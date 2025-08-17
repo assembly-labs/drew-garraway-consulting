@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Drew Garraway | Product Consultant Philadelphia | AI Operations & Product Strategy</title>
+    <meta name="description" content="Philadelphia product consultant who ships real products in 90 days. AI operations, project rescue, growth systems. Former Apple, Google, Samsung, Tesla. Stop talking, start shipping.">
+    <meta name="keywords" content="product consultant, AI operations, product strategy, Philadelphia consultant, project rescue, growth systems, Drew Garraway, ship products not powerpoints">
+    <meta name="author" content="Drew Garraway">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://assemblylabs.co">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Drew Garraway - I Ship Products. Not PowerPoints.">
+    <meta property="og:description" content="Your competition's still in discovery. Ship real products in 90 days with a consultant who's delivered at Apple, Google, Samsung, and Tesla.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://assemblylabs.co">
+    <meta property="og:site_name" content="Drew Garraway Consulting">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Drew Garraway - I Ship Products. Not PowerPoints.">
+    <meta name="twitter:description" content="Philadelphia product consultant. AI operations, project rescue, growth systems. Real products in 90 days.">
+    <meta name="twitter:creator" content="@drewgarraway">
+    
+    <!-- Structured Data Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Drew Garraway Consulting",
+      "alternateName": "Assembly Labs",
+      "description": "Product consulting services specializing in AI operations, project rescue, and growth systems",
+      "url": "https://assemblylabs.co",
+      "email": "drew@assemblylabs.co",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Wayne",
+        "addressRegion": "PA",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "40.0439",
+        "longitude": "-75.3875"
+      },
+      "priceRange": "$$",
+      "founder": {
+        "@type": "Person",
+        "name": "Drew Garraway",
+        "jobTitle": "Product Consultant",
+        "alumniOf": [
+          {"@type": "Organization", "name": "Apple"},
+          {"@type": "Organization", "name": "Google"},
+          {"@type": "Organization", "name": "Samsung"},
+          {"@type": "Organization", "name": "Tesla"}
+        ],
+        "knowsAbout": ["Product Strategy", "AI Operations", "Project Management", "Growth Systems", "Digital Transformation"]
+      },
+      "serviceType": ["Product Consulting", "AI Operations", "Project Rescue", "Growth Strategy"],
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      }
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='50%25' y='50%25' font-size='20' text-anchor='middle' dy='.3em' fill='%233b82f6'%3E⚡%3C/text%3E%3C/svg%3E">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --accent: #3b82f6;
+            --accent-dark: #2563eb;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(59, 130, 246, 0.03) 2px,
+                    rgba(59, 130, 246, 0.03) 4px
+                );
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .tagline-dot {
+            color: var(--accent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-paragraph {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 900px;
+            margin-bottom: 3rem;
+            animation: slideUp 0.8s ease-out 0.2s both;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--accent);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: #0f0f0f;
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .section-header {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 4rem;
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .service-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+
+        .service-stat {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
+        }
+
+        .cta-text {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: var(--white);
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 100vh;
+                padding: 1.5rem;
+            }
+
+            .services {
+                padding: 3rem 1.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection Style */
+        ::selection {
+            background: var(--accent);
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero" id="hero" role="banner">
+        <div class="container">
+            <h1>I Ship Products<span class="tagline-dot">.</span><br>Not PowerPoints<span class="tagline-dot">.</span></h1>
+            
+            <p class="hero-paragraph" role="contentinfo">
+                Your competition hired consultants six months ago. They're still in discovery. Me? I ship products. Learned from <span class="highlight">Tesla</span> to engage customers constantly and advise, never sell BS. <span class="highlight">Google</span> taught me to think beyond the obvious solution. <span class="highlight">Apple</span> showed me the difference between talking about concepts and actually building them. At <span class="highlight">Samsung</span>, I discovered what happens when creative technologists merge right brain with left brain—magic. Growing up in Philly? That taught me to back up every word with action. Now I help businesses stop theorizing and start shipping. <span class="highlight">Real products that generate real revenue in 90 days, not two years.</span>
+            </p>
+        </div>
+        
+        <div class="scroll-indicator" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">
+            <svg viewBox="0 0 24 24">
+                <polyline points="7 13 12 18 17 13" aria-hidden="true"></polyline>
+                <polyline points="7 6 12 11 17 6" aria-hidden="true"></polyline>
+            </svg>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <main>
+        <section class="services" id="services" role="main" aria-label="Services">
+            <div class="container">
+                <h2 class="section-header">Here's How I Fix What's Broken and Build What's Missing</h2>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3 class="service-title">AI Operations That Actually Work</h3>
+                    <p class="service-description">
+                        Your AI strategy is probably 200 slides and zero products. I'll get you from tool paralysis to shipped solutions in 90 days. Not with more frameworks—with workflows that cut production time by <span class="service-stat">40-200%</span>.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <h3 class="service-title">Project Rescue & Acceleration</h3>
+                    <p class="service-description">
+                        That project that's six months behind? I've inherited disasters at 100% behind schedule and delivered on time. Not with miracles—with systems that actually work.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <h3 class="service-title">Growth Without the Grinding</h3>
+                    <p class="service-description">
+                        Scale doesn't have to mean chaos. I build the operational systems that let you grow without breaking everything that got you here. Same energy that helped generate <span class="service-stat">$4M+ at Dakota, $1M+ at DLE</span>.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <h3 class="service-title">Vision to Shipped Reality</h3>
+                    <p class="service-description">
+                        Great ideas die in committee. I turn your "what if" into "what's next"—with real products generating real revenue. Not someday. <span class="service-stat">Next quarter</span>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section" aria-label="Contact">
+            <div class="container">
+                <p class="cta-text">Ready to ship something real?</p>
+                <a href="mailto:drew@assemblylabs.co" class="cta-button" aria-label="Email Drew Garraway">
+                    <span>drew@assemblylabs.co</span>
+                    <span class="arrow" aria-hidden="true">→</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Add subtle parallax effect to hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Add intersection observer for service cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideUp 0.6s ease-out both';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
