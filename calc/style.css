@@ -60,7 +60,8 @@ main{max-width:1200px; margin:24px auto 80px; padding:0 16px;}
 /* Field */
 .field{display:grid; grid-template-columns: 1fr 140px; gap:8px; align-items:center}
 .field label{color:#c8d3e6; font-size:14px}
-.field input{width:100%; padding:10px 10px; border-radius:10px; border:1px solid var(--border); background:var(--input); color:var(--text)}
+.field input{width:100%; padding:10px 10px; border-radius:10px; border:1px solid var(--border); background:var(--input); color:#var(--text)}
+.field input{color:var(--text)}
 .field input:focus{outline:2px solid var(--accent); border-color:transparent}
 .err{font-size:12px; color:var(--warn); margin-top:2px}
 
