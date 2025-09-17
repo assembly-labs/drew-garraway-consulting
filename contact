@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drew Garraway Contact</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+        h1 { text-align: center; }
+        section { margin-bottom: 20px; }
+        a { color: #007bff; text-decoration: none; }
+        #qrcode { text-align: center; margin: 20px 0; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <h1>Drew Garraway</h1>
+    <p>Email: <a href="mailto:drew@assemblylabs.co">drew@assemblylabs.co</a></p>
+    <p>Phone: 310.739.4396</p>
+
+    <section>
+        <h2>Co-founder, Kaijutsu</h2>
+        <p><a href="https://playkaijutsu.com">playkaijutsu.com</a></p>
+        <p>Seeking educators, SEL experts, child development experts, and therapists.</p>
+        <p>Currently crowdfunding to launch in 2026.</p>
+    </section>
+
+    <section>
+        <h2>Founder, Assembly Labs</h2>
+        <p>AI Training Consultancy</p>
+        <p><a href="https://assemblylabs.co">assemblylabs.co</a></p>
+        <p>Currently available for training enterprise and startup teams.</p>
+    </section>
+
+    <section>
+        <h2>Founder, GPWCo</h2>
+        <p><a href="https://greaterphiladelphiawatercompany.com">greaterphiladelphiawatercompany.com</a></p>
+        <p>Seeking investors.</p>
+    </section>
+
+    <div id="qrcode"></div>
+    <p style="text-align: center;"><a href="data:text/vcard;charset=utf-8,BEGIN:VCARD%0AVERSION:3.0%0AFN:Drew%20Garraway%0AN:Garraway;Drew;;;%0ATEL;TYPE=CELL:310.739.4396%0AEMAIL:drew@assemblylabs.co%0AURL:https://assemblylabs.co%0AEND:VCARD" download="drew-garraway.vcf">Download vCard</a></p>
+
+    <script>
+        new QRCode(document.getElementById("qrcode"), {
+            text: window.location.href,
+            width: 200,
+            height: 200
+        });
+    </script>
+</body>
+</html>
