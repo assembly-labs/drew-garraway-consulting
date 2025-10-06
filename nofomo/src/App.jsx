@@ -18,6 +18,13 @@ import { QuoteEngine } from './utils/quoteEngine';
 import { fetchPriceData, calculateScenario, ASSET_NAMES } from './utils/api';
 import quotes from './quotes.json';
 
+// Debug mode - set to false in production
+const DEBUG_MODE = true;
+if (!DEBUG_MODE) {
+  console.log = () => {};
+  console.warn = () => {};
+}
+
 const theme = new ThemeEngine();
 const quoteEngine = new QuoteEngine(quotes);
 
@@ -49,7 +56,7 @@ function QuoteBanner({ text, mode }) {
           : 'border-primary/20 bg-primary/5'
       }`}
     >
-      <p className="text-base font-semibold tracking-tight italic">"{text}"</p>
+      <p className="text-3xl font-bold tracking-tight italic">{text}</p>
     </motion.div>
   );
 }
@@ -87,7 +94,7 @@ function LoadingState() {
 
 export default function App() {
   const [ticker, setTicker] = useState('X:BTCUSD');
-  const [amount, setAmount] = useState('10000');
+  const [amount, setAmount] = useState('10,000');
   const [date, setDate] = useState('2020-01');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -96,6 +103,24 @@ export default function App() {
 
   const profitRef = useRef(null);
   const currentRef = useRef(null);
+
+  // Helper functions for formatting/parsing amount
+  const formatAmountWithCommas = (value) => {
+    // Remove all non-digit characters
+    const digits = value.replace(/\D/g, '');
+    // Add commas
+    return digits.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  const parseAmount = (value) => {
+    // Remove commas and convert to number
+    return parseFloat(value.replace(/,/g, ''));
+  };
+
+  const handleAmountChange = (e) => {
+    const formatted = formatAmountWithCommas(e.target.value);
+    setAmount(formatted);
+  };
 
   // Set up date constraints
   const today = new Date();
@@ -109,9 +134,16 @@ export default function App() {
     setError('');
     setLoading(true);
 
+    console.log('🎯 Starting calculation:', {
+      ticker,
+      date,
+      amount,
+      parsedAmount: parseAmount(amount)
+    });
+
     try {
       // Validate inputs
-      const amountNum = parseFloat(amount);
+      const amountNum = parseAmount(amount);
       if (isNaN(amountNum) || amountNum <= 0 || amountNum > 10000000) {
         throw new Error('Amount must be between $1 and $10,000,000');
       }
@@ -121,25 +153,43 @@ export default function App() {
       }
 
       // Fetch price data
+      console.log('📊 Fetching price data for:', ticker);
       const fromDate = `${date}-01`;
       const priceData = await fetchPriceData(ticker, fromDate);
+
+      console.log('📈 Price data received:', {
+        success: priceData.success,
+        resultCount: priceData.results?.length
+      });
 
       if (!priceData.success) {
         throw new Error(priceData.error || 'Failed to fetch price data');
       }
 
       // Calculate scenario
+      console.log('💰 Calculating scenario...');
       const result = calculateScenario(priceData, amountNum);
+
+      console.log('📊 Scenario calculated:', {
+        profit: result.profit,
+        profitPct: result.profitPct,
+        mode: result.mode
+      });
 
       // Get quote
       const quote = quoteEngine.pick(result.profitPct);
+      console.log('💬 Quote selected:', quote.text);
 
       // Set theme and scenario
       const newMode = result.mode;
+      console.log('🎨 Setting theme mode:', newMode);
       setMode(newMode);
       theme.setMode(newMode);
       setScenario({ ...result, quote: quote.text });
+
+      console.log('✅ Calculation complete!');
     } catch (err) {
+      console.error('❌ Calculation error:', err);
       setError(err.message || 'Something went wrong. Please try again.');
       setMode('base');
       theme.setMode('base');
@@ -179,16 +229,6 @@ export default function App() {
     };
   }, [scenario]);
 
-  function handleReset() {
-    setTicker('X:BTCUSD');
-    setAmount('10000');
-    setDate('2020-01');
-    setScenario(null);
-    setMode('base');
-    theme.setMode('base');
-    setError('');
-  }
-
   // Custom tooltip for chart
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload[0]) {
@@ -208,13 +248,9 @@ export default function App() {
     <div className="min-h-screen theme-fade" data-mode={mode}>
       {/* Header */}
       <header className="sticky top-0 z-10 bg-white/70 backdrop-blur border-b theme-fade">
-        <div className="mx-auto max-w-7xl px-4 py-3 flex items-center gap-4">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="h-8 w-8 rounded-lg bg-accent theme-fade"
-          />
-          <h1 className="font-bold tracking-tight text-xl">NO FOMO</h1>
-          <div className="ml-auto text-sm text-muted">
+        <div className="mx-auto max-w-7xl px-4 py-3 flex items-center">
+          <h1 className="font-bold tracking-tight text-5xl">NO FOMO</h1>
+          <div className="flex-1 text-center text-sm text-muted">
             What if you'd bought it then?
           </div>
         </div>
@@ -259,12 +295,10 @@ export default function App() {
                 <div className="relative">
                   <span className="absolute left-3 top-2 text-muted">$</span>
                   <input
-                    type="number"
+                    type="text"
                     value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    min="1"
-                    max="10000000"
-                    step="100"
+                    onChange={handleAmountChange}
+                    placeholder="10,000"
                     className="w-full rounded-xl border pl-8 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent/40 theme-fade"
                     required
                   />
@@ -285,6 +319,11 @@ export default function App() {
                   <optgroup label="Cryptocurrency">
                     <option value="X:BTCUSD">BTC (Bitcoin)</option>
                     <option value="X:ETHUSD">ETH (Ethereum)</option>
+                    <option value="X:DOGEUSD">DOGE (Dogecoin)</option>
+                    <option value="X:SOLUSD">SOL (Solana)</option>
+                    <option value="X:ADAUSD">ADA (Cardano)</option>
+                    <option value="X:XRPUSD">XRP (Ripple)</option>
+                    <option value="X:MATICUSD">MATIC (Polygon)</option>
                   </optgroup>
                   <optgroup label="Tech Giants">
                     <option value="AAPL">AAPL (Apple)</option>
@@ -294,6 +333,29 @@ export default function App() {
                     <option value="NVDA">NVDA (NVIDIA)</option>
                     <option value="TSLA">TSLA (Tesla)</option>
                     <option value="META">META (Meta)</option>
+                    <option value="AMD">AMD (AMD)</option>
+                    <option value="INTC">INTC (Intel)</option>
+                    <option value="CRM">CRM (Salesforce)</option>
+                    <option value="NFLX">NFLX (Netflix)</option>
+                    <option value="ORCL">ORCL (Oracle)</option>
+                    <option value="UBER">UBER (Uber)</option>
+                    <option value="SNAP">SNAP (Snapchat)</option>
+                    <option value="SQ">SQ (Square/Block)</option>
+                  </optgroup>
+                  <optgroup label="Traditional Blue Chips">
+                    <option value="JPM">JPM (JPMorgan)</option>
+                    <option value="BAC">BAC (Bank of America)</option>
+                    <option value="WMT">WMT (Walmart)</option>
+                    <option value="DIS">DIS (Disney)</option>
+                    <option value="KO">KO (Coca-Cola)</option>
+                    <option value="MCD">MCD (McDonald's)</option>
+                    <option value="V">V (Visa)</option>
+                    <option value="MA">MA (Mastercard)</option>
+                  </optgroup>
+                  <optgroup label="Meme Stocks">
+                    <option value="GME">GME (GameStop)</option>
+                    <option value="AMC">AMC (AMC Entertainment)</option>
+                    <option value="BB">BB (BlackBerry)</option>
                   </optgroup>
                   <optgroup label="Index Funds">
                     <option value="SPY">SPY (S&P 500)</option>
@@ -311,20 +373,8 @@ export default function App() {
                   disabled={loading}
                   className="w-full rounded-xl bg-accent text-white py-3 font-semibold shadow hover:shadow-hover transition-all theme-fade disabled:opacity-50"
                 >
-                  {loading ? 'Calculating...' : 'Regret It'}
+                  {loading ? 'Calculating...' : 'Regret It?'}
                 </motion.button>
-
-                {scenario && (
-                  <motion.button
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    type="button"
-                    onClick={handleReset}
-                    className="w-full rounded-xl border border-gray-200 py-2 text-sm hover:bg-gray-50 transition-colors"
-                  >
-                    Try Another
-                  </motion.button>
-                )}
               </div>
 
               {/* Error Display */}
@@ -458,45 +508,24 @@ export default function App() {
                     </AreaChart>
                   </ResponsiveContainer>
                 </motion.div>
-
-                {/* Action Buttons */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                  className="mt-6 flex gap-3"
-                >
-                  <button
-                    onClick={handleReset}
-                    className="rounded-xl border px-4 py-2 hover:bg-gray-50 transition-colors"
-                  >
-                    Try Again
-                  </button>
-                  <button
-                    onClick={() => {
-                      // Future: Implement share functionality
-                      alert('Share feature coming soon!');
-                    }}
-                    className="rounded-xl border px-4 py-2 hover:bg-gray-50 transition-colors"
-                  >
-                    Share Result
-                  </button>
-                </motion.div>
               </motion.div>
-            ) : (
-              <motion.div
-                key="empty"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="rounded-2xl border bg-white/70 backdrop-blur p-12 text-muted text-center theme-fade"
-              >
-                <p className="text-lg">Enter a scenario to see your alternate timeline.</p>
-                <p className="text-sm mt-2">Choose a date, amount, and asset to begin.</p>
-              </motion.div>
-            )}
+            ) : null}
           </AnimatePresence>
         </section>
       </main>
+
+      {/* Footer */}
+      <footer className="border-t mt-12 py-6 text-center text-sm text-muted">
+        Designed with frustration and annoyance. Built in partnership with{' '}
+        <a
+          href="https://assemblylabs.co/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-accent hover:underline theme-fade"
+        >
+          Assembly Labs
+        </a>
+      </footer>
     </div>
   );
 }
