@@ -1,0 +1,162 @@
+[
+  {
+    "id": "p_warren",
+    "tone": "praise",
+    "severity": 3,
+    "min_delta_pct": 100,
+    "max_delta_pct": 10000,
+    "text": "You're basically Warren Buffett now. Time to write a shareholder letter."
+  },
+  {
+    "id": "p_diamond",
+    "tone": "praise",
+    "severity": 2,
+    "min_delta_pct": 50,
+    "max_delta_pct": 100,
+    "text": "Diamond hands paid off. Someone studied the charts."
+  },
+  {
+    "id": "p_rocket",
+    "tone": "praise",
+    "severity": 1,
+    "min_delta_pct": 20,
+    "max_delta_pct": 50,
+    "text": "Rocket mode engaged. Don't forget your space helmet."
+  },
+  {
+    "id": "p_nice",
+    "tone": "praise",
+    "severity": 1,
+    "min_delta_pct": 10,
+    "max_delta_pct": 20,
+    "text": "Nice gains! Your future self would high-five you."
+  },
+  {
+    "id": "p_solid",
+    "tone": "praise",
+    "severity": 1,
+    "min_delta_pct": 5,
+    "max_delta_pct": 10,
+    "text": "Solid moves. The market gods smile upon you."
+  },
+  {
+    "id": "p_green",
+    "tone": "praise",
+    "severity": 1,
+    "min_delta_pct": 0,
+    "max_delta_pct": 5,
+    "text": "Green is green. Better than a savings account!"
+  },
+  {
+    "id": "r_cotton",
+    "tone": "roast",
+    "severity": 3,
+    "min_delta_pct": -100,
+    "max_delta_pct": -50,
+    "text": "Buy high, sell low? Bold strategy, Cotton."
+  },
+  {
+    "id": "r_titanic",
+    "tone": "roast",
+    "severity": 3,
+    "min_delta_pct": -100,
+    "max_delta_pct": -75,
+    "text": "Your portfolio is cosplaying the Titanic. Magnificent."
+  },
+  {
+    "id": "r_gone",
+    "tone": "roast",
+    "severity": 2,
+    "min_delta_pct": -75,
+    "max_delta_pct": -50,
+    "text": "That money identified as gone. Respect its journey."
+  },
+  {
+    "id": "r_limbo",
+    "tone": "roast",
+    "severity": 2,
+    "min_delta_pct": -50,
+    "max_delta_pct": -25,
+    "text": "Portfolio doing the limbo — how low can it go?"
+  },
+  {
+    "id": "r_donation",
+    "tone": "roast",
+    "severity": 2,
+    "min_delta_pct": -50,
+    "max_delta_pct": -30,
+    "text": "Generous donation to Wall Street. They needed it."
+  },
+  {
+    "id": "r_tuition",
+    "tone": "roast",
+    "severity": 1,
+    "min_delta_pct": -25,
+    "max_delta_pct": -10,
+    "text": "Market tuition paid. Expensive lesson learned."
+  },
+  {
+    "id": "r_speed_bump",
+    "tone": "roast",
+    "severity": 1,
+    "min_delta_pct": -10,
+    "max_delta_pct": -5,
+    "text": "Just a speed bump. Or a cliff. Hard to tell."
+  },
+  {
+    "id": "r_paper_cut",
+    "tone": "roast",
+    "severity": 1,
+    "min_delta_pct": -5,
+    "max_delta_pct": 0,
+    "text": "It's just a flesh wound. Walk it off, champ."
+  },
+  {
+    "id": "p_genius",
+    "tone": "praise",
+    "severity": 3,
+    "min_delta_pct": 200,
+    "max_delta_pct": 10000,
+    "text": "Time traveler confirmed. Share your crystal ball?"
+  },
+  {
+    "id": "p_yacht",
+    "tone": "praise",
+    "severity": 2,
+    "min_delta_pct": 75,
+    "max_delta_pct": 200,
+    "text": "Yacht week is calling. You've earned it."
+  },
+  {
+    "id": "r_vanish",
+    "tone": "roast",
+    "severity": 3,
+    "min_delta_pct": -100,
+    "max_delta_pct": -80,
+    "text": "Thanos snapped your portfolio. Perfectly balanced."
+  },
+  {
+    "id": "r_gravity",
+    "tone": "roast",
+    "severity": 2,
+    "min_delta_pct": -40,
+    "max_delta_pct": -20,
+    "text": "Gravity is undefeated. Your portfolio knows."
+  },
+  {
+    "id": "p_printing",
+    "tone": "praise",
+    "severity": 2,
+    "min_delta_pct": 30,
+    "max_delta_pct": 75,
+    "text": "Money printer goes brrr. You're the Fed now."
+  },
+  {
+    "id": "r_spicy",
+    "tone": "roast",
+    "severity": 1,
+    "min_delta_pct": -15,
+    "max_delta_pct": -8,
+    "text": "Spicy loss. Nothing a ramen diet can't fix."
+  }
+]

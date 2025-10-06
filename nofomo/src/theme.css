@@ -1,0 +1,75 @@
+/* Theme system with CSS variables */
+:root {
+  /* base brand colors as RGB triplets */
+  --primary: 51 113 212;   /* #3371D4 */
+  --success: 24 176 122;   /* #18B07A */
+  --danger: 228 88 88;     /* #E45858 */
+
+  /* surfaces & text */
+  --bg: 249 250 252;       /* #F9FAFC */
+  --bg-dark: 11 19 32;     /* #0B1320 */
+  --fg: 15 23 42;          /* slate-900-ish */
+  --muted: 100 116 139;    /* slate-500-ish */
+
+  /* dynamic accent (changes with mode) */
+  --accent: var(--primary);
+
+  /* motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 200ms;
+  --dur-base: 300ms;
+}
+
+/***** Theme modes *****/
+/* Base (neutral/blue) */
+[data-mode="base"] {
+  --accent: var(--primary);
+}
+/* Profit/Growth */
+[data-mode="profit"] {
+  --accent: var(--success);
+  --bg: 240 253 244;       /* slight green tint */
+}
+/* Loss */
+[data-mode="loss"] {
+  --accent: var(--danger);
+  --bg: 254 242 242;       /* slight red tint */
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-feature-settings: "tnum" 1, "ss01" 1; /* tabular nums if available */
+  transition: background var(--dur-fast) var(--ease);
+}
+
+/* Utility helpers for smooth theme transitions */
+.theme-fade {
+  transition: background var(--dur-fast) var(--ease),
+              color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--bg));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--muted) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--muted) / 0.5);
+}
