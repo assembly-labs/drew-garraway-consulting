@@ -43,3 +43,14 @@ lerna-debug.log*
 
 # TypeScript
 *.tsbuildinfo
+
+# Deployment files
+netlify.toml
+!netlify.toml.example
+
+# Test outputs
+test-results/
+*.test.log
+
+# Local scripts output
+validation-report.txt

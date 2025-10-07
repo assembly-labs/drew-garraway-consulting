@@ -266,6 +266,36 @@ netlify env:set claude_api_key "new-key-here"
 
 ---
 
+## ⚠️ Common Pitfalls (Lessons Learned)
+
+### 1. API Endpoint Path Mismatch
+**Problem**: Frontend calling `/api/claude-chat` instead of `/.netlify/functions/claude-chat`
+**Symptom**: "I apologize, but I'm having trouble connecting right now"
+**Fix**: Update `src/hooks/useClaudeChat.ts` to use correct endpoint
+
+### 2. ES Module Syntax Issues
+**Problem**: Using wrong function export syntax with ES modules
+**Symptom**: 503 errors from Netlify Functions
+**Wrong**: `export const handler = async () => {}`
+**Right**: `export async function handler() {}`
+
+### 3. netlify.toml Conflicts
+**Problem**: Multiple netlify.toml files overriding dashboard settings
+**Symptom**: "0 files uploaded" despite correct configuration
+**Fix**: Rename or remove netlify.toml files, use dashboard settings
+
+### 4. Model Name Errors
+**Problem**: Using non-existent model names
+**Symptom**: 404 "model not found" errors
+**Fix**: Use valid model names like `claude-3-haiku-20240307`
+
+### 5. Module Type Mismatch
+**Problem**: package.json has `"type": "module"` but function uses CommonJS
+**Symptom**: Function crashes with 503 errors
+**Fix**: Ensure all code uses ES module syntax consistently
+
+---
+
 ## 📊 Monitoring & Logs
 
 ### View Function Logs

@@ -1,0 +1,19 @@
+# EXAMPLE Netlify configuration
+# Rename to netlify.toml if you need to override dashboard settings
+# WARNING: This file overrides Netlify dashboard settings!
+
+[build]
+  # Use dashboard settings instead of this file when possible
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  # Node version for builds
+  NODE_VERSION = "20"
+
+# Development settings
+[dev]
+  command = "npm run dev"
+  port = 5173
+  functionsPort = 9999

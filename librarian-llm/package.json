@@ -9,7 +9,11 @@
     "dev:netlify": "netlify dev",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "validate": "node scripts/validate-deployment.js",
+    "predeploy": "npm run validate && npm run build",
+    "deploy:test": "npm run predeploy && echo '✅ Ready to push to GitHub!'",
+    "test:api": "node scripts/test-api-local.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.27.3",
