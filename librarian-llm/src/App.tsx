@@ -149,7 +149,7 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-auto pb-36">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Conversation History */}
           <ConversationHistory
@@ -171,27 +171,29 @@ function App() {
         </div>
       </main>
 
-      {/* Search Input - Sticky Footer */}
-      <div className="border-t border-gray-200 bg-white px-4 py-4">
-        <div className="max-w-4xl mx-auto">
-          <SearchInput
-            onSubmit={handleSearch}
-            isLoading={conversationLoading}
-            placeholder="Ask me about books... (e.g., 'I want a mystery set in Paris')"
-          />
-
-          {/* Catalog Info */}
-          <p className="text-center text-xs text-gray-500 mt-3">
-            {catalog.length} books in mock catalog • Powered by Claude AI
-          </p>
-        </div>
-      </div>
-
       {/* Disclaimer Banner */}
       <div className="bg-yellow-50 border-t border-yellow-200 px-4 py-2">
         <p className="text-center text-xs text-yellow-800">
           ⚠️ This is a prototype demonstration. Not connected to real library systems.
         </p>
+      </div>
+
+      {/* Floating Search Module */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 p-4 bg-gradient-to-t from-white via-white to-transparent pointer-events-none">
+        <div className="max-w-4xl mx-auto pointer-events-auto">
+          <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 dark:bg-gray-800 dark:border-gray-700">
+            <SearchInput
+              onSubmit={handleSearch}
+              isLoading={conversationLoading}
+              placeholder="Ask me about books... (e.g., 'I want a mystery set in Paris')"
+            />
+
+            {/* Catalog Info */}
+            <p className="text-center text-xs text-gray-500 mt-3 dark:text-gray-400">
+              {catalog.length} books in mock catalog • Powered by Claude AI
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

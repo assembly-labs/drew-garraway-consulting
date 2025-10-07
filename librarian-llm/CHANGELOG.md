@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Planned Features - UX Enhancements (Added to roadmap 2025-10-07)
+
+#### Quick Wins
+- Typing indicators and loading animations for better perceived performance
+- Enhanced book cards with hover previews and format icons
+- Voice input support for accessibility (Web Speech API)
+- Smart search suggestions with rotating examples
+
+#### Core Enhancements
+- Visual conversation threading with message grouping
+- Advanced filtering and book discovery tools
+- Session-based personalization and preferences
+- Reading lists and side-by-side comparison views
+
+#### Wild Card Feature
+- **Librarian Personality Modes** - Transform the AI assistant with selectable personalities:
+  - Classic Librarian (formal, knowledgeable)
+  - Cool Bookstore Employee (casual, enthusiastic)
+  - Grandma's Book Club (warm, nurturing)
+  - Literary Professor (analytical, academic)
+
+_See ROADMAP.md for detailed feature specifications and implementation timeline_
+
 ### Added
 - CHANGELOG.md to track all feature additions and changes (2025-10-07)
 - Theme Toggle (Dark Mode / Light Mode) with system preference detection and localStorage persistence (2025-10-07)

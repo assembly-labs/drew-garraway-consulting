@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Message } from '../types';
 import { formatDate } from '../utils/formatters';
 import { ResultsList } from './ResultsList';
+import { TypingIndicator } from './TypingIndicator';
 
 interface ConversationHistoryProps {
   messages: Message[];
@@ -57,7 +58,7 @@ export const ConversationHistory: React.FC<ConversationHistoryProps> = ({
       {messages.map((message) => (
         <div
           key={message.id}
-          className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} animate-slide-up`}
+          className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}
         >
           <div
             className={`relative max-w-[85%] md:max-w-[70%] ${
@@ -96,21 +97,7 @@ export const ConversationHistory: React.FC<ConversationHistoryProps> = ({
       ))}
 
       {/* Loading indicator with typing effect */}
-      {isLoading && (
-        <div className="flex justify-start animate-slide-up">
-          <div className="message-assistant message-bubble relative">
-            <div className="flex items-center space-x-3">
-              <span className="text-sm font-medium text-gray-600">📚 Library Assistant</span>
-              <div className="flex space-x-1">
-                <span className="typing-dot w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                <span className="typing-dot w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                <span className="typing-dot w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
-              </div>
-            </div>
-            <div className="text-xs text-gray-500 mt-1">Searching through the catalog...</div>
-          </div>
-        </div>
-      )}
+      {isLoading && <TypingIndicator />}
 
       {/* Scroll anchor */}
       <div ref={bottomRef} />

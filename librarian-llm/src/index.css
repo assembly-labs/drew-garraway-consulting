@@ -75,6 +75,66 @@
     animation-delay: -0.16s;
   }
 
+  /* Fade in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  /* Animation delays for typing indicators */
+  .animation-delay-0 {
+    animation-delay: 0ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  /* Book flip animation for loading */
+  @keyframes bookFlip {
+    0%, 100% {
+      transform: rotateY(0deg);
+    }
+    50% {
+      transform: rotateY(180deg);
+    }
+  }
+
+  .animate-book-flip {
+    animation: bookFlip 1.5s ease-in-out infinite;
+    display: inline-block;
+    transform-style: preserve-3d;
+  }
+
+  /* Typing dots animation */
+  @keyframes typingBounce {
+    0%, 60%, 100% {
+      transform: translateY(0);
+    }
+    30% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-typing-dot {
+    animation: typingBounce 1.4s ease-in-out infinite;
+    display: inline-block;
+  }
+
   /* Message bubble styles */
   .message-bubble {
     @apply rounded-lg p-4 max-w-[85%] animate-slide-up;

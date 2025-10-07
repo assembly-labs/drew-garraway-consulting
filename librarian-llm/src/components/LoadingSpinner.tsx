@@ -10,22 +10,24 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   message
 }) => {
   const sizeClasses = {
-    sm: 'w-4 h-4',
-    md: 'w-8 h-8',
-    lg: 'w-12 h-12'
+    sm: 'text-2xl',
+    md: 'text-4xl',
+    lg: 'text-6xl'
   };
 
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <div className="relative">
-        {/* Spinning circle */}
-        <div className={`${sizeClasses[size]} animate-spin`}>
-          <div className="h-full w-full rounded-full border-4 border-gray-200 border-t-primary-600"></div>
+        {/* Book flip animation */}
+        <div className={`${sizeClasses[size]} animate-book-flip`}>
+          📖
         </div>
       </div>
 
       {message && (
-        <p className="mt-3 text-sm text-gray-600">{message}</p>
+        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400 animate-pulse">
+          {message || "Finding your next great read..."}
+        </p>
       )}
     </div>
   );
