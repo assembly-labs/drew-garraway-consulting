@@ -3,6 +3,7 @@ import { SearchInput } from './components/SearchInput';
 import { ConversationHistory } from './components/ConversationHistory';
 import { ErrorMessage } from './components/ErrorMessage';
 import { LoadingSpinner } from './components/LoadingSpinner';
+import { ThemeToggle } from './components/ThemeToggle';
 import { useCatalog } from './hooks/useCatalog';
 import { useConversation } from './hooks/useConversation';
 import { useClaudeChat } from './hooks/useClaudeChat';
@@ -115,8 +116,11 @@ function App() {
               </div>
             </div>
 
-            {messages.length > 0 && (
-              <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3">
+              <ThemeToggle />
+
+              {messages.length > 0 && (
+                <>
                 <div className="text-xs text-gray-500" title="Messages in conversation context">
                   <span className={`inline-flex items-center px-2 py-1 rounded-full ${
                     messages.length > 20 ? 'bg-yellow-100 text-yellow-800' :
@@ -137,8 +141,9 @@ function App() {
                 >
                   New Chat
                 </button>
-              </div>
-            )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </header>

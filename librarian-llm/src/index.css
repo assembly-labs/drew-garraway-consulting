@@ -88,3 +88,60 @@
     @apply bg-white border-2 border-gray-200 mr-auto;
   }
 }
+
+/* Dark mode styles */
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  @apply bg-gray-900 text-gray-100;
+}
+
+.dark header {
+  @apply bg-gray-800 border-gray-700;
+}
+
+.dark .message-user {
+  @apply bg-primary-700 text-white;
+}
+
+.dark .message-assistant {
+  @apply bg-gray-800 border-gray-700 text-gray-100;
+}
+
+.dark .bg-gray-50 {
+  @apply bg-gray-900;
+}
+
+.dark .bg-white {
+  @apply bg-gray-800;
+}
+
+.dark .text-gray-900 {
+  @apply text-gray-100;
+}
+
+.dark .text-gray-600 {
+  @apply text-gray-400;
+}
+
+.dark .text-gray-500 {
+  @apply text-gray-400;
+}
+
+.dark .border-gray-200 {
+  @apply border-gray-700;
+}
+
+.dark .bg-yellow-50 {
+  @apply bg-yellow-900;
+}
+
+.dark .text-yellow-800 {
+  @apply text-yellow-200;
+}
+
+.dark .border-yellow-200 {
+  @apply border-yellow-700;
+}

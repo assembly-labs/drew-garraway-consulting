@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-import Anthropic from '@anthropic-ai/sdk';
 import { Book, Message } from '../types';
 import {
   buildSystemPrompt,
@@ -23,18 +22,6 @@ export const useClaudeChat = ({ catalog, onError }: UseClaudeChatOptions) => {
     setIsLoading(true);
 
     try {
-      // Check if API key exists
-      const apiKey = import.meta.env.VITE_CLAUDE_API_KEY;
-      if (!apiKey) {
-        throw new Error('Claude API key not configured. Please add VITE_CLAUDE_API_KEY to your .env file.');
-      }
-
-      // Initialize Claude client
-      const client = new Anthropic({
-        apiKey,
-        dangerouslyAllowBrowser: true // Acceptable for prototype
-      });
-
       // Build the system prompt with catalog context
       const systemPrompt = buildSystemPrompt(catalog);
 
@@ -47,19 +34,27 @@ export const useClaudeChat = ({ catalog, onError }: UseClaudeChatOptions) => {
         content: userMessage
       });
 
-      // Make API call to Claude
-      const response = await client.messages.create({
-        model: 'claude-sonnet-4-5', // Claude Sonnet 4.x
-        max_tokens: 1500,
-        temperature: 0.3, // Lower temperature for more consistent responses
-        system: systemPrompt,
-        messages: formattedMessages,
+      // Call our secure Netlify function instead of directly calling Anthropic
+      const response = await fetch('/api/claude-chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: formattedMessages,
+          systemPrompt: systemPrompt
+        })
       });
 
-      // Extract the text content from response
-      const content = response.content[0].type === 'text'
-        ? response.content[0].text
-        : '';
+      // Check if request was successful
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+        throw new Error(errorData.error || `Server error: ${response.status}`);
+      }
+
+      // Parse the response
+      const data = await response.json();
+      const content = data.content || '';
 
       // Extract book recommendations from the response
       const recommendedBooks = extractBookRecommendations(content, catalog);
@@ -108,56 +103,18 @@ export const useClaudeChat = ({ catalog, onError }: UseClaudeChatOptions) => {
   }, [catalog, onError]);
 
   // Stream response for better UX (optional enhancement)
+  // Note: Streaming is not currently supported through Netlify Functions
+  // This method will use the regular sendMessage approach
   const streamMessage = useCallback(async (
     userMessage: string,
     conversationHistory: Message[],
     onChunk: (chunk: string) => void
   ): Promise<void> => {
-    setIsLoading(true);
-
-    try {
-      const apiKey = import.meta.env.VITE_CLAUDE_API_KEY;
-      if (!apiKey) {
-        throw new Error('Claude API key not configured');
-      }
-
-      const client = new Anthropic({
-        apiKey,
-        dangerouslyAllowBrowser: true
-      });
-
-      const systemPrompt = buildSystemPrompt(catalog);
-      const formattedMessages = formatConversationForAPI(conversationHistory);
-      formattedMessages.push({ role: 'user', content: userMessage });
-
-      const stream = await client.messages.create({
-        model: 'claude-sonnet-4-5',
-        max_tokens: 1500,
-        temperature: 0.3,
-        system: systemPrompt,
-        messages: formattedMessages,
-        stream: true,
-      });
-
-      let fullContent = '';
-
-      for await (const chunk of stream) {
-        if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
-          const text = chunk.delta.text;
-          fullContent += text;
-          onChunk(text);
-        }
-      }
-
-      setIsLoading(false);
-
-    } catch (error) {
-      setIsLoading(false);
-      console.error('Claude streaming error:', error);
-      onError?.(error instanceof Error ? error.message : 'Streaming failed');
-      throw error;
-    }
-  }, [catalog, onError]);
+    // For now, just use sendMessage and call onChunk with the full response
+    // In the future, you could implement Server-Sent Events for streaming
+    const result = await sendMessage(userMessage, conversationHistory);
+    onChunk(result.content);
+  }, [sendMessage]);
 
   return {
     sendMessage,

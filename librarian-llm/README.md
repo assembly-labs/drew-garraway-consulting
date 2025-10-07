@@ -29,7 +29,7 @@ A conversational AI prototype for discovering library books using natural langua
    cp .env.example .env
 
    # Edit .env and add your Claude API key
-   # VITE_CLAUDE_API_KEY=sk-ant-api03-YOUR-KEY-HERE
+   # claude_api_key=sk-ant-api03-YOUR-KEY-HERE
    ```
 
 3. **Start the development server:**
@@ -54,6 +54,7 @@ A conversational AI prototype for discovering library books using natural langua
 - ✅ **Enhanced Error Messages**: Helpful troubleshooting suggestions
 - ✅ **Conversation Memory Indicator**: Visual feedback for context length
 - ✅ **Improved Book Matching**: Advanced recommendation extraction
+- ✅ **Dark Mode Toggle**: Switch between light and dark themes with persistent preference
 
 ## 🎯 Example Queries
 
@@ -96,7 +97,7 @@ librarian-llm/
 
 3. Add environment variable in Vercel dashboard:
    - Go to project settings
-   - Add `VITE_CLAUDE_API_KEY` with your API key
+   - API key is now managed by Netlify serverless function (see DEPLOYMENT_NETLIFY.md)
 
 ### Option B: Netlify
 
@@ -132,10 +133,10 @@ librarian-llm/
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `VITE_CLAUDE_API_KEY` | Your Claude API key | Yes |
+| `claude_api_key` | Claude API key (for local dev only, managed by Netlify function in production) | Yes |
 | `VITE_ENV` | Environment (development/production) | No |
 
-⚠️ **Security Note:** For the public demo, users need to provide their own API key. Never commit API keys to version control.
+⚠️ **Security Note:** API key is stored securely in Netlify environment variables for production. For local development, use `.env` file (never commit to version control). See DEPLOYMENT_NETLIFY.md for full deployment guide.
 
 ## 📝 Development
 
