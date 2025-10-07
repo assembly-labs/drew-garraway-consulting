@@ -29,7 +29,7 @@ A conversational AI prototype for discovering library books using natural langua
    cp .env.example .env
 
    # Edit .env and add your Claude API key
-   # claude_api_key=sk-ant-api03-YOUR-KEY-HERE
+   # claude_api_key=your-api-key-here
    ```
 
 3. **Start the development server:**

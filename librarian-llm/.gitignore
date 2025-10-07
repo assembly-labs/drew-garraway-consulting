@@ -10,11 +10,13 @@ docs-private/
 node_modules/
 
 # Build outputs
-# Removed /index.html, /assets/, /data/ so they can be uploaded to GitHub
 dist/
 dist-ssr/
 build/
 *.local
+
+# Build artifacts (may contain bundled secrets - never commit)
+assets/
 
 # IDE
 .vscode/*

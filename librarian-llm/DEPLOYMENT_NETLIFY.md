@@ -43,7 +43,7 @@ Before deploying, test that everything works locally:
 ```bash
 # Make sure your .env file has claude_api_key set (not VITE_CLAUDE_API_KEY)
 # It should look like:
-# claude_api_key=sk-ant-api03-YOUR-KEY-HERE
+# claude_api_key=your-api-key-here
 
 # Start the Netlify dev server
 npm run dev:netlify
@@ -102,7 +102,7 @@ git push origin main
    - Before clicking "Deploy", click "Advanced build settings"
    - Click "New variable"
    - **Key:** `claude_api_key`
-   - **Value:** `sk-ant-api03-YOUR-ACTUAL-KEY-HERE`
+   - **Value:** `your-anthropic-api-key`
    - Click "Deploy site"
 
 6. **Wait for Build:**
@@ -132,7 +132,7 @@ netlify init
 # - Site name: librarian-llm (or any name)
 
 # Set the environment variable
-netlify env:set claude_api_key "sk-ant-api03-YOUR-ACTUAL-KEY-HERE"
+netlify env:set claude_api_key "your-anthropic-api-key"
 
 # Deploy to production
 netlify deploy --prod

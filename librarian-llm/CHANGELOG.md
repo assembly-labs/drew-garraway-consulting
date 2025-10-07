@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Netlify deployment configuration: Fixed Vite base path from `/librarian-llm/` to `/` to resolve asset loading errors (2025-10-07)
 - Standardized environment variable naming: Changed from `CLAUDE_API_KEY` to `claude_api_key` to match Netlify configuration (2025-10-07)
 - Updated all documentation to reflect correct environment variable naming convention (2025-10-07)
+- Security: Removed API key patterns from documentation and blocked build artifacts from git to prevent secret exposure (2025-10-07)
 
 ## [1.0.0] - 2024-10-07
 
