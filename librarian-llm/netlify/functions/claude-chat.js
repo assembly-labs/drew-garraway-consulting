@@ -74,13 +74,13 @@ exports.handler = async (event, context) => {
       apiKey: apiKey
     });
 
-    console.log(`Initializing Anthropic with model: claude-3-5-sonnet-20241022`);
+    console.log(`Initializing Anthropic with model: claude-3-haiku-20240307`);
     console.log(`API Key present: ${apiKey ? 'Yes' : 'No'}`);
     console.log(`Processing request with ${messages.length} messages`);
 
     // Call Claude API
     const response = await client.messages.create({
-      model: 'claude-3-5-sonnet-20241022',
+      model: 'claude-3-haiku-20240307',
       max_tokens: 1500,
       temperature: 0.3,
       system: systemPrompt,
