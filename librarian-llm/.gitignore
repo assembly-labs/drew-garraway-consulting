@@ -9,10 +9,8 @@ docs-private/
 # Dependencies
 node_modules/
 
-# Build outputs (now in root for easy upload)
-/index.html
-/assets/
-/data/
+# Build outputs
+# Removed /index.html, /assets/, /data/ so they can be uploaded to GitHub
 dist/
 dist-ssr/
 build/
