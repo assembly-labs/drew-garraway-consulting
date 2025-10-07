@@ -6,9 +6,9 @@
  * Netlify's environment variables and never exposed to the client.
  */
 
-const Anthropic = require('@anthropic-ai/sdk');
+import Anthropic from '@anthropic-ai/sdk';
 
-exports.handler = async (event, context) => {
+export const handler = async (event, context) => {
   // Enable CORS for your domain
   const headers = {
     'Access-Control-Allow-Origin': '*', // Update to your domain in production
