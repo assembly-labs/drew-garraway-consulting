@@ -83,33 +83,19 @@ librarian-llm/
 
 ## 🚢 Deployment
 
-### Option A: Vercel (Recommended)
+This project is deployed on **Netlify** with serverless functions for secure API key management.
 
-1. Install Vercel CLI:
-   ```bash
-   npm i -g vercel
-   ```
+### Quick Deploy:
+```bash
+git push origin main
+```
+Netlify automatically builds and deploys when you push to GitHub.
 
-2. Deploy:
-   ```bash
-   vercel
-   ```
+### Detailed Instructions:
+See [DEPLOYMENT_NETLIFY.md](DEPLOYMENT_NETLIFY.md) for complete setup and deployment guide.
 
-3. Add environment variable in Vercel dashboard:
-   - Go to project settings
-   - API key is now managed by Netlify serverless function (see DEPLOYMENT_NETLIFY.md)
-
-### Option B: Netlify
-
-1. Build the project:
-   ```bash
-   npm run build
-   ```
-
-2. Deploy:
-   - Go to [app.netlify.com](https://app.netlify.com)
-   - Drag the `dist` folder to deploy
-   - Add environment variable in site settings
+### Live Demo:
+🔗 **[https://librarian-llm.netlify.app](https://librarian-llm.netlify.app)** *(or your custom domain)*
 
 ## 🧪 Testing
 
