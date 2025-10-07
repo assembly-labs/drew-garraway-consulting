@@ -8,7 +8,7 @@
 
 import Anthropic from '@anthropic-ai/sdk';
 
-export const handler = async (event, context) => {
+export async function handler(event, context) {
   // Enable CORS for your domain
   const headers = {
     'Access-Control-Allow-Origin': '*', // Update to your domain in production
@@ -141,4 +141,4 @@ export const handler = async (event, context) => {
       })
     };
   }
-};
+}
