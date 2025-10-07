@@ -1,0 +1,65 @@
+name: Deploy Librarian LLM to GitHub Pages
+
+on:
+  push:
+    branches: ['main']
+    paths:
+      - 'librarian-llm/**'
+      - '.github/workflows/deploy-librarian.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: librarian-llm/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./librarian-llm
+        run: npm ci
+
+      - name: Build project
+        working-directory: ./librarian-llm
+        run: npm run build
+
+      - name: Create docs directory for GitHub Pages
+        run: |
+          mkdir -p docs/librarian-llm
+          cp -r librarian-llm/dist/* docs/librarian-llm/
+
+      - name: Create index.html redirect in docs root
+        run: |
+          cat > docs/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <title>Redirecting to Librarian LLM</title>
+            <meta http-equiv="refresh" content="0; url=./librarian-llm/">
+          </head>
+          <body>
+            <p>Redirecting to <a href="./librarian-llm/">Librarian LLM</a>...</p>
+          </body>
+          </html>
+          EOF
+
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add docs/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Deploy Librarian LLM to GitHub Pages [skip ci]" && git push)
