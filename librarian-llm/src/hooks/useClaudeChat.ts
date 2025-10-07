@@ -49,7 +49,7 @@ export const useClaudeChat = ({ catalog, onError }: UseClaudeChatOptions) => {
 
       // Make API call to Claude
       const response = await client.messages.create({
-        model: 'claude-3-haiku-20240307', // Testing with Haiku model
+        model: 'claude-3-5-sonnet-20241022', // Claude Sonnet 4.x
         max_tokens: 1500,
         temperature: 0.3, // Lower temperature for more consistent responses
         system: systemPrompt,
@@ -131,7 +131,7 @@ export const useClaudeChat = ({ catalog, onError }: UseClaudeChatOptions) => {
       formattedMessages.push({ role: 'user', content: userMessage });
 
       const stream = await client.messages.create({
-        model: 'claude-3-haiku-20240307',
+        model: 'claude-3-5-sonnet-20241022',
         max_tokens: 1500,
         temperature: 0.3,
         system: systemPrompt,
