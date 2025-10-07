@@ -56,10 +56,10 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Check for API key
-    const apiKey = process.env.claude_api_key;
+    // Check for API key (support both uppercase and lowercase)
+    const apiKey = process.env.CLAUDE_API_KEY || process.env.claude_api_key;
     if (!apiKey) {
-      console.error('claude_api_key environment variable is not set');
+      console.error('Neither CLAUDE_API_KEY nor claude_api_key environment variable is set');
       return {
         statusCode: 500,
         headers,
@@ -74,11 +74,13 @@ exports.handler = async (event, context) => {
       apiKey: apiKey
     });
 
+    console.log(`Initializing Anthropic with model: claude-3-5-sonnet-20241022`);
+    console.log(`API Key present: ${apiKey ? 'Yes' : 'No'}`);
     console.log(`Processing request with ${messages.length} messages`);
 
     // Call Claude API
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-5',
+      model: 'claude-3-5-sonnet-20241022',
       max_tokens: 1500,
       temperature: 0.3,
       system: systemPrompt,
