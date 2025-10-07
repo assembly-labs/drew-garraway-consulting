@@ -9,7 +9,10 @@ docs-private/
 # Dependencies
 node_modules/
 
-# Build outputs
+# Build outputs (now in root for easy upload)
+/index.html
+/assets/
+/data/
 dist/
 dist-ssr/
 build/
