@@ -35,7 +35,7 @@ export const useClaudeChat = ({ catalog, onError }: UseClaudeChatOptions) => {
       });
 
       // Call our secure Netlify function instead of directly calling Anthropic
-      const response = await fetch('/api/claude-chat', {
+      const response = await fetch('/.netlify/functions/claude-chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
