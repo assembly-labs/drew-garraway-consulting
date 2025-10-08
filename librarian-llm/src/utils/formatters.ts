@@ -49,13 +49,13 @@ export const getFormatIcon = (type: BookFormat['type']): string => {
 export const getStatusColor = (status: BookFormat['status']): string => {
   switch (status) {
     case 'available':
-      return 'text-green-700 bg-green-100';
+      return 'text-green-700 bg-green-100 dark:text-green-300 dark:bg-green-900/50';
     case 'waitlist':
-      return 'text-yellow-700 bg-yellow-100';
+      return 'text-yellow-700 bg-yellow-100 dark:text-yellow-300 dark:bg-yellow-900/50';
     case 'checked_out':
-      return 'text-red-700 bg-red-100';
+      return 'text-red-700 bg-red-100 dark:text-red-300 dark:bg-red-900/50';
     default:
-      return 'text-gray-700 bg-gray-100';
+      return 'text-gray-700 bg-gray-100 dark:text-gray-300 dark:bg-gray-700';
   }
 };
 

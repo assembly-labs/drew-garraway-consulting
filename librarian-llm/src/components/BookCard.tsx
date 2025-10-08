@@ -30,8 +30,9 @@ export const BookCard: React.FC<BookCardProps> = ({
 
   return (
     <article
-      className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow
-                 border-2 border-gray-100 p-4"
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg
+                 dark:shadow-gray-900/50 transition-shadow
+                 border-2 border-gray-100 dark:border-gray-700 p-4"
       aria-label={`${book.title} by ${book.author}`}
     >
       <div className="flex gap-4">
@@ -47,6 +48,7 @@ export const BookCard: React.FC<BookCardProps> = ({
             />
           ) : (
             <div className="w-24 h-36 bg-gradient-to-br from-primary-100 to-primary-200
+                          dark:from-primary-900 dark:to-primary-800
                           rounded-md shadow-sm flex items-center justify-center">
               <span className="text-4xl">📚</span>
             </div>
@@ -56,10 +58,10 @@ export const BookCard: React.FC<BookCardProps> = ({
         {/* Book Details */}
         <div className="flex-1 min-w-0">
           <div className="mb-2">
-            <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 line-clamp-1">
               {book.title}
             </h3>
-            <p className="text-sm text-gray-600 mt-1">by {book.author}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">by {book.author}</p>
           </div>
 
           {/* Formats and Availability */}
@@ -79,7 +81,7 @@ export const BookCard: React.FC<BookCardProps> = ({
           {book.rating && (
             <div className="text-sm mb-2" aria-label={`Rating: ${book.rating} out of 5`}>
               {getRatingStars(book.rating)}
-              <span className="ml-1 text-gray-600">({book.rating})</span>
+              <span className="ml-1 text-gray-600 dark:text-gray-400">({book.rating})</span>
             </div>
           )}
 
@@ -98,7 +100,7 @@ export const BookCard: React.FC<BookCardProps> = ({
           {book.description.length > 150 && (
             <button
               onClick={() => setExpanded(!expanded)}
-              className="text-sm text-primary-600 hover:text-primary-700 font-medium mb-3"
+              className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium mb-3"
               aria-expanded={expanded}
             >
               {expanded ? 'Show less' : 'Show more'}
@@ -106,7 +108,7 @@ export const BookCard: React.FC<BookCardProps> = ({
           )}
 
           {/* Subjects/Genres */}
-          <div className="text-xs text-gray-500 mb-3">
+          <div className="text-xs text-gray-500 dark:text-gray-400 mb-3">
             📂 {formatSubjects(book.subjects)}
           </div>
 
@@ -136,10 +138,10 @@ export const BookCard: React.FC<BookCardProps> = ({
       </div>
 
       {/* Metadata footer */}
-      <div className="mt-3 pt-3 border-t border-gray-100 flex justify-between text-xs text-gray-500">
+      <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700 flex justify-between text-xs text-gray-500 dark:text-gray-400">
         <span>Published {book.publication_year}</span>
         <span>{book.pages} pages</span>
-        {book.popular && <span className="text-orange-600 font-medium">🔥 Popular</span>}
+        {book.popular && <span className="text-orange-600 dark:text-orange-400 font-medium">🔥 Popular</span>}
       </div>
     </article>
   );

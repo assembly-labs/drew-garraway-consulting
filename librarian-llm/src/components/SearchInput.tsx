@@ -120,7 +120,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
                        focus:outline-none focus:ring-2 focus:ring-primary-500"
               type="button"
             >
-              "{example}"
+              {example}
             </button>
           ))}
         </div>
