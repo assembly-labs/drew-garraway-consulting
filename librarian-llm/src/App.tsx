@@ -171,9 +171,9 @@ function App() {
         </div>
       </main>
 
-      {/* Disclaimer Banner */}
-      <div className="bg-yellow-50 border-t border-yellow-200 px-4 py-2">
-        <p className="text-center text-xs text-yellow-800">
+      {/* Disclaimer Banner - Added padding bottom to prevent overlap */}
+      <div className="bg-yellow-50 border-t border-yellow-200 px-4 py-2 pb-48 dark:bg-yellow-900/20 dark:border-yellow-800">
+        <p className="text-center text-xs text-yellow-800 dark:text-yellow-200">
           ⚠️ This is a prototype demonstration. Not connected to real library systems.
         </p>
       </div>
