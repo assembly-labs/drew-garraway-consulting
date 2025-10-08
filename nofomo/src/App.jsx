@@ -15,14 +15,18 @@ import { ThemeEngine } from './utils/themeEngine';
 import { formatCurrency, formatPercent } from './utils/formatters';
 import { animateNumber } from './utils/numberAnimator';
 import { QuoteEngine } from './utils/quoteEngine';
-import { fetchPriceData, calculateScenario, ASSET_NAMES } from './utils/api';
+import { fetchPriceData, calculateScenario, calculateScenarioWithSplits, ASSET_NAMES } from './utils/api';
 import quotes from './quotes.json';
 
 // Debug mode - set to false in production
-const DEBUG_MODE = true;
-if (!DEBUG_MODE) {
+const DEBUG_MODE = false;
+const ENABLE_LOGGING = false; // Set to true for debugging
+
+// Conditionally disable console methods in production
+if (!ENABLE_LOGGING) {
   console.log = () => {};
   console.warn = () => {};
+  // Keep console.error for critical errors
 }
 
 const theme = new ThemeEngine();
@@ -93,7 +97,7 @@ function LoadingState() {
 }
 
 export default function App() {
-  const [ticker, setTicker] = useState('X:BTCUSD');
+  const [ticker, setTicker] = useState('AAPL');  // Default to stock instead of crypto
   const [amount, setAmount] = useState('10,000');
   const [date, setDate] = useState('2020-01');
   const [loading, setLoading] = useState(false);
@@ -103,6 +107,21 @@ export default function App() {
 
   const profitRef = useRef(null);
   const currentRef = useRef(null);
+
+  // Update date when switching between crypto and stocks
+  useEffect(() => {
+    const currentMinDate = getMinDate();
+    const currentMaxDate = maxDate;
+
+    // Ensure date is within valid range for selected asset type
+    if (date < currentMinDate) {
+      setDate(currentMinDate);
+      console.log(`📅 Auto-adjusted date to ${currentMinDate} for ${ticker.startsWith('X:') ? 'crypto' : 'stock'} data availability`);
+    } else if (date > currentMaxDate) {
+      setDate(currentMaxDate);
+      console.log(`📅 Auto-adjusted date to ${currentMaxDate} (max allowed)`);
+    }
+  }, [ticker]);
 
   // Helper functions for formatting/parsing amount
   const formatAmountWithCommas = (value) => {
@@ -122,12 +141,30 @@ export default function App() {
     setAmount(formatted);
   };
 
-  // Set up date constraints
+  // Set up date constraints based on asset type and API limitations
   const today = new Date();
   const maxDate = new Date(today.getFullYear(), today.getMonth() - 1, 1)
     .toISOString()
     .slice(0, 7);
-  const minDate = '2010-01';
+
+  // Strict date limits based on Polygon free tier API limitations
+  const DATE_LIMITS = {
+    crypto: {
+      min: '2023-10', // Crypto data starts Oct 2023
+      max: maxDate
+    },
+    stocks: {
+      min: '2020-01', // Conservative limit for stocks (last 5 years)
+      max: maxDate
+    }
+  };
+
+  // Get min date based on current ticker selection
+  const getMinDate = () => {
+    return ticker.startsWith('X:') ? DATE_LIMITS.crypto.min : DATE_LIMITS.stocks.min;
+  };
+
+  const minDate = getMinDate();
 
   async function handleCalculate(e) {
     e?.preventDefault();
@@ -166,14 +203,16 @@ export default function App() {
         throw new Error(priceData.error || 'Failed to fetch price data');
       }
 
-      // Calculate scenario
-      console.log('💰 Calculating scenario...');
-      const result = calculateScenario(priceData, amountNum);
+      // Calculate scenario with split adjustments
+      console.log('💰 Calculating scenario with splits...');
+      const result = await calculateScenarioWithSplits(priceData, amountNum, ticker);
 
       console.log('📊 Scenario calculated:', {
         profit: result.profit,
         profitPct: result.profitPct,
-        mode: result.mode
+        mode: result.mode,
+        splits: result.splits?.length || 0,
+        validation: result.validation
       });
 
       // Get quote
@@ -202,30 +241,81 @@ export default function App() {
   useEffect(() => {
     if (!scenario) return;
 
-    const stops = [];
+    console.log('🎬 Starting animations with scenario:', {
+      profit: scenario.profit,
+      currentValue: scenario.currentValue,
+      initialAmount: scenario.initialAmount,
+      profitRef: profitRef.current,
+      currentRef: currentRef.current
+    });
 
-    if (profitRef.current) {
-      stops.push(
-        animateNumber(profitRef.current, scenario.profit, {
-          from: 0,
-          duration: 0.6,
-          formatter: (v) => formatCurrency(v),
-        })
-      );
-    }
+    // Use setTimeout to ensure refs are attached to DOM elements
+    // This fixes the issue where animation doesn't run on first load
+    const animationTimer = setTimeout(() => {
+      const stops = [];
 
-    if (currentRef.current) {
-      stops.push(
-        animateNumber(currentRef.current, scenario.currentValue, {
-          from: scenario.initialAmount,
-          duration: 0.6,
-          formatter: (v) => formatCurrency(v),
-        })
-      );
-    }
+      if (profitRef.current) {
+        console.log('💰 Animating profit element:', profitRef.current);
+        console.log('💰 Animating profit value:', scenario.profit);
 
+        // For profit, force full precision to avoid formatting issues during animation
+        const profitFormatter = (v) => {
+          const sign = v >= 0 ? '+' : '-';
+          // Force full precision during animation to avoid $0.0K -> $25.2K jumps
+          const formatted = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0
+          }).format(Math.abs(v));
+          return sign + formatted;
+        };
+
+        stops.push(
+          animateNumber(profitRef.current, scenario.profit, {
+            from: 0,
+            duration: 0.8,
+            formatter: profitFormatter,
+          })
+        );
+      } else {
+        console.warn('⚠️ profitRef.current is null - animation skipped');
+      }
+
+      if (currentRef.current) {
+        console.log('📈 Animating current value element:', currentRef.current);
+        console.log('📈 Animating current value:', scenario.currentValue);
+
+        // Use full precision for large values to avoid formatting jumps
+        const valueFormatter = (v) => {
+          return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0
+          }).format(v);
+        };
+
+        stops.push(
+          animateNumber(currentRef.current, scenario.currentValue, {
+            from: scenario.initialAmount,
+            duration: 0.8,
+            formatter: valueFormatter,
+          })
+        );
+      } else {
+        console.warn('⚠️ currentRef.current is null - animation skipped');
+      }
+
+      // Store stops in a ref or state if we need to clean them up later
+      return () => {
+        stops.forEach((stop) => stop && stop());
+      };
+    }, 0); // Delay by 0ms to push to next tick
+
+    // Cleanup function
     return () => {
-      stops.forEach((stop) => stop && stop());
+      clearTimeout(animationTimer);
     };
   }, [scenario]);
 
@@ -284,6 +374,11 @@ export default function App() {
                 />
                 <small className="text-muted text-xs">
                   Range: {minDate} to {maxDate}
+                  {ticker.startsWith('X:') && (
+                    <span className="text-yellow-600 block">
+                      ⚠️ Crypto data limited to Oct 2023+ on free API
+                    </span>
+                  )}
                 </small>
               </div>
 
@@ -433,8 +528,17 @@ export default function App() {
                   />
                   <KPI
                     label="Current Value"
-                    value={<span ref={currentRef}>{formatCurrency(scenario.initialAmount)}</span>}
-                    sub={`${scenario.shares.toFixed(4)} shares`}
+                    value={<span ref={currentRef}>{formatCurrency(scenario.currentValue, 'USD', true)}</span>}
+                    sub={
+                      <>
+                        {scenario.shares.toFixed(4)} shares
+                        {scenario.splits && scenario.splits.length > 0 && (
+                          <span className="text-accent ml-1">
+                            ({scenario.splits.length} split{scenario.splits.length > 1 ? 's' : ''})
+                          </span>
+                        )}
+                      </>
+                    }
                     delay={0.06}
                   />
                   <KPI
@@ -446,7 +550,9 @@ export default function App() {
                           scenario.profit >= 0 ? 'text-success' : 'text-danger'
                         }`}
                       >
-                        $0.00
+                        {/* Show actual value immediately as fallback, animation will override */}
+                        {scenario.profit >= 0 ? '+' : '-'}
+                        {formatCurrency(Math.abs(scenario.profit), 'USD', true)}
                       </span>
                     }
                     sub={
@@ -459,6 +565,37 @@ export default function App() {
                     delay={0.12}
                   />
                 </motion.div>
+
+                {/* Debug Info Panel (only in debug mode) */}
+                {DEBUG_MODE && scenario.validation && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="mb-4 p-3 bg-gray-100 rounded-lg text-xs font-mono"
+                  >
+                    <div className="font-semibold mb-2">Debug Info:</div>
+                    <div>Data Points: {scenario.validation.dataPoints}</div>
+                    <div>Adjusted Data: {scenario.validation.isLikelyAdjusted ? 'Yes' : 'No'}</div>
+                    {scenario.splits && scenario.splits.length > 0 && (
+                      <div className="mt-2">
+                        <div className="font-semibold">Stock Splits Detected:</div>
+                        {scenario.splits.map((split, i) => (
+                          <div key={i}>
+                            {split.date}: {split.to}:{split.from} (×{split.ratio.toFixed(2)})
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {scenario.validation.warnings && scenario.validation.warnings.length > 0 && (
+                      <div className="mt-2">
+                        <div className="font-semibold text-yellow-600">Warnings:</div>
+                        {scenario.validation.warnings.slice(0, 3).map((warning, i) => (
+                          <div key={i} className="text-yellow-600">{warning}</div>
+                        ))}
+                      </div>
+                    )}
+                  </motion.div>
+                )}
 
                 {/* Chart */}
                 <motion.div
