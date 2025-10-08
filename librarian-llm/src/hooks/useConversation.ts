@@ -51,25 +51,6 @@ export const useConversation = () => {
     return state.messages.slice(-count);
   }, [state.messages]);
 
-  // Check if there's an ongoing conversation
-  const hasConversation = state.messages.length > 0;
-
-  // Get conversation statistics
-  const getStats = useCallback(() => {
-    const userMessages = state.messages.filter(m => m.role === 'user').length;
-    const assistantMessages = state.messages.filter(m => m.role === 'assistant').length;
-    const totalBooks = state.messages
-      .filter(m => m.books && m.books.length > 0)
-      .reduce((acc, m) => acc + (m.books?.length || 0), 0);
-
-    return {
-      userMessages,
-      assistantMessages,
-      totalMessages: state.messages.length,
-      totalBooks
-    };
-  }, [state.messages]);
-
   return {
     messages: state.messages,
     isLoading: state.isLoading,
@@ -78,8 +59,6 @@ export const useConversation = () => {
     setLoading,
     setError,
     clearConversation,
-    getRecentContext,
-    hasConversation,
-    getStats
+    getRecentContext
   };
 };

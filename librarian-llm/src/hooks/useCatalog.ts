@@ -27,47 +27,11 @@ export const useCatalog = () => {
     retry: 2,
   });
 
-  // Search function
-  const searchBooks = (query: string): Book[] => {
-    const searchTerm = query.toLowerCase();
-    return catalog.filter(book =>
-      book.title.toLowerCase().includes(searchTerm) ||
-      book.author.toLowerCase().includes(searchTerm) ||
-      book.subjects.some(subject => subject.toLowerCase().includes(searchTerm)) ||
-      book.description.toLowerCase().includes(searchTerm)
-    );
-  };
-
-  // Filter by format availability
-  const filterByFormat = (format: 'physical' | 'ebook' | 'audiobook'): Book[] => {
-    return catalog.filter(book =>
-      book.formats.some(f => f.type === format && f.status === 'available')
-    );
-  };
-
-  // Get popular books
-  const getPopularBooks = (limit: number = 10): Book[] => {
-    return catalog
-      .filter(book => book.popular === true)
-      .slice(0, limit);
-  };
-
-  // Get books by subject/genre
-  const getBooksBySubject = (subject: string): Book[] => {
-    return catalog.filter(book =>
-      book.subjects.includes(subject.toLowerCase())
-    );
-  };
-
   return {
     catalog,
     isLoading,
     error: error as Error | null,
-    refetch,
-    searchBooks,
-    filterByFormat,
-    getPopularBooks,
-    getBooksBySubject
+    refetch
   };
 };
 

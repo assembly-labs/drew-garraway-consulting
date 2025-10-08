@@ -70,10 +70,11 @@ export const SearchInput: React.FC<SearchInputProps> = ({
             placeholder={placeholder}
             disabled={isLoading}
             rows={1}
-            className="w-full px-5 py-3 pr-12 rounded-full border-2 border-gray-300
-                     focus:outline-none focus:border-primary-500 resize-none
-                     disabled:bg-gray-100 disabled:cursor-not-allowed
-                     text-gray-900 placeholder-gray-500 focus-enhanced"
+            className="w-full px-5 py-3 pr-12 rounded-full border-2 border-gray-300 dark:border-gray-600
+                     focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 resize-none
+                     disabled:bg-gray-100 disabled:cursor-not-allowed dark:disabled:bg-gray-700
+                     text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400
+                     bg-white dark:bg-gray-800 focus-enhanced"
             style={{ minHeight: '48px', maxHeight: '120px' }}
             aria-label="Search for books"
             aria-describedby="search-help"
@@ -114,8 +115,8 @@ export const SearchInput: React.FC<SearchInputProps> = ({
             <button
               key={index}
               onClick={() => handleExampleClick(example)}
-              className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200
-                       text-gray-700 rounded-full transition-colors
+              className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600
+                       text-gray-700 dark:text-gray-300 rounded-full transition-colors
                        focus:outline-none focus:ring-2 focus:ring-primary-500"
               type="button"
             >

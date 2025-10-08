@@ -33,12 +33,6 @@
 
 /* Smooth scrolling for conversation */
 @layer components {
-  .smooth-scroll {
-    scroll-behavior: smooth;
-  }
-
-
-
   /* Fade in animation */
   @keyframes fadeIn {
     from {
@@ -175,45 +169,7 @@
    Added: 2025-10-07
    ============================================ */
 
-/* 1. Enhanced Book Card Hover Effects */
-.book-card-enhanced {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: center;
-}
-
-.book-card-enhanced:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-/* Book cover image hover effect */
-.book-cover-enhanced {
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.book-cover-enhanced::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, transparent 0%, transparent 70%, rgba(0,0,0,0.1) 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.book-cover-enhanced:hover::after {
-  opacity: 1;
-}
-
-.book-cover-enhanced:hover img {
-  transform: scale(1.05);
-}
-
-/* 2. Universal Button Enhancements */
+/* 1. Universal Button Enhancements */
 .btn-enhanced {
   position: relative;
   overflow: hidden;
@@ -274,10 +230,6 @@
   }
 }
 
-.search-input-breathe:focus {
-  animation: breathe 2s infinite;
-}
-
 /* 4. Enhanced Focus States */
 @keyframes focus-ring-expand {
   from {
@@ -302,17 +254,8 @@ button, a, input, textarea, select {
   transition: all 0.2s ease;
 }
 
-.theme-transition * {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
-}
-
 html {
   scroll-behavior: smooth;
-}
-
-.conversation-scroll {
-  scroll-behavior: smooth;
-  overscroll-behavior-y: contain;
 }
 
 /* 6. Enhanced Loading Animations */
@@ -327,25 +270,6 @@ html {
   }
 }
 
-.typing-dot-enhanced {
-  animation: dot-pulse 1.4s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-.shimmer {
-  background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite;
-}
-
 /* 7. Glass Morphism & Depth Effects */
 .glass-effect {
   backdrop-filter: blur(10px);
@@ -355,17 +279,6 @@ html {
 
 .dark .glass-effect {
   background: rgba(31, 41, 55, 0.9);
-}
-
-.gradient-overlay-soft::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
-  pointer-events: none;
 }
 
 /* 8. Micro-interactions */
@@ -378,46 +291,6 @@ html {
   }
 }
 
-.checkmark-animate {
-  stroke-dasharray: 100;
-  animation: checkmark 0.3s ease-out forwards;
-}
+/* 9. Card Lift on Hover - Removed as requested */
 
-.link-hover {
-  position: relative;
-  text-decoration: none;
-}
-
-.link-hover::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: currentColor;
-  transition: width 0.3s ease;
-}
-
-.link-hover:hover::after {
-  width: 100%;
-}
-
-/* 9. Card Lift on Hover */
-.card-lift {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-lift:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-/* 10. Smooth Opacity Transitions */
-.opacity-transition {
-  transition: opacity 0.3s ease;
-}
-
-.opacity-transition:hover {
-  opacity: 0.8;
-}
+/* 10. Smooth Opacity Transitions - Removed as unused */

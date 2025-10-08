@@ -112,17 +112,3 @@ export const extractBookRecommendations = (
   // Limit to top 6 recommendations
   return recommendedBooks.slice(0, 6);
 };
-
-export const buildFollowUpPrompt = (
-  userQuery: string,
-  previousContext: Message[]
-): string => {
-  // Add context awareness for follow-up questions
-  const hasContext = previousContext.length > 0;
-
-  if (hasContext) {
-    return `Based on our previous conversation about books, the patron is now asking: "${userQuery}". Please provide relevant recommendations while maintaining context from earlier messages.`;
-  }
-
-  return userQuery;
-};

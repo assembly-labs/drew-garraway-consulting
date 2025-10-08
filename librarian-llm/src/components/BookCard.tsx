@@ -31,7 +31,7 @@ export const BookCard: React.FC<BookCardProps> = ({
   return (
     <article
       className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow
-                 border-2 border-gray-100 p-4 book-card-enhanced"
+                 border-2 border-gray-100 p-4"
       aria-label={`${book.title} by ${book.author}`}
     >
       <div className="flex gap-4">
@@ -85,13 +85,13 @@ export const BookCard: React.FC<BookCardProps> = ({
 
           {/* Recommendation reason */}
           {recommendation && (
-            <div className="bg-blue-50 border-l-4 border-blue-400 p-2 mb-3 rounded">
-              <p className="text-sm text-blue-700">{recommendation}</p>
+            <div className="bg-blue-50 border-l-4 border-blue-400 p-2 mb-3 rounded dark:bg-blue-900/30 dark:border-blue-500">
+              <p className="text-sm text-blue-700 dark:text-blue-300">{recommendation}</p>
             </div>
           )}
 
           {/* Description */}
-          <p className={`text-sm text-gray-700 mb-3 ${!expanded ? 'line-clamp-2' : ''}`}>
+          <p className={`text-sm text-gray-700 dark:text-gray-300 mb-3 ${!expanded ? 'line-clamp-2' : ''}`}>
             {book.description}
           </p>
 
@@ -123,8 +123,8 @@ export const BookCard: React.FC<BookCardProps> = ({
             </button>
             <button
               onClick={() => onAction?.('details', book)}
-              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md
-                       hover:bg-gray-50 focus:outline-none focus:ring-2
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-md
+                       hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2
                        focus:ring-primary-500 focus:ring-offset-2 transition-colors
                        text-sm font-medium btn-enhanced"
               aria-label={`View details for ${book.title}`}

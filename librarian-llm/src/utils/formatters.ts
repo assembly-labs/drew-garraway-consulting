@@ -59,21 +59,6 @@ export const getStatusColor = (status: BookFormat['status']): string => {
   }
 };
 
-export const truncateText = (text: string, maxLength: number): string => {
-  if (text.length <= maxLength) return text;
-  return text.substring(0, maxLength - 3) + '...';
-};
-
-export const generatePlaceholderCover = (title: string): string => {
-  // Generate a placeholder book cover URL with the title
-  const encodedTitle = encodeURIComponent(title.substring(0, 20));
-  const colors = ['4F46E5', '7C3AED', 'DC2626', '059669', 'EA580C', '0891B2'];
-  const colorIndex = title.length % colors.length;
-  const bgColor = colors[colorIndex];
-
-  return `https://via.placeholder.com/150x225/${bgColor}/FFFFFF?text=${encodedTitle}`;
-};
-
 export const formatSubjects = (subjects: string[]): string => {
   return subjects
     .map(s => s.charAt(0).toUpperCase() + s.slice(1))

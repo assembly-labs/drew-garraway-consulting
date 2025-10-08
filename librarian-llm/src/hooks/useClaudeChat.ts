@@ -102,23 +102,8 @@ export const useClaudeChat = ({ catalog, onError }: UseClaudeChatOptions) => {
     }
   }, [catalog, onError]);
 
-  // Stream response for better UX (optional enhancement)
-  // Note: Streaming is not currently supported through Netlify Functions
-  // This method will use the regular sendMessage approach
-  const streamMessage = useCallback(async (
-    userMessage: string,
-    conversationHistory: Message[],
-    onChunk: (chunk: string) => void
-  ): Promise<void> => {
-    // For now, just use sendMessage and call onChunk with the full response
-    // In the future, you could implement Server-Sent Events for streaming
-    const result = await sendMessage(userMessage, conversationHistory);
-    onChunk(result.content);
-  }, [sendMessage]);
-
   return {
     sendMessage,
-    streamMessage,
     isLoading
   };
 };
