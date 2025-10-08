@@ -32,14 +32,3 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
     </div>
   );
 };
-
-// Loading dots component for chat messages
-export const LoadingDots: React.FC = () => {
-  return (
-    <div className="flex space-x-1 p-2">
-      <div className="w-2 h-2 bg-gray-400 rounded-full loading-dot"></div>
-      <div className="w-2 h-2 bg-gray-400 rounded-full loading-dot"></div>
-      <div className="w-2 h-2 bg-gray-400 rounded-full loading-dot"></div>
-    </div>
-  );
-};

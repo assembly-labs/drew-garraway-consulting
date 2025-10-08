@@ -31,7 +31,7 @@ export const BookCard: React.FC<BookCardProps> = ({
   return (
     <article
       className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow
-                 border-2 border-gray-100 p-4"
+                 border-2 border-gray-100 p-4 book-card-enhanced"
       aria-label={`${book.title} by ${book.author}`}
     >
       <div className="flex gap-4">
@@ -116,7 +116,7 @@ export const BookCard: React.FC<BookCardProps> = ({
               onClick={() => onAction?.('hold', book)}
               className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700
                        focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
-                       transition-colors text-sm font-medium"
+                       transition-colors text-sm font-medium btn-enhanced"
               aria-label={`Place hold on ${book.title}`}
             >
               {primaryFormat.status === 'available' ? 'Check Out' : 'Place Hold'}
@@ -126,7 +126,7 @@ export const BookCard: React.FC<BookCardProps> = ({
               className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md
                        hover:bg-gray-50 focus:outline-none focus:ring-2
                        focus:ring-primary-500 focus:ring-offset-2 transition-colors
-                       text-sm font-medium"
+                       text-sm font-medium btn-enhanced"
               aria-label={`View details for ${book.title}`}
             >
               View Details

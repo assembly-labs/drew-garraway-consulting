@@ -136,7 +136,7 @@ function App() {
                   className="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900
                            border border-gray-300 rounded-md hover:bg-gray-50
                            transition-colors focus:outline-none focus:ring-2
-                           focus:ring-primary-500 focus:ring-offset-2"
+                           focus:ring-primary-500 focus:ring-offset-2 btn-enhanced"
                   aria-label="Start new conversation"
                 >
                   New Chat
@@ -181,7 +181,7 @@ function App() {
       {/* Floating Search Module */}
       <div className="fixed bottom-0 left-0 right-0 z-40 p-4 bg-gradient-to-t from-white via-white to-transparent pointer-events-none">
         <div className="max-w-4xl mx-auto pointer-events-auto">
-          <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 dark:bg-gray-800 dark:border-gray-700">
+          <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 dark:bg-gray-800 dark:border-gray-700 glass-effect">
             <SearchInput
               onSubmit={handleSearch}
               isLoading={conversationLoading}

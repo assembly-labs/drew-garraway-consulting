@@ -73,7 +73,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
             className="w-full px-5 py-3 pr-12 rounded-full border-2 border-gray-300
                      focus:outline-none focus:border-primary-500 resize-none
                      disabled:bg-gray-100 disabled:cursor-not-allowed
-                     text-gray-900 placeholder-gray-500"
+                     text-gray-900 placeholder-gray-500 focus-enhanced"
             style={{ minHeight: '48px', maxHeight: '120px' }}
             aria-label="Search for books"
             aria-describedby="search-help"
@@ -82,10 +82,11 @@ export const SearchInput: React.FC<SearchInputProps> = ({
           <button
             type="submit"
             disabled={!query.trim() || isLoading}
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full
+            className={`absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full
                      bg-primary-600 text-white hover:bg-primary-700 transition-colors
                      disabled:bg-gray-300 disabled:cursor-not-allowed
-                     focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                     focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
+                     ${!isLoading && query.trim() ? 'search-btn-pulse' : ''}`}
             aria-label="Send message"
           >
             {isLoading ? (
