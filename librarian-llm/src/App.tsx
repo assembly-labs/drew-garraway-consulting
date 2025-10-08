@@ -149,7 +149,7 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto pb-36">
+      <main className="flex-1 overflow-auto pb-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Conversation History */}
           <ConversationHistory
@@ -170,13 +170,6 @@ function App() {
           )}
         </div>
       </main>
-
-      {/* Disclaimer Banner - Added padding bottom to prevent overlap */}
-      <div className="bg-yellow-50 border-t border-yellow-200 px-4 py-2 pb-48 dark:bg-yellow-900/20 dark:border-yellow-800">
-        <p className="text-center text-xs text-yellow-800 dark:text-yellow-200">
-          ⚠️ This is a prototype demonstration. Not connected to real library systems.
-        </p>
-      </div>
 
       {/* Floating Search Module */}
       <div className="fixed bottom-0 left-0 right-0 z-40 p-4 pointer-events-none">
