@@ -250,28 +250,45 @@
 }
 
 /* 5. Global Smooth Transitions */
-button, a, input, textarea, select {
-  transition: all 0.2s ease;
-}
-
 html {
   scroll-behavior: smooth;
 }
 
-/* Smooth theme transitions */
-* {
-  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+/* Theme transitions - Only on major layout elements to prevent text pop */
+body,
+#root,
+header,
+main,
+footer,
+article,
+section,
+.bg-white,
+.bg-gray-50,
+.bg-gray-100,
+.bg-gray-800,
+.bg-gray-900 {
+  transition: background-color 0.35s ease-out,
+              border-color 0.35s ease-out;
 }
 
-/* Faster transitions for interactive elements */
-button, a, input, textarea, select {
-  transition: all 0.2s ease;
+/* Text color transitions - Unified timing */
+h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, label {
+  transition: color 0.35s ease-out;
 }
 
-/* Disable transitions on page load to prevent flash */
+/* Interactive elements - Faster transitions for responsiveness */
+button:hover,
+button:focus,
+a:hover,
+a:focus,
+input:hover,
+input:focus,
+textarea:hover,
+textarea:focus {
+  transition: all 0.15s ease;
+}
+
+/* Disable all transitions on initial page load */
 .no-transitions * {
   transition: none !important;
 }

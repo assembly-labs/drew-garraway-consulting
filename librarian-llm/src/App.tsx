@@ -179,7 +179,7 @@ function App() {
       </div>
 
       {/* Floating Search Module */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 p-4 bg-gradient-to-t from-white via-white to-transparent pointer-events-none">
+      <div className="fixed bottom-0 left-0 right-0 z-40 p-4 pointer-events-none">
         <div className="max-w-4xl mx-auto pointer-events-auto">
           <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 dark:bg-gray-800 dark:border-gray-700 glass-effect">
             <SearchInput

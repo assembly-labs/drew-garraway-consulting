@@ -35,7 +35,6 @@ export const useTheme = () => {
   }, [theme]);
 
   const toggleTheme = () => {
-    // Add a smooth transition effect
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
   };
 
