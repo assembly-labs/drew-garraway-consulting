@@ -1,15 +1,43 @@
-import { useCallback } from 'react';
+import { useCallback, useState, useRef } from 'react';
 import { SearchInput } from './components/SearchInput';
 import { ConversationHistory } from './components/ConversationHistory';
 import { ErrorMessage } from './components/ErrorMessage';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { ThemeToggle } from './components/ThemeToggle';
+import { HamburgerButton } from './components/HamburgerButton';
+import { Sidebar } from './components/Sidebar';
+import { DigitalLibraryCardModal } from './components/DigitalLibraryCardModal';
+import { MyCheckoutsPage } from './components/MyCheckoutsPage';
+import { MyHoldsPage } from './components/MyHoldsPage';
+import { EventsPage } from './components/EventsPage';
+import { MyReadingHistoryPage } from './components/MyReadingHistoryPage';
+import { MyFinesPage } from './components/MyFinesPage';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { ToastContainer } from './components/ToastContainer';
+import { ToastProvider } from './contexts/ToastContext';
+import { useToast } from './hooks/useToast';
 import { useCatalog } from './hooks/useCatalog';
 import { useConversation } from './hooks/useConversation';
 import { useClaudeChat } from './hooks/useClaudeChat';
+import { useHolds } from './hooks/useHolds';
+import { useFines } from './hooks/useFines';
 import { Book } from './types';
+import { mockCheckouts } from './data/mockCheckouts';
 
-function App() {
+type PageView = 'search' | 'checkouts' | 'holds' | 'events' | 'history' | 'fines';
+
+function AppContent() {
+  // Sidebar and modal state
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showLibraryCardModal, setShowLibraryCardModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState<PageView>('search');
+  const hamburgerButtonRef = useRef<HTMLButtonElement>(null);
+  const toast = useToast();
+
+  // Dynamic badge counts
+  const { totalCount: holdsCount } = useHolds();
+  const { totalOutstanding: finesAmount } = useFines();
+
   // Load the book catalog
   const {
     catalog,
@@ -73,6 +101,71 @@ function App() {
     }
   }, []);
 
+  // Toggle sidebar
+  const toggleSidebar = useCallback(() => {
+    setSidebarOpen(prev => !prev);
+  }, []);
+
+  // Handle sidebar close - return focus to hamburger button
+  const handleSidebarClose = useCallback(() => {
+    setSidebarOpen(false);
+    // Return focus to hamburger button
+    setTimeout(() => hamburgerButtonRef.current?.focus(), 100);
+  }, []);
+
+  // Handle sidebar menu item clicks
+  const handleSidebarMenuClick = useCallback((itemId: string) => {
+    // Handle specific menu items
+    switch (itemId) {
+      case 'digital-library-card':
+        setShowLibraryCardModal(true);
+        break;
+      case 'search':
+        setCurrentPage('search');
+        break;
+      case 'my-checkouts':
+        setCurrentPage('checkouts');
+        break;
+      case 'my-reading-history':
+        setCurrentPage('history');
+        break;
+      case 'my-holds':
+        setCurrentPage('holds');
+        break;
+      case 'my-fines':
+        setCurrentPage('fines');
+        break;
+      case 'events-calendar':
+        setCurrentPage('events');
+        break;
+      case 'settings':
+        toast.info('Settings', {
+          description: 'Settings coming soon. This will allow you to customize your library experience.'
+        });
+        break;
+      case 'help':
+        toast.info('Help', {
+          description: 'Help documentation coming soon. This will provide guides and FAQs.'
+        });
+        break;
+      default:
+        console.log('Unknown menu item:', itemId);
+    }
+  }, [toast]);
+
+  // Handle library card modal actions
+  const handleLibraryCardAction = useCallback((action: string) => {
+    if (action === 'save') {
+      toast.info('Feature coming soon!', {
+        description: 'Save to device will be available in production.'
+      });
+    } else if (action === 'wallet') {
+      toast.info('Feature coming soon!', {
+        description: 'Apple Wallet integration will be available in production.'
+      });
+    }
+  }, [toast]);
+
   // Show loading state while catalog loads
   if (catalogLoading) {
     return (
@@ -98,13 +191,100 @@ function App() {
     );
   }
 
+  // Helper function to return to search
+  const resetToSearch = () => {
+    setCurrentPage('search');
+  };
+
+  // If showing any specialized page, render it instead of main app
+  if (currentPage === 'checkouts') {
+    return (
+      <>
+        <ErrorBoundary>
+          <MyCheckoutsPage onClose={resetToSearch} />
+        </ErrorBoundary>
+        <ToastContainer />
+      </>
+    );
+  }
+
+  if (currentPage === 'holds') {
+    return (
+      <>
+        <ErrorBoundary>
+          <MyHoldsPage onClose={resetToSearch} />
+        </ErrorBoundary>
+        <ToastContainer />
+      </>
+    );
+  }
+
+  if (currentPage === 'events') {
+    return (
+      <>
+        <ErrorBoundary>
+          <EventsPage onClose={resetToSearch} />
+        </ErrorBoundary>
+        <ToastContainer />
+      </>
+    );
+  }
+
+  if (currentPage === 'history') {
+    return (
+      <>
+        <ErrorBoundary>
+          <MyReadingHistoryPage onClose={resetToSearch} />
+        </ErrorBoundary>
+        <ToastContainer />
+      </>
+    );
+  }
+
+  if (currentPage === 'fines') {
+    return (
+      <>
+        <ErrorBoundary>
+          <MyFinesPage onClose={resetToSearch} />
+        </ErrorBoundary>
+        <ToastContainer />
+      </>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
+      {/* Toast Container */}
+      <ToastContainer />
+
+      {/* Sidebar */}
+      <Sidebar
+        isOpen={sidebarOpen}
+        onClose={handleSidebarClose}
+        onMenuItemClick={handleSidebarMenuClick}
+        checkoutsCount={mockCheckouts.length}
+        holdsCount={holdsCount}
+        finesAmount={finesAmount}
+      />
+
+      {/* Digital Library Card Modal */}
+      <DigitalLibraryCardModal
+        isOpen={showLibraryCardModal}
+        onClose={() => setShowLibraryCardModal(false)}
+        onAction={handleLibraryCardAction}
+      />
+
       {/* Header */}
       <header className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
+              <div ref={hamburgerButtonRef as any}>
+                <HamburgerButton
+                  isOpen={sidebarOpen}
+                  onClick={toggleSidebar}
+                />
+              </div>
               <span className="text-3xl">📚</span>
               <div>
                 <h1 className="text-xl font-bold text-gray-900">
@@ -189,6 +369,15 @@ function App() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Main App component wrapped with ToastProvider
+function App() {
+  return (
+    <ToastProvider>
+      <AppContent />
+    </ToastProvider>
   );
 }
 

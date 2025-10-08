@@ -329,3 +329,132 @@ textarea:focus {
 /* 9. Card Lift on Hover - Removed as requested */
 
 /* 10. Smooth Opacity Transitions - Removed as unused */
+
+/* ============================================
+   SIDEBAR & MODAL ANIMATIONS
+   Added for Phase 1 Implementation
+   ============================================ */
+
+/* Sidebar slide animations */
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutToLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.sidebar-enter {
+  animation: slideInFromLeft 300ms ease-in-out;
+}
+
+.sidebar-exit {
+  animation: slideOutToLeft 300ms ease-in-out;
+}
+
+/* Modal fade animations */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-enter {
+  animation: modalFadeIn 200ms ease-out;
+}
+
+/* Primary color utilities for badges */
+.bg-primary-100 {
+  @apply bg-blue-100;
+}
+
+.text-primary-800 {
+  @apply text-blue-800;
+}
+
+.bg-primary-900 {
+  @apply bg-blue-900;
+}
+
+.text-primary-200 {
+  @apply text-blue-200;
+}
+
+.bg-primary-600 {
+  @apply bg-blue-600;
+}
+
+.bg-primary-700 {
+  @apply bg-blue-700;
+}
+
+.ring-primary-500 {
+  @apply ring-blue-500;
+}
+
+.focus\:ring-primary-500:focus {
+  @apply ring-blue-500;
+}
+
+/* Dark mode primary colors */
+.dark .bg-primary-100 {
+  @apply bg-blue-900;
+}
+
+.dark .text-primary-800 {
+  @apply text-blue-200;
+}
+
+.dark .bg-primary-900 {
+  @apply bg-blue-800;
+}
+
+.dark .text-primary-200 {
+  @apply text-blue-300;
+}
+
+/* Toast animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.toast-enter {
+  animation: slideInRight 300ms ease-out;
+}
+
+.toast-exit {
+  animation: slideOutRight 200ms ease-in;
+}

@@ -76,3 +76,16 @@ export const getRatingStars = (rating: number): string => {
     '☆'.repeat(emptyStars)
   );
 };
+
+export const formatCurrency = (cents: number): string => {
+  return `$${(cents / 100).toFixed(2)}`;
+};
+
+export const getFormatEmoji = (format: string): string => {
+  switch (format) {
+    case 'physical': return '📕';
+    case 'ebook': return '📱';
+    case 'audiobook': return '🎧';
+    default: return '📖';
+  }
+};
