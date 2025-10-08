@@ -105,6 +105,16 @@
   .message-assistant {
     @apply bg-white border-2 border-gray-200 mr-auto;
   }
+
+  /* Hide scrollbar while preserving scroll functionality */
+  .scrollbar-hide {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 }
 
 /* Dark mode styles */

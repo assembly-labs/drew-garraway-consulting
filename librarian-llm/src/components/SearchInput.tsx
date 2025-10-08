@@ -1,4 +1,4 @@
-import React, { useState, useRef, KeyboardEvent } from 'react';
+import React, { useState, useRef, KeyboardEvent, useEffect } from 'react';
 
 interface SearchInputProps {
   onSubmit: (query: string) => void;
@@ -13,14 +13,54 @@ const exampleQueries = [
   "Science books for kids"
 ];
 
+// Hook to detect mobile viewport
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(() => {
+    // Initialize with actual window size to prevent hydration mismatch
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 640; // Tailwind sm breakpoint
+    }
+    return false; // SSR fallback
+  });
+
+  const mountedRef = useRef(true);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      // Only update state if component is still mounted
+      if (mountedRef.current) {
+        setIsMobile(window.innerWidth < 640);
+      }
+    };
+
+    // Re-check on mount in case initial state was SSR fallback
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => {
+      mountedRef.current = false; // Mark as unmounted
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
+  return isMobile;
+};
+
 export const SearchInput: React.FC<SearchInputProps> = ({
   onSubmit,
   isLoading,
-  placeholder = "Ask me anything about books..."
+  placeholder
 }) => {
+  const isMobile = useIsMobile();
   const [query, setQuery] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Compute responsive placeholder
+  const effectivePlaceholder = placeholder || (
+    isMobile
+      ? "Ask me about books..."
+      : "Ask me about books... (e.g., 'I want a mystery set in Paris')"
+  );
 
   const handleSubmit = (e?: React.FormEvent) => {
     e?.preventDefault();
@@ -67,11 +107,11 @@ export const SearchInput: React.FC<SearchInputProps> = ({
             onKeyDown={handleKeyDown}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            placeholder={placeholder}
+            placeholder={effectivePlaceholder}
             disabled={isLoading}
             rows={1}
             className="w-full px-5 py-3 pr-12 rounded-full border-2 border-gray-300 dark:border-gray-600
-                     focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 resize-none
+                     focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 resize-none overflow-auto scrollbar-hide
                      disabled:bg-gray-100 disabled:cursor-not-allowed dark:disabled:bg-gray-700
                      text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400
                      bg-white dark:bg-gray-800 focus-enhanced"

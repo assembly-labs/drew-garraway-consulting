@@ -329,7 +329,7 @@ function AppContent() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto pb-32">
+      <main className="flex-1 overflow-auto">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Conversation History */}
           <ConversationHistory
@@ -348,26 +348,23 @@ function AppContent() {
               />
             </div>
           )}
-        </div>
-      </main>
 
-      {/* Floating Search Module */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 p-4 pointer-events-none">
-        <div className="max-w-4xl mx-auto pointer-events-auto">
-          <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 dark:bg-gray-800 dark:border-gray-700 glass-effect">
-            <SearchInput
-              onSubmit={handleSearch}
-              isLoading={conversationLoading}
-              placeholder="Ask me about books... (e.g., 'I want a mystery set in Paris')"
-            />
+          {/* Search Module - flows with content */}
+          <div className="mt-6 mb-8">
+            <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 dark:bg-gray-800 dark:border-gray-700 glass-effect backdrop-blur-xl">
+              <SearchInput
+                onSubmit={handleSearch}
+                isLoading={conversationLoading}
+              />
 
-            {/* Catalog Info */}
-            <p className="text-center text-xs text-gray-500 mt-3 dark:text-gray-400">
-              {catalog.length} books in mock catalog • Powered by Claude AI
-            </p>
+              {/* Catalog Info */}
+              <p className="text-center text-xs text-gray-500 mt-3 dark:text-gray-400">
+                {catalog.length} books in mock catalog • Powered by Claude AI
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
