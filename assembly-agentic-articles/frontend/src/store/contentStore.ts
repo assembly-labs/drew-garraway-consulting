@@ -10,6 +10,9 @@ interface ContentStore {
   status: 'idle' | 'researching' | 'generating' | 'revising' | 'formatting' | 'error';
   error: string | null;
   loading: boolean;
+  selectedSourceIds: string[];
+  researchRetryCount: number;
+  canRetryResearch: boolean;
 
   // Actions
   createDraft: (idea: string) => Promise<void>;
@@ -21,6 +24,11 @@ interface ContentStore {
   approveDraft: () => Promise<void>;
   formatContent: () => Promise<void>;
   publishContent: (platforms: string[]) => Promise<void>;
+  selectSources: (sourceIds: string[]) => void;
+  saveSourceSelection: () => Promise<void>;
+  retryResearch: () => Promise<void>;
+  generateContentFromSelection: () => Promise<void>;
+  skipSourceSelection: () => Promise<void>;
   setStatus: (status: ContentStore['status']) => void;
   setError: (error: string | null) => void;
   reset: () => void;
@@ -35,6 +43,9 @@ const useContentStore = create<ContentStore>((set, get) => ({
   status: 'idle',
   error: null,
   loading: false,
+  selectedSourceIds: [],
+  researchRetryCount: 0,
+  canRetryResearch: true,
 
   // Actions
   createDraft: async (idea: string) => {
@@ -108,14 +119,17 @@ const useContentStore = create<ContentStore>((set, get) => ({
 
     set({ status: 'researching', error: null });
     try {
-      const sources = await contentApi.conductResearch(currentDraft.id);
+      const result = await contentApi.conductResearch(currentDraft.id);
       set({
-        sources,
-        status: 'idle'
+        sources: result.sources,
+        canRetryResearch: result.canRetry,
+        researchRetryCount: result.retryCount,
+        status: 'idle',
+        selectedSourceIds: [] // Reset selection
       });
 
-      // Automatically generate content after research
-      await get().generateContent();
+      // REMOVED: Auto-generate content
+      // Now user must select sources first
     } catch (error: any) {
       set({
         error: error.message || 'Failed to conduct research',
@@ -253,6 +267,98 @@ const useContentStore = create<ContentStore>((set, get) => ({
     }
   },
 
+  // NEW: Update local selection state
+  selectSources: (sourceIds: string[]) => {
+    set({ selectedSourceIds: sourceIds });
+  },
+
+  // NEW: Save selection to backend
+  saveSourceSelection: async () => {
+    const { currentDraft, selectedSourceIds } = get();
+    if (!currentDraft) return;
+
+    if (selectedSourceIds.length < 3) {
+      set({ error: 'Please select at least 3 sources' });
+      throw new Error('Please select at least 3 sources');
+    }
+
+    try {
+      await contentApi.selectSources(currentDraft.id, selectedSourceIds);
+    } catch (error: any) {
+      set({ error: error.message || 'Failed to save source selection' });
+      throw error;
+    }
+  },
+
+  // NEW: Generate content with selected sources
+  generateContentFromSelection: async () => {
+    const { currentDraft, selectedSourceIds } = get();
+    if (!currentDraft) return;
+
+    // Validation
+    if (selectedSourceIds.length < 3) {
+      set({ error: 'Please select at least 3 sources to generate content' });
+      return;
+    }
+
+    set({ status: 'generating', error: null });
+
+    try {
+      // Save selection first
+      await get().saveSourceSelection();
+
+      // Then generate content
+      await get().generateContent();
+    } catch (error: any) {
+      set({
+        error: error.message || 'Failed to generate content',
+        status: 'error'
+      });
+    }
+  },
+
+  // NEW: Skip selection and use all sources
+  skipSourceSelection: async () => {
+    const { sources } = get();
+
+    // Select all sources
+    const allSourceIds = sources.map(s => s.id);
+    set({ selectedSourceIds: allSourceIds });
+
+    // Generate immediately
+    await get().generateContentFromSelection();
+  },
+
+  // NEW: Re-run research
+  retryResearch: async () => {
+    const { currentDraft, researchRetryCount } = get();
+    if (!currentDraft) return;
+
+    if (researchRetryCount >= 2) {
+      set({ error: 'Maximum research attempts (2) reached' });
+      return;
+    }
+
+    set({ status: 'researching', error: null });
+
+    try {
+      const result = await contentApi.retryResearch(currentDraft.id);
+
+      // Append new sources to existing list
+      set((state) => ({
+        sources: [...state.sources, ...result.newSources],
+        researchRetryCount: result.retryCount,
+        canRetryResearch: result.canRetry,
+        status: 'idle'
+      }));
+    } catch (error: any) {
+      set({
+        error: error.message || 'Failed to find more sources',
+        status: 'error'
+      });
+    }
+  },
+
   setStatus: (status) => set({ status }),
   setError: (error) => set({ error }),
 
@@ -262,7 +368,10 @@ const useContentStore = create<ContentStore>((set, get) => ({
     formattedContent: null,
     status: 'idle',
     error: null,
-    loading: false
+    loading: false,
+    selectedSourceIds: [],
+    researchRetryCount: 0,
+    canRetryResearch: true
   }),
 }));
 

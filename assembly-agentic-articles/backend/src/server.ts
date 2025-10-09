@@ -9,62 +9,73 @@ import { createContentRoutes } from './routes/content.routes';
 // Validate environment variables
 validateEnv();
 
-const app: Express = express();
-
-// Middleware
-app.use(helmet());
-app.use(cors({
-  origin: config.frontend.url,
-  credentials: true,
-}));
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per windowMs
-  message: 'Too many requests from this IP, please try again later.',
-});
-app.use('/api', limiter);
-
-// Health check
-app.get('/health', (_req: Request, res: Response) => {
-  res.json({
-    status: 'ok',
-    timestamp: new Date().toISOString(),
-    environment: config.env,
-  });
-});
-
-// API routes - Pass null if database not connected to use mock data
-app.use('/api/content', createContentRoutes(dbPool));
-
-// 404 handler
-app.use((_req: Request, res: Response) => {
-  res.status(404).json({
-    success: false,
-    error: 'Route not found',
-  });
-});
-
-// Error handler
-app.use((err: any, _req: Request, res: Response, _next: any) => {
-  console.error('Server error:', err);
-  res.status(err.status || 500).json({
-    success: false,
-    error: config.env === 'development' ? err.message : 'Internal server error',
-  });
-});
-
 // Start server
 async function startServer() {
   try {
-    // Test database connection
+    // TEST DATABASE FIRST (before creating routes)
+    console.log('🔍 Testing database connection...');
     const dbConnected = await testConnection();
+
     if (!dbConnected && config.env === 'production') {
-      throw new Error('Failed to connect to database');
+      throw new Error('Failed to connect to database in production mode');
     }
+
+    // Determine which pool to use (null = mock service)
+    const servicePool = dbConnected ? dbPool : null;
+    const mode = dbConnected ? 'DATABASE' : 'MOCK DATA';
+
+    console.log(`✅ Running in ${mode} mode\n`);
+
+    // NOW create Express app with correct pool
+    const app: Express = express();
+
+    // Middleware
+    app.use(helmet());
+    app.use(cors({
+      origin: config.frontend.url,
+      credentials: true,
+    }));
+    app.use(express.json({ limit: '10mb' }));
+    app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+    // Rate limiting
+    const limiter = rateLimit({
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: 100, // Limit each IP to 100 requests per windowMs
+      message: 'Too many requests from this IP, please try again later.',
+    });
+    app.use('/api', limiter);
+
+    // Health check
+    app.get('/health', (_req: Request, res: Response) => {
+      res.json({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        environment: config.env,
+        mode: mode,
+        database: dbConnected ? 'connected' : 'not connected',
+      });
+    });
+
+    // API routes - Pass tested pool (null if no DB = uses MockContentService)
+    app.use('/api/content', createContentRoutes(servicePool));
+
+    // 404 handler
+    app.use((_req: Request, res: Response) => {
+      res.status(404).json({
+        success: false,
+        error: 'Route not found',
+      });
+    });
+
+    // Error handler
+    app.use((err: any, _req: Request, res: Response, _next: any) => {
+      console.error('Server error:', err);
+      res.status(err.status || 500).json({
+        success: false,
+        error: config.env === 'development' ? err.message : 'Internal server error',
+      });
+    });
 
     // Start listening
     const server = app.listen(config.port, () => {
@@ -74,6 +85,7 @@ async function startServer() {
 ║   Environment: ${config.env.padEnd(34)}║
 ║   Port: ${String(config.port).padEnd(41)}║
 ║   Frontend: ${config.frontend.url.padEnd(37)}║
+║   Mode: ${mode.padEnd(41)}║
 ╚══════════════════════════════════════════════════╝
 
 📝 API Endpoints:
@@ -113,7 +125,7 @@ async function startServer() {
     });
 
   } catch (error) {
-    console.error('Failed to start server:', error);
+    console.error('❌ Failed to start server:', error);
     process.exit(1);
   }
 }

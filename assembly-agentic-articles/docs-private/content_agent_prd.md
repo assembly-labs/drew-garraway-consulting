@@ -55,12 +55,13 @@ Build the operating system for executive thought leadership—a platform that be
 **Core Features:**
 1. Single-sentence idea input
 2. Basic web search (5-10 sources)
-3. Claude-powered content generation (800-1000 words, inline citations)
-4. Simple editorial interface with revision system (max 2 revisions)
-5. Multi-platform formatting (LinkedIn, X, TikTok)
-6. **Basic source credibility scoring** (domain authority + recency)
-7. **Calendar integration foundation** (read-only: upcoming events)
-8. Manual publishing with approval workflow
+3. **Research source validation & selection** (user selects which sources to use)
+4. Claude-powered content generation (800-1000 words, inline citations)
+5. Simple editorial interface with revision system (max 2 revisions)
+6. Multi-platform formatting (LinkedIn, X, TikTok)
+7. **Basic source credibility scoring** (domain authority + recency)
+8. **Calendar integration foundation** (read-only: upcoming events)
+9. Manual publishing with approval workflow
 
 **Deliverables:**
 - Functional product you can use today
@@ -109,13 +110,86 @@ Build the operating system for executive thought leadership—a platform that be
 - Phase 1: Manual curation of top 500 sources by vertical
 - Build proprietary "credible source library" by industry
 
+**FR-1.5: Research Source Validation (MVP Enhancement)**
+
+**Purpose:** Allow users to validate research quality before content generation
+
+**Functional Requirements:**
+- Display all research sources in selection interface immediately after research completes
+- Default state: ZERO sources selected (user must actively choose)
+- Minimum validation: At least 3 sources must be selected to proceed
+- Selection UI:
+  - Checkbox on each source card
+  - Visual distinction: Selected sources have blue accent border + background tint
+  - Selection counter updates in real-time: "X of Y selected (minimum 3 required)"
+
+**Quick Action Buttons:**
+1. "Select High Credibility (8+)"
+   - Auto-selects all sources with credibilityScore >= 8.0
+   - If < 3 sources meet criteria, shows warning: "Only X high-credibility sources found. Select more or run 'Find More Sources'"
+
+2. "Select Academic Only"
+   - Auto-selects all sources where sourceType = 'academic'
+   - If < 3 academic sources, shows same warning
+
+3. "Select All"
+   - Selects all available sources
+   - Always enables "Generate Article" button
+
+4. "Deselect All"
+   - Clears all selections
+
+**Alternative Actions:**
+1. "Skip Selection (Use All Sources)"
+   - Immediately proceeds to content generation with all sources
+   - Bypasses validation requirement
+   - Analytics: Track usage rate to measure friction
+
+2. "Find More Sources"
+   - Re-triggers research phase with same idea
+   - Appends new sources to existing list (deduplicates by URL)
+   - Max 2 retries per draft (prevent infinite loops)
+   - Button disabled after 2 retries: "Maximum research attempts reached"
+
+**Generate Article Button:**
+- Disabled state (gray):
+  - selectedSources.length < 3
+  - Tooltip: "Select at least 3 sources to continue"
+- Enabled state (blue):
+  - selectedSources.length >= 3
+  - Click triggers content generation with ONLY selected sources
+
+**Side Panel Analytics:**
+- Display source quality metrics:
+  - Average credibility: (sum of selected credibilityScores) / count
+  - Source type breakdown: Academic (3), Industry (2), News (1)
+  - Recency: "6 sources from 2024, 0 older than 2023"
+- Provide guidance:
+  - "💡 Tip: Mix academic and industry sources for balanced perspectives"
+  - "⚠️ Warning: Low average credibility (6.2/10). Consider selecting higher-quality sources."
+
+**Database Changes:**
+```sql
+ALTER TABLE research_sources
+ADD COLUMN user_selected BOOLEAN DEFAULT false;
+
+ALTER TABLE content_drafts
+ADD COLUMN research_retry_count INT DEFAULT 0;
+```
+
+**Success Metrics:**
+- 70%+ users modify default selection (shows engagement with validation)
+- <10% use "Skip Selection" (shows feature provides value)
+- Average credibility of selected sources > average of all sources (users selecting quality)
+- 20%+ use quick action buttons (shows utility of filters)
+
 **Data Model Additions:**
 ```json
 {
   "source_credibility": {
     "url": "string",
     "domain_authority": "float",
-    "recency_score": "float", 
+    "recency_score": "float",
     "cross_reference_count": "int",
     "citation_network_score": "float",
     "overall_score": "float (1-10)",
@@ -514,13 +588,38 @@ Workflow example:
    - Extracts key findings and statistics
    - Generates citations list with URLs
 
-3. **Content Generation** (1-2 minutes)
-   - Claude generates 800-1000 word draft
-   - Inline citations: [1], [2] format
+3. **Research Source Validation & Selection** (30-60 seconds)
+   - User reviews all research sources (none selected by default)
+   - Interactive selection interface:
+     - Checkbox per source card
+     - Selection counter: "0 of 8 selected (minimum 3 required)"
+     - Visual distinction: Selected sources have blue border + background tint
+   - **Quick action buttons:**
+     - "Select High Credibility (8+)" - Auto-selects sources with score ≥8.0
+     - "Select Academic Only" - Auto-selects academic sources only
+     - "Select All" - Selects all sources
+     - "Deselect All" - Clears selection
+   - **Alternative actions:**
+     - "Skip Selection (Use All Sources)" - Proceeds with all sources, no validation
+     - "Find More Sources" - Re-runs research (max 2 retries per draft)
+   - **Generate Article button:**
+     - Disabled (grayed out) until ≥3 sources selected
+     - Enabled (blue) when validation passes
+     - Tooltip shows requirement: "Select at least 3 sources to continue"
+   - **Side panel analytics:**
+     - Average credibility score of selected sources
+     - Source type breakdown (academic, industry, news, blog)
+     - Recency analysis (2024 sources, 2023, older)
+     - Selection tips and quality warnings
+
+4. **Content Generation** (1-2 minutes)
+   - Claude generates 800-1000 word draft using ONLY selected sources
+   - Progress indicator: "Drafting article with 6 selected sources..."
+   - Inline citations: [1], [2] format (renumbered based on selected sources)
    - Structure: Hook → Context → 3 Key Points → Conclusion
    - Compelling title auto-generated
 
-4. **Editorial Interface**
+5. **Editorial Interface**
    - Rich text editor (TipTap)
    - Side panel: Research sources with credibility scores
    - Actions:
@@ -529,12 +628,12 @@ Workflow example:
      - 🔄 Start Over
    - Revision counter: "Revision 1/2" displayed
 
-5. **Revision Loop** (if requested)
+6. **Revision Loop** (if requested)
    - User provides feedback: "Make it more technical" or "Add more data"
    - System regenerates in <90 seconds
    - Maximum 2 revisions, then force approve or start over
 
-6. **Multi-Platform Formatting** (automatic)
+7. **Multi-Platform Formatting** (automatic)
    - **LinkedIn:**
      - Professional formatting, paragraph breaks
      - 3-5 hashtags added
@@ -550,12 +649,12 @@ Workflow example:
      - Visual cues: [Show graphic], [Text overlay]
      - Call-to-action at end
 
-7. **Preview & Approval**
+8. **Preview & Approval**
    - Side-by-side view of all platform versions
    - Individual approve/reject per platform
    - Schedule or publish immediately
 
-8. **Publication**
+9. **Publication**
    - APIs publish to selected platforms
    - Confirmation with live links
    - Error handling with retry

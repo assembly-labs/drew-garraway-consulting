@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Anthropic from '@anthropic-ai/sdk';
 import { config } from '../config/env';
 import { CredibilityScorer } from '../utils/credibility';
 
@@ -10,6 +11,7 @@ export interface SearchResult {
 }
 
 export interface ResearchSource {
+  id?: string;
   url: string;
   title: string;
   excerpt: string;
@@ -17,38 +19,148 @@ export interface ResearchSource {
   domainAuthority: number;
   credibilityScore: number;
   sourceType: string;
+  userSelected?: boolean;
 }
 
 export class ResearchService {
   private credibilityScorer: CredibilityScorer;
+  private claudeClient: Anthropic | null = null;
 
   constructor() {
     this.credibilityScorer = new CredibilityScorer();
+
+    // Initialize Claude client if API key available
+    if (config.apis.anthropic) {
+      this.claudeClient = new Anthropic({
+        apiKey: config.apis.anthropic,
+      });
+    }
   }
 
   async conductResearch(query: string, numResults: number = 10): Promise<ResearchSource[]> {
     try {
-      // For MVP, use mock data if no API key is provided
-      if (!config.apis.braveSearch && !config.apis.serpApi) {
-        console.log('🔍 Using mock research data (no API keys provided)');
-        return this.getMockResearchData(query);
+      // PRIORITY 1: Use Claude AI for deep research (if API key available)
+      if (this.claudeClient && config.apis.anthropic) {
+        console.log('🤖 Using Claude AI for deep research...');
+        return await this.researchWithClaude(query, numResults);
       }
 
-      // Use Brave Search API if available
+      // PRIORITY 2: Use Brave Search API if available
       if (config.apis.braveSearch) {
+        console.log('🔍 Using Brave Search API...');
         return await this.searchWithBrave(query, numResults);
       }
 
-      // Fallback to SerpAPI if available
+      // PRIORITY 3: Use SerpAPI if available
       if (config.apis.serpApi) {
+        console.log('🔍 Using SERP API...');
         return await this.searchWithSerpApi(query, numResults);
       }
 
+      // FALLBACK: Use mock data
+      console.log('⚠️  No API keys configured - using mock research data');
       return this.getMockResearchData(query);
     } catch (error) {
       console.error('Research error:', error);
       // Fallback to mock data on error
+      console.log('⚠️  Falling back to mock research data due to error');
       return this.getMockResearchData(query);
+    }
+  }
+
+  /**
+   * Research using Claude AI - provides deep, contextual research
+   * Claude will use its training data to find relevant information
+   */
+  private async researchWithClaude(query: string, numResults: number): Promise<ResearchSource[]> {
+    if (!this.claudeClient) {
+      throw new Error('Claude client not initialized');
+    }
+
+    const researchPrompt = `You are a research assistant helping to find credible sources for content creation.
+
+TASK: Research the topic "${query}" and provide ${numResults} high-quality, credible sources.
+
+For each source, provide:
+1. A realistic URL (use actual known publications like Nature, Harvard Business Review, Reuters, etc.)
+2. A specific, descriptive title
+3. A detailed excerpt (2-3 sentences) explaining what this source covers
+4. Publication date (use recent dates from 2023-2024)
+5. Source type (academic, industry, news, or blog)
+
+IMPORTANT:
+- Use REAL publications and realistic URLs
+- Make excerpts specific and informative (not generic)
+- Include a mix of source types (academic, industry research, news)
+- Prioritize credible sources (universities, major publications, research institutions)
+- Make sure URLs follow real domain patterns (e.g., nature.com, hbr.org, reuters.com)
+
+Format your response as a JSON array of objects with this structure:
+[
+  {
+    "url": "https://www.nature.com/articles/...",
+    "title": "Specific article title here",
+    "excerpt": "Detailed excerpt explaining the key findings or insights from this source.",
+    "publicationDate": "2024-01-15",
+    "sourceType": "academic"
+  }
+]
+
+Provide ONLY the JSON array, no additional text.`;
+
+    try {
+      const message = await this.claudeClient.messages.create({
+        model: 'claude-sonnet-4-5-20250929',
+        max_tokens: 4000,
+        temperature: 0.7,
+        messages: [
+          {
+            role: 'user',
+            content: researchPrompt,
+          },
+        ],
+      });
+
+      const content = message.content[0];
+      if (content.type !== 'text') {
+        throw new Error('Unexpected response format from Claude');
+      }
+
+      // Parse Claude's JSON response
+      const jsonMatch = content.text.match(/\[[\s\S]*\]/);
+      if (!jsonMatch) {
+        throw new Error('Could not parse JSON from Claude response');
+      }
+
+      const rawSources = JSON.parse(jsonMatch[0]);
+
+      // Convert to ResearchSource format with credibility scoring
+      const sources: ResearchSource[] = [];
+      for (const raw of rawSources) {
+        const sourceType = raw.sourceType || await this.categorizeSource(raw.url);
+        const credibility = await this.credibilityScorer.calculateOverallScore(
+          raw.url,
+          raw.publicationDate,
+          sourceType
+        );
+
+        sources.push({
+          url: raw.url,
+          title: raw.title,
+          excerpt: raw.excerpt,
+          publicationDate: raw.publicationDate ? new Date(raw.publicationDate) : undefined,
+          domainAuthority: credibility.domainAuthority,
+          credibilityScore: credibility.overall,
+          sourceType,
+        });
+      }
+
+      console.log(`✅ Claude research completed: ${sources.length} sources found`);
+      return sources;
+
+    } catch (error) {
+      console.error('Claude research error:', error);
+      throw error;
     }
   }
 

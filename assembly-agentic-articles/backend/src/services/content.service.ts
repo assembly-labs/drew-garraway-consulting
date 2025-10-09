@@ -63,7 +63,7 @@ export class ContentService {
     return result.rows.map(row => this.mapRowToDraft(row));
   }
 
-  async conductResearch(draftId: string): Promise<ResearchSource[]> {
+  async conductResearch(draftId: string, options?: { append?: boolean }): Promise<ResearchSource[]> {
     // Get the draft
     const draftResult = await this.dbPool.query(
       'SELECT original_idea FROM content_drafts WHERE id = $1',
@@ -83,39 +83,81 @@ export class ContentService {
     );
 
     // Conduct research
-    const sources = await this.researchService.conductResearch(idea, 10);
+    const newSources = await this.researchService.conductResearch(idea, 10);
 
-    // Save sources to database
-    for (const source of sources) {
-      await this.dbPool.query(
-        `INSERT INTO research_sources
-         (draft_id, url, title, excerpt, publication_date, domain_authority, credibility_score, source_type)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-        [
-          draftId,
-          source.url,
-          source.title,
-          source.excerpt,
-          source.publicationDate || null,
-          source.domainAuthority,
-          source.credibilityScore,
-          source.sourceType,
-        ]
+    if (options?.append) {
+      // Append mode: Get existing source URLs to deduplicate
+      const existingResult = await this.dbPool.query(
+        'SELECT url FROM research_sources WHERE draft_id = $1',
+        [draftId]
       );
+      const existingUrls = new Set(existingResult.rows.map((r: any) => r.url));
+
+      // Filter out duplicates
+      const uniqueNewSources = newSources.filter(s => !existingUrls.has(s.url));
+
+      // Insert only unique sources
+      for (const source of uniqueNewSources) {
+        await this.dbPool.query(
+          `INSERT INTO research_sources
+           (draft_id, url, title, excerpt, publication_date, domain_authority, credibility_score, source_type, user_selected)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, false)`,
+          [
+            draftId,
+            source.url,
+            source.title,
+            source.excerpt,
+            source.publicationDate || null,
+            source.domainAuthority,
+            source.credibilityScore,
+            source.sourceType,
+          ]
+        );
+      }
+
+      // Update status back to idle (not drafting, user needs to select sources)
+      await this.dbPool.query(
+        'UPDATE content_drafts SET status = $1 WHERE id = $2',
+        ['draft', draftId]
+      );
+
+      return uniqueNewSources;
+    } else {
+      // Normal mode: Delete old sources and insert new ones
+      await this.dbPool.query('DELETE FROM research_sources WHERE draft_id = $1', [draftId]);
+
+      // Save sources to database (user_selected defaults to false)
+      for (const source of newSources) {
+        await this.dbPool.query(
+          `INSERT INTO research_sources
+           (draft_id, url, title, excerpt, publication_date, domain_authority, credibility_score, source_type, user_selected)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, false)`,
+          [
+            draftId,
+            source.url,
+            source.title,
+            source.excerpt,
+            source.publicationDate || null,
+            source.domainAuthority,
+            source.credibilityScore,
+            source.sourceType,
+          ]
+        );
+      }
+
+      // Update status to draft (not drafting, user needs to select sources)
+      await this.dbPool.query(
+        'UPDATE content_drafts SET status = $1 WHERE id = $2',
+        ['draft', draftId]
+      );
+
+      return newSources;
     }
-
-    // Update status to drafting
-    await this.dbPool.query(
-      'UPDATE content_drafts SET status = $1 WHERE id = $2',
-      ['drafting', draftId]
-    );
-
-    return sources;
   }
 
   async getSources(draftId: string): Promise<ResearchSource[]> {
     const result = await this.dbPool.query(
-      `SELECT url, title, excerpt, publication_date, domain_authority, credibility_score, source_type
+      `SELECT id, url, title, excerpt, publication_date, domain_authority, credibility_score, source_type, user_selected
        FROM research_sources
        WHERE draft_id = $1
        ORDER BY credibility_score DESC`,
@@ -123,6 +165,7 @@ export class ContentService {
     );
 
     return result.rows.map(row => ({
+      id: row.id,
       url: row.url,
       title: row.title,
       excerpt: row.excerpt,
@@ -130,15 +173,21 @@ export class ContentService {
       domainAuthority: row.domain_authority,
       credibilityScore: row.credibility_score,
       sourceType: row.source_type,
+      userSelected: row.user_selected || false,
     }));
   }
 
   async generateDraftContent(draftId: string, feedback?: string): Promise<string> {
-    // Get sources
-    const sources = await this.getSources(draftId);
+    // Get ONLY selected sources
+    const allSources = await this.getSources(draftId);
+    const sources = allSources.filter(s => s.userSelected);
 
     if (sources.length === 0) {
-      throw new Error('No research sources found. Please conduct research first.');
+      throw new Error('No sources selected. Please select at least 3 sources before generating content.');
+    }
+
+    if (sources.length < 3) {
+      throw new Error(`Only ${sources.length} source(s) selected. Please select at least 3 sources.`);
     }
 
     // Get original idea
@@ -311,6 +360,29 @@ export class ContentService {
       message: 'Content ready for publishing. Copy and paste to your chosen platforms.',
       platforms,
     };
+  }
+
+  async selectSources(draftId: string, selectedSourceIds: string[]): Promise<void> {
+    // First, mark ALL sources for this draft as NOT selected
+    await this.dbPool.query(
+      'UPDATE research_sources SET user_selected = false WHERE draft_id = $1',
+      [draftId]
+    );
+
+    // Then, mark ONLY the selected IDs as selected
+    if (selectedSourceIds.length > 0) {
+      await this.dbPool.query(
+        'UPDATE research_sources SET user_selected = true WHERE id = ANY($1) AND draft_id = $2',
+        [selectedSourceIds, draftId]
+      );
+    }
+  }
+
+  async incrementResearchRetry(draftId: string): Promise<void> {
+    await this.dbPool.query(
+      'UPDATE content_drafts SET research_retry_count = research_retry_count + 1 WHERE id = $1',
+      [draftId]
+    );
   }
 
   private mapRowToDraft(row: any): ContentDraft {

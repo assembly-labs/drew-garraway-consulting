@@ -43,6 +43,22 @@ const PlatformPreview: React.FC<PlatformPreviewProps> = ({
     }
   };
 
+  if (loading) {
+    return (
+      <div className="h-full flex items-center justify-center p-8">
+        <div className="text-center">
+          <div className="spinner w-16 h-16 mx-auto mb-4"></div>
+          <h3 className="text-xl font-semibold text-text-primary mb-2">
+            Formatting Content
+          </h3>
+          <p className="text-text-secondary">
+            Creating platform-specific versions... This takes 30-60 seconds
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   if (!content) {
     return (
       <div className="p-8 text-center">

@@ -32,6 +32,7 @@ export interface Draft {
 }
 
 export interface ResearchSource {
+  id: string;
   url: string;
   title: string;
   excerpt: string;
@@ -39,6 +40,7 @@ export interface ResearchSource {
   domainAuthority: number;
   credibilityScore: number;
   sourceType: string;
+  userSelected?: boolean;
 }
 
 export interface PlatformContent {
@@ -66,14 +68,32 @@ export const contentApi = {
   },
 
   // Research
-  conductResearch: async (draftId: string): Promise<ResearchSource[]> => {
+  conductResearch: async (draftId: string): Promise<{ sources: ResearchSource[]; canRetry: boolean; retryCount: number }> => {
     const response = await api.post(`/content/drafts/${draftId}/research`);
-    return response.data.sources;
+    return {
+      sources: response.data.sources,
+      canRetry: response.data.canRetry,
+      retryCount: response.data.retryCount
+    };
   },
 
   getSources: async (draftId: string): Promise<ResearchSource[]> => {
     const response = await api.get(`/content/drafts/${draftId}/sources`);
     return response.data.sources;
+  },
+
+  selectSources: async (draftId: string, selectedSourceIds: string[]): Promise<{ success: boolean; selectedCount: number }> => {
+    const response = await api.post(`/content/drafts/${draftId}/sources/select`, { selectedSourceIds });
+    return response.data;
+  },
+
+  retryResearch: async (draftId: string): Promise<{ newSources: ResearchSource[]; retryCount: number; canRetry: boolean }> => {
+    const response = await api.post(`/content/drafts/${draftId}/research/retry`);
+    return {
+      newSources: response.data.newSources,
+      retryCount: response.data.retryCount,
+      canRetry: response.data.canRetry
+    };
   },
 
   // Content generation

@@ -17,6 +17,10 @@ const publishSchema = z.object({
   platforms: z.array(z.enum(['linkedin', 'twitter', 'tiktok'])).min(1),
 });
 
+const selectSourcesSchema = z.object({
+  selectedSourceIds: z.array(z.string().uuid()).min(3, 'At least 3 sources must be selected'),
+});
+
 export function createContentRoutes(dbPool: Pool | null): Router {
   const router = Router();
   // Use mock service if database is not available
@@ -110,9 +114,16 @@ export function createContentRoutes(dbPool: Pool | null): Router {
 
       const sources = await contentService.conductResearch(id);
 
+      // Get retry info
+      const draft = await contentService.getDraft(id);
+      const retryCount = (draft as any)?.research_retry_count || 0;
+      const canRetry = retryCount < 2;
+
       res.json({
         success: true,
         sources,
+        retryCount,
+        canRetry,
         message: 'Research completed successfully',
       });
     } catch (error: any) {
@@ -140,6 +151,75 @@ export function createContentRoutes(dbPool: Pool | null): Router {
       res.status(500).json({
         success: false,
         error: error.message || 'Failed to fetch sources',
+      });
+    }
+  });
+
+  // Select sources for content generation
+  router.post('/drafts/:id/sources/select', async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params;
+      const { selectedSourceIds } = selectSourcesSchema.parse(req.body);
+
+      await contentService.selectSources(id, selectedSourceIds);
+
+      res.json({
+        success: true,
+        selectedCount: selectedSourceIds.length,
+        message: 'Source selection saved successfully',
+      });
+    } catch (error: any) {
+      console.error('Source selection error:', error);
+      if (error instanceof z.ZodError) {
+        res.status(400).json({
+          success: false,
+          error: error.errors[0]?.message || 'At least 3 sources must be selected',
+          details: error.errors,
+        });
+        return;
+      }
+      res.status(500).json({
+        success: false,
+        error: error.message || 'Failed to save source selection',
+      });
+    }
+  });
+
+  // Retry research (Find More Sources)
+  router.post('/drafts/:id/research/retry', async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params;
+
+      // Check retry limit
+      const draft = await contentService.getDraft(id);
+      const retryCount = (draft as any)?.research_retry_count || 0;
+
+      if (retryCount >= 2) {
+        res.status(400).json({
+          success: false,
+          error: 'Maximum research retries (2) reached for this draft',
+        });
+        return;
+      }
+
+      // Increment retry count
+      await contentService.incrementResearchRetry(id);
+
+      // Run research again (append mode)
+      const newSources = await contentService.conductResearch(id, { append: true });
+
+      res.json({
+        success: true,
+        newSources,
+        retryCount: retryCount + 1,
+        canRetry: retryCount + 1 < 2,
+        message: `Found ${newSources.length} additional sources`,
+      });
+    } catch (error: any) {
+      console.error('Research retry error:', error);
+      res.status(500).json({
+        success: false,
+        error: error.message || 'Failed to retry research',
       });
     }
   });

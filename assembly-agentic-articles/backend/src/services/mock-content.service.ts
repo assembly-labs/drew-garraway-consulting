@@ -51,24 +51,64 @@ export class MockContentService {
     return drafts;
   }
 
-  async conductResearch(draftId: string): Promise<ResearchSource[]> {
+  async conductResearch(draftId: string, options?: { append?: boolean }): Promise<ResearchSource[]> {
     const draft = mockDrafts.get(draftId);
     if (!draft) {
       throw new Error('Draft not found');
     }
 
-    const sources = await this.researchService.conductResearch(draft.originalIdea);
-    mockSources.set(draftId, sources);
+    const newSources = await this.researchService.conductResearch(draft.originalIdea);
 
-    // Update draft status
-    draft.status = 'researching';
-    draft.updatedAt = new Date();
+    // Add IDs to sources
+    const sourcesWithIds = newSources.map(s => ({
+      ...s,
+      id: uuidv4(),
+      userSelected: false
+    }));
 
-    return sources;
+    if (options?.append) {
+      // Append mode: get existing sources and deduplicate
+      const existingSources = mockSources.get(draftId) || [];
+      const existingUrls = new Set(existingSources.map(s => s.url));
+      const uniqueNewSources = sourcesWithIds.filter(s => !existingUrls.has(s.url));
+
+      mockSources.set(draftId, [...existingSources, ...uniqueNewSources]);
+      return uniqueNewSources;
+    } else {
+      // Normal mode: replace all sources
+      mockSources.set(draftId, sourcesWithIds);
+      draft.status = 'draft';
+      draft.updatedAt = new Date();
+      return sourcesWithIds;
+    }
   }
 
   async getSources(draftId: string): Promise<ResearchSource[]> {
     return mockSources.get(draftId) || [];
+  }
+
+  async selectSources(draftId: string, selectedSourceIds: string[]): Promise<void> {
+    const sources = mockSources.get(draftId) || [];
+
+    // Mark all as not selected
+    sources.forEach(s => s.userSelected = false);
+
+    // Mark selected ones as selected
+    sources.forEach(s => {
+      if (selectedSourceIds.includes(s.id || '')) {
+        s.userSelected = true;
+      }
+    });
+
+    mockSources.set(draftId, sources);
+  }
+
+  async incrementResearchRetry(draftId: string): Promise<void> {
+    const draft = mockDrafts.get(draftId);
+    if (draft) {
+      // Add retry count tracking (store in draft object)
+      (draft as any).research_retry_count = ((draft as any).research_retry_count || 0) + 1;
+    }
   }
 
   async generateDraftContent(draftId: string): Promise<string> {
@@ -77,7 +117,18 @@ export class MockContentService {
       throw new Error('Draft not found');
     }
 
-    const sources = mockSources.get(draftId) || [];
+    // Get ONLY selected sources
+    const allSources = mockSources.get(draftId) || [];
+    const sources = allSources.filter(s => s.userSelected);
+
+    if (sources.length === 0) {
+      throw new Error('No sources selected. Please select at least 3 sources before generating content.');
+    }
+
+    if (sources.length < 3) {
+      throw new Error(`Only ${sources.length} source(s) selected. Please select at least 3 sources.`);
+    }
+
     const content = await this.claudeService.generateContent({
       idea: draft.originalIdea,
       sources
@@ -85,7 +136,7 @@ export class MockContentService {
 
     // Update draft
     draft.draftContent = content;
-    draft.status = 'generated';
+    draft.status = 'review';
     draft.updatedAt = new Date();
 
     return content;

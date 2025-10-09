@@ -67,7 +67,7 @@ Always cite sources using inline citations. Every major claim should reference a
 
     try {
       const message = await this.client.messages.create({
-        model: 'claude-3-sonnet-20240229',
+        model: 'claude-sonnet-4-5-20250929',
         max_tokens: 4000,
         temperature: 0.7,
         system: systemPrompt,
@@ -170,7 +170,7 @@ Always cite sources using inline citations. Every major claim should reference a
 
     try {
       const message = await this.client.messages.create({
-        model: 'claude-3-sonnet-20240229',
+        model: 'claude-sonnet-4-5-20250929',
         max_tokens: 100,
         temperature: 0.5,
         messages: [

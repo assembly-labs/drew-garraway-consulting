@@ -201,7 +201,7 @@ const ResearchPanel: React.FC<ResearchPanelProps> = ({ sources, loading = false 
           <span className="text-text-secondary">Credibility Average:</span>
           <span className="font-semibold text-text-primary">
             {displaySources.length > 0
-              ? (displaySources.reduce((acc, s) => acc + s.credibilityScore, 0) / displaySources.length).toFixed(1)
+              ? (displaySources.reduce((acc: number, s) => acc + s.credibilityScore, 0) / displaySources.length).toFixed(1)
               : '0.0'}
             /10
           </span>

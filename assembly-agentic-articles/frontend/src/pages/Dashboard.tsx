@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Clock, CheckCircle, AlertCircle, TrendingUp, FileText } from 'lucide-react';
+import { Plus, Clock, CheckCircle, AlertCircle, FileText } from 'lucide-react';
 import useContentStore from '../store/contentStore';
 
 const Dashboard: React.FC = () => {
@@ -10,32 +10,11 @@ const Dashboard: React.FC = () => {
     loadDrafts();
   }, []);
 
-  // Mock data for demonstration
-  const mockDrafts = [
-    {
-      id: '1',
-      originalIdea: 'The Future of AI in Healthcare',
-      status: 'published',
-      createdAt: '2024-03-15T10:30:00',
-      revisionCount: 1,
-    },
-    {
-      id: '2',
-      originalIdea: 'Remote Work Culture Transformation',
-      status: 'review',
-      createdAt: '2024-03-14T14:20:00',
-      revisionCount: 0,
-    },
-    {
-      id: '3',
-      originalIdea: 'Sustainable Technology Innovation',
-      status: 'drafting',
-      createdAt: '2024-03-13T09:15:00',
-      revisionCount: 2,
-    },
-  ];
-
-  const displayDrafts = drafts.length > 0 ? drafts : mockDrafts;
+  // Calculate real stats from actual drafts
+  const totalDrafts = drafts.length;
+  const publishedCount = drafts.filter(d => d.status === 'published').length;
+  const reviewCount = drafts.filter(d => d.status === 'review' || d.status === 'approved').length;
+  const draftCount = drafts.filter(d => d.status === 'draft').length;
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -75,8 +54,7 @@ const Dashboard: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-text-secondary text-sm mb-1">Total Drafts</p>
-              <p className="text-3xl font-bold text-text-primary">24</p>
-              <p className="text-xs text-success mt-1">+3 this week</p>
+              <p className="text-3xl font-bold text-text-primary">{totalDrafts}</p>
             </div>
             <FileText className="w-10 h-10 text-accent opacity-50" />
           </div>
@@ -86,8 +64,7 @@ const Dashboard: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-text-secondary text-sm mb-1">Published</p>
-              <p className="text-3xl font-bold text-success">18</p>
-              <p className="text-xs text-text-secondary mt-1">75% success rate</p>
+              <p className="text-3xl font-bold text-success">{publishedCount}</p>
             </div>
             <CheckCircle className="w-10 h-10 text-success opacity-50" />
           </div>
@@ -96,22 +73,20 @@ const Dashboard: React.FC = () => {
         <div className="card">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-text-secondary text-sm mb-1">Avg. Time</p>
-              <p className="text-3xl font-bold text-text-primary">14m</p>
-              <p className="text-xs text-accent mt-1">Per article</p>
+              <p className="text-text-secondary text-sm mb-1">In Review</p>
+              <p className="text-3xl font-bold text-accent">{reviewCount}</p>
             </div>
-            <Clock className="w-10 h-10 text-accent opacity-50" />
+            <AlertCircle className="w-10 h-10 text-accent opacity-50" />
           </div>
         </div>
 
         <div className="card">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-text-secondary text-sm mb-1">Engagement</p>
-              <p className="text-3xl font-bold text-text-primary">+47%</p>
-              <p className="text-xs text-success mt-1">↑ vs last month</p>
+              <p className="text-text-secondary text-sm mb-1">In Progress</p>
+              <p className="text-3xl font-bold text-text-primary">{draftCount}</p>
             </div>
-            <TrendingUp className="w-10 h-10 text-success opacity-50" />
+            <Clock className="w-10 h-10 text-text-secondary opacity-50" />
           </div>
         </div>
       </div>
@@ -148,14 +123,14 @@ const Dashboard: React.FC = () => {
                   <p className="text-text-secondary mt-2">Loading drafts...</p>
                 </td>
               </tr>
-            ) : displayDrafts.length === 0 ? (
+            ) : drafts.length === 0 ? (
               <tr>
                 <td colSpan={6} className="text-center py-8">
                   <p className="text-text-secondary">No drafts yet. Create your first content!</p>
                 </td>
               </tr>
             ) : (
-              displayDrafts.map((draft: any) => (
+              drafts.map((draft: any) => (
                 <tr key={draft.id} className="hover:bg-surface/50 transition-colors">
                   <td className="pl-4">
                     {getStatusIcon(draft.status)}
