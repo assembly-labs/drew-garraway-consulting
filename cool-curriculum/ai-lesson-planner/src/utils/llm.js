@@ -1,9 +1,8 @@
 // LLM Integration Utilities for AI Lesson Planner
-// Handles communication with Anthropic Claude API
+// Handles communication with Anthropic Claude API via proxy server
 
-const ANTHROPIC_API_KEY = process.env.REACT_APP_ANTHROPIC_API_KEY;
-const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
-const MODEL = 'claude-sonnet-4-20250514';
+// Use proxy server to avoid CORS issues
+const PROXY_URL = process.env.REACT_APP_PROXY_URL || 'http://localhost:3001/api/generate';
 
 /**
  * Builds the system and user prompt for LLM generation
@@ -90,33 +89,20 @@ Please generate the learning material following the JSON format specified. Make 
 }
 
 /**
- * Calls the Anthropic Claude API to generate content
+ * Calls the Anthropic Claude API via proxy server to avoid CORS
  */
 export async function generateDraft(request) {
-  if (!ANTHROPIC_API_KEY) {
-    throw new Error('Anthropic API key not configured. Please add REACT_APP_ANTHROPIC_API_KEY to .env.local');
-  }
-
   const { systemPrompt, userPrompt } = buildPrompt(request);
 
   try {
-    const response = await fetch(ANTHROPIC_API_URL, {
+    const response = await fetch(PROXY_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 4096,
-        system: systemPrompt,
-        messages: [
-          {
-            role: 'user',
-            content: userPrompt
-          }
-        ]
+        systemPrompt,
+        userPrompt
       })
     });
 
