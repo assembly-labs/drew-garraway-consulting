@@ -3,6 +3,7 @@ import { ClaudeService } from './claude.service';
 import { ResearchService, ResearchSource } from './research.service';
 import { PlatformFormatter } from '../utils/formatting';
 import { ContentDraft } from './content.service';
+import { Platform } from '../config/platforms';
 
 // In-memory storage for mock data
 const mockDrafts = new Map<string, ContentDraft>();
@@ -111,11 +112,22 @@ export class MockContentService {
     }
   }
 
-  async generateDraftContent(draftId: string): Promise<string> {
+  async generateDraftContent(draftId: string, platforms: string[], contentLength: string, feedback?: string): Promise<Record<Platform, string>> {
     const draft = mockDrafts.get(draftId);
     if (!draft) {
       throw new Error('Draft not found');
     }
+
+    // Validate platforms
+    const validPlatforms = platforms.filter(p => p === 'linkedin' || p === 'twitter') as Platform[];
+    if (validPlatforms.length === 0) {
+      throw new Error('At least one valid platform must be selected (linkedin or twitter)');
+    }
+
+    // Validate content length
+    const validLength = (contentLength === 'short' || contentLength === 'medium' || contentLength === 'long')
+      ? contentLength
+      : 'short'; // default to short
 
     // Get ONLY selected sources
     const allSources = mockSources.get(draftId) || [];
@@ -129,20 +141,31 @@ export class MockContentService {
       throw new Error(`Only ${sources.length} source(s) selected. Please select at least 3 sources.`);
     }
 
-    const content = await this.claudeService.generateContent({
-      idea: draft.originalIdea,
-      sources
-    });
+    // Generate content for each platform
+    const generatedContent: Record<Platform, string> = {} as Record<Platform, string>;
 
-    // Update draft
-    draft.draftContent = content;
+    for (const platform of validPlatforms) {
+      console.log(`📝 [MOCK] Generating ${platform} content (${validLength}) for draft ${draftId}`);
+      const content = await this.claudeService.generateContent({
+        idea: draft.originalIdea,
+        sources,
+        platform,
+        contentLength: validLength,
+        feedback
+      });
+      generatedContent[platform] = content;
+    }
+
+    // Store the primary content (use first platform's content as the draft_content)
+    const primaryContent = generatedContent[validPlatforms[0]];
+    draft.draftContent = primaryContent;
     draft.status = 'review';
     draft.updatedAt = new Date();
 
-    return content;
+    return generatedContent;
   }
 
-  async requestRevision(draftId: string, userId: string, feedback: string): Promise<string> {
+  async requestRevision(draftId: string, userId: string, platforms: string[], contentLength: string, feedback: string): Promise<Record<Platform, string>> {
     const draft = mockDrafts.get(draftId);
     if (!draft || draft.userId !== userId) {
       throw new Error('Draft not found');
@@ -152,20 +175,42 @@ export class MockContentService {
       throw new Error('Maximum revisions (2) reached');
     }
 
-    const sources = mockSources.get(draftId) || [];
-    const revisedContent = await this.claudeService.generateContent({
-      idea: draft.originalIdea,
-      sources,
-      feedback
-    });
+    // Validate platforms
+    const validPlatforms = platforms.filter(p => p === 'linkedin' || p === 'twitter') as Platform[];
+    if (validPlatforms.length === 0) {
+      throw new Error('At least one valid platform must be selected (linkedin or twitter)');
+    }
 
-    // Update draft
-    draft.draftContent = revisedContent;
+    // Validate content length
+    const validLength = (contentLength === 'short' || contentLength === 'medium' || contentLength === 'long')
+      ? contentLength
+      : 'short'; // default to short
+
+    const sources = mockSources.get(draftId) || [];
+
+    // Generate revised content for each platform
+    const generatedContent: Record<Platform, string> = {} as Record<Platform, string>;
+
+    for (const platform of validPlatforms) {
+      console.log(`📝 [MOCK] Revising ${platform} content (${validLength}) for draft ${draftId}`);
+      const content = await this.claudeService.generateContent({
+        idea: draft.originalIdea,
+        sources,
+        platform,
+        contentLength: validLength,
+        feedback
+      });
+      generatedContent[platform] = content;
+    }
+
+    // Update draft with primary content
+    const primaryContent = generatedContent[validPlatforms[0]];
+    draft.draftContent = primaryContent;
     draft.revisionCount++;
     draft.status = 'revised';
     draft.updatedAt = new Date();
 
-    return revisedContent;
+    return generatedContent;
   }
 
   async approveDraft(draftId: string, userId: string): Promise<void> {
@@ -196,7 +241,6 @@ export class MockContentService {
     const formatted = {
       linkedin: this.formatter.formatForLinkedIn(draft.draftContent, sources),
       twitter: this.formatter.formatForTwitter(draft.draftContent, sources),
-      tiktok: this.formatter.formatForTikTok(draft.draftContent, sources),
     };
 
     mockFormattedContent.set(draftId, formatted);

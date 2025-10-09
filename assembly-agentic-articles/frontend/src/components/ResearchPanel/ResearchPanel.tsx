@@ -51,9 +51,16 @@ const ResearchPanel: React.FC<ResearchPanelProps> = ({ sources, loading = false 
     }
   };
 
+  const calculateAverageCredibility = (sources: ResearchSource[]): string => {
+    if (sources.length === 0) return '0.0';
+    const sum = sources.reduce((acc: number, s: ResearchSource) => acc + s.credibilityScore, 0);
+    return (sum / sources.length).toFixed(1);
+  };
+
   // Mock sources for demonstration if none provided
-  const displaySources = sources.length > 0 ? sources : [
+  const displaySources: ResearchSource[] = sources.length > 0 ? sources : [
     {
+      id: 'mock-1',
       url: 'https://www.nature.com/articles/example',
       title: 'Recent Advances in AI-Powered Content Generation',
       excerpt: 'A comprehensive study on the latest developments in artificial intelligence for content creation, focusing on accuracy, credibility, and source verification mechanisms. The research demonstrates significant improvements in contextual understanding and citation accuracy.',
@@ -63,6 +70,7 @@ const ResearchPanel: React.FC<ResearchPanelProps> = ({ sources, loading = false 
       sourceType: 'academic'
     },
     {
+      id: 'mock-2',
       url: 'https://www.mckinsey.com/insights/example',
       title: 'The AI Content Revolution in Enterprises',
       excerpt: 'McKinsey research shows that AI-powered content platforms can reduce content creation time by 85% while maintaining quality through advanced verification systems.',
@@ -72,6 +80,7 @@ const ResearchPanel: React.FC<ResearchPanelProps> = ({ sources, loading = false 
       sourceType: 'industry'
     },
     {
+      id: 'mock-3',
       url: 'https://techcrunch.com/2024/example',
       title: 'AI Content Startups Raise Record Funding',
       excerpt: 'Venture capital firms are betting big on AI content generation, with investments focusing on platforms that combine research, writing, and distribution.',
@@ -200,10 +209,7 @@ const ResearchPanel: React.FC<ResearchPanelProps> = ({ sources, loading = false 
         <div className="flex items-center justify-between text-sm">
           <span className="text-text-secondary">Credibility Average:</span>
           <span className="font-semibold text-text-primary">
-            {displaySources.length > 0
-              ? (displaySources.reduce((acc: number, s) => acc + s.credibilityScore, 0) / displaySources.length).toFixed(1)
-              : '0.0'}
-            /10
+            {calculateAverageCredibility(displaySources)}/10
           </span>
         </div>
       </div>

@@ -18,7 +18,6 @@ const DraftDetail: React.FC = () => {
     loadDraft,
     reviseContent,
     approveDraft,
-    formatContent,
     publishContent
   } = useContentStore();
 
@@ -118,10 +117,7 @@ const DraftDetail: React.FC = () => {
           <>
             <ContentEditor
               content={currentDraft.draftContent}
-              onApprove={async () => {
-                await approveDraft();
-                await formatContent();
-              }}
+              onApprove={approveDraft}
               onRevise={reviseContent}
               revisionCount={currentDraft.revisionCount}
               status={currentDraft.status}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
@@ -12,8 +13,13 @@ import {
   ListOrdered,
   Quote,
   Undo,
-  Redo
+  Redo,
+  RotateCcw
 } from 'lucide-react';
+import RevisionModal from './RevisionModal';
+import ConfirmDialog from '../common/ConfirmDialog';
+import { formatRelativeTime } from '../../utils/time';
+import useContentStore from '../../store/contentStore';
 
 interface ContentEditorProps {
   content: string | null;
@@ -32,8 +38,11 @@ const ContentEditor: React.FC<ContentEditorProps> = ({
   status,
   loading = false
 }) => {
-  const [showFeedback, setShowFeedback] = useState(false);
-  const [feedback, setFeedback] = useState('');
+  const navigate = useNavigate();
+  const { reset } = useContentStore();
+  const [revisionModalOpen, setRevisionModalOpen] = useState(false);
+  const [confirmResetOpen, setConfirmResetOpen] = useState(false);
+  const [lastSaved, setLastSaved] = useState<Date>(new Date());
 
   const editor = useEditor({
     extensions: [
@@ -53,16 +62,40 @@ const ContentEditor: React.FC<ContentEditorProps> = ({
   useEffect(() => {
     if (editor && content) {
       editor.commands.setContent(content);
+      setLastSaved(new Date());
     }
   }, [editor, content]);
 
-  const handleRevision = () => {
-    if (feedback.trim()) {
-      onRevise(feedback);
-      setFeedback('');
-      setShowFeedback(false);
-    }
+  // Auto-save simulation (debounced)
+  useEffect(() => {
+    if (!editor) return;
+
+    const handler = setTimeout(() => {
+      // Simulate auto-save
+      setLastSaved(new Date());
+    }, 2000);
+
+    return () => clearTimeout(handler);
+  }, [editor?.getHTML()]);
+
+  const handleRevisionSubmit = (feedback: string) => {
+    onRevise(feedback);
+    setRevisionModalOpen(false);
   };
+
+  const handleStartOver = () => {
+    reset();
+    navigate('/create');
+  };
+
+  // Calculate word count
+  const getWordCount = (): number => {
+    if (!editor) return 0;
+    const text = editor.getText();
+    return text.split(/\s+/).filter(word => word.length > 0).length;
+  };
+
+  const wordCount = getWordCount();
 
   if (!content && !loading) {
     return (
@@ -99,29 +132,58 @@ const ContentEditor: React.FC<ContentEditorProps> = ({
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
             <h3 className="text-lg font-semibold text-text-primary">Content Editor</h3>
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-text-secondary">
-                Revision {revisionCount}/2
+
+            {/* Revision Counter Badge */}
+            <div className={`px-3 py-1 rounded-full text-sm font-medium ${
+              revisionCount === 0
+                ? 'bg-blue-500/10 text-blue-500'
+                : revisionCount === 1
+                  ? 'bg-yellow-500/10 text-yellow-500'
+                  : 'bg-orange-500/10 text-orange-500'
+            }`}>
+              {revisionCount === 0 && '✨ Original Draft'}
+              {revisionCount === 1 && '🔄 Revision 1/2'}
+              {revisionCount === 2 && '🔄 Revision 2/2 (Final)'}
+            </div>
+
+            {/* Word Count */}
+            <div className="text-sm">
+              <span className={`font-semibold ${
+                wordCount >= 800 && wordCount <= 1000 ? 'text-success' : 'text-warning'
+              }`}>
+                {wordCount} words
               </span>
-              {revisionCount >= 2 && (
-                <span className="text-xs text-orange-500 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  Max revisions reached
-                </span>
-              )}
+              <span className="text-text-secondary ml-2">
+                {wordCount < 800 && `(${800 - wordCount} below target)`}
+                {wordCount > 1000 && `(${wordCount - 1000} above target)`}
+                {wordCount >= 800 && wordCount <= 1000 && '✓ Optimal length'}
+              </span>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
+            {/* Start Over Button */}
+            <button
+              onClick={() => setConfirmResetOpen(true)}
+              className="btn btn-outline btn-sm"
+              title="Discard and start over"
+            >
+              <RotateCcw className="w-4 h-4" />
+              Start Over
+            </button>
+
+            {/* Request Revision Button */}
             {revisionCount < 2 && (
               <button
-                onClick={() => setShowFeedback(!showFeedback)}
-                className="btn btn-ghost"
+                onClick={() => setRevisionModalOpen(true)}
+                className="btn btn-secondary"
               >
                 <RefreshCw className="w-4 h-4" />
-                Request Revision
+                Request Revision {revisionCount < 2 && `(${2 - revisionCount} remaining)`}
               </button>
             )}
+
+            {/* Approve Button */}
             <button
               onClick={onApprove}
               className="btn btn-success"
@@ -194,40 +256,6 @@ const ContentEditor: React.FC<ContentEditorProps> = ({
         )}
       </div>
 
-      {/* Feedback Panel */}
-      {showFeedback && (
-        <div className="border-b border-border p-4 bg-accent/5">
-          <label className="block text-sm font-medium text-text-primary mb-2">
-            What would you like to change?
-          </label>
-          <textarea
-            value={feedback}
-            onChange={(e) => setFeedback(e.target.value)}
-            placeholder="E.g., 'Make it more technical' or 'Add more data about market trends'"
-            className="textarea w-full mb-3"
-            rows={3}
-          />
-          <div className="flex justify-end gap-2">
-            <button
-              onClick={() => {
-                setShowFeedback(false);
-                setFeedback('');
-              }}
-              className="btn btn-ghost"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleRevision}
-              disabled={!feedback.trim()}
-              className="btn btn-primary"
-            >
-              Submit Feedback
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* Editor Content */}
       <div className="flex-1 overflow-y-auto p-8">
         <div className="editor max-w-4xl mx-auto">
@@ -235,17 +263,38 @@ const ContentEditor: React.FC<ContentEditorProps> = ({
         </div>
       </div>
 
-      {/* Word Count */}
+      {/* Auto-Save Indicator */}
       <div className="border-t border-border p-4 bg-surface/30">
-        <div className="flex items-center justify-between text-sm text-text-secondary">
-          <span>
-            {editor ? `${editor.storage.characterCount?.characters() || 0} characters` : '0 characters'}
+        <div className="flex items-center justify-between text-sm">
+          <span className="text-text-secondary flex items-center gap-2">
+            💾 Last saved {formatRelativeTime(lastSaved)}
           </span>
-          <span>
-            {editor ? `~${Math.round((editor.storage.characterCount?.characters() || 0) / 5)} words` : '0 words'}
+          <span className="text-text-secondary">
+            {wordCount} words • {editor ? `${editor.storage.characterCount?.characters() || 0} characters` : '0 characters'}
           </span>
         </div>
       </div>
+
+      {/* Revision Modal */}
+      <RevisionModal
+        isOpen={revisionModalOpen}
+        onClose={() => setRevisionModalOpen(false)}
+        onSubmit={handleRevisionSubmit}
+        loading={loading}
+        currentRevision={revisionCount}
+      />
+
+      {/* Confirm Reset Dialog */}
+      <ConfirmDialog
+        isOpen={confirmResetOpen}
+        onClose={() => setConfirmResetOpen(false)}
+        onConfirm={handleStartOver}
+        title="Start Over?"
+        message="This will discard all progress including research and content. This cannot be undone."
+        confirmText="Yes, Start Over"
+        cancelText="Cancel"
+        danger={true}
+      />
     </div>
   );
 };

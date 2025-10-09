@@ -9,12 +9,19 @@ const createDraftSchema = z.object({
   idea: z.string().min(5).max(200),
 });
 
+const generateContentSchema = z.object({
+  platforms: z.array(z.enum(['linkedin', 'twitter'])).min(1, 'At least one platform must be selected'),
+  contentLength: z.enum(['short', 'medium', 'long']).default('short'),
+});
+
 const revisionSchema = z.object({
   feedback: z.string().min(10).max(500),
+  platforms: z.array(z.enum(['linkedin', 'twitter'])).min(1, 'At least one platform must be selected'),
+  contentLength: z.enum(['short', 'medium', 'long']).default('short'),
 });
 
 const publishSchema = z.object({
-  platforms: z.array(z.enum(['linkedin', 'twitter', 'tiktok'])).min(1),
+  platforms: z.array(z.enum(['linkedin', 'twitter'])).min(1),
 });
 
 const selectSourcesSchema = z.object({
@@ -225,19 +232,32 @@ export function createContentRoutes(dbPool: Pool | null): Router {
   });
 
   // Generate content for a draft
-  router.post('/drafts/:id/generate', async (req: Request, res: Response) => {
+  router.post('/drafts/:id/generate', async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
+      const { platforms, contentLength } = generateContentSchema.parse(req.body);
 
-      const content = await contentService.generateDraftContent(id);
+      const platformContents = await contentService.generateDraftContent(id, platforms, contentLength);
+
+      // Format the generated content for each platform
+      const formatted = await contentService.formatContent(id, platformContents);
 
       res.json({
         success: true,
-        content,
-        message: 'Content generated successfully',
+        content: platformContents,
+        formatted,
+        message: 'Content generated and formatted successfully',
       });
     } catch (error: any) {
       console.error('Generate content error:', error);
+      if (error instanceof z.ZodError) {
+        res.status(400).json({
+          success: false,
+          error: 'Invalid input',
+          details: error.errors,
+        });
+        return;
+      }
       res.status(500).json({
         success: false,
         error: error.message || 'Failed to generate content',
@@ -249,15 +269,19 @@ export function createContentRoutes(dbPool: Pool | null): Router {
   router.post('/drafts/:id/revise', async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
-      const { feedback } = revisionSchema.parse(req.body);
+      const { feedback, platforms, contentLength } = revisionSchema.parse(req.body);
       const userId = req.headers['user-id'] as string || DEFAULT_USER_ID;
 
-      const revisedContent = await contentService.requestRevision(id, userId, feedback);
+      const platformContents = await contentService.requestRevision(id, userId, platforms, contentLength, feedback);
+
+      // Format the revised content for each platform
+      const formatted = await contentService.formatContent(id, platformContents);
 
       res.json({
         success: true,
-        content: revisedContent,
-        message: 'Content revised successfully',
+        content: platformContents,
+        formatted,
+        message: 'Content revised and formatted successfully',
       });
     } catch (error: any) {
       console.error('Revision error:', error);
@@ -297,28 +321,7 @@ export function createContentRoutes(dbPool: Pool | null): Router {
     }
   });
 
-  // Format content for platforms
-  router.post('/drafts/:id/format', async (req: Request, res: Response) => {
-    try {
-      const { id } = req.params;
-
-      const formatted = await contentService.formatContent(id);
-
-      res.json({
-        success: true,
-        formatted,
-        message: 'Content formatted for all platforms',
-      });
-    } catch (error: any) {
-      console.error('Format content error:', error);
-      res.status(500).json({
-        success: false,
-        error: error.message || 'Failed to format content',
-      });
-    }
-  });
-
-  // Get formatted content
+  // Get formatted content (already formatted during generation)
   router.get('/drafts/:id/formatted', async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
@@ -328,12 +331,13 @@ export function createContentRoutes(dbPool: Pool | null): Router {
       res.json({
         success: true,
         formatted,
+        message: 'Formatted content retrieved successfully',
       });
     } catch (error: any) {
       console.error('Get formatted content error:', error);
       res.status(500).json({
         success: false,
-        error: error.message || 'Failed to fetch formatted content',
+        error: error.message || 'Failed to get formatted content',
       });
     }
   });

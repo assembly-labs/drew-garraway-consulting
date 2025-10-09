@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { contentApi, Draft, ResearchSource, PlatformContent } from '../services/api';
+import { contentApi, Draft, ResearchSource, PlatformContent, Platform, ContentLength } from '../services/api';
 
 interface ContentStore {
   // State
@@ -11,6 +11,8 @@ interface ContentStore {
   error: string | null;
   loading: boolean;
   selectedSourceIds: string[];
+  selectedPlatforms: Platform[];
+  selectedContentLength: ContentLength;
   researchRetryCount: number;
   canRetryResearch: boolean;
 
@@ -22,9 +24,10 @@ interface ContentStore {
   generateContent: () => Promise<void>;
   reviseContent: (feedback: string) => Promise<void>;
   approveDraft: () => Promise<void>;
-  formatContent: () => Promise<void>;
   publishContent: (platforms: string[]) => Promise<void>;
   selectSources: (sourceIds: string[]) => void;
+  selectPlatforms: (platforms: Platform[]) => void;
+  selectContentLength: (length: ContentLength) => void;
   saveSourceSelection: () => Promise<void>;
   retryResearch: () => Promise<void>;
   generateContentFromSelection: () => Promise<void>;
@@ -44,6 +47,8 @@ const useContentStore = create<ContentStore>((set, get) => ({
   error: null,
   loading: false,
   selectedSourceIds: [],
+  selectedPlatforms: ['linkedin', 'twitter'], // Default: both platforms
+  selectedContentLength: 'short', // Default: short
   researchRetryCount: 0,
   canRetryResearch: true,
 
@@ -132,62 +137,80 @@ const useContentStore = create<ContentStore>((set, get) => ({
       // Now user must select sources first
     } catch (error: any) {
       set({
-        error: error.message || 'Failed to conduct research',
+        error: error.message || 'We couldn\'t find enough credible sources. Try rephrasing your idea or use "Find More Sources".',
         status: 'error'
       });
     }
   },
 
   generateContent: async () => {
-    const { currentDraft } = get();
+    const { currentDraft, selectedPlatforms, selectedContentLength } = get();
     if (!currentDraft) return;
+
+    if (selectedPlatforms.length === 0) {
+      set({ error: 'Please select at least one platform' });
+      return;
+    }
 
     set({ status: 'generating', error: null });
     try {
-      const content = await contentApi.generateContent(currentDraft.id);
+      const result = await contentApi.generateContent(currentDraft.id, selectedPlatforms, selectedContentLength);
+
+      // Store the first platform's content as the draft content
+      const primaryContent = result.content[selectedPlatforms[0]];
 
       // Update the draft with new content
       const updatedDraft = {
         ...currentDraft,
-        draftContent: content,
-        status: 'review'
+        draftContent: primaryContent,
+        status: 'review' as const
       };
-
       set({
         currentDraft: updatedDraft,
+        formattedContent: result.formatted,
         status: 'idle'
       });
     } catch (error: any) {
+      console.error('[ContentStore] Generation error:', error);
       set({
-        error: error.message || 'Failed to generate content',
+        error: error.message || 'Content generation failed. This might be due to source complexity. Try selecting fewer sources or revising your idea.',
         status: 'error'
       });
     }
   },
 
   reviseContent: async (feedback: string) => {
-    const { currentDraft } = get();
+    const { currentDraft, selectedPlatforms, selectedContentLength } = get();
     if (!currentDraft) return;
+
+    if (selectedPlatforms.length === 0) {
+      set({ error: 'Please select at least one platform' });
+      return;
+    }
 
     set({ status: 'revising', error: null });
     try {
-      const content = await contentApi.reviseContent(currentDraft.id, feedback);
+      const result = await contentApi.reviseContent(currentDraft.id, selectedPlatforms, selectedContentLength, feedback);
+
+      // Store the first platform's content as the draft content
+      const primaryContent = result.content[selectedPlatforms[0]];
 
       // Update the draft with revised content
       const updatedDraft = {
         ...currentDraft,
-        draftContent: content,
+        draftContent: primaryContent,
         status: 'review',
         revisionCount: currentDraft.revisionCount + 1
       };
 
       set({
         currentDraft: updatedDraft,
+        formattedContent: result.formatted,
         status: 'idle'
       });
     } catch (error: any) {
       set({
-        error: error.message || 'Failed to revise content',
+        error: error.message || 'Revision failed. Please try again with more specific feedback, or approve the current draft.',
         status: 'error'
       });
     }
@@ -211,32 +234,10 @@ const useContentStore = create<ContentStore>((set, get) => ({
         currentDraft: updatedDraft,
         loading: false
       });
-
-      // Automatically format content after approval
-      await get().formatContent();
     } catch (error: any) {
       set({
         error: error.message || 'Failed to approve draft',
         loading: false
-      });
-    }
-  },
-
-  formatContent: async () => {
-    const { currentDraft } = get();
-    if (!currentDraft) return;
-
-    set({ status: 'formatting', error: null });
-    try {
-      const formatted = await contentApi.formatContent(currentDraft.id);
-      set({
-        formattedContent: formatted,
-        status: 'idle'
-      });
-    } catch (error: any) {
-      set({
-        error: error.message || 'Failed to format content',
-        status: 'error'
       });
     }
   },
@@ -272,6 +273,15 @@ const useContentStore = create<ContentStore>((set, get) => ({
     set({ selectedSourceIds: sourceIds });
   },
 
+  // NEW: Update platform selection
+  selectPlatforms: (platforms: Platform[]) => {
+    set({ selectedPlatforms: platforms });
+  },
+
+  selectContentLength: (length: ContentLength) => {
+    set({ selectedContentLength: length });
+  },
+
   // NEW: Save selection to backend
   saveSourceSelection: async () => {
     const { currentDraft, selectedSourceIds } = get();
@@ -293,6 +303,7 @@ const useContentStore = create<ContentStore>((set, get) => ({
   // NEW: Generate content with selected sources
   generateContentFromSelection: async () => {
     const { currentDraft, selectedSourceIds } = get();
+
     if (!currentDraft) return;
 
     // Validation
@@ -311,7 +322,7 @@ const useContentStore = create<ContentStore>((set, get) => ({
       await get().generateContent();
     } catch (error: any) {
       set({
-        error: error.message || 'Failed to generate content',
+        error: error.message || 'Content generation failed. This might be due to source complexity. Try selecting fewer sources or revising your idea.',
         status: 'error'
       });
     }
@@ -353,7 +364,7 @@ const useContentStore = create<ContentStore>((set, get) => ({
       }));
     } catch (error: any) {
       set({
-        error: error.message || 'Failed to find more sources',
+        error: error.message || 'Could not find additional sources. You can proceed with the sources already found.',
         status: 'error'
       });
     }
@@ -370,6 +381,7 @@ const useContentStore = create<ContentStore>((set, get) => ({
     error: null,
     loading: false,
     selectedSourceIds: [],
+    selectedPlatforms: ['linkedin', 'twitter'],
     researchRetryCount: 0,
     canRetryResearch: true
   }),
