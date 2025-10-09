@@ -1,0 +1,39 @@
+/* Print-friendly styles for templates */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  @page {
+    size: letter;
+    margin: 0.5in;
+  }
+
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+/* Template-specific styles */
+.worksheet-template {
+  background: white;
+  max-width: 8.5in;
+  min-height: 11in;
+  margin: 0 auto;
+  padding: 0.5in;
+}
+
+.question-box {
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.work-space {
+  min-height: 100px;
+  border: 1px dashed #d1d5db;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}

@@ -6,6 +6,8 @@ import ResearchPanel from '../components/ResearchPanel/ResearchPanel';
 import ContentEditor from '../components/Editor/ContentEditor';
 import PlatformPreview from '../components/PlatformPreview/PlatformPreview';
 import SourceSelectionCard from '../components/ResearchPanel/SourceSelectionCard';
+import PlatformSelector from '../components/common/PlatformSelector';
+import LengthSelector from '../components/common/LengthSelector';
 import useContentStore from '../store/contentStore';
 
 type WorkflowStep = 'idea' | 'research' | 'edit' | 'preview';
@@ -22,6 +24,8 @@ const CreateContent: React.FC = () => {
     error,
     loading,
     selectedSourceIds,
+    selectedPlatforms,
+    selectedContentLength,
     researchRetryCount,
     canRetryResearch,
     createDraft,
@@ -29,8 +33,9 @@ const CreateContent: React.FC = () => {
     approveDraft,
     publishContent,
     selectSources,
+    selectPlatforms,
+    selectContentLength,
     generateContentFromSelection,
-    skipSourceSelection,
     retryResearch,
     reset
   } = useContentStore();
@@ -44,9 +49,12 @@ const CreateContent: React.FC = () => {
   useEffect(() => {
     // Auto-progress through workflow based on status
     if (status === 'idle' && currentDraft) {
-      // REMOVED: Auto-progress from research to edit
-      // Now user must manually select sources and trigger generation
+      // Auto-progress to edit when content is generated
+      if (currentDraft.draftContent && currentDraft.status === 'review' && currentStep === 'research') {
+        setCurrentStep('edit');
+      }
 
+      // Auto-progress to preview when draft is approved
       if (currentDraft.status === 'approved' && currentStep === 'edit') {
         setCurrentStep('preview');
       }
@@ -114,13 +122,6 @@ const CreateContent: React.FC = () => {
     selectSources([]);
   };
 
-  const handleSkipSelection = async () => {
-    if (window.confirm('Skip source selection and generate article using all sources?')) {
-      await skipSourceSelection();
-      setCurrentStep('edit'); // Move to edit after generation
-    }
-  };
-
   const handleGenerateFromSelection = async () => {
     if (selectedSourceIds.length < 3) {
       alert('Please select at least 3 sources to continue');
@@ -128,7 +129,7 @@ const CreateContent: React.FC = () => {
     }
 
     await generateContentFromSelection();
-    setCurrentStep('edit'); // Move to edit after generation
+    // Step will auto-advance via useEffect when content is ready
   };
 
   const handleRetryResearch = async () => {
@@ -141,7 +142,7 @@ const CreateContent: React.FC = () => {
     if (selectedSourceIds.length === 0) return 0;
 
     const selectedSources = sources.filter(s => selectedSourceIds.includes(s.id));
-    const sum = selectedSources.reduce((acc, s) => acc + s.credibilityScore, 0);
+    const sum = selectedSources.reduce<number>((acc, s) => acc + s.credibilityScore, 0);
     return sum / selectedSources.length;
   };
 
@@ -325,109 +326,91 @@ const CreateContent: React.FC = () => {
                 <>
                   {/* Main Content Area */}
                   <div className="flex-1 flex flex-col overflow-hidden">
-                    {/* Header */}
-                    <div className="p-8 border-b border-border bg-bg-secondary">
-                      <h2 className="text-2xl font-bold text-text-primary mb-2">
-                        Review Research Results
-                      </h2>
-                      <p className="text-text-secondary mb-6">
-                        Select the sources that best support your idea. We'll generate your article using only the selected sources.
-                      </p>
-
-                      {/* Selection Summary Bar */}
-                      <div className="bg-surface rounded-lg border border-border p-4">
-                        <div className="flex items-center justify-between">
-                          {/* Left: Count */}
-                          <div>
-                            <span className={`text-lg font-semibold ${
-                              selectedSourceIds.length >= 3 ? 'text-success' : 'text-warning'
-                            }`}>
-                              {selectedSourceIds.length} of {sources.length} sources selected
-                            </span>
-                            <p className="text-sm text-text-secondary mt-1">
-                              {selectedSourceIds.length < 3
-                                ? `Select ${3 - selectedSourceIds.length} more (minimum 3 required)`
-                                : '✓ Ready to generate'
-                              }
-                            </p>
-                          </div>
-
-                          {/* Right: Action Buttons */}
-                          <div className="flex items-center gap-3">
-                            <button
-                              onClick={handleSkipSelection}
-                              className="btn btn-secondary"
-                              disabled={loading}
-                            >
-                              Skip Selection (Use All)
-                            </button>
-
-                            <button
-                              onClick={handleGenerateFromSelection}
-                              disabled={selectedSourceIds.length < 3 || loading}
-                              className="btn btn-primary btn-lg"
-                              title={selectedSourceIds.length < 3 ? 'Select at least 3 sources to continue' : 'Generate article with selected sources'}
-                            >
-                              Generate Article →
-                            </button>
-                          </div>
+                    {/* Compact Sticky Header */}
+                    <div className="p-4 border-b border-border bg-bg-secondary sticky top-0 z-20 shadow-sm">
+                      <div className="flex items-center justify-between mb-3">
+                        <div>
+                          <h2 className="text-xl font-bold text-text-primary">
+                            Select Sources ({selectedSourceIds.length} of {sources.length})
+                          </h2>
+                          <p className="text-sm text-text-secondary">
+                            {selectedSourceIds.length < 3
+                              ? `Select ${3 - selectedSourceIds.length} more (minimum 3 required)`
+                              : '✓ Ready to generate'
+                            }
+                          </p>
                         </div>
 
-                        {/* Quick Action Buttons */}
-                        <div className="flex items-center gap-2 mt-4 pt-4 border-t border-border">
-                          <span className="text-sm text-text-secondary mr-2">Quick select:</span>
-
+                        {/* Action Buttons - Compact */}
+                        <div className="flex items-center gap-2">
                           <button
-                            onClick={handleSelectHighCredibility}
-                            className="btn btn-sm btn-outline"
-                            disabled={loading}
+                            onClick={handleGenerateFromSelection}
+                            disabled={selectedSourceIds.length < 3 || selectedPlatforms.length === 0 || loading}
+                            className="btn btn-primary btn-lg"
                           >
-                            🟢 High Credibility (8+)
+                            Generate Article →
                           </button>
-
-                          <button
-                            onClick={handleSelectAcademic}
-                            className="btn btn-sm btn-outline"
-                            disabled={loading}
-                          >
-                            📚 Academic Only
-                          </button>
-
-                          <button
-                            onClick={handleSelectAll}
-                            className="btn btn-sm btn-outline"
-                            disabled={loading}
-                          >
-                            ✓ Select All
-                          </button>
-
-                          <button
-                            onClick={handleDeselectAll}
-                            className="btn btn-sm btn-outline"
-                            disabled={loading}
-                          >
-                            ✗ Deselect All
-                          </button>
-
-                          {/* Find More Sources */}
-                          <div className="ml-auto">
-                            <button
-                              onClick={handleRetryResearch}
-                              disabled={!canRetryResearch || loading}
-                              className="btn btn-sm btn-outline"
-                              title={!canRetryResearch ? 'Maximum research attempts (2) reached' : 'Find additional sources'}
-                            >
-                              🔍 Find More Sources
-                              {researchRetryCount > 0 && ` (${researchRetryCount}/2)`}
-                            </button>
-                          </div>
                         </div>
+                      </div>
+
+                      {/* Platform Selector - Compact */}
+                      <div className="mb-3">
+                        <PlatformSelector
+                          selectedPlatforms={selectedPlatforms}
+                          onPlatformChange={selectPlatforms}
+                          disabled={loading}
+                        />
+                      </div>
+
+                      {/* Length Selector - Compact */}
+                      <div className="mb-3">
+                        <LengthSelector
+                          selectedLength={selectedContentLength}
+                          onLengthChange={selectContentLength}
+                          disabled={loading}
+                        />
+                      </div>
+
+                      {/* Error Display */}
+                      {error && (
+                        <div className="mb-3 p-3 bg-error/10 border border-error/30 rounded text-error text-sm">
+                          ⚠️ {error}
+                        </div>
+                      )}
+
+                      {/* Quick Actions - Compact Row */}
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-xs text-text-secondary">Quick:</span>
+                        <button onClick={handleSelectHighCredibility} className="btn btn-xs btn-outline" disabled={loading}>
+                          🟢 High Cred
+                        </button>
+                        <button onClick={handleSelectAcademic} className="btn btn-xs btn-outline" disabled={loading}>
+                          📚 Academic
+                        </button>
+                        <button onClick={handleSelectAll} className="btn btn-xs btn-outline" disabled={loading}>
+                          Select All
+                        </button>
+                        <button onClick={handleDeselectAll} className="btn btn-xs btn-outline" disabled={loading}>
+                          Clear
+                        </button>
+                        <button
+                          onClick={handleRetryResearch}
+                          disabled={!canRetryResearch || loading}
+                          className="btn btn-xs btn-outline ml-auto"
+                        >
+                          🔍 Find More {researchRetryCount > 0 && `(${researchRetryCount}/2)`}
+                        </button>
                       </div>
                     </div>
 
-                    {/* Source Cards Grid */}
-                    <div className="flex-1 overflow-y-auto p-8">
-                      <div className="grid grid-cols-1 gap-4 max-w-4xl mx-auto">
+                    {/* Scrollable Source Cards Grid */}
+                    <div className="flex-1 overflow-y-auto p-6 bg-bg-primary">
+                      {/* Scroll indicator */}
+                      <div className="text-center mb-4 text-sm text-text-secondary">
+                        ↓ Scroll to see all {sources.length} sources ↓
+                      </div>
+
+                      <div className="grid grid-cols-1 gap-4 max-w-4xl mx-auto pb-8">
                         {sources.map((source, index) => (
                           <SourceSelectionCard
                             key={source.id}

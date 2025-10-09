@@ -2,6 +2,7 @@ import { Pool } from 'pg';
 import { ClaudeService } from './claude.service';
 import { ResearchService, ResearchSource } from './research.service';
 import { PlatformFormatter } from '../utils/formatting';
+import { Platform, validatePlatforms } from '../config/platforms';
 
 export interface ContentDraft {
   id: string;
@@ -177,7 +178,18 @@ export class ContentService {
     }));
   }
 
-  async generateDraftContent(draftId: string, feedback?: string): Promise<string> {
+  async generateDraftContent(draftId: string, platforms: string[], contentLength: string, feedback?: string): Promise<Record<Platform, string>> {
+    // Validate platforms
+    const validPlatforms = validatePlatforms(platforms);
+    if (validPlatforms.length === 0) {
+      throw new Error('At least one valid platform must be selected (linkedin or twitter)');
+    }
+
+    // Validate content length
+    const validLength = (contentLength === 'short' || contentLength === 'medium' || contentLength === 'long')
+      ? contentLength
+      : 'short'; // default to short
+
     // Get ONLY selected sources
     const allSources = await this.getSources(draftId);
     const sources = allSources.filter(s => s.userSelected);
@@ -198,19 +210,28 @@ export class ContentService {
 
     const idea = draftResult.rows[0].original_idea;
 
-    // Generate content with Claude
-    const content = await this.claudeService.generateContent({
-      idea,
-      sources,
-      feedback,
-    });
+    // Generate content for each platform
+    const generatedContent: Record<Platform, string> = {} as Record<Platform, string>;
 
-    // Update draft
+    for (const platform of validPlatforms) {
+      console.log(`📝 Generating ${platform} content (${validLength}) for draft ${draftId}`);
+      const content = await this.claudeService.generateContent({
+        idea,
+        sources,
+        platform,
+        contentLength: validLength,
+        feedback,
+      });
+      generatedContent[platform] = content;
+    }
+
+    // Store the primary content (use first platform's content as the draft_content)
+    const primaryContent = generatedContent[validPlatforms[0]];
     await this.dbPool.query(
       `UPDATE content_drafts
        SET draft_content = $1, status = 'review'
        WHERE id = $2`,
-      [content, draftId]
+      [primaryContent, draftId]
     );
 
     // Store edit if this is a revision
@@ -228,16 +249,16 @@ export class ContentService {
             draftId,
             previousContent.rows[0].user_id,
             previousContent.rows[0].draft_content,
-            content
+            primaryContent
           ]
         );
       }
     }
 
-    return content;
+    return generatedContent;
   }
 
-  async requestRevision(draftId: string, userId: string, feedback: string): Promise<string> {
+  async requestRevision(draftId: string, userId: string, platforms: string[], contentLength: string, feedback: string): Promise<Record<Platform, string>> {
     // Check revision count
     const result = await this.dbPool.query(
       `SELECT revision_count FROM content_drafts WHERE id = $1 AND user_id = $2`,
@@ -263,7 +284,7 @@ export class ContentService {
     );
 
     // Generate revised content
-    const revisedContent = await this.generateDraftContent(draftId, feedback);
+    const revisedContent = await this.generateDraftContent(draftId, platforms, contentLength, feedback);
 
     return revisedContent;
   }
@@ -277,30 +298,24 @@ export class ContentService {
     );
   }
 
-  async formatContent(draftId: string): Promise<any> {
-    // Get draft content
-    const draftResult = await this.dbPool.query(
-      'SELECT draft_content FROM content_drafts WHERE id = $1',
-      [draftId]
-    );
-
-    if (draftResult.rows.length === 0 || !draftResult.rows[0].draft_content) {
-      throw new Error('Draft content not found');
-    }
-
-    const content = draftResult.rows[0].draft_content;
-
-    // Get sources
+  async formatContent(draftId: string, platformContents: Record<Platform, string>): Promise<any> {
+    // Get sources for formatting
     const sources = await this.getSources(draftId);
 
-    // Format for all platforms
-    const formatted = await this.formatter.formatForAllPlatforms(content, sources);
+    // Format each platform's content
+    const formatted: any = {};
 
-    // Save formatted versions
-    for (const [platform, formattedContent] of Object.entries(formatted)) {
-      const contentStr = Array.isArray(formattedContent)
-        ? JSON.stringify(formattedContent)
-        : formattedContent;
+    for (const [platform, content] of Object.entries(platformContents)) {
+      if (platform === 'twitter') {
+        formatted[platform] = this.formatter.formatForTwitter(content, sources);
+      } else if (platform === 'linkedin') {
+        formatted[platform] = this.formatter.formatForLinkedIn(content, sources);
+      }
+
+      // Save formatted version
+      const contentStr = Array.isArray(formatted[platform])
+        ? JSON.stringify(formatted[platform])
+        : formatted[platform];
 
       await this.dbPool.query(
         `INSERT INTO platform_content (draft_id, platform, formatted_content)

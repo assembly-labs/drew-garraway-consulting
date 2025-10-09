@@ -3,7 +3,6 @@ import { ResearchSource } from '../services/research.service';
 export interface PlatformContent {
   linkedin: string;
   twitter: string[];
-  tiktok: string;
 }
 
 export class PlatformFormatter {
@@ -119,68 +118,6 @@ export class PlatformFormatter {
     });
   }
 
-  formatForTikTok(content: string, sources: ResearchSource[]): string {
-    // Extract title
-    const titleMatch = content.match(/^#\s+(.*)/);
-    const title = titleMatch ? titleMatch[1] : 'Key Insights';
-
-    // Remove markdown formatting
-    let script = content
-      .replace(/^#\s+.*\n\n/, '')
-      .replace(/#{1,6}\s/g, '')
-      .replace(/\*\*(.*?)\*\*/g, '$1')
-      .replace(/\*(.*?)\*/g, '$1')
-      .replace(/\[(\d+)\]/g, '');
-
-    // Convert to script format with timing cues
-    const paragraphs = script.split('\n\n').filter(p => p.length > 0);
-
-    let tiktokScript = '🎬 TIKTOK VIDEO SCRIPT (60-90 seconds)\n';
-    tiktokScript += '═'.repeat(50) + '\n\n';
-
-    tiktokScript += '⏱️ [0:00-0:03] HOOK\n';
-    tiktokScript += '─'.repeat(30) + '\n';
-    if (paragraphs[0]) {
-      tiktokScript += this.shortenForTikTok(paragraphs[0], 100) + '\n';
-      tiktokScript += '💡 Visual: Eye-catching text overlay with motion\n\n';
-    }
-
-    tiktokScript += '⏱️ [0:03-0:10] CONTEXT\n';
-    tiktokScript += '─'.repeat(30) + '\n';
-    if (paragraphs[1]) {
-      tiktokScript += this.shortenForTikTok(paragraphs[1], 150) + '\n';
-      tiktokScript += '💡 Visual: Supporting graphics or b-roll footage\n\n';
-    }
-
-    tiktokScript += '⏱️ [0:10-0:50] KEY POINTS\n';
-    tiktokScript += '─'.repeat(30) + '\n';
-
-    // Extract key statistics or points
-    const keyPoints = this.extractKeyPoints(content);
-    keyPoints.slice(0, 3).forEach((point, idx) => {
-      tiktokScript += `${idx + 1}. ${point}\n`;
-    });
-    tiktokScript += '💡 Visual: Animated text with icons for each point\n\n';
-
-    tiktokScript += '⏱️ [0:50-0:60] CALL TO ACTION\n';
-    tiktokScript += '─'.repeat(30) + '\n';
-    tiktokScript += '"Want the full analysis? Check the link in my bio for sources and detailed insights!"\n';
-    tiktokScript += '💡 Visual: Profile highlight with arrow pointing to bio\n\n';
-
-    tiktokScript += '📱 PRODUCTION NOTES:\n';
-    tiktokScript += '─'.repeat(30) + '\n';
-    tiktokScript += '• Film in vertical format (9:16 ratio)\n';
-    tiktokScript += '• Use trending audio if appropriate\n';
-    tiktokScript += '• Add captions for accessibility\n';
-    tiktokScript += '• Include relevant hashtags\n\n';
-
-    tiktokScript += '🏷️ SUGGESTED HASHTAGS:\n';
-    tiktokScript += '─'.repeat(30) + '\n';
-    const hashtags = this.extractHashtags(content);
-    tiktokScript += hashtags.join(' ') + '\n';
-
-    return tiktokScript;
-  }
 
   private extractHashtags(content: string): string[] {
     // Extract meaningful keywords for hashtags
@@ -211,74 +148,4 @@ export class PlatformFormatter {
       .map(k => `#${k}`);
   }
 
-  private extractKeyPoints(content: string): string[] {
-    const points: string[] = [];
-
-    // Look for statistics (numbers with context)
-    const statPattern = /(\d+(?:\.\d+)?%?)[^.]*(?:increase|decrease|growth|reduction|improvement|adoption|companies|organizations|enterprises)/gi;
-    const matches = content.match(statPattern) || [];
-
-    matches.forEach(match => {
-      if (match.length < 100) {
-        points.push(match.trim());
-      }
-    });
-
-    // Look for bullet points or list items
-    const bulletPattern = /[•\-]\s*([^•\-\n]+)/g;
-    const bullets = content.match(bulletPattern) || [];
-
-    bullets.forEach(bullet => {
-      const cleaned = bullet.replace(/[•\-]\s*/, '').trim();
-      if (cleaned.length < 80) {
-        points.push(cleaned);
-      }
-    });
-
-    // If not enough points, extract from key sentences
-    if (points.length < 3) {
-      const sentences = content.split(/[.!?]+/).filter(s => s.length > 20 && s.length < 100);
-      sentences.slice(0, 5).forEach(sentence => {
-        if (sentence.includes('show') || sentence.includes('reveal') ||
-            sentence.includes('indicate') || sentence.includes('demonstrate')) {
-          points.push(sentence.trim());
-        }
-      });
-    }
-
-    return points.slice(0, 5);
-  }
-
-  private shortenForTikTok(text: string, maxLength: number): string {
-    if (text.length <= maxLength) {
-      return text;
-    }
-
-    // Try to cut at sentence boundary
-    const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
-    let result = '';
-
-    for (const sentence of sentences) {
-      if ((result + sentence).length <= maxLength) {
-        result += sentence;
-      } else {
-        break;
-      }
-    }
-
-    if (!result) {
-      result = text.substring(0, maxLength - 3) + '...';
-    }
-
-    return result.trim();
-  }
-
-  // Helper to format all platforms at once
-  async formatForAllPlatforms(content: string, sources: ResearchSource[]): Promise<PlatformContent> {
-    return {
-      linkedin: this.formatForLinkedIn(content, sources),
-      twitter: this.formatForTwitter(content, sources),
-      tiktok: this.formatForTikTok(content, sources),
-    };
-  }
 }

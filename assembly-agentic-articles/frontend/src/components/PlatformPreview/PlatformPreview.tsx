@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Linkedin, Twitter, Video, Copy, Check, Send, X } from 'lucide-react';
+import { Linkedin, Twitter, Copy, Check, Send, Download } from 'lucide-react';
 import { PlatformContent } from '../../services/api';
+import { ToastContainer } from '../common/Toast';
 
 interface PlatformPreviewProps {
   content: PlatformContent | null;
@@ -13,33 +14,64 @@ const PlatformPreview: React.FC<PlatformPreviewProps> = ({
   onPublish,
   loading = false
 }) => {
-  const [selectedPlatforms, setSelectedPlatforms] = useState<Set<string>>(new Set());
-  const [copiedPlatform, setCopiedPlatform] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'linkedin' | 'twitter' | 'tiktok'>('linkedin');
+  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
+  const [toasts, setToasts] = useState<Array<{id: string; message: string; type: 'success' | 'error' | 'info' | 'warning'}>>([]);
+
+  const addToast = (message: string, type: 'success' | 'error' | 'info' | 'warning' = 'success') => {
+    const id = Date.now().toString();
+    setToasts(prev => [...prev, { id, message, type }]);
+  };
+
+  const removeToast = (id: string) => {
+    setToasts(prev => prev.filter(t => t.id !== id));
+  };
 
   const handleCopy = async (text: string, platform: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      setCopiedPlatform(platform);
-      setTimeout(() => setCopiedPlatform(null), 2000);
+      addToast(`✓ ${platform} content copied to clipboard!`, 'success');
     } catch (err) {
       console.error('Failed to copy:', err);
+      addToast(`Failed to copy ${platform} content`, 'error');
     }
+  };
+
+  const handleDownload = (platform: string, content: string) => {
+    try {
+      const blob = new Blob([content], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `content-${platform}-${Date.now()}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      addToast(`✓ ${platform} content downloaded!`, 'success');
+    } catch (err) {
+      console.error('Failed to download:', err);
+      addToast(`Failed to download ${platform} content`, 'error');
+    }
+  };
+
+  const handleDownloadAll = () => {
+    if (!content) return;
+
+    if (content.linkedin) handleDownload('linkedin', content.linkedin);
+    if (content.twitter) handleDownload('twitter', content.twitter.join('\n\n'));
   };
 
   const togglePlatform = (platform: string) => {
-    const newSelected = new Set(selectedPlatforms);
-    if (newSelected.has(platform)) {
-      newSelected.delete(platform);
-    } else {
-      newSelected.add(platform);
-    }
-    setSelectedPlatforms(newSelected);
+    setSelectedPlatforms(prev =>
+      prev.includes(platform)
+        ? prev.filter(p => p !== platform)
+        : [...prev, platform]
+    );
   };
 
   const handlePublish = () => {
-    if (selectedPlatforms.size > 0) {
-      onPublish(Array.from(selectedPlatforms));
+    if (selectedPlatforms.length > 0) {
+      onPublish(selectedPlatforms);
     }
   };
 
@@ -103,226 +135,167 @@ What's your experience with AI in healthcare? Share your thoughts below!
       "McKinsey data: 73% of healthcare organizations now using AI. That's a 300% increase in just 2 years. The adoption curve is accelerating rapidly. (4/6)",
       "This isn't just about efficiency. AI is enabling personalized medicine at scale, catching diseases earlier, and literally saving lives. (5/6)",
       "The convergence of tech and healthcare is just beginning. What excites you most about AI in medicine? 🏥💡 (6/6)"
-    ],
-
-    tiktok: `🎬 TIKTOK VIDEO SCRIPT (60-90 seconds)
-══════════════════════════════════════════════════
-
-⏱️ [0:00-0:03] HOOK
-──────────────────────────────
-"AI just changed healthcare forever - here's how"
-💡 Visual: Eye-catching text overlay with motion
-
-⏱️ [0:03-0:10] CONTEXT
-──────────────────────────────
-"New research shows AI can now diagnose diseases 85% more accurately than before"
-💡 Visual: Supporting graphics or b-roll footage
-
-⏱️ [0:10-0:50] KEY POINTS
-──────────────────────────────
-1. AI predicts diseases with 92% accuracy
-2. Diagnosis time cut by 60%
-3. Saving $150 billion by 2026
-💡 Visual: Animated text with icons for each point
-
-⏱️ [0:50-0:60] CALL TO ACTION
-──────────────────────────────
-"Want the full analysis? Check the link in my bio for sources and detailed insights!"
-💡 Visual: Profile highlight with arrow pointing to bio
-
-📱 PRODUCTION NOTES:
-──────────────────────────────
-• Film in vertical format (9:16 ratio)
-• Use trending audio if appropriate
-• Add captions for accessibility
-• Include relevant hashtags
-
-🏷️ SUGGESTED HASHTAGS:
-──────────────────────────────
-#AI #Healthcare #Innovation #Tech #Future #Medicine #2024`
+    ]
   };
 
   return (
-    <div className="h-full flex flex-col bg-bg-primary">
-      {/* Header */}
-      <div className="p-6 border-b border-border">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold text-text-primary">Platform Preview</h2>
-          <button
-            onClick={handlePublish}
-            disabled={selectedPlatforms.size === 0 || loading}
-            className="btn btn-primary"
-          >
-            {loading ? (
-              <>
-                <div className="spinner w-5 h-5"></div>
-                Publishing...
-              </>
-            ) : (
-              <>
-                <Send className="w-5 h-5" />
-                Publish Selected ({selectedPlatforms.size})
-              </>
-            )}
-          </button>
+    <>
+      <ToastContainer toasts={toasts} onRemove={removeToast} />
+
+      <div className="h-full flex flex-col bg-bg-primary">
+        {/* Header */}
+        <div className="p-6 border-b border-border">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-semibold text-text-primary mb-1">Preview & Export</h2>
+              <p className="text-sm text-text-secondary">Review your content for each platform</p>
+            </div>
+            <button
+              onClick={handleDownloadAll}
+              className="btn btn-secondary"
+            >
+              <Download className="w-4 h-4" />
+              Download All (.txt)
+            </button>
+          </div>
         </div>
 
-        {/* Platform Tabs */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => setActiveTab('linkedin')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-              activeTab === 'linkedin'
-                ? 'bg-accent text-white'
-                : 'bg-surface text-text-secondary hover:text-text-primary'
-            }`}
-          >
-            <Linkedin className="w-4 h-4" />
-            LinkedIn
-          </button>
-          <button
-            onClick={() => setActiveTab('twitter')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-              activeTab === 'twitter'
-                ? 'bg-accent text-white'
-                : 'bg-surface text-text-secondary hover:text-text-primary'
-            }`}
-          >
-            <Twitter className="w-4 h-4" />
-            X / Twitter
-          </button>
-          <button
-            onClick={() => setActiveTab('tiktok')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-              activeTab === 'tiktok'
-                ? 'bg-accent text-white'
-                : 'bg-surface text-text-secondary hover:text-text-primary'
-            }`}
-          >
-            <Video className="w-4 h-4" />
-            TikTok
-          </button>
-        </div>
-      </div>
-
-      {/* Content Preview */}
-      <div className="flex-1 overflow-y-auto p-6">
-        {/* LinkedIn Preview */}
-        {activeTab === 'linkedin' && (
-          <div className="max-w-2xl mx-auto">
-            <div className="preview-card">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedPlatforms.has('linkedin')}
-                    onChange={() => togglePlatform('linkedin')}
-                    className="w-5 h-5 rounded border-border bg-bg-secondary text-accent focus:ring-accent"
-                  />
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <Linkedin className="w-5 h-5 text-[#0077B5]" />
-                    <span className="font-medium text-text-primary">LinkedIn Post</span>
-                  </label>
-                </div>
-                <button
-                  onClick={() => handleCopy(displayContent.linkedin, 'linkedin')}
-                  className="btn btn-ghost p-2"
-                >
-                  {copiedPlatform === 'linkedin' ? (
-                    <Check className="w-4 h-4 text-success" />
-                  ) : (
-                    <Copy className="w-4 h-4" />
-                  )}
-                </button>
+        {/* Two-Column Layout */}
+        <div className="flex-1 overflow-y-auto p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* LinkedIn Column */}
+            <div className="bg-surface border border-border rounded-lg p-6 flex flex-col">
+              <div className="flex items-center gap-2 mb-4">
+                <Linkedin className="w-6 h-6 text-[#0077B5]" />
+                <h3 className="text-lg font-semibold text-text-primary">LinkedIn</h3>
               </div>
-              <div className="bg-bg-secondary rounded-lg p-4">
-                <pre className="preview-content whitespace-pre-wrap font-sans">
-                  {displayContent.linkedin}
+
+              {/* Content Preview */}
+              <div className="flex-1 bg-bg-secondary rounded-lg p-4 mb-4 overflow-y-auto" style={{ maxHeight: '400px' }}>
+                <pre className="text-sm text-text-primary whitespace-pre-wrap font-sans">
+                  {displayContent.linkedin || ''}
                 </pre>
               </div>
-            </div>
-          </div>
-        )}
 
-        {/* Twitter Preview */}
-        {activeTab === 'twitter' && (
-          <div className="max-w-2xl mx-auto">
-            <div className="preview-card">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedPlatforms.has('twitter')}
-                    onChange={() => togglePlatform('twitter')}
-                    className="w-5 h-5 rounded border-border bg-bg-secondary text-accent focus:ring-accent"
-                  />
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <Twitter className="w-5 h-5 text-[#1DA1F2]" />
-                    <span className="font-medium text-text-primary">X Thread ({displayContent.twitter.length} tweets)</span>
-                  </label>
+              {/* Stats */}
+              <div className="mb-4 pb-4 border-b border-border space-y-1">
+                <div className="text-xs text-text-secondary">
+                  📊 {displayContent.linkedin?.length || 0} chars
                 </div>
+                <div className="text-xs text-text-secondary">
+                  {(displayContent.linkedin?.split('#').length || 1) - 1} hashtags
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="flex flex-col gap-2">
                 <button
-                  onClick={() => handleCopy(displayContent.twitter.join('\n\n'), 'twitter')}
-                  className="btn btn-ghost p-2"
+                  onClick={() => handleCopy(displayContent.linkedin || '', 'LinkedIn')}
+                  className="btn btn-primary w-full"
                 >
-                  {copiedPlatform === 'twitter' ? (
-                    <Check className="w-4 h-4 text-success" />
-                  ) : (
-                    <Copy className="w-4 h-4" />
-                  )}
+                  <Copy className="w-4 h-4" />
+                  Copy
+                </button>
+                <button
+                  onClick={() => handleDownload('linkedin', displayContent.linkedin || '')}
+                  className="btn btn-secondary w-full"
+                >
+                  <Download className="w-4 h-4" />
+                  Download .txt
                 </button>
               </div>
-              <div className="space-y-3">
-                {displayContent.twitter.map((tweet, index) => (
-                  <div key={index} className="bg-bg-secondary rounded-lg p-4">
-                    <pre className="preview-content whitespace-pre-wrap font-sans">
+            </div>
+
+            {/* Twitter Column */}
+            <div className="bg-surface border border-border rounded-lg p-6 flex flex-col">
+              <div className="flex items-center gap-2 mb-4">
+                <Twitter className="w-6 h-6 text-[#1DA1F2]" />
+                <h3 className="text-lg font-semibold text-text-primary">Twitter/X</h3>
+              </div>
+
+              {/* Thread Preview */}
+              <div className="flex-1 bg-bg-secondary rounded-lg p-4 mb-4 overflow-y-auto space-y-2" style={{ maxHeight: '400px' }}>
+                {(displayContent.twitter || []).map((tweet, index) => (
+                  <div key={index} className="bg-bg-primary rounded p-3 border-l-2 border-accent">
+                    <pre className="text-xs text-text-primary whitespace-pre-wrap font-sans">
                       {tweet}
                     </pre>
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        )}
 
-        {/* TikTok Preview */}
-        {activeTab === 'tiktok' && (
-          <div className="max-w-2xl mx-auto">
-            <div className="preview-card">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedPlatforms.has('tiktok')}
-                    onChange={() => togglePlatform('tiktok')}
-                    className="w-5 h-5 rounded border-border bg-bg-secondary text-accent focus:ring-accent"
-                  />
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <Video className="w-5 h-5 text-[#FF0050]" />
-                    <span className="font-medium text-text-primary">TikTok Script</span>
-                  </label>
+              {/* Stats */}
+              <div className="mb-4 pb-4 border-b border-border space-y-1">
+                <div className="text-xs text-text-secondary">
+                  🧵 {displayContent.twitter?.length || 0} tweets
                 </div>
+                <div className="text-xs text-text-secondary">
+                  Avg {displayContent.twitter?.length ? Math.round(displayContent.twitter.reduce((acc, t) => acc + t.length, 0) / displayContent.twitter.length) : 0} chars/tweet
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="flex flex-col gap-2">
                 <button
-                  onClick={() => handleCopy(displayContent.tiktok, 'tiktok')}
-                  className="btn btn-ghost p-2"
+                  onClick={() => handleCopy((displayContent.twitter || []).join('\n\n'), 'Twitter')}
+                  className="btn btn-primary w-full"
                 >
-                  {copiedPlatform === 'tiktok' ? (
-                    <Check className="w-4 h-4 text-success" />
-                  ) : (
-                    <Copy className="w-4 h-4" />
-                  )}
+                  <Copy className="w-4 h-4" />
+                  Copy Thread
+                </button>
+                <button
+                  onClick={() => handleDownload('twitter', (displayContent.twitter || []).join('\n\n'))}
+                  className="btn btn-secondary w-full"
+                >
+                  <Download className="w-4 h-4" />
+                  Download .txt
                 </button>
               </div>
-              <div className="bg-bg-secondary rounded-lg p-4">
-                <pre className="preview-content whitespace-pre-wrap font-sans font-mono text-sm">
-                  {displayContent.tiktok}
-                </pre>
-              </div>
             </div>
           </div>
-        )}
+        </div>
+
+        {/* Footer - Publish Section */}
+        <div className="border-t border-border p-6 bg-bg-secondary">
+          <div className="flex items-center justify-between">
+            {/* Platform Selection */}
+            <div className="flex items-center gap-6">
+              <span className="text-sm font-medium text-text-secondary">Mark as published:</span>
+              <div className="flex items-center gap-4">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={selectedPlatforms.includes('linkedin')}
+                    onChange={() => togglePlatform('linkedin')}
+                    className="w-4 h-4 rounded border-border text-accent focus:ring-accent"
+                  />
+                  <span className="text-sm text-text-primary">LinkedIn</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={selectedPlatforms.includes('twitter')}
+                    onChange={() => togglePlatform('twitter')}
+                    className="w-4 h-4 rounded border-border text-accent focus:ring-accent"
+                  />
+                  <span className="text-sm text-text-primary">Twitter</span>
+                </label>
+              </div>
+            </div>
+
+            {/* Publish Button */}
+            <button
+              onClick={handlePublish}
+              disabled={selectedPlatforms.length === 0 || loading}
+              className="btn btn-success btn-lg"
+            >
+              <Check className="w-5 h-5" />
+              Mark as Published ({selectedPlatforms.length} platform{selectedPlatforms.length !== 1 ? 's' : ''})
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

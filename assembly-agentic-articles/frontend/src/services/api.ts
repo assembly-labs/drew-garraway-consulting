@@ -44,10 +44,12 @@ export interface ResearchSource {
 }
 
 export interface PlatformContent {
-  linkedin: string;
-  twitter: string[];
-  tiktok: string;
+  linkedin?: string;
+  twitter?: string[];
 }
+
+export type Platform = 'linkedin' | 'twitter';
+export type ContentLength = 'short' | 'medium' | 'long';
 
 // API Methods
 export const contentApi = {
@@ -97,26 +99,27 @@ export const contentApi = {
   },
 
   // Content generation
-  generateContent: async (draftId: string): Promise<string> => {
-    const response = await api.post(`/content/drafts/${draftId}/generate`);
-    return response.data.content;
+  generateContent: async (draftId: string, platforms: Platform[], contentLength: ContentLength): Promise<{ content: Record<Platform, string>; formatted: PlatformContent }> => {
+    const response = await api.post(`/content/drafts/${draftId}/generate`, { platforms, contentLength });
+    return {
+      content: response.data.content,
+      formatted: response.data.formatted
+    };
   },
 
-  reviseContent: async (draftId: string, feedback: string): Promise<string> => {
-    const response = await api.post(`/content/drafts/${draftId}/revise`, { feedback });
-    return response.data.content;
+  reviseContent: async (draftId: string, platforms: Platform[], contentLength: ContentLength, feedback: string): Promise<{ content: Record<Platform, string>; formatted: PlatformContent }> => {
+    const response = await api.post(`/content/drafts/${draftId}/revise`, { feedback, platforms, contentLength });
+    return {
+      content: response.data.content,
+      formatted: response.data.formatted
+    };
   },
 
   approveDraft: async (draftId: string): Promise<void> => {
     await api.post(`/content/drafts/${draftId}/approve`);
   },
 
-  // Formatting
-  formatContent: async (draftId: string): Promise<PlatformContent> => {
-    const response = await api.post(`/content/drafts/${draftId}/format`);
-    return response.data.formatted;
-  },
-
+  // Formatting (already done during generation)
   getFormattedContent: async (draftId: string): Promise<PlatformContent> => {
     const response = await api.get(`/content/drafts/${draftId}/formatted`);
     return response.data.formatted;
