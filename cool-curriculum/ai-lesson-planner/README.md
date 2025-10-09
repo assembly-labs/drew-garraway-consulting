@@ -1,70 +1,269 @@
-# Getting Started with Create React App
+# AI Lesson Planner
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+AI-powered lesson material generator for K-4 educators. Creates differentiated, standards-aligned worksheets, quizzes, and activities using Claude AI.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- ✅ **Real AI Generation** - Powered by Anthropic Claude Sonnet 4
+- ✅ **Student Profiles** - Create reusable profiles for differentiation (no PII)
+- ✅ **Rate Limiting** - 3 regenerations per 10 minutes to conserve API costs
+- ✅ **Draft Editing** - Inline editing for all AI-generated content
+- ✅ **Print-Friendly** - Professional worksheet templates optimized for printing
+- ✅ **Library** - Save and organize materials with search/filter
+- ✅ **localStorage Persistence** - All data saved locally (no backend required)
 
-### `npm start`
+## 📋 Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js 18+ installed
+- Anthropic API key ([get one here](https://console.anthropic.com/))
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Setup
 
-### `npm test`
+### 1. Install Dependencies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install
+```
 
-### `npm run build`
+### 2. Configure API Key
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Create a `.env.local` file in the project root:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+REACT_APP_ANTHROPIC_API_KEY=your_api_key_here
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**⚠️ Important:** Never commit `.env.local` to git - it's already in `.gitignore`
 
-### `npm run eject`
+### 3. Start Both Servers
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**You need TWO terminal windows running simultaneously:**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Terminal 1 - Proxy Server (Port 3001):**
+```bash
+npm run server
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+You should see:
+```
+🚀 Proxy server running on http://localhost:3001
+📡 Accepting requests from http://localhost:3000
+🔑 API key configured: Yes ✅
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Terminal 2 - React App (Port 3000):**
+```bash
+npm start
+```
 
-## Learn More
+You should see:
+```
+Compiled successfully!
+Local: http://localhost:3000
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 4. Open in Browser
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Navigate to: **http://localhost:3000**
 
-### Code Splitting
+## 🎓 Quick Start Guide
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 1. Create a Student Profile
 
-### Analyzing the Bundle Size
+1. Click **"Profiles"** in the header
+2. Click **"Create New Profile"**
+3. Fill out the form:
+   - Name: e.g., "Visual Learners"
+   - Grade: Select grade level(s)
+   - Interests: Choose themes (animals, sports, etc.)
+   - Reading Level: Below/On/Above grade
+4. Click **"Save Profile"**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 2. Generate Your First Lesson
 
-### Making a Progressive Web App
+1. Go to **Dashboard**
+2. Click **"Create New Lesson Material"**
+3. Enter a prompt:
+   ```
+   Create a worksheet about addition with regrouping for 2nd graders who love animals. Include 5 problems with space to show work.
+   ```
+4. (Optional) Click **"Select Student Profiles"** to differentiate
+5. Click **"Generate Draft"**
+6. Wait 15-20 seconds for AI generation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 3. Review & Edit
 
-### Advanced Configuration
+1. Review the AI-generated content
+2. Click any field to edit inline
+3. Use **"Regenerate"** if needed (3 times per 10 minutes)
+4. Click **"Looks Good - Continue"**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 4. Save to Library
 
-### Deployment
+1. Review the visual template
+2. Click **"Save to Library"**
+3. Access saved materials anytime from the Library page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🏗️ Architecture
 
-### `npm run build` fails to minify
+### Why Two Servers?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Problem:** Browsers block direct API calls to Anthropic due to CORS policy (security feature)
+
+**Solution:** Proxy server architecture
+
+```
+Browser (localhost:3000)
+    ↓ Calls proxy (no CORS!)
+Proxy Server (localhost:3001)
+    ↓ Forwards request with API key
+Anthropic API
+    ↓ Returns AI content
+Proxy → Browser
+```
+
+**Benefits:**
+- ✅ No CORS errors
+- ✅ API key stays secure on server
+- ✅ Works locally without a full backend
+
+## 📁 Project Structure
+
+```
+ai-lesson-planner/
+├── public/                 # Static assets
+├── src/
+│   ├── components/
+│   │   ├── shared/        # Button, Modal, LoadingSpinner, Header
+│   │   ├── profiles/      # ProfileForm, ProfileCard
+│   │   ├── creation/      # PromptBuilder, ProfileSelector, RateLimitWarning
+│   │   └── templates/     # (Future: Visual templates)
+│   ├── contexts/
+│   │   └── AppContext.js  # Global state management
+│   ├── pages/
+│   │   ├── Dashboard.js   # Landing page
+│   │   ├── CreateMaterial.js  # Prompt builder
+│   │   ├── DraftReview.js     # AI generation & editing
+│   │   ├── VisualEditor.js    # Mock visual template
+│   │   ├── ProfileManager.js  # Profile CRUD
+│   │   └── Library.js         # Saved materials
+│   ├── utils/
+│   │   ├── llm.js         # LLM API integration
+│   │   └── rateLimit.js   # Rate limiting logic
+│   └── styles/
+│       └── templates.css  # Print-friendly styles
+├── server.js              # Proxy server for API calls
+├── .env.local            # API keys (not committed)
+└── package.json
+```
+
+## 🔧 Available Scripts
+
+- **`npm start`** - Start React dev server (port 3000)
+- **`npm run server`** - Start proxy server (port 3001)
+- **`npm run build`** - Create production build
+- **`npm test`** - Run tests
+
+## 🐛 Troubleshooting
+
+### CORS Errors / "Failed to fetch"
+
+**Problem:** Proxy server not running or crashed
+
+**Solution:**
+```bash
+# Check if proxy is running
+ps aux | grep "node server.js" | grep -v grep
+
+# If not, restart it
+npm run server
+```
+
+### Port Already in Use
+
+**Problem:** Something else is using port 3000 or 3001
+
+**Solution:**
+```bash
+# Find what's using the port
+lsof -i :3000
+lsof -i :3001
+
+# Kill the process
+kill -9 <PID>
+
+# Or use a different port
+PORT=3002 npm start
+```
+
+### API Key Not Working
+
+**Problem:** "API key not configured" error
+
+**Solution:**
+1. Check `.env.local` exists in project root
+2. Verify format: `REACT_APP_ANTHROPIC_API_KEY=sk-ant-api03-...`
+3. Restart both servers
+4. Check API key is valid at https://console.anthropic.com/
+
+### Generation Takes Too Long / Times Out
+
+**Problem:** Network issues or API rate limits
+
+**Solution:**
+1. Check your internet connection
+2. Verify API key has available credits
+3. Check Anthropic status: https://status.anthropic.com/
+
+## ⚠️ Known Limitations (MVP)
+
+1. **Stage 2 is Mock** - Visual generation uses template, not AI
+2. **No Authentication** - Session is browser-based only
+3. **Client-Side API Key** - Not production-secure (prototype only)
+4. **No Backend** - Everything runs client-side
+5. **localStorage Only** - ~5-10MB limit, no multi-device sync
+6. **Dev Dependencies** - Some known vulnerabilities (dev only, not production)
+
+## 🚀 Production Deployment Considerations
+
+For a production-ready app, you'll need:
+
+1. **Backend Server** - Move proxy to real backend (Express, FastAPI, etc.)
+2. **Database** - Replace localStorage with Supabase/PostgreSQL
+3. **Authentication** - Add Auth0, Clerk, or Supabase Auth
+4. **API Security** - Store API keys in environment variables on server
+5. **Stage 2 Implementation** - Real visual generation with image AI
+6. **Rate Limiting** - Server-side rate limiting per user
+7. **Export Functionality** - PDF generation with proper library
+8. **Update Dependencies** - Fix security vulnerabilities
+
+## 📝 Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `REACT_APP_ANTHROPIC_API_KEY` | Anthropic Claude API key | Yes |
+| `REACT_APP_PROXY_URL` | Proxy server URL (defaults to localhost:3001) | No |
+
+## 🤝 Contributing
+
+This is a prototype/MVP. For production use:
+1. Move API calls to backend
+2. Implement proper authentication
+3. Add database for persistence
+4. Build real Stage 2 visual generation
+5. Add comprehensive error handling
+
+## 📄 License
+
+Private project - All rights reserved
+
+## 🙏 Credits
+
+- Built with React + Tailwind CSS
+- AI powered by Anthropic Claude Sonnet 4
+- Icons from Lucide React
+- Built by Claude Code
+
+---
+
+**Questions?** Check the troubleshooting section above or open an issue.
