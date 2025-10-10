@@ -22,7 +22,8 @@ export default function Dashboard() {
         </p>
         <Button
           onClick={() => navigate('/create')}
-          className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-4 flex items-center gap-3 mx-auto"
+          variant="light"
+          className="text-lg px-8 py-4 flex items-center gap-3 mx-auto"
         >
           <Sparkles size={24} />
           Create New Lesson Material
