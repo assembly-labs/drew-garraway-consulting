@@ -1,0 +1,424 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 [\
+  \{\
+    "name": "Barbell Back Squat",\
+    "description": "Squat with a barbell across your upper back, hips and knees bending to at least parallel before driving up.",\
+    "body_focus": "lower body",\
+    "benefits": "Builds total-leg strength and mass; high carryover to athletics and daily lifting."\
+  \},\
+  \{\
+    "name": "Front Squat",\
+    "description": "Squat holding the barbell on front delts with elbows high, keeping torso upright through the descent and ascent.",\
+    "body_focus": "lower body",\
+    "benefits": "Emphasizes quads and core; reinforces upright posture and clean squat mechanics."\
+  \},\
+  \{\
+    "name": "Goblet Squat",\
+    "description": "Hold a dumbbell or kettlebell at your chest and squat to depth with a controlled torso.",\
+    "body_focus": "lower body",\
+    "benefits": "Beginner-friendly squat that grooves form, improves hip mobility, and strengthens quads and glutes."\
+  \},\
+  \{\
+    "name": "Smith-Machine Squat",\
+    "description": "Back squat pattern on a fixed bar path to focus on depth and tension with added stability.",\
+    "body_focus": "lower body",\
+    "benefits": "Allows safe progression and higher reps while reducing balance demands and spotter needs."\
+  \},\
+  \{\
+    "name": "Leg Press",\
+    "description": "Seated press of a weighted sled by extending hips and knees, controlling the return.",\
+    "body_focus": "lower body",\
+    "benefits": "Loads quads and glutes heavily without spinal strain; great for hypertrophy."\
+  \},\
+  \{\
+    "name": "Hack Squat (Machine)",\
+    "description": "Machine-guided squat with back support, driving through heels to extend knees and hips.",\
+    "body_focus": "lower body",\
+    "benefits": "Targets quads safely at high intensity; excellent for muscle gain and knee-dominant strength."\
+  \},\
+  \{\
+    "name": "Bulgarian Split Squat",\
+    "description": "Rear foot elevated; lower into a single-leg squat and drive up through the front heel.",\
+    "body_focus": "lower body",\
+    "benefits": "Builds unilateral strength, balance, and hip stability; addresses leg imbalances."\
+  \},\
+  \{\
+    "name": "Walking Lunge (Dumbbells)",\
+    "description": "Stride forward into lunges, alternating legs while keeping torso tall and knees tracking.",\
+    "body_focus": "lower body",\
+    "benefits": "Improves gait mechanics, leg strength, and balance with functional carryover."\
+  \},\
+  \{\
+    "name": "Reverse Lunge (Dumbbells)",\
+    "description": "Step backward into a lunge to reduce knee stress, then return to stand.",\
+    "body_focus": "lower body",\
+    "benefits": "Knee-friendly lunge variation that strengthens quads, glutes, and stabilizers."\
+  \},\
+  \{\
+    "name": "Step-Up (Bench, Dumbbells)",\
+    "description": "Step onto a bench with one foot, drive through heel to stand tall, then lower under control.",\
+    "body_focus": "lower body",\
+    "benefits": "Single-leg strength builder that mimics stairs and hiking; boosts knee and hip stability."\
+  \},\
+  \{\
+    "name": "Romanian Deadlift (Barbell/Dumbbells)",\
+    "description": "Hip-hinge lowering the weight along thighs to hamstring stretch, then extend hips to stand.",\
+    "body_focus": "lower body",\
+    "benefits": "Targets posterior chain to protect knees and back; improves hinge mechanics and power."\
+  \},\
+  \{\
+    "name": "Conventional Deadlift",\
+    "description": "Pull a barbell from floor to lockout with braced core and strong hip drive.",\
+    "body_focus": "full body",\
+    "benefits": "Maximizes posterior-chain strength and real-world lifting capacity."\
+  \},\
+  \{\
+    "name": "Leg Extension (Machine)",\
+    "description": "Extend knees against pad resistance from seated position; control the lower.",\
+    "body_focus": "lower body",\
+    "benefits": "Isolates quadriceps to strengthen around the knee and add targeted hypertrophy."\
+  \},\
+  \{\
+    "name": "Leg Curl (Seated or Lying)",\
+    "description": "Flex knees against machine resistance, squeezing hamstrings; return slowly.",\
+    "body_focus": "lower body",\
+    "benefits": "Balances quad work, supports knee health, and improves sprinting/hinge power."\
+  \},\
+  \{\
+    "name": "Hip Thrust / Glute Bridge",\
+    "description": "With shoulders on bench or floor, drive hips up by squeezing glutes; lower under control.",\
+    "body_focus": "lower body",\
+    "benefits": "Top-tier glute builder; supports back health and boosts sprint/jump performance."\
+  \},\
+  \{\
+    "name": "Calf Raise (Standing/Seated)",\
+    "description": "Raise heels to full plantar flexion and pause; lower slowly to stretch.",\
+    "body_focus": "lower body",\
+    "benefits": "Builds ankle strength and power for running, jumping, and durable gait."\
+  \},\
+  \{\
+    "name": "Barbell Bench Press",\
+    "description": "Press a barbell from chest to lockout, keeping shoulder blades retracted and feet planted.",\
+    "body_focus": "upper push",\
+    "benefits": "Primary upper-body strength builder for chest, shoulders, and triceps."\
+  \},\
+  \{\
+    "name": "Dumbbell Bench Press",\
+    "description": "Press paired dumbbells from chest with neutral shoulder position and full control.",\
+    "body_focus": "upper push",\
+    "benefits": "Greater range of motion and unilateral balance; shoulder-friendly pressing."\
+  \},\
+  \{\
+    "name": "Incline Dumbbell Bench Press",\
+    "description": "Press dumbbells on a 30\'9645\'b0 bench to emphasize upper chest and anterior delts.",\
+    "body_focus": "upper push",\
+    "benefits": "Builds upper chest for balanced aesthetics and pressing strength."\
+  \},\
+  \{\
+    "name": "Machine Chest Press",\
+    "description": "Seated press along guided path to focus on chest contraction and safe overload.",\
+    "body_focus": "upper push",\
+    "benefits": "Stable pressing for high-tension sets without spotter; joint-friendly."\
+  \},\
+  \{\
+    "name": "Push-Up",\
+    "description": "Bodyweight press keeping a rigid plank; lower chest to floor and press back up.",\
+    "body_focus": "upper push",\
+    "benefits": "Foundational movement that builds pressing endurance and core stability anywhere."\
+  \},\
+  \{\
+    "name": "Dip (Assisted or Parallel Bars)",\
+    "description": "Lower body between bars by bending elbows, then press to lockout with chest lean.",\
+    "body_focus": "upper push",\
+    "benefits": "Targets lower chest and triceps; scalable strength for push patterns."\
+  \},\
+  \{\
+    "name": "Overhead Shoulder Press (Dumbbells)",\
+    "description": "Press dumbbells from shoulder level to overhead while bracing glutes and core.",\
+    "body_focus": "upper push",\
+    "benefits": "Builds delts and triceps; reinforces overhead stability for daily tasks."\
+  \},\
+  \{\
+    "name": "Barbell Overhead Press",\
+    "description": "Strict press a bar from shoulders to overhead with tight core and stacked ribs.",\
+    "body_focus": "upper push",\
+    "benefits": "Classic vertical press for raw shoulder strength and posture integrity."\
+  \},\
+  \{\
+    "name": "Machine Shoulder Press",\
+    "description": "Seated overhead press on a guided track to isolate delts safely.",\
+    "body_focus": "upper push",\
+    "benefits": "Joint-friendly progression and easy load control for shoulder development."\
+  \},\
+  \{\
+    "name": "Dumbbell Lateral Raise",\
+    "description": "Lift dumbbells out to shoulder height with slight elbow bend and controlled tempo.",\
+    "body_focus": "upper push",\
+    "benefits": "Targets lateral delts for broader shoulders and improved shoulder function."\
+  \},\
+  \{\
+    "name": "Pec-Deck (Machine Fly)",\
+    "description": "Bring arms together in a hugging motion on the pec deck, squeezing chest hard.",\
+    "body_focus": "upper push",\
+    "benefits": "Isolates chest fibers with constant tension for hypertrophy and mobility."\
+  \},\
+  \{\
+    "name": "Cable Chest Fly (High/Low)",\
+    "description": "With cables set high or low, sweep arms in arcs to emphasize different chest fibers.",\
+    "body_focus": "upper push",\
+    "benefits": "Adjustable angles produce comprehensive chest development with joint-friendly tension."\
+  \},\
+  \{\
+    "name": "Assisted Pull-Up / Chin-Up",\
+    "description": "Use assistance or bodyweight to pull chin over bar with controlled scapular motion.",\
+    "body_focus": "upper pull",\
+    "benefits": "Builds wide back, arm strength, and shoulder health; scalable for all levels."\
+  \},\
+  \{\
+    "name": "Lat Pulldown (Various Grips)",\
+    "description": "Pull bar to chest while keeping torso steady and elbows driving down.",\
+    "body_focus": "upper pull",\
+    "benefits": "Back-width developer that mimics pull-ups with adjustable loading."\
+  \},\
+  \{\
+    "name": "Seated Cable Row",\
+    "description": "Row handle to torso, squeezing shoulder blades, then extend arms under control.",\
+    "body_focus": "upper pull",\
+    "benefits": "Strengthens mid-back for posture and shoulder stability."\
+  \},\
+  \{\
+    "name": "Bent-Over Barbell Row",\
+    "description": "Hip-hinge and pull bar to mid-torso with tight lats and flat back.",\
+    "body_focus": "upper pull",\
+    "benefits": "Thickens entire back; complements pressing and deadlift performance."\
+  \},\
+  \{\
+    "name": "One-Arm Dumbbell Row",\
+    "description": "Bench-supported single-arm row, pulling toward hip with neutral spine.",\
+    "body_focus": "upper pull",\
+    "benefits": "Unilateral back strength; fixes imbalances and builds grip."\
+  \},\
+  \{\
+    "name": "Chest-Supported Row (Machine/Bench)",\
+    "description": "Row with chest support to minimize lower-back demand and maximize back tension.",\
+    "body_focus": "upper pull",\
+    "benefits": "Targets lats and mid-back safely for higher-volume hypertrophy."\
+  \},\
+  \{\
+    "name": "Cable Face Pull (Rope)",\
+    "description": "Pull rope to face with elbows high, ending in external rotation.",\
+    "body_focus": "upper pull",\
+    "benefits": "Strengthens rear delts and rotator cuff to protect shoulders and improve posture."\
+  \},\
+  \{\
+    "name": "Rear-Delt Fly (Machine/Dumbbells)",\
+    "description": "Reverse fly pattern focusing on squeezing shoulder blades together.",\
+    "body_focus": "upper pull",\
+    "benefits": "Balances pressing by building posterior shoulders and scapular stability."\
+  \},\
+  \{\
+    "name": "Straight-Arm Pulldown (Cable)",\
+    "description": "With straight elbows, sweep bar from overhead to thighs, engaging lats.",\
+    "body_focus": "upper pull",\
+    "benefits": "Lat isolation that improves mind\'96muscle connection and pull-up strength."\
+  \},\
+  \{\
+    "name": "Barbell or EZ-Bar Curl",\
+    "description": "Curl bar through full ROM while keeping elbows pinned and wrists neutral.",\
+    "body_focus": "upper pull",\
+    "benefits": "Direct biceps strength for pulling capacity and elbow support."\
+  \},\
+  \{\
+    "name": "Dumbbell Hammer Curl",\
+    "description": "Neutral-grip curl emphasizing brachialis and forearms.",\
+    "body_focus": "upper pull",\
+    "benefits": "Builds grip and elbow stability; great carryover to climbing and grappling."\
+  \},\
+  \{\
+    "name": "Cable Curl (Rope/Bar)",\
+    "description": "Curl cable attachment with continuous tension and strict form.",\
+    "body_focus": "upper pull",\
+    "benefits": "Time-under-tension arm work for hypertrophy and tendon resilience."\
+  \},\
+  \{\
+    "name": "Shrug (Dumbbells/Barbell)",\
+    "description": "Elevate shoulders straight up, pause, and lower slowly.",\
+    "body_focus": "upper pull",\
+    "benefits": "Strengthens traps for carrying, posture, and neck/shoulder durability."\
+  \},\
+  \{\
+    "name": "Front Plank",\
+    "description": "Hold a rigid plank on forearms or hands with braced core and glutes.",\
+    "body_focus": "core",\
+    "benefits": "Trains anti-extension core stability to protect the spine under load."\
+  \},\
+  \{\
+    "name": "Side Plank",\
+    "description": "Support body on one forearm and foot, forming a straight line.",\
+    "body_focus": "core",\
+    "benefits": "Builds lateral core and hip stability; reduces back strain during twisting."\
+  \},\
+  \{\
+    "name": "Hanging Knee/Leg Raise",\
+    "description": "From a bar or captain\'92s chair, raise knees or straight legs under control.",\
+    "body_focus": "core",\
+    "benefits": "Strengthens lower abs and hip flexors; improves trunk control for athletics."\
+  \},\
+  \{\
+    "name": "Cable Woodchop (High/Low)",\
+    "description": "Rotate torso pulling cable diagonally across body; control return.",\
+    "body_focus": "core",\
+    "benefits": "Trains rotational power and anti-rotation control for combat and sport."\
+  \},\
+  \{\
+    "name": "Pallof Press (Cable)",\
+    "description": "Press cable handle away from chest resisting rotation.",\
+    "body_focus": "core",\
+    "benefits": "Excellent anti-rotation drill that bulletproofs the spine and hips."\
+  \},\
+  \{\
+    "name": "Ab-Wheel or Barbell Rollout",\
+    "description": "From knees, roll forward into long lever, then pull back with braced abs.",\
+    "body_focus": "core",\
+    "benefits": "Powerful anti-extension stimulus for rock-solid trunk strength."\
+  \},\
+  \{\
+    "name": "Back Extension (45\'b0 / Roman Chair)",\
+    "description": "Hinge over pad and extend torso to neutral, squeezing glutes.",\
+    "body_focus": "core",\
+    "benefits": "Strengthens spinal erectors and glutes; supports healthy posture."\
+  \},\
+  \{\
+    "name": "Dead Bug",\
+    "description": "Supine, alternate extending opposite arm/leg while keeping spine neutral.",\
+    "body_focus": "core",\
+    "benefits": "Teaches core bracing and coordination; rehab-friendly stability work."\
+  \},\
+  \{\
+    "name": "Bird Dog",\
+    "description": "Quadruped, extend opposite arm and leg without trunk rotation.",\
+    "body_focus": "core",\
+    "benefits": "Builds spinal stability and balance; foundational movement control."\
+  \},\
+  \{\
+    "name": "Swiss-Ball Crunch",\
+    "description": "Crunch over stability ball for increased ab range of motion.",\
+    "body_focus": "core",\
+    "benefits": "Targets rectus abdominis with a joint-friendly arc for hypertrophy."\
+  \},\
+  \{\
+    "name": "Treadmill Walk/Run (Incline)",\
+    "description": "Steady walk or run; use incline to elevate heart rate at lower impact.",\
+    "body_focus": "cardio/conditioning",\
+    "benefits": "Builds aerobic base and VO\uc0\u8322 ; key for longevity and fat management."\
+  \},\
+  \{\
+    "name": "Stationary Bike / Spin Bike",\
+    "description": "Seated cycling at steady or interval efforts.",\
+    "body_focus": "cardio/conditioning",\
+    "benefits": "Low-impact endurance; scalable from recovery to brutal intervals."\
+  \},\
+  \{\
+    "name": "Rowing Machine (Erg)",\
+    "description": "Drive with legs, hinge and pull; smooth, full-body strokes.",\
+    "body_focus": "cardio/conditioning",\
+    "benefits": "Total-body aerobic power with minimal joint stress."\
+  \},\
+  \{\
+    "name": "Elliptical",\
+    "description": "Low-impact cyclic stride with optional arm action.",\
+    "body_focus": "cardio/conditioning",\
+    "benefits": "Joint-friendly cardio; great for warm-ups and Zone 2 volume."\
+  \},\
+  \{\
+    "name": "Stair Climber / Stepmill",\
+    "description": "Continuous step ascent at controlled cadence.",\
+    "body_focus": "cardio/conditioning",\
+    "benefits": "Smokes glutes and calves while boosting heart health and leg endurance."\
+  \},\
+  \{\
+    "name": "Bodyweight Deep Squat Hold",\
+    "description": "Sit into a deep squat and hold while breathing and keeping heels down.",\
+    "body_focus": "mobility/lower body",\
+    "benefits": "Improves hip, ankle, and thoracic mobility; better squat depth and knee comfort."\
+  \},\
+  \{\
+    "name": "Cat\'96Cow Stretch",\
+    "description": "Alternate spinal flexion and extension on all fours with controlled breath.",\
+    "body_focus": "mobility/core",\
+    "benefits": "Mobilizes spine and primes core for lifting; reduces stiffness."\
+  \},\
+  \{\
+    "name": "Cable Glute Kickback",\
+    "description": "With ankle strap, extend hip back against cable resistance.",\
+    "body_focus": "lower body",\
+    "benefits": "Isolates glutes for activation before compounds and added hypertrophy."\
+  \},\
+  \{\
+    "name": "Adductor/Abductor Machine",\
+    "description": "Seated hip adduction/abduction against pads to train inner/outer thighs.",\
+    "body_focus": "lower body",\
+    "benefits": "Strengthens hip stabilizers; supports knee tracking and change-of-direction."\
+  \},\
+  \{\
+    "name": "Incline Cable Fly",\
+    "description": "On incline bench, sweep cables in arcs to emphasize upper chest.",\
+    "body_focus": "upper push",\
+    "benefits": "Continuous tension chest finisher for clavicular fibers."\
+  \},\
+  \{\
+    "name": "Front Raise (Dumbbell or Plate)",\
+    "description": "Lift weight to shoulder height in sagittal plane with strict control.",\
+    "body_focus": "upper push",\
+    "benefits": "Builds anterior delts and shoulder elevation strength."\
+  \},\
+  \{\
+    "name": "Reverse Cable Curl",\
+    "description": "Overhand-grip cable curl focusing on wrist extensors and brachioradialis.",\
+    "body_focus": "upper pull",\
+    "benefits": "Balances forearm strength for healthier elbows and stronger grip."\
+  \},\
+  \{\
+    "name": "Cable Crunch (Kneeling)",\
+    "description": "Kneel and flex spine against cable resistance, ribs to hips.",\
+    "body_focus": "core",\
+    "benefits": "Loads abs safely for growth and bracing capacity."\
+  \},\
+  \{\
+    "name": "Hanging Windshield Wiper",\
+    "description": "From bar hang, raise legs and sweep side to side under control.",\
+    "body_focus": "core",\
+    "benefits": "Advanced rotational core strength and hip control for combat sports."\
+  \},\
+  \{\
+    "name": "Decline Sit-Up (Bench)",\
+    "description": "Controlled sit-ups on a decline bench; avoid pulling on neck.",\
+    "body_focus": "core",\
+    "benefits": "Higher-load trunk flexion to build ab strength and endurance."\
+  \},\
+  \{\
+    "name": "Sled Push/Pull",\
+    "description": "Drive a weighted sled forward or pull it back over turf.",\
+    "body_focus": "full body",\
+    "benefits": "Joint-friendly conditioning and leg strength with minimal eccentric strain."\
+  \},\
+  \{\
+    "name": "Farmer\'92s Carry (DBs or Trap Bar)",\
+    "description": "Walk with heavy implements at your sides while maintaining tall posture.",\
+    "body_focus": "full body",\
+    "benefits": "Builds grip, traps, core, and gait stability; exceptional real-world strength."\
+  \},\
+  \{\
+    "name": "Heavy Bag Striking Circuit",\
+    "description": "Three 1-minute rounds: jab\'96cross combos, alternating round kicks, then slips and footwork; 30s rest.",\
+    "body_focus": "cardio/conditioning",\
+    "benefits": "Fun, athletic conditioning that builds power, timing, and endurance while relieving stress."\
+  \}\
+]\
+}

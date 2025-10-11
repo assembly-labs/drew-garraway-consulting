@@ -1,0 +1,170 @@
+export interface Exercise {
+  id: string;
+  name: string;
+  category: 'Chest' | 'Back' | 'Legs' | 'Shoulders' | 'Arms' | 'Core' | 'Cardio';
+  muscleGroups: string[];
+  equipment: string[];
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  description: string;
+  formTips: string[];
+  defaultSets: number;
+  defaultReps: number;
+  restTime: number;
+  icon: string;
+}
+
+export const exerciseLibrary: Exercise[] = [
+  {
+    id: 'bench-press',
+    name: 'Barbell Bench Press',
+    category: 'Chest',
+    muscleGroups: ['Chest', 'Triceps', 'Shoulders'],
+    equipment: ['Barbell', 'Bench'],
+    difficulty: 'Intermediate',
+    description: 'Press a barbell from chest to lockout, keeping shoulder blades retracted and feet planted.',
+    formTips: [
+      'Keep feet planted firmly on ground',
+      'Retract shoulder blades and create arch',
+      'Lower bar to mid-chest, not neck',
+      'Drive through heels on press',
+    ],
+    defaultSets: 4,
+    defaultReps: 8,
+    restTime: 90,
+    icon: '🏋️',
+  },
+  {
+    id: 'squat',
+    name: 'Barbell Squat',
+    category: 'Legs',
+    muscleGroups: ['Quadriceps', 'Glutes', 'Hamstrings', 'Core'],
+    equipment: ['Barbell', 'Squat Rack'],
+    difficulty: 'Intermediate',
+    description: 'Squat with a barbell across your upper back, hips and knees bending to at least parallel before driving up.',
+    formTips: [
+      'Bar positioned on upper traps or rear delts',
+      'Feet shoulder-width, toes slightly out',
+      'Break at hips and knees simultaneously',
+      'Keep chest up and core braced',
+      'Drive through mid-foot',
+    ],
+    defaultSets: 4,
+    defaultReps: 6,
+    restTime: 120,
+    icon: '🦵',
+  },
+  {
+    id: 'deadlift',
+    name: 'Conventional Deadlift',
+    category: 'Back',
+    muscleGroups: ['Back', 'Glutes', 'Hamstrings', 'Core'],
+    equipment: ['Barbell'],
+    difficulty: 'Advanced',
+    description: 'Pull a barbell from floor to lockout with braced core and strong hip drive.',
+    formTips: [
+      'Set up with bar over mid-foot',
+      'Grip just outside legs',
+      'Pull slack out of bar before lift',
+      'Drive through heels, hips and shoulders rise together',
+    ],
+    defaultSets: 3,
+    defaultReps: 5,
+    restTime: 180,
+    icon: '💪',
+  },
+  {
+    id: 'overhead-press',
+    name: 'Barbell Overhead Press',
+    category: 'Shoulders',
+    muscleGroups: ['Shoulders', 'Triceps', 'Core'],
+    equipment: ['Barbell'],
+    difficulty: 'Intermediate',
+    description: 'Strict press a bar from shoulders to overhead with tight core and stacked ribs.',
+    formTips: [
+      'Bar starts on front delts',
+      'Press straight up, not forward',
+      'Squeeze glutes and brace core',
+      'Lock out fully overhead',
+    ],
+    defaultSets: 4,
+    defaultReps: 8,
+    restTime: 90,
+    icon: '💪',
+  },
+  {
+    id: 'pull-ups',
+    name: 'Pull-Ups',
+    category: 'Back',
+    muscleGroups: ['Lats', 'Biceps', 'Upper Back'],
+    equipment: ['Pull-up Bar'],
+    difficulty: 'Intermediate',
+    description: 'Use bodyweight to pull chin over bar with controlled scapular motion.',
+    formTips: [
+      'Start from dead hang',
+      'Pull elbows down and back',
+      'Get chin over bar',
+      'Control descent',
+    ],
+    defaultSets: 3,
+    defaultReps: 10,
+    restTime: 90,
+    icon: '🔺',
+  },
+  {
+    id: 'barbell-row',
+    name: 'Bent-Over Barbell Row',
+    category: 'Back',
+    muscleGroups: ['Mid Back', 'Lats', 'Biceps'],
+    equipment: ['Barbell'],
+    difficulty: 'Intermediate',
+    description: 'Hip-hinge and pull bar to mid-torso with tight lats and flat back.',
+    formTips: [
+      'Hip hinge to 45 degrees',
+      'Pull bar to lower chest/upper abs',
+      'Keep core tight',
+      'Squeeze shoulder blades at top',
+    ],
+    defaultSets: 4,
+    defaultReps: 8,
+    restTime: 90,
+    icon: '💪',
+  },
+  {
+    id: 'dumbbell-curl',
+    name: 'Dumbbell Curl',
+    category: 'Arms',
+    muscleGroups: ['Biceps'],
+    equipment: ['Dumbbells'],
+    difficulty: 'Beginner',
+    description: 'Curl dumbbells through full ROM while keeping elbows pinned.',
+    formTips: [
+      'Keep elbows at sides',
+      'Curl with control',
+      'Squeeze at top',
+      'Lower slowly',
+    ],
+    defaultSets: 3,
+    defaultReps: 12,
+    restTime: 60,
+    icon: '💪',
+  },
+  {
+    id: 'plank',
+    name: 'Front Plank',
+    category: 'Core',
+    muscleGroups: ['Core', 'Abs'],
+    equipment: ['Bodyweight'],
+    difficulty: 'Beginner',
+    description: 'Hold a rigid plank on forearms with braced core and glutes.',
+    formTips: [
+      'Elbows under shoulders',
+      'Body in straight line',
+      'Squeeze glutes',
+      'Don\'t let hips sag',
+    ],
+    defaultSets: 3,
+    defaultReps: 1,
+    restTime: 60,
+    icon: '🏃',
+  },
+];
