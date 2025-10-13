@@ -54,6 +54,11 @@ export const ActiveWorkoutScreen: React.FC<ActiveWorkoutScreenProps> = ({
   const [showTransition, setShowTransition] = useState(false);
   const [transitionText, setTransitionText] = useState('');
 
+  // Input state for current set
+  const [currentReps, setCurrentReps] = useState(exercises[0]?.defaultReps || 0);
+  const [currentWeight, setCurrentWeight] = useState(0);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
   // Initialize exercise tracking
   const [exerciseTracking, setExerciseTracking] = useState<ExerciseTracking[]>(
     exercises.map((ex) => ({
@@ -102,6 +107,10 @@ export const ActiveWorkoutScreen: React.FC<ActiveWorkoutScreenProps> = ({
   useEffect(() => {
     exerciseTimer.reset();
     exerciseTimer.start();
+    // Reset input values
+    setCurrentReps(currentExercise.defaultReps);
+    setCurrentWeight(0);
+    setHasUnsavedChanges(false);
   }, [currentExerciseIndex]);
 
   // Push message system
@@ -141,10 +150,28 @@ export const ActiveWorkoutScreen: React.FC<ActiveWorkoutScreenProps> = ({
     return () => clearInterval(interval);
   }, [isResting]);
 
+  const handleSaveInputs = () => {
+    // Save current reps and weight
+    setExerciseTracking((prev) => {
+      const updated = [...prev];
+      updated[currentExerciseIndex].sets[currentSet - 1].reps = currentReps;
+      updated[currentExerciseIndex].sets[currentSet - 1].weight = currentWeight;
+      return updated;
+    });
+    setHasUnsavedChanges(false);
+  };
+
   const handleSetComplete = () => {
+    // Save inputs if unsaved
+    if (hasUnsavedChanges) {
+      handleSaveInputs();
+    }
+
     // Mark set as completed
     setExerciseTracking((prev) => {
       const updated = [...prev];
+      updated[currentExerciseIndex].sets[currentSet - 1].reps = currentReps;
+      updated[currentExerciseIndex].sets[currentSet - 1].weight = currentWeight;
       updated[currentExerciseIndex].sets[currentSet - 1].completed = true;
       return updated;
     });
@@ -421,16 +448,73 @@ export const ActiveWorkoutScreen: React.FC<ActiveWorkoutScreenProps> = ({
         >
           Set {currentSet} of {currentExercise.defaultSets}
         </div>
-        <div
-          style={{
-            fontSize: 'clamp(28px, 8vw, 48px)',
-            fontWeight: 700,
-            color: colors.white,
-            marginBottom: spacing.m,
-          }}
-        >
-          {currentExercise.defaultReps} reps
+
+        {/* Input Fields */}
+        <div style={{ marginBottom: spacing.m, width: '100%', maxWidth: 'min(400px, 90vw)' }}>
+          <div style={{ marginBottom: spacing.s }}>
+            <label
+              style={{
+                display: 'block',
+                fontSize: 'clamp(12px, 3vw, 14px)',
+                color: colors.gray400,
+                marginBottom: spacing.xxs,
+              }}
+            >
+              REPS
+            </label>
+            <input
+              type="number"
+              value={currentReps}
+              onChange={(e) => {
+                setCurrentReps(Number(e.target.value));
+                setHasUnsavedChanges(true);
+              }}
+              style={{
+                width: '100%',
+                padding: spacing.s,
+                fontSize: 'clamp(24px, 6vw, 36px)',
+                fontWeight: 700,
+                color: colors.white,
+                backgroundColor: colors.gray800,
+                border: `2px solid ${hasUnsavedChanges ? colors.red : colors.gray700}`,
+                borderRadius: '8px',
+                textAlign: 'center',
+              }}
+            />
+          </div>
+          <div style={{ marginBottom: spacing.s }}>
+            <label
+              style={{
+                display: 'block',
+                fontSize: 'clamp(12px, 3vw, 14px)',
+                color: colors.gray400,
+                marginBottom: spacing.xxs,
+              }}
+            >
+              WEIGHT (LBS)
+            </label>
+            <input
+              type="number"
+              value={currentWeight}
+              onChange={(e) => {
+                setCurrentWeight(Number(e.target.value));
+                setHasUnsavedChanges(true);
+              }}
+              style={{
+                width: '100%',
+                padding: spacing.s,
+                fontSize: 'clamp(24px, 6vw, 36px)',
+                fontWeight: 700,
+                color: colors.white,
+                backgroundColor: colors.gray800,
+                border: `2px solid ${hasUnsavedChanges ? colors.red : colors.gray700}`,
+                borderRadius: '8px',
+                textAlign: 'center',
+              }}
+            />
+          </div>
         </div>
+
         <details
           style={{
             maxWidth: 'min(400px, 90vw)',
@@ -455,6 +539,11 @@ export const ActiveWorkoutScreen: React.FC<ActiveWorkoutScreenProps> = ({
 
       {/* Bottom Actions */}
       <div style={{ padding: spacing.m, width: '100%' }}>
+        {hasUnsavedChanges && (
+          <Button onClick={handleSaveInputs} size="large" fullWidth style={{ marginBottom: spacing.s }}>
+            SAVE
+          </Button>
+        )}
         <Button onClick={handleSetComplete} size="large" fullWidth>
           {isResting ? `REST ${restTimeRemaining}s` : 'DONE'}
         </Button>
@@ -473,6 +562,24 @@ export const ActiveWorkoutScreen: React.FC<ActiveWorkoutScreenProps> = ({
           }}
         >
           Skip Exercise
+        </button>
+        {/* DONE EARLY - Testing Button */}
+        <button
+          onClick={() => completeWorkout()}
+          style={{
+            width: '100%',
+            marginTop: spacing.s,
+            padding: spacing.m,
+            background: colors.red,
+            border: `2px solid ${colors.white}`,
+            borderRadius: '8px',
+            color: colors.white,
+            fontWeight: 700,
+            cursor: 'pointer',
+            fontSize: 'clamp(14px, 3.5vw, 16px)',
+          }}
+        >
+          🧪 DONE EARLY (Testing)
         </button>
       </div>
 

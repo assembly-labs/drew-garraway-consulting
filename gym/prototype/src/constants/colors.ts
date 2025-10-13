@@ -10,6 +10,7 @@ export const colors = {
 
   // Semantic
   success: '#16A34A',
+  green: '#16A34A',
   warning: '#F59E0B',
   error: '#DC2626',
   disabled: '#525252',

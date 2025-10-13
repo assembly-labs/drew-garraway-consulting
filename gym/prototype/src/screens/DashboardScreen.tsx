@@ -141,13 +141,16 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
             marginBottom: spacing.s,
           }}
         >
-          Choose Your Workout
+          Choose Your Workout Day
         </h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.xs, width: '100%' }}>
           {availablePlans.map((plan) => (
             <Card
               key={plan.id}
-              onClick={() => onPlanSelected(plan)}
+              onClick={() => {
+                onPlanSelected(plan);
+                onStartWorkout(plan);
+              }}
               borderColor={selectedPlan.id === plan.id ? colors.red : colors.gray800}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: spacing.xs }}>
