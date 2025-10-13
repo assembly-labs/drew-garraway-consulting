@@ -1,0 +1,166 @@
+{
+  "personas": {
+    "GOGGINS": {
+      "weight": 0.25,
+      "name": "David Goggins"
+    },
+    "JOCKO": {
+      "weight": 0.20,
+      "name": "Jocko Willink"
+    },
+    "ARNOLD": {
+      "weight": 0.12,
+      "name": "Arnold Schwarzenegger"
+    },
+    "STALLONE": {
+      "weight": 0.12,
+      "name": "Sylvester Stallone"
+    },
+    "DANAHER": {
+      "weight": 0.10,
+      "name": "John Danaher"
+    },
+    "BRUCE_LEE": {
+      "weight": 0.10,
+      "name": "Bruce Lee"
+    },
+    "RENZO": {
+      "weight": 0.10,
+      "name": "Renzo Gracie"
+    },
+    "RICKSON": {
+      "weight": 0.08,
+      "name": "Rickson Gracie"
+    },
+    "CHUCK": {
+      "weight": 0.03,
+      "name": "Chuck Norris"
+    }
+  },
+  "contexts": {
+    "WORKOUT_START": {
+      "JOCKO": "Time to go to work. Get after it.",
+      "GOGGINS": "Timer starts. No excuses from here. Stay hard.",
+      "ARNOLD": "Let's go! Time to get HUGE!",
+      "STALLONE": "One round at a time. Let's do this.",
+      "CHUCK": "Chuck Norris doesn't start workouts. Workouts start when Chuck arrives. You? Hit start.",
+      "BRUCE_LEE": "Empty your mind. Now fill it with iron.",
+      "RENZO": "Time to fight. Let's fucking go.",
+      "RICKSON": "Breathe. Focus. Begin."
+    },
+    "MID_WORKOUT": {
+      "JOCKO": "Keep moving. Don't stop.",
+      "GOGGINS": "Who's gonna carry the boats? You or someone else?",
+      "ARNOLD": "Come on! One more! You got this!",
+      "STALLONE": "It ain't over. Keep punching.",
+      "CHUCK": "Time doesn't wait for you. You're not Chuck Norris.",
+      "BRUCE_LEE": "The successful warrior is the average man with laser-like focus. Focus.",
+      "RENZO": "Push through. That's what warriors do.",
+      "RICKSON": "Breathe through it. Control your breath, control the moment."
+    },
+    "PAUSE_WARNING": {
+      "JOCKO": "Pausing. Weak.",
+      "GOGGINS": "Taking a break? Your competition isn't.",
+      "ARNOLD": "No breaks for champions. Get back to work!",
+      "STALLONE": "You wanna quit? That ain't you.",
+      "CHUCK": "Chuck Norris never pauses. Neither should you.",
+      "BRUCE_LEE": "The mind is the limit. Pause your mind, pause your body. Don't.",
+      "RENZO": "You tap in training, you tap in life. Don't tap.",
+      "RICKSON": "Discomfort is temporary. Breathe. Continue."
+    },
+    "PR_ACHIEVED": {
+      "JOCKO": "New PR. Good.",
+      "GOGGINS": "PR logged. Now beat it next week. Stay hard.",
+      "ARNOLD": "YES! That's a CHAMPION! New PR!",
+      "STALLONE": "That's what I'm talking about. You earned that.",
+      "CHUCK": "PR achieved. Chuck Norris nods with approval. Briefly.",
+      "BRUCE_LEE": "You just became more than you were. Good. Do it again.",
+      "RENZO": "That's a warrior's PR. Respect.",
+      "RICKSON": "New record. Breathe it in. Tomorrow, break it again."
+    },
+    "WORKOUT_COMPLETE": {
+      "JOCKO": "Done. Good work.",
+      "GOGGINS": "Finished. That's what we do. Stay hard.",
+      "ARNOLD": "COMPLETE! You are a MACHINE!",
+      "STALLONE": "You went the distance. Respect.",
+      "CHUCK": "Workout complete. Chuck Norris is aware. He's unimpressed, but aware.",
+      "BRUCE_LEE": "Knowing is not enough. You applied. That's the way.",
+      "RENZO": "Session done. That's how you train like a fighter.",
+      "RICKSON": "Complete. Breathe. Recover. Repeat tomorrow."
+    },
+    "WORKOUT_FAILED": {
+      "JOCKO": "Time's up. You failed. Learn from it.",
+      "GOGGINS": "Ran out of time. Plan better or move faster. This is on you.",
+      "ARNOLD": "You didn't finish! Next time, CRUSH IT!",
+      "STALLONE": "Got knocked out. Happens. Come back stronger tomorrow.",
+      "CHUCK": "Time beat you. Chuck Norris beat time in an arm wrestle. Be more like Chuck.",
+      "BRUCE_LEE": "Defeat is a state of mind. You're not defeated. Just unprepared. Fix it.",
+      "RENZO": "Ran out of time? You got submitted by the clock. Train harder.",
+      "RICKSON": "Incomplete. Analyze. Breathe. Adjust. Return stronger."
+    },
+    "FORM_REMINDER": {
+      "JOCKO": "Form first. Speed second. Execute properly.",
+      "GOGGINS": "Sloppy reps don't count. Do it right or do it again.",
+      "ARNOLD": "SQUEEZE! Control the weight! Form is EVERYTHING!",
+      "STALLONE": "Technique wins fights. Control the bar.",
+      "CHUCK": "Chuck's form is perfect because physics adjusts to Chuck. You? Fix your form.",
+      "BRUCE_LEE": "A punch is just a punch. Until it's perfect. Same with reps. Be perfect.",
+      "RENZO": "Bad technique gets you hurt. Control the weight or drop it.",
+      "RICKSON": "Invisible technique. Perfect position. Breathe and execute with precision."
+    },
+    "STAGNATION": {
+      "JOCKO": "3 weeks. Same weight. Unacceptable. Add weight.",
+      "GOGGINS": "Stuck at 185? Comfortable? That's fucking weak. Level up.",
+      "ARNOLD": "You're better than this! Add weight NOW!",
+      "STALLONE": "Nobody's gonna hit as hard as life. But you're hitting the same weight? Come on.",
+      "CHUCK": "Chuck Norris added 500 lbs in 3 weeks. You added zero. Fix it.",
+      "BRUCE_LEE": "Adaptation without progress is death. Add weight or die stagnant.",
+      "RENZO": "Same weight for 3 weeks? That's bullshit. Fight harder.",
+      "RICKSON": "Your body adapted weeks ago. The weight must evolve. Add more."
+    }
+  },
+  "contextWeights": {
+    "PAUSE_WARNING": {
+      "GOGGINS": 0.5,
+      "RENZO": 0.3,
+      "JOCKO": 0.2
+    },
+    "PR_ACHIEVED": {
+      "ARNOLD": 0.35,
+      "GOGGINS": 0.2,
+      "JOCKO": 0.15,
+      "STALLONE": 0.1,
+      "RENZO": 0.2
+    },
+    "MID_WORKOUT": {
+      "GOGGINS": 0.3,
+      "JOCKO": 0.25,
+      "RENZO": 0.15,
+      "ARNOLD": 0.12,
+      "BRUCE_LEE": 0.1,
+      "RICKSON": 0.05,
+      "CHUCK": 0.03
+    },
+    "WORKOUT_FAILED": {
+      "STALLONE": 0.25,
+      "GOGGINS": 0.2,
+      "RICKSON": 0.2,
+      "JOCKO": 0.1,
+      "BRUCE_LEE": 0.25
+    },
+    "FORM_REMINDER": {
+      "RICKSON": 0.25,
+      "BRUCE_LEE": 0.2,
+      "JOCKO": 0.15,
+      "RENZO": 0.05,
+      "ARNOLD": 0.35
+    },
+    "STAGNATION": {
+      "GOGGINS": 0.4,
+      "RENZO": 0.15,
+      "JOCKO": 0.1,
+      "BRUCE_LEE": 0.1,
+      "ARNOLD": 0.25
+    }
+  }
+}
