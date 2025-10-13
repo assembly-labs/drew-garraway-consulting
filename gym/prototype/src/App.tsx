@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { AppProvider, useAppContext } from './context/AppContext';
+import { InitialSelectionScreen } from './screens/InitialSelectionScreen';
 import { WelcomeScreen } from './screens/WelcomeScreen';
 import { ModeSelectionScreen } from './screens/ModeSelectionScreen';
 import { DashboardScreen } from './screens/DashboardScreen';
-import { ActiveWorkoutScreen } from './screens/ActiveWorkoutScreen';
+import { ActiveWorkoutScreenNew } from './screens/ActiveWorkoutScreenNew';
 import { WorkoutSummaryScreen } from './screens/WorkoutSummaryScreen';
 import { WorkoutHistoryScreen } from './screens/WorkoutHistoryScreen';
 import { PlanManagementScreen } from './screens/PlanManagementScreen';
@@ -15,6 +16,7 @@ import { WorkoutPlan } from './data/workoutPlans';
 import { WorkoutSession, storageService } from './services/StorageService';
 
 type Screen =
+  | 'initial-selection'
   | 'welcome'
   | 'mode-selection'
   | 'dashboard'
@@ -41,7 +43,7 @@ function AppContent() {
     isLoading,
   } = useAppContext();
 
-  const [currentScreen, setCurrentScreen] = useState<Screen>('welcome');
+  const [currentScreen, setCurrentScreen] = useState<Screen>('initial-selection');
   const [selectedPlan, setSelectedPlan] = useState<WorkoutPlan | null>(null);
   const [editingPlan, setEditingPlan] = useState<WorkoutPlan | null>(null);
   const [currentWorkout, setCurrentWorkout] = useState<{
@@ -157,6 +159,13 @@ function AppContent() {
   // Render current screen
   return (
     <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+      {currentScreen === 'initial-selection' && (
+        <InitialSelectionScreen
+          onViewHistory={() => setCurrentScreen('history')}
+          onStartWorkout={() => setCurrentScreen('welcome')}
+        />
+      )}
+
       {currentScreen === 'welcome' && (
         <WelcomeScreen onContinue={() => setCurrentScreen('mode-selection')} />
       )}
@@ -188,7 +197,7 @@ function AppContent() {
       )}
 
       {currentScreen === 'workout' && currentWorkout && (
-        <ActiveWorkoutScreen
+        <ActiveWorkoutScreenNew
           planId={currentWorkout.planId}
           planName={currentWorkout.planName}
           exercises={currentWorkout.exercises}
@@ -208,7 +217,7 @@ function AppContent() {
       {currentScreen === 'history' && (
         <WorkoutHistoryScreen
           workoutHistory={workoutHistory}
-          onBack={() => setCurrentScreen('dashboard')}
+          onBack={() => setCurrentScreen('initial-selection')}
         />
       )}
 
