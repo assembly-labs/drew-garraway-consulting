@@ -462,7 +462,7 @@
                     const offsetY = star.y - scrollPos + (scrollPos * parallaxFactor);
 
                     if (offsetY >= -5 && offsetY <= canvas.height + 5) {
-                        const fadeMultiplier = 0.3 + (scrollProgress * 0.7);
+                        const fadeMultiplier = 1.0 - (scrollProgress * 0.7);
                         const finalOpacity = star.baseOpacity * fadeMultiplier;
 
                         ctx.fillStyle = star.color;
@@ -501,9 +501,9 @@
                         layer1.style.transform = `translate3d(${scrollPos * 0.15}px, ${scrollPos * 0.15}px, 0)`;
                         layer2.style.transform = `translate3d(${scrollPos * 0.08}px, ${scrollPos * 0.08}px, 0)`;
 
-                        // Progressive opacity for SVG layers (dim at start, bright at end)
-                        layer1.style.opacity = 0.3 + (scrollProgress * 0.7);
-                        layer2.style.opacity = 0.35 + (scrollProgress * 0.65);
+                        // Progressive opacity for SVG layers (bright at start, dim at end)
+                        layer1.style.opacity = 1.0 - (scrollProgress * 0.7);
+                        layer2.style.opacity = 1.0 - (scrollProgress * 0.65);
 
                         ticking = false;
                     });
