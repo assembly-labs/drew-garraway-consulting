@@ -1,0 +1,302 @@
+[
+  {
+    "id": "ex-001",
+    "name": "Dumbbell Goblet Squat",
+    "category": "Legs",
+    "description": "Hold dumbbell at chest height, squat to parallel depth while maintaining upright torso.",
+    "sets": 4,
+    "reps": "8-12",
+    "equipment": "Dumbbell",
+    "dayTypes": ["MONDAY", "FRIDAY"]
+  },
+  {
+    "id": "ex-002",
+    "name": "Trap Bar Deadlift",
+    "category": "Legs",
+    "description": "Stand inside hexagonal bar, grip handles, lift with neutral grip while maintaining neutral spine.",
+    "sets": 4,
+    "reps": "6-8",
+    "equipment": "Trap Bar",
+    "dayTypes": ["MONDAY", "WEEKEND"]
+  },
+  {
+    "id": "ex-003",
+    "name": "Romanian Deadlift (Dumbbell)",
+    "category": "Posterior Chain",
+    "description": "Hip hinge with slight knee bend, lower dumbbells to mid-shin with controlled eccentric (3-second lowering).",
+    "sets": 3,
+    "reps": "10-12",
+    "equipment": "Dumbbells",
+    "dayTypes": ["FRIDAY", "WEEKEND"]
+  },
+  {
+    "id": "ex-004",
+    "name": "Single-Leg Romanian Deadlift",
+    "category": "Posterior Chain",
+    "description": "Stand on one leg, hinge at hip while holding dumbbells, extend opposite leg behind for balance.",
+    "sets": 3,
+    "reps": "10-12",
+    "equipment": "Dumbbells",
+    "dayTypes": ["WEEKEND"]
+  },
+  {
+    "id": "ex-005",
+    "name": "Bulgarian Split Squat",
+    "category": "Legs",
+    "description": "Rear foot elevated on bench, front leg performs squat motion with dumbbells at sides.",
+    "sets": 3,
+    "reps": "10-12",
+    "equipment": "Dumbbells, Bench",
+    "dayTypes": ["FRIDAY", "WEEKEND"]
+  },
+  {
+    "id": "ex-006",
+    "name": "Reverse Lunge",
+    "category": "Legs",
+    "description": "Step backward into lunge position, lower back knee toward ground, return to standing.",
+    "sets": 3,
+    "reps": "10-12",
+    "equipment": "Dumbbells",
+    "dayTypes": ["WEEKEND"]
+  },
+  {
+    "id": "ex-007",
+    "name": "Walking Lunge",
+    "category": "Legs",
+    "description": "Alternating forward lunges covering distance, maintaining upright torso throughout.",
+    "sets": 3,
+    "reps": "20 total",
+    "equipment": "Dumbbells",
+    "dayTypes": ["WEEKEND"]
+  },
+  {
+    "id": "ex-008",
+    "name": "Step-Ups",
+    "category": "Legs",
+    "description": "Step onto elevated surface, drive through heel, fully extend hip at top.",
+    "sets": 3,
+    "reps": "10-12",
+    "equipment": "Box/Bench, Dumbbells",
+    "dayTypes": ["WEEKEND"]
+  },
+  {
+    "id": "ex-009",
+    "name": "Glute Bridge",
+    "category": "Glutes",
+    "description": "Lie on back with knees bent, drive hips upward by squeezing glutes, hold briefly at top.",
+    "sets": 3,
+    "reps": "12-15",
+    "equipment": "Bodyweight",
+    "dayTypes": ["WEEKEND"]
+  },
+  {
+    "id": "ex-010",
+    "name": "Single-Leg Glute Bridge",
+    "category": "Glutes",
+    "description": "Bridge variation performed on one leg, opposite leg extended straight.",
+    "sets": 3,
+    "reps": "10-12",
+    "equipment": "Bodyweight",
+    "dayTypes": ["WEEKEND"]
+  },
+  {
+    "id": "ex-011",
+    "name": "Hip Thrust",
+    "category": "Glutes",
+    "description": "Upper back on bench, drive hips upward with weight across hips, squeeze glutes at top.",
+    "sets": 4,
+    "reps": "10-12",
+    "equipment": "Bench, Barbell or Dumbbell",
+    "dayTypes": ["MONDAY", "FRIDAY"]
+  },
+  {
+    "id": "ex-012",
+    "name": "Dumbbell Single-Arm Row",
+    "category": "Back",
+    "description": "One hand on bench for support, row dumbbell with opposite arm, pulling elbow back and up.",
+    "sets": 3,
+    "reps": "10-12",
+    "equipment": "Dumbbell, Bench",
+    "dayTypes": ["MONDAY", "FRIDAY"]
+  },
+  {
+    "id": "ex-013",
+    "name": "Chest-Supported Dumbbell Row",
+    "category": "Back",
+    "description": "Lie prone on incline bench, row both dumbbells simultaneously toward hips.",
+    "sets": 3,
+    "reps": "10-12",
+    "equipment": "Dumbbells, Incline Bench",
+    "dayTypes": ["FRIDAY"]
+  },
+  {
+    "id": "ex-014",
+    "name": "Bent-Over Dumbbell Row",
+    "category": "Back",
+    "description": "Hip hinge position, row both dumbbells simultaneously toward lower ribs/hips.",
+    "sets": 4,
+    "reps": "8-10",
+    "equipment": "Dumbbells",
+    "dayTypes": ["MONDAY", "WEEKEND"]
+  },
+  {
+    "id": "ex-015",
+    "name": "Inverted Row",
+    "category": "Back",
+    "description": "Hang from bar at waist height with body straight, pull chest to bar.",
+    "sets": 3,
+    "reps": "8-12",
+    "equipment": "Bar",
+    "dayTypes": ["WEEKEND"]
+  },
+  {
+    "id": "ex-016",
+    "name": "Seated Cable Row",
+    "category": "Back",
+    "description": "Seated position, pull cable handle to torso while maintaining upright posture.",
+    "sets": 3,
+    "reps": "10-12",
+    "equipment": "Cable Machine",
+    "dayTypes": ["FRIDAY"]
+  },
+  {
+    "id": "ex-017",
+    "name": "Pull-Ups or Lat Pulldown",
+    "category": "Back",
+    "description": "Pull-ups: hang from bar, pull body until chin over bar. Lat pulldown: pull bar to upper chest.",
+    "sets": 4,
+    "reps": "6-10",
+    "equipment": "Pull-Up Bar or Machine",
+    "dayTypes": ["MONDAY", "FRIDAY"]
+  },
+  {
+    "id": "ex-018",
+    "name": "Face Pulls",
+    "category": "Back",
+    "description": "Cable at face height, pull rope toward face while externally rotating shoulders.",
+    "sets": 3,
+    "reps": "15-20",
+    "equipment": "Cable Machine",
+    "dayTypes": ["MONDAY", "FRIDAY", "WEEKEND"]
+  },
+  {
+    "id": "ex-019",
+    "name": "Pallof Press",
+    "category": "Core",
+    "description": "Cable at chest height, press out while resisting rotation, maintain squared shoulders.",
+    "sets": 3,
+    "reps": "10-12",
+    "equipment": "Cable or Band",
+    "dayTypes": ["FRIDAY", "WEEKEND"]
+  },
+  {
+    "id": "ex-020",
+    "name": "Dead Bug",
+    "category": "Core",
+    "description": "Lie on back, opposite arm and leg extend while maintaining neutral spine.",
+    "sets": 3,
+    "reps": "10-12",
+    "equipment": "Bodyweight",
+    "dayTypes": ["WEEKEND"]
+  },
+  {
+    "id": "ex-021",
+    "name": "RKC Plank",
+    "category": "Core",
+    "description": "Standard plank with maximal total body tension - pull elbows closer, squeeze glutes maximally.",
+    "sets": 3,
+    "reps": "20-30 sec",
+    "equipment": "Bodyweight",
+    "dayTypes": ["MONDAY", "WEEKEND"]
+  },
+  {
+    "id": "ex-022",
+    "name": "Side Plank",
+    "category": "Core",
+    "description": "On side, hold body straight from feet to head, supported by forearm and feet.",
+    "sets": 3,
+    "reps": "30-45 sec",
+    "equipment": "Bodyweight",
+    "dayTypes": ["FRIDAY", "WEEKEND"]
+  },
+  {
+    "id": "ex-023",
+    "name": "Ab Wheel Rollout",
+    "category": "Core",
+    "description": "Kneel, roll wheel forward maintaining neutral spine, return to start position.",
+    "sets": 3,
+    "reps": "6-10",
+    "equipment": "Ab Wheel",
+    "dayTypes": ["MONDAY", "FRIDAY"]
+  },
+  {
+    "id": "ex-024",
+    "name": "Hanging Knee Raise",
+    "category": "Core",
+    "description": "Hang from bar, raise knees to chest with control, lower with control.",
+    "sets": 3,
+    "reps": "8-12",
+    "equipment": "Pull-Up Bar",
+    "dayTypes": ["FRIDAY"]
+  },
+  {
+    "id": "ex-025",
+    "name": "Standing Dumbbell Shoulder Press",
+    "category": "Shoulders",
+    "description": "Press dumbbells overhead while standing, maintaining neutral spine and engaged core.",
+    "sets": 4,
+    "reps": "8-10",
+    "equipment": "Dumbbells",
+    "dayTypes": ["MONDAY", "FRIDAY"]
+  },
+  {
+    "id": "ex-026",
+    "name": "Landmine Press",
+    "category": "Shoulders",
+    "description": "Barbell in corner or landmine, press at angle with one or two hands.",
+    "sets": 3,
+    "reps": "10-12",
+    "equipment": "Barbell",
+    "dayTypes": ["FRIDAY"]
+  },
+  {
+    "id": "ex-027",
+    "name": "Standard Push-Up",
+    "category": "Chest",
+    "description": "Hands shoulder-width, lower chest to ground maintaining straight body, push back up.",
+    "sets": 3,
+    "reps": "10-20",
+    "equipment": "Bodyweight",
+    "dayTypes": ["WEEKEND"]
+  },
+  {
+    "id": "ex-028",
+    "name": "Incline Push-Up",
+    "category": "Chest",
+    "description": "Hands on elevated surface, perform push-up with reduced load.",
+    "sets": 3,
+    "reps": "12-20",
+    "equipment": "Elevated Surface",
+    "dayTypes": ["WEEKEND"]
+  },
+  {
+    "id": "ex-029",
+    "name": "Pike Push-Up",
+    "category": "Shoulders",
+    "description": "Hips high in inverted V position, perform push-up emphasizing shoulders.",
+    "sets": 3,
+    "reps": "8-12",
+    "equipment": "Bodyweight",
+    "dayTypes": ["WEEKEND"]
+  },
+  {
+    "id": "ex-030",
+    "name": "External Rotation",
+    "category": "Shoulders",
+    "description": "Elbow at side bent 90 degrees, rotate forearm outward against resistance.",
+    "sets": 3,
+    "reps": "15-20",
+    "equipment": "Band or Cable",
+    "dayTypes": ["MONDAY", "FRIDAY", "WEEKEND"]
+  }
+]
