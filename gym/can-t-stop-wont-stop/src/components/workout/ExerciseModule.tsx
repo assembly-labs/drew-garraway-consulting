@@ -198,26 +198,26 @@ const CompactSetRow: React.FC<CompactSetRowProps> = ({
   showToast,
 }) => {
   return (
-    <div className={`flex items-center gap-2 p-2 rounded-none border transition-all ${
+    <div className={`flex items-center gap-3 p-3 rounded-none border-2 transition-all ${
       set.completed
         ? 'bg-semantic-success bg-opacity-10 border-semantic-success'
         : 'bg-primary-black border-gray-700'
     }`}>
       {/* Set Number with Checkmark */}
-      <div className="flex-shrink-0 w-8">
+      <div className="flex-shrink-0 w-10">
         {set.completed ? (
-          <div className="w-8 h-8 rounded-full bg-semantic-success flex items-center justify-center">
-            <span className="text-white font-bold text-sm">✓</span>
+          <div className="w-10 h-10 rounded-full bg-semantic-success flex items-center justify-center">
+            <span className="text-white font-bold text-base">✓</span>
           </div>
         ) : (
-          <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
-            <span className="text-gray-400 font-bold text-sm">{setNumber}</span>
+          <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">
+            <span className="text-gray-400 font-bold text-base">{setNumber}</span>
           </div>
         )}
       </div>
 
-      {/* Reps Input - Compact */}
-      <div className="flex-1 min-w-0">
+      {/* Reps Input - Better sizing */}
+      <div className="flex-1 min-w-[80px]">
         <Input
           inputType="reps"
           value={set.reps}
@@ -225,34 +225,34 @@ const CompactSetRow: React.FC<CompactSetRowProps> = ({
           showEasterEgg={showToast}
           disabled={set.completed}
           placeholder="Reps"
-          className="text-center py-1 text-sm h-10"
+          className="text-center py-2 text-base h-12 font-semibold"
         />
       </div>
 
-      {/* "reps @" label */}
-      <span className="text-xs text-gray-500 flex-shrink-0">reps @</span>
+      {/* "reps @" label - more prominent */}
+      <span className="text-sm text-gray-400 font-medium flex-shrink-0">@</span>
 
-      {/* Weight Input - Compact */}
-      <div className="flex-1 min-w-0">
+      {/* Weight Input - Better sizing */}
+      <div className="flex-1 min-w-[90px]">
         <Input
           inputType="weight"
           value={set.weight}
           onValidatedChange={onWeightChange}
           disabled={set.completed}
           placeholder="lbs"
-          className="text-center py-1 text-sm h-10"
+          className="text-center py-2 text-base h-12 font-semibold"
         />
       </div>
 
-      {/* "lbs" label */}
-      <span className="text-xs text-gray-500 flex-shrink-0">lbs</span>
+      {/* "lbs" label - more prominent */}
+      <span className="text-sm text-gray-400 font-medium flex-shrink-0">lbs</span>
 
-      {/* Complete Button - Compact */}
+      {/* Complete Button - Better touch target */}
       <div className="flex-shrink-0">
         <button
           onClick={onComplete}
           disabled={set.completed}
-          className={`min-w-[60px] h-10 rounded-none font-bold text-xs transition-colors ${
+          className={`min-w-[70px] h-12 rounded-none font-bold text-sm transition-colors ${
             set.completed
               ? 'bg-semantic-success text-white cursor-not-allowed'
               : 'bg-primary-red hover:bg-primary-red-dark text-white active:scale-95'
