@@ -1,0 +1,39 @@
+# Netlify Configuration for Can't Stop Won't Stop Workout App
+# This app lives in: gym/can-t-stop-wont-stop/
+
+[build]
+  # Base directory where the app lives
+  base = "gym/can-t-stop-wont-stop"
+
+  # Build command to run
+  command = "npm run build"
+
+  # Directory where built files are output (relative to base)
+  publish = "dist"
+
+  # Node version to use
+  [build.environment]
+    NODE_VERSION = "20"
+
+# SPA (Single Page Application) Redirect Rule
+# This ensures React Router works properly on direct URL access
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Optional: Set cache headers for better performance
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
