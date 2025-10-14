@@ -151,6 +151,7 @@ export function PostWorkoutEdit() {
           message={personaMsg.message}
           name={personaMsg.name}
           onDismiss={() => setPersonaMsg(null)}
+          duration={2000}
         />
       )}
     </div>
