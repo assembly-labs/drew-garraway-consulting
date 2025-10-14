@@ -97,10 +97,14 @@ const Input: React.FC<InputProps> = ({
     }
   };
 
-  // Determine HTML input type
+  // Determine HTML input type and inputmode
   let htmlInputType = inputType;
+  let inputMode: 'text' | 'decimal' | 'numeric' | undefined = undefined;
+
   if (inputType === 'reps' || inputType === 'weight') {
-    htmlInputType = 'number';
+    // Use 'text' type to avoid browser number spinners, but numeric inputmode for mobile keyboard
+    htmlInputType = 'text';
+    inputMode = 'numeric';
   }
 
   // Determine CSS classes
@@ -118,6 +122,7 @@ const Input: React.FC<InputProps> = ({
       )}
       <input
         type={htmlInputType}
+        inputMode={inputMode}
         value={localValue}
         onChange={handleChange}
         onBlur={handleBlur}

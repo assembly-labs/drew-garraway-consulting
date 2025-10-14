@@ -86,6 +86,17 @@
   /* Number Input for Reps/Weight */
   .input-number {
     @apply text-center text-xl font-bold bg-primary-black-secondary border-2 border-gray-700 rounded-small text-white focus:outline-none focus:border-primary-red focus:ring-2 focus:ring-primary-red focus:ring-opacity-50 min-h-[48px] transition-all;
+    /* Improve mobile touch target and input behavior */
+    touch-action: manipulation;
+    -webkit-user-select: text;
+    user-select: text;
+    font-size: 18px; /* Prevents iOS zoom on focus */
+  }
+
+  .input-number:focus {
+    @apply border-primary-red ring-2 ring-primary-red;
+    /* Ensure input is clearly focused */
+    z-index: 10;
   }
 
   .input-number:disabled {

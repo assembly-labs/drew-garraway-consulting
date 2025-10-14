@@ -211,9 +211,9 @@ const ActiveWorkout = () => {
 
       {/* Persona Message */}
       {personaMessage && (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 animate-fade-in-out px-4 w-full max-w-lg">
-          <div className="bg-primary-red bg-opacity-90 border-4 border-white rounded-none p-8 shadow-red-glow-pulse">
-            <p className="text-white text-4xl font-bold text-center leading-tight">
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-6 pointer-events-none animate-fade-in-out">
+          <div className="bg-primary-red border-4 border-white rounded-none p-8 shadow-2xl pointer-events-auto max-w-lg w-full">
+            <p className="text-white text-3xl sm:text-4xl font-bold text-center leading-tight">
               {personaMessage.message}
             </p>
           </div>
