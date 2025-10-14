@@ -42,34 +42,42 @@ export function SetInput({ setNumber, reps, weight, onUpdate, onEasterEgg }) {
   };
 
   return (
-    <div className="flex items-center gap-3">
-      <span className="text-gray-400 font-medium w-12">Set {setNumber}</span>
-      <div className="flex-1">
-        <Input
-          type="number"
-          value={localReps}
-          onChange={(e) => setLocalReps(e.target.value)}
-          onBlur={handleRepsBlur}
-          placeholder="Reps"
-          min={0}
-          max={69}
-          error={repsError}
-        />
+    <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-gray-300 font-bold text-lg">Set {setNumber}</span>
       </div>
-      <span className="text-gray-500">×</span>
-      <div className="flex-1">
-        <Input
-          type="number"
-          value={localWeight}
-          onChange={(e) => setLocalWeight(e.target.value)}
-          onBlur={handleWeightBlur}
-          placeholder="Weight"
-          min={0}
-          max={9999}
-          error={weightError}
-        />
+
+      <div className="grid grid-cols-2 gap-3">
+        <div>
+          <label className="block text-gray-400 text-xs mb-1">Reps</label>
+          <Input
+            type="number"
+            value={localReps}
+            onChange={(e) => setLocalReps(e.target.value)}
+            onBlur={handleRepsBlur}
+            placeholder="0"
+            min={0}
+            max={69}
+            error={repsError}
+            className="text-center text-xl font-bold"
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-400 text-xs mb-1">Weight (lbs)</label>
+          <Input
+            type="number"
+            value={localWeight}
+            onChange={(e) => setLocalWeight(e.target.value)}
+            onBlur={handleWeightBlur}
+            placeholder="0"
+            min={0}
+            max={9999}
+            error={weightError}
+            className="text-center text-xl font-bold"
+          />
+        </div>
       </div>
-      <span className="text-gray-400 text-sm">lbs</span>
     </div>
   );
 }
