@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Global Reset and Base Styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #0A0A0A;
+    color: #FFFFFF;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Touch targets - minimum 44x44px for accessibility */
+  button,
+  a,
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Remove default button styles */
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  /* Input defaults */
+  input,
+  textarea {
+    font-family: inherit;
+    color: inherit;
+  }
+
+  /* Disable text selection on buttons for better mobile UX */
+  button {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+@layer components {
+  /* Primary Button */
+  .btn-primary {
+    @apply bg-primary-red hover:bg-primary-red-dark text-white font-bold py-4 px-8 rounded-none text-lg transition-colors min-h-[56px] w-full;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .btn-primary:active {
+    @apply scale-[0.98] opacity-90;
+  }
+
+  .btn-primary:disabled {
+    @apply bg-gray-600 opacity-50 cursor-not-allowed;
+  }
+
+  /* Secondary Button */
+  .btn-secondary {
+    @apply bg-transparent border-2 border-white text-white font-bold py-3 px-6 rounded-none text-lg transition-colors min-h-[56px] w-full;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-white text-primary-black;
+  }
+
+  /* Input Field */
+  .input-field {
+    @apply w-full px-4 py-3 text-lg border-2 border-gray-700 bg-primary-black-secondary rounded-small text-white placeholder-gray-500 focus:border-primary-red focus:outline-none transition-colors;
+  }
+
+  /* Number Input for Reps/Weight */
+  .input-number {
+    @apply text-center text-4xl font-bold bg-primary-black-secondary border border-gray-700 rounded-small text-white focus:outline-none focus:border-primary-red min-h-[56px];
+  }
+
+  /* Card Styles */
+  .card {
+    @apply bg-primary-black-secondary rounded-none border border-gray-800 shadow-level1;
+  }
+
+  /* Timer Display */
+  .timer-display {
+    @apply text-7xl font-mono font-bold text-center;
+  }
+
+  /* Exercise Card */
+  .exercise-card {
+    @apply bg-primary-black-secondary rounded-none p-4 border-2 border-gray-800 hover:border-primary-red cursor-pointer transition-colors;
+  }
+
+  .exercise-card-expanded {
+    @apply bg-primary-black-secondary rounded-none p-6 border-2 border-primary-red shadow-level2;
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  .animate-flash {
+    animation: flash 0.5s ease-in-out infinite;
+  }
+
+  @keyframes flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes progressBar {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+
+  @keyframes slideOut {
+    to { transform: translateX(150%); opacity: 0; }
+  }
+
+  .animate-slide-out-right {
+    animation: slideOut 0.3s ease-in-out forwards;
+  }
+
+  /* Haptic feedback simulation (visual) */
+  .haptic-tap {
+    @apply active:scale-95 transition-transform duration-100;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Safe area padding for mobile devices */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Text shadow for display text */
+  .text-shadow-display {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  }
+}
