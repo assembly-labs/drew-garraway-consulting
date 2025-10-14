@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { SetInput } from './SetInput';
 
 export function ExerciseModule({ exercise, onUpdateSet, onEasterEgg, isPR = false }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const completedSets = exercise.sets.filter(s => s.reps > 0 || s.weight > 0).length;
   const totalSets = exercise.sets.length;
