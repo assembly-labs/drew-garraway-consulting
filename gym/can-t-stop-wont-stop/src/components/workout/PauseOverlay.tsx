@@ -31,7 +31,7 @@ const PauseOverlay: React.FC<PauseOverlayProps> = ({ isVisible, onDismiss }) => 
 
       return () => clearTimeout(timer);
     }
-  }, [isVisible, onDismiss]);
+  }, [isVisible]);
 
   if (!isVisible) return null;
 

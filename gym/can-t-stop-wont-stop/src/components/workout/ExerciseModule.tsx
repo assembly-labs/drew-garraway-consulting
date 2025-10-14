@@ -12,12 +12,12 @@ interface ExerciseModuleProps {
 }
 
 /**
- * ExerciseModule Component
+ * ExerciseModule Component - Always Expanded Mini-Cards (Option A)
  *
  * Features:
- * - Collapsible exercise cards
- * - Display: exercise name, set progress, current reps/weight
- * - Tap to expand
+ * - Always shows all sets (no collapse/expand)
+ * - Compact vertical layout for efficient workout flow
+ * - Swipe-to-dismiss when all sets complete
  * - Fixed number of sets (user cannot change)
  * - Editable reps (0-69) and weight (0-9999)
  * - Real-time auto-save
@@ -30,7 +30,6 @@ const ExerciseModule: React.FC<ExerciseModuleProps> = ({
   onDismiss,
   showToast,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchCurrent, setTouchCurrent] = useState<number | null>(null);
   const [isSwiping, setIsSwiping] = useState(false);
@@ -39,13 +38,7 @@ const ExerciseModule: React.FC<ExerciseModuleProps> = ({
   const totalSets = exercise.sets.length;
   const isComplete = completedSets === totalSets;
 
-  const toggleExpand = () => {
-    if (!isSwiping) {
-      setIsExpanded(!isExpanded);
-    }
-  };
-
-  // Swipe handlers
+  // Swipe handlers (only active when exercise is complete)
   const handleTouchStart = (e: React.TouchEvent) => {
     if (!isComplete || !onDismiss) return;
     setTouchStart(e.touches[0].clientX);
@@ -107,127 +100,71 @@ const ExerciseModule: React.FC<ExerciseModuleProps> = ({
     onCompleteSet(setIndex);
   };
 
-  if (!isExpanded) {
-    // Find next incomplete set
-    const nextSet = exercise.sets.find(set => !set.completed);
-    const nextSetNumber = nextSet ? nextSet.setNumber : totalSets;
-
-    // Truncate description to 60 chars
-    const descriptionPreview = exercise.description
-      ? exercise.description.length > 60
-        ? exercise.description.substring(0, 60) + '...'
-        : exercise.description
-      : null;
-
-    // Collapsed View
-    return (
-      <div
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        style={{
-          transform: getSwipeTransform(),
-          transition: isSwiping ? 'none' : 'transform 0.3s ease-out',
-        }}
-      >
-        <button
-          onClick={toggleExpand}
-          className={`w-full text-left py-5 px-6 ${
-            isComplete
-              ? 'exercise-card border-semantic-success bg-semantic-success bg-opacity-10'
-              : 'exercise-card'
-          }`}
-        >
-        <div className="flex items-center justify-between">
-          <div className="flex-1">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-primary-red font-bold text-sm">
-                #{exerciseNumber}
-              </span>
-              <h3 className="text-white font-bold text-lg">
-                {exercise.exerciseName}
-              </h3>
-            </div>
-
-            {/* Description Preview */}
-            {descriptionPreview && (
-              <p className="text-gray-400 text-xs mb-3 leading-relaxed">
-                {descriptionPreview}
-              </p>
-            )}
-
-            {/* Current Progress */}
-            <div className="flex items-center gap-3 text-sm mb-2">
-              <span className="text-gray-400">
-                Sets: {completedSets}/{totalSets}
-              </span>
-              <span className="text-gray-600">•</span>
-              <span className="text-gray-400">{exercise.category}</span>
-              {exercise.equipment && (
-                <>
-                  <span className="text-gray-600">•</span>
-                  <span className="text-gray-400">{exercise.equipment}</span>
-                </>
-              )}
-            </div>
-
-            {/* Next Set Info or Complete Indicator */}
-            {isComplete ? (
-              <div className="text-xs text-semantic-success font-bold flex items-center gap-2">
-                <span className="text-lg">✓</span> COMPLETE - Swipe to dismiss
-              </div>
-            ) : nextSet ? (
-              <div className="text-xs text-primary-red font-semibold">
-                Next: Set {nextSetNumber} • {nextSet.reps} reps @ {nextSet.weight} lbs
-              </div>
-            ) : null}
-          </div>
-          <div className={`text-2xl ml-4 ${isComplete ? 'text-semantic-success' : 'text-gray-400'}`}>
-            {isComplete ? '✓' : '▼'}
-          </div>
-        </div>
-      </button>
-      </div>
-    );
-  }
-
-  // Expanded View
   return (
-    <div className="exercise-card-expanded w-full">
+    <div
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      style={{
+        transform: getSwipeTransform(),
+        transition: isSwiping ? 'none' : 'transform 0.3s ease-out',
+      }}
+      className={`w-full rounded-none p-5 border-2 ${
+        isComplete
+          ? 'border-semantic-success bg-semantic-success bg-opacity-10'
+          : 'border-gray-800 bg-primary-black-secondary'
+      }`}
+    >
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-3">
         <div className="flex-1">
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex items-center gap-2 mb-1">
             <span className="text-primary-red font-bold text-sm">
               #{exerciseNumber}
             </span>
-            <h3 className="text-white font-bold text-xl">
+            <h3 className="text-white font-bold text-lg">
               {exercise.exerciseName}
             </h3>
+            <span className={`ml-auto text-sm font-semibold ${
+              isComplete ? 'text-semantic-success' : 'text-gray-400'
+            }`}>
+              {completedSets}/{totalSets} sets
+            </span>
           </div>
-          <div className="text-sm text-gray-400">
-            {completedSets}/{totalSets} sets completed
+          <div className="flex items-center gap-2 text-xs text-gray-400">
+            <span>{exercise.category}</span>
+            {exercise.equipment && (
+              <>
+                <span>•</span>
+                <span>{exercise.equipment}</span>
+              </>
+            )}
           </div>
         </div>
-        <button
-          onClick={toggleExpand}
-          className="text-gray-400 hover:text-white text-2xl min-w-[44px] min-h-[44px] flex items-center justify-center"
-        >
-          ▲
-        </button>
       </div>
 
       {/* Exercise Description */}
       {exercise.description && (
-        <div className="mb-4 p-3 bg-primary-black border border-gray-700 rounded-none">
-          <p className="text-sm text-gray-300">{exercise.description}</p>
+        <div className="mb-3 pb-3 border-b border-gray-700">
+          <p className="text-xs text-gray-400 leading-relaxed">
+            {exercise.description}
+          </p>
         </div>
       )}
 
-      {/* Sets */}
-      <div className="space-y-3">
+      {/* Complete Indicator */}
+      {isComplete && (
+        <div className="mb-3 p-2 bg-semantic-success bg-opacity-20 border border-semantic-success rounded-none">
+          <p className="text-xs text-semantic-success font-bold text-center flex items-center justify-center gap-2">
+            <span className="text-base">✓</span> COMPLETE - Swipe left or right to dismiss
+          </p>
+        </div>
+      )}
+
+      {/* Sets List - Compact Single Line Per Set */}
+      <div className="space-y-2">
         {exercise.sets.map((set, index) => (
-          <SetInput
+          <CompactSetRow
             key={set.setNumber}
             set={set}
             setNumber={set.setNumber}
@@ -242,8 +179,8 @@ const ExerciseModule: React.FC<ExerciseModuleProps> = ({
   );
 };
 
-// SetInput Component (individual set)
-interface SetInputProps {
+// Compact Set Row Component (single line per set)
+interface CompactSetRowProps {
   set: ExerciseSet;
   setNumber: number;
   onRepsChange: (reps: number) => void;
@@ -252,7 +189,7 @@ interface SetInputProps {
   showToast?: (message: string) => void;
 }
 
-const SetInput: React.FC<SetInputProps> = ({
+const CompactSetRow: React.FC<CompactSetRowProps> = ({
   set,
   setNumber,
   onRepsChange,
@@ -261,24 +198,26 @@ const SetInput: React.FC<SetInputProps> = ({
   showToast,
 }) => {
   return (
-    <div className={`flex items-center gap-3 p-4 rounded-none border ${
+    <div className={`flex items-center gap-2 p-2 rounded-none border transition-all ${
       set.completed
         ? 'bg-semantic-success bg-opacity-10 border-semantic-success'
-        : 'bg-primary-black-secondary border-gray-700'
+        : 'bg-primary-black border-gray-700'
     }`}>
-      {/* Set Number */}
-      <div className="flex-shrink-0">
-        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
-          set.completed
-            ? 'bg-semantic-success text-white'
-            : 'bg-gray-800 text-gray-400'
-        }`}>
-          {setNumber}
-        </div>
+      {/* Set Number with Checkmark */}
+      <div className="flex-shrink-0 w-8">
+        {set.completed ? (
+          <div className="w-8 h-8 rounded-full bg-semantic-success flex items-center justify-center">
+            <span className="text-white font-bold text-sm">✓</span>
+          </div>
+        ) : (
+          <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
+            <span className="text-gray-400 font-bold text-sm">{setNumber}</span>
+          </div>
+        )}
       </div>
 
-      {/* Reps Input */}
-      <div className="flex-1">
+      {/* Reps Input - Compact */}
+      <div className="flex-1 min-w-0">
         <Input
           inputType="reps"
           value={set.reps}
@@ -286,28 +225,34 @@ const SetInput: React.FC<SetInputProps> = ({
           showEasterEgg={showToast}
           disabled={set.completed}
           placeholder="Reps"
-          className="text-center py-2"
+          className="text-center py-1 text-sm h-10"
         />
       </div>
 
-      {/* Weight Input */}
-      <div className="flex-1">
+      {/* "reps @" label */}
+      <span className="text-xs text-gray-500 flex-shrink-0">reps @</span>
+
+      {/* Weight Input - Compact */}
+      <div className="flex-1 min-w-0">
         <Input
           inputType="weight"
           value={set.weight}
           onValidatedChange={onWeightChange}
           disabled={set.completed}
-          placeholder="Weight"
-          className="text-center py-2"
+          placeholder="lbs"
+          className="text-center py-1 text-sm h-10"
         />
       </div>
 
-      {/* Complete Button */}
+      {/* "lbs" label */}
+      <span className="text-xs text-gray-500 flex-shrink-0">lbs</span>
+
+      {/* Complete Button - Compact */}
       <div className="flex-shrink-0">
         <button
           onClick={onComplete}
           disabled={set.completed}
-          className={`min-w-[44px] min-h-[44px] rounded-none font-bold text-sm transition-colors ${
+          className={`min-w-[60px] h-10 rounded-none font-bold text-xs transition-colors ${
             set.completed
               ? 'bg-semantic-success text-white cursor-not-allowed'
               : 'bg-primary-red hover:bg-primary-red-dark text-white active:scale-95'
