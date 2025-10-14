@@ -5,6 +5,7 @@ import { useTimer } from '../hooks/useTimer';
 import Timer from '../components/common/Timer';
 import ExerciseModule from '../components/workout/ExerciseModule';
 import PauseOverlay from '../components/workout/PauseOverlay';
+import StopOverlay from '../components/workout/StopOverlay';
 import CelebrationOverlay from '../components/workout/CelebrationOverlay';
 import personaService from '../services/personaService';
 import affirmationService from '../services/affirmationService';
@@ -21,6 +22,7 @@ const ActiveWorkout = () => {
   } = useWorkout();
 
   const [showPauseOverlay, setShowPauseOverlay] = useState(false);
+  const [showStopOverlay, setShowStopOverlay] = useState(false);
   const [personaMessage, setPersonaMessage] = useState<{ persona: string; message: string } | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [dismissedExercises, setDismissedExercises] = useState<Set<string>>(new Set());
@@ -88,6 +90,22 @@ const ActiveWorkout = () => {
     }, 3000);
   };
 
+  // Handle stop button click
+  const handleStopClick = () => {
+    setShowStopOverlay(true);
+  };
+
+  // Handle stop confirmation (user clicked "I'm a bitch")
+  const handleStopConfirm = () => {
+    endWorkout();
+    navigate('/post-workout-edit');
+  };
+
+  // Handle stop overlay dismiss (user wants to continue)
+  const handleStopDismiss = () => {
+    setShowStopOverlay(false);
+  };
+
   // Handle exercise set updates
   const handleUpdateSet = (exerciseId: string, setIndex: number, reps: number, weight: number) => {
     updateExerciseSet(exerciseId, setIndex, reps, weight);
@@ -131,6 +149,13 @@ const ActiveWorkout = () => {
         onDismiss={handlePauseOverlayDismiss}
       />
 
+      {/* Stop Overlay */}
+      <StopOverlay
+        isVisible={showStopOverlay}
+        onConfirm={handleStopConfirm}
+        onDismiss={handleStopDismiss}
+      />
+
       {/* Celebration Overlay */}
       <CelebrationOverlay
         isVisible={showCelebration}
@@ -146,14 +171,26 @@ const ActiveWorkout = () => {
             {completedSets}/{totalSets} sets
           </div>
 
-          {/* Pause Button (CRITICAL) */}
-          <button
-            onClick={handlePauseClick}
-            className="min-w-[44px] min-h-[44px] flex items-center justify-center text-2xl hover:text-primary-red transition-colors"
-            title="Pause (just kidding)"
-          >
-            ⏸️
-          </button>
+          {/* Stop & Pause Buttons */}
+          <div className="flex gap-3">
+            {/* Stop Button */}
+            <button
+              onClick={handleStopClick}
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center text-2xl hover:text-semantic-error transition-colors"
+              title="Stop workout"
+            >
+              ⏹️
+            </button>
+
+            {/* Pause Button (CRITICAL) */}
+            <button
+              onClick={handlePauseClick}
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center text-2xl hover:text-primary-red transition-colors"
+              title="Pause (just kidding)"
+            >
+              ⏸️
+            </button>
+          </div>
         </div>
 
         {/* Timer */}
@@ -174,13 +211,10 @@ const ActiveWorkout = () => {
 
       {/* Persona Message */}
       {personaMessage && (
-        <div className="fixed top-1/4 left-1/2 transform -translate-x-1/2 z-50 animate-slide-in">
-          <div className="bg-primary-red bg-opacity-90 border-4 border-white rounded-none p-6 max-w-sm mx-4 shadow-red-glow-pulse">
-            <p className="text-white text-sm font-bold text-center mb-2 tracking-wider">
-              {personaMessage.persona.toUpperCase()}
-            </p>
-            <p className="text-white text-xl font-bold text-center leading-tight">
-              "{personaMessage.message}"
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 animate-fade-in-out">
+          <div className="bg-primary-red bg-opacity-90 border-4 border-white rounded-none p-8 max-w-lg mx-4 shadow-red-glow-pulse">
+            <p className="text-white text-4xl font-bold text-center leading-tight">
+              {personaMessage.message}
             </p>
           </div>
         </div>
