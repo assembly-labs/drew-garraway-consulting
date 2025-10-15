@@ -1,15 +1,18 @@
-# Netlify Configuration for Can't Stop Won't Stop Workout App
-# This app lives in: gym/can-t-stop-wont-stop/
+# Netlify Configuration for Librarian LLM
+# This app lives in: librarian-llm/
 
 [build]
   # Base directory where the app lives
-  base = "gym/can-t-stop-wont-stop"
+  base = "librarian-llm"
 
   # Build command to run
   command = "npm run build"
 
   # Directory where built files are output (relative to base)
   publish = "dist"
+
+  # Netlify Functions directory
+  functions = "netlify/functions"
 
   # Node version to use
   [build.environment]
