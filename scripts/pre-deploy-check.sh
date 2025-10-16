@@ -50,7 +50,7 @@ CHANGED_FILES=$(git diff --name-only HEAD 2>/dev/null || git status --short | aw
 # Array of known prototypes
 declare -A PROTOTYPES=(
     ["librarian-llm"]="Librarian LLM"
-    ["cantstopwontstop"]="CantStopWontStop"
+    ["fuckyougotrain"]="Fuck You Go Train"
     ["nofomo"]="NoFomo"
     ["assembly-agentic-articles"]="Assembly Agentic Articles"
     ["gym/prototype"]="Gym Prototype"

@@ -12,7 +12,7 @@ This repository is a **monorepo** containing multiple prototypes. Each prototype
 ```
 drew-garraway-consulting/
 ├── librarian-llm/           → Librarian LLM app
-├── cantstopwontstop/        → CantStopWontStop app
+├── fuckyougotrain/          → Fuck You Go Train app
 ├── nofomo/                  → NoFomo app
 ├── assembly-agentic-articles/ → Assembly Articles app
 ├── gym/prototype/           → Gym Prototype app
@@ -24,8 +24,8 @@ drew-garraway-consulting/
 
 | Prototype | Directory | Netlify Site | Custom Domain |
 |-----------|-----------|--------------|---------------|
-| **Librarian LLM** | `librarian-llm/` | [Add URL here] | librarian.drewgarraway.com |
-| **CantStopWontStop** | `cantstopwontstop/` | [Add URL here] | cantstopwontstop.drewgarraway.com |
+| **Librarian LLM** | `librarian-llm/` | https://librarian-llm.netlify.app | librarian.drewgarraway.com |
+| **Fuck You Go Train** | `fuckyougotrain/` | https://fuckyougotrain.netlify.app | fuckyougotrain.netlify.app |
 | **NoFomo** | `nofomo/` | [Add URL here] | nofomo.drewgarraway.com |
 | **Assembly Articles** | `assembly-agentic-articles/frontend/` | [Add URL here] | assembly.drewgarraway.com |
 | **Gym Prototype** | `gym/prototype/` | [Add URL here] | gym.drewgarraway.com |

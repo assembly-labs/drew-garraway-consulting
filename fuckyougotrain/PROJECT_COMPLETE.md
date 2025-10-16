@@ -1,4 +1,4 @@
-# 🎉 PROJECT COMPLETE: Can't Stop Won't Stop v2.0
+# 🎉 PROJECT COMPLETE: Fuck You Go Train v2.0
 
 ## 🚀 READY TO DEPLOY
 
@@ -12,7 +12,7 @@
 ## 📂 YOUR CODEBASE
 
 ```
-cantstopwontstop/
+fuckyougotrain/
 ├── src/
 │   ├── components/
 │   │   ├── common/
@@ -210,7 +210,7 @@ Then click around:
 
 The app is **production-ready**. Deploy it. Use it. Get swole.
 
-**You literally can't stop. You won't stop.** 💪
+**Fuck you, go train.** 💪
 
 ---
 
