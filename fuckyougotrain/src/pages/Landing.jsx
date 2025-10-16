@@ -10,9 +10,9 @@ export function Landing() {
         {/* Title */}
         <div className="text-center space-y-4">
           <h1 className="text-5xl md:text-6xl font-bold text-white">
-            Can't Stop
+            Fuck You
             <br />
-            Won't Stop
+            Go Train
           </h1>
           <p className="text-2xl">💪</p>
           <p className="text-gray-400 text-lg">

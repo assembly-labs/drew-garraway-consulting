@@ -27,7 +27,7 @@
 ```
 drew-garraway-consulting/
 ├── librarian-llm/          → Prototype 1
-├── cantstopwontstop/       → Prototype 2
+├── fuckyougotrain/         → Prototype 2
 ├── nofomo/                 → Prototype 3
 ├── assembly-agentic-articles/ → Prototype 4
 └── gym/prototype/          → Prototype 5
@@ -245,25 +245,26 @@ VITE_ANTHROPIC_API_KEY = [your-api-key]
 
 ---
 
-### 🏃 Prototype 2: CantStopWontStop
+### 💪 Prototype 2: Fuck You Go Train
 
-**Status:** ⏳ Pending deployment
+**Status:** ✅ Deployed successfully - **PRODUCTION**
 
 ```
 Base directory: (empty)
-Package directory: cantstopwontstop/
-Build command: npm run build
-Publish directory: dist
-Functions directory: (empty or netlify/functions if applicable)
+Package directory: (empty/locked - doesn't matter)
+Build command: cd fuckyougotrain && npm install && npm run build
+Publish directory: fuckyougotrain/dist
+Functions directory: fuckyougotrain/netlify/functions
 ```
 
 **Environment Variables:**
 ```
-(Add any required API keys)
+(No API keys required)
 ```
 
-**Proposed Site Name:** `cantstopwontstop`
-**Target URL:** `https://cantstopwontstop.netlify.app`
+**Deployed URL:** `https://fuckyougotrain.netlify.app`
+**Build Time:** 3.9s
+**Bundle Size:** 216 KB (gzipped: 68 KB)
 
 ---
 
@@ -420,8 +421,8 @@ git push origin main
 
 | Prototype | Netlify Site Created | Settings Configured | Environment Variables | First Deploy Status | Site Renamed | URL |
 |-----------|---------------------|---------------------|----------------------|-------------------|--------------|-----|
-| Librarian LLM | ✅ | ✅ | ✅ | ⏳ Building | ⏳ Pending | TBD |
-| CantStopWontStop | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | TBD |
+| Librarian LLM | ✅ | ✅ | ✅ | ✅ Deployed | ✅ | https://librarian-llm.netlify.app |
+| Fuck You Go Train | ✅ | ✅ | ✅ | ✅ Deployed | ✅ | https://fuckyougotrain.netlify.app |
 | NoFomo | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | TBD |
 | Assembly Articles | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | TBD |
 | Gym Prototype | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | TBD |

@@ -27,9 +27,9 @@
       "group": "build"
     },
     {
-      "label": "🏃 Deploy: CantStopWontStop",
+      "label": "💪 Deploy: Fuck You Go Train",
       "type": "shell",
-      "command": "cd cantstopwontstop && npm run build && cd .. && git add cantstopwontstop && git commit -m '🚀 Update CantStopWontStop' && git push origin main",
+      "command": "cd fuckyougotrain && npm run build && cd .. && git add fuckyougotrain && git commit -m '🚀 Update Fuck You Go Train' && git push origin main",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -81,9 +81,9 @@
       "group": "test"
     },
     {
-      "label": "🧪 Test Build: CantStopWontStop",
+      "label": "🧪 Test Build: Fuck You Go Train",
       "type": "shell",
-      "command": "cd cantstopwontstop && npm run build",
+      "command": "cd fuckyougotrain && npm run build",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always"
@@ -103,7 +103,7 @@
     {
       "label": "🔄 Install All Dependencies",
       "type": "shell",
-      "command": "for dir in librarian-llm cantstopwontstop nofomo assembly-agentic-articles/frontend gym/prototype; do echo \"Installing $dir...\" && (cd $dir && npm install); done",
+      "command": "for dir in librarian-llm fuckyougotrain nofomo assembly-agentic-articles/frontend gym/prototype; do echo \"Installing $dir...\" && (cd $dir && npm install); done",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",

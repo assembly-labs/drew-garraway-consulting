@@ -36,31 +36,31 @@ https://librarian-llm.netlify.app
 
 ---
 
-## 🏃 PROTOTYPE 2: CantStopWontStop
+## 💪 PROTOTYPE 2: Fuck You Go Train
 
 ### Netlify Build Settings
 ```
 Base directory: (empty)
 Package directory: (empty/locked - doesn't matter)
-Build command: cd cantstopwontstop && npm install && npm run build
-Publish directory: cantstopwontstop/dist
-Functions directory: cantstopwontstop/netlify/functions
+Build command: cd fuckyougotrain && npm install && npm run build
+Publish directory: fuckyougotrain/dist
+Functions directory: fuckyougotrain/netlify/functions
 ```
 
 ### Environment Variables
 ```
-(Check cantstopwontstop/package.json for API usage)
+(Check fuckyougotrain/package.json for API usage)
 (Add any required keys)
 ```
 
 ### Site Name
 ```
-cantstopwontstop
+fuckyougotrain
 ```
 
 ### Expected URL
 ```
-https://cantstopwontstop.netlify.app
+https://fuckyougotrain.netlify.app
 ```
 
 **Status:** ⏳ Pending
@@ -247,7 +247,7 @@ For each prototype, follow these steps:
 - [x] Verified working
 - [x] URL documented
 
-### CantStopWontStop
+### Fuck You Go Train
 - [ ] Site created
 - [ ] Settings configured
 - [ ] Environment variables added
