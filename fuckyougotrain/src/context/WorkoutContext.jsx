@@ -8,7 +8,7 @@ const WorkoutContext = createContext();
 export function WorkoutProvider({ children }) {
   // Selection state
   const [selectedDay, setSelectedDay] = useState(null); // 'MONDAY', 'FRIDAY', 'WEEKEND'
-  const [selectedDuration, setSelectedDuration] = useState(null); // 60, 45, 30
+  const [selectedDuration, setSelectedDuration] = useState(60); // Always 60 minutes
   const [workoutPlan, setWorkoutPlan] = useState(null); // Generated workout plan
 
   // Active workout state
@@ -31,7 +31,7 @@ export function WorkoutProvider({ children }) {
   /**
    * Generate workout plan based on selected day
    */
-  const generateWorkoutPlan = (dayType, duration) => {
+  const generateWorkoutPlan = (dayType, duration = 60) => {
     const template = workoutTemplates[dayType];
     if (!template) return null;
 

@@ -21,7 +21,7 @@ export function WorkoutPlanPreview() {
       {/* Header */}
       <div className="mb-6">
         <button
-          onClick={() => navigate('/time')}
+          onClick={() => navigate('/day')}
           className="text-gray-400 hover:text-white mb-4"
         >
           ← Back
@@ -67,7 +67,7 @@ export function WorkoutPlanPreview() {
           fullWidth
           className="text-2xl py-6"
         >
-          Let's Go 🔥
+          Let's Go
         </Button>
         <p className="text-center text-gray-500 text-sm">
           Timer starts immediately. No stopping.

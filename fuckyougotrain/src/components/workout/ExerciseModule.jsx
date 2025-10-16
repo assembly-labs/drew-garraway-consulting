@@ -23,7 +23,7 @@ export function ExerciseModule({ exercise, onUpdateSet, onEasterEgg, isPR = fals
         <div className="flex-1">
           <h3 className="font-bold text-lg text-white flex items-center gap-2">
             {exercise.exerciseName}
-            {isPR && <span className="text-yellow-400 text-sm">⭐ PR!</span>}
+            {isPR && <span className="text-yellow-400 text-sm">PR!</span>}
           </h3>
           <p className="text-sm text-gray-400">
             {exercise.category} • {exercise.equipment}
