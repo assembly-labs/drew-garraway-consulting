@@ -26,7 +26,7 @@ export function PersonaMessage({ persona, message, name, onDismiss, duration = 5
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <p className="font-bold text-sm mb-1">💬 {name}</p>
+          <p className="font-bold text-sm mb-1">{name}</p>
           <p className="text-base">{message}</p>
         </div>
         <button

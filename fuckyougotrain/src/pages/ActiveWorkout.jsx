@@ -156,7 +156,6 @@ export function ActiveWorkout() {
             <br />
             NO STOPPING
           </p>
-          <p className="text-8xl">🖕</p>
         </div>
       )}
 

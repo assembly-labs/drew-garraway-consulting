@@ -83,7 +83,7 @@ export function PostWorkoutEdit() {
         {prExercises.size > 0 && (
           <div className="mt-4 bg-yellow-900 border border-yellow-600 rounded-lg p-3">
             <p className="text-yellow-400 font-bold">
-              🎉 {prExercises.size} PR{prExercises.size > 1 ? 's' : ''} Achieved!
+              {prExercises.size} PR{prExercises.size > 1 ? 's' : ''} Achieved!
             </p>
           </div>
         )}

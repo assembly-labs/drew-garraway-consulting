@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWorkout } from '../context/WorkoutContext';
-import { Button } from '../components/common/Button';
 
 export function DaySelection() {
   const navigate = useNavigate();
-  const { setSelectedDay } = useWorkout();
-  const [selected, setSelected] = useState(null);
+  const { setSelectedDay, generateWorkoutPlan } = useWorkout();
 
   const days = [
     { id: 'MONDAY', label: 'Monday', subtitle: 'Power Day' },
@@ -14,11 +11,10 @@ export function DaySelection() {
     { id: 'WEEKEND', label: 'Weekend', subtitle: 'Warrior Mode' },
   ];
 
-  const handleNext = () => {
-    if (selected) {
-      setSelectedDay(selected);
-      navigate('/time');
-    }
+  const handleDaySelect = (dayId) => {
+    setSelectedDay(dayId);
+    generateWorkoutPlan(dayId, 60); // Always 60 minutes
+    navigate('/preview');
   };
 
   return (
@@ -40,31 +36,15 @@ export function DaySelection() {
         {days.map((day) => (
           <button
             key={day.id}
-            onClick={() => setSelected(day.id)}
-            className={`w-full p-6 rounded-lg border-2 transition-all text-left ${
-              selected === day.id
-                ? 'bg-red-600 border-red-600 text-white'
-                : 'bg-gray-900 border-gray-700 text-white hover:border-red-500'
-            }`}
+            onClick={() => handleDaySelect(day.id)}
+            className="w-full p-6 rounded-lg border-2 transition-all text-left bg-gray-900 border-gray-700 text-white hover:border-red-500 hover:bg-gray-800"
           >
             <div className="font-bold text-xl">{day.label}</div>
-            <div className={`text-sm mt-1 ${selected === day.id ? 'text-white' : 'text-gray-400'}`}>
+            <div className="text-sm mt-1 text-gray-400">
               {day.subtitle}
             </div>
           </button>
         ))}
-      </div>
-
-      {/* Next button */}
-      <div className="mt-6">
-        <Button
-          onClick={handleNext}
-          disabled={!selected}
-          variant="primary"
-          fullWidth
-        >
-          Next
-        </Button>
       </div>
     </div>
   );

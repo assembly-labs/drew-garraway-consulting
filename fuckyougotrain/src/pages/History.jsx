@@ -124,7 +124,7 @@ export function History() {
                     <div key={idx} className="bg-gray-950 rounded p-3">
                       <h4 className="font-bold text-white text-sm mb-2">
                         {exercise.exerciseName}
-                        {exercise.isPR && <span className="text-yellow-400 ml-2">⭐ PR</span>}
+                        {exercise.isPR && <span className="text-yellow-400 ml-2">PR</span>}
                       </h4>
                       <div className="space-y-1">
                         {exercise.sets?.map((set, setIdx) => (

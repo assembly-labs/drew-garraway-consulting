@@ -3,7 +3,6 @@ import { WorkoutProvider } from './context/WorkoutContext';
 import { UserProvider } from './context/UserContext';
 import { Landing } from './pages/Landing';
 import { DaySelection } from './pages/DaySelection';
-import { TimeSelection } from './pages/TimeSelection';
 import { WorkoutPlanPreview } from './pages/WorkoutPlanPreview';
 import { ActiveWorkout } from './pages/ActiveWorkout';
 import { PostWorkoutEdit } from './pages/PostWorkoutEdit';
@@ -17,7 +16,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/day" element={<DaySelection />} />
-            <Route path="/time" element={<TimeSelection />} />
             <Route path="/preview" element={<WorkoutPlanPreview />} />
             <Route path="/workout" element={<ActiveWorkout />} />
             <Route path="/edit" element={<PostWorkoutEdit />} />

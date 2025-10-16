@@ -14,7 +14,6 @@ export function Landing() {
             <br />
             Go Train
           </h1>
-          <p className="text-2xl">💪</p>
           <p className="text-gray-400 text-lg">
             Time-based workouts. No stopping. No excuses.
           </p>
