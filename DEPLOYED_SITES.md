@@ -1,5 +1,14 @@
 # 🌐 Deployed Prototypes
 
+## 📖 Documentation
+
+**Before deploying, read these:**
+- 🚀 **[Netlify Monorepo Workflow](.github/NETLIFY_MONOREPO_WORKFLOW.md)** - Complete deployment guide (REQUIRED READING)
+- 📇 **[Quick Deploy Cards](.github/QUICK_DEPLOY_CARDS.md)** - Copy-paste settings for each prototype
+- 📚 **[General Deployment Guide](.github/DEPLOYMENT_GUIDE.md)** - Additional context and troubleshooting
+
+---
+
 ## Live Sites
 
 All prototypes are deployed to Netlify with automatic deployments on push to `main` branch.
@@ -8,11 +17,11 @@ All prototypes are deployed to Netlify with automatic deployments on push to `ma
 
 | Prototype | Description | URL | Directory | Status |
 |-----------|-------------|-----|-----------|--------|
-| **Librarian LLM** | AI-powered library assistant | [librarian-llm.netlify.app](https://librarian-llm.netlify.app) | `librarian-llm/` | 🟢 Live |
-| **CantStopWontStop** | Fitness tracking app | [cantstopwontstop.netlify.app](https://cantstopwontstop.netlify.app) | `cantstopwontstop/` | 🟢 Live |
-| **NoFomo** | Social event tracker | [nofomo.netlify.app](https://nofomo.netlify.app) | `nofomo/` | 🟢 Live |
-| **Assembly Articles** | AI article generator | [assembly-articles.netlify.app](https://assembly-articles.netlify.app) | `assembly-agentic-articles/` | 🟢 Live |
-| **Gym Prototype** | Gym management system | [gym-prototype.netlify.app](https://gym-prototype.netlify.app) | `gym/prototype/` | 🟢 Live |
+| **Librarian LLM** | AI-powered library assistant | [librarian-llm.netlify.app](https://librarian-llm.netlify.app) | `librarian-llm/` | 🟡 Deploying |
+| **CantStopWontStop** | Fitness tracking app | TBD | `cantstopwontstop/` | ⏳ Pending |
+| **NoFomo** | Social event tracker | TBD | `nofomo/` | ⏳ Pending |
+| **Assembly Articles** | AI article generator | TBD | `assembly-agentic-articles/frontend/` | ⏳ Pending |
+| **Gym Prototype** | Gym management system | TBD | `gym/prototype/` | ⏳ Pending |
 
 ## Deployment Information
 
