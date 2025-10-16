@@ -1,0 +1,134 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🔍 Pre-Deploy Check",
+      "type": "shell",
+      "command": "bash scripts/pre-deploy-check.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "📚 Deploy: Librarian LLM",
+      "type": "shell",
+      "command": "cd librarian-llm && npm run build && cd .. && git add librarian-llm && git commit -m '🚀 Update Librarian LLM' && git push origin main",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "group": "build"
+    },
+    {
+      "label": "🏃 Deploy: CantStopWontStop",
+      "type": "shell",
+      "command": "cd cantstopwontstop && npm run build && cd .. && git add cantstopwontstop && git commit -m '🚀 Update CantStopWontStop' && git push origin main",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "group": "build"
+    },
+    {
+      "label": "🎯 Deploy: NoFomo",
+      "type": "shell",
+      "command": "cd nofomo && npm run build && cd .. && git add nofomo && git commit -m '🚀 Update NoFomo' && git push origin main",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "group": "build"
+    },
+    {
+      "label": "📰 Deploy: Assembly Articles",
+      "type": "shell",
+      "command": "cd assembly-agentic-articles/frontend && npm run build && cd ../.. && git add assembly-agentic-articles && git commit -m '🚀 Update Assembly Articles' && git push origin main",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "group": "build"
+    },
+    {
+      "label": "💪 Deploy: Gym Prototype",
+      "type": "shell",
+      "command": "cd gym/prototype && npm run build && cd ../.. && git add gym/prototype && git commit -m '🚀 Update Gym Prototype' && git push origin main",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "group": "build"
+    },
+    {
+      "label": "🧪 Test Build: Librarian LLM",
+      "type": "shell",
+      "command": "cd librarian-llm && npm run build",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always"
+      },
+      "group": "test"
+    },
+    {
+      "label": "🧪 Test Build: CantStopWontStop",
+      "type": "shell",
+      "command": "cd cantstopwontstop && npm run build",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always"
+      },
+      "group": "test"
+    },
+    {
+      "label": "🧪 Test Build: NoFomo",
+      "type": "shell",
+      "command": "cd nofomo && npm run build",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always"
+      },
+      "group": "test"
+    },
+    {
+      "label": "🔄 Install All Dependencies",
+      "type": "shell",
+      "command": "for dir in librarian-llm cantstopwontstop nofomo assembly-agentic-articles/frontend gym/prototype; do echo \"Installing $dir...\" && (cd $dir && npm install); done",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "group": "build"
+    },
+    {
+      "label": "🧹 Clean All Build Artifacts",
+      "type": "shell",
+      "command": "find . -type d \\( -name 'dist' -o -name 'build' -o -name '.netlify' \\) -not -path './node_modules/*' -prune -exec rm -rf {} +",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "📊 Check Repository Status",
+      "type": "shell",
+      "command": "echo '=== Git Status ===' && git status && echo '' && echo '=== Changed Files ===' && git diff --name-only && echo '' && echo '=== Recent Commits ===' && git log --oneline -5",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}
