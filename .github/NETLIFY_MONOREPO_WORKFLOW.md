@@ -43,17 +43,20 @@ drew-garraway-consulting/
 
 ## Critical Configuration Rules
 
-### 🚨 RULE 1: Package Directory Auto-Detection
+### 🚨 RULE 1: Use "cd" Approach for Monorepos
 
-**What Happens:**
-- Netlify **auto-detects** monorepo structures
-- When detected, it **forces** "Package directory" to be filled
-- You **CANNOT clear** Package directory (it's locked)
+**✅ PROVEN WORKING METHOD (Tested with Librarian LLM):**
 
-**What This Means:**
-- ✅ **ALWAYS use Package directory** (not Base directory)
-- ❌ **NEVER fill in both** Base directory AND Package directory
-- ✅ **All paths are relative** to Package directory
+Netlify may auto-detect Package directory and lock it. When this happens:
+- Package directory gets locked (cannot be cleared)
+- **Solution:** Use `cd` command to navigate into folder
+- Build command handles the directory change
+
+**Working Pattern:**
+```bash
+Build command: cd <prototype-folder> && npm install && npm run build
+Publish directory: <prototype-folder>/dist
+```
 
 ---
 
@@ -67,33 +70,35 @@ drew-garraway-consulting/
 **Solution:**
 - ✅ **DELETE** any root `netlify.toml` files
 - ✅ Each prototype configures via **Netlify UI only**
-- ✅ If needed, put `netlify.toml` INSIDE prototype folder (not tested yet)
+- ✅ Config is set per-site, not shared
 
 ---
 
-### 🚨 RULE 3: Path Structure Logic
+### 🚨 RULE 3: Path Structure for Monorepo
 
-**Correct Understanding:**
-
-```
-Package directory = "librarian-llm/"
-  ↓
-Netlify starts HERE: /repo/librarian-llm/
-  ↓
-All other paths are RELATIVE to this location:
-  - npm run build → runs in /repo/librarian-llm/
-  - dist → publishes from /repo/librarian-llm/dist
-  - netlify/functions → reads from /repo/librarian-llm/netlify/functions
-```
-
-**WRONG (causes double paths):**
+**✅ CORRECT (What Works):**
 
 ```
-Base directory = "librarian-llm"
-Package directory = "librarian-llm/"
-Publish directory = "librarian-llm/dist"
+Base directory: (empty)
+Package directory: (empty or locked - doesn't matter)
+Build command: cd librarian-llm && npm install && npm run build
+Publish directory: librarian-llm/dist
   ↓
-Netlify tries: /repo/librarian-llm/librarian-llm/dist ❌ NOT FOUND
+Netlify behavior:
+1. Starts at: /opt/build/repo/ (root)
+2. Runs: cd librarian-llm (enters folder)
+3. Runs: npm install && npm run build (in that folder)
+4. Publishes: /opt/build/repo/librarian-llm/dist ✅
+```
+
+**❌ WRONG (What Doesn't Work):**
+
+```
+Base directory: librarian-llm
+Package directory: librarian-llm/
+  ↓
+Result: Package directory doesn't change working directory
+Build fails: Cannot find package.json at root
 ```
 
 ---
@@ -191,34 +196,42 @@ git push origin main
 
 ### 🔵 TEMPLATE: Copy-Paste Settings for Each Prototype
 
-**Use this for ALL prototypes:**
+**✅ PROVEN WORKING TEMPLATE (Used for Librarian LLM - SUCCESS):**
 
 ```
 Base directory: (leave completely empty)
 
-Package directory: <PROTOTYPE-FOLDER>/
-(Netlify auto-fills this - leave it as-is)
+Package directory: (leave empty or ignore if locked)
 
-Build command: npm run build
+Build command: cd <PROTOTYPE-FOLDER> && npm install && npm run build
 
-Publish directory: dist
+Publish directory: <PROTOTYPE-FOLDER>/dist
 
-Functions directory: netlify/functions
+Functions directory: <PROTOTYPE-FOLDER>/netlify/functions
 (or leave empty if no functions)
+```
+
+**Example for librarian-llm:**
+```
+Base directory: (empty)
+Package directory: (empty or locked - doesn't matter)
+Build command: cd librarian-llm && npm install && npm run build
+Publish directory: librarian-llm/dist
+Functions directory: librarian-llm/netlify/functions
 ```
 
 ---
 
 ### 📚 Prototype 1: Librarian LLM
 
-**Status:** ✅ Deployed successfully
+**Status:** ✅ Deployed successfully - **PRODUCTION**
 
 ```
 Base directory: (empty)
-Package directory: librarian-llm/
-Build command: npm run build
-Publish directory: dist
-Functions directory: netlify/functions
+Package directory: (empty/locked - doesn't matter)
+Build command: cd librarian-llm && npm install && npm run build
+Publish directory: librarian-llm/dist
+Functions directory: librarian-llm/netlify/functions
 ```
 
 **Environment Variables:**
@@ -226,7 +239,9 @@ Functions directory: netlify/functions
 VITE_ANTHROPIC_API_KEY = [your-api-key]
 ```
 
-**Site URL:** `https://librarian-llm.netlify.app`
+**Deployed URL:** `https://librarian-llm.netlify.app`
+**Build Time:** 29.4s
+**Bundle Size:** 308.90 kB (gzipped: 87.31 kB)
 
 ---
 
@@ -301,19 +316,19 @@ VITE_API_URL = [backend-url]
 
 ### 💪 Prototype 5: Gym Prototype
 
-**Status:** ⏳ Pending deployment
+**Status:** ⏳ Ready to deploy
 
 ```
 Base directory: (empty)
-Package directory: gym/prototype/
-Build command: npm run build
-Publish directory: dist
-Functions directory: (empty or netlify/functions if applicable)
+Package directory: (empty/locked - doesn't matter)
+Build command: cd gym/prototype && npm install && npm run build
+Publish directory: gym/prototype/dist
+Functions directory: gym/prototype/netlify/functions
 ```
 
 **Environment Variables:**
 ```
-(Add any required API keys)
+(Add any required API keys - check package.json for API usage)
 ```
 
 **Proposed Site Name:** `gym-prototype`
