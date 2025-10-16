@@ -1,5 +1,17 @@
 # 🌐 Deployed Prototypes
 
+## 📊 Deployment Progress
+
+**1 of 5 prototypes deployed** (20% complete)
+
+- ✅ **Librarian LLM** - LIVE at [librarian-llm.netlify.app](https://librarian-llm.netlify.app)
+- 🔄 **Gym Prototype** - Next to deploy
+- ⏳ **CantStopWontStop** - Queued
+- ⏳ **NoFomo** - Queued
+- ⏳ **Assembly Articles** - Queued
+
+---
+
 ## 📖 Documentation
 
 **Before deploying, read these:**
@@ -17,11 +29,11 @@ All prototypes are deployed to Netlify with automatic deployments on push to `ma
 
 | Prototype | Description | URL | Directory | Status |
 |-----------|-------------|-----|-----------|--------|
-| **Librarian LLM** | AI-powered library assistant | [librarian-llm.netlify.app](https://librarian-llm.netlify.app) | `librarian-llm/` | 🟡 Deploying |
+| **Librarian LLM** | AI-powered library assistant | [librarian-llm.netlify.app](https://librarian-llm.netlify.app) | `librarian-llm/` | ✅ **LIVE** |
 | **CantStopWontStop** | Fitness tracking app | TBD | `cantstopwontstop/` | ⏳ Pending |
 | **NoFomo** | Social event tracker | TBD | `nofomo/` | ⏳ Pending |
 | **Assembly Articles** | AI article generator | TBD | `assembly-agentic-articles/frontend/` | ⏳ Pending |
-| **Gym Prototype** | Gym management system | TBD | `gym/prototype/` | ⏳ Pending |
+| **Gym Prototype** | Gym management system | TBD | `gym/prototype/` | 🔄 Next Up |
 
 ## Deployment Information
 
