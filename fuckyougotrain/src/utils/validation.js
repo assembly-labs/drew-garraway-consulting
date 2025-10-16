@@ -37,19 +37,3 @@ export function validateWeight(value) {
 
   return { value: num, message: null };
 }
-
-/**
- * Validate duration selection
- */
-export function validateDuration(duration) {
-  const validDurations = [60, 45, 30];
-  return validDurations.includes(duration) ? duration : 60;
-}
-
-/**
- * Validate day type
- */
-export function validateDayType(dayType) {
-  const validDays = ['MONDAY', 'FRIDAY', 'WEEKEND'];
-  return validDays.includes(dayType) ? dayType : 'MONDAY';
-}
