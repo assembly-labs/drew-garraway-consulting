@@ -132,7 +132,6 @@ export function WorkoutProvider({ children }) {
     setCurrentWorkout(null);
     setIsWorkoutActive(false);
     setSelectedDay(null);
-    setSelectedDuration(null);
     setWorkoutPlan(null);
 
     return completedWorkout;
@@ -167,7 +166,6 @@ export function WorkoutProvider({ children }) {
     setCurrentWorkout(null);
     setIsWorkoutActive(false);
     setSelectedDay(null);
-    setSelectedDuration(null);
     setWorkoutPlan(null);
   };
 
@@ -176,7 +174,6 @@ export function WorkoutProvider({ children }) {
     selectedDay,
     setSelectedDay,
     selectedDuration,
-    setSelectedDuration,
 
     // Plan
     workoutPlan,
