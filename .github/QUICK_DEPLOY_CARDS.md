@@ -63,7 +63,7 @@ fuckyougotrain
 https://fuckyougotrain.netlify.app
 ```
 
-**Status:** ⏳ Pending
+**Status:** ✅ **DEPLOYED & LIVE**
 
 ---
 
@@ -248,13 +248,13 @@ For each prototype, follow these steps:
 - [x] URL documented
 
 ### Fuck You Go Train
-- [ ] Site created
-- [ ] Settings configured
-- [ ] Environment variables added
-- [ ] Deployed successfully
-- [ ] Site renamed
-- [ ] Verified working
-- [ ] URL documented
+- [x] Site created
+- [x] Settings configured
+- [x] Environment variables added
+- [x] Deployed successfully
+- [x] Site renamed
+- [x] Verified working
+- [x] URL documented
 
 ### NoFomo
 - [ ] Site created
