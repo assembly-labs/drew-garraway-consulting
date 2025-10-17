@@ -1,5 +1,14 @@
 # 🌐 Deployed Prototypes
 
+## 🎨 Brand Guidelines
+
+**Visual Theme:** Luxury Tech Gradient
+**Color Palette:** Deep Indigo (#1E1B4B) → Rich Purple (#4C1D95) → Vibrant Magenta (#C026D3) → Coral Pink (#FB7185)
+**Style:** Modern, sophisticated, energetic
+**Reference:** See [STYLE_GUIDE.md](STYLE_GUIDE.md) for complete implementation details
+
+---
+
 ## 📊 Deployment Progress
 
 **2 of 5 prototypes deployed** (40% complete)
