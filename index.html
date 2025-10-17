@@ -79,12 +79,26 @@
         }
 
         :root {
+            /* Primary Gradient Colors */
+            --indigo-deep: #1E1B4B;
+            --purple-rich: #4C1D95;
+            --magenta-vibrant: #C026D3;
+            --coral-pink: #FB7185;
+
+            /* Background Gradients */
+            --gradient-main: linear-gradient(135deg, #1E1B4B 0%, #4C1D95 35%, #C026D3 70%, #FB7185 100%);
+            --gradient-subtle: linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%);
+            --gradient-accent: linear-gradient(90deg, #C026D3 0%, #FB7185 100%);
+
+            /* Text Gradients */
+            --gradient-text: linear-gradient(90deg, #1E1B4B, #4C1D95, #C026D3, #FB7185);
+            --gradient-text-bright: linear-gradient(90deg, #4C1D95, #C026D3, #FB7185);
+            --gradient-text-reverse: linear-gradient(90deg, #FB7185, #C026D3, #4C1D95, #1E1B4B);
+
+            /* Legacy/Supporting Colors */
             --black: #0a0a0a;
             --white: #ffffff;
             --gray: #6b7280;
-            --accent: #3b82f6;
-            --accent-dark: #2563eb;
-            --success: #10b981;
         }
 
         body {
@@ -103,7 +117,7 @@
             justify-content: center;
             padding: 2rem;
             position: relative;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            background: #000000;
         }
 
         .hero::before {
@@ -113,13 +127,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 repeating-linear-gradient(
                     0deg,
                     transparent,
                     transparent 2px,
-                    rgba(59, 130, 246, 0.03) 2px,
-                    rgba(59, 130, 246, 0.03) 4px
+                    rgba(192, 38, 211, 0.02) 2px,
+                    rgba(192, 38, 211, 0.02) 4px
                 );
             pointer-events: none;
         }
@@ -139,10 +153,23 @@
             margin-bottom: 2rem;
             letter-spacing: -0.02em;
             animation: slideUp 0.8s ease-out;
+            /* Fallback for browsers without gradient support */
+            color: #C026D3;
+            /* Gradient text */
+            background: linear-gradient(90deg, #4C1D95, #C026D3, #FB7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .tagline-dot {
-            color: var(--accent);
+            /* Fallback */
+            color: #FB7185;
+            /* Gradient for dots */
+            background: linear-gradient(90deg, #C026D3, #FB7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             animation: pulse 2s ease-in-out infinite;
         }
 
@@ -171,8 +198,45 @@
             line-height: 1.8;
         }
 
+        .hero-paragraph a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(192, 38, 211, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .hero-paragraph a:hover {
+            border-bottom-color: #FB7185;
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .hero-paragraph a.highlight-link {
+            /* Fallback */
+            color: #C026D3;
+            /* Gradient text for colorful links */
+            background: linear-gradient(90deg, #C026D3, #FB7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border-bottom-color: rgba(251, 113, 133, 0.4);
+        }
+
+        .hero-paragraph a.highlight-link:hover {
+            background: linear-gradient(90deg, #FB7185, #C026D3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border-bottom-color: #FB7185;
+        }
+
         .highlight {
-            color: var(--accent);
+            /* Fallback */
+            color: #C026D3;
+            /* Gradient text for highlights */
+            background: linear-gradient(90deg, #C026D3, #FB7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: 600;
         }
 
@@ -200,7 +264,7 @@
         .scroll-indicator svg {
             width: 30px;
             height: 30px;
-            stroke: var(--accent);
+            stroke: #C026D3;
             stroke-width: 2;
             fill: none;
         }
@@ -208,7 +272,7 @@
         /* Services Section */
         .services {
             padding: 5rem 2rem;
-            background: #0f0f0f;
+            background: linear-gradient(180deg, #0f0f0f 0%, #1E1B4B 50%, #0f0f0f 100%);
             position: relative;
         }
 
@@ -219,7 +283,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            background: linear-gradient(90deg, transparent, #C026D3, transparent);
         }
 
         .section-header {
@@ -228,6 +292,13 @@
             margin-bottom: 4rem;
             text-align: center;
             letter-spacing: -0.02em;
+            /* Fallback */
+            color: #FB7185;
+            /* Gradient text */
+            background: linear-gradient(90deg, #FB7185, #C026D3, #4C1D95);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .services-grid {
@@ -239,7 +310,7 @@
 
         .service-card {
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(192, 38, 211, 0.2);
             padding: 2rem;
             border-radius: 8px;
             transition: all 0.3s ease;
@@ -254,7 +325,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(192, 38, 211, 0.1), rgba(251, 113, 133, 0.1), transparent);
             transition: left 0.5s ease;
         }
 
@@ -264,8 +335,8 @@
 
         .service-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(59, 130, 246, 0.3);
-            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(251, 113, 133, 0.4);
+            background: rgba(78, 29, 149, 0.05);
         }
 
         .service-title {
@@ -281,7 +352,13 @@
         }
 
         .service-stat {
-            color: var(--success);
+            /* Fallback */
+            color: #FB7185;
+            /* Gradient text for stats */
+            background: linear-gradient(90deg, #C026D3, #FB7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: 600;
         }
 
@@ -289,7 +366,7 @@
         .cta-section {
             text-align: center;
             padding: 4rem 2rem;
-            background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
+            background: linear-gradient(135deg, #1E1B4B 0%, #4C1D95 35%, #C026D3 70%, #FB7185 100%);
         }
 
         .cta-text {
@@ -302,8 +379,8 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: var(--accent);
-            color: var(--white);
+            background: rgba(255, 255, 255, 0.95);
+            color: #1E1B4B;
             padding: 1rem 2rem;
             font-size: 1.2rem;
             font-weight: 600;
@@ -312,6 +389,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 20px rgba(251, 113, 133, 0.3);
         }
 
         .cta-button::before {
@@ -321,7 +399,7 @@
             left: 50%;
             width: 0;
             height: 0;
-            background: rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, rgba(192, 38, 211, 0.2), rgba(251, 113, 133, 0.2));
             border-radius: 50%;
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
@@ -333,9 +411,9 @@
         }
 
         .cta-button:hover {
-            background: var(--accent-dark);
+            background: rgba(255, 255, 255, 1);
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 40px rgba(251, 113, 133, 0.5);
         }
 
         .arrow {
@@ -369,7 +447,7 @@
 
         /* Selection Style */
         ::selection {
-            background: var(--accent);
+            background: #C026D3;
             color: var(--white);
         }
     </style>
@@ -381,7 +459,7 @@
             <h1>I Ship Ideas and Products<span class="tagline-dot">.</span><br>Not PowerPoints and Fluff<span class="tagline-dot">.</span></h1>
             
             <p class="hero-paragraph" role="contentinfo">
-                Your competition hired consultants six months ago. They're still in discovery. Me? I ship products. Learned from <span class="highlight">Tesla</span> to engage customers constantly and advise, never sell BS. <span class="highlight">Google</span> taught me to think beyond the obvious solution. <span class="highlight">Apple</span> showed me the difference between talking about concepts and actually building them. At <span class="highlight">Samsung</span>, I discovered what happens when creative technologists merge right brain with left brain—magic. Growing up in Philly? That taught me to back up every word with action. Now I help businesses stop theorizing and start shipping. <span class="highlight">Real products that generate real revenue in 90 days, not two years.</span>
+                Collaborated with <a href="https://www.mediaartslab.com/" target="_blank" rel="noopener noreferrer">Media Arts Lab</a> and <a href="https://toolofna.com/" target="_blank" rel="noopener noreferrer">Tool of NA</a> on <a href="https://techcrunch.com/2014/01/24/apple-reflects-on-the-mac-at-30-with-new-video-and-website-retrospective/" target="_blank" rel="noopener noreferrer" class="highlight-link">Apple's</a> 30th birthday, deploying cutting-edge web design with acclaimed content creators. Helped <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer" class="highlight-link">Google</a> get small businesses online through an award-winning campaign at <a href="https://enso.co/" target="_blank" rel="noopener noreferrer">Enso</a> that pioneered dynamic content. Led digital reimaginations for <a href="https://www.samsung.com/" target="_blank" rel="noopener noreferrer" class="highlight-link">Samsung</a>, <a href="https://www.dreamworks.com/" target="_blank" rel="noopener noreferrer" class="highlight-link">DreamWorks</a>, <a href="https://www.lexus.com/" target="_blank" rel="noopener noreferrer" class="highlight-link">Lexus</a>, and <a href="https://www.subaru.com/" target="_blank" rel="noopener noreferrer" class="highlight-link">Subaru</a>, then spent time at <a href="https://www.tesla.com/" target="_blank" rel="noopener noreferrer" class="highlight-link">Tesla</a> when the Model 3 was fresh off the factory floors with Elon. Now I work with Philadelphia innovators, building AI operations, partnerships, and products that ship with intent to create a better future for those inheriting it.
             </p>
         </div>
         
@@ -415,16 +493,9 @@
                 </div>
 
                 <div class="service-card">
-                    <h3 class="service-title">Growth Without the Grinding</h3>
+                    <h3 class="service-title">Growth Without Grinding Gears</h3>
                     <p class="service-description">
                         Scale doesn't have to mean chaos. I build the operational systems that let you grow without breaking everything that got you here. Same energy that helped generate <span class="service-stat">$4M+ at Dakota, $1M+ at DLE</span>.
-                    </p>
-                </div>
-
-                <div class="service-card">
-                    <h3 class="service-title">Vision to Shipped Reality</h3>
-                    <p class="service-description">
-                        Great ideas die in committee. I turn your "what if" into "what's next"—with real products generating real revenue. Not someday. <span class="service-stat">Next quarter</span>.
                     </p>
                 </div>
             </div>
