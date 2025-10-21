@@ -12,43 +12,40 @@ const DaySelection = () => {
   const dayOptions: { value: DayType; label: string; description: string }[] = [
     {
       value: 'Monday',
-      label: 'MONDAY',
-      description: 'Start the week strong',
+      label: 'Monday',
+      description: 'Power Day',
     },
     {
       value: 'Friday',
-      label: 'FRIDAY',
-      description: 'Finish the week hard',
+      label: 'Friday',
+      description: 'Strength Day',
     },
     {
       value: 'Weekend',
-      label: 'WEEKEND',
-      description: 'Extra time for gains',
+      label: 'Weekend',
+      description: 'Warrior Mode',
     },
   ];
 
   const handleSelect = (day: DayType) => {
     setLocalSelection(day);
     setSelectedDay(day);
-    navigate('/time-selection');
+    navigate('/workout-preview');
   };
 
   return (
     <div className="min-h-screen bg-primary-black px-6 py-8 flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between mb-4">
         <Button variant="icon" onClick={() => navigate('/')}>
           <span className="text-2xl">←</span>
         </Button>
-        <h1 className="text-h2 font-bold text-white">SELECT DAY</h1>
+        <h1 className="text-h2 font-bold text-white">Select Your Day</h1>
         <div className="w-11"></div> {/* Spacer for centering */}
       </div>
 
-      {/* Progress indicator */}
-      <div className="flex items-center justify-center gap-2 mb-12">
-        <div className="w-8 h-1 bg-primary-red rounded-full"></div>
-        <div className="w-8 h-1 bg-gray-700 rounded-full"></div>
-      </div>
+      {/* Subtitle */}
+      <p className="text-center text-gray-400 mb-12">Choose your workout split</p>
 
       {/* Day Options */}
       <div className="flex-1 flex flex-col justify-center space-y-4 max-w-md mx-auto w-full">

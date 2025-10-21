@@ -67,7 +67,7 @@ const WorkoutContext = createContext<WorkoutContextType | undefined>(undefined);
 export const WorkoutProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // Selection state
   const [selectedDay, setSelectedDay] = useState<DayType>(null);
-  const [selectedDuration, setSelectedDuration] = useState<DurationType>(null);
+  const [selectedDuration, setSelectedDuration] = useState<DurationType>(60); // Default to 60 min
 
   // Current workout state
   const [currentWorkout, setCurrentWorkout] = useState<WorkoutData | null>(null);

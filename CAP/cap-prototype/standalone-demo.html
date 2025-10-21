@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAP Prototype - Championship Athletic Prospects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Graduate&family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-display { font-family: 'Bebas Neue', sans-serif; }
+        .font-accent { font-family: 'Graduate', serif; }
+        .font-mono { font-family: 'Roboto Mono', monospace; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+            color: #0A1F44;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s;
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255,215,0,0.4);
+        }
+
+        .btn-secondary {
+            background: #0A1F44;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            background: #0F2D5C;
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(90deg, #E5C100 0%, #FFD700 50%, #FFE44D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-rotate {
+            animation: cardRotate 3s ease-in-out infinite;
+        }
+
+        @keyframes cardRotate {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .page { display: none; }
+        .page.active { display: block; }
+
+        .prototype-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, #DC143C 0%, #B8102E 100%);
+            color: white;
+            padding: 8px;
+            text-align: center;
+            z-index: 50;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Prototype Banner -->
+    <div class="prototype-banner">
+        🎭 PROTOTYPE MODE - This is a clickable demo with fake data |
+        <button onclick="resetDemo()" class="underline hover:no-underline ml-2">Reset Demo</button>
+    </div>
+
+    <!-- Landing Page -->
+    <div id="landing-page" class="page active pt-12">
+        <section class="relative overflow-hidden bg-gradient-to-b from-yellow-50 to-white py-20">
+            <div class="container mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h1 class="font-display text-6xl md:text-7xl lg:text-8xl uppercase mb-4">
+                            <span class="text-gradient-gold">Championship</span><br>
+                            <span class="text-blue-900">Athletic</span><br>
+                            <span class="text-blue-900">Prospects</span>
+                        </h1>
+                        <p class="text-xl md:text-2xl text-gray-700 mb-8">
+                            Turn phone photos into professional trading cards in under 5 minutes.
+                            Every kid's a champion with CAP.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="showPage('signup')" class="btn-primary">
+                                Create Your First Card →
+                            </button>
+                            <button onclick="showPage('login')" class="btn-secondary">
+                                Sign In
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative h-96 hidden lg:block">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="card-rotate w-72 h-96 rounded-2xl shadow-2xl bg-gradient-to-br from-yellow-400 to-yellow-500 p-6 text-white">
+                                <div class="font-accent text-sm uppercase tracking-widest mb-auto">CAP Trading Card</div>
+                                <div class="flex flex-col items-center justify-center h-full">
+                                    <div class="font-mono text-6xl font-bold mb-2">#17</div>
+                                    <div class="font-display text-3xl uppercase">HOCKEY</div>
+                                    <div class="text-sm mt-2">2024 Season</div>
+                                </div>
+                                <div class="text-center mt-auto">
+                                    <div class="font-accent text-xs uppercase tracking-wider">Championship Edition</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="font-display text-5xl text-center text-blue-900 uppercase mb-12">How CAP Works</h2>
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-yellow-400 flex items-center justify-center text-3xl">
+                            📸
+                        </div>
+                        <h3 class="font-display text-2xl text-blue-900 uppercase mb-3">1. Upload Photos</h3>
+                        <p class="text-gray-700">Take photos with your phone or upload existing images.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-blue-900 flex items-center justify-center text-3xl">
+                            ✨
+                        </div>
+                        <h3 class="font-display text-2xl text-blue-900 uppercase mb-3">2. AI Enhancement</h3>
+                        <p class="text-gray-700">Professional background removal and bio generation.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-red-500 flex items-center justify-center text-3xl">
+                            🏆
+                        </div>
+                        <h3 class="font-display text-2xl text-blue-900 uppercase mb-3">3. Print & Deliver</h3>
+                        <p class="text-gray-700">Professional quality cards delivered in 5-7 days.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-page" class="page pt-12">
+        <div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-yellow-50 to-white">
+            <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full">
+                <h2 class="font-display text-4xl text-blue-900 uppercase mb-6 text-center">Sign In</h2>
+                <form onsubmit="handleLogin(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Email</label>
+                        <input type="email" value="parent@test.com" class="w-full px-4 py-2 border rounded-lg" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2">Password</label>
+                        <input type="password" value="demo123" class="w-full px-4 py-2 border rounded-lg" required>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">Sign In</button>
+                </form>
+                <p class="text-center mt-4 text-gray-600">
+                    Demo credentials pre-filled. Just click Sign In!
+                </p>
+                <p class="text-center mt-2">
+                    <button onclick="showPage('landing')" class="text-blue-600 hover:underline">← Back to Home</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Page -->
+    <div id="signup-page" class="page pt-12">
+        <div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-yellow-50 to-white">
+            <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full">
+                <h2 class="font-display text-4xl text-blue-900 uppercase mb-6 text-center">Create Account</h2>
+                <form onsubmit="handleSignup(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Your Role</label>
+                        <select class="w-full px-4 py-2 border rounded-lg">
+                            <option>Parent</option>
+                            <option>Coach</option>
+                            <option>Photographer</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Name</label>
+                        <input type="text" value="Demo User" class="w-full px-4 py-2 border rounded-lg" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Email</label>
+                        <input type="email" value="demo@test.com" class="w-full px-4 py-2 border rounded-lg" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2">Password</label>
+                        <input type="password" value="demo123" class="w-full px-4 py-2 border rounded-lg" required>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">Create Account</button>
+                </form>
+                <p class="text-center mt-4">
+                    <button onclick="showPage('landing')" class="text-blue-600 hover:underline">← Back to Home</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page pt-12">
+        <div class="min-h-screen bg-gradient-to-b from-yellow-50 to-white">
+            <div class="container mx-auto px-4 py-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h1 class="font-display text-4xl text-blue-900 uppercase">Welcome Back, Champion!</h1>
+                    <button onclick="showPage('landing')" class="btn-secondary">Sign Out</button>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="font-display text-2xl text-blue-900 uppercase mb-2">Your Teams</h3>
+                        <p class="text-4xl font-bold text-yellow-500">3</p>
+                        <p class="text-gray-600">Active teams</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="font-display text-2xl text-blue-900 uppercase mb-2">Total Cards</h3>
+                        <p class="text-4xl font-bold text-yellow-500">47</p>
+                        <p class="text-gray-600">Cards created</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="font-display text-2xl text-blue-900 uppercase mb-2">Latest Order</h3>
+                        <p class="text-2xl font-bold text-green-500">Delivered</p>
+                        <p class="text-gray-600">Oct 15, 2024</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h2 class="font-display text-3xl text-blue-900 uppercase mb-6">Your Teams</h2>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="border-2 border-yellow-400 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer" onclick="showPage('team-design')">
+                            <h3 class="font-display text-xl uppercase mb-2">Lightning Hawks</h3>
+                            <p class="text-gray-600 mb-2">Hockey • U12</p>
+                            <p class="text-sm text-gray-500">12 players • 2024 season</p>
+                            <button class="btn-primary mt-4 text-sm">Design Cards →</button>
+                        </div>
+                        <div class="border-2 border-blue-900 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
+                            <h3 class="font-display text-xl uppercase mb-2">Thunder Eagles</h3>
+                            <p class="text-gray-600 mb-2">Football • U14</p>
+                            <p class="text-sm text-gray-500">18 players • 2024 season</p>
+                            <button class="btn-secondary mt-4 text-sm">View Cards</button>
+                        </div>
+                        <div class="border-2 border-red-500 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
+                            <h3 class="font-display text-xl uppercase mb-2">Fire Dragons</h3>
+                            <p class="text-gray-600 mb-2">Baseball • U10</p>
+                            <p class="text-sm text-gray-500">15 players • 2024 season</p>
+                            <button class="btn-secondary mt-4 text-sm">View Cards</button>
+                        </div>
+                    </div>
+                    <button onclick="showPage('new-team')" class="btn-primary mt-6">
+                        + Create New Team
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Team Page -->
+    <div id="new-team-page" class="page pt-12">
+        <div class="min-h-screen bg-gradient-to-b from-yellow-50 to-white">
+            <div class="container mx-auto px-4 py-8">
+                <button onclick="showPage('dashboard')" class="text-blue-600 hover:underline mb-6">← Back to Dashboard</button>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
+                    <h2 class="font-display text-4xl text-blue-900 uppercase mb-6">Create New Team</h2>
+                    <form onsubmit="handleCreateTeam(event)">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Team Name</label>
+                            <input type="text" placeholder="Lightning Hawks" class="w-full px-4 py-2 border rounded-lg" required>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Sport</label>
+                                <select class="w-full px-4 py-2 border rounded-lg">
+                                    <option>Hockey</option>
+                                    <option>Football</option>
+                                    <option>Baseball</option>
+                                    <option>Soccer</option>
+                                    <option>Basketball</option>
+                                    <option>Lacrosse</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Age Group</label>
+                                <select class="w-full px-4 py-2 border rounded-lg">
+                                    <option>U8</option>
+                                    <option>U10</option>
+                                    <option>U12</option>
+                                    <option>U14</option>
+                                    <option>U16</option>
+                                    <option>U18</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 mb-2">Season</label>
+                            <input type="text" value="2024" class="w-full px-4 py-2 border rounded-lg" required>
+                        </div>
+                        <button type="submit" class="btn-primary w-full">Create Team & Add Players</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Design Page -->
+    <div id="team-design-page" class="page pt-12">
+        <div class="min-h-screen bg-gradient-to-b from-yellow-50 to-white">
+            <div class="container mx-auto px-4 py-8">
+                <button onclick="showPage('dashboard')" class="text-blue-600 hover:underline mb-6">← Back to Dashboard</button>
+
+                <h1 class="font-display text-4xl text-blue-900 uppercase mb-8">Design Cards - Lightning Hawks</h1>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Card Preview -->
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h3 class="font-display text-2xl uppercase mb-4">Card Preview</h3>
+                        <div class="w-full max-w-sm mx-auto">
+                            <div class="aspect-[3/4] rounded-xl shadow-2xl bg-gradient-to-br from-yellow-400 to-yellow-500 p-6 text-white">
+                                <div class="font-accent text-sm uppercase tracking-widest mb-4">Lightning Hawks</div>
+                                <div class="flex flex-col items-center justify-center h-3/4">
+                                    <div class="text-8xl mb-4">👤</div>
+                                    <div class="font-mono text-4xl font-bold mb-2">#99</div>
+                                    <div class="font-display text-2xl uppercase">John Smith</div>
+                                    <div class="text-sm mt-2">Center • Captain</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-accent text-xs uppercase tracking-wider">2024 Championship Edition</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Design Options -->
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h3 class="font-display text-2xl uppercase mb-4">Design Options</h3>
+
+                        <div class="mb-6">
+                            <label class="block text-gray-700 mb-2">Card Template</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button class="border-2 border-yellow-400 rounded p-2 text-sm">Gold Pro</button>
+                                <button class="border-2 border-gray-300 rounded p-2 text-sm">Navy Classic</button>
+                                <button class="border-2 border-gray-300 rounded p-2 text-sm">Fire Red</button>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-gray-700 mb-2">Team Colors</label>
+                            <div class="flex gap-2">
+                                <div class="w-10 h-10 bg-yellow-400 rounded cursor-pointer border-2 border-gray-300"></div>
+                                <div class="w-10 h-10 bg-blue-900 rounded cursor-pointer border-2 border-gray-300"></div>
+                                <div class="w-10 h-10 bg-red-500 rounded cursor-pointer border-2 border-gray-300"></div>
+                                <div class="w-10 h-10 bg-green-500 rounded cursor-pointer border-2 border-gray-300"></div>
+                                <div class="w-10 h-10 bg-purple-500 rounded cursor-pointer border-2 border-gray-300"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-gray-700 mb-2">Add Team Logo</label>
+                            <button class="border-2 border-dashed border-gray-300 rounded-lg p-4 w-full hover:border-yellow-400">
+                                📁 Upload Logo
+                            </button>
+                        </div>
+
+                        <button class="btn-primary w-full">Save Design & Add Players →</button>
+                    </div>
+                </div>
+
+                <!-- Players List -->
+                <div class="bg-white rounded-xl shadow-lg p-8 mt-8">
+                    <h3 class="font-display text-2xl uppercase mb-4">Team Roster (12 Players)</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="border rounded-lg p-4">
+                            <p class="font-bold">John Smith #99</p>
+                            <p class="text-sm text-gray-600">Center • Captain</p>
+                            <button class="text-blue-600 text-sm hover:underline mt-2">Upload Photo →</button>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <p class="font-bold">Mike Johnson #17</p>
+                            <p class="text-sm text-gray-600">Wing</p>
+                            <button class="text-blue-600 text-sm hover:underline mt-2">Upload Photo →</button>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <p class="font-bold">Sarah Williams #23</p>
+                            <p class="text-sm text-gray-600">Defense</p>
+                            <button class="text-blue-600 text-sm hover:underline mt-2">Upload Photo →</button>
+                        </div>
+                    </div>
+                    <button class="btn-secondary mt-4">+ Add More Players</button>
+                </div>
+
+                <div class="flex justify-center mt-8">
+                    <button onclick="alert('Order placed! In a real app, this would process your order.')" class="btn-primary text-xl px-12 py-4">
+                        Order All Cards - $75
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Role Switcher -->
+    <div class="fixed bottom-4 right-4 bg-blue-900 text-white p-4 rounded-lg shadow-xl z-50">
+        <p class="text-sm font-bold mb-2">Quick Demo Roles:</p>
+        <div class="flex flex-col gap-2">
+            <button onclick="switchRole('parent')" class="text-left text-sm hover:bg-white/20 p-1 rounded">👤 Parent View</button>
+            <button onclick="switchRole('coach')" class="text-left text-sm hover:bg-white/20 p-1 rounded">👥 Coach View</button>
+            <button onclick="switchRole('photographer')" class="text-left text-sm hover:bg-white/20 p-1 rounded">📸 Photographer View</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 'landing';
+        let currentRole = 'parent';
+
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(page + '-page').classList.add('active');
+            currentPage = page;
+            window.scrollTo(0, 0);
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            showPage('dashboard');
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            showPage('dashboard');
+        }
+
+        function handleCreateTeam(e) {
+            e.preventDefault();
+            showPage('team-design');
+        }
+
+        function switchRole(role) {
+            currentRole = role;
+            alert(`Switched to ${role} view. In a real app, the interface would update based on the role.`);
+        }
+
+        function resetDemo() {
+            showPage('landing');
+            currentRole = 'parent';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAP Enhanced Demo - Championship Athletic Prospects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Graduate&family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-display { font-family: 'Bebas Neue', sans-serif; }
+        .font-accent { font-family: 'Graduate', serif; }
+        .font-mono { font-family: 'Roboto Mono', monospace; }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+            color: #0A1F44;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s;
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255,215,0,0.4);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: #0A1F44;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-block;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-secondary:hover {
+            background: #0F2D5C;
+        }
+
+        .btn-danger {
+            background: #DC143C;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-danger:hover {
+            background: #B8102E;
+        }
+
+        /* Text Effects */
+        .text-gradient-gold {
+            background: linear-gradient(90deg, #E5C100 0%, #FFD700 50%, #FFE44D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Card Animations */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        .card-3d.flipped {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        .card-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFD700 0%, #FFC700 100%);
+            transition: width 0.5s ease;
+        }
+
+        /* Loading Animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 100;
+            border-left: 4px solid #10B981;
+        }
+        .notification.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Page Management */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.show {
+            display: flex;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlide 0.3s ease;
+        }
+        @keyframes modalSlide {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Fixed Elements */
+        .prototype-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, #DC143C 0%, #B8102E 100%);
+            color: white;
+            padding: 8px;
+            text-align: center;
+            z-index: 50;
+            font-size: 14px;
+        }
+
+        .cart-icon {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: #FFD700;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            z-index: 40;
+            transition: all 0.3s;
+        }
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #DC143C;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Photo Upload */
+        .upload-zone {
+            border: 3px dashed #D1D5DB;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .upload-zone:hover {
+            border-color: #FFD700;
+            background: #FFFBEB;
+        }
+        .upload-zone.dragover {
+            border-color: #FFD700;
+            background: #FEF3C7;
+        }
+
+        /* Image Preview */
+        .image-preview {
+            position: relative;
+            display: inline-block;
+        }
+        .image-preview img {
+            max-width: 200px;
+            border-radius: 8px;
+        }
+        .image-preview .remove-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #DC143C;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* AI Processing Effect */
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100%); }
+        }
+        .ai-scanner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+            animation: scan 2s linear infinite;
+        }
+
+        /* Tabs */
+        .tab-button {
+            padding: 12px 24px;
+            background: #F3F4F6;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .tab-button.active {
+            background: #FFD700;
+            color: #0A1F44;
+            font-weight: 600;
+        }
+        .tab-content {
+            display: none;
+            padding: 24px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Steps */
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 32px;
+        }
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        .step::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: #E5E7EB;
+            z-index: -1;
+        }
+        .step:last-child::after {
+            display: none;
+        }
+        .step.completed::after {
+            background: #10B981;
+        }
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #E5E7EB;
+            color: #9CA3AF;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .step.active .step-circle {
+            background: #FFD700;
+            color: #0A1F44;
+        }
+        .step.completed .step-circle {
+            background: #10B981;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Prototype Banner -->
+    <div class="prototype-banner">
+        🎭 ENHANCED DEMO - Click everything! All features are interactive |
+        <button onclick="resetDemo()" class="underline hover:no-underline ml-2">Reset Demo</button>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <p id="notification-text"></p>
+    </div>
+
+    <!-- Shopping Cart Icon -->
+    <div class="cart-icon" onclick="openCart()">
+        🛒
+        <span class="cart-badge" id="cart-count">0</span>
+    </div>
+
+    <!-- Landing Page -->
+    <div id="landing-page" class="page active pt-12">
+        <section class="relative overflow-hidden bg-gradient-to-b from-yellow-50 to-white py-20">
+            <div class="container mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h1 class="font-display text-6xl md:text-7xl lg:text-8xl uppercase mb-4">
+                            <span class="text-gradient-gold">Championship</span><br>
+                            <span class="text-blue-900">Athletic</span><br>
+                            <span class="text-blue-900">Prospects</span>
+                        </h1>
+                        <p class="text-xl md:text-2xl text-gray-700 mb-8">
+                            Turn phone photos into professional trading cards in under 5 minutes.
+                            Every kid's a champion with CAP.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="showPage('signup')" class="btn-primary">
+                                Create Your First Card →
+                            </button>
+                            <button onclick="showPage('login')" class="btn-secondary">
+                                Sign In
+                            </button>
+                        </div>
+                        <div class="mt-8 grid grid-cols-3 gap-4">
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-yellow-500">15K+</p>
+                                <p class="text-sm text-gray-600">Happy Athletes</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-yellow-500">4.9⭐</p>
+                                <p class="text-sm text-gray-600">Rating</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-yellow-500">5-7</p>
+                                <p class="text-sm text-gray-600">Day Delivery</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative h-96 hidden lg:block">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="card-3d w-72 h-96" id="hero-card" onclick="flipCard('hero-card')">
+                                <div class="card-front card-float w-full h-full rounded-2xl shadow-2xl bg-gradient-to-br from-yellow-400 to-yellow-500 p-6 text-white">
+                                    <div class="font-accent text-sm uppercase tracking-widest mb-auto">CAP Trading Card</div>
+                                    <div class="flex flex-col items-center justify-center h-full">
+                                        <div class="font-mono text-6xl font-bold mb-2">#17</div>
+                                        <div class="font-display text-3xl uppercase">HOCKEY</div>
+                                        <div class="text-sm mt-2">2024 Season</div>
+                                    </div>
+                                    <div class="text-center mt-auto">
+                                        <div class="font-accent text-xs uppercase tracking-wider">Click to Flip!</div>
+                                    </div>
+                                </div>
+                                <div class="card-back w-full h-full rounded-2xl shadow-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-6 text-white">
+                                    <div class="font-accent text-sm uppercase tracking-widest mb-4">Player Stats</div>
+                                    <div class="space-y-2 text-sm">
+                                        <p><strong>Goals:</strong> 23</p>
+                                        <p><strong>Assists:</strong> 31</p>
+                                        <p><strong>Games:</strong> 42</p>
+                                        <p><strong>Position:</strong> Center</p>
+                                        <p><strong>Team:</strong> Lightning Hawks</p>
+                                    </div>
+                                    <div class="mt-auto">
+                                        <p class="text-xs italic">"Speed, skill, and heart define this player's game!"</p>
+                                        <div class="font-accent text-xs uppercase tracking-wider mt-4">Limited Edition</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="font-display text-5xl text-center text-blue-900 uppercase mb-12">How CAP Works</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="step-indicator">
+                        <div class="step completed">
+                            <div class="step-circle">1</div>
+                            <p class="text-sm font-semibold">Upload</p>
+                        </div>
+                        <div class="step completed">
+                            <div class="step-circle">2</div>
+                            <p class="text-sm font-semibold">Design</p>
+                        </div>
+                        <div class="step active">
+                            <div class="step-circle">3</div>
+                            <p class="text-sm font-semibold">Enhance</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-circle">4</div>
+                            <p class="text-sm font-semibold">Print</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-circle">5</div>
+                            <p class="text-sm font-semibold">Deliver</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mt-12">
+                    <div class="text-center group cursor-pointer" onclick="showModal('upload-demo')">
+                        <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-yellow-400 flex items-center justify-center text-3xl group-hover:scale-110 transition-all">
+                            📸
+                        </div>
+                        <h3 class="font-display text-2xl text-blue-900 uppercase mb-3">Smart Upload</h3>
+                        <p class="text-gray-700">AI detects faces and auto-crops. Supports batch uploads.</p>
+                        <button class="text-blue-600 hover:underline mt-2 text-sm">Try Demo →</button>
+                    </div>
+                    <div class="text-center group cursor-pointer" onclick="showModal('ai-demo')">
+                        <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-blue-900 flex items-center justify-center text-3xl group-hover:scale-110 transition-all">
+                            ✨
+                        </div>
+                        <h3 class="font-display text-2xl text-blue-900 uppercase mb-3">AI Magic</h3>
+                        <p class="text-gray-700">Remove backgrounds, enhance colors, generate bios.</p>
+                        <button class="text-blue-600 hover:underline mt-2 text-sm">See Magic →</button>
+                    </div>
+                    <div class="text-center group cursor-pointer" onclick="showModal('delivery-demo')">
+                        <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-red-500 flex items-center justify-center text-3xl group-hover:scale-110 transition-all">
+                            🚀
+                        </div>
+                        <h3 class="font-display text-2xl text-blue-900 uppercase mb-3">Fast Delivery</h3>
+                        <p class="text-gray-700">Track your order in real-time. Express options available.</p>
+                        <button class="text-blue-600 hover:underline mt-2 text-sm">Track Demo →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Demo Section -->
+        <section class="py-20 bg-gradient-to-b from-blue-50 to-white">
+            <div class="container mx-auto px-4">
+                <h2 class="font-display text-5xl text-center text-blue-900 uppercase mb-12">Try Live Demo</h2>
+                <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-display text-2xl uppercase mb-4">Upload Your Photo</h3>
+                            <div class="upload-zone" onclick="simulateUpload()">
+                                <div id="upload-content">
+                                    <p class="text-4xl mb-2">📁</p>
+                                    <p class="font-semibold">Click to upload</p>
+                                    <p class="text-sm text-gray-500">or drag and drop</p>
+                                    <p class="text-xs text-gray-400 mt-2">PNG, JPG up to 10MB</p>
+                                </div>
+                                <div id="upload-preview" style="display: none;">
+                                    <div class="image-preview">
+                                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%239ca3af' font-size='20'%3EPlayer Photo%3C/text%3E%3C/svg%3E" alt="Preview">
+                                        <button class="remove-btn" onclick="event.stopPropagation(); removeUpload()">×</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-2xl uppercase mb-4">Instant Preview</h3>
+                            <div id="preview-card" class="w-full max-w-sm">
+                                <div class="aspect-[3/4] rounded-xl shadow-lg bg-gradient-to-br from-gray-200 to-gray-300 p-4 flex items-center justify-center">
+                                    <p class="text-gray-500">Upload a photo to see preview</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <button onclick="processWithAI()" class="btn-primary" id="process-btn" disabled>
+                            Process with AI ✨
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page pt-12">
+        <div class="min-h-screen bg-gradient-to-b from-yellow-50 to-white">
+            <div class="container mx-auto px-4 py-8">
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-8">
+                    <h1 class="font-display text-4xl text-blue-900 uppercase">Dashboard</h1>
+                    <div class="flex gap-4">
+                        <button onclick="showNotification('Refreshed!')" class="btn-secondary">🔄 Refresh</button>
+                        <button onclick="showPage('landing')" class="btn-secondary">Sign Out</button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer" onclick="showModal('stats-detail')">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-display text-xl text-blue-900 uppercase">Teams</h3>
+                            <span class="text-green-500 text-sm">+2 this month</span>
+                        </div>
+                        <p class="text-4xl font-bold text-yellow-500">5</p>
+                        <div class="progress-bar mt-3">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer">
+                        <h3 class="font-display text-xl text-blue-900 uppercase mb-2">Cards</h3>
+                        <p class="text-4xl font-bold text-yellow-500">127</p>
+                        <p class="text-sm text-gray-600">23 pending</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer">
+                        <h3 class="font-display text-xl text-blue-900 uppercase mb-2">Photos</h3>
+                        <p class="text-4xl font-bold text-yellow-500">342</p>
+                        <p class="text-sm text-gray-600">AI enhanced</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer">
+                        <h3 class="font-display text-xl text-blue-900 uppercase mb-2">Orders</h3>
+                        <p class="text-4xl font-bold text-green-500">✓ 8</p>
+                        <p class="text-sm text-gray-600">All delivered</p>
+                    </div>
+                </div>
+
+                <!-- Tabs Section -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="flex border-b">
+                        <button class="tab-button active" onclick="switchTab('teams')">Teams</button>
+                        <button class="tab-button" onclick="switchTab('orders')">Orders</button>
+                        <button class="tab-button" onclick="switchTab('gallery')">Gallery</button>
+                        <button class="tab-button" onclick="switchTab('settings')">Settings</button>
+                    </div>
+
+                    <!-- Teams Tab -->
+                    <div id="teams-tab" class="tab-content active">
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="border-2 border-yellow-400 rounded-lg p-4 hover:shadow-lg transition-all">
+                                <div class="flex justify-between items-start mb-3">
+                                    <h3 class="font-display text-xl uppercase">Lightning Hawks</h3>
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+                                </div>
+                                <p class="text-gray-600 mb-2">Hockey • U12 • 2024</p>
+                                <div class="flex gap-2 text-sm text-gray-500 mb-4">
+                                    <span>👥 12 players</span>
+                                    <span>📸 48 photos</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button onclick="showPage('team-manager')" class="btn-primary text-sm">Manage</button>
+                                    <button onclick="showPage('card-designer')" class="btn-secondary text-sm">Design</button>
+                                </div>
+                            </div>
+
+                            <div class="border-2 border-blue-900 rounded-lg p-4 hover:shadow-lg transition-all">
+                                <div class="flex justify-between items-start mb-3">
+                                    <h3 class="font-display text-xl uppercase">Thunder Eagles</h3>
+                                    <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Processing</span>
+                                </div>
+                                <p class="text-gray-600 mb-2">Football • U14 • 2024</p>
+                                <div class="flex gap-2 text-sm text-gray-500 mb-4">
+                                    <span>👥 18 players</span>
+                                    <span>📸 72 photos</span>
+                                </div>
+                                <div class="progress-bar mb-3">
+                                    <div class="progress-fill" style="width: 75%"></div>
+                                </div>
+                                <p class="text-xs text-gray-500">75% complete</p>
+                            </div>
+
+                            <div class="border-2 border-gray-300 border-dashed rounded-lg p-4 hover:border-yellow-400 transition-all cursor-pointer" onclick="showPage('team-creator')">
+                                <div class="text-center py-8">
+                                    <p class="text-4xl mb-2">➕</p>
+                                    <p class="font-display text-xl uppercase">Add New Team</p>
+                                    <p class="text-sm text-gray-500 mt-2">Start creating cards</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders Tab -->
+                    <div id="orders-tab" class="tab-content">
+                        <div class="space-y-4">
+                            <div class="border rounded-lg p-4 flex justify-between items-center hover:shadow-md transition-all">
+                                <div>
+                                    <p class="font-semibold">Order #CAP-2024-1127</p>
+                                    <p class="text-sm text-gray-600">Lightning Hawks Team Pack • 25 cards</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Delivered</span>
+                                    <p class="text-sm text-gray-500 mt-1">Oct 15, 2024</p>
+                                </div>
+                                <button onclick="showModal('order-detail')" class="btn-secondary text-sm">View Details</button>
+                            </div>
+
+                            <div class="border rounded-lg p-4 flex justify-between items-center hover:shadow-md transition-all">
+                                <div>
+                                    <p class="font-semibold">Order #CAP-2024-1095</p>
+                                    <p class="text-sm text-gray-600">Thunder Eagles Team Pack • 50 cards</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">Processing</span>
+                                    <p class="text-sm text-gray-500 mt-1">Est. Oct 22, 2024</p>
+                                </div>
+                                <button onclick="trackOrder()" class="btn-primary text-sm">Track</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Tab -->
+                    <div id="gallery-tab" class="tab-content">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="aspect-[3/4] rounded-lg bg-gradient-to-br from-yellow-400 to-yellow-500 p-3 text-white cursor-pointer hover:scale-105 transition-all" onclick="viewCard(1)">
+                                <div class="text-xs font-accent uppercase">Lightning Hawks</div>
+                                <div class="flex flex-col items-center justify-center h-full">
+                                    <p class="font-mono text-2xl font-bold">#99</p>
+                                    <p class="text-xs mt-1">J. Smith</p>
+                                </div>
+                            </div>
+                            <div class="aspect-[3/4] rounded-lg bg-gradient-to-br from-blue-800 to-blue-900 p-3 text-white cursor-pointer hover:scale-105 transition-all" onclick="viewCard(2)">
+                                <div class="text-xs font-accent uppercase">Thunder Eagles</div>
+                                <div class="flex flex-col items-center justify-center h-full">
+                                    <p class="font-mono text-2xl font-bold">#7</p>
+                                    <p class="text-xs mt-1">M. Johnson</p>
+                                </div>
+                            </div>
+                            <div class="aspect-[3/4] rounded-lg bg-gradient-to-br from-red-500 to-red-600 p-3 text-white cursor-pointer hover:scale-105 transition-all" onclick="viewCard(3)">
+                                <div class="text-xs font-accent uppercase">Fire Dragons</div>
+                                <div class="flex flex-col items-center justify-center h-full">
+                                    <p class="font-mono text-2xl font-bold">#23</p>
+                                    <p class="text-xs mt-1">S. Williams</p>
+                                </div>
+                            </div>
+                            <div class="aspect-[3/4] rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center cursor-pointer hover:border-yellow-400 transition-all" onclick="showPage('card-designer')">
+                                <div class="text-center">
+                                    <p class="text-2xl">➕</p>
+                                    <p class="text-sm text-gray-500">Create New</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div id="settings-tab" class="tab-content">
+                        <div class="max-w-2xl">
+                            <h3 class="font-display text-2xl uppercase mb-4">Account Settings</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Email Notifications</label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="mr-2">
+                                        <span>Order updates</span>
+                                    </label>
+                                    <label class="flex items-center mt-2">
+                                        <input type="checkbox" checked class="mr-2">
+                                        <span>Team invitations</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Default Card Style</label>
+                                    <select class="w-full px-4 py-2 border rounded-lg">
+                                        <option>Gold Premium</option>
+                                        <option>Navy Classic</option>
+                                        <option>Fire Red</option>
+                                    </select>
+                                </div>
+                                <button class="btn-primary">Save Settings</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Manager Page -->
+    <div id="team-manager-page" class="page pt-12">
+        <div class="min-h-screen bg-gradient-to-b from-yellow-50 to-white">
+            <div class="container mx-auto px-4 py-8">
+                <button onclick="showPage('dashboard')" class="text-blue-600 hover:underline mb-6">← Back to Dashboard</button>
+
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex justify-between items-center mb-8">
+                        <h1 class="font-display text-4xl text-blue-900 uppercase">Lightning Hawks Roster</h1>
+                        <div class="flex gap-2">
+                            <button onclick="showModal('bulk-upload')" class="btn-secondary">📤 Bulk Upload</button>
+                            <button onclick="addPlayer()" class="btn-primary">+ Add Player</button>
+                        </div>
+                    </div>
+
+                    <!-- Player List with Drag & Drop -->
+                    <div class="grid gap-4" id="player-list">
+                        <div class="border rounded-lg p-4 bg-white hover:shadow-md transition-all" draggable="true">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center text-white font-bold">
+                                        99
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">John Smith</p>
+                                        <p class="text-sm text-gray-600">Center • Captain</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-sm text-gray-500">📸 4 photos</span>
+                                        <button onclick="uploadPhoto(1)" class="text-blue-600 hover:underline text-sm">Upload</button>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button onclick="editPlayer(1)" class="text-blue-600 hover:underline">Edit</button>
+                                        <button onclick="generateBio(1)" class="btn-primary text-sm">Generate Bio</button>
+                                        <button onclick="removePlayer(1)" class="text-red-500 hover:underline">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3 text-sm text-gray-600">
+                                <p><strong>Stats:</strong> 23 goals, 31 assists, 42 games</p>
+                                <p class="italic mt-1">"Natural leader with exceptional vision on ice"</p>
+                            </div>
+                        </div>
+
+                        <div class="border rounded-lg p-4 bg-white hover:shadow-md transition-all" draggable="true">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold">
+                                        17
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">Mike Johnson</p>
+                                        <p class="text-sm text-gray-600">Right Wing</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-sm text-gray-500">📸 2 photos</span>
+                                        <button onclick="uploadPhoto(2)" class="text-blue-600 hover:underline text-sm">Upload</button>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button onclick="editPlayer(2)" class="text-blue-600 hover:underline">Edit</button>
+                                        <button onclick="generateBio(2)" class="btn-primary text-sm">Generate Bio</button>
+                                        <button onclick="removePlayer(2)" class="text-red-500 hover:underline">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-yellow-400 transition-all cursor-pointer" onclick="addPlayer()">
+                            <p class="text-2xl mb-2">➕</p>
+                            <p class="text-gray-500">Add Another Player</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-between items-center">
+                        <div>
+                            <p class="text-gray-600">Total Players: <span class="font-bold">12</span></p>
+                            <p class="text-gray-600">Photos Uploaded: <span class="font-bold">38/48</span></p>
+                        </div>
+                        <button onclick="showPage('card-designer')" class="btn-primary">
+                            Continue to Card Design →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Designer Page -->
+    <div id="card-designer-page" class="page pt-12">
+        <div class="min-h-screen bg-gradient-to-b from-yellow-50 to-white">
+            <div class="container mx-auto px-4 py-8">
+                <button onclick="showPage('dashboard')" class="text-blue-600 hover:underline mb-6">← Back to Dashboard</button>
+
+                <h1 class="font-display text-4xl text-blue-900 uppercase mb-8">Card Designer Studio</h1>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Live Preview -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-xl shadow-lg p-8">
+                            <h3 class="font-display text-2xl uppercase mb-4">Live Preview</h3>
+                            <div class="flex justify-center">
+                                <div class="card-3d w-80 h-[450px] relative" id="design-card">
+                                    <div class="card-front w-full h-full rounded-xl shadow-2xl p-6 text-white" id="card-preview" style="background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);">
+                                        <div class="font-accent text-sm uppercase tracking-widest mb-4" id="team-name">Lightning Hawks</div>
+                                        <div class="flex flex-col items-center justify-center h-3/4">
+                                            <div class="w-32 h-32 rounded-full bg-white/20 mb-4 flex items-center justify-center text-6xl" id="player-photo">
+                                                👤
+                                            </div>
+                                            <div class="font-mono text-5xl font-bold mb-2" id="player-number">#99</div>
+                                            <div class="font-display text-3xl uppercase" id="player-name">John Smith</div>
+                                            <div class="text-lg mt-2" id="player-position">Center • Captain</div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="font-accent text-xs uppercase tracking-wider">2024 Championship Edition</div>
+                                        </div>
+                                    </div>
+                                    <div class="card-back w-full h-full rounded-xl shadow-2xl p-6 bg-gradient-to-br from-gray-800 to-gray-900 text-white">
+                                        <div class="font-accent text-sm uppercase tracking-widest mb-4">Player Stats</div>
+                                        <div id="player-stats" class="space-y-2 text-sm">
+                                            <p><strong>Goals:</strong> 23</p>
+                                            <p><strong>Assists:</strong> 31</p>
+                                            <p><strong>Games:</strong> 42</p>
+                                            <p><strong>Position:</strong> Center</p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="text-xs italic" id="player-bio">"Natural leader with exceptional vision and playmaking ability"</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-6">
+                                <button onclick="flipCard('design-card')" class="btn-secondary">Flip Card</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Design Controls -->
+                    <div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 space-y-6">
+                            <div>
+                                <h4 class="font-semibold mb-3">Card Style</h4>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button onclick="changeCardStyle('gold')" class="p-3 rounded border-2 border-yellow-400 bg-gradient-to-br from-yellow-400 to-yellow-500 text-white font-semibold">Gold</button>
+                                    <button onclick="changeCardStyle('navy')" class="p-3 rounded border-2 border-gray-300 bg-gradient-to-br from-blue-800 to-blue-900 text-white font-semibold">Navy</button>
+                                    <button onclick="changeCardStyle('red')" class="p-3 rounded border-2 border-gray-300 bg-gradient-to-br from-red-500 to-red-600 text-white font-semibold">Fire</button>
+                                    <button onclick="changeCardStyle('green')" class="p-3 rounded border-2 border-gray-300 bg-gradient-to-br from-green-500 to-green-600 text-white font-semibold">Forest</button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold mb-3">Font Style</h4>
+                                <select class="w-full px-4 py-2 border rounded-lg" onchange="changeFontStyle(this.value)">
+                                    <option value="modern">Modern</option>
+                                    <option value="classic">Classic</option>
+                                    <option value="bold">Bold Impact</option>
+                                    <option value="elegant">Elegant</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold mb-3">Special Effects</h4>
+                                <label class="flex items-center mb-2">
+                                    <input type="checkbox" onchange="toggleEffect('holographic')" class="mr-2">
+                                    <span>✨ Holographic Shine</span>
+                                </label>
+                                <label class="flex items-center mb-2">
+                                    <input type="checkbox" onchange="toggleEffect('foil')" class="mr-2">
+                                    <span>🌟 Gold Foil Accents</span>
+                                </label>
+                                <label class="flex items-center mb-2">
+                                    <input type="checkbox" onchange="toggleEffect('embossed')" class="mr-2">
+                                    <span>📐 Embossed Text</span>
+                                </label>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold mb-3">Border Style</h4>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button onclick="changeBorder('none')" class="p-2 border rounded text-sm">None</button>
+                                    <button onclick="changeBorder('thin')" class="p-2 border-2 rounded text-sm">Thin</button>
+                                    <button onclick="changeBorder('thick')" class="p-2 border-4 rounded text-sm">Thick</button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold mb-3">Quick Actions</h4>
+                                <button onclick="randomizeDesign()" class="btn-secondary w-full mb-2">🎲 Randomize Design</button>
+                                <button onclick="saveTemplate()" class="btn-primary w-full">💾 Save as Template</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-lg p-6 mt-6">
+                            <h4 class="font-semibold mb-3">Pricing</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span>Base Card (×25)</span>
+                                    <span>$75.00</span>
+                                </div>
+                                <div class="flex justify-between text-green-600">
+                                    <span>Bulk Discount</span>
+                                    <span>-$10.00</span>
+                                </div>
+                                <div class="flex justify-between text-yellow-600">
+                                    <span>Premium Effects</span>
+                                    <span>+$15.00</span>
+                                </div>
+                                <hr class="my-2">
+                                <div class="flex justify-between font-bold text-lg">
+                                    <span>Total</span>
+                                    <span id="total-price">$80.00</span>
+                                </div>
+                            </div>
+                            <button onclick="addToCart()" class="btn-primary w-full mt-4">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Page -->
+    <div id="checkout-page" class="page pt-12">
+        <div class="min-h-screen bg-gradient-to-b from-yellow-50 to-white">
+            <div class="container mx-auto px-4 py-8">
+                <h1 class="font-display text-4xl text-blue-900 uppercase mb-8">Checkout</h1>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2">
+                        <!-- Shipping Info -->
+                        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                            <h3 class="font-display text-2xl uppercase mb-4">Shipping Information</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <input type="text" placeholder="First Name" value="John" class="px-4 py-2 border rounded-lg">
+                                <input type="text" placeholder="Last Name" value="Doe" class="px-4 py-2 border rounded-lg">
+                                <input type="email" placeholder="Email" value="john@example.com" class="px-4 py-2 border rounded-lg">
+                                <input type="tel" placeholder="Phone" value="555-0123" class="px-4 py-2 border rounded-lg">
+                                <input type="text" placeholder="Street Address" value="123 Main St" class="px-4 py-2 border rounded-lg md:col-span-2">
+                                <input type="text" placeholder="City" value="Springfield" class="px-4 py-2 border rounded-lg">
+                                <input type="text" placeholder="State" value="IL" class="px-4 py-2 border rounded-lg">
+                                <input type="text" placeholder="ZIP" value="62701" class="px-4 py-2 border rounded-lg">
+                            </div>
+                        </div>
+
+                        <!-- Payment Info -->
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <h3 class="font-display text-2xl uppercase mb-4">Payment Method</h3>
+                            <div class="space-y-4">
+                                <label class="flex items-center p-3 border-2 border-yellow-400 rounded-lg cursor-pointer">
+                                    <input type="radio" name="payment" checked class="mr-3">
+                                    <span>💳 Credit Card</span>
+                                </label>
+                                <label class="flex items-center p-3 border rounded-lg cursor-pointer">
+                                    <input type="radio" name="payment" class="mr-3">
+                                    <span>🅿️ PayPal</span>
+                                </label>
+                            </div>
+                            <div class="mt-4 space-y-4">
+                                <input type="text" placeholder="Card Number" value="4242 4242 4242 4242" class="w-full px-4 py-2 border rounded-lg">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input type="text" placeholder="MM/YY" value="12/25" class="px-4 py-2 border rounded-lg">
+                                    <input type="text" placeholder="CVV" value="123" class="px-4 py-2 border rounded-lg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 sticky top-20">
+                            <h3 class="font-display text-2xl uppercase mb-4">Order Summary</h3>
+                            <div class="space-y-3 mb-4" id="cart-items">
+                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                                    <div>
+                                        <p class="font-semibold">Lightning Hawks Team Pack</p>
+                                        <p class="text-sm text-gray-600">25 cards • Gold Premium</p>
+                                    </div>
+                                    <span class="font-bold">$80.00</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-sm mb-4">
+                                <div class="flex justify-between">
+                                    <span>Subtotal</span>
+                                    <span>$80.00</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Shipping</span>
+                                    <span>$5.99</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Tax</span>
+                                    <span>$6.88</span>
+                                </div>
+                            </div>
+                            <div class="border-t pt-4">
+                                <div class="flex justify-between font-bold text-lg mb-4">
+                                    <span>Total</span>
+                                    <span>$92.87</span>
+                                </div>
+                                <button onclick="processPayment()" class="btn-primary w-full">
+                                    Complete Order →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal" class="modal">
+        <div class="modal-content p-8">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-display text-2xl uppercase" id="modal-title">Demo Feature</h3>
+                <button onclick="closeModal()" class="text-2xl hover:text-gray-600">×</button>
+            </div>
+            <div id="modal-body">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content p-8">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-display text-2xl uppercase">Shopping Cart</h3>
+                <button onclick="closeCart()" class="text-2xl hover:text-gray-600">×</button>
+            </div>
+            <div id="cart-content" class="space-y-4">
+                <p class="text-gray-500">Your cart is empty</p>
+            </div>
+            <div class="mt-6 pt-4 border-t">
+                <div class="flex justify-between font-bold text-lg mb-4">
+                    <span>Total</span>
+                    <span id="cart-total">$0.00</span>
+                </div>
+                <button onclick="showPage('checkout'); closeCart();" class="btn-primary w-full">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Role Switcher -->
+    <div class="fixed bottom-4 right-4 bg-blue-900 text-white p-4 rounded-lg shadow-xl z-30">
+        <p class="text-xs font-bold mb-2">Demo Roles:</p>
+        <div class="flex flex-col gap-1">
+            <button onclick="switchRole('parent')" class="text-left text-xs hover:bg-white/20 p-1 rounded">👤 Parent</button>
+            <button onclick="switchRole('coach')" class="text-left text-xs hover:bg-white/20 p-1 rounded">👥 Coach</button>
+            <button onclick="switchRole('photographer')" class="text-left text-xs hover:bg-white/20 p-1 rounded">📸 Photo</button>
+        </div>
+    </div>
+
+    <script>
+        // State Management
+        let currentPage = 'landing';
+        let currentRole = 'parent';
+        let cartItems = [];
+        let uploadedImage = false;
+        let currentTab = 'teams';
+
+        // Page Navigation
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const pageEl = document.getElementById(page + '-page');
+            if (pageEl) {
+                pageEl.classList.add('active');
+                currentPage = page;
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Authentication
+        function handleLogin(e) {
+            e.preventDefault();
+            showNotification('Welcome back! Logged in successfully.');
+            showPage('dashboard');
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            showNotification('Account created! Welcome to CAP!');
+            showPage('dashboard');
+        }
+
+        // Notifications
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            document.getElementById('notification-text').textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Modal Management
+        function showModal(type) {
+            const modal = document.getElementById('modal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+
+            switch(type) {
+                case 'upload-demo':
+                    title.textContent = 'Smart Upload Demo';
+                    body.innerHTML = `
+                        <div class="space-y-4">
+                            <p>Our AI automatically:</p>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li>Detects faces and centers them</li>
+                                <li>Removes backgrounds instantly</li>
+                                <li>Enhances image quality</li>
+                                <li>Crops to perfect card dimensions</li>
+                            </ul>
+                            <div class="bg-yellow-50 p-4 rounded-lg">
+                                <p class="text-sm">💡 <strong>Pro Tip:</strong> Upload multiple photos at once for entire teams!</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'ai-demo':
+                    title.textContent = 'AI Enhancement Magic';
+                    body.innerHTML = `
+                        <div class="space-y-4">
+                            <div class="relative">
+                                <div class="h-40 bg-gradient-to-r from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
+                                    <p class="text-gray-500">Before: Original Photo</p>
+                                </div>
+                                <div class="ai-scanner"></div>
+                            </div>
+                            <div class="h-40 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg flex items-center justify-center text-white">
+                                <p>After: AI Enhanced</p>
+                            </div>
+                            <p class="text-sm text-gray-600">AI removes backgrounds, adjusts lighting, and creates professional results in seconds!</p>
+                        </div>
+                    `;
+                    break;
+                case 'order-detail':
+                    title.textContent = 'Order Details';
+                    body.innerHTML = `
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <p class="font-semibold mb-2">Order #CAP-2024-1127</p>
+                                <p class="text-sm text-gray-600">Placed: October 10, 2024</p>
+                                <p class="text-sm text-gray-600">Delivered: October 15, 2024</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold mb-2">Items (25)</p>
+                                <div class="space-y-2 max-h-40 overflow-y-auto">
+                                    <div class="flex justify-between text-sm">
+                                        <span>Player #99 - John Smith</span>
+                                        <span>Gold Premium</span>
+                                    </div>
+                                    <div class="flex justify-between text-sm">
+                                        <span>Player #17 - Mike Johnson</span>
+                                        <span>Gold Premium</span>
+                                    </div>
+                                    <div class="text-sm text-gray-500">... and 23 more</div>
+                                </div>
+                            </div>
+                            <button onclick="closeModal()" class="btn-primary w-full">Close</button>
+                        </div>
+                    `;
+                    break;
+            }
+
+            modal.classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+        }
+
+        // Cart Management
+        function openCart() {
+            const modal = document.getElementById('cart-modal');
+            const content = document.getElementById('cart-content');
+
+            if (cartItems.length === 0) {
+                content.innerHTML = '<p class="text-gray-500">Your cart is empty</p>';
+                document.getElementById('cart-total').textContent = '$0.00';
+            } else {
+                content.innerHTML = cartItems.map((item, index) => `
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                        <div>
+                            <p class="font-semibold">${item.name}</p>
+                            <p class="text-sm text-gray-600">${item.description}</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold">$${item.price.toFixed(2)}</span>
+                            <button onclick="removeFromCart(${index})" class="btn-danger text-xs">Remove</button>
+                        </div>
+                    </div>
+                `).join('');
+
+                const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+                document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+            }
+
+            modal.classList.add('show');
+        }
+
+        function closeCart() {
+            document.getElementById('cart-modal').classList.remove('show');
+        }
+
+        function addToCart() {
+            const item = {
+                name: 'Lightning Hawks Team Pack',
+                description: '25 cards • Gold Premium',
+                price: 80.00
+            };
+            cartItems.push(item);
+            updateCartBadge();
+            showNotification('Added to cart!');
+        }
+
+        function removeFromCart(index) {
+            cartItems.splice(index, 1);
+            updateCartBadge();
+            openCart(); // Refresh cart modal
+        }
+
+        function updateCartBadge() {
+            document.getElementById('cart-count').textContent = cartItems.length;
+        }
+
+        // Upload Simulation
+        function simulateUpload() {
+            document.getElementById('upload-content').style.display = 'none';
+            document.getElementById('upload-preview').style.display = 'block';
+            document.getElementById('process-btn').disabled = false;
+            uploadedImage = true;
+
+            // Update preview card
+            document.getElementById('preview-card').innerHTML = `
+                <div class="aspect-[3/4] rounded-xl shadow-2xl bg-gradient-to-br from-yellow-400 to-yellow-500 p-6 text-white">
+                    <div class="font-accent text-sm uppercase tracking-widest mb-auto">Preview</div>
+                    <div class="flex flex-col items-center justify-center h-full">
+                        <div class="text-6xl mb-4">👤</div>
+                        <div class="font-mono text-3xl font-bold mb-2">#00</div>
+                        <div class="font-display text-xl uppercase">Your Player</div>
+                    </div>
+                </div>
+            `;
+
+            showNotification('Photo uploaded successfully!');
+        }
+
+        function removeUpload() {
+            document.getElementById('upload-content').style.display = 'block';
+            document.getElementById('upload-preview').style.display = 'none';
+            document.getElementById('process-btn').disabled = true;
+            uploadedImage = false;
+
+            document.getElementById('preview-card').innerHTML = `
+                <div class="aspect-[3/4] rounded-xl shadow-lg bg-gradient-to-br from-gray-200 to-gray-300 p-4 flex items-center justify-center">
+                    <p class="text-gray-500">Upload a photo to see preview</p>
+                </div>
+            `;
+        }
+
+        function processWithAI() {
+            if (!uploadedImage) return;
+
+            const btn = document.getElementById('process-btn');
+            btn.innerHTML = 'Processing... ✨';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = 'Complete! ✅';
+                showNotification('AI processing complete! Background removed and image enhanced.');
+
+                // Update preview with "enhanced" version
+                document.getElementById('preview-card').innerHTML = `
+                    <div class="aspect-[3/4] rounded-xl shadow-2xl bg-gradient-to-br from-yellow-400 to-yellow-500 p-6 text-white">
+                        <div class="font-accent text-sm uppercase tracking-widest mb-auto">AI Enhanced</div>
+                        <div class="flex flex-col items-center justify-center h-full">
+                            <div class="text-6xl mb-4 animate-pulse">✨</div>
+                            <div class="font-mono text-3xl font-bold mb-2">#00</div>
+                            <div class="font-display text-xl uppercase">Ready for Print!</div>
+                        </div>
+                        <div class="text-center mt-auto">
+                            <button onclick="addToCart()" class="bg-white text-blue-900 px-4 py-2 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+            }, 2000);
+        }
+
+        // Card Interactions
+        function flipCard(cardId) {
+            document.getElementById(cardId).classList.toggle('flipped');
+        }
+
+        // Tab Management
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById(tab + '-tab').classList.add('active');
+            currentTab = tab;
+        }
+
+        // Card Designer Functions
+        function changeCardStyle(style) {
+            const preview = document.getElementById('card-preview');
+            const styles = {
+                gold: 'linear-gradient(135deg, #FFD700 0%, #FFC700 100%)',
+                navy: 'linear-gradient(135deg, #0A1F44 0%, #1E3A5F 100%)',
+                red: 'linear-gradient(135deg, #DC143C 0%, #B8102E 100%)',
+                green: 'linear-gradient(135deg, #10B981 0%, #059669 100%)'
+            };
+            preview.style.background = styles[style];
+            showNotification(`Card style changed to ${style}!`);
+        }
+
+        function changeFontStyle(style) {
+            showNotification(`Font style changed to ${style}!`);
+        }
+
+        function toggleEffect(effect) {
+            showNotification(`${effect} effect toggled!`);
+            updatePrice();
+        }
+
+        function changeBorder(style) {
+            const preview = document.getElementById('card-preview');
+            const borders = {
+                none: '0px',
+                thin: '2px solid white',
+                thick: '4px solid white'
+            };
+            preview.style.border = borders[style];
+        }
+
+        function randomizeDesign() {
+            const styles = ['gold', 'navy', 'red', 'green'];
+            const randomStyle = styles[Math.floor(Math.random() * styles.length)];
+            changeCardStyle(randomStyle);
+            showNotification('Design randomized!');
+        }
+
+        function saveTemplate() {
+            showNotification('Template saved! You can reuse this design for future cards.');
+        }
+
+        function updatePrice() {
+            const base = 75;
+            const effects = document.querySelectorAll('input[type="checkbox"]:checked').length * 5;
+            const total = base + effects;
+            document.getElementById('total-price').textContent = `$${total}.00`;
+        }
+
+        // Team Manager Functions
+        function addPlayer() {
+            showNotification('Player added to roster!');
+        }
+
+        function editPlayer(id) {
+            showNotification(`Editing player #${id}`);
+        }
+
+        function generateBio(id) {
+            showNotification('AI generating player bio... "Natural talent with exceptional skills!"');
+        }
+
+        function removePlayer(id) {
+            if (confirm('Remove this player from the roster?')) {
+                showNotification('Player removed');
+            }
+        }
+
+        function uploadPhoto(id) {
+            showNotification(`Upload photo for player #${id}`);
+        }
+
+        // Order Functions
+        function trackOrder() {
+            showNotification('Order is being printed. Estimated delivery: 3 days');
+        }
+
+        function processPayment() {
+            showNotification('Processing payment...');
+            setTimeout(() => {
+                showNotification('Order placed successfully! Check your email for confirmation.');
+                showPage('dashboard');
+            }, 2000);
+        }
+
+        // Role Management
+        function switchRole(role) {
+            currentRole = role;
+            showNotification(`Switched to ${role} view`);
+
+            // Update UI based on role
+            if (role === 'photographer') {
+                showNotification('Photographer mode: Bulk upload tools enabled');
+            } else if (role === 'coach') {
+                showNotification('Coach mode: Team management features unlocked');
+            }
+        }
+
+        // Demo Reset
+        function resetDemo() {
+            currentPage = 'landing';
+            currentRole = 'parent';
+            cartItems = [];
+            uploadedImage = false;
+            updateCartBadge();
+            showPage('landing');
+            showNotification('Demo reset to initial state');
+        }
+
+        // Login shortcut
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'l' && e.metaKey) {
+                showPage('login');
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartBadge();
+        });
+    </script>
+</body>
+</html>
