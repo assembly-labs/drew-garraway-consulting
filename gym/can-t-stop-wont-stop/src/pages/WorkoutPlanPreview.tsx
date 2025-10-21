@@ -8,8 +8,8 @@ const WorkoutPlanPreview = () => {
   const navigate = useNavigate();
   const { selectedDay, selectedDuration, startWorkout } = useWorkout();
 
-  // If no day/duration selected, redirect back
-  if (!selectedDay || !selectedDuration) {
+  // If no day selected, redirect back
+  if (!selectedDay) {
     navigate('/day-selection');
     return null;
   }
@@ -39,10 +39,10 @@ const WorkoutPlanPreview = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary-black px-6 py-8 flex flex-col">
+    <div className="min-h-screen bg-primary-black px-6 py-8 flex flex-col pb-40">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
-        <Button variant="icon" onClick={() => navigate('/time-selection')}>
+        <Button variant="icon" onClick={() => navigate('/day-selection')}>
           <span className="text-2xl">←</span>
         </Button>
         <h1 className="text-h3 font-bold text-white">WORKOUT PREVIEW</h1>
@@ -68,9 +68,9 @@ const WorkoutPlanPreview = () => {
       </div>
 
       {/* Exercise List */}
-      <div className="flex-1 overflow-y-auto scrollbar-hide mb-6">
+      <div className="flex-1 overflow-y-auto scrollbar-hide">
         <h2 className="text-lg font-bold text-white mb-4">EXERCISES</h2>
-        <div className="space-y-3">
+        <div className="space-y-3 pb-4">
           {exercises.map((exercise, index) => (
             <div
               key={exercise.exerciseId}
@@ -104,25 +104,33 @@ const WorkoutPlanPreview = () => {
         </div>
       </div>
 
-      {/* Warning Message */}
-      <div className="bg-primary-red bg-opacity-10 border-2 border-primary-red rounded-none p-4 mb-6">
-        <p className="text-primary-red font-bold text-center text-sm">
-          ⚠️ TIMER CANNOT BE PAUSED
-        </p>
-        <p className="text-gray-300 text-center text-xs mt-2">
-          Once started, the timer runs until 00:00. No stopping. No excuses.
-        </p>
-      </div>
+      {/* Sticky Footer - Always Visible */}
+      <div className="fixed bottom-0 left-0 right-0 z-50">
+        {/* Gradient overlay to indicate scrollable content above */}
+        <div className="h-16 bg-gradient-to-t from-primary-black via-primary-black to-transparent pointer-events-none" />
 
-      {/* Start Button */}
-      <Button
-        variant="primary"
-        fullWidth
-        onClick={handleStart}
-        className="animate-pulse"
-      >
-        LET'S GO
-      </Button>
+        <div className="bg-primary-black px-6 pb-8">
+          {/* Warning Message */}
+          <div className="bg-primary-red bg-opacity-10 border-2 border-primary-red rounded-none p-4 mb-4">
+            <p className="text-primary-red font-bold text-center text-sm">
+              ⚠️ TIMER CANNOT BE PAUSED
+            </p>
+            <p className="text-gray-300 text-center text-xs mt-2">
+              Once started, the timer runs until 00:00. No stopping. No excuses.
+            </p>
+          </div>
+
+          {/* Start Button */}
+          <Button
+            variant="primary"
+            fullWidth
+            onClick={handleStart}
+            className="animate-pulse"
+          >
+            LET'S GO
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

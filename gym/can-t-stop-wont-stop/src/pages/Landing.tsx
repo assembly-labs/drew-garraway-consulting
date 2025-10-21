@@ -10,10 +10,10 @@ const Landing = () => {
         {/* App Title */}
         <div className="text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight tracking-tight">
-            CAN'T STOP<br />WON'T STOP
+            Fuck You<br />Go Train
           </h1>
           <p className="text-lg md:text-xl text-gray-400 font-semibold">
-            Time-based training. Zero excuses.
+            Time-based workouts. No stopping. No excuses.
           </p>
         </div>
 
@@ -24,7 +24,7 @@ const Landing = () => {
             fullWidth
             onClick={() => navigate('/day-selection')}
           >
-            START WORKOUT
+            Start Workout
           </Button>
 
           <Button
@@ -32,14 +32,14 @@ const Landing = () => {
             fullWidth
             onClick={() => navigate('/history')}
           >
-            HISTORY
+            View History
           </Button>
         </div>
 
         {/* Tagline */}
         <div className="text-center mt-8">
           <p className="text-sm text-gray-600">
-            No pause. No excuses. Just results.
+            Built for men who don't quit
           </p>
         </div>
       </div>

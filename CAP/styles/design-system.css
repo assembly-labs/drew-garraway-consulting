@@ -1,0 +1,332 @@
+/* CAP Design System v1.0 */
+/* Championship Athletic Prospects */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Graduate&family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;700&display=swap');
+
+:root {
+  /* ========== FONT FAMILIES ========== */
+  /* Display - Player names, headlines, hero text */
+  --font-display: 'Bebas Neue', 'Arial Narrow', 'Arial', sans-serif;
+
+  /* Body - Paragraphs, descriptions, general UI */
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Numbers - Stats, jersey numbers, data */
+  --font-mono: 'Roboto Mono', 'Courier New', monospace;
+
+  /* Accent - Badges, stamps, special callouts */
+  --font-accent: 'Graduate', 'Georgia', 'Times New Roman', serif;
+
+  /* ========== COLORS ========== */
+  /* GOLD - Primary Brand Color */
+  --gold-500: #FFD700;           /* Championship gold */
+  --gold-400: #FFE44D;           /* Lighter gold - hover */
+  --gold-600: #E5C100;           /* Darker gold - active */
+  --gold-700: #B8991A;           /* Antique gold - text */
+  --gold-50: #FFFDF0;            /* Pale gold - backgrounds */
+
+  /* NAVY - Primary Text & Anchors */
+  --navy-900: #0A1F44;           /* Deep navy - headings */
+  --navy-800: #0F2D5C;           /* Medium navy - body */
+  --navy-700: #1E3A5F;           /* Light navy - secondary */
+  --navy-500: #3D5A80;           /* Muted navy - borders */
+  --navy-100: #E8EDF5;           /* Very light - backgrounds */
+
+  /* NEUTRALS */
+  --white: #FFFFFF;
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-400: #9CA3AF;
+  --gray-700: #374151;
+  --gray-900: #111827;
+  --black: #000000;
+
+  /* ACCENT COLORS (Use Sparingly) */
+  --blue-500: #0066FF;           /* Electric blue */
+  --blue-600: #0052CC;
+  --red-500: #DC143C;            /* Fire red */
+  --red-600: #B8102E;
+  --green-500: #059669;          /* Success green */
+  --green-600: #047857;
+
+  /* SEMANTIC COLORS */
+  --color-success: #059669;
+  --color-error: #DC143C;
+  --color-warning: #FFD700;
+  --color-info: #0066FF;
+
+  /* ========== TYPOGRAPHY SCALE ========== */
+  /* Display Sizes - Bebas Neue */
+  --text-display-xl: 4rem;        /* 64px - Hero headlines */
+  --text-display-lg: 3rem;        /* 48px - Page titles */
+  --text-display-md: 2.25rem;     /* 36px - Section headers */
+  --text-display-sm: 1.875rem;    /* 30px - Card titles */
+
+  /* Heading Sizes */
+  --text-h1: 2.5rem;              /* 40px */
+  --text-h2: 2rem;                /* 32px */
+  --text-h3: 1.5rem;              /* 24px */
+  --text-h4: 1.25rem;             /* 20px */
+  --text-h5: 1.125rem;            /* 18px */
+  --text-h6: 1rem;                /* 16px */
+
+  /* Body Sizes - Inter */
+  --text-xl: 1.25rem;             /* 20px */
+  --text-lg: 1.125rem;            /* 18px */
+  --text-base: 1rem;              /* 16px */
+  --text-sm: 0.875rem;            /* 14px */
+  --text-xs: 0.75rem;             /* 12px */
+
+  /* Number Sizes - Roboto Mono */
+  --text-number-xl: 3rem;         /* 48px */
+  --text-number-lg: 2rem;         /* 32px */
+  --text-number-base: 1rem;       /* 16px */
+
+  /* Badge Sizes - Graduate */
+  --text-badge-lg: 1rem;          /* 16px */
+  --text-badge-base: 0.875rem;    /* 14px */
+
+  /* ========== FONT WEIGHTS ========== */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* ========== LINE HEIGHTS ========== */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* ========== LETTER SPACING ========== */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* ========== SPACING SYSTEM ========== */
+  --space-0: 0;
+  --space-1: 0.25rem;     /* 4px */
+  --space-2: 0.5rem;      /* 8px */
+  --space-3: 0.75rem;     /* 12px */
+  --space-4: 1rem;        /* 16px */
+  --space-5: 1.25rem;     /* 20px */
+  --space-6: 1.5rem;      /* 24px */
+  --space-8: 2rem;        /* 32px */
+  --space-10: 2.5rem;     /* 40px */
+  --space-12: 3rem;       /* 48px */
+  --space-16: 4rem;       /* 64px */
+  --space-20: 5rem;       /* 80px */
+  --space-24: 6rem;       /* 96px */
+  --space-32: 8rem;       /* 128px */
+
+  /* ========== BORDER RADIUS ========== */
+  --radius-none: 0;
+  --radius-sm: 0.25rem;    /* 4px */
+  --radius-base: 0.5rem;   /* 8px */
+  --radius-md: 0.75rem;    /* 12px */
+  --radius-lg: 1rem;       /* 16px */
+  --radius-xl: 1.5rem;     /* 24px */
+  --radius-full: 9999px;   /* Pills, avatars */
+
+  /* ========== SHADOWS ========== */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* Gold Glow - For special elements */
+  --shadow-gold: 0 0 20px rgba(255, 215, 0, 0.4);
+  --shadow-gold-lg: 0 0 40px rgba(255, 215, 0, 0.6);
+}
+
+/* ========== COMPONENT STYLES ========== */
+
+/* Primary Button - Gold */
+.btn-primary {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-bold);
+  padding: var(--space-4) var(--space-8);
+  background-color: var(--gold-500);
+  color: var(--navy-900);
+  border: 2px solid var(--navy-900);
+  border-radius: var(--radius-base);
+  box-shadow: var(--shadow-base);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.btn-primary:hover {
+  background-color: var(--gold-400);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  background-color: var(--gold-600);
+  transform: translateY(0);
+}
+
+/* Secondary Button - Navy */
+.btn-secondary {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-3) var(--space-6);
+  background-color: var(--navy-900);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-base);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--navy-800);
+  box-shadow: var(--shadow-md);
+}
+
+/* Ghost Button - Outline */
+.btn-ghost {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-3) var(--space-6);
+  background-color: transparent;
+  color: var(--gold-500);
+  border: 2px solid var(--gold-500);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background-color: var(--gold-500);
+  color: var(--navy-900);
+}
+
+/* ========== TYPOGRAPHY COMPONENTS ========== */
+
+/* Display Heading */
+.text-display {
+  font-family: var(--font-display);
+  font-size: var(--text-display-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--navy-900);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+}
+
+/* Section Heading */
+.text-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--navy-900);
+  line-height: var(--leading-tight);
+  text-transform: uppercase;
+}
+
+/* Body Text */
+.text-body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-normal);
+  color: var(--navy-800);
+  line-height: var(--leading-relaxed);
+}
+
+/* Stats/Numbers */
+.text-stat {
+  font-family: var(--font-mono);
+  font-size: var(--text-number-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--navy-900);
+  line-height: var(--leading-none);
+  font-feature-settings: "tnum" 1;
+}
+
+/* Badge */
+.text-badge {
+  font-family: var(--font-accent);
+  font-size: var(--text-badge-base);
+  font-weight: var(--font-weight-normal);
+  color: var(--gold-700);
+  line-height: var(--leading-tight);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* ========== CARD COMPONENTS ========== */
+
+/* Standard Card */
+.card {
+  background-color: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-6);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+/* Premium Card with Gold Border */
+.card-premium {
+  background-color: var(--white);
+  border: 2px solid var(--gold-500);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-gold);
+  padding: var(--space-6);
+}
+
+/* Dark Card */
+.card-dark {
+  background-color: var(--navy-900);
+  border: 1px solid var(--navy-800);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-6);
+  color: var(--white);
+}
+
+/* ========== UTILITY CLASSES ========== */
+
+/* Gold Gradient Text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Championship Gradient */
+.gradient-championship {
+  background: linear-gradient(135deg, var(--gold-500) 0%, var(--navy-900) 50%, var(--red-500) 100%);
+}
+
+/* Gold Glow Effect */
+.glow-gold {
+  box-shadow: var(--shadow-gold);
+}
+
+.glow-gold-lg {
+  box-shadow: var(--shadow-gold-lg);
+}
