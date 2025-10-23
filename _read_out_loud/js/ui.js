@@ -35,8 +35,6 @@ class UIController {
     this.elements.playIcon = document.getElementById('playIcon');
     this.elements.pauseIcon = document.getElementById('pauseIcon');
     this.elements.stopBtn = document.getElementById('stopBtn');
-    this.elements.skipBackBtn = document.getElementById('skipBackBtn');
-    this.elements.skipForwardBtn = document.getElementById('skipForwardBtn');
 
     // Speed controls
     this.elements.speedSlider = document.getElementById('speedSlider');
@@ -91,8 +89,6 @@ class UIController {
     // Playback controls
     this.elements.playPauseBtn.addEventListener('click', () => this.togglePlayPause());
     this.elements.stopBtn.addEventListener('click', () => this.stopPlayback());
-    this.elements.skipBackBtn.addEventListener('click', () => this.skipBackward());
-    this.elements.skipForwardBtn.addEventListener('click', () => this.skipForward());
 
     // Speed controls
     this.elements.speedSlider.addEventListener('input', (e) => this.updateSpeed(e.target.value));
@@ -317,14 +313,6 @@ class UIController {
     this.speechEngine.stop();
     this.updatePlayPauseButton(false);
     this.resetProgress();
-  }
-
-  skipForward() {
-    this.speechEngine.skipForward();
-  }
-
-  skipBackward() {
-    this.speechEngine.skipBackward();
   }
 
   updatePlayPauseButton(isPlaying) {
@@ -641,16 +629,6 @@ class UIController {
         break;
       case 'Escape':
         this.stopPlayback();
-        break;
-      case 'ArrowLeft':
-        if (event.metaKey || event.ctrlKey) {
-          this.skipBackward();
-        }
-        break;
-      case 'ArrowRight':
-        if (event.metaKey || event.ctrlKey) {
-          this.skipForward();
-        }
         break;
     }
   }

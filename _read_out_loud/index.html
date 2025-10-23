@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#667eea">
-    <title>Text Reader - Free Text-to-Speech</title>
+    <title>READ OUT LOUD - Free Text-to-Speech</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,7 @@
     <div id="app" class="app-container">
         <!-- Header -->
         <header class="app-header">
-            <h1 class="app-title">Text Reader</h1>
+            <h1 class="app-title">READ OUT LOUD</h1>
             <div class="header-actions">
                 <button id="libraryBtn" class="cta-library-btn" aria-label="Library">
                     LIBRARY
@@ -94,28 +94,18 @@
             <!-- Control Buttons -->
             <div class="controls">
                 <div class="control-group">
-                    <button id="skipBackBtn" class="control-btn" aria-label="Skip back">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M11 17l-5-5 5-5v10zm2-10v10l5-5-5-5z"></path>
-                        </svg>
-                    </button>
                     <button id="playPauseBtn" class="control-btn primary" aria-label="Play/Pause">
-                        <svg id="playIcon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <svg id="playIcon" width="36" height="36" viewBox="0 0 24 24" fill="currentColor">
                             <polygon points="5 3 19 12 5 21 5 3"></polygon>
                         </svg>
-                        <svg id="pauseIcon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                        <svg id="pauseIcon" width="36" height="36" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
                             <rect x="6" y="4" width="4" height="16"></rect>
                             <rect x="14" y="4" width="4" height="16"></rect>
                         </svg>
                     </button>
-                    <button id="stopBtn" class="control-btn" aria-label="Stop">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <button id="stopBtn" class="control-btn secondary" aria-label="Stop">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
                             <rect x="6" y="6" width="12" height="12"></rect>
-                        </svg>
-                    </button>
-                    <button id="skipForwardBtn" class="control-btn" aria-label="Skip forward">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M13 7l5 5-5 5V7zm-2 10V7l-5 5 5 5z"></path>
                         </svg>
                     </button>
                 </div>
