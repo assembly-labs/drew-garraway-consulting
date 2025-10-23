@@ -1,18 +1,18 @@
 // Service Worker for offline functionality
-const CACHE_VERSION = 'v1.0.0';
+const CACHE_VERSION = 'v2.0.0';
 const CACHE_NAME = `tts-reader-${CACHE_VERSION}`;
 
 // Assets to cache
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/css/styles.css',
-  '/js/app.js',
-  '/js/speech.js',
-  '/js/storage.js',
-  '/js/ui.js',
-  '/js/fileImport.js',
-  '/manifest.json'
+  './',
+  './index.html',
+  './css/styles.css',
+  './js/app.js',
+  './js/speech.js',
+  './js/storage.js',
+  './js/ui.js',
+  './js/fileImport.js',
+  './manifest.json'
 ];
 
 // External CDN resources to cache
