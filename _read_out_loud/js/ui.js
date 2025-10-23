@@ -66,9 +66,6 @@ class UIController {
     this.elements.libraryList = document.getElementById('libraryList');
     this.elements.closeLibraryModal = document.getElementById('closeLibraryModal');
 
-    // Settings
-    this.elements.settingsBtn = document.getElementById('settingsBtn');
-
     // Loading and toast
     this.elements.loadingIndicator = document.getElementById('loadingIndicator');
     this.elements.loadingMessage = document.getElementById('loadingMessage');
@@ -77,37 +74,66 @@ class UIController {
 
   attachEventListeners() {
     // Text input
-    this.elements.textInput.addEventListener('input', () => this.handleTextChange());
+    if (this.elements.textInput) {
+      this.elements.textInput.addEventListener('input', () => this.handleTextChange());
+    }
 
     // Action buttons
-    this.elements.pasteBtn.addEventListener('click', () => this.pasteText());
-    this.elements.importBtn.addEventListener('click', () => this.importFile());
-    this.elements.saveBtn.addEventListener('click', () => this.saveToLibrary());
-    this.elements.clearBtn.addEventListener('click', () => this.clearText());
-    this.elements.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+    if (this.elements.pasteBtn) {
+      this.elements.pasteBtn.addEventListener('click', () => this.pasteText());
+    }
+    if (this.elements.importBtn) {
+      this.elements.importBtn.addEventListener('click', () => this.importFile());
+    }
+    if (this.elements.saveBtn) {
+      this.elements.saveBtn.addEventListener('click', () => this.saveToLibrary());
+    }
+    if (this.elements.clearBtn) {
+      this.elements.clearBtn.addEventListener('click', () => this.clearText());
+    }
+    if (this.elements.fileInput) {
+      this.elements.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+    }
 
     // Playback controls
-    this.elements.playPauseBtn.addEventListener('click', () => this.togglePlayPause());
-    this.elements.stopBtn.addEventListener('click', () => this.stopPlayback());
+    if (this.elements.playPauseBtn) {
+      this.elements.playPauseBtn.addEventListener('click', () => this.togglePlayPause());
+    }
+    if (this.elements.stopBtn) {
+      this.elements.stopBtn.addEventListener('click', () => this.stopPlayback());
+    }
 
     // Speed controls
-    this.elements.speedSlider.addEventListener('input', (e) => this.updateSpeed(e.target.value));
-    this.elements.speedPresets.forEach(btn => {
-      btn.addEventListener('click', () => this.updateSpeed(btn.dataset.speed));
-    });
+    if (this.elements.speedSlider) {
+      this.elements.speedSlider.addEventListener('input', (e) => this.updateSpeed(e.target.value));
+    }
+    if (this.elements.speedPresets) {
+      this.elements.speedPresets.forEach(btn => {
+        btn.addEventListener('click', () => this.updateSpeed(btn.dataset.speed));
+      });
+    }
 
     // Voice selection
-    this.elements.voiceSelectBtn.addEventListener('click', () => this.openVoiceModal());
-    this.elements.closeVoiceModal.addEventListener('click', () => this.closeVoiceModal());
-    this.elements.voiceSearch.addEventListener('input', (e) => this.filterVoices(e.target.value));
+    if (this.elements.voiceSelectBtn) {
+      this.elements.voiceSelectBtn.addEventListener('click', () => this.openVoiceModal());
+    }
+    if (this.elements.closeVoiceModal) {
+      this.elements.closeVoiceModal.addEventListener('click', () => this.closeVoiceModal());
+    }
+    if (this.elements.voiceSearch) {
+      this.elements.voiceSearch.addEventListener('input', (e) => this.filterVoices(e.target.value));
+    }
 
     // Library
-    this.elements.libraryBtn.addEventListener('click', () => this.openLibraryModal());
-    this.elements.closeLibraryModal.addEventListener('click', () => this.closeLibraryModal());
-    this.elements.librarySearch.addEventListener('input', (e) => this.filterLibrary(e.target.value));
-
-    // Settings
-    this.elements.settingsBtn.addEventListener('click', () => this.openSettings());
+    if (this.elements.libraryBtn) {
+      this.elements.libraryBtn.addEventListener('click', () => this.openLibraryModal());
+    }
+    if (this.elements.closeLibraryModal) {
+      this.elements.closeLibraryModal.addEventListener('click', () => this.closeLibraryModal());
+    }
+    if (this.elements.librarySearch) {
+      this.elements.librarySearch.addEventListener('input', (e) => this.filterLibrary(e.target.value));
+    }
 
     // Speech engine callbacks
     this.speechEngine.boundaryCallback = (data) => this.handleWordBoundary(data);
@@ -118,12 +144,16 @@ class UIController {
     document.addEventListener('keydown', (e) => this.handleKeyboardShortcuts(e));
 
     // Modal close on outside click
-    this.elements.voiceModal.addEventListener('click', (e) => {
-      if (e.target === this.elements.voiceModal) this.closeVoiceModal();
-    });
-    this.elements.libraryModal.addEventListener('click', (e) => {
-      if (e.target === this.elements.libraryModal) this.closeLibraryModal();
-    });
+    if (this.elements.voiceModal) {
+      this.elements.voiceModal.addEventListener('click', (e) => {
+        if (e.target === this.elements.voiceModal) this.closeVoiceModal();
+      });
+    }
+    if (this.elements.libraryModal) {
+      this.elements.libraryModal.addEventListener('click', (e) => {
+        if (e.target === this.elements.libraryModal) this.closeLibraryModal();
+      });
+    }
   }
 
   loadSavedState() {
