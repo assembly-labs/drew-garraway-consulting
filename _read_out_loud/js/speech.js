@@ -319,41 +319,8 @@ class SpeechEngine {
     return (this.getCurrentPosition() / total) * 100;
   }
 
-  skipForward() {
-    // Skip forward by one sentence
-    if (!this.text) return;
-
-    const currentPos = this.getCurrentPosition();
-    const nextSentence = this.text.indexOf('. ', currentPos);
-
-    if (nextSentence !== -1 && nextSentence < this.text.length - 2) {
-      const wasPlaying = this.state === 'PLAYING';
-      this.stop();
-      if (wasPlaying) {
-        this.play(this.text, nextSentence + 2);
-      }
-    }
-  }
-
-  skipBackward() {
-    // Skip backward by one sentence
-    if (!this.text) return;
-
-    const currentPos = this.getCurrentPosition();
-    const textBeforeCurrent = this.text.substring(0, Math.max(0, currentPos - 2));
-    const prevSentence = textBeforeCurrent.lastIndexOf('. ');
-
-    const wasPlaying = this.state === 'PLAYING';
-    this.stop();
-
-    if (prevSentence !== -1) {
-      if (wasPlaying) {
-        this.play(this.text, prevSentence + 2);
-      }
-    } else if (wasPlaying) {
-      this.play(this.text, 0);
-    }
-  }
+  // Skip functions removed - no longer needed after UI update
+  // These were used for sentence-by-sentence navigation
 
   // Preview a voice with sample text
   previewVoice(voice, text = "Hello, this is how I sound when reading your text.") {
