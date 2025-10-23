@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Icon Generator for Text Reader</title>
+</head>
+<body style="margin: 0; padding: 20px; font-family: -apple-system, sans-serif; background: #f0f0f0;">
+    <h1>Text Reader App Icons</h1>
+    <p>Right-click and save each icon:</p>
+
+    <!-- 192x192 Icon -->
+    <div style="margin: 20px 0;">
+        <h3>icon-192.png (192x192)</h3>
+        <canvas id="icon192" width="192" height="192" style="border: 1px solid #ccc; background: white;"></canvas>
+    </div>
+
+    <!-- 512x512 Icon -->
+    <div style="margin: 20px 0;">
+        <h3>icon-512.png (512x512)</h3>
+        <canvas id="icon512" width="512" height="512" style="border: 1px solid #ccc; background: white;"></canvas>
+    </div>
+
+    <script>
+        function drawIcon(canvasId, size) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+
+            // Background
+            ctx.fillStyle = '#1E1E1E';
+            ctx.fillRect(0, 0, size, size);
+
+            // Draw sound wave icon
+            const centerX = size / 2;
+            const centerY = size / 2;
+            const scale = size / 192;
+
+            // Speaker cone
+            ctx.fillStyle = '#007AFF';
+            ctx.beginPath();
+            ctx.moveTo(centerX - 30 * scale, centerY - 20 * scale);
+            ctx.lineTo(centerX - 10 * scale, centerY - 30 * scale);
+            ctx.lineTo(centerX - 10 * scale, centerY + 30 * scale);
+            ctx.lineTo(centerX - 30 * scale, centerY + 20 * scale);
+            ctx.closePath();
+            ctx.fill();
+
+            // Speaker box
+            ctx.fillRect(centerX - 50 * scale, centerY - 20 * scale, 20 * scale, 40 * scale);
+
+            // Sound waves
+            ctx.strokeStyle = '#007AFF';
+            ctx.lineWidth = 3 * scale;
+            ctx.lineCap = 'round';
+
+            // Small wave
+            ctx.beginPath();
+            ctx.arc(centerX - 10 * scale, centerY, 25 * scale, -Math.PI / 6, Math.PI / 6, false);
+            ctx.stroke();
+
+            // Medium wave
+            ctx.beginPath();
+            ctx.arc(centerX - 10 * scale, centerY, 40 * scale, -Math.PI / 6, Math.PI / 6, false);
+            ctx.stroke();
+
+            // Large wave
+            ctx.beginPath();
+            ctx.arc(centerX - 10 * scale, centerY, 55 * scale, -Math.PI / 6, Math.PI / 6, false);
+            ctx.stroke();
+
+            // Add "TTS" text
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = `bold ${16 * scale}px -apple-system, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+            ctx.fillText('TTS', centerX + 30 * scale, size - 20 * scale);
+        }
+
+        // Generate icons
+        drawIcon('icon192', 192);
+        drawIcon('icon512', 512);
+
+        // Add download functionality
+        document.querySelectorAll('canvas').forEach(canvas => {
+            canvas.style.cursor = 'pointer';
+            canvas.title = 'Click to download';
+            canvas.addEventListener('click', () => {
+                const link = document.createElement('a');
+                link.download = canvas.id + '.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html>

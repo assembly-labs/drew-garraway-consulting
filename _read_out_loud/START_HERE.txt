@@ -1,0 +1,105 @@
+═══════════════════════════════════════════════════════════════════════════
+  TEXT READER - iOS TESTING QUICK START
+═══════════════════════════════════════════════════════════════════════════
+
+🔴 PROBLEM IDENTIFIED:
+   Safari on iOS won't open files because you're using HTTP.
+   iOS Safari REQUIRES HTTPS for file access and PWA features.
+
+✅ SOLUTION PROVIDED:
+   New HTTPS server with automatic SSL certificate generation.
+
+═══════════════════════════════════════════════════════════════════════════
+  STEP 1: Install mkcert (ONE TIME ONLY - 30 seconds)
+═══════════════════════════════════════════════════════════════════════════
+
+Run this command:
+
+    brew install mkcert && mkcert -install
+
+═══════════════════════════════════════════════════════════════════════════
+  STEP 2: Start HTTPS Server (10 seconds)
+═══════════════════════════════════════════════════════════════════════════
+
+Run this command:
+
+    python3 server_https.py
+
+You will see:
+    🚀 Text Reader App - HTTPS Development Server
+    📱 LOCAL ACCESS: https://localhost:8443
+    📱 iOS DEVICE ACCESS: https://192.168.1.XXX:8443
+
+═══════════════════════════════════════════════════════════════════════════
+  STEP 3: Test on Your Laptop (2 minutes)
+═══════════════════════════════════════════════════════════════════════════
+
+1. Open: https://localhost:8443
+2. Click "Advanced" → "Proceed" (accept security warning)
+3. Test file import with a PDF
+
+═══════════════════════════════════════════════════════════════════════════
+  STEP 4: Test on iPhone (2 minutes)
+═══════════════════════════════════════════════════════════════════════════
+
+1. Make sure iPhone is on SAME WiFi as your laptop
+2. On iPhone Safari, open: https://[IP-ADDRESS]:8443
+   (Use the IP address shown by the server in Step 2)
+3. Tap "Advanced" → "Proceed to [IP address]"
+4. Tap "Import File" button
+   → File picker should open! ✅
+5. Select a PDF or Word doc
+   → Text should load! ✅
+
+═══════════════════════════════════════════════════════════════════════════
+  STEP 5: Install as PWA (1 minute)
+═══════════════════════════════════════════════════════════════════════════
+
+1. Tap Share button (center bottom in Safari)
+2. Scroll down → Tap "Add to Home Screen"
+3. Tap "Add"
+4. Launch from home screen icon
+
+═══════════════════════════════════════════════════════════════════════════
+  📚 FULL DOCUMENTATION
+═══════════════════════════════════════════════════════════════════════════
+
+For detailed instructions:
+
+    QUICKSTART.md     - 5-minute setup guide (START HERE)
+    TESTING.md        - Complete testing procedures
+    DEPLOYMENT.md     - Deploy to production
+    SUMMARY.md        - Full problem analysis
+    README.md         - Project overview
+
+═══════════════════════════════════════════════════════════════════════════
+  🐛 TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════════
+
+File picker doesn't open?
+    → Make sure URL shows 🔒 lock icon (HTTPS working)
+
+Can't connect from iPhone?
+    → Check both devices on same WiFi
+
+"This connection is not private"?
+    → Normal for local dev! Tap "Proceed"
+
+Still stuck?
+    → See TESTING.md for detailed troubleshooting
+
+═══════════════════════════════════════════════════════════════════════════
+  ✅ SUCCESS CHECKLIST
+═══════════════════════════════════════════════════════════════════════════
+
+□ mkcert installed
+□ HTTPS server running
+□ Tested on laptop (file import works)
+□ Tested on iPhone (file import works)
+□ PWA installed on home screen
+□ All features working
+
+═══════════════════════════════════════════════════════════════════════════
+
+Ready to start? Run:  python3 server_https.py
+
