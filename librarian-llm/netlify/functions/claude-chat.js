@@ -74,16 +74,23 @@ export async function handler(event, context) {
       apiKey: apiKey
     });
 
-    console.log(`Initializing Anthropic with model: claude-3-haiku-20240307`);
+    console.log(`Initializing Anthropic with model: claude-3-5-sonnet-20241022`);
     console.log(`API Key present: ${apiKey ? 'Yes' : 'No'}`);
     console.log(`Processing request with ${messages.length} messages`);
+    console.log(`Using prompt caching for catalog data`);
 
-    // Call Claude API
+    // Call Claude API with prompt caching for better performance
     const response = await client.messages.create({
-      model: 'claude-3-haiku-20240307',
+      model: 'claude-3-5-sonnet-20241022', // Latest model with better instruction following
       max_tokens: 1500,
-      temperature: 0.3,
-      system: systemPrompt,
+      temperature: 0.2, // Lower temperature for more focused responses
+      system: [
+        {
+          type: "text",
+          text: systemPrompt,
+          cache_control: { type: "ephemeral" } // Cache the catalog for cost savings
+        }
+      ],
       messages: messages
     });
 
