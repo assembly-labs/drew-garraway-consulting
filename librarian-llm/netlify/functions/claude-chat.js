@@ -74,13 +74,13 @@ export async function handler(event, context) {
       apiKey: apiKey
     });
 
-    console.log(`Initializing Anthropic with model: claude-3-5-sonnet-20240620`);
+    console.log(`Initializing Anthropic with model: claude-3-haiku-20240307`);
     console.log(`API Key present: ${apiKey ? 'Yes' : 'No'}`);
     console.log(`Processing request with ${messages.length} messages`);
 
-    // Call Claude API with better instruction-following model
+    // Call Claude API with Haiku model (fast and reliable)
     const response = await client.messages.create({
-      model: 'claude-3-5-sonnet-20240620', // Sonnet 3.5 - best quality with good instruction following
+      model: 'claude-3-haiku-20240307', // Using Haiku - fast, reliable, and definitely exists
       max_tokens: 1500,
       temperature: 0.2, // Lower temperature for more focused, catalog-only responses
       system: systemPrompt, // Simple string format (compatible with SDK 0.27.3)
