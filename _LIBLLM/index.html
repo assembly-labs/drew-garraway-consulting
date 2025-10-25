@@ -434,6 +434,150 @@
                 bottom: 1rem;
             }
         }
+
+        /* Claude-Style Chat Section */
+        #chat-demo {
+            transition: all 0.3s ease;
+        }
+
+        .claude-input-wrapper {
+            display: flex;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .claude-input-wrapper:focus-within {
+            box-shadow: 0 6px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        #claude-chat-input {
+            flex: 1;
+            padding: 1.25rem 1.75rem;
+            border: none;
+            background: transparent;
+            font-size: 1.125rem;
+            font-family: inherit;
+            outline: none;
+            color: #333;
+        }
+
+        #claude-chat-input::placeholder {
+            color: #999;
+        }
+
+        #claude-chat-send {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        #claude-chat-send:hover {
+            transform: scale(1.05);
+        }
+
+        .claude-prompts-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .claude-prompts-grid.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+        }
+
+        .prompt-label {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .prompt-card {
+            background: white;
+            padding: 1.75rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .prompt-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+
+        .prompt-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .prompt-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .prompt-text {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .claude-chat-messages {
+            max-width: 800px;
+            margin: 3rem auto 0 auto;
+            display: none;
+        }
+
+        .claude-chat-messages.visible {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .claude-prompts-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .claude-input-wrapper {
+                padding: 0.25rem;
+            }
+
+            #claude-chat-input {
+                padding: 1rem 1.25rem;
+                font-size: 1rem;
+            }
+
+            #claude-chat-send {
+                width: 48px;
+                height: 48px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -450,6 +594,80 @@
             <p class="lead">
                 Discovery is broken. Patrons give up. Collections go unused.
             </p>
+        </section>
+
+        <!-- CLAUDE-STYLE CHAT SECTION -->
+        <section id="chat-demo" style="min-height: 100vh; padding: 6rem 0; background: #fafafa;">
+            <div class="container" style="max-width: 1000px;">
+
+                <!-- Header -->
+                <div style="text-align: center; margin-bottom: 3rem;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">
+                        💬 What would you like to know?
+                    </h2>
+                    <p class="lead" style="font-size: 1.25rem; color: #666; margin-bottom: 0;">
+                        Ask me anything about Librarian LLM
+                    </p>
+                </div>
+
+                <!-- Input Area (Prominent, centered) -->
+                <div class="claude-input-wrapper">
+                    <input
+                        type="text"
+                        id="claude-chat-input"
+                        placeholder="Ask about our business model, competition, funding..."
+                        aria-label="Chat input"
+                    />
+                    <button id="claude-chat-send" aria-label="Send">
+                        <span>→</span>
+                    </button>
+                </div>
+
+                <!-- Suggested Prompts Grid -->
+                <div class="claude-prompts-grid" id="claude-prompts-grid">
+                    <div class="prompt-label">Or try one of these:</div>
+
+                    <div class="prompt-card" data-prompt="How do you compete with OverDrive?">
+                        <div class="prompt-icon">🏢</div>
+                        <div class="prompt-title">Competition</div>
+                        <div class="prompt-text">How do you compete with OverDrive and other vendors?</div>
+                    </div>
+
+                    <div class="prompt-card" data-prompt="What specifically does the $500K fund?">
+                        <div class="prompt-icon">💰</div>
+                        <div class="prompt-title">Use of Funds</div>
+                        <div class="prompt-text">What will the $500K investment be used for?</div>
+                    </div>
+
+                    <div class="prompt-card" data-prompt="What's your customer acquisition cost?">
+                        <div class="prompt-icon">📊</div>
+                        <div class="prompt-title">Unit Economics</div>
+                        <div class="prompt-text">Tell me about CAC, LTV, and retention rates</div>
+                    </div>
+
+                    <div class="prompt-card" data-prompt="How are you ensuring DEI?">
+                        <div class="prompt-icon">🎯</div>
+                        <div class="prompt-title">DEI Commitments</div>
+                        <div class="prompt-text">What's your approach to diversity and inclusion?</div>
+                    </div>
+
+                    <div class="prompt-card" data-prompt="Explain your zero-logging architecture">
+                        <div class="prompt-icon">🔒</div>
+                        <div class="prompt-title">Privacy & Security</div>
+                        <div class="prompt-text">How does your zero-logging system work?</div>
+                    </div>
+
+                    <div class="prompt-card" data-prompt="What's your churn risk?">
+                        <div class="prompt-icon">📈</div>
+                        <div class="prompt-title">Retention</div>
+                        <div class="prompt-text">Why won't libraries cancel after Year 1?</div>
+                    </div>
+                </div>
+
+                <!-- Chat Messages (Hidden initially) -->
+                <div id="claude-chat-messages" class="claude-chat-messages"></div>
+
+            </div>
         </section>
 
         <!-- SOLUTION -->
@@ -605,11 +823,12 @@
             </div>
 
             <a href="mailto:Drew@whiterabbitedventures.com" class="cta">Let's Talk →</a>
+            <a href="mailto:drew@whiterabbitedventures.com?subject=Sign%20me%20up%20for%20beta" class="cta" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); margin-left: 1rem;">Sign Up for Beta →</a>
         </section>
 
         <footer style="text-align: center; padding: 4rem 0; color: #999;">
             <p>📚 Librarian LLM · Privacy-First AI Discovery for Public Libraries</p>
-            <p style="margin-top: 1rem;">Built WITH librarians, not FOR them</p>
+            <p style="margin-top: 1rem;">Built WITH librarians, FOR patrons.</p>
         </footer>
     </div>
 
@@ -827,6 +1046,90 @@
             if (e.key === 'Enter') {
                 handleUserMessage(input.value);
             }
+        });
+
+        // Claude-style chat functionality
+        const claudeChat = {
+            messageHistory: [],
+            promptsVisible: true
+        };
+
+        const claudeInput = document.getElementById('claude-chat-input');
+        const claudeSendBtn = document.getElementById('claude-chat-send');
+        const claudeMessagesDiv = document.getElementById('claude-chat-messages');
+        const claudePromptsGrid = document.getElementById('claude-prompts-grid');
+        const promptCards = document.querySelectorAll('.prompt-card');
+
+        // Add message to Claude-style chat
+        function addClaudeMessage(text, isUser) {
+            // Show messages area if first message
+            if (claudeChat.messageHistory.length === 0) {
+                claudeMessagesDiv.classList.add('visible');
+                // Hide prompt cards with animation
+                if (claudePromptsGrid) {
+                    claudePromptsGrid.classList.add('hidden');
+                }
+            }
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${isUser ? 'user' : 'bot'}`;
+
+            const bubble = document.createElement('div');
+            bubble.className = 'message-bubble';
+            bubble.textContent = text;
+
+            messageDiv.appendChild(bubble);
+            claudeMessagesDiv.appendChild(messageDiv);
+
+            // Smooth scroll to message
+            messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            claudeChat.messageHistory.push({ text, isUser });
+        }
+
+        // Handle Claude-style message
+        function handleClaudeMessage(message) {
+            if (!message.trim()) return;
+
+            addClaudeMessage(message, true);
+            claudeInput.value = '';
+
+            // Simulate thinking delay
+            setTimeout(() => {
+                const answer = findAnswer(message);
+
+                if (answer) {
+                    addClaudeMessage(answer, false);
+                } else {
+                    addClaudeMessage(
+                        "That's a great question! While I don't have a specific answer for that, you can reach out directly at Drew@whiterabbitedventures.com. Is there anything else about our business model, competition, team, or funding I can help with?",
+                        false
+                    );
+                }
+            }, 600);
+        }
+
+        // Event Listeners for Claude-style chat
+        if (claudeSendBtn) {
+            claudeSendBtn.addEventListener('click', () => {
+                handleClaudeMessage(claudeInput.value);
+            });
+        }
+
+        if (claudeInput) {
+            claudeInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    handleClaudeMessage(claudeInput.value);
+                }
+            });
+        }
+
+        // Prompt card clicks
+        promptCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const prompt = card.getAttribute('data-prompt');
+                handleClaudeMessage(prompt);
+            });
         });
     </script>
 </body>
