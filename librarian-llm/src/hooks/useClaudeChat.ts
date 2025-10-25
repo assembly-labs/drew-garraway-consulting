@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Book, Message } from '../types';
+import { CatalogItem, Message } from '../types';
 import {
   buildSystemPrompt,
   formatConversationForAPI,
@@ -7,7 +7,7 @@ import {
 } from '../utils/promptBuilder';
 
 interface UseClaudeChatOptions {
-  catalog: Book[];
+  catalog: CatalogItem[];
   onError?: (error: string) => void;
 }
 
@@ -18,7 +18,7 @@ export const useClaudeChat = ({ catalog, onError }: UseClaudeChatOptions) => {
     userMessage: string,
     conversationHistory: Message[],
     retryCount = 0
-  ): Promise<{ content: string; books: Book[] }> => {
+  ): Promise<{ content: string; books: CatalogItem[] }> => {
     setIsLoading(true);
 
     try {

@@ -1,10 +1,10 @@
-# Librarian LLM - AI-Powered Library Book Discovery
+# Librarian LLM - AI-Powered Library Discovery System
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/assembly-labs/drew-garraway-consulting/tree/main/librarian-llm)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue)](https://github.com/assembly-labs/drew-garraway-consulting/tree/main/librarian-llm)
 [![Status](https://img.shields.io/badge/status-production%20ready-green)](https://drewgarraway.com/librarian-llm/)
 [![Demo](https://img.shields.io/badge/demo-live-orange)](https://drewgarraway.com/librarian-llm/)
 
-A conversational AI prototype for discovering library books using natural language queries. Built with React, TypeScript, and Claude AI.
+A conversational AI prototype for discovering library materials including books, DVDs, games, equipment, and more through our "Library of Things" program. Built with React, TypeScript, and Claude AI.
 
 🔗 **[Live Demo](https://drewgarraway.com/librarian-llm/)** | 📂 **[Repository](https://github.com/assembly-labs/drew-garraway-consulting/tree/main/librarian-llm)**
 
@@ -44,26 +44,35 @@ A conversational AI prototype for discovering library books using natural langua
 
 ## ✅ Features
 
-- ✅ **Natural Language Search**: Ask for books using conversational queries
+- ✅ **Natural Language Search**: Ask for any library materials using conversational queries
+- ✅ **Library of Things**: Discover books, DVDs, games, 3D printers, tools, and more
 - ✅ **Multi-turn Conversations**: Maintain context across multiple questions
-- ✅ **Rich Book Information**: Cover images, formats, availability status
+- ✅ **Rich Item Information**: Cover images, formats, availability, special requirements
 - ✅ **Mobile Responsive**: Works on phones, tablets, and desktops
 - ✅ **Accessibility**: Keyboard navigation and screen reader support
-- ✅ **Mock Catalog**: 69 diverse books for demonstration
+- ✅ **Diverse Catalog**: 90+ items including books, media, equipment, and unique materials
 - ✅ **Smart Retry Logic**: Automatic retry for transient errors
 - ✅ **Enhanced Error Messages**: Helpful troubleshooting suggestions
 - ✅ **Conversation Memory Indicator**: Visual feedback for context length
-- ✅ **Improved Book Matching**: Advanced recommendation extraction
+- ✅ **Polymorphic Components**: Intelligent display of different material types
 - ✅ **Dark Mode Toggle**: Switch between light and dark themes with persistent preference
 
 ## 🎯 Example Queries
 
 Try these example searches:
+
+**Books & Media:**
 - "I want something funny for the beach"
 - "Books like Educated by Tara Westover"
-- "Mystery novels set in Paris"
-- "Science books for a curious 12-year-old"
-- "Do you have that in audiobook?"
+- "Do you have Planet Earth on DVD?"
+- "Comics for teenagers"
+
+**Library of Things:**
+- "Can I borrow a 3D printer?"
+- "Do you have video games for PS5?"
+- "I need to test my home for radon"
+- "Board games for family game night"
+- "Tools for home improvement"
 
 ## 🏗️ Project Structure
 
@@ -81,18 +90,25 @@ librarian-llm/
 └── package.json         # Dependencies
 ```
 
+## 📚 Documentation
+
+- **[Library of Things Guide](LIBRARY_OF_THINGS_GUIDE.md)** - Complete technical guide to the diverse materials system
+- **[Adding New Materials](ADDING_NEW_MATERIALS.md)** - Step-by-step instructions for adding new item types
+- **[Deployment Guide](DEPLOYMENT_GUIDE.md)** - Comprehensive deployment and maintenance procedures
+
 ## 🚢 Deployment
 
 This project is deployed on **Netlify** with serverless functions for secure API key management.
 
 ### Quick Deploy:
 ```bash
-git push origin main
+npm run build
+npm run deploy  # or git push origin main for auto-deploy
 ```
 Netlify automatically builds and deploys when you push to GitHub.
 
 ### Detailed Instructions:
-See [DEPLOYMENT_NETLIFY.md](DEPLOYMENT_NETLIFY.md) for complete setup and deployment guide.
+See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for complete setup and deployment guide.
 
 ### Live Demo:
 🔗 **[https://librarian-llm.netlify.app](https://librarian-llm.netlify.app)** *(or your custom domain)*
@@ -111,9 +127,10 @@ See [DEPLOYMENT_NETLIFY.md](DEPLOYMENT_NETLIFY.md) for complete setup and deploy
 
 1. **First-time user**: "I just finished Educated and loved it"
 2. **Format preference**: "Do you have that in audiobook?"
-3. **No results**: "Books about underwater basket weaving"
-4. **Unclear query**: "Something good"
-5. **Complex request**: "Gift for my 12-year-old who likes science and funny books"
+3. **Equipment inquiry**: "Can I borrow a 3D printer?"
+4. **Media request**: "Nature documentaries on DVD"
+5. **Complex request**: "Activities for a rainy day with kids"
+6. **Library of Things**: "Do you have tools I can borrow?"
 
 ## 🔑 Environment Variables
 
@@ -149,8 +166,10 @@ npm run lint
 ## 🤝 For Pilot Libraries
 
 This is a **prototype demonstration**, not production software. It:
-- ✅ Shows conversational search capabilities
+- ✅ Shows conversational search for all library materials
+- ✅ Demonstrates "Library of Things" capabilities
 - ✅ Uses real AI (Claude) for recommendations
+- ✅ Supports diverse materials (books, DVDs, games, equipment, etc.)
 - ✅ Works on mobile and desktop
 - ❌ Does NOT connect to real library systems
 - ❌ Does NOT scale beyond demo usage

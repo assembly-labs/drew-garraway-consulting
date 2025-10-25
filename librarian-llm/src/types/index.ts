@@ -1,28 +1,119 @@
-// Book-related types
-export interface Book {
+// Material type definitions
+export type MaterialType = 'book' | 'dvd' | 'game' | 'equipment' | 'comic' | 'audiovisual' | 'thing';
+
+// Extended format types for different materials
+export type ItemFormatType =
+  | 'physical' | 'ebook' | 'audiobook'  // existing book formats
+  | 'dvd' | 'bluray' | 'cd' | 'vinyl'    // media formats
+  | 'ps5' | 'xbox' | 'switch' | 'pc' | 'retro'     // game platforms
+  | 'equipment' | 'tool' | 'device'       // equipment types
+  | 'comic' | 'manga' | 'graphic-novel';  // comic formats
+
+// Base interface for all library items
+export interface LibraryItem {
   id: string;
-  isbn: string;
+  itemType: MaterialType;
   title: string;
-  author: string;
   cover: string;
-  formats: BookFormat[];
-  subjects: string[];
+  formats: ItemFormat[];
   description: string;
-  publication_year: number;
-  pages: number;
-  rating: number;
+  rating?: number;
   popular?: boolean;
 }
 
-export interface BookFormat {
-  type: 'physical' | 'ebook' | 'audiobook';
-  status: 'available' | 'waitlist' | 'checked_out';
+// Updated format structure with new fields for special materials
+export interface ItemFormat {
+  type: ItemFormatType;
+  status: 'available' | 'waitlist' | 'checked_out' | 'maintenance' | 'reserved';
   copies_available?: number;
   copies_total?: number;
   wait_time?: string;
   holds?: number;
   due_date?: string;
+  // New fields for special materials
+  booking_required?: boolean;
+  slots_available?: string[];
+  checkout_duration_days?: number;
+  deposit_required?: number;
+  age_restriction?: string;
 }
+
+// Book-related types (now extends LibraryItem)
+export interface Book extends LibraryItem {
+  itemType: 'book';
+  isbn: string;
+  author: string;
+  subjects: string[];
+  publication_year: number;
+  pages: number;
+}
+
+// Keep BookFormat for backward compatibility
+export interface BookFormat extends ItemFormat {
+  type: 'physical' | 'ebook' | 'audiobook';
+}
+
+// Media item types (DVDs, Blu-rays, etc.)
+export interface MediaItem extends LibraryItem {
+  itemType: 'dvd' | 'audiovisual';
+  director?: string;
+  actors?: string[];
+  runtime_minutes?: number;
+  release_year: number;
+  rating_mpaa?: string;
+  episodes?: number;
+  season?: number;
+}
+
+// Game item types
+export interface GameItem extends LibraryItem {
+  itemType: 'game';
+  platform: string[];
+  developer: string;
+  publisher?: string;
+  release_year: number;
+  rating_esrb?: string;
+  players?: string;
+  online_multiplayer?: boolean;
+  includes?: string[];
+}
+
+// Equipment item types
+export interface EquipmentItem extends LibraryItem {
+  itemType: 'equipment';
+  category: string;
+  manufacturer?: string;
+  model?: string;
+  includes: string[];
+  requirements?: string[];
+  instructions_url?: string;
+  replacement_cost?: number;
+}
+
+// Comic/Graphic Novel types
+export interface ComicItem extends LibraryItem {
+  itemType: 'comic';
+  author?: string;
+  artist?: string;
+  series?: string;
+  issue_number?: number;
+  volume?: number;
+  publisher: string;
+  publication_year: number;
+}
+
+// General "Thing" types (board games, tools, etc.)
+export interface ThingItem extends LibraryItem {
+  itemType: 'thing';
+  category: string;
+  brand?: string;
+  includes?: string[];
+  condition?: string;
+  suitable_ages?: string;
+}
+
+// Union type for all library materials
+export type CatalogItem = Book | MediaItem | GameItem | EquipmentItem | ComicItem | ThingItem;
 
 // Conversation types
 export interface Message {
@@ -30,7 +121,7 @@ export interface Message {
   role: 'user' | 'assistant' | 'system';
   content: string;
   timestamp: Date;
-  books?: Book[]; // Books mentioned in the response
+  books?: CatalogItem[]; // Items mentioned in the response
 }
 
 export interface ConversationState {

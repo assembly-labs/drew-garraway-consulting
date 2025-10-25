@@ -1,11 +1,11 @@
 import React from 'react';
-import { Book } from '../types';
+import { CatalogItem } from '../types';
 import { BookCard } from './BookCard';
 
 interface ResultsListProps {
-  books: Book[];
-  recommendations?: { [bookId: string]: string }; // Recommendation reasons by book ID
-  onBookAction?: (action: 'hold' | 'details', book: Book) => void;
+  books: CatalogItem[];
+  recommendations?: { [bookId: string]: string }; // Recommendation reasons by item ID
+  onBookAction?: (action: 'hold' | 'details', book: CatalogItem) => void;
   title?: string;
 }
 

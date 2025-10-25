@@ -1,23 +1,27 @@
-import { Book, Message } from '../types';
+import { CatalogItem, Message } from '../types';
+import { formatItemCreator } from './formatters';
 
-export const buildSystemPrompt = (catalog: Book[]): string => {
+export const buildSystemPrompt = (catalog: CatalogItem[]): string => {
   // Create a condensed version of the catalog for the prompt
-  const catalogSummary = catalog.map(book => ({
-    id: book.id,
-    title: book.title,
-    author: book.author,
-    subjects: book.subjects,
-    description: book.description.substring(0, 100) + '...', // Truncate for context window
-    formats: book.formats.map(f => ({
+  const catalogSummary = catalog.map(item => ({
+    id: item.id,
+    itemType: item.itemType,
+    title: item.title,
+    creator: formatItemCreator(item),
+    subjects: 'subjects' in item ? item.subjects : [item.itemType],
+    description: item.description.substring(0, 100) + '...', // Truncate for context window
+    formats: item.formats.map(f => ({
       type: f.type,
       status: f.status,
-      wait_time: f.wait_time
+      wait_time: f.wait_time,
+      booking_required: f.booking_required
     })),
-    rating: book.rating,
-    year: book.publication_year
+    rating: item.rating,
+    year: 'publication_year' in item ? item.publication_year :
+          'release_year' in item ? item.release_year : null
   }));
 
-  return `You are a friendly and knowledgeable library assistant. You can ONLY recommend books from the catalog provided below. Do NOT use any external knowledge or mention books not in this catalog.
+  return `You are a friendly and knowledgeable library assistant. You can ONLY recommend items from the catalog provided below. Our library offers books, DVDs, games, equipment, comics, and more through our "Library of Things" program. Do NOT use any external knowledge or mention items not in this catalog.
 
 COMPLETE LIBRARY CATALOG:
 ${JSON.stringify(catalogSummary, null, 2)}
@@ -59,21 +63,21 @@ export const formatConversationForAPI = (messages: Message[]): any[] => {
 
 export const extractBookRecommendations = (
   response: string,
-  catalog: Book[]
-): Book[] => {
-  // Extract book titles mentioned in the response with improved matching
-  const recommendedBooks: Book[] = [];
+  catalog: CatalogItem[]
+): CatalogItem[] => {
+  // Extract items mentioned in the response with improved matching
+  const recommendedItems: CatalogItem[] = [];
   const responseNormalized = response.toLowerCase();
 
   // Create a Set to avoid duplicates
-  const foundBookIds = new Set<string>();
+  const foundItemIds = new Set<string>();
 
-  catalog.forEach(book => {
+  catalog.forEach(item => {
     // Skip if already found
-    if (foundBookIds.has(book.id)) return;
+    if (foundItemIds.has(item.id)) return;
 
-    const titleNormalized = book.title.toLowerCase();
-    const authorNormalized = book.author.toLowerCase();
+    const titleNormalized = item.title.toLowerCase();
+    const creatorNormalized = formatItemCreator(item).toLowerCase();
 
     // Check multiple matching strategies
     const isMatched =
@@ -85,29 +89,29 @@ export const extractBookRecommendations = (
       // Title in quotes or bold
       responseNormalized.includes(`"${titleNormalized}"`) ||
       responseNormalized.includes(`**${titleNormalized}**`) ||
-      // Title and author mentioned close together (within 50 chars)
+      // Title and creator mentioned close together (within 50 chars)
       (responseNormalized.includes(titleNormalized.split(' ')[0]) &&
-       responseNormalized.includes(authorNormalized) &&
+       responseNormalized.includes(creatorNormalized) &&
        Math.abs(
          responseNormalized.indexOf(titleNormalized.split(' ')[0]) -
-         responseNormalized.indexOf(authorNormalized)
+         responseNormalized.indexOf(creatorNormalized)
        ) < 50) ||
-      // ISBN match (if response contains ISBNs)
-      responseNormalized.includes(book.isbn);
+      // ISBN match (if response contains ISBNs for books)
+      ('isbn' in item && responseNormalized.includes(item.isbn));
 
     if (isMatched) {
-      foundBookIds.add(book.id);
-      recommendedBooks.push(book);
+      foundItemIds.add(item.id);
+      recommendedItems.push(item);
     }
   });
 
   // Sort by order of appearance in response
-  recommendedBooks.sort((a, b) => {
+  recommendedItems.sort((a, b) => {
     const aIndex = responseNormalized.indexOf(a.title.toLowerCase());
     const bIndex = responseNormalized.indexOf(b.title.toLowerCase());
     return aIndex - bIndex;
   });
 
   // Limit to top 6 recommendations
-  return recommendedBooks.slice(0, 6);
+  return recommendedItems.slice(0, 6);
 };

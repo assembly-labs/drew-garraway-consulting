@@ -21,7 +21,7 @@ import { useConversation } from './hooks/useConversation';
 import { useClaudeChat } from './hooks/useClaudeChat';
 import { useHolds } from './hooks/useHolds';
 import { useFines } from './hooks/useFines';
-import { Book } from './types';
+import { CatalogItem } from './types';
 import { mockCheckouts } from './data/mockCheckouts';
 
 type PageView = 'search' | 'checkouts' | 'holds' | 'events' | 'history' | 'fines';
@@ -92,12 +92,18 @@ function AppContent() {
   }, [addMessage, setLoading, setError, getRecentContext, sendMessage]);
 
   // Handle book actions
-  const handleBookAction = useCallback((action: 'hold' | 'details', book: Book) => {
+  const handleBookAction = useCallback((action: 'hold' | 'details', book: CatalogItem) => {
     // In a real app, this would integrate with library systems
     if (action === 'hold') {
       alert(`Demo: Placing hold on "${book.title}".\n\nIn a production system, this would connect to your library's hold system.`);
     } else if (action === 'details') {
-      alert(`Demo: Viewing details for "${book.title}"\n\nTitle: ${book.title}\nAuthor: ${book.author}\nISBN: ${book.isbn}\nYear: ${book.publication_year}\n\nIn production, this would open a detailed view.`);
+      const creator = 'author' in book ? book.author :
+                       'director' in book ? book.director :
+                       'developer' in book ? book.developer : 'Unknown';
+      const year = 'publication_year' in book ? book.publication_year :
+                   'release_year' in book ? book.release_year : 'N/A';
+      const isbn = 'isbn' in book ? book.isbn : 'N/A';
+      alert(`Demo: Viewing details for "${book.title}"\n\nTitle: ${book.title}\nCreator: ${creator}\nISBN/ID: ${isbn}\nYear: ${year}\nType: ${book.itemType}\n\nIn production, this would open a detailed view.`);
     }
   }, []);
 
@@ -149,7 +155,7 @@ function AppContent() {
         });
         break;
       default:
-        console.log('Unknown menu item:', itemId);
+        // Unknown menu item - no action needed
     }
   }, [toast]);
 
