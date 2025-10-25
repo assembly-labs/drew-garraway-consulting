@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Message } from '../types';
+import { Message, CatalogItem } from '../types';
 import { formatDate } from '../utils/formatters';
 import { ResultsList } from './ResultsList';
 import { TypingIndicator } from './TypingIndicator';
@@ -7,7 +7,7 @@ import { TypingIndicator } from './TypingIndicator';
 interface ConversationHistoryProps {
   messages: Message[];
   isLoading?: boolean;
-  onBookAction?: (action: 'hold' | 'details', book: any) => void;
+  onBookAction?: (action: 'hold' | 'details', book: CatalogItem) => void;
 }
 
 export const ConversationHistory: React.FC<ConversationHistoryProps> = ({

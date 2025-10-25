@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { Book } from '../types';
+import { CatalogItem } from '../types';
 import {
   formatAvailability,
   getFormatIcon,
   getStatusColor,
   getRatingStars,
-  formatSubjects
+  formatSubjects,
+  formatItemCreator
 } from '../utils/formatters';
 
 interface BookCardProps {
-  book: Book;
-  recommendation?: string; // Why this book was recommended
-  onAction?: (action: 'hold' | 'details', book: Book) => void;
+  book: CatalogItem;
+  recommendation?: string; // Why this item was recommended
+  onAction?: (action: 'hold' | 'details', book: CatalogItem) => void;
 }
 
 export const BookCard: React.FC<BookCardProps> = ({
@@ -33,7 +34,7 @@ export const BookCard: React.FC<BookCardProps> = ({
       className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg
                  dark:shadow-gray-900/50 transition-shadow
                  border-2 border-gray-100 dark:border-gray-700 p-4"
-      aria-label={`${book.title} by ${book.author}`}
+      aria-label={`${book.title} by ${formatItemCreator(book)}`}
     >
       <div className="flex gap-4">
         {/* Book Cover */}
@@ -61,7 +62,7 @@ export const BookCard: React.FC<BookCardProps> = ({
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 line-clamp-1">
               {book.title}
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">by {book.author}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">by {formatItemCreator(book)}</p>
           </div>
 
           {/* Formats and Availability */}
@@ -107,10 +108,12 @@ export const BookCard: React.FC<BookCardProps> = ({
             </button>
           )}
 
-          {/* Subjects/Genres */}
-          <div className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-            📂 {formatSubjects(book.subjects)}
-          </div>
+          {/* Subjects/Genres/Category */}
+          {'subjects' in book && book.subjects && (
+            <div className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+              📂 {formatSubjects(book.subjects)}
+            </div>
+          )}
 
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-2">
@@ -139,8 +142,15 @@ export const BookCard: React.FC<BookCardProps> = ({
 
       {/* Metadata footer */}
       <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700 flex justify-between text-xs text-gray-500 dark:text-gray-400">
-        <span>Published {book.publication_year}</span>
-        <span>{book.pages} pages</span>
+        {'publication_year' in book && (
+          <span>Published {book.publication_year}</span>
+        )}
+        {'release_year' in book && (
+          <span>Released {book.release_year}</span>
+        )}
+        {'pages' in book && book.pages && (
+          <span>{book.pages} pages</span>
+        )}
         {book.popular && <span className="text-orange-600 dark:text-orange-400 font-medium">🔥 Popular</span>}
       </div>
     </article>

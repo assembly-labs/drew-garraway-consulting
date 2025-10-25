@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Book } from '../types';
+import { CatalogItem } from '../types';
 
 export const useCatalog = () => {
   // Use React Query for efficient data fetching and caching
@@ -8,7 +8,7 @@ export const useCatalog = () => {
     isLoading,
     error,
     refetch
-  } = useQuery<Book[]>({
+  } = useQuery<CatalogItem[]>({
     queryKey: ['catalog'],
     queryFn: async () => {
       try {
@@ -36,10 +36,11 @@ export const useCatalog = () => {
 };
 
 // Fallback catalog data in case the JSON file fails to load
-const getFallbackCatalog = (): Book[] => {
+const getFallbackCatalog = (): CatalogItem[] => {
   return [
     {
       id: 'fallback-1',
+      itemType: 'book' as const,
       isbn: '9780735219090',
       title: 'Where the Crawdads Sing',
       author: 'Delia Owens',
@@ -58,6 +59,7 @@ const getFallbackCatalog = (): Book[] => {
     },
     {
       id: 'fallback-2',
+      itemType: 'book' as const,
       isbn: '9781250178619',
       title: 'The Thursday Murder Club',
       author: 'Richard Osman',
@@ -75,6 +77,7 @@ const getFallbackCatalog = (): Book[] => {
     },
     {
       id: 'fallback-3',
+      itemType: 'book' as const,
       isbn: '9780399590504',
       title: 'Educated',
       author: 'Tara Westover',
@@ -93,6 +96,7 @@ const getFallbackCatalog = (): Book[] => {
     },
     {
       id: 'fallback-4',
+      itemType: 'book' as const,
       isbn: '9780385547345',
       title: 'The Silent Patient',
       author: 'Alex Michaelides',
@@ -110,6 +114,7 @@ const getFallbackCatalog = (): Book[] => {
     },
     {
       id: 'fallback-5',
+      itemType: 'book' as const,
       isbn: '9780525559474',
       title: 'The Midnight Library',
       author: 'Matt Haig',
