@@ -1199,5 +1199,359 @@
     "pages": 32,
     "rating": 4.3,
     "popular": false
+  },
+  {
+    "id": "book_070",
+    "isbn": "9780062315014",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Alchemist",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["fiction", "philosophy", "spiritual", "adventure"],
+    "description": "A shepherd boy's journey to the Egyptian pyramids teaches him to follow his dreams and listen to his heart.",
+    "publication_year": 1988,
+    "pages": 208,
+    "rating": 4.0,
+    "popular": true
+  },
+  {
+    "id": "book_071",
+    "isbn": "9780446310789",
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Mockingbird",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 5, "copies_total": 8},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["classic", "historical-fiction", "legal", "racism"],
+    "description": "A young girl in Depression-era Alabama witnesses her father defend a Black man falsely accused of a crime.",
+    "publication_year": 1960,
+    "pages": 324,
+    "rating": 4.7,
+    "popular": true
+  },
+  {
+    "id": "book_072",
+    "isbn": "9780743273565",
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Gatsby",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 6, "copies_total": 9},
+      {"type": "ebook", "status": "available"}
+    ],
+    "subjects": ["classic", "romance", "1920s", "tragedy"],
+    "description": "The mysterious millionaire Jay Gatsby and his obsession with the beautiful Daisy Buchanan in Jazz Age America.",
+    "publication_year": 1925,
+    "pages": 180,
+    "rating": 4.2,
+    "popular": false
+  },
+  {
+    "id": "book_073",
+    "isbn": "9780547928227",
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Hobbit",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["fantasy", "adventure", "classic", "dragons"],
+    "description": "Bilbo Baggins is swept into an epic quest to reclaim the lost Dwarf Kingdom from the dragon Smaug.",
+    "publication_year": 1937,
+    "pages": 310,
+    "rating": 4.6,
+    "popular": true
+  },
+  {
+    "id": "book_074",
+    "isbn": "9780544003415",
+    "title": "The Lord of the Rings",
+    "author": "J.R.R. Tolkien",
+    "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=LOTR",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 7},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["fantasy", "epic", "adventure", "classic"],
+    "description": "Frodo Baggins must destroy the One Ring to save Middle-earth from the Dark Lord Sauron.",
+    "publication_year": 1954,
+    "pages": 1178,
+    "rating": 4.8,
+    "popular": true
+  },
+  {
+    "id": "book_075",
+    "isbn": "9780545010221",
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "J.K. Rowling",
+    "cover": "https://via.placeholder.com/150x225/DB2777/FFFFFF?text=Harry+Potter",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 7, "copies_total": 10},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["fantasy", "magic", "young-adult", "school"],
+    "description": "An orphaned boy discovers he's a wizard and attends Hogwarts School of Witchcraft and Wizardry.",
+    "publication_year": 1997,
+    "pages": 309,
+    "rating": 4.7,
+    "popular": true
+  },
+  {
+    "id": "book_076",
+    "isbn": "9780553213690",
+    "title": "A Game of Thrones",
+    "author": "George R.R. Martin",
+    "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Game+Thrones",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["fantasy", "epic", "political", "medieval"],
+    "description": "Noble families vie for control of the Iron Throne in the Seven Kingdoms of Westeros.",
+    "publication_year": 1996,
+    "pages": 694,
+    "rating": 4.5,
+    "popular": true
+  },
+  {
+    "id": "book_077",
+    "isbn": "9780765326355",
+    "title": "The Way of Kings",
+    "author": "Brandon Sanderson",
+    "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Way+Kings",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 4},
+      {"type": "ebook", "status": "available"}
+    ],
+    "subjects": ["fantasy", "epic", "magic-system", "war"],
+    "description": "In a world of stone and storms, ancient powers awaken as civilization faces collapse.",
+    "publication_year": 2010,
+    "pages": 1007,
+    "rating": 4.6,
+    "popular": false
+  },
+  {
+    "id": "book_078",
+    "isbn": "9780316129084",
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Catcher+Rye",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
+      {"type": "ebook", "status": "available"}
+    ],
+    "subjects": ["classic", "coming-of-age", "literary", "teenage"],
+    "description": "Holden Caulfield's story of teenage rebellion and alienation in 1950s New York City.",
+    "publication_year": 1951,
+    "pages": 277,
+    "rating": 3.8,
+    "popular": false
+  },
+  {
+    "id": "book_079",
+    "isbn": "9780141439518",
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "cover": "https://via.placeholder.com/150x225/DC2626/FFFFFF?text=Pride+Prejudice",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 5, "copies_total": 7},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["classic", "romance", "regency", "satire"],
+    "description": "Elizabeth Bennet navigates issues of marriage, morality, and misunderstandings in Georgian England.",
+    "publication_year": 1813,
+    "pages": 432,
+    "rating": 4.4,
+    "popular": true
+  },
+  {
+    "id": "book_080",
+    "isbn": "9780451524935",
+    "title": "1984",
+    "author": "George Orwell",
+    "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=1984",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 6, "copies_total": 8},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["dystopian", "classic", "political", "science-fiction"],
+    "description": "Winston Smith struggles against totalitarian government surveillance in a bleak future.",
+    "publication_year": 1949,
+    "pages": 328,
+    "rating": 4.5,
+    "popular": true
+  },
+  {
+    "id": "book_081",
+    "isbn": "9780060850524",
+    "title": "Brave New World",
+    "author": "Aldous Huxley",
+    "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Brave+New",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
+      {"type": "ebook", "status": "available"}
+    ],
+    "subjects": ["dystopian", "classic", "science-fiction", "social-commentary"],
+    "description": "A futuristic society achieves happiness through genetic engineering, psychological manipulation, and drugs.",
+    "publication_year": 1932,
+    "pages": 288,
+    "rating": 4.1,
+    "popular": false
+  },
+  {
+    "id": "book_082",
+    "isbn": "9780385333849",
+    "title": "The Handmaid's Tale",
+    "author": "Margaret Atwood",
+    "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Handmaid",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["dystopian", "feminism", "speculative-fiction", "classic"],
+    "description": "In a theocratic future America, women are subjugated and forced into reproductive servitude.",
+    "publication_year": 1985,
+    "pages": 311,
+    "rating": 4.3,
+    "popular": true
+  },
+  {
+    "id": "book_083",
+    "isbn": "9780316769174",
+    "title": "The Color Purple",
+    "author": "Alice Walker",
+    "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Color+Purple",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
+      {"type": "ebook", "status": "available"}
+    ],
+    "subjects": ["classic", "historical-fiction", "african-american", "feminism"],
+    "description": "Letters from a Black woman in the rural South chronicle her journey from abuse to self-discovery.",
+    "publication_year": 1982,
+    "pages": 295,
+    "rating": 4.4,
+    "popular": false
+  },
+  {
+    "id": "book_084",
+    "isbn": "9780679783268",
+    "title": "Beloved",
+    "author": "Toni Morrison",
+    "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Beloved",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 4},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["classic", "historical-fiction", "slavery", "supernatural"],
+    "description": "A former slave is haunted by the ghost of her baby daughter in post-Civil War Ohio.",
+    "publication_year": 1987,
+    "pages": 324,
+    "rating": 4.2,
+    "popular": false
+  },
+  {
+    "id": "book_085",
+    "isbn": "9780062073556",
+    "title": "And Then There Were None",
+    "author": "Agatha Christie",
+    "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Then+None",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 5, "copies_total": 7},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["mystery", "thriller", "classic", "murder"],
+    "description": "Ten strangers invited to an island are murdered one by one in this classic whodunit.",
+    "publication_year": 1939,
+    "pages": 272,
+    "rating": 4.5,
+    "popular": true
+  },
+  {
+    "id": "book_086",
+    "isbn": "9780316346627",
+    "title": "The Stand",
+    "author": "Stephen King",
+    "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=The+Stand",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
+      {"type": "ebook", "status": "available"}
+    ],
+    "subjects": ["horror", "post-apocalyptic", "thriller", "epic"],
+    "description": "After a plague wipes out most of humanity, survivors must choose between good and evil.",
+    "publication_year": 1978,
+    "pages": 1153,
+    "rating": 4.4,
+    "popular": false
+  },
+  {
+    "id": "book_087",
+    "isbn": "9780061120084",
+    "title": "The Shining",
+    "author": "Stephen King",
+    "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Shining",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["horror", "thriller", "psychological", "supernatural"],
+    "description": "A family's winter caretaking job at an isolated hotel turns into a nightmare of madness and terror.",
+    "publication_year": 1977,
+    "pages": 447,
+    "rating": 4.3,
+    "popular": true
+  },
+  {
+    "id": "book_088",
+    "isbn": "9780345803481",
+    "title": "Ready Player One",
+    "author": "Ernest Cline",
+    "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Ready+Player",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 5, "copies_total": 7},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["science-fiction", "gaming", "dystopian", "adventure"],
+    "description": "A teenager searches for an Easter egg hidden in a massive virtual reality world.",
+    "publication_year": 2011,
+    "pages": 374,
+    "rating": 4.0,
+    "popular": true
+  },
+  {
+    "id": "book_089",
+    "isbn": "9780765378569",
+    "title": "Ender's Game",
+    "author": "Orson Scott Card",
+    "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Enders+Game",
+    "formats": [
+      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
+      {"type": "ebook", "status": "available"},
+      {"type": "audiobook", "status": "available"}
+    ],
+    "subjects": ["science-fiction", "military", "space", "young-adult"],
+    "description": "A brilliant child is trained at a military academy in space to defend Earth from alien invasion.",
+    "publication_year": 1985,
+    "pages": 324,
+    "rating": 4.4,
+    "popular": true
   }
 ]
