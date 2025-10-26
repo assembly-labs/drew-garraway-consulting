@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { CatalogItem, BookDetails, ThingDetails } from '../../types';
-import { formatItemCreator, getRatingStars, formatSubjects } from '../../utils/formatters';
+import { CatalogItem } from '../../types';
+import { formatItemCreator, getRatingStars } from '../../utils/formatters';
 
 interface ItemDetailsModalProps {
   item: CatalogItem | null;
