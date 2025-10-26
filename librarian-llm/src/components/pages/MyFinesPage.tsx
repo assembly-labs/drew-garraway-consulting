@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { FineCard } from './FineCard';
-import { PaymentModal } from './PaymentModal';
-import { useFines } from '../hooks/useFines';
+import { FineCard } from '../features/FineCard';
+import { PaymentModal } from '../modals/PaymentModal';
+import { useFines } from '../../hooks/useFines';
 
 interface MyFinesPageProps {
   onClose: () => void;

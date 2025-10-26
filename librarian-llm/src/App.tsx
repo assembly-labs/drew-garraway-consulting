@@ -1,19 +1,20 @@
 import { useCallback, useState, useRef } from 'react';
-import { SearchInput } from './components/SearchInput';
-import { ConversationHistory } from './components/ConversationHistory';
-import { ErrorMessage } from './components/ErrorMessage';
-import { LoadingSpinner } from './components/LoadingSpinner';
-import { ThemeToggle } from './components/ThemeToggle';
-import { HamburgerButton } from './components/HamburgerButton';
-import { Sidebar } from './components/Sidebar';
-import { DigitalLibraryCardModal } from './components/DigitalLibraryCardModal';
-import { MyCheckoutsPage } from './components/MyCheckoutsPage';
-import { MyHoldsPage } from './components/MyHoldsPage';
-import { EventsPage } from './components/EventsPage';
-import { MyReadingHistoryPage } from './components/MyReadingHistoryPage';
-import { MyFinesPage } from './components/MyFinesPage';
-import { ErrorBoundary } from './components/ErrorBoundary';
-import { ToastContainer } from './components/ToastContainer';
+import { SearchInput } from './components/common/SearchInput';
+import { ConversationHistory } from './components/features/ConversationHistory';
+import { ErrorMessage } from './components/common/ErrorMessage';
+import { LoadingSpinner } from './components/common/LoadingSpinner';
+import { ThemeToggle } from './components/common/ThemeToggle';
+import { HamburgerButton } from './components/common/HamburgerButton';
+import { Sidebar } from './components/layout/Sidebar';
+import { DigitalLibraryCardModal } from './components/modals/DigitalLibraryCardModal';
+import { QueryLimitWarning } from './components/modals/QueryLimitWarning';
+import { MyCheckoutsPage } from './components/pages/MyCheckoutsPage';
+import { MyHoldsPage } from './components/pages/MyHoldsPage';
+import { EventsPage } from './components/pages/EventsPage';
+import { MyReadingHistoryPage } from './components/pages/MyReadingHistoryPage';
+import { MyFinesPage } from './components/pages/MyFinesPage';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
+import { ToastContainer } from './components/common/ToastContainer';
 import { ToastProvider } from './contexts/ToastContext';
 import { useToast } from './hooks/useToast';
 import { useCatalog } from './hooks/useCatalog';
@@ -26,13 +27,18 @@ import { mockCheckouts } from './data/mockCheckouts';
 
 type PageView = 'search' | 'checkouts' | 'holds' | 'events' | 'history' | 'fines';
 
-function AppContent() {
+function AppContent(): JSX.Element {
   // Sidebar and modal state
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showLibraryCardModal, setShowLibraryCardModal] = useState(false);
   const [currentPage, setCurrentPage] = useState<PageView>('search');
   const hamburgerButtonRef = useRef<HTMLButtonElement>(null);
   const toast = useToast();
+
+  // Query limit state (resets on page refresh)
+  const [queryCount, setQueryCount] = useState(0);
+  const [showQueryWarning, setShowQueryWarning] = useState(false);
+  const [isSessionLimitReached, setIsSessionLimitReached] = useState(false);
 
   // Dynamic badge counts
   const { totalCount: holdsCount } = useHolds();
@@ -66,6 +72,16 @@ function AppContent() {
 
   // Handle search submission
   const handleSearch = useCallback(async (query: string) => {
+    // Check if session limit has been reached
+    if (isSessionLimitReached) {
+      return; // Don't process if limit reached
+    }
+
+    // Check if this is the 5th query (show warning)
+    if (queryCount === 4) {
+      setShowQueryWarning(true);
+    }
+
     // Add user message to conversation
     addMessage(query, 'user');
     setLoading(true);
@@ -79,6 +95,15 @@ function AppContent() {
 
       // Add assistant response with book recommendations
       addMessage(content, 'assistant', books);
+
+      // Increment query count after successful response
+      const newCount = queryCount + 1;
+      setQueryCount(newCount);
+
+      // Check if we've reached the session limit (6 queries)
+      if (newCount >= 6) {
+        setIsSessionLimitReached(true);
+      }
     } catch (error) {
       // Error is already handled by the onError callback
       // Just add a fallback message
@@ -89,7 +114,7 @@ function AppContent() {
     } finally {
       setLoading(false);
     }
-  }, [addMessage, setLoading, setError, getRecentContext, sendMessage]);
+  }, [addMessage, setLoading, setError, getRecentContext, sendMessage, queryCount, isSessionLimitReached]);
 
   // Handle book actions
   const handleBookAction = useCallback((action: 'hold' | 'details', book: CatalogItem) => {
@@ -280,6 +305,12 @@ function AppContent() {
         onAction={handleLibraryCardAction}
       />
 
+      {/* Query Limit Warning Modal */}
+      <QueryLimitWarning
+        isOpen={showQueryWarning}
+        onClose={() => setShowQueryWarning(false)}
+      />
+
       {/* Header */}
       <header className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -361,6 +392,8 @@ function AppContent() {
               <SearchInput
                 onSubmit={handleSearch}
                 isLoading={conversationLoading}
+                isDisabled={isSessionLimitReached}
+                disabledMessage="Session limit reached."
               />
 
               {/* Catalog Info */}
@@ -376,7 +409,7 @@ function AppContent() {
 }
 
 // Main App component wrapped with ToastProvider
-function App() {
+function App(): JSX.Element {
   return (
     <ToastProvider>
       <AppContent />

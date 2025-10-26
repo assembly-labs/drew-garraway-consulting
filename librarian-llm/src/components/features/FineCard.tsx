@@ -1,5 +1,5 @@
 import React from 'react';
-import { FineItem } from '../types';
+import { FineItem } from '../../types';
 
 interface FineCardProps {
   fine: FineItem;

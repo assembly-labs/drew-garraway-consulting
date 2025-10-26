@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { LibraryCard } from '../types';
+import { LibraryCard } from '../../types';
 
 interface DigitalLibraryCardModalProps {
   isOpen: boolean;

@@ -6,11 +6,27 @@
     "author": "Richard Osman",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Thursday+Murder",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["mystery", "humor", "seniors", "british"],
+    "subjects": [
+      "mystery",
+      "humor",
+      "seniors",
+      "british"
+    ],
     "description": "In a peaceful retirement village, four unlikely friends meet weekly in the Jigsaw Room to discuss unsolved crimes. Together they call themselves The Thursday Murder Club.",
     "publication_year": 2020,
     "pages": 368,
@@ -24,10 +40,23 @@
     "author": "Alex Michaelides",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Silent+Patient",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 4},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 4
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["thriller", "mystery", "psychological", "fiction"],
+    "subjects": [
+      "thriller",
+      "mystery",
+      "psychological",
+      "fiction"
+    ],
     "description": "Alicia Berenson shoots her husband five times in the face, and then never speaks another word. The mystery unfolds as a psychotherapist becomes obsessed with uncovering the truth.",
     "publication_year": 2019,
     "pages": 336,
@@ -41,15 +70,31 @@
     "author": "Gillian Flynn",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Gone+Girl",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 5, "copies_total": 7},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 5,
+        "copies_total": 7
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["thriller", "mystery", "suspense", "crime"],
+    "subjects": [
+      "thriller",
+      "mystery",
+      "suspense",
+      "crime"
+    ],
     "description": "On Nick and Amy Dunne's fifth wedding anniversary, Amy disappears. Nick's lies and behavior have everyone asking: Did Nick Dunne kill his wife?",
     "publication_year": 2012,
     "pages": 432,
-    "rating": 4.0,
+    "rating": 4,
     "popular": true
   },
   {
@@ -59,10 +104,23 @@
     "author": "Paula Hawkins",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Girl+Train",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 6
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["thriller", "mystery", "suspense", "fiction"],
+    "subjects": [
+      "thriller",
+      "mystery",
+      "suspense",
+      "fiction"
+    ],
     "description": "Rachel takes the same commuter train every morning and night, watching the same couple breakfasting on their deck. Then she sees something shocking.",
     "publication_year": 2015,
     "pages": 395,
@@ -76,10 +134,23 @@
     "author": "Liane Moriarty",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Big+Little",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["mystery", "drama", "women", "domestic"],
+    "subjects": [
+      "mystery",
+      "drama",
+      "women",
+      "domestic"
+    ],
     "description": "Three women, each at a crossroads, whose lives are about to collide in ways they never expected at a school fundraising trivia night.",
     "publication_year": 2014,
     "pages": 460,
@@ -93,10 +164,23 @@
     "author": "Lucy Foley",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Guest+List",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 3},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 3
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["mystery", "thriller", "wedding", "murder"],
+    "subjects": [
+      "mystery",
+      "thriller",
+      "wedding",
+      "murder"
+    ],
     "description": "A wedding on a remote Irish island turns deadly when someone turns up dead. Everyone is a suspect.",
     "publication_year": 2020,
     "pages": 320,
@@ -110,11 +194,27 @@
     "author": "Colleen Hoover",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Verity",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 6, "copies_total": 8},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 6,
+        "copies_total": 8
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["thriller", "romance", "suspense", "psychological"],
+    "subjects": [
+      "thriller",
+      "romance",
+      "suspense",
+      "psychological"
+    ],
     "description": "Lowen Ashleigh is hired to complete the remaining books in a successful series. She discovers an unfinished autobiography that may reveal terrifying truths.",
     "publication_year": 2018,
     "pages": 336,
@@ -128,11 +228,27 @@
     "author": "Taylor Jenkins Reid",
     "cover": "https://via.placeholder.com/150x225/DC2626/FFFFFF?text=Seven+Husbands",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 6
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["romance", "historical", "lgbtq", "fiction"],
+    "subjects": [
+      "romance",
+      "historical",
+      "lgbtq",
+      "fiction"
+    ],
     "description": "Aging Hollywood icon Evelyn Hugo finally decides to tell her scandalous life story to an unknown magazine reporter, revealing unexpected truths.",
     "publication_year": 2017,
     "pages": 389,
@@ -146,14 +262,27 @@
     "author": "Emily Henry",
     "cover": "https://via.placeholder.com/150x225/DC2626/FFFFFF?text=Beach+Read",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["romance", "contemporary", "humor", "fiction"],
+    "subjects": [
+      "romance",
+      "contemporary",
+      "humor",
+      "fiction"
+    ],
     "description": "A romance writer who no longer believes in love and a literary writer stuck in a rut engage in a summer-long writing challenge.",
     "publication_year": 2020,
     "pages": 361,
-    "rating": 4.0,
+    "rating": 4,
     "popular": false
   },
   {
@@ -163,10 +292,23 @@
     "author": "Emily Henry",
     "cover": "https://via.placeholder.com/150x225/DC2626/FFFFFF?text=People+Vacation",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 5, "copies_total": 7},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 5,
+        "copies_total": 7
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["romance", "contemporary", "travel", "friendship"],
+    "subjects": [
+      "romance",
+      "contemporary",
+      "travel",
+      "friendship"
+    ],
     "description": "Best friends Poppy and Alex take one vacation together every summer for a decade, until something goes wrong. Now they have one more chance to fix things.",
     "publication_year": 2021,
     "pages": 364,
@@ -180,10 +322,23 @@
     "author": "Elena Armas",
     "cover": "https://via.placeholder.com/150x225/DC2626/FFFFFF?text=Spanish+Love",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 4},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 4
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["romance", "contemporary", "fake-relationship", "office"],
+    "subjects": [
+      "romance",
+      "contemporary",
+      "fake-relationship",
+      "office"
+    ],
     "description": "Catalina needs a date to her sister's wedding. Her office nemesis Aaron Blackford offers to help, leading to unexpected complications.",
     "publication_year": 2021,
     "pages": 448,
@@ -197,11 +352,27 @@
     "author": "Colleen Hoover",
     "cover": "https://via.placeholder.com/150x225/DC2626/FFFFFF?text=It+Ends",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 7, "copies_total": 10},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 7,
+        "copies_total": 10
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["romance", "contemporary", "drama", "emotional"],
+    "subjects": [
+      "romance",
+      "contemporary",
+      "drama",
+      "emotional"
+    ],
     "description": "Lily falls for neurosurgeon Ryle, but when her first love reappears, she must confront difficult truths about relationships and patterns.",
     "publication_year": 2016,
     "pages": 376,
@@ -215,14 +386,27 @@
     "author": "Sally Thorne",
     "cover": "https://via.placeholder.com/150x225/DC2626/FFFFFF?text=Hating+Game",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["romance", "contemporary", "office", "enemies-to-lovers"],
+    "subjects": [
+      "romance",
+      "contemporary",
+      "office",
+      "enemies-to-lovers"
+    ],
     "description": "Lucy and Joshua hate each other. Not dislike. Hate. But when they're up for the same promotion, their dynamic starts to change.",
     "publication_year": 2016,
     "pages": 387,
-    "rating": 4.0,
+    "rating": 4,
     "popular": false
   },
   {
@@ -232,11 +416,27 @@
     "author": "Andy Weir",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Project+Hail",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 6
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["science-fiction", "space", "humor", "adventure"],
+    "subjects": [
+      "science-fiction",
+      "space",
+      "humor",
+      "adventure"
+    ],
     "description": "Ryland Grace wakes up alone on a spaceship with no memory. He must solve an impossible scientific mystery to save humanity.",
     "publication_year": 2021,
     "pages": 476,
@@ -250,11 +450,27 @@
     "author": "Matt Haig",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Midnight+Library",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fiction", "fantasy", "philosophy", "mental-health"],
+    "subjects": [
+      "fiction",
+      "fantasy",
+      "philosophy",
+      "mental-health"
+    ],
     "description": "Between life and death there is a library with infinite books, each offering a chance to live another life you could have lived.",
     "publication_year": 2020,
     "pages": 288,
@@ -268,10 +484,23 @@
     "author": "Kazuo Ishiguro",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Klara+Sun",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 4},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 4
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["science-fiction", "literary", "artificial-intelligence", "dystopian"],
+    "subjects": [
+      "science-fiction",
+      "literary",
+      "artificial-intelligence",
+      "dystopian"
+    ],
     "description": "Klara is an Artificial Friend with outstanding observational qualities who watches carefully from her store, hoping to be chosen.",
     "publication_year": 2021,
     "pages": 303,
@@ -285,11 +514,27 @@
     "author": "V.E. Schwab",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Addie+LaRue",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 5, "copies_total": 7},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 5,
+        "copies_total": 7
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fantasy", "romance", "historical", "magical-realism"],
+    "subjects": [
+      "fantasy",
+      "romance",
+      "historical",
+      "magical-realism"
+    ],
     "description": "A woman makes a Faustian bargain to live forever but is cursed to be forgotten by everyone she meets.",
     "publication_year": 2020,
     "pages": 444,
@@ -303,10 +548,23 @@
     "author": "TJ Klune",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Cerulean+Sea",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 6
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fantasy", "lgbtq", "romance", "magical-realism"],
+    "subjects": [
+      "fantasy",
+      "lgbtq",
+      "romance",
+      "magical-realism"
+    ],
     "description": "A case worker is sent to evaluate a highly classified orphanage for magical children and discovers they might bring about the end of days.",
     "publication_year": 2020,
     "pages": 394,
@@ -320,11 +578,27 @@
     "author": "Frank Herbert",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Dune",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 6, "copies_total": 8},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 6,
+        "copies_total": 8
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["science-fiction", "classic", "epic", "space"],
+    "subjects": [
+      "science-fiction",
+      "classic",
+      "epic",
+      "space"
+    ],
     "description": "On the desert planet Arrakis, young Paul Atreides becomes embroiled in a struggle for the spice melange, the universe's most valuable substance.",
     "publication_year": 1965,
     "pages": 688,
@@ -338,11 +612,27 @@
     "author": "Delia Owens",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Crawdads",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 5, "copies_total": 8},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 5,
+        "copies_total": 8
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fiction", "mystery", "nature", "coming-of-age"],
+    "subjects": [
+      "fiction",
+      "mystery",
+      "nature",
+      "coming-of-age"
+    ],
     "description": "The 'Marsh Girl' Kya Clark becomes the prime suspect when the town's golden boy is found dead in the North Carolina marshlands.",
     "publication_year": 2018,
     "pages": 384,
@@ -356,10 +646,23 @@
     "author": "Brit Bennett",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Vanishing+Half",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fiction", "historical", "family", "identity"],
+    "subjects": [
+      "fiction",
+      "historical",
+      "family",
+      "identity"
+    ],
     "description": "Twin sisters choose to live in two different worlds, one black and one white, in 1960s America.",
     "publication_year": 2020,
     "pages": 343,
@@ -373,10 +676,23 @@
     "author": "Maggie O'Farrell",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Hamnet",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 3},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 3
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fiction", "historical", "shakespeare", "literary"],
+    "subjects": [
+      "fiction",
+      "historical",
+      "shakespeare",
+      "literary"
+    ],
     "description": "A luminous portrait of a marriage, a family ravaged by grief, and a boy whose name was given to Shakespeare's most famous play.",
     "publication_year": 2020,
     "pages": 320,
@@ -390,11 +706,27 @@
     "author": "Donna Tartt",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Goldfinch",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 6
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fiction", "literary", "art", "coming-of-age"],
+    "subjects": [
+      "fiction",
+      "literary",
+      "art",
+      "coming-of-age"
+    ],
     "description": "After surviving a terrorist attack at an art museum, a boy clings to a painting that becomes his obsession and downfall.",
     "publication_year": 2013,
     "pages": 771,
@@ -408,11 +740,29 @@
     "author": "Amor Towles",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Gentleman+Moscow",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "2 weeks", "holds": 12},
-      {"type": "ebook", "status": "waitlist", "wait_time": "1 week", "holds": 8},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 12
+      },
+      {
+        "type": "ebook",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 8
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fiction", "historical", "russia", "literary"],
+    "subjects": [
+      "fiction",
+      "historical",
+      "russia",
+      "literary"
+    ],
     "description": "A Russian count is sentenced to house arrest in a luxury hotel, where he witnesses decades of Russian history from his attic room.",
     "publication_year": 2016,
     "pages": 462,
@@ -426,10 +776,25 @@
     "author": "Sally Rooney",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Normal+People",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "3 weeks", "holds": 15},
-      {"type": "ebook", "status": "waitlist", "wait_time": "2 weeks", "holds": 10}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "3 weeks",
+        "holds": 15
+      },
+      {
+        "type": "ebook",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 10
+      }
     ],
-    "subjects": ["fiction", "contemporary", "romance", "ireland"],
+    "subjects": [
+      "fiction",
+      "contemporary",
+      "romance",
+      "ireland"
+    ],
     "description": "The complex relationship between Connell and Marianne as they navigate social dynamics from school through university in Ireland.",
     "publication_year": 2018,
     "pages": 273,
@@ -443,11 +808,29 @@
     "author": "Markus Zusak",
     "cover": "https://via.placeholder.com/150x225/EA580C/FFFFFF?text=Book+Thief",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "1 week", "holds": 6},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "waitlist", "wait_time": "2 weeks", "holds": 9}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 6
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 9
+      }
     ],
-    "subjects": ["historical-fiction", "world-war-2", "young-adult", "germany"],
+    "subjects": [
+      "historical-fiction",
+      "world-war-2",
+      "young-adult",
+      "germany"
+    ],
     "description": "Death narrates the story of Liesel, a young girl in Nazi Germany who finds solace by stealing books and sharing them with others.",
     "publication_year": 2005,
     "pages": 552,
@@ -461,10 +844,25 @@
     "author": "Anthony Doerr",
     "cover": "https://via.placeholder.com/150x225/EA580C/FFFFFF?text=All+Light",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "2 weeks", "holds": 11},
-      {"type": "ebook", "status": "waitlist", "wait_time": "1 week", "holds": 7}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 11
+      },
+      {
+        "type": "ebook",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 7
+      }
     ],
-    "subjects": ["historical-fiction", "world-war-2", "france", "literary"],
+    "subjects": [
+      "historical-fiction",
+      "world-war-2",
+      "france",
+      "literary"
+    ],
     "description": "A blind French girl and a German boy's paths collide in occupied France as both try to survive the devastation of World War II.",
     "publication_year": 2014,
     "pages": 531,
@@ -478,11 +876,31 @@
     "author": "Kristin Hannah",
     "cover": "https://via.placeholder.com/150x225/EA580C/FFFFFF?text=Nightingale",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "3 weeks", "holds": 18},
-      {"type": "ebook", "status": "waitlist", "wait_time": "2 weeks", "holds": 14},
-      {"type": "audiobook", "status": "waitlist", "wait_time": "1 week", "holds": 5}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "3 weeks",
+        "holds": 18
+      },
+      {
+        "type": "ebook",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 14
+      },
+      {
+        "type": "audiobook",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 5
+      }
     ],
-    "subjects": ["historical-fiction", "world-war-2", "france", "sisters"],
+    "subjects": [
+      "historical-fiction",
+      "world-war-2",
+      "france",
+      "sisters"
+    ],
     "description": "Two French sisters struggle to survive and resist the German occupation during World War II in very different ways.",
     "publication_year": 2015,
     "pages": 440,
@@ -496,10 +914,23 @@
     "author": "Kate Quinn",
     "cover": "https://via.placeholder.com/150x225/EA580C/FFFFFF?text=Alice+Network",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "2 weeks", "holds": 10},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 10
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["historical-fiction", "world-war-1", "espionage", "women"],
+    "subjects": [
+      "historical-fiction",
+      "world-war-1",
+      "espionage",
+      "women"
+    ],
     "description": "Two women—a female spy from WWI and an American socialite searching for her cousin in 1947—embark on a dangerous mission.",
     "publication_year": 2017,
     "pages": 503,
@@ -513,11 +944,29 @@
     "author": "Madeline Miller",
     "cover": "https://via.placeholder.com/150x225/EA580C/FFFFFF?text=Circe",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "1 week", "holds": 8},
-      {"type": "ebook", "status": "waitlist", "wait_time": "2 weeks", "holds": 12},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 8
+      },
+      {
+        "type": "ebook",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 12
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["mythology", "historical-fiction", "greek", "fantasy"],
+    "subjects": [
+      "mythology",
+      "historical-fiction",
+      "greek",
+      "fantasy"
+    ],
     "description": "The daughter of a Titan discovers her power of witchcraft and transforms from an outcast to one of the most powerful figures in mythology.",
     "publication_year": 2018,
     "pages": 393,
@@ -531,15 +980,33 @@
     "author": "Fredrik Backman",
     "cover": "https://via.placeholder.com/150x225/0891B2/FFFFFF?text=Anxious+People",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "2 weeks", "holds": 9},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "waitlist", "wait_time": "1 week", "holds": 4}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 9
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 4
+      }
     ],
-    "subjects": ["fiction", "humor", "contemporary", "sweden"],
+    "subjects": [
+      "fiction",
+      "humor",
+      "contemporary",
+      "sweden"
+    ],
     "description": "A failed bank robber takes a group of strangers hostage at an apartment viewing, revealing surprising truths about human nature.",
     "publication_year": 2020,
     "pages": 352,
-    "rating": 4.0,
+    "rating": 4,
     "popular": false
   },
   {
@@ -549,10 +1016,25 @@
     "author": "Nita Prose",
     "cover": "https://via.placeholder.com/150x225/0891B2/FFFFFF?text=The+Maid",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "3 weeks", "holds": 20},
-      {"type": "ebook", "status": "waitlist", "wait_time": "2 weeks", "holds": 16}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "3 weeks",
+        "holds": 20
+      },
+      {
+        "type": "ebook",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 16
+      }
     ],
-    "subjects": ["mystery", "contemporary", "neurodivergent", "cozy"],
+    "subjects": [
+      "mystery",
+      "contemporary",
+      "neurodivergent",
+      "cozy"
+    ],
     "description": "A hotel maid with social difficulties becomes the prime suspect when she discovers a wealthy guest dead in his bed.",
     "publication_year": 2022,
     "pages": 304,
@@ -566,11 +1048,31 @@
     "author": "Bonnie Garmus",
     "cover": "https://via.placeholder.com/150x225/0891B2/FFFFFF?text=Lessons+Chemistry",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "3 weeks", "holds": 25},
-      {"type": "ebook", "status": "waitlist", "wait_time": "2 weeks", "holds": 18},
-      {"type": "audiobook", "status": "waitlist", "wait_time": "1 week", "holds": 8}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "3 weeks",
+        "holds": 25
+      },
+      {
+        "type": "ebook",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 18
+      },
+      {
+        "type": "audiobook",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 8
+      }
     ],
-    "subjects": ["fiction", "feminism", "1960s", "science"],
+    "subjects": [
+      "fiction",
+      "feminism",
+      "1960s",
+      "science"
+    ],
     "description": "In the 1960s, chemist Elizabeth Zott finds herself hosting a TV cooking show, using it to teach women more than recipes.",
     "publication_year": 2022,
     "pages": 400,
@@ -584,10 +1086,25 @@
     "author": "Gabrielle Zevin",
     "cover": "https://via.placeholder.com/150x225/0891B2/FFFFFF?text=Tomorrow+Tomorrow",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "2 weeks", "holds": 14},
-      {"type": "ebook", "status": "waitlist", "wait_time": "3 weeks", "holds": 22}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 14
+      },
+      {
+        "type": "ebook",
+        "status": "waitlist",
+        "wait_time": "3 weeks",
+        "holds": 22
+      }
     ],
-    "subjects": ["fiction", "gaming", "friendship", "contemporary"],
+    "subjects": [
+      "fiction",
+      "gaming",
+      "friendship",
+      "contemporary"
+    ],
     "description": "Two friends reunite to create video games together, navigating fame, ambition, and the complexities of creative partnership.",
     "publication_year": 2022,
     "pages": 416,
@@ -601,11 +1118,29 @@
     "author": "Amor Towles",
     "cover": "https://via.placeholder.com/150x225/0891B2/FFFFFF?text=Lincoln+Highway",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "1 week", "holds": 7},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "waitlist", "wait_time": "2 weeks", "holds": 11}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 7
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 11
+      }
     ],
-    "subjects": ["fiction", "historical", "road-trip", "1950s"],
+    "subjects": [
+      "fiction",
+      "historical",
+      "road-trip",
+      "1950s"
+    ],
     "description": "In 1954, two brothers plan to head west but find their journey derailed by two stowaways from a juvenile work farm.",
     "publication_year": 2021,
     "pages": 592,
@@ -619,11 +1154,29 @@
     "author": "Tara Westover",
     "cover": "https://via.placeholder.com/150x225/B91C1C/FFFFFF?text=Educated",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "2 weeks", "holds": 13},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "waitlist", "wait_time": "1 week", "holds": 6}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 13
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 6
+      }
     ],
-    "subjects": ["memoir", "education", "family", "non-fiction"],
+    "subjects": [
+      "memoir",
+      "education",
+      "family",
+      "non-fiction"
+    ],
     "description": "Born to survivalists in Idaho, Tara Westover never attended school but went on to earn a PhD from Cambridge University.",
     "publication_year": 2018,
     "pages": 334,
@@ -637,11 +1190,27 @@
     "author": "Michelle Obama",
     "cover": "https://via.placeholder.com/150x225/B91C1C/FFFFFF?text=Becoming",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "1 week", "holds": 5},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["memoir", "politics", "autobiography", "non-fiction"],
+    "subjects": [
+      "memoir",
+      "politics",
+      "autobiography",
+      "non-fiction"
+    ],
     "description": "The former First Lady shares her journey from the South Side of Chicago to the White House and beyond.",
     "publication_year": 2018,
     "pages": 448,
@@ -655,10 +1224,23 @@
     "author": "Trevor Noah",
     "cover": "https://via.placeholder.com/150x225/B91C1C/FFFFFF?text=Born+Crime",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "2 weeks", "holds": 10},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 10
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["memoir", "humor", "south-africa", "non-fiction"],
+    "subjects": [
+      "memoir",
+      "humor",
+      "south-africa",
+      "non-fiction"
+    ],
     "description": "The Daily Show host's story of growing up in apartheid South Africa, where his birth was literally a crime.",
     "publication_year": 2016,
     "pages": 304,
@@ -672,10 +1254,25 @@
     "author": "Paul Kalanithi",
     "cover": "https://via.placeholder.com/150x225/B91C1C/FFFFFF?text=When+Breath",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "1 week", "holds": 8},
-      {"type": "ebook", "status": "waitlist", "wait_time": "2 weeks", "holds": 12}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 8
+      },
+      {
+        "type": "ebook",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 12
+      }
     ],
-    "subjects": ["memoir", "medicine", "mortality", "non-fiction"],
+    "subjects": [
+      "memoir",
+      "medicine",
+      "mortality",
+      "non-fiction"
+    ],
     "description": "A neurosurgeon facing terminal cancer examines what makes life worth living in this profound memoir.",
     "publication_year": 2016,
     "pages": 228,
@@ -689,11 +1286,29 @@
     "author": "Michelle Zauner",
     "cover": "https://via.placeholder.com/150x225/B91C1C/FFFFFF?text=Crying+H+Mart",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "3 weeks", "holds": 17},
-      {"type": "ebook", "status": "waitlist", "wait_time": "2 weeks", "holds": 15},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "3 weeks",
+        "holds": 17
+      },
+      {
+        "type": "ebook",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 15
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["memoir", "food", "grief", "korean-american"],
+    "subjects": [
+      "memoir",
+      "food",
+      "grief",
+      "korean-american"
+    ],
     "description": "A memoir about growing up Korean American, losing her mother, and forging her own identity through food and music.",
     "publication_year": 2021,
     "pages": 256,
@@ -707,11 +1322,29 @@
     "author": "Yuval Noah Harari",
     "cover": "https://via.placeholder.com/150x225/92400E/FFFFFF?text=Sapiens",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "1 week", "holds": 9},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "waitlist", "wait_time": "2 weeks", "holds": 11}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 9
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 11
+      }
     ],
-    "subjects": ["history", "anthropology", "science", "non-fiction"],
+    "subjects": [
+      "history",
+      "anthropology",
+      "science",
+      "non-fiction"
+    ],
     "description": "A brief history of humankind, exploring how we became the dominant species on Earth.",
     "publication_year": 2015,
     "pages": 443,
@@ -725,10 +1358,23 @@
     "author": "Isabel Wilkerson",
     "cover": "https://via.placeholder.com/150x225/92400E/FFFFFF?text=Warmth+Suns",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "2 weeks", "holds": 7},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 7
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["history", "migration", "african-american", "non-fiction"],
+    "subjects": [
+      "history",
+      "migration",
+      "african-american",
+      "non-fiction"
+    ],
     "description": "The epic story of America's Great Migration, when six million African Americans fled the South for northern and western cities.",
     "publication_year": 2010,
     "pages": 640,
@@ -742,10 +1388,23 @@
     "author": "David Grann",
     "cover": "https://via.placeholder.com/150x225/92400E/FFFFFF?text=Flower+Moon",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "1 week", "holds": 6},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 6
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["history", "true-crime", "native-american", "non-fiction"],
+    "subjects": [
+      "history",
+      "true-crime",
+      "native-american",
+      "non-fiction"
+    ],
     "description": "The shocking true story of the murders of wealthy Osage people in 1920s Oklahoma and the birth of the FBI.",
     "publication_year": 2017,
     "pages": 338,
@@ -759,14 +1418,29 @@
     "author": "Erik Larson",
     "cover": "https://via.placeholder.com/150x225/92400E/FFFFFF?text=Devil+White",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "2 weeks", "holds": 10},
-      {"type": "ebook", "status": "waitlist", "wait_time": "1 week", "holds": 5}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 10
+      },
+      {
+        "type": "ebook",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 5
+      }
     ],
-    "subjects": ["history", "true-crime", "chicago", "non-fiction"],
+    "subjects": [
+      "history",
+      "true-crime",
+      "chicago",
+      "non-fiction"
+    ],
     "description": "The true story of the 1893 World's Fair in Chicago and America's first serial killer.",
     "publication_year": 2003,
     "pages": 447,
-    "rating": 4.0,
+    "rating": 4,
     "popular": true
   },
   {
@@ -776,11 +1450,31 @@
     "author": "James Clear",
     "cover": "https://via.placeholder.com/150x225/0D9488/FFFFFF?text=Atomic+Habits",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "3 weeks", "holds": 30},
-      {"type": "ebook", "status": "waitlist", "wait_time": "2 weeks", "holds": 25},
-      {"type": "audiobook", "status": "waitlist", "wait_time": "1 week", "holds": 10}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "3 weeks",
+        "holds": 30
+      },
+      {
+        "type": "ebook",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 25
+      },
+      {
+        "type": "audiobook",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 10
+      }
     ],
-    "subjects": ["self-help", "productivity", "psychology", "non-fiction"],
+    "subjects": [
+      "self-help",
+      "productivity",
+      "psychology",
+      "non-fiction"
+    ],
     "description": "Practical strategies for forming good habits, breaking bad ones, and mastering the tiny behaviors that lead to remarkable results.",
     "publication_year": 2018,
     "pages": 320,
@@ -794,33 +1488,30 @@
     "author": "Bessel van der Kolk",
     "cover": "https://via.placeholder.com/150x225/0D9488/FFFFFF?text=Body+Score",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "2 weeks", "holds": 20},
-      {"type": "ebook", "status": "waitlist", "wait_time": "3 weeks", "holds": 28}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 20
+      },
+      {
+        "type": "ebook",
+        "status": "waitlist",
+        "wait_time": "3 weeks",
+        "holds": 28
+      }
     ],
-    "subjects": ["psychology", "trauma", "mental-health", "non-fiction"],
+    "subjects": [
+      "psychology",
+      "trauma",
+      "mental-health",
+      "non-fiction"
+    ],
     "description": "A pioneering researcher transforms our understanding of trauma and offers a bold new paradigm for healing.",
     "publication_year": 2014,
     "pages": 464,
     "rating": 4.5,
     "popular": true
-  },
-  {
-    "id": "book_047",
-    "isbn": "9781984801258",
-    "title": "Untamed",
-    "author": "Glennon Doyle",
-    "cover": "https://via.placeholder.com/150x225/0D9488/FFFFFF?text=Untamed",
-    "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-25"},
-      {"type": "ebook", "status": "checked_out", "due_date": "2025-10-20"},
-      {"type": "audiobook", "status": "available"}
-    ],
-    "subjects": ["self-help", "memoir", "feminism", "non-fiction"],
-    "description": "A memoir and self-help book about breaking free from societal expectations to live an authentic life.",
-    "publication_year": 2020,
-    "pages": 352,
-    "rating": 4.0,
-    "popular": false
   },
   {
     "id": "book_048",
@@ -829,10 +1520,22 @@
     "author": "Adam Grant",
     "cover": "https://via.placeholder.com/150x225/0D9488/FFFFFF?text=Think+Again",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-28"},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-28"
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["psychology", "business", "decision-making", "non-fiction"],
+    "subjects": [
+      "psychology",
+      "business",
+      "decision-making",
+      "non-fiction"
+    ],
     "description": "The power of knowing what you don't know and how embracing the joy of being wrong can make you right.",
     "publication_year": 2021,
     "pages": 320,
@@ -846,10 +1549,22 @@
     "author": "Neil deGrasse Tyson",
     "cover": "https://via.placeholder.com/150x225/1E40AF/FFFFFF?text=Astrophysics",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-22"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-22"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["science", "astronomy", "physics", "non-fiction"],
+    "subjects": [
+      "science",
+      "astronomy",
+      "physics",
+      "non-fiction"
+    ],
     "description": "Everything you need to know about the universe in the time it takes to drink your morning coffee.",
     "publication_year": 2017,
     "pages": 222,
@@ -863,10 +1578,23 @@
     "author": "Walter Isaacson",
     "cover": "https://via.placeholder.com/150x225/1E40AF/FFFFFF?text=Code+Breaker",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-30"},
-      {"type": "ebook", "status": "checked_out", "due_date": "2025-10-18"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-30"
+      },
+      {
+        "type": "ebook",
+        "status": "checked_out",
+        "due_date": "2025-10-18"
+      }
     ],
-    "subjects": ["science", "biography", "genetics", "non-fiction"],
+    "subjects": [
+      "science",
+      "biography",
+      "genetics",
+      "non-fiction"
+    ],
     "description": "The story of Jennifer Doudna, gene editing, and the future of the human race through CRISPR technology.",
     "publication_year": 2021,
     "pages": 560,
@@ -880,11 +1608,27 @@
     "author": "Robin Wall Kimmerer",
     "cover": "https://via.placeholder.com/150x225/1E40AF/FFFFFF?text=Braiding+Sweetgrass",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-27"},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "checked_out", "due_date": "2025-10-24"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-27"
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "checked_out",
+        "due_date": "2025-10-24"
+      }
     ],
-    "subjects": ["nature", "indigenous", "ecology", "non-fiction"],
+    "subjects": [
+      "nature",
+      "indigenous",
+      "ecology",
+      "non-fiction"
+    ],
     "description": "Indigenous wisdom, scientific knowledge, and the teachings of plants come together in this important book.",
     "publication_year": 2013,
     "pages": 390,
@@ -898,10 +1642,22 @@
     "author": "Samin Nosrat",
     "cover": "https://via.placeholder.com/150x225/FACC15/000000?text=Salt+Fat",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-21"},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-21"
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["cooking", "cookbook", "food-science", "non-fiction"],
+    "subjects": [
+      "cooking",
+      "cookbook",
+      "food-science",
+      "non-fiction"
+    ],
     "description": "Master the four elements of good cooking with this revolutionary approach to food and recipes.",
     "publication_year": 2017,
     "pages": 480,
@@ -915,10 +1671,22 @@
     "author": "Anthony Bourdain",
     "cover": "https://via.placeholder.com/150x225/FACC15/000000?text=Kitchen",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-19"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-19"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["cooking", "memoir", "restaurant", "non-fiction"],
+    "subjects": [
+      "cooking",
+      "memoir",
+      "restaurant",
+      "non-fiction"
+    ],
     "description": "The late chef's wild expose of life in professional kitchens and the restaurant industry.",
     "publication_year": 2000,
     "pages": 312,
@@ -932,10 +1700,23 @@
     "author": "Jon Krakauer",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Into+Wild",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-26"},
-      {"type": "ebook", "status": "checked_out", "due_date": "2025-10-23"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-26"
+      },
+      {
+        "type": "ebook",
+        "status": "checked_out",
+        "due_date": "2025-10-23"
+      }
     ],
-    "subjects": ["adventure", "biography", "nature", "non-fiction"],
+    "subjects": [
+      "adventure",
+      "biography",
+      "nature",
+      "non-fiction"
+    ],
     "description": "The tragic true story of Chris McCandless, a young man who walked into the Alaska wilderness and never came out.",
     "publication_year": 1996,
     "pages": 207,
@@ -949,15 +1730,30 @@
     "author": "Bill Bryson",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Walk+Woods",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-29"},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-29"
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["travel", "humor", "nature", "non-fiction"],
+    "subjects": [
+      "travel",
+      "humor",
+      "nature",
+      "non-fiction"
+    ],
     "description": "The humorous account of the author's attempt to hike the Appalachian Trail with his out-of-shape friend.",
     "publication_year": 1998,
     "pages": 397,
-    "rating": 4.0,
+    "rating": 4,
     "popular": true
   },
   {
@@ -967,11 +1763,27 @@
     "author": "Angie Thomas",
     "cover": "https://via.placeholder.com/150x225/DB2777/FFFFFF?text=Hate+U+Give",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-20"},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "checked_out", "due_date": "2025-10-25"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-20"
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "checked_out",
+        "due_date": "2025-10-25"
+      }
     ],
-    "subjects": ["young-adult", "contemporary", "social-justice", "fiction"],
+    "subjects": [
+      "young-adult",
+      "contemporary",
+      "social-justice",
+      "fiction"
+    ],
     "description": "A powerful story about a teen who witnesses the fatal shooting of her unarmed friend by a police officer.",
     "publication_year": 2017,
     "pages": 444,
@@ -985,10 +1797,22 @@
     "author": "Rick Riordan",
     "cover": "https://via.placeholder.com/150x225/DB2777/FFFFFF?text=Percy+Jackson",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-18"},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-18"
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["young-adult", "fantasy", "mythology", "adventure"],
+    "subjects": [
+      "young-adult",
+      "fantasy",
+      "mythology",
+      "adventure"
+    ],
     "description": "A boy discovers he's the son of Poseidon and must prevent a war between the Greek gods.",
     "publication_year": 2005,
     "pages": 377,
@@ -1002,10 +1826,22 @@
     "author": "John Green",
     "cover": "https://via.placeholder.com/150x225/DB2777/FFFFFF?text=Fault+Stars",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-22"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-22"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["young-adult", "romance", "cancer", "contemporary"],
+    "subjects": [
+      "young-adult",
+      "romance",
+      "cancer",
+      "contemporary"
+    ],
     "description": "Two teens with cancer fall in love after meeting at a support group.",
     "publication_year": 2012,
     "pages": 313,
@@ -1019,10 +1855,23 @@
     "author": "Leigh Bardugo",
     "cover": "https://via.placeholder.com/150x225/DB2777/FFFFFF?text=Six+Crows",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-24"},
-      {"type": "ebook", "status": "checked_out", "due_date": "2025-10-21"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-24"
+      },
+      {
+        "type": "ebook",
+        "status": "checked_out",
+        "due_date": "2025-10-21"
+      }
     ],
-    "subjects": ["young-adult", "fantasy", "heist", "adventure"],
+    "subjects": [
+      "young-adult",
+      "fantasy",
+      "heist",
+      "adventure"
+    ],
     "description": "Six dangerous outcasts must pull off a heist that could make them rich beyond their wildest dreams.",
     "publication_year": 2015,
     "pages": 465,
@@ -1036,11 +1885,26 @@
     "author": "Adam Silvera",
     "cover": "https://via.placeholder.com/150x225/DB2777/FFFFFF?text=Both+Die",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-26"},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-26"
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["young-adult", "lgbtq", "contemporary", "emotional"],
+    "subjects": [
+      "young-adult",
+      "lgbtq",
+      "contemporary",
+      "emotional"
+    ],
     "description": "Two strangers meet on their last day of life after receiving a death notification.",
     "publication_year": 2017,
     "pages": 389,
@@ -1054,11 +1918,28 @@
     "author": "Suzanne Collins",
     "cover": "https://via.placeholder.com/150x225/DB2777/FFFFFF?text=Hunger+Games",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-19"},
-      {"type": "ebook", "status": "checked_out", "due_date": "2025-10-23"},
-      {"type": "audiobook", "status": "checked_out", "due_date": "2025-10-28"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-19"
+      },
+      {
+        "type": "ebook",
+        "status": "checked_out",
+        "due_date": "2025-10-23"
+      },
+      {
+        "type": "audiobook",
+        "status": "checked_out",
+        "due_date": "2025-10-28"
+      }
     ],
-    "subjects": ["young-adult", "dystopian", "action", "survival"],
+    "subjects": [
+      "young-adult",
+      "dystopian",
+      "action",
+      "survival"
+    ],
     "description": "In a dystopian future, teens must fight to the death in a televised competition.",
     "publication_year": 2008,
     "pages": 374,
@@ -1072,9 +1953,18 @@
     "author": "Maurice Sendak",
     "cover": "https://via.placeholder.com/150x225/FACC15/000000?text=Wild+Things",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-17"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-17"
+      }
     ],
-    "subjects": ["children", "picture-book", "imagination", "classic"],
+    "subjects": [
+      "children",
+      "picture-book",
+      "imagination",
+      "classic"
+    ],
     "description": "Max sails to an island inhabited by Wild Things and becomes their king in this beloved picture book.",
     "publication_year": 1963,
     "pages": 48,
@@ -1088,9 +1978,18 @@
     "author": "Eric Carle",
     "cover": "https://via.placeholder.com/150x225/FACC15/000000?text=Hungry+Caterpillar",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-16"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-16"
+      }
     ],
-    "subjects": ["children", "picture-book", "nature", "counting"],
+    "subjects": [
+      "children",
+      "picture-book",
+      "nature",
+      "counting"
+    ],
     "description": "A caterpillar eats his way through the week before transforming into a beautiful butterfly.",
     "publication_year": 1969,
     "pages": 26,
@@ -1104,11 +2003,26 @@
     "author": "E.B. White",
     "cover": "https://via.placeholder.com/150x225/FACC15/000000?text=Charlottes+Web",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-21"},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-21"
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["children", "animals", "friendship", "classic"],
+    "subjects": [
+      "children",
+      "animals",
+      "friendship",
+      "classic"
+    ],
     "description": "The story of a pig named Wilbur and his friend Charlotte, a spider who saves his life.",
     "publication_year": 1952,
     "pages": 192,
@@ -1122,10 +2036,23 @@
     "author": "Roald Dahl",
     "cover": "https://via.placeholder.com/150x225/FACC15/000000?text=Matilda",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-27"},
-      {"type": "ebook", "status": "checked_out", "due_date": "2025-10-24"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-27"
+      },
+      {
+        "type": "ebook",
+        "status": "checked_out",
+        "due_date": "2025-10-24"
+      }
     ],
-    "subjects": ["children", "magic", "school", "humor"],
+    "subjects": [
+      "children",
+      "magic",
+      "school",
+      "humor"
+    ],
     "description": "A brilliant girl with terrible parents discovers she has telekinetic powers.",
     "publication_year": 1988,
     "pages": 240,
@@ -1139,10 +2066,22 @@
     "author": "Art Spiegelman",
     "cover": "https://via.placeholder.com/150x225/6B7280/FFFFFF?text=Maus",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-30"},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-30"
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["graphic-novel", "holocaust", "memoir", "history"],
+    "subjects": [
+      "graphic-novel",
+      "holocaust",
+      "memoir",
+      "history"
+    ],
     "description": "A powerful graphic novel about the Holocaust, depicting Jews as mice and Nazis as cats.",
     "publication_year": 1986,
     "pages": 296,
@@ -1156,10 +2095,23 @@
     "author": "Marjane Satrapi",
     "cover": "https://via.placeholder.com/150x225/6B7280/FFFFFF?text=Persepolis",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-25"},
-      {"type": "ebook", "status": "checked_out", "due_date": "2025-10-29"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-25"
+      },
+      {
+        "type": "ebook",
+        "status": "checked_out",
+        "due_date": "2025-10-29"
+      }
     ],
-    "subjects": ["graphic-novel", "memoir", "iran", "coming-of-age"],
+    "subjects": [
+      "graphic-novel",
+      "memoir",
+      "iran",
+      "coming-of-age"
+    ],
     "description": "A memoir of growing up in Iran during the Islamic Revolution, told through black-and-white comics.",
     "publication_year": 2003,
     "pages": 160,
@@ -1173,14 +2125,26 @@
     "author": "Rupi Kaur",
     "cover": "https://via.placeholder.com/150x225/6B7280/FFFFFF?text=Sun+Flowers",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-18"},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-18"
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["poetry", "feminism", "healing", "contemporary"],
+    "subjects": [
+      "poetry",
+      "feminism",
+      "healing",
+      "contemporary"
+    ],
     "description": "A collection of poetry about growth, healing, ancestry, and honoring one's roots.",
     "publication_year": 2017,
     "pages": 256,
-    "rating": 4.0,
+    "rating": 4,
     "popular": true
   },
   {
@@ -1190,10 +2154,22 @@
     "author": "Amanda Gorman",
     "cover": "https://via.placeholder.com/150x225/6B7280/FFFFFF?text=Hill+Climb",
     "formats": [
-      {"type": "physical", "status": "checked_out", "due_date": "2025-10-20"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "checked_out",
+        "due_date": "2025-10-20"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["poetry", "politics", "hope", "american"],
+    "subjects": [
+      "poetry",
+      "politics",
+      "hope",
+      "american"
+    ],
     "description": "The poem that captivated the world, delivered at President Biden's inauguration.",
     "publication_year": 2021,
     "pages": 32,
@@ -1207,15 +2183,31 @@
     "author": "Paulo Coelho",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Alchemist",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 6
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fiction", "philosophy", "spiritual", "adventure"],
+    "subjects": [
+      "fiction",
+      "philosophy",
+      "spiritual",
+      "adventure"
+    ],
     "description": "A shepherd boy's journey to the Egyptian pyramids teaches him to follow his dreams and listen to his heart.",
     "publication_year": 1988,
     "pages": 208,
-    "rating": 4.0,
+    "rating": 4,
     "popular": true
   },
   {
@@ -1225,11 +2217,27 @@
     "author": "Harper Lee",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Mockingbird",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 5, "copies_total": 8},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 5,
+        "copies_total": 8
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["classic", "historical-fiction", "legal", "racism"],
+    "subjects": [
+      "classic",
+      "historical-fiction",
+      "legal",
+      "racism"
+    ],
     "description": "A young girl in Depression-era Alabama witnesses her father defend a Black man falsely accused of a crime.",
     "publication_year": 1960,
     "pages": 324,
@@ -1243,10 +2251,23 @@
     "author": "F. Scott Fitzgerald",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Gatsby",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 6, "copies_total": 9},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 6,
+        "copies_total": 9
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["classic", "romance", "1920s", "tragedy"],
+    "subjects": [
+      "classic",
+      "romance",
+      "1920s",
+      "tragedy"
+    ],
     "description": "The mysterious millionaire Jay Gatsby and his obsession with the beautiful Daisy Buchanan in Jazz Age America.",
     "publication_year": 1925,
     "pages": 180,
@@ -1260,11 +2281,27 @@
     "author": "J.R.R. Tolkien",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Hobbit",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fantasy", "adventure", "classic", "dragons"],
+    "subjects": [
+      "fantasy",
+      "adventure",
+      "classic",
+      "dragons"
+    ],
     "description": "Bilbo Baggins is swept into an epic quest to reclaim the lost Dwarf Kingdom from the dragon Smaug.",
     "publication_year": 1937,
     "pages": 310,
@@ -1278,11 +2315,27 @@
     "author": "J.R.R. Tolkien",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=LOTR",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 7},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 7
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fantasy", "epic", "adventure", "classic"],
+    "subjects": [
+      "fantasy",
+      "epic",
+      "adventure",
+      "classic"
+    ],
     "description": "Frodo Baggins must destroy the One Ring to save Middle-earth from the Dark Lord Sauron.",
     "publication_year": 1954,
     "pages": 1178,
@@ -1296,11 +2349,27 @@
     "author": "J.K. Rowling",
     "cover": "https://via.placeholder.com/150x225/DB2777/FFFFFF?text=Harry+Potter",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 7, "copies_total": 10},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 7,
+        "copies_total": 10
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fantasy", "magic", "young-adult", "school"],
+    "subjects": [
+      "fantasy",
+      "magic",
+      "young-adult",
+      "school"
+    ],
     "description": "An orphaned boy discovers he's a wizard and attends Hogwarts School of Witchcraft and Wizardry.",
     "publication_year": 1997,
     "pages": 309,
@@ -1314,11 +2383,27 @@
     "author": "George R.R. Martin",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Game+Thrones",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fantasy", "epic", "political", "medieval"],
+    "subjects": [
+      "fantasy",
+      "epic",
+      "political",
+      "medieval"
+    ],
     "description": "Noble families vie for control of the Iron Throne in the Seven Kingdoms of Westeros.",
     "publication_year": 1996,
     "pages": 694,
@@ -1332,10 +2417,23 @@
     "author": "Brandon Sanderson",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Way+Kings",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 4},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 4
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["fantasy", "epic", "magic-system", "war"],
+    "subjects": [
+      "fantasy",
+      "epic",
+      "magic-system",
+      "war"
+    ],
     "description": "In a world of stone and storms, ancient powers awaken as civilization faces collapse.",
     "publication_year": 2010,
     "pages": 1007,
@@ -1349,10 +2447,23 @@
     "author": "J.D. Salinger",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Catcher+Rye",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 6
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["classic", "coming-of-age", "literary", "teenage"],
+    "subjects": [
+      "classic",
+      "coming-of-age",
+      "literary",
+      "teenage"
+    ],
     "description": "Holden Caulfield's story of teenage rebellion and alienation in 1950s New York City.",
     "publication_year": 1951,
     "pages": 277,
@@ -1366,11 +2477,27 @@
     "author": "Jane Austen",
     "cover": "https://via.placeholder.com/150x225/DC2626/FFFFFF?text=Pride+Prejudice",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 5, "copies_total": 7},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 5,
+        "copies_total": 7
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["classic", "romance", "regency", "satire"],
+    "subjects": [
+      "classic",
+      "romance",
+      "regency",
+      "satire"
+    ],
     "description": "Elizabeth Bennet navigates issues of marriage, morality, and misunderstandings in Georgian England.",
     "publication_year": 1813,
     "pages": 432,
@@ -1384,11 +2511,27 @@
     "author": "George Orwell",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=1984",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 6, "copies_total": 8},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 6,
+        "copies_total": 8
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["dystopian", "classic", "political", "science-fiction"],
+    "subjects": [
+      "dystopian",
+      "classic",
+      "political",
+      "science-fiction"
+    ],
     "description": "Winston Smith struggles against totalitarian government surveillance in a bleak future.",
     "publication_year": 1949,
     "pages": 328,
@@ -1402,10 +2545,23 @@
     "author": "Aldous Huxley",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Brave+New",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["dystopian", "classic", "science-fiction", "social-commentary"],
+    "subjects": [
+      "dystopian",
+      "classic",
+      "science-fiction",
+      "social-commentary"
+    ],
     "description": "A futuristic society achieves happiness through genetic engineering, psychological manipulation, and drugs.",
     "publication_year": 1932,
     "pages": 288,
@@ -1419,11 +2575,27 @@
     "author": "Margaret Atwood",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Handmaid",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 6
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["dystopian", "feminism", "speculative-fiction", "classic"],
+    "subjects": [
+      "dystopian",
+      "feminism",
+      "speculative-fiction",
+      "classic"
+    ],
     "description": "In a theocratic future America, women are subjugated and forced into reproductive servitude.",
     "publication_year": 1985,
     "pages": 311,
@@ -1437,10 +2609,23 @@
     "author": "Alice Walker",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Color+Purple",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["classic", "historical-fiction", "african-american", "feminism"],
+    "subjects": [
+      "classic",
+      "historical-fiction",
+      "african-american",
+      "feminism"
+    ],
     "description": "Letters from a Black woman in the rural South chronicle her journey from abuse to self-discovery.",
     "publication_year": 1982,
     "pages": 295,
@@ -1454,11 +2639,27 @@
     "author": "Toni Morrison",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Beloved",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 4},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 4
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["classic", "historical-fiction", "slavery", "supernatural"],
+    "subjects": [
+      "classic",
+      "historical-fiction",
+      "slavery",
+      "supernatural"
+    ],
     "description": "A former slave is haunted by the ghost of her baby daughter in post-Civil War Ohio.",
     "publication_year": 1987,
     "pages": 324,
@@ -1472,11 +2673,27 @@
     "author": "Agatha Christie",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Then+None",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 5, "copies_total": 7},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 5,
+        "copies_total": 7
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["mystery", "thriller", "classic", "murder"],
+    "subjects": [
+      "mystery",
+      "thriller",
+      "classic",
+      "murder"
+    ],
     "description": "Ten strangers invited to an island are murdered one by one in this classic whodunit.",
     "publication_year": 1939,
     "pages": 272,
@@ -1490,10 +2707,23 @@
     "author": "Stephen King",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=The+Stand",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 5},
-      {"type": "ebook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
     ],
-    "subjects": ["horror", "post-apocalyptic", "thriller", "epic"],
+    "subjects": [
+      "horror",
+      "post-apocalyptic",
+      "thriller",
+      "epic"
+    ],
     "description": "After a plague wipes out most of humanity, survivors must choose between good and evil.",
     "publication_year": 1978,
     "pages": 1153,
@@ -1507,11 +2737,27 @@
     "author": "Stephen King",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Shining",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 6
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["horror", "thriller", "psychological", "supernatural"],
+    "subjects": [
+      "horror",
+      "thriller",
+      "psychological",
+      "supernatural"
+    ],
     "description": "A family's winter caretaking job at an isolated hotel turns into a nightmare of madness and terror.",
     "publication_year": 1977,
     "pages": 447,
@@ -1525,15 +2771,31 @@
     "author": "Ernest Cline",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Ready+Player",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 5, "copies_total": 7},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 5,
+        "copies_total": 7
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["science-fiction", "gaming", "dystopian", "adventure"],
+    "subjects": [
+      "science-fiction",
+      "gaming",
+      "dystopian",
+      "adventure"
+    ],
     "description": "A teenager searches for an Easter egg hidden in a massive virtual reality world.",
     "publication_year": 2011,
     "pages": 374,
-    "rating": 4.0,
+    "rating": 4,
     "popular": true
   },
   {
@@ -1543,11 +2805,27 @@
     "author": "Orson Scott Card",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Enders+Game",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 6},
-      {"type": "ebook", "status": "available"},
-      {"type": "audiobook", "status": "available"}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 6
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      },
+      {
+        "type": "audiobook",
+        "status": "available"
+      }
     ],
-    "subjects": ["science-fiction", "military", "space", "young-adult"],
+    "subjects": [
+      "science-fiction",
+      "military",
+      "space",
+      "young-adult"
+    ],
     "description": "A brilliant child is trained at a military academy in space to defend Earth from alien invasion.",
     "publication_year": 1985,
     "pages": 324,
@@ -1561,8 +2839,18 @@
     "director": "David Attenborough",
     "cover": "https://via.placeholder.com/150x225/2563EB/FFFFFF?text=Planet+Earth",
     "formats": [
-      {"type": "dvd", "status": "available", "copies_available": 2, "copies_total": 3},
-      {"type": "bluray", "status": "available", "copies_available": 1, "copies_total": 1}
+      {
+        "type": "dvd",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 3
+      },
+      {
+        "type": "bluray",
+        "status": "available",
+        "copies_available": 1,
+        "copies_total": 1
+      }
     ],
     "description": "David Attenborough narrates this stunning nature documentary showcasing life in all habitats.",
     "runtime_minutes": 298,
@@ -1576,12 +2864,19 @@
     "id": "game_001",
     "itemType": "game",
     "title": "The Legend of Zelda: Tears of the Kingdom",
-    "platform": ["switch"],
+    "platform": [
+      "switch"
+    ],
     "developer": "Nintendo",
     "publisher": "Nintendo",
     "cover": "https://via.placeholder.com/150x225/10B981/FFFFFF?text=Zelda+TOTK",
     "formats": [
-      {"type": "switch", "status": "checked_out", "due_date": "2025-10-30", "checkout_duration_days": 7}
+      {
+        "type": "switch",
+        "status": "checked_out",
+        "due_date": "2025-10-30",
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Embark on an epic adventure across the land and skies of Hyrule.",
     "release_year": 2023,
@@ -1603,14 +2898,26 @@
         "type": "equipment",
         "status": "available",
         "booking_required": true,
-        "slots_available": ["2025-10-26 10:00", "2025-10-26 14:00", "2025-10-27 10:00"],
+        "slots_available": [
+          "2025-10-26 10:00",
+          "2025-10-26 14:00",
+          "2025-10-27 10:00"
+        ],
         "checkout_duration_days": 3,
         "deposit_required": 50
       }
     ],
     "description": "Entry-level 3D printer perfect for hobbyists and students learning 3D printing.",
-    "includes": ["3D Printer", "1kg PLA filament", "SD card with models", "Tool kit"],
-    "requirements": ["Complete safety training", "Age 16+ or adult supervision"],
+    "includes": [
+      "3D Printer",
+      "1kg PLA filament",
+      "SD card with models",
+      "Tool kit"
+    ],
+    "requirements": [
+      "Complete safety training",
+      "Age 16+ or adult supervision"
+    ],
     "instructions_url": "https://library.example.com/3dprinting",
     "replacement_cost": 299,
     "rating": 4.5,
@@ -1624,10 +2931,20 @@
     "brand": "Celestron",
     "cover": "https://via.placeholder.com/150x225/1E293B/FFFFFF?text=Telescope",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 7}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Powerful telescope perfect for astronomy beginners and moon observation.",
-    "includes": ["Telescope", "Tripod", "Two eyepieces", "Barlow lens", "Carrying case"],
+    "includes": [
+      "Telescope",
+      "Tripod",
+      "Two eyepieces",
+      "Barlow lens",
+      "Carrying case"
+    ],
     "suitable_ages": "10+",
     "rating": 4.3,
     "popular": false
@@ -1643,7 +2960,12 @@
     "publisher": "Image Comics",
     "cover": "https://via.placeholder.com/150x225/EC4899/FFFFFF?text=Saga",
     "formats": [
-      {"type": "graphic-novel", "status": "available", "copies_available": 3, "copies_total": 4}
+      {
+        "type": "graphic-novel",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 4
+      }
     ],
     "description": "Epic space opera about star-crossed lovers from warring races trying to survive with their newborn.",
     "publication_year": 2012,
@@ -1654,7 +2976,9 @@
     "id": "game_002",
     "itemType": "game",
     "title": "PlayStation 5 Console",
-    "platform": ["ps5"],
+    "platform": [
+      "ps5"
+    ],
     "developer": "Sony",
     "cover": "https://via.placeholder.com/150x225/000000/FFFFFF?text=PS5",
     "formats": [
@@ -1662,14 +2986,23 @@
         "type": "equipment",
         "status": "available",
         "booking_required": true,
-        "slots_available": ["2025-10-26", "2025-10-27", "2025-10-28"],
+        "slots_available": [
+          "2025-10-26",
+          "2025-10-27",
+          "2025-10-28"
+        ],
         "checkout_duration_days": 3,
         "deposit_required": 100,
         "age_restriction": "18+"
       }
     ],
     "description": "Next-gen gaming console for use in library gaming room. Includes 2 controllers.",
-    "includes": ["PS5 Console", "2 DualSense Controllers", "HDMI Cable", "Power Cable"],
+    "includes": [
+      "PS5 Console",
+      "2 DualSense Controllers",
+      "HDMI Cable",
+      "Power Cable"
+    ],
     "rating": 4.9,
     "popular": true
   },
@@ -1679,8 +3012,18 @@
     "title": "Stranger Things: Season 1",
     "cover": "https://via.placeholder.com/150x225/B91C1C/FFFFFF?text=Stranger+Things",
     "formats": [
-      {"type": "dvd", "status": "waitlist", "wait_time": "1 week", "holds": 5},
-      {"type": "bluray", "status": "available", "copies_available": 1, "copies_total": 1}
+      {
+        "type": "dvd",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 5
+      },
+      {
+        "type": "bluray",
+        "status": "available",
+        "copies_available": 1,
+        "copies_total": 1
+      }
     ],
     "description": "When a young boy disappears, his mother, a police chief and his friends must confront terrifying supernatural forces.",
     "runtime_minutes": 402,
@@ -1708,8 +3051,17 @@
       }
     ],
     "description": "Professional mirrorless camera perfect for photography projects and events.",
-    "includes": ["Camera body", "18-45mm lens", "Battery & charger", "32GB SD card", "Camera bag"],
-    "requirements": ["Valid ID", "Equipment handling agreement"],
+    "includes": [
+      "Camera body",
+      "18-45mm lens",
+      "Battery & charger",
+      "32GB SD card",
+      "Camera bag"
+    ],
+    "requirements": [
+      "Valid ID",
+      "Equipment handling agreement"
+    ],
     "replacement_cost": 899,
     "rating": 4.7,
     "popular": false
@@ -1722,10 +3074,21 @@
     "brand": "Catan Studio",
     "cover": "https://via.placeholder.com/150x225/F59E0B/FFFFFF?text=Catan",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 5}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 5
+      }
     ],
     "description": "Classic strategy board game where players collect resources and build settlements.",
-    "includes": ["Game board", "Resource cards", "Development cards", "Dice", "Game pieces"],
+    "includes": [
+      "Game board",
+      "Resource cards",
+      "Development cards",
+      "Dice",
+      "Game pieces"
+    ],
     "suitable_ages": "10+",
     "rating": 4.5,
     "popular": true
@@ -1739,10 +3102,21 @@
     "model": "MiFi 8800L",
     "cover": "https://via.placeholder.com/150x225/0EA5E9/FFFFFF?text=WiFi+Hotspot",
     "formats": [
-      {"type": "device", "status": "available", "copies_available": 8, "copies_total": 10, "checkout_duration_days": 14}
+      {
+        "type": "device",
+        "status": "available",
+        "copies_available": 8,
+        "copies_total": 10,
+        "checkout_duration_days": 14
+      }
     ],
     "description": "Portable WiFi hotspot with unlimited data for students without home internet.",
-    "includes": ["Hotspot device", "Charger", "USB cable", "Quick start guide"],
+    "includes": [
+      "Hotspot device",
+      "Charger",
+      "USB cable",
+      "Quick start guide"
+    ],
     "rating": 4.2,
     "popular": true
   },
@@ -1757,7 +3131,12 @@
     "publisher": "Marvel Comics",
     "cover": "https://via.placeholder.com/150x225/EF4444/FFFFFF?text=Ms+Marvel",
     "formats": [
-      {"type": "comic", "status": "available", "copies_available": 2, "copies_total": 3}
+      {
+        "type": "comic",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 3
+      }
     ],
     "description": "Kamala Khan, a Pakistani-American teenager from Jersey City, discovers she has shape-shifting abilities.",
     "publication_year": 2014,
@@ -1772,10 +3151,20 @@
     "brand": "Instant Pot",
     "cover": "https://via.placeholder.com/150x225/84CC16/FFFFFF?text=Instant+Pot",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 7}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Multi-use pressure cooker perfect for quick and easy meal preparation.",
-    "includes": ["Instant Pot", "Inner pot", "Steam rack", "Recipe book", "Measuring cup"],
+    "includes": [
+      "Instant Pot",
+      "Inner pot",
+      "Steam rack",
+      "Recipe book",
+      "Measuring cup"
+    ],
     "condition": "Like new",
     "rating": 4.6,
     "popular": false
@@ -1786,8 +3175,18 @@
     "title": "Rosetta Stone Spanish (Latin America)",
     "cover": "https://via.placeholder.com/150x225/8B5CF6/FFFFFF?text=Spanish+Course",
     "formats": [
-      {"type": "dvd", "status": "available", "copies_available": 2, "copies_total": 2},
-      {"type": "cd", "status": "available", "copies_available": 1, "copies_total": 1}
+      {
+        "type": "dvd",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 2
+      },
+      {
+        "type": "cd",
+        "status": "available",
+        "copies_available": 1,
+        "copies_total": 1
+      }
     ],
     "description": "Complete Spanish language learning course with interactive lessons and speech recognition.",
     "runtime_minutes": 1200,
@@ -1813,7 +3212,12 @@
       }
     ],
     "description": "Computerized sewing machine with 70 built-in stitches, perfect for quilting and crafts.",
-    "includes": ["Sewing machine", "Accessory kit", "Instructional DVD", "Hard case"],
+    "includes": [
+      "Sewing machine",
+      "Accessory kit",
+      "Instructional DVD",
+      "Hard case"
+    ],
     "instructions_url": "https://library.example.com/sewing",
     "replacement_cost": 199,
     "rating": 4.5,
@@ -1823,7 +3227,10 @@
     "id": "game_003",
     "itemType": "game",
     "title": "Meta Quest 2 VR Headset",
-    "platform": ["pc", "standalone"],
+    "platform": [
+      "pc",
+      "standalone"
+    ],
     "developer": "Meta",
     "cover": "https://via.placeholder.com/150x225/0284C7/FFFFFF?text=Quest+2",
     "formats": [
@@ -1837,7 +3244,12 @@
       }
     ],
     "description": "All-in-one VR headset for immersive gaming and educational experiences.",
-    "includes": ["VR Headset", "2 Touch Controllers", "Charging cable", "Glasses spacer"],
+    "includes": [
+      "VR Headset",
+      "2 Touch Controllers",
+      "Charging cable",
+      "Glasses spacer"
+    ],
     "rating": 4.6,
     "popular": true
   },
@@ -1849,10 +3261,21 @@
     "brand": "Park Tool",
     "cover": "https://via.placeholder.com/150x225/22C55E/FFFFFF?text=Bike+Tools",
     "formats": [
-      {"type": "tool", "status": "available", "checkout_duration_days": 3}
+      {
+        "type": "tool",
+        "status": "available",
+        "checkout_duration_days": 3
+      }
     ],
     "description": "Complete bicycle maintenance kit with everything needed for basic repairs.",
-    "includes": ["Multi-tool", "Tire levers", "Patch kit", "Chain tool", "Spoke wrench", "Carry case"],
+    "includes": [
+      "Multi-tool",
+      "Tire levers",
+      "Patch kit",
+      "Chain tool",
+      "Spoke wrench",
+      "Carry case"
+    ],
     "condition": "Good",
     "rating": 4.3,
     "popular": false
@@ -1868,7 +3291,11 @@
     "publisher": "VIZ Media",
     "cover": "https://via.placeholder.com/150x225/FBBF24/000000?text=One+Piece",
     "formats": [
-      {"type": "manga", "status": "checked_out", "due_date": "2025-10-29"}
+      {
+        "type": "manga",
+        "status": "checked_out",
+        "due_date": "2025-10-29"
+      }
     ],
     "description": "Young pirate Monkey D. Luffy sets out on a quest to find the One Piece treasure.",
     "publication_year": 2003,
@@ -1892,7 +3319,14 @@
       }
     ],
     "description": "Waterproof action camera perfect for outdoor adventures and sports recording.",
-    "includes": ["GoPro camera", "3 batteries", "Chest mount", "Head strap", "64GB SD card", "Case"],
+    "includes": [
+      "GoPro camera",
+      "3 batteries",
+      "Chest mount",
+      "Head strap",
+      "64GB SD card",
+      "Case"
+    ],
     "replacement_cost": 399,
     "rating": 4.7,
     "popular": true
@@ -1905,10 +3339,19 @@
     "brand": "Singing Machine",
     "cover": "https://via.placeholder.com/150x225/DC2626/FFFFFF?text=Karaoke",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 2}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 2
+      }
     ],
     "description": "Portable karaoke system with Bluetooth connectivity and two wireless microphones.",
-    "includes": ["Karaoke machine", "2 wireless microphones", "AUX cable", "Power adapter"],
+    "includes": [
+      "Karaoke machine",
+      "2 wireless microphones",
+      "AUX cable",
+      "Power adapter"
+    ],
     "suitable_ages": "All ages",
     "rating": 4.4,
     "popular": false
@@ -1920,7 +3363,12 @@
     "director": "MasterClass",
     "cover": "https://via.placeholder.com/150x225/CA8A04/FFFFFF?text=MasterClass",
     "formats": [
-      {"type": "dvd", "status": "available", "copies_available": 3, "copies_total": 3}
+      {
+        "type": "dvd",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 3
+      }
     ],
     "description": "Learn cooking techniques, recipe planning, and kitchen skills from the master chef.",
     "runtime_minutes": 240,
@@ -1937,10 +3385,20 @@
     "model": "ACE 300",
     "cover": "https://via.placeholder.com/150x225/78716C/FFFFFF?text=Metal+Detector",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 3}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 3
+      }
     ],
     "description": "Professional metal detector for treasure hunting and beach combing.",
-    "includes": ["Metal detector", "Headphones", "Digging tool", "Finds pouch", "Batteries"],
+    "includes": [
+      "Metal detector",
+      "Headphones",
+      "Digging tool",
+      "Finds pouch",
+      "Batteries"
+    ],
     "replacement_cost": 299,
     "rating": 4.2,
     "popular": false
@@ -1953,10 +3411,20 @@
     "brand": "Wizards of the Coast",
     "cover": "https://via.placeholder.com/150x225/991B1B/FFFFFF?text=D%26D",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 3}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 3
+      }
     ],
     "description": "Everything needed to start playing D&D including dice, character sheets, and adventure book.",
-    "includes": ["Rulebook", "Adventure book", "5 pre-generated characters", "6 dice"],
+    "includes": [
+      "Rulebook",
+      "Adventure book",
+      "5 pre-generated characters",
+      "6 dice"
+    ],
     "suitable_ages": "12+",
     "rating": 4.6,
     "popular": true
@@ -1979,7 +3447,13 @@
       }
     ],
     "description": "All-in-one PA system perfect for presentations, small concerts, and outdoor events.",
-    "includes": ["PA speaker", "2 wireless microphones", "Mixer", "Cables", "Speaker stand"],
+    "includes": [
+      "PA speaker",
+      "2 wireless microphones",
+      "Mixer",
+      "Cables",
+      "Speaker stand"
+    ],
     "replacement_cost": 599,
     "rating": 4.5,
     "popular": false
@@ -1994,7 +3468,12 @@
     "publisher": "Image Comics",
     "cover": "https://via.placeholder.com/150x225/6B7280/FFFFFF?text=Walking+Dead",
     "formats": [
-      {"type": "graphic-novel", "status": "waitlist", "wait_time": "2 weeks", "holds": 8}
+      {
+        "type": "graphic-novel",
+        "status": "waitlist",
+        "wait_time": "2 weeks",
+        "holds": 8
+      }
     ],
     "description": "The first 48 issues of the zombie survival horror series that inspired the TV show.",
     "publication_year": 2009,
@@ -2008,10 +3487,22 @@
     "category": "Outdoor Equipment",
     "cover": "https://via.placeholder.com/150x225/166534/FFFFFF?text=Camping+Kit",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 7, "deposit_required": 50}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 7,
+        "deposit_required": 50
+      }
     ],
     "description": "Complete camping kit for a family weekend adventure.",
-    "includes": ["4-person tent", "4 sleeping bags", "Camp stove", "Cooler", "Lantern", "First aid kit"],
+    "includes": [
+      "4-person tent",
+      "4 sleeping bags",
+      "Camp stove",
+      "Cooler",
+      "Lantern",
+      "First aid kit"
+    ],
     "condition": "Good",
     "suitable_ages": "All ages",
     "rating": 4.4,
@@ -2024,12 +3515,17 @@
     "director": "The Beatles",
     "cover": "https://via.placeholder.com/150x225/1F2937/FFFFFF?text=Abbey+Road",
     "formats": [
-      {"type": "vinyl", "status": "available", "copies_available": 1, "copies_total": 1}
+      {
+        "type": "vinyl",
+        "status": "available",
+        "copies_available": 1,
+        "copies_total": 1
+      }
     ],
     "description": "Classic 1969 album featuring 'Come Together' and 'Here Comes the Sun' on 180g vinyl.",
     "runtime_minutes": 47,
     "release_year": 1969,
-    "rating": 5.0,
+    "rating": 5,
     "popular": false
   },
   {
@@ -2041,11 +3537,23 @@
     "model": "Official Starter Kit",
     "cover": "https://via.placeholder.com/150x225/3B82F6/FFFFFF?text=Arduino",
     "formats": [
-      {"type": "device", "status": "available", "checkout_duration_days": 14}
+      {
+        "type": "device",
+        "status": "available",
+        "checkout_duration_days": 14
+      }
     ],
     "description": "Learn electronics and programming with 15 projects including sensors, LEDs, and motors.",
-    "includes": ["Arduino Uno board", "170+ components", "Project book", "USB cable", "Battery holder"],
-    "requirements": ["Basic computer skills"],
+    "includes": [
+      "Arduino Uno board",
+      "170+ components",
+      "Project book",
+      "USB cable",
+      "Battery holder"
+    ],
+    "requirements": [
+      "Basic computer skills"
+    ],
     "replacement_cost": 89,
     "rating": 4.7,
     "popular": false
@@ -2054,14 +3562,25 @@
     "id": "game_004",
     "itemType": "game",
     "title": "Retro Gaming Console - 620 Games",
-    "platform": ["retro"],
+    "platform": [
+      "retro"
+    ],
     "developer": "Various",
     "cover": "https://via.placeholder.com/150x225/A855F7/FFFFFF?text=Retro+Games",
     "formats": [
-      {"type": "device", "status": "available", "checkout_duration_days": 5}
+      {
+        "type": "device",
+        "status": "available",
+        "checkout_duration_days": 5
+      }
     ],
     "description": "Classic NES-style console preloaded with 620 retro games from the 80s and 90s.",
-    "includes": ["Console", "2 controllers", "AV cables", "Power adapter"],
+    "includes": [
+      "Console",
+      "2 controllers",
+      "AV cables",
+      "Power adapter"
+    ],
     "rating": 4.1,
     "popular": false
   },
@@ -2073,10 +3592,19 @@
     "brand": "P3 International",
     "cover": "https://via.placeholder.com/150x225/0369A1/FFFFFF?text=Energy+Monitor",
     "formats": [
-      {"type": "device", "status": "available", "copies_available": 5, "copies_total": 6}
+      {
+        "type": "device",
+        "status": "available",
+        "copies_available": 5,
+        "copies_total": 6
+      }
     ],
     "description": "Monitor electricity usage and costs of household appliances to save on energy bills.",
-    "includes": ["Kill A Watt meter", "Instructions", "Energy saving tips guide"],
+    "includes": [
+      "Kill A Watt meter",
+      "Instructions",
+      "Energy saving tips guide"
+    ],
     "rating": 4.3,
     "popular": false
   },
@@ -2089,12 +3617,21 @@
     "model": "TL901X",
     "cover": "https://via.placeholder.com/150x225/64748B/FFFFFF?text=Laminator",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 3}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 3
+      }
     ],
     "description": "Thermal laminator for preserving documents, photos, and crafts.",
-    "includes": ["Laminator", "20 pouches (letter size)", "20 pouches (photo size)", "Trimmer"],
+    "includes": [
+      "Laminator",
+      "20 pouches (letter size)",
+      "20 pouches (photo size)",
+      "Trimmer"
+    ],
     "replacement_cost": 45,
-    "rating": 4.0,
+    "rating": 4,
     "popular": false
   },
   {
@@ -2106,7 +3643,12 @@
     "publisher": "DC Comics",
     "cover": "https://via.placeholder.com/150x225/FACC15/000000?text=Watchmen",
     "formats": [
-      {"type": "graphic-novel", "status": "available", "copies_available": 2, "copies_total": 3}
+      {
+        "type": "graphic-novel",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 3
+      }
     ],
     "description": "Groundbreaking graphic novel deconstructing the superhero genre in an alternate 1985.",
     "publication_year": 1987,
@@ -2121,10 +3663,20 @@
     "brand": "Wilton",
     "cover": "https://via.placeholder.com/150x225/F472B6/FFFFFF?text=Cake+Pans",
     "formats": [
-      {"type": "equipment", "status": "available", "copies_available": 3, "copies_total": 4, "checkout_duration_days": 7}
+      {
+        "type": "equipment",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 4,
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Collection of novelty cake pans including dinosaur, castle, unicorn, and number shapes for special occasion baking.",
-    "includes": ["12 specialty shaped pans", "Recipe booklet", "Decorating tips guide"],
+    "includes": [
+      "12 specialty shaped pans",
+      "Recipe booklet",
+      "Decorating tips guide"
+    ],
     "suitable_ages": "All ages",
     "rating": 4.4,
     "popular": false
@@ -2138,10 +3690,19 @@
     "model": "Model 125",
     "cover": "https://via.placeholder.com/150x225/FBBF24/000000?text=Button+Maker",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 3}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 3
+      }
     ],
     "description": "Create custom 1.25 inch buttons for campaigns, events, or personal expression. Popular with teens and activists.",
-    "includes": ["Button maker press", "100 button parts", "Circle cutter", "Design templates"],
+    "includes": [
+      "Button maker press",
+      "100 button parts",
+      "Circle cutter",
+      "Design templates"
+    ],
     "replacement_cost": 175,
     "rating": 4.5,
     "popular": false
@@ -2154,10 +3715,21 @@
     "brand": "First Alert",
     "cover": "https://via.placeholder.com/150x225/EF4444/FFFFFF?text=Radon+Test",
     "formats": [
-      {"type": "device", "status": "available", "copies_available": 10, "copies_total": 15, "checkout_duration_days": 7}
+      {
+        "type": "device",
+        "status": "available",
+        "copies_available": 10,
+        "copies_total": 15,
+        "checkout_duration_days": 7
+      }
     ],
     "description": "EPA-recommended home radon testing kit to check for dangerous gas levels in your home.",
-    "includes": ["Test kit", "Lab analysis prepaid", "Instructions", "Return envelope"],
+    "includes": [
+      "Test kit",
+      "Lab analysis prepaid",
+      "Instructions",
+      "Return envelope"
+    ],
     "rating": 4.1,
     "popular": false
   },
@@ -2170,10 +3742,20 @@
     "model": "C3-X",
     "cover": "https://via.placeholder.com/150x225/F97316/FFFFFF?text=Thermal+Camera",
     "formats": [
-      {"type": "device", "status": "available", "checkout_duration_days": 3, "deposit_required": 50}
+      {
+        "type": "device",
+        "status": "available",
+        "checkout_duration_days": 3,
+        "deposit_required": 50
+      }
     ],
     "description": "Detect heat loss, moisture problems, and electrical issues in your home. Popular for energy audits.",
-    "includes": ["Thermal camera", "USB cable", "Carrying pouch", "Quick start guide"],
+    "includes": [
+      "Thermal camera",
+      "USB cable",
+      "Carrying pouch",
+      "Quick start guide"
+    ],
     "replacement_cost": 499,
     "rating": 4.6,
     "popular": true
@@ -2185,10 +3767,19 @@
     "category": "Gardening",
     "cover": "https://via.placeholder.com/150x225/16A34A/FFFFFF?text=Seed+Library",
     "formats": [
-      {"type": "physical", "status": "available", "checkout_duration_days": 365}
+      {
+        "type": "physical",
+        "status": "available",
+        "checkout_duration_days": 365
+      }
     ],
     "description": "Heirloom vegetable and flower seeds. Take seeds to plant, grow, and optionally return new seeds from your harvest.",
-    "includes": ["10 seed packets", "Planting guide", "Seed saving instructions", "Garden journal"],
+    "includes": [
+      "10 seed packets",
+      "Planting guide",
+      "Seed saving instructions",
+      "Garden journal"
+    ],
     "suitable_ages": "All ages",
     "rating": 4.7,
     "popular": true
@@ -2202,10 +3793,18 @@
     "model": "9600LS",
     "cover": "https://via.placeholder.com/150x225/6366F1/FFFFFF?text=Induction+Cooktop",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 7}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Energy-efficient portable cooktop for events, small spaces, or testing before purchasing.",
-    "includes": ["Induction cooktop", "Compatible test pan", "User manual"],
+    "includes": [
+      "Induction cooktop",
+      "Compatible test pan",
+      "User manual"
+    ],
     "replacement_cost": 89,
     "rating": 4.3,
     "popular": false
@@ -2218,10 +3817,19 @@
     "brand": "American Girl",
     "cover": "https://via.placeholder.com/150x225/EC4899/FFFFFF?text=Am+Girl+Doll",
     "formats": [
-      {"type": "physical", "status": "available", "checkout_duration_days": 14}
+      {
+        "type": "physical",
+        "status": "available",
+        "checkout_duration_days": 14
+      }
     ],
     "description": "Historical doll with accompanying books teaching about New Mexican culture in the 1820s. Popular for cultural education.",
-    "includes": ["Josefina doll", "Traditional outfit", "3 chapter books", "Historical guide"],
+    "includes": [
+      "Josefina doll",
+      "Traditional outfit",
+      "3 chapter books",
+      "Historical guide"
+    ],
     "suitable_ages": "8+",
     "condition": "Good",
     "rating": 4.6,
@@ -2236,10 +3844,22 @@
     "model": "KA-15S",
     "cover": "https://via.placeholder.com/150x225/8B5CF6/FFFFFF?text=Ukulele",
     "formats": [
-      {"type": "equipment", "status": "available", "copies_available": 4, "copies_total": 6, "checkout_duration_days": 21}
+      {
+        "type": "equipment",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 6,
+        "checkout_duration_days": 21
+      }
     ],
     "description": "Learn to play ukulele with this soprano uke, perfect for beginners and children.",
-    "includes": ["Soprano ukulele", "Tuner", "Chord chart", "Online lesson access code", "Gig bag"],
+    "includes": [
+      "Soprano ukulele",
+      "Tuner",
+      "Chord chart",
+      "Online lesson access code",
+      "Gig bag"
+    ],
     "replacement_cost": 79,
     "rating": 4.5,
     "popular": false
@@ -2251,10 +3871,20 @@
     "category": "Admission Passes",
     "cover": "https://via.placeholder.com/150x225/0EA5E9/FFFFFF?text=Museum+Pass",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 3, "checkout_duration_days": 7}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 3,
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Free admission passes to local museums, zoo, and aquarium. Each pass admits up to 4 people.",
-    "includes": ["Pass card", "List of participating venues", "Parking vouchers"],
+    "includes": [
+      "Pass card",
+      "List of participating venues",
+      "Parking vouchers"
+    ],
     "rating": 4.9,
     "popular": true
   },
@@ -2267,12 +3897,21 @@
     "model": "Cruiser Deluxe",
     "cover": "https://via.placeholder.com/150x225/1F2937/FFFFFF?text=Record+Player",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 7}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Vintage-style portable turntable for playing vinyl records. Includes built-in speakers.",
-    "includes": ["Record player", "RCA cable", "Power adapter", "45 RPM adapter"],
+    "includes": [
+      "Record player",
+      "RCA cable",
+      "Power adapter",
+      "45 RPM adapter"
+    ],
     "replacement_cost": 79,
-    "rating": 4.0,
+    "rating": 4,
     "popular": false
   },
   {
@@ -2282,10 +3921,22 @@
     "category": "Nature & Wildlife",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Birding+Kit",
     "formats": [
-      {"type": "equipment", "status": "available", "copies_available": 3, "copies_total": 4, "checkout_duration_days": 14}
+      {
+        "type": "equipment",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 4,
+        "checkout_duration_days": 14
+      }
     ],
     "description": "Everything needed to start birdwatching as a hobby. Popular with seniors and nature enthusiasts.",
-    "includes": ["Binoculars", "Regional bird guide", "Bird call identifier", "Field notebook", "Bird feeder"],
+    "includes": [
+      "Binoculars",
+      "Regional bird guide",
+      "Bird call identifier",
+      "Field notebook",
+      "Bird feeder"
+    ],
     "suitable_ages": "8+",
     "rating": 4.5,
     "popular": false
@@ -2299,10 +3950,18 @@
     "model": "HappyLight",
     "cover": "https://via.placeholder.com/150x225/FACC15/000000?text=Light+Therapy",
     "formats": [
-      {"type": "device", "status": "available", "checkout_duration_days": 30}
+      {
+        "type": "device",
+        "status": "available",
+        "checkout_duration_days": 30
+      }
     ],
     "description": "10,000 lux therapy lamp for seasonal affective disorder. Try before buying this wellness device.",
-    "includes": ["Light therapy lamp", "Timer instructions", "Positioning guide"],
+    "includes": [
+      "Light therapy lamp",
+      "Timer instructions",
+      "Positioning guide"
+    ],
     "replacement_cost": 69,
     "rating": 4.3,
     "popular": true
@@ -2315,10 +3974,20 @@
     "brand": "Magna-Tiles",
     "cover": "https://via.placeholder.com/150x225/A855F7/FFFFFF?text=Magna+Tiles",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 3, "checkout_duration_days": 14}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 3,
+        "checkout_duration_days": 14
+      }
     ],
     "description": "100-piece magnetic building tile set for creative construction and STEM learning.",
-    "includes": ["100 magnetic tiles", "Idea booklet", "Storage container"],
+    "includes": [
+      "100 magnetic tiles",
+      "Idea booklet",
+      "Storage container"
+    ],
     "suitable_ages": "3+",
     "rating": 4.8,
     "popular": true
@@ -2332,10 +4001,21 @@
     "model": "Joy",
     "cover": "https://via.placeholder.com/150x225/C084FC/FFFFFF?text=Cricut+Joy",
     "formats": [
-      {"type": "equipment", "status": "available", "booking_required": true, "checkout_duration_days": 7, "deposit_required": 30}
+      {
+        "type": "equipment",
+        "status": "available",
+        "booking_required": true,
+        "checkout_duration_days": 7,
+        "deposit_required": 30
+      }
     ],
     "description": "Compact cutting machine for custom labels, cards, and vinyl projects. Popular for small businesses.",
-    "includes": ["Cricut Joy machine", "Blade & housing", "Sample materials pack", "Design software access"],
+    "includes": [
+      "Cricut Joy machine",
+      "Blade & housing",
+      "Sample materials pack",
+      "Design software access"
+    ],
     "replacement_cost": 179,
     "rating": 4.4,
     "popular": false
@@ -2348,10 +4028,20 @@
     "brand": "Shakespeare",
     "cover": "https://via.placeholder.com/150x225/0284C7/FFFFFF?text=Fishing+Rod",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 7}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Complete freshwater fishing setup for beginners. License required separately.",
-    "includes": ["Spinning rod & reel", "Tackle box with lures", "Line", "Bobbers", "How-to-fish guide"],
+    "includes": [
+      "Spinning rod & reel",
+      "Tackle box with lures",
+      "Line",
+      "Bobbers",
+      "How-to-fish guide"
+    ],
     "suitable_ages": "10+",
     "rating": 4.2,
     "popular": false
@@ -2365,10 +4055,19 @@
     "model": "eTrex 22x",
     "cover": "https://via.placeholder.com/150x225/EA580C/FFFFFF?text=GPS+Unit",
     "formats": [
-      {"type": "device", "status": "available", "checkout_duration_days": 7}
+      {
+        "type": "device",
+        "status": "available",
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Rugged GPS device for geocaching, hiking, and outdoor navigation where phones don't work.",
-    "includes": ["GPS unit", "Carabiner clip", "USB cable", "Geocaching starter guide"],
+    "includes": [
+      "GPS unit",
+      "Carabiner clip",
+      "USB cable",
+      "Geocaching starter guide"
+    ],
     "replacement_cost": 199,
     "rating": 4.3,
     "popular": false
@@ -2380,10 +4079,18 @@
     "category": "Children's Literacy",
     "cover": "https://via.placeholder.com/150x225/FF69B4/FFFFFF?text=Imagination+Lib",
     "formats": [
-      {"type": "physical", "status": "available", "checkout_duration_days": 30}
+      {
+        "type": "physical",
+        "status": "available",
+        "checkout_duration_days": 30
+      }
     ],
     "description": "Collection of 12 age-appropriate books from Dolly Parton's literacy program for ages 0-5.",
-    "includes": ["12 board/picture books", "Parent reading guide", "Literacy activities"],
+    "includes": [
+      "12 board/picture books",
+      "Parent reading guide",
+      "Literacy activities"
+    ],
     "suitable_ages": "0-5",
     "rating": 4.9,
     "popular": true
@@ -2397,10 +4104,18 @@
     "model": "WAF-F20",
     "cover": "https://via.placeholder.com/150x225/F59E0B/FFFFFF?text=Waffle+Maker",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 3}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 3
+      }
     ],
     "description": "Make restaurant-quality Belgian waffles at home. Test before buying your own.",
-    "includes": ["Double waffle maker", "Recipe book", "Measuring cup"],
+    "includes": [
+      "Double waffle maker",
+      "Recipe book",
+      "Measuring cup"
+    ],
     "replacement_cost": 99,
     "rating": 4.5,
     "popular": false
@@ -2413,10 +4128,21 @@
     "brand": "AmScope",
     "cover": "https://via.placeholder.com/150x225/6366F1/FFFFFF?text=Microscope",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 14, "deposit_required": 25}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 14,
+        "deposit_required": 25
+      }
     ],
     "description": "40x-1000x magnification microscope for science projects and exploration. Includes prepared slides.",
-    "includes": ["Microscope", "25 prepared slides", "10 blank slides", "Cover slips", "Specimen collection kit"],
+    "includes": [
+      "Microscope",
+      "25 prepared slides",
+      "10 blank slides",
+      "Cover slips",
+      "Specimen collection kit"
+    ],
     "suitable_ages": "10+",
     "rating": 4.4,
     "popular": false
@@ -2430,10 +4156,21 @@
     "model": "18-inch LED",
     "cover": "https://via.placeholder.com/150x225/FBBF24/000000?text=Ring+Light",
     "formats": [
-      {"type": "equipment", "status": "available", "copies_available": 2, "copies_total": 3, "checkout_duration_days": 5}
+      {
+        "type": "equipment",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 3,
+        "checkout_duration_days": 5
+      }
     ],
     "description": "Professional ring light for video calls, content creation, or portrait photography.",
-    "includes": ["18-inch ring light", "Adjustable tripod", "Phone holder", "Remote control"],
+    "includes": [
+      "18-inch ring light",
+      "Adjustable tripod",
+      "Phone holder",
+      "Remote control"
+    ],
     "replacement_cost": 119,
     "rating": 4.5,
     "popular": true
@@ -2446,10 +4183,20 @@
     "brand": "National Geographic",
     "cover": "https://via.placeholder.com/150x225/78716C/FFFFFF?text=Rock+Tumbler",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 30}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 30
+      }
     ],
     "description": "Transform rough rocks into polished gems. Full cycle takes 4 weeks - perfect for patient hobbyists.",
-    "includes": ["Rock tumbler", "Rough rocks", "4 polishing grits", "Jewelry findings", "Learning guide"],
+    "includes": [
+      "Rock tumbler",
+      "Rough rocks",
+      "4 polishing grits",
+      "Jewelry findings",
+      "Learning guide"
+    ],
     "suitable_ages": "8+",
     "rating": 4.2,
     "popular": false
@@ -2463,11 +4210,24 @@
     "model": "ProFinish 14CG754",
     "cover": "https://via.placeholder.com/150x225/A855F7/FFFFFF?text=Serger",
     "formats": [
-      {"type": "equipment", "status": "available", "booking_required": true, "checkout_duration_days": 14, "deposit_required": 50}
+      {
+        "type": "equipment",
+        "status": "available",
+        "booking_required": true,
+        "checkout_duration_days": 14,
+        "deposit_required": 50
+      }
     ],
     "description": "Professional edge finishing for sewn garments. Requires basic sewing knowledge.",
-    "includes": ["Serger machine", "4 thread cones", "Accessories kit", "DVD tutorial"],
-    "requirements": ["Previous sewing experience"],
+    "includes": [
+      "Serger machine",
+      "4 thread cones",
+      "Accessories kit",
+      "DVD tutorial"
+    ],
+    "requirements": [
+      "Previous sewing experience"
+    ],
     "replacement_cost": 299,
     "rating": 4.3,
     "popular": false
@@ -2479,10 +4239,19 @@
     "category": "Children's Entertainment",
     "cover": "https://via.placeholder.com/150x225/EC4899/FFFFFF?text=Puppet+Theater",
     "formats": [
-      {"type": "physical", "status": "available", "checkout_duration_days": 14}
+      {
+        "type": "physical",
+        "status": "available",
+        "checkout_duration_days": 14
+      }
     ],
     "description": "Wooden puppet theater with 12 hand puppets and 3 story scripts. Great for literacy and creativity.",
-    "includes": ["Folding theater stage", "12 hand puppets", "3 story scripts", "Blank script templates"],
+    "includes": [
+      "Folding theater stage",
+      "12 hand puppets",
+      "3 story scripts",
+      "Blank script templates"
+    ],
     "suitable_ages": "3+",
     "rating": 4.7,
     "popular": false
@@ -2496,10 +4265,19 @@
     "model": "Intuos",
     "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Drawing+Tablet",
     "formats": [
-      {"type": "device", "status": "available", "checkout_duration_days": 14}
+      {
+        "type": "device",
+        "status": "available",
+        "checkout_duration_days": 14
+      }
     ],
     "description": "Pressure-sensitive drawing tablet for digital art creation. Compatible with most art software.",
-    "includes": ["Drawing tablet", "Stylus", "USB cable", "Software download codes"],
+    "includes": [
+      "Drawing tablet",
+      "Stylus",
+      "USB cable",
+      "Software download codes"
+    ],
     "replacement_cost": 99,
     "rating": 4.4,
     "popular": false
@@ -2512,10 +4290,22 @@
     "brand": "Hey! Play!",
     "cover": "https://via.placeholder.com/150x225/16A34A/FFFFFF?text=Bocce+Ball",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 2, "checkout_duration_days": 7}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 2,
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Classic Italian lawn game perfect for picnics and family gatherings.",
-    "includes": ["8 bocce balls", "1 pallino", "Measuring rope", "Carrying case", "Rules & variations guide"],
+    "includes": [
+      "8 bocce balls",
+      "1 pallino",
+      "Measuring rope",
+      "Carrying case",
+      "Rules & variations guide"
+    ],
     "suitable_ages": "8+",
     "rating": 4.3,
     "popular": false
@@ -2529,10 +4319,19 @@
     "model": "BB-PDC20BA",
     "cover": "https://via.placeholder.com/150x225/92400E/FFFFFF?text=Bread+Machine",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 7, "deposit_required": 30}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 7,
+        "deposit_required": 30
+      }
     ],
     "description": "Automatic bread maker with gluten-free setting. Makes 2-pound loaves.",
-    "includes": ["Bread machine", "Measuring cup & spoon", "Recipe book with 50 recipes"],
+    "includes": [
+      "Bread machine",
+      "Measuring cup & spoon",
+      "Recipe book with 50 recipes"
+    ],
     "replacement_cost": 249,
     "rating": 4.6,
     "popular": false
@@ -2544,10 +4343,20 @@
     "category": "Sports Equipment",
     "cover": "https://via.placeholder.com/150x225/EF4444/FFFFFF?text=Badminton",
     "formats": [
-      {"type": "physical", "status": "available", "checkout_duration_days": 7}
+      {
+        "type": "physical",
+        "status": "available",
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Complete badminton set with easy setup net for backyard or park play.",
-    "includes": ["Portable net & poles", "4 rackets", "6 shuttlecocks", "Boundary markers", "Carrying bag"],
+    "includes": [
+      "Portable net & poles",
+      "4 rackets",
+      "6 shuttlecocks",
+      "Boundary markers",
+      "Carrying bag"
+    ],
     "suitable_ages": "8+",
     "rating": 4.1,
     "popular": false
@@ -2560,10 +4369,22 @@
     "manufacturer": "TriggerPoint",
     "cover": "https://via.placeholder.com/150x225/0D9488/FFFFFF?text=Foam+Roller",
     "formats": [
-      {"type": "equipment", "status": "available", "copies_available": 4, "copies_total": 5, "checkout_duration_days": 14}
+      {
+        "type": "equipment",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 5,
+        "checkout_duration_days": 14
+      }
     ],
     "description": "Muscle recovery and flexibility tools including rollers and massage balls.",
-    "includes": ["Textured foam roller", "Smooth roller", "Massage ball set", "Exercise guide", "Storage bag"],
+    "includes": [
+      "Textured foam roller",
+      "Smooth roller",
+      "Massage ball set",
+      "Exercise guide",
+      "Storage bag"
+    ],
     "replacement_cost": 59,
     "rating": 4.4,
     "popular": false
@@ -2576,10 +4397,18 @@
     "brand": "Elenco",
     "cover": "https://via.placeholder.com/150x225/3B82F6/FFFFFF?text=Snap+Circuits",
     "formats": [
-      {"type": "physical", "status": "available", "checkout_duration_days": 21}
+      {
+        "type": "physical",
+        "status": "available",
+        "checkout_duration_days": 21
+      }
     ],
     "description": "Build 100+ electronic projects with snap-together components. No soldering required.",
-    "includes": ["30+ snap components", "Project manual", "Component storage tray"],
+    "includes": [
+      "30+ snap components",
+      "Project manual",
+      "Component storage tray"
+    ],
     "suitable_ages": "8+",
     "rating": 4.7,
     "popular": true
@@ -2593,12 +4422,20 @@
     "model": "YM80",
     "cover": "https://via.placeholder.com/150x225/84CC16/FFFFFF?text=Yogurt+Maker",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 7}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Make homemade yogurt with 7 glass jars. Includes timer and automatic shutoff.",
-    "includes": ["Yogurt maker base", "7 glass jars with lids", "Instruction & recipe book"],
+    "includes": [
+      "Yogurt maker base",
+      "7 glass jars with lids",
+      "Instruction & recipe book"
+    ],
     "replacement_cost": 39,
-    "rating": 4.0,
+    "rating": 4,
     "popular": false
   },
   {
@@ -2609,10 +4446,22 @@
     "brand": "Speedball",
     "cover": "https://via.placeholder.com/150x225/DC2626/FFFFFF?text=Calligraphy",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 3, "copies_total": 4, "checkout_duration_days": 21}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 4,
+        "checkout_duration_days": 21
+      }
     ],
     "description": "Complete calligraphy kit for learning beautiful lettering and invitation design.",
-    "includes": ["6 fountain pens", "4 ink colors", "Practice pad", "Instruction book", "Letter guides"],
+    "includes": [
+      "6 fountain pens",
+      "4 ink colors",
+      "Practice pad",
+      "Instruction book",
+      "Letter guides"
+    ],
     "suitable_ages": "12+",
     "rating": 4.3,
     "popular": false
@@ -2626,11 +4475,22 @@
     "model": "ICE-21",
     "cover": "https://via.placeholder.com/150x225/F472B6/FFFFFF?text=Ice+Cream",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 3}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 3
+      }
     ],
     "description": "Make 1.5 quarts of ice cream, frozen yogurt, or sorbet in 20 minutes.",
-    "includes": ["Ice cream maker", "Freezer bowl", "Paddle", "Recipe book"],
-    "requirements": ["Freezer space for bowl pre-freezing"],
+    "includes": [
+      "Ice cream maker",
+      "Freezer bowl",
+      "Paddle",
+      "Recipe book"
+    ],
+    "requirements": [
+      "Freezer space for bowl pre-freezing"
+    ],
     "replacement_cost": 69,
     "rating": 4.5,
     "popular": true
@@ -2643,10 +4503,21 @@
     "brand": "LEKI",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Walking+Poles",
     "formats": [
-      {"type": "equipment", "status": "available", "copies_available": 3, "copies_total": 4, "checkout_duration_days": 14}
+      {
+        "type": "equipment",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 4,
+        "checkout_duration_days": 14
+      }
     ],
     "description": "Adjustable walking poles for low-impact full-body exercise. Popular with seniors.",
-    "includes": ["2 adjustable poles", "Rubber tips for pavement", "Snow baskets", "Technique DVD"],
+    "includes": [
+      "2 adjustable poles",
+      "Rubber tips for pavement",
+      "Snow baskets",
+      "Technique DVD"
+    ],
     "suitable_ages": "All ages",
     "rating": 4.2,
     "popular": false
@@ -2660,10 +4531,20 @@
     "model": "R8080",
     "cover": "https://via.placeholder.com/150x225/6B7280/FFFFFF?text=Sound+Meter",
     "formats": [
-      {"type": "device", "status": "available", "checkout_duration_days": 3}
+      {
+        "type": "device",
+        "status": "available",
+        "checkout_duration_days": 3
+      }
     ],
     "description": "Measure decibel levels for noise complaints, baby rooms, or workplace safety.",
-    "includes": ["Sound level meter", "Calibrator", "Windscreen", "Case", "Reference guide"],
+    "includes": [
+      "Sound level meter",
+      "Calibrator",
+      "Windscreen",
+      "Case",
+      "Reference guide"
+    ],
     "replacement_cost": 89,
     "rating": 4.1,
     "popular": false
@@ -2675,10 +4556,21 @@
     "category": "Sports Equipment",
     "cover": "https://via.placeholder.com/150x225/10B981/FFFFFF?text=Pickleball",
     "formats": [
-      {"type": "physical", "status": "waitlist", "wait_time": "1 week", "holds": 3}
+      {
+        "type": "physical",
+        "status": "waitlist",
+        "wait_time": "1 week",
+        "holds": 3
+      }
     ],
     "description": "America's fastest growing sport! Complete set for learning pickleball.",
-    "includes": ["4 paddles", "6 balls", "Portable net", "Court tape", "Rules guide"],
+    "includes": [
+      "4 paddles",
+      "6 balls",
+      "Portable net",
+      "Court tape",
+      "Rules guide"
+    ],
     "suitable_ages": "All ages",
     "rating": 4.6,
     "popular": true
@@ -2692,10 +4584,19 @@
     "model": "FD-75A",
     "cover": "https://via.placeholder.com/150x225/CA8A04/FFFFFF?text=Dehydrator",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 7}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Make beef jerky, dried fruits, and vegetable chips. Preserve garden harvests.",
-    "includes": ["6-tray dehydrator", "Fruit roll sheets", "Jerky gun", "Recipe guide"],
+    "includes": [
+      "6-tray dehydrator",
+      "Fruit roll sheets",
+      "Jerky gun",
+      "Recipe guide"
+    ],
     "replacement_cost": 79,
     "rating": 4.3,
     "popular": false
@@ -2708,12 +4609,23 @@
     "brand": "Baden",
     "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Croquet",
     "formats": [
-      {"type": "physical", "status": "available", "checkout_duration_days": 7}
+      {
+        "type": "physical",
+        "status": "available",
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Classic Victorian lawn game for garden parties and family gatherings.",
-    "includes": ["6 mallets", "6 balls", "9 wickets", "2 stakes", "Carrying bag", "Setup guide"],
+    "includes": [
+      "6 mallets",
+      "6 balls",
+      "9 wickets",
+      "2 stakes",
+      "Carrying bag",
+      "Setup guide"
+    ],
     "suitable_ages": "8+",
-    "rating": 4.0,
+    "rating": 4,
     "popular": false
   },
   {
@@ -2725,10 +4637,21 @@
     "model": "ProSensor 710",
     "cover": "https://via.placeholder.com/150x225/F97316/FFFFFF?text=Stud+Finder",
     "formats": [
-      {"type": "device", "status": "available", "copies_available": 2, "copies_total": 3, "checkout_duration_days": 3}
+      {
+        "type": "device",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 3,
+        "checkout_duration_days": 3
+      }
     ],
     "description": "Professional stud finder that also detects live AC wires for safe DIY projects.",
-    "includes": ["Stud finder", "9V battery", "User guide", "Project tips booklet"],
+    "includes": [
+      "Stud finder",
+      "9V battery",
+      "User guide",
+      "Project tips booklet"
+    ],
     "replacement_cost": 59,
     "rating": 4.4,
     "popular": false
@@ -2740,10 +4663,21 @@
     "category": "Art & Crafts",
     "cover": "https://via.placeholder.com/150x225/FBBF24/000000?text=Origami",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 5, "copies_total": 6, "checkout_duration_days": 30}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 5,
+        "copies_total": 6,
+        "checkout_duration_days": 30
+      }
     ],
     "description": "500 sheets of authentic origami paper with instruction books for all skill levels.",
-    "includes": ["500 sheets (varied sizes)", "3 instruction books", "Practice paper", "Display stands"],
+    "includes": [
+      "500 sheets (varied sizes)",
+      "3 instruction books",
+      "Practice paper",
+      "Display stands"
+    ],
     "suitable_ages": "6+",
     "rating": 4.5,
     "popular": false
@@ -2757,10 +4691,19 @@
     "model": "Atlas 150",
     "cover": "https://via.placeholder.com/150x225/84CC16/FFFFFF?text=Pasta+Maker",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 7}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Hand-crank pasta machine for making fresh fettuccine, tagliolini, and lasagne.",
-    "includes": ["Pasta machine", "Table clamp", "Cleaning brush", "Recipe book"],
+    "includes": [
+      "Pasta machine",
+      "Table clamp",
+      "Cleaning brush",
+      "Recipe book"
+    ],
     "replacement_cost": 79,
     "rating": 4.6,
     "popular": false
@@ -2773,10 +4716,20 @@
     "brand": "ThinkFun",
     "cover": "https://via.placeholder.com/150x225/3B82F6/FFFFFF?text=Robot+Turtles",
     "formats": [
-      {"type": "physical", "status": "available", "checkout_duration_days": 14}
+      {
+        "type": "physical",
+        "status": "available",
+        "checkout_duration_days": 14
+      }
     ],
     "description": "Board game that teaches programming fundamentals to kids ages 4+. No screens required!",
-    "includes": ["Game board", "Robot turtle tiles", "Code cards", "Obstacle pieces", "Instruction book"],
+    "includes": [
+      "Game board",
+      "Robot turtle tiles",
+      "Code cards",
+      "Obstacle pieces",
+      "Instruction book"
+    ],
     "suitable_ages": "4+",
     "rating": 4.4,
     "popular": true
@@ -2789,10 +4742,21 @@
     "manufacturer": "The Kombucha Shop",
     "cover": "https://via.placeholder.com/150x225/16A34A/FFFFFF?text=Kombucha+Kit",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 30}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 30
+      }
     ],
     "description": "Everything needed to brew your own kombucha at home. Makes 1 gallon per batch.",
-    "includes": ["1-gallon jar", "SCOBY", "Tea blend", "Temperature strip", "Cover cloth", "Instructions"],
+    "includes": [
+      "1-gallon jar",
+      "SCOBY",
+      "Tea blend",
+      "Temperature strip",
+      "Cover cloth",
+      "Instructions"
+    ],
     "replacement_cost": 45,
     "rating": 4.2,
     "popular": false
@@ -2805,10 +4769,20 @@
     "brand": "Gibbon",
     "cover": "https://via.placeholder.com/150x225/EF4444/FFFFFF?text=Slack+Line",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 7}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 7
+      }
     ],
     "description": "50-foot slackline for balance training and outdoor fun. Set up between two trees.",
-    "includes": ["Slackline", "Ratchet system", "Tree protectors", "Training line", "Setup guide"],
+    "includes": [
+      "Slackline",
+      "Ratchet system",
+      "Tree protectors",
+      "Training line",
+      "Setup guide"
+    ],
     "suitable_ages": "5+",
     "rating": 4.3,
     "popular": false
@@ -2821,10 +4795,21 @@
     "manufacturer": "MySoil",
     "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Soil+Test",
     "formats": [
-      {"type": "device", "status": "available", "copies_available": 6, "copies_total": 8, "checkout_duration_days": 7}
+      {
+        "type": "device",
+        "status": "available",
+        "copies_available": 6,
+        "copies_total": 8,
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Test soil pH, nitrogen, phosphorus, and potassium levels. Includes lab analysis.",
-    "includes": ["Collection kit", "Prepaid lab analysis", "Digital results access", "Amendment guide"],
+    "includes": [
+      "Collection kit",
+      "Prepaid lab analysis",
+      "Digital results access",
+      "Amendment guide"
+    ],
     "replacement_cost": 29,
     "rating": 4.5,
     "popular": false
@@ -2836,10 +4821,21 @@
     "category": "Board Games",
     "cover": "https://via.placeholder.com/150x225/92400E/FFFFFF?text=Backgammon",
     "formats": [
-      {"type": "physical", "status": "available", "checkout_duration_days": 14}
+      {
+        "type": "physical",
+        "status": "available",
+        "checkout_duration_days": 14
+      }
     ],
     "description": "Professional tournament-size backgammon set with leather playing surface.",
-    "includes": ["Folding board", "30 checkers", "4 dice", "Doubling cube", "Dice cups", "Strategy guide"],
+    "includes": [
+      "Folding board",
+      "30 checkers",
+      "4 dice",
+      "Doubling cube",
+      "Dice cups",
+      "Strategy guide"
+    ],
     "suitable_ages": "8+",
     "rating": 4.1,
     "popular": false
@@ -2853,11 +4849,22 @@
     "model": "Classic 3.0",
     "cover": "https://via.placeholder.com/150x225/0EA5E9/FFFFFF?text=Bidet+Kit",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 30}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 30
+      }
     ],
     "description": "Try a bidet attachment before purchasing. Easy installation, no electricity required.",
-    "includes": ["Bidet attachment", "All adapters", "Installation guide", "Cleaning supplies"],
-    "requirements": ["Standard toilet"],
+    "includes": [
+      "Bidet attachment",
+      "All adapters",
+      "Installation guide",
+      "Cleaning supplies"
+    ],
+    "requirements": [
+      "Standard toilet"
+    ],
     "replacement_cost": 99,
     "rating": 4.3,
     "popular": false
@@ -2869,10 +4876,21 @@
     "category": "Admission Passes",
     "cover": "https://via.placeholder.com/150x225/16A34A/FFFFFF?text=Park+Pass",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 4, "copies_total": 5, "checkout_duration_days": 7}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 5,
+        "checkout_duration_days": 7
+      }
     ],
     "description": "Annual vehicle pass for all state parks. Includes parking and day-use areas.",
-    "includes": ["Vehicle pass", "Park maps", "Trail guides", "Parking hang tag"],
+    "includes": [
+      "Vehicle pass",
+      "Park maps",
+      "Trail guides",
+      "Parking hang tag"
+    ],
     "rating": 4.8,
     "popular": true
   },
@@ -2885,11 +4903,25 @@
     "model": "SPX3000",
     "cover": "https://via.placeholder.com/150x225/F97316/FFFFFF?text=Pressure+Washer",
     "formats": [
-      {"type": "equipment", "status": "available", "booking_required": true, "checkout_duration_days": 2, "deposit_required": 50}
+      {
+        "type": "equipment",
+        "status": "available",
+        "booking_required": true,
+        "checkout_duration_days": 2,
+        "deposit_required": 50
+      }
     ],
     "description": "2030 PSI electric pressure washer for driveways, decks, and siding.",
-    "includes": ["Pressure washer", "5 spray nozzles", "35-ft hose", "Detergent tank"],
-    "requirements": ["Outdoor water access", "GFCI outlet"],
+    "includes": [
+      "Pressure washer",
+      "5 spray nozzles",
+      "35-ft hose",
+      "Detergent tank"
+    ],
+    "requirements": [
+      "Outdoor water access",
+      "GFCI outlet"
+    ],
     "replacement_cost": 169,
     "rating": 4.4,
     "popular": true
@@ -2902,10 +4934,20 @@
     "brand": "Authentic Knitting Board",
     "cover": "https://via.placeholder.com/150x225/C084FC/FFFFFF?text=Knitting+Loom",
     "formats": [
-      {"type": "physical", "status": "available", "checkout_duration_days": 21}
+      {
+        "type": "physical",
+        "status": "available",
+        "checkout_duration_days": 21
+      }
     ],
     "description": "Round and rectangular looms for making hats, scarves, and blankets without needles.",
-    "includes": ["4 round looms", "2 rectangular looms", "Hook tool", "Yarn needle", "Pattern book"],
+    "includes": [
+      "4 round looms",
+      "2 rectangular looms",
+      "Hook tool",
+      "Yarn needle",
+      "Pattern book"
+    ],
     "suitable_ages": "8+",
     "rating": 4.2,
     "popular": false
@@ -2919,10 +4961,20 @@
     "model": "Wave Plus",
     "cover": "https://via.placeholder.com/150x225/0369A1/FFFFFF?text=Air+Monitor",
     "formats": [
-      {"type": "device", "status": "available", "checkout_duration_days": 14}
+      {
+        "type": "device",
+        "status": "available",
+        "checkout_duration_days": 14
+      }
     ],
     "description": "Monitor radon, CO2, VOCs, humidity, temperature, and air pressure in your home.",
-    "includes": ["Air monitor", "Batteries", "Mounting plate", "App access", "Interpretation guide"],
+    "includes": [
+      "Air monitor",
+      "Batteries",
+      "Mounting plate",
+      "App access",
+      "Interpretation guide"
+    ],
     "replacement_cost": 229,
     "rating": 4.5,
     "popular": false
@@ -2934,10 +4986,21 @@
     "category": "Lawn Games",
     "cover": "https://via.placeholder.com/150x225/F59E0B/FFFFFF?text=Giant+Jenga",
     "formats": [
-      {"type": "physical", "status": "available", "copies_available": 2, "copies_total": 2, "checkout_duration_days": 3}
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 2,
+        "checkout_duration_days": 3
+      }
     ],
     "description": "Oversized wooden Jenga game that starts at 2 feet and builds to over 4 feet tall.",
-    "includes": ["54 giant blocks", "Stacking sleeve", "Carrying bag", "Game variations guide"],
+    "includes": [
+      "54 giant blocks",
+      "Stacking sleeve",
+      "Carrying bag",
+      "Game variations guide"
+    ],
     "suitable_ages": "8+",
     "rating": 4.6,
     "popular": true
@@ -2950,12 +5013,1502 @@
     "manufacturer": "Standing Stone Farms",
     "cover": "https://via.placeholder.com/150x225/FACC15/000000?text=Cheese+Kit",
     "formats": [
-      {"type": "equipment", "status": "available", "checkout_duration_days": 14}
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_duration_days": 14
+      }
     ],
     "description": "Make mozzarella, ricotta, and other fresh cheeses at home in under an hour.",
-    "includes": ["Thermometer", "Rennet tablets", "Citric acid", "Cheese salt", "Cheesecloth", "Recipe book"],
+    "includes": [
+      "Thermometer",
+      "Rennet tablets",
+      "Citric acid",
+      "Cheese salt",
+      "Cheesecloth",
+      "Recipe book"
+    ],
     "replacement_cost": 35,
     "rating": 4.1,
     "popular": false
+  },
+  {
+    "id": "book_090",
+    "isbn": "9780063337312",
+    "title": "The First State of Being",
+    "author": "Erin Entrada Kelly",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780063337312-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Middle Grade",
+      "Science Fiction",
+      "Historical Fiction",
+      "Time Travel",
+      "Fiction",
+      "Audiobook",
+      "Childrens"
+    ],
+    "description": "When twelve-year-old Michael Rosario meets a mysterious boy from the future, his life is changed forever. From bestselling author Erin Entrada Kelly, this novel explores themes of family, friendship, trust, and forgiveness.",
+    "publication_year": 2024,
+    "pages": 320,
+    "rating": 4.1,
+    "popular": true
+  },
+  {
+    "id": "book_091",
+    "isbn": "9781419762611",
+    "title": "All the Fighting Parts",
+    "author": "Hannah V. Sawyerr",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781419762611-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Young Adult",
+      "Poetry",
+      "Contemporary",
+      "Realistic Fiction",
+      "Novel In Verse",
+      "Fiction"
+    ],
+    "description": "In the vein of Grown and The Poet X, Hannah V. Sawyerr's All the Fighting Parts is an award-winning, searing, and defiant young adult novel in verse about reclaiming agency after a sexual assault within the church community.",
+    "publication_year": 2023,
+    "pages": 387,
+    "rating": 4.4,
+    "popular": true
+  },
+  {
+    "id": "book_092",
+    "isbn": "9780063160378",
+    "title": "Rez Ball",
+    "author": "Byron Graves",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780063160378-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Young Adult",
+      "Sports",
+      "Fiction",
+      "Native American",
+      "Contemporary"
+    ],
+    "description": "This compelling debut novel by new talent Byron Graves tells the relatable, high-stakes story of a young athlete determined to play like the hero his Ojibwe community needs him to be.",
+    "publication_year": 2023,
+    "pages": 368,
+    "rating": 4.2,
+    "popular": true
+  },
+  {
+    "id": "book_093",
+    "isbn": "9780593620281",
+    "title": "The Collectors: Stories",
+    "author": "A.S. King",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780593620281-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Young Adult",
+      "Short Stories",
+      "Fiction",
+      "Anthologies",
+      "Teen",
+      "Fantasy"
+    ],
+    "description": "From Michael L. Printz Award winner A.S. King and an all-star team of contributors, an anthology of stories about remarkable people and their strange and surprising collections.",
+    "publication_year": 2023,
+    "pages": 272,
+    "rating": 4,
+    "popular": true
+  },
+  {
+    "id": "book_094",
+    "isbn": "9780593537619",
+    "title": "Martyr!",
+    "author": "Kaveh Akbar",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780593537619-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Literary Fiction",
+      "Contemporary",
+      "Audiobook",
+      "Queer",
+      "LGBT"
+    ],
+    "description": "A newly sober, orphaned son of Iranian immigrants, guided by the voices of artists, poets, and kings, embarks on a remarkable search for a family secret that leads him to a terminally ill painter.",
+    "publication_year": 2024,
+    "pages": 352,
+    "rating": 4.2,
+    "popular": true
+  },
+  {
+    "id": "book_095",
+    "isbn": "9781982117085",
+    "title": "Lady Tan's Circle of Women",
+    "author": "Lisa See",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781982117085-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Historical Fiction",
+      "Fiction",
+      "Book Club",
+      "Historical",
+      "Audiobook",
+      "China",
+      "Asia"
+    ],
+    "description": "An immersive historical novel inspired by the true story of a woman physician in 15th-century China.",
+    "publication_year": 2023,
+    "pages": 368,
+    "rating": 4.3,
+    "popular": true
+  },
+  {
+    "id": "book_096",
+    "isbn": "9781250328137",
+    "title": "The Grey Wolf",
+    "author": "Louise Penny",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781250328137-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Mystery",
+      "Fiction",
+      "Audiobook",
+      "Thriller",
+      "Crime",
+      "Canada",
+      "Mystery Thriller"
+    ],
+    "description": "The 19th mystery in the #1 New York Times-bestselling Armand Gamache series.",
+    "publication_year": 2024,
+    "pages": 432,
+    "rating": 4.3,
+    "popular": true
+  },
+  {
+    "id": "book_097",
+    "isbn": "9780593441282",
+    "title": "Funny Story",
+    "author": "Emily Henry",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780593441282-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Romance",
+      "Fiction",
+      "Audiobook",
+      "Contemporary",
+      "Book Club",
+      "Contemporary Romance",
+      "Adult"
+    ],
+    "description": "A shimmering, joyful novel about a pair of opposites with the wrong thing in common.",
+    "publication_year": 2024,
+    "pages": 400,
+    "rating": 4.3,
+    "popular": true
+  },
+  {
+    "id": "book_098",
+    "isbn": "9780385550369",
+    "title": "James",
+    "author": "Percival Everett",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780385550369-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Historical Fiction",
+      "Book Club",
+      "Audiobook",
+      "Literary Fiction",
+      "Historical",
+      "Race"
+    ],
+    "description": "A brilliant, action-packed reimagining of Adventures of Huckleberry Finn, told from the enslaved Jim's point of view.",
+    "publication_year": 2024,
+    "pages": 320,
+    "rating": 4.5,
+    "popular": true
+  },
+  {
+    "id": "book_099",
+    "isbn": "9781464227325",
+    "title": "The Crash",
+    "author": "Freida McFadden",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781464227325-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Thriller",
+      "Audiobook",
+      "Mystery",
+      "Fiction",
+      "Mystery Thriller",
+      "Suspense",
+      "Psychological Thriller"
+    ],
+    "description": "A gut-wrenching story of motherhood, survival, and twisted expectations, a snowbound thriller that will chill you to the bone.",
+    "publication_year": 2025,
+    "pages": 384,
+    "rating": 4.1,
+    "popular": true
+  },
+  {
+    "id": "book_100",
+    "isbn": "9780063318670",
+    "title": "Looking for Smoke",
+    "author": "K.A. Cobell",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780063318670-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Young Adult",
+      "Mystery",
+      "Native American",
+      "Contemporary",
+      "Thriller"
+    ],
+    "description": "Four teens on the Blackfeet reservation become suspects in a murder investigation and must work together to clear their names and uncover the truth.",
+    "publication_year": 2024,
+    "pages": 402,
+    "rating": 4.2,
+    "popular": true
+  },
+  {
+    "id": "book_101",
+    "isbn": "9780593696125",
+    "title": "Libertad",
+    "author": "Bessie Flores Zaldivar",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780593696125-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Young Adult",
+      "Poetry",
+      "Contemporary",
+      "Immigrant Experience",
+      "LGBTQ+"
+    ],
+    "description": "A Honduran-American teen creates political poetry online while dealing with family tragedy and a growing attraction to her best friend.",
+    "publication_year": 2024,
+    "pages": 417,
+    "rating": 4.3,
+    "popular": true
+  },
+  {
+    "id": "book_102",
+    "isbn": "9780593381229",
+    "title": "Bright Red Fruit",
+    "author": "Safia Elhillo",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780593381229-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Young Adult",
+      "Poetry",
+      "Sudanese-American",
+      "Contemporary",
+      "Fiction"
+    ],
+    "description": "Sudanese-American teen Samira retreats to an online poetry community when grounded by her mother, but discovers risks when she connects with a mysterious older poet.",
+    "publication_year": 2024,
+    "pages": 368,
+    "rating": 4.1,
+    "popular": true
+  },
+  {
+    "id": "book_103",
+    "isbn": "9780358272106",
+    "title": "Dragonfruit",
+    "author": "Makiia Lucier",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780358272106-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Young Adult",
+      "Fantasy",
+      "Pacific-Islander",
+      "Romantasy",
+      "Adventure"
+    ],
+    "description": "Hanalei and the exiled princess of Tamarind must find a rare dragon egg to restore balance and confront their intertwined pasts in a lush fantasy adventure.",
+    "publication_year": 2024,
+    "pages": 356,
+    "rating": 4,
+    "popular": true
+  },
+  {
+    "id": "book_104",
+    "isbn": "9781250816597",
+    "title": "Thirsty",
+    "author": "Jas Hammonds",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781250816597-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Young Adult",
+      "Contemporary",
+      "Alcohol Use",
+      "Fiction",
+      "Coming-of-Age"
+    ],
+    "description": "Biracial teen Blake Brenner navigates privilege, heartbreak, and a dangerous drinking problem in the summer before college.",
+    "publication_year": 2024,
+    "pages": 318,
+    "rating": 3.9,
+    "popular": true
+  },
+  {
+    "id": "book_105",
+    "isbn": "9781506497648",
+    "title": "Anonymoose",
+    "author": "Shawna J. C. Tenney",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781506497648-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Children",
+      "Middle Grade",
+      "Social-Emotional Learning",
+      "Fiction",
+      "Identity"
+    ],
+    "description": "In an imaginative tale, a moose becomes the anonymous voice in a child's community-kindness project, exploring identity and the power of doing good without recognition.",
+    "publication_year": 2024,
+    "pages": 48,
+    "rating": 4.4,
+    "popular": true
+  },
+  {
+    "id": "book_106",
+    "isbn": "9781636551128",
+    "title": "Aloha Everything",
+    "author": "Kaylin Melia George",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781636551128-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Children",
+      "Picture Book",
+      "Cultural Diversity",
+      "Hawaiian",
+      "Fiction"
+    ],
+    "description": "A vibrant picture book celebrating the beauty of Aloha spirit, family, nature and the Hawaiian islands — perfect for read-alouds.",
+    "publication_year": 2024,
+    "pages": 40,
+    "rating": 4.6,
+    "popular": true
+  },
+  {
+    "id": "book_107",
+    "isbn": "9781623544188",
+    "title": "Archie Celebrates an Indian Wedding",
+    "author": "Mitali Banerjee Ruths",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781623544188-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Children",
+      "Picture Book",
+      "Cultural Diversity",
+      "Indian Wedding",
+      "Fiction"
+    ],
+    "description": "Archie, a curious child, attends his first Indian wedding and learns about traditions, family, and joy across cultures.",
+    "publication_year": 2024,
+    "pages": 48,
+    "rating": 4.5,
+    "popular": true
+  },
+  {
+    "id": "book_108",
+    "isbn": "9781250848772",
+    "title": "Abuelo, the Sea, and Me",
+    "author": "Ismée Williams",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781250848772-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Children",
+      "Middle Grade",
+      "Immigrant Experience",
+      "Sea",
+      "Adventure",
+      "Fiction"
+    ],
+    "description": "A young girl and her grandfather spend time by the ocean reflecting on his childhood in Havana and exploring their evolving bond across time and place.",
+    "publication_year": 2024,
+    "pages": 144,
+    "rating": 4.7,
+    "popular": true
+  },
+  {
+    "id": "book_109",
+    "isbn": "9781524881023",
+    "title": "Afro Unicorn — The Land of Afronia, Vol. 1",
+    "author": "April Showers",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781524881023-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Children",
+      "Middle Grade",
+      "Fantasy",
+      "Diversity",
+      "Graphic Novel",
+      "Fiction"
+    ],
+    "description": "In a lush fantasy world called Afronia, unicorn-hero must lead a journey of discovery and representation — first in a middle grade graphic novel format.",
+    "publication_year": 2024,
+    "pages": 160,
+    "rating": 4.3,
+    "popular": true
+  },
+  {
+    "id": "book_110",
+    "isbn": "9780593497576",
+    "title": "The Demon of Unrest",
+    "author": "Erik Larson",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780593497576-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Nonfiction",
+      "History",
+      "Civil War",
+      "United States"
+    ],
+    "description": "A gripping narrative of the five months leading up to the American Civil War, blending political intrigue and personal stories of the era.",
+    "publication_year": 2024,
+    "pages": 512,
+    "rating": 4.4,
+    "popular": true
+  },
+  {
+    "id": "book_111",
+    "isbn": "9780385548243",
+    "title": "Demon Copperhead",
+    "author": "Barbara Kingsolver",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780385548243-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Appalachia",
+      "Coming of Age",
+      "Addiction",
+      "Social Issues"
+    ],
+    "description": "A modern retelling of David Copperfield set in rural Appalachia, blending humor, grit, and heart.",
+    "publication_year": 2022,
+    "pages": 560,
+    "rating": 4.6,
+    "popular": true
+  },
+  {
+    "id": "book_112",
+    "isbn": "9780593315309",
+    "title": "The Bee Sting",
+    "author": "Paul Murray",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780593315309-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Family Saga",
+      "Ireland",
+      "Contemporary"
+    ],
+    "description": "A Booker Prize finalist about a crumbling Irish family facing climate anxiety, debt, and secrets.",
+    "publication_year": 2023,
+    "pages": 656,
+    "rating": 4.4,
+    "popular": true
+  },
+  {
+    "id": "book_113",
+    "isbn": "9780525659478",
+    "title": "The Covenant of Water",
+    "author": "Abraham Verghese",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780525659478-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Historical Fiction",
+      "India",
+      "Family Saga"
+    ],
+    "description": "An epic multigenerational story of a South Indian family cursed by drowning, filled with love, loss, and healing.",
+    "publication_year": 2023,
+    "pages": 736,
+    "rating": 4.6,
+    "popular": true
+  },
+  {
+    "id": "book_114",
+    "isbn": "9781982185824",
+    "title": "Outlive: The Science & Art of Longevity",
+    "author": "Peter Attia, M.D.",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781982185824-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Nonfiction",
+      "Health",
+      "Science",
+      "Longevity"
+    ],
+    "description": "A groundbreaking guide to extending healthspan and improving vitality, rooted in data and clinical insight.",
+    "publication_year": 2023,
+    "pages": 496,
+    "rating": 4.5,
+    "popular": true
+  },
+  {
+    "id": "book_115",
+    "isbn": "9780063204157",
+    "title": "The Wager: A Tale of Shipwreck, Mutiny and Murder",
+    "author": "David Grann",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780063204157-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Nonfiction",
+      "History",
+      "Maritime",
+      "Exploration"
+    ],
+    "description": "A gripping true story of shipwreck and survival that exposes the darkest corners of imperial ambition.",
+    "publication_year": 2023,
+    "pages": 352,
+    "rating": 4.7,
+    "popular": true
+  },
+  {
+    "id": "book_116",
+    "isbn": "9781250221063",
+    "title": "I'm Glad My Mom Died",
+    "author": "Jennette McCurdy",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781250221063-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Nonfiction",
+      "Memoir",
+      "Celebrity",
+      "Mental Health"
+    ],
+    "description": "The darkly funny, brutally honest memoir by former Nickelodeon star Jennette McCurdy about abuse, grief, and self-reclamation.",
+    "publication_year": 2022,
+    "pages": 320,
+    "rating": 4.7,
+    "popular": true
+  },
+  {
+    "id": "book_117",
+    "isbn": "9780593235942",
+    "title": "Killers of the Flower Moon",
+    "author": "David Grann",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780593235942-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Nonfiction",
+      "History",
+      "True Crime",
+      "Native American"
+    ],
+    "description": "The shocking true story of the Osage murders and the birth of the FBI.",
+    "publication_year": 2017,
+    "pages": 400,
+    "rating": 4.6,
+    "popular": true
+  },
+  {
+    "id": "book_118",
+    "isbn": "9780385548922",
+    "title": "North Woods",
+    "author": "Daniel Mason",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780385548922-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Historical",
+      "Nature",
+      "Experimental"
+    ],
+    "description": "A luminous novel chronicling the lives and ghosts tied to one plot of New England land across four centuries.",
+    "publication_year": 2023,
+    "pages": 384,
+    "rating": 4.5,
+    "popular": true
+  },
+  {
+    "id": "book_119",
+    "isbn": "9780525659263",
+    "title": "You Could Make This Place Beautiful",
+    "author": "Maggie Smith",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780525659263-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Nonfiction",
+      "Memoir",
+      "Poetry",
+      "Divorce",
+      "Healing"
+    ],
+    "description": "A lyrical memoir from the poet of 'Good Bones', examining love, loss, motherhood, and transformation.",
+    "publication_year": 2023,
+    "pages": 320,
+    "rating": 4.4,
+    "popular": true
+  },
+  {
+    "id": "book_120",
+    "isbn": "9780593443347",
+    "title": "Tomorrow, and Tomorrow, and Tomorrow",
+    "author": "Gabrielle Zevin",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780593443347-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Friendship",
+      "Gaming",
+      "Creativity"
+    ],
+    "description": "Two friends reunite to design video games that mirror their complicated bond—a tender meditation on art and love.",
+    "publication_year": 2022,
+    "pages": 416,
+    "rating": 4.6,
+    "popular": true
+  },
+  {
+    "id": "book_121",
+    "isbn": "9780593534168",
+    "title": "The Women",
+    "author": "Kristin Hannah",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780593534168-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Historical",
+      "Vietnam War",
+      "Women"
+    ],
+    "description": "A young nurse's coming-of-age during the Vietnam War—an emotional, sweeping tale of friendship and bravery.",
+    "publication_year": 2024,
+    "pages": 480,
+    "rating": 4.7,
+    "popular": true
+  },
+  {
+    "id": "book_122",
+    "isbn": "9781984877918",
+    "title": "Small Things Like These",
+    "author": "Claire Keegan",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781984877918-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Historical",
+      "Ireland",
+      "Ethics"
+    ],
+    "description": "A quiet Christmas novella about courage and conscience in 1980s Ireland, shortlisted for the Booker Prize.",
+    "publication_year": 2021,
+    "pages": 128,
+    "rating": 4.5,
+    "popular": true
+  },
+  {
+    "id": "book_123",
+    "isbn": "9780062977229",
+    "title": "Remarkably Bright Creatures",
+    "author": "Shelby Van Pelt",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780062977229-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Contemporary",
+      "Friendship",
+      "Animals"
+    ],
+    "description": "A widowed cleaning woman befriends a wise giant Pacific octopus, leading to a heart-warming tale of connection and hope.",
+    "publication_year": 2022,
+    "pages": 368,
+    "rating": 4.6,
+    "popular": true
+  },
+  {
+    "id": "book_124",
+    "isbn": "9780525564918",
+    "title": "The Midnight Library",
+    "author": "Matt Haig",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780525564918-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Fantasy",
+      "Philosophy",
+      "Mental Health"
+    ],
+    "description": "Between life and death lies a library with endless possibilities—an uplifting novel about regret, choice, and meaning.",
+    "publication_year": 2020,
+    "pages": 304,
+    "rating": 4.4,
+    "popular": true
+  },
+  {
+    "id": "book_125",
+    "isbn": "9780143135702",
+    "title": "Crying in H Mart",
+    "author": "Michelle Zauner",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780143135702-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Nonfiction",
+      "Memoir",
+      "Korean American",
+      "Music"
+    ],
+    "description": "A moving memoir of food, family, identity and grief from musician Michelle Zauner of Japanese Breakfast.",
+    "publication_year": 2021,
+    "pages": 256,
+    "rating": 4.3,
+    "popular": true
+  },
+  {
+    "id": "book_126",
+    "isbn": "9780143110438",
+    "title": "The God of Small Things",
+    "author": "Arundhati Roy",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780143110438-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Postcolonial",
+      "India",
+      "Family Saga"
+    ],
+    "description": "An acclaimed novel about two twins growing up in India's Kerala region, dealing with family trauma, love and social caste.",
+    "publication_year": 1997,
+    "pages": 340,
+    "rating": 4.4,
+    "popular": true
+  },
+  {
+    "id": "book_127",
+    "isbn": "9780593595161",
+    "title": "A Little Devil in America",
+    "author": "Hanif Abdurraqib",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780593595161-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Nonfiction",
+      "Music",
+      "African American",
+      "Culture"
+    ],
+    "description": "A lyric and deeply researched cultural memoir about Black music, history and identity from poet-critic Hanif Abdurraqib.",
+    "publication_year": 2021,
+    "pages": 432,
+    "rating": 4.5,
+    "popular": true
+  },
+  {
+    "id": "book_128",
+    "isbn": "9780307957288",
+    "title": "Educated: A Memoir",
+    "author": "Tara Westover",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780307957288-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Nonfiction",
+      "Memoir",
+      "Education",
+      "Survival"
+    ],
+    "description": "From growing up in a survivalist family to earning a PhD at Cambridge, Tara Westover's story challenges assumptions about education, family and identity.",
+    "publication_year": 2018,
+    "pages": 352,
+    "rating": 4.7,
+    "popular": true
+  },
+  {
+    "id": "book_129",
+    "isbn": "9781426219569",
+    "title": "The Glass Castle",
+    "author": "Jeannette Walls",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781426219569-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Nonfiction",
+      "Memoir",
+      "Family",
+      "Poverty"
+    ],
+    "description": "A heartbreaking and true story of surviving a chaotic upbringing and forging one's own path through grit and resilience.",
+    "publication_year": 2005,
+    "pages": 288,
+    "rating": 4.6,
+    "popular": true
+  },
+  {
+    "id": "book_130",
+    "isbn": "9781984822182",
+    "title": "The Sentence",
+    "author": "Louise Erdrich",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781984822182-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Literary Fiction",
+      "Native American",
+      "Magical Realism"
+    ],
+    "description": "A Native American bookstore owner reckons with ghosts, guilt and the weight of history over a year of pandemic and protest.",
+    "publication_year": 2021,
+    "pages": 640,
+    "rating": 4.3,
+    "popular": true
+  },
+  {
+    "id": "book_131",
+    "isbn": "9780061122415",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780061122415-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Philosophical",
+      "Spiritual",
+      "Classic"
+    ],
+    "description": "A timeless bestseller about a shepherd's journey to self-discovery and fulfilling one's personal legend.",
+    "publication_year": 1988,
+    "pages": 208,
+    "rating": 4.2,
+    "popular": true
+  },
+  {
+    "id": "book_132",
+    "isbn": "9780307457890",
+    "title": "The Five People You Meet in Heaven",
+    "author": "Mitch Albom",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780307457890-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Inspirational",
+      "Fantasy",
+      "Life/Death"
+    ],
+    "description": "A philosophical novel about a maintenance man whose death leads him to five people who changed his life.",
+    "publication_year": 2003,
+    "pages": 240,
+    "rating": 4.1,
+    "popular": true
+  },
+  {
+    "id": "book_133",
+    "isbn": "9781635578159",
+    "title": "The Invisible Life of Addie LaRue",
+    "author": "V.E. Schwab",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781635578159-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Fantasy",
+      "Historical",
+      "Romance"
+    ],
+    "description": "A genre-blending bestseller about a woman cursed to be forgotten by everyone she meets, spanning centuries of life and longing.",
+    "publication_year": 2020,
+    "pages": 448,
+    "rating": 4.4,
+    "popular": true
+  },
+  {
+    "id": "book_134",
+    "isbn": "9780316449876",
+    "title": "Beautiful World, Where Are You",
+    "author": "Sally Rooney",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780316449876-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Literary Fiction",
+      "Contemporary",
+      "Relationships"
+    ],
+    "description": "Three young adults in Ireland grapple with friendship, love and the possibility of a good life in this widely discussed novel.",
+    "publication_year": 2021,
+    "pages": 448,
+    "rating": 4.2,
+    "popular": true
+  },
+  {
+    "id": "book_135",
+    "isbn": "9781982148198",
+    "title": "The Anxious Generation: How the Great Rewiring of Childhood Is Causing an Epidemic of Mental Illness",
+    "author": "Jonathan Haidt",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781982148198-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Nonfiction",
+      "Psychology",
+      "Youth",
+      "Mental Health"
+    ],
+    "description": "A timely exploration of how digital life, parenting and cultural change are shaping anxiety and mental health in today's youth.",
+    "publication_year": 2024,
+    "pages": 256,
+    "rating": 4.1,
+    "popular": true
+  },
+  {
+    "id": "book_136",
+    "isbn": "9780316262286",
+    "title": "The Night Circus",
+    "author": "Erin Morgenstern",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780316262286-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Fantasy",
+      "Magical Realism",
+      "Romance"
+    ],
+    "description": "An enchanting fantasy about a mysterious circus that appears without warning, and the two magicians bound into a deadly competition.",
+    "publication_year": 2011,
+    "pages": 512,
+    "rating": 4.1,
+    "popular": true
+  },
+  {
+    "id": "book_137",
+    "isbn": "9780143126560",
+    "title": "The Sellout",
+    "author": "Paul Beatty",
+    "cover": "https://covers.openlibrary.org/b/isbn/9780143126560-L.jpg",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "Fiction",
+      "Satire",
+      "Race",
+      "Social Justice"
+    ],
+    "description": "A biting, bold satire about race in America, winner of the Man Booker Prize and widely recommended by librarians and critics alike.",
+    "publication_year": 2015,
+    "pages": 336,
+    "rating": 4.2,
+    "popular": true
   }
 ]

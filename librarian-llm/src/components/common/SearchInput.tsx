@@ -4,6 +4,8 @@ interface SearchInputProps {
   onSubmit: (query: string) => void;
   isLoading: boolean;
   placeholder?: string;
+  isDisabled?: boolean;
+  disabledMessage?: string;
 }
 
 const exampleQueries = [
@@ -48,11 +50,12 @@ const useIsMobile = () => {
 export const SearchInput: React.FC<SearchInputProps> = ({
   onSubmit,
   isLoading,
-  placeholder
+  placeholder,
+  isDisabled = false,
+  disabledMessage
 }) => {
   const isMobile = useIsMobile();
   const [query, setQuery] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Compute responsive placeholder
@@ -98,36 +101,43 @@ export const SearchInput: React.FC<SearchInputProps> = ({
 
   return (
     <div className="w-full">
+      {/* Session limit message */}
+      {isDisabled && disabledMessage && (
+        <div className="mb-3 text-center">
+          <p className="text-sm font-medium text-red-600 dark:text-red-400">
+            {disabledMessage}
+          </p>
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="relative">
-        <div className={`relative transition-all ${isFocused ? 'ring-2 ring-primary-500' : ''} rounded-full`}>
+        <div className="relative">
           <textarea
             ref={textareaRef}
             value={query}
             onChange={handleInput}
             onKeyDown={handleKeyDown}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            placeholder={effectivePlaceholder}
-            disabled={isLoading}
+            placeholder={isDisabled ? "Session limit reached" : effectivePlaceholder}
+            disabled={isLoading || isDisabled}
             rows={1}
-            className="w-full px-5 py-3 pr-12 rounded-full border-2 border-gray-300 dark:border-gray-600
+            className="w-full px-5 py-3.5 pr-14 rounded-full border-2 border-gray-300 dark:border-gray-600
                      focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 resize-none overflow-auto scrollbar-hide
                      disabled:bg-gray-100 disabled:cursor-not-allowed dark:disabled:bg-gray-700
                      text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400
                      bg-white dark:bg-gray-800 focus-enhanced"
-            style={{ minHeight: '48px', maxHeight: '120px' }}
+            style={{ minHeight: '48px', maxHeight: '120px', lineHeight: '1.5' }}
             aria-label="Search for books"
             aria-describedby="search-help"
           />
 
           <button
             type="submit"
-            disabled={!query.trim() || isLoading}
-            className={`absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full
+            disabled={!query.trim() || isLoading || isDisabled}
+            className={`absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full flex items-center justify-center
                      bg-primary-600 text-white hover:bg-primary-700 transition-colors
                      disabled:bg-gray-300 disabled:cursor-not-allowed
                      focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
-                     ${!isLoading && query.trim() ? 'search-btn-pulse' : ''}`}
+                     ${!isLoading && query.trim() && !isDisabled ? 'search-btn-pulse' : ''}`}
             aria-label="Send message"
           >
             {isLoading ? (
@@ -148,8 +158,8 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         </div>
       </form>
 
-      {/* Example queries - only show when empty */}
-      {!query && (
+      {/* Example queries - only show when empty and not disabled */}
+      {!query && !isDisabled && (
         <div className="mt-3 flex flex-wrap gap-2 justify-center">
           {exampleQueries.map((example, index) => (
             <button

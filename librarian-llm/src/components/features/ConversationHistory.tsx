@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { Message, CatalogItem } from '../types';
-import { formatDate } from '../utils/formatters';
+import { Message, CatalogItem } from '../../types';
+import { formatDate } from '../../utils/formatters';
 import { ResultsList } from './ResultsList';
-import { TypingIndicator } from './TypingIndicator';
+import { TypingIndicator } from '../common/TypingIndicator';
 
 interface ConversationHistoryProps {
   messages: Message[];

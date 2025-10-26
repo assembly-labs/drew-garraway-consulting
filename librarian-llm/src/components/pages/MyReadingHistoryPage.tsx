@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { HistoryCard } from './HistoryCard';
-import { ConfirmDialog } from './ConfirmDialog';
-import { useReadingHistory } from '../hooks/useReadingHistory';
+import { HistoryCard } from '../features/HistoryCard';
+import { ConfirmDialog } from '../modals/ConfirmDialog';
+import { useReadingHistory } from '../../hooks/useReadingHistory';
 
 interface MyReadingHistoryPageProps {
   onClose: () => void;

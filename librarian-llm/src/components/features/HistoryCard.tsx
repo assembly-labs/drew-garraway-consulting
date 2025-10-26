@@ -1,6 +1,6 @@
 import React from 'react';
-import { StarRating } from './StarRating';
-import { HistoryItem } from '../types';
+import { StarRating } from '../common/StarRating';
+import { HistoryItem } from '../../types';
 
 interface HistoryCardProps {
   item: HistoryItem;

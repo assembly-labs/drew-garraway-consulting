@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { SidebarMenuItem } from '../types';
+import { SidebarMenuItem } from '../../types';
 
 interface SidebarProps {
   isOpen: boolean;

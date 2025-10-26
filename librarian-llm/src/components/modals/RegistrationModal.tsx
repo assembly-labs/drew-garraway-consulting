@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { LibraryEvent, RegistrationForm } from '../types';
+import { LibraryEvent, RegistrationForm } from '../../types';
 
 interface RegistrationModalProps {
   isOpen: boolean;
