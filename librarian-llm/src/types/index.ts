@@ -9,6 +9,34 @@ export type ItemFormatType =
   | 'equipment' | 'tool' | 'device'       // equipment types
   | 'comic' | 'manga' | 'graphic-novel';  // comic formats
 
+// Details structures for different item types
+export interface BookDetails {
+  extendedDescription?: string;
+  awards?: string[];
+  reviews?: { reviewer: string; quote: string; rating?: number }[];
+  tableOfContents?: string[];
+  authorBio?: string;
+  funFacts?: string[];
+  similarTitles?: string[];
+  targetAudience?: string;
+  contentWarnings?: string[];
+}
+
+export interface ThingDetails {
+  whatsIncluded?: string[];
+  howToUse?: string;
+  careInstructions?: string;
+  safetyInfo?: string;
+  recommendedUses?: string[];
+  phillyTips?: string[];
+  bestSeasons?: string[];
+  ageRecommendation?: string;
+  depositAmount?: number;
+  replacementCost?: number;
+}
+
+export type ItemDetails = BookDetails | ThingDetails;
+
 // Base interface for all library items
 export interface LibraryItem {
   id: string;
@@ -19,6 +47,7 @@ export interface LibraryItem {
   description: string;
   rating?: number;
   popular?: boolean;
+  details?: ItemDetails;
 }
 
 // Updated format structure with new fields for special materials
