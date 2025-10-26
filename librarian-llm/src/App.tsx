@@ -8,6 +8,7 @@ import { HamburgerButton } from './components/common/HamburgerButton';
 import { Sidebar } from './components/layout/Sidebar';
 import { DigitalLibraryCardModal } from './components/modals/DigitalLibraryCardModal';
 import { QueryLimitWarning } from './components/modals/QueryLimitWarning';
+import { ItemDetailsModal } from './components/modals/ItemDetailsModal';
 import { MyCheckoutsPage } from './components/pages/MyCheckoutsPage';
 import { MyHoldsPage } from './components/pages/MyHoldsPage';
 import { EventsPage } from './components/pages/EventsPage';
@@ -31,6 +32,7 @@ function AppContent(): JSX.Element {
   // Sidebar and modal state
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showLibraryCardModal, setShowLibraryCardModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<CatalogItem | null>(null);
   const [currentPage, setCurrentPage] = useState<PageView>('search');
   const hamburgerButtonRef = useRef<HTMLButtonElement>(null);
   const toast = useToast();
@@ -120,17 +122,13 @@ function AppContent(): JSX.Element {
   const handleBookAction = useCallback((action: 'hold' | 'details', book: CatalogItem) => {
     // In a real app, this would integrate with library systems
     if (action === 'hold') {
-      alert(`Demo: Placing hold on "${book.title}".\n\nIn a production system, this would connect to your library's hold system.`);
+      toast.success('Hold Placed!', {
+        description: `You've placed a hold on "${book.title}". You'll be notified when it's available.`
+      });
     } else if (action === 'details') {
-      const creator = 'author' in book ? book.author :
-                       'director' in book ? book.director :
-                       'developer' in book ? book.developer : 'Unknown';
-      const year = 'publication_year' in book ? book.publication_year :
-                   'release_year' in book ? book.release_year : 'N/A';
-      const isbn = 'isbn' in book ? book.isbn : 'N/A';
-      alert(`Demo: Viewing details for "${book.title}"\n\nTitle: ${book.title}\nCreator: ${creator}\nISBN/ID: ${isbn}\nYear: ${year}\nType: ${book.itemType}\n\nIn production, this would open a detailed view.`);
+      setSelectedItem(book);
     }
-  }, []);
+  }, [toast]);
 
   // Toggle sidebar
   const toggleSidebar = useCallback(() => {
@@ -309,6 +307,19 @@ function AppContent(): JSX.Element {
       <QueryLimitWarning
         isOpen={showQueryWarning}
         onClose={() => setShowQueryWarning(false)}
+      />
+
+      {/* Item Details Modal */}
+      <ItemDetailsModal
+        item={selectedItem}
+        isOpen={selectedItem !== null}
+        onClose={() => setSelectedItem(null)}
+        onHold={(item) => {
+          setSelectedItem(null);
+          toast.success('Hold Placed!', {
+            description: `You've placed a hold on "${item.title}".`
+          });
+        }}
       />
 
       {/* Header */}
