@@ -94,8 +94,7 @@ export const useClaudeChat = ({ catalog, onError }: UseClaudeChatOptions) => {
         return sendMessage(userMessage, conversationHistory, retryCount + 1);
       }
 
-      // Log error for debugging (kept for production debugging)
-      console.error('Claude API Error:', error);
+      // Pass error to error handler
       onError?.(errorMessage);
 
       throw new Error(errorMessage);

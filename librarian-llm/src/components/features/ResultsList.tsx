@@ -1,6 +1,6 @@
 import React from 'react';
-import { CatalogItem } from '../types';
-import { BookCard } from './BookCard';
+import { CatalogItem } from '../../types';
+import { BookCard } from '../common/BookCard';
 
 interface ResultsListProps {
   books: CatalogItem[];

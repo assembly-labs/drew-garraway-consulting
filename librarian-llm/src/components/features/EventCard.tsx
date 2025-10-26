@@ -1,5 +1,5 @@
 import React from 'react';
-import { LibraryEvent } from '../types';
+import { LibraryEvent } from '../../types';
 
 interface EventCardProps {
   event: LibraryEvent;

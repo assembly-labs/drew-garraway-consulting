@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { HoldCard } from './HoldCard';
-import { ConfirmDialog } from './ConfirmDialog';
-import { FreezeDatePicker } from './FreezeDatePicker';
-import { useHolds } from '../hooks/useHolds';
+import { HoldCard } from '../features/HoldCard';
+import { ConfirmDialog } from '../modals/ConfirmDialog';
+import { FreezeDatePicker } from '../features/FreezeDatePicker';
+import { useHolds } from '../../hooks/useHolds';
 
 interface MyHoldsPageProps {
   onClose: () => void;

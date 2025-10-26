@@ -1,5 +1,5 @@
 import React from 'react';
-import { HoldItem } from '../types';
+import { HoldItem } from '../../types';
 
 interface HoldCardProps {
   hold: HoldItem;

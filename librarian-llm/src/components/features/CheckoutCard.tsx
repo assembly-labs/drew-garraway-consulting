@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckoutItem } from '../types';
+import { CheckoutItem } from '../../types';
 
 interface CheckoutCardProps {
   checkout: CheckoutItem;

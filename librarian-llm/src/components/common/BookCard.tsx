@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CatalogItem } from '../types';
+import { CatalogItem } from '../../types';
 import {
   formatAvailability,
   getFormatIcon,
@@ -7,7 +7,7 @@ import {
   getRatingStars,
   formatSubjects,
   formatItemCreator
-} from '../utils/formatters';
+} from '../../utils/formatters';
 
 interface BookCardProps {
   book: CatalogItem;

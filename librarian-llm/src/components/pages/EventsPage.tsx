@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { EventCard } from './EventCard';
-import { RegistrationModal } from './RegistrationModal';
-import { useEvents } from '../hooks/useEvents';
-import { LibraryEvent, RegistrationForm } from '../types';
+import { EventCard } from '../features/EventCard';
+import { RegistrationModal } from '../modals/RegistrationModal';
+import { useEvents } from '../../hooks/useEvents';
+import { LibraryEvent, RegistrationForm } from '../../types';
 
 interface EventsPageProps {
   onClose: () => void;

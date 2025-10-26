@@ -1,7 +1,7 @@
 import React from 'react';
-import { CheckoutCard } from './CheckoutCard';
-import { useCheckouts } from '../hooks/useCheckouts';
-import { SortOption, FormatFilter } from '../types';
+import { CheckoutCard } from '../features/CheckoutCard';
+import { useCheckouts } from '../../hooks/useCheckouts';
+import { SortOption, FormatFilter } from '../../types';
 
 interface MyCheckoutsPageProps {
   onClose: () => void;
