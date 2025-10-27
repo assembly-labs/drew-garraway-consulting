@@ -6791,5 +6791,524 @@
     "pages": 256,
     "rating": 4.2,
     "popular": true
+  },
+  {
+    "id": "thing_040",
+    "itemType": "thing",
+    "title": "Arduino IoT Starter Kit",
+    "category": "Technology",
+    "manufacturer": "Arduino",
+    "cover": "https://via.placeholder.com/150x225/10B981/FFFFFF?text=Arduino+IoT",
+    "formats": [
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_period": "2 weeks"
+      }
+    ],
+    "subjects": [
+      "internet of things",
+      "iot",
+      "electronics",
+      "programming",
+      "maker",
+      "stem",
+      "arduino",
+      "sensors",
+      "smart devices"
+    ],
+    "description": "Complete IoT starter kit with Arduino MKR WiFi 1010, environmental sensors, LEDs, and comprehensive project guide for building connected devices and Internet of Things applications.",
+    "popular": true,
+    "rating": 4.8
+  },
+  {
+    "id": "book_150",
+    "isbn": "9781491904336",
+    "itemType": "book",
+    "title": "Building the Internet of Things",
+    "author": "Maciej Kranz",
+    "cover": "https://via.placeholder.com/150x225/3B82F6/FFFFFF?text=IoT+Book",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 4
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "internet of things",
+      "iot",
+      "technology",
+      "business",
+      "innovation",
+      "smart devices",
+      "connected"
+    ],
+    "description": "Implement New Business Models, Disrupt Competitors, Transform Your Industry. A comprehensive guide to IoT technologies and their practical applications in business.",
+    "publication_year": 2017,
+    "pages": 288,
+    "rating": 4.3,
+    "popular": false
+  },
+  {
+    "id": "dvd_025",
+    "itemType": "dvd",
+    "title": "The Internet of Things: Connecting Our World",
+    "director": "Tech Documentary Series",
+    "cover": "https://via.placeholder.com/150x225/8B5CF6/FFFFFF?text=IoT+Doc",
+    "formats": [
+      {
+        "type": "dvd",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 2
+      },
+      {
+        "type": "streaming",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "technology",
+      "internet of things",
+      "documentary",
+      "future",
+      "smart cities",
+      "innovation"
+    ],
+    "description": "Documentary exploring how IoT is transforming homes, cities, and industries. Features real-world examples and expert interviews on the future of connected devices.",
+    "release_year": 2023,
+    "runtime": 120,
+    "rating": 4.5,
+    "popular": true
+  },
+  {
+    "id": "thing_041",
+    "itemType": "thing",
+    "title": "Raspberry Pi 4 Complete Kit",
+    "category": "Technology",
+    "manufacturer": "Raspberry Pi Foundation",
+    "cover": "https://via.placeholder.com/150x225/EC4899/FFFFFF?text=RPi+Kit",
+    "formats": [
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_period": "2 weeks"
+      }
+    ],
+    "subjects": [
+      "raspberry pi",
+      "programming",
+      "maker",
+      "iot",
+      "electronics",
+      "linux",
+      "stem",
+      "robotics"
+    ],
+    "description": "Raspberry Pi 4 (8GB RAM) with case, power supply, SD card, HDMI cable, and beginner's guide. Perfect for learning programming, IoT projects, and home automation.",
+    "popular": true,
+    "rating": 4.7
+  },
+  {
+    "id": "thing_042",
+    "itemType": "thing",
+    "title": "Complete Home Repair Toolkit",
+    "category": "Tools",
+    "manufacturer": "DeWalt",
+    "cover": "https://via.placeholder.com/150x225/F59E0B/FFFFFF?text=Tool+Kit",
+    "formats": [
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_period": "1 week"
+      }
+    ],
+    "subjects": [
+      "repair",
+      "diy",
+      "tools",
+      "maintenance",
+      "home improvement",
+      "fix",
+      "problem solving"
+    ],
+    "description": "Professional 150-piece toolkit including power drill, screwdrivers, wrenches, pliers, hammer, level, and more. Everything needed for home repairs and DIY projects.",
+    "popular": true,
+    "rating": 4.9
+  },
+  {
+    "id": "kit_001",
+    "itemType": "kit",
+    "title": "Spanish Learning Complete Package",
+    "category": "Language Learning",
+    "cover": "https://via.placeholder.com/150x225/EF4444/FFFFFF?text=Spanish+Kit",
+    "formats": [
+      {
+        "type": "kit",
+        "status": "available",
+        "checkout_period": "4 weeks"
+      }
+    ],
+    "subjects": [
+      "language",
+      "spanish",
+      "education",
+      "self-study",
+      "learning",
+      "bilingual"
+    ],
+    "description": "Complete Spanish learning kit with textbooks, workbooks, audio CDs, flashcards, and online access code. Covers beginner to intermediate levels with interactive exercises.",
+    "popular": true,
+    "rating": 4.4
+  },
+  {
+    "id": "thing_043",
+    "itemType": "thing",
+    "title": "Digital Music Production Station",
+    "category": "Music",
+    "manufacturer": "Akai Professional",
+    "cover": "https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Music+Station",
+    "formats": [
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_period": "2 weeks"
+      }
+    ],
+    "subjects": [
+      "music",
+      "creative",
+      "technology",
+      "recording",
+      "production",
+      "audio",
+      "art"
+    ],
+    "description": "MIDI controller keyboard, audio interface, microphone, and software bundle for music creation. Perfect for beginners and intermediate producers.",
+    "popular": false,
+    "rating": 4.6
+  },
+  {
+    "id": "game_015",
+    "itemType": "game",
+    "title": "Cashflow - Rich Dad's Board Game",
+    "developer": "Robert Kiyosaki",
+    "cover": "https://via.placeholder.com/150x225/059669/FFFFFF?text=Cashflow",
+    "formats": [
+      {
+        "type": "boardgame",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 3
+      }
+    ],
+    "subjects": [
+      "financial",
+      "investing",
+      "education",
+      "strategy",
+      "money",
+      "business",
+      "learning"
+    ],
+    "description": "Educational board game that teaches financial literacy, investing strategies, and how to build passive income. Fun way to learn about money management.",
+    "players": "2-6",
+    "age_rating": "14+",
+    "rating": 4.2,
+    "popular": true
+  },
+  {
+    "id": "book_151",
+    "isbn": "9780142410318",
+    "itemType": "book",
+    "title": "The Anxiety and Worry Workbook",
+    "author": "David A. Clark and Aaron T. Beck",
+    "cover": "https://via.placeholder.com/150x225/6B7280/FFFFFF?text=Anxiety+Book",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 4,
+        "copies_total": 5
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "mental health",
+      "anxiety",
+      "self-help",
+      "psychology",
+      "wellness",
+      "stress",
+      "therapy"
+    ],
+    "description": "Cognitive behavioral techniques for overcoming anxiety and worry. Includes practical exercises, worksheets, and strategies for managing stress and improving mental health.",
+    "publication_year": 2011,
+    "pages": 320,
+    "rating": 4.5,
+    "popular": true
+  },
+  {
+    "id": "dvd_026",
+    "itemType": "dvd",
+    "title": "Headspace Guide to Meditation",
+    "director": "Netflix Original",
+    "cover": "https://via.placeholder.com/150x225/14B8A6/FFFFFF?text=Meditation",
+    "formats": [
+      {
+        "type": "dvd",
+        "status": "available",
+        "copies_available": 3,
+        "copies_total": 3
+      }
+    ],
+    "subjects": [
+      "meditation",
+      "mindfulness",
+      "mental health",
+      "wellness",
+      "stress",
+      "relaxation",
+      "self-care"
+    ],
+    "description": "8-episode series teaching meditation techniques for stress relief, better sleep, and improved focus. Animated guides make mindfulness accessible for beginners.",
+    "release_year": 2021,
+    "runtime": 240,
+    "rating": 4.7,
+    "popular": true
+  },
+  {
+    "id": "thing_044",
+    "itemType": "thing",
+    "title": "Adult Coloring & Art Therapy Kit",
+    "category": "Wellness",
+    "cover": "https://via.placeholder.com/150x225/F472B6/FFFFFF?text=Art+Kit",
+    "formats": [
+      {
+        "type": "kit",
+        "status": "available",
+        "checkout_period": "2 weeks"
+      }
+    ],
+    "subjects": [
+      "art",
+      "stress relief",
+      "creative",
+      "mindfulness",
+      "relaxation",
+      "mental health",
+      "therapy"
+    ],
+    "description": "Premium coloring books, colored pencils, markers, and guided creativity exercises for stress relief and mindful relaxation. Includes nature, mandala, and abstract designs.",
+    "popular": true,
+    "rating": 4.3
+  },
+  {
+    "id": "game_016",
+    "itemType": "game",
+    "title": "1000-Piece Jigsaw Puzzle Collection",
+    "developer": "Ravensburger",
+    "cover": "https://via.placeholder.com/150x225/0891B2/FFFFFF?text=Puzzles",
+    "formats": [
+      {
+        "type": "puzzle",
+        "status": "available",
+        "copies_available": 5,
+        "copies_total": 6
+      }
+    ],
+    "subjects": [
+      "puzzles",
+      "relaxation",
+      "mindfulness",
+      "entertainment",
+      "stress relief",
+      "activities"
+    ],
+    "description": "Collection of 5 beautiful 1000-piece puzzles featuring landscapes, art masterpieces, and nature scenes. Perfect for relaxation and mindful focus.",
+    "age_rating": "12+",
+    "rating": 4.6,
+    "popular": false
+  },
+  {
+    "id": "thing_045",
+    "itemType": "thing",
+    "title": "3D Printer - Ender 3 Pro",
+    "category": "Maker Technology",
+    "manufacturer": "Creality",
+    "cover": "https://via.placeholder.com/150x225/DC2626/FFFFFF?text=3D+Printer",
+    "formats": [
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_period": "1 week",
+        "booking_required": true
+      }
+    ],
+    "subjects": [
+      "3d printing",
+      "maker",
+      "technology",
+      "design",
+      "prototyping",
+      "engineering",
+      "creative"
+    ],
+    "description": "Entry-level 3D printer with 220x220x250mm build volume. Includes starter filament, tools, and access to online design library. Training required before checkout.",
+    "popular": true,
+    "rating": 4.4
+  },
+  {
+    "id": "book_152",
+    "isbn": "9781449373320",
+    "itemType": "book",
+    "title": "Learning Python",
+    "author": "Mark Lutz",
+    "cover": "https://via.placeholder.com/150x225/3B82F6/FFFFFF?text=Python",
+    "formats": [
+      {
+        "type": "physical",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 4
+      },
+      {
+        "type": "ebook",
+        "status": "available"
+      }
+    ],
+    "subjects": [
+      "programming",
+      "python",
+      "coding",
+      "computer science",
+      "technology",
+      "software",
+      "learning"
+    ],
+    "description": "Comprehensive introduction to Python programming. Covers basics through advanced topics including web development, data science, and automation. Perfect for beginners.",
+    "publication_year": 2023,
+    "pages": 1552,
+    "rating": 4.6,
+    "popular": true
+  },
+  {
+    "id": "thing_046",
+    "itemType": "thing",
+    "title": "Telescope - Celestron NexStar 6SE",
+    "category": "Science Equipment",
+    "manufacturer": "Celestron",
+    "cover": "https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Telescope",
+    "formats": [
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_period": "3 days",
+        "booking_required": true
+      }
+    ],
+    "subjects": [
+      "astronomy",
+      "science",
+      "space",
+      "exploration",
+      "stem",
+      "education",
+      "observation"
+    ],
+    "description": "Computerized telescope with 6-inch aperture, automated tracking, and smartphone adapter. Perfect for stargazing, lunar observation, and planetary viewing.",
+    "popular": false,
+    "rating": 4.8
+  },
+  {
+    "id": "kit_002",
+    "itemType": "kit",
+    "title": "Garden Starter Kit",
+    "category": "Gardening",
+    "cover": "https://via.placeholder.com/150x225/10B981/FFFFFF?text=Garden+Kit",
+    "formats": [
+      {
+        "type": "kit",
+        "status": "available",
+        "checkout_period": "Season pass"
+      }
+    ],
+    "subjects": [
+      "gardening",
+      "plants",
+      "vegetables",
+      "organic",
+      "sustainability",
+      "outdoor",
+      "growing"
+    ],
+    "description": "Everything needed to start a vegetable garden: seeds, starter pots, soil, tools, and comprehensive growing guide. Includes tomatoes, peppers, herbs, and leafy greens.",
+    "popular": true,
+    "rating": 4.5
+  },
+  {
+    "id": "dvd_027",
+    "itemType": "dvd",
+    "title": "MasterClass: Gordon Ramsay Teaches Cooking",
+    "director": "MasterClass",
+    "cover": "https://via.placeholder.com/150x225/F59E0B/FFFFFF?text=Cooking+Class",
+    "formats": [
+      {
+        "type": "dvd",
+        "status": "available",
+        "copies_available": 2,
+        "copies_total": 3
+      }
+    ],
+    "subjects": [
+      "cooking",
+      "culinary",
+      "education",
+      "chef",
+      "food",
+      "skills",
+      "learning"
+    ],
+    "description": "20 video lessons from Gordon Ramsay covering knife skills, cooking methods, recipe building, and plating. Transform your cooking from amateur to restaurant quality.",
+    "release_year": 2022,
+    "runtime": 480,
+    "rating": 4.7,
+    "popular": true
+  },
+  {
+    "id": "thing_047",
+    "itemType": "thing",
+    "title": "Bike Repair Station",
+    "category": "Transportation",
+    "cover": "https://via.placeholder.com/150x225/EF4444/FFFFFF?text=Bike+Tools",
+    "formats": [
+      {
+        "type": "equipment",
+        "status": "available",
+        "checkout_period": "4 hours",
+        "onsite_only": true
+      }
+    ],
+    "subjects": [
+      "bike",
+      "bicycle",
+      "repair",
+      "maintenance",
+      "tools",
+      "transportation",
+      "fix"
+    ],
+    "description": "Professional bike repair stand with complete tool set. Available for on-site use only. Includes pumps, wrenches, chain tools, and tire repair equipment.",
+    "popular": false,
+    "rating": 4.9
   }
 ]
