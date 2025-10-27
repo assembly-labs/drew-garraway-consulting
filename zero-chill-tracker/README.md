@@ -1,14 +1,15 @@
-# 0 Chill Tracker
+# ZERO CHILL
 
-A simple, beautiful web app for tracking your daily chill vs no-chill days.
+A simple, beautiful web app for tracking your daily chill vs no-chill days. Press the button only if today had ZERO CHILL.
 
 ## Features
 
+- **Daily Check-In**: Giant red "ZERO CHILL" button as the main interaction
+- **One-Button Tracking**: Press the button if you had zero chill, or mark it as chill
+- **PWA Support**: Install as a standalone app on your phone
 - **Visual Calendar**: Monthly calendar view with intuitive color coding
-- **Simple Tracking**: Click to cycle through states:
-  - Untracked → 🤙 Chill (1) → 0 No Chill (0) → Untracked
 - **Monthly Statistics**: See your chill days, no-chill days, total tracked, and chill percentage
-- **Data Persistence**: All data saved to localStorage
+- **Data Persistence**: All data saved to localStorage (works offline)
 - **Smooth Animations**: Built with Framer Motion for delightful interactions
 - **Responsive Design**: Works great on mobile and desktop
 
@@ -25,6 +26,7 @@ A simple, beautiful web app for tracking your daily chill vs no-chill days.
 - Tailwind CSS (styling)
 - Framer Motion (animations)
 - localStorage (data persistence)
+- PWA (Progressive Web App) with Service Worker
 
 ## Development
 
@@ -42,25 +44,48 @@ npm run build
 npm run preview
 ```
 
+## Installing as a Mobile App
+
+### iOS (Safari)
+1. Open the app in Safari
+2. Tap the Share button
+3. Scroll down and tap "Add to Home Screen"
+4. Tap "Add"
+
+### Android (Chrome)
+1. Open the app in Chrome
+2. Tap the menu (three dots)
+3. Tap "Install app" or "Add to Home Screen"
+4. Tap "Install"
+
+## UX Flow
+
+1. **Daily Check-In**: Open the app to see the giant "ZERO CHILL" button
+2. **Press Button**: If you had zero chill today, press the red button → day marked as 0
+3. **Alternative**: Press "Actually, it was chill 🤙" → day marked as chill
+4. **Confirmation**: See your choice confirmed with animation
+5. **View History**: Navigate to calendar to see your monthly progress
+6. **Stats Dashboard**: Check your chill percentage and streaks
+
 ## UX Design Decisions
 
-1. **One-Click Interaction**: Click to cycle through all states, making tracking effortless
-2. **Visual Feedback**: Immediate color changes and smooth animations provide clear feedback
-3. **Monthly Stats**: Quick overview of your month at a glance
-4. **Today Highlight**: Current day has a blue border for easy identification
-5. **Month Navigation**: Easy navigation with prev/next buttons and "Today" shortcut
-6. **Responsive Grid**: Calendar adapts beautifully to any screen size
+1. **Focus on Daily Interaction**: The main screen is optimized for quick daily logging
+2. **Giant Button**: Impossible to miss, makes the primary action obvious
+3. **Visual Feedback**: Immediate confirmation with smooth animations
+4. **Secondary Calendar**: History view doesn't interfere with daily check-in
+5. **PWA**: Feels like a native app with offline support
+6. **Persistent Data**: Never lose your tracking data
 
 ## How It Works
 
 The app uses a custom `useChillTracker` hook that:
 - Manages state for all tracked days
 - Persists data to localStorage automatically
-- Provides helpers for toggling days and calculating stats
+- Provides setDay() for direct value setting
+- Calculates monthly statistics
 
-Each day can be in one of three states:
-- `null`: Not tracked (default)
+Each day can be in one of two states:
 - `1`: Chill day (green with 🤙)
 - `0`: No chill day (red with 0)
 
-Click any day to cycle through these states!
+The daily check-in makes it easy to track in under 5 seconds!
