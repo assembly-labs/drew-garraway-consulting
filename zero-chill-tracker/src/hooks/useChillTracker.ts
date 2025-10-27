@@ -36,6 +36,13 @@ export function useChillTracker() {
     })
   }
 
+  const setDay = (date: string, value: ChillValue) => {
+    setData(prev => ({
+      ...prev,
+      [date]: value
+    }))
+  }
+
   const getDay = (date: string): ChillValue => {
     return data[date] ?? null
   }
@@ -65,6 +72,7 @@ export function useChillTracker() {
 
   return {
     toggleDay,
+    setDay,
     getDay,
     getMonthStats
   }
