@@ -128,3 +128,7 @@ storybook-static/
 .github/CLOUDFLARE_MIGRATION_CHECKLIST.md
 .github/CLOUDFLARE_MIGRATION_GUIDE.md
 .github/SIMPLE_MIGRATION_PLAN.md
+
+# Exception: Allow zero-chill-tracker build output for GitHub Pages
+!zero-chill-tracker/dist/
+!zero-chill-tracker/dist/**
