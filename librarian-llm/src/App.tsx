@@ -2,7 +2,6 @@ import { useCallback, useState, useRef } from 'react';
 import { SearchInput } from './components/common/SearchInput';
 import { ConversationHistory } from './components/features/ConversationHistory';
 import { ErrorMessage } from './components/common/ErrorMessage';
-import { LoadingSpinner } from './components/common/LoadingSpinner';
 import { ThemeToggle } from './components/common/ThemeToggle';
 import { HamburgerButton } from './components/common/HamburgerButton';
 import { Sidebar } from './components/layout/Sidebar';
@@ -199,7 +198,10 @@ function AppContent(): JSX.Element {
   if (catalogLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <LoadingSpinner size="lg" message="Loading library catalog..." />
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
+          <p className="text-gray-600">Loading library catalog...</p>
+        </div>
       </div>
     );
   }
@@ -409,7 +411,7 @@ function AppContent(): JSX.Element {
 
               {/* Catalog Info */}
               <p className="text-center text-xs text-gray-500 mt-3 dark:text-gray-400">
-                {catalog.length} books in mock catalog • Powered by Claude AI
+                {catalog.length} items in catalog • Powered by Claude AI
               </p>
             </div>
           </div>

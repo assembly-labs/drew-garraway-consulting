@@ -8,6 +8,64 @@
 
 import Anthropic from '@anthropic-ai/sdk';
 
+// Retry configuration
+const MAX_RETRIES = 2;
+const RETRY_DELAY = 1000; // Start with 1 second
+
+// Response cache configuration
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in milliseconds
+const responseCache = new Map(); // In-memory cache: key -> {response, timestamp}
+
+// Cache helper functions
+function getCacheKey(messages, systemPrompt) {
+  // Create a unique key from the request
+  return JSON.stringify({ messages, systemPrompt });
+}
+
+function getCachedResponse(cacheKey) {
+  const cached = responseCache.get(cacheKey);
+  if (!cached) return null;
+
+  const age = Date.now() - cached.timestamp;
+  if (age > CACHE_TTL) {
+    // Cache expired, remove it
+    responseCache.delete(cacheKey);
+    return null;
+  }
+
+  return cached.response;
+}
+
+function setCachedResponse(cacheKey, response) {
+  responseCache.set(cacheKey, {
+    response,
+    timestamp: Date.now()
+  });
+
+  // Simple cache size limit (keep last 100 entries)
+  if (responseCache.size > 100) {
+    const firstKey = responseCache.keys().next().value;
+    responseCache.delete(firstKey);
+  }
+}
+
+async function callClaudeWithRetry(client, params, retries = 0) {
+  try {
+    return await client.messages.create(params);
+  } catch (error) {
+    if (retries < MAX_RETRIES) {
+      // Check if error is retryable
+      if (error.status === 429 || error.status === 503 || error.status === 504) {
+        const delay = RETRY_DELAY * Math.pow(2, retries); // Exponential backoff
+        console.log(`Retrying Claude API call after ${delay}ms (attempt ${retries + 1}/${MAX_RETRIES})`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        return callClaudeWithRetry(client, params, retries + 1);
+      }
+    }
+    throw error;
+  }
+}
+
 export async function handler(event, context) {
   // Enable CORS for your domain
   const headers = {
@@ -36,8 +94,34 @@ export async function handler(event, context) {
   }
 
   try {
+    // Validate request body exists
+    if (!event.body) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({
+          error: 'No request body provided',
+          fallback: true
+        })
+      };
+    }
+
     // Parse request body
-    const { messages, systemPrompt } = JSON.parse(event.body);
+    let messages, systemPrompt;
+    try {
+      const parsed = JSON.parse(event.body);
+      messages = parsed.messages;
+      systemPrompt = parsed.systemPrompt;
+    } catch (parseError) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({
+          error: 'Invalid JSON in request body',
+          fallback: true
+        })
+      };
+    }
 
     // Validate request
     if (!messages || !Array.isArray(messages)) {
@@ -78,21 +162,42 @@ export async function handler(event, context) {
     console.log(`API Key present: ${apiKey ? 'Yes' : 'No'}`);
     console.log(`Processing request with ${messages.length} messages`);
 
-    // Call Claude API with Haiku model (fast and reliable)
-    const response = await client.messages.create({
-      model: 'claude-3-haiku-20240307', // Using Haiku - fast, reliable, and definitely exists
-      max_tokens: 1500,
-      temperature: 0.2, // Lower temperature for more focused, catalog-only responses
-      system: systemPrompt, // Simple string format (compatible with SDK 0.27.3)
-      messages: messages
-    });
+    // Check cache first
+    const cacheKey = getCacheKey(messages, systemPrompt);
+    const cachedResponse = getCachedResponse(cacheKey);
 
-    // Extract text content
-    const content = response.content[0]?.type === 'text'
-      ? response.content[0].text
-      : '';
+    let content, usage;
 
-    console.log('Successfully processed Claude API request');
+    if (cachedResponse) {
+      // Return cached response
+      console.log('Cache hit - returning cached response');
+      content = cachedResponse.content;
+      usage = cachedResponse.usage;
+    } else {
+      // Call Claude API with retry logic
+      console.log('Cache miss - calling Claude API');
+      const response = await callClaudeWithRetry(client, {
+        model: 'claude-3-haiku-20240307', // Using Haiku - fast, reliable model
+        max_tokens: 1500,
+        temperature: 0.2, // Lower temperature for more focused, catalog-only responses
+        system: systemPrompt,
+        messages: messages
+      });
+
+      // Extract text content (defensive: handle missing text property)
+      content = response.content[0]?.type === 'text'
+        ? (response.content[0].text || '')
+        : '';
+
+      usage = {
+        input_tokens: response.usage?.input_tokens || 0,
+        output_tokens: response.usage?.output_tokens || 0
+      };
+
+      // Cache the response
+      setCachedResponse(cacheKey, { content, usage });
+      console.log('Successfully processed Claude API request and cached response');
+    }
 
     // Return successful response
     return {
@@ -100,10 +205,7 @@ export async function handler(event, context) {
       headers,
       body: JSON.stringify({
         content: content,
-        usage: {
-          input_tokens: response.usage?.input_tokens || 0,
-          output_tokens: response.usage?.output_tokens || 0
-        }
+        usage: usage
       })
     };
 
@@ -137,7 +239,8 @@ export async function handler(event, context) {
       statusCode: statusCode,
       headers,
       body: JSON.stringify({
-        error: errorMessage
+        error: errorMessage,
+        fallback: true // Signal to frontend to use fallback
       })
     };
   }
