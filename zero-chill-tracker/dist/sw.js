@@ -1,10 +1,11 @@
 // Service Worker for ZERO CHILL PWA
 const CACHE_NAME = 'zero-chill-v1'
+const BASE_PATH = '/zero-chill-tracker'
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon.svg'
+  `${BASE_PATH}/`,
+  `${BASE_PATH}/index.html`,
+  `${BASE_PATH}/manifest.json`,
+  `${BASE_PATH}/icon.svg`
 ]
 
 // Install event - cache essential files

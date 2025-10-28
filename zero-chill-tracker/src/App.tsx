@@ -57,7 +57,7 @@ function App() {
             >
               <button
                 onClick={handleViewCalendar}
-                className="text-white/70 hover:text-white text-sm font-semibold tracking-wide transition-all duration-300 underline decoration-2 underline-offset-4 hover:decoration-magenta-vibrant"
+                className="text-white/70 hover:text-white text-sm font-semibold tracking-wide transition-all duration-300 underline decoration-2 underline-offset-4 hover:decoration-red-500"
               >
                 View Calendar
               </button>
@@ -118,7 +118,7 @@ function App() {
               >
                 <button
                   onClick={handleViewCalendar}
-                  className="px-8 py-4 bg-gradient-to-br from-purple-rich to-magenta-vibrant text-white rounded-xl font-bold hover:shadow-xl transition-all duration-300 shadow-lg hover:scale-105 active:scale-95"
+                  className="px-8 py-4 bg-gradient-to-br from-slate-700 to-slate-600 text-white rounded-xl font-bold hover:shadow-xl transition-all duration-300 shadow-lg hover:scale-105 active:scale-95"
                 >
                   View Calendar
                 </button>

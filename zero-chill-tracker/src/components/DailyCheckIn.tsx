@@ -68,7 +68,6 @@ export function DailyCheckIn({ onZeroChill, onChill, todayDate }: DailyCheckInPr
             <div className="text-6xl md:text-7xl font-black tracking-tighter leading-none drop-shadow-lg">
               CHILL
             </div>
-            <div className="text-7xl md:text-8xl mt-3 font-black drop-shadow-lg">0</div>
           </div>
 
           {/* Hover glow */}
