@@ -86,26 +86,26 @@ export function CalendarView({ onBack }: CalendarViewProps) {
   return (
     <div className="w-full max-w-5xl px-4">
       <motion.div
-        className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-6 md:p-10"
+        className="bg-slate-900/95 backdrop-blur-sm rounded-3xl shadow-2xl p-6 md:p-10"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4 }}
         style={{
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1)',
         }}
       >
         {/* Header with Back Button */}
         <div className="flex items-center justify-between mb-8">
           <button
             onClick={onBack}
-            className="px-5 py-2.5 bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-xl hover:from-gray-200 hover:to-gray-300 transition-all duration-300 font-semibold text-sm shadow-md hover:shadow-lg"
+            className="px-5 py-2.5 bg-gradient-to-br from-slate-700 to-slate-600 text-white rounded-xl hover:from-slate-600 hover:to-slate-500 transition-all duration-300 font-semibold text-sm shadow-md hover:shadow-lg"
           >
             ← Back
           </button>
           <motion.h1
             className="text-3xl md:text-4xl font-black gradient-text tracking-tight"
           >
-            0 Chill Tracker
+            Zero Chill Tracker
           </motion.h1>
           <div className="w-[80px]"></div> {/* Spacer for centering */}
         </div>
@@ -117,18 +117,18 @@ export function CalendarView({ onBack }: CalendarViewProps) {
         <div className="flex items-center justify-between mb-8 mt-8">
           <button
             onClick={previousMonth}
-            className="px-6 py-3 bg-gradient-to-br from-purple-rich to-magenta-vibrant text-white rounded-xl hover:shadow-xl transition-all duration-300 font-semibold shadow-lg hover:scale-105 active:scale-95"
+            className="px-6 py-3 bg-gradient-to-br from-slate-800 to-slate-700 text-white rounded-xl hover:shadow-xl transition-all duration-300 font-semibold shadow-lg hover:scale-105 active:scale-95"
           >
             ← Prev
           </button>
 
           <div className="flex flex-col items-center">
-            <h2 className="text-2xl md:text-3xl font-black text-gray-800 tracking-tight">
+            <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight">
               {monthNames[month]} {year}
             </h2>
             <button
               onClick={goToToday}
-              className="text-sm font-semibold gradient-text mt-2 hover:opacity-80 transition-opacity"
+              className="text-sm font-semibold text-red-400 hover:text-red-300 mt-2 transition-colors"
             >
               Jump to Today
             </button>
@@ -136,7 +136,7 @@ export function CalendarView({ onBack }: CalendarViewProps) {
 
           <button
             onClick={nextMonth}
-            className="px-6 py-3 bg-gradient-to-br from-purple-rich to-magenta-vibrant text-white rounded-xl hover:shadow-xl transition-all duration-300 font-semibold shadow-lg hover:scale-105 active:scale-95"
+            className="px-6 py-3 bg-gradient-to-br from-slate-800 to-slate-700 text-white rounded-xl hover:shadow-xl transition-all duration-300 font-semibold shadow-lg hover:scale-105 active:scale-95"
           >
             Next →
           </button>
@@ -147,7 +147,7 @@ export function CalendarView({ onBack }: CalendarViewProps) {
           {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
             <div
               key={day}
-              className="text-center text-xs font-bold text-gray-500 uppercase tracking-wider py-2"
+              className="text-center text-xs font-bold text-gray-400 uppercase tracking-wider py-2"
             >
               {day}
             </div>
@@ -183,7 +183,7 @@ export function CalendarView({ onBack }: CalendarViewProps) {
             <div className="text-xl font-bold">0</div>
             <span className="font-semibold">No Chill (0)</span>
           </div>
-          <div className="flex items-center gap-2.5 bg-gray-200 text-gray-700 px-4 py-2 rounded-xl shadow-md">
+          <div className="flex items-center gap-2.5 bg-slate-700 text-gray-300 px-4 py-2 rounded-xl shadow-md">
             <div className="text-xl">•</div>
             <span className="font-semibold">Not tracked</span>
           </div>

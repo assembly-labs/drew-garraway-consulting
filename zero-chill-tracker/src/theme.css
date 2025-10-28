@@ -94,7 +94,7 @@
 
 /* Utility Classes */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-purple-rich), var(--color-magenta-vibrant), var(--color-coral-pink));
+  background: linear-gradient(135deg, #DC2626, #ff6b6b);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
