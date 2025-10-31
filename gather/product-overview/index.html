@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gather Product Overview - Building the infrastructure for how neighbors take care of neighbors. Learn about our users, the problems we solve, and the features we're building.">
+  <title>Gather Product Overview | Users, Problems & Solutions</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============================================
+       HERO SECTION: PRODUCT VISION
+       ============================================ -->
+  <section class="product-hero" id="hero">
+    <div class="container">
+      <p class="eyebrow">Product Overview</p>
+
+      <h1 class="hero-headline">
+        Building infrastructure for
+        <span class="gradient-text">how neighbors take care of neighbors</span>
+      </h1>
+
+      <p class="hero-subheadline">
+        Gather solves the administrative nightmare facing 8,140 US farmers markets
+        while unlocking the $2B in potential sales currently locked away by inconvenience.
+      </p>
+
+      <div class="nav-links">
+        <a href="#users" class="nav-pill">Our Users</a>
+        <a href="#problems" class="nav-pill">The Problems</a>
+        <a href="#solutions" class="nav-pill">Our Solutions</a>
+        <a href="#roadmap" class="nav-pill">Product Roadmap</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 1: THE USERS
+       ============================================ -->
+  <section class="users-section" id="users">
+    <div class="container">
+      <h2 class="section-title">Three users. One ecosystem.</h2>
+      <p class="section-subtitle">
+        Every farmers market has three critical stakeholders. Each faces unique challenges
+        that our platform addresses with purpose-built solutions.
+      </p>
+
+      <div class="user-cards">
+
+        <!-- Margaret the Market Manager -->
+        <div class="user-card primary">
+          <div class="user-badge">Primary User</div>
+          <div class="user-icon manager"></div>
+          <h3>Margaret the Market Manager</h3>
+          <div class="user-demographics">
+            <span class="demo-item">48 years old</span>
+            <span class="demo-item">73% female</span>
+            <span class="demo-item">Part-time/Volunteer</span>
+          </div>
+
+          <div class="user-quote">
+            "I became a market manager to help neighbors connect with good food.
+            Instead, I spend 60 hours a week in Excel hell."
+          </div>
+
+          <div class="user-stats">
+            <div class="stat">
+              <span class="stat-number">40-60</span>
+              <span class="stat-label">hours/week on admin</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">30-50</span>
+              <span class="stat-label">vendors to manage</span>
+            </div>
+          </div>
+
+          <div class="user-details">
+            <h4>Daily Reality</h4>
+            <ul>
+              <li>Managing vendors through spreadsheets and "4-inch binders"</li>
+              <li>4+ hours every Saturday counting SNAP tokens</li>
+              <li>40 hours compiling grant applications</li>
+              <li>Chasing vendors for late booth payments</li>
+              <li>No visibility into what products are available</li>
+            </ul>
+
+            <h4>Success Metrics</h4>
+            <ul class="success-metrics">
+              <li>Time saved on administration</li>
+              <li>Vendor satisfaction scores</li>
+              <li>Successful grant applications</li>
+              <li>Online marketplace revenue</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Victor the Vendor -->
+        <div class="user-card secondary">
+          <div class="user-badge">Secondary User</div>
+          <div class="user-icon vendor"></div>
+          <h3>Victor the Vendor</h3>
+          <div class="user-demographics">
+            <span class="demo-item">Small family farm</span>
+            <span class="demo-item"><$150K revenue</span>
+            <span class="demo-item">36% use digital tools</span>
+          </div>
+
+          <div class="user-quote">
+            "We grow good food the right way. But waiting 45 days for wholesale payment
+            means I can't buy seeds for next season."
+          </div>
+
+          <div class="user-stats">
+            <div class="stat">
+              <span class="stat-number">30-45</span>
+              <span class="stat-label">days to get paid</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">4</span>
+              <span class="stat-label">sales channels to manage</span>
+            </div>
+          </div>
+
+          <div class="user-details">
+            <h4>Daily Reality</h4>
+            <ul>
+              <li>Cash flow nightmare from payment delays</li>
+              <li>Managing inventory across markets, CSA, wholesale</li>
+              <li>No easy way to reach customers online</li>
+              <li>Customers don't know what's available</li>
+              <li>Manual tracking of sales and inventory</li>
+            </ul>
+
+            <h4>Success Metrics</h4>
+            <ul class="success-metrics">
+              <li>Faster payment cycles</li>
+              <li>Increased sales volume</li>
+              <li>Simplified bookkeeping</li>
+              <li>Online customer reach</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Catherine the Customer -->
+        <div class="user-card tertiary">
+          <div class="user-badge">Tertiary User</div>
+          <div class="user-icon customer"></div>
+          <h3>Catherine the Customer</h3>
+          <div class="user-demographics">
+            <span class="demo-item">35-45 years old</span>
+            <span class="demo-item">$96K+ income</span>
+            <span class="demo-item">77% bachelor's+</span>
+          </div>
+
+          <div class="user-quote">
+            "I want to support Tom's farm down the road, not some corporation.
+            But I work Saturdays and can't shop at 8am."
+          </div>
+
+          <div class="user-stats">
+            <div class="stat">
+              <span class="stat-number">51%</span>
+              <span class="stat-label">skip due to inconvenience</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">2-4x</span>
+              <span class="stat-label">larger online baskets</span>
+            </div>
+          </div>
+
+          <div class="user-details">
+            <h4>Daily Reality</h4>
+            <ul>
+              <li>Can't attend Saturday morning markets</li>
+              <li>Doesn't know what products are available</li>
+              <li>Uses Instacart for convenience</li>
+              <li>Wants to support local but needs pre-ordering</li>
+              <li>Values freshness over price</li>
+            </ul>
+
+            <h4>Success Metrics</h4>
+            <ul class="success-metrics">
+              <li>Shopping convenience</li>
+              <li>Product quality</li>
+              <li>Supporting local farms</li>
+              <li>Easy browsing and checkout</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 2: THE PROBLEMS
+       ============================================ -->
+  <section class="problems-section" id="problems">
+    <div class="container">
+      <h2 class="section-title">The broken system crushing good people</h2>
+      <p class="section-subtitle">
+        Each user group faces interconnected problems that compound each other,
+        creating a vicious cycle that limits growth for everyone.
+      </p>
+
+      <!-- Market Manager Problems -->
+      <div class="problem-group">
+        <div class="problem-header">
+          <div class="problem-icon manager"></div>
+          <h3>Market Manager Problems</h3>
+          <p class="problem-impact">Impact: 40-60 hours/week wasted on manual tasks</p>
+        </div>
+
+        <div class="problem-grid">
+          <div class="problem-card critical">
+            <div class="severity-badge">Critical</div>
+            <h4>Vendor Management Chaos</h4>
+            <p>Managing 30+ vendors through spreadsheets, paper applications, and "4-inch binders"</p>
+            <div class="problem-stats">
+              <span>2 hours per vendor onboarding</span>
+              <span>Zero real-time visibility</span>
+            </div>
+          </div>
+
+          <div class="problem-card critical">
+            <div class="severity-badge">Critical</div>
+            <h4>SNAP/EBT Processing Nightmare</h4>
+            <p>Manual token distribution and reconciliation consuming 30-40% of manager time</p>
+            <div class="problem-stats">
+              <span>4 hours every Saturday</span>
+              <span>Error-prone manual counting</span>
+            </div>
+          </div>
+
+          <div class="problem-card high">
+            <div class="severity-badge">High</div>
+            <h4>Grant Reporting Burden</h4>
+            <p>Manual compilation of data for USDA FMPP/LFPP applications</p>
+            <div class="problem-stats">
+              <span>40 hours per application</span>
+              <span>$50K+ in missed funding</span>
+            </div>
+          </div>
+
+          <div class="problem-card high">
+            <div class="severity-badge">High</div>
+            <h4>Fee Collection Issues</h4>
+            <p>Chasing vendors for booth fees, tracking overdue payments manually</p>
+            <div class="problem-stats">
+              <span>60% on-time payment rate</span>
+              <span>Lost revenue from tracking gaps</span>
+            </div>
+          </div>
+
+          <div class="problem-card medium">
+            <div class="severity-badge">Medium</div>
+            <h4>Communication Fragmentation</h4>
+            <p>Information scattered across email, phone, text with frequent missed messages</p>
+            <div class="problem-stats">
+              <span>5% message delivery failure</span>
+              <span>No audit trail</span>
+            </div>
+          </div>
+
+          <div class="problem-card medium">
+            <div class="severity-badge">Medium</div>
+            <h4>Product Visibility Gap</h4>
+            <p>No central system to track what products are available when</p>
+            <div class="problem-stats">
+              <span>"Does anyone have eggs?"</span>
+              <span>Lost sales opportunities</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vendor Problems -->
+      <div class="problem-group">
+        <div class="problem-header">
+          <div class="problem-icon vendor"></div>
+          <h3>Vendor Problems</h3>
+          <p class="problem-impact">Impact: 30-45 day payment delays killing cash flow</p>
+        </div>
+
+        <div class="problem-grid">
+          <div class="problem-card critical">
+            <div class="severity-badge">Critical</div>
+            <h4>Cash Flow Crisis</h4>
+            <p>30-45 day payment delays in wholesale channels while needing cash for operations</p>
+            <div class="problem-stats">
+              <span>$8K stuck in pipeline</span>
+              <span>Can't buy seeds/supplies</span>
+            </div>
+          </div>
+
+          <div class="problem-card high">
+            <div class="severity-badge">High</div>
+            <h4>Multi-Channel Chaos</h4>
+            <p>Managing inventory across farmers markets, CSA, wholesale, farm stand</p>
+            <div class="problem-stats">
+              <span>4+ systems to update</span>
+              <span>Frequent stockouts</span>
+            </div>
+          </div>
+
+          <div class="problem-card high">
+            <div class="severity-badge">High</div>
+            <h4>No Online Presence</h4>
+            <p>No easy way to reach customers online or accept pre-orders</p>
+            <div class="problem-stats">
+              <span>$0 online revenue</span>
+              <span>Missing 51% of customers</span>
+            </div>
+          </div>
+
+          <div class="problem-card medium">
+            <div class="severity-badge">Medium</div>
+            <h4>Customer Discovery</h4>
+            <p>Customers don't know what's available or when</p>
+            <div class="problem-stats">
+              <span>Lost sales daily</span>
+              <span>Product waste</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Problems -->
+      <div class="problem-group">
+        <div class="problem-header">
+          <div class="problem-icon customer"></div>
+          <h3>Customer Problems</h3>
+          <p class="problem-impact">Impact: 51% skip markets due to inconvenience</p>
+        </div>
+
+        <div class="problem-grid">
+          <div class="problem-card critical">
+            <div class="severity-badge">Critical</div>
+            <h4>Limited Market Hours</h4>
+            <p>Saturday 8am-1pm only doesn't work for modern lifestyles</p>
+            <div class="problem-stats">
+              <span>Work conflicts</span>
+              <span>Family obligations</span>
+            </div>
+          </div>
+
+          <div class="problem-card high">
+            <div class="severity-badge">High</div>
+            <h4>No Product Visibility</h4>
+            <p>Don't know what's available without visiting in person</p>
+            <div class="problem-stats">
+              <span>Wasted trips</span>
+              <span>Disappointment</span>
+            </div>
+          </div>
+
+          <div class="problem-card high">
+            <div class="severity-badge">High</div>
+            <h4>Can't Pre-Order</h4>
+            <p>Popular items gone by 9am, no way to reserve</p>
+            <div class="problem-stats">
+              <span>Miss out on favorites</span>
+              <span>Turn to grocery stores</span>
+            </div>
+          </div>
+
+          <div class="problem-card medium">
+            <div class="severity-badge">Medium</div>
+            <h4>Weather Dependency</h4>
+            <p>Is the market even happening today? No way to know</p>
+            <div class="problem-stats">
+              <span>Uncertainty</span>
+              <span>Wasted trips</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Vicious Cycle -->
+      <div class="cycle-visualization">
+        <h3>The Vicious Cycle</h3>
+        <div class="cycle-flow">
+          <div class="cycle-step">
+            <div class="step-number">1</div>
+            <p>Managers drowning in admin work</p>
+          </div>
+          <div class="cycle-arrow">→</div>
+          <div class="cycle-step">
+            <div class="step-number">2</div>
+            <p>Can't build online presence</p>
+          </div>
+          <div class="cycle-arrow">→</div>
+          <div class="cycle-step">
+            <div class="step-number">3</div>
+            <p>Customers choose convenience</p>
+          </div>
+          <div class="cycle-arrow">→</div>
+          <div class="cycle-step">
+            <div class="step-number">4</div>
+            <p>Vendors lose sales</p>
+          </div>
+          <div class="cycle-arrow">→</div>
+          <div class="cycle-step">
+            <div class="step-number">5</div>
+            <p>Markets struggle to grow</p>
+          </div>
+        </div>
+        <p class="cycle-impact">
+          Result: $2B in potential sales locked away while good people suffer
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 3: THE SOLUTIONS
+       ============================================ -->
+  <section class="solutions-section" id="solutions">
+    <div class="container">
+      <h2 class="section-title">One platform. Three transformed experiences.</h2>
+      <p class="section-subtitle">
+        We're building the complete ecosystem that solves every problem for every user,
+        turning a broken system into a thriving marketplace.
+      </p>
+
+      <!-- Phase 1: Core Management Platform -->
+      <div class="solution-phase">
+        <div class="phase-header">
+          <span class="phase-label">Phase 1: MVP (Months 1-6)</span>
+          <h3>Core Market Management Platform</h3>
+          <p>Essential features to rescue market managers from administrative hell</p>
+        </div>
+
+        <div class="feature-grid">
+
+          <div class="feature-card">
+            <div class="feature-icon vendor-mgmt"></div>
+            <h4>Digital Vendor Management</h4>
+            <div class="feature-problem">
+              <span class="label">Solving:</span> Spreadsheet chaos, paper applications
+            </div>
+            <ul class="feature-list">
+              <li>Digital vendor applications with document upload</li>
+              <li>Automated application review workflow</li>
+              <li>Visual stall assignment with market layout</li>
+              <li>Vendor database with certifications tracking</li>
+              <li>Automated waitlist management</li>
+            </ul>
+            <div class="feature-impact">
+              <span class="impact-metric">2 hours → 15 minutes per vendor</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon payment"></div>
+            <h4>Automated Fee Collection</h4>
+            <div class="feature-problem">
+              <span class="label">Solving:</span> Chasing late payments, manual tracking
+            </div>
+            <ul class="feature-list">
+              <li>Automated fee calculation (daily/seasonal)</li>
+              <li>Online payment collection (ACH, credit)</li>
+              <li>Overdue payment reminders</li>
+              <li>Financial reporting dashboard</li>
+              <li>Vendor payout management</li>
+            </ul>
+            <div class="feature-impact">
+              <span class="impact-metric">60% → 90% on-time payments</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon snap"></div>
+            <h4>Digital SNAP/EBT Processing</h4>
+            <div class="feature-problem">
+              <span class="label">Solving:</span> 4 hours manual token counting
+            </div>
+            <ul class="feature-list">
+              <li>Digital SNAP/EBT processing</li>
+              <li>Automated token reconciliation</li>
+              <li>USDA reporting compliance</li>
+              <li>Market Match program management</li>
+              <li>State incentive program support</li>
+            </ul>
+            <div class="feature-impact">
+              <span class="impact-metric">4 hours → 30 minutes weekly</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon communication"></div>
+            <h4>Communication Hub</h4>
+            <div class="feature-problem">
+              <span class="label">Solving:</span> Fragmented messages, lost emails
+            </div>
+            <ul class="feature-list">
+              <li>Broadcast announcements (SMS/email)</li>
+              <li>Vendor-specific messaging</li>
+              <li>Weather alerts and cancellations</li>
+              <li>Newsletter builder with templates</li>
+              <li>Vendor bulletin board</li>
+            </ul>
+            <div class="feature-impact">
+              <span class="impact-metric">95% message delivery rate</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon reporting"></div>
+            <h4>One-Click Grant Reports</h4>
+            <div class="feature-problem">
+              <span class="label">Solving:</span> 40-hour grant applications
+            </div>
+            <ul class="feature-list">
+              <li>Pre-built USDA FMPP/LFPP templates</li>
+              <li>Automatic data compilation</li>
+              <li>Economic impact calculator</li>
+              <li>Customer survey tools</li>
+              <li>Attendance tracking</li>
+            </ul>
+            <div class="feature-impact">
+              <span class="impact-metric">40 hours → 15 minutes</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon catalog"></div>
+            <h4>Product Catalog System</h4>
+            <div class="feature-problem">
+              <span class="label">Solving:</span> No visibility into products
+            </div>
+            <ul class="feature-list">
+              <li>Master product database</li>
+              <li>Seasonal availability tracking</li>
+              <li>Price range management</li>
+              <li>Dietary attributes (vegan, gluten-free)</li>
+              <li>Real-time inventory status</li>
+            </ul>
+            <div class="feature-impact">
+              <span class="impact-metric">Instant product discovery</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Phase 2: Marketplace Platform -->
+      <div class="solution-phase">
+        <div class="phase-header">
+          <span class="phase-label">Phase 2: Growth (Months 7-12)</span>
+          <h3>Full Marketplace Platform</h3>
+          <p>Instacart-like shopping experience that unlocks $2B in trapped sales</p>
+        </div>
+
+        <div class="feature-grid">
+
+          <div class="feature-card">
+            <div class="feature-icon shopping"></div>
+            <h4>Customer Shopping Experience</h4>
+            <div class="feature-problem">
+              <span class="label">Solving:</span> 51% can't attend markets
+            </div>
+            <ul class="feature-list">
+              <li>Browse by category or vendor</li>
+              <li>Search with filters (organic, local)</li>
+              <li>High-quality product photos</li>
+              <li>Multi-vendor shopping cart</li>
+              <li>Scheduled pickup windows</li>
+              <li>Guest checkout option</li>
+            </ul>
+            <div class="feature-impact">
+              <span class="impact-metric">$59 avg basket (vs $28 in-person)</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon inventory"></div>
+            <h4>Vendor Inventory Sync</h4>
+            <div class="feature-problem">
+              <span class="label">Solving:</span> Multi-channel chaos
+            </div>
+            <ul class="feature-list">
+              <li>One inventory system for all channels</li>
+              <li>Real-time availability updates</li>
+              <li>Automated low-stock alerts</li>
+              <li>Price management by channel</li>
+              <li>Voice-to-text product entry</li>
+              <li>Works offline at markets</li>
+            </ul>
+            <div class="feature-impact">
+              <span class="impact-metric">4 systems → 1 unified system</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon mobile"></div>
+            <h4>Mobile Applications</h4>
+            <div class="feature-problem">
+              <span class="label">Solving:</span> Need for on-the-go access
+            </div>
+            <ul class="feature-list">
+              <li>Customer app with barcode scanning</li>
+              <li>Vendor app with photo uploads</li>
+              <li>Manager app for market day</li>
+              <li>Push notifications for orders</li>
+              <li>Offline mode with sync</li>
+              <li>Big buttons for farm use</li>
+            </ul>
+            <div class="feature-impact">
+              <span class="impact-metric">Built for actual farmers</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon fulfillment"></div>
+            <h4>Order Fulfillment System</h4>
+            <div class="feature-problem">
+              <span class="label">Solving:</span> Complex pickup logistics
+            </div>
+            <ul class="feature-list">
+              <li>Consolidated pick lists by vendor</li>
+              <li>Customer pickup check-in</li>
+              <li>QR code for contactless pickup</li>
+              <li>Order status tracking</li>
+              <li>Substitution management</li>
+              <li>Pickup reminders</li>
+            </ul>
+            <div class="feature-impact">
+              <span class="impact-metric">3-minute pickup process</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon analytics"></div>
+            <h4>Analytics & Insights</h4>
+            <div class="feature-problem">
+              <span class="label">Solving:</span> No data for decisions
+            </div>
+            <ul class="feature-list">
+              <li>Sales trends and forecasting</li>
+              <li>Customer behavior analytics</li>
+              <li>Vendor performance metrics</li>
+              <li>Product demand insights</li>
+              <li>Grant impact reporting</li>
+              <li>Economic impact calculator</li>
+            </ul>
+            <div class="feature-impact">
+              <span class="impact-metric">Data-driven growth</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon payment"></div>
+            <h4>Fast Vendor Payments</h4>
+            <div class="feature-problem">
+              <span class="label">Solving:</span> 30-45 day payment delays
+            </div>
+            <ul class="feature-list">
+              <li>7-day payment cycles</li>
+              <li>Automated disbursements</li>
+              <li>Sales reporting dashboard</li>
+              <li>Tax documentation</li>
+              <li>Multiple payout methods</li>
+              <li>Transaction history</li>
+            </ul>
+            <div class="feature-impact">
+              <span class="impact-metric">30-45 days → 7 days</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Integration Capabilities -->
+      <div class="integrations-section">
+        <h3>Seamless Integrations</h3>
+        <div class="integration-grid">
+          <div class="integration-item">
+            <div class="integration-logo stripe"></div>
+            <span>Payment Processing</span>
+          </div>
+          <div class="integration-item">
+            <div class="integration-logo snap"></div>
+            <span>SNAP/EBT</span>
+          </div>
+          <div class="integration-item">
+            <div class="integration-logo twilio"></div>
+            <span>SMS Communications</span>
+          </div>
+          <div class="integration-item">
+            <div class="integration-logo quickbooks"></div>
+            <span>Accounting</span>
+          </div>
+          <div class="integration-item">
+            <div class="integration-logo usda"></div>
+            <span>USDA Reporting</span>
+          </div>
+          <div class="integration-item">
+            <div class="integration-logo maps"></div>
+            <span>Location Services</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 4: PRODUCT ROADMAP
+       ============================================ -->
+  <section class="roadmap-section" id="roadmap">
+    <div class="container">
+      <h2 class="section-title">From MVP to market dominance</h2>
+      <p class="section-subtitle">
+        Our phased approach ensures we solve the most critical problems first,
+        then expand to capture the full market opportunity.
+      </p>
+
+      <div class="roadmap-timeline">
+
+        <!-- Q1 2025 -->
+        <div class="roadmap-quarter">
+          <div class="quarter-header">
+            <h3>Q1 2025</h3>
+            <span class="quarter-label">Foundation</span>
+          </div>
+          <div class="quarter-milestones">
+            <div class="milestone">
+              <div class="milestone-icon"></div>
+              <h4>Core Vendor Management</h4>
+              <p>Digital applications, stall assignments, vendor database</p>
+            </div>
+            <div class="milestone">
+              <div class="milestone-icon"></div>
+              <h4>Fee Collection System</h4>
+              <p>Automated billing, online payments, financial tracking</p>
+            </div>
+            <div class="milestone">
+              <div class="milestone-icon"></div>
+              <h4>Communication Hub</h4>
+              <p>Broadcast messaging, vendor announcements</p>
+            </div>
+          </div>
+          <div class="quarter-metrics">
+            <span class="metric">5 pilot markets</span>
+            <span class="metric">$3K MRR</span>
+          </div>
+        </div>
+
+        <!-- Q2 2025 -->
+        <div class="roadmap-quarter">
+          <div class="quarter-header">
+            <h3>Q2 2025</h3>
+            <span class="quarter-label">Enhancement</span>
+          </div>
+          <div class="quarter-milestones">
+            <div class="milestone">
+              <div class="milestone-icon"></div>
+              <h4>SNAP/EBT Integration</h4>
+              <p>Digital processing, automated reconciliation</p>
+            </div>
+            <div class="milestone">
+              <div class="milestone-icon"></div>
+              <h4>Grant Reporting</h4>
+              <p>One-click USDA reports, impact analytics</p>
+            </div>
+            <div class="milestone">
+              <div class="milestone-icon"></div>
+              <h4>Product Catalog</h4>
+              <p>Inventory management, seasonal tracking</p>
+            </div>
+          </div>
+          <div class="quarter-metrics">
+            <span class="metric">20 markets</span>
+            <span class="metric">$15K MRR</span>
+          </div>
+        </div>
+
+        <!-- Q3 2025 -->
+        <div class="roadmap-quarter highlight">
+          <div class="quarter-header">
+            <h3>Q3 2025</h3>
+            <span class="quarter-label">Marketplace Launch</span>
+          </div>
+          <div class="quarter-milestones">
+            <div class="milestone">
+              <div class="milestone-icon"></div>
+              <h4>Customer Shopping Portal</h4>
+              <p>Browse, search, multi-vendor cart</p>
+            </div>
+            <div class="milestone">
+              <div class="milestone-icon"></div>
+              <h4>Pre-Order System</h4>
+              <p>Scheduled pickup, payment processing</p>
+            </div>
+            <div class="milestone">
+              <div class="milestone-icon"></div>
+              <h4>Vendor Mobile App</h4>
+              <p>Order management, inventory updates</p>
+            </div>
+          </div>
+          <div class="quarter-metrics">
+            <span class="metric">100 markets</span>
+            <span class="metric">$50K MRR</span>
+            <span class="metric">$500K GMV</span>
+          </div>
+        </div>
+
+        <!-- Q4 2025 -->
+        <div class="roadmap-quarter">
+          <div class="quarter-header">
+            <h3>Q4 2025</h3>
+            <span class="quarter-label">Scale</span>
+          </div>
+          <div class="quarter-milestones">
+            <div class="milestone">
+              <div class="milestone-icon"></div>
+              <h4>Customer Mobile Apps</h4>
+              <p>iOS/Android apps with full shopping</p>
+            </div>
+            <div class="milestone">
+              <div class="milestone-icon"></div>
+              <h4>Advanced Analytics</h4>
+              <p>Predictive insights, demand forecasting</p>
+            </div>
+            <div class="milestone">
+              <div class="milestone-icon"></div>
+              <h4>Enterprise Features</h4>
+              <p>Multi-market management, API access</p>
+            </div>
+          </div>
+          <div class="quarter-metrics">
+            <span class="metric">500 markets</span>
+            <span class="metric">$200K MRR</span>
+            <span class="metric">Series A ready</span>
+          </div>
+        </div>
+
+        <!-- 2026 Vision -->
+        <div class="roadmap-future">
+          <h3>2026 & Beyond</h3>
+          <div class="future-vision">
+            <div class="vision-item">
+              <h4>1,000+ Markets</h4>
+              <p>Dominant platform in major metros</p>
+            </div>
+            <div class="vision-item">
+              <h4>$30M ARR</h4>
+              <p>Sustainable unit economics</p>
+            </div>
+            <div class="vision-item">
+              <h4>National Partnerships</h4>
+              <p>USDA, state associations</p>
+            </div>
+            <div class="vision-item">
+              <h4>International Expansion</h4>
+              <p>Canada, UK, Australia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success Metrics -->
+      <div class="success-metrics-section">
+        <h3>How We Measure Success</h3>
+        <div class="metrics-grid">
+
+          <div class="metric-card">
+            <h4>Market Manager Success</h4>
+            <ul>
+              <li>Time saved: 20+ hours/week</li>
+              <li>Vendor satisfaction: NPS >50</li>
+              <li>Grant success rate: 90%+</li>
+              <li>Fee collection: 90% on-time</li>
+            </ul>
+          </div>
+
+          <div class="metric-card">
+            <h4>Vendor Success</h4>
+            <ul>
+              <li>Payment cycle: 7 days</li>
+              <li>Sales increase: 35%+</li>
+              <li>Online revenue: 25% of total</li>
+              <li>Retention rate: 94%</li>
+            </ul>
+          </div>
+
+          <div class="metric-card">
+            <h4>Customer Success</h4>
+            <ul>
+              <li>Basket size: $59 online</li>
+              <li>Repeat rate: 40% monthly</li>
+              <li>Satisfaction: 4.8/5 stars</li>
+              <li>Pickup time: <5 minutes</li>
+            </ul>
+          </div>
+
+          <div class="metric-card">
+            <h4>Platform Success</h4>
+            <ul>
+              <li>Market growth: 100% YoY</li>
+              <li>GMV: $6M+ annually</li>
+              <li>LTV:CAC ratio: 20:1</li>
+              <li>Gross margin: 75%</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 5: TECHNICAL APPROACH
+       ============================================ -->
+  <section class="technical-section" id="technical">
+    <div class="container">
+      <h2 class="section-title">Built for farmers, powered by modern tech</h2>
+      <p class="section-subtitle">
+        Simple interfaces hiding sophisticated technology. Fast development through
+        AI acceleration. Designed for people who work with their hands.
+      </p>
+
+      <div class="tech-stack">
+        <h3>Technology Stack</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <h4>Frontend</h4>
+            <ul>
+              <li>React/Next.js</li>
+              <li>Mobile-first responsive</li>
+              <li>Offline capability</li>
+              <li>Progressive Web App</li>
+            </ul>
+          </div>
+          <div class="stack-item">
+            <h4>Backend</h4>
+            <ul>
+              <li>Node.js/PostgreSQL</li>
+              <li>RESTful API</li>
+              <li>Real-time sync</li>
+              <li>Microservices architecture</li>
+            </ul>
+          </div>
+          <div class="stack-item">
+            <h4>Infrastructure</h4>
+            <ul>
+              <li>AWS/Vercel hosting</li>
+              <li>Cloudflare CDN</li>
+              <li>Redis caching</li>
+              <li>Elasticsearch</li>
+            </ul>
+          </div>
+          <div class="stack-item">
+            <h4>Integrations</h4>
+            <ul>
+              <li>Stripe Connect</li>
+              <li>Twilio SMS</li>
+              <li>Auth0</li>
+              <li>Mixpanel analytics</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="development-approach">
+        <h3>AI-Accelerated Development</h3>
+        <div class="approach-benefits">
+          <div class="benefit">
+            <div class="benefit-icon"></div>
+            <h4>70% Faster Development</h4>
+            <p>Claude Code generates initial codebase, human engineers refine</p>
+          </div>
+          <div class="benefit">
+            <div class="benefit-icon"></div>
+            <h4>6-Month MVP</h4>
+            <p>vs 18 months traditional development</p>
+          </div>
+          <div class="benefit">
+            <div class="benefit-icon"></div>
+            <h4>Rapid Iteration</h4>
+            <p>Weekly feature releases based on user feedback</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="design-principles">
+        <h3>Design Principles</h3>
+        <div class="principles-grid">
+          <div class="principle">
+            <h4>Simple Over Clever</h4>
+            <p>Big buttons, clear language, minimal steps</p>
+          </div>
+          <div class="principle">
+            <h4>Mobile-First</h4>
+            <p>Managers work on-site, vendors in fields</p>
+          </div>
+          <div class="principle">
+            <h4>Offline Capable</h4>
+            <p>Markets have terrible WiFi</p>
+          </div>
+          <div class="principle">
+            <h4>Voice & Photo</h4>
+            <p>No typing with muddy hands</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER / CTA
+       ============================================ -->
+  <footer class="product-footer">
+    <div class="container">
+      <div class="footer-cta">
+        <h2>Ready to transform farmers markets?</h2>
+        <p>
+          We're building the infrastructure for how neighbors take care of neighbors.
+          Join us in bringing 8,140 markets into the digital age.
+        </p>
+        <div class="cta-buttons">
+          <a href="../index.html" class="btn-primary">View Investor Deck</a>
+          <a href="#users" class="btn-secondary">Back to Top</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Gather. Building infrastructure for local food commerce.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+</html>
