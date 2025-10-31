@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gather - Investment Deck</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+      line-height: 1.6;
+      color: #0a0a0a;
+      background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* Enhanced header with animation */
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #2d5016 0%, #4A7C28 50%, #6FA043 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 15px;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .tagline {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      color: #333;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    section {
+      margin-bottom: 80px;
+    }
+
+    h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #4A7C28, #6FA043);
+      border-radius: 2px;
+    }
+
+    .problem {
+      background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+      padding: clamp(25px, 5vw, 40px);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      border: 2px solid rgba(74, 124, 40, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .problem:before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(135deg, #4A7C28, #6FA043);
+      border-radius: 16px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: -1;
+    }
+
+    .problem:hover {
+      box-shadow: 0 15px 50px rgba(74, 124, 40, 0.15);
+    }
+
+    .problem p {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      line-height: 1.8;
+      font-weight: 500;
+      color: #2a2a2a;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: clamp(15px, 3vw, 30px);
+      margin: 30px 0;
+    }
+
+    .stat {
+      text-align: center;
+      padding: clamp(15px, 3vw, 25px);
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .stat:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(74, 124, 40, 0.2);
+      border-color: #4A7C28;
+    }
+
+    .stat-number {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #2d5016, #4A7C28);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      color: #555;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      margin-top: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .solution-points {
+      list-style: none;
+      padding: 0;
+    }
+
+    .solution-points li {
+      padding: 20px;
+      margin-bottom: 15px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      transition: all 0.3s ease;
+      border-left: 5px solid #4A7C28;
+    }
+
+    .solution-points li:hover {
+      transform: translateX(10px);
+      box-shadow: 0 5px 25px rgba(74, 124, 40, 0.15);
+    }
+
+    .solution-points strong {
+      color: #2d5016;
+      display: block;
+      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .traction-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: clamp(15px, 3vw, 25px);
+      margin: 30px 0;
+    }
+
+    .traction-item {
+      background: white;
+      padding: clamp(20px, 4vw, 30px);
+      border-radius: 12px;
+      border-left: 5px solid #FF6B35;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+
+    .traction-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(255, 107, 53, 0.2);
+    }
+
+    .traction-item strong {
+      font-size: clamp(1.2rem, 3vw, 1.4rem);
+      color: #1a1a1a;
+      font-weight: 800;
+    }
+
+    .market-size {
+      background: linear-gradient(135deg, #2d5016 0%, #4A7C28 50%, #6FA043 100%);
+      color: white;
+      padding: clamp(40px, 8vw, 60px) clamp(20px, 5vw, 40px);
+      border-radius: 20px;
+      text-align: center;
+      margin: 40px 0;
+      box-shadow: 0 15px 50px rgba(74, 124, 40, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .market-size:before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    .market-size h3 {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      margin-bottom: 15px;
+      font-weight: 900;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .market-size p {
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      opacity: 0.95;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .team-card {
+      background: white;
+      padding: clamp(25px, 5vw, 40px);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      text-align: center;
+      border: 2px solid rgba(74, 124, 40, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .team-card:hover {
+      box-shadow: 0 15px 50px rgba(74, 124, 40, 0.15);
+      border-color: #4A7C28;
+    }
+
+    .team-card h3 {
+      background: linear-gradient(135deg, #2d5016, #4A7C28);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .team-card .title {
+      color: #555;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      margin-bottom: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .team-card .bio {
+      line-height: 1.8;
+      color: #333;
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+    }
+
+    /* New CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #2d5016 0%, #4A7C28 50%, #6FA043 100%);
+      padding: clamp(40px, 8vw, 60px) clamp(20px, 5vw, 40px);
+      border-radius: 20px;
+      text-align: center;
+      margin: 60px 0;
+      box-shadow: 0 15px 50px rgba(74, 124, 40, 0.3);
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cta-section h2 {
+      color: white;
+      border: none;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 20px;
+      text-transform: none;
+      font-weight: 900;
+    }
+
+    .cta-section h2:after {
+      display: none;
+    }
+
+    .cta-section p {
+      color: rgba(255,255,255,0.9);
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      margin-bottom: 30px;
+      font-weight: 400;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: clamp(15px, 3vw, 20px) clamp(30px, 6vw, 50px);
+      background: white;
+      color: #2d5016;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      background: #f0f0f0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px 15px;
+      }
+
+      section {
+        margin-bottom: 50px;
+      }
+
+      .traction-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h2:after {
+        width: 60px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .solution-points li {
+        padding: 15px;
+      }
+
+      .solution-points li:hover {
+        transform: translateX(5px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Gather</h1>
+      <p class="tagline">The operating system for farmers markets</p>
+    </header>
+
+    <section>
+      <h2>The Problem</h2>
+      <div class="problem">
+        <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 20px;">
+          10,000 farmers markets operate like it's 1995. Managers spend 60 hours per week on admin tasks that should take 15. Vendors wait 30-45 days for payments. Customers can't find what they want. Everyone loses.
+        </p>
+        <div class="stat-grid">
+          <div class="stat">
+            <span class="stat-number">$2B</span>
+            <span class="stat-label">Lost annual revenue</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">60hrs</span>
+            <span class="stat-label">Weekly admin burden</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">51%</span>
+            <span class="stat-label">Can't shop (wrong hours)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Our Solution</h2>
+      <ul class="solution-points">
+        <li><strong>For Managers:</strong> One platform replacing Excel, email, paper. Automated SNAP processing, vendor management, grant reporting.</li>
+        <li><strong>For Vendors:</strong> 7-day payments (not 30-45), unified inventory across all sales channels, 35% sales increase from online orders.</li>
+        <li><strong>For Customers:</strong> Browse and pre-order from all vendors, one checkout, pickup anytime. Instacart convenience for local food.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Traction</h2>
+      <div class="traction-grid">
+        <div class="traction-item">
+          <strong>20 markets signed</strong><br>
+          50 more in pipeline
+        </div>
+        <div class="traction-item">
+          <strong>$3K MRR</strong><br>
+          Growing 40% month-over-month
+        </div>
+        <div class="traction-item">
+          <strong>3 state associations</strong><br>
+          Letters of intent signed
+        </div>
+        <div class="traction-item">
+          <strong>USDA partnership</strong><br>
+          In active discussions
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="market-size">
+        <h3>$3.5B</h3>
+        <p>Total Addressable Market</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Business Model</h2>
+      <ul class="solution-points">
+        <li><strong>Market SaaS:</strong> $99-299/month per market (core platform)</li>
+        <li><strong>Transaction fees:</strong> 2.9% + $0.30 on marketplace orders</li>
+        <li><strong>Premium features:</strong> Advanced analytics, multi-market chains</li>
+        <li><strong>Path to profit:</strong> Break-even at 150 markets (18 months)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Team</h2>
+      <div class="team-card">
+        <h3>Carlo Luciano</h3>
+        <p class="title">Founder & CEO</p>
+        <p class="bio">
+          Built Berwyn Farmers Market from 15 to 70+ vendors. Former product leader at tech startups.
+          Lived the problem, building the solution. Knows every market manager in Illinois by name.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="cta-section">
+        <h2>Ready to Transform Farmers Markets?</h2>
+        <p>Let's discuss how Gather can revolutionize your local food ecosystem</p>
+        <a href="mailto:carlo@culinaryharvest.com" class="cta-button">Connect with Carlo</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Gather - Taking care of neighbors at scale</p>
+      <p>Contact: carlo@culinaryharvest.com</p>
+    </footer>
+  </div>
+</body>
+</html>

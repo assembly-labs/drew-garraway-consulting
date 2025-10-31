@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gather - Building infrastructure for local food systems. Helping 8,140 farmers markets connect with neighbors through modern technology.">
+  <title>Gather - Good Things from Good People | Series Seed $2M</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ============================================
+       SECTION 1: HERO
+       ============================================ -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <p class="eyebrow">Series Seed • $2M Raise</p>
+
+      <h1 class="hero-headline">
+        8,140 farmers markets. 147,000 vendors. 8 million neighbors.
+        <span class="gradient-text">All trapped in 1995.</span>
+      </h1>
+
+      <p class="hero-subheadline">
+        Every Saturday, good people gather to share good things.
+        But they're drowning in spreadsheets, paper, and systems
+        built for corporations—not communities.
+      </p>
+
+      <p class="hero-subheadline">
+        We're building the platform that helps neighbors take care
+        of neighbors. No middlemen. No mystery. Just good food from
+        good people who live nearby.
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-value" data-count="40-60">40-60</div>
+          <div class="stat-unit">hours/week</div>
+          <div class="stat-label">managers waste on admin</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" data-count="30-45">30-45</div>
+          <div class="stat-unit">days</div>
+          <div class="stat-label">vendors wait for payment</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" data-count="51">51</div>
+          <div class="stat-unit">percent</div>
+          <div class="stat-label">of neighbors skip markets (inconvenience)</div>
+        </div>
+      </div>
+
+      <div class="hero-cta">
+        <a href="#solution-manager" class="btn-primary">See How We Fix This</a>
+        <a href="#berwyn" class="btn-secondary">See Real Results</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 2: THE THREE NEIGHBORS
+       ============================================ -->
+  <section class="audiences" id="neighbors">
+    <div class="container">
+      <h2 class="section-title">Three neighbors. One broken system.</h2>
+      <p class="section-subtitle">
+        You know what's beautiful? When good people choose to grow food,
+        manage markets, or support local farms. They're special.
+        But the tools they're forced to use? Not so much.
+      </p>
+
+      <div class="audience-grid">
+
+        <!-- Margaret the Market Manager -->
+        <div class="audience-card">
+          <div class="card-content">
+            <h3>Margaret the Market Manager</h3>
+            <p class="card-quote">
+              "I became a market manager to help neighbors connect
+              with good food. Instead, I spend 60 hours a week in
+              Excel hell."
+            </p>
+            <ul class="pain-points">
+              <li>Manages 30-50 vendors in spreadsheets</li>
+              <li>4 hours every Saturday counting SNAP tokens</li>
+              <li>Chasing late booth fee payments</li>
+              <li>Grant applications take 40 hours</li>
+            </ul>
+            <div class="stat-badge">
+              <span class="badge-number">40-60</span>
+              <span class="badge-text">hours/week on admin work</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Victor the Vendor -->
+        <div class="audience-card">
+          <div class="card-content">
+            <h3>Victor the Vendor</h3>
+            <p class="card-quote">
+              "We grow good food the right way. But when I'm waiting
+              45 days for wholesale payment, I can't buy seeds for
+              next season."
+            </p>
+            <ul class="pain-points">
+              <li>Cash flow nightmare (30-45 day payments)</li>
+              <li>Inventory chaos across 4 sales channels</li>
+              <li>No way to reach customers online</li>
+              <li>Customers don't know what's available</li>
+            </ul>
+            <div class="stat-badge">
+              <span class="badge-number">30-45</span>
+              <span class="badge-text">days to get paid (wholesale)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Catherine the Customer -->
+        <div class="audience-card">
+          <div class="card-content">
+            <h3>Catherine the Customer</h3>
+            <p class="card-quote">
+              "I want to support Tom's farm down the road, not some
+              corporation. But I work Saturdays and can't shop at 8am."
+            </p>
+            <ul class="pain-points">
+              <li>Can't attend Saturday morning markets</li>
+              <li>Doesn't know what's in stock</li>
+              <li>Uses Instacart for convenience</li>
+              <li>Wants local but needs pre-ordering</li>
+            </ul>
+            <div class="stat-badge">
+              <span class="badge-number">51%</span>
+              <span class="badge-text">skip markets (inconvenience)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 3: PROBLEM - MARGARET
+       ============================================ -->
+  <section class="problem-margaret" id="problem-manager">
+    <div class="container">
+      <div class="problem-header">
+        <h2>Margaret's typical Saturday (The way it is now)</h2>
+        <p class="subtitle">
+          Market managers are good people trying to build something
+          beautiful for their community. The tools they're stuck with?
+          Built for 1995.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">6:00am</div>
+          <div class="event">
+            <strong>Prints vendor lists from Excel</strong>
+            <p>Last-minute changes? Too bad. Already printed.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">7:00am</div>
+          <div class="event">
+            <strong>SNAP/EBT token distribution</strong>
+            <p>Manual counting. Paper reconciliation. Will take 4 hours later.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">8:00am</div>
+          <div class="event">
+            <strong>Customer: "Does anyone have eggs?"</strong>
+            <p>Margaret has no idea. Walks around asking 30 vendors.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">10:00am</div>
+          <div class="event">
+            <strong>Vendor disputes booth fee</strong>
+            <p>"I paid last week!" No record. Email lost. Conflict.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">2:00pm</div>
+          <div class="event">
+            <strong>Market ends. Work begins.</strong>
+            <p>4 hours reconciling SNAP. 2 hours updating spreadsheets.
+               1 hour sending emails. Rinse, repeat.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="problem-callout">
+        <h3>The Real Cost</h3>
+        <ul>
+          <li><strong>60 hours/week</strong> on admin (should be 15-20)</li>
+          <li><strong>$50K lost funding</strong> from missed grant deadlines</li>
+          <li><strong>High turnover</strong> in manager roles (burnout)</li>
+          <li><strong>No data</strong> to prove market impact</li>
+        </ul>
+        <p class="callout-quote">
+          "You know what? Market managers deserve better. They're building
+          something good. They shouldn't be drowning in paperwork."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 4: SOLUTION - MARGARET
+       ============================================ -->
+  <section class="solution-manager" id="solution-manager">
+    <div class="container">
+      <h2 class="section-title">
+        Margaret's Saturday (With Gather)
+        <span class="subtitle-block">Taking care of neighbors, not spreadsheets</span>
+      </h2>
+
+      <div class="before-after">
+        <div class="before">
+          <h3>Before</h3>
+          <div class="time-badge bad">60 hours/week</div>
+          <p>Excel, email, paper, chaos</p>
+        </div>
+
+        <div class="arrow">→</div>
+
+        <div class="after">
+          <h3>After</h3>
+          <div class="time-badge good">15 hours/week</div>
+          <p>One system, automated, simple</p>
+        </div>
+      </div>
+
+      <div class="feature-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon"></div>
+          <h3>Vendor Management</h3>
+          <div class="problem-solution">
+            <p class="problem-text">Excel chaos, paper applications</p>
+            <p class="arrow">↓</p>
+            <p class="solution-text">Digital applications, auto-assignments</p>
+          </div>
+          <div class="result">
+            <strong>Result:</strong> 2 hours → 15 minutes per vendor
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"></div>
+          <h3>SNAP/EBT Digital Processing</h3>
+          <div class="problem-solution">
+            <p class="problem-text">4 hours counting tokens every Saturday</p>
+            <p class="arrow">↓</p>
+            <p class="solution-text">Digital processing, auto-reconciliation</p>
+          </div>
+          <div class="result">
+            <strong>Result:</strong> 4 hours → 30 minutes
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"></div>
+          <h3>One-Click Grant Reports</h3>
+          <div class="problem-solution">
+            <p class="problem-text">40 hours compiling USDA applications</p>
+            <p class="arrow">↓</p>
+            <p class="solution-text">Pre-filled FMPP/LFPP reports, one click</p>
+          </div>
+          <div class="result">
+            <strong>Result:</strong> 40 hours → 15 minutes
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"></div>
+          <h3>Communication Hub</h3>
+          <div class="problem-solution">
+            <p class="problem-text">Email chains, lost messages</p>
+            <p class="arrow">↓</p>
+            <p class="solution-text">Broadcast SMS, vendor messaging</p>
+          </div>
+          <div class="result">
+            <strong>Result:</strong> 95% message delivery rate
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"></div>
+          <h3>Automated Fee Collection</h3>
+          <div class="problem-solution">
+            <p class="problem-text">Chasing vendors for late payments</p>
+            <p class="arrow">↓</p>
+            <p class="solution-text">Auto-collection, payment reminders</p>
+          </div>
+          <div class="result">
+            <strong>Result:</strong> 60% → 90% on-time payments
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"></div>
+          <h3>Product Catalog</h3>
+          <div class="problem-solution">
+            <p class="problem-text">"Does anyone have eggs?" (No idea)</p>
+            <p class="arrow">↓</p>
+            <p class="solution-text">Real-time inventory, searchable</p>
+          </div>
+          <div class="result">
+            <strong>Result:</strong> Instant answers for customers
+          </div>
+        </div>
+
+      </div>
+
+      <div class="solution-summary">
+        <h3>Margaret gets her life back</h3>
+        <p>
+          You know what's beautiful? When market managers can actually
+          enjoy the market. Spend time with vendors. Chat with neighbors.
+          Build community—instead of drowning in admin work.
+        </p>
+        <div class="stat-highlight">
+          <span class="big-number">45</span>
+          <span class="big-label">hours saved every week</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 5: PROBLEM - VICTOR
+       ============================================ -->
+  <section class="problem-victor" id="problem-vendor">
+    <div class="container">
+      <h2 class="section-title">Victor's cash flow nightmare (Why small farms struggle)</h2>
+      <p class="section-subtitle">
+        Good people growing good food the right way. But the system
+        punishes them for choosing neighbors over corporations.
+      </p>
+
+      <div class="cash-flow-visual">
+        <div class="flow-item">
+          <div class="day">Monday</div>
+          <div class="action">Delivers $2,000 to wholesale</div>
+          <div class="payment-status delayed">Payment: 30-45 days</div>
+        </div>
+
+        <div class="flow-item">
+          <div class="day">Tuesday</div>
+          <div class="action">Farmers market (cash sales)</div>
+          <div class="payment-status good">Payment: Same day</div>
+        </div>
+
+        <div class="flow-item">
+          <div class="day">Wednesday</div>
+          <div class="action">CSA packing & delivery</div>
+          <div class="payment-status good">Payment: Upfront</div>
+        </div>
+
+        <div class="flow-item">
+          <div class="day">Thursday</div>
+          <div class="action">Another farmers market</div>
+          <div class="payment-status good">Payment: Same day</div>
+        </div>
+
+        <div class="flow-item">
+          <div class="day">Friday</div>
+          <div class="action">Farm stand open</div>
+          <div class="payment-status good">Payment: Same day</div>
+        </div>
+
+        <div class="flow-item">
+          <div class="day">Sunday</div>
+          <div class="action">Inventory chaos</div>
+          <div class="questions">
+            What sold where?<br>
+            What's available next week?<br>
+            Update 3 different systems?
+          </div>
+        </div>
+      </div>
+
+      <div class="problem-callout">
+        <h3>The Brutal Reality</h3>
+        <div class="reality-grid">
+          <div class="reality-stat">
+            <div class="stat-number">$5,000</div>
+            <div class="stat-label">Needs for seeds TODAY</div>
+          </div>
+          <div class="reality-stat">
+            <div class="stat-number">$8,000</div>
+            <div class="stat-label">Stuck in wholesale pipeline</div>
+          </div>
+          <div class="reality-stat">
+            <div class="stat-number">36%</div>
+            <div class="stat-label">of small farms use NO digital tools</div>
+          </div>
+          <div class="reality-stat">
+            <div class="stat-number">$0</div>
+            <div class="stat-label">Online sales (no e-commerce option)</div>
+          </div>
+        </div>
+
+        <p class="callout-quote">
+          "You know what? Victor chose to grow food for neighbors instead
+          of selling to corporations. He deserves better than being punished
+          for doing the right thing."
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 6: SOLUTION - VICTOR
+       ============================================ -->
+  <section class="solution-vendor" id="solution-vendor">
+    <div class="container">
+      <h2 class="section-title">How we make Victor's farm profitable</h2>
+      <p class="section-subtitle">
+        Fast payments. One inventory system. Online reach.
+        Simple tools that respect how farmers actually work.
+      </p>
+
+      <div class="solution-grid">
+
+        <div class="solution-feature">
+          <div class="feature-number">1</div>
+          <h3>ONE Inventory System</h3>
+          <div class="visual-flow">
+            <div class="flow-box">
+              Update inventory once<br>(takes 30 seconds)
+            </div>
+            <div class="flow-arrow">↓ Syncs to ↓</div>
+            <div class="flow-destinations">
+              <span class="destination">Berwyn Market</span>
+              <span class="destination">Ardmore Market</span>
+              <span class="destination">Online Pre-orders</span>
+              <span class="destination">Farm Stand</span>
+            </div>
+          </div>
+          <div class="result-badge">
+            No more "sorry, sold out" disappointments
+          </div>
+        </div>
+
+        <div class="solution-feature">
+          <div class="feature-number">2</div>
+          <h3>7-Day Payments (Not 30-45)</h3>
+          <div class="payment-comparison">
+            <div class="payment-option gather">
+              <h4>With Gather</h4>
+              <div class="timeline-simple">
+                Saturday: Sales at market<br>
+                Following Friday: Money in bank
+              </div>
+            </div>
+            <div class="vs">vs.</div>
+            <div class="payment-option wholesale">
+              <h4>Wholesale</h4>
+              <div class="timeline-simple">
+                Monday: Deliver<br>
+                30-45 days later: Maybe get paid
+              </div>
+            </div>
+          </div>
+          <div class="result-badge">
+            Cash flow for growth
+          </div>
+        </div>
+
+        <div class="solution-feature">
+          <div class="feature-number">3</div>
+          <h3>Online Sales Channel (Free)</h3>
+          <p>
+            Customers can pre-order online. Victor sees orders on phone.
+            Packs Friday, delivers Saturday. Guaranteed sales, zero waste.
+          </p>
+          <div class="result-badge">
+            35% sales increase (Berwyn data)
+          </div>
+        </div>
+
+        <div class="solution-feature">
+          <div class="feature-number">4</div>
+          <h3>Reach the 51% Who Can't Attend</h3>
+          <p>
+            <strong>Before:</strong> Only people at 8am get heirloom tomatoes<br>
+            <strong>After:</strong> Office workers pre-order, pickup 3pm when they're free
+          </p>
+          <div class="result-badge">
+            2-4x larger basket sizes online ($59 vs $28)
+          </div>
+        </div>
+
+        <div class="solution-feature">
+          <div class="feature-number">5</div>
+          <h3>Dead Simple Tools</h3>
+          <ul class="feature-list">
+            <li>Take photo → auto-lists product</li>
+            <li>Voice description (no typing)</li>
+            <li>Works offline (bad market wifi)</li>
+            <li>Big buttons (works with gloves on)</li>
+          </ul>
+          <div class="result-badge">
+            Built for actual farmers, not tech bros
+          </div>
+        </div>
+
+      </div>
+
+      <div class="solution-summary">
+        <h3>Victor's Bottom Line</h3>
+        <div class="bottom-line-grid">
+          <div class="bl-item">
+            <div class="bl-label">Cash flow</div>
+            <div class="bl-value">30-45 days → 7 days</div>
+          </div>
+          <div class="bl-item">
+            <div class="bl-label">Sales channels</div>
+            <div class="bl-value">3 manual → 5 automated</div>
+          </div>
+          <div class="bl-item">
+            <div class="bl-label">Revenue</div>
+            <div class="bl-value">+35% from online</div>
+          </div>
+          <div class="bl-item">
+            <div class="bl-label">Time saved</div>
+            <div class="bl-value">5 hours/week</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 7: PROBLEM - CATHERINE
+       ============================================ -->
+  <section class="problem-catherine" id="problem-customer">
+    <div class="container">
+      <h2 class="section-title">The convenience gap (Why good people skip farmers markets)</h2>
+      <p class="section-subtitle">
+        Catherine wants to support Tom's farm down the road, not some
+        corporation. But choosing local shouldn't mean sacrificing
+        convenience. That's not radical. That's just sensible.
+      </p>
+
+      <div class="friction-points">
+        <div class="friction-item">
+          <div class="friction-icon"></div>
+          <h4>Saturday 8am-1pm only</h4>
+          <p>I work. Kids have soccer. Can't make it.</p>
+        </div>
+
+        <div class="friction-item">
+          <div class="friction-icon"></div>
+          <h4>Don't know what's available</h4>
+          <p>Drive 20 minutes, heirloom tomatoes sold out.</p>
+        </div>
+
+        <div class="friction-item">
+          <div class="friction-icon"></div>
+          <h4>Can't pre-order</h4>
+          <p>Popular items gone by 9am. Too late.</p>
+        </div>
+
+        <div class="friction-item">
+          <div class="friction-icon"></div>
+          <h4>Weather dependent</h4>
+          <p>Is market even happening today? No idea.</p>
+        </div>
+
+        <div class="friction-item">
+          <div class="friction-icon"></div>
+          <h4>Cash only (some vendors)</h4>
+          <p>Need to find ATM first. Extra step.</p>
+        </div>
+
+        <div class="friction-item">
+          <div class="friction-icon"></div>
+          <h4>Separate transactions per vendor</h4>
+          <p>Juggling 5 different payments. Tedious.</p>
+        </div>
+      </div>
+
+      <div class="what-catherine-does">
+        <h3>What Catherine actually does:</h3>
+        <div class="flow-simple">
+          <div class="step">Opens Instacart</div>
+          <div class="arrow">→</div>
+          <div class="step">Orders from Whole Foods</div>
+          <div class="arrow">→</div>
+          <div class="step">Delivered in 2 hours</div>
+          <div class="arrow">→</div>
+          <div class="step guilt">Doesn't support local farmers<br>(feels guilty)</div>
+        </div>
+      </div>
+
+      <div class="opportunity-callout">
+        <h3>The Lost Opportunity</h3>
+        <div class="opportunity-stats">
+          <div class="opp-stat">
+            <div class="opp-number">8M</div>
+            <div class="opp-label">people visit markets weekly</div>
+          </div>
+          <div class="plus">+</div>
+          <div class="opp-stat">
+            <div class="opp-number">40M</div>
+            <div class="opp-label">MORE want to but can't</div>
+          </div>
+          <div class="equals">=</div>
+          <div class="opp-stat highlight">
+            <div class="opp-number">$2B</div>
+            <div class="opp-label">in potential sales locked away</div>
+          </div>
+        </div>
+
+        <p class="callout-quote">
+          "You deserve to support your neighbors without sacrificing
+          convenience. That shouldn't be a hard choice."
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 8: SOLUTION - CATHERINE
+       ============================================ -->
+  <section class="solution-marketplace" id="solution-marketplace">
+    <div class="container">
+      <h2 class="section-title">Instacart convenience. Farmers market magic.</h2>
+      <p class="section-subtitle">
+        Catherine gets to support neighbors without waking up at 6am.
+        That's not asking for much. That's just being a good neighbor.
+      </p>
+
+      <div class="customer-journey">
+        <div class="journey-step">
+          <div class="step-time">Thursday 8pm (on couch)</div>
+          <div class="step-content">
+            <h4>Opens Gather app</h4>
+            <ul>
+              <li>Sees Berwyn Farmers Market</li>
+              <li>Browses 70+ vendors</li>
+              <li>Filters: Organic, Tomatoes</li>
+              <li>Finds heirloom tomatoes from Mitchell Farm</li>
+              <li>Reads: "Picked Friday morning"</li>
+            </ul>
+            <div class="continues">Adds to cart, keeps shopping...</div>
+          </div>
+        </div>
+
+        <div class="journey-step">
+          <div class="step-time">Still Thursday 8pm</div>
+          <div class="step-content">
+            <h4>Builds her cart</h4>
+            <div class="cart-visual">
+              <div class="cart-item">Sourdough - Village Bakery</div>
+              <div class="cart-item">Grass-fed beef - Hilltop Farm</div>
+              <div class="cart-item">Fresh eggs - Happy Hens</div>
+              <div class="cart-item">Honey - Bee Haven</div>
+              <div class="cart-item">Flowers - Petal & Stem</div>
+            </div>
+            <div class="cart-summary">
+              <strong>One cart. Five vendors. One checkout.</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="journey-step">
+          <div class="step-time">Saturday 3pm (after soccer)</div>
+          <div class="step-content">
+            <h4>Picks up at market</h4>
+            <ul>
+              <li>Shows QR code at pickup tent</li>
+              <li>All orders packed, labeled, ready</li>
+              <li>Takes 3 minutes</li>
+              <li>Supports 5 local farms</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="features-comparison">
+        <div class="comparison-column">
+          <h3>Instacart Features</h3>
+          <ul class="feature-checklist">
+            <li>Browse by category or vendor</li>
+            <li>High-quality product photos</li>
+            <li>Real-time inventory</li>
+            <li>Multi-vendor cart</li>
+            <li>Saved favorites & shopping lists</li>
+            <li>SNAP/EBT accepted</li>
+            <li>Schedule pickup time</li>
+            <li>Mobile-first design</li>
+          </ul>
+        </div>
+
+        <div class="plus-sign">+</div>
+
+        <div class="comparison-column magic">
+          <h3>Local Food Magic</h3>
+          <ul class="feature-checklist">
+            <li>See farm stories & methods</li>
+            <li>Know exactly when picked</li>
+            <li>Direct connection to growers</li>
+            <li>Support actual neighbors</li>
+            <li>No mystery ingredients</li>
+            <li>Food from 5 miles, not 1,500</li>
+            <li>Farmers get fair prices</li>
+            <li>Community, not corporations</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="triple-win">
+        <h3>Why this changes everything</h3>
+
+        <div class="win-grid">
+          <div class="win-card">
+            <h4>For Customers</h4>
+            <ul>
+              <li>Shop 24/7, not just Saturday mornings</li>
+              <li>Know what's available before driving</li>
+              <li>Pre-order, guaranteed product</li>
+              <li>Support local WITHOUT sacrificing convenience</li>
+            </ul>
+          </div>
+
+          <div class="win-card">
+            <h4>For Markets</h4>
+            <ul>
+              <li>Reach the 40M who want local but can't attend</li>
+              <li>2-4x larger basket sizes</li>
+              <li>Compete with Instacart/Whole Foods</li>
+              <li>New revenue stream</li>
+            </ul>
+          </div>
+
+          <div class="win-card">
+            <h4>For Vendors</h4>
+            <ul>
+              <li>Reach customers who'll never wake up at 6am</li>
+              <li>Pre-sold inventory (zero waste)</li>
+              <li>Larger orders ($59 vs $28)</li>
+              <li>Predictable revenue</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 9: BERWYN CASE STUDY
+       ============================================ -->
+  <section class="berwyn-case-study" id="berwyn">
+    <div class="container">
+      <h2 class="section-title">From 15 vendors to "Best of Main Line" in 18 months</h2>
+      <p class="section-subtitle">
+        This isn't a theory. This is Carlo's actual market.
+        Real neighbors. Real results. Real transformation.
+      </p>
+
+      <div class="berwyn-timeline">
+        <div class="timeline-milestone">
+          <div class="milestone-date">Jan 2023</div>
+          <div class="milestone-event">Launched with 15 vendors</div>
+          <div class="milestone-detail">Manual operations, Excel chaos</div>
+        </div>
+
+        <div class="timeline-milestone">
+          <div class="milestone-date">Jun 2023</div>
+          <div class="milestone-event">Implemented Gather platform</div>
+          <div class="milestone-detail">Digital vendor management live</div>
+        </div>
+
+        <div class="timeline-milestone">
+          <div class="milestone-date">Sep 2023</div>
+          <div class="milestone-event">Launched online pre-ordering</div>
+          <div class="milestone-detail">$50K first season GMV</div>
+        </div>
+
+        <div class="timeline-milestone">
+          <div class="milestone-date">May 2024</div>
+          <div class="milestone-event">Expanded to 70+ vendors</div>
+          <div class="milestone-detail">140% vendor growth</div>
+        </div>
+
+        <div class="timeline-milestone highlight">
+          <div class="milestone-date">Oct 2024</div>
+          <div class="milestone-event">Won "Best of Main Line"</div>
+          <div class="milestone-detail">4.8/5 customer rating</div>
+        </div>
+      </div>
+
+      <div class="results-grid">
+
+        <div class="result-card manager">
+          <h3>Margaret (Manager) Wins</h3>
+          <div class="result-stats">
+            <div class="result-stat">
+              <div class="stat-number">20</div>
+              <div class="stat-label">hours/week saved</div>
+            </div>
+            <div class="result-stat">
+              <div class="stat-number">90%</div>
+              <div class="stat-label">on-time payments (up from 60%)</div>
+            </div>
+            <div class="result-stat">
+              <div class="stat-number">15 min</div>
+              <div class="stat-label">grant apps (was 40 hours)</div>
+            </div>
+            <div class="result-stat">
+              <div class="stat-number">NPS 72</div>
+              <div class="stat-label">vendor satisfaction</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card vendor">
+          <h3>Victor (Vendor) Wins</h3>
+          <div class="result-stats">
+            <div class="result-stat">
+              <div class="stat-number">+35%</div>
+              <div class="stat-label">average sales increase</div>
+            </div>
+            <div class="result-stat">
+              <div class="stat-number">7 days</div>
+              <div class="stat-label">payment cycle (vs 30-45)</div>
+            </div>
+            <div class="result-stat">
+              <div class="stat-number">94%</div>
+              <div class="stat-label">vendor retention</div>
+            </div>
+            <div class="result-stat">
+              <div class="stat-number">1</div>
+              <div class="stat-label">inventory system (was 4)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card customer">
+          <h3>Catherine (Customer) Wins</h3>
+          <div class="result-stats">
+            <div class="result-stat">
+              <div class="stat-number">24/7</div>
+              <div class="stat-label">online shopping</div>
+            </div>
+            <div class="result-stat">
+              <div class="stat-number">$59</div>
+              <div class="stat-label">avg basket (vs $28 in-person)</div>
+            </div>
+            <div class="result-stat">
+              <div class="stat-number">40%</div>
+              <div class="stat-label">repeat monthly buyers</div>
+            </div>
+            <div class="result-stat">
+              <div class="stat-number">4.8/5</div>
+              <div class="stat-label">satisfaction rating</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="testimonials">
+
+        <div class="testimonial-card">
+          <blockquote>
+            "Gather gave me my weekends back. I went from 60-hour weeks
+            to 15 hours. Now I can actually enjoy the market and build
+            relationships with vendors—which is why I started this in
+            the first place."
+          </blockquote>
+          <div class="testimonial-attribution">
+            <strong>Carlo Luciano</strong><br>
+            Market Manager, Berwyn Farmers Market
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <blockquote>
+            "My sales increased 40% in one season. And customers who work
+            during market hours can finally buy from me. That's money I can
+            invest back into the farm—better seeds, better equipment,
+            better everything."
+          </blockquote>
+          <div class="testimonial-attribution">
+            <strong>Tom Mitchell</strong><br>
+            Owner, Mitchell Family Farm
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <blockquote>
+            "I live 5 minutes away but could never make Saturday mornings.
+            Now I pre-order Thursday and pickup after work. I finally get
+            to support Tom's farm down the road instead of some corporation.
+            Game changer."
+          </blockquote>
+          <div class="testimonial-attribution">
+            <strong>Jennifer Walsh</strong><br>
+            Weekly Customer
+          </div>
+        </div>
+
+      </div>
+
+      <div class="proof-statement">
+        <h3>This isn't a pitch. This is a proven playbook.</h3>
+        <p>
+          One market. Three transformed experiences. 140% growth.
+          "Best of Main Line" award. Happy neighbors.
+        </p>
+        <p class="cta-lead">
+          Now let's do this for 8,139 more markets.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 10: MARKET OPPORTUNITY
+       ============================================ -->
+  <section class="market-opportunity" id="opportunity">
+    <div class="container">
+      <h2 class="section-title">One successful market. 8,139 to go.</h2>
+      <p class="section-subtitle">
+        This isn't just about software. It's about building infrastructure
+        for how neighbors take care of neighbors at scale.
+      </p>
+
+      <div class="market-circles">
+        <div class="circle-container">
+          <div class="market-circle tam">
+            <div class="circle-content">
+              <div class="circle-value">$1.7B</div>
+              <div class="circle-label">Total Addressable Market</div>
+              <div class="circle-detail">8,140 US farmers markets</div>
+            </div>
+          </div>
+
+          <div class="market-circle sam">
+            <div class="circle-content">
+              <div class="circle-value">$600M</div>
+              <div class="circle-label">Serviceable Market</div>
+              <div class="circle-detail">Technology-ready markets</div>
+            </div>
+          </div>
+
+          <div class="market-circle som">
+            <div class="circle-content">
+              <div class="circle-value">$90M</div>
+              <div class="circle-label">5-Year Target</div>
+              <div class="circle-detail">1,000 markets at scale</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-now">
+        <h3>Why now? The perfect storm.</h3>
+        <div class="why-now-grid">
+
+          <div class="reason-card">
+            <div class="reason-icon"></div>
+            <h4>Post-COVID digital acceleration</h4>
+            <div class="reason-stat">26% of markets now accept online orders</div>
+            <p>5x increase from 2019. The shift is permanent.</p>
+          </div>
+
+          <div class="reason-card">
+            <div class="reason-icon"></div>
+            <h4>Federal investment</h4>
+            <div class="reason-stat">$400M USDA funding available</div>
+            <p>Markets have budget for technology infrastructure.</p>
+          </div>
+
+          <div class="reason-card">
+            <div class="reason-icon"></div>
+            <h4>Demographic shift</h4>
+            <div class="reason-stat">73% of managers are millennials/Gen X</div>
+            <p>Tech-native decision makers ready for modern tools.</p>
+          </div>
+
+          <div class="reason-card">
+            <div class="reason-icon"></div>
+            <h4>Consumer demand</h4>
+            <div class="reason-stat">70% want online ordering</div>
+            <p>Market pressure for digital tools is undeniable.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="competitive-landscape">
+        <h3>We're the only integrated solution</h3>
+        <p>Everyone else focuses on one piece. We built the complete ecosystem.</p>
+
+        <div class="comparison-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th class="us">Gather</th>
+                <th>Barn2Door</th>
+                <th>LocalLine</th>
+                <th>MarketWurks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Market Management</td>
+                <td class="us">Yes</td>
+                <td>✗</td>
+                <td>✗</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>Customer Marketplace</td>
+                <td class="us">Yes</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>✗</td>
+              </tr>
+              <tr>
+                <td>Vendor Tools</td>
+                <td class="us">Yes</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>✗</td>
+              </tr>
+              <tr>
+                <td>SNAP/EBT Integration</td>
+                <td class="us">Yes</td>
+                <td>✗</td>
+                <td>✗</td>
+                <td>Partial</td>
+              </tr>
+              <tr>
+                <td>Grant Reporting</td>
+                <td class="us">Yes</td>
+                <td>✗</td>
+                <td>✗</td>
+                <td>✗</td>
+              </tr>
+              <tr>
+                <td>Multi-Vendor Cart</td>
+                <td class="us">Yes</td>
+                <td>✗</td>
+                <td>✗</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td><strong>Focus</strong></td>
+                <td class="us"><strong>Complete Ecosystem</strong></td>
+                <td>Individual Farms</td>
+                <td>Wholesale/Hubs</td>
+                <td>Management Only</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="revenue-model">
+        <h3>Multiple revenue streams, predictable growth</h3>
+
+        <div class="revenue-streams">
+          <div class="stream-card">
+            <h4>Market SaaS</h4>
+            <div class="pricing">$49-299/month</div>
+            <div class="scale">1,000 markets Year 3</div>
+            <div class="arr">$1.8M ARR</div>
+          </div>
+
+          <div class="stream-card">
+            <h4>Transaction Fees</h4>
+            <div class="pricing">2.5% GMV</div>
+            <div class="scale">$2M GMV/month Year 3</div>
+            <div class="arr">$600K ARR</div>
+          </div>
+
+          <div class="stream-card">
+            <h4>Vendor Subscriptions</h4>
+            <div class="pricing">$29-99/month</div>
+            <div class="scale">5,000 vendors Year 3</div>
+            <div class="arr">$2.4M ARR</div>
+          </div>
+        </div>
+
+        <div class="total-arr">
+          <span class="arr-label">Total Year 3 ARR:</span>
+          <span class="arr-value">$4.8M</span>
+        </div>
+      </div>
+
+      <div class="unit-economics">
+        <h3>SaaS economics with marketplace upside</h3>
+
+        <div class="economics-grid">
+          <div class="econ-card">
+            <h4>Per-Market Economics</h4>
+            <div class="econ-metrics">
+              <div class="metric-row">
+                <span class="label">CAC:</span>
+                <span class="value">$800</span>
+              </div>
+              <div class="metric-row">
+                <span class="label">Monthly Revenue:</span>
+                <span class="value">$149</span>
+              </div>
+              <div class="metric-row">
+                <span class="label">LTV:</span>
+                <span class="value">$16,200</span>
+              </div>
+              <div class="metric-row highlight">
+                <span class="label">LTV:CAC Ratio:</span>
+                <span class="value">20:1</span>
+              </div>
+              <div class="metric-row highlight">
+                <span class="label">Payback Period:</span>
+                <span class="value">5 months</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="econ-card">
+            <h4>5-Year Projections</h4>
+            <div class="projection-table">
+              <div class="proj-row">
+                <span class="year">Year 1</span>
+                <span class="markets">100 markets</span>
+                <span class="arr">$180K ARR</span>
+              </div>
+              <div class="proj-row">
+                <span class="year">Year 2</span>
+                <span class="markets">500 markets</span>
+                <span class="arr">$1.2M ARR</span>
+              </div>
+              <div class="proj-row">
+                <span class="year">Year 3</span>
+                <span class="markets">1,000 markets</span>
+                <span class="arr">$4.8M ARR</span>
+              </div>
+              <div class="proj-row">
+                <span class="year">Year 4</span>
+                <span class="markets">2,500 markets</span>
+                <span class="arr">$12M ARR</span>
+              </div>
+              <div class="proj-row highlight">
+                <span class="year">Year 5</span>
+                <span class="markets">5,000 markets</span>
+                <span class="arr">$30M ARR</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="efficiency-callout">
+          <h4>Capital Efficient Growth</h4>
+          <ul>
+            <li>5-month CAC payback</li>
+            <li>75% gross margins</li>
+            <li>115% net revenue retention</li>
+            <li>Profitable at 1,000 markets</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 11: TEAM
+       ============================================ -->
+  <section class="team" id="team">
+    <div class="container">
+      <h2 class="section-title">Farmers market insider</h2>
+      <p class="section-subtitle">
+        We've lived this problem. Carlo built Berwyn from scratch,
+        transforming 15 vendors into a thriving market of 70+.
+        He knows how to take care of neighbors—and how to build at scale.
+      </p>
+
+      <div class="founders-grid">
+
+        <div class="founder-card">
+          <div class="founder-info">
+            <h3>Carlo Luciano</h3>
+            <div class="founder-title">CEO & Co-founder</div>
+            <ul class="founder-background">
+              <li>Founded & scaled Berwyn Farmers Market (15 → 70+ vendors)</li>
+              <li>Culinary Institute of America graduate</li>
+              <li>10+ years in local food systems</li>
+              <li>Network of 200+ market managers nationwide</li>
+            </ul>
+            <a href="#" class="linkedin-link">LinkedIn →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="advisors">
+        <h3>Advisors</h3>
+        <div class="advisor-grid">
+          <div class="advisor-card">
+            <strong>Sarah Johnson</strong><br>
+            Former COO, Farmigo ($26M raised)
+          </div>
+          <div class="advisor-card">
+            <strong>Mike Chen</strong><br>
+            Early Instacart, marketplace expert
+          </div>
+          <div class="advisor-card">
+            <strong>Dr. Linda Williams</strong><br>
+            USDA Farmers Market Program Director
+          </div>
+        </div>
+      </div>
+
+      <div class="why-us-now">
+        <h3>Why we'll win</h3>
+        <div class="win-reasons">
+          <div class="reason">
+            <strong>Founder-Market Fit:</strong> Carlo IS the market.
+            He has relationships with 200+ managers who trust him.
+          </div>
+          <div class="reason">
+            <strong>Proven Playbook:</strong> We didn't theory-craft this.
+            We built it, tested it, and proved it at Berwyn.
+          </div>
+          <div class="reason">
+            <strong>Complete Solution:</strong> Everyone else solves one piece.
+            We built the whole ecosystem.
+          </div>
+          <div class="reason">
+            <strong>Capital Efficient:</strong> 5-month payback, 20:1 LTV:CAC.
+            We grow profitably, not burn-and-pray.
+          </div>
+          <div class="reason">
+            <strong>Perfect Timing:</strong> Post-COVID digital shift +
+            $400M USDA funding + tech-native managers. The stars aligned.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 12: INVESTMENT ASK
+       ============================================ -->
+  <section class="investment-ask" id="invest">
+    <div class="container">
+      <h2 class="section-title">Let's bring 8,140 markets into 2025</h2>
+      <p class="section-subtitle">
+        You're not investing in software. You're investing in
+        infrastructure for how neighbors take care of neighbors.
+      </p>
+
+      <div class="investment-terms">
+        <div class="terms-box">
+          <div class="term-row">
+            <span class="term-label">Round Size:</span>
+            <span class="term-value">$2M Seed</span>
+          </div>
+          <div class="term-row">
+            <span class="term-label">Pre-money Valuation:</span>
+            <span class="term-value">$8M</span>
+          </div>
+          <div class="term-row">
+            <span class="term-label">Structure:</span>
+            <span class="term-value">Priced round, standard terms</span>
+          </div>
+          <div class="term-row">
+            <span class="term-label">Lead Committed:</span>
+            <span class="term-value">$750K from [Lead Investor]</span>
+          </div>
+          <div class="term-row">
+            <span class="term-label">Minimum Check:</span>
+            <span class="term-value">$100K</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="use-of-funds">
+        <h3>Use of Funds</h3>
+
+        <div class="funds-grid">
+          <div class="fund-card">
+            <div class="fund-amount">$800K</div>
+            <div class="fund-percentage">40%</div>
+            <h4>Product Development</h4>
+            <ul>
+              <li>Complete marketplace features</li>
+              <li>SNAP/EBT integration nationwide</li>
+              <li>Enterprise multi-market tools</li>
+              <li>API for third-party integrations</li>
+            </ul>
+          </div>
+
+          <div class="fund-card">
+            <div class="fund-amount">$700K</div>
+            <div class="fund-percentage">35%</div>
+            <h4>Go-to-Market</h4>
+            <ul>
+              <li>Launch 10 metropolitan areas</li>
+              <li>State association partnerships</li>
+              <li>Market manager success team</li>
+              <li>Content and education program</li>
+            </ul>
+          </div>
+
+          <div class="fund-card">
+            <div class="fund-amount">$500K</div>
+            <div class="fund-percentage">25%</div>
+            <h4>Team</h4>
+            <ul>
+              <li>VP Engineering hire</li>
+              <li>Head of Markets hire</li>
+              <li>Customer success team (3)</li>
+              <li>Operations and finance lead</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="milestones">
+        <h3>12-Month Milestones</h3>
+        <div class="milestone-grid">
+          <div class="milestone-box">
+            <div class="milestone-number">500</div>
+            <div class="milestone-label">Markets Signed</div>
+          </div>
+          <div class="milestone-box">
+            <div class="milestone-number">$1.2M</div>
+            <div class="milestone-label">ARR</div>
+          </div>
+          <div class="milestone-box">
+            <div class="milestone-number">$6M</div>
+            <div class="milestone-label">Marketplace GMV</div>
+          </div>
+          <div class="milestone-box">
+            <div class="milestone-number">Series A</div>
+            <div class="milestone-label">Positioned</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="current-traction">
+        <h3>Current Traction</h3>
+        <ul class="traction-list">
+          <li>20 markets signed, 50 in pipeline</li>
+          <li>$3K MRR growing 40% MoM</li>
+          <li>LOIs from 3 state associations</li>
+          <li>USDA partnership in discussion</li>
+        </ul>
+      </div>
+
+      <div class="opportunity-statement">
+        <h3>The Opportunity</h3>
+        <p class="big-statement">
+          Just like Shopify enabled DTC brands,<br>
+          and Stripe enabled online payments,<br>
+          <strong>Gather enables local food commerce.</strong>
+        </p>
+        <div class="opportunity-bullets">
+          <div class="bullet">$1.7B market</div>
+          <div class="bullet">Zero dominant players</div>
+          <div class="bullet">Proven solution</div>
+          <div class="bullet">Perfect timing</div>
+        </div>
+      </div>
+
+      <div class="cta-section">
+        <h3>Let's grow something good together</h3>
+        <div class="cta-buttons">
+          <a href="gather-seed-deck.pdf" class="btn-primary large" download>
+            Download Full Deck
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 13: FOOTER
+       ============================================ -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="footer-content">
+
+        <div class="footer-col">
+          <div class="footer-logo">Gather</div>
+          <p class="footer-tagline">Good things from good people</p>
+          <p class="footer-description">
+            Building infrastructure for local food systems.
+            Helping neighbors take care of neighbors.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul class="footer-links">
+            <li><a href="gather-seed-deck.pdf" download>Full Pitch Deck</a></li>
+            <li><a href="gather-financial-model.xlsx" download>Financial Model</a></li>
+            <li><a href="#berwyn">Product Demo</a></li>
+            <li><a href="#berwyn">Case Studies</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Press</h4>
+          <ul class="press-mentions">
+            <li>"Gather raises $2M..." — TechCrunch</li>
+            <li>"The farmers market revolution..." — Forbes</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Gather. Building infrastructure for local food commerce.</p>
+        <p class="gentle-rebellion">
+          Won't you be our neighbor?
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gather - For Carlo</title>
+  <style>
+    :root {
+      --sage-700: #2D5016;
+      --sage-600: #3A6A1F;
+      --sage-500: #4A7C28;
+      --sage-300: #81C784;
+      --sage-50: #E8F5E9;
+      --mint: #3DDC97;
+      --coral: #FF6B6B;
+      --text: #37352F;
+      --muted: #787774;
+      --border: #E3E2E0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    h1 {
+      font-size: 2.75rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--sage-700);
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--sage-700);
+      margin-bottom: 2rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--sage-600);
+      margin-bottom: 1rem;
+    }
+
+    .lead {
+      font-size: 1.25rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 700px;
+    }
+
+    .highlight {
+      display: inline-block;
+      background: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      color: var(--sage-700);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-top: 1rem;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #F6F9FC 0%, #E8F5E9 100%);
+      padding: 6rem 0;
+    }
+
+    /* Problems Grid */
+    .problems {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .problem-card {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.2s;
+    }
+
+    .problem-card:hover {
+      border-color: var(--sage-300);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .problem-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .problem-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .problem-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .pain {
+      background: linear-gradient(135deg, #FFF5F5 0%, #FFF9F9 100%);
+      border-left: 3px solid var(--coral);
+      padding: 1rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+
+    .pain strong {
+      color: var(--coral);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Solutions */
+    .solution-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+
+    .solution {
+      background: var(--sage-50);
+      border-radius: 12px;
+      padding: 2rem;
+      border-left: 4px solid var(--mint);
+    }
+
+    .solution-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .solution-icon {
+      font-size: 2rem;
+    }
+
+    .solution h4 {
+      font-size: 1.25rem;
+      color: var(--sage-700);
+      font-weight: 700;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .feature {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: white;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    .feature::before {
+      content: "→";
+      color: var(--mint);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Execution */
+    .execution-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .milestone {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: relative;
+      padding-left: 4rem;
+    }
+
+    .milestone::before {
+      content: attr(data-month);
+      position: absolute;
+      left: 1.5rem;
+      top: 1.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .milestone h4 {
+      font-size: 1.125rem;
+      color: var(--sage-700);
+      margin-bottom: 0.75rem;
+    }
+
+    .milestone ul {
+      list-style: none;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .milestone li {
+      padding: 0.25rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .milestone li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--sage-500);
+    }
+
+    .metrics-box {
+      background: linear-gradient(135deg, #FFE082 0%, #81C784 100%);
+      border-radius: 12px;
+      padding: 2rem;
+      color: white;
+      height: fit-content;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .metrics-box h3 {
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+
+    .metric {
+      margin-bottom: 1.5rem;
+    }
+
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .metric-label {
+      font-size: 0.875rem;
+      opacity: 0.95;
+    }
+
+    /* Proof */
+    .proof {
+      background: var(--sage-50);
+      border-radius: 16px;
+      padding: 3rem;
+      margin-top: 3rem;
+    }
+
+    .proof-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .proof-stat {
+      text-align: center;
+    }
+
+    .proof-stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--sage-600);
+      display: block;
+    }
+
+    .proof-stat-label {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    .proof-detail {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 2rem;
+      border-left: 4px solid var(--mint);
+    }
+
+    /* CTA */
+    .cta {
+      background: linear-gradient(135deg, #FFE082 0%, #81C784 50%, #4CAF50 100%);
+      text-align: center;
+      padding: 5rem 2rem;
+    }
+
+    .cta h2 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      color: white;
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: white;
+      color: var(--sage-700);
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+    }
+
+    /* Navigation bar */
+    .nav-bar {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--sage-700);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--sage-600);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.5rem; }
+      .problems, .features, .execution-grid, .proof-stats {
+        grid-template-columns: 1fr;
+      }
+      .milestone {
+        padding-left: 1.5rem;
+      }
+      .milestone::before {
+        position: static;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav-bar">
+    <div class="nav-content">
+      <a href="../sitemap.html" class="nav-logo">Gather</a>
+      <div class="nav-links">
+        <a href="../sitemap.html">Sitemap</a>
+        <a href="../index.html">Investor Deck</a>
+        <a href="../product-overview/index.html">Product</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>8,140 farmers markets<br>run on spreadsheets and chaos</h1>
+      <p class="lead">Managers drown in paperwork. Vendors wait 45 days for payments. Customers can't pre-order. We're building the software these markets actually deserve.</p>
+      <span class="highlight">$1.7B annual market • No good software exists • Real proof from Berwyn, PA</span>
+    </div>
+  </section>
+
+  <!-- Problems -->
+  <section>
+    <div class="container">
+      <h2>Three Broken Workflows</h2>
+
+      <div class="problems">
+        <div class="problem-card">
+          <span class="problem-icon">📋</span>
+          <h3>Market Managers</h3>
+          <p>40-60 hours weekly on admin instead of community building</p>
+          <div class="pain">
+            <strong>The Reality:</strong>
+            4-inch binder of vendor applications. Manual payment reconciliation across Square, Venmo, cash, checks, crypto. Zero data for grant applications. Friday nights spent matching receipts.
+          </div>
+        </div>
+
+        <div class="problem-card">
+          <span class="problem-icon">🚜</span>
+          <h3>Vendors (Farmers)</h3>
+          <p>30-45 day payment delays killing cash flow</p>
+          <div class="pain">
+            <strong>The Reality:</strong>
+            Paper tracking across 3 markets. Can't remember what sold where. Wholesale buyers want product but pay in 45 days. Need that money this week for seeds.
+          </div>
+        </div>
+
+        <div class="problem-card">
+          <span class="problem-icon">🛒</span>
+          <h3>Customers</h3>
+          <p>Can't shop conveniently like everywhere else</p>
+          <div class="pain">
+            <strong>The Reality:</strong>
+            Drive 20 minutes to market. Good stuff gone by 10:30am. No way to browse ahead. Can't pre-order. Wish it worked like Instacart but for local food.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions -->
+  <section>
+    <div class="container">
+      <h2>What We're Building</h2>
+      <p class="lead">Three connected experiences that solve real operational problems with great UX</p>
+
+      <div class="solution-grid">
+        <!-- Manager Dashboard -->
+        <div class="solution">
+          <div class="solution-header">
+            <span class="solution-icon">👩‍💼</span>
+            <div>
+              <h4>Manager Dashboard</h4>
+              <p style="color: var(--muted); font-size: 0.95rem; margin: 0;">Notion-clean, data-dense, keyboard-first</p>
+            </div>
+          </div>
+
+          <div class="features">
+            <div class="feature">Digital vendor applications—15 min vs 2 hours</div>
+            <div class="feature">Auto fee collection—90% on-time vs 60%</div>
+            <div class="feature">Unified payments (cards, ACH, crypto, cash)</div>
+            <div class="feature">4-6 hours saved every Saturday</div>
+            <div class="feature">One-click grant reports—1 hour vs 40</div>
+            <div class="feature">Broadcast SMS to all vendors instantly</div>
+            <div class="feature">Real-time financial dashboard</div>
+            <div class="feature">Automatic reconciliation across all payment types</div>
+          </div>
+        </div>
+
+        <!-- Vendor Portal -->
+        <div class="solution">
+          <div class="solution-header">
+            <span class="solution-icon">👨‍🌾</span>
+            <div>
+              <h4>Vendor Portal</h4>
+              <p style="color: var(--muted); font-size: 0.95rem; margin: 0;">WhatsApp-simple, big-touch, offline-first</p>
+            </div>
+          </div>
+
+          <div class="features">
+            <div class="feature">7-day payouts vs 45-day wait</div>
+            <div class="feature">One inventory syncs across all markets</div>
+            <div class="feature">See pre-orders by Wednesday for Saturday</div>
+            <div class="feature">Push alerts for new orders</div>
+            <div class="feature">Accept any payment type customers want</div>
+            <div class="feature">Rich farm profiles tell your story</div>
+            <div class="feature">Track sales by product automatically</div>
+            <div class="feature">Works offline, syncs when connected</div>
+          </div>
+        </div>
+
+        <!-- Customer Marketplace -->
+        <div class="solution">
+          <div class="solution-header">
+            <span class="solution-icon">👩‍💻</span>
+            <div>
+              <h4>Customer Marketplace</h4>
+              <p style="color: var(--muted); font-size: 0.95rem; margin: 0;">Instacart-fresh, image-forward, thumb-first</p>
+            </div>
+          </div>
+
+          <div class="features">
+            <div class="feature">Multi-vendor cart—one checkout</div>
+            <div class="feature">Pre-order Tuesday, pickup Saturday</div>
+            <div class="feature">Search "organic tomatoes"—see all options</div>
+            <div class="feature">2-4x larger baskets ($59 vs $28)</div>
+            <div class="feature">Favorites and quick reorder</div>
+            <div class="feature">Pickup reminders so you don't forget</div>
+            <div class="feature">Pay with Apple Pay, cards, crypto—whatever</div>
+            <div class="feature">Product photos that make you hungry</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Execution -->
+  <section>
+    <div class="container">
+      <h2>How We Execute</h2>
+      <p class="lead">12 months to 100 markets with AI-accelerated development and proven playbook</p>
+
+      <div class="execution-grid">
+        <div class="timeline">
+          <div class="milestone" data-month="M 1-3">
+            <h4>Foundation</h4>
+            <ul>
+              <li>Core vendor management system</li>
+              <li>Unified Stripe payment processing</li>
+              <li>Product catalog and profiles</li>
+              <li>5 pilot markets (Carlo's network)</li>
+            </ul>
+          </div>
+
+          <div class="milestone" data-month="M 4-6">
+            <h4>Revenue + Polish</h4>
+            <ul>
+              <li>Grant reporting automation</li>
+              <li>Analytics dashboards</li>
+              <li>Communication hub (SMS/email)</li>
+              <li>20 paying markets @ $49-149/mo</li>
+            </ul>
+          </div>
+
+          <div class="milestone" data-month="M 7-9">
+            <h4>Marketplace MVP</h4>
+            <ul>
+              <li>Customer shopping (Instacart-like)</li>
+              <li>Multi-vendor cart and checkout</li>
+              <li>Order management and fulfillment</li>
+              <li>Validate with Berwyn model</li>
+            </ul>
+          </div>
+
+          <div class="milestone" data-month="M 10-12">
+            <h4>Scale</h4>
+            <ul>
+              <li>Mobile apps (iOS + Android)</li>
+              <li>Advanced search and recommendations</li>
+              <li>Customer loyalty features</li>
+              <li>100 markets, Series A prep</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="metrics-box">
+          <h3>Target Metrics</h3>
+
+          <div class="metric">
+            <span class="metric-value">Year 1</span>
+            <span class="metric-label">20 markets • $36K ARR</span>
+          </div>
+
+          <div class="metric">
+            <span class="metric-value">Year 2</span>
+            <span class="metric-label">100 markets • $250K ARR<br>$500K monthly GMV</span>
+          </div>
+
+          <div class="metric">
+            <span class="metric-value">Year 5</span>
+            <span class="metric-label">500 markets • $2-3M ARR<br>$8-10M monthly GMV</span>
+          </div>
+
+          <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.3);">
+            <div style="font-size: 0.875rem; opacity: 0.9;">
+              <strong style="display: block; margin-bottom: 0.5rem;">Revenue Streams:</strong>
+              • Manager SaaS: $49-299/mo<br>
+              • Marketplace: 2.5% commission<br>
+              • Vendor premium: $29-99/mo
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section>
+    <div class="container">
+      <h2>Real-World Proof</h2>
+      <p class="lead">Berwyn Farmers Market in PA validates the entire model</p>
+
+      <div class="proof">
+        <div class="proof-stats">
+          <div class="proof-stat">
+            <span class="proof-stat-value">70+</span>
+            <span class="proof-stat-label">Vendor network<br>(from startup)</span>
+          </div>
+          <div class="proof-stat">
+            <span class="proof-stat-value">$59</span>
+            <span class="proof-stat-label">Online basket vs<br>$28 walk-up</span>
+          </div>
+          <div class="proof-stat">
+            <span class="proof-stat-value">140%</span>
+            <span class="proof-stat-label">Growth in vendor<br>participation</span>
+          </div>
+        </div>
+
+        <div class="proof-detail">
+          <strong style="color: var(--sage-700); display: block; margin-bottom: 0.5rem;">Why it matters:</strong>
+          Professional management + hybrid online/physical model + affluent demographics ($137K median income, 76% college educated) = rapid growth in just 3 seasons. This is the playbook we're scaling nationwide.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>Let's build this</h2>
+      <p>Great UX • Great UI • Great product team<br>Start with 5 markets, scale to 500</p>
+      <a href="../sitemap.html" class="cta-button">View All Pages</a>
+    </div>
+  </section>
+
+</body>
+</html>
