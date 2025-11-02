@@ -15,10 +15,17 @@ Secondary Problems (Vendors & Customers)
 	•	Vendors: 30-45 day payment delays in wholesale channels, managing inventory across multiple sales channels, no easy way to reach customers online
 	•	Customers: 51% cite "inconvenience" as barrier - limited hours, weather dependency, can't pre-order, don't know what's available
 Solution Overview
-Phase 1: Core Market Management (MVP - Months 1-6)
-Essential features to capture market manager workflow and vendor/product management
-Phase 2: Marketplace Integration (Months 7-12)
-Full Instacart-like shopping experience based on Berwyn model validation
+Phase 1: Core Buyer & Manager Platform (Months 1-3)
+- Complete buyer shopping experience (100% functionality)
+- Full market manager administrative tools (100% functionality)
+- Live transactions and pilot market deployment
+
+Phase 2: Vendor Features & Scaling (Months 4-8)
+- Vendor dashboard and analytics
+- Inventory and order management
+- Platform refinement based on user feedback
+- Mobile applications
+- Scale to 100+ markets
 User Personas
 Primary: Market Manager "Margaret"
 	•	Demographics: 48 years old, female (73% of managers), bachelor's degree
@@ -37,7 +44,7 @@ Tertiary: Customer "Catherine"
 	•	Pain Points: Can't attend Saturday morning markets, wants to pre-order, doesn't know what's available
 	•	Success Metrics: Convenience, quality, supporting local farms, easy browsing and checkout
 Feature Requirements
-Phase 1: Core Market Management (MVP)
+Phase 1: Core Buyer & Manager Platform (Months 1-3)
 1.1 Vendor Management
 User Story: As a market manager, I need to manage vendor applications and assignments without spreadsheets
 Features:
@@ -125,7 +132,7 @@ Acceptance Criteria:
 	•	500+ product SKUs supported
 	•	Bulk import via CSV
 	•	Real-time availability updates
-Phase 2: Marketplace Features (Post-MVP)
+Phase 2: Vendor Features & Scaling (Months 4-8)
 2.1 Customer Pre-Ordering System
 User Story: As a customer, I want to pre-order from multiple vendors for market pickup
 Features:
@@ -247,7 +254,7 @@ AI-Accelerated Development Strategy:
 	•	Claude Code for initial code generation (70% of codebase)
 	•	Human review and refinement of AI-generated code
 	•	Rapid prototyping with v0/Cursor
-	•	6-month MVP timeline (vs 18 months traditional)
+	•	3-month core platform timeline (vs 12 months traditional)
 Tech Stack
 	•	Frontend: React/Next.js (mobile-responsive)
 	•	Backend: Node.js/PostgreSQL
@@ -280,22 +287,22 @@ Vendor Mobile App
 	•	Camera integration for products
 	•	Voice-to-text for descriptions
 Success Metrics
-Phase 1 KPIs (Months 1-6)
-	•	Adoption: 20 markets onboarded
-	•	Activation: 70% of markets using weekly
-	•	Time Savings: 20 hours/week per market manager
-	•	Vendor Satisfaction: NPS >50
-	•	Revenue: $36K ARR ($150/month × 20 markets)
-	•	Product Listings: 50+ products per vendor
-Phase 2 KPIs (Months 7-12)
-	•	Market Growth: 100 markets
+Phase 1 KPIs (Months 1-3)
+	•	Adoption: 10 pilot markets onboarded
+	•	Customer Transactions: Live shopping and payments
+	•	Manager Time Savings: 20+ hours/week
+	•	Platform Stability: 99.9% uptime
+	•	Initial Revenue: $5K MRR from pilot markets
+	•	Customer Satisfaction: >90% positive feedback
+Phase 2 KPIs (Months 4-8)
+	•	Market Growth: 100+ markets
+	•	Vendor Dashboard Adoption: 80% active weekly
 	•	Marketplace GMV: $500K monthly
 	•	Online Basket Size: $59 average (vs $28 in-person)
-	•	Revenue: $250K ARR
+	•	Revenue: $50K+ MRR
 	•	Browse to Buy: >3% conversion rate
-	•	Cart Abandonment: <30%
 	•	Customer Retention: 40% monthly repeat
-	•	Search Success Rate: >80% find what they want
+	•	Vendor Satisfaction: NPS >50
 Pricing Strategy
 Tiered SaaS Model
 	•	Free: <10 vendors (land grab)
@@ -332,31 +339,30 @@ Operational Risks
 	•	Risk: Complex multi-vendor logistics
 	•	Mitigation: Start with simple pickup model, expand gradually
 Development Timeline
-Months 1-3: Foundation
-	•	Core vendor management
-	•	Basic fee collection
+Months 1-3: Core Buyer & Manager Platform
+	•	Customer shopping portal (100%)
+	•	Multi-vendor cart and checkout
+	•	SNAP/EBT payment processing
+	•	Full vendor management system
+	•	Market layout & stall assignments
+	•	Fee collection & payment processing
+	•	Grant reporting automation
 	•	Communication hub
-	•	Vendor profiles
-	•	Product catalog
-	•	5 pilot markets with Carlo
-Months 4-6: Enhancement
-	•	SNAP/EBT integration
-	•	Grant reporting
-	•	Analytics dashboard
-	•	Advanced vendor features
-	•	20 paying markets
-Months 7-9: Marketplace MVP
-	•	Customer browsing interface
-	•	Shopping cart and checkout
-	•	Vendor inventory management
-	•	Order management system
-	•	Test with Berwyn model
-Months 10-12: Scale & Polish
-	•	Mobile apps launch
-	•	Advanced search and recommendations
-	•	Customer accounts and loyalty
-	•	Full marketplace rollout
-	•	100 markets target
+	•	10 pilot markets with Carlo
+Months 4-6: Vendor Features & Refinement
+	•	Vendor dashboard & analytics
+	•	Inventory management tools
+	•	Order fulfillment system
+	•	Platform optimization based on feedback
+	•	Advanced reporting features
+	•	50 paying markets
+Months 7-8: Scale & Advanced Features
+	•	Mobile apps (iOS + Android)
+	•	Advanced analytics & insights
+	•	Customer loyalty programs
+	•	API development
+	•	Enterprise features
+	•	100+ markets target
 	•	Series A preparation
 User Experience Flows
 Market Manager Flow
@@ -522,7 +528,7 @@ Customer Satisfaction
 
 Document Version Control
 	•	v1.0 - Initial complete PRD (January 2025)
-	•	Next Review: Post 5-market pilot (Month 3)
-	•	Major Revision: Post-MVP launch (Month 6)
+	•	Next Review: Post 10-market pilot (Month 3)
+	•	Major Revision: Full platform launch (Month 8)
 
 

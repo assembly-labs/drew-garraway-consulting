@@ -1,0 +1,55 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+
+# Build output
+dist
+dist-ssr
+
+# Vite
+*.local
+.vite
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Netlify
+.netlify
+netlify.toml.backup
+
+# Testing
+coverage
+*.lcov
+.nyc_output
+test-results
+playwright-report
+stats.html
+
+# OS Files
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+.cache
