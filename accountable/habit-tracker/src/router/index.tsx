@@ -12,4 +12,6 @@ export const router = createBrowserRouter([
     element: <CalendarView />,
   },
   // Future module routes will be added here
-]);
+], {
+  basename: '/accountable/habit-tracker'
+});
