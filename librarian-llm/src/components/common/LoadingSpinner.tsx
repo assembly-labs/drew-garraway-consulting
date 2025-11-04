@@ -25,7 +25,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
       </div>
 
       {message && (
-        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400 animate-pulse">
+        <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-400 animate-pulse">
           {message || "Finding your next great read..."}
         </p>
       )}

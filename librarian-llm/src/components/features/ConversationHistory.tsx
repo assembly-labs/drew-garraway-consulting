@@ -44,10 +44,10 @@ export const ConversationHistory: React.FC<ConversationHistoryProps> = ({
           <div className="mb-4">
             <span className="text-6xl">👋</span>
           </div>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+          <h2 className="text-2xl font-semibold text-navy-900 dark:text-neutral-100 mb-2">
             Welcome to Library Book Discovery!
           </h2>
-          <p className="text-gray-600 max-w-md mx-auto">
+          <p className="text-neutral-text dark:text-neutral-300 max-w-md mx-auto">
             I'm here to help you find your next great read. Just describe what you're looking for,
             and I'll recommend books from our catalog.
           </p>
@@ -72,7 +72,7 @@ export const ConversationHistory: React.FC<ConversationHistoryProps> = ({
               <span className="text-xs font-medium">
                 {message.role === 'user' ? 'You' : '📚 Library Assistant'}
               </span>
-              <time className="text-xs text-gray-500" dateTime={message.timestamp.toISOString()}>
+              <time className="text-xs text-neutral-500 dark:text-neutral-400" dateTime={message.timestamp.toISOString()}>
                 {formatDate(message.timestamp)}
               </time>
             </div>

@@ -98,7 +98,7 @@ export const getStatusColor = (status: ItemFormat['status'] | BookFormat['status
     case 'maintenance':
       return 'text-orange-700 bg-orange-100 dark:text-orange-300 dark:bg-orange-900/50';
     default:
-      return 'text-gray-700 bg-gray-100 dark:text-gray-300 dark:bg-gray-700';
+      return 'text-neutral-800 bg-neutral-100 dark:text-neutral-200 dark:bg-navy-700';
   }
 };
 

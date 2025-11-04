@@ -55,16 +55,16 @@ export const StarRating: React.FC<StarRatingProps> = ({
           disabled={readonly}
           className={`${sizeClasses[size]} ${
             readonly ? 'cursor-default' : 'cursor-pointer hover:scale-110'
-          } transition-transform focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded`}
+          } transition-transform focus:outline-none focus:ring-2 focus:ring-attention rounded`}
           aria-label={`Rate ${star} star${star !== 1 ? 's' : ''}`}
         >
-          <span className={star <= displayRating ? 'text-yellow-500' : 'text-gray-300 dark:text-gray-600'}>
+          <span className={star <= displayRating ? 'text-attention' : 'text-neutral-300 dark:text-neutral-600'}>
             {star <= displayRating ? '★' : '☆'}
           </span>
         </button>
       ))}
       {rating > 0 && readonly && (
-        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
+        <span className="ml-2 text-sm text-neutral-600 dark:text-neutral-400">
           ({rating}/5)
         </span>
       )}

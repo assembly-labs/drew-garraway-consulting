@@ -19,10 +19,10 @@ export const ResultsList: React.FC<ResultsListProps> = ({
     return (
       <div className="text-center py-8">
         <div className="text-6xl mb-4">📚</div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+        <h3 className="text-xl font-semibold text-navy-900 dark:text-neutral-100 mb-2">
           No books found
         </h3>
-        <p className="text-gray-600">
+        <p className="text-neutral-text dark:text-neutral-300">
           Try adjusting your search or asking a different question.
         </p>
       </div>
@@ -35,7 +35,7 @@ export const ResultsList: React.FC<ResultsListProps> = ({
       role="region"
       aria-label={title}
     >
-      <h2 className="text-lg font-semibold text-gray-900 mb-3">
+      <h2 className="text-lg font-semibold text-navy-900 dark:text-neutral-100 mb-3">
         {title} ({books.length})
       </h2>
 
@@ -52,7 +52,7 @@ export const ResultsList: React.FC<ResultsListProps> = ({
 
       {books.length > 5 && (
         <div className="text-center pt-4">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-neutral-text dark:text-neutral-300">
             Showing {books.length} book{books.length > 1 ? 's' : ''} based on your request.
           </p>
         </div>

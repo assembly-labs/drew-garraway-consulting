@@ -197,10 +197,10 @@ function AppContent(): JSX.Element {
   // Show loading state while catalog loads
   if (catalogLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-page flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
-          <p className="text-gray-600">Loading library catalog...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-navy mb-4"></div>
+          <p className="text-neutral-text">Loading library catalog...</p>
         </div>
       </div>
     );
@@ -209,7 +209,7 @@ function AppContent(): JSX.Element {
   // Show error if catalog fails to load
   if (catalogError) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-page flex items-center justify-center p-4">
         <div className="max-w-md">
           <ErrorMessage
             title="Failed to load catalog"
@@ -284,7 +284,7 @@ function AppContent(): JSX.Element {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-page flex flex-col">
       {/* Toast Container */}
       <ToastContainer />
 
@@ -325,7 +325,7 @@ function AppContent(): JSX.Element {
       />
 
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
+      <header className="bg-navy shadow-sm border-b border-navy-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -337,10 +337,10 @@ function AppContent(): JSX.Element {
               </div>
               <span className="text-3xl">📚</span>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">
+                <h1 className="text-xl font-bold text-white">
                   Librarian LLM
                 </h1>
-                <p className="text-xs text-gray-600">
+                <p className="text-xs text-navy-100">
                   AI-Powered Book Discovery (Prototype)
                 </p>
               </div>
@@ -351,11 +351,11 @@ function AppContent(): JSX.Element {
 
               {messages.length > 0 && (
                 <>
-                <div className="text-xs text-gray-500" title="Messages in conversation context">
+                <div className="text-xs text-navy-100" title="Messages in conversation context">
                   <span className={`inline-flex items-center px-2 py-1 rounded-full ${
-                    messages.length > 20 ? 'bg-yellow-100 text-yellow-800' :
-                    messages.length > 10 ? 'bg-blue-100 text-blue-800' :
-                    'bg-gray-100'
+                    messages.length > 20 ? 'bg-coral-50 text-coral-dark border border-coral' :
+                    messages.length > 10 ? 'bg-navy-50 text-navy-dark border border-navy-300' :
+                    'bg-neutral-100 text-neutral-800'
                   }`}>
                     💬 {messages.length} message{messages.length !== 1 ? 's' : ''}
                     {messages.length > 20 && ' (max context)'}
@@ -363,10 +363,10 @@ function AppContent(): JSX.Element {
                 </div>
                 <button
                   onClick={clearConversation}
-                  className="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900
-                           border border-gray-300 rounded-md hover:bg-gray-50
+                  className="px-3 py-1.5 text-sm text-white hover:text-navy-100
+                           border border-navy-400 rounded-md hover:bg-navy-600
                            transition-colors focus:outline-none focus:ring-2
-                           focus:ring-primary-500 focus:ring-offset-2 btn-enhanced"
+                           focus:ring-white focus:ring-offset-2 focus:ring-offset-navy btn-enhanced"
                   aria-label="Start new conversation"
                 >
                   New Chat
@@ -401,7 +401,7 @@ function AppContent(): JSX.Element {
 
           {/* Search Module - flows with content */}
           <div className="mt-6 mb-8">
-            <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 dark:bg-gray-800 dark:border-gray-700 glass-effect backdrop-blur-xl">
+            <div className="bg-surface rounded-2xl shadow-2xl border border-neutral-300 p-4 dark:bg-navy-800 dark:border-navy-700 glass-effect backdrop-blur-xl">
               <SearchInput
                 onSubmit={handleSearch}
                 isLoading={conversationLoading}
@@ -410,7 +410,7 @@ function AppContent(): JSX.Element {
               />
 
               {/* Catalog Info */}
-              <p className="text-center text-xs text-gray-500 mt-3 dark:text-gray-400">
+              <p className="text-center text-xs text-neutral-text mt-3 dark:text-neutral-400">
                 {catalog.length} items in catalog • Powered by Claude AI
               </p>
             </div>

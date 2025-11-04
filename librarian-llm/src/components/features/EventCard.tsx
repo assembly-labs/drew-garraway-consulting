@@ -57,7 +57,7 @@ export const EventCard: React.FC<EventCardProps> = ({
           return {
             text: `${event.registered}/${event.capacity} registered • Few spots left`,
             badge: '⚠️ Nearly Full',
-            badgeClass: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+            badgeClass: 'bg-attention-light text-attention-dark dark:bg-attention/30 dark:text-coral-300'
           };
         }
         return {
@@ -69,19 +69,19 @@ export const EventCard: React.FC<EventCardProps> = ({
         return {
           text: `${event.registered}/${event.capacity} registered • Waitlist available`,
           badge: 'Waitlist',
-          badgeClass: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200'
+          badgeClass: 'bg-warning-light text-warning-dark dark:bg-warning/30 dark:text-warning'
         };
       case 'full':
         return {
           text: `Event full (${event.capacity}/${event.capacity})`,
           badge: 'Full',
-          badgeClass: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+          badgeClass: 'bg-error-light text-error-dark dark:bg-error/30 dark:text-error'
         };
       case 'drop_in':
         return {
           text: 'Drop-in event • No registration needed',
           badge: 'Drop-in',
-          badgeClass: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+          badgeClass: 'bg-sage-100 text-sage-800 dark:bg-sage-900 dark:text-sage-200'
         };
       default:
         return { text: '', badge: null, badgeClass: '' };
@@ -92,10 +92,10 @@ export const EventCard: React.FC<EventCardProps> = ({
   const registrationDisplay = getRegistrationDisplay();
 
   return (
-    <article className="border rounded-lg p-4 bg-white dark:bg-gray-800 hover:shadow-md transition-shadow">
+    <article className="border border-neutral-200 dark:border-navy-700 rounded-lg p-4 bg-surface dark:bg-navy-800 hover:shadow-md transition-shadow">
       {/* Date and Time */}
       <div className="flex items-start justify-between mb-3">
-        <div className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+        <div className="text-sm font-semibold text-neutral-600 dark:text-neutral-400">
           {formatDate(event.date)} • {formatTime(event.time)}
         </div>
         {registrationDisplay.badge && (
@@ -110,11 +110,11 @@ export const EventCard: React.FC<EventCardProps> = ({
         <div className="flex items-start gap-3">
           <span className="text-2xl flex-shrink-0">{icon}</span>
           <div className="flex-1">
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+            <h3 className="font-semibold text-navy-900 dark:text-surface">
               {event.title}
             </h3>
             {event.facilitator && (
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
                 with {event.facilitator}
               </p>
             )}
@@ -123,12 +123,12 @@ export const EventCard: React.FC<EventCardProps> = ({
       </div>
 
       {/* Description */}
-      <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">
+      <p className="text-sm text-neutral-600 dark:text-neutral-300 mb-3 line-clamp-2">
         {event.description}
       </p>
 
       {/* Location */}
-      <div className="flex items-center gap-1 mb-3 text-sm text-gray-500 dark:text-gray-400">
+      <div className="flex items-center gap-1 mb-3 text-sm text-neutral-500 dark:text-neutral-400">
         <span>📍</span>
         <span>{event.location.branch}</span>
         {event.location.room && (
@@ -141,7 +141,7 @@ export const EventCard: React.FC<EventCardProps> = ({
 
       {/* Registration Info */}
       <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+        <p className="text-sm text-neutral-600 dark:text-neutral-400">
           <span className="inline-flex items-center gap-1">
             <span>👥</span>
             <span>{registrationDisplay.text}</span>
@@ -153,14 +153,14 @@ export const EventCard: React.FC<EventCardProps> = ({
           {event.userRegistered ? (
             <button
               disabled
-              className="px-4 py-2 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-md cursor-not-allowed font-medium text-sm"
+              className="px-4 py-2 bg-sage-100 text-sage-800 dark:bg-sage-900 dark:text-sage-200 rounded-md cursor-not-allowed font-medium text-sm"
             >
               ✓ Registered
             </button>
           ) : event.userOnWaitlist ? (
             <button
               disabled
-              className="px-4 py-2 bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200 rounded-md cursor-not-allowed font-medium text-sm"
+              className="px-4 py-2 bg-warning-light text-warning-dark dark:bg-warning/30 dark:text-warning rounded-md cursor-not-allowed font-medium text-sm"
             >
               ✓ On Waitlist
             </button>
@@ -169,7 +169,7 @@ export const EventCard: React.FC<EventCardProps> = ({
               {event.registration_status === 'open' && (
                 <button
                   onClick={() => onRegister(event)}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium text-sm"
+                  className="px-4 py-2 bg-navy-600 text-white rounded-md hover:bg-navy-700 transition-colors focus:outline-none focus:ring-2 focus:ring-navy-500 focus:ring-offset-2 font-medium text-sm"
                 >
                   Register
                 </button>
@@ -177,7 +177,7 @@ export const EventCard: React.FC<EventCardProps> = ({
               {event.registration_status === 'waitlist' && (
                 <button
                   onClick={() => onJoinWaitlist(event)}
-                  className="px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 font-medium text-sm"
+                  className="px-4 py-2 bg-warning text-white rounded-md hover:bg-warning/90 transition-colors focus:outline-none focus:ring-2 focus:ring-warning focus:ring-offset-2 font-medium text-sm"
                 >
                   Join Waitlist
                 </button>
@@ -185,14 +185,14 @@ export const EventCard: React.FC<EventCardProps> = ({
               {event.registration_status === 'full' && (
                 <button
                   disabled
-                  className="px-4 py-2 bg-gray-300 text-gray-500 dark:bg-gray-600 dark:text-gray-400 rounded-md cursor-not-allowed font-medium text-sm"
+                  className="px-4 py-2 bg-neutral-300 text-neutral-500 dark:bg-navy-600 dark:text-neutral-400 rounded-md cursor-not-allowed font-medium text-sm"
                 >
                   Event Full
                 </button>
               )}
               {event.registration_status === 'drop_in' && (
                 <button
-                  className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 font-medium text-sm"
+                  className="px-4 py-2 bg-neutral-100 dark:bg-navy-700 text-neutral-700 dark:text-neutral-300 rounded-md hover:bg-neutral-200 dark:hover:bg-navy-600 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 font-medium text-sm"
                 >
                   Add to Calendar
                 </button>
