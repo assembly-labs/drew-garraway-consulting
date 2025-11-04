@@ -1,39 +1,38 @@
-# Librarian LLM - Deployment Ready 🚀
+# Librarian LLM - Netlify Deployment Ready 🚀
 
 ## Overview
-All four Librarian LLM websites are prepared and ready for deployment. This document provides complete instructions for deploying each component.
+All four Librarian LLM websites are prepared and ready for deployment to Netlify. This document provides complete instructions for deploying each component to the Netlify platform.
 
-## Components Ready for Deployment
+## Components Ready for Netlify Deployment
 
 ### 1. Main Application - Librarian LLM
 **Location:** `/librarian-llm/`
 **Build Status:** ✅ Production build complete
-**Deployment Platform:** Netlify
+**Deployment Platform:** Netlify (with serverless functions)
 **Technology:** React + Vite + TypeScript + Tailwind CSS
+**Claude Model:** claude-3-haiku-20240307 (configured, do not change)
 
 ### 2. Investor Website
 **Location:** `/_LIBLLM_investors/`
 **Build Status:** ✅ Static HTML ready
-**Deployment Platform:** Any static host (Netlify, Vercel, GitHub Pages)
+**Deployment Platform:** Netlify
 **Technology:** Static HTML + CSS
 
 ### 3. Librarian Cohort Website
 **Location:** `/_LIBLLM_librarian-cohort/`
 **Build Status:** ✅ Static HTML ready
-**Deployment Platform:** Any static host (Netlify, Vercel, GitHub Pages)
+**Deployment Platform:** Netlify
 **Technology:** Static HTML + CSS
 
 ### 4. Design System Showcase
 **Location:** `/librarian-llm/librarian-llm-design-system/`
 **Build Status:** ✅ Static HTML ready
-**Deployment Platform:** Any static host (Netlify, Vercel, GitHub Pages)
+**Deployment Platform:** Netlify
 **Technology:** Static HTML + Tailwind CDN
 
 ---
 
-## Deployment Instructions
-
-### Option A: Deploy to Netlify (Recommended)
+## Netlify Deployment Instructions
 
 #### Main Application (librarian-llm)
 
@@ -47,6 +46,8 @@ All four Librarian LLM websites are prepared and ready for deployment. This docu
    CLAUDE_API_KEY=your-anthropic-api-key-here
    NODE_VERSION=22
    ```
+
+   ⚠️ **Important:** The Claude model is already configured as `claude-3-haiku-20240307` in the serverless function. Do NOT change or add a model configuration variable.
 
 3. **Build Settings:**
    - Build command: `npm run build`
@@ -87,54 +88,6 @@ netlify deploy --prod --dir .
 cd librarian-llm/librarian-llm-design-system
 netlify deploy --prod --dir .
 ```
-
----
-
-### Option B: Deploy to Vercel
-
-#### Main Application
-1. **Install Vercel CLI:**
-   ```bash
-   npm install -g vercel
-   ```
-
-2. **Deploy:**
-   ```bash
-   cd librarian-llm
-   vercel --prod
-   ```
-
-3. **Add Environment Variable:**
-   - Go to Vercel dashboard
-   - Settings → Environment Variables
-   - Add `CLAUDE_API_KEY`
-
-#### Static Websites
-```bash
-# Deploy each static site
-vercel --prod
-```
-
----
-
-### Option C: Deploy to GitHub Pages
-
-#### Static Websites Only
-(Note: Main app requires serverless functions, use Netlify/Vercel)
-
-1. **Create separate repositories for each site**
-
-2. **Enable GitHub Pages:**
-   - Repository Settings → Pages
-   - Source: Deploy from branch
-   - Branch: main / root
-
-3. **Push files:**
-   ```bash
-   git add .
-   git commit -m "Deploy website"
-   git push origin main
-   ```
 
 ---
 
@@ -247,7 +200,7 @@ npm run preview
 ## Support Resources
 
 - Netlify Docs: https://docs.netlify.com
-- Vercel Docs: https://vercel.com/docs
+- Netlify Support: https://www.netlify.com/support/
 - Anthropic API: https://docs.anthropic.com
 - Project Repository: [Your GitHub URL]
 
