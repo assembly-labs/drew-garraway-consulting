@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Librarian LLM - AI Discovery for Public Libraries</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,10 +15,10 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Crimson Pro', 'Source Serif Pro', Georgia, Cambria, 'Times New Roman', serif;
             line-height: 1.6;
             color: #333;
-            background: #ffffff;
+            background: #FAFAF9;
             overflow-x: hidden;
         }
 
@@ -34,37 +37,20 @@
         }
 
         h1 {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg,
-                #667eea 0%,
-                #764ba2 25%,
-                #f093fb 50%,
-                #4facfe 75%,
-                #00f2fe 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 8s ease infinite;
-            background-size: 200% 200%;
-        }
-
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            color: #1A3E67;
         }
 
         h2 {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #1A3E67;
         }
 
         .lead {
@@ -79,28 +65,22 @@
             display: inline-block;
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #1A3E67;
             margin-right: 1rem;
         }
 
         .highlight {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #feca57 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #D96A3F;
             font-weight: 700;
         }
 
         .card {
-            background: #f8f9fa;
+            background: #FFFFFF;
             border-radius: 16px;
             padding: 2rem;
             margin: 1rem 0;
-            border-left: 4px solid;
-            border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%) 1;
+            border-left: 4px solid #83A07F;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .grid {
@@ -112,42 +92,45 @@
 
         .feature {
             padding: 1.5rem;
-            background: #ffffff;
+            background: #FFFFFF;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border: 2px solid transparent;
+            border: 2px solid #BAB9B1;
             transition: all 0.3s ease;
         }
 
         .feature:hover {
-            border-color: #667eea;
+            border-color: #83A07F;
             transform: translateY(-4px);
-            box-shadow: 0 8px 12px rgba(102, 126, 234, 0.15);
+            box-shadow: 0 8px 12px rgba(131, 160, 127, 0.15);
         }
 
         .feature h3 {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 1.5rem;
             margin-bottom: 0.75rem;
-            color: #667eea;
+            color: #5D7A5A;
         }
 
         .cta {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             display: inline-block;
             padding: 1.25rem 3rem;
             font-size: 1.25rem;
             font-weight: 700;
             color: white;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #1A3E67;
             border-radius: 50px;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 15px rgba(26, 62, 103, 0.3);
             margin-top: 2rem;
         }
 
         .cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 6px 20px rgba(26, 62, 103, 0.4);
+            background: #14314F;
         }
 
         .metrics {
@@ -162,23 +145,21 @@
             min-width: 200px;
             text-align: center;
             padding: 1.5rem;
-            background: #ffffff;
+            background: #FFFFFF;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 2px solid #BAB9B1;
         }
 
         .metric-number {
             font-size: 3rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #1A3E67;
         }
 
         .metric-label {
             font-size: 1rem;
-            color: #666;
+            color: #6C6B65;
             margin-top: 0.5rem;
         }
 
@@ -198,18 +179,16 @@
             content: "✓";
             position: absolute;
             left: 0;
-            color: #667eea;
+            color: #83A07F;
             font-weight: 800;
             font-size: 1.5rem;
         }
 
         .logo {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 1.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #1A3E67;
             padding: 2rem 0;
         }
 
@@ -226,16 +205,17 @@
 
         /* Chatbot Styles */
         #chatbot-toggle {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             position: fixed;
             bottom: 2rem;
             right: 2rem;
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #5D7A5A; /* Darker sage for better contrast (4.2:1) */
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 4px 20px rgba(93, 122, 90, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -246,7 +226,8 @@
 
         #chatbot-toggle:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.7);
+            box-shadow: 0 6px 25px rgba(93, 122, 90, 0.7);
+            background: #374837; /* Even darker on hover */
         }
 
         #chatbot-container {
@@ -257,7 +238,7 @@
             max-width: calc(100vw - 4rem);
             height: 600px;
             max-height: calc(100vh - 150px);
-            background: #ffffff;
+            background: #FFFFFF;
             border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             display: none;
@@ -271,7 +252,8 @@
         }
 
         #chatbot-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1A3E67;
             color: white;
             padding: 1.25rem;
             font-weight: 700;
@@ -282,6 +264,7 @@
         }
 
         #chatbot-close {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: none;
             border: none;
             color: white;
@@ -305,7 +288,7 @@
             flex: 1;
             overflow-y: auto;
             padding: 1.5rem;
-            background: #f8f9fa;
+            background: #FAFAF9;
         }
 
         .chat-message {
@@ -337,7 +320,7 @@
         }
 
         .chat-message.user .message-bubble {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #1A3E67;
             color: white;
             border-bottom-right-radius: 4px;
         }
@@ -345,14 +328,14 @@
         .chat-message.bot .message-bubble {
             background: white;
             color: #333;
-            border: 1px solid #e0e0e0;
+            border: 1px solid #BAB9B1;
             border-bottom-left-radius: 4px;
         }
 
         #chatbot-input-area {
             padding: 1rem;
             background: white;
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid #BAB9B1;
             display: flex;
             gap: 0.5rem;
         }
@@ -360,7 +343,7 @@
         #chatbot-input {
             flex: 1;
             padding: 0.875rem;
-            border: 1px solid #e0e0e0;
+            border: 1px solid #BAB9B1;
             border-radius: 24px;
             font-size: 0.95rem;
             font-family: inherit;
@@ -369,11 +352,12 @@
         }
 
         #chatbot-input:focus {
-            border-color: #667eea;
+            border-color: #83A07F;
         }
 
         #chatbot-send {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #5D7A5A; /* Darker sage for better contrast (4.2:1) */
             color: white;
             border: none;
             border-radius: 50%;
@@ -389,6 +373,7 @@
 
         #chatbot-send:hover {
             transform: scale(1.05);
+            background: #374837; /* Even darker on hover */
         }
 
         #chatbot-send:disabled {
@@ -404,9 +389,10 @@
         }
 
         .suggested-question {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: white;
-            border: 1px solid #667eea;
-            color: #667eea;
+            border: 1px solid #83A07F;
+            color: #5D7A5A;
             padding: 0.625rem 1rem;
             border-radius: 20px;
             font-size: 0.875rem;
@@ -416,7 +402,7 @@
         }
 
         .suggested-question:hover {
-            background: #667eea;
+            background: #5D7A5A; /* Darker sage for better contrast (4.2:1) */
             color: white;
             transform: translateX(4px);
         }
@@ -450,10 +436,12 @@
             border-radius: 50px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             transition: box-shadow 0.3s ease;
+            border: 2px solid #BAB9B1;
         }
 
         .claude-input-wrapper:focus-within {
-            box-shadow: 0 6px 30px rgba(102, 126, 234, 0.15);
+            box-shadow: 0 6px 30px rgba(131, 160, 127, 0.15);
+            border-color: #83A07F;
         }
 
         #claude-chat-input {
@@ -472,11 +460,12 @@
         }
 
         #claude-chat-send {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             width: 56px;
             height: 56px;
             border-radius: 50%;
             border: none;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #5D7A5A; /* Darker sage for better contrast (4.2:1) */
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
@@ -489,6 +478,7 @@
 
         #claude-chat-send:hover {
             transform: scale(1.05);
+            background: #374837; /* Even darker on hover */
         }
 
         .claude-prompts-grid {
@@ -509,7 +499,7 @@
         .prompt-label {
             grid-column: 1 / -1;
             text-align: center;
-            color: #666;
+            color: #6C6B65;
             font-size: 1rem;
             margin-bottom: 1rem;
         }
@@ -521,13 +511,13 @@
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            border: 2px solid #BAB9B1;
         }
 
         .prompt-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
-            border-color: #667eea;
+            box-shadow: 0 8px 24px rgba(131, 160, 127, 0.15);
+            border-color: #83A07F;
         }
 
         .prompt-icon {
@@ -536,15 +526,16 @@
         }
 
         .prompt-title {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 1.125rem;
             font-weight: 700;
-            color: #333;
+            color: #1A3E67;
             margin-bottom: 0.5rem;
         }
 
         .prompt-text {
             font-size: 0.95rem;
-            color: #666;
+            color: #6C6B65;
             line-height: 1.5;
         }
 
@@ -597,7 +588,7 @@
         </section>
 
         <!-- CLAUDE-STYLE CHAT SECTION -->
-        <section id="chat-demo" style="min-height: 100vh; padding: 6rem 0; background: #fafafa;">
+        <section id="chat-demo" style="min-height: 100vh; padding: 6rem 0; background: #FFFFFF;">
             <div class="container" style="max-width: 1000px;">
 
                 <!-- Header -->
@@ -605,7 +596,7 @@
                     <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">
                         💬 What would you like to know?
                     </h2>
-                    <p class="lead" style="font-size: 1.25rem; color: #666; margin-bottom: 0;">
+                    <p class="lead" style="font-size: 1.25rem; color: #6C6B65; margin-bottom: 0;">
                         Ask me anything about Librarian LLM
                     </p>
                 </div>
@@ -823,10 +814,10 @@
             </div>
 
             <a href="mailto:Drew@whiterabbitedventures.com" class="cta">Let's Talk →</a>
-            <a href="mailto:drew@whiterabbitedventures.com?subject=Sign%20me%20up%20for%20beta" class="cta" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); margin-left: 1rem;">Sign Up for Beta →</a>
+            <a href="mailto:drew@whiterabbitedventures.com?subject=Sign%20me%20up%20for%20beta" class="cta" style="background: #F2895E; margin-left: 1rem;">Sign Up for Beta →</a>
         </section>
 
-        <footer style="text-align: center; padding: 4rem 0; color: #999;">
+        <footer style="text-align: center; padding: 4rem 0; color: #6C6B65;">
             <p>📚 Librarian LLM · Privacy-First AI Discovery for Public Libraries</p>
             <p style="margin-top: 1rem;">Built WITH librarians, FOR patrons.</p>
         </footer>

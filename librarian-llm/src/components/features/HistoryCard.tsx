@@ -37,7 +37,7 @@ export const HistoryCard: React.FC<HistoryCardProps> = ({
 
   return (
     <article
-      className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-shadow"
+      className="bg-surface dark:bg-navy-800 border border-neutral-200 dark:border-navy-700 rounded-lg p-4 hover:shadow-md transition-shadow"
       aria-label={`${item.book.title} by ${item.book.author}, returned ${formatDate(item.returned_date)}`}
     >
       <div className="flex gap-4">
@@ -57,16 +57,16 @@ export const HistoryCard: React.FC<HistoryCardProps> = ({
         <div className="flex-1 min-w-0">
           {/* Title and Author */}
           <div className="mb-2">
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100 truncate">
+            <h3 className="font-semibold text-navy-900 dark:text-surface truncate">
               {item.book.title}
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">
               by {item.book.author}
             </p>
           </div>
 
           {/* Format and Dates */}
-          <div className="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
+          <div className="flex flex-wrap gap-4 text-sm text-neutral-500 dark:text-neutral-400 mb-3">
             <span className="flex items-center gap-1">
               {getFormatEmoji(item.format)} {item.format === 'audiobook' ? 'Audiobook' : item.format.charAt(0).toUpperCase() + item.format.slice(1)}
             </span>
@@ -80,14 +80,14 @@ export const HistoryCard: React.FC<HistoryCardProps> = ({
 
           {/* Star Rating */}
           <div className="flex items-center gap-3 mb-3">
-            <span className="text-sm text-gray-600 dark:text-gray-400">Your rating:</span>
+            <span className="text-sm text-neutral-600 dark:text-neutral-400">Your rating:</span>
             <StarRating
               rating={item.user_rating}
               onRatingChange={(rating) => onRatingChange(item.id, rating)}
               size="sm"
             />
             {item.user_rating === 0 && (
-              <span className="text-xs text-gray-500 dark:text-gray-400 italic">
+              <span className="text-xs text-neutral-500 dark:text-neutral-400 italic">
                 Not rated yet
               </span>
             )}
@@ -97,14 +97,14 @@ export const HistoryCard: React.FC<HistoryCardProps> = ({
           <div className="flex gap-2">
             <button
               onClick={() => onReadAgain(item.book)}
-              className="px-3 py-1.5 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-1.5 bg-navy-600 text-white text-sm rounded-md hover:bg-navy-700 transition-colors focus:outline-none focus:ring-2 focus:ring-navy-500"
               aria-label={`Read ${item.book.title} again`}
             >
               Read Again
             </button>
             <button
               onClick={() => onDelete(item.id, item.book.title)}
-              className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400"
+              className="px-3 py-1.5 border border-neutral-300 dark:border-navy-600 text-neutral-700 dark:text-neutral-300 text-sm rounded-md hover:bg-neutral-50 dark:hover:bg-navy-700 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-400"
               aria-label={`Delete ${item.book.title} from history`}
             >
               Delete

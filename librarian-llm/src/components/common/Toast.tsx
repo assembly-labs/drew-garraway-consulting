@@ -41,13 +41,13 @@ export const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
   const getStyles = () => {
     switch (toast.type) {
       case 'success':
-        return 'bg-green-50 border-green-200 text-green-800 dark:bg-green-900 dark:border-green-700 dark:text-green-200';
+        return 'bg-sage-50 border-sage-200 text-sage-800 dark:bg-sage-900 dark:border-sage-700 dark:text-sage-200';
       case 'error':
-        return 'bg-red-50 border-red-200 text-red-800 dark:bg-red-900 dark:border-red-700 dark:text-red-200';
+        return 'bg-error-light border-error text-error-dark dark:bg-error/20 dark:border-error dark:text-error';
       case 'warning':
-        return 'bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-900 dark:border-yellow-700 dark:text-yellow-200';
+        return 'bg-attention-light border-attention text-attention-dark dark:bg-attention/20 dark:border-attention dark:text-coral-300';
       case 'info':
-        return 'bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-200';
+        return 'bg-navy-50 border-navy-200 text-navy-800 dark:bg-navy-900 dark:border-navy-700 dark:text-navy-200';
     }
   };
 
@@ -78,7 +78,7 @@ export const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
       {/* Close button */}
       <button
         onClick={handleClose}
-        className="flex-shrink-0 p-1 hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 rounded"
+        className="flex-shrink-0 p-1 hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 rounded"
         aria-label="Close notification"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

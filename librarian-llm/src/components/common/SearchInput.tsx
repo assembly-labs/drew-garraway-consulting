@@ -104,14 +104,14 @@ export const SearchInput: React.FC<SearchInputProps> = ({
       {/* Session limit message */}
       {isDisabled && disabledMessage && (
         <div className="mb-3 text-center">
-          <p className="text-sm font-medium text-red-600 dark:text-red-400">
+          <p className="text-sm font-medium text-error-dark dark:text-error">
             {disabledMessage}
           </p>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="relative">
-        <div className="relative">
+        <div className="relative flex items-center">
           <textarea
             ref={textareaRef}
             value={query}
@@ -120,11 +120,11 @@ export const SearchInput: React.FC<SearchInputProps> = ({
             placeholder={isDisabled ? "Session limit reached" : effectivePlaceholder}
             disabled={isLoading || isDisabled}
             rows={1}
-            className="w-full px-5 py-3.5 pr-14 rounded-full border-2 border-gray-300 dark:border-gray-600
-                     focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 resize-none overflow-auto scrollbar-hide
-                     disabled:bg-gray-100 disabled:cursor-not-allowed dark:disabled:bg-gray-700
-                     text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400
-                     bg-white dark:bg-gray-800 focus-enhanced"
+            className="w-full px-5 py-3.5 pr-14 rounded-full border-2 border-navy dark:border-navy-600
+                     focus:outline-none focus:border-navy-600 dark:focus:border-navy-400 resize-none overflow-auto scrollbar-hide
+                     disabled:bg-neutral-100 disabled:cursor-not-allowed dark:disabled:bg-navy-700
+                     text-navy dark:text-surface placeholder-neutral-text dark:placeholder-neutral-400
+                     bg-surface dark:bg-navy-800 focus-enhanced"
             style={{ minHeight: '48px', maxHeight: '120px', lineHeight: '1.5' }}
             aria-label="Search for books"
             aria-describedby="search-help"
@@ -133,10 +133,10 @@ export const SearchInput: React.FC<SearchInputProps> = ({
           <button
             type="submit"
             disabled={!query.trim() || isLoading || isDisabled}
-            className={`absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full flex items-center justify-center
-                     bg-primary-600 text-white hover:bg-primary-700 transition-colors
-                     disabled:bg-gray-300 disabled:cursor-not-allowed
-                     focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
+            className={`absolute right-3 p-2 rounded-full flex items-center justify-center
+                     bg-coral text-white hover:bg-coral-700 transition-colors
+                     disabled:bg-coral-400 disabled:text-white disabled:opacity-60 disabled:cursor-not-allowed
+                     focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2
                      ${!isLoading && query.trim() && !isDisabled ? 'search-btn-pulse' : ''}`}
             aria-label="Send message"
           >
@@ -165,9 +165,9 @@ export const SearchInput: React.FC<SearchInputProps> = ({
             <button
               key={index}
               onClick={() => handleExampleClick(example)}
-              className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600
-                       text-gray-700 dark:text-gray-300 rounded-full transition-colors
-                       focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="px-3 py-1 text-sm bg-neutral-100 dark:bg-navy-700 hover:bg-neutral-200 dark:hover:bg-navy-600
+                       text-navy dark:text-neutral-300 rounded-full transition-colors
+                       focus:outline-none focus:ring-2 focus:ring-navy"
               type="button"
             >
               {example}

@@ -9,14 +9,14 @@ export const TypingIndicator: React.FC = () => {
         </div>
       </div>
       <div className="flex-1">
-        <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-lg p-4 max-w-[300px]">
+        <div className="bg-white dark:bg-navy-800 border-2 border-neutral-300 dark:border-navy-700 rounded-lg p-4 max-w-[300px]">
           <div className="flex items-center space-x-2">
             <div className="flex space-x-1">
-              <span className="inline-block w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-typing-dot animation-delay-0"></span>
-              <span className="inline-block w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-typing-dot animation-delay-200"></span>
-              <span className="inline-block w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-typing-dot animation-delay-400"></span>
+              <span className="inline-block w-2 h-2 bg-neutral-500 dark:bg-neutral-400 rounded-full animate-typing-dot animation-delay-0"></span>
+              <span className="inline-block w-2 h-2 bg-neutral-500 dark:bg-neutral-400 rounded-full animate-typing-dot animation-delay-200"></span>
+              <span className="inline-block w-2 h-2 bg-neutral-500 dark:bg-neutral-400 rounded-full animate-typing-dot animation-delay-400"></span>
             </div>
-            <span className="text-sm text-gray-600 dark:text-gray-400 italic">
+            <span className="text-sm text-neutral-text dark:text-neutral-300 italic">
               Librarian is thinking...
             </span>
           </div>

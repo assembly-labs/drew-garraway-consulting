@@ -68,7 +68,7 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-page dark:bg-navy-900">
       {/* Registration Modal */}
       <RegistrationModal
         isOpen={!!selectedEvent}
@@ -79,24 +79,24 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onClose }) => {
       />
 
       {/* Header */}
-      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+      <header className="bg-white dark:bg-navy-800 shadow-sm border-b border-neutral-300 dark:border-navy-700">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
                 onClick={onClose}
-                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="p-2 rounded-md hover:bg-neutral-100 dark:hover:bg-navy-700 transition-colors focus:outline-none focus:ring-2 focus:ring-navy"
                 aria-label="Back to main"
               >
-                <svg className="w-6 h-6 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 text-neutral-text dark:text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
               <div>
-                <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                <h1 className="text-xl font-bold text-navy-900 dark:text-neutral-100">
                   Events Calendar
                 </h1>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-neutral-text dark:text-neutral-300">
                   Upcoming programs and activities
                 </p>
               </div>
@@ -107,7 +107,7 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onClose }) => {
               <button className="px-3 py-1 bg-blue-600 text-white rounded-md text-sm font-medium">
                 List
               </button>
-              <button className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md text-sm hover:bg-gray-200 dark:hover:bg-gray-600">
+              <button className="px-3 py-1 bg-neutral-100 dark:bg-navy-700 text-neutral-800 dark:text-neutral-200 rounded-md text-sm hover:bg-gray-200 dark:hover:bg-gray-600">
                 Calendar
               </button>
             </div>
@@ -122,7 +122,7 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onClose }) => {
                   id="event-type"
                   value={filterType}
                   onChange={(e) => setFilterType(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="px-3 py-2 border border-neutral-300 dark:border-navy-600 rounded-md bg-white dark:bg-gray-700 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-navy"
                 >
                   <option value="all">All Events</option>
                   {eventTypes.map(type => (
@@ -139,7 +139,7 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onClose }) => {
                   id="location"
                   value={filterLocation}
                   onChange={(e) => setFilterLocation(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="px-3 py-2 border border-neutral-300 dark:border-navy-600 rounded-md bg-white dark:bg-gray-700 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-navy"
                 >
                   <option value="all">All Branches</option>
                   {locations.map(loc => (
@@ -170,12 +170,12 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onClose }) => {
           // Loading state
           <div className="space-y-4">
             {[1, 2, 3].map(i => (
-              <div key={i} className="border rounded-lg p-4 bg-white dark:bg-gray-800 animate-pulse">
+              <div key={i} className="border rounded-lg p-4 bg-white dark:bg-navy-800 animate-pulse">
                 <div className="space-y-3">
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4"></div>
-                  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+                  <div className="h-4 bg-neutral-200 dark:bg-navy-700 rounded w-1/4"></div>
+                  <div className="h-6 bg-neutral-200 dark:bg-navy-700 rounded w-3/4"></div>
+                  <div className="h-4 bg-neutral-200 dark:bg-navy-700 rounded w-full"></div>
+                  <div className="h-4 bg-neutral-200 dark:bg-navy-700 rounded w-1/2"></div>
                 </div>
               </div>
             ))}
@@ -184,12 +184,12 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onClose }) => {
           // Empty state
           <div className="text-center py-12">
             <div className="text-6xl mb-4">📅</div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+            <h2 className="text-xl font-semibold text-navy-900 dark:text-neutral-100 mb-2">
               {filterType !== 'all' || filterLocation !== 'all'
                 ? 'No events match your filters'
                 : 'No upcoming events'}
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md mx-auto">
+            <p className="text-neutral-text dark:text-neutral-300 mb-6 max-w-md mx-auto">
               {filterType !== 'all' || filterLocation !== 'all'
                 ? 'Try adjusting your filters or check back later for new programs.'
                 : 'Check back soon for new programs and activities!'}
@@ -200,7 +200,7 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onClose }) => {
                   setFilterType('all');
                   setFilterLocation('all');
                 }}
-                className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="px-6 py-2 bg-navy text-white rounded-md hover:bg-navy-600 transition-colors focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
               >
                 Clear Filters
               </button>
@@ -212,7 +212,7 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onClose }) => {
             {/* This Week */}
             {groupedEvents.thisWeek.length > 0 && (
               <section>
-                <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
+                <h2 className="text-sm font-semibold text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mb-3">
                   ━━━ THIS WEEK ━━━
                 </h2>
                 <div className="grid gap-4 md:grid-cols-2">
@@ -231,7 +231,7 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onClose }) => {
             {/* This Month */}
             {groupedEvents.thisMonth.length > 0 && (
               <section>
-                <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
+                <h2 className="text-sm font-semibold text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mb-3">
                   ━━━ THIS MONTH ━━━
                 </h2>
                 <div className="grid gap-4 md:grid-cols-2">
@@ -250,7 +250,7 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onClose }) => {
             {/* Later */}
             {groupedEvents.later.length > 0 && (
               <section>
-                <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
+                <h2 className="text-sm font-semibold text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mb-3">
                   ━━━ LATER ━━━
                 </h2>
                 <div className="grid gap-4 md:grid-cols-2">

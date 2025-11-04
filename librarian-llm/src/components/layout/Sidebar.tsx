@@ -170,19 +170,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
         id="sidebar-navigation"
         role="navigation"
         aria-label="Main menu"
-        className={`fixed top-0 left-0 h-full w-72 bg-white dark:bg-gray-800 shadow-2xl transform transition-transform duration-300 ease-in-out z-50 ${
+        className={`fixed top-0 left-0 h-full w-72 bg-surface dark:bg-navy-900 shadow-2xl transform transition-transform duration-300 ease-in-out z-50 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Header */}
-        <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+        <div className="p-6 border-b border-neutral-300 dark:border-navy-700">
           <div className="flex items-center space-x-3">
             <span className="text-3xl">📚</span>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white">
+              <h2 className="text-lg font-bold text-navy dark:text-white">
                 Librarian LLM
               </h2>
-              <p className="text-xs text-gray-600 dark:text-gray-400">
+              <p className="text-xs text-neutral-text dark:text-neutral-400">
                 Anytown Public Library
               </p>
             </div>
@@ -193,11 +193,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="px-4 pt-4">
           <button
             onClick={() => handleMenuClick('search')}
-            className="w-full p-3 text-left rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            className="w-full p-3 text-left rounded-lg bg-neutral-100 dark:bg-navy-700 hover:bg-neutral-200 dark:hover:bg-navy-600 transition-colors"
           >
             <span className="flex items-center space-x-2">
               <span>🔍</span>
-              <span className="text-sm text-gray-700 dark:text-gray-300">Back to Search</span>
+              <span className="text-sm text-navy dark:text-neutral-300">Back to Search</span>
             </span>
           </button>
         </div>
@@ -206,7 +206,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <nav className="flex-1 overflow-y-auto px-4 py-4">
           {/* MY ACCOUNT Section */}
           <div className="mb-6">
-            <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 px-3">
+            <h3 className="text-xs font-semibold text-neutral-text dark:text-neutral-400 uppercase tracking-wider mb-3 px-3">
               My Account
             </h3>
             <ul className="space-y-1">
@@ -215,17 +215,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   <button
                     ref={index === 0 ? firstMenuItemRef : undefined}
                     onClick={item.onClick}
-                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-navy-700 transition-colors focus:outline-none focus:ring-2 focus:ring-navy"
                   >
                     <span className="flex items-center justify-between">
                       <span className="flex items-center space-x-3">
                         <span className="text-lg">{item.icon}</span>
-                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                        <span className="text-sm font-medium text-navy dark:text-surface">
                           {item.label}
                         </span>
                       </span>
                       {item.badge && (
-                        <span className="text-xs px-2 py-1 rounded-full bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 font-semibold">
+                        <span className="text-xs px-2 py-1 rounded-full bg-sage-50 text-sage-dark dark:bg-sage-900 dark:text-sage-200 font-semibold">
                           {item.badge}
                         </span>
                       )}
@@ -238,7 +238,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           {/* EVENTS Section */}
           <div className="mb-6">
-            <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 px-3">
+            <h3 className="text-xs font-semibold text-neutral-text dark:text-neutral-400 uppercase tracking-wider mb-3 px-3">
               Events
             </h3>
             <ul className="space-y-1">
@@ -246,11 +246,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <li key={item.id}>
                   <button
                     onClick={item.onClick}
-                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-navy-700 transition-colors focus:outline-none focus:ring-2 focus:ring-navy"
                   >
                     <span className="flex items-center space-x-3">
                       <span className="text-lg">{item.icon}</span>
-                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                      <span className="text-sm font-medium text-navy dark:text-surface">
                         {item.label}
                       </span>
                     </span>
@@ -262,17 +262,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </nav>
 
         {/* Footer */}
-        <div className="border-t border-gray-200 dark:border-gray-700 p-4">
+        <div className="border-t border-neutral-300 dark:border-navy-700 p-4">
           <ul className="space-y-1">
             {footerItems.map((item) => (
               <li key={item.id}>
                 <button
                   onClick={item.onClick}
-                  className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full text-left px-3 py-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-navy-700 transition-colors focus:outline-none focus:ring-2 focus:ring-navy"
                 >
                   <span className="flex items-center space-x-3">
                     <span className="text-lg">{item.icon}</span>
-                    <span className="text-sm text-gray-700 dark:text-gray-300">
+                    <span className="text-sm text-neutral-text dark:text-neutral-300">
                       {item.label}
                     </span>
                   </span>

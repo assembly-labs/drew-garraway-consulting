@@ -31,15 +31,15 @@ export const FineCard: React.FC<FineCardProps> = ({
   const getFineTypeInfo = (type: FineItem['type']) => {
     switch (type) {
       case 'overdue':
-        return { icon: '⏰', label: 'Overdue Fine', color: 'text-yellow-600 dark:text-yellow-400' };
+        return { icon: '⏰', label: 'Overdue Fine', color: 'text-attention dark:text-attention' };
       case 'damaged':
-        return { icon: '💔', label: 'Damage Fee', color: 'text-red-600 dark:text-red-400' };
+        return { icon: '💔', label: 'Damage Fee', color: 'text-error dark:text-error' };
       case 'lost':
-        return { icon: '🔍', label: 'Lost Item', color: 'text-purple-600 dark:text-purple-400' };
+        return { icon: '🔍', label: 'Lost Item', color: 'text-coral-600 dark:text-coral-400' };
       case 'processing':
-        return { icon: '📋', label: 'Processing Fee', color: 'text-blue-600 dark:text-blue-400' };
+        return { icon: '📋', label: 'Processing Fee', color: 'text-navy-600 dark:text-navy-400' };
       default:
-        return { icon: '💵', label: 'Fine', color: 'text-gray-600 dark:text-gray-400' };
+        return { icon: '💵', label: 'Fine', color: 'text-neutral-600 dark:text-neutral-400' };
     }
   };
 
@@ -47,10 +47,10 @@ export const FineCard: React.FC<FineCardProps> = ({
 
   return (
     <article
-      className={`bg-white dark:bg-gray-800 border rounded-lg p-4 transition-all ${
+      className={`bg-surface dark:bg-navy-800 border rounded-lg p-4 transition-all ${
         isSelected
-          ? 'border-blue-500 ring-2 ring-blue-200 dark:ring-blue-900'
-          : 'border-gray-200 dark:border-gray-700'
+          ? 'border-navy-500 ring-2 ring-navy-200 dark:ring-navy-900'
+          : 'border-neutral-200 dark:border-navy-700'
       }`}
       aria-label={`${typeInfo.label} of ${formatCurrency(fine.amount)} for ${fine.item?.title || fine.description}`}
     >
@@ -62,7 +62,7 @@ export const FineCard: React.FC<FineCardProps> = ({
               type="checkbox"
               checked={isSelected}
               onChange={() => onToggleSelect(fine.id)}
-              className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+              className="w-5 h-5 text-navy-600 rounded focus:ring-2 focus:ring-navy-500"
               aria-label={`Select ${typeInfo.label} of ${formatCurrency(fine.amount)}`}
             />
           </label>
@@ -80,31 +80,31 @@ export const FineCard: React.FC<FineCardProps> = ({
               <h3 className={`font-semibold ${typeInfo.color}`}>
                 {typeInfo.label}
               </h3>
-              <p className="text-sm text-gray-900 dark:text-gray-100 mt-1">
+              <p className="text-sm text-navy-900 dark:text-surface mt-1">
                 {fine.description}
               </p>
               {fine.item && (
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
                   <span className="font-medium">{fine.item.title}</span> by {fine.item.author}
                 </p>
               )}
               {fine.days_overdue && (
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
                   {fine.days_overdue} days overdue
                 </p>
               )}
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2">
                 Incurred on {formatDate(fine.date_incurred)}
               </p>
             </div>
 
             {/* Amount */}
             <div className="text-right">
-              <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
+              <div className="text-xl font-bold text-navy-900 dark:text-surface">
                 {formatCurrency(fine.amount)}
               </div>
               {fine.status === 'outstanding' && (
-                <span className="text-xs text-red-600 dark:text-red-400">
+                <span className="text-xs text-error dark:text-error">
                   Outstanding
                 </span>
               )}

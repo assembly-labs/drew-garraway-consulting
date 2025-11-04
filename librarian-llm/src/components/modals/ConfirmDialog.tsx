@@ -72,17 +72,17 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
         aria-modal="true"
         aria-labelledby="dialog-title"
         aria-describedby="dialog-description"
-        className="relative bg-white dark:bg-gray-800 rounded-lg shadow-2xl max-w-md w-full mx-4 p-6"
+        className="relative bg-surface dark:bg-navy-800 rounded-lg shadow-2xl max-w-md w-full mx-4 p-6"
       >
         {warning && (
           <div className="mb-4 text-center text-4xl">⚠️</div>
         )}
 
-        <h2 id="dialog-title" className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+        <h2 id="dialog-title" className="text-xl font-bold text-navy-900 dark:text-white mb-3">
           {title}
         </h2>
 
-        <p id="dialog-description" className="text-gray-600 dark:text-gray-300 mb-6">
+        <p id="dialog-description" className="text-neutral-600 dark:text-neutral-300 mb-6">
           {message}
         </p>
 
@@ -90,7 +90,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           <button
             ref={cancelButtonRef}
             onClick={onCancel}
-            className="px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            className="px-4 py-2 text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-navy-700 rounded-md hover:bg-neutral-200 dark:hover:bg-navy-600 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2"
           >
             {cancelText}
           </button>
@@ -98,8 +98,8 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
             onClick={onConfirm}
             className={`px-4 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
               confirmStyle === 'destructive'
-                ? 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500'
-                : 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500'
+                ? 'bg-error text-white hover:bg-error/90 focus:ring-error'
+                : 'bg-navy-600 text-white hover:bg-navy-700 focus:ring-navy-500'
             }`}
           >
             {confirmText}

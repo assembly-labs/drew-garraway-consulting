@@ -2,23 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom scrollbar styles */
+/* CSS Variables for the Librarian LLM Color System */
 @layer base {
+  :root {
+    /* Core Brand Colors */
+    --navy: #1A3E67;
+    --sage: #83A07F;
+    --coral: #F2895E;
+    --neutral: #BAB9B1;
+
+    /* Accessible Text Variants */
+    --navy-text: #1A3E67;
+    --sage-text: #5D7A5A;
+    --coral-text: #D96A3F;
+    --neutral-text: #86857E;
+
+    /* Common Backgrounds */
+    --bg-page: #FAFAF9;
+    --bg-surface: #FFFFFF;
+    --bg-alt: #F5F5F2;
+  }
+
+  /* Typography System */
+  body {
+    @apply bg-page text-navy-900 font-serif;
+    font-weight: 400;
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+  }
+
+  button, input, select, textarea, .btn {
+    @apply font-sans;
+  }
+
+  .font-display {
+    @apply font-sans;
+    font-weight: 700;
+  }
+
+  /* Custom scrollbar styles with brand colors */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-gray-100;
+    @apply bg-neutral-100;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-400 rounded-full;
+    @apply bg-neutral-400 rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-500;
+    @apply bg-neutral-500;
   }
 
   /* Focus visible only on keyboard navigation */
@@ -27,7 +87,7 @@
   }
 
   *:focus-visible {
-    @apply ring-2 ring-primary-500 ring-offset-2;
+    @apply ring-2 ring-navy ring-offset-2;
   }
 }
 
@@ -93,17 +153,17 @@
     display: inline-block;
   }
 
-  /* Message bubble styles */
+  /* Message bubble styles with brand colors */
   .message-bubble {
     @apply rounded-lg p-4 max-w-[85%];
   }
 
   .message-user {
-    @apply bg-primary-100 text-primary-900 ml-auto;
+    @apply bg-navy-50 text-navy-900 ml-auto;
   }
 
   .message-assistant {
-    @apply bg-white border-2 border-gray-200 mr-auto;
+    @apply bg-surface border-2 border-neutral-300 mr-auto;
   }
 
   /* Hide scrollbar while preserving scroll functionality */
@@ -117,66 +177,69 @@
   }
 }
 
-/* Dark mode styles */
+/* Dark mode styles - Using warmer navy tones instead of harsh grays */
 .dark {
   color-scheme: dark;
 }
 
 .dark body {
-  @apply bg-gray-900 text-gray-100;
+  @apply bg-navy-900 text-neutral-100;
 }
 
 .dark header {
-  @apply bg-gray-800 border-gray-700;
+  @apply bg-navy-800 border-navy-700;
 }
 
 .dark .message-user {
-  @apply bg-primary-700 text-white;
+  @apply bg-navy-700 text-white;
 }
 
 .dark .message-assistant {
-  @apply bg-gray-800 border-gray-700 text-gray-100;
+  @apply bg-navy-800 border-navy-700 text-neutral-100;
 }
 
-.dark .bg-gray-50 {
-  @apply bg-gray-900;
+.dark .bg-neutral-50,
+.dark .bg-page {
+  @apply bg-navy-900;
 }
 
-.dark .bg-white {
-  @apply bg-gray-800;
+.dark .bg-surface {
+  @apply bg-navy-800;
 }
 
-.dark .text-gray-900 {
-  @apply text-gray-100;
+.dark .text-navy-900 {
+  @apply text-neutral-100;
 }
 
-.dark .text-gray-600 {
-  @apply text-gray-400;
+.dark .text-neutral-600,
+.dark .text-neutral-text {
+  @apply text-neutral-300;
 }
 
-.dark .text-gray-500 {
-  @apply text-gray-400;
+.dark .text-neutral-500 {
+  @apply text-neutral-300;
 }
 
-.dark .border-gray-200 {
-  @apply border-gray-700;
+.dark .border-neutral-200,
+.dark .border-neutral-300 {
+  @apply border-navy-700;
 }
 
-.dark .bg-yellow-50 {
-  @apply bg-yellow-900;
+/* Success/Info/Attention states with brand colors */
+.dark .bg-success-light {
+  @apply bg-sage-900;
 }
 
-.dark .text-yellow-800 {
-  @apply text-yellow-200;
+.dark .text-success-dark {
+  @apply text-sage-200;
 }
 
-.dark .border-yellow-200 {
-  @apply border-yellow-700;
+.dark .border-success {
+  @apply border-sage-700;
 }
 
 /* ============================================
    VISUAL POLISH & MICRO-INTERACTIONS
-   Added: 2025-10-07
    ============================================ */
 
 /* 1. Universal Button Enhancements */
@@ -206,7 +269,7 @@
 
 .btn-enhanced:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px -5px rgba(26, 62, 103, 0.2);
 }
 
 .btn-enhanced:active {
@@ -216,10 +279,10 @@
 /* 3. Search Button Pulse Animation */
 @keyframes pulse-ring {
   0% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 0 0 rgba(26, 62, 103, 0.5);
   }
   100% {
-    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+    box-shadow: 0 0 0 10px rgba(26, 62, 103, 0);
   }
 }
 
@@ -233,20 +296,20 @@
 
 @keyframes breathe {
   0%, 100% {
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 2px rgba(26, 62, 103, 0.1);
   }
   50% {
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.05);
+    box-shadow: 0 0 0 4px rgba(26, 62, 103, 0.05);
   }
 }
 
-/* 4. Enhanced Focus States */
+/* 4. Enhanced Focus States with Navy */
 @keyframes focus-ring-expand {
   from {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 0 0 rgba(26, 62, 103, 0.5);
   }
   to {
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 0 0 4px rgba(26, 62, 103, 0.2);
   }
 }
 
@@ -272,11 +335,12 @@ main,
 footer,
 article,
 section,
-.bg-white,
-.bg-gray-50,
-.bg-gray-100,
-.bg-gray-800,
-.bg-gray-900 {
+.bg-surface,
+.bg-page,
+.bg-neutral-50,
+.bg-neutral-100,
+.bg-navy-800,
+.bg-navy-900 {
   transition: background-color 0.35s ease-out,
               border-color 0.35s ease-out;
 }
@@ -323,7 +387,7 @@ textarea:focus {
 }
 
 .dark .glass-effect {
-  background: rgba(31, 41, 55, 0.9);
+  background: rgba(26, 62, 103, 0.9);
 }
 
 /* 8. Micro-interactions */
@@ -336,13 +400,8 @@ textarea:focus {
   }
 }
 
-/* 9. Card Lift on Hover - Removed as requested */
-
-/* 10. Smooth Opacity Transitions - Removed as unused */
-
 /* ============================================
    SIDEBAR & MODAL ANIMATIONS
-   Added for Phase 1 Implementation
    ============================================ */
 
 /* Sidebar slide animations */
@@ -386,56 +445,6 @@ textarea:focus {
 
 .modal-enter {
   animation: modalFadeIn 200ms ease-out;
-}
-
-/* Primary color utilities for badges */
-.bg-primary-100 {
-  @apply bg-blue-100;
-}
-
-.text-primary-800 {
-  @apply text-blue-800;
-}
-
-.bg-primary-900 {
-  @apply bg-blue-900;
-}
-
-.text-primary-200 {
-  @apply text-blue-200;
-}
-
-.bg-primary-600 {
-  @apply bg-blue-600;
-}
-
-.bg-primary-700 {
-  @apply bg-blue-700;
-}
-
-.ring-primary-500 {
-  @apply ring-blue-500;
-}
-
-.focus\:ring-primary-500:focus {
-  @apply ring-blue-500;
-}
-
-/* Dark mode primary colors */
-.dark .bg-primary-100 {
-  @apply bg-blue-900;
-}
-
-.dark .text-primary-800 {
-  @apply text-blue-200;
-}
-
-.dark .bg-primary-900 {
-  @apply bg-blue-800;
-}
-
-.dark .text-primary-200 {
-  @apply text-blue-300;
 }
 
 /* Toast animations */

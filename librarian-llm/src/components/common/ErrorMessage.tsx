@@ -16,9 +16,9 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
   suggestions = []
 }) => {
   const typeStyles = {
-    error: 'bg-red-50 border-red-200 text-red-800',
-    warning: 'bg-yellow-50 border-yellow-200 text-yellow-800',
-    info: 'bg-blue-50 border-blue-200 text-blue-800'
+    error: 'bg-error-light border-error text-error-dark',
+    warning: 'bg-attention-light border-attention text-attention-dark',
+    info: 'bg-navy-50 border-navy-200 text-navy-800'
   };
 
   const iconStyles = {
@@ -85,7 +85,7 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
           {onRetry && (
             <button
               onClick={onRetry}
-              className="mt-3 px-4 py-2 bg-white border border-current rounded-md hover:bg-gray-50 transition-colors text-sm font-medium"
+              className="mt-3 px-4 py-2 bg-surface border border-current rounded-md hover:bg-neutral-50 transition-colors text-sm font-medium"
               aria-label="Try again"
             >
               Try Again

@@ -18,8 +18,8 @@ export const CheckoutCard: React.FC<CheckoutCardProps> = ({
 
     if (days_remaining < 0) {
       return {
-        colorClass: 'bg-red-50 border-red-200 dark:bg-red-900 dark:border-red-700',
-        textClass: 'text-red-800 dark:text-red-200',
+        colorClass: 'bg-error/10 border-error dark:bg-error/20 dark:border-error',
+        textClass: 'text-error dark:text-error',
         badge: 'Overdue',
         icon: '⚠️',
         label: `Overdue by ${Math.abs(days_remaining)} day${Math.abs(days_remaining) !== 1 ? 's' : ''}`,
@@ -27,8 +27,8 @@ export const CheckoutCard: React.FC<CheckoutCardProps> = ({
       };
     } else if (days_remaining === 0) {
       return {
-        colorClass: 'bg-red-50 border-red-200 dark:bg-red-900 dark:border-red-700',
-        textClass: 'text-red-800 dark:text-red-200',
+        colorClass: 'bg-error/10 border-error dark:bg-error/20 dark:border-error',
+        textClass: 'text-error dark:text-error',
         badge: 'Due Today',
         icon: '⚠️',
         label: 'Due today',
@@ -36,8 +36,8 @@ export const CheckoutCard: React.FC<CheckoutCardProps> = ({
       };
     } else if (days_remaining <= 3) {
       return {
-        colorClass: 'bg-yellow-50 border-yellow-200 dark:bg-yellow-900 dark:border-yellow-700',
-        textClass: 'text-yellow-800 dark:text-yellow-200',
+        colorClass: 'bg-attention/10 border-attention dark:bg-attention/20 dark:border-attention',
+        textClass: 'text-attention-dark dark:text-coral-300',
         badge: 'Due Soon',
         icon: '⏰',
         label: `Due in ${days_remaining} day${days_remaining !== 1 ? 's' : ''}`,
@@ -45,8 +45,8 @@ export const CheckoutCard: React.FC<CheckoutCardProps> = ({
       };
     } else {
       return {
-        colorClass: 'bg-gray-50 border-gray-200 dark:bg-gray-800 dark:border-gray-700',
-        textClass: 'text-gray-700 dark:text-gray-300',
+        colorClass: 'bg-neutral-50 border-neutral-200 dark:bg-navy-800 dark:border-navy-700',
+        textClass: 'text-neutral-700 dark:text-neutral-300',
         badge: null,
         icon: '✓',
         label: `Due in ${days_remaining} days`,
@@ -93,7 +93,7 @@ export const CheckoutCard: React.FC<CheckoutCardProps> = ({
       <div className="flex flex-col sm:flex-row gap-4">
         {/* Book Cover Placeholder */}
         <div className="flex-shrink-0">
-          <div className="w-16 h-24 sm:w-20 sm:h-28 bg-gradient-to-br from-blue-400 to-blue-600 rounded flex items-center justify-center text-white font-bold text-xs text-center p-2">
+          <div className="w-16 h-24 sm:w-20 sm:h-28 bg-gradient-to-br from-navy-400 to-navy-600 rounded flex items-center justify-center text-white font-bold text-xs text-center p-2">
             {checkout.book.title.substring(0, 20)}
           </div>
         </div>
@@ -102,17 +102,17 @@ export const CheckoutCard: React.FC<CheckoutCardProps> = ({
         <div className="flex-1">
           {/* Title and Author */}
           <div className="mb-2">
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+            <h3 className="font-semibold text-navy-900 dark:text-surface">
               {checkout.book.title}
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">
               by {checkout.book.author}
             </p>
           </div>
 
           {/* Format Badge */}
           <div className="flex items-center gap-2 mb-2">
-            <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600">
+            <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-surface dark:bg-navy-700 border border-neutral-300 dark:border-navy-600">
               <span>{format.icon}</span>
               <span>{format.label}</span>
             </span>
@@ -128,9 +128,9 @@ export const CheckoutCard: React.FC<CheckoutCardProps> = ({
               {status.badge && (
                 <span className={`
                   inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
-                  ${status.urgency === 'high' ? 'bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100' :
-                    status.urgency === 'medium' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100' :
-                    'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100'}
+                  ${status.urgency === 'high' ? 'bg-error-light text-error-dark dark:bg-error/30 dark:text-error' :
+                    status.urgency === 'medium' ? 'bg-attention-light text-attention-dark dark:bg-attention/30 dark:text-coral-300' :
+                    'bg-neutral-100 text-neutral-800 dark:bg-navy-700 dark:text-neutral-100'}
                 `}>
                   {status.badge}
                 </span>
@@ -140,7 +140,7 @@ export const CheckoutCard: React.FC<CheckoutCardProps> = ({
           </div>
 
           {/* Renewals Info */}
-          <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+          <div className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
             Renewals: {checkout.renewals_used}/{checkout.renewals_max}
           </div>
         </div>
@@ -156,15 +156,15 @@ export const CheckoutCard: React.FC<CheckoutCardProps> = ({
               className={`
                 px-4 py-2 rounded-md font-medium transition-all
                 ${isRenewing
-                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed dark:bg-gray-600 dark:text-gray-400'
-                  : 'bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'}
+                  ? 'bg-neutral-300 text-neutral-500 cursor-not-allowed dark:bg-navy-600 dark:text-neutral-400'
+                  : 'bg-navy-600 text-white hover:bg-navy-700 dark:bg-navy-500 dark:hover:bg-navy-600 focus:outline-none focus:ring-2 focus:ring-navy-500 focus:ring-offset-2'}
                 min-w-[100px]
               `}
             >
               {isRenewing ? 'Renewing...' : 'Renew'}
             </button>
           ) : (
-            <div className="text-sm text-gray-500 dark:text-gray-400 italic">
+            <div className="text-sm text-neutral-500 dark:text-neutral-400 italic">
               Maximum renewals reached ({checkout.renewals_max}/{checkout.renewals_max})
             </div>
           )}
