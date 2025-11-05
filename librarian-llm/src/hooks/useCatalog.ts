@@ -44,7 +44,7 @@ const getFallbackCatalog = (): CatalogItem[] => {
       isbn: '9780735219090',
       title: 'Where the Crawdads Sing',
       author: 'Delia Owens',
-      cover: 'https://via.placeholder.com/150x225/4F46E5/FFFFFF?text=Crawdads',
+      cover: '',
       formats: [
         { type: 'physical', status: 'available', copies_available: 3 },
         { type: 'ebook', status: 'waitlist', wait_time: '2 weeks' },
@@ -63,7 +63,7 @@ const getFallbackCatalog = (): CatalogItem[] => {
       isbn: '9781250178619',
       title: 'The Thursday Murder Club',
       author: 'Richard Osman',
-      cover: 'https://via.placeholder.com/150x225/7C3AED/FFFFFF?text=Thursday',
+      cover: '',
       formats: [
         { type: 'physical', status: 'available', copies_available: 2 },
         { type: 'ebook', status: 'available' }
@@ -81,7 +81,7 @@ const getFallbackCatalog = (): CatalogItem[] => {
       isbn: '9780399590504',
       title: 'Educated',
       author: 'Tara Westover',
-      cover: 'https://via.placeholder.com/150x225/DC2626/FFFFFF?text=Educated',
+      cover: '',
       formats: [
         { type: 'physical', status: 'checked_out', due_date: '2025-10-20' },
         { type: 'ebook', status: 'available' },
@@ -100,7 +100,7 @@ const getFallbackCatalog = (): CatalogItem[] => {
       isbn: '9780385547345',
       title: 'The Silent Patient',
       author: 'Alex Michaelides',
-      cover: 'https://via.placeholder.com/150x225/059669/FFFFFF?text=Silent',
+      cover: '',
       formats: [
         { type: 'physical', status: 'available', copies_available: 5 },
         { type: 'ebook', status: 'available' }
@@ -118,7 +118,7 @@ const getFallbackCatalog = (): CatalogItem[] => {
       isbn: '9780525559474',
       title: 'The Midnight Library',
       author: 'Matt Haig',
-      cover: 'https://via.placeholder.com/150x225/0891B2/FFFFFF?text=Midnight',
+      cover: '',
       formats: [
         { type: 'physical', status: 'waitlist', wait_time: '1 week', holds: 8 },
         { type: 'ebook', status: 'available' },

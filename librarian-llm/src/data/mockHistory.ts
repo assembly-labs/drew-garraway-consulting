@@ -10,7 +10,7 @@ export const mockHistory: HistoryItem[] = [
       id: "book_042",
       title: "The Midnight Library",
       author: "Matt Haig",
-      cover: "/covers/midnight-library.jpg",
+      cover: "",
       isbn: "978-0-52-555947-4"
     },
     format: "physical",
@@ -25,7 +25,7 @@ export const mockHistory: HistoryItem[] = [
       id: "book_087",
       title: "Educated",
       author: "Tara Westover",
-      cover: "/covers/educated.jpg",
+      cover: "",
       isbn: "978-0-39-959050-4"
     },
     format: "audiobook",
@@ -40,7 +40,7 @@ export const mockHistory: HistoryItem[] = [
       id: "book_123",
       title: "Atomic Habits",
       author: "James Clear",
-      cover: "/covers/atomic-habits.jpg",
+      cover: "",
       isbn: "978-0-73-521129-2"
     },
     format: "ebook",
@@ -55,7 +55,7 @@ export const mockHistory: HistoryItem[] = [
       id: "book_156",
       title: "Project Hail Mary",
       author: "Andy Weir",
-      cover: "/covers/hail-mary.jpg",
+      cover: "",
       isbn: "978-0-59-313523-1"
     },
     format: "physical",
@@ -70,7 +70,7 @@ export const mockHistory: HistoryItem[] = [
       id: "book_201",
       title: "The Seven Husbands of Evelyn Hugo",
       author: "Taylor Jenkins Reid",
-      cover: "/covers/evelyn-hugo.jpg",
+      cover: "",
       isbn: "978-1-50-116198-3"
     },
     format: "ebook",
@@ -87,7 +87,7 @@ export const mockHistory: HistoryItem[] = [
       id: "book_312",
       title: "Sapiens: A Brief History of Humankind",
       author: "Yuval Noah Harari",
-      cover: "/covers/sapiens.jpg",
+      cover: "",
       isbn: "978-0-06-231609-7"
     },
     format: "physical",
@@ -102,7 +102,7 @@ export const mockHistory: HistoryItem[] = [
       id: "book_445",
       title: "The Silent Patient",
       author: "Alex Michaelides",
-      cover: "/covers/silent-patient.jpg",
+      cover: "",
       isbn: "978-1-25-030169-7"
     },
     format: "audiobook",
@@ -117,7 +117,7 @@ export const mockHistory: HistoryItem[] = [
       id: "book_567",
       title: "Where the Crawdads Sing",
       author: "Delia Owens",
-      cover: "/covers/crawdads.jpg",
+      cover: "",
       isbn: "978-0-73-521909-0"
     },
     format: "ebook",

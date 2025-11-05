@@ -14,7 +14,7 @@ export const mockHolds: HoldItem[] = [
       id: "book_201",
       title: "The Seven Husbands of Evelyn Hugo",
       author: "Taylor Jenkins Reid",
-      cover: "/covers/seven-husbands.jpg"
+      cover: ""
     },
     format: "ebook",
     status: "ready",
@@ -32,7 +32,7 @@ export const mockHolds: HoldItem[] = [
       id: "book_202",
       title: "Tomorrow, and Tomorrow, and Tomorrow",
       author: "Gabrielle Zevin",
-      cover: "/covers/tomorrow.jpg"
+      cover: ""
     },
     format: "physical",
     status: "waiting",
@@ -50,7 +50,7 @@ export const mockHolds: HoldItem[] = [
       id: "book_203",
       title: "Holly",
       author: "Stephen King",
-      cover: "/covers/holly.jpg"
+      cover: ""
     },
     format: "audiobook",
     status: "waiting",
@@ -68,7 +68,7 @@ export const mockHolds: HoldItem[] = [
       id: "book_204",
       title: "The Women",
       author: "Kristin Hannah",
-      cover: "/covers/the-women.jpg"
+      cover: ""
     },
     format: "physical",
     status: "coming_soon",

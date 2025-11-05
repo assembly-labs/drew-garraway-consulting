@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CatalogItem } from '../../types';
 import { formatItemCreator, getRatingStars } from '../../utils/formatters';
+import { getOpenLibraryCover } from '../../utils/bookCovers';
 
 interface ItemDetailsModalProps {
   item: CatalogItem | null;
@@ -17,6 +18,32 @@ export const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const [imageError, setImageError] = useState(false);
+  const [coverUrl, setCoverUrl] = useState<string>('');
+
+  // Get book initials for fallback display
+  const getBookInitials = () => {
+    if (!item) return '';
+    const words = item.title.split(' ').filter(w => w.length > 0);
+    if (words.length === 1) {
+      return words[0].substring(0, 2).toUpperCase();
+    }
+    return words.slice(0, 2).map(w => w[0]).join('').toUpperCase();
+  };
+
+  // Update cover URL when item changes
+  useEffect(() => {
+    if (item) {
+      setImageError(false);
+      if ('isbn' in item && item.isbn) {
+        setCoverUrl(getOpenLibraryCover(item.isbn, 'L'));
+      } else if (item.cover && !item.cover.includes('placeholder')) {
+        setCoverUrl(item.cover);
+      } else {
+        setCoverUrl('');
+      }
+    }
+  }, [item]);
 
   // Focus management
   useEffect(() => {
@@ -115,14 +142,26 @@ export const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
           <div className="flex flex-col md:flex-row gap-6 mb-6">
             {/* Cover Image */}
             <div className="flex-shrink-0">
-              <img
-                src={item.cover}
-                alt={`Cover of ${item.title}`}
-                className="w-40 h-60 md:w-48 md:h-72 object-cover rounded-lg shadow-lg mx-auto md:mx-0"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'https://via.placeholder.com/192x288/4F46E5/FFFFFF?text=No+Image';
-                }}
-              />
+              {!imageError && coverUrl ? (
+                <img
+                  src={coverUrl}
+                  alt={`Cover of ${item.title}`}
+                  className="w-40 h-60 md:w-48 md:h-72 object-cover rounded-lg shadow-lg mx-auto md:mx-0"
+                  onError={() => setImageError(true)}
+                />
+              ) : (
+                <div className="w-40 h-60 md:w-48 md:h-72 bg-gradient-to-br from-navy-500 to-navy-700
+                              dark:from-navy-700 dark:to-navy-900
+                              rounded-lg shadow-lg mx-auto md:mx-0 flex flex-col items-center justify-center
+                              border-2 border-navy-400 dark:border-navy-600">
+                  <div className="text-white text-3xl font-bold tracking-wider mb-2">
+                    {getBookInitials()}
+                  </div>
+                  <div className="text-white/60 text-lg">
+                    {item.itemType === 'book' ? '📖' : '📦'}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Title and Metadata */}
