@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HoldItem } from '../../types';
 
 interface HoldCardProps {
@@ -16,6 +16,17 @@ export const HoldCard: React.FC<HoldCardProps> = ({
   onCheckOut,
   isProcessing
 }) => {
+  const [imageError, setImageError] = useState(false);
+
+  // Get book initials for fallback display
+  const getBookInitials = () => {
+    const words = hold.book.title.split(' ').filter(w => w.length > 0);
+    if (words.length === 1) {
+      return words[0].substring(0, 2).toUpperCase();
+    }
+    return words.slice(0, 2).map(w => w[0]).join('').toUpperCase();
+  };
+
   // Get status display info
   const getStatusDisplay = () => {
     switch (hold.status) {
@@ -104,11 +115,29 @@ export const HoldCard: React.FC<HoldCardProps> = ({
       aria-label={`${hold.book.title} by ${hold.book.author}, ${format.label}, ${status.badge}`}
     >
       <div className="flex flex-col sm:flex-row gap-4">
-        {/* Book Cover Placeholder */}
+        {/* Book Cover
+          * Sage gradient fallback indicates waiting/available status
+          * Green tone suggests positive state (ready or coming soon)
+        */}
         <div className="flex-shrink-0">
-          <div className="w-16 h-24 sm:w-20 sm:h-28 bg-gradient-to-br from-navy-400 to-navy-600 rounded flex items-center justify-center text-white font-bold text-xs text-center p-2">
-            {hold.book.title.substring(0, 20)}
-          </div>
+          {!imageError && hold.book.cover && !hold.book.cover.includes('placeholder') ? (
+            <img
+              src={hold.book.cover}
+              alt={`Cover of ${hold.book.title}`}
+              onError={() => setImageError(true)}
+              className="w-16 h-24 sm:w-20 sm:h-28 object-cover rounded shadow-sm"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-16 h-24 sm:w-20 sm:h-28 bg-gradient-to-br from-sage-500 to-sage-700
+                          dark:from-sage-600 dark:to-sage-800
+                          rounded shadow-sm flex flex-col items-center justify-center
+                          border border-sage-600 dark:border-sage-700">
+              <div className="text-white text-sm sm:text-base font-bold">
+                {getBookInitials()}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Book Info */}

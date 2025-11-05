@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CheckoutItem } from '../../types';
 
 interface CheckoutCardProps {
@@ -12,6 +12,17 @@ export const CheckoutCard: React.FC<CheckoutCardProps> = ({
   onRenew,
   isRenewing
 }) => {
+  const [imageError, setImageError] = useState(false);
+
+  // Get book initials for fallback display
+  const getBookInitials = () => {
+    const words = checkout.book.title.split(' ').filter(w => w.length > 0);
+    if (words.length === 1) {
+      return words[0].substring(0, 2).toUpperCase();
+    }
+    return words.slice(0, 2).map(w => w[0]).join('').toUpperCase();
+  };
+
   // Get due date status for styling and messaging
   const getDueDateStatus = () => {
     const { days_remaining } = checkout;
@@ -91,11 +102,29 @@ export const CheckoutCard: React.FC<CheckoutCardProps> = ({
       aria-label={`${checkout.book.title} by ${checkout.book.author}, ${format.label}, ${status.label}`}
     >
       <div className="flex flex-col sm:flex-row gap-4">
-        {/* Book Cover Placeholder */}
+        {/* Book Cover
+          * Coral gradient fallback indicates items requiring action (returns)
+          * Helps users quickly identify checked-out items needing attention
+        */}
         <div className="flex-shrink-0">
-          <div className="w-16 h-24 sm:w-20 sm:h-28 bg-gradient-to-br from-navy-400 to-navy-600 rounded flex items-center justify-center text-white font-bold text-xs text-center p-2">
-            {checkout.book.title.substring(0, 20)}
-          </div>
+          {!imageError && checkout.book.cover && !checkout.book.cover.includes('placeholder') ? (
+            <img
+              src={checkout.book.cover}
+              alt={`Cover of ${checkout.book.title}`}
+              onError={() => setImageError(true)}
+              className="w-16 h-24 sm:w-20 sm:h-28 object-cover rounded shadow-sm"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-16 h-24 sm:w-20 sm:h-28 bg-gradient-to-br from-coral-400 to-coral-600
+                          dark:from-coral-500 dark:to-coral-700
+                          rounded shadow-sm flex flex-col items-center justify-center
+                          border border-coral-500 dark:border-coral-600">
+              <div className="text-white text-sm sm:text-base font-bold">
+                {getBookInitials()}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Book Info */}

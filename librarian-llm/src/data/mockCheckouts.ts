@@ -24,7 +24,7 @@ export const mockCheckouts: CheckoutItem[] = [
       id: "book_042",
       title: "The Midnight Library",
       author: "Matt Haig",
-      cover: "/covers/midnight-library.jpg"
+      cover: ""
     },
     format: "physical",
     checked_out_date: getDateFromToday(-11), // 11 days ago
@@ -41,7 +41,7 @@ export const mockCheckouts: CheckoutItem[] = [
       id: "book_087",
       title: "Educated",
       author: "Tara Westover",
-      cover: "/covers/educated.jpg"
+      cover: ""
     },
     format: "audiobook",
     checked_out_date: getDateFromToday(-15), // 15 days ago
@@ -58,7 +58,7 @@ export const mockCheckouts: CheckoutItem[] = [
       id: "book_123",
       title: "Atomic Habits",
       author: "James Clear",
-      cover: "/covers/atomic-habits.jpg"
+      cover: ""
     },
     format: "ebook",
     checked_out_date: getDateFromToday(-18), // 18 days ago
@@ -75,7 +75,7 @@ export const mockCheckouts: CheckoutItem[] = [
       id: "book_156",
       title: "Project Hail Mary",
       author: "Andy Weir",
-      cover: "/covers/hail-mary.jpg"
+      cover: ""
     },
     format: "physical",
     checked_out_date: getDateFromToday(-23), // 23 days ago

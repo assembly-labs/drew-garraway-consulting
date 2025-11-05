@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CatalogItem } from '../../types';
 import {
   formatAvailability,
@@ -8,6 +8,7 @@ import {
   formatSubjects,
   formatItemCreator
 } from '../../utils/formatters';
+import { getOpenLibraryCover } from '../../utils/bookCovers';
 
 interface BookCardProps {
   book: CatalogItem;
@@ -22,9 +23,31 @@ export const BookCard: React.FC<BookCardProps> = ({
 }) => {
   const [imageError, setImageError] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [coverUrl, setCoverUrl] = useState<string>('');
+
+  useEffect(() => {
+    // Determine which cover image to display
+    // Priority: 1) Open Library via ISBN, 2) Valid existing cover, 3) Fallback gradient
+    if ('isbn' in book && book.isbn) {
+      setCoverUrl(getOpenLibraryCover(book.isbn, 'M'));
+    } else if (book.cover && !book.cover.includes('placeholder')) {
+      setCoverUrl(book.cover);
+    } else {
+      setCoverUrl(''); // Will trigger fallback gradient display
+    }
+  }, [book]);
 
   const handleImageError = () => {
     setImageError(true);
+  };
+
+  // Get book initials for fallback display
+  const getBookInitials = () => {
+    const words = book.title.split(' ').filter(w => w.length > 0);
+    if (words.length === 1) {
+      return words[0].substring(0, 2).toUpperCase();
+    }
+    return words.slice(0, 2).map(w => w[0]).join('').toUpperCase();
   };
 
   const primaryFormat = book.formats[0];
@@ -37,21 +60,32 @@ export const BookCard: React.FC<BookCardProps> = ({
       aria-label={`${book.title} by ${formatItemCreator(book)}`}
     >
       <div className="flex gap-4">
-        {/* Book Cover */}
+        {/* Book Cover
+          * Displays book cover with fallback strategy:
+          * 1. Real image from Open Library API (if ISBN available)
+          * 2. Navy gradient with book initials (if image fails/unavailable)
+          * Navy color indicates catalog/browsing context
+        */}
         <div className="flex-shrink-0">
-          {!imageError ? (
+          {!imageError && coverUrl ? (
             <img
-              src={book.cover}
+              src={coverUrl}
               alt={`Cover of ${book.title}`}
               onError={handleImageError}
               className="w-24 h-36 object-cover rounded-md shadow-sm"
               loading="lazy"
             />
           ) : (
-            <div className="w-24 h-36 bg-gradient-to-br from-navy-100 to-navy-200
-                          dark:from-navy-900 dark:to-navy-800
-                          rounded-md shadow-sm flex items-center justify-center">
-              <span className="text-4xl">📚</span>
+            <div className="w-24 h-36 bg-gradient-to-br from-navy-500 to-navy-700
+                          dark:from-navy-700 dark:to-navy-900
+                          rounded-md shadow-sm flex flex-col items-center justify-center
+                          border border-navy-400 dark:border-navy-600">
+              <div className="text-white text-xl font-bold tracking-wider">
+                {getBookInitials()}
+              </div>
+              <div className="text-white/60 text-xs mt-1">
+                {book.itemType === 'book' ? '📖' : '📦'}
+              </div>
             </div>
           )}
         </div>

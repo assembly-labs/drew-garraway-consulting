@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StarRating } from '../common/StarRating';
 import { HistoryItem } from '../../types';
+import { getOpenLibraryCover } from '../../utils/bookCovers';
 
 interface HistoryCardProps {
   item: HistoryItem;
@@ -15,6 +16,17 @@ export const HistoryCard: React.FC<HistoryCardProps> = ({
   onReadAgain,
   onDelete
 }) => {
+  const [imageError, setImageError] = useState(false);
+
+  // Get book initials for fallback display
+  const getBookInitials = () => {
+    const words = item.book.title.split(' ').filter(w => w.length > 0);
+    if (words.length === 1) {
+      return words[0].substring(0, 2).toUpperCase();
+    }
+    return words.slice(0, 2).map(w => w[0]).join('').toUpperCase();
+  };
+
   // Format dates for display
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
@@ -41,16 +53,28 @@ export const HistoryCard: React.FC<HistoryCardProps> = ({
       aria-label={`${item.book.title} by ${item.book.author}, returned ${formatDate(item.returned_date)}`}
     >
       <div className="flex gap-4">
-        {/* Book Cover */}
+        {/* Book Cover
+          * Purple gradient fallback indicates historical/past items
+          * Helps distinguish completed reads from active items
+        */}
         <div className="flex-shrink-0">
-          <img
-            src={item.book.cover}
-            alt={`Cover of ${item.book.title}`}
-            className="w-16 h-24 object-cover rounded shadow-sm"
-            onError={(e) => {
-              e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iOTAiIHZpZXdCb3g9IjAgMCA2MCA5MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjkwIiBmaWxsPSIjRTVFN0VCIi8+CjxwYXRoIGQ9Ik0yMiA0MEgyMlYzNkgyNlYzNkgzOFYzNkgzOFY0MEgzNFY0MEgzNFY0NEgzMFY0NEgzMFY0MEgyNlY0MFY0NFYNDRIMjJWNDBaIiBmaWxsPSIjOUIyQzJDIi8+CjxwYXRoIGQ9Ik0yMiA1MkgyMlY1NkgyNlY1NkgzNFY1NkgzOFY1NkgzOFY1MkgzNFY1MkgzMFY1MkgyNlY1MkgyMloiIGZpbGw9IiM2Qjc1ODAiLz4KPC9zdmc+';
-            }}
-          />
+          {!imageError && (item.book.isbn || (item.book.cover && !item.book.cover.includes('placeholder'))) ? (
+            <img
+              src={item.book.isbn ? getOpenLibraryCover(item.book.isbn, 'M') : item.book.cover}
+              alt={`Cover of ${item.book.title}`}
+              className="w-16 h-24 object-cover rounded shadow-sm"
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            <div className="w-16 h-24 bg-gradient-to-br from-purple-500 to-purple-700
+                          dark:from-purple-600 dark:to-purple-800
+                          rounded shadow-sm flex flex-col items-center justify-center
+                          border border-purple-600 dark:border-purple-700">
+              <div className="text-white text-sm font-bold">
+                {getBookInitials()}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Book Details */}
