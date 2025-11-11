@@ -30,6 +30,7 @@ export interface DashboardCardProps {
   habit: Habit;
   isCompleted: boolean;
   onToggle: () => void;
+  isEditable?: boolean;
 }
 
 export interface ModuleRoute {

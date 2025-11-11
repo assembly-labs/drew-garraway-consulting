@@ -1,39 +1,40 @@
 import { useState } from 'react';
-import { motion, PanInfo, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { DashboardCardProps } from '@/types';
+import { useSwipeable } from '@/shared/hooks/useSwipeable';
 
 export const SimpleHabitCard: React.FC<DashboardCardProps> = ({
   habit,
   isCompleted,
   onToggle,
+  isEditable = true,
 }) => {
-  const [isDragging, setIsDragging] = useState(false);
   const [showCheckmark, setShowCheckmark] = useState(false);
-  const controls = useAnimation();
 
-  const handleDragEnd = async (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    setIsDragging(false);
-
-    // If dragged more than 50px in either direction, toggle
-    if (Math.abs(info.offset.x) > 50 && !isCompleted) {
-      // Show checkmark briefly before toggling
-      setShowCheckmark(true);
-
-      // Animate back to center
-      await controls.start({
-        x: 0,
-        transition: { duration: 0.3, type: "spring", stiffness: 300 }
-      });
-
-      // Wait 300ms to show checkmark, then toggle (which will trigger exit animation)
-      setTimeout(() => {
-        onToggle();
-      }, 300);
-    } else {
-      // Snap back if not dragged far enough
-      controls.start({ x: 0, transition: { duration: 0.2 } });
-    }
-  };
+  /**
+   * Custom hook for Tinder-style swipe behavior
+   * Handles all drag physics, rotation, and opacity transforms
+   */
+  const {
+    x,
+    rotate,
+    opacity,
+    isDragging,
+    handleDragStart,
+    handleDragEnd,
+  } = useSwipeable(
+    () => {
+      // Callback when swipe completes (card goes off-screen)
+      if (!isCompleted) {
+        setShowCheckmark(true);
+        // Small delay to show checkmark before state update
+        setTimeout(() => {
+          onToggle();
+        }, 150);
+      }
+    },
+    isEditable && !isCompleted // Only enable swipe if editable and not completed
+  );
 
   const categoryColors = {
     physical: {
@@ -60,34 +61,69 @@ export const SimpleHabitCard: React.FC<DashboardCardProps> = ({
 
   return (
     <motion.div
-      drag="x"
+      // Enable horizontal dragging only when editable and not completed
+      drag={isEditable && !isCompleted ? "x" : false}
+
+      // No constraints - allow card to move freely during drag
       dragConstraints={{ left: 0, right: 0 }}
-      dragElastic={0.2}
-      onDragStart={() => !isCompleted && setIsDragging(true)}
+      dragElastic={1} // Allow natural movement beyond constraints
+      dragMomentum={false} // Disable momentum for precise control
+
+      // Drag handlers from useSwipeable hook
+      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      animate={controls}
-      whileHover={!isCompleted ? { scale: 1.02 } : {}}
-      whileTap={!isCompleted ? { scale: 0.98 } : {}}
+
+      // Bind motion values for smooth transforms
+      style={{
+        x, // Horizontal position (controlled by drag)
+        rotate, // Rotation based on x position (-15deg to +15deg)
+        opacity, // Opacity fades as card moves away
+        touchAction: 'pan-y', // Allow vertical scrolling on touch devices
+      }}
+
+      // Hover and tap animations for better UX feedback
+      whileHover={isEditable && !isCompleted ? { scale: 1.02 } : {}}
+      whileTap={isEditable && !isCompleted ? { scale: 0.98 } : {}}
+
+      // Exit animation when card is removed from DOM (after completion)
       exit={{
         x: 300,
         opacity: 0,
-        transition: { duration: 0.4, ease: "easeOut" }
+        rotate: 15,
+        transition: {
+          duration: 0.3,
+          ease: [0.4, 0, 0.2, 1] // Custom easing for smooth exit
+        }
       }}
+
+      // Animate layout changes smoothly
       layout
+
+      // Transition for layout and scale animations
+      transition={{
+        layout: { duration: 0.3, ease: "easeInOut" },
+        scale: { duration: 0.2 },
+      }}
+
       className={`
         relative overflow-hidden rounded-xl p-5
-        transition-all duration-300 border
+        border
         ${colors.bg} ${colors.text} ${colors.border}
-        ${!isCompleted ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}
-        ${isDragging ? 'shadow-2xl scale-105' : 'shadow-lg hover:shadow-xl'}
+        ${isEditable && !isCompleted ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}
+        ${isDragging ? 'shadow-2xl z-10' : 'shadow-lg hover:shadow-xl'}
+        ${!isEditable ? 'opacity-60' : ''}
       `}
-      style={{
-        touchAction: 'pan-y', // Allow vertical scrolling
-      }}
     >
       <div className="flex items-center justify-between">
         <div className="flex-1">
-          <h3 className="text-lg font-semibold">{habit.name}</h3>
+          <h3 className="text-lg font-semibold flex items-center gap-2">
+            {habit.name}
+            {!isEditable && (
+              <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+              </svg>
+            )}
+          </h3>
         </div>
 
         {showCheckmark || isCompleted ? (
@@ -116,14 +152,44 @@ export const SimpleHabitCard: React.FC<DashboardCardProps> = ({
         )}
       </div>
 
-      {/* Swipe indicator - only shows during drag */}
+      {/* Swipe indicator overlay - shows during drag with animated entrance */}
       {!isCompleted && isDragging && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-10 backdrop-blur-sm"
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-10 backdrop-blur-sm rounded-xl pointer-events-none"
         >
-          <span className="text-lg font-medium">Release to complete</span>
+          <div className="flex flex-col items-center gap-2">
+            <motion.div
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <svg
+                className="w-8 h-8 text-white drop-shadow-lg"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </motion.div>
+            <span className="text-sm font-semibold text-white drop-shadow-lg">
+              Release to complete
+            </span>
+          </div>
         </motion.div>
       )}
     </motion.div>
