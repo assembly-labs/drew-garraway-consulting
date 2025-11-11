@@ -12,7 +12,13 @@ interface ClusterCardProps {
 export const ClusterCard: React.FC<ClusterCardProps> = ({ cluster }) => {
   const completedHabits = useHabitStore(state => state.completedHabits);
   const toggleHabit = useHabitStore(state => state.toggleHabit);
+  const currentDate = useHabitStore(state => state.currentDate);
+  const isDateEditable = useHabitStore(state => state.isDateEditable);
   const [toast, setToast] = useState<{ habitId: string; habitName: string } | null>(null);
+
+  const isEditable = useMemo(() => {
+    return isDateEditable(currentDate);
+  }, [currentDate, isDateEditable]);
 
   // Calculate progress locally - NOT in the selector
   const progress = useMemo(() => {
@@ -110,6 +116,7 @@ export const ClusterCard: React.FC<ClusterCardProps> = ({ cluster }) => {
                   habit={habit}
                   isCompleted={isCompleted}
                   onToggle={() => handleToggle(habit.id, habit.name)}
+                  isEditable={isEditable}
                 />
               );
             })}

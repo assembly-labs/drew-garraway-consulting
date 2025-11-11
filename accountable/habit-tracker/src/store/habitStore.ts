@@ -1,7 +1,9 @@
 import { create } from 'zustand';
-import { format } from 'date-fns';
+import { format, differenceInDays } from 'date-fns';
 import { createRepository } from '@/data/repositories';
 import { CLUSTERS } from '@/config/clusters';
+
+const MAX_EDITABLE_DAYS = 5;
 
 interface HabitState {
   currentDate: string;
@@ -12,6 +14,7 @@ interface HabitState {
   loadDate: (date: string) => Promise<void>;
   toggleHabit: (habitId: string) => Promise<void>;
   calculateStreak: () => Promise<number>;
+  isDateEditable: (date: string) => boolean;
 }
 
 const repository = createRepository();
@@ -33,7 +36,14 @@ export const useHabitStore = create<HabitState>((set, get) => ({
   },
 
   toggleHabit: async (habitId: string) => {
-    const { currentDate, completedHabits } = get();
+    const { currentDate, completedHabits, isDateEditable } = get();
+
+    // Check if date is editable before allowing toggle
+    if (!isDateEditable(currentDate)) {
+      console.warn(`Cannot edit habits for ${currentDate} - beyond 5 day window`);
+      return;
+    }
+
     const newCompleted = new Set(completedHabits);
 
     if (newCompleted.has(habitId)) {
@@ -87,5 +97,18 @@ export const useHabitStore = create<HabitState>((set, get) => ({
     }
 
     return streak;
+  },
+
+  isDateEditable: (date: string) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset to start of day
+
+    const checkDate = new Date(date);
+    checkDate.setHours(0, 0, 0, 0); // Reset to start of day
+
+    const daysDiff = differenceInDays(today, checkDate);
+
+    // Can edit if within 0-4 days ago (today + 4 previous days = 5 total)
+    return daysDiff >= 0 && daysDiff < MAX_EDITABLE_DAYS;
   },
 }));
