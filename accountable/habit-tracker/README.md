@@ -16,7 +16,7 @@ Open [http://localhost:5173](http://localhost:5173)
 
 ## 💰 Zero-Cost Testing & Deployment Strategy
 
-**IMPORTANT:** This project is configured to minimize Netlify build credits by testing everything locally first.
+**IMPORTANT:** This project is deployed to Cloudflare Pages with automatic deployments from GitHub.
 
 ### Local Testing (FREE)
 
@@ -28,11 +28,14 @@ npm run preflight
 npm run test:preview
 ```
 
-### Deployment (Manual Only)
+### Deployment
 
 ```bash
-# Build locally, deploy only the dist/ folder (uses 0 Netlify credits)
-npm run build && netlify deploy --dir=dist --prod
+# Option 1: Auto-deploy via GitHub push (recommended)
+git push
+
+# Option 2: Manual deploy via Wrangler CLI
+npm run build && wrangler pages deploy dist --project-name=accountable-habit-tracker
 ```
 
 ## 📁 Project Structure
@@ -119,16 +122,18 @@ git commit -m "Description of changes"
 git push
 ```
 
-### 3. Deploy to Netlify (Manual)
+### 3. Deploy to Cloudflare Pages
 
 ```bash
-# Option A: CLI (Recommended - 0 credits)
-npm run build
-netlify deploy --dir=dist --prod
+# Option A: Automatic (via GitHub push)
+# Simply push to GitHub - Cloudflare auto-deploys
 
-# Option B: Drag & Drop (0 credits)
-# 1. Run: npm run build
-# 2. Drag dist/ folder to Netlify UI
+# Option B: Manual CLI deployment
+npm run build
+wrangler pages deploy dist --project-name=accountable-habit-tracker
+
+# Option C: Using npm script
+npm run deploy:production
 ```
 
 ## 📋 Documentation

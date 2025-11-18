@@ -1,0 +1,12 @@
+name = "accountable-habit-tracker"
+compatibility_date = "2024-11-01"
+
+[site]
+bucket = "./dist"
+
+# Optional: Add custom headers
+[site.headers]
+  "/*"
+    Cache-Control = "public, max-age=3600"
+  "/assets/*"
+    Cache-Control = "public, max-age=31536000, immutable"

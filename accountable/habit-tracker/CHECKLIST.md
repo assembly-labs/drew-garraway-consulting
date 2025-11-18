@@ -1,6 +1,6 @@
 # ✅ HABIT TRACKER - QUICK DEPLOYMENT CHECKLIST
 
-## 🚀 FASTEST PATH TO DEPLOY (Zero Credits)
+## 🚀 FASTEST PATH TO DEPLOY (Cloudflare Pages)
 
 ```bash
 # 1. Test
@@ -9,8 +9,11 @@ npm run preflight
 # 2. Build
 npm run build
 
-# 3. Deploy (uses 0 Netlify credits)
-netlify deploy --dir=dist --prod
+# 3. Deploy to Cloudflare Pages
+wrangler pages deploy dist --project-name=accountable-habit-tracker --branch=main
+
+# OR simply push to GitHub (auto-deploys)
+git push
 ```
 
 ---
@@ -51,18 +54,21 @@ netlify deploy --dir=dist --prod
 
 ## 🎯 DEPLOYMENT COMMANDS
 
-### **Option A: CLI Deploy (Recommended - 0 Credits)**
+### **Option A: Auto-Deploy via GitHub (Recommended)**
 ```bash
-npm run build
-netlify deploy --dir=dist --prod
+# Simply push to GitHub - Cloudflare auto-deploys
+git add .
+git commit -m "Your changes"
+git push
 ```
 
-### **Option B: Drag & Drop (0 Credits)**
-1. Run: `npm run build`
-2. Open: https://app.netlify.com
-3. Drag `dist` folder to browser
+### **Option B: Manual CLI Deploy**
+```bash
+npm run build
+wrangler pages deploy dist --project-name=accountable-habit-tracker --branch=main
+```
 
-### **Option C: Automated (Uses Credits)**
+### **Option C: Using npm scripts**
 ```bash
 npm run deploy:production
 ```
@@ -72,23 +78,24 @@ npm run deploy:production
 ## 🔥 EMERGENCY ROLLBACK
 
 ### **Fastest Method:**
-1. Go to https://app.netlify.com
-2. Click "Deploys"
-3. Find last working deploy
-4. Click "..." → "Publish deploy"
+1. Go to https://dash.cloudflare.com
+2. Navigate to Pages → Your project
+3. Click "View builds"
+4. Find last working deployment
+5. Click "..." → "Rollback to this deployment"
 
 ### **CLI Method:**
 ```bash
 git checkout [LAST_GOOD_COMMIT]
 npm run build
-netlify deploy --dir=dist --prod
+wrangler pages deploy dist --project-name=accountable-habit-tracker --branch=main
 ```
 
 ---
 
 ## 📊 POST-DEPLOYMENT VERIFICATION
 
-- [ ] Visit production URL
+- [ ] Visit production URL: https://accountable.pages.dev
 - [ ] Test habit completion
 - [ ] Check data persistence
 - [ ] Test on mobile device
@@ -100,41 +107,42 @@ netlify deploy --dir=dist --prod
 
 1. **NEVER deploy untested code**
 2. **ALWAYS run preflight first**
-3. **BUILD locally to save credits**
+3. **LEVERAGE auto-deploy from GitHub**
 4. **TEST on production URL after deploy**
 5. **ROLLBACK immediately if issues found**
 
 ---
 
-## 🚨 CREDIT SAVING TIPS
+## 🚨 CLOUDFLARE ADVANTAGES
 
-| Action | Credits Used | Alternative |
-|--------|--------------|-------------|
-| Auto-deploy from GitHub | 3 mins/deploy | Manual deploy |
-| Netlify build | 3 mins | Local build |
-| Preview deploys | 3 mins each | Local preview |
-| Branch deploys | 3 mins each | Don't use |
+| Feature | Cloudflare Pages | Previous Platform |
+|---------|------------------|-------------------|
+| Build limit | 500/month | 300 minutes |
+| Bandwidth | Unlimited | 100GB |
+| Global CDN | ✅ 200+ locations | Limited |
+| Auto SSL | ✅ Free | ✅ Free |
+| Preview URLs | ✅ Every PR | Limited |
 
-**Monthly Free Tier: 300 minutes**
-**Each Netlify build: ~3 minutes**
-**Each local build + deploy: 0 minutes** ← USE THIS!
+**Monthly Free Tier: 500 builds**
+**Bandwidth: Unlimited**
+**Cost: $0**
 
 ---
 
 ## 📝 QUICK COPY-PASTE COMMANDS
 
 ```bash
-# Full safe deployment (0 credits)
-npm run preflight && npm run build && netlify deploy --dir=dist --prod
+# Full safe deployment
+npm run preflight && npm run build && git push
 
-# Quick deployment (0 credits, no tests)
-npm run build && netlify deploy --dir=dist --prod
+# Manual deployment
+npm run build && wrangler pages deploy dist --project-name=accountable-habit-tracker
 
 # Test everything locally first
 npm run test:local && npm run serve:prod
 
-# Emergency rollback
-netlify deploy:restore
+# Check build status
+wrangler pages deployment list --project-name=accountable-habit-tracker
 
 # Check what will be deployed
 npm run deploy:dry-run
@@ -145,15 +153,15 @@ npm run deploy:dry-run
 **⏱️ Time Required:**
 - Local testing: 2-5 minutes
 - Build: 30 seconds
-- Deploy: 30 seconds
+- Deploy: 30 seconds (auto via GitHub)
 - **Total: ~5 minutes**
 
 **💰 Cost:**
-- Local testing: $0
-- Local build: $0
-- Deploy dist/: $0
+- Cloudflare Pages: $0
+- Bandwidth: $0
+- SSL: $0
 - **Total: $0**
 
 ---
 
-Last Updated: November 2024 | Version: 1.0.0
+Last Updated: November 2024 | Version: 2.0.0 | Platform: Cloudflare Pages

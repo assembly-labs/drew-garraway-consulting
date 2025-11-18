@@ -34,9 +34,9 @@ dist-ssr
 .env.local
 .env.*.local
 
-# Netlify
-.netlify
-netlify.toml.backup
+# Cloudflare
+.wrangler
+wrangler.toml.backup
 
 # Testing
 coverage

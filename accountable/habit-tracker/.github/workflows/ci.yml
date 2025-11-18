@@ -1,7 +1,7 @@
 name: CI - Test Only (No Deploy)
 
 # This workflow tests the code but does NOT deploy
-# Deployments are manual to save Netlify credits
+# Deployments are handled automatically by Cloudflare Pages on push
 
 on:
   push:
@@ -68,5 +68,5 @@ jobs:
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: '✅ Build successful on Node ${{ matrix.node-version }}!\n\nTo deploy:\n1. Merge this PR\n2. Pull latest main branch locally\n3. Run: `npm run build && netlify deploy --dir=dist --prod`'
+            body: '✅ Build successful on Node ${{ matrix.node-version }}!\n\nTo deploy:\n1. Merge this PR\n2. Cloudflare Pages will automatically deploy from the main branch\n3. View deployment at: https://accountable.pages.dev'
           })

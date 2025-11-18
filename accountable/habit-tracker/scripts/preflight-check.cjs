@@ -112,7 +112,7 @@ async function main() {
   allChecksPassed &= checkExists('vite.config.ts', 'Vite config exists');
   allChecksPassed &= checkExists('tailwind.config.js', 'Tailwind config exists');
   allChecksPassed &= checkExists('tsconfig.app.json', 'TypeScript config exists');
-  allChecksPassed &= checkExists('netlify.toml', 'Netlify config exists');
+  allChecksPassed &= checkExists('public/_redirects', 'Cloudflare redirects file exists');
   allChecksPassed &= checkExists('src/App.tsx', 'App.tsx exists');
   allChecksPassed &= checkExists('src/main.tsx', 'main.tsx exists');
 
