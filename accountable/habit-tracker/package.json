@@ -17,8 +17,8 @@
     "serve:prod": "npx serve -s dist -p 3000",
     "preflight": "node scripts/preflight-check.cjs",
     "deploy:dry-run": "npm run preflight && npm run build && echo '✅ Ready for deployment'",
-    "deploy:staging": "npm run deploy:dry-run && npx netlify deploy --dir=dist",
-    "deploy:production": "npm run preflight && npm run build && npx netlify deploy --dir=dist --prod"
+    "deploy:staging": "npm run deploy:dry-run && npx wrangler pages deploy dist --project-name=accountable-habit-tracker",
+    "deploy:production": "npm run preflight && npm run build && npx wrangler pages deploy dist --project-name=accountable-habit-tracker --branch=main"
   },
   "dependencies": {
     "date-fns": "^4.1.0",
