@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Drew Garraway - Resume | Product & Program Management</title>
+    <meta name="description" content="Resume of Drew Garraway - Product Manager and Operations Leader with 15+ years experience in AI operations, product strategy, and team leadership.">
+    <meta name="author" content="Drew Garraway">
+    <meta name="robots" content="index, follow">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --indigo-deep: #1E1B4B;
+            --purple-rich: #4C1D95;
+            --magenta-vibrant: #C026D3;
+            --coral-pink: #FB7185;
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --gray-light: #9ca3af;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Header */
+        .resume-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid rgba(192, 38, 211, 0.3);
+        }
+
+        .name {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #4C1D95, #C026D3, #FB7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            color: var(--gray-light);
+            font-size: 0.95rem;
+        }
+
+        .contact-info a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #FB7185;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: linear-gradient(90deg, #FB7185, #C026D3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border-bottom: 1px solid rgba(192, 38, 211, 0.3);
+            padding-bottom: 0.5rem;
+        }
+
+        .summary-text {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Experience Items */
+        .experience-item {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid rgba(192, 38, 211, 0.4);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            background: rgba(78, 29, 149, 0.05);
+            border-left-color: #FB7185;
+        }
+
+        .job-header {
+            margin-bottom: 1rem;
+        }
+
+        .job-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+
+        .company-name {
+            font-size: 1.1rem;
+            color: #FB7185;
+            font-weight: 600;
+        }
+
+        .job-meta {
+            color: var(--gray-light);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .responsibilities {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .responsibilities li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+        }
+
+        .responsibilities li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #C026D3;
+            font-weight: bold;
+        }
+
+        /* Education & Certifications */
+        .education-item,
+        .cert-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+        }
+
+        .degree,
+        .cert-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .school,
+        .cert-org {
+            color: #FB7185;
+            font-weight: 600;
+        }
+
+        .edu-meta {
+            color: var(--gray-light);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+        }
+
+        .skill-category-title {
+            font-weight: 700;
+            color: #FB7185;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-list {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #C026D3;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #FB7185;
+            transform: translateX(-5px);
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .name,
+            .section-title,
+            .company-name,
+            .school,
+            .cert-org,
+            .skill-category-title {
+                -webkit-text-fill-color: initial;
+                color: #4C1D95;
+            }
+
+            .back-link {
+                display: none;
+            }
+
+            .experience-item,
+            .education-item,
+            .cert-item,
+            .skill-category {
+                background: #f9fafb;
+                break-inside: avoid;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
+            }
+
+            .experience-item {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+
+        <!-- Header -->
+        <header class="resume-header">
+            <h1 class="name">Drew Garraway</h1>
+            <div class="contact-info">
+                <span>Wayne, PA</span>
+                <span>•</span>
+                <a href="tel:310-739-4396">310-739-4396</a>
+                <span>•</span>
+                <a href="mailto:garrawaydrew@gmail.com">garrawaydrew@gmail.com</a>
+                <span>•</span>
+                <a href="https://www.linkedin.com/in/drewgarraway/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <span>•</span>
+                <a href="https://drewgarraway.com">drewgarraway.com</a>
+            </div>
+        </header>
+
+        <!-- Professional Summary -->
+        <section class="section">
+            <h2 class="section-title">Professional Summary</h2>
+            <p class="summary-text">
+                Program, project, and operations leader with 15+ years of experience building relationships, partnerships, and products. Experienced in leading teams from concept to launch with minimal (or no) oversight, wearing multiple hats, being a strategic partner in small companies to be awarded new business, creating new services, scaling teams, and minimizing turnover during growth. Leverages AI, CRMs, agile methodologies, and team members' strengths/skills to move projects forward while fostering meaningful relationships and committed, high-performing teams. Achieves this by merging diverse skills and perspectives to deliver exceptional work. Finds pride and satisfaction in ensuring team members and clients are enthusiastic, happy, and motivated to build together.
+            </p>
+        </section>
+
+        <!-- Professional Experience -->
+        <section class="section">
+            <h2 class="section-title">Professional Experience</h2>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <h3 class="job-title">Contract Senior Product Manager and Product Strategy</h3>
+                    <div class="company-name">Dakota</div>
+                    <div class="job-meta">Philadelphia, PA | November 2024 – March 2025</div>
+                </div>
+                <ul class="responsibilities">
+                    <li>Organized and facilitated market research through customer interviews, synthesizing qualitative data with Salesforce and Google Analytics to inform roadmap decisions and strengthen client relationships</li>
+                    <li>Created suite of AI-driven tools including communication, documentation, content creation, and task management solutions to reduce operational overhead and enhance team productivity</li>
+                    <li>Realigned vendor contracts resulting in clear goals, expectations, and improved milestone adherence across partner ecosystem</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <h3 class="job-title">Contract Technical Project Manager and Customer Experience Delivery</h3>
+                    <div class="company-name">Chop Dawg</div>
+                    <div class="job-meta">Remote (HQ Philadelphia, PA) | August 2024 – November 2024</div>
+                </div>
+                <ul class="responsibilities">
+                    <li>Developed SaaS and AI LLM features using Claude AI and OpenAI enterprise API integrations</li>
+                    <li>Managed eight client applications across wellness, therapy, sports, dating, and fintech industries as client-facing project lead</li>
+                    <li>Led cross-functional teams of ~8 resources per project across design, development, and quality assurance using Agile methodologies</li>
+                    <li>Reduced production delays by 50% through Agile methodologies, daily stand-ups, and improved resource allocation</li>
+                    <li>Boosted team morale in high-stress environment by implementing communication frameworks, clear role definitions, and recognition programs, reducing turnover by over 100%</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <h3 class="job-title">Product Manager and Project Manager</h3>
+                    <div class="company-name">Dynamic Learning Experience</div>
+                    <div class="job-meta">Cherry Hill, NJ | May 2023 – March 2024</div>
+                </div>
+                <ul class="responsibilities">
+                    <li>Managed 20+ team members across strategy, execution, launch, and maintenance for entire product lifecycle of EdTech products and Learning Management System</li>
+                    <li>Led go-to-market strategy working closely with external marketing partners and sales team to convert users from research to sales through data-driven positioning</li>
+                    <li>Launched FPV Initiator Program in 3 months generating $1M+ first-year revenue with complex integration of custom LMS, third-party vendors, drone technology, and customized curriculum</li>
+                    <li>Leveraged AI tools (GPT, Intellectible) to innovate customer products and streamline internal workflows, enhancing time management for sales and support teams</li>
+                    <li>Conducted manual market research, field research, and user testing to ensure products met market needs while maintaining executive communications with clear updates</li>
+                    <li>Developed data-driven go-to-market strategies using market analysis and competitive positioning to fuel product adoption and shape pricing strategies</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <h3 class="job-title">Contract Product Management and Operations</h3>
+                    <div class="company-name">Symmetry Labs</div>
+                    <div class="job-meta">Long Beach, CA | July 2020 – August 2022</div>
+                </div>
+                <ul class="responsibilities">
+                    <li>Built and managed relationships with clients and prospects while overseeing 5 concurrent software development projects</li>
+                    <li>Facilitated global team coordination across engineering, design, and vendor partnerships to maintain alignment and project momentum</li>
+                    <li>Designed customer onboarding experience that reduced setup time by 70% through AI-driven automation and intelligent workflows</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <h3 class="job-title">Contract Project Manager / Producer</h3>
+                    <div class="company-name">Impact XM</div>
+                    <div class="job-meta">Philadelphia, PA | October 2020 - June 2022</div>
+                </div>
+                <ul class="responsibilities">
+                    <li>Produced large-scale experiential marketing events and brand activations for enterprise clients in the pharmaceutical industry</li>
+                    <li>Led event strategy, design, and execution from concept through post-event evaluation, managing budgets up to $500K per activation</li>
+                    <li>Coordinated cross-functional teams of 15-25 creative, technical, operations, and vendor partners to deliver seamless live experiences</li>
+                    <li>Developed event timelines, run-of-show documentation, and contingency plans to ensure flawless execution under tight deadlines</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <h3 class="job-title">Program Manager</h3>
+                    <div class="company-name">Benchworks</div>
+                    <div class="job-meta">Philadelphia, PA | November 2019 – July 2020</div>
+                </div>
+                <ul class="responsibilities">
+                    <li>Led digital initiatives and operations across new departments, introducing and onboarding strategic partners to expand service capabilities and drive revenue growth</li>
+                    <li>Managed $1M digital production budget with 100% alignment to project deliverables and goals, ensuring resource allocation matched project needs</li>
+                    <li>Secured new digital business and expanded existing contracts, boosting overall revenue through relationship-driven business development</li>
+                    <li>Implemented agile methodologies and coached cross-functional teams on self-managed workflows, increasing team productivity and collaboration efficiency</li>
+                    <li>Facilitated collaboration between clients, internal teams, and external partners through optimized workflows and clear communication frameworks</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Community Leadership -->
+        <section class="section">
+            <h2 class="section-title">Community Leadership & Volunteer Work</h2>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <h3 class="job-title">Organizer, Philadelphia Code and Coffee</h3>
+                    <div class="job-meta">2024 – Present</div>
+                </div>
+                <ul class="responsibilities">
+                    <li>Organize regular community events bringing together Philadelphia's innovation-forward technical founders and entrepreneurs to foster collaboration and ecosystem growth</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <h3 class="job-title">Organizer, Best Friends Society / South LA Animal Shelter</h3>
+                    <div class="job-meta">Los Angeles, CA</div>
+                </div>
+                <ul class="responsibilities">
+                    <li>Raised $30,000 and mobilized 30+ volunteers for shelter support through community engagement and donor relationship cultivation</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <div class="degree">Bachelor of Arts</div>
+                <div class="school">Temple University</div>
+                <div class="edu-meta">Philadelphia, PA | Graduated 2008 | GPA: 3.85</div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="cert-item">
+                <div class="cert-name">Certified ScrumMaster (CSM)</div>
+                <div class="cert-org">Scrum Alliance, 2019</div>
+            </div>
+            <div class="cert-item">
+                <div class="cert-name">Google UX Design Certificate</div>
+                <div class="cert-org">Google, 2018</div>
+            </div>
+            <div class="cert-item">
+                <div class="cert-name">NABCEP PV Associate</div>
+                <div class="cert-org">North American Board of Certified Energy Practitioners, 2022</div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-category-title">Core Competencies</div>
+                    <div class="skill-list">Program Design & Execution | Event Production | Mentorship & Coaching | Stakeholder Engagement | Community Building | Ecosystem Development | Strategic Partnerships | Business Development | Client & Account Management | Cross-Functional Collaboration | Investor Relations | AI & Automation Integration | Budget Management ($1M+) | Fundraising ($3M+ raised) | Go-to-Market Strategy | Agile Methodologies</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Software & Tools</div>
+                    <div class="skill-list">Asana, Jira, Salesforce, HubSpot, Monday.com, Zoho, Figma, Canva, Claude Code</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Industries</div>
+                    <div class="skill-list">Fintech, EdTech, Energy, Healthcare, Automotive, Consumer Tech, Nonprofit</div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
