@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing & Payments - Alliance BJJ Platform</title>
+    <link rel="icon" type="image/png" href="../Alliance_jiu-jitsu.svg.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, nosnippet, noarchive, noimageindex, notranslate">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid var(--gray-200);
+            margin-bottom: var(--space-lg);
+        }
+        .tab {
+            padding: var(--space-sm) var(--space-lg);
+            color: var(--gray-500);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+        .tab.active {
+            color: var(--gray-900);
+            border-bottom-color: var(--gray-900);
+        }
+        .chart-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-500);
+            margin-bottom: var(--space-lg);
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../Alliance_jiu-jitsu.svg.png" alt="Alliance BJJ" class="sidebar-logo-placeholder" style="width: 72px; height: auto;">
+                <div style="font-size: 32px; font-weight: bold;">PAOLI</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="sidebar-nav-item">Dashboard</a>
+                <a href="members.html" class="sidebar-nav-item">Members</a>
+                <a href="schedule.html" class="sidebar-nav-item">Schedule</a>
+                <a href="billing.html" class="sidebar-nav-item active">Billing</a>
+                <a href="settings.html" class="sidebar-nav-item">Settings</a>
+            </nav>
+            <div class="sidebar-user">
+                <img src="../portraits/men/male-1.png" alt="Professor Mike" class="user-avatar">
+                <span>Professor Mike</span><br>
+                <a href="#" class="text-small text-muted">Log out</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="header-row">
+                <div class="header-left">
+                    <h1>Billing & Payments</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn">Record Payment</button>
+                    <button class="btn" style="margin-left: 8px;">Export ▼</button>
+                </div>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Revenue (MTD)</div>
+                    <div class="stat-value">$23,450</div>
+                    <div class="stat-change">+8%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Outstanding</div>
+                    <div class="stat-value">$1,200</div>
+                    <div class="text-small text-muted">3 members</div>
+                </div>
+                <div class="stat-card" style="border-left: 4px solid var(--error);">
+                    <div class="stat-label">Failed Payments</div>
+                    <div class="stat-value" style="color: var(--error);">3</div>
+                    <div class="text-small text-muted">Requires attention</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Active Subscriptions</div>
+                    <div class="stat-value">148</div>
+                    <div class="stat-change">+5 this month</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <div class="tab active">Overview</div>
+                <div class="tab">Transactions</div>
+                <div class="tab">Failed Payments</div>
+                <div class="tab">Plans</div>
+            </div>
+
+            <!-- Overview Tab Content -->
+            <div class="card">
+                <h3>Revenue Trend</h3>
+                <div class="chart-placeholder">
+                    [Line chart: 12-month revenue trend]
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Recent Transactions</h3>
+                    <a href="#">View all transactions →</a>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Member</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nov 27</td>
+                            <td>Lisa Thompson</td>
+                            <td>Monthly Unlimited</td>
+                            <td>$150.00</td>
+                            <td><span class="status-badge status-active">Paid ✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nov 27</td>
+                            <td>John Smith</td>
+                            <td>Monthly Unlimited</td>
+                            <td>$150.00</td>
+                            <td><span class="status-badge status-active">Paid ✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nov 25</td>
+                            <td>Carlos Rodriguez</td>
+                            <td>Annual</td>
+                            <td>$1,500.00</td>
+                            <td><span class="status-badge status-active">Paid ✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nov 22</td>
+                            <td>Emily Davis</td>
+                            <td>Monthly Unlimited</td>
+                            <td>$150.00</td>
+                            <td><span class="status-badge status-past-due">Failed ✗</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nov 20</td>
+                            <td>David Kim</td>
+                            <td>Monthly Unlimited</td>
+                            <td>$150.00</td>
+                            <td><span class="status-badge status-past-due">Failed ✗</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nov 18</td>
+                            <td>Amanda White</td>
+                            <td>Monthly Unlimited</td>
+                            <td>$150.00</td>
+                            <td><span class="status-badge status-active">Paid ✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nov 15</td>
+                            <td>Mike Chen</td>
+                            <td>Monthly Unlimited</td>
+                            <td>$150.00</td>
+                            <td><span class="status-badge status-active">Paid ✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nov 12</td>
+                            <td>Sarah Johnson</td>
+                            <td>Monthly Unlimited</td>
+                            <td>$150.00</td>
+                            <td><span class="status-badge status-active">Paid ✓</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="../theme.js"></script>
+    <script src="../bot-protection.js"></script>
+</body>
+</html>

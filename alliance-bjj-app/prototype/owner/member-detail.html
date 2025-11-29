@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Smith - Member Detail - Alliance BJJ Platform</title>
+    <link rel="icon" type="image/png" href="../Alliance_jiu-jitsu.svg.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, nosnippet, noarchive, noimageindex, notranslate">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid var(--gray-200);
+            margin-bottom: var(--space-lg);
+        }
+        .tab {
+            padding: var(--space-sm) var(--space-lg);
+            color: var(--gray-500);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+        .tab.active {
+            color: var(--gray-900);
+            border-bottom-color: var(--gray-900);
+        }
+        .belt-timeline {
+            display: flex;
+            align-items: center;
+            margin: var(--space-lg) 0;
+        }
+        .belt-step {
+            flex: 1;
+            text-align: center;
+            padding: var(--space-sm);
+        }
+        .belt-step.complete {
+            color: var(--gray-900);
+        }
+        .belt-step.incomplete {
+            color: var(--gray-500);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+            margin: var(--space-lg) 0;
+        }
+        .stat-box {
+            padding: var(--space-md);
+            background-color: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+        }
+        .timeline-item {
+            display: flex;
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .timeline-date {
+            width: 100px;
+            color: var(--gray-500);
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../Alliance_jiu-jitsu.svg.png" alt="Alliance BJJ" class="sidebar-logo-placeholder" style="width: 72px; height: auto;">
+                <div style="font-size: 32px; font-weight: bold;">PAOLI</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="sidebar-nav-item">Dashboard</a>
+                <a href="members.html" class="sidebar-nav-item active">Members</a>
+                <a href="schedule.html" class="sidebar-nav-item">Schedule</a>
+                <a href="billing.html" class="sidebar-nav-item">Billing</a>
+                <a href="settings.html" class="sidebar-nav-item">Settings</a>
+            </nav>
+            <div class="sidebar-user">
+                <img src="../portraits/men/male-1.png" alt="Professor Mike" class="user-avatar">
+                <span>Professor Mike</span><br>
+                <a href="#" class="text-small text-muted">Log out</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="mb-lg">
+                <a href="members.html">← Back to Members</a>
+            </div>
+
+            <div class="two-column">
+                <!-- Main Column -->
+                <div>
+                    <!-- Profile Header Card -->
+                    <div class="card">
+                        <div style="display: flex; align-items: center;">
+                            <img src="../portraits/men/male-2.png" alt="John Smith" style="width: 80px; height: 80px; border-radius: 50%; margin-right: var(--space-lg); object-fit: cover; object-position: center;">
+                            <div style="flex: 1;">
+                                <h1 style="margin-bottom: 4px;">John Smith</h1>
+                                <div class="text-muted mb-sm">john.smith@email.com · (555) 123-4567</div>
+                                <div style="display: flex; align-items: center; gap: 16px;">
+                                    <div class="belt-badge belt-blue" style="width: 80px; height: 20px;">
+                                        <div class="stripes">
+                                            <span class="stripe"></span>
+                                            <span class="stripe"></span>
+                                            <span class="stripe"></span>
+                                        </div>
+                                    </div>
+                                    <span>Member since March 15, 2024</span>
+                                </div>
+                                <div class="mt-md">
+                                    <span style="padding: 4px 8px; background-color: var(--accent-yellow); color: var(--primary-black); border-radius: 4px; margin-right: 8px; font-weight: 500;">Adults Program</span>
+                                    <span style="padding: 4px 8px; background-color: var(--accent-yellow); color: var(--primary-black); border-radius: 4px; font-weight: 500;">Competition Team</span>
+                                </div>
+                            </div>
+                            <button class="btn">Edit Profile</button>
+                        </div>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="tabs">
+                        <div class="tab active">Overview</div>
+                        <div class="tab">Attendance</div>
+                        <div class="tab">Payments</div>
+                        <div class="tab">Notes</div>
+                    </div>
+
+                    <!-- Overview Tab Content -->
+                    <div class="card">
+                        <h3>Belt Progression</h3>
+                        <div class="belt-timeline">
+                            <div class="belt-step complete">White<br>✓</div>
+                            <div class="belt-step complete" style="font-weight: bold;">Blue<br>✓</div>
+                            <div class="belt-step incomplete">Purple</div>
+                            <div class="belt-step incomplete">Brown</div>
+                            <div class="belt-step incomplete">Black</div>
+                        </div>
+                        <div style="background-color: var(--accent-yellow); padding: var(--space-md); border-radius: 8px;">
+                            <div style="color: var(--primary-black);"><strong>Current:</strong> Blue Belt, 3 Stripes</div>
+                            <div style="color: var(--primary-black);"><strong>Time at current rank:</strong> 8 months</div>
+                            <div style="color: var(--primary-black);"><strong>Classes since last promotion:</strong> 42</div>
+                            <div class="mt-md">
+                                <div style="color: var(--primary-black);">Progress to next stripe:</div>
+                                <div class="progress-bar mt-sm">
+                                    <div class="progress-fill" style="width: 84%;"></div>
+                                </div>
+                                <div class="text-small mt-sm" style="color: var(--primary-black); opacity: 0.8;">42/50 classes</div>
+                            </div>
+                        </div>
+
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="text-muted text-small">Total Classes</div>
+                                <div class="text-large font-bold">127</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="text-muted text-small">This Month</div>
+                                <div class="text-large font-bold">12</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="text-muted text-small">Current Streak</div>
+                                <div class="text-large font-bold">5 classes</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="text-muted text-small">Avg/Week</div>
+                                <div class="text-large font-bold">3.2</div>
+                            </div>
+                        </div>
+
+                        <h3 class="mt-lg">Promotion History</h3>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Nov 2024</div>
+                            <div>
+                                <strong>Blue Belt, 3rd Stripe</strong><br>
+                                <span class="text-small text-muted">By: Professor Mike</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Aug 2024</div>
+                            <div>
+                                <strong>Blue Belt, 2nd Stripe</strong><br>
+                                <span class="text-small text-muted">By: Professor Mike</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">May 2024</div>
+                            <div>
+                                <strong>Blue Belt, 1st Stripe</strong><br>
+                                <span class="text-small text-muted">By: Coach Sarah</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Mar 2024</div>
+                            <div>
+                                <strong>Blue Belt</strong><br>
+                                <span class="text-small text-muted">By: Professor Mike</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Column -->
+                <div>
+                    <!-- Quick Actions Card -->
+                    <div class="card">
+                        <h3>Quick Actions</h3>
+                        <a href="promotion-modal.html" class="btn btn-primary" style="width: 100%; margin-bottom: 8px; text-align: center; display: block;">Promote</a>
+                        <button class="btn" style="width: 100%; margin-bottom: 8px; background-color: var(--white); border: 2px solid var(--gray-900); color: var(--gray-900);">Message</button>
+                        <button class="btn" style="width: 100%; background-color: var(--white); border: 2px solid var(--gray-900); color: var(--gray-900);">Check In</button>
+                    </div>
+
+                    <!-- Emergency Contact Card -->
+                    <div class="card">
+                        <h3>Emergency Contact</h3>
+                        <div><strong>Jane Smith (Spouse)</strong></div>
+                        <div class="text-muted">(555) 987-6543</div>
+                    </div>
+
+                    <!-- Membership Details Card -->
+                    <div class="card">
+                        <h3>Membership Details</h3>
+                        <div class="mb-sm">
+                            <div class="text-small text-muted">Plan</div>
+                            <div><strong>Monthly Unlimited</strong></div>
+                        </div>
+                        <div class="mb-sm">
+                            <div class="text-small text-muted">Price</div>
+                            <div><strong>$150/month</strong></div>
+                        </div>
+                        <div class="mb-sm">
+                            <div class="text-small text-muted">Status</div>
+                            <div><span class="status-badge status-active">Active</span></div>
+                        </div>
+                        <div>
+                            <div class="text-small text-muted">Next payment</div>
+                            <div><strong>Dec 1, 2024</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../theme.js"></script>
+    <script src="../bot-protection.js"></script>
+</body>
+</html>

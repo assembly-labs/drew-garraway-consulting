@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members - Alliance BJJ Platform</title>
+    <link rel="icon" type="image/png" href="../Alliance_jiu-jitsu.svg.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, nosnippet, noarchive, noimageindex, notranslate">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../animations.css">
+</head>
+<body class="dark-mode members-page">
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../Alliance_jiu-jitsu.svg.png" alt="Alliance BJJ" class="sidebar-logo-placeholder" style="width: 72px; height: auto;">
+                <div style="font-size: 32px; font-weight: bold;">PAOLI</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="sidebar-nav-item">Dashboard</a>
+                <a href="members.html" class="sidebar-nav-item active">Members</a>
+                <a href="schedule.html" class="sidebar-nav-item">Schedule</a>
+                <a href="billing.html" class="sidebar-nav-item">Billing</a>
+                <a href="settings.html" class="sidebar-nav-item">Settings</a>
+            </nav>
+            <div class="sidebar-user">
+                <img src="../portraits/men/male-1.png" alt="Professor Mike" class="user-avatar">
+                <span>Professor Mike</span><br>
+                <a href="#" class="text-small text-muted">Log out</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="header-row">
+                <div>
+                    <h1>Members</h1>
+                </div>
+                <div>
+                    <button data-modal="add-member" class="btn btn-primary">Add Member</button>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="card">
+                <div style="display: flex; gap: 16px; align-items: center;">
+                    <input type="text" id="member-search" class="form-input input-modern" placeholder="Search by name, email, or phone..." style="flex: 1;">
+                    <select class="form-select" style="width: 150px;">
+                        <option>All Belts</option>
+                        <option>White</option>
+                        <option>Blue</option>
+                        <option>Purple</option>
+                        <option>Brown</option>
+                        <option>Black</option>
+                    </select>
+                    <select class="form-select" style="width: 150px;">
+                        <option>All Status</option>
+                        <option>Active</option>
+                        <option>Past Due</option>
+                        <option>Frozen</option>
+                    </select>
+                    <select class="form-select" style="width: 200px;">
+                        <option>Sort: Last Name A-Z</option>
+                        <option>Sort: Last Name Z-A</option>
+                        <option>Sort: Newest First</option>
+                        <option>Sort: Oldest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Count -->
+            <div class="mb-md">
+                <strong>Showing 156 members</strong>
+            </div>
+
+            <!-- Members Table -->
+            <div class="card member-list">
+                <table class="table animate-list">
+                    <thead>
+                        <tr>
+                            <th>Member</th>
+                            <th>Belt</th>
+                            <th>Status</th>
+                            <th>Joined</th>
+                            <th>Last Check-in</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="member-card card-hover" onclick="window.location='member-detail.html'" style="cursor: pointer;">
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <img src="../portraits/men/male-2.png" alt="John Smith" class="user-avatar" style="margin-right: 12px;">
+                                    <div>
+                                        <div><strong>John Smith</strong></div>
+                                        <div class="text-small text-muted">john@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="belt-badge belt-blue">
+                                    <div class="stripes">
+                                        <span class="stripe"></span>
+                                        <span class="stripe"></span>
+                                        <span class="stripe"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>Mar 15, 2024</td>
+                            <td>Today</td>
+                            <td>
+                                <a href="member-detail.html" class="btn btn-sm">View</a>
+                                <button class="btn btn-sm">Edit</button>
+                                <button class="btn btn-sm">...</button>
+                            </td>
+                        </tr>
+                        <tr onclick="window.location='member-detail.html'" style="cursor: pointer;">
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <img src="../portraits/women/female-1.png" alt="Sarah Johnson" class="user-avatar" style="margin-right: 12px;">
+                                    <div>
+                                        <div><strong>Sarah Johnson</strong></div>
+                                        <div class="text-small text-muted">sarah@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="belt-badge belt-purple">
+                                    <div class="stripes">
+                                        <span class="stripe"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>Jan 8, 2023</td>
+                            <td>Yesterday</td>
+                            <td>
+                                <a href="member-detail.html" class="btn btn-sm">View</a>
+                                <button class="btn btn-sm">Edit</button>
+                                <button class="btn btn-sm">...</button>
+                            </td>
+                        </tr>
+                        <tr onclick="window.location='member-detail.html'" style="cursor: pointer;">
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <img src="../portraits/men/male-5.png" alt="Mike Chen" class="user-avatar" style="margin-right: 12px;">
+                                    <div>
+                                        <div><strong>Mike Chen</strong></div>
+                                        <div class="text-small text-muted">mike.chen@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="belt-badge belt-white">
+                                    <div class="stripes">
+                                        <span class="stripe"></span>
+                                        <span class="stripe"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>Oct 1, 2024</td>
+                            <td>3 days ago</td>
+                            <td>
+                                <a href="member-detail.html" class="btn btn-sm">View</a>
+                                <button class="btn btn-sm">Edit</button>
+                                <button class="btn btn-sm">...</button>
+                            </td>
+                        </tr>
+                        <tr onclick="window.location='member-detail.html'" style="cursor: pointer;">
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <img src="../portraits/women/female-2.png" alt="Emily Davis" class="user-avatar" style="margin-right: 12px;">
+                                    <div>
+                                        <div><strong>Emily Davis</strong></div>
+                                        <div class="text-small text-muted">emily@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="belt-badge belt-blue"></div>
+                            </td>
+                            <td><span class="status-badge status-past-due">Past Due</span></td>
+                            <td>Jun 22, 2024</td>
+                            <td>1 week ago</td>
+                            <td>
+                                <a href="member-detail.html" class="btn btn-sm">View</a>
+                                <button class="btn btn-sm">Edit</button>
+                                <button class="btn btn-sm">...</button>
+                            </td>
+                        </tr>
+                        <tr onclick="window.location='member-detail.html'" style="cursor: pointer;">
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <img src="../portraits/men/male-3.png" alt="Carlos Rodriguez" class="user-avatar" style="margin-right: 12px;">
+                                    <div>
+                                        <div><strong>Carlos Rodriguez</strong></div>
+                                        <div class="text-small text-muted">carlos@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="belt-badge belt-brown">
+                                    <div class="stripes">
+                                        <span class="stripe"></span>
+                                        <span class="stripe"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>Feb 14, 2022</td>
+                            <td>Today</td>
+                            <td>
+                                <a href="member-detail.html" class="btn btn-sm">View</a>
+                                <button class="btn btn-sm">Edit</button>
+                                <button class="btn btn-sm">...</button>
+                            </td>
+                        </tr>
+                        <tr onclick="window.location='member-detail.html'" style="cursor: pointer;">
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <img src="../portraits/women/female-3.png" alt="Amanda White" class="user-avatar" style="margin-right: 12px;">
+                                    <div>
+                                        <div><strong>Amanda White</strong></div>
+                                        <div class="text-small text-muted">amanda@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="belt-badge belt-white">
+                                    <div class="stripes">
+                                        <span class="stripe"></span>
+                                        <span class="stripe"></span>
+                                        <span class="stripe"></span>
+                                        <span class="stripe"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>Sep 5, 2024</td>
+                            <td>Today</td>
+                            <td>
+                                <a href="member-detail.html" class="btn btn-sm">View</a>
+                                <button class="btn btn-sm">Edit</button>
+                                <button class="btn btn-sm">...</button>
+                            </td>
+                        </tr>
+                        <tr onclick="window.location='member-detail.html'" style="cursor: pointer;">
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <img src="../portraits/men/male-4.png" alt="David Kim" class="user-avatar" style="margin-right: 12px;">
+                                    <div>
+                                        <div><strong>David Kim</strong></div>
+                                        <div class="text-small text-muted">david.kim@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="belt-badge belt-purple">
+                                    <div class="stripes">
+                                        <span class="stripe"></span>
+                                        <span class="stripe"></span>
+                                        <span class="stripe"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="status-badge status-frozen">Frozen</span></td>
+                            <td>Nov 1, 2023</td>
+                            <td>2 months ago</td>
+                            <td>
+                                <a href="member-detail.html" class="btn btn-sm">View</a>
+                                <button class="btn btn-sm">Edit</button>
+                                <button class="btn btn-sm">...</button>
+                            </td>
+                        </tr>
+                        <tr onclick="window.location='member-detail.html'" style="cursor: pointer;">
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <img src="../portraits/women/female-4.png" alt="Lisa Thompson" class="user-avatar" style="margin-right: 12px;">
+                                    <div>
+                                        <div><strong>Lisa Thompson</strong></div>
+                                        <div class="text-small text-muted">lisa@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="belt-badge belt-blue">
+                                    <div class="stripes">
+                                        <span class="stripe"></span>
+                                        <span class="stripe"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>Apr 30, 2024</td>
+                            <td>Yesterday</td>
+                            <td>
+                                <a href="member-detail.html" class="btn btn-sm">View</a>
+                                <button class="btn btn-sm">Edit</button>
+                                <button class="btn btn-sm">...</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; border-top: 1px solid var(--gray-200);">
+                    <div>Showing 1-25 of 156</div>
+                    <div>
+                        <button class="btn btn-sm" disabled>Previous</button>
+                        <button class="btn btn-sm" style="margin-left: 8px;">Next</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Core JavaScript -->
+    <script src="../theme.js"></script>
+    <script src="../utils.js"></script>
+
+    <!-- Animation and Interaction Modules -->
+    <script src="../js/core/modal.js"></script>
+    <script src="../js/core/interactions.js"></script>
+
+    <!-- Main App Initialization -->
+    <script src="../app.js"></script>
+    <script src="../bot-protection.js"></script>
+</body>
+</html>

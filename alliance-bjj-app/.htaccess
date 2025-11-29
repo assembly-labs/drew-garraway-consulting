@@ -1,0 +1,53 @@
+# Alliance BJJ App - Security Configuration
+# Prevents unauthorized access and indexing
+
+# Disable directory browsing
+Options -Indexes
+Options -MultiViews
+
+# Block access to sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Block access to specific file types
+<FilesMatch "\.(log|md|gitignore|git|env|json|lock|yml|yaml)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Prevent hotlinking
+RewriteEngine On
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?localhost [NC]
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?127.0.0.1 [NC]
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?192.168 [NC]
+RewriteRule \.(jpg|jpeg|png|gif|svg|css|js|html)$ - [F,NC,L]
+
+# Add security headers
+<IfModule mod_headers.c>
+    Header set X-Robots-Tag "noindex, nofollow, nosnippet, noarchive, noimageindex"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "no-referrer"
+</IfModule>
+
+# Block bad bots and scrapers
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP_USER_AGENT} (bot|crawl|spider|scraper|scan|slurp|grab|miner) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (ahref|semrush|mj12bot|dotbot) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|yandexbot|baiduspider) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit|twitterbot|linkedinbot) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (wget|curl|python|java|ruby) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# Disable server signature
+ServerSignature Off
+
+# Custom error pages (optional)
+ErrorDocument 403 "Access Forbidden - Private Prototype"
+ErrorDocument 404 "Page Not Found - Private Prototype"

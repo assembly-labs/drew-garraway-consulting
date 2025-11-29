@@ -1,0 +1,6 @@
+name = "careerchat-api"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# You'll add your Anthropic API key as a secret via Cloudflare dashboard
+# Environment variable: ANTHROPIC_API_KEY

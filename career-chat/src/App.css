@@ -1,0 +1,508 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Primary Gradient Colors */
+  --indigo-deep: #1E1B4B;
+  --purple-rich: #4C1D95;
+  --magenta-vibrant: #C026D3;
+  --coral-pink: #FB7185;
+
+  /* Background Gradients */
+  --gradient-main: linear-gradient(135deg, #1E1B4B 0%, #4C1D95 35%, #C026D3 70%, #FB7185 100%);
+  --gradient-subtle: linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%);
+  --gradient-accent: linear-gradient(90deg, #C026D3 0%, #FB7185 100%);
+
+  /* Text Gradients */
+  --gradient-text: linear-gradient(90deg, #1E1B4B, #4C1D95, #C026D3, #FB7185);
+  --gradient-text-bright: linear-gradient(90deg, #4C1D95, #C026D3, #FB7185);
+  --gradient-text-reverse: linear-gradient(90deg, #FB7185, #C026D3, #4C1D95, #1E1B4B);
+
+  /* Legacy/Supporting Colors */
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --gray: #6b7280;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--black);
+  color: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* App Container */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #000000;
+}
+
+.app-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(192, 38, 211, 0.02) 2px,
+      rgba(192, 38, 211, 0.02) 4px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Header */
+.app-header {
+  position: relative;
+  z-index: 10;
+  padding: 1.5rem 2rem;
+  background: rgba(30, 27, 75, 0.3);
+  border-bottom: 1px solid rgba(192, 38, 211, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+}
+
+.app-title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  /* Fallback */
+  color: #C026D3;
+  /* Gradient text */
+  background: linear-gradient(90deg, #4C1D95, #C026D3, #FB7185);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.share-button {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1E1B4B;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(251, 113, 133, 0.3);
+}
+
+.share-button:hover {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 10px 40px rgba(251, 113, 133, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Content Wrapper */
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+/* Chat Interface */
+.chat-interface {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(192, 38, 211, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.messages-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #C026D3, #FB7185);
+  border-radius: 4px;
+}
+
+/* Message Bubbles */
+.message-container {
+  display: flex;
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-message {
+  justify-content: flex-end;
+}
+
+.bot-message {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  max-width: 70%;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  position: relative;
+}
+
+.user-message .message-bubble {
+  background: linear-gradient(135deg, rgba(192, 38, 211, 0.2), rgba(251, 113, 133, 0.2));
+  border: 1px solid rgba(251, 113, 133, 0.4);
+  color: var(--white);
+}
+
+.bot-message .message-bubble {
+  background: rgba(30, 27, 75, 0.4);
+  border: 1px solid rgba(192, 38, 211, 0.2);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.message-bubble p {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.message-time {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  display: block;
+  text-align: right;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  align-items: center;
+}
+
+.loading-indicator .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #C026D3, #FB7185);
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-indicator .dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-indicator .dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Chat Input */
+.chat-input-container {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(30, 27, 75, 0.3);
+  border-top: 1px solid rgba(192, 38, 211, 0.2);
+}
+
+.chat-input-container textarea {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(192, 38, 211, 0.3);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--white);
+  font-family: inherit;
+  font-size: 1rem;
+  resize: none;
+  min-height: 44px;
+  max-height: 120px;
+  transition: all 0.3s ease;
+}
+
+.chat-input-container textarea:focus {
+  outline: none;
+  border-color: rgba(251, 113, 133, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.chat-input-container textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.send-button {
+  background: linear-gradient(90deg, #C026D3, #FB7185);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.send-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(251, 113, 133, 0.4);
+}
+
+.send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Resume Display */
+.resume-display {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(192, 38, 211, 0.2);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.resume-header {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+  /* Fallback */
+  color: #FB7185;
+  /* Gradient text */
+  background: linear-gradient(90deg, #FB7185, #C026D3, #4C1D95);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.resume-content {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.resume-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.resume-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.resume-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #C026D3, #FB7185);
+  border-radius: 4px;
+}
+
+/* Markdown Styling */
+.resume-content h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  /* Fallback */
+  color: #C026D3;
+  /* Gradient text */
+  background: linear-gradient(90deg, #4C1D95, #C026D3, #FB7185);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.resume-content h1:first-child {
+  margin-top: 0;
+}
+
+.resume-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.resume-content h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.resume-content p {
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.resume-content ul,
+.resume-content ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.resume-content li {
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.resume-content a {
+  color: #FB7185;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(251, 113, 133, 0.4);
+  transition: all 0.3s ease;
+}
+
+.resume-content a:hover {
+  border-bottom-color: #FB7185;
+  color: #C026D3;
+}
+
+.resume-content code {
+  background: rgba(192, 38, 211, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #FB7185;
+}
+
+.resume-content pre {
+  background: rgba(30, 27, 75, 0.4);
+  border: 1px solid rgba(192, 38, 211, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.resume-content pre code {
+  background: none;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.resume-content blockquote {
+  border-left: 3px solid #C026D3;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-style: italic;
+}
+
+.resume-content hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C026D3, transparent);
+  margin: 2rem 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .app-title {
+    text-align: center;
+  }
+
+  .share-button {
+    width: 100%;
+  }
+
+  .content-wrapper {
+    padding: 1rem;
+  }
+
+  .chat-interface {
+    height: 400px;
+  }
+
+  .messages-container {
+    padding: 1rem;
+  }
+
+  .message-bubble {
+    max-width: 85%;
+  }
+
+  .chat-input-container {
+    padding: 1rem;
+    flex-direction: column;
+  }
+
+  .send-button {
+    width: 100%;
+  }
+
+  .resume-display {
+    padding: 1.5rem;
+  }
+
+  .resume-content {
+    max-height: 400px;
+  }
+}
+
+/* Selection Style */
+::selection {
+  background: #C026D3;
+  color: var(--white);
+}

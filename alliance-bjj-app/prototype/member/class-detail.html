@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced No-Gi - Alliance BJJ Member App</title>
+    <link rel="icon" type="image/png" href="../Alliance_jiu-jitsu.svg.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, nosnippet, noarchive, noimageindex, notranslate">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            background-color: var(--gray-100);
+        }
+        .back-button {
+            padding: var(--space-md);
+            background-color: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .detail-section {
+            background-color: var(--white);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        .capacity-bar-container {
+            width: 100%;
+            height: 8px;
+            background-color: var(--gray-200);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: var(--space-sm) 0;
+        }
+        .capacity-bar-fill {
+            height: 100%;
+            background-color: var(--gray-700);
+            width: 90%;
+        }
+        .avatar-row {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+        .avatar-circle {
+            width: 40px;
+            height: 40px;
+            background-color: var(--gray-300);
+            border-radius: 50%;
+        }
+        .fixed-action {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 375px;
+            background-color: var(--white);
+            border-top: 1px solid var(--gray-200);
+            padding: var(--space-md);
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="mobile-frame">
+        <div class="mobile-content">
+            <!-- Back Button -->
+            <div class="back-button">
+                <a href="schedule.html">← Back</a>
+            </div>
+
+            <!-- Header -->
+            <div class="detail-section">
+                <h1 style="margin-bottom: var(--space-sm);">Advanced No-Gi</h1>
+                <span class="class-badge">No-Gi</span>
+            </div>
+
+            <!-- Details -->
+            <div class="detail-section">
+                <h3>Details</h3>
+                <div style="margin-top: var(--space-md);">
+                    <div style="display: flex; justify-content: space-between; padding: var(--space-sm) 0; border-bottom: 1px solid var(--gray-200);">
+                        <span class="text-muted">Date & Time</span>
+                        <strong>Tue, Nov 27 · 6:30 - 8:00 PM</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: var(--space-sm) 0; border-bottom: 1px solid var(--gray-200);">
+                        <span class="text-muted">Duration</span>
+                        <strong>90 minutes</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructor -->
+            <div class="detail-section">
+                <h3>Instructor</h3>
+                <div style="display: flex; align-items: center; margin-top: var(--space-md);">
+                    <img src="../portraits/women/female-1.png" alt="Coach Sarah" style="width: 48px; height: 48px; border-radius: 50%; margin-right: var(--space-md); object-fit: cover; object-position: center;">
+                    <div style="flex: 1;">
+                        <strong>Coach Sarah</strong>
+                        <div class="belt-badge belt-purple" style="margin-top: 4px;">
+                            <div class="stripes">
+                                <span class="stripe"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="detail-section">
+                <h3>Description</h3>
+                <p>Advanced techniques and live sparring for experienced practitioners.</p>
+            </div>
+
+            <!-- Capacity -->
+            <div class="detail-section">
+                <h3>Capacity</h3>
+                <div class="capacity-bar-container">
+                    <div class="capacity-bar-fill"></div>
+                </div>
+                <div class="text-small text-muted">18 of 20 spots filled</div>
+            </div>
+
+            <!-- Who's Going -->
+            <div class="detail-section" style="margin-bottom: 80px;">
+                <h3>Who's Going</h3>
+                <div class="avatar-row">
+                    <img src="../portraits/men/male-2.png" alt="Member" class="avatar-circle" style="object-fit: cover;">
+                    <img src="../portraits/women/female-1.png" alt="Member" class="avatar-circle" style="object-fit: cover;">
+                    <img src="../portraits/men/male-3.png" alt="Member" class="avatar-circle" style="object-fit: cover;">
+                    <img src="../portraits/women/female-2.png" alt="Member" class="avatar-circle" style="object-fit: cover;">
+                    <img src="../portraits/men/male-4.png" alt="Member" class="avatar-circle" style="object-fit: cover;">
+                    <img src="../portraits/women/female-3.png" alt="Member" class="avatar-circle" style="object-fit: cover;">
+                    <div class="avatar-circle" style="background-color: var(--gray-200); display: flex; align-items: center; justify-content: center; font-size: 12px;">+12</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fixed Action Button -->
+        <div class="fixed-action">
+            <button class="btn btn-danger" style="width: 100%; border: 2px solid var(--error); background-color: var(--white); color: var(--error);">Cancel Booking</button>
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+            <a href="home.html" class="tab-item">
+                <svg class="tab-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span class="tab-label">Home</span>
+            </a>
+            <a href="schedule.html" class="tab-item active">
+                <svg class="tab-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span class="tab-label">Schedule</span>
+            </a>
+            <a href="checkin.html" class="tab-item center">
+                <div class="tab-action-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <span class="tab-label">Check-in</span>
+            </a>
+            <a href="progress.html" class="tab-item">
+                <svg class="tab-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <line x1="18" y1="20" x2="18" y2="10" stroke="currentColor" stroke-width="2"/>
+                    <line x1="12" y1="20" x2="12" y2="4" stroke="currentColor" stroke-width="2"/>
+                    <line x1="6" y1="20" x2="6" y2="14" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span class="tab-label">Progress</span>
+            </a>
+            <a href="profile.html" class="tab-item">
+                <svg class="tab-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                    <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span class="tab-label">Profile</span>
+            </a>
+        </div>
+    </div>
+    <script src="../theme.js"></script>
+    <script src="../bot-protection.js"></script>
+</body>
+</html>

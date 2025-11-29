@@ -1,0 +1,15 @@
+# Block all access to docs folder
+Order Deny,Allow
+Deny from all
+
+# Disable directory browsing
+Options -Indexes
+
+# Block specific file types
+<FilesMatch "\.(md|txt|pdf|doc|docx)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Return 403 for all requests
+RedirectMatch 403 ^/docs/.*$

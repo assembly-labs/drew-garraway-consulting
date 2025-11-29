@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alliance BJJ Platform - Interactive Sitemap</title>
+    <link rel="icon" type="image/png" href="Alliance_jiu-jitsu.svg.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, nosnippet, noarchive, noimageindex, notranslate">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <style>
+        :root {
+            --primary: #ffcc00;
+            --primary-dark: #e5b800;
+            --bg-dark: #0a0a0a;
+            --bg-card: #171717;
+            --bg-hover: #1a1a1a;
+            --border: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #a3a3a3;
+            --text-muted: #737373;
+            --success: #22c55e;
+            --info: #3b82f6;
+            --warning: #f59e0b;
+            --mobile: #8b5cf6;
+            --desktop: #06b6d4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #0f0f0f 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .header .subtitle {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            background-color: rgba(255, 204, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 20px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.1);
+        }
+
+        .search-box::placeholder {
+            color: var(--text-muted);
+        }
+
+        .sitemap-section {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .section-header {
+            padding: 20px 25px;
+            background-color: rgba(255, 204, 0, 0.05);
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .section-header:hover {
+            background-color: rgba(255, 204, 0, 0.08);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 204, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .section-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .section-count {
+            background-color: rgba(255, 204, 0, 0.2);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .section-description {
+            padding: 20px 25px;
+            background-color: rgba(255, 204, 0, 0.02);
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .section-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .section-content.expanded {
+            max-height: 2000px;
+        }
+
+        .page-list {
+            padding: 20px 0;
+        }
+
+        .page-item {
+            padding: 12px 25px;
+            display: flex;
+            align-items: start;
+            gap: 15px;
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid rgba(42, 42, 42, 0.5);
+        }
+
+        .page-item:hover {
+            background-color: var(--bg-hover);
+        }
+
+        .page-item:last-child {
+            border-bottom: none;
+        }
+
+        .page-indicator {
+            min-width: 24px;
+            height: 24px;
+            background-color: rgba(255, 204, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .page-details {
+            flex: 1;
+        }
+
+        .page-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s ease;
+        }
+
+        .page-link:hover {
+            color: var(--primary-dark);
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-mobile {
+            background-color: rgba(139, 92, 246, 0.2);
+            color: var(--mobile);
+        }
+
+        .badge-desktop {
+            background-color: rgba(6, 182, 212, 0.2);
+            color: var(--desktop);
+        }
+
+        .badge-modal {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .page-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+
+        .page-components {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .component-tag {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .toggle-icon {
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .section-header.expanded .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .quick-nav {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            z-index: 100;
+            display: none;
+        }
+
+        @media (min-width: 1200px) {
+            .quick-nav {
+                display: block;
+            }
+        }
+
+        .quick-nav-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .quick-nav-item {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 5px 0;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .quick-nav-item:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section-name {
+                font-size: 18px;
+            }
+
+            .page-item {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Alliance BJJ Platform Sitemap</h1>
+            <p class="subtitle">Complete navigation map of all prototype pages and components</p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">31</div>
+                    <div class="stat-label">Total Pages</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Sections</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Portals</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">Nov 28</div>
+                    <div class="stat-label">Updated</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search for pages, features, or components..." id="searchInput">
+        </div>
+
+        <!-- Root Level Pages -->
+        <div class="sitemap-section" id="root">
+            <div class="section-header" onclick="toggleSection('root')">
+                <div class="section-title">
+                    <div class="section-icon">🏠</div>
+                    <div class="section-name">Root Level Pages</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span class="section-count">2 pages</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+            </div>
+            <div class="section-description">
+                Core system pages that serve as entry points and foundational resources for the Alliance BJJ platform. These include the main redirect hub and the comprehensive design system documentation. Essential pages for system navigation and maintaining visual consistency across all interfaces.
+            </div>
+            <div class="section-content expanded" id="root-content">
+                <div class="page-list">
+                    <div class="page-item">
+                        <div class="page-indicator">📄</div>
+                        <div class="page-details">
+                            <a href="index.html" class="page-link" target="_blank">index.html</a>
+                            <div class="page-description">Auto-redirect landing page that routes users to the appropriate portal</div>
+                            <div class="page-components">
+                                <span class="component-tag">Auto-redirect</span>
+                                <span class="component-tag">Entry point</span>
+                                <span class="component-tag">Theme detection</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">🎨</div>
+                        <div class="page-details">
+                            <a href="design-system.html" class="page-link" target="_blank">design-system.html</a>
+                            <div class="page-description">Comprehensive UI component library and design guidelines</div>
+                            <div class="page-components">
+                                <span class="component-tag">Color system</span>
+                                <span class="component-tag">Typography</span>
+                                <span class="component-tag">Components</span>
+                                <span class="component-tag">Forms</span>
+                                <span class="component-tag">Dark theme</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Landing Pages -->
+        <div class="sitemap-section" id="landing">
+            <div class="section-header" onclick="toggleSection('landing')">
+                <div class="section-title">
+                    <div class="section-icon">🚀</div>
+                    <div class="section-name">Landing Pages</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span class="section-count">2 pages</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+            </div>
+            <div class="section-description">
+                Public-facing pages designed to convert visitors into trial members through optimized signup flows. Features both the original and redesigned trial registration experiences with integrated payment processing. These pages serve as the first touchpoint for potential new members discovering the gym.
+            </div>
+            <div class="section-content expanded" id="landing-content">
+                <div class="page-list">
+                    <div class="page-item">
+                        <div class="page-indicator">📝</div>
+                        <div class="page-details">
+                            <a href="landing/trial-signup.html" class="page-link" target="_blank">trial-signup.html</a>
+                            <div class="page-description">Original trial registration form with class selection and payment</div>
+                            <div class="page-components">
+                                <span class="component-tag">Registration form</span>
+                                <span class="component-tag">Class selection</span>
+                                <span class="component-tag">Payment integration</span>
+                                <span class="component-tag">Validation</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">✨</div>
+                        <div class="page-details">
+                            <a href="landing/trial-signup-redesigned.html" class="page-link" target="_blank">trial-signup-redesigned.html</a>
+                            <div class="page-description">Enhanced trial signup with improved UX and step-by-step flow</div>
+                            <div class="page-components">
+                                <span class="component-tag">Multi-step form</span>
+                                <span class="component-tag">Progress indicator</span>
+                                <span class="component-tag">Mobile-optimized</span>
+                                <span class="component-tag">Smart defaults</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Member Portal -->
+        <div class="sitemap-section" id="member">
+            <div class="section-header" onclick="toggleSection('member')">
+                <div class="section-title">
+                    <div class="section-icon">👤</div>
+                    <div class="section-name">Member Portal</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span class="section-count">8 pages</span>
+                    <span class="page-badge badge-mobile">MOBILE</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+            </div>
+            <div class="section-description">
+                Mobile-first member experience designed for daily engagement with training activities and gym services. Provides comprehensive tools for class scheduling, attendance tracking, progress monitoring, and account management. Optimized for quick access during training sessions with features like QR code check-in and real-time class updates.
+            </div>
+            <div class="section-content expanded" id="member-content">
+                <div class="page-list">
+                    <div class="page-item">
+                        <div class="page-indicator">📱</div>
+                        <div class="page-details">
+                            <a href="member/index.html" class="page-link" target="_blank">index.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Member portal entry point with authentication</div>
+                            <div class="page-components">
+                                <span class="component-tag">Login</span>
+                                <span class="component-tag">Portal redirect</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">🏡</div>
+                        <div class="page-details">
+                            <a href="member/home.html" class="page-link" target="_blank">home.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Personal dashboard with stats, upcoming classes, and achievements</div>
+                            <div class="page-components">
+                                <span class="component-tag">Quick stats</span>
+                                <span class="component-tag">Next class</span>
+                                <span class="component-tag">Achievements</span>
+                                <span class="component-tag">Notifications</span>
+                                <span class="component-tag">Streak tracking</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">📅</div>
+                        <div class="page-details">
+                            <a href="member/schedule.html" class="page-link" target="_blank">schedule.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Interactive class schedule with filters and booking</div>
+                            <div class="page-components">
+                                <span class="component-tag">Calendar view</span>
+                                <span class="component-tag">Class filters</span>
+                                <span class="component-tag">Booking system</span>
+                                <span class="component-tag">Waitlist</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">🥋</div>
+                        <div class="page-details">
+                            <a href="member/class-detail.html" class="page-link" target="_blank">class-detail.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Detailed class information with instructor and technique details</div>
+                            <div class="page-components">
+                                <span class="component-tag">Class info</span>
+                                <span class="component-tag">Instructor bio</span>
+                                <span class="component-tag">Technique list</span>
+                                <span class="component-tag">Attendee list</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">📲</div>
+                        <div class="page-details">
+                            <a href="member/checkin.html" class="page-link" target="_blank">checkin.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">QR code scanner for quick class check-in</div>
+                            <div class="page-components">
+                                <span class="component-tag">QR scanner</span>
+                                <span class="component-tag">Check-in confirmation</span>
+                                <span class="component-tag">Class selection</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">📊</div>
+                        <div class="page-details">
+                            <a href="member/progress.html" class="page-link" target="_blank">progress.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Training progress tracker with attendance and belt progression</div>
+                            <div class="page-components">
+                                <span class="component-tag">Attendance chart</span>
+                                <span class="component-tag">Belt progress</span>
+                                <span class="component-tag">Technique log</span>
+                                <span class="component-tag">Goals</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">⚙️</div>
+                        <div class="page-details">
+                            <a href="member/profile.html" class="page-link" target="_blank">profile.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Profile management with personal info and preferences</div>
+                            <div class="page-components">
+                                <span class="component-tag">Personal info</span>
+                                <span class="component-tag">Emergency contacts</span>
+                                <span class="component-tag">Preferences</span>
+                                <span class="component-tag">Photo upload</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">💳</div>
+                        <div class="page-details">
+                            <a href="member/payments.html" class="page-link" target="_blank">payments.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Payment history and billing management</div>
+                            <div class="page-components">
+                                <span class="component-tag">Payment history</span>
+                                <span class="component-tag">Invoices</span>
+                                <span class="component-tag">Payment methods</span>
+                                <span class="component-tag">Billing cycle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Owner/Admin Portal -->
+        <div class="sitemap-section" id="owner">
+            <div class="section-header" onclick="toggleSection('owner')">
+                <div class="section-title">
+                    <div class="section-icon">👨‍💼</div>
+                    <div class="section-name">Owner/Admin Portal</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span class="section-count">10 pages</span>
+                    <span class="page-badge badge-desktop">DESKTOP</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+            </div>
+            <div class="section-description">
+                Comprehensive desktop management platform for gym owners and administrators to oversee all operations. Features advanced member management, financial tracking, schedule administration, and business analytics. Designed for efficiency with bulk actions, detailed reporting, and real-time monitoring capabilities.
+            </div>
+            <div class="section-content expanded" id="owner-content">
+                <div class="page-list">
+                    <div class="page-item">
+                        <div class="page-indicator">🖥️</div>
+                        <div class="page-details">
+                            <a href="owner/index.html" class="page-link" target="_blank">index.html</a>
+                            <span class="page-badge badge-desktop">DESKTOP</span>
+                            <div class="page-description">Owner portal entry point</div>
+                            <div class="page-components">
+                                <span class="component-tag">Admin login</span>
+                                <span class="component-tag">Portal redirect</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">📈</div>
+                        <div class="page-details">
+                            <a href="owner/dashboard.html" class="page-link" target="_blank">dashboard.html</a>
+                            <span class="page-badge badge-desktop">DESKTOP</span>
+                            <div class="page-description">Main admin dashboard with KPIs, alerts, and daily overview</div>
+                            <div class="page-components">
+                                <span class="component-tag">KPI metrics</span>
+                                <span class="component-tag">Revenue stats</span>
+                                <span class="component-tag">Alerts</span>
+                                <span class="component-tag">Today's classes</span>
+                                <span class="component-tag">Recent activity</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">👥</div>
+                        <div class="page-details">
+                            <a href="owner/members.html" class="page-link" target="_blank">members.html</a>
+                            <span class="page-badge badge-desktop">DESKTOP</span>
+                            <div class="page-description">Complete member management with search and bulk actions</div>
+                            <div class="page-components">
+                                <span class="component-tag">Member list</span>
+                                <span class="component-tag">Advanced search</span>
+                                <span class="component-tag">Bulk actions</span>
+                                <span class="component-tag">Export tools</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">👤</div>
+                        <div class="page-details">
+                            <a href="owner/member-detail.html" class="page-link" target="_blank">member-detail.html</a>
+                            <span class="page-badge badge-desktop">DESKTOP</span>
+                            <div class="page-description">Individual member profile with complete history and management</div>
+                            <div class="page-components">
+                                <span class="component-tag">Member profile</span>
+                                <span class="component-tag">Attendance log</span>
+                                <span class="component-tag">Payment history</span>
+                                <span class="component-tag">Notes</span>
+                                <span class="component-tag">Actions</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">📆</div>
+                        <div class="page-details">
+                            <a href="owner/schedule.html" class="page-link" target="_blank">schedule.html</a>
+                            <span class="page-badge badge-desktop">DESKTOP</span>
+                            <div class="page-description">Class schedule management with instructor assignments</div>
+                            <div class="page-components">
+                                <span class="component-tag">Schedule editor</span>
+                                <span class="component-tag">Instructor assign</span>
+                                <span class="component-tag">Recurring classes</span>
+                                <span class="component-tag">Capacity management</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">💰</div>
+                        <div class="page-details">
+                            <a href="owner/billing.html" class="page-link" target="_blank">billing.html</a>
+                            <span class="page-badge badge-desktop">DESKTOP</span>
+                            <div class="page-description">Financial management with revenue tracking and failed payments</div>
+                            <div class="page-components">
+                                <span class="component-tag">Revenue reports</span>
+                                <span class="component-tag">Failed payments</span>
+                                <span class="component-tag">Invoice management</span>
+                                <span class="component-tag">Financial charts</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">⚙️</div>
+                        <div class="page-details">
+                            <a href="owner/settings.html" class="page-link" target="_blank">settings.html</a>
+                            <span class="page-badge badge-desktop">DESKTOP</span>
+                            <div class="page-description">System configuration and gym settings management</div>
+                            <div class="page-components">
+                                <span class="component-tag">Gym info</span>
+                                <span class="component-tag">Notifications</span>
+                                <span class="component-tag">Integrations</span>
+                                <span class="component-tag">Staff management</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">🔲</div>
+                        <div class="page-details">
+                            <a href="owner/class-detail-modal.html" class="page-link" target="_blank">class-detail-modal.html</a>
+                            <span class="page-badge badge-modal">MODAL</span>
+                            <div class="page-description">Modal for editing class details and viewing attendees</div>
+                            <div class="page-components">
+                                <span class="component-tag">Class editor</span>
+                                <span class="component-tag">Attendee list</span>
+                                <span class="component-tag">Check-in management</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">➕</div>
+                        <div class="page-details">
+                            <a href="owner/member-add-modal.html" class="page-link" target="_blank">member-add-modal.html</a>
+                            <span class="page-badge badge-modal">MODAL</span>
+                            <div class="page-description">Quick member registration modal</div>
+                            <div class="page-components">
+                                <span class="component-tag">Quick add form</span>
+                                <span class="component-tag">Membership selection</span>
+                                <span class="component-tag">Payment setup</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">🏅</div>
+                        <div class="page-details">
+                            <a href="owner/promotion-modal.html" class="page-link" target="_blank">promotion-modal.html</a>
+                            <span class="page-badge badge-modal">MODAL</span>
+                            <div class="page-description">Belt promotion workflow and ceremony tracking</div>
+                            <div class="page-components">
+                                <span class="component-tag">Eligibility check</span>
+                                <span class="component-tag">Promotion form</span>
+                                <span class="component-tag">Certificate generation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Owner -->
+        <div class="sitemap-section" id="mobile-owner">
+            <div class="section-header" onclick="toggleSection('mobile-owner')">
+                <div class="section-title">
+                    <div class="section-icon">📱</div>
+                    <div class="section-name">Mobile Owner</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span class="section-count">7 pages</span>
+                    <span class="page-badge badge-mobile">MOBILE</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+            </div>
+            <div class="section-description">
+                Streamlined mobile interface for gym owners to manage operations on-the-go. Provides essential administrative functions optimized for mobile devices, enabling quick actions during classes or away from the desk. Perfect for floor management, quick member lookups, and real-time class monitoring.
+            </div>
+            <div class="section-content expanded" id="mobile-owner-content">
+                <div class="page-list">
+                    <div class="page-item">
+                        <div class="page-indicator">📱</div>
+                        <div class="page-details">
+                            <a href="mobile-owner/index.html" class="page-link" target="_blank">index.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Mobile owner app entry point</div>
+                            <div class="page-components">
+                                <span class="component-tag">Mobile login</span>
+                                <span class="component-tag">App redirect</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">📊</div>
+                        <div class="page-details">
+                            <a href="mobile-owner/dashboard.html" class="page-link" target="_blank">dashboard.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Condensed mobile dashboard with key metrics</div>
+                            <div class="page-components">
+                                <span class="component-tag">Quick stats</span>
+                                <span class="component-tag">Today's overview</span>
+                                <span class="component-tag">Alerts</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">👥</div>
+                        <div class="page-details">
+                            <a href="mobile-owner/members.html" class="page-link" target="_blank">members.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Simplified member list with quick search</div>
+                            <div class="page-components">
+                                <span class="component-tag">Member search</span>
+                                <span class="component-tag">Quick contact</span>
+                                <span class="component-tag">Filter options</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">👤</div>
+                        <div class="page-details">
+                            <a href="mobile-owner/member-detail.html" class="page-link" target="_blank">member-detail.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Mobile-optimized member details view</div>
+                            <div class="page-components">
+                                <span class="component-tag">Member info</span>
+                                <span class="component-tag">Quick actions</span>
+                                <span class="component-tag">Contact options</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">📅</div>
+                        <div class="page-details">
+                            <a href="mobile-owner/schedule.html" class="page-link" target="_blank">schedule.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Today's schedule with check-in management</div>
+                            <div class="page-components">
+                                <span class="component-tag">Class list</span>
+                                <span class="component-tag">Check-ins</span>
+                                <span class="component-tag">Attendance</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">⚡</div>
+                        <div class="page-details">
+                            <a href="mobile-owner/quick-actions.html" class="page-link" target="_blank">quick-actions.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Quick action menu for common tasks</div>
+                            <div class="page-components">
+                                <span class="component-tag">Check-in member</span>
+                                <span class="component-tag">Add member</span>
+                                <span class="component-tag">Take payment</span>
+                                <span class="component-tag">Send message</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">☰</div>
+                        <div class="page-details">
+                            <a href="mobile-owner/more.html" class="page-link" target="_blank">more.html</a>
+                            <span class="page-badge badge-mobile">MOBILE</span>
+                            <div class="page-description">Additional options and settings menu</div>
+                            <div class="page-components">
+                                <span class="component-tag">Settings</span>
+                                <span class="component-tag">Reports</span>
+                                <span class="component-tag">Help</span>
+                                <span class="component-tag">Logout</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Onboarding Flow -->
+        <div class="sitemap-section" id="onboarding">
+            <div class="section-header" onclick="toggleSection('onboarding')">
+                <div class="section-title">
+                    <div class="section-icon">🎯</div>
+                    <div class="section-name">Onboarding Flow</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span class="section-count">3 pages</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+            </div>
+            <div class="section-description">
+                Streamlined new member onboarding sequence that ensures all legal and financial requirements are completed before training begins. Features digital waiver signing, payment method setup, and automated welcome messaging. Designed to convert trial members to full memberships with minimal friction.
+            </div>
+            <div class="section-content expanded" id="onboarding-content">
+                <div class="page-list">
+                    <div class="page-item">
+                        <div class="page-indicator">📋</div>
+                        <div class="page-details">
+                            <a href="onboarding/waiver.html" class="page-link" target="_blank">waiver.html</a>
+                            <div class="page-description">Digital waiver and liability agreement with e-signature</div>
+                            <div class="page-components">
+                                <span class="component-tag">Legal terms</span>
+                                <span class="component-tag">E-signature</span>
+                                <span class="component-tag">Medical info</span>
+                                <span class="component-tag">Emergency contact</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">💳</div>
+                        <div class="page-details">
+                            <a href="onboarding/payment-setup.html" class="page-link" target="_blank">payment-setup.html</a>
+                            <div class="page-description">Payment method configuration and billing cycle selection</div>
+                            <div class="page-components">
+                                <span class="component-tag">Card entry</span>
+                                <span class="component-tag">Bank setup</span>
+                                <span class="component-tag">Billing cycle</span>
+                                <span class="component-tag">Plan selection</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <div class="page-indicator">🎉</div>
+                        <div class="page-details">
+                            <a href="onboarding/success.html" class="page-link" target="_blank">success.html</a>
+                            <div class="page-description">Welcome confirmation with next steps and first class details</div>
+                            <div class="page-components">
+                                <span class="component-tag">Welcome message</span>
+                                <span class="component-tag">Next steps</span>
+                                <span class="component-tag">First class info</span>
+                                <span class="component-tag">App download</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Navigation -->
+    <div class="quick-nav">
+        <div class="quick-nav-title">Quick Jump</div>
+        <a href="#root" class="quick-nav-item">Root Pages</a>
+        <a href="#landing" class="quick-nav-item">Landing</a>
+        <a href="#member" class="quick-nav-item">Member Portal</a>
+        <a href="#owner" class="quick-nav-item">Owner Portal</a>
+        <a href="#mobile-owner" class="quick-nav-item">Mobile Owner</a>
+        <a href="#onboarding" class="quick-nav-item">Onboarding</a>
+    </div>
+
+    <script>
+        // Toggle section expansion
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const header = content.previousElementSibling;
+
+            content.classList.toggle('expanded');
+            header.classList.toggle('expanded');
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const sections = document.querySelectorAll('.sitemap-section');
+
+            sections.forEach(section => {
+                const pageItems = section.querySelectorAll('.page-item');
+                let hasVisibleItems = false;
+
+                pageItems.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                        hasVisibleItems = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // Show/hide section based on search results
+                if (searchTerm === '') {
+                    section.style.display = 'block';
+                    pageItems.forEach(item => {
+                        item.style.display = 'flex';
+                    });
+                } else {
+                    section.style.display = hasVisibleItems ? 'block' : 'none';
+                    // Expand section if it has results
+                    if (hasVisibleItems) {
+                        const content = section.querySelector('.section-content');
+                        content.classList.add('expanded');
+                    }
+                }
+            });
+        });
+
+        // Smooth scroll for quick navigation
+        document.querySelectorAll('.quick-nav-item').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+    <script src="bot-protection.js"></script>
+</body>
+</html>

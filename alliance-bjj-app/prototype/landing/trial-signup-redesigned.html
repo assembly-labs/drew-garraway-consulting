@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Start your Brazilian Jiu-Jitsu journey with a free 7-day trial at Alliance BJJ Paoli. No credit card required. Join 150+ members training with world-class instructors.">
+    <title>Free 7-Day Trial - Alliance BJJ Paoli | Start Training Today</title>
+
+    <style>
+        /* Design System Variables */
+        :root {
+            /* Colors */
+            --color-primary: #000000;
+            --color-primary-hover: #1a1a1a;
+            --color-accent: #C8102E;
+            --color-accent-hover: #A00825;
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-text: #111827;
+            --color-text-secondary: #6B7280;
+            --color-bg: #FFFFFF;
+            --color-bg-secondary: #F9FAFB;
+            --color-border: #E5E7EB;
+
+            /* Typography */
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            --font-size-4xl: 2.25rem;
+            --font-size-5xl: 3rem;
+
+            /* Spacing (8px grid) */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+            --spacing-3xl: 6rem;
+
+            /* Border Radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 1rem;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-base: 250ms ease;
+            --transition-slow: 350ms ease;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--color-text);
+            background: var(--color-bg);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3rem); }
+        h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
+        h3 { font-size: clamp(1.25rem, 3vw, 1.875rem); }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Header with Trust Bar */
+        .trust-bar {
+            background: var(--color-primary);
+            color: white;
+            padding: var(--spacing-xs) 0;
+            font-size: var(--font-size-sm);
+        }
+
+        .trust-bar-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .trust-item svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--color-warning);
+        }
+
+        /* Hero Section - Split Layout */
+        .hero {
+            padding: var(--spacing-2xl) 0;
+            background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg) 100%);
+            min-height: calc(100vh - 40px);
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-3xl);
+            align-items: center;
+        }
+
+        .hero-content {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            background: var(--color-success);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-title {
+            margin-bottom: var(--spacing-md);
+            color: var(--color-primary);
+        }
+
+        .hero-subtitle {
+            font-size: var(--font-size-xl);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.5;
+        }
+
+        .hero-features {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: var(--font-size-lg);
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--color-success);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .instructor-info {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm);
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .instructor-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .instructor-details h4 {
+            font-size: var(--font-size-base);
+            margin-bottom: 2px;
+        }
+
+        .instructor-details p {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .form-header {
+            background: var(--color-primary);
+            color: white;
+            padding: var(--spacing-md);
+            text-align: center;
+        }
+
+        .form-header h3 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .form-header p {
+            font-size: var(--font-size-sm);
+            opacity: 0.9;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            display: flex;
+            padding: var(--spacing-md);
+            background: var(--color-bg-secondary);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .progress-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 60%;
+            right: -40%;
+            height: 2px;
+            background: var(--color-border);
+            z-index: 0;
+        }
+
+        .progress-step.active::after {
+            background: var(--color-success);
+        }
+
+        .step-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--color-border);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            transition: all var(--transition-base);
+        }
+
+        .progress-step.active .step-number,
+        .progress-step.completed .step-number {
+            background: var(--color-success);
+            border-color: var(--color-success);
+            color: white;
+        }
+
+        .step-label {
+            display: block;
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+            margin-top: var(--spacing-xs);
+        }
+
+        .progress-step.active .step-label {
+            color: var(--color-text);
+            font-weight: 600;
+        }
+
+        /* Multi-Step Form */
+        .form-body {
+            padding: var(--spacing-lg);
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            color: var(--color-text);
+            font-size: var(--font-size-sm);
+        }
+
+        .form-label .required {
+            color: var(--color-accent);
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: var(--spacing-sm) var(--spacing-sm);
+            font-size: var(--font-size-base);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+            background: white;
+            min-height: 48px; /* Touch-friendly */
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-input.error {
+            border-color: var(--color-accent);
+        }
+
+        .form-helper {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+            margin-top: var(--spacing-xs);
+        }
+
+        .error-message {
+            color: var(--color-accent);
+            font-size: var(--font-size-xs);
+            margin-top: var(--spacing-xs);
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-lg);
+        }
+
+        .btn {
+            flex: 1;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-xs);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--color-bg-secondary);
+            color: var(--color-text);
+            border: 2px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-border);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Trust Badges under Form */
+        .form-trust {
+            padding: var(--spacing-md);
+            background: var(--color-bg-secondary);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .trust-badge svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--color-success);
+        }
+
+        /* Social Proof Section */
+        .social-proof {
+            padding: var(--spacing-xl) 0;
+            background: white;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .social-proof-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .stat-card {
+            padding: var(--spacing-md);
+        }
+
+        .stat-number {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            color: var(--color-primary);
+            display: block;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Benefits Section - Card Grid */
+        .benefits {
+            padding: var(--spacing-3xl) 0;
+            background: var(--color-bg-secondary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .section-header h2 {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .section-header p {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-secondary);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .benefit-card {
+            background: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-base);
+            text-align: center;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .benefit-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto var(--spacing-md);
+            background: var(--color-primary);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .benefit-card h3 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .benefit-card p {
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Schedule Preview */
+        .schedule-preview {
+            padding: var(--spacing-3xl) 0;
+            background: white;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-sm);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .schedule-day {
+            text-align: center;
+            padding: var(--spacing-md);
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-base);
+        }
+
+        .schedule-day:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .day-name {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .class-count {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+        }
+
+        .class-label {
+            font-size: var(--font-size-sm);
+            opacity: 0.8;
+        }
+
+        /* Testimonials - Carousel Style */
+        .testimonials {
+            padding: var(--spacing-3xl) 0;
+            background: var(--color-bg-secondary);
+        }
+
+        .testimonial-carousel {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .testimonial-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto var(--spacing-md);
+            background: var(--color-border);
+        }
+
+        .testimonial-rating {
+            color: var(--color-warning);
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .testimonial-text {
+            font-size: var(--font-size-lg);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-md);
+            font-style: italic;
+            color: var(--color-text);
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .testimonial-meta {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: var(--spacing-3xl) 0;
+            background: white;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-sm);
+            overflow: hidden;
+            transition: all var(--transition-base);
+        }
+
+        .faq-item.active {
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: var(--spacing-md);
+            background: white;
+            border: none;
+            text-align: left;
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-base);
+        }
+
+        .faq-question:hover {
+            background: var(--color-bg-secondary);
+        }
+
+        .faq-icon {
+            transform: rotate(0);
+            transition: transform var(--transition-base);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-slow);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 var(--spacing-md) var(--spacing-md);
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: var(--spacing-3xl) 0;
+            background: linear-gradient(135deg, var(--color-primary) 0%, #2a2a2a 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            color: white;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-content p {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-lg);
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--color-accent);
+            color: white;
+            padding: var(--spacing-md) var(--spacing-xl);
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--radius-full);
+            transition: all var(--transition-base);
+        }
+
+        .cta-button:hover {
+            background: var(--color-accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-primary);
+            color: white;
+            padding: var(--spacing-xl) 0 var(--spacing-lg);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-section h4 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            padding: var(--spacing-xs) 0;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: var(--font-size-sm);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-xl);
+            }
+
+            .hero {
+                min-height: auto;
+                padding: var(--spacing-xl) 0;
+            }
+
+            .form-card {
+                margin-top: var(--spacing-lg);
+            }
+
+            .trust-bar-content {
+                font-size: var(--font-size-xs);
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-trust {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: white;
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-xl);
+            display: none;
+            align-items: center;
+            gap: var(--spacing-sm);
+            animation: slideInLeft 0.5s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            display: flex;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Loading state */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <div class="trust-bar-content">
+                <div class="trust-item">
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    <span>5.0 Rating on Google (127 Reviews)</span>
+                </div>
+                <div class="trust-item">
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>Alliance Certified Academy</span>
+                </div>
+                <div class="trust-item">
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                    </svg>
+                    <span>info@alliancebjjpaoli.com</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section with Split Layout -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-container">
+                <!-- Left: Content -->
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                        </svg>
+                        Limited Spots - Only 3 Remaining This Week
+                    </div>
+
+                    <h1 class="hero-title">Transform Your Life Through Brazilian Jiu-Jitsu</h1>
+                    <p class="hero-subtitle">Join 150+ members discovering their strength, building confidence, and mastering self-defense at Paoli's premier BJJ academy.</p>
+
+                    <div class="hero-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">✓</div>
+                            <span>7 Full Days of Unlimited Classes</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">✓</div>
+                            <span>No Credit Card or Commitment Required</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">✓</div>
+                            <span>Professional Gear Provided</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">✓</div>
+                            <span>Beginner-Friendly Environment</span>
+                        </div>
+                    </div>
+
+                    <div class="instructor-info">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23ddd' width='100' height='100'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='20'%3EPhoto%3C/text%3E%3C/svg%3E" alt="Professor Mike Santos" class="instructor-photo">
+                        <div class="instructor-details">
+                            <h4>Professor Mike Santos</h4>
+                            <p>3rd Degree Black Belt • 15+ Years Teaching</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Form -->
+                <div class="form-card">
+                    <div class="form-header">
+                        <h3>Start Your Free Week Today</h3>
+                        <p>Takes less than 60 seconds</p>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="progress-bar">
+                        <div class="progress-step active" data-step="1">
+                            <span class="step-number">1</span>
+                            <span class="step-label">Contact</span>
+                        </div>
+                        <div class="progress-step" data-step="2">
+                            <span class="step-number">2</span>
+                            <span class="step-label">Program</span>
+                        </div>
+                        <div class="progress-step" data-step="3">
+                            <span class="step-number">3</span>
+                            <span class="step-label">Confirm</span>
+                        </div>
+                    </div>
+
+                    <form class="signup-form" id="trialForm">
+                        <div class="form-body">
+                            <!-- Step 1: Contact Info -->
+                            <div class="form-step active" data-step="1">
+                                <div class="form-group">
+                                    <label class="form-label" for="firstName">
+                                        First Name <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="firstName" class="form-input" required placeholder="John">
+                                    <span class="error-message">Please enter your first name</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="lastName">
+                                        Last Name <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="lastName" class="form-input" required placeholder="Smith">
+                                    <span class="error-message">Please enter your last name</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="email">
+                                        Email Address <span class="required">*</span>
+                                    </label>
+                                    <input type="email" id="email" class="form-input" required placeholder="john@example.com">
+                                    <p class="form-helper">We'll send your class schedule here</p>
+                                    <span class="error-message">Please enter a valid email</span>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-primary" onclick="nextStep()">
+                                        Continue
+                                        <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Program Selection -->
+                            <div class="form-step" data-step="2">
+                                <div class="form-group">
+                                    <label class="form-label" for="phone">
+                                        Phone Number <span class="required">*</span>
+                                    </label>
+                                    <input type="tel" id="phone" class="form-input" required placeholder="(555) 123-4567">
+                                    <p class="form-helper">For scheduling your first class</p>
+                                    <span class="error-message">Please enter a valid phone number</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="program">
+                                        Which program interests you? <span class="required">*</span>
+                                    </label>
+                                    <select id="program" class="form-select" required>
+                                        <option value="">Select a program...</option>
+                                        <option value="adult-beginner" selected>Adult Fundamentals (Most Popular)</option>
+                                        <option value="adult-all">Adult All Levels</option>
+                                        <option value="kids">Kids (Ages 4-12)</option>
+                                        <option value="teens">Teens (Ages 13-17)</option>
+                                        <option value="competition">Competition Team</option>
+                                    </select>
+                                    <p class="form-helper">Not sure? We'll help you choose!</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="experience">
+                                        Any martial arts experience?
+                                    </label>
+                                    <select id="experience" class="form-select">
+                                        <option value="none">No experience</option>
+                                        <option value="some">Some experience</option>
+                                        <option value="experienced">Experienced practitioner</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                                        Back
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="nextStep()">
+                                        Continue
+                                        <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Confirmation -->
+                            <div class="form-step" data-step="3">
+                                <div style="text-align: center; padding: 20px 0;">
+                                    <div style="width: 64px; height: 64px; background: var(--color-success); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                                        <svg width="32" height="32" viewBox="0 0 20 20" fill="white">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <h3 style="margin-bottom: 10px;">Almost Done!</h3>
+                                    <p style="color: var(--color-text-secondary); margin-bottom: 20px;">Review your information and claim your free week</p>
+                                </div>
+
+                                <div style="background: var(--color-bg-secondary); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                                    <p style="font-size: 14px; margin-bottom: 10px;"><strong>Your Selection:</strong></p>
+                                    <p id="confirmationDetails" style="font-size: 14px; color: var(--color-text-secondary);">
+                                        <!-- Details will be populated by JavaScript -->
+                                    </p>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                                        Back
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        Claim Free Week
+                                        <span class="loading" style="display: none;"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Trust Badges -->
+                    <div class="form-trust">
+                        <div class="trust-badge">
+                            <svg viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>SSL Secured</span>
+                        </div>
+                        <div class="trust-badge">
+                            <svg viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
+                                <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>No Payment Required</span>
+                        </div>
+                        <div class="trust-badge">
+                            <svg viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Instant Access</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Numbers -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="social-proof-container">
+                <div class="stat-card">
+                    <span class="stat-number">150+</span>
+                    <span class="stat-label">Active Members</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Classes Per Week</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Years of Excellence</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Success Stories</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything You Need to Succeed</h2>
+                <p>Our comprehensive program is designed for your success</p>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Structured Learning</h3>
+                    <p>Follow our proven curriculum that takes you from white belt fundamentals to advanced techniques at your own pace.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">💪</div>
+                    <h3>Total Body Fitness</h3>
+                    <p>Burn 500-800 calories per class while building functional strength, flexibility, and endurance.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛡️</div>
+                    <h3>Real Self-Defense</h3>
+                    <p>Learn practical techniques that work in real situations, building confidence that extends beyond the mat.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤝</div>
+                    <h3>Supportive Community</h3>
+                    <p>Train with like-minded individuals in an ego-free environment focused on mutual growth and respect.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h3>Track Your Progress</h3>
+                    <p>Regular assessments and belt promotions keep you motivated and celebrating achievements.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏆</div>
+                    <h3>Competition Ready</h3>
+                    <p>Optional competition team for those wanting to test their skills in local and national tournaments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Preview -->
+    <section class="schedule-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2>Classes Available 7 Days a Week</h2>
+                <p>Find the perfect time that fits your schedule</p>
+            </div>
+
+            <div class="schedule-grid">
+                <div class="schedule-day">
+                    <div class="day-name">Monday</div>
+                    <div class="class-count">4</div>
+                    <div class="class-label">Classes</div>
+                </div>
+                <div class="schedule-day">
+                    <div class="day-name">Tuesday</div>
+                    <div class="class-count">3</div>
+                    <div class="class-label">Classes</div>
+                </div>
+                <div class="schedule-day">
+                    <div class="day-name">Wednesday</div>
+                    <div class="class-count">4</div>
+                    <div class="class-label">Classes</div>
+                </div>
+                <div class="schedule-day">
+                    <div class="day-name">Thursday</div>
+                    <div class="class-count">3</div>
+                    <div class="class-label">Classes</div>
+                </div>
+                <div class="schedule-day">
+                    <div class="day-name">Friday</div>
+                    <div class="class-count">3</div>
+                    <div class="class-label">Classes</div>
+                </div>
+                <div class="schedule-day">
+                    <div class="day-name">Saturday</div>
+                    <div class="class-count">2</div>
+                    <div class="class-label">Classes</div>
+                </div>
+                <div class="schedule-day">
+                    <div class="day-name">Sunday</div>
+                    <div class="class-count">1</div>
+                    <div class="class-label">Open Mat</div>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 30px; color: var(--color-text-secondary);">
+                Morning, afternoon, and evening options available
+            </p>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Real Members, Real Results</h2>
+                <p>Join hundreds who've transformed their lives</p>
+            </div>
+
+            <div class="testimonial-carousel">
+                <div class="testimonial-card">
+                    <div class="testimonial-photo"></div>
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">
+                        "I've lost 35 pounds and gained incredible confidence. The instructors are patient, knowledgeable, and create an environment where everyone succeeds. BJJ changed my life!"
+                    </p>
+                    <div class="testimonial-author">Sarah Johnson</div>
+                    <div class="testimonial-meta">Blue Belt • Member since 2022</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know before starting</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>I've never done martial arts before. Is this for me?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Absolutely! Over 80% of our members started with zero martial arts experience. Our Fundamentals Program is specifically designed for complete beginners. You'll learn at your own pace in a supportive, non-intimidating environment.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What should I wear to my first class?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            For your first week, just wear comfortable athletic clothing (t-shirt and shorts or sweatpants). We'll provide you with a loaner gi (uniform) if needed. Once you decide to continue, we'll help you get your own gear.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Am I too old/out of shape to start?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Not at all! We have members from 4 to 74 years old, and many started their journey out of shape. BJJ is scalable to any fitness level, and you'll improve at your own pace. The workout itself will get you in the best shape of your life.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is BJJ safe? What about injuries?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Safety is our top priority. BJJ is actually safer than most contact sports because you can "tap out" at any time. Our instructors emphasize proper technique and control. Injuries are rare and usually minor when they do occur.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What happens after my free week?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            There's absolutely no obligation after your free week. If you love it (and we think you will!), we offer flexible membership options starting at $149/month. We'll discuss what works best for your goals and budget - no pressure, ever.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your Journey?</h2>
+                <p>Join 150+ members who've discovered the power of Brazilian Jiu-Jitsu</p>
+                <a href="#top" class="cta-button">Claim Your Free Week Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Alliance BJJ Paoli</h4>
+                    <a href="tel:6105550123">(610) 555-0123</a>
+                    <a href="mailto:info@alliancebjjpaoli.com">info@alliancebjjpaoli.com</a>
+                    <a href="#">123 Main Street, Paoli, PA 19301</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Programs</h4>
+                    <a href="#">Adult Classes</a>
+                    <a href="#">Kids Program</a>
+                    <a href="#">Private Training</a>
+                    <a href="#">Competition Team</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#">Class Schedule</a>
+                    <a href="#">Pricing</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">YouTube</a>
+                    <a href="#">Google Reviews</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Alliance BJJ Paoli. All rights reserved. | <a href="#" style="color: inherit;">Privacy Policy</a> | <a href="#" style="color: inherit;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--color-success)">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+        </svg>
+        <span>Someone from Paoli just signed up!</span>
+    </div>
+
+    <script>
+        // Multi-step form logic
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function showStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.progress-step').forEach(s => s.classList.remove('active', 'completed'));
+
+            // Show current step
+            document.querySelector(`.form-step[data-step="${step}"]`).classList.add('active');
+
+            // Update progress bar
+            for(let i = 1; i <= step; i++) {
+                const progressStep = document.querySelector(`.progress-step[data-step="${i}"]`);
+                if(i < step) {
+                    progressStep.classList.add('completed');
+                } else if(i === step) {
+                    progressStep.classList.add('active');
+                }
+            }
+        }
+
+        function validateStep(step) {
+            const currentStepEl = document.querySelector(`.form-step[data-step="${step}"]`);
+            const inputs = currentStepEl.querySelectorAll('input[required], select[required]');
+            let valid = true;
+
+            inputs.forEach(input => {
+                if(!input.value) {
+                    input.classList.add('error');
+                    const errorMsg = input.parentElement.querySelector('.error-message');
+                    if(errorMsg) errorMsg.classList.add('show');
+                    valid = false;
+                } else {
+                    input.classList.remove('error');
+                    const errorMsg = input.parentElement.querySelector('.error-message');
+                    if(errorMsg) errorMsg.classList.remove('show');
+                }
+            });
+
+            return valid;
+        }
+
+        function nextStep() {
+            if(validateStep(currentStep) && currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+
+                // Update confirmation details on last step
+                if(currentStep === 3) {
+                    updateConfirmation();
+                }
+            }
+        }
+
+        function prevStep() {
+            if(currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        function updateConfirmation() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const program = document.getElementById('program').options[document.getElementById('program').selectedIndex].text;
+
+            document.getElementById('confirmationDetails').innerHTML = `
+                <strong>Name:</strong> ${firstName} ${lastName}<br>
+                <strong>Email:</strong> ${email}<br>
+                <strong>Phone:</strong> ${phone}<br>
+                <strong>Program:</strong> ${program}
+            `;
+        }
+
+        // Form submission
+        document.getElementById('trialForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Show loading state
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const loadingSpinner = submitBtn.querySelector('.loading');
+            submitBtn.disabled = true;
+            loadingSpinner.style.display = 'inline-block';
+
+            // Simulate form submission
+            setTimeout(() => {
+                // Redirect to waiver page
+                window.location.href = '../onboarding/waiver.html';
+            }, 1500);
+        });
+
+        // Remove error state on input
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('error');
+                const errorMsg = this.parentElement.querySelector('.error-message');
+                if(errorMsg) errorMsg.classList.remove('show');
+            });
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', function() {
+                const item = this.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+                // Open clicked item if it wasn't active
+                if(!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Show random notification
+        function showNotification() {
+            const messages = [
+                'Someone from Paoli just signed up!',
+                'A new member joined the fundamentals class',
+                '2 spots remaining for this week',
+                'Sarah just claimed her free trial'
+            ];
+
+            const notification = document.getElementById('notification');
+            const message = messages[Math.floor(Math.random() * messages.length)];
+            notification.querySelector('span').textContent = message;
+
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        // Show notification after delay
+        setTimeout(showNotification, 8000);
+
+        // Show another notification periodically
+        setInterval(showNotification, 45000);
+
+        // Smooth scroll to form when CTA clicked
+        document.querySelectorAll('a[href="#top"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if(value.length >= 6) {
+                value = `(${value.slice(0,3)}) ${value.slice(3,6)}-${value.slice(6,10)}`;
+            } else if(value.length >= 3) {
+                value = `(${value.slice(0,3)}) ${value.slice(3)}`;
+            }
+            e.target.value = value;
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe benefit cards for animation
+        document.querySelectorAll('.benefit-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+    <script src="../bot-protection.js"></script>
+</body>
+</html>

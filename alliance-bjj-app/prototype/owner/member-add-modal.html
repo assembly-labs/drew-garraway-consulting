@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Member - Alliance BJJ Platform</title>
+    <link rel="icon" type="image/png" href="../Alliance_jiu-jitsu.svg.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, nosnippet, noarchive, noimageindex, notranslate">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="dark-mode">
+    <div class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Add New Member</h2>
+                <a href="members.html" style="font-size: 24px; color: var(--gray-500);">&times;</a>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <!-- Basic Information -->
+                    <h3>Basic Information</h3>
+                    <div class="form-group">
+                        <label class="form-label">First Name *</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name *</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date of Birth</label>
+                        <input type="date" class="form-input">
+                    </div>
+
+                    <!-- BJJ Information -->
+                    <h3 class="mt-lg">BJJ Information</h3>
+                    <div class="form-group">
+                        <label class="form-label">Program *</label>
+                        <select class="form-select" required>
+                            <option value="">Select program...</option>
+                            <option value="adults">Adults</option>
+                            <option value="kids">Kids</option>
+                            <option value="competition">Competition Team</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Current Belt *</label>
+                        <select class="form-select" required>
+                            <option value="">Select belt...</option>
+                            <option value="white">White</option>
+                            <option value="blue">Blue</option>
+                            <option value="purple">Purple</option>
+                            <option value="brown">Brown</option>
+                            <option value="black">Black</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Current Stripes</label>
+                        <select class="form-select">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Start Date</label>
+                        <input type="date" class="form-input" value="2024-11-27">
+                    </div>
+
+                    <!-- Emergency Contact -->
+                    <h3 class="mt-lg">Emergency Contact</h3>
+                    <div class="form-group">
+                        <label class="form-label">Contact Name</label>
+                        <input type="text" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Relationship</label>
+                        <select class="form-select">
+                            <option value="">Select relationship...</option>
+                            <option value="spouse">Spouse</option>
+                            <option value="parent">Parent</option>
+                            <option value="sibling">Sibling</option>
+                            <option value="friend">Friend</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-input">
+                    </div>
+
+                    <!-- Membership -->
+                    <h3 class="mt-lg">Membership</h3>
+                    <div class="form-group">
+                        <label class="form-label">Plan *</label>
+                        <select class="form-select" required>
+                            <option value="">Select plan...</option>
+                            <option value="monthly">Monthly Unlimited</option>
+                            <option value="annual">Annual</option>
+                            <option value="2xweek">2x/Week</option>
+                            <option value="dropin">Drop-in</option>
+                            <option value="trial">Trial</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="members.html" class="btn">Cancel</a>
+                <a href="members.html" class="btn btn-primary">Add Member</a>
+            </div>
+        </div>
+    </div>
+    <script src="../theme.js"></script>
+    <script src="../bot-protection.js"></script>
+</body>
+</html>

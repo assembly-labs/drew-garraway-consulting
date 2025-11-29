@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Alliance BJJ Platform</title>
+    <link rel="icon" type="image/png" href="../Alliance_jiu-jitsu.svg.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, nosnippet, noarchive, noimageindex, notranslate">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: var(--space-xl);
+        }
+        .settings-sidebar {
+            background-color: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: var(--space-md);
+            height: fit-content;
+        }
+        .settings-nav-item {
+            display: block;
+            padding: var(--space-sm) var(--space-md);
+            margin-bottom: var(--space-xs);
+            border-radius: 4px;
+            color: var(--gray-700);
+        }
+        .settings-nav-item:hover {
+            background-color: var(--gray-100);
+            text-decoration: none;
+        }
+        .settings-nav-item.active {
+            background-color: var(--gray-100);
+            color: var(--gray-900);
+            font-weight: 600;
+        }
+        .hours-table {
+            width: 100%;
+            margin-top: var(--space-md);
+        }
+        .hours-table td {
+            padding: var(--space-sm);
+        }
+        .hours-table input {
+            width: 100px;
+            padding: var(--space-xs);
+            border: 1px solid var(--gray-300);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../Alliance_jiu-jitsu.svg.png" alt="Alliance BJJ" class="sidebar-logo-placeholder" style="width: 72px; height: auto;">
+                <div style="font-size: 32px; font-weight: bold;">PAOLI</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="sidebar-nav-item">Dashboard</a>
+                <a href="members.html" class="sidebar-nav-item">Members</a>
+                <a href="schedule.html" class="sidebar-nav-item">Schedule</a>
+                <a href="billing.html" class="sidebar-nav-item">Billing</a>
+                <a href="settings.html" class="sidebar-nav-item active">Settings</a>
+            </nav>
+            <div class="sidebar-user">
+                <img src="../portraits/men/male-1.png" alt="Professor Mike" class="user-avatar">
+                <span>Professor Mike</span><br>
+                <a href="#" class="text-small text-muted">Log out</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <h1 class="mb-lg">Settings</h1>
+
+            <!-- Settings Layout -->
+            <div class="settings-layout">
+                <!-- Settings Sidebar -->
+                <div class="settings-sidebar">
+                    <a href="#" class="settings-nav-item active">Gym Profile</a>
+                    <a href="#" class="settings-nav-item">Appearance</a>
+                    <a href="#" class="settings-nav-item">Branding</a>
+                    <a href="#" class="settings-nav-item">Team & Permissions</a>
+                    <a href="#" class="settings-nav-item">Billing Settings</a>
+                    <a href="#" class="settings-nav-item">Notifications</a>
+                    <a href="#" class="settings-nav-item">Belt Progression</a>
+                </div>
+
+                <!-- Settings Content -->
+                <div>
+                    <!-- Appearance Settings (Hidden by default, shown when Appearance clicked) -->
+                    <div class="card" id="appearance-settings" style="display: none;">
+                        <h2>Appearance</h2>
+                        <p class="text-muted mb-lg">Customize how the Alliance BJJ platform looks for you and your team.</p>
+
+                        <div class="form-group">
+                            <label class="form-label">Theme</label>
+                            <p class="text-small text-muted mb-md">Choose between light and dark mode. Your preference will be saved automatically.</p>
+
+                            <div style="display: flex; gap: var(--space-md);">
+                                <label style="display: flex; align-items: center; padding: var(--space-md); border: 2px solid var(--gray-300); border-radius: 8px; cursor: pointer; flex: 1;">
+                                    <input type="radio" name="theme" value="dark" id="theme-dark" checked onchange="setTheme('dark')" style="margin-right: var(--space-sm);">
+                                    <div>
+                                        <div style="font-weight: 600;">🌙 Dark Mode</div>
+                                        <div class="text-small text-muted">Easier on the eyes in low light</div>
+                                    </div>
+                                </label>
+
+                                <label style="display: flex; align-items: center; padding: var(--space-md); border: 2px solid var(--gray-300); border-radius: 8px; cursor: pointer; flex: 1;">
+                                    <input type="radio" name="theme" value="light" id="theme-light" onchange="setTheme('light')" style="margin-right: var(--space-sm);">
+                                    <div>
+                                        <div style="font-weight: 600;">☀️ Light Mode</div>
+                                        <div class="text-small text-muted">Classic bright appearance</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="alert-banner" style="margin-top: var(--space-lg);">
+                            <span>💡 Your theme preference is saved automatically and will apply across all pages.</span>
+                        </div>
+                    </div>
+
+                    <!-- Gym Profile Settings -->
+                    <div class="card" id="gym-profile-settings">
+                        <h2>Gym Profile</h2>
+
+                        <form>
+                            <div class="form-group">
+                                <label class="form-label">Gym Name</label>
+                                <input type="text" class="form-input" value="Alliance BJJ Paoli">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Address</label>
+                                <input type="text" class="form-input" value="123 Main Street, Paoli, PA 19301">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Phone</label>
+                                <input type="tel" class="form-input" value="(610) 555-0123">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" value="info@alliancepaoli.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Website</label>
+                                <input type="url" class="form-input" value="www.alliancepaoli.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-textarea" placeholder="Tell members about your gym...">Alliance BJJ Paoli is a premier Brazilian Jiu-Jitsu academy offering world-class instruction for all ages and skill levels. Our experienced instructors are dedicated to helping you achieve your martial arts goals in a supportive and professional environment.</textarea>
+                            </div>
+
+                            <h3 class="mt-lg mb-md">Operating Hours</h3>
+                            <table class="hours-table">
+                                <tr>
+                                    <td><strong>Monday</strong></td>
+                                    <td><input type="time" value="06:00"> to <input type="time" value="21:00"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tuesday</strong></td>
+                                    <td><input type="time" value="06:00"> to <input type="time" value="21:00"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Wednesday</strong></td>
+                                    <td><input type="time" value="06:00"> to <input type="time" value="21:00"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Thursday</strong></td>
+                                    <td><input type="time" value="06:00"> to <input type="time" value="21:00"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Friday</strong></td>
+                                    <td><input type="time" value="06:00"> to <input type="time" value="21:00"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Saturday</strong></td>
+                                    <td><input type="time" value="08:00"> to <input type="time" value="14:00"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sunday</strong></td>
+                                    <td><input type="time" value="10:00"> to <input type="time" value="13:00"></td>
+                                </tr>
+                            </table>
+
+                            <div class="mt-lg">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../theme.js"></script>
+    <script>
+        // Settings tab switching
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.settings-nav-item');
+            const appearanceSettings = document.getElementById('appearance-settings');
+            const gymProfileSettings = document.getElementById('gym-profile-settings');
+
+            navItems.forEach(function(item, index) {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // Remove active class from all items
+                    navItems.forEach(function(nav) {
+                        nav.classList.remove('active');
+                    });
+
+                    // Add active class to clicked item
+                    this.classList.add('active');
+
+                    // Show/hide appropriate content
+                    const text = this.textContent.trim();
+                    if (text === 'Appearance') {
+                        appearanceSettings.style.display = 'block';
+                        gymProfileSettings.style.display = 'none';
+                    } else if (text === 'Gym Profile') {
+                        appearanceSettings.style.display = 'none';
+                        gymProfileSettings.style.display = 'block';
+                    } else {
+                        // Hide all settings sections for other tabs (not implemented)
+                        appearanceSettings.style.display = 'none';
+                        gymProfileSettings.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="../bot-protection.js"></script>
+</body>
+</html>
