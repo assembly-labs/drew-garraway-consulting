@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Schedule - Alliance BJJ Platform</title>
+    <link rel="icon" type="image/png" href="../Alliance_jiu-jitsu.svg.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, nosnippet, noarchive, noimageindex, notranslate">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .schedule-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+        .view-toggle {
+            display: flex;
+            border: 1px solid var(--gray-300);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .view-toggle button {
+            padding: var(--space-sm) var(--space-md);
+            border: none;
+            background-color: var(--white);
+            cursor: pointer;
+            border-right: 1px solid var(--gray-300);
+        }
+        .view-toggle button:last-child {
+            border-right: none;
+        }
+        .view-toggle button.active {
+            background-color: var(--gray-900);
+            color: var(--white);
+        }
+        .date-nav {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        .week-grid {
+            display: grid;
+            grid-template-columns: 60px repeat(7, 1fr);
+            gap: 1px;
+            background-color: var(--gray-300);
+            border: 1px solid var(--gray-300);
+        }
+        .time-label {
+            background-color: var(--white);
+            padding: var(--space-sm);
+            text-align: center;
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+        .day-header {
+            background-color: var(--gray-100);
+            padding: var(--space-md);
+            text-align: center;
+            font-weight: 600;
+        }
+        .day-header.today {
+            background-color: var(--gray-900);
+            color: var(--white);
+        }
+        .time-slot {
+            background-color: var(--white);
+            min-height: 80px;
+            padding: var(--space-xs);
+        }
+        .class-block {
+            background-color: var(--gray-200);
+            padding: var(--space-sm);
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: var(--space-xs);
+            font-size: 12px;
+        }
+        .class-block:hover {
+            background-color: var(--gray-300);
+        }
+        .class-block.gi {
+            background-color: #E8E8E8;
+        }
+        .class-block.nogi {
+            background-color: #D4D4D4;
+        }
+        .class-block.kids {
+            background-color: #F5F5F5;
+        }
+        .class-block.open {
+            background-color: #C8C8C8;
+        }
+        .legend {
+            display: flex;
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../Alliance_jiu-jitsu.svg.png" alt="Alliance BJJ" class="sidebar-logo-placeholder" style="width: 72px; height: auto;">
+                <div style="font-size: 32px; font-weight: bold;">PAOLI</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="sidebar-nav-item">Dashboard</a>
+                <a href="members.html" class="sidebar-nav-item">Members</a>
+                <a href="schedule.html" class="sidebar-nav-item active">Schedule</a>
+                <a href="billing.html" class="sidebar-nav-item">Billing</a>
+                <a href="settings.html" class="sidebar-nav-item">Settings</a>
+            </nav>
+            <div class="sidebar-user">
+                <img src="../portraits/men/male-1.png" alt="Professor Mike" class="user-avatar">
+                <span>Professor Mike</span><br>
+                <a href="#" class="text-small text-muted">Log out</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="header-row">
+                <div class="header-left">
+                    <h1>Class Schedule</h1>
+                </div>
+                <div class="header-right">
+                    <a href="#" class="btn btn-primary">Add Class</a>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="schedule-controls">
+                <div class="view-toggle">
+                    <button>Day</button>
+                    <button class="active">Week</button>
+                    <button>Month</button>
+                </div>
+                <div class="date-nav">
+                    <button class="btn">←</button>
+                    <strong>November 24-30, 2024</strong>
+                    <button class="btn">→</button>
+                    <button class="btn">Today</button>
+                </div>
+            </div>
+
+            <!-- Week View Grid -->
+            <div class="week-grid">
+                <!-- Header Row -->
+                <div class="time-label"></div>
+                <div class="day-header">Sun 24</div>
+                <div class="day-header">Mon 25</div>
+                <div class="day-header">Tue 26</div>
+                <div class="day-header today">Wed 27</div>
+                <div class="day-header">Thu 28</div>
+                <div class="day-header">Fri 29</div>
+                <div class="day-header">Sat 30</div>
+
+                <!-- 6 AM -->
+                <div class="time-label">6 AM</div>
+                <div class="time-slot"></div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block gi class-type-gi">
+                        <strong>Fundamentals</strong><br>
+                        Coach Mike<br>
+                        12/20
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block gi class-type-gi">
+                        <strong>Fundamentals</strong><br>
+                        Coach Mike<br>
+                        14/20
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block gi class-type-gi">
+                        <strong>Fundamentals</strong><br>
+                        Coach Mike<br>
+                        12/20
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block gi class-type-gi">
+                        <strong>Fundamentals</strong><br>
+                        Coach Mike<br>
+                        11/20
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block gi class-type-gi">
+                        <strong>Fundamentals</strong><br>
+                        Coach Mike<br>
+                        13/20
+                    </a>
+                </div>
+                <div class="time-slot"></div>
+
+                <!-- 9 AM -->
+                <div class="time-label">9 AM</div>
+                <div class="time-slot"></div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block gi class-type-gi">
+                        <strong>All Levels</strong><br>
+                        Coach Sarah<br>
+                        7/15
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block gi class-type-gi">
+                        <strong>All Levels</strong><br>
+                        Coach Sarah<br>
+                        9/15
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block gi class-type-gi">
+                        <strong>All Levels</strong><br>
+                        Coach Sarah<br>
+                        8/15
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block gi class-type-gi">
+                        <strong>All Levels</strong><br>
+                        Coach Sarah<br>
+                        10/15
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block gi class-type-gi">
+                        <strong>All Levels</strong><br>
+                        Coach Sarah<br>
+                        8/15
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block open class-type-openmat">
+                        <strong>Open Mat</strong><br>
+                        10:00-12:00<br>
+                        8/30
+                    </a>
+                </div>
+
+                <!-- 12 PM -->
+                <div class="time-label">12 PM</div>
+                <div class="time-slot"></div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block open class-type-openmat">
+                        <strong>Open Mat</strong><br>
+                        —<br>
+                        4/30
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block open class-type-openmat">
+                        <strong>Open Mat</strong><br>
+                        —<br>
+                        6/30
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block open class-type-openmat">
+                        <strong>Open Mat</strong><br>
+                        —<br>
+                        5/30
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block open class-type-openmat">
+                        <strong>Open Mat</strong><br>
+                        —<br>
+                        7/30
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block open class-type-openmat">
+                        <strong>Open Mat</strong><br>
+                        —<br>
+                        5/30
+                    </a>
+                </div>
+                <div class="time-slot"></div>
+
+                <!-- 5 PM -->
+                <div class="time-label">5 PM</div>
+                <div class="time-slot"></div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block kids class-type-kids">
+                        <strong>Kids (7-12)</strong><br>
+                        Coach Mike<br>
+                        13/16
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block kids class-type-kids">
+                        <strong>Kids (7-12)</strong><br>
+                        Coach Mike<br>
+                        15/16
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block kids class-type-kids">
+                        <strong>Kids (7-12)</strong><br>
+                        Coach Mike<br>
+                        14/16
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block kids class-type-kids">
+                        <strong>Kids (7-12)</strong><br>
+                        Coach Mike<br>
+                        12/16
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block kids class-type-kids">
+                        <strong>Kids (7-12)</strong><br>
+                        Coach Mike<br>
+                        14/16
+                    </a>
+                </div>
+                <div class="time-slot"></div>
+
+                <!-- 6:30 PM -->
+                <div class="time-label">6:30 PM</div>
+                <div class="time-slot"></div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block nogi class-type-nogi">
+                        <strong>Advanced</strong><br>
+                        Coach Sarah<br>
+                        17/20
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block nogi class-type-nogi">
+                        <strong>Advanced</strong><br>
+                        Coach Sarah<br>
+                        19/20
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block nogi class-type-nogi">
+                        <strong>Advanced</strong><br>
+                        Coach Sarah<br>
+                        18/20
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block nogi class-type-nogi">
+                        <strong>Advanced</strong><br>
+                        Coach Sarah<br>
+                        16/20
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block nogi class-type-nogi">
+                        <strong>Advanced</strong><br>
+                        Coach Sarah<br>
+                        18/20
+                    </a>
+                </div>
+                <div class="time-slot"></div>
+
+                <!-- 8 PM -->
+                <div class="time-label">8 PM</div>
+                <div class="time-slot"></div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block nogi class-type-nogi">
+                        <strong>Competition Team</strong><br>
+                        Professor Mike<br>
+                        9/12
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block nogi class-type-nogi">
+                        <strong>Competition Team</strong><br>
+                        Professor Mike<br>
+                        11/12
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block nogi class-type-nogi">
+                        <strong>Competition Team</strong><br>
+                        Professor Mike<br>
+                        10/12
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block nogi class-type-nogi">
+                        <strong>Competition Team</strong><br>
+                        Professor Mike<br>
+                        12/12
+                    </a>
+                </div>
+                <div class="time-slot">
+                    <a href="class-detail-modal.html" class="class-block nogi class-type-nogi">
+                        <strong>Competition Team</strong><br>
+                        Professor Mike<br>
+                        10/12
+                    </a>
+                </div>
+                <div class="time-slot"></div>
+            </div>
+
+            <!-- Legend -->
+            <div class="class-legend">
+                <div class="class-legend-item">
+                    <div class="class-legend-color" style="background-color: #3B82F6;"></div>
+                    <span>Gi</span>
+                </div>
+                <div class="class-legend-item">
+                    <div class="class-legend-color" style="background-color: #F97316;"></div>
+                    <span>No-Gi</span>
+                </div>
+                <div class="class-legend-item">
+                    <div class="class-legend-color" style="background-color: #22C55E;"></div>
+                    <span>Kids</span>
+                </div>
+                <div class="class-legend-item">
+                    <div class="class-legend-color" style="background-color: #A855F7;"></div>
+                    <span>Open Mat</span>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../theme.js"></script>
+    <script src="../bot-protection.js"></script>
+</body>
+</html>

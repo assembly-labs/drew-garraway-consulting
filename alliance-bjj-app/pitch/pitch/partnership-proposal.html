@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alliance BJJ Platform — Partnership Proposal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Alliance BJJ Design System Variables */
+    :root {
+      /* Primary Brand Colors */
+      --primary-black: #000000;
+      --primary-white: #FFFFFF;
+      --accent-yellow: #FCD34D;
+      --accent-yellow-hover: #FBBF24;
+      --accent-yellow-dark: #F59E0B;
+      --accent-yellow-text: #B8860B;
+      --accent-yellow-dark-text: #FFD700;
+      --accent-yellow-button: #F59E0B;
+
+      /* Grayscale Palette */
+      --gray-100: #F5F5F5;
+      --gray-200: #E5E5E5;
+      --gray-300: #D4D4D4;
+      --gray-500: #6B7280;
+      --gray-600: #4B5563;
+      --gray-700: #374151;
+      --gray-900: #171717;
+
+      /* Typography */
+      --font-heading: 'Montserrat', Arial, Helvetica, sans-serif;
+      --font-body: 'Open Sans', Arial, Helvetica, sans-serif;
+      --letter-spacing-heading: 1.5px;
+      --letter-spacing-subheading: 1px;
+      --line-height-heading: 1.2;
+      --line-height-body: 1.6;
+
+      /* Spacing System */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+
+      /* Dark Mode Variables */
+      --dark-bg-primary: #0F0F0F;
+      --dark-bg-secondary: #1A1A1A;
+      --dark-bg-tertiary: #252525;
+      --dark-border: #353535;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: var(--line-height-body);
+      font-weight: 400;
+      color: var(--primary-black);
+      background-color: var(--gray-100);
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode {
+      background-color: var(--dark-bg-primary);
+      color: var(--primary-white);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-2xl) var(--space-xl);
+    }
+
+    /* Header Section */
+    .header {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+      padding-bottom: var(--space-xl);
+      border-bottom: 3px solid var(--accent-yellow);
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .header h1 {
+      font-family: var(--font-heading);
+      font-size: 48px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-heading);
+      color: var(--primary-black);
+      margin-bottom: var(--space-sm);
+      line-height: var(--line-height-heading);
+    }
+
+    body.dark-mode .header h1 {
+      color: var(--primary-white);
+    }
+
+    .header .subtitle {
+      font-family: var(--font-body);
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--gray-600);
+      letter-spacing: var(--letter-spacing-subheading);
+      text-transform: uppercase;
+    }
+
+    body.dark-mode .header .subtitle {
+      color: var(--gray-300);
+    }
+
+    /* Section Styles */
+    section {
+      background-color: var(--primary-white);
+      border-radius: 8px;
+      padding: var(--space-xl);
+      margin-bottom: var(--space-lg);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.5s ease-out;
+    }
+
+    body.dark-mode section {
+      background-color: var(--dark-bg-secondary);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    section:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    body.dark-mode section:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-subheading);
+      color: var(--primary-black);
+      margin-bottom: var(--space-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    body.dark-mode h2 {
+      color: var(--primary-white);
+    }
+
+    h2::before {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 28px;
+      background: var(--accent-yellow-button);
+      border-radius: 2px;
+    }
+
+    body.dark-mode h2::before {
+      background: var(--accent-yellow-dark-text);
+    }
+
+    /* Paragraph Styles */
+    p {
+      margin-bottom: var(--space-md);
+      color: var(--gray-700);
+      font-weight: 400;
+      line-height: var(--line-height-body);
+    }
+
+    body.dark-mode p {
+      color: var(--gray-200);
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .lead {
+      font-size: 18px;
+      line-height: 1.8;
+      font-weight: 400;
+      color: var(--gray-700);
+    }
+
+    body.dark-mode .lead {
+      color: var(--gray-200);
+    }
+
+    strong {
+      font-weight: 600;
+      color: var(--primary-black);
+    }
+
+    body.dark-mode strong {
+      color: var(--primary-white);
+    }
+
+    em {
+      font-style: italic;
+      color: var(--accent-yellow-text);
+    }
+
+    body.dark-mode em {
+      color: var(--accent-yellow-dark-text);
+    }
+
+    /* Value Props List */
+    .value-props {
+      list-style: none;
+      margin: var(--space-lg) 0;
+    }
+
+    .value-props li {
+      padding: var(--space-lg) 0 var(--space-lg) var(--space-xl);
+      border-bottom: 1px solid var(--gray-200);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .value-props li {
+      border-color: var(--dark-border);
+    }
+
+    .value-props li:hover {
+      background-color: var(--gray-100);
+      padding-left: calc(var(--space-xl) + 8px);
+    }
+
+    body.dark-mode .value-props li:hover {
+      background-color: var(--dark-bg-tertiary);
+    }
+
+    .value-props li:last-child {
+      border-bottom: none;
+    }
+
+    .value-props li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent-yellow-button);
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    body.dark-mode .value-props li::before {
+      color: var(--accent-yellow-dark-text);
+    }
+
+    .value-props .label {
+      font-weight: 600;
+      color: var(--primary-black);
+      font-family: var(--font-heading);
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    body.dark-mode .value-props .label {
+      color: var(--primary-white);
+    }
+
+    /* Split Table */
+    .split-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin: var(--space-lg) 0;
+      border: 2px solid var(--accent-yellow);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    body.dark-mode .split-table {
+      border-color: var(--accent-yellow-dark-text);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .split-table .col-header {
+      padding: var(--space-md) var(--space-lg);
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-subheading);
+      text-align: center;
+    }
+
+    .split-table .col:first-child .col-header {
+      background: var(--primary-black);
+      color: var(--primary-white);
+    }
+
+    .split-table .col:last-child .col-header {
+      background: var(--accent-yellow);
+      color: var(--primary-black);
+    }
+
+    body.dark-mode .split-table .col:last-child .col-header {
+      background: var(--accent-yellow-dark-text);
+    }
+
+    .split-table ul {
+      list-style: none;
+      padding: 0;
+      background-color: var(--primary-white);
+    }
+
+    body.dark-mode .split-table ul {
+      background-color: var(--dark-bg-secondary);
+    }
+
+    .split-table li {
+      padding: var(--space-md) var(--space-lg);
+      border-bottom: 1px solid var(--gray-200);
+      font-size: 15px;
+      color: var(--gray-700);
+      transition: background-color 0.3s ease;
+    }
+
+    body.dark-mode .split-table li {
+      border-color: var(--dark-border);
+      color: var(--gray-200);
+    }
+
+    .split-table li:hover {
+      background-color: var(--gray-100);
+    }
+
+    body.dark-mode .split-table li:hover {
+      background-color: var(--dark-bg-tertiary);
+    }
+
+    .split-table li:last-child {
+      border-bottom: none;
+    }
+
+    .split-table .col:first-child {
+      border-right: 1px solid var(--gray-200);
+    }
+
+    body.dark-mode .split-table .col:first-child {
+      border-color: var(--dark-border);
+    }
+
+    /* Benefits Table */
+    .benefits-table {
+      margin: var(--space-lg) 0;
+      border: 2px solid var(--accent-yellow);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    body.dark-mode .benefits-table {
+      border-color: var(--accent-yellow-dark-text);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .benefits-table .row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    body.dark-mode .benefits-table .row {
+      border-color: var(--dark-border);
+    }
+
+    .benefits-table .row:last-child {
+      border-bottom: none;
+    }
+
+    .benefits-table .row.header {
+      background: var(--accent-yellow);
+    }
+
+    body.dark-mode .benefits-table .row.header {
+      background: var(--accent-yellow-dark-text);
+    }
+
+    .benefits-table .row.header .cell {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-subheading);
+      color: var(--primary-black);
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .benefits-table .cell {
+      padding: var(--space-md) var(--space-lg);
+      font-size: 15px;
+      background-color: var(--primary-white);
+      color: var(--gray-700);
+    }
+
+    body.dark-mode .benefits-table .cell {
+      background-color: var(--dark-bg-secondary);
+      color: var(--gray-200);
+    }
+
+    .benefits-table .cell:first-child {
+      font-weight: 600;
+      background: var(--gray-100);
+      border-right: 1px solid var(--gray-200);
+      color: var(--primary-black);
+    }
+
+    body.dark-mode .benefits-table .cell:first-child {
+      background: var(--dark-bg-tertiary);
+      border-color: var(--dark-border);
+      color: var(--primary-white);
+    }
+
+    /* Role Sections */
+    .role-section {
+      margin: var(--space-lg) 0;
+      padding: var(--space-lg);
+      background-color: var(--gray-100);
+      border-radius: 8px;
+      border-left: 4px solid var(--accent-yellow-button);
+    }
+
+    body.dark-mode .role-section {
+      background-color: var(--dark-bg-tertiary);
+      border-color: var(--accent-yellow-dark-text);
+    }
+
+    .role-section h3 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-subheading);
+      color: var(--primary-black);
+      margin-bottom: var(--space-md);
+    }
+
+    body.dark-mode .role-section h3 {
+      color: var(--primary-white);
+    }
+
+    .role-section ul {
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .role-section li {
+      padding: var(--space-sm) 0 var(--space-sm) var(--space-lg);
+      position: relative;
+      color: var(--gray-700);
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .role-section li {
+      color: var(--gray-200);
+    }
+
+    .role-section li:hover {
+      padding-left: calc(var(--space-lg) + 8px);
+    }
+
+    .role-section li::before {
+      content: '•';
+      position: absolute;
+      left: var(--space-sm);
+      color: var(--accent-yellow-button);
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    body.dark-mode .role-section li::before {
+      color: var(--accent-yellow-dark-text);
+    }
+
+    /* Callout Box */
+    .callout {
+      background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-yellow-hover) 100%);
+      border-left: 4px solid var(--accent-yellow-button);
+      padding: var(--space-lg);
+      margin: var(--space-xl) 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(252, 211, 77, 0.3);
+    }
+
+    body.dark-mode .callout {
+      background: var(--dark-bg-tertiary);
+      border-color: var(--accent-yellow-dark-text);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--primary-black);
+    }
+
+    body.dark-mode .callout p {
+      color: var(--primary-white);
+    }
+
+    /* Signature Section */
+    .signature {
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-xl);
+      border-top: 2px solid var(--accent-yellow);
+      text-align: center;
+    }
+
+    body.dark-mode .signature {
+      border-color: var(--accent-yellow-dark-text);
+    }
+
+    .signature .name {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-heading);
+      color: var(--primary-black);
+      margin-bottom: var(--space-sm);
+    }
+
+    body.dark-mode .signature .name {
+      color: var(--primary-white);
+    }
+
+    .signature .info {
+      color: var(--gray-600);
+      font-size: 15px;
+      font-weight: 300;
+    }
+
+    body.dark-mode .signature .info {
+      color: var(--gray-300);
+    }
+
+    /* Dark Mode Toggle */
+    .mode-toggle {
+      position: fixed;
+      top: var(--space-lg);
+      right: var(--space-lg);
+      z-index: 1000;
+    }
+
+    .mode-toggle-btn {
+      padding: var(--space-sm) var(--space-lg);
+      background-color: var(--accent-yellow-button);
+      color: var(--primary-white);
+      border: none;
+      border-radius: 24px;
+      cursor: pointer;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .mode-toggle-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      background-color: var(--accent-yellow-hover);
+    }
+
+    body.dark-mode .mode-toggle-btn {
+      background-color: var(--accent-yellow-dark-text);
+      color: var(--primary-black);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: var(--space-lg) var(--space-md);
+      }
+
+      .header h1 {
+        font-size: 36px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .split-table {
+        grid-template-columns: 1fr;
+      }
+
+      .split-table .col:first-child {
+        border-right: none;
+        border-bottom: 2px solid var(--accent-yellow);
+      }
+
+      body.dark-mode .split-table .col:first-child {
+        border-color: var(--accent-yellow-dark-text);
+      }
+
+      .benefits-table .row {
+        grid-template-columns: 1fr;
+      }
+
+      .benefits-table .cell:first-child {
+        border-right: none;
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      body.dark-mode .benefits-table .cell:first-child {
+        border-color: var(--dark-border);
+      }
+
+      .mode-toggle {
+        top: var(--space-md);
+        right: var(--space-md);
+      }
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        font-size: 11pt;
+        background-color: white;
+        color: black;
+      }
+
+      .container {
+        max-width: 100%;
+        padding: 0;
+      }
+
+      .mode-toggle {
+        display: none;
+      }
+
+      section {
+        box-shadow: none;
+        border: 1px solid var(--gray-200);
+        page-break-inside: avoid;
+      }
+
+      .header h1 {
+        font-size: 32pt;
+      }
+
+      h2 {
+        font-size: 18pt;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Dark Mode Toggle -->
+  <div class="mode-toggle">
+    <button class="mode-toggle-btn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+  </div>
+
+  <div class="container">
+    <header class="header">
+      <h1>Alliance BJJ Platform</h1>
+      <p class="subtitle">A Partnership Proposal</p>
+    </header>
+
+    <section>
+      <h2>The Opportunity</h2>
+      <p class="lead">Gracie Barra runs 900+ locations on proprietary software. Alliance has 300+ affiliates with <em>nothing</em>—each gym cobbling together spreadsheets and generic fitness software that doesn't understand BJJ.</p>
+      <p>I'm building the platform to fill that gap. Purpose-built for BJJ with proper belt tracking, Gi/No-Gi distinction, and payment automation that works.</p>
+      <p>But I need a partner who <em>lives</em> the problem—someone who knows what matters and how to reach the right people.</p>
+    </section>
+
+    <section>
+      <h2>Why I'm Coming to You</h2>
+      <p>You have a rare combination that's exactly what this product needs:</p>
+      <ul class="value-props">
+        <li><span class="label">Black belt credibility.</span> You understand the belt system, the culture, what matters to students and instructors.</li>
+        <li><span class="label">Operations expertise.</span> You've mastered making gyms profitable—spotting inefficiencies others miss, knowing which metrics matter, and balancing growth with sustainability.</li>
+        <li><span class="label">Fitness & wellness knowledge.</span> Beyond BJJ, you understand the broader fitness ecosystem—opening doors for accountability features and habit-building tools that reduce churn.</li>
+        <li><span class="label">Marketing expertise.</span> You know how to position products, reach gym owners, and what messaging resonates.</li>
+        <li><span class="label">Network access.</span> You have credibility with Alliance owners. When you say "this works," people listen.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Why Work With Me</h2>
+      <p>I bring something competitors can't match:</p>
+      <ul class="value-props">
+        <li><span class="label">Operations expertise.</span> Like you, I've built systems that scale and understand what gym owners actually need—not what software companies think they need.</li>
+        <li><span class="label">AI-accelerated development.</span> My team leverages AI to build faster and cheaper than traditional development. Startup speed without the burn rate.</li>
+        <li><span class="label">No outside funding baggage.</span> We stay lean, keep our equity, and reinvest profits into the product—not paying back VCs.</li>
+        <li><span class="label">Product & engineering.</span> I handle the entire build—UX, design, infrastructure.</li>
+        <li><span class="label">Sales partnership.</span> We do this together. I'm in the fight with you.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What I'm Proposing</h2>
+      <p>I want you as a <strong>partner</strong>, not a customer. Here's what that looks like:</p>
+      <div class="split-table">
+        <div class="col">
+          <div class="col-header">I Bring</div>
+          <ul>
+            <li>Product development & engineering</li>
+            <li>UX/UI design & research</li>
+            <li>AI-accelerated build team</li>
+            <li>Technical infrastructure</li>
+            <li>Capital investment</li>
+            <li>Outreach & sales support</li>
+          </ul>
+        </div>
+        <div class="col">
+          <div class="col-header">You Bring</div>
+          <ul>
+            <li>BJJ expertise & credibility</li>
+            <li>Operations & retention expertise</li>
+            <li>Fitness industry knowledge</li>
+            <li>Marketing & positioning expertise</li>
+            <li>Network access & introductions</li>
+            <li>Alliance Paoli as proving ground</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Our Shared Vision: Operations + Retention</h2>
+      <p class="lead">We're both operations experts. Together, we'll create more than just gym management software—we'll build a platform that transforms how gyms operate and keep members engaged.</p>
+
+      <div class="role-section">
+        <h3>Seamless Operations</h3>
+        <ul>
+          <li>Automated workflows that eliminate repetitive tasks</li>
+          <li>Smart scheduling that maximizes mat time and instructor efficiency</li>
+          <li>Financial dashboards that show real profitability drivers</li>
+          <li>Staff management tools that reduce turnover and improve culture</li>
+        </ul>
+      </div>
+
+      <div class="role-section">
+        <h3>Member Accountability & Retention</h3>
+        <ul>
+          <li>Progress tracking across BJJ, strength, and conditioning</li>
+          <li>Goal-setting features that keep members motivated between promotions</li>
+          <li>Habit-building tools that create gym attendance streaks</li>
+          <li>Community features that strengthen bonds between training partners</li>
+          <li>Automated check-ins for members who've been absent</li>
+          <li>Nutrition and recovery tracking integrated with training</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <p>This creates an ecosystem where members <em>want</em> to stay and train harder. Smooth operations + engaged members = natural profitability.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Your Role</h2>
+
+      <div class="role-section">
+        <h3>Product Partner</h3>
+        <ul>
+          <li>Your feedback determines the roadmap</li>
+          <li>Test features before anyone else</li>
+          <li>Alliance Paoli becomes the live proving ground</li>
+        </ul>
+      </div>
+
+      <div class="role-section">
+        <h3>GTM Partner</h3>
+        <ul>
+          <li>Craft positioning and messaging</li>
+          <li>Advise on reaching Alliance owners</li>
+          <li>Make introductions when ready</li>
+          <li>Co-create content: testimonials, demos, case studies</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <p>Regular check-ins ensure we solve <em>your</em> problems first—then scale to the network.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>What You Get</h2>
+      <div class="benefits-table">
+        <div class="row header">
+          <div class="cell">Benefit</div>
+          <div class="cell">Details</div>
+        </div>
+        <div class="row">
+          <div class="cell">Equity stake</div>
+          <div class="cell">Ownership in the company—terms to discuss</div>
+        </div>
+        <div class="row">
+          <div class="cell">Free software forever</div>
+          <div class="cell">Alliance Paoli never pays a dime</div>
+        </div>
+        <div class="row">
+          <div class="cell">Referral revenue</div>
+          <div class="cell">Commission or equity credit for every gym you bring in</div>
+        </div>
+        <div class="row">
+          <div class="cell">Product influence</div>
+          <div class="cell">Your requests are prioritized—you shape what this becomes</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>The Upside</h2>
+      <p>If this works, we're building the operating system for Alliance gyms—and eventually the broader BJJ market. 300+ Alliance locations, 10,000+ BJJ gyms in the US.</p>
+      <p>Every referral builds your equity. Plus, you get software built exactly how you want it, free forever.</p>
+    </section>
+
+    <section>
+      <h2>Next Step</h2>
+      <p>Let's grab 30 minutes. I'll show you what I've mapped out, you tell me if you're interested.</p>
+    </section>
+
+    <div class="signature">
+      <div class="name">Drew Garraway</div>
+      <div class="info">assemblylabs.co</div>
+    </div>
+  </div>
+
+  <script>
+    // Dark Mode Toggle
+    function toggleDarkMode() {
+      const body = document.body;
+      const btn = document.querySelector('.mode-toggle-btn');
+
+      body.classList.toggle('dark-mode');
+
+      if (body.classList.contains('dark-mode')) {
+        btn.textContent = '☀️ Light Mode';
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        btn.textContent = '🌙 Dark Mode';
+        localStorage.setItem('darkMode', 'disabled');
+      }
+    }
+
+    // Check for saved dark mode preference
+    document.addEventListener('DOMContentLoaded', function() {
+      const darkMode = localStorage.getItem('darkMode');
+      const btn = document.querySelector('.mode-toggle-btn');
+
+      if (darkMode === 'enabled') {
+        document.body.classList.add('dark-mode');
+        btn.textContent = '☀️ Light Mode';
+      }
+    });
+  </script>
+</body>
+</html>

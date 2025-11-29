@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Choose Your Plan - Alliance BJJ Paoli</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="onboarding-container">
+        <!-- Progress Bar -->
+        <div class="progress-steps">
+            <div class="progress-step completed">
+                <div class="progress-step-number">✓</div>
+                <div>Waiver</div>
+            </div>
+            <div class="progress-step active">
+                <div class="progress-step-number">2</div>
+                <div>Payment</div>
+            </div>
+            <div class="progress-step">
+                <div class="progress-step-number">3</div>
+                <div>Welcome</div>
+            </div>
+        </div>
+
+        <h1 style="text-align: center; margin-bottom: 10px; font-size: 32px; text-transform: none;">
+            Choose Your Membership Plan
+        </h1>
+        <p style="text-align: center; color: var(--gray-500); margin-bottom: 30px;">
+            Your 7-day trial starts today. Payment begins after trial ends.
+        </p>
+
+        <!-- Plan Selection -->
+        <div class="plan-cards">
+            <div class="plan-card">
+                <h3 style="text-transform: none;">Monthly</h3>
+                <div class="plan-price">$149</div>
+                <div class="plan-period">per month</div>
+                <ul style="text-align: left; margin-top: 20px; padding-left: 20px; list-style: none;">
+                    <li style="margin-bottom: 8px;">✓ Unlimited classes</li>
+                    <li style="margin-bottom: 8px;">✓ Open mat access</li>
+                    <li style="margin-bottom: 8px;">✓ Cancel anytime</li>
+                </ul>
+            </div>
+            <div class="plan-card selected">
+                <h3 style="text-transform: none;">Annual</h3>
+                <div class="plan-price">$1,490</div>
+                <div class="plan-period">per year</div>
+                <div class="plan-badge">Save $298</div>
+                <ul style="text-align: left; margin-top: 20px; padding-left: 20px; list-style: none;">
+                    <li style="margin-bottom: 8px;">✓ Everything in Monthly</li>
+                    <li style="margin-bottom: 8px;">✓ 2 months FREE</li>
+                    <li style="margin-bottom: 8px;">✓ Guest passes (4/year)</li>
+                    <li style="margin-bottom: 8px;">✓ Priority seminar booking</li>
+                </ul>
+            </div>
+            <div class="plan-card">
+                <h3 style="text-transform: none;">Family</h3>
+                <div class="plan-price">$249</div>
+                <div class="plan-period">per month</div>
+                <ul style="text-align: left; margin-top: 20px; padding-left: 20px; list-style: none;">
+                    <li style="margin-bottom: 8px;">✓ 2 adults + kids</li>
+                    <li style="margin-bottom: 8px;">✓ All programs included</li>
+                    <li style="margin-bottom: 8px;">✓ Flexible scheduling</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Payment Details -->
+        <div class="form-section">
+            <div class="form-section-title">Payment Information</div>
+
+            <div class="payment-fields">
+                <div class="stripe-element-mock">
+                    <span style="color: var(--gray-400);">Card Number</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="stripe-element-mock">
+                        <span style="color: var(--gray-400);">MM / YY</span>
+                    </div>
+                    <div class="stripe-element-mock">
+                        <span style="color: var(--gray-400);">CVC</span>
+                    </div>
+                </div>
+                <div class="stripe-element-mock">
+                    <span style="color: var(--gray-400);">ZIP Code</span>
+                </div>
+            </div>
+
+            <p style="text-align: center; color: var(--gray-500); font-size: 14px; margin-top: 15px;">
+                <span style="display: inline-block; width: 20px; height: 20px;
+                             background: #635BFF; border-radius: 2px;
+                             vertical-align: middle; margin-right: 5px;"></span>
+                Powered by Stripe - Your payment info is secure and encrypted
+            </p>
+        </div>
+
+        <!-- Billing Details -->
+        <div class="form-section">
+            <div class="form-section-title">Billing Details</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Billing Name</label>
+                    <input type="text" value="John Smith" readonly
+                           style="background: var(--gray-100);">
+                </div>
+                <div class="form-group">
+                    <label>Billing Email</label>
+                    <input type="email" value="john@example.com" readonly
+                           style="background: var(--gray-100);">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Billing Address <span class="required-mark">*</span></label>
+                <input type="text" placeholder="123 Main Street" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>City <span class="required-mark">*</span></label>
+                    <input type="text" placeholder="Paoli" required>
+                </div>
+                <div class="form-group">
+                    <label>State <span class="required-mark">*</span></label>
+                    <input type="text" placeholder="PA" maxlength="2" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>ZIP Code <span class="required-mark">*</span></label>
+                <input type="text" placeholder="19301" required>
+            </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="form-section">
+            <div class="form-section-title">Order Summary</div>
+            <div style="padding: 20px; background: var(--gray-100); border-radius: 8px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span>Annual Membership</span>
+                    <span>$1,490.00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span>7-Day Free Trial</span>
+                    <span style="color: var(--success);">-$1,490.00</span>
+                </div>
+                <hr style="margin: 15px 0; border: none; border-top: 1px solid var(--gray-300);">
+                <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px;">
+                    <span>Due Today</span>
+                    <span>$0.00</span>
+                </div>
+                <p style="margin-top: 15px; font-size: 12px; color: var(--gray-500);">
+                    Your card will be charged $1,490.00 on December 4, 2024 (after trial ends).
+                    You can cancel anytime during your trial period with no charge.
+                </p>
+            </div>
+        </div>
+
+        <!-- Add-ons Section -->
+        <div class="form-section">
+            <div class="form-section-title">Optional Add-ons</div>
+            <label style="display: flex; align-items: center; margin-bottom: 15px; cursor: pointer;">
+                <input type="checkbox" style="margin-right: 10px; width: auto;">
+                <div>
+                    <strong>Alliance Team Gi - $120</strong><br>
+                    <span style="font-size: 14px; color: var(--gray-500);">
+                        Official Alliance BJJ gi with patches (required for competitions)
+                    </span>
+                </div>
+            </label>
+            <label style="display: flex; align-items: center; margin-bottom: 15px; cursor: pointer;">
+                <input type="checkbox" style="margin-right: 10px; width: auto;">
+                <div>
+                    <strong>Private Lesson Package - $200</strong><br>
+                    <span style="font-size: 14px; color: var(--gray-500);">
+                        Two 1-hour private lessons with Professor Mike
+                    </span>
+                </div>
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer;">
+                <input type="checkbox" style="margin-right: 10px; width: auto;">
+                <div>
+                    <strong>Competition Team - $50/month</strong><br>
+                    <span style="font-size: 14px; color: var(--gray-500);">
+                        Advanced training for tournament preparation (2x/week)
+                    </span>
+                </div>
+            </label>
+        </div>
+
+        <!-- Terms Agreement -->
+        <div style="margin: 30px 0;">
+            <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                <input type="checkbox" required style="margin-right: 8px; margin-top: 4px; width: auto;">
+                <span style="font-size: 14px;">
+                    I authorize Alliance BJJ Paoli to charge my card for the membership
+                    selected above. I understand that I can cancel anytime with 30 days notice.
+                    I have read and agree to the membership terms and conditions.
+                </span>
+            </label>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div style="display: flex; justify-content: space-between;">
+            <a href="waiver.html"
+               style="padding: 12px 24px; border: 1px solid var(--gray-300);
+                      text-decoration: none; color: var(--gray-500); border-radius: 4px;">
+                ← Back
+            </a>
+            <a href="success.html" class="btn btn-primary"
+               style="padding: 12px 40px; background: var(--primary-black); color: white;
+                      text-decoration: none; border-radius: 4px; font-weight: 600;">
+                Complete Sign Up →
+            </a>
+        </div>
+    </div>
+    <script src="../bot-protection.js"></script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule - Alliance BJJ Member App</title>
+    <link rel="icon" type="image/png" href="../Alliance_jiu-jitsu.svg.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, nosnippet, noarchive, noimageindex, notranslate">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            background-color: var(--gray-100);
+        }
+        .filter-chips {
+            display: flex;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            overflow-x: auto;
+        }
+        .chip {
+            padding: var(--space-xs) var(--space-md);
+            border: 1px solid var(--gray-300);
+            border-radius: 20px;
+            background-color: var(--white);
+            white-space: nowrap;
+            font-size: 13px;
+        }
+        .chip.active {
+            background-color: var(--gray-900);
+            color: var(--white);
+            border-color: var(--gray-900);
+        }
+        .date-bar {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            overflow-x: auto;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .date-circle {
+            text-align: center;
+            min-width: 50px;
+        }
+        .date-circle-inner {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--gray-300);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        .date-circle.today .date-circle-inner {
+            background-color: var(--accent-yellow);
+            color: var(--primary-black);
+            border-color: var(--accent-yellow);
+            font-weight: 600;
+        }
+        .date-circle.today .date-circle-inner * {
+            color: var(--primary-black) !important;
+        }
+        .class-list {
+            padding: var(--space-md);
+        }
+        .day-section {
+            margin-bottom: var(--space-lg);
+        }
+        .mobile-class-card {
+            background-color: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+            display: flex;
+            gap: var(--space-md);
+        }
+        .class-time-col {
+            min-width: 60px;
+        }
+        .class-info-col {
+            flex: 1;
+        }
+        .booked-badge {
+            background-color: var(--success);
+            color: var(--white);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="mobile-frame">
+        <div class="mobile-content">
+            <!-- Header -->
+            <div class="mobile-header">
+                <h1 style="margin-bottom: 0;">Schedule</h1>
+            </div>
+
+            <!-- Filter Chips -->
+            <div class="filter-chips">
+                <span class="chip active">All</span>
+                <span class="chip">Gi</span>
+                <span class="chip">No-Gi</span>
+                <span class="chip">Open Mat</span>
+            </div>
+
+            <!-- Date Bar -->
+            <div class="date-bar">
+                <div class="date-circle">
+                    <div class="date-circle-inner">
+                        <div>Tue</div>
+                        <div><strong>26</strong></div>
+                    </div>
+                </div>
+                <div class="date-circle today">
+                    <div class="date-circle-inner">
+                        <div>Wed</div>
+                        <div><strong>27</strong></div>
+                    </div>
+                </div>
+                <div class="date-circle">
+                    <div class="date-circle-inner">
+                        <div>Thu</div>
+                        <div><strong>28</strong></div>
+                    </div>
+                </div>
+                <div class="date-circle">
+                    <div class="date-circle-inner">
+                        <div>Fri</div>
+                        <div><strong>29</strong></div>
+                    </div>
+                </div>
+                <div class="date-circle">
+                    <div class="date-circle-inner">
+                        <div>Sat</div>
+                        <div><strong>30</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Class List -->
+            <div class="class-list">
+                <!-- Today -->
+                <div class="day-section">
+                    <h3>Today, November 27</h3>
+
+                    <a href="class-detail.html" class="mobile-class-card">
+                        <div class="class-time-col">
+                            <div class="font-bold">6:00 AM</div>
+                            <div class="text-small text-muted">90 min</div>
+                        </div>
+                        <div class="class-info-col">
+                            <div class="font-bold">Fundamentals</div>
+                            <div style="margin: 4px 0;">
+                                <span class="class-badge class-badge-gi">Gi</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                                <div class="user-avatar" style="width: 20px; height: 20px;"></div>
+                                <span class="text-small">Coach Mike</span>
+                            </div>
+                            <div class="text-small text-muted">12/20 spots</div>
+                        </div>
+                    </a>
+
+                    <a href="class-detail.html" class="mobile-class-card">
+                        <div class="class-time-col">
+                            <div class="font-bold">9:00 AM</div>
+                            <div class="text-small text-muted">90 min</div>
+                        </div>
+                        <div class="class-info-col">
+                            <div class="font-bold">All Levels</div>
+                            <div style="margin: 4px 0;">
+                                <span class="class-badge class-badge-gi">Gi</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                                <div class="user-avatar" style="width: 20px; height: 20px;"></div>
+                                <span class="text-small">Coach Sarah</span>
+                            </div>
+                            <div class="text-small text-muted">8/15 spots</div>
+                        </div>
+                    </a>
+
+                    <a href="class-detail.html" class="mobile-class-card">
+                        <div class="class-time-col">
+                            <div class="font-bold">12:00 PM</div>
+                            <div class="text-small text-muted">120 min</div>
+                        </div>
+                        <div class="class-info-col">
+                            <div class="font-bold">Open Mat</div>
+                            <div style="margin: 4px 0;">
+                                <span class="class-badge class-badge-openmat">Open Mat</span>
+                            </div>
+                            <div class="text-small text-muted">5/30 spots</div>
+                        </div>
+                    </a>
+
+                    <a href="class-detail.html" class="mobile-class-card">
+                        <div class="class-time-col">
+                            <div class="font-bold">5:00 PM</div>
+                            <div class="text-small text-muted">60 min</div>
+                        </div>
+                        <div class="class-info-col">
+                            <div class="font-bold">Kids (7-12)</div>
+                            <div style="margin: 4px 0;">
+                                <span class="class-badge class-badge-gi">Gi</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                                <div class="user-avatar" style="width: 20px; height: 20px;"></div>
+                                <span class="text-small">Coach Mike</span>
+                            </div>
+                            <div class="text-small text-muted">14/16 spots</div>
+                        </div>
+                    </a>
+
+                    <a href="class-detail.html" class="mobile-class-card" style="border: 2px solid var(--success);">
+                        <div class="class-time-col">
+                            <div class="font-bold">6:30 PM</div>
+                            <div class="text-small text-muted">90 min</div>
+                        </div>
+                        <div class="class-info-col">
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <div class="font-bold">Advanced</div>
+                                <span class="booked-badge">BOOKED ✓</span>
+                            </div>
+                            <div style="margin: 4px 0;">
+                                <span class="class-badge class-badge-nogi">No-Gi</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                                <div class="user-avatar" style="width: 20px; height: 20px;"></div>
+                                <span class="text-small">Coach Sarah</span>
+                            </div>
+                            <div class="text-small text-muted">18/20 spots</div>
+                        </div>
+                    </a>
+
+                    <a href="class-detail.html" class="mobile-class-card">
+                        <div class="class-time-col">
+                            <div class="font-bold">8:00 PM</div>
+                            <div class="text-small text-muted">90 min</div>
+                        </div>
+                        <div class="class-info-col">
+                            <div class="font-bold">Competition Team</div>
+                            <div style="margin: 4px 0;">
+                                <span class="class-badge class-badge-nogi">No-Gi</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                                <div class="user-avatar" style="width: 20px; height: 20px;"></div>
+                                <span class="text-small">Professor Mike</span>
+                            </div>
+                            <div class="text-small text-muted">10/12 spots</div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Tomorrow -->
+                <div class="day-section">
+                    <h3>Tomorrow, November 28</h3>
+
+                    <a href="class-detail.html" class="mobile-class-card">
+                        <div class="class-time-col">
+                            <div class="font-bold">6:00 AM</div>
+                            <div class="text-small text-muted">90 min</div>
+                        </div>
+                        <div class="class-info-col">
+                            <div class="font-bold">Fundamentals</div>
+                            <div style="margin: 4px 0;">
+                                <span class="class-badge class-badge-gi">Gi</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                                <div class="user-avatar" style="width: 20px; height: 20px;"></div>
+                                <span class="text-small">Coach Mike</span>
+                            </div>
+                            <div class="text-small text-muted">11/20 spots</div>
+                        </div>
+                    </a>
+
+                    <a href="class-detail.html" class="mobile-class-card">
+                        <div class="class-time-col">
+                            <div class="font-bold">9:00 AM</div>
+                            <div class="text-small text-muted">90 min</div>
+                        </div>
+                        <div class="class-info-col">
+                            <div class="font-bold">All Levels</div>
+                            <div style="margin: 4px 0;">
+                                <span class="class-badge class-badge-gi">Gi</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                                <div class="user-avatar" style="width: 20px; height: 20px;"></div>
+                                <span class="text-small">Coach Sarah</span>
+                            </div>
+                            <div class="text-small text-muted">10/15 spots</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+            <a href="home.html" class="tab-item">
+                <svg class="tab-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span class="tab-label">Home</span>
+            </a>
+            <a href="schedule.html" class="tab-item active">
+                <svg class="tab-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span class="tab-label">Schedule</span>
+            </a>
+            <a href="checkin.html" class="tab-item center">
+                <div class="tab-action-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <span class="tab-label">Check-in</span>
+            </a>
+            <a href="progress.html" class="tab-item">
+                <svg class="tab-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <line x1="18" y1="20" x2="18" y2="10" stroke="currentColor" stroke-width="2"/>
+                    <line x1="12" y1="20" x2="12" y2="4" stroke="currentColor" stroke-width="2"/>
+                    <line x1="6" y1="20" x2="6" y2="14" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span class="tab-label">Progress</span>
+            </a>
+            <a href="profile.html" class="tab-item">
+                <svg class="tab-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                    <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span class="tab-label">Profile</span>
+            </a>
+        </div>
+    </div>
+    <script src="../theme.js"></script>
+    <script src="../bot-protection.js"></script>
+</body>
+</html>

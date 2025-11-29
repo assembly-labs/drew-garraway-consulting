@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Alliance BJJ Platform</title>
+    <link rel="icon" type="image/png" href="../Alliance_jiu-jitsu.svg.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, nosnippet, noarchive, noimageindex, notranslate">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../animations.css">
+</head>
+<body class="dark-mode dashboard-page">
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" role="navigation" aria-label="Main navigation">
+            <div class="sidebar-logo">
+                <img src="../Alliance_jiu-jitsu.svg.png" alt="Alliance BJJ Logo" class="sidebar-logo-placeholder logo-size-md">
+                <div class="logo-text" aria-label="Gym location: Paoli">PAOLI</div>
+            </div>
+            <nav class="sidebar-nav" aria-label="Primary navigation">
+                <a href="dashboard.html" class="sidebar-nav-item active" aria-current="page">Dashboard</a>
+                <a href="members.html" class="sidebar-nav-item">Members</a>
+                <a href="schedule.html" class="sidebar-nav-item">Schedule</a>
+                <a href="billing.html" class="sidebar-nav-item">Billing</a>
+                <a href="settings.html" class="sidebar-nav-item">Settings</a>
+            </nav>
+            <div class="sidebar-user">
+                <img src="../portraits/men/male-1.png" alt="Professor Mike" class="user-avatar">
+                <span>Professor Mike</span><br>
+                <a href="#" class="text-small text-muted">Log out</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="header-row header-padding">
+                <div class="header-left">
+                    <h1 class="header-title">Good morning, Professor Mike</h1>
+                </div>
+                <div class="header-right">
+                    <div class="text-muted mb-sm">November 27, 2024</div>
+                    <button data-modal="add-member" class="btn btn-primary">Add Member</button>
+                </div>
+            </div>
+
+            <!-- Alert Banner -->
+            <div class="alert-banner" role="alert" aria-live="polite">
+                <span>⚠ 3 members have failed payments requiring attention</span>
+                <a href="billing.html" aria-label="View all failed payments">View all →</a>
+            </div>
+
+            <!-- Stats Row -->
+            <section class="stats-row dashboard-grid" aria-label="Key metrics dashboard">
+                <article class="stat-card card-hover" aria-labelledby="stat-members" data-tooltip="Click to view all members">
+                    <div class="stat-label" id="stat-members">Active Members</div>
+                    <div class="stat-value stat-number" data-counter aria-label="156 active members">156</div>
+                    <div class="stat-change" aria-label="Increased by 12 this month">+12 this month</div>
+                </article>
+                <article class="stat-card card-hover" aria-labelledby="stat-checkins">
+                    <div class="stat-label" id="stat-checkins">Today's Check-ins</div>
+                    <div class="stat-value stat-number" data-counter aria-label="34 check-ins today">34</div>
+                    <div class="stat-change">across 6 classes</div>
+                </article>
+                <article class="stat-card card-hover" aria-labelledby="stat-revenue">
+                    <div class="stat-label" id="stat-revenue">Revenue (MTD)</div>
+                    <div class="stat-value revenue-number" aria-label="$23,450 revenue month to date">$23,450</div>
+                    <div class="stat-change" aria-label="8% increase versus last month">+8% vs last month</div>
+                </article>
+                <article class="stat-card card-hover" aria-labelledby="stat-promotions">
+                    <div class="stat-label" id="stat-promotions">Promotion Ready</div>
+                    <div class="stat-value stat-number" data-counter aria-label="8 members ready for promotion">8</div>
+                    <a href="#promotion-queue" aria-label="View promotion ready list">View list →</a>
+                </article>
+            </section>
+
+            <!-- Two Column Layout -->
+            <div class="two-column">
+                <!-- Left Column -->
+                <div>
+                    <!-- Today's Schedule -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Today's Classes</h3>
+                            <a href="schedule.html">View Full Schedule →</a>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Class</th>
+                                    <th>Instructor</th>
+                                    <th>Enrolled</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr onclick="window.location='class-detail-modal.html'" class="cursor-pointer">
+                                    <td>6:00 AM</td>
+                                    <td>Fundamentals</td>
+                                    <td>Coach Mike</td>
+                                    <td>12/20</td>
+                                </tr>
+                                <tr onclick="window.location='class-detail-modal.html'" class="cursor-pointer">
+                                    <td>9:00 AM</td>
+                                    <td>All Levels</td>
+                                    <td>Coach Sarah</td>
+                                    <td>8/15</td>
+                                </tr>
+                                <tr onclick="window.location='class-detail-modal.html'" class="cursor-pointer">
+                                    <td>12:00 PM</td>
+                                    <td>Open Mat</td>
+                                    <td>—</td>
+                                    <td>5/30</td>
+                                </tr>
+                                <tr onclick="window.location='class-detail-modal.html'" class="cursor-pointer">
+                                    <td>5:00 PM</td>
+                                    <td>Kids (7-12)</td>
+                                    <td>Coach Mike</td>
+                                    <td>14/16</td>
+                                </tr>
+                                <tr onclick="window.location='class-detail-modal.html'" class="cursor-pointer">
+                                    <td>6:30 PM</td>
+                                    <td>Advanced</td>
+                                    <td>Coach Sarah</td>
+                                    <td>18/20</td>
+                                </tr>
+                                <tr onclick="window.location='class-detail-modal.html'" class="cursor-pointer">
+                                    <td>8:00 PM</td>
+                                    <td>Competition Team</td>
+                                    <td>Professor Mike</td>
+                                    <td>10/12</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Recent Activity</h3>
+                        </div>
+                        <div class="activity-item">
+                            <img src="../portraits/men/male-2.png" alt="John Smith" class="activity-avatar">
+                            <div>John Smith checked in to 6:00 AM Fundamentals · 2 min ago</div>
+                        </div>
+                        <div class="activity-item">
+                            <img src="../portraits/women/female-4.png" alt="Lisa Thompson" class="activity-avatar">
+                            <div>Payment received from Lisa Thompson · $150 · 1 hour ago</div>
+                        </div>
+                        <div class="activity-item">
+                            <img src="../portraits/women/female-3.png" alt="Amanda White" class="activity-avatar">
+                            <div>Amanda White promoted to White Belt 4th Stripe · 3 hours ago</div>
+                        </div>
+                        <div class="activity-item">
+                            <img src="../portraits/men/male-5.png" alt="Mike Chen" class="activity-avatar">
+                            <div>New member: Mike Chen joined · Yesterday</div>
+                        </div>
+                        <div class="activity-item">
+                            <img src="../portraits/women/female-2.png" alt="Emily Davis" class="activity-avatar">
+                            <div>Failed payment: Emily Davis · $150 · 2 days ago</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div>
+                    <!-- Quick Actions -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quick Actions</h3>
+                        </div>
+                        <div class="quick-actions-grid">
+                            <a href="member-add-modal.html" class="btn">Add Member</a>
+                            <a href="billing.html" class="btn">Record Payment</a>
+                            <button class="btn opacity-50" disabled>Send Announcement</button>
+                            <a href="schedule.html" class="btn">Add Class</a>
+                        </div>
+                    </div>
+
+                    <!-- Promotion Queue -->
+                    <div class="card" id="promotion-queue">
+                        <div class="card-header">
+                            <h3 class="card-title">Ready for Promotion</h3>
+                            <a href="#">View All →</a>
+                        </div>
+                        <div class="promotion-item">
+                            <div>Amanda White</div>
+                            <div class="belt-badge belt-white">
+                                <div class="stripes">
+                                    <span class="stripe"></span>
+                                    <span class="stripe"></span>
+                                    <span class="stripe"></span>
+                                    <span class="stripe"></span>
+                                </div>
+                            </div>
+                            <span class="promotion-arrow">→</span>
+                            <div class="belt-badge belt-blue"></div>
+                            <button data-modal="promote-member"
+                                    data-member-name="Amanda White"
+                                    data-current-belt="white"
+                                    data-current-stripes="4"
+                                    data-new-belt="blue"
+                                    data-new-stripes="0"
+                                    class="btn btn-sm btn-primary ml-auto">Promote</button>
+                        </div>
+                        <div class="promotion-item">
+                            <div>John Smith</div>
+                            <div class="belt-badge belt-blue">
+                                <div class="stripes">
+                                    <span class="stripe"></span>
+                                    <span class="stripe"></span>
+                                    <span class="stripe"></span>
+                                </div>
+                            </div>
+                            <span class="promotion-arrow">→</span>
+                            <div class="belt-badge belt-blue">
+                                <div class="stripes">
+                                    <span class="stripe"></span>
+                                    <span class="stripe"></span>
+                                    <span class="stripe"></span>
+                                    <span class="stripe"></span>
+                                </div>
+                            </div>
+                            <button data-modal="promote-member"
+                                    data-member-name="John Smith"
+                                    data-current-belt="blue"
+                                    data-current-stripes="3"
+                                    data-new-belt="blue"
+                                    data-new-stripes="4"
+                                    class="btn btn-sm btn-primary ml-auto">Promote</button>
+                        </div>
+                        <div class="promotion-item">
+                            <div>Carlos Rodriguez</div>
+                            <div class="belt-badge belt-brown">
+                                <div class="stripes">
+                                    <span class="stripe"></span>
+                                    <span class="stripe"></span>
+                                </div>
+                            </div>
+                            <span class="promotion-arrow">→</span>
+                            <div class="belt-badge belt-brown">
+                                <div class="stripes">
+                                    <span class="stripe"></span>
+                                    <span class="stripe"></span>
+                                    <span class="stripe"></span>
+                                </div>
+                            </div>
+                            <button data-modal="promote-member"
+                                    data-member-name="Carlos Rodriguez"
+                                    data-current-belt="brown"
+                                    data-current-stripes="2"
+                                    data-new-belt="brown"
+                                    data-new-stripes="3"
+                                    class="btn btn-sm btn-primary ml-auto">Promote</button>
+                        </div>
+                    </div>
+
+                    <!-- Failed Payments -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Failed Payments <span class="badge-error">3</span></h3>
+                        </div>
+                        <div class="failed-payment-item">
+                            <div class="flex-between mb-sm">
+                                <strong>Emily Davis</strong>
+                                <span>$150.00</span>
+                            </div>
+                            <div class="text-small text-muted mb-sm">5 days overdue</div>
+                            <button class="btn btn-sm">Retry</button>
+                            <button class="btn btn-sm ml-sm">Contact</button>
+                        </div>
+                        <div class="failed-payment-item">
+                            <div class="flex-between mb-sm">
+                                <strong>David Kim</strong>
+                                <span>$150.00</span>
+                            </div>
+                            <div class="text-small text-muted mb-sm">12 days overdue</div>
+                            <button class="btn btn-sm">Retry</button>
+                            <button class="btn btn-sm ml-sm">Contact</button>
+                        </div>
+                        <div class="failed-payment-item">
+                            <div class="flex-between mb-sm">
+                                <strong>Mark Wilson</strong>
+                                <span>$150.00</span>
+                            </div>
+                            <div class="text-small text-muted mb-sm">3 days overdue</div>
+                            <button class="btn btn-sm">Retry</button>
+                            <button class="btn btn-sm ml-sm">Contact</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Core JavaScript -->
+    <script src="../theme.js"></script>
+    <script src="../utils.js"></script>
+
+    <!-- Animation and Interaction Modules -->
+    <script src="../js/core/modal.js"></script>
+    <script src="../js/core/interactions.js"></script>
+
+    <!-- Main App Initialization -->
+    <script src="../app.js"></script>
+    <script src="../bot-protection.js"></script>
+</body>
+</html>

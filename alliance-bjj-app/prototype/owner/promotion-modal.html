@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promote John Smith - Alliance BJJ Platform</title>
+    <link rel="icon" type="image/png" href="../Alliance_jiu-jitsu.svg.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, nosnippet, noarchive, noimageindex, notranslate">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, nosnippet, noarchive, noimageindex">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .promotion-option {
+            display: flex;
+            align-items: center;
+            padding: var(--space-md);
+            border: 2px solid var(--gray-300);
+            border-radius: 8px;
+            margin-bottom: var(--space-md);
+            cursor: pointer;
+        }
+        .promotion-option input[type="radio"] {
+            margin-right: var(--space-md);
+        }
+        .promotion-option:has(input:checked) {
+            border-color: var(--gray-900);
+            background-color: var(--gray-100);
+        }
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+        .checkbox-option input {
+            margin-right: var(--space-sm);
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Promote John Smith</h2>
+                <a href="member-detail.html" style="font-size: 24px; color: var(--gray-500);">&times;</a>
+            </div>
+            <div class="modal-body">
+                <!-- Current Status -->
+                <h3>Current Status</h3>
+                <div style="display: flex; align-items: center; padding: var(--space-md); background-color: var(--gray-100); border-radius: 8px; margin-bottom: var(--space-lg);">
+                    <div style="width: 64px; height: 64px; background-color: var(--gray-300); border-radius: 50%; margin-right: var(--space-md);"></div>
+                    <div>
+                        <strong>John Smith</strong><br>
+                        <div class="belt-badge belt-blue" style="margin: 8px 0; width: 80px; height: 20px;">
+                            <div class="stripes">
+                                <span class="stripe"></span>
+                                <span class="stripe"></span>
+                                <span class="stripe"></span>
+                            </div>
+                        </div>
+                        <div class="text-small text-muted">42 classes since last promotion · 8 months at current rank</div>
+                    </div>
+                </div>
+
+                <!-- Promote To -->
+                <h3>Promote To</h3>
+                <label class="promotion-option">
+                    <input type="radio" name="promotion" value="stripe" checked>
+                    <div>
+                        <strong>4th Stripe</strong>
+                        <div class="belt-badge belt-blue" style="margin-top: 8px; width: 80px; height: 20px;">
+                            <div class="stripes">
+                                <span class="stripe"></span>
+                                <span class="stripe"></span>
+                                <span class="stripe"></span>
+                                <span class="stripe"></span>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+                <label class="promotion-option">
+                    <input type="radio" name="promotion" value="purple">
+                    <div>
+                        <strong>Purple Belt</strong>
+                        <div class="belt-badge belt-purple" style="margin-top: 8px; width: 80px; height: 20px;"></div>
+                    </div>
+                </label>
+
+                <!-- Details -->
+                <h3 class="mt-lg">Details</h3>
+                <div class="form-group">
+                    <label class="form-label">Promotion Date</label>
+                    <input type="date" class="form-input" value="2024-11-27">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Promoting Instructor</label>
+                    <select class="form-select">
+                        <option value="professor-mike" selected>Professor Mike</option>
+                        <option value="coach-sarah">Coach Sarah</option>
+                        <option value="coach-carlos">Coach Carlos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notes</label>
+                    <textarea class="form-textarea" placeholder="Add any notes about this promotion..."></textarea>
+                </div>
+
+                <!-- Options -->
+                <h3 class="mt-lg">Options</h3>
+                <label class="checkbox-option">
+                    <input type="checkbox" checked>
+                    <span>Generate promotion certificate</span>
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" checked>
+                    <span>Notify member via app and email</span>
+                </label>
+            </div>
+            <div class="modal-footer">
+                <a href="member-detail.html" class="btn">Cancel</a>
+                <a href="member-detail.html" class="btn btn-primary">⭐ Confirm Promotion</a>
+            </div>
+        </div>
+    </div>
+    <script src="../theme.js"></script>
+    <script src="../bot-protection.js"></script>
+</body>
+</html>

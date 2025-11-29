@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Security: Prevent indexing and crawling -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="GPTBot" content="noindex, nofollow">
+    <meta name="ChatGPT-User" content="noindex, nofollow">
+    <meta name="anthropic-ai" content="noindex, nofollow">
+    <meta name="Claude-Web" content="noindex, nofollow">
+    <meta name="CCBot" content="noindex, nofollow">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Waiver & Medical - Alliance BJJ Paoli</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="onboarding-container">
+        <!-- Progress Bar -->
+        <div class="progress-steps">
+            <div class="progress-step active">
+                <div class="progress-step-number">1</div>
+                <div>Waiver</div>
+            </div>
+            <div class="progress-step">
+                <div class="progress-step-number">2</div>
+                <div>Payment</div>
+            </div>
+            <div class="progress-step">
+                <div class="progress-step-number">3</div>
+                <div>Welcome</div>
+            </div>
+        </div>
+
+        <h1 style="text-align: center; margin-bottom: 30px; font-size: 32px; text-transform: none;">
+            Liability Waiver & Medical Information
+        </h1>
+
+        <!-- Personal Information -->
+        <div class="form-section">
+            <div class="form-section-title">Personal Information</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" value="John Smith" readonly
+                           style="background: var(--gray-100);">
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth <span class="required-mark">*</span></label>
+                    <input type="date" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Address <span class="required-mark">*</span></label>
+                <input type="text" placeholder="123 Main Street" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>City <span class="required-mark">*</span></label>
+                    <input type="text" placeholder="Paoli" required>
+                </div>
+                <div class="form-group">
+                    <label>State <span class="required-mark">*</span></label>
+                    <input type="text" placeholder="PA" maxlength="2" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>ZIP <span class="required-mark">*</span></label>
+                <input type="text" placeholder="19301" required>
+            </div>
+        </div>
+
+        <!-- Emergency Contact -->
+        <div class="form-section">
+            <div class="form-section-title">Emergency Contact</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Contact Name <span class="required-mark">*</span></label>
+                    <input type="text" placeholder="Jane Smith" required>
+                </div>
+                <div class="form-group">
+                    <label>Relationship <span class="required-mark">*</span></label>
+                    <select required>
+                        <option>Spouse</option>
+                        <option>Parent</option>
+                        <option>Sibling</option>
+                        <option>Friend</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Contact Phone <span class="required-mark">*</span></label>
+                <input type="tel" placeholder="(555) 987-6543" required>
+            </div>
+        </div>
+
+        <!-- Medical Information -->
+        <div class="form-section">
+            <div class="form-section-title">Medical Information</div>
+            <p style="margin-bottom: 20px; color: var(--gray-500);">
+                Please check any conditions that apply:
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" style="margin-right: 8px; width: auto;">
+                    Asthma
+                </label>
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" style="margin-right: 8px; width: auto;">
+                    Heart Condition
+                </label>
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" style="margin-right: 8px; width: auto;">
+                    Diabetes
+                </label>
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" style="margin-right: 8px; width: auto;">
+                    High Blood Pressure
+                </label>
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" style="margin-right: 8px; width: auto;">
+                    Joint Problems
+                </label>
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" style="margin-right: 8px; width: auto;">
+                    Back Problems
+                </label>
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" style="margin-right: 8px; width: auto;">
+                    Recent Surgery
+                </label>
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" style="margin-right: 8px; width: auto;">
+                    None of the Above
+                </label>
+            </div>
+            <div class="form-group" style="margin-top: 20px;">
+                <label>Additional Medical Information</label>
+                <textarea rows="3" placeholder="Please list any injuries, medications, or other conditions we should know about"></textarea>
+            </div>
+        </div>
+
+        <!-- Terms & Waiver -->
+        <div class="form-section">
+            <div class="form-section-title">Liability Waiver & Terms</div>
+            <div class="terms-box">
+                <h4>ASSUMPTION OF RISK</h4>
+                <p>I understand that Brazilian Jiu-Jitsu is a contact sport that involves
+                physical contact and the risk of injury. I voluntarily assume all risks
+                associated with participation, including but not limited to: muscle strains,
+                joint injuries, bruises, and other potential injuries.</p>
+
+                <h4>RELEASE OF LIABILITY</h4>
+                <p>I hereby release Alliance BJJ Paoli, its owners, instructors, employees,
+                and agents from any and all liability, claims, demands, actions, and causes
+                of action whatsoever arising out of or related to any loss, damage, or injury
+                that may be sustained by me while participating in activities at the gym.</p>
+
+                <h4>MEDICAL CLEARANCE</h4>
+                <p>I confirm that I am physically fit and have no medical conditions that
+                would prevent my participation in Brazilian Jiu-Jitsu training. I have
+                disclosed all relevant medical information above and will inform the gym
+                of any changes to my health status.</p>
+
+                <h4>PHOTO/VIDEO RELEASE</h4>
+                <p>I grant permission for photos and videos taken during training to be
+                used for promotional purposes on the gym's website, social media, and
+                marketing materials. I understand I will not receive compensation for
+                such use.</p>
+
+                <h4>MEMBERSHIP TERMS</h4>
+                <p>I understand that membership fees are due monthly and that there is a
+                30-day cancellation notice required. I agree to provide written notice
+                of cancellation via email or in person. I understand that refunds are
+                not provided for unused portions of membership.</p>
+
+                <h4>CODE OF CONDUCT</h4>
+                <p>I agree to maintain respectful behavior toward all members, staff, and
+                visitors. I understand that violation of gym rules or inappropriate
+                conduct may result in immediate termination of membership without refund.</p>
+
+                <h4>EQUIPMENT AND FACILITY USE</h4>
+                <p>I agree to use all equipment and facilities properly and safely. I will
+                report any equipment damage or safety concerns immediately. I understand
+                that I am responsible for any damage caused by my negligence or misuse.</p>
+
+                <h4>MINORS</h4>
+                <p>If signing on behalf of a minor, I certify that I am the parent or legal
+                guardian and have the authority to sign this waiver on their behalf. I
+                accept full responsibility for their participation.</p>
+
+                <h4>GOVERNING LAW</h4>
+                <p>This agreement shall be governed by the laws of the Commonwealth of
+                Pennsylvania. Any disputes arising from this agreement shall be resolved
+                in the courts of Chester County, Pennsylvania.</p>
+            </div>
+
+            <div class="form-group" style="margin-top: 20px;">
+                <label>E-Signature <span class="required-mark">*</span></label>
+                <div class="signature-pad">
+                    [Click to Sign]
+                </div>
+            </div>
+
+            <label style="display: flex; align-items: flex-start; margin-bottom: 20px; cursor: pointer;">
+                <input type="checkbox" required style="margin-right: 8px; margin-top: 4px; width: auto;">
+                <span>I have read, understood, and agree to the terms and conditions above.
+                I am signing this waiver voluntarily and acknowledge that this is a
+                legally binding agreement.</span>
+            </label>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+            <a href="../landing/trial-signup.html"
+               style="padding: 12px 24px; border: 1px solid var(--gray-300);
+                      text-decoration: none; color: var(--gray-500); border-radius: 4px;">
+                ← Back
+            </a>
+            <a href="payment-setup.html" class="btn btn-primary"
+               style="padding: 12px 40px; background: var(--primary-black); color: white;
+                      text-decoration: none; border-radius: 4px; font-weight: 600;">
+                Continue to Payment →
+            </a>
+        </div>
+    </div>
+    <script src="../bot-protection.js"></script>
+</body>
+</html>

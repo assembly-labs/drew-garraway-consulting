@@ -1,0 +1,537 @@
+/**
+ * Alliance BJJ - Modern Animation System
+ * Smooth, purposeful animations for enhanced UX
+ */
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+* {
+    /* Optimize animations for GPU acceleration */
+    will-change: auto;
+}
+
+/* Respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================
+   PAGE LOAD ANIMATIONS
+   ============================================ */
+
+/* Fade in and slide up */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade in and scale */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ============================================
+   STAGGERED ANIMATIONS
+   ============================================ */
+
+.animate-in {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.animate-scale {
+    animation: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.animate-list > * {
+    animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+/* Stagger children animations */
+.animate-list > *:nth-child(1) { animation-delay: 0.05s; }
+.animate-list > *:nth-child(2) { animation-delay: 0.1s; }
+.animate-list > *:nth-child(3) { animation-delay: 0.15s; }
+.animate-list > *:nth-child(4) { animation-delay: 0.2s; }
+.animate-list > *:nth-child(5) { animation-delay: 0.25s; }
+.animate-list > *:nth-child(6) { animation-delay: 0.3s; }
+.animate-list > *:nth-child(7) { animation-delay: 0.35s; }
+.animate-list > *:nth-child(8) { animation-delay: 0.4s; }
+
+/* Dashboard cards stagger */
+.dashboard-grid > * {
+    animation: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.dashboard-grid > *:nth-child(1) { animation-delay: 0.1s; }
+.dashboard-grid > *:nth-child(2) { animation-delay: 0.15s; }
+.dashboard-grid > *:nth-child(3) { animation-delay: 0.2s; }
+.dashboard-grid > *:nth-child(4) { animation-delay: 0.25s; }
+
+/* ============================================
+   MODAL ANIMATIONS
+   ============================================ */
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 9998;
+    pointer-events: none;
+}
+
+.modal-backdrop.active {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 9999;
+    max-width: 90vw;
+    max-height: 90vh;
+    pointer-events: none;
+}
+
+.modal-container.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Modal shake animation for errors */
+@keyframes modalShake {
+    0%, 100% { transform: translate(-50%, -50%) rotate(0); }
+    25% { transform: translate(-50%, -50%) rotate(-1deg); }
+    75% { transform: translate(-50%, -50%) rotate(1deg); }
+}
+
+.modal-container.shake {
+    animation: modalShake 0.5s ease-in-out;
+}
+
+/* ============================================
+   MICRO INTERACTIONS
+   ============================================ */
+
+/* Button hover lift */
+.btn-interactive {
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.btn-interactive:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-interactive:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Card hover effect */
+.card-hover {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+}
+
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth hover for navigation items */
+.nav-item {
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-yellow);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-item:hover::after,
+.nav-item.active::after {
+    width: 100%;
+}
+
+/* ============================================
+   NUMBER COUNTER ANIMATIONS
+   ============================================ */
+
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: scale(0.5) rotate(-10deg);
+    }
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+.number-animate {
+    animation: countUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+
+/* Skeleton loader */
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background: #e0e0e0;
+}
+
+.skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    animation: skeltonShimmer 2s infinite;
+}
+
+@keyframes skeltonShimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Pulse loader */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.pulse-loader {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Spinner */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--gray-300);
+    border-top-color: var(--accent-yellow);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* ============================================
+   BELT PROMOTION CELEBRATIONS
+   ============================================ */
+
+@keyframes celebrate {
+    0%, 100% {
+        transform: scale(1) rotate(0);
+    }
+    25% {
+        transform: scale(1.05) rotate(3deg);
+    }
+    50% {
+        transform: scale(1.1) rotate(-3deg);
+    }
+    75% {
+        transform: scale(1.05) rotate(3deg);
+    }
+}
+
+.celebration {
+    animation: celebrate 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Stripe addition animation */
+@keyframes stripeAdd {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 20px;
+        opacity: 1;
+    }
+}
+
+.stripe-new {
+    animation: stripeAdd 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Success flash */
+@keyframes successFlash {
+    0% {
+        background: transparent;
+    }
+    50% {
+        background: rgba(252, 211, 77, 0.1); /* Alliance yellow */
+    }
+    100% {
+        background: transparent;
+    }
+}
+
+.success-flash {
+    animation: successFlash 0.6s ease-out;
+}
+
+/* ============================================
+   FORM INTERACTIONS
+   ============================================ */
+
+/* Input focus animation */
+.input-modern {
+    transition: all 0.2s ease;
+}
+
+.input-modern:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 3px rgba(252, 211, 77, 0.2);
+}
+
+/* Form step transitions */
+.form-step {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-step.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.form-step.previous {
+    transform: translateX(-50px);
+}
+
+/* ============================================
+   NOTIFICATION TOASTS
+   ============================================ */
+
+@keyframes slideInTop {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutTop {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+.toast {
+    animation: slideInTop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast.hiding {
+    animation: slideOutTop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   MOBILE TOUCH FEEDBACK
+   ============================================ */
+
+.touch-feedback {
+    position: relative;
+    overflow: hidden;
+}
+
+.touch-feedback::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(252, 211, 77, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.touch-feedback:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* ============================================
+   SCROLL ANIMATIONS
+   ============================================ */
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Parallax effect */
+.parallax {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   SPECIAL EFFECTS
+   ============================================ */
+
+/* Glow effect for important elements */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(252, 211, 77, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(252, 211, 77, 0.8);
+    }
+}
+
+.glow-effect {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Subtle float animation for badges */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.float-animation {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.transition-all {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.transition-fast {
+    transition: all 0.15s ease-out;
+}
+
+.transition-slow {
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.no-transition {
+    transition: none !important;
+}
+
+/* Scale on hover */
+.scale-hover:hover {
+    transform: scale(1.05);
+}
+
+/* Opacity hover */
+.opacity-hover {
+    transition: opacity 0.2s ease;
+}
+
+.opacity-hover:hover {
+    opacity: 0.8;
+}
