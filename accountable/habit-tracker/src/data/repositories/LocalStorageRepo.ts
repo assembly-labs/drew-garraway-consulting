@@ -48,9 +48,10 @@ export class LocalStorageRepository implements IHabitRepository {
     });
   }
 
-  async saveSession(habitId: string, date: string, data: SessionData): Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async saveSession(_habitId: string, _date: string, _data: SessionData): Promise<void> {
     // Future implementation for detailed session data
-    console.log('Session save not implemented yet', habitId, date, data);
+    // Session save not implemented yet
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

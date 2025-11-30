@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useTransform } from 'framer-motion';
 import { DashboardCardProps } from '@/types';
 import { useSwipeable } from '@/shared/hooks/useSwipeable';
 
@@ -10,6 +10,29 @@ export const SimpleHabitCard: React.FC<DashboardCardProps> = ({
   isEditable = true,
 }) => {
   const [showCheckmark, setShowCheckmark] = useState(false);
+
+  const categoryColors = {
+    physical: {
+      bg: 'bg-gradient-to-r from-blue-50 to-blue-100',
+      text: 'text-blue-900',
+      border: 'border-blue-200',
+      icon: 'text-blue-400'
+    },
+    mental: {
+      bg: 'bg-gradient-to-r from-purple-50 to-purple-100',
+      text: 'text-purple-900',
+      border: 'border-purple-200',
+      icon: 'text-purple-400'
+    },
+    diet: {
+      bg: 'bg-gradient-to-r from-green-50 to-green-100',
+      text: 'text-green-900',
+      border: 'border-green-200',
+      icon: 'text-green-400'
+    }
+  };
+
+  const colors = categoryColors[habit.category] || categoryColors.physical;
 
   /**
    * Custom hook for Tinder-style swipe behavior
@@ -36,28 +59,13 @@ export const SimpleHabitCard: React.FC<DashboardCardProps> = ({
     isEditable && !isCompleted // Only enable swipe if editable and not completed
   );
 
-  const categoryColors = {
-    physical: {
-      bg: 'bg-gradient-to-r from-blue-50 to-blue-100',
-      text: 'text-blue-900',
-      border: 'border-blue-200',
-      icon: 'text-blue-400'
-    },
-    mental: {
-      bg: 'bg-gradient-to-r from-purple-50 to-purple-100',
-      text: 'text-purple-900',
-      border: 'border-purple-200',
-      icon: 'text-purple-400'
-    },
-    diet: {
-      bg: 'bg-gradient-to-r from-green-50 to-green-100',
-      text: 'text-green-900',
-      border: 'border-green-200',
-      icon: 'text-green-400'
-    }
-  };
-
-  const colors = categoryColors[habit.category] || categoryColors.physical;
+  // Create transforms at component level to avoid conditional hook calls
+  const progressBarWidth = useTransform(x, [0, 100], ['0%', '100%']);
+  const swipeText = useTransform(
+    x,
+    [0, 30, 70, 100],
+    ["Keep swiping", "Keep swiping", "Almost there!", "Release to complete!"]
+  );
 
   return (
     <motion.div
@@ -152,6 +160,22 @@ export const SimpleHabitCard: React.FC<DashboardCardProps> = ({
         )}
       </div>
 
+      {/* Swipe progress bar at bottom */}
+      {!isCompleted && isDragging && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200"
+        >
+          <motion.div
+            className="h-full bg-gradient-to-r from-green-400 to-green-500"
+            style={{
+              width: progressBarWidth
+            }}
+          />
+        </motion.div>
+      )}
+
       {/* Swipe indicator overlay - shows during drag with animated entrance */}
       {!isCompleted && isDragging && (
         <motion.div
@@ -186,9 +210,9 @@ export const SimpleHabitCard: React.FC<DashboardCardProps> = ({
                 />
               </svg>
             </motion.div>
-            <span className="text-sm font-semibold text-white drop-shadow-lg">
-              Release to complete
-            </span>
+            <motion.span className="text-sm font-semibold text-white drop-shadow-lg">
+              {swipeText.get()}
+            </motion.span>
           </div>
         </motion.div>
       )}

@@ -1,9 +1,11 @@
 import { format, isToday } from 'date-fns';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useHabitStore } from '@/store/habitStore';
 import { DaySelector } from './DaySelector';
 
 export const Header: React.FC = () => {
+  const navigate = useNavigate();
   const currentDate = useHabitStore(state => state.currentDate);
   const [streak, setStreak] = useState(0);
 
@@ -14,8 +16,8 @@ export const Header: React.FC = () => {
         const store = useHabitStore.getState();
         const streakValue = await store.calculateStreak();
         setStreak(streakValue);
-      } catch (error) {
-        console.error('Error calculating streak:', error);
+      } catch {
+        // Error calculating streak - default to 0
         setStreak(0);
       }
     };
@@ -29,6 +31,22 @@ export const Header: React.FC = () => {
   return (
     <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl">
       <div className="px-6 py-8">
+        {/* Navigation buttons */}
+        <div className="flex justify-between items-center mb-4">
+          <button
+            onClick={() => navigate('/calendar')}
+            className="px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-medium transition-colors"
+          >
+            📅 Calendar
+          </button>
+          <button
+            onClick={() => navigate('/progress')}
+            className="px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-medium transition-colors"
+          >
+            📊 Progress
+          </button>
+        </div>
+
         <div className="mb-4">
           <DaySelector />
         </div>
@@ -38,7 +56,7 @@ export const Header: React.FC = () => {
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
             </svg>
-            <span>Viewing past day - You can edit within 5 days</span>
+            <span>Viewing past day - You can edit within 7 days</span>
           </div>
         )}
 

@@ -77,7 +77,7 @@ export const ClusterPulse: React.FC = () => {
           setMonthLogs(logsMap);
         } catch (error) {
           if (error instanceof Error && error.name !== 'AbortError') {
-            console.error('Error loading month data:', error);
+            // Error loading month data
           }
         } finally {
           if (!abortController.signal.aborted) {
@@ -159,8 +159,8 @@ export const ClusterPulse: React.FC = () => {
 
       setStreaks(streakData);
       lastCalculatedDateRef.current = dateKey;
-    } catch (error) {
-      console.error('Error calculating streaks:', error);
+    } catch {
+      // Error calculating streaks
     } finally {
       setStreakLoading(false);
     }
@@ -242,16 +242,20 @@ export const ClusterPulse: React.FC = () => {
             {format(selectedDate, 'MMMM d, yyyy')}
           </p>
         </div>
-        <button
-          onClick={() => navigateDate('next')}
-          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-          disabled={isToday(selectedDate)}
-          aria-label={isToday(selectedDate) ? "Cannot navigate to future dates" : "Next day"}
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
+        {!isToday(selectedDate) ? (
+          <button
+            onClick={() => navigateDate('next')}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            aria-label="Next day"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        ) : (
+          /* Empty spacer to maintain layout */
+          <div className="w-9 h-9" />
+        )}
       </div>
 
       {/* Cluster Nodes */}
@@ -345,15 +349,22 @@ export const ClusterPulse: React.FC = () => {
           <h2 className="text-xl font-bold text-gray-800">
             {format(selectedDate, 'MMMM yyyy')}
           </h2>
-          <button
-            onClick={() => navigateDate('next')}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-            aria-label="Next month"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+          {selectedDate.getFullYear() < new Date().getFullYear() ||
+           (selectedDate.getFullYear() === new Date().getFullYear() &&
+            selectedDate.getMonth() < new Date().getMonth()) ? (
+            <button
+              onClick={() => navigateDate('next')}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              aria-label="Next month"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          ) : (
+            /* Empty spacer to maintain layout */
+            <div className="w-9 h-9" />
+          )}
         </div>
 
         {/* Heat Map */}

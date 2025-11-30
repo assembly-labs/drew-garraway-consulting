@@ -2,6 +2,7 @@ import { IHabitModule } from '@/modules/_base/HabitModule';
 import { JiuJitsuModule } from '@/modules/jiu-jitsu';
 import { GymModule } from '@/modules/gym';
 import { YogaModule } from '@/modules/yoga';
+import { SaunaModule } from '@/modules/sauna';
 import { MeditationModule } from '@/modules/meditation';
 import { NotYellingModule } from '@/modules/not-yelling';
 import { SupplementsModule } from '@/modules/supplements';
@@ -10,6 +11,7 @@ export const HABIT_MODULES: IHabitModule[] = [
   new YogaModule(),
   new GymModule(),
   new JiuJitsuModule(),
+  new SaunaModule(),
   new MeditationModule(),
   new NotYellingModule(),
   new SupplementsModule(),
