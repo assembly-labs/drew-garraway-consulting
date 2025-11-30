@@ -5,8 +5,8 @@ export const CLUSTERS = [
     'physical',
     'PHYSICAL',
     'physical',
-    ['yoga', 'gym', 'jiu-jitsu'],
-    1 // 1 of 3 required
+    ['yoga', 'gym', 'jiu-jitsu', 'sauna'],
+    1 // 1 of 4 required
   ),
   new Cluster(
     'mental',

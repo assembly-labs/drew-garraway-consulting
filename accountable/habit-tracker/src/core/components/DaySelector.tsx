@@ -1,7 +1,7 @@
 import { format, subDays, isToday, isYesterday } from 'date-fns';
 import { useHabitStore } from '@/store/habitStore';
 
-const MAX_EDITABLE_DAYS = 5;
+const MAX_EDITABLE_DAYS = 7;
 
 export const DaySelector: React.FC = () => {
   const currentDate = useHabitStore(state => state.currentDate);
@@ -9,7 +9,7 @@ export const DaySelector: React.FC = () => {
 
   const today = new Date();
 
-  // Generate last 5 days (including today)
+  // Generate last 7 days (including today)
   const editableDays = Array.from({ length: MAX_EDITABLE_DAYS }, (_, i) => {
     const date = subDays(today, i);
     const dateStr = format(date, 'yyyy-MM-dd');

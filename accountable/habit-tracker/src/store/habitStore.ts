@@ -3,7 +3,7 @@ import { format, differenceInDays } from 'date-fns';
 import { createRepository } from '@/data/repositories';
 import { CLUSTERS } from '@/config/clusters';
 
-const MAX_EDITABLE_DAYS = 5;
+const MAX_EDITABLE_DAYS = 7;
 
 interface HabitState {
   currentDate: string;
@@ -40,7 +40,7 @@ export const useHabitStore = create<HabitState>((set, get) => ({
 
     // Check if date is editable before allowing toggle
     if (!isDateEditable(currentDate)) {
-      console.warn(`Cannot edit habits for ${currentDate} - beyond 5 day window`);
+      // Cannot edit habits beyond the 7-day window
       return;
     }
 
@@ -108,7 +108,7 @@ export const useHabitStore = create<HabitState>((set, get) => ({
 
     const daysDiff = differenceInDays(today, checkDate);
 
-    // Can edit if within 0-4 days ago (today + 4 previous days = 5 total)
+    // Can edit if within 0-6 days ago (today + 6 previous days = 7 total)
     return daysDiff >= 0 && daysDiff < MAX_EDITABLE_DAYS;
   },
 }));

@@ -128,7 +128,6 @@ export const CalendarView: React.FC = () => {
                 key={day.toISOString()}
                 onClick={() => {
                   // Future: open day detail modal
-                  console.log('Clicked day:', format(day, 'yyyy-MM-dd'));
                 }}
                 className={`
                   aspect-square rounded-lg flex items-center justify-center

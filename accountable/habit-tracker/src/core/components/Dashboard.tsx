@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from './Header';
 import { ClusterPulse } from './ClusterPulse';
 import { ClusterCard } from './ClusterCard';
@@ -9,6 +10,7 @@ import { CLUSTERS } from '@/config/clusters';
 type VisualizationMode = 'pulse' | 'cards';
 
 export const Dashboard: React.FC = () => {
+  const navigate = useNavigate();
   const [visualizationMode, setVisualizationMode] = useState<VisualizationMode>('pulse');
 
   // Toggle between visualization modes
@@ -19,6 +21,25 @@ export const Dashboard: React.FC = () => {
   if (visualizationMode === 'pulse') {
     return (
       <div className="min-h-screen">
+        {/* Navigation bar for pulse view */}
+        <div className="absolute top-0 left-0 right-0 z-30 bg-gradient-to-r from-blue-600/90 to-purple-600/90 backdrop-blur-sm">
+          <div className="px-6 py-4 flex justify-between items-center">
+            <button
+              onClick={() => navigate('/calendar')}
+              className="px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-medium text-white transition-colors"
+            >
+              📅 Calendar
+            </button>
+            <h2 className="text-white font-semibold">Accountable</h2>
+            <button
+              onClick={() => navigate('/progress')}
+              className="px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-medium text-white transition-colors"
+            >
+              📊 Progress
+            </button>
+          </div>
+        </div>
+
         <ClusterPulse />
 
         {/* Mode toggle button */}
