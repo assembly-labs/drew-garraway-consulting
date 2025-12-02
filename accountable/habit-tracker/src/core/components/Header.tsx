@@ -1,11 +1,9 @@
 import { format, isToday } from 'date-fns';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useHabitStore } from '@/store/habitStore';
 import { DaySelector } from './DaySelector';
 
 export const Header: React.FC = () => {
-  const navigate = useNavigate();
   const currentDate = useHabitStore(state => state.currentDate);
   const [streak, setStreak] = useState(0);
 
@@ -29,23 +27,8 @@ export const Header: React.FC = () => {
   const viewingToday = isToday(new Date(currentDate));
 
   return (
-    <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl">
-      <div className="px-6 py-8">
-        {/* Navigation buttons */}
-        <div className="flex justify-between items-center mb-4">
-          <button
-            onClick={() => navigate('/calendar')}
-            className="px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-medium transition-colors"
-          >
-            📅 Calendar
-          </button>
-          <button
-            onClick={() => navigate('/progress')}
-            className="px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-medium transition-colors"
-          >
-            📊 Progress
-          </button>
-        </div>
+    <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl safe-top">
+      <div className="px-6 py-6 safe-x">
 
         <div className="mb-4">
           <DaySelector />

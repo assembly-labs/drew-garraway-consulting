@@ -1,9 +1,10 @@
-import { useMemo, useState, useCallback } from 'react';
+import { useMemo, useState, useCallback, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useHabitStore } from '@/store/habitStore';
 import { Cluster } from '@/data/models/Cluster';
 import { getModulesByCategory } from '@/config/modules';
 import { Toast } from '@/shared/components/Toast';
+import { SwipeHint } from '@/shared/components/SwipeHint';
 
 interface ClusterCardProps {
   cluster: Cluster;
@@ -15,6 +16,7 @@ export const ClusterCard: React.FC<ClusterCardProps> = ({ cluster }) => {
   const currentDate = useHabitStore(state => state.currentDate);
   const isDateEditable = useHabitStore(state => state.isDateEditable);
   const [toast, setToast] = useState<{ habitId: string; habitName: string } | null>(null);
+  const [showSwipeHint, setShowSwipeHint] = useState(false);
 
   const isEditable = useMemo(() => {
     return isDateEditable(currentDate);
@@ -37,6 +39,16 @@ export const ClusterCard: React.FC<ClusterCardProps> = ({ cluster }) => {
     return modules.filter(module => !completedHabits.has(module.getHabit().id));
   }, [modules, completedHabits]);
 
+  // Show swipe hint on first cluster if it's the physical cluster and user hasn't seen it
+  useEffect(() => {
+    if (cluster.category === 'physical' && activeModules.length > 0) {
+      const hasSeenHint = localStorage.getItem('hasSeenSwipeHint');
+      if (!hasSeenHint) {
+        setShowSwipeHint(true);
+      }
+    }
+  }, [cluster.category, activeModules.length]);
+
   const handleToggle = useCallback((habitId: string, habitName: string) => {
     toggleHabit(habitId);
     setToast({ habitId, habitName });
@@ -48,6 +60,11 @@ export const ClusterCard: React.FC<ClusterCardProps> = ({ cluster }) => {
       setToast(null);
     }
   }, [toast, toggleHabit]);
+
+  const handleDismissHint = useCallback(() => {
+    setShowSwipeHint(false);
+    localStorage.setItem('hasSeenSwipeHint', 'true');
+  }, []);
 
   const categoryColors = {
     physical: {
@@ -142,6 +159,12 @@ export const ClusterCard: React.FC<ClusterCardProps> = ({ cluster }) => {
           />
         )}
       </AnimatePresence>
+
+      {/* Swipe hint for first-time users */}
+      <SwipeHint
+        show={showSwipeHint}
+        onDismiss={handleDismissHint}
+      />
     </div>
   );
 };
