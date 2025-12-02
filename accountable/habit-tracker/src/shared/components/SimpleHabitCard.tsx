@@ -87,10 +87,15 @@ export const SimpleHabitCard: React.FC<DashboardCardProps> = ({
         rotate, // Rotation based on x position (-15deg to +15deg)
         opacity, // Opacity fades as card moves away
         touchAction: 'pan-y', // Allow vertical scrolling on touch devices
+        transformStyle: 'preserve-3d', // Enable 3D transforms
       }}
 
       // Hover and tap animations for better UX feedback
-      whileHover={isEditable && !isCompleted ? { scale: 1.02 } : {}}
+      whileHover={isEditable && !isCompleted ? {
+        scale: 1.02,
+        y: -2,
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+      } : {}}
       whileTap={isEditable && !isCompleted ? { scale: 0.98 } : {}}
 
       // Exit animation when card is removed from DOM (after completion)
@@ -114,12 +119,14 @@ export const SimpleHabitCard: React.FC<DashboardCardProps> = ({
       }}
 
       className={`
-        relative overflow-hidden rounded-xl p-5
-        border
-        ${colors.bg} ${colors.text} ${colors.border}
-        ${isEditable && !isCompleted ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}
-        ${isDragging ? 'shadow-2xl z-10' : 'shadow-lg hover:shadow-xl'}
+        relative overflow-hidden rounded-2xl p-5
+        border backdrop-blur-md
+        ${isDragging ? 'glass shadow-2xl z-10 border-white/30' : `${colors.bg} ${colors.border}`}
+        ${colors.text}
+        ${isEditable && !isCompleted ? 'cursor-grab active:cursor-grabbing touch-target' : 'cursor-default'}
+        ${!isDragging ? 'shadow-lg hover:shadow-xl' : ''}
         ${!isEditable ? 'opacity-60' : ''}
+        transition-smooth
       `}
     >
       <div className="flex items-center justify-between">
