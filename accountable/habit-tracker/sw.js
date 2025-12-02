@@ -1,6 +1,6 @@
 // Service Worker for Accountable Habit Tracker
 const CACHE_NAME = 'accountable-v1';
-const BASE_PATH = '/accountable/habit-tracker';
+const BASE_PATH = '';
 
 // Files to cache for offline use
 const STATIC_CACHE = [
