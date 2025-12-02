@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 
 export default defineConfig({
-  base: '/accountable/habit-tracker/',
+  base: '/',
   plugins: [react()],
   resolve: {
     alias: {
