@@ -1,0 +1,39 @@
+{
+  "name": "franklin-hugh-money",
+  "version": "1.0.0",
+  "description": "Building F.U. Money with a punk rock attitude - A financial journey documentation",
+  "private": true,
+  "author": "Drew Garraway",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "python3 -m http.server 8000 --directory public",
+    "serve": "npx serve public",
+    "format": "prettier --write '**/*.{html,css,js,md,json}'",
+    "lint:html": "html-validate 'public/**/*.html' 'src/pages/**/*.html'",
+    "lint:css": "stylelint 'public/**/*.css' 'src/styles/**/*.css'",
+    "lint:js": "eslint 'public/**/*.js' 'src/scripts/**/*.js'",
+    "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
+    "test": "echo 'No tests configured yet'",
+    "build": "echo 'Build process will be configured in Phase 2'"
+  },
+  "keywords": [
+    "finance",
+    "personal-finance",
+    "wealth-building",
+    "financial-independence",
+    "F.U. money",
+    "punk",
+    "rebellion"
+  ],
+  "devDependencies": {
+    "prettier": "^3.1.0",
+    "eslint": "^8.54.0",
+    "stylelint": "^15.11.0",
+    "html-validate": "^8.7.0",
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
