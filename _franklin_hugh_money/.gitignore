@@ -1,0 +1,74 @@
+# Franklin Hugh Money - Git Ignore File
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+.vs/
+
+# Dependencies
+node_modules/
+bower_components/
+
+# Build outputs
+dist/
+build/
+*.min.js
+*.min.css
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.env
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Cache
+.cache/
+.sass-cache/
+.parcel-cache/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Personal notes (keep private)
+personal-notes/
+private/
+*.private.*
+
+# Financial data (sensitive)
+real-data/
+actual-numbers/
+portfolio-data/
+
+# Session logs (keep only index)
+dev/logs/*.md
+!dev/logs/session-log.md
+
+# Backup files
+*.backup
+*.bak
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

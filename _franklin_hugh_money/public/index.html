@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="Franklin Hugh Money - Building F.U. Money with a punk rock attitude. A financial journey from zero to expertise.">
+
+    <title>Franklin Hugh Money - Building Wealth with Rebellion</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Core Colors */
+            --fh-black: #0A0A0A;
+            --fh-white: #FAFAFA;
+            --fh-punk: #00FF00;
+            --fh-rebel: #FF1493;
+            --fh-anarchy: #00FFFF;
+            --fh-danger: #FF0040;
+
+            /* Grays */
+            --fh-gray-900: #1A1A1A;
+            --fh-gray-800: #2A2A2A;
+            --fh-gray-700: #404040;
+            --fh-gray-500: #737373;
+            --fh-gray-300: #D4D4D4;
+
+            /* Fonts */
+            --fh-font-display: 'Bebas Neue', sans-serif;
+            --fh-font-body: 'Inter', sans-serif;
+            --fh-font-mono: 'JetBrains Mono', monospace;
+
+            /* Spacing */
+            --fh-space-sm: 0.5rem;
+            --fh-space-md: 1rem;
+            --fh-space-lg: 1.5rem;
+            --fh-space-xl: 2rem;
+            --fh-space-2xl: 3rem;
+            --fh-space-3xl: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--fh-font-body);
+            background: var(--fh-black);
+            color: var(--fh-white);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: var(--fh-font-display);
+            font-size: clamp(3rem, 10vw, 6rem);
+            line-height: 1;
+            letter-spacing: 0.02em;
+        }
+
+        h2 {
+            font-family: var(--fh-font-display);
+            font-size: clamp(2rem, 6vw, 3rem);
+            line-height: 1.1;
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        /* Layout */
+        .fh-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--fh-space-md);
+        }
+
+        /* Hero Section */
+        .fh-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(180deg, var(--fh-black) 0%, var(--fh-gray-900) 100%);
+        }
+
+        .fh-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 2px, var(--fh-gray-900) 2px, var(--fh-gray-900) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, var(--fh-gray-900) 2px, var(--fh-gray-900) 4px);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .fh-hero__content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .fh-title {
+            margin-bottom: var(--fh-space-xl);
+            position: relative;
+            display: inline-block;
+        }
+
+        .fh-title span {
+            display: block;
+        }
+
+        .fh-title .franklin {
+            color: var(--fh-punk);
+            text-shadow: 0 0 20px var(--fh-punk);
+        }
+
+        .fh-title .hugh {
+            color: var(--fh-rebel);
+            text-shadow: 0 0 20px var(--fh-rebel);
+            margin: -0.2em 0;
+        }
+
+        .fh-title .money {
+            color: var(--fh-anarchy);
+            text-shadow: 0 0 20px var(--fh-anarchy);
+        }
+
+        .fh-tagline {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--fh-gray-300);
+            margin-bottom: var(--fh-space-2xl);
+            font-weight: 300;
+        }
+
+        .fh-ascii {
+            font-family: var(--fh-font-mono);
+            font-size: clamp(0.5rem, 1.5vw, 0.875rem);
+            color: var(--fh-punk);
+            white-space: pre;
+            line-height: 1;
+            margin-bottom: var(--fh-space-xl);
+            opacity: 0.8;
+        }
+
+        /* Glitch Effect */
+        @keyframes glitch {
+            0%, 100% {
+                text-shadow:
+                    2px 2px var(--fh-punk),
+                    -2px -2px var(--fh-rebel);
+            }
+            25% {
+                text-shadow:
+                    -2px 2px var(--fh-anarchy),
+                    2px -2px var(--fh-punk);
+            }
+            50% {
+                text-shadow:
+                    2px -2px var(--fh-rebel),
+                    -2px 2px var(--fh-anarchy);
+            }
+            75% {
+                text-shadow:
+                    -2px -2px var(--fh-punk),
+                    2px 2px var(--fh-rebel);
+            }
+        }
+
+        .fh-title:hover {
+            animation: glitch 0.3s infinite;
+        }
+
+        /* Button */
+        .fh-btn {
+            display: inline-block;
+            padding: var(--fh-space-md) var(--fh-space-2xl);
+            font-family: var(--fh-font-display);
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--fh-punk);
+            border: 2px solid var(--fh-punk);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.05em;
+        }
+
+        .fh-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--fh-punk);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .fh-btn:hover {
+            color: var(--fh-black);
+        }
+
+        .fh-btn:hover::before {
+            left: 0;
+        }
+
+        .fh-btn:hover {
+            box-shadow: 0 0 30px var(--fh-punk);
+        }
+
+        /* Manifesto Section */
+        .fh-manifesto {
+            padding: var(--fh-space-3xl) 0;
+            background: var(--fh-gray-900);
+        }
+
+        .fh-manifesto__content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .fh-manifesto h2 {
+            color: var(--fh-punk);
+            text-align: center;
+        }
+
+        .fh-manifesto p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: var(--fh-space-lg);
+            color: var(--fh-gray-300);
+        }
+
+        .fh-manifesto strong {
+            color: var(--fh-rebel);
+            font-weight: 600;
+        }
+
+        /* Coming Soon */
+        .fh-coming-soon {
+            padding: var(--fh-space-3xl) 0;
+            text-align: center;
+            background: var(--fh-black);
+            border-top: 1px solid var(--fh-gray-800);
+        }
+
+        .fh-coming-soon h2 {
+            color: var(--fh-anarchy);
+            margin-bottom: var(--fh-space-2xl);
+        }
+
+        .fh-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--fh-space-lg);
+            margin-bottom: var(--fh-space-2xl);
+        }
+
+        .fh-card {
+            background: var(--fh-gray-900);
+            border: 1px solid var(--fh-gray-800);
+            padding: var(--fh-space-lg);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .fh-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--fh-punk);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .fh-card:hover {
+            border-color: var(--fh-punk);
+            transform: translateY(-2px);
+        }
+
+        .fh-card:hover::before {
+            opacity: 1;
+        }
+
+        .fh-card h3 {
+            font-family: var(--fh-font-display);
+            font-size: 1.5rem;
+            color: var(--fh-white);
+            margin-bottom: var(--fh-space-sm);
+        }
+
+        .fh-card p {
+            color: var(--fh-gray-500);
+            font-size: 0.875rem;
+        }
+
+        /* Footer */
+        .fh-footer {
+            padding: var(--fh-space-xl) 0;
+            text-align: center;
+            border-top: 1px solid var(--fh-gray-800);
+            color: var(--fh-gray-500);
+            font-family: var(--fh-font-mono);
+            font-size: 0.875rem;
+        }
+
+        .fh-footer a {
+            color: var(--fh-punk);
+            text-decoration: none;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .fh-ascii {
+                display: none;
+            }
+
+            .fh-hero {
+                padding: var(--fh-space-2xl) var(--fh-space-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="fh-hero">
+        <div class="fh-hero__content">
+            <pre class="fh-ascii">
+ _____ _   _   __  __
+|  ___| | | | |  \/  | ___  _ __   ___ _   _
+| |_  | | | | | |\/| |/ _ \| '_ \ / _ \ | | |
+|  _| | |_| | | |  | | (_) | | | |  __/ |_| |
+|_|    \___/  |_|  |_|\___/|_| |_|\___|\__, |
+                                        |___/
+            </pre>
+
+            <h1 class="fh-title">
+                <span class="franklin">FRANKLIN</span>
+                <span class="hugh">HUGH</span>
+                <span class="money">MONEY</span>
+            </h1>
+
+            <p class="fh-tagline">Building Wealth with a Middle Finger to the Establishment</p>
+
+            <a href="#manifesto" class="fh-btn">Enter the Rebellion</a>
+        </div>
+    </section>
+
+    <!-- Manifesto Section -->
+    <section class="fh-manifesto" id="manifesto">
+        <div class="fh-container">
+            <div class="fh-manifesto__content">
+                <h2>The F.U. Money Manifesto</h2>
+
+                <p>
+                    <strong>Franklin Hugh Money</strong> isn't just a clever play on words. It's a declaration of financial independence.
+                </p>
+
+                <p>
+                    The financial industry wants you confused, dependent, and poor. They profit from complexity, thrive on your ignorance, and build empires on the backs of people living paycheck to paycheck.
+                </p>
+
+                <p>
+                    <strong>F*ck that.</strong>
+                </p>
+
+                <p>
+                    This is my journey from financial nobody to somebody who actually understands this game. No suits. No bullsh*t. No sugar-coating. Just raw, honest documentation of building real wealth while keeping my soul intact.
+                </p>
+
+                <p>
+                    I'm starting with an SEI certification and a chip on my shoulder. Every win, every loss, every lesson learned the hard way - it's all here. Real numbers. Real strategies. Real talk about money that your financial advisor won't give you because they're too busy selling you their high-fee garbage.
+                </p>
+
+                <p>
+                    <strong>This is financial education for people who hate finance but love freedom.</strong>
+                </p>
+
+                <p>
+                    Join me as I build my F.U. Money - enough wealth to say "f*ck you" to any job, any boss, any system that tries to keep me down. This is how we win. This is how we build wealth with rebellion.
+                </p>
+
+                <p>
+                    Welcome to Franklin Hugh Money.<br>
+                    <strong>Stay punk. Get paid.</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="fh-coming-soon">
+        <div class="fh-container">
+            <h2>Loading the Revolution...</h2>
+
+            <div class="fh-grid">
+                <div class="fh-card">
+                    <h3>The Journey</h3>
+                    <p>Weekly updates on building wealth from zero</p>
+                </div>
+
+                <div class="fh-card">
+                    <h3>F.U. Lessons</h3>
+                    <p>Financial education without the corporate BS</p>
+                </div>
+
+                <div class="fh-card">
+                    <h3>Tools</h3>
+                    <p>Calculators and trackers that actually help</p>
+                </div>
+
+                <div class="fh-card">
+                    <h3>Rants</h3>
+                    <p>Calling out the system's bullsh*t</p>
+                </div>
+            </div>
+
+            <p style="color: var(--fh-gray-500); margin-top: var(--fh-space-2xl);">
+                Full site launching soon. The revolution begins 2025.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="fh-footer">
+        <div class="fh-container">
+            <p>© 2024 Franklin Hugh Money | Part of <a href="https://drewgarraway.com" target="_blank">Drew Garraway</a></p>
+            <p style="margin-top: var(--fh-space-sm);">This site is not indexed by search engines. Access via drewgarraway.com only.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple console easter egg
+        console.log('%c FRANKLIN HUGH MONEY ', 'background: #00FF00; color: #000; font-size: 20px; font-weight: bold; padding: 10px;');
+        console.log('%c Building F.U. Money Since 2024 ', 'background: #000; color: #00FF00; padding: 5px;');
+        console.log('Want to join the rebellion? Check back soon...');
+    </script>
+</body>
+</html>
