@@ -1,10 +1,10 @@
-# Franklin Hugh Money 💰🤘
+# Franklin Hugh Money
 
-> Building F.U. Money with a punk rock attitude
+> An Investment in Knowledge
 
 ## What is This?
 
-Franklin Hugh Money is a personal finance journey documentation project. It's a tongue-in-cheek reference to "F.U. Money" - building enough wealth to have true financial independence, documented with authenticity and rebellion against traditional financial advice.
+Franklin Hugh Money is a personal finance documentation project chronicling one individual's journey toward financial independence. Named after Benjamin Franklin and Hugh (a family name that completes the acronym rather conveniently), it documents the patient accumulation of wealth through index fund investing.
 
 ## Project Status
 
@@ -70,23 +70,23 @@ _franklin_hugh_money/
 
 - **Not Indexed**: Blocked from search engines via robots.txt
 - **Linked Only**: Accessible via drewgarraway.com sitemap
-- **Punk Aesthetic**: Neon colors, glitch effects, rebellious tone
+- **Institutional Design**: Clean, professional aesthetic with subtle personality
 - **Real Journey**: Actual financial progress documentation
-- **Educational**: Complex concepts explained simply
+- **Educational**: Complex concepts explained clearly
 
 ## Technology Stack
 
 - **Current**: Vanilla HTML/CSS/JS
-- **Styling**: Custom CSS with punk-rock design system
-- **Fonts**: Bebas Neue (display), Inter (body), JetBrains Mono (code)
-- **Colors**: Neon green (#00FF00), Hot pink (#FF1493), Electric blue (#00FFFF)
+- **Styling**: Custom CSS with institutional design system
+- **Fonts**: Crimson Pro (serif display), Inter (body), IBM Plex Mono (data)
+- **Colors**: Navy (#002D62), Cream (#FFFDF7), Sage (#7C9885)
 - **Hosting**: Cloudflare Pages (planned)
 
 ## Development Philosophy
 
 1. **Build to Scale**: Start simple but architect for growth
 2. **Document Everything**: Comprehensive documentation for AI collaboration
-3. **Punk Rock Attitude**: Rebellious tone, authentic voice
+3. **Thoughtful Voice**: Clear, approachable writing with occasional wit
 4. **Real Numbers**: Actual financial data (anonymized as needed)
 5. **Progressive Enhancement**: Works without JavaScript
 
@@ -132,10 +132,10 @@ This is a personal project, but if you're interested in the journey:
 
 ## Legal
 
-This is not financial advice. Just one person's journey to financial independence, documented with punk rock energy.
+This is not financial advice. Simply one person's documented journey toward financial independence through index fund investing.
 
 ---
 
-**Stay punk. Get paid.** 🤘💰
+*"An investment in knowledge pays the best interest."* – Benjamin Franklin
 
-*Franklin Hugh Money - Because F.U. Money sounds better in a suit.*
+*Franklin Hugh Money - Building wealth through patient investing.*

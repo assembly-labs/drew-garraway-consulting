@@ -4,43 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-    <meta name="description" content="Franklin Hugh Money - Building F.U. Money with a punk rock attitude. A financial journey from zero to expertise.">
+    <meta name="description" content="Franklin Hugh Money - A personal documentation of building wealth through patient index fund investing.">
 
-    <title>Franklin Hugh Money - Building Wealth with Rebellion</title>
+    <title>Franklin Hugh Money | An Investment in Knowledge</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* Core Colors */
-            --fh-black: #0A0A0A;
-            --fh-white: #FAFAFA;
-            --fh-punk: #00FF00;
-            --fh-rebel: #FF1493;
-            --fh-anarchy: #00FFFF;
-            --fh-danger: #FF0040;
+            /* Primary Institutional Colors */
+            --fh-navy: #002D62;
+            --fh-cream: #FFFDF7;
+            --fh-gray: #54585A;
 
-            /* Grays */
+            /* Secondary Colors */
+            --fh-sage: #7C9885;
+            --fh-burgundy: #6B2737;
+            --fh-gold: #B08D57;
+
+            /* Neutral Scale */
             --fh-gray-900: #1A1A1A;
-            --fh-gray-800: #2A2A2A;
             --fh-gray-700: #404040;
+            --fh-gray-600: #595959;
             --fh-gray-500: #737373;
             --fh-gray-300: #D4D4D4;
+            --fh-gray-200: #E5E5E5;
+            --fh-gray-100: #F5F5F5;
+            --fh-white: #FFFFFF;
 
-            /* Fonts */
-            --fh-font-display: 'Bebas Neue', sans-serif;
-            --fh-font-body: 'Inter', sans-serif;
-            --fh-font-mono: 'JetBrains Mono', monospace;
+            /* Typography */
+            --fh-font-display: 'Crimson Pro', Georgia, serif;
+            --fh-font-body: 'Inter', -apple-system, sans-serif;
+            --fh-font-mono: 'IBM Plex Mono', monospace;
 
             /* Spacing */
+            --fh-space-xs: 0.25rem;
             --fh-space-sm: 0.5rem;
             --fh-space-md: 1rem;
             --fh-space-lg: 1.5rem;
             --fh-space-xl: 2rem;
             --fh-space-2xl: 3rem;
             --fh-space-3xl: 4rem;
+            --fh-space-4xl: 6rem;
         }
 
         * {
@@ -51,407 +58,454 @@
 
         body {
             font-family: var(--fh-font-body);
-            background: var(--fh-black);
-            color: var(--fh-white);
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
+            font-size: 16px;
+            line-height: 1.75;
+            color: var(--fh-gray-900);
+            background: var(--fh-cream);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Typography */
-        h1 {
+        h1, h2, h3 {
             font-family: var(--fh-font-display);
-            font-size: clamp(3rem, 10vw, 6rem);
-            line-height: 1;
-            letter-spacing: 0.02em;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            letter-spacing: -0.02em;
+            color: var(--fh-navy);
         }
 
         h2 {
-            font-family: var(--fh-font-display);
-            font-size: clamp(2rem, 6vw, 3rem);
-            line-height: 1.1;
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
             margin-bottom: var(--fh-space-lg);
+            color: var(--fh-navy);
+        }
+
+        h3 {
+            font-size: clamp(1.25rem, 2vw, 1.75rem);
+            margin-bottom: var(--fh-space-md);
+        }
+
+        p {
+            margin-bottom: var(--fh-space-md);
+            color: var(--fh-gray-700);
+        }
+
+        a {
+            color: var(--fh-navy);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            text-decoration-thickness: 2px;
         }
 
         /* Layout */
-        .fh-container {
-            max-width: 1280px;
+        .container {
+            max-width: 1024px;
             margin: 0 auto;
-            padding: 0 var(--fh-space-md);
+            padding: 0 var(--fh-space-lg);
         }
 
-        /* Hero Section */
-        .fh-hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .prose {
+            max-width: 65ch;
+            margin: 0 auto;
+        }
+
+        .text-center {
             text-align: center;
-            position: relative;
-            background: linear-gradient(180deg, var(--fh-black) 0%, var(--fh-gray-900) 100%);
         }
 
-        .fh-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image:
-                repeating-linear-gradient(0deg, transparent, transparent 2px, var(--fh-gray-900) 2px, var(--fh-gray-900) 4px),
-                repeating-linear-gradient(90deg, transparent, transparent 2px, var(--fh-gray-900) 2px, var(--fh-gray-900) 4px);
-            opacity: 0.1;
-            pointer-events: none;
+        /* Header */
+        .header {
+            padding: var(--fh-space-4xl) 0;
+            text-align: center;
+            border-bottom: 1px solid var(--fh-gray-200);
+            background: var(--fh-white);
         }
 
-        .fh-hero__content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .fh-title {
-            margin-bottom: var(--fh-space-xl);
-            position: relative;
-            display: inline-block;
-        }
-
-        .fh-title span {
-            display: block;
-        }
-
-        .fh-title .franklin {
-            color: var(--fh-punk);
-            text-shadow: 0 0 20px var(--fh-punk);
-        }
-
-        .fh-title .hugh {
-            color: var(--fh-rebel);
-            text-shadow: 0 0 20px var(--fh-rebel);
-            margin: -0.2em 0;
-        }
-
-        .fh-title .money {
-            color: var(--fh-anarchy);
-            text-shadow: 0 0 20px var(--fh-anarchy);
-        }
-
-        .fh-tagline {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            color: var(--fh-gray-300);
-            margin-bottom: var(--fh-space-2xl);
+        .header__subtitle {
+            font-family: var(--fh-font-display);
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--fh-gray-600);
+            margin-top: var(--fh-space-sm);
             font-weight: 300;
         }
 
-        .fh-ascii {
-            font-family: var(--fh-font-mono);
-            font-size: clamp(0.5rem, 1.5vw, 0.875rem);
-            color: var(--fh-punk);
-            white-space: pre;
-            line-height: 1;
-            margin-bottom: var(--fh-space-xl);
-            opacity: 0.8;
+        /* Navigation */
+        .nav {
+            margin-top: var(--fh-space-2xl);
+            display: flex;
+            justify-content: center;
+            gap: var(--fh-space-xl);
+            flex-wrap: wrap;
         }
 
-        /* Glitch Effect */
-        @keyframes glitch {
-            0%, 100% {
-                text-shadow:
-                    2px 2px var(--fh-punk),
-                    -2px -2px var(--fh-rebel);
-            }
-            25% {
-                text-shadow:
-                    -2px 2px var(--fh-anarchy),
-                    2px -2px var(--fh-punk);
-            }
-            50% {
-                text-shadow:
-                    2px -2px var(--fh-rebel),
-                    -2px 2px var(--fh-anarchy);
-            }
-            75% {
-                text-shadow:
-                    -2px -2px var(--fh-punk),
-                    2px 2px var(--fh-rebel);
-            }
-        }
-
-        .fh-title:hover {
-            animation: glitch 0.3s infinite;
-        }
-
-        /* Button */
-        .fh-btn {
-            display: inline-block;
-            padding: var(--fh-space-md) var(--fh-space-2xl);
-            font-family: var(--fh-font-display);
-            font-size: 1.25rem;
+        .nav a {
+            font-size: 0.95rem;
             text-transform: uppercase;
+            letter-spacing: 0.1em;
             text-decoration: none;
-            color: var(--fh-punk);
-            border: 2px solid var(--fh-punk);
-            background: transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            letter-spacing: 0.05em;
+            color: var(--fh-gray-700);
+            font-weight: 500;
+            transition: color 0.2s ease;
         }
 
-        .fh-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--fh-punk);
-            transition: left 0.3s ease;
-            z-index: -1;
+        .nav a:hover {
+            color: var(--fh-navy);
         }
 
-        .fh-btn:hover {
-            color: var(--fh-black);
-        }
-
-        .fh-btn:hover::before {
-            left: 0;
-        }
-
-        .fh-btn:hover {
-            box-shadow: 0 0 30px var(--fh-punk);
-        }
-
-        /* Manifesto Section */
-        .fh-manifesto {
+        /* Main Content */
+        .section {
             padding: var(--fh-space-3xl) 0;
-            background: var(--fh-gray-900);
         }
 
-        .fh-manifesto__content {
-            max-width: 800px;
-            margin: 0 auto;
+        .section--alt {
+            background: var(--fh-white);
         }
 
-        .fh-manifesto h2 {
-            color: var(--fh-punk);
-            text-align: center;
-        }
-
-        .fh-manifesto p {
+        /* Introduction */
+        .intro {
             font-size: 1.125rem;
             line-height: 1.8;
-            margin-bottom: var(--fh-space-lg);
-            color: var(--fh-gray-300);
+            color: var(--fh-gray-700);
         }
 
-        .fh-manifesto strong {
-            color: var(--fh-rebel);
-            font-weight: 600;
+        .intro strong {
+            color: var(--fh-navy);
+            font-weight: 500;
         }
 
-        /* Coming Soon */
-        .fh-coming-soon {
-            padding: var(--fh-space-3xl) 0;
-            text-align: center;
-            background: var(--fh-black);
-            border-top: 1px solid var(--fh-gray-800);
-        }
-
-        .fh-coming-soon h2 {
-            color: var(--fh-anarchy);
-            margin-bottom: var(--fh-space-2xl);
-        }
-
-        .fh-grid {
+        /* Philosophy Cards */
+        .philosophy-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--fh-space-lg);
-            margin-bottom: var(--fh-space-2xl);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--fh-space-xl);
+            margin-top: var(--fh-space-2xl);
         }
 
-        .fh-card {
-            background: var(--fh-gray-900);
-            border: 1px solid var(--fh-gray-800);
-            padding: var(--fh-space-lg);
-            position: relative;
-            transition: all 0.3s ease;
+        .philosophy-card {
+            background: var(--fh-white);
+            padding: var(--fh-space-xl);
+            border: 1px solid var(--fh-gray-200);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s ease;
         }
 
-        .fh-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--fh-punk);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .philosophy-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
         }
 
-        .fh-card:hover {
-            border-color: var(--fh-punk);
-            transform: translateY(-2px);
-        }
-
-        .fh-card:hover::before {
-            opacity: 1;
-        }
-
-        .fh-card h3 {
-            font-family: var(--fh-font-display);
-            font-size: 1.5rem;
-            color: var(--fh-white);
+        .philosophy-card h3 {
+            font-family: var(--fh-font-body);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--fh-navy);
             margin-bottom: var(--fh-space-sm);
         }
 
-        .fh-card p {
-            color: var(--fh-gray-500);
-            font-size: 0.875rem;
+        .philosophy-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
-        /* Footer */
-        .fh-footer {
-            padding: var(--fh-space-xl) 0;
-            text-align: center;
-            border-top: 1px solid var(--fh-gray-800);
-            color: var(--fh-gray-500);
+        /* Performance Section */
+        .performance {
             font-family: var(--fh-font-mono);
-            font-size: 0.875rem;
+            background: var(--fh-white);
+            padding: var(--fh-space-xl);
+            border: 1px solid var(--fh-gray-200);
+            margin: var(--fh-space-2xl) 0;
         }
 
-        .fh-footer a {
-            color: var(--fh-punk);
+        .performance__title {
+            font-family: var(--fh-font-display);
+            font-size: 1.25rem;
+            margin-bottom: var(--fh-space-lg);
+            color: var(--fh-navy);
+        }
+
+        .performance__row {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--fh-space-sm) 0;
+            border-bottom: 1px solid var(--fh-gray-200);
+        }
+
+        .performance__row:last-child {
+            border-bottom: none;
+        }
+
+        .performance__label {
+            font-size: 0.875rem;
+            color: var(--fh-gray-600);
+        }
+
+        .performance__value {
+            font-weight: 500;
+            color: var(--fh-gray-900);
+        }
+
+        .performance__value--positive {
+            color: var(--fh-sage);
+        }
+
+        .performance__value--negative {
+            color: var(--fh-burgundy);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: var(--fh-space-3xl) 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: var(--fh-space-md) var(--fh-space-2xl);
+            background: var(--fh-navy);
+            color: var(--fh-cream);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.025em;
+            border-radius: 2px;
+            transition: background 0.2s ease;
+        }
+
+        .button:hover {
+            background: var(--fh-gray-900);
             text-decoration: none;
         }
 
-        /* Mobile Adjustments */
+        .button--secondary {
+            background: transparent;
+            color: var(--fh-navy);
+            border: 1px solid var(--fh-navy);
+        }
+
+        .button--secondary:hover {
+            background: var(--fh-navy);
+            color: var(--fh-cream);
+        }
+
+        /* Footer */
+        .footer {
+            padding: var(--fh-space-2xl) 0;
+            text-align: center;
+            border-top: 1px solid var(--fh-gray-200);
+            background: var(--fh-white);
+        }
+
+        .footer__text {
+            font-size: 0.875rem;
+            color: var(--fh-gray-600);
+            margin-bottom: var(--fh-space-xs);
+        }
+
+        .footer__disclaimer {
+            font-size: 0.75rem;
+            color: var(--fh-gray-500);
+            font-style: italic;
+        }
+
+        /* Quote */
+        .quote {
+            padding: var(--fh-space-2xl);
+            border-left: 3px solid var(--fh-sage);
+            margin: var(--fh-space-2xl) 0;
+            font-style: italic;
+            color: var(--fh-gray-700);
+        }
+
+        .quote__attribution {
+            margin-top: var(--fh-space-md);
+            font-size: 0.875rem;
+            color: var(--fh-gray-600);
+            font-style: normal;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .fh-ascii {
-                display: none;
+            .nav {
+                gap: var(--fh-space-md);
             }
 
-            .fh-hero {
-                padding: var(--fh-space-2xl) var(--fh-space-md);
+            .philosophy-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="fh-hero">
-        <div class="fh-hero__content">
-            <pre class="fh-ascii">
- _____ _   _   __  __
-|  ___| | | | |  \/  | ___  _ __   ___ _   _
-| |_  | | | | | |\/| |/ _ \| '_ \ / _ \ | | |
-|  _| | |_| | | |  | | (_) | | | |  __/ |_| |
-|_|    \___/  |_|  |_|\___/|_| |_|\___|\__, |
-                                        |___/
-            </pre>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>Franklin Hugh Money</h1>
+            <p class="header__subtitle">An Investment in Knowledge</p>
 
-            <h1 class="fh-title">
-                <span class="franklin">FRANKLIN</span>
-                <span class="hugh">HUGH</span>
-                <span class="money">MONEY</span>
-            </h1>
-
-            <p class="fh-tagline">Building Wealth with a Middle Finger to the Establishment</p>
-
-            <a href="#manifesto" class="fh-btn">Enter the Rebellion</a>
+            <nav class="nav">
+                <a href="#philosophy">Philosophy</a>
+                <a href="#approach">Approach</a>
+                <a href="#progress">Progress</a>
+                <a href="#resources">Resources</a>
+            </nav>
         </div>
-    </section>
+    </header>
 
-    <!-- Manifesto Section -->
-    <section class="fh-manifesto" id="manifesto">
-        <div class="fh-container">
-            <div class="fh-manifesto__content">
-                <h2>The F.U. Money Manifesto</h2>
-
+    <!-- Introduction -->
+    <section class="section">
+        <div class="container prose">
+            <div class="intro">
                 <p>
-                    <strong>Franklin Hugh Money</strong> isn't just a clever play on words. It's a declaration of financial independence.
+                    <strong>Franklin Hugh Money</strong> documents one individual's journey from financial confusion to, hopefully, financial independence.
                 </p>
-
                 <p>
-                    The financial industry wants you confused, dependent, and poor. They profit from complexity, thrive on your ignorance, and build empires on the backs of people living paycheck to paycheck.
+                    Named after Benjamin Franklin (whose wisdom on compound interest remains surprisingly relevant) and Hugh (a family name that completes the acronym rather conveniently), this project chronicles the patient accumulation of wealth through remarkably boring methods.
                 </p>
-
                 <p>
-                    <strong>F*ck that.</strong>
-                </p>
-
-                <p>
-                    This is my journey from financial nobody to somebody who actually understands this game. No suits. No bullsh*t. No sugar-coating. Just raw, honest documentation of building real wealth while keeping my soul intact.
-                </p>
-
-                <p>
-                    I'm starting with an SEI certification and a chip on my shoulder. Every win, every loss, every lesson learned the hard way - it's all here. Real numbers. Real strategies. Real talk about money that your financial advisor won't give you because they're too busy selling you their high-fee garbage.
-                </p>
-
-                <p>
-                    <strong>This is financial education for people who hate finance but love freedom.</strong>
-                </p>
-
-                <p>
-                    Join me as I build my F.U. Money - enough wealth to say "f*ck you" to any job, any boss, any system that tries to keep me down. This is how we win. This is how we build wealth with rebellion.
-                </p>
-
-                <p>
-                    Welcome to Franklin Hugh Money.<br>
-                    <strong>Stay punk. Get paid.</strong>
+                    No day trading. No cryptocurrency speculation. No get-rich-quick schemes. Just index funds, patience, and the occasional observation about why this is all harder than it needs to be.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Coming Soon Section -->
-    <section class="fh-coming-soon">
-        <div class="fh-container">
-            <h2>Loading the Revolution...</h2>
+    <!-- Philosophy -->
+    <section class="section section--alt" id="philosophy">
+        <div class="container">
+            <h2 class="text-center">Investment Philosophy</h2>
 
-            <div class="fh-grid">
-                <div class="fh-card">
-                    <h3>The Journey</h3>
-                    <p>Weekly updates on building wealth from zero</p>
-                </div>
-
-                <div class="fh-card">
-                    <h3>F.U. Lessons</h3>
-                    <p>Financial education without the corporate BS</p>
-                </div>
-
-                <div class="fh-card">
-                    <h3>Tools</h3>
-                    <p>Calculators and trackers that actually help</p>
-                </div>
-
-                <div class="fh-card">
-                    <h3>Rants</h3>
-                    <p>Calling out the system's bullsh*t</p>
-                </div>
+            <div class="prose">
+                <p class="text-center" style="margin-bottom: var(--fh-space-2xl);">
+                    The strategy employed here would disappoint anyone seeking excitement.
+                </p>
             </div>
 
-            <p style="color: var(--fh-gray-500); margin-top: var(--fh-space-2xl);">
-                Full site launching soon. The revolution begins 2025.
-            </p>
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <h3>Simplicity Over Complexity</h3>
+                    <p>The best investment strategy fits on an index card. The financial industry exists largely to convince you otherwise.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <h3>Time Over Timing</h3>
+                    <p>Success comes from time in the market, not timing the market. Though everyone thinks they're the exception.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <h3>Costs Matter</h3>
+                    <p>A 2% fee is 25% of expected returns. Compounded over decades, that's retirement at 60 versus 70.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <h3>Documentation Helps</h3>
+                    <p>Writing forces clarity. Publishing creates accountability. Even if nobody reads it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approach -->
+    <section class="section" id="approach">
+        <div class="container">
+            <div class="prose">
+                <h2>The Approach</h2>
+
+                <p>The methodology is embarrassingly simple:</p>
+
+                <ol style="margin-left: var(--fh-space-xl); color: var(--fh-gray-700);">
+                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Live below my means</strong> – Spend less than earned (revolutionary, I know)</li>
+                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Invest the difference</strong> – In low-cost index funds</li>
+                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Wait</strong> – The hardest part</li>
+                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Document everything</strong> – For science, or perhaps masochism</li>
+                </ol>
+
+                <p style="margin-top: var(--fh-space-lg);">
+                    This approach has decades of academic validation and requires no special skill, which may explain why the financial services industry rarely mentions it.
+                </p>
+
+                <div class="performance">
+                    <h3 class="performance__title">Current Snapshot</h3>
+                    <div class="performance__row">
+                        <span class="performance__label">Portfolio Value</span>
+                        <span class="performance__value">Coming Soon</span>
+                    </div>
+                    <div class="performance__row">
+                        <span class="performance__label">Monthly Contribution</span>
+                        <span class="performance__value">$2,000</span>
+                    </div>
+                    <div class="performance__row">
+                        <span class="performance__label">Time Horizon</span>
+                        <span class="performance__value">20+ years</span>
+                    </div>
+                    <div class="performance__row">
+                        <span class="performance__label">Strategy</span>
+                        <span class="performance__value">Buy & Hold Index Funds</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote -->
+    <section class="section section--alt">
+        <div class="container">
+            <div class="prose">
+                <blockquote class="quote">
+                    "An investment in knowledge pays the best interest."
+                    <div class="quote__attribution">
+                        — Benjamin Franklin<br>
+                        <span style="font-size: 0.875rem; color: var(--fh-gray-500);">(Though he failed to mention it compounds tax-deferred)</span>
+                    </div>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress -->
+    <section class="section" id="progress">
+        <div class="container">
+            <div class="prose">
+                <h2>Documentation in Progress</h2>
+
+                <p>This project officially begins January 2025. Planned content includes:</p>
+
+                <ul style="margin-left: var(--fh-space-xl); color: var(--fh-gray-700);">
+                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Monthly Updates</strong> – Portfolio performance and lessons learned</li>
+                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Quarterly Letters</strong> – Deeper analysis and observations</li>
+                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Investment Tools</strong> – Calculators that actually help</li>
+                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Resources</strong> – Curated reading that matters</li>
+                </ul>
+
+                <div class="cta">
+                    <a href="#" class="button button--secondary">Coming January 2025</a>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="fh-footer">
-        <div class="fh-container">
-            <p>© 2024 Franklin Hugh Money | Part of <a href="https://drewgarraway.com" target="_blank">Drew Garraway</a></p>
-            <p style="margin-top: var(--fh-space-sm);">This site is not indexed by search engines. Access via drewgarraway.com only.</p>
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__text">
+                © 2024 Franklin Hugh Money | A Project by <a href="https://drewgarraway.com">Drew Garraway</a>
+            </p>
+            <p class="footer__disclaimer">
+                Nothing here constitutes financial advice. Past performance does not guarantee future results. Your mileage will vary.
+            </p>
         </div>
     </footer>
 
     <script>
-        // Simple console easter egg
-        console.log('%c FRANKLIN HUGH MONEY ', 'background: #00FF00; color: #000; font-size: 20px; font-weight: bold; padding: 10px;');
-        console.log('%c Building F.U. Money Since 2024 ', 'background: #000; color: #00FF00; padding: 5px;');
-        console.log('Want to join the rebellion? Check back soon...');
+        // Subtle console message
+        console.log('%cFranklin Hugh Money', 'font-family: Georgia; font-size: 16px; color: #002D62;');
+        console.log('An investment in knowledge pays the best interest.');
+        console.log('(Yes, the acronym spells what you think it does.)');
     </script>
 </body>
 </html>

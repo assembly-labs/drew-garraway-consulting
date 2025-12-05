@@ -21,9 +21,9 @@
 ## 2. PROJECT CONTEXT & PHILOSOPHY
 
 ### FRANKLIN HUGH MONEY CORE PRINCIPLES:
-- **Mission**: Document Drew's journey from SEI certification to financial expertise
-- **Tone**: Punk-rock approach to personal finance ("F U Money")
-- **Attitude**: Building wealth with irreverence and authenticity
+- **Mission**: Document Drew's journey from SEI certification to financial independence
+- **Tone**: Thoughtful, approachable financial documentation with subtle wit
+- **Voice**: Clear, modern language with occasional clever observations
 - **Privacy**: NOT searchable by search engines (robots.txt blocks all bots)
 - **Integration**: Linked from main drewgarraway.com sitemap only
 
@@ -44,7 +44,7 @@
 <!-- CORRECT STRUCTURE -->
 <article class="fh-card" data-component="lesson-card">
   <header class="fh-card__header">
-    <h2 class="fh-card__title">Compound Interest is Punk Rock</h2>
+    <h2 class="fh-card__title">Understanding Compound Interest</h2>
     <time class="fh-card__date" datetime="2024-01-15">Jan 15, 2024</time>
   </header>
   <div class="fh-card__content">
@@ -69,9 +69,9 @@
 
 /* Custom Properties */
 :root {
-  --fh-color-punk: #00FF00;     /* Neon Green */
-  --fh-color-rebel: #FF1493;    /* Hot Pink */
-  --fh-color-anarchy: #00FFFF;  /* Electric Blue */
+  --fh-navy: #002D62;           /* Institutional Navy */
+  --fh-cream: #FFFDF7;          /* Paper Cream */
+  --fh-sage: #7C9885;           /* Sage Green (Growth) */
 }
 ```
 

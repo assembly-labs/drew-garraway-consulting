@@ -1,5 +1,5 @@
 # Franklin Hugh Money Design System
-## "Building Wealth with Attitude"
+## "An Investment in Knowledge"
 
 ---
 
@@ -8,17 +8,17 @@
 ### Primary Colors
 ```css
 :root {
-  /* Core Punk Colors */
-  --fh-black: #0A0A0A;        /* Deep Black */
-  --fh-white: #FAFAFA;        /* Off White */
-  --fh-punk: #00FF00;         /* Neon Green (Primary Action) */
+  /* Primary Institutional Colors */
+  --fh-navy: #002D62;         /* Institutional Navy */
+  --fh-cream: #FFFDF7;        /* Paper Cream */
+  --fh-gray: #54585A;         /* Warm Gray */
 
-  /* Accent Colors */
-  --fh-rebel: #FF1493;        /* Hot Pink (Emphasis) */
-  --fh-anarchy: #00FFFF;      /* Electric Blue (Links) */
-  --fh-danger: #FF0040;       /* Blood Red (Warnings) */
+  /* Secondary Colors */
+  --fh-sage: #7C9885;         /* Sage Green (Growth) */
+  --fh-burgundy: #6B2737;     /* Burgundy (Losses) */
+  --fh-gold: #B08D57;         /* Gold (Achievements) */
 
-  /* Grays */
+  /* Neutral Scale */
   --fh-gray-900: #1A1A1A;
   --fh-gray-800: #2A2A2A;
   --fh-gray-700: #404040;
@@ -28,16 +28,18 @@
   --fh-gray-300: #D4D4D4;
   --fh-gray-200: #E5E5E5;
   --fh-gray-100: #F5F5F5;
+  --fh-white: #FFFFFF;
 }
 ```
 
 ### Color Usage
-- **Background**: Black/Gray-900
-- **Text**: White/Gray-100
-- **Links**: Anarchy (electric blue)
-- **CTAs**: Punk (neon green)
-- **Emphasis**: Rebel (hot pink)
-- **Warnings**: Danger (blood red)
+- **Background**: Cream/White
+- **Text**: Navy/Gray-900
+- **Links**: Navy (hover: underlined)
+- **Primary CTAs**: Navy background, cream text
+- **Success/Growth**: Sage green
+- **Losses/Warnings**: Burgundy
+- **Achievements**: Gold accents
 
 ---
 
@@ -46,33 +48,57 @@
 ### Font Stack
 ```css
 :root {
-  /* Headings - Bold & Aggressive */
-  --fh-font-display: 'Bebas Neue', 'Impact', sans-serif;
+  /* Headlines - Classical Serif */
+  --fh-font-display: 'Crimson Pro', 'EB Garamond', Georgia, serif;
 
-  /* Body - Clean & Readable */
-  --fh-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Body - Clean Sans */
+  --fh-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  /* Code/Numbers - Monospace */
-  --fh-font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  /* Data/Numbers - Precise Mono */
+  --fh-font-mono: 'IBM Plex Mono', 'SF Mono', 'Consolas', monospace;
 }
 ```
 
 ### Type Scale
 ```css
 /* Mobile First */
-.fh-h1 { font-size: 2.5rem; line-height: 1.1; }    /* 40px */
-.fh-h2 { font-size: 2rem; line-height: 1.2; }      /* 32px */
-.fh-h3 { font-size: 1.5rem; line-height: 1.3; }    /* 24px */
-.fh-h4 { font-size: 1.25rem; line-height: 1.4; }   /* 20px */
-.fh-body { font-size: 1rem; line-height: 1.6; }    /* 16px */
-.fh-small { font-size: 0.875rem; line-height: 1.5; } /* 14px */
+.fh-h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.fh-h2 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 400;
+}
+.fh-h3 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+.fh-body {
+  font-size: 1rem;
+  line-height: 1.75;
+  font-weight: 400;
+}
+.fh-small {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.fh-caption {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--fh-gray-600);
+}
 
 /* Desktop (min-width: 768px) */
 @media (min-width: 768px) {
-  .fh-h1 { font-size: 4rem; }     /* 64px */
-  .fh-h2 { font-size: 3rem; }     /* 48px */
-  .fh-h3 { font-size: 2rem; }     /* 32px */
-  .fh-h4 { font-size: 1.5rem; }   /* 24px */
+  .fh-h1 { font-size: 3rem; }
+  .fh-h2 { font-size: 2rem; }
+  .fh-h3 { font-size: 1.5rem; }
+  .fh-body { font-size: 1.125rem; }
 }
 ```
 
@@ -80,7 +106,7 @@
 
 ## 📐 Spacing System
 
-### Base Unit: 8px
+### Base Unit: 8px (Harmonious Proportions)
 ```css
 :root {
   --fh-space-xs: 0.25rem;   /* 4px */
@@ -98,48 +124,35 @@
 
 ## 🎭 Effects & Animations
 
-### Glitch Effect
-```css
-@keyframes fh-glitch {
-  0%, 100% { text-shadow: 2px 2px var(--fh-punk), -2px -2px var(--fh-rebel); }
-  25% { text-shadow: -2px 2px var(--fh-anarchy), 2px -2px var(--fh-punk); }
-  50% { text-shadow: 2px -2px var(--fh-rebel), -2px 2px var(--fh-anarchy); }
-  75% { text-shadow: -2px -2px var(--fh-punk), 2px 2px var(--fh-rebel); }
-}
-
-.fh-glitch {
-  animation: fh-glitch 0.3s infinite;
-}
-
-.fh-glitch-hover:hover {
-  animation: fh-glitch 0.3s infinite;
-}
-```
-
-### Neon Glow
-```css
-.fh-neon {
-  text-shadow:
-    0 0 10px var(--fh-punk),
-    0 0 20px var(--fh-punk),
-    0 0 30px var(--fh-punk),
-    0 0 40px var(--fh-punk);
-}
-
-.fh-neon-pink {
-  text-shadow:
-    0 0 10px var(--fh-rebel),
-    0 0 20px var(--fh-rebel),
-    0 0 30px var(--fh-rebel);
-}
-```
-
-### Transitions
+### Subtle Transitions
 ```css
 :root {
-  --fh-transition-fast: 150ms ease-in-out;
-  --fh-transition-base: 250ms ease-in-out;
-  --fh-transition-slow: 350ms ease-in-out;
+  --fh-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --fh-transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --fh-transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover states are understated */
+a {
+  transition: color var(--fh-transition-fast);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+```
+
+### Loading Animation
+```css
+@keyframes fh-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.fh-loading {
+  animation: fh-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 ```
 
@@ -152,75 +165,121 @@
 .fh-btn {
   /* Base */
   padding: var(--fh-space-sm) var(--fh-space-lg);
-  font-family: var(--fh-font-display);
-  font-size: 1.125rem;
-  text-transform: uppercase;
-  border: 2px solid currentColor;
+  font-family: var(--fh-font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  border: 1px solid currentColor;
   cursor: pointer;
-  transition: all var(--fh-transition-fast);
-  position: relative;
-  overflow: hidden;
+  transition: all var(--fh-transition-base);
+  background: transparent;
+  border-radius: 2px;
 }
 
 .fh-btn--primary {
-  background: var(--fh-black);
-  color: var(--fh-punk);
-  border-color: var(--fh-punk);
+  background: var(--fh-navy);
+  color: var(--fh-cream);
+  border-color: var(--fh-navy);
 }
 
 .fh-btn--primary:hover {
-  background: var(--fh-punk);
-  color: var(--fh-black);
-  box-shadow: 0 0 20px var(--fh-punk);
+  background: var(--fh-gray-900);
+  border-color: var(--fh-gray-900);
 }
 
-.fh-btn--rebel {
-  background: var(--fh-black);
-  color: var(--fh-rebel);
-  border-color: var(--fh-rebel);
+.fh-btn--secondary {
+  color: var(--fh-navy);
+  border-color: var(--fh-navy);
+}
+
+.fh-btn--secondary:hover {
+  background: var(--fh-navy);
+  color: var(--fh-cream);
 }
 ```
 
 ### Cards
 ```css
 .fh-card {
-  background: var(--fh-gray-900);
-  border: 1px solid var(--fh-gray-800);
-  padding: var(--fh-space-lg);
+  background: var(--fh-white);
+  border: 1px solid var(--fh-gray-200);
+  padding: var(--fh-space-xl);
   position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow var(--fh-transition-base);
 }
 
-.fh-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--fh-punk);
+.fh-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+.fh-card__header {
+  border-bottom: 1px solid var(--fh-gray-200);
+  padding-bottom: var(--fh-space-md);
+  margin-bottom: var(--fh-space-lg);
 }
 
 .fh-card--featured {
-  border-color: var(--fh-punk);
-  box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+  border-left: 3px solid var(--fh-sage);
+}
+```
+
+### Tables (Financial Data)
+```css
+.fh-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--fh-font-mono);
+  font-size: 0.9rem;
+}
+
+.fh-table th {
+  text-align: left;
+  font-weight: 600;
+  padding: var(--fh-space-sm);
+  border-bottom: 2px solid var(--fh-gray-300);
+  font-family: var(--fh-font-body);
+}
+
+.fh-table td {
+  padding: var(--fh-space-sm);
+  border-bottom: 1px solid var(--fh-gray-200);
+}
+
+.fh-table__positive {
+  color: var(--fh-sage);
+}
+
+.fh-table__negative {
+  color: var(--fh-burgundy);
 }
 ```
 
 ### Forms
 ```css
 .fh-input {
-  background: var(--fh-black);
-  border: 2px solid var(--fh-gray-700);
-  color: var(--fh-white);
+  width: 100%;
   padding: var(--fh-space-sm) var(--fh-space-md);
-  font-family: var(--fh-font-mono);
-  transition: all var(--fh-transition-fast);
+  font-family: var(--fh-font-body);
+  font-size: 1rem;
+  border: 1px solid var(--fh-gray-300);
+  background: var(--fh-white);
+  transition: border-color var(--fh-transition-fast);
+  border-radius: 2px;
 }
 
 .fh-input:focus {
   outline: none;
-  border-color: var(--fh-punk);
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  border-color: var(--fh-navy);
+  box-shadow: 0 0 0 3px rgba(0, 45, 98, 0.1);
+}
+
+.fh-label {
+  display: block;
+  margin-bottom: var(--fh-space-xs);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--fh-gray-700);
 }
 ```
 
@@ -229,7 +288,7 @@
 ## 📱 Breakpoints
 
 ```css
-/* Mobile First */
+/* Mobile First Approach */
 :root {
   --fh-screen-sm: 640px;   /* Small devices */
   --fh-screen-md: 768px;   /* Tablets */
@@ -238,68 +297,65 @@
   --fh-screen-2xl: 1536px; /* XL desktop */
 }
 
-/* Usage */
-@media (min-width: 768px) { }
-@media (min-width: 1024px) { }
+/* Standard Media Queries */
+@media (min-width: 768px) { }  /* Tablet and up */
+@media (min-width: 1024px) { } /* Desktop and up */
 ```
 
 ---
 
-## 🎪 Special Elements
+## 📊 Data Visualization
 
-### ASCII Art Headers
+### Charts & Graphs
 ```css
-.fh-ascii {
-  font-family: var(--fh-font-mono);
-  white-space: pre;
-  line-height: 1;
-  color: var(--fh-punk);
+.fh-chart {
+  width: 100%;
+  height: 300px;
+  border: 1px solid var(--fh-gray-200);
+  background: var(--fh-white);
+  padding: var(--fh-space-lg);
+}
+
+.fh-chart__title {
+  font-family: var(--fh-font-display);
+  font-size: 1.125rem;
+  margin-bottom: var(--fh-space-md);
+  color: var(--fh-gray-900);
+}
+
+.fh-chart__legend {
+  font-size: 0.75rem;
+  color: var(--fh-gray-600);
+  display: flex;
+  gap: var(--fh-space-lg);
+  margin-top: var(--fh-space-md);
 }
 ```
 
-### Progress Bars
+### Portfolio Display
 ```css
-.fh-progress {
-  height: 4px;
-  background: var(--fh-gray-800);
-  position: relative;
-  overflow: hidden;
-}
-
-.fh-progress__bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--fh-punk), var(--fh-anarchy));
-  transition: width var(--fh-transition-slow);
-}
-
-.fh-progress__glow {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100px;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, var(--fh-punk));
-  animation: slide 2s infinite;
-}
-```
-
-### Data/Money Display
-```css
-.fh-money {
+.fh-portfolio {
   font-family: var(--fh-font-mono);
-  font-size: 2rem;
-  color: var(--fh-punk);
-  font-weight: bold;
-  letter-spacing: 0.05em;
+  font-size: 1.5rem;
+  color: var(--fh-navy);
+  font-weight: 500;
+  letter-spacing: 0.025em;
 }
 
-.fh-money::before {
-  content: '$';
-  opacity: 0.5;
+.fh-portfolio__change--positive {
+  color: var(--fh-sage);
 }
 
-.fh-money--large {
-  font-size: 3rem;
+.fh-portfolio__change--negative {
+  color: var(--fh-burgundy);
+}
+
+.fh-portfolio__label {
+  font-family: var(--fh-font-body);
+  font-size: 0.75rem;
+  color: var(--fh-gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 ```
 
@@ -309,34 +365,38 @@
 
 ### Text Utilities
 ```css
-.fh-uppercase { text-transform: uppercase; }
-.fh-bold { font-weight: 700; }
-.fh-mono { font-family: var(--fh-font-mono); }
-.fh-punk-text { color: var(--fh-punk); }
-.fh-rebel-text { color: var(--fh-rebel); }
+.fh-text-center { text-align: center; }
+.fh-text-muted { color: var(--fh-gray-600); }
+.fh-font-serif { font-family: var(--fh-font-display); }
+.fh-font-mono { font-family: var(--fh-font-mono); }
+.fh-uppercase { text-transform: uppercase; letter-spacing: 0.1em; }
 ```
 
 ### Layout Utilities
 ```css
 .fh-container {
-  max-width: 1280px;
+  max-width: 1024px;
   margin: 0 auto;
-  padding: 0 var(--fh-space-md);
+  padding: 0 var(--fh-space-lg);
+}
+
+.fh-prose {
+  max-width: 65ch;
+  margin: 0 auto;
 }
 
 .fh-grid {
   display: grid;
-  gap: var(--fh-space-lg);
+  gap: var(--fh-space-xl);
 }
 
 .fh-flex {
   display: flex;
+  gap: var(--fh-space-md);
 }
 
-.fh-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.fh-section {
+  padding: var(--fh-space-3xl) 0;
 }
 ```
 
@@ -344,39 +404,63 @@
 
 ## 🎯 Component Examples
 
-### Hero Section
+### Page Header
 ```html
-<section class="fh-hero">
-  <h1 class="fh-h1 fh-glitch-hover">
-    FRANKLIN HUGH MONEY
-  </h1>
-  <p class="fh-tagline fh-neon">
-    Building Wealth with a Middle Finger to the Establishment
-  </p>
-  <button class="fh-btn fh-btn--primary">
-    Start Your Journey
-  </button>
-</section>
+<header class="fh-header">
+  <div class="fh-container">
+    <h1 class="fh-h1">Franklin Hugh Money</h1>
+    <p class="fh-subtitle">An Investment in Knowledge</p>
+    <nav class="fh-nav">
+      <a href="/philosophy">Philosophy</a>
+      <a href="/portfolio">Portfolio</a>
+      <a href="/quarterly">Quarterly Letters</a>
+    </nav>
+  </div>
+</header>
 ```
 
-### Lesson Card
+### Portfolio Card
 ```html
-<article class="fh-card fh-card--lesson">
+<article class="fh-card">
   <header class="fh-card__header">
-    <span class="fh-badge">Lesson 01</span>
-    <h3 class="fh-h3">Why Your Bank Hates You</h3>
+    <h3 class="fh-h3">Q4 2024 Performance</h3>
   </header>
   <div class="fh-card__content">
-    <p>Traditional banking is designed to keep you poor...</p>
+    <div class="fh-portfolio">
+      <span class="fh-portfolio__label">Portfolio Value</span>
+      <div>$47,832</div>
+      <div class="fh-portfolio__change--positive">+3.2%</div>
+    </div>
   </div>
-  <footer class="fh-card__footer">
-    <span class="fh-punk-text">5 min read</span>
-    <span class="fh-money">+$1,337</span>
-  </footer>
 </article>
+```
+
+### Data Table
+```html
+<table class="fh-table">
+  <thead>
+    <tr>
+      <th>Asset</th>
+      <th>Allocation</th>
+      <th>Performance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>VTSAX</td>
+      <td>60%</td>
+      <td class="fh-table__positive">+12.3%</td>
+    </tr>
+    <tr>
+      <td>VTIAX</td>
+      <td>40%</td>
+      <td class="fh-table__negative">-2.1%</td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 ---
 
 *Last Updated: 2024-12-05*
-*Design System v1.0*
+*Design System v2.0 - Institutional Edition*
