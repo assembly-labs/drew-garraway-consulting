@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="Chapter 5: Municipal Debt - Interactive SIE Exam Study Guide by Franklin Hugh Money">
+
+    <title>Chapter 5: Municipal Debt (Interactive) | SIE Study Materials | Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Primary Institutional Colors */
+            --fh-navy: #002D62;
+            --fh-cream: #FFFDF7;
+            --fh-gray: #54585A;
+
+            /* Secondary Colors */
+            --fh-sage: #7C9885;
+            --fh-burgundy: #6B2737;
+            --fh-gold: #B08D57;
+
+            /* Neutral Scale */
+            --fh-gray-900: #1A1A1A;
+            --fh-gray-700: #404040;
+            --fh-gray-600: #595959;
+            --fh-gray-500: #737373;
+            --fh-gray-300: #D4D4D4;
+            --fh-gray-200: #E5E5E5;
+            --fh-gray-100: #F5F5F5;
+            --fh-white: #FFFFFF;
+
+            /* Typography */
+            --fh-font-display: 'Crimson Pro', Georgia, serif;
+            --fh-font-body: 'Inter', -apple-system, sans-serif;
+            --fh-font-mono: 'IBM Plex Mono', monospace;
+
+            /* Spacing */
+            --fh-space-xs: 0.25rem;
+            --fh-space-sm: 0.5rem;
+            --fh-space-md: 1rem;
+            --fh-space-lg: 1.5rem;
+            --fh-space-xl: 2rem;
+            --fh-space-2xl: 3rem;
+            --fh-space-3xl: 4rem;
+            --fh-space-4xl: 6rem;
+
+            /* Popover Colors by Type */
+            --popover-history: #6B2737;
+            --popover-joke: #B08D57;
+            --popover-context: #002D62;
+            --popover-example: #7C9885;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--fh-font-body);
+            font-size: 16px;
+            line-height: 1.75;
+            color: var(--fh-gray-900);
+            background: var(--fh-cream);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: var(--fh-font-display);
+            font-weight: 400;
+            line-height: 1.3;
+            color: var(--fh-navy);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            letter-spacing: -0.02em;
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            margin-top: var(--fh-space-3xl);
+            margin-bottom: var(--fh-space-xl);
+            padding-top: var(--fh-space-xl);
+            border-top: 2px solid var(--fh-gray-200);
+        }
+
+        h2:first-of-type {
+            border-top: none;
+            padding-top: 0;
+            margin-top: var(--fh-space-2xl);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: var(--fh-space-2xl);
+            margin-bottom: var(--fh-space-md);
+            color: var(--fh-gray-900);
+        }
+
+        p {
+            margin-bottom: var(--fh-space-md);
+            color: var(--fh-gray-700);
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--fh-gray-900);
+        }
+
+        ul, ol {
+            margin-bottom: var(--fh-space-lg);
+            margin-left: var(--fh-space-xl);
+            color: var(--fh-gray-700);
+        }
+
+        li {
+            margin-bottom: var(--fh-space-sm);
+            line-height: 1.75;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 var(--fh-space-xl);
+        }
+
+        /* Header */
+        .header {
+            background: var(--fh-white);
+            border-bottom: 1px solid var(--fh-gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--fh-space-lg) var(--fh-space-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* ============================================
+           INTERACTIVE POPOVER SYSTEM
+           ============================================ */
+
+        /* Clickable Reference Triggers */
+        .ref {
+            position: relative;
+            cursor: help;
+            border-bottom: 2px dotted;
+            text-decoration: none;
+            padding-bottom: 1px;
+            transition: all 0.2s ease;
+        }
+
+        .ref:hover {
+            border-bottom-style: solid;
+        }
+
+        /* Different types of references */
+        .ref--history {
+            border-bottom-color: var(--popover-history);
+            color: inherit;
+        }
+
+        .ref--joke {
+            border-bottom-color: var(--popover-joke);
+            color: inherit;
+        }
+
+        .ref--context {
+            border-bottom-color: var(--popover-context);
+            color: inherit;
+        }
+
+        .ref--example {
+            border-bottom-color: var(--popover-example);
+            color: inherit;
+        }
+
+        /* Small icon indicator */
+        .ref::after {
+            content: "ⓘ";
+            font-size: 0.75em;
+            vertical-align: super;
+            margin-left: 2px;
+            opacity: 0.6;
+        }
+
+        .ref--history::after { content: "🏛"; }
+        .ref--joke::after { content: "😏"; }
+        .ref--context::after { content: "💡"; }
+        .ref--example::after { content: "📊"; }
+
+        /* Popover Container */
+        .popover {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: var(--fh-white);
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            max-width: 90%;
+            width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .popover.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Popover Header */
+        .popover__header {
+            padding: var(--fh-space-lg);
+            border-bottom: 1px solid var(--fh-gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .popover__title {
+            font-family: var(--fh-font-display);
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-sm);
+        }
+
+        .popover__icon {
+            font-size: 1.25em;
+        }
+
+        /* Type-specific header colors */
+        .popover--history .popover__header {
+            background: linear-gradient(135deg, var(--popover-history), #8B3747);
+            color: var(--fh-white);
+        }
+
+        .popover--joke .popover__header {
+            background: linear-gradient(135deg, var(--popover-joke), #C49D67);
+            color: var(--fh-white);
+        }
+
+        .popover--context .popover__header {
+            background: linear-gradient(135deg, var(--popover-context), #003D82);
+            color: var(--fh-white);
+        }
+
+        .popover--example .popover__header {
+            background: linear-gradient(135deg, var(--popover-example), #8CA895);
+            color: var(--fh-white);
+        }
+
+        /* Close button */
+        .popover__close {
+            background: none;
+            border: none;
+            color: inherit;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+
+        .popover__close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Popover Body */
+        .popover__body {
+            padding: var(--fh-space-lg);
+        }
+
+        .popover__body p {
+            margin-bottom: var(--fh-space-md);
+            color: var(--fh-gray-700);
+            line-height: 1.6;
+        }
+
+        .popover__body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .popover__meta {
+            font-size: 0.875rem;
+            color: var(--fh-gray-500);
+            font-style: italic;
+            margin-top: var(--fh-space-md);
+            padding-top: var(--fh-space-md);
+            border-top: 1px solid var(--fh-gray-200);
+        }
+
+        /* Backdrop */
+        .popover-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .popover-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Key Terms */
+        .key-term {
+            background: linear-gradient(to bottom, transparent 60%, rgba(124, 152, 133, 0.2) 60%);
+            padding: 0 2px;
+            font-weight: 600;
+            color: var(--fh-gray-900);
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: var(--fh-white);
+            border-left: 4px solid var(--fh-sage);
+            padding: var(--fh-space-lg);
+            margin: var(--fh-space-xl) 0;
+            border-radius: 4px;
+        }
+
+        .info-box__title {
+            font-family: var(--fh-font-mono);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--fh-sage);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--fh-space-sm);
+        }
+
+        /* Test Tips */
+        .test-tip {
+            background: var(--fh-gold);
+            background: linear-gradient(135deg, var(--fh-gold), #C4A06B);
+            color: var(--fh-white);
+            padding: var(--fh-space-lg);
+            border-radius: 4px;
+            margin: var(--fh-space-xl) 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .popover {
+                width: 95%;
+                max-width: none;
+            }
+
+            .header__inner {
+                flex-direction: column;
+                gap: var(--fh-space-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Popover Backdrop -->
+    <div class="popover-backdrop" id="popoverBackdrop"></div>
+
+    <!-- Popover Container (reusable) -->
+    <div class="popover" id="popoverContainer">
+        <div class="popover__header">
+            <h3 class="popover__title">
+                <span class="popover__icon"></span>
+                <span class="popover__title-text"></span>
+            </h3>
+            <button class="popover__close" aria-label="Close">&times;</button>
+        </div>
+        <div class="popover__body"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header__inner">
+            <h1 style="margin: 0; font-size: 1.125rem;">Chapter 5: Municipal Debt (Interactive)</h1>
+            <nav style="display: flex; gap: 1rem; font-size: 0.875rem;">
+                <a href="index.html" style="color: var(--fh-gray-600); text-decoration: none;">Home</a>
+                <span style="color: var(--fh-gray-400);">/</span>
+                <a href="sie-study-materials.html" style="color: var(--fh-gray-600); text-decoration: none;">SIE Study Materials</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <div style="font-size: 1.125rem; line-height: 1.8; margin: 3rem 0; padding-bottom: 2rem; border-bottom: 1px solid var(--fh-gray-200);">
+            <p>
+                Municipal bonds: where local governments turn their promises into IOUs that somehow
+                become tax-free income for investors. It's a beautiful system where cities get to build
+                schools, and you get to keep more of your investment returns. Win-win, assuming the city
+                doesn't pull a
+                <span class="ref ref--history"
+                      data-type="history"
+                      data-title="The Detroit Bankruptcy"
+                      data-content="In July 2013, Detroit filed for Chapter 9 bankruptcy—the largest municipal bankruptcy in U.S. history at the time, with $18-20 billion in debt. The city had been in decline since the 1950s, losing over 60% of its population. Bondholders took significant haircuts, with some receiving as little as 13 cents on the dollar. The bankruptcy was finalized in 2014, and Detroit has since recovered, but it served as a stark reminder that municipal bonds aren't risk-free.">Detroit circa 2013</span>.
+            </p>
+            <p>
+                This chapter covers how municipalities borrow money, the different flavors of municipal debt,
+                and why
+                <span class="ref ref--joke"
+                      data-type="joke"
+                      data-title="Why Wealthy People Love Munis"
+                      data-content="The joke here is that municipal bonds are stereotypically associated with wealthy, older investors who care more about tax savings than returns. At Thanksgiving, your wealthy uncle probably isn't bragging about his 3% muni yield—but he's definitely not paying taxes on it. The higher your tax bracket, the more attractive munis become. If you're in the 37% bracket, a 3% muni is equivalent to a 4.76% taxable bond. That's why munis are called 'rich people bonds.'">your wealthy uncle keeps talking about "munis" at Thanksgiving dinner</span>.
+            </p>
+        </div>
+
+        <h2>The Basics: Why Cities Borrow Money</h2>
+
+        <p>
+            The major appeal of municipal debt isn't the excitement of funding
+            <span class="ref ref--example"
+                  data-type="example"
+                  data-title="Glamorous Municipal Projects"
+                  data-content="Real municipal bond proceeds at work: The Central Utah Water Conservancy District issued $75 million in revenue bonds in 2020 to upgrade water treatment facilities. New York's MTA issued $2.9 billion in green bonds to buy new subway cars. The City of Chicago issued $1.3 billion in 2019 for, yes, sewage system improvements. Not exactly Wolf of Wall Street material, but these projects keep cities functioning.">sewage treatment plants</span>—it's the
+            <span class="key-term">preferential tax treatment</span> on the interest income. When
+            <span class="ref ref--context"
+                  data-type="context"
+                  data-title="Why Tax Exemption Exists"
+                  data-content="The federal government exempts municipal bond interest from taxes to subsidize state and local infrastructure. Without this exemption, cities would have to offer higher interest rates to attract investors, making projects more expensive. It's essentially a federal subsidy delivered through the tax code rather than direct spending. Economists debate whether this is efficient (spoiler: they debate everything), but it's been the system for over a century.">Uncle Sam decided to encourage infrastructure investment</span>,
+            he made muni bond interest exempt from federal taxes.
+        </p>
+
+        <h3>Legal Opinion: The Lawyer's Blessing</h3>
+        <p>
+            Every municipal issue needs a <span class="key-term">legal opinion</span>. The municipality hires
+            a law firm as <span class="key-term">bond counsel</span> to verify three things:
+        </p>
+        <ul>
+            <li><strong>Legality:</strong> Yes, this is actually legal and binding</li>
+            <li><strong>Validity:</strong> The municipality can actually do this</li>
+            <li><strong>Tax-exempt status:</strong> The
+                <span class="ref ref--joke"
+                      data-type="joke"
+                      data-title="The IRS Always Watches"
+                      data-content="The '(hopefully)' is a nod to the IRS's ability to retroactively revoke tax-exempt status if bonds are used improperly. For example, if a municipality issues tax-exempt bonds for a 'public' stadium but gives a private sports team too many benefits, the IRS might say 'nice try' and make the interest taxable. This happened with some stadium bonds in the 1980s, leading to stricter rules about private use of tax-exempt financed facilities.">IRS won't come knocking (hopefully)</span></li>
+        </ul>
+
+        <p>Legal opinions come in two flavors:</p>
+        <ul>
+            <li><strong>Qualified:</strong>
+                <span class="ref ref--context"
+                      data-type="context"
+                      data-title="The Problem with Qualified Opinions"
+                      data-content="A qualified legal opinion contains conditions or exceptions. For example: 'This bond is legally valid UNLESS federal tax law changes' or 'This is tax-exempt ASSUMING the facility is used as described.' Investors hate qualified opinions because they introduce uncertainty. The bond might trade at a discount, or might not sell at all. It's like buying a house where the inspector says 'it's fine, probably.'">This looks fine, BUT..." (investors hate this)</span></li>
+            <li><strong>Unqualified:</strong> "All good, no problems here" (investors love this)</li>
+        </ul>
+
+        <div class="test-tip">
+            <p style="font-size: 1.5rem; margin-bottom: 0.5rem;">💡</p>
+            <p style="color: white; margin: 0;">
+                <strong>Test Tip:</strong> Remember that issuers want an
+                <span class="ref ref--context"
+                      data-type="context"
+                      data-title="The Unqualified Confusion"
+                      data-content="This is a classic exam trick. In most contexts, 'qualified' sounds better than 'unqualified.' A qualified accountant is better than an unqualified one. But in legal opinions, 'qualified' means 'with conditions or reservations,' while 'unqualified' means 'without reservations.' Think of it as: Qualified = Qualified with concerns, Unqualified = Unqualified approval (no concerns). The exam loves this type of counterintuitive terminology."
+                      style="color: white; border-bottom-color: white;">unqualified legal opinion</span>.
+                It's counterintuitive—usually "qualified" sounds better than "unqualified," but not here.
+            </p>
+        </div>
+
+        <h2>General Obligation (GO) Bonds</h2>
+
+        <p>
+            <span class="key-term">General Obligation bonds</span> are the municipal bond world's blue chips.
+            They're backed by the "full faith, credit, and taxing power" of the issuer—which is
+            <span class="ref ref--joke"
+                  data-type="joke"
+                  data-title="The Taxing Power Reality"
+                  data-content="The fancy language 'full faith, credit, and taxing power' just means the municipality can raise property taxes to pay bondholders. Homeowners generally aren't thrilled about this feature. Cities have actually done this—Vallejo, California raised property taxes after emerging from bankruptcy. The phrase sounds noble and trustworthy, but it literally means 'we'll tax our residents more if needed.' Democracy in action!">a fancy way of saying "we'll raise taxes if we have to."</span>
+            These are typically backed by <span class="key-term">ad valorem taxes</span>
+            <span class="ref ref--context"
+                  data-type="context"
+                  data-title="Ad Valorem Explained"
+                  data-content="'Ad valorem' is Latin for 'according to value.' Property taxes are ad valorem because they're based on the assessed value of your property. Own a $500,000 house? You pay more than someone with a $200,000 house. This is different from a flat tax where everyone pays the same amount. The term sounds fancy, but it's just percentage-based taxation—like sales tax, but for property.">(property taxes, from the Latin meaning "according to value")</span>.
+        </p>
+
+        <h3>Capital Appreciation Bonds (CABs)</h3>
+        <p>
+            <span class="key-term">CABs</span> are zero-coupon municipal bonds with a clever twist: only
+            the discounted purchase price counts against the debt limit. Buy a bond for $600,000 that matures
+            at $1 million? Only $600,000 hits the debt limit.
+            <span class="ref ref--context"
+                  data-type="context"
+                  data-title="Creative Municipal Accounting"
+                  data-content="CABs became controversial after some California school districts used them excessively. Poway Unified School District borrowed $105 million but will pay back $981 million by maturity—a 9:1 ratio. The district needed money for schools but had hit its debt limit. CABs let them borrow without technically exceeding the limit, but future taxpayers will pay dearly. California has since restricted CAB use. It's creative accounting that follows the letter of the law while arguably violating its spirit.">It's creative accounting that's actually legal</span>.
+        </p>
+
+        <h2>Revenue Bonds</h2>
+
+        <p>
+            Before issuing revenue bonds, municipalities conduct a <span class="key-term">feasibility study</span>.
+            Outside consultants
+            <span class="ref ref--joke"
+                  data-type="joke"
+                  data-title="The Consultant Game"
+                  data-content="This is a cynical (but often accurate) observation about feasibility studies. Politicians want projects to happen. If the first consultant says 'this project won't generate enough revenue,' they might hire another consultant with different assumptions. It's not exactly fraud—different consultants can legitimately reach different conclusions using different methodologies. But there's definitely pressure to find consultants who will provide the 'right' answer. The Puerto Rico Electric Power Authority got multiple feasibility studies until they found one supporting their borrowing. That ended well. (It didn't.)">who theoretically have no stake in the outcome</span>
+            analyze whether the project makes economic sense.
+        </p>
+
+        <h2>Special Types of Municipal Debt</h2>
+
+        <h3>Moral Obligation Bonds</h3>
+        <p>
+            The municipality promises to pay but isn't legally required to.
+            <span class="ref ref--joke"
+                  data-type="joke"
+                  data-title="The Napkin IOU"
+                  data-content="This comparison captures the sketchy nature of moral obligation bonds perfectly. A legal obligation is enforceable in court—you can sue if they don't pay. A moral obligation is just a promise to try to pay. It's like the difference between a signed contract and a handshake agreement. Or in this case, between a formal bond covenant and something you scribbled on a napkin after three martinis. These bonds typically yield more because investors know they're taking on 'maybe we'll pay you back' risk.">It's like an IOU written on a napkin</span>—it might be honored, but you can't sue over it.
+        </p>
+
+        <div class="info-box">
+            <div class="info-box__title">The NYC Crisis Example</div>
+            <p>
+                In 1975, New York City hit its debt limit and faced bankruptcy. The state issued moral
+                obligation bonds, essentially saying "We'll probably help if NYC can't pay, but no promises."
+                <span class="ref ref--history"
+                      data-type="history"
+                      data-title="Ford to City: Drop Dead"
+                      data-content="The Daily News headline 'Ford to City: Drop Dead' from October 30, 1975, became one of the most famous in newspaper history. President Ford had refused federal assistance for NYC's fiscal crisis. The actual quote was more diplomatic, but the headline captured the sentiment. Ford later claimed this headline cost him New York in the 1976 election, which he lost to Jimmy Carter by 2 percentage points. The city eventually got federal loan guarantees, avoided bankruptcy, and paid everything back. The moral obligation bonds also paid out, establishing their viability as emergency financing tools.">President Ford's initial response—immortalized in the headline "Ford to City: Drop Dead"</span>—didn't help.
+                The city survived, the bonds paid out, and moral obligation bonds earned their reputation
+                as "maybe bonds."
+            </p>
+        </div>
+
+        <h3>Build America Bonds (BABs)</h3>
+        <p>
+            Created during the 2008 financial crisis, these taxable munis came with a 35% federal subsidy
+            on interest payments. A 10% BAB cost the issuer only 6.5% after the subsidy. The program ended
+            in 2010,
+            <span class="ref ref--context"
+                  data-type="context"
+                  data-title="Why BABs Ended"
+                  data-content="BABs were part of the American Recovery and Reinvestment Act (stimulus package) and were always intended to be temporary. They cost the federal government about $182 billion in subsidies. Congress didn't renew them because: 1) The immediate crisis had passed, 2) They were expensive for the federal budget, 3) Some argued they primarily benefited wealthy states that could issue more debt. There's periodic talk of bringing them back, especially during infrastructure pushes, but the budget math is challenging. The program did successfully lower borrowing costs during the crisis and funded about $181 billion in infrastructure projects.">probably because someone in Congress did the math on what this was costing</span>.
+        </p>
+
+        <h2>Municipal Debt Trading</h2>
+
+        <p>
+            Municipal bonds trade <span class="key-term">over the counter (OTC)</span> in what might be
+            <span class="ref ref--joke"
+                  data-type="joke"
+                  data-title="The Quiet Muni Market"
+                  data-content="The municipal bond market is notoriously sleepy. Daily trading volume is about $11 billion compared to $500+ billion for Treasuries. Most muni investors are buy-and-hold retirees who purchase bonds and clip coupons until maturity. The lack of trading makes price discovery difficult and bid-ask spreads wide. It's so quiet that when there IS significant trading, it often signals something bad (like Detroit's bankruptcy). The joke is that calling it 'the world's quietest market' might be understating it—libraries see more action.">the world's quietest market</span>.
+            Most investors buy munis and hold them until maturity or death, whichever comes first.
+        </p>
+
+        <h3>No Short Selling</h3>
+        <p>
+            You can't short municipal bonds. The market is too thin—you'd never find bonds to borrow.
+            <span class="ref ref--context"
+                  data-type="context"
+                  data-title="The Optics of Shorting Munis"
+                  data-content="Beyond the practical impossibility (thin market, hard to borrow), shorting municipal bonds would be terrible optics. You'd literally be betting against schools, hospitals, and infrastructure. Imagine explaining at a cocktail party that you make money when cities fail to fund children's education or clean water. Even hedge funds, not known for their moral squeamishness, generally avoid this. The one exception was during the 2008 crisis when some funds bought credit default swaps on muni bond insurers—technically not shorting the bonds, but betting against the market. They made money, but it wasn't a good look.">This is probably for the best. Betting against cities and schools isn't a great look anyway</span>.
+        </p>
+
+        <h2>Tax Status (The Good Part)</h2>
+
+        <p>
+            Here's why wealthy investors love munis: the interest is <span class="key-term">exempt from
+            federal income tax</span>. If you live in the issuing state, it's usually exempt from state
+            and local taxes too, achieving the
+            <span class="ref ref--context"
+                  data-type="context"
+                  data-title="The Triple Tax-Exempt Dream"
+                  data-content="Triple tax-exempt means no federal, state, or local taxes on interest income. For high earners in high-tax states, this is huge. A California resident in the top tax bracket faces: 37% federal + 13.3% state + potentially local taxes. That's over 50% total tax rate. A triple tax-exempt bond yielding 3% is equivalent to a taxable bond yielding 6%+. This is why parking garages in California can borrow money cheaper than Apple—the tax exemption is that valuable to certain investors.">holy grail of triple tax-exempt status</span>.
+        </p>
+
+        <div class="info-box">
+            <div class="info-box__title">Tax Equivalent Yield</div>
+            <p>
+                To compare munis with taxable bonds, calculate the tax-equivalent yield. A 4% muni for
+                someone in the 37% tax bracket equals a 6.35% taxable bond (4% ÷ (1 - 0.37)). This is
+                why munis are called "rich people bonds"—the math only works if you're in a high tax bracket.
+                <span class="ref ref--joke"
+                      data-type="joke"
+                      data-title="Your Barista's Tax Bracket"
+                      data-content="This is a gentle dig at the reality of muni bond economics. If you're making $30,000 a year as a barista, you're in the 12% tax bracket. A 3% muni would be equivalent to a 3.4% taxable bond for you—barely worth the complexity. Meanwhile, Treasury bonds might yield 4% and corporate bonds 5%. The barista would be actively losing money buying munis. This is why municipal bonds are predominantly owned by wealthy retirees—they're the only ones for whom the tax math makes sense. It's not discrimination; it's just arithmetic.">Your barista probably shouldn't buy munis</span>.
+            </p>
+        </div>
+    </main>
+
+    <script>
+        // Popover System JavaScript
+        const popover = document.getElementById('popoverContainer');
+        const backdrop = document.getElementById('popoverBackdrop');
+        const popoverTitle = popover.querySelector('.popover__title-text');
+        const popoverIcon = popover.querySelector('.popover__icon');
+        const popoverBody = popover.querySelector('.popover__body');
+        const closeBtn = popover.querySelector('.popover__close');
+
+        // Type configurations
+        const typeConfig = {
+            history: { icon: '🏛', label: 'Historical Context' },
+            joke: { icon: '😏', label: 'Why This Is Funny' },
+            context: { icon: '💡', label: 'Deep Dive' },
+            example: { icon: '📊', label: 'Real Example' }
+        };
+
+        // Initialize all reference triggers
+        document.querySelectorAll('.ref').forEach(ref => {
+            ref.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPopover(ref);
+            });
+        });
+
+        function showPopover(element) {
+            const type = element.dataset.type;
+            const title = element.dataset.title;
+            const content = element.dataset.content;
+
+            // Set popover type class
+            popover.className = 'popover active popover--' + type;
+
+            // Set content
+            popoverIcon.textContent = typeConfig[type].icon;
+            popoverTitle.textContent = title;
+            popoverBody.innerHTML = `<p>${content}</p>`;
+
+            // Add meta info if it's a history item
+            if (type === 'history') {
+                popoverBody.innerHTML += `<p class="popover__meta">Historical Reference</p>`;
+            }
+
+            // Show backdrop and popover
+            backdrop.classList.add('active');
+            popover.classList.add('active');
+
+            // Trap focus
+            closeBtn.focus();
+        }
+
+        function hidePopover() {
+            backdrop.classList.remove('active');
+            popover.classList.remove('active');
+        }
+
+        // Close handlers
+        closeBtn.addEventListener('click', hidePopover);
+        backdrop.addEventListener('click', hidePopover);
+
+        // ESC key handler
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && popover.classList.contains('active')) {
+                hidePopover();
+            }
+        });
+
+        // Optional: Add hover preview for desktop
+        let hoverTimeout;
+        document.querySelectorAll('.ref').forEach(ref => {
+            ref.addEventListener('mouseenter', (e) => {
+                if (window.innerWidth > 768) {
+                    hoverTimeout = setTimeout(() => {
+                        // Could show a tooltip preview here
+                        ref.style.borderBottomWidth = '3px';
+                    }, 500);
+                }
+            });
+
+            ref.addEventListener('mouseleave', (e) => {
+                clearTimeout(hoverTimeout);
+                ref.style.borderBottomWidth = '';
+            });
+        });
+    </script>
+</body>
+</html>
