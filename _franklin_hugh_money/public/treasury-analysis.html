@@ -937,6 +937,12 @@
                 plot_bgcolor: 'rgba(0,0,0,0)'
             };
 
+            // Clear loading message before creating chart
+            const container = document.getElementById('pieChart');
+            if (container) {
+                container.innerHTML = '';
+            }
+
             Plotly.newPlot('pieChart', pieData, layout, {responsive: true});
         }
 
@@ -944,7 +950,8 @@
         function createTreemap() {
             const labels = Object.keys(data);
             const values = Object.values(data);
-            const text = labels.map(k => `$${data[k].toFixed(1)}T<br>${percentages[k].toFixed(1)}%`);
+            // Combine the label and values into a single text string to avoid duplication
+            const text = labels.map(k => `${k}<br>$${data[k].toFixed(1)}T<br>${percentages[k].toFixed(1)}%`);
 
             const treemapData = [{
                 type: 'treemap',
@@ -953,6 +960,7 @@
                 values: values,
                 text: text,
                 textposition: 'middle center',
+                textinfo: 'text',  // Only show the custom text, not the label
                 marker: {
                     colors: labels.map(l => colors[l] || '#999999'),
                     line: {
@@ -973,6 +981,12 @@
                 paper_bgcolor: 'rgba(0,0,0,0)',
                 plot_bgcolor: 'rgba(0,0,0,0)'
             };
+
+            // Clear loading message before creating chart
+            const container = document.getElementById('treemapChart');
+            if (container) {
+                container.innerHTML = '';
+            }
 
             Plotly.newPlot('treemapChart', treemapData, layout, {responsive: true});
         }
@@ -1094,6 +1108,12 @@
                 paper_bgcolor: 'rgba(0,0,0,0)',
                 plot_bgcolor: 'rgba(0,0,0,0)'
             };
+
+            // Clear loading message before creating chart
+            const container = document.getElementById('sankeyChart');
+            if (container) {
+                container.innerHTML = '';
+            }
 
             Plotly.newPlot('sankeyChart', [sankeyData], layout, {responsive: true});
         }
