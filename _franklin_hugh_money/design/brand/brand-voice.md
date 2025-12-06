@@ -11,6 +11,36 @@
 
 ---
 
+## Brand Naming Guidelines
+
+### Approved Brand Names
+The brand must be referenced using ONLY these three variations:
+- **Franklin Hugh** - When referring to the brand concisely
+- **Franklin Hugh Money** - Full brand name
+- **F. Hugh Money** - Abbreviated form
+
+### Prohibited Variations
+Never use:
+- FH Money
+- Franklin H. Money
+- F.H. Money
+- Franklin Hugh
+- Hugh Money
+- Any other variations not explicitly listed above
+
+### Usage Examples
+✅ **Correct:**
+- "Welcome to Franklin Hugh Money"
+- "Franklin Hugh is a personal finance project"
+- "F. Hugh Money documents one person's journey"
+
+❌ **Incorrect:**
+- "FH Money is..."
+- "Franklin H. Money presents..."
+- "The FHM project..."
+
+---
+
 ## Voice Principles
 
 ### The 90/10 Rule
