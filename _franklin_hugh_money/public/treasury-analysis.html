@@ -1100,13 +1100,18 @@
 
         // Initialize all visualizations
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded. Checking for Plotly...');
+
             // Check if Plotly is loaded
             if (typeof Plotly === 'undefined') {
+                console.error('Plotly is not defined! CDN may be blocked or failed to load.');
                 document.querySelectorAll('.loading').forEach(el => {
-                    el.textContent = 'Error: Visualization library failed to load. Please refresh the page.';
+                    el.innerHTML = '<span style="color: red;">Error: Plotly.js library failed to load. This may be due to:<br>• Network/firewall blocking CDN<br>• Ad blocker interference<br>• Browser security settings<br>Please check console for details.</span>';
                 });
                 return;
             }
+
+            console.log('Plotly loaded successfully:', typeof Plotly);
 
             try {
                 populateEnhancedTable();
@@ -1121,7 +1126,9 @@
                 try {
                     createPieChart();
                 } catch (error) {
-                    // Silently handle error in production
+                    console.error('Pie Chart Error:', error);
+                    document.getElementById('pieChart').innerHTML =
+                        '<div class="loading" style="color: red;">Error loading pie chart: ' + error.message + '</div>';
                 }
             }, 100);
 
@@ -1129,7 +1136,9 @@
                 try {
                     createTreemap();
                 } catch (error) {
-                    // Silently handle error in production
+                    console.error('Treemap Error:', error);
+                    document.getElementById('treemapChart').innerHTML =
+                        '<div class="loading" style="color: red;">Error loading treemap: ' + error.message + '</div>';
                 }
             }, 200);
 
@@ -1137,7 +1146,9 @@
                 try {
                     createSankey();
                 } catch (error) {
-                    // Silently handle error in production
+                    console.error('Sankey Error:', error);
+                    document.getElementById('sankeyChart').innerHTML =
+                        '<div class="loading" style="color: red;">Error loading flow diagram: ' + error.message + '</div>';
                 }
             }, 300);
         });
