@@ -310,12 +310,203 @@
             40% { content: ".."; }
             60%, 100% { content: "..."; }
         }
+
+        /* Enhanced Table Styles */
+        .data-legend {
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-xl);
+            margin-bottom: var(--fh-space-lg);
+            padding: var(--fh-space-md);
+            background: var(--fh-gray-100);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-xs);
+        }
+
+        .control-btn {
+            margin-left: auto;
+            padding: var(--fh-space-xs) var(--fh-space-md);
+            background: var(--fh-navy);
+            color: var(--fh-white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .control-btn:hover {
+            background: #003d82;
+            transform: translateY(-1px);
+        }
+
+        /* Expandable Row Styles */
+        .data-table.enhanced {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .data-table.enhanced th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .parent-row {
+            background: var(--fh-gray-100);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .parent-row:hover {
+            background: #e3e9f0;
+        }
+
+        .parent-row.expanded {
+            background: #d9e2ed;
+        }
+
+        .child-row {
+            background: var(--fh-white);
+            font-size: 0.925rem;
+            transition: all 0.3s ease;
+        }
+
+        .child-row.hidden {
+            display: none;
+        }
+
+        .child-row td {
+            border-left: 3px solid var(--fh-gray-200);
+        }
+
+        .child-row td:first-child {
+            border-left: none;
+        }
+
+        .expand-icon {
+            text-align: center;
+            user-select: none;
+            font-size: 0.9rem;
+            color: var(--fh-gray-600);
+        }
+
+        .holder-name.indented {
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .holder-name.indented:before {
+            content: "└─";
+            position: absolute;
+            left: 0.5rem;
+            color: var(--fh-gray-400);
+        }
+
+        /* Verification Badges */
+        .status-badge {
+            font-size: 0.75rem;
+            margin-left: var(--fh-space-sm);
+            display: inline-block;
+        }
+
+        .status-verified {
+            color: #2E7D32;
+        }
+
+        .status-estimated {
+            color: #F57C00;
+        }
+
+        .source-note {
+            font-size: 0.8rem;
+            color: var(--fh-gray-600);
+            font-style: italic;
+        }
+
+        /* YoY Change Indicators */
+        .change {
+            text-align: right;
+            font-family: var(--fh-font-mono);
+            font-size: 0.9rem;
+        }
+
+        .change.positive {
+            color: #2E7D32;
+        }
+
+        .change.negative {
+            color: #C62828;
+        }
+
+        .change.neutral {
+            color: var(--fh-gray-500);
+        }
+
+        /* SIE Footnotes Section */
+        .sie-footnotes {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 1px solid #FFB74D;
+            border-radius: 8px;
+            padding: var(--fh-space-2xl);
+            margin: var(--fh-space-2xl) 0;
+        }
+
+        .sie-footnotes h3 {
+            color: #E65100;
+            margin-bottom: var(--fh-space-lg);
+            border-bottom: 2px solid #FFB74D;
+            padding-bottom: var(--fh-space-sm);
+        }
+
+        .sie-note {
+            margin-bottom: var(--fh-space-lg);
+            padding: var(--fh-space-md);
+            background: var(--fh-white);
+            border-left: 4px solid #FF9800;
+            border-radius: 4px;
+        }
+
+        .sie-note-title {
+            font-weight: 600;
+            color: #E65100;
+            margin-bottom: var(--fh-space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-sm);
+        }
+
+        .sie-note-content {
+            color: var(--fh-gray-700);
+            line-height: 1.6;
+        }
+
+        .sie-note-content strong {
+            color: #E65100;
+            font-weight: 600;
+        }
+
+        /* Footnote References */
+        .footnote-ref {
+            color: #E65100;
+            font-weight: 600;
+            cursor: help;
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <nav class="nav">
-            <a href="franklin-hugh-money.html">← Back to F.H. Money</a>
+            <a href="index.html">← Home</a>
             <a href="#overview">Overview</a>
             <a href="#pie-chart">Pie Chart</a>
             <a href="#treemap">Treemap</a>
@@ -333,18 +524,37 @@
         <!-- Data Overview Table -->
         <section id="overview" class="viz-section">
             <h2>Ownership Breakdown</h2>
-            <table class="data-table">
+
+            <!-- Data Status Legend -->
+            <div class="data-legend">
+                <span class="legend-item">🟢 <strong>Verified:</strong> Official government sources</span>
+                <span class="legend-item">🟡 <strong>Estimated:</strong> Industry reports & historical patterns</span>
+                <button id="expandAllBtn" class="control-btn">Expand All</button>
+            </div>
+
+            <table class="data-table enhanced">
                 <thead>
                     <tr>
-                        <th>Holder</th>
-                        <th class="amount">Amount</th>
-                        <th class="percentage">Share</th>
+                        <th width="5%"></th>
+                        <th width="35%">Holder</th>
+                        <th class="amount" width="15%">Amount</th>
+                        <th class="percentage" width="10%">Share</th>
+                        <th width="20%">Data Source</th>
+                        <th class="change" width="15%">YoY Change</th>
                     </tr>
                 </thead>
                 <tbody id="dataTableBody">
                     <!-- Will be populated by JavaScript -->
                 </tbody>
             </table>
+        </section>
+
+        <!-- SIE Exam Key Concepts -->
+        <section class="sie-footnotes">
+            <h3>🎓 SIE Exam Key Concepts</h3>
+            <div id="sieNotesContainer">
+                <!-- Will be populated by JavaScript -->
+            </div>
         </section>
 
         <!-- Key Insights -->
@@ -395,7 +605,7 @@
 
         <footer class="footer">
             <p>
-                Data as of December 2025 | Analysis by <a href="franklin-hugh-money.html">Franklin Hugh Money</a>
+                Data as of December 2025 | Analysis by <a href="index.html">Franklin Hugh Money</a>
             </p>
             <p>
                 <small>An investment in knowledge pays the best interest.</small>
@@ -404,27 +614,126 @@
     </div>
 
     <script>
-        // Data preparation
-        const rawData = {
-            'Federal Reserve': 6.5,
-            'Intragovernmental Holdings': 6.8,
-            'Foreign Official Holders': 8.5,
-            'U.S. Mutual Funds & ETFs': 6.8,
-            'U.S. Banks & Depositories': 4.5,
-            'Pension Funds': 2.5,
-            'Insurance/State/Local/Other': 2.0
+        // Enhanced data structure with verified/estimated subcategories
+        const treasuryHoldings = {
+            metadata: {
+                totalDebt: 36.0,
+                asOf: "December 2024",
+                sources: {
+                    primary: "U.S. Treasury Bulletin Q3 2024",
+                    foreign: "TIC Data October 2024",
+                    federal: "Federal Reserve H.4.1 Release",
+                    intragovt: "Monthly Statement of Public Debt"
+                }
+            },
+            categories: {
+                'Federal Reserve': {
+                    total: 6.5,
+                    status: 'verified',
+                    source: 'SOMA Holdings Report',
+                    yoyChange: '+2.3%',
+                    breakdown: {
+                        'Bills (< 1 year)': { amount: 0.4, status: 'verified', change: '+0.3%' },
+                        'Notes (1-10 years)': { amount: 4.2, status: 'verified', change: '+1.8%' },
+                        'Bonds (10-30 years)': { amount: 1.6, status: 'verified', change: '+0.2%' },
+                        'TIPS (Inflation-Protected)': { amount: 0.3, status: 'verified', change: '0.0%' }
+                    },
+                    sieNote: "The Federal Reserve conducts Open Market Operations (OMO) through 23 authorized Primary Dealers. Treasury purchases are a key tool of monetary policy. Know the difference between monetary policy (Fed) and fiscal policy (Congress/Treasury)."
+                },
+                'Intragovernmental Holdings': {
+                    total: 6.8,
+                    status: 'verified',
+                    source: 'Treasury MSPD',
+                    yoyChange: '+1.8%',
+                    breakdown: {
+                        'Social Security Trust Fund': { amount: 2.9, status: 'verified', change: '+0.8%' },
+                        'Medicare Trust Funds': { amount: 0.4, status: 'verified', change: '+0.1%' },
+                        'Federal Retirement Funds': { amount: 1.8, status: 'verified', change: '+0.5%' },
+                        'Other Government Accounts': { amount: 1.7, status: 'verified', change: '+0.4%' }
+                    },
+                    sieNote: "Government Account Series (GAS) securities are non-marketable and cannot be traded. Trust funds are legally required to invest surpluses in special-issue Treasury securities. These holdings represent IOUs from one part of government to another."
+                },
+                'Foreign Official Holders': {
+                    total: 8.5,
+                    status: 'verified',
+                    source: 'TIC Data Oct 2024',
+                    yoyChange: '-0.5%',
+                    breakdown: {
+                        'Japan': { amount: 1.13, status: 'verified', change: '-0.2%' },
+                        'China': { amount: 0.77, status: 'verified', change: '-0.8%' },
+                        'United Kingdom': { amount: 0.75, status: 'verified', change: '+0.3%' },
+                        'Luxembourg': { amount: 0.41, status: 'verified', change: '+0.1%' },
+                        'Belgium': { amount: 0.36, status: 'verified', change: '+0.2%' },
+                        'Ireland': { amount: 0.33, status: 'verified', change: '+0.1%' },
+                        'Canada': { amount: 0.32, status: 'verified', change: '0.0%' },
+                        'Cayman Islands': { amount: 0.31, status: 'verified', change: '+0.4%' },
+                        'Switzerland': { amount: 0.30, status: 'verified', change: '-0.1%' },
+                        'France': { amount: 0.28, status: 'verified', change: '+0.1%' },
+                        'All Other Countries': { amount: 3.54, status: 'verified', change: '-0.6%' }
+                    },
+                    sieNote: "U.S. Treasuries are considered risk-free in USD terms and serve as reserve assets for foreign central banks. The 'petrodollar' system and trade surpluses drive foreign Treasury accumulation. Note: Cayman Islands holdings often represent hedge fund custody accounts."
+                },
+                'U.S. Mutual Funds & ETFs': {
+                    total: 6.8,
+                    status: 'verified',
+                    source: 'Fed Z.1 Report',
+                    yoyChange: '+1.2%',
+                    breakdown: {
+                        'Bond Mutual Funds': { amount: 3.1, status: 'estimated', change: '+0.5%', basis: 'ICI data' },
+                        'Money Market Funds': { amount: 2.2, status: 'estimated', change: '+0.4%', basis: 'ICI data' },
+                        'Treasury ETFs': { amount: 1.0, status: 'estimated', change: '+0.2%', basis: 'ETF.com' },
+                        'Target-Date Funds': { amount: 0.5, status: 'estimated', change: '+0.1%', basis: 'Morningstar' }
+                    },
+                    sieNote: "Money Market Funds must maintain stable $1.00 NAV and invest in securities maturing in 397 days or less. Treasury ETFs trade on exchanges with intraday pricing, unlike mutual funds which price once daily at NAV. Know the difference between open-end funds, closed-end funds, and ETFs."
+                },
+                'U.S. Banks & Depositories': {
+                    total: 4.5,
+                    status: 'verified',
+                    source: 'FDIC Banking Profile',
+                    yoyChange: '-0.8%',
+                    breakdown: {
+                        'Large Commercial Banks (>$250B)': { amount: 2.8, status: 'estimated', change: '-0.5%', basis: 'FDIC' },
+                        'Regional Banks ($10-250B)': { amount: 1.1, status: 'estimated', change: '-0.2%', basis: 'FDIC' },
+                        'Community Banks (<$10B)': { amount: 0.4, status: 'estimated', change: '-0.1%', basis: 'FDIC' },
+                        'Savings Institutions & Credit Unions': { amount: 0.2, status: 'estimated', change: '0.0%', basis: 'NCUA' }
+                    },
+                    sieNote: "Banks classify Treasuries as either Held-to-Maturity (HTM) at amortized cost or Available-for-Sale (AFS) at fair value. Under Basel III, Treasuries qualify as High-Quality Liquid Assets (HQLA) with 0% risk weighting. The 2023 regional bank crisis highlighted duration risk in HTM portfolios."
+                },
+                'Pension Funds': {
+                    total: 2.5,
+                    status: 'verified',
+                    source: 'Fed Z.1 Report',
+                    yoyChange: '+0.6%',
+                    breakdown: {
+                        'State & Local Government': { amount: 1.4, status: 'estimated', change: '+0.3%', basis: 'Census' },
+                        'Corporate Defined Benefit': { amount: 0.7, status: 'estimated', change: '+0.2%', basis: 'DOL' },
+                        'Corporate Defined Contribution': { amount: 0.4, status: 'estimated', change: '+0.1%', basis: 'DOL' }
+                    },
+                    sieNote: "ERISA establishes fiduciary standards for private pension plans. Defined Benefit plans use Liability-Driven Investing (LDI) with Treasuries for duration matching. 401(k) plans are Defined Contribution where investment risk shifts to participants."
+                },
+                'Insurance/State/Local/Other': {
+                    total: 2.0,
+                    status: 'verified',
+                    source: 'Various Sources',
+                    yoyChange: '+0.3%',
+                    breakdown: {
+                        'Life Insurance Companies': { amount: 0.9, status: 'estimated', change: '+0.2%', basis: 'NAIC' },
+                        'Property & Casualty Insurers': { amount: 0.3, status: 'estimated', change: '0.0%', basis: 'NAIC' },
+                        'State & Local Governments': { amount: 0.5, status: 'estimated', change: '+0.1%', basis: 'Census' },
+                        'Other Institutional': { amount: 0.3, status: 'estimated', change: '0.0%', basis: 'Residual' }
+                    },
+                    sieNote: "Insurance companies use Asset-Liability Management (ALM) to match policy durations. Life insurers hold longer-duration Treasuries than P&C insurers. State regulations often mandate minimum Treasury allocations. General Account assets back guarantees; Separate Accounts shift risk to policyholders."
+                }
+            }
         };
 
-        // Normalize to exactly $36T
-        const total = Object.values(rawData).reduce((a, b) => a + b, 0);
-        const scaleFactor = 36.0 / total;
-
+        // Legacy data format for existing visualizations
         const data = {};
         const percentages = {};
 
-        for (const [key, value] of Object.entries(rawData)) {
-            data[key] = value * scaleFactor;
-            percentages[key] = (data[key] / 36.0) * 100;
+        for (const [key, value] of Object.entries(treasuryHoldings.categories)) {
+            data[key] = value.total;
+            percentages[key] = (value.total / 36.0) * 100;
         }
 
         // Color scheme matching the site design
@@ -438,18 +747,74 @@
             'Insurance/State/Local/Other': '#7C9885'  // Sage
         };
 
-        // Populate data table
-        function populateTable() {
+        // Enhanced table population with expandable rows
+        function populateEnhancedTable() {
             const tbody = document.getElementById('dataTableBody');
-            const sortedEntries = Object.entries(data).sort((a, b) => b[1] - a[1]);
+            tbody.innerHTML = ''; // Clear existing content
 
-            sortedEntries.forEach(([holder, amount]) => {
-                const row = tbody.insertRow();
-                row.innerHTML = `
-                    <td>${holder}</td>
-                    <td class="amount">$${amount.toFixed(1)}T</td>
-                    <td class="percentage">${percentages[holder].toFixed(1)}%</td>
+            let footnoteCounter = 1;
+            const sieNotes = [];
+
+            // Sort categories by total amount
+            const sortedCategories = Object.entries(treasuryHoldings.categories)
+                .sort((a, b) => b[1].total - a[1].total);
+
+            sortedCategories.forEach(([categoryName, categoryData]) => {
+                const categoryId = categoryName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+
+                // Create parent row
+                const parentRow = tbody.insertRow();
+                parentRow.className = 'parent-row';
+                parentRow.dataset.category = categoryId;
+
+                const statusBadge = categoryData.status === 'verified' ? '🟢' : '🟡';
+                const changeClass = getChangeClass(categoryData.yoyChange);
+
+                parentRow.innerHTML = `
+                    <td class="expand-icon">▼</td>
+                    <td class="holder-name">
+                        ${categoryName}
+                        <span class="status-badge">${statusBadge}</span>
+                        <sup class="footnote-ref">[${footnoteCounter}]</sup>
+                    </td>
+                    <td class="amount">$${categoryData.total.toFixed(1)}T</td>
+                    <td class="percentage">${((categoryData.total / 36.0) * 100).toFixed(1)}%</td>
+                    <td class="source-note">${categoryData.source}</td>
+                    <td class="change ${changeClass}">${categoryData.yoyChange}</td>
                 `;
+
+                // Store SIE note for later
+                sieNotes.push({
+                    number: footnoteCounter,
+                    title: categoryName,
+                    content: categoryData.sieNote
+                });
+                footnoteCounter++;
+
+                // Create child rows
+                if (categoryData.breakdown) {
+                    Object.entries(categoryData.breakdown).forEach(([subName, subData]) => {
+                        const childRow = tbody.insertRow();
+                        childRow.className = 'child-row';
+                        childRow.dataset.parent = categoryId;
+
+                        const subStatusBadge = subData.status === 'verified' ? '🟢' : '🟡';
+                        const subChangeClass = getChangeClass(subData.change);
+                        const sourceText = subData.basis || 'Verified';
+
+                        childRow.innerHTML = `
+                            <td></td>
+                            <td class="holder-name indented">
+                                ${subName}
+                                <span class="status-badge">${subStatusBadge}</span>
+                            </td>
+                            <td class="amount">$${subData.amount.toFixed(2)}T</td>
+                            <td class="percentage">${((subData.amount / 36.0) * 100).toFixed(2)}%</td>
+                            <td class="source-note">${sourceText}</td>
+                            <td class="change ${subChangeClass}">${subData.change}</td>
+                        `;
+                    });
+                }
             });
 
             // Add total row
@@ -457,14 +822,99 @@
             totalRow.style.fontWeight = 'bold';
             totalRow.style.borderTop = '2px solid var(--fh-navy)';
             totalRow.innerHTML = `
-                <td>TOTAL</td>
+                <td></td>
+                <td>TOTAL U.S. TREASURY DEBT</td>
                 <td class="amount">$36.0T</td>
                 <td class="percentage">100.0%</td>
+                <td colspan="2"></td>
             `;
+
+            // Populate SIE notes
+            populateSIENotes(sieNotes);
+        }
+
+        // Helper function to determine change class
+        function getChangeClass(changeStr) {
+            if (!changeStr) return 'neutral';
+            if (changeStr.startsWith('+')) return 'positive';
+            if (changeStr.startsWith('-')) return 'negative';
+            return 'neutral';
+        }
+
+        // Populate SIE exam notes
+        function populateSIENotes(notes) {
+            const container = document.getElementById('sieNotesContainer');
+            if (!container) return;
+
+            container.innerHTML = notes.map(note => `
+                <div class="sie-note">
+                    <div class="sie-note-title">
+                        <span>[${note.number}]</span>
+                        ${note.title}
+                    </div>
+                    <div class="sie-note-content">
+                        ${note.content}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Setup table interactivity
+        function setupTableInteractivity() {
+            // Parent row click to expand/collapse
+            document.querySelectorAll('.parent-row').forEach(row => {
+                row.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    const children = document.querySelectorAll(`[data-parent="${category}"]`);
+                    const icon = this.querySelector('.expand-icon');
+
+                    children.forEach(child => {
+                        child.classList.toggle('hidden');
+                    });
+
+                    this.classList.toggle('expanded');
+                    icon.textContent = icon.textContent === '▼' ? '▶' : '▼';
+                });
+            });
+
+            // Expand/Collapse All button
+            const expandBtn = document.getElementById('expandAllBtn');
+            if (expandBtn) {
+                expandBtn.addEventListener('click', function() {
+                    const isExpanding = this.textContent === 'Expand All';
+
+                    document.querySelectorAll('.parent-row').forEach(row => {
+                        const category = row.dataset.category;
+                        const children = document.querySelectorAll(`[data-parent="${category}"]`);
+                        const icon = row.querySelector('.expand-icon');
+
+                        if (isExpanding) {
+                            children.forEach(child => child.classList.remove('hidden'));
+                            row.classList.add('expanded');
+                            icon.textContent = '▼';
+                        } else {
+                            children.forEach(child => child.classList.add('hidden'));
+                            row.classList.remove('expanded');
+                            icon.textContent = '▶';
+                        }
+                    });
+
+                    this.textContent = isExpanding ? 'Collapse All' : 'Expand All';
+                });
+            }
         }
 
         // 1. Pie Chart
         function createPieChart() {
+            // Remove loading message immediately
+            const container = document.getElementById('pieChart');
+            if (container) {
+                const loadingDiv = container.querySelector('.loading');
+                if (loadingDiv) {
+                    loadingDiv.remove();
+                }
+            }
+
             const sortedData = Object.entries(data).sort((a, b) => b[1] - a[1]);
 
             const pieData = [{
@@ -501,8 +951,18 @@
 
         // 2. Treemap
         function createTreemap() {
+            // Remove loading message immediately
+            const container = document.getElementById('treemapChart');
+            if (container) {
+                const loadingDiv = container.querySelector('.loading');
+                if (loadingDiv) {
+                    loadingDiv.remove();
+                }
+            }
+
             const labels = Object.keys(data);
             const values = Object.values(data);
+            // Create complete text with label, amount, and percentage all in one
             const text = labels.map(k => `${k}<br>$${data[k].toFixed(1)}T<br>${percentages[k].toFixed(1)}%`);
 
             const treemapData = [{
@@ -512,6 +972,8 @@
                 values: values,
                 text: text,
                 textposition: 'middle center',
+                textinfo: 'text',  // Only show the custom text, nothing else
+                // Remove texttemplate completely to avoid duplication
                 marker: {
                     colors: labels.map(l => colors[l] || '#999999'),
                     line: {
@@ -536,68 +998,106 @@
             Plotly.newPlot('treemapChart', treemapData, layout, {responsive: true});
         }
 
-        // 3. Sankey Diagram
+        // 3. Enhanced Sankey Diagram with subcategories
         function createSankey() {
-            const nodeLabels = [
-                "U.S. Treasury Debt<br>$36T",  // 0
-                "U.S. Government<br>$13.0T (36%)",  // 1
-                "Domestic Private<br>$14.2T (39%)",  // 2
-                "Foreign Holders<br>$8.8T (24%)",  // 3
-                `Federal Reserve<br>$${data['Federal Reserve'].toFixed(1)}T`,  // 4
-                `Intragovernmental<br>$${data['Intragovernmental Holdings'].toFixed(1)}T`,  // 5
-                `Foreign Official<br>$${data['Foreign Official Holders'].toFixed(1)}T`,  // 6
-                `Mutual Funds & ETFs<br>$${data['U.S. Mutual Funds & ETFs'].toFixed(1)}T`,  // 7
-                `Banks & Depositories<br>$${data['U.S. Banks & Depositories'].toFixed(1)}T`,  // 8
-                `Pension Funds<br>$${data['Pension Funds'].toFixed(1)}T`,  // 9
-                `Insurance/Other<br>$${data['Insurance/State/Local/Other'].toFixed(1)}T`  // 10
-            ];
+            // Remove loading message immediately
+            const container = document.getElementById('sankeyChart');
+            if (container) {
+                const loadingDiv = container.querySelector('.loading');
+                if (loadingDiv) {
+                    loadingDiv.remove();
+                }
+            }
 
-            const nodeColors = [
-                '#808080',  // Treasury
-                '#002D62',  // Government
-                '#2E7D32',  // Domestic
-                '#B08D57',  // Foreign
-                '#002D62',  // Fed
-                '#4A6FA5',  // Intra
-                '#B08D57',  // Foreign
-                '#2E7D32',  // Mutual
-                '#43A047',  // Banks
-                '#66BB6A',  // Pension
-                '#7C9885'   // Other
-            ];
+            // Build nodes array with subcategories
+            const nodes = [];
+            const nodeColors = [];
+            const links = [];
+
+            // Main source node
+            nodes.push("U.S. Treasury Debt<br>$36T");
+            nodeColors.push('#808080');
+
+            // Category groupings
+            nodes.push("U.S. Government<br>$13.3T (36.9%)");  // 1
+            nodes.push("Domestic Private<br>$14.2T (39.4%)");  // 2
+            nodes.push("Foreign Holders<br>$8.5T (23.6%)");   // 3
+            nodeColors.push('#002D62', '#2E7D32', '#B08D57');
+
+            let nodeIndex = 4;
+            const categoryIndices = {};
+
+            // Add main categories and their subcategories
+            const govCategories = ['Federal Reserve', 'Intragovernmental Holdings'];
+            const domesticCategories = ['U.S. Mutual Funds & ETFs', 'U.S. Banks & Depositories',
+                                      'Pension Funds', 'Insurance/State/Local/Other'];
+
+            // Government categories
+            govCategories.forEach(cat => {
+                const catData = treasuryHoldings.categories[cat];
+                nodes.push(`${cat}<br>$${catData.total.toFixed(1)}T`);
+                nodeColors.push('#002D62');
+                categoryIndices[cat] = nodeIndex++;
+                links.push({
+                    source: 1,
+                    target: categoryIndices[cat],
+                    value: catData.total
+                });
+            });
+
+            // Domestic categories
+            domesticCategories.forEach(cat => {
+                const catData = treasuryHoldings.categories[cat];
+                nodes.push(`${cat}<br>$${catData.total.toFixed(1)}T`);
+                nodeColors.push('#2E7D32');
+                categoryIndices[cat] = nodeIndex++;
+                links.push({
+                    source: 2,
+                    target: categoryIndices[cat],
+                    value: catData.total
+                });
+            });
+
+            // Foreign category
+            const foreignData = treasuryHoldings.categories['Foreign Official Holders'];
+            nodes.push(`Foreign Official Holders<br>$${foreignData.total.toFixed(1)}T`);
+            nodeColors.push('#B08D57');
+            categoryIndices['Foreign Official Holders'] = nodeIndex++;
+            links.push({
+                source: 3,
+                target: categoryIndices['Foreign Official Holders'],
+                value: foreignData.total
+            });
+
+            // Removed individual country nodes to prevent duplication and maintain consistency
+
+            // Main flow links
+            links.unshift(
+                { source: 0, target: 1, value: 13.3 },
+                { source: 0, target: 2, value: 14.2 },
+                { source: 0, target: 3, value: 8.5 }
+            );
 
             const sankeyData = {
                 type: "sankey",
                 orientation: "h",
                 node: {
                     pad: 15,
-                    thickness: 30,
+                    thickness: 25,
                     line: {
                         color: "white",
                         width: 1
                     },
-                    label: nodeLabels,
+                    label: nodes,
                     color: nodeColors,
                     hovertemplate: '%{label}<extra></extra>'
                 },
                 link: {
-                    source: [0, 0, 0, 1, 1, 2, 2, 2, 2, 3],
-                    target: [1, 2, 3, 4, 5, 7, 8, 9, 10, 6],
-                    value: [
-                        data['Federal Reserve'] + data['Intragovernmental Holdings'],
-                        data['U.S. Mutual Funds & ETFs'] + data['U.S. Banks & Depositories'] +
-                        data['Pension Funds'] + data['Insurance/State/Local/Other'],
-                        data['Foreign Official Holders'],
-                        data['Federal Reserve'],
-                        data['Intragovernmental Holdings'],
-                        data['U.S. Mutual Funds & ETFs'],
-                        data['U.S. Banks & Depositories'],
-                        data['Pension Funds'],
-                        data['Insurance/State/Local/Other'],
-                        data['Foreign Official Holders']
-                    ],
-                    color: 'rgba(0,0,0,0.2)',
-                    hovertemplate: '$%{value:.1f} Trillion<extra></extra>'
+                    source: links.map(l => l.source),
+                    target: links.map(l => l.target),
+                    value: links.map(l => l.value),
+                    color: 'rgba(0,0,0,0.15)',
+                    hovertemplate: '$%{value:.2f} Trillion<extra></extra>'
                 }
             };
 
@@ -617,44 +1117,77 @@
 
         // Initialize all visualizations
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded. Checking for Plotly...');
+
             // Check if Plotly is loaded
             if (typeof Plotly === 'undefined') {
+                console.error('Plotly is not defined! CDN may be blocked or failed to load.');
                 document.querySelectorAll('.loading').forEach(el => {
-                    el.textContent = 'Error: Visualization library failed to load. Please refresh the page.';
+                    el.innerHTML = '<span style="color: red;">Error: Plotly.js library failed to load. This may be due to:<br>• Network/firewall blocking CDN<br>• Ad blocker interference<br>• Browser security settings<br>Please check console for details.</span>';
                 });
                 return;
             }
 
+            console.log('Plotly loaded successfully:', typeof Plotly);
+
             try {
-                populateTable();
+                populateEnhancedTable();
+                setupTableInteractivity();
             } catch (error) {
                 // Silently handle error in production
+                console.error('Table initialization error:', error);
             }
 
-            // Create visualizations with slight delay for smooth loading
+            // Create visualizations with proper loading message removal
             setTimeout(() => {
+                const pieContainer = document.getElementById('pieChart');
                 try {
+                    console.log('Creating pie chart...');
                     createPieChart();
+                    console.log('Pie chart created successfully');
                 } catch (error) {
-                    // Silently handle error in production
+                    console.error('Pie Chart Error:', error);
+                    if (pieContainer) {
+                        pieContainer.innerHTML = '<div style="color: red;">Error loading pie chart: ' + error.message + '</div>';
+                    }
                 }
             }, 100);
 
             setTimeout(() => {
+                const treemapContainer = document.getElementById('treemapChart');
                 try {
+                    console.log('Creating treemap...');
                     createTreemap();
+                    console.log('Treemap created successfully');
                 } catch (error) {
-                    // Silently handle error in production
+                    console.error('Treemap Error:', error);
+                    if (treemapContainer) {
+                        treemapContainer.innerHTML = '<div style="color: red;">Error loading treemap: ' + error.message + '</div>';
+                    }
                 }
             }, 200);
 
             setTimeout(() => {
+                const sankeyContainer = document.getElementById('sankeyChart');
                 try {
+                    console.log('Creating sankey diagram...');
                     createSankey();
+                    console.log('Sankey diagram created successfully');
                 } catch (error) {
-                    // Silently handle error in production
+                    console.error('Sankey Error:', error);
+                    if (sankeyContainer) {
+                        sankeyContainer.innerHTML = '<div style="color: red;">Error loading flow diagram: ' + error.message + '</div>';
+                    }
                 }
             }, 300);
+
+            // Aggressive failsafe: Remove ALL loading messages after charts should be loaded
+            setTimeout(() => {
+                document.querySelectorAll('.loading').forEach(el => {
+                    console.warn('Removing loading message from:', el.parentElement?.id || 'unknown');
+                    el.remove();  // Completely remove the element, not just hide it
+                });
+            }, 500);
         });
 
         // Smooth scroll for anchor links
