@@ -1060,7 +1060,7 @@
 
             // Foreign category
             const foreignData = treasuryHoldings.categories['Foreign Official Holders'];
-            nodes.push(`Foreign Official<br>$${foreignData.total.toFixed(1)}T`);
+            nodes.push(`Foreign Official Holders<br>$${foreignData.total.toFixed(1)}T`);
             nodeColors.push('#B08D57');
             categoryIndices['Foreign Official Holders'] = nodeIndex++;
             links.push({
@@ -1069,20 +1069,7 @@
                 value: foreignData.total
             });
 
-            // Add top 5 foreign countries as subcategories
-            const topForeignCountries = Object.entries(foreignData.breakdown)
-                .slice(0, 5)
-                .filter(([name, _]) => name !== 'All Other Countries');
-
-            topForeignCountries.forEach(([country, countryData]) => {
-                nodes.push(`${country}<br>$${countryData.amount.toFixed(2)}T`);
-                nodeColors.push('#D4A76A');
-                links.push({
-                    source: categoryIndices['Foreign Official Holders'],
-                    target: nodeIndex++,
-                    value: countryData.amount
-                });
-            });
+            // Removed individual country nodes to prevent duplication and maintain consistency
 
             // Main flow links
             links.unshift(
