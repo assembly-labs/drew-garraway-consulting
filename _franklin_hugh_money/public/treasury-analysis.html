@@ -619,47 +619,40 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Check if Plotly is loaded
             if (typeof Plotly === 'undefined') {
-                console.error('Plotly library not loaded!');
                 document.querySelectorAll('.loading').forEach(el => {
                     el.textContent = 'Error: Visualization library failed to load. Please refresh the page.';
                 });
                 return;
             }
 
-            console.log('Plotly version:', Plotly.version);
-
             try {
                 populateTable();
-                console.log('Table populated successfully');
             } catch (error) {
-                console.error('Error populating table:', error);
+                // Silently handle error in production
             }
 
-            // Create visualizations with slight delay for smooth loading and error handling
+            // Create visualizations with slight delay for smooth loading
             setTimeout(() => {
                 try {
                     createPieChart();
-                    console.log('Pie chart created successfully');
                 } catch (error) {
-                    console.error('Error creating pie chart:', error);
+                    // Silently handle error in production
                 }
             }, 100);
 
             setTimeout(() => {
                 try {
                     createTreemap();
-                    console.log('Treemap created successfully');
                 } catch (error) {
-                    console.error('Error creating treemap:', error);
+                    // Silently handle error in production
                 }
             }, 200);
 
             setTimeout(() => {
                 try {
                     createSankey();
-                    console.log('Sankey diagram created successfully');
                 } catch (error) {
-                    console.error('Error creating Sankey:', error);
+                    // Silently handle error in production
                 }
             }, 300);
         });
