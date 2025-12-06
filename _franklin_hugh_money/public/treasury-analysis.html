@@ -937,10 +937,13 @@
                 plot_bgcolor: 'rgba(0,0,0,0)'
             };
 
-            // Clear loading message before creating chart
+            // Clear the entire container including loading message
             const container = document.getElementById('pieChart');
             if (container) {
-                container.innerHTML = '';
+                // Remove all child elements first
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
             }
 
             Plotly.newPlot('pieChart', pieData, layout, {responsive: true});
@@ -950,8 +953,8 @@
         function createTreemap() {
             const labels = Object.keys(data);
             const values = Object.values(data);
-            // Combine the label and values into a single text string to avoid duplication
-            const text = labels.map(k => `${k}<br>$${data[k].toFixed(1)}T<br>${percentages[k].toFixed(1)}%`);
+            // Only show the dollar amount and percentage - label is shown separately
+            const text = labels.map(k => `$${data[k].toFixed(1)}T<br>${percentages[k].toFixed(1)}%`);
 
             const treemapData = [{
                 type: 'treemap',
@@ -960,7 +963,8 @@
                 values: values,
                 text: text,
                 textposition: 'middle center',
-                textinfo: 'text',  // Only show the custom text, not the label
+                textinfo: 'text',  // Only display custom text, not label
+                texttemplate: '%{label}<br>%{text}',  // Format: Label on top, then custom text
                 marker: {
                     colors: labels.map(l => colors[l] || '#999999'),
                     line: {
@@ -982,10 +986,13 @@
                 plot_bgcolor: 'rgba(0,0,0,0)'
             };
 
-            // Clear loading message before creating chart
+            // Clear the entire container including loading message
             const container = document.getElementById('treemapChart');
             if (container) {
-                container.innerHTML = '';
+                // Remove all child elements first
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
             }
 
             Plotly.newPlot('treemapChart', treemapData, layout, {responsive: true});
@@ -1109,10 +1116,13 @@
                 plot_bgcolor: 'rgba(0,0,0,0)'
             };
 
-            // Clear loading message before creating chart
+            // Clear the entire container including loading message
             const container = document.getElementById('sankeyChart');
             if (container) {
-                container.innerHTML = '';
+                // Remove all child elements first
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
             }
 
             Plotly.newPlot('sankeyChart', [sankeyData], layout, {responsive: true});
@@ -1141,36 +1151,58 @@
                 console.error('Table initialization error:', error);
             }
 
-            // Create visualizations with slight delay for smooth loading
+            // Create visualizations with proper loading message removal
             setTimeout(() => {
+                const pieContainer = document.getElementById('pieChart');
                 try {
+                    console.log('Creating pie chart...');
                     createPieChart();
+                    console.log('Pie chart created successfully');
                 } catch (error) {
                     console.error('Pie Chart Error:', error);
-                    document.getElementById('pieChart').innerHTML =
-                        '<div class="loading" style="color: red;">Error loading pie chart: ' + error.message + '</div>';
+                    if (pieContainer) {
+                        pieContainer.innerHTML = '<div style="color: red;">Error loading pie chart: ' + error.message + '</div>';
+                    }
                 }
             }, 100);
 
             setTimeout(() => {
+                const treemapContainer = document.getElementById('treemapChart');
                 try {
+                    console.log('Creating treemap...');
                     createTreemap();
+                    console.log('Treemap created successfully');
                 } catch (error) {
                     console.error('Treemap Error:', error);
-                    document.getElementById('treemapChart').innerHTML =
-                        '<div class="loading" style="color: red;">Error loading treemap: ' + error.message + '</div>';
+                    if (treemapContainer) {
+                        treemapContainer.innerHTML = '<div style="color: red;">Error loading treemap: ' + error.message + '</div>';
+                    }
                 }
             }, 200);
 
             setTimeout(() => {
+                const sankeyContainer = document.getElementById('sankeyChart');
                 try {
+                    console.log('Creating sankey diagram...');
                     createSankey();
+                    console.log('Sankey diagram created successfully');
                 } catch (error) {
                     console.error('Sankey Error:', error);
-                    document.getElementById('sankeyChart').innerHTML =
-                        '<div class="loading" style="color: red;">Error loading flow diagram: ' + error.message + '</div>';
+                    if (sankeyContainer) {
+                        sankeyContainer.innerHTML = '<div style="color: red;">Error loading flow diagram: ' + error.message + '</div>';
+                    }
                 }
             }, 300);
+
+            // Failsafe: Clear any remaining loading messages after all charts should be loaded
+            setTimeout(() => {
+                document.querySelectorAll('.loading').forEach(el => {
+                    if (el.textContent.includes('Loading visualization')) {
+                        console.warn('Found persistent loading message, removing:', el.parentElement.id);
+                        el.style.display = 'none';
+                    }
+                });
+            }, 1000);
         });
 
         // Smooth scroll for anchor links
