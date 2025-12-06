@@ -11,6 +11,7 @@
 - [ ] Read this protocol document completely
 - [ ] Check `dev/roadmap/current-sprint.md` for active tasks
 - [ ] Review `dev/docs/known-issues.md` for known bugs
+- [ ] **CRITICAL: Read `dev/docs/DEPLOYMENT_GUIDE.md` - Files deploy from ROOT not public/**
 - [ ] Run `git status` to check current state
 - [ ] Review last 3 commits with `git log -3 --oneline`
 - [ ] Check `dev/logs/session-log.md` for previous session notes
