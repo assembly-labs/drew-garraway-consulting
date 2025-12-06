@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="Understanding the $36 Trillion U.S. Treasury Market - Who owns America's debt?">
+
+    <title>U.S. Treasury Market Analysis | Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Plotly.js for visualizations -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+
+    <style>
+        :root {
+            /* Primary Institutional Colors */
+            --fh-navy: #002D62;
+            --fh-cream: #FFFDF7;
+            --fh-gray: #54585A;
+
+            /* Secondary Colors */
+            --fh-sage: #7C9885;
+            --fh-burgundy: #6B2737;
+            --fh-gold: #B08D57;
+
+            /* Neutral Scale */
+            --fh-gray-900: #1A1A1A;
+            --fh-gray-700: #404040;
+            --fh-gray-600: #595959;
+            --fh-gray-500: #737373;
+            --fh-gray-300: #D4D4D4;
+            --fh-gray-200: #E5E5E5;
+            --fh-gray-100: #F5F5F5;
+            --fh-white: #FFFFFF;
+
+            /* Typography */
+            --fh-font-display: 'Crimson Pro', Georgia, serif;
+            --fh-font-body: 'Inter', -apple-system, sans-serif;
+            --fh-font-mono: 'IBM Plex Mono', monospace;
+
+            /* Spacing */
+            --fh-space-xs: 0.25rem;
+            --fh-space-sm: 0.5rem;
+            --fh-space-md: 1rem;
+            --fh-space-lg: 1.5rem;
+            --fh-space-xl: 2rem;
+            --fh-space-2xl: 3rem;
+            --fh-space-3xl: 4rem;
+            --fh-space-4xl: 6rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--fh-font-body);
+            font-size: 16px;
+            line-height: 1.75;
+            color: var(--fh-gray-900);
+            background: var(--fh-cream);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--fh-font-display);
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            letter-spacing: -0.02em;
+            color: var(--fh-navy);
+            margin-bottom: var(--fh-space-xl);
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: var(--fh-space-lg);
+            color: var(--fh-navy);
+            border-bottom: 2px solid var(--fh-navy);
+            padding-bottom: var(--fh-space-sm);
+        }
+
+        h3 {
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+            margin-bottom: var(--fh-space-md);
+            color: var(--fh-gray-700);
+        }
+
+        p {
+            margin-bottom: var(--fh-space-md);
+            color: var(--fh-gray-700);
+            max-width: 65ch;
+        }
+
+        a {
+            color: var(--fh-navy);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            text-decoration-thickness: 2px;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--fh-space-xl);
+        }
+
+        /* Header */
+        .header {
+            padding: var(--fh-space-2xl) 0;
+            border-bottom: 1px solid var(--fh-gray-200);
+            margin-bottom: var(--fh-space-2xl);
+        }
+
+        .nav {
+            display: flex;
+            gap: var(--fh-space-xl);
+            margin-bottom: var(--fh-space-2xl);
+            font-size: 0.9rem;
+            letter-spacing: 0.01em;
+        }
+
+        .nav a {
+            color: var(--fh-gray-600);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav a:hover {
+            color: var(--fh-navy);
+        }
+
+        .nav .active {
+            color: var(--fh-navy);
+            font-weight: 600;
+        }
+
+        /* Lead Text */
+        .lead {
+            font-size: 1.25rem;
+            font-family: var(--fh-font-display);
+            color: var(--fh-gray-600);
+            line-height: 1.6;
+            margin-bottom: var(--fh-space-2xl);
+        }
+
+        /* Visualization Containers */
+        .viz-section {
+            margin-bottom: var(--fh-space-4xl);
+            padding: var(--fh-space-2xl);
+            background: var(--fh-white);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .viz-container {
+            min-height: 500px;
+            margin-top: var(--fh-space-xl);
+        }
+
+        .viz-description {
+            font-size: 0.95rem;
+            color: var(--fh-gray-600);
+            margin-top: var(--fh-space-md);
+            font-style: italic;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            margin: var(--fh-space-2xl) 0;
+            border-collapse: collapse;
+            font-family: var(--fh-font-mono);
+            font-size: 0.9rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: var(--fh-space-md);
+            text-align: left;
+            border-bottom: 1px solid var(--fh-gray-200);
+        }
+
+        .data-table th {
+            background: var(--fh-navy);
+            color: var(--fh-white);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.85rem;
+        }
+
+        .data-table tr:hover {
+            background: var(--fh-gray-100);
+        }
+
+        .data-table .amount {
+            text-align: right;
+            font-weight: 500;
+        }
+
+        .data-table .percentage {
+            text-align: right;
+            color: var(--fh-gray-600);
+        }
+
+        /* Insights Box */
+        .insight-box {
+            background: linear-gradient(135deg, var(--fh-navy) 0%, #003d82 100%);
+            color: var(--fh-white);
+            padding: var(--fh-space-2xl);
+            border-radius: 8px;
+            margin: var(--fh-space-2xl) 0;
+        }
+
+        .insight-box h3 {
+            color: var(--fh-white);
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        .insight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .insight-box li {
+            padding-left: var(--fh-space-lg);
+            margin-bottom: var(--fh-space-sm);
+            position: relative;
+        }
+
+        .insight-box li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--fh-gold);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: var(--fh-space-4xl);
+            padding-top: var(--fh-space-2xl);
+            border-top: 1px solid var(--fh-gray-200);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--fh-gray-500);
+        }
+
+        .footer a {
+            color: var(--fh-gray-600);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--fh-space-md);
+            }
+
+            .viz-section {
+                padding: var(--fh-space-lg);
+            }
+
+            .nav {
+                flex-wrap: wrap;
+                gap: var(--fh-space-md);
+            }
+
+            .data-table {
+                font-size: 0.8rem;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: var(--fh-space-sm);
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: var(--fh-space-2xl);
+            color: var(--fh-gray-500);
+        }
+
+        .loading:after {
+            content: "...";
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: "."; }
+            40% { content: ".."; }
+            60%, 100% { content: "..."; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <a href="franklin-hugh-money.html">← Back to F.H. Money</a>
+            <a href="#overview">Overview</a>
+            <a href="#pie-chart">Pie Chart</a>
+            <a href="#treemap">Treemap</a>
+            <a href="#flow">Flow Diagram</a>
+        </nav>
+
+        <header class="header">
+            <h1>Who Owns the $36 Trillion U.S. Treasury Market?</h1>
+            <p class="lead">
+                Understanding the distribution of U.S. government debt reveals the complex web of domestic and international stakeholders
+                that finance America's operations. This analysis visualizes the December 2025 ownership structure of the world's largest bond market.
+            </p>
+        </header>
+
+        <!-- Data Overview Table -->
+        <section id="overview" class="viz-section">
+            <h2>Ownership Breakdown</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Holder</th>
+                        <th class="amount">Amount</th>
+                        <th class="percentage">Share</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTableBody">
+                    <!-- Will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Key Insights -->
+        <div class="insight-box">
+            <h3>Key Insights</h3>
+            <ul>
+                <li>The U.S. government itself holds 37.5% through the Federal Reserve and intragovernmental accounts</li>
+                <li>Foreign holders control nearly a quarter (23.5%) of all U.S. debt</li>
+                <li>Domestic private investors (mutual funds, banks, pensions) own 39% combined</li>
+                <li>The Federal Reserve's $6.5T position makes it one of the largest single holders</li>
+            </ul>
+        </div>
+
+        <!-- Pie Chart -->
+        <section id="pie-chart" class="viz-section">
+            <h2>Traditional Ownership View</h2>
+            <div id="pieChart" class="viz-container">
+                <div class="loading">Loading visualization</div>
+            </div>
+            <p class="viz-description">
+                A classic pie chart showing the relative size of each holder category.
+                The largest holders are emphasized with expanded slices.
+            </p>
+        </section>
+
+        <!-- Treemap -->
+        <section id="treemap" class="viz-section">
+            <h2>Hierarchical Distribution</h2>
+            <div id="treemapChart" class="viz-container">
+                <div class="loading">Loading visualization</div>
+            </div>
+            <p class="viz-description">
+                A space-efficient treemap visualization where each rectangle's area corresponds to the holder's share of the total debt.
+            </p>
+        </section>
+
+        <!-- Sankey Diagram -->
+        <section id="flow" class="viz-section">
+            <h2>Ownership Flow Analysis</h2>
+            <div id="sankeyChart" class="viz-container">
+                <div class="loading">Loading visualization</div>
+            </div>
+            <p class="viz-description">
+                This flow diagram traces how the $36 trillion in Treasury debt flows from issuance to three major categories
+                (Government, Domestic Private, Foreign), then to specific holder types.
+            </p>
+        </section>
+
+        <footer class="footer">
+            <p>
+                Data as of December 2025 | Analysis by <a href="franklin-hugh-money.html">Franklin Hugh Money</a>
+            </p>
+            <p>
+                <small>An investment in knowledge pays the best interest.</small>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Data preparation
+        const rawData = {
+            'Federal Reserve': 6.5,
+            'Intragovernmental Holdings': 6.8,
+            'Foreign Official Holders': 8.5,
+            'U.S. Mutual Funds & ETFs': 6.8,
+            'U.S. Banks & Depositories': 4.5,
+            'Pension Funds': 2.5,
+            'Insurance/State/Local/Other': 2.0
+        };
+
+        // Normalize to exactly $36T
+        const total = Object.values(rawData).reduce((a, b) => a + b, 0);
+        const scaleFactor = 36.0 / total;
+
+        const data = {};
+        const percentages = {};
+
+        for (const [key, value] of Object.entries(rawData)) {
+            data[key] = value * scaleFactor;
+            percentages[key] = (data[key] / 36.0) * 100;
+        }
+
+        // Color scheme matching the site design
+        const colors = {
+            'Federal Reserve': '#002D62',  // Navy
+            'Intragovernmental Holdings': '#4A6FA5',  // Lighter navy
+            'Foreign Official Holders': '#B08D57',  // Gold
+            'U.S. Mutual Funds & ETFs': '#2E7D32',  // Deep green
+            'U.S. Banks & Depositories': '#43A047',  // Medium green
+            'Pension Funds': '#66BB6A',  // Light green
+            'Insurance/State/Local/Other': '#7C9885'  // Sage
+        };
+
+        // Populate data table
+        function populateTable() {
+            const tbody = document.getElementById('dataTableBody');
+            const sortedEntries = Object.entries(data).sort((a, b) => b[1] - a[1]);
+
+            sortedEntries.forEach(([holder, amount]) => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${holder}</td>
+                    <td class="amount">$${amount.toFixed(1)}T</td>
+                    <td class="percentage">${percentages[holder].toFixed(1)}%</td>
+                `;
+            });
+
+            // Add total row
+            const totalRow = tbody.insertRow();
+            totalRow.style.fontWeight = 'bold';
+            totalRow.style.borderTop = '2px solid var(--fh-navy)';
+            totalRow.innerHTML = `
+                <td>TOTAL</td>
+                <td class="amount">$36.0T</td>
+                <td class="percentage">100.0%</td>
+            `;
+        }
+
+        // 1. Pie Chart
+        function createPieChart() {
+            const sortedData = Object.entries(data).sort((a, b) => b[1] - a[1]);
+
+            const pieData = [{
+                values: sortedData.map(d => d[1]),
+                labels: sortedData.map(([k, v]) => `${k}<br>$${v.toFixed(1)}T`),
+                type: 'pie',
+                hole: 0,
+                textposition: 'outside',
+                textinfo: 'label+percent',
+                marker: {
+                    colors: sortedData.map(d => colors[d[0]] || '#999999'),
+                    line: {
+                        color: '#FFFFFF',
+                        width: 2
+                    }
+                },
+                pull: sortedData.map((_, i) => i < 3 ? 0.1 : 0),
+                hovertemplate: '<b>%{label}</b><br>%{percent}<br>$%{value:.1f} Trillion<extra></extra>'
+            }];
+
+            const layout = {
+                height: 600,
+                font: {
+                    family: 'Inter, -apple-system, sans-serif'
+                },
+                showlegend: false,
+                margin: { l: 100, r: 100, t: 50, b: 50 },
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)'
+            };
+
+            Plotly.newPlot('pieChart', pieData, layout, {responsive: true});
+        }
+
+        // 2. Treemap
+        function createTreemap() {
+            const labels = Object.keys(data);
+            const values = Object.values(data);
+            const text = labels.map(k => `${k}<br>$${data[k].toFixed(1)}T<br>${percentages[k].toFixed(1)}%`);
+
+            const treemapData = [{
+                type: 'treemap',
+                labels: labels,
+                parents: Array(labels.length).fill(""),
+                values: values,
+                text: text,
+                textposition: 'middle center',
+                marker: {
+                    colors: labels.map(l => colors[l] || '#999999'),
+                    line: {
+                        color: '#FFFFFF',
+                        width: 2
+                    }
+                },
+                hovertemplate: '<b>%{label}</b><br>Value: $%{value:.1f} Trillion<br>Share: %{percentroot}<extra></extra>',
+                textfont: {
+                    family: 'Inter, -apple-system, sans-serif',
+                    size: 14
+                }
+            }];
+
+            const layout = {
+                height: 500,
+                margin: { l: 0, r: 0, t: 0, b: 0 },
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)'
+            };
+
+            Plotly.newPlot('treemapChart', treemapData, layout, {responsive: true});
+        }
+
+        // 3. Sankey Diagram
+        function createSankey() {
+            const nodeLabels = [
+                "U.S. Treasury Debt<br>$36T",  // 0
+                "U.S. Government<br>$13.0T (36%)",  // 1
+                "Domestic Private<br>$14.2T (39%)",  // 2
+                "Foreign Holders<br>$8.8T (24%)",  // 3
+                `Federal Reserve<br>$${data['Federal Reserve'].toFixed(1)}T`,  // 4
+                `Intragovernmental<br>$${data['Intragovernmental Holdings'].toFixed(1)}T`,  // 5
+                `Foreign Official<br>$${data['Foreign Official Holders'].toFixed(1)}T`,  // 6
+                `Mutual Funds & ETFs<br>$${data['U.S. Mutual Funds & ETFs'].toFixed(1)}T`,  // 7
+                `Banks & Depositories<br>$${data['U.S. Banks & Depositories'].toFixed(1)}T`,  // 8
+                `Pension Funds<br>$${data['Pension Funds'].toFixed(1)}T`,  // 9
+                `Insurance/Other<br>$${data['Insurance/State/Local/Other'].toFixed(1)}T`  // 10
+            ];
+
+            const nodeColors = [
+                '#808080',  // Treasury
+                '#002D62',  // Government
+                '#2E7D32',  // Domestic
+                '#B08D57',  // Foreign
+                '#002D62',  // Fed
+                '#4A6FA5',  // Intra
+                '#B08D57',  // Foreign
+                '#2E7D32',  // Mutual
+                '#43A047',  // Banks
+                '#66BB6A',  // Pension
+                '#7C9885'   // Other
+            ];
+
+            const sankeyData = {
+                type: "sankey",
+                orientation: "h",
+                node: {
+                    pad: 15,
+                    thickness: 30,
+                    line: {
+                        color: "white",
+                        width: 1
+                    },
+                    label: nodeLabels,
+                    color: nodeColors,
+                    hovertemplate: '%{label}<extra></extra>'
+                },
+                link: {
+                    source: [0, 0, 0, 1, 1, 2, 2, 2, 2, 3],
+                    target: [1, 2, 3, 4, 5, 7, 8, 9, 10, 6],
+                    value: [
+                        data['Federal Reserve'] + data['Intragovernmental Holdings'],
+                        data['U.S. Mutual Funds & ETFs'] + data['U.S. Banks & Depositories'] +
+                        data['Pension Funds'] + data['Insurance/State/Local/Other'],
+                        data['Foreign Official Holders'],
+                        data['Federal Reserve'],
+                        data['Intragovernmental Holdings'],
+                        data['U.S. Mutual Funds & ETFs'],
+                        data['U.S. Banks & Depositories'],
+                        data['Pension Funds'],
+                        data['Insurance/State/Local/Other'],
+                        data['Foreign Official Holders']
+                    ],
+                    color: 'rgba(0,0,0,0.2)',
+                    hovertemplate: '$%{value:.1f} Trillion<extra></extra>'
+                }
+            };
+
+            const layout = {
+                height: 600,
+                font: {
+                    family: 'Inter, -apple-system, sans-serif',
+                    size: 12
+                },
+                margin: { l: 10, r: 10, t: 10, b: 10 },
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)'
+            };
+
+            Plotly.newPlot('sankeyChart', [sankeyData], layout, {responsive: true});
+        }
+
+        // Initialize all visualizations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if Plotly is loaded
+            if (typeof Plotly === 'undefined') {
+                document.querySelectorAll('.loading').forEach(el => {
+                    el.textContent = 'Error: Visualization library failed to load. Please refresh the page.';
+                });
+                return;
+            }
+
+            try {
+                populateTable();
+            } catch (error) {
+                // Silently handle error in production
+            }
+
+            // Create visualizations with slight delay for smooth loading
+            setTimeout(() => {
+                try {
+                    createPieChart();
+                } catch (error) {
+                    // Silently handle error in production
+                }
+            }, 100);
+
+            setTimeout(() => {
+                try {
+                    createTreemap();
+                } catch (error) {
+                    // Silently handle error in production
+                }
+            }, 200);
+
+            setTimeout(() => {
+                try {
+                    createSankey();
+                } catch (error) {
+                    // Silently handle error in production
+                }
+            }, 300);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
