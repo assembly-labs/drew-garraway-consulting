@@ -906,6 +906,15 @@
 
         // 1. Pie Chart
         function createPieChart() {
+            // Remove loading message immediately
+            const container = document.getElementById('pieChart');
+            if (container) {
+                const loadingDiv = container.querySelector('.loading');
+                if (loadingDiv) {
+                    loadingDiv.remove();
+                }
+            }
+
             const sortedData = Object.entries(data).sort((a, b) => b[1] - a[1]);
 
             const pieData = [{
@@ -937,24 +946,24 @@
                 plot_bgcolor: 'rgba(0,0,0,0)'
             };
 
-            // Clear the entire container including loading message
-            const container = document.getElementById('pieChart');
-            if (container) {
-                // Remove all child elements first
-                while (container.firstChild) {
-                    container.removeChild(container.firstChild);
-                }
-            }
-
             Plotly.newPlot('pieChart', pieData, layout, {responsive: true});
         }
 
         // 2. Treemap
         function createTreemap() {
+            // Remove loading message immediately
+            const container = document.getElementById('treemapChart');
+            if (container) {
+                const loadingDiv = container.querySelector('.loading');
+                if (loadingDiv) {
+                    loadingDiv.remove();
+                }
+            }
+
             const labels = Object.keys(data);
             const values = Object.values(data);
-            // Only show the dollar amount and percentage - label is shown separately
-            const text = labels.map(k => `$${data[k].toFixed(1)}T<br>${percentages[k].toFixed(1)}%`);
+            // Create complete text with label, amount, and percentage all in one
+            const text = labels.map(k => `${k}<br>$${data[k].toFixed(1)}T<br>${percentages[k].toFixed(1)}%`);
 
             const treemapData = [{
                 type: 'treemap',
@@ -963,8 +972,8 @@
                 values: values,
                 text: text,
                 textposition: 'middle center',
-                textinfo: 'text',  // Only display custom text, not label
-                texttemplate: '%{label}<br>%{text}',  // Format: Label on top, then custom text
+                textinfo: 'text',  // Only show the custom text, nothing else
+                // Remove texttemplate completely to avoid duplication
                 marker: {
                     colors: labels.map(l => colors[l] || '#999999'),
                     line: {
@@ -986,20 +995,20 @@
                 plot_bgcolor: 'rgba(0,0,0,0)'
             };
 
-            // Clear the entire container including loading message
-            const container = document.getElementById('treemapChart');
-            if (container) {
-                // Remove all child elements first
-                while (container.firstChild) {
-                    container.removeChild(container.firstChild);
-                }
-            }
-
             Plotly.newPlot('treemapChart', treemapData, layout, {responsive: true});
         }
 
         // 3. Enhanced Sankey Diagram with subcategories
         function createSankey() {
+            // Remove loading message immediately
+            const container = document.getElementById('sankeyChart');
+            if (container) {
+                const loadingDiv = container.querySelector('.loading');
+                if (loadingDiv) {
+                    loadingDiv.remove();
+                }
+            }
+
             // Build nodes array with subcategories
             const nodes = [];
             const nodeColors = [];
@@ -1116,15 +1125,6 @@
                 plot_bgcolor: 'rgba(0,0,0,0)'
             };
 
-            // Clear the entire container including loading message
-            const container = document.getElementById('sankeyChart');
-            if (container) {
-                // Remove all child elements first
-                while (container.firstChild) {
-                    container.removeChild(container.firstChild);
-                }
-            }
-
             Plotly.newPlot('sankeyChart', [sankeyData], layout, {responsive: true});
         }
 
@@ -1194,15 +1194,13 @@
                 }
             }, 300);
 
-            // Failsafe: Clear any remaining loading messages after all charts should be loaded
+            // Aggressive failsafe: Remove ALL loading messages after charts should be loaded
             setTimeout(() => {
                 document.querySelectorAll('.loading').forEach(el => {
-                    if (el.textContent.includes('Loading visualization')) {
-                        console.warn('Found persistent loading message, removing:', el.parentElement.id);
-                        el.style.display = 'none';
-                    }
+                    console.warn('Removing loading message from:', el.parentElement?.id || 'unknown');
+                    el.remove();  // Completely remove the element, not just hide it
                 });
-            }, 1000);
+            }, 500);
         });
 
         // Smooth scroll for anchor links
