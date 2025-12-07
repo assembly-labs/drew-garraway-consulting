@@ -1,0 +1,47 @@
+{
+  "number": 5,
+  "title": "Debt Securities",
+  "description": "Comprehensive coverage of municipal bonds, money market instruments, and corporate debt securities",
+  "sections": [
+    {
+      "id": "5.1",
+      "title": "Municipal Debt",
+      "file": "section-01-municipal-debt.md",
+      "locked": false,
+      "topics": [
+        "General Obligation Bonds",
+        "Revenue Bonds",
+        "Special Types of Municipal Debt",
+        "Tax Treatment",
+        "Municipal Trading"
+      ],
+      "estimated_minutes": 45
+    },
+    {
+      "id": "5.2",
+      "title": "Money Market Instruments",
+      "file": "section-02-money-markets.md",
+      "locked": false,
+      "topics": [
+        "Treasury Bills",
+        "Commercial Paper",
+        "Banker's Acceptances",
+        "Repurchase Agreements",
+        "Federal Funds"
+      ],
+      "estimated_minutes": 40
+    }
+  ],
+  "prerequisites": ["chapter-04"],
+  "estimated_hours": 1.5,
+  "learning_objectives": [
+    "Distinguish between different types of municipal securities",
+    "Understand the tax implications of municipal bonds",
+    "Identify money market instruments and their characteristics",
+    "Compare yields and risks across debt securities"
+  ],
+  "exam_weight": "12-15%",
+  "last_updated": "2024-01-15",
+  "author": "Franklin Hugh Money",
+  "status": "published"
+}
