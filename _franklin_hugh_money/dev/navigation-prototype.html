@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Prototype - Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Franklin Hugh Colors */
+            --fh-navy: #002D62;
+            --fh-cream: #FFFDF7;
+            --fh-gray: #54585A;
+            --fh-sage: #7C9885;
+            --fh-burgundy: #6B2737;
+            --fh-gold: #B08D57;
+
+            /* Neutral Scale */
+            --fh-gray-900: #1A1A1A;
+            --fh-gray-700: #404040;
+            --fh-gray-600: #595959;
+            --fh-gray-500: #737373;
+            --fh-gray-300: #D4D4D4;
+            --fh-gray-200: #E5E5E5;
+            --fh-gray-100: #F5F5F5;
+            --fh-white: #FFFFFF;
+
+            /* Typography */
+            --fh-font-display: 'Crimson Pro', Georgia, serif;
+            --fh-font-body: 'Inter', -apple-system, sans-serif;
+            --fh-font-mono: 'IBM Plex Mono', monospace;
+
+            /* Spacing */
+            --fh-space-xs: 0.25rem;
+            --fh-space-sm: 0.5rem;
+            --fh-space-md: 1rem;
+            --fh-space-lg: 1.5rem;
+            --fh-space-xl: 2rem;
+            --fh-space-2xl: 3rem;
+            --fh-space-3xl: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--fh-font-body);
+            font-size: 16px;
+            line-height: 1.75;
+            color: var(--fh-gray-900);
+            background: var(--fh-cream);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Enhanced Header with Multi-Level Navigation */
+        .header {
+            background: var(--fh-white);
+            border-bottom: 1px solid var(--fh-gray-200);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .header__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--fh-space-md) var(--fh-space-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header__title {
+            font-size: 1.125rem;
+            color: var(--fh-gray-900);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        /* Enhanced Breadcrumb with Dropdowns */
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-xs);
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb-nav a {
+            color: var(--fh-gray-600);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: var(--fh-navy);
+        }
+
+        .breadcrumb-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .breadcrumb-dropdown__toggle {
+            background: none;
+            border: none;
+            color: var(--fh-gray-600);
+            cursor: pointer;
+            font-size: 0.875rem;
+            padding: var(--fh-space-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-xs);
+        }
+
+        .breadcrumb-dropdown__toggle:hover {
+            color: var(--fh-navy);
+        }
+
+        .breadcrumb-dropdown__content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--fh-white);
+            border: 1px solid var(--fh-gray-200);
+            border-radius: 4px;
+            min-width: 250px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s;
+            margin-top: var(--fh-space-xs);
+        }
+
+        .breadcrumb-dropdown:hover .breadcrumb-dropdown__content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .breadcrumb-dropdown__content a {
+            display: block;
+            padding: var(--fh-space-sm) var(--fh-space-md);
+            color: var(--fh-gray-700);
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .breadcrumb-dropdown__content a:hover {
+            background: var(--fh-gray-100);
+            color: var(--fh-navy);
+        }
+
+        .breadcrumb-dropdown__content a.active {
+            background: var(--fh-sage);
+            color: var(--fh-white);
+        }
+
+        /* Dual Progress Bars */
+        .progress-container {
+            background: var(--fh-gray-100);
+            padding: var(--fh-space-sm) 0;
+        }
+
+        .progress-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--fh-space-xl);
+            display: flex;
+            gap: var(--fh-space-lg);
+        }
+
+        .progress {
+            flex: 1;
+            position: relative;
+        }
+
+        .progress__track {
+            height: 4px;
+            background: var(--fh-gray-200);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress__bar {
+            height: 100%;
+            background: var(--fh-sage);
+            transition: width 0.3s ease;
+        }
+
+        .progress__bar--chapter {
+            background: var(--fh-navy);
+        }
+
+        .progress__label {
+            font-size: 0.75rem;
+            color: var(--fh-gray-600);
+            margin-top: var(--fh-space-xs);
+            display: block;
+        }
+
+        /* Side Navigation */
+        .side-nav {
+            position: fixed;
+            left: 0;
+            top: 100px; /* Below header */
+            width: 280px;
+            height: calc(100vh - 100px);
+            background: var(--fh-white);
+            border-right: 1px solid var(--fh-gray-200);
+            transform: translateX(-240px);
+            transition: transform 0.3s ease;
+            z-index: 90;
+        }
+
+        .side-nav--open {
+            transform: translateX(0);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .side-nav__toggle {
+            position: absolute;
+            right: -40px;
+            top: var(--fh-space-md);
+            width: 40px;
+            height: 40px;
+            background: var(--fh-white);
+            border: 1px solid var(--fh-gray-200);
+            border-left: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .side-nav__content {
+            padding: var(--fh-space-xl);
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .side-nav__title {
+            font-family: var(--fh-font-display);
+            font-size: 1.25rem;
+            color: var(--fh-navy);
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        .side-nav__search {
+            width: 100%;
+            padding: var(--fh-space-sm);
+            border: 1px solid var(--fh-gray-300);
+            border-radius: 4px;
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        .side-nav__chapters {
+            list-style: none;
+        }
+
+        .side-nav__chapter {
+            margin-bottom: var(--fh-space-sm);
+        }
+
+        .side-nav__chapter-toggle {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: var(--fh-space-sm);
+            font-size: 0.875rem;
+            color: var(--fh-gray-700);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .side-nav__chapter-toggle:hover {
+            background: var(--fh-gray-100);
+            color: var(--fh-navy);
+        }
+
+        .side-nav__chapter--active .side-nav__chapter-toggle {
+            background: var(--fh-sage);
+            color: var(--fh-white);
+            font-weight: 600;
+        }
+
+        .side-nav__sections {
+            list-style: none;
+            padding-left: var(--fh-space-lg);
+            margin-top: var(--fh-space-xs);
+        }
+
+        .side-nav__sections a {
+            display: block;
+            padding: var(--fh-space-xs) var(--fh-space-sm);
+            font-size: 0.875rem;
+            color: var(--fh-gray-600);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .side-nav__sections a:hover {
+            color: var(--fh-navy);
+            background: var(--fh-gray-100);
+        }
+
+        .side-nav__section--active a {
+            color: var(--fh-navy);
+            font-weight: 600;
+            background: var(--fh-gray-100);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            max-width: 900px;
+            margin: 120px auto 0;
+            padding: var(--fh-space-2xl) var(--fh-space-xl);
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content--nav-open {
+            margin-left: 140px;
+        }
+
+        /* Enhanced Bottom Navigation */
+        .chapter-nav {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: var(--fh-space-xl);
+            margin-top: var(--fh-space-4xl);
+            padding-top: var(--fh-space-2xl);
+            border-top: 2px solid var(--fh-gray-200);
+        }
+
+        .chapter-nav__link {
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-md);
+            text-decoration: none;
+            padding: var(--fh-space-md);
+            border: 1px solid var(--fh-gray-200);
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .chapter-nav__link:hover {
+            background: var(--fh-gray-100);
+            border-color: var(--fh-navy);
+        }
+
+        .chapter-nav__content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chapter-nav__label {
+            font-size: 0.75rem;
+            color: var(--fh-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .chapter-nav__title {
+            font-size: 1rem;
+            color: var(--fh-navy);
+            font-weight: 600;
+        }
+
+        .chapter-nav__arrow {
+            font-size: 1.5rem;
+            color: var(--fh-sage);
+        }
+
+        .chapter-nav__overview {
+            background: var(--fh-white);
+            border: 1px solid var(--fh-gray-200);
+            padding: var(--fh-space-sm) var(--fh-space-md);
+            border-radius: 4px;
+            cursor: pointer;
+            color: var(--fh-gray-700);
+            transition: all 0.2s;
+        }
+
+        .chapter-nav__overview:hover {
+            background: var(--fh-gray-100);
+            border-color: var(--fh-navy);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--fh-white);
+            border-top: 1px solid var(--fh-gray-200);
+            padding: var(--fh-space-sm) 0;
+            z-index: 100;
+        }
+
+        .mobile-nav__items {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .mobile-nav__item {
+            background: none;
+            border: none;
+            padding: var(--fh-space-xs);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            color: var(--fh-gray-600);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .mobile-nav__item:hover,
+        .mobile-nav__item--active {
+            color: var(--fh-navy);
+        }
+
+        .mobile-nav__icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header__inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--fh-space-sm);
+            }
+
+            .breadcrumb-nav {
+                flex-wrap: wrap;
+            }
+
+            .side-nav {
+                width: 100%;
+                transform: translateX(-100%);
+            }
+
+            .side-nav__toggle {
+                display: none;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
+            .main-content {
+                margin-bottom: 80px;
+            }
+
+            .chapter-nav {
+                grid-template-columns: 1fr;
+                gap: var(--fh-space-md);
+                margin-bottom: 80px;
+            }
+
+            .chapter-nav__overview {
+                display: none;
+            }
+        }
+
+        /* Demo Content */
+        .demo-section {
+            padding: var(--fh-space-2xl);
+            background: var(--fh-white);
+            border: 1px solid var(--fh-gray-200);
+            border-radius: 4px;
+            margin-bottom: var(--fh-space-xl);
+        }
+
+        h1 {
+            font-family: var(--fh-font-display);
+            font-size: 2.5rem;
+            color: var(--fh-navy);
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        h2 {
+            font-family: var(--fh-font-display);
+            font-size: 1.5rem;
+            color: var(--fh-gray-900);
+            margin-bottom: var(--fh-space-md);
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Header -->
+    <header class="header">
+        <div class="header__inner">
+            <a href="index.html" class="header__title">Franklin Hugh Money</a>
+
+            <!-- Enhanced Breadcrumb Navigation -->
+            <nav class="breadcrumb-nav">
+                <a href="index.html">Home</a>
+                <span>/</span>
+
+                <!-- SIE Materials Dropdown -->
+                <div class="breadcrumb-dropdown">
+                    <button class="breadcrumb-dropdown__toggle">
+                        SIE Study Materials
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                            <path d="M3 5L6 8L9 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="breadcrumb-dropdown__content">
+                        <a href="sie-study-materials.html">All Chapters</a>
+                        <a href="sie-practice-exams.html">Practice Exams</a>
+                        <a href="sie-flashcards.html">Flashcards</a>
+                        <a href="sie-formula-sheet.html">Formula Sheet</a>
+                    </div>
+                </div>
+                <span>/</span>
+
+                <!-- Chapter 5 Dropdown -->
+                <div class="breadcrumb-dropdown">
+                    <button class="breadcrumb-dropdown__toggle">
+                        Chapter 5
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                            <path d="M3 5L6 8L9 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="breadcrumb-dropdown__content">
+                        <a href="sie-chapter-5.html">Section 1: Municipal Debt</a>
+                        <a href="sie-chapter-5-money-markets.html" class="active">Section 2: Money Markets</a>
+                    </div>
+                </div>
+                <span>/</span>
+
+                <span>Section 2: Money Markets</span>
+            </nav>
+        </div>
+
+        <!-- Dual Progress Bars -->
+        <div class="progress-container">
+            <div class="progress-wrapper">
+                <div class="progress">
+                    <div class="progress__track">
+                        <div class="progress__bar progress__bar--chapter" style="width: 38.5%"></div>
+                    </div>
+                    <span class="progress__label">Chapter 5 of 13 (38%)</span>
+                </div>
+                <div class="progress">
+                    <div class="progress__track">
+                        <div class="progress__bar" style="width: 100%"></div>
+                    </div>
+                    <span class="progress__label">Section 2 of 2 (100%)</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Side Navigation -->
+    <nav class="side-nav" id="sideNav">
+        <button class="side-nav__toggle" onclick="toggleSideNav()">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <rect x="2" y="4" width="16" height="2"/>
+                <rect x="2" y="9" width="16" height="2"/>
+                <rect x="2" y="14" width="16" height="2"/>
+            </svg>
+        </button>
+
+        <div class="side-nav__content">
+            <h3 class="side-nav__title">Study Guide Contents</h3>
+
+            <input type="search" class="side-nav__search" placeholder="Search topics...">
+
+            <ul class="side-nav__chapters">
+                <li class="side-nav__chapter">
+                    <button class="side-nav__chapter-toggle">
+                        Chapter 1: Securities Markets
+                    </button>
+                </li>
+                <li class="side-nav__chapter">
+                    <button class="side-nav__chapter-toggle">
+                        Chapter 2: Equity Securities
+                    </button>
+                </li>
+                <li class="side-nav__chapter">
+                    <button class="side-nav__chapter-toggle">
+                        Chapter 3: Corporate Debt
+                    </button>
+                </li>
+                <li class="side-nav__chapter">
+                    <button class="side-nav__chapter-toggle">
+                        Chapter 4: Investment Companies
+                    </button>
+                </li>
+                <li class="side-nav__chapter side-nav__chapter--active">
+                    <button class="side-nav__chapter-toggle">
+                        Chapter 5: Municipal & Money Markets
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                            <path d="M3 5L6 8L9 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <ul class="side-nav__sections">
+                        <li><a href="sie-chapter-5.html">Section 1: Municipal Debt</a></li>
+                        <li class="side-nav__section--active">
+                            <a href="sie-chapter-5-money-markets.html">Section 2: Money Markets</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="side-nav__chapter">
+                    <button class="side-nav__chapter-toggle">
+                        Chapter 6: Options
+                    </button>
+                </li>
+                <li class="side-nav__chapter">
+                    <button class="side-nav__chapter-toggle">
+                        Chapter 7: Customer Accounts
+                    </button>
+                </li>
+                <!-- Additional chapters... -->
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <div class="demo-section">
+            <h1>Chapter 5, Section 2: Money Market Instruments</h1>
+
+            <p>This is a prototype demonstrating the enhanced navigation system for the SIE Study Materials.</p>
+
+            <h2>Navigation Features</h2>
+            <ul>
+                <li><strong>Dual Progress Bars:</strong> Track both chapter progress (5 of 13) and section progress (2 of 2)</li>
+                <li><strong>Enhanced Breadcrumbs:</strong> Dropdown menus for quick navigation to other chapters/sections</li>
+                <li><strong>Side Navigation:</strong> Collapsible sidebar showing all chapters and sections (click the menu icon)</li>
+                <li><strong>Smart Previous/Next:</strong> Navigation understands sections within chapters</li>
+                <li><strong>Mobile Optimized:</strong> Responsive design with bottom navigation on mobile devices</li>
+            </ul>
+
+            <h2>Content Structure</h2>
+            <p>Chapter 5 is divided into two sections:</p>
+            <ol>
+                <li><strong>Section 1:</strong> Municipal Debt (GO bonds, revenue bonds, etc.)</li>
+                <li><strong>Section 2:</strong> Money Market Instruments (T-bills, commercial paper, repos, etc.)</li>
+            </ol>
+
+            <p>The navigation system automatically handles this structure, allowing users to:</p>
+            <ul>
+                <li>Navigate sequentially through sections</li>
+                <li>Jump directly to any chapter or section</li>
+                <li>See their overall progress through the material</li>
+                <li>Understand the content hierarchy at a glance</li>
+            </ul>
+        </div>
+
+        <!-- Enhanced Bottom Navigation -->
+        <nav class="chapter-nav">
+            <!-- Previous -->
+            <a href="sie-chapter-5.html" class="chapter-nav__link">
+                <span class="chapter-nav__arrow">←</span>
+                <div class="chapter-nav__content">
+                    <span class="chapter-nav__label">Previous Section</span>
+                    <span class="chapter-nav__title">Section 1: Municipal Debt</span>
+                </div>
+            </a>
+
+            <!-- Center -->
+            <button class="chapter-nav__overview">
+                View Chapter 5 Overview
+            </button>
+
+            <!-- Next -->
+            <a href="sie-chapter-6.html" class="chapter-nav__link">
+                <div class="chapter-nav__content">
+                    <span class="chapter-nav__label">Next Chapter</span>
+                    <span class="chapter-nav__title">Chapter 6: Options</span>
+                </div>
+                <span class="chapter-nav__arrow">→</span>
+            </a>
+        </nav>
+    </main>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav__items">
+            <button class="mobile-nav__item" onclick="toggleSideNav()">
+                <svg class="mobile-nav__icon" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="3" y="6" width="18" height="2"/>
+                    <rect x="3" y="11" width="18" height="2"/>
+                    <rect x="3" y="16" width="18" height="2"/>
+                </svg>
+                <span>Menu</span>
+            </button>
+            <button class="mobile-nav__item" onclick="goToPrevious()">
+                <svg class="mobile-nav__icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15 18L9 12L15 6"/>
+                </svg>
+                <span>Previous</span>
+            </button>
+            <button class="mobile-nav__item mobile-nav__item--active">
+                <svg class="mobile-nav__icon" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="3" y="5" width="18" height="2"/>
+                    <rect x="3" y="11" width="14" height="2"/>
+                    <rect x="3" y="17" width="10" height="2"/>
+                </svg>
+                <span>Contents</span>
+            </button>
+            <button class="mobile-nav__item" onclick="goToNext()">
+                <svg class="mobile-nav__icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9 6L15 12L9 18"/>
+                </svg>
+                <span>Next</span>
+            </button>
+            <button class="mobile-nav__item">
+                <svg class="mobile-nav__icon" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M12 12L12 7" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span>38%</span>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        // Toggle Side Navigation
+        function toggleSideNav() {
+            const sideNav = document.getElementById('sideNav');
+            const mainContent = document.getElementById('mainContent');
+
+            sideNav.classList.toggle('side-nav--open');
+            mainContent.classList.toggle('main-content--nav-open');
+        }
+
+        // Navigation Functions
+        function goToPrevious() {
+            window.location.href = 'sie-chapter-5.html';
+        }
+
+        function goToNext() {
+            window.location.href = 'sie-chapter-6.html';
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && !e.shiftKey) {
+                goToPrevious();
+            } else if (e.key === 'ArrowRight' && !e.shiftKey) {
+                goToNext();
+            } else if (e.key === 'm' && e.ctrlKey) {
+                toggleSideNav();
+            }
+        });
+
+        // Chapter Toggle
+        document.querySelectorAll('.side-nav__chapter-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                const sections = this.nextElementSibling;
+                if (sections && sections.classList.contains('side-nav__sections')) {
+                    sections.style.display = sections.style.display === 'none' ? 'block' : 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
