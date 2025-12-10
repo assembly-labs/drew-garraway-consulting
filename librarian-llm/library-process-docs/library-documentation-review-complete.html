@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Process Documentation Review Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c5530;
+            --secondary-color: #4a7c59;
+            --accent-color: #8fb996;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --border-color: #dee2e6;
+            --sidebar-width: 320px;
+            --header-height: 70px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-height);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header h1 i {
+            font-size: 1.3rem;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 400px;
+            flex: 1;
+            margin: 0 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.5rem 2.5rem 0.5rem 1rem;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary-color);
+        }
+
+        /* Layout Container */
+        .container {
+            display: flex;
+            margin-top: var(--header-height);
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            position: fixed;
+            height: calc(100vh - var(--header-height));
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+        }
+
+        .category {
+            margin-bottom: 0.5rem;
+        }
+
+        .category-header {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 0;
+            transition: background 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .category-header:hover {
+            background: var(--secondary-color);
+        }
+
+        .category-header i {
+            transition: transform 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .category.expanded .category-header i {
+            transform: rotate(90deg);
+        }
+
+        .category-items {
+            display: none;
+            background: #fafafa;
+        }
+
+        .category.expanded .category-items {
+            display: block;
+        }
+
+        .nav-item {
+            padding: 0.6rem 1rem 0.6rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-item:hover {
+            background: #f0f0f0;
+            border-left-color: var(--secondary-color);
+        }
+
+        .nav-item.active {
+            background: #e8f4ea;
+            border-left-color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .nav-item i {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        .doc-count {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.1rem 0.4rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+            max-width: calc(100% - var(--sidebar-width));
+            transition: all 0.3s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 0;
+            max-width: 100%;
+        }
+
+        .content-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 2rem;
+        }
+
+        /* Document Info Bar */
+        .doc-info {
+            background: linear-gradient(135deg, #f0f7ff, #e8f4f8);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .doc-info h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .doc-meta {
+            display: flex;
+            gap: 2rem;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .doc-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .doc-meta-item i {
+            color: var(--secondary-color);
+        }
+
+        /* Content Styles */
+        .document-content {
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+
+        .document-content h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.75rem;
+            margin: 2rem 0 1.5rem 0;
+            font-size: 2rem;
+        }
+
+        .document-content h2 {
+            color: var(--secondary-color);
+            margin: 1.75rem 0 1rem 0;
+            font-size: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.5rem;
+        }
+
+        .document-content h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 0.75rem 0;
+            font-size: 1.2rem;
+        }
+
+        .document-content h4 {
+            color: #555;
+            margin: 1.25rem 0 0.75rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .document-content p {
+            margin: 1rem 0;
+        }
+
+        .document-content ul, .document-content ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .document-content li {
+            margin: 0.5rem 0;
+        }
+
+        .document-content code {
+            background: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .document-content pre {
+            background: #f8f8f8;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid #e0e0e0;
+        }
+
+        .document-content blockquote {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .document-content strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .document-content em {
+            color: #555;
+        }
+
+        .document-content hr {
+            border: none;
+            border-top: 2px solid #e0e0e0;
+            margin: 2rem 0;
+        }
+
+        /* Image/Screenshot placeholders */
+        .document-content p:has(> em:only-child) {
+            background: #f0f7ff;
+            border: 2px dashed var(--accent-color);
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            color: var(--secondary-color);
+            font-style: normal;
+            margin: 1.5rem 0;
+        }
+
+        /* Toggle Button */
+        .sidebar-toggle {
+            position: fixed;
+            left: 1rem;
+            bottom: 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 100;
+            transition: all 0.3s;
+            display: none;
+        }
+
+        .sidebar-toggle:hover {
+            background: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .welcome-screen h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .welcome-screen p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        /* Print Styles */
+        @media print {
+            .header, .sidebar, .sidebar-toggle {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+                padding: 1rem;
+            }
+
+            .sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .search-container {
+                display: none;
+            }
+
+            .header h1 {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Loading Spinner */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1><i class="fas fa-book-open"></i> Tredyffrin Library Process Documentation Review</h1>
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search documentation...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        <div style="color: white; font-size: 0.9rem;">
+            <i class="far fa-calendar"></i> Generated: Dec 8, 2024
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="category expanded" data-category="digital-services">
+                <div class="category-header">
+                    <span><i class="fas fa-laptop"></i> Digital Services & Apps</span>
+                    <span class="doc-count">6</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="category-items"></div>
+            </div>
+
+            <div class="category" data-category="patron-services">
+                <div class="category-header">
+                    <span><i class="fas fa-users"></i> Patron Services</span>
+                    <span class="doc-count">5</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="category-items"></div>
+            </div>
+
+            <div class="category" data-category="policies">
+                <div class="category-header">
+                    <span><i class="fas fa-gavel"></i> Policies & Procedures</span>
+                    <span class="doc-count">6</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="category-items"></div>
+            </div>
+
+            <div class="category" data-category="meeting-rooms">
+                <div class="category-header">
+                    <span><i class="fas fa-door-open"></i> Meeting Rooms</span>
+                    <span class="doc-count">5</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="category-items"></div>
+            </div>
+
+            <div class="category" data-category="operations">
+                <div class="category-header">
+                    <span><i class="fas fa-cogs"></i> Operations</span>
+                    <span class="doc-count">3</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="category-items"></div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="mainContent">
+            <div class="content-wrapper">
+                <div id="documentDisplay" class="document-content">
+                    <div class="welcome-screen">
+                        <h2><i class="fas fa-book-reader"></i> Welcome to the Documentation Review Portal</h2>
+                        <p>Select a document from the sidebar to review the transcribed content.</p>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">47</div>
+                                <div class="stat-label">Images Processed</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">24</div>
+                                <div class="stat-label">Documents Created</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">5</div>
+                                <div class="stat-label">Categories</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 3rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px; text-align: left;">
+                            <h3 style="color: var(--primary-color); margin-bottom: 1rem;">
+                                <i class="fas fa-info-circle"></i> Review Instructions
+                            </h3>
+                            <ul style="text-align: left; margin-left: 0; list-style-position: inside;">
+                                <li><strong>Browse by Category:</strong> Click category headers to expand/collapse</li>
+                                <li><strong>Search:</strong> Use the search bar to find specific content</li>
+                                <li><strong>Source Images:</strong> Each document shows its original image reference</li>
+                                <li><strong>Visual Elements:</strong> Screenshots and images are noted in brackets</li>
+                                <li><strong>Print:</strong> Use Ctrl/Cmd + P to print any document</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <script>
+        // Document database
+        const documents = {
+            'digital-services': [
+                {
+                    id: 'chester-county-app',
+                    title: 'Chester County Library App Download',
+                    file: 'chester-county-library-app-download.md',
+                    source: 'IMG_8297.HEIC',
+                    icon: 'fa-mobile-alt'
+                },
+                {
+                    id: 'mobile-app',
+                    title: 'Mobile App Instructions',
+                    file: 'mobile-app-instructions.md',
+                    source: 'IMG_8312-8313.HEIC',
+                    icon: 'fa-tablet'
+                },
+                {
+                    id: 'libby',
+                    title: 'Libby - Getting Started',
+                    file: 'libby-getting-started.md',
+                    source: 'IMG_8302-8303.HEIC',
+                    icon: 'fa-book-reader'
+                },
+                {
+                    id: 'kanopy',
+                    title: 'Kanopy Streaming Service',
+                    file: 'kanopy.md',
+                    source: 'IMG_8301.HEIC',
+                    icon: 'fa-video'
+                },
+                {
+                    id: 'nytimes',
+                    title: 'New York Times Digital Access',
+                    file: 'new-york-times-digital-access.md',
+                    source: 'IMG_8309.HEIC',
+                    icon: 'fa-newspaper'
+                },
+                {
+                    id: 'printing',
+                    title: 'Public Computer Printing',
+                    file: 'public-computer-printing.md',
+                    source: 'IMG_8329-8330.HEIC',
+                    icon: 'fa-print'
+                }
+            ],
+            'patron-services': [
+                {
+                    id: 'pin-creation',
+                    title: 'Creating a Patron PIN',
+                    file: 'creating-patron-pin.md',
+                    source: 'IMG_8310-8311.HEIC',
+                    icon: 'fa-key'
+                },
+                {
+                    id: 'ill',
+                    title: 'Interlibrary Loan',
+                    file: 'interlibrary-loan.md',
+                    source: 'IMG_8300.HEIC',
+                    icon: 'fa-exchange-alt'
+                },
+                {
+                    id: 'donations',
+                    title: 'Book Donations - Red Fox Book Shop',
+                    file: 'book-donations-red-fox-book-shop.md',
+                    source: 'IMG_8299.HEIC',
+                    icon: 'fa-gift'
+                },
+                {
+                    id: 'museum-pass',
+                    title: 'Museum Pass Program',
+                    file: 'museum-pass-program-punch-card.md',
+                    source: 'IMG_8306-8308.HEIC',
+                    icon: 'fa-ticket-alt'
+                },
+                {
+                    id: 'copying',
+                    title: 'Copying at Front Desk',
+                    file: 'copying-at-front-desk.md',
+                    source: 'IMG_8331.HEIC',
+                    icon: 'fa-copy'
+                }
+            ],
+            'policies': [
+                {
+                    id: 'policies-overview',
+                    title: 'Library Policies Overview',
+                    file: 'library-policies-overview.md',
+                    source: 'IMG_8314-8317.HEIC',
+                    icon: 'fa-scroll'
+                },
+                {
+                    id: 'definitions',
+                    title: 'Library Definitions',
+                    file: 'library-definitions.md',
+                    source: 'IMG_8320.HEIC',
+                    icon: 'fa-book'
+                },
+                {
+                    id: 'ccls-toc',
+                    title: 'CCLS Borrowing Policy TOC',
+                    file: 'chester-county-library-system-table-of-contents.md',
+                    source: 'IMG_8319.HEIC',
+                    icon: 'fa-list'
+                },
+                {
+                    id: 'library-cards',
+                    title: 'Library Cards & Responsibilities',
+                    file: 'library-cards-and-patron-responsibilities.md',
+                    source: 'IMG_8321-8325.HEIC',
+                    icon: 'fa-id-card'
+                },
+                {
+                    id: 'claims-holds',
+                    title: 'Claims, Notices & Holds',
+                    file: 'library-claims-returned-notices-holds.md',
+                    source: 'IMG_8326-8328.HEIC',
+                    icon: 'fa-clipboard-check'
+                },
+                {
+                    id: 'library-info',
+                    title: 'Tredyffrin Libraries Info',
+                    file: 'tredyffrin-township-libraries-info.md',
+                    source: 'IMG_8318.HEIC',
+                    icon: 'fa-info-circle'
+                }
+            ],
+            'meeting-rooms': [
+                {
+                    id: 'room-rental',
+                    title: 'Meeting Room Rentals',
+                    file: 'meeting-room-rentals-tredyffrin.md',
+                    source: 'IMG_8332.HEIC',
+                    icon: 'fa-calendar-check'
+                },
+                {
+                    id: 'rental-form1',
+                    title: 'Rental Request Form - Page 1',
+                    file: 'meeting-room-rental-request-form.md',
+                    source: 'IMG_8333.HEIC',
+                    icon: 'fa-file-alt'
+                },
+                {
+                    id: 'rental-form2',
+                    title: 'Rental Request Form - Page 2',
+                    file: 'meeting-room-rental-request-form-page2.md',
+                    source: 'IMG_8334.HEIC',
+                    icon: 'fa-file-signature'
+                },
+                {
+                    id: 'room-policy',
+                    title: 'Meeting Room Policy Guidelines',
+                    file: 'meeting-room-policy-guidelines.md',
+                    source: 'IMG_8335-8339.HEIC',
+                    icon: 'fa-gavel'
+                },
+                {
+                    id: 'room-appeal',
+                    title: 'Meeting Room Denial Appeal',
+                    file: 'meeting-room-denial-appeal.md',
+                    source: 'IMG_8340.HEIC',
+                    icon: 'fa-balance-scale'
+                }
+            ],
+            'operations': [
+                {
+                    id: 'ref-desk-checklist',
+                    title: 'Reference Desk Checklist',
+                    file: 'reference-desk-opening-closing-checklist.md',
+                    source: 'IMG_8294-8295.HEIC',
+                    icon: 'fa-tasks'
+                },
+                {
+                    id: 'toc',
+                    title: 'Reference Desk Table of Contents',
+                    file: 'table-of-contents.md',
+                    source: 'IMG_8296.HEIC',
+                    icon: 'fa-list-ol'
+                },
+                {
+                    id: 'summary',
+                    title: 'Conversion Summary',
+                    file: 'CONVERSION_SUMMARY.md',
+                    source: 'Generated',
+                    icon: 'fa-chart-bar'
+                }
+            ]
+        };
+
+        const embeddedContent = {
+    "chester-county-app": `# Download the Chester County Library App\n\n1. Make sure the patron\'s device is connected to the library\'s Wi-Fi network.\n\n2. Have them go to the App Store or Play Store on their device.\n\n3. Search for \"Chester County Library System\".\n\n4. Click \"Download and Install\" - The icon should look similar to this:\n   [Chester County Library System logo]\n\n5. Click \"Manage Accounts\"\n\n6. Enter the Library Card Number and PIN.\n\n   If the patron does not have a PIN, please see directions titled \"Creating Patron PIN\" in the 3-Ring Binder.\n\n7. Once the system has verified the patron\'s information, you can give a brief tour of the App and highlight the following if time permits:\n   - **\"Digital Library Card\"** – The patron\'s phone/device can now be their library card.\n   - **\"My Checkouts\"** – If the patron has books checked out, you can point out the due dates.\n   - **\"Renew Selected\"** by clicking the book, also be renewed.\n   - **\"My Holds\"** – This is a list of items that the patron currently has on hold.\n   - **\"My Plan\"** – Using the \"Manage Settings\" button.\n\n8. There are many other helpful features on the App! Please feel free to ask Jennifer if you have questions.\n\nCreated: 7/14/2024\nRevised: 8/19/2024`,
+    "mobile-app": `# The Mobile App\n\n## What can you do with the Chester County Library System\'s Mobile App?\n\n- Check out books with your digital library card\n- Search for books, movies, and other items\n- Put materials on hold\n- Renew items\n- Find library events\n- ... and so much more!\n\n## Follow these steps to download the Mobile App:\n\n1. Go to the App Store or Play Store on your device.\n2. Search for \"Chester County Library System\". The icon should look similar to this:\n   [Chester County Library System logo]\n3. Once the app is downloaded to the device, open it and click \"My Account\".\n4. Click \"Manage Accounts\".\n5. Enter your Chester County Library System\'s card number.\n6. Enter your 4-digit PIN (personal identification number). If you do not have a PIN, follow the instructions on the other side of this page.\n7. You are ready to start exploring!\n\n[Note with handwritten text: \"Return Version - Patricia\'s COA - IPHC-48-KIDs - Come to download the app and ask for help if you would like. Email: info@brandywine.lib.pa.us\"]`,
+    "libby": `# Getting started with Libby\n\n## Libby Help\nSearch help articles\n[Return arrow icon]\n\n## HOME > GETTING STARTED\n\nWith Libby, you can enjoy free ebooks, digital audiobooks, and magazines from your library. All you need is a library card.\n\n## Step 1\nDownload or open Libby on your device.\n- iOS devices: Apple App Store\n- Android devices: Google Play\n- Amazon Fire tablets: Amazon Appstore\n- Windows, Mac, and Chromebooks: libbyapp.com\n\n[Download button] Download and open Libby on your device.\n\n## Step 2\nIn Libby, follow the prompts to find your library and sign in with a library card.\n\n## Step 3\nBrowse or search to discover your next favorite book or audiobook.\n\n## Find something to borrow.\n\n[Icons showing different features]\n1. Find your library and sign in with your library card.\n2. Browse or search to discover your next favorite book or audiobook.\n3. Start reading & listening!\n\n### Happy reading!\n\n**See also**\n[Links to related help topics]\n\n**Contact Support** | **Cookie Information**\n\n---\n\n# Libby\n\n## For help with Libby\nhelp.libbyapp.com\n\n[Sticky note: \"For help with Libby help.libbyapp.com\"]\n\n## How does Libby work?\n\n[Icons showing the process flow:]\n1. Apple iPhones & iPads\n2. Phones & Tablets with Google Play\n3. Amazon Fire Tablets\n4. Laptops & Desktop Computers\n\n[Icons with labels:]\n- App Store (Also compatible with Apple CarPlay)\n- Google Play (Also compatible with android/auto, SONOS, and amazon echo & more!)\n- amazon (Libbypapp.com & much more)\n\n## Step process:\n1. Download and open Libby on your device.\n2. Find your library and sign in with your library card.\n3. Browse or search to discover your next favorite book or audiobook.\n4. Start reading & listening!\n\n## Scan this QR code for Step-by-Step instructions:\n[QR Code displayed]`,
+    "kanopy": `# NOW streaming: Thoughtful Entertainment\n\n## What is Kanopy?\n\nKanopy is a video streaming service that provides instant access to critically acclaimed movies and documentaries. We partnered with Kanopy to bring you their unique collection of thoughtful entertainment.\n\n## How can I watch Kanopy?\n\nYou can stream Kanopy on any of your favorite devices! Kanopy is accessible via web tools on all tablets (ipods for iPads and Android), phones (iOS and Android), Apple TV, and Fire Stick.\n\n## How to create an account:\n\nTo get started, visit ccls.kanopy.com and select the \"Add Library Card\" button to enter the library card information and create an account. Or, download the Kanopy app to your preferred email.\n\n[Kanopy Kids logo]\n\n## What can you discover on Kanopy Kids?\n\nGet your parents or loved ones.\nGive us a try with\nBrowse.\nEnter with your number\nCreate a your account\nStart exploring!\n\n[Image showing children\'s content categories]\n\n### Process:\n1. A patron will pick up a blank punch card at the Reference Desk.\n2. A patron will reserve a museum pass. They may ask for your help to do so!\n3. A patron will pick up the museum pass from the circulation desk. If needed,\n4. A patron will return the Reference Desk with their museum pass (enter the physical card) on the printable) to show proof of visiting the attraction.\n5. You will punch their card.\n6. Keep the punch card at the Reference Desk. When complete, the voucher may be used by September 30, 2025. These vouchers are kept in a labeled envelope on the shelf behind the Desk.\n\n***There will be quarter sheets listing the rules available at the Desk for patrons.\n\nIf you have any questions, please ask Sam or Jennifer!`,
+    "nytimes": `# The New York Times\n\n## Digital Edition\n\n### The daily newspaper right on your digital devices—FREE with your Chester County Library card!\n\n## U.S. & World News,\nArts, Politics, Business,\nTech, Science, Health,\n& much more!\n\n### Includes historical archives from 1851-1922 & 1981-present.\n\n---\n\n## Getting Started\n\n### 1\nVisit www.chescollbraries.org\n- All CCLS Database & New York Times Access\n\n### 2\nYour Account\nEnter your library card and PIN numbers.\n- Log in with an existing nytimes.com account or create a new one.\n\n### 3\nNavigating NYTimes\n- Sections\n  - Use the features to jump to your favorite sections of the paper.\n\n- Video\n  - Short video covering all the latest hot topics in the news.\n\n- Newsletter\n  - Sign up for various newsletters including headlines delivered to your email daily and much more.\n\n## PRINT & CO PASSES\n### CONTINUING...\n\n- The Academy of Natural Science of University\n- Philadelphia Museum\n- Museum of the American Revolution\n- Please Touch Museum\n- Barnes Foundation Museum\n- Brandywine River Museum of Art\n- PA Academy of Fine Arts\n- National Constitutional Center\n- Philadelphia Zoo\n- Museum of the American Revolution\n- Winterthur Museum, Garden & Library\n- Elmwood Park Zoo\n\n## PHYSICAL PASSES\n- Once reserved, the following passes can be picked up at the Tredyffrin Public Library:\n- Please see listed up to at the reference desk for assistance\n- Garden & Library`,
+    "printing": `# Printing from Public Computers\n\n## After clicking \"Print\" or Control+P, follow these steps:\n\n### Print Screen\n1. Select \"Cloud Print\" (in red circle below)\n2. Click \"Print\" (in green circle below)\n\n[Screenshot showing print dialog with Cloud Print option circled in red and Print button circled in green]\n\n### Print Confirmation\n3. Make a note of the User ID and Password tapped to the bottom of the monitor\n4. Go over to the Public Printer and follow the steps to release your pages.\n\n[Screenshot showing Current Balance, Welcome screen with User ID and Password fields, and Color/Mono options]\n\n[Screenshot showing document selection interface]\n\n## Releasing a Print Job\n\n### 1. Touch Elevate Sky Print\n[Screenshot showing login screen with \"Log in using your User ID and Password\" prompt and circled green button]\n\n### 2. Enter the User ID and password from bottom of monitor, then touch the green \"Go\" button.\n[Screenshot showing login screen with password field circled in green]\n\n### 3. Touch the icon that has a number in a white circle.\n[Screenshot showing interface with Current Balance, Mono, Color options and \"Unlimited\" status]\n\n### 4. Touch the name of the document and then touch the printer icon.\n[Screenshot showing document selection interface with printer icon circled]\n\n## TREDYFFRIN PUBLIC LIBRARY\nA TREDYFFRIN TOWNSHIP LIBRARY`,
+    "pin-creation": `# Creating a PIN\n## (Personal Identification Number)\n\n### Video - Creating a PIN\n\nThere is an instructional video for patrons titled \"Creating a PIN\" on the Tredyffrin Public Library\'s YouTube Page.\n\nAccess the video by scanning this QR Code:\n\n[QR Code image]\n\nYou can also follow these steps:\n\n- Go to www.tredyffrinlibraries.org\n- Click \"Connect\"\n- Click \"Follow Us Online\"\n- Click the YouTube icon under Tredyffrin Township Libraries\n- Click \"Playlists\" - This is under the Word Subscribe\n- Click on the Playlist Titled \"Instructional Videos\"\n\n---\n\n## Creating a PIN\n## (Personal Identification Number)\n\n1. Go to https://catalog.ccls.org/patroninfo or scan this QR Code:\n   [QR Code image]\n\n2. Enter your library card number in this field:\n   [Screenshot showing library card number entry field]\n\n3. Leave the PIN field blank and click submit.\n\n4. You will be asked to enter their new PIN two times*. See below:\n   [Login screen showing PIN entry fields]\n\n5. Use this PIN to finish signing into the Mobile App!\n\n*Please NOTE - You can also use this website to set a new PIN if you do not remember it. To do this, click \"Forgot your PIN?\" after entering your barcode.\n\n*It is recommend you use a four digit number. PIN may not include numbers which repeat three times, example: 8777 nor numbers which repeat two digits, example: 1212.`,
+    "ill": `# INTERLIBRARY LOAN\n\n[Image of books]\n\n**Can\'t find what you\'re looking for???**\n**Give us a try...**\n\nInterlibrary Loan (ILL) is the service by which libraries borrow and lend materials in order to supplement their existing collections. ILL is not the same as the Holds service used between libraries in the Chester County Library System, but occurs between libraries across the nation.\n\nILL is available to patrons with a current library card from any of the 18 libraries in the Chester County Library System and whose records are updated and fine-free. Just fill out a request at your local library in person, by phone, or online.\n\n**Need help? Contact us:**\nThe Interlibrary Loan Office\n450 Exton Square Parkway\nExton, PA 19341\n610-280-2625 ccedelchecker@ccls.org\nwww.ccls.org\n\n[Chester County Library System logo]\n\n---\n\n## Request Form\n\n### Patron Information\n**Name:** ____________________\n**Library Card #:** ____________________\n**Phone:** ____________________\n\n### Item Information\n**Title:** ____________________\n**Author:** ____________________\n**Pub Date:** ____________________\n\n***NOTE:** Material must be at least 1 year old and available in Access PA to be eligible for Interlibrary Loan. All other items must be at least 6 months from pub date for Interlibrary Loan.\n\n**Format:** Book    Large Type    Audiobook: Unabridged    Audiobook: Abridged    CD    DVD\n\n**Date item needed by:** ____________________\n\n**Staff Looked for item in CCLS Catalog?** Yes ___ No ___\n\n**Staff Name:** ____________________ **Date:** ____________________`,
+    "donations": `# RED FOX BOOK SHOP AT TREDYFFRIN PUBLIC LIBRARY\n## 2025 SCHEDULE\n\n### SATURDAY DONATION DAYS/WEEKEND BOOK SALES\n\n**JANUARY 25**\n10:00-2:00 Donation Day\n10:00-2:00 Donation Day\n\n**FEBRUARY 22**\n10:00-2:00 Donation Day\n\n**MARCH 14, 15, 16**\nSPRING BOOK SALE\n10:00-2:00 Donation Day\n10:00-2:00 Donation Day\n\n**APRIL 19**\n10:00-2:00 Donation Day\n10:00-2:00 Donation Day\n\n**MAY 3**\n10:00-2:00 Donation Day\n10:00-2:00 Donation Day\n\n**JUNE 7**\n10:00-2:00 SPRING BOOK SALE\n\n**JULY 28**\nNo Donation Day\nNo Donation Day\n\n**AUGUST 12, 13, 14**\nBACK TO SCHOOL BOOK SALE\n10:00-2:00 Donation Day\n10:00-2:00 Donation Day\n\n**SEPTEMBER 27**\n10:00-2:00 Donation Day\n\n**OCTOBER 25**\n10:00-2:00 Donation Day\n\n**NOVEMBER 14, 15, 16**\nHOLIDAY BOOK SALE\n10:00-2:00 Donation Day\n\n**DECEMBER 13**\n10:00-2:00 Donation Day\n\n*\"Curbside Drop-Off\" is available during Donation Days: Conestroga Key Club volunteers move books from vehicles into the library. Thank you, Key Club!\n\nDonations: limited to 4 boxes or bags. Please, no huge boxes or bags! Junker boxes available in Book Sale. Put your donations in the rolling carts which have water or smoke damage, and are moldy, old, and/or small hard.\n\nREMEMBER: THE BOOK SHOP (DOWNSTAIRS) IS OPEN DURING ALL LIBRARY HOURS. ALL PROCEEDS BENEFIT THE LIBRARY.`,
+    "museum-pass": `# Museum Passport Punch Cards\n\n## TREDYFFRIN PUBLIC LIBRARY\n## TREDYFFRIN TOWNSHIP LIBRARY\n\n### Museum Passport Program\n**PUNCH CARDS**\n\n1. Reserve one of Tredyffrin\'s museum passes\n2. Visit the attraction\n3. Receive a punch on your card at Tredyffrin\'s Reference Desk. Stop by the Desk before you return your physical pass to show proof of attendance.\n4. Complete four punches and return your card to the Reference Desk for a prize.\n5. The Longwood Gardens vouchers is valid for up to four (4) free general admission tickets and 25% off of a Membership. It\'s for a one-time use before September 30, 2025.\n\n**Please Note: Prizes are limited! Once we distribute all of our Longwood Gardens vouchers, we will not be getting more. After September 30, 2025, we will be introducing a new prize.**\n\nQuestions? Contact the Reference Desk at 610-688-7092 x212\n\n---\n\n## Museum Pass Program\n\nThe museum pass program at Tredyffrin Public Library is generously sponsored by the Friends of Tredyffrin Public Library.\n\nSupport the Friends by visiting the Red Fox Book Shop at the library!\n\n[Red Fox Book Shop logo - \"Celebrating 15 Years\"]\n[Adventure Passport Museums & More logo]\n\n### TREDYFFRIN PUBLIC LIBRARY\n**A TREDYFFRIN TOWNSHIP LIBRARY**\n\n582 Upper Gulph Road\nStrafford, PA 19087\n610-688-7092\nwww.tredyffrinlibraries.org\n\n[Chester County Library System logo]\n\n---\n\n## Museum Pass Program\n\n### Visit local museums for free with your library card!\n\n[Tredyffrin Public Library logo]\n[A Tredyffrin Township Library]\n\n**All museum passes must be reserved online in advance.**\n\nScan this QR code to reserve a museum pass from the Tredyffrin Public Library\n\n[QR Code]\n\nOr go to:\nbit.ly/TredyffrinMPP`,
+    "copying": `# Copying at the Front Desk\n\n## 5. Confirm the information on this screen, then touch \"Print\".\n\n[Screenshot showing a Print Settings dialog with the following elements:\n- Print Settings header\n- Various print document options (Kellogg\'s, Wet..., Document)\n- Pages: 1\n- Color: B&W (circled in red)\n- Print button (circled in red)]\n\n## 6. Please pay for copies at the Front Desk.\n\n[Note: Interface shows \"Account\", \"Copy\", \"Scan\" options at bottom]`,
+    "policies-overview": `# TREDYFFRIN TOWNSHIP LIBRARIES\n## TREDYFFRIN PUBLIC LIBRARY & PAOLI LIBRARY\n\n### POLICIES\n\n#### PATRON BEHAVIOR\n- Appropriate behavior inside is expected. All behavior is expected to be appropriate to maintain a supportive environment for library users.\n- Visit this link to see the complete sets Behavior Policy.\n- You may print hard copies from the Behavior Policy link or request them at the Info Desk. Patrons violating the Behavior Policy will be asked to leave. Depending on the severity, permanent ban or consequences may follow.\n- Internet use and other library activities, particularly those associated with minors (under 18), must also adhere to the Libraries\' Policies.\n\n#### GENERAL PATRON BEHAVIOR GUIDELINES\nThe following guidelines shall apply to all library patrons. Patrons violating these guidelines may be asked to leave the library. A patron who repeatedly violates these guidelines or engages in serious misconduct on Library property will be reported to the proper authorities and may be subject to prosecution. Serious misconduct includes but is not limited to the following:\n- A patron will be asked to leave if a patron cannot maintain control of him/herself (i.e., they are intoxicated).\n- Sleeping is not permitted. Sleeping shall be defined as a patron closing his/her eyes for more than 30 seconds.\n- Library tables and chairs (i.e., any library property) are generally for library use/business only and are not for private tutoring or after-school activities of children.\n\nThe following behavior problems are prohibited:\n- Soliciting, petitioning, or distributing written materials inside the library without permission of library administration\n- Interfering with library staff\'s performance of their duties\n- Interfering with another person\'s use of the library or library materials\n- Food and beverages (non-alcoholic only) may be brought into and consumed in the library; however, they must be kept away from computers, scanners, and other library equipment.\n- Cell phone conversations are acceptable. However, patrons are asked to keep their voices down as a courtesy to other patrons\n\n#### Patron Behavior Policy\n\nIn addition to these prohibited behaviors, all patrons are subject to the behavioral guidelines adopted:\n- **Unattended Children Policy**\n- **Internet Acceptable Use Policy**\n- **Meeting Room Policy**\n- **Circulation Policy**\n- **Electronic Equipment Use Policy**\n\n#### PA Law regarding behavior and any individual violating the law will be asked to cease such behavior and/or will be reported to law enforcement:\n- **Smoking inside:** PA Library Code sections 7505 and 7506\n- **Possessing inside or on Library premises or windows, as provided under Government Code sections 7596 and 7597**\n- **Possessing, consuming, exchanging, or selling illegal drugs inside or outside the library building**\n\n#### Library Response to Violations of Behavior Policy\n\nAny person who violates the Behavior Policy will be handled in a professional and courteous manner and will follow the following pattern, unless the violation (e.g., crime) warrants a more urgent response:\n\nStaff will tell 19-1-1 immediately in response to any behavior that poses an immediate threat to the safety and security of library patrons, staff, and library facilities or local ordinances. Staff may call the police if a patron refuses to leave the library when asked or required.\n\n### TREDYFFRIN TOWNSHIP LIBRARIES\n#### TREDYFFRIN PUBLIC LIBRARY & PAOLI LIBRARY\n\nRefusal to follow reasonable direction from staff, including but not limited to leaving the library during normal closing procedures or refusing to vacate an emergency evacuation during an emergency.\n- Possessing or consuming alcohol or illegal substances.\n- Using the public restrooms in any manner that is not usual or customary, including washing clothing or use in the public restrooms authorized by law.\n- Adults loitering in the children\'s room/area unless supervising a child, using the library telephone for personal business, unless in an emergency or a request for transportation.\n- The questionnaire is a violation of state law and is punishable by fine and/or other penalty.\n\n### Additional Information\n\nFor most other interpretive behavior, one warning will be given. An additional violation will result in immediate expulsion from the library. (A Patron Violation of the rules of staff shall have library privileges suspended, may result in longer expulsion period, or a violation form may be filled out, which shall be kept with evidence notes of the violation shall be given to the patron, a copy of which shall be kept on file.)\n\nAn individual who is banned from the library may be criminally charged with trespassing if they enter the library\'s premises. Violations with no means of identification will be left staff and law enforcement. The request must be made to writing and submitted to:\nThe Library Director, and the Library Board decision is final. The Board of Trustees of the Library. The request must be submitted in writing to the Board of Trustees and must include a statement that the person wishes the Board of Trustees to review the Board\'s Board meeting and the decision of the Board shall be delivered in writing within ten (10) days thereafter.\n\n**Adopted by the Tredyffrin Township Libraries Board 11/29/2016**\n**First approved 10/22/2010**\n**Revised and approved 06/28/2018**\n\n---\n\n### UNATTENDED CHILDREN\n\n#### Policy Guidelines\nParents are responsible for the supervision of their children while in the library. Young children (and vulnerable adults) should not be left unattended anywhere in the library.\n\nChildren under age 11 are not permitted to be in the library without the presence of a parent or responsible caregiver.\n\nResponsibility for the safety of children using the library rests with the parent or guardian. Library staff cannot and will not assume responsibility for the supervision or safety of children in the library.\n\nChildren 6 years of age and under must not be left unattended in the Library. If a child under 8 years of age is found unattended, the situation will be treated as a safety issue. The parent, guardian, and/or caregiver will be contacted and appropriate action will be taken which may include contacting the proper authorities.\n\nParents or guardians or 8-10 year old children may not leave them unattended in the library for extended periods of time (one hour or more). The children must be prepared to leave the library if necessary. Library staff will attempt to contact the parent, guardian, and/or caregiver if a child aged 8-10 appears to have been left unattended for more than one hour.\n\nChildren ages 11 and older may use the library on their own; however, parents are still responsible for the behavior of their children.\n\nDisruptive children of any age will be asked to leave the library.\n\nStaff will attempt to contact parents or guardians of children who are still at the library after closing. If a parent or guardian cannot be reached, the staff may contact the proper authorities who may assume responsibility for the child.\n\nLibrary Programs\n\nIf a parent drops their child off at the library for a planned library program and the program is cancelled (due to presenter illness, inclement weather, etc.) the parent or guardian will be responsible for arranging for the prompt pick up of their child.\n\nParents, guardians, and caregivers should be aware that the library cannot and does not provide supervision or care for children or vulnerable adults during library programs.\n\nChildren 6 years old and under attending library programs must be accompanied by an adult caregiver.\n\nParents and/or adult caregivers are expected to remain in the library during programs for children under 11.\n\n**First approved January 28, 2020**`,
+    "definitions": `# DEFINITIONS\n\n- **Claims returned:** a patron has indicated that they have returned an item that the circulation system still shows as being out.\n\n- **Circulation agency:** a third-party company that specializes in resource recovery. The Collection agency contacts patrons and informs them or outstanding accounts for either materials or monies owed.\n\n- **Courtesy notice:** an email notice sent to patrons when one or more materials they have borrowed are due the next day.\n\n- **Fee:** a charge imposed per item (may be for a specific time period).\n\n- **Final notice:** a notice sent by US mail for the replacement cost of an unreturned item.\n\n- **Fine:** a charge imposed per day per item for the late return of library materials.\n\n- **Hold:** an active request for an item from the CCLS Collection to be held in a patron\'s name for future pickup (from a designated member library).\n\n- **In good standing:** an account that has no overdue or lost materials. Fines and fees must be no more than \$10.00 to be in outstanding charges in excess of \$10.00.\n\n- **Library card:** a card containing a 14-digit unique identifying number issued to a patron to establish an account with CCLS. If patrons have their library cards on file with their libraries to maintain a record of which materials are on loan to a patron.\n\n- **Loan limit:** the total number of items of a specific type or total value that any one patron can have on loan at one time.\n\n- **Loan period:** the total number of hours, days or weeks that one patron can keep a specific item.\n\n- **Minor:** an individual under the age of 18, who has not been legally emancipated.\n\n- **Overdue item:** an item that has not been returned to the library by the due date.\n\n- **Overdue notice:** a notice delivered by email, text, or US mail, listing library materials that have been retained past the due date.\n\n- **Renewal:** an extension of the original loan period.\n\n- **Rental book:** one that has been purchased specifically to supplement the regular collection and is not budgeted. Individuals can borrow those items for a fee.\n\n*Chester County Library System Borrowing Policy Regulations and Procedures*`,
+    "ccls-toc": `# CHESTER COUNTY LIBRARY SYSTEM\n## BORROWING POLICY REGULATIONS AND PROCEDURES\n\n## TABLE OF CONTENTS\n\n### DEFINITIONS\n\n### LIBRARY CARDS\n- Obtaining a Library Card\n- Provisional Library Cards\n- Borrowing Privileges\n- Lost, Stolen or Previously Issued Library Cards\n\n### PATRON RESPONSIBILITIES\n\n### LIBRARY EMPLOYEE AND VOLUNTEER BORROWING PRIVILEGES\n\n### LOAN PERIODS\n\n### RENEWALS\n\n### FINES AND FEES\n- Overdue Fines\n- Miscellaneous Fees\n- Fines and Fees for Unreturned, Lost or Damaged Materials\n- Paying Library Fines and Fees\n\n### CLAIMS RETURNED\n\n### NOTICES\n\n### LIBRARY MATERIAL HOLDS\n\n### COLLECTION AGENCY\n\n*Chester County Library System Borrowing Policy Regulations and Procedures*\n\n---\n\nPage Numbers:\n2\n3\n3\n3\n3\n3\n4\n4\n5\n5\n6\n7\n7\n7\n7\n8\n8\n9\n9\n10`,
+    "library-cards": `# LIBRARY CARDS\n\n## Provisional Library Card and Non-Resident Library Cards\n\nProvisional library cards can be issued to individuals who can show proof of PA residency but do not live in the library\'s service area. Provisional library cards are issued at no cost. Provisional library cardholders are limited to checking out three items at a time with no access to digital resources.\n\nIndividuals who cannot show proof of residency, or are visitors to the area, may purchase an annual non-resident library card. Fees for non-resident library cards are set at the discretion of each member library. An annual non-resident library card entitles the holder to full borrowing privileges.\n\n## Borrowing Privileges and Other Services\n\nLibrary cardholders in good standing are entitled to borrow materials from the system\'s physical collection. Access to digital resources is limited to individuals with standard library cards.\n\nSpecific loan periods and renewal information for library materials can be found on the patron\'s library receipt.\n\n## Lost, Stolen, or Provisional Library Cards\n\nPatrons are responsible for all materials borrowed with their library card(s). If a library card is lost or stolen, the patron must immediately notify the library where their account was created. A CCLS member library will place a restriction on the account to prevent its use. Only the member library where the patron\'s account was created can issue a replacement library card. A replacement fee may be charged.\n\nIf a patron\'s library account is in good standing, CCLS member libraries will issue a paper receipt with a barcode that can be used to access library resources. This receipt is valid for 30 days and cannot be used to access digital resources. A library patron can only receive two provisional cards in a 12-month period. Patrons may not use another individual\'s library card without their permission.\n\n## PATRON RESPONSIBILITIES\n\nPatrons are responsible for all materials checked out on their library card and are encouraged to keep track of due dates and renew items in a timely fashion.\n\nThe parent or legal guardian who signs a minor\'s library card application is responsible for all materials borrowed by the minor. See Youth Services exceptions to this rule.\n\nA library patron is liable for charges resulting from lost or damaged materials, in accordance with the Fines and Fees policy.\n\n---\n\n## LIBRARY EMPLOYEE AND VOLUNTEER BORROWING PRIVILEGES\n\nCurrent CCLS employees and volunteers are given special borrowing privileges:\n- Employees are entitled to an extended loan period on all items. Some exceptions to this rule include:\n  - New popular items may have specific loan periods that apply to staff and volunteers\n  - Museum passes\n  - Library of Things items\n\nLibrary employee and volunteer borrowing privileges may be adjusted when necessary in accordance with CCLS member library policies. CCLS reserves the right to suspend these privileges if they are being misused or abused.\n\n## LOAN PERIODS\n\nThe loan period for most items in the CCLS collection is 21 days. Some items have shorter or longer loan periods. Items with variable loan periods include but are not limited to:\n- New materials\n- Museum passes\n- Holiday materials\n- Library of Things\n- Electronic devices\n\nA library will determine the loan period of items. Some exceptions to this rule include:\n- Museum passes\n- Library of Things\n- Electronic devices\n- This will be indicated at the time of checkout\n\n---\n\n## FINES AND FEES\n\n## Overdue Fines\n\nOverdue fines are charged when an item is returned past its due date. CCLS eliminated overdue fines on most materials starting July 1, 2021. Items that still have overdue fines include:\n- Museum passes\n- Library of Things materials\n- ILL items from other library systems\n\nSpecific fine amounts are set by each CCLS member library.\n\n## Miscellaneous Fees\n\nCCLS member libraries may charge fees for various services including, but not limited to:\n- Replacement library cards\n- Photocopying\n- Printing\n- Faxing\n- Proctoring exams\n- Processing fees for lost or damaged items\n\n## Fines and Fees for Unreturned, Lost or Damaged Materials\n\nLibrary patrons are responsible for library materials checked out on their library card. If materials are not returned 21 days past their due date, the patron\'s account will be charged the replacement cost plus any applicable processing fee. Once payment is made, the item becomes the property of the patron.\n\nIf a patron pays for an item and returns it within 6 months, CCLS will refund the replacement cost but not the processing fee. The patron must provide proof of payment.\n\nMaterials that are damaged beyond use will be charged to the patron at replacement cost plus processing fee.\n\n## Paying Library Fines and Fees\n\nFines and fees can be paid at any CCLS member library. Payment may be made by cash, check, or credit card depending on the policies of each member library.`,
+    "claims-holds": `# CLAIMS RETURNED\n\nThe CCLS Board of Trustees has instituted this policy to assist in recovering materials that have been returned according to the patron. This procedure does not imply that we disbelieve the patron, but rather serves to help recover materials that may be missing.\n\n## Paying Library Fines and Fees\n- Fines and fees can be paid at any of the CCLS member libraries.\n- Items can be returned to any of the CCLS member libraries.\n- Note: some libraries can no longer accept credit cards as payment. The cardholder library can advise the patron.\n\n## CLAIMS RETURNED\n\nThe process of \"claims returned\" shall be used when a patron has indicated to the library that the material in question has been returned. There is a limit of two active claims returned items per patron. Once a patron has reached the limit of two items, they may not claim additional items until a previously claimed item has been resolved.\n\nWhen a patron claims that an item has been returned, the library will:\n- Search the shelf and surrounding areas\n- Check the book drop\n- Review recent check-ins\n- Mark the item as \"claims returned\" in the system\n\nIf the item is not found within 90 days:\n- The patron will be billed for the replacement cost\n- The patron\'s borrowing privileges may be limited or suspended\n- The matter may be referred to a collection agency if payment is not received\n\n## NOTICES\n\nThe CCLS automated system generates several types of notices to keep patrons informed about their accounts:\n\n### Courtesy Notices\nSent one day before items are due via email or text message to patrons who have opted in.\n\n### Overdue Notices\n- First overdue notice: 3 days after due date\n- Second overdue notice: 10 days after due date\n- Third overdue notice: 17 days after due date\n- Final notice: 21 days after due date (sent via US mail with replacement costs)\n\n### Hold Notices\nPatrons are notified when requested materials are available for pickup. Items are held for 7 days before being passed to the next patron or returned to the shelf.\n\n## LIBRARY MATERIAL HOLDS\n\nPatrons in good standing may place holds on CCLS materials. The following guidelines apply:\n\n- Patrons may have up to 25 active holds\n- DVDs and new materials may have hold limits\n- Museum passes cannot have holds placed on them\n- Patrons will be notified when items are ready for pickup\n- Items not picked up within 7 days will go to the next patron\n- Holds can be suspended for vacation periods\n\n## COLLECTION AGENCY\n\nAccounts with materials 90+ days overdue or with fines exceeding \$25.00 may be referred to a collection agency. Before referral:\n- Multiple notices will be sent\n- The patron will receive a final notice via certified mail\n- Once referred to collections, a \$10.00 fee is added to the account\n- Full payment must be made to restore borrowing privileges\n- The collection agency reports to credit bureaus\n\n**Approved September 11, 2023**\n*Chester County Library System Borrowing Policy Regulations and Procedures*`,
+    "library-info": `# TREDYFFRIN TOWNSHIP LIBRARIES\n\n## Tredyffrin Public Library & Paoli Library\n\n**Tredyffrin Public Library**\n582 Upper Gulph Road, Strafford, PA 19087\nPhone: 610-688-7092, Option 2 for Tredyffrin\n\n**Paoli Library**\n18 Darby Road, Paoli, PA 19301\nPhone: 610-296-7996\n\n**Website:** www.tredyffrinlibraries.org\n\n## Hours/Locations\n\n**Tredyffrin Public Library**\nMonday-Thursday: 10 am – 9 pm\nFriday: 10 am – 6 pm\nSaturday: 10 am – 5 pm\nSunday: 1 pm – 5 pm (September – May)\n\n**Paoli Library**\nMonday & Wednesday: 10 am – 8 pm\nTuesday & Thursday: 12 pm – 8 pm\nFriday: 10 am – 6 pm\nSaturday: 10 am – 2 pm\nSunday: Closed\n\n## Vision and Mission\n\n### Vision of the Libraries\nTo enrich the lives of the community we serve through the transformative power of knowledge, information, education, and engagement. Libraries are catalysts for building community and improving lives.\n\n### Mission of the Libraries\nThe libraries empower diverse audiences to read, learn, create, and connect by providing equitable access to information, technology, cultural resources, and gathering spaces.\n\n## About the Tredyffrin Township Libraries\nThe Tredyffrin Township Libraries consist of two library locations: Tredyffrin Public Library and Paoli Library. The Libraries are governed by a seven-member Board of Trustees appointed by the Tredyffrin Township Board of Supervisors. The Township provides 85% of the Libraries\' funding, with the remaining 15% provided through state funding. Both libraries are members of the Chester County Library System (CCLS).\n\n## Library Director\nLindsey Dearborn, MLS, Executive Director\n\n## What Else Can Your Libraries Provide?\n- eBooks and audiobooks through cloudLibrary and Libby\n- Music downloads and streaming through Freegal Music\n- Digital magazines through Libby\n- Museum passes available for checkout\n- Language learning through Transparent Language Online\n- Online research databases\n- Job search assistance and career resources\n- Technology help\n- Meeting rooms\n- Study rooms\n- Programs for all ages\n\n## Follow Us\nFacebook: @TredyffrinTownshipLibraries\nInstagram: @tredylibraries\nTwitter: @TredyLibraries\n\n**Revised: March 24, 2021**\n**Revised: August 28, 2024**`,
+    "room-rental": `# Interested in renting a Meeting Room at the Tredyffrin Public Library?\n\nFollow these steps:\n\n1. Go to www.tredyffrinlibraries.org\n2. Click \"About\"\n3. Click \"Meeting Room Rentals\"\n4. Click the link titled Tredyffrin Township Libraries Meeting Room Policy to read the current policy.\n5. Complete and submit the Room Rental Request on the website.\n\nYou can also scan this QR code to go directly to the Meeting Room Rental\'s Webpage:\n\n[QR Code]\n\nQuestions?\nSend an email to rooms@tredyffrinlibraries.org\nor call 610-688-7092 x218\n\n[Desk/Table icon]\n\n[Sticky note text:]\nExtra copies in Noah\'s folder\nPatrons can take with them`,
+    "rental-form1": `# TREDYFFRIN PUBLIC LIBRARY\n## A TREDYFFRIN TOWNSHIP LIBRARY\n\n## Meeting Room Rental Request\n\n[Please Note box:]\nPlease Note -\nThis form should only be used if patron cannot provide an email address; otherwise, patron needs to complete the online room rental form and submit.\n\n### Date of Rental: _____________\n\n### Please list any additional dates if needed: _____________\n\n### Start time (Please include time for set-up): _____________\n\n### End time (Please include time for take-down): _____________\n\n### Please Note: All rooms must be cleared 15 minutes before closing time. (Please see hours of operation on website)\n\n### Anticipated attendance: _____________\n\n### Applicant Information:\n\n**First & Last Name:** _____________\n\n**Address:** _____________\n\n**Phone:** _____________\n\n**Email:** _____________\n\nIf email cannot be provided, please provide your Chester County Library Card number: _____________\n\n**Organization Name:** _____________\n\nPage 1 of 2`,
+    "rental-form2": `# TREDYFFRIN PUBLIC LIBRARY\n## A TREDYFFRIN TOWNSHIP LIBRARY\n\n## Meeting Room Rental Request Form (continued)\n\n### Type of Organization\n\nNon-for-Profit: Groups or organizations with proof of incorporation as a nonprofit or charitable entity, and those working in partnership with the library on a service organization, or any group or individual meeting for a specific not-for-profit purpose.\n\nFor-Profit: For profit groups, organizations, or an individual whose purpose is to conduct operations to realize a financial profit.\n\nPlease Check One:\n___ Non-Profit\n___ For-Profit\n\n### Organization Address (if different from applicant): _____________\n\n### Phone (if different from applicant): _____________\n\n### Email (if different from applicant): _____________\n\n### Terms and Conditions\n\nCheck to Agree to Terms:\n\nI have read the policies governing the use of the library and meeting rooms and hereby agree, intending to be legally bound, to indemnify and save harmless the Chester County Library System, the Board of Trustees and all employees from any or all claims and demands for damage, claims or demands of any nature arising out of or in connection with the use or occupancy of the library meeting room. Also I agree to adhere to and be bound by the provisions of such policies and by any laws that will circulate, including the rules and guests of the library meeting rooms. I certify that I will circulate the charges of 18 years of age or older.\n\n___ I agree to the terms listed\n\n**Signature:** _____________\n\n**Date:** _____________\n\nPage 2 of 2`,
+    "room-policy": `# TREDYFFRIN TOWNSHIP LIBRARIES\n## TREDYFFRIN PUBLIC LIBRARY & PAOLI LIBRARY\n\n## MEETING ROOM POLICY\n\nTredyffrin Township Libraries meeting rooms accommodate a variety of library-administered and library-sponsored programs and activities. These may include programs, classes, and gatherings of persons interested in using the library\'s services and materials as well as library events. The meeting rooms when not in use for library-administered or library-sponsored programs or activities, are available during normal library business hours to organizations engaged in educational, cultural, intellectual, or charitable activities.\n\nThe following policy guidelines for both reserving and using the meeting rooms with consideration of the American Library Association\'s Library Bill of Rights statement: \"Libraries that make exhibit spaces and meeting rooms available to the public they serve should make such facilities available on an equitable basis, regardless of the beliefs or affiliations of individuals or groups requesting their use.\"\n\n**Note:** Pennsylvania libraries that make meeting rooms available for civic uses are also considered a designated public forum under the First Amendment to the United States Constitution. As such, the Library cannot discriminate based on the viewpoints expressed by a meeting room user unless there is a compelling interest warranting the endorsement of the goals, policies, or activities of any group or organization.\n\n## INDEMNIFICATION OF LIBRARY\n\nIndividuals and groups using meeting rooms agree to indemnify and hold harmless Tredyffrin Township, The Tredyffrin Libraries, and their Board members and employees from all suits, actions, claims or demands of any nature, claims or demands of any nature arising out of or in connection with the use or occupancy of the library meeting rooms. Its furnishings or its equipment.\n\n## RENTAL FEES\n\nFor the purpose of collecting hourly room rental fees, organizations are classified into two categories - Non-Profit or For-Profit. The Library Director/Branch Manager or their designee shall decide whether an applicant qualifies as Not-for-Profit or For-Profit based on the following criteria:\n\nA. **Not-for-Profit:** Groups or organizations with proof of incorporation as a nonprofit or charitable entity, and those working in partnership with the library on a joint program, as well as any group of individuals meeting for a specific purpose that does not result in realizing a financial profit.\n\nB. **For-Profit:** For profit groups or organizations whose purpose is to conduct operations to realize a financial profit.\n\n## REQUESTED MEETING ROOMS\n\n### GUIDELINES FOR MEETING ROOMS\n\nThese are the rooms will be assigned by the Library Director or Designee:\n\n1. Meeting rooms will be available for the use of the Library during normal operating hours.\n2. Applications for organization meetings will be reviewed and assignments made as deemed appropriate by the designated person. These rooms will not be reserved by groups whose meetings should disrupt library operations or patrons. Decisions made by the Director are final.\n3. Disruptive behavior as described in the Guidelines for Patron Behavior will result in termination of meeting with groups required to leave the library immediately.\n4. Library-administered and Library-sponsored programs are not charged a fee. Scheduled library events take precedence.\n5. Permission to use meeting rooms is extended on an individual basis. No organization may claim that their use of the meeting rooms consists or indicates library endorsement.\n\n### Additional Key Points (highlighted sections):\n\n**REQUESTED MEETING ROOMS**\n- Meeting room requests must be submitted to the organization meeting room.\n- The Library can cancel any reservation at any time.\n- No smoking is permitted in any library building or on library property.\n- The consumption of alcoholic beverages is not allowed in library meeting rooms.\n- Food and beverages may be served. (Note: Groups are responsible for cleanup)\n- All publicity must clearly identify the meeting with the sponsoring individual or group. The Library\'s name and address may only be given as location.\n\n**FURNITURE, MANAGEMENT, EQUIPMENT AND IREY VILLAGES**\n- The library will provide tables, chairs, and equipment as available.\n- Materials or signs may be taped to walls, ceilings, doors, or windows in meeting rooms.\n- Each group will leave the room properly arranged with all litter disposed of in containers provided.\n- Library equipment such as copiers, computers, telephones, fax machines, etc., is not to be used as part of any meeting activity.\n\n**CANCELLATIONS**\n- In the event of a program cancellation, the library should be notified immediately to inform future attendees.\n- Groups must remove any items they bring within the building immediately after the meeting ends.\n- Groups are responsible for any damage to the room during their use of the facility.`,
+    "room-appeal": `# APPEAL\n\nIf it is determined by the Library Director or Branch Manager that an individual or group has violated the provisions of the Meeting Room Policy or has violated one or more of the above meeting room regulations, the group or individual may be denied future use of the meeting room space.\nDepending upon the nature and type of violation, a group or individual may be denied use of the meeting room space.\n\nA person or group denied permission to use the meeting rooms may appeal such a denial at the next regularly scheduled meeting of the Board of Library Trustees. The appeal must be submitted in writing to the Library Director at least 48 hours prior to the scheduled meeting of the Library Board.\n\n**Adopted by the Tredyffrin Township Libraries Board, December 2019**\n**Revised and adopted by the Tredyffrin Township Libraries Board, May 2024**`,
+    "ref-desk-checklist": `# Check/Complete #3shmi at Area (3)\n\n## Opening Tasks\n\n### Turn off alarm: First to enter\n- ✓\n\n### Turn on local lighting\n- ✓\n\n### Turn on monitors for public computers and catalog stations\n- ✓\n\n### Power up/log in to desk computers\n- ✓\n\n### Turn on video/music cases\n- ✓\n\n### Check AED in lobby (look for front label \"GOOD\")\n- ✓\n\n### Empty outside book drop\n- ✓\n\n### Turn on receipt printers for desk computer terminals\n- ✓\n\n### Confirm contact changes in the newsletter list received\n- ✓\n\n### Gather and check in newspapers\n- ✓\n\n### Fill holds\n- ✓\n\n### Empty inside drop boxes\n- ✓\n\n### Record temperature and humidity on voicemail and respond\n- ✓\n\n### Read new staff blog entries and Slack posts\n- ✓\n\n### Spray down and wipe the Whiteboards clean\n- ✓\n\n### Straighten and establish the desks\n- ✓\n\n### Check in book drop materials when other opening tasks are complete\n- ✓\n\n### Adult Circulation\n- ✓\n\n### Children\'s Circulation\n- ✓\n\n### Reference\n- Add is NF: During Busy Local History Room Hours (Before 10am)\n- Mon-Fri (except holidays) Login/Lighted\n\n## Notes\n\n### Extra: 4-digit on test payroll and phone 610.933.9097\n\n### Event: Employee Chrome Profile, Manager/Timekeeping/Clerk Daily\n\n### Remote/Note: sign the Desk opening guest\'s not only P10\n\n### Book date returned by 32 weeks a day\n\n### 15 Ones; 8 Fives; 2 Tens = \$75 Total\n\n### Plan paging list, clear backpacked blending/mark\'s and inventory\n\n### Book date materials to previous day\n\n### Make a note in the log book in case there are any issues that need to be carried over into the next day\n(Against oil, odor, noises Audit Dine - Blue logbook out; contains - Stephanie, Pat & Jennifers\n\n---\n\n## Closing Tasks\n\n### 50 Minutes Prior to Close\n- Empty outside book drop\n- ✓\n\n### 30 Minutes Prior to Close\n- Walk the building and stairs (min 30 mins per shift time)\n- Walk the building first, close off stairwell doors\n- Start off public computers as change if needed\n\n### 30 Minutes Prior to Close\n- ✓\n\n### 5 Minutes Prior to Close\n- Turn off lobby monitors\n- Walk the building and close lobby door\n- Close no building\n\n### Check all meeting and study rooms\n- Turn off catalog monitors\n- Turn off local lighting\n- Count out cash register drawer\n- Check that there are no patrons left in the building\n- Gather all items again to leave together\n- Arm alarm: P/C\n\n### Special Notes\n\n#### Study Rooms\n- Add is NF: During Busy Local History Room Hours (Before 10am)\n- Mon-Fri (except holidays)\n- Lights/lights\n\n#### Circ Desk\n- Tyler-\n  Primrose\n  Friday\n  Brooks-\n  Yoga\n- ✓\n\n#### Children\'s Circulation\n- ✓\n\n#### Reference\n- ✓\n\n### Notes\n\nEnd meeting/scheduled notes after 9:00 pm. Events schedule to previous order, book return staff\n\n\$15 for every cart. Expects cart counted, blocked, plan expectations, and loaded in 2 shifts\n\nCheck study rooms, meeting rooms, bathrooms, \"Tap\'s For window climbing, and downstairs`,
+    "toc": `# Reference Desk Information\n## Table of Contents\n\n1. **App**\n   - Directions for downloading the CCLS App\n\n2. **Book Donations**\n   - Red Fox Book Shop Schedule\n\n3. **Interlibrary Loans**\n   - Details about the ILL program and guidelines\n\n4. **Kanopy**\n   - Information for kids and adults\n\n5. **Libby**\n   - Instructions for downloading and a QR code for detailed instructions\n\n6. **Museums**\n   - Museum Pass Punch Card\n   - Museum Pass Brochure with list of current museums\n\n7. **New York Times**\n   - Digital Edition Instructions\n\n8. **PIN**\n   - Instructions for setting a 4-digit PIN for the CCLS website and App\n\n9. **Policies**\n   - Frequently referenced policies`,
+};
+
+        // Store all document content
+        const documentContent = {};
+
+        // Initialize the application
+        async function init() {
+            setupEventListeners();
+            populateNavigation();
+            await loadAllDocuments();
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Category expand/collapse
+            document.querySelectorAll('.category-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    const category = this.parentElement;
+                    category.classList.toggle('expanded');
+                });
+            });
+
+            // Sidebar toggle for mobile
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+
+            sidebarToggle?.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('expanded');
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            searchInput?.addEventListener('input', (e) => {
+                performSearch(e.target.value);
+            });
+        }
+
+        // Populate navigation
+        function populateNavigation() {
+            Object.entries(documents).forEach(([category, docs]) => {
+                const categoryElement = document.querySelector(`[data-category="${category}"] .category-items`);
+                if (categoryElement) {
+                    docs.forEach(doc => {
+                        const navItem = document.createElement('div');
+                        navItem.className = 'nav-item';
+                        navItem.dataset.docId = doc.id;
+                        navItem.dataset.category = category;
+                        navItem.innerHTML = `
+                            <i class="fas ${doc.icon}"></i>
+                            <span>${doc.title}</span>
+                        `;
+                        navItem.addEventListener('click', () => loadDocument(category, doc));
+                        categoryElement.appendChild(navItem);
+                    });
+                }
+            });
+        }
+
+        // Load all documents
+        async function loadAllDocuments() {
+            // Copy embedded content to documentContent
+            Object.keys(embeddedContent).forEach(key => {
+                documentContent[key] = embeddedContent[key];
+            });
+        }
+
+        // Load and display a document
+        function loadDocument(category, doc) {
+            // Update active state
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`[data-doc-id="${doc.id}"]`)?.classList.add('active');
+
+            // Display document
+            const display = document.getElementById('documentDisplay');
+            const content = documentContent[doc.id] || generatePlaceholderContent(doc);
+
+            display.innerHTML = `
+                <div class="doc-info">
+                    <h2><i class="fas ${doc.icon}"></i> ${doc.title}</h2>
+                    <div class="doc-meta">
+                        <div class="doc-meta-item">
+                            <i class="fas fa-folder"></i>
+                            <span>${formatCategoryName(category)}</span>
+                        </div>
+                        <div class="doc-meta-item">
+                            <i class="fas fa-file"></i>
+                            <span>${doc.file}</span>
+                        </div>
+                        <div class="doc-meta-item">
+                            <i class="fas fa-image"></i>
+                            <span>Source: ${doc.source}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="document-content">
+                    ${markdownToHtml(content)}
+                </div>
+            `;
+
+            // Close sidebar on mobile after selection
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar')?.classList.remove('active');
+            }
+        }
+
+        // Generate placeholder content
+        function generatePlaceholderContent(doc) {
+            return `# ${doc.title}
+
+*This document will display the transcribed content from ${doc.file}*
+
+## Source Information
+- **Original Image(s):** ${doc.source}
+- **Category:** ${formatCategoryName(doc.category || 'general')}
+- **File:** ${doc.file}
+
+## Content Preview
+The full transcribed content would appear here, showing all the library process documentation exactly as it was transcribed from the original images.`;
+        }
+
+        // Simple markdown to HTML converter
+        function markdownToHtml(markdown) {
+            let html = markdown
+                // Headers
+                .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                // Bold
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                // Italic
+                .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+                // Line breaks
+                .replace(/\n\n/g, '</p><p>')
+                // Lists
+                .replace(/^\* (.+)$/gim, '<li>$1</li>')
+                .replace(/^\d+\. (.+)$/gim, '<li>$1</li>')
+                // Wrap lists
+                .replace(/(<li>.*<\/li>)/s, function(match) {
+                    const lines = match.split('\n').filter(line => line.trim());
+                    if (lines[0]?.match(/^\d+\./)) {
+                        return '<ol>' + lines.join('') + '</ol>';
+                    }
+                    return '<ul>' + lines.join('') + '</ul>';
+                })
+                // Code blocks
+                .replace(/```([^`]+)```/g, '<pre><code>$1</code></pre>')
+                // Inline code
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                // Horizontal rules
+                .replace(/^---$/gim, '<hr>');
+
+            // Wrap in paragraphs
+            html = '<p>' + html + '</p>';
+
+            // Clean up empty paragraphs
+            html = html.replace(/<p><\/p>/g, '');
+
+            // Handle bracketed image descriptions
+            html = html.replace(/\[([^\]]+)\]/g, '<em style="display:block; background:#f0f7ff; border:2px dashed #8fb996; padding:1rem; border-radius:5px; text-align:center; color:#4a7c59; margin:1rem 0;">$1</em>');
+
+            return html;
+        }
+
+        // Format category name
+        function formatCategoryName(category) {
+            return category.split('-').map(word =>
+                word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' ');
+        }
+
+        // Search functionality
+        function performSearch(query) {
+            const lowerQuery = query.toLowerCase();
+
+            if (!query) {
+                // Show all items
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.style.display = 'flex';
+                });
+                return;
+            }
+
+            // Search through navigation items and content
+            document.querySelectorAll('.nav-item').forEach(item => {
+                const title = item.textContent.toLowerCase();
+                const docId = item.dataset.docId;
+                const content = (documentContent[docId] || '').toLowerCase();
+
+                if (title.includes(lowerQuery) || content.includes(lowerQuery)) {
+                    item.style.display = 'flex';
+                    // Expand parent category if collapsed
+                    const category = item.closest('.category');
+                    if (category && !category.classList.contains('expanded')) {
+                        category.classList.add('expanded');
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
