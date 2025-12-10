@@ -407,6 +407,109 @@
             margin-bottom: var(--fh-space-sm);
         }
 
+        /* Franklin Fact - Collapsible Financial History */
+        .franklin-fact {
+            background: linear-gradient(135deg, rgba(107, 39, 55, 0.03), rgba(107, 39, 55, 0.08));
+            border: 2px solid var(--fh-burgundy);
+            border-radius: 8px;
+            margin: var(--fh-space-2xl) 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .franklin-fact__header {
+            padding: var(--fh-space-lg);
+            cursor: pointer;
+            background: var(--fh-white);
+            transition: background-color 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--fh-space-lg);
+        }
+
+        .franklin-fact__header:hover {
+            background: rgba(107, 39, 55, 0.02);
+        }
+
+        .franklin-fact__header-content {
+            flex: 1;
+            min-width: 0; /* Allows text truncation if needed */
+        }
+
+        .franklin-fact__label {
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--fh-burgundy);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--fh-space-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-sm);
+        }
+
+        .franklin-fact__label::before {
+            content: "💡";
+            font-size: 1.2rem;
+        }
+
+        .franklin-fact__title {
+            font-family: var(--fh-font-display);
+            font-size: 1.25rem;
+            color: var(--fh-gray-900);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .franklin-fact__toggle {
+            flex-shrink: 0;
+            font-size: 1.25rem;
+            color: var(--fh-burgundy);
+            transition: transform 0.3s ease;
+            user-select: none;
+            width: 1.5rem;
+            text-align: center;
+        }
+
+        /* Hidden checkbox for expand/collapse */
+        .franklin-fact__checkbox {
+            display: none;
+        }
+
+        .franklin-fact__content {
+            padding: 0 var(--fh-space-lg);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            background: var(--fh-white);
+        }
+
+        .franklin-fact__checkbox:checked ~ .franklin-fact__wrapper .franklin-fact__content {
+            max-height: 800px;
+            padding: 0 var(--fh-space-lg) var(--fh-space-xl);
+        }
+
+        .franklin-fact__checkbox:checked ~ .franklin-fact__wrapper .franklin-fact__toggle {
+            transform: rotate(180deg);
+        }
+
+        .franklin-fact__content p {
+            margin-bottom: var(--fh-space-md);
+            line-height: 1.8;
+        }
+
+        .franklin-fact__content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .franklin-fact__highlight {
+            background: linear-gradient(to bottom, transparent 60%, rgba(107, 39, 55, 0.15) 60%);
+            padding: 0 2px;
+            font-weight: 600;
+        }
+
 
         /* Footer */
         .footer {
@@ -438,6 +541,11 @@
             }
         }
     </style>
+    <!-- Cache Control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
     <!-- Cache Control -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -611,6 +719,37 @@
                 <p>
                     Jumbo CDs of up to $250,000 receive Federal Deposit Insurance Corporation (FDIC) coverage if they're titled in the customer's name.
                 </p>
+            </div>
+
+            <!-- Franklin Fact: Breaking the Buck -->
+            <div class="franklin-fact">
+                <input type="checkbox" id="franklin-fact-1" class="franklin-fact__checkbox">
+                <div class="franklin-fact__wrapper">
+                    <label for="franklin-fact-1" class="franklin-fact__header">
+                        <div class="franklin-fact__header-content">
+                            <div class="franklin-fact__label">Franklin Fact</div>
+                            <h4 class="franklin-fact__title">When Money Markets Broke the Buck: September 2008</h4>
+                        </div>
+                        <span class="franklin-fact__toggle">▼</span>
+                    </label>
+                    <div class="franklin-fact__content">
+                        <p>
+                            September 16, 2008: The Reserve Primary Fund did what money market funds aren't supposed to do—it <span class="franklin-fact__highlight">"broke the buck,"</span> dropping to $0.97 per share. This was the financial equivalent of discovering your bank's vault was actually made of cardboard.
+                        </p>
+                        <p>
+                            The catalyst was $785 million in Lehman Brothers commercial paper that became worthless overnight when Lehman filed for bankruptcy. For context, this was only the second time in history a money market fund had broken the sacred $1.00 NAV—but the first time that mattered to anyone beyond a handful of investors.
+                        </p>
+                        <p>
+                            The real danger wasn't just one fund breaking. AIG was simultaneously circling the drain, and money market funds held billions in AIG commercial paper. Had AIG followed Lehman into bankruptcy, <span class="franklin-fact__highlight">the cascade would have broken dozens of funds simultaneously.</span> Understanding this systemic risk, the government announced an $85 billion AIG bailout that same afternoon (ultimately reaching $182 billion).
+                        </p>
+                        <p>
+                            The market response was swift: investors withdrew over $300 billion from money market funds within days—a classic run on the shadow banking system. The Treasury had to guarantee money market deposits, while the Fed opened emergency lending facilities. These events fundamentally restructured money market regulation, introducing floating NAVs for institutional funds and liquidity fees.
+                        </p>
+                        <p>
+                            The lesson remains relevant: even instruments designed for absolute safety can fail when systemic risks materialize. That "cash-equivalent" position in your portfolio? Under the right circumstances, it's just another security.
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <h3>Repurchase Agreements: The Fed's Favorite Tool</h3>
