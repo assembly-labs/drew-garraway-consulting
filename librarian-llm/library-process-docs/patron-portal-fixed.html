@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tredyffrin Library Help Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #22543d;
+            --secondary-color: #38a169;
+            --accent-color: #9ae6b4;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --border-color: #dee2e6;
+            --sidebar-width: 320px;
+            --header-height: 70px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-height);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 400px;
+            flex: 1;
+            margin: 0 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.5rem 2.5rem 0.5rem 1rem;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        .container {
+            display: flex;
+            margin-top: var(--header-height);
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            position: fixed;
+            height: calc(100vh - var(--header-height));
+        }
+
+        .category {
+            margin-bottom: 0.5rem;
+        }
+
+        .category-header {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .category-header:hover {
+            background: var(--secondary-color);
+        }
+
+        .category-items {
+            display: none;
+            background: #fafafa;
+        }
+
+        .category.expanded .category-items {
+            display: block;
+        }
+
+        .nav-item {
+            padding: 0.6rem 1rem 0.6rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.9rem;
+        }
+
+        .nav-item:hover {
+            background: #f0f0f0;
+            border-left-color: var(--secondary-color);
+        }
+
+        .nav-item.active {
+            background: #e8f4ea;
+            border-left-color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+        }
+
+        .content-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 2rem;
+        }
+
+        .doc-info {
+            background: linear-gradient(135deg, #f0f7ff, #e8f4f8);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .doc-info h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-meta {
+            display: flex;
+            gap: 2rem;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .document-content h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.75rem;
+            margin: 2rem 0 1.5rem 0;
+        }
+
+        .document-content h2 {
+            color: var(--secondary-color);
+            margin: 1.75rem 0 1rem 0;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.5rem;
+        }
+
+        .document-content h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .document-content p {
+            margin: 1rem 0;
+        }
+
+        .document-content ul, .document-content ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .document-content li {
+            margin: 0.5rem 0;
+        }
+
+        .welcome-screen {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .welcome-screen h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1><i class="fas fa-book-open"></i> Tredyffrin Library Help Center</h1>
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search documentation...">
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar" id="sidebar">
+
+            <div class="category" data-category="digital-services">
+                <div class="category-header">
+                    <span><i class="fas fa-laptop"></i> Digital Services & Apps</span>
+                    <span style="background: var(--secondary-color); color: white; padding: 0.1rem 0.4rem; border-radius: 10px; font-size: 0.75rem;">5</span>
+                </div>
+                <div class="category-items"></div>
+            </div>
+
+            <div class="category" data-category="computer-services">
+                <div class="category-header">
+                    <span><i class="fas fa-desktop"></i> Computer & Printing</span>
+                    <span style="background: var(--secondary-color); color: white; padding: 0.1rem 0.4rem; border-radius: 10px; font-size: 0.75rem;">2</span>
+                </div>
+                <div class="category-items"></div>
+            </div>
+
+            <div class="category" data-category="library-programs">
+                <div class="category-header">
+                    <span><i class="fas fa-calendar-alt"></i> Programs & Services</span>
+                    <span style="background: var(--secondary-color); color: white; padding: 0.1rem 0.4rem; border-radius: 10px; font-size: 0.75rem;">3</span>
+                </div>
+                <div class="category-items"></div>
+            </div>
+
+            <div class="category" data-category="meeting-rooms">
+                <div class="category-header">
+                    <span><i class="fas fa-door-open"></i> Meeting Rooms</span>
+                    <span style="background: var(--secondary-color); color: white; padding: 0.1rem 0.4rem; border-radius: 10px; font-size: 0.75rem;">3</span>
+                </div>
+                <div class="category-items"></div>
+            </div>
+
+            <div class="category" data-category="general-info">
+                <div class="category-header">
+                    <span><i class="fas fa-info-circle"></i> General Information</span>
+                    <span style="background: var(--secondary-color); color: white; padding: 0.1rem 0.4rem; border-radius: 10px; font-size: 0.75rem;">1</span>
+                </div>
+                <div class="category-items"></div>
+            </div>
+
+        </nav>
+
+        <main class="main-content" id="mainContent">
+            <div class="content-wrapper">
+                <div id="documentDisplay" class="document-content">
+                    <div class="welcome-screen">
+
+                        <h2><i class="fas fa-book-open"></i> Tredyffrin Library Help Center</h2>
+                        <p>Guides and resources for library services</p>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">14</div>
+                                <div class="stat-label">Help Guides</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">5</div>
+                                <div class="stat-label">Service Areas</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">📚</div>
+                                <div class="stat-label">Resources</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Document data with clickable image links
+        const documents = {
+            'digital-services': [
+                {
+                    id: 'mobile-app',
+                    title: 'Mobile App Instructions',
+                    file: 'mobile-app-instructions.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8312.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8312</a>, <a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8313.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8313</a>.HEIC',
+                    icon: 'fa-tablet'
+                },
+                {
+                    id: 'libby',
+                    title: 'Getting Started with Libby',
+                    file: 'libby-getting-started.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8302.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8302</a>, <a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8303.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8303</a>.HEIC',
+                    icon: 'fa-book-reader'
+                },
+                {
+                    id: 'kanopy',
+                    title: 'Kanopy Streaming Service',
+                    file: 'kanopy.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8301.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8301.HEIC</a>',
+                    icon: 'fa-video'
+                },
+                {
+                    id: 'nytimes',
+                    title: 'NY Times Digital Access',
+                    file: 'new-york-times-digital-access.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8309.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8309.HEIC</a>',
+                    icon: 'fa-newspaper'
+                },
+                {
+                    id: 'pin-create',
+                    title: 'Creating Your PIN',
+                    file: 'creating-patron-pin.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8310.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8310</a>, <a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8311.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8311</a>.HEIC',
+                    icon: 'fa-key'
+                },
+            ],
+            'computer-services': [
+                {
+                    id: 'printing',
+                    title: 'Printing from Computers',
+                    file: 'public-computer-printing.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/other/IMG_8329.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8329</a>, <a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/other/IMG_8330.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8330</a>.HEIC',
+                    icon: 'fa-print'
+                },
+                {
+                    id: 'copying',
+                    title: 'Making Copies',
+                    file: 'copying-at-front-desk.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/other/IMG_8331.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8331.HEIC</a>',
+                    icon: 'fa-copy'
+                },
+            ],
+            'library-programs': [
+                {
+                    id: 'ill',
+                    title: 'Interlibrary Loan Service',
+                    file: 'interlibrary-loan.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8300.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8300.HEIC</a>',
+                    icon: 'fa-exchange-alt'
+                },
+                {
+                    id: 'museum-pass',
+                    title: 'Museum Pass Program',
+                    file: 'museum-pass-program-punch-card.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8306.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8306</a>, <a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8307.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8307</a>, <a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8308.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8308</a>.HEIC',
+                    icon: 'fa-ticket-alt'
+                },
+                {
+                    id: 'donations',
+                    title: 'Book Donation Schedule',
+                    file: 'book-donations-red-fox-book-shop.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8299.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8299.HEIC</a>',
+                    icon: 'fa-gift'
+                },
+            ],
+            'meeting-rooms': [
+                {
+                    id: 'room-rental',
+                    title: 'Meeting Room Rentals',
+                    file: 'meeting-room-rentals-tredyffrin.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/other/IMG_8332.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8332.HEIC</a>',
+                    icon: 'fa-calendar-check'
+                },
+                {
+                    id: 'rental-form1',
+                    title: 'Rental Request Form (Page 1)',
+                    file: 'meeting-room-rental-request-form.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/other/IMG_8333.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8333.HEIC</a>',
+                    icon: 'fa-file-alt'
+                },
+                {
+                    id: 'rental-form2',
+                    title: 'Rental Request Form (Page 2)',
+                    file: 'meeting-room-rental-request-form-page2.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/other/IMG_8334.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8334.HEIC</a>',
+                    icon: 'fa-file-signature'
+                },
+            ],
+            'general-info': [
+                {
+                    id: 'library-info',
+                    title: 'Library Hours & Locations',
+                    file: 'tredyffrin-township-libraries-info.md',
+                    source: '<a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference desk processes/IMG_8318.HEIC" target="_blank" style="color: #667eea; text-decoration: none; hover: underline;">IMG_8318.HEIC</a>',
+                    icon: 'fa-map-marker-alt'
+                },
+            ],
+        };
+
+        // Embedded content
+        const documentContent = {
+            'mobile-app': `# The Mobile App\n\n## What can you do with the Chester County Library System\'s Mobile App?\n\n- Check out books with your digital library card\n- Search for books, movies, and other items\n- Put materials on hold\n- Renew items\n- Find library events\n- ... and so much more!\n\n## Follow these steps to download the Mobile App:\n\n1. Go to the App Store or Play Store on your device.\n2. Search for \"Chester County Library System\". The icon should look similar to this:\n   [Chester County Library System logo]\n3. Once the app is downloaded to the device, open it and click \"My Account\".\n4. Click \"Manage Accounts\".\n5. Enter your Chester County Library System\'s card number.\n6. Enter your 4-digit PIN (personal identification number). If you do not have a PIN, follow the instructions on the other side of this page.\n7. You are ready to start exploring!\n\n[Note with handwritten text: \"Return Version - Patricia\'s COA - IPHC-48-KIDs - Come to download the app and ask for help if you would like. Email: info@brandywine.lib.pa.us\"]`,
+            'libby': `# Getting started with Libby\n\n## Libby Help\nSearch help articles\n[Return arrow icon]\n\n## HOME > GETTING STARTED\n\nWith Libby, you can enjoy free ebooks, digital audiobooks, and magazines from your library. All you need is a library card.\n\n## Step 1\nDownload or open Libby on your device.\n- iOS devices: Apple App Store\n- Android devices: Google Play\n- Amazon Fire tablets: Amazon Appstore\n- Windows, Mac, and Chromebooks: libbyapp.com\n\n[Download button] Download and open Libby on your device.\n\n## Step 2\nIn Libby, follow the prompts to find your library and sign in with a library card.\n\n## Step 3\nBrowse or search to discover your next favorite book or audiobook.\n\n## Find something to borrow.\n\n[Icons showing different features]\n1. Find your library and sign in with your library card.\n2. Browse or search to discover your next favorite book or audiobook.\n3. Start reading & listening!\n\n### Happy reading!\n\n**See also**\n[Links to related help topics]\n\n**Contact Support** | **Cookie Information**\n\n---\n\n# Libby\n\n## For help with Libby\nhelp.libbyapp.com\n\n[Sticky note: \"For help with Libby help.libbyapp.com\"]\n\n## How does Libby work?\n\n[Icons showing the process flow:]\n1. Apple iPhones & iPads\n2. Phones & Tablets with Google Play\n3. Amazon Fire Tablets\n4. Laptops & Desktop Computers\n\n[Icons with labels:]\n- App Store (Also compatible with Apple CarPlay)\n- Google Play (Also compatible with android/auto, SONOS, and amazon echo & more!)\n- amazon (Libbypapp.com & much more)\n\n## Step process:\n1. Download and open Libby on your device.\n2. Find your library and sign in with your library card.\n3. Browse or search to discover your next favorite book or audiobook.\n4. Start reading & listening!\n\n## Scan this QR code for Step-by-Step instructions:\n[QR Code displayed]`,
+            'kanopy': `# NOW streaming: Thoughtful Entertainment\n\n## What is Kanopy?\n\nKanopy is a video streaming service that provides instant access to critically acclaimed movies and documentaries. We partnered with Kanopy to bring you their unique collection of thoughtful entertainment.\n\n## How can I watch Kanopy?\n\nYou can stream Kanopy on any of your favorite devices! Kanopy is accessible via web tools on all tablets (ipods for iPads and Android), phones (iOS and Android), Apple TV, and Fire Stick.\n\n## How to create an account:\n\nTo get started, visit ccls.kanopy.com and select the \"Add Library Card\" button to enter the library card information and create an account. Or, download the Kanopy app to your preferred email.\n\n[Kanopy Kids logo]\n\n## What can you discover on Kanopy Kids?\n\nGet your parents or loved ones.\nGive us a try with\nBrowse.\nEnter with your number\nCreate a your account\nStart exploring!\n\n[Image showing children\'s content categories]\n\n### Process:\n1. A patron will pick up a blank punch card at the Reference Desk.\n2. A patron will reserve a museum pass. They may ask for your help to do so!\n3. A patron will pick up the museum pass from the circulation desk. If needed,\n4. A patron will return the Reference Desk with their museum pass (enter the physical card) on the printable) to show proof of visiting the attraction.\n5. You will punch their card.\n6. Keep the punch card at the Reference Desk. When complete, the voucher may be used by September 30, 2025. These vouchers are kept in a labeled envelope on the shelf behind the Desk.\n\n***There will be quarter sheets listing the rules available at the Desk for patrons.\n\nIf you have any questions, please ask Sam or Jennifer!`,
+            'nytimes': `# The New York Times\n\n## Digital Edition\n\n### The daily newspaper right on your digital devices—FREE with your Chester County Library card!\n\n## U.S. & World News,\nArts, Politics, Business,\nTech, Science, Health,\n& much more!\n\n### Includes historical archives from 1851-1922 & 1981-present.\n\n---\n\n## Getting Started\n\n### 1\nVisit www.chescollbraries.org\n- All CCLS Database & New York Times Access\n\n### 2\nYour Account\nEnter your library card and PIN numbers.\n- Log in with an existing nytimes.com account or create a new one.\n\n### 3\nNavigating NYTimes\n- Sections\n  - Use the features to jump to your favorite sections of the paper.\n\n- Video\n  - Short video covering all the latest hot topics in the news.\n\n- Newsletter\n  - Sign up for various newsletters including headlines delivered to your email daily and much more.\n\n## PRINT & CO PASSES\n### CONTINUING...\n\n- The Academy of Natural Science of University\n- Philadelphia Museum\n- Museum of the American Revolution\n- Please Touch Museum\n- Barnes Foundation Museum\n- Brandywine River Museum of Art\n- PA Academy of Fine Arts\n- National Constitutional Center\n- Philadelphia Zoo\n- Museum of the American Revolution\n- Winterthur Museum, Garden & Library\n- Elmwood Park Zoo\n\n## PHYSICAL PASSES\n- Once reserved, the following passes can be picked up at the Tredyffrin Public Library:\n- Please see listed up to at the reference desk for assistance\n- Garden & Library`,
+            'pin-create': `# Creating a PIN\n## (Personal Identification Number)\n\n### Video - Creating a PIN\n\nThere is an instructional video for patrons titled \"Creating a PIN\" on the Tredyffrin Public Library\'s YouTube Page.\n\nAccess the video by scanning this QR Code:\n\n[QR Code image]\n\nYou can also follow these steps:\n\n- Go to www.tredyffrinlibraries.org\n- Click \"Connect\"\n- Click \"Follow Us Online\"\n- Click the YouTube icon under Tredyffrin Township Libraries\n- Click \"Playlists\" - This is under the Word Subscribe\n- Click on the Playlist Titled \"Instructional Videos\"\n\n---\n\n## Creating a PIN\n## (Personal Identification Number)\n\n1. Go to https://catalog.ccls.org/patroninfo or scan this QR Code:\n   [QR Code image]\n\n2. Enter your library card number in this field:\n   [Screenshot showing library card number entry field]\n\n3. Leave the PIN field blank and click submit.\n\n4. You will be asked to enter their new PIN two times*. See below:\n   [Login screen showing PIN entry fields]\n\n5. Use this PIN to finish signing into the Mobile App!\n\n*Please NOTE - You can also use this website to set a new PIN if you do not remember it. To do this, click \"Forgot your PIN?\" after entering your barcode.\n\n*It is recommend you use a four digit number. PIN may not include numbers which repeat three times, example: 8777 nor numbers which repeat two digits, example: 1212.`,
+            'printing': `# Printing from Public Computers\n\n## After clicking \"Print\" or Control+P, follow these steps:\n\n### Print Screen\n1. Select \"Cloud Print\" (in red circle below)\n2. Click \"Print\" (in green circle below)\n\n[Screenshot showing print dialog with Cloud Print option circled in red and Print button circled in green]\n\n### Print Confirmation\n3. Make a note of the User ID and Password tapped to the bottom of the monitor\n4. Go over to the Public Printer and follow the steps to release your pages.\n\n[Screenshot showing Current Balance, Welcome screen with User ID and Password fields, and Color/Mono options]\n\n[Screenshot showing document selection interface]\n\n## Releasing a Print Job\n\n### 1. Touch Elevate Sky Print\n[Screenshot showing login screen with \"Log in using your User ID and Password\" prompt and circled green button]\n\n### 2. Enter the User ID and password from bottom of monitor, then touch the green \"Go\" button.\n[Screenshot showing login screen with password field circled in green]\n\n### 3. Touch the icon that has a number in a white circle.\n[Screenshot showing interface with Current Balance, Mono, Color options and \"Unlimited\" status]\n\n### 4. Touch the name of the document and then touch the printer icon.\n[Screenshot showing document selection interface with printer icon circled]\n\n## TREDYFFRIN PUBLIC LIBRARY\nA TREDYFFRIN TOWNSHIP LIBRARY`,
+            'copying': `# Copying at the Front Desk\n\n## 5. Confirm the information on this screen, then touch \"Print\".\n\n[Screenshot showing a Print Settings dialog with the following elements:\n- Print Settings header\n- Various print document options (Kellogg\'s, Wet..., Document)\n- Pages: 1\n- Color: B&W (circled in red)\n- Print button (circled in red)]\n\n## 6. Please pay for copies at the Front Desk.\n\n[Note: Interface shows \"Account\", \"Copy\", \"Scan\" options at bottom]`,
+            'ill': `# INTERLIBRARY LOAN\n\n[Image of books]\n\n**Can\'t find what you\'re looking for???**\n**Give us a try...**\n\nInterlibrary Loan (ILL) is the service by which libraries borrow and lend materials in order to supplement their existing collections. ILL is not the same as the Holds service used between libraries in the Chester County Library System, but occurs between libraries across the nation.\n\nILL is available to patrons with a current library card from any of the 18 libraries in the Chester County Library System and whose records are updated and fine-free. Just fill out a request at your local library in person, by phone, or online.\n\n**Need help? Contact us:**\nThe Interlibrary Loan Office\n450 Exton Square Parkway\nExton, PA 19341\n610-280-2625 ccedelchecker@ccls.org\nwww.ccls.org\n\n[Chester County Library System logo]\n\n---\n\n## Request Form\n\n### Patron Information\n**Name:** ____________________\n**Library Card #:** ____________________\n**Phone:** ____________________\n\n### Item Information\n**Title:** ____________________\n**Author:** ____________________\n**Pub Date:** ____________________\n\n***NOTE:** Material must be at least 1 year old and available in Access PA to be eligible for Interlibrary Loan. All other items must be at least 6 months from pub date for Interlibrary Loan.\n\n**Format:** Book    Large Type    Audiobook: Unabridged    Audiobook: Abridged    CD    DVD\n\n**Date item needed by:** ____________________\n\n**Staff Looked for item in CCLS Catalog?** Yes ___ No ___\n\n**Staff Name:** ____________________ **Date:** ____________________`,
+            'museum-pass': `# Museum Passport Punch Cards\n\n## TREDYFFRIN PUBLIC LIBRARY\n## TREDYFFRIN TOWNSHIP LIBRARY\n\n### Museum Passport Program\n**PUNCH CARDS**\n\n1. Reserve one of Tredyffrin\'s museum passes\n2. Visit the attraction\n3. Receive a punch on your card at Tredyffrin\'s Reference Desk. Stop by the Desk before you return your physical pass to show proof of attendance.\n4. Complete four punches and return your card to the Reference Desk for a prize.\n5. The Longwood Gardens vouchers is valid for up to four (4) free general admission tickets and 25% off of a Membership. It\'s for a one-time use before September 30, 2025.\n\n**Please Note: Prizes are limited! Once we distribute all of our Longwood Gardens vouchers, we will not be getting more. After September 30, 2025, we will be introducing a new prize.**\n\nQuestions? Contact the Reference Desk at 610-688-7092 x212\n\n---\n\n## Museum Pass Program\n\nThe museum pass program at Tredyffrin Public Library is generously sponsored by the Friends of Tredyffrin Public Library.\n\nSupport the Friends by visiting the Red Fox Book Shop at the library!\n\n[Red Fox Book Shop logo - \"Celebrating 15 Years\"]\n[Adventure Passport Museums & More logo]\n\n### TREDYFFRIN PUBLIC LIBRARY\n**A TREDYFFRIN TOWNSHIP LIBRARY**\n\n582 Upper Gulph Road\nStrafford, PA 19087\n610-688-7092\nwww.tredyffrinlibraries.org\n\n[Chester County Library System logo]\n\n---\n\n## Museum Pass Program\n\n### Visit local museums for free with your library card!\n\n[Tredyffrin Public Library logo]\n[A Tredyffrin Township Library]\n\n**All museum passes must be reserved online in advance.**\n\nScan this QR code to reserve a museum pass from the Tredyffrin Public Library\n\n[QR Code]\n\nOr go to:\nbit.ly/TredyffrinMPP`,
+            'donations': `# RED FOX BOOK SHOP AT TREDYFFRIN PUBLIC LIBRARY\n## 2025 SCHEDULE\n\n### SATURDAY DONATION DAYS/WEEKEND BOOK SALES\n\n**JANUARY 25**\n10:00-2:00 Donation Day\n10:00-2:00 Donation Day\n\n**FEBRUARY 22**\n10:00-2:00 Donation Day\n\n**MARCH 14, 15, 16**\nSPRING BOOK SALE\n10:00-2:00 Donation Day\n10:00-2:00 Donation Day\n\n**APRIL 19**\n10:00-2:00 Donation Day\n10:00-2:00 Donation Day\n\n**MAY 3**\n10:00-2:00 Donation Day\n10:00-2:00 Donation Day\n\n**JUNE 7**\n10:00-2:00 SPRING BOOK SALE\n\n**JULY 28**\nNo Donation Day\nNo Donation Day\n\n**AUGUST 12, 13, 14**\nBACK TO SCHOOL BOOK SALE\n10:00-2:00 Donation Day\n10:00-2:00 Donation Day\n\n**SEPTEMBER 27**\n10:00-2:00 Donation Day\n\n**OCTOBER 25**\n10:00-2:00 Donation Day\n\n**NOVEMBER 14, 15, 16**\nHOLIDAY BOOK SALE\n10:00-2:00 Donation Day\n\n**DECEMBER 13**\n10:00-2:00 Donation Day\n\n*\"Curbside Drop-Off\" is available during Donation Days: Conestroga Key Club volunteers move books from vehicles into the library. Thank you, Key Club!\n\nDonations: limited to 4 boxes or bags. Please, no huge boxes or bags! Junker boxes available in Book Sale. Put your donations in the rolling carts which have water or smoke damage, and are moldy, old, and/or small hard.\n\nREMEMBER: THE BOOK SHOP (DOWNSTAIRS) IS OPEN DURING ALL LIBRARY HOURS. ALL PROCEEDS BENEFIT THE LIBRARY.`,
+            'room-rental': `# Interested in renting a Meeting Room at the Tredyffrin Public Library?\n\nFollow these steps:\n\n1. Go to www.tredyffrinlibraries.org\n2. Click \"About\"\n3. Click \"Meeting Room Rentals\"\n4. Click the link titled Tredyffrin Township Libraries Meeting Room Policy to read the current policy.\n5. Complete and submit the Room Rental Request on the website.\n\nYou can also scan this QR code to go directly to the Meeting Room Rental\'s Webpage:\n\n[QR Code]\n\nQuestions?\nSend an email to rooms@tredyffrinlibraries.org\nor call 610-688-7092 x218\n\n[Desk/Table icon]\n\n[Sticky note text:]\nExtra copies in Noah\'s folder\nPatrons can take with them`,
+            'rental-form1': `# TREDYFFRIN PUBLIC LIBRARY\n## A TREDYFFRIN TOWNSHIP LIBRARY\n\n## Meeting Room Rental Request\n\n[Please Note box:]\nPlease Note -\nThis form should only be used if patron cannot provide an email address; otherwise, patron needs to complete the online room rental form and submit.\n\n### Date of Rental: _____________\n\n### Please list any additional dates if needed: _____________\n\n### Start time (Please include time for set-up): _____________\n\n### End time (Please include time for take-down): _____________\n\n### Please Note: All rooms must be cleared 15 minutes before closing time. (Please see hours of operation on website)\n\n### Anticipated attendance: _____________\n\n### Applicant Information:\n\n**First & Last Name:** _____________\n\n**Address:** _____________\n\n**Phone:** _____________\n\n**Email:** _____________\n\nIf email cannot be provided, please provide your Chester County Library Card number: _____________\n\n**Organization Name:** _____________\n\nPage 1 of 2`,
+            'rental-form2': `# TREDYFFRIN PUBLIC LIBRARY\n## A TREDYFFRIN TOWNSHIP LIBRARY\n\n## Meeting Room Rental Request Form (continued)\n\n### Type of Organization\n\nNon-for-Profit: Groups or organizations with proof of incorporation as a nonprofit or charitable entity, and those working in partnership with the library on a service organization, or any group or individual meeting for a specific not-for-profit purpose.\n\nFor-Profit: For profit groups, organizations, or an individual whose purpose is to conduct operations to realize a financial profit.\n\nPlease Check One:\n___ Non-Profit\n___ For-Profit\n\n### Organization Address (if different from applicant): _____________\n\n### Phone (if different from applicant): _____________\n\n### Email (if different from applicant): _____________\n\n### Terms and Conditions\n\nCheck to Agree to Terms:\n\nI have read the policies governing the use of the library and meeting rooms and hereby agree, intending to be legally bound, to indemnify and save harmless the Chester County Library System, the Board of Trustees and all employees from any or all claims and demands for damage, claims or demands of any nature arising out of or in connection with the use or occupancy of the library meeting room. Also I agree to adhere to and be bound by the provisions of such policies and by any laws that will circulate, including the rules and guests of the library meeting rooms. I certify that I will circulate the charges of 18 years of age or older.\n\n___ I agree to the terms listed\n\n**Signature:** _____________\n\n**Date:** _____________\n\nPage 2 of 2`,
+            'library-info': `# TREDYFFRIN TOWNSHIP LIBRARIES\n\n## Tredyffrin Public Library & Paoli Library\n\n**Tredyffrin Public Library**\n582 Upper Gulph Road, Strafford, PA 19087\nPhone: 610-688-7092, Option 2 for Tredyffrin\n\n**Paoli Library**\n18 Darby Road, Paoli, PA 19301\nPhone: 610-296-7996\n\n**Website:** www.tredyffrinlibraries.org\n\n## Hours/Locations\n\n**Tredyffrin Public Library**\nMonday-Thursday: 10 am – 9 pm\nFriday: 10 am – 6 pm\nSaturday: 10 am – 5 pm\nSunday: 1 pm – 5 pm (September – May)\n\n**Paoli Library**\nMonday & Wednesday: 10 am – 8 pm\nTuesday & Thursday: 12 pm – 8 pm\nFriday: 10 am – 6 pm\nSaturday: 10 am – 2 pm\nSunday: Closed\n\n## Vision and Mission\n\n### Vision of the Libraries\nTo enrich the lives of the community we serve through the transformative power of knowledge, information, education, and engagement. Libraries are catalysts for building community and improving lives.\n\n### Mission of the Libraries\nThe libraries empower diverse audiences to read, learn, create, and connect by providing equitable access to information, technology, cultural resources, and gathering spaces.\n\n## About the Tredyffrin Township Libraries\nThe Tredyffrin Township Libraries consist of two library locations: Tredyffrin Public Library and Paoli Library. The Libraries are governed by a seven-member Board of Trustees appointed by the Tredyffrin Township Board of Supervisors. The Township provides 85% of the Libraries\' funding, with the remaining 15% provided through state funding. Both libraries are members of the Chester County Library System (CCLS).\n\n## Library Director\nLindsey Dearborn, MLS, Executive Director\n\n## What Else Can Your Libraries Provide?\n- eBooks and audiobooks through cloudLibrary and Libby\n- Music downloads and streaming through Freegal Music\n- Digital magazines through Libby\n- Museum passes available for checkout\n- Language learning through Transparent Language Online\n- Online research databases\n- Job search assistance and career resources\n- Technology help\n- Meeting rooms\n- Study rooms\n- Programs for all ages\n\n## Follow Us\nFacebook: @TredyffrinTownshipLibraries\nInstagram: @tredylibraries\nTwitter: @TredyLibraries\n\n**Revised: March 24, 2021**\n**Revised: August 28, 2024**`,
+        };
+
+        // Initialize navigation
+        function init() {
+            populateNavigation();
+            setupEventListeners();
+        }
+
+        // Populate navigation items
+        function populateNavigation() {
+            Object.entries(documents).forEach(([category, docs]) => {
+                const categoryElement = document.querySelector(`[data-category="${category}"] .category-items`);
+                if (categoryElement) {
+                    docs.forEach(doc => {
+                        const navItem = document.createElement('div');
+                        navItem.className = 'nav-item';
+                        navItem.dataset.docId = doc.id;
+                        navItem.innerHTML = `<i class="fas ${doc.icon}" style="margin-right: 0.5rem; color: var(--secondary-color);"></i>${doc.title}`;
+                        navItem.addEventListener('click', () => loadDocument(category, doc));
+                        categoryElement.appendChild(navItem);
+                    });
+                }
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Category expand/collapse
+            document.querySelectorAll('.category-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    this.parentElement.classList.toggle('expanded');
+                });
+            });
+
+            // Search
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                performSearch(e.target.value);
+            });
+        }
+
+        // Load document
+        function loadDocument(category, doc) {
+            // Update active state
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            // Display document
+            const display = document.getElementById('documentDisplay');
+            const content = documentContent[doc.id] || 'Content not found';
+
+            display.innerHTML = `
+                <div class="doc-info">
+                    <h2>${doc.title}</h2>
+                    <div class="doc-meta">
+                        <div><i class="fas fa-folder"></i> ${documents[category].find(d => d.id === doc.id) ? category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : ''}</div>
+                        <div><i class="fas fa-image"></i> Source: ${doc.source}</div>
+                    </div>
+                </div>
+                <div class="document-content">
+                    ${markdownToHtml(content)}
+                </div>
+            `;
+        }
+
+        // Simple markdown to HTML converter
+        function markdownToHtml(markdown) {
+            let html = markdown
+                .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>');
+
+            return '<p>' + html + '</p>';
+        }
+
+        // Search functionality
+        function performSearch(query) {
+            const lowerQuery = query.toLowerCase();
+            document.querySelectorAll('.nav-item').forEach(item => {
+                const title = item.textContent.toLowerCase();
+                const docId = item.dataset.docId;
+                const content = (documentContent[docId] || '').toLowerCase();
+
+                if (!query || title.includes(lowerQuery) || content.includes(lowerQuery)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

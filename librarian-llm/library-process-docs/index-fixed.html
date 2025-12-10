@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tredyffrin Library Documentation - Fixed Version</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .features-banner {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .features-banner h3 {
+            color: white;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.95rem;
+        }
+
+        .feature-item i {
+            color: #fbbf24;
+            font-size: 1.2rem;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .portal-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--card-color), var(--card-color-dark));
+        }
+
+        .portal-card.staff::before {
+            --card-color: #60a5fa;
+            --card-color-dark: #2563eb;
+        }
+
+        .portal-card.patron::before {
+            --card-color: #34d399;
+            --card-color-dark: #10b981;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+        }
+
+        .portal-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            text-align: center;
+        }
+
+        .staff .portal-icon {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .patron .portal-icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .portal-description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .doc-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            padding: 0.75rem;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+
+        .stat i {
+            color: #9ca3af;
+        }
+
+        .portal-link {
+            display: inline-block;
+            width: 100%;
+            padding: 0.875rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .staff .portal-link {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+        }
+
+        .staff .portal-link:hover {
+            background: linear-gradient(135deg, #1e40af, #1e3a8a);
+            transform: scale(1.02);
+        }
+
+        .patron .portal-link {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .patron .portal-link:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: scale(1.02);
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-top: 2rem;
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+        }
+
+        .warning-box i {
+            color: #d97706;
+            font-size: 1.5rem;
+            margin-top: 0.25rem;
+        }
+
+        .warning-content h3 {
+            color: #92400e;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-content p {
+            color: #78350f;
+            line-height: 1.5;
+        }
+
+        .test-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .test-section h3 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .test-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .test-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #f3f4f6;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #4b5563;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .test-link:hover {
+            background: #e5e7eb;
+            color: #1f2937;
+        }
+
+        @media (max-width: 768px) {
+            .portal-grid {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Tredyffrin Library Documentation</h1>
+        <p class="subtitle">Complete portal system with verified content and image links</p>
+
+        <div class="features-banner">
+            <h3><i class="fas fa-sparkles"></i> New Features in Fixed Version</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Content properly loads</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-image"></i>
+                    <span>Clickable source images</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-lock"></i>
+                    <span>Separated by audience</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-search"></i>
+                    <span>Full text search</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="portal-grid">
+            <div class="portal-card staff">
+                <span class="portal-icon">
+                    <i class="fas fa-user-shield"></i>
+                </span>
+                <h2>Staff Portal</h2>
+                <p class="portal-description">
+                    Internal procedures, policies, and reference materials for library staff only.
+                    Contains sensitive operational information.
+                </p>
+                <div class="doc-stats">
+                    <div class="stat">
+                        <i class="fas fa-file-alt"></i>
+                        <span><strong>11</strong> Documents</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-folder"></i>
+                        <span><strong>4</strong> Categories</span>
+                    </div>
+                </div>
+                <a href="staff-portal-fixed.html" class="portal-link">
+                    <i class="fas fa-sign-in-alt"></i> Access Staff Portal
+                </a>
+            </div>
+
+            <div class="portal-card patron">
+                <span class="portal-icon">
+                    <i class="fas fa-book-open"></i>
+                </span>
+                <h2>Patron Resources</h2>
+                <p class="portal-description">
+                    Help guides and instructions for library services that can be freely shared with patrons.
+                    Self-service documentation.
+                </p>
+                <div class="doc-stats">
+                    <div class="stat">
+                        <i class="fas fa-file-alt"></i>
+                        <span><strong>14</strong> Documents</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-folder"></i>
+                        <span><strong>5</strong> Categories</span>
+                    </div>
+                </div>
+                <a href="patron-portal-fixed.html" class="portal-link">
+                    <i class="fas fa-book-reader"></i> View Patron Resources
+                </a>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3><i class="fas fa-vial"></i> Test Image Links</h3>
+            <p style="color: #6b7280; margin-bottom: 1rem;">
+                Click these sample image links to verify they open correctly:
+            </p>
+            <div class="test-links">
+                <a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference%20desk%20processes/IMG_8296.HEIC"
+                   target="_blank" class="test-link">
+                    <i class="fas fa-image"></i> Table of Contents (IMG_8296)
+                </a>
+                <a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference%20desk%20processes/IMG_8302.HEIC"
+                   target="_blank" class="test-link">
+                    <i class="fas fa-image"></i> Libby Guide (IMG_8302)
+                </a>
+                <a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/other/IMG_8332.HEIC"
+                   target="_blank" class="test-link">
+                    <i class="fas fa-image"></i> Meeting Rooms (IMG_8332)
+                </a>
+                <a href="file:///Users/drewgarraway/Desktop/image-processes-to-convert-to-text/reference%20desk%20tasks%20checklist/IMG_8294.HEIC"
+                   target="_blank" class="test-link">
+                    <i class="fas fa-image"></i> Checklist (IMG_8294)
+                </a>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div class="warning-content">
+                <h3>Security Notice</h3>
+                <p>
+                    The Staff Portal contains sensitive operational information including security procedures
+                    and should be password-protected before deployment. The Patron Portal can be made publicly
+                    accessible. Image links will only work on your local machine.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
