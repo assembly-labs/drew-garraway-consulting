@@ -1,0 +1,98 @@
+{
+  "number": 6,
+  "title": "Packaged Products",
+  "description": "Comprehensive coverage of mutual funds, ETFs, REITs, hedge funds, DPPs, and other pooled investment vehicles",
+  "sections": [
+    {
+      "id": "6.1",
+      "title": "Investment Company Basics",
+      "file": "section-01-investment-company-basics.md",
+      "locked": false,
+      "topics": [
+        "Types of Investment Companies",
+        "Management Companies",
+        "Open-End vs Closed-End Funds",
+        "Unit Investment Trusts"
+      ],
+      "estimated_minutes": 25
+    },
+    {
+      "id": "6.2",
+      "title": "Fund Management & Structure",
+      "file": "section-02-fund-management-structure.md",
+      "locked": false,
+      "topics": [
+        "Fund Structure",
+        "75-5-10 Diversification Rule",
+        "Types of Funds",
+        "Fund Objectives"
+      ],
+      "estimated_minutes": 20
+    },
+    {
+      "id": "6.3",
+      "title": "Buying and Selling Fund Shares",
+      "file": "section-03-buying-selling-fund-shares.md",
+      "locked": false,
+      "topics": [
+        "NAV and POP Pricing",
+        "Breakpoints",
+        "Letter of Intent",
+        "Rights of Accumulation"
+      ],
+      "estimated_minutes": 30
+    },
+    {
+      "id": "6.4",
+      "title": "Fund Expenses and Share Classes",
+      "file": "section-04-expenses-share-classes.md",
+      "locked": false,
+      "topics": [
+        "12b-1 Fees",
+        "Class A, B, C Shares",
+        "Expense Ratios",
+        "Management Fees"
+      ],
+      "estimated_minutes": 25
+    },
+    {
+      "id": "6.5",
+      "title": "Distributions and Prohibited Practices",
+      "file": "section-05-distributions-prohibited-practices.md",
+      "locked": false,
+      "topics": [
+        "Subchapter M",
+        "Breakpoint Sales",
+        "Churning",
+        "Selling Dividends"
+      ],
+      "estimated_minutes": 20
+    },
+    {
+      "id": "6.6",
+      "title": "Other Packaged Products",
+      "file": "section-06-other-packaged-products.md",
+      "locked": false,
+      "topics": [
+        "ETFs and ETNs",
+        "REITs",
+        "Hedge Funds",
+        "DPPs and Private Equity"
+      ],
+      "estimated_minutes": 35
+    }
+  ],
+  "prerequisites": ["chapter-05"],
+  "estimated_hours": 2.5,
+  "learning_objectives": [
+    "Distinguish between open-end and closed-end investment companies",
+    "Calculate NAV and understand mutual fund pricing",
+    "Compare share classes and their appropriate uses",
+    "Identify prohibited sales practices",
+    "Understand ETFs, REITs, and alternative investments"
+  ],
+  "exam_weight": "10-12%",
+  "last_updated": "2024-12-12",
+  "author": "Franklin Hugh Money",
+  "status": "published"
+}
