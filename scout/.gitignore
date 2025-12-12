@@ -1,0 +1,58 @@
+# =====================
+# Scout Project .gitignore
+# =====================
+
+# Internal working documents - DO NOT COMMIT
+# Contains: gtm-materials, research, investors, cohort, claude-resources, outputs
+_scout_project_files/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+*.local
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# Deployment files - netlify.toml tracked, example kept
+netlify.toml
+!netlify.toml.example
+
+# Test outputs and local scripts
+test-results/
+*.test.log
+validation-report.txt
+test-*.sh
+test-*.js

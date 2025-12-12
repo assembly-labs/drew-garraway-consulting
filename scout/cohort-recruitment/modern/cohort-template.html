@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{LIBRARY_NAME}} - Join Scout's founding librarian cohort">
+    <title>Scout Partnership Invitation - {{LIBRARY_NAME}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables - Scout Design System */
+        :root {
+            /* Core Brand Colors */
+            --navy: #1A3E67;
+            --navy-50: #E8EEF5;
+            --navy-100: #D1DDE9;
+            --navy-200: #A3BBD3;
+            --navy-700: #102841;
+            --navy-900: #06121B;
+
+            --sage: #83A07F;
+            --sage-50: #F2F4F1;
+            --sage-100: #E5E9E3;
+            --sage-200: #CBD3C7;
+            --sage-text: #5D7A5A;
+            --sage-dark: #374837;
+
+            --coral: #F2895E;
+            --coral-50: #FEF5F2;
+            --coral-100: #FDEBE5;
+            --coral-text: #D96A3F;
+            --coral-dark: #8F4326;
+
+            --neutral: #BAB9B1;
+            --neutral-50: #FAFAF9;
+            --neutral-100: #F5F5F2;
+            --neutral-200: #E6E5DF;
+            --neutral-300: #D6D5CE;
+            --neutral-text: #6C6B65;
+            --neutral-dark: #52514C;
+
+            /* Page colors */
+            --bg-page: #FAFAF9;
+            --bg-surface: #FFFFFF;
+            --bg-alt: #F5F5F2;
+        }
+
+        /* Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Typography System */
+        body {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            line-height: 1.7;
+            letter-spacing: 0.01em;
+            color: var(--navy-900);
+            background-color: var(--bg-page);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--navy);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        h3 {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--neutral-text);
+            line-height: 1.8;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 72rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Modern Card Design */
+        .card {
+            background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-page) 100%);
+            border: 1px solid rgba(186, 185, 177, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(26, 62, 103, 0.15);
+        }
+
+        .card-navy {
+            background: linear-gradient(135deg, var(--navy-50) 0%, var(--bg-surface) 100%);
+            border-color: var(--navy-200);
+        }
+
+        .card-sage {
+            background: linear-gradient(135deg, var(--sage-50) 0%, var(--bg-surface) 100%);
+            border-color: var(--sage-200);
+        }
+
+        .card-coral {
+            background: linear-gradient(135deg, var(--coral-50) 0%, var(--bg-surface) 100%);
+            border-color: var(--coral-100);
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+            .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(180deg, var(--navy-50) 0%, var(--bg-page) 100%);
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 80%, var(--sage-50) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, var(--coral-50) 0%, transparent 50%);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: var(--sage);
+            color: white;
+            border-radius: 9999px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .hero-title {
+            margin-bottom: 1.5rem;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .hero-title .accent {
+            color: var(--coral);
+            position: relative;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+            color: var(--neutral-text);
+            margin-bottom: 2rem;
+            animation: slideUp 0.9s ease-out;
+        }
+
+        .hero-box {
+            background: linear-gradient(135deg, var(--navy-50) 0%, var(--bg-surface) 100%);
+            border-left: 4px solid var(--navy);
+            border-radius: 0 12px 12px 0;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero-box p {
+            color: var(--navy);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-700) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(26, 62, 103, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 25px rgba(26, 62, 103, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--navy);
+            border-color: var(--navy);
+        }
+
+        .btn-secondary:hover {
+            background: var(--navy);
+            color: white;
+        }
+
+        .btn-sage {
+            background: linear-gradient(135deg, var(--sage) 0%, var(--sage-text) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(131, 160, 127, 0.3);
+        }
+
+        .btn-coral {
+            background: linear-gradient(135deg, var(--coral) 0%, var(--coral-text) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(242, 137, 94, 0.3);
+        }
+
+        /* Conversation UI */
+        .conversation-wrapper {
+            background: linear-gradient(135deg, var(--bg-surface) 0%, var(--neutral-100) 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(26, 62, 103, 0.1);
+        }
+
+        .conversation-example {
+            border-left: 4px solid var(--navy-200);
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .bubble {
+            display: inline-block;
+            padding: 1rem 1.25rem;
+            border-radius: 20px;
+            margin-bottom: 0.75rem;
+            position: relative;
+            max-width: 80%;
+            animation: bubbleFade 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .bubble-user {
+            background: linear-gradient(135deg, var(--neutral-100) 0%, var(--bg-surface) 100%);
+            border: 1px solid var(--neutral-200);
+            margin-right: auto;
+        }
+
+        .bubble-ai {
+            background: linear-gradient(135deg, var(--navy-50) 0%, var(--bg-surface) 100%);
+            border: 1px solid var(--navy-100);
+            margin-left: 3rem;
+            animation-delay: 0.3s;
+        }
+
+        @keyframes bubbleFade {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stats */
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-surface);
+            border-radius: 16px;
+            border: 1px solid var(--neutral-200);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--navy) 0%, var(--coral) 50%, var(--sage) 100%);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(26, 62, 103, 0.1);
+        }
+
+        .stat-number {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--coral) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--neutral-text);
+            font-size: 0.95rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Quote Block */
+        .quote {
+            position: relative;
+            padding: 2rem 2rem 2rem 3rem;
+            background: linear-gradient(135deg, var(--sage-50) 0%, var(--bg-surface) 100%);
+            border-left: 4px solid var(--sage);
+            border-radius: 0 12px 12px 0;
+            margin: 3rem 0;
+            font-style: italic;
+            color: var(--navy);
+        }
+
+        .quote::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--coral);
+            font-family: 'Crimson Pro', serif;
+            line-height: 1;
+        }
+
+        /* Time Table */
+        .time-table {
+            background: var(--bg-surface);
+            border: 1px solid var(--neutral-200);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .time-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--neutral-100);
+            transition: all 0.3s ease;
+        }
+
+        .time-row:last-child {
+            border-bottom: none;
+        }
+
+        .time-row:hover {
+            padding-left: 1rem;
+            background: var(--neutral-50);
+            margin: 0 -1rem;
+            padding-right: 1rem;
+            border-radius: 8px;
+        }
+
+        /* Lists */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-list li:hover {
+            background: var(--neutral-50);
+            transform: translateX(4px);
+        }
+
+        .check-navy { color: var(--navy); }
+        .check-sage { color: var(--sage); }
+        .check-coral { color: var(--coral); }
+
+        /* Section backgrounds */
+        .section-page { background-color: var(--bg-page); }
+        .section-white { background-color: var(--bg-surface); }
+        .section-alt { background-color: var(--neutral-100); }
+        .section-gradient {
+            background: linear-gradient(180deg, var(--navy-50) 0%, var(--bg-page) 100%);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Focus States */
+        :focus-visible {
+            outline: 3px solid var(--navy);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            section { padding: 3rem 0; }
+            .container { padding: 0 1rem; }
+            .card { padding: 1.5rem; }
+            .bubble { max-width: 90%; }
+            .bubble-ai { margin-left: 1.5rem; }
+        }
+
+        /* Print styles */
+        @media print {
+            .hero { background: white; }
+            .btn { border: 2px solid var(--navy); }
+            .card { box-shadow: none; border: 1px solid var(--neutral-300); }
+        }
+
+        /* Utility classes */
+        .text-center { text-align: center; }
+        .text-navy { color: var(--navy); }
+        .text-sage { color: var(--sage-text); }
+        .text-coral { color: var(--coral-text); }
+        .text-sm { font-size: 0.875rem; }
+        .font-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif { font-family: 'Crimson Pro', serif; }
+        .font-bold { font-weight: 700; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-8 { margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <!-- Template Instructions (Remove before sending) -->
+    <div style="background: #fef3c7; border: 2px solid #f59e0b; padding: 1.5rem; margin: 1rem; border-radius: 8px;">
+        <h3 style="color: #92400e; margin-bottom: 1rem;">Template Variables to Replace:</h3>
+        <ul style="color: #78350f; font-size: 0.9rem; line-height: 1.6;">
+            <li><strong>{{LIBRARY_NAME}}</strong> - Full library name (e.g., "Tredyffrin Public Library")</li>
+            <li><strong>{{LIBRARY_SHORT}}</strong> - Short name/acronym (e.g., "Tredyffrin" or "TPL")</li>
+            <li><strong>{{COMMUNITY_DESC}}</strong> - Community description (e.g., "Chester County community")</li>
+            <li><strong>{{PATRON_COUNT}}</strong> - Approximate patrons served (e.g., "32,000 residents")</li>
+            <li><strong>{{UNIQUE_FEATURE}}</strong> - Something notable (e.g., "innovative STEM programs")</li>
+            <li><strong>{{ILS_SYSTEM}}</strong> - Their ILS platform (e.g., "Polaris")</li>
+            <li><strong>{{DIRECTOR_NAME}}</strong> - Library Director name if known</li>
+            <li><strong>{{SPECIFIC_CHALLENGE}}</strong> - Known pain point</li>
+            <li><strong>{{WHY_SELECTED}}</strong> - Why this library specifically</li>
+        </ul>
+        <p style="color: #92400e; font-size: 0.8rem; margin-top: 1rem; font-style: italic;">
+            ⚠️ Delete this yellow box before sending to libraries!
+        </p>
+    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <span class="badge">Personal Invitation for {{LIBRARY_NAME}}</span>
+            <h1 class="hero-title">
+                {{LIBRARY_SHORT}}, we'd like you to help shape<br>
+                <span class="accent">the future of library discovery.</span>
+            </h1>
+            <p class="hero-subtitle">
+                We're building AI-powered patron discovery and need thoughtful libraries like yours to ensure we get it right.
+            </p>
+            <div class="hero-box">
+                <p>We're inviting just 5-12 libraries nationwide. {{LIBRARY_NAME}} would bring essential perspective as a {{WHY_SELECTED}}.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reality Check Section -->
+    <section class="section-white">
+        <div class="container">
+            <h2 class="text-navy">Yes, we know. You've been promised "revolutionary" tools before.</h2>
+
+            <div class="grid grid-2">
+                <div class="card card-coral">
+                    <h3 class="text-navy">Your Daily Reality</h3>
+                    <ul class="feature-list">
+                        <li>
+                            <span class="check-coral" style="margin-right: 12px;">→</span>
+                            <span>Toggle between catalog, OverDrive, Hoopla, Kanopy just to answer "Do you have this?"</span>
+                        </li>
+                        <li>
+                            <span class="check-coral" style="margin-right: 12px;">→</span>
+                            <span>Reference questions down 15% but complexity up 40%</span>
+                        </li>
+                        <li>
+                            <span class="check-coral" style="margin-right: 12px;">→</span>
+                            <span>Vendors launch features without asking what you actually need</span>
+                        </li>
+                        <li>
+                            <span class="check-coral" style="margin-right: 12px;">→</span>
+                            <span>Your makerspace sits empty because patrons don't know it exists</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card card-sage">
+                    <h3 class="text-navy">Why Scout is Different</h3>
+                    <ul class="feature-list">
+                        <li>
+                            <span class="check-sage" style="margin-right: 12px;">✓</span>
+                            <span>You're a co-creator, not a beta tester</span>
+                        </li>
+                        <li>
+                            <span class="check-sage" style="margin-right: 12px;">✓</span>
+                            <span>Your feedback shapes the product in real-time</span>
+                        </li>
+                        <li>
+                            <span class="check-sage" style="margin-right: 12px;">✓</span>
+                            <span>Privacy and accessibility from day one</span>
+                        </li>
+                        <li>
+                            <span class="check-sage" style="margin-right: 12px;">✓</span>
+                            <span>Built to augment your expertise, not replace it</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quote">
+                "We're not another vendor with a finished product. We're building this with you from the ground up. Your workflows, your patron needs, your privacy standards—they drive every decision."
+            </div>
+        </div>
+    </section>
+
+    <!-- What Scout Does Section -->
+    <section class="section-alt">
+        <div class="container">
+            <h2 class="text-navy">What Scout Actually Does</h2>
+
+            <div class="conversation-wrapper">
+                <h3 class="text-navy mb-4">Real Conversations, Real Results</h3>
+
+                <div class="conversation-example">
+                    <div class="bubble bubble-user">
+                        <strong class="font-sans">Patron:</strong> "I want something funny for the beach"
+                    </div>
+                    <div class="bubble bubble-ai">
+                        <strong class="font-sans">Scout:</strong> "Perfect! Here are some light, funny reads from your library:<br><br>
+                        📚 <strong>Good Omens</strong> - Available in print and as audiobook<br>
+                        📱 <strong>The Hitchhiker's Guide</strong> - OverDrive ebook, no wait<br>
+                        📕 <strong>Anxious People</strong> - 2 copies available now"
+                    </div>
+                </div>
+
+                <div class="conversation-example" style="border-color: var(--sage-200);">
+                    <div class="bubble bubble-user">
+                        <strong class="font-sans">Patron:</strong> "Can I borrow a 3D printer?"
+                    </div>
+                    <div class="bubble bubble-ai" style="background: linear-gradient(135deg, var(--sage-50) 0%, var(--bg-surface) 100%); border-color: var(--sage-100);">
+                        <strong class="font-sans">Scout:</strong> "Yes! Your library has 2 Creality Ender 3 printers available:<br><br>
+                        🔧 3-day checkout period<br>
+                        📅 Next slot: Tuesday 10am<br>
+                        📋 Safety training required (online, 30 min)"
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-4 mt-8">
+                <div class="card">
+                    <h4 class="font-sans text-navy mb-4">🔍 Unified Search</h4>
+                    <p class="text-sm">Physical catalog + OverDrive + Hoopla in one conversation</p>
+                </div>
+                <div class="card">
+                    <h4 class="font-sans text-navy mb-4">🎙️ Voice Interface</h4>
+                    <p class="text-sm">Critical for seniors and visually impaired patrons</p>
+                </div>
+                <div class="card">
+                    <h4 class="font-sans text-navy mb-4">🔒 Zero-Logging</h4>
+                    <p class="text-sm">No search history stored. Ever. Published privacy audits.</p>
+                </div>
+                <div class="card">
+                    <h4 class="font-sans text-navy mb-4">♿ WCAG 2.2 AA</h4>
+                    <p class="text-sm">Accessibility from day one, not retrofitted</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Section -->
+    <section class="section-white">
+        <div class="container">
+            <h2 class="text-navy">The Partnership Opportunity</h2>
+
+            <div class="card card-navy mb-6">
+                <h3 class="text-navy">You're a Co-Creator, Not a Beta Tester</h3>
+                <div class="grid grid-2">
+                    <div>
+                        <h4 class="font-sans text-navy mb-4">What You Shape:</h4>
+                        <ul class="text-sm">
+                            <li class="mb-2">• Privacy architecture that meets ALA standards</li>
+                            <li class="mb-2">• Conversation design that sounds human, not robotic</li>
+                            <li class="mb-2">• Accessibility testing with your actual patrons</li>
+                            <li class="mb-2">• Integration priorities (which ILS first?)</li>
+                            <li class="mb-2">• Staff tools for training and workflow documentation*</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-sans text-navy mb-4">What You Get:</h4>
+                        <ul class="text-sm">
+                            <li class="mb-2">• Founding Library Partner status</li>
+                            <li class="mb-2">• Permanent advisory board seat</li>
+                            <li class="mb-2">• Conference co-presentation opportunities</li>
+                            <li class="mb-2">• Deep founder pricing forever</li>
+                            <li class="mb-2">• First access to new features</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="time-table">
+                <h3 class="text-navy">Clear Time Commitment</h3>
+                <p class="text-sm mb-4" style="color: var(--neutral-text);">Total: 15-20 hours over 4-8 weeks</p>
+                <div class="time-row">
+                    <span class="font-sans">Initial onboarding session</span>
+                    <strong class="font-sans text-navy">90 minutes</strong>
+                </div>
+                <div class="time-row">
+                    <span class="font-sans">Weekly check-ins (30-45 min each)</span>
+                    <strong class="font-sans text-navy">3-6 hours total</strong>
+                </div>
+                <div class="time-row">
+                    <span class="font-sans">Testing with real patrons</span>
+                    <strong class="font-sans text-navy">8-12 hours total</strong>
+                </div>
+                <div class="time-row">
+                    <span class="font-sans">Mid-cycle review</span>
+                    <strong class="font-sans text-navy">60 minutes</strong>
+                </div>
+                <div class="time-row">
+                    <span class="font-sans">Exit interview</span>
+                    <strong class="font-sans text-navy">45-60 minutes</strong>
+                </div>
+            </div>
+
+            <div class="card card-sage mt-6">
+                <h3 class="text-navy">Compensation for Your Time</h3>
+                <p><strong>IMLS Grant pending:</strong> $3,000-$8,000 per library for research partnership participation</p>
+                <p class="text-sm" style="color: var(--neutral-text);">This positions you as a research partner investigating AI's impact on patron outcomes, not a beta tester.</p>
+                <p class="text-sm"><strong>If grant not awarded:</strong> 12+ months free access + permanent steep founder discount + same recognition</p>
+            </div>
+
+            <p class="text-sm font-sans italic mt-4" style="color: var(--neutral-text);">
+                *Beyond patron discovery, we're exploring professional tools like a librarian dashboard for onboarding, institutional knowledge management, and workflow documentation—but that's phase 2. First, let's nail the patron experience.
+            </p>
+        </div>
+    </section>
+
+    <!-- Why Now Section -->
+    <section class="section-alt">
+        <div class="container">
+            <h2 class="text-navy text-center">Why This Matters Now</h2>
+
+            <div class="grid grid-3 mb-8">
+                <div class="stat-card">
+                    <div class="stat-number">2-3</div>
+                    <div class="stat-label">Years before AI market consolidation</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">9,194</div>
+                    <div class="stat-label">US public libraries that could benefit</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">96.3%</div>
+                    <div class="stat-label">Library websites failing accessibility</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="text-navy">The Stakes Are Real</h3>
+                <p>Remember OverDrive's "Inspire Me" launch? Twenty-two years of trust, then they dropped an AI feature without asking librarians first. The backlash was immediate—privacy concerns, limited scope, no catalog integration.</p>
+                <p><span style="background: linear-gradient(180deg, transparent 60%, var(--coral-50) 60%); padding: 0 4px; font-weight: 600;">This is our window</span> to build AI that actually respects the Library Bill of Rights, meets ADA requirements from day one, and solves the real problems you're dealing with at 2pm on a Tuesday.</p>
+                <p>Once the big vendors lock in their approach, it's too late. Help us get it right while we still can.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We're Looking For Section -->
+    <section class="section-white">
+        <div class="container">
+            <h2 class="text-navy">Who We're Looking For</h2>
+
+            <div class="grid grid-2">
+                <div>
+                    <h3 class="text-sage">✓ This IS for you if:</h3>
+                    <ul class="feature-list">
+                        <li>
+                            <span class="check-sage" style="margin-right: 12px;">•</span>
+                            <span>You've thought "there has to be a better way" while toggling between systems</span>
+                        </li>
+                        <li>
+                            <span class="check-sage" style="margin-right: 12px;">•</span>
+                            <span>You want AI done right—with privacy, accessibility, and library values</span>
+                        </li>
+                        <li>
+                            <span class="check-sage" style="margin-right: 12px;">•</span>
+                            <span>You have director support and 15-20 hours allocated</span>
+                        </li>
+                        <li>
+                            <span class="check-sage" style="margin-right: 12px;">•</span>
+                            <span>You're comfortable saying "this doesn't work" when it doesn't</span>
+                        </li>
+                        <li>
+                            <span class="check-sage" style="margin-right: 12px;">•</span>
+                            <span>You remember why you became a librarian and want tools that honor that</span>
+                        </li>
+                        <li>
+                            <span class="check-sage" style="margin-right: 12px;">•</span>
+                            <span>You're excited to influence something that could transform library service</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--neutral-text);">✗ This ISN'T for you if:</h3>
+                    <ul class="feature-list" style="color: var(--neutral-text);">
+                        <li>
+                            <span style="color: var(--neutral); margin-right: 12px;">•</span>
+                            <span>You need a polished, production-ready tool now</span>
+                        </li>
+                        <li>
+                            <span style="color: var(--neutral); margin-right: 12px;">•</span>
+                            <span>You're looking for passive free software</span>
+                        </li>
+                        <li>
+                            <span style="color: var(--neutral); margin-right: 12px;">•</span>
+                            <span>Your library has zero budget for AI tools</span>
+                        </li>
+                        <li>
+                            <span style="color: var(--neutral); margin-right: 12px;">•</span>
+                            <span>You can't allocate the time commitment</span>
+                        </li>
+                        <li>
+                            <span style="color: var(--neutral); margin-right: 12px;">•</span>
+                            <span>You're uncomfortable with bugs and iteration</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card card-navy mt-8">
+                <h3 class="text-navy">We Need Different Perspectives</h3>
+                <p>We're seeking 5-12 libraries representing:</p>
+                <div class="grid grid-2">
+                    <ul class="text-sm">
+                        <li class="mb-2">• Small rural branches AND major urban systems</li>
+                        <li class="mb-2">• Different regions (we need Southern, Midwest, etc.)</li>
+                        <li class="mb-2">• Mix of ILS platforms (especially Polaris & Koha)</li>
+                    </ul>
+                    <ul class="text-sm">
+                        <li class="mb-2">• Communities with digital divides</li>
+                        <li class="mb-2">• Both tech-forward and traditional approaches</li>
+                        <li class="mb-2">• Solo librarians AND large teams</li>
+                    </ul>
+                </div>
+                <p class="text-sm italic mt-4" style="color: var(--neutral-text);">
+                    Don't self-select out because you think you're "not technical enough." We need librarians who understand patrons, not just APIs.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-gradient" style="padding: 5rem 0;">
+        <div class="container text-center">
+            <h2 class="text-navy">Ready to Build the Tools We Actually Need?</h2>
+            <p class="hero-subtitle">
+                This isn't about being an early adopter. It's about making sure library values are baked in before it's too late.
+            </p>
+
+            <div class="card" style="max-width: 48rem; margin: 3rem auto;">
+                <h3 class="text-navy">Express Your Interest</h3>
+
+                <div style="text-align: left; margin-top: 2rem;">
+                    <div class="card card-sage mb-4">
+                        <p class="font-sans font-bold text-navy">Option 1: Quick Email</p>
+                        <p class="text-sm">Send us a brief note with:</p>
+                        <ul class="text-sm" style="margin: 1rem 0 1rem 1rem;">
+                            <li>• Your name and role</li>
+                            <li>• Library name and location</li>
+                            <li>• Why you're interested</li>
+                        </ul>
+                        <a href="mailto:drew@scout-library.com?subject=Librarian Cohort Interest" class="btn btn-primary" style="margin-top: 1rem;">
+                            Email drew@scout-library.com
+                        </a>
+                    </div>
+
+                    <div class="card mb-4">
+                        <p class="font-sans font-bold text-navy">Option 2: Interest Form</p>
+                        <p class="text-sm">Fill out a 2-minute form with basic information</p>
+                        <a href="#" class="btn btn-secondary" style="margin-top: 1rem;">
+                            Complete Interest Form
+                        </a>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--neutral-200); margin-top: 2rem; padding-top: 2rem;">
+                    <p class="font-sans font-bold text-navy">What Happens Next?</p>
+                    <ol class="text-sm" style="text-align: left; margin: 1rem 0 0 2rem;">
+                        <li>1. We'll review your submission within 48 hours</li>
+                        <li>2. Schedule a 20-minute conversation to explore fit</li>
+                        <li>3. Cohort participants selected by January 10</li>
+                        <li>4. Program kicks off January 20, 2025</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="text-sm" style="margin-top: 2rem; color: var(--neutral-text);">
+                <p>Questions? Concerns? Want to know more about our team? Email drew@scout-library.com</p>
+                <p>We welcome your skepticism • No vendor sales pitch • We're looking for thoughtful partners, not quick sign-ups</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--navy-900); color: var(--neutral-200); padding: 3rem 0;">
+        <div class="container">
+            <div class="grid grid-3" style="text-align: left; margin-bottom: 2rem;">
+                <div>
+                    <h4 style="color: white; margin-bottom: 1rem;">About Scout</h4>
+                    <p class="text-sm">AI-powered library discovery built WITH librarians, not FOR them. Privacy-first, accessibility-native, patron-focused.</p>
+                </div>
+                <div>
+                    <h4 style="color: white; margin-bottom: 1rem;">Our Commitments</h4>
+                    <ul class="text-sm">
+                        <li class="mb-2">• Zero-logging architecture</li>
+                        <li class="mb-2">• WCAG 2.2 AA compliance</li>
+                        <li class="mb-2">• Augment, not replace librarians</li>
+                        <li class="mb-2">• Published privacy audits</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: white; margin-bottom: 1rem;">Timeline</h4>
+                    <ul class="text-sm">
+                        <li class="mb-2">• Cohort: January-February 2025</li>
+                        <li class="mb-2">• Beta Launch: March 2025</li>
+                        <li class="mb-2">• Full Launch: Fall 2025</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-sm text-center" style="border-top: 1px solid var(--navy-700); padding-top: 2rem;">
+                © 2024 Scout Library Discovery. Building the future of patron discovery, together.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

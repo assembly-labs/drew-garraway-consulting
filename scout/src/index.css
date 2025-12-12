@@ -1,0 +1,479 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables for the Scout Library Assistant Color System - Updated 2025-12-11 */
+@layer base {
+  :root {
+    /* Core Brand Colors */
+    --navy: #1A3E67;
+    --sage: #83A07F;
+    --coral: #F2895E;
+    --neutral: #BAB9B1;
+
+    /* Accessible Text Variants */
+    --navy-text: #1A3E67;
+    --sage-text: #5D7A5A;
+    --coral-text: #D96A3F;
+    --neutral-text: #86857E;
+
+    /* Common Backgrounds */
+    --bg-page: #FAFAF9;
+    --bg-surface: #FFFFFF;
+    --bg-alt: #F5F5F2;
+  }
+
+  /* Typography System */
+  body {
+    @apply bg-page text-navy-900 font-serif;
+    font-weight: 400;
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+  }
+
+  button, input, select, textarea, .btn {
+    @apply font-sans;
+  }
+
+  .font-display {
+    @apply font-sans;
+    font-weight: 700;
+  }
+
+  /* Custom scrollbar styles with brand colors */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-neutral-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-400 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-500;
+  }
+
+  /* Focus visible only on keyboard navigation */
+  *:focus {
+    outline: none;
+  }
+
+  *:focus-visible {
+    @apply ring-2 ring-navy ring-offset-2;
+  }
+}
+
+/* Smooth scrolling for conversation */
+@layer components {
+  /* Fade in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  /* Animation delays for typing indicators */
+  .animation-delay-0 {
+    animation-delay: 0ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  /* Book flip animation for loading */
+  @keyframes bookFlip {
+    0%, 100% {
+      transform: rotateY(0deg);
+    }
+    50% {
+      transform: rotateY(180deg);
+    }
+  }
+
+  .animate-book-flip {
+    animation: bookFlip 1.5s ease-in-out infinite;
+    display: inline-block;
+    transform-style: preserve-3d;
+  }
+
+  /* Typing dots animation */
+  @keyframes typingBounce {
+    0%, 60%, 100% {
+      transform: translateY(0);
+    }
+    30% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-typing-dot {
+    animation: typingBounce 1.4s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  /* Message bubble styles with brand colors */
+  .message-bubble {
+    @apply rounded-lg p-4 max-w-[85%];
+  }
+
+  .message-user {
+    @apply bg-navy-50 text-navy-900 ml-auto;
+  }
+
+  .message-assistant {
+    @apply bg-surface border-2 border-neutral-300 mr-auto;
+  }
+
+  /* Hide scrollbar while preserving scroll functionality */
+  .scrollbar-hide {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
+
+/* Dark mode styles - Using warmer navy tones instead of harsh grays */
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  @apply bg-navy-900 text-neutral-100;
+}
+
+.dark header {
+  @apply bg-navy-800 border-navy-700;
+}
+
+.dark .message-user {
+  @apply bg-navy-700 text-white;
+}
+
+.dark .message-assistant {
+  @apply bg-navy-800 border-navy-700 text-neutral-100;
+}
+
+.dark .bg-neutral-50,
+.dark .bg-page {
+  @apply bg-navy-900;
+}
+
+.dark .bg-surface {
+  @apply bg-navy-800;
+}
+
+.dark .text-navy-900 {
+  @apply text-neutral-100;
+}
+
+.dark .text-neutral-600,
+.dark .text-neutral-text {
+  @apply text-neutral-300;
+}
+
+.dark .text-neutral-500 {
+  @apply text-neutral-300;
+}
+
+.dark .border-neutral-200,
+.dark .border-neutral-300 {
+  @apply border-navy-700;
+}
+
+/* Success/Info/Attention states with brand colors */
+.dark .bg-success-light {
+  @apply bg-sage-900;
+}
+
+.dark .text-success-dark {
+  @apply text-sage-200;
+}
+
+.dark .border-success {
+  @apply border-sage-700;
+}
+
+/* ============================================
+   VISUAL POLISH & MICRO-INTERACTIONS
+   ============================================ */
+
+/* 1. Universal Button Enhancements */
+.btn-enhanced {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-enhanced:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-enhanced:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px rgba(26, 62, 103, 0.2);
+}
+
+.btn-enhanced:active {
+  transform: translateY(0);
+}
+
+/* 3. Search Button Pulse Animation */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(26, 62, 103, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(26, 62, 103, 0);
+  }
+}
+
+.search-btn-pulse {
+  animation: pulse-ring 2s infinite;
+}
+
+.search-btn-pulse:hover {
+  animation: none;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    box-shadow: 0 0 0 2px rgba(26, 62, 103, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(26, 62, 103, 0.05);
+  }
+}
+
+/* 4. Enhanced Focus States with Navy */
+@keyframes focus-ring-expand {
+  from {
+    box-shadow: 0 0 0 0 rgba(26, 62, 103, 0.5);
+  }
+  to {
+    box-shadow: 0 0 0 4px rgba(26, 62, 103, 0.2);
+  }
+}
+
+.focus-enhanced:focus {
+  outline: none;
+  animation: focus-ring-expand 0.2s ease-out forwards;
+}
+
+.focus-enhanced:focus-visible {
+  animation: focus-ring-expand 0.2s ease-out forwards;
+}
+
+/* 5. Global Smooth Transitions */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Theme transitions - Only on major layout elements to prevent text pop */
+body,
+#root,
+header,
+main,
+footer,
+article,
+section,
+.bg-surface,
+.bg-page,
+.bg-neutral-50,
+.bg-neutral-100,
+.bg-navy-800,
+.bg-navy-900 {
+  transition: background-color 0.35s ease-out,
+              border-color 0.35s ease-out;
+}
+
+/* Text color transitions - Unified timing */
+h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, label {
+  transition: color 0.35s ease-out;
+}
+
+/* Interactive elements - Faster transitions for responsiveness */
+button:hover,
+button:focus,
+a:hover,
+a:focus,
+input:hover,
+input:focus,
+textarea:hover,
+textarea:focus {
+  transition: all 0.15s ease;
+}
+
+/* Disable all transitions on initial page load */
+.no-transitions * {
+  transition: none !important;
+}
+
+/* 6. Enhanced Loading Animations */
+@keyframes dot-pulse {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* 7. Glass Morphism & Depth Effects */
+.glass-effect {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.dark .glass-effect {
+  background: rgba(26, 62, 103, 0.9);
+}
+
+/* 8. Micro-interactions */
+@keyframes checkmark {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ============================================
+   SIDEBAR & MODAL ANIMATIONS
+   ============================================ */
+
+/* Sidebar slide animations */
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutToLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.sidebar-enter {
+  animation: slideInFromLeft 300ms ease-in-out;
+}
+
+.sidebar-exit {
+  animation: slideOutToLeft 300ms ease-in-out;
+}
+
+/* Modal fade animations */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-enter {
+  animation: modalFadeIn 200ms ease-out;
+}
+
+/* Toast animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.toast-enter {
+  animation: slideInRight 300ms ease-out;
+}
+
+.toast-exit {
+  animation: slideOutRight 200ms ease-in;
+}

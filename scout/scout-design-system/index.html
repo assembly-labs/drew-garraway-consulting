@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scout - Design System Showcase</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Crimson+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        'serif': ['Crimson Pro', 'Source Serif Pro', 'serif'],
+                        'display': ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            DEFAULT: '#1A3E67',
+                            50: '#E8EEF5',
+                            100: '#D1DDE9',
+                            200: '#A3BBD3',
+                            300: '#7599BD',
+                            400: '#4777A7',
+                            500: '#1A3E67',
+                            600: '#153354',
+                            700: '#102841',
+                            800: '#0B1D2E',
+                            900: '#06121B',
+                            text: '#1A3E67',
+                        },
+                        sage: {
+                            DEFAULT: '#83A07F',
+                            50: '#F2F4F1',
+                            100: '#E5E9E3',
+                            200: '#CBD3C7',
+                            300: '#B1BDAB',
+                            400: '#97A78F',
+                            500: '#83A07F',
+                            600: '#6B8368',
+                            700: '#536651',
+                            800: '#3B493A',
+                            900: '#232C23',
+                            text: '#5D7A5A',
+                            dark: '#374837',
+                        },
+                        coral: {
+                            DEFAULT: '#F2895E',
+                            50: '#FEF5F2',
+                            100: '#FDEBE5',
+                            200: '#FBD7CB',
+                            300: '#F9C3B1',
+                            400: '#F7AF97',
+                            500: '#F2895E',
+                            600: '#E86E3E',
+                            700: '#D96A3F',
+                            800: '#B54D2A',
+                            900: '#8F4326',
+                            text: '#D96A3F',
+                        },
+                        neutral: {
+                            DEFAULT: '#BAB9B1',
+                            50: '#FAFAF9',
+                            100: '#F5F5F2',
+                            200: '#E6E5DF',
+                            300: '#D6D5CE',
+                            400: '#C6C5BD',
+                            500: '#BAB9B1',
+                            600: '#A09F97',
+                            700: '#86857E',
+                            800: '#6C6B65',
+                            900: '#52514C',
+                            text: '#6C6B65',
+                        },
+                        success: {
+                            light: '#F2F4F1',
+                            DEFAULT: '#83A07F',
+                            dark: '#374837',
+                            border: '#83A07F',
+                        },
+                        info: {
+                            light: '#E8EEF5',
+                            DEFAULT: '#1A3E67',
+                            dark: '#06121B',
+                            border: '#1A3E67',
+                        },
+                        attention: {
+                            light: '#FEF5F2',
+                            DEFAULT: '#F2895E',
+                            dark: '#8F4326',
+                            border: '#F2895E',
+                        },
+                        warning: {
+                            light: '#FEF3C7',
+                            DEFAULT: '#F59E0B',
+                            dark: '#78350F',
+                            border: '#F59E0B',
+                        },
+                        error: {
+                            light: '#FFEBEE',
+                            DEFAULT: '#D32F2F',
+                            dark: '#B71C1C',
+                            border: '#D32F2F',
+                        },
+                        page: {
+                            DEFAULT: '#FAFAF9',
+                            alt: '#F5F5F2',
+                        },
+                        surface: {
+                            DEFAULT: '#FFFFFF',
+                            alt: '#F5F5F2',
+                        },
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'spin': 'spin 1s linear infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        spin: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        /* Custom animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Typing animation for TypingIndicator */
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        .typing-dot {
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.16s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.32s; }
+
+        /* Smooth transitions */
+        .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
+
+        /* Dark mode specific styles */
+        .dark .dark\:bg-navy-900 { background-color: #06121B; }
+        .dark .dark\:bg-neutral-800 { background-color: #6C6B65; }
+        .dark .dark\:text-white { color: white; }
+        .dark .dark\:text-neutral-100 { color: #F5F5F2; }
+        .dark .dark\:border-neutral-600 { border-color: #A09F97; }
+        .dark .dark\:bg-surface-800 { background-color: #2D2D2D; }
+        .dark .dark\:bg-neutral-900 { background-color: #52514C; }
+    </style>
+</head>
+<body class="bg-neutral-50">
+    <!-- Main Header -->
+    <header class="bg-white shadow-sm border-b border-neutral-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <h1 class="text-3xl font-bold text-navy text-center">Scout Design System</h1>
+            <p class="text-center text-neutral-600 mt-2">Complete component showcase in Day Mode and Night Mode</p>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- DAY MODE SECTION -->
+    <!-- ============================================ -->
+    <section class="bg-neutral-50">
+        <div class="bg-navy text-white py-6">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-2xl font-bold flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    Day Mode
+                </h2>
+                <p class="text-neutral-200 mt-1">Light theme components as they appear during daytime viewing</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 py-8">
+
+            <!-- Color Palette Section -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-navy">Color Palette</h3>
+                <div class="space-y-6">
+
+                    <!-- Primary Colors -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-neutral-700">Primary Brand Colors</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="space-y-2">
+                                <div class="h-24 bg-navy rounded-lg shadow-sm"></div>
+                                <p class="text-sm font-medium">Navy</p>
+                                <p class="text-xs text-neutral-500">#1A3E67</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-24 bg-sage rounded-lg shadow-sm"></div>
+                                <p class="text-sm font-medium">Sage</p>
+                                <p class="text-xs text-neutral-500">#83A07F</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-24 bg-coral rounded-lg shadow-sm"></div>
+                                <p class="text-sm font-medium">Coral</p>
+                                <p class="text-xs text-neutral-500">#F2895E</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-24 bg-neutral rounded-lg shadow-sm"></div>
+                                <p class="text-sm font-medium">Neutral</p>
+                                <p class="text-xs text-neutral-500">#BAB9B1</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Semantic Colors -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-neutral-700">Semantic Colors</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                            <div class="space-y-2">
+                                <div class="h-20 rounded-lg shadow-sm" style="background-color: #83A07F;"></div>
+                                <p class="text-sm font-medium">Success</p>
+                                <p class="text-xs text-neutral-500">#83A07F</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-20 rounded-lg shadow-sm" style="background-color: #1A3E67;"></div>
+                                <p class="text-sm font-medium">Info</p>
+                                <p class="text-xs text-neutral-500">#1A3E67</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-20 rounded-lg shadow-sm" style="background-color: #F2895E;"></div>
+                                <p class="text-sm font-medium">Attention</p>
+                                <p class="text-xs text-neutral-500">#F2895E</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-20 rounded-lg shadow-sm" style="background-color: #F59E0B;"></div>
+                                <p class="text-sm font-medium">Warning</p>
+                                <p class="text-xs text-neutral-500">#F59E0B</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-20 rounded-lg shadow-sm" style="background-color: #D32F2F;"></div>
+                                <p class="text-sm font-medium">Error</p>
+                                <p class="text-xs text-neutral-500">#D32F2F</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Typography Section -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-navy">Typography</h3>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-xs text-neutral-500 mb-1">font-display (Plus Jakarta Sans)</p>
+                            <h1 class="text-4xl font-bold text-navy">Display Heading</h1>
+                        </div>
+                        <div>
+                            <p class="text-xs text-neutral-500 mb-1">font-sans text-2xl</p>
+                            <h2 class="text-2xl font-semibold text-navy">Main Heading</h2>
+                        </div>
+                        <div>
+                            <p class="text-xs text-neutral-500 mb-1">font-sans text-xl</p>
+                            <h3 class="text-xl font-medium text-neutral-700">Subheading</h3>
+                        </div>
+                        <div>
+                            <p class="text-xs text-neutral-500 mb-1">font-sans text-base</p>
+                            <p class="text-base text-neutral-700">Body text using Plus Jakarta Sans for readability and modern appearance.</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-neutral-500 mb-1">font-serif text-lg</p>
+                            <p class="text-lg font-serif text-neutral-700">Serif text using Crimson Pro for elegant reading experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Common Components -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-navy">Common Components</h3>
+
+                <!-- SearchInput -->
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-sm">
+                    <h4 class="text-lg font-medium mb-2">SearchInput</h4>
+                    <p class="text-sm text-neutral-500 mb-4">Reference: src/components/common/SearchInput.tsx</p>
+                    <div class="space-y-4">
+                        <div class="relative">
+                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <input type="text" placeholder="Search for books, authors, or topics..."
+                                   class="w-full pl-10 pr-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy focus:border-transparent transition-all">
+                        </div>
+                        <div class="relative">
+                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <input type="text" value="The Great Gatsby"
+                                   class="w-full pl-10 pr-4 py-3 border border-navy rounded-lg focus:outline-none focus:ring-2 focus:ring-navy transition-all">
+                        </div>
+                        <div class="relative">
+                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <input type="text" disabled placeholder="Disabled search input"
+                                   class="w-full pl-10 pr-4 py-3 border border-neutral-200 rounded-lg bg-neutral-50 cursor-not-allowed opacity-50">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LoadingSpinner -->
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-sm">
+                    <h4 class="text-lg font-medium mb-2">LoadingSpinner</h4>
+                    <p class="text-sm text-neutral-500 mb-4">Reference: src/components/common/LoadingSpinner.tsx</p>
+                    <div class="flex space-x-8">
+                        <div class="text-center">
+                            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-navy border-r-transparent"></div>
+                            <p class="text-xs mt-2 text-neutral-500">Small</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-navy border-r-transparent"></div>
+                            <p class="text-xs mt-2 text-neutral-500">Medium</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="inline-block h-16 w-16 animate-spin rounded-full border-4 border-solid border-navy border-r-transparent"></div>
+                            <p class="text-xs mt-2 text-neutral-500">Large</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- StarRating -->
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-sm">
+                    <h4 class="text-lg font-medium mb-2">StarRating</h4>
+                    <p class="text-sm text-neutral-500 mb-4">Reference: src/components/common/StarRating.tsx</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-2">
+                            <div class="flex space-x-1">
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm text-neutral-600">5.0 Stars</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="flex space-x-1">
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm text-neutral-600">3.0 Stars</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="flex space-x-1">
+                                <svg class="w-7 h-7 text-yellow-400 fill-current hover:scale-110 transition-transform cursor-pointer" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-7 h-7 text-yellow-400 fill-current hover:scale-110 transition-transform cursor-pointer" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-7 h-7 text-yellow-400 fill-current hover:scale-110 transition-transform cursor-pointer" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-7 h-7 text-yellow-400 fill-current hover:scale-110 transition-transform cursor-pointer" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-7 h-7 text-neutral-300 hover:text-yellow-400 hover:scale-110 transition-all cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm text-neutral-600">Interactive (hover over stars)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TypingIndicator -->
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-sm">
+                    <h4 class="text-lg font-medium mb-2">TypingIndicator</h4>
+                    <p class="text-sm text-neutral-500 mb-4">Reference: src/components/common/TypingIndicator.tsx</p>
+                    <div class="flex items-center space-x-2">
+                        <div class="flex space-x-1">
+                            <div class="w-2 h-2 bg-neutral-400 rounded-full typing-dot"></div>
+                            <div class="w-2 h-2 bg-neutral-400 rounded-full typing-dot"></div>
+                            <div class="w-2 h-2 bg-neutral-400 rounded-full typing-dot"></div>
+                        </div>
+                        <span class="text-sm text-neutral-500">AI is thinking...</span>
+                    </div>
+                </div>
+
+                <!-- ErrorMessage -->
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-sm">
+                    <h4 class="text-lg font-medium mb-2">ErrorMessage</h4>
+                    <p class="text-sm text-neutral-500 mb-4">Reference: src/components/common/ErrorMessage.tsx</p>
+                    <div class="space-y-3">
+                        <div class="rounded-lg p-4 flex items-start space-x-3" style="background-color: #FFEBEE; border: 1px solid #D32F2F;">
+                            <svg class="w-5 h-5 mt-0.5 flex-shrink-0" style="color: #D32F2F;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div class="flex-1">
+                                <p class="font-medium" style="color: #B71C1C;">Error occurred</p>
+                                <p class="text-sm mt-1" style="color: #B71C1C;">Unable to fetch data. Please try again later.</p>
+                            </div>
+                        </div>
+                        <div class="rounded-lg p-4 flex items-start space-x-3" style="background-color: #FEF3C7; border: 1px solid #F59E0B;">
+                            <svg class="w-5 h-5 mt-0.5 flex-shrink-0" style="color: #F59E0B;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            </svg>
+                            <div class="flex-1">
+                                <p class="font-medium" style="color: #78350F;">Warning</p>
+                                <p class="text-sm mt-1" style="color: #78350F;">Your session will expire in 5 minutes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toast -->
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-sm">
+                    <h4 class="text-lg font-medium mb-2">Toast</h4>
+                    <p class="text-sm text-neutral-500 mb-4">Reference: src/components/common/Toast.tsx</p>
+                    <div class="space-y-3">
+                        <div class="bg-white shadow-lg rounded-lg p-4 border border-neutral-200 max-w-sm animate-slide-up">
+                            <div class="flex items-center space-x-3">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center" style="background-color: #F2F4F1;">
+                                    <svg class="w-6 h-6" style="color: #83A07F;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-neutral-900">Success!</p>
+                                    <p class="text-xs text-neutral-500 mt-1">Book has been checked out</p>
+                                </div>
+                                <button class="text-neutral-400 hover:text-neutral-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-white shadow-lg rounded-lg p-4 border border-neutral-200 max-w-sm animate-slide-up">
+                            <div class="flex items-center space-x-3">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center" style="background-color: #E8EEF5;">
+                                    <svg class="w-6 h-6" style="color: #1A3E67;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-neutral-900">Information</p>
+                                    <p class="text-xs text-neutral-500 mt-1">New books available in your genre</p>
+                                </div>
+                                <button class="text-neutral-400 hover:text-neutral-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HamburgerButton -->
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-sm">
+                    <h4 class="text-lg font-medium mb-2">HamburgerButton</h4>
+                    <p class="text-sm text-neutral-500 mb-4">Reference: src/components/common/HamburgerButton.tsx</p>
+                    <div class="flex space-x-4">
+                        <button onclick="toggleHamburger(this)" class="p-2 rounded-lg hover:bg-neutral-100 transition-colors">
+                            <div class="w-6 h-5 flex flex-col justify-between hamburger-lines">
+                                <span class="block h-0.5 w-full bg-neutral-700 transition-all"></span>
+                                <span class="block h-0.5 w-full bg-neutral-700 transition-all"></span>
+                                <span class="block h-0.5 w-full bg-neutral-700 transition-all"></span>
+                            </div>
+                        </button>
+                        <button class="p-2 rounded-lg bg-navy hover:bg-navy-600 transition-colors">
+                            <div class="w-6 h-5 flex flex-col justify-between">
+                                <span class="block h-0.5 w-full bg-white"></span>
+                                <span class="block h-0.5 w-full bg-white"></span>
+                                <span class="block h-0.5 w-full bg-white"></span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ThemeToggle -->
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-sm">
+                    <h4 class="text-lg font-medium mb-2">ThemeToggle</h4>
+                    <p class="text-sm text-neutral-500 mb-4">Reference: src/components/common/ThemeToggle.tsx</p>
+                    <div class="flex space-x-4">
+                        <button class="relative inline-flex h-7 w-14 items-center rounded-full bg-neutral-200 transition-colors hover:bg-neutral-300">
+                            <span class="inline-block h-5 w-5 transform rounded-full bg-white shadow-sm transition-transform translate-x-1"></span>
+                        </button>
+                        <button class="relative inline-flex h-7 w-14 items-center rounded-full bg-navy transition-colors hover:bg-navy-600">
+                            <span class="inline-block h-5 w-5 transform rounded-full bg-white shadow-sm transition-transform translate-x-8"></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Buttons Section -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-navy">Buttons</h3>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="space-y-6">
+                        <!-- Primary Buttons -->
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-3">Primary Buttons</p>
+                            <div class="flex flex-wrap gap-3">
+                                <button class="px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy-600 transition-colors">Default</button>
+                                <button class="px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy-600 transition-colors flex items-center space-x-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg>
+                                    <span>With Icon</span>
+                                </button>
+                                <button disabled class="px-4 py-2 bg-navy text-white rounded-lg opacity-50 cursor-not-allowed">Disabled</button>
+                            </div>
+                        </div>
+
+                        <!-- Secondary Buttons -->
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-3">Secondary Buttons</p>
+                            <div class="flex flex-wrap gap-3">
+                                <button class="px-4 py-2 bg-sage text-white rounded-lg hover:bg-sage-600 transition-colors">Default</button>
+                                <button class="px-4 py-2 bg-coral text-white rounded-lg hover:bg-coral-600 transition-colors">Accent</button>
+                                <button class="px-4 py-2 bg-neutral text-white rounded-lg hover:bg-neutral-600 transition-colors">Neutral</button>
+                            </div>
+                        </div>
+
+                        <!-- Outlined Buttons -->
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-3">Outlined Buttons</p>
+                            <div class="flex flex-wrap gap-3">
+                                <button class="px-4 py-2 border-2 border-navy text-navy rounded-lg hover:bg-navy hover:text-white transition-all">Navy Outline</button>
+                                <button class="px-4 py-2 border-2 border-sage text-sage rounded-lg hover:bg-sage hover:text-white transition-all">Sage Outline</button>
+                                <button class="px-4 py-2 border-2 border-coral text-coral rounded-lg hover:bg-coral hover:text-white transition-all">Coral Outline</button>
+                            </div>
+                        </div>
+
+                        <!-- Size Variants -->
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-3">Size Variants</p>
+                            <div class="flex flex-wrap items-center gap-3">
+                                <button class="px-2 py-1 text-sm bg-navy text-white rounded hover:bg-navy-600 transition-colors">Small</button>
+                                <button class="px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy-600 transition-colors">Medium</button>
+                                <button class="px-6 py-3 text-lg bg-navy text-white rounded-lg hover:bg-navy-600 transition-colors">Large</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feature Cards -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-navy">Feature Cards</h3>
+
+                <!-- BookCard -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-medium mb-2">BookCard</h4>
+                    <p class="text-sm text-neutral-500 mb-4">Reference: src/components/common/BookCard.tsx</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-4 border border-neutral-200">
+                            <div class="flex space-x-4">
+                                <div class="w-20 h-28 bg-gradient-to-br from-navy-400 to-navy-600 rounded flex-shrink-0"></div>
+                                <div class="flex-1">
+                                    <h5 class="font-semibold text-navy line-clamp-2">The Great Gatsby</h5>
+                                    <p class="text-sm text-neutral-600 mt-1">F. Scott Fitzgerald</p>
+                                    <div class="flex items-center mt-2">
+                                        <div class="flex space-x-0.5">
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                        </div>
+                                        <span class="text-xs text-neutral-500 ml-2">4.2</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <span class="inline-block px-2 py-1 text-xs rounded" style="background-color: #F2F4F1; color: #374837;">Available</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-4 border border-neutral-200">
+                            <div class="flex space-x-4">
+                                <div class="w-20 h-28 bg-gradient-to-br from-coral-400 to-coral-600 rounded flex-shrink-0"></div>
+                                <div class="flex-1">
+                                    <h5 class="font-semibold text-navy line-clamp-2">To Kill a Mockingbird</h5>
+                                    <p class="text-sm text-neutral-600 mt-1">Harper Lee</p>
+                                    <div class="flex items-center mt-2">
+                                        <div class="flex space-x-0.5">
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                        </div>
+                                        <span class="text-xs text-neutral-500 ml-2">4.8</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <span class="inline-block px-2 py-1 text-xs rounded" style="background-color: #FEF5F2; color: #8F4326;">On Hold</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CheckoutCard -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-medium mb-2">CheckoutCard</h4>
+                    <p class="text-sm text-neutral-500 mb-4">Reference: src/components/features/CheckoutCard.tsx</p>
+                    <div class="bg-white rounded-lg shadow-sm p-6 border border-neutral-200">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h5 class="font-semibold text-navy">Digital Fortress</h5>
+                                <p class="text-sm text-neutral-600 mt-1">Dan Brown</p>
+                                <div class="mt-3 space-y-1">
+                                    <p class="text-sm text-neutral-500">Checked out: Nov 1, 2024</p>
+                                    <p class="text-sm text-neutral-500">Due date: Nov 15, 2024</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <button class="px-3 py-1.5 text-sm bg-navy text-white rounded-lg hover:bg-navy-600 transition-colors">Renew</button>
+                                <button class="px-3 py-1.5 text-sm border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-colors">Return</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HoldCard -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-medium mb-2">HoldCard</h4>
+                    <p class="text-sm text-neutral-500 mb-4">Reference: src/components/features/HoldCard.tsx</p>
+                    <div class="bg-white rounded-lg shadow-sm p-6 border border-neutral-200">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h5 class="font-semibold text-navy">The Silent Patient</h5>
+                                <p class="text-sm text-neutral-600 mt-1">Alex Michaelides</p>
+                                <div class="mt-3 space-y-1">
+                                    <p class="text-sm text-neutral-500">Position in queue: 3</p>
+                                    <p class="text-sm text-neutral-500">Estimated wait: 2 weeks</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <span class="px-3 py-1 text-sm rounded-full" style="background-color: #E8EEF5; color: #06121B;">On Hold</span>
+                                <button class="px-3 py-1.5 text-sm hover:underline" style="color: #D32F2F;">Cancel Hold</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FineCard -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-medium mb-2">FineCard</h4>
+                    <p class="text-sm text-neutral-500 mb-4">Reference: src/components/features/FineCard.tsx</p>
+                    <div class="bg-white rounded-lg shadow-sm p-6" style="border: 1px solid #F2895E;">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h5 class="font-semibold text-navy">Overdue Fine</h5>
+                                <p class="text-sm text-neutral-600 mt-1">The Midnight Library - Matt Haig</p>
+                                <div class="mt-3 space-y-1">
+                                    <p class="text-sm text-neutral-500">Days overdue: 5</p>
+                                    <p class="text-sm text-neutral-500">Fine rate: $0.25/day</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end space-y-2">
+                                <span class="text-xl font-bold" style="color: #F2895E;">$1.25</span>
+                                <button class="px-3 py-1.5 text-sm bg-coral text-white rounded-lg hover:bg-coral-600 transition-colors">Pay Fine</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EventCard -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-medium mb-2">EventCard</h4>
+                    <p class="text-sm text-neutral-500 mb-4">Reference: src/components/features/EventCard.tsx</p>
+                    <div class="bg-white rounded-lg shadow-sm p-6 border border-neutral-200 hover:border-navy transition-colors">
+                        <div class="flex space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-sage-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h5 class="font-semibold text-navy">Author Meet & Greet</h5>
+                                <p class="text-sm text-neutral-600 mt-1">Join us for an evening with bestselling author Sarah Johnson</p>
+                                <div class="flex items-center mt-3 space-x-4">
+                                    <span class="text-sm text-neutral-500 flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        Nov 20, 6:00 PM
+                                    </span>
+                                    <span class="text-sm text-neutral-500 flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                        Main Library
+                                    </span>
+                                </div>
+                                <button class="mt-4 px-4 py-2 bg-sage text-white rounded-lg hover:bg-sage-600 transition-colors text-sm">
+                                    Register for Event
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Form Elements -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-navy">Form Elements</h3>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="space-y-6">
+                        <!-- Text Inputs -->
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-3">Text Inputs</p>
+                            <div class="space-y-3">
+                                <input type="text" placeholder="Default input" class="w-full px-4 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy transition-all">
+                                <input type="text" value="Input with value" class="w-full px-4 py-2 border border-navy rounded-lg focus:outline-none focus:ring-2 focus:ring-navy transition-all">
+                                <input type="text" disabled placeholder="Disabled input" class="w-full px-4 py-2 border border-neutral-200 rounded-lg bg-neutral-50 cursor-not-allowed opacity-50">
+                            </div>
+                        </div>
+
+                        <!-- Select Dropdown -->
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-3">Select Dropdown</p>
+                            <select class="w-full px-4 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy bg-white">
+                                <option>Select a category</option>
+                                <option>Fiction</option>
+                                <option>Non-Fiction</option>
+                                <option>Science</option>
+                                <option>History</option>
+                            </select>
+                        </div>
+
+                        <!-- Checkbox & Radio -->
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-3">Checkbox & Radio</p>
+                            <div class="space-y-3">
+                                <label class="flex items-center space-x-3">
+                                    <input type="checkbox" class="w-4 h-4 text-navy border-neutral-300 rounded focus:ring-navy">
+                                    <span class="text-neutral-700">Remember me</span>
+                                </label>
+                                <label class="flex items-center space-x-3">
+                                    <input type="checkbox" checked class="w-4 h-4 text-navy border-neutral-300 rounded focus:ring-navy">
+                                    <span class="text-neutral-700">Send me notifications</span>
+                                </label>
+                                <div class="flex space-x-6">
+                                    <label class="flex items-center space-x-2">
+                                        <input type="radio" name="format-day" class="w-4 h-4 text-navy border-neutral-300 focus:ring-navy">
+                                        <span class="text-neutral-700">Physical</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="radio" name="format-day" checked class="w-4 h-4 text-navy border-neutral-300 focus:ring-navy">
+                                        <span class="text-neutral-700">Digital</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="radio" name="format-day" class="w-4 h-4 text-navy border-neutral-300 focus:ring-navy">
+                                        <span class="text-neutral-700">Audio</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Textarea -->
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-3">Textarea</p>
+                            <textarea placeholder="Write your review here..." rows="4" class="w-full px-4 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy resize-none"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Badges and Tags -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-navy">Badges and Tags</h3>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="space-y-4">
+                        <!-- Status Badges -->
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-3">Status Badges</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 text-xs font-medium rounded-full" style="background-color: #F2F4F1; color: #374837;">Available</span>
+                                <span class="px-3 py-1 text-xs font-medium rounded-full" style="background-color: #FEF5F2; color: #8F4326;">On Hold</span>
+                                <span class="px-3 py-1 text-xs font-medium rounded-full" style="background-color: #E8EEF5; color: #06121B;">Processing</span>
+                                <span class="px-3 py-1 text-xs font-medium rounded-full" style="background-color: #FFEBEE; color: #B71C1C;">Overdue</span>
+                                <span class="px-3 py-1 text-xs font-medium rounded-full" style="background-color: #FEF3C7; color: #78350F;">Limited</span>
+                                <span class="px-3 py-1 text-xs font-medium bg-neutral-100 text-neutral-700 rounded-full">Archived</span>
+                            </div>
+                        </div>
+
+                        <!-- Genre Tags -->
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-3">Genre Tags</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1.5 text-sm border border-navy text-navy rounded-lg hover:bg-navy hover:text-white transition-all cursor-pointer">Fiction</span>
+                                <span class="px-3 py-1.5 text-sm border border-sage text-sage rounded-lg hover:bg-sage hover:text-white transition-all cursor-pointer">Science</span>
+                                <span class="px-3 py-1.5 text-sm border border-coral text-coral rounded-lg hover:bg-coral hover:text-white transition-all cursor-pointer">Mystery</span>
+                                <span class="px-3 py-1.5 text-sm bg-navy text-white rounded-lg">Selected</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- NIGHT MODE SECTION -->
+    <!-- ============================================ -->
+    <section class="dark bg-gray-900">
+        <div class="bg-gray-800 text-white py-6 border-t border-gray-700">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-2xl font-bold flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                    Night Mode
+                </h2>
+                <p class="text-gray-400 mt-1">Dark theme components as they appear during nighttime viewing</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 py-8">
+
+            <!-- Color Palette Section -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-white">Color Palette</h3>
+                <div class="space-y-6">
+
+                    <!-- Primary Colors -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-gray-300">Primary Brand Colors</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="space-y-2">
+                                <div class="h-24 bg-navy-400 rounded-lg shadow-sm"></div>
+                                <p class="text-sm font-medium text-gray-300">Navy</p>
+                                <p class="text-xs text-gray-500">#4777A7</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-24 bg-sage-400 rounded-lg shadow-sm"></div>
+                                <p class="text-sm font-medium text-gray-300">Sage</p>
+                                <p class="text-xs text-gray-500">#97A78F</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-24 bg-coral-400 rounded-lg shadow-sm"></div>
+                                <p class="text-sm font-medium text-gray-300">Coral</p>
+                                <p class="text-xs text-gray-500">#F7AF97</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-24 bg-neutral-400 rounded-lg shadow-sm"></div>
+                                <p class="text-sm font-medium text-gray-300">Neutral</p>
+                                <p class="text-xs text-gray-500">#C6C5BD</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Semantic Colors in Dark Mode -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-gray-300">Semantic Colors</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                            <div class="space-y-2">
+                                <div class="h-20 bg-sage-500 rounded-lg shadow-sm"></div>
+                                <p class="text-sm font-medium text-gray-300">Success</p>
+                                <p class="text-xs text-gray-500">#83A07F</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-20 bg-navy-400 rounded-lg shadow-sm"></div>
+                                <p class="text-sm font-medium text-gray-300">Info</p>
+                                <p class="text-xs text-gray-500">#4777A7</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-20 bg-coral-500 rounded-lg shadow-sm"></div>
+                                <p class="text-sm font-medium text-gray-300">Attention</p>
+                                <p class="text-xs text-gray-500">#F2895E</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-20 bg-yellow-500 rounded-lg shadow-sm"></div>
+                                <p class="text-sm font-medium text-gray-300">Warning</p>
+                                <p class="text-xs text-gray-500">#F59E0B</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-20 bg-red-500 rounded-lg shadow-sm"></div>
+                                <p class="text-sm font-medium text-gray-300">Error</p>
+                                <p class="text-xs text-gray-500">#EF4444</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Typography Section -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-white">Typography</h3>
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">font-display (Plus Jakarta Sans)</p>
+                            <h1 class="text-4xl font-bold text-white">Display Heading</h1>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">font-sans text-2xl</p>
+                            <h2 class="text-2xl font-semibold text-gray-100">Main Heading</h2>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">font-sans text-xl</p>
+                            <h3 class="text-xl font-medium text-gray-200">Subheading</h3>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">font-sans text-base</p>
+                            <p class="text-base text-gray-300">Body text using Plus Jakarta Sans for readability and modern appearance.</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">font-serif text-lg</p>
+                            <p class="text-lg font-serif text-gray-300">Serif text using Crimson Pro for elegant reading experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Common Components -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-white">Common Components</h3>
+
+                <!-- SearchInput -->
+                <div class="mb-8 bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h4 class="text-lg font-medium mb-2 text-white">SearchInput</h4>
+                    <p class="text-sm text-gray-500 mb-4">Reference: src/components/common/SearchInput.tsx</p>
+                    <div class="space-y-4">
+                        <div class="relative">
+                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <input type="text" placeholder="Search for books, authors, or topics..."
+                                   class="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-400 focus:border-transparent transition-all">
+                        </div>
+                        <div class="relative">
+                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <input type="text" value="The Great Gatsby"
+                                   class="w-full pl-10 pr-4 py-3 bg-gray-700 border border-navy-400 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-400 transition-all">
+                        </div>
+                        <div class="relative">
+                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <input type="text" disabled placeholder="Disabled search input"
+                                   class="w-full pl-10 pr-4 py-3 bg-gray-800 border border-gray-700 text-gray-500 placeholder-gray-600 rounded-lg cursor-not-allowed opacity-50">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LoadingSpinner -->
+                <div class="mb-8 bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h4 class="text-lg font-medium mb-2 text-white">LoadingSpinner</h4>
+                    <p class="text-sm text-gray-500 mb-4">Reference: src/components/common/LoadingSpinner.tsx</p>
+                    <div class="flex space-x-8">
+                        <div class="text-center">
+                            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-navy-400 border-r-transparent"></div>
+                            <p class="text-xs mt-2 text-gray-500">Small</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-navy-400 border-r-transparent"></div>
+                            <p class="text-xs mt-2 text-gray-500">Medium</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="inline-block h-16 w-16 animate-spin rounded-full border-4 border-solid border-navy-400 border-r-transparent"></div>
+                            <p class="text-xs mt-2 text-gray-500">Large</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- StarRating -->
+                <div class="mb-8 bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h4 class="text-lg font-medium mb-2 text-white">StarRating</h4>
+                    <p class="text-sm text-gray-500 mb-4">Reference: src/components/common/StarRating.tsx</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-2">
+                            <div class="flex space-x-1">
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm text-gray-400">5.0 Stars</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="flex space-x-1">
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm text-gray-400">3.0 Stars</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TypingIndicator -->
+                <div class="mb-8 bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h4 class="text-lg font-medium mb-2 text-white">TypingIndicator</h4>
+                    <p class="text-sm text-gray-500 mb-4">Reference: src/components/common/TypingIndicator.tsx</p>
+                    <div class="flex items-center space-x-2">
+                        <div class="flex space-x-1">
+                            <div class="w-2 h-2 bg-gray-500 rounded-full typing-dot"></div>
+                            <div class="w-2 h-2 bg-gray-500 rounded-full typing-dot"></div>
+                            <div class="w-2 h-2 bg-gray-500 rounded-full typing-dot"></div>
+                        </div>
+                        <span class="text-sm text-gray-500">AI is thinking...</span>
+                    </div>
+                </div>
+
+                <!-- ErrorMessage -->
+                <div class="mb-8 bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h4 class="text-lg font-medium mb-2 text-white">ErrorMessage</h4>
+                    <p class="text-sm text-gray-500 mb-4">Reference: src/components/common/ErrorMessage.tsx</p>
+                    <div class="space-y-3">
+                        <div class="bg-red-900/20 border border-red-500/50 rounded-lg p-4 flex items-start space-x-3">
+                            <svg class="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div class="flex-1">
+                                <p class="text-red-300 font-medium">Error occurred</p>
+                                <p class="text-red-400 text-sm mt-1">Unable to fetch data. Please try again later.</p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-900/20 border border-yellow-500/50 rounded-lg p-4 flex items-start space-x-3">
+                            <svg class="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            </svg>
+                            <div class="flex-1">
+                                <p class="text-yellow-300 font-medium">Warning</p>
+                                <p class="text-yellow-400 text-sm mt-1">Your session will expire in 5 minutes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toast -->
+                <div class="mb-8 bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h4 class="text-lg font-medium mb-2 text-white">Toast</h4>
+                    <p class="text-sm text-gray-500 mb-4">Reference: src/components/common/Toast.tsx</p>
+                    <div class="space-y-3">
+                        <div class="bg-gray-800 shadow-xl rounded-lg p-4 border border-gray-700 max-w-sm animate-slide-up">
+                            <div class="flex items-center space-x-3">
+                                <div class="flex-shrink-0 w-10 h-10 bg-green-900/30 rounded-full flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-200">Success!</p>
+                                    <p class="text-xs text-gray-500 mt-1">Book has been checked out</p>
+                                </div>
+                                <button class="text-gray-500 hover:text-gray-300">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-gray-800 shadow-xl rounded-lg p-4 border border-gray-700 max-w-sm animate-slide-up">
+                            <div class="flex items-center space-x-3">
+                                <div class="flex-shrink-0 w-10 h-10 bg-blue-900/30 rounded-full flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-200">Information</p>
+                                    <p class="text-xs text-gray-500 mt-1">New books available in your genre</p>
+                                </div>
+                                <button class="text-gray-500 hover:text-gray-300">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HamburgerButton -->
+                <div class="mb-8 bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h4 class="text-lg font-medium mb-2 text-white">HamburgerButton</h4>
+                    <p class="text-sm text-gray-500 mb-4">Reference: src/components/common/HamburgerButton.tsx</p>
+                    <div class="flex space-x-4">
+                        <button onclick="toggleHamburger(this)" class="p-2 rounded-lg hover:bg-gray-700 transition-colors">
+                            <div class="w-6 h-5 flex flex-col justify-between hamburger-lines">
+                                <span class="block h-0.5 w-full bg-gray-400 transition-all"></span>
+                                <span class="block h-0.5 w-full bg-gray-400 transition-all"></span>
+                                <span class="block h-0.5 w-full bg-gray-400 transition-all"></span>
+                            </div>
+                        </button>
+                        <button class="p-2 rounded-lg bg-navy-600 hover:bg-navy-700 transition-colors">
+                            <div class="w-6 h-5 flex flex-col justify-between">
+                                <span class="block h-0.5 w-full bg-white"></span>
+                                <span class="block h-0.5 w-full bg-white"></span>
+                                <span class="block h-0.5 w-full bg-white"></span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ThemeToggle -->
+                <div class="mb-8 bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h4 class="text-lg font-medium mb-2 text-white">ThemeToggle</h4>
+                    <p class="text-sm text-gray-500 mb-4">Reference: src/components/common/ThemeToggle.tsx</p>
+                    <div class="flex space-x-4">
+                        <button class="relative inline-flex h-7 w-14 items-center rounded-full bg-gray-600 transition-colors hover:bg-gray-500">
+                            <span class="inline-block h-5 w-5 transform rounded-full bg-white shadow-sm transition-transform translate-x-1"></span>
+                        </button>
+                        <button class="relative inline-flex h-7 w-14 items-center rounded-full bg-navy-500 transition-colors hover:bg-navy-400">
+                            <span class="inline-block h-5 w-5 transform rounded-full bg-white shadow-sm transition-transform translate-x-8"></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Buttons Section -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-white">Buttons</h3>
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <div class="space-y-6">
+                        <!-- Primary Buttons -->
+                        <div>
+                            <p class="text-sm text-gray-500 mb-3">Primary Buttons</p>
+                            <div class="flex flex-wrap gap-3">
+                                <button class="px-4 py-2 bg-navy-500 text-white rounded-lg hover:bg-navy-400 transition-colors">Default</button>
+                                <button class="px-4 py-2 bg-navy-500 text-white rounded-lg hover:bg-navy-400 transition-colors flex items-center space-x-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg>
+                                    <span>With Icon</span>
+                                </button>
+                                <button disabled class="px-4 py-2 bg-gray-700 text-gray-500 rounded-lg cursor-not-allowed">Disabled</button>
+                            </div>
+                        </div>
+
+                        <!-- Secondary Buttons -->
+                        <div>
+                            <p class="text-sm text-gray-500 mb-3">Secondary Buttons</p>
+                            <div class="flex flex-wrap gap-3">
+                                <button class="px-4 py-2 bg-sage-600 text-white rounded-lg hover:bg-sage-500 transition-colors">Default</button>
+                                <button class="px-4 py-2 bg-coral-600 text-white rounded-lg hover:bg-coral-500 transition-colors">Accent</button>
+                                <button class="px-4 py-2 bg-neutral-600 text-white rounded-lg hover:bg-neutral-500 transition-colors">Neutral</button>
+                            </div>
+                        </div>
+
+                        <!-- Outlined Buttons -->
+                        <div>
+                            <p class="text-sm text-gray-500 mb-3">Outlined Buttons</p>
+                            <div class="flex flex-wrap gap-3">
+                                <button class="px-4 py-2 border-2 border-navy-400 text-navy-300 rounded-lg hover:bg-navy-500 hover:text-white transition-all">Navy Outline</button>
+                                <button class="px-4 py-2 border-2 border-sage-500 text-sage-400 rounded-lg hover:bg-sage-600 hover:text-white transition-all">Sage Outline</button>
+                                <button class="px-4 py-2 border-2 border-coral-500 text-coral-400 rounded-lg hover:bg-coral-600 hover:text-white transition-all">Coral Outline</button>
+                            </div>
+                        </div>
+
+                        <!-- Size Variants -->
+                        <div>
+                            <p class="text-sm text-gray-500 mb-3">Size Variants</p>
+                            <div class="flex flex-wrap items-center gap-3">
+                                <button class="px-2 py-1 text-sm bg-navy-500 text-white rounded hover:bg-navy-400 transition-colors">Small</button>
+                                <button class="px-4 py-2 bg-navy-500 text-white rounded-lg hover:bg-navy-400 transition-colors">Medium</button>
+                                <button class="px-6 py-3 text-lg bg-navy-500 text-white rounded-lg hover:bg-navy-400 transition-colors">Large</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feature Cards -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-white">Feature Cards</h3>
+
+                <!-- BookCard -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-medium mb-2 text-white">BookCard</h4>
+                    <p class="text-sm text-gray-500 mb-4">Reference: src/components/common/BookCard.tsx</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-gray-800 rounded-lg hover:bg-gray-750 transition-colors p-4 border border-gray-700">
+                            <div class="flex space-x-4">
+                                <div class="w-20 h-28 bg-gradient-to-br from-navy-500 to-navy-700 rounded flex-shrink-0"></div>
+                                <div class="flex-1">
+                                    <h5 class="font-semibold text-white line-clamp-2">The Great Gatsby</h5>
+                                    <p class="text-sm text-gray-400 mt-1">F. Scott Fitzgerald</p>
+                                    <div class="flex items-center mt-2">
+                                        <div class="flex space-x-0.5">
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                        </div>
+                                        <span class="text-xs text-gray-500 ml-2">4.2</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <span class="inline-block px-2 py-1 text-xs bg-green-900/30 text-green-400 rounded">Available</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-800 rounded-lg hover:bg-gray-750 transition-colors p-4 border border-gray-700">
+                            <div class="flex space-x-4">
+                                <div class="w-20 h-28 bg-gradient-to-br from-coral-500 to-coral-700 rounded flex-shrink-0"></div>
+                                <div class="flex-1">
+                                    <h5 class="font-semibold text-white line-clamp-2">To Kill a Mockingbird</h5>
+                                    <p class="text-sm text-gray-400 mt-1">Harper Lee</p>
+                                    <div class="flex items-center mt-2">
+                                        <div class="flex space-x-0.5">
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                            </svg>
+                                        </div>
+                                        <span class="text-xs text-gray-500 ml-2">4.8</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <span class="inline-block px-2 py-1 text-xs bg-orange-900/30 text-orange-400 rounded">On Hold</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CheckoutCard -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-medium mb-2 text-white">CheckoutCard</h4>
+                    <p class="text-sm text-gray-500 mb-4">Reference: src/components/features/CheckoutCard.tsx</p>
+                    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h5 class="font-semibold text-white">Digital Fortress</h5>
+                                <p class="text-sm text-gray-400 mt-1">Dan Brown</p>
+                                <div class="mt-3 space-y-1">
+                                    <p class="text-sm text-gray-500">Checked out: Nov 1, 2024</p>
+                                    <p class="text-sm text-gray-500">Due date: Nov 15, 2024</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <button class="px-3 py-1.5 text-sm bg-navy-500 text-white rounded-lg hover:bg-navy-400 transition-colors">Renew</button>
+                                <button class="px-3 py-1.5 text-sm border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors">Return</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HoldCard -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-medium mb-2 text-white">HoldCard</h4>
+                    <p class="text-sm text-gray-500 mb-4">Reference: src/components/features/HoldCard.tsx</p>
+                    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h5 class="font-semibold text-white">The Silent Patient</h5>
+                                <p class="text-sm text-gray-400 mt-1">Alex Michaelides</p>
+                                <div class="mt-3 space-y-1">
+                                    <p class="text-sm text-gray-500">Position in queue: 3</p>
+                                    <p class="text-sm text-gray-500">Estimated wait: 2 weeks</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <span class="px-3 py-1 text-sm bg-blue-900/30 text-blue-400 rounded-full">On Hold</span>
+                                <button class="px-3 py-1.5 text-sm text-red-400 hover:underline">Cancel Hold</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FineCard -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-medium mb-2 text-white">FineCard</h4>
+                    <p class="text-sm text-gray-500 mb-4">Reference: src/components/features/FineCard.tsx</p>
+                    <div class="bg-gray-800 rounded-lg p-6 border border-orange-500/50">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h5 class="font-semibold text-white">Overdue Fine</h5>
+                                <p class="text-sm text-gray-400 mt-1">The Midnight Library - Matt Haig</p>
+                                <div class="mt-3 space-y-1">
+                                    <p class="text-sm text-gray-500">Days overdue: 5</p>
+                                    <p class="text-sm text-gray-500">Fine rate: $0.25/day</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end space-y-2">
+                                <span class="text-xl font-bold text-orange-400">$1.25</span>
+                                <button class="px-3 py-1.5 text-sm bg-coral-600 text-white rounded-lg hover:bg-coral-500 transition-colors">Pay Fine</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EventCard -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-medium mb-2 text-white">EventCard</h4>
+                    <p class="text-sm text-gray-500 mb-4">Reference: src/components/features/EventCard.tsx</p>
+                    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-navy-500 transition-colors">
+                        <div class="flex space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-sage-900/30 rounded-lg flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-sage-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h5 class="font-semibold text-white">Author Meet & Greet</h5>
+                                <p class="text-sm text-gray-400 mt-1">Join us for an evening with bestselling author Sarah Johnson</p>
+                                <div class="flex items-center mt-3 space-x-4">
+                                    <span class="text-sm text-gray-500 flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        Nov 20, 6:00 PM
+                                    </span>
+                                    <span class="text-sm text-gray-500 flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                        Main Library
+                                    </span>
+                                </div>
+                                <button class="mt-4 px-4 py-2 bg-sage-600 text-white rounded-lg hover:bg-sage-500 transition-colors text-sm">
+                                    Register for Event
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Form Elements -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-white">Form Elements</h3>
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <div class="space-y-6">
+                        <!-- Text Inputs -->
+                        <div>
+                            <p class="text-sm text-gray-500 mb-3">Text Inputs</p>
+                            <div class="space-y-3">
+                                <input type="text" placeholder="Default input" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-400 transition-all">
+                                <input type="text" value="Input with value" class="w-full px-4 py-2 bg-gray-700 border border-navy-400 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-400 transition-all">
+                                <input type="text" disabled placeholder="Disabled input" class="w-full px-4 py-2 bg-gray-800 border border-gray-700 text-gray-500 placeholder-gray-600 rounded-lg cursor-not-allowed opacity-50">
+                            </div>
+                        </div>
+
+                        <!-- Select Dropdown -->
+                        <div>
+                            <p class="text-sm text-gray-500 mb-3">Select Dropdown</p>
+                            <select class="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-400">
+                                <option>Select a category</option>
+                                <option>Fiction</option>
+                                <option>Non-Fiction</option>
+                                <option>Science</option>
+                                <option>History</option>
+                            </select>
+                        </div>
+
+                        <!-- Checkbox & Radio -->
+                        <div>
+                            <p class="text-sm text-gray-500 mb-3">Checkbox & Radio</p>
+                            <div class="space-y-3">
+                                <label class="flex items-center space-x-3">
+                                    <input type="checkbox" class="w-4 h-4 bg-gray-700 border-gray-600 text-navy-400 rounded focus:ring-navy-400">
+                                    <span class="text-gray-300">Remember me</span>
+                                </label>
+                                <label class="flex items-center space-x-3">
+                                    <input type="checkbox" checked class="w-4 h-4 bg-gray-700 border-gray-600 text-navy-400 rounded focus:ring-navy-400">
+                                    <span class="text-gray-300">Send me notifications</span>
+                                </label>
+                                <div class="flex space-x-6">
+                                    <label class="flex items-center space-x-2">
+                                        <input type="radio" name="format-night" class="w-4 h-4 bg-gray-700 border-gray-600 text-navy-400 focus:ring-navy-400">
+                                        <span class="text-gray-300">Physical</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="radio" name="format-night" checked class="w-4 h-4 bg-gray-700 border-gray-600 text-navy-400 focus:ring-navy-400">
+                                        <span class="text-gray-300">Digital</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="radio" name="format-night" class="w-4 h-4 bg-gray-700 border-gray-600 text-navy-400 focus:ring-navy-400">
+                                        <span class="text-gray-300">Audio</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Textarea -->
+                        <div>
+                            <p class="text-sm text-gray-500 mb-3">Textarea</p>
+                            <textarea placeholder="Write your review here..." rows="4" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-400 resize-none"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Badges and Tags -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-white">Badges and Tags</h3>
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <div class="space-y-4">
+                        <!-- Status Badges -->
+                        <div>
+                            <p class="text-sm text-gray-500 mb-3">Status Badges</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 text-xs font-medium bg-green-900/30 text-green-400 rounded-full">Available</span>
+                                <span class="px-3 py-1 text-xs font-medium bg-orange-900/30 text-orange-400 rounded-full">On Hold</span>
+                                <span class="px-3 py-1 text-xs font-medium bg-blue-900/30 text-blue-400 rounded-full">Processing</span>
+                                <span class="px-3 py-1 text-xs font-medium bg-red-900/30 text-red-400 rounded-full">Overdue</span>
+                                <span class="px-3 py-1 text-xs font-medium bg-yellow-900/30 text-yellow-400 rounded-full">Limited</span>
+                                <span class="px-3 py-1 text-xs font-medium bg-gray-700 text-gray-400 rounded-full">Archived</span>
+                            </div>
+                        </div>
+
+                        <!-- Genre Tags -->
+                        <div>
+                            <p class="text-sm text-gray-500 mb-3">Genre Tags</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1.5 text-sm border border-navy-400 text-navy-300 rounded-lg hover:bg-navy-500 hover:text-white transition-all cursor-pointer">Fiction</span>
+                                <span class="px-3 py-1.5 text-sm border border-sage-500 text-sage-400 rounded-lg hover:bg-sage-600 hover:text-white transition-all cursor-pointer">Science</span>
+                                <span class="px-3 py-1.5 text-sm border border-coral-500 text-coral-400 rounded-lg hover:bg-coral-600 hover:text-white transition-all cursor-pointer">Mystery</span>
+                                <span class="px-3 py-1.5 text-sm bg-navy-500 text-white rounded-lg">Selected</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+    <!-- JavaScript for interactions -->
+    <script>
+        // Hamburger toggle
+        function toggleHamburger(button) {
+            button.classList.toggle('active');
+            const lines = button.querySelector('.hamburger-lines');
+            if (button.classList.contains('active')) {
+                lines.children[0].style.transform = 'rotate(45deg) translateY(8px)';
+                lines.children[1].style.opacity = '0';
+                lines.children[2].style.transform = 'rotate(-45deg) translateY(-8px)';
+            } else {
+                lines.children[0].style.transform = '';
+                lines.children[1].style.opacity = '';
+                lines.children[2].style.transform = '';
+            }
+        }
+
+        // Add interactive hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add ripple effect to buttons
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.style.position = 'relative';
+                button.style.overflow = 'hidden';
+            });
+        });
+    </script>
+</body>
+</html>
