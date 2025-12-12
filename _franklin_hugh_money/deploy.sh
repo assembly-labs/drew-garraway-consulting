@@ -14,6 +14,17 @@ if [ ! -f "package.json" ] || [ ! -d "public" ]; then
     exit 1
 fi
 
+# Step 0: Cache busting
+echo "🔄 Step 0: Running cache-bust..."
+node scripts/cache-bust.js
+if [ $? -eq 0 ]; then
+    echo "   ✓ Cache busting complete"
+else
+    echo "   ✗ Cache busting failed"
+    exit 1
+fi
+echo ""
+
 echo "📋 Step 1: Copying files to deployment location..."
 cp public/index.html ../franklin-hugh-money.html
 if [ $? -eq 0 ]; then
