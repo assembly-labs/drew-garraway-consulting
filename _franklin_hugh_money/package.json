@@ -14,7 +14,11 @@
     "lint:js": "eslint 'public/**/*.js' 'src/scripts/**/*.js'",
     "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
     "test": "echo 'No tests configured yet'",
-    "build": "echo 'Build process will be configured in Phase 2'"
+    "build": "npm run cache-bust",
+    "cache-bust": "node scripts/cache-bust.js",
+    "cache-bust:check": "node scripts/cache-bust.js --check",
+    "cache-bust:clean": "node scripts/cache-bust.js --clean",
+    "predeploy": "npm run cache-bust"
   },
   "keywords": [
     "finance",
