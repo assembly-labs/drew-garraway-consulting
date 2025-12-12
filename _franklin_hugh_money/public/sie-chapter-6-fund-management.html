@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="Chapter 6.2: Fund Management & Structure - SIE Exam Study Guide by Franklin Hugh Money">
+
+    <title>Chapter 6.2: Fund Management & Structure | SIE Study Materials | Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sie-navigation.css">
+
+    <style>
+        :root {
+            --fh-navy: #002D62; --fh-cream: #FFFDF7; --fh-gray: #54585A; --fh-sage: #7C9885;
+            --fh-burgundy: #6B2737; --fh-gold: #B08D57; --fh-gray-900: #1A1A1A; --fh-gray-700: #404040;
+            --fh-gray-600: #595959; --fh-gray-500: #737373; --fh-gray-300: #D4D4D4; --fh-gray-200: #E5E5E5;
+            --fh-gray-100: #F5F5F5; --fh-white: #FFFFFF;
+            --fh-font-display: 'Crimson Pro', Georgia, serif; --fh-font-body: 'Inter', -apple-system, sans-serif;
+            --fh-font-mono: 'IBM Plex Mono', monospace;
+            --fh-space-xs: 0.25rem; --fh-space-sm: 0.5rem; --fh-space-md: 1rem; --fh-space-lg: 1.5rem;
+            --fh-space-xl: 2rem; --fh-space-2xl: 3rem; --fh-space-3xl: 4rem; --fh-space-4xl: 6rem;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--fh-font-body); font-size: 16px; line-height: 1.75; color: var(--fh-gray-900); background: var(--fh-cream); -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4 { font-family: var(--fh-font-display); font-weight: 400; line-height: 1.3; color: var(--fh-navy); }
+        h1 { font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -0.02em; margin-bottom: var(--fh-space-lg); }
+        h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); margin-top: var(--fh-space-3xl); margin-bottom: var(--fh-space-xl); padding-top: var(--fh-space-xl); border-top: 2px solid var(--fh-gray-200); }
+        h2:first-of-type { border-top: none; padding-top: 0; margin-top: var(--fh-space-2xl); }
+        h3 { font-size: 1.5rem; margin-top: var(--fh-space-2xl); margin-bottom: var(--fh-space-md); color: var(--fh-gray-900); }
+        p { margin-bottom: var(--fh-space-md); color: var(--fh-gray-700); }
+        strong { font-weight: 600; color: var(--fh-gray-900); }
+        a { color: var(--fh-navy); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 var(--fh-space-xl); }
+        .header { background: var(--fh-white); border-bottom: 1px solid var(--fh-gray-200); position: sticky; top: 0; z-index: 100; }
+        .header__inner { max-width: 1200px; margin: 0 auto; padding: var(--fh-space-lg) var(--fh-space-xl); display: flex; justify-content: space-between; align-items: center; }
+        .header__title { font-size: 1.125rem; color: var(--fh-gray-900); font-weight: 500; margin: 0; }
+        .breadcrumb { display: flex; gap: var(--fh-space-sm); font-size: 0.875rem; color: var(--fh-gray-600); }
+        .breadcrumb a { color: var(--fh-gray-600); text-decoration: none; }
+        .progress { background: var(--fh-gray-100); height: 3px; }
+        .progress__bar { background: var(--fh-sage); height: 100%; width: 40%; }
+        .intro { font-size: 1.125rem; color: var(--fh-gray-700); line-height: 1.8; margin-bottom: var(--fh-space-2xl); padding-bottom: var(--fh-space-xl); border-bottom: 1px solid var(--fh-gray-200); }
+        ul, ol { margin-bottom: var(--fh-space-lg); margin-left: var(--fh-space-xl); color: var(--fh-gray-700); }
+        li { margin-bottom: var(--fh-space-sm); line-height: 1.75; }
+        .key-term { background: linear-gradient(to bottom, transparent 60%, rgba(124, 152, 133, 0.2) 60%); padding: 0 2px; font-weight: 600; color: var(--fh-gray-900); }
+        .info-box { background: var(--fh-white); border-left: 4px solid var(--fh-sage); padding: var(--fh-space-lg); margin: var(--fh-space-xl) 0; border-radius: 4px; }
+        .info-box__title { font-family: var(--fh-font-mono); font-size: 0.875rem; font-weight: 600; color: var(--fh-sage); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--fh-space-sm); }
+        .info-box p { margin-bottom: 0; }
+        .test-tip { background: linear-gradient(135deg, var(--fh-gold), #C4A06B); color: var(--fh-white); padding: var(--fh-space-lg); border-radius: 4px; margin: var(--fh-space-xl) 0; }
+        .test-tip p { color: var(--fh-white); margin-bottom: 0; }
+        .comparison-table { background: var(--fh-white); border: 1px solid var(--fh-gray-200); border-radius: 4px; overflow: hidden; margin: var(--fh-space-xl) 0; }
+        .comparison-table table { width: 100%; border-collapse: collapse; }
+        .comparison-table th { background: var(--fh-gray-100); padding: var(--fh-space-md); text-align: left; font-weight: 600; color: var(--fh-gray-900); border-bottom: 2px solid var(--fh-gray-200); }
+        .comparison-table td { padding: var(--fh-space-md); border-bottom: 1px solid var(--fh-gray-200); }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: var(--fh-space-4xl); padding-top: var(--fh-space-2xl); border-top: 2px solid var(--fh-gray-200); }
+        .chapter-nav__link { display: flex; align-items: center; gap: var(--fh-space-sm); text-decoration: none; color: var(--fh-gray-700); font-weight: 500; }
+        .footer { padding: var(--fh-space-2xl) 0; text-align: center; border-top: 1px solid var(--fh-gray-200); background: var(--fh-white); margin-top: var(--fh-space-4xl); }
+        .footer__text { color: var(--fh-gray-600); font-size: 0.875rem; }
+        @media (max-width: 768px) { .header__inner { flex-direction: column; gap: var(--fh-space-md); } .comparison-table { overflow-x: auto; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header__inner">
+            <h1 class="header__title">Chapter 6.2: Fund Management & Structure</h1>
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a><span>/</span>
+                <a href="sie-study-materials.html">SIE Study Materials</a><span>/</span>
+                <span>Chapter 6.2</span>
+            </nav>
+        </div>
+        <div class="progress"><div class="progress__bar"></div></div>
+    </header>
+
+    <main class="container">
+        <div class="intro">
+            <p>
+                Running a mutual fund isn't a one-person job. It takes a team of specialized players, each with distinct responsibilities and regulatory obligations. Understanding who does what—and who pays whom—helps explain why fund expenses exist and where your money actually goes.
+            </p>
+        </div>
+
+        <section>
+            <h2>Fund Structure: Who Does What</h2>
+
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Party</th>
+                            <th>Role</th>
+                            <th>Compensation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Custodian Bank</strong></td>
+                            <td>Safeguards fund assets; may act as Transfer Agent and Paying Agent</td>
+                            <td>Custodial fees</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Investment Adviser</strong></td>
+                            <td>Manages fund within stated objectives; contract approved by shareholders</td>
+                            <td>Management fees (% of AUM)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fund Sponsor (Underwriter)</strong></td>
+                            <td>Creates and distributes the fund</td>
+                            <td>Underwriting fees</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Selling Group</strong></td>
+                            <td>Acts as agent selling shares at POP</td>
+                            <td>Selling concession</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                The <span class="key-term">custodian bank</span> is like the vault keeper—they hold the actual securities and ensure they're properly safeguarded. The <span class="key-term">investment adviser</span> makes the investment decisions. The <span class="key-term">selling group</span> gets the fund into investors' hands.
+            </p>
+
+            <div class="info-box">
+                <div class="info-box__title">Important Distinction</div>
+                <p>The investment adviser's contract must be approved by shareholders. This gives investors a voice in who manages their money—and how much they're paid to do it.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Benefits of Mutual Funds</h2>
+
+            <p>Why did mutual funds become the dominant investment vehicle for regular Americans? Three reasons:</p>
+
+            <ol>
+                <li><strong>Professional Money Management</strong> — Someone else does the research</li>
+                <li><strong>Diversification</strong> — Own hundreds of securities with a single purchase</li>
+                <li><strong>Wide Variety of Fund Objectives</strong> — Whatever your goal, there's probably a fund for it</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>The 75-5-10 Rule: What Makes a "Diversified" Fund</h2>
+
+            <p>The Investment Company Act defines a <span class="key-term">diversified fund</span> using the <strong>75-5-10 Rule</strong>:</p>
+
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Requirement</th>
+                            <th>Meaning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>75%</strong></td>
+                            <td>At least 75% of the fund's assets must be invested in securities</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5%</strong></td>
+                            <td>No more than 5% of the fund's assets can be invested in any one issuer</td>
+                        </tr>
+                        <tr>
+                            <td><strong>10%</strong></td>
+                            <td>A maximum of 10% of the voting securities of one issuer is allowed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="test-tip">
+                <p><strong>Test Tip:</strong> The 75-5-10 rule only applies to 75% of the portfolio. The other 25% can be invested however the fund chooses—even entirely in one security.</p>
+            </div>
+
+            <h3>Non-Diversified Funds</h3>
+
+            <p>
+                A fund that doesn't meet the 75-5-10 requirements is classified as <span class="key-term">non-diversified</span>. This isn't necessarily bad—a fund that only invests in U.S. Treasuries would be non-diversified but hardly risky.
+            </p>
+        </section>
+
+        <section>
+            <h2>Types of Funds</h2>
+
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fund Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Growth Funds</strong></td>
+                            <td>Invests in equities of rapidly growing companies for capital gains</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Growth and Income Funds</strong></td>
+                            <td>Provides both dividend income and growth potential</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Income Funds</strong></td>
+                            <td>Invests in fixed income securities like preferred stocks and bonds</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Balanced Funds</strong></td>
+                            <td>Maintains a balance of stocks and bonds</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Index Funds</strong></td>
+                            <td>Tracks the performance of an index like the S&P 500</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Specialized (Sector) Funds</strong></td>
+                            <td>Invests in a particular industry or geographic area</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Target Date Funds</strong></td>
+                            <td>Automatically adjusts allocation as target date approaches</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-box">
+                <div class="info-box__title">Target Date Funds</div>
+                <p>
+                    These have become enormously popular in 401(k) plans because they automatically adjust asset allocation as retirement approaches. A "2050 Fund" holds mostly stocks today but will shift toward bonds as 2050 nears. It's professional management on autopilot.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Key Points to Remember</h2>
+
+            <ul>
+                <li><strong>Custodian bank</strong> holds the assets; <strong>investment adviser</strong> makes decisions</li>
+                <li><strong>75-5-10 Rule:</strong> 75% in securities, max 5% per issuer, max 10% voting control</li>
+                <li><strong>Non-diversified</strong> doesn't mean high-risk—it means concentrated</li>
+                <li><strong>Target date funds</strong> automatically adjust allocation over time</li>
+            </ul>
+        </section>
+
+        <nav class="chapter-nav">
+            <a href="sie-chapter-6-investment-company-basics.html" class="chapter-nav__link">← Section 6.1: Investment Company Basics</a>
+            <a href="sie-chapter-6-buying-selling.html" class="chapter-nav__link">Section 6.3: Buying and Selling →</a>
+        </nav>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__text">© 2024 Franklin Hugh Money. An Investment in Knowledge.</p>
+        </div>
+    </footer>
+
+    <script src="sie-navigation-config.js"></script>
+    <script src="sie-navigation-component.js"></script>
+</body>
+</html>

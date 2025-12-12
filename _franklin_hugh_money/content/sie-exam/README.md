@@ -15,7 +15,7 @@ This directory contains all study materials for the Securities Industry Essentia
 3. **Debt Securities** - Corporate bonds, Treasury securities
 4. **Investment Companies** - Mutual funds, ETFs, pooled investments
 5. **Municipal Debt** ✅ - GO bonds, revenue bonds, tax implications
-6. **Options** - Calls, puts, derivative strategies
+6. **Packaged Products** ✅ - Mutual funds, ETFs, REITs, hedge funds, DPPs
 7. **Customer Accounts** - Account types, registration, suitability
 8. **Prohibited Activities** - Compliance and ethics
 9. **Trading & Settlement** - Trade execution and settlement processes
@@ -29,7 +29,8 @@ This directory contains all study materials for the Securities Industry Essentia
 
 ## Status
 
-- ✅ Chapter 5: Complete (raw notes and web version)
+- ✅ Chapter 5: Complete (Municipal Debt, Money Markets)
+- ✅ Chapter 6: Complete (Packaged Products - 6 sections)
 - ⏳ Other chapters: Coming soon
 
 ## File Naming Convention

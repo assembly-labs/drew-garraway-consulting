@@ -45,10 +45,14 @@ const SIECourseStructure = {
         },
         {
             number: 6,
-            title: "Options",
+            title: "Packaged Products",
             sections: [
-                { id: "6.1", title: "Options Basics", file: "sie-chapter-6-basics.html", locked: true },
-                { id: "6.2", title: "Options Strategies", file: "sie-chapter-6-strategies.html", locked: true }
+                { id: "6.1", title: "Investment Company Basics", file: "sie-chapter-6-investment-company-basics.html", locked: false },
+                { id: "6.2", title: "Fund Management & Structure", file: "sie-chapter-6-fund-management.html", locked: false },
+                { id: "6.3", title: "Buying and Selling Fund Shares", file: "sie-chapter-6-buying-selling.html", locked: false },
+                { id: "6.4", title: "Fund Expenses and Share Classes", file: "sie-chapter-6-expenses-classes.html", locked: false },
+                { id: "6.5", title: "Distributions and Prohibited Practices", file: "sie-chapter-6-distributions.html", locked: false },
+                { id: "6.6", title: "Other Packaged Products", file: "sie-chapter-6-other-products.html", locked: false }
             ]
         },
         {
