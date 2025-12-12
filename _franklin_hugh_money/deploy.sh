@@ -1,6 +1,7 @@
 #!/bin/bash
 # Franklin Hugh Money Deployment Script
 # Created: 2024-12-05
+# Updated: 2024-12-12 - Now deploys all public files
 # Purpose: Automate deployment of Franklin Hugh Money pages to repository root
 
 echo "🚀 Franklin Hugh Money Deployment Script"
@@ -25,34 +26,42 @@ else
 fi
 echo ""
 
+# Step 1: Copy all public files to repo root
 echo "📋 Step 1: Copying files to deployment location..."
-cp public/index.html ../franklin-hugh-money.html
-if [ $? -eq 0 ]; then
-    echo "   ✓ Copied index.html → franklin-hugh-money.html"
-else
-    echo "   ✗ Failed to copy index.html"
-    exit 1
-fi
 
-cp public/franklin-hugh-money-treasury.html ../franklin-hugh-money-treasury.html
-if [ $? -eq 0 ]; then
-    echo "   ✓ Copied treasury page"
-else
-    echo "   ✗ Failed to copy treasury page"
-    exit 1
-fi
+# Copy main FHM pages
+cp public/index.html ../franklin-hugh-money.html && echo "   ✓ index.html → franklin-hugh-money.html"
+cp public/franklin-hugh-money-treasury.html ../franklin-hugh-money-treasury.html && echo "   ✓ franklin-hugh-money-treasury.html"
 
-# Navigate to repository root
+# Copy SIE study materials
+cp public/sie-study-materials.html ../sie-study-materials.html && echo "   ✓ sie-study-materials.html"
+
+# Copy SIE Chapter 5
+cp public/sie-chapter-5.html ../sie-chapter-5.html && echo "   ✓ sie-chapter-5.html"
+cp public/sie-chapter-5-municipal.html ../sie-chapter-5-municipal.html && echo "   ✓ sie-chapter-5-municipal.html"
+cp public/sie-chapter-5-money-markets.html ../sie-chapter-5-money-markets.html && echo "   ✓ sie-chapter-5-money-markets.html"
+
+# Copy SIE Chapter 6
+for file in public/sie-chapter-6-*.html; do
+    filename=$(basename "$file")
+    cp "$file" "../$filename" && echo "   ✓ $filename"
+done
+
+# Copy shared assets (CSS, JS)
+cp public/sie-navigation.css ../sie-navigation.css && echo "   ✓ sie-navigation.css"
+cp public/sie-navigation-config.js ../sie-navigation-config.js && echo "   ✓ sie-navigation-config.js"
+cp public/sie-navigation-component.js ../sie-navigation-component.js && echo "   ✓ sie-navigation-component.js"
+
 echo ""
 echo "📦 Step 2: Preparing git commit..."
 cd ..
 
 # Check git status
 echo "   Current changes:"
-git status --short franklin-hugh-money*.html
+git status --short franklin-hugh-money*.html sie-*.html sie-*.css sie-*.js
 
-# Add files
-git add franklin-hugh-money*.html
+# Add all deployed files
+git add franklin-hugh-money*.html sie-*.html sie-*.css sie-*.js
 
 # Get commit message from user or use default
 echo ""
@@ -94,7 +103,9 @@ echo "✅ Deployment complete!"
 echo ""
 echo "📍 Your changes will be live in 1-2 minutes at:"
 echo "   • https://drewgarraway.com/franklin-hugh-money.html"
-echo "   • https://drewgarraway.com/franklin-hugh-money-treasury.html"
+echo "   • https://drewgarraway.com/sie-study-materials.html"
+echo "   • https://drewgarraway.com/sie-chapter-5.html"
+echo "   • https://drewgarraway.com/sie-chapter-6-investment-company-basics.html"
 echo ""
 echo "💡 Tip: Use incognito mode to avoid cache issues when checking"
 
