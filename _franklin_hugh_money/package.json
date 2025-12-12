@@ -6,6 +6,8 @@
   "author": "Drew Garraway",
   "license": "UNLICENSED",
   "scripts": {
+    "setup": "node scripts/setup.js",
+    "postinstall": "node scripts/setup.js",
     "dev": "python3 -m http.server 8000 --directory public",
     "serve": "npx serve public",
     "format": "prettier --write '**/*.{html,css,js,md,json}'",

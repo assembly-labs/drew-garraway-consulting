@@ -1,0 +1,67 @@
+#!/bin/bash
+# Franklin Hugh Money - Pre-commit Hook
+# Automatically runs cache-busting when CSS/JS files are modified
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Get the root of the git repo
+REPO_ROOT=$(git rev-parse --show-toplevel)
+FHM_DIR="$REPO_ROOT/_franklin_hugh_money"
+
+# Check if we're in the right context
+if [ ! -d "$FHM_DIR" ]; then
+    # Not in the franklin hugh money repo context, skip
+    exit 0
+fi
+
+# Check if any CSS or JS files in public/ are staged
+STAGED_ASSETS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '_franklin_hugh_money/public/.*\.(css|js)$' | grep -v '.min.')
+
+if [ -z "$STAGED_ASSETS" ]; then
+    # No asset files staged, nothing to do
+    exit 0
+fi
+
+echo -e "${YELLOW}[FHM Cache-Bust]${NC} Asset changes detected, running cache-bust..."
+
+# Save current directory
+ORIG_DIR=$(pwd)
+
+# Change to FHM directory to run cache-bust
+cd "$FHM_DIR"
+
+# Run cache-bust
+node scripts/cache-bust.js --quiet 2>/dev/null || node scripts/cache-bust.js
+
+if [ $? -ne 0 ]; then
+    echo -e "${RED}[FHM Cache-Bust]${NC} Cache-bust failed!"
+    cd "$ORIG_DIR"
+    exit 1
+fi
+
+# Return to repo root for git operations
+cd "$REPO_ROOT"
+
+# Check if any HTML files were modified by cache-bust (using full path from repo root)
+MODIFIED_HTML=$(git diff --name-only -- '_franklin_hugh_money/public/*.html')
+
+if [ -n "$MODIFIED_HTML" ]; then
+    echo -e "${GREEN}[FHM Cache-Bust]${NC} Re-staging modified HTML files..."
+
+    # Stage the modified HTML files
+    for file in $MODIFIED_HTML; do
+        git add "$file"
+        echo "  + $(basename $file)"
+    done
+
+    echo -e "${GREEN}[FHM Cache-Bust]${NC} Done! HTML references updated."
+else
+    echo -e "${GREEN}[FHM Cache-Bust]${NC} No HTML changes needed."
+fi
+
+cd "$ORIG_DIR"
+exit 0
