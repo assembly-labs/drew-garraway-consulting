@@ -8,6 +8,24 @@ echo "🚀 Franklin Hugh Money Deployment Script"
 echo "========================================"
 echo ""
 
+# Pre-deployment checklist reminder
+echo "📋 PRE-DEPLOYMENT CHECKLIST"
+echo "   See docs/DEPLOYMENT_CHECKLIST.md for full details"
+echo ""
+echo "   Quick checks:"
+echo "   • sie-study-materials.html - chapter cards updated?"
+echo "   • sie-navigation-config.js - new sections added?"
+echo "   • Progress badge count correct?"
+echo ""
+read -p "   Have you reviewed the checklist? (y/n): " checklist_ok
+if [ "$checklist_ok" != "y" ] && [ "$checklist_ok" != "Y" ]; then
+    echo ""
+    echo "   ⚠️  Please review docs/DEPLOYMENT_CHECKLIST.md before deploying"
+    echo "   Run again when ready."
+    exit 0
+fi
+echo ""
+
 # Check if we're in the right directory
 if [ ! -f "package.json" ] || [ ! -d "public" ]; then
     echo "❌ Error: Must run from _franklin_hugh_money directory"
