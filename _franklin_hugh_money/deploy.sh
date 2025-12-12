@@ -1,29 +1,11 @@
 #!/bin/bash
 # Franklin Hugh Money Deployment Script
 # Created: 2024-12-05
-# Updated: 2024-12-12 - Now deploys all public files
+# Updated: 2024-12-12 - Dynamic file detection, content validation
 # Purpose: Automate deployment of Franklin Hugh Money pages to repository root
 
 echo "🚀 Franklin Hugh Money Deployment Script"
 echo "========================================"
-echo ""
-
-# Pre-deployment checklist reminder
-echo "📋 PRE-DEPLOYMENT CHECKLIST"
-echo "   See docs/DEPLOYMENT_CHECKLIST.md for full details"
-echo ""
-echo "   Quick checks:"
-echo "   • sie-study-materials.html - chapter cards updated?"
-echo "   • sie-navigation-config.js - new sections added?"
-echo "   • Progress badge count correct?"
-echo ""
-read -p "   Have you reviewed the checklist? (y/n): " checklist_ok
-if [ "$checklist_ok" != "y" ] && [ "$checklist_ok" != "Y" ]; then
-    echo ""
-    echo "   ⚠️  Please review docs/DEPLOYMENT_CHECKLIST.md before deploying"
-    echo "   Run again when ready."
-    exit 0
-fi
 echo ""
 
 # Check if we're in the right directory
@@ -33,8 +15,22 @@ if [ ! -f "package.json" ] || [ ! -d "public" ]; then
     exit 1
 fi
 
-# Step 0: Cache busting
-echo "🔄 Step 0: Running cache-bust..."
+# Step 0: Run content validation
+echo "🔍 Step 0: Validating content sync..."
+node scripts/validate-content.js
+if [ $? -ne 0 ]; then
+    echo ""
+    echo "   ⚠️  Content validation found issues (see above)"
+    read -p "   Continue anyway? (y/n): " continue_deploy
+    if [ "$continue_deploy" != "y" ] && [ "$continue_deploy" != "Y" ]; then
+        echo "   Deployment cancelled. Fix issues and try again."
+        exit 1
+    fi
+fi
+echo ""
+
+# Step 1: Cache busting
+echo "🔄 Step 1: Running cache-bust..."
 node scripts/cache-bust.js
 if [ $? -eq 0 ]; then
     echo "   ✓ Cache busting complete"
@@ -44,34 +40,33 @@ else
 fi
 echo ""
 
-# Step 1: Copy all public files to repo root
-echo "📋 Step 1: Copying files to deployment location..."
+# Step 2: Copy all public files to repo root
+echo "📋 Step 2: Copying files to deployment location..."
 
 # Copy main FHM pages
 cp public/index.html ../franklin-hugh-money.html && echo "   ✓ index.html → franklin-hugh-money.html"
 cp public/franklin-hugh-money-treasury.html ../franklin-hugh-money-treasury.html && echo "   ✓ franklin-hugh-money-treasury.html"
 
-# Copy SIE study materials
+# Copy SIE study materials and navigation
 cp public/sie-study-materials.html ../sie-study-materials.html && echo "   ✓ sie-study-materials.html"
-
-# Copy SIE Chapter 5
-cp public/sie-chapter-5.html ../sie-chapter-5.html && echo "   ✓ sie-chapter-5.html"
-cp public/sie-chapter-5-municipal.html ../sie-chapter-5-municipal.html && echo "   ✓ sie-chapter-5-municipal.html"
-cp public/sie-chapter-5-money-markets.html ../sie-chapter-5-money-markets.html && echo "   ✓ sie-chapter-5-money-markets.html"
-
-# Copy SIE Chapter 6
-for file in public/sie-chapter-6-*.html; do
-    filename=$(basename "$file")
-    cp "$file" "../$filename" && echo "   ✓ $filename"
-done
-
-# Copy shared assets (CSS, JS)
 cp public/sie-navigation.css ../sie-navigation.css && echo "   ✓ sie-navigation.css"
 cp public/sie-navigation-config.js ../sie-navigation-config.js && echo "   ✓ sie-navigation-config.js"
 cp public/sie-navigation-component.js ../sie-navigation-component.js && echo "   ✓ sie-navigation-component.js"
 
+# Dynamically copy ALL SIE chapter HTML files
+echo "   Copying SIE chapter files..."
+chapter_count=0
+for file in public/sie-chapter-*.html; do
+    if [ -f "$file" ]; then
+        filename=$(basename "$file")
+        cp "$file" "../$filename" && echo "   ✓ $filename"
+        ((chapter_count++))
+    fi
+done
+echo "   Total: $chapter_count chapter files copied"
+
 echo ""
-echo "📦 Step 2: Preparing git commit..."
+echo "📦 Step 3: Preparing git commit..."
 cd ..
 
 # Check git status
@@ -83,7 +78,7 @@ git add franklin-hugh-money*.html sie-*.html sie-*.css sie-*.js
 
 # Get commit message from user or use default
 echo ""
-echo "📝 Step 3: Commit message (press Enter for default):"
+echo "📝 Step 4: Commit message (press Enter for default):"
 read -p "   Message: " commit_msg
 
 if [ -z "$commit_msg" ]; then
@@ -105,7 +100,7 @@ fi
 
 # Push
 echo ""
-echo "⬆️  Step 4: Pushing to remote..."
+echo "⬆️  Step 5: Pushing to remote..."
 git push ssh main
 
 if [ $? -eq 0 ]; then
@@ -120,10 +115,7 @@ echo ""
 echo "✅ Deployment complete!"
 echo ""
 echo "📍 Your changes will be live in 1-2 minutes at:"
-echo "   • https://drewgarraway.com/franklin-hugh-money.html"
 echo "   • https://drewgarraway.com/sie-study-materials.html"
-echo "   • https://drewgarraway.com/sie-chapter-5.html"
-echo "   • https://drewgarraway.com/sie-chapter-6-investment-company-basics.html"
 echo ""
 echo "💡 Tip: Use incognito mode to avoid cache issues when checking"
 
