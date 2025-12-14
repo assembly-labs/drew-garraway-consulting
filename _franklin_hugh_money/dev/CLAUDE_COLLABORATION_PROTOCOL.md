@@ -150,7 +150,44 @@ export class FHCalculator {
 
 ## 5. CONTENT DEVELOPMENT PROCESS
 
-### CONTENT STRUCTURE:
+### SIE EXAM CONTENT WORKFLOW (CRITICAL)
+
+When adding new SIE chapter content, follow the **5-phase process**:
+
+```
+PHASE 1: Extract    → Raw facts from screenshots/notes
+PHASE 2: Transform  → Apply brand voice, add stories & context (CRITICAL)
+PHASE 3: Structure  → Format with components & templates
+PHASE 4: Generate   → Create HTML files
+PHASE 5: Deploy     → Update navigation, validate, publish
+```
+
+**PHASE 2 IS NON-NEGOTIABLE.** Raw textbook content cannot be published directly.
+
+Every section must include:
+1. **Opening hook** - Story or "why it matters," NOT a definition
+2. **Historical context** - The story behind the regulation (why does it exist?)
+3. **Real-world examples** - Concrete numbers and scenarios
+4. **Observational humor** - One subtle, well-placed moment per section
+5. **The "why"** - Explain reasons behind rules, not just what they are
+
+**Key References:**
+- `/docs/ADDING_NEW_CONTENT.md` - Full transformation guide
+- `/design/brand/brand-voice.md` - Voice and tone requirements
+- `/content/sie-exam/templates/section-template.md` - Content template
+- `/content/sie-exam/chapters/chapter-06-packaged-products/` - Example of transformed content
+
+**Quality Gate Checklist:**
+- [ ] Passes "Dinner Party Test" (sounds natural in conversation)
+- [ ] Opens with hook, not definition
+- [ ] Has at least one historical context story
+- [ ] Contains real-world examples with numbers
+- [ ] One subtle humor moment per section
+- [ ] Explains "why" behind rules
+
+---
+
+### GENERAL CONTENT STRUCTURE:
 All content uses Markdown with frontmatter:
 
 ```markdown

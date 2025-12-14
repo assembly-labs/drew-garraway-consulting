@@ -2,10 +2,38 @@
 
 This directory contains all study materials for the Securities Industry Essentials (SIE) Exam.
 
+## Content Creation Workflow
+
+Adding a new chapter follows a **5-phase process**. Do not skip Phase 2.
+
+```
+PHASE 1: Extract    → Raw facts from screenshots/notes
+PHASE 2: Transform  → Apply brand voice, add stories & context (CRITICAL)
+PHASE 3: Structure  → Format with components & templates
+PHASE 4: Generate   → Create HTML files
+PHASE 5: Deploy     → Update navigation, validate, publish
+```
+
+### Phase 2 is Non-Negotiable
+
+Raw textbook content is not publishable. Every section must be transformed with:
+
+1. **Opening hook** - Start with a story or "why it matters," not a definition
+2. **Historical context** - The story behind the regulation or product
+3. **Real-world examples** - Concrete numbers and scenarios
+4. **Observational humor** - One subtle, well-placed moment per section
+5. **The "why"** - Explain why rules exist, not just what they are
+
+See `/docs/ADDING_NEW_CONTENT.md` for the complete transformation guide.
+See `/design/brand/brand-voice.md` for voice and tone requirements.
+
+---
+
 ## Structure
 
 - **`raw-notes/`** - Original study notes from textbooks, screenshots, and personal studying
-- **`study-guides/`** - Processed, web-ready content formatted for the website
+- **`chapters/`** - Transformed, web-ready markdown content
+- **`templates/`** - Section and chapter templates to follow
 - **`practice/`** - Practice questions, flashcards, and test prep materials
 
 ## Chapter List
@@ -60,11 +88,50 @@ This directory contains all study materials for the Securities Industry Essentia
 
 ## Adding New Chapters
 
-1. Add raw notes to `raw-notes/` folder
-2. Process into web-ready format following brand voice
-3. Create corresponding HTML page in `/public/`
-4. Update index page to show new chapter as available
-5. Add practice questions if available
+### Step-by-Step Process
+
+**Phase 1: Extract Raw Content**
+1. Receive screenshots or source materials
+2. Extract all factual content into `raw-notes/chapter-XX-topic.md`
+3. Capture key terms, definitions, formulas, regulations
+
+**Phase 2: Transform Content (CRITICAL)**
+4. Research historical context for major topics
+5. Write engaging opening hooks for each section
+6. Add real-world examples with concrete numbers
+7. Include one subtle humor moment per section
+8. Explain the "why" behind every regulation
+9. Apply brand voice throughout (see `/design/brand/brand-voice.md`)
+
+**Phase 3: Structure & Format**
+10. Create chapter folder: `chapters/chapter-XX-[title]/`
+11. Create section files following `templates/section-template.md`
+12. Create `chapter-meta.json` with metadata
+13. Apply HTML components (key-term, info-box, historical-note, test-tip)
+
+**Phase 4: Generate HTML**
+14. Generate HTML files in `/public/`
+15. Apply styling and navigation component
+16. Verify all components render correctly
+
+**Phase 5: Deploy**
+17. Update `sie-navigation-config.js` with new sections
+18. Update `sie-study-materials.html` with chapter card and progress badge
+19. Run `npm run validate` to check for sync errors
+20. Run `npm run cache-bust` for version strings
+21. Copy files to repo root (live site serves from root, not `/public/`)
+22. Git commit and push
+
+### Quality Gates
+
+Before publishing, content must:
+- [ ] Pass the "Dinner Party Test" (sounds natural in conversation)
+- [ ] Have opening hook, not definition
+- [ ] Include historical context
+- [ ] Contain real-world examples
+- [ ] Have exactly one humor moment per section
+- [ ] Explain "why" behind rules
+- [ ] Include all required HTML components
 
 ---
 
