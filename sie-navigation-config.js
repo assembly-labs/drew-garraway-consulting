@@ -57,10 +57,9 @@ const SIECourseStructure = {
         },
         {
             number: 7,
-            title: "Retirement Plans",
+            title: "Trading Markets",
             sections: [
-                { id: "7.1", title: "Qualified Plans", file: "sie-chapter-7-qualified.html", locked: true },
-                { id: "7.2", title: "IRAs", file: "sie-chapter-7-iras.html", locked: true }
+                { id: "7.1", title: "Types of Trading Markets", file: "sie-chapter-7-trading-markets.html", locked: false }
             ]
         },
         {

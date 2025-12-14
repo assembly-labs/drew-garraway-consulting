@@ -1,6 +1,118 @@
 # Adding New Content - Quick Start Guide
 
-## 🚀 Quick Process for Adding New Content
+## The Complete 0-to-1 Process
+
+Adding new SIE chapter content is a **multi-phase process**. Raw content (screenshots, textbook notes, etc.) must be transformed into engaging Franklin Hugh content before publication.
+
+```
+RAW CONTENT (Screenshots/Notes)
+       ↓
+PHASE 1: Extract raw facts
+       ↓
+PHASE 2: Transform with brand voice ← CRITICAL STEP
+       ↓
+PHASE 3: Structure & format
+       ↓
+PHASE 4: Generate HTML
+       ↓
+PHASE 5: Deploy
+```
+
+---
+
+## Phase 1: Content Extraction
+
+### Source Materials
+- Screenshots from study materials
+- Textbook notes
+- Raw study content
+
+### Extract Into Raw Notes
+Save to `content/sie-exam/raw-notes/chapter-XX-topic.md`:
+- All factual content
+- Key terms and definitions
+- Formulas and calculations
+- Regulatory requirements
+- Test-relevant information
+
+---
+
+## Phase 2: Content Transformation (CRITICAL)
+
+**This is not optional.** Raw textbook content must be transformed into Franklin Hugh content.
+
+### Apply Brand Voice
+
+Reference: `/design/brand/brand-voice.md`
+
+**The 90/10 Rule:**
+- 90% straightforward, useful content
+- 10% clever observations that reward attention
+
+**Voice Characteristics:**
+- Conversational professional ("educated friend explaining over coffee")
+- Modern but literate
+- Quietly confident without arrogance
+- Clear before clever
+
+### Add Engaging Elements
+
+**1. Opening Hook (Required)**
+Don't start with a definition. Start with a story, a historical moment, or a "why this matters" statement.
+
+❌ Bad: "Municipal bonds are debt securities issued by state and local governments."
+
+✅ Good: "Before 1924, if you wanted a diversified portfolio of stocks, you needed to be wealthy. Really wealthy..."
+
+**2. Historical Context (Required)**
+Every major topic has a story. Find it and tell it.
+
+Examples:
+- The 1929 crash → Investment Company Act of 1940
+- Massachusetts Investors Trust (1924) → birth of mutual funds
+- The regulation exists because something went wrong—explain what
+
+Use the historical-note component:
+```html
+<div class="historical-note">
+  <div class="historical-note__label">Historical Context</div>
+  <p>After the stock market crash of 1929...</p>
+</div>
+```
+
+**3. Real-World Examples (Required)**
+Use concrete numbers and scenarios.
+
+❌ Bad: "Investors can buy shares at NAV."
+
+✅ Good: "When you invest $10,000 in a mutual fund, the fund creates new shares for you. When you withdraw, those shares disappear."
+
+**4. Observational Humor (One Per Section)**
+Place naturally—end of sections, parentheticals, or asides.
+
+Example: "Whether those decisions add value after fees is a debate that has launched a thousand academic papers and at least one very successful index fund company in Valley Forge, Pennsylvania."
+
+**5. The "Why" Behind the "What"**
+Don't just state facts. Explain why they matter.
+
+❌ Bad: "Closed-end funds trade on exchanges."
+
+✅ Good: "This creates arbitrage opportunities that don't exist with open-end funds—and exam questions that definitely do."
+
+### Transformation Checklist
+
+Before moving to Phase 3:
+- [ ] Opens with a hook, not a definition
+- [ ] Includes at least one historical context story
+- [ ] Has real-world examples with concrete numbers
+- [ ] Contains one subtle, well-placed humor element
+- [ ] Explains the "why" behind regulations and rules
+- [ ] Sounds like a person wrote it, not a textbook
+- [ ] Passes the "Dinner Party Test" (would this sound normal in conversation?)
+
+---
+
+## Phase 3: Structure & Format
 
 ### Step 1: Prepare Your Content
 

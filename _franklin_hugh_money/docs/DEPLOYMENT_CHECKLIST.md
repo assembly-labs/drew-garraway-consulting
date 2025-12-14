@@ -2,6 +2,23 @@
 
 Pre-deployment sweep to catch common errors before pushing to production.
 
+## Before Creating New Content
+
+### Content Quality Gate (Phase 2 Validation)
+
+New chapter content must pass transformation requirements before HTML generation:
+
+- [ ] **Opening hooks** - Each section starts with a story or "why it matters," NOT a definition
+- [ ] **Historical context** - At least one historical story per chapter explaining why regulations exist
+- [ ] **Real-world examples** - Concrete numbers and scenarios (not abstract explanations)
+- [ ] **Brand voice** - Sounds like "educated friend over coffee," not a textbook
+- [ ] **Humor placement** - Exactly one subtle, well-placed observation per section
+- [ ] **The "why"** - Explains reasons behind rules, not just what they are
+
+**Reference:** `/docs/ADDING_NEW_CONTENT.md` (Phase 2: Content Transformation)
+
+---
+
 ## Before Every Deployment
 
 ### 1. Content Sync Check
