@@ -49,21 +49,27 @@ npm run lint:js
 
 ```
 _franklin_hugh_money/
-├── dev/                    # Development documentation
-│   ├── CLAUDE_COLLABORATION_PROTOCOL.md  # AI pair programming guide
-│   ├── architecture/       # Technical documentation
-│   ├── roadmap/           # Sprint planning
-│   ├── docs/              # Additional documentation
-│   └── logs/              # Development session logs
+├── content/               # Markdown content source
+│   └── sie-exam/          # SIE exam study materials
 ├── design/                # Design system and brand
 │   ├── brand/             # Brand manifesto and guidelines
 │   ├── ui/                # Design system
 │   └── ux/                # User experience docs
+├── dev/                   # Development documentation
+│   ├── CLAUDE_COLLABORATION_PROTOCOL.md
+│   ├── architecture/      # Technical documentation
+│   ├── roadmap/           # Sprint planning
+│   ├── docs/              # Additional documentation
+│   └── logs/              # Development session logs
+├── docs/                  # Project documentation
 ├── public/                # Live website files
+│   ├── assets/            # Shared CSS and JS
+│   │   ├── css/           # Stylesheets
+│   │   └── js/            # JavaScript modules
 │   ├── index.html         # Main manifesto page
+│   ├── sie-chapter-*.html # SIE exam chapters
 │   └── robots.txt         # Bot blocking (no indexing)
-├── src/                   # Source files (future)
-└── content/              # Markdown content (future)
+└── scripts/               # Build and automation scripts
 ```
 
 ## Key Features
