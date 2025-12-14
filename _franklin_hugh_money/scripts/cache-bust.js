@@ -26,9 +26,10 @@ const MANIFEST_FILE = path.join(__dirname, '..', '.cache-manifest.json');
 
 // Assets to track (relative to public/)
 const TRACKED_ASSETS = [
-    'sie-navigation.css',
-    'sie-navigation-config.js',
-    'sie-navigation-component.js'
+    'assets/css/sie-chapter.css',
+    'assets/css/sie-navigation.css',
+    'assets/js/sie-navigation-config.js',
+    'assets/js/sie-navigation-component.js'
 ];
 
 // Patterns to match in HTML files
@@ -94,11 +95,14 @@ function updateHtmlFile(htmlPath, hashes, dryRun = false) {
 
     // Update CSS references
     content = content.replace(CSS_PATTERN, (match, filename, existingVersion) => {
-        const basename = path.basename(filename);
-        if (hashes[basename]) {
-            const newRef = `href="${filename}?v=${hashes[basename]}"`;
+        // Try to match by full path first, then by basename for backwards compatibility
+        const matchedAsset = TRACKED_ASSETS.find(asset =>
+            filename === asset || filename.endsWith(asset) || asset.endsWith(filename)
+        );
+        if (matchedAsset && hashes[matchedAsset]) {
+            const newRef = `href="${filename}?v=${hashes[matchedAsset]}"`;
             if (match !== newRef) {
-                changes.push({ type: 'css', file: basename, hash: hashes[basename] });
+                changes.push({ type: 'css', file: filename, hash: hashes[matchedAsset] });
             }
             return newRef;
         }
@@ -112,11 +116,14 @@ function updateHtmlFile(htmlPath, hashes, dryRun = false) {
             return match;
         }
 
-        const basename = path.basename(filename);
-        if (hashes[basename]) {
-            const newRef = `src="${filename}?v=${hashes[basename]}"`;
+        // Try to match by full path first, then by basename for backwards compatibility
+        const matchedAsset = TRACKED_ASSETS.find(asset =>
+            filename === asset || filename.endsWith(asset) || asset.endsWith(filename)
+        );
+        if (matchedAsset && hashes[matchedAsset]) {
+            const newRef = `src="${filename}?v=${hashes[matchedAsset]}"`;
             if (match !== newRef) {
-                changes.push({ type: 'js', file: basename, hash: hashes[basename] });
+                changes.push({ type: 'js', file: filename, hash: hashes[matchedAsset] });
             }
             return newRef;
         }

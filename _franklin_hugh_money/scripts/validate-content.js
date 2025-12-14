@@ -40,7 +40,7 @@ function getChapterFiles() {
  * Parse navigation config to get chapter structure
  */
 function parseNavigationConfig() {
-    const configPath = path.join(PUBLIC_DIR, 'sie-navigation-config.js');
+    const configPath = path.join(PUBLIC_DIR, 'assets', 'js', 'sie-navigation-config.js');
     const content = fs.readFileSync(configPath, 'utf8');
 
     // Extract chapters array using regex (simple parser)
