@@ -64,66 +64,66 @@ const SIECourseStructure = {
         },
         {
             number: 8,
-            title: "Customer Accounts",
+            title: "Trade Processing and Settlement",
             sections: [
-                { id: "8.1", title: "Account Types", file: "sie-chapter-8-types.html", locked: true },
-                { id: "8.2", title: "Account Opening", file: "sie-chapter-8-opening.html", locked: true }
+                { id: "8.1", title: "Trade Processing and Settlement", file: "sie-chapter-8-trade-processing.html", locked: false }
             ]
         },
         {
             number: 9,
-            title: "Prohibited Activities",
+            title: "Customer Accounts",
             sections: [
-                { id: "9.1", title: "Prohibited Practices", file: "sie-chapter-9-practices.html", locked: true }
+                { id: "9.1", title: "Account Types", file: "sie-chapter-9-types.html", locked: true },
+                { id: "9.2", title: "Account Opening", file: "sie-chapter-9-opening.html", locked: true }
             ]
         },
         {
             number: 10,
-            title: "Securities Act of 1933",
+            title: "Prohibited Activities",
             sections: [
-                { id: "10.1", title: "Registration & Exemptions", file: "sie-chapter-10-registration.html", locked: true }
+                { id: "10.1", title: "Prohibited Practices", file: "sie-chapter-10-practices.html", locked: true }
             ]
         },
         {
             number: 11,
-            title: "Securities Exchange Act of 1934",
+            title: "Securities Act of 1933",
             sections: [
-                { id: "11.1", title: "Exchange Act Provisions", file: "sie-chapter-11-provisions.html", locked: true }
+                { id: "11.1", title: "Registration & Exemptions", file: "sie-chapter-11-registration.html", locked: true }
             ]
         },
         {
             number: 12,
-            title: "FINRA Rules",
+            title: "Securities Exchange Act of 1934",
             sections: [
-                { id: "12.1", title: "Conduct & Suitability", file: "sie-chapter-12-conduct.html", locked: true }
+                { id: "12.1", title: "Exchange Act Provisions", file: "sie-chapter-12-provisions.html", locked: true }
             ]
         },
         {
             number: 13,
-            title: "Other Regulations",
+            title: "FINRA Rules",
             sections: [
-                { id: "13.1", title: "Additional Regulations", file: "sie-chapter-13-other.html", locked: true }
+                { id: "13.1", title: "Conduct & Suitability", file: "sie-chapter-13-conduct.html", locked: true }
             ]
         },
         {
             number: 14,
-            title: "Communications",
+            title: "Other Regulations",
             sections: [
-                { id: "14.1", title: "Communications with Public", file: "sie-chapter-14-communications.html", locked: true }
+                { id: "14.1", title: "Additional Regulations", file: "sie-chapter-14-other.html", locked: true }
             ]
         },
         {
             number: 15,
-            title: "Ethics",
+            title: "Communications",
             sections: [
-                { id: "15.1", title: "Ethical Practices", file: "sie-chapter-15-ethics.html", locked: true }
+                { id: "15.1", title: "Communications with Public", file: "sie-chapter-15-communications.html", locked: true }
             ]
         },
         {
             number: 16,
-            title: "Review & Practice",
+            title: "Ethics",
             sections: [
-                { id: "16.1", title: "Final Review", file: "sie-chapter-16-review.html", locked: true }
+                { id: "16.1", title: "Ethical Practices", file: "sie-chapter-16-ethics.html", locked: true }
             ]
         }
     ],
