@@ -8,42 +8,40 @@
     left: 0;
     right: 0;
     background: var(--fh-white);
-    border-top: 2px solid var(--fh-gray-200);
-    box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--fh-gray-200);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
     z-index: 1000;
-    padding: var(--fh-space-md) var(--fh-space-xl);
+    padding: var(--fh-space-sm) var(--fh-space-xl);
 }
 
 .sie-nav-bar__content {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--fh-space-lg);
+    gap: var(--fh-space-md);
 }
 
 /* Navigation Buttons */
 .sie-nav-button {
     display: flex;
     align-items: center;
-    gap: var(--fh-space-sm);
-    padding: var(--fh-space-sm) var(--fh-space-md);
-    background: var(--fh-gray-100);
-    border: 1px solid var(--fh-gray-300);
+    gap: var(--fh-space-xs);
+    padding: var(--fh-space-xs) var(--fh-space-md);
+    background: transparent;
+    border: none;
     border-radius: 4px;
     text-decoration: none;
-    color: var(--fh-gray-700);
+    color: var(--fh-navy);
     font-weight: 500;
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     transition: all 0.2s ease;
-    min-width: 120px;
+    min-width: 80px;
 }
 
 .sie-nav-button:hover:not(.sie-nav-button--disabled) {
-    background: var(--fh-navy);
-    color: var(--fh-white);
-    border-color: var(--fh-navy);
+    background: var(--fh-gray-100);
     text-decoration: none;
 }
 
@@ -64,19 +62,20 @@
 /* Chapter/Section Selector */
 .sie-chapter-selector {
     flex: 1;
-    max-width: 500px;
+    max-width: 400px;
     display: flex;
     align-items: center;
-    gap: var(--fh-space-md);
+    gap: var(--fh-space-sm);
 }
 
 .sie-chapter-selector__label {
-    font-size: 0.875rem;
-    color: var(--fh-gray-600);
-    font-weight: 600;
+    font-size: 0.75rem;
+    color: var(--fh-gray-500);
+    font-weight: 500;
     white-space: nowrap;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    display: none;
 }
 
 .sie-chapter-selector__dropdown {
@@ -86,9 +85,9 @@
 
 .sie-chapter-selector__toggle {
     width: 100%;
-    padding: var(--fh-space-sm) var(--fh-space-md);
-    background: var(--fh-white);
-    border: 2px solid var(--fh-gray-300);
+    padding: var(--fh-space-xs) var(--fh-space-md);
+    background: var(--fh-gray-100);
+    border: 1px solid var(--fh-gray-200);
     border-radius: 4px;
     cursor: pointer;
     display: flex;
@@ -98,13 +97,13 @@
 }
 
 .sie-chapter-selector__toggle:hover {
-    border-color: var(--fh-sage);
+    background: var(--fh-gray-200);
 }
 
 .sie-chapter-selector__current {
-    font-weight: 600;
-    color: var(--fh-gray-900);
-    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--fh-gray-700);
+    font-size: 0.8125rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -117,10 +116,10 @@
     left: 0;
     right: 0;
     background: var(--fh-white);
-    border: 2px solid var(--fh-gray-300);
-    border-radius: 4px;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
-    max-height: 400px;
+    border: 1px solid var(--fh-gray-200);
+    border-radius: 8px;
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.12);
+    max-height: 350px;
     overflow-y: auto;
     display: none;
     z-index: 1001;
@@ -287,28 +286,20 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .sie-nav-bar {
-        padding: var(--fh-space-sm) var(--fh-space-md);
+        padding: var(--fh-space-xs) var(--fh-space-md);
     }
 
     .sie-nav-bar__content {
-        flex-wrap: wrap;
-        gap: var(--fh-space-sm);
+        gap: var(--fh-space-xs);
     }
 
     .sie-chapter-selector {
-        order: -1;
-        flex: 100%;
-        max-width: 100%;
-        margin-bottom: var(--fh-space-xs);
-    }
-
-    .sie-chapter-selector__label {
-        display: none;
+        flex: 1;
+        max-width: none;
     }
 
     .sie-nav-button {
         min-width: auto;
-        flex: 1;
         padding: var(--fh-space-xs) var(--fh-space-sm);
         font-size: 0.75rem;
     }
@@ -318,7 +309,9 @@
     }
 
     .sie-chapter-selector__menu {
-        max-height: 300px;
+        max-height: 280px;
+        left: -60px;
+        right: -60px;
     }
 
     .sie-section-option {
@@ -348,5 +341,5 @@
 
 /* Ensure body has bottom padding for fixed nav */
 body {
-    padding-bottom: 80px;
+    padding-bottom: 60px;
 }

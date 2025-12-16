@@ -59,6 +59,7 @@ const SIECourseStructure = {
             number: 7,
             title: "Trading Markets",
             sections: [
+                { id: "7.0", title: "Chapter Overview", file: "sie-chapter-7-one-pager.html", locked: false },
                 { id: "7.1", title: "Types of Trading Markets", file: "sie-chapter-7-trading-markets.html", locked: false }
             ]
         },
