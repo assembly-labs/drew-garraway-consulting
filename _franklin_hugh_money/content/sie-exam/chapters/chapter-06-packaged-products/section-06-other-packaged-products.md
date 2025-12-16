@@ -97,9 +97,22 @@ ETNs look like ETFs but have a fundamentally different structure:
 | **Credit Risk** | Minimal | Issuer default risk |
 | **Tax Efficient?** | Yes | Yes |
 
+<div class="info-box">
+  <div class="info-box__title">Example: How an ETN Actually Works</div>
+  <p>Suppose JP Morgan issues an ETN tracking the S&P 500 Volatility Index (VIX):</p>
+  <ul>
+    <li>You buy the ETN for <strong>$50</strong></li>
+    <li>JP Morgan does <strong>NOT</strong> buy any VIX futures or assets on your behalf</li>
+    <li>Instead, JP Morgan simply <strong>promises</strong> (like an IOU) to pay you whatever return the VIX produces</li>
+    <li>If VIX goes up 20%, JP Morgan owes you <strong>$60</strong></li>
+    <li>If VIX goes down 20%, you get <strong>$40</strong></li>
+  </ul>
+  <p><strong>The critical difference from an ETF:</strong> With an ETF, actual assets back your investment. With an ETN, you're relying entirely on the bank's promise to pay.</p>
+</div>
+
 <div class="historical-note">
   <div class="historical-note__label">The Hidden Risk</div>
-  <p>In 2008, when Lehman Brothers collapsed, holders of Lehman-issued ETNs discovered that "backed by the issuer" meant exactly that. No underlying assets to claim—just an unsecured creditor position in bankruptcy.</p>
+  <p>In 2008, when Lehman Brothers collapsed, holders of Lehman-issued ETNs discovered that "backed by the issuer" meant exactly that. No underlying assets to claim—just an unsecured creditor position in bankruptcy. The underlying index could have been up 50%—it didn't matter. The promise was worthless.</p>
 </div>
 
 ---

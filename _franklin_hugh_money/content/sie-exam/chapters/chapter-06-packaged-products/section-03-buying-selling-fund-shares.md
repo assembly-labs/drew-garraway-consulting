@@ -33,6 +33,11 @@ By the end of this section, you'll be able to:
 
 ## How Shares Are Issued
 
+<div class="exam-focus">
+  <div class="exam-focus__label">EXAM FOCUS - HIGH PRIORITY</div>
+  <p><strong>This topic was marked WEAK on your practice exam.</strong> Focus on how open-end vs closed-end issuance works and the prospectus requirements.</p>
+</div>
+
 ### Closed-End Funds
 
 One-time stock issuance. After the IPO, shares trade continuously throughout the day on an exchange, just like regular stocks.
@@ -42,6 +47,31 @@ One-time stock issuance. After the IPO, shares trade continuously throughout the
 Continuous issuance of new shares and <span class="key-term">redemption</span> of old ones. Every purchase creates shares; every sale destroys them.
 
 ### The Prospectus Question
+
+<div class="critical-concept">
+  <div class="critical-concept__label">EXAM TRAP - PROSPECTUS REQUIREMENTS</div>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Fund Type</th>
+        <th>Prospectus Required?</th>
+        <th>WHY (Key Reasoning)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Closed-End Fund</strong></td>
+        <td>Only at IPO, NOT in secondary market</td>
+        <td>Secondary trades are investor-to-investor</td>
+      </tr>
+      <tr>
+        <td><strong>Open-End Fund</strong></td>
+        <td>YES - EVERY purchase</td>
+        <td>Always a PRIMARY offering (fund creates new shares)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 This is a common exam topic:
 
@@ -58,6 +88,36 @@ This is a common exam topic:
 ---
 
 ## Fund Pricing: NAV and POP
+
+<div class="critical-concept">
+  <div class="critical-concept__label">MASTER THESE FORMULAS</div>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Formula</th>
+        <th>Calculation</th>
+        <th>Exam Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>NAV</strong></td>
+        <td>(Total Assets - Total Liabilities) / Shares Outstanding</td>
+        <td>Computed DAILY</td>
+      </tr>
+      <tr>
+        <td><strong>POP</strong></td>
+        <td>NAV + Sales Charge</td>
+        <td>What investors PAY to buy</td>
+      </tr>
+      <tr>
+        <td><strong>Sales Charge %</strong></td>
+        <td><strong>(POP - NAV) / POP</strong></td>
+        <td>ALWAYS divide by POP, not NAV!</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ### Net Asset Value (NAV)
 
@@ -79,7 +139,10 @@ When you buy mutual fund shares, you pay the <span class="key-term">POP</span>:
 POP = NAV + Sales Charge (SC)
 ```
 
-The **maximum sales charge is 8½% of POP** (not of NAV—this is a common exam trick).
+<div class="exam-focus">
+  <div class="exam-focus__label">EXAM TRAP - 8.5% MAX</div>
+  <p>The <strong>maximum sales charge is 8½% of POP</strong> (not of NAV). The exam will try to trick you on this. Always calculate sales charge as a % of POP.</p>
+</div>
 
 ### Calculating Sales Charge
 
@@ -104,6 +167,41 @@ Sales Charge = (POP - NAV) / POP
 
 ## Open-End vs. Closed-End: A Comparison
 
+<div class="critical-concept">
+  <div class="critical-concept__label">KNOW THIS TABLE COLD</div>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>OPEN-END Fund</th>
+        <th>CLOSED-END Fund</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Buy at</strong></td>
+        <td>POP (NAV + sales charge)</td>
+        <td>Market price + commission</td>
+      </tr>
+      <tr>
+        <td><strong>Sell at</strong></td>
+        <td>NAV (redeem with fund)</td>
+        <td>Market price - commission</td>
+      </tr>
+      <tr>
+        <td><strong>Pricing</strong></td>
+        <td>FORWARD pricing (next NAV, typically 4 PM)</td>
+        <td>CONTINUOUS throughout day</td>
+      </tr>
+      <tr>
+        <td><strong>Premium/Discount</strong></td>
+        <td>NO - Always at NAV</td>
+        <td>YES - Can trade above or below NAV</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 | Feature | Open-End Fund | Closed-End Fund |
 |---------|---------------|-----------------|
 | **Buy at** | POP (NAV + sales charge) | Market price + commission |
@@ -112,6 +210,11 @@ Sales Charge = (POP - NAV) / POP
 | **Premium/Discount** | Always trades at NAV | Can trade at premium or discount |
 
 ### Forward Pricing
+
+<div class="exam-focus">
+  <div class="exam-focus__label">FORWARD PRICING - KEY CONCEPT</div>
+  <p><strong>Forward pricing</strong> means your order is filled at the NEXT calculated NAV. Order at 2:00 PM? You get the 4:00 PM price. This applies ONLY to open-end (mutual) funds.</p>
+</div>
 
 <span class="key-term">Forward pricing</span> means your order is filled at the next calculated NAV. If you place an order at 2:00 PM, you get the 4:00 PM price. This prevents arbitrage that could harm other shareholders.
 

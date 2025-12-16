@@ -35,7 +35,38 @@ By the end of this section, you'll be able to:
 
 ## Fund Distributions Under Subchapter M
 
+<div class="exam-focus">
+  <div class="exam-focus__label">BORDERLINE TOPIC - STRENGTHEN THIS</div>
+  <p>You scored borderline on Subchapter M. Focus on the 90% rule and the tax implications.</p>
+</div>
+
 Here's a tax advantage that makes mutual funds viable: <span class="key-term">Subchapter M</span> of the IRS Code.
+
+<div class="critical-concept">
+  <div class="critical-concept__label">SUBCHAPTER M - THE 90% RULE</div>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>If Fund Distributes...</th>
+        <th>Tax Treatment</th>
+        <th>Key Point</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>90% or MORE</strong> of net investment income</td>
+        <td>Fund pays NO TAX on distributed income</td>
+        <td>Pass-through taxation (like partnership)</td>
+      </tr>
+      <tr>
+        <td><strong>Less than 90%</strong></td>
+        <td>Fund pays CORPORATE TAX on retained income</td>
+        <td>Double taxation occurs</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="margin-top: 10px;"><strong>EXAM TRAP:</strong> Shareholders pay taxes on distributions even if REINVESTED. Reinvestment doesn't defer taxes!</p>
+</div>
 
 ### The 90% Rule
 

@@ -33,7 +33,38 @@ By the end of this section, you'll be able to:
 
 ## 12b-1 Fees: The Marketing Charge
 
+<div class="exam-focus">
+  <div class="exam-focus__label">BORDERLINE TOPIC - STRENGTHEN THIS</div>
+  <p>You scored borderline on 12b-1 fees. Memorize these key numbers and approval requirements.</p>
+</div>
+
 Named after the SEC rule that permits them, <span class="key-term">12b-1 fees</span> offset marketing, advertising, and distribution expenses.
+
+<div class="critical-concept">
+  <div class="critical-concept__label">12b-1 FEE LIMITS - MEMORIZE THESE</div>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Fund Type</th>
+        <th>Maximum 12b-1 Fee</th>
+        <th>Memory Aid</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Load Funds</strong></td>
+        <td><strong>1.00%</strong> (100 basis points)</td>
+        <td>"Load = 1%"</td>
+      </tr>
+      <tr>
+        <td><strong>No-Load Funds</strong></td>
+        <td><strong>0.25%</strong> (25 basis points)</td>
+        <td>"No-load = quarter percent"</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="margin-top: 10px;"><strong>Approval Required:</strong> Shareholders + Board + Independent Board Members (ALL THREE)</p>
+</div>
 
 ### Key Rules
 

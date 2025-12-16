@@ -33,7 +33,47 @@ By the end of this section, you'll be able to:
 
 ## Fund Structure: Who Does What
 
+<div class="exam-focus">
+  <div class="exam-focus__label">EXAM FOCUS - HIGH PRIORITY</div>
+  <p><strong>This topic was marked WEAK on your practice exam.</strong> Know who does what in fund operations and which party has which responsibility.</p>
+</div>
+
 ### The Key Players
+
+<div class="critical-concept">
+  <div class="critical-concept__label">MEMORIZE THESE FOUR PARTIES</div>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Party</th>
+        <th>Role</th>
+        <th>Key Exam Point</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Custodian Bank</strong></td>
+        <td>HOLDS the assets (safekeeping)</td>
+        <td>Physical possession of securities</td>
+      </tr>
+      <tr>
+        <td><strong>Investment Adviser</strong></td>
+        <td>MANAGES the portfolio (buy/sell decisions)</td>
+        <td>Contract approved by SHAREHOLDERS</td>
+      </tr>
+      <tr>
+        <td><strong>Fund Sponsor (Underwriter)</strong></td>
+        <td>CREATES and distributes the fund</td>
+        <td>Principal in the distribution</td>
+      </tr>
+      <tr>
+        <td><strong>Selling Group</strong></td>
+        <td>SELLS shares to public</td>
+        <td>Acts as AGENT at POP</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 | Party | Role | Compensation |
 |-------|------|--------------|
@@ -63,6 +103,37 @@ Why did mutual funds become the dominant investment vehicle for regular American
 
 ## The 75-5-10 Rule: What Makes a "Diversified" Fund
 
+<div class="critical-concept">
+  <div class="critical-concept__label">MEMORIZE THIS - 75-5-10 RULE</div>
+  <p>This rule defines what makes a fund "diversified" under the Investment Company Act. <strong>HEAVILY TESTED.</strong></p>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Number</th>
+        <th>What It Means</th>
+        <th>Memory Trick</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>75%</strong></td>
+        <td>At least 75% of assets must be in securities</td>
+        <td>"75% must be invested"</td>
+      </tr>
+      <tr>
+        <td><strong>5%</strong></td>
+        <td>Max 5% of fund assets in ANY ONE issuer</td>
+        <td>"5% max per company"</td>
+      </tr>
+      <tr>
+        <td><strong>10%</strong></td>
+        <td>Max 10% of ONE issuer's VOTING securities</td>
+        <td>"10% voting control limit"</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 The Investment Company Act defines a <span class="key-term">diversified fund</span> using the **75-5-10 Rule**:
 
 | Requirement | Meaning |
@@ -71,8 +142,9 @@ The Investment Company Act defines a <span class="key-term">diversified fund</sp
 | **5%** | No more than 5% of the fund's assets can be invested in any one issuer |
 | **10%** | A maximum of 10% of the voting securities of one issuer is allowed |
 
-<div class="test-tip">
-  <p><strong>Test Tip:</strong> The 75-5-10 rule only applies to 75% of the portfolio. The other 25% can be invested however the fund chooses—even entirely in one security.</p>
+<div class="exam-focus">
+  <div class="exam-focus__label">EXAM TRAP ALERT</div>
+  <p><strong>The 75-5-10 rule only applies to 75% of the portfolio!</strong> The other 25% can be invested however the fund chooses—even entirely in ONE security. This is a common trick question.</p>
 </div>
 
 ### Non-Diversified Funds
