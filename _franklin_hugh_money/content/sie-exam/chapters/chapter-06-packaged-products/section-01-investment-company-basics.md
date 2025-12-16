@@ -39,6 +39,11 @@ By the end of this section, you'll be able to:
 
 ## What is an Investment Company?
 
+<div class="exam-focus">
+  <div class="exam-focus__label">EXAM FOCUS - HIGH PRIORITY</div>
+  <p><strong>This topic was marked WEAK on your practice exam.</strong> Pay close attention to the three types of investment companies and their distinguishing characteristics.</p>
+</div>
+
 An investment company does exactly what the name suggests: it's a company that invests. More specifically, it:
 
 - Issues securities to raise capital from investors
@@ -57,6 +62,36 @@ After the stock market crash of 1929 and the subsequent Great Depression, Congre
 </div>
 
 The Act recognizes three types of investment companies:
+
+<div class="critical-concept">
+  <div class="critical-concept__label">MEMORIZE THIS - THREE TYPES</div>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Key Characteristic</th>
+        <th>Exam Frequency</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Face-Amount Certificate Company</strong></td>
+        <td>Promises fixed payment at maturity; HISTORICAL RELIC</td>
+        <td>Rarely tested (know it exists)</td>
+      </tr>
+      <tr>
+        <td><strong>Management Company</strong></td>
+        <td>Actively managed; includes Open-End (mutual funds) and Closed-End funds</td>
+        <td>HEAVILY TESTED</td>
+      </tr>
+      <tr>
+        <td><strong>Unit Investment Trust (UIT)</strong></td>
+        <td>FIXED portfolio; NO active management; has TERMINATION DATE</td>
+        <td>Frequently tested</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ```
                     Types of Investment Companies
@@ -108,6 +143,46 @@ Closed-end funds work differently:
 - **Shares trade on an exchange or OTC** — like regular stocks
 - **Not redeemable** — the fund doesn't buy back shares; you sell to another investor
 
+<div class="critical-concept">
+  <div class="critical-concept__label">EXAM TRAP - OPEN-END vs CLOSED-END</div>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>OPEN-END (Mutual Fund)</th>
+        <th>CLOSED-END</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Can issue</strong></td>
+        <td>Common stock ONLY</td>
+        <td>Stocks AND bonds</td>
+      </tr>
+      <tr>
+        <td><strong>Share creation</strong></td>
+        <td>CONTINUOUS (creates/destroys daily)</td>
+        <td>ONE-TIME at IPO only</td>
+      </tr>
+      <tr>
+        <td><strong>Where to trade</strong></td>
+        <td>REDEEM with the fund at NAV</td>
+        <td>On EXCHANGE like stocks</td>
+      </tr>
+      <tr>
+        <td><strong>Price vs NAV</strong></td>
+        <td>ALWAYS at NAV</td>
+        <td>Can trade at PREMIUM or DISCOUNT</td>
+      </tr>
+      <tr>
+        <td><strong>Prospectus</strong></td>
+        <td>Required EVERY purchase</td>
+        <td>Only at IPO (secondary = no)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <div class="info-box">
   <div class="info-box__title">Premium and Discount</div>
   <p>Because closed-end fund shares trade on the open market, they can trade at a <strong>premium</strong> or <strong>discount</strong> to their NAV. If a fund holds $100 million in securities but investors are pessimistic about its prospects, it might trade at $95 million (a 5% discount). If investors are enthusiastic, it might trade at $105 million (a 5% premium).</p>
@@ -118,6 +193,16 @@ This creates arbitrage opportunities that don't exist with open-end funds—and 
 ---
 
 ## Unit Investment Trusts
+
+<div class="exam-focus">
+  <div class="exam-focus__label">UIT KEY DISTINCTIONS</div>
+  <p>UITs are different from management companies in THREE critical ways the exam tests:</p>
+  <ol>
+    <li><strong>NO ACTIVE MANAGEMENT</strong> — portfolio is FIXED at creation</li>
+    <li><strong>HAS A TERMINATION DATE</strong> — trust winds down</li>
+    <li><strong>NO BOARD OF DIRECTORS</strong> — has a TRUSTEE instead</li>
+  </ol>
+</div>
 
 Unit Investment Trusts (UITs) take a different approach: they assemble a fixed portfolio and hold it. No active management. No trading. Just... holding.
 

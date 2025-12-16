@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/sie-chapter.css?v=a95fe73b">
+    <link rel="stylesheet" href="assets/css/sie-chapter.css?v=8f1fdcc0">
     <link rel="stylesheet" href="assets/css/sie-navigation.css?v=6e062608">
 
 </head>
@@ -38,6 +38,41 @@
         <section>
             <h2>Fund Pricing: NAV and POP</h2>
 
+            <div class="exam-focus">
+                <div class="exam-focus__label">EXAM FOCUS - HIGH PRIORITY</div>
+                <p><strong>This topic was marked WEAK on your practice exam.</strong> Focus on how open-end vs closed-end issuance works and the pricing formulas.</p>
+            </div>
+
+            <div class="critical-concept">
+                <div class="critical-concept__label">MASTER THESE FORMULAS</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Formula</th>
+                            <th>Calculation</th>
+                            <th>Exam Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>NAV</strong></td>
+                            <td>(Total Assets - Total Liabilities) / Shares Outstanding</td>
+                            <td>Computed DAILY</td>
+                        </tr>
+                        <tr>
+                            <td><strong>POP</strong></td>
+                            <td>NAV + Sales Charge</td>
+                            <td>What investors PAY to buy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sales Charge %</strong></td>
+                            <td><strong>(POP - NAV) / POP</strong></td>
+                            <td>ALWAYS divide by POP, not NAV!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <h3>Net Asset Value (NAV)</h3>
 
             <p><span class="key-term">NAV</span> is the fund's per-share value, computed daily:</p>
@@ -50,7 +85,10 @@
 
             <pre>POP = NAV + Sales Charge (SC)</pre>
 
-            <p>The <strong>maximum sales charge is 8½% of POP</strong> (not of NAV—this is a common exam trick).</p>
+            <div class="exam-focus">
+                <div class="exam-focus__label">EXAM TRAP - 8.5% MAX</div>
+                <p>The <strong>maximum sales charge is 8½% of POP</strong> (not of NAV). The exam will try to trick you on this. Always calculate sales charge as a % of POP.</p>
+            </div>
 
             <h3>Calculating Sales Charge</h3>
 
@@ -71,6 +109,21 @@
         <section>
             <h2>Open-End vs. Closed-End: A Comparison</h2>
 
+            <div class="critical-concept">
+                <div class="critical-concept__label">KNOW THIS TABLE COLD</div>
+                <table>
+                    <thead>
+                        <tr><th>Feature</th><th>OPEN-END Fund</th><th>CLOSED-END Fund</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Buy at</strong></td><td>POP (NAV + sales charge)</td><td>Market price + commission</td></tr>
+                        <tr><td><strong>Sell at</strong></td><td>NAV (redeem with fund)</td><td>Market price - commission</td></tr>
+                        <tr><td><strong>Pricing</strong></td><td>FORWARD pricing (next NAV, typically 4 PM)</td><td>CONTINUOUS throughout day</td></tr>
+                        <tr><td><strong>Premium/Discount</strong></td><td>NO - Always at NAV</td><td>YES - Can trade above or below NAV</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
             <div class="comparison-table">
                 <table>
                     <thead>
@@ -83,6 +136,11 @@
                         <tr><td><strong>Premium/Discount</strong></td><td>Always trades at NAV</td><td>Can trade at premium or discount</td></tr>
                     </tbody>
                 </table>
+            </div>
+
+            <div class="exam-focus">
+                <div class="exam-focus__label">FORWARD PRICING - KEY CONCEPT</div>
+                <p><strong>Forward pricing</strong> means your order is filled at the NEXT calculated NAV. Order at 2:00 PM? You get the 4:00 PM price. This applies ONLY to open-end (mutual) funds.</p>
             </div>
 
             <p><span class="key-term">Forward pricing</span> means your order is filled at the next calculated NAV. If you place an order at 2:00 PM, you get the 4:00 PM price.</p>

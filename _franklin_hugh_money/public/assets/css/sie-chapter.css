@@ -94,6 +94,77 @@ li { margin-bottom: var(--fh-space-sm); line-height: 1.75; }
 .test-tip { background: linear-gradient(135deg, var(--fh-gold), #C4A06B); color: var(--fh-white); padding: var(--fh-space-lg); border-radius: 4px; margin: var(--fh-space-xl) 0; }
 .test-tip p { color: var(--fh-white); margin-bottom: 0; }
 
+/* Exam Focus Box - High Priority Weak Areas */
+.exam-focus {
+    background: linear-gradient(135deg, #DC2626, #B91C1C);
+    color: var(--fh-white);
+    padding: var(--fh-space-lg);
+    border-radius: 4px;
+    margin: var(--fh-space-xl) 0;
+    border-left: 6px solid #7F1D1D;
+    box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.2);
+}
+.exam-focus__label {
+    font-family: var(--fh-font-mono);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--fh-space-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--fh-space-sm);
+}
+.exam-focus__label::before {
+    content: "⚠️";
+}
+.exam-focus p { color: var(--fh-white); margin-bottom: 0; }
+.exam-focus ol { color: var(--fh-white); margin-bottom: 0; }
+.exam-focus li { color: var(--fh-white); }
+
+/* Critical Concept Box - Must Memorize */
+.critical-concept {
+    background: var(--fh-white);
+    border: 3px solid var(--fh-navy);
+    padding: var(--fh-space-lg);
+    border-radius: 4px;
+    margin: var(--fh-space-xl) 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 45, 98, 0.1);
+}
+.critical-concept__label {
+    font-family: var(--fh-font-mono);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--fh-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--fh-space-md);
+    padding-bottom: var(--fh-space-sm);
+    border-bottom: 2px solid var(--fh-navy);
+    display: flex;
+    align-items: center;
+    gap: var(--fh-space-sm);
+}
+.critical-concept__label::before {
+    content: "📌";
+}
+.critical-concept p { margin-bottom: var(--fh-space-sm); }
+.critical-concept table { width: 100%; border-collapse: collapse; margin-top: var(--fh-space-sm); }
+.critical-concept th {
+    background: var(--fh-navy);
+    color: var(--fh-white);
+    padding: var(--fh-space-md);
+    text-align: left;
+    font-weight: 600;
+}
+.critical-concept td {
+    padding: var(--fh-space-md);
+    border-bottom: 1px solid var(--fh-gray-200);
+    background: var(--fh-white);
+}
+.critical-concept tr:nth-child(even) td { background: var(--fh-gray-100); }
+.critical-concept tr:last-child td { border-bottom: none; }
+
 .comparison-table { background: var(--fh-white); border: 1px solid var(--fh-gray-200); border-radius: 4px; overflow: hidden; margin: var(--fh-space-xl) 0; }
 .comparison-table table { width: 100%; border-collapse: collapse; }
 .comparison-table th { background: var(--fh-gray-100); padding: var(--fh-space-md); text-align: left; font-weight: 600; color: var(--fh-gray-900); border-bottom: 2px solid var(--fh-gray-200); }
