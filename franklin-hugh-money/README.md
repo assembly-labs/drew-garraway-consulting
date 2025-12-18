@@ -48,7 +48,7 @@ npm run lint:js
 ## Project Structure
 
 ```
-_franklin_hugh_money/
+franklin-hugh-money/
 ├── content/               # Markdown content source
 │   └── sie-exam/          # SIE exam study materials
 ├── design/                # Design system and brand

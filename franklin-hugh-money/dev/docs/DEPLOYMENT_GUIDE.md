@@ -13,11 +13,11 @@ This is the #1 source of deployment issues. Read this section carefully.
 
 | Development Location | Live URL | Deployment Location |
 |---------------------|----------|-------------------|
-| `_franklin_hugh_money/public/index.html` | `/franklin-hugh-money.html` | Repository root |
-| `_franklin_hugh_money/public/franklin-hugh-money-treasury.html` | `/franklin-hugh-money-treasury.html` | Repository root |
+| `franklin-hugh-money/public/index.html` | `/franklin-hugh-money.html` | Repository root |
+| `franklin-hugh-money/public/franklin-hugh-money-treasury.html` | `/franklin-hugh-money-treasury.html` | Repository root |
 
 ### Why This Matters
-- We develop in `_franklin_hugh_money/public/` for organization
+- We develop in `franklin-hugh-money/public/` for organization
 - The live site serves from the repository root directory
 - **Files MUST be copied to root** for changes to appear live
 
@@ -36,7 +36,7 @@ This is the #1 source of deployment issues. Read this section carefully.
 
 2. **Copy files from development to deployment location**
    ```bash
-   # From _franklin_hugh_money directory
+   # From franklin-hugh-money directory
    cp public/index.html ../franklin-hugh-money.html
    cp public/franklin-hugh-money-treasury.html ../franklin-hugh-money-treasury.html
    ```
@@ -102,7 +102,7 @@ git push ssh main  # Instead of: git push origin main
 drew-garraway-consulting/          # Repository root (deployment location)
 ├── franklin-hugh-money.html       # DEPLOYED: Main page
 ├── franklin-hugh-money-treasury.html  # DEPLOYED: Treasury analysis
-├── _franklin_hugh_money/          # Development directory
+├── franklin-hugh-money/          # Development directory
 │   ├── public/                    # Working files
 │   │   ├── index.html            # DEV: Main page source
 │   │   └── franklin-hugh-money-treasury.html  # DEV: Treasury source
@@ -115,7 +115,7 @@ drew-garraway-consulting/          # Repository root (deployment location)
 
 ## 🚀 Quick Deploy Script
 
-Save this as `deploy.sh` in the `_franklin_hugh_money` directory:
+Save this as `deploy.sh` in the `franklin-hugh-money` directory:
 
 ```bash
 #!/bin/bash

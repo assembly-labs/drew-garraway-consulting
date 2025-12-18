@@ -1,0 +1,36 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "globals": {
+    "SIECourseStructure": "readonly",
+    "module": "readonly"
+  },
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-console": "off",
+    "semi": ["error", "always"],
+    "quotes": "off"
+  },
+  "overrides": [
+    {
+      "files": ["scripts/**/*.js"],
+      "env": {
+        "node": true,
+        "browser": false
+      },
+      "globals": {
+        "require": "readonly",
+        "module": "readonly",
+        "process": "readonly",
+        "__dirname": "readonly"
+      }
+    }
+  ]
+}
