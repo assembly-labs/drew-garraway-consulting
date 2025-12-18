@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lease Agreement - Oakwood Commons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --text-primary: #1C1917;
+            --text-secondary: #57534E;
+            --bg-highlight: #FEF9C3;
+            --border: #E7E5E4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: #FAFAF9;
+        }
+
+        .document-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        }
+
+        .document-header {
+            padding: 60px 80px 40px;
+            border-bottom: 2px solid var(--text-primary);
+            text-align: center;
+        }
+
+        .document-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .document-header h2 {
+            font-size: 18px;
+            font-weight: 400;
+            margin: 0 0 16px;
+            color: var(--text-secondary);
+        }
+
+        .document-header p {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .document-body {
+            padding: 40px 80px 80px;
+        }
+
+        .toc {
+            margin-bottom: 40px;
+            padding: 24px;
+            background: #FAFAF9;
+            border-radius: 8px;
+        }
+
+        .toc h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+        }
+
+        .toc li {
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc li:last-child {
+            border-bottom: none;
+        }
+
+        .toc a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .article {
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+
+        .article-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 24px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+            scroll-margin-top: 20px;
+        }
+
+        .section-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 12px;
+            color: var(--text-primary);
+        }
+
+        .section p {
+            margin: 0 0 12px;
+            text-align: justify;
+        }
+
+        .section ul, .section ol {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: var(--bg-highlight);
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        .section:target {
+            background: var(--bg-highlight);
+            padding: 16px;
+            margin-left: -16px;
+            margin-right: -16px;
+            border-radius: 4px;
+        }
+
+        .page-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-align: right;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: white;
+            border: 1px solid #E7E5E4;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.15s ease;
+        }
+
+        .back-link:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .document-header,
+            .document-body {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .back-link {
+                position: static;
+                margin: 16px;
+                display: inline-flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../demos.html" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Demos
+    </a>
+
+    <div class="document-container">
+        <header class="document-header">
+            <h1>Residential Lease Agreement</h1>
+            <h2>Oakwood Commons</h2>
+            <p>Standard Form Lease | Version 2024.1 | State Compliant</p>
+        </header>
+
+        <div class="document-body">
+            <nav class="toc">
+                <h3>Table of Contents (Excerpt)</h3>
+                <ul>
+                    <li><a href="#section-10">Section 10: Maintenance and Repairs</a> (Page 8)</li>
+                    <li><a href="#section-11">Section 11: Entry and Inspection</a> (Page 9)</li>
+                    <li><a href="#section-12">Section 12: Move-Out Procedures</a> (Page 10-11)</li>
+                    <li><a href="#section-13">Section 13: Security Deposit</a> (Page 12)</li>
+                </ul>
+            </nav>
+
+            <!-- Section 10 -->
+            <article class="article" id="section-10">
+                <h2 class="article-title">Section 10: Maintenance and Repairs</h2>
+                <div class="section">
+                    <p><strong>10.1</strong> Tenant shall maintain the Premises in a clean and sanitary condition and shall not permit any waste or damage to the Premises beyond normal wear and tear.</p>
+                    <p><strong>10.2</strong> Tenant shall promptly notify Landlord in writing of any maintenance issues, defects, or needed repairs.</p>
+                    <p><strong>10.3</strong> Landlord shall be responsible for repairs to structural elements, plumbing systems, electrical systems, and appliances provided by Landlord, except where damage is caused by Tenant's negligence or misuse.</p>
+                </div>
+            </article>
+
+            <!-- Section 11 -->
+            <article class="article" id="section-11">
+                <h2 class="article-title">Section 11: Entry and Inspection</h2>
+                <div class="section">
+                    <p><strong>11.1</strong> Landlord may enter the Premises with at least 24 hours written notice for inspections, repairs, or to show the unit to prospective tenants or buyers.</p>
+                    <p><strong>11.2</strong> Landlord may enter without notice in case of emergency.</p>
+                    <p class="page-number">Page 9</p>
+                </div>
+            </article>
+
+            <!-- Section 12: Move-Out -->
+            <article class="article" id="section-12">
+                <h2 class="article-title">Section 12: Move-Out Procedures</h2>
+
+                <div class="section" id="section-12-1">
+                    <h3 class="section-title">12.1 - Notice of Intent to Vacate</h3>
+                    <p><span class="highlight"><strong>Required Notice Period:</strong> Tenant must provide written notice of intent to vacate at least thirty (30) days prior to the intended move-out date.</span> Notice shall be delivered via the resident portal, email to management, or certified mail.</p>
+                    <p>Failure to provide proper notice may result in forfeiture of security deposit or liability for additional rent.</p>
+                </div>
+
+                <div class="section" id="section-12-2">
+                    <h3 class="section-title">12.2 - Scheduling Move-Out</h3>
+                    <p>To ensure a smooth move-out process and minimize disruption to other residents:</p>
+                    <ul>
+                        <li><span class="highlight"><strong>Elevator Reservation:</strong> Tenant must reserve the service elevator at least seventy-two (72) hours in advance of the scheduled move.</span></li>
+                        <li><span class="highlight"><strong>Permitted Hours:</strong> Moving activities are permitted Monday through Saturday, 8:00 AM to 6:00 PM. No moving activities are permitted on Sundays or observed holidays.</span></li>
+                        <li><span class="highlight"><strong>Moving Deposit:</strong> A refundable moving deposit of Fifty Dollars ($50.00) is required to reserve the elevator and common area access.</span></li>
+                    </ul>
+                </div>
+
+                <div class="section" id="section-12-3">
+                    <h3 class="section-title">12.3 - Condition of Premises at Move-Out</h3>
+                    <p>Tenant shall return the Premises in the same condition as received, reasonable wear and tear excepted. Prior to move-out, Tenant shall:</p>
+                    <ul class="checklist">
+                        <li><span class="highlight">Remove all personal belongings and debris</span></li>
+                        <li><span class="highlight">Clean all rooms, appliances, fixtures, and surfaces thoroughly</span></li>
+                        <li><span class="highlight">Patch small nail holes (1/4" or smaller) with spackling compound</span></li>
+                        <li><span class="highlight">Replace any burned-out light bulbs</span></li>
+                        <li><span class="highlight">Remove all trash and dispose properly</span></li>
+                        <li><span class="highlight">Clean interior of all cabinets, closets, and storage areas</span></li>
+                        <li>Defrost and clean refrigerator/freezer</li>
+                        <li>Clean oven, stovetop, and range hood</li>
+                        <li>Clean bathrooms including toilet, tub/shower, and sink</li>
+                        <li>Vacuum carpets and mop hard floors</li>
+                        <li>Clean windows (interior)</li>
+                    </ul>
+                </div>
+
+                <div class="section" id="section-12-4">
+                    <h3 class="section-title">12.4 - Return of Keys and Access Devices</h3>
+                    <p><span class="highlight"><strong>All Keys Must Be Returned:</strong> Tenant shall return all keys, key fobs, access cards, parking passes, mailbox keys, and any other access devices to the management office by 12:00 PM (noon) on the move-out date.</span></p>
+                    <p>Unreturned keys or access devices will result in a charge for re-keying or replacement, deducted from the security deposit.</p>
+                </div>
+
+                <div class="section" id="section-12-5">
+                    <h3 class="section-title">12.5 - Move-Out Inspection</h3>
+                    <p>Tenant has the right to request a pre-move-out inspection to identify any issues that may result in security deposit deductions. Tenant may also be present during the final move-out inspection.</p>
+                    <p class="page-number">Page 11</p>
+                </div>
+            </article>
+
+            <!-- Section 13: Security Deposit -->
+            <article class="article" id="section-13">
+                <h2 class="article-title">Section 13: Security Deposit</h2>
+
+                <div class="section" id="section-13-1">
+                    <h3 class="section-title">13.1 - Return of Security Deposit</h3>
+                    <p><span class="highlight"><strong>Timeline:</strong> Landlord shall return the security deposit, less any lawful deductions, within twenty-one (21) days after Tenant has vacated the Premises and returned all keys.</span></p>
+                    <p>If deductions are made, Landlord shall provide an itemized statement of deductions along with any remaining balance.</p>
+                </div>
+
+                <div class="section" id="section-13-2">
+                    <h3 class="section-title">13.2 - Permissible Deductions</h3>
+                    <p>Landlord may deduct from the security deposit for:</p>
+                    <ul>
+                        <li>Unpaid rent or other charges due under the lease</li>
+                        <li>Repair of damages beyond normal wear and tear</li>
+                        <li>Cleaning costs if unit is not returned in clean condition</li>
+                        <li>Replacement of unreturned keys or access devices</li>
+                        <li>Costs to remove abandoned personal property</li>
+                    </ul>
+                    <p><strong>Normal Wear and Tear:</strong> Landlord shall not deduct for normal wear and tear, which includes minor scuffs on walls, worn carpet in traffic areas, faded paint, or minor marks that can be cleaned.</p>
+                    <p class="page-number">Page 12</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</body>
+</html>

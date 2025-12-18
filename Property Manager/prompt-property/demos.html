@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Property Manager - Conversation Demos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           Design Tokens - "Composed Confidence"
+           ======================================== */
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --primary-light: #EEF2FF;
+            --primary-subtle: #F5F3FF;
+
+            --accent: #F59E0B;
+            --accent-light: #FEF3C7;
+
+            --success: #059669;
+            --success-light: #D1FAE5;
+            --warning: #F59E0B;
+            --warning-light: #FEF3C7;
+            --error: #DC2626;
+            --error-light: #FEE2E2;
+
+            --neutral-50: #FAFAF9;
+            --neutral-100: #F5F5F4;
+            --neutral-200: #E7E5E4;
+            --neutral-300: #D6D3D1;
+            --neutral-400: #A8A29E;
+            --neutral-500: #78716C;
+            --neutral-600: #57534E;
+            --neutral-700: #44403C;
+            --neutral-800: #1C1917;
+            --neutral-900: #0C0A09;
+
+            --bg-app: var(--neutral-50);
+            --bg-card: #FFFFFF;
+            --bg-assistant: var(--neutral-100);
+            --bg-user: var(--primary-light);
+
+            --text-primary: var(--neutral-800);
+            --text-secondary: var(--neutral-600);
+            --text-muted: var(--neutral-500);
+
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --transition-fast: 150ms ease-out;
+            --transition-medium: 300ms ease-out;
+        }
+
+        [data-theme="dark"] {
+            --bg-app: var(--neutral-900);
+            --bg-card: var(--neutral-800);
+            --bg-assistant: var(--neutral-800);
+            --bg-user: #312E81;
+            --text-primary: #F5F5F4;
+            --text-secondary: var(--neutral-400);
+            --text-muted: var(--neutral-500);
+            --neutral-200: var(--neutral-700);
+            --primary: #818CF8;
+        }
+
+        /* ========================================
+           Base Styles
+           ======================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-app);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========================================
+           Layout
+           ======================================== */
+        .page-container {
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .demo-header {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .demo-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 0 8px;
+            color: var(--text-primary);
+        }
+
+        .demo-header p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .demo-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .demo-nav-btn {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--neutral-200);
+            border-radius: 8px;
+            font-family: var(--font-family);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .demo-nav-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .demo-nav-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .control-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--primary);
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-family);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: background var(--transition-fast);
+        }
+
+        .control-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .control-btn.secondary {
+            background: var(--bg-card);
+            border: 1px solid var(--neutral-200);
+            color: var(--text-secondary);
+        }
+
+        .control-btn.secondary:hover {
+            border-color: var(--neutral-300);
+            background: var(--neutral-100);
+        }
+
+        /* ========================================
+           Demo Container
+           ======================================== */
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .demo-phone-frame {
+            background: var(--neutral-900);
+            padding: 12px 12px 0;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .demo-phone-notch {
+            width: 120px;
+            height: 24px;
+            background: var(--neutral-900);
+            border-radius: 0 0 12px 12px;
+            margin: 0 auto;
+        }
+
+        .demo-app-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--neutral-200);
+        }
+
+        .demo-logo {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .demo-logo svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .demo-title {
+            flex: 1;
+        }
+
+        .demo-title h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .demo-title span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ========================================
+           Chat Area
+           ======================================== */
+        .demo-chat {
+            height: 650px;
+            overflow-y: auto;
+            padding: 24px;
+            background: var(--bg-app);
+        }
+
+        .demo-messages {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .message {
+            max-width: 85%;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .message.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .message.user {
+            align-self: flex-end;
+        }
+
+        .message.assistant {
+            align-self: flex-start;
+        }
+
+        .message-bubble {
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.9375rem;
+            line-height: 1.5;
+        }
+
+        .message.user .message-bubble {
+            background: var(--bg-user);
+            border-top-right-radius: 4px;
+        }
+
+        .message.assistant .message-bubble {
+            background: var(--bg-assistant);
+            border-top-left-radius: 4px;
+        }
+
+        .message-bubble p {
+            margin: 0 0 12px;
+        }
+
+        .message-bubble p:last-child {
+            margin-bottom: 0;
+        }
+
+        .message-bubble strong {
+            font-weight: 600;
+        }
+
+        .message-bubble h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin: 16px 0 8px;
+        }
+
+        .message-bubble h4:first-child {
+            margin-top: 0;
+        }
+
+        .message-bubble ul, .message-bubble ol {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .message-bubble li {
+            margin-bottom: 4px;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .status-badge svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .status-allowed {
+            background: var(--success-light);
+            color: var(--success);
+        }
+
+        .status-conditional {
+            background: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .status-prohibited {
+            background: var(--error-light);
+            color: var(--error);
+        }
+
+        /* Citation */
+        .citation {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--neutral-200);
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+
+        .citation svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        .citation a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            margin-top: 12px;
+            font-size: 0.75rem;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        /* Follow-up */
+        .followup {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--neutral-200);
+            color: var(--text-secondary);
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            padding: 12px 16px;
+            background: var(--bg-assistant);
+            border-radius: 12px;
+            border-top-left-radius: 4px;
+        }
+
+        .typing-indicator.visible {
+            display: block;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: var(--neutral-400);
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out both;
+        }
+
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typingBounce {
+            0%, 80%, 100% { opacity: 0.4; transform: scale(0.8); }
+            40% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Input Area */
+        .demo-input {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: var(--bg-card);
+            border-top: 1px solid var(--neutral-200);
+        }
+
+        .demo-input-field {
+            flex: 1;
+            padding: 10px 16px;
+            background: var(--bg-app);
+            border: 1px solid var(--neutral-300);
+            border-radius: 24px;
+            font-family: var(--font-family);
+            font-size: 0.9375rem;
+            color: var(--text-primary);
+        }
+
+        .demo-input-field::placeholder {
+            color: var(--neutral-400);
+        }
+
+        .demo-send-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .demo-send-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ========================================
+           Use Case Info
+           ======================================== */
+        .use-case-info {
+            max-width: 800px;
+            margin: 24px auto 0;
+            padding: 20px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--neutral-200);
+        }
+
+        .use-case-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 0 8px;
+            color: var(--text-primary);
+        }
+
+        .use-case-info p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin: 0 0 12px;
+        }
+
+        .use-case-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .use-case-tag {
+            padding: 4px 10px;
+            background: var(--primary-subtle);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        /* ========================================
+           Theme Toggle
+           ======================================== */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: var(--bg-card);
+            border: 1px solid var(--neutral-200);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--neutral-300);
+        }
+
+        .theme-toggle .icon-moon { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+
+        /* Back link */
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--neutral-200);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+
+        .back-link:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .demo-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .demo-nav {
+                gap: 8px;
+            }
+
+            .demo-nav-btn {
+                padding: 8px 14px;
+                font-size: 0.8125rem;
+            }
+
+            .back-link, .theme-toggle {
+                position: static;
+                margin-bottom: 16px;
+            }
+
+            .page-container {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Prototype
+    </a>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <div class="page-container">
+        <header class="demo-header">
+            <h1>Prompt Property Manager Demos</h1>
+            <p>Watch animated conversations showcasing key use cases</p>
+
+            <nav class="demo-nav">
+                <button class="demo-nav-btn active" data-demo="pets">Pets</button>
+                <button class="demo-nav-btn" data-demo="fence">Fence Approval</button>
+                <button class="demo-nav-btn" data-demo="parking">Parking</button>
+                <button class="demo-nav-btn" data-demo="airbnb">Airbnb</button>
+                <button class="demo-nav-btn" data-demo="moveout">Move Out</button>
+                <button class="demo-nav-btn" data-demo="escalation">Escalation</button>
+            </nav>
+
+            <div class="controls">
+                <button class="control-btn" id="playBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    Play Demo
+                </button>
+                <button class="control-btn secondary" id="resetBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="1 4 1 10 7 10"></polyline>
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                    </svg>
+                    Reset
+                </button>
+            </div>
+        </header>
+
+        <div class="demo-container">
+            <div class="demo-phone-frame">
+                <div class="demo-phone-notch"></div>
+            </div>
+            <div class="demo-app-header">
+                <div class="demo-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </div>
+                <div class="demo-title">
+                    <h2>Prompt</h2>
+                    <span>Oakwood Commons</span>
+                </div>
+            </div>
+            <div class="demo-chat" id="demoChat">
+                <div class="demo-messages" id="demoMessages">
+                    <!-- Messages inserted by JS -->
+                </div>
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-input">
+                <input type="text" class="demo-input-field" placeholder="Ask a question..." disabled>
+                <button class="demo-send-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="use-case-info" id="useCaseInfo">
+            <h3 id="useCaseTitle">Pet Policy Inquiry</h3>
+            <p id="useCaseDesc">#1 most common resident question. Covers weight limits, breed restrictions, deposits, and registration requirements.</p>
+            <div class="use-case-tags" id="useCaseTags">
+                <span class="use-case-tag">P0 Priority</span>
+                <span class="use-case-tag">Very High Frequency</span>
+                <span class="use-case-tag">Low Risk</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // Demo Conversations Data
+        // ============================================
+        const demos = {
+            pets: {
+                title: "Pet Policy Inquiry",
+                description: "#1 most common resident question. Covers weight limits, breed restrictions, deposits, and registration requirements.",
+                tags: ["P0 Priority", "Very High Frequency", "Low Risk"],
+                messages: [
+                    {
+                        role: "user",
+                        content: "Can I have a dog?"
+                    },
+                    {
+                        role: "assistant",
+                        content: `
+                            <div class="status-badge status-allowed">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Allowed
+                            </div>
+                            <p>Yes, dogs are allowed at Oakwood Commons.</p>
+                            <h4>Requirements:</h4>
+                            <ul>
+                                <li>Weight limit: <strong>50 lbs</strong> maximum</li>
+                                <li>Breed restrictions: Pit bulls, Rottweilers, and wolf hybrids not permitted</li>
+                                <li>Maximum: 2 pets per household</li>
+                                <li>Registration required within 14 days</li>
+                            </ul>
+                            <h4>Costs:</h4>
+                            <ul>
+                                <li>Pet deposit: $300 (refundable)</li>
+                                <li>Monthly pet rent: $25/pet</li>
+                            </ul>
+                            <div class="citation">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                                <span>Source: <a href="docs/ccrs.html#section-7-1" target="_blank">CC&Rs Section 7.1-7.3 (Page 24)</a></span>
+                            </div>
+                            <p class="followup"><a href="forms/pet-registration.html" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 500;">Yes, open the Pet Registration Form &rarr;</a></p>
+                            <p class="disclaimer">This is general policy information, not legal advice.</p>
+                        `
+                    }
+                ]
+            },
+            fence: {
+                title: "Architectural Modification - Fence",
+                description: "#2 most common HOA question and #1 source of violations. Demonstrates multi-step approval process.",
+                tags: ["P0 Priority", "Very High Frequency", "Medium Risk"],
+                messages: [
+                    {
+                        role: "user",
+                        content: "Can I put up a fence in my backyard?"
+                    },
+                    {
+                        role: "assistant",
+                        content: `
+                            <div class="status-badge status-conditional">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                                Approval Required
+                            </div>
+                            <p>Yes, fences are allowed with Architectural Review Committee (ARC) approval.</p>
+                            <h4>Requirements:</h4>
+                            <ul>
+                                <li>Maximum height: <strong>6 feet</strong></li>
+                                <li>Materials: Wood or vinyl only (no chain link)</li>
+                                <li>Colors: Must be from approved earth-tone palette</li>
+                                <li>Setback: At least 3 feet from property line</li>
+                            </ul>
+                            <h4>Approval Process:</h4>
+                            <ol>
+                                <li>Submit ARC Application</li>
+                                <li>Include fence plan and material samples</li>
+                                <li>Pay $50 application fee</li>
+                                <li>Allow 30 days for review</li>
+                            </ol>
+                            <p><strong>Important:</strong> Don't start construction before receiving written approval.</p>
+                            <div class="citation">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                                <span>Source: <a href="docs/ccrs.html#section-4-2" target="_blank">CC&Rs Section 4.1-4.2 (Page 12)</a></span>
+                            </div>
+                            <p class="followup"><a href="forms/arc-application.html" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 500;">Yes, open the ARC Application Form &rarr;</a></p>
+                            <p class="disclaimer">This is general policy information, not legal advice.</p>
+                        `
+                    }
+                ]
+            },
+            parking: {
+                title: "Parking Rules - RV Restriction",
+                description: "Top 5 most common question and violation. Demonstrates clear 'no' with alternatives offered.",
+                tags: ["P0 Priority", "Very High Frequency", "Low Risk"],
+                messages: [
+                    {
+                        role: "user",
+                        content: "Can I park my RV in the driveway?"
+                    },
+                    {
+                        role: "assistant",
+                        content: `
+                            <div class="status-badge status-prohibited">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                                Not Allowed
+                            </div>
+                            <p>No, RVs cannot be parked in driveways or on the street at Oakwood Commons.</p>
+                            <h4>Vehicle restrictions include:</h4>
+                            <ul>
+                                <li>Recreational vehicles (RVs, motorhomes)</li>
+                                <li>Boats and boat trailers</li>
+                                <li>Trailers of any kind</li>
+                                <li>Commercial vehicles with visible signage</li>
+                            </ul>
+                            <h4>Alternatives:</h4>
+                            <ul>
+                                <li><strong>Temporary:</strong> Loading/unloading up to 48 hours with management notice</li>
+                                <li><strong>Storage:</strong> Several RV storage facilities within 5 miles</li>
+                            </ul>
+                            <p>This policy maintains neighborhood appearance and property values.</p>
+                            <div class="citation">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                                <span>Source: <a href="docs/ccrs.html#section-6-4" target="_blank">CC&Rs Section 6.4 (Page 20)</a></span>
+                            </div>
+                            <p class="followup">Would you like information about nearby RV storage facilities?</p>
+                            <p class="disclaimer">This is general policy information, not legal advice.</p>
+                        `
+                    }
+                ]
+            },
+            airbnb: {
+                title: "Short-Term Rental Restriction",
+                description: "Common question with significant financial impact. Shows 'no' response with alternative options.",
+                tags: ["P1 Priority", "Medium-High Frequency", "Medium Risk"],
+                messages: [
+                    {
+                        role: "user",
+                        content: "Can I rent my unit on Airbnb?"
+                    },
+                    {
+                        role: "assistant",
+                        content: `
+                            <div class="status-badge status-prohibited">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                                Not Allowed
+                            </div>
+                            <p><strong>Short-term rentals under 30 days are not permitted</strong> at Oakwood Commons.</p>
+                            <p>I understand this may affect your plans—this policy exists to maintain community stability and comply with local regulations.</p>
+                            <h4>What IS allowed:</h4>
+                            <ul>
+                                <li>Rentals of <strong>30 days or longer</strong></li>
+                                <li>Board notification required before renting</li>
+                                <li>Tenant must receive and acknowledge community rules</li>
+                            </ul>
+                            <h4>Requirements for long-term rental:</h4>
+                            <ol>
+                                <li>Submit Rental Notification Form</li>
+                                <li>Provide tenant contact information</li>
+                                <li>Tenant receives CC&R summary</li>
+                            </ol>
+                            <div class="citation">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                                <span>Source: <a href="docs/ccrs.html#section-8-2" target="_blank">CC&Rs Section 8.2-8.4 (Page 28)</a></span>
+                            </div>
+                            <p class="followup"><a href="forms/rental-notification.html" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 500;">Yes, open the Rental Notification Form &rarr;</a></p>
+                            <p class="disclaimer">This is general policy information, not legal advice.</p>
+                        `
+                    }
+                ]
+            },
+            moveout: {
+                title: "Move-Out Procedure",
+                description: "High-impact use case affecting security deposits. Demonstrates checklist format for complex procedures.",
+                tags: ["P0 Priority", "High Frequency", "Medium Risk"],
+                messages: [
+                    {
+                        role: "user",
+                        content: "I'm moving out next month. What do I need to do?"
+                    },
+                    {
+                        role: "assistant",
+                        content: `
+                            <p>Here's your move-out checklist for Oakwood Commons:</p>
+                            <h4>Required notice:</h4>
+                            <ul>
+                                <li>Provide written notice at least <strong>30 days</strong> before move-out</li>
+                                <li>Submit via resident portal or email</li>
+                            </ul>
+                            <h4>Schedule your move:</h4>
+                            <ul>
+                                <li>Reserve elevator 72 hours in advance</li>
+                                <li>Moving hours: 8 AM - 6 PM (no Sundays)</li>
+                                <li>$50 refundable moving deposit</li>
+                            </ul>
+                            <h4>Before move-out:</h4>
+                            <ul>
+                                <li>☐ Remove all personal belongings</li>
+                                <li>☐ Clean unit thoroughly</li>
+                                <li>☐ Patch small nail holes</li>
+                                <li>☐ Replace burned-out light bulbs</li>
+                                <li>☐ Remove all trash</li>
+                                <li>☐ Return all keys and access devices</li>
+                            </ul>
+                            <h4>Security deposit:</h4>
+                            <p>Returned within <strong>21 days</strong> of move-out, minus any deductions for damage beyond normal wear.</p>
+                            <div class="citation">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                                <span>Source: <a href="docs/lease-agreement.html#section-12" target="_blank">Lease Agreement Section 12 (Page 10-11)</a></span>
+                            </div>
+                            <p class="followup"><a href="forms/moveout-inspection.html" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 500;">Yes, schedule my Move-Out Inspection &rarr;</a></p>
+                            <p class="disclaimer">This is general policy information, not legal advice.</p>
+                        `
+                    }
+                ]
+            },
+            escalation: {
+                title: "Escalation - Complex Issue",
+                description: "Demonstrates graceful handoff to human when AI can't definitively answer. Critical for trust and liability.",
+                tags: ["High Risk", "Always Escalate", "Fair Housing"],
+                messages: [
+                    {
+                        role: "user",
+                        content: "I have an emotional support animal. What do I need to do?"
+                    },
+                    {
+                        role: "assistant",
+                        content: `
+                            <p>Service animals and emotional support animals (ESAs) are accommodated under the Fair Housing Act.</p>
+                            <h4>General information:</h4>
+                            <ul>
+                                <li>Pet policies (breed restrictions, deposits) <strong>do not apply</strong> to assistance animals</li>
+                                <li>You may be asked to provide documentation of disability-related need</li>
+                                <li>The HOA cannot charge pet deposits or fees for assistance animals</li>
+                            </ul>
+                            <h4>Important:</h4>
+                            <p>Because assistance animal requests involve individual circumstances and legal protections, I recommend speaking directly with your property manager.</p>
+                            <p><strong>Sarah Chen</strong> can help you with:</p>
+                            <ul>
+                                <li>Reasonable accommodation request process</li>
+                                <li>Required documentation</li>
+                                <li>Any questions about your specific situation</li>
+                            </ul>
+                            <p style="margin-top: 16px; padding: 12px; background: var(--primary-subtle); border-radius: 8px;">
+                                <strong>Contact:</strong><br>
+                                📧 schen@oakwoodmgmt.com<br>
+                                📞 (555) 123-4567
+                            </p>
+                            <p class="followup">Would you like me to note that you have a question about assistance animal accommodations?</p>
+                            <p class="disclaimer">This is general information about Fair Housing protections, not legal advice.</p>
+                        `
+                    }
+                ]
+            }
+        };
+
+        // ============================================
+        // DOM Elements
+        // ============================================
+        const demoMessages = document.getElementById('demoMessages');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const playBtn = document.getElementById('playBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const demoNavBtns = document.querySelectorAll('.demo-nav-btn');
+        const themeToggle = document.getElementById('themeToggle');
+        const useCaseTitle = document.getElementById('useCaseTitle');
+        const useCaseDesc = document.getElementById('useCaseDesc');
+        const useCaseTags = document.getElementById('useCaseTags');
+        const demoChat = document.getElementById('demoChat');
+
+        // ============================================
+        // State
+        // ============================================
+        let currentDemo = 'pets';
+        let isPlaying = false;
+
+        // ============================================
+        // Functions
+        // ============================================
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function updateUseCaseInfo(demoKey) {
+            const demo = demos[demoKey];
+            useCaseTitle.textContent = demo.title;
+            useCaseDesc.textContent = demo.description;
+            useCaseTags.innerHTML = demo.tags.map(tag =>
+                `<span class="use-case-tag">${tag}</span>`
+            ).join('');
+        }
+
+        function resetDemo() {
+            demoMessages.innerHTML = '';
+            typingIndicator.classList.remove('visible');
+            isPlaying = false;
+            playBtn.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                Play Demo
+            `;
+        }
+
+        async function playDemo() {
+            if (isPlaying) return;
+
+            isPlaying = true;
+            playBtn.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="6" y="4" width="4" height="16"></rect>
+                    <rect x="14" y="4" width="4" height="16"></rect>
+                </svg>
+                Playing...
+            `;
+
+            resetDemo();
+            isPlaying = true;
+
+            const demo = demos[currentDemo];
+
+            for (const msg of demo.messages) {
+                if (!isPlaying) break;
+
+                if (msg.role === 'user') {
+                    // Add user message
+                    const userDiv = document.createElement('div');
+                    userDiv.className = 'message user';
+                    userDiv.innerHTML = `<div class="message-bubble"><p>${msg.content}</p></div>`;
+                    demoMessages.appendChild(userDiv);
+
+                    await sleep(100);
+                    userDiv.classList.add('visible');
+                    scrollToBottom();
+
+                    await sleep(800);
+                } else {
+                    // Show typing indicator
+                    typingIndicator.classList.add('visible');
+                    scrollToBottom();
+
+                    // Simulate typing time based on content length
+                    const typingTime = Math.min(2000, 1000 + msg.content.length / 20);
+                    await sleep(typingTime);
+
+                    // Hide typing, show message
+                    typingIndicator.classList.remove('visible');
+
+                    const assistantDiv = document.createElement('div');
+                    assistantDiv.className = 'message assistant';
+                    assistantDiv.innerHTML = `<div class="message-bubble">${msg.content}</div>`;
+                    demoMessages.appendChild(assistantDiv);
+
+                    await sleep(100);
+                    assistantDiv.classList.add('visible');
+                    scrollToBottom();
+                }
+            }
+
+            isPlaying = false;
+            playBtn.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                Replay
+            `;
+        }
+
+        function scrollToBottom() {
+            demoChat.scrollTo({
+                top: demoChat.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        function selectDemo(demoKey) {
+            currentDemo = demoKey;
+
+            // Update nav buttons
+            demoNavBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.demo === demoKey);
+            });
+
+            // Update info
+            updateUseCaseInfo(demoKey);
+
+            // Reset and auto-play
+            resetDemo();
+            setTimeout(playDemo, 300);
+        }
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('prompt-pm-theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else if (systemPrefersDark) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('prompt-pm-theme', newTheme);
+        }
+
+        // ============================================
+        // Event Listeners
+        // ============================================
+        playBtn.addEventListener('click', playDemo);
+        resetBtn.addEventListener('click', resetDemo);
+        themeToggle.addEventListener('click', toggleTheme);
+
+        demoNavBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectDemo(btn.dataset.demo);
+            });
+        });
+
+        // ============================================
+        // Initialize
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            updateUseCaseInfo(currentDemo);
+            // Auto-play first demo after a short delay
+            setTimeout(playDemo, 500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CC&Rs - Oakwood Commons Homeowners Association</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --text-primary: #1C1917;
+            --text-secondary: #57534E;
+            --bg-highlight: #FEF9C3;
+            --border: #E7E5E4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: #FAFAF9;
+        }
+
+        .document-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        }
+
+        .document-header {
+            padding: 60px 80px 40px;
+            border-bottom: 2px solid var(--text-primary);
+            text-align: center;
+        }
+
+        .document-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .document-header h2 {
+            font-size: 18px;
+            font-weight: 400;
+            margin: 0 0 16px;
+            color: var(--text-secondary);
+        }
+
+        .document-header p {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .document-body {
+            padding: 40px 80px 80px;
+        }
+
+        .toc {
+            margin-bottom: 40px;
+            padding: 24px;
+            background: #FAFAF9;
+            border-radius: 8px;
+        }
+
+        .toc h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+        }
+
+        .toc li {
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc li:last-child {
+            border-bottom: none;
+        }
+
+        .toc a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .article {
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+
+        .article-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 24px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+            scroll-margin-top: 20px;
+        }
+
+        .section-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 12px;
+            color: var(--text-primary);
+        }
+
+        .section p {
+            margin: 0 0 12px;
+            text-align: justify;
+        }
+
+        .section ul, .section ol {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: var(--bg-highlight);
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        .section:target {
+            background: var(--bg-highlight);
+            padding: 16px;
+            margin-left: -16px;
+            margin-right: -16px;
+            border-radius: 4px;
+        }
+
+        .page-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-align: right;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: white;
+            border: 1px solid #E7E5E4;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.15s ease;
+        }
+
+        .back-link:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        @media (max-width: 900px) {
+            .document-header,
+            .document-body {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .back-link {
+                position: static;
+                margin: 16px;
+                display: inline-flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../demos.html" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Demos
+    </a>
+
+    <div class="document-container">
+        <header class="document-header">
+            <h1>Declaration of Covenants, Conditions & Restrictions</h1>
+            <h2>Oakwood Commons Homeowners Association</h2>
+            <p>Recorded: January 15, 2019 | Document No. 2019-0012345 | County of Sample, State</p>
+        </header>
+
+        <div class="document-body">
+            <nav class="toc">
+                <h3>Table of Contents</h3>
+                <ul>
+                    <li><a href="#article-4">Article 4: Architectural Standards</a> (Page 10-15)</li>
+                    <li><a href="#article-6">Article 6: Vehicle & Parking Regulations</a> (Page 18-21)</li>
+                    <li><a href="#article-7">Article 7: Pet & Animal Policies</a> (Page 22-25)</li>
+                    <li><a href="#article-8">Article 8: Leasing & Rental Restrictions</a> (Page 26-29)</li>
+                </ul>
+            </nav>
+
+            <!-- Article 4: Architectural Standards -->
+            <article class="article" id="article-4">
+                <h2 class="article-title">Article 4: Architectural Standards and Modifications</h2>
+
+                <div class="section" id="section-4-1">
+                    <h3 class="section-title">Section 4.1 - Architectural Review Committee Authority</h3>
+                    <p>The Architectural Review Committee ("ARC") shall have exclusive jurisdiction over all exterior modifications, additions, or alterations to any Lot or the exterior of any structure within the Community. No Owner shall make any exterior modification without first obtaining written approval from the ARC.</p>
+                    <p>The ARC shall consist of three (3) to five (5) members appointed by the Board of Directors. The ARC shall establish and publish guidelines for architectural standards, which may be amended from time to time.</p>
+                </div>
+
+                <div class="section" id="section-4-2">
+                    <h3 class="section-title">Section 4.2 - Fences and Walls</h3>
+                    <p>The construction, installation, or modification of any fence, wall, or similar boundary structure shall require prior written approval from the ARC. The following standards shall apply to all fence installations:</p>
+                    <ul>
+                        <li><span class="highlight"><strong>Maximum Height:</strong> Six (6) feet for rear and side yard fences; four (4) feet for front yard fences</span></li>
+                        <li><span class="highlight"><strong>Approved Materials:</strong> Wood (cedar, redwood, or pressure-treated pine) or vinyl in approved colors. Chain link, wire mesh, and metal fencing are prohibited in all areas visible from streets or common areas.</span></li>
+                        <li><span class="highlight"><strong>Color Requirements:</strong> All fences must be finished in earth-tone colors from the approved palette, including: Natural wood stain, White, Tan, Brown, or Gray.</span></li>
+                        <li><span class="highlight"><strong>Setback Requirements:</strong> All fences must be set back a minimum of three (3) feet from any property line shared with common areas or neighboring lots.</span></li>
+                    </ul>
+                    <p><strong>Application Process:</strong> Owners must submit an ARC Application Form along with: (a) a site plan showing proposed fence location, (b) material specifications and color samples, (c) the $50.00 non-refundable application fee. The ARC shall respond within thirty (30) days of receipt of a complete application.</p>
+                    <p><strong>Important Notice:</strong> Construction shall not commence until written approval is received. Unapproved modifications may be subject to fines and/or mandatory removal at Owner's expense.</p>
+                    <p class="page-number">Page 12</p>
+                </div>
+            </article>
+
+            <!-- Article 6: Vehicle & Parking -->
+            <article class="article" id="article-6">
+                <h2 class="article-title">Article 6: Vehicle and Parking Regulations</h2>
+
+                <div class="section" id="section-6-4">
+                    <h3 class="section-title">Section 6.4 - Prohibited Vehicles</h3>
+                    <p>The following vehicles may not be parked, stored, or maintained on any Lot, driveway, street, or common area within the Community, except as specifically provided herein:</p>
+                    <ul>
+                        <li><span class="highlight"><strong>Recreational Vehicles:</strong> Including but not limited to motorhomes, campers, travel trailers, fifth-wheel trailers, and similar vehicles designed for temporary living accommodations.</span></li>
+                        <li><span class="highlight"><strong>Boats and Watercraft:</strong> Including boats, jet skis, kayaks (when on trailers), and boat trailers of any kind.</span></li>
+                        <li><span class="highlight"><strong>Trailers:</strong> Including utility trailers, enclosed trailers, flatbed trailers, and similar conveyances, whether attached to a vehicle or not.</span></li>
+                        <li><span class="highlight"><strong>Commercial Vehicles:</strong> Vehicles displaying commercial signage, lettering, or logos; vehicles with mounted equipment (ladders, pipe racks, etc.); and vehicles exceeding one (1) ton rated capacity.</span></li>
+                        <li><strong>Inoperable Vehicles:</strong> Any vehicle that is not currently registered, does not display valid license plates, or is not in operating condition.</li>
+                    </ul>
+                    <p><strong>Temporary Exception:</strong> Recreational vehicles and trailers may be parked in driveways for a period not to exceed forty-eight (48) hours for the purpose of loading, unloading, or preparation for travel, provided that written notice is given to the management office at least 24 hours in advance.</p>
+                    <p><strong>Purpose:</strong> These restrictions are intended to maintain the residential character and aesthetic appearance of the Community, preserve property values, and ensure adequate parking availability for residents and guests.</p>
+                    <p class="page-number">Page 20</p>
+                </div>
+            </article>
+
+            <!-- Article 7: Pet Policies -->
+            <article class="article" id="article-7">
+                <h2 class="article-title">Article 7: Pet and Animal Policies</h2>
+
+                <div class="section" id="section-7-1">
+                    <h3 class="section-title">Section 7.1 - Permitted Animals</h3>
+                    <p>Owners and residents may keep common domestic household pets, including dogs, cats, birds (non-poultry), and fish, subject to the restrictions and requirements set forth in this Article. The keeping of pets is a privilege, not a right, and may be revoked for violations of these policies.</p>
+                    <p><span class="highlight"><strong>Maximum Number:</strong> No more than two (2) pets per household shall be permitted, excluding fish maintained in aquariums of 50 gallons or less.</span></p>
+                </div>
+
+                <div class="section" id="section-7-2">
+                    <h3 class="section-title">Section 7.2 - Dog Restrictions</h3>
+                    <p>Dogs are permitted subject to the following restrictions:</p>
+                    <ul>
+                        <li><span class="highlight"><strong>Weight Limit:</strong> Dogs shall not exceed fifty (50) pounds at maturity. Owners of dogs exceeding this weight limit as of the effective date of these CC&Rs may keep such dogs but may not replace them with dogs exceeding the weight limit.</span></li>
+                        <li><span class="highlight"><strong>Breed Restrictions:</strong> The following breeds, and any mix thereof, are prohibited: Pit Bull Terriers (American Pit Bull Terrier, American Staffordshire Terrier, Staffordshire Bull Terrier), Rottweilers, and Wolf Hybrids.</span></li>
+                        <li><strong>Leash Requirement:</strong> All dogs must be kept on a leash not exceeding six (6) feet in length when outside the Owner's Lot.</li>
+                        <li><strong>Waste Removal:</strong> Owners must immediately remove and properly dispose of pet waste.</li>
+                    </ul>
+                </div>
+
+                <div class="section" id="section-7-3">
+                    <h3 class="section-title">Section 7.3 - Registration and Fees</h3>
+                    <p>All pets must be registered with the Association within fourteen (14) days of acquisition or move-in. Registration requires:</p>
+                    <ul>
+                        <li>Completed Pet Registration Form</li>
+                        <li>Proof of current vaccinations (rabies, distemper for dogs; rabies for cats)</li>
+                        <li>Proof of spay/neuter (or signed waiver with additional deposit)</li>
+                        <li>Current photograph of the pet</li>
+                    </ul>
+                    <p><span class="highlight"><strong>Pet Deposit:</strong> A refundable pet deposit of Three Hundred Dollars ($300.00) per pet is required, payable upon registration.</span></p>
+                    <p><span class="highlight"><strong>Monthly Pet Rent:</strong> A non-refundable monthly pet fee of Twenty-Five Dollars ($25.00) per pet shall be added to the Owner's regular assessment.</span></p>
+                    <p class="page-number">Page 24</p>
+                </div>
+            </article>
+
+            <!-- Article 8: Leasing & Rental -->
+            <article class="article" id="article-8">
+                <h2 class="article-title">Article 8: Leasing and Rental Restrictions</h2>
+
+                <div class="section" id="section-8-2">
+                    <h3 class="section-title">Section 8.2 - Minimum Lease Term</h3>
+                    <p><span class="highlight"><strong>Short-Term Rentals Prohibited:</strong> No Lot or dwelling unit may be leased or rented for a period of less than thirty (30) consecutive days. Daily, weekly, and other short-term rentals, including but not limited to rentals through platforms such as Airbnb, VRBO, HomeAway, or similar services, are strictly prohibited.</span></p>
+                    <p>This restriction applies regardless of whether the Owner is present during the rental period. "House-sitting" arrangements where compensation is exchanged shall be considered rentals subject to this restriction.</p>
+                </div>
+
+                <div class="section" id="section-8-3">
+                    <h3 class="section-title">Section 8.3 - Notification Requirements</h3>
+                    <p>Prior to leasing any Lot or dwelling unit, the Owner must:</p>
+                    <ol>
+                        <li><span class="highlight">Submit a completed Rental Notification Form to the Association at least fourteen (14) days before the lease commencement date.</span></li>
+                        <li><span class="highlight">Provide the tenant's name, contact information, and emergency contact.</span></li>
+                        <li>Provide a copy of the executed lease agreement.</li>
+                        <li>Ensure the tenant receives a copy of the CC&Rs, Bylaws, and Community Rules.</li>
+                        <li><span class="highlight">Obtain tenant's signed acknowledgment of receipt of governing documents.</span></li>
+                    </ol>
+                </div>
+
+                <div class="section" id="section-8-4">
+                    <h3 class="section-title">Section 8.4 - Owner Responsibility</h3>
+                    <p>The Owner shall remain fully responsible for compliance with all Association governing documents, including the actions of their tenants, guests, and invitees. Violations by tenants shall be treated as violations by the Owner and may result in fines and other enforcement actions against the Owner.</p>
+                    <p>Repeated violations by a tenant may result in the Board requiring termination of the lease as a condition of avoiding further enforcement action.</p>
+                    <p class="page-number">Page 28</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</body>
+</html>

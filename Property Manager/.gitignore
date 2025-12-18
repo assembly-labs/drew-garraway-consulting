@@ -1,0 +1,96 @@
+# ========================================
+# Prompt Property Manager - Git Ignore
+# ========================================
+
+# ----------------------------------------
+# INTERNAL / PRIVATE FILES
+# These folders contain sensitive, non-public information
+# ----------------------------------------
+/internal/
+internal/
+
+# ----------------------------------------
+# Dependencies
+# ----------------------------------------
+node_modules/
+.pnp
+.pnp.js
+
+# ----------------------------------------
+# Build Output
+# ----------------------------------------
+dist/
+dist-ssr/
+build/
+*.local
+
+# ----------------------------------------
+# Environment Variables
+# NEVER commit API keys or secrets
+# ----------------------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# ----------------------------------------
+# IDE / Editor
+# ----------------------------------------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# ----------------------------------------
+# OS Generated
+# ----------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ----------------------------------------
+# Testing
+# ----------------------------------------
+coverage/
+test-results/
+playwright-report/
+playwright/.cache/
+*.lcov
+
+# ----------------------------------------
+# Logs
+# ----------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ----------------------------------------
+# TypeScript
+# ----------------------------------------
+*.tsbuildinfo
+
+# ----------------------------------------
+# Misc
+# ----------------------------------------
+*.pem
+.cache/
+.temp/
+.tmp/
+
+# ----------------------------------------
+# Cloudflare
+# ----------------------------------------
+.wrangler/

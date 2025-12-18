@@ -1,0 +1,809 @@
+{
+  "community": {
+    "name": "Oakwood Commons HOA",
+    "type": "planned_community",
+    "units": 450,
+    "property_type": "townhomes_and_single_family",
+    "year_established": 2018,
+    "management_company": "Premier Property Management",
+    "community_manager": {
+      "name": "Sandra Chen",
+      "title": "Community Manager",
+      "email": "schen@premierprop.com",
+      "phone": "(555) 123-4567",
+      "office_hours": "Monday - Friday, 9:00 AM - 5:00 PM",
+      "office_location": "Oakwood Commons Clubhouse, 100 Oakwood Drive"
+    },
+    "board_meeting": {
+      "frequency": "Third Tuesday of each month",
+      "time": "7:00 PM",
+      "location": "Clubhouse Community Room"
+    },
+    "annual_dues": {
+      "single_family": 325,
+      "townhome": 275,
+      "due_date": "1st of each month",
+      "late_fee": 25,
+      "grace_period_days": 15
+    }
+  },
+  "documents": [
+    {
+      "id": "ccr_main",
+      "type": "ccr",
+      "title": "Declaration of Covenants, Conditions & Restrictions",
+      "effective_date": "2018-03-15",
+      "last_amended": "2023-06-01",
+      "sections": [
+        {
+          "number": "3.1",
+          "title": "Use Restrictions - Residential Use",
+          "content": "All Lots shall be used exclusively for residential purposes. No trade, business, profession, or commercial activity of any kind shall be conducted on any Lot, except that an Owner or occupant may conduct business activities within the dwelling so long as: (a) the existence or operation of the business activity is not apparent or detectable by sight, sound, or smell from outside the dwelling; (b) the business activity does not involve regular visitation of the Lot by clients, customers, suppliers, or employees; (c) the business activity does not increase traffic or parking in the community; and (d) the business activity is consistent with the residential character of the community and does not constitute a nuisance.",
+          "plain_language": "Your home must be used as a residence. You can work from home as long as it doesn't look like a business from outside, you don't have regular business visitors, and it doesn't create extra traffic or noise.",
+          "common_questions": ["work from home", "home business", "home office", "commercial", "business"]
+        },
+        {
+          "number": "3.2",
+          "title": "Use Restrictions - Prohibited Activities",
+          "content": "No noxious or offensive activity shall be carried on upon any Lot, nor shall anything be done thereon which may be or become an annoyance or nuisance to the neighborhood. Without limiting the generality of the foregoing, the following activities are expressly prohibited: (a) storage of junk, inoperable vehicles, or unsightly materials visible from neighboring properties or Common Areas; (b) repair or restoration of motor vehicles, boats, or other vehicles, except for minor maintenance within an enclosed garage; (c) discharge of firearms, except by licensed security personnel; (d) keeping of livestock, poultry, or farm animals; (e) operation of machinery or equipment that creates unreasonable noise, vibration, or interference with radio or television reception.",
+          "plain_language": "Don't do anything that bothers your neighbors. Specifically: no junk or broken cars visible outside, no working on vehicles except minor stuff in your garage, no shooting guns, no farm animals like chickens or goats, and no loud machinery.",
+          "common_questions": ["junk", "chickens", "farm animals", "car repair", "noise", "nuisance", "livestock", "poultry"]
+        },
+        {
+          "number": "4.1",
+          "title": "Architectural Control - General Requirements",
+          "content": "No building, fence, wall, swimming pool, spa, or other structure shall be commenced, erected, placed, or maintained upon any Lot, nor shall any exterior addition to or change or alteration therein be made, including but not limited to painting, changes in landscaping, installation of solar panels, satellite dishes, or exterior lighting, until the plans and specifications showing the nature, kind, shape, height, materials, color, and location of the same shall have been submitted to and approved in writing by the Architectural Review Committee (ARC). The ARC shall have thirty (30) days from receipt of a complete application to approve or deny the request. Failure to respond within thirty (30) days shall be deemed approval.",
+          "plain_language": "You need written approval from the Architectural Review Committee (ARC) before making ANY exterior changes to your property. This includes fences, paint, landscaping, solar panels, satellite dishes, and outdoor lighting. Submit your application and they have 30 days to respond.",
+          "related_forms": ["architectural_review_application"],
+          "common_questions": ["exterior changes", "ARC", "approval", "modification", "addition", "alteration"]
+        },
+        {
+          "number": "4.2",
+          "title": "Architectural Control - Approved Materials and Colors",
+          "content": "All exterior paint colors, siding materials, roofing materials, and fencing materials must be selected from the Association-approved palette and materials list, copies of which are available from the management office and on the community website. Deviation from approved colors or materials requires specific written approval from the ARC.",
+          "plain_language": "You must choose from pre-approved colors and materials for any exterior work. Get the approved list from the management office or website.",
+          "approved_colors": {
+            "exterior_body": [
+              {"name": "Desert Sand", "hex": "#D4C4B0"},
+              {"name": "Sage Meadow", "hex": "#9CAF88"},
+              {"name": "Adobe Brown", "hex": "#8B7355"},
+              {"name": "Slate Gray", "hex": "#708090"},
+              {"name": "Warm Taupe", "hex": "#B5A999"},
+              {"name": "Coastal Mist", "hex": "#B8C4C8"}
+            ],
+            "trim": [
+              {"name": "Crisp White", "hex": "#FFFFFF"},
+              {"name": "Antique Cream", "hex": "#FFFDD0"},
+              {"name": "Charcoal", "hex": "#36454F"},
+              {"name": "Deep Bronze", "hex": "#4A3C2A"}
+            ],
+            "front_door": [
+              {"name": "Classic Red", "hex": "#8B0000"},
+              {"name": "Navy Blue", "hex": "#000080"},
+              {"name": "Forest Green", "hex": "#228B22"},
+              {"name": "Black", "hex": "#000000"},
+              {"name": "Natural Wood Stain", "hex": "#8B4513"}
+            ],
+            "fence": [
+              {"name": "Natural Cedar", "hex": "#A0785A"},
+              {"name": "Desert Sand", "hex": "#D4C4B0"},
+              {"name": "Adobe Brown", "hex": "#8B7355"}
+            ]
+          },
+          "common_questions": ["paint color", "colors", "exterior paint", "approved colors", "color palette"]
+        },
+        {
+          "number": "4.3",
+          "title": "Architectural Control - Fences",
+          "content": "Fences may be erected on Lots only with prior written approval of the ARC. All fences shall comply with the following requirements: (a) maximum height of six (6) feet for rear and side yard fences, and four (4) feet for front yard fences where permitted; (b) fences must be constructed of wood, vinyl, or wrought iron only—chain link, wire mesh, and barbed wire are prohibited; (c) fence color must be selected from the approved palette; (d) front yard fences are generally prohibited except for decorative wrought iron fencing not exceeding four (4) feet in height; (e) all fences must be maintained in good condition and repair.",
+          "plain_language": "Fences need ARC approval. Back/side fences can be up to 6 feet tall, front fences up to 4 feet. Only wood, vinyl, or wrought iron allowed—no chain link. Must use approved colors and keep it maintained.",
+          "restrictions": {
+            "max_height_rear_side_ft": 6,
+            "max_height_front_ft": 4,
+            "allowed_materials": ["wood", "vinyl", "wrought iron"],
+            "prohibited_materials": ["chain link", "wire mesh", "barbed wire"]
+          },
+          "related_forms": ["architectural_review_application"],
+          "common_questions": ["fence", "fencing", "fence height", "chain link", "privacy fence"]
+        },
+        {
+          "number": "4.4",
+          "title": "Architectural Control - Landscaping",
+          "content": "All landscaping changes visible from neighboring properties or Common Areas require ARC approval. Front yard landscaping must include at least fifty percent (50%) living plant material. Artificial turf is permitted in rear yards only with ARC approval and must be of high quality, realistic appearance. Xeriscaping and drought-tolerant landscaping are encouraged but must be approved by the ARC to ensure aesthetic compatibility. Tree removal requires ARC approval except for dead, diseased, or hazardous trees, which should be reported to management.",
+          "plain_language": "Landscaping changes need ARC approval. Front yards need at least 50% real plants. Artificial turf only in backyards with approval. Drought-friendly landscaping is encouraged but needs approval. Don't remove trees without permission unless they're dead or dangerous.",
+          "related_forms": ["architectural_review_application", "tree_removal_request"],
+          "common_questions": ["landscaping", "artificial turf", "trees", "xeriscaping", "drought tolerant", "plants", "front yard"]
+        },
+        {
+          "number": "4.5",
+          "title": "Architectural Control - Solar Panels",
+          "content": "Solar panels and solar energy devices are permitted subject to ARC review and approval. Applications must include detailed plans showing panel placement, dimensions, and mounting system. The ARC may not unreasonably deny applications but may require modifications to minimize visual impact from street view where technically feasible without significantly reducing system efficiency or increasing cost by more than ten percent (10%). Ground-mounted systems require additional approval and screening.",
+          "plain_language": "Solar panels are allowed but need ARC approval. They can suggest changes to reduce how visible panels are from the street, but they can't make you do anything that reduces efficiency a lot or costs more than 10% extra. Ground-mounted panels need extra approval.",
+          "related_forms": ["architectural_review_application", "solar_panel_application"],
+          "common_questions": ["solar", "solar panels", "solar energy", "renewable energy"]
+        },
+        {
+          "number": "4.6",
+          "title": "Architectural Control - Satellite Dishes and Antennas",
+          "content": "Satellite dishes one meter (39.37 inches) or less in diameter and television antennas designed to receive video programming are permitted without ARC approval, provided they are installed in a location not visible from the street where reception is not substantially degraded. Dishes or antennas that must be visible from the street due to reception requirements should be installed in the least obtrusive location possible. Dishes larger than one meter require ARC approval.",
+          "plain_language": "Small satellite dishes (under 39 inches) don't need approval if you can put them where they're not visible from the street. If you can only get signal from a visible spot, put it in the least obvious place. Larger dishes need ARC approval.",
+          "restrictions": {
+            "max_diameter_no_approval_inches": 39.37,
+            "preferred_location": "not visible from street"
+          },
+          "common_questions": ["satellite dish", "antenna", "TV antenna", "dish"]
+        },
+        {
+          "number": "4.7",
+          "title": "Architectural Control - Holiday Decorations",
+          "content": "Holiday decorations may be displayed without ARC approval subject to the following limitations: (a) decorations may be installed no earlier than thirty (30) days before the holiday and must be removed within fifteen (15) days after the holiday; (b) decorations must not create a safety hazard, fire risk, or nuisance; (c) lighting displays must not unreasonably disturb neighbors through excessive brightness or flashing; (d) decorations must not damage Common Areas or community landscaping.",
+          "plain_language": "Holiday decorations are fine without approval. Put them up no more than 30 days before the holiday and take them down within 15 days after. Don't create safety hazards or blind your neighbors with super bright lights.",
+          "restrictions": {
+            "install_days_before": 30,
+            "remove_days_after": 15
+          },
+          "common_questions": ["holiday decorations", "Christmas lights", "decorations", "lights"]
+        },
+        {
+          "number": "5.1",
+          "title": "Maintenance - Owner Responsibilities",
+          "content": "Each Owner shall be responsible for maintaining their Lot and all improvements thereon in good condition and repair, including but not limited to: (a) exterior surfaces of all structures, including painting, repairs, and cleaning; (b) all landscaping, including lawns, plants, trees, and irrigation systems; (c) driveways, walkways, and patios; (d) fences and walls; (e) exterior lighting fixtures; (f) mailboxes and address numbers. Lawns must be mowed regularly and maintained at a height not exceeding four (4) inches. Dead plants must be replaced within sixty (60) days.",
+          "plain_language": "You're responsible for maintaining your property including: painting, repairs, landscaping, driveway, fences, lights, and mailbox. Keep your lawn under 4 inches tall and replace dead plants within 60 days.",
+          "restrictions": {
+            "max_lawn_height_inches": 4,
+            "dead_plant_replacement_days": 60
+          },
+          "common_questions": ["maintenance", "lawn", "yard maintenance", "repairs", "owner responsibility"]
+        },
+        {
+          "number": "5.2",
+          "title": "Maintenance - Association Responsibilities",
+          "content": "The Association shall be responsible for maintaining the Common Areas and the following elements: (a) all Common Area landscaping, irrigation, and lighting; (b) community amenities including the pool, clubhouse, and fitness center; (c) community entrance features and signage; (d) private streets and sidewalks within the community; (e) perimeter walls and fencing; (f) storm water management facilities. The Association is not responsible for maintenance of individual Lots or any improvements thereon.",
+          "plain_language": "The HOA takes care of: common areas, community landscaping, the pool, clubhouse, fitness center, entrance signs, community streets/sidewalks, perimeter walls, and drainage. They don't maintain your personal property.",
+          "common_questions": ["HOA maintenance", "association responsibility", "common area", "what does HOA cover"]
+        },
+        {
+          "number": "6.1",
+          "title": "Leasing and Rentals - General Requirements",
+          "content": "Owners may lease their Lots subject to the following conditions: (a) all leases must be for the entire dwelling and for a minimum term of twelve (12) months; (b) short-term rentals, including vacation rentals and rentals through platforms such as Airbnb, VRBO, or similar services, are prohibited; (c) subleasing is prohibited; (d) the Owner must provide the Association with a copy of the lease agreement and tenant contact information within ten (10) days of lease execution; (e) the Owner remains responsible for all tenant violations of the CC&Rs and community rules; (f) no more than twenty-five percent (25%) of units in the community may be leased at any time.",
+          "plain_language": "You can rent out your home, but: leases must be at least 12 months (no Airbnb or short-term rentals), no subleasing, you must give the HOA a copy of your lease and tenant info, you're responsible if your tenant breaks the rules, and there's a 25% cap on rentals in the community.",
+          "restrictions": {
+            "minimum_lease_months": 12,
+            "short_term_rentals_allowed": false,
+            "subletting_allowed": false,
+            "max_rental_percentage": 25,
+            "lease_copy_deadline_days": 10
+          },
+          "related_forms": ["tenant_registration"],
+          "common_questions": ["rent", "rental", "lease", "Airbnb", "VRBO", "short term rental", "sublease", "tenant"]
+        },
+        {
+          "number": "7.1",
+          "title": "Vehicles and Parking - Assigned Parking",
+          "content": "Each Lot is entitled to use of designated parking spaces as follows: single-family homes - two (2) garage spaces and two (2) driveway spaces; townhomes - two (2) garage spaces. All vehicles must be parked within designated spaces. Garage spaces must be maintained clear and available for vehicle parking—garages may not be converted to living space or used primarily for storage such that vehicles cannot be parked therein.",
+          "plain_language": "Single-family homes get 2 garage spaces plus 2 driveway spaces. Townhomes get 2 garage spaces. Keep your garage clear enough to actually park cars in it—you can't convert it to a room or fill it so full of stuff that cars don't fit.",
+          "restrictions": {
+            "single_family_garage_spaces": 2,
+            "single_family_driveway_spaces": 2,
+            "townhome_garage_spaces": 2
+          },
+          "common_questions": ["parking spaces", "garage", "parking", "driveway"]
+        },
+        {
+          "number": "7.2",
+          "title": "Vehicles and Parking - Guest Parking",
+          "content": "Guest parking is available in designated guest parking areas throughout the community on a first-come, first-served basis. Guest parking spaces are limited to seventy-two (72) hours of continuous use. Residents may not use guest parking spaces for their own vehicles. Guests requiring parking beyond seventy-two (72) hours must obtain a temporary parking permit from the management office.",
+          "plain_language": "Guests can park in the designated guest spots for up to 72 hours. Residents can't use guest parking for their own cars. If your guest needs to stay longer than 72 hours, get a temporary permit from the office.",
+          "restrictions": {
+            "max_guest_parking_hours": 72
+          },
+          "related_forms": ["temporary_parking_permit"],
+          "common_questions": ["guest parking", "visitor parking", "parking permit", "guest"]
+        },
+        {
+          "number": "7.3",
+          "title": "Vehicles and Parking - Prohibited Vehicles",
+          "content": "The following vehicles may not be parked, stored, or kept on any Lot or Common Area except within an enclosed garage: (a) recreational vehicles, motor homes, campers, and trailers; (b) boats and personal watercraft; (c) commercial vehicles exceeding 10,000 pounds GVWR or displaying commercial signage visible from outside the vehicle; (d) inoperable vehicles or vehicles without current registration; (e) vehicles leaking fluids onto pavement. Motorcycles, golf carts, and standard pickup trucks used for personal transportation are permitted.",
+          "plain_language": "The following can only be kept in a closed garage (not visible): RVs, campers, trailers, boats, large commercial vehicles, and vehicles with visible company logos. Broken or unregistered cars aren't allowed. Regular motorcycles and pickup trucks are fine.",
+          "restrictions": {
+            "prohibited_outside_garage": ["RVs", "motor homes", "campers", "trailers", "boats", "commercial vehicles over 10,000 lbs"],
+            "allowed": ["motorcycles", "golf carts", "pickup trucks for personal use"]
+          },
+          "common_questions": ["RV", "boat", "trailer", "commercial vehicle", "truck", "motorcycle", "work truck"]
+        },
+        {
+          "number": "7.4",
+          "title": "Vehicles and Parking - Street Parking",
+          "content": "Parking on community streets is prohibited between the hours of 11:00 PM and 6:00 AM except in designated overnight parking areas. Daytime street parking is permitted but vehicles may not be parked in the same location for more than forty-eight (48) consecutive hours. Fire lanes must remain clear at all times. The Association reserves the right to tow vehicles in violation at the owner's expense.",
+          "plain_language": "No street parking overnight (11 PM - 6 AM) unless in designated areas. During the day, you can street park but not in the same spot for more than 48 hours. Never block fire lanes. Illegally parked cars can be towed at your expense.",
+          "restrictions": {
+            "overnight_restriction_start": "23:00",
+            "overnight_restriction_end": "06:00",
+            "max_same_spot_hours": 48
+          },
+          "common_questions": ["street parking", "overnight parking", "towing", "fire lane"]
+        },
+        {
+          "number": "8.1",
+          "title": "Pets - General Policy",
+          "content": "Residents may keep common household pets subject to the following limitations: (a) maximum of three (3) pets per household, with no more than two (2) dogs; (b) dogs must not exceed sixty (60) pounds at maturity; (c) pets must be registered with the Association within thirty (30) days of acquisition or move-in; (d) a refundable pet deposit of three hundred fifty dollars ($350) per pet is required; (e) all pets must be kept under the owner's control at all times; (f) pet owners are responsible for immediate cleanup of all pet waste; (g) pets creating a nuisance through excessive noise, aggressive behavior, or property damage may be required to be removed from the community.",
+          "plain_language": "You can have up to 3 pets total, but max 2 dogs. Dogs must be under 60 lbs when fully grown. Register your pets within 30 days and pay a $350 deposit per pet (refundable). Always control your pets, clean up after them, and don't let them be a nuisance.",
+          "restrictions": {
+            "max_pets_total": 3,
+            "max_dogs": 2,
+            "max_dog_weight_lbs": 60,
+            "registration_deadline_days": 30,
+            "deposit_per_pet": 350
+          },
+          "related_forms": ["pet_registration"],
+          "common_questions": ["pet", "pets", "how many pets", "pet deposit", "pet rules"]
+        },
+        {
+          "number": "8.2",
+          "title": "Pets - Breed Restrictions",
+          "content": "The following dog breeds and their mixes are prohibited due to insurance liability concerns: Pit Bull Terriers (including American Pit Bull Terrier, American Staffordshire Terrier, and Staffordshire Bull Terrier), Rottweilers, Doberman Pinschers, German Shepherds, Chow Chows, Presa Canarios, Akitas, and Wolf Hybrids. Residents with existing restricted breeds as of the adoption of this amendment may keep their current pet but may not acquire additional restricted breeds.",
+          "plain_language": "These dog breeds are not allowed: Pit Bulls, Rottweilers, Dobermans, German Shepherds, Chow Chows, Presa Canarios, Akitas, and Wolf Hybrids (or mixes of these). If you already had one of these breeds before this rule, you can keep it but can't get another.",
+          "restrictions": {
+            "prohibited_breeds": [
+              "Pit Bull Terrier",
+              "American Pit Bull Terrier",
+              "American Staffordshire Terrier",
+              "Staffordshire Bull Terrier",
+              "Rottweiler",
+              "Doberman Pinscher",
+              "German Shepherd",
+              "Chow Chow",
+              "Presa Canario",
+              "Akita",
+              "Wolf Hybrid"
+            ]
+          },
+          "common_questions": ["breed restrictions", "pit bull", "rottweiler", "german shepherd", "banned breeds", "restricted breeds"]
+        },
+        {
+          "number": "8.3",
+          "title": "Pets - Leash Requirements",
+          "content": "All dogs must be kept on a leash not exceeding six (6) feet in length when outside the owner's Lot, including all Common Areas, streets, and sidewalks within the community. The designated dog park is the only area where dogs may be off-leash, and only when the dog is under voice control of the owner. Retractable leashes are prohibited in Common Areas.",
+          "plain_language": "Dogs must be on a leash (6 feet max) whenever outside your property. The only exception is the dog park, where dogs can be off-leash if they listen to your commands. No retractable leashes in common areas.",
+          "restrictions": {
+            "max_leash_length_ft": 6,
+            "retractable_leashes_allowed": false,
+            "off_leash_area": "designated dog park only"
+          },
+          "common_questions": ["leash", "dog leash", "off leash", "dog park"]
+        },
+        {
+          "number": "8.4",
+          "title": "Pets - Cats and Other Pets",
+          "content": "Cats must be kept indoors or within the owner's enclosed Lot. Free-roaming cats are prohibited. Other common household pets including birds, fish, hamsters, guinea pigs, rabbits, and non-venomous reptiles are permitted when kept indoors. Exotic pets including but not limited to snakes over six (6) feet, venomous reptiles, primates, large cats, bears, and other wildlife are prohibited.",
+          "plain_language": "Cats must stay inside your home or fenced yard—no outdoor roaming. Small pets like birds, fish, hamsters, guinea pigs, rabbits, and small reptiles are fine indoors. No exotic pets like large snakes, venomous animals, monkeys, or wild animals.",
+          "restrictions": {
+            "cats_must_be": "indoors or within enclosed lot",
+            "free_roaming_cats": false,
+            "allowed_indoor_pets": ["birds", "fish", "hamsters", "guinea pigs", "rabbits", "non-venomous reptiles under 6 feet"],
+            "prohibited_exotic_pets": ["snakes over 6 feet", "venomous reptiles", "primates", "large cats", "bears", "wildlife"]
+          },
+          "common_questions": ["cat", "cats", "indoor cat", "outdoor cat", "exotic pets", "reptiles", "birds", "fish tank"]
+        },
+        {
+          "number": "8.5",
+          "title": "Pets - Service and Assistance Animals",
+          "content": "Service animals and emotional support animals with proper documentation are exempt from breed and weight restrictions. Owners must provide documentation from a licensed healthcare provider for emotional support animals or certification for service animals. The Association reserves the right to require removal of any animal, regardless of status, that poses a direct threat to the health or safety of others. Reasonable accommodation requests should be submitted to the management office.",
+          "plain_language": "Service animals and emotional support animals with proper documentation are exempt from breed and weight rules. Provide documentation from your doctor for ESAs or service animal certification. Even with documentation, an animal that's dangerous to others may need to be removed.",
+          "related_forms": ["reasonable_accommodation_request"],
+          "common_questions": ["service animal", "service dog", "emotional support animal", "ESA", "assistance animal", "accommodation"]
+        },
+        {
+          "number": "9.1",
+          "title": "Insurance Requirements",
+          "content": "Each Owner shall maintain homeowner's insurance with coverage of at least the full replacement cost of all improvements on their Lot. Owners shall also maintain personal liability coverage of at least three hundred thousand dollars ($300,000). Upon request, Owners must provide the Association with evidence of current insurance coverage. Owners are encouraged to maintain coverage for assessment liability in the event of a Common Area claim.",
+          "plain_language": "You must have homeowner's insurance covering full replacement cost of your home, plus at least $300,000 in liability coverage. The HOA can ask to see proof of insurance.",
+          "restrictions": {
+            "minimum_liability_coverage": 300000
+          },
+          "common_questions": ["insurance", "homeowner insurance", "liability", "insurance requirements"]
+        },
+        {
+          "number": "10.1",
+          "title": "Enforcement and Violations - Process",
+          "content": "Violations of these CC&Rs or the community Rules and Regulations shall be addressed as follows: (a) First violation: written warning sent by mail and email detailing the violation and required corrective action; (b) Second violation of the same provision within twelve (12) months: fine of fifty dollars ($50); (c) Third violation within twelve (12) months: fine of one hundred dollars ($100); (d) Subsequent violations: fine of two hundred dollars ($200) each and potential legal action. Owners shall have fourteen (14) days from receipt of a fine notice to cure the violation or request a hearing before the Board. Continuing violations may be assessed daily fines after proper notice.",
+          "plain_language": "Violation process: 1st offense = warning letter, 2nd offense (same issue within 12 months) = $50 fine, 3rd offense = $100 fine, after that = $200 per violation plus possible legal action. You have 14 days to fix the problem or request a hearing.",
+          "violation_schedule": {
+            "first_offense": "Written warning",
+            "second_offense_fine": 50,
+            "third_offense_fine": 100,
+            "subsequent_fine": 200,
+            "cure_period_days": 14,
+            "timeframe_months": 12
+          },
+          "related_forms": ["violation_appeal"],
+          "common_questions": ["violation", "fine", "fines", "warning", "penalty", "enforcement"]
+        },
+        {
+          "number": "10.2",
+          "title": "Enforcement and Violations - Appeal Process",
+          "content": "Any Owner who receives a fine notice may appeal by submitting a written request for a hearing to the Board of Directors within fourteen (14) days of the fine notice date. The Board shall schedule a hearing within thirty (30) days of receiving the appeal request. At the hearing, the Owner may present evidence and witnesses. The Board shall render a written decision within fourteen (14) days of the hearing. The Board's decision shall be final and binding.",
+          "plain_language": "If you get a fine, you can appeal by requesting a hearing in writing within 14 days. The Board will hold a hearing within 30 days where you can present your case. They'll give you a written decision within 14 days after the hearing.",
+          "restrictions": {
+            "appeal_deadline_days": 14,
+            "hearing_deadline_days": 30,
+            "decision_deadline_days": 14
+          },
+          "related_forms": ["violation_appeal"],
+          "common_questions": ["appeal", "dispute", "contest", "hearing", "fight fine"]
+        }
+      ]
+    },
+    {
+      "id": "rules_regs",
+      "type": "rules_and_regulations",
+      "title": "Community Rules and Regulations",
+      "effective_date": "2023-01-01",
+      "last_amended": "2024-06-15",
+      "sections": [
+        {
+          "number": "R-1",
+          "title": "Quiet Hours and Noise",
+          "content": "Quiet hours are in effect during the following times: Sunday through Thursday from 10:00 PM to 7:00 AM; Friday and Saturday from 11:00 PM to 8:00 AM. During quiet hours, residents shall refrain from activities that create noise audible from neighboring Lots or Common Areas, including but not limited to: loud music or television, parties, power tools, lawn equipment, and loud conversations outdoors. Construction and renovation work is permitted only between 8:00 AM and 6:00 PM Monday through Friday, and 9:00 AM to 5:00 PM on Saturdays. No construction work is permitted on Sundays or federal holidays.",
+          "plain_language": "Keep noise down during quiet hours: 10 PM - 7 AM on weeknights, 11 PM - 8 AM on weekends. Construction work: Mon-Fri 8 AM - 6 PM, Saturdays 9 AM - 5 PM, none on Sundays or holidays.",
+          "schedule": {
+            "quiet_hours_weekday": {"start": "22:00", "end": "07:00"},
+            "quiet_hours_weekend": {"start": "23:00", "end": "08:00"},
+            "construction_weekday": {"start": "08:00", "end": "18:00"},
+            "construction_saturday": {"start": "09:00", "end": "17:00"},
+            "construction_sunday": "prohibited"
+          },
+          "common_questions": ["noise", "quiet hours", "loud music", "party", "construction hours", "renovation", "noise complaint"]
+        },
+        {
+          "number": "R-2",
+          "title": "Trash and Recycling",
+          "content": "Trash and recycling containers shall be stored within the garage or behind screening not visible from the street except during designated collection periods. Containers may be placed at the curb no earlier than 5:00 PM the evening before scheduled collection and must be returned to storage by 9:00 PM on collection day. Bulk items and large appliances require special pickup—contact the waste management company to schedule. Hazardous materials must be disposed of at designated county facilities. Dumping of any materials in Common Areas is prohibited.",
+          "plain_language": "Keep trash cans in your garage or hidden from view except on collection days. Put cans out no earlier than 5 PM the night before pickup and bring them back in by 9 PM on pickup day. Call for bulk item pickup. Don't dump anything in common areas.",
+          "schedule": {
+            "earliest_placement": "17:00 day before",
+            "latest_retrieval": "21:00 collection day"
+          },
+          "common_questions": ["trash", "garbage", "recycling", "trash cans", "bulk pickup", "collection day"]
+        },
+        {
+          "number": "R-3",
+          "title": "Garage Sales and Moving Sales",
+          "content": "Garage sales, yard sales, and moving sales are permitted subject to the following restrictions: (a) maximum of two (2) sales per household per calendar year; (b) sales may be conducted only on Saturdays and Sundays between 8:00 AM and 4:00 PM; (c) all items must be displayed within the Lot boundaries—no items in streets, sidewalks, or Common Areas; (d) all signs must be removed immediately after the sale; (e) residents must notify the management office at least three (3) days in advance of any sale.",
+          "plain_language": "You can have 2 garage sales per year, on weekends only from 8 AM - 4 PM. Keep everything on your property, remove signs after, and let the office know 3 days ahead.",
+          "restrictions": {
+            "max_sales_per_year": 2,
+            "permitted_days": ["Saturday", "Sunday"],
+            "hours": {"start": "08:00", "end": "16:00"},
+            "advance_notice_days": 3
+          },
+          "common_questions": ["garage sale", "yard sale", "moving sale", "estate sale"]
+        },
+        {
+          "number": "R-4",
+          "title": "Signs and Flags",
+          "content": "Signs are generally prohibited except: (a) one (1) professional 'For Sale' or 'For Rent' sign not exceeding eighteen (18) inches by twenty-four (24) inches; (b) one (1) security system sign; (c) political signs during election season, not more than forty-five (45) days before an election and removed within seven (7) days after; (d) temporary event signs (garage sale, open house) removed within 24 hours of event. The American flag and official state flag may be displayed on a pole attached to the dwelling not exceeding six (6) feet in length. Flags must be maintained in good condition. No flags with commercial advertising or offensive content.",
+          "plain_language": "Limited signs allowed: one For Sale/Rent sign (18\"x24\" max), one security sign, political signs near elections (45 days before, remove within 7 days after). American and state flags OK on a pole up to 6 feet. No advertising flags.",
+          "restrictions": {
+            "for_sale_sign_max_inches": "18x24",
+            "political_sign_days_before_election": 45,
+            "political_sign_removal_days_after": 7,
+            "flag_pole_max_length_ft": 6
+          },
+          "common_questions": ["signs", "for sale sign", "flag", "American flag", "political signs", "real estate sign"]
+        },
+        {
+          "number": "R-5",
+          "title": "Pool Rules",
+          "content": "The community pool is open from Memorial Day weekend through Labor Day, 6:00 AM to 10:00 PM daily. Pool rules include: (a) residents must have valid access card or be accompanied by cardholder; (b) maximum of four (4) guests per household; (c) children under fourteen (14) years of age must be accompanied by an adult at all times; (d) no glass containers in the pool area; (e) no diving in the shallow end; (f) no running on the pool deck; (g) appropriate swimwear required—no cutoffs or street clothes; (h) no alcohol in the pool area unless at an approved community event; (i) pool furniture may not be reserved; (j) no pets in the pool area. Violation of pool rules may result in suspension of pool privileges.",
+          "plain_language": "Pool is open Memorial Day to Labor Day, 6 AM - 10 PM. Bring your access card, max 4 guests, kids under 14 need adult supervision. No glass, no diving in shallow end, no running, proper swimwear required, no alcohol (except at approved events), no saving chairs, no pets.",
+          "schedule": {
+            "season_start": "Memorial Day weekend",
+            "season_end": "Labor Day",
+            "hours": {"open": "06:00", "close": "22:00"}
+          },
+          "restrictions": {
+            "max_guests": 4,
+            "child_supervision_age": 14,
+            "prohibited": ["glass containers", "diving in shallow end", "running", "cutoffs", "street clothes", "alcohol", "reserving furniture", "pets"]
+          },
+          "common_questions": ["pool", "pool hours", "swimming pool", "pool guests", "pool rules"]
+        },
+        {
+          "number": "R-6",
+          "title": "Fitness Center Rules",
+          "content": "The fitness center is available to residents twenty-four (24) hours a day, seven (7) days a week with valid access card. Rules include: (a) guests under eighteen (18) are not permitted; (b) appropriate athletic attire and closed-toe athletic shoes required; (c) users must wipe down equipment after use; (d) maximum thirty (30) minutes on cardio equipment when others are waiting; (e) no personal trainers conducting paid sessions; (f) the Association is not responsible for injuries—use equipment at your own risk; (g) report equipment malfunctions to management immediately.",
+          "plain_language": "Fitness center is open 24/7 with your access card. Must be 18+, wear workout clothes and athletic shoes, wipe equipment after use, limit cardio to 30 min if others are waiting. No paid personal training sessions allowed. Use at your own risk.",
+          "schedule": {
+            "hours": "24/7"
+          },
+          "restrictions": {
+            "minimum_age": 18,
+            "cardio_time_limit_minutes": 30,
+            "required": ["athletic attire", "closed-toe athletic shoes"],
+            "prohibited": ["paid personal training sessions"]
+          },
+          "common_questions": ["fitness center", "gym", "workout", "fitness room", "gym hours", "exercise"]
+        },
+        {
+          "number": "R-7",
+          "title": "Clubhouse Reservations",
+          "content": "The clubhouse community room may be reserved by residents for private events. Reservations require: (a) submission of reservation form at least fourteen (14) days in advance; (b) non-refundable reservation fee of seventy-five dollars ($75); (c) refundable security deposit of two hundred fifty dollars ($250); (d) maximum occupancy of seventy-five (75) persons; (e) events must conclude by 11:00 PM; (f) resident host must be present throughout the event; (g) cleaning and restoration of the room to original condition. The Association reserves the right to deny reservations that may disturb residents or damage facilities.",
+          "plain_language": "Reserve the clubhouse at least 14 days ahead. Costs: $75 reservation fee (non-refundable) plus $250 deposit (refundable if no damage). Max 75 people, must end by 11 PM, you must be there the whole time, and clean up after.",
+          "restrictions": {
+            "advance_notice_days": 14,
+            "reservation_fee": 75,
+            "security_deposit": 250,
+            "max_occupancy": 75,
+            "end_time": "23:00"
+          },
+          "related_forms": ["clubhouse_reservation"],
+          "common_questions": ["clubhouse", "reserve clubhouse", "party room", "community room", "rent clubhouse", "event space"]
+        },
+        {
+          "number": "R-8",
+          "title": "Dog Park Rules",
+          "content": "The dog park is open from dawn to dusk daily. Rules include: (a) dogs must have current vaccinations and wear visible tags; (b) owners must remain in the park and supervise their dogs at all times; (c) aggressive dogs must be removed immediately; (d) owners must clean up after their dogs; (e) maximum two (2) dogs per handler; (f) puppies under four (4) months and female dogs in heat are not permitted; (g) no food or treats in the off-leash area; (h) children under twelve (12) must be accompanied by an adult.",
+          "plain_language": "Dog park is open dawn to dusk. Dogs need current vaccines and visible tags. You must stay and supervise. Clean up after your dog. Max 2 dogs per person. No puppies under 4 months, no dogs in heat, no food/treats in the off-leash area. Kids under 12 need an adult.",
+          "restrictions": {
+            "hours": "dawn to dusk",
+            "max_dogs_per_handler": 2,
+            "minimum_puppy_age_months": 4,
+            "child_supervision_age": 12,
+            "required": ["current vaccinations", "visible tags", "owner supervision"],
+            "prohibited": ["aggressive dogs", "food or treats", "female dogs in heat"]
+          },
+          "common_questions": ["dog park", "off leash", "dog area"]
+        },
+        {
+          "number": "R-9",
+          "title": "Guest Policy",
+          "content": "Residents are responsible for the conduct of their guests at all times. Guests must be accompanied by a resident when using community amenities. Long-term guests staying more than fourteen (14) consecutive days or more than thirty (30) days in any calendar year must be registered with the management office. Unauthorized occupants may be considered a violation of the rental restrictions.",
+          "plain_language": "You're responsible for your guests' behavior. Guests need a resident with them to use amenities. If someone stays more than 14 days straight or 30 days total in a year, register them with the office.",
+          "restrictions": {
+            "consecutive_days_before_registration": 14,
+            "total_days_per_year_before_registration": 30
+          },
+          "related_forms": ["guest_registration"],
+          "common_questions": ["guests", "visitors", "long term guest", "guest policy", "house guest"]
+        },
+        {
+          "number": "R-10",
+          "title": "Move-In/Move-Out Procedures",
+          "content": "All move-in and move-out activities must be scheduled with the management office at least seventy-two (72) hours in advance. Move-in fee of one hundred fifty dollars ($150) is required. Moving activities are permitted Monday through Saturday, 8:00 AM to 6:00 PM only—no Sunday or holiday moves. Elevator pads must be used in buildings with elevators. Moving trucks may not block fire lanes or other residents' access. Residents are responsible for any damage to Common Areas during moving.",
+          "plain_language": "Schedule your move 72 hours ahead. There's a $150 move-in fee. Moving allowed Mon-Sat, 8 AM - 6 PM only (no Sundays/holidays). Use elevator pads where required. Don't block fire lanes. You pay for any damage to common areas.",
+          "restrictions": {
+            "advance_notice_hours": 72,
+            "move_in_fee": 150,
+            "permitted_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "hours": {"start": "08:00", "end": "18:00"}
+          },
+          "related_forms": ["move_in_out_notification"],
+          "common_questions": ["move in", "move out", "moving", "move-in fee", "moving truck", "moving day"]
+        },
+        {
+          "number": "R-11",
+          "title": "Solicitation and Canvassing",
+          "content": "Door-to-door solicitation and canvassing by non-residents is prohibited. Residents may not solicit other residents for commercial purposes. Distribution of commercial flyers, advertisements, or promotional materials in Common Areas or on vehicles is prohibited. Political candidates and their representatives may canvass during election periods in compliance with applicable law.",
+          "plain_language": "No door-to-door sales from non-residents. Residents can't sell to other residents. No putting flyers on cars or in common areas. Political campaigning is allowed during election season.",
+          "common_questions": ["solicitation", "door to door", "sales", "canvassing", "flyers", "advertising"]
+        },
+        {
+          "number": "R-12",
+          "title": "Common Area Use",
+          "content": "Common Areas are for the use and enjoyment of all residents. The following activities are prohibited in Common Areas: (a) ball playing, skateboarding, rollerblading, or similar activities except in designated areas; (b) barbecuing or open flames except in designated picnic areas; (c) consumption of alcohol except at approved community events or designated areas; (d) littering; (e) feeding wildlife; (f) damage to landscaping, trees, or community property; (g) blocking sidewalks, pathways, or fire lanes; (h) leaving personal property unattended.",
+          "plain_language": "Common areas are for everyone. No ball playing, skateboarding, etc. except in designated spots. BBQ only in picnic areas. No alcohol except at approved events. Don't litter, feed wildlife, damage plants, block walkways, or leave stuff unattended.",
+          "restrictions": {
+            "prohibited": ["ball playing outside designated areas", "skateboarding outside designated areas", "BBQ outside picnic areas", "alcohol outside approved events", "littering", "feeding wildlife", "damaging landscaping", "blocking pathways", "unattended personal property"]
+          },
+          "common_questions": ["common area", "community area", "BBQ", "barbecue", "picnic", "skateboard"]
+        },
+        {
+          "number": "R-13",
+          "title": "Security and Access",
+          "content": "Access cards are required for entry through community gates and use of amenities. Each household is issued two (2) access cards at no charge. Additional cards may be purchased for twenty-five dollars ($25) each. Lost or stolen cards must be reported immediately to the management office for deactivation. Tailgating (allowing non-cardholders to enter through gates) is prohibited. Do not prop gates open. Report suspicious activity to security or local police.",
+          "plain_language": "You get 2 free access cards for gates and amenities. Extra cards cost $25. Report lost cards immediately so they can be deactivated. Don't let people follow you through gates and don't prop gates open.",
+          "restrictions": {
+            "cards_per_household": 2,
+            "additional_card_cost": 25
+          },
+          "common_questions": ["access card", "gate", "key card", "security", "lost card", "gate code"]
+        },
+        {
+          "number": "R-14",
+          "title": "Exterior Storage and Appearance",
+          "content": "No items shall be stored on balconies, patios, or in yards that are visible from neighboring properties or Common Areas except: (a) patio furniture designed for outdoor use; (b) barbecue grills; (c) potted plants in appropriate containers; (d) seasonal furniture stored neatly. Specifically prohibited: indoor furniture, appliances, boxes, building materials, auto parts, bicycles (except in approved racks), and tarps or covers over stored items. Window-mounted air conditioning units are prohibited. Window treatments visible from outside must be white, off-white, or neutral in color.",
+          "plain_language": "Keep visible outdoor areas neat. OK to have: patio furniture, grills, potted plants. Not OK: indoor furniture outside, appliances, boxes, building materials, car parts, tarps over stuff, bikes (except in racks). No window AC units. Window coverings facing outside must be white or neutral.",
+          "restrictions": {
+            "allowed_visible_items": ["outdoor patio furniture", "BBQ grills", "potted plants", "seasonal furniture"],
+            "prohibited_visible_items": ["indoor furniture", "appliances", "boxes", "building materials", "auto parts", "loose bicycles", "tarps"],
+            "window_ac_units": "prohibited",
+            "window_treatment_colors": ["white", "off-white", "neutral"]
+          },
+          "common_questions": ["patio", "balcony", "storage", "appearance", "outdoor storage", "window AC", "window covering"]
+        }
+      ]
+    },
+    {
+      "id": "bylaws",
+      "type": "bylaws",
+      "title": "Bylaws of Oakwood Commons Homeowners Association",
+      "effective_date": "2018-03-15",
+      "last_amended": "2022-01-15",
+      "sections": [
+        {
+          "number": "B-1",
+          "title": "Board of Directors",
+          "content": "The Association shall be governed by a Board of Directors consisting of five (5) members elected by the membership. Directors serve two-year staggered terms. The Board shall meet at least monthly and maintain minutes of all meetings. Special meetings may be called by the President or any three (3) Directors.",
+          "plain_language": "The HOA is run by a 5-member Board elected by homeowners. Directors serve 2-year terms. The Board meets at least once a month.",
+          "common_questions": ["board", "board of directors", "HOA board", "board members", "board meeting"]
+        },
+        {
+          "number": "B-2",
+          "title": "Voting and Elections",
+          "content": "Each Lot is entitled to one (1) vote on all matters submitted to a vote of the membership. Elections are held at the annual meeting. Candidates must be Owners in good standing. Absentee voting by proxy or written ballot is permitted. A quorum of twenty percent (20%) of eligible voters is required for any membership vote.",
+          "plain_language": "Each home gets one vote. Elections happen at the annual meeting. You can vote by proxy or mail-in ballot if you can't attend. At least 20% of homeowners need to participate for a vote to count.",
+          "restrictions": {
+            "votes_per_lot": 1,
+            "quorum_percentage": 20
+          },
+          "common_questions": ["voting", "elections", "vote", "proxy", "ballot", "annual meeting"]
+        },
+        {
+          "number": "B-3",
+          "title": "Annual Meeting",
+          "content": "The annual meeting of the membership shall be held in January of each year at a time and place determined by the Board. Notice of the annual meeting shall be provided at least thirty (30) days in advance. The agenda shall include election of Directors, presentation of annual budget, and such other business as may properly come before the meeting.",
+          "plain_language": "The annual homeowner meeting is in January. You'll get 30 days' notice. They'll elect board members, present the budget, and discuss other HOA business.",
+          "restrictions": {
+            "notice_days": 30
+          },
+          "common_questions": ["annual meeting", "homeowner meeting", "membership meeting"]
+        },
+        {
+          "number": "B-4",
+          "title": "Assessments and Dues",
+          "content": "The Board shall establish annual assessments (dues) to fund the operation of the Association. Assessments are due on the first day of each month. A late fee of twenty-five dollars ($25) shall be assessed for payments received more than fifteen (15) days past due. Accounts more than sixty (60) days past due may be subject to collection proceedings and lien against the property.",
+          "plain_language": "HOA dues are due on the 1st of each month. If you're more than 15 days late, there's a $25 late fee. After 60 days late, they can start collections and put a lien on your home.",
+          "restrictions": {
+            "due_day": 1,
+            "grace_period_days": 15,
+            "late_fee": 25,
+            "collection_threshold_days": 60
+          },
+          "common_questions": ["dues", "HOA dues", "assessment", "late fee", "payment", "HOA fees"]
+        },
+        {
+          "number": "B-5",
+          "title": "Special Assessments",
+          "content": "Special assessments for capital improvements or unexpected expenses exceeding five percent (5%) of the annual budget require approval by a majority vote of the membership. The Board may levy special assessments up to five percent (5%) of the annual budget without member approval for emergency repairs.",
+          "plain_language": "Big special charges (over 5% of the budget) need homeowner vote approval. The Board can charge up to 5% of the budget for emergencies without a vote.",
+          "restrictions": {
+            "member_approval_threshold_percent": 5
+          },
+          "common_questions": ["special assessment", "extra charges", "capital improvement"]
+        }
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "id": "architectural_review_application",
+      "name": "Architectural Review Application",
+      "description": "Required for any exterior modifications including fences, paint, landscaping changes, solar panels, or structural additions",
+      "processing_time": "30 days",
+      "fee": 50,
+      "submission_methods": ["Online portal", "Email to arc@oakwoodcommons.org", "Drop off at management office"],
+      "required_documents": ["Completed application form", "Detailed description of proposed changes", "Photos of current condition", "Plans/drawings showing proposed changes", "Material samples or specifications", "Contractor information if applicable"],
+      "common_questions": ["ARC application", "modification form", "exterior change form"]
+    },
+    {
+      "id": "solar_panel_application",
+      "name": "Solar Panel Installation Application",
+      "description": "Supplemental form required for solar panel installations in addition to standard ARC application",
+      "processing_time": "30 days",
+      "fee": 0,
+      "submission_methods": ["Online portal", "Email to arc@oakwoodcommons.org"],
+      "required_documents": ["Standard ARC application", "System specifications", "Panel placement diagram", "Mounting system details", "Contractor license and insurance"],
+      "common_questions": ["solar form", "solar application", "solar panel form"]
+    },
+    {
+      "id": "tree_removal_request",
+      "name": "Tree Removal Request",
+      "description": "Required for removal of any tree larger than 4 inches in diameter, unless dead, diseased, or hazardous",
+      "processing_time": "14 days",
+      "fee": 0,
+      "submission_methods": ["Online portal", "Email to arc@oakwoodcommons.org"],
+      "required_documents": ["Completed request form", "Photos of tree", "Reason for removal", "Arborist report if applicable"],
+      "common_questions": ["tree removal", "cut down tree", "remove tree"]
+    },
+    {
+      "id": "pet_registration",
+      "name": "Pet Registration Form",
+      "description": "Required for all pets within 30 days of acquisition or move-in",
+      "processing_time": "5 business days",
+      "fee": 0,
+      "deposit": 350,
+      "submission_methods": ["Online portal", "Management office"],
+      "required_documents": ["Completed registration form", "Proof of current vaccinations", "Photo of pet", "Veterinarian contact information", "Pet deposit payment"],
+      "common_questions": ["pet registration", "register pet", "pet form", "pet deposit"]
+    },
+    {
+      "id": "tenant_registration",
+      "name": "Tenant Registration Form",
+      "description": "Required within 10 days of lease execution for all rental properties",
+      "processing_time": "5 business days",
+      "fee": 0,
+      "submission_methods": ["Online portal", "Management office"],
+      "required_documents": ["Completed registration form", "Copy of signed lease agreement", "Tenant contact information", "Owner acknowledgment of responsibility"],
+      "common_questions": ["tenant registration", "register tenant", "lease registration", "renter form"]
+    },
+    {
+      "id": "temporary_parking_permit",
+      "name": "Temporary Parking Permit",
+      "description": "For guests requiring parking beyond 72 hours",
+      "processing_time": "Same day",
+      "fee": 0,
+      "max_duration_days": 14,
+      "submission_methods": ["Online portal", "Management office"],
+      "required_documents": ["Completed permit request", "Guest information", "Vehicle information"],
+      "common_questions": ["parking permit", "guest parking permit", "temporary parking"]
+    },
+    {
+      "id": "clubhouse_reservation",
+      "name": "Clubhouse Reservation Form",
+      "description": "Reserve the clubhouse community room for private events",
+      "processing_time": "7 business days",
+      "fee": 75,
+      "deposit": 250,
+      "advance_notice_days": 14,
+      "submission_methods": ["Online portal", "Management office"],
+      "required_documents": ["Completed reservation form", "Event details", "Estimated attendance", "Payment of fees and deposit"],
+      "common_questions": ["reserve clubhouse", "clubhouse reservation", "rent community room", "book clubhouse"]
+    },
+    {
+      "id": "move_in_out_notification",
+      "name": "Move-In/Move-Out Notification",
+      "description": "Required 72 hours in advance of any moving activity",
+      "processing_time": "Same day",
+      "fee": 150,
+      "submission_methods": ["Online portal", "Management office"],
+      "required_documents": ["Completed notification form", "Scheduled date and time", "Moving company information", "Payment of move-in fee"],
+      "common_questions": ["moving form", "move in form", "move out form", "moving notification"]
+    },
+    {
+      "id": "guest_registration",
+      "name": "Extended Guest Registration",
+      "description": "Required for guests staying more than 14 consecutive days or 30 days in a calendar year",
+      "processing_time": "3 business days",
+      "fee": 0,
+      "submission_methods": ["Online portal", "Management office"],
+      "required_documents": ["Completed registration form", "Guest information", "Expected duration of stay"],
+      "common_questions": ["guest registration", "register guest", "long term guest form"]
+    },
+    {
+      "id": "reasonable_accommodation_request",
+      "name": "Reasonable Accommodation Request",
+      "description": "Request for accommodation under Fair Housing Act, including service animal or assistance animal",
+      "processing_time": "10 business days",
+      "fee": 0,
+      "submission_methods": ["Management office", "Email to manager@oakwoodcommons.org"],
+      "required_documents": ["Completed request form", "Description of accommodation needed", "Documentation from licensed healthcare provider (for ESA/assistance animals)", "Service animal certification (if applicable)"],
+      "common_questions": ["accommodation request", "service animal form", "ESA form", "fair housing"]
+    },
+    {
+      "id": "violation_appeal",
+      "name": "Violation Appeal Request",
+      "description": "Request a hearing to appeal a violation notice or fine",
+      "processing_time": "Hearing scheduled within 30 days",
+      "fee": 0,
+      "deadline_days": 14,
+      "submission_methods": ["Written letter to Board", "Management office"],
+      "required_documents": ["Written appeal request", "Violation notice reference", "Explanation and supporting evidence"],
+      "common_questions": ["appeal violation", "dispute fine", "contest violation", "appeal form"]
+    },
+    {
+      "id": "access_card_request",
+      "name": "Access Card Request",
+      "description": "Request additional access cards or replacement for lost/stolen cards",
+      "processing_time": "Same day",
+      "fee": 25,
+      "submission_methods": ["Management office"],
+      "required_documents": ["Completed request form", "Proof of residency", "Payment for additional cards"],
+      "common_questions": ["access card", "key card", "gate card", "replacement card"]
+    }
+  ],
+  "contacts": {
+    "management_office": {
+      "name": "Premier Property Management",
+      "phone": "(555) 123-4567",
+      "email": "info@oakwoodcommons.org",
+      "hours": "Monday - Friday, 9:00 AM - 5:00 PM",
+      "address": "100 Oakwood Drive, Suite 101"
+    },
+    "community_manager": {
+      "name": "Sandra Chen",
+      "phone": "(555) 123-4567 ext. 101",
+      "email": "schen@premierprop.com"
+    },
+    "emergency_after_hours": {
+      "phone": "(555) 999-8888",
+      "description": "For urgent matters only: water leaks, security concerns, or safety hazards"
+    },
+    "maintenance_requests": {
+      "email": "maintenance@oakwoodcommons.org",
+      "portal": "https://oakwoodcommons.residentportal.com/maintenance"
+    },
+    "arc_submissions": {
+      "email": "arc@oakwoodcommons.org",
+      "description": "For architectural review applications and inquiries"
+    },
+    "accounting": {
+      "email": "accounting@premierprop.com",
+      "phone": "(555) 123-4567 ext. 102",
+      "description": "For dues payments, account inquiries, and billing questions"
+    },
+    "security": {
+      "phone": "(555) 123-4000",
+      "description": "Community security patrol - available 24/7"
+    },
+    "pool_issues": {
+      "email": "maintenance@oakwoodcommons.org",
+      "phone": "(555) 123-4567 ext. 103"
+    },
+    "board_of_directors": {
+      "email": "board@oakwoodcommons.org",
+      "description": "For communications to the Board of Directors"
+    }
+  },
+  "amenities": {
+    "pool": {
+      "name": "Community Swimming Pool",
+      "location": "Adjacent to Clubhouse",
+      "hours": "6:00 AM - 10:00 PM (Memorial Day - Labor Day)",
+      "features": ["25-meter lap pool", "Separate kids' wading pool", "Lounge chairs and umbrellas", "Restrooms and changing rooms"]
+    },
+    "fitness_center": {
+      "name": "Fitness Center",
+      "location": "Clubhouse, Lower Level",
+      "hours": "24/7 with access card",
+      "features": ["Treadmills", "Ellipticals", "Stationary bikes", "Free weights", "Weight machines", "Stretching area"]
+    },
+    "clubhouse": {
+      "name": "Community Clubhouse",
+      "location": "100 Oakwood Drive",
+      "features": ["Community room (seats 75)", "Kitchen facilities", "Restrooms", "Management office"],
+      "reservation": "Available for private events with advance reservation"
+    },
+    "dog_park": {
+      "name": "Bark Park",
+      "location": "East side of community, near entrance 2",
+      "hours": "Dawn to dusk",
+      "features": ["Fully fenced", "Separate small dog area", "Waste stations", "Benches", "Water fountain for dogs"]
+    },
+    "playground": {
+      "name": "Children's Playground",
+      "location": "Central park area",
+      "hours": "Dawn to dusk",
+      "features": ["Play structure for ages 5-12", "Swings", "Benches for parents", "Rubberized safety surface"]
+    },
+    "walking_trails": {
+      "name": "Walking Trails",
+      "description": "1.5 miles of paved walking paths throughout the community",
+      "features": ["Pet-friendly", "Well-lit", "Connects to all community areas"]
+    }
+  },
+  "important_dates": {
+    "board_meetings": "Third Tuesday of each month, 7:00 PM, Clubhouse",
+    "annual_meeting": "Third Saturday of January",
+    "pool_season": "Memorial Day weekend through Labor Day",
+    "dues_due": "1st of each month",
+    "arc_meetings": "First and third Wednesday of each month"
+  },
+  "quick_reference": {
+    "emergency": "911",
+    "after_hours_emergency": "(555) 999-8888",
+    "management_office": "(555) 123-4567",
+    "security": "(555) 123-4000",
+    "gate_code_assistance": "(555) 123-4567 ext. 100"
+  }
+}

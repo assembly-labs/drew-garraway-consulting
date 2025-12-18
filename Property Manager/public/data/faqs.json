@@ -1,0 +1,196 @@
+{
+  "categories": [
+    {
+      "id": "pets",
+      "name": "Pets",
+      "icon": "paw-print",
+      "description": "Pet policies, restrictions, and registration",
+      "suggested_questions": [
+        "Can I have a dog?",
+        "What breeds are restricted?",
+        "How many pets can I have?",
+        "What's the pet deposit?",
+        "Where can dogs be off-leash?",
+        "Are cats allowed outside?",
+        "How do I register my pet?",
+        "What about service animals?"
+      ]
+    },
+    {
+      "id": "parking",
+      "name": "Parking",
+      "icon": "car",
+      "description": "Parking rules, guest parking, and vehicle restrictions",
+      "suggested_questions": [
+        "Where can my guests park?",
+        "Can I park on the street overnight?",
+        "Can I keep my RV here?",
+        "How long can guest parking be used?",
+        "Can I have a work truck?",
+        "What about motorcycles?",
+        "Where can I store my boat?",
+        "What if I have more than 2 cars?"
+      ]
+    },
+    {
+      "id": "pool",
+      "name": "Pool & Amenities",
+      "icon": "waves",
+      "description": "Pool hours, rules, and community amenities",
+      "suggested_questions": [
+        "What are the pool hours?",
+        "When does the pool open for the season?",
+        "Can I bring guests to the pool?",
+        "Is the fitness center 24/7?",
+        "How do I reserve the clubhouse?",
+        "Are there rules for the dog park?",
+        "Can I have alcohol at the pool?",
+        "What are the gym rules?"
+      ]
+    },
+    {
+      "id": "modifications",
+      "name": "Home Modifications",
+      "icon": "hammer",
+      "description": "Architectural changes, approvals, and restrictions",
+      "suggested_questions": [
+        "Can I build a fence?",
+        "What paint colors are approved?",
+        "Do I need approval for solar panels?",
+        "Can I change my landscaping?",
+        "How do I submit an ARC application?",
+        "Can I install a satellite dish?",
+        "What about holiday decorations?",
+        "Can I add a patio cover?"
+      ]
+    },
+    {
+      "id": "noise",
+      "name": "Noise & Quiet Hours",
+      "icon": "volume-x",
+      "description": "Quiet hours, noise policies, and construction times",
+      "suggested_questions": [
+        "What are the quiet hours?",
+        "When can I do construction work?",
+        "Can I have a party?",
+        "How do I report a noise complaint?",
+        "What's the policy on loud music?",
+        "When can contractors work?",
+        "Are there different rules for weekends?",
+        "What counts as a noise violation?"
+      ]
+    },
+    {
+      "id": "guests",
+      "name": "Guests & Visitors",
+      "icon": "users",
+      "description": "Guest policies, long-term visitors, and registration",
+      "suggested_questions": [
+        "How long can guests stay?",
+        "Do I need to register long-term guests?",
+        "Can guests use the pool?",
+        "What about visiting family staying for a month?",
+        "How do I get guest parking permits?",
+        "Are guests allowed in the fitness center?",
+        "What's my responsibility for guest behavior?",
+        "How many guests can I have at the pool?"
+      ]
+    },
+    {
+      "id": "fees",
+      "name": "Fees & Payments",
+      "icon": "credit-card",
+      "description": "HOA dues, fees, fines, and payment information",
+      "suggested_questions": [
+        "How much are HOA dues?",
+        "When are dues due?",
+        "What's the late fee?",
+        "How do I pay my dues?",
+        "What's the move-in fee?",
+        "How much is the pet deposit?",
+        "What does the clubhouse rental cost?",
+        "What are the violation fines?"
+      ]
+    },
+    {
+      "id": "moving",
+      "name": "Move-In/Move-Out",
+      "icon": "truck",
+      "description": "Moving procedures, fees, and scheduling",
+      "suggested_questions": [
+        "What's the move-in process?",
+        "Is there a move-in fee?",
+        "What days can I move?",
+        "What hours are moves allowed?",
+        "How far in advance do I need to schedule?",
+        "Are there elevator rules for moving?",
+        "What about moving on Sunday?",
+        "Who do I contact to schedule?"
+      ]
+    },
+    {
+      "id": "rentals",
+      "name": "Renting & Leasing",
+      "icon": "home",
+      "description": "Rental policies, Airbnb, and tenant registration",
+      "suggested_questions": [
+        "Can I rent out my home?",
+        "Is Airbnb allowed?",
+        "What's the minimum lease term?",
+        "Do I need to register my tenant?",
+        "Can I sublease?",
+        "Am I responsible for my tenant?",
+        "What's the rental cap?",
+        "Can I do short-term rentals?"
+      ]
+    },
+    {
+      "id": "violations",
+      "name": "Violations & Appeals",
+      "icon": "alert-triangle",
+      "description": "Violation process, fines, and how to appeal",
+      "suggested_questions": [
+        "What happens if I get a violation?",
+        "How much are fines?",
+        "Can I appeal a violation?",
+        "How long do I have to fix a violation?",
+        "What's the appeal process?",
+        "How many warnings before a fine?",
+        "Can I request a hearing?",
+        "Who reviews appeals?"
+      ]
+    }
+  ],
+  "featured_questions": [
+    {
+      "question": "Can I have a dog?",
+      "category": "pets",
+      "popularity": 95
+    },
+    {
+      "question": "What are the pool hours?",
+      "category": "pool",
+      "popularity": 90
+    },
+    {
+      "question": "Where can guests park?",
+      "category": "parking",
+      "popularity": 85
+    },
+    {
+      "question": "What paint colors are approved?",
+      "category": "modifications",
+      "popularity": 80
+    },
+    {
+      "question": "When are quiet hours?",
+      "category": "noise",
+      "popularity": 78
+    },
+    {
+      "question": "How much are HOA dues?",
+      "category": "fees",
+      "popularity": 75
+    }
+  ]
+}
