@@ -10,7 +10,7 @@ NC='\033[0m' # No Color
 
 # Get the root of the git repo
 REPO_ROOT=$(git rev-parse --show-toplevel)
-FHM_DIR="$REPO_ROOT/_franklin_hugh_money"
+FHM_DIR="$REPO_ROOT/franklin-hugh-money"
 
 # Check if we're in the right context
 if [ ! -d "$FHM_DIR" ]; then
@@ -19,7 +19,7 @@ if [ ! -d "$FHM_DIR" ]; then
 fi
 
 # Check if any CSS or JS files in public/ are staged
-STAGED_ASSETS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '_franklin_hugh_money/public/.*\.(css|js)$' | grep -v '.min.')
+STAGED_ASSETS=$(git diff --cached --name-only --diff-filter=ACM | grep -E 'franklin-hugh-money/public/.*\.(css|js)$' | grep -v '.min.')
 
 if [ -z "$STAGED_ASSETS" ]; then
     # No asset files staged, nothing to do
@@ -47,7 +47,7 @@ fi
 cd "$REPO_ROOT"
 
 # Check if any HTML files were modified by cache-bust (using full path from repo root)
-MODIFIED_HTML=$(git diff --name-only -- '_franklin_hugh_money/public/*.html')
+MODIFIED_HTML=$(git diff --name-only -- 'franklin-hugh-money/public/*.html')
 
 if [ -n "$MODIFIED_HTML" ]; then
     echo -e "${GREEN}[FHM Cache-Bust]${NC} Re-staging modified HTML files..."

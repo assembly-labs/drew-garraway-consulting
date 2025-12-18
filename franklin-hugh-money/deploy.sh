@@ -10,7 +10,7 @@ echo ""
 
 # Check if we're in the right directory
 if [ ! -f "package.json" ] || [ ! -d "public" ]; then
-    echo "❌ Error: Must run from _franklin_hugh_money directory"
+    echo "❌ Error: Must run from franklin-hugh-money directory"
     echo "   Current directory: $(pwd)"
     exit 1
 fi
@@ -120,4 +120,4 @@ echo ""
 echo "💡 Tip: Use incognito mode to avoid cache issues when checking"
 
 # Return to original directory
-cd _franklin_hugh_money
+cd franklin-hugh-money
