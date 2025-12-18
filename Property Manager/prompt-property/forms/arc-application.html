@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARC Application - Oakwood Commons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --success: #059669;
+            --warning: #D97706;
+            --error: #DC2626;
+            --text-primary: #1C1917;
+            --text-secondary: #57534E;
+            --text-muted: #A8A29E;
+            --bg-app: #FAFAF9;
+            --bg-card: #FFFFFF;
+            --border: #E7E5E4;
+            --border-focus: #4F46E5;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-app);
+        }
+
+        .demo-banner {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-bottom: 2px solid #F59E0B;
+            padding: 12px 24px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .demo-banner-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .demo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #F59E0B;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .demo-badge svg { width: 14px; height: 14px; }
+
+        .demo-text { color: #92400E; font-size: 13px; }
+        .demo-text strong { font-weight: 600; }
+
+        .page-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 32px 24px 60px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 24px;
+            transition: color 0.15s;
+        }
+
+        .back-link:hover { color: var(--primary); }
+        .back-link svg { width: 16px; height: 16px; }
+
+        .form-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .form-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(to bottom, #FFFFFF, #FAFAF9);
+        }
+
+        .form-header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 4px;
+        }
+
+        .form-header p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .form-body { padding: 32px; }
+
+        .form-section { margin-bottom: 32px; }
+        .form-section:last-child { margin-bottom: 0; }
+
+        .form-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-row.single { grid-template-columns: 1fr; }
+
+        .form-group { display: flex; flex-direction: column; }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-label .required { color: var(--error); }
+
+        .form-input, .form-select, .form-textarea {
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text-primary);
+            background: white;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-input::placeholder { color: var(--text-muted); }
+        .form-textarea { min-height: 100px; resize: vertical; }
+        .form-hint { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+        .checkbox-group { display: flex; flex-direction: column; gap: 10px; }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .checkbox-item input {
+            margin-top: 2px;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            font-size: 14px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .radio-item input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .radio-item label {
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .file-upload {
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            background: var(--bg-app);
+            cursor: pointer;
+            transition: border-color 0.15s, background 0.15s;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: #EEF2FF;
+        }
+
+        .file-upload svg {
+            width: 32px;
+            height: 32px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .file-upload p { margin: 0; font-size: 14px; color: var(--text-secondary); }
+        .file-upload span { color: var(--primary); font-weight: 500; }
+
+        .info-box {
+            background: #EEF2FF;
+            border: 1px solid #C7D2FE;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .info-box h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1E40AF;
+            margin: 0 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-box h4 svg { width: 16px; height: 16px; }
+
+        .info-box ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 13px;
+            color: #1E40AF;
+        }
+
+        .info-box li { margin-bottom: 4px; }
+
+        .fee-summary {
+            background: #F0FDF4;
+            border: 1px solid #BBF7D0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 24px;
+        }
+
+        .fee-summary h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #166534;
+            margin: 0 0 12px;
+        }
+
+        .fee-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .fee-row:last-child {
+            margin-bottom: 0;
+            padding-top: 8px;
+            border-top: 1px solid #BBF7D0;
+            font-weight: 600;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            padding: 24px 32px;
+            background: var(--bg-app);
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover { background: var(--primary-hover); }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-app);
+            border-color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+            .form-body, .form-actions { padding: 24px; }
+            .demo-banner-content { flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-banner">
+        <div class="demo-banner-content">
+            <span class="demo-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                Demo Only
+            </span>
+            <span class="demo-text">
+                <strong>This form is for demonstration purposes only.</strong> No data will be submitted or saved.
+            </span>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <a href="../demos.html" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back to Demos
+        </a>
+
+        <div class="form-card">
+            <div class="form-header">
+                <h1>Architectural Review Committee Application</h1>
+                <p>Oakwood Commons Homeowners Association</p>
+            </div>
+
+            <div class="form-body">
+                <div class="info-box">
+                    <h4>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        Before You Submit
+                    </h4>
+                    <ul>
+                        <li>Review CC&Rs Section 4 for architectural guidelines</li>
+                        <li>Allow 30 days for ARC review and response</li>
+                        <li>Do NOT begin construction until written approval is received</li>
+                        <li>Approval is valid for 6 months from date of issuance</li>
+                    </ul>
+                </div>
+
+                <!-- Owner Information -->
+                <div class="form-section">
+                    <h3 class="form-section-title">Owner Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">First Name <span class="required">*</span></label>
+                            <input type="text" class="form-input" placeholder="John">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name <span class="required">*</span></label>
+                            <input type="text" class="form-input" placeholder="Smith">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Property Address <span class="required">*</span></label>
+                            <input type="text" class="form-input" placeholder="123 Oakwood Lane">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Unit/Lot Number <span class="required">*</span></label>
+                            <input type="text" class="form-input" placeholder="e.g., Lot 45">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Phone Number <span class="required">*</span></label>
+                            <input type="tel" class="form-input" placeholder="(555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Address <span class="required">*</span></label>
+                            <input type="email" class="form-input" placeholder="john.smith@email.com">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Type -->
+                <div class="form-section">
+                    <h3 class="form-section-title">Type of Modification</h3>
+                    <div class="form-group">
+                        <label class="form-label">Select all that apply <span class="required">*</span></label>
+                        <div class="checkbox-group" style="margin-top: 8px;">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fence" checked>
+                                <label for="fence">Fence or Wall</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="deck">
+                                <label for="deck">Deck or Patio</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="landscaping">
+                                <label for="landscaping">Landscaping</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="paint">
+                                <label for="paint">Exterior Paint/Stain</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="roofing">
+                                <label for="roofing">Roofing</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="solar">
+                                <label for="solar">Solar Panels</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="other">
+                                <label for="other">Other (describe below)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Details -->
+                <div class="form-section">
+                    <h3 class="form-section-title">Project Details</h3>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label class="form-label">Project Description <span class="required">*</span></label>
+                            <textarea class="form-textarea" placeholder="Describe the proposed modification in detail. Include dimensions, location on property, and any other relevant information.">Install a 6-foot privacy fence along the rear and side property lines. Fence will be cedar wood with a natural stain finish. Total length approximately 150 linear feet.</textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Proposed Start Date</label>
+                            <input type="date" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Estimated Completion Date</label>
+                            <input type="date" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label class="form-label">Contractor Information (if applicable)</label>
+                            <input type="text" class="form-input" placeholder="Company name, license number">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Materials -->
+                <div class="form-section">
+                    <h3 class="form-section-title">Materials & Colors</h3>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label class="form-label">Materials to be Used <span class="required">*</span></label>
+                            <textarea class="form-textarea" placeholder="List all materials, including manufacturer and product names if known.">Cedar wood fence boards (6" dog-ear style)
+4x4 cedar posts
+Concrete for post footings
+Natural cedar stain (Behr Premium Semi-Transparent #ST-533)</textarea>
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label class="form-label">Color Selection <span class="required">*</span></label>
+                            <select class="form-select">
+                                <option value="">Select from approved palette...</option>
+                                <option value="natural" selected>Natural Wood Stain</option>
+                                <option value="white">White</option>
+                                <option value="tan">Tan / Beige</option>
+                                <option value="brown">Brown</option>
+                                <option value="gray">Gray</option>
+                            </select>
+                            <span class="form-hint">Per CC&Rs Section 4.2, fences must be earth-tone colors from the approved palette</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attachments -->
+                <div class="form-section">
+                    <h3 class="form-section-title">Required Attachments</h3>
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label class="form-label">Site Plan / Plot Map <span class="required">*</span></label>
+                        <div class="file-upload">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            <p><span>Click to upload</span> site plan showing modification location</p>
+                            <p style="font-size: 12px; color: var(--text-muted);">PDF, JPG, or PNG</p>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label class="form-label">Material Samples / Photos</label>
+                        <div class="file-upload">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                            <p><span>Click to upload</span> photos of materials and color samples</p>
+                            <p style="font-size: 12px; color: var(--text-muted);">JPG or PNG, max 10MB total</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Additional Documents</label>
+                        <div class="file-upload">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                            </svg>
+                            <p><span>Click to upload</span> contractor bids, permits, or other documents</p>
+                            <p style="font-size: 12px; color: var(--text-muted);">PDF only</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acknowledgments -->
+                <div class="form-section">
+                    <h3 class="form-section-title">Acknowledgments</h3>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="guidelines">
+                            <label for="guidelines">I have reviewed the Architectural Guidelines and CC&Rs Section 4 <span class="required">*</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="wait">
+                            <label for="wait">I understand I must wait for written approval before starting construction <span class="required">*</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="accurate">
+                            <label for="accurate">All information provided is accurate to the best of my knowledge <span class="required">*</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="fee">
+                            <label for="fee">I agree to pay the non-refundable application fee <span class="required">*</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fee Summary -->
+                <div class="fee-summary">
+                    <h4>Application Fee</h4>
+                    <div class="fee-row">
+                        <span>ARC Application Fee (non-refundable)</span>
+                        <span>$50.00</span>
+                    </div>
+                    <div class="fee-row">
+                        <span>Total Due</span>
+                        <span>$50.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="window.close()">Cancel</button>
+                <button class="btn btn-primary" onclick="alert('This is a demo form. No data will be submitted.')">Submit Application</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

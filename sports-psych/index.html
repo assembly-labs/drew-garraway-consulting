@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Sports Wisdom</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="hero-section">
+            <h1 class="title">DAILY SPORTS WISDOM</h1>
+            <div class="date-display" id="currentDate"></div>
+        </header>
+
+        <main class="content-wrapper">
+            <!-- Quote of the Day Section -->
+            <section class="quote-section">
+                <div class="section-label">QUOTE OF THE DAY</div>
+                <blockquote class="main-quote" id="mainQuote">
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                </blockquote>
+                <cite class="quote-author" id="quoteAuthor">— Lorem Ipsum, Professional Athlete</cite>
+            </section>
+
+            <!-- Simplified Version Section -->
+            <section class="simplified-section">
+                <div class="section-label">WHAT THIS MEANS</div>
+                <div class="simplified-text" id="simplifiedText">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                </div>
+            </section>
+
+            <!-- Think About It Section -->
+            <section class="reflection-section">
+                <div class="section-label">THINK ABOUT IT</div>
+                <div class="reflection-text" id="reflectionText">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit? Duis aute irure dolor in reprehenderit in voluptate velit esse?</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>Quote #{<span id="quoteNumber">1</span>} • Come back tomorrow for more wisdom</p>
+        </footer>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator">
+        <span class="scroll-text">Learn More</span>
+        <div class="scroll-arrow"></div>
+    </div>
+
+    <script src="quotes-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document - Demo Placeholder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #1C1917;
+            background: #FAFAF9;
+        }
+
+        .demo-banner {
+            background: linear-gradient(135deg, #EEF2FF 0%, #C7D2FE 100%);
+            border-bottom: 2px solid #3B82F6;
+            padding: 16px 24px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .demo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #3B82F6;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .demo-text {
+            color: #1E40AF;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .document-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        }
+
+        .document-header {
+            padding: 60px 80px 40px;
+            border-bottom: 2px solid #1E293B;
+            text-align: center;
+        }
+
+        .document-header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .document-header p {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #78716C;
+            margin: 0;
+        }
+
+        .document-body {
+            padding: 60px 80px;
+        }
+
+        .fpo-section {
+            margin-bottom: 48px;
+        }
+
+        .fpo-label {
+            display: inline-block;
+            background: #E7E5E4;
+            color: #57534E;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+
+        .fpo-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1C1917;
+            margin: 0 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #E7E5E4;
+        }
+
+        .fpo-content {
+            background: #FAFAF9;
+            border: 2px dashed #D6D3D1;
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .fpo-lorem {
+            color: #A8A29E;
+            margin: 0 0 16px;
+        }
+
+        .fpo-lorem:last-child {
+            margin-bottom: 0;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: white;
+            border: 1px solid #E7E5E4;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #78716C;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .back-link:hover {
+            border-color: #4F46E5;
+            color: #4F46E5;
+        }
+
+        @media (max-width: 900px) {
+            .document-header, .document-body {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+            .back-link {
+                position: static;
+                margin: 16px;
+                display: inline-flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-banner">
+        <span class="demo-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+            </svg>
+            FPO - For Position Only
+        </span>
+        <p class="demo-text">This document is placeholder content for demonstration purposes.</p>
+    </div>
+
+    <a href="../index.html" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Chat
+    </a>
+
+    <div class="document-container">
+        <header class="document-header">
+            <h1>Community Governing Documents</h1>
+            <p>Placeholder Document for Demo</p>
+        </header>
+
+        <div class="document-body">
+            <div class="fpo-section">
+                <span class="fpo-label">Section 1 - FPO Content</span>
+                <h2 class="fpo-title">Article 1: General Provisions</h2>
+                <div class="fpo-content">
+                    <p class="fpo-lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p class="fpo-lorem">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+
+            <div class="fpo-section">
+                <span class="fpo-label">Section 2 - FPO Content</span>
+                <h2 class="fpo-title">Article 2: Property Regulations</h2>
+                <div class="fpo-content">
+                    <p class="fpo-lorem">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    <p class="fpo-lorem">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                </div>
+            </div>
+
+            <div class="fpo-section">
+                <span class="fpo-label">Section 3 - FPO Content</span>
+                <h2 class="fpo-title">Article 3: Community Standards</h2>
+                <div class="fpo-content">
+                    <p class="fpo-lorem">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+                    <p class="fpo-lorem">Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
