@@ -1,0 +1,10 @@
+# Cloudflare Pages configuration
+name = "bjj-journal"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "npm run build"
+cwd = "."
+
+[build.upload]
+dir = "dist"
