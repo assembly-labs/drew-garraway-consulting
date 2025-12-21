@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BJJ Journal - Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <h1>BJJ Journal Design System</h1>
+    <p>Living documentation of UI elements, components, and patterns</p>
+  </header>
+
+  <div class="container">
+    <!-- Tab Navigation -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="foundations">Foundations</button>
+      <button class="tab" data-tab="components">Components</button>
+      <button class="tab" data-tab="patterns">Patterns</button>
+      <button class="tab" data-tab="voice">Voice & Copy</button>
+    </nav>
+
+    <!-- ==========================================
+         FOUNDATIONS TAB
+         ========================================== -->
+    <div id="foundations" class="tab-content active">
+
+      <!-- Colors -->
+      <section class="section">
+        <h2 class="section-title">Colors</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Primary Brand</h3>
+          <div class="flex flex-wrap gap-lg">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#000;color:#fff;">Primary</div>
+              <span class="swatch-label">#000000</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#1a1a1a;color:#fff;">Primary Light</div>
+              <span class="swatch-label">#1A1A1A</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#FCD34D;">Accent</div>
+              <span class="swatch-label">#FCD34D</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#FBBF24;">Accent Hover</div>
+              <span class="swatch-label">#FBBF24</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#F59E0B;">Accent Dark</div>
+              <span class="swatch-label">#F59E0B</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Belt Colors</h3>
+          <div class="flex flex-wrap gap-lg">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#fff;border:2px solid #ddd;">White</div>
+              <span class="swatch-label">#FFFFFF</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#0033A0;color:#fff;">Blue</div>
+              <span class="swatch-label">#0033A0</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#4B0082;color:#fff;">Purple</div>
+              <span class="swatch-label">#4B0082</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#8B4513;color:#fff;">Brown</div>
+              <span class="swatch-label">#8B4513</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#000;color:#fff;">Black</div>
+              <span class="swatch-label">#000000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Training Types</h3>
+          <div class="flex flex-wrap gap-lg">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#3B82F6;color:#fff;">Gi</div>
+              <span class="swatch-label">#3B82F6</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#F97316;color:#fff;">No-Gi</div>
+              <span class="swatch-label">#F97316</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#A855F7;color:#fff;">Open Mat</div>
+              <span class="swatch-label">#A855F7</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#22C55E;color:#fff;">Private</div>
+              <span class="swatch-label">#22C55E</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#EF4444;color:#fff;">Competition</div>
+              <span class="swatch-label">#EF4444</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Status Colors</h3>
+          <div class="flex flex-wrap gap-lg">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#22C55E;color:#fff;">Success</div>
+              <span class="swatch-label">#22C55E</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#F59E0B;color:#fff;">Warning</div>
+              <span class="swatch-label">#F59E0B</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#EF4444;color:#fff;">Error</div>
+              <span class="swatch-label">#EF4444</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#3B82F6;color:#fff;">Info</div>
+              <span class="swatch-label">#3B82F6</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Grayscale</h3>
+          <div class="flex flex-wrap gap-lg">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#FAFAFA;">50</div>
+              <span class="swatch-label">#FAFAFA</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#F5F5F5;">100</div>
+              <span class="swatch-label">#F5F5F5</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#E5E5E5;">200</div>
+              <span class="swatch-label">#E5E5E5</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#D4D4D4;">300</div>
+              <span class="swatch-label">#D4D4D4</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#A3A3A3;">400</div>
+              <span class="swatch-label">#A3A3A3</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#6B7280;color:#fff;">500</div>
+              <span class="swatch-label">#6B7280</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#374151;color:#fff;">700</div>
+              <span class="swatch-label">#374151</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#171717;color:#fff;">900</div>
+              <span class="swatch-label">#171717</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Typography -->
+      <section class="section">
+        <h2 class="section-title">Typography</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Headings (Montserrat)</h3>
+          <div class="card">
+            <h1>H1 - BJJ JOURNAL HEADING</h1>
+            <h2 style="margin-top:var(--space-md)">H2 - SECTION TITLE</h2>
+            <h3 style="margin-top:var(--space-md)">H3 - SUBSECTION</h3>
+            <h4 style="margin-top:var(--space-md)">H4 - CARD TITLE</h4>
+            <h5 style="margin-top:var(--space-md)">H5 - SMALL HEADING</h5>
+            <h6 style="margin-top:var(--space-md)">H6 - LABEL</h6>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Body Text (Open Sans)</h3>
+          <div class="card">
+            <p style="font-size:var(--text-lg)">Large text - 1.125rem / 18px</p>
+            <p style="font-size:var(--text-base)">Base text - 1rem / 16px - Default body copy for paragraphs and content.</p>
+            <p style="font-size:var(--text-sm)">Small text - 0.875rem / 14px - Secondary information and captions.</p>
+            <p style="font-size:var(--text-xs);margin:0">Extra small - 0.75rem / 12px - Labels, badges, timestamps.</p>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Text Styles</h3>
+          <div class="card">
+            <p class="font-bold">Bold text - font-weight: 700</p>
+            <p class="text-muted">Muted text - color: gray-500</p>
+            <p class="text-uppercase">UPPERCASE WITH TRACKING</p>
+            <p style="margin:0"><a href="#">Link style - underlined with accent color</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Spacing -->
+      <section class="section">
+        <h2 class="section-title">Spacing Scale</h2>
+        <div class="card">
+          <div class="flex flex-col gap-md">
+            <div class="spacing-demo">
+              <div class="spacing-bar" style="width:4px"></div>
+              <span class="text-small" style="min-width:50px">XS</span>
+              <span class="text-small text-muted">4px</span>
+              <code class="text-xs text-muted">--space-xs</code>
+            </div>
+            <div class="spacing-demo">
+              <div class="spacing-bar" style="width:8px"></div>
+              <span class="text-small" style="min-width:50px">SM</span>
+              <span class="text-small text-muted">8px</span>
+              <code class="text-xs text-muted">--space-sm</code>
+            </div>
+            <div class="spacing-demo">
+              <div class="spacing-bar" style="width:16px"></div>
+              <span class="text-small" style="min-width:50px">MD</span>
+              <span class="text-small text-muted">16px</span>
+              <code class="text-xs text-muted">--space-md</code>
+            </div>
+            <div class="spacing-demo">
+              <div class="spacing-bar" style="width:24px"></div>
+              <span class="text-small" style="min-width:50px">LG</span>
+              <span class="text-small text-muted">24px</span>
+              <code class="text-xs text-muted">--space-lg</code>
+            </div>
+            <div class="spacing-demo">
+              <div class="spacing-bar" style="width:32px"></div>
+              <span class="text-small" style="min-width:50px">XL</span>
+              <span class="text-small text-muted">32px</span>
+              <code class="text-xs text-muted">--space-xl</code>
+            </div>
+            <div class="spacing-demo">
+              <div class="spacing-bar" style="width:48px"></div>
+              <span class="text-small" style="min-width:50px">2XL</span>
+              <span class="text-small text-muted">48px</span>
+              <code class="text-xs text-muted">--space-2xl</code>
+            </div>
+            <div class="spacing-demo">
+              <div class="spacing-bar" style="width:64px"></div>
+              <span class="text-small" style="min-width:50px">3XL</span>
+              <span class="text-small text-muted">64px</span>
+              <code class="text-xs text-muted">--space-3xl</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Border Radius -->
+      <section class="section">
+        <h2 class="section-title">Border Radius</h2>
+        <div class="flex flex-wrap gap-xl">
+          <div class="text-center">
+            <div style="width:80px;height:80px;background:var(--color-gray-200);border-radius:4px;margin-bottom:var(--space-sm)"></div>
+            <span class="text-small">SM</span><br>
+            <span class="text-xs text-muted">4px</span>
+          </div>
+          <div class="text-center">
+            <div style="width:80px;height:80px;background:var(--color-gray-200);border-radius:8px;margin-bottom:var(--space-sm)"></div>
+            <span class="text-small">MD</span><br>
+            <span class="text-xs text-muted">8px</span>
+          </div>
+          <div class="text-center">
+            <div style="width:80px;height:80px;background:var(--color-gray-200);border-radius:12px;margin-bottom:var(--space-sm)"></div>
+            <span class="text-small">LG</span><br>
+            <span class="text-xs text-muted">12px</span>
+          </div>
+          <div class="text-center">
+            <div style="width:80px;height:80px;background:var(--color-gray-200);border-radius:16px;margin-bottom:var(--space-sm)"></div>
+            <span class="text-small">XL</span><br>
+            <span class="text-xs text-muted">16px</span>
+          </div>
+          <div class="text-center">
+            <div style="width:80px;height:80px;background:var(--color-gray-200);border-radius:9999px;margin-bottom:var(--space-sm)"></div>
+            <span class="text-small">Full</span><br>
+            <span class="text-xs text-muted">9999px</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shadows -->
+      <section class="section">
+        <h2 class="section-title">Shadows</h2>
+        <div class="flex flex-wrap gap-xl">
+          <div class="text-center">
+            <div class="shadow-demo" style="box-shadow:var(--shadow-sm);margin-bottom:var(--space-sm)"></div>
+            <span class="text-small">SM</span>
+          </div>
+          <div class="text-center">
+            <div class="shadow-demo" style="box-shadow:var(--shadow-md);margin-bottom:var(--space-sm)"></div>
+            <span class="text-small">MD</span>
+          </div>
+          <div class="text-center">
+            <div class="shadow-demo" style="box-shadow:var(--shadow-lg);margin-bottom:var(--space-sm)"></div>
+            <span class="text-small">LG</span>
+          </div>
+          <div class="text-center">
+            <div class="shadow-demo" style="box-shadow:var(--shadow-xl);margin-bottom:var(--space-sm)"></div>
+            <span class="text-small">XL</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mobile-First Guidelines -->
+      <section class="section">
+        <h2 class="section-title">Mobile-First Guidelines</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Design Philosophy</h3>
+          <div class="card card-accent">
+            <p style="margin:0"><strong>Mobile is the primary platform.</strong> A sweeping majority of BJJ practitioners will log their training sessions on their phones immediately after class. All designs start with mobile and enhance for larger screens.</p>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Responsive Breakpoints</h3>
+          <div class="card">
+            <div class="flex flex-col gap-md">
+              <div class="flex items-center gap-md">
+                <div style="min-width:100px;font-weight:600;color:var(--color-accent-text)">Base</div>
+                <div class="text-small">0 - 767px (Mobile phones)</div>
+                <div class="text-xs text-muted">Default styles</div>
+              </div>
+              <div class="flex items-center gap-md">
+                <div style="min-width:100px;font-weight:600;color:var(--color-accent-text)">Tablet</div>
+                <div class="text-small">768px+ (Tablets, small laptops)</div>
+                <code class="text-xs text-muted">min-width: 768px</code>
+              </div>
+              <div class="flex items-center gap-md">
+                <div style="min-width:100px;font-weight:600;color:var(--color-accent-text)">Desktop</div>
+                <div class="text-small">1024px+ (Laptops, desktops)</div>
+                <code class="text-xs text-muted">min-width: 1024px</code>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Touch Target Guidelines</h3>
+          <div class="card">
+            <div class="flex flex-wrap gap-xl items-center" style="margin-bottom:var(--space-lg)">
+              <div class="text-center">
+                <div style="width:44px;height:44px;background:var(--color-success);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;margin-bottom:var(--space-xs)">44</div>
+                <span class="text-xs text-muted">Minimum</span>
+              </div>
+              <div class="text-center">
+                <div style="width:48px;height:48px;background:var(--color-accent);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-weight:bold;margin-bottom:var(--space-xs)">48</div>
+                <span class="text-xs text-muted">Recommended</span>
+              </div>
+              <div class="text-center">
+                <div style="width:56px;height:56px;background:var(--color-info);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;margin-bottom:var(--space-xs)">56</div>
+                <span class="text-xs text-muted">Primary Action</span>
+              </div>
+            </div>
+            <div class="alert alert-warning">
+              <span class="alert-icon">!</span>
+              <span class="text-small"><strong>All interactive elements must be at least 44x44px</strong> for comfortable thumb tapping. This includes buttons, links, form controls, and toggle areas.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Mobile Typography Scale</h3>
+          <div class="card">
+            <table style="width:100%;border-collapse:collapse">
+              <thead>
+                <tr style="border-bottom:1px solid var(--color-gray-200)">
+                  <th style="text-align:left;padding:var(--space-sm) 0" class="text-small">Element</th>
+                  <th style="text-align:left;padding:var(--space-sm) 0" class="text-small">Mobile (Base)</th>
+                  <th style="text-align:left;padding:var(--space-sm) 0" class="text-small">Tablet (768px+)</th>
+                  <th style="text-align:left;padding:var(--space-sm) 0" class="text-small">Desktop (1024px+)</th>
+                </tr>
+              </thead>
+              <tbody class="text-small">
+                <tr style="border-bottom:1px solid var(--color-gray-200)">
+                  <td style="padding:var(--space-xs) 0">H1</td>
+                  <td style="padding:var(--space-xs) 0">1.5rem (24px)</td>
+                  <td style="padding:var(--space-xs) 0">1.875rem (30px)</td>
+                  <td style="padding:var(--space-xs) 0">2.25rem (36px)</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--color-gray-200)">
+                  <td style="padding:var(--space-xs) 0">H2</td>
+                  <td style="padding:var(--space-xs) 0">1.25rem (20px)</td>
+                  <td style="padding:var(--space-xs) 0">1.5rem (24px)</td>
+                  <td style="padding:var(--space-xs) 0">1.875rem (30px)</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--color-gray-200)">
+                  <td style="padding:var(--space-xs) 0">H3</td>
+                  <td style="padding:var(--space-xs) 0">1.125rem (18px)</td>
+                  <td style="padding:var(--space-xs) 0">1.25rem (20px)</td>
+                  <td style="padding:var(--space-xs) 0">1.5rem (24px)</td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-xs) 0">Stat Value</td>
+                  <td style="padding:var(--space-xs) 0">1.5rem (24px)</td>
+                  <td style="padding:var(--space-xs) 0">1.875rem (30px)</td>
+                  <td style="padding:var(--space-xs) 0">2.25rem (36px)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Best Practices Checklist</h3>
+          <div class="card">
+            <div class="flex flex-col gap-sm">
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-success);font-weight:bold">&#10003;</span>
+                <span class="text-small">Touch targets minimum 44x44px</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-success);font-weight:bold">&#10003;</span>
+                <span class="text-small">Buttons have 12px+ spacing between them</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-success);font-weight:bold">&#10003;</span>
+                <span class="text-small">Forms use native input types (number, date, etc.)</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-success);font-weight:bold">&#10003;</span>
+                <span class="text-small">Single-column layout on mobile</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-success);font-weight:bold">&#10003;</span>
+                <span class="text-small">Critical actions within thumb reach zone</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-success);font-weight:bold">&#10003;</span>
+                <span class="text-small">No hover-only interactions (touch devices don't hover)</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-success);font-weight:bold">&#10003;</span>
+                <span class="text-small">Safe area insets for notched devices (iPhone)</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-success);font-weight:bold">&#10003;</span>
+                <span class="text-small">Reduced motion support for accessibility</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Post-Training UX Guidelines -->
+      <section class="section">
+        <h2 class="section-title">Post-Training UX Guidelines</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">User State: "Fat-Fingered & Exhausted"</h3>
+          <div class="card card-accent">
+            <p style="margin-bottom:var(--space-md)"><strong>Our users are logging sessions immediately after training.</strong> This means:</p>
+            <div class="grid grid-2" style="gap:var(--space-lg)">
+              <div>
+                <h4 style="margin-bottom:var(--space-sm);color:var(--color-error)">PHYSICAL STATE</h4>
+                <ul style="font-size:var(--text-sm);padding-left:var(--space-md);margin:0">
+                  <li style="margin-bottom:var(--space-xs)">Sweaty, slippery fingers</li>
+                  <li style="margin-bottom:var(--space-xs)">Hands swollen from gripping</li>
+                  <li style="margin-bottom:var(--space-xs)">Trembling from exertion</li>
+                  <li style="margin-bottom:var(--space-xs)">Reduced fine motor control</li>
+                  <li>Often standing, one-handed</li>
+                </ul>
+              </div>
+              <div>
+                <h4 style="margin-bottom:var(--space-sm);color:var(--color-warning)">MENTAL STATE</h4>
+                <ul style="font-size:var(--text-sm);padding-left:var(--space-md);margin:0">
+                  <li style="margin-bottom:var(--space-xs)">Cognitive fatigue</li>
+                  <li style="margin-bottom:var(--space-xs)">Impatient (want to shower)</li>
+                  <li style="margin-bottom:var(--space-xs)">Memory fading fast</li>
+                  <li style="margin-bottom:var(--space-xs)">Low tolerance for complexity</li>
+                  <li>Easily distracted</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Enlarged Touch Targets for Entry Flows</h3>
+          <div class="card">
+            <p class="text-small" style="margin-bottom:var(--space-md)">Standard 44px minimum is NOT enough for post-training users. Entry flows must use larger targets:</p>
+            <div class="flex flex-wrap gap-xl items-end" style="margin-bottom:var(--space-lg)">
+              <div class="text-center">
+                <div style="width:44px;height:44px;background:var(--color-gray-300);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-weight:bold;margin-bottom:var(--space-xs)">44</div>
+                <span class="text-xs text-muted">Standard</span><br>
+                <span class="text-xs" style="color:var(--color-error)">Too small!</span>
+              </div>
+              <div class="text-center">
+                <div style="width:56px;height:56px;background:var(--color-accent);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-weight:bold;margin-bottom:var(--space-xs)">56</div>
+                <span class="text-xs text-muted">Selection Pills</span><br>
+                <span class="text-xs" style="color:var(--color-success)">Minimum</span>
+              </div>
+              <div class="text-center">
+                <div style="width:64px;height:64px;background:var(--color-accent-button);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;margin-bottom:var(--space-xs)">64</div>
+                <span class="text-xs text-muted">Primary Actions</span><br>
+                <span class="text-xs" style="color:var(--color-success)">Recommended</span>
+              </div>
+              <div class="text-center">
+                <div style="width:80px;height:80px;background:var(--color-primary);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;margin-bottom:var(--space-xs)">80</div>
+                <span class="text-xs text-muted">Training Type</span><br>
+                <span class="text-xs" style="color:var(--color-success)">Ideal</span>
+              </div>
+            </div>
+            <div class="alert alert-warning">
+              <span class="alert-icon">!</span>
+              <span class="text-small"><strong>Minimum 16px gap</strong> between all touch targets to prevent accidental mis-taps with sweaty fingers.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Tap-First Input Philosophy</h3>
+          <div class="card">
+            <p class="text-small" style="margin-bottom:var(--space-md)"><strong>Reduce typing to near-zero.</strong> Exhausted users can't type accurately. Prefer taps over keyboards:</p>
+            <table style="width:100%;border-collapse:collapse">
+              <thead>
+                <tr style="border-bottom:1px solid var(--color-gray-200)">
+                  <th style="text-align:left;padding:var(--space-sm) 0" class="text-small">Input</th>
+                  <th style="text-align:left;padding:var(--space-sm) 0" class="text-small" style="color:var(--color-error)">Avoid</th>
+                  <th style="text-align:left;padding:var(--space-sm) 0" class="text-small" style="color:var(--color-success)">Prefer</th>
+                </tr>
+              </thead>
+              <tbody class="text-small">
+                <tr style="border-bottom:1px solid var(--color-gray-200)">
+                  <td style="padding:var(--space-sm) 0">Duration</td>
+                  <td style="padding:var(--space-sm) 0;color:var(--color-error)">Text input "90"</td>
+                  <td style="padding:var(--space-sm) 0;color:var(--color-success)">Preset buttons: 30 | 60 | 90 | 120</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--color-gray-200)">
+                  <td style="padding:var(--space-sm) 0">Date</td>
+                  <td style="padding:var(--space-sm) 0;color:var(--color-error)">Date picker</td>
+                  <td style="padding:var(--space-sm) 0;color:var(--color-success)">Today (default) | Yesterday | Pick...</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--color-gray-200)">
+                  <td style="padding:var(--space-sm) 0">Training Type</td>
+                  <td style="padding:var(--space-sm) 0;color:var(--color-error)">Dropdown menu</td>
+                  <td style="padding:var(--space-sm) 0;color:var(--color-success)">Large button grid (remember last)</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--color-gray-200)">
+                  <td style="padding:var(--space-sm) 0">Techniques</td>
+                  <td style="padding:var(--space-sm) 0;color:var(--color-error)">Search + type</td>
+                  <td style="padding:var(--space-sm) 0;color:var(--color-success)">Recent/Favorites first, then search</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--color-gray-200)">
+                  <td style="padding:var(--space-sm) 0">Energy Level</td>
+                  <td style="padding:var(--space-sm) 0;color:var(--color-error)">Slider</td>
+                  <td style="padding:var(--space-sm) 0;color:var(--color-success)">5 large tappable buttons</td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-sm) 0">Notes</td>
+                  <td style="padding:var(--space-sm) 0;color:var(--color-error)">Required field</td>
+                  <td style="padding:var(--space-sm) 0;color:var(--color-success)">Optional + voice-to-text option</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Quick Log Flow: 3 Taps Max</h3>
+          <div class="card">
+            <p class="text-small" style="margin-bottom:var(--space-md)">For exhausted users who just want to log and go:</p>
+            <div class="flex items-center gap-md" style="margin-bottom:var(--space-lg);overflow-x:auto;padding-bottom:var(--space-sm)">
+              <div style="min-width:100px;text-align:center">
+                <div style="width:80px;height:80px;background:var(--color-training-gi);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;margin:0 auto var(--space-xs)">GI</div>
+                <span class="text-xs text-muted">Tap 1: Type</span>
+              </div>
+              <div style="font-size:var(--text-2xl);color:var(--color-gray-300)">→</div>
+              <div style="min-width:100px;text-align:center">
+                <div style="width:80px;height:80px;background:var(--color-accent);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-weight:bold;margin:0 auto var(--space-xs)">90</div>
+                <span class="text-xs text-muted">Tap 2: Duration</span>
+              </div>
+              <div style="font-size:var(--text-2xl);color:var(--color-gray-300)">→</div>
+              <div style="min-width:100px;text-align:center">
+                <div style="width:80px;height:80px;background:var(--color-success);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;margin:0 auto var(--space-xs)">✓</div>
+                <span class="text-xs text-muted">Tap 3: Save</span>
+              </div>
+            </div>
+            <div class="alert alert-success">
+              <span class="alert-icon">&#10003;</span>
+              <span class="text-small"><strong>Session logged in under 10 seconds.</strong> Additional details can be added later from "Recent Sessions."</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Error Prevention Strategies</h3>
+          <div class="card">
+            <div class="flex flex-col gap-md">
+              <div class="flex gap-md">
+                <div style="width:40px;height:40px;background:var(--color-accent);border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0">1</div>
+                <div>
+                  <div class="font-bold text-small">Large Hit Areas = Fewer Mis-taps</div>
+                  <div class="text-xs text-muted">Entire list row is tappable, not just the small checkbox</div>
+                </div>
+              </div>
+              <div class="flex gap-md">
+                <div style="width:40px;height:40px;background:var(--color-accent);border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0">2</div>
+                <div>
+                  <div class="font-bold text-small">Auto-Save Drafts</div>
+                  <div class="text-xs text-muted">Never lose data if app is closed accidentally</div>
+                </div>
+              </div>
+              <div class="flex gap-md">
+                <div style="width:40px;height:40px;background:var(--color-accent);border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0">3</div>
+                <div>
+                  <div class="font-bold text-small">Undo for Recent Actions</div>
+                  <div class="text-xs text-muted">"Session deleted" → [UNDO] toast notification</div>
+                </div>
+              </div>
+              <div class="flex gap-md">
+                <div style="width:40px;height:40px;background:var(--color-accent);border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0">4</div>
+                <div>
+                  <div class="font-bold text-small">Confirm Destructive Actions Only</div>
+                  <div class="text-xs text-muted">Delete requires confirmation; edits save automatically</div>
+                </div>
+              </div>
+              <div class="flex gap-md">
+                <div style="width:40px;height:40px;background:var(--color-accent);border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0">5</div>
+                <div>
+                  <div class="font-bold text-small">Forgiving Validation</div>
+                  <div class="text-xs text-muted">Accept partial entries; prompt for missing data later</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Visual Feedback for Tired Eyes</h3>
+          <div class="card">
+            <p class="text-small" style="margin-bottom:var(--space-md)">Exhausted users need <strong>obvious</strong> feedback that their taps registered:</p>
+            <div class="flex flex-wrap gap-lg items-center">
+              <div class="text-center">
+                <button class="btn btn-primary btn-lg" style="min-width:120px">SAVE</button>
+                <div class="text-xs text-muted" style="margin-top:var(--space-sm)">Large primary button</div>
+              </div>
+              <div class="text-center">
+                <div style="width:64px;height:64px;background:var(--color-success);border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;color:white;font-size:var(--text-2xl);font-weight:bold">✓</div>
+                <div class="text-xs text-muted" style="margin-top:var(--space-sm)">Success animation</div>
+              </div>
+              <div class="text-center">
+                <div class="alert alert-success" style="padding:var(--space-sm) var(--space-md)">
+                  <span style="font-weight:bold;margin-right:var(--space-sm)">✓</span>
+                  <span class="text-small">Session saved!</span>
+                </div>
+                <div class="text-xs text-muted" style="margin-top:var(--space-sm)">Confirmation toast</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Post-Training UX Checklist</h3>
+          <div class="card" style="background:var(--color-primary);color:var(--color-white)">
+            <h4 style="color:var(--color-accent);margin-bottom:var(--space-md)">BEFORE SHIPPING ANY ENTRY FLOW:</h4>
+            <div class="flex flex-col gap-sm">
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-accent)">□</span>
+                <span class="text-small">Can this be completed in 3 taps or less?</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-accent)">□</span>
+                <span class="text-small">Are all touch targets 56px+ for entry flows?</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-accent)">□</span>
+                <span class="text-small">Is there 16px+ spacing between targets?</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-accent)">□</span>
+                <span class="text-small">Does it work one-handed (bottom-heavy layout)?</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-accent)">□</span>
+                <span class="text-small">Is typing reduced to optional notes only?</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-accent)">□</span>
+                <span class="text-small">Are smart defaults pre-selected?</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-accent)">□</span>
+                <span class="text-small">Is success feedback obvious and immediate?</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-accent)">□</span>
+                <span class="text-small">Does it auto-save to prevent data loss?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================
+         COMPONENTS TAB
+         ========================================== -->
+    <div id="components" class="tab-content">
+
+      <!-- Buttons -->
+      <section class="section">
+        <h2 class="section-title">Buttons</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Button Variants</h3>
+          <div class="flex flex-wrap gap-md items-center">
+            <button class="btn">Default</button>
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-dark">Dark</button>
+            <button class="btn btn-outline">Outline</button>
+            <button class="btn btn-success">Success</button>
+            <button class="btn btn-danger">Danger</button>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Button Sizes</h3>
+          <div class="flex flex-wrap gap-md items-center">
+            <button class="btn btn-sm btn-primary">Small</button>
+            <button class="btn btn-primary">Default</button>
+            <button class="btn btn-lg btn-primary">Large</button>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Button States</h3>
+          <div class="flex flex-wrap gap-md items-center">
+            <button class="btn btn-primary">Normal</button>
+            <button class="btn btn-primary" style="opacity:0.8">Hover (simulated)</button>
+            <button class="btn btn-primary" disabled>Disabled</button>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Icon Buttons</h3>
+          <div class="flex flex-wrap gap-md items-center">
+            <button class="btn btn-primary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Add Session
+            </button>
+            <button class="btn btn-outline">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              Search
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cards -->
+      <section class="section">
+        <h2 class="section-title">Cards</h2>
+        <div class="grid grid-auto">
+          <div class="card">
+            <h4 style="margin-bottom:var(--space-sm)">DEFAULT CARD</h4>
+            <p class="text-muted text-small" style="margin:0">Basic card with padding and border. Used as the primary container for content.</p>
+          </div>
+          <div class="card card-accent">
+            <h4 style="margin-bottom:var(--space-sm)">ACCENT BORDER CARD</h4>
+            <p class="text-muted text-small" style="margin:0">Card with accent left border. Used for coach feedback and highlights.</p>
+          </div>
+          <div class="card card-dark">
+            <h4 style="margin-bottom:var(--space-sm)">HERO CARD</h4>
+            <p style="margin:0;color:var(--color-gray-300);font-size:var(--text-sm)">Dark gradient card for hero sections and emphasis.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Belt Badges -->
+      <section class="section">
+        <h2 class="section-title">Belt Badges</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">All Belt Colors</h3>
+          <div class="flex flex-wrap gap-xl items-center">
+            <div class="text-center">
+              <div class="belt-badge belt-badge-lg belt-white"></div>
+              <p class="text-small text-muted" style="margin-top:var(--space-xs);margin-bottom:0">White</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-badge-lg belt-blue"></div>
+              <p class="text-small text-muted" style="margin-top:var(--space-xs);margin-bottom:0">Blue</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-badge-lg belt-purple"></div>
+              <p class="text-small text-muted" style="margin-top:var(--space-xs);margin-bottom:0">Purple</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-badge-lg belt-brown"></div>
+              <p class="text-small text-muted" style="margin-top:var(--space-xs);margin-bottom:0">Brown</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-badge-lg belt-black"></div>
+              <p class="text-small text-muted" style="margin-top:var(--space-xs);margin-bottom:0">Black</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">With Stripes (Blue Belt Example)</h3>
+          <div class="flex flex-wrap gap-xl items-center">
+            <div class="text-center">
+              <div class="belt-badge belt-badge-lg belt-blue"></div>
+              <p class="text-small text-muted" style="margin-top:var(--space-xs);margin-bottom:0">0 stripes</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-badge-lg belt-blue">
+                <div class="belt-stripe"></div>
+              </div>
+              <p class="text-small text-muted" style="margin-top:var(--space-xs);margin-bottom:0">1 stripe</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-badge-lg belt-blue">
+                <div class="belt-stripe"></div>
+                <div class="belt-stripe"></div>
+              </div>
+              <p class="text-small text-muted" style="margin-top:var(--space-xs);margin-bottom:0">2 stripes</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-badge-lg belt-blue">
+                <div class="belt-stripe"></div>
+                <div class="belt-stripe"></div>
+                <div class="belt-stripe"></div>
+              </div>
+              <p class="text-small text-muted" style="margin-top:var(--space-xs);margin-bottom:0">3 stripes</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-badge-lg belt-blue">
+                <div class="belt-stripe"></div>
+                <div class="belt-stripe"></div>
+                <div class="belt-stripe"></div>
+                <div class="belt-stripe"></div>
+              </div>
+              <p class="text-small text-muted" style="margin-top:var(--space-xs);margin-bottom:0">4 stripes</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Sizes</h3>
+          <div class="flex flex-wrap gap-xl items-center">
+            <div class="text-center">
+              <div class="belt-badge belt-badge-sm belt-purple">
+                <div class="belt-stripe"></div>
+                <div class="belt-stripe"></div>
+              </div>
+              <p class="text-small text-muted" style="margin-top:var(--space-xs);margin-bottom:0">SM</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-badge-md belt-purple">
+                <div class="belt-stripe"></div>
+                <div class="belt-stripe"></div>
+              </div>
+              <p class="text-small text-muted" style="margin-top:var(--space-xs);margin-bottom:0">MD</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-badge-lg belt-purple">
+                <div class="belt-stripe"></div>
+                <div class="belt-stripe"></div>
+              </div>
+              <p class="text-small text-muted" style="margin-top:var(--space-xs);margin-bottom:0">LG</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Training Badges -->
+      <section class="section">
+        <h2 class="section-title">Training Type Badges</h2>
+        <div class="flex flex-wrap gap-md" style="margin-bottom:var(--space-md)">
+          <span class="training-badge training-gi">GI</span>
+          <span class="training-badge training-nogi">NO-GI</span>
+          <span class="training-badge training-openmat">OPEN MAT</span>
+          <span class="training-badge training-private">PRIVATE</span>
+          <span class="training-badge training-competition">COMP</span>
+        </div>
+        <div class="flex flex-wrap gap-md">
+          <span class="training-badge training-badge-sm training-gi">GI</span>
+          <span class="training-badge training-badge-sm training-nogi">NO-GI</span>
+          <span class="training-badge training-badge-sm training-openmat">OPEN MAT</span>
+          <span class="training-badge training-badge-sm training-private">PRIVATE</span>
+          <span class="training-badge training-badge-sm training-competition">COMP</span>
+        </div>
+      </section>
+
+      <!-- Stat Cards -->
+      <section class="section">
+        <h2 class="section-title">Stat Cards</h2>
+        <div class="grid grid-auto">
+          <div class="stat-card">
+            <div class="stat-label">This Month</div>
+            <div class="stat-value">12</div>
+            <div class="text-small text-muted">Sessions</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Current Streak</div>
+            <div class="stat-value">5</div>
+            <div class="flex items-center gap-xs" style="margin-top:var(--space-xs)">
+              <span class="text-small text-muted">Days</span>
+              <span class="stat-trend stat-trend-up">+2</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total Hours</div>
+            <div class="stat-value">312</div>
+            <div class="text-small text-muted">Mat time</div>
+          </div>
+          <div class="stat-card stat-card-accent">
+            <div class="stat-label">This Week</div>
+            <div class="stat-value">4</div>
+            <div class="text-small" style="color:var(--color-gray-300)">Sessions</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Progress Ring -->
+      <section class="section">
+        <h2 class="section-title">Progress Ring</h2>
+        <div class="flex flex-wrap gap-xl items-center">
+          <div class="text-center">
+            <div class="progress-ring" data-progress-ring="25" data-size="80" data-stroke="6"></div>
+            <p class="text-small text-muted" style="margin-top:var(--space-sm)">25%</p>
+          </div>
+          <div class="text-center">
+            <div class="progress-ring" data-progress-ring="50" data-size="80" data-stroke="6"></div>
+            <p class="text-small text-muted" style="margin-top:var(--space-sm)">50%</p>
+          </div>
+          <div class="text-center">
+            <div class="progress-ring" data-progress-ring="75" data-size="80" data-stroke="6"></div>
+            <p class="text-small text-muted" style="margin-top:var(--space-sm)">75%</p>
+          </div>
+          <div class="text-center">
+            <div class="progress-ring" data-progress-ring="100" data-size="80" data-stroke="6"></div>
+            <p class="text-small text-muted" style="margin-top:var(--space-sm)">100%</p>
+          </div>
+          <div class="text-center">
+            <div class="progress-ring" data-progress-ring="68" data-size="120" data-stroke="8"></div>
+            <p class="text-small text-muted" style="margin-top:var(--space-sm)">Large (120px)</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Progress Bars -->
+      <section class="section">
+        <h2 class="section-title">Progress Bars</h2>
+        <div class="card" style="max-width:500px">
+          <div style="margin-bottom:var(--space-lg)">
+            <div class="flex justify-between" style="margin-bottom:4px">
+              <span class="text-small">25%</span>
+              <span class="text-small text-muted">2/8</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:25%"></div>
+            </div>
+          </div>
+          <div style="margin-bottom:var(--space-lg)">
+            <div class="flex justify-between" style="margin-bottom:4px">
+              <span class="text-small">50%</span>
+              <span class="text-small text-muted">4/8</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:50%"></div>
+            </div>
+          </div>
+          <div style="margin-bottom:var(--space-lg)">
+            <div class="flex justify-between" style="margin-bottom:4px">
+              <span class="text-small">75%</span>
+              <span class="text-small text-muted">6/8</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:75%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between" style="margin-bottom:4px">
+              <span class="text-small">100%</span>
+              <span class="text-small text-muted">Complete</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill progress-fill-success" style="width:100%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Status Badges -->
+      <section class="section">
+        <h2 class="section-title">Status Badges</h2>
+        <div class="flex flex-wrap gap-md">
+          <span class="status-badge status-success">Verified</span>
+          <span class="status-badge status-warning">In Progress</span>
+          <span class="status-badge status-error">Not Started</span>
+          <span class="status-badge status-info">Info</span>
+        </div>
+      </section>
+
+      <!-- Form Elements -->
+      <section class="section">
+        <h2 class="section-title">Form Elements</h2>
+        <div class="card" style="max-width:500px">
+          <div class="form-group">
+            <label class="form-label">Text Input</label>
+            <input type="text" class="form-input" placeholder="Enter text...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Select</label>
+            <select class="form-select">
+              <option>Select an option</option>
+              <option>Gi Training</option>
+              <option>No-Gi Training</option>
+              <option>Open Mat</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Textarea</label>
+            <textarea class="form-textarea" placeholder="Enter notes..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Number Input</label>
+            <input type="number" class="form-input" placeholder="60">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Input with Error</label>
+            <input type="text" class="form-input form-error" placeholder="Invalid input">
+            <div class="form-error-text">This field is required</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================
+         PATTERNS TAB
+         ========================================== -->
+    <div id="patterns" class="tab-content">
+
+      <!-- Card Headers -->
+      <section class="section">
+        <h2 class="section-title">Card Headers</h2>
+        <div class="grid grid-auto">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Card Title</span>
+              <a href="#" style="font-size:var(--text-sm)">View All</a>
+            </div>
+            <p class="text-muted text-small" style="margin:0">Card content goes here...</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">With Badge</span>
+              <span class="status-badge status-success">Active</span>
+            </div>
+            <p class="text-muted text-small" style="margin:0">Card content goes here...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- List Items -->
+      <section class="section">
+        <h2 class="section-title">List Items</h2>
+        <div class="card" style="max-width:500px">
+          <div class="list-item">
+            <div class="list-item-content">
+              <div class="list-item-title">Today</div>
+              <div class="list-item-subtitle">90 min - 3 techniques</div>
+            </div>
+            <span class="training-badge training-badge-sm training-gi">GI</span>
+          </div>
+          <div class="list-item">
+            <div class="list-item-content">
+              <div class="list-item-title">Yesterday</div>
+              <div class="list-item-subtitle">60 min - 2 techniques</div>
+            </div>
+            <span class="training-badge training-badge-sm training-nogi">NO-GI</span>
+          </div>
+          <div class="list-item">
+            <div class="list-item-content">
+              <div class="list-item-title">Dec 18</div>
+              <div class="list-item-subtitle">120 min - Open mat</div>
+            </div>
+            <span class="training-badge training-badge-sm training-openmat">OPEN MAT</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Empty State -->
+      <section class="section">
+        <h2 class="section-title">Empty States</h2>
+        <div class="card empty-state">
+          <div class="empty-state-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-400)" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+          </div>
+          <h4 style="margin-bottom:var(--space-sm)">NO SESSIONS YET</h4>
+          <p class="text-muted text-small" style="margin-bottom:var(--space-md)">Start tracking your training journey by logging your first session.</p>
+          <button class="btn btn-primary">Log First Session</button>
+        </div>
+      </section>
+
+      <!-- Alerts -->
+      <section class="section">
+        <h2 class="section-title">Alerts & Notices</h2>
+        <div class="flex flex-col gap-md" style="max-width:500px">
+          <div class="alert alert-success">
+            <span class="alert-icon">&#10003;</span>
+            <span class="text-small">Requirement completed and verified by coach.</span>
+          </div>
+          <div class="alert alert-warning">
+            <span class="alert-icon">&#9675;</span>
+            <span class="text-small">15 of 18 months completed at current belt.</span>
+          </div>
+          <div class="alert alert-error">
+            <span class="alert-icon">!</span>
+            <span class="text-small">Injury logged - consider rest or modified training.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Metric Display -->
+      <section class="section">
+        <h2 class="section-title">Metric Displays</h2>
+        <div class="card" style="max-width:400px">
+          <h4 style="margin-bottom:var(--space-md)">SPARRING RECORD</h4>
+          <div class="grid grid-3 text-center">
+            <div>
+              <div class="font-heading" style="font-size:var(--text-2xl);font-weight:800;color:var(--color-success)">89</div>
+              <div class="text-small text-muted">Wins</div>
+            </div>
+            <div>
+              <div class="font-heading" style="font-size:var(--text-2xl);font-weight:800;color:var(--color-error)">67</div>
+              <div class="text-small text-muted">Losses</div>
+            </div>
+            <div>
+              <div class="font-heading" style="font-size:var(--text-2xl);font-weight:800;color:var(--color-gray-500)">45</div>
+              <div class="text-small text-muted">Draws</div>
+            </div>
+          </div>
+          <div style="margin-top:var(--space-md);padding:var(--space-sm);background:var(--color-gray-100);border-radius:var(--radius-sm);text-align:center">
+            <span class="text-small">Win Rate: <strong style="color:var(--color-accent-text)">44%</strong></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Action Footer -->
+      <section class="section">
+        <h2 class="section-title">Action Footers</h2>
+        <div class="card" style="max-width:500px">
+          <p class="text-small" style="margin-bottom:var(--space-md)">Form content would go here...</p>
+          <div class="flex gap-md" style="padding-top:var(--space-md);border-top:1px solid var(--color-gray-200)">
+            <button class="btn btn-outline" style="flex:1">Cancel</button>
+            <button class="btn btn-primary" style="flex:1">Save Session</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Selection Pills -->
+      <section class="section">
+        <h2 class="section-title">Selection Pills</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Single Select (Training Type)</h3>
+          <div class="flex flex-wrap gap-sm demo-group">
+            <button class="btn btn-sm demo-selectable active">Gi</button>
+            <button class="btn btn-sm demo-selectable">No-Gi</button>
+            <button class="btn btn-sm demo-selectable">Open Mat</button>
+            <button class="btn btn-sm demo-selectable">Private</button>
+            <button class="btn btn-sm demo-selectable">Competition</button>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Multi Select (Technique Tags)</h3>
+          <div class="flex flex-wrap gap-sm pill-group">
+            <span class="pill active">Armbar <span style="margin-left:4px">&times;</span></span>
+            <span class="pill active">Triangle <span style="margin-left:4px">&times;</span></span>
+            <span class="pill">Guard Pass</span>
+            <span class="pill">Sweep</span>
+            <span class="pill pill-add">+ Add</span>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Rating Scale (Energy/Mood)</h3>
+          <div class="flex gap-sm rating-group">
+            <button class="rating-btn active">1</button>
+            <button class="rating-btn active">2</button>
+            <button class="rating-btn active">3</button>
+            <button class="rating-btn">4</button>
+            <button class="rating-btn">5</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================
+         VOICE & COPY TAB
+         ========================================== -->
+    <div id="voice" class="tab-content">
+
+      <!-- Brand Philosophy -->
+      <section class="section">
+        <h2 class="section-title">Brand Philosophy</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Core Philosophy</h3>
+          <div class="card card-dark">
+            <h4 style="color:var(--color-accent);margin-bottom:var(--space-md)">EVERY PRACTITIONER DESERVES TO SEE THEIR JOURNEY CLEARLY.</h4>
+            <p style="color:var(--color-gray-300);margin:0">Because understanding where you've been is how you know where to go next.</p>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">The Archetype: The Dedicated Training Partner</h3>
+          <div class="card card-accent">
+            <p style="margin:0">We're the <strong>purple belt who's been training for six years</strong>. Not the loudest person in the room, but the one everyone trusts to roll with on their first day and their hundredth. We remember what it felt like to be new. We've seen enough to know what matters. We're still learning too.</p>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Five Pillars</h3>
+          <div class="card">
+            <div class="flex flex-col gap-md">
+              <div class="flex gap-md">
+                <div style="width:32px;height:32px;background:var(--color-accent);border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0">1</div>
+                <div>
+                  <div class="font-bold text-small">Understanding beats memorization</div>
+                  <div class="text-xs text-muted">Show how techniques connect - not just what, but why and when</div>
+                </div>
+              </div>
+              <div class="flex gap-md">
+                <div style="width:32px;height:32px;background:var(--color-accent);border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0">2</div>
+                <div>
+                  <div class="font-bold text-small">The fundamentals ARE the advanced techniques</div>
+                  <div class="text-xs text-muted">A perfect hip escape is more valuable than a flashy submission</div>
+                </div>
+              </div>
+              <div class="flex gap-md">
+                <div style="width:32px;height:32px;background:var(--color-accent);border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0">3</div>
+                <div>
+                  <div class="font-bold text-small">Every journey is valid</div>
+                  <div class="text-xs text-muted">Competitors, hobbyists, self-defense - all paths deserve equal respect</div>
+                </div>
+              </div>
+              <div class="flex gap-md">
+                <div style="width:32px;height:32px;background:var(--color-accent);border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0">4</div>
+                <div>
+                  <div class="font-bold text-small">Progress is personal, not comparative</div>
+                  <div class="text-xs text-muted">Your only opponent is yesterday's version of yourself</div>
+                </div>
+              </div>
+              <div class="flex gap-md">
+                <div style="width:32px;height:32px;background:var(--color-accent);border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0">5</div>
+                <div>
+                  <div class="font-bold text-small">Consistency compounds</div>
+                  <div class="text-xs text-muted">Showing up matters more than talent. Reward the work, not just wins.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Voice Attributes -->
+      <section class="section">
+        <h2 class="section-title">Voice Attributes</h2>
+
+        <div class="card">
+          <table style="width:100%;border-collapse:collapse">
+            <thead>
+              <tr style="border-bottom:2px solid var(--color-accent)">
+                <th style="text-align:left;padding:var(--space-sm) 0" class="text-small">Attribute</th>
+                <th style="text-align:left;padding:var(--space-sm) 0" class="text-small" style="color:var(--color-success)">We Sound Like</th>
+                <th style="text-align:left;padding:var(--space-sm) 0" class="text-small" style="color:var(--color-error)">We Never Sound Like</th>
+              </tr>
+            </thead>
+            <tbody class="text-small">
+              <tr style="border-bottom:1px solid var(--color-gray-200)">
+                <td style="padding:var(--space-sm) 0;font-weight:600">Confident</td>
+                <td style="padding:var(--space-sm) 0">"Your guard retention improved 23% this month."</td>
+                <td style="padding:var(--space-sm) 0;color:var(--color-gray-500)">"Maybe your guard got a little better?"</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-gray-200)">
+                <td style="padding:var(--space-sm) 0;font-weight:600">Conversational</td>
+                <td style="padding:var(--space-sm) 0">"Looks like you haven't trained in a couple weeks. Everything okay?"</td>
+                <td style="padding:var(--space-sm) 0;color:var(--color-gray-500)">"ALERT: Training streak broken."</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-gray-200)">
+                <td style="padding:var(--space-sm) 0;font-weight:600">Encouraging</td>
+                <td style="padding:var(--space-sm) 0">"100 sessions logged. That's serious commitment."</td>
+                <td style="padding:var(--space-sm) 0;color:var(--color-gray-500)">"OMG you're AMAZING!!!"</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-gray-200)">
+                <td style="padding:var(--space-sm) 0;font-weight:600">Clear</td>
+                <td style="padding:var(--space-sm) 0">"3 techniques left for blue belt requirements."</td>
+                <td style="padding:var(--space-sm) 0;color:var(--color-gray-500)">"You're making great progress!"</td>
+              </tr>
+              <tr>
+                <td style="padding:var(--space-sm) 0;font-weight:600">Grounded</td>
+                <td style="padding:var(--space-sm) 0">"Most practitioners spend 2-3 years at blue belt."</td>
+                <td style="padding:var(--space-sm) 0;color:var(--color-gray-500)">"Unlock purple belt in just 6 months!"</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Copy Examples -->
+      <section class="section">
+        <h2 class="section-title">Copy Examples</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Empty States</h3>
+          <div class="grid grid-2">
+            <div class="card" style="border-left:4px solid var(--color-error)">
+              <div class="text-xs text-muted" style="margin-bottom:var(--space-xs)">DON'T</div>
+              <p class="text-small" style="margin:0">"No training sessions yet! Get started on your BJJ journey today!"</p>
+            </div>
+            <div class="card" style="border-left:4px solid var(--color-success)">
+              <div class="text-xs text-muted" style="margin-bottom:var(--space-xs)">DO</div>
+              <p class="text-small" style="margin:0">"No sessions logged yet. Log your first training after class."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Success Messages</h3>
+          <div class="grid grid-2">
+            <div class="card" style="border-left:4px solid var(--color-error)">
+              <div class="text-xs text-muted" style="margin-bottom:var(--space-xs)">DON'T</div>
+              <p class="text-small" style="margin:0">"Awesome job! You're crushing it!"</p>
+            </div>
+            <div class="card" style="border-left:4px solid var(--color-success)">
+              <div class="text-xs text-muted" style="margin-bottom:var(--space-xs)">DO</div>
+              <p class="text-small" style="margin:0">"Session logged. 47 sessions this year."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Error Messages</h3>
+          <div class="grid grid-2">
+            <div class="card" style="border-left:4px solid var(--color-error)">
+              <div class="text-xs text-muted" style="margin-bottom:var(--space-xs)">DON'T</div>
+              <p class="text-small" style="margin:0">"Oops! Something went wrong!"</p>
+            </div>
+            <div class="card" style="border-left:4px solid var(--color-success)">
+              <div class="text-xs text-muted" style="margin-bottom:var(--space-xs)">DO</div>
+              <p class="text-small" style="margin:0">"Couldn't save your session. Check your connection and try again."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Achievement Messages</h3>
+          <div class="grid grid-2">
+            <div class="card" style="border-left:4px solid var(--color-error)">
+              <div class="text-xs text-muted" style="margin-bottom:var(--space-xs)">DON'T</div>
+              <p class="text-small" style="margin:0">"Achievement unlocked: Training Warrior!"</p>
+            </div>
+            <div class="card" style="border-left:4px solid var(--color-success)">
+              <div class="text-xs text-muted" style="margin-bottom:var(--space-xs)">DO</div>
+              <p class="text-small" style="margin:0">"10-week training streak. Consistency is paying off."</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Terminology -->
+      <section class="section">
+        <h2 class="section-title">Terminology</h2>
+
+        <div class="grid grid-2">
+          <div class="card" style="border-left:4px solid var(--color-success)">
+            <h4 style="color:var(--color-success);margin-bottom:var(--space-md)">WORDS WE USE</h4>
+            <div class="flex flex-col gap-sm text-small">
+              <div><strong>Journey</strong> - Process over destination (use sparingly)</div>
+              <div><strong>Progress</strong> - Measurable and personal</div>
+              <div><strong>Session</strong> - Neutral term for training</div>
+              <div><strong>Log / Logged</strong> - Professional action verb</div>
+              <div><strong>Practitioner</strong> - Inclusive for all levels</div>
+              <div><strong>Consistency</strong> - Core value, research-backed</div>
+              <div><strong>Insight(s)</strong> - For analytics/patterns</div>
+            </div>
+          </div>
+          <div class="card" style="border-left:4px solid var(--color-error)">
+            <h4 style="color:var(--color-error);margin-bottom:var(--space-md)">WORDS WE AVOID</h4>
+            <div class="flex flex-col gap-sm text-small">
+              <div><strong>Level up</strong> - Gaming language</div>
+              <div><strong>Unlock / Achievement</strong> - Gamification</div>
+              <div><strong>Crush it / Kill it</strong> - Overhyped</div>
+              <div><strong>Warrior / Beast</strong> - Ego-driven</div>
+              <div><strong>Easy / Quick</strong> - False promises</div>
+              <div><strong>Secret / Hack</strong> - No shortcuts exist</div>
+              <div><strong>Dominate</strong> - We emphasize growth</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Non-Negotiables -->
+      <section class="section">
+        <h2 class="section-title">Non-Negotiables</h2>
+
+        <div class="card" style="background:var(--color-primary);color:var(--color-white)">
+          <h4 style="color:var(--color-accent);margin-bottom:var(--space-md)">BEFORE PUBLISHING ANY COPY:</h4>
+          <div class="flex flex-col gap-sm">
+            <div class="flex items-center gap-sm">
+              <span style="color:var(--color-error);font-weight:bold">X</span>
+              <span class="text-small">Never gamify belt progression</span>
+            </div>
+            <div class="flex items-center gap-sm">
+              <span style="color:var(--color-error);font-weight:bold">X</span>
+              <span class="text-small">Never contradict a user's coach</span>
+            </div>
+            <div class="flex items-center gap-sm">
+              <span style="color:var(--color-error);font-weight:bold">X</span>
+              <span class="text-small">Never promise faster promotions</span>
+            </div>
+            <div class="flex items-center gap-sm">
+              <span style="color:var(--color-error);font-weight:bold">X</span>
+              <span class="text-small">Never use empty hype language</span>
+            </div>
+            <div class="flex items-center gap-sm">
+              <span style="color:var(--color-error);font-weight:bold">X</span>
+              <span class="text-small">Never disrespect the tradition</span>
+            </div>
+          </div>
+          <div style="margin-top:var(--space-lg);padding-top:var(--space-md);border-top:1px solid var(--dark-border)">
+            <div class="flex flex-col gap-sm">
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-success);font-weight:bold">?</span>
+                <span class="text-small">Does this respect the coach relationship? (We amplify, never replace)</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-success);font-weight:bold">?</span>
+                <span class="text-small">Is this specific or vague? (Numbers > adjectives)</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-success);font-weight:bold">?</span>
+                <span class="text-small">Would a purple belt say this? (Knowledgeable but still learning)</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span style="color:var(--color-success);font-weight:bold">?</span>
+                <span class="text-small">Does it respect the difficulty of BJJ? (No shortcuts, no hacks)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Instructor Influence -->
+      <section class="section">
+        <h2 class="section-title">Instructor Influence</h2>
+        <p class="text-muted text-small" style="margin-bottom:var(--space-md)">Our content philosophy draws from BJJ's greatest instructors:</p>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <h4 style="margin-bottom:var(--space-sm)">SYSTEMS-BASED</h4>
+            <p class="text-xs text-muted" style="margin-bottom:var(--space-sm)">John Danaher, Darragh O'Conaill</p>
+            <p class="text-small" style="margin:0">Show technique relationships. Understanding WHY, not just HOW.</p>
+          </div>
+          <div class="card">
+            <h4 style="margin-bottom:var(--space-sm)">FUNDAMENTALS-FIRST</h4>
+            <p class="text-xs text-muted" style="margin-bottom:var(--space-sm)">Roger Gracie, Fabio Gurgel</p>
+            <p class="text-small" style="margin:0">Master basics before advancing. The basics ARE the advanced techniques.</p>
+          </div>
+          <div class="card">
+            <h4 style="margin-bottom:var(--space-sm)">HIGH-PERFORMANCE</h4>
+            <p class="text-xs text-muted" style="margin-bottom:var(--space-sm)">Andre Galvao, Leo Vieira</p>
+            <p class="text-small" style="margin:0">Excellence requires measurement. Mindset and culture matter.</p>
+          </div>
+          <div class="card">
+            <h4 style="margin-bottom:var(--space-sm)">TECHNICAL PRECISION</h4>
+            <p class="text-xs text-muted" style="margin-bottom:var(--space-sm)">Mikey Musumeci, Mayssa Bastos</p>
+            <p class="text-small" style="margin:0">Details matter. Elite technique is teachable - demystify mastery.</p>
+          </div>
+          <div class="card">
+            <h4 style="margin-bottom:var(--space-sm)">MOTIVATIONAL</h4>
+            <p class="text-xs text-muted" style="margin-bottom:var(--space-sm)">Tom DeBlass</p>
+            <p class="text-small" style="margin:0">Mental resilience is trainable. The struggle IS the path.</p>
+          </div>
+          <div class="card">
+            <h4 style="margin-bottom:var(--space-sm)">ADAPTIVE</h4>
+            <p class="text-xs text-muted" style="margin-bottom:var(--space-sm)">Renzo Gracie</p>
+            <p class="text-small" style="margin:0">Honor tradition while evolving. Bridge old and new.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
