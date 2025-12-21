@@ -260,7 +260,46 @@ npm run build
 
 ## Change Log
 
-### December 21, 2025
+### December 21, 2025 (Evening Session)
+
+**Conversation Design:**
+- Created `/conversation-design/` folder
+- Created `CONVERSATION_DESIGN_FOUNDATION.md` - principles, voice, tone, question frameworks
+- Links to brand voice guide as source of truth
+
+**Voice Logger Feature:**
+- Created `VoiceLogger.tsx` - 6-phase flow (Idle→Recording→Processing→Gap-Fill→Review→Success)
+- Added audio waveform visualization during recording
+- Added smooth fade transitions between phases
+- Added Gap-Fill phase for missing training type
+- Updated copy to match brand voice ("How'd training go? Just talk—I'm listening.")
+- Added session count to success message ("Session #48 Logged")
+- Added cancel button during recording
+- Dark theme throughout all phases
+
+**Session History:**
+- Created `SessionHistory.tsx` - past sessions grouped by date
+- Created `SessionCard.tsx` - compact card with training type, technique preview, stats
+- Sessions show submission counts (✓/✗), injury indicators
+
+**UX Flow Updates:**
+- App auto-opens voice logger on first load
+- Post-log completion navigates to Journal (Session History)
+- Dashboard "Log Training" opens voice logger
+- Journal "Log" button opens voice logger
+
+**File Cleanup:**
+- Deleted `BJJ_Progress_Tracker_Feature_List.docx` (duplicate)
+- Renamed `v2_122125_compass_artifact_*.md` → `BJJ_Belt_Curriculum_Reference.md`
+- Added `.md` extension to research files
+
+### December 21, 2025 (PM)
+- Research ingestion: 21 sources analyzed
+- Created `data-requirements-analysis.md`, `sources-bibliography.md`
+- Built Dashboard component with all sections
+- Created UI components (Header, TabBar, BeltBadge, StatCard, TrainingBadge, ProgressRing)
+
+### December 21, 2025 (AM)
 - Updated PROJECT_STATUS.md with session protocol and quick reference
 
 ### December 21, 2024 (Initial Session)
