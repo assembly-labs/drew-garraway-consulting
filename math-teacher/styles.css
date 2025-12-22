@@ -1,0 +1,357 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    background: #0a0a0a;
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 3rem 2rem 2rem 2rem;
+    margin: -2rem -2rem 3rem -2rem;
+    position: relative;
+    background: #0a0a0a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.date-display {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Section Styling */
+section {
+    padding: 2rem;
+    border-radius: 0;
+    border-left: 6px solid transparent;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+section:hover {
+    border-left-width: 8px;
+}
+
+/* Section Labels */
+.section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: block;
+    opacity: 0.6;
+}
+
+/* Difficulty Section */
+.difficulty-section {
+    border-left-color: #4169e1;
+    background: rgba(65, 105, 225, 0.03);
+}
+
+.difficulty-section .section-label {
+    color: #4169e1;
+}
+
+.difficulty-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.difficulty-btn {
+    flex: 1;
+    min-width: 100px;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.difficulty-btn:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.difficulty-btn.active {
+    border-color: #4169e1;
+    color: #4169e1;
+    background: rgba(65, 105, 225, 0.1);
+}
+
+/* Problem Section */
+.problem-section {
+    border-left-color: #dc143c;
+    background: rgba(220, 20, 60, 0.03);
+    text-align: center;
+}
+
+.problem-section .section-label {
+    color: #dc143c;
+    text-align: left;
+}
+
+.problem-display {
+    padding: 2rem 0;
+}
+
+.problem-text {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+.problem-type {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+/* Answer Section */
+.answer-section {
+    border-left-color: #32cd32;
+    background: rgba(50, 205, 50, 0.03);
+}
+
+.answer-section .section-label {
+    color: #32cd32;
+}
+
+.answer-input-wrapper {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.answer-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    outline: none;
+    transition: all 0.2s ease;
+    font-variant-numeric: tabular-nums;
+    -moz-appearance: textfield;
+}
+
+.answer-input::-webkit-outer-spin-button,
+.answer-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.answer-input:focus {
+    border-color: #32cd32;
+    background: rgba(50, 205, 50, 0.05);
+}
+
+.answer-input::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.check-btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: none;
+    background: #32cd32;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.check-btn:hover {
+    background: #28a428;
+    transform: scale(1.02);
+}
+
+.check-btn:active {
+    transform: scale(0.98);
+}
+
+.feedback {
+    min-height: 2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    padding-top: 0.5rem;
+}
+
+.feedback.correct {
+    color: #32cd32;
+}
+
+.feedback.incorrect {
+    color: #dc143c;
+}
+
+/* Stats Section */
+.stats-section {
+    border-left-color: #ffd700;
+    background: rgba(255, 215, 0, 0.03);
+}
+
+.stats-section .section-label {
+    color: #ffd700;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    text-align: center;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Action Section */
+.action-section {
+    border-left-color: transparent;
+    background: transparent;
+    text-align: center;
+    padding: 1rem 2rem;
+}
+
+.new-problem-btn {
+    width: 100%;
+    max-width: 300px;
+    padding: 1.25rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.new-problem-btn:hover {
+    border-color: #fff;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.new-problem-btn:active {
+    transform: scale(0.98);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 3rem 0 2rem 0;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .problem-text {
+        font-size: 3rem;
+    }
+
+    section {
+        padding: 1.5rem;
+    }
+
+    .difficulty-buttons {
+        flex-direction: column;
+    }
+
+    .difficulty-btn {
+        width: 100%;
+    }
+
+    .answer-input-wrapper {
+        flex-direction: column;
+    }
+
+    .answer-input {
+        font-size: 1.5rem;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Teacher | Daily Practice</title>
+    <meta name="description" content="Daily math practice problems for K-4 students. Build confidence with addition, subtraction, multiplication, and division.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="hero-section">
+            <h1 class="title">MATH TEACHER</h1>
+            <div class="date-display" id="currentDate"></div>
+        </header>
+
+        <main class="content-wrapper">
+            <!-- Difficulty Selector -->
+            <section class="difficulty-section">
+                <div class="section-label">CHOOSE YOUR LEVEL</div>
+                <div class="difficulty-buttons">
+                    <button class="difficulty-btn active" data-level="easy">Easy</button>
+                    <button class="difficulty-btn" data-level="medium">Medium</button>
+                    <button class="difficulty-btn" data-level="hard">Hard</button>
+                </div>
+            </section>
+
+            <!-- Problem Section -->
+            <section class="problem-section">
+                <div class="section-label">TODAY'S PROBLEM</div>
+                <div class="problem-display">
+                    <span class="problem-text" id="problemText">5 + 3 = ?</span>
+                </div>
+                <div class="problem-type" id="problemType">Addition</div>
+            </section>
+
+            <!-- Answer Section -->
+            <section class="answer-section">
+                <div class="section-label">YOUR ANSWER</div>
+                <div class="answer-input-wrapper">
+                    <input type="number" class="answer-input" id="answerInput" placeholder="?" autocomplete="off">
+                    <button class="check-btn" id="checkBtn">Check</button>
+                </div>
+                <div class="feedback" id="feedback"></div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="section-label">YOUR PROGRESS</div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value" id="correctCount">0</span>
+                        <span class="stat-label">Correct</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="streakCount">0</span>
+                        <span class="stat-label">Streak</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalCount">0</span>
+                        <span class="stat-label">Total</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- New Problem Button -->
+            <section class="action-section">
+                <button class="new-problem-btn" id="newProblemBtn">Next Problem</button>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>Practice makes perfect</p>
+        </footer>
+    </div>
+
+    <script src="problems-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
