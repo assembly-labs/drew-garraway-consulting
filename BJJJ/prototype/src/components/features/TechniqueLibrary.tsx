@@ -523,8 +523,6 @@ function ForYouView({
   recommendations: VideoRecommendation[];
   onOpenFeedback?: () => void;
 }) {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
       {/* Section Header */}
@@ -587,33 +585,12 @@ function ForYouView({
 
           {/* Video Player / Thumbnail */}
           <div style={{ padding: 'var(--space-md)' }}>
-            {expandedIndex === index ? (
-              <YouTubeEmbed
-                videoId={rec.video.youtube_id}
-                title={rec.video.title}
-                instructor={rec.video.instructor}
-                duration={rec.video.duration_seconds}
-              />
-            ) : (
-              <button
-                onClick={() => setExpandedIndex(index)}
-                style={{
-                  width: '100%',
-                  background: 'none',
-                  border: 'none',
-                  padding: 0,
-                  cursor: 'pointer',
-                }}
-              >
-                <YouTubeEmbed
-                  videoId={rec.video.youtube_id}
-                  title={rec.video.title}
-                  instructor={rec.video.instructor}
-                  duration={rec.video.duration_seconds}
-                  autoplay={false}
-                />
-              </button>
-            )}
+            <YouTubeEmbed
+              videoId={rec.video.youtube_id}
+              title={rec.video.title}
+              instructor={rec.video.instructor}
+              duration={rec.video.duration_seconds}
+            />
           </div>
 
           {/* Recommendation Reason */}
@@ -978,8 +955,6 @@ function MindsetDetail({
   videos: TechniqueVideo[];
   onBack: () => void;
 }) {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
       {/* Header */}
@@ -1046,33 +1021,12 @@ function MindsetDetail({
             }}
           >
             <div style={{ padding: 'var(--space-md)' }}>
-              {expandedIndex === index ? (
-                <YouTubeEmbed
-                  videoId={video.youtube_id}
-                  title={video.title}
-                  instructor={video.instructor}
-                  duration={video.duration_seconds}
-                />
-              ) : (
-                <button
-                  onClick={() => setExpandedIndex(index)}
-                  style={{
-                    width: '100%',
-                    background: 'none',
-                    border: 'none',
-                    padding: 0,
-                    cursor: 'pointer',
-                  }}
-                >
-                  <YouTubeEmbed
-                    videoId={video.youtube_id}
-                    title={video.title}
-                    instructor={video.instructor}
-                    duration={video.duration_seconds}
-                    autoplay={false}
-                  />
-                </button>
-              )}
+              <YouTubeEmbed
+                videoId={video.youtube_id}
+                title={video.title}
+                instructor={video.instructor}
+                duration={video.duration_seconds}
+              />
             </div>
           </div>
         ))}
