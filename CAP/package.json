@@ -5,12 +5,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:cloudflare": "npx @cloudflare/next-on-pages",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "vitest",
-    "test:watch": "vitest watch"
+    "test:watch": "vitest watch",
+    "preview:cloudflare": "npx wrangler pages dev .vercel/output/static --compatibility-flags=nodejs_compat",
+    "deploy:cloudflare": "npx wrangler pages deploy .vercel/output/static"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -37,7 +40,9 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
-    "@netlify/functions": "^2.4.1",
+    "@cloudflare/next-on-pages": "^1.13.0",
+    "@cloudflare/workers-types": "^4.20240129.0",
+    "wrangler": "^3.25.0",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",

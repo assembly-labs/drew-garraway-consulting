@@ -7,12 +7,15 @@
   "scripts": {
     "dev": "vite",
     "dev:netlify": "netlify dev",
+    "dev:cloudflare": "npx wrangler pages dev dist --compatibility-flags=nodejs_compat",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "preview:cloudflare": "npx wrangler pages dev dist --compatibility-flags=nodejs_compat",
     "lint": "tsc --noEmit",
     "validate": "node scripts/validate-deployment.js",
     "predeploy": "npm run validate && npm run build",
     "deploy:test": "npm run predeploy && echo '✅ Ready to push to GitHub!'",
+    "deploy:cloudflare": "npx wrangler pages deploy dist",
     "test:api": "node scripts/test-api-local.js"
   },
   "dependencies": {
@@ -22,6 +25,8 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240129.0",
+    "wrangler": "^3.25.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.17.0",

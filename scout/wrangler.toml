@@ -1,0 +1,15 @@
+# Cloudflare Pages configuration for Scout Library Assistant
+# Vite SPA with Pages Functions
+
+name = "scout-library-assistant"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Pages configuration - Vite builds to dist/
+pages_build_output_dir = "dist"
+
+# Environment variables (set in Cloudflare dashboard)
+# CLAUDE_API_KEY
+
+[vars]
+NODE_ENV = "production"

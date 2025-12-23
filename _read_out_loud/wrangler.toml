@@ -1,0 +1,11 @@
+# Cloudflare Pages configuration for Read Out Loud
+# Static site deployment
+
+name = "read-out-loud"
+compatibility_date = "2024-01-01"
+
+# Pages configuration - static site serves from root
+pages_build_output_dir = "."
+
+[vars]
+NODE_ENV = "production"

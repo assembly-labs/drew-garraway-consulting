@@ -1,0 +1,11 @@
+# Cloudflare Pages configuration for Fuck You Go Train
+# Vite SPA deployment
+
+name = "fuckyougotrain"
+compatibility_date = "2024-01-01"
+
+# Pages configuration - Vite builds to dist/
+pages_build_output_dir = "dist"
+
+[vars]
+NODE_ENV = "production"
