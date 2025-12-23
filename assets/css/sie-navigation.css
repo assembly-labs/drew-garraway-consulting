@@ -1,0 +1,352 @@
+/* SIE Navigation Component Styles */
+/* Shared navigation styles for all SIE study material pages */
+
+/* Navigation Bar */
+.sie-nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--fh-white);
+    border-top: 2px solid var(--fh-gray-200);
+    box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: var(--fh-space-md) var(--fh-space-xl);
+}
+
+.sie-nav-bar__content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--fh-space-lg);
+}
+
+/* Navigation Buttons */
+.sie-nav-button {
+    display: flex;
+    align-items: center;
+    gap: var(--fh-space-sm);
+    padding: var(--fh-space-sm) var(--fh-space-md);
+    background: var(--fh-gray-100);
+    border: 1px solid var(--fh-gray-300);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--fh-gray-700);
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    min-width: 120px;
+}
+
+.sie-nav-button:hover:not(.sie-nav-button--disabled) {
+    background: var(--fh-navy);
+    color: var(--fh-white);
+    border-color: var(--fh-navy);
+    text-decoration: none;
+}
+
+.sie-nav-button--disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.sie-nav-button--prev {
+    justify-content: flex-start;
+}
+
+.sie-nav-button--next {
+    justify-content: flex-end;
+}
+
+/* Chapter/Section Selector */
+.sie-chapter-selector {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    gap: var(--fh-space-md);
+}
+
+.sie-chapter-selector__label {
+    font-size: 0.875rem;
+    color: var(--fh-gray-600);
+    font-weight: 600;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sie-chapter-selector__dropdown {
+    flex: 1;
+    position: relative;
+}
+
+.sie-chapter-selector__toggle {
+    width: 100%;
+    padding: var(--fh-space-sm) var(--fh-space-md);
+    background: var(--fh-white);
+    border: 2px solid var(--fh-gray-300);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.sie-chapter-selector__toggle:hover {
+    border-color: var(--fh-sage);
+}
+
+.sie-chapter-selector__current {
+    font-weight: 600;
+    color: var(--fh-gray-900);
+    font-size: 0.875rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Chapter Menu Dropdown */
+.sie-chapter-selector__menu {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: var(--fh-white);
+    border: 2px solid var(--fh-gray-300);
+    border-radius: 4px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    max-height: 400px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1001;
+}
+
+.sie-chapter-selector__menu.open {
+    display: block;
+}
+
+/* Chapter Groups in Menu */
+.sie-chapter-group {
+    border-bottom: 1px solid var(--fh-gray-200);
+}
+
+.sie-chapter-group:last-child {
+    border-bottom: none;
+}
+
+.sie-chapter-group__header {
+    padding: var(--fh-space-sm) var(--fh-space-md);
+    background: var(--fh-gray-100);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fh-gray-600);
+}
+
+.sie-chapter-group__sections {
+    background: var(--fh-white);
+}
+
+/* Section Options in Menu */
+.sie-section-option {
+    display: flex;
+    align-items: center;
+    gap: var(--fh-space-sm);
+    padding: var(--fh-space-sm) var(--fh-space-md);
+    padding-left: var(--fh-space-xl);
+    color: var(--fh-gray-700);
+    text-decoration: none;
+    border-bottom: 1px solid var(--fh-gray-100);
+    transition: background 0.2s ease;
+    position: relative;
+    font-size: 0.875rem;
+}
+
+.sie-section-option:hover:not(.sie-section-option--locked) {
+    background: var(--fh-gray-100);
+}
+
+.sie-section-option--current {
+    background: var(--fh-sage);
+    color: var(--fh-white);
+    font-weight: 600;
+}
+
+.sie-section-option--current:hover {
+    background: var(--fh-sage);
+}
+
+.sie-section-option--locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.sie-section-option__number {
+    font-family: var(--fh-font-mono);
+    font-size: 0.75rem;
+    color: var(--fh-sage);
+    min-width: 2.5rem;
+}
+
+.sie-section-option--current .sie-section-option__number {
+    color: var(--fh-white);
+}
+
+.sie-section-option__title {
+    flex: 1;
+}
+
+.sie-section-option__lock {
+    position: absolute;
+    right: var(--fh-space-md);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Section Navigation Dots */
+.sie-section-nav {
+    display: flex;
+    gap: var(--fh-space-xs);
+    align-items: center;
+}
+
+/* Dots for internal page sections */
+.sie-section-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--fh-gray-300);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.sie-section-dot:hover {
+    background: var(--fh-sage);
+    transform: scale(1.5);
+}
+
+.sie-section-dot.active {
+    background: var(--fh-sage);
+    transform: scale(1.3);
+}
+
+/* Dots for linking to other sections */
+.sie-section-link-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--fh-gray-300);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.sie-section-link-dot:hover:not(.locked) {
+    background: var(--fh-sage);
+    transform: scale(1.5);
+}
+
+.sie-section-link-dot.active {
+    background: var(--fh-sage);
+    transform: scale(1.3);
+}
+
+.sie-section-link-dot.locked {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Scrollbar Styling for Menu */
+.sie-chapter-selector__menu::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sie-chapter-selector__menu::-webkit-scrollbar-track {
+    background: var(--fh-gray-100);
+    border-radius: 4px;
+}
+
+.sie-chapter-selector__menu::-webkit-scrollbar-thumb {
+    background: var(--fh-gray-400);
+    border-radius: 4px;
+}
+
+.sie-chapter-selector__menu::-webkit-scrollbar-thumb:hover {
+    background: var(--fh-gray-500);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .sie-nav-bar {
+        padding: var(--fh-space-sm) var(--fh-space-md);
+    }
+
+    .sie-nav-bar__content {
+        flex-wrap: wrap;
+        gap: var(--fh-space-sm);
+    }
+
+    .sie-chapter-selector {
+        order: -1;
+        flex: 100%;
+        max-width: 100%;
+        margin-bottom: var(--fh-space-xs);
+    }
+
+    .sie-chapter-selector__label {
+        display: none;
+    }
+
+    .sie-nav-button {
+        min-width: auto;
+        flex: 1;
+        padding: var(--fh-space-xs) var(--fh-space-sm);
+        font-size: 0.75rem;
+    }
+
+    .sie-section-nav {
+        display: none;
+    }
+
+    .sie-chapter-selector__menu {
+        max-height: 300px;
+    }
+
+    .sie-section-option {
+        padding: var(--fh-space-xs) var(--fh-space-sm);
+        padding-left: var(--fh-space-lg);
+        font-size: 0.8125rem;
+    }
+}
+
+/* Tooltip for dots */
+.sie-section-dot[title]:hover::after,
+.sie-section-link-dot[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--fh-gray-900);
+    color: var(--fh-white);
+    padding: var(--fh-space-xs) var(--fh-space-sm);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 1002;
+}
+
+/* Ensure body has bottom padding for fixed nav */
+body {
+    padding-bottom: 80px;
+}
