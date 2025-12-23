@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:netlify": "netlify dev",
     "dev:cloudflare": "npx wrangler pages dev dist --compatibility-flags=nodejs_compat",
     "build": "tsc && vite build",
     "preview": "vite preview",
@@ -26,7 +25,6 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240129.0",
-    "wrangler": "^3.25.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
@@ -36,11 +34,11 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.9",
-    "netlify-cli": "^17.0.0",
     "postcss": "^8.4.41",
     "tailwindcss": "^3.4.7",
     "terser": "^5.44.0",
     "typescript": "^5.5.4",
-    "vite": "^5.3.5"
+    "vite": "^5.3.5",
+    "wrangler": "^3.25.0"
   }
 }

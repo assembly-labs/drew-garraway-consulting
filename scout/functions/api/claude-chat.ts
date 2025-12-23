@@ -1,3 +1,4 @@
+/// <reference types="@cloudflare/workers-types" />
 /**
  * Cloudflare Pages Function: Secure Claude API Proxy
  * Migrated from Netlify Functions

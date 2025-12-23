@@ -1,3 +1,4 @@
+/// <reference types="@cloudflare/workers-types" />
 /**
  * Cloudflare Pages Function: Age Verification
  * Migrated from Netlify Functions

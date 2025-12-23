@@ -1,3 +1,4 @@
+/// <reference types="@cloudflare/workers-types" />
 /**
  * Cloudflare Pages Function: Auth Signup
  * Migrated from Netlify Functions
