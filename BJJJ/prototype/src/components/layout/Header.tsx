@@ -11,7 +11,7 @@ interface HeaderProps {
 }
 
 export function Header({
-  title = 'BJJ JOURNAL',
+  title = 'ALLY',
   showBackButton = false,
   onBack,
   rightAction

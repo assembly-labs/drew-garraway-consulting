@@ -29,7 +29,7 @@ export type TechniqueCategory =
   | 'control'
   | 'transition';
 
-export type ProficiencyLevel = 'learning' | 'developing' | 'proficient';
+export type ProficiencyLevel = 'learning' | 'developing' | 'proficient' | 'advanced';
 
 export interface Technique {
   id: string;

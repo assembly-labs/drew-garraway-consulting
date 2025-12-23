@@ -280,6 +280,8 @@ export const mockPositionMastery: PositionMastery[] = [
 // MILESTONES & BADGES
 // ===========================================
 
+// Icon names reference the Icons component from ../components/ui/Icons.tsx
+// NEVER use emojis - always use lineart icon names
 export const mockMilestones: Milestone[] = [
   {
     id: 'mile-001',
@@ -287,7 +289,7 @@ export const mockMilestones: Milestone[] = [
     name: 'Blue Belt',
     description: 'Earned blue belt rank',
     earnedAt: '2023-09-15',
-    icon: '🥋',
+    icon: 'Belt', // Line art icon name
   },
   {
     id: 'mile-002',
@@ -295,7 +297,7 @@ export const mockMilestones: Milestone[] = [
     name: 'Century Club',
     description: 'Completed 100 training sessions',
     earnedAt: '2023-05-20',
-    icon: '💯',
+    icon: 'Hundred', // Line art icon name
   },
   {
     id: 'mile-003',
@@ -303,7 +305,7 @@ export const mockMilestones: Milestone[] = [
     name: 'Double Century',
     description: 'Completed 200 training sessions',
     earnedAt: '2024-08-15',
-    icon: '🎯',
+    icon: 'Target', // Line art icon name
   },
   {
     id: 'mile-004',
@@ -311,7 +313,7 @@ export const mockMilestones: Milestone[] = [
     name: 'Two Week Warrior',
     description: 'Trained 14 days in a row',
     earnedAt: '2024-03-10',
-    icon: '🔥',
+    icon: 'Flame', // Line art icon name
   },
   {
     id: 'mile-005',
@@ -319,7 +321,7 @@ export const mockMilestones: Milestone[] = [
     name: 'Three Week Streak',
     description: 'Trained 21 days in a row',
     earnedAt: '2024-07-28',
-    icon: '⚡',
+    icon: 'Zap', // Line art icon name
   },
   {
     id: 'mile-006',
@@ -327,7 +329,7 @@ export const mockMilestones: Milestone[] = [
     name: 'First Competition',
     description: 'Competed in first tournament',
     earnedAt: '2023-04-15',
-    icon: '🏆',
+    icon: 'Trophy', // Line art icon name
   },
   {
     id: 'mile-007',
@@ -335,7 +337,7 @@ export const mockMilestones: Milestone[] = [
     name: 'Medal Winner',
     description: 'Won a medal in competition',
     earnedAt: '2024-06-22',
-    icon: '🥈',
+    icon: 'Medal', // Line art icon name
   },
   {
     id: 'mile-008',
@@ -343,7 +345,7 @@ export const mockMilestones: Milestone[] = [
     name: 'Armbar Master',
     description: 'Landed 10 armbars in sparring',
     earnedAt: '2023-08-10',
-    icon: '💪',
+    icon: 'Award', // Line art icon name
   },
   {
     id: 'mile-009',
@@ -351,7 +353,7 @@ export const mockMilestones: Milestone[] = [
     name: 'Well Rounded',
     description: 'Drilled techniques from all positions',
     earnedAt: '2024-02-15',
-    icon: '🌟',
+    icon: 'Star', // Line art icon name
   },
 ];
 
@@ -497,6 +499,7 @@ export interface PromotionReadiness {
     total: number;
     percentage: number;
   };
+  areasNeedingWork?: string[]; // Areas that need improvement for promotion
   coachRecommendation?: 'not-ready' | 'almost-ready' | 'ready';
   coachNotes?: string;
   lastAssessmentDate?: string;
@@ -582,6 +585,7 @@ export const mockTonyChenPromotionReadiness: PromotionReadiness = {
     total: 11,
     percentage: 45,
   },
+  areasNeedingWork: ['Open guard development', 'Combination attacks', 'Half guard passing'],
   coachRecommendation: 'almost-ready',
   coachNotes: 'Tony shows strong fundamentals and dedication. Needs 3 more months at blue belt and should focus on open guard development and combination attacks. On track for purple in mid-2025.',
   lastAssessmentDate: '2024-11-15',

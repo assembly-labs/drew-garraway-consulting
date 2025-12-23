@@ -1,6 +1,6 @@
 export type BeltColor = 'white' | 'blue' | 'purple' | 'brown' | 'black';
 
-export type TrainingType = 'gi' | 'no-gi' | 'open-mat' | 'private' | 'competition';
+export type TrainingType = 'gi' | 'nogi' | 'openmat' | 'private' | 'competition';
 
 export interface Technique {
   id: string;

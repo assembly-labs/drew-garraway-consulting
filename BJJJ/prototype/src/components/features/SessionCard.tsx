@@ -13,7 +13,8 @@ export interface Session {
   submissionsGiven: number;
   submissionsReceived: number;
   struggles: string[];
-  injuries: { bodyPart: string; notes: string }[];
+  workedWell?: string[];  // Things that went well
+  sparringRounds?: number; // Number of sparring rounds
 }
 
 interface SessionCardProps {
@@ -30,8 +31,47 @@ const trainingTypeLabels: Record<Session['trainingType'], string> = {
   competition: 'Competition',
 };
 
+// Tally mark component for session cards
+function TallyMark({ count, color }: { count: number; color: string }) {
+  if (count === 0) return null;
+
+  const fullGroups = Math.floor(count / 5);
+  const remainder = count % 5;
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+      {/* Full groups of 5 */}
+      {Array.from({ length: fullGroups }).map((_, i) => (
+        <svg key={`g-${i}`} width="20" height="16" viewBox="0 0 20 16">
+          <line x1="2" y1="2" x2="2" y2="14" stroke={color} strokeWidth="2" strokeLinecap="round" />
+          <line x1="6" y1="2" x2="6" y2="14" stroke={color} strokeWidth="2" strokeLinecap="round" />
+          <line x1="10" y1="2" x2="10" y2="14" stroke={color} strokeWidth="2" strokeLinecap="round" />
+          <line x1="14" y1="2" x2="14" y2="14" stroke={color} strokeWidth="2" strokeLinecap="round" />
+          <line x1="0" y1="12" x2="16" y2="4" stroke={color} strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      ))}
+      {/* Remaining lines */}
+      {remainder > 0 && (
+        <svg width={remainder * 4 + 2} height="16" viewBox={`0 0 ${remainder * 4 + 2} 16`}>
+          {Array.from({ length: remainder }).map((_, i) => (
+            <line
+              key={`l-${i}`}
+              x1={2 + i * 4}
+              y1="2"
+              x2={2 + i * 4}
+              y2="14"
+              stroke={color}
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          ))}
+        </svg>
+      )}
+    </div>
+  );
+}
+
 export function SessionCard({ session, onClick, isHighlighted }: SessionCardProps) {
-  const hasInjury = session.injuries.length > 0;
   const techniquePreview = session.techniques.length > 0
     ? session.techniques[0]
     : session.struggles.length > 0
@@ -41,7 +81,6 @@ export function SessionCard({ session, onClick, isHighlighted }: SessionCardProp
   return (
     <button
       onClick={onClick}
-      className="card"
       style={{
         width: '100%',
         textAlign: 'left',
@@ -49,16 +88,19 @@ export function SessionCard({ session, onClick, isHighlighted }: SessionCardProp
         borderLeft: isHighlighted ? '4px solid var(--color-accent)' : '4px solid transparent',
         transition: 'transform 0.2s, box-shadow 0.2s, border-color 0.2s',
         padding: 'var(--space-md)',
+        backgroundColor: 'var(--color-gray-900)',
+        border: '1px solid var(--color-gray-800)',
+        borderRadius: 'var(--radius-md)',
       }}
       onMouseOver={(e) => {
         if (onClick) {
           e.currentTarget.style.transform = 'translateY(-1px)';
-          e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+          e.currentTarget.style.backgroundColor = 'var(--color-gray-800)';
         }
       }}
       onMouseOut={(e) => {
         e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = 'none';
+        e.currentTarget.style.backgroundColor = 'var(--color-gray-900)';
       }}
     >
       {/* Header Row */}
@@ -72,7 +114,7 @@ export function SessionCard({ session, onClick, isHighlighted }: SessionCardProp
           <span style={{
             fontSize: 'var(--text-sm)',
             fontWeight: 600,
-            color: 'var(--color-gray-700)',
+            color: 'var(--color-gray-300)',
           }}>
             {session.time}
           </span>
@@ -91,7 +133,7 @@ export function SessionCard({ session, onClick, isHighlighted }: SessionCardProp
       {/* Technique Preview */}
       <div style={{
         fontSize: 'var(--text-base)',
-        color: 'var(--color-gray-800)',
+        color: 'var(--color-gray-200)',
         marginBottom: 'var(--space-sm)',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
@@ -100,62 +142,46 @@ export function SessionCard({ session, onClick, isHighlighted }: SessionCardProp
         {techniquePreview}
       </div>
 
-      {/* Stats Row */}
+      {/* Stats Row - Tally Marks */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 'var(--space-md)',
+        gap: 'var(--space-lg)',
         fontSize: 'var(--text-sm)',
       }}>
-        {/* Submissions Given */}
+        {/* Submissions Given - Tally */}
         {session.submissionsGiven > 0 && (
-          <span style={{
+          <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: 'var(--space-xs)',
-            color: 'var(--color-success)',
           }}>
-            <span style={{ fontWeight: 600 }}>✓</span>
-            <span>{session.submissionsGiven}</span>
-          </span>
+            <TallyMark count={session.submissionsGiven} color="var(--color-positive)" />
+            <span style={{ color: 'var(--color-gray-500)', fontSize: 'var(--text-xs)', textTransform: 'uppercase' }}>
+              dished
+            </span>
+          </div>
         )}
 
-        {/* Submissions Received */}
+        {/* Submissions Received - Tally */}
         {session.submissionsReceived > 0 && (
-          <span style={{
+          <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: 'var(--space-xs)',
-            color: 'var(--color-error)',
           }}>
-            <span style={{ fontWeight: 600 }}>✗</span>
-            <span>{session.submissionsReceived}</span>
-          </span>
-        )}
-
-        {/* Injury indicator */}
-        {hasInjury && (
-          <span style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 'var(--space-xs)',
-            color: 'var(--color-warning)',
-            marginLeft: 'auto',
-          }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-              <line x1="12" y1="9" x2="12" y2="13" />
-              <line x1="12" y1="17" x2="12.01" y2="17" />
-            </svg>
-            <span>{session.injuries[0].bodyPart}</span>
-          </span>
+            <TallyMark count={session.submissionsReceived} color="var(--color-negative)" />
+            <span style={{ color: 'var(--color-gray-500)', fontSize: 'var(--text-xs)', textTransform: 'uppercase' }}>
+              tapped
+            </span>
+          </div>
         )}
 
         {/* Chevron */}
         {onClick && (
           <span style={{
-            marginLeft: hasInjury ? 0 : 'auto',
-            color: 'var(--color-gray-400)',
+            marginLeft: 'auto',
+            color: 'var(--color-gray-500)',
           }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="9 18 15 12 9 6" />

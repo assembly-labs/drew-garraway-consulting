@@ -1,54 +1,65 @@
 # BJJ Journal Design System
 
-Based on Alliance BJJ Design Language - Bold, high-contrast, martial arts inspired.
+Bold, dark, editorial design system. Linear/Palantir inspired aesthetic.
 
 ---
 
 ## Design Principles
 
-1. **Bold & Strong** - Uppercase headings, heavy weights, high contrast
-2. **Black & Gold** - Primary palette reflecting martial arts tradition
-3. **Functional** - Clear hierarchy, accessible, mobile-first
-4. **Respectful** - Belt colors follow industry standards
+1. **NO EMOJIS** - Use SVG lineart icons only
+2. **Dark Theme** - #111111 background (softened from pure black) with gold accents
+3. **Large Typography** - Hero numbers up to 144px-180px
+4. **Semantic Colors** - GREEN = positive, RED = negative
+5. **Full-Bleed Sections** - No rounded corners, gradient backgrounds
+6. **Space Grotesk + Space Mono** - Modern geometric typography
+7. **Medium Font Weight** - Body text uses 500 weight for better readability
+8. **Lightened Grays** - All gray values lifted for better contrast on dark backgrounds
 
 ---
 
 ## Color Tokens
 
-### Primary Brand Colors
+### Primary Colors
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--color-primary` | `#000000` | Main dark color, headers, text |
-| `--color-primary-light` | `#1a1a1a` | Lighter dark variant |
-| `--color-primary-dark` | `#0a0a0a` | Deep dark backgrounds |
-| `--color-white` | `#FFFFFF` | Light backgrounds, text on dark |
+| `--color-black` | `#111111` | Primary background (softened for readability) |
+| `--color-white` | `#FFFFFF` | Primary text |
+| `--color-gold` | `#F5A623` | Accent color |
+| `--color-gold-dim` | `rgba(245, 166, 35, 0.15)` | Gold backgrounds |
+| `--color-gold-glow` | `rgba(245, 166, 35, 0.25)` | Gold radial glows |
 
-### Accent Colors (Gold/Yellow)
+### Semantic Colors (Positive/Negative)
+
+Use GREEN for positive outcomes (wins, submissions landed, progress).
+Use RED for negative outcomes (losses, times tapped, weaknesses).
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--color-accent` | `#FCD34D` | Primary accent, highlights, progress |
-| `--color-accent-hover` | `#FBBF24` | Hover states |
-| `--color-accent-dark` | `#F59E0B` | Active states |
-| `--color-accent-text` | `#B8860B` | Text on light backgrounds (7.3:1 contrast) |
-| `--color-accent-text-dark` | `#FFD700` | Text on dark backgrounds (10.8:1 contrast) |
-| `--color-accent-button` | `#F59E0B` | Button backgrounds (3.5:1 contrast) |
+| `--color-positive` | `#22c55e` | Wins, submissions, streaks |
+| `--color-positive-dim` | `rgba(34, 197, 94, 0.15)` | Green backgrounds |
+| `--color-positive-glow` | `rgba(34, 197, 94, 0.25)` | Green radial glows |
+| `--color-negative` | `#ef4444` | Losses, taps, weaknesses |
+| `--color-negative-dim` | `rgba(239, 68, 68, 0.15)` | Red backgrounds |
+| `--color-negative-glow` | `rgba(239, 68, 68, 0.25)` | Red radial glows |
+| `--color-warning` | `#f59e0b` | Warnings |
+| `--color-info` | `#3b82f6` | Information |
 
 ### Grayscale Palette
 
+All grays are lightened for better contrast on dark backgrounds.
+
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--color-gray-50` | `#FAFAFA` | Lightest backgrounds |
-| `--color-gray-100` | `#F5F5F5` | Page backgrounds |
-| `--color-gray-200` | `#E5E5E5` | Borders, dividers |
-| `--color-gray-300` | `#D4D4D4` | Input borders |
-| `--color-gray-400` | `#A3A3A3` | Placeholder text |
-| `--color-gray-500` | `#6B7280` | Muted text (4.6:1 on white) |
-| `--color-gray-600` | `#4B5563` | Secondary text |
-| `--color-gray-700` | `#374151` | Primary body text |
-| `--color-gray-800` | `#1F2937` | Dark text |
-| `--color-gray-900` | `#171717` | Darkest text |
+| `--color-gray-100` | `#f5f5f5` | Primary text on dark |
+| `--color-gray-200` | `#e5e5e5` | Secondary text on dark |
+| `--color-gray-300` | `#d4d4d4` | Tertiary text - readable on dark |
+| `--color-gray-400` | `#b3b3b3` | Muted text (lightened from #a3a3a3) |
+| `--color-gray-500` | `#8b8b8b` | Labels (lightened from #6b7280) |
+| `--color-gray-600` | `#6b6b6b` | Secondary labels (lightened from #525252) |
+| `--color-gray-700` | `#4a4a4a` | Borders (lightened from #404040) |
+| `--color-gray-800` | `#1f1f1f` | Card backgrounds (lightened from #1a1a1a) |
+| `--color-gray-900` | `#161616` | Elevated surfaces (lightened from #0f0f0f) |
 
 ### Belt Colors (Industry Standard)
 
@@ -59,18 +70,6 @@ Based on Alliance BJJ Design Language - Bold, high-contrast, martial arts inspir
 | `--color-belt-purple` | `#4B0082` | Purple belt |
 | `--color-belt-brown` | `#8B4513` | Brown belt |
 | `--color-belt-black` | `#000000` | Black belt |
-
-### Status Colors
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--color-success` | `#22C55E` | Success states, confirmations |
-| `--color-success-text` | `#15803D` | Success text (high contrast) |
-| `--color-warning` | `#F59E0B` | Warning states |
-| `--color-warning-text` | `#B45309` | Warning text (high contrast) |
-| `--color-error` | `#EF4444` | Error states, destructive |
-| `--color-error-text` | `#B91C1C` | Error text (high contrast) |
-| `--color-info` | `#3B82F6` | Informational |
 
 ### Training Type Colors
 
@@ -88,49 +87,50 @@ Based on Alliance BJJ Design Language - Bold, high-contrast, martial arts inspir
 
 ### Font Families
 
-| Type | Font | Fallbacks |
-|------|------|-----------|
-| Headings | Montserrat | Arial, Helvetica, sans-serif |
-| Body | Open Sans | Arial, Helvetica, sans-serif |
+| Type | Font | Weight | Fallbacks |
+|------|------|--------|-----------|
+| Headings | Space Grotesk | 700 | -apple-system, sans-serif |
+| Body | Space Grotesk | **500** | -apple-system, sans-serif |
+| Monospace | Space Mono | 400/700 | monospace |
+
+**Note:** Body text uses weight 500 (medium) instead of 400 (regular) for better readability on dark backgrounds.
 
 ### Type Scale
 
 | Token | Size | Pixels |
 |-------|------|--------|
-| `--text-xs` | 0.75rem | 12px |
-| `--text-sm` | 0.875rem | 14px |
-| `--text-base` | 1rem | 16px |
-| `--text-lg` | 1.125rem | 18px |
-| `--text-xl` | 1.25rem | 20px |
+| `--text-xs` | 0.625rem | 10px |
+| `--text-sm` | 0.8125rem | 13px |
+| `--text-base` | 0.9375rem | 15px |
+| `--text-lg` | 1.0625rem | 17px |
+| `--text-xl` | 1.375rem | 22px |
 | `--text-2xl` | 1.5rem | 24px |
-| `--text-3xl` | 1.875rem | 30px |
-| `--text-4xl` | 2.25rem | 36px |
+| `--text-3xl` | 2rem | 32px |
+| `--text-4xl` | 3rem | 48px |
+| `--text-5xl` | 4.5rem | 72px |
+| `--text-hero` | 9rem | 144px |
+| `--text-mega` | 11.25rem | 180px |
 
 ### Line Heights
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--leading-tight` | 1.2 | Headings |
-| `--leading-normal` | 1.6 | Body text |
-| `--leading-relaxed` | 1.76 | Mobile body (+10%) |
+| `--leading-none` | 0.8 | Hero numbers |
+| `--leading-tight` | 0.85 | Large headings |
+| `--leading-snug` | 1 | Compact text |
+| `--leading-normal` | 1.5 | Body text |
 
 ### Letter Spacing
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--tracking-tight` | -0.025em | Tight headlines |
+| `--tracking-tighter` | -0.05em | Mega numbers |
+| `--tracking-tight` | -0.04em | Hero numbers |
 | `--tracking-normal` | 0 | Default |
-| `--tracking-wide` | 0.025em | Subheadings |
-| `--tracking-wider` | 0.05em | H1 headings |
-| `--tracking-widest` | 0.1em | Labels, caps |
-
-### Heading Styles
-
-All headings use:
-- Font: Montserrat
-- Weight: 700 (Bold)
-- Transform: UPPERCASE
-- Line-height: 1.2
+| `--tracking-wide` | 0.05em | Subheadings |
+| `--tracking-wider` | 0.1em | Labels |
+| `--tracking-widest` | 0.15em | Section titles |
+| `--tracking-ultra` | 0.2em | Eyebrow labels |
 
 ---
 
@@ -152,110 +152,111 @@ Based on 4px unit for consistency.
 
 ## Border Radius
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--radius-sm` | 4px | Inputs, small buttons |
-| `--radius-md` | 8px | Cards, buttons |
-| `--radius-lg` | 12px | Large cards |
-| `--radius-xl` | 16px | Modals |
-| `--radius-full` | 9999px | Pills, avatars |
-
----
-
-## Shadows
+Minimal radius - sharp edges for bold aesthetic.
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--shadow-sm` | `0 1px 2px 0 rgb(0 0 0 / 0.05)` | Subtle elevation |
-| `--shadow-md` | `0 4px 6px -1px rgb(0 0 0 / 0.1)` | Cards, buttons |
-| `--shadow-lg` | `0 10px 15px -3px rgb(0 0 0 / 0.1)` | Modals, dropdowns |
-| `--shadow-xl` | `0 20px 25px -5px rgb(0 0 0 / 0.1)` | Floating elements |
+| `--radius-none` | 0 | Default, most elements |
+| `--radius-sm` | 2px | Belt badges |
+| `--radius-md` | 4px | Buttons (rare) |
 
 ---
 
 ## Components
 
+### Stat Displays
+
+```css
+.stat-grid              /* Grid container with 1px gap */
+.stat-grid-2            /* 2-column grid */
+.stat-grid-4            /* 4-column grid */
+.stat-grid-5            /* 5-column grid */
+.stat-cell              /* Individual stat cell */
+.stat-cell--positive    /* Green gradient background */
+.stat-cell--negative    /* Red gradient background */
+.stat-cell--compact     /* Smaller padding, centered */
+.stat-label             /* Monospace uppercase label */
+.stat-label--positive   /* Green label text */
+.stat-label--negative   /* Red label text */
+.stat-value             /* Large number (64px) */
+.stat-value--positive   /* Green number */
+.stat-value--negative   /* Red number */
+.stat-value--gold       /* Gold number */
+```
+
 ### Buttons
 
 ```css
-.btn              /* Base button */
-.btn-primary      /* Gold/yellow accent */
-.btn-dark         /* Black button */
-.btn-outline      /* Outlined button */
-.btn-success      /* Green success */
-.btn-danger       /* Red destructive */
-.btn-sm           /* Small size */
-.btn-lg           /* Large size */
+.btn                    /* Base button */
+.btn-primary            /* Gold background, black text */
+.btn-dark               /* Dark background, gray border */
+.btn-outline            /* Transparent, gray border */
+.btn-positive           /* Green background */
+.btn-negative           /* Red background */
+.btn-sm                 /* Smaller padding */
 ```
 
-### Cards
+### Callouts
 
 ```css
-.card             /* Base card container */
-.card-header      /* Card header section */
-.card-title       /* Card title text */
-```
-
-### Forms
-
-```css
-.form-group       /* Form field wrapper */
-.form-label       /* Field label */
-.form-input       /* Text input */
-.form-select      /* Select dropdown */
-.form-textarea    /* Multiline input */
+.callout                /* Base callout */
+.callout--positive      /* Green gradient + left border */
+.callout--negative      /* Red gradient + left border */
+.callout-label          /* Uppercase monospace label */
+.callout-text           /* Body text */
 ```
 
 ### Badges
 
 ```css
 /* Belt badges */
-.belt-badge       /* Base belt badge */
-.belt-white       /* White belt color */
-.belt-blue        /* Blue belt color */
-.belt-purple      /* Purple belt color */
-.belt-brown       /* Brown belt color */
-.belt-black       /* Black belt color */
-.belt-stripes     /* Stripe container */
-.belt-stripe      /* Individual stripe */
+.belt-badge             /* Base belt badge */
+.belt-white             /* White belt color */
+.belt-blue              /* Blue belt color */
+.belt-purple            /* Purple belt color */
+.belt-brown             /* Brown belt color */
+.belt-black             /* Black belt color */
 
 /* Training type badges */
-.training-badge   /* Base training badge */
-.training-gi      /* Gi class */
-.training-nogi    /* No-Gi class */
-.training-openmat /* Open mat */
-.training-private /* Private lesson */
-.training-competition /* Competition */
-
-/* Status badges */
-.status-badge     /* Base status badge */
-.status-success   /* Green success */
-.status-warning   /* Yellow warning */
-.status-error     /* Red error */
+.training-badge         /* Base training badge */
+.training-gi            /* Gi class */
+.training-nogi          /* No-Gi class */
+.training-openmat       /* Open mat */
+.training-private       /* Private lesson */
+.training-competition   /* Competition */
 ```
 
-### Stats
+### Bar Charts
 
 ```css
-.stat-card        /* Stat card container */
-.stat-label       /* Stat label text */
-.stat-value       /* Stat value (large number) */
+.bar-list               /* Container for bar rows */
+.bar-row                /* Individual bar row */
+.bar-rank               /* Rank number */
+.bar-container          /* Bar background */
+.bar-fill               /* Bar fill */
+.bar-fill--gold         /* Gold fill */
+.bar-fill--gray         /* Gray fill */
+.bar-label              /* Label inside bar */
+.bar-count              /* Count outside bar */
 ```
 
-### Progress
+### Forms
 
 ```css
-.progress-bar     /* Progress bar container */
-.progress-fill    /* Progress bar fill */
+.form-group             /* Form field wrapper */
+.form-label             /* Monospace uppercase label */
+.form-input             /* Text input */
+.form-select            /* Select dropdown */
+.form-textarea          /* Multiline input */
 ```
 
-### Navigation
+### Streak Display
 
 ```css
-.tab-bar          /* Mobile tab bar */
-.tab-item         /* Tab bar item */
-.tab-item.active  /* Active tab */
-.tab-icon         /* Tab icon */
+.streak-display         /* Container with dark bg */
+.streak-glow            /* Radial gradient glow */
+.streak-number          /* Massive green number */
+.streak-unit            /* "Day Streak" label */
 ```
 
 ---
@@ -263,39 +264,72 @@ Based on 4px unit for consistency.
 ## Utility Classes
 
 ```css
-/* Text alignment */
-.text-center
-.text-right
+/* Layout */
+.flex                   /* display: flex */
+.flex-wrap              /* flex-wrap: wrap */
+.flex-col               /* flex-direction: column */
+.items-center           /* align-items: center */
+.justify-between        /* justify-content: space-between */
 
-/* Text styling */
-.text-muted       /* Muted gray text */
-.text-small       /* Small text */
-.text-large       /* Large text */
-.text-uppercase   /* Uppercase text */
-.font-bold        /* Bold weight */
-.font-heading     /* Montserrat font */
+/* Spacing */
+.gap-xs                 /* gap: 4px */
+.gap-sm                 /* gap: 8px */
+.gap-md                 /* gap: 16px */
+.gap-lg                 /* gap: 24px */
+.gap-xl                 /* gap: 32px */
+
+/* Grid */
+.grid                   /* display: grid */
+.grid-2                 /* 2-column grid */
+.grid-3                 /* 3-column grid */
+.grid-auto              /* auto-fit columns */
+
+/* Text */
+.text-center            /* text-align: center */
+.text-small             /* font-size: 13px */
+.text-muted             /* color: gray-400 */
+.text-mono              /* font-family: Space Mono */
+.text-gold              /* color: gold */
+.text-positive          /* color: green */
+.text-negative          /* color: red */
 ```
 
 ---
 
-## Dark Mode
+## Icon Guidelines
 
-Dark mode is automatically applied via `prefers-color-scheme: dark`.
+**NEVER USE EMOJIS.**
 
-### Dark Mode Tokens
+Always use SVG lineart icons from the Icons component:
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--dark-bg-primary` | `#0F0F0F` | Main background |
-| `--dark-bg-secondary` | `#1A1A1A` | Card backgrounds |
-| `--dark-bg-tertiary` | `#252525` | Hover states |
-| `--dark-border` | `#353535` | Border color |
+```tsx
+import { IconCheck, IconFlame, IconTrophy, IconTarget } from './ui/Icons';
+
+// Usage
+<IconCheck size={24} />
+<IconFlame size={24} />
+```
+
+Available icons:
+- IconCheck, IconX
+- IconPlus, IconMinus
+- IconChevronRight, IconChevronDown
+- IconSearch, IconFilter
+- IconMic, IconMicOff
+- IconStar, IconStarFilled
+- IconFlame, IconTrophy, IconTarget
+- IconCalendar, IconClock, IconTimer
+- IconUser, IconSettings, IconLogOut
+- IconHome, IconBook, IconBarChart
+- IconTrendUp, IconTrendDown
+- IconBelt, IconMedal, IconAward
+- And more...
 
 ---
 
 ## Accessibility
 
 - All color combinations meet WCAG 2.1 AA standards
-- Focus states use 2px outline with accent color
-- Interactive elements have visible hover/focus states
-- Text contrast ratios noted in token tables
+- Focus states use gold outline with 3px gold-dim box-shadow
+- Interactive elements have min 44px touch targets
+- Motion respects prefers-reduced-motion

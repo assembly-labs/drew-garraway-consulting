@@ -233,6 +233,7 @@ export const mockTrainingStats = {
     hours: 15.5,
     techniques: 8,
     sparringRounds: 24,
+    targetSessions: 16, // Monthly goal
   },
   thisYear: {
     sessions: 156,

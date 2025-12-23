@@ -7,3 +7,4 @@ export { BeltBadge } from './BeltBadge';
 export { StatCard } from './StatCard';
 export { TrainingBadge } from './TrainingBadge';
 export { ProgressRing } from './ProgressRing';
+export { YouTubeEmbed, VideoThumbnail } from './YouTubeEmbed';
