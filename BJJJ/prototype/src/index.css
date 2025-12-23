@@ -1,3 +1,6 @@
+/* Google Fonts - Space Grotesk & Space Mono (must be first) */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
 @import "tailwindcss";
 
 /* ========================================
@@ -13,9 +16,6 @@
    6. Full-bleed sections with gradient backgrounds
    7. Semantic colors: GREEN = positive, RED = negative
    ======================================== */
-
-/* Google Fonts - Space Grotesk & Space Mono */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 @theme {
   /* ========================================
