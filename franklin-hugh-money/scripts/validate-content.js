@@ -20,7 +20,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const PUBLIC_DIR = path.join(__dirname, '..', 'public');
+const PUBLIC_DIR = path.join(__dirname, '..');
 const CONTENT_DIR = path.join(__dirname, '..', 'content', 'sie-exam', 'chapters');
 
 let errors = [];

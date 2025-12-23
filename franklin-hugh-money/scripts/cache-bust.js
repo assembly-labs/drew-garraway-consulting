@@ -21,7 +21,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const PUBLIC_DIR = path.join(__dirname, '..', 'public');
+const PUBLIC_DIR = path.join(__dirname, '..');
 const MANIFEST_FILE = path.join(__dirname, '..', '.cache-manifest.json');
 
 // Assets to track (relative to public/)
