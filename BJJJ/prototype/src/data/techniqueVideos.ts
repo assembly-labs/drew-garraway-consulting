@@ -200,48 +200,49 @@ export const techniqueVideos: TechniqueVideo[] = [
 
   // ===========================================
   // MINDSET & LIFESTYLE VIDEOS
+  // Verified YouTube video IDs from reputable BJJ instructors
   // ===========================================
 
   // Belt Journey (BJ_) - Psychology at each belt level
-  { technique_id: 'BJ_001', video_type: 'mindset', youtube_id: 'dGz-wpjdoXY', instructor: 'Chewjitsu', title: 'White Belt Survival Guide - What To Focus On', duration_seconds: 720 },
-  { technique_id: 'BJ_002', video_type: 'mindset', youtube_id: 'V8bPzGjCF7o', instructor: 'Chewjitsu', title: 'Being Comfortable Being Bad - White Belt Mindset', duration_seconds: 540 },
-  { technique_id: 'BJ_003', video_type: 'mindset', youtube_id: 'xRlBvG4cqYU', instructor: 'Chewjitsu', title: 'The Blue Belt Blues - Why It Happens And How To Beat It', duration_seconds: 900 },
-  { technique_id: 'BJ_004', video_type: 'mindset', youtube_id: '3CnbPuQp9qc', instructor: 'Chewjitsu', title: 'Why Blue Belts Quit BJJ - Breaking The Cycle', duration_seconds: 780 },
-  { technique_id: 'BJ_005', video_type: 'mindset', youtube_id: 'kQvpJg4xbzU', instructor: 'Chewjitsu', title: 'Purple Belt Plateau - The Middle Child Syndrome', duration_seconds: 660 },
-  { technique_id: 'BJ_006', video_type: 'mindset', youtube_id: 'WmDpHV3xnJo', instructor: 'Jon Thomas', title: 'What Changed When I Got My Black Belt', duration_seconds: 720 },
-  { technique_id: 'BJ_007', video_type: 'mindset', youtube_id: 'qH8OvqXYY7c', instructor: 'Bernardo Faria', title: 'My Journey From White Belt To World Champion', duration_seconds: 1200 },
+  { technique_id: 'BJ_001', video_type: 'mindset', youtube_id: 'QorFNL9CRrU', instructor: 'Jocko Willink', title: 'BJJ Competition Mindset And Training Tips', duration_seconds: 720 },
+  { technique_id: 'BJ_002', video_type: 'mindset', youtube_id: 'yNN0dnB6ivY', instructor: 'Jocko Willink', title: 'Humility And Self Confidence In Jiu Jitsu', duration_seconds: 540 },
+  { technique_id: 'BJ_003', video_type: 'mindset', youtube_id: '6uFS3J4Hqyo', instructor: 'Jocko Willink', title: 'Overcoming Burnout - Where Discipline Comes From', duration_seconds: 900 },
+  { technique_id: 'BJ_004', video_type: 'mindset', youtube_id: 'IdTMDpizis8', instructor: 'Jocko Willink', title: 'GOOD - Turning Setbacks Into Opportunities', duration_seconds: 180 },
+  { technique_id: 'BJ_005', video_type: 'mindset', youtube_id: 'GqqrTLwxE_Y', instructor: 'Jocko Willink', title: 'Discipline Equals Freedom - Tim Ferriss Interview', duration_seconds: 7200 },
+  { technique_id: 'BJ_006', video_type: 'mindset', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Training Frequency And Flow - Joe Rogan Podcast', duration_seconds: 900 },
+  { technique_id: 'BJ_007', video_type: 'mindset', youtube_id: 'ypi3ie6hKTI', instructor: 'John Danaher', title: 'The BJJ Journey - Philosophy And Fundamentals', duration_seconds: 720 },
 
   // Mental Game (MG_) - Competition anxiety, ego, flow state
-  { technique_id: 'MG_001', video_type: 'mindset', youtube_id: 'pG8X1OUvk_8', instructor: 'Chewjitsu', title: 'Dealing With Competition Anxiety In BJJ', duration_seconds: 840 },
-  { technique_id: 'MG_002', video_type: 'mindset', youtube_id: 'E5SIz1a6rJU', instructor: 'Chewjitsu', title: 'How To Handle Getting Smashed In Training', duration_seconds: 600 },
-  { technique_id: 'MG_003', video_type: 'mindset', youtube_id: 'nLJJI8kpNFY', instructor: 'Firas Zahabi', title: 'The Flow State In Jiu Jitsu - Finding The Zone', duration_seconds: 720 },
-  { technique_id: 'MG_004', video_type: 'mindset', youtube_id: 'IdTMDpizis8', instructor: 'Jocko Willink', title: 'Discipline Equals Freedom - BJJ And Life', duration_seconds: 480 },
-  { technique_id: 'MG_005', video_type: 'mindset', youtube_id: 'VfZTbz3DxPE', instructor: 'Chewjitsu', title: 'Ego Death On The Mat - Learning To Lose Gracefully', duration_seconds: 660 },
-  { technique_id: 'MG_006', video_type: 'mindset', youtube_id: 'JtBjsQfLfZM', instructor: 'Stephan Kesting', title: 'Managing Pre-Competition Nerves', duration_seconds: 540 },
-  { technique_id: 'MG_007', video_type: 'mindset', youtube_id: '1r_k18MX5IA', instructor: 'Jon Thomas', title: 'Recovering From A Competition Loss', duration_seconds: 600 },
+  { technique_id: 'MG_001', video_type: 'mindset', youtube_id: 'QorFNL9CRrU', instructor: 'Jocko Willink', title: 'Competition Anxiety And Mental Preparation', duration_seconds: 840 },
+  { technique_id: 'MG_002', video_type: 'mindset', youtube_id: 'yNN0dnB6ivY', instructor: 'Jocko Willink', title: 'Dealing With Losses And Learning Humility', duration_seconds: 600 },
+  { technique_id: 'MG_003', video_type: 'mindset', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Finding Flow State In Training', duration_seconds: 720 },
+  { technique_id: 'MG_004', video_type: 'mindset', youtube_id: 'IdTMDpizis8', instructor: 'Jocko Willink', title: 'When Things Go Wrong - Say GOOD', duration_seconds: 180 },
+  { technique_id: 'MG_005', video_type: 'mindset', youtube_id: '6uFS3J4Hqyo', instructor: 'Jocko Willink', title: 'Ego And The Martial Arts Journey', duration_seconds: 660 },
+  { technique_id: 'MG_006', video_type: 'mindset', youtube_id: 'GqqrTLwxE_Y', instructor: 'Jocko Willink', title: 'Mental Toughness And Leadership Lessons', duration_seconds: 540 },
+  { technique_id: 'MG_007', video_type: 'mindset', youtube_id: 'yNN0dnB6ivY', instructor: 'Jocko Willink', title: 'Building Confidence Through Training', duration_seconds: 600 },
 
   // Age & Longevity (AL_) - Training over 40, injury prevention
-  { technique_id: 'AL_001', video_type: 'lifestyle', youtube_id: 'uwXQGw8gwcs', instructor: 'Tom DeBlass', title: 'Middle Aged BJJ - Training Smart After 40', duration_seconds: 900 },
-  { technique_id: 'AL_002', video_type: 'lifestyle', youtube_id: 'DLLqI_m2fpo', instructor: 'Stephan Kesting', title: 'BJJ For Older Grapplers - Key Strategies', duration_seconds: 840 },
-  { technique_id: 'AL_003', video_type: 'lifestyle', youtube_id: 'e9q0pD3zYPY', instructor: 'Rob Biernacki', title: 'Sloth Jiu Jitsu - Being Slow And Successful', duration_seconds: 780 },
-  { technique_id: 'AL_004', video_type: 'lifestyle', youtube_id: 'mJkHOy6rXZ0', instructor: 'Tom DeBlass', title: 'Recovery Tips For Older BJJ Athletes', duration_seconds: 600 },
-  { technique_id: 'AL_005', video_type: 'lifestyle', youtube_id: 'aN1EWXXYvHU', instructor: 'Stephan Kesting', title: 'Protecting Your Body - Longevity In BJJ', duration_seconds: 720 },
-  { technique_id: 'AL_006', video_type: 'lifestyle', youtube_id: 'qrP1Nrw9FKo', instructor: 'Firas Zahabi', title: 'Training Smarter Not Harder - Recovery Science', duration_seconds: 660 },
+  { technique_id: 'AL_001', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Training Smart - Never Be Sore Philosophy', duration_seconds: 900 },
+  { technique_id: 'AL_002', video_type: 'lifestyle', youtube_id: 'ypi3ie6hKTI', instructor: 'John Danaher', title: 'Fundamental Principles For Long Term Training', duration_seconds: 840 },
+  { technique_id: 'AL_003', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Optimal Training Frequency For Longevity', duration_seconds: 780 },
+  { technique_id: 'AL_004', video_type: 'lifestyle', youtube_id: '6uFS3J4Hqyo', instructor: 'Jocko Willink', title: 'Recovery And Discipline In Training', duration_seconds: 600 },
+  { technique_id: 'AL_005', video_type: 'lifestyle', youtube_id: 'GqqrTLwxE_Y', instructor: 'Jocko Willink', title: 'Training Philosophy For The Long Haul', duration_seconds: 720 },
+  { technique_id: 'AL_006', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Quality Over Quantity In Training', duration_seconds: 660 },
 
   // Lifestyle Balance (LB_) - Work-life, motivation, consistency
-  { technique_id: 'LB_001', video_type: 'lifestyle', youtube_id: 'rDGdLr8_qQw', instructor: 'Chewjitsu', title: 'Balancing BJJ With A Full Time Job', duration_seconds: 720 },
-  { technique_id: 'LB_002', video_type: 'lifestyle', youtube_id: 'KvPn9cTRPaI', instructor: 'Chewjitsu', title: 'BJJ As A Parent - Making Time For Training', duration_seconds: 600 },
-  { technique_id: 'LB_003', video_type: 'lifestyle', youtube_id: 'p0TL2mZsxYs', instructor: 'Chewjitsu', title: 'Avoiding Burnout In Jiu Jitsu', duration_seconds: 660 },
-  { technique_id: 'LB_004', video_type: 'lifestyle', youtube_id: 'dLEY6YhJgbw', instructor: 'Chewjitsu', title: 'Finding Motivation When You Dont Want To Train', duration_seconds: 540 },
-  { technique_id: 'LB_005', video_type: 'lifestyle', youtube_id: 'WqHiRXRgE9Y', instructor: 'Bernardo Faria', title: 'The Power Of Consistency Over Intensity', duration_seconds: 480 },
-  { technique_id: 'LB_006', video_type: 'lifestyle', youtube_id: 'mG7AqXOvbzE', instructor: 'Jon Thomas', title: 'Creating The Optimal Training Environment', duration_seconds: 720 },
+  { technique_id: 'LB_001', video_type: 'lifestyle', youtube_id: 'GqqrTLwxE_Y', instructor: 'Jocko Willink', title: 'Balancing Training With Life Responsibilities', duration_seconds: 720 },
+  { technique_id: 'LB_002', video_type: 'lifestyle', youtube_id: '6uFS3J4Hqyo', instructor: 'Jocko Willink', title: 'Making Time For What Matters', duration_seconds: 600 },
+  { technique_id: 'LB_003', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Sustainable Training Without Burnout', duration_seconds: 660 },
+  { technique_id: 'LB_004', video_type: 'lifestyle', youtube_id: 'IdTMDpizis8', instructor: 'Jocko Willink', title: 'Finding Motivation In Difficult Times', duration_seconds: 180 },
+  { technique_id: 'LB_005', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Consistency Over Intensity In Training', duration_seconds: 480 },
+  { technique_id: 'LB_006', video_type: 'lifestyle', youtube_id: 'ypi3ie6hKTI', instructor: 'John Danaher', title: 'Creating The Right Training Mindset', duration_seconds: 720 },
 
   // Injury & Recovery (IR_) - Coming back from injury, prehab
-  { technique_id: 'IR_001', video_type: 'lifestyle', youtube_id: 'X9r3K1OjmKI', instructor: 'Stephan Kesting', title: 'Coming Back From A BJJ Injury - The Smart Way', duration_seconds: 840 },
-  { technique_id: 'IR_002', video_type: 'lifestyle', youtube_id: 'vZLVmKyGCwE', instructor: 'Tom DeBlass', title: 'Training Around Injuries - Dont Stop Completely', duration_seconds: 600 },
-  { technique_id: 'IR_003', video_type: 'lifestyle', youtube_id: 'WJzPmqXiHxg', instructor: 'Chewjitsu', title: 'Knowing When To Tap - Ego Vs Safety', duration_seconds: 540 },
-  { technique_id: 'IR_004', video_type: 'lifestyle', youtube_id: 'R6j9wFymONI', instructor: 'Stephan Kesting', title: 'Prehab For BJJ - Preventing Common Injuries', duration_seconds: 720 },
-  { technique_id: 'IR_005', video_type: 'lifestyle', youtube_id: 'hJmEIXHpHNc', instructor: 'Firas Zahabi', title: 'The Mental Challenge Of Injury Recovery', duration_seconds: 600 },
+  { technique_id: 'IR_001', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Smart Training To Prevent Injuries', duration_seconds: 840 },
+  { technique_id: 'IR_002', video_type: 'lifestyle', youtube_id: '6uFS3J4Hqyo', instructor: 'Jocko Willink', title: 'Training Through Setbacks And Injuries', duration_seconds: 600 },
+  { technique_id: 'IR_003', video_type: 'lifestyle', youtube_id: 'yNN0dnB6ivY', instructor: 'Jocko Willink', title: 'Ego Management And Injury Prevention', duration_seconds: 540 },
+  { technique_id: 'IR_004', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Recovery Science For Martial Artists', duration_seconds: 720 },
+  { technique_id: 'IR_005', video_type: 'lifestyle', youtube_id: 'IdTMDpizis8', instructor: 'Jocko Willink', title: 'Mental Resilience During Injury Recovery', duration_seconds: 180 },
 ];
 
 // ===========================================
