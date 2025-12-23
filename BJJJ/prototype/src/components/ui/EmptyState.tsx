@@ -159,10 +159,10 @@ export function EmptyState({
       {/* Title */}
       <h3 style={{
         fontFamily: 'var(--font-heading)',
-        fontSize: '20px',
+        fontSize: 'var(--text-xl)',
         fontWeight: 700,
         color: 'var(--color-white)',
-        marginBottom: '8px',
+        marginBottom: 'var(--space-sm)',
         textTransform: 'uppercase',
         letterSpacing: '0.1em',
       }}>
@@ -171,9 +171,9 @@ export function EmptyState({
 
       {/* Message */}
       <p style={{
-        fontSize: '15px',
+        fontSize: 'var(--text-base)',
         color: 'var(--color-gray-400)',
-        marginBottom: '32px',
+        marginBottom: 'var(--space-2xl)',
         maxWidth: 280,
         lineHeight: 1.6,
       }}>

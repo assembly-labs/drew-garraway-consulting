@@ -236,7 +236,7 @@ function ToastItem({ toast, onDismiss }: ToastItemProps) {
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
         color: toast.type === 'warning' ? 'var(--color-black)' : 'var(--color-white)',
         fontWeight: 500,
-        fontSize: '14px',
+        fontSize: 'var(--text-sm)',
         pointerEvents: 'auto',
         animation: isExiting
           ? 'toast-slide-out var(--duration-fast, 0.15s) ease-in forwards'

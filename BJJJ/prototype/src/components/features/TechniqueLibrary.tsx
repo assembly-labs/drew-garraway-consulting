@@ -23,6 +23,7 @@ import {
   positionNames,
   getVideoStats,
   getMindsetVideosByCategory,
+  getMindsetVideos,
 } from '../../data/techniqueVideos';
 import { YouTubeEmbed, VideoThumbnail } from '../ui/YouTubeEmbed';
 import type { TechniqueVideo, VideoRecommendation, PositionCategory } from '../../types/techniqueVideos';
@@ -102,7 +103,7 @@ export function TechniqueLibrary({ onOpenFeedback }: TechniqueLibraryProps) {
   // Video stats
   const videoStats = useMemo(() => getVideoStats(), []);
 
-  // Search results
+  // Search results - techniques
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) return [];
     const query = searchQuery.toLowerCase();
@@ -111,6 +112,17 @@ export function TechniqueLibrary({ onOpenFeedback }: TechniqueLibraryProps) {
       t.position.toLowerCase().includes(query) ||
       t.category.toLowerCase().includes(query)
     ).slice(0, 10);
+  }, [searchQuery]);
+
+  // Search results - mindset videos
+  const mindsetSearchResults = useMemo(() => {
+    if (!searchQuery.trim()) return [];
+    const query = searchQuery.toLowerCase();
+    const mindsetVideos = getMindsetVideos();
+    return mindsetVideos.filter(v =>
+      v.title.toLowerCase().includes(query) ||
+      v.instructor.toLowerCase().includes(query)
+    ).slice(0, 5);
   }, [searchQuery]);
 
   // Navigation handlers
@@ -204,51 +216,144 @@ export function TechniqueLibrary({ onOpenFeedback }: TechniqueLibraryProps) {
       </div>
 
       {/* Search Results */}
-      {searchQuery && searchResults.length > 0 && (
+      {searchQuery && (searchResults.length > 0 || mindsetSearchResults.length > 0) && (
         <div style={{
           backgroundColor: 'var(--color-gray-900)',
           borderRadius: 'var(--radius-md)',
           marginBottom: 'var(--space-md)',
           overflow: 'hidden',
         }}>
-          {searchResults.map(technique => (
-            <button
-              key={technique.id}
-              onClick={() => openTechnique(technique)}
-              style={{
-                width: '100%',
-                padding: 'var(--space-md)',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                backgroundColor: 'transparent',
-                border: 'none',
-                borderBottom: '1px solid var(--color-gray-800)',
-                cursor: 'pointer',
-                textAlign: 'left',
-              }}
-            >
-              <div>
-                <div style={{
-                  color: 'var(--color-white)',
-                  fontWeight: 600,
-                  marginBottom: '2px',
-                }}>
-                  {technique.name}
-                </div>
-                <div style={{
-                  color: 'var(--color-gray-400)',
+          {/* Technique Results */}
+          {searchResults.length > 0 && (
+            <>
+              <div style={{
+                padding: 'var(--space-sm) var(--space-md)',
+                backgroundColor: 'var(--color-gray-800)',
+              }}>
+                <span style={{
+                  fontFamily: 'var(--font-mono)',
                   fontSize: 'var(--text-xs)',
-                  textTransform: 'capitalize',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: 'var(--tracking-wider)',
+                  color: 'var(--color-gray-400)',
                 }}>
-                  {technique.position.replace('-', ' ')}
-                </div>
+                  Techniques
+                </span>
               </div>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-500)" strokeWidth="2">
-                <polyline points="9 18 15 12 9 6" />
-              </svg>
-            </button>
-          ))}
+              {searchResults.map(technique => (
+                <button
+                  key={technique.id}
+                  onClick={() => openTechnique(technique)}
+                  style={{
+                    width: '100%',
+                    padding: 'var(--space-md)',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    borderBottom: '1px solid var(--color-gray-800)',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                  }}
+                >
+                  <div>
+                    <div style={{
+                      color: 'var(--color-white)',
+                      fontWeight: 600,
+                      marginBottom: '2px',
+                    }}>
+                      {technique.name}
+                    </div>
+                    <div style={{
+                      color: 'var(--color-gray-400)',
+                      fontSize: 'var(--text-xs)',
+                      textTransform: 'capitalize',
+                    }}>
+                      {technique.position.replace('-', ' ')}
+                    </div>
+                  </div>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-500)" strokeWidth="2">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </button>
+              ))}
+            </>
+          )}
+
+          {/* Mindset Video Results */}
+          {mindsetSearchResults.length > 0 && (
+            <>
+              <div style={{
+                padding: 'var(--space-sm) var(--space-md)',
+                backgroundColor: 'var(--color-gray-800)',
+              }}>
+                <span style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'var(--text-xs)',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: 'var(--tracking-wider)',
+                  color: 'var(--color-gold)',
+                }}>
+                  Mindset & Lifestyle
+                </span>
+              </div>
+              {mindsetSearchResults.map((video, index) => (
+                <button
+                  key={`${video.youtube_id}-${index}`}
+                  onClick={() => {
+                    // Find the category for this video
+                    const prefix = video.technique_id.split('_')[0];
+                    const categoryMap: Record<string, MindsetCategoryId> = {
+                      'BJ': 'belt_journey',
+                      'MG': 'mental_game',
+                      'AL': 'age_longevity',
+                      'LB': 'lifestyle',
+                      'IR': 'injury_recovery',
+                    };
+                    const category = categoryMap[prefix];
+                    if (category) {
+                      openMindsetCategory(category);
+                    }
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: 'var(--space-md)',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    borderBottom: '1px solid var(--color-gray-800)',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                  }}
+                >
+                  <div style={{ flex: 1 }}>
+                    <div style={{
+                      color: 'var(--color-white)',
+                      fontWeight: 600,
+                      marginBottom: '2px',
+                      lineHeight: 1.3,
+                    }}>
+                      {video.title}
+                    </div>
+                    <div style={{
+                      color: 'var(--color-gray-400)',
+                      fontSize: 'var(--text-xs)',
+                    }}>
+                      {video.instructor}
+                    </div>
+                  </div>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-500)" strokeWidth="2" style={{ flexShrink: 0, marginLeft: 'var(--space-sm)' }}>
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </button>
+              ))}
+            </>
+          )}
         </div>
       )}
 
