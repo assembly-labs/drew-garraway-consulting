@@ -4,13 +4,18 @@ This document outlines the migration from Netlify to Cloudflare Pages for all pr
 
 ## Migration Status
 
-| Project | Type | Netlify Config | Cloudflare Config | Status |
-|---------|------|----------------|-------------------|--------|
-| **CAP** | Next.js + Functions | `netlify.toml` | `wrangler.toml` + `functions/` | ✅ Ready |
-| **fuckyougotrain** | Vite SPA | `netlify.toml` | `wrangler.toml` | ✅ Ready |
-| **_read_out_loud** | Static | `netlify.toml` | `wrangler.toml` | ✅ Ready |
-| **nofomo** | Vite SPA | (pending) | `wrangler.toml` | ✅ Ready |
+| Project | Type | Netlify Config | Cloudflare Config | Build Status |
+|---------|------|----------------|-------------------|--------------|
+| **CAP** | Next.js + Functions | `netlify.toml` | `wrangler.toml` + `functions/` | ⚠️ Has TS errors |
+| **fuckyougotrain** | Vite SPA | `netlify.toml` | `wrangler.toml` | ✅ Builds |
+| **_read_out_loud** | Static | `netlify.toml` | `wrangler.toml` | ✅ Static |
+| **nofomo** | Vite SPA | (pending) | `wrangler.toml` | ✅ Builds |
 | **scout** | Vite + Functions | `netlify.toml.example` | `wrangler.toml` + `functions/` | ✅ Ready |
+
+### Known Issues
+
+- **CAP**: Has pre-existing TypeScript errors (missing `@/lib/auth-context` module). Fix the codebase before deploying.
+- **Vite projects**: `_headers` and `_redirects` files are in `public/` folder to be included in build output.
 
 ---
 
