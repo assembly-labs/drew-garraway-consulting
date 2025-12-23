@@ -1,22 +1,22 @@
 #!/bin/bash
 # Franklin Hugh Money Deployment Script
 # Created: 2024-12-05
-# Updated: 2024-12-12 - Dynamic file detection, content validation
-# Purpose: Automate deployment of Franklin Hugh Money pages to repository root
+# Updated: 2024-12-23 - Simplified for subdirectory serving (no more copy-to-root)
+# Purpose: Validate, cache-bust, and push Franklin Hugh Money updates
 
 echo "🚀 Franklin Hugh Money Deployment Script"
 echo "========================================"
 echo ""
 
 # Check if we're in the right directory
-if [ ! -f "package.json" ] || [ ! -d "public" ]; then
+if [ ! -f "package.json" ] || [ ! -d "assets" ]; then
     echo "❌ Error: Must run from franklin-hugh-money directory"
     echo "   Current directory: $(pwd)"
     exit 1
 fi
 
-# Step 0: Run content validation
-echo "🔍 Step 0: Validating content sync..."
+# Step 1: Run content validation
+echo "🔍 Step 1: Validating content sync..."
 node scripts/validate-content.js
 if [ $? -ne 0 ]; then
     echo ""
@@ -29,8 +29,8 @@ if [ $? -ne 0 ]; then
 fi
 echo ""
 
-# Step 1: Cache busting
-echo "🔄 Step 1: Running cache-bust..."
+# Step 2: Cache busting
+echo "🔄 Step 2: Running cache-bust..."
 node scripts/cache-bust.js
 if [ $? -eq 0 ]; then
     echo "   ✓ Cache busting complete"
@@ -40,41 +40,16 @@ else
 fi
 echo ""
 
-# Step 2: Copy all public files to repo root
-echo "📋 Step 2: Copying files to deployment location..."
-
-# Copy main FHM pages
-cp public/index.html ../franklin-hugh-money.html && echo "   ✓ index.html → franklin-hugh-money.html"
-cp public/franklin-hugh-money-treasury.html ../franklin-hugh-money-treasury.html && echo "   ✓ franklin-hugh-money-treasury.html"
-
-# Copy SIE study materials and navigation
-cp public/sie-study-materials.html ../sie-study-materials.html && echo "   ✓ sie-study-materials.html"
-cp public/sie-navigation.css ../sie-navigation.css && echo "   ✓ sie-navigation.css"
-cp public/sie-navigation-config.js ../sie-navigation-config.js && echo "   ✓ sie-navigation-config.js"
-cp public/sie-navigation-component.js ../sie-navigation-component.js && echo "   ✓ sie-navigation-component.js"
-
-# Dynamically copy ALL SIE chapter HTML files
-echo "   Copying SIE chapter files..."
-chapter_count=0
-for file in public/sie-chapter-*.html; do
-    if [ -f "$file" ]; then
-        filename=$(basename "$file")
-        cp "$file" "../$filename" && echo "   ✓ $filename"
-        ((chapter_count++))
-    fi
-done
-echo "   Total: $chapter_count chapter files copied"
-
-echo ""
+# Step 3: Git operations
 echo "📦 Step 3: Preparing git commit..."
 cd ..
 
-# Check git status
+# Check git status for FHM files
 echo "   Current changes:"
-git status --short franklin-hugh-money*.html sie-*.html sie-*.css sie-*.js
+git status --short franklin-hugh-money/
 
-# Add all deployed files
-git add franklin-hugh-money*.html sie-*.html sie-*.css sie-*.js
+# Add all FHM files
+git add franklin-hugh-money/
 
 # Get commit message from user or use default
 echo ""
@@ -115,7 +90,8 @@ echo ""
 echo "✅ Deployment complete!"
 echo ""
 echo "📍 Your changes will be live in 1-2 minutes at:"
-echo "   • https://drewgarraway.com/sie-study-materials.html"
+echo "   • https://drewgarraway.com/franklin-hugh-money/"
+echo "   • https://drewgarraway.com/franklin-hugh-money/sie-study-materials.html"
 echo ""
 echo "💡 Tip: Use incognito mode to avoid cache issues when checking"
 

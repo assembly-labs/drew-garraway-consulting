@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="Chapter 8: Trade Processing and Settlement - SIE Exam Study Guide by Franklin Hugh Money">
+
+    <title>Chapter 8: Trade Processing and Settlement | SIE Study Materials | Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Shared Navigation Styles -->
+    <link rel="stylesheet" href="assets/css/sie-chapter.css?v=30cafc9e">
+    <link rel="stylesheet" href="assets/css/sie-navigation.css?v=6e062608">
+
+</head>
+<body>
+    <header class="header">
+        <div class="header__inner">
+            <h1 class="header__title">Chapter 8: Trade Processing and Settlement</h1>
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="sie-study-materials.html">SIE Study Materials</a>
+                <span>/</span>
+                <span>Chapter 8</span>
+            </nav>
+        </div>
+        <div class="progress">
+            <div class="progress__bar"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="intro">
+            <p>
+                You click "buy" on your brokerage app, and a second later it says "filled." Done, right? Not even close.
+            </p>
+            <p>
+                Behind that one-second confirmation lies an intricate machinery of clearing corporations, depositories, and settlement systems processing trillions of dollars daily. This chapter covers the journey from order ticket to settlement—and all the rules designed to keep people from cheating along the way.
+            </p>
+        </div>
+
+        <nav class="toc">
+            <h2 class="toc__title">What We'll Cover</h2>
+            <ul class="toc__list">
+                <li class="toc__item">
+                    <a href="#order-tickets" class="toc__link">
+                        <span class="toc__number">01</span>
+                        Order Tickets and Requirements
+                    </a>
+                </li>
+                <li class="toc__item">
+                    <a href="#prohibited-practices" class="toc__link">
+                        <span class="toc__number">02</span>
+                        Prohibited Trading Practices
+                    </a>
+                </li>
+                <li class="toc__item">
+                    <a href="#trade-clearing" class="toc__link">
+                        <span class="toc__number">03</span>
+                        Trade Clearing
+                    </a>
+                </li>
+                <li class="toc__item">
+                    <a href="#trade-settlement" class="toc__link">
+                        <span class="toc__number">04</span>
+                        Trade Settlement
+                    </a>
+                </li>
+                <li class="toc__item">
+                    <a href="#good-delivery" class="toc__link">
+                        <span class="toc__number">05</span>
+                        Good Delivery of Securities
+                    </a>
+                </li>
+                <li class="toc__item">
+                    <a href="#confirmations" class="toc__link">
+                        <span class="toc__number">06</span>
+                        Customer Confirmations
+                    </a>
+                </li>
+                <li class="toc__item">
+                    <a href="#distribution-dates" class="toc__link">
+                        <span class="toc__number">07</span>
+                        Distribution Dates
+                    </a>
+                </li>
+                <li class="toc__item">
+                    <a href="#summary" class="toc__link">
+                        <span class="toc__number">08</span>
+                        Summary & Key Points
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- SECTION 1: ORDER TICKETS -->
+        <section id="order-tickets">
+            <h2>Order Tickets and Requirements</h2>
+
+            <p>
+                In 2015, a trader at Citadel Securities fat-fingered an order and accidentally bought $15 billion worth of stock in a single trade. The firm caught the error and unwound the position within minutes—but not before it briefly moved markets and triggered a wave of confused calls to compliance departments across Wall Street.
+            </p>
+
+            <p>
+                The order ticket is where every trade begins. It's a deceptively simple document—just a few data fields—but it serves as the permanent record of what happened, when, and why.
+            </p>
+
+            <h3>Essential Order Information</h3>
+
+            <p>The order ticket must specify the following:</p>
+
+            <p><strong>Buy or Sell:</strong></p>
+            <ul>
+                <li><span class="key-term">Buy</span> = taking a long position</li>
+                <li><span class="key-term">Sell long</span> = selling stock you already own</li>
+                <li><span class="key-term">Sell short</span> = selling borrowed shares (both "Sell" and "Short" are marked)</li>
+            </ul>
+
+            <p><strong>Security Name:</strong> Typically the ticker symbol—AAPL, not "Apple Inc."</p>
+
+            <p><strong>Order Size:</strong> Number of shares (usually in round lots of 100), option contracts, or bonds</p>
+
+            <p><strong>Duration:</strong></p>
+            <ul>
+                <li><span class="key-term">Day order</span> = expires at market close</li>
+                <li><span class="key-term">Good-til-canceled (GTC)</span> = remains active until filled or canceled</li>
+            </ul>
+
+            <h3>Discretionary vs. Not Held Orders</h3>
+
+            <p>
+                A <span class="key-term">discretionary order</span> gives the representative authority to choose what security to buy and/or how much to trade. If a customer says, "Buy $10,000 of a good high-tech stock," that's discretionary—the rep picks the stock. Discretionary accounts require:
+            </p>
+            <ul>
+                <li>Written power of attorney from the customer</li>
+                <li>Principal approval before the account is opened</li>
+                <li>Principal approval of each trade</li>
+            </ul>
+
+            <p>
+                But what if the customer says, "Buy 1,000 shares of XYZ when it looks good to you"? The security and amount are specified—only the timing and price are left to the rep's judgment. This is a <span class="key-term">market not held order</span>, which is NOT considered discretionary.
+            </p>
+
+            <div class="test-tip">
+                <p><strong>Test Tip:</strong> The key to distinguishing discretionary from not held: if the security and amount are specified, it's not discretionary. The rep having discretion over price or timing alone doesn't make the order discretionary.</p>
+            </div>
+
+            <h3>Additional Required Information</h3>
+
+            <p>The ticket must also include:</p>
+            <ul>
+                <li><strong>Execution price:</strong> For limit orders, stop orders, or stop-limit orders (not required for market orders)</li>
+                <li><strong>Solicited or unsolicited:</strong> Did the rep recommend the trade, or did the customer initiate it?</li>
+                <li><strong>Manager approval:</strong> All orders must be approved by a principal—promptly, which typically means by end of day</li>
+                <li><strong>Rep's name:</strong> Who handled the order</li>
+                <li><strong>Customer name and account number</strong></li>
+            </ul>
+
+            <h3>Regulation SHO: Short Sale Requirements</h3>
+
+            <p>
+                When you sell stock you don't own—borrowing shares to sell now, hoping to buy them back cheaper later—you're <span class="key-term">selling short</span>. <span class="key-term">Regulation SHO</span>, adopted by the SEC, requires that:
+            </p>
+            <ul>
+                <li>Every order to sell must be marked as either a long sale or a short sale</li>
+                <li>For short sales, the broker must locate the shares to be borrowed before the sale</li>
+                <li>Borrowed shares must be delivered on settlement</li>
+            </ul>
+
+            <h3>Alterations to Executed Orders</h3>
+
+            <p>
+                Under <span class="key-term">FINRA rules</span>, changing an executed order ticket requires:
+            </p>
+            <ul>
+                <li>Written approval from a branch manager or compliance officer</li>
+                <li>Documentation of the essential facts and the reason for the change</li>
+            </ul>
+        </section>
+
+        <!-- SECTION 2: PROHIBITED PRACTICES -->
+        <section id="prohibited-practices">
+            <h2>Prohibited Trading Practices</h2>
+
+            <p>
+                Now we get to the practices that will end your career and potentially land you in prison. These rules exist because people actually tried—and sometimes still try—these schemes.
+            </p>
+
+            <h3>Best Execution</h3>
+
+            <p>
+                When executing customer orders, a firm must obtain the <span class="key-term">best outcome</span> for the customer. Price matters, but it's not the only factor. Firms should consider:
+            </p>
+            <ul>
+                <li>The character of the market (price, volatility, liquidity)</li>
+                <li>The size and type of transaction</li>
+                <li>The number of markets checked</li>
+                <li>The firm's accessibility to various markets and quotation sources</li>
+            </ul>
+
+            <p>Failure to provide best execution violates <span class="key-term">FINRA rules</span>.</p>
+
+            <h3>Customer Orders Have Priority</h3>
+
+            <p>
+                Simple rule: customer orders come first. A firm cannot give preference to its own proprietary trading account over customer orders—that's <span class="key-term">trading ahead</span>.
+            </p>
+
+            <h3>Front Running</h3>
+
+            <p>
+                <span class="key-term">Front running</span> is trading ahead of large block orders. If an institutional client is about to buy 500,000 shares—which will likely push the price up—the firm cannot buy shares for itself first and profit from the anticipated price movement.
+            </p>
+
+            <h3>Trading Ahead of Research Reports</h3>
+
+            <p>
+                If your firm's research department is about to publish a report recommending a stock—which will likely move the price—the firm cannot trade based on advance knowledge of that recommendation. Once the research is publicly disseminated, the restriction lifts.
+            </p>
+
+            <div class="historical-note">
+                <div class="historical-note__label">Historical Context</div>
+                <p>
+                    The Chinese wall between research and trading exists because of spectacular conflicts of interest during the dot-com bubble. Analysts publicly recommended stocks while privately calling them garbage, generating investment banking fees for their firms. The 2003 Global Research Analyst Settlement extracted $1.4 billion in fines and fundamentally restructured how research departments operate.
+                </p>
+            </div>
+
+            <h3>Acting as Both Broker and Dealer (Hidden Profit)</h3>
+
+            <p>
+                A firm can act as a <span class="key-term">broker (agent)</span> or a <span class="key-term">dealer (principal)</span> on a transaction—but not both on the same trade. If you charge both a commission AND a markup, that's a <span class="key-term">hidden profit</span>—and it's prohibited.
+            </p>
+
+            <h3>No Interpositioning</h3>
+
+            <p>
+                When your firm receives a customer order, you go to the market maker. You do not route the order through another firm that then goes to the market maker—unless doing so would result in a better price for the customer. <span class="key-term">Interpositioning</span> adds unnecessary costs.
+            </p>
+
+            <h3>Backing Away from a Firm Quote</h3>
+
+            <p>
+                If a market maker posts a quote, they must honor it. <span class="key-term">Backing away</span>—refusing to trade at your posted price—is explicitly prohibited by FINRA.
+            </p>
+
+            <h3>Market Manipulation</h3>
+
+            <p>Manipulation of the market is prohibited in any form. Key schemes to know:</p>
+
+            <p>
+                <strong>Trading Pools (Pump and Dump):</strong> A group coordinates to buy a security at successively higher prices, creating false demand. Outside investors pile in, then pool members sell at artificially inflated prices.
+            </p>
+
+            <p>
+                <strong>Wash Trades (Painting the Tape):</strong> Buying and selling the same security repeatedly with no actual change in ownership, creating the false appearance of trading activity.
+            </p>
+
+            <p>
+                <strong>Marking the Close / Marking the Open:</strong> Trading at or near market close/open specifically to manipulate the closing or opening price.
+            </p>
+
+            <div class="test-tip">
+                <p><strong>Test Tip:</strong> All market manipulation schemes share a common element: creating a false or misleading appearance of market activity or prices.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: TRADE CLEARING -->
+        <section id="trade-clearing">
+            <h2>Trade Clearing</h2>
+
+            <p>
+                After a trade is executed, it must be <span class="key-term">cleared</span> and <span class="key-term">settled</span>. These are not the same thing:
+            </p>
+            <ul>
+                <li><strong>Clearing</strong> = verifying that both parties agree on the trade details</li>
+                <li><strong>Settlement</strong> = actually exchanging cash for securities</li>
+            </ul>
+
+            <h3>The Depository Trust Company (DTC)</h3>
+
+            <p>
+                The <span class="key-term">Depository Trust Company (DTC)</span> is essentially the vault where all securities positions are held. Member firms maintain accounts at the DTC containing securities and cash.
+            </p>
+
+            <p>
+                Almost all securities are now held in <span class="key-term">book entry</span> form—electronic records rather than paper certificates. When you "own" 100 shares of Apple, what you actually own is an entry in a database.
+            </p>
+
+            <h3>The National Securities Clearing Corporation (NSCC)</h3>
+
+            <p>
+                The <span class="key-term">National Securities Clearing Corporation (NSCC)</span> handles clearing of corporate securities trades:
+            </p>
+            <ol>
+                <li>Both sides submit trade details to the NSCC</li>
+                <li>The NSCC compares submissions to ensure they match</li>
+                <li>If matched, the trade proceeds to settlement</li>
+                <li>On settlement date, NSCC instructs DTC to adjust accounts</li>
+            </ol>
+
+            <p>
+                Both DTC and NSCC are subsidiaries of the <span class="key-term">Depository Trust & Clearing Corporation (DTCC)</span>.
+            </p>
+
+            <h3>Clearing Firms vs. Introducing Firms</h3>
+
+            <p>
+                <span class="key-term">Clearing firms</span> are large broker-dealers that clear and settle trades for themselves and customers. <span class="key-term">Introducing firms</span> are smaller broker-dealers that focus on customer relationships but rely on clearing firms for back-office processing.
+            </p>
+
+            <h3>The Options Clearing Corporation (OCC)</h3>
+
+            <p>
+                The <span class="key-term">Options Clearing Corporation (OCC)</span> performs a similar function for options trades, recording positions and guaranteeing contract performance.
+            </p>
+
+            <h3>Trade Comparisons and DK Notices</h3>
+
+            <p>Each side of a trade sends a confirmation to the <span class="key-term">contra broker</span>. The confirmations include:</p>
+            <ul>
+                <li>Trade date and settlement date</li>
+                <li>Size of trade and security traded</li>
+                <li>Execution price</li>
+                <li><span class="key-term">CUSIP number</span> (unique identifier for securities)</li>
+            </ul>
+
+            <p>
+                If there's a discrepancy, the firm sends a <span class="key-term">DK (Don't Know) notice</span>. DK notices must be resolved within <strong>20 minutes</strong>.
+            </p>
+
+            <div class="test-tip">
+                <p><strong>Test Tip:</strong> Dealer-to-dealer confirmations do NOT include customer information or commission details. That information appears only on customer confirmations.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 4: TRADE SETTLEMENT -->
+        <section id="trade-settlement">
+            <h2>Trade Settlement</h2>
+
+            <p>
+                <span class="key-term">Settlement</span> is when transactions officially complete—cash and securities actually change hands.
+            </p>
+
+            <h3>Regular Way Settlement: T+1</h3>
+
+            <p>
+                As of May 2024, <span class="key-term">regular way settlement</span> for most securities is <span class="key-term">T+1</span>—one business day after the trade date. This applies to:
+            </p>
+            <ul>
+                <li>Stocks</li>
+                <li>Corporate bonds</li>
+                <li>Municipal bonds</li>
+                <li>U.S. government securities</li>
+                <li>Listed options</li>
+            </ul>
+
+            <div class="historical-note">
+                <div class="historical-note__label">Historical Context</div>
+                <p>
+                    Settlement used to take five business days (T+5), then shortened to T+3 in 1995, then T+2 in 2017, and finally T+1 in 2024. The meme stock volatility of January 2021—when brokers restricted trading because they couldn't meet settlement obligations—accelerated the push to T+1.
+                </p>
+            </div>
+
+            <h3>Cash Settlement</h3>
+
+            <p>
+                <span class="key-term">Cash settlement</span> means same-day settlement, for trades entered before 2:30 p.m. ET. Typically used for index options and commodity futures.
+            </p>
+
+            <div class="info-box">
+                <p><strong>Note:</strong> Don't confuse cash settlement with trades in a cash account. A <span class="key-term">cash account</span> is an account type (no borrowing). <span class="key-term">Cash settlement</span> is same-day settlement regardless of account type.</p>
+            </div>
+
+            <h3>Other Settlement Types</h3>
+
+            <p><strong>Seller's Option:</strong> When the seller needs more time—gives buyer one day's notice of delivery.</p>
+            <p><strong>Buyer's Option:</strong> When the buyer can't pay by regular way.</p>
+            <p><strong>When, As, and If Issued:</strong> For new securities not yet available for trading.</p>
+        </section>
+
+        <!-- SECTION 5: GOOD DELIVERY -->
+        <section id="good-delivery">
+            <h2>Good Delivery of Securities</h2>
+
+            <p>
+                Physical stock certificates still exist, and the exam tests the rules for delivering them. For a physical delivery to be "good," several conditions must be met:
+            </p>
+
+            <h3>Endorsement Requirements</h3>
+
+            <ul>
+                <li>Physical securities must be endorsed on the back by the registered owner in exact name</li>
+                <li>Alternative: Use a <span class="key-term">stock power</span> or <span class="key-term">bond power</span>—separate transfer documents</li>
+            </ul>
+
+            <h3>Signature Guarantees (Medallions)</h3>
+
+            <p>
+                The customer's signature must be guaranteed by a FINRA member firm, bank, or savings institution. A <span class="key-term">signature guarantee (medallion)</span> is NOT the same as a notary seal.
+            </p>
+
+            <h3>Certificate Denominations</h3>
+
+            <p><strong>Bonds:</strong> $1,000 minimum or multiples up to $100,000 maximum per certificate.</p>
+
+            <p><strong>Stocks:</strong> Must be in <span class="key-term">round lots</span> (100 shares) or certificates that combine to make round lots.</p>
+
+            <p>Example for 400 shares—good delivery:</p>
+            <ul>
+                <li>1 certificate for 400 shares ✓</li>
+                <li>4 certificates of 100 shares each ✓</li>
+                <li>8 certificates of 50 shares each ✓ (two 50s = 100)</li>
+            </ul>
+
+            <p>NOT good delivery: 10 certificates of 40 shares (40+40+40=120, an odd lot)</p>
+
+            <h3>Mutilated Securities</h3>
+
+            <p>Damaged certificates are not good delivery unless accompanied by a validation letter from the transfer agent or issuer.</p>
+
+            <div class="test-tip">
+                <p><strong>Test Tip:</strong> For good delivery, all stock certificates must combine into round lots of 100 shares. If they can't add up to multiples of 100, it's not good delivery.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 6: CUSTOMER CONFIRMATIONS -->
+        <section id="confirmations">
+            <h2>Customer Confirmations</h2>
+
+            <p>
+                Customer trade confirmations must be delivered by settlement date. Required information includes:
+            </p>
+            <ul>
+                <li>Customer name and address</li>
+                <li>Firm name, address, and telephone number</li>
+                <li>Type of account (cash or margin)</li>
+                <li>Name of security, size, and price</li>
+                <li>Trade date and settlement date</li>
+                <li>CUSIP number</li>
+                <li><span class="key-term">Accrued interest</span> (if a bond trade)</li>
+                <li>Commission (if the firm acted as agent)</li>
+                <li>Whether <span class="key-term">payment for order flow</span> was accepted</li>
+            </ul>
+
+            <h3>What's NOT Disclosed</h3>
+
+            <p>
+                If the firm acts as dealer (principal), the markup or markdown is generally NOT disclosed—except for Nasdaq principal transactions.
+            </p>
+
+            <h3>Municipal Bond Confirmations</h3>
+
+            <p>The <span class="key-term">MSRB</span> requires additional disclosure:</p>
+            <ul>
+                <li>Issuer name, interest rate, maturity, and if callable</li>
+                <li>Whether it's a limited tax GO bond</li>
+                <li>Revenue source for revenue bonds</li>
+                <li>Yield and dollar price (yield to maturity or <span class="key-term">yield to worst</span> for callable premium bonds)</li>
+            </ul>
+
+            <h3>Accrued Interest</h3>
+
+            <p>
+                When a bond is sold between interest payments, the buyer pays the seller <span class="key-term">accrued interest</span> from the last payment date through the day before settlement.
+            </p>
+
+            <p><strong>Calculation methods:</strong></p>
+            <ul>
+                <li><strong>Corporate/Municipal bonds:</strong> 30/360 (30 days per month, 360 days per year)</li>
+                <li><strong>U.S. Treasuries:</strong> Actual/365 (actual days, 365 per year)</li>
+            </ul>
+
+            <p><strong>Bonds that trade flat (no accrued interest):</strong></p>
+            <ul>
+                <li>Zero-coupon bonds</li>
+                <li>Defaulted bonds</li>
+                <li>Income bonds</li>
+            </ul>
+        </section>
+
+        <!-- SECTION 7: DISTRIBUTION DATES -->
+        <section id="distribution-dates">
+            <h2>Distribution Dates</h2>
+
+            <p>
+                When a company pays dividends or executes stock splits, specific dates determine who receives what. These dates trip up new investors constantly.
+            </p>
+
+            <h3>Cash Dividend Dates</h3>
+
+            <p><strong>The Four Key Dates:</strong></p>
+
+            <ul>
+                <li><strong>Declaration Date:</strong> Board announces the dividend</li>
+                <li><strong>Record Date:</strong> Must be owner of record by this date to receive dividend</li>
+                <li><strong>Ex-Date:</strong> First date too late to buy and receive dividend</li>
+                <li><strong>Payment Date (Payable Date):</strong> Dividend checks are mailed</li>
+            </ul>
+
+            <h3>Ex-Date = Record Date (Under T+1)</h3>
+
+            <p>
+                With T+1 settlement, the <span class="key-term">ex-date</span> and <span class="key-term">record date</span> are now the same day for cash dividends. Previously they were different.
+            </p>
+
+            <div class="test-tip">
+                <p><strong>Test Tip:</strong> On the exam, if you see "ex-date," think "record date." They're the same day for cash dividends now. You must buy at least ONE BUSINESS DAY BEFORE the record date for your trade to settle in time.</p>
+            </div>
+
+            <h3>Sample Question</h3>
+
+            <div class="info-box">
+                <p><strong>Question:</strong> Sharon wants to purchase 100 shares of AAPL. If the record date is Tuesday, July 15, by when must she purchase?</p>
+                <p><strong>Answer:</strong> Monday, July 14. One business day before the record date. If she buys on July 14, the trade settles July 15, and she's the owner of record.</p>
+            </div>
+
+            <h3>Price Adjustment and Selling Dividends</h3>
+
+            <p>
+                On the ex-date morning, stock prices typically open lower by approximately the dividend amount. <span class="key-term">Selling dividends</span>—recommending purchases just for the dividend—is prohibited because customers don't actually benefit (price drops by the dividend amount).
+            </p>
+
+            <h3>Stock Splits and Stock Dividends</h3>
+
+            <p>
+                <span class="key-term">Forward stock splits</span> increase shares outstanding while reducing price proportionally. A 2:1 split means twice the shares at half the price—same total value.
+            </p>
+
+            <p>
+                <span class="key-term">Reverse stock splits</span> reduce shares while increasing price. Used when stock price gets too low.
+            </p>
+
+            <p>
+                <span class="key-term">Stock dividends</span> are similar to small forward splits—additional shares with proportional price reduction.
+            </p>
+
+            <h3>Critical Difference: Ex-Date for Splits</h3>
+
+            <p>The ex-date for stock splits and stock dividends is handled differently:</p>
+
+            <ul>
+                <li><strong>Cash dividends:</strong> Ex-date = Record date (same day)</li>
+                <li><strong>Stock splits/dividends:</strong> Ex-date = Day AFTER payment date</li>
+            </ul>
+
+            <div class="test-tip">
+                <p><strong>Test Tip:</strong> This is a favorite exam topic:<br>
+                • Cash dividends: Ex-date = Record date<br>
+                • Stock splits/dividends: Ex-date = Day AFTER payment date</p>
+            </div>
+
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Declaration Date</th>
+                            <th>Ex-Date</th>
+                            <th>Record Date</th>
+                            <th>Payment Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Company announces dividend, sets record date and payment date</td>
+                            <td>First date too late to buy for dividend. Under T+1, same as record date for cash dividends</td>
+                            <td>Date that determines who receives dividend. Trades must settle by this date</td>
+                            <td>Date dividend is paid to owners of record</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SUMMARY -->
+        <section id="summary">
+            <h2>Summary & Key Points</h2>
+
+            <div class="key-terms">
+                <h3>Order Tickets and Prohibited Practices</h3>
+                <ul>
+                    <li><strong>Order tickets</strong> must include: buy/sell, security, size, duration, price (for limit orders), solicited/unsolicited, manager approval, rep name, customer info</li>
+                    <li><strong>Discretionary orders</strong> require written authorization; "market not held" orders are NOT discretionary</li>
+                    <li><strong>Regulation SHO</strong> requires marking sales long or short and locating shares before short selling</li>
+                    <li><strong>Best execution</strong> means best overall outcome—not just best price</li>
+                    <li><strong>Prohibited practices:</strong> front running, trading ahead, hidden profits, interpositioning, backing away, market manipulation</li>
+                </ul>
+
+                <h3>Trade Clearing and Settlement</h3>
+                <ul>
+                    <li><strong>DTC</strong> holds securities in book entry form; <strong>NSCC</strong> clears corporate trades; both are DTCC subsidiaries</li>
+                    <li><strong>OCC</strong> clears and guarantees options contracts</li>
+                    <li><strong>DK notices</strong> must be resolved within 20 minutes</li>
+                    <li><strong>Regular way settlement: T+1</strong> for stocks, bonds, options</li>
+                    <li><strong>Cash settlement:</strong> Same day (before 2:30 PM ET)</li>
+                </ul>
+
+                <h3>Good Delivery and Confirmations</h3>
+                <ul>
+                    <li><strong>Good delivery</strong> requires proper endorsement, signature guarantee (medallion), and round lot denominations</li>
+                    <li><strong>Customer confirmations</strong> must include trade details, commissions (if agency), accrued interest (if bonds)</li>
+                    <li><strong>Markups/markdowns</strong> NOT disclosed except for Nasdaq principal transactions</li>
+                    <li><strong>Accrued interest:</strong> Corporate/muni use 30/360; Treasuries use actual/365</li>
+                </ul>
+
+                <h3>Distribution Dates</h3>
+                <ul>
+                    <li><strong>Four dates:</strong> Declaration, Record, Ex-date, Payment</li>
+                    <li><strong>Ex-date = Record date</strong> for cash dividends (under T+1)</li>
+                    <li><strong>Buy ONE business day before</strong> record date to receive dividend</li>
+                    <li><strong>Selling dividends</strong> is prohibited</li>
+                    <li><strong>Stock split/dividend ex-date</strong> = day AFTER payment date</li>
+                </ul>
+            </div>
+        </section>
+
+        <nav class="nav-links">
+            <a href="sie-chapter-7-trading-markets.html" class="nav-links__prev">
+                <span class="nav-links__label">Previous Chapter</span>
+                <span class="nav-links__title">Chapter 7: Trading Markets</span>
+            </a>
+            <a href="sie-study-materials.html" class="nav-links__next">
+                <span class="nav-links__label">Back to</span>
+                <span class="nav-links__title">Study Materials</span>
+            </a>
+        </nav>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Franklin Hugh Money. For educational purposes only.</p>
+    </footer>
+
+    <script src="assets/js/sie-chapter.js?v=6e062608"></script>
+</body>
+</html>
