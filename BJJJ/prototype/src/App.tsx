@@ -6,12 +6,17 @@ import { TabBar, type TabId } from './components/layout/TabBar'
 import { Dashboard } from './components/features/Dashboard'
 import { VoiceLogger } from './components/features/VoiceLogger'
 import { SessionHistory } from './components/features/SessionHistory'
+import { TechniqueLibrary } from './components/features/TechniqueLibrary'
+import { TrainingFeedback } from './components/features/TrainingFeedback'
+import { BeltProgress } from './components/features/BeltProgress'
 
 type View = 'dashboard' | 'journal' | 'progress' | 'library' | 'profile' | 'design-system'
 
 function App() {
   // Track if voice logger should be shown (overlay)
   const [showVoiceLogger, setShowVoiceLogger] = useState(true) // Auto-open on load
+  // Track if training feedback should be shown (overlay)
+  const [showTrainingFeedback, setShowTrainingFeedback] = useState(false)
 
   // Check URL for design system mode
   const [currentView, setCurrentView] = useState<View>(() => {
@@ -77,10 +82,10 @@ function App() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: 'var(--color-gray-100)' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--color-black)' }}>
       {/* Header */}
       <Header
-        title="BJJ JOURNAL"
+        title="ALLY"
         rightAction={
           <button
             onClick={() => setCurrentView('design-system')}
@@ -103,7 +108,7 @@ function App() {
       />
 
       {/* Main Content */}
-      <main style={{ padding: 'var(--space-lg)', paddingBottom: '100px' }}>
+      <main style={{ paddingBottom: '100px' }}>
         {currentView === 'dashboard' && (
           <Dashboard onNavigate={handleNavigate} />
         )}
@@ -119,34 +124,32 @@ function App() {
         )}
 
         {currentView === 'progress' && (
-          <div className="card">
-            <h2 style={{ marginBottom: 'var(--space-lg)' }}>BELT PROGRESS</h2>
-            <p className="text-muted">Belt progress tracking coming soon...</p>
-            <p className="text-small text-muted">This screen will show IBJJF requirements, technique proficiency, and coach feedback.</p>
-          </div>
+          <BeltProgress />
         )}
 
         {currentView === 'library' && (
-          <div className="card">
-            <h2 style={{ marginBottom: 'var(--space-lg)' }}>TECHNIQUE LIBRARY</h2>
-            <p className="text-muted">Technique library coming soon...</p>
-            <p className="text-small text-muted">Browse, search, and track your proficiency across all techniques.</p>
-          </div>
+          <TechniqueLibrary onOpenFeedback={() => setShowTrainingFeedback(true)} />
         )}
 
         {currentView === 'profile' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)', padding: 'var(--space-lg)' }}>
             {/* Profile Header */}
-            <div className="card" style={{ textAlign: 'center' }}>
+            <div style={{
+              backgroundColor: 'var(--color-gray-900)',
+              border: '1px solid var(--color-gray-800)',
+              borderRadius: 'var(--radius-md)',
+              padding: 'var(--space-xl)',
+              textAlign: 'center',
+            }}>
               <div style={{
                 width: 80,
                 height: 80,
                 borderRadius: 'var(--radius-full)',
-                backgroundColor: 'var(--color-gray-300)',
+                backgroundColor: 'var(--color-gray-700)',
                 margin: '0 auto var(--space-md)'
               }}></div>
-              <h2 style={{ marginBottom: 'var(--space-xs)' }}>TONY CHEN</h2>
-              <div className="text-muted" style={{ marginBottom: 'var(--space-md)' }}>Training since March 2022</div>
+              <h2 style={{ color: 'var(--color-white)', marginBottom: 'var(--space-xs)' }}>TONY CHEN</h2>
+              <div style={{ color: 'var(--color-gray-400)', marginBottom: 'var(--space-md)' }}>Training since March 2022</div>
               <span className="belt-badge belt-blue" style={{ margin: '0 auto' }}>
                 <span className="belt-stripes">
                   <span className="belt-stripe"></span>
@@ -156,23 +159,33 @@ function App() {
             </div>
 
             {/* Stats */}
-            <div className="card">
-              <h3 style={{ marginBottom: 'var(--space-md)' }}>Training Stats</h3>
+            <div style={{
+              backgroundColor: 'var(--color-gray-900)',
+              border: '1px solid var(--color-gray-800)',
+              borderRadius: 'var(--radius-md)',
+              padding: 'var(--space-xl)',
+            }}>
+              <h3 style={{ color: 'var(--color-white)', marginBottom: 'var(--space-md)' }}>Training Stats</h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-md)' }}>
                 <div>
-                  <div className="stat-label">Total Sessions</div>
-                  <div className="stat-value">247</div>
+                  <div style={{ color: 'var(--color-gray-500)', fontSize: 'var(--text-sm)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Total Sessions</div>
+                  <div style={{ color: 'var(--color-white)', fontSize: 'var(--text-3xl)', fontWeight: 700 }}>247</div>
                 </div>
                 <div>
-                  <div className="stat-label">Total Hours</div>
-                  <div className="stat-value">312</div>
+                  <div style={{ color: 'var(--color-gray-500)', fontSize: 'var(--text-sm)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Total Hours</div>
+                  <div style={{ color: 'var(--color-white)', fontSize: 'var(--text-3xl)', fontWeight: 700 }}>312</div>
                 </div>
               </div>
             </div>
 
             {/* Belt System */}
-            <div className="card">
-              <h3 style={{ marginBottom: 'var(--space-md)' }}>Belt Journey</h3>
+            <div style={{
+              backgroundColor: 'var(--color-gray-900)',
+              border: '1px solid var(--color-gray-800)',
+              borderRadius: 'var(--radius-md)',
+              padding: 'var(--space-xl)',
+            }}>
+              <h3 style={{ color: 'var(--color-white)', marginBottom: 'var(--space-md)' }}>Belt Journey</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
                 {[
                   { name: 'White', class: 'belt-white', stripes: 4, completed: true },
@@ -196,12 +209,20 @@ function App() {
                         </span>
                       )}
                     </span>
-                    <span>{belt.name} Belt</span>
+                    <span style={{ color: 'var(--color-white)' }}>{belt.name} Belt</span>
                     {belt.current && (
-                      <span className="status-badge status-success" style={{ marginLeft: 'auto' }}>Current</span>
+                      <span style={{
+                        marginLeft: 'auto',
+                        backgroundColor: 'var(--color-positive)',
+                        color: 'var(--color-white)',
+                        padding: '2px 8px',
+                        borderRadius: 'var(--radius-sm)',
+                        fontSize: 'var(--text-xs)',
+                        textTransform: 'uppercase',
+                      }}>Current</span>
                     )}
                     {belt.completed && !belt.current && (
-                      <span className="text-small text-muted" style={{ marginLeft: 'auto' }}>Sep 2023</span>
+                      <span style={{ marginLeft: 'auto', color: 'var(--color-gray-500)', fontSize: 'var(--text-sm)' }}>Sep 2023</span>
                     )}
                   </div>
                 ))}
@@ -228,6 +249,20 @@ function App() {
           <VoiceLogger
             onComplete={handleLogComplete}
             onCancel={handleLogCancel}
+          />
+        </div>
+      )}
+
+      {/* Training Feedback Overlay - Full Screen */}
+      {showTrainingFeedback && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 100,
+          backgroundColor: 'var(--color-black)',
+        }}>
+          <TrainingFeedback
+            onClose={() => setShowTrainingFeedback(false)}
           />
         </div>
       )}

@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Progress Screen Preview - Ally</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       DESIGN SYSTEM VARIABLES
+       ======================================== */
+    :root {
+      --color-primary: #000000;
+      --color-primary-light: #1a1a1a;
+      --color-white: #FFFFFF;
+      --color-accent: #FCD34D;
+      --color-accent-hover: #FBBF24;
+      --color-accent-text: #B8860B;
+      --color-gray-50: #FAFAFA;
+      --color-gray-100: #F5F5F5;
+      --color-gray-200: #E5E5E5;
+      --color-gray-300: #D4D4D4;
+      --color-gray-400: #A3A3A3;
+      --color-gray-500: #6B7280;
+      --color-gray-600: #4B5563;
+      --color-gray-700: #374151;
+      --color-belt-white: #FFFFFF;
+      --color-belt-blue: #0033A0;
+      --color-belt-purple: #4B0082;
+      --color-belt-brown: #8B4513;
+      --color-belt-black: #000000;
+      --color-success: #22C55E;
+      --color-success-text: #15803D;
+      --color-warning: #F59E0B;
+      --color-warning-text: #B45309;
+      --color-error: #EF4444;
+      --color-error-text: #B91C1C;
+      --color-info: #3B82F6;
+      --font-heading: 'Montserrat', Arial, sans-serif;
+      --font-body: 'Open Sans', Arial, sans-serif;
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 1.875rem;
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-full: 9999px;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --tracking-wide: 0.025em;
+      --tracking-wider: 0.05em;
+      --leading-relaxed: 1.76;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-primary);
+      background-color: var(--color-gray-100);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========================================
+       LAYOUT
+       ======================================== */
+    .phone-frame {
+      max-width: 390px;
+      margin: 0 auto;
+      background: var(--color-gray-100);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .header {
+      background: var(--color-primary);
+      color: var(--color-white);
+      padding: var(--space-md) var(--space-lg);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+    }
+
+    .header-badge {
+      background: var(--color-accent);
+      color: var(--color-primary);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .content {
+      padding: var(--space-lg);
+      padding-bottom: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    /* ========================================
+       CARDS
+       ======================================== */
+    .card {
+      background: var(--color-white);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+    }
+
+    .card-highlight {
+      border-left: 4px solid var(--color-accent);
+      background: linear-gradient(135deg, var(--color-white) 0%, rgba(252, 211, 77, 0.05) 100%);
+    }
+
+    .module-header h3 {
+      font-family: var(--font-heading);
+      font-size: var(--text-base);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      margin-bottom: var(--space-xs);
+    }
+
+    .module-header .subtitle {
+      color: var(--color-gray-500);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    /* ========================================
+       MODULE 1: NARRATIVE DEBRIEF
+       ======================================== */
+    .debrief-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    .debrief-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .debrief-avatar svg {
+      stroke: var(--color-accent);
+    }
+
+    .debrief-greeting {
+      font-weight: 600;
+      color: var(--color-primary);
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-md);
+    }
+
+    .debrief-text {
+      color: var(--color-gray-700);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-md);
+    }
+
+    .callout {
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .callout-success {
+      background: rgba(34, 197, 94, 0.1);
+      border-left: 3px solid var(--color-success);
+    }
+
+    .callout-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-left: 3px solid var(--color-warning);
+    }
+
+    .callout-label {
+      font-weight: 600;
+      font-size: var(--text-sm);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      margin-bottom: var(--space-xs);
+    }
+
+    .callout-success .callout-label { color: var(--color-success-text); }
+    .callout-warning .callout-label { color: var(--color-warning-text); }
+
+    .callout p {
+      margin: 0;
+      color: var(--color-gray-700);
+    }
+
+    .debrief-closing {
+      font-style: italic;
+      color: var(--color-gray-600);
+    }
+
+    /* ========================================
+       MODULE 2: STREAK
+       ======================================== */
+    .streak-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .streak-display {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .streak-number {
+      font-family: var(--font-heading);
+      font-size: var(--text-3xl);
+      font-weight: 800;
+      color: var(--color-accent-text);
+    }
+
+    .streak-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--color-gray-200);
+      text-align: center;
+    }
+
+    .streak-stat-value {
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+      font-weight: 700;
+    }
+
+    .streak-stat-label {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+    }
+
+    /* ========================================
+       PROGRESS BARS
+       ======================================== */
+    .progress-bar {
+      height: 8px;
+      background: var(--color-gray-200);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      transition: width 0.3s ease;
+    }
+
+    .progress-fill-accent { background: var(--color-accent); }
+    .progress-fill-success { background: var(--color-success); }
+    .progress-fill-gray { background: var(--color-gray-400); }
+
+    /* ========================================
+       MODULE 3: MAT TIME
+       ======================================== */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+
+    .stat-box {
+      background: var(--color-gray-50);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+
+    .stat-box-label {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-xs);
+    }
+
+    .stat-box-value {
+      font-family: var(--font-heading);
+      font-size: var(--text-3xl);
+      font-weight: 800;
+      color: var(--color-accent-text);
+    }
+
+    .stat-box-trend {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      margin-left: var(--space-sm);
+    }
+
+    .trend-up { color: var(--color-success); }
+    .trend-down { color: var(--color-error); }
+
+    .stat-box-compare {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+    }
+
+    .alltime-banner {
+      margin-top: var(--space-md);
+      padding: var(--space-md);
+      background: var(--color-primary);
+      border-radius: var(--radius-md);
+      color: var(--color-white);
+    }
+
+    .alltime-label {
+      font-size: var(--text-sm);
+      color: var(--color-gray-300);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      margin-bottom: var(--space-xs);
+    }
+
+    .alltime-stats {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .alltime-value {
+      font-family: var(--font-heading);
+      font-size: var(--text-2xl);
+      font-weight: 800;
+      color: var(--color-accent);
+    }
+
+    .alltime-unit {
+      color: var(--color-gray-300);
+      margin-left: var(--space-xs);
+    }
+
+    /* ========================================
+       MODULE 4: SPARRING SCORECARD
+       ======================================== */
+    .sparring-main {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .sparring-box {
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      text-align: center;
+    }
+
+    .sparring-box-success {
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    .sparring-box-error {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .sparring-value {
+      font-family: var(--font-heading);
+      font-size: var(--text-3xl);
+      font-weight: 800;
+    }
+
+    .sparring-box-success .sparring-value { color: var(--color-success); }
+    .sparring-box-error .sparring-value { color: var(--color-error); }
+
+    .sparring-label {
+      font-size: var(--text-sm);
+    }
+
+    .sparring-box-success .sparring-label { color: var(--color-success-text); }
+    .sparring-box-error .sparring-label { color: var(--color-error-text); }
+
+    .sparring-compare {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+    }
+
+    .context-box {
+      background: var(--color-gray-50);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin-bottom: var(--space-md);
+      font-size: var(--text-sm);
+      color: var(--color-gray-600);
+    }
+
+    .sparring-secondary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-sm);
+      text-align: center;
+    }
+
+    .sparring-secondary-box {
+      padding: var(--space-sm);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-sm);
+    }
+
+    .sparring-secondary-value {
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+      font-weight: 700;
+    }
+
+    .sparring-secondary-label {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+    }
+
+    .section-label {
+      font-size: var(--text-sm);
+      color: var(--color-gray-600);
+      margin-bottom: var(--space-sm);
+      margin-top: var(--space-lg);
+    }
+
+    .sub-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .sub-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .sub-count {
+      width: 20px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: var(--text-sm);
+    }
+
+    .sub-count-top { color: var(--color-accent-text); }
+    .sub-count-other { color: var(--color-gray-500); }
+
+    .sub-bar {
+      flex: 1;
+      height: 6px;
+      background: var(--color-gray-200);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .sub-bar-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+    }
+
+    .sub-bar-fill-top { background: var(--color-accent); }
+    .sub-bar-fill-other { background: var(--color-gray-300); }
+
+    .sub-name {
+      min-width: 80px;
+      font-size: var(--text-sm);
+    }
+
+    /* ========================================
+       MODULE 5: TECHNIQUE ARSENAL
+       ======================================== */
+    .arsenal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .arsenal-total {
+      background: var(--color-accent);
+      color: var(--color-primary);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-xs);
+      text-align: center;
+      margin-bottom: var(--space-lg);
+    }
+
+    .category-box {
+      padding: var(--space-sm);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-sm);
+    }
+
+    .category-value {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .category-label {
+      font-size: 10px;
+      color: var(--color-gray-500);
+      text-transform: capitalize;
+    }
+
+    .category-trend {
+      font-size: 10px;
+    }
+
+    .category-trend-up { color: var(--color-success); }
+    .category-trend-down { color: var(--color-error); }
+
+    .signature-moves {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .signature-move {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-sm);
+    }
+
+    .move-name {
+      font-weight: 600;
+    }
+
+    .move-reps {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+    }
+
+    .proficiency-badge {
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--color-white);
+    }
+
+    .proficiency-advanced { background: var(--color-success); }
+    .proficiency-intermediate { background: var(--color-info); }
+
+    .new-techniques {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    .new-tech-tag {
+      padding: var(--space-xs) var(--space-sm);
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--color-info);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+    }
+
+    /* ========================================
+       MODULE 6: POSITION MASTERY
+       ======================================== */
+    .position-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .position-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .position-header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .position-name {
+      font-size: var(--text-sm);
+    }
+
+    .position-name-strong {
+      font-weight: 600;
+    }
+
+    .position-name-weak {
+      color: var(--color-gray-500);
+    }
+
+    .position-value {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+    }
+
+    .position-star {
+      color: var(--color-success);
+      margin-left: 4px;
+    }
+
+    .position-legend {
+      margin-top: var(--space-md);
+      padding: var(--space-sm);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-sm);
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      font-size: var(--text-sm);
+    }
+
+    /* ========================================
+       MODULE 7: BELT JOURNEY
+       ======================================== */
+    .belt-timeline-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: var(--space-lg);
+      padding: var(--space-md) 0;
+    }
+
+    .belt-dot {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .belt-dot-achieved {
+      width: 24px;
+      height: 24px;
+    }
+
+    .belt-dot-current {
+      width: 40px;
+      height: 40px;
+      box-shadow: 0 0 0 4px var(--color-accent);
+    }
+
+    .belt-dot-future {
+      width: 24px;
+      height: 24px;
+      background: var(--color-gray-200);
+    }
+
+    .belt-connector {
+      width: 30px;
+      height: 3px;
+    }
+
+    .belt-connector-done { background: var(--color-accent); }
+    .belt-connector-future { background: var(--color-gray-200); }
+
+    .belt-details {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .belt-card {
+      display: flex;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+    }
+
+    .belt-card-past {
+      background: var(--color-gray-50);
+      border-left: 3px solid var(--color-gray-300);
+    }
+
+    .belt-card-current {
+      background: rgba(252, 211, 77, 0.1);
+      border-left: 3px solid var(--color-accent);
+    }
+
+    .belt-badge {
+      width: 50px;
+      height: 14px;
+      border-radius: 2px;
+      position: relative;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .belt-badge-white {
+      background: var(--color-belt-white);
+      border: 1px solid var(--color-gray-300);
+    }
+
+    .belt-badge-blue {
+      background: var(--color-belt-blue);
+    }
+
+    .belt-stripes {
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 2px;
+    }
+
+    .belt-stripe {
+      width: 2px;
+      height: 8px;
+      background: var(--color-white);
+    }
+
+    .belt-badge-white .belt-stripe {
+      background: var(--color-primary);
+    }
+
+    .belt-card-info {
+      flex: 1;
+    }
+
+    .belt-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-xs);
+    }
+
+    .belt-name {
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+
+    .belt-name-current {
+      color: var(--color-accent-text);
+    }
+
+    .belt-duration {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+    }
+
+    .belt-sessions {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-xs);
+    }
+
+    .belt-milestones {
+      display: flex;
+      gap: var(--space-xs);
+      flex-wrap: wrap;
+    }
+
+    .milestone-tag {
+      padding: 2px 6px;
+      background: var(--color-white);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-sm);
+      font-size: 10px;
+    }
+
+    /* ========================================
+       MODULE 8: RECORDS & MILESTONES
+       ======================================== */
+    .recent-unlock {
+      background: rgba(252, 211, 77, 0.2);
+      border: 2px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin-bottom: var(--space-lg);
+      text-align: center;
+    }
+
+    .recent-unlock-emoji {
+      font-size: 32px;
+      margin-bottom: var(--space-xs);
+    }
+
+    .recent-unlock-title {
+      font-weight: 700;
+      margin-bottom: var(--space-xs);
+    }
+
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .achievement {
+      text-align: center;
+      padding: var(--space-md) var(--space-sm);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-md);
+    }
+
+    .achievement-emoji {
+      font-size: 28px;
+      margin-bottom: var(--space-xs);
+    }
+
+    .achievement-title {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .achievement-date {
+      font-size: 10px;
+      color: var(--color-gray-500);
+    }
+
+    .personal-bests {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .pb-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-sm);
+    }
+
+    .pb-label {
+      font-size: var(--text-sm);
+    }
+
+    .pb-value {
+      font-weight: 700;
+      color: var(--color-accent-text);
+    }
+
+    .pb-date {
+      font-size: 10px;
+      color: var(--color-gray-500);
+    }
+
+    /* ========================================
+       TAB BAR
+       ======================================== */
+    .tab-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 390px;
+      background: var(--color-white);
+      border-top: 1px solid var(--color-gray-200);
+      display: flex;
+      justify-content: space-around;
+      padding: var(--space-sm) 0;
+      padding-bottom: max(var(--space-sm), env(safe-area-inset-bottom));
+    }
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--space-xs);
+      color: var(--color-gray-500);
+      font-size: var(--text-xs);
+    }
+
+    .tab-item.active {
+      color: var(--color-accent-text);
+    }
+
+    .tab-icon {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone-frame">
+    <!-- Header -->
+    <div class="header">
+      <h1>Progress</h1>
+      <span class="header-badge">December</span>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- ========================================
+           MODULE 1: NARRATIVE DEBRIEF
+           ======================================== -->
+      <div class="card card-highlight">
+        <div class="debrief-header">
+          <div class="debrief-avatar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+          </div>
+          <div>
+            <h3 style="font-size: var(--text-base); margin: 0;">Your Debrief</h3>
+            <span style="font-size: var(--text-sm); color: var(--color-gray-500);">December 2024</span>
+          </div>
+        </div>
+
+        <p class="debrief-greeting">Solid month, Marcus.</p>
+
+        <p class="debrief-text">
+          You've been showing up consistently—12 sessions this month puts you above your 3-month average. I'm seeing real development in your guard game. Your sweep attempts are up 40% and you're finishing more triangles than ever.
+        </p>
+
+        <div class="callout callout-success">
+          <p class="callout-label">What's Working</p>
+          <p>Your closed guard is becoming a problem for people. Three different training partners mentioned getting caught in your hip bump to triangle combo. That's your game emerging.</p>
+        </div>
+
+        <div class="callout callout-warning">
+          <p class="callout-label">Area to Watch</p>
+          <p>One thing I'd watch: your escape work has dropped off. You've logged zero mount escape drills in 3 weeks. When's the last time you started a round from bottom mount? Might be worth 10 minutes before your next roll.</p>
+        </div>
+
+        <p class="debrief-closing">Keep this pace. You're building something.</p>
+      </div>
+
+      <!-- ========================================
+           MODULE 2: STREAK & CONSISTENCY
+           ======================================== -->
+      <div class="card">
+        <div class="streak-header">
+          <div class="module-header">
+            <h3>Training Streak</h3>
+            <p class="subtitle">11 of 13 weeks on target</p>
+          </div>
+          <div class="streak-display">
+            <span style="font-size: 28px;">&#128293;</span>
+            <span class="streak-number">14</span>
+          </div>
+        </div>
+
+        <div class="streak-stats">
+          <div>
+            <div class="streak-stat-value">14</div>
+            <div class="streak-stat-label">Current</div>
+          </div>
+          <div>
+            <div class="streak-stat-value">23</div>
+            <div class="streak-stat-label">Best Ever</div>
+          </div>
+          <div>
+            <div class="streak-stat-value" style="color: var(--color-success);">87%</div>
+            <div class="streak-stat-label">Consistency</div>
+          </div>
+        </div>
+
+        <div style="margin-top: var(--space-md);">
+          <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-xs);">
+            <span style="font-size: var(--text-sm);">Weekly target: 3x</span>
+            <span style="font-size: var(--text-sm); color: var(--color-gray-500);">11/13 weeks</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill progress-fill-success" style="width: 87%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================
+           MODULE 3: MAT TIME STATS
+           ======================================== -->
+      <div class="card">
+        <div class="module-header">
+          <h3>Mat Time</h3>
+          <p class="subtitle">This month vs your averages</p>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-box">
+            <div class="stat-box-label">Sessions</div>
+            <div>
+              <span class="stat-box-value">12</span>
+              <span class="stat-box-trend trend-up">&#8593; 20%</span>
+            </div>
+            <div class="stat-box-compare">vs 10 last month</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-label">Hours</div>
+            <div>
+              <span class="stat-box-value">18</span>
+              <span class="stat-box-trend trend-up">&#8593; 20%</span>
+            </div>
+            <div class="stat-box-compare">vs 15 last month</div>
+          </div>
+        </div>
+
+        <div class="alltime-banner">
+          <div class="alltime-label">All-Time</div>
+          <div class="alltime-stats">
+            <div>
+              <span class="alltime-value">127</span>
+              <span class="alltime-unit">sessions</span>
+            </div>
+            <div>
+              <span class="alltime-value">190</span>
+              <span class="alltime-unit">hours</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================
+           MODULE 4: SPARRING SCORECARD
+           ======================================== -->
+      <div class="card">
+        <div class="module-header">
+          <h3>Sparring Scorecard</h3>
+          <p class="subtitle">Submissions, sweeps, and more this month</p>
+        </div>
+
+        <div class="sparring-main">
+          <div class="sparring-box sparring-box-success">
+            <div class="sparring-value">18</div>
+            <div class="sparring-label">Submissions</div>
+            <div class="sparring-compare">vs 14 last month</div>
+          </div>
+          <div class="sparring-box sparring-box-error">
+            <div class="sparring-value">24</div>
+            <div class="sparring-label">Times Tapped</div>
+            <div class="sparring-compare">vs 28 last month</div>
+          </div>
+        </div>
+
+        <div class="context-box">
+          &#128161; <strong>Context:</strong> Tapping often means you're rolling with people who challenge you. Your ratio improved from 1:2 last month to 1:1.3 this month—that's real progress.
+        </div>
+
+        <div class="sparring-secondary">
+          <div class="sparring-secondary-box">
+            <div class="sparring-secondary-value">31</div>
+            <div class="sparring-secondary-label">Sweeps</div>
+          </div>
+          <div class="sparring-secondary-box">
+            <div class="sparring-secondary-value">22</div>
+            <div class="sparring-secondary-label">Passes</div>
+          </div>
+          <div class="sparring-secondary-box">
+            <div class="sparring-secondary-value">15</div>
+            <div class="sparring-secondary-label">Escapes</div>
+          </div>
+        </div>
+
+        <h4 class="section-label">Submission Breakdown</h4>
+        <div class="sub-breakdown">
+          <div class="sub-row">
+            <span class="sub-count sub-count-top">8</span>
+            <div class="sub-bar"><div class="sub-bar-fill sub-bar-fill-top" style="width: 100%;"></div></div>
+            <span class="sub-name">Triangle</span>
+          </div>
+          <div class="sub-row">
+            <span class="sub-count sub-count-other">5</span>
+            <div class="sub-bar"><div class="sub-bar-fill sub-bar-fill-other" style="width: 62.5%;"></div></div>
+            <span class="sub-name">Armbar</span>
+          </div>
+          <div class="sub-row">
+            <span class="sub-count sub-count-other">3</span>
+            <div class="sub-bar"><div class="sub-bar-fill sub-bar-fill-other" style="width: 37.5%;"></div></div>
+            <span class="sub-name">RNC</span>
+          </div>
+          <div class="sub-row">
+            <span class="sub-count sub-count-other">2</span>
+            <div class="sub-bar"><div class="sub-bar-fill sub-bar-fill-other" style="width: 25%;"></div></div>
+            <span class="sub-name">Guillotine</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================
+           MODULE 5: TECHNIQUE ARSENAL
+           ======================================== -->
+      <div class="card">
+        <div class="arsenal-header">
+          <div class="module-header">
+            <h3>Technique Arsenal</h3>
+            <p class="subtitle">What you know and what you're building</p>
+          </div>
+          <div class="arsenal-total">47</div>
+        </div>
+
+        <div class="category-grid">
+          <div class="category-box">
+            <div class="category-value">14</div>
+            <div class="category-label">Guards</div>
+            <div class="category-trend category-trend-up">&#8593;</div>
+          </div>
+          <div class="category-box">
+            <div class="category-value">9</div>
+            <div class="category-label">Passes</div>
+          </div>
+          <div class="category-box">
+            <div class="category-value">12</div>
+            <div class="category-label">Subs</div>
+            <div class="category-trend category-trend-up">&#8593;</div>
+          </div>
+          <div class="category-box">
+            <div class="category-value">6</div>
+            <div class="category-label">Escapes</div>
+            <div class="category-trend category-trend-down">&#8595;</div>
+          </div>
+          <div class="category-box">
+            <div class="category-value">6</div>
+            <div class="category-label">Takedowns</div>
+          </div>
+        </div>
+
+        <h4 class="section-label" style="margin-top: 0;">
+          <span style="color: var(--color-accent-text);">&#9733;</span> Signature Moves
+        </h4>
+        <div class="signature-moves">
+          <div class="signature-move">
+            <div>
+              <div class="move-name">Hip Bump Sweep</div>
+              <div class="move-reps">45 reps logged</div>
+            </div>
+            <span class="proficiency-badge proficiency-advanced">Advanced</span>
+          </div>
+          <div class="signature-move">
+            <div>
+              <div class="move-name">Triangle from Guard</div>
+              <div class="move-reps">38 reps logged</div>
+            </div>
+            <span class="proficiency-badge proficiency-advanced">Advanced</span>
+          </div>
+          <div class="signature-move">
+            <div>
+              <div class="move-name">Scissor Sweep</div>
+              <div class="move-reps">32 reps logged</div>
+            </div>
+            <span class="proficiency-badge proficiency-intermediate">Intermediate</span>
+          </div>
+        </div>
+
+        <h4 class="section-label" style="margin-top: 0;">New This Month</h4>
+        <div class="new-techniques">
+          <span class="new-tech-tag">+ Berimbolo Entry</span>
+          <span class="new-tech-tag">+ Worm Guard Basics</span>
+          <span class="new-tech-tag">+ Leg Drag Pass</span>
+        </div>
+      </div>
+
+      <!-- ========================================
+           MODULE 6: POSITION MASTERY
+           ======================================== -->
+      <div class="card">
+        <div class="module-header">
+          <h3>Position Mastery</h3>
+          <p class="subtitle">Where you're strong and where to grow</p>
+        </div>
+
+        <div class="position-list">
+          <div class="position-row">
+            <div class="position-header">
+              <span class="position-name position-name-strong">Closed Guard <span class="position-star">&#9733;</span></span>
+              <span class="position-value">85%</span>
+            </div>
+            <div class="progress-bar" style="height: 6px;">
+              <div class="progress-fill progress-fill-success" style="width: 85%;"></div>
+            </div>
+          </div>
+          <div class="position-row">
+            <div class="position-header">
+              <span class="position-name position-name-strong">Open Guard <span class="position-star">&#9733;</span></span>
+              <span class="position-value">72%</span>
+            </div>
+            <div class="progress-bar" style="height: 6px;">
+              <div class="progress-fill progress-fill-success" style="width: 72%;"></div>
+            </div>
+          </div>
+          <div class="position-row">
+            <div class="position-header">
+              <span class="position-name position-name-strong">Back Control <span class="position-star">&#9733;</span></span>
+              <span class="position-value">70%</span>
+            </div>
+            <div class="progress-bar" style="height: 6px;">
+              <div class="progress-fill progress-fill-success" style="width: 70%;"></div>
+            </div>
+          </div>
+          <div class="position-row">
+            <div class="position-header">
+              <span class="position-name">Half Guard</span>
+              <span class="position-value">65%</span>
+            </div>
+            <div class="progress-bar" style="height: 6px;">
+              <div class="progress-fill progress-fill-accent" style="width: 65%;"></div>
+            </div>
+          </div>
+          <div class="position-row">
+            <div class="position-header">
+              <span class="position-name">Side Control</span>
+              <span class="position-value">62%</span>
+            </div>
+            <div class="progress-bar" style="height: 6px;">
+              <div class="progress-fill progress-fill-accent" style="width: 62%;"></div>
+            </div>
+          </div>
+          <div class="position-row">
+            <div class="position-header">
+              <span class="position-name">Mount</span>
+              <span class="position-value">58%</span>
+            </div>
+            <div class="progress-bar" style="height: 6px;">
+              <div class="progress-fill progress-fill-accent" style="width: 58%;"></div>
+            </div>
+          </div>
+          <div class="position-row">
+            <div class="position-header">
+              <span class="position-name position-name-weak">Escapes</span>
+              <span class="position-value">45%</span>
+            </div>
+            <div class="progress-bar" style="height: 6px;">
+              <div class="progress-fill progress-fill-gray" style="width: 45%;"></div>
+            </div>
+          </div>
+          <div class="position-row">
+            <div class="position-header">
+              <span class="position-name position-name-weak">Takedowns</span>
+              <span class="position-value">40%</span>
+            </div>
+            <div class="progress-bar" style="height: 6px;">
+              <div class="progress-fill progress-fill-gray" style="width: 40%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="position-legend">
+          <span><span style="color: var(--color-success);">&#9733;</span> Strength (70%+)</span>
+          <span style="color: var(--color-gray-500);">— Growth area (&lt;50%)</span>
+        </div>
+      </div>
+
+      <!-- ========================================
+           MODULE 7: BELT JOURNEY
+           ======================================== -->
+      <div class="card">
+        <div class="module-header">
+          <h3>Your Journey</h3>
+          <p class="subtitle">Training since June 2022</p>
+        </div>
+
+        <div class="belt-timeline-visual">
+          <div class="belt-dot belt-dot-achieved" style="background: var(--color-belt-white); border: 2px solid var(--color-gray-300);"></div>
+          <div class="belt-connector belt-connector-done"></div>
+          <div class="belt-dot belt-dot-current" style="background: var(--color-belt-blue);">
+            <span style="color: var(--color-white); font-size: 10px;">&#9679;</span>
+          </div>
+          <div class="belt-connector belt-connector-future"></div>
+          <div class="belt-dot belt-dot-future"></div>
+          <div class="belt-connector belt-connector-future"></div>
+          <div class="belt-dot belt-dot-future"></div>
+          <div class="belt-connector belt-connector-future"></div>
+          <div class="belt-dot belt-dot-future"></div>
+        </div>
+
+        <div class="belt-details">
+          <div class="belt-card belt-card-past">
+            <div class="belt-badge belt-badge-white">
+              <div class="belt-stripes">
+                <div class="belt-stripe"></div>
+                <div class="belt-stripe"></div>
+                <div class="belt-stripe"></div>
+                <div class="belt-stripe"></div>
+              </div>
+            </div>
+            <div class="belt-card-info">
+              <div class="belt-card-header">
+                <span class="belt-name">White Belt</span>
+                <span class="belt-duration">15 months</span>
+              </div>
+              <div class="belt-sessions">78 sessions logged</div>
+              <div class="belt-milestones">
+                <span class="milestone-tag">First submission</span>
+                <span class="milestone-tag">First competition</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="belt-card belt-card-current">
+            <div class="belt-badge belt-badge-blue">
+              <div class="belt-stripes">
+                <div class="belt-stripe"></div>
+                <div class="belt-stripe"></div>
+              </div>
+            </div>
+            <div class="belt-card-info">
+              <div class="belt-card-header">
+                <span class="belt-name belt-name-current">Blue Belt (Current)</span>
+                <span class="belt-duration">15 months</span>
+              </div>
+              <div class="belt-sessions">49 sessions logged</div>
+              <div class="belt-milestones">
+                <span class="milestone-tag">100th session</span>
+                <span class="milestone-tag">First medal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================
+           MODULE 8: RECORDS & MILESTONES
+           ======================================== -->
+      <div class="card">
+        <div class="module-header">
+          <h3>Records & Milestones</h3>
+          <p class="subtitle">Your achievements unlocked</p>
+        </div>
+
+        <div class="recent-unlock">
+          <div class="recent-unlock-emoji">&#127881;</div>
+          <div class="recent-unlock-title">New Achievement!</div>
+          <div style="font-size: var(--text-sm);">You unlocked <strong>100 Sessions</strong></div>
+        </div>
+
+        <div class="achievements-grid">
+          <div class="achievement">
+            <div class="achievement-emoji">&#128175;</div>
+            <div class="achievement-title">100 Sessions</div>
+            <div class="achievement-date">Aug 2024</div>
+          </div>
+          <div class="achievement">
+            <div class="achievement-emoji">&#127874;</div>
+            <div class="achievement-title">Year One</div>
+            <div class="achievement-date">Jun 2023</div>
+          </div>
+          <div class="achievement">
+            <div class="achievement-emoji">&#127942;</div>
+            <div class="achievement-title">First Comp</div>
+            <div class="achievement-date">Nov 2023</div>
+          </div>
+          <div class="achievement">
+            <div class="achievement-emoji">&#127919;</div>
+            <div class="achievement-title">Sub Hunter</div>
+            <div class="achievement-date">Jul 2024</div>
+          </div>
+          <div class="achievement">
+            <div class="achievement-emoji">&#128293;</div>
+            <div class="achievement-title">Iron Will</div>
+            <div class="achievement-date">Mar 2024</div>
+          </div>
+          <div class="achievement">
+            <div class="achievement-emoji">&#129351;</div>
+            <div class="achievement-title">Blue Belt</div>
+            <div class="achievement-date">Sep 2023</div>
+          </div>
+        </div>
+
+        <h4 class="section-label" style="margin-top: 0;">Personal Bests</h4>
+        <div class="personal-bests">
+          <div class="pb-row">
+            <span class="pb-label">Longest Streak</span>
+            <div style="text-align: right;">
+              <div class="pb-value">23 weeks</div>
+              <div class="pb-date">March 2024</div>
+            </div>
+          </div>
+          <div class="pb-row">
+            <span class="pb-label">Most Sessions (Month)</span>
+            <div style="text-align: right;">
+              <div class="pb-value">16 sessions</div>
+              <div class="pb-date">January 2024</div>
+            </div>
+          </div>
+          <div class="pb-row">
+            <span class="pb-label">Most Mat Hours (Week)</span>
+            <div style="text-align: right;">
+              <div class="pb-value">8.5 hours</div>
+              <div class="pb-date">February 2024</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+      <div class="tab-item">
+        <span class="tab-icon">&#127968;</span>
+        <span>Home</span>
+      </div>
+      <div class="tab-item">
+        <span class="tab-icon">&#128221;</span>
+        <span>Journal</span>
+      </div>
+      <div class="tab-item active">
+        <span class="tab-icon">&#128200;</span>
+        <span>Progress</span>
+      </div>
+      <div class="tab-item">
+        <span class="tab-icon">&#128218;</span>
+        <span>Library</span>
+      </div>
+      <div class="tab-item">
+        <span class="tab-icon">&#128100;</span>
+        <span>Profile</span>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

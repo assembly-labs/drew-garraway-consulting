@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { JournalData, JournalEntry, UserProfile } from '../types/journal';
 
-const STORAGE_KEY = 'bjj-journal-data';
+const STORAGE_KEY = 'ally-data';
 
 const defaultData: JournalData = {
   profile: null,

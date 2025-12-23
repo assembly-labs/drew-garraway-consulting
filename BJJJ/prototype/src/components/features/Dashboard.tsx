@@ -1,13 +1,21 @@
 /**
- * Dashboard Feature
- * Main home screen for practitioners
- * Shows training summary, recent sessions, belt progress, and quick actions
+ * Dashboard Feature - BOLD DESIGN
+ * Dark, aggressive, typography-forward
+ * NO boring cards. NO generic layouts.
+ *
+ * DESIGN RULES:
+ * - Large numbers dominate
+ * - Full-bleed sections
+ * - Gold accents on black
+ * - GREEN = positive, RED = negative
+ * - NO EMOJIS - lineart only
  */
 
 import { currentUser } from '../../data/users';
 import { mockTrainingStats, mockJournalEntries } from '../../data/journal';
-import { mockProgressSummary, mockGoals, mockTonyChenPromotionReadiness } from '../../data/progress';
-import { BeltBadge, StatCard, TrainingBadge, ProgressRing } from '../ui';
+import { mockProgressSummary, mockTonyChenPromotionReadiness } from '../../data/progress';
+import { BeltBadge, TrainingBadge } from '../ui';
+import { useCountUp } from '../../utils/useCountUp';
 
 interface DashboardProps {
   onNavigate: (view: string) => void;
@@ -19,407 +27,642 @@ export function Dashboard({ onNavigate }: DashboardProps) {
   const progress = mockProgressSummary;
   const readiness = mockTonyChenPromotionReadiness;
   const recentEntries = mockJournalEntries.slice(0, 3);
-  const activeGoals = mockGoals.filter(g => !g.isComplete).slice(0, 3);
 
-  // Calculate greeting based on time of day
-  const hour = new Date().getHours();
-  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+  const monthName = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+  // Animated count-up for hero stats
+  const animatedSessions = useCountUp(stats.totalSessions, { duration: 600, delay: 100 });
+  const animatedStreak = useCountUp(stats.currentStreak, { duration: 500, delay: 200 });
+  const animatedSubmissions = useCountUp(stats.sparringRecord.wins, { duration: 500, delay: 100 });
+  const animatedTapped = useCountUp(stats.sparringRecord.losses, { duration: 500, delay: 150 });
+
+  // Streak glow threshold (7+ days gets the celebration glow)
+  const showStreakGlow = stats.currentStreak >= 7;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
-      {/* Hero Welcome Section */}
-      <div
-        className="card"
+    <div style={{ background: 'var(--color-black)', minHeight: '100vh' }}>
+
+      {/* ============================================
+          HERO - Massive session count
+          ============================================ */}
+      <section
         style={{
-          background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
-          color: 'var(--color-white)',
-          padding: 'var(--space-xl)',
+          minHeight: '70vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          padding: '24px',
+          paddingBottom: '48px',
+          position: 'relative',
+          overflow: 'hidden',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-          <div>
-            <p style={{
-              color: 'var(--color-gray-300)',
-              marginBottom: 'var(--space-xs)',
-              fontSize: 'var(--text-sm)',
-            }}>
-              {greeting},
-            </p>
-            <h2 style={{
-              color: 'var(--color-white)',
-              marginBottom: 'var(--space-sm)',
-              fontSize: 'var(--text-2xl)',
-            }}>
-              {user.firstName} {user.lastName}
-            </h2>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
-              <BeltBadge belt={user.belt} stripes={user.stripes} size="lg" />
-              <span style={{
-                color: 'var(--color-gray-300)',
-                fontSize: 'var(--text-sm)',
-              }}>
-                {progress.timeAtBelt} at {user.belt} belt
-              </span>
-            </div>
-          </div>
-          <div style={{ textAlign: 'right' }}>
-            <div style={{
-              backgroundColor: 'var(--color-accent)',
-              color: 'var(--color-primary)',
-              padding: 'var(--space-sm) var(--space-md)',
-              borderRadius: 'var(--radius-md)',
-              fontWeight: 700,
-              fontSize: 'var(--text-2xl)',
-              fontFamily: 'var(--font-heading)',
-            }}>
-              {stats.currentStreak}
-            </div>
-            <span style={{
+        {/* Gold glow */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '-30%',
+            right: '-30%',
+            width: '150%',
+            height: '150%',
+            background: 'radial-gradient(circle at 70% 30%, rgba(245, 166, 35, 0.12) 0%, transparent 50%)',
+            pointerEvents: 'none',
+          }}
+        />
+
+        <div
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.25em',
+            color: 'var(--color-gold)',
+            marginBottom: '12px',
+          }}
+        >
+          {monthName}
+        </div>
+
+        <div
+          style={{
+            fontSize: 'clamp(100px, 30vw, 160px)',
+            fontWeight: 700,
+            lineHeight: 0.85,
+            letterSpacing: '-0.04em',
+            background: 'linear-gradient(180deg, #ffffff 0%, #666666 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+        >
+          {animatedSessions}
+        </div>
+
+        <div
+          style={{
+            fontSize: 'var(--text-xl)',
+            fontWeight: 300,
+            color: 'var(--color-gray-400)',
+            marginTop: '-4px',
+            marginBottom: '24px',
+          }}
+        >
+          sessions logged
+        </div>
+
+        <p
+          style={{
+            fontSize: 'var(--text-base)',
+            color: 'var(--color-gray-400)',
+            maxWidth: '300px',
+            lineHeight: 1.6,
+            margin: 0,
+          }}
+        >
+          <strong style={{ color: 'var(--color-white)' }}>{stats.totalHours} hours</strong> on the mat.
+          You're showing up.
+        </p>
+
+        {/* Scroll hint */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '20px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            color: 'var(--color-gray-600)',
+            fontSize: 'var(--text-xs)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.2em',
+            opacity: 0.6,
+          }}
+        >
+          scroll
+        </div>
+      </section>
+
+      {/* ============================================
+          SPARRING DOMINANCE - Full bleed grid
+          ============================================ */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '1px',
+          background: 'var(--color-gray-800)',
+        }}
+      >
+        {/* SUBMISSIONS - GREEN (positive) */}
+        <div
+          style={{
+            background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, var(--color-black) 100%)',
+            padding: '40px 24px',
+          }}
+        >
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
               fontSize: 'var(--text-xs)',
-              color: 'var(--color-gray-300)',
               textTransform: 'uppercase',
-              letterSpacing: 'var(--tracking-wider)',
-            }}>
-              Day Streak
-            </span>
+              letterSpacing: '0.2em',
+              color: 'var(--color-positive)',
+              marginBottom: '12px',
+            }}
+          >
+            Submissions
+          </div>
+          <div
+            style={{
+              fontSize: '64px',
+              fontWeight: 700,
+              color: 'var(--color-positive)',
+              lineHeight: 1,
+              letterSpacing: '-0.03em',
+            }}
+          >
+            {animatedSubmissions}
+          </div>
+          <div
+            style={{
+              fontSize: 'var(--text-sm)',
+              color: 'var(--color-gray-400)',
+              marginTop: '8px',
+            }}
+          >
+            you landed
+          </div>
+        </div>
+
+        {/* TAPPED - RED (negative) */}
+        <div
+          style={{
+            background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, var(--color-black) 100%)',
+            padding: '40px 24px',
+          }}
+        >
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.2em',
+              color: 'var(--color-negative)',
+              marginBottom: '12px',
+            }}
+          >
+            Tapped Out
+          </div>
+          <div
+            style={{
+              fontSize: '64px',
+              fontWeight: 700,
+              color: 'var(--color-negative)',
+              lineHeight: 1,
+              letterSpacing: '-0.03em',
+            }}
+          >
+            {animatedTapped}
+          </div>
+          <div
+            style={{
+              fontSize: 'var(--text-sm)',
+              color: 'var(--color-gray-400)',
+              marginTop: '8px',
+            }}
+          >
+            this month
           </div>
         </div>
       </div>
 
-      {/* Quick Stats Row */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
-        gap: 'var(--space-md)'
-      }}>
-        <StatCard
-          label="This Month"
-          value={stats.thisMonth.sessions}
-          subtitle="Sessions"
-          trend="up"
-          trendValue="+3 vs last"
+      {/* ============================================
+          STREAK - Massive typographic statement
+          ============================================ */}
+      <section
+        style={{
+          padding: '80px 24px',
+          textAlign: 'center',
+          position: 'relative',
+          borderTop: '1px solid var(--color-gray-800)',
+        }}
+      >
+        {/* Glow behind number - animated pulse for 7+ day streaks */}
+        <div
+          className={showStreakGlow ? 'animate-streak-glow' : undefined}
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '280px',
+            height: '280px',
+            background: 'radial-gradient(circle, var(--color-positive-glow) 0%, transparent 70%)',
+            pointerEvents: 'none',
+            borderRadius: '50%',
+          }}
         />
-        <StatCard
-          label="Total Hours"
-          value={stats.totalHours}
-          subtitle="Mat time"
-        />
-      </div>
 
-      {/* Belt Progress Card */}
-      <div className="card">
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: 'var(--space-md)',
-        }}>
+        <div
+          style={{
+            fontSize: 'clamp(120px, 40vw, 200px)',
+            fontWeight: 700,
+            lineHeight: 0.75,
+            letterSpacing: '-0.05em',
+            color: 'var(--color-positive)',
+            position: 'relative',
+          }}
+        >
+          {animatedStreak}
+        </div>
+
+        <div
+          style={{
+            fontSize: 'var(--text-sm)',
+            fontWeight: 500,
+            textTransform: 'uppercase',
+            letterSpacing: '0.35em',
+            color: 'var(--color-positive)',
+            marginTop: '20px',
+          }}
+        >
+          Day Streak
+        </div>
+
+        {/* Meta stats */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '64px',
+            marginTop: '48px',
+            paddingTop: '32px',
+            borderTop: '1px solid var(--color-gray-800)',
+          }}
+        >
           <div>
-            <h3 style={{ marginBottom: 'var(--space-xs)' }}>Purple Belt Progress</h3>
-            <p className="text-muted text-small" style={{ marginBottom: 0 }}>
-              {readiness.technicalProgress.overallPercentage}% requirements complete
-            </p>
-          </div>
-          <ProgressRing
-            percentage={readiness.technicalProgress.overallPercentage}
-            size={70}
-            strokeWidth={5}
-          />
-        </div>
-
-        {/* Time requirement */}
-        <div style={{
-          backgroundColor: readiness.meetsTimeRequirement ? 'rgba(34, 197, 94, 0.1)' : 'rgba(245, 158, 11, 0.1)',
-          border: `1px solid ${readiness.meetsTimeRequirement ? 'var(--color-success)' : 'var(--color-warning)'}`,
-          borderRadius: 'var(--radius-sm)',
-          padding: 'var(--space-sm) var(--space-md)',
-          marginBottom: 'var(--space-md)',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
-            <span style={{
-              color: readiness.meetsTimeRequirement ? 'var(--color-success)' : 'var(--color-warning)',
-              fontWeight: 600,
-            }}>
-              {readiness.meetsTimeRequirement ? '✓' : '○'}
-            </span>
-            <span className="text-small">
-              Time in grade: <strong>{readiness.timeAtCurrentBelt}</strong> / {readiness.timeRequired} months
-            </span>
-          </div>
-        </div>
-
-        {/* Category Progress */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-          {readiness.technicalProgress.byCategory.slice(0, 4).map((cat) => (
-            <div key={cat.category}>
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginBottom: 4,
-              }}>
-                <span className="text-small" style={{ textTransform: 'capitalize' }}>
-                  {cat.category.replace('-', ' ')}
-                </span>
-                <span className="text-small text-muted">
-                  {cat.completed}/{cat.total}
-                </span>
-              </div>
-              <div className="progress-bar" style={{ height: 6 }}>
-                <div
-                  className="progress-fill"
-                  style={{ width: `${cat.percentage}%` }}
-                />
-              </div>
+            <div style={{ fontSize: 'var(--text-3xl)', fontWeight: 700, color: 'var(--color-white)' }}>
+              {stats.longestStreak}
             </div>
-          ))}
+            <div style={{
+              fontSize: 'var(--text-xs)',
+              color: 'var(--color-gray-400)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.15em',
+              marginTop: '4px',
+            }}>
+              Best Ever
+            </div>
+          </div>
+          <div>
+            <div style={{ fontSize: 'var(--text-3xl)', fontWeight: 700, color: 'var(--color-gold)' }}>
+              {Math.round((stats.thisMonth.sessions / stats.thisMonth.targetSessions) * 100)}%
+            </div>
+            <div style={{
+              fontSize: 'var(--text-xs)',
+              color: 'var(--color-gray-400)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.15em',
+              marginTop: '4px',
+            }}>
+              Monthly Goal
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================
+          BELT PROGRESS - Arsenal style grid
+          ============================================ */}
+      <section
+        style={{
+          padding: '48px 24px',
+          borderTop: '1px solid var(--color-gray-800)',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '32px' }}>
+          <span style={{
+            fontSize: 'var(--text-sm)',
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            letterSpacing: '0.15em',
+            color: 'var(--color-white)',
+          }}>
+            {user.belt === 'blue' ? 'Purple' : 'Next'} Belt Progress
+          </span>
+          <span style={{
+            fontSize: 'var(--text-xs)',
+            color: 'var(--color-gray-400)',
+          }}>
+            {readiness.technicalProgress.overallPercentage}% ready
+          </span>
+        </div>
+
+        {/* Big percentage + belt */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '32px' }}>
+          <div
+            style={{
+              fontSize: '72px',
+              fontWeight: 700,
+              color: readiness.technicalProgress.overallPercentage >= 70 ? 'var(--color-positive)' : 'var(--color-gold)',
+              lineHeight: 1,
+              letterSpacing: '-0.03em',
+            }}
+          >
+            {readiness.technicalProgress.overallPercentage}%
+          </div>
+          <div>
+            <BeltBadge belt={user.belt} stripes={user.stripes} size="lg" />
+            <div style={{
+              fontSize: 'var(--text-sm)',
+              color: 'var(--color-gray-400)',
+              marginTop: '8px',
+            }}>
+              {progress.timeAtBelt} at {user.belt} belt
+            </div>
+          </div>
+        </div>
+
+        {/* Category breakdown - arsenal grid style */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '2px',
+            background: 'var(--color-gray-800)',
+            marginBottom: '24px',
+          }}
+        >
+          {readiness.technicalProgress.byCategory.slice(0, 4).map((cat) => {
+            const isStrong = cat.percentage >= 70;
+            const isWeak = cat.percentage < 40;
+            return (
+              <div
+                key={cat.category}
+                style={{
+                  background: isStrong
+                    ? 'linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, var(--color-gray-900) 100%)'
+                    : isWeak
+                    ? 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, var(--color-gray-900) 100%)'
+                    : 'var(--color-gray-900)',
+                  padding: '20px 12px',
+                  textAlign: 'center',
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: '28px',
+                    fontWeight: 700,
+                    color: isStrong ? 'var(--color-positive)' : isWeak ? 'var(--color-negative)' : 'var(--color-white)',
+                    lineHeight: 1,
+                  }}
+                >
+                  {cat.percentage}%
+                </div>
+                <div
+                  style={{
+                    fontSize: 'var(--text-xs)',
+                    color: 'var(--color-gray-400)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                    marginTop: '8px',
+                  }}
+                >
+                  {cat.category.replace('-', ' ').split(' ')[0]}
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         <button
-          className="btn btn-outline"
           onClick={() => onNavigate('progress')}
-          style={{ width: '100%', marginTop: 'var(--space-md)' }}
+          style={{
+            width: '100%',
+            padding: '16px',
+            background: 'transparent',
+            border: '1px solid var(--color-gray-700)',
+            color: 'var(--color-white)',
+            fontSize: 'var(--text-sm)',
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            letterSpacing: '0.15em',
+            cursor: 'pointer',
+          }}
         >
           View Full Progress
         </button>
-      </div>
+      </section>
 
-      {/* Quick Actions */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
-        gap: 'var(--space-md)'
-      }}>
-        <button
-          className="btn btn-primary"
-          onClick={() => onNavigate('voice-logger')}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: 'var(--space-lg)',
-            gap: 'var(--space-sm)',
-          }}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-            <line x1="12" y1="19" x2="12" y2="23" />
-            <line x1="8" y1="23" x2="16" y2="23" />
-          </svg>
-          <span>Log Training</span>
-        </button>
-        <button
-          className="btn btn-dark"
-          onClick={() => onNavigate('library')}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: 'var(--space-lg)',
-            gap: 'var(--space-sm)',
-          }}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          <span>Techniques</span>
-        </button>
-      </div>
+      {/* ============================================
+          QUICK ACTIONS - Bold buttons
+          ============================================ */}
+      <section style={{ padding: '24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+          <button
+            onClick={() => onNavigate('voice-logger')}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '32px 24px',
+              background: 'var(--color-gold)',
+              border: 'none',
+              color: 'var(--color-black)',
+              cursor: 'pointer',
+              gap: '12px',
+            }}
+          >
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+              <line x1="12" y1="19" x2="12" y2="23" />
+              <line x1="8" y1="23" x2="16" y2="23" />
+            </svg>
+            <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+              Log Training
+            </span>
+          </button>
 
-      {/* Recent Sessions */}
-      <div className="card">
-        <div className="card-header">
-          <span className="card-title">Recent Sessions</span>
+          <button
+            onClick={() => onNavigate('library')}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '32px 24px',
+              background: 'var(--color-gray-900)',
+              border: '1px solid var(--color-gray-800)',
+              color: 'var(--color-white)',
+              cursor: 'pointer',
+              gap: '12px',
+            }}
+          >
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+            </svg>
+            <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+              Techniques
+            </span>
+          </button>
+        </div>
+      </section>
+
+      {/* ============================================
+          RECENT SESSIONS - Clean list
+          ============================================ */}
+      <section
+        style={{
+          padding: '48px 24px',
+          borderTop: '1px solid var(--color-gray-800)',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '24px' }}>
+          <span style={{
+            fontSize: 'var(--text-sm)',
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            letterSpacing: '0.15em',
+            color: 'var(--color-white)',
+          }}>
+            Recent Sessions
+          </span>
           <button
             onClick={() => onNavigate('journal')}
             style={{
               background: 'none',
               border: 'none',
-              color: 'var(--color-accent-text)',
+              color: 'var(--color-gold)',
               cursor: 'pointer',
-              fontSize: 'var(--text-sm)',
-              fontWeight: 500,
+              fontSize: 'var(--text-xs)',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
             }}
           >
             View All
           </button>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-          {recentEntries.map((entry, i) => {
-            const date = new Date(entry.date);
-            const today = new Date();
-            const yesterday = new Date(today);
-            yesterday.setDate(yesterday.getDate() - 1);
 
-            let dateLabel: string;
-            if (date.toDateString() === today.toDateString()) {
-              dateLabel = 'Today';
-            } else if (date.toDateString() === yesterday.toDateString()) {
-              dateLabel = 'Yesterday';
-            } else {
-              dateLabel = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-            }
+        {recentEntries.map((entry) => {
+          const date = new Date(entry.date);
+          const today = new Date();
+          const yesterday = new Date(today);
+          yesterday.setDate(yesterday.getDate() - 1);
 
-            return (
-              <div
-                key={entry.id}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  paddingBottom: i < recentEntries.length - 1 ? 'var(--space-md)' : 0,
-                  borderBottom: i < recentEntries.length - 1 ? '1px solid var(--color-gray-200)' : 'none',
-                }}
-              >
-                <div>
-                  <div className="font-bold">{dateLabel}</div>
-                  <div className="text-small text-muted">
-                    {entry.duration} min • {entry.techniques.length} technique{entry.techniques.length !== 1 ? 's' : ''} • {entry.sparringRounds.length} roll{entry.sparringRounds.length !== 1 ? 's' : ''}
-                  </div>
+          let dateLabel: string;
+          if (date.toDateString() === today.toDateString()) {
+            dateLabel = 'Today';
+          } else if (date.toDateString() === yesterday.toDateString()) {
+            dateLabel = 'Yesterday';
+          } else {
+            dateLabel = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+          }
+
+          return (
+            <div
+              key={entry.id}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid var(--color-gray-800)',
+              }}
+            >
+              <div>
+                <div style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--color-white)' }}>
+                  {dateLabel}
                 </div>
-                <TrainingBadge type={entry.type} size="sm" />
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Active Goals */}
-      <div className="card">
-        <div className="card-header">
-          <span className="card-title">Active Goals</span>
-          <span className="text-muted text-small">{activeGoals.length} goals</span>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-          {activeGoals.map((goal) => {
-            const progress = goal.targetValue && goal.currentValue
-              ? Math.round((goal.currentValue / goal.targetValue) * 100)
-              : null;
-
-            return (
-              <div key={goal.id}>
                 <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  marginBottom: 'var(--space-xs)',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'var(--text-xs)',
+                  color: 'var(--color-gray-400)',
+                  marginTop: '4px',
                 }}>
-                  <span className="font-bold text-small">{goal.title}</span>
-                  {goal.targetDate && (
-                    <span className="text-muted text-small">
-                      {new Date(goal.targetDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
-                    </span>
-                  )}
+                  {entry.duration}min / {entry.techniques.length} tech / {entry.sparringRounds.length} rolls
                 </div>
-                {progress !== null && (
-                  <div className="progress-bar" style={{ height: 6 }}>
-                    <div
-                      className="progress-fill"
-                      style={{ width: `${progress}%` }}
-                    />
-                  </div>
-                )}
-                {progress === null && (
-                  <p className="text-muted text-small" style={{ marginBottom: 0 }}>
-                    {goal.description}
-                  </p>
-                )}
               </div>
-            );
-          })}
-        </div>
-      </div>
+              <TrainingBadge type={entry.type} size="sm" />
+            </div>
+          );
+        })}
+      </section>
 
-      {/* Sparring Record Summary */}
-      <div className="card">
-        <h3 style={{ marginBottom: 'var(--space-md)' }}>Sparring Record</h3>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 'var(--space-md)',
-          textAlign: 'center',
-        }}>
-          <div>
-            <div style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'var(--text-2xl)',
-              fontWeight: 800,
-              color: 'var(--color-success)',
-            }}>
-              {stats.sparringRecord.wins}
+      {/* ============================================
+          CALLOUTS - Strength & Watch
+          ============================================ */}
+      {readiness.areasNeedingWork && readiness.areasNeedingWork.length > 0 && (
+        <>
+          {/* GREEN - What's working */}
+          <div
+            style={{
+              padding: '32px 24px',
+              background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, transparent 100%)',
+              borderLeft: '3px solid var(--color-positive)',
+            }}
+          >
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.25em',
+                color: 'var(--color-positive)',
+                marginBottom: '12px',
+              }}
+            >
+              What's Working
             </div>
-            <div className="text-small text-muted">Wins</div>
-          </div>
-          <div>
-            <div style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'var(--text-2xl)',
-              fontWeight: 800,
-              color: 'var(--color-error)',
+            <p style={{
+              fontSize: 'var(--text-base)',
+              color: 'var(--color-gray-100)',
+              lineHeight: 1.6,
+              margin: 0,
             }}>
-              {stats.sparringRecord.losses}
-            </div>
-            <div className="text-small text-muted">Losses</div>
+              Progress toward {user.belt === 'blue' ? 'purple' : 'next'} belt at {readiness.technicalProgress.overallPercentage}%.
+              {readiness.meetsTimeRequirement ? ' Time requirement met.' : ` ${readiness.timeAtCurrentBelt}/${readiness.timeRequired} months.`}
+            </p>
           </div>
-          <div>
-            <div style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'var(--text-2xl)',
-              fontWeight: 800,
-              color: 'var(--color-gray-500)',
-            }}>
-              {stats.sparringRecord.draws}
-            </div>
-            <div className="text-small text-muted">Draws</div>
-          </div>
-        </div>
-        <div style={{
-          marginTop: 'var(--space-md)',
-          padding: 'var(--space-sm)',
-          backgroundColor: 'var(--color-gray-100)',
-          borderRadius: 'var(--radius-sm)',
-          textAlign: 'center',
-        }}>
-          <span className="text-small">
-            Win Rate: <strong style={{ color: 'var(--color-accent-text)' }}>
-              {Math.round((stats.sparringRecord.wins / (stats.sparringRecord.wins + stats.sparringRecord.losses + stats.sparringRecord.draws)) * 100)}%
-            </strong>
-          </span>
-        </div>
-      </div>
 
-      {/* Coach Feedback Preview */}
-      {readiness.coachNotes && (
-        <div
-          className="card"
-          style={{
-            borderLeft: '4px solid var(--color-accent)',
-          }}
-        >
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 'var(--space-sm)',
-            marginBottom: 'var(--space-sm)',
-          }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-text)" strokeWidth="2">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-            <span className="card-title" style={{ margin: 0 }}>Coach Feedback</span>
+          {/* RED - Needs work */}
+          <div
+            style={{
+              padding: '32px 24px',
+              background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, transparent 100%)',
+              borderLeft: '3px solid var(--color-negative)',
+            }}
+          >
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.25em',
+                color: 'var(--color-negative)',
+                marginBottom: '12px',
+              }}
+            >
+              Needs Work
+            </div>
+            <p style={{
+              fontSize: 'var(--text-base)',
+              color: 'var(--color-gray-100)',
+              lineHeight: 1.6,
+              margin: 0,
+            }}>
+              {readiness.areasNeedingWork[0]} is a gap. Focus here during your next few sessions.
+            </p>
           </div>
-          <p className="text-small" style={{ marginBottom: 'var(--space-sm)', color: 'var(--color-gray-700)' }}>
-            "{readiness.coachNotes}"
-          </p>
-          <div className="text-small text-muted">
-            Last assessment: {new Date(readiness.lastAssessmentDate || '').toLocaleDateString('en-US', {
-              month: 'long',
-              day: 'numeric',
-              year: 'numeric',
-            })}
-          </div>
-        </div>
+        </>
       )}
+
+      {/* Bottom spacer for tab bar */}
+      <div style={{ height: '100px' }} />
     </div>
   );
 }

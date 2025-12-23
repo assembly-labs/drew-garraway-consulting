@@ -31,7 +31,6 @@ interface SessionData {
   sparringResults: SparringResult[];
   workedWell: string[];
   struggles: string[];
-  injuries: { bodyPart: string; notes: string }[];
   energyLevel: 'high' | 'medium' | 'low' | null;
 }
 
@@ -48,11 +47,13 @@ const MOCK_EXTRACTED_DATA: SessionData = {
   techniques: ['Knee slice pass (far arm control)'],
   sparringResults: [
     { type: 'submission_given', technique: 'Collar choke', partner: 'Jake' },
+    { type: 'submission_given', technique: 'Armbar', partner: 'Mike' },
+    { type: 'submission_given', technique: 'RNC', partner: 'Tom' },
     { type: 'submission_received', technique: 'Triangle', partner: 'Sarah' },
+    { type: 'submission_received', technique: 'Kimura', partner: 'Jake' },
   ],
   workedWell: [],
   struggles: ['Half guard top — losing underhook'],
-  injuries: [{ bodyPart: 'Left knee', notes: 'minor tightness' }],
   energyLevel: 'medium',
 };
 
@@ -66,20 +67,18 @@ interface VoiceLoggerProps {
 
 export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
   const [phase, setPhase] = useState<Phase>('idle');
-  const [previousPhase, setPreviousPhase] = useState<Phase | null>(null);
   const [recordingTime, setRecordingTime] = useState(0);
   const [sessionData, setSessionData] = useState<SessionData | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Smooth phase transition
   const transitionTo = useCallback((newPhase: Phase) => {
-    setPreviousPhase(phase);
     setIsTransitioning(true);
     setTimeout(() => {
       setPhase(newPhase);
       setTimeout(() => setIsTransitioning(false), 50);
     }, 200);
-  }, [phase]);
+  }, []);
 
   // Recording timer
   useEffect(() => {
@@ -148,7 +147,7 @@ export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
   }, [onCancel]);
 
   // Transition wrapper style
-  const getPhaseStyle = (currentPhase: Phase): React.CSSProperties => ({
+  const getPhaseStyle = (): React.CSSProperties => ({
     opacity: isTransitioning ? 0 : 1,
     transform: isTransitioning ? 'translateY(10px)' : 'translateY(0)',
     transition: 'opacity 0.2s ease, transform 0.2s ease',
@@ -159,7 +158,7 @@ export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
-      ...getPhaseStyle(phase),
+      ...getPhaseStyle(),
     }}>
       {phase === 'idle' && (
         <IdlePhase onStart={handleStartRecording} onCancel={handleCancel} />
@@ -196,15 +195,44 @@ export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
 // ============================================
 // IDLE PHASE - Call to action to start
 // ============================================
+const PROMPT_HINTS = [
+  "How'd today go?",
+  "Tell me about the positions.",
+  "Tap to anything?",
+  "Tap anyone out?",
+  "What went well?",
+  "What didn't go well?",
+];
+
 function IdlePhase({ onStart, onCancel }: { onStart: () => void; onCancel?: () => void }) {
+  const [currentHintIndex, setCurrentHintIndex] = useState(0);
+  const [isHintVisible, setIsHintVisible] = useState(true);
+
+  // Rotate through hints with fade effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Fade out
+      setIsHintVisible(false);
+
+      // After fade out, change text and fade in
+      setTimeout(() => {
+        setCurrentHintIndex((prev) => (prev + 1) % PROMPT_HINTS.length);
+        setIsHintVisible(true);
+      }, 400);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div style={{
       flex: 1,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       padding: 'var(--space-xl)',
+      paddingTop: '15vh',
       textAlign: 'center',
       backgroundColor: 'var(--color-primary)',
       color: 'var(--color-white)',
@@ -242,7 +270,7 @@ function IdlePhase({ onStart, onCancel }: { onStart: () => void; onCancel?: () =
         </button>
       )}
 
-      {/* Mic icon with glow */}
+      {/* Mic icon with glow - moved up */}
       <div style={{
         width: 120,
         height: 120,
@@ -251,7 +279,7 @@ function IdlePhase({ onStart, onCancel }: { onStart: () => void; onCancel?: () =
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 'var(--space-xl)',
+        marginBottom: '48px',
         boxShadow: '0 0 0 20px rgba(252, 211, 77, 0.15), 0 0 0 40px rgba(252, 211, 77, 0.08)',
       }}>
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="2.5">
@@ -268,20 +296,32 @@ function IdlePhase({ onStart, onCancel }: { onStart: () => void; onCancel?: () =
         fontWeight: 700,
         textTransform: 'uppercase',
         letterSpacing: 'var(--tracking-wider)',
-        marginBottom: 'var(--space-md)',
+        marginBottom: 'var(--space-lg)',
       }}>
         Log Training
       </h1>
 
-      <p style={{
-        fontSize: 'var(--text-lg)',
-        color: 'var(--color-gray-400)',
+      {/* Rotating hint prompts */}
+      <div style={{
+        height: 28,
         marginBottom: 'var(--space-2xl)',
-        maxWidth: 280,
-        lineHeight: 'var(--leading-relaxed)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}>
-        How'd training go? Just talk—I'm listening.
-      </p>
+        <p style={{
+          fontSize: 'var(--text-lg)',
+          color: 'var(--color-gray-400)',
+          maxWidth: 300,
+          lineHeight: 'var(--leading-relaxed)',
+          margin: 0,
+          opacity: isHintVisible ? 1 : 0,
+          transform: isHintVisible ? 'translateY(0)' : 'translateY(-8px)',
+          transition: 'opacity 0.4s ease, transform 0.4s ease',
+        }}>
+          {PROMPT_HINTS[currentHintIndex]}
+        </p>
+      </div>
 
       <button
         onClick={onStart}
@@ -355,8 +395,84 @@ function AudioWaveform() {
 }
 
 // ============================================
-// RECORDING PHASE - Active recording state
+// TALLY MARKS - Chicken scratch counting
+// Classic tally: 4 vertical lines + diagonal strike for 5
 // ============================================
+function TallyMarks({ count, color = 'currentColor' }: { count: number; color?: string }) {
+  if (count === 0) {
+    return (
+      <span style={{
+        fontFamily: 'var(--font-mono)',
+        fontSize: 'var(--text-lg)',
+        color: 'var(--color-gray-600)',
+      }}>
+        0
+      </span>
+    );
+  }
+
+  const fullGroups = Math.floor(count / 5);
+  const remainder = count % 5;
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      {/* Full groups of 5 (four lines + diagonal strike) */}
+      {Array.from({ length: fullGroups }).map((_, groupIndex) => (
+        <svg
+          key={`group-${groupIndex}`}
+          width="28"
+          height="24"
+          viewBox="0 0 28 24"
+          style={{ display: 'block' }}
+        >
+          {/* Four vertical lines */}
+          <line x1="4" y1="4" x2="4" y2="20" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="10" y1="4" x2="10" y2="20" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="16" y1="4" x2="16" y2="20" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="22" y1="4" x2="22" y2="20" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
+          {/* Diagonal strike through */}
+          <line x1="1" y1="18" x2="25" y2="6" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
+        </svg>
+      ))}
+      {/* Remaining lines (1-4) */}
+      {remainder > 0 && (
+        <svg
+          width={remainder * 6 + 2}
+          height="24"
+          viewBox={`0 0 ${remainder * 6 + 2} 24`}
+          style={{ display: 'block' }}
+        >
+          {Array.from({ length: remainder }).map((_, i) => (
+            <line
+              key={`line-${i}`}
+              x1={4 + i * 6}
+              y1="4"
+              x2={4 + i * 6}
+              y2="20"
+              stroke={color}
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+          ))}
+        </svg>
+      )}
+    </div>
+  );
+}
+
+// ============================================
+// RECORDING PHASE - Active recording state
+// Bold, typography-forward design with strong motion
+// ============================================
+const RECORDING_HINTS = [
+  "How'd today go?",
+  "Tell me about the positions.",
+  "Tap to anything?",
+  "Tap anyone out?",
+  "What went well?",
+  "What didn't go well?",
+];
+
 function RecordingPhase({
   recordingTime,
   formatTime,
@@ -368,136 +484,215 @@ function RecordingPhase({
   onStop: () => void;
   onCancel: () => void;
 }) {
+  const [currentHintIndex, setCurrentHintIndex] = useState(0);
+  const [animationPhase, setAnimationPhase] = useState<'visible' | 'exit' | 'enter'>('visible');
+
+  // Rotate through hints with strong motion
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Start exit animation
+      setAnimationPhase('exit');
+
+      // After exit, change text and start enter animation
+      setTimeout(() => {
+        setCurrentHintIndex((prev) => (prev + 1) % RECORDING_HINTS.length);
+        setAnimationPhase('enter');
+      }, 300);
+
+      // Settle to visible
+      setTimeout(() => {
+        setAnimationPhase('visible');
+      }, 600);
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Animation styles based on phase
+  const getHintStyle = (): React.CSSProperties => {
+    switch (animationPhase) {
+      case 'exit':
+        return {
+          opacity: 0,
+          transform: 'translateY(-30px) scale(0.95)',
+          filter: 'blur(4px)',
+        };
+      case 'enter':
+        return {
+          opacity: 1,
+          transform: 'translateY(0) scale(1)',
+          filter: 'blur(0px)',
+        };
+      default:
+        return {
+          opacity: 1,
+          transform: 'translateY(0) scale(1)',
+          filter: 'blur(0px)',
+        };
+    }
+  };
+
   return (
     <div style={{
       flex: 1,
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 'var(--space-xl)',
-      textAlign: 'center',
       backgroundColor: 'var(--color-primary)',
       color: 'var(--color-white)',
       position: 'relative',
+      overflow: 'hidden',
     }}>
-      {/* Cancel button */}
-      <button
-        onClick={onCancel}
-        style={{
-          position: 'absolute',
-          top: 'var(--space-lg)',
-          left: 'var(--space-lg)',
-          background: 'none',
-          border: 'none',
-          color: 'var(--color-gray-500)',
-          cursor: 'pointer',
-          padding: 'var(--space-sm)',
-          borderRadius: 'var(--radius-full)',
-          transition: 'color 0.2s, background-color 0.2s',
-        }}
-        onMouseOver={(e) => {
-          e.currentTarget.style.color = 'var(--color-white)';
-          e.currentTarget.style.backgroundColor = 'var(--color-gray-800)';
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.color = 'var(--color-gray-500)';
-          e.currentTarget.style.backgroundColor = 'transparent';
-        }}
-        aria-label="Cancel recording"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M18 6L6 18M6 6l12 12" />
-        </svg>
-      </button>
-
-      {/* Recording indicator dot */}
+      {/* Top bar - minimal recording indicator */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 'var(--space-sm)',
-        marginBottom: 'var(--space-xl)',
+        justifyContent: 'space-between',
+        padding: 'var(--space-lg)',
+        paddingTop: 'max(var(--space-lg), env(safe-area-inset-top))',
       }}>
-        <span style={{
-          width: 12,
-          height: 12,
-          borderRadius: 'var(--radius-full)',
-          backgroundColor: 'var(--color-error)',
-          animation: 'blink 1s ease-in-out infinite',
-        }} />
-        <span style={{
-          fontFamily: 'var(--font-heading)',
-          fontSize: 'var(--text-sm)',
-          textTransform: 'uppercase',
-          letterSpacing: 'var(--tracking-widest)',
-          color: 'var(--color-error)',
+        {/* Cancel button */}
+        <button
+          onClick={onCancel}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: 'var(--color-gray-500)',
+            cursor: 'pointer',
+            padding: 'var(--space-sm)',
+            borderRadius: 'var(--radius-full)',
+            transition: 'color 0.2s',
+          }}
+          aria-label="Cancel recording"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+
+        {/* Recording indicator - compact */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
         }}>
-          Recording
-        </span>
+          <span style={{
+            width: 8,
+            height: 8,
+            borderRadius: '50%',
+            backgroundColor: 'var(--color-error)',
+            animation: 'pulse 1.5s ease-in-out infinite',
+          }} />
+          <span style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-sm)',
+            letterSpacing: '0.05em',
+            color: 'var(--color-gray-400)',
+          }}>
+            {formatTime(recordingTime)}
+          </span>
+        </div>
+
+        {/* Spacer for balance */}
+        <div style={{ width: 40 }} />
       </div>
 
-      {/* Audio waveform visualization */}
-      <AudioWaveform />
-
-      {/* Timer */}
+      {/* Main content - centered, typography-forward */}
       <div style={{
-        fontFamily: 'var(--font-heading)',
-        fontSize: 'var(--text-4xl)',
-        fontWeight: 700,
-        letterSpacing: 'var(--tracking-wide)',
-        marginBottom: 'var(--space-lg)',
-        fontVariantNumeric: 'tabular-nums',
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 'var(--space-xl)',
+        paddingBottom: '160px',
       }}>
-        {formatTime(recordingTime)}
+        {/* Large rotating hint text - the hero element */}
+        <div style={{
+          minHeight: 120,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          maxWidth: 340,
+        }}>
+          <h2 style={{
+            fontFamily: 'var(--font-heading)',
+            fontSize: 'clamp(28px, 8vw, 36px)',
+            fontWeight: 600,
+            lineHeight: 1.2,
+            textAlign: 'center',
+            color: 'var(--color-white)',
+            margin: 0,
+            transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease',
+            ...getHintStyle(),
+          }}>
+            {RECORDING_HINTS[currentHintIndex]}
+          </h2>
+        </div>
+
+        {/* Subtle waveform indicator */}
+        <div style={{ marginTop: 'var(--space-xl)' }}>
+          <AudioWaveform />
+        </div>
       </div>
 
-      {/* Prompt - conversational */}
-      <p style={{
-        fontSize: 'var(--text-base)',
-        color: 'var(--color-gray-400)',
-        marginBottom: 'var(--space-2xl)',
-        maxWidth: 280,
-        lineHeight: 'var(--leading-relaxed)',
+      {/* Bottom action area - fixed */}
+      <div style={{
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        padding: 'var(--space-xl)',
+        paddingBottom: 'max(var(--space-xl), env(safe-area-inset-bottom))',
+        background: 'linear-gradient(to top, var(--color-primary) 60%, transparent)',
       }}>
-        What'd you work on? How'd the rolls go?
-      </p>
-
-      {/* Stop button - prominent */}
-      <button
-        onClick={onStop}
-        style={{
-          width: '100%',
-          maxWidth: 320,
-          padding: 'var(--space-lg)',
-          backgroundColor: 'var(--color-white)',
-          color: 'var(--color-primary)',
-          border: 'none',
-          borderRadius: 'var(--radius-md)',
-          fontFamily: 'var(--font-heading)',
-          fontSize: 'var(--text-lg)',
-          fontWeight: 700,
-          textTransform: 'uppercase',
-          letterSpacing: 'var(--tracking-wide)',
-          cursor: 'pointer',
-          transition: 'transform 0.2s, box-shadow 0.2s',
-          boxShadow: '0 4px 20px rgba(255,255,255,0.2)',
-        }}
-        onMouseOver={(e) => {
-          e.currentTarget.style.transform = 'translateY(-2px)';
-          e.currentTarget.style.boxShadow = '0 6px 24px rgba(255,255,255,0.3)';
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.transform = 'translateY(0)';
-          e.currentTarget.style.boxShadow = '0 4px 20px rgba(255,255,255,0.2)';
-        }}
-      >
-        Done
-      </button>
+        <button
+          onClick={onStop}
+          style={{
+            width: '100%',
+            padding: '20px',
+            backgroundColor: 'var(--color-white)',
+            color: 'var(--color-primary)',
+            border: 'none',
+            borderRadius: '12px',
+            fontFamily: 'var(--font-heading)',
+            fontSize: 'var(--text-lg)',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            cursor: 'pointer',
+            transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+            boxShadow: '0 8px 32px rgba(255,255,255,0.15)',
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.transform = 'scale(1.02)';
+            e.currentTarget.style.boxShadow = '0 12px 40px rgba(255,255,255,0.25)';
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.boxShadow = '0 8px 32px rgba(255,255,255,0.15)';
+          }}
+          onMouseDown={(e) => {
+            e.currentTarget.style.transform = 'scale(0.98)';
+          }}
+          onMouseUp={(e) => {
+            e.currentTarget.style.transform = 'scale(1.02)';
+          }}
+        >
+          Done
+        </button>
+      </div>
 
       <style>{`
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.3; }
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.4;
+            transform: scale(1.2);
+          }
         }
       `}</style>
     </div>
@@ -586,10 +781,10 @@ function GapFillPhase({ onAnswer }: { onAnswer: (type: 'gi' | 'nogi') => void })
         justifyContent: 'center',
         marginBottom: 'var(--space-xl)',
       }}>
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10" />
-          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-          <line x1="12" y1="17" x2="12.01" y2="17" />
+          <path d="M9 9c0-1.7 1.3-3 3-3s3 1.3 3 3c0 1.3-.8 2.4-2 2.8-.4.1-.7.3-.8.6-.1.2-.2.4-.2.6v1" />
+          <circle cx="12" cy="17" r="0.5" fill="var(--color-accent)" />
         </svg>
       </div>
 
@@ -724,7 +919,7 @@ function ReviewPhase({
             fontSize: 'var(--text-sm)',
             color: 'var(--color-gray-500)',
           }}>
-            Tap save or edit anything that's off
+            Tap save when ready
           </p>
         </div>
         <button
@@ -842,7 +1037,7 @@ function ReviewPhase({
             </div>
           )}
 
-          {/* Sparring Results */}
+          {/* Sparring Results - Tally Style */}
           {data.sparringResults.length > 0 && (
             <div style={{ marginBottom: 'var(--space-md)' }}>
               <div style={{
@@ -852,38 +1047,45 @@ function ReviewPhase({
                 textTransform: 'uppercase',
                 letterSpacing: 'var(--tracking-widest)',
                 color: 'var(--color-gray-500)',
-                marginBottom: 'var(--space-xs)',
+                marginBottom: 'var(--space-sm)',
               }}>
                 Sparring
               </div>
-              {data.sparringResults.map((result, i) => (
-                <div key={i} style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 'var(--space-sm)',
-                  fontSize: 'var(--text-base)',
-                  marginBottom: 'var(--space-xs)',
-                }}>
+              <div style={{
+                display: 'flex',
+                gap: 'var(--space-xl)',
+              }}>
+                {/* Taps Given */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
+                  <TallyMarks
+                    count={data.sparringResults.filter(r => r.type === 'submission_given').length}
+                    color="var(--color-positive)"
+                  />
                   <span style={{
-                    color: result.type === 'submission_given'
-                      ? 'var(--color-success)'
-                      : 'var(--color-error)',
-                    fontWeight: 600,
-                    fontSize: 'var(--text-lg)',
+                    fontSize: 'var(--text-sm)',
+                    color: 'var(--color-gray-400)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
                   }}>
-                    {result.type === 'submission_given' ? '✓' : '✗'}
-                  </span>
-                  <span style={{ color: 'var(--color-gray-200)' }}>
-                    {result.technique}
-                    {result.partner && (
-                      <span style={{ color: 'var(--color-gray-500)' }}>
-                        {result.type === 'submission_given' ? ' → ' : ' ← '}
-                        {result.partner}
-                      </span>
-                    )}
+                    taps dished
                   </span>
                 </div>
-              ))}
+                {/* Taps Received */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
+                  <TallyMarks
+                    count={data.sparringResults.filter(r => r.type === 'submission_received').length}
+                    color="var(--color-negative)"
+                  />
+                  <span style={{
+                    fontSize: 'var(--text-sm)',
+                    color: 'var(--color-gray-400)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                  }}>
+                    tapped out
+                  </span>
+                </div>
+              </div>
             </div>
           )}
 
@@ -912,36 +1114,6 @@ function ReviewPhase({
             </div>
           )}
 
-          {/* Physical/Injuries */}
-          {data.injuries.length > 0 && (
-            <div style={{
-              padding: 'var(--space-sm) var(--space-md)',
-              backgroundColor: 'rgba(245, 158, 11, 0.15)',
-              border: '1px solid rgba(245, 158, 11, 0.3)',
-              borderRadius: 'var(--radius-sm)',
-              marginTop: 'var(--space-md)',
-            }}>
-              <div style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 'var(--text-xs)',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: 'var(--tracking-widest)',
-                color: 'var(--color-warning)',
-                marginBottom: 'var(--space-xs)',
-              }}>
-                Physical
-              </div>
-              {data.injuries.map((injury, i) => (
-                <div key={i} style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--color-gray-200)',
-                }}>
-                  {injury.bodyPart}: {injury.notes}
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
 
@@ -971,7 +1143,7 @@ function ReviewPhase({
             cursor: 'pointer',
           }}
         >
-          Edit
+          Start Over
         </button>
         <button
           onClick={onSave}
