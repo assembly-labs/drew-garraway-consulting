@@ -13,6 +13,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../services/api';
+import { useUserProfile } from '../../context/UserProfileContext';
 import type { SubmissionInsert } from '../../types/database';
 
 // Types for extracted session data
@@ -68,6 +69,7 @@ interface VoiceLoggerProps {
 }
 
 export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
+  const { profile } = useUserProfile();
   const [phase, setPhase] = useState<Phase>('idle');
   const [recordingTime, setRecordingTime] = useState(0);
   const [sessionData, setSessionData] = useState<SessionData | null>(null);
@@ -138,7 +140,7 @@ export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
 
     try {
       // Create session first
-      const userId = 'user-001'; // TODO: Get from auth context
+      const userId = profile.userId;
       const sessionDate = new Date().toISOString().split('T')[0];
 
       const sessionResult = await api.sessions.create({
@@ -175,7 +177,7 @@ export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
       console.error('Failed to save session:', error);
       // TODO: Show error state
     }
-  }, [sessionData, transitionTo, onComplete]);
+  }, [sessionData, transitionTo, onComplete, profile.userId]);
 
   // Cancel/close
   const handleCancel = useCallback(() => {

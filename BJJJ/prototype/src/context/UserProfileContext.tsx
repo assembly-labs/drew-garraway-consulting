@@ -18,8 +18,16 @@ export type BeltLevel = 'white' | 'blue' | 'purple' | 'brown' | 'black';
 export type TrainingGoal = 'competition' | 'fitness' | 'self-defense' | 'mental' | 'community';
 export type LoggingPreference = 'voice' | 'type' | 'undecided';
 
+// Generate a simple unique ID for local-first users
+function generateUserId(): string {
+  return 'user-' + crypto.randomUUID();
+}
+
 // Profile data structure
 export interface UserProfile {
+  // User identification
+  userId: string;
+
   // Critical (required during onboarding)
   name: string;
   belt: BeltLevel;
@@ -156,6 +164,7 @@ export const PROFILE_QUESTIONS: ProfileQuestion[] = [
 
 // Default profile state
 const DEFAULT_PROFILE: UserProfile = {
+  userId: generateUserId(),
   name: '',
   belt: 'white',
   stripes: null,
@@ -225,7 +234,9 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        setProfile({ ...DEFAULT_PROFILE, ...parsed });
+        // Ensure existing users without a userId get a stable one
+        const userId = parsed.userId || generateUserId();
+        setProfile({ ...DEFAULT_PROFILE, ...parsed, userId });
       } catch {
         console.error('Failed to parse stored profile');
       }
