@@ -5,11 +5,9 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAppContext } from '../context/AppContext';
-import { Ionicons } from '@expo/vector-icons';
 
 export default function ProfileScreen({ navigation }) {
   const { user, logout } = useAppContext();

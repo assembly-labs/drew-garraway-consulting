@@ -128,13 +128,9 @@ export const AppProvider = ({ children }) => {
     updateProfile,
     loadUserData,
 
-    // Setters (removed - not needed for prototype)
-    setUser: () => {},
-    setSchedule: () => {},
+    // State setters - only active ones exposed for prototype
     setCheckInHistory,
-    setProgress,
-    setNotifications: () => {},
-    setPayments: () => {}
+    setProgress
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
