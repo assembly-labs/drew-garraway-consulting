@@ -1,0 +1,20 @@
+name = "scout-library-assistant"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "dist"
+
+# Environment variables (public)
+[vars]
+VITE_ENV = "production"
+
+# Secrets (set via: wrangler secret put CLAUDE_API_KEY)
+# CLAUDE_API_KEY
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
