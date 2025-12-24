@@ -123,8 +123,8 @@ export const useClaudeChat = ({ catalog, onError }: UseClaudeChatOptions) => {
         content: userMessage
       });
 
-      // Call our secure Netlify function instead of directly calling Anthropic
-      const response = await fetch('/.netlify/functions/claude-chat', {
+      // Call our secure Cloudflare Pages Function instead of directly calling Anthropic
+      const response = await fetch('/api/claude-chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
