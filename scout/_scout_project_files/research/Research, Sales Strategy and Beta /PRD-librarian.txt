@@ -1,0 +1,674 @@
+Librarian LLM - Product Requirements Document
+Version: 1.1 Last Updated: October 6, 2025 Status: Product Deep Research
+
+1. Executive Summary
+Overview
+Librarian LLM is an AI-powered discovery assistant for US public libraries that solves three critical problems:
+Fragmented search across multiple platforms
+Library jargon barriers preventing effective discovery
+Declining staff capacity for patron assistance
+Scope
+This PRD defines the Minimum Viable Product (Phase 1) to be deployed with 5-7 pilot libraries within 6 months.
+Market
+Target Market: 9,194 US public library systems serving 171M patrons
+Initial Target: 2,357 libraries using Polaris or Koha ILS
+Revenue Model: Tiered SaaS ($5K-$100K annually per library)
+Value Proposition
+Enable patrons to discover relevant materials through natural conversation while empowering librarians to focus on fulfilling, high-impact work—community programming, relationship-building, and specialized research—all while preserving library values of privacy, intellectual freedom, and equitable access.
+
+How We Serve the Librarian's Calling:
+Librarians are the keepers and protectors of knowledge who connect people with ideas
+that spark understanding and belonging. Patrons are the users and creators of knowledge
+who discover, learn, and contribute back to the community. Librarian LLM automates the
+mechanics of discovery—freeing librarians to fulfill their deeper purpose: safeguarding
+humanity's ideas, building relationships, creating transformative programs, and mentoring
+patrons as they grow from users to creators of knowledge. The community becomes the space
+where all this magic happens.
+
+2. Product Vision & Strategic Context
+Vision Statement
+Enable every library patron—every user and creator of knowledge—to discover relevant
+materials, community events, and spaces through natural conversation. Free librarians,
+the keepers and protectors of knowledge, to fulfill their deeper calling: connecting
+people with ideas that spark understanding and belonging, safeguarding humanity's wisdom,
+and creating spaces where curiosity is shared and everyone feels they have a place in
+the library and community—the space where all the magic happens.
+Market Gap
+Academic vs Public: Academic libraries have AI tools from Ex Libris and EBSCO; public library offerings remain limited
+Competition: OverDrive's "Inspire Me" (August 2025) operates only within their ebook ecosystem and cannot search physical catalogs
+Window: 2-3 year opportunity before market consolidation
+Documented Pain Points
+Discovery Fragmentation: Patrons must search 4-5 separate systems (physical catalog, OverDrive, Hoopla, Kanopy) with no unified layer
+Jargon Barriers: 51% of library websites use impenetrable terminology; users don't understand what search boxes actually search
+Staff Capacity Crisis: 54% of libraries cite staff capacity as primary technology challenge; reference assistance dropped from 50% to 35% of in-person visitors
+Phase 1 Objectives (Months 0-6)
+✅ Unified Discovery: Search physical catalog + OverDrive in single natural language query
+✅ Accessibility Foundation: WCAG 2.1 AA compliance with screen reader support from day one
+✅ Privacy First: Zero-logging architecture that meets ALA privacy principles
+✅ Self-Service Efficiency: Enable 85%+ of routine discovery queries without librarian intervention
+✅ Librarian Empowerment: Free librarians—the keepers and protectors of knowledge—from
+routine discovery queries so they can focus on high-value work: safeguarding and curating
+humanity's ideas, mentoring patrons as users and creators of knowledge, building relationships,
+and creating transformative community programs in the space where all the magic happens
+✅ Pilot Validation: Deploy to 5-7 libraries and demonstrate measurable impact on patron satisfaction and librarian capacity
+
+Phase 2 - UX Enhancements (Months 6-9, Post-Prototype Validation)
+After successful prototype validation with pilot libraries, implement user experience improvements:
+
+Quick Wins (Week 1 of Phase 2)
+✨ Enhanced Visual Feedback: Typing indicators, smooth animations, book-themed loading states
+✨ Improved Book Cards: Format icons, hover previews, color-coded availability badges
+✨ Voice Input: Web Speech API integration for accessibility and convenience
+✨ Smart Search Suggestions: Rotating example queries to guide user discovery
+
+Core Features (Weeks 2-3 of Phase 2)
+🔧 Conversation Threading: Visual message grouping with context management
+🔧 Advanced Discovery Tools: Filters by format/genre/availability, "find similar" functionality
+🔧 Session Personalization: Reading preferences, age-appropriate modes, mood-based search
+🔧 Comparison Tools: Side-by-side book comparisons, temporary reading lists
+
+Differentiator Feature (Week 4 of Phase 2)
+🎯 Librarian Personality Modes - Selectable AI assistant personalities:
+  • Classic Librarian: Formal, knowledgeable, citation-heavy responses
+  • Cool Bookstore Employee: Casual, enthusiastic, pop culture references
+  • Grandma's Book Club: Warm, nurturing, personal anecdotes
+  • Literary Professor: Academic, analytical, thematic analysis
+
+Expected Impact:
+  • 40% increase in user engagement (session duration)
+  • 30% improvement in return visits
+  • Creates memorable, shareable experience for pilot demonstrations
+  • Differentiates from generic AI assistants
+
+Investment: Additional 3-4 weeks development post-Phase 1
+ROI: Higher pilot conversion rate, increased user satisfaction scores
+
+3. User Personas
+Primary: Sarah (Casual Reader)
+Demographics: 35-year-old parent, works full-time, library cardholder for 3 years
+Behavior: Visits library 2x/month, checks out 4-5 books, uses OverDrive app
+Pain Points: Can't find books like ones she loved, doesn't know what's available digitally, library catalog confusing
+Goals: Find next great read quickly, access from phone while kids are at soccer practice
+Quote: "I just want to tell someone what I'm in the mood for and have them show me what's available"
+Secondary: Marcus (Patron with Visual Impairment)
+Demographics: 84-year-old, blind since birth, heavy audiobook user
+Behavior: Uses JAWS screen reader, prefers accessible interfaces, library 3x/month
+Pain Points: Library website not fully accessible, can't browse shelves independently
+Goals: Discover new audiobooks without sighted assistance, quick format switching
+Quote: "I want the same independence other patrons have when finding books"
+Tertiary: Linda (Reference Librarian)
+Demographics: 48-year-old MLIS, 15 years experience, mid-size library system
+Behavior: Staffs reference desk 20 hrs/week, answers 30-40 patron questions daily
+Pain Points: 60% of questions are routine (what's available? how to search?), not enough time for complex research queries
+Goals: Automate simple discovery transactions, focus expertise on challenging reference work
+Quote: "I want to help patrons with real research, not explain Boolean operators for the hundredth time"
+
+Linda's Mission Statement:
+"I live to connect people with ideas that spark understanding and belonging. By curating and protecting knowledge, I help build a community where curiosity is shared, stories are preserved, and everyone feels they have a place in the library and community."
+
+How Librarian LLM Serves This Mission:
+Librarian LLM handles the mechanics of discovery so Linda can focus on the soul of
+librarianship—her role as keeper and protector of knowledge. She creates spaces where
+curiosity flourishes, connects patrons (users and creators of knowledge) with ideas that
+transform lives, and builds the deep relationships that make every person feel they belong.
+The library becomes the space where keepers meet creators, where all the magic happens.
+Quaternary: James (Library IT Administrator)
+Demographics: 42-year-old, manages technology for 8-branch system
+Behavior: Evaluates new tools, concerned about privacy/security, limited staff
+Pain Points: Vendor lock-in, complicated integrations, privacy compliance burden
+Goals: Deploy tools that work out-of-box, maintain patron privacy, prove ROI to board
+Quote: "If it requires our team to run servers or compromises privacy, it's a non-starter"
+
+4. Phase 1 User Stories (MVP)
+Epic 1: Natural Language Discovery
+US1.1: Unified Search Across Platforms
+As a library patron I want to search for books by describing what I'm looking for using everyday language So that I don't have to learn library jargon or search multiple apps
+Acceptance Criteria:
+[ ] User can type queries like "I want something funny for the beach" and receive results
+[ ] System searches physical catalog AND OverDrive simultaneously within 3 seconds
+[ ] Results show availability status (available now vs. wait time)
+[ ] No Boolean operators (AND, OR, NOT) required
+[ ] Works on mobile and desktop browsers
+[ ] Handles typos and natural language variations ("scifi" = "science fiction")
+Priority: P0 (Must Have) Estimated Effort: 3 weeks Dependencies: Claude API integration, ILS API connection, OverDrive API
+
+US1.5: Single-Turn Recommendations
+As a reader who just finished a book I loved I want to tell the AI what I liked and get 3-5 similar recommendations So that I can quickly find my next read
+Acceptance Criteria:
+[ ] User provides book title/author and brief description of what they liked
+[ ] LLM returns 3-5 recommendations with explanations: "I suggested this because..."
+[ ] Each recommendation shows: cover image, availability, format options (book/ebook/audiobook)
+[ ] "Place hold" or "Check out now" action directly from results
+[ ] Recommendations pulled from actual library catalog (no hallucinated titles)
+[ ] Fallback if book not in catalog: "I don't have that title, but based on what you described..."
+Priority: P0 (Must Have) Estimated Effort: 2 weeks Dependencies: Claude API, catalog metadata in vector DB
+
+US1.6: Smart Query Reformulation
+As a patron whose search returned no results I want to receive automatic suggestions for better search terms So that I don't give up when my first search fails
+Acceptance Criteria:
+[ ] When search returns 0 results, system tries 2-3 alternative formulations automatically
+[ ] Explains what it tried: "I couldn't find 'The Midnight Library', but I found 'The Midnight Line'"
+[ ] Suggests broader searches: "No results for 'cozy mysteries set in bakeries'—try 'cozy mysteries'?"
+[ ] Option to connect with librarian: "These suggestions didn't help? Chat with a librarian"
+[ ] Does not store failed queries (privacy requirement)
+Priority: P1 (Should Have) Estimated Effort: 1 week Dependencies: Claude API, search result processing
+
+Epic 2: Accessibility
+US1.3: Screen Reader Full Compatibility
+As a patron who uses JAWS or NVDA screen readers I want to navigate all features using keyboard-only controls with proper semantic markup So that I have equal access to library AI assistance
+Acceptance Criteria:
+[ ] All interactive elements accessible via Tab/Shift+Tab
+[ ] ARIA labels on all form inputs, buttons, dynamic content
+[ ] Focus indicators visible with 3:1 contrast ratio minimum
+[ ] Skip-to-content link on all pages
+[ ] Dynamic content updates announced to screen readers (ARIA live regions)
+[ ] WCAG 2.1 AA compliance verified by third-party audit
+[ ] No keyboard traps (user can always Tab out)
+Priority: P0 (Must Have) Estimated Effort: 2 weeks (ongoing) Dependencies: None (architectural requirement)
+
+Epic 3: Privacy & Trust
+US1.7: Privacy-Preserving Sessions
+As a library administrator concerned about patron privacy I want to guarantee patron searches never logged or associated with accounts So that we comply with ALA privacy principles
+Acceptance Criteria:
+[ ] Zero query logging architecture (searches not stored in any database)
+[ ] Anonymous session IDs that reset every 24 hours
+[ ] No tracking cookies beyond essential session management (JWT in httpOnly cookie)
+[ ] Published privacy policy in plain language (8th grade reading level)
+[ ] Third-party privacy audit completed and report published publicly
+[ ] Data retention policy: only aggregated metrics (query volume, no query content)
+Priority: P0 (Must Have) Estimated Effort: 1 week (architectural decision, ongoing enforcement) Dependencies: Legal review of privacy policy
+
+US1.10: Confident Fallback to Human
+As a reference librarian I want to the AI to seamlessly hand off complex questions it can't answer So that patrons get accurate help and I'm not cleaning up AI mistakes
+Acceptance Criteria:
+[ ] LLM recognizes uncertainty: "This question needs human expertise—let me connect you"
+[ ] Confidence threshold: <70% confidence triggers handoff
+[ ] Preserves conversation context so librarian sees what patron already tried
+[ ] Shows librarian availability: "Reference desk open until 9 PM" or "Submit question for response"
+[ ] Tracks handoff rate (target: <15% of queries) to measure AI effectiveness
+[ ] Never invents information—says "I don't know" explicitly
+[ ] Graceful degradation if librarian chat unavailable
+Priority: P0 (Must Have) Estimated Effort: 1 week Dependencies: Confidence scoring from Claude API
+
+5. Technical Architecture
+5.1 System Architecture Overview
+┌─────────────────────────────────────────────────────────────┐
+│                     Frontend (React PWA)                     │
+│  - Responsive UI (mobile-first)                              │
+│  - WCAG 2.1 AA compliant                                     │
+└──────────────────────┬──────────────────────────────────────┘
+                       │ HTTPS
+                       ▼
+┌─────────────────────────────────────────────────────────────┐
+│              API Gateway (FastAPI/Python)                    │
+│  - Rate limiting                                             │
+│  - Request routing                                           │
+└──────┬──────────────┬──────────────┬───────────────┬────────┘
+       │              │              │               │
+       ▼              ▼              ▼               ▼
+┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────────┐
+│  Claude  │   │   ILS    │   │OverDrive │   │  Vector DB   │
+│   API    │   │   APIs   │   │   API    │   │  (Pinecone)  │
+│          │   │ (Polaris,│   │          │   │ Catalog Meta │
+│          │   │  Koha)   │   │          │   │              │
+└──────────┘   └──────────┘   └──────────┘   └──────────────┘
+
+5.2 Technology Stack
+Frontend: React PWA with TypeScript
+Rationale:
+Progressive Web App = no app store delays, works across iOS/Android
+Can be added to home screen like native app
+Offline capabilities for saved searches/lists
+Single codebase for mobile and desktop
+TypeScript for type safety and fewer bugs
+Key Libraries:
+{
+  "dependencies": {
+    "react": "^18.x",
+    "react-aria": "^3.x",
+    "tailwindcss": "^3.x",
+    "react-query": "^4.x",
+    "typescript": "^5.x"
+  }
+}
+Why NOT native apps: Avoiding separate iOS/Android codebases saves 60% development time in Phase 1.
+
+Backend: Python with FastAPI
+Rationale:
+Native Anthropic SDK for Claude integration
+Modern async support (handles 500+ concurrent users efficiently)
+Automatic OpenAPI documentation
+Built-in request validation via Pydantic
+Project Structure:
+app/
+├── api/          # FastAPI routes
+├── core/         # Business logic (search, recommendations)
+├── integrations/ # External API clients (ILS, OverDrive, Claude)
+├── models/       # Pydantic schemas
+└── utils/        # Helpers (auth, caching)
+Why NOT Flask/Django: Flask lacks native async; Django too heavyweight for API-only service.
+
+LLM: Claude API (Anthropic Sonnet 4.5)
+Rationale:
+Superior reasoning for nuanced queries ("something like Circe but less mythology")
+Enterprise privacy: Zero-retention API available (queries not used for training)
+Constitutional AI: Reduces hallucinations and inappropriate content
+Instruction following: Reliable adherence to system prompts (critical for RAG grounding)
+Cost: ~$0.02/query (acceptable for MVP)
+Configuration:
+CLAUDE_CONFIG = {
+    "model": "claude-sonnet-4-5-20250929",
+    "temperature": 0.3,  # Deterministic, less creative
+    "max_tokens": 1500,  # Concise responses
+    "streaming": True    # Better UX
+}
+Why NOT alternatives:
+Grok: Wrong product focus (social media), immature platform, brand risk
+GPT-4: OpenAI privacy policies less clear for public sector
+Open-source LLMs: Would require self-hosting infrastructure ($5K-$10K/month)
+Custom LLM: 12-18 months + $2M+ to reach Claude parity
+
+Vector Database: Pinecone
+Rationale:
+Managed service: No infrastructure to maintain
+Fast queries: <100ms at p95 for expected scale
+Metadata filtering: Filter by library, format, availability during search
+Cost: ~$70/month for MVP (100K vectors, 1M queries/month)
+Data Model:
+{
+  "id": "lib123_isbn9780735219090",
+  "title": "Where the Crawdads Sing",
+  "author": "Delia Owens",
+  "library_id": "lib123",
+  "formats": ["physical", "ebook", "audiobook"],
+  "availability": {
+    "physical": "available",
+    "ebook": "waitlist_2_weeks"
+  },
+  "subjects": ["fiction", "coming-of-age", "nature"]
+}
+Why NOT self-hosted: Weaviate/Qdrant require DevOps resources we don't have in Phase 1.
+
+ILS Integration: REST APIs
+Phase 1 Priority:
+Polaris (704 libraries)
+Koha (1,653 libraries)
+Total addressable: 2,357 libraries (50% market coverage)
+Integration Approach:
+Abstraction layer for easy expansion (Sierra/Symphony in Phase 2)
+OAuth 2.0 authentication
+Sandbox testing before production
+Key Endpoints:
+class ILSClient:
+    def authenticate_patron(self, card_number: str, pin: str) -> Session
+    def search_catalog(self, query: str, filters: dict) -> List[CatalogItem]
+    def check_availability(self, item_id: str) -> AvailabilityStatus
+    def place_hold(self, patron_id: str, item_id: str) -> HoldConfirmation
+
+OverDrive API
+Integration:
+Library-specific API keys
+Metadata search
+Real-time availability
+Deep linking to Libby for checkout
+Rate Limiting: 50 requests/minute per library (managed via request queue)
+Why: Dominant digital platform (92,000+ library subscribers)
+
+Database: PostgreSQL
+Use Cases:
+Anonymous session IDs (24-hour expiration)
+Aggregate analytics (no query content)
+Library configuration (API keys, settings)
+Schema:
+-- No patron PII stored
+CREATE TABLE sessions (
+  id UUID PRIMARY KEY,
+  library_id VARCHAR(50) NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW(),
+  expires_at TIMESTAMP NOT NULL
+);
+
+-- Only aggregated metrics
+CREATE TABLE query_metrics (
+  library_id VARCHAR(50) NOT NULL,
+  query_date DATE NOT NULL,
+  query_count INTEGER,
+  avg_response_time_ms INTEGER
+  -- No query_text column
+);
+
+Caching: Redis
+Purpose: Reduce Claude API costs by caching common queries
+Cache Policies:
+CACHE_TTL = {
+    "catalog_metadata": 86400,    # 24 hours
+    "search_results": 3600,       # 1 hour (availability changes)
+    "common_queries": 604800,     # 7 days
+    "patron_data": 0              # Never cache
+}
+Target: 60-70% cache hit rate
+
+Hosting: AWS
+Services:
+ECS Fargate (containerized backend)
+RDS PostgreSQL (managed database)
+ElastiCache (managed Redis)
+CloudFront (CDN)
+Secrets Manager (API keys)
+Estimated Cost (MVP): ~$150-300/month per pilot library
+Why AWS: Most libraries already use AWS (familiarity), mature security certifications.
+
+5.3 Privacy Architecture (Critical Design)
+Zero-Logging Principle
+Query text never persisted to disk
+Passes through memory only during processing
+Session IDs are random UUIDs (no link to patron records)
+Analytics aggregate only: "Library X had 500 queries on date Y"
+Authentication Flow
+1. Patron uses library card # + PIN (for Phase 2 account features)
+2. Backend validates with ILS API
+3. ILS returns session token
+4. Backend creates anonymous session ID
+5. Returns JWT to frontend (httpOnly cookie)
+6. Session expires after 24 hours
+Security Measures
+HTTPS everywhere (TLS 1.3)
+JWT tokens in httpOnly cookies (prevents XSS)
+Rate limiting: 100 requests/minute per session
+Encrypted ILS tokens in database (AES-256)
+Compliance
+ALA Library Privacy Guidelines
+GDPR
+CCPA
+
+5.4 RAG (Retrieval-Augmented Generation) Architecture
+Why RAG: Grounds LLM responses in verified catalog data, eliminates hallucinations
+Flow:
+1. User query: "I want something like Circe"
+2. Embed query (Anthropic's Voyage model)
+3. Search Pinecone for similar titles (top 20)
+4. Construct prompt with catalog context + user query
+5. Send to Claude API
+6. Claude responds from provided context only
+7. Display results with availability from ILS
+System Prompt Template:
+You are a library assistant. Only recommend books 
+in the provided catalog data.
+
+RULES:
+1. Never invent titles, authors, or ISBN numbers
+2. If unsure, say "I don't know" and offer librarian handoff
+3. Explain recommendations briefly (2-3 sentences)
+4. Be concise and friendly
+
+CATALOG DATA:
+{catalog_context}
+
+PATRON QUERY:
+{user_query}
+Confidence Scoring:
+Track hedge language ("might", "possibly", "I think")
+3+ hedges → trigger librarian handoff
+<3 results → ask patron to broaden search
+
+6. Non-Functional Requirements
+6.1 Performance
+API Response Time: <3 seconds for 95% of queries
+Search Results: Display first results within 1 second (streaming)
+Database Queries: <100ms for lookups
+Uptime: 99.5%
+6.2 Scalability
+Concurrent Users: Support 500+ simultaneous users per library
+Query Volume: Handle 100,000 queries/month across pilots
+Database: Design for 1M+ catalog items in vector DB
+6.3 Accessibility (WCAG 2.1 AA)
+Keyboard Navigation: All functions accessible via keyboard
+Screen Reader Support: Full compatibility with JAWS, NVDA, VoiceOver
+Color Contrast: 4.5:1 for normal text, 3:1 for large text
+Focus Indicators: Visible 3:1 contrast ratio
+Responsive Text: User can zoom to 200% without loss of functionality
+6.4 Security
+Data Encryption: TLS 1.3 in transit, AES-256 at rest
+Secret Management: AWS Secrets Manager (rotate every 90 days)
+Vulnerability Scanning: Weekly automated scans
+Penetration Testing: Third-party audit before production
+6.5 Privacy
+Zero Query Logging: Search queries never persisted
+Session Expiration: Anonymous sessions deleted after 24 hours
+No Third-Party Tracking: No analytics SDKs that track individuals
+Data Minimization: Collect only what's necessary for service
+Transparency: Published privacy policy (8th grade reading level)
+Audit: Third-party privacy audit before pilot launch
+6.6 Reliability
+Error Handling: Graceful degradation if Claude API unavailable
+Fallback: Direct catalog search if LLM fails
+Monitoring: Real-time alerting for API errors
+Backups: Daily PostgreSQL backups (30-day retention)
+Disaster Recovery: RTO <4 hours
+
+7. UI/UX Guidelines
+7.1 Design Principles
+Accessibility First: All design decisions evaluated through accessibility lens
+Progressive Disclosure: Simple by default, power features discoverable
+Mobile-First: Design for small screens, enhance for desktop
+Library Branding: White-label so it feels like library's tool
+Trust Through Transparency: Show sources, explain reasoning
+7.2 Key Screens
+Home Screen (Search Interface)
+Large search bar: "Ask me anything about books..."
+Example queries below: "Find me a mystery set in Paris", "Books like Educated"
+Quick actions: "Explore new arrivals"
+Search Results
+Card-based layout (mobile/desktop compatible)
+Each result shows:
+Cover image, title/author
+Format badges: 📕 Print | 📱 eBook | 🎧 Audiobook
+Availability: "Available now" (green) | "2-week wait" (yellow)
+AI explanation: "You might like this because..."
+Action button: "Place Hold" or "Check Out Now"
+Error States
+No results: "I couldn't find anything matching '[query]'" + suggestions
+API error: "I'm having trouble connecting. Try again in a moment?"
+Low confidence: "I'm not sure I understand. Could you rephrase?"
+Side Menu (retractable)
+Account:
+Digital Library Card
+Holds
+Fines Due
+Manage Account
+Get/Renew Library Card
+Reading History
+Checkout Materials
+Events
+
+8. Testing & Quality Assurance
+8.1 Testing Strategy
+Unit Tests (80% coverage minimum)
+All business logic functions
+API integrations (mocked)
+Data validation
+Integration Tests
+ILS API calls (sandbox environment)
+OverDrive API
+Claude API
+Database operations
+End-to-End Tests
+Search → View Results → Place Hold
+Critical user flows on Chrome, Firefox, Safari
+Mobile and desktop viewports
+Accessibility Tests
+Automated: axe-core, pa11y
+Manual: Screen reader testing (JAWS, NVDA, VoiceOver)
+Keyboard navigation walkthroughs
+Third-party WCAG audit
+Performance Tests
+Load testing: 500 concurrent users
+API response times under load
+Security Tests
+OWASP Top 10 vulnerabilities
+Dependency scanning
+Third-party penetration test
+
+8.2 QA Checklist (Pre-Pilot Launch)
+Functionality
+[ ] Search returns relevant results from catalog + OverDrive
+[ ] Recommendations pulled from actual catalog (no hallucinations)
+[ ] Hold placement works
+[ ] "Connect with librarian" handoff functions
+[ ] Error states display appropriately
+Accessibility
+[ ] WCAG 2.1 AA audit passed (third-party)
+[ ] Keyboard navigation complete
+[ ] Screen readers announce all elements
+[ ] Color contrast meets 4.5:1 minimum
+[ ] Focus indicators visible
+Performance
+[ ] API response time <3s for 95% of queries
+[ ] Load test passed (500 concurrent users)
+[ ] Mobile performance acceptable on 4G
+Security
+[ ] HTTPS enforced everywhere
+[ ] No credentials in logs
+[ ] Secrets encrypted
+[ ] Rate limiting prevents abuse
+Privacy
+[ ] Query logging confirmed disabled
+[ ] Session IDs anonymous (no patron PII)
+[ ] Privacy policy published
+[ ] Third-party privacy audit passed
+
+9. Release Criteria (Definition of Done)
+Phase 1 MVP Release Checklist
+Technical Completeness
+[ ] All 6 P0 user stories implemented and tested
+[ ] Integration tests passing (ILS, OverDrive, Claude)
+[ ] End-to-end tests passing on Chrome, Firefox, Safari
+[ ] Performance benchmarks met (95th percentile <3s)
+[ ] Security scan passed (no critical vulnerabilities)
+[ ] Accessibility audit passed (WCAG 2.1 AA)
+Documentation
+[ ] User guide written (patron-facing)
+[ ] Admin guide written (library staff)
+[ ] Privacy policy published
+[ ] Terms of service reviewed by legal
+Pilot Readiness
+[ ] 5-7 pilot libraries committed
+[ ] White-label instances configured per library
+[ ] ILS credentials obtained and tested
+[ ] Training materials prepared
+[ ] Support process defined
+Monitoring & Support
+[ ] Logging configured
+[ ] Error alerting set up
+[ ] Analytics dashboard built
+[ ] On-call rotation scheduled
+[ ] Runbook documented
+
+10. Future Phases (Brief Overview)
+Phase 2: Enhanced Interaction (Months 6-12)
+Key Features:
+Voice input/output: Speech-to-text for queries, text-to-speech for results
+Account management: Check holds, renew items, view due dates
+Multi-turn conversations: 5-10 turn dialogues maintaining context
+Format-aware results: Show all available formats (print, ebook, audiobook, large print)
+Spanish language support: Full UI and conversational support
+Success Criteria:
+300-500 libraries deployed
+Voice feature used by 20%+ of sessions
+Account management reduces staff reference queries by 30%
+
+Phase 3: Advanced Features (Months 12-18)
+Key Features:
+Service discovery: Explain library programs, events, services
+Streaming media integration: Hoopla and Kanopy unified search
+Mobile PWA: Add to home screen, offline mode
+Reading history insights: Opt-in analysis ("What have I read this year?")
+Community trends: Anonymized popular titles (privacy-preserved)
+Multilingual expansion: Chinese, Vietnamese, Arabic
+Success Criteria:
+1,500+ libraries deployed
+Service discovery drives 15%+ increase in program attendance
+Mobile PWA adoption reaches 40% of users
+
+11. Feasibility Assessment
+11.1 Technical Feasibility: ✅ HIGH
+Strengths:
+All APIs documented and available (Claude, ILS, OverDrive)
+React/FastAPI proven at scale
+Pinecone managed service (no DevOps burden)
+6-month timeline achievable with 3-4 engineers
+Risks (Low):
+ILS API quirks: Mitigated by sandbox testing first
+Claude API rate limits: Mitigated by caching strategy
+Verdict: Technically sound. No blockers identified.
+
+11.2 Resource Feasibility: ✅ MODERATE
+Required Team (Phase 1):
+1 Senior Full-Stack Engineer (React + Python): $120K-$160K
+1 Library Technology Specialist (domain expert): $80K-$110K
+1 Accessibility Engineer (WCAG compliance): $100K-$140K
+1 Product Manager: $110K-$150K
+Budget Estimate:
+Salaries: $410K-$560K (6 months)
+Infrastructure: $5K-$10K (AWS, Pinecone, APIs)
+Third-party audits: $20K-$30K (security, accessibility, privacy)
+Total: ~$435K-$600K for 6 months
+Verdict: Feasible with proper funding. Tight but manageable.
+
+11.3 Market Feasibility: ✅ HIGH
+Strengths:
+No direct competitors in public library AI discovery
+Documented pain points with clear value proposition
+5-7 pilot commitments realistic
+2-3 year window before incumbents catch up
+Risks (Moderate):
+Long sales cycles (12-18 months): Mitigated by consortium approach
+Privacy concerns: Mitigated by zero-logging architecture
+Budget constraints: Mitigated by freemium tier
+Verdict: Market opportunity validated. Clear path to early adopters.
+
+11.4 Timeline Feasibility: ✅ MODERATE-HIGH
+6-Month MVP Timeline:
+Month 1-2: Infrastructure + basic search (achievable)
+Month 3-4: Recommendations, accessibility (tight but doable)
+Month 5-6: OverDrive integration, testing (realistic)
+Critical Path:
+ILS sandbox access (Week 1): Must secure immediately
+Pilot library commitments (Month 2): Parallel track
+Accessibility audit (Month 5): Schedule now
+Risks:
+Scope creep: Mitigated by strict P0 prioritization
+Integration surprises: Mitigated by 2-week buffer
+Verdict: Aggressive but achievable with disciplined execution.
+
+11.5 Overall Feasibility: ✅ HIGH
+Go/No-Go Decision: GO
+This PRD represents a technically sound, market-validated product with clear path to:
+MVP deployment in 6 months
+5-7 pilot libraries demonstrating impact
+Foundation for scaling to 1,500+ libraries by Year 3
+Key Success Factors:
+Hire senior full-stack engineer (Month 1)
+Lock pilot library commitments (Month 2-3)
+Ruthless scope discipline (P0 features only)
+Ship fast, iterate based on pilot feedback
+Next Action: Begin pilot library outreach and senior engineer recruitment immediately.
+
+12. Open Questions & Decisions Needed
+Technical Decisions
+[ ] Redis vs. PostgreSQL for session storage? Recommend: Redis (performance)
+[ ] Streaming vs. batch responses from Claude? Recommend: Streaming (better UX)
+Product Decisions
+[ ] Freemium tier for small libraries? Recommend: Yes (drives adoption)
+[ ] White-label branding required? Recommend: Yes (library ownership)
+Business Decisions
+[ ] Pricing per-library vs. per-patron? Recommend: Offer both (flexibility)
+
+13. Conclusion
+This PRD defines a technically feasible, market-validated MVP that solves critical pain points for public libraries. The Phase 1 scope is achievable in 6 months with a 4-person team and ~$435K-$600K budget.
+Key Differentiators
+First-mover advantage: No production-ready competitors
+Accessibility-first: Screen reader support from day one
+Privacy-native: Zero-logging architecture (not retrofitted)
+Unified discovery: Searches catalog + OverDrive simultaneously
+The 2-3 year market window is real. Speed to market is critical.

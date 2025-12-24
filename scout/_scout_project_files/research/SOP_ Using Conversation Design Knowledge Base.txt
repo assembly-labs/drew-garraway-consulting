@@ -1,0 +1,60 @@
+SOP: Using Conversation Design Knowledge Base
+Basic Pattern
+Using the conversation design knowledge base, [your task]
+
+Quick Prompt Templates
+Design Conversation Flow
+Using the conversation design knowledge base phase 2 guidelines:
+- Design flow for [task]
+- Include happy path + 2-3 error scenarios
+Context: [your situation]
+
+Create System Persona
+Using the persona creation methodology:
+- Create persona for [assistant type]
+- 4-6 personality traits
+- Dos/don'ts lists
+Values: [your values]
+
+Write Dialogue
+Using Grice's maxims and script guidelines:
+- Write [X]-turn dialogue for [scenario]
+- Include [greeting/success/error/escalation]
+
+Review/Critique Work
+Using the evaluation checklist, review this dialogue:
+[paste dialogue]
+
+Check against antipatterns and error handling best practices.
+
+Fix Errors
+Using the error handling section:
+- Design 3-level responses for [scenario]
+Level 1: Gentle rephrase
+Level 2: Specific alternatives  
+Level 3: Escalation
+
+Generate Training Data
+Using NLU best practices:
+- Generate 15 variations for [intent]
+- Include natural phrasings, slang, shorthand
+Domain: [your domain]
+
+Design Escalation
+Using handoff protocols:
+- Define triggers for [use case]
+- 3-phase handoff process
+Context: [scenarios]
+
+Quick Reference Table
+
+Pro Tips
+✅ Be specific: "Using error handling section" not just "using the knowledge base"  ✅ Provide context: Always include your domain, users, constraints  ✅ Ask for citations: "Cite specific principles from the knowledge base"  ✅ Use evaluation checklist: "Run this through the checklist and score each"  ✅ Reference section IDs: "Using antipattern id='sorry_cliff'..."
+Complete Workflow Example
+1. Create persona using phase 1 methodology
+2. Design flow using phase 2 guidelines  
+3. Write dialogues using phase 3 script guidelines
+4. Review using evaluation checklist
+5. Generate training data using NLU best practices
+
+Key: Always explicitly reference the knowledge base in prompts—it won't auto-apply otherwise.

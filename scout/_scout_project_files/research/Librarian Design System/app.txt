@@ -1,0 +1,210 @@
+/**
+ * Library Assistant Application JavaScript
+ * Version 1.0
+ * 
+ * Handles:
+ * - Side menu toggle
+ * - Theme switching
+ * - Input auto-resize
+ * - Example prompt interactions
+ * - Message sending
+ */
+
+// ============================================
+// SIDE MENU FUNCTIONALITY
+// ============================================
+
+const menuToggle = document.getElementById('menu-toggle');
+const menuClose = document.getElementById('menu-close');
+const menuOverlay = document.getElementById('menu-overlay');
+const sideMenu = document.getElementById('side-menu');
+
+function openMenu() {
+  sideMenu.classList.add('active');
+  menuOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  sideMenu.classList.remove('active');
+  menuOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Event listeners for menu
+menuToggle.addEventListener('click', openMenu);
+menuClose.addEventListener('click', closeMenu);
+menuOverlay.addEventListener('click', closeMenu);
+
+// Close menu with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && sideMenu.classList.contains('active')) {
+    closeMenu();
+  }
+});
+
+// ============================================
+// THEME SWITCHING
+// ============================================
+
+const themeToggle = document.getElementById('theme-toggle');
+const html = document.documentElement;
+const themes = ['light', 'dark', 'ccls'];
+let currentThemeIndex = 2; // Start with CCLS
+
+themeToggle.addEventListener('click', (e) => {
+  e.preventDefault();
+  currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+  const newTheme = themes[currentThemeIndex];
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+});
+
+// Load saved theme on page load
+const savedTheme = localStorage.getItem('theme') || 'ccls';
+currentThemeIndex = themes.indexOf(savedTheme);
+html.setAttribute('data-theme', savedTheme);
+
+// ============================================
+// INPUT FIELD AUTO-RESIZE
+// ============================================
+
+const textarea = document.getElementById('message-input');
+
+textarea.addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+
+// ============================================
+// EXAMPLE PROMPTS
+// ============================================
+
+document.querySelectorAll('.example-prompt').forEach(button => {
+  button.addEventListener('click', () => {
+    // Remove quotes from prompt text and insert into input
+    textarea.value = button.textContent.replace(/"/g, '');
+    textarea.focus();
+    // Trigger auto-resize
+    textarea.dispatchEvent(new Event('input'));
+  });
+});
+
+// ============================================
+// SEND MESSAGE FUNCTIONALITY
+// ============================================
+
+const sendButton = document.getElementById('send-button');
+
+sendButton.addEventListener('click', () => {
+  if (textarea.value.trim()) {
+    console.log('Sending:', textarea.value);
+    
+    // In production, this would:
+    // 1. Send message to backend API
+    // 2. Display user message in chat
+    // 3. Show typing indicator
+    // 4. Display AI response when received
+    
+    // Clear input
+    textarea.value = '';
+    textarea.style.height = 'auto';
+  }
+});
+
+// ============================================
+// KEYBOARD SHORTCUTS
+// ============================================
+
+// Enter to send message (Shift+Enter for new line)
+textarea.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendButton.click();
+  }
+});
+
+// ============================================
+// UTILITY FUNCTIONS FOR INTEGRATION
+// ============================================
+
+/**
+ * Add a new message to the chat
+ * @param {string} content - Message text
+ * @param {string} type - 'user' or 'assistant'
+ */
+function addMessage(content, type = 'assistant') {
+  const chatMessages = document.querySelector('.chat-messages');
+  
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message message--${type}`;
+  
+  const p = document.createElement('p');
+  p.textContent = content;
+  messageDiv.appendChild(p);
+  
+  chatMessages.appendChild(messageDiv);
+  
+  // Scroll to bottom
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+/**
+ * Add a book card to the most recent assistant message
+ * @param {Object} book - Book data object
+ */
+function addBookCard(book) {
+  const lastMessage = document.querySelector('.message--assistant:last-child');
+  if (!lastMessage) return;
+  
+  const bookCard = document.createElement('div');
+  bookCard.className = 'book-card';
+  bookCard.innerHTML = `
+    <div class="book-card-header">
+      <div class="book-cover">${book.emoji || '📚'}</div>
+      <div class="book-info">
+        <h3 class="book-title">${book.title}</h3>
+        <p class="book-author">${book.author}</p>
+        <div class="book-formats">
+          <span class="badge badge--${book.availability}">${book.availabilityText}</span>
+          ${book.formats.map(f => `<span class="badge badge--format">${f}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+    <p class="book-explanation">${book.explanation}</p>
+    <div class="book-actions">
+      <button class="btn btn-primary">${book.primaryAction}</button>
+      <button class="btn btn-secondary">${book.secondaryAction}</button>
+    </div>
+  `;
+  
+  lastMessage.appendChild(bookCard);
+}
+
+/**
+ * Show typing indicator
+ */
+function showTypingIndicator() {
+  const chatMessages = document.querySelector('.chat-messages');
+  
+  const indicator = document.createElement('div');
+  indicator.className = 'typing-indicator';
+  indicator.id = 'typing-indicator';
+  indicator.innerHTML = '<span></span><span></span><span></span>';
+  
+  chatMessages.appendChild(indicator);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+/**
+ * Hide typing indicator
+ */
+function hideTypingIndicator() {
+  const indicator = document.getElementById('typing-indicator');
+  if (indicator) {
+    indicator.remove();
+  }
+}
+
+// Export functions for use in other modules (if using ES6 modules)
+// export { addMessage, addBookCard, showTypingIndicator, hideTypingIndicator };

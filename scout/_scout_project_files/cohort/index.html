@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scout - Built WITH Librarians</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', 'Source Serif Pro', Georgia, Cambria, 'Times New Roman', serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #FAFAF9;
+        }
+
+        /* Ensure all text has proper color */
+        h1, h2, h3, h4, h5, h6, p, li, span, strong, em, div {
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+
+        /* Hero Section */
+        .hero {
+            background: #FAFAF9;
+            color: #333;
+            padding: 6rem 2rem;
+            text-align: center;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            letter-spacing: -0.02em;
+            color: #1A3E67 !important; /* Navy blue for cream background */
+        }
+
+        .hero p {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            margin-bottom: 2.5rem;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+            color: #333; /* Dark text for cream background */
+        }
+
+        .cta-button {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: inline-block;
+            background: #F2895E;
+            color: white;
+            padding: 1rem 3rem;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 12px rgba(242, 137, 94, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(242, 137, 94, 0.4);
+            background: #D96A3F;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 2rem;
+            color: #333; /* Default text color for all sections */
+        }
+
+        section:nth-child(even) {
+            background-color: white;
+        }
+
+        h2 {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            letter-spacing: -0.02em;
+            color: #1A3E67;
+        }
+
+        .section-intro {
+            text-align: center;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Demo Section */
+        .demo {
+            background: white;
+            color: #333; /* Explicitly set text color */
+        }
+
+        .demo-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 2px solid #BAB9B1;
+        }
+
+        .demo-placeholder {
+            background: #F5F5F4; /* Light background */
+            height: 450px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            text-align: center;
+            padding: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #BAB9B1;
+        }
+
+        .demo-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: rgba(131, 160, 127, 0.05);
+            border-radius: 50%;
+            border: 2px solid rgba(131, 160, 127, 0.2);
+        }
+
+        .demo-placeholder-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .demo-placeholder strong {
+            font-size: 1.4em;
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .demo-placeholder em {
+            font-size: 0.95em;
+            font-style: normal;
+            background: rgba(131, 160, 127, 0.1);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: #5D7A5A;
+        }
+
+        .demo-caption {
+            text-align: center;
+            font-size: 1.1em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 2px solid #BAB9B1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 12px rgba(131, 160, 127, 0.15);
+            border-color: #83A07F;
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 1.25rem;
+        }
+
+        .feature-icon i {
+            color: #5D7A5A;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 1.5em;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #1A3E67;
+        }
+
+        .feature-card p {
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        /* Mission Section */
+        .mission {
+            background: #FAFAF9; /* Cream background */
+            color: #333;
+        }
+
+        .mission h2 {
+            color: #1A3E67; /* Navy */
+        }
+
+        .mission-content {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: clamp(1.1rem, 2vw, 1.25rem);
+            line-height: 1.8;
+            color: #333; /* Dark text on cream background */
+        }
+
+        .mission-content p {
+            margin-bottom: 1.75rem;
+            color: #333;
+        }
+
+        .mission-content p strong,
+        .mission-content p em,
+        .mission-content strong,
+        .mission-content em {
+            color: #333;
+        }
+
+        .mission-content ul {
+            margin: 2rem 0;
+            padding-left: 1.5rem;
+            color: #333;
+        }
+
+        .mission-content li {
+            margin-bottom: 1rem;
+            font-size: 1.05em;
+            color: #333;
+        }
+
+        .mission-content li strong {
+            color: #5D7A5A; /* Darker sage for emphasis */
+        }
+
+        .pullquote {
+            background: rgba(83, 102, 81, 0.08); /* Light sage tint */
+            padding: 3rem 3rem 3rem 4rem;
+            margin: 4rem auto;
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.35;
+            border-radius: 12px;
+            letter-spacing: -0.02em;
+            text-align: left;
+            border-left: 8px solid #5D7A5A; /* Darker sage border */
+            max-width: 900px;
+            color: #1A3E67; /* Navy text on light background */
+        }
+
+        /* Join Section */
+        .join {
+            background: white;
+            text-align: center;
+            color: #333; /* Explicitly set text color */
+        }
+
+        .join-content {
+            max-width: 850px;
+            margin: 0 auto 3rem;
+        }
+
+        .join-content p {
+            font-size: clamp(1.05rem, 2vw, 1.2rem);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .join-content > p strong {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 800;
+            display: block;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            color: #1A3E67;
+        }
+
+        .join-content ul {
+            text-align: left;
+            display: inline-block;
+            margin: 0 0 3rem 0;
+            font-size: clamp(1.15rem, 2vw, 1.3rem);
+            background: white;
+            padding: 2rem 2rem 2rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 2px solid #BAB9B1;
+            max-width: 100%;
+        }
+
+        .join-content li {
+            margin-bottom: 1.25rem;
+            padding-left: 0.5rem;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        .join-content li:last-child {
+            margin-bottom: 0;
+        }
+
+        .join-content li::marker {
+            color: #83A07F;
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        .join-cta-wrapper {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 2px solid #BAB9B1;
+        }
+
+        .join-cta-wrapper p {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            color: #1A3E67;
+            letter-spacing: -0.02em;
+        }
+
+        .join-cta-wrapper .cta-button {
+            margin-top: 0;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: #FAFAF9;
+            color: #333; /* Explicitly set text color */
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1.25rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 2px solid #BAB9B1;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #83A07F;
+        }
+
+        .faq-question {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 1.75rem 2rem;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #1A3E67;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .faq-question::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: transparent;
+            transition: background 0.3s ease;
+            z-index: -1;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .faq-question:hover::before {
+            background: rgba(131, 160, 127, 0.05);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.8em;
+            font-weight: 300;
+            color: #5D7A5A;
+        }
+
+        .faq-question.active::after {
+            content: '−';
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 2rem;
+        }
+
+        .faq-answer.active {
+            max-height: 600px;
+            padding: 0 2rem 1.75rem;
+        }
+
+        .faq-answer p {
+            font-size: 1.05em;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #1A3E67;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: underline;
+            transition: opacity 0.3s ease;
+        }
+
+        footer a:hover {
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .hero {
+                padding: 4rem 1.5rem;
+                min-height: 70vh;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .demo-container {
+                padding: 2rem;
+            }
+
+            .demo-placeholder {
+                height: 350px;
+                padding: 2rem;
+            }
+
+            .pullquote {
+                padding: 2rem 1.5rem 2rem 2rem;
+                margin: 3rem auto;
+            }
+
+            .join-content ul {
+                padding: 1.5rem 1.5rem 1.5rem 2.5rem;
+                margin: 0 0 2rem 0;
+            }
+
+            .join-content > p strong {
+                margin-top: 2rem;
+            }
+
+            .join-cta-wrapper {
+                margin-top: 3rem;
+                padding-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Reclaim Your Time for What You Love: Helping Patrons, Not Wrestling Search Boxes</h1>
+            <p>Join librarians nationwide building a discovery tool that handles the routine, so you can focus on the remarkable.</p>
+            <a href="mailto:drew@whiterabbitedventures.com?subject=Let's discover a better future&body=Hi Drew,%0D%0A%0D%0AI am interested in joining the Librarian Cohort to help build products that support our Librarians." class="cta-button">Join the Librarian Cohort</a>
+        </div>
+    </section>
+
+    <!-- DEMO SECTION -->
+    <section class="demo">
+        <div class="container">
+            <h2>See It in Action</h2>
+            <p class="section-intro">Watch how patrons search naturally: no Boolean operators, no training manuals, no frustration.</p>
+            <div class="demo-container">
+                <div class="demo-placeholder">
+                    <div class="demo-placeholder-content">
+                        <strong>Patron:</strong> "I want something funny for the beach"<br><br>
+                        <strong>Scout:</strong> Here are some light, entertaining reads perfect for vacation...<br><br>
+                        <em>[Video demo placeholder - Shows simple, conversational interface]</em>
+                    </div>
+                </div>
+                <p class="demo-caption">Conversational search. Unified results. No jargon required.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features">
+        <div class="container">
+            <h2>Get Back 10-15 Hours Per Week for Meaningful Work</h2>
+            <p class="section-intro">Stop explaining how to search. Start helping patrons discover what they need.</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-comments"></i></div>
+                    <h3>No More Boolean Tutorials</h3>
+                    <p>Patrons search the way they think: naturally. "I want mysteries set in Paris" just works. You're freed from explaining AND, OR, and quotation marks.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-search"></i></div>
+                    <h3>Unified Discovery</h3>
+                    <p>One search across your physical catalog, OverDrive, databases, and more. Patrons find what's available without navigating five different systems.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-microphone"></i></div>
+                    <h3>Voice Accessibility</h3>
+                    <p>Seniors and patrons with visual impairments search independently using voice. Dignity through technology that actually works for everyone.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                    <h3>Privacy Built-In</h3>
+                    <p>Zero-logging architecture that meets ALA privacy principles. Patron searches are never stored, never tracked, never sold. This is your value system in code.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION SECTION -->
+    <section class="mission">
+        <div class="container">
+            <h2>Built WITH Librarians</h2>
+            <div class="mission-content">
+                <p><strong>We believe librarians are the experts in discovery, community, and equitable access.</strong> This tool doesn't replace your expertise. It amplifies it.</p>
+
+                <p>We're not Silicon Valley swooping in with solutions to problems we don't understand. We're building this <em>with</em> you, not <em>for</em> you. Your voice shapes every feature. Your values guide every decision.</p>
+
+                <ul>
+                    <li><strong>Privacy-first:</strong> Zero-logging, transparent data practices, ALA-aligned</li>
+                    <li><strong>Accessibility-first:</strong> WCAG compliance, voice interface, screen reader optimized</li>
+                    <li><strong>Library values at the core:</strong> Intellectual freedom, equity, community</li>
+                    <li><strong>You decide what matters:</strong> Test with your patrons, validate privacy, shape the roadmap</li>
+                </ul>
+
+                <div class="pullquote">
+                    We're not here to automate reference desks. We're here to free you from explaining 'AND' vs. 'OR' so you can do what you do best: connect people with exactly what they need.
+                </div>
+
+                <p>Too many technology vendors treat libraries as customers to extract from. We see you as partners who know what your communities need. Let's build something worthy of that trust.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- JOIN SECTION -->
+    <section class="join">
+        <div class="container">
+            <h2>We Need Your Expertise</h2>
+            <div class="join-content">
+                <p><strong>This only works if librarians lead the way.</strong> We're seeking 8-12 public librarians to join our Founding Cohort: a diverse group representing small, medium, and large libraries across urban, suburban, and rural communities.</p>
+
+                <p><strong>The commitment: 4-6 hours per month</strong></p>
+                <ul>
+                    <li>One 60-90 minute virtual meeting (we work around your schedule)</li>
+                    <li>Test features with a few patrons and share what you observe</li>
+                    <li>Tell us when we're wrong (seriously, we need to hear it)</li>
+                    <li>Help us understand what matters in your library</li>
+                </ul>
+
+                <p><strong>Why librarians join:</strong></p>
+                <ul>
+                    <li>Finally build a tool designed <em>with</em> libraries, not <em>at</em> them</li>
+                    <li>Shape a product that respects patron privacy from the ground up</li>
+                    <li>Get a solution that fits your workflow instead of fighting another vendor system</li>
+                    <li>Early access to features you helped design</li>
+                    <li>Founding partner pricing if you choose to continue after the pilot</li>
+                </ul>
+
+                <div class="join-cta-wrapper">
+                    <p>Ready to help us build something better?</p>
+                    <a href="mailto:drew@whiterabbitedventures.com?subject=Let's discover a better future&body=Hi Drew,%0D%0A%0D%0AI am interested in joining the Librarian Cohort to help build products that support our Librarians." class="cta-button">Count Me In</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq">
+        <div class="container">
+            <h2>Questions We're Hearing</h2>
+            <div class="faq-container">
+
+                <div class="faq-item">
+                    <div class="faq-question">Is this replacing librarians?</div>
+                    <div class="faq-answer">
+                        <p><strong>Absolutely not.</strong> This tool handles routine discovery tasks (like explaining Boolean operators or searching multiple systems) so you can spend time on complex research questions, readers' advisory, community programming, and the human connection that defines librarianship. Think of it as taking mundane work off your plate, not taking your job. Librarians remain essential for nuance, judgment, and the kind of personalized help that technology can't replicate.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What about patron privacy?</div>
+                    <div class="faq-answer">
+                        <p>Privacy is foundational, not an afterthought. We're building a <strong>zero-logging architecture</strong> where patron searches are never stored in any database, never associated with accounts, never tracked across sessions. We meet ALA Library Privacy Guidelines and will undergo third-party privacy audits to prove it. Your IT department can review our architecture. If we can't meet your privacy standards, we don't deserve to serve libraries.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">How does this address concerns about AI?</div>
+                    <div class="faq-answer">
+                        <p>We share your skepticism of overhyped technology. That's why we're building <em>with</em> librarians to ensure this tool: (1) never invents information (recommendations come from your actual catalog); (2) transparently hands off complex questions to reference librarians; (3) respects patron privacy with zero data retention; and (4) augments librarian expertise rather than claiming to replace it. You validate every claim we make about functionality and values alignment. If it doesn't meet library standards, we fix it or we don't ship it.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What's the time commitment?</div>
+                    <div class="faq-answer">
+                        <p>Approximately <strong>4-6 hours per month</strong>: one 60-90 minute virtual meeting, plus occasional testing with your patrons (30-60 minutes) and brief feedback surveys (10-15 minutes). We know you're already stretched thin, so we structure participation to respect your time. Meetings are recorded if you can't attend live. You can adjust involvement based on your capacity in any given month.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Will libraries have to pay for this?</div>
+                    <div class="faq-answer">
+                        <p>Cohort members receive <strong>free access during development</strong> (12-16 weeks) and <strong>significant founder's pricing</strong> if you choose to continue (20-30% discount). We're building a sustainable SaaS model with tiered pricing based on library size: $5K-$15K annually for most public libraries, with LSTA grant support strategies. Cohort participation is completely free with no obligation. If the tool doesn't prove its value during the pilot, you walk away having helped shape something for the broader library community.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Can I drop out if it's not working?</div>
+                    <div class="faq-answer">
+                        <p><strong>Yes, absolutely.</strong> This is a voluntary partnership. If your schedule changes, if the tool doesn't meet expectations, or if participation isn't valuable to you, simply let us know. No hard feelings, no strings attached. We want engaged partners who see the potential, not obligated participants. Your feedback about <em>why</em> it's not working would be helpful, but there's zero pressure to stay if it's not the right fit.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Scout | Built WITH Librarians</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = answer.classList.contains('active');
+
+                // Close all answers
+                document.querySelectorAll('.faq-answer').forEach(a => {
+                    a.classList.remove('active');
+                });
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                });
+
+                // Open clicked answer if it wasn't already open
+                if (!isActive) {
+                    answer.classList.add('active');
+                    question.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
