@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alliance BJJ App - Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-eyebrow">Design System v1.0</div>
+    <h1>ALLIANCE BJJ APP</h1>
+    <p>Clean, minimal, member-focused. Light theme for gym visibility. iOS-inspired components.</p>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="tabs">
+    <button class="tab active" data-tab="foundations">Foundations</button>
+    <button class="tab" data-tab="components">Components</button>
+    <button class="tab" data-tab="patterns">Patterns</button>
+  </div>
+
+  <!-- Content -->
+  <div class="container">
+    <!-- FOUNDATIONS TAB -->
+    <div class="tab-content active" id="foundations">
+
+      <!-- Colors -->
+      <section class="section">
+        <h2 class="section-title">Colors</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Core Palette</h3>
+          <div class="swatch-grid">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#000000;color:#fff">#000000</div>
+              <span class="swatch-label">Primary</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#333333;color:#fff">#333333</div>
+              <span class="swatch-label">Primary Light</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#F5F5F5;color:#000">#F5F5F5</div>
+              <span class="swatch-label">Background</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#FFFFFF;color:#000;border:1px solid #E5E5E5">#FFFFFF</div>
+              <span class="swatch-label">Surface</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#FAFAFA;color:#000;border:1px solid #E5E5E5">#FAFAFA</div>
+              <span class="swatch-label">Surface Secondary</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Text Colors</h3>
+          <div class="swatch-grid">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#000000;color:#fff">#000000</div>
+              <span class="swatch-label">Text Primary</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#737373;color:#fff">#737373</div>
+              <span class="swatch-label">Text Secondary</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#A5A5A5;color:#fff">#A5A5A5</div>
+              <span class="swatch-label">Text Muted</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#FFFFFF;color:#000;border:1px solid #E5E5E5">#FFFFFF</div>
+              <span class="swatch-label">Text Inverse</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Borders & Dividers</h3>
+          <div class="swatch-grid">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#E5E5E5;color:#000">#E5E5E5</div>
+              <span class="swatch-label">Border / Divider</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Status Colors</h3>
+          <div class="swatch-grid">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#D4EDDA;color:#155724">#D4EDDA</div>
+              <span class="swatch-label">Success BG</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#155724;color:#fff">#155724</div>
+              <span class="swatch-label">Success Text</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#F8D7DA;color:#721C24">#F8D7DA</div>
+              <span class="swatch-label">Error BG</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#721C24;color:#fff">#721C24</div>
+              <span class="swatch-label">Error Text</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#DC3545;color:#fff">#DC3545</div>
+              <span class="swatch-label">Danger</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#0066CC;color:#fff">#0066CC</div>
+              <span class="swatch-label">Link</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Belt Colors</h3>
+          <div class="swatch-grid">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#FFFFFF;border:1px solid #E5E5E5;color:#000">#FFFFFF</div>
+              <span class="swatch-label">White</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#0066CC;color:#fff">#0066CC</div>
+              <span class="swatch-label">Blue</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#6F42C1;color:#fff">#6F42C1</div>
+              <span class="swatch-label">Purple</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#8B4513;color:#fff">#8B4513</div>
+              <span class="swatch-label">Brown</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#000000;color:#fff">#000000</div>
+              <span class="swatch-label">Black</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Typography -->
+      <section class="section">
+        <h2 class="section-title">Typography</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Font Sizes</h3>
+          <div class="type-scale">
+            <div class="type-row">
+              <span class="type-sample" style="font-size:32px">Aa</span>
+              <span class="type-label">5xl - 32px</span>
+              <span class="type-usage">Hero numbers</span>
+            </div>
+            <div class="type-row">
+              <span class="type-sample" style="font-size:28px">Aa</span>
+              <span class="type-label">4xl - 28px</span>
+              <span class="type-usage">Large headings</span>
+            </div>
+            <div class="type-row">
+              <span class="type-sample" style="font-size:24px">Aa</span>
+              <span class="type-label">3xl - 24px</span>
+              <span class="type-usage">Screen titles</span>
+            </div>
+            <div class="type-row">
+              <span class="type-sample" style="font-size:20px">Aa</span>
+              <span class="type-label">2xl - 20px</span>
+              <span class="type-usage">Section headings</span>
+            </div>
+            <div class="type-row">
+              <span class="type-sample" style="font-size:18px">Aa</span>
+              <span class="type-label">xl - 18px</span>
+              <span class="type-usage">Card titles</span>
+            </div>
+            <div class="type-row">
+              <span class="type-sample" style="font-size:16px">Aa</span>
+              <span class="type-label">lg - 16px</span>
+              <span class="type-usage">Body text, buttons</span>
+            </div>
+            <div class="type-row">
+              <span class="type-sample" style="font-size:14px">Aa</span>
+              <span class="type-label">md - 14px</span>
+              <span class="type-usage">Secondary text</span>
+            </div>
+            <div class="type-row">
+              <span class="type-sample" style="font-size:12px">Aa</span>
+              <span class="type-label">sm - 12px</span>
+              <span class="type-usage">Captions, badges</span>
+            </div>
+            <div class="type-row">
+              <span class="type-sample" style="font-size:10px">Aa</span>
+              <span class="type-label">xs - 10px</span>
+              <span class="type-usage">Fine print</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Font Weights</h3>
+          <div class="type-scale">
+            <div class="type-row">
+              <span class="type-sample" style="font-weight:400">Regular 400</span>
+              <span class="type-usage">Body text</span>
+            </div>
+            <div class="type-row">
+              <span class="type-sample" style="font-weight:500">Medium 500</span>
+              <span class="type-usage">Buttons, labels</span>
+            </div>
+            <div class="type-row">
+              <span class="type-sample" style="font-weight:600">Semibold 600</span>
+              <span class="type-usage">Section headers</span>
+            </div>
+            <div class="type-row">
+              <span class="type-sample" style="font-weight:700">Bold 700</span>
+              <span class="type-usage">Titles, emphasis</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Spacing -->
+      <section class="section">
+        <h2 class="section-title">Spacing</h2>
+        <div class="spacing-scale">
+          <div class="spacing-row"><div class="spacing-bar" style="width:4px"></div><span class="spacing-label">xs</span><span class="spacing-value">4px</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:8px"></div><span class="spacing-label">sm</span><span class="spacing-value">8px</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:12px"></div><span class="spacing-label">md</span><span class="spacing-value">12px</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:16px"></div><span class="spacing-label">lg</span><span class="spacing-value">16px</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:20px"></div><span class="spacing-label">xl</span><span class="spacing-value">20px</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:24px"></div><span class="spacing-label">2xl</span><span class="spacing-value">24px</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:32px"></div><span class="spacing-label">3xl</span><span class="spacing-value">32px</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:40px"></div><span class="spacing-label">4xl</span><span class="spacing-value">40px</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:48px"></div><span class="spacing-label">5xl</span><span class="spacing-value">48px</span></div>
+        </div>
+      </section>
+
+      <!-- Border Radius -->
+      <section class="section">
+        <h2 class="section-title">Border Radius</h2>
+        <div class="radius-scale">
+          <div class="radius-item">
+            <div class="radius-demo" style="border-radius:0"></div>
+            <span class="radius-label">none - 0</span>
+          </div>
+          <div class="radius-item">
+            <div class="radius-demo" style="border-radius:4px"></div>
+            <span class="radius-label">sm - 4px</span>
+          </div>
+          <div class="radius-item">
+            <div class="radius-demo" style="border-radius:6px"></div>
+            <span class="radius-label">md - 6px</span>
+          </div>
+          <div class="radius-item">
+            <div class="radius-demo" style="border-radius:8px"></div>
+            <span class="radius-label">lg - 8px</span>
+          </div>
+          <div class="radius-item">
+            <div class="radius-demo" style="border-radius:12px"></div>
+            <span class="radius-label">xl - 12px</span>
+          </div>
+          <div class="radius-item">
+            <div class="radius-demo" style="border-radius:16px"></div>
+            <span class="radius-label">2xl - 16px</span>
+          </div>
+          <div class="radius-item">
+            <div class="radius-demo" style="border-radius:50%"></div>
+            <span class="radius-label">full - 50%</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- COMPONENTS TAB -->
+    <div class="tab-content" id="components">
+
+      <!-- Buttons -->
+      <section class="section">
+        <h2 class="section-title">Buttons</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Primary Button</h3>
+          <p class="desc">Main call-to-action. Black background, white text.</p>
+          <div class="component-demo">
+            <button class="btn btn-primary">Check In</button>
+            <button class="btn btn-primary">View Schedule</button>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Secondary Button</h3>
+          <p class="desc">Secondary actions. White background, border.</p>
+          <div class="component-demo">
+            <button class="btn btn-secondary">View Details</button>
+            <button class="btn btn-secondary">Edit Profile</button>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Danger Button</h3>
+          <p class="desc">Destructive actions. Red border and text.</p>
+          <div class="component-demo">
+            <button class="btn btn-danger">Log Out</button>
+            <button class="btn btn-danger">Cancel Membership</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cards -->
+      <section class="section">
+        <h2 class="section-title">Cards</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Info Card</h3>
+          <p class="desc">Container for grouped information with rows.</p>
+          <div class="card-demo">
+            <div class="info-card">
+              <div class="info-row">
+                <span class="info-label">Member ID</span>
+                <span class="info-value">ALB-2023-1156</span>
+              </div>
+              <div class="divider"></div>
+              <div class="info-row">
+                <span class="info-label">Email</span>
+                <span class="info-value">john@example.com</span>
+              </div>
+              <div class="divider"></div>
+              <div class="info-row">
+                <span class="info-label">Member Since</span>
+                <span class="info-value">January 2023</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Stat Card</h3>
+          <p class="desc">Display key metrics prominently.</p>
+          <div class="component-demo">
+            <div class="stat-card">
+              <span class="stat-number">12</span>
+              <span class="stat-label">Classes This Month</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">4</span>
+              <span class="stat-label">Day Streak</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">156</span>
+              <span class="stat-label">Total Classes</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Badges -->
+      <section class="section">
+        <h2 class="section-title">Badges</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Status Badges</h3>
+          <div class="component-demo">
+            <span class="badge badge-success">Active</span>
+            <span class="badge badge-success">Paid</span>
+            <span class="badge badge-error">Overdue</span>
+            <span class="badge badge-neutral">Pending</span>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Belt Badges</h3>
+          <div class="component-demo">
+            <div class="belt-badge-demo">
+              <div class="belt-circle belt-white"></div>
+              <span>White</span>
+            </div>
+            <div class="belt-badge-demo">
+              <div class="belt-circle belt-blue"></div>
+              <span>Blue</span>
+            </div>
+            <div class="belt-badge-demo">
+              <div class="belt-circle belt-purple"></div>
+              <span>Purple</span>
+            </div>
+            <div class="belt-badge-demo">
+              <div class="belt-circle belt-brown"></div>
+              <span>Brown</span>
+            </div>
+            <div class="belt-badge-demo">
+              <div class="belt-circle belt-black"></div>
+              <span>Black</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Class Type Tags</h3>
+          <div class="component-demo">
+            <span class="tag">Gi</span>
+            <span class="tag">No-Gi</span>
+            <span class="tag">Fundamentals</span>
+            <span class="tag">Advanced</span>
+            <span class="tag">Open Mat</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Avatar -->
+      <section class="section">
+        <h2 class="section-title">Avatars</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Profile Avatar</h3>
+          <p class="desc">Large avatar for profile screens. Shows initials.</p>
+          <div class="component-demo">
+            <div class="avatar avatar-lg">JS</div>
+            <div class="avatar avatar-md">MC</div>
+            <div class="avatar avatar-sm">ED</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Form Elements -->
+      <section class="section">
+        <h2 class="section-title">Form Elements</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Text Input</h3>
+          <div class="form-demo">
+            <input type="text" class="input" placeholder="Enter your email">
+            <input type="text" class="input input-disabled" value="john@example.com" disabled>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- PATTERNS TAB -->
+    <div class="tab-content" id="patterns">
+
+      <!-- Screen Header -->
+      <section class="section">
+        <h2 class="section-title">Screen Header</h2>
+        <p class="desc">Consistent header pattern for all screens.</p>
+        <div class="pattern-demo">
+          <div class="screen-header">
+            <h1 class="screen-title">Progress</h1>
+            <p class="screen-subtitle">Track your BJJ journey</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Layout -->
+      <section class="section">
+        <h2 class="section-title">Section Layout</h2>
+        <p class="desc">Sections with title and content card.</p>
+        <div class="pattern-demo">
+          <div class="section-pattern">
+            <h3 class="section-header">Personal Information</h3>
+            <div class="info-card">
+              <div class="info-row">
+                <span class="info-label">Name</span>
+                <span class="info-value">John Smith</span>
+              </div>
+              <div class="divider"></div>
+              <div class="info-row">
+                <span class="info-label">Belt</span>
+                <span class="info-value">Blue Belt - 3 Stripes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- List Item Pattern -->
+      <section class="section">
+        <h2 class="section-title">List Items</h2>
+        <p class="desc">Tappable list items with arrow indicator.</p>
+        <div class="pattern-demo">
+          <div class="settings-list">
+            <div class="list-item">
+              <span class="list-text">Edit Profile</span>
+              <span class="list-arrow">›</span>
+            </div>
+            <div class="list-item">
+              <span class="list-text">Notifications</span>
+              <span class="list-arrow">›</span>
+            </div>
+            <div class="list-item">
+              <span class="list-text">Privacy</span>
+              <span class="list-arrow">›</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Class Card Pattern -->
+      <section class="section">
+        <h2 class="section-title">Class Card</h2>
+        <p class="desc">Schedule and class display pattern.</p>
+        <div class="pattern-demo">
+          <div class="class-card">
+            <div class="class-header">
+              <span class="class-name">Fundamentals</span>
+              <span class="class-time">6:00 PM - 7:30 PM</span>
+            </div>
+            <div class="class-meta">
+              <span class="class-instructor">Professor Mike</span>
+              <span class="class-level">All Levels</span>
+            </div>
+            <div class="class-spots">18 spots available</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Progress Bar -->
+      <section class="section">
+        <h2 class="section-title">Progress Indicators</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Belt Progress Bar</h3>
+          <div class="pattern-demo">
+            <div class="progress-container">
+              <div class="progress-header">
+                <span>Blue Belt</span>
+                <span>Purple Belt</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width:75%"></div>
+              </div>
+              <div class="progress-label">75% complete</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Technique Progress</h3>
+          <div class="pattern-demo">
+            <div class="technique-item">
+              <div class="technique-header">
+                <span class="technique-name">Guard Passes</span>
+                <span class="technique-count">8/12</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width:67%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Check-in Success -->
+      <section class="section">
+        <h2 class="section-title">Check-in States</h2>
+        <div class="component-demo">
+          <div class="checkin-success">
+            <div class="checkin-icon">✓</div>
+            <div class="checkin-text">Checked In!</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
