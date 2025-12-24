@@ -1,0 +1,14 @@
+name = "nofomo-investment"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "dist"
+
+# Cache static assets
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
