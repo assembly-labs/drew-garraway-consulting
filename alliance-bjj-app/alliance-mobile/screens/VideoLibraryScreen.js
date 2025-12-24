@@ -209,32 +209,90 @@ export default function VideoLibraryScreen({ navigation }) {
     }
   };
 
-  // Render theme selector (for demo purposes)
+  // State for showing theme info panel
+  const [showThemeInfo, setShowThemeInfo] = useState(true);
+
+  // Render theme selector (for demo/testing purposes)
   const renderThemeSelector = () => (
-    <View style={[styles.themeSelector, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}>
-      <Text style={[styles.themeSelectorLabel, { color: theme.colors.textSecondary }]}>THEME VARIANT:</Text>
-      <View style={styles.themeButtons}>
-        {Object.entries(THEMES).map(([key, t]) => (
-          <TouchableOpacity
-            key={key}
-            style={[
-              styles.themeButton,
-              {
-                backgroundColor: theme.name === t.name ? theme.colors.primary : theme.colors.surfaceElevated,
-                borderColor: theme.colors.border,
-              }
-            ]}
-            onPress={() => setTheme(t)}
-          >
-            <Text style={[
-              styles.themeButtonText,
-              { color: theme.name === t.name ? '#FFFFFF' : theme.colors.text }
-            ]}>
-              {t.name.split(' ')[0]}
-            </Text>
-          </TouchableOpacity>
-        ))}
+    <View style={[styles.themeSelectorContainer, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}>
+      {/* Theme Switcher Header */}
+      <TouchableOpacity
+        style={styles.themeSelectorHeader}
+        onPress={() => setShowThemeInfo(!showThemeInfo)}
+      >
+        <View style={styles.themeSelectorTitleRow}>
+          <Ionicons name="color-palette" size={18} color={theme.colors.primary} />
+          <Text style={[styles.themeSelectorTitle, { color: theme.colors.text }]}>
+            DESIGN VARIANT TESTER
+          </Text>
+        </View>
+        <Ionicons
+          name={showThemeInfo ? "chevron-up" : "chevron-down"}
+          size={18}
+          color={theme.colors.textMuted}
+        />
+      </TouchableOpacity>
+
+      {/* Theme Buttons - Always Visible */}
+      <View style={styles.themeButtonsRow}>
+        {Object.entries(THEMES).map(([key, t]) => {
+          const isActive = theme.name === t.name;
+          return (
+            <TouchableOpacity
+              key={key}
+              style={[
+                styles.themeButtonLarge,
+                {
+                  backgroundColor: isActive ? theme.colors.primary : theme.colors.surfaceElevated,
+                  borderColor: isActive ? theme.colors.primary : theme.colors.border,
+                  borderWidth: isActive ? 2 : 1,
+                }
+              ]}
+              onPress={() => setTheme(t)}
+            >
+              <View style={[
+                styles.themeButtonIcon,
+                { backgroundColor: isActive ? 'rgba(255,255,255,0.2)' : t.colors.primary + '20' }
+              ]}>
+                <Ionicons
+                  name={key === 'darkDojo' ? 'moon' : key === 'cleanAcademy' ? 'sunny' : 'sparkles'}
+                  size={20}
+                  color={isActive ? '#FFFFFF' : t.colors.primary}
+                />
+              </View>
+              <Text style={[
+                styles.themeButtonLabel,
+                { color: isActive ? '#FFFFFF' : theme.colors.text }
+              ]}>
+                {t.name}
+              </Text>
+              {isActive && (
+                <View style={styles.activeIndicator}>
+                  <Ionicons name="checkmark-circle" size={16} color="#FFFFFF" />
+                </View>
+              )}
+            </TouchableOpacity>
+          );
+        })}
       </View>
+
+      {/* Expandable Theme Description */}
+      {showThemeInfo && (
+        <View style={[styles.themeInfoPanel, { backgroundColor: theme.colors.surfaceElevated, borderColor: theme.colors.border }]}>
+          <Text style={[styles.themeInfoName, { color: theme.colors.primary }]}>
+            {theme.name}
+          </Text>
+          <Text style={[styles.themeInfoDescription, { color: theme.colors.textSecondary }]}>
+            {theme.description}
+          </Text>
+          <View style={styles.themeColorPreview}>
+            <View style={[styles.colorSwatch, { backgroundColor: theme.colors.primary }]} />
+            <View style={[styles.colorSwatch, { backgroundColor: theme.colors.secondary }]} />
+            <View style={[styles.colorSwatch, { backgroundColor: theme.colors.accent }]} />
+            <View style={[styles.colorSwatch, { backgroundColor: theme.colors.background, borderWidth: 1, borderColor: theme.colors.border }]} />
+          </View>
+        </View>
+      )}
     </View>
   );
 
@@ -941,33 +999,84 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  // Theme Selector
-  themeSelector: {
+  // Theme Selector - Enhanced for testing
+  themeSelectorContainer: {
+    borderBottomWidth: 1,
+    paddingBottom: 12,
+  },
+  themeSelectorHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 8,
+    justifyContent: 'space-between',
     paddingHorizontal: 16,
-    borderBottomWidth: 1,
+    paddingVertical: 10,
   },
-  themeSelectorLabel: {
-    fontSize: 10,
+  themeSelectorTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  themeSelectorTitle: {
+    fontSize: 12,
+    fontWeight: '700',
+    letterSpacing: 1,
+  },
+  themeButtonsRow: {
+    flexDirection: 'row',
+    paddingHorizontal: 12,
+    gap: 8,
+  },
+  themeButtonLarge: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 8,
+    borderRadius: 10,
+    position: 'relative',
+  },
+  themeButtonIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 6,
+  },
+  themeButtonLabel: {
+    fontSize: 11,
     fontWeight: '600',
-    marginRight: 12,
+    textAlign: 'center',
   },
-  themeButtons: {
+  activeIndicator: {
+    position: 'absolute',
+    top: 6,
+    right: 6,
+  },
+  themeInfoPanel: {
+    marginHorizontal: 12,
+    marginTop: 12,
+    padding: 14,
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  themeInfoName: {
+    fontSize: 16,
+    fontWeight: '700',
+    marginBottom: 6,
+  },
+  themeInfoDescription: {
+    fontSize: 13,
+    lineHeight: 18,
+    marginBottom: 12,
+  },
+  themeColorPreview: {
     flexDirection: 'row',
     gap: 8,
   },
-  themeButton: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 4,
-    borderWidth: 1,
-  },
-  themeButtonText: {
-    fontSize: 11,
-    fontWeight: '600',
+  colorSwatch: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
   },
 
   // Header
