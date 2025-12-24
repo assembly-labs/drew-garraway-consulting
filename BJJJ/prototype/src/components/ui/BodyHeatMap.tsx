@@ -21,12 +21,18 @@ interface BodyHeatMapProps {
 }
 
 // Heat zone positions (center points for radial gradients)
+// Mapped to 160x300 viewport matching the silhouette proportions
 const HEAT_ZONES = {
-  neck: { cx: 80, cy: 52, rx: 25, ry: 20 },
-  leftArm: { cx: 35, cy: 140, rx: 30, ry: 50 },
-  rightArm: { cx: 125, cy: 140, rx: 30, ry: 50 },
-  leftLeg: { cx: 62, cy: 230, rx: 20, ry: 55 },
-  rightLeg: { cx: 98, cy: 230, rx: 20, ry: 55 },
+  // Neck/throat area - chokes target here
+  neck: { cx: 80, cy: 62, rx: 16, ry: 12 },
+  // Left arm - elbow/forearm area for armbars, kimuras
+  leftArm: { cx: 38, cy: 138, rx: 20, ry: 40 },
+  // Right arm - mirror of left
+  rightArm: { cx: 122, cy: 138, rx: 20, ry: 40 },
+  // Left leg - knee/ankle area for leg locks
+  leftLeg: { cx: 68, cy: 240, rx: 16, ry: 45 },
+  // Right leg - mirror of left
+  rightLeg: { cx: 92, cy: 240, rx: 16, ry: 45 },
 };
 
 // Human body silhouette with PNG image and radial gradient heat overlays
