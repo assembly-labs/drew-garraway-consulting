@@ -1,0 +1,21 @@
+name = "franklin-hugh-money"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "public"
+
+# Static HTML site - no build step required
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Audio files - longer cache
+[[headers]]
+  for = "/audio/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
