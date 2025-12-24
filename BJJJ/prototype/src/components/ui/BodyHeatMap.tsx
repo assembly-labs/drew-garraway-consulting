@@ -20,35 +20,36 @@ interface BodyHeatMapProps {
   };
 }
 
-// Calculate color intensity based on percentage (0-1)
-function getHeatColor(intensity: number, isGiven: boolean): string {
-  if (intensity === 0) return 'var(--color-gray-800)';
+// Heat zone positions (center points for radial gradients)
+const HEAT_ZONES = {
+  neck: { cx: 80, cy: 52, rx: 25, ry: 20 },
+  leftArm: { cx: 35, cy: 140, rx: 30, ry: 50 },
+  rightArm: { cx: 125, cy: 140, rx: 30, ry: 50 },
+  leftLeg: { cx: 62, cy: 230, rx: 20, ry: 55 },
+  rightLeg: { cx: 98, cy: 230, rx: 20, ry: 55 },
+};
 
-  // Given = green tones, Received = red tones
-  if (isGiven) {
-    const alpha = Math.min(0.15 + intensity * 0.6, 0.75);
-    return `rgba(34, 197, 94, ${alpha})`;
-  } else {
-    const alpha = Math.min(0.15 + intensity * 0.6, 0.75);
-    return `rgba(239, 68, 68, ${alpha})`;
-  }
-}
-
-// Human body silhouette with PNG image and overlay regions
+// Human body silhouette with PNG image and radial gradient heat overlays
 function BodySilhouette({
-  neckColor,
-  armsColor,
-  legsColor,
+  neckIntensity,
+  armsIntensity,
+  legsIntensity,
+  isGiven,
   onRegionClick,
 }: {
-  neckColor: string;
-  armsColor: string;
-  legsColor: string;
+  neckIntensity: number;
+  armsIntensity: number;
+  legsIntensity: number;
+  isGiven: boolean;
   onRegionClick?: (region: BodyRegion) => void;
 }) {
   const handleClick = (region: BodyRegion) => {
     onRegionClick?.(region);
   };
+
+  // Get heat color based on mode (green for given, red for received)
+  const getHeatRgb = () => isGiven ? '34, 197, 94' : '239, 68, 68';
+  const heatRgb = getHeatRgb();
 
   return (
     <div
@@ -58,7 +59,7 @@ function BodySilhouette({
         height: 300,
       }}
     >
-      {/* PNG silhouette with glow effect */}
+      {/* PNG silhouette with subtle glow outline */}
       <img
         src="/human-body-silo.png"
         alt="Body silhouette"
@@ -66,16 +67,117 @@ function BodySilhouette({
           width: '100%',
           height: '100%',
           objectFit: 'contain',
-          filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))',
+          filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.25)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))',
         }}
       />
 
-      {/* Clickable overlay regions */}
+      {/* Heat map overlay with radial gradients */}
       <svg
         width="160"
         height="300"
         viewBox="0 0 160 300"
-        fill="none"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          pointerEvents: 'none',
+          mixBlendMode: 'screen',
+        }}
+      >
+        <defs>
+          {/* Radial gradient for neck */}
+          <radialGradient id="neckHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={neckIntensity * 0.9} />
+            <stop offset="40%" stopColor={`rgb(${heatRgb})`} stopOpacity={neckIntensity * 0.5} />
+            <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
+          </radialGradient>
+
+          {/* Radial gradient for arms */}
+          <radialGradient id="armsHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={armsIntensity * 0.85} />
+            <stop offset="35%" stopColor={`rgb(${heatRgb})`} stopOpacity={armsIntensity * 0.45} />
+            <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
+          </radialGradient>
+
+          {/* Radial gradient for legs */}
+          <radialGradient id="legsHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={legsIntensity * 0.85} />
+            <stop offset="35%" stopColor={`rgb(${heatRgb})`} stopOpacity={legsIntensity * 0.45} />
+            <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
+          </radialGradient>
+
+          {/* Blur filter for softer glow */}
+          <filter id="heatBlur" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+          </filter>
+        </defs>
+
+        {/* Neck heat zone */}
+        {neckIntensity > 0 && (
+          <ellipse
+            cx={HEAT_ZONES.neck.cx}
+            cy={HEAT_ZONES.neck.cy}
+            rx={HEAT_ZONES.neck.rx}
+            ry={HEAT_ZONES.neck.ry}
+            fill="url(#neckHeat)"
+            filter="url(#heatBlur)"
+          />
+        )}
+
+        {/* Left arm heat zone */}
+        {armsIntensity > 0 && (
+          <ellipse
+            cx={HEAT_ZONES.leftArm.cx}
+            cy={HEAT_ZONES.leftArm.cy}
+            rx={HEAT_ZONES.leftArm.rx}
+            ry={HEAT_ZONES.leftArm.ry}
+            fill="url(#armsHeat)"
+            filter="url(#heatBlur)"
+          />
+        )}
+
+        {/* Right arm heat zone */}
+        {armsIntensity > 0 && (
+          <ellipse
+            cx={HEAT_ZONES.rightArm.cx}
+            cy={HEAT_ZONES.rightArm.cy}
+            rx={HEAT_ZONES.rightArm.rx}
+            ry={HEAT_ZONES.rightArm.ry}
+            fill="url(#armsHeat)"
+            filter="url(#heatBlur)"
+          />
+        )}
+
+        {/* Left leg heat zone */}
+        {legsIntensity > 0 && (
+          <ellipse
+            cx={HEAT_ZONES.leftLeg.cx}
+            cy={HEAT_ZONES.leftLeg.cy}
+            rx={HEAT_ZONES.leftLeg.rx}
+            ry={HEAT_ZONES.leftLeg.ry}
+            fill="url(#legsHeat)"
+            filter="url(#heatBlur)"
+          />
+        )}
+
+        {/* Right leg heat zone */}
+        {legsIntensity > 0 && (
+          <ellipse
+            cx={HEAT_ZONES.rightLeg.cx}
+            cy={HEAT_ZONES.rightLeg.cy}
+            rx={HEAT_ZONES.rightLeg.rx}
+            ry={HEAT_ZONES.rightLeg.ry}
+            fill="url(#legsHeat)"
+            filter="url(#heatBlur)"
+          />
+        )}
+      </svg>
+
+      {/* Invisible clickable regions for interaction */}
+      <svg
+        width="160"
+        height="300"
+        viewBox="0 0 160 300"
         style={{
           position: 'absolute',
           top: 0,
@@ -83,79 +185,60 @@ function BodySilhouette({
           pointerEvents: 'none',
         }}
       >
-        {/* Neck region - clickable */}
-        <g
+        {/* Neck click area */}
+        <ellipse
+          cx={HEAT_ZONES.neck.cx}
+          cy={HEAT_ZONES.neck.cy}
+          rx={HEAT_ZONES.neck.rx + 5}
+          ry={HEAT_ZONES.neck.ry + 5}
+          fill="transparent"
           onClick={() => handleClick('neck')}
           style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
-        >
-          <ellipse
-            cx="80"
-            cy="52"
-            rx="14"
-            ry="10"
-            fill={neckColor}
-            opacity="0.7"
-          />
-        </g>
+        />
 
-        {/* Left arm region - clickable */}
-        <g
+        {/* Left arm click area */}
+        <ellipse
+          cx={HEAT_ZONES.leftArm.cx}
+          cy={HEAT_ZONES.leftArm.cy}
+          rx={HEAT_ZONES.leftArm.rx + 5}
+          ry={HEAT_ZONES.leftArm.ry + 5}
+          fill="transparent"
           onClick={() => handleClick('arms')}
           style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
-        >
-          <path
-            d="M52 68 L38 78 L22 140 L32 200 L42 200 L48 145 L58 90 Z"
-            fill={armsColor}
-            opacity="0.6"
-          />
-        </g>
+        />
 
-        {/* Right arm region - clickable */}
-        <g
+        {/* Right arm click area */}
+        <ellipse
+          cx={HEAT_ZONES.rightArm.cx}
+          cy={HEAT_ZONES.rightArm.cy}
+          rx={HEAT_ZONES.rightArm.rx + 5}
+          ry={HEAT_ZONES.rightArm.ry + 5}
+          fill="transparent"
           onClick={() => handleClick('arms')}
           style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
-        >
-          <path
-            d="M108 68 L122 78 L138 140 L128 200 L118 200 L112 145 L102 90 Z"
-            fill={armsColor}
-            opacity="0.6"
-          />
-        </g>
+        />
 
-        {/* Left leg region - clickable */}
-        <g
+        {/* Left leg click area */}
+        <ellipse
+          cx={HEAT_ZONES.leftLeg.cx}
+          cy={HEAT_ZONES.leftLeg.cy}
+          rx={HEAT_ZONES.leftLeg.rx + 5}
+          ry={HEAT_ZONES.leftLeg.ry + 5}
+          fill="transparent"
           onClick={() => handleClick('legs')}
           style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
-        >
-          <path
-            d="M58 165 L52 290 L72 290 L78 165 Z"
-            fill={legsColor}
-            opacity="0.6"
-          />
-        </g>
+        />
 
-        {/* Right leg region - clickable */}
-        <g
+        {/* Right leg click area */}
+        <ellipse
+          cx={HEAT_ZONES.rightLeg.cx}
+          cy={HEAT_ZONES.rightLeg.cy}
+          rx={HEAT_ZONES.rightLeg.rx + 5}
+          ry={HEAT_ZONES.rightLeg.ry + 5}
+          fill="transparent"
           onClick={() => handleClick('legs')}
           style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
-        >
-          <path
-            d="M82 165 L88 290 L108 290 L102 165 Z"
-            fill={legsColor}
-            opacity="0.6"
-          />
-        </g>
-
-        {/* Region labels */}
-        <text x="80" y="55" textAnchor="middle" fill="var(--color-white)" fontSize="9" fontWeight="600" style={{ pointerEvents: 'none' }}>
-          NECK
-        </text>
-        <text x="24" y="170" textAnchor="middle" fill="var(--color-white)" fontSize="9" fontWeight="600" style={{ pointerEvents: 'none' }}>
-          ARMS
-        </text>
-        <text x="80" y="230" textAnchor="middle" fill="var(--color-white)" fontSize="9" fontWeight="600" style={{ pointerEvents: 'none' }}>
-          LEGS
-        </text>
+        />
       </svg>
     </div>
   );
@@ -293,9 +376,10 @@ export function BodyHeatMap({ data, techniqueBreakdown }: BodyHeatMapProps) {
         {/* Body silhouette */}
         <div style={{ flexShrink: 0 }}>
           <BodySilhouette
-            neckColor={getHeatColor(getIntensity('neck'), view === 'given')}
-            armsColor={getHeatColor(getIntensity('arms'), view === 'given')}
-            legsColor={getHeatColor(getIntensity('legs'), view === 'given')}
+            neckIntensity={getIntensity('neck')}
+            armsIntensity={getIntensity('arms')}
+            legsIntensity={getIntensity('legs')}
+            isGiven={view === 'given'}
             onRegionClick={setSelectedRegion}
           />
         </div>
