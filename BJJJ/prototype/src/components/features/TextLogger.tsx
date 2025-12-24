@@ -11,6 +11,7 @@
 
 import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { api } from '../../services/api';
+import { useUserProfile } from '../../context/UserProfileContext';
 import type { SubmissionInsert } from '../../types/database';
 
 // Types for extracted session data (matches VoiceLogger)
@@ -332,6 +333,7 @@ interface TextLoggerProps {
 type Phase = 'input' | 'processing' | 'gap-fill' | 'review' | 'success';
 
 export function TextLogger({ onComplete, onCancel, onSwitchToVoice }: TextLoggerProps) {
+  const { profile } = useUserProfile();
   const [phase, setPhase] = useState<Phase>('input');
   const [text, setText] = useState('');
   const [sessionData, setSessionData] = useState<SessionData | null>(null);
@@ -409,7 +411,7 @@ export function TextLogger({ onComplete, onCancel, onSwitchToVoice }: TextLogger
     if (!sessionData) return;
 
     try {
-      const userId = 'user-001'; // TODO: Get from auth context
+      const userId = profile.userId;
       const sessionDate = new Date().toISOString().split('T')[0];
 
       // Map training type to API format
@@ -455,7 +457,7 @@ export function TextLogger({ onComplete, onCancel, onSwitchToVoice }: TextLogger
       console.error('Failed to save session:', error);
       // TODO: Show error state
     }
-  }, [sessionData, transitionTo, onComplete]);
+  }, [sessionData, transitionTo, onComplete, profile.userId]);
 
   // Handle cancel
   const handleCancel = useCallback(() => {
