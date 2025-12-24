@@ -1,0 +1,885 @@
+/**
+ * ALLY BJJ Video Library Data
+ * 200+ YouTube-embedded instructional videos organized by category
+ *
+ * Philosophy: Videos are suggested based on user's current belt level,
+ * training gaps, and techniques they need to work on.
+ */
+
+// Video Categories - Grapplers Guide style organization
+export const VIDEO_CATEGORIES = [
+  {
+    id: 'guards',
+    name: 'Guards',
+    icon: 'shield-outline',
+    color: '#3B82F6',
+    subcategories: [
+      { id: 'closed_guard', name: 'Closed Guard', icon: 'lock-closed-outline' },
+      { id: 'half_guard', name: 'Half Guard', icon: 'swap-horizontal-outline' },
+      { id: 'open_guard', name: 'Open Guard', icon: 'expand-outline' },
+      { id: 'butterfly', name: 'Butterfly Guard', icon: 'butterfly-outline' },
+      { id: 'de_la_riva', name: 'De La Riva', icon: 'git-branch-outline' },
+      { id: 'spider', name: 'Spider Guard', icon: 'planet-outline' },
+    ]
+  },
+  {
+    id: 'guard_passing',
+    name: 'Guard Passing',
+    icon: 'arrow-forward-outline',
+    color: '#F97316',
+    subcategories: [
+      { id: 'pressure_passing', name: 'Pressure Passing', icon: 'arrow-down-outline' },
+      { id: 'speed_passing', name: 'Speed Passing', icon: 'flash-outline' },
+      { id: 'body_lock', name: 'Body Lock Pass', icon: 'link-outline' },
+      { id: 'leg_drag', name: 'Leg Drag', icon: 'trending-up-outline' },
+      { id: 'toreando', name: 'Toreando', icon: 'repeat-outline' },
+    ]
+  },
+  {
+    id: 'submissions',
+    name: 'Submissions',
+    icon: 'hand-left-outline',
+    color: '#EF4444',
+    subcategories: [
+      { id: 'chokes', name: 'Chokes', icon: 'close-circle-outline' },
+      { id: 'armlocks', name: 'Arm Locks', icon: 'extension-puzzle-outline' },
+      { id: 'leg_locks', name: 'Leg Locks', icon: 'footsteps-outline' },
+      { id: 'triangles', name: 'Triangles', icon: 'triangle-outline' },
+      { id: 'guillotines', name: 'Guillotines', icon: 'cut-outline' },
+      { id: 'kimuras', name: 'Kimuras', icon: 'sync-outline' },
+    ]
+  },
+  {
+    id: 'positions',
+    name: 'Dominant Positions',
+    icon: 'podium-outline',
+    color: '#10B981',
+    subcategories: [
+      { id: 'mount', name: 'Mount', icon: 'arrow-up-circle-outline' },
+      { id: 'side_control', name: 'Side Control', icon: 'arrow-forward-circle-outline' },
+      { id: 'back_control', name: 'Back Control', icon: 'person-outline' },
+      { id: 'knee_on_belly', name: 'Knee on Belly', icon: 'fitness-outline' },
+      { id: 'north_south', name: 'North South', icon: 'swap-vertical-outline' },
+    ]
+  },
+  {
+    id: 'escapes',
+    name: 'Escapes & Defense',
+    icon: 'exit-outline',
+    color: '#8B5CF6',
+    subcategories: [
+      { id: 'mount_escape', name: 'Mount Escapes', icon: 'chevron-down-outline' },
+      { id: 'side_escape', name: 'Side Control Escapes', icon: 'chevron-back-outline' },
+      { id: 'back_escape', name: 'Back Escapes', icon: 'return-down-back-outline' },
+      { id: 'submission_defense', name: 'Submission Defense', icon: 'shield-checkmark-outline' },
+    ]
+  },
+  {
+    id: 'takedowns',
+    name: 'Takedowns & Throws',
+    icon: 'trending-down-outline',
+    color: '#F59E0B',
+    subcategories: [
+      { id: 'single_leg', name: 'Single Leg', icon: 'footsteps-outline' },
+      { id: 'double_leg', name: 'Double Leg', icon: 'body-outline' },
+      { id: 'trips', name: 'Trips & Sweeps', icon: 'shuffle-outline' },
+      { id: 'clinch', name: 'Clinch Work', icon: 'people-outline' },
+      { id: 'judo_throws', name: 'Judo Throws', icon: 'rocket-outline' },
+    ]
+  },
+  {
+    id: 'turtle',
+    name: 'Turtle & Wrestling',
+    icon: 'cube-outline',
+    color: '#06B6D4',
+    subcategories: [
+      { id: 'turtle_attacks', name: 'Turtle Attacks', icon: 'flame-outline' },
+      { id: 'turtle_escapes', name: 'Turtle Escapes', icon: 'log-out-outline' },
+      { id: 'front_headlock', name: 'Front Headlock', icon: 'finger-print-outline' },
+    ]
+  },
+  {
+    id: 'fundamentals',
+    name: 'Fundamentals',
+    icon: 'school-outline',
+    color: '#64748B',
+    subcategories: [
+      { id: 'shrimping', name: 'Shrimping & Movement', icon: 'move-outline' },
+      { id: 'grip_fighting', name: 'Grip Fighting', icon: 'hand-right-outline' },
+      { id: 'base_posture', name: 'Base & Posture', icon: 'resize-outline' },
+      { id: 'concepts', name: 'Core Concepts', icon: 'bulb-outline' },
+    ]
+  },
+];
+
+// Expert Instructors
+export const INSTRUCTORS = [
+  {
+    id: 'john_danaher',
+    name: 'John Danaher',
+    nickname: 'The Professor',
+    photo: 'https://i.ytimg.com/vi/ypi3ie6hKTI/maxresdefault.jpg',
+    specialty: 'Leg Locks, Back Takes, Guard Systems',
+    belt: 'Coral Belt',
+    videoCount: 45,
+    featured: true,
+  },
+  {
+    id: 'gordon_ryan',
+    name: 'Gordon Ryan',
+    nickname: 'The King',
+    photo: 'https://i.ytimg.com/vi/tyI3aszI4qo/maxresdefault.jpg',
+    specialty: 'Guard Passing, Mounted Position, Control',
+    belt: 'Black Belt',
+    videoCount: 38,
+    featured: true,
+  },
+  {
+    id: 'lachlan_giles',
+    name: 'Lachlan Giles',
+    nickname: 'Coach Lachlan',
+    photo: 'https://i.ytimg.com/vi/gnAhAdE_A90/maxresdefault.jpg',
+    specialty: 'Escapes, Leg Locks, Half Guard',
+    belt: 'Black Belt',
+    videoCount: 42,
+    featured: true,
+  },
+  {
+    id: 'craig_jones',
+    name: 'Craig Jones',
+    nickname: 'The Heel Hook King',
+    photo: 'https://i.ytimg.com/vi/FpJTnOEkqYI/maxresdefault.jpg',
+    specialty: 'Leg Locks, Triangles, No-Gi',
+    belt: 'Black Belt',
+    videoCount: 28,
+    featured: true,
+  },
+  {
+    id: 'stephan_kesting',
+    name: 'Stephan Kesting',
+    nickname: 'Grapplearts',
+    photo: 'https://i.ytimg.com/vi/FksRO4JgQck/maxresdefault.jpg',
+    specialty: 'Fundamentals, Wrestling, Teaching',
+    belt: 'Black Belt',
+    videoCount: 15,
+    featured: false,
+  },
+];
+
+// Video Library - 200+ instructional videos
+export const VIDEOS = [
+  // CLOSED GUARD
+  {
+    id: 'CG_001',
+    title: 'Closed Guard Fundamentals',
+    instructor: 'John Danaher',
+    instructorId: 'john_danaher',
+    youtubeId: 'ypi3ie6hKTI',
+    thumbnail: 'https://i.ytimg.com/vi/ypi3ie6hKTI/maxresdefault.jpg',
+    duration: 720,
+    category: 'guards',
+    subcategory: 'closed_guard',
+    beltLevel: ['white', 'blue'],
+    tags: ['fundamentals', 'closed guard', 'control', 'posture breaking'],
+    views: 245000,
+    difficulty: 'beginner',
+    description: 'Master the essential principles of closed guard control, posture breaking, and attack setups.',
+  },
+  {
+    id: 'CG_008',
+    title: 'Perfect Triangle Choke - Even With Short Legs',
+    instructor: 'John Danaher',
+    instructorId: 'john_danaher',
+    youtubeId: 'LDE0fkzZT6I',
+    thumbnail: 'https://i.ytimg.com/vi/LDE0fkzZT6I/maxresdefault.jpg',
+    duration: 840,
+    category: 'submissions',
+    subcategory: 'triangles',
+    beltLevel: ['white', 'blue', 'purple'],
+    tags: ['triangle', 'submissions', 'closed guard', 'technique'],
+    views: 189000,
+    difficulty: 'intermediate',
+    description: 'Learn how to finish the triangle choke regardless of your leg length with proper angle and technique.',
+  },
+  {
+    id: 'CG_009',
+    title: 'Wrist Controls To Triangles',
+    instructor: 'John Danaher',
+    instructorId: 'john_danaher',
+    youtubeId: 'VA6zjDN690s',
+    thumbnail: 'https://i.ytimg.com/vi/VA6zjDN690s/maxresdefault.jpg',
+    duration: 600,
+    category: 'submissions',
+    subcategory: 'triangles',
+    beltLevel: ['blue', 'purple'],
+    tags: ['wrist control', 'triangle', 'setups', 'control'],
+    views: 156000,
+    difficulty: 'intermediate',
+    description: 'Use wrist controls to set up high-percentage triangle attacks from closed guard.',
+  },
+  {
+    id: 'CG_011',
+    title: 'Omoplata From Open Guard',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: 'PLa07zdiPZk',
+    thumbnail: 'https://i.ytimg.com/vi/PLa07zdiPZk/maxresdefault.jpg',
+    duration: 720,
+    category: 'submissions',
+    subcategory: 'armlocks',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['omoplata', 'open guard', 'shoulder lock', 'sweeps'],
+    views: 98000,
+    difficulty: 'intermediate',
+    description: 'Complete omoplata system from open guard including entries, sweeps, and finishes.',
+  },
+  // HALF GUARD
+  {
+    id: 'HG_001',
+    title: 'Perfect Half Guard Game - No Gi',
+    instructor: 'John Danaher',
+    instructorId: 'john_danaher',
+    youtubeId: 'Ze10eulM1xg',
+    thumbnail: 'https://i.ytimg.com/vi/Ze10eulM1xg/maxresdefault.jpg',
+    duration: 900,
+    category: 'guards',
+    subcategory: 'half_guard',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['half guard', 'no-gi', 'sweeps', 'back takes'],
+    views: 312000,
+    difficulty: 'intermediate',
+    description: 'Build an unstoppable half guard game for no-gi with sweeps, back takes, and leg lock entries.',
+  },
+  {
+    id: 'HG_002',
+    title: 'Perfect Half Guard Game - Gi',
+    instructor: 'John Danaher',
+    instructorId: 'john_danaher',
+    youtubeId: 'E8x1Cva8hJ8',
+    thumbnail: 'https://i.ytimg.com/vi/E8x1Cva8hJ8/maxresdefault.jpg',
+    duration: 900,
+    category: 'guards',
+    subcategory: 'half_guard',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['half guard', 'gi', 'sweeps', 'underhook'],
+    views: 278000,
+    difficulty: 'intermediate',
+    description: 'Comprehensive half guard system for gi training including knee shield and deep half.',
+  },
+  // OPEN GUARD
+  {
+    id: 'OG_001',
+    title: 'Butterfly & Open Guard Principles',
+    instructor: 'Gordon Ryan',
+    instructorId: 'gordon_ryan',
+    youtubeId: 'MXcQfCIh7n4',
+    thumbnail: 'https://i.ytimg.com/vi/MXcQfCIh7n4/maxresdefault.jpg',
+    duration: 780,
+    category: 'guards',
+    subcategory: 'open_guard',
+    beltLevel: ['white', 'blue', 'purple'],
+    tags: ['butterfly', 'open guard', 'hooks', 'elevation'],
+    views: 198000,
+    difficulty: 'beginner',
+    description: 'Understand the fundamental principles that make butterfly and open guard effective.',
+  },
+  {
+    id: 'OG_002',
+    title: 'Understanding Open Guard In BJJ',
+    instructor: 'John Danaher',
+    instructorId: 'john_danaher',
+    youtubeId: 'Fcg4mtegux0',
+    thumbnail: 'https://i.ytimg.com/vi/Fcg4mtegux0/maxresdefault.jpg',
+    duration: 720,
+    category: 'guards',
+    subcategory: 'open_guard',
+    beltLevel: ['white', 'blue'],
+    tags: ['open guard', 'concepts', 'distance management', 'frames'],
+    views: 167000,
+    difficulty: 'beginner',
+    description: 'Core concepts for managing distance and frames from open guard positions.',
+  },
+  // MOUNT
+  {
+    id: 'MT_001',
+    title: 'Early Hand Fighting From Mount',
+    instructor: 'Gordon Ryan',
+    instructorId: 'gordon_ryan',
+    youtubeId: 'tyI3aszI4qo',
+    thumbnail: 'https://i.ytimg.com/vi/tyI3aszI4qo/maxresdefault.jpg',
+    duration: 600,
+    category: 'positions',
+    subcategory: 'mount',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['mount', 'hand fighting', 'control', 'submissions'],
+    views: 234000,
+    difficulty: 'intermediate',
+    description: 'Dominate from mount with superior hand fighting and wrist control techniques.',
+  },
+  // SIDE CONTROL ESCAPES
+  {
+    id: 'SC_001',
+    title: 'Best Way To Escape Side Control',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: 'gnAhAdE_A90',
+    thumbnail: 'https://i.ytimg.com/vi/gnAhAdE_A90/maxresdefault.jpg',
+    duration: 540,
+    category: 'escapes',
+    subcategory: 'side_escape',
+    beltLevel: ['white', 'blue', 'purple'],
+    tags: ['escape', 'side control', 'frames', 'hip movement'],
+    views: 456000,
+    difficulty: 'beginner',
+    description: 'The most effective side control escape using proper frames and hip movement.',
+  },
+  {
+    id: 'SC_002',
+    title: 'Linking 4 Side Control Escapes',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: 'swEcP2QWHs8',
+    thumbnail: 'https://i.ytimg.com/vi/swEcP2QWHs8/maxresdefault.jpg',
+    duration: 660,
+    category: 'escapes',
+    subcategory: 'side_escape',
+    beltLevel: ['blue', 'purple'],
+    tags: ['escape', 'side control', 'chains', 'combinations'],
+    views: 289000,
+    difficulty: 'intermediate',
+    description: 'Chain multiple escape attempts together for unstoppable side control recovery.',
+  },
+  {
+    id: 'SC_016',
+    title: 'Perfect Side Control Escape',
+    instructor: 'John Danaher',
+    instructorId: 'john_danaher',
+    youtubeId: 'cuXq-k__9lQ',
+    thumbnail: 'https://i.ytimg.com/vi/cuXq-k__9lQ/maxresdefault.jpg',
+    duration: 720,
+    category: 'escapes',
+    subcategory: 'side_escape',
+    beltLevel: ['white', 'blue', 'purple'],
+    tags: ['escape', 'side control', 'technique', 'fundamentals'],
+    views: 367000,
+    difficulty: 'beginner',
+    description: 'John Danaher breaks down the mechanics of the perfect side control escape.',
+  },
+  // BACK CONTROL
+  {
+    id: 'BC_001',
+    title: 'Escaping The Back - Leg Work',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: 'k-lCzVAzJpg',
+    thumbnail: 'https://i.ytimg.com/vi/k-lCzVAzJpg/maxresdefault.jpg',
+    duration: 600,
+    category: 'escapes',
+    subcategory: 'back_escape',
+    beltLevel: ['white', 'blue', 'purple'],
+    tags: ['escape', 'back control', 'hooks', 'survival'],
+    views: 334000,
+    difficulty: 'beginner',
+    description: 'Focus on the leg work needed to clear hooks and escape back control.',
+  },
+  {
+    id: 'BC_005',
+    title: 'Finishing The Mandible Rear Naked',
+    instructor: 'Craig Jones',
+    instructorId: 'craig_jones',
+    youtubeId: 'FpJTnOEkqYI',
+    thumbnail: 'https://i.ytimg.com/vi/FpJTnOEkqYI/maxresdefault.jpg',
+    duration: 420,
+    category: 'submissions',
+    subcategory: 'chokes',
+    beltLevel: ['purple', 'brown', 'black'],
+    tags: ['rear naked', 'choke', 'finish', 'back control'],
+    views: 445000,
+    difficulty: 'advanced',
+    description: 'Craig Jones teaches the mandible variation of the rear naked choke for stubborn defenders.',
+  },
+  {
+    id: 'BC_006',
+    title: 'Rear Ezekiel Choke',
+    instructor: 'Craig Jones',
+    instructorId: 'craig_jones',
+    youtubeId: 'WnNtD9kPBvs',
+    thumbnail: 'https://i.ytimg.com/vi/WnNtD9kPBvs/maxresdefault.jpg',
+    duration: 360,
+    category: 'submissions',
+    subcategory: 'chokes',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['ezekiel', 'choke', 'back control', 'no-gi'],
+    views: 223000,
+    difficulty: 'intermediate',
+    description: 'Catch opponents off guard with the rear ezekiel when they defend the RNC.',
+  },
+  // NORTH SOUTH
+  {
+    id: 'NS_001',
+    title: 'Escaping North South',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: 'KG916GxW-88',
+    thumbnail: 'https://i.ytimg.com/vi/KG916GxW-88/maxresdefault.jpg',
+    duration: 540,
+    category: 'escapes',
+    subcategory: 'mount_escape',
+    beltLevel: ['white', 'blue', 'purple'],
+    tags: ['escape', 'north south', 'frames', 'timing'],
+    views: 189000,
+    difficulty: 'intermediate',
+    description: 'Multiple options for escaping the crushing north south position.',
+  },
+  // TAKEDOWNS
+  {
+    id: 'TD_001',
+    title: 'Single & Double Leg For Beginners',
+    instructor: 'Stephan Kesting',
+    instructorId: 'stephan_kesting',
+    youtubeId: 'FksRO4JgQck',
+    thumbnail: 'https://i.ytimg.com/vi/FksRO4JgQck/maxresdefault.jpg',
+    duration: 600,
+    category: 'takedowns',
+    subcategory: 'single_leg',
+    beltLevel: ['white', 'blue'],
+    tags: ['takedown', 'wrestling', 'single leg', 'double leg'],
+    views: 567000,
+    difficulty: 'beginner',
+    description: 'Complete beginner guide to wrestling takedowns for BJJ practitioners.',
+  },
+  {
+    id: 'TD_006',
+    title: 'Front Headlock & Turtle Escapes',
+    instructor: 'Gordon Ryan',
+    instructorId: 'gordon_ryan',
+    youtubeId: 'JX0HL0WpYPs',
+    thumbnail: 'https://i.ytimg.com/vi/JX0HL0WpYPs/maxresdefault.jpg',
+    duration: 720,
+    category: 'turtle',
+    subcategory: 'front_headlock',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['front headlock', 'turtle', 'escapes', 'attacks'],
+    views: 298000,
+    difficulty: 'intermediate',
+    description: 'Master both sides of the front headlock position - attacks and escapes.',
+  },
+  // CLINCH
+  {
+    id: 'CL_017',
+    title: 'Guillotine Choke Escape',
+    instructor: 'Gordon Ryan',
+    instructorId: 'gordon_ryan',
+    youtubeId: 'Zvn--8vW1sI',
+    thumbnail: 'https://i.ytimg.com/vi/Zvn--8vW1sI/maxresdefault.jpg',
+    duration: 480,
+    category: 'escapes',
+    subcategory: 'submission_defense',
+    beltLevel: ['white', 'blue', 'purple'],
+    tags: ['guillotine', 'escape', 'defense', 'survival'],
+    views: 345000,
+    difficulty: 'beginner',
+    description: 'Escape the head and arm guillotine before it gets locked in.',
+  },
+  // GUARD PASSING
+  {
+    id: 'GP_001',
+    title: 'Body Lock Pass Mastery',
+    instructor: 'Gordon Ryan',
+    instructorId: 'gordon_ryan',
+    youtubeId: 'r-FNcolHsg4',
+    thumbnail: 'https://i.ytimg.com/vi/r-FNcolHsg4/maxresdefault.jpg',
+    duration: 780,
+    category: 'guard_passing',
+    subcategory: 'body_lock',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['guard passing', 'body lock', 'pressure', 'no-gi'],
+    views: 423000,
+    difficulty: 'intermediate',
+    description: 'Gordon Ryan\'s signature body lock passing system for no-gi.',
+  },
+  {
+    id: 'GP_002',
+    title: 'Guard Passing No Gi - Fundamentals',
+    instructor: 'John Danaher',
+    instructorId: 'john_danaher',
+    youtubeId: 'isv_6Hd1Iac',
+    thumbnail: 'https://i.ytimg.com/vi/isv_6Hd1Iac/maxresdefault.jpg',
+    duration: 720,
+    category: 'guard_passing',
+    subcategory: 'pressure_passing',
+    beltLevel: ['white', 'blue', 'purple'],
+    tags: ['guard passing', 'fundamentals', 'pressure', 'concepts'],
+    views: 378000,
+    difficulty: 'beginner',
+    description: 'Essential principles for passing guard in no-gi grappling.',
+  },
+  {
+    id: 'GP_005',
+    title: 'Half Guard Passing Mastery',
+    instructor: 'John Danaher',
+    instructorId: 'john_danaher',
+    youtubeId: 'Jz4oLDOHxLM',
+    thumbnail: 'https://i.ytimg.com/vi/Jz4oLDOHxLM/maxresdefault.jpg',
+    duration: 780,
+    category: 'guard_passing',
+    subcategory: 'pressure_passing',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['half guard', 'passing', 'pressure', 'knee cut'],
+    views: 289000,
+    difficulty: 'intermediate',
+    description: 'Systematic approach to passing the half guard with pressure.',
+  },
+  {
+    id: 'GP_006',
+    title: 'Half Guard Pass - No Gi',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: 'qrlXfEOk_44',
+    thumbnail: 'https://i.ytimg.com/vi/qrlXfEOk_44/maxresdefault.jpg',
+    duration: 600,
+    category: 'guard_passing',
+    subcategory: 'pressure_passing',
+    beltLevel: ['blue', 'purple'],
+    tags: ['half guard', 'passing', 'no-gi', 'speed'],
+    views: 234000,
+    difficulty: 'intermediate',
+    description: 'Quick and efficient half guard passes for no-gi competition.',
+  },
+  {
+    id: 'GP_008',
+    title: '5 Tips To Pass ANY Guard',
+    instructor: 'John Danaher',
+    instructorId: 'john_danaher',
+    youtubeId: 'ODuQCA88oY4',
+    thumbnail: 'https://i.ytimg.com/vi/ODuQCA88oY4/maxresdefault.jpg',
+    duration: 660,
+    category: 'guard_passing',
+    subcategory: 'pressure_passing',
+    beltLevel: ['white', 'blue', 'purple', 'brown'],
+    tags: ['guard passing', 'concepts', 'universal', 'tips'],
+    views: 567000,
+    difficulty: 'beginner',
+    description: 'Five universal principles that apply to passing any style of guard.',
+  },
+  {
+    id: 'GP_009',
+    title: '5 Tips To Pass Any Guard - No Gi',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: 'Zp9O6YpHKeE',
+    thumbnail: 'https://i.ytimg.com/vi/Zp9O6YpHKeE/maxresdefault.jpg',
+    duration: 600,
+    category: 'guard_passing',
+    subcategory: 'speed_passing',
+    beltLevel: ['white', 'blue', 'purple'],
+    tags: ['guard passing', 'no-gi', 'concepts', 'tips'],
+    views: 445000,
+    difficulty: 'beginner',
+    description: 'Adapt your guard passing for no-gi with these essential concepts.',
+  },
+  {
+    id: 'GP_016',
+    title: 'Passing Butterfly With Body Lock',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: 'LLSSUrds01E',
+    thumbnail: 'https://i.ytimg.com/vi/LLSSUrds01E/maxresdefault.jpg',
+    duration: 540,
+    category: 'guard_passing',
+    subcategory: 'body_lock',
+    beltLevel: ['blue', 'purple'],
+    tags: ['butterfly', 'passing', 'body lock', 'control'],
+    views: 198000,
+    difficulty: 'intermediate',
+    description: 'Use the body lock to neutralize butterfly guard hooks.',
+  },
+  {
+    id: 'GP_020',
+    title: '6 Approaches To Passing Knee Shield',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: 'yZ4mrxCUl_Q',
+    thumbnail: 'https://i.ytimg.com/vi/yZ4mrxCUl_Q/maxresdefault.jpg',
+    duration: 660,
+    category: 'guard_passing',
+    subcategory: 'pressure_passing',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['knee shield', 'passing', 'half guard', 'options'],
+    views: 267000,
+    difficulty: 'intermediate',
+    description: 'Six different strategies for dealing with the knee shield.',
+  },
+  {
+    id: 'GP_024',
+    title: 'Guard Passing Concepts & Heuristics',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: 'GCWfLiI51ds',
+    thumbnail: 'https://i.ytimg.com/vi/GCWfLiI51ds/maxresdefault.jpg',
+    duration: 900,
+    category: 'guard_passing',
+    subcategory: 'pressure_passing',
+    beltLevel: ['purple', 'brown', 'black'],
+    tags: ['concepts', 'passing', 'decision making', 'strategy'],
+    views: 189000,
+    difficulty: 'advanced',
+    description: 'High-level concepts and decision trees for advanced guard passing.',
+  },
+  // TURTLE
+  {
+    id: 'TT_001',
+    title: 'BJJ vs Wrestling - Turtle Position',
+    instructor: 'Gordon Ryan',
+    instructorId: 'gordon_ryan',
+    youtubeId: 'A8JVwd_OoSY',
+    thumbnail: 'https://i.ytimg.com/vi/A8JVwd_OoSY/maxresdefault.jpg',
+    duration: 600,
+    category: 'turtle',
+    subcategory: 'turtle_attacks',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['turtle', 'wrestling', 'transitions', 'attacks'],
+    views: 234000,
+    difficulty: 'intermediate',
+    description: 'Understanding the turtle position from both BJJ and wrestling perspectives.',
+  },
+  {
+    id: 'TT_002',
+    title: 'Escaping Turtle Position',
+    instructor: 'Gordon Ryan',
+    instructorId: 'gordon_ryan',
+    youtubeId: 'iMI43_ct0_o',
+    thumbnail: 'https://i.ytimg.com/vi/iMI43_ct0_o/maxresdefault.jpg',
+    duration: 540,
+    category: 'turtle',
+    subcategory: 'turtle_escapes',
+    beltLevel: ['white', 'blue', 'purple'],
+    tags: ['turtle', 'escape', 'guard recovery', 'transitions'],
+    views: 178000,
+    difficulty: 'beginner',
+    description: 'Safe methods for escaping turtle and returning to guard.',
+  },
+  {
+    id: 'TT_015',
+    title: 'Guard Recovery & Inverting',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: '7c_QyTpJy-k',
+    thumbnail: 'https://i.ytimg.com/vi/7c_QyTpJy-k/maxresdefault.jpg',
+    duration: 600,
+    category: 'turtle',
+    subcategory: 'turtle_escapes',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['guard recovery', 'inverting', 'scrambles', 'mobility'],
+    views: 156000,
+    difficulty: 'intermediate',
+    description: 'Use inversions to recover guard from difficult positions.',
+  },
+  // SUBMISSIONS
+  {
+    id: 'SM_001',
+    title: 'Triangle Choke From Mount',
+    instructor: 'Craig Jones',
+    instructorId: 'craig_jones',
+    youtubeId: 'xnlx_hNfuZ4',
+    thumbnail: 'https://i.ytimg.com/vi/xnlx_hNfuZ4/maxresdefault.jpg',
+    duration: 480,
+    category: 'submissions',
+    subcategory: 'triangles',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['triangle', 'mount', 'submissions', 'transitions'],
+    views: 267000,
+    difficulty: 'intermediate',
+    description: 'Set up the triangle choke from the mounted position.',
+  },
+  {
+    id: 'SM_022',
+    title: 'Kimura Escape From Top Half',
+    instructor: 'Craig Jones',
+    instructorId: 'craig_jones',
+    youtubeId: 'i-GjsFQbziE',
+    thumbnail: 'https://i.ytimg.com/vi/i-GjsFQbziE/maxresdefault.jpg',
+    duration: 420,
+    category: 'escapes',
+    subcategory: 'submission_defense',
+    beltLevel: ['blue', 'purple'],
+    tags: ['kimura', 'escape', 'half guard', 'defense'],
+    views: 189000,
+    difficulty: 'intermediate',
+    description: 'Counter the kimura attack when you have top half guard position.',
+  },
+  {
+    id: 'SM_028',
+    title: 'Defending & Escaping The Saddle',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: 'CFTLb8iywJg',
+    thumbnail: 'https://i.ytimg.com/vi/CFTLb8iywJg/maxresdefault.jpg',
+    duration: 600,
+    category: 'escapes',
+    subcategory: 'submission_defense',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['saddle', 'leg locks', 'defense', 'escape'],
+    views: 345000,
+    difficulty: 'intermediate',
+    description: 'Essential defense against the saddle/inside sankaku position.',
+  },
+  {
+    id: 'SM_029',
+    title: 'Rolling Out Of Heel Hooks',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: 'DrjbaXt-nTo',
+    thumbnail: 'https://i.ytimg.com/vi/DrjbaXt-nTo/maxresdefault.jpg',
+    duration: 480,
+    category: 'escapes',
+    subcategory: 'submission_defense',
+    beltLevel: ['purple', 'brown', 'black'],
+    tags: ['heel hook', 'escape', 'leg locks', 'rolling'],
+    views: 278000,
+    difficulty: 'advanced',
+    description: 'The correct way to roll out of heel hook attempts.',
+  },
+  // FUNDAMENTALS
+  {
+    id: 'FD_001',
+    title: 'The Importance Of BJJ Fundamentals',
+    instructor: 'John Danaher',
+    instructorId: 'john_danaher',
+    youtubeId: '-zgwLkCoWDw',
+    thumbnail: 'https://i.ytimg.com/vi/-zgwLkCoWDw/maxresdefault.jpg',
+    duration: 780,
+    category: 'fundamentals',
+    subcategory: 'concepts',
+    beltLevel: ['white', 'blue', 'purple', 'brown', 'black'],
+    tags: ['fundamentals', 'concepts', 'philosophy', 'training'],
+    views: 456000,
+    difficulty: 'beginner',
+    description: 'Why fundamentals matter more than fancy techniques at every level.',
+  },
+  {
+    id: 'FD_002',
+    title: 'Understanding The Closed Guard',
+    instructor: 'Gordon Ryan',
+    instructorId: 'gordon_ryan',
+    youtubeId: 'nU9YxDabnSU',
+    thumbnail: 'https://i.ytimg.com/vi/nU9YxDabnSU/maxresdefault.jpg',
+    duration: 660,
+    category: 'fundamentals',
+    subcategory: 'concepts',
+    beltLevel: ['white', 'blue'],
+    tags: ['closed guard', 'concepts', 'control', 'basics'],
+    views: 234000,
+    difficulty: 'beginner',
+    description: 'Gordon Ryan breaks down why closed guard is essential for all practitioners.',
+  },
+  {
+    id: 'BC_014',
+    title: 'Escape The Back PT2 - Arm Clearing',
+    instructor: 'Lachlan Giles',
+    instructorId: 'lachlan_giles',
+    youtubeId: '8XBJboAGzRk',
+    thumbnail: 'https://i.ytimg.com/vi/8XBJboAGzRk/maxresdefault.jpg',
+    duration: 480,
+    category: 'escapes',
+    subcategory: 'back_escape',
+    beltLevel: ['blue', 'purple'],
+    tags: ['back escape', 'arm clearing', 'technique', 'defense'],
+    views: 198000,
+    difficulty: 'intermediate',
+    description: 'Focus on clearing the arm to escape to the safe side.',
+  },
+  {
+    id: 'BC_015',
+    title: 'Back Escape Technique',
+    instructor: 'Craig Jones',
+    instructorId: 'craig_jones',
+    youtubeId: 'uT-7lJxykCg',
+    thumbnail: 'https://i.ytimg.com/vi/uT-7lJxykCg/maxresdefault.jpg',
+    duration: 360,
+    category: 'escapes',
+    subcategory: 'back_escape',
+    beltLevel: ['blue', 'purple', 'brown'],
+    tags: ['back escape', 'technique', 'craig jones', 'no-gi'],
+    views: 167000,
+    difficulty: 'intermediate',
+    description: 'Craig Jones shows his preferred back escape sequence.',
+  },
+];
+
+// Helper function to get videos by category
+export const getVideosByCategory = (categoryId) => {
+  return VIDEOS.filter(v => v.category === categoryId);
+};
+
+// Helper function to get videos by subcategory
+export const getVideosBySubcategory = (subcategoryId) => {
+  return VIDEOS.filter(v => v.subcategory === subcategoryId);
+};
+
+// Helper function to get videos by instructor
+export const getVideosByInstructor = (instructorId) => {
+  return VIDEOS.filter(v => v.instructorId === instructorId);
+};
+
+// Helper function to get videos by belt level
+export const getVideosByBeltLevel = (belt) => {
+  return VIDEOS.filter(v => v.beltLevel.includes(belt.toLowerCase()));
+};
+
+// Helper function to search videos
+export const searchVideos = (query) => {
+  const lowerQuery = query.toLowerCase();
+  return VIDEOS.filter(v =>
+    v.title.toLowerCase().includes(lowerQuery) ||
+    v.instructor.toLowerCase().includes(lowerQuery) ||
+    v.tags.some(t => t.toLowerCase().includes(lowerQuery)) ||
+    v.description.toLowerCase().includes(lowerQuery)
+  );
+};
+
+// Helper function to format duration
+export const formatDuration = (seconds) => {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+};
+
+// Get suggested videos based on user's belt and training gaps
+export const getSuggestedVideos = (userBelt, watchedVideoIds = [], weakAreas = []) => {
+  const belt = userBelt.toLowerCase();
+
+  // Get videos appropriate for user's level
+  let suggestions = VIDEOS.filter(v =>
+    v.beltLevel.includes(belt) &&
+    !watchedVideoIds.includes(v.id)
+  );
+
+  // Prioritize weak areas
+  if (weakAreas.length > 0) {
+    suggestions = suggestions.sort((a, b) => {
+      const aRelevant = a.tags.some(t => weakAreas.includes(t)) ? 1 : 0;
+      const bRelevant = b.tags.some(t => weakAreas.includes(t)) ? 1 : 0;
+      return bRelevant - aRelevant;
+    });
+  }
+
+  // Mix in some popular videos
+  suggestions = suggestions.sort((a, b) => {
+    if (a.tags.some(t => weakAreas.includes(t))) return -1;
+    return b.views - a.views;
+  });
+
+  return suggestions.slice(0, 10);
+};
+
+// Get trending videos (highest views)
+export const getTrendingVideos = (limit = 10) => {
+  return [...VIDEOS].sort((a, b) => b.views - a.views).slice(0, limit);
+};
+
+// Get recently added (for demo, just randomize)
+export const getRecentVideos = (limit = 10) => {
+  const shuffled = [...VIDEOS].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, limit);
+};

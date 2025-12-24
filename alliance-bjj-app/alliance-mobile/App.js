@@ -16,6 +16,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import ClassDetailScreen from './screens/ClassDetailScreen';
 import PaymentsScreen from './screens/PaymentsScreen';
 import LoginScreen from './screens/LoginScreen';
+import VideoLibraryScreen from './screens/VideoLibraryScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -54,13 +55,13 @@ function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="CheckIn"
-        component={CheckInScreen}
+        name="Videos"
+        component={VideoLibraryScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="qr-code-outline" size={size} color={color} />
+            <Ionicons name="play-circle-outline" size={size} color={color} />
           ),
-          tabBarLabel: 'Check-in',
+          tabBarLabel: 'Videos',
         }}
       />
       <Tab.Screen
