@@ -34,7 +34,7 @@ function getHeatColor(intensity: number, isGiven: boolean): string {
   }
 }
 
-// Human body silhouette SVG with three selectable regions
+// Human body silhouette with PNG image and overlay regions
 function BodySilhouette({
   neckColor,
   armsColor,
@@ -51,109 +51,113 @@ function BodySilhouette({
   };
 
   return (
-    <svg
-      width="200"
-      height="300"
-      viewBox="0 0 200 300"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+    <div
+      style={{
+        position: 'relative',
+        width: 160,
+        height: 300,
+      }}
     >
-      {/* Head outline */}
-      <ellipse
-        cx="100"
-        cy="35"
-        rx="25"
-        ry="30"
-        fill="var(--color-gray-800)"
-        stroke="var(--color-gray-600)"
+      {/* PNG silhouette with glow effect */}
+      <img
+        src="/human-body-silo.png"
+        alt="Body silhouette"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'contain',
+          filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))',
+        }}
       />
 
-      {/* Neck region - clickable */}
-      <g
-        onClick={() => handleClick('neck')}
-        style={{ cursor: onRegionClick ? 'pointer' : 'default' }}
+      {/* Clickable overlay regions */}
+      <svg
+        width="160"
+        height="300"
+        viewBox="0 0 160 300"
+        fill="none"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          pointerEvents: 'none',
+        }}
       >
-        <rect
-          x="88"
-          y="60"
-          width="24"
-          height="25"
-          fill={neckColor}
-          stroke="var(--color-gray-600)"
-          rx="4"
-        />
-        {/* Neck label indicator */}
-        <circle cx="100" cy="72" r="3" fill="var(--color-gray-500)" />
-      </g>
+        {/* Neck region - clickable */}
+        <g
+          onClick={() => handleClick('neck')}
+          style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
+        >
+          <ellipse
+            cx="80"
+            cy="52"
+            rx="14"
+            ry="10"
+            fill={neckColor}
+            opacity="0.7"
+          />
+        </g>
 
-      {/* Torso - not a submission target */}
-      <path
-        d="M70 85 L130 85 L135 180 L65 180 Z"
-        fill="var(--color-gray-800)"
-        stroke="var(--color-gray-600)"
-      />
+        {/* Left arm region - clickable */}
+        <g
+          onClick={() => handleClick('arms')}
+          style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
+        >
+          <path
+            d="M52 68 L38 78 L22 140 L32 200 L42 200 L48 145 L58 90 Z"
+            fill={armsColor}
+            opacity="0.6"
+          />
+        </g>
 
-      {/* Left arm region - clickable */}
-      <g
-        onClick={() => handleClick('arms')}
-        style={{ cursor: onRegionClick ? 'pointer' : 'default' }}
-      >
-        <path
-          d="M70 85 L40 95 L25 160 L35 165 L55 110 L65 115 L65 180"
-          fill={armsColor}
-          stroke="var(--color-gray-600)"
-        />
-      </g>
+        {/* Right arm region - clickable */}
+        <g
+          onClick={() => handleClick('arms')}
+          style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
+        >
+          <path
+            d="M108 68 L122 78 L138 140 L128 200 L118 200 L112 145 L102 90 Z"
+            fill={armsColor}
+            opacity="0.6"
+          />
+        </g>
 
-      {/* Right arm region - clickable */}
-      <g
-        onClick={() => handleClick('arms')}
-        style={{ cursor: onRegionClick ? 'pointer' : 'default' }}
-      >
-        <path
-          d="M130 85 L160 95 L175 160 L165 165 L145 110 L135 115 L135 180"
-          fill={armsColor}
-          stroke="var(--color-gray-600)"
-        />
-      </g>
+        {/* Left leg region - clickable */}
+        <g
+          onClick={() => handleClick('legs')}
+          style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
+        >
+          <path
+            d="M58 165 L52 290 L72 290 L78 165 Z"
+            fill={legsColor}
+            opacity="0.6"
+          />
+        </g>
 
-      {/* Left leg region - clickable */}
-      <g
-        onClick={() => handleClick('legs')}
-        style={{ cursor: onRegionClick ? 'pointer' : 'default' }}
-      >
-        <path
-          d="M65 180 L70 280 L90 280 L95 180"
-          fill={legsColor}
-          stroke="var(--color-gray-600)"
-        />
-      </g>
+        {/* Right leg region - clickable */}
+        <g
+          onClick={() => handleClick('legs')}
+          style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
+        >
+          <path
+            d="M82 165 L88 290 L108 290 L102 165 Z"
+            fill={legsColor}
+            opacity="0.6"
+          />
+        </g>
 
-      {/* Right leg region - clickable */}
-      <g
-        onClick={() => handleClick('legs')}
-        style={{ cursor: onRegionClick ? 'pointer' : 'default' }}
-      >
-        <path
-          d="M105 180 L110 280 L130 280 L135 180"
-          fill={legsColor}
-          stroke="var(--color-gray-600)"
-        />
-      </g>
-
-      {/* Region labels */}
-      <text x="100" y="72" textAnchor="middle" fill="var(--color-white)" fontSize="10" fontWeight="600">
-        NECK
-      </text>
-      <text x="30" y="130" textAnchor="middle" fill="var(--color-white)" fontSize="10" fontWeight="600">
-        ARMS
-      </text>
-      <text x="100" y="240" textAnchor="middle" fill="var(--color-white)" fontSize="10" fontWeight="600">
-        LEGS
-      </text>
-    </svg>
+        {/* Region labels */}
+        <text x="80" y="55" textAnchor="middle" fill="var(--color-white)" fontSize="9" fontWeight="600" style={{ pointerEvents: 'none' }}>
+          NECK
+        </text>
+        <text x="24" y="170" textAnchor="middle" fill="var(--color-white)" fontSize="9" fontWeight="600" style={{ pointerEvents: 'none' }}>
+          ARMS
+        </text>
+        <text x="80" y="230" textAnchor="middle" fill="var(--color-white)" fontSize="9" fontWeight="600" style={{ pointerEvents: 'none' }}>
+          LEGS
+        </text>
+      </svg>
+    </div>
   );
 }
 
