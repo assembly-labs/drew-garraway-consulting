@@ -10,8 +10,15 @@
  */
 
 import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
+import { api } from '../../services/api';
+import type { SubmissionInsert } from '../../types/database';
 
 // Types for extracted session data (matches VoiceLogger)
+interface SparringResult {
+  type: 'submission_given' | 'submission_received';
+  technique: string;
+}
+
 interface SessionData {
   date: string;
   time: string;
@@ -20,6 +27,7 @@ interface SessionData {
   durationMinutes: number | null;
   sparringRounds: number | null;
   techniques: string[];
+  sparringResults: SparringResult[];
   workedWell: string[];
   struggles: string[];
   rawText: string;
@@ -27,7 +35,7 @@ interface SessionData {
 
 interface ParsedChip {
   id: string;
-  type: 'trainingType' | 'duration' | 'rounds' | 'technique' | 'positive' | 'negative';
+  type: 'trainingType' | 'duration' | 'rounds' | 'technique' | 'positive' | 'negative' | 'submission_given' | 'submission_received';
   label: string;
   value: string | number;
   confirmed: boolean;
@@ -75,6 +83,30 @@ const NEGATIVE_KEYWORDS = [
   'gassed', 'need work', 'couldn\'t finish', 'kept losing', 'getting stuck',
 ];
 
+// Submission techniques for matching
+const SUBMISSION_TECHNIQUES = [
+  'armbar', 'arm bar', 'triangle', 'kimura', 'americana', 'omoplata',
+  'guillotine', 'rear naked', 'rnc', 'darce', 'd\'arce', 'anaconda',
+  'arm triangle', 'ezekiel', 'loop choke', 'baseball bat', 'bow and arrow',
+  'cross collar', 'collar choke', 'heel hook', 'knee bar', 'kneebar', 'toe hold',
+  'ankle lock', 'straight ankle', 'calf slicer', 'wrist lock',
+];
+
+// Patterns for detecting submissions given
+const SUBMISSION_GIVEN_PATTERNS = [
+  /(?:got|caught|tapped|submitted|finished)\s+(?:him|her|them|someone|a?\s*\w+\s*belt)?\s*(?:with|using|via)?\s*(?:an?\s+)?(\w+(?:\s+\w+)?)/i,
+  /hit\s+(?:an?\s+)?(\w+(?:\s+\w+)?)/i,
+  /landed\s+(?:an?\s+)?(\w+(?:\s+\w+)?)/i,
+  /(\w+(?:\s+\w+)?)\s+(?:tap|submission|finish)/i,
+];
+
+// Patterns for detecting submissions received
+const SUBMISSION_RECEIVED_PATTERNS = [
+  /(?:got|was)\s+(?:caught|tapped|submitted|finished)\s+(?:by|with|in|to)?\s*(?:an?\s+)?(\w+(?:\s+\w+)?)/i,
+  /(?:tapped|submitted)\s+to\s+(?:an?\s+)?(\w+(?:\s+\w+)?)/i,
+  /(?:caught|got)\s+(?:me|in)\s+(?:an?\s+)?(\w+(?:\s+\w+)?)/i,
+];
+
 // Training type patterns
 const TRAINING_TYPE_PATTERNS: { pattern: RegExp; type: SessionData['trainingType'] }[] = [
   { pattern: /\bno[- ]?gi\b/i, type: 'nogi' },
@@ -101,12 +133,21 @@ const ROUND_PATTERNS = [
 ];
 
 /**
+ * Check if a technique name matches any known submission technique
+ */
+function isSubmissionTechnique(technique: string): boolean {
+  const lower = technique.toLowerCase();
+  return SUBMISSION_TECHNIQUES.some(sub => lower.includes(sub));
+}
+
+/**
  * Parse raw text into structured session data
  */
 function parseSessionText(text: string): { data: Partial<SessionData>; chips: ParsedChip[] } {
   const chips: ParsedChip[] = [];
   const data: Partial<SessionData> = {
     techniques: [],
+    sparringResults: [],
     workedWell: [],
     struggles: [],
     rawText: text,
@@ -190,8 +231,57 @@ function parseSessionText(text: string): { data: Partial<SessionData>; chips: Pa
   }
   data.techniques = foundTechniques;
 
-  // Extract positive insights
+  // Extract submissions given
   const sentences = text.split(/[.!?]+/).filter(s => s.trim());
+  for (const sentence of sentences) {
+    // Check for submissions given patterns
+    for (const pattern of SUBMISSION_GIVEN_PATTERNS) {
+      const match = sentence.match(pattern);
+      if (match && match[1]) {
+        const technique = match[1].trim();
+        if (isSubmissionTechnique(technique)) {
+          const capitalizedTechnique = technique.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+          data.sparringResults?.push({
+            type: 'submission_given',
+            technique: capitalizedTechnique,
+          });
+          chips.push({
+            id: `sub-given-${technique}-${data.sparringResults?.length}`,
+            type: 'submission_given',
+            label: `Tapped: ${capitalizedTechnique}`,
+            value: capitalizedTechnique,
+            confirmed: true,
+          });
+          break; // Only one submission per sentence
+        }
+      }
+    }
+
+    // Check for submissions received patterns
+    for (const pattern of SUBMISSION_RECEIVED_PATTERNS) {
+      const match = sentence.match(pattern);
+      if (match && match[1]) {
+        const technique = match[1].trim();
+        if (isSubmissionTechnique(technique)) {
+          const capitalizedTechnique = technique.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+          data.sparringResults?.push({
+            type: 'submission_received',
+            technique: capitalizedTechnique,
+          });
+          chips.push({
+            id: `sub-recv-${technique}-${data.sparringResults?.length}`,
+            type: 'submission_received',
+            label: `Caught: ${capitalizedTechnique}`,
+            value: capitalizedTechnique,
+            confirmed: true,
+          });
+          break; // Only one submission per sentence
+        }
+      }
+    }
+  }
+
+  // Extract positive insights (reuse sentences array from above)
   for (const sentence of sentences) {
     const lowerSentence = sentence.toLowerCase();
     for (const keyword of POSITIVE_KEYWORDS) {
@@ -289,6 +379,7 @@ export function TextLogger({ onComplete, onCancel, onSwitchToVoice }: TextLogger
         durationMinutes: data.durationMinutes || null,
         sparringRounds: data.sparringRounds || null,
         techniques: data.techniques || [],
+        sparringResults: data.sparringResults || [],
         workedWell: data.workedWell || [],
         struggles: data.struggles || [],
         rawText: text,
@@ -313,13 +404,58 @@ export function TextLogger({ onComplete, onCancel, onSwitchToVoice }: TextLogger
     transitionTo('review');
   }, [sessionData, transitionTo]);
 
-  // Handle save
-  const handleSave = useCallback(() => {
-    transitionTo('success');
-    setTimeout(() => {
-      onComplete?.();
-    }, 2000);
-  }, [transitionTo, onComplete]);
+  // Handle save - saves session and submissions to API
+  const handleSave = useCallback(async () => {
+    if (!sessionData) return;
+
+    try {
+      const userId = 'user-001'; // TODO: Get from auth context
+      const sessionDate = new Date().toISOString().split('T')[0];
+
+      // Map training type to API format
+      const trainingTypeMap: Record<string, 'gi' | 'nogi' | 'openmat' | 'private' | 'competition'> = {
+        'gi': 'gi',
+        'nogi': 'nogi',
+        'open-mat': 'openmat',
+        'drilling': 'gi', // Default drilling to gi
+        'private': 'private',
+      };
+
+      const sessionResult = await api.sessions.create({
+        user_id: userId,
+        date: sessionDate,
+        training_type: trainingTypeMap[sessionData.trainingType || 'gi'] || 'gi',
+        time: sessionData.time,
+        duration_minutes: sessionData.durationMinutes,
+        sparring_rounds: sessionData.sparringRounds,
+        techniques: sessionData.techniques,
+        worked_well: sessionData.workedWell,
+        struggles: sessionData.struggles,
+        notes: sessionData.rawText,
+      });
+
+      // Save submissions if we have any
+      if (sessionResult.data && sessionData.sparringResults.length > 0) {
+        const submissionInserts: SubmissionInsert[] = sessionData.sparringResults.map(result => ({
+          session_id: sessionResult.data!.id,
+          user_id: userId,
+          technique_name: result.technique,
+          outcome: result.type === 'submission_given' ? 'given' : 'received',
+          date: sessionDate,
+        }));
+
+        await api.submissions.createBatch(submissionInserts);
+      }
+
+      transitionTo('success');
+      setTimeout(() => {
+        onComplete?.();
+      }, 2000);
+    } catch (error) {
+      console.error('Failed to save session:', error);
+      // TODO: Show error state
+    }
+  }, [sessionData, transitionTo, onComplete]);
 
   // Handle cancel
   const handleCancel = useCallback(() => {
@@ -634,6 +770,16 @@ function ChipTag({ chip }: { chip: ParsedChip }) {
       text: 'var(--color-error)',
       border: 'rgba(239, 68, 68, 0.3)',
     },
+    submission_given: {
+      bg: 'rgba(34, 197, 94, 0.2)',
+      text: 'var(--color-success)',
+      border: 'rgba(34, 197, 94, 0.4)',
+    },
+    submission_received: {
+      bg: 'rgba(239, 68, 68, 0.2)',
+      text: 'var(--color-error)',
+      border: 'rgba(239, 68, 68, 0.4)',
+    },
   };
 
   const style = colors[chip.type];
@@ -645,6 +791,8 @@ function ChipTag({ chip }: { chip: ParsedChip }) {
     technique: '',
     positive: '✓',
     negative: '!',
+    submission_given: '✓',
+    submission_received: '✗',
   };
 
   return (

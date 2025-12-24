@@ -26,7 +26,12 @@ import type {
   TechniqueProgressUpdate,
   ApiResponse,
   UserStats,
+  SubmissionRecord,
+  SubmissionInsert,
+  SubmissionStats,
+  BeltLevel,
 } from '../types/database';
+import { getBodyRegion } from '../types/database';
 
 // ===========================================
 // STORAGE KEYS
@@ -36,6 +41,7 @@ const STORAGE_KEYS = {
   PROFILE: 'bjj-user-profile',
   SESSIONS: 'bjj-sessions',
   TECHNIQUE_PROGRESS: 'bjj-technique-progress',
+  SUBMISSIONS: 'bjj-submissions',
 } as const;
 
 // ===========================================
@@ -370,6 +376,154 @@ const techniqueProgressService = {
 };
 
 // ===========================================
+// SUBMISSIONS SERVICE
+// ===========================================
+
+const submissionsService = {
+  async list(userId: string): Promise<ApiResponse<SubmissionRecord[]>> {
+    const submissions = getFromStorage<SubmissionRecord[]>(STORAGE_KEYS.SUBMISSIONS, [])
+      .filter(s => s.user_id === userId);
+    return { data: submissions, error: null };
+  },
+
+  async listBySession(sessionId: string): Promise<ApiResponse<SubmissionRecord[]>> {
+    const submissions = getFromStorage<SubmissionRecord[]>(STORAGE_KEYS.SUBMISSIONS, [])
+      .filter(s => s.session_id === sessionId);
+    return { data: submissions, error: null };
+  },
+
+  async create(data: SubmissionInsert): Promise<ApiResponse<SubmissionRecord>> {
+    const submissions = getFromStorage<SubmissionRecord[]>(STORAGE_KEYS.SUBMISSIONS, []);
+    const now = getTimestamp();
+
+    const submission: SubmissionRecord = {
+      id: generateId(),
+      session_id: data.session_id,
+      user_id: data.user_id,
+      technique_name: data.technique_name,
+      outcome: data.outcome,
+      body_region: getBodyRegion(data.technique_name),
+      partner_belt: data.partner_belt || null,
+      position: data.position || null,
+      date: data.date,
+      created_at: now,
+    };
+
+    submissions.push(submission);
+    saveToStorage(STORAGE_KEYS.SUBMISSIONS, submissions);
+    return { data: submission, error: null };
+  },
+
+  async createBatch(submissions: SubmissionInsert[]): Promise<ApiResponse<SubmissionRecord[]>> {
+    const allSubmissions = getFromStorage<SubmissionRecord[]>(STORAGE_KEYS.SUBMISSIONS, []);
+    const now = getTimestamp();
+
+    const newRecords: SubmissionRecord[] = submissions.map(data => ({
+      id: generateId(),
+      session_id: data.session_id,
+      user_id: data.user_id,
+      technique_name: data.technique_name,
+      outcome: data.outcome,
+      body_region: getBodyRegion(data.technique_name),
+      partner_belt: data.partner_belt || null,
+      position: data.position || null,
+      date: data.date,
+      created_at: now,
+    }));
+
+    allSubmissions.push(...newRecords);
+    saveToStorage(STORAGE_KEYS.SUBMISSIONS, allSubmissions);
+    return { data: newRecords, error: null };
+  },
+
+  async delete(id: string): Promise<ApiResponse<null>> {
+    const submissions = getFromStorage<SubmissionRecord[]>(STORAGE_KEYS.SUBMISSIONS, []);
+    const filtered = submissions.filter(s => s.id !== id);
+    saveToStorage(STORAGE_KEYS.SUBMISSIONS, filtered);
+    return { data: null, error: null };
+  },
+
+  async deleteBySession(sessionId: string): Promise<ApiResponse<null>> {
+    const submissions = getFromStorage<SubmissionRecord[]>(STORAGE_KEYS.SUBMISSIONS, []);
+    const filtered = submissions.filter(s => s.session_id !== sessionId);
+    saveToStorage(STORAGE_KEYS.SUBMISSIONS, filtered);
+    return { data: null, error: null };
+  },
+
+  /**
+   * Get computed submission stats for a user
+   * @param userId - User ID
+   * @param userBelt - User's current belt (used to determine if achilles heel should be shown)
+   */
+  async getStats(userId: string, userBelt: BeltLevel): Promise<ApiResponse<SubmissionStats>> {
+    const submissions = getFromStorage<SubmissionRecord[]>(STORAGE_KEYS.SUBMISSIONS, [])
+      .filter(s => s.user_id === userId);
+
+    const given = submissions.filter(s => s.outcome === 'given');
+    const received = submissions.filter(s => s.outcome === 'received');
+
+    // Count by technique
+    const givenByTechnique: Record<string, number> = {};
+    const receivedByTechnique: Record<string, number> = {};
+
+    given.forEach(s => {
+      givenByTechnique[s.technique_name] = (givenByTechnique[s.technique_name] || 0) + 1;
+    });
+    received.forEach(s => {
+      receivedByTechnique[s.technique_name] = (receivedByTechnique[s.technique_name] || 0) + 1;
+    });
+
+    // Sort by count
+    const givenSorted = Object.entries(givenByTechnique)
+      .sort((a, b) => b[1] - a[1])
+      .map(([technique, count]) => ({ technique, count }));
+
+    const receivedSorted = Object.entries(receivedByTechnique)
+      .sort((a, b) => b[1] - a[1])
+      .map(([technique, count]) => ({ technique, count }));
+
+    // Deadliest attack: only show if total given >= 50
+    const totalGiven = given.length;
+    const deadliestAttack = totalGiven >= 50 && givenSorted.length > 0
+      ? { technique: givenSorted[0].technique, count: givenSorted[0].count }
+      : null;
+
+    // Achilles heel: only for white and blue belts
+    const showAchillesHeel = userBelt === 'white' || userBelt === 'blue';
+    const achillesHeel = showAchillesHeel && receivedSorted.length > 0
+      ? { technique: receivedSorted[0].technique, count: receivedSorted[0].count }
+      : null;
+
+    // Body heat map
+    const bodyHeatMap: SubmissionStats['bodyHeatMap'] = {
+      given: { neck: 0, arms: 0, legs: 0 },
+      received: { neck: 0, arms: 0, legs: 0 },
+    };
+
+    given.forEach(s => {
+      bodyHeatMap.given[s.body_region]++;
+    });
+    received.forEach(s => {
+      bodyHeatMap.received[s.body_region]++;
+    });
+
+    const stats: SubmissionStats = {
+      totalGiven,
+      totalReceived: received.length,
+      deadliestAttack,
+      achillesHeel,
+      bodyHeatMap,
+      techniqueBreakdown: {
+        given: givenSorted,
+        received: receivedSorted,
+      },
+    };
+
+    return { data: stats, error: null };
+  },
+};
+
+// ===========================================
 // EXPORTED API
 // ===========================================
 
@@ -377,7 +531,8 @@ export const api = {
   profile: profileService,
   sessions: sessionsService,
   techniqueProgress: techniqueProgressService,
+  submissions: submissionsService,
 };
 
 // Export individual services for direct import if needed
-export { profileService, sessionsService, techniqueProgressService };
+export { profileService, sessionsService, techniqueProgressService, submissionsService };

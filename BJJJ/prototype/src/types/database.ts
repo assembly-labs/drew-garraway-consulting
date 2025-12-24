@@ -292,3 +292,169 @@ export interface ProgressStats {
   daysAtCurrentBelt: number;
   estimatedTimeToNextBelt: number | null; // days
 }
+
+// ===========================================
+// SUBMISSIONS TABLE
+// ===========================================
+
+export type SubmissionOutcome = 'given' | 'received';
+export type BodyRegion = 'neck' | 'arms' | 'legs';
+
+export interface SubmissionRecord {
+  id: string; // UUID
+  session_id: string; // UUID, references sessions.id
+  user_id: string; // UUID, references profiles.id
+  technique_name: string; // e.g., "Armbar", "Triangle"
+  outcome: SubmissionOutcome;
+  body_region: BodyRegion; // Derived from technique
+  partner_belt?: BeltLevel | null;
+  position?: string | null; // e.g., "Mount", "Closed Guard"
+  date: string; // ISO date (denormalized for fast queries)
+  created_at: string; // ISO timestamp
+}
+
+// Insert type
+export interface SubmissionInsert {
+  session_id: string;
+  user_id: string;
+  technique_name: string;
+  outcome: SubmissionOutcome;
+  partner_belt?: BeltLevel | null;
+  position?: string | null;
+  date: string;
+}
+
+// ===========================================
+// TECHNIQUE TO BODY REGION MAPPING
+// ===========================================
+
+/**
+ * Maps submission techniques to their target body region
+ * Used for heat map visualization
+ */
+export const TECHNIQUE_BODY_MAP: Record<string, BodyRegion> = {
+  // Neck/Head submissions (chokes, strangles)
+  'rnc': 'neck',
+  'rear naked choke': 'neck',
+  'rear naked': 'neck',
+  'guillotine': 'neck',
+  'triangle': 'neck',
+  'triangle choke': 'neck',
+  'darce': 'neck',
+  'd\'arce': 'neck',
+  'anaconda': 'neck',
+  'anaconda choke': 'neck',
+  'ezekiel': 'neck',
+  'ezekiel choke': 'neck',
+  'cross collar choke': 'neck',
+  'cross collar': 'neck',
+  'collar choke': 'neck',
+  'bow and arrow': 'neck',
+  'bow and arrow choke': 'neck',
+  'baseball bat choke': 'neck',
+  'baseball bat': 'neck',
+  'baseball choke': 'neck',
+  'north south choke': 'neck',
+  'north-south choke': 'neck',
+  'arm triangle': 'neck',
+  'arm-triangle': 'neck',
+  'head and arm choke': 'neck',
+  'kata gatame': 'neck',
+  'loop choke': 'neck',
+  'clock choke': 'neck',
+  'paper cutter': 'neck',
+  'paper cutter choke': 'neck',
+  'breadcutter': 'neck',
+  'breadcutter choke': 'neck',
+  'von flue choke': 'neck',
+  'von flue': 'neck',
+  'gogoplata': 'neck',
+  'peruvian necktie': 'neck',
+  'japanese necktie': 'neck',
+  'brabo choke': 'neck',
+  'brabo': 'neck',
+
+  // Arm submissions (armlocks, shoulder locks)
+  'armbar': 'arms',
+  'arm bar': 'arms',
+  'juji gatame': 'arms',
+  'kimura': 'arms',
+  'double wristlock': 'arms',
+  'americana': 'arms',
+  'keylock': 'arms',
+  'key lock': 'arms',
+  'omoplata': 'arms',
+  'straight armlock': 'arms',
+  'straight arm lock': 'arms',
+  'wristlock': 'arms',
+  'wrist lock': 'arms',
+  'bicep slicer': 'arms',
+  'bicep crusher': 'arms',
+  'tarikoplata': 'arms',
+  'baratoplata': 'arms',
+  'monoplata': 'arms',
+
+  // Leg submissions (leg locks)
+  'heel hook': 'legs',
+  'inside heel hook': 'legs',
+  'outside heel hook': 'legs',
+  'kneebar': 'legs',
+  'knee bar': 'legs',
+  'toe hold': 'legs',
+  'toehold': 'legs',
+  'ankle lock': 'legs',
+  'straight ankle lock': 'legs',
+  'straight ankle': 'legs',
+  'achilles lock': 'legs',
+  'calf slicer': 'legs',
+  'calf crusher': 'legs',
+  'estima lock': 'legs',
+  'texas cloverleaf': 'legs',
+  'electric chair': 'legs',
+  'banana split': 'legs',
+  'vaporizer': 'legs',
+  'aoki lock': 'legs',
+  'twister': 'legs', // Technically spine but often grouped with leg attacks
+};
+
+/**
+ * Get body region for a technique name
+ * Falls back to 'neck' if unknown (most submissions target upper body)
+ */
+export function getBodyRegion(techniqueName: string): BodyRegion {
+  const normalized = techniqueName.toLowerCase().trim();
+  return TECHNIQUE_BODY_MAP[normalized] || 'neck';
+}
+
+// ===========================================
+// SUBMISSION STATS (Computed)
+// ===========================================
+
+export interface SubmissionStats {
+  totalGiven: number;
+  totalReceived: number;
+
+  // Deadliest attack (only shown if totalGiven >= 50)
+  deadliestAttack: {
+    technique: string;
+    count: number;
+  } | null;
+
+  // Achilles heel (only for white/blue belts)
+  achillesHeel: {
+    technique: string;
+    count: number;
+  } | null;
+
+  // Heat map data
+  bodyHeatMap: {
+    given: Record<BodyRegion, number>;
+    received: Record<BodyRegion, number>;
+  };
+
+  // Breakdown by technique
+  techniqueBreakdown: {
+    given: Array<{ technique: string; count: number }>;
+    received: Array<{ technique: string; count: number }>;
+  };
+}
