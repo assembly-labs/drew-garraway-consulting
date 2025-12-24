@@ -8,3 +8,6 @@ export { StatCard } from './StatCard';
 export { TrainingBadge } from './TrainingBadge';
 export { ProgressRing } from './ProgressRing';
 export { YouTubeEmbed, VideoThumbnail } from './YouTubeEmbed';
+export { DeadliestAttackCard } from './DeadliestAttackCard';
+export { AchillesHeelCard } from './AchillesHeelCard';
+export { BodyHeatMap } from './BodyHeatMap';

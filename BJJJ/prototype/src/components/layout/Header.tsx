@@ -1,6 +1,7 @@
 /**
  * Header Component
  * App header with title and optional actions
+ * Includes profile avatar in top-right for navigation to Profile screen
  */
 
 interface HeaderProps {
@@ -8,13 +9,17 @@ interface HeaderProps {
   showBackButton?: boolean;
   onBack?: () => void;
   rightAction?: React.ReactNode;
+  userInitial?: string;
+  onProfileClick?: () => void;
 }
 
 export function Header({
   title = 'ALLY',
   showBackButton = false,
   onBack,
-  rightAction
+  rightAction,
+  userInitial,
+  onProfileClick,
 }: HeaderProps) {
   return (
     <header style={{
@@ -58,9 +63,35 @@ export function Header({
           {title}
         </h1>
       </div>
-      {rightAction && (
-        <div>{rightAction}</div>
-      )}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
+        {rightAction && (
+          <div>{rightAction}</div>
+        )}
+        {userInitial && onProfileClick && (
+          <button
+            onClick={onProfileClick}
+            style={{
+              width: 36,
+              height: 36,
+              borderRadius: 'var(--radius-full)',
+              backgroundColor: 'var(--color-gray-800)',
+              border: '2px solid var(--color-gray-600)',
+              color: 'var(--color-white)',
+              fontSize: 'var(--text-sm)',
+              fontWeight: 700,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textTransform: 'uppercase',
+              transition: 'border-color 0.2s ease, background-color 0.2s ease',
+            }}
+            aria-label="Open profile"
+          >
+            {userInitial}
+          </button>
+        )}
+      </div>
     </header>
   );
 }

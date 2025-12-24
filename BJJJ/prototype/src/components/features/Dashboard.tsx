@@ -14,7 +14,8 @@
 import { currentUser } from '../../data/users';
 import { mockTrainingStats, mockJournalEntries } from '../../data/journal';
 import { mockProgressSummary, mockTonyChenPromotionReadiness } from '../../data/progress';
-import { BeltBadge, TrainingBadge } from '../ui';
+import { mockSubmissionStats } from '../../data/submissions';
+import { BeltBadge, TrainingBadge, DeadliestAttackCard, AchillesHeelCard } from '../ui';
 import { useCountUp } from '../../utils/useCountUp';
 
 interface DashboardProps {
@@ -233,6 +234,36 @@ export function Dashboard({ onNavigate }: DashboardProps) {
             this month
           </div>
         </div>
+      </div>
+
+      {/* ============================================
+          SUBMISSION PROFILE - Deadliest & Achilles Heel
+          ============================================ */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: mockSubmissionStats.deadliestAttack && (user.belt === 'white' || user.belt === 'blue') && mockSubmissionStats.achillesHeel
+            ? '1fr 1fr'
+            : '1fr',
+          gap: '1px',
+          background: 'var(--color-gray-800)',
+        }}
+      >
+        {/* Deadliest Attack - only show after 50 total submissions */}
+        {mockSubmissionStats.deadliestAttack && mockSubmissionStats.totalGiven >= 50 && (
+          <DeadliestAttackCard
+            technique={mockSubmissionStats.deadliestAttack.technique}
+            count={mockSubmissionStats.deadliestAttack.count}
+          />
+        )}
+
+        {/* Achilles Heel - only for white and blue belts */}
+        {(user.belt === 'white' || user.belt === 'blue') && mockSubmissionStats.achillesHeel && (
+          <AchillesHeelCard
+            technique={mockSubmissionStats.achillesHeel.technique}
+            count={mockSubmissionStats.achillesHeel.count}
+          />
+        )}
       </div>
 
       {/* ============================================

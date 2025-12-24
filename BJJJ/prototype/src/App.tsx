@@ -9,14 +9,18 @@ import { SessionHistory } from './components/features/SessionHistory'
 import { TechniqueLibrary } from './components/features/TechniqueLibrary'
 import { TrainingFeedback } from './components/features/TrainingFeedback'
 import { BeltProgress } from './components/features/BeltProgress'
+import { ProfileScreen } from './components/features/ProfileScreen'
+import { useUserProfile } from './context/UserProfileContext'
 
-type View = 'dashboard' | 'journal' | 'progress' | 'library' | 'profile' | 'design-system'
+type View = 'dashboard' | 'journal' | 'progress' | 'library' | 'insights' | 'profile' | 'design-system'
 
 function App() {
+  // Get user profile for header avatar
+  const { profile } = useUserProfile()
+  const userInitial = profile.name ? profile.name.charAt(0).toUpperCase() : 'U'
+
   // Track if voice logger should be shown (overlay)
   const [showVoiceLogger, setShowVoiceLogger] = useState(true) // Auto-open on load
-  // Track if training feedback should be shown (overlay)
-  const [showTrainingFeedback, setShowTrainingFeedback] = useState(false)
 
   // Check URL for design system mode
   const [currentView, setCurrentView] = useState<View>(() => {
@@ -26,6 +30,9 @@ function App() {
     return 'dashboard'
   })
 
+  // Track last tab view for back navigation from profile
+  const [lastTabView, setLastTabView] = useState<TabId>('dashboard')
+
   // Update URL hash when switching to/from design system
   useEffect(() => {
     if (currentView === 'design-system') {
@@ -34,6 +41,11 @@ function App() {
       window.location.hash = ''
     }
   }, [currentView])
+
+  // Scroll to top when view changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentView]);
 
   // Handle navigation from child components
   const handleNavigate = (view: string) => {
@@ -81,30 +93,25 @@ function App() {
     )
   }
 
+  // Handle profile navigation
+  const handleProfileClick = () => {
+    // Only save tab views (not profile or design-system)
+    const tabViews: TabId[] = ['dashboard', 'journal', 'progress', 'library', 'insights']
+    if (tabViews.includes(currentView as TabId)) {
+      setLastTabView(currentView as TabId)
+    }
+    setCurrentView('profile')
+  }
+
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'var(--color-black)' }}>
-      {/* Header */}
+      {/* Header - changes based on current view */}
       <Header
-        title="ALLY"
-        rightAction={
-          <button
-            onClick={() => setCurrentView('design-system')}
-            style={{
-              background: 'none',
-              border: '1px solid var(--color-gray-600)',
-              borderRadius: 'var(--radius-sm)',
-              padding: '4px 8px',
-              color: 'var(--color-gray-300)',
-              fontSize: 'var(--text-xs)',
-              cursor: 'pointer',
-              textTransform: 'uppercase',
-              letterSpacing: 'var(--tracking-wide)',
-            }}
-            title="View Design System"
-          >
-            DS
-          </button>
-        }
+        title={currentView === 'profile' ? 'PROFILE' : 'ALLY'}
+        showBackButton={currentView === 'profile'}
+        onBack={() => setCurrentView(lastTabView)}
+        userInitial={currentView !== 'profile' ? userInitial : undefined}
+        onProfileClick={currentView !== 'profile' ? handleProfileClick : undefined}
       />
 
       {/* Main Content */}
@@ -128,113 +135,23 @@ function App() {
         )}
 
         {currentView === 'library' && (
-          <TechniqueLibrary onOpenFeedback={() => setShowTrainingFeedback(true)} />
+          <TechniqueLibrary onOpenFeedback={() => setCurrentView('insights')} />
+        )}
+
+        {currentView === 'insights' && (
+          <TrainingFeedback />
         )}
 
         {currentView === 'profile' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)', padding: 'var(--space-lg)' }}>
-            {/* Profile Header */}
-            <div style={{
-              backgroundColor: 'var(--color-gray-900)',
-              border: '1px solid var(--color-gray-800)',
-              borderRadius: 'var(--radius-md)',
-              padding: 'var(--space-xl)',
-              textAlign: 'center',
-            }}>
-              <div style={{
-                width: 80,
-                height: 80,
-                borderRadius: 'var(--radius-full)',
-                backgroundColor: 'var(--color-gray-700)',
-                margin: '0 auto var(--space-md)'
-              }}></div>
-              <h2 style={{ color: 'var(--color-white)', marginBottom: 'var(--space-xs)' }}>TONY CHEN</h2>
-              <div style={{ color: 'var(--color-gray-400)', marginBottom: 'var(--space-md)' }}>Training since March 2022</div>
-              <span className="belt-badge belt-blue" style={{ margin: '0 auto' }}>
-                <span className="belt-stripes">
-                  <span className="belt-stripe"></span>
-                  <span className="belt-stripe"></span>
-                </span>
-              </span>
-            </div>
-
-            {/* Stats */}
-            <div style={{
-              backgroundColor: 'var(--color-gray-900)',
-              border: '1px solid var(--color-gray-800)',
-              borderRadius: 'var(--radius-md)',
-              padding: 'var(--space-xl)',
-            }}>
-              <h3 style={{ color: 'var(--color-white)', marginBottom: 'var(--space-md)' }}>Training Stats</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-md)' }}>
-                <div>
-                  <div style={{ color: 'var(--color-gray-500)', fontSize: 'var(--text-sm)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Total Sessions</div>
-                  <div style={{ color: 'var(--color-white)', fontSize: 'var(--text-3xl)', fontWeight: 700 }}>247</div>
-                </div>
-                <div>
-                  <div style={{ color: 'var(--color-gray-500)', fontSize: 'var(--text-sm)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Total Hours</div>
-                  <div style={{ color: 'var(--color-white)', fontSize: 'var(--text-3xl)', fontWeight: 700 }}>312</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Belt System */}
-            <div style={{
-              backgroundColor: 'var(--color-gray-900)',
-              border: '1px solid var(--color-gray-800)',
-              borderRadius: 'var(--radius-md)',
-              padding: 'var(--space-xl)',
-            }}>
-              <h3 style={{ color: 'var(--color-white)', marginBottom: 'var(--space-md)' }}>Belt Journey</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-                {[
-                  { name: 'White', class: 'belt-white', stripes: 4, completed: true },
-                  { name: 'Blue', class: 'belt-blue', stripes: 2, current: true },
-                  { name: 'Purple', class: 'belt-purple', stripes: 0, future: true },
-                  { name: 'Brown', class: 'belt-brown', stripes: 0, future: true },
-                  { name: 'Black', class: 'belt-black', stripes: 0, future: true },
-                ].map((belt) => (
-                  <div key={belt.name} style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 'var(--space-md)',
-                    opacity: belt.future ? 0.4 : 1,
-                  }}>
-                    <span className={`belt-badge ${belt.class}`}>
-                      {belt.stripes > 0 && (
-                        <span className="belt-stripes">
-                          {Array.from({ length: belt.stripes }).map((_, i) => (
-                            <span key={i} className="belt-stripe"></span>
-                          ))}
-                        </span>
-                      )}
-                    </span>
-                    <span style={{ color: 'var(--color-white)' }}>{belt.name} Belt</span>
-                    {belt.current && (
-                      <span style={{
-                        marginLeft: 'auto',
-                        backgroundColor: 'var(--color-positive)',
-                        color: 'var(--color-white)',
-                        padding: '2px 8px',
-                        borderRadius: 'var(--radius-sm)',
-                        fontSize: 'var(--text-xs)',
-                        textTransform: 'uppercase',
-                      }}>Current</span>
-                    )}
-                    {belt.completed && !belt.current && (
-                      <span style={{ marginLeft: 'auto', color: 'var(--color-gray-500)', fontSize: 'var(--text-sm)' }}>Sep 2023</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div style={{ padding: 'var(--space-lg)' }}>
+            <ProfileScreen onNavigate={handleNavigate} />
           </div>
         )}
       </main>
 
-      {/* Bottom Navigation */}
+      {/* Bottom Navigation - show last valid tab when on profile screen */}
       <TabBar
-        activeTab={currentView as TabId}
+        activeTab={currentView === 'profile' ? lastTabView : currentView as TabId}
         onTabChange={(tab) => setCurrentView(tab)}
       />
 
@@ -249,20 +166,6 @@ function App() {
           <VoiceLogger
             onComplete={handleLogComplete}
             onCancel={handleLogCancel}
-          />
-        </div>
-      )}
-
-      {/* Training Feedback Overlay - Full Screen */}
-      {showTrainingFeedback && (
-        <div style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 100,
-          backgroundColor: 'var(--color-black)',
-        }}>
-          <TrainingFeedback
-            onClose={() => setShowTrainingFeedback(false)}
           />
         </div>
       )}

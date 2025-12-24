@@ -10,7 +10,7 @@
  * John Danaher, Gordon Ryan, Lachlan Giles, Craig Jones
  */
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import {
   mockTechniques,
   mockTechniqueProgress,
@@ -92,6 +92,11 @@ export function TechniqueLibrary({ onOpenFeedback }: TechniqueLibraryProps) {
   const [selectedVideo, setSelectedVideo] = useState<TechniqueVideo | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMindsetCategory, setSelectedMindsetCategory] = useState<MindsetCategoryId | null>(null);
+
+  // Scroll to top when component mounts (user taps Techniques tab)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Progress map for quick lookup
   const progressMap = useMemo(() => {

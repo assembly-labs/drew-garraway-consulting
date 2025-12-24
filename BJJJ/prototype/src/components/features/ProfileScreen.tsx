@@ -13,6 +13,8 @@ import { useState } from 'react';
 import { useUserProfile, PROFILE_QUESTIONS, type BeltLevel } from '../../context/UserProfileContext';
 import { EditSheet } from './EditSheet';
 import { ProfileNudge } from './ProfileNudge';
+import { BodyHeatMap } from '../ui';
+import { mockSubmissionStats } from '../../data/submissions';
 
 interface ProfileScreenProps {
   onNavigate?: (view: string) => void;
@@ -259,6 +261,14 @@ export function ProfileScreen({ onNavigate }: ProfileScreenProps) {
           )}
         </div>
       </div>
+
+      {/* Attack Profile Heat Map */}
+      {(mockSubmissionStats.totalGiven > 0 || mockSubmissionStats.totalReceived > 0) && (
+        <BodyHeatMap
+          data={mockSubmissionStats.bodyHeatMap}
+          techniqueBreakdown={mockSubmissionStats.techniqueBreakdown}
+        />
+      )}
 
       {/* Profile Details */}
       <div className="card">

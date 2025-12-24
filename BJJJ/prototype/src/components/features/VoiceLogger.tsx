@@ -12,6 +12,8 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
+import { api } from '../../services/api';
+import type { SubmissionInsert } from '../../types/database';
 
 // Types for extracted session data
 interface SparringResult {
@@ -130,13 +132,50 @@ export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
     transitionTo('review');
   }, [sessionData, transitionTo]);
 
-  // Save session
-  const handleSave = useCallback(() => {
-    transitionTo('success');
-    setTimeout(() => {
-      onComplete?.();
-    }, 2000);
-  }, [transitionTo, onComplete]);
+  // Save session and submissions
+  const handleSave = useCallback(async () => {
+    if (!sessionData) return;
+
+    try {
+      // Create session first
+      const userId = 'user-001'; // TODO: Get from auth context
+      const sessionDate = new Date().toISOString().split('T')[0];
+
+      const sessionResult = await api.sessions.create({
+        user_id: userId,
+        date: sessionDate,
+        training_type: sessionData.trainingType || 'gi',
+        time: sessionData.time,
+        duration_minutes: sessionData.durationMinutes,
+        sparring_rounds: sessionData.sparringRounds,
+        techniques: sessionData.techniques,
+        worked_well: sessionData.workedWell,
+        struggles: sessionData.struggles,
+        voice_transcript: 'Voice recording transcript', // TODO: Real transcript
+      });
+
+      // Save submissions if we have any
+      if (sessionResult.data && sessionData.sparringResults.length > 0) {
+        const submissionInserts: SubmissionInsert[] = sessionData.sparringResults.map(result => ({
+          session_id: sessionResult.data!.id,
+          user_id: userId,
+          technique_name: result.technique,
+          outcome: result.type === 'submission_given' ? 'given' : 'received',
+          date: sessionDate,
+        }));
+
+        await api.submissions.createBatch(submissionInserts);
+      }
+
+      transitionTo('success');
+      setTimeout(() => {
+        onComplete?.();
+      }, 2000);
+    } catch (error) {
+      console.error('Failed to save session:', error);
+      // TODO: Show error state
+    }
+  }, [sessionData, transitionTo, onComplete]);
 
   // Cancel/close
   const handleCancel = useCallback(() => {

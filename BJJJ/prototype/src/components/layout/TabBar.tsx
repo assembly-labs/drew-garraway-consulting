@@ -3,7 +3,7 @@
  * Bottom navigation for mobile-first experience
  */
 
-export type TabId = 'dashboard' | 'journal' | 'progress' | 'library' | 'profile';
+export type TabId = 'dashboard' | 'journal' | 'progress' | 'library' | 'insights';
 
 interface Tab {
   id: TabId;
@@ -57,12 +57,11 @@ const tabs: Tab[] = [
     ),
   },
   {
-    id: 'profile',
-    label: 'Profile',
+    id: 'insights',
+    label: 'Insights',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-        <circle cx="12" cy="7" r="4" />
+        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
       </svg>
     ),
   },
