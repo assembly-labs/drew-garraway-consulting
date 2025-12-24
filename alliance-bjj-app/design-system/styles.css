@@ -1,8 +1,19 @@
 /* ========================================
-   ALLIANCE BJJ APP - DESIGN SYSTEM STYLES
+   ALLIANCE BJJ APP - DESIGN SYSTEM
+   ========================================
+
+   SOURCE OF TRUTH FOR DESIGN TOKENS
+
+   How to update:
+   1. Edit the values in :root below
+   2. Ask Claude Code: "Sync the design system to theme.js"
+   3. Claude will update alliance-mobile/constants/theme.js to match
+
    ======================================== */
 
-/* CSS Variables from theme.js */
+/* ===========================================
+   DESIGN TOKENS - Edit these values here
+   =========================================== */
 :root {
   /* Colors */
   --color-primary: #000000;

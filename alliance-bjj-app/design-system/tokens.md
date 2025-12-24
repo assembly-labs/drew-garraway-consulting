@@ -1,7 +1,14 @@
 # Alliance BJJ App - Design Tokens
 
-This document serves as the canonical reference for all design tokens.
-The source of truth is `alliance-mobile/constants/theme.js`.
+## How to Update Design Tokens
+
+1. **Open** `design-system/index.html` in a browser to see the current design
+2. **Edit** the CSS variables in `design-system/styles.css` (the `:root` section at the top)
+3. **Refresh** the browser to preview your changes
+4. **Ask Claude Code:** "Sync the design system to theme.js"
+5. Claude will update `alliance-mobile/constants/theme.js` to match
+
+---
 
 ## Colors
 
