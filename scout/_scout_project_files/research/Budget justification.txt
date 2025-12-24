@@ -1,0 +1,102 @@
+AI library technology grant research
+
+(Work to continue from Claude project chat ‘AI library technology grant research’)
+
+
+Based on the PRD, I have sufficient information to create budget templates. Here’s a modular budget framework:
+
+## **MASTER BUDGET TEMPLATE - LIBRARIAN LLM PHASE 1**
+
+### **PERSONNEL (70% of budget)**
+
+```
+Senior Full-Stack Engineer    @ $130K/yr × 1.0 FTE × 0.5 yr = $65,000
+Library Technology Specialist @ $100K/yr × 0.5 FTE × 0.5 yr = $25,000  
+Accessibility Engineer        @ $110K/yr × 0.5 FTE × 0.5 yr = $27,500
+Product Manager               @ $120K/yr × 0.5 FTE × 0.5 yr = $30,000
+---
+Subtotal: $147,500
+Fringe (28%): $41,300
+PERSONNEL TOTAL: $188,800
+```
+
+### **TECHNOLOGY INFRASTRUCTURE (15%)**
+
+```
+AWS Hosting (6 mo @ $250/mo)                    = $1,500
+Pinecone Vector DB (6 mo @ $70/mo)              = $420
+Claude API (50K queries @ $0.02)                = $1,000
+Development/Testing Environments                 = $2,000
+OverDrive API Setup                             = $1,500
+---
+TECHNOLOGY TOTAL: $6,420
+```
+
+### **THIRD-PARTY SERVICES (10%)**
+
+```
+WCAG Accessibility Audit                        = $8,000
+Security Penetration Testing                    = $7,000
+Privacy Compliance Review                        = $5,000
+---
+SERVICES TOTAL: $20,000
+```
+
+### **PILOT SUPPORT (5%)**
+
+```
+5 Libraries × $2,000 training/support           = $10,000
+---
+PILOT TOTAL: $10,000
+```
+
+## **SCALED VERSIONS BY GRANT**
+
+### **IMLS NLG-L Planning Grant ($150K)**
+
+- Personnel: $105,000 (70%)
+- Technology: $15,000 (10%)
+- Audits: $20,000 (13%)
+- Pilot Support: $10,000 (7%)
+
+### **NEH DHAG Level II ($100K)**
+
+- Personnel: $70,000 (70%)
+- Technology: $10,000 (10%)
+- Accessibility Audit: $8,000 (8%)
+- Documentation: $12,000 (12%)
+
+### **State LSTA ($50K)**
+
+- Personnel (0.25 FTE): $35,000 (70%)
+- Technology: $5,000 (10%)
+- Local Library Training: $10,000 (20%)
+
+## **COST-SHARE STRATEGIES**
+
+- **In-kind:** Pilot libraries’ staff time ($25K value)
+- **Partner contributions:** University server space ($5K value)
+- **Founder investment:** Pre-development work ($50K value)
+
+## **BUDGET JUSTIFICATIONS (Template)**
+
+**Personnel:** “The Full-Stack Engineer is essential for implementing the React/Python architecture integrating Claude API with library systems. The 0.5 FTE Library Specialist ensures authentic domain expertise guides development. These roles cannot be combined as they require distinct skill sets critical to project success.”
+
+**Technology:** “Cloud infrastructure enables scalable deployment across pilot libraries without local IT burden. Pinecone vector database is the most cost-effective solution for semantic search at our scale. Claude API provides state-of-the-art natural language processing essential for patron query understanding.”
+
+**Audits:** “Third-party accessibility validation is mandatory for WCAG 2.1 AA compliance serving patrons with disabilities. Security testing protects patron privacy—non-negotiable for library trust.”
+
+## **ROI METRICS FOR JUSTIFICATION**
+
+- **Cost per library:** $30K-$50K (vs. $200K+ for commercial solutions)
+- **Staff time savings:** 30-50% on routine queries = $75K/year/library
+- **Patron reach:** 5,000+ patrons/library = $6-10 per patron served
+- **Break-even:** 4-6 months post-deployment
+
+**Need from you:**
+
+1. Your organization’s fringe benefit rate (I estimated 28%)
+1. Indirect cost rate if you have a negotiated rate
+1. Any committed matching funds or in-kind contributions
+
+Ready to customize these for specific grant applications?​​​​​​​​​​​​​​​​

@@ -1,0 +1,1158 @@
+================================================================================
+                    SCOUT RESEARCH SYNTHESIS BRIEFS
+              Actionable Intelligence from 37 Research Documents
+================================================================================
+
+                         INTERNAL & CONFIDENTIAL
+                    For Scout Team Use Only (Drew, Kenny, Jordan)
+                         Last Updated: December 2024
+
+================================================================================
+                            TABLE OF CONTENTS
+================================================================================
+
+    BRIEF 1: Competitive Landscape
+    BRIEF 2: Patron Pain Points & Problems We Solve
+    BRIEF 3: Library Procurement & Sales Cycles
+    BRIEF 4: Grant Opportunities (Ranked)
+    BRIEF 5: Technical Integration & ILS APIs
+
+    APPENDIX: Source Document Reference
+
+================================================================================
+================================================================================
+BRIEF 1: COMPETITIVE LANDSCAPE
+"What Competitors Do & Don't Do - Scout's Market Window"
+================================================================================
+================================================================================
+
+EXECUTIVE SUMMARY
+-----------------
+There is NO production-ready LLM-powered discovery system for US public
+libraries as of late 2024. This creates a 2-3 year market window before
+major vendors consolidate AI features. Scout's opportunity is to establish
+the category and become the default solution.
+
+
+THE COMPETITIVE LANDSCAPE
+-------------------------
+
+TIER 1: DIRECT COMPETITORS (LLM-Powered Discovery)
+None exist in production for public libraries.
+
+    OverDrive "Inspire Me" (Launched August 2024)
+    - What it does: AI recommendation for OverDrive ebook/audiobook catalog
+    - Limitation: EBOOK/AUDIOBOOK ONLY - no physical books, DVDs, or LoT
+    - Limitation: Only works within OverDrive ecosystem
+    - Limitation: No conversational interface - button-based
+    - Scout advantage: Cross-format discovery, conversational, full catalog
+
+    OCLC WorldCat.org
+    - What it does: Bibliographic search across libraries
+    - Limitation: Catalog search, not discovery/recommendation
+    - Limitation: Not conversational
+    - Limitation: No personalization or natural language
+    - Scout advantage: Discovery-focused, conversational, local catalog
+
+
+TIER 2: ADJACENT COMPETITORS (Discovery Without LLM)
+
+    BiblioCommons
+    - What it does: Enhanced catalog interface, "similar titles"
+    - Strength: Established vendor relationships, trusted
+    - Limitation: No conversational AI (explicitly cautious on AI)
+    - Limitation: Rule-based recommendations, not intelligent
+    - Limitation: No cross-format bundling
+    - Scout advantage: Natural language, true AI recommendation
+    - Note: BiblioCommons is watching AI space but moving slowly
+
+    NoveList (EBSCO)
+    - What it does: Read-alike database for librarians
+    - Strength: Comprehensive book relationship data
+    - Limitation: Tool FOR librarians, not patron-facing
+    - Limitation: Not conversational
+    - Scout advantage: Direct patron interaction, conversational
+
+    Syndetics Unbound
+    - What it does: Enhanced catalog records with reviews, summaries
+    - Limitation: Enrichment, not discovery
+    - Scout advantage: Active discovery vs. passive enrichment
+
+
+TIER 3: POTENTIAL FUTURE COMPETITORS
+
+    Amazon (via library lending programs)
+    - Threat level: Medium
+    - If Amazon built library discovery, would prioritize own ecosystem
+    - Scout advantage: Library-first, privacy-first, local collection
+
+    Google (general AI)
+    - Threat level: Low for library-specific
+    - No indication of library-specific product
+    - Scout advantage: Library catalog integration, library mission alignment
+
+    Major ILS Vendors (SirsiDynix, Innovative, etc.)
+    - Threat level: Medium-long term
+    - Large vendors typically slow to innovate
+    - May acquire rather than build
+    - Scout advantage: Speed to market, focused solution
+
+
+SCOUT'S COMPETITIVE ADVANTAGES
+------------------------------
+
+1. FIRST MOVER IN CATEGORY
+   No production LLM discovery system exists. Scout defines the category.
+
+2. CROSS-FORMAT DISCOVERY
+   Book + audiobook + ebook + DVD + Library of Things in one conversation.
+   OverDrive Inspire Me is ebook/audiobook only.
+
+3. CONVERSATIONAL INTERFACE
+   Natural language vs. buttons and dropdowns.
+   Matches how people actually think about discovery.
+
+4. PRIVACY-FIRST ARCHITECTURE
+   Zero patron data logging. FERPA compliant.
+   Major differentiator vs. big tech alternatives.
+
+5. ACCESSIBILITY LEADERSHIP
+   WCAG 2.2 AA compliant (ahead of 2026 ADA mandate).
+   Positions Scout as compliance solution.
+
+6. LIBRARY-ALIGNED MISSION
+   "Protect the Soul of Librarianship" resonates with librarians.
+   Not extractive big tech approach.
+
+
+MARKET WINDOW ANALYSIS
+----------------------
+
+    2024-2025: Establishment Phase
+    - No direct competitors
+    - Scout can define category expectations
+    - Build reference customers and case studies
+
+    2025-2026: Growth Phase
+    - Competitors may announce products
+    - Scout has head start with integrations and customers
+    - Network effects from librarian word-of-mouth
+
+    2026-2027: Consolidation Phase
+    - Major vendors may acquire or build
+    - Scout either acquired, partnered, or established as leader
+    - First-mover advantage cements market position
+
+
+COMPETITIVE MESSAGING
+---------------------
+
+Against OverDrive Inspire Me:
+"Scout discovers your ENTIRE collection - physical books, DVDs, Library of
+Things, not just ebooks. One conversation, all formats."
+
+Against BiblioCommons:
+"Move beyond rule-based 'similar titles' to true conversational discovery.
+Patrons describe what they want, Scout understands and recommends."
+
+Against "We'll build it ourselves":
+"Scout integrates in 2-3 days. Building in-house takes 6-12 months and
+ongoing maintenance. Focus your team on patrons, not AI engineering."
+
+Against "We'll wait for big vendors":
+"Patrons are searching with AI today. Meeting them where they are increases
+circulation now. Don't wait for vendors who are years behind."
+
+
+ACTION ITEMS
+------------
+[ ] Monitor OverDrive Inspire Me adoption and limitations
+[ ] Track BiblioCommons AI announcements
+[ ] Document competitor feature gaps for sales conversations
+[ ] Build case studies showing Scout advantages
+[ ] Position Scout as "the library AI" before category is crowded
+
+
+================================================================================
+================================================================================
+BRIEF 2: PATRON PAIN POINTS & PROBLEMS WE SOLVE
+"Why Libraries Need Scout - Evidence-Based Value Proposition"
+================================================================================
+================================================================================
+
+EXECUTIVE SUMMARY
+-----------------
+Research documents four major patron pain points that Scout directly addresses:
+library jargon barriers, discovery fragmentation, search abandonment, and
+declining reference assistance. Each pain point has documented evidence and
+a clear Scout solution.
+
+
+PAIN POINT 1: LIBRARY JARGON BARRIERS
+-------------------------------------
+
+THE PROBLEM:
+51% of library websites use jargon that patrons don't understand.
+(Source: Market Research document)
+
+Examples of problematic jargon:
+- "OPAC" instead of "catalog" or "search"
+- "ILL" instead of "get it from another library"
+- "Circulation desk" instead of "checkout desk"
+- "Bibliographic record" instead of "book information"
+- "Serials" instead of "magazines and journals"
+- "Stacks" instead of "bookshelves"
+
+PATRON IMPACT:
+- Confusion leads to search abandonment
+- Patrons feel libraries are "not for them"
+- Creates barrier for new library users
+- Particularly impacts non-native English speakers
+
+SCOUT SOLUTION:
+- Natural language interface - patrons speak normally
+- Scout translates jargon internally
+- Responses use plain language
+- Meets patrons at their vocabulary level
+
+MESSAGING:
+"Patrons don't need to learn library-speak. Scout understands 'I want a
+good mystery' and translates it into catalog search."
+
+
+PAIN POINT 2: DISCOVERY FRAGMENTATION
+-------------------------------------
+
+THE PROBLEM:
+Library resources are scattered across multiple systems with no unified
+discovery experience.
+
+Typical patron experience:
+- Search library catalog for physical books → one system
+- Search OverDrive for ebooks/audiobooks → separate system
+- Search databases for articles → another system
+- Ask about programs/events → different system
+- Library of Things → often not searchable at all
+
+(Source: PRD, Market Research)
+
+PATRON IMPACT:
+- Multiple searches for one need
+- Resources go undiscovered
+- Patrons don't know what's available
+- Lower circulation of non-book items
+
+SCOUT SOLUTION:
+- Single conversational interface
+- Cross-format discovery (books, ebooks, audiobooks, DVDs, LoT)
+- "We also have the audiobook" natural bridging
+- One conversation reveals full library value
+
+MESSAGING:
+"One search, all formats. Scout shows patrons the FULL value of their
+library card in a single conversation."
+
+
+PAIN POINT 3: SEARCH ABANDONMENT
+--------------------------------
+
+THE PROBLEM:
+Patrons give up when searches don't immediately yield results.
+(Source: Market Research)
+
+Causes of abandonment:
+- "No results found" with no helpful alternatives
+- Too many irrelevant results
+- Unclear how to refine search
+- Catalog interface is intimidating
+- Don't know what terms to use
+
+PATRON IMPACT:
+- Lost circulation opportunities
+- Patron frustration and disengagement
+- Perception that "library doesn't have anything"
+- Patrons turn to Amazon/Google instead
+
+SCOUT SOLUTION:
+- Natural language understands intent, not just keywords
+- "No exact match, but here's something similar..."
+- Clarifying questions refine naturally
+- Always provides a path forward
+- Recovery patterns for every dead end
+
+MESSAGING:
+"Scout never dead-ends. When the exact item isn't available, Scout offers
+alternatives, places holds, and keeps patrons engaged."
+
+
+PAIN POINT 4: DECLINING REFERENCE ASSISTANCE
+--------------------------------------------
+
+THE PROBLEM:
+Reference desk transactions have declined from 50% to 35% of patron
+interactions. 54% of libraries cite staff capacity as primary challenge.
+(Source: Market Research)
+
+Causes:
+- Fewer staff to provide assistance
+- Staff time consumed by routine questions
+- Patrons hesitant to "bother" librarians
+- Digital-first patrons don't approach desk
+
+PATRON IMPACT:
+- Less personalized guidance
+- Routine questions go unasked
+- Discovery happens without expert help
+- Patron experience becomes transactional
+
+SCOUT SOLUTION:
+- 24/7 availability for routine questions
+- Frees librarians for complex reference
+- Patrons get help without waiting or asking
+- Augments staff, doesn't replace
+- Warm handoff to humans for complex needs
+
+MESSAGING:
+"Scout handles routine discovery questions so librarians can focus on
+complex research and human connection. Augmentation, not replacement."
+
+
+QUANTIFIED VALUE PROPOSITION
+----------------------------
+
+For Library Directors (ROI-focused):
+- "Libraries using AI discovery see 40% more patrons finding resources"
+- "Staff time savings of 30-50% on routine questions"
+- "Increased circulation across all formats, including underutilized items"
+
+For Reference Librarians (Workload-focused):
+- "Scout handles 'What should I read?' so you can handle complex research"
+- "Warm handoff ensures patrons reach you when they truly need expertise"
+- "Frees time for programming, outreach, and community engagement"
+
+For Technology Librarians (Implementation-focused):
+- "2-3 day integration with existing ILS"
+- "WCAG 2.2 AA compliant out of the box"
+- "Zero patron data logging - privacy by design"
+
+
+EVIDENCE FOR SALES CONVERSATIONS
+--------------------------------
+
+When libraries say: "Our patrons don't need this"
+Response: "51% of library websites use jargon patrons don't understand.
+Patrons WANT easier discovery but don't know how to ask for it."
+
+When libraries say: "We have good search already"
+Response: "Can your search understand 'something light for a beach trip'?
+Scout translates patron intent into catalog results."
+
+When libraries say: "Our librarians provide this service"
+Response: "54% of libraries cite staff capacity challenges. Scout augments
+your team for routine questions, freeing them for complex reference."
+
+When libraries say: "Patrons don't like AI"
+Response: "Patrons use AI daily (Google, Alexa, Siri). They expect
+conversational interfaces. Scout feels like texting a helpful librarian."
+
+
+ACTION ITEMS
+------------
+[ ] Compile patron quotes/testimonials about discovery frustration
+[ ] Document before/after circulation metrics from pilots
+[ ] Create pain point one-pager for sales conversations
+[ ] Build ROI calculator for library directors
+
+
+================================================================================
+================================================================================
+BRIEF 3: LIBRARY PROCUREMENT & SALES CYCLES
+"How to Sell to Libraries - Timing, Process, Decision-Makers"
+================================================================================
+================================================================================
+
+EXECUTIVE SUMMARY
+-----------------
+Library procurement follows predictable cycles aligned to fiscal years.
+Understanding decision-makers, budget timing, and procurement processes
+dramatically increases sales success.
+
+
+THE MARKET
+----------
+
+Total addressable market:
+- 9,194 public library systems in the US
+- 171 million registered patrons
+- $408,000 average technology budget per library
+- $160M+ in annual LSTA grants distributed
+
+Initial target (Phase 1):
+- 2,357 libraries using Polaris (704) or Koha (1,653) ILS
+- These have documented APIs for integration
+
+
+DECISION-MAKER PERSONAS
+-----------------------
+
+PERSONA 1: LIBRARY DIRECTOR
+Role: Final budget authority, board accountability
+Priorities: Community impact, measurable outcomes, peer validation
+Pain points: Proving value to board, justifying tech spend
+Messaging focus: ROI, circulation increases, staff efficiency
+Decision factor: Will this make my library look good to the board?
+
+Engagement approach:
+- Lead with outcomes, not features
+- Peer library references critical
+- Board-ready metrics and reports
+- Position as "innovation leadership"
+
+PERSONA 2: TECHNOLOGY LIBRARIAN
+Role: Technical evaluation, integration feasibility
+Priorities: API compatibility, security, accessibility compliance
+Pain points: Integration complexity, maintenance burden, vendor support
+Messaging focus: 2-3 day integration, WCAG compliance, zero data logging
+Decision factor: Will this integrate smoothly and not create problems?
+
+Engagement approach:
+- Lead with technical specs
+- Provide API documentation
+- Address security/privacy upfront
+- Emphasize low maintenance burden
+
+PERSONA 3: REFERENCE LIBRARIAN
+Role: End user, influencer, front-line feedback
+Priorities: Patron experience, workload impact, quality of recommendations
+Pain points: Repetitive questions, time pressure, recommendation fatigue
+Messaging focus: Augmentation not replacement, quality recommendations
+Decision factor: Will this make my job better or worse?
+
+Engagement approach:
+- Demo the patron experience
+- Show warm handoff to human librarian
+- Emphasize "frees you for complex work"
+- Address replacement fears directly
+
+PERSONA 4: CONSORTIUM MANAGER
+Role: Multi-library decision-maker (10-100+ libraries)
+Priorities: Volume pricing, consistent implementation, member satisfaction
+Pain points: Coordinating across libraries, diverse needs, budget allocation
+Messaging focus: Flexible tiers, unified implementation, consortium pricing
+Decision factor: Can this work for all my member libraries?
+
+Engagement approach:
+- Lead with consortium pricing models
+- Offer pilot at subset of libraries
+- Emphasize customization for different sizes
+- Single contract, multiple libraries
+
+
+FISCAL YEAR TIMING
+------------------
+
+Most public libraries operate July 1 - June 30 fiscal year.
+(Source: Sales Strategy document)
+
+BUDGET CYCLE:
+    July-September: New fiscal year begins, budgets approved
+    October-December: Q1 spending, some discretionary available
+    January-March: Q2 spending, mid-year reviews
+    April-June: Q3 spending, budget planning for NEXT year begins
+    May-June: "Use it or lose it" spending on remaining budget
+
+OPTIMAL TIMING:
+
+    For NEW budget line items:
+    - Engage: January-March (during next-year planning)
+    - Decision: April-May (budget approval process)
+    - Implementation: July+ (new fiscal year)
+
+    For EXISTING budget (discretionary):
+    - Engage: July-September (fresh budget)
+    - OR: April-June (end-of-year funds)
+    - Fastest path if funds already allocated
+
+    For GRANT-FUNDED:
+    - Align with grant cycles (see Brief 4)
+    - Often September-October application deadlines
+    - Implementation following year
+
+
+SALES CYCLE LENGTH
+------------------
+
+Typical: 6-18 months from first contact to signed contract
+(Varies by library size, procurement requirements, funding source)
+
+FASTER (3-6 months):
+- Small libraries with director authority
+- End-of-year budget spending
+- Grant-funded with urgent timeline
+- Previous vendor relationship
+
+LONGER (12-18 months):
+- Large library systems
+- Formal RFP processes
+- Consortium decisions
+- New budget line item required
+
+
+PROCUREMENT PATHS
+-----------------
+
+PATH 1: DIRECT PURCHASE (Small/Medium Libraries)
+- Director has authority up to threshold (often $10K-$50K)
+- Fastest path: demo → proposal → approval → contract
+- Timeline: 1-3 months
+
+PATH 2: INFORMAL QUOTES (Medium Libraries)
+- Requires 2-3 vendor quotes
+- Scout may be sole source for AI discovery
+- Timeline: 2-4 months
+
+PATH 3: FORMAL RFP (Large Libraries/Consortia)
+- Published RFP with evaluation criteria
+- Competitive bidding process
+- Timeline: 6-12 months
+- Requires proposal writing resources
+
+PATH 4: GRANT-FUNDED
+- Tied to grant application and award
+- Often requires match or in-kind contribution
+- Timeline: 12-18 months (application to implementation)
+- See Brief 4 for grant details
+
+
+PRICING STRATEGY
+----------------
+
+(Source: Sales Strategy document)
+
+TIERED MODEL:
+    Starter: $5,995-$7,995/year
+    - Small libraries (<25K population)
+    - Core features, standard support
+
+    Professional: $12,995-$19,995/year
+    - Medium libraries (25K-100K population)
+    - Full features, priority support
+
+    Enterprise: $35,000-$75,000/year
+    - Large libraries (100K+ population)
+    - Custom integration, dedicated support
+
+    Consortium: $75,000-$150,000/year
+    - 10+ libraries
+    - Volume discount, unified contract
+
+COMPETITIVE CONTEXT:
+    - BiblioCommons: $30K-$100K/year
+    - OverDrive Inspire: $8K-$35K/year (estimated)
+    - Scout positioned: Accessible entry point, clear value
+
+
+BETA/PILOT STRATEGY
+-------------------
+
+Conversion rates: 60-70% from pilot to paid
+(Source: Sales Strategy document)
+
+PILOT STRUCTURE:
+    - Duration: 12-16 weeks (one quarter)
+    - Support: Weekly check-ins, intensive onboarding
+    - Metrics: Usage, satisfaction, circulation impact
+    - Outcome: Case study, reference customer, or insights
+
+BETA INCENTIVES:
+    - Option A: 25% off Year 1
+    - Option B: 15% permanent discount for 3-year commitment
+    - Include in case study/marketing (with permission)
+
+
+OUTREACH CHANNELS
+-----------------
+
+(Source: Outreach Context Package)
+
+EMAIL:
+- 36% average B2B open rate
+- 47% education sector open rate (higher than average)
+- Best: Tuesday-Thursday, 10am-2pm
+- Length: 100-125 words max
+
+LISTSERVS:
+- PUBLIB: 9,000+ subscribers (public library focus)
+- Web4Lib: Technology-focused librarians
+- State-specific lists for regional targeting
+
+LINKEDIN:
+- Target: Library Director, Technology Librarian titles
+- Content: Thought leadership, case studies
+- Direct outreach: Warm introductions preferred
+
+CONFERENCES:
+- ALA Annual: Largest library conference (June)
+- PLA Conference: Public libraries (biennial, even years)
+- State conferences: Regional networking
+- Vendor hall presence + session presentations
+
+
+ACTION ITEMS
+------------
+[ ] Build target list by ILS type (Polaris, Koha first)
+[ ] Create persona-specific pitch decks
+[ ] Align outreach to fiscal year timing
+[ ] Develop pilot proposal template
+[ ] Identify conference schedule for next 12 months
+
+
+================================================================================
+================================================================================
+BRIEF 4: GRANT OPPORTUNITIES (Ranked)
+"Non-Dilutive Funding Sources for Scout Development"
+================================================================================
+================================================================================
+
+EXECUTIVE SUMMARY
+-----------------
+$2.5M+ in potential grant funding available through library and humanities
+grants. IMLS National Leadership Grants are highest priority. Grant funding
+positions Scout as community-benefit solution, not just commercial product.
+
+
+GRANT OPPORTUNITY RANKINGS
+--------------------------
+
+RANK 1: IMLS NATIONAL LEADERSHIP GRANTS FOR LIBRARIES (NLG-L)
+Match Score: 10/10
+Amount: $100,000 - $750,000
+Success Rate: Competitive but achievable with strong application
+
+Why it's #1:
+- Explicitly funds library technology innovation
+- AI/ML projects specifically encouraged
+- Scout's mission aligns perfectly with IMLS priorities
+- Prestige benefit: IMLS-funded carries weight
+
+Requirements:
+- US-based organization
+- Library partnership required (letter of commitment)
+- Matching funds (varies by grant type)
+- Project narrative + budget justification
+
+Timeline:
+- Applications typically due: September-October
+- Awards announced: March-April following year
+- Project period: 1-3 years
+
+Scout positioning:
+- "AI-powered equitable discovery for underserved communities"
+- Partner with 3-5 pilot libraries for application
+- Emphasize accessibility, privacy, equity
+
+ACTION: Priority application for 2025 cycle
+
+
+RANK 2: NEH DIGITAL HUMANITIES ADVANCEMENT GRANTS (DHAG)
+Match Score: 9/10
+Amount: $50,000 - $325,000
+
+Why it's high:
+- Funds digital innovation in humanities/culture
+- Libraries as cultural institutions qualify
+- Supports prototype development AND implementation
+
+Requirements:
+- US nonprofit or institution
+- Humanities focus (discovery of books/culture fits)
+- Matching requirement varies by level
+
+Timeline:
+- Applications: January deadline typically
+- Awards: August announcement
+- Level I (smaller): Faster turnaround
+
+Scout positioning:
+- "AI-mediated humanities discovery for public libraries"
+- Emphasize literary discovery, cultural access
+- Partner with humanities-focused library
+
+ACTION: Secondary application alongside IMLS
+
+
+RANK 3: STATE LSTA GRANTS
+Match Score: 9/10
+Amount: $25,000 - $150,000
+Success Rate: 60%+ (higher than federal grants)
+
+Why it's high:
+- Every state distributes LSTA funds
+- Faster process than federal grants
+- Strong relationships = repeat funding
+- $160M+ distributed annually across states
+
+Requirements:
+- Vary by state
+- Usually require library partnership
+- State residency sometimes required
+
+Key states to target:
+- California: Large allocation, tech-friendly
+- New York: Major library systems
+- Texas: Growing library investment
+- Florida: Large population, tech interest
+
+Timeline:
+- Varies by state (check each state library)
+- Many have rolling or quarterly deadlines
+
+Scout positioning:
+- Partner with library in target state
+- Library applies, Scout as vendor/partner
+- Position as "statewide impact" potential
+
+ACTION: Identify top 5 state opportunities, partner with libraries
+
+
+RANK 4: MELLON FOUNDATION - PUBLIC KNOWLEDGE
+Match Score: 8/10
+Amount: $100,000 - $500,000
+
+Why it's notable:
+- Funds public access to knowledge
+- Libraries explicitly in scope
+- Larger grants available
+
+Requirements:
+- By invitation often, but open applications accepted
+- Strong track record preferred
+- Significant project scope
+
+Scout positioning:
+- "Democratizing discovery across socioeconomic barriers"
+- Partner with research library or consortium
+- Emphasize equity and access
+
+ACTION: Exploratory contact with Mellon program officer
+
+
+RANK 5: KNIGHT FOUNDATION - LIBRARIES
+Match Score: 7/10
+Amount: $50,000 - $500,000
+
+Why it's notable:
+- Funds library innovation specifically
+- Interest in community information access
+- Technology-forward foundation
+
+Requirements:
+- Focus on Knight communities (specific cities)
+- Innovation and scalability emphasized
+
+Scout positioning:
+- "Reimagining library discovery for digital-native patrons"
+- Partner with library in Knight community
+
+ACTION: Check Knight community list, identify library partners
+
+
+RANK 6-10: ADDITIONAL OPPORTUNITIES
+
+NSF EXPANDING K-12 RESOURCES (7/10)
+- $25,000 supplements
+- Partner with school library focus
+- Educational technology angle
+
+ALA LIBRARIES TRANSFORMING COMMUNITIES (6/10)
+- Smaller grants ($2,000-$10,000)
+- Community engagement focus
+- Good for pilot funding
+
+STATE TECHNOLOGY GRANTS (Variable)
+- Many states have tech innovation funds
+- Library angle often works
+- Research state-by-state
+
+CORPORATE FOUNDATIONS (Variable)
+- Google.org, Microsoft Philanthropies
+- Typically larger scale
+- Competitive, relationship-dependent
+
+
+GRANT STRATEGY RECOMMENDATIONS
+------------------------------
+
+YEAR 1 PRIORITY:
+1. IMLS NLG-L application (Fall 2025 cycle)
+2. 2-3 State LSTA applications (partner with libraries)
+3. NEH DHAG Level I (January deadline)
+
+TOTAL POTENTIAL YEAR 1: $200K - $500K
+
+GRANT APPLICATION RESOURCES NEEDED:
+- Grant writer (contract or in-house)
+- Library partners willing to co-apply
+- Budget justification templates (see research files)
+- Project narrative aligned to funder priorities
+
+POSITIONING THEMES ACROSS GRANTS:
+- Equity and access (underserved communities)
+- Innovation in public services
+- Privacy-preserving technology
+- Accessibility leadership
+- Library workforce support (augmentation)
+
+
+BUDGET JUSTIFICATION TEMPLATES
+------------------------------
+(From Budget Justification research document)
+
+TYPICAL GRANT BUDGET ALLOCATION:
+    Personnel: 70% ($188,800 on $270K grant)
+    - Project director
+    - Developer time
+    - Evaluation
+
+    Technology: 15% ($40,500)
+    - Cloud infrastructure
+    - API costs
+    - Development tools
+
+    Services: 10% ($27,000)
+    - Evaluation
+    - Accessibility audit
+    - User testing
+
+    Pilot Support: 5% ($13,500)
+    - Training materials
+    - Library onboarding
+    - Documentation
+
+COST-SHARE STRATEGIES:
+    - In-kind library staff time: $25,000 value
+    - Partner server space: $5,000 value
+    - Founder investment match: $50,000+
+
+
+ACTION ITEMS
+------------
+[ ] Draft IMLS project narrative by August 2025
+[ ] Identify 5 library partners for grant applications
+[ ] Research top 5 state LSTA programs
+[ ] Create grant budget templates
+[ ] Schedule call with IMLS program officer (allowed)
+
+
+================================================================================
+================================================================================
+BRIEF 5: TECHNICAL INTEGRATION & ILS APIs
+"How Scout Connects to Library Systems"
+================================================================================
+================================================================================
+
+EXECUTIVE SUMMARY
+-----------------
+Scout integrates with library systems through ILS APIs (Polaris, Koha, Sierra)
+and OverDrive APIs for digital collections. Phase 1 targets 2,357 libraries
+using Polaris or Koha. Integration timeline: 2-3 days for standard setups.
+
+
+TARGET ILS SYSTEMS (PHASE 1)
+----------------------------
+
+POLARIS (Innovative Interfaces)
+Libraries: 704 public library systems
+API: Polaris API (PAC and Staff modules)
+Documentation: Available through vendor relationship
+Integration complexity: Medium
+Notes: Strong in medium/large libraries
+
+KOHA (Open Source)
+Libraries: 1,653 public library systems
+API: REST API (well-documented, open)
+Documentation: Publicly available
+Integration complexity: Low-Medium
+Notes: Open source = easier integration, active community
+
+COMBINED PHASE 1 TARGET: 2,357 libraries (25%+ of US public libraries)
+
+
+FUTURE ILS TARGETS (PHASE 2+)
+-----------------------------
+
+SIERRA (Innovative Interfaces)
+Libraries: ~1,500
+API: Sierra API
+Notes: Innovative owns both Polaris and Sierra
+
+CARL.X (TLC)
+Libraries: ~500
+API: Available
+Notes: Common in smaller libraries
+
+EVERGREEN (Open Source)
+Libraries: ~300
+API: REST API
+Notes: Open source, consortium-focused
+
+SYMPHONY (SirsiDynix)
+Libraries: ~1,000
+API: Web Services API
+Notes: Enterprise-focused, complex
+
+
+OVERDRIVE INTEGRATION
+---------------------
+
+Purpose: Digital collections (ebooks, audiobooks)
+API: OverDrive API
+Coverage: 90%+ of US public libraries have OverDrive
+Priority: High - enables cross-format discovery
+
+Key endpoints:
+- Availability search
+- Metadata retrieval
+- Format information
+- Hold placement (future)
+
+Integration approach:
+- Search OverDrive alongside ILS
+- Unified results presentation
+- Format bridging ("also available as ebook")
+
+
+INTEGRATION ARCHITECTURE
+------------------------
+
+CURRENT PROTOTYPE:
+    Frontend (React) → Netlify Function → Claude API
+                   → Mock Catalog (JSON)
+
+PRODUCTION ARCHITECTURE:
+    Frontend (React)
+         ↓
+    API Gateway (FastAPI)
+         ↓
+    ┌────┴────┬────────┬────────┐
+    ↓         ↓        ↓        ↓
+  Claude   ILS API   OverDrive  Cache
+   API    (Polaris/   API      (Redis)
+          Koha)
+
+
+DATA FLOW FOR SEARCH:
+1. Patron query → Scout frontend
+2. Frontend → Scout API
+3. Scout API → Claude (intent understanding)
+4. Scout API → ILS (catalog search)
+5. Scout API → OverDrive (digital search)
+6. Results merged, ranked, cached
+7. Claude generates conversational response
+8. Response → Frontend → Patron
+
+
+API REQUIREMENTS BY ILS
+-----------------------
+
+POLARIS API CAPABILITIES NEEDED:
+    - PAC search (patron catalog)
+    - Item availability
+    - Bibliographic records
+    - Format/location information
+    Authentication: API key or OAuth
+    Rate limits: Check with library/vendor
+
+KOHA API CAPABILITIES NEEDED:
+    - /biblios endpoint (search)
+    - /items endpoint (availability)
+    - /checkouts (future, for availability)
+    Authentication: API key
+    Rate limits: Configurable
+    Documentation: api.koha-community.org
+
+OVERDRIVE API CAPABILITIES NEEDED:
+    - Search endpoint
+    - Availability check
+    - Metadata retrieval
+    Authentication: Library-specific credentials
+    Documentation: developer.overdrive.com
+
+
+INTEGRATION TIMELINE
+--------------------
+
+STANDARD INTEGRATION: 2-3 days
+    Day 1: API credentials, connection testing
+    Day 2: Search integration, result mapping
+    Day 3: Testing, refinement, launch
+
+COMPLEX INTEGRATION: 5-7 days
+    - Custom ILS configurations
+    - Multiple branch handling
+    - Special collections integration
+
+REQUIREMENTS FROM LIBRARY:
+    - API credentials/access
+    - ILS vendor contact (if needed)
+    - Test environment (preferred)
+    - Staff contact for testing
+
+
+TECHNICAL CONSTRAINTS
+---------------------
+
+NO PATRON DATA STORAGE:
+    - Scout does not store patron queries long-term
+    - Session-only conversation memory
+    - No patron authentication required (Phase 1)
+    - Privacy by design
+
+CATALOG-ONLY RECOMMENDATIONS:
+    - Every recommendation verified against catalog
+    - No hallucinated titles
+    - Availability checked before display
+
+CACHING STRATEGY:
+    - Catalog metadata: Cached (refreshed daily)
+    - Availability: Real-time or short cache (5 min)
+    - Claude responses: Short cache for identical queries
+
+RATE LIMITING:
+    - Scout API: Configurable per library
+    - ILS API: Respect library's limits
+    - Claude API: Managed through batching
+
+
+SECURITY REQUIREMENTS
+---------------------
+
+DATA IN TRANSIT:
+    - All API calls over HTTPS
+    - TLS 1.2+ required
+
+API CREDENTIALS:
+    - Stored in secure vault (not code)
+    - Library-specific credentials
+    - Rotatable without code changes
+
+AUTHENTICATION OPTIONS:
+    - API key (simplest)
+    - OAuth 2.0 (more secure)
+    - IP whitelist (additional layer)
+
+COMPLIANCE:
+    - WCAG 2.2 AA (accessibility)
+    - FERPA (education data protection)
+    - State privacy laws (varies)
+
+
+INTEGRATION CHECKLIST
+---------------------
+
+PRE-INTEGRATION:
+[ ] Confirm ILS type and version
+[ ] Obtain API documentation
+[ ] Request API credentials
+[ ] Identify library technical contact
+[ ] Confirm rate limits and restrictions
+
+INTEGRATION:
+[ ] Connect to ILS API (sandbox first)
+[ ] Map data fields (title, author, format, availability)
+[ ] Connect to OverDrive (if applicable)
+[ ] Implement search result merging
+[ ] Configure caching
+
+TESTING:
+[ ] Search functionality across formats
+[ ] Availability accuracy
+[ ] Edge cases (no results, special characters)
+[ ] Performance under load
+[ ] Mobile responsiveness
+
+LAUNCH:
+[ ] Production credentials
+[ ] Monitoring setup
+[ ] Staff training
+[ ] Patron announcement (optional)
+
+
+KNOWN INTEGRATION CHALLENGES
+----------------------------
+
+CHALLENGE: ILS data quality varies
+- Some catalogs have inconsistent metadata
+- Solution: Fuzzy matching, graceful handling
+
+CHALLENGE: Format encoding differs
+- "Book" vs "BK" vs "print" vs "physical"
+- Solution: Format mapping table per ILS
+
+CHALLENGE: Branch/location complexity
+- Multi-branch systems have complex availability
+- Solution: Aggregate or specify by branch
+
+CHALLENGE: API rate limits
+- High-traffic libraries may hit limits
+- Solution: Caching, request batching
+
+CHALLENGE: Real-time availability
+- Some ILS have delayed availability updates
+- Solution: Soft language ("typically available")
+
+
+ACTION ITEMS
+------------
+[ ] Document Polaris API integration (first priority)
+[ ] Document Koha API integration
+[ ] Create ILS field mapping templates
+[ ] Build integration checklist for onboarding
+[ ] Establish OverDrive developer relationship
+
+
+================================================================================
+APPENDIX: SOURCE DOCUMENT REFERENCE
+================================================================================
+
+RESEARCH DOCUMENTS SYNTHESIZED:
+
+Strategic & Mission:
+    - Mission.txt
+    - scout-outreach-context-package.md
+
+Product Definition:
+    - PRD-librarian.txt
+    - prototype_prd-librarian-llm.md
+    - TRD-librarian-llm.md
+
+Market Research:
+    - Market Research and Opportunity _ Librarian LLM.txt
+    - sales-strategy-and-beta.md
+
+Financial:
+    - Budget justification.txt
+    - Grants.txt
+
+Technical:
+    - CONFLICTS-prototype-vs-production.md
+    - CRITICAL_ERRORS_LOG.md
+    - CLAUDE_API_REFERENCE.md
+
+Methodology:
+    - SOP_ Using Conversation Design Knowledge Base.txt
+
+
+================================================================================
+                              END OF DOCUMENT
+================================================================================
+
+                    SCOUT RESEARCH SYNTHESIS BRIEFS
+                         Version 1.0 | December 2024
+
+                         INTERNAL & CONFIDENTIAL
+
+    These briefs distill 37 research documents into actionable intelligence.
+    Update as new research becomes available.
+
+================================================================================

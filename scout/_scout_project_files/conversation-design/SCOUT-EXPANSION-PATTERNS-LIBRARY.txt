@@ -1,0 +1,1726 @@
+================================================================================
+              SCOUT RECOMMENDATION EXPANSION PATTERNS LIBRARY
+                  "One Search to Multiple Discoveries"
+================================================================================
+
+                         INTERNAL & CONFIDENTIAL
+                    For Scout Team Use Only (Drew, Kenny, Jordan)
+                         Last Updated: December 2024
+
+================================================================================
+                            TABLE OF CONTENTS
+================================================================================
+
+    SECTION 1:  Core Philosophy & Strategy
+    SECTION 2:  Format Bridging Patterns
+    SECTION 3:  Genre-Specific Expansion Patterns (Fiction)
+    SECTION 4:  Topic-Specific Expansion Patterns (Nonfiction)
+    SECTION 5:  Library of Things Connection Patterns
+    SECTION 6:  Series & Sequel Patterns
+    SECTION 7:  Themed Bundle Templates
+    SECTION 8:  Serendipity Spark Patterns
+    SECTION 9:  Natural Language Variations
+    SECTION 10: Timing & "Reading the Room"
+    SECTION 11: Implementation Guide
+
+================================================================================
+SECTION 1: CORE PHILOSOPHY & STRATEGY
+================================================================================
+
+THE CIRCULATION MULTIPLIER
+--------------------------
+Every patron search is an opportunity to reveal the full value of their
+library. The goal: transform a single query into multiple discoveries that
+genuinely enhance the patron's experience.
+
+    Single Search
+         |
+         v
+    Primary Recommendation (answer their question)
+         |
+         v
+    Natural Expansion (reveal related value)
+         |
+         v
+    Multiple Checkouts (patron leaves enriched)
+
+
+THE JOYFUL DISCOVERY FRAMEWORK
+------------------------------
+Expansion must feel like a gift, not a sales pitch.
+
+    JOYFUL (What we do):
+    - "Oh, you might also enjoy..."
+    - "Did you know we have..."
+    - "Since you're interested in X, we actually have Y..."
+    - Framed as: "I'm helping you get more value"
+    - Patron reaction: Grateful, delighted, curious
+
+    PUSHY (What we avoid):
+    - "You should also check out..."
+    - "Don't forget to grab..."
+    - "Our most popular items include..."
+    - Framed as: "The library wants you to take more"
+    - Patron reaction: Pressured, annoyed, defensive
+
+
+EXPANSION HIERARCHY
+-------------------
+When multiple expansion options exist, prioritize in this order:
+
+    1. FORMAT BRIDGING (same content, different format)
+       Highest relevance - exact same content they want
+       "We also have the audiobook version"
+
+    2. DIRECT CONTINUATION (series, sequels, same author)
+       High relevance - they'll want this if they like the first
+       "That's the first in a series" / "Same author also wrote..."
+
+    3. READ-ALIKE (similar content, different source)
+       Medium-high relevance - matches their demonstrated taste
+       "If you like that, you'd also enjoy..."
+
+    4. COMPANION CONTENT (enhances the primary)
+       Medium relevance - adds value to what they're getting
+       "The documentary about this is also great"
+
+    5. TANGENTIAL CONNECTION (related but different)
+       Lower relevance - only if patron seems exploratory
+       "Since you're into astronomy, did you know we have telescopes?"
+
+    6. SERENDIPITY SPARK (unexpected delight)
+       Variable relevance - use sparingly, high reward when it lands
+       "This is random, but based on what you said..."
+
+
+EXPANSION RULES
+---------------
+
+    RULE 1: Primary first, always
+    Never expand until the patron's actual question is answered.
+
+    RULE 2: One expansion at a time
+    Offer one additional thing. If they engage, offer another.
+
+    RULE 3: Earn the right to expand
+    Expansion after a helpful primary feels generous.
+    Expansion instead of a helpful primary feels evasive.
+
+    RULE 4: Match expansion to engagement level
+    - Short, transactional queries: minimal expansion
+    - Engaged, conversational patrons: more expansion opportunity
+    - Explicitly satisfied patrons: no expansion needed
+
+    RULE 5: Format > Content for busy patrons
+    When in doubt, format bridging is safest (same content, different way)
+
+
+================================================================================
+SECTION 2: FORMAT BRIDGING PATTERNS
+================================================================================
+
+Format bridging is the highest-value expansion because it offers the SAME
+content in a form that might better suit the patron's life.
+
+
+--------------------------------------------------------------------------------
+2.1 BOOK → AUDIOBOOK
+--------------------------------------------------------------------------------
+
+WHEN TO SUGGEST:
+- Patron hasn't specified format preference
+- Patron mentions commute, exercise, or multitasking
+- Book is known to have excellent narration
+- Wait time for print is longer than audiobook
+
+PATTERN TEMPLATES:
+
+    Basic:
+    "We also have the audiobook if you prefer listening."
+
+    With context:
+    "The audiobook is great too - [narrator name] really brings it to life."
+
+    Availability-driven:
+    "The print has a wait, but the audiobook is available now."
+
+    Activity-specific:
+    "Perfect for listening during your commute too - we have the audiobook."
+
+    Quality highlight:
+    "The audiobook is actually narrated by the author, which adds a lot."
+
+EXAMPLE DIALOGUES:
+
+    Query: "I want to read Becoming by Michelle Obama"
+    Primary: "'Becoming' is available - it's a powerful memoir."
+    Expansion: "The audiobook is narrated by Michelle Obama herself,
+    which really adds to the experience. Want both, or just one format?"
+
+    Query: "Something for my long drive"
+    Primary: "For a long drive, 'Project Hail Mary' is gripping and funny."
+    [No expansion needed - they asked for audio context]
+
+
+--------------------------------------------------------------------------------
+2.2 BOOK → EBOOK
+--------------------------------------------------------------------------------
+
+WHEN TO SUGGEST:
+- Patron hasn't specified format
+- Patron mentions travel or reading at night
+- Ebook has shorter wait than print
+- Patron uses library app (Libby mention)
+
+PATTERN TEMPLATES:
+
+    Basic:
+    "That's also available as an ebook through Libby."
+
+    Convenience-focused:
+    "If you want it instantly, the ebook is available right now."
+
+    Wait-driven:
+    "Print has a wait, but the ebook is available today."
+
+    Device mention:
+    "Available on Kindle/tablet through Libby if digital works for you."
+
+EXAMPLE DIALOGUES:
+
+    Query: "Do you have The Midnight Library?"
+    Primary: "'The Midnight Library' is available in print."
+    Expansion: "It's also on Libby if you prefer reading on your device -
+    no wait for the ebook."
+
+
+--------------------------------------------------------------------------------
+2.3 BOOK → FILM/DVD
+--------------------------------------------------------------------------------
+
+WHEN TO SUGGEST:
+- Book has a notable film adaptation
+- Patron mentions family or group activity
+- Patron is browsing for entertainment broadly
+- Book is challenging; film might be accessible entry
+
+PATTERN TEMPLATES:
+
+    Basic:
+    "There's also a movie adaptation if you want to watch it after reading."
+
+    Family activity:
+    "We have the film too - could be a fun family movie night after
+    someone finishes the book."
+
+    Comparison framing:
+    "The movie adaptation is great too - fun to compare after reading."
+
+    Quality note:
+    "The film version won [award/acclaim] - worth watching too."
+
+EXAMPLE DIALOGUES:
+
+    Query: "I want to read Dune"
+    Primary: "'Dune' by Frank Herbert - a sci-fi classic. We have it."
+    Expansion: "The recent film adaptation is stunning too - we have
+    the DVD. Some people like reading first, some watch then read."
+
+    Query: "My book club is reading Little Fires Everywhere"
+    Primary: "Great pick - we have several copies."
+    Expansion: "The Hulu series adaptation is excellent too if your
+    club wants to discuss both versions."
+
+
+--------------------------------------------------------------------------------
+2.4 BOOK → GRAPHIC NOVEL/ILLUSTRATED VERSION
+--------------------------------------------------------------------------------
+
+WHEN TO SUGGEST:
+- Classic literature with graphic adaptations
+- Patron seems hesitant about length
+- Children/teen patrons
+- Visual learners mentioned
+
+PATTERN TEMPLATES:
+
+    Basic:
+    "There's also a graphic novel version if you prefer that format."
+
+    Accessibility:
+    "If the full novel feels daunting, there's an illustrated/graphic
+    version that's more accessible."
+
+    For kids:
+    "We also have a graphic novel adaptation that younger readers love."
+
+EXAMPLE DIALOGUES:
+
+    Query: "My kid has to read a classic for school"
+    Primary: "What classic? I can help find it."
+    [After patron says "Great Gatsby"]
+    Primary: "We have 'The Great Gatsby' available."
+    Expansion: "There's also a graphic novel adaptation that some
+    students find more engaging while still getting the story."
+
+
+--------------------------------------------------------------------------------
+2.5 REVERSE BRIDGING (Non-Book → Book)
+--------------------------------------------------------------------------------
+
+WHEN TO SUGGEST:
+- Patron asks for movie/show they loved
+- Patron doesn't realize there's a book version
+- "Based on the book" opportunity
+
+PATTERN TEMPLATES:
+
+    Basic:
+    "Did you know that's based on a book? We have it."
+
+    Enhancement:
+    "The book goes deeper than the movie - worth reading too."
+
+    Origin story:
+    "That started as a book - want the original?"
+
+EXAMPLE DIALOGUES:
+
+    Query: "I loved the show Bridgerton"
+    Primary: "Julia Quinn's 'Bridgerton' series is what the show is based
+    on - we have all the books. Each one focuses on a different sibling."
+    [Expansion built into primary since it's about the source material]
+
+
+--------------------------------------------------------------------------------
+2.6 FORMAT BRIDGING NATURAL LANGUAGE BANK
+--------------------------------------------------------------------------------
+
+AUDIOBOOK:
+    - "We also have the audiobook if you prefer listening."
+    - "The audiobook version is available too."
+    - "Great on audio if that works better for you."
+    - "The narration on this one is excellent - audiobook's worth it."
+    - "Available as an audiobook for your commute/walks/etc."
+
+EBOOK:
+    - "Also available as an ebook through Libby."
+    - "If you want it instantly, the ebook has no wait."
+    - "Available digitally if you prefer that."
+    - "On Libby too, if you read on your phone/tablet."
+
+DVD/FILM:
+    - "We have the movie adaptation too."
+    - "There's a film version if you want to watch after."
+    - "The movie's in our collection too - worth comparing."
+    - "We've got the DVD if movie night sounds good."
+
+LARGE PRINT:
+    - "Also available in large print if that's easier."
+    - "We have a large print edition."
+    - "That comes in large print too."
+
+
+================================================================================
+SECTION 3: GENRE-SPECIFIC EXPANSION PATTERNS (Fiction)
+================================================================================
+
+Each genre has natural expansion paths. Use these patterns when patron
+has found a fiction book they're interested in.
+
+
+--------------------------------------------------------------------------------
+3.1 MYSTERY/THRILLER
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Same Author:
+    "If you like this, [author] has [X] other books - want suggestions?"
+
+    Series Continuation:
+    "That's book [X] in the series - there are [Y] more."
+
+    Subgenre Pivot:
+    "That's a cozy mystery. Want something darker, or more cozies?"
+
+    True Crime Companion:
+    "If you like fictional mysteries, the true crime section has real cases."
+
+    Podcast/Documentary:
+    "There's a true crime documentary that's similar in tone - we have it."
+
+PATTERN EXAMPLES:
+
+    Query: "I loved 'The Silent Patient'"
+    Primary: "Great thriller! Alex Michaelides also wrote 'The Maidens' -
+    same psychological intensity."
+    Expansion: "If you want more unreliable narrator thrillers, I can
+    suggest a few others too."
+
+    Query: "Cozy mystery recommendations?"
+    Primary: "'The Thursday Murder Club' - British, funny, heartwarming."
+    Expansion: "That's a series with 3 books now if you get hooked."
+
+READ-ALIKE BUNDLES:
+    - Psychological thriller: "Silent Patient" → "Gone Girl" → "The Woman in the Window"
+    - Cozy mystery: "Thursday Murder Club" → "A Fatal Grace" → "The Sweetness at the Bottom of the Pie"
+    - Legal thriller: "The Firm" → "Presumed Innocent" → "The Lincoln Lawyer"
+
+
+--------------------------------------------------------------------------------
+3.2 ROMANCE
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Same Author Backlist:
+    "Emily Henry has 4 other books - want me to list them?"
+
+    Series/Interconnected:
+    "That's part of a series set in the same town - different couples."
+
+    Heat Level Pivot:
+    "That one's pretty steamy. Want similar heat or something sweeter?"
+
+    Trope-Based:
+    "Since you like enemies-to-lovers, here are more with that trope."
+
+    Adaptation:
+    "That has a movie/show adaptation - cute for after you read."
+
+PATTERN EXAMPLES:
+
+    Query: "I loved 'Beach Read'"
+    Primary: "Emily Henry is great! Try 'People We Meet on Vacation' next."
+    Expansion: "She has a few others too - all standalone but same vibe."
+
+    Query: "Enemies to lovers romance?"
+    Primary: "'The Hating Game' is a classic for that trope."
+    Expansion: "Also in audiobook with great narration if that helps."
+
+TROPE BUNDLES:
+    - Enemies to lovers: "The Hating Game" → "Beach Read" → "The Spanish Love Deception"
+    - Second chance: "One True Loves" → "People We Meet on Vacation" → "The Notebook"
+    - Forced proximity: "The Love Hypothesis" → "Shipped" → "The Ex Talk"
+
+
+--------------------------------------------------------------------------------
+3.3 SCIENCE FICTION
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Same Author:
+    "Andy Weir also wrote 'The Martian' - same problem-solving energy."
+
+    Series Continuation:
+    "That's book 1 of [X] - major commitment but worth it."
+
+    Subgenre Pivot:
+    "That's hard sci-fi. Want more science-heavy, or more space opera?"
+
+    Nonfiction Companion:
+    "Interested in real space science? We have great astronomy books."
+
+    Film/TV Adaptation:
+    "The show/movie adaptation is excellent - we have it."
+
+PATTERN EXAMPLES:
+
+    Query: "I loved 'Project Hail Mary'"
+    Primary: "So good! 'The Martian' by same author has the same vibe."
+    Expansion: "If you're into the space science, we also have nonfiction
+    about Mars exploration that's surprisingly fun."
+
+    Query: "Space opera recommendations?"
+    Primary: "'The Long Way to a Small, Angry Planet' - found family,
+    diverse crew, cozy space adventure."
+    Expansion: "That's a series but each book can stand alone."
+
+READ-ALIKE BUNDLES:
+    - Hard sci-fi: "Project Hail Mary" → "The Martian" → "Seveneves"
+    - Space opera: "Wayfarers" → "Murderbot" → "Bobiverse"
+    - Near-future: "Ready Player One" → "Snow Crash" → "Neuromancer"
+
+
+--------------------------------------------------------------------------------
+3.4 FANTASY
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Series Continuation:
+    "That's book 1 of [X] - heads up, it's a commitment!"
+
+    Same Author:
+    "Brandon Sanderson has multiple series - want the reading order?"
+
+    Subgenre Pivot:
+    "That's epic fantasy. Want more epic, or something smaller scale?"
+
+    Cozy/Romantasy:
+    "That has romance - want more romantasy, or less romance?"
+
+    Map/World Companion:
+    "There's an illustrated guide to that world - super cool."
+
+PATTERN EXAMPLES:
+
+    Query: "I want to read ACOTAR"
+    Primary: "'A Court of Thorns and Roses' - be ready, it's addictive."
+    Expansion: "That's a 5-book series plus novellas. The audiobooks
+    are popular too if you want to binge faster."
+
+    Query: "Fantasy that's not too long?"
+    Primary: "'The House in the Cerulean Sea' - standalone, cozy, quick."
+    Expansion: "TJ Klune has a few other standalones if you like this one."
+
+READ-ALIKE BUNDLES:
+    - Romantasy: "ACOTAR" → "From Blood and Ash" → "Serpent & Dove"
+    - Cozy fantasy: "Cerulean Sea" → "Legends & Lattes" → "Piranesi"
+    - Epic fantasy: "Mistborn" → "The Name of the Wind" → "The Blade Itself"
+
+
+--------------------------------------------------------------------------------
+3.5 LITERARY FICTION
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Same Author:
+    "[Author]'s other novels have similar depth."
+
+    Award Connection:
+    "That won [award] - want other [award] winners?"
+
+    Theme-Based:
+    "If the [theme] resonated, this other book explores it differently."
+
+    Author Interview/Essay:
+    "The author has an essay collection that's great too."
+
+    Discussion Guide:
+    "Perfect for book club - want discussion questions?"
+
+PATTERN EXAMPLES:
+
+    Query: "Literary fiction with beautiful prose"
+    Primary: "'All the Light We Cannot See' - stunning writing, WWII setting."
+    Expansion: "That won the Pulitzer. Want more Pulitzer winners, or
+    more WWII literary fiction?"
+
+    Query: "Something like 'A Little Life'"
+    Primary: "That's intense. 'The Goldfinch' has similar depth and length."
+    Expansion: "Both are available on audio if you want to experience
+    them that way - different but powerful."
+
+
+--------------------------------------------------------------------------------
+3.6 HORROR
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Same Author:
+    "Stephen King has [hundreds] of books - want favorites?"
+
+    Scare Level:
+    "That's intense. Want scarier, or more atmospheric creepy?"
+
+    Classic vs. Modern:
+    "That's modern horror. Want the classic that inspired it?"
+
+    Nonfiction Companion:
+    "Interested in real haunted places? We have that too."
+
+    Film:
+    "The movie adaptation is terrifying - we have it."
+
+PATTERN EXAMPLES:
+
+    Query: "Scary books for October"
+    Primary: "'Mexican Gothic' - creepy, atmospheric, gothic."
+    Expansion: "Also 'The Haunting of Hill House' if you want classic
+    haunted house. We have the show adaptation too."
+
+
+--------------------------------------------------------------------------------
+3.7 HISTORICAL FICTION
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Same Era:
+    "More WWII historical fiction, or a different time period?"
+
+    Nonfiction Companion:
+    "The real history is fascinating - want nonfiction about [era]?"
+
+    Same Author:
+    "Kristin Hannah writes great historical - want her backlist?"
+
+    Documentary:
+    "There's an excellent documentary about this era."
+
+    Location-Based:
+    "More books set in [location]?"
+
+PATTERN EXAMPLES:
+
+    Query: "WWII historical fiction"
+    Primary: "'The Nightingale' by Kristin Hannah - French Resistance,
+    two sisters, powerful."
+    Expansion: "If you want the real history too, we have great WWII
+    nonfiction - 'Unbroken' reads like fiction but it's true."
+
+
+================================================================================
+SECTION 4: TOPIC-SPECIFIC EXPANSION PATTERNS (Nonfiction)
+================================================================================
+
+Nonfiction naturally lends itself to learning journeys and practical bundles.
+
+
+--------------------------------------------------------------------------------
+4.1 SELF-HELP/PERSONAL DEVELOPMENT
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Author Backlist:
+    "Brene Brown has several books - want the reading order?"
+
+    Complementary Topic:
+    "'Atomic Habits' pairs well with books on productivity/goals."
+
+    Audiobook (Author-Read):
+    "The audiobook is read by the author - adds a lot."
+
+    Workbook/Journal:
+    "There's a companion workbook for applying the concepts."
+
+    Adjacent Topic:
+    "Interested in the psychology behind this? We have deeper dives."
+
+PATTERN EXAMPLES:
+
+    Query: "I want to build better habits"
+    Primary: "'Atomic Habits' by James Clear - the definitive guide."
+    Expansion: "The audiobook is excellent, and there's also a workbook
+    version if you want to actively apply the framework."
+
+TOPIC BUNDLES:
+    - Habits: "Atomic Habits" → "Tiny Habits" → "The Power of Habit"
+    - Mindset: "Mindset" → "Grit" → "Peak"
+    - Relationships: "Attached" → "Hold Me Tight" → "The Seven Principles"
+
+
+--------------------------------------------------------------------------------
+4.2 BIOGRAPHY/MEMOIR
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Same Subject (Different Angle):
+    "That's about [person]. This other bio covers their [earlier/later] years."
+
+    Related Figure:
+    "Interested in [contemporary/collaborator]? We have their bio too."
+
+    Documentary:
+    "There's a documentary about them - we have it."
+
+    Their Own Work:
+    "Want to read their actual [speeches/writings]?"
+
+    Historical Context:
+    "For the era they lived in, this history book is great."
+
+PATTERN EXAMPLES:
+
+    Query: "Biography of Einstein"
+    Primary: "Walter Isaacson's 'Einstein' is the definitive biography."
+    Expansion: "We also have Einstein's own writings collected, and a
+    great documentary about his life."
+
+
+--------------------------------------------------------------------------------
+4.3 HISTORY
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Deeper on Era:
+    "Want more on [era]? I can suggest the essential books."
+
+    Primary Sources:
+    "Want to read actual documents/letters from that time?"
+
+    Different Perspective:
+    "That's from [perspective]. Want the [other] side's view?"
+
+    Documentary:
+    "Ken Burns' documentary on this is excellent - we have it."
+
+    Historical Fiction Companion:
+    "There's great historical fiction set in this period too."
+
+PATTERN EXAMPLES:
+
+    Query: "Books about the Civil War"
+    Primary: "'Battle Cry of Freedom' by McPherson - the standard
+    single-volume history."
+    Expansion: "For personal stories, 'The Civil War: A Narrative' by
+    Shelby Foote is incredible. We also have documentaries if you
+    want to watch as well as read."
+
+TOPIC BUNDLES:
+    - WWII: "The Rise and Fall of the Third Reich" → "Unbroken" → "Band of Brothers"
+    - American Revolution: "1776" → "John Adams" → "Hamilton" (the biography)
+    - Civil Rights: "The Autobiography of Malcolm X" → "Parting the Waters" → "Just Mercy"
+
+
+--------------------------------------------------------------------------------
+4.4 SCIENCE/NATURE
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Same Author:
+    "Mary Roach has other fascinating books - 'Stiff,' 'Gulp,' 'Packing for Mars.'"
+
+    Deeper Dive:
+    "Want more technical depth on [topic]?"
+
+    Documentary/Visual:
+    "Planet Earth/Cosmos covers this beautifully - we have them."
+
+    Field Guide:
+    "Want to observe [subject] yourself? We have field guides."
+
+    Equipment (Library of Things):
+    "We have [binoculars/telescope/microscope] you can borrow!"
+
+PATTERN EXAMPLES:
+
+    Query: "I want to learn about space"
+    Primary: "'Astrophysics for People in a Hurry' by Neil deGrasse Tyson -
+    accessible and fascinating."
+    Expansion: "We also have 'Cosmos' on DVD - beautiful visuals. And
+    did you know we have telescopes you can borrow?"
+
+
+--------------------------------------------------------------------------------
+4.5 COOKING/FOOD
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Same Cuisine:
+    "More [Italian/Thai/etc.] cookbooks?"
+
+    Technique Focus:
+    "Want to master [technique]? We have books just on that."
+
+    Equipment (Library of Things):
+    "We have [instant pot/stand mixer/etc.] you can borrow to try it."
+
+    Food Memoir:
+    "Love the culture behind the food? These memoirs are great."
+
+    Dietary Variation:
+    "[Same cuisine] but vegetarian/gluten-free?"
+
+PATTERN EXAMPLES:
+
+    Query: "Thai cookbook recommendations"
+    Primary: "'Thai Food' by David Thompson - comprehensive and authentic."
+    Expansion: "If you want to go deep, we also have Thai ingredients
+    guides. And our Library of Things has woks and steamers!"
+
+
+--------------------------------------------------------------------------------
+4.6 BUSINESS/CAREER
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Author Backlist:
+    "Malcolm Gladwell has several - want the essential reading order?"
+
+    Complementary Skill:
+    "Leadership pairs well with communication - want that angle?"
+
+    Audiobook:
+    "Great for commute listening - the audiobook is available."
+
+    Industry-Specific:
+    "Want this applied to [specific industry]?"
+
+    Biography Companion:
+    "The [CEO/founder] biography shows these principles in action."
+
+PATTERN EXAMPLES:
+
+    Query: "Books on leadership"
+    Primary: "'Leaders Eat Last' by Simon Sinek - great foundational read."
+    Expansion: "The audiobook is perfect for your commute. And if you
+    want leadership in action, the Steve Jobs biography is fascinating."
+
+
+--------------------------------------------------------------------------------
+4.7 DIY/HOW-TO
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Tools (Library of Things):
+    "We have [tools] you can borrow for this project!"
+
+    Video Format:
+    "This Old House DVDs show these techniques step-by-step."
+
+    Deeper Specialization:
+    "Want to go deeper on just the [specific aspect]?"
+
+    Related Project:
+    "Once you do this, you might want to tackle [related project]."
+
+    Reference:
+    "Keep this reference book handy for future projects."
+
+PATTERN EXAMPLES:
+
+    Query: "I want to learn woodworking"
+    Primary: "'The Complete Manual of Woodworking' - comprehensive starter."
+    Expansion: "Our Library of Things has power tools you can borrow
+    to get started without buying everything. And we have project
+    books once you learn the basics."
+
+
+--------------------------------------------------------------------------------
+4.8 HEALTH/WELLNESS
+--------------------------------------------------------------------------------
+
+EXPANSION PATHS:
+
+    Cookbook Companion:
+    "Want recipes that align with [health approach]?"
+
+    Exercise/Movement:
+    "Pairs well with [yoga/strength/etc.] - want those resources?"
+
+    Audiobook:
+    "Great for motivation - the audiobook keeps you inspired."
+
+    Deeper Science:
+    "Want the research behind this? More technical options available."
+
+    Disclaimer + Redirect:
+    "For medical decisions, your doctor's the expert - but for education..."
+
+PATTERN EXAMPLES:
+
+    Query: "Books about anti-inflammatory diet"
+    Primary: "'The Anti-Inflammatory Diet' - good overview with recipes."
+    Expansion: "We also have cookbooks specifically for this approach
+    if you want more recipe variety."
+
+
+================================================================================
+SECTION 5: LIBRARY OF THINGS CONNECTION PATTERNS
+================================================================================
+
+The Library of Things is a major differentiator. These patterns connect
+book/media interests to borrowable equipment.
+
+
+--------------------------------------------------------------------------------
+5.1 TOPIC → EQUIPMENT MAPPING
+--------------------------------------------------------------------------------
+
+ASTRONOMY/SPACE:
+    Books: Space, astronomy, stargazing guides
+    Equipment: Telescopes, star charts, binoculars
+
+    Pattern: "Since you're interested in astronomy, did you know we have
+    telescopes you can borrow? Perfect for trying stargazing without
+    buying equipment."
+
+BIRDWATCHING/NATURE:
+    Books: Bird guides, nature observation, wildlife
+    Equipment: Binoculars, bird call devices, nature journals
+
+    Pattern: "For birdwatching, we have binoculars you can check out -
+    great for trying the hobby before investing."
+
+MUSIC/INSTRUMENTS:
+    Books: Learn guitar, piano, music theory
+    Equipment: Guitars, ukuleles, keyboards, music stands
+
+    Pattern: "Learning guitar? We actually have guitars you can borrow
+    to practice with while you learn."
+
+GARDENING:
+    Books: Gardening, plants, landscaping
+    Equipment: Soil testing kits, gardening tools, seed libraries
+
+    Pattern: "Starting a garden? Our soil testing kit helps you know
+    what your soil needs before planting."
+
+CRAFTS/MAKING:
+    Books: Sewing, knitting, crafts
+    Equipment: Sewing machines, sergers, Cricut machines
+
+    Pattern: "Want to try sewing? We have sewing machines you can
+    borrow to test before buying your own."
+
+COOKING:
+    Books: Cookbooks, baking, specific cuisines
+    Equipment: Instant Pots, stand mixers, specialty pans, woks
+
+    Pattern: "For that baking project, we have stand mixers and
+    specialty pans you can borrow."
+
+HOME IMPROVEMENT:
+    Books: DIY, home repair, woodworking
+    Equipment: Power tools, tool sets, laser levels
+
+    Pattern: "For that project, check out our tool library - power
+    drills, saws, and more."
+
+GAMING/ENTERTAINMENT:
+    Books: Game strategy guides, gaming history
+    Equipment: Board games, video games, VR headsets, gaming consoles
+
+    Pattern: "We have that board game you can borrow too!"
+
+PHOTOGRAPHY:
+    Books: Photography guides, camera techniques
+    Equipment: Cameras, tripods, lighting kits, GoPros
+
+    Pattern: "Learning photography? We have cameras you can borrow
+    to practice with."
+
+OUTDOOR/CAMPING:
+    Books: Hiking guides, camping, outdoor skills
+    Equipment: Camping gear, hiking poles, GPS devices
+
+    Pattern: "Planning to hike? We have GPS devices and hiking poles
+    you can check out."
+
+SCIENCE/STEM:
+    Books: Science experiments, STEM learning
+    Equipment: Microscopes, science kits, robotics kits
+
+    Pattern: "For hands-on science, we have microscopes and experiment
+    kits you can borrow."
+
+FITNESS:
+    Books: Exercise, yoga, specific sports
+    Equipment: Yoga mats, resistance bands, fitness trackers
+
+    Pattern: "Starting yoga? We have yoga equipment you can borrow."
+
+
+--------------------------------------------------------------------------------
+5.2 NATURAL LANGUAGE FOR LIBRARY OF THINGS
+--------------------------------------------------------------------------------
+
+DISCOVERY FRAMING:
+    "Did you know we have [equipment] you can borrow?"
+    "We actually have [equipment] in our Library of Things!"
+    "Fun fact: you can check out [equipment] here."
+    "Perfect excuse to try [activity] - we have [equipment] to borrow."
+
+PRACTICAL FRAMING:
+    "Great for trying [activity] before investing in your own."
+    "You can borrow [equipment] to see if you like [activity]."
+    "No need to buy [equipment] - borrow ours first."
+
+ACTIVITY CONNECTION:
+    "Since you're interested in [topic], the [equipment] would be perfect."
+    "That pairs well with our [equipment] - hands-on experience."
+    "[Topic] is even better when you can [do thing with equipment]."
+
+
+--------------------------------------------------------------------------------
+5.3 EXAMPLE DIALOGUES
+--------------------------------------------------------------------------------
+
+EXAMPLE 1 - Astronomy:
+    Query: "Books about stargazing for beginners"
+    Primary: "'NightWatch' is the classic starter guide - maps, tips,
+    everything you need to begin."
+    Expansion: "And here's the fun part - we have telescopes you can
+    borrow. Perfect for trying stargazing without buying equipment."
+
+EXAMPLE 2 - Cooking:
+    Query: "I want to learn to bake bread"
+    Primary: "'Flour Water Salt Yeast' is excellent - simple recipes,
+    great technique explanations."
+    Expansion: "We also have stand mixers and bread pans in our Library
+    of Things if you need equipment."
+
+EXAMPLE 3 - DIY:
+    Query: "How to build a bookshelf"
+    Primary: "'The Complete Manual of Woodworking' covers this and more."
+    Expansion: "Our tool lending library has power tools - drills, saws,
+    sanders - so you don't have to buy everything for one project."
+
+EXAMPLE 4 - Music:
+    Query: "I want to learn ukulele"
+    Primary: "'Ukulele for Dummies' is a solid starting point with basics."
+    Expansion: "Did you know we have ukuleles you can check out? Great
+    way to learn without committing to buying one yet."
+
+
+================================================================================
+SECTION 6: SERIES & SEQUEL PATTERNS
+================================================================================
+
+Series awareness prevents patron frustration and creates natural continuation.
+
+
+--------------------------------------------------------------------------------
+6.1 SERIES DETECTION & COMMUNICATION
+--------------------------------------------------------------------------------
+
+FIRST BOOK RECOMMENDED:
+
+    Short Series (2-4 books):
+    "That's the first of [X] books - easy commitment!"
+
+    Long Series (5+ books):
+    "That's book 1 of [X] - fair warning, it's addictive."
+
+    Completed vs. Ongoing:
+    "The series is complete at [X] books." OR
+    "The series is ongoing - [X] out so far, more coming."
+
+LATER BOOK REQUESTED:
+
+    Alert Pattern:
+    "Just so you know, that's book [X] in a series. Some people jump
+    in anywhere, but want me to find book 1?"
+
+    Standalone Check:
+    "That's part of a series, but it works as a standalone too."
+
+SERIES LISTING:
+
+    When Asked:
+    "Here's the reading order:
+    1. [Title]
+    2. [Title]
+    3. [Title]
+    We have all of them."
+
+
+--------------------------------------------------------------------------------
+6.2 SERIES EXPANSION LANGUAGE
+--------------------------------------------------------------------------------
+
+INFORMATIONAL:
+    "That's the first in a series - [X] books total."
+    "FYI, that's book [X] of [Y]."
+    "There are [X] more after that one."
+    "The series continues with [next title]."
+
+ENCOURAGING:
+    "Good news - if you love it, there are [X] more!"
+    "That's book 1, and the series only gets better."
+    "Plenty more where that came from - it's a [X]-book series."
+
+PRACTICAL:
+    "The whole series is available."
+    "We have books 1-[X] in stock."
+    "Want me to list the reading order?"
+
+
+--------------------------------------------------------------------------------
+6.3 SAME-AUTHOR EXPANSION
+--------------------------------------------------------------------------------
+
+When patron enjoys an author, their backlist is natural expansion:
+
+    Prolific Author:
+    "[Author] has [many] other books. Want me to suggest where to go next?"
+
+    Debut/Limited Author:
+    "That's [author]'s debut - they have one other book out: [title]."
+
+    Different Series:
+    "[Author] has another series too - different setting but same quality."
+
+    Standalone to Series:
+    "If you liked that standalone, [author]'s [series name] series is great."
+
+
+--------------------------------------------------------------------------------
+6.4 EXAMPLE DIALOGUES
+--------------------------------------------------------------------------------
+
+EXAMPLE 1 - First in series:
+    Query: "I want to read 'The Hunger Games'"
+    Primary: "'The Hunger Games' - great choice, we have it."
+    Expansion: "That's a trilogy, and honestly all three are worth
+    reading. We have the whole set."
+
+EXAMPLE 2 - Protecting from spoilers:
+    Query: "Do you have 'Mockingjay'?"
+    Response: "Yes! Just checking - that's book 3 in the Hunger Games
+    trilogy. Have you read the first two, or want me to start you
+    at the beginning?"
+
+EXAMPLE 3 - Author expansion:
+    Query: "I loved 'The House in the Cerulean Sea'"
+    Primary: "TJ Klune is wonderful! 'Under the Whispering Door' has
+    the same cozy, heartfelt feeling."
+    Expansion: "He has a few others too - want the full list?"
+
+
+================================================================================
+SECTION 7: THEMED BUNDLE TEMPLATES
+================================================================================
+
+Pre-designed bundles for common themes, occasions, and interests.
+
+
+--------------------------------------------------------------------------------
+7.1 SEASONAL BUNDLES
+--------------------------------------------------------------------------------
+
+SUMMER READING:
+    Theme: Beach reads, vacation books, light entertainment
+    Bundle: "Summer reading mode? Here's a mix:
+    - Light romance: [title]
+    - Fun thriller: [title]
+    - Feel-good fiction: [title]
+    All easy reads that don't require much focus."
+
+OCTOBER/HALLOWEEN:
+    Theme: Spooky, horror, atmospheric
+    Bundle: "October vibes! Different scare levels:
+    - Creepy but not terrifying: [title]
+    - Actually scary: [title]
+    - Spooky nonfiction: [title about true hauntings/mysteries]"
+
+WINTER/COZY SEASON:
+    Theme: Comfort reads, long books, staying in
+    Bundle: "Perfect for staying in:
+    - Cozy fantasy: [title]
+    - Long immersive novel: [title]
+    - Comfort reread material: [classic]"
+
+HOLIDAY GIFT FINDING:
+    Theme: Books as gifts
+    Bundle: "Gift ideas for [recipient type]:
+    - Coffee table book: [title]
+    - Current bestseller: [title]
+    - Crowd-pleaser: [title]"
+
+
+--------------------------------------------------------------------------------
+7.2 LIFE EVENT BUNDLES
+--------------------------------------------------------------------------------
+
+NEW BABY:
+    "For new parents:
+    - Sleep and basics: [practical guide]
+    - Parenting philosophy: [approach book]
+    - Light escape reading: [easy fiction for tired parents]"
+
+STARTING NEW JOB:
+    "For career transitions:
+    - Role-specific skills: [relevant skill book]
+    - General professional development: [title]
+    - Stress management: [title]"
+
+RETIREMENT:
+    "For this new chapter:
+    - Financial planning: [title]
+    - Finding purpose: [title]
+    - New hobby exploration: [various]"
+
+GRIEF/LOSS:
+    "When you're going through loss:
+    - Understanding grief: [title]
+    - Comfort reading: [title]
+    - When you're ready for hope: [title]
+    Take what feels right for where you are."
+
+
+--------------------------------------------------------------------------------
+7.3 HOBBY STARTER BUNDLES
+--------------------------------------------------------------------------------
+
+GARDENING STARTER:
+    "Getting into gardening:
+    - Beginner guide: [title]
+    - Regional growing: [local climate book]
+    - Inspiration: [garden design/memoir]
+    Plus: soil testing kit from Library of Things!"
+
+COOKING FOUNDATIONS:
+    "Building cooking skills:
+    - Technique basics: [title like Salt Fat Acid Heat]
+    - Recipe collection: [reliable cookbook]
+    - Specific cuisine: [based on interest]
+    Equipment available to borrow too."
+
+PHOTOGRAPHY BEGINNER:
+    "Learning photography:
+    - Camera basics: [technique book]
+    - Composition: [title]
+    - Inspiration: [photo book]
+    We have cameras to borrow while you learn!"
+
+
+--------------------------------------------------------------------------------
+7.4 BOOK CLUB BUNDLES
+--------------------------------------------------------------------------------
+
+DISCUSSION-RICH FICTION:
+    "Great for book club discussion:
+    - Multiple perspectives book: [title]
+    - Morally complex: [title]
+    - Based on true events: [title]
+    All have discussion guides available."
+
+VARIETY PACK:
+    "Mix of genres for adventurous clubs:
+    - Literary fiction: [title]
+    - Mystery: [title]
+    - Nonfiction: [title]
+    Something for different tastes."
+
+
+--------------------------------------------------------------------------------
+7.5 AWARD WINNER BUNDLES
+--------------------------------------------------------------------------------
+
+RECENT PULITZER FICTION:
+    "Recent Pulitzer winners:
+    - [Year]: [Title]
+    - [Year]: [Title]
+    - [Year]: [Title]
+    All literary fiction that sparked conversation."
+
+BOOKER PRIZE:
+    "Booker Prize highlights:
+    - [Title] - [brief note]
+    - [Title] - [brief note]
+    International literary excellence."
+
+
+================================================================================
+SECTION 8: SERENDIPITY SPARK PATTERNS
+================================================================================
+
+Unexpected connections that delight. Use sparingly but memorably.
+
+
+--------------------------------------------------------------------------------
+8.1 CROSS-CATEGORY CONNECTIONS
+--------------------------------------------------------------------------------
+
+FICTION → NONFICTION:
+    "Random idea: since you love mysteries, our true crime section has
+    real cases that read like thrillers."
+
+    "You mentioned loving historical fiction set in [era]. Want the
+    actual history too? It's just as dramatic."
+
+    "If you enjoy [sci-fi concept], the actual science is fascinating -
+    we have accessible books on [real science topic]."
+
+NONFICTION → FICTION:
+    "Since you're into [topic], there's great fiction that explores
+    it too - [title] is [topic] as a thriller/novel."
+
+    "The real history you're reading about inspired [fiction title] -
+    might be fun to compare."
+
+BOOK → UNEXPECTED FORMAT:
+    "This is random, but since you're into [hobby], we have [game/kit/
+    equipment] that's basically [hobby] as an activity."
+
+    "You might not expect this, but our [Library of Things item] connects
+    to your interest in [topic]."
+
+
+--------------------------------------------------------------------------------
+8.2 UNEXPECTED AUTHOR CONNECTIONS
+--------------------------------------------------------------------------------
+
+"Did you know [Author A] and [Author B] were friends? Their books
+are in conversation with each other."
+
+"[Fiction author] actually wrote nonfiction too - [title] is their
+take on [topic]."
+
+"[Famous person]'s book recommendations include [title] - interesting
+connection to your interest."
+
+
+--------------------------------------------------------------------------------
+8.3 WHEN TO USE SERENDIPITY SPARKS
+--------------------------------------------------------------------------------
+
+GOOD MOMENTS:
+    - Patron has been engaged and exploratory
+    - Conversation has been going well
+    - Patron seems open to discovery (said "surprise me" or similar)
+    - You've already met their primary need well
+    - The connection is genuinely interesting, not forced
+
+BAD MOMENTS:
+    - Patron wants efficiency/quick answers
+    - Primary need not yet met
+    - Connection feels like a stretch
+    - Patron has declined previous expansions
+
+
+--------------------------------------------------------------------------------
+8.4 SERENDIPITY LANGUAGE
+--------------------------------------------------------------------------------
+
+FRAMING:
+    "This might be unexpected, but..."
+    "Random idea:"
+    "You might not expect this connection, but..."
+    "Here's something interesting:"
+    "Since you mentioned [thing], I thought of..."
+
+SOFTENING (in case it doesn't land):
+    "...but ignore that if it doesn't appeal."
+    "...just a thought."
+    "...or we can stick to [original topic]."
+
+
+--------------------------------------------------------------------------------
+8.5 EXAMPLE DIALOGUES
+--------------------------------------------------------------------------------
+
+EXAMPLE 1:
+    Context: Patron has been looking for mystery novels, seems engaged
+
+    Scout: "Here's something you might not expect - since you love solving
+    puzzles in mysteries, we have escape room kits in the Library of Things.
+    Same satisfaction of figuring things out, but hands-on."
+
+EXAMPLE 2:
+    Context: Patron interested in astronomy books
+
+    Scout: "Random connection: if you're into space, there's amazing
+    sci-fi that uses real astronomy - 'Project Hail Mary' is scientifically
+    accurate AND a page-turner. Best of both worlds."
+
+EXAMPLE 3:
+    Context: Patron reading about Roman history
+
+    Scout: "Since you're into Roman history - there's a fantastic historical
+    fiction series set in Rome by Lindsey Davis. Mysteries set in ancient
+    Rome, but historically accurate. Fiction and history together."
+
+
+================================================================================
+SECTION 9: NATURAL LANGUAGE VARIATIONS
+================================================================================
+
+Variety prevents Scout from sounding robotic. Use these interchangeably.
+
+
+--------------------------------------------------------------------------------
+9.1 EXPANSION OPENERS
+--------------------------------------------------------------------------------
+
+SOFT (Low Pressure):
+    "Oh, and..."
+    "By the way..."
+    "You might also enjoy..."
+    "Just thought I'd mention..."
+    "While I'm thinking of it..."
+    "Also worth knowing..."
+
+MEDIUM (Engaged):
+    "Since you're interested in [topic]..."
+    "Building on that..."
+    "In a similar vein..."
+    "For more like that..."
+    "If that appeals to you..."
+
+ENTHUSIASTIC (When Patron Is Engaged):
+    "Oh! You should also check out..."
+    "Okay, this is exciting -"
+    "You know what would be perfect?"
+    "Here's something great:"
+
+PRACTICAL:
+    "For the complete experience..."
+    "To get the most out of this..."
+    "Pairs well with..."
+
+
+--------------------------------------------------------------------------------
+9.2 FORMAT MENTIONS
+--------------------------------------------------------------------------------
+
+AUDIOBOOK:
+    "Also available as an audiobook."
+    "The audiobook is great too."
+    "Available on audio if you prefer listening."
+    "Great for listening during [commute/walks/etc.]"
+    "The narrator on this one is excellent."
+
+EBOOK:
+    "Also on Libby if you prefer digital."
+    "Available as an ebook with no wait."
+    "If you want it instantly, the ebook is ready."
+    "On your tablet/phone through Libby."
+
+DVD/FILM:
+    "We have the movie too."
+    "There's a film adaptation - worth watching."
+    "The movie version is in our collection."
+    "Great to watch after reading."
+
+
+--------------------------------------------------------------------------------
+9.3 SERIES/CONTINUATION
+--------------------------------------------------------------------------------
+
+INFORMATIONAL:
+    "That's book [X] of [Y]."
+    "First in a series."
+    "There are [X] more after this."
+    "The series continues with [title]."
+
+ENCOURAGING:
+    "Good news - there's more if you love it!"
+    "Plenty more where that came from."
+    "The series only gets better."
+    "You'll have reading material for a while."
+
+PRACTICAL:
+    "We have the whole series."
+    "All [X] books are available."
+    "Want me to list the order?"
+
+
+--------------------------------------------------------------------------------
+9.4 RELATED RECOMMENDATIONS
+--------------------------------------------------------------------------------
+
+SAME AUTHOR:
+    "[Author] also wrote [title]."
+    "Same author, different book: [title]."
+    "If you like their style, try [title]."
+    "[Author]'s other work is great too."
+
+SIMILAR VIBE:
+    "Similar feel: [title]."
+    "Same energy: [title]."
+    "If you want more of that vibe..."
+    "In the same spirit..."
+
+COMPARISON:
+    "If you liked [X], you'll love [Y]."
+    "Fans of [X] often enjoy [Y]."
+    "[Y] scratches the same itch."
+
+
+--------------------------------------------------------------------------------
+9.5 INVITATIONS TO CONTINUE
+--------------------------------------------------------------------------------
+
+OPEN:
+    "Want more suggestions?"
+    "Should I suggest more?"
+    "Want to explore other directions?"
+    "Anything else I can help find?"
+
+SPECIFIC:
+    "Want more [genre/topic]?"
+    "Should I look for more like this?"
+    "Want similar recommendations?"
+    "More from this author?"
+
+EITHER/OR:
+    "Want more of this, or something different?"
+    "More like this, or should we try another angle?"
+    "Keep going in this direction, or pivot?"
+
+
+================================================================================
+SECTION 10: TIMING & "READING THE ROOM"
+================================================================================
+
+Knowing WHEN to expand is as important as knowing HOW.
+
+
+--------------------------------------------------------------------------------
+10.1 SIGNALS TO EXPAND
+--------------------------------------------------------------------------------
+
+GREEN LIGHT - EXPAND FREELY:
+    - Patron asks follow-up questions
+    - Patron expresses enthusiasm ("Oh, that sounds great!")
+    - Patron mentions multiple interests
+    - Patron says "what else" or "more like this"
+    - Conversation has been back-and-forth engaged
+    - Patron seems to be browsing/exploring
+    - Patron explicitly asks for more options
+
+YELLOW LIGHT - EXPAND CAUTIOUSLY:
+    - Patron gives neutral responses ("Okay, thanks")
+    - Patron hasn't engaged with previous suggestions
+    - Conversation has been short
+    - Unclear if primary need is fully met
+    - Patron seems uncertain
+
+    Strategy: Offer ONE gentle expansion, gauge response
+
+
+--------------------------------------------------------------------------------
+10.2 SIGNALS TO HOLD BACK
+--------------------------------------------------------------------------------
+
+RED LIGHT - DON'T EXPAND:
+    - Patron says "that's perfect" or "just that one"
+    - Patron's messages are very short/transactional
+    - Patron declined previous expansion
+    - Patron seems rushed ("quick question")
+    - Patron explicitly asked for specific item only
+    - Patron expresses overwhelm ("that's a lot")
+    - Known-item search successfully completed
+
+    Strategy: Confirm primary recommendation, offer help with
+    next steps (availability, location), close warmly
+
+
+--------------------------------------------------------------------------------
+10.3 HOW TO GAUGE MID-CONVERSATION
+--------------------------------------------------------------------------------
+
+ENGAGEMENT INDICATORS (Positive):
+    - Longer messages
+    - Questions back to Scout
+    - Personal details shared
+    - Enthusiasm expressed
+    - Multiple topics mentioned
+
+DISENGAGEMENT INDICATORS (Negative):
+    - Single-word responses
+    - "Thanks" without follow-up
+    - Ignoring suggestions
+    - Repeating original question
+    - Long pauses
+
+
+--------------------------------------------------------------------------------
+10.4 GRACEFUL NON-EXPANSION
+--------------------------------------------------------------------------------
+
+When NOT expanding, still close warmly:
+
+    "Perfect - [title] is available [details]. Happy reading!"
+
+    "[Title] is ready for you. Let me know if you need anything else."
+
+    "Got it - you can find that in [location]. Enjoy!"
+
+These close the loop without pushing more items.
+
+
+--------------------------------------------------------------------------------
+10.5 RECOVERING FROM OVER-EXPANSION
+--------------------------------------------------------------------------------
+
+If patron seems overwhelmed:
+
+    "Sorry, that was a lot! Let me simplify: [primary recommendation]
+    is the one I'd start with."
+
+    "I got excited with options - [title] is the best match for what
+    you described."
+
+    "Let's focus: [title] is your answer. Everything else is optional."
+
+
+================================================================================
+SECTION 11: IMPLEMENTATION GUIDE
+================================================================================
+
+How to use this document in Scout's development and operation.
+
+
+--------------------------------------------------------------------------------
+11.1 SYSTEM PROMPT INTEGRATION
+--------------------------------------------------------------------------------
+
+OPTION A: Reference Document
+Keep this document as reference; distill key patterns into system prompt.
+
+Add to system prompt:
+    "EXPANSION PRINCIPLES:
+    1. Primary recommendation first, always
+    2. One expansion at a time
+    3. Format bridging is highest value
+    4. Match expansion to engagement level
+    5. Read patron signals before expanding"
+
+OPTION B: Pattern Injection
+Inject specific patterns based on context:
+    - If recommending fiction: load genre-specific patterns
+    - If patron mentions hobby: load Library of Things connections
+    - If series detected: load series patterns
+
+OPTION C: Few-Shot Examples
+Add expansion examples to system prompt:
+    [Include 3-5 examples from this document that show ideal expansion]
+
+
+--------------------------------------------------------------------------------
+11.2 CATALOG ENRICHMENT
+--------------------------------------------------------------------------------
+
+To enable smart expansion, catalog data should include:
+
+REQUIRED:
+    - title
+    - author
+    - format (book, audiobook, ebook, DVD)
+    - availability
+
+EXPANSION-ENABLING:
+    - series_name (if part of series)
+    - series_position (book 1, book 2, etc.)
+    - adaptation_of / has_adaptation (linked items)
+    - genre / subgenre
+    - themes / keywords
+
+LIBRARY OF THINGS:
+    - category
+    - related_topics (connect to book subjects)
+    - borrowing_rules
+
+
+--------------------------------------------------------------------------------
+11.3 EXPANSION LOGIC
+--------------------------------------------------------------------------------
+
+When Scout makes a primary recommendation, check:
+
+    1. FORMAT OPTIONS
+       Does this item exist in other formats?
+       If yes: queue format bridging suggestion
+
+    2. SERIES CHECK
+       Is this part of a series?
+       If yes: note series info, queue series mention
+
+    3. SAME AUTHOR
+       Does author have other works in catalog?
+       If yes: queue author expansion option
+
+    4. LIBRARY OF THINGS
+       Does topic connect to borrowable equipment?
+       If yes: queue LoT suggestion
+
+    5. THEMATIC BUNDLES
+       Does query match a pre-built bundle?
+       If yes: consider bundle suggestion
+
+THEN: Based on patron engagement signals, deliver 0-1 expansions.
+
+
+--------------------------------------------------------------------------------
+11.4 TESTING EXPANSION PATTERNS
+--------------------------------------------------------------------------------
+
+TEST SCENARIOS:
+
+    1. Format Expansion
+       Query: "Do you have Becoming by Michelle Obama?"
+       Expected: Primary + audiobook mention (author-narrated)
+
+    2. Series Awareness
+       Query: "I want to read Hunger Games"
+       Expected: Primary + "that's a trilogy" mention
+
+    3. Library of Things
+       Query: "Books about stargazing"
+       Expected: Primary + telescope mention
+
+    4. Genre Read-Alike
+       Query: "I loved The Silent Patient"
+       Expected: Primary similar book + offer for more
+
+    5. Non-Expansion (Efficiency)
+       Query: "Do you have The Great Gatsby? Just need to know if it's available."
+       Expected: Availability only, no expansion
+
+    6. Over-Expansion Recovery
+       Query: [give long response with multiple suggestions]
+       Follow-up: "That's overwhelming"
+       Expected: Apology + simplification to one best option
+
+
+--------------------------------------------------------------------------------
+11.5 METRICS TO TRACK
+--------------------------------------------------------------------------------
+
+EXPANSION EFFECTIVENESS:
+    - Expansion offer rate (how often does Scout expand?)
+    - Expansion acceptance rate (does patron engage with expansion?)
+    - Multi-item sessions (sessions with 2+ distinct items discussed)
+    - Format bridging success (how often do format mentions get engagement?)
+
+QUALITY SIGNALS:
+    - Patron continues conversation after expansion (positive)
+    - Patron ignores expansion (neutral/negative)
+    - Patron explicitly declines ("just that one") (negative)
+    - Patron expresses overwhelm (negative)
+
+TARGETS:
+    - Expansion offer rate: 60-70% of eligible conversations
+    - Expansion acceptance: 30-40% of offers
+    - Overwhelm complaints: <5% of conversations
+
+
+--------------------------------------------------------------------------------
+11.6 ITERATION PROCESS
+--------------------------------------------------------------------------------
+
+WEEKLY:
+    - Review 10-20 conversations with expansion
+    - Identify patterns that worked / didn't work
+    - Note new expansion opportunities discovered
+
+MONTHLY:
+    - Update pattern library with new patterns
+    - Refine natural language variations
+    - Adjust expansion triggers based on data
+
+QUARTERLY:
+    - Review Library of Things connections (new items?)
+    - Update seasonal bundles
+    - Add new genre/topic patterns as catalog grows
+
+
+================================================================================
+                              END OF DOCUMENT
+================================================================================
+
+              SCOUT RECOMMENDATION EXPANSION PATTERNS LIBRARY
+                         Version 1.0 | December 2024
+
+                         INTERNAL & CONFIDENTIAL
+
+    This library should grow as Scout learns what resonates with patrons.
+    Add successful patterns. Remove ones that don't land.
+
+================================================================================

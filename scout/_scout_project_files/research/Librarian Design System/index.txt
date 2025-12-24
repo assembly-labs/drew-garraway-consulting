@@ -1,0 +1,205 @@
+Tab 1<!DOCTYPE html>
+<html lang="en" data-theme="ccls">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CCLS Library AI Assistant - Discover books and manage your library account">
+  <title>CCLS Library Assistant</title>
+  
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="design-system.css">
+</head>
+<body>
+  <!-- Skip to main content (accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-content">
+      <div class="header-left">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <a href="#" class="library-logo" id="theme-toggle">
+          <div class="library-logo-icon">📚</div>
+          <div class="library-name">CCLS Library</div>
+        </a>
+      </div>
+      <div class="header-actions">
+        <button class="icon-button notification-badge" aria-label="Notifications">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Side Menu Overlay -->
+  <div class="side-menu-overlay" id="menu-overlay"></div>
+
+  <!-- Side Menu -->
+  <nav class="side-menu" id="side-menu" aria-label="Main navigation">
+    <div class="side-menu-header">
+      <h2 class="side-menu-title">Menu</h2>
+      <button class="side-menu-close" id="menu-close" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="side-menu-content">
+      <!-- My Account Section -->
+      <div class="menu-section">
+        <div class="menu-section-title">My Account</div>
+        <a href="#" class="menu-item">
+          <span class="menu-item-icon">💳</span>
+          <span class="menu-item-text">Digital Library Card</span>
+        </a>
+        <a href="#" class="menu-item">
+          <span class="menu-item-icon">📖</span>
+          <span class="menu-item-text">Checkouts</span>
+          <span class="menu-item-badge">3</span>
+        </a>
+        <a href="#" class="menu-item">
+          <span class="menu-item-icon">🔖</span>
+          <span class="menu-item-text">Holds</span>
+          <span class="menu-item-badge">2</span>
+        </a>
+        <a href="#" class="menu-item">
+          <span class="menu-item-icon">💰</span>
+          <span class="menu-item-text">Fines Due</span>
+        </a>
+        <a href="#" class="menu-item">
+          <span class="menu-item-icon">📚</span>
+          <span class="menu-item-text">Reading History</span>
+        </a>
+      </div>
+
+      <div class="menu-divider"></div>
+
+      <!-- Library Services -->
+      <div class="menu-section">
+        <div class="menu-section-title">Library Services</div>
+        <a href="#" class="menu-item">
+          <span class="menu-item-icon">📅</span>
+          <span class="menu-item-text">Events & Programs</span>
+        </a>
+        <a href="#" class="menu-item">
+          <span class="menu-item-icon">🎯</span>
+          <span class="menu-item-text">Book a Study Room</span>
+        </a>
+        <a href="#" class="menu-item">
+          <span class="menu-item-icon">❓</span>
+          <span class="menu-item-text">Ask a Librarian</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Chat Application -->
+  <div class="app-container">
+    <main id="main" class="chat-container">
+      <div class="chat-messages">
+        
+        <!-- Initial Greeting -->
+        <div class="message message--assistant">
+          <p>Hi! I'm here to help you discover books and manage your library account. What can I help you with today?</p>
+        </div>
+
+        <!-- Example User Message -->
+        <div class="message message--user">
+          <p>I want a mystery set in Paris</p>
+        </div>
+
+        <!-- Example Assistant Response with Book Cards -->
+        <div class="message message--assistant">
+          <p>Great choice! I found several mysteries set in Paris. Here are some available now:</p>
+          
+          <!-- Book Card Example 1 -->
+          <div class="book-card">
+            <div class="book-card-header">
+              <div class="book-cover">🗼</div>
+              <div class="book-info">
+                <h3 class="book-title">Murder in the Marais</h3>
+                <p class="book-author">Cara Black</p>
+                <div class="book-formats">
+                  <span class="badge badge--available">Available Now</span>
+                  <span class="badge badge--format">📕 Print</span>
+                  <span class="badge badge--format">🎧 Audiobook</span>
+                </div>
+              </div>
+            </div>
+            <p class="book-explanation">
+              Perfect match! First in the Aimée Leduc series, featuring a private investigator solving crimes in the atmospheric neighborhoods of Paris.
+            </p>
+            <div class="book-actions">
+              <button class="btn btn-primary">Place Hold</button>
+              <button class="btn btn-secondary">See More in Series</button>
+            </div>
+          </div>
+
+          <!-- Book Card Example 2 -->
+          <div class="book-card">
+            <div class="book-card-header">
+              <div class="book-cover">🥐</div>
+              <div class="book-info">
+                <h3 class="book-title">The Paris Apartment</h3>
+                <p class="book-author">Lucy Foley</p>
+                <div class="book-formats">
+                  <span class="badge badge--waitlist">1-week wait</span>
+                  <span class="badge badge--format">📕 Print</span>
+                  <span class="badge badge--format">📱 eBook</span>
+                </div>
+              </div>
+            </div>
+            <p class="book-explanation">
+              A locked-room mystery set in a charming Parisian apartment building with secrets behind every door.
+            </p>
+            <div class="book-actions">
+              <button class="btn btn-primary">Join Waitlist</button>
+              <button class="btn btn-ghost">Tell me more</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Fixed Input Area -->
+    <div class="input-container">
+      <div class="input-wrapper">
+        <textarea 
+          class="input-field" 
+          placeholder="Ask me anything about books, your account, or library services..."
+          rows="1"
+          id="message-input"
+          aria-label="Message input"
+        ></textarea>
+        <button class="send-button" id="send-button" aria-label="Send message">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M14.5 1.5L7 9M14.5 1.5L10 14.5L7 9M14.5 1.5L1.5 6L7 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Example Prompts -->
+      <div class="example-prompts">
+        <button class="example-prompt">"Show me cozy mysteries"</button>
+        <button class="example-prompt">"What's new in sci-fi?"</button>
+        <button class="example-prompt">"When are my books due?"</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>

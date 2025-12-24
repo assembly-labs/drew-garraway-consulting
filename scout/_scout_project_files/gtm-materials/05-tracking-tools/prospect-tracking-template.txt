@@ -1,0 +1,154 @@
+PROSPECT TRACKING SPREADSHEET TEMPLATE
+(Create in Google Sheets or Excel)
+
+==============================================
+SHEET 1: PROSPECT DATABASE
+==============================================
+Column Headers:
+
+A. Library Name
+B. State
+C. City
+D. Population Served
+E. ILS System (Polaris/Koha/Sierra/Other)
+F. Director Name
+G. Director Email
+H. Director Phone
+I. Director LinkedIn
+J. Other Contact Name
+K. Other Contact Email
+L. Library Website
+M. Digital Platforms (OverDrive/Hoopla/etc)
+N. Recent News/Initiatives
+O. Grant Funding Recent (Y/N)
+P. Innovation Indicators
+Q. Fiscal Year End (Month)
+R. Annual Budget (if known)
+S. Priority Score (1-10)
+T. Notes
+
+==============================================
+SHEET 2: OUTREACH TRACKING
+==============================================
+Column Headers:
+
+A. Library Name
+B. First Contact Date
+C. Contact Method (Email/LinkedIn/Phone)
+D. Email Template Used
+E. Response? (Y/N)
+F. Response Date
+G. Interest Level (1-5)
+H. Discovery Call Date
+I. Demo Scheduled Date
+J. Demo Completed? (Y/N)
+K. Cohort Interest (High/Medium/Low/No)
+L. Follow-Up 1 Date
+M. Follow-Up 2 Date
+N. Follow-Up 3 Date
+O. Current Status (Cold/Contacted/Qualified/Demo/Proposal/Closed)
+P. Next Action
+Q. Next Action Date
+R. Outcome (Joined/Not Now/Lost)
+S. Loss Reason
+T. Notes
+
+==============================================
+SHEET 3: PIPELINE DASHBOARD
+==============================================
+Status Tracking:
+- Cold: [Count] libraries
+- Contacted: [Count] libraries
+- Discovery Call: [Count] libraries
+- Demo Scheduled: [Count] libraries
+- Demo Complete: [Count] libraries
+- Proposal Sent: [Count] libraries
+- Negotiating: [Count] libraries
+- Closed Won: [Count] libraries
+- Closed Lost: [Count] libraries
+
+Cohort Status:
+- Spots Filled: [X] / 8
+- Spots Tentative: [X]
+- Spots Available: [X]
+
+By Geography:
+- PA/DE: [X] confirmed
+- California: [X] confirmed
+- Massachusetts: [X] confirmed
+- Other: [X] confirmed
+
+==============================================
+SHEET 4: ACTIVITY METRICS
+==============================================
+Weekly Tracking:
+
+Week of: [Date]
+- Emails Sent: [X]
+- LinkedIn Requests: [X]
+- Phone Calls: [X]
+- Responses Received: [X]
+- Discovery Calls: [X]
+- Demos Completed: [X]
+- Proposals Sent: [X]
+- Cohort Spots Filled: [X]
+
+Response Rates:
+- Email Response Rate: [X]%
+- LinkedIn Accept Rate: [X]%
+- Discovery → Demo Rate: [X]%
+- Demo → Proposal Rate: [X]%
+- Proposal → Close Rate: [X]%
+
+==============================================
+SHEET 5: CONTACT LOG
+==============================================
+Detailed Interaction Tracking:
+
+Date | Library | Contact Person | Type | Notes | Next Step
+---------------------------------------------------------
+[Date] | [Library] | [Name] | Email | Sent cohort offer | Follow up 1/15
+[Date] | [Library] | [Name] | Demo | Loved Scout, checking budget | Send proposal
+[Date] | [Library] | [Name] | Call | Needs board approval | Provide board deck
+
+==============================================
+KEY METRICS TO TRACK
+==============================================
+Daily:
+- Number of outreach touches
+- Responses received
+- Demos scheduled
+
+Weekly:
+- Response rate by template
+- Demo conversion rate
+- Pipeline movement
+
+Monthly:
+- Cohort spots filled
+- Revenue pipeline
+- Loss analysis
+- Template performance
+
+==============================================
+SCORING CRITERIA (1-10)
+==============================================
+10 points total based on:
+- ILS Match (3 points): Polaris/Koha=3, Sierra=2, Other=1
+- Size Fit (3 points): 25-75K=3, 15-25K or 75-100K=2, Other=1
+- Innovation Signs (2 points): Recent grant/tech=2, Some=1, None=0
+- Geography (2 points): PA/DE=2, Priority state=1, Other=0
+
+==============================================
+STATUS DEFINITIONS
+==============================================
+Cold: Not contacted yet
+Contacted: Outreach sent, no response
+Qualified: Responded with interest
+Discovery: Call scheduled/completed
+Demo: Demo scheduled/completed
+Proposal: Proposal/agreement sent
+Negotiating: Discussing terms
+Won: Joined cohort
+Lost: Declined/Not now
+Nurture: Not ready but stay in touch

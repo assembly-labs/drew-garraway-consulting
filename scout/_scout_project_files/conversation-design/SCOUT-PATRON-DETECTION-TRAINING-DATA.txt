@@ -1,0 +1,2086 @@
+================================================================================
+                  SCOUT PATRON DETECTION TRAINING DATA
+              Adaptive Response System - Classification Dataset
+================================================================================
+
+                         INTERNAL & CONFIDENTIAL
+                    For Scout Team Use Only (Drew, Kenny, Jordan)
+                         Last Updated: December 2024
+
+================================================================================
+                            TABLE OF CONTENTS
+================================================================================
+
+    SECTION 1:  Overview & Patron Type Definitions
+    SECTION 2:  Detection Signal Framework
+    SECTION 3:  Training Data - Children & Families
+    SECTION 4:  Training Data - Teens
+    SECTION 5:  Training Data - General Adults
+    SECTION 6:  Training Data - Seniors
+    SECTION 7:  Training Data - Students/Researchers
+    SECTION 8:  Training Data - Hobbyists/Enthusiasts
+    SECTION 9:  Edge Cases & Ambiguous Queries
+    SECTION 10: Cross-Patron Linguistic Analysis
+    SECTION 11: Implementation Guide
+
+================================================================================
+SECTION 1: OVERVIEW & PATRON TYPE DEFINITIONS
+================================================================================
+
+PURPOSE OF PATRON DETECTION
+---------------------------
+Scout adapts its tone, vocabulary, pacing, and recommendations based on who
+it's talking to. Accurate patron detection enables:
+
+    - Appropriate language complexity
+    - Relevant recommendation framing
+    - Correct personality pairing
+    - Better expansion timing
+    - Higher satisfaction and engagement
+
+
+THE SIX PATRON TYPES
+--------------------
+
+TYPE 1: CHILDREN & FAMILIES
+    Who: Parents/caregivers searching for children, or children themselves
+    Age range: Content for ages 0-12, searchers any age
+    Key need: Age-appropriate, engaging, often series-based
+    Personality match: Navigator, Storyteller, Explorer
+
+TYPE 2: TEENS
+    Who: Adolescents 13-19 searching for themselves
+    Key need: Respect, no condescension, trending content
+    Personality match: Enthusiast, Navigator
+    Avoid: Scholar, Storyteller (feels parental)
+
+TYPE 3: GENERAL ADULTS
+    Who: Adults 20-60 with general reading interests
+    Key need: Efficiency, relevance, respect for taste
+    Personality match: Navigator, Curator, Helper, Enthusiast
+    Note: Largest and most diverse group
+
+TYPE 4: SENIORS
+    Who: Older adults 65+, may have accessibility needs
+    Key need: Patience, clarity, dignity, accessibility options
+    Personality match: Storyteller, Navigator, Curator
+    Avoid: Enthusiast (may feel disrespectful)
+
+TYPE 5: STUDENTS/RESEARCHERS
+    Who: Students (high school through graduate), academics, professionals
+    Key need: Credible sources, appropriate depth, deadline awareness
+    Personality match: Scholar, Navigator, Helper
+
+TYPE 6: HOBBYISTS/ENTHUSIASTS
+    Who: Deep interest in specific topics, may be experts
+    Key need: Depth, respect for expertise, non-obvious recommendations
+    Personality match: Scholar, Curator, Explorer, Helper
+
+
+DETECTION CONFIDENCE LEVELS
+---------------------------
+
+    HIGH CONFIDENCE (90%+):
+    Multiple strong signals align. Respond with full adaptation.
+    Example: "my 7 year old loves dog man" → clearly parent/child
+
+    MEDIUM CONFIDENCE (60-89%):
+    Some signals present but not definitive. Adapt moderately.
+    Example: "mystery recommendations" → likely adult, but could be teen
+
+    LOW CONFIDENCE (<60%):
+    Signals ambiguous or conflicting. Use Navigator default.
+    Example: "books" → no patron signals, stay neutral
+
+    CONFLICTING SIGNALS:
+    Different signals suggest different types. Clarify or use safest option.
+    Example: Formal vocabulary but YA request → could be parent, librarian, or mature teen
+
+
+================================================================================
+SECTION 2: DETECTION SIGNAL FRAMEWORK
+================================================================================
+
+Signals are weighted cues that suggest patron type. Multiple signals combine
+for higher confidence.
+
+
+--------------------------------------------------------------------------------
+2.1 VOCABULARY SIGNALS
+--------------------------------------------------------------------------------
+
+CHILDREN/FAMILY INDICATORS:
+    High weight:
+    - "my kid/child/son/daughter/little one"
+    - "for my [age] year old"
+    - Age mentions: "she's 8", "he's in 2nd grade"
+    - "picture books", "chapter books", "middle grade"
+    - Character names: "Peppa Pig", "Dog Man", "Diary of a Wimpy Kid"
+
+    Medium weight:
+    - "bedtime stories"
+    - "read together"
+    - "school assignment" (elementary context)
+    - Simple sentence structure from child typing
+
+TEEN INDICATORS:
+    High weight:
+    - Casual spelling: "ur", "rn", "tbh", "ngl", "imo"
+    - Slang: "slaps", "hits different", "lowkey", "highkey", "bussin"
+    - "BookTok", "BookTube" mentions
+    - Trending YA titles: "ACOTAR", "Colleen Hoover"
+    - Lowercase everything, minimal punctuation
+
+    Medium weight:
+    - "ya" or "young adult" explicit mention
+    - Romance subgenre awareness (enemies to lovers, slow burn)
+    - Casual tone without age mention
+    - Short messages, quick pacing
+
+SENIOR INDICATORS:
+    High weight:
+    - "large print" request
+    - Mentions of vision/hearing changes
+    - Classic author references (Maeve Binchy, Rosamunde Pilcher)
+    - More formal grammar and complete sentences
+    - Polite openers ("Hello", "Good morning")
+
+    Medium weight:
+    - Slower typing pace (longer gaps between messages)
+    - Traditional genre preferences (cozy mysteries, historical)
+    - Questions about physical format specifically
+    - Mention of grandchildren (shifts to family mode)
+
+STUDENT/RESEARCHER INDICATORS:
+    High weight:
+    - "for class", "assignment", "paper", "thesis", "research"
+    - Academic vocabulary: "sources", "scholarly", "peer-reviewed"
+    - Subject + level: "psychology 101", "graduate level"
+    - Citation needs: "need to cite", "bibliography"
+
+    Medium weight:
+    - Technical terminology in query
+    - Specific nonfiction topics
+    - Deadline mentions
+    - Multiple book requests on same topic
+
+HOBBYIST/ENTHUSIAST INDICATORS:
+    High weight:
+    - Deep subgenre knowledge: "grimdark fantasy", "cozy mystery with cats"
+    - "I've already read" + multiple titles
+    - Technical hobby vocabulary
+    - "book club" mentions
+    - "deeper dive" or "more advanced" requests
+
+    Medium weight:
+    - Author name drops
+    - Series awareness
+    - Specific trope requests
+    - Comparison to multiple titles
+
+
+--------------------------------------------------------------------------------
+2.2 TOPIC SIGNALS
+--------------------------------------------------------------------------------
+
+STRONGLY SUGGESTS CHILDREN/FAMILY:
+    - Picture books, board books
+    - Early readers, chapter books
+    - Middle grade fiction
+    - Children's series (Magic Tree House, Junie B. Jones)
+    - Parenting, child development
+
+STRONGLY SUGGESTS TEEN:
+    - YA fantasy romance
+    - BookTok trending titles
+    - Coming of age themes
+    - High school settings
+    - YA dystopian
+
+STRONGLY SUGGESTS STUDENT:
+    - Textbook requests
+    - Academic subjects with level indicators
+    - Test prep (SAT, GRE, MCAT)
+    - Study guides
+    - Primary sources, research materials
+
+STRONGLY SUGGESTS SENIOR:
+    - Large print requests
+    - Audiobooks for accessibility
+    - Classic authors, traditional genres
+    - Memoir, biography of historical figures
+    - Gentle, cozy content preferences
+
+STRONGLY SUGGESTS HOBBYIST:
+    - Niche subgenres
+    - Technical how-to at advanced level
+    - Collecting, specialized interests
+    - Deep-dive nonfiction
+    - "Beyond beginner" requests
+
+
+--------------------------------------------------------------------------------
+2.3 TONE/STYLE SIGNALS
+--------------------------------------------------------------------------------
+
+FORMALITY SPECTRUM:
+
+    Very Casual (suggests teen or casual adult):
+    "yo", "hey", lowercase, no punctuation, slang, emoji
+
+    Casual (suggests general adult):
+    Conversational but proper, some punctuation, relaxed
+
+    Neutral (ambiguous):
+    Standard grammar, moderate formality
+
+    Formal (suggests senior, professional, or student):
+    Complete sentences, proper punctuation, polite openers
+
+    Very Formal (suggests senior or academic):
+    "I am seeking", "I would appreciate", elaborate politeness
+
+
+PACING SIGNALS:
+
+    Rapid/Short (suggests teen or busy adult):
+    Single words, quick questions, minimal context
+
+    Moderate (suggests general adult):
+    Complete questions, some context
+
+    Detailed/Lengthy (suggests hobbyist, researcher, or senior):
+    Extensive context, multiple sentences, thorough explanation
+
+
+--------------------------------------------------------------------------------
+2.4 CONTEXT SIGNALS
+--------------------------------------------------------------------------------
+
+RELATIONSHIP MENTIONS:
+    "for my kid/child" → Family mode
+    "for my mom/dad" → Adult shopping for senior
+    "for my grandkid" → Senior shopping for child
+    "for my friend" → Peer recommendation (match friend's signals)
+    "for myself" → Self-directed, use other signals
+
+TIME/OCCASION MENTIONS:
+    "summer reading" → Often family or student
+    "beach vacation" → Often adult
+    "book club" → Adult hobbyist
+    "assignment due" → Student
+    "can't sleep" → Adult or senior
+    "long flight" → Adult traveler
+
+FORMAT PREFERENCES:
+    "large print" → Senior (high confidence)
+    "audiobook for commute" → Working adult
+    "ebook" → Tech-comfortable (any age)
+    "picture book" → Child/family
+
+
+================================================================================
+SECTION 3: TRAINING DATA - CHILDREN & FAMILIES
+================================================================================
+
+50 example queries with classification annotations.
+
+FORMAT:
+[Query]
+Signals: [identified signals]
+Confidence: [High/Medium/Low]
+Sub-type: [Parent searching / Child typing / Gift-giver]
+
+
+--------------------------------------------------------------------------------
+3.1 HIGH CONFIDENCE - PARENT/CAREGIVER SEARCHING
+--------------------------------------------------------------------------------
+
+1. "Books for my 7 year old who loves animals"
+   Signals: "my X year old", topic (animals)
+   Confidence: High
+   Sub-type: Parent searching
+
+2. "My daughter is obsessed with Dog Man, what else would she like?"
+   Signals: "my daughter", character name (Dog Man)
+   Confidence: High
+   Sub-type: Parent searching
+
+3. "Chapter books for a reluctant reader, he's 9"
+   Signals: Age mention, "chapter books", parental framing
+   Confidence: High
+   Sub-type: Parent searching
+
+4. "Need picture books about starting kindergarten"
+   Signals: "picture books", developmental milestone
+   Confidence: High
+   Sub-type: Parent searching
+
+5. "What's appropriate for a 10 year old who reads above grade level?"
+   Signals: Age, grade level, appropriateness concern
+   Confidence: High
+   Sub-type: Parent searching
+
+6. "My son won't read anything without pictures, he's 8"
+   Signals: "my son", age, reading preference
+   Confidence: High
+   Sub-type: Parent searching
+
+7. "Bedtime stories for my toddler"
+   Signals: "my toddler", bedtime context
+   Confidence: High
+   Sub-type: Parent searching
+
+8. "Books like Magic Tree House for my twins"
+   Signals: "my twins", series comparison
+   Confidence: High
+   Sub-type: Parent searching
+
+9. "My kid needs to read a biography for school, 4th grade level"
+   Signals: "my kid", school assignment, grade level
+   Confidence: High
+   Sub-type: Parent searching
+
+10. "Graphic novels for my 11 year old who doesn't like reading"
+    Signals: "my X year old", format preference, reluctant reader
+    Confidence: High
+    Sub-type: Parent searching
+
+11. "Books that teach kindness for ages 5-7"
+    Signals: Age range, educational intent
+    Confidence: High
+    Sub-type: Parent searching
+
+12. "My daughter just finished Diary of a Wimpy Kid, now what?"
+    Signals: "my daughter", children's series
+    Confidence: High
+    Sub-type: Parent searching
+
+13. "Early readers for a kid just learning to read"
+    Signals: "early readers", developmental stage
+    Confidence: High
+    Sub-type: Parent searching
+
+14. "Books about divorce for children, my kids are 6 and 9"
+    Signals: Ages, sensitive topic for children, "my kids"
+    Confidence: High
+    Sub-type: Parent searching
+
+15. "What's the reading level of Junie B. Jones?"
+    Signals: Children's series, reading level question
+    Confidence: High
+    Sub-type: Parent searching
+
+16. "Board books for my baby"
+    Signals: "board books", "my baby"
+    Confidence: High
+    Sub-type: Parent searching
+
+17. "My son only wants to read about dinosaurs"
+    Signals: "my son", narrow interest typical of children
+    Confidence: High
+    Sub-type: Parent searching
+
+18. "Need books for my niece, she's turning 8"
+    Signals: "my niece", age, gift context
+    Confidence: High
+    Sub-type: Gift-giver
+
+19. "What age is Harry Potter appropriate for?"
+    Signals: Appropriateness question, children's/middle grade title
+    Confidence: High
+    Sub-type: Parent searching
+
+20. "Books to help my kid with anxiety, she's 7"
+    Signals: "my kid", age, mental health topic for child
+    Confidence: High
+    Sub-type: Parent searching
+
+
+--------------------------------------------------------------------------------
+3.2 MEDIUM CONFIDENCE - LIKELY FAMILY
+--------------------------------------------------------------------------------
+
+21. "Good books for a 12 year old"
+    Signals: Age mention (tweens can search themselves)
+    Confidence: Medium
+    Sub-type: Could be parent or self
+
+22. "Chapter books about soccer"
+    Signals: "chapter books" (children's format)
+    Confidence: Medium
+    Sub-type: Likely parent, could be child
+
+23. "Books like Percy Jackson"
+    Signals: Middle grade series
+    Confidence: Medium
+    Sub-type: Could be parent, child, or nostalgic adult
+
+24. "Funny books for kids"
+    Signals: "for kids" framing
+    Confidence: Medium
+    Sub-type: Likely parent or teacher
+
+25. "Middle grade fantasy recommendations"
+    Signals: "middle grade" category knowledge
+    Confidence: Medium
+    Sub-type: Could be informed parent, teacher, or librarian
+
+26. "Books about a new sibling"
+    Signals: Life event topic common for young children
+    Confidence: Medium
+    Sub-type: Likely parent
+
+27. "What's popular with 3rd graders?"
+    Signals: Grade level framing
+    Confidence: Medium
+    Sub-type: Parent or teacher
+
+28. "Easy readers with diverse characters"
+    Signals: "easy readers", diversity request
+    Confidence: Medium
+    Sub-type: Parent, teacher, or librarian
+
+29. "Audiobooks for a long car trip with kids"
+    Signals: "with kids" context
+    Confidence: Medium
+    Sub-type: Parent planning
+
+30. "Science books for elementary age"
+    Signals: "elementary age" framing
+    Confidence: Medium
+    Sub-type: Parent or teacher
+
+
+--------------------------------------------------------------------------------
+3.3 CHILD TYPING THEMSELVES
+--------------------------------------------------------------------------------
+
+31. "i like dog man whats like it"
+    Signals: Simple structure, lowercase, children's character
+    Confidence: High
+    Sub-type: Child typing
+
+32. "books about cats"
+    Signals: Simple query, narrow topic
+    Confidence: Medium
+    Sub-type: Could be child
+
+33. "scary books for kids"
+    Signals: "for kids" self-identification
+    Confidence: Medium
+    Sub-type: Likely child or parent
+
+34. "i want a book about horses"
+    Signals: "i want", simple structure, topic
+    Confidence: Medium
+    Sub-type: Likely child
+
+35. "whats the next dork diaries"
+    Signals: Children's series, casual typing
+    Confidence: High
+    Sub-type: Child or young teen
+
+
+--------------------------------------------------------------------------------
+3.4 FAMILY EDGE CASES
+--------------------------------------------------------------------------------
+
+36. "Babysitters Club books"
+    Signals: Children's series
+    Confidence: Medium
+    Sub-type: Could be nostalgic adult, parent, or child
+
+37. "Books for my teenager who used to love reading as a kid"
+    Signals: Teen mention, but parental framing
+    Confidence: High - but TEEN content needed
+    Sub-type: Parent searching for teen
+
+38. "Grandpa wants to read to my kids, what's good?"
+    Signals: Multi-generational, reading aloud
+    Confidence: High
+    Sub-type: Parent facilitating
+
+39. "I'm a teacher looking for read-alouds"
+    Signals: Professional context
+    Confidence: High
+    Sub-type: Teacher (professional mode)
+
+40. "Good audiobooks for family road trip, ages 5 to 15"
+    Signals: Age range, family context
+    Confidence: High
+    Sub-type: Parent seeking all-ages content
+
+
+================================================================================
+SECTION 4: TRAINING DATA - TEENS
+================================================================================
+
+50 example queries showing teen linguistic patterns.
+
+
+--------------------------------------------------------------------------------
+4.1 HIGH CONFIDENCE - CLEAR TEEN SIGNALS
+--------------------------------------------------------------------------------
+
+1. "ya fantasy recs??"
+   Signals: "ya", casual, abbreviated
+   Confidence: High
+
+2. "something like acotar but shorter"
+   Signals: ACOTAR reference, lowercase, casual
+   Confidence: High
+
+3. "enemies to lovers books pls"
+   Signals: Romance trope, "pls"
+   Confidence: High
+
+4. "i need a book thats not boring"
+   Signals: Casual, lowercase, "boring" framing
+   Confidence: High
+
+5. "whats on booktok rn"
+   Signals: "booktok", "rn"
+   Confidence: High
+
+6. "books that will make me cry"
+   Signals: Emotional request, casual tone
+   Confidence: High
+
+7. "anything by colleen hoover"
+   Signals: Author popular with teens, lowercase
+   Confidence: High
+
+8. "dark romance recs"
+   Signals: Subgenre awareness, "recs"
+   Confidence: High
+
+9. "books like twilight but better"
+   Signals: YA reference, casual judgment
+   Confidence: High
+
+10. "fantasy romance thats actually good"
+    Signals: Genre combo, casual qualifier
+    Confidence: High
+
+11. "tbh i dont usually read but i want to start"
+    Signals: "tbh", casual admission
+    Confidence: High
+
+12. "need something for english class that wont put me to sleep"
+    Signals: School context, casual framing
+    Confidence: High
+
+13. "books with morally grey characters"
+    Signals: Trope awareness ("morally grey")
+    Confidence: High
+
+14. "slow burn romance pls"
+    Signals: "slow burn" trope, "pls"
+    Confidence: High
+
+15. "something spicy but not too spicy if u know what i mean"
+    Signals: "u", casual, romance heat level awareness
+    Confidence: High
+
+16. "yo any good horror books"
+    Signals: "yo", casual
+    Confidence: High
+
+17. "books similar to the cruel prince"
+    Signals: YA fantasy reference
+    Confidence: High
+
+18. "i just finished it ends with us what next"
+    Signals: Trending title, casual pacing
+    Confidence: High
+
+19. "lowkey want something sad"
+    Signals: "lowkey"
+    Confidence: High
+
+20. "fantasy books that hit different"
+    Signals: "hit different"
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+4.2 MEDIUM CONFIDENCE - LIKELY TEEN
+--------------------------------------------------------------------------------
+
+21. "romance recommendations"
+    Signals: Genre interest common with teens
+    Confidence: Medium (could be adult)
+
+22. "dystopian books like hunger games"
+    Signals: YA dystopian reference
+    Confidence: Medium
+
+23. "books about high school"
+    Signals: Setting relevant to teens
+    Confidence: Medium (could be nostalgic adult)
+
+24. "quick reads"
+    Signals: Pacing preference
+    Confidence: Medium
+
+25. "something with a happy ending"
+    Signals: Tone preference
+    Confidence: Medium
+
+26. "lgbtq ya books"
+    Signals: "ya" explicit
+    Confidence: High
+
+27. "books for a 16 year old"
+    Signals: Age mention
+    Confidence: Medium (could be self or parent)
+
+28. "fantasy series to binge"
+    Signals: Binge reading
+    Confidence: Medium
+
+29. "what should i read next"
+    Signals: Casual, seeking guidance
+    Confidence: Medium
+
+30. "books that are easy to get into"
+    Signals: Accessibility concern
+    Confidence: Medium
+
+
+--------------------------------------------------------------------------------
+4.3 TEEN SLANG/VOCABULARY PATTERNS
+--------------------------------------------------------------------------------
+
+31. "ngl i need a good book"
+    Signals: "ngl" (not gonna lie)
+    Confidence: High
+
+32. "this might be a weird ask but vampire romance?"
+    Signals: Self-aware request, trending interest
+    Confidence: High
+
+33. "ok so i loved fourth wing now what"
+    Signals: "ok so", casual narrative style
+    Confidence: High
+
+34. "any recs for when ur sad"
+    Signals: "recs", "ur"
+    Confidence: High
+
+35. "books that are giving main character energy"
+    Signals: "giving X energy"
+    Confidence: High
+
+36. "i literally cant stop thinking about that book whats similar"
+    Signals: "literally", emotional intensity
+    Confidence: High
+
+37. "pls help i have a book hangover"
+    Signals: "pls", "book hangover" (reader slang)
+    Confidence: High
+
+38. "im looking for comfort reads"
+    Signals: "comfort reads" terminology
+    Confidence: Medium-High
+
+39. "books w good representation"
+    Signals: "w" abbreviation, diversity interest
+    Confidence: High
+
+40. "found family trope recs"
+    Signals: Trope vocabulary
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+4.4 TEEN EDGE CASES
+--------------------------------------------------------------------------------
+
+41. "I need to read a classic for school"
+    Signals: School requirement, but formal grammar
+    Confidence: Medium
+    Note: Could be teen with formal writing or parent asking
+
+42. "Books for my book club, we're all 17"
+    Signals: Age mention, book club
+    Confidence: High
+
+43. "What's appropriate for a mature 14 year old?"
+    Signals: Age + appropriateness = likely parent
+    Confidence: Parent asking about teen
+
+44. "College essay books"
+    Signals: Could be teen (applying) or parent
+    Confidence: Medium
+
+45. "I used to love reading but stopped, trying to get back into it"
+    Signals: Reading history, no strong age signals
+    Confidence: Medium (teen or young adult)
+
+
+================================================================================
+SECTION 5: TRAINING DATA - GENERAL ADULTS
+================================================================================
+
+50 example queries showing adult patterns (ages ~25-60).
+
+
+--------------------------------------------------------------------------------
+5.1 HIGH CONFIDENCE - CLEAR ADULT SIGNALS
+--------------------------------------------------------------------------------
+
+1. "I need a good thriller for my flight"
+    Signals: Travel context, genre preference
+    Confidence: High
+
+2. "Book club suggestions for literary fiction"
+    Signals: Book club, genre awareness
+    Confidence: High
+
+3. "Something like Where the Crawdads Sing"
+    Signals: Adult bestseller reference
+    Confidence: High
+
+4. "Beach reads for vacation"
+    Signals: Vacation context
+    Confidence: High
+
+5. "I loved Lessons in Chemistry, what's similar?"
+    Signals: Adult fiction reference
+    Confidence: High
+
+6. "Historical fiction set in WWII"
+    Signals: Adult genre preference
+    Confidence: High
+
+7. "Audiobooks for my commute, about 30 minutes each way"
+    Signals: Commute context (working adult)
+    Confidence: High
+
+8. "Just finished a heavy book, need something lighter"
+    Signals: Reading palette management
+    Confidence: High
+
+9. "Mysteries like Louise Penny"
+    Signals: Adult mystery author
+    Confidence: High
+
+10. "Books on leadership for work"
+    Signals: Professional development
+    Confidence: High
+
+11. "Something to help with stress and anxiety"
+    Signals: Adult life challenge
+    Confidence: High
+
+12. "I haven't read fiction in years, where do I start?"
+    Signals: Adult re-entry to reading
+    Confidence: High
+
+13. "Nonfiction about habit building"
+    Signals: Self-improvement topic
+    Confidence: High
+
+14. "Memoir recommendations"
+    Signals: Adult genre preference
+    Confidence: High
+
+15. "Books about marriage and relationships"
+    Signals: Adult life topic
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+5.2 ADULT - PRACTICAL/LIFE CONTEXT
+--------------------------------------------------------------------------------
+
+16. "I'm going through a divorce, something to help"
+    Signals: Adult life event
+    Confidence: High
+
+17. "Starting a new job, books on the industry"
+    Signals: Career context
+    Confidence: High
+
+18. "Planning to travel to Italy, want to learn about the culture"
+    Signals: Travel planning
+    Confidence: High
+
+19. "Books about investing for beginners"
+    Signals: Financial topic
+    Confidence: High
+
+20. "Something to read while the baby naps"
+    Signals: Parent of infant
+    Confidence: High
+
+21. "Quick reads I can finish in a weekend"
+    Signals: Time-constrained reading
+    Confidence: High
+
+22. "Books that will help me be a better manager"
+    Signals: Professional role
+    Confidence: High
+
+23. "Home renovation guides"
+    Signals: Homeowner context
+    Confidence: High
+
+24. "Cookbooks for busy weeknights"
+    Signals: Adult household management
+    Confidence: High
+
+25. "Books about dealing with aging parents"
+    Signals: Sandwich generation topic
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+5.3 ADULT - ENTERTAINMENT FOCUSED
+--------------------------------------------------------------------------------
+
+26. "Something fun and escapist"
+    Signals: Entertainment goal
+    Confidence: High
+
+27. "Thrillers that keep you guessing"
+    Signals: Genre preference
+    Confidence: High
+
+28. "Romance without too much drama"
+    Signals: Specific tone preference
+    Confidence: High
+
+29. "Page turners I won't be able to put down"
+    Signals: Engagement priority
+    Confidence: High
+
+30. "Psychological thrillers like Gone Girl"
+    Signals: Adult thriller reference
+    Confidence: High
+
+31. "Feel-good fiction, something uplifting"
+    Signals: Mood specification
+    Confidence: High
+
+32. "Mystery series I can binge"
+    Signals: Series interest
+    Confidence: Medium-High
+
+33. "Something everyone is talking about"
+    Signals: Social relevance
+    Confidence: Medium
+
+34. "Books that became good movies"
+    Signals: Cross-format interest
+    Confidence: Medium
+
+35. "Award winners I should have read by now"
+    Signals: Cultural literacy interest
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+5.4 ADULT - MODERATE FORMALITY
+--------------------------------------------------------------------------------
+
+36. "Looking for fiction recommendations"
+    Signals: Neutral, clear request
+    Confidence: High (adult default)
+
+37. "Can you suggest some good nonfiction?"
+    Signals: Polite, open request
+    Confidence: High
+
+38. "I enjoyed The Nightingale. Similar books?"
+    Signals: Adult historical fiction reference
+    Confidence: High
+
+39. "What's popular in mysteries right now?"
+    Signals: Trend curiosity
+    Confidence: Medium-High
+
+40. "Books about creativity and innovation"
+    Signals: Professional interest topic
+    Confidence: High
+
+41. "Historical fiction, preferably not too long"
+    Signals: Genre + practical constraint
+    Confidence: High
+
+42. "Recommendations for someone who likes true crime"
+    Signals: Adult genre preference
+    Confidence: High
+
+43. "Science books for a general audience"
+    Signals: Accessible nonfiction interest
+    Confidence: High
+
+44. "Contemporary literary fiction suggestions"
+    Signals: Genre sophistication
+    Confidence: High
+
+45. "Biographies of interesting people"
+    Signals: Broad adult interest
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+5.5 ADULT EDGE CASES
+--------------------------------------------------------------------------------
+
+46. "Romance recommendations" (no other signals)
+    Signals: Genre only
+    Confidence: Medium (could be adult or teen)
+    Default: Adult, but watch for teen signals in follow-up
+
+47. "Fantasy series" (minimal context)
+    Signals: Genre only
+    Confidence: Medium
+    Default: Adult, but could be any age
+
+48. "Good books"
+    Signals: None
+    Confidence: Low
+    Default: Navigator personality, probe for more
+
+49. "Something like Harry Potter" (adult asking)
+    Signals: Could be nostalgia or comp for children's book
+    Confidence: Medium
+    Note: Adult may want adult fantasy with similar feel
+
+50. "I need a book for my wife"
+    Signals: Gift shopping
+    Confidence: High adult, but need wife's preferences
+
+
+================================================================================
+SECTION 6: TRAINING DATA - SENIORS
+================================================================================
+
+50 example queries showing senior patterns (ages 65+).
+
+
+--------------------------------------------------------------------------------
+6.1 HIGH CONFIDENCE - CLEAR SENIOR SIGNALS
+--------------------------------------------------------------------------------
+
+1. "Do you have large print mysteries?"
+   Signals: "large print" high-weight signal
+   Confidence: High
+
+2. "I enjoy Maeve Binchy, similar authors?"
+   Signals: Classic author preference
+   Confidence: High
+
+3. "Good morning. I'm looking for gentle fiction."
+   Signals: Formal greeting, "gentle" preference
+   Confidence: High
+
+4. "Books on audio, my eyesight isn't what it used to be"
+   Signals: Accessibility mention
+   Confidence: High
+
+5. "Rosamunde Pilcher type books"
+   Signals: Classic author preference
+   Confidence: High
+
+6. "I would like to find a nice cozy mystery"
+   Signals: Formal phrasing, "nice", "cozy"
+   Confidence: High
+
+7. "What do you have in large print romance?"
+   Signals: Large print + genre
+   Confidence: High
+
+8. "Clean fiction without bad language please"
+   Signals: Content preferences common in seniors
+   Confidence: High
+
+9. "Books set in England, preferably historical"
+   Signals: Setting preference, formal request
+   Confidence: Medium-High
+
+10. "I'm looking for something to read to my grandchildren"
+    Signals: Grandparent role
+    Confidence: High
+
+11. "Memoirs of people from my generation"
+    Signals: Generational framing
+    Confidence: High
+
+12. "Books about World War II from the home front perspective"
+    Signals: Historical interest, specific framing
+    Confidence: Medium-High
+
+13. "Something like the books we used to read, good storytelling"
+    Signals: Nostalgic framing
+    Confidence: High
+
+14. "Christian fiction recommendations"
+    Signals: Faith-based interest (higher in senior demographic)
+    Confidence: Medium-High
+
+15. "Biographies of historical figures"
+    Signals: Traditional nonfiction interest
+    Confidence: Medium
+
+
+--------------------------------------------------------------------------------
+6.2 SENIOR - ACCESSIBILITY FOCUSED
+--------------------------------------------------------------------------------
+
+16. "What audiobooks do you recommend for someone new to them?"
+    Signals: Format question, new to audio
+    Confidence: Medium-High
+
+17. "Are there any large print new releases?"
+    Signals: Large print interest
+    Confidence: High
+
+18. "Books with bigger text"
+    Signals: Readability concern (may not know "large print" term)
+    Confidence: High
+
+19. "I prefer physical books to the computer ones"
+    Signals: Format preference, "computer" for ebook
+    Confidence: High
+
+20. "Easy to hold paperbacks"
+    Signals: Physical comfort concern
+    Confidence: High
+
+21. "How do I use the audiobook app?"
+    Signals: Technology assistance need
+    Confidence: High
+
+22. "Narrators who speak clearly and not too fast"
+    Signals: Audio preference detail
+    Confidence: High
+
+23. "Short chapters, I fall asleep reading"
+    Signals: Reading pattern accommodation
+    Confidence: Medium-High
+
+24. "Nothing with tiny print"
+    Signals: Readability concern
+    Confidence: High
+
+25. "Do you have books on CD still?"
+    Signals: Older format preference
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+6.3 SENIOR - FORMAL/POLITE TONE
+--------------------------------------------------------------------------------
+
+26. "Good afternoon. I was wondering if you might help me find a book."
+    Signals: Formal greeting, polite inquiry
+    Confidence: High
+
+27. "I would appreciate recommendations for historical novels."
+    Signals: "would appreciate", formal structure
+    Confidence: High
+
+28. "Thank you for your help. Could you suggest one more?"
+    Signals: Politeness, measured request
+    Confidence: High
+
+29. "If it's not too much trouble, I'm looking for..."
+    Signals: Deferential phrasing
+    Confidence: High
+
+30. "I do enjoy a good story with a satisfying ending."
+    Signals: Traditional preference, formal phrasing
+    Confidence: High
+
+31. "My reading group is meeting next month."
+    Signals: Social/book club context
+    Confidence: Medium
+
+32. "Something uplifting, nothing too dark please."
+    Signals: Content preference, polite request
+    Confidence: High
+
+33. "I've been a library patron for forty years."
+    Signals: Long library relationship mention
+    Confidence: High
+
+34. "What would you recommend for someone who enjoys British authors?"
+    Signals: Formal question structure, preference
+    Confidence: Medium-High
+
+35. "A nice story about family"
+    Signals: "Nice", family theme
+    Confidence: Medium-High
+
+
+--------------------------------------------------------------------------------
+6.4 SENIOR - CLASSIC/TRADITIONAL PREFERENCES
+--------------------------------------------------------------------------------
+
+36. "Authors like James Michener"
+    Signals: Classic author reference
+    Confidence: High
+
+37. "Good old-fashioned mysteries"
+    Signals: "old-fashioned" positive framing
+    Confidence: High
+
+38. "Books like they used to write"
+    Signals: Nostalgic framing
+    Confidence: High
+
+39. "Nothing too graphic or violent"
+    Signals: Content preference
+    Confidence: Medium-High
+
+40. "I miss Agatha Christie, who writes like her now?"
+    Signals: Classic author, contemporary search
+    Confidence: High
+
+41. "Novels with proper grammar and good writing"
+    Signals: Traditional standards
+    Confidence: High
+
+42. "The classics I may have missed"
+    Signals: Classic interest
+    Confidence: Medium
+
+43. "Wholesome stories"
+    Signals: "Wholesome" preference
+    Confidence: High
+
+44. "Books my wife and I can both enjoy"
+    Signals: Couple reading, long partnership implied
+    Confidence: Medium-High
+
+45. "What are people my age reading?"
+    Signals: Age awareness
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+6.5 SENIOR EDGE CASES
+--------------------------------------------------------------------------------
+
+46. "Large print" (request only)
+    Signals: Format only
+    Confidence: High for senior, but could be vision impaired any age
+
+47. "Cozy mystery" (popular across ages)
+    Signals: Genre only
+    Confidence: Medium (popular with seniors but not exclusive)
+
+48. "Historical fiction"
+    Signals: Genre only
+    Confidence: Medium (cross-generational appeal)
+
+49. "I want to read what my grandkids are reading"
+    Signals: Grandparent connecting with younger generation
+    Confidence: High senior, but content may be YA/children's
+
+50. "Technology books for beginners"
+    Signals: Could be senior learning tech or any beginner
+    Confidence: Medium
+
+
+================================================================================
+SECTION 7: TRAINING DATA - STUDENTS/RESEARCHERS
+================================================================================
+
+50 example queries showing academic/research patterns.
+
+
+--------------------------------------------------------------------------------
+7.1 HIGH CONFIDENCE - EXPLICIT ACADEMIC CONTEXT
+--------------------------------------------------------------------------------
+
+1. "Sources for my research paper on climate change"
+   Signals: "research paper", topic
+   Confidence: High
+
+2. "Books for Psychology 101"
+   Signals: Course number
+   Confidence: High
+
+3. "I need scholarly articles on machine learning"
+   Signals: "scholarly articles"
+   Confidence: High
+
+4. "Primary sources on the French Revolution"
+   Signals: "primary sources"
+   Confidence: High
+
+5. "Textbook for organic chemistry"
+   Signals: "textbook", course topic
+   Confidence: High
+
+6. "Peer-reviewed sources on vaccine efficacy"
+   Signals: "peer-reviewed"
+   Confidence: High
+
+7. "My thesis is on postcolonial literature"
+   Signals: "thesis"
+   Confidence: High
+
+8. "Annotated bibliography sources on immigration policy"
+   Signals: "annotated bibliography" (assignment type)
+   Confidence: High
+
+9. "Graduate level economics texts"
+   Signals: "graduate level"
+   Confidence: High
+
+10. "Due tomorrow, need three sources on renewable energy"
+    Signals: Deadline, source count requirement
+    Confidence: High
+
+11. "Literature review on cognitive behavioral therapy"
+    Signals: "literature review" (academic genre)
+    Confidence: High
+
+12. "What's the seminal work on attachment theory?"
+    Signals: "seminal work" (academic vocabulary)
+    Confidence: High
+
+13. "Research on sleep deprivation effects"
+    Signals: Research framing
+    Confidence: High
+
+14. "Books to cite for my English paper"
+    Signals: Citation intent, school context
+    Confidence: High
+
+15. "Academic sources on social media's impact on teens"
+    Signals: "academic sources"
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+7.2 STUDENT - DEADLINE/ASSIGNMENT FOCUSED
+--------------------------------------------------------------------------------
+
+16. "I have a paper due Friday on the Cold War"
+    Signals: Deadline, topic
+    Confidence: High
+
+17. "Need to read a classic for English class"
+    Signals: Class requirement
+    Confidence: High
+
+18. "Summer reading for AP English"
+    Signals: AP class (high school)
+    Confidence: High
+
+19. "Study guide for the SAT"
+    Signals: Test prep
+    Confidence: High
+
+20. "Books for my book report, 6th grade"
+    Signals: Assignment, grade level
+    Confidence: High
+
+21. "GRE prep materials"
+    Signals: Graduate test prep
+    Confidence: High
+
+22. "I need to analyze a poem for class"
+    Signals: Assignment type
+    Confidence: High
+
+23. "Biography for my history presentation"
+    Signals: Presentation assignment
+    Confidence: High
+
+24. "MCAT study books"
+    Signals: Professional exam prep
+    Confidence: High
+
+25. "Books about the Great Depression for my essay"
+    Signals: Essay assignment, topic
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+7.3 RESEARCHER - PROFESSIONAL/ACADEMIC
+--------------------------------------------------------------------------------
+
+26. "Comprehensive overview of quantum computing"
+    Signals: "comprehensive", technical topic
+    Confidence: High
+
+27. "Recent publications on CRISPR"
+    Signals: "recent publications", cutting-edge topic
+    Confidence: High
+
+28. "Meta-analyses on mindfulness interventions"
+    Signals: "meta-analyses" (research methodology)
+    Confidence: High
+
+29. "Foundational texts in behavioral economics"
+    Signals: "foundational texts"
+    Confidence: High
+
+30. "Interdisciplinary approaches to urban planning"
+    Signals: Academic framing
+    Confidence: High
+
+31. "What's the current consensus on dark matter?"
+    Signals: Academic phrasing
+    Confidence: High
+
+32. "Comparative analysis of healthcare systems"
+    Signals: Academic framing
+    Confidence: High
+
+33. "Sources that critique neoliberalism"
+    Signals: Academic topic, critical lens
+    Confidence: High
+
+34. "Methodologies for qualitative research"
+    Signals: Research methodology focus
+    Confidence: High
+
+35. "The literature on emotional intelligence"
+    Signals: "the literature" (academic phrasing)
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+7.4 STUDENT - VARIOUS LEVELS
+--------------------------------------------------------------------------------
+
+36. "Books for a 5th grade science project"
+    Signals: Grade level, project
+    Confidence: High (younger student or parent)
+
+37. "College-level introduction to philosophy"
+    Signals: "college-level"
+    Confidence: High
+
+38. "My professor recommended books on modernism"
+    Signals: "professor"
+    Confidence: High
+
+39. "High school chemistry help"
+    Signals: Level, subject
+    Confidence: High
+
+40. "Dissertation research on urban ecology"
+    Signals: "dissertation"
+    Confidence: High
+
+41. "Medical school pathology resources"
+    Signals: Professional school context
+    Confidence: High
+
+42. "Law school case study books"
+    Signals: Professional school context
+    Confidence: High
+
+43. "MBA recommended reading list"
+    Signals: Professional degree context
+    Confidence: High
+
+44. "Homeschool curriculum for American history"
+    Signals: Educational context
+    Confidence: High (parent or student)
+
+45. "AP US History review book"
+    Signals: AP exam, subject
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+7.5 STUDENT/RESEARCHER EDGE CASES
+--------------------------------------------------------------------------------
+
+46. "Books on psychology"
+    Signals: Topic only
+    Confidence: Medium (could be student, self-help seeker, or curious adult)
+
+47. "History of World War II"
+    Signals: Broad topic
+    Confidence: Medium (could be student or general interest)
+
+48. "I'm interested in learning about economics"
+    Signals: Learning intent, but not academic context
+    Confidence: Medium (could be student or self-directed learner)
+
+49. "Research on parenting"
+    Signals: "Research" but personal topic
+    Confidence: Medium (could be academic or personal interest)
+
+50. "Everything you have on climate change"
+    Signals: Comprehensive request, hot topic
+    Confidence: Medium (could be student, activist, or concerned citizen)
+
+
+================================================================================
+SECTION 8: TRAINING DATA - HOBBYISTS/ENTHUSIASTS
+================================================================================
+
+50 example queries showing deep interest/expertise patterns.
+
+
+--------------------------------------------------------------------------------
+8.1 HIGH CONFIDENCE - DEEP GENRE KNOWLEDGE
+--------------------------------------------------------------------------------
+
+1. "Grimdark fantasy that's not Abercrombie"
+   Signals: Subgenre, author exclusion (read widely)
+   Confidence: High
+
+2. "Cozy mysteries with cats, already read Rita Mae Brown"
+   Signals: Niche subgenre, author read
+   Confidence: High
+
+3. "Hard sci-fi with accurate physics"
+   Signals: Subgenre specificity, quality criteria
+   Confidence: High
+
+4. "Regency romance but with actual historical accuracy"
+   Signals: Subgenre, quality distinction
+   Confidence: High
+
+5. "Locked room mysteries in the Golden Age style"
+   Signals: Subgenre + era knowledge
+   Confidence: High
+
+6. "Literary fiction with unreliable narrators, not the obvious ones"
+   Signals: Trope + read widely implication
+   Confidence: High
+
+7. "Space opera that's more like Banks than Star Wars"
+   Signals: Comparison sophistication
+   Confidence: High
+
+8. "New weird fiction, not Mieville though"
+   Signals: Subgenre, author exclusion
+   Confidence: High
+
+9. "Southern gothic with magical realism elements"
+   Signals: Genre blend knowledge
+   Confidence: High
+
+10. "Noir detective fiction set outside the US"
+    Signals: Genre + setting specificity
+    Confidence: High
+
+11. "Slice of life fantasy, like Legends & Lattes"
+    Signals: Emerging subgenre awareness
+    Confidence: High
+
+12. "Progression fantasy with good prose"
+    Signals: Subgenre (niche), quality criterion
+    Confidence: High
+
+13. "Romantasy without the fae courts trope"
+    Signals: Genre term, trope exclusion
+    Confidence: High
+
+14. "Cli-fi that isn't depressing"
+    Signals: Genre term (climate fiction), tone preference
+    Confidence: High
+
+15. "Upmarket women's fiction vs literary fiction - what's the difference?"
+    Signals: Industry category awareness
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+8.2 HOBBYIST - TECHNICAL/CRAFT EXPERTISE
+--------------------------------------------------------------------------------
+
+16. "Advanced woodworking joinery techniques"
+    Signals: "advanced", technical specificity
+    Confidence: High
+
+17. "Sourdough books beyond the basics"
+    Signals: "beyond basics"
+    Confidence: High
+
+18. "Traditional wet plate photography"
+    Signals: Historical technique knowledge
+    Confidence: High
+
+19. "Fermentation for someone who already does kimchi and sauerkraut"
+    Signals: Existing skill level stated
+    Confidence: High
+
+20. "Knife sharpening techniques, Japanese water stones"
+    Signals: Technical specificity
+    Confidence: High
+
+21. "Mycology field guides for Pacific Northwest"
+    Signals: Technical term, regional specificity
+    Confidence: High
+
+22. "Amateur radio licensing study materials"
+    Signals: Hobby certification knowledge
+    Confidence: High
+
+23. "Beekeeping second year and beyond"
+    Signals: Experience level stated
+    Confidence: High
+
+24. "Architectural history of brutalism"
+    Signals: Specific movement knowledge
+    Confidence: High
+
+25. "Letterpress printing, not just beginner stuff"
+    Signals: Skill level, craft hobby
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+8.3 HOBBYIST - BOOK CLUB/READING GROUP
+--------------------------------------------------------------------------------
+
+26. "Our book club likes literary fiction with discussion potential"
+    Signals: "book club", selection criteria
+    Confidence: High
+
+27. "Diverse perspectives for a reading group"
+    Signals: "reading group", intentional selection
+    Confidence: High
+
+28. "Historical fiction our whole club will like"
+    Signals: Group selection
+    Confidence: High
+
+29. "We alternate fiction and nonfiction, need a nonfiction pick"
+    Signals: Club structure knowledge
+    Confidence: High
+
+30. "Books with author discussion guides"
+    Signals: Book club resource awareness
+    Confidence: High
+
+31. "Something that will generate good debate"
+    Signals: Discussion priority
+    Confidence: High
+
+32. "Our mystery book club has read most of the major authors"
+    Signals: Genre club, extensive reading
+    Confidence: High
+
+33. "We want to try a graphic novel for book club"
+    Signals: Experimental selection
+    Confidence: High
+
+34. "Books about 300 pages, we have busy members"
+    Signals: Practical group constraint
+    Confidence: High
+
+35. "Contemporary fiction from international authors"
+    Signals: Intentional diversity
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+8.4 HOBBYIST - COLLECTOR/COMPLETIST
+--------------------------------------------------------------------------------
+
+36. "First editions of Hemingway"
+    Signals: Collector interest
+    Confidence: High
+
+37. "I've read all of Brandon Sanderson's Cosmere books"
+    Signals: Complete series/universe knowledge
+    Confidence: High
+
+38. "Every Agatha Christie in chronological order"
+    Signals: Completist approach
+    Confidence: High
+
+39. "Pulitzer winners I'm missing from my list"
+    Signals: Award tracking
+    Confidence: High
+
+40. "Modern Library 100 best novels - opinions on the list?"
+    Signals: Canon awareness
+    Confidence: High
+
+41. "Hugo and Nebula winners from the 70s"
+    Signals: Award + era specificity
+    Confidence: High
+
+42. "Barnes and Noble leather bound editions"
+    Signals: Format/edition awareness
+    Confidence: High
+
+43. "Comparing translations of War and Peace"
+    Signals: Translation awareness
+    Confidence: High
+
+44. "The New York Review of Books classics series"
+    Signals: Imprint awareness
+    Confidence: High
+
+45. "Penguin Clothbound Classics I should have"
+    Signals: Edition awareness
+    Confidence: High
+
+
+--------------------------------------------------------------------------------
+8.5 HOBBYIST EDGE CASES
+--------------------------------------------------------------------------------
+
+46. "Fantasy recommendations"
+    Signals: Genre only
+    Confidence: Low (could be new or experienced reader)
+
+47. "Baking books"
+    Signals: Topic only
+    Confidence: Low (could be beginner or advanced)
+
+48. "I love mysteries"
+    Signals: Genre affinity
+    Confidence: Medium (affinity but unclear depth)
+
+49. "Best books of 2023"
+    Signals: Trend awareness
+    Confidence: Medium (could be casual or engaged reader)
+
+50. "Something challenging"
+    Signals: Difficulty preference
+    Confidence: Medium (engaged reader, unclear expertise)
+
+
+================================================================================
+SECTION 9: EDGE CASES & AMBIGUOUS QUERIES
+================================================================================
+
+Real-world queries often don't fit neatly. This section covers tricky cases.
+
+
+--------------------------------------------------------------------------------
+9.1 MULTI-SIGNAL CONFLICTS
+--------------------------------------------------------------------------------
+
+1. "ya books for my literature class"
+   Conflict: "ya" (teen) + "literature class" (student)
+   Resolution: Student studying YA lit (adult/college student)
+
+2. "large print romance like what's on booktok"
+   Conflict: "large print" (senior) + "booktok" (teen)
+   Resolution: Likely senior aware of trends, or vision-impaired younger person
+
+3. "My 14 year old wants something mature"
+   Conflict: Teen content + parent asking
+   Resolution: Parent mode with teen content appropriate answers
+
+4. "chapter books for my graduate thesis on children's literature"
+   Conflict: "chapter books" (children's) + "thesis" (researcher)
+   Resolution: Academic studying children's lit
+
+5. "I'm 70 and want to understand what my grandson is reading"
+   Conflict: Senior + teen content
+   Resolution: Senior seeking youth content to connect
+
+
+--------------------------------------------------------------------------------
+9.2 MINIMAL SIGNAL QUERIES
+--------------------------------------------------------------------------------
+
+6. "book recommendations"
+   Signals: None specific
+   Resolution: Default Navigator, ask clarifying question
+
+7. "something good"
+   Signals: None specific
+   Resolution: Ask about mood or last enjoyed book
+
+8. "what do you suggest"
+   Signals: None specific
+   Resolution: Ask discovery question
+
+9. "fiction"
+   Signals: Format only
+   Resolution: Ask about genre or mood
+
+10. "help"
+    Signals: None specific
+    Resolution: Friendly open-ended offer
+
+
+--------------------------------------------------------------------------------
+9.3 ROLE AMBIGUITY
+--------------------------------------------------------------------------------
+
+11. "Books for a 10 year old"
+    Ambiguity: Parent? Teacher? Librarian? The 10 year old?
+    Resolution: Provide children's content, language for likely adult
+
+12. "Teen romance"
+    Ambiguity: Teen seeking? Adult seeking? Parent checking?
+    Resolution: Provide YA content, watch for clarifying signals
+
+13. "Something for my friend who likes mysteries"
+    Ambiguity: Friend's preferences filtered through requester
+    Resolution: Ask about friend's taste specifics
+
+14. "Books like my daughter reads"
+    Ambiguity: Want same content? Or similar vibe but adult?
+    Resolution: Clarify if wanting to share her books or find adult versions
+
+15. "What's popular with kids these days"
+    Ambiguity: Parent? Grandparent? Teacher? Journalist?
+    Resolution: Provide information, watch for context
+
+
+--------------------------------------------------------------------------------
+9.4 FORMAT VS. CONTENT AMBIGUITY
+--------------------------------------------------------------------------------
+
+16. "audiobooks"
+    Ambiguity: Asking about format availability? Or recommendations?
+    Resolution: Clarify what kind of content they want in audio
+
+17. "ebooks"
+    Ambiguity: How to access? Or what to read?
+    Resolution: Ask if they need content suggestions or technical help
+
+18. "picture books"
+    Ambiguity: For children? Or adult picture book art?
+    Resolution: Likely children's, but could clarify
+
+19. "graphic novels for adults"
+    Ambiguity: Adult content level? Or adult readers of any content?
+    Resolution: Ask about genre interest
+
+20. "large print mysteries"
+    Ambiguity: Clear format+genre, but which subgenre?
+    Resolution: Ask about cozy vs. thriller preference
+
+
+--------------------------------------------------------------------------------
+9.5 POTENTIAL MISCLASSIFICATION TRAPS
+--------------------------------------------------------------------------------
+
+21. "Harry Potter" - Could be: child, nostalgic adult, parent, or academic
+22. "Twilight" - Could be: teen, nostalgic adult, or curious newcomer
+23. "Diary of a Wimpy Kid" - Could be: child, parent, or educator
+24. "Colleen Hoover" - Could be: teen or adult (wide readership)
+25. "Stephen King" - Could be: teen or adult
+26. "Cozy mystery" - Could be: senior or younger cozy fan
+27. "Romance" - Could be: any age from teen to senior
+28. "Fantasy" - Could be: any age, vastly different subgenres
+29. "Self-help" - Could be: any adult age
+30. "Cookbook" - Could be: any adult age, various skill levels
+
+
+================================================================================
+SECTION 10: CROSS-PATRON LINGUISTIC ANALYSIS
+================================================================================
+
+Patterns that distinguish patron types when signals are subtle.
+
+
+--------------------------------------------------------------------------------
+10.1 GREETING PATTERNS
+--------------------------------------------------------------------------------
+
+CHILDREN (typing themselves):
+    - Often no greeting, straight to ask
+    - "hi" lowercase if present
+
+TEENS:
+    - "hey", "yo", or no greeting
+    - Lowercase, minimal punctuation
+
+GENERAL ADULTS:
+    - "Hi", "Hello", or straight to question
+    - Mixed formality
+
+SENIORS:
+    - "Good morning/afternoon", "Hello"
+    - Complete greeting before request
+    - May include pleasantries
+
+STUDENTS:
+    - Often straight to need (efficient)
+    - May be formal or casual depending on context
+
+HOBBYISTS:
+    - Variable, often straight to specific ask
+    - Genre/topic vocabulary in opening
+
+
+--------------------------------------------------------------------------------
+10.2 REQUEST PHRASING
+--------------------------------------------------------------------------------
+
+CHILDREN:
+    "i want..." / "i like..." / "can i have..."
+
+TEENS:
+    "got any..." / "need..." / "looking for..." / "recs?"
+
+ADULTS:
+    "I'm looking for..." / "Can you suggest..." / "Recommendations for..."
+
+SENIORS:
+    "I would like..." / "Could you help me find..." / "I'm hoping to find..."
+
+STUDENTS:
+    "I need..." / "I have to find..." / "Do you have sources on..."
+
+HOBBYISTS:
+    Specific ask upfront: "[exact subgenre/topic]?"
+
+
+--------------------------------------------------------------------------------
+10.3 PUNCTUATION & CAPITALIZATION
+--------------------------------------------------------------------------------
+
+TEENS: lowercase, minimal punctuation, "??" for emphasis
+CHILDREN: often lowercase, may have typos
+ADULTS: standard capitalization, standard punctuation
+SENIORS: often full punctuation, may over-punctuate
+STUDENTS: variable, often efficient/minimal
+HOBBYISTS: variable, often precise
+
+
+--------------------------------------------------------------------------------
+10.4 VOCABULARY SOPHISTICATION
+--------------------------------------------------------------------------------
+
+Lower complexity suggests: child or casual teen
+Standard complexity suggests: adult (default)
+Higher complexity suggests: senior (formal), student (academic), or hobbyist (specialized)
+
+SPECIALIZED VOCABULARY:
+    - Academic terms → student/researcher
+    - Genre terms → hobbyist
+    - Dated slang → senior
+    - Current slang → teen
+    - Industry terms → professional hobbyist
+
+
+--------------------------------------------------------------------------------
+10.5 MESSAGE LENGTH PATTERNS
+--------------------------------------------------------------------------------
+
+VERY SHORT (1-5 words): Teen, child, or efficient adult
+SHORT (6-15 words): Most patrons
+MEDIUM (16-30 words): Adults, students, seniors
+LONG (30+ words): Seniors, researchers, hobbyists with complex needs
+
+
+================================================================================
+SECTION 11: IMPLEMENTATION GUIDE
+================================================================================
+
+How to use this training data in Scout's development.
+
+
+--------------------------------------------------------------------------------
+11.1 CLASSIFICATION ALGORITHM
+--------------------------------------------------------------------------------
+
+STEP 1: Extract signals from query
+    - Vocabulary signals (keywords, slang, formality)
+    - Topic signals (content requested)
+    - Tone signals (greeting, punctuation, length)
+    - Context signals (mentions of roles, relationships, occasions)
+
+STEP 2: Score each patron type
+    - Each signal adds weight to relevant type(s)
+    - High-weight signals: +3 points
+    - Medium-weight signals: +2 points
+    - Low-weight signals: +1 point
+
+STEP 3: Calculate confidence
+    - If one type scores significantly higher: High confidence
+    - If two types are close: Medium confidence, note both
+    - If no type stands out: Low confidence, use default
+
+STEP 4: Handle conflicts
+    - If signals conflict, identify the CONTENT need vs. COMMUNICATION style
+    - Example: Parent asking for teen content → Parent mode, teen content
+
+STEP 5: Adapt response
+    - Apply personality appropriate to detected type
+    - Adjust vocabulary complexity
+    - Adjust response length
+    - Adjust expansion timing
+
+
+--------------------------------------------------------------------------------
+11.2 SYSTEM PROMPT INTEGRATION
+--------------------------------------------------------------------------------
+
+Add to system prompt:
+
+    PATRON DETECTION:
+    Analyze each query for patron type signals:
+    - Children/Family: age mentions, "my kid", children's content
+    - Teen: casual language, "ya", trending titles, slang
+    - Adult: neutral signals, adult topics, professional context
+    - Senior: formal language, large print, classic authors
+    - Student: academic context, deadlines, sources needed
+    - Hobbyist: deep genre knowledge, specific subgenres
+
+    ADAPTATION RULES:
+    - Children/Family: simpler vocabulary, shorter responses, series mentions
+    - Teens: casual tone, no lecturing, respect their taste
+    - Adults: efficient, match their formality
+    - Seniors: patient, clear, mention accessibility options
+    - Students: focused on their actual need, source quality
+    - Hobbyists: respect expertise, go beyond obvious suggestions
+
+
+--------------------------------------------------------------------------------
+11.3 FEW-SHOT EXAMPLES FOR PROMPTS
+--------------------------------------------------------------------------------
+
+Include 2-3 examples per patron type in system prompt:
+
+CHILDREN/FAMILY EXAMPLE:
+    Query: "books for my 7 year old who loves animals"
+    Detection: Parent searching for child (age mention, "my X year old")
+    Response: [warm, suggests age-appropriate, mentions series]
+
+TEEN EXAMPLE:
+    Query: "ya fantasy recs??"
+    Detection: Teen (casual, "ya", "recs", punctuation)
+    Response: [casual tone, no condescension, trending titles]
+
+SENIOR EXAMPLE:
+    Query: "Good morning. I enjoy Maeve Binchy. Similar authors please."
+    Detection: Senior (formal greeting, classic author)
+    Response: [warm, patient, mentions large print/audio options]
+
+
+--------------------------------------------------------------------------------
+11.4 TESTING PROTOCOL
+--------------------------------------------------------------------------------
+
+TEST SET REQUIREMENTS:
+    - 20 queries per patron type (120 total)
+    - Mix of high, medium, and low confidence
+    - Include edge cases and conflicts
+
+ACCURACY TARGETS:
+    - High confidence queries: 90%+ correct classification
+    - Medium confidence queries: 75%+ correct classification
+    - Low confidence queries: Appropriate default response
+
+FAILURE ANALYSIS:
+    - Track misclassifications by type
+    - Identify missing signals
+    - Update training data with new patterns
+
+
+--------------------------------------------------------------------------------
+11.5 ITERATION PROCESS
+--------------------------------------------------------------------------------
+
+WEEKLY:
+    - Review misclassified queries
+    - Add new signal patterns observed
+    - Refine weights for existing signals
+
+MONTHLY:
+    - Run full test suite
+    - Update training data with new patterns
+    - Adjust classification thresholds
+
+QUARTERLY:
+    - Review patron type definitions
+    - Consider new patron types if patterns emerge
+    - Update few-shot examples
+
+
+--------------------------------------------------------------------------------
+11.6 PRIVACY CONSIDERATIONS
+--------------------------------------------------------------------------------
+
+IMPORTANT:
+    - Detection uses query content only, not stored history
+    - No patron data is stored between sessions
+    - Classification happens per-query, not per-person
+    - Signals are linguistic patterns, not personal identification
+
+
+================================================================================
+APPENDIX A: QUICK REFERENCE - SIGNALS BY TYPE
+================================================================================
+
+CHILDREN/FAMILY:
+    High: "my kid/child", age mentions, children's content
+    Medium: "chapter books", "picture books", series titles
+    Low: Simple sentence structure, narrow topics
+
+TEENS:
+    High: Slang (ngl, tbh, lowkey), "booktok", "ya"
+    Medium: Casual tone, lowercase, trending titles
+    Low: Short messages, minimal punctuation
+
+GENERAL ADULTS:
+    High: Professional context, adult life topics
+    Medium: Standard formality, mainstream titles
+    Low: (Default when no strong signals)
+
+SENIORS:
+    High: "large print", formal greetings, classic authors
+    Medium: Polite phrasing, accessibility mentions
+    Low: Complete sentences, traditional preferences
+
+STUDENTS/RESEARCHERS:
+    High: "for class", "thesis", "sources", academic vocab
+    Medium: Course/subject mentions, deadline awareness
+    Low: Information-seeking phrasing
+
+HOBBYISTS:
+    High: Subgenre specificity, "already read X", technical depth
+    Medium: Author name-dropping, trope vocabulary
+    Low: Quality distinctions, completist interests
+
+
+================================================================================
+APPENDIX B: SIGNAL WEIGHT TABLE
+================================================================================
+
++3 POINTS (High weight - near definitive):
+    - "my X year old" → Children/Family
+    - "for class/thesis/paper" → Student
+    - "large print" → Senior
+    - "booktok", "ngl", "tbh" → Teen
+    - "I've already read [multiple specific titles]" → Hobbyist
+
++2 POINTS (Medium weight - strong indicator):
+    - Age mentions → Children/Family
+    - "ya" → Teen
+    - Formal greeting + politeness → Senior
+    - Academic vocabulary → Student
+    - Deep subgenre terms → Hobbyist
+    - Slang (current) → Teen
+
++1 POINT (Low weight - supporting evidence):
+    - Children's content → Possibly family
+    - Lowercase/minimal punctuation → Possibly teen
+    - Adult life topics → Possibly adult
+    - Complete sentences → Possibly senior
+    - Quality criteria → Possibly hobbyist
+
+
+================================================================================
+                              END OF DOCUMENT
+================================================================================
+
+                  SCOUT PATRON DETECTION TRAINING DATA
+                         Version 1.0 | December 2024
+
+                         INTERNAL & CONFIDENTIAL
+
+    This dataset should grow as Scout encounters new patron patterns.
+    Add new examples. Refine signal weights. Track classification accuracy.
+
+================================================================================

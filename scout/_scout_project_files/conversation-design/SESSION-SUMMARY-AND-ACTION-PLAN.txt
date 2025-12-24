@@ -1,0 +1,800 @@
+================================================================================
+            SCOUT CONVERSATION DESIGN SESSION SUMMARY
+                    December 2024 Work Session
+================================================================================
+
+                         INTERNAL & CONFIDENTIAL
+                    For Scout Team: Drew, Kenny, Jordan
+                         Created: December 2024
+
+================================================================================
+                            TABLE OF CONTENTS
+================================================================================
+
+    PART 1: What We Created Today
+    PART 2: Document Reading Guide (By Role)
+    PART 3: Action Plan - Understanding the Work
+    PART 4: Action Plan - Integrating with Live System
+    PART 5: Technical Spec - FAQ & Token Optimization System
+    PART 6: Priority Roadmap
+
+================================================================================
+PART 1: WHAT WE CREATED TODAY
+================================================================================
+
+SESSION OUTPUT: 5 Major Documents
+---------------------------------
+
+Total content produced: ~270KB of actionable conversation design documentation
+
+LOCATION: _scout_project_files/conversation-design/
+
+
+DOCUMENT 1: SCOUT-CONVERSATION-DESIGN-FRAMEWORK.txt
+----------------------------------------------------
+Size: ~70KB
+Purpose: The "bible" for how Scout talks, thinks, and guides patrons
+
+Contents:
+    - Section 0: How to use the framework (role mapping)
+    - Section 1: Core philosophy & Grice's Maxims
+    - Section 2: 7 Scout personalities (deep definitions)
+    - Section 3: 6 patron personas with adaptation strategies
+    - Section 4: Intent-to-response framework (6 intent types)
+    - Section 5: Dialogue pattern library
+    - Section 6: Recommendation expansion playbook
+    - Section 7: Flow templates & decision trees
+    - Section 8: Success metrics
+    - Section 9: 5 annotated sample dialogues
+    - Section 10: Implementation checklists
+
+Key deliverables:
+    - 7 personality definitions (Navigator default + 6 variants)
+    - 6 patron persona profiles
+    - Response patterns for common scenarios
+    - Quality standards and evaluation criteria
+
+
+DOCUMENT 2: SCOUT-FIRST-MESSAGE-TRAINING-GUIDE.txt
+--------------------------------------------------
+Size: ~65KB
+Purpose: Ensure Scout nails the first response every time
+
+Contents:
+    - Part 1: Grice's Maxims operationalized (4 maxims → specific rules)
+    - Part 2: Query classification framework (7 query types)
+    - Part 3: Response patterns by query type
+    - Part 4: 50 annotated example dialogues
+    - Part 5: Production system prompt (LLM-ready)
+    - Part 6: Quality evaluation rubric (5 dimensions, 1-5 scale)
+    - Part 7: Implementation guide (7 steps)
+
+Key deliverables:
+    - Drop-in system prompt for Claude (with LLM-agnostic version)
+    - 50 real-world query examples with ideal responses
+    - Testing scenarios and scoring rubric
+    - Step-by-step deployment guide
+
+
+DOCUMENT 3: SCOUT-EXPANSION-PATTERNS-LIBRARY.txt
+------------------------------------------------
+Size: ~45KB
+Purpose: Turn one search into multiple discoveries (circulation multiplier)
+
+Contents:
+    - Section 1: Core philosophy ("joyful discovery" vs "pushy sales")
+    - Section 2: Format bridging patterns (book↔audio↔ebook↔DVD)
+    - Section 3: Genre-specific expansion (7 fiction genres)
+    - Section 4: Topic-specific expansion (8 nonfiction categories)
+    - Section 5: Library of Things connections (12 topic→equipment maps)
+    - Section 6: Series & sequel patterns
+    - Section 7: Themed bundle templates
+    - Section 8: Serendipity spark patterns
+    - Section 9: Natural language variations (50+ phrases)
+    - Section 10: Timing & "reading the room"
+    - Section 11: Implementation guide
+
+Key deliverables:
+    - Complete expansion strategy for increasing circulation
+    - Library of Things integration patterns
+    - Pre-built themed bundles (seasonal, life events, hobbies)
+    - Signals for when to expand vs. hold back
+
+
+DOCUMENT 4: SCOUT-PATRON-DETECTION-TRAINING-DATA.txt
+----------------------------------------------------
+Size: ~55KB
+Purpose: Enable Scout to identify who it's talking to and adapt
+
+Contents:
+    - Section 1: Overview & 6 patron type definitions
+    - Section 2: Detection signal framework (vocabulary, topic, tone, context)
+    - Section 3-8: Training data per patron type (50+ examples each)
+    - Section 9: Edge cases & ambiguous queries (30 examples)
+    - Section 10: Cross-patron linguistic analysis
+    - Section 11: Implementation guide
+    - Appendix A: Quick reference signals
+    - Appendix B: Signal weight table
+
+Key deliverables:
+    - 315 annotated query examples
+    - Signal detection algorithm outline
+    - Confidence scoring system
+    - Classification testing protocol
+
+
+DOCUMENT 5: SCOUT-RESEARCH-SYNTHESIS-BRIEFS.txt
+-----------------------------------------------
+Size: ~35KB
+Purpose: Actionable intelligence from 37 research documents
+
+Contents:
+    - Brief 1: Competitive landscape (market window, competitor gaps)
+    - Brief 2: Patron pain points (4 problems Scout solves)
+    - Brief 3: Library procurement (timing, decision-makers, sales cycles)
+    - Brief 4: Grant opportunities (10 ranked, $2.5M+ potential)
+    - Brief 5: Technical integration (ILS APIs, 2,357 Phase 1 targets)
+
+Key deliverables:
+    - Competitive positioning and messaging
+    - Evidence-based value propositions
+    - Fiscal year timing for sales
+    - Grant application priorities
+    - Integration requirements by ILS type
+
+
+================================================================================
+PART 2: DOCUMENT READING GUIDE (By Role)
+================================================================================
+
+FOR DREW (User Expert, Account Rep, Sales)
+------------------------------------------
+
+PRIORITY READING ORDER:
+1. Research Synthesis Briefs (Brief 2: Pain Points, Brief 3: Procurement)
+2. Conversation Design Framework (Section 1: Philosophy, Section 3: Personas)
+3. First-Message Training Guide (Part 4: Example dialogues)
+4. Expansion Patterns Library (Section 1: Philosophy, Section 7: Bundles)
+
+WHY THESE:
+- Pain points & procurement: Your sales conversations
+- Personas: Understanding who you're serving
+- Example dialogues: Demonstrating Scout's value
+- Bundles: Explaining the circulation multiplier
+
+TIME ESTIMATE: 2-3 hours for priority sections
+
+
+FOR KENNY (Product Design, GTM)
+-------------------------------
+
+PRIORITY READING ORDER:
+1. Conversation Design Framework (Full document, focus on Sections 1, 2, 8)
+2. First-Message Training Guide (Parts 1-3, Part 6: Metrics)
+3. Expansion Patterns Library (Sections 1, 5, 7)
+4. Research Synthesis Briefs (Brief 1: Competitive, Brief 4: Grants)
+
+WHY THESE:
+- Framework: Defines the product's voice and personality
+- Training Guide: Quality standards and metrics
+- Expansion: The differentiation strategy
+- Briefs: Positioning and funding
+
+TIME ESTIMATE: 4-5 hours for comprehensive review
+
+
+FOR JORDAN (Developer)
+----------------------
+
+PRIORITY READING ORDER:
+1. First-Message Training Guide (Part 5: System Prompt, Part 7: Implementation)
+2. Patron Detection Training Data (Section 2: Signals, Section 11: Implementation)
+3. Conversation Design Framework (Section 2: Personalities, Section 4: Intents)
+4. Research Synthesis Briefs (Brief 5: Technical Integration)
+
+WHY THESE:
+- System prompt: Drop-in code artifact
+- Detection data: Algorithm requirements
+- Personalities/Intents: Logic for adaptation
+- Technical brief: API integration specs
+
+TIME ESTIMATE: 3-4 hours for implementation-focused sections
+
+
+================================================================================
+PART 3: ACTION PLAN - UNDERSTANDING THE WORK
+================================================================================
+
+WEEK 1: ORIENTATION
+-------------------
+
+ALL TEAM:
+[ ] Day 1-2: Each person reads their priority sections (see Part 2)
+[ ] Day 3: 60-minute team sync to discuss:
+    - What resonates?
+    - What questions do you have?
+    - What's missing?
+[ ] Day 4-5: Second-pass reading of remaining sections
+
+DREW'S FOCUS:
+[ ] Read Research Synthesis Briefs completely
+[ ] Highlight phrases for sales conversations
+[ ] List questions about patron personas
+[ ] Note any gaps in competitive messaging
+
+KENNY'S FOCUS:
+[ ] Read Framework + Training Guide completely
+[ ] Evaluate personality definitions - do they feel right?
+[ ] Review metrics - are these what we should measure?
+[ ] Note any product implications
+
+JORDAN'S FOCUS:
+[ ] Read System Prompt section - can this drop into current code?
+[ ] Review Detection Algorithm - implementation questions?
+[ ] Identify technical gaps or conflicts with current architecture
+[ ] Assess FAQ optimization feature (see Part 5)
+
+
+WEEK 2: DEEP DIVE
+-----------------
+
+ALL TEAM:
+[ ] Day 1: Jordan presents technical assessment
+[ ] Day 2: Kenny presents product/design assessment
+[ ] Day 3: Drew presents sales/user assessment
+[ ] Day 4-5: Identify integration priorities
+
+DELIVERABLES BY END OF WEEK 2:
+[ ] Technical feasibility assessment (Jordan)
+[ ] Product roadmap alignment (Kenny)
+[ ] Sales enablement priorities (Drew)
+[ ] Agreed priority list for integration
+
+
+================================================================================
+PART 4: ACTION PLAN - INTEGRATING WITH LIVE SYSTEM
+================================================================================
+
+CURRENT STATE (What's Live)
+---------------------------
+
+Based on codebase exploration:
+- Frontend: React + TypeScript on Netlify
+- API: Netlify serverless function (claude-chat.js)
+- Model: Claude 3 Haiku
+- Catalog: Mock JSON (90+ items)
+- System prompt: In promptBuilder.ts
+
+Key files:
+- src/utils/promptBuilder.ts (system prompt)
+- src/utils/intentAnalyzer.ts (intent detection)
+- src/hooks/useConversation.ts (conversation state)
+- netlify/functions/claude-chat.js (API proxy)
+
+
+INTEGRATION PHASES
+------------------
+
+PHASE 1: SYSTEM PROMPT UPDATE (Week 3-4)
+Priority: High | Effort: Low | Impact: High
+
+What to do:
+1. Replace current system prompt with new version from Training Guide
+2. Add few-shot examples to prompt
+3. Test against 16 scenarios from evaluation rubric
+4. Deploy to staging, test for 48 hours
+5. Deploy to production
+
+Files to modify:
+- src/utils/promptBuilder.ts
+
+Success criteria:
+- All 16 test scenarios score 4+ on rubric
+- No regressions in current functionality
+- Response quality visibly improved
+
+
+PHASE 2: PATRON DETECTION (Week 5-6)
+Priority: Medium | Effort: Medium | Impact: Medium
+
+What to do:
+1. Create patronDetector.ts utility
+2. Implement signal extraction from query
+3. Implement confidence scoring
+4. Add patron type to conversation context
+5. Adjust response tone based on detection
+
+Files to create:
+- src/utils/patronDetector.ts
+
+Files to modify:
+- src/hooks/useConversation.ts (add patron type to state)
+- src/utils/promptBuilder.ts (include patron type in prompt)
+
+Success criteria:
+- 90%+ accuracy on high-confidence queries
+- 75%+ accuracy on medium-confidence queries
+- No false classifications causing bad responses
+
+
+PHASE 3: EXPANSION TRIGGERS (Week 7-8)
+Priority: Medium | Effort: Medium | Impact: High
+
+What to do:
+1. Add expansion logic to recommendation flow
+2. Implement format bridging (detect other formats available)
+3. Add Library of Things connections
+4. Add series awareness
+5. Implement "reading the room" signals
+
+Files to modify:
+- src/utils/promptBuilder.ts (expansion instructions)
+- src/utils/semanticSearch.ts (format/series awareness)
+
+Success criteria:
+- 60-70% of eligible conversations get expansion
+- 30-40% of expansions see engagement
+- No complaints of "pushy" behavior
+
+
+PHASE 4: PERSONALITY SWITCHING (Week 9-10)
+Priority: Lower | Effort: Medium | Impact: Medium
+
+What to do:
+1. Create personality configuration system
+2. Build personality selector (optional UI or auto-detect)
+3. Create prompt variants for each personality
+4. Test each personality with appropriate queries
+
+Files to create:
+- src/utils/personalities.ts
+- src/components/PersonalitySelector.tsx (optional)
+
+Success criteria:
+- Each personality feels distinct
+- Appropriate personality matches patron type
+- Smooth switching without jarring changes
+
+
+PHASE 5: FAQ OPTIMIZATION (See Part 5)
+Priority: High | Effort: High | Impact: High (Cost Savings)
+
+[Detailed spec in Part 5]
+
+
+INTEGRATION CHECKLIST
+---------------------
+
+Before each deployment:
+[ ] Run test suite against evaluation rubric
+[ ] Check response length (not getting longer over time)
+[ ] Verify catalog-only recommendations
+[ ] Test on mobile
+[ ] Check accessibility (screen reader)
+[ ] Review 5 sample conversations manually
+
+After deployment:
+[ ] Monitor error rates for 24 hours
+[ ] Review first 20 conversations
+[ ] Check for any obvious regressions
+[ ] Gather team feedback
+
+
+================================================================================
+PART 5: TECHNICAL SPEC - FAQ & TOKEN OPTIMIZATION SYSTEM
+================================================================================
+
+OVERVIEW
+--------
+
+Problem: Every query currently hits Claude API, consuming tokens and adding
+latency/cost even for simple, repetitive questions.
+
+Solution: Implement a tiered response system that handles FAQs and common
+queries locally before escalating to LLM.
+
+Goal: Reduce LLM calls by 30-50% while maintaining response quality.
+
+
+ARCHITECTURE
+------------
+
+CURRENT FLOW:
+    User Query → Claude API → Response
+
+PROPOSED FLOW:
+    User Query
+         ↓
+    [Tier 1: FAQ Match]
+    Exact/fuzzy match against FAQ database
+    If match (confidence >90%): Return stored response
+         ↓ (no match)
+    [Tier 2: Pattern Match]
+    Query classification + template response
+    If pattern match: Return templated response with catalog data
+         ↓ (no match)
+    [Tier 3: LLM Call]
+    Full Claude API call for complex/novel queries
+
+
+TIER 1: FAQ DATABASE
+--------------------
+
+Structure:
+    {
+      "id": "faq_001",
+      "patterns": [
+        "what time do you close",
+        "when do you close",
+        "library hours",
+        "what are your hours"
+      ],
+      "intent": "hours_inquiry",
+      "response": "I'm Scout, the library's book-finding assistant - I don't
+        have access to hours. That info is on the library's website or you
+        can call the front desk. Want me to help you find something to read?",
+      "bypass_llm": true,
+      "redirect_category": "out_of_scope"
+    }
+
+FAQ Categories to Build:
+
+    OUT OF SCOPE (bypass LLM completely):
+    - Library hours/location
+    - Account questions (due dates, fines, renewals)
+    - General knowledge questions
+    - Technical support requests
+
+    SIMPLE DISCOVERY (template + catalog lookup):
+    - "Do you have [specific title]?" → Catalog lookup + template
+    - "Books by [author]" → Catalog lookup + template
+    - "What's popular?" → Pre-cached popular list + template
+    - "New releases" → Pre-cached new list + template
+
+    COMMON INTENTS (template with variables):
+    - "I want a mystery" → Genre template + clarifying question
+    - "Something for my kid" → Age template + clarifying question
+    - "Beach reads" → Mood template + curated list
+
+Matching Algorithm:
+    1. Normalize query (lowercase, remove punctuation)
+    2. Check exact match against patterns
+    3. If no exact match, fuzzy match (Levenshtein distance <3)
+    4. If no fuzzy match, check keyword overlap (>70% match)
+    5. Return confidence score (0-100)
+
+Threshold: Respond from FAQ if confidence >90%
+
+
+TIER 2: PATTERN MATCHING
+------------------------
+
+For queries that aren't exact FAQs but follow predictable patterns.
+
+Pattern Categories:
+
+    KNOWN_ITEM_SEARCH:
+    Patterns: "do you have [title]", "is [title] available", "[title] by [author]"
+    Action: Search catalog, return template response
+    Template: "Yes! '[title]' is available in [formats]. [availability_details]"
+    LLM needed: No (if item found)
+
+    AUTHOR_SEARCH:
+    Patterns: "books by [author]", "[author] books", "anything by [author]"
+    Action: Search catalog by author, return results
+    Template: "Here's what we have by [author]: [list]. Any of these interest you?"
+    LLM needed: No
+
+    GENRE_BROWSE:
+    Patterns: "[genre] recommendations", "[genre] books", "I want a [genre]"
+    Action: Return clarifying question from template
+    Template: "Love [genre]! Are you in the mood for [option_a] or [option_b]?"
+    LLM needed: Only for follow-up after clarification
+
+    FORMAT_SPECIFIC:
+    Patterns: "audiobooks about [topic]", "ebooks for [query]", "large print [query]"
+    Action: Search catalog with format filter, return results
+    LLM needed: Only if results need explanation
+
+
+TIER 3: LLM ESCALATION
+----------------------
+
+Queries that reach LLM:
+- Complex multi-part queries
+- Emotional/nuanced requests ("I'm going through a breakup...")
+- Queries requiring reasoning about recommendations
+- Follow-up questions in complex conversations
+- Anything with confidence <70% in Tiers 1-2
+
+LLM call includes:
+- Original query
+- Conversation history
+- Patron type (if detected)
+- Any catalog search results from Tier 2
+
+
+IMPLEMENTATION PLAN
+-------------------
+
+STEP 1: Build FAQ Database (2-3 days)
+    - Create JSON structure for FAQs
+    - Populate with 50-100 common queries
+    - Include all out-of-scope redirects
+
+    File: src/data/faq-database.json
+
+STEP 2: Build Matching Engine (3-4 days)
+    - Implement normalization
+    - Implement exact matching
+    - Implement fuzzy matching (use existing library: fuse.js)
+    - Implement confidence scoring
+
+    File: src/utils/faqMatcher.ts
+
+STEP 3: Build Pattern Detector (2-3 days)
+    - Implement pattern templates
+    - Connect to catalog search
+    - Build response templates
+
+    File: src/utils/patternMatcher.ts
+
+STEP 4: Build Response Router (2-3 days)
+    - Implement tiered routing logic
+    - Add logging/metrics for each tier
+    - Handle fallthrough to LLM
+
+    File: src/utils/responseRouter.ts
+
+STEP 5: Integrate with Conversation Flow (2-3 days)
+    - Replace direct LLM call with router
+    - Ensure conversation history still works
+    - Test all query types
+
+    Modify: src/hooks/useClaudeChat.ts
+
+STEP 6: Build Monitoring Dashboard (2-3 days)
+    - Track queries by tier
+    - Track LLM bypass rate
+    - Track response quality per tier
+
+Total estimate: 15-20 days of development
+
+
+DATA STRUCTURE: FAQ DATABASE
+----------------------------
+
+faq-database.json:
+{
+  "version": "1.0",
+  "last_updated": "2024-12-14",
+  "faqs": [
+    {
+      "id": "oos_hours",
+      "category": "out_of_scope",
+      "patterns": [
+        "what time do you close",
+        "when do you close",
+        "library hours",
+        "what are your hours",
+        "are you open",
+        "when do you open"
+      ],
+      "response": "I'm Scout, the library's book-finding assistant - I don't have access to hours. That info is on the library's website or you can call the front desk. Want me to help you find something to read?",
+      "bypass_llm": true
+    },
+    {
+      "id": "oos_account",
+      "category": "out_of_scope",
+      "patterns": [
+        "when are my books due",
+        "what do I owe",
+        "renew my books",
+        "my account",
+        "my fines"
+      ],
+      "response": "I can't access your account - for due dates, renewals, or fines, check your library app or ask at the circulation desk. While you're here, want me to help you find your next read?",
+      "bypass_llm": true
+    },
+    {
+      "id": "simple_genre_mystery",
+      "category": "genre_browse",
+      "patterns": [
+        "mystery recommendations",
+        "mystery books",
+        "i want a mystery",
+        "good mysteries"
+      ],
+      "response_template": "Love mysteries! Are you in the mood for cozy and light, or dark and suspenseful? I've got great options either way.",
+      "bypass_llm": true,
+      "follow_up_requires_llm": false
+    }
+  ]
+}
+
+
+CODE STRUCTURE: RESPONSE ROUTER
+-------------------------------
+
+// src/utils/responseRouter.ts
+
+interface RoutingResult {
+  tier: 'faq' | 'pattern' | 'llm';
+  confidence: number;
+  response?: string;
+  requiresLLM: boolean;
+  catalogResults?: CatalogItem[];
+}
+
+async function routeQuery(
+  query: string,
+  conversationHistory: Message[],
+  catalog: CatalogItem[]
+): Promise<RoutingResult> {
+
+  // Tier 1: FAQ Match
+  const faqResult = matchFAQ(query);
+  if (faqResult.confidence > 90) {
+    logRouting('faq', query, faqResult);
+    return {
+      tier: 'faq',
+      confidence: faqResult.confidence,
+      response: faqResult.response,
+      requiresLLM: false
+    };
+  }
+
+  // Tier 2: Pattern Match
+  const patternResult = matchPattern(query, catalog);
+  if (patternResult.confidence > 80) {
+    logRouting('pattern', query, patternResult);
+    return {
+      tier: 'pattern',
+      confidence: patternResult.confidence,
+      response: patternResult.response,
+      requiresLLM: false,
+      catalogResults: patternResult.catalogResults
+    };
+  }
+
+  // Tier 3: LLM Required
+  logRouting('llm', query, { confidence: patternResult.confidence });
+  return {
+    tier: 'llm',
+    confidence: patternResult.confidence,
+    requiresLLM: true,
+    catalogResults: patternResult.catalogResults // Pass any found items to LLM
+  };
+}
+
+
+METRICS TO TRACK
+----------------
+
+COST METRICS:
+- Total queries per day
+- Queries handled by FAQ tier (target: 20-30%)
+- Queries handled by pattern tier (target: 20-30%)
+- Queries escalated to LLM (target: 40-60%)
+- Estimated token savings per day
+- Estimated cost savings per month
+
+QUALITY METRICS:
+- Response accuracy per tier
+- User satisfaction per tier (if feedback collected)
+- Conversation continuation rate per tier
+- Escalation rate (pattern → LLM mid-conversation)
+
+OPERATIONAL METRICS:
+- Average response time per tier
+- FAQ database hit rate by category
+- Pattern match distribution
+- Failed matches (low confidence, sent to LLM)
+
+
+EXPECTED OUTCOMES
+-----------------
+
+Conservative estimate:
+- 30% of queries handled by FAQ/pattern tiers
+- 30% reduction in LLM API costs
+- 40% reduction in average response latency for simple queries
+
+Optimistic estimate:
+- 50% of queries handled by FAQ/pattern tiers
+- 50% reduction in LLM API costs
+- Improved response consistency for common questions
+
+
+MAINTENANCE REQUIREMENTS
+------------------------
+
+Weekly:
+- Review queries that fell through to LLM with high pattern similarity
+- Add new FAQ patterns based on common queries
+- Update response templates as needed
+
+Monthly:
+- Analyze tier distribution
+- Identify new FAQ categories
+- Refine matching thresholds
+- Update popular/new release caches
+
+
+================================================================================
+PART 6: PRIORITY ROADMAP
+================================================================================
+
+IMMEDIATE (This Week)
+---------------------
+[ ] All team members read priority sections (Part 2)
+[ ] Schedule Week 1 sync meeting
+[ ] Jordan: Initial assessment of system prompt integration
+
+WEEK 2
+------
+[ ] Team deep dive sessions
+[ ] Create integration priority list
+[ ] Jordan: Begin system prompt update
+
+WEEK 3-4
+--------
+[ ] Deploy updated system prompt
+[ ] Test against evaluation rubric
+[ ] Drew: Begin using Research Briefs in sales conversations
+
+WEEK 5-6
+--------
+[ ] Implement patron detection
+[ ] Jordan: Begin FAQ optimization system
+[ ] Kenny: Plan personality switching UX
+
+WEEK 7-8
+--------
+[ ] Implement expansion triggers
+[ ] Continue FAQ system development
+[ ] Gather feedback from live usage
+
+WEEK 9-10
+---------
+[ ] Implement personality switching
+[ ] Complete FAQ optimization system
+[ ] Measure cost savings and quality impact
+
+
+KEY MILESTONES
+--------------
+
+Milestone 1: System Prompt Live (End of Week 4)
+- New Training Guide prompt deployed
+- Measurable quality improvement
+
+Milestone 2: Adaptive Responses (End of Week 6)
+- Patron detection working
+- Responses adapt to patron type
+
+Milestone 3: FAQ Optimization (End of Week 8)
+- Tier 1 and Tier 2 routing live
+- 30%+ reduction in LLM calls
+
+Milestone 4: Full System (End of Week 10)
+- All personalities available
+- Expansion triggers working
+- Complete conversation design implemented
+
+
+================================================================================
+                              END OF DOCUMENT
+================================================================================
+
+            SCOUT CONVERSATION DESIGN SESSION SUMMARY
+                         December 2024
+
+    Total artifacts created: 5 major documents (~270KB)
+
+    This summary is your roadmap for understanding and implementing
+    the conversation design work. Follow the weekly action plan.
+
+    Questions? Discuss in team sync.
+
+================================================================================
