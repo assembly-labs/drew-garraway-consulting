@@ -250,6 +250,70 @@ wrangler pages deploy dist
 
 ---
 
+## Testing
+
+### Projects with Vitest
+
+| Project | Test Command | Watch Mode |
+|---------|--------------|------------|
+| Scout | `npm run test:run` | `npm run test` |
+| No FOMO | `npm run test:run` | `npm run test` |
+| Zero Chill | `npm run test:run` | `npm run test` |
+| Career Chat | `npm run test:run` | `npm run test` |
+
+### Running Tests
+
+```bash
+cd <project>
+
+# Run tests once
+npm run test:run
+
+# Watch mode (re-runs on file changes)
+npm run test
+
+# With coverage report
+npm run test:coverage
+```
+
+### Writing Tests
+
+Tests are located in `src/` alongside the code they test:
+- `src/App.test.tsx` - Tests for App component
+- `src/components/Button.test.tsx` - Tests for Button component
+
+Example test:
+```typescript
+import { describe, it, expect } from 'vitest'
+import { render, screen } from '@testing-library/react'
+import MyComponent from './MyComponent'
+
+describe('MyComponent', () => {
+  it('renders correctly', () => {
+    render(<MyComponent />)
+    expect(screen.getByText('Hello')).toBeInTheDocument()
+  })
+})
+```
+
+---
+
+## Setup Scripts
+
+For complex projects, use the setup scripts:
+
+```bash
+# Setup everything (simple projects only)
+bash scripts/setup-all.sh
+
+# Individual complex projects
+bash scripts/setup-cap.sh           # CAP with Supabase
+bash scripts/setup-assembly.sh      # Assembly with Docker
+bash scripts/setup-cool-curriculum.sh  # Cool Curriculum
+```
+
+---
+
 ## Common Issues
 
 ### Port Already in Use
