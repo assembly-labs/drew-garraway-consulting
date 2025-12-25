@@ -11,21 +11,26 @@
  *   node scripts/cache-bust.js --clean  # Remove version strings
  *
  * How it works:
- *   1. Scans all CSS/JS files in public/
+ *   1. Scans all CSS/JS files in project
  *   2. Generates MD5 hash of each file's content (first 8 chars)
  *   3. Updates HTML files to reference assets with ?v=<hash>
  *   4. Writes a manifest file for tracking
  */
 
-const fs = require('fs');
-const path = require('path');
-const crypto = require('crypto');
+import fs from 'fs';
+import path from 'path';
+import crypto from 'crypto';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const PUBLIC_DIR = path.join(__dirname, '..');
 const MANIFEST_FILE = path.join(__dirname, '..', '.cache-manifest.json');
 
-// Assets to track (relative to public/)
+// Assets to track (relative to project root)
 const TRACKED_ASSETS = [
+    'assets/css/main.css',
     'assets/css/sie-chapter.css',
     'assets/css/sie-navigation.css',
     'assets/js/sie-navigation-config.js',
@@ -150,12 +155,27 @@ function cleanHtmlFile(htmlPath) {
 }
 
 /**
- * Get all HTML files in public directory
+ * Get all HTML files recursively
  */
-function getHtmlFiles() {
-    return fs.readdirSync(PUBLIC_DIR)
-        .filter(f => f.endsWith('.html'))
-        .map(f => path.join(PUBLIC_DIR, f));
+function getHtmlFiles(dir = PUBLIC_DIR) {
+    let results = [];
+    const items = fs.readdirSync(dir);
+
+    for (const item of items) {
+        const fullPath = path.join(dir, item);
+        const stat = fs.statSync(fullPath);
+
+        if (stat.isDirectory()) {
+            // Skip node_modules and hidden directories
+            if (!item.startsWith('.') && item !== 'node_modules') {
+                results = results.concat(getHtmlFiles(fullPath));
+            }
+        } else if (item.endsWith('.html')) {
+            results.push(fullPath);
+        }
+    }
+
+    return results;
 }
 
 /**

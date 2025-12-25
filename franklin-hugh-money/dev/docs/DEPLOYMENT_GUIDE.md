@@ -3,196 +3,123 @@
 
 ---
 
-## 🚨 CRITICAL: Deployment Structure
+## Current Deployment Structure
 
-**THE LIVE SITE SERVES FROM THE REPOSITORY ROOT, NOT FROM SUBDIRECTORIES!**
+**The site is served via Cloudflare Pages from the `franklin-hugh-money/` subdirectory.**
 
-This is the #1 source of deployment issues. Read this section carefully.
+No more copying files to the repository root. The deploy script handles everything.
 
-### File Structure Mapping
+### Live URLs
 
-| Development Location | Live URL | Deployment Location |
-|---------------------|----------|-------------------|
-| `franklin-hugh-money/public/index.html` | `/franklin-hugh-money.html` | Repository root |
-| `franklin-hugh-money/public/franklin-hugh-money-treasury.html` | `/franklin-hugh-money-treasury.html` | Repository root |
-
-### Why This Matters
-- We develop in `franklin-hugh-money/public/` for organization
-- The live site serves from the repository root directory
-- **Files MUST be copied to root** for changes to appear live
+| Page | URL |
+|------|-----|
+| Main Site | https://drewgarraway.com/franklin-hugh-money/ |
+| SIE Study Materials | https://drewgarraway.com/franklin-hugh-money/sie-study-materials.html |
+| Treasury Analysis | https://drewgarraway.com/franklin-hugh-money/franklin-hugh-money-treasury.html |
 
 ---
 
-## 📋 Deployment Checklist
+## Quick Deployment
 
-### Before Every Deployment
-
-1. **Verify file names match live URLs**
-   ```bash
-   # Check the live URL structure
-   # https://drewgarraway.com/franklin-hugh-money.html
-   # https://drewgarraway.com/franklin-hugh-money-treasury.html
-   ```
-
-2. **Copy files from development to deployment location**
-   ```bash
-   # From franklin-hugh-money directory
-   cp public/index.html ../franklin-hugh-money.html
-   cp public/franklin-hugh-money-treasury.html ../franklin-hugh-money-treasury.html
-   ```
-
-3. **Commit and push from root**
-   ```bash
-   # Navigate to repository root
-   cd ..
-
-   # Add the root-level files
-   git add franklin-hugh-money*.html
-
-   # Commit with descriptive message
-   git commit -m "Update Franklin Hugh Money pages"
-
-   # Push using SSH (not HTTPS which requires auth)
-   git push ssh main
-   ```
-
-4. **Verify deployment**
-   - Wait 1-2 minutes for deployment
-   - Check live URLs
-   - Use browser incognito mode to avoid cache issues
-
----
-
-## 🔧 Common Issues & Solutions
-
-### Issue: "My changes aren't showing up!"
-
-**Diagnosis Steps:**
-1. Check which file you edited
-2. Check where you committed it
-3. Check the live URL you're visiting
-
-**Solution:**
-```bash
-# You probably edited the file in public/ but didn't copy to root
-cp public/franklin-hugh-money-treasury.html ../franklin-hugh-money-treasury.html
-cd .. && git add franklin-hugh-money-treasury.html && git commit -m "Fix deployment" && git push ssh main
-```
-
-### Issue: "Git push fails with authentication error"
-
-**Solution:**
-```bash
-# Use SSH remote instead of HTTPS
-git push ssh main  # Instead of: git push origin main
-```
-
-### Issue: "The wrong file is being served"
-
-**Check:**
-- File naming consistency
-- `treasury-analysis.html` was renamed to `franklin-hugh-money-treasury.html`
-- Index links must point to correct filenames
-
----
-
-## 🏗️ Project Structure
-
-```
-drew-garraway-consulting/          # Repository root (deployment location)
-├── franklin-hugh-money.html       # DEPLOYED: Main page
-├── franklin-hugh-money-treasury.html  # DEPLOYED: Treasury analysis
-├── franklin-hugh-money/          # Development directory
-│   ├── public/                    # Working files
-│   │   ├── index.html            # DEV: Main page source
-│   │   └── franklin-hugh-money-treasury.html  # DEV: Treasury source
-│   ├── dev/                      # Documentation
-│   └── src/                      # Future source files
-└── [other projects...]
-```
-
----
-
-## 🚀 Quick Deploy Script
-
-Save this as `deploy.sh` in the `franklin-hugh-money` directory:
+From the `franklin-hugh-money` directory:
 
 ```bash
-#!/bin/bash
-# Franklin Hugh Money Deployment Script
+./deploy.sh
+```
 
-echo "🚀 Starting deployment..."
+The script will:
+1. Validate content sync
+2. Run cache-busting on CSS/JS files
+3. Stage and commit changes
+4. Push to remote
 
-# Copy files to root
-echo "📋 Copying files to deployment location..."
-cp public/index.html ../franklin-hugh-money.html
-cp public/franklin-hugh-money-treasury.html ../franklin-hugh-money-treasury.html
+---
 
-# Navigate to root
+## Manual Deployment Steps
+
+If you prefer to deploy manually:
+
+```bash
+# 1. Navigate to project directory
+cd franklin-hugh-money
+
+# 2. Run cache-bust (updates version hashes in HTML files)
+node scripts/cache-bust.js
+
+# 3. Stage changes
 cd ..
+git add franklin-hugh-money/
 
-# Git operations
-echo "📦 Committing changes..."
-git add franklin-hugh-money*.html
-git commit -m "Deploy Franklin Hugh Money updates"
+# 4. Commit with descriptive message
+git commit -m "Your commit message"
 
-echo "⬆️ Pushing to remote..."
+# 5. Push to remote
+git push ssh main
+```
+
+---
+
+## Troubleshooting
+
+### Changes not appearing on live site
+
+1. **Clear browser cache** or use incognito mode
+2. Wait 1-2 minutes for Cloudflare to propagate changes
+3. Verify the commit was pushed: `git log -1 --oneline`
+4. Check Cloudflare Pages dashboard for build status
+
+### Cache-busting issues
+
+If CSS/JS changes aren't reflected:
+
+```bash
+# Force regenerate version hashes
+node scripts/cache-bust.js
+
+# Verify hashes updated in HTML files
+grep -r "\.css\?v=" *.html | head -5
+```
+
+### Git push fails
+
+```bash
+# Use SSH remote
 git push ssh main
 
-echo "✅ Deployment complete! Check live site in 1-2 minutes."
-echo "📍 URLs:"
-echo "   - https://drewgarraway.com/franklin-hugh-money.html"
-echo "   - https://drewgarraway.com/franklin-hugh-money-treasury.html"
-```
-
-Make it executable:
-```bash
-chmod +x deploy.sh
+# If SSH issues, check your SSH key is added
+ssh -T git@github.com
 ```
 
 ---
 
-## 📊 Visualization-Specific Notes
+## Project Structure
 
-### Plotly.js Best Practices
-1. **Always clear loading messages first**
-   ```javascript
-   const loadingDiv = container.querySelector('.loading');
-   if (loadingDiv) loadingDiv.remove();
-   ```
-
-2. **Treemap text configuration**
-   - Use `textinfo: 'text'` with complete formatted text
-   - Avoid mixing `texttemplate` with `textinfo`
-
-3. **Sankey diagram structure**
-   - Maintain consistent node hierarchy
-   - Don't add asymmetric subcategories
-
----
-
-## 🔍 Debugging Deployments
-
-### Check deployment status:
-1. View GitHub repository to confirm push succeeded
-2. Check file timestamps in root directory
-3. Use browser DevTools Network tab to verify which file is being served
-4. Clear browser cache or use incognito mode
-
-### Useful commands:
-```bash
-# Check what files are in root vs public
-ls -la ../franklin-hugh-money*.html
-ls -la public/*.html
-
-# See last commit affecting root files
-git log -1 --name-only ../franklin-hugh-money*.html
-
-# Compare files
-diff public/index.html ../franklin-hugh-money.html
+```
+drew-garraway-consulting/           # Repository root
+└── franklin-hugh-money/            # This project (deployment root)
+    ├── index.html                  # Main landing page
+    ├── sie-study-materials.html    # SIE course index
+    ├── sie-chapter-*.html          # Chapter pages
+    ├── assets/                     # CSS, JS, images, audio
+    │   ├── css/
+    │   ├── js/
+    │   ├── images/
+    │   └── audio/
+    ├── scripts/                    # Build/deployment scripts
+    ├── dev/                        # Development docs & logs
+    └── content/                    # Source content & organization
 ```
 
 ---
 
-*Last Updated: 2024-12-05*
-*Created after debugging session where deployment structure mismatch caused updates not to appear live*
+## Cache-Bust Workflow
+
+The `cache-bust.js` script generates content-based hashes for CSS and JS files, appending them as version query parameters (e.g., `?v=a34c2881`). This forces browsers to fetch new versions when files change.
+
+Files processed:
+- `assets/css/*.css`
+- `assets/js/*.js`
+
+---
+
+*Last Updated: 2024-12-24*

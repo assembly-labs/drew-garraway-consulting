@@ -1,0 +1,782 @@
+/* Franklin Hugh Money - Main Shared Styles
+ * Core design system used across all pages
+ * Extracted from inline styles for caching efficiency
+ */
+
+/* ============================================
+   CSS Variables (Design Tokens)
+   ============================================ */
+:root {
+    /* Primary Institutional Colors */
+    --fh-navy: #002D62;
+    --fh-cream: #FFFDF7;
+    --fh-gray: #54585A;
+
+    /* Secondary Colors */
+    --fh-sage: #7C9885;
+    --fh-burgundy: #6B2737;
+    --fh-gold: #B08D57;
+
+    /* Neutral Scale */
+    --fh-gray-900: #1A1A1A;
+    --fh-gray-700: #404040;
+    --fh-gray-600: #595959;
+    --fh-gray-500: #737373;
+    --fh-gray-400: #8a8a8a;
+    --fh-gray-300: #D4D4D4;
+    --fh-gray-200: #E5E5E5;
+    --fh-gray-100: #F5F5F5;
+    --fh-white: #FFFFFF;
+
+    /* Typography */
+    --fh-font-display: 'Crimson Pro', Georgia, serif;
+    --fh-font-body: 'Inter', -apple-system, sans-serif;
+    --fh-font-mono: 'IBM Plex Mono', monospace;
+
+    /* Spacing Scale (8px base) */
+    --fh-space-xs: 0.25rem;
+    --fh-space-sm: 0.5rem;
+    --fh-space-md: 1rem;
+    --fh-space-lg: 1.5rem;
+    --fh-space-xl: 2rem;
+    --fh-space-2xl: 3rem;
+    --fh-space-3xl: 4rem;
+    --fh-space-4xl: 6rem;
+}
+
+/* ============================================
+   Reset & Base Styles
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fh-font-body);
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--fh-gray-900);
+    background: var(--fh-cream);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+h1, h2, h3 {
+    font-family: var(--fh-font-display);
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: -0.02em;
+    color: var(--fh-navy);
+}
+
+h2 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    margin-bottom: var(--fh-space-lg);
+    color: var(--fh-navy);
+}
+
+h3 {
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    margin-bottom: var(--fh-space-md);
+}
+
+p {
+    margin-bottom: var(--fh-space-md);
+    color: var(--fh-gray-700);
+}
+
+a {
+    color: var(--fh-navy);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    text-decoration-thickness: 2px;
+}
+
+strong {
+    font-weight: 600;
+    color: var(--fh-gray-900);
+}
+
+/* ============================================
+   Layout Utilities
+   ============================================ */
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 var(--fh-space-lg);
+}
+
+.container--wide {
+    max-width: 1200px;
+    padding: var(--fh-space-xl);
+}
+
+.prose {
+    max-width: 65ch;
+    margin: 0 auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* ============================================
+   Header Component (Home Page)
+   ============================================ */
+.header {
+    padding: var(--fh-space-4xl) 0;
+    text-align: center;
+    border-bottom: 1px solid var(--fh-gray-200);
+    background: var(--fh-white);
+}
+
+.header__subtitle {
+    font-family: var(--fh-font-display);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--fh-gray-600);
+    margin-top: var(--fh-space-sm);
+    font-weight: 300;
+}
+
+/* ============================================
+   Navigation
+   ============================================ */
+.nav {
+    margin-top: var(--fh-space-2xl);
+    display: flex;
+    justify-content: center;
+    gap: var(--fh-space-xl);
+    flex-wrap: wrap;
+}
+
+.nav a {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    color: var(--fh-gray-700);
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav a:hover {
+    color: var(--fh-navy);
+}
+
+.nav__link--sage {
+    color: var(--fh-sage);
+    font-weight: 600;
+}
+
+.nav__link--burgundy {
+    color: var(--fh-burgundy);
+    font-weight: 600;
+}
+
+.nav .active {
+    color: var(--fh-navy);
+    font-weight: 600;
+}
+
+/* Inline navigation (treasury page style) */
+.nav--inline {
+    margin-top: 0;
+    margin-bottom: var(--fh-space-2xl);
+    justify-content: flex-start;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+}
+
+.nav--inline a {
+    color: var(--fh-gray-600);
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+.section {
+    padding: var(--fh-space-3xl) 0;
+}
+
+.section--alt {
+    background: var(--fh-white);
+}
+
+/* ============================================
+   Introduction Text
+   ============================================ */
+.intro {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--fh-gray-700);
+}
+
+.intro strong {
+    color: var(--fh-navy);
+    font-weight: 500;
+}
+
+/* Lead text (larger intro) */
+.lead {
+    font-size: 1.25rem;
+    font-family: var(--fh-font-display);
+    color: var(--fh-gray-600);
+    line-height: 1.6;
+    margin-bottom: var(--fh-space-2xl);
+}
+
+/* ============================================
+   Philosophy Cards (Home Page)
+   ============================================ */
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--fh-space-xl);
+    margin-top: var(--fh-space-2xl);
+}
+
+.philosophy-card {
+    background: var(--fh-white);
+    padding: var(--fh-space-xl);
+    border: 1px solid var(--fh-gray-200);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+.philosophy-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+.philosophy-card h3 {
+    font-family: var(--fh-font-body);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--fh-navy);
+    margin-bottom: var(--fh-space-sm);
+}
+
+.philosophy-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ============================================
+   Performance Widget (Home Page)
+   ============================================ */
+.performance {
+    font-family: var(--fh-font-mono);
+    background: var(--fh-white);
+    padding: var(--fh-space-xl);
+    border: 1px solid var(--fh-gray-200);
+    margin: var(--fh-space-2xl) 0;
+}
+
+.performance__title {
+    font-family: var(--fh-font-display);
+    font-size: 1.25rem;
+    margin-bottom: var(--fh-space-lg);
+    color: var(--fh-navy);
+}
+
+.performance__row {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--fh-space-sm) 0;
+    border-bottom: 1px solid var(--fh-gray-200);
+}
+
+.performance__row:last-child {
+    border-bottom: none;
+}
+
+.performance__label {
+    font-size: 0.875rem;
+    color: var(--fh-gray-600);
+}
+
+.performance__value {
+    font-weight: 500;
+    color: var(--fh-gray-900);
+}
+
+.performance__value--positive {
+    color: var(--fh-sage);
+}
+
+.performance__value--negative {
+    color: var(--fh-burgundy);
+}
+
+/* ============================================
+   Buttons & CTAs
+   ============================================ */
+.cta {
+    text-align: center;
+    padding: var(--fh-space-3xl) 0;
+}
+
+.button {
+    display: inline-block;
+    padding: var(--fh-space-md) var(--fh-space-2xl);
+    background: var(--fh-navy);
+    color: var(--fh-cream);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    border-radius: 2px;
+    transition: background 0.2s ease;
+}
+
+.button:hover {
+    background: var(--fh-gray-900);
+    text-decoration: none;
+}
+
+.button--secondary {
+    background: transparent;
+    color: var(--fh-navy);
+    border: 1px solid var(--fh-navy);
+}
+
+.button--secondary:hover {
+    background: var(--fh-navy);
+    color: var(--fh-cream);
+}
+
+/* Control buttons (treasury page) */
+.control-btn {
+    margin-left: auto;
+    padding: var(--fh-space-xs) var(--fh-space-md);
+    background: var(--fh-navy);
+    color: var(--fh-white);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+    background: #003d82;
+    transform: translateY(-1px);
+}
+
+/* ============================================
+   Quote Block
+   ============================================ */
+.quote {
+    padding: var(--fh-space-2xl);
+    border-left: 3px solid var(--fh-sage);
+    margin: var(--fh-space-2xl) 0;
+    font-style: italic;
+    color: var(--fh-gray-700);
+}
+
+.quote__attribution {
+    margin-top: var(--fh-space-md);
+    font-size: 0.875rem;
+    color: var(--fh-gray-600);
+    font-style: normal;
+}
+
+.quote__note {
+    font-size: 0.875rem;
+    color: var(--fh-gray-500);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.footer {
+    padding: var(--fh-space-2xl) 0;
+    text-align: center;
+    border-top: 1px solid var(--fh-gray-200);
+    background: var(--fh-white);
+}
+
+.footer__text {
+    font-size: 0.875rem;
+    color: var(--fh-gray-600);
+    margin-bottom: var(--fh-space-xs);
+}
+
+.footer__disclaimer {
+    font-size: 0.75rem;
+    color: var(--fh-gray-500);
+    font-style: italic;
+}
+
+.footer a {
+    color: var(--fh-gray-600);
+}
+
+/* Footer with top margin (treasury page style) */
+.footer--spaced {
+    margin-top: var(--fh-space-4xl);
+    padding-top: var(--fh-space-2xl);
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   Lists with Styles
+   ============================================ */
+.list--styled {
+    margin-left: var(--fh-space-xl);
+    color: var(--fh-gray-700);
+}
+
+.list--styled li {
+    margin-bottom: var(--fh-space-sm);
+}
+
+.list--styled strong {
+    color: var(--fh-navy);
+}
+
+/* ============================================
+   Visualization Sections (Treasury Page)
+   ============================================ */
+.viz-section {
+    margin-bottom: var(--fh-space-4xl);
+    padding: var(--fh-space-2xl);
+    background: var(--fh-white);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.viz-container {
+    min-height: 500px;
+    margin-top: var(--fh-space-xl);
+}
+
+.viz-description {
+    font-size: 0.95rem;
+    color: var(--fh-gray-600);
+    margin-top: var(--fh-space-md);
+    font-style: italic;
+}
+
+/* ============================================
+   Data Tables
+   ============================================ */
+.data-table {
+    width: 100%;
+    margin: var(--fh-space-2xl) 0;
+    border-collapse: collapse;
+    font-family: var(--fh-font-mono);
+    font-size: 0.9rem;
+}
+
+.data-table th,
+.data-table td {
+    padding: var(--fh-space-md);
+    text-align: left;
+    border-bottom: 1px solid var(--fh-gray-200);
+}
+
+.data-table th {
+    background: var(--fh-navy);
+    color: var(--fh-white);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+}
+
+.data-table tr:hover {
+    background: var(--fh-gray-100);
+}
+
+.data-table .amount {
+    text-align: right;
+    font-weight: 500;
+}
+
+.data-table .percentage {
+    text-align: right;
+    color: var(--fh-gray-600);
+}
+
+/* Enhanced table styles */
+.data-table.enhanced {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.data-table.enhanced th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Data legend */
+.data-legend {
+    display: flex;
+    align-items: center;
+    gap: var(--fh-space-xl);
+    margin-bottom: var(--fh-space-lg);
+    padding: var(--fh-space-md);
+    background: var(--fh-gray-100);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--fh-space-xs);
+}
+
+/* Expandable rows */
+.parent-row {
+    background: var(--fh-gray-100);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.parent-row:hover {
+    background: #e3e9f0;
+}
+
+.parent-row.expanded {
+    background: #d9e2ed;
+}
+
+.child-row {
+    background: var(--fh-white);
+    font-size: 0.925rem;
+    transition: all 0.3s ease;
+}
+
+.child-row.hidden {
+    display: none;
+}
+
+.child-row td {
+    border-left: 3px solid var(--fh-gray-200);
+}
+
+.child-row td:first-child {
+    border-left: none;
+}
+
+.expand-icon {
+    text-align: center;
+    user-select: none;
+    font-size: 0.9rem;
+    color: var(--fh-gray-600);
+}
+
+.holder-name.indented {
+    padding-left: 2rem;
+    position: relative;
+}
+
+.holder-name.indented:before {
+    content: "\2514\2500";
+    position: absolute;
+    left: 0.5rem;
+    color: var(--fh-gray-400);
+}
+
+/* Status badges */
+.status-badge {
+    font-size: 0.75rem;
+    margin-left: var(--fh-space-sm);
+    display: inline-block;
+}
+
+.status-verified {
+    color: #2E7D32;
+}
+
+.status-estimated {
+    color: #F57C00;
+}
+
+.source-note {
+    font-size: 0.8rem;
+    color: var(--fh-gray-600);
+    font-style: italic;
+}
+
+/* YoY Change indicators */
+.change {
+    text-align: right;
+    font-family: var(--fh-font-mono);
+    font-size: 0.9rem;
+}
+
+.change.positive {
+    color: #2E7D32;
+}
+
+.change.negative {
+    color: #C62828;
+}
+
+.change.neutral {
+    color: var(--fh-gray-500);
+}
+
+/* ============================================
+   Insight Box (Treasury Page)
+   ============================================ */
+.insight-box {
+    background: linear-gradient(135deg, var(--fh-navy) 0%, #003d82 100%);
+    color: var(--fh-white);
+    padding: var(--fh-space-2xl);
+    border-radius: 8px;
+    margin: var(--fh-space-2xl) 0;
+}
+
+.insight-box h3 {
+    color: var(--fh-white);
+    margin-bottom: var(--fh-space-lg);
+}
+
+.insight-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.insight-box li {
+    padding-left: var(--fh-space-lg);
+    margin-bottom: var(--fh-space-sm);
+    position: relative;
+}
+
+.insight-box li:before {
+    content: "\2192";
+    position: absolute;
+    left: 0;
+    color: var(--fh-gold);
+}
+
+/* ============================================
+   SIE Footnotes Section (Treasury Page)
+   ============================================ */
+.sie-footnotes {
+    background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+    border: 1px solid #FFB74D;
+    border-radius: 8px;
+    padding: var(--fh-space-2xl);
+    margin: var(--fh-space-2xl) 0;
+}
+
+.sie-footnotes h3 {
+    color: #E65100;
+    margin-bottom: var(--fh-space-lg);
+    border-bottom: 2px solid #FFB74D;
+    padding-bottom: var(--fh-space-sm);
+}
+
+.sie-note {
+    margin-bottom: var(--fh-space-lg);
+    padding: var(--fh-space-md);
+    background: var(--fh-white);
+    border-left: 4px solid #FF9800;
+    border-radius: 4px;
+}
+
+.sie-note-title {
+    font-weight: 600;
+    color: #E65100;
+    margin-bottom: var(--fh-space-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--fh-space-sm);
+}
+
+.sie-note-content {
+    color: var(--fh-gray-700);
+    line-height: 1.6;
+}
+
+.sie-note-content strong {
+    color: #E65100;
+    font-weight: 600;
+}
+
+.footnote-ref {
+    color: #E65100;
+    font-weight: 600;
+    cursor: help;
+    font-size: 0.85rem;
+}
+
+/* ============================================
+   Loading State
+   ============================================ */
+.loading {
+    text-align: center;
+    padding: var(--fh-space-2xl);
+    color: var(--fh-gray-500);
+}
+
+.loading:after {
+    content: "...";
+    animation: dots 1.5s steps(5, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: "."; }
+    40% { content: ".."; }
+    60%, 100% { content: "..."; }
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+@media (max-width: 768px) {
+    .nav {
+        gap: var(--fh-space-md);
+    }
+
+    .philosophy-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container--wide {
+        padding: var(--fh-space-md);
+    }
+
+    .viz-section {
+        padding: var(--fh-space-lg);
+    }
+
+    .nav--inline {
+        flex-wrap: wrap;
+        gap: var(--fh-space-md);
+    }
+
+    .data-table {
+        font-size: 0.8rem;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: var(--fh-space-sm);
+    }
+
+    .data-legend {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--fh-space-sm);
+    }
+}

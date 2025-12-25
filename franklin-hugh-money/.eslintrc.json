@@ -13,10 +13,13 @@
     "module": "readonly"
   },
   "rules": {
-    "no-unused-vars": "warn",
-    "no-console": "off",
+    "no-unused-vars": "error",
+    "no-console": "warn",
     "semi": ["error", "always"],
-    "quotes": "off"
+    "quotes": ["warn", "single", { "avoidEscape": true }],
+    "eqeqeq": ["error", "always"],
+    "no-var": "error",
+    "prefer-const": "warn"
   },
   "overrides": [
     {
