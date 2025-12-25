@@ -17,20 +17,25 @@
  *   1 = Validation errors found
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const PUBLIC_DIR = path.join(__dirname, '..');
+const SIE_DIR = path.join(__dirname, '..', 'pages', 'sie');
 const CONTENT_DIR = path.join(__dirname, '..', 'content', 'sie-exam', 'chapters');
 
 let errors = [];
 let warnings = [];
 
 /**
- * Get all SIE chapter HTML files in public/
+ * Get all SIE chapter HTML files in pages/sie/
  */
 function getChapterFiles() {
-    const files = fs.readdirSync(PUBLIC_DIR)
+    const files = fs.readdirSync(SIE_DIR)
         .filter(f => f.match(/^sie-chapter-\d+.*\.html$/))
         .sort();
     return files;
@@ -74,7 +79,7 @@ function parseNavigationConfig() {
  * Parse study materials page to get chapter cards
  */
 function parseStudyMaterials() {
-    const htmlPath = path.join(PUBLIC_DIR, 'sie-study-materials.html');
+    const htmlPath = path.join(SIE_DIR, 'sie-study-materials.html');
     const content = fs.readFileSync(htmlPath, 'utf8');
 
     // Count available chapters (with chapter-card--available class)
@@ -157,6 +162,7 @@ function validate() {
     const unlockedSections = navConfig.sections.filter(s => !s.locked);
 
     for (const section of unlockedSections) {
+        // Files in config now include pages/sie/ prefix
         const filePath = path.join(PUBLIC_DIR, section.file);
         if (!fs.existsSync(filePath)) {
             errors.push(`Navigation config references missing file: ${section.file}`);
@@ -170,7 +176,8 @@ function validate() {
     // 3. Validate study materials links
     console.log('Checking study materials page...');
     for (const link of studyMaterials.links) {
-        const filePath = path.join(PUBLIC_DIR, link);
+        // Links in study materials are relative to pages/sie/
+        const filePath = path.join(SIE_DIR, link);
         if (!fs.existsSync(filePath)) {
             errors.push(`Study materials links to missing file: ${link}`);
         }
@@ -220,7 +227,7 @@ function validate() {
 
     // 6. Check for duplicate meta tags (common error)
     const studyMaterialsContent = fs.readFileSync(
-        path.join(PUBLIC_DIR, 'sie-study-materials.html'),
+        path.join(SIE_DIR, 'sie-study-materials.html'),
         'utf8'
     );
     const cacheControlCount = (studyMaterialsContent.match(/Cache-Control/g) || []).length;

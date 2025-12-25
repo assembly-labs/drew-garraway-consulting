@@ -12,355 +12,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            /* Primary Institutional Colors */
-            --fh-navy: #002D62;
-            --fh-cream: #FFFDF7;
-            --fh-gray: #54585A;
-
-            /* Secondary Colors */
-            --fh-sage: #7C9885;
-            --fh-burgundy: #6B2737;
-            --fh-gold: #B08D57;
-
-            /* Neutral Scale */
-            --fh-gray-900: #1A1A1A;
-            --fh-gray-700: #404040;
-            --fh-gray-600: #595959;
-            --fh-gray-500: #737373;
-            --fh-gray-300: #D4D4D4;
-            --fh-gray-200: #E5E5E5;
-            --fh-gray-100: #F5F5F5;
-            --fh-white: #FFFFFF;
-
-            /* Typography */
-            --fh-font-display: 'Crimson Pro', Georgia, serif;
-            --fh-font-body: 'Inter', -apple-system, sans-serif;
-            --fh-font-mono: 'IBM Plex Mono', monospace;
-
-            /* Spacing */
-            --fh-space-xs: 0.25rem;
-            --fh-space-sm: 0.5rem;
-            --fh-space-md: 1rem;
-            --fh-space-lg: 1.5rem;
-            --fh-space-xl: 2rem;
-            --fh-space-2xl: 3rem;
-            --fh-space-3xl: 4rem;
-            --fh-space-4xl: 6rem;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--fh-font-body);
-            font-size: 16px;
-            line-height: 1.75;
-            color: var(--fh-gray-900);
-            background: var(--fh-cream);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Typography */
-        h1, h2, h3 {
-            font-family: var(--fh-font-display);
-            font-weight: 400;
-            line-height: 1.2;
-        }
-
-        h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            letter-spacing: -0.02em;
-            color: var(--fh-navy);
-        }
-
-        h2 {
-            font-size: clamp(1.5rem, 3vw, 2.25rem);
-            margin-bottom: var(--fh-space-lg);
-            color: var(--fh-navy);
-        }
-
-        h3 {
-            font-size: clamp(1.25rem, 2vw, 1.75rem);
-            margin-bottom: var(--fh-space-md);
-        }
-
-        p {
-            margin-bottom: var(--fh-space-md);
-            color: var(--fh-gray-700);
-        }
-
-        a {
-            color: var(--fh-navy);
-            text-decoration-thickness: 1px;
-            text-underline-offset: 2px;
-            transition: all 0.2s ease;
-        }
-
-        a:hover {
-            text-decoration-thickness: 2px;
-        }
-
-        /* Layout */
-        .container {
-            max-width: 1024px;
-            margin: 0 auto;
-            padding: 0 var(--fh-space-lg);
-        }
-
-        .prose {
-            max-width: 65ch;
-            margin: 0 auto;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* Header */
-        .header {
-            padding: var(--fh-space-4xl) 0;
-            text-align: center;
-            border-bottom: 1px solid var(--fh-gray-200);
-            background: var(--fh-white);
-        }
-
-        .header__subtitle {
-            font-family: var(--fh-font-display);
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--fh-gray-600);
-            margin-top: var(--fh-space-sm);
-            font-weight: 300;
-        }
-
-        /* Navigation */
-        .nav {
-            margin-top: var(--fh-space-2xl);
-            display: flex;
-            justify-content: center;
-            gap: var(--fh-space-xl);
-            flex-wrap: wrap;
-        }
-
-        .nav a {
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            text-decoration: none;
-            color: var(--fh-gray-700);
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .nav a:hover {
-            color: var(--fh-navy);
-        }
-
-        /* Main Content */
-        .section {
-            padding: var(--fh-space-3xl) 0;
-        }
-
-        .section--alt {
-            background: var(--fh-white);
-        }
-
-        /* Introduction */
-        .intro {
-            font-size: 1.125rem;
-            line-height: 1.8;
-            color: var(--fh-gray-700);
-        }
-
-        .intro strong {
-            color: var(--fh-navy);
-            font-weight: 500;
-        }
-
-        /* Philosophy Cards */
-        .philosophy-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--fh-space-xl);
-            margin-top: var(--fh-space-2xl);
-        }
-
-        .philosophy-card {
-            background: var(--fh-white);
-            padding: var(--fh-space-xl);
-            border: 1px solid var(--fh-gray-200);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            transition: box-shadow 0.3s ease;
-        }
-
-        .philosophy-card:hover {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-        }
-
-        .philosophy-card h3 {
-            font-family: var(--fh-font-body);
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--fh-navy);
-            margin-bottom: var(--fh-space-sm);
-        }
-
-        .philosophy-card p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Performance Section */
-        .performance {
-            font-family: var(--fh-font-mono);
-            background: var(--fh-white);
-            padding: var(--fh-space-xl);
-            border: 1px solid var(--fh-gray-200);
-            margin: var(--fh-space-2xl) 0;
-        }
-
-        .performance__title {
-            font-family: var(--fh-font-display);
-            font-size: 1.25rem;
-            margin-bottom: var(--fh-space-lg);
-            color: var(--fh-navy);
-        }
-
-        .performance__row {
-            display: flex;
-            justify-content: space-between;
-            padding: var(--fh-space-sm) 0;
-            border-bottom: 1px solid var(--fh-gray-200);
-        }
-
-        .performance__row:last-child {
-            border-bottom: none;
-        }
-
-        .performance__label {
-            font-size: 0.875rem;
-            color: var(--fh-gray-600);
-        }
-
-        .performance__value {
-            font-weight: 500;
-            color: var(--fh-gray-900);
-        }
-
-        .performance__value--positive {
-            color: var(--fh-sage);
-        }
-
-        .performance__value--negative {
-            color: var(--fh-burgundy);
-        }
-
-        /* CTA */
-        .cta {
-            text-align: center;
-            padding: var(--fh-space-3xl) 0;
-        }
-
-        .button {
-            display: inline-block;
-            padding: var(--fh-space-md) var(--fh-space-2xl);
-            background: var(--fh-navy);
-            color: var(--fh-cream);
-            text-decoration: none;
-            font-weight: 500;
-            letter-spacing: 0.025em;
-            border-radius: 2px;
-            transition: background 0.2s ease;
-        }
-
-        .button:hover {
-            background: var(--fh-gray-900);
-            text-decoration: none;
-        }
-
-        .button--secondary {
-            background: transparent;
-            color: var(--fh-navy);
-            border: 1px solid var(--fh-navy);
-        }
-
-        .button--secondary:hover {
-            background: var(--fh-navy);
-            color: var(--fh-cream);
-        }
-
-        /* Footer */
-        .footer {
-            padding: var(--fh-space-2xl) 0;
-            text-align: center;
-            border-top: 1px solid var(--fh-gray-200);
-            background: var(--fh-white);
-        }
-
-        .footer__text {
-            font-size: 0.875rem;
-            color: var(--fh-gray-600);
-            margin-bottom: var(--fh-space-xs);
-        }
-
-        .footer__disclaimer {
-            font-size: 0.75rem;
-            color: var(--fh-gray-500);
-            font-style: italic;
-        }
-
-        /* Quote */
-        .quote {
-            padding: var(--fh-space-2xl);
-            border-left: 3px solid var(--fh-sage);
-            margin: var(--fh-space-2xl) 0;
-            font-style: italic;
-            color: var(--fh-gray-700);
-        }
-
-        .quote__attribution {
-            margin-top: var(--fh-space-md);
-            font-size: 0.875rem;
-            color: var(--fh-gray-600);
-            font-style: normal;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav {
-                gap: var(--fh-space-md);
-            }
-
-            .philosophy-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="assets/css/main.css">
     <!-- Cache Control -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-
-    <!-- Cache Control -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-
-    <!-- Cache Control -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-
-    <!-- Cache Control -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-
 </head>
 <body>
     <!-- Header -->
@@ -374,8 +31,8 @@
                 <a href="#approach">Approach</a>
                 <a href="#progress">Progress</a>
                 <a href="#resources">Resources</a>
-                <a href="sie-study-materials.html" style="color: var(--fh-sage); font-weight: 600;">SIE Study Materials</a>
-                <a href="franklin-hugh-money-treasury.html" style="color: var(--fh-burgundy); font-weight: 600;">Treasury Analysis</a>
+                <a href="pages/sie/sie-study-materials.html" class="nav__link--sage">SIE Study Materials</a>
+                <a href="pages/franklin-hugh-money-treasury.html" class="nav__link--burgundy">Treasury Analysis</a>
             </nav>
         </div>
     </header>
@@ -403,7 +60,7 @@
             <h2 class="text-center">Investment Philosophy</h2>
 
             <div class="prose">
-                <p class="text-center" style="margin-bottom: var(--fh-space-2xl);">
+                <p class="text-center lead">
                     The strategy employed here would disappoint anyone seeking excitement.
                 </p>
             </div>
@@ -440,14 +97,14 @@
 
                 <p>The methodology is embarrassingly simple:</p>
 
-                <ol style="margin-left: var(--fh-space-xl); color: var(--fh-gray-700);">
-                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Live below my means</strong> – Spend less than earned (revolutionary, I know)</li>
-                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Invest the difference</strong> – In low-cost index funds</li>
-                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Wait</strong> – The hardest part</li>
-                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Document everything</strong> – For science, or perhaps masochism</li>
+                <ol class="list--styled">
+                    <li><strong>Live below my means</strong> – Spend less than earned (revolutionary, I know)</li>
+                    <li><strong>Invest the difference</strong> – In low-cost index funds</li>
+                    <li><strong>Wait</strong> – The hardest part</li>
+                    <li><strong>Document everything</strong> – For science, or perhaps masochism</li>
                 </ol>
 
-                <p style="margin-top: var(--fh-space-lg);">
+                <p>
                     This approach has decades of academic validation and requires no special skill, which may explain why the financial services industry rarely mentions it.
                 </p>
 
@@ -482,7 +139,7 @@
                     "An investment in knowledge pays the best interest."
                     <div class="quote__attribution">
                         — Benjamin Franklin<br>
-                        <span style="font-size: 0.875rem; color: var(--fh-gray-500);">(Though he failed to mention it compounds tax-deferred)</span>
+                        <span class="quote__note">(Though he failed to mention it compounds tax-deferred)</span>
                     </div>
                 </blockquote>
             </div>
@@ -497,15 +154,15 @@
 
                 <p>This project officially begins January 2025. Planned content includes:</p>
 
-                <ul style="margin-left: var(--fh-space-xl); color: var(--fh-gray-700);">
-                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Monthly Updates</strong> – Portfolio performance and lessons learned</li>
-                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Quarterly Letters</strong> – Deeper analysis and observations</li>
-                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Investment Tools</strong> – Calculators that actually help</li>
-                    <li style="margin-bottom: var(--fh-space-sm);"><strong style="color: var(--fh-navy);">Resources</strong> – Curated reading that matters</li>
+                <ul class="list--styled">
+                    <li><strong>Monthly Updates</strong> – Portfolio performance and lessons learned</li>
+                    <li><strong>Quarterly Letters</strong> – Deeper analysis and observations</li>
+                    <li><strong>Investment Tools</strong> – Calculators that actually help</li>
+                    <li><strong>Resources</strong> – Curated reading that matters</li>
                 </ul>
 
                 <div class="cta">
-                    <a href="#" class="button button--secondary">Coming January 2025</a>
+                    <a href="pages/sie/sie-study-materials.html" class="button button--secondary">View SIE Study Materials</a>
                 </div>
             </div>
         </div>
