@@ -1,0 +1,1 @@
+export { EditingBooth } from './EditingBooth';

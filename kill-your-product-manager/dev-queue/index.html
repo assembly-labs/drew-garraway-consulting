@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev Queue - Kill Your PM</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <h1 class="logo">DEV QUEUE</h1>
+        <span class="tagline">Kill Your PM</span>
+      </div>
+      <div class="header-right">
+        <button class="btn btn-primary" id="newTicketBtn">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          New Ticket
+        </button>
+        <button class="btn btn-icon" id="settingsBtn" title="Manage Projects">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"></path>
+          </svg>
+        </button>
+        <button class="btn btn-icon" id="helpBtn" title="Keyboard Shortcuts (?)">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div class="filter-group">
+          <select id="projectFilter" class="select">
+            <option value="">All Projects</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select id="priorityFilter" class="select">
+            <option value="">All Priorities</option>
+            <option value="1">Critical</option>
+            <option value="2">High</option>
+            <option value="3">Medium</option>
+            <option value="4">Low</option>
+            <option value="5">Nice to have</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select id="statusFilter" class="select">
+            <option value="">All Statuses</option>
+            <option value="backlog">Backlog</option>
+            <option value="review">Review</option>
+            <option value="approved">Approved</option>
+            <option value="queued">Queued</option>
+            <option value="in-progress">In Progress</option>
+            <option value="done">Done</option>
+            <option value="blocked">Blocked</option>
+          </select>
+        </div>
+        <label class="toggle-label">
+          <input type="checkbox" id="myTicketsToggle">
+          <span>My Tickets</span>
+        </label>
+      </div>
+      <div class="toolbar-right">
+        <div class="search-box">
+          <svg class="icon search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search tickets... (/)">
+        </div>
+        <div class="view-toggle">
+          <button class="view-toggle-btn active" data-view="board" title="Board View">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+            </svg>
+          </button>
+          <button class="view-toggle-btn" data-view="table" title="Table View">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Pills -->
+    <div class="filter-pills" id="filterPills"></div>
+
+    <!-- Kanban Board -->
+    <div class="board" id="board">
+      <div class="column" data-status="backlog">
+        <div class="column-header">
+          <h2 class="column-title">Backlog</h2>
+          <span class="column-count" data-count="backlog">0</span>
+        </div>
+        <div class="column-content" data-status="backlog"></div>
+      </div>
+      <div class="column" data-status="review">
+        <div class="column-header">
+          <h2 class="column-title">Review</h2>
+          <span class="column-count" data-count="review">0</span>
+        </div>
+        <div class="column-content" data-status="review"></div>
+      </div>
+      <div class="column" data-status="approved">
+        <div class="column-header">
+          <h2 class="column-title">Approved</h2>
+          <span class="column-count" data-count="approved">0</span>
+        </div>
+        <div class="column-content" data-status="approved"></div>
+      </div>
+      <div class="column" data-status="queued">
+        <div class="column-header">
+          <h2 class="column-title">Queued</h2>
+          <span class="column-count" data-count="queued">0</span>
+        </div>
+        <div class="column-content" data-status="queued"></div>
+      </div>
+      <div class="column" data-status="in-progress">
+        <div class="column-header">
+          <h2 class="column-title">In Progress</h2>
+          <span class="column-count" data-count="in-progress">0</span>
+        </div>
+        <div class="column-content" data-status="in-progress"></div>
+      </div>
+      <div class="column" data-status="done">
+        <div class="column-header">
+          <h2 class="column-title">Done</h2>
+          <span class="column-count" data-count="done">0</span>
+        </div>
+        <div class="column-content" data-status="done"></div>
+      </div>
+      <div class="column column-blocked" data-status="blocked">
+        <div class="column-header">
+          <h2 class="column-title">Blocked</h2>
+          <span class="column-count" data-count="blocked">0</span>
+        </div>
+        <div class="column-content" data-status="blocked"></div>
+      </div>
+    </div>
+
+    <!-- Table View -->
+    <div class="table-view" id="tableView" style="display: none;">
+      <table class="ticket-table">
+        <thead>
+          <tr>
+            <th class="sortable" data-sort="id">ID <span class="sort-icon">↕</span></th>
+            <th class="sortable" data-sort="title">Title <span class="sort-icon">↕</span></th>
+            <th class="sortable" data-sort="project">Project <span class="sort-icon">↕</span></th>
+            <th class="sortable" data-sort="priority">Priority <span class="sort-icon">↕</span></th>
+            <th class="sortable" data-sort="status">Status <span class="sort-icon">↕</span></th>
+            <th class="sortable" data-sort="createdAt">Created <span class="sort-icon">↕</span></th>
+            <th>Creator</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Dynamically populated -->
+        </tbody>
+      </table>
+      <div class="table-empty" id="tableEmpty" style="display: none;">
+        <p>No tickets found</p>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Saved Indicator -->
+    <div id="savedIndicator" class="saved-indicator">Saved</div>
+  </div>
+
+  <!-- New Ticket Modal -->
+  <div id="newTicketModal" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>Create New Ticket</h2>
+        <button class="btn btn-icon modal-close">&times;</button>
+      </div>
+      <form id="newTicketForm" class="modal-body">
+        <div class="form-group">
+          <label class="form-label required">Title</label>
+          <input type="text" id="ticketTitle" class="form-input" placeholder="Short, descriptive title for this feature" required>
+          <span class="form-hint">Example: "Add dark mode toggle to settings"</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label required">Project</label>
+            <select id="ticketProject" class="form-select" required>
+              <option value="">Select project</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Priority</label>
+            <div class="priority-options">
+              <label class="priority-option">
+                <input type="radio" name="priority" value="1">
+                <span class="priority-label priority-critical">Critical</span>
+              </label>
+              <label class="priority-option">
+                <input type="radio" name="priority" value="2">
+                <span class="priority-label priority-high">High</span>
+              </label>
+              <label class="priority-option">
+                <input type="radio" name="priority" value="3" checked>
+                <span class="priority-label priority-medium">Medium</span>
+              </label>
+              <label class="priority-option">
+                <input type="radio" name="priority" value="4">
+                <span class="priority-label priority-low">Low</span>
+              </label>
+              <label class="priority-option">
+                <input type="radio" name="priority" value="5">
+                <span class="priority-label priority-nice">Nice</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label required">Description</label>
+          <textarea id="ticketDescription" class="form-textarea" rows="4" placeholder="Describe what to build and why it matters. Be specific. Assume the reader has no context." required></textarea>
+          <span class="form-hint">Minimum 100 characters required. <span id="descCharCount">0</span>/100</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label required">Acceptance Criteria</label>
+          <div id="acceptanceCriteriaList" class="criteria-list">
+            <div class="criteria-item">
+              <input type="text" class="form-input criteria-input" placeholder="What must be true for this to be complete?">
+              <button type="button" class="btn btn-icon btn-remove-criteria">&times;</button>
+            </div>
+            <div class="criteria-item">
+              <input type="text" class="form-input criteria-input" placeholder="Another criterion...">
+              <button type="button" class="btn btn-icon btn-remove-criteria">&times;</button>
+            </div>
+          </div>
+          <button type="button" id="addCriteriaBtn" class="btn btn-secondary btn-small">+ Add criterion</button>
+          <span class="form-hint">Minimum 2 criteria required.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Files Affected <span class="optional">(optional but recommended)</span></label>
+          <div id="filesAffectedList" class="files-list">
+            <div class="file-item">
+              <input type="text" class="form-input file-input" placeholder="/path/to/file.js">
+              <button type="button" class="btn btn-icon btn-remove-file">&times;</button>
+            </div>
+          </div>
+          <button type="button" id="addFileBtn" class="btn btn-secondary btn-small">+ Add file</button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Edge Cases <span class="optional">(optional but recommended)</span></label>
+          <div id="edgeCasesList" class="edge-cases-list">
+            <div class="edge-case-item">
+              <input type="text" class="form-input edge-case-input" placeholder="What if the user...">
+              <button type="button" class="btn btn-icon btn-remove-edge-case">&times;</button>
+            </div>
+          </div>
+          <button type="button" id="addEdgeCaseBtn" class="btn btn-secondary btn-small">+ Add edge case</button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Technical Notes <span class="optional">(optional)</span></label>
+          <textarea id="ticketTechnicalNotes" class="form-textarea" rows="2" placeholder="Any implementation guidance or patterns to follow?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label required">Your Name</label>
+          <input type="text" id="ticketCreator" class="form-input" placeholder="Your name" required>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary modal-close">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Ticket</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Ticket Detail Modal -->
+  <div id="ticketDetailModal" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <button class="btn btn-secondary btn-small modal-close">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          Back
+        </button>
+        <div class="modal-header-actions">
+          <button class="btn btn-danger btn-small" id="deleteTicketBtn">Delete</button>
+          <button class="btn btn-icon modal-close">&times;</button>
+        </div>
+      </div>
+      <div class="modal-body ticket-detail" id="ticketDetailContent">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Management Modal -->
+  <div id="projectModal" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Manage Projects</h2>
+        <button class="btn btn-icon modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="projectList" class="project-list">
+          <!-- Dynamically populated -->
+        </div>
+        <hr class="divider">
+        <h3>Add New Project</h3>
+        <form id="addProjectForm" class="add-project-form">
+          <div class="form-group">
+            <label class="form-label">Slug</label>
+            <input type="text" id="projectSlug" class="form-input" placeholder="project-slug" pattern="[a-z0-9-]+" required>
+            <span class="form-hint">Lowercase, no spaces, hyphens allowed</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Display Name</label>
+            <input type="text" id="projectName" class="form-input" placeholder="Project Display Name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Path</label>
+            <input type="text" id="projectPath" class="form-input" placeholder="/path/to/project/root" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Add Project</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyboard Shortcuts Modal -->
+  <div id="shortcutsModal" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content modal-small">
+      <div class="modal-header">
+        <h2>Keyboard Shortcuts</h2>
+        <button class="btn btn-icon modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="shortcuts-list">
+          <div class="shortcut-item">
+            <kbd>N</kbd>
+            <span>New ticket</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>V</kbd>
+            <span>Toggle view (Board/Table)</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>/</kbd>
+            <span>Focus search</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Esc</kbd>
+            <span>Close modal</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>?</kbd>
+            <span>Show shortcuts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Welcome Modal -->
+  <div id="welcomeModal" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content modal-small">
+      <div class="modal-header">
+        <h2>Welcome to Dev Queue</h2>
+      </div>
+      <div class="modal-body">
+        <p>Let's get started by creating your first project.</p>
+        <p class="text-muted">Projects represent different codebases or applications you're managing.</p>
+        <div class="form-actions">
+          <button class="btn btn-primary" id="welcomeCreateProjectBtn">Create First Project</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Modal -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content modal-small">
+      <div class="modal-header">
+        <h2 id="confirmTitle">Confirm</h2>
+        <button class="btn btn-icon modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="confirmMessage">Are you sure?</p>
+        <div class="form-actions">
+          <button class="btn btn-secondary modal-close">Cancel</button>
+          <button class="btn btn-danger" id="confirmBtn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

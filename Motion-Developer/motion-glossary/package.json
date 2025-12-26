@@ -1,0 +1,49 @@
+{
+  "name": "motion-glossary",
+  "version": "1.0.0",
+  "description": "A comprehensive React animation library with Storybook - a visual glossary of motion patterns",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "framer-motion": "^11.15.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^8.4.7",
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/addon-interactions": "^8.4.7",
+    "@storybook/addon-links": "^8.4.7",
+    "@storybook/addon-storysource": "^8.4.7",
+    "@storybook/blocks": "^8.4.7",
+    "@storybook/react": "^8.4.7",
+    "@storybook/react-vite": "^8.4.7",
+    "@storybook/theming": "^8.4.7",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "prismjs": "^1.29.0",
+    "@types/prismjs": "^1.26.5",
+    "storybook": "^8.4.7",
+    "storybook-dark-mode": "^4.0.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  },
+  "keywords": [
+    "react",
+    "animation",
+    "motion",
+    "framer-motion",
+    "storybook",
+    "css-animations",
+    "ui-library"
+  ],
+  "author": "Drew Garraway",
+  "license": "MIT"
+}

@@ -1,0 +1,178 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  border: 1px solid var(--color-border, #2e2e2e);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: #222;
+  border-bottom: 1px solid var(--color-border, #2e2e2e);
+  gap: 12px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary, #a3a3a3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.tab {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary, #a3a3a3);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.tab:hover {
+  color: var(--color-text-primary, #fafafa);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.tabActive {
+  color: var(--color-text-primary, #fafafa);
+  background-color: var(--color-bg-tertiary, #262626);
+  border-color: var(--color-border, #2e2e2e);
+}
+
+.copyButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary, #a3a3a3);
+  background-color: transparent;
+  border: 1px solid var(--color-border, #2e2e2e);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.copyButton:hover {
+  color: var(--color-text-primary, #fafafa);
+  background-color: var(--color-bg-tertiary, #262626);
+  border-color: var(--color-border-hover, #404040);
+}
+
+.codeWrapper {
+  overflow: auto;
+}
+
+.pre {
+  display: flex;
+  margin: 0;
+  padding: 16px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  background: transparent;
+  overflow-x: auto;
+}
+
+.lineNumbers {
+  display: flex;
+  flex-direction: column;
+  padding-right: 16px;
+  margin-right: 16px;
+  border-right: 1px solid var(--color-border, #2e2e2e);
+  user-select: none;
+}
+
+.lineNumber {
+  color: var(--color-text-muted, #737373);
+  text-align: right;
+  min-width: 2ch;
+}
+
+.code {
+  flex: 1;
+  white-space: pre;
+}
+
+/* Prism theme overrides */
+.code :global(.token.comment),
+.code :global(.token.prolog),
+.code :global(.token.doctype),
+.code :global(.token.cdata) {
+  color: #6a737d;
+}
+
+.code :global(.token.punctuation) {
+  color: #e1e4e8;
+}
+
+.code :global(.token.property),
+.code :global(.token.tag),
+.code :global(.token.boolean),
+.code :global(.token.number),
+.code :global(.token.constant),
+.code :global(.token.symbol),
+.code :global(.token.deleted) {
+  color: #79b8ff;
+}
+
+.code :global(.token.selector),
+.code :global(.token.attr-name),
+.code :global(.token.string),
+.code :global(.token.char),
+.code :global(.token.builtin),
+.code :global(.token.inserted) {
+  color: #9ecbff;
+}
+
+.code :global(.token.operator),
+.code :global(.token.entity),
+.code :global(.token.url),
+.code :global(.language-css) :global(.token.string),
+.code :global(.style) :global(.token.string) {
+  color: #e1e4e8;
+}
+
+.code :global(.token.atrule),
+.code :global(.token.attr-value),
+.code :global(.token.keyword) {
+  color: #f97583;
+}
+
+.code :global(.token.function),
+.code :global(.token.class-name) {
+  color: #b392f0;
+}
+
+.code :global(.token.regex),
+.code :global(.token.important),
+.code :global(.token.variable) {
+  color: #ffab70;
+}

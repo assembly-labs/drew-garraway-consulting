@@ -1,0 +1,19 @@
+.toggle {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.toggle:focus {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
+
+.knob {
+  display: block;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

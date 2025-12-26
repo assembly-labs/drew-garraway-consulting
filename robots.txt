@@ -1,0 +1,44 @@
+# robots.txt for drewgarraway.com
+# Main pages (index.html, resume.html, contact.html) are allowed
+# All project folders are blocked
+
+User-agent: *
+
+# Block all project folders
+Disallow: /BJJJ/
+Disallow: /CAP/
+Disallow: /Motion-Developer/
+Disallow: /Photography-and-visual-design-expert/
+Disallow: /_read_out_loud/
+Disallow: /accountable/
+Disallow: /alliance-bjj-app/
+Disallow: /assembly-agentic-articles/
+Disallow: /calc/
+Disallow: /career-chat/
+Disallow: /cleaning-services-by-amanda/
+Disallow: /cool-curriculum/
+Disallow: /design-system-framework/
+Disallow: /docs/
+Disallow: /f_this_app/
+Disallow: /franklin-hugh-money/
+Disallow: /fuckyougotrain/
+Disallow: /gather/
+Disallow: /kill-your-product-manager/
+Disallow: /nofomo/
+Disallow: /prompt-property/
+Disallow: /scout/
+Disallow: /scripts/
+Disallow: /sports-psych/
+Disallow: /zero-chill-tracker/
+
+# Block internal/system folders
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /.claude/
+Disallow: /.vscode/
+
+# Block products page (links to all projects)
+Disallow: /products.html
+
+# Sitemap location
+Sitemap: https://drewgarraway.com/sitemap.xml

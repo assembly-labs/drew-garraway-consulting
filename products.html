@@ -240,6 +240,39 @@
             transform: translateX(3px);
         }
 
+        /* Section Titles */
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(251, 113, 133, 0.8);
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(192, 38, 211, 0.2);
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Featured Items */
+        .product-item.featured {
+            border-color: rgba(251, 113, 133, 0.3);
+            background: rgba(76, 29, 149, 0.15);
+        }
+
+        .product-item.featured::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #C026D3, #FB7185);
+            border-radius: 12px 0 0 12px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero {
@@ -267,12 +300,14 @@
 
     <section class="products">
         <div class="container">
+            <!-- FEATURED PRODUCTS -->
+            <h3 class="section-title">Featured</h3>
             <div class="products-list">
-                <div class="product-item">
+                <div class="product-item featured">
                     <div class="product-content">
-                        <h2 class="product-name">Scout</h2>
-                        <p class="product-description">AI-powered library assistant for discovering books, resources, and educational materials</p>
-                        <a href="/scout" class="product-link">
+                        <h2 class="product-name">BJJJ</h2>
+                        <p class="product-description">Voice-first training journal for Brazilian Jiu-Jitsu. Capture insights at the critical post-training moment when information is fresh but you're exhausted. Session logging, belt progression, technique library.</p>
+                        <a href="/BJJJ" class="product-link">
                             View Product
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path d="M9 5l7 7-7 7"/>
@@ -281,10 +316,49 @@
                     </div>
                 </div>
 
-                <div class="product-item">
+                <div class="product-item featured">
+                    <div class="product-content">
+                        <h2 class="product-name">Kill Your PM</h2>
+                        <p class="product-description">Internal Kanban tool that lets non-technical teams write feature specs queued for autonomous execution by Claude Code. Stop waiting. Start shipping. No standups. No sprint planning. No bottlenecks.</p>
+                        <a href="/kill-your-product-manager" class="product-link">
+                            View Product
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-item featured">
+                    <div class="product-content">
+                        <h2 class="product-name">Design System Framework</h2>
+                        <p class="product-description">Professional 0-to-1 product development framework for building software with Claude Code. IDEA to Concept to UX to UI to Development. Build products with intention, not defaults.</p>
+                        <a href="/design-system-framework" class="product-link">
+                            View Product
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-item featured">
+                    <div class="product-content">
+                        <h2 class="product-name">Motion Glossary</h2>
+                        <p class="product-description">Comprehensive React animation library with Storybook. 30+ reusable animations organized by category: entrances, feedback, text, scroll-driven, ambient. Copy-paste ready with accessibility support.</p>
+                        <a href="/Motion-Developer" class="product-link">
+                            View Product
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-item featured">
                     <div class="product-content">
                         <h2 class="product-name">Franklin Hugh Money</h2>
-                        <p class="product-description">Personal finance journey documentation - Building F.U. Money with a punk rock attitude toward wealth</p>
+                        <p class="product-description">Personal finance documentation site chronicling the journey toward financial independence through index fund investing. SIE exam study materials, institutional design aesthetic.</p>
                         <a href="/franklin-hugh-money/" class="product-link">
                             View Product
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -294,11 +368,11 @@
                     </div>
                 </div>
 
-                <div class="product-item">
+                <div class="product-item featured">
                     <div class="product-content">
-                        <h2 class="product-name">Alliance BJJ App</h2>
-                        <p class="product-description">BJJ gym management platform prototype for gym owners and members with scheduling, check-ins, and progress tracking</p>
-                        <a href="/alliance-bjj-app" class="product-link">
+                        <h2 class="product-name">F This App</h2>
+                        <p class="product-description">Next.js web application with Supabase backend and Tailwind CSS. Full-stack TypeScript with Cloudflare Workers integration.</p>
+                        <a href="/f_this_app" class="product-link">
                             View Product
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path d="M9 5l7 7-7 7"/>
@@ -307,10 +381,27 @@
                     </div>
                 </div>
 
+                <div class="product-item featured">
+                    <div class="product-content">
+                        <h2 class="product-name">Scout</h2>
+                        <p class="product-description">AI-powered library discovery system. Conversational AI for finding books, DVDs, games, equipment, and "Library of Things" using Claude AI. Natural language search with multi-turn conversations.</p>
+                        <a href="/scout" class="product-link">
+                            View Product
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI & AUTOMATION -->
+            <h3 class="section-title">AI & Automation</h3>
+            <div class="products-list">
                 <div class="product-item">
                     <div class="product-content">
                         <h2 class="product-name">CAP</h2>
-                        <p class="product-description">AI-powered youth sports trading card platform - turn phone photos into professional cards in under 5 minutes</p>
+                        <p class="product-description">AI-powered youth sports trading card platform. Turn phone photos into professional trading cards in under 5 minutes. Next.js with Supabase and Stripe.</p>
                         <a href="/CAP" class="product-link">
                             View Product
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -323,7 +414,7 @@
                 <div class="product-item">
                     <div class="product-content">
                         <h2 class="product-name">Cool Curriculum</h2>
-                        <p class="product-description">AI-powered lesson material generator for K-4 educators creating differentiated, standards-aligned worksheets</p>
+                        <p class="product-description">AI-powered lesson material generator for K-4 educators creating differentiated, standards-aligned worksheets.</p>
                         <a href="/cool-curriculum" class="product-link">
                             View Product
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -335,21 +426,8 @@
 
                 <div class="product-item">
                     <div class="product-content">
-                        <h2 class="product-name">Prompt Property</h2>
-                        <p class="product-description">AI-powered real estate form and document generation platform</p>
-                        <a href="/prompt-property" class="product-link">
-                            View Product
-                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path d="M9 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="product-item">
-                    <div class="product-content">
                         <h2 class="product-name">Career Chat</h2>
-                        <p class="product-description">AI-powered career coaching and professional development conversation tool</p>
+                        <p class="product-description">AI chatbot powered by Claude 3.5 Sonnet for career and professional development questions. Server-side API security via Cloudflare Worker.</p>
                         <a href="/career-chat" class="product-link">
                             View Product
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -361,9 +439,9 @@
 
                 <div class="product-item">
                     <div class="product-content">
-                        <h2 class="product-name">Read Out Loud</h2>
-                        <p class="product-description">Modern text-to-speech web app with file import support and progressive web app installation</p>
-                        <a href="/_read_out_loud" class="product-link">
+                        <h2 class="product-name">Assembly Agentic Articles</h2>
+                        <p class="product-description">AI-powered content research and publishing platform. Streamlines content creation with AI research, generation, revision, and multi-platform publishing.</p>
+                        <a href="/assembly-agentic-articles" class="product-link">
                             View Product
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path d="M9 5l7 7-7 7"/>
@@ -374,9 +452,26 @@
 
                 <div class="product-item">
                     <div class="product-content">
-                        <h2 class="product-name">Canned Product Calculator</h2>
-                        <p class="product-description">Canned product cost calculator with bid comparison and CSV export</p>
-                        <a href="/calc" class="product-link">
+                        <h2 class="product-name">Prompt Property</h2>
+                        <p class="product-description">AI-powered real estate form and document generation platform.</p>
+                        <a href="/prompt-property" class="product-link">
+                            View Product
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FITNESS & WELLNESS -->
+            <h3 class="section-title">Fitness & Wellness</h3>
+            <div class="products-list">
+                <div class="product-item">
+                    <div class="product-content">
+                        <h2 class="product-name">Alliance BJJ App</h2>
+                        <p class="product-description">BJJ gym management platform prototype. Member management, class scheduling, belt progression tracking, and billing for gym owners and members.</p>
+                        <a href="/alliance-bjj-app" class="product-link">
                             View Product
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path d="M9 5l7 7-7 7"/>
@@ -388,7 +483,7 @@
                 <div class="product-item">
                     <div class="product-content">
                         <h2 class="product-name">Fuck You Go Train</h2>
-                        <p class="product-description">Time-based workout app with non-stoppable timers and motivational personas for men 40+</p>
+                        <p class="product-description">Time-based workout app with non-stoppable timers. 30 exercises, 9 motivational personas (Goggins, Jocko, Arnold), automatic PR tracking. For men 40+.</p>
                         <a href="/fuckyougotrain" class="product-link">
                             View Product
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -400,22 +495,9 @@
 
                 <div class="product-item">
                     <div class="product-content">
-                        <h2 class="product-name">Gather</h2>
-                        <p class="product-description">Platform to modernize farmers market operations with digital vendor management, SNAP/EBT processing, and online pre-ordering</p>
-                        <a href="/gather" class="product-link">
-                            View Product
-                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path d="M9 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="product-item">
-                    <div class="product-content">
-                        <h2 class="product-name">no fomo</h2>
-                        <p class="product-description">Investment time machine calculator showing what investments would be worth if purchased at different times</p>
-                        <a href="/nofomo" class="product-link">
+                        <h2 class="product-name">Daily Sports Wisdom</h2>
+                        <p class="product-description">Daily motivational quotes and sports psychology insights for athletes and coaches.</p>
+                        <a href="/sports-psych" class="product-link">
                             View Product
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path d="M9 5l7 7-7 7"/>
@@ -427,7 +509,7 @@
                 <div class="product-item">
                     <div class="product-content">
                         <h2 class="product-name">Zero Chill Tracker</h2>
-                        <p class="product-description">Daily mood tracking app with PWA support for logging chill vs no-chill days</p>
+                        <p class="product-description">Simple daily mood tracker PWA. Log chill vs no-chill days with monthly calendar view and statistics.</p>
                         <a href="/zero-chill-tracker" class="product-link">
                             View Product
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -439,9 +521,82 @@
 
                 <div class="product-item">
                     <div class="product-content">
-                        <h2 class="product-name">Daily Sports Wisdom</h2>
-                        <p class="product-description">Daily motivational quotes and sports psychology insights for athletes and coaches</p>
-                        <a href="/sports-psych" class="product-link">
+                        <h2 class="product-name">Accountable</h2>
+                        <p class="product-description">Habit tracking dashboard for daily accountability and routine building.</p>
+                        <a href="/accountable" class="product-link">
+                            View Product
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FINANCE & BUSINESS -->
+            <h3 class="section-title">Finance & Business</h3>
+            <div class="products-list">
+                <div class="product-item">
+                    <div class="product-content">
+                        <h2 class="product-name">no fomo</h2>
+                        <p class="product-description">Investment time machine. See what investments would be worth if bought at different times. Real market data via Polygon.io with stock split adjustments.</p>
+                        <a href="/nofomo" class="product-link">
+                            View Product
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-item">
+                    <div class="product-content">
+                        <h2 class="product-name">Gather</h2>
+                        <p class="product-description">Local food systems infrastructure platform. Helping farmers markets connect with neighbors through digital vendor management and SNAP/EBT processing.</p>
+                        <a href="/gather" class="product-link">
+                            View Product
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-item">
+                    <div class="product-content">
+                        <h2 class="product-name">Canned Product Calculator</h2>
+                        <p class="product-description">Spreadsheet-style tool for calculating costs of canned products across variants with CSV export.</p>
+                        <a href="/calc" class="product-link">
+                            View Product
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOOLS & UTILITIES -->
+            <h3 class="section-title">Tools & Utilities</h3>
+            <div class="products-list">
+                <div class="product-item">
+                    <div class="product-content">
+                        <h2 class="product-name">Photography & Visual Design</h2>
+                        <p class="product-description">Fast UI for sourcing images, icons, and visual design assets. Integrates with Unsplash, Pexels, Iconify, and Flaticon APIs.</p>
+                        <a href="/Photography-and-visual-design-expert" class="product-link">
+                            View Product
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-item">
+                    <div class="product-content">
+                        <h2 class="product-name">Read Out Loud</h2>
+                        <p class="product-description">Modern text-to-speech web app with glassmorphism design. Converts text/PDFs/DOCX to speech. Multiple voices, speed control, 100% private.</p>
+                        <a href="/_read_out_loud" class="product-link">
                             View Product
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path d="M9 5l7 7-7 7"/>

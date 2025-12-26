@@ -1,0 +1,124 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# Motion Glossary
+
+A comprehensive React animation library with Storybook. Browse, preview, and copy animations for your projects.
+
+---
+
+## Looking for a specific animation?
+
+**Use the "Browse All Animations" page** in the sidebar to search by keyword. You can use **Cmd+F** to search for terms like:
+- "fade", "slide", "bounce", "pop"
+- "loading", "spinner", "skeleton"
+- "button", "toggle", "success"
+- "text", "typewriter", "count"
+
+Or use **Cmd+K** to open Storybook's built-in search.
+
+---
+
+## What is This?
+
+Motion Glossary is a visual glossary of motion patterns organized by use case. It's designed to be:
+
+- **Browsable** - Navigate animations by category
+- **Interactive** - See each animation running live with adjustable parameters
+- **Copy-Paste Ready** - View and copy the code for any animation
+- **Educational** - Understand when and why to use each pattern
+- **Accessible** - All animations respect `prefers-reduced-motion`
+
+## Categories
+
+### 1. Entrances & Exits
+Bringing elements into view and removing them gracefully. Includes fades, slides, scales, reveals, and specialty entrances.
+
+### 2. Attention & Emphasis
+Drawing the user's eye to important elements. Includes pulses, shakes, bounces, glows, and highlights.
+
+### 3. Feedback & State
+Communicating system status and response to user actions. Includes button effects, loading states, success/error animations, and toggles.
+
+### 4. Navigation & Flow
+Guiding users through the interface and between views. Includes page transitions, tabs, accordions, modals, and navigation elements.
+
+### 5. Scroll-Driven
+Animations tied to scroll position and viewport entry. Includes reveal effects, parallax, progress indicators, and scroll transforms.
+
+### 6. Text & Typography
+Bringing text to life. Includes typewriter effects, character reveals, text effects, counters, and specialized text animations.
+
+### 7. Decorative & Ambient
+Adding visual polish and delight. Includes floating elements, cursor effects, particles, SVG animations, and card effects.
+
+### 8. Micro-Interactions
+Small, delightful feedback for user actions. Includes icon animations, likes, notifications, and interactive elements.
+
+### 9. Ambient Backgrounds
+Subtle motion that gives pages life without distracting from content. Includes gradients, particles, waves, and atmospheric effects.
+
+---
+
+## Tech Stack
+
+- **React 18+** - Functional components with hooks
+- **Framer Motion** - Physics-based animations
+- **CSS Modules** - Scoped styling
+- **TypeScript** - Full type safety
+
+## Getting Started
+
+Each animation component can be used directly in your React projects:
+
+```tsx
+import { FadeIn } from 'motion-glossary/animations';
+
+function MyComponent() {
+  return (
+    <FadeIn duration={0.5} delay={0.1}>
+      <div>Your content here</div>
+    </FadeIn>
+  );
+}
+```
+
+## Using the Library
+
+1. **Browse** - Use the sidebar to explore animations by category
+2. **Preview** - Watch the animation in the preview panel
+3. **Adjust** - Use controls to tweak duration, easing, and other parameters
+4. **Copy** - Click the copy button to grab the code
+5. **Implement** - Paste into your project and customize
+
+---
+
+## New to Animation? Start Here!
+
+**Check out the "Controls Guide" page** in the sidebar. It explains every setting in plain English:
+- What each control does
+- What values to use
+- What happens when you change them
+- Recommended starting points for common use cases
+
+Perfect for developers who want to understand animation settings without diving into documentation.
+
+## Accessibility
+
+All animations in this library respect the user's `prefers-reduced-motion` preference. When reduced motion is enabled:
+
+- Opacity-only animations replace transform-based ones
+- Durations are minimized
+- Repeated/infinite animations are disabled
+
+## Credits
+
+Built with:
+- [Framer Motion](https://www.framer.com/motion/)
+- [Storybook](https://storybook.js.org/)
+- [React](https://react.dev/)
+
+---
+
+**Start exploring** by selecting a category from the sidebar!

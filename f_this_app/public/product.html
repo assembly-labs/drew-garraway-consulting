@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F*** This App! - The Game Where Your Dirty Mouth Costs You</title>
+  <meta name="description" content="A hilarious social accountability game where friends compete to curse the LEAST. Report slip-ups, rack up points, and try not to give Filthy Phil the satisfaction.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+      background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 70%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .mascots {
+      font-size: 5rem;
+      margin-bottom: 30px;
+      display: flex;
+      gap: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 900;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ef4444 0%, #f97316 50%, #facc15 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .tagline {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: #888;
+      margin-bottom: 40px;
+      max-width: 600px;
+    }
+
+    .hero .tagline strong {
+      color: #ef4444;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 16px 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(239, 68, 68, 0.5);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid #444;
+    }
+
+    .btn-secondary:hover {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      color: #444;
+      font-size: 2rem;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-10px); }
+      60% { transform: translateX(-50%) translateY(-5px); }
+    }
+
+    /* Section Styling */
+    section {
+      padding: 100px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      color: #888;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* How It Works */
+    .how-it-works {
+      background: linear-gradient(180deg, #0a0a0a 0%, #111 100%);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+
+    .step {
+      text-align: center;
+      padding: 40px 30px;
+      background: #1a1a1a;
+      border-radius: 24px;
+      border: 1px solid #222;
+      transition: all 0.3s ease;
+    }
+
+    .step:hover {
+      border-color: #ef4444;
+      transform: translateY(-5px);
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0 auto 20px;
+    }
+
+    .step h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+    }
+
+    .step p {
+      color: #888;
+    }
+
+    /* The Big Red Button */
+    .button-showcase {
+      text-align: center;
+      padding: 120px 20px;
+      background: radial-gradient(ellipse at center, #1a0a0a 0%, #0a0a0a 70%);
+    }
+
+    .curse-button-demo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ef4444, #b91c1c);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow:
+        0 0 0 8px rgba(239, 68, 68, 0.2),
+        0 0 0 16px rgba(239, 68, 68, 0.1),
+        0 10px 40px rgba(239, 68, 68, 0.4);
+      animation: pulse-button 2s ease-in-out infinite;
+      margin: 40px auto;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+
+    .curse-button-demo:hover {
+      transform: scale(1.05);
+    }
+
+    .curse-button-demo:active {
+      transform: scale(0.95);
+    }
+
+    @keyframes pulse-button {
+      0%, 100% {
+        box-shadow:
+          0 0 0 8px rgba(239, 68, 68, 0.2),
+          0 0 0 16px rgba(239, 68, 68, 0.1),
+          0 10px 40px rgba(239, 68, 68, 0.4);
+      }
+      50% {
+        box-shadow:
+          0 0 0 12px rgba(239, 68, 68, 0.3),
+          0 0 0 24px rgba(239, 68, 68, 0.15),
+          0 10px 60px rgba(239, 68, 68, 0.5);
+      }
+    }
+
+    .button-showcase h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .button-showcase p {
+      color: #888;
+      font-size: 1.2rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Features Grid */
+    .features {
+      background: #0a0a0a;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .feature {
+      padding: 30px;
+      background: linear-gradient(135deg, #1a1a1a, #111);
+      border-radius: 20px;
+      border: 1px solid #222;
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .feature h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      color: #888;
+      font-size: 0.95rem;
+    }
+
+    /* Meet the Mascots */
+    .mascots-section {
+      background: linear-gradient(180deg, #0a0a0a 0%, #0f0f1a 50%, #0a0a0a 100%);
+      text-align: center;
+    }
+
+    .mascot-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .mascot-card {
+      padding: 40px;
+      border-radius: 24px;
+      text-align: center;
+    }
+
+    .mascot-card.sunny {
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.1), rgba(34, 197, 94, 0.1));
+      border: 2px solid rgba(250, 204, 21, 0.3);
+    }
+
+    .mascot-card.phil {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(139, 92, 246, 0.1));
+      border: 2px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .mascot-emoji {
+      font-size: 5rem;
+      margin-bottom: 20px;
+    }
+
+    .mascot-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .mascot-card .role {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .mascot-quotes {
+      font-style: italic;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .mascot-quotes p {
+      margin-bottom: 8px;
+    }
+
+    /* Scoring Section */
+    .scoring {
+      background: #0a0a0a;
+    }
+
+    .scoring-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      text-align: center;
+    }
+
+    .scoring-item {
+      padding: 30px;
+      background: #1a1a1a;
+      border-radius: 16px;
+      border: 1px solid #222;
+    }
+
+    .scoring-item .points {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .scoring-item .points.positive { color: #ef4444; }
+    .scoring-item .points.negative { color: #22c55e; }
+    .scoring-item .points.multiplier { color: #facc15; }
+
+    .scoring-item h4 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .scoring-item p {
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    /* Game Modes */
+    .game-modes {
+      background: linear-gradient(180deg, #0a0a0a 0%, #111 100%);
+    }
+
+    .modes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .mode-card {
+      padding: 30px 24px;
+      background: #1a1a1a;
+      border-radius: 16px;
+      border: 1px solid #222;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .mode-card:hover {
+      border-color: #444;
+      transform: translateY(-3px);
+    }
+
+    .mode-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .mode-card h4 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .mode-card p {
+      color: #888;
+      font-size: 0.85rem;
+    }
+
+    /* Social Proof / Use Cases */
+    .use-cases {
+      background: #0a0a0a;
+    }
+
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .use-case {
+      padding: 30px;
+      background: linear-gradient(135deg, #1a1a1a, #151515);
+      border-radius: 20px;
+      border-left: 4px solid #ef4444;
+    }
+
+    .use-case h4 {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .use-case p {
+      color: #888;
+      font-size: 0.95rem;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      text-align: center;
+      padding: 120px 20px;
+      background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 70%);
+    }
+
+    .final-cta h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 20px;
+    }
+
+    .final-cta p {
+      color: #888;
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid #222;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #888;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #ef4444;
+    }
+
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 20px;
+      }
+
+      .mascots {
+        font-size: 3.5rem;
+      }
+
+      section {
+        padding: 60px 20px;
+      }
+
+      .curse-button-demo {
+        width: 150px;
+        height: 150px;
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="mascots">
+      <span>😇</span>
+      <span>🤬</span>
+      <span>😈</span>
+    </div>
+    <h1>F*** This App!</h1>
+    <p class="tagline">The game where your <strong>dirty mouth costs you</strong>. Compete with friends to curse the LEAST.</p>
+    <div class="cta-buttons">
+      <a href="/signup?dev=true" class="btn btn-primary">Start Playing Free</a>
+      <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+    </div>
+    <div class="scroll-indicator">↓</div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-header">
+      <h2>How It Works</h2>
+      <p>Simple rules. Maximum accountability. Endless roasting.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Create or Join a Game</h3>
+        <p>Start a game with your office, friends, or family. Share the invite code and get everyone in.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Catch Someone Cursing</h3>
+        <p>When someone drops a curse word, you tap the big red button and report them. It's instant.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Watch Points Stack Up</h3>
+        <p>Every curse = +1 point. But here's the twist: <strong>lowest score wins</strong>. Like golf, but for your mouth.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Get Roasted (or Celebrated)</h3>
+        <p>Filthy Phil roasts the losers. Sunny celebrates the winners. Weekly recaps reveal the truth.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Big Red Button -->
+  <section class="button-showcase">
+    <h2>The Button That Started It All</h2>
+    <p>One satisfying tap. One reported curse. One step closer to victory.</p>
+    <button class="curse-button-demo" onclick="this.textContent = '💥'; setTimeout(() => this.textContent = 'CURSE!', 500)">
+      CURSE!
+    </button>
+    <p style="color: #666; margin-top: 20px; font-size: 0.9rem;">Go ahead. Tap it. You know you want to.</p>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="section-header">
+      <h2>Built for Accountability</h2>
+      <p>Everything you need to keep your crew in check</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">🏆</div>
+        <h3>Live Leaderboard</h3>
+        <p>Real-time rankings so everyone knows who's winning (and who's not).</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <h3>2X Multiplier Days</h3>
+        <p>Sundays, holidays, and "Around Kids" mode double your points. Choose your moments wisely.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔥</div>
+        <h3>Clean Streaks</h3>
+        <p>Go multiple days without cursing? We track that. Brag rights unlocked.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">✨</div>
+        <h3>Nice Word of the Week</h3>
+        <p>Use the weekly nice word to earn negative points. Fight fire with kindness.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📊</div>
+        <h3>Weekly Recaps</h3>
+        <p>Every week: winners, losers, top snitches, and the worst offenders. All exposed.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">👥</div>
+        <h3>Teams Mode</h3>
+        <p>Sales vs Engineering? Parents vs Kids? Team scores add up. Trash talk encouraged.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meet the Mascots -->
+  <section class="mascots-section">
+    <div class="section-header">
+      <h2>Meet Your Judges</h2>
+      <p>One celebrates. One roasts. Both are watching.</p>
+    </div>
+    <div class="mascot-cards">
+      <div class="mascot-card sunny">
+        <div class="mascot-emoji">😇</div>
+        <h3>Sunny</h3>
+        <p class="role">The Cheerleader</p>
+        <div class="mascot-quotes">
+          <p>"5 days clean! You're practically a saint!"</p>
+          <p>"Look at you, using nice words!"</p>
+          <p>"Winner winner, clean mouth dinner!"</p>
+        </div>
+      </div>
+      <div class="mascot-card phil">
+        <div class="mascot-emoji">😈</div>
+        <h3>Filthy Phil</h3>
+        <p class="role">The Roaster</p>
+        <div class="mascot-quotes">
+          <p>"Another slip-up? I expected nothing less."</p>
+          <p>"23 points this week? That's almost impressive."</p>
+          <p>"The bottom of the leaderboard called. It misses you."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scoring Explained -->
+  <section class="scoring">
+    <div class="section-header">
+      <h2>The Scoring System</h2>
+      <p>Like golf: lowest score wins</p>
+    </div>
+    <div class="scoring-content">
+      <div class="scoring-item">
+        <div class="points positive">+1</div>
+        <h4>Each Curse</h4>
+        <p>Someone reports you for cursing</p>
+      </div>
+      <div class="scoring-item">
+        <div class="points multiplier">+2</div>
+        <h4>2X Days</h4>
+        <p>Sundays, holidays, Around Kids mode</p>
+      </div>
+      <div class="scoring-item">
+        <div class="points negative">-1</div>
+        <h4>Nice Word</h4>
+        <p>Use the weekly nice word to redeem yourself</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Game Modes -->
+  <section class="game-modes">
+    <div class="section-header">
+      <h2>Pick Your Poison</h2>
+      <p>Presets for every situation</p>
+    </div>
+    <div class="modes-grid">
+      <div class="mode-card">
+        <div class="mode-icon">👨‍👩‍👧‍👦</div>
+        <h4>Family Friendly</h4>
+        <p>Sunday 2X, nice words enabled, kid-safe vibes</p>
+      </div>
+      <div class="mode-card">
+        <div class="mode-icon">💼</div>
+        <h4>Office Mode</h4>
+        <p>Weekdays only, weekends immune, professional-ish</p>
+      </div>
+      <div class="mode-card">
+        <div class="mode-icon">🍻</div>
+        <h4>Friend Group</h4>
+        <p>Standard rules, no mercy, pure chaos</p>
+      </div>
+      <div class="mode-card">
+        <div class="mode-icon">💀</div>
+        <h4>Hardcore</h4>
+        <p>No immunity, holiday 2X, max accountability</p>
+      </div>
+      <div class="mode-card">
+        <div class="mode-icon">⚙️</div>
+        <h4>Custom</h4>
+        <p>You set the rules. Your game, your way.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="use-cases">
+    <div class="section-header">
+      <h2>Perfect For...</h2>
+      <p>Turns out, everyone needs to watch their mouth</p>
+    </div>
+    <div class="use-cases-grid">
+      <div class="use-case">
+        <h4>🏢 Office Teams</h4>
+        <p>"We started a Slack channel just for reporting. HR is thrilled. Sort of."</p>
+      </div>
+      <div class="use-case">
+        <h4>👨‍👩‍👧 Families</h4>
+        <p>"The kids love reporting Dad. Dad is learning new vocabulary."</p>
+      </div>
+      <div class="use-case">
+        <h4>🍻 Friend Groups</h4>
+        <p>"Game nights got a lot more interesting. And quieter. Briefly."</p>
+      </div>
+      <div class="use-case">
+        <h4>💑 Couples</h4>
+        <p>"Nothing says 'I love you' like a curse report at dinner."</p>
+      </div>
+      <div class="use-case">
+        <h4>🏋️ Challenge Groups</h4>
+        <p>"We already track steps and calories. Why not curses?"</p>
+      </div>
+      <div class="use-case">
+        <h4>🎲 Game Night Crews</h4>
+        <p>"Monopoly rage now has consequences."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <h2>Ready to Watch Your Mouth?</h2>
+    <p>Create a game in 30 seconds. Invite your crew. Let the accountability begin.</p>
+    <div class="cta-buttons">
+      <a href="/signup?dev=true" class="btn btn-primary">Get Started Free</a>
+      <a href="/dev" class="btn btn-secondary">Try the Demo</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>F*** This App! - Because your mouth needs supervision.</p>
+    <p style="margin-top: 12px;">
+      <a href="/ux-journey.html">UX Testing Map</a> &nbsp;|&nbsp;
+      <a href="/dev">Dev Hub</a>
+    </p>
+  </footer>
+
+</body>
+</html>

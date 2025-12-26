@@ -1,0 +1,124 @@
+/* EditingBooth - Main unified editing experience */
+
+.booth {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* Animation header */
+.boothHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #2e2e2e;
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.animationName {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fafafa;
+  margin: 0;
+}
+
+.animationDescription {
+  font-size: 15px;
+  color: #a3a3a3;
+  margin: 0;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.categoryBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 20px;
+  color: #7c3aed;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.categoryIcon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Main content area */
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Preview section - full width */
+.previewSection {
+  width: 100%;
+}
+
+/* Controls and code side by side */
+.controlsCodeSection {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Usage notes section */
+.usageSection {
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .controlsCodeSection {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .booth {
+    padding: 16px;
+  }
+
+  .boothHeader {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .animationName {
+    font-size: 24px;
+  }
+}
+
+/* Keywords/tags display */
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.keyword {
+  padding: 4px 8px;
+  background: #1a1a1a;
+  border: 1px solid #2e2e2e;
+  border-radius: 4px;
+  color: #666;
+  font-size: 11px;
+}

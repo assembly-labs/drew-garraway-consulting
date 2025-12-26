@@ -1,0 +1,583 @@
+/* SIE Flashcard Styles
+ * Mobile-first design for swipe-based flashcard training
+ * Uses existing design tokens from main.css
+ */
+
+/* ============================================
+   Flashcard App Container
+   ============================================ */
+.flashcard-app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    background: var(--fh-cream);
+    overflow: hidden;
+}
+
+/* ============================================
+   Header
+   ============================================ */
+.flashcard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--fh-space-md) var(--fh-space-lg);
+    background: var(--fh-navy);
+    color: var(--fh-white);
+}
+
+.flashcard-title {
+    font-family: var(--fh-font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--fh-white);
+    margin: 0;
+}
+
+.flashcard-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--fh-space-sm);
+    font-size: 0.875rem;
+    opacity: 0.9;
+}
+
+.stat-divider {
+    opacity: 0.5;
+}
+
+/* ============================================
+   Start Screen
+   ============================================ */
+.flashcard-start-screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--fh-space-xl);
+    text-align: center;
+}
+
+.start-content {
+    max-width: 320px;
+    width: 100%;
+}
+
+/* Progress Ring */
+.progress-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto var(--fh-space-xl);
+}
+
+.progress-ring svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.progress-ring__bg {
+    fill: none;
+    stroke: var(--fh-gray-200);
+    stroke-width: 8;
+}
+
+.progress-ring__fill {
+    fill: none;
+    stroke: var(--fh-sage);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.progress-ring__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--fh-font-display);
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--fh-navy);
+}
+
+.start-title {
+    font-family: var(--fh-font-display);
+    font-size: 1.75rem;
+    color: var(--fh-navy);
+    margin-bottom: var(--fh-space-sm);
+}
+
+.start-description {
+    color: var(--fh-gray-600);
+    margin-bottom: var(--fh-space-xl);
+}
+
+/* Session Options */
+.session-options {
+    margin-top: var(--fh-space-xl);
+}
+
+.option-label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fh-space-sm);
+    font-size: 0.875rem;
+    color: var(--fh-gray-600);
+}
+
+.option-select {
+    padding: var(--fh-space-sm) var(--fh-space-md);
+    font-family: var(--fh-font-body);
+    font-size: 1rem;
+    border: 1px solid var(--fh-gray-300);
+    border-radius: 8px;
+    background: var(--fh-white);
+    color: var(--fh-gray-900);
+    cursor: pointer;
+}
+
+.option-select:focus {
+    outline: none;
+    border-color: var(--fh-navy);
+    box-shadow: 0 0 0 3px rgba(0, 45, 98, 0.1);
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--fh-space-md) var(--fh-space-xl);
+    font-family: var(--fh-font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    min-height: 48px; /* Touch target */
+    min-width: 48px;
+}
+
+.btn--primary {
+    background: var(--fh-navy);
+    color: var(--fh-white);
+}
+
+.btn--primary:hover {
+    background: #003a7d;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 45, 98, 0.3);
+}
+
+.btn--primary:active {
+    transform: translateY(0);
+}
+
+.btn--secondary {
+    background: transparent;
+    color: var(--fh-navy);
+    border: 2px solid var(--fh-navy);
+}
+
+.btn--secondary:hover {
+    background: rgba(0, 45, 98, 0.05);
+}
+
+.btn--start {
+    width: 100%;
+    padding: var(--fh-space-lg) var(--fh-space-xl);
+    font-size: 1.125rem;
+}
+
+/* ============================================
+   Session View
+   ============================================ */
+.flashcard-session {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: var(--fh-space-md);
+    overflow: hidden;
+}
+
+/* Progress Bar */
+.session-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--fh-space-md);
+    margin-bottom: var(--fh-space-md);
+}
+
+.progress-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--fh-gray-200);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar__fill {
+    height: 100%;
+    background: var(--fh-sage);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--fh-gray-600);
+    white-space: nowrap;
+}
+
+/* ============================================
+   Flashcard
+   ============================================ */
+.flashcard-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+    touch-action: none; /* Enable custom touch handling */
+    user-select: none;
+}
+
+.flashcard {
+    width: 85%;
+    max-width: 400px;
+    height: 60vh;
+    max-height: 500px;
+    min-height: 300px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease;
+}
+
+.flashcard--flipped {
+    transform: rotateY(180deg);
+}
+
+.flashcard__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.flashcard__front,
+.flashcard__back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--fh-space-xl);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08),
+                0 8px 40px rgba(0, 0, 0, 0.04);
+    overflow-y: auto;
+}
+
+.flashcard__front {
+    background: var(--fh-white);
+    border: 2px solid var(--fh-gray-200);
+}
+
+.flashcard__back {
+    background: var(--fh-navy);
+    color: var(--fh-white);
+    transform: rotateY(180deg);
+}
+
+.flashcard__text {
+    font-family: var(--fh-font-body);
+    font-size: clamp(1.125rem, 4vw, 1.5rem);
+    line-height: 1.5;
+    text-align: center;
+    margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.flashcard__front .flashcard__text {
+    color: var(--fh-navy);
+    font-weight: 500;
+}
+
+.flashcard__back .flashcard__text {
+    color: var(--fh-white);
+    font-weight: 400;
+}
+
+/* Swipe visual feedback */
+.flashcard--swiping-horizontal {
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.4);
+}
+
+.flashcard--swiping-up {
+    box-shadow: 0 0 20px rgba(124, 152, 133, 0.5);
+}
+
+/* ============================================
+   Swipe Hints
+   ============================================ */
+.swipe-hints {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--fh-space-md) var(--fh-space-lg);
+    margin-top: var(--fh-space-md);
+}
+
+.hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--fh-space-xs);
+    opacity: 0.6;
+}
+
+.hint--up {
+    flex-direction: column;
+}
+
+.hint-icon {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--fh-gray-500);
+}
+
+.hint--up .hint-icon {
+    color: var(--fh-sage);
+}
+
+.hint-text {
+    font-size: 0.75rem;
+    color: var(--fh-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tap-hint {
+    text-align: center;
+    padding: var(--fh-space-sm);
+    font-size: 0.875rem;
+    color: var(--fh-gray-400);
+}
+
+/* ============================================
+   Session Summary
+   ============================================ */
+.flashcard-summary {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--fh-space-xl);
+}
+
+.summary-content {
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.summary-title {
+    font-family: var(--fh-font-display);
+    font-size: 2rem;
+    color: var(--fh-navy);
+    margin-bottom: var(--fh-space-xl);
+}
+
+.summary-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--fh-space-xl);
+    margin-bottom: var(--fh-space-2xl);
+}
+
+.summary-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--fh-space-xs);
+}
+
+.summary-stat__value {
+    font-family: var(--fh-font-display);
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--fh-navy);
+}
+
+.summary-stat--proficient .summary-stat__value {
+    color: var(--fh-sage);
+}
+
+.summary-stat--learning .summary-stat__value {
+    color: var(--fh-gold);
+}
+
+.summary-stat__label {
+    font-size: 0.875rem;
+    color: var(--fh-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.summary-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fh-space-md);
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+@media (min-width: 768px) {
+    .flashcard {
+        width: 70%;
+        max-width: 500px;
+    }
+
+    .swipe-hints {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .summary-actions {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .flashcard-app {
+        max-width: 800px;
+        margin: 0 auto;
+        min-height: calc(100vh - 4rem);
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+}
+
+/* ============================================
+   Dark Mode Support
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    .flashcard-app {
+        background: var(--fh-gray-900);
+    }
+
+    .start-title,
+    .summary-title {
+        color: var(--fh-cream);
+    }
+
+    .start-description {
+        color: var(--fh-gray-400);
+    }
+
+    .progress-ring__text {
+        color: var(--fh-cream);
+    }
+
+    .progress-ring__bg {
+        stroke: var(--fh-gray-700);
+    }
+
+    .option-label {
+        color: var(--fh-gray-400);
+    }
+
+    .option-select {
+        background: var(--fh-gray-800);
+        border-color: var(--fh-gray-700);
+        color: var(--fh-cream);
+    }
+
+    .progress-bar {
+        background: var(--fh-gray-700);
+    }
+
+    .progress-text {
+        color: var(--fh-gray-400);
+    }
+
+    .flashcard__front {
+        background: var(--fh-gray-800);
+        border-color: var(--fh-gray-700);
+    }
+
+    .flashcard__front .flashcard__text {
+        color: var(--fh-cream);
+    }
+
+    .hint-icon,
+    .hint-text {
+        color: var(--fh-gray-500);
+    }
+
+    .tap-hint {
+        color: var(--fh-gray-600);
+    }
+
+    .summary-stat__value {
+        color: var(--fh-cream);
+    }
+
+    .summary-stat__label {
+        color: var(--fh-gray-500);
+    }
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .flashcard,
+    .progress-bar__fill,
+    .progress-ring__fill,
+    .btn {
+        transition: none;
+    }
+
+    .flashcard--flipped {
+        transform: none;
+    }
+
+    .flashcard--flipped .flashcard__front {
+        visibility: hidden;
+    }
+
+    .flashcard--flipped .flashcard__back {
+        transform: none;
+        visibility: visible;
+    }
+}
+
+/* Focus styles for keyboard navigation */
+.btn:focus-visible {
+    outline: 3px solid var(--fh-gold);
+    outline-offset: 2px;
+}
+
+.flashcard:focus-visible {
+    outline: 3px solid var(--fh-gold);
+    outline-offset: 4px;
+}

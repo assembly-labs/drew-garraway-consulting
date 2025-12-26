@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F*** This App! - UX Journey Map</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+      color: #fff;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: #888;
+      font-size: 1.1rem;
+    }
+
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .legend-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.entry { background: #22c55e; }
+    .legend-dot.screen { background: #3b82f6; }
+    .legend-dot.action { background: #f97316; }
+    .legend-dot.state { background: #a855f7; }
+    .legend-dot.modal { background: #ec4899; }
+
+    .journey-section {
+      margin-bottom: 60px;
+    }
+
+    .journey-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .journey-title .emoji {
+      font-size: 1.8rem;
+    }
+
+    .journey-title .badge {
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.1);
+      color: #888;
+    }
+
+    .flow-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .flow-node {
+      position: relative;
+      min-width: 140px;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .flow-node:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    .flow-node.entry {
+      background: linear-gradient(135deg, #22c55e20, #16a34a20);
+      border: 2px solid #22c55e;
+    }
+
+    .flow-node.screen {
+      background: linear-gradient(135deg, #3b82f620, #2563eb20);
+      border: 2px solid #3b82f6;
+    }
+
+    .flow-node.action {
+      background: linear-gradient(135deg, #f9731620, #ea580c20);
+      border: 2px solid #f97316;
+    }
+
+    .flow-node.state {
+      background: linear-gradient(135deg, #a855f720, #9333ea20);
+      border: 2px solid #a855f7;
+    }
+
+    .flow-node.modal {
+      background: linear-gradient(135deg, #ec489920, #db277720);
+      border: 2px solid #ec4899;
+    }
+
+    .flow-node .icon {
+      font-size: 1.5rem;
+    }
+
+    .flow-node .label {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .flow-node .sublabel {
+      font-size: 0.7rem;
+      color: #888;
+    }
+
+    .flow-arrow {
+      color: #444;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      min-height: 80px;
+    }
+
+    .tester-note {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 24px;
+      height: 24px;
+      background: #facc15;
+      color: #000;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: help;
+    }
+
+    .tester-tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e1e1e;
+      border: 1px solid #333;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: #ccc;
+      width: 220px;
+      text-align: left;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      line-height: 1.4;
+    }
+
+    .tester-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 8px solid transparent;
+      border-top-color: #333;
+    }
+
+    .flow-node:hover .tester-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scenarios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .scenario-card {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .scenario-card:hover {
+      border-color: #ef4444;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(239, 68, 68, 0.2);
+    }
+
+    .scenario-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .scenario-card p {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .scenario-card .test-points {
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .scenario-card .test-points li {
+      margin-bottom: 4px;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .scenario-card .test-points li::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      color: #ef4444;
+    }
+
+    .quick-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      padding-top: 40px;
+      border-top: 1px solid #333;
+    }
+
+    .quick-link {
+      padding: 12px 20px;
+      background: #222;
+      border: 1px solid #444;
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .quick-link:hover {
+      background: #333;
+      border-color: #ef4444;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #333, transparent);
+      margin: 60px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-header h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .section-header p {
+      color: #888;
+    }
+
+    @media (max-width: 768px) {
+      .flow-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .flow-arrow {
+        transform: rotate(90deg);
+        min-height: auto;
+        justify-content: center;
+        padding: 10px 0;
+      }
+
+      .flow-node {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>F*** This App! - UX Journey Map</h1>
+      <p>Interactive testing guide for all user flows and screen states</p>
+    </header>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot entry"></div> Entry Point</div>
+      <div class="legend-item"><div class="legend-dot screen"></div> Screen</div>
+      <div class="legend-item"><div class="legend-dot action"></div> User Action</div>
+      <div class="legend-item"><div class="legend-dot state"></div> App State</div>
+      <div class="legend-item"><div class="legend-dot modal"></div> Modal/Overlay</div>
+    </div>
+
+    <!-- JOURNEY 1: New User Onboarding -->
+    <div class="journey-section">
+      <h2 class="journey-title">
+        <span class="emoji">👋</span>
+        Journey 1: New User Onboarding
+        <span class="badge">First-Time Experience</span>
+      </h2>
+      <div class="flow-container">
+        <a href="/?dev=true" class="flow-node entry" target="_blank">
+          <span class="icon">🏠</span>
+          <span class="label">Landing Page</span>
+          <span class="sublabel">Marketing hero</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Does the value prop hook you? Are CTAs clear? Check mobile layout. Mascots visible?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/signup?dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">📝</span>
+          <span class="label">Sign Up</span>
+          <span class="sublabel">Email or OAuth</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Form validation working? OAuth buttons visible? Error states clear?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/onboarding?dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">📚</span>
+          <span class="label">Onboarding</span>
+          <span class="sublabel">5 tutorial slides</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Swipe between slides. Skip button works? Progress dots clickable? Content clear?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/home?dev=true&scenario=newUser" class="flow-node screen" target="_blank">
+          <span class="icon">🎮</span>
+          <span class="label">Home (Empty)</span>
+          <span class="sublabel">No games yet</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Empty state CTA visible? "Create First Game" button prominent?
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- JOURNEY 2: Game Creation -->
+    <div class="journey-section">
+      <h2 class="journey-title">
+        <span class="emoji">🎯</span>
+        Journey 2: Creating a Game (Host Flow)
+        <span class="badge">Core Feature</span>
+      </h2>
+      <div class="flow-container">
+        <a href="/home?dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">🏠</span>
+          <span class="label">Home</span>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/create?dev=true" class="flow-node action" target="_blank">
+          <span class="icon">➕</span>
+          <span class="label">Create Game</span>
+          <span class="sublabel">Tap button</span>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/create?dev=true&step=1" class="flow-node screen" target="_blank">
+          <span class="icon">✏️</span>
+          <span class="label">Step 1: Name</span>
+          <span class="sublabel">Custom or generate</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Random name generator fun? Input validation? Can proceed without name?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/create?dev=true&step=2" class="flow-node screen" target="_blank">
+          <span class="icon">📋</span>
+          <span class="label">Step 2: Preset</span>
+          <span class="sublabel">5 options</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Preset cards clear? Icons match themes? Custom option visible? Selection state clear?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/create?dev=true&step=3" class="flow-node screen" target="_blank">
+          <span class="icon">⚙️</span>
+          <span class="label">Step 3: Settings</span>
+          <span class="sublabel">If custom preset</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Toggles responsive? Settings explained? Default values sensible?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/create?dev=true&step=4" class="flow-node screen" target="_blank">
+          <span class="icon">👥</span>
+          <span class="label">Step 4: Mode</span>
+          <span class="sublabel">FFA vs Teams</span>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/create?dev=true&step=5" class="flow-node screen" target="_blank">
+          <span class="icon">📤</span>
+          <span class="label">Step 5: Invite</span>
+          <span class="sublabel">Share code</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Code displayed clearly? Copy button works? Share sheet opens? Go to Game button visible?
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- JOURNEY 3: Joining a Game -->
+    <div class="journey-section">
+      <h2 class="journey-title">
+        <span class="emoji">🔗</span>
+        Journey 3: Joining a Game
+        <span class="badge">Invite Flow</span>
+      </h2>
+      <div class="flow-container">
+        <div class="flow-node entry">
+          <span class="icon">💬</span>
+          <span class="label">Receive Invite</span>
+          <span class="sublabel">Link or code</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <a href="/join?code=OFFICE&dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">🔑</span>
+          <span class="label">Join Page</span>
+          <span class="sublabel">Enter code</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Code auto-fills from URL? 6-char limit? Auto-lookup working? Invalid code error?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/join?code=OFFICE&dev=true" class="flow-node state" target="_blank">
+          <span class="icon">👁️</span>
+          <span class="label">Game Preview</span>
+          <span class="sublabel">See host & players</span>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/game/game-active-normal?dev=true" class="flow-node action" target="_blank">
+          <span class="icon">✅</span>
+          <span class="label">Join Button</span>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/game/game-active-normal?dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">🎮</span>
+          <span class="label">Game Screen</span>
+          <span class="sublabel">Ready to play!</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- JOURNEY 4: Active Gameplay -->
+    <div class="journey-section">
+      <h2 class="journey-title">
+        <span class="emoji">🤬</span>
+        Journey 4: Active Gameplay (Core Loop)
+        <span class="badge">Primary Experience</span>
+      </h2>
+      <div class="flow-container">
+        <a href="/game/game-test-001?dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">🎮</span>
+          <span class="label">Game Screen</span>
+          <span class="sublabel">Main view</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Curse button prominent? Score visible? Leaderboard preview working? Navigation clear?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/game/game-test-001?dev=true" class="flow-node action" target="_blank">
+          <span class="icon">🔴</span>
+          <span class="label">Tap CURSE!</span>
+          <span class="sublabel">Big red button</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Button pulsing animation? Satisfying tap feedback? Color changes on state?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/game/game-test-001?dev=true" class="flow-node modal" target="_blank">
+          <span class="icon">👥</span>
+          <span class="label">Player Selector</span>
+          <span class="sublabel">Who cursed?</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> All players shown? Avatars visible? Easy to tap? Can dismiss?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node modal">
+          <span class="icon">❓</span>
+          <span class="label">Confirm Report</span>
+          <span class="sublabel">Points preview</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node modal">
+          <span class="icon">🎉</span>
+          <span class="label">Success!</span>
+          <span class="sublabel">Phil roasts them</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Animation plays? Points update? Character reaction visible? Auto-dismiss timing right?
+          </div>
+        </div>
+        <span class="flow-arrow">→</span>
+        <a href="/game/game-test-001?dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">🔄</span>
+          <span class="label">Return</span>
+          <span class="sublabel">Updated score</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- JOURNEY 5: Game States -->
+    <div class="journey-section">
+      <h2 class="journey-title">
+        <span class="emoji">⚡</span>
+        Journey 5: Game States & Modifiers
+        <span class="badge">State Variations</span>
+      </h2>
+      <div class="flow-container">
+        <a href="/game/game-test-001?dev=true" class="flow-node state" target="_blank">
+          <span class="icon">🟢</span>
+          <span class="label">Normal State</span>
+          <span class="sublabel">1x points</span>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/game/game-test-001?dev=true&state=2x" class="flow-node state" target="_blank">
+          <span class="icon">⚡</span>
+          <span class="label">2X Active</span>
+          <span class="sublabel">Multiplier day</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Button color changes? 2X badge visible? Points show correctly?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/game/game-test-001?dev=true&state=kids" class="flow-node action" target="_blank">
+          <span class="icon">👶</span>
+          <span class="label">Around Kids</span>
+          <span class="sublabel">Toggle ON</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Toggle responsive? 2X indicator appears? All players see change?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/game/game-test-001?dev=true&state=ceasefire" class="flow-node state" target="_blank">
+          <span class="icon">🕊️</span>
+          <span class="label">Cease-Fire</span>
+          <span class="sublabel">Reporting disabled</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Button grayed out? Message explains why? Timer showing?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/game/game-test-001?dev=true&state=lobby" class="flow-node state" target="_blank">
+          <span class="icon">⏳</span>
+          <span class="label">Lobby</span>
+          <span class="sublabel">Waiting for start</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Overlay visible? Player count updating? Start button for host only? Share link works?
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- JOURNEY 6: Stats & Leaderboard -->
+    <div class="journey-section">
+      <h2 class="journey-title">
+        <span class="emoji">📊</span>
+        Journey 6: Stats & Leaderboard
+        <span class="badge">Analytics</span>
+      </h2>
+      <div class="flow-container">
+        <a href="/game/game-test-001?dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">🎮</span>
+          <span class="label">Game Screen</span>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/game/game-test-001/leaderboard?dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">🏆</span>
+          <span class="label">Leaderboard</span>
+          <span class="sublabel">Full rankings</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Your row highlighted? Streak icons showing? Individual/Teams toggle (if teams mode)?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/game/game-test-001/stats?dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">📈</span>
+          <span class="label">Stats Page</span>
+          <span class="sublabel">Weekly breakdown</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> All stat cards rendering? Recent activity feed working? Numbers accurate?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node modal">
+          <span class="icon">🎊</span>
+          <span class="label">Weekly Recap</span>
+          <span class="sublabel">Winner/Loser reveal</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Sunny celebrates winner? Phil roasts loser? Animations smooth? Stats correct?
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOURNEY 7: Profile -->
+    <div class="journey-section">
+      <h2 class="journey-title">
+        <span class="emoji">👤</span>
+        Journey 7: Profile & Account
+        <span class="badge">User Management</span>
+      </h2>
+      <div class="flow-container">
+        <a href="/home?dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">🏠</span>
+          <span class="label">Home</span>
+          <span class="sublabel">Tap avatar</span>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/profile?dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">👤</span>
+          <span class="label">Profile</span>
+          <span class="sublabel">All-time stats</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Avatar display? Stats accurate? Edit button visible? Sign out works?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node modal">
+          <span class="icon">✏️</span>
+          <span class="label">Edit Profile</span>
+          <span class="sublabel">Change name</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <a href="/?dev=true" class="flow-node action" target="_blank">
+          <span class="icon">🚪</span>
+          <span class="label">Sign Out</span>
+          <span class="sublabel">Return to landing</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- JOURNEY 8: Admin Controls -->
+    <div class="journey-section">
+      <h2 class="journey-title">
+        <span class="emoji">👑</span>
+        Journey 8: Admin / Game Host Controls
+        <span class="badge">Host Only</span>
+      </h2>
+      <div class="flow-container">
+        <a href="/game/game-test-001?dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">🎮</span>
+          <span class="label">Game (as Host)</span>
+          <span class="sublabel">Settings icon visible</span>
+        </a>
+        <span class="flow-arrow">→</span>
+        <a href="/game/game-test-001/settings?dev=true" class="flow-node screen" target="_blank">
+          <span class="icon">⚙️</span>
+          <span class="label">Settings</span>
+          <span class="sublabel">Admin controls</span>
+          <div class="tester-note">?</div>
+          <div class="tester-tooltip">
+            <strong>Test:</strong> Only admins see this? All actions working? Confirmations for destructive actions?
+          </div>
+        </a>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node action">
+          <span class="icon">✨</span>
+          <span class="label">Set Nice Word</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node action">
+          <span class="icon">🕊️</span>
+          <span class="label">Trigger Cease-Fire</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node action">
+          <span class="icon">🏁</span>
+          <span class="label">End Game</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Test Scenarios Section -->
+    <div class="section-header">
+      <h2>🧪 Quick Test Scenarios</h2>
+      <p>Click to open app in specific testing states</p>
+    </div>
+
+    <div class="scenarios-grid">
+      <a href="/dev" class="scenario-card" target="_blank">
+        <h3>🧪 Dev Hub</h3>
+        <p>Main testing dashboard with all screen links and mock data loaded</p>
+        <ul class="test-points">
+          <li>Navigate all screens</li>
+          <li>Mock data pre-loaded</li>
+          <li>Dev mode active</li>
+        </ul>
+      </a>
+
+      <a href="/home?dev=true&scenario=newUser" class="scenario-card" target="_blank">
+        <h3>👶 New User (Empty State)</h3>
+        <p>First-time user experience with no games created yet</p>
+        <ul class="test-points">
+          <li>Empty state messaging</li>
+          <li>Create game CTA visible</li>
+          <li>Onboarding complete</li>
+        </ul>
+      </a>
+
+      <a href="/home?dev=true" class="scenario-card" target="_blank">
+        <h3>🎮 Active Player</h3>
+        <p>Returning user with multiple games in different states</p>
+        <ul class="test-points">
+          <li>Active games section</li>
+          <li>Lobby games section</li>
+          <li>Completed games section</li>
+        </ul>
+      </a>
+
+      <a href="/game/game-test-001?dev=true" class="scenario-card" target="_blank">
+        <h3>🔴 Gameplay - Normal</h3>
+        <p>Standard gameplay with curse button active</p>
+        <ul class="test-points">
+          <li>Curse button pulsing</li>
+          <li>Player selector flow</li>
+          <li>Report success animation</li>
+        </ul>
+      </a>
+
+      <a href="/game/game-test-001?dev=true&aroundKids=true" class="scenario-card" target="_blank">
+        <h3>⚡ Gameplay - 2X Mode</h3>
+        <p>Around Kids or multiplier day active</p>
+        <ul class="test-points">
+          <li>2X badge visible</li>
+          <li>Button color change</li>
+          <li>Double points on report</li>
+        </ul>
+      </a>
+
+      <a href="/game/game-lobby?dev=true" class="scenario-card" target="_blank">
+        <h3>⏳ Game Lobby</h3>
+        <p>Waiting for players to join before starting</p>
+        <ul class="test-points">
+          <li>Lobby overlay visible</li>
+          <li>Player count updating</li>
+          <li>Share invite working</li>
+        </ul>
+      </a>
+
+      <a href="/game/game-test-001/leaderboard?dev=true" class="scenario-card" target="_blank">
+        <h3>🏆 Leaderboard</h3>
+        <p>View player rankings and streaks</p>
+        <ul class="test-points">
+          <li>Rankings correct (lowest = 1st)</li>
+          <li>Your row highlighted</li>
+          <li>Streak indicators visible</li>
+        </ul>
+      </a>
+
+      <a href="/game/game-test-001/stats?dev=true" class="scenario-card" target="_blank">
+        <h3>📊 Weekly Stats</h3>
+        <p>Detailed stats breakdown and activity feed</p>
+        <ul class="test-points">
+          <li>All stat cards render</li>
+          <li>Weekly recap modal</li>
+          <li>Activity feed populates</li>
+        </ul>
+      </a>
+
+      <a href="/create?dev=true" class="scenario-card" target="_blank">
+        <h3>➕ Create Game Flow</h3>
+        <p>Full game creation wizard experience</p>
+        <ul class="test-points">
+          <li>5 steps navigation</li>
+          <li>Preset selection</li>
+          <li>Invite code generation</li>
+        </ul>
+      </a>
+
+      <a href="/onboarding?dev=true" class="scenario-card" target="_blank">
+        <h3>📚 Onboarding Tutorial</h3>
+        <p>5-slide tutorial for new users</p>
+        <ul class="test-points">
+          <li>Swipe navigation</li>
+          <li>Skip functionality</li>
+          <li>Progress indicators</li>
+        </ul>
+      </a>
+
+      <a href="/profile?dev=true" class="scenario-card" target="_blank">
+        <h3>👤 Profile Page</h3>
+        <p>User profile and all-time statistics</p>
+        <ul class="test-points">
+          <li>Stats display correctly</li>
+          <li>Edit profile modal</li>
+          <li>Sign out functionality</li>
+        </ul>
+      </a>
+
+      <a href="/?dev=true" class="scenario-card" target="_blank">
+        <h3>🏠 Landing Page</h3>
+        <p>Marketing page for new visitors</p>
+        <ul class="test-points">
+          <li>Hero section impact</li>
+          <li>Feature highlights</li>
+          <li>CTA buttons working</li>
+        </ul>
+      </a>
+    </div>
+
+    <div class="quick-links">
+      <h3 style="width: 100%; margin-bottom: 12px; color: #888;">Quick Screen Access:</h3>
+      <a href="/?dev=true" class="quick-link" target="_blank">/ Landing</a>
+      <a href="/login?dev=true" class="quick-link" target="_blank">/login</a>
+      <a href="/signup?dev=true" class="quick-link" target="_blank">/signup</a>
+      <a href="/onboarding?dev=true" class="quick-link" target="_blank">/onboarding</a>
+      <a href="/home?dev=true" class="quick-link" target="_blank">/home</a>
+      <a href="/create?dev=true" class="quick-link" target="_blank">/create</a>
+      <a href="/join?code=OFFICE&dev=true" class="quick-link" target="_blank">/join</a>
+      <a href="/profile?dev=true" class="quick-link" target="_blank">/profile</a>
+      <a href="/game/game-test-001?dev=true" class="quick-link" target="_blank">/game</a>
+      <a href="/game/game-test-001/leaderboard?dev=true" class="quick-link" target="_blank">/leaderboard</a>
+      <a href="/game/game-test-001/stats?dev=true" class="quick-link" target="_blank">/stats</a>
+      <a href="/game/game-test-001/settings?dev=true" class="quick-link" target="_blank">/settings</a>
+    </div>
+
+    <div style="text-align: center; margin-top: 60px; color: #666; font-size: 0.9rem;">
+      <p>All links open in new tabs with <code>?dev=true</code> for auth bypass</p>
+      <p style="margin-top: 8px;">Hover over <span style="background: #facc15; color: #000; padding: 2px 6px; border-radius: 4px; font-weight: bold;">?</span> icons for tester notes</p>
+    </div>
+  </div>
+</body>
+</html>

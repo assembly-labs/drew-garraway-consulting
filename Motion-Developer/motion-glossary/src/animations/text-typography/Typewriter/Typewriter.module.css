@@ -1,0 +1,10 @@
+.typewriter {
+  display: inline;
+  font-family: inherit;
+}
+
+.cursor {
+  display: inline;
+  margin-left: 2px;
+  color: var(--color-accent-primary, #8b5cf6);
+}
