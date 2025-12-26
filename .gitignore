@@ -51,6 +51,9 @@ out/
 ehthumbs.db
 Thumbs.db
 
+# Security - local SSL certs
+*.pem
+
 # Testing
 coverage/
 .nyc_output/
