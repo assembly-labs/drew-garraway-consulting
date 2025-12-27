@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -32,7 +32,23 @@ import { cn } from '@/lib/utils/cn';
 import Link from 'next/link';
 import { useDevModeData } from '@/lib/dev/use-dev-mode';
 
+function GamePageLoading() {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-4xl animate-bounce">🎮</div>
+    </div>
+  );
+}
+
 export default function GamePage() {
+  return (
+    <Suspense fallback={<GamePageLoading />}>
+      <GamePageContent />
+    </Suspense>
+  );
+}
+
+function GamePageContent() {
   const router = useRouter();
   const params = useParams();
   const gameId = params.gameId as string;

@@ -25,7 +25,7 @@ type FloatingParticlesStory = StoryObj<typeof EditingBooth>;
 
 export const FloatingParticlesBooth: FloatingParticlesStory = {
   args: {
-    entry: floatingParticlesEntry,
+    animation: floatingParticlesEntry,
   },
   parameters: {
     docs: {
@@ -42,7 +42,7 @@ export const FloatingParticlesBooth: FloatingParticlesStory = {
 
 export const StarfieldBooth: StoryObj<typeof EditingBooth> = {
   args: {
-    entry: starfieldEntry,
+    animation: starfieldEntry,
   },
   parameters: {
     docs: {
@@ -59,7 +59,7 @@ export const StarfieldBooth: StoryObj<typeof EditingBooth> = {
 
 export const ParticleNetworkBooth: StoryObj<typeof EditingBooth> = {
   args: {
-    entry: particleNetworkEntry,
+    animation: particleNetworkEntry,
   },
   parameters: {
     docs: {

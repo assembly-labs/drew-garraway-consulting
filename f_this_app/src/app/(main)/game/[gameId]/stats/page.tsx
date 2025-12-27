@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
@@ -14,7 +14,23 @@ import { cn } from '@/lib/utils/cn';
 import { useDevModeData } from '@/lib/dev/use-dev-mode';
 import { MOCK_WEEKLY_STATS, MOCK_REPORTS } from '@/lib/dev/mock-data';
 
+function StatsPageLoading() {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-4xl animate-bounce">📊</div>
+    </div>
+  );
+}
+
 export default function StatsPage() {
+  return (
+    <Suspense fallback={<StatsPageLoading />}>
+      <StatsPageContent />
+    </Suspense>
+  );
+}
+
+function StatsPageContent() {
   const router = useRouter();
   const params = useParams();
   const gameId = params.gameId as string;

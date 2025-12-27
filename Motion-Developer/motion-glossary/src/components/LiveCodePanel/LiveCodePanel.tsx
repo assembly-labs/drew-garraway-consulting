@@ -11,8 +11,8 @@ import styles from './LiveCodePanel.module.css';
 export const LiveCodePanel: React.FC<LiveCodePanelProps> = ({
   templates,
   currentProps,
-  highlightChanges = false,
-  defaultValues = {},
+  highlightChanges: _highlightChanges = false,
+  defaultValues: _defaultValues = {},
 }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [copied, setCopied] = useState(false);

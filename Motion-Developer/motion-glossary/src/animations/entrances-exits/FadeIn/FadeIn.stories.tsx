@@ -29,12 +29,12 @@ const meta: Meta<typeof FadeIn> = {
     },
     easing: {
       control: 'select',
-      options: {
-        'Ease Out': [0.4, 0, 0.2, 1],
-        'Ease In': [0.4, 0, 1, 1],
-        'Ease In Out': [0.4, 0, 0.2, 1],
-        Linear: [0, 0, 1, 1],
-      },
+      options: [
+        [0.4, 0, 0.2, 1],  // Ease Out
+        [0.4, 0, 1, 1],    // Ease In
+        [0.4, 0, 0.2, 1],  // Ease In Out
+        [0, 0, 1, 1],      // Linear
+      ],
       description: 'Easing function',
     },
   },

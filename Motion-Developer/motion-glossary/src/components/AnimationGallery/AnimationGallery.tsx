@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { AnimationRegistryEntry } from '../../registry/types';
-import { allAnimations, getAllCategories, searchAnimations, getAnimationsByCategory } from '../../registry';
+import { allAnimations, getAllCategories, searchAnimations } from '../../registry';
 import styles from './AnimationGallery.module.css';
 
 export interface AnimationGalleryProps {

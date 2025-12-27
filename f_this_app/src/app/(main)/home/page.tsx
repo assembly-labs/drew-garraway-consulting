@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -17,7 +17,26 @@ interface GameWithPlayers extends Game {
   game_players: (GamePlayer & { user: User })[];
 }
 
+function HomePageLoading() {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <div className="text-4xl mb-4 animate-bounce">🤬</div>
+        <p className="text-gray-400">Loading...</p>
+      </div>
+    </div>
+  );
+}
+
 export default function HomePage() {
+  return (
+    <Suspense fallback={<HomePageLoading />}>
+      <HomePageContent />
+    </Suspense>
+  );
+}
+
+function HomePageContent() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [games, setGames] = useState<GameWithPlayers[]>([]);

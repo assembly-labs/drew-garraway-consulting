@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
@@ -39,7 +39,23 @@ const MOCK_PROFILE_STATS: AllTimeStats = {
   total_nice_words: 12,
 };
 
+function ProfilePageLoading() {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-4xl animate-bounce">👤</div>
+    </div>
+  );
+}
+
 export default function ProfilePage() {
+  return (
+    <Suspense fallback={<ProfilePageLoading />}>
+      <ProfilePageContent />
+    </Suspense>
+  );
+}
+
+function ProfilePageContent() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [stats, setStats] = useState<AllTimeStats | null>(null);

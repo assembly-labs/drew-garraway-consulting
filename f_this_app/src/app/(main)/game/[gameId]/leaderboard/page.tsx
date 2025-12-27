@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { Suspense, useEffect, useState, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 import { Leaderboard, TeamLeaderboard } from '@/components/game/leaderboard';
@@ -9,7 +9,23 @@ import { Game, GamePlayer, LeaderboardEntry } from '@/types/database';
 import { cn } from '@/lib/utils/cn';
 import { useDevModeData } from '@/lib/dev/use-dev-mode';
 
+function LeaderboardPageLoading() {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-4xl animate-bounce">🏆</div>
+    </div>
+  );
+}
+
 export default function LeaderboardPage() {
+  return (
+    <Suspense fallback={<LeaderboardPageLoading />}>
+      <LeaderboardPageContent />
+    </Suspense>
+  );
+}
+
+function LeaderboardPageContent() {
   const router = useRouter();
   const params = useParams();
   const gameId = params.gameId as string;

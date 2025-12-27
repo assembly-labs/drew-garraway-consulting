@@ -66,7 +66,7 @@ export function getReducedMotionVariant<T extends object>(
   reducedVariant?: Partial<T>
 ): T | Partial<T> {
   if (prefersReducedMotion) {
-    return reducedVariant || { opacity: 1 } as Partial<T>;
+    return reducedVariant || ({ opacity: 1 } as unknown as Partial<T>);
   }
   return fullVariant;
 }

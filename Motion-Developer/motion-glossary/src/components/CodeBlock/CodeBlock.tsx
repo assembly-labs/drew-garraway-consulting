@@ -30,7 +30,7 @@ export interface CodeBlockProps {
  */
 export const CodeBlock: React.FC<CodeBlockProps> = ({
   code,
-  language = 'tsx',
+  language: _language = 'tsx',
   title,
   showLineNumbers = true,
   showCopyButton = true,
