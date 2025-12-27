@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Enable static exports for Cloudflare Pages compatibility
-  // Note: For full SSR support on Cloudflare, use OpenNext adapter
-  // For now, we'll use static export + client-side rendering
+  // This app requires SSR due to dynamic routes
+  // Deploy to Vercel or use OpenNext adapter for Cloudflare
+  // Static export not possible: dynamic routes like /game/[gameId]/*
 
   // Optimize images
   images: {
