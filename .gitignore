@@ -1,3 +1,15 @@
+# ============================================
+# PRIVATE/SENSITIVE CONTENT - NEVER TRACK
+# ============================================
+**/docs-private/
+**/private-docs/
+**/_internal/
+**/api-keys*
+**/secrets/
+**/*.secret
+**/*.secrets
+**/credentials*
+
 # Dependencies
 node_modules/
 npm-debug.log*
@@ -132,6 +144,5 @@ storybook-static/
 .github/CLOUDFLARE_MIGRATION_GUIDE.md
 .github/SIMPLE_MIGRATION_PLAN.md
 
-# Exception: Allow zero-chill-tracker build output for GitHub Pages
-!zero-chill-tracker/dist/
-!zero-chill-tracker/dist/**
+# Note: Archived projects are in _archived/ folder
+# See _archived/README.md for redeployment instructions

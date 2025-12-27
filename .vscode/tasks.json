@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "🔍 Pre-Deploy Check",
+      "label": "Pre-Deploy Check",
       "type": "shell",
       "command": "bash scripts/pre-deploy-check.sh",
       "problemMatcher": [],
@@ -16,9 +16,9 @@
       }
     },
     {
-      "label": "📚 Deploy: Librarian LLM",
+      "label": "Deploy: Scout",
       "type": "shell",
-      "command": "cd librarian-llm && npm run build && cd .. && git add librarian-llm && git commit -m '🚀 Update Librarian LLM' && git push origin main",
+      "command": "cd scout && npm run build && npx wrangler pages deploy dist",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -27,9 +27,9 @@
       "group": "build"
     },
     {
-      "label": "💪 Deploy: Fuck You Go Train",
+      "label": "Deploy: F This App",
       "type": "shell",
-      "command": "cd fuckyougotrain && npm run build && cd .. && git add fuckyougotrain && git commit -m '🚀 Update Fuck You Go Train' && git push origin main",
+      "command": "cd f_this_app && npm run build && npx wrangler pages deploy .next",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -38,9 +38,9 @@
       "group": "build"
     },
     {
-      "label": "🎯 Deploy: NoFomo",
+      "label": "Deploy: Franklin Hugh Money",
       "type": "shell",
-      "command": "cd nofomo && npm run build && cd .. && git add nofomo && git commit -m '🚀 Update NoFomo' && git push origin main",
+      "command": "cd franklin-hugh-money && npm run build && npx wrangler pages deploy dist",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -49,9 +49,9 @@
       "group": "build"
     },
     {
-      "label": "📰 Deploy: Assembly Articles",
+      "label": "Deploy: Assembly Articles",
       "type": "shell",
-      "command": "cd assembly-agentic-articles/frontend && npm run build && cd ../.. && git add assembly-agentic-articles && git commit -m '🚀 Update Assembly Articles' && git push origin main",
+      "command": "cd assembly-agentic-articles/frontend && npm run build",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -60,9 +60,9 @@
       "group": "build"
     },
     {
-      "label": "💪 Deploy: Gym Prototype",
+      "label": "Deploy: Career Chat",
       "type": "shell",
-      "command": "cd gym/prototype && npm run build && cd ../.. && git add gym/prototype && git commit -m '🚀 Update Gym Prototype' && git push origin main",
+      "command": "cd career-chat && npm run build",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -71,9 +71,9 @@
       "group": "build"
     },
     {
-      "label": "🧪 Test Build: Librarian LLM",
+      "label": "Test Build: Scout",
       "type": "shell",
-      "command": "cd librarian-llm && npm run build",
+      "command": "cd scout && npm run build",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always"
@@ -81,9 +81,9 @@
       "group": "test"
     },
     {
-      "label": "🧪 Test Build: Fuck You Go Train",
+      "label": "Test Build: F This App",
       "type": "shell",
-      "command": "cd fuckyougotrain && npm run build",
+      "command": "cd f_this_app && npm run build",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always"
@@ -91,19 +91,9 @@
       "group": "test"
     },
     {
-      "label": "🧪 Test Build: NoFomo",
+      "label": "Install All Dependencies",
       "type": "shell",
-      "command": "cd nofomo && npm run build",
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always"
-      },
-      "group": "test"
-    },
-    {
-      "label": "🔄 Install All Dependencies",
-      "type": "shell",
-      "command": "for dir in librarian-llm fuckyougotrain nofomo assembly-agentic-articles/frontend gym/prototype; do echo \"Installing $dir...\" && (cd $dir && npm install); done",
+      "command": "for dir in scout f_this_app franklin-hugh-money career-chat assembly-agentic-articles/frontend; do echo \"Installing $dir...\" && (cd $dir && npm install); done",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -112,16 +102,16 @@
       "group": "build"
     },
     {
-      "label": "🧹 Clean All Build Artifacts",
+      "label": "Clean All Build Artifacts",
       "type": "shell",
-      "command": "find . -type d \\( -name 'dist' -o -name 'build' -o -name '.netlify' \\) -not -path './node_modules/*' -prune -exec rm -rf {} +",
+      "command": "find . -type d \\( -name 'dist' -o -name 'build' -o -name '.netlify' \\) -not -path './node_modules/*' -not -path './_archived/*' -prune -exec rm -rf {} +",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always"
       }
     },
     {
-      "label": "📊 Check Repository Status",
+      "label": "Check Repository Status",
       "type": "shell",
       "command": "echo '=== Git Status ===' && git status && echo '' && echo '=== Changed Files ===' && git diff --name-only && echo '' && echo '=== Recent Commits ===' && git log --oneline -5",
       "problemMatcher": [],

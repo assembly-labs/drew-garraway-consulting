@@ -1,0 +1,9 @@
+# Cloudflare Pages configuration for Read Out Loud
+# Migrated from Netlify
+
+name = "read-out-loud"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "."
+
+# Note: Headers are configured in _headers file for Cloudflare Pages
+# See: https://developers.cloudflare.com/pages/configuration/headers/
