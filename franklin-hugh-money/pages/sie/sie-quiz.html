@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="SIE Exam Quiz Drill - Practice multiple choice questions for the Securities Industry Essentials exam">
+
+    <title>SIE Quiz Drill | Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --fh-navy: #002D62;
+            --fh-cream: #FFFDF7;
+            --fh-gray: #54585A;
+            --fh-sage: #7C9885;
+            --fh-burgundy: #6B2737;
+            --fh-gold: #B08D57;
+            --fh-gray-900: #1A1A1A;
+            --fh-gray-700: #404040;
+            --fh-gray-600: #595959;
+            --fh-gray-500: #737373;
+            --fh-gray-400: #8a8a8a;
+            --fh-gray-300: #D4D4D4;
+            --fh-gray-200: #E5E5E5;
+            --fh-gray-100: #F5F5F5;
+            --fh-white: #FFFFFF;
+            --fh-font-display: 'Crimson Pro', Georgia, serif;
+            --fh-font-body: 'Inter', -apple-system, sans-serif;
+            --fh-font-mono: 'IBM Plex Mono', monospace;
+            --fh-space-xs: 0.25rem;
+            --fh-space-sm: 0.5rem;
+            --fh-space-md: 1rem;
+            --fh-space-lg: 1.5rem;
+            --fh-space-xl: 2rem;
+            --fh-space-2xl: 3rem;
+            --fh-space-3xl: 4rem;
+            --fh-correct: #10B981;
+            --fh-incorrect: #EF4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--fh-font-body);
+            font-size: 16px;
+            line-height: 1.75;
+            color: var(--fh-gray-900);
+            background: var(--fh-cream);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--fh-space-xl);
+        }
+
+        /* Header */
+        .quiz-header {
+            background: linear-gradient(135deg, var(--fh-navy) 0%, #003d82 100%);
+            color: var(--fh-white);
+            padding: var(--fh-space-xl) 0;
+        }
+
+        .quiz-header__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--fh-space-md);
+        }
+
+        .quiz-header__title {
+            font-family: var(--fh-font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--fh-white);
+        }
+
+        .quiz-header__nav {
+            display: flex;
+            gap: var(--fh-space-lg);
+        }
+
+        .quiz-header__nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .quiz-header__nav a:hover,
+        .quiz-header__nav a.active {
+            color: var(--fh-white);
+        }
+
+        /* Score Bar */
+        .score-bar {
+            background: var(--fh-white);
+            border-bottom: 1px solid var(--fh-gray-200);
+            padding: var(--fh-space-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .score-bar__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--fh-space-sm);
+        }
+
+        .score-bar__progress {
+            font-family: var(--fh-font-mono);
+            font-size: 0.875rem;
+            color: var(--fh-gray-600);
+        }
+
+        .score-bar__score {
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-md);
+        }
+
+        .score-bar__correct {
+            color: var(--fh-correct);
+            font-weight: 600;
+        }
+
+        .score-bar__incorrect {
+            color: var(--fh-incorrect);
+            font-weight: 600;
+        }
+
+        .score-bar__percent {
+            font-family: var(--fh-font-mono);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--fh-navy);
+        }
+
+        /* Progress Bar */
+        .progress-track {
+            height: 4px;
+            background: var(--fh-gray-200);
+            border-radius: 2px;
+            margin-top: var(--fh-space-sm);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--fh-sage);
+            transition: width 0.3s ease;
+        }
+
+        /* Setup Screen */
+        .setup-screen {
+            padding: var(--fh-space-3xl) 0;
+            text-align: center;
+        }
+
+        .setup-screen h1 {
+            font-family: var(--fh-font-display);
+            font-size: 2.5rem;
+            color: var(--fh-navy);
+            margin-bottom: var(--fh-space-md);
+        }
+
+        .setup-screen__subtitle {
+            font-size: 1.125rem;
+            color: var(--fh-gray-600);
+            margin-bottom: var(--fh-space-2xl);
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--fh-space-md);
+            margin: var(--fh-space-xl) 0;
+            text-align: left;
+        }
+
+        .topic-btn {
+            background: var(--fh-white);
+            border: 2px solid var(--fh-gray-200);
+            border-radius: 8px;
+            padding: var(--fh-space-lg);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .topic-btn:hover {
+            border-color: var(--fh-sage);
+        }
+
+        .topic-btn.selected {
+            border-color: var(--fh-navy);
+            background: rgba(0, 45, 98, 0.05);
+        }
+
+        .topic-btn__name {
+            font-weight: 600;
+            color: var(--fh-gray-900);
+            margin-bottom: var(--fh-space-xs);
+        }
+
+        .topic-btn__count {
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            color: var(--fh-gray-500);
+        }
+
+        .start-btn {
+            background: var(--fh-navy);
+            color: var(--fh-white);
+            border: none;
+            padding: var(--fh-space-md) var(--fh-space-2xl);
+            border-radius: 8px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            margin-top: var(--fh-space-xl);
+        }
+
+        .start-btn:hover {
+            background: #003d82;
+            transform: translateY(-2px);
+        }
+
+        .start-btn:disabled {
+            background: var(--fh-gray-300);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Quiz Screen */
+        .quiz-screen {
+            display: none;
+            padding: var(--fh-space-2xl) 0 var(--fh-space-3xl);
+        }
+
+        .question-card {
+            background: var(--fh-white);
+            border-radius: 12px;
+            padding: var(--fh-space-xl);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .question-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        .question-topic {
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--fh-sage);
+            background: rgba(124, 152, 133, 0.1);
+            padding: var(--fh-space-xs) var(--fh-space-sm);
+            border-radius: 4px;
+        }
+
+        .question-number {
+            font-family: var(--fh-font-mono);
+            font-size: 0.875rem;
+            color: var(--fh-gray-500);
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--fh-gray-900);
+            line-height: 1.5;
+            margin-bottom: var(--fh-space-xl);
+        }
+
+        .answers-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--fh-space-md);
+        }
+
+        .answer-btn {
+            background: var(--fh-gray-100);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: var(--fh-space-md) var(--fh-space-lg);
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            color: var(--fh-gray-700);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--fh-space-md);
+        }
+
+        .answer-btn:hover:not(:disabled) {
+            background: var(--fh-white);
+            border-color: var(--fh-navy);
+        }
+
+        .answer-btn:disabled {
+            cursor: default;
+        }
+
+        .answer-btn.selected {
+            background: var(--fh-white);
+            border-color: var(--fh-navy);
+        }
+
+        .answer-btn.correct {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--fh-correct);
+        }
+
+        .answer-btn.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--fh-incorrect);
+        }
+
+        .answer-btn.was-correct {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--fh-correct);
+        }
+
+        .answer-letter {
+            font-family: var(--fh-font-mono);
+            font-weight: 600;
+            color: var(--fh-navy);
+            flex-shrink: 0;
+        }
+
+        .answer-btn.correct .answer-letter,
+        .answer-btn.was-correct .answer-letter {
+            color: var(--fh-correct);
+        }
+
+        .answer-btn.incorrect .answer-letter {
+            color: var(--fh-incorrect);
+        }
+
+        /* Feedback */
+        .feedback {
+            display: none;
+            margin-top: var(--fh-space-xl);
+            padding: var(--fh-space-lg);
+            border-radius: 8px;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--fh-correct);
+        }
+
+        .feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--fh-incorrect);
+        }
+
+        .feedback__title {
+            font-weight: 700;
+            margin-bottom: var(--fh-space-sm);
+        }
+
+        .feedback.correct .feedback__title {
+            color: var(--fh-correct);
+        }
+
+        .feedback.incorrect .feedback__title {
+            color: var(--fh-incorrect);
+        }
+
+        .feedback__explanation {
+            color: var(--fh-gray-700);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--fh-space-xl);
+        }
+
+        .next-btn {
+            background: var(--fh-navy);
+            color: var(--fh-white);
+            border: none;
+            padding: var(--fh-space-md) var(--fh-space-xl);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-left: auto;
+        }
+
+        .next-btn:hover {
+            background: #003d82;
+        }
+
+        .next-btn:disabled {
+            background: var(--fh-gray-300);
+            cursor: not-allowed;
+        }
+
+        /* Results Screen */
+        .results-screen {
+            display: none;
+            padding: var(--fh-space-3xl) 0;
+            text-align: center;
+        }
+
+        .results-card {
+            background: var(--fh-white);
+            border-radius: 12px;
+            padding: var(--fh-space-2xl);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: var(--fh-space-2xl);
+        }
+
+        .results-score {
+            font-family: var(--fh-font-display);
+            font-size: 4rem;
+            font-weight: 600;
+            color: var(--fh-navy);
+            margin-bottom: var(--fh-space-sm);
+        }
+
+        .results-score.passing {
+            color: var(--fh-correct);
+        }
+
+        .results-score.failing {
+            color: var(--fh-incorrect);
+        }
+
+        .results-label {
+            font-size: 1.25rem;
+            color: var(--fh-gray-600);
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        .results-breakdown {
+            display: flex;
+            justify-content: center;
+            gap: var(--fh-space-2xl);
+            padding: var(--fh-space-lg) 0;
+            border-top: 1px solid var(--fh-gray-200);
+        }
+
+        .results-stat {
+            text-align: center;
+        }
+
+        .results-stat__value {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .results-stat__value.correct {
+            color: var(--fh-correct);
+        }
+
+        .results-stat__value.incorrect {
+            color: var(--fh-incorrect);
+        }
+
+        .results-stat__label {
+            font-size: 0.875rem;
+            color: var(--fh-gray-500);
+        }
+
+        .results-message {
+            font-size: 1.125rem;
+            color: var(--fh-gray-700);
+            margin: var(--fh-space-lg) 0;
+            padding: var(--fh-space-lg);
+            background: var(--fh-gray-100);
+            border-radius: 8px;
+        }
+
+        /* Missed Questions Review */
+        .missed-section {
+            text-align: left;
+            margin-top: var(--fh-space-2xl);
+        }
+
+        .missed-section h3 {
+            font-family: var(--fh-font-display);
+            font-size: 1.5rem;
+            color: var(--fh-navy);
+            margin-bottom: var(--fh-space-lg);
+            text-align: center;
+        }
+
+        .missed-card {
+            background: var(--fh-white);
+            border: 1px solid var(--fh-gray-200);
+            border-left: 4px solid var(--fh-incorrect);
+            border-radius: 8px;
+            padding: var(--fh-space-lg);
+            margin-bottom: var(--fh-space-md);
+        }
+
+        .missed-card__question {
+            font-weight: 500;
+            color: var(--fh-gray-900);
+            margin-bottom: var(--fh-space-md);
+        }
+
+        .missed-card__your-answer {
+            color: var(--fh-incorrect);
+            font-size: 0.9375rem;
+            margin-bottom: var(--fh-space-xs);
+        }
+
+        .missed-card__correct-answer {
+            color: var(--fh-correct);
+            font-size: 0.9375rem;
+            font-weight: 600;
+        }
+
+        .restart-btn {
+            background: var(--fh-sage);
+            color: var(--fh-white);
+            border: none;
+            padding: var(--fh-space-md) var(--fh-space-2xl);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: var(--fh-space-xl);
+        }
+
+        .restart-btn:hover {
+            background: #6a8773;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .quiz-header__inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .score-bar__inner {
+                flex-direction: column;
+                gap: var(--fh-space-md);
+            }
+
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-breakdown {
+                flex-direction: column;
+                gap: var(--fh-space-lg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="quiz-header">
+        <div class="container">
+            <div class="quiz-header__inner">
+                <h1 class="quiz-header__title">SIE Quiz Drill</h1>
+                <nav class="quiz-header__nav">
+                    <a href="sie-study-materials.html">Study Materials</a>
+                    <a href="sie-cramming.html">Cramming</a>
+                    <a href="sie-flashcards.html">Flashcards</a>
+                    <a href="#" class="active">Quiz</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Score Bar (hidden until quiz starts) -->
+    <div class="score-bar" id="scoreBar" style="display: none;">
+        <div class="container">
+            <div class="score-bar__inner">
+                <span class="score-bar__progress">Question <span id="currentQ">1</span> of <span id="totalQ">10</span></span>
+                <div class="score-bar__score">
+                    <span class="score-bar__correct"><span id="correctCount">0</span> correct</span>
+                    <span class="score-bar__incorrect"><span id="incorrectCount">0</span> wrong</span>
+                    <span class="score-bar__percent" id="percentScore">0%</span>
+                </div>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Setup Screen -->
+    <div class="setup-screen" id="setupScreen">
+        <div class="container">
+            <h1>Ready to Drill?</h1>
+            <p class="setup-screen__subtitle">Select topics to practice, then start your session.</p>
+
+            <div class="topic-grid" id="topicGrid">
+                <!-- Topics populated by JS -->
+            </div>
+
+            <div>
+                <button class="topic-btn" id="selectAllBtn" style="display: inline-block; margin-bottom: var(--fh-space-md);">
+                    <span class="topic-btn__name">Select All Topics</span>
+                </button>
+            </div>
+
+            <p id="questionCount" style="color: var(--fh-gray-600); margin-top: var(--fh-space-md);">
+                Select at least one topic to start
+            </p>
+
+            <button class="start-btn" id="startBtn" disabled>Start Quiz</button>
+        </div>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="quiz-screen" id="quizScreen">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-meta">
+                    <span class="question-topic" id="questionTopic">OPTIONS</span>
+                    <span class="question-number" id="questionNumber">Question 1</span>
+                </div>
+                <p class="question-text" id="questionText">Loading question...</p>
+                <div class="answers-list" id="answersList">
+                    <!-- Answers populated by JS -->
+                </div>
+                <div class="feedback" id="feedback">
+                    <div class="feedback__title" id="feedbackTitle">Correct!</div>
+                    <p class="feedback__explanation" id="feedbackExplanation"></p>
+                </div>
+            </div>
+            <div class="quiz-nav">
+                <button class="next-btn" id="nextBtn" disabled>Next Question</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div class="results-screen" id="resultsScreen">
+        <div class="container">
+            <div class="results-card">
+                <div class="results-score" id="finalScore">0%</div>
+                <div class="results-label">Final Score</div>
+                <div class="results-breakdown">
+                    <div class="results-stat">
+                        <div class="results-stat__value correct" id="finalCorrect">0</div>
+                        <div class="results-stat__label">Correct</div>
+                    </div>
+                    <div class="results-stat">
+                        <div class="results-stat__value incorrect" id="finalIncorrect">0</div>
+                        <div class="results-stat__label">Incorrect</div>
+                    </div>
+                </div>
+                <p class="results-message" id="resultsMessage"></p>
+            </div>
+
+            <div class="missed-section" id="missedSection" style="display: none;">
+                <h3>Review Missed Questions</h3>
+                <div id="missedList">
+                    <!-- Missed questions populated by JS -->
+                </div>
+            </div>
+
+            <button class="restart-btn" id="restartBtn">Start New Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // Question Bank
+        const questionBank = [
+            // OPTIONS (15 questions)
+            {
+                topic: "Options",
+                question: "A call option gives the buyer the right to:",
+                answers: ["Sell the underlying asset", "Buy the underlying asset", "Receive dividends", "Vote on corporate matters"],
+                correct: 1,
+                explanation: "A call option gives the buyer the RIGHT to BUY the underlying asset at the strike price. Remember: 'Call UP' - you call the stock up to you.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Think about those TSLA $300 calls you've eyed. You're paying for the right to buy TSLA at $300 no matter how high it goes. If TSLA moons to $400, you still get it at $300. That's the power of a call."
+            },
+            {
+                topic: "Options",
+                question: "A put option gives the buyer the right to:",
+                answers: ["Buy the underlying asset", "Sell the underlying asset", "Receive interest payments", "Convert to common stock"],
+                correct: 1,
+                explanation: "A put option gives the buyer the RIGHT to SELL the underlying asset at the strike price. Remember: 'Put DOWN' - you put the stock away from you.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Puts are your portfolio's insurance policy. If you own 100 shares of NVDA and buy a put, you're paying for the right to sell at a guaranteed floor price even if the stock tanks. Hedge funds use this constantly."
+            },
+            {
+                topic: "Options",
+                question: "What is the maximum loss for an option buyer?",
+                answers: ["Unlimited", "The strike price", "The premium paid", "The difference between strike and market price"],
+                correct: 2,
+                explanation: "Option buyers can only lose the premium they paid for the option - nothing more. This is true for both calls and puts.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> This is the beauty of being an option buyer - your risk is defined the moment you enter. Paid $500 for those AMD calls? Worst case, you lose $500. Period. No margin calls, no surprises at 4am. Compare that to selling naked options where you can lose your shirt and your house."
+            },
+            {
+                topic: "Options",
+                question: "A call writer (seller) has the:",
+                answers: ["Right to buy", "Right to sell", "Obligation to sell", "Obligation to buy"],
+                correct: 2,
+                explanation: "A call writer has the OBLIGATION to SELL the underlying asset at the strike price if assigned. Writers receive premium but take on obligations.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Selling options is like being the casino - you collect premiums upfront and hope the buyer's 'bet' doesn't pay off. Works great until it doesn't. The wheel strategy folks love selling covered calls on PLTR, collecting income while waiting for their shares to get called away."
+            },
+            {
+                topic: "Options",
+                question: "A put writer (seller) has the:",
+                answers: ["Obligation to sell", "Right to buy", "Obligation to buy", "Right to sell"],
+                correct: 2,
+                explanation: "A put writer has the OBLIGATION to BUY the underlying asset at the strike price if assigned, even if the market price is much lower.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Cash-secured puts are how Warren Buffett enters positions - he gets paid to wait for the price he wants. Sell a SOFI $7 put, collect premium, and if assigned, you own SOFI at $7 minus the premium. Just make sure you actually want to own those shares if it tanks."
+            },
+            {
+                topic: "Options",
+                question: "A call option is 'in the money' when:",
+                answers: ["Market price is below strike price", "Market price equals strike price", "Market price is above strike price", "The option has expired"],
+                correct: 2,
+                explanation: "A call is in the money when the market price is ABOVE the strike price. The buyer could exercise and immediately buy below market value.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> If you own a NVDA $100 call and NVDA is trading at $140, your call is $40 'in the money' - that's intrinsic value, baby. You could exercise and instantly buy at $100 what's worth $140. The deeper ITM you go, the more the option behaves like owning actual shares."
+            },
+            {
+                topic: "Options",
+                question: "A put option is 'in the money' when:",
+                answers: ["Market price is above strike price", "Market price is below strike price", "Market price equals strike price", "Premium exceeds strike price"],
+                correct: 1,
+                explanation: "A put is in the money when the market price is BELOW the strike price. The buyer could exercise and sell above market value.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Your AAPL $180 put is ITM if AAPL drops to $150. You can sell at $180 what's only worth $150. This is why during crashes, put values explode - everyone's suddenly ITM. The bears who bought puts before the 2020 COVID crash were eating caviar for months."
+            },
+            {
+                topic: "Options",
+                question: "What organization issues and guarantees all listed options?",
+                answers: ["SEC", "FINRA", "Options Clearing Corporation (OCC)", "MSRB"],
+                correct: 2,
+                explanation: "The Options Clearing Corporation (OCC) issues, standardizes, and guarantees all listed options contracts, eliminating counterparty risk.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The OCC is why you don't have to worry about whether the person on the other side of your trade is good for it. Founded in 1973 alongside the CBOE, they've guaranteed trillions in options. When you exercise, you're dealing with the OCC - the ultimate counterparty."
+            },
+            {
+                topic: "Options",
+                question: "A 'covered call' means the writer:",
+                answers: ["Has purchased put protection", "Owns the underlying shares", "Has a margin account", "Has multiple option positions"],
+                correct: 1,
+                explanation: "A covered call means the writer owns the underlying shares. If assigned, they can deliver shares they already own, limiting their risk.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The classic income strategy. Own 100 shares of AAPL, sell a call against it, collect premium every month. If shares get called away? You still profit - you sold at the strike plus kept the premium. It's like renting out a house you already own."
+            },
+            {
+                topic: "Options",
+                question: "What document must be provided before or at options account approval?",
+                answers: ["Prospectus", "Annual report", "Options Disclosure Document (ODD)", "Form U4"],
+                correct: 2,
+                explanation: "The Options Disclosure Document (ODD), also called 'Characteristics and Risks of Standardized Options,' must be provided AT or BEFORE account approval.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> That 183-page document you probably clicked through to get options approval? That's the ODD. The SEC and OCC wrote it so when traders blow up their accounts, nobody can say they weren't warned. FINRA loves testing that it must be provided AT or BEFORE approval."
+            },
+            {
+                topic: "Options",
+                question: "An investor who is 'long' a call option has:",
+                answers: ["Written the call", "Sold the call", "Bought the call", "Exercised the call"],
+                correct: 2,
+                explanation: "Being 'long' means you bought and own the option. Long = buyer = has rights. Short = writer/seller = has obligations.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Think of it like concert tickets. Long means you hold the ticket - you have the right to attend. Short means you sold the ticket - now you're obligated to let the holder in. Rights vs. obligations, that's the whole ballgame in options."
+            },
+            {
+                topic: "Options",
+                question: "Which position has unlimited loss potential?",
+                answers: ["Long call", "Long put", "Short (naked) call", "Short put"],
+                correct: 2,
+                explanation: "A naked (uncovered) call writer has unlimited loss potential because there's no cap on how high a stock can rise, and they'd have to buy shares at market price to deliver.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> This is the widow-maker trade. Remember the GameStop saga? Traders who sold naked calls at $20 had to buy shares at $400+ to deliver. Infinite risk isn't a figure of speech - there's literally no limit to how much you can lose. This is why brokers require Level 4+ approval."
+            },
+            {
+                topic: "Options",
+                question: "Options contracts settle in:",
+                answers: ["T+0 (same day)", "T+1 (one business day)", "T+2 (two business days)", "T+3 (three business days)"],
+                correct: 1,
+                explanation: "Options settle T+1, the same as stocks and bonds. Settlement is trade date plus one business day.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The SEC moved from T+2 to T+1 in May 2024 - the biggest settlement change in decades. Options, stocks, bonds - all T+1 now. Only exception worth knowing: government securities settle T+1 but can go same-day. The GameStop fiasco accelerated this push."
+            },
+            {
+                topic: "Options",
+                question: "The 'strike price' of an option is also called the:",
+                answers: ["Premium", "Exercise price", "Intrinsic value", "Time value"],
+                correct: 1,
+                explanation: "Strike price and exercise price are synonymous - it's the price at which the option holder can buy (call) or sell (put) the underlying asset.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> When scanning the options chain on your broker, the strike price is that column in the middle. For TSLA, you might see strikes at $250, $255, $260, etc. Pick your strike, pick your expiration, pay the premium - you've just defined your trade."
+            },
+            {
+                topic: "Options",
+                question: "Time value of an option is greatest when the option is:",
+                answers: ["Deep in the money", "At the money", "Deep out of the money", "Expired"],
+                correct: 1,
+                explanation: "Time value is greatest when the option is at the money (strike price equals market price) because there's maximum uncertainty about whether it will end up profitable.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> ATM options are peak uncertainty - could go either way, so time has maximum value. Deep ITM options move like stock (mostly intrinsic value). Deep OTM options are lottery tickets (all time value, usually dying). Theta decay hurts ATM options the most as expiration nears."
+            },
+
+            // BONDS (12 questions)
+            {
+                topic: "Bonds",
+                question: "When interest rates rise, bond prices:",
+                answers: ["Rise", "Fall", "Stay the same", "Become unpredictable"],
+                correct: 1,
+                explanation: "Bond prices and interest rates have an INVERSE relationship. When rates rise, existing bond prices fall because newer bonds offer better yields.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The seesaw that rules fixed income. When the Fed raised rates in 2022-2023, the bond market had its worst year in decades. Your 2% bond looks terrible when new issues pay 5%. This is why 'safe' bond funds lost 13%+ that year."
+            },
+            {
+                topic: "Bonds",
+                question: "A bond trading at 102 is trading at a:",
+                answers: ["Discount", "Premium", "Par", "Spread"],
+                correct: 1,
+                explanation: "102 means 102% of par value ($1,020 for a $1,000 bond). Above 100 = premium. Below 100 = discount. At 100 = par.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Bond quotes drop the last digit - a quote of 102 means $1,020 per bond. It's quoted as a percentage of par ($1,000). Trading at premium means you're paying more than face value, typically because the coupon rate is higher than current market rates."
+            },
+            {
+                topic: "Bonds",
+                question: "Current yield is calculated as:",
+                answers: ["Coupon rate / Par value", "Annual interest / Current market price", "YTM / Years to maturity", "Price change / Original price"],
+                correct: 1,
+                explanation: "Current Yield = Annual Interest Payment / Current Market Price. It measures the yield based on what you'd actually pay for the bond today.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The only bond formula you actually need to calculate. $50 annual coupon / $950 price = 5.26% current yield. Simple division. The SIE rarely makes you compute this, but knowing the logic helps you understand why discount bonds have higher current yields than their coupon rates."
+            },
+            {
+                topic: "Bonds",
+                question: "For a bond trading at a PREMIUM, which yield is lowest?",
+                answers: ["Nominal (coupon) yield", "Current yield", "Yield to maturity (YTM)", "Yield to call (YTC)"],
+                correct: 3,
+                explanation: "For premium bonds, yield order from lowest to highest: YTC < YTM < Current Yield < Nominal. YTC is lowest because you lose the premium sooner if called.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Premium bond yield ladder: YTC is the basement, Nominal is the penthouse. Why? If you paid $1,100 for a bond callable at $1,000, getting called hurts - you lose that $100 premium faster. The earlier you're forced to sell at par, the worse your return looks."
+            },
+            {
+                topic: "Bonds",
+                question: "For a bond trading at a DISCOUNT, which yield is highest?",
+                answers: ["Nominal (coupon) yield", "Current yield", "Yield to maturity (YTM)", "Yield to call (YTC)"],
+                correct: 3,
+                explanation: "For discount bonds, the order reverses. YTC is HIGHEST because if called early, you get to par value sooner, capturing the discount gain faster.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Discount bond yield ladder flips - YTC is now the penthouse. If you bought at $900 and get called at $1,000, you pocket that $100 gain faster. The quicker you reach par, the better your annualized return. Discount bonds LOVE being called early."
+            },
+            {
+                topic: "Bonds",
+                question: "Interest rate risk is highest for bonds with:",
+                answers: ["Short maturities", "Long maturities", "High coupon rates", "Low credit ratings"],
+                correct: 1,
+                explanation: "Longer maturity bonds have MORE interest rate risk. Their prices are more sensitive to rate changes because cash flows are locked in for longer.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Duration is the measure - longer duration means more rate sensitivity. A 30-year Treasury might drop 15-20% on a 1% rate hike. A 2-year Treasury? Maybe 2%. This is why TLT (long Treasury ETF) got crushed in 2022 while short-term bills barely budged."
+            },
+            {
+                topic: "Bonds",
+                question: "Reinvestment risk is the risk that:",
+                answers: ["Interest rates will rise", "The issuer will default", "Coupon payments will be reinvested at lower rates", "The bond will be called"],
+                correct: 2,
+                explanation: "Reinvestment risk is the risk that when rates fall, you'll have to reinvest coupon payments at lower rates, reducing overall return.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Picture this: you're clipping 6% coupons from a bond, but rates drop to 3%. Every time a coupon comes in, you can only reinvest at that crummy 3%. Your 'locked in' 6% return slowly erodes. This is why high-coupon bonds have more reinvestment risk."
+            },
+            {
+                topic: "Bonds",
+                question: "Zero-coupon bonds have:",
+                answers: ["High reinvestment risk, low interest rate risk", "Low reinvestment risk, high interest rate risk", "High risk of both types", "Low risk of both types"],
+                correct: 1,
+                explanation: "Zero-coupon bonds have ZERO reinvestment risk (no coupons to reinvest) but HIGH interest rate risk (price is very sensitive to rate changes).<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Zeros are the purest duration play. No coupons = nothing to reinvest = zero reinvestment risk. But all your return is locked in at the end, making price super sensitive to rates. STRIPS (Treasury zeros) are the go-to for this. Popular for target-date goals like college funds."
+            },
+            {
+                topic: "Bonds",
+                question: "Callable bonds have higher:",
+                answers: ["Interest rate risk", "Reinvestment risk", "Default risk", "Inflation risk"],
+                correct: 1,
+                explanation: "Callable bonds have higher reinvestment risk. If rates fall, issuers call the bonds, forcing investors to reinvest at the new lower rates.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The issuer holds a free option against you. Rates drop? They call your 6% bond, pay you par, and refinance at 4%. Now you're stuck reinvesting at 4% while they laugh to the bank. This is why callable bonds pay slightly higher yields - compensation for that call risk."
+            },
+            {
+                topic: "Bonds",
+                question: "The nominal yield (coupon rate) of a bond:",
+                answers: ["Changes with market conditions", "Is fixed at issuance", "Equals the current yield", "Determines the bond's rating"],
+                correct: 1,
+                explanation: "Nominal yield (coupon rate) is FIXED at issuance and never changes. A 5% coupon bond always pays 5% of par annually.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The coupon is literally printed on the bond (back in the paper days). A $1,000 bond with 5% coupon pays $50/year forever until maturity - doesn't matter if you paid $800 or $1,200 for it. That's why current yield differs from nominal yield."
+            },
+            {
+                topic: "Bonds",
+                question: "Yield to Maturity (YTM) accounts for:",
+                answers: ["Only coupon payments", "Only price appreciation/depreciation", "Both coupons and price change to par", "Only reinvestment of coupons"],
+                correct: 2,
+                explanation: "YTM is the most comprehensive yield measure - it accounts for coupon payments AND the gain or loss as the price moves toward par at maturity.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> YTM is the 'true' return if you hold to maturity. Buy at $950, get $50/year coupons, receive $1,000 at maturity - YTM captures all of it in one number. It's the internal rate of return (IRR) of the bond. When bond traders quote yields, they mean YTM."
+            },
+            {
+                topic: "Bonds",
+                question: "Corporate bonds settle in:",
+                answers: ["T+0", "T+1", "T+2", "T+3"],
+                correct: 1,
+                explanation: "Corporate bonds (like stocks and most other securities) settle T+1 - trade date plus one business day.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> T+1 is the new standard across the board - stocks, corporate bonds, munis, agencies, options. The only weird ones are government securities (can settle same-day) and some options exercises. When in doubt on the SIE, T+1 is usually your answer."
+            },
+
+            // PROHIBITED ACTIVITIES (10 questions)
+            {
+                topic: "Prohibited Activities",
+                question: "A broker buying shares before executing a large customer order is engaging in:",
+                answers: ["Churning", "Front running", "Pump and dump", "Backing away"],
+                correct: 1,
+                explanation: "Front running is trading ahead of a large customer order to profit from the anticipated price movement when that order hits the market.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Classic broker betrayal. Client calls with a 500,000 share buy order. Broker quickly buys 1,000 shares personally, executes the client order (pushing price up), then sells for instant profit. This is wire fraud territory - people go to prison for this."
+            },
+            {
+                topic: "Prohibited Activities",
+                question: "Excessive trading in a customer account to generate commissions is called:",
+                answers: ["Front running", "Marking the close", "Churning", "Painting the tape"],
+                correct: 2,
+                explanation: "Churning requires three elements: control over the account, excessive trading activity, and intent to generate commissions rather than benefit the customer.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The wolf in advisor's clothing. Granny's account has 200% turnover while she's just trying to preserve capital. FINRA looks at turnover ratio, cost-to-equity ratio, and in-and-out trading. If it looks like the broker is getting rich while the client goes nowhere, that's churning."
+            },
+            {
+                topic: "Prohibited Activities",
+                question: "Spreading false positive information to inflate a stock's price, then selling, is:",
+                answers: ["Churning", "Pump and dump", "Front running", "Backing away"],
+                correct: 1,
+                explanation: "Pump and dump involves artificially inflating prices through false or misleading statements ('pump'), then selling into the inflated price ('dump').<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The classic penny stock scam. Buy a million shares of a $0.10 stock, blast 'hot tip' emails to 100,000 people, watch it spike to $0.50, dump your shares. The SEC has entire divisions hunting these schemes. If someone's pushing an 'undiscovered gem' hard, run."
+            },
+            {
+                topic: "Prohibited Activities",
+                question: "Trading on material non-public information is:",
+                answers: ["Legal if you're not an officer", "Insider trading", "Front running", "Acceptable for family members"],
+                correct: 1,
+                explanation: "Insider trading is trading on material non-public information (MNPI). Both the tipper and tippee can be liable, regardless of their position.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Martha Stewart went to prison for this. Your buddy at the pharma company mentions they're getting FDA approval tomorrow? Trade on it, you're both liable. The SEC uses sophisticated pattern detection - unusual options activity before announcements is a red flag they actively monitor."
+            },
+            {
+                topic: "Prohibited Activities",
+                question: "A market maker refusing to honor their published quote is:",
+                answers: ["Front running", "Marking the close", "Backing away", "Churning"],
+                correct: 2,
+                explanation: "Backing away is when a market maker refuses to execute at their published bid or ask price. Market makers are obligated to honor their quotes.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Market makers get special privileges (see inside quotes, trade on the spread) but in exchange they MUST provide liquidity. Posting a bid of $50, then refusing to buy at $50 when someone hits you? That's backing away. FINRA Rule 5220 explicitly prohibits this."
+            },
+            {
+                topic: "Prohibited Activities",
+                question: "Placing trades at the end of the day to manipulate closing prices is:",
+                answers: ["Painting the tape", "Marking the close", "Front running", "Matched orders"],
+                correct: 1,
+                explanation: "Marking the close is placing trades near market close specifically to manipulate the closing price, often to affect portfolio valuations.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Hedge fund manager's portfolio is valued at the close. He buys aggressively in the last 5 minutes to push up prices, making his quarter-end numbers look better. This manipulation affects NAV calculations for mutual funds too. The SEC watches end-of-day patterns like hawks."
+            },
+            {
+                topic: "Prohibited Activities",
+                question: "A Suspicious Activity Report (SAR) must be filed within:",
+                answers: ["10 calendar days", "30 calendar days", "60 calendar days", "90 calendar days"],
+                correct: 1,
+                explanation: "SARs must be filed within 30 calendar days of detecting suspicious activity involving $5,000 or more. Never tell the customer about the SAR.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Anti-money laundering is serious business. If you notice weird patterns - round-dollar deposits, structuring to avoid reporting, transfers to sketchy jurisdictions - file the SAR. And here's the key: 'tipping off' the client that a SAR was filed is itself a crime."
+            },
+            {
+                topic: "Prohibited Activities",
+                question: "A Currency Transaction Report (CTR) is required for cash transactions over:",
+                answers: ["$3,000", "$5,000", "$10,000", "$15,000"],
+                correct: 2,
+                explanation: "CTRs are required for cash transactions exceeding $10,000 in a single day. Breaking up transactions to avoid reporting is 'structuring' - also illegal.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The $10,000 threshold is designed to catch drug money, terrorism financing, and tax evasion. Making five $9,000 deposits instead of one $45,000 deposit? That's structuring (also called 'smurfing'), and it's a federal crime even if the underlying money is legit."
+            },
+            {
+                topic: "Prohibited Activities",
+                question: "Creating the false appearance of trading activity is called:",
+                answers: ["Backing away", "Painting the tape", "Front running", "Churning"],
+                correct: 1,
+                explanation: "Painting the tape involves creating a false appearance of active trading to attract other investors, typically through coordinated or wash trades.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Named after the old stock ticker tape. Colluding parties trade shares back and forth between themselves at rising prices, making it look like there's real demand. Other investors see the 'activity' and pile in. Classic manipulation that dates back to the 1920s bucket shops."
+            },
+            {
+                topic: "Prohibited Activities",
+                question: "The OFAC SDN list is used to:",
+                answers: ["Track market makers", "Screen customers for prohibited persons", "Monitor trading volume", "Report insider trades"],
+                correct: 1,
+                explanation: "The Specially Designated Nationals (SDN) list from Treasury/OFAC identifies people and entities with whom U.S. persons cannot do business.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Think of it as the government's 'Do Not Fly' list for finance. Terrorists, drug kingpins, sanctioned oligarchs - they're all on the SDN list. Every brokerage runs new accounts against this list. Open an account for someone on it? That's a federal crime and a career-ender."
+            },
+
+            // ORDER TYPES (10 questions)
+            {
+                topic: "Order Types",
+                question: "A buy stop order is placed:",
+                answers: ["Below the current market price", "At the current market price", "Above the current market price", "At the previous day's close"],
+                correct: 2,
+                explanation: "Buy stops are placed ABOVE current market. Remember 'BLiSS' - Buy Limit and Sell Stop are below. So Buy Stop is above.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Buy stops are for breakout traders. TSLA is at $250, resistance at $260 - you set a buy stop at $261. If it breaks out, you're automatically in. Also used by short sellers as protection: if the stock you shorted starts running up, the buy stop limits your loss."
+            },
+            {
+                topic: "Order Types",
+                question: "A sell stop order is placed:",
+                answers: ["Above the current market price", "At the current market price", "Below the current market price", "At the opening price"],
+                correct: 2,
+                explanation: "Sell stops are placed BELOW current market. Remember 'BLiSS' - Buy Limit and Sell Stop are placed below market.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Your safety net. NVDA is at $500, you don't want to lose more than 10%, so you set a sell stop at $450. If it drops there, you're out automatically. The downside? Flash crashes can trigger your stop, sell you out, and then the stock bounces right back. Happens all the time."
+            },
+            {
+                topic: "Order Types",
+                question: "A sell limit order is placed:",
+                answers: ["Below the current market price", "Above the current market price", "At the current market price", "At any price"],
+                correct: 1,
+                explanation: "Sell limits are placed ABOVE current market. Remember 'SLoBS' - Sell Limit or Buy Stop are placed above market.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Your profit-taking order. PLTR is at $25, you want to sell at $30. Set a sell limit at $30 - when it hits, you're out at your target price. The risk? It might hit $29.90 and reverse, never filling your limit. You were 'right' but didn't get paid."
+            },
+            {
+                topic: "Order Types",
+                question: "A market order guarantees:",
+                answers: ["Price", "Execution", "Both price and execution", "Neither price nor execution"],
+                correct: 1,
+                explanation: "Market orders guarantee EXECUTION but not price. You will get filled, but the exact price depends on market conditions at execution.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Market orders say 'I want in NOW, whatever the price.' Great for liquid stocks like AAPL where the spread is a penny. Dangerous for thinly-traded stocks where you might see 'slippage' - you wanted $10, you got filled at $10.50. In volatile markets, that gap can be brutal."
+            },
+            {
+                topic: "Order Types",
+                question: "A limit order guarantees:",
+                answers: ["Execution", "Price (or better)", "Both execution and price", "Neither execution nor price"],
+                correct: 1,
+                explanation: "Limit orders guarantee PRICE (or better) but not execution. Your order may not fill if the market never reaches your limit price.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Limit orders say 'I'll only pay this much' or 'I won't sell for less than this.' You control the price, but the market might not cooperate. Watching AMD run from $100 to $150 while your $95 buy limit sits unfilled is a special kind of pain."
+            },
+            {
+                topic: "Order Types",
+                question: "When triggered, a stop order becomes a:",
+                answers: ["Limit order", "Market order", "Day order", "GTC order"],
+                correct: 1,
+                explanation: "When the stop price is reached, a stop order becomes a MARKET order and executes at the next available price.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> This is the gotcha. Your stop at $50 triggers, becomes a market order, but in a fast-moving market you might get filled at $48. That's why stop-LIMIT orders exist - they trigger and become limit orders. Tradeoff: limits might not fill if the price gaps past them."
+            },
+            {
+                topic: "Order Types",
+                question: "GTC stands for:",
+                answers: ["Good Till Close", "Good Till Canceled", "Guaranteed To Complete", "General Trading Conditions"],
+                correct: 1,
+                explanation: "GTC means Good Till Canceled - the order remains active until it's either executed or the investor cancels it.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Day orders die at 4pm. GTC orders keep working day after day. Most brokers cap GTC at 60-90 days, then you need to re-enter. Pro tip: review your GTC orders regularly. That buy limit from 3 months ago might not make sense anymore."
+            },
+            {
+                topic: "Order Types",
+                question: "An AON (All or None) order:",
+                answers: ["Must execute at the opening", "Cannot be partially filled", "Must be a market order", "Expires at end of day"],
+                correct: 1,
+                explanation: "All or None means the entire order must execute at once - no partial fills allowed. The order may not execute at all if the full quantity isn't available.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Useful when you need a specific position size or don't want to pay multiple commissions on partial fills. The downside: if only 450 shares are available and you want 500 AON, you get nothing. Partial fill traders call it the 'greedy order' - sometimes you miss out."
+            },
+            {
+                topic: "Order Types",
+                question: "Stocks settle in:",
+                answers: ["T+0", "T+1", "T+2", "T+3"],
+                correct: 1,
+                explanation: "Stocks (and most securities) settle T+1 - trade date plus one business day.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Trade Monday, settle Tuesday. Your broker shows the shares immediately, but the actual money-for-shares exchange happens T+1. Before May 2024 it was T+2. Before 2017 it was T+3. The trend: faster settlement reduces counterparty risk."
+            },
+            {
+                topic: "Order Types",
+                question: "Under Regulation T, customers must pay within:",
+                answers: ["T+1", "T+2", "4 business days", "5 business days"],
+                correct: 2,
+                explanation: "Regulation T requires customer payment within 4 business days from trade date. Don't confuse with settlement (T+1).<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Classic exam trap. Settlement is T+1, but Reg T payment deadline is 4 business days. Why the gap? Gives cash account customers extra time to get money to the broker. Miss this deadline? Your account gets restricted and you might get a 90-day freeze."
+            },
+
+            // ACCOUNTS (10 questions)
+            {
+                topic: "Accounts",
+                question: "In a UTMA/UGMA account, the beneficial owner is:",
+                answers: ["The custodian", "The minor", "The parent", "The broker-dealer"],
+                correct: 1,
+                explanation: "In custodial accounts, the MINOR is the beneficial owner of the assets. The custodian manages the account but doesn't own it.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Grandma sets up a UTMA for little Timmy. She's the custodian, Timmy's the owner. The money is taxed at Timmy's (presumably lower) rate. At age 18 or 21 (depending on state), Timmy gets full control. Plot twist: 18-year-olds with $50K don't always make great decisions."
+            },
+            {
+                topic: "Accounts",
+                question: "Can margin trading occur in a UTMA/UGMA account?",
+                answers: ["Yes, with custodian approval", "Yes, if the minor is 16+", "No, margin is prohibited", "Yes, for covered options only"],
+                correct: 2,
+                explanation: "NO margin, short selling, or uncovered options are allowed in custodial accounts. They must be cash accounts with conservative investments.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The 'protect the children' rule. You can't borrow money against a minor's account (margin) or bet against stocks (short selling). Why? Because minors can't enter legal contracts, and these strategies could create liabilities the child can't be responsible for."
+            },
+            {
+                topic: "Accounts",
+                question: "The initial margin requirement under Regulation T is:",
+                answers: ["25%", "35%", "50%", "75%"],
+                correct: 2,
+                explanation: "Regulation T requires 50% initial margin. To buy $10,000 of stock, you deposit $5,000 and the broker lends you $5,000.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> 50% down, like a down payment on leverage. Want $20K of TSLA? Put up $10K, borrow $10K from your broker (at interest). This is why margin accounts amplify gains AND losses. Reg T has been 50% since 1974 - the Fed sets this, not FINRA."
+            },
+            {
+                topic: "Accounts",
+                question: "The minimum maintenance margin for long positions is:",
+                answers: ["25%", "30%", "35%", "50%"],
+                correct: 0,
+                explanation: "FINRA requires minimum 25% maintenance margin for long positions. If equity falls below this, you get a margin call.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The dreaded margin call. You bought $10K of stock with 50% margin ($5K equity). Stock drops to $6,000 - your equity is now only $1K (16%). Below 25% means the broker calls you for more money. Don't have it? They liquidate your positions. Usually at the worst possible time."
+            },
+            {
+                topic: "Accounts",
+                question: "Which makes an order 'discretionary'?",
+                answers: ["Choosing the time of execution", "Choosing the price", "Choosing which security to trade", "Choosing the settlement date"],
+                correct: 2,
+                explanation: "Discretionary authority means choosing asset, amount, or action (buy/sell). Time and price decisions are NOT discretionary.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The AAA test: Asset, Amount, Action. If the broker decides ANY of these, it's discretionary. 'Buy AAPL when it hits $150' is NOT discretionary (you chose the asset, amount, and action). 'Invest $10K however you see fit' IS discretionary. Written authorization required for the latter."
+            },
+            {
+                topic: "Accounts",
+                question: "Traditional IRA contributions are:",
+                answers: ["Never tax-deductible", "Tax-deductible, withdrawals taxed", "After-tax, withdrawals tax-free", "Tax-deductible, withdrawals tax-free"],
+                correct: 1,
+                explanation: "Traditional IRA: tax-deductible contributions NOW, pay taxes on withdrawals LATER. It's 'pay later' versus Roth's 'pay now.'<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Traditional IRAs are a bet that your tax rate will be LOWER in retirement. Put money in at a 32% tax bracket, pull it out at 22%? You win. This math made sense when tax rates were higher. Today's lower rates make Roth more attractive for many."
+            },
+            {
+                topic: "Accounts",
+                question: "Roth IRA contributions are:",
+                answers: ["Tax-deductible", "After-tax (not deductible)", "Pre-tax", "Tax-free"],
+                correct: 1,
+                explanation: "Roth IRA contributions are after-tax (not deductible), but qualified withdrawals are tax-free. You pay now, withdraw tax-free later.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Roth is a bet that tax rates go UP or that you'll be in a higher bracket later. Young professionals love Roths - pay taxes at 22% now, withdraw tax-free when you're earning more. Peter Thiel famously grew $5K into $5 BILLION in a Roth. All tax-free."
+            },
+            {
+                topic: "Accounts",
+                question: "Required Minimum Distributions (RMDs) for Traditional IRAs begin at age:",
+                answers: ["59½", "65", "70½", "73"],
+                correct: 3,
+                explanation: "RMDs begin at age 73 for Traditional IRAs. Roth IRAs have NO RMDs during the owner's lifetime.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The IRS wants their taxes eventually. They let you defer taxes in a Traditional IRA, but at 73 they force you to start withdrawing. Miss an RMD? Brutal 25% penalty on the amount not taken. Roth has no RMDs - another reason young investors prefer them."
+            },
+            {
+                topic: "Accounts",
+                question: "The penalty for early IRA withdrawal (before 59½) is:",
+                answers: ["5%", "10%", "15%", "20%"],
+                correct: 1,
+                explanation: "Early IRA withdrawals face a 10% penalty PLUS ordinary income tax. Some exceptions exist (first home, disability, education).<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Pull $10K early from your Traditional IRA, pay maybe $2,200 in taxes PLUS $1,000 penalty. You just lost 32% right away. Exceptions to memorize: first-time homebuyer ($10K max), disability, certain medical expenses, education. These escape the 10% penalty but not the taxes."
+            },
+            {
+                topic: "Accounts",
+                question: "SIPC coverage per customer is:",
+                answers: ["$100,000 total", "$250,000 total", "$500,000 total, max $250,000 cash", "$1,000,000 total"],
+                correct: 2,
+                explanation: "SIPC covers up to $500,000 total per customer, with a maximum of $250,000 for cash. It protects against broker-dealer failure, NOT market losses.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> SIPC is NOT the stock market's FDIC. It protects you if your broker goes bust and your assets go missing - not if your stocks tank. When Lehman collapsed, SIPC helped customers recover their securities. But your -40% loss on that biotech? That's all you, pal."
+            },
+
+            // REGULATORY (8 questions)
+            {
+                topic: "Regulatory",
+                question: "The Securities Act of 1933 regulates:",
+                answers: ["Secondary market trading", "Primary market (new issues)", "Investment advisers", "Broker-dealer conduct"],
+                correct: 1,
+                explanation: "The 1933 Act covers the PRIMARY market - new securities issuance, IPOs, registration requirements, and prospectus delivery. 'Paper Act.'<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Born from the 1929 crash chaos. Before 1933, companies could sell stock with zero disclosure - pure Wild West. Now they must register with the SEC and give you a prospectus. Remember: '33 Act = First sale = Primary market. It came first, deals with first sales."
+            },
+            {
+                topic: "Regulatory",
+                question: "The Securities Exchange Act of 1934 created the:",
+                answers: ["FINRA", "SEC", "MSRB", "OCC"],
+                correct: 1,
+                explanation: "The 1934 Act created the SEC and regulates the SECONDARY market - trading of existing securities, exchanges, and broker-dealers. 'People Act.'<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The '34 Act is the SEC's birth certificate. It also regulates everything that happens AFTER the IPO - your daily trading, exchanges, broker-dealers, margin rules. Remember: '34 = Secondary = ongoing trading. Also: 1934 = SEC, 1933 = prospectus requirements."
+            },
+            {
+                topic: "Regulatory",
+                question: "FINRA is a:",
+                answers: ["Government agency", "Self-regulatory organization (SRO)", "Stock exchange", "Clearing corporation"],
+                correct: 1,
+                explanation: "FINRA is a self-regulatory organization (SRO) for broker-dealers. It writes rules, administers exams (like the SIE), and handles enforcement.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> FINRA isn't government - it's the industry policing itself under SEC oversight. Formed in 2007 when NASD merged with NYSE's regulatory arm. They write the rules, administer the exams, and can bar you from the industry. The SIE you're studying for? That's a FINRA exam."
+            },
+            {
+                topic: "Regulatory",
+                question: "Form U4 is filed when an associated person:",
+                answers: ["Leaves a firm", "Joins a firm", "Opens a customer account", "Reports a complaint"],
+                correct: 1,
+                explanation: "Form U4 (Uniform Application) is filed when JOINING a firm. Form U5 (Termination Notice) is filed when leaving.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Your U4 is your permanent record in the securities industry. Lies on a U4 can end your career - they verify everything. It follows you to BrokerCheck, visible to the public forever. Criminal history, customer complaints, regulatory actions - all disclosed on the U4."
+            },
+            {
+                topic: "Regulatory",
+                question: "Form U5 must be filed within how many days of termination?",
+                answers: ["10 days", "30 days", "60 days", "90 days"],
+                correct: 1,
+                explanation: "Form U5 must be filed within 30 days of an associated person's termination from a firm.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The U5 is how the industry knows you left - and WHY you left. 'Voluntary' vs. 'Permitted to resign' vs. 'Terminated' tells a story. A bad U5 can haunt you - future employers see it. Some departures turn into legal battles over what gets written on that form."
+            },
+            {
+                topic: "Regulatory",
+                question: "The MSRB regulates:",
+                answers: ["Options trading", "Municipal securities dealers", "Investment advisers", "Commodity futures"],
+                correct: 1,
+                explanation: "The Municipal Securities Rulemaking Board (MSRB) writes rules for municipal securities dealers. FINRA and SEC enforce MSRB rules.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The MSRB is unique - it makes the rules but can't enforce them. Created in 1975 because municipal bonds are issued by state/local governments, and feds can't directly regulate states. FINRA and SEC enforce MSRB rules for broker-dealers. It's regulatory inception."
+            },
+            {
+                topic: "Regulatory",
+                question: "The Investment Company Act of 1940 regulates:",
+                answers: ["Broker-dealers", "Investment advisers", "Mutual funds", "Stock exchanges"],
+                correct: 2,
+                explanation: "The Investment Company Act of 1940 regulates investment companies, primarily mutual funds - their registration, structure, and operations.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The '40 Act is why mutual funds must have independent boards, daily pricing, and disclosed expenses. It created the regulatory framework that makes SPY and VOO possible. Fun fact: hedge funds typically use '40 Act exemptions to avoid these rules."
+            },
+            {
+                topic: "Regulatory",
+                question: "The SEC has what type of enforcement authority?",
+                answers: ["Criminal only", "Civil only", "Both criminal and civil", "Neither - it's advisory only"],
+                correct: 1,
+                explanation: "The SEC has CIVIL enforcement authority. Criminal securities violations are prosecuted by the Department of Justice.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The SEC can fine you, disgore profits, and bar you from the industry - but they can't throw you in jail. For that, they refer cases to the DOJ. This is why insider trading cases often have BOTH an SEC civil action (monetary penalties) AND DOJ criminal charges (prison time)."
+            },
+
+            // CAPITAL MARKETS (12 questions)
+            {
+                topic: "Capital Markets",
+                question: "The PRIMARY market is where:",
+                answers: ["Existing securities are traded between investors", "New securities are sold for the first time", "Only government bonds are traded", "Market makers provide liquidity"],
+                correct: 1,
+                explanation: "The primary market is where NEW securities are issued and sold for the first time. IPOs happen in the primary market. The 1933 Act regulates this.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> When PLTR went public in 2020, that was the primary market - Palantir raised capital directly from investors. After the IPO, all trading between you and other investors is secondary market. The company only gets money once - at the initial sale."
+            },
+            {
+                topic: "Capital Markets",
+                question: "The SECONDARY market is where:",
+                answers: ["Companies issue new stock", "IPOs take place", "Existing securities trade between investors", "Underwriters sell to institutional investors"],
+                correct: 2,
+                explanation: "The secondary market is where EXISTING securities trade between investors (NYSE, NASDAQ, etc.). The 1934 Act regulates this.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Every trade you make on Robinhood, Schwab, or Fidelity is secondary market. You're buying from another investor, not from the company. Apple doesn't get a dime when you buy AAPL shares - that money goes to whoever sold them to you."
+            },
+            {
+                topic: "Capital Markets",
+                question: "An IPO (Initial Public Offering) occurs in which market?",
+                answers: ["Secondary market", "Primary market", "Third market", "Fourth market"],
+                correct: 1,
+                explanation: "IPOs are PRIMARY market transactions - the company is issuing new securities to the public for the first time.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The 'I' in IPO stands for Initial - first time. Facebook's 2012 IPO raised $16 billion directly for the company. The moment regular investors started trading FB shares with each other (often at a loss that first year), it became secondary market activity."
+            },
+            {
+                topic: "Capital Markets",
+                question: "In a firm commitment underwriting, who bears the risk of unsold shares?",
+                answers: ["The issuing company", "The underwriter", "The investors", "The SEC"],
+                correct: 1,
+                explanation: "In a firm commitment, the UNDERWRITER buys all shares from the issuer and bears the risk of selling them. They guarantee the issuer will receive the proceeds.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Goldman Sachs underwrote the Uber IPO as firm commitment. They bought all the shares from Uber at one price, then sold to the public at a higher price. If demand had collapsed, Goldman would've been stuck holding billions in shares. That spread is their reward for taking the risk."
+            },
+            {
+                topic: "Capital Markets",
+                question: "In a best efforts underwriting, the underwriter:",
+                answers: ["Guarantees all shares will be sold", "Buys all shares from the issuer", "Acts as agent and sells what they can", "Purchases unsold shares at a discount"],
+                correct: 2,
+                explanation: "In best efforts, the underwriter acts as AGENT and sells what they can. Unsold shares go back to the issuer - the underwriter takes no risk.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Best efforts is 'we'll try our best, but no guarantees.' Common for smaller, riskier IPOs where banks don't want to eat unsold shares. The underwriter gets a fee for effort, but if the offering flops, the company is the one left holding the bag."
+            },
+            {
+                topic: "Capital Markets",
+                question: "A private placement under Regulation D is:",
+                answers: ["Available to the general public", "Exempt from full SEC registration", "Only for government securities", "Required to be listed on an exchange"],
+                correct: 1,
+                explanation: "Private placements under Reg D are EXEMPT from full SEC registration. They're sold to accredited investors (institutions, high-net-worth individuals).<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> This is how startups raise money before going public. SpaceX has raised billions through Reg D private placements. No SEC registration, no prospectus - but only 'sophisticated' investors can participate. It's the rich getting richer on deals regular folks can't access."
+            },
+            {
+                topic: "Capital Markets",
+                question: "Which is an accredited investor under Regulation D?",
+                answers: ["Any individual investor", "Individual with $200,000+ annual income", "Individual with $50,000 in savings", "Any retirement account holder"],
+                correct: 1,
+                explanation: "Accredited investors include individuals with income over $200K ($300K joint) for 2 years, or net worth over $1M (excluding primary residence), plus institutions.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The SEC's theory: if you're rich enough, you don't need their protection - you can evaluate risky deals yourself. These thresholds haven't changed since 1982, which means way more people qualify now due to inflation. About 13% of U.S. households are now accredited."
+            },
+            {
+                topic: "Capital Markets",
+                question: "The Federal Reserve influences interest rates primarily through:",
+                answers: ["Setting stock prices", "Buying and selling government securities", "Directly controlling bank rates", "Regulating mutual funds"],
+                correct: 1,
+                explanation: "The Fed uses open market operations - buying and selling government securities - to influence the money supply and interest rates. This is monetary policy.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> When the Fed buys Treasury bonds, they inject cash into the banking system, pushing rates down. When they sell, they soak up cash, pushing rates up. This is why traders obsess over Fed meetings - Jerome Powell's words move billions. FOMC days are some of the most volatile trading days of the year."
+            },
+            {
+                topic: "Capital Markets",
+                question: "When the Federal Reserve RAISES interest rates, bond prices typically:",
+                answers: ["Rise", "Fall", "Stay the same", "Become more volatile"],
+                correct: 1,
+                explanation: "Bond prices and interest rates move INVERSELY. When the Fed raises rates, existing bond prices fall because new bonds offer better yields.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The Fed raised rates aggressively in 2022-2023, and bond holders got crushed. Long-term Treasuries lost over 30% in value. This inverse relationship is one of the most fundamental concepts in finance - and one of the SIE's favorite test topics."
+            },
+            {
+                topic: "Capital Markets",
+                question: "Inflation risk is the risk that:",
+                answers: ["Interest rates will rise", "Purchasing power of returns will decrease", "The issuer will default", "The market will crash"],
+                correct: 1,
+                explanation: "Inflation risk (purchasing power risk) is the risk that inflation will erode the real value of your investment returns over time.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Your bond pays 4%, but inflation is 6%? You're losing 2% in real purchasing power. This is why fixed-income investors hate inflation - your dollars are worth less. Stocks historically beat inflation long-term because companies can raise prices. Bonds can't."
+            },
+            {
+                topic: "Capital Markets",
+                question: "A broker-dealer that buys securities for its own inventory is acting as a:",
+                answers: ["Broker", "Dealer (principal)", "Agent", "Custodian"],
+                correct: 1,
+                explanation: "When trading from their own inventory (taking a position), the firm acts as DEALER or PRINCIPAL. When acting on behalf of customers, they're a BROKER or AGENT.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Think of a car dealership vs. a real estate agent. The dealer owns the cars, takes on risk, and makes money on the markup. The agent never owns the house - just connects buyer and seller for a commission. Broker = agent, Dealer = used car lot."
+            },
+            {
+                topic: "Capital Markets",
+                question: "The 'spread' in market making refers to:",
+                answers: ["The commission charged to customers", "The difference between bid and ask prices", "The underwriting discount", "The margin requirement"],
+                correct: 1,
+                explanation: "The spread is the difference between the BID (what dealers pay to buy) and ASK (what dealers charge to sell). This is how market makers profit.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> You see AAPL at $185.00 x $185.02. That $0.02 spread is the market maker's edge. They buy at $185.00, sell at $185.02, pocket the difference millions of times a day. Tight spreads = liquid stocks. Wide spreads = illiquid, proceed with caution."
+            }
+        ];
+
+        // Quiz State
+        let selectedTopics = new Set();
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let correctAnswers = 0;
+        let incorrectAnswers = 0;
+        let answered = false;
+        let missedQuestions = [];
+
+        // DOM Elements
+        const setupScreen = document.getElementById('setupScreen');
+        const quizScreen = document.getElementById('quizScreen');
+        const resultsScreen = document.getElementById('resultsScreen');
+        const scoreBar = document.getElementById('scoreBar');
+        const topicGrid = document.getElementById('topicGrid');
+        const startBtn = document.getElementById('startBtn');
+        const selectAllBtn = document.getElementById('selectAllBtn');
+        const questionCount = document.getElementById('questionCount');
+        const nextBtn = document.getElementById('nextBtn');
+        const restartBtn = document.getElementById('restartBtn');
+
+        // Get unique topics
+        const topics = [...new Set(questionBank.map(q => q.topic))];
+
+        // Initialize topic buttons
+        function initTopics() {
+            topicGrid.innerHTML = '';
+            topics.forEach(topic => {
+                const count = questionBank.filter(q => q.topic === topic).length;
+                const btn = document.createElement('button');
+                btn.className = 'topic-btn';
+                btn.innerHTML = `
+                    <div class="topic-btn__name">${topic}</div>
+                    <div class="topic-btn__count">${count} questions</div>
+                `;
+                btn.addEventListener('click', () => toggleTopic(topic, btn));
+                topicGrid.appendChild(btn);
+            });
+        }
+
+        function toggleTopic(topic, btn) {
+            if (selectedTopics.has(topic)) {
+                selectedTopics.delete(topic);
+                btn.classList.remove('selected');
+            } else {
+                selectedTopics.add(topic);
+                btn.classList.add('selected');
+            }
+            updateQuestionCount();
+        }
+
+        function updateQuestionCount() {
+            const count = questionBank.filter(q => selectedTopics.has(q.topic)).length;
+            questionCount.textContent = count > 0
+                ? `${count} questions selected`
+                : 'Select at least one topic to start';
+            startBtn.disabled = count === 0;
+        }
+
+        selectAllBtn.addEventListener('click', () => {
+            const allSelected = selectedTopics.size === topics.length;
+            document.querySelectorAll('.topic-btn').forEach((btn, i) => {
+                if (allSelected) {
+                    selectedTopics.delete(topics[i]);
+                    btn.classList.remove('selected');
+                } else {
+                    selectedTopics.add(topics[i]);
+                    btn.classList.add('selected');
+                }
+            });
+            selectAllBtn.querySelector('.topic-btn__name').textContent = allSelected ? 'Select All Topics' : 'Deselect All';
+            updateQuestionCount();
+        });
+
+        // Start Quiz
+        startBtn.addEventListener('click', startQuiz);
+
+        function startQuiz() {
+            // Filter and shuffle questions
+            currentQuestions = questionBank
+                .filter(q => selectedTopics.has(q.topic))
+                .sort(() => Math.random() - 0.5);
+
+            currentIndex = 0;
+            correctAnswers = 0;
+            incorrectAnswers = 0;
+            missedQuestions = [];
+
+            setupScreen.style.display = 'none';
+            quizScreen.style.display = 'block';
+            scoreBar.style.display = 'block';
+
+            document.getElementById('totalQ').textContent = currentQuestions.length;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = currentQuestions[currentIndex];
+            answered = false;
+            nextBtn.disabled = true;
+
+            document.getElementById('questionTopic').textContent = q.topic.toUpperCase();
+            document.getElementById('questionNumber').textContent = `Question ${currentIndex + 1}`;
+            document.getElementById('questionText').textContent = q.question;
+            document.getElementById('currentQ').textContent = currentIndex + 1;
+
+            const answersList = document.getElementById('answersList');
+            answersList.innerHTML = '';
+
+            const letters = ['A', 'B', 'C', 'D'];
+            q.answers.forEach((answer, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.innerHTML = `<span class="answer-letter">${letters[i]}.</span><span>${answer}</span>`;
+                btn.addEventListener('click', () => selectAnswer(i));
+                answersList.appendChild(btn);
+            });
+
+            document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
+            updateProgress();
+        }
+
+        function selectAnswer(index) {
+            if (answered) return;
+            answered = true;
+
+            const q = currentQuestions[currentIndex];
+            const isCorrect = index === q.correct;
+            const buttons = document.querySelectorAll('.answer-btn');
+
+            buttons.forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === q.correct) {
+                    btn.classList.add(i === index ? 'correct' : 'was-correct');
+                } else if (i === index) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            if (isCorrect) {
+                correctAnswers++;
+            } else {
+                incorrectAnswers++;
+                missedQuestions.push({
+                    question: q.question,
+                    yourAnswer: q.answers[index],
+                    correctAnswer: q.answers[q.correct]
+                });
+            }
+
+            // Show feedback
+            const feedback = document.getElementById('feedback');
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            document.getElementById('feedbackTitle').textContent = isCorrect ? 'Correct!' : 'Incorrect';
+            document.getElementById('feedbackExplanation').innerHTML = q.explanation;
+
+            nextBtn.disabled = false;
+            nextBtn.textContent = currentIndex < currentQuestions.length - 1 ? 'Next Question' : 'See Results';
+
+            updateScore();
+        }
+
+        function updateProgress() {
+            const progress = ((currentIndex) / currentQuestions.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+        }
+
+        function updateScore() {
+            document.getElementById('correctCount').textContent = correctAnswers;
+            document.getElementById('incorrectCount').textContent = incorrectAnswers;
+            const total = correctAnswers + incorrectAnswers;
+            const percent = total > 0 ? Math.round((correctAnswers / total) * 100) : 0;
+            document.getElementById('percentScore').textContent = `${percent}%`;
+        }
+
+        // Next Question
+        nextBtn.addEventListener('click', () => {
+            currentIndex++;
+            if (currentIndex < currentQuestions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        function showResults() {
+            quizScreen.style.display = 'none';
+            scoreBar.style.display = 'none';
+            resultsScreen.style.display = 'block';
+
+            const total = correctAnswers + incorrectAnswers;
+            const percent = Math.round((correctAnswers / total) * 100);
+
+            const scoreEl = document.getElementById('finalScore');
+            scoreEl.textContent = `${percent}%`;
+            scoreEl.className = 'results-score ' + (percent >= 70 ? 'passing' : 'failing');
+
+            document.getElementById('finalCorrect').textContent = correctAnswers;
+            document.getElementById('finalIncorrect').textContent = incorrectAnswers;
+
+            let message = '';
+            if (percent >= 90) {
+                message = "Excellent! You're ready for the exam. Keep reviewing the few you missed.";
+            } else if (percent >= 70) {
+                message = "You're at passing level (70%). Review your missed questions and keep drilling.";
+            } else if (percent >= 50) {
+                message = "Getting there! Focus on the topics where you missed questions.";
+            } else {
+                message = "More study needed. Review the cramming page and try again.";
+            }
+            document.getElementById('resultsMessage').textContent = message;
+
+            // Show missed questions
+            const missedSection = document.getElementById('missedSection');
+            const missedList = document.getElementById('missedList');
+
+            if (missedQuestions.length > 0) {
+                missedSection.style.display = 'block';
+                missedList.innerHTML = missedQuestions.map(m => `
+                    <div class="missed-card">
+                        <div class="missed-card__question">${m.question}</div>
+                        <div class="missed-card__your-answer">Your answer: ${m.yourAnswer}</div>
+                        <div class="missed-card__correct-answer">Correct: ${m.correctAnswer}</div>
+                    </div>
+                `).join('');
+            } else {
+                missedSection.style.display = 'none';
+            }
+        }
+
+        // Restart
+        restartBtn.addEventListener('click', () => {
+            resultsScreen.style.display = 'none';
+            setupScreen.style.display = 'block';
+        });
+
+        // Initialize
+        initTopics();
+    </script>
+</body>
+</html>

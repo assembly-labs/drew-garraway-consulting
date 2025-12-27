@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="SIE Exam Cramming - High-yield drill page for the Securities Industry Essentials exam">
+
+    <title>SIE Cramming | Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/css/sie-chapter.css">
+    <link rel="stylesheet" href="../../assets/css/sie-navigation.css">
+
+    <style>
+        /* Cramming Page Specific Styles */
+
+        .cram-header {
+            background: linear-gradient(135deg, var(--fh-navy) 0%, #003d82 100%);
+            color: var(--fh-white);
+            padding: var(--fh-space-3xl) 0;
+            text-align: center;
+        }
+
+        .cram-header h1 {
+            color: var(--fh-white);
+            margin-bottom: var(--fh-space-sm);
+        }
+
+        .cram-header__subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: var(--fh-space-lg);
+            color: var(--fh-white);
+        }
+
+        .cram-header__countdown {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: var(--fh-space-sm) var(--fh-space-lg);
+            border-radius: 24px;
+            font-family: var(--fh-font-mono);
+            font-size: 0.875rem;
+        }
+
+        .nav {
+            margin-top: var(--fh-space-xl);
+            display: flex;
+            justify-content: center;
+            gap: var(--fh-space-lg);
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            color: var(--fh-white);
+        }
+
+        /* Table of Contents */
+        .cram-toc {
+            background: var(--fh-white);
+            border: 2px solid var(--fh-navy);
+            border-radius: 8px;
+            padding: var(--fh-space-xl);
+            margin: var(--fh-space-2xl) 0;
+        }
+
+        .cram-toc__title {
+            font-family: var(--fh-font-mono);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--fh-navy);
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        .cram-toc__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--fh-space-md);
+        }
+
+        .cram-toc__link {
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-sm);
+            padding: var(--fh-space-sm) var(--fh-space-md);
+            background: var(--fh-gray-100);
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--fh-gray-700);
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .cram-toc__link:hover {
+            background: var(--fh-navy);
+            color: var(--fh-white);
+        }
+
+        .cram-toc__link:hover .cram-toc__number {
+            background: var(--fh-white);
+            color: var(--fh-navy);
+        }
+
+        .cram-toc__number {
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--fh-sage);
+            color: var(--fh-white);
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        /* Drill Block Styles */
+        .drill-block {
+            margin: var(--fh-space-3xl) 0;
+            padding: var(--fh-space-2xl) 0;
+            border-top: 3px solid var(--fh-navy);
+        }
+
+        .drill-block__header {
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-md);
+            margin-bottom: var(--fh-space-xl);
+        }
+
+        .drill-block__number {
+            font-family: var(--fh-font-mono);
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--fh-navy);
+            color: var(--fh-white);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .drill-block__title {
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+
+        .drill-block__intro {
+            font-size: 1.125rem;
+            color: var(--fh-gray-700);
+            margin-bottom: var(--fh-space-xl);
+            padding-bottom: var(--fh-space-lg);
+            border-bottom: 1px solid var(--fh-gray-200);
+        }
+
+        /* Memory Arsenal */
+        .memory-arsenal {
+            background: linear-gradient(135deg, var(--fh-gold) 0%, #C4A06B 100%);
+            border-radius: 8px;
+            padding: var(--fh-space-xl);
+            margin: var(--fh-space-2xl) 0;
+            color: var(--fh-white);
+        }
+
+        .memory-arsenal__label {
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--fh-space-md);
+            opacity: 0.9;
+        }
+
+        .memory-arsenal__title {
+            font-size: 1.75rem;
+            color: var(--fh-white);
+            margin-bottom: var(--fh-space-lg);
+            border: none;
+            padding: 0;
+        }
+
+        .memory-arsenal__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--fh-space-lg);
+        }
+
+        .memory-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            padding: var(--fh-space-lg);
+            backdrop-filter: blur(8px);
+        }
+
+        .memory-card__title {
+            font-family: var(--fh-font-mono);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--fh-space-sm);
+            color: var(--fh-white);
+        }
+
+        .memory-card__content {
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .memory-card__note {
+            font-size: 0.875rem;
+            margin-top: var(--fh-space-sm);
+            opacity: 0.85;
+        }
+
+        /* Q&A Reveal Cards */
+        .qa-grid {
+            display: grid;
+            gap: var(--fh-space-md);
+            margin: var(--fh-space-xl) 0;
+        }
+
+        .qa-card {
+            background: var(--fh-white);
+            border: 1px solid var(--fh-gray-200);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .qa-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .qa-question {
+            padding: var(--fh-space-lg);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--fh-space-md);
+            font-weight: 500;
+            color: var(--fh-gray-900);
+            user-select: none;
+        }
+
+        .qa-question:hover {
+            background: var(--fh-gray-100);
+        }
+
+        .qa-toggle {
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: var(--fh-space-xs) var(--fh-space-sm);
+            background: var(--fh-sage);
+            color: var(--fh-white);
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: background 0.2s ease;
+        }
+
+        .qa-card.revealed .qa-toggle {
+            background: var(--fh-gray-400);
+        }
+
+        .qa-answer {
+            display: none;
+            padding: var(--fh-space-lg);
+            background: var(--fh-gray-100);
+            border-top: 1px solid var(--fh-gray-200);
+            color: var(--fh-gray-700);
+            line-height: 1.7;
+        }
+
+        .qa-card.revealed .qa-answer {
+            display: block;
+        }
+
+        .qa-answer strong {
+            color: var(--fh-navy);
+        }
+
+        /* Scenario Cards */
+        .scenario-card {
+            background: var(--fh-white);
+            border: 2px solid var(--fh-burgundy);
+            border-radius: 6px;
+            padding: var(--fh-space-lg);
+            margin: var(--fh-space-md) 0;
+        }
+
+        .scenario-card__label {
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--fh-burgundy);
+            margin-bottom: var(--fh-space-sm);
+        }
+
+        .scenario-card__situation {
+            font-style: italic;
+            color: var(--fh-gray-700);
+            margin-bottom: var(--fh-space-md);
+            padding-bottom: var(--fh-space-md);
+            border-bottom: 1px dashed var(--fh-gray-300);
+        }
+
+        .scenario-card__answer {
+            display: none;
+            padding-top: var(--fh-space-sm);
+        }
+
+        .scenario-card.revealed .scenario-card__answer {
+            display: block;
+        }
+
+        .scenario-card__violation {
+            font-weight: 700;
+            color: var(--fh-burgundy);
+            font-size: 1.125rem;
+        }
+
+        .scenario-card__explain {
+            color: var(--fh-gray-600);
+            margin-top: var(--fh-space-xs);
+        }
+
+        .scenario-reveal-btn {
+            background: var(--fh-burgundy);
+            color: var(--fh-white);
+            border: none;
+            padding: var(--fh-space-sm) var(--fh-space-lg);
+            border-radius: 4px;
+            font-family: var(--fh-font-body);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .scenario-reveal-btn:hover {
+            background: #5a2130;
+        }
+
+        .scenario-card.revealed .scenario-reveal-btn {
+            display: none;
+        }
+
+        /* Yield Ladder Visual */
+        .yield-ladder {
+            background: var(--fh-white);
+            border: 2px solid var(--fh-navy);
+            border-radius: 8px;
+            padding: var(--fh-space-xl);
+            margin: var(--fh-space-xl) 0;
+        }
+
+        .yield-ladder__title {
+            font-family: var(--fh-font-mono);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--fh-navy);
+            text-align: center;
+            margin-bottom: var(--fh-space-xl);
+        }
+
+        .yield-ladder__container {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: var(--fh-space-lg);
+            align-items: center;
+        }
+
+        .yield-ladder__column {
+            display: flex;
+            flex-direction: column;
+            gap: var(--fh-space-sm);
+        }
+
+        .yield-ladder__column--premium .yield-rung {
+            background: linear-gradient(90deg, var(--fh-sage) 0%, transparent 100%);
+        }
+
+        .yield-ladder__column--discount .yield-rung {
+            background: linear-gradient(270deg, var(--fh-burgundy) 0%, transparent 100%);
+        }
+
+        .yield-rung {
+            padding: var(--fh-space-sm) var(--fh-space-md);
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .yield-ladder__center {
+            text-align: center;
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            color: var(--fh-gray-500);
+        }
+
+        .yield-ladder__label {
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--fh-space-sm);
+            text-align: center;
+        }
+
+        .yield-ladder__column--premium .yield-ladder__label {
+            color: var(--fh-sage);
+        }
+
+        .yield-ladder__column--discount .yield-ladder__label {
+            color: var(--fh-burgundy);
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: var(--fh-gray-900);
+            color: var(--fh-white);
+            border-radius: 6px;
+            padding: var(--fh-space-lg);
+            margin: var(--fh-space-md) 0;
+            font-family: var(--fh-font-mono);
+        }
+
+        .formula-box__label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--fh-sage);
+            margin-bottom: var(--fh-space-sm);
+        }
+
+        .formula-box__equation {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        /* Comparison Tables */
+        .cram-table-wrapper {
+            overflow-x: auto;
+            margin: var(--fh-space-lg) 0;
+            border-radius: 6px;
+            border: 1px solid var(--fh-gray-200);
+        }
+
+        .cram-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--fh-white);
+            min-width: 500px;
+        }
+
+        .cram-table th {
+            background: var(--fh-navy);
+            color: var(--fh-white);
+            padding: var(--fh-space-md);
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .cram-table td {
+            padding: var(--fh-space-md);
+            border-bottom: 1px solid var(--fh-gray-200);
+            font-size: 0.9375rem;
+        }
+
+        .cram-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .cram-table tr:nth-child(even) td {
+            background: var(--fh-gray-100);
+        }
+
+        /* Formulas Section */
+        .formulas-section {
+            margin: var(--fh-space-2xl) 0;
+        }
+
+        .formulas-section h3 {
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        /* Main content bottom spacing */
+        main.container {
+            padding-bottom: var(--fh-space-3xl);
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            margin: var(--fh-space-lg) 0;
+            padding: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--fh-space-md);
+            padding: var(--fh-space-md) 0;
+            border-bottom: 1px solid var(--fh-gray-200);
+        }
+
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .checklist__checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--fh-sage);
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checklist__checkbox:hover {
+            background: rgba(124, 152, 133, 0.1);
+        }
+
+        .checklist__checkbox.checked {
+            background: var(--fh-sage);
+            position: relative;
+        }
+
+        .checklist__checkbox.checked::after {
+            content: "\2713";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--fh-white);
+            font-size: 0.875rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        /* FINRA Alert */
+        .finra-alert {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            border-radius: 8px;
+            padding: var(--fh-space-xl);
+            margin: var(--fh-space-2xl) 0;
+            color: var(--fh-white);
+            text-align: center;
+        }
+
+        .finra-alert__title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--fh-space-sm);
+            color: var(--fh-white);
+        }
+
+        .finra-alert__text {
+            font-size: 1.125rem;
+            margin-bottom: var(--fh-space-lg);
+            opacity: 0.95;
+        }
+
+        .finra-alert__link {
+            display: inline-block;
+            background: var(--fh-white);
+            color: #059669;
+            padding: var(--fh-space-sm) var(--fh-space-xl);
+            border-radius: 24px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .finra-alert__link:hover {
+            transform: scale(1.05);
+        }
+
+        /* Trap Alert */
+        .trap-alert {
+            background: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: var(--fh-space-md) var(--fh-space-lg);
+            margin: var(--fh-space-lg) 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .trap-alert__title {
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #B45309;
+            margin-bottom: var(--fh-space-xs);
+        }
+
+        .trap-alert__text {
+            color: #92400E;
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .yield-ladder__container {
+                grid-template-columns: 1fr;
+                gap: var(--fh-space-xl);
+            }
+
+            .yield-ladder__center {
+                order: -1;
+            }
+
+            .memory-arsenal__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cram-toc__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav {
+                gap: var(--fh-space-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="cram-header">
+        <div class="container">
+            <h1>SIE Cramming</h1>
+            <p class="cram-header__subtitle">High-Yield Drill for the Securities Industry Essentials Exam</p>
+            <span class="cram-header__countdown">Exam: January 5, 2026</span>
+
+            <nav class="nav">
+                <a href="sie-study-materials.html">Study Materials</a>
+                <a href="sie-flashcards.html">Flashcards</a>
+                <a href="sie-quiz.html">Quiz</a>
+                <a href="#" class="active">Cramming</a>
+                <a href="sie-audio-library.html">Audio</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Quick Nav -->
+        <nav class="cram-toc">
+            <div class="cram-toc__title">Jump to Drill Block</div>
+            <div class="cram-toc__grid">
+                <a href="#memory-arsenal" class="cram-toc__link">
+                    <span class="cram-toc__number">0</span>
+                    Memory Arsenal
+                </a>
+                <a href="#options" class="cram-toc__link">
+                    <span class="cram-toc__number">1</span>
+                    Options Fundamentals
+                </a>
+                <a href="#bonds" class="cram-toc__link">
+                    <span class="cram-toc__number">2</span>
+                    Bonds & Yields
+                </a>
+                <a href="#prohibited" class="cram-toc__link">
+                    <span class="cram-toc__number">3</span>
+                    Prohibited Activities
+                </a>
+                <a href="#orders" class="cram-toc__link">
+                    <span class="cram-toc__number">4</span>
+                    Order Types
+                </a>
+                <a href="#accounts" class="cram-toc__link">
+                    <span class="cram-toc__number">5</span>
+                    Customer Accounts
+                </a>
+                <a href="#regulatory" class="cram-toc__link">
+                    <span class="cram-toc__number">6</span>
+                    Regulatory Speed Round
+                </a>
+                <a href="#exam-day" class="cram-toc__link">
+                    <span class="cram-toc__number">7</span>
+                    Exam Day Checklist
+                </a>
+            </div>
+        </nav>
+
+        <!-- ========================================
+             SECTION 0: MEMORY ARSENAL
+             ======================================== -->
+        <section id="memory-arsenal" class="memory-arsenal">
+            <div class="memory-arsenal__label">Review This in the Parking Lot</div>
+            <h2 class="memory-arsenal__title">The Memory Arsenal</h2>
+
+            <div class="memory-arsenal__grid">
+                <div class="memory-card">
+                    <div class="memory-card__title">Options Direction</div>
+                    <div class="memory-card__content">"Call UP, Put DOWN"</div>
+                    <div class="memory-card__note">Calls profit when prices go up. Puts profit when prices go down.</div>
+                </div>
+
+                <div class="memory-card">
+                    <div class="memory-card__title">Order Placement</div>
+                    <div class="memory-card__content">"SLoBS & BLiSS"</div>
+                    <div class="memory-card__note">
+                        <strong>S</strong>ell <strong>L</strong>imit/<strong>B</strong>uy <strong>S</strong>top = Above market<br>
+                        <strong>B</strong>uy <strong>L</strong>imit/<strong>S</strong>ell <strong>S</strong>top = Below market
+                    </div>
+                </div>
+
+                <div class="memory-card">
+                    <div class="memory-card__title">Bond Price/Yield</div>
+                    <div class="memory-card__content">Price & Yield = Inverse</div>
+                    <div class="memory-card__note">When interest rates rise, bond prices fall. Always.</div>
+                </div>
+
+                <div class="memory-card">
+                    <div class="memory-card__title">The Key Acts</div>
+                    <div class="memory-card__content">'33 = Primary, '34 = Secondary</div>
+                    <div class="memory-card__note">1933 Act = New issues (IPOs). 1934 Act = Trading (SEC created).</div>
+                </div>
+
+                <div class="memory-card">
+                    <div class="memory-card__title">Settlement</div>
+                    <div class="memory-card__content">T+1 for Everything</div>
+                    <div class="memory-card__note">Stocks, bonds, options, munis = Trade date + 1 business day.</div>
+                </div>
+
+                <div class="memory-card">
+                    <div class="memory-card__title">Reg T Payment</div>
+                    <div class="memory-card__content">4 Business Days</div>
+                    <div class="memory-card__note">Customer must pay within 4 business days (T+4). Initial margin = 50%.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulas -->
+        <div class="formulas-section">
+            <h3>The Only 3 Formulas You Need</h3>
+
+            <div class="formula-box">
+                <div class="formula-box__label">Sales Charge %</div>
+                <div class="formula-box__equation">(POP - NAV) / POP</div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-box__label">Current Yield (Bonds)</div>
+                <div class="formula-box__equation">Annual Interest / Current Market Price</div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-box__label">Dividend Yield (Stocks)</div>
+                <div class="formula-box__equation">Annual Dividend / Stock Price</div>
+            </div>
+        </div>
+
+        <!-- ========================================
+             SECTION 1: OPTIONS DRILL
+             ======================================== -->
+        <section id="options" class="drill-block">
+            <div class="drill-block__header">
+                <span class="drill-block__number">1</span>
+                <h2 class="drill-block__title">Options Fundamentals</h2>
+            </div>
+
+            <p class="drill-block__intro">
+                Options are the <strong>#1 most confusing topic</strong> on the SIE. The good news: the exam tests concepts, not calculations. Master the basics below and you'll handle any options question.
+            </p>
+
+            <div class="exam-focus">
+                <div class="exam-focus__label">High-Yield Concept</div>
+                <p><strong>Buyers get RIGHTS. Sellers (writers) take OBLIGATIONS.</strong> This single concept drives most options questions.</p>
+            </div>
+
+            <h3>Core Concepts - Click to Reveal Answers</h3>
+
+            <div class="qa-grid">
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What does a CALL option give the buyer?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>The RIGHT to BUY</strong> the underlying asset at the strike price before expiration. Remember: "Call UP" - you call the stock UP to you.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What does a PUT option give the buyer?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>The RIGHT to SELL</strong> the underlying asset at the strike price before expiration. Remember: "Put DOWN" - you put the stock down (away from you).
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is the obligation of a call WRITER (seller)?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>The OBLIGATION to SELL</strong> the underlying asset at the strike price if assigned. The writer received the premium upfront and now must deliver if the buyer exercises.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is the obligation of a put WRITER (seller)?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>The OBLIGATION to BUY</strong> the underlying asset at the strike price if assigned. The writer must purchase shares even if the market price is much lower.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        When is a CALL option "in the money"?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        When the <strong>market price is ABOVE the strike price</strong>. The buyer could exercise and immediately buy below market value. Example: Stock at $55, strike at $50 = $5 in the money.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        When is a PUT option "in the money"?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        When the <strong>market price is BELOW the strike price</strong>. The buyer could exercise and sell above market value. Example: Stock at $45, strike at $50 = $5 in the money.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is a "covered" call?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        When the call writer <strong>owns the underlying shares</strong>. If assigned, they can deliver shares they already own. This limits risk vs. a "naked" (uncovered) call where they'd need to buy shares at market price.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is the maximum loss for an option BUYER?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>The premium paid.</strong> Buyers can only lose what they paid for the option - nothing more. This is true for both calls and puts.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What organization issues and guarantees all listed options?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>The Options Clearing Corporation (OCC).</strong> The OCC standardizes contracts and guarantees performance, eliminating counterparty risk.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What document must be provided before or at account approval for options?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>The Options Disclosure Document (ODD)</strong>, also called "Characteristics and Risks of Standardized Options." Must be provided AT or BEFORE account approval.
+                    </div>
+                </div>
+            </div>
+
+            <div class="trap-alert">
+                <div class="trap-alert__title">Trap Alert</div>
+                <p class="trap-alert__text">Questions often try to confuse buyers and writers. Remember: If the question says "long" = buyer (has rights). If it says "short" or "writer" = seller (has obligations).</p>
+            </div>
+        </section>
+
+        <!-- ========================================
+             SECTION 2: BONDS & YIELDS
+             ======================================== -->
+        <section id="bonds" class="drill-block">
+            <div class="drill-block__header">
+                <span class="drill-block__number">2</span>
+                <h2 class="drill-block__title">Bonds & Yields</h2>
+            </div>
+
+            <p class="drill-block__intro">
+                The inverse relationship between bond prices and yields appears on <strong>virtually every exam</strong>. Master the yield ladder and you're set.
+            </p>
+
+            <div class="exam-focus">
+                <div class="exam-focus__label">The Golden Rule</div>
+                <p><strong>When interest rates RISE, bond prices FALL.</strong> When rates fall, prices rise. They move in opposite directions. Always.</p>
+            </div>
+
+            <!-- Yield Ladder Visual -->
+            <div class="yield-ladder">
+                <div class="yield-ladder__title">The Yield Ladder</div>
+                <div class="yield-ladder__container">
+                    <div class="yield-ladder__column yield-ladder__column--premium">
+                        <div class="yield-ladder__label">Premium Bond (Above Par)</div>
+                        <div class="yield-rung"><strong>LOWEST:</strong> YTC</div>
+                        <div class="yield-rung">YTM</div>
+                        <div class="yield-rung">Current Yield</div>
+                        <div class="yield-rung"><strong>HIGHEST:</strong> Nominal (Coupon)</div>
+                    </div>
+                    <div class="yield-ladder__center">
+                        <div style="font-size: 2rem; margin-bottom: var(--fh-space-sm);">&#8596;</div>
+                        <div>Order<br>Reverses</div>
+                    </div>
+                    <div class="yield-ladder__column yield-ladder__column--discount">
+                        <div class="yield-ladder__label">Discount Bond (Below Par)</div>
+                        <div class="yield-rung"><strong>HIGHEST:</strong> YTC</div>
+                        <div class="yield-rung">YTM</div>
+                        <div class="yield-rung">Current Yield</div>
+                        <div class="yield-rung"><strong>LOWEST:</strong> Nominal (Coupon)</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Bond Concepts - Click to Reveal</h3>
+
+            <div class="qa-grid">
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is nominal yield (coupon rate)?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>The fixed interest rate stated on the bond.</strong> It never changes after issuance. A 5% coupon bond always pays 5% of par ($50 per year on a $1,000 bond).
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is current yield?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Annual Interest / Current Market Price.</strong> If a $1,000 par bond with 5% coupon trades at $900: Current Yield = $50 / $900 = 5.56%. It rises when price falls.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is Yield to Maturity (YTM)?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Total return if held to maturity</strong>, including coupon payments AND the gain/loss from price to par. Most comprehensive yield measure. Accounts for time value of money.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is Yield to Call (YTC)?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Yield if the bond is called before maturity.</strong> For premium bonds (price > par), YTC is the LOWEST yield because you lose the premium sooner. Issuers call bonds when rates fall.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        A bond trading at 102 is at a _____? What about 98?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>102 = Premium</strong> (102% of par = $1,020). <strong>98 = Discount</strong> (98% of par = $980). At 100 = "Par" ($1,000).
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is interest rate risk?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>The risk that rising rates will decrease bond prices.</strong> Longer maturities have MORE interest rate risk. A 30-year bond will drop more than a 2-year bond when rates rise.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is reinvestment risk?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>The risk that falling rates will reduce income from reinvested coupons.</strong> When rates drop, you reinvest interest payments at lower rates. Callable bonds have HIGH reinvestment risk.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        Zero-coupon bonds have what kind of risk?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>HIGH interest rate risk, ZERO reinvestment risk.</strong> No coupons to reinvest (so no reinvestment risk), but the price is very sensitive to rate changes.
+                    </div>
+                </div>
+            </div>
+
+            <div class="trap-alert">
+                <div class="trap-alert__title">Trap Alert</div>
+                <p class="trap-alert__text">Don't confuse interest rate risk with reinvestment risk - they're opposites! Rising rates = bad for prices (interest rate risk). Falling rates = bad for reinvestment (reinvestment risk).</p>
+            </div>
+        </section>
+
+        <!-- ========================================
+             SECTION 3: PROHIBITED ACTIVITIES
+             ======================================== -->
+        <section id="prohibited" class="drill-block">
+            <div class="drill-block__header">
+                <span class="drill-block__number">3</span>
+                <h2 class="drill-block__title">Prohibited Activities</h2>
+            </div>
+
+            <p class="drill-block__intro">
+                These questions appear as <strong>scenarios</strong>. You'll read a situation and identify the violation. Practice pattern recognition below.
+            </p>
+
+            <div class="critical-concept">
+                <div class="critical-concept__label">Know These Violations</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Violation</th>
+                            <th>Definition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Front Running</strong></td>
+                            <td>Trading ahead of a large customer order to profit from the price movement</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Churning</strong></td>
+                            <td>Excessive trading to generate commissions (requires control + excessive activity + intent)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pump and Dump</strong></td>
+                            <td>Artificially inflating prices through false statements, then selling</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Marking the Close</strong></td>
+                            <td>Placing trades at end of day to manipulate closing prices</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Insider Trading</strong></td>
+                            <td>Trading on material non-public information (MNPI)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Backing Away</strong></td>
+                            <td>Market maker refusing to honor their quoted bid/ask</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Painting the Tape</strong></td>
+                            <td>Creating false appearance of trading activity</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Matched Orders</strong></td>
+                            <td>Coordinated buy/sell orders to create false volume</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Name That Violation - Scenario Drill</h3>
+
+            <div class="scenario-card">
+                <div class="scenario-card__label">Scenario 1</div>
+                <div class="scenario-card__situation">
+                    A broker receives a large order from a pension fund to buy 50,000 shares of XYZ stock. Before entering the order, the broker buys 1,000 shares for his personal account.
+                </div>
+                <button class="scenario-reveal-btn" onclick="this.parentElement.classList.add('revealed')">What's the Violation?</button>
+                <div class="scenario-card__answer">
+                    <div class="scenario-card__violation">Front Running</div>
+                    <div class="scenario-card__explain">The broker traded ahead of a customer order to profit from the anticipated price increase when the large order hits the market.</div>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-card__label">Scenario 2</div>
+                <div class="scenario-card__situation">
+                    A registered rep with discretionary authority over a retired widow's account makes 47 trades in one month, generating $12,000 in commissions. The account value is $80,000.
+                </div>
+                <button class="scenario-reveal-btn" onclick="this.parentElement.classList.add('revealed')">What's the Violation?</button>
+                <div class="scenario-card__answer">
+                    <div class="scenario-card__violation">Churning</div>
+                    <div class="scenario-card__explain">Excessive trading (47 trades in a month for a retiree) + control (discretionary authority) + commissions as apparent motivation = churning.</div>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-card__label">Scenario 3</div>
+                <div class="scenario-card__situation">
+                    A group of traders posts false positive news about a small company on social media, buys shares as the price rises, then sells everything when retail investors pile in.
+                </div>
+                <button class="scenario-reveal-btn" onclick="this.parentElement.classList.add('revealed')">What's the Violation?</button>
+                <div class="scenario-card__answer">
+                    <div class="scenario-card__violation">Pump and Dump</div>
+                    <div class="scenario-card__explain">Artificially inflating prices through false/misleading statements, then selling into the inflated price. Classic market manipulation.</div>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-card__label">Scenario 4</div>
+                <div class="scenario-card__situation">
+                    An executive learns her company will announce a major acquisition tomorrow. She tells her husband to buy shares that evening. He does.
+                </div>
+                <button class="scenario-reveal-btn" onclick="this.parentElement.classList.add('revealed')">What's the Violation?</button>
+                <div class="scenario-card__answer">
+                    <div class="scenario-card__violation">Insider Trading (both parties)</div>
+                    <div class="scenario-card__explain">She tipped material non-public information (MNPI). He traded on it. Both are liable. The acquisition news is material and non-public.</div>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-card__label">Scenario 5</div>
+                <div class="scenario-card__situation">
+                    A market maker displays a quote of $25.00 bid for ABC stock. When a customer tries to sell at $25.00, the market maker says "that quote is stale" and refuses to buy.
+                </div>
+                <button class="scenario-reveal-btn" onclick="this.parentElement.classList.add('revealed')">What's the Violation?</button>
+                <div class="scenario-card__answer">
+                    <div class="scenario-card__violation">Backing Away</div>
+                    <div class="scenario-card__explain">Market makers must honor their published quotes. Refusing to execute at the quoted price is "backing away" - a violation of market maker obligations.</div>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-card__label">Scenario 6</div>
+                <div class="scenario-card__situation">
+                    A trader places a series of trades at 3:59 PM to push a stock's closing price higher, then closes the positions the next morning.
+                </div>
+                <button class="scenario-reveal-btn" onclick="this.parentElement.classList.add('revealed')">What's the Violation?</button>
+                <div class="scenario-card__answer">
+                    <div class="scenario-card__violation">Marking the Close</div>
+                    <div class="scenario-card__explain">Deliberately placing trades near market close to manipulate the closing price. Often done to affect portfolio valuations or trigger options exercises.</div>
+                </div>
+            </div>
+
+            <h3>AML Quick Hits</h3>
+
+            <div class="qa-grid">
+                <div class="qa-card">
+                    <div class="qa-question">
+                        When must a Suspicious Activity Report (SAR) be filed?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        Within <strong>30 calendar days</strong> of detecting suspicious activity involving $5,000 or more. Do NOT tell the customer about the SAR filing.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What triggers a Currency Transaction Report (CTR)?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Cash transactions over $10,000</strong> in a single day. Filed with FinCEN. Breaking transactions into smaller amounts to avoid reporting = "structuring" (illegal).
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is the OFAC SDN list?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Specially Designated Nationals</strong> list maintained by Treasury. Firms must screen customers against this list. Cannot do business with anyone on it.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             SECTION 4: ORDER TYPES
+             ======================================== -->
+        <section id="orders" class="drill-block">
+            <div class="drill-block__header">
+                <span class="drill-block__number">4</span>
+                <h2 class="drill-block__title">Order Types & Trading</h2>
+            </div>
+
+            <p class="drill-block__intro">
+                Order type questions require pure memorization. Master <strong>SLoBS and BLiSS</strong> and you'll nail every one.
+            </p>
+
+            <div class="test-tip">
+                <p><strong>SLoBS & BLiSS Memory Trick:</strong><br>
+                <strong>S</strong>ell <strong>L</strong>imit or <strong>B</strong>uy <strong>S</strong>top = placed ABOVE current market<br>
+                <strong>B</strong>uy <strong>L</strong>imit or <strong>S</strong>ell <strong>S</strong>top = placed BELOW current market</p>
+            </div>
+
+            <div class="critical-concept">
+                <div class="critical-concept__label">Order Type Comparison</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order Type</th>
+                            <th>Purpose</th>
+                            <th>Placed</th>
+                            <th>Guarantees</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Market Order</strong></td>
+                            <td>Execute immediately</td>
+                            <td>N/A</td>
+                            <td>Execution (not price)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Limit Order</strong></td>
+                            <td>Get specific price or better</td>
+                            <td>Buy below / Sell above</td>
+                            <td>Price (not execution)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stop Order</strong></td>
+                            <td>Becomes market when triggered</td>
+                            <td>Buy above / Sell below</td>
+                            <td>Neither</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stop-Limit</strong></td>
+                            <td>Becomes limit when triggered</td>
+                            <td>Buy above / Sell below</td>
+                            <td>Price (if executed)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Order Concepts - Click to Reveal</h3>
+
+            <div class="qa-grid">
+                <div class="qa-card">
+                    <div class="qa-question">
+                        Stock is at $50. Where would you place a buy stop order?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>ABOVE $50</strong> (e.g., $55). Buy stops are placed above market. Think: "I want to buy if it breaks out higher." Uses: protect short positions, buy on breakouts.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        Stock is at $50. Where would you place a sell stop order?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>BELOW $50</strong> (e.g., $45). Sell stops are placed below market. Think: "I want to sell if it drops." Uses: protect long positions (stop-loss), sell on breakdowns.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What's the difference between a stop order and a stop-limit order?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        A <strong>stop order becomes a MARKET order</strong> when triggered (guarantees execution). A <strong>stop-limit becomes a LIMIT order</strong> when triggered (guarantees price but may not execute in fast markets).
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What does GTC mean?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Good Till Canceled.</strong> The order stays active until executed or canceled. Contrast with "Day order" which expires at end of trading day if not filled.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What does AON (All or None) mean?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Execute the entire order or don't execute at all.</strong> No partial fills allowed. Similar: FOK (Fill or Kill) = AON but must execute immediately or cancel entirely.
+                    </div>
+                </div>
+            </div>
+
+            <h3>Settlement Timeframes</h3>
+
+            <div class="cram-table-wrapper">
+                <table class="cram-table">
+                    <thead>
+                        <tr>
+                            <th>Security Type</th>
+                            <th>Settlement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Stocks, Corporate Bonds, Munis</td>
+                            <td><strong>T+1</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Government Securities (T-Bills, T-Notes, T-Bonds)</td>
+                            <td><strong>T+1</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Options</td>
+                            <td><strong>T+1</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Regulation T (Customer Payment)</td>
+                            <td><strong>T+4</strong> (4 business days)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="trap-alert">
+                <div class="trap-alert__title">Trap Alert</div>
+                <p class="trap-alert__text">Don't confuse settlement (T+1) with Reg T payment deadline (T+4). Settlement is when the trade officially completes. Reg T is how long customers have to pay.</p>
+            </div>
+        </section>
+
+        <!-- ========================================
+             SECTION 5: CUSTOMER ACCOUNTS
+             ======================================== -->
+        <section id="accounts" class="drill-block">
+            <div class="drill-block__header">
+                <span class="drill-block__number">5</span>
+                <h2 class="drill-block__title">Customer Accounts</h2>
+            </div>
+
+            <p class="drill-block__intro">
+                Account types, registrations, and suitability rules generate multiple questions. Focus on UTMA/UGMA, margin mechanics, and retirement accounts.
+            </p>
+
+            <h3>Account Types - Click to Reveal</h3>
+
+            <div class="qa-grid">
+                <div class="qa-card">
+                    <div class="qa-question">
+                        Who owns the assets in a UTMA/UGMA account?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>The MINOR is the beneficial owner.</strong> The custodian manages the account but assets belong to the child. One minor, one custodian. Irrevocable gift - can't take it back.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        Can you trade on margin in a custodial (UTMA/UGMA) account?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>NO.</strong> No margin, no short selling, no uncovered options. Must be cash account with conservative investments suitable for a minor.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is "discretionary authority"?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Written authorization to make trades without prior approval</strong> for each trade. Rep can choose asset, amount, and buy/sell. Requires written power of attorney. Principal must approve discretionary accounts.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What makes an order "discretionary"?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        If the rep chooses <strong>ANY of: which security, how many shares, or buy vs. sell</strong>. Time and price are NOT discretionary - you can decide when/at what price without written authority.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is the initial margin requirement under Reg T?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>50%</strong>. To buy $10,000 of stock on margin, you deposit $5,000. The broker-dealer lends you the other $5,000 (the "debit balance").
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is the minimum maintenance margin for long positions?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>25%</strong> (set by FINRA, but most firms require higher). If equity falls below this, you get a maintenance call - must deposit more or positions are liquidated.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        Traditional IRA vs. Roth IRA - which has tax-deductible contributions?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Traditional IRA = tax-deductible contributions</strong> (taxed on withdrawal).<br>
+                        <strong>Roth IRA = after-tax contributions</strong> (tax-free withdrawal). "Pay now or pay later."
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        At what age do Required Minimum Distributions (RMDs) begin?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Age 73</strong> for Traditional IRAs and 401(k)s. Roth IRAs have NO RMDs during owner's lifetime - big advantage for estate planning.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is the penalty for early IRA withdrawals?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>10% penalty</strong> plus ordinary income tax if withdrawn before age 59½. Exceptions include: first home purchase ($10K max), disability, death, education expenses.
+                    </div>
+                </div>
+            </div>
+
+            <h3>Suitability Requirements</h3>
+
+            <div class="critical-concept">
+                <div class="critical-concept__label">The Three Suitability Obligations</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Obligation</th>
+                            <th>What It Means</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Reasonable Basis</strong></td>
+                            <td>Rep must understand the product before recommending it to anyone</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Customer-Specific</strong></td>
+                            <td>Recommendation must fit this specific customer's profile</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quantitative</strong></td>
+                            <td>Total number of transactions must be suitable (anti-churning)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-box">
+                <div class="info-box__title">Know Your Customer (KYC)</div>
+                <p>Before making recommendations, gather: investment objectives, risk tolerance, time horizon, liquidity needs, tax status, financial situation, other investments. This info drives suitability analysis.</p>
+            </div>
+        </section>
+
+        <!-- ========================================
+             SECTION 6: REGULATORY SPEED ROUND
+             ======================================== -->
+        <section id="regulatory" class="drill-block">
+            <div class="drill-block__header">
+                <span class="drill-block__number">6</span>
+                <h2 class="drill-block__title">Regulatory Speed Round</h2>
+            </div>
+
+            <p class="drill-block__intro">
+                Quick hits on the key acts, agencies, and registration requirements. These appear throughout the exam woven into other questions.
+            </p>
+
+            <h3>The Four Key Acts</h3>
+
+            <div class="cram-table-wrapper">
+                <table class="cram-table">
+                    <thead>
+                        <tr>
+                            <th>Act</th>
+                            <th>Year</th>
+                            <th>Key Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Securities Act</strong></td>
+                            <td>1933</td>
+                            <td><strong>Primary market</strong> - new issues, IPOs, registration, prospectus requirement. "Paper Act"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Securities Exchange Act</strong></td>
+                            <td>1934</td>
+                            <td><strong>Secondary market</strong> - trading, created SEC, regulates exchanges and broker-dealers. "People Act"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Investment Company Act</strong></td>
+                            <td>1940</td>
+                            <td>Regulates <strong>mutual funds</strong> - registration, structure, operations, disclosures</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Investment Advisers Act</strong></td>
+                            <td>1940</td>
+                            <td>Regulates <strong>investment advisers</strong> - registration, fiduciary duty, record-keeping</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="test-tip">
+                <p><strong>Memory trick:</strong> '33 = new securities (primary). '34 = existing securities (secondary). Both 1940 acts = "investments" (companies and advisers).</p>
+            </div>
+
+            <h3>Regulatory Entities</h3>
+
+            <div class="qa-grid">
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is the SEC?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Securities and Exchange Commission.</strong> Federal agency created by 1934 Act. Oversees securities markets, enforces federal securities laws, regulates SROs. Has civil (not criminal) enforcement authority.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is FINRA?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Financial Industry Regulatory Authority.</strong> Self-regulatory organization (SRO) for broker-dealers. Writes and enforces rules, administers licensing exams (like the SIE), operates dispute resolution.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is MSRB?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Municipal Securities Rulemaking Board.</strong> Writes rules for municipal securities dealers. Does NOT enforce - FINRA and SEC enforce MSRB rules. EMMA system provides muni disclosure.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is SIPC?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Securities Investor Protection Corporation.</strong> Protects customers if broker-dealer fails. Covers up to <strong>$500,000 total</strong> per customer (max $250,000 cash). Does NOT protect against market losses.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What does the Federal Reserve (FRB) regulate?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Credit/margin requirements</strong> through Regulations T, U, and X. Sets initial margin at 50%. Also: monetary policy, interest rates, bank regulation.
+                    </div>
+                </div>
+            </div>
+
+            <h3>Registration Quick Hits</h3>
+
+            <div class="qa-grid">
+                <div class="qa-card">
+                    <div class="qa-question">
+                        Who must register with FINRA?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Broker-dealers and their associated persons</strong> who sell securities or supervise those who do. Must pass qualification exams (SIE + top-off like Series 7).
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is Form U4?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Uniform Application for Securities Registration.</strong> Filed when joining a firm. Must disclose: criminal history, regulatory actions, customer complaints, bankruptcies, judgments. Update within 30 days of changes.
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="qa-question">
+                        What is Form U5?
+                        <span class="qa-toggle">REVEAL</span>
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Uniform Termination Notice.</strong> Filed when leaving a firm. Must be filed within 30 days of termination. Contains reason for departure and any disclosure events.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             SECTION 7: EXAM DAY CHECKLIST
+             ======================================== -->
+        <section id="exam-day" class="drill-block">
+            <div class="drill-block__header">
+                <span class="drill-block__number">7</span>
+                <h2 class="drill-block__title">Exam Day Checklist</h2>
+            </div>
+
+            <p class="drill-block__intro">
+                Final review items and test-taking strategies from actual test-takers.
+            </p>
+
+            <!-- FINRA Alert -->
+            <div class="finra-alert">
+                <div class="finra-alert__title">Take the FINRA Practice Exam</div>
+                <div class="finra-alert__text">Test-takers report seeing IDENTICAL questions from the free FINRA practice exam. Take it 1-2 days before your test.</div>
+                <a href="https://www.finra.org/registration-exams-ce/qualification-exams/securities-industry-essentials-exam" target="_blank" class="finra-alert__link">Go to FINRA Practice Exam</a>
+            </div>
+
+            <h3>Last-Look Review Items</h3>
+
+            <ul class="checklist">
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span><strong>"Call UP, Put DOWN"</strong> - Options direction mnemonic</span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span><strong>"SLoBS and BLiSS"</strong> - Order placement mnemonic</span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span><strong>Bond prices and yields move inversely</strong></span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span><strong>Yield ladder order</strong> - Premium: YTC < YTM < CY < Nominal</span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span><strong>Buyers = Rights / Writers = Obligations</strong></span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span><strong>'33 = Primary market / '34 = Secondary market</strong></span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span><strong>Settlement = T+1 / Reg T Payment = T+4</strong></span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span><strong>SIPC = $500K total, $250K cash max</strong></span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span><strong>Initial margin = 50% / Maintenance = 25%</strong></span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span><strong>UTMA/UGMA = No margin, no options, minor owns it</strong></span>
+                </li>
+            </ul>
+
+            <h3>Question Trap Patterns</h3>
+
+            <div class="trap-alert">
+                <div class="trap-alert__title">Watch for These</div>
+                <p class="trap-alert__text">
+                    <strong>EXCEPT/NOT questions:</strong> Read carefully - they flip the logic.<br>
+                    <strong>Which is TRUE/FALSE:</strong> Don't assume - verify the correct framing.<br>
+                    <strong>Best/Most appropriate:</strong> Multiple answers may be "correct" - pick the BEST one.<br>
+                    <strong>Long scenarios:</strong> Identify the key issue - ignore filler details.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <div class="info-box__title">Test-Taker Insights</div>
+                <p>
+                    <strong>Fewer calculations than expected.</strong> Focus on concepts over math.<br>
+                    <strong>More conceptual than detailed.</strong> High-level understanding matters more than minutiae.<br>
+                    <strong>Regulation feels like 40% of the exam</strong> even though it's officially 9%.<br>
+                    <strong>Questions are wordier</strong> than practice exams - take your time reading.
+                </p>
+            </div>
+
+            <h3>Exam Day Logistics</h3>
+
+            <ul class="checklist">
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span>Bring <strong>two forms of ID</strong> (one government-issued with photo)</span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span>Arrive <strong>30 minutes early</strong></span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span>You get <strong>1 hour 45 minutes</strong> for 75 scored questions (+ 10 unscored)</span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span>Passing score: <strong>70%</strong> (about 53 of 75)</span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span>Flag difficult questions and return - don't get stuck</span>
+                </li>
+                <li>
+                    <span class="checklist__checkbox" onclick="this.classList.toggle('checked')"></span>
+                    <span>You'll know your result immediately after finishing</span>
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__text">You've got this. Trust your preparation.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Q&A Card Reveal Toggle
+        document.querySelectorAll('.qa-question').forEach(function(question) {
+            question.addEventListener('click', function() {
+                const card = this.closest('.qa-card');
+                card.classList.toggle('revealed');
+                const toggle = this.querySelector('.qa-toggle');
+                toggle.textContent = card.classList.contains('revealed') ? 'HIDE' : 'REVEAL';
+            });
+        });
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.cram-toc__link').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Reveal All button for each drill block (optional enhancement)
+        document.querySelectorAll('.drill-block').forEach(function(block) {
+            const cards = block.querySelectorAll('.qa-card');
+            if (cards.length > 3) {
+                // Could add a "Reveal All" button here if desired
+            }
+        });
+
+        // Keyboard navigation for Q&A cards
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const focused = document.activeElement;
+                if (focused.classList.contains('qa-question')) {
+                    focused.click();
+                    e.preventDefault();
+                }
+            }
+        });
+
+        // Make Q&A questions focusable
+        document.querySelectorAll('.qa-question').forEach(function(q) {
+            q.setAttribute('tabindex', '0');
+            q.setAttribute('role', 'button');
+        });
+    </script>
+</body>
+</html>
