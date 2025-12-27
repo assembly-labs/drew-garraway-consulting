@@ -35,6 +35,8 @@ out/
 # Environment files
 .env
 .env.local
+.env.production
+.env.development
 .env.development.local
 .env.test.local
 .env.production.local
