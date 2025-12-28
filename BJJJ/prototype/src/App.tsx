@@ -8,11 +8,10 @@ import { VoiceLogger } from './components/features/VoiceLogger'
 import { SessionHistory } from './components/features/SessionHistory'
 import { TechniqueLibrary } from './components/features/TechniqueLibrary'
 import { TrainingFeedback } from './components/features/TrainingFeedback'
-import { BeltProgress } from './components/features/BeltProgress'
 import { ProfileScreen } from './components/features/ProfileScreen'
 import { useUserProfile } from './context/UserProfileContext'
 
-type View = 'dashboard' | 'journal' | 'progress' | 'library' | 'insights' | 'profile' | 'design-system'
+type View = 'stats' | 'journal' | 'library' | 'insights' | 'profile' | 'design-system'
 
 function App() {
   // Get user profile for header avatar
@@ -27,11 +26,11 @@ function App() {
     if (typeof window !== 'undefined' && window.location.hash === '#design-system') {
       return 'design-system'
     }
-    return 'dashboard'
+    return 'stats'
   })
 
   // Track last tab view for back navigation from profile
-  const [lastTabView, setLastTabView] = useState<TabId>('dashboard')
+  const [lastTabView, setLastTabView] = useState<TabId>('stats')
 
   // Update URL hash when switching to/from design system
   useEffect(() => {
@@ -74,7 +73,7 @@ function App() {
         <Header
           title="DESIGN SYSTEM"
           showBackButton
-          onBack={() => setCurrentView('dashboard')}
+          onBack={() => setCurrentView('stats')}
           rightAction={
             <span style={{
               fontSize: 'var(--text-xs)',
@@ -96,7 +95,7 @@ function App() {
   // Handle profile navigation
   const handleProfileClick = () => {
     // Only save tab views (not profile or design-system)
-    const tabViews: TabId[] = ['dashboard', 'journal', 'progress', 'library', 'insights']
+    const tabViews: TabId[] = ['stats', 'journal', 'library', 'insights']
     if (tabViews.includes(currentView as TabId)) {
       setLastTabView(currentView as TabId)
     }
@@ -116,7 +115,7 @@ function App() {
 
       {/* Main Content */}
       <main style={{ paddingBottom: '100px' }}>
-        {currentView === 'dashboard' && (
+        {currentView === 'stats' && (
           <Dashboard onNavigate={handleNavigate} />
         )}
 
@@ -128,10 +127,6 @@ function App() {
               console.log('Selected session:', session)
             }}
           />
-        )}
-
-        {currentView === 'progress' && (
-          <BeltProgress />
         )}
 
         {currentView === 'library' && (

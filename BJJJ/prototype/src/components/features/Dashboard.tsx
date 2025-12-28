@@ -784,23 +784,6 @@ export function Dashboard({ onNavigate }: DashboardProps) {
           })}
         </div>
 
-        <button
-          onClick={() => onNavigate('progress')}
-          style={{
-            width: '100%',
-            padding: '16px',
-            background: 'transparent',
-            border: '1px solid var(--color-gray-700)',
-            color: 'var(--color-white)',
-            fontSize: 'var(--text-sm)',
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: '0.15em',
-            cursor: 'pointer',
-          }}
-        >
-          View Full Progress
-        </button>
       </section>
 
       {/* ============================================

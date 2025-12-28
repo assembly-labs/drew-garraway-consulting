@@ -5,65 +5,69 @@
 
 import { SessionCard, type Session } from './SessionCard';
 import { useBeltPersonalization } from '../../hooks';
+import { mockJournalEntries, type JournalEntry } from '../../data/journal';
 
-// Mock session data
-const MOCK_SESSIONS: Session[] = [
-  {
-    id: '1',
-    date: 'Today',
-    time: '10:30 AM',
-    trainingType: 'gi',
-    durationMinutes: 90,
-    techniques: ['Knee slice pass (far arm control)'],
-    submissionsGiven: 3,
-    submissionsReceived: 2,
-    struggles: ['Half guard top — losing underhook'],
-  },
-  {
-    id: '2',
-    date: 'Yesterday',
-    time: '7:00 PM',
-    trainingType: 'nogi',
-    durationMinutes: 60,
-    techniques: ['Single leg defense', 'Guillotine counters'],
-    submissionsGiven: 2,
-    submissionsReceived: 0,
-    struggles: [],
-  },
-  {
-    id: '3',
-    date: 'Fri, Dec 19',
-    time: '12:00 PM',
-    trainingType: 'openmat',
-    durationMinutes: 120,
-    techniques: [],
-    submissionsGiven: 5,
-    submissionsReceived: 3,
-    struggles: ['Mount escapes'],
-  },
-  {
-    id: '4',
-    date: 'Thu, Dec 18',
-    time: '6:30 PM',
-    trainingType: 'gi',
-    durationMinutes: 90,
-    techniques: ['Collar sleeve guard', 'Triangle setups'],
-    submissionsGiven: 1,
-    submissionsReceived: 1,
-    struggles: [],
-  },
-  {
-    id: '5',
-    date: 'Tue, Dec 16',
-    time: '7:00 PM',
-    trainingType: 'nogi',
-    durationMinutes: 75,
-    techniques: ['Arm drag series', 'Back takes'],
-    submissionsGiven: 4,
-    submissionsReceived: 0,
-    struggles: ['Maintaining back control'],
-  },
-];
+/**
+ * Transform JournalEntry to Session display format
+ */
+function transformToSession(entry: JournalEntry): Session {
+  const entryDate = new Date(entry.date);
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  // Format date display
+  const isToday = entryDate.toDateString() === today.toDateString();
+  const isYesterday = entryDate.toDateString() === yesterday.toDateString();
+
+  let dateDisplay: string;
+  if (isToday) {
+    dateDisplay = 'Today';
+  } else if (isYesterday) {
+    dateDisplay = 'Yesterday';
+  } else {
+    dateDisplay = entryDate.toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric'
+    });
+  }
+
+  // Count submissions from sparring rounds
+  const submissionsGiven = entry.sparringRounds.filter(
+    r => r.outcome === 'submission-win'
+  ).length;
+  const submissionsReceived = entry.sparringRounds.filter(
+    r => r.outcome === 'submission-loss'
+  ).length;
+
+  // Extract struggles from notes that mention difficulties
+  const struggles: string[] = [];
+  if (entry.notes.toLowerCase().includes('caught') ||
+      entry.notes.toLowerCase().includes('struggle') ||
+      entry.notes.toLowerCase().includes('need to work')) {
+    // Extract relevant struggle phrases from sparring rounds
+    entry.sparringRounds
+      .filter(r => r.outcome === 'submission-loss' && r.submissionType)
+      .forEach(r => struggles.push(`Got caught in ${r.submissionType}`));
+  }
+
+  return {
+    id: entry.id,
+    date: dateDisplay,
+    time: '7:00 PM', // Default time since JournalEntry doesn't store time
+    trainingType: entry.type,
+    durationMinutes: entry.duration,
+    techniques: entry.techniques.map(t => t.techniqueName),
+    submissionsGiven,
+    submissionsReceived,
+    struggles,
+    sparringRounds: entry.sparringRounds.length,
+  };
+}
+
+// Transform journal entries to sessions - single source of truth
+const sessions: Session[] = mockJournalEntries.map(transformToSession);
 
 interface SessionHistoryProps {
   onLogNew: () => void;
@@ -92,9 +96,9 @@ export function SessionHistory({ onLogNew, onSelectSession }: SessionHistoryProp
   };
 
   // Group sessions by date category
-  const today = MOCK_SESSIONS.filter(s => s.date === 'Today');
-  const yesterday = MOCK_SESSIONS.filter(s => s.date === 'Yesterday');
-  const earlier = MOCK_SESSIONS.filter(s => s.date !== 'Today' && s.date !== 'Yesterday');
+  const today = sessions.filter(s => s.date === 'Today');
+  const yesterday = sessions.filter(s => s.date === 'Yesterday');
+  const earlier = sessions.filter(s => s.date !== 'Today' && s.date !== 'Yesterday');
 
   return (
     <div style={{
@@ -111,7 +115,7 @@ export function SessionHistory({ onLogNew, onSelectSession }: SessionHistoryProp
       }}>
         <div>
           <h2 style={{ marginBottom: 'var(--space-xs)', color: 'var(--color-white)' }}>JOURNAL</h2>
-          <p style={{ color: 'var(--color-gray-500)', fontSize: 'var(--text-sm)' }}>{MOCK_SESSIONS.length} sessions logged</p>
+          <p style={{ color: 'var(--color-gray-500)', fontSize: 'var(--text-sm)' }}>{sessions.length} sessions logged</p>
         </div>
         <button
           onClick={onLogNew}
@@ -211,7 +215,7 @@ export function SessionHistory({ onLogNew, onSelectSession }: SessionHistoryProp
       )}
 
       {/* Empty State */}
-      {MOCK_SESSIONS.length === 0 && (
+      {sessions.length === 0 && (
         <div style={{
           textAlign: 'center',
           padding: 'var(--space-2xl)',
