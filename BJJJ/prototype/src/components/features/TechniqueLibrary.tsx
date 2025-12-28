@@ -19,7 +19,7 @@ import {
 } from '../../data/techniques';
 import {
   techniqueVideos,
-  mockForYouSection,
+  getBeltSpecificRecommendations,
   positionNames,
   getVideoStats,
   getMindsetVideosByCategory,
@@ -95,7 +95,13 @@ export function TechniqueLibrary({ onOpenFeedback }: TechniqueLibraryProps) {
   const [selectedMindsetCategory, setSelectedMindsetCategory] = useState<MindsetCategoryId | null>(null);
 
   // Belt personalization for video recommendations
-  const { videoTutorials, chatbot } = useBeltPersonalization();
+  const { videoTutorials, chatbot, profile } = useBeltPersonalization();
+
+  // Generate belt-specific recommendations
+  const beltRecommendations = useMemo(
+    () => getBeltSpecificRecommendations(profile.belt as 'white' | 'blue' | 'purple' | 'brown' | 'black'),
+    [profile.belt]
+  );
 
   // Scroll to top when component mounts (user taps Techniques tab)
   useEffect(() => {
@@ -392,7 +398,7 @@ export function TechniqueLibrary({ onOpenFeedback }: TechniqueLibraryProps) {
           {/* For You View */}
           {viewMode === 'for_you' && (
             <ForYouView
-              recommendations={mockForYouSection.recommendations}
+              recommendations={beltRecommendations.recommendations}
               onOpenFeedback={onOpenFeedback}
               playlistName={videoTutorials.personalizedPlaylistName}
               emphasizeTopics={chatbot.emphasizeTopics}

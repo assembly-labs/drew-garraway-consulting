@@ -612,7 +612,7 @@ export function BeltProgress() {
       )}
 
       {/* ============================================
-          PATTERNS FROM YOUR LOGS
+          PATTERNS
           ============================================ */}
       <section style={{
         padding: '32px 24px',
@@ -627,10 +627,10 @@ export function BeltProgress() {
           color: 'var(--color-gray-500)',
           marginBottom: '20px',
         }}>
-          Patterns From Your Logs
+          Patterns
         </h2>
 
-        {/* Getting Caught */}
+        {/* Caught In */}
         {recentStruggles.length > 0 && (
           <div style={{ marginBottom: '28px' }}>
             <div style={{
@@ -642,7 +642,7 @@ export function BeltProgress() {
               color: 'var(--color-negative)',
               marginBottom: '12px',
             }}>
-              Getting Caught
+              Caught In
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {recentStruggles.map((item, i) => (
@@ -671,7 +671,7 @@ export function BeltProgress() {
           </div>
         )}
 
-        {/* Frequently Drilled */}
+        {/* Catching */}
         {frequentTechniques.length > 0 && (
           <div>
             <div style={{
@@ -683,7 +683,7 @@ export function BeltProgress() {
               color: 'var(--color-positive)',
               marginBottom: '12px',
             }}>
-              Frequently Drilled
+              Catching
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {frequentTechniques.map((item, i) => (

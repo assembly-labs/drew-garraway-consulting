@@ -22,17 +22,18 @@ interface BodyHeatMapProps {
 
 // Heat zone positions (center points for radial gradients)
 // Mapped to 160x300 viewport matching the silhouette proportions
+// Increased sizes for more visible heat zones
 const HEAT_ZONES = {
   // Neck/throat area - chokes target here
-  neck: { cx: 80, cy: 62, rx: 16, ry: 12 },
+  neck: { cx: 80, cy: 62, rx: 24, ry: 18 },
   // Left arm - elbow/forearm area for armbars, kimuras
-  leftArm: { cx: 38, cy: 138, rx: 20, ry: 40 },
+  leftArm: { cx: 38, cy: 138, rx: 28, ry: 50 },
   // Right arm - mirror of left
-  rightArm: { cx: 122, cy: 138, rx: 20, ry: 40 },
+  rightArm: { cx: 122, cy: 138, rx: 28, ry: 50 },
   // Left leg - knee/ankle area for leg locks
-  leftLeg: { cx: 68, cy: 240, rx: 16, ry: 45 },
+  leftLeg: { cx: 68, cy: 240, rx: 22, ry: 55 },
   // Right leg - mirror of left
-  rightLeg: { cx: 92, cy: 240, rx: 16, ry: 45 },
+  rightLeg: { cx: 92, cy: 240, rx: 22, ry: 55 },
 };
 
 // Human body silhouette with PNG image and radial gradient heat overlays
@@ -65,19 +66,36 @@ function BodySilhouette({
         height: 300,
       }}
     >
-      {/* PNG silhouette with subtle glow outline */}
+      {/* Gradient background to make black silhouette visible against dark bg */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '140px',
+          height: '280px',
+          background: 'radial-gradient(ellipse at center, rgba(60, 60, 70, 0.8) 0%, rgba(40, 40, 50, 0.5) 40%, transparent 70%)',
+          borderRadius: '50%',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Body silhouette image with enhanced glow */}
       <img
         src="/human-body-silo.png"
         alt="Body silhouette"
         style={{
+          position: 'relative',
           width: '100%',
           height: '100%',
           objectFit: 'contain',
-          filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.25)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))',
+          filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 3px rgba(255, 255, 255, 0.5)) brightness(1.1)',
+          zIndex: 1,
         }}
       />
 
-      {/* Heat map overlay with radial gradients */}
+      {/* Heat map overlay with radial gradients - increased opacity for visibility */}
       <svg
         width="160"
         height="300"
@@ -88,33 +106,34 @@ function BodySilhouette({
           left: 0,
           pointerEvents: 'none',
           mixBlendMode: 'screen',
+          zIndex: 2,
         }}
       >
         <defs>
-          {/* Radial gradient for neck */}
+          {/* Radial gradient for neck - boosted opacity */}
           <radialGradient id="neckHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={neckIntensity * 0.9} />
-            <stop offset="40%" stopColor={`rgb(${heatRgb})`} stopOpacity={neckIntensity * 0.5} />
+            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(1, neckIntensity * 1.5 + 0.3)} />
+            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(0.8, neckIntensity * 0.9 + 0.2)} />
             <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
           </radialGradient>
 
-          {/* Radial gradient for arms */}
+          {/* Radial gradient for arms - boosted opacity */}
           <radialGradient id="armsHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={armsIntensity * 0.85} />
-            <stop offset="35%" stopColor={`rgb(${heatRgb})`} stopOpacity={armsIntensity * 0.45} />
+            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(1, armsIntensity * 1.5 + 0.3)} />
+            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(0.8, armsIntensity * 0.9 + 0.2)} />
             <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
           </radialGradient>
 
-          {/* Radial gradient for legs */}
+          {/* Radial gradient for legs - boosted opacity */}
           <radialGradient id="legsHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={legsIntensity * 0.85} />
-            <stop offset="35%" stopColor={`rgb(${heatRgb})`} stopOpacity={legsIntensity * 0.45} />
+            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(1, legsIntensity * 1.5 + 0.3)} />
+            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(0.8, legsIntensity * 0.9 + 0.2)} />
             <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
           </radialGradient>
 
-          {/* Blur filter for softer glow */}
+          {/* Blur filter for softer glow - reduced blur for sharper visibility */}
           <filter id="heatBlur" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
           </filter>
         </defs>
 

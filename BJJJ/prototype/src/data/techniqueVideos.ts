@@ -13,7 +13,8 @@ import type {
   RecommendationReason,
   ForYouSection,
 } from '../types/techniqueVideos';
-import type { BeltLevel, ProficiencyLevel } from '../types/database';
+import type { BeltLevel } from '../types/database';
+import type { ProficiencyLevel } from '../types/database';
 
 // ===========================================
 // VIDEO DATA (from technique_videos.csv)
@@ -506,71 +507,114 @@ export function generateRecommendations(
 }
 
 // ===========================================
-// MOCK DATA FOR TESTING
+// BELT-SPECIFIC VIDEO RECOMMENDATIONS
 // ===========================================
 
 /**
- * Mock "For You" recommendations for demo
+ * Belt-specific video recommendations configuration
+ * These are curated for each belt level's focus areas
  */
-export const mockForYouSection: ForYouSection = {
-  recommendations: [
-    {
-      video: techniqueVideos.find(v => v.technique_id === 'SC_016')!,
-      technique_name: 'Side Control Escape',
-      position_category: 'Side Control',
-      reason: 'recent_struggle',
-      reason_text: 'You mentioned difficulty with side control escapes in your last 3 sessions. This comprehensive guide covers the fundamentals.',
-      priority: 'high',
-      user_proficiency: 'developing',
-      times_practiced: 12,
-      last_practiced: '2024-12-18',
+const beltRecommendationConfig: Record<BeltLevel, {
+  techniqueIds: string[];
+  focusAreas: string[];
+  reasonTexts: Record<string, string>;
+}> = {
+  white: {
+    techniqueIds: ['SC_016', 'BC_014', 'MT_001', 'CG_001', 'TD_001'],
+    focusAreas: ['survival', 'escapes', 'basic sweeps', 'position recognition'],
+    reasonTexts: {
+      'SC_016': 'Side control escape is essential for survival. This guide covers the fundamentals every white belt needs.',
+      'BC_014': 'Getting out of back control is critical. Learning this escape will save you countless taps.',
+      'MT_001': 'Mount defense and hand fighting are survival priorities. Study these fundamentals.',
+      'CG_001': 'Closed guard is your defensive home base. Learn to control posture and set up sweeps.',
+      'TD_001': 'Basic takedown awareness helps you avoid bad positions from the start.',
     },
-    {
-      video: techniqueVideos.find(v => v.technique_id === 'CG_008')!,
-      technique_name: 'Triangle Choke',
-      position_category: 'Closed Guard',
-      reason: 'plateau_technique',
-      reason_text: 'Triangle choke has been at "developing" for 3 weeks. Review the angle and leg positioning details.',
-      priority: 'high',
-      user_proficiency: 'developing',
-      times_practiced: 18,
-      last_practiced: '2024-12-15',
+  },
+  blue: {
+    techniqueIds: ['GP_024', 'HG_001', 'OG_019', 'CG_008', 'BC_005'],
+    focusAreas: ['game development', 'guard systems', 'passing concepts', 'combination attacks'],
+    reasonTexts: {
+      'GP_024': 'Guard passing concepts are essential at blue belt. This overview helps you see the bigger picture.',
+      'HG_001': 'Half guard is a crucial transitional position. Build your bottom and top game from here.',
+      'OG_019': 'Open guard and butterfly fundamentals expand your game. Essential for blue belt development.',
+      'CG_008': 'Triangle choke from closed guard - a high-percentage attack you should be developing now.',
+      'BC_005': 'Rear naked choke finishing details. You\'re taking backs now - learn to finish.',
     },
-    {
-      video: techniqueVideos.find(v => v.technique_id === 'GP_024')!,
-      technique_name: 'Guard Passing Concepts',
-      position_category: 'Guard Passing',
-      reason: 'belt_level_gap',
-      reason_text: 'Guard passing is a core skill for blue belt. This conceptual overview will help you understand the bigger picture.',
-      priority: 'medium',
-      user_proficiency: 'learning',
-      times_practiced: 5,
-      last_practiced: '2024-12-10',
+  },
+  purple: {
+    techniqueIds: ['GP_024', 'SM_028', 'OG_019', 'BC_005', 'HG_016'],
+    focusAreas: ['systems thinking', 'leg locks', 'guard retention', 'conceptual principles'],
+    reasonTexts: {
+      'GP_024': 'Deep conceptual understanding of guard passing. Connect your techniques into systems.',
+      'SM_028': 'Heel hook defense and escapes - essential knowledge for modern grappling.',
+      'OG_019': 'Advanced open guard concepts. Refine your retention and attacks.',
+      'BC_005': 'Back attack finishing mastery. Perfect your highest percentage finish.',
+      'HG_016': 'Half guard systems integration. Build complete chains from this position.',
     },
-    {
-      video: techniqueVideos.find(v => v.technique_id === 'BC_005')!,
-      technique_name: 'Rear Naked Choke',
-      position_category: 'Back Control',
-      reason: 'chain_completion',
-      reason_text: 'You\'re getting better at taking the back. Adding a solid RNC finish will complete your back attack chain.',
-      priority: 'medium',
-      user_proficiency: 'proficient',
-      times_practiced: 28,
-      last_practiced: '2024-12-19',
+  },
+  brown: {
+    techniqueIds: ['GP_024', 'SM_028', 'BC_005', 'CG_008', 'OG_019'],
+    focusAreas: ['refinement', 'efficiency', 'teaching methodology', 'game polish'],
+    reasonTexts: {
+      'GP_024': 'Refine your passing concepts. Focus on efficiency and timing.',
+      'SM_028': 'Complete leg lock knowledge - offense and defense at brown belt level.',
+      'BC_005': 'Perfect your finishing mechanics. The details make the difference.',
+      'CG_008': 'Triangle refinement - timing, angles, and troubleshooting common defenses.',
+      'OG_019': 'Polish your open guard systems. Integration and flow.',
     },
-    {
-      video: techniqueVideos.find(v => v.technique_id === 'HG_001')!,
-      technique_name: 'Half Guard Fundamentals',
-      position_category: 'Half Guard',
-      reason: 'fundamentals_refresh',
-      reason_text: 'It\'s been 30+ days since you practiced half guard. A quick refresh on the fundamentals can help.',
-      priority: 'low',
-      user_proficiency: 'proficient',
-      times_practiced: 35,
-      last_practiced: '2024-11-15',
+  },
+  black: {
+    techniqueIds: ['GP_024', 'BJ_007', 'MG_001', 'AL_001', 'SM_028'],
+    focusAreas: ['innovation', 'teaching methodology', 'student development', 'art contribution'],
+    reasonTexts: {
+      'GP_024': 'Conceptual teaching frameworks for guard passing instruction.',
+      'BJ_007': 'Philosophy of the BJJ journey - deepen your teaching perspective.',
+      'MG_001': 'Mental game insights to share with your students.',
+      'AL_001': 'Training longevity principles for yourself and your academy.',
+      'SM_028': 'Modern leg lock teaching - staying current with the meta.',
     },
-  ],
-  generated_at: new Date().toISOString(),
-  based_on_sessions: 47,
-  user_belt: 'blue',
+  },
 };
+
+/**
+ * Generate belt-specific "For You" recommendations
+ */
+export function getBeltSpecificRecommendations(belt: BeltLevel): ForYouSection {
+  const config = beltRecommendationConfig[belt] || beltRecommendationConfig.white;
+
+  const recommendations: VideoRecommendation[] = [];
+
+  config.techniqueIds.forEach((techniqueId, index) => {
+    const video = techniqueVideos.find(v => v.technique_id === techniqueId);
+    if (!video) return;
+
+    const proficiencyMap: ProficiencyLevel[] = ['learning', 'developing', 'developing', 'proficient', 'proficient'];
+
+    recommendations.push({
+      video,
+      technique_name: video.title.split(' - ')[0] || video.title,
+      position_category: positionNames[getTechniquePosition(techniqueId)] || 'General',
+      reason: index === 0 ? 'belt_level_gap' :
+              index === 1 ? 'training_focus' :
+              'next_progression',
+      reason_text: config.reasonTexts[techniqueId] || `Recommended for ${belt} belt development.`,
+      priority: index < 2 ? 'high' : 'medium',
+      user_proficiency: proficiencyMap[index] || 'learning',
+      times_practiced: Math.floor(Math.random() * 20) + 5,
+      last_practiced: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    });
+  });
+
+  return {
+    recommendations,
+    generated_at: new Date().toISOString(),
+    based_on_sessions: 47,
+    user_belt: belt,
+  };
+}
+
+/**
+ * Legacy mock for backwards compatibility - defaults to white belt
+ * @deprecated Use getBeltSpecificRecommendations(belt) instead
+ */
+export const mockForYouSection: ForYouSection = getBeltSpecificRecommendations('white');
