@@ -18,7 +18,8 @@ import { currentUser } from '../../data/users';
 import { mockTrainingStats, mockJournalEntries } from '../../data/journal';
 import { mockProgressSummary, mockTonyChenPromotionReadiness } from '../../data/progress';
 import { mockSubmissionStats } from '../../data/submissions';
-import { BeltBadge, TrainingBadge, DeadliestAttackCard, AchillesHeelCard, BodyHeatMap, BreakthroughHero } from '../ui';
+import { BeltBadge, TrainingBadge, DeadliestAttackCard, AchillesHeelCard, BreakthroughHero } from '../ui';
+import { AttackProfile } from './AttackProfile';
 import { useCountUp, useBeltPersonalization } from '../../hooks';
 import { useUserProfile } from '../../context/UserProfileContext';
 import {
@@ -26,98 +27,6 @@ import {
   getMostSignificantBreakthrough,
   type BreakthroughDetectionInput,
 } from '../../utils/breakthrough-detection';
-
-// ===========================================
-// SPECIALIST NICKNAME LOGIC
-// ===========================================
-
-interface SpecialistNickname {
-  nickname: string;
-  description: string;
-  icon: 'skull' | 'target' | 'fire' | 'hand';
-}
-
-/**
- * Determine specialist nickname based on attack distribution
- * - 50%+ wrist attacks = "Limp Wrist"
- * - 75%+ neck attacks = "Head Hunter"
- * - 50%+ leg attacks = "Leg Locker"
- * - 50%+ arm attacks = "Arm Collector"
- * - Balanced = "Body Breaker"
- */
-function getSpecialistNickname(
-  bodyStats: { neck: number; arms: number; legs: number },
-  techniqueBreakdown?: { technique: string; count: number }[]
-): SpecialistNickname | null {
-  const total = bodyStats.neck + bodyStats.arms + bodyStats.legs;
-  if (total < 20) return null; // Not enough data
-
-  // Check for wristlock specialist first (from technique breakdown)
-  if (techniqueBreakdown) {
-    const wristTechniques = ['wristlock', 'wrist lock'];
-    const wristCount = techniqueBreakdown
-      .filter(t => wristTechniques.some(w => t.technique.toLowerCase().includes(w)))
-      .reduce((sum, t) => sum + t.count, 0);
-    const wristPercent = (wristCount / total) * 100;
-
-    if (wristPercent >= 50) {
-      return {
-        nickname: 'LIMP WRIST',
-        description: `${Math.round(wristPercent)}% of your finishes are wristlocks`,
-        icon: 'hand',
-      };
-    }
-  }
-
-  const neckPercent = (bodyStats.neck / total) * 100;
-  const armsPercent = (bodyStats.arms / total) * 100;
-  const legsPercent = (bodyStats.legs / total) * 100;
-
-  if (neckPercent >= 75) {
-    return {
-      nickname: 'HEAD HUNTER',
-      description: `${Math.round(neckPercent)}% of your finishes target the neck`,
-      icon: 'skull',
-    };
-  }
-
-  if (legsPercent >= 50) {
-    return {
-      nickname: 'LEG LOCKER',
-      description: `${Math.round(legsPercent)}% of your finishes attack the legs`,
-      icon: 'target',
-    };
-  }
-
-  if (armsPercent >= 50) {
-    return {
-      nickname: 'ARM COLLECTOR',
-      description: `${Math.round(armsPercent)}% of your finishes attack the arms`,
-      icon: 'fire',
-    };
-  }
-
-  if (neckPercent >= 60) {
-    return {
-      nickname: 'CHOKE ARTIST',
-      description: `${Math.round(neckPercent)}% of your finishes are strangles`,
-      icon: 'skull',
-    };
-  }
-
-  // Check if reasonably balanced (no single area dominates)
-  const max = Math.max(neckPercent, armsPercent, legsPercent);
-  const min = Math.min(neckPercent, armsPercent, legsPercent);
-  if (max - min < 25 && total >= 30) {
-    return {
-      nickname: 'BODY BREAKER',
-      description: 'Balanced attack distribution across all targets',
-      icon: 'fire',
-    };
-  }
-
-  return null;
-}
 
 interface DashboardProps {
   onNavigate: (view: string) => void;
@@ -413,109 +322,18 @@ export function Dashboard({ onNavigate }: DashboardProps) {
       )}
 
       {/* ============================================
-          ATTACK PROFILE - Body heat map with specialist nickname
+          ATTACK PROFILE - Full submission story visualization
           ============================================ */}
-      {(() => {
-        const specialistNickname = getSpecialistNickname(
-          mockSubmissionStats.bodyHeatMap.given,
-          mockSubmissionStats.techniqueBreakdown.given
-        );
-        return (
-          <section
-            style={{
-              padding: '48px 24px',
-              borderTop: '1px solid var(--color-gray-800)',
-            }}
-          >
-            {/* Specialist Nickname Banner */}
-            {specialistNickname && (
-              <div
-                style={{
-                  marginBottom: '24px',
-                  padding: '20px 24px',
-                  background: 'linear-gradient(135deg, rgba(252, 211, 77, 0.15) 0%, var(--color-black) 100%)',
-                  borderLeft: '3px solid var(--color-gold)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '16px',
-                }}
-              >
-                {/* Icon */}
-                <div
-                  style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: 'var(--radius-full)',
-                    background: 'var(--color-gold-dim)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                  }}
-                >
-                  {specialistNickname.icon === 'skull' && (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="10" r="7" />
-                      <circle cx="9" cy="9" r="1.5" fill="var(--color-gold)" />
-                      <circle cx="15" cy="9" r="1.5" fill="var(--color-gold)" />
-                      <path d="M12 14v4M10 21l2-3 2 3M8 18h8" />
-                    </svg>
-                  )}
-                  {specialistNickname.icon === 'target' && (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10" />
-                      <circle cx="12" cy="12" r="6" />
-                      <circle cx="12" cy="12" r="2" />
-                    </svg>
-                  )}
-                  {specialistNickname.icon === 'fire' && (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
-                    </svg>
-                  )}
-                  {specialistNickname.icon === 'hand' && (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0" />
-                      <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6" />
-                      <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8" />
-                      <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
-                    </svg>
-                  )}
-                </div>
-
-                <div>
-                  <div
-                    style={{
-                      fontFamily: 'var(--font-heading)',
-                      fontSize: 'var(--text-lg)',
-                      fontWeight: 700,
-                      color: 'var(--color-gold)',
-                      letterSpacing: '0.1em',
-                    }}
-                  >
-                    {specialistNickname.nickname}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 'var(--text-sm)',
-                      color: 'var(--color-gray-400)',
-                      marginTop: '2px',
-                    }}
-                  >
-                    {specialistNickname.description}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Body Heat Map */}
-            <BodyHeatMap
-              data={mockSubmissionStats.bodyHeatMap}
-              techniqueBreakdown={mockSubmissionStats.techniqueBreakdown}
-            />
-          </section>
-        );
-      })()}
+      <section
+        style={{
+          borderTop: '1px solid var(--color-gray-800)',
+        }}
+      >
+        <AttackProfile
+          submissionStats={mockSubmissionStats}
+          belt={profile.belt}
+        />
+      </section>
 
       {/* ============================================
           SPARRING DOMINANCE - Full bleed grid
