@@ -4,7 +4,7 @@ import { DesignSystem } from './components/DesignSystem'
 import { Header } from './components/layout/Header'
 import { TabBar, type TabId } from './components/layout/TabBar'
 import { Dashboard } from './components/features/Dashboard'
-import { VoiceLogger } from './components/features/VoiceLogger'
+import { SessionLogger } from './components/features/SessionLogger'
 import { SessionHistory } from './components/features/SessionHistory'
 import { TechniqueLibrary } from './components/features/TechniqueLibrary'
 import { TrainingFeedback } from './components/features/TrainingFeedback'
@@ -18,8 +18,8 @@ function App() {
   const { profile } = useUserProfile()
   const userInitial = profile.name ? profile.name.charAt(0).toUpperCase() : 'U'
 
-  // Track if voice logger should be shown (overlay)
-  const [showVoiceLogger, setShowVoiceLogger] = useState(true) // Auto-open on load
+  // Track if session logger should be shown (overlay)
+  const [showSessionLogger, setShowSessionLogger] = useState(true) // Auto-open on load
 
   // Check URL for design system mode
   const [currentView, setCurrentView] = useState<View>(() => {
@@ -48,22 +48,22 @@ function App() {
 
   // Handle navigation from child components
   const handleNavigate = (view: string) => {
-    if (view === 'voice-logger') {
-      setShowVoiceLogger(true)
+    if (view === 'voice-logger' || view === 'session-logger') {
+      setShowSessionLogger(true)
     } else {
       setCurrentView(view as View)
     }
   }
 
-  // Handle voice logger completion
+  // Handle session logger completion
   const handleLogComplete = () => {
-    setShowVoiceLogger(false)
+    setShowSessionLogger(false)
     setCurrentView('journal') // Go to journal to see the logged session
   }
 
-  // Handle voice logger cancel
+  // Handle session logger cancel
   const handleLogCancel = () => {
-    setShowVoiceLogger(false)
+    setShowSessionLogger(false)
   }
 
   // Show Design System page
@@ -106,7 +106,7 @@ function App() {
     <div style={{ minHeight: '100vh', backgroundColor: 'var(--color-black)' }}>
       {/* Header - changes based on current view */}
       <Header
-        title={currentView === 'profile' ? 'PROFILE' : 'ALLY'}
+        title={currentView === 'profile' ? 'PROFILE' : 'BJJJ'}
         showBackButton={currentView === 'profile'}
         onBack={() => setCurrentView(lastTabView)}
         userInitial={currentView !== 'profile' ? userInitial : undefined}
@@ -121,7 +121,7 @@ function App() {
 
         {currentView === 'journal' && (
           <SessionHistory
-            onLogNew={() => setShowVoiceLogger(true)}
+            onLogNew={() => setShowSessionLogger(true)}
             onSelectSession={(session) => {
               // Session detail view would go here
               console.log('Selected session:', session)
@@ -150,15 +150,15 @@ function App() {
         onTabChange={(tab) => setCurrentView(tab)}
       />
 
-      {/* Voice Logger Overlay - Full Screen */}
-      {showVoiceLogger && (
+      {/* Session Logger Overlay - Full Screen */}
+      {showSessionLogger && (
         <div style={{
           position: 'fixed',
           inset: 0,
           zIndex: 100,
           backgroundColor: 'var(--color-primary)',
         }}>
-          <VoiceLogger
+          <SessionLogger
             onComplete={handleLogComplete}
             onCancel={handleLogCancel}
           />
