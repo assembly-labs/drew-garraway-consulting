@@ -37,18 +37,18 @@
 
   /* ========================================
      GRAYSCALE PALETTE
-     Lightened grays for better contrast on dark bg
+     READABILITY-FIRST: All text grays meet WCAG AA contrast on dark
      ======================================== */
   --color-gray-50: #fafafa;        /* Lightest gray */
   --color-gray-100: #f5f5f5;       /* Primary text on dark */
   --color-gray-200: #e5e5e5;       /* Secondary text on dark */
   --color-gray-300: #d4d4d4;       /* Tertiary text - readable on dark */
-  --color-gray-400: #b3b3b3;       /* Muted text - LIGHTENED from #a3a3a3 */
-  --color-gray-500: #8b8b8b;       /* Labels - LIGHTENED from #6b7280 */
-  --color-gray-600: #6b6b6b;       /* Secondary labels - LIGHTENED from #525252 */
-  --color-gray-700: #4a4a4a;       /* Borders - LIGHTENED from #404040 */
-  --color-gray-800: #1f1f1f;       /* Card backgrounds - LIGHTENED from #1a1a1a */
-  --color-gray-900: #161616;       /* Elevated surfaces - LIGHTENED from #0f0f0f */
+  --color-gray-400: #c4c4c4;       /* Muted text - BRIGHTENED for readability */
+  --color-gray-500: #a3a3a3;       /* Labels - BRIGHTENED for better contrast */
+  --color-gray-600: #8a8a8a;       /* Secondary labels - BRIGHTENED significantly */
+  --color-gray-700: #4a4a4a;       /* Borders */
+  --color-gray-800: #1f1f1f;       /* Card backgrounds */
+  --color-gray-900: #161616;       /* Elevated surfaces */
 
   /* ========================================
      SEMANTIC COLORS - Positive/Negative
@@ -213,7 +213,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  font-weight: 500;
+  font-weight: 600;  /* Increased from 500 for better readability */
   background: var(--color-black);
   color: var(--color-white);
   line-height: var(--leading-normal);
@@ -279,6 +279,7 @@ h6 {
 p {
   margin-bottom: var(--space-md);
   color: var(--color-gray-100);
+  font-weight: 500;  /* Ensure paragraphs are readable */
 }
 
 a {
@@ -337,10 +338,10 @@ a:hover {
 .label {
   font-family: var(--font-mono);
   font-size: 11px;  /* Bumped from 10px */
-  font-weight: 600;
+  font-weight: 700;  /* Bolder for readability */
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);  /* Reduced for readability */
-  color: var(--color-gray-300);  /* Lightened from gray-400 */
+  color: var(--color-gray-200);  /* Brightened for contrast */
 }
 
 /* ========================================
@@ -369,7 +370,8 @@ a:hover {
 
 .section-subtitle {
   font-size: 11px;
-  color: var(--color-gray-400);
+  font-weight: 600;  /* Bolder for readability */
+  color: var(--color-gray-300);  /* Brightened for contrast */
 }
 
 /* ========================================
@@ -430,9 +432,10 @@ a:hover {
 .insight-label {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
+  font-weight: 700;  /* Bolder for readability */
   text-transform: uppercase;
   letter-spacing: var(--tracking-widest);
-  color: var(--color-gray-400);
+  color: var(--color-gray-300);  /* Brightened for contrast */
   margin-bottom: var(--space-sm);
 }
 
@@ -455,7 +458,8 @@ a:hover {
 
 .insight-subtext {
   font-size: var(--text-sm);
-  color: var(--color-gray-400);
+  font-weight: 500;  /* Ensure readable weight */
+  color: var(--color-gray-300);  /* Brightened for contrast */
   margin-top: var(--space-sm);
 }
 
@@ -641,10 +645,10 @@ a:hover {
   margin-bottom: var(--space-sm);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  font-weight: 500;
+  font-weight: 700;  /* Bolder for readability */
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
-  color: var(--color-gray-400);
+  color: var(--color-gray-300);  /* Brightened for contrast */
 }
 
 .form-input,
@@ -784,8 +788,9 @@ a:hover {
 
 .stat-label {
   font-family: var(--font-mono);
-  color: var(--color-gray-400);
+  color: var(--color-gray-300);  /* Brightened for readability */
   font-size: var(--text-xs);
+  font-weight: 700;  /* Bolder for readability */
   text-transform: uppercase;
   letter-spacing: var(--tracking-widest);
   margin-bottom: var(--space-sm);
@@ -866,8 +871,9 @@ a:hover {
 
 .data-cell-label {
   font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--color-gray-400);
+  font-size: 10px;  /* Slightly larger for readability */
+  font-weight: 700;  /* Bolder for readability */
+  color: var(--color-gray-300);  /* Brightened for contrast */
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
   margin-top: var(--space-xs);
@@ -989,7 +995,8 @@ a:hover {
 .list-item-meta {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-gray-400);
+  font-weight: 600;  /* Bolder for readability */
+  color: var(--color-gray-300);  /* Brightened for contrast */
   margin-top: 2px;
 }
 
@@ -1070,7 +1077,8 @@ a:hover {
 .journey-duration {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-gray-400);
+  font-weight: 600;  /* Bolder for readability */
+  color: var(--color-gray-300);  /* Brightened for contrast */
   margin-top: 4px;
 }
 
@@ -1172,7 +1180,8 @@ a:hover {
 
 .hero-context {
   font-size: 15px;
-  color: var(--color-gray-400);
+  font-weight: 500;  /* Ensure readable weight */
+  color: var(--color-gray-300);  /* Brightened for contrast */
   max-width: 280px;
   line-height: 1.6;
 }
@@ -1259,7 +1268,8 @@ a:hover {
 
 .streak-meta-label {
   font-size: 11px;
-  color: var(--color-gray-400);
+  font-weight: 600;  /* Bolder for readability */
+  color: var(--color-gray-300);  /* Brightened for contrast */
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-top: var(--space-xs);
@@ -1348,7 +1358,8 @@ a:hover {
 
 .arsenal-label {
   font-size: 14px;
-  color: var(--color-gray-400);
+  font-weight: 600;  /* Bolder for readability */
+  color: var(--color-gray-300);  /* Brightened for contrast */
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -1373,8 +1384,9 @@ a:hover {
 }
 
 .arsenal-cell-label {
-  font-size: 9px;
-  color: var(--color-gray-400);
+  font-size: 10px;  /* Slightly larger for readability */
+  font-weight: 700;  /* Bolder for readability */
+  color: var(--color-gray-300);  /* Brightened for contrast */
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-top: var(--space-xs);
@@ -1413,7 +1425,8 @@ a:hover {
 .signature-reps {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--color-gray-400);
+  font-weight: 600;  /* Bolder for readability */
+  color: var(--color-gray-300);  /* Brightened for contrast */
   margin-top: 2px;
 }
 
@@ -1447,7 +1460,8 @@ a:hover {
 
 .record-label {
   font-size: var(--text-sm);
-  color: var(--color-gray-400);
+  font-weight: 500;  /* Ensure readable weight */
+  color: var(--color-gray-300);  /* Brightened for contrast */
 }
 
 .record-value {
@@ -1578,7 +1592,7 @@ a:hover {
 /* Legacy aliases */
 .text-success { color: var(--color-positive); }
 .text-danger { color: var(--color-negative); }
-.text-muted { color: var(--color-gray-400); }
+.text-muted { color: var(--color-gray-300); font-weight: 500; }  /* Brightened for readability */
 .text-small { font-size: var(--text-sm); }
 .text-large { font-size: var(--text-lg); }
 .text-mono { font-family: var(--font-mono); }

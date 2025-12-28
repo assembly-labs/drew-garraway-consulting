@@ -111,7 +111,7 @@ export function ErrorState({
         fontFamily: 'var(--font-heading)',
         fontSize: 'var(--text-xl)',
         fontWeight: 700,
-        color: 'var(--color-primary)',
+        color: 'var(--color-white)',
         marginBottom: 'var(--space-xs)',
         textTransform: 'uppercase',
         letterSpacing: 'var(--tracking-wide)',
@@ -122,7 +122,8 @@ export function ErrorState({
       {/* Error Message */}
       <p style={{
         fontSize: 'var(--text-lg)',
-        color: 'var(--color-gray-600)',
+        fontWeight: 500,
+        color: 'var(--color-gray-300)',
         marginBottom: 'var(--space-2xl)',
         maxWidth: 280,
         lineHeight: 'var(--leading-normal)',

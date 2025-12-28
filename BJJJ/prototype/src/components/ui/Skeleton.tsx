@@ -47,7 +47,7 @@ export function Skeleton({
         width: typeof width === 'number' ? `${width}px` : width,
         height: typeof height === 'number' ? `${height}px` : height,
         borderRadius: radiusMap[radius],
-        background: 'linear-gradient(90deg, var(--color-gray-200) 25%, var(--color-gray-100) 50%, var(--color-gray-200) 75%)',
+        background: 'linear-gradient(90deg, var(--color-gray-800) 25%, var(--color-gray-700) 50%, var(--color-gray-800) 75%)',
         backgroundSize: '200% 100%',
         animation: 'skeleton-shimmer 1.5s ease-in-out infinite',
         ...style,
@@ -122,8 +122,8 @@ export function SkeletonCard({
       role="status"
       aria-label="Loading content..."
       style={{
-        background: 'var(--color-white)',
-        border: '1px solid var(--color-gray-200)',
+        background: 'var(--color-gray-900)',
+        border: '1px solid var(--color-gray-800)',
         borderRadius: 'var(--radius-lg)',
         padding: 'var(--space-lg)',
         height: height ? (typeof height === 'number' ? `${height}px` : height) : 'auto',
@@ -157,8 +157,8 @@ export function SkeletonSessionCard() {
       role="status"
       aria-label="Loading session..."
       style={{
-        background: 'var(--color-white)',
-        border: '1px solid var(--color-gray-200)',
+        background: 'var(--color-gray-900)',
+        border: '1px solid var(--color-gray-800)',
         borderRadius: 'var(--radius-lg)',
         padding: 'var(--space-md)',
       }}
@@ -207,8 +207,8 @@ export function SkeletonStatCard() {
       role="status"
       aria-label="Loading stat..."
       style={{
-        background: 'var(--color-white)',
-        border: '1px solid var(--color-gray-200)',
+        background: 'var(--color-gray-900)',
+        border: '1px solid var(--color-gray-800)',
         borderRadius: 'var(--radius-lg)',
         padding: 'var(--space-lg)',
         textAlign: 'center',

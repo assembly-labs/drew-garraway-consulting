@@ -135,7 +135,8 @@ export function SessionCard({ session, onClick, isHighlighted }: SessionCardProp
         </div>
         <span style={{
           fontSize: 'var(--text-sm)',
-          color: 'var(--color-gray-500)',
+          fontWeight: 600,
+          color: 'var(--color-gray-400)',
         }}>
           {session.durationMinutes} min
         </span>
@@ -168,7 +169,7 @@ export function SessionCard({ session, onClick, isHighlighted }: SessionCardProp
             gap: 'var(--space-xs)',
           }}>
             <TallyMark count={session.submissionsGiven} color="var(--color-positive)" />
-            <span style={{ color: 'var(--color-gray-500)', fontSize: 'var(--text-xs)', textTransform: 'uppercase' }}>
+            <span style={{ color: 'var(--color-gray-400)', fontSize: 'var(--text-xs)', fontWeight: 600, textTransform: 'uppercase' }}>
               subs given
             </span>
           </div>
@@ -182,7 +183,7 @@ export function SessionCard({ session, onClick, isHighlighted }: SessionCardProp
             gap: 'var(--space-xs)',
           }}>
             <TallyMark count={session.submissionsReceived} color="var(--color-negative)" />
-            <span style={{ color: 'var(--color-gray-500)', fontSize: 'var(--text-xs)', textTransform: 'uppercase' }}>
+            <span style={{ color: 'var(--color-gray-400)', fontSize: 'var(--text-xs)', fontWeight: 600, textTransform: 'uppercase' }}>
               caught
             </span>
           </div>
@@ -192,7 +193,7 @@ export function SessionCard({ session, onClick, isHighlighted }: SessionCardProp
         {onClick && (
           <span style={{
             marginLeft: 'auto',
-            color: 'var(--color-gray-500)',
+            color: 'var(--color-gray-400)',
           }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="9 18 15 12 9 6" />
