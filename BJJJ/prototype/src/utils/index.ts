@@ -5,6 +5,18 @@
  * Helps eliminate code duplication and maintain consistency.
  */
 
+// Breakthrough Detection exports
+export {
+  detectBreakthroughs,
+  detectPlateau,
+  getMostSignificantBreakthrough,
+  type Breakthrough,
+  type BreakthroughType,
+  type BreakthroughConfidence,
+  type BreakthroughDetectionInput,
+  type PlateauDetection,
+} from './breakthrough-detection';
+
 // ===========================================
 // DATE UTILITIES
 // ===========================================

@@ -1,6 +1,10 @@
 /**
  * SessionCard Component
  * Compact card showing session summary in history list
+ *
+ * Terminology (per Data Science Audit Dec 2024):
+ * - "Subs given" = user tapped someone (positive)
+ * - "Submitted by" = user got tapped (negative)
  */
 
 export interface Session {
@@ -15,6 +19,8 @@ export interface Session {
   struggles: string[];
   workedWell?: string[];  // Things that went well
   sparringRounds?: number; // Number of sparring rounds
+  lessonTopic?: string; // What did the coach teach?
+  techniquesDrilled?: string[]; // What techniques were practiced?
 }
 
 interface SessionCardProps {
@@ -72,7 +78,12 @@ function TallyMark({ count, color }: { count: number; color: string }) {
 }
 
 export function SessionCard({ session, onClick, isHighlighted }: SessionCardProps) {
-  const techniquePreview = session.techniques.length > 0
+  // Prefer lessonTopic, fallback to techniques/struggles
+  const techniquePreview = session.lessonTopic
+    ? session.lessonTopic
+    : session.techniquesDrilled && session.techniquesDrilled.length > 0
+    ? session.techniquesDrilled[0]
+    : session.techniques.length > 0
     ? session.techniques[0]
     : session.struggles.length > 0
     ? `Worked on: ${session.struggles[0]}`
@@ -149,7 +160,7 @@ export function SessionCard({ session, onClick, isHighlighted }: SessionCardProp
         gap: 'var(--space-lg)',
         fontSize: 'var(--text-sm)',
       }}>
-        {/* Submissions Given - Tally */}
+        {/* Subs Given - Tally */}
         {session.submissionsGiven > 0 && (
           <div style={{
             display: 'flex',
@@ -158,12 +169,12 @@ export function SessionCard({ session, onClick, isHighlighted }: SessionCardProp
           }}>
             <TallyMark count={session.submissionsGiven} color="var(--color-positive)" />
             <span style={{ color: 'var(--color-gray-500)', fontSize: 'var(--text-xs)', textTransform: 'uppercase' }}>
-              dished
+              subs given
             </span>
           </div>
         )}
 
-        {/* Submissions Received - Tally */}
+        {/* Submitted By - Tally */}
         {session.submissionsReceived > 0 && (
           <div style={{
             display: 'flex',
@@ -172,7 +183,7 @@ export function SessionCard({ session, onClick, isHighlighted }: SessionCardProp
           }}>
             <TallyMark count={session.submissionsReceived} color="var(--color-negative)" />
             <span style={{ color: 'var(--color-gray-500)', fontSize: 'var(--text-xs)', textTransform: 'uppercase' }}>
-              tapped
+              caught
             </span>
           </div>
         )}

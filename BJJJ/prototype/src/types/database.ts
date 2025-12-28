@@ -14,7 +14,7 @@
 // ===========================================
 
 export type BeltLevel = 'white' | 'blue' | 'purple' | 'brown' | 'black';
-export type TrainingType = 'gi' | 'nogi' | 'openmat' | 'private' | 'competition';
+export type TrainingType = 'gi' | 'nogi' | 'openmat' | 'drilling' | 'private' | 'competition';
 export type ProficiencyLevel = 'learning' | 'developing' | 'proficient' | 'advanced';
 export type LoggingPreference = 'voice' | 'text' | 'undecided';
 
@@ -76,8 +76,18 @@ export interface Session {
   time: string | null; // e.g., "18:30"
   training_type: TrainingType;
   duration_minutes: number | null;
+
+  // Learning/Drilling section
+  lesson_topic: string | null; // What did the coach teach today?
+  techniques_drilled: string[]; // What techniques were practiced?
+
+  // Sparring section (gated by did_spar)
+  did_spar: boolean;
   sparring_rounds: number | null;
+
+  // Legacy field - prefer techniques_drilled
   techniques: string[]; // Array of technique names
+
   worked_well: string[]; // Things that went well
   struggles: string[]; // Areas of difficulty
   notes: string | null;
@@ -93,8 +103,11 @@ export interface SessionInsert {
   training_type: TrainingType;
   time?: string | null;
   duration_minutes?: number | null;
+  lesson_topic?: string | null;
+  techniques_drilled?: string[];
+  did_spar?: boolean;
   sparring_rounds?: number | null;
-  techniques?: string[];
+  techniques?: string[]; // Legacy
   worked_well?: string[];
   struggles?: string[];
   notes?: string | null;
@@ -107,8 +120,11 @@ export interface SessionUpdate {
   time?: string | null;
   training_type?: TrainingType;
   duration_minutes?: number | null;
+  lesson_topic?: string | null;
+  techniques_drilled?: string[];
+  did_spar?: boolean;
   sparring_rounds?: number | null;
-  techniques?: string[];
+  techniques?: string[]; // Legacy
   worked_well?: string[];
   struggles?: string[];
   notes?: string | null;
@@ -238,17 +254,39 @@ export interface TechniqueFilters {
 /**
  * SessionData is used during the session logging flow.
  * This is the in-memory representation before saving to database.
+ *
+ * DATA COLLECTION PHILOSOPHY:
+ * Only collect data users will reliably provide (exhausted post-training).
+ * See: Data Science Audit (Dec 2024) for reliability analysis.
  */
 export interface SessionData {
+  // Auto-captured
   date: string; // ISO date string
   time: string; // e.g., "18:30"
   dayOfWeek: string; // e.g., "Monday"
+
+  // Quick context (3 taps max)
   trainingType: TrainingType | null;
   durationMinutes: number | null;
+
+  // Learning section (what did you learn/drill today?)
+  lessonTopic: string | null; // What did the coach teach?
+  techniquesDrilled: string[]; // What techniques were practiced?
+
+  // Sparring section (gated by didSpar)
+  didSpar: boolean;
   sparringRounds: number | null;
-  techniques: string[];
+  submissionsGiven: string[]; // Technique names only (no partner context)
+  submissionsReceived: string[]; // Technique names only
+
+  // Qualitative (parsed from voice/text)
   workedWell: string[];
   struggles: string[];
+
+  // Legacy fields
+  techniques: string[]; // Deprecated: use techniquesDrilled
+
+  // Raw input
   rawText?: string; // Original text input (TextLogger)
   voiceTranscript?: string; // Voice transcription (VoiceLogger)
 }
@@ -262,10 +300,15 @@ export const DEFAULT_SESSION_DATA: SessionData = {
   dayOfWeek: new Date().toLocaleDateString('en-US', { weekday: 'long' }),
   trainingType: null,
   durationMinutes: null,
+  lessonTopic: null,
+  techniquesDrilled: [],
+  didSpar: false,
   sparringRounds: null,
-  techniques: [],
+  submissionsGiven: [],
+  submissionsReceived: [],
   workedWell: [],
   struggles: [],
+  techniques: [], // Legacy
 };
 
 // ===========================================
@@ -307,10 +350,13 @@ export interface SubmissionRecord {
   technique_name: string; // e.g., "Armbar", "Triangle"
   outcome: SubmissionOutcome;
   body_region: BodyRegion; // Derived from technique
-  partner_belt?: BeltLevel | null;
-  position?: string | null; // e.g., "Mount", "Closed Guard"
   date: string; // ISO date (denormalized for fast queries)
   created_at: string; // ISO timestamp
+
+  // DEPRECATED: Users don't reliably provide these (see Data Science Audit Dec 2024)
+  // Kept for backwards compatibility but not collected in new sessions
+  partner_belt?: BeltLevel | null; // DEPRECATED: Users roll with multiple partners, don't know belts
+  position?: string | null; // DEPRECATED: Users don't remember position context
 }
 
 // Insert type
@@ -319,9 +365,10 @@ export interface SubmissionInsert {
   user_id: string;
   technique_name: string;
   outcome: SubmissionOutcome;
+  date: string;
+  // DEPRECATED: Not collected in new sessions
   partner_belt?: BeltLevel | null;
   position?: string | null;
-  date: string;
 }
 
 // ===========================================

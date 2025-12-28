@@ -5,26 +5,27 @@
  * - Preferences (logging, notifications)
  * - Account management
  * - App info (version, legal, support)
+ * - Demo profile switcher for prototype approval
  */
 
 import { useState } from 'react';
-import { useUserProfile, type LoggingPreference, type BeltLevel } from '../../context/UserProfileContext';
+import { useUserProfile, type LoggingPreference } from '../../context/UserProfileContext';
+import { mockProfiles, type ActiveProfileKey } from '../../data/mock-profiles';
 
 interface SettingsProps {
   onBack: () => void;
 }
 
-// Belt options for the demo switcher
-const BELT_OPTIONS: { value: BeltLevel; label: string; color: string }[] = [
-  { value: 'white', label: 'White', color: 'var(--color-belt-white)' },
-  { value: 'blue', label: 'Blue', color: 'var(--color-belt-blue)' },
-  { value: 'purple', label: 'Purple', color: 'var(--color-belt-purple)' },
-  { value: 'brown', label: 'Brown', color: 'var(--color-belt-brown)' },
-  { value: 'black', label: 'Black', color: 'var(--color-belt-black)' },
+// Belt options for the demo switcher (only white through brown for demo)
+const DEMO_BELT_OPTIONS: { value: ActiveProfileKey; label: string; color: string; persona: string }[] = [
+  { value: 'white', label: 'White', color: 'var(--color-belt-white)', persona: 'David Morrison' },
+  { value: 'blue', label: 'Blue', color: 'var(--color-belt-blue)', persona: 'Marcus Chen' },
+  { value: 'purple', label: 'Purple', color: 'var(--color-belt-purple)', persona: 'Sofia Rodriguez' },
+  { value: 'brown', label: 'Brown', color: 'var(--color-belt-brown)', persona: 'Elena Kim' },
 ];
 
 export function Settings({ onBack }: SettingsProps) {
-  const { profile, setLoggingPreference, updateProfile } = useUserProfile();
+  const { profile, setLoggingPreference, isDemoMode, activeDemoProfile, switchDemoProfile, exitDemoMode } = useUserProfile();
 
   // Local state for toggles (would connect to a settings context in production)
   const [notifications, setNotifications] = useState({
@@ -126,9 +127,9 @@ export function Settings({ onBack }: SettingsProps) {
                   onClick={() => handleLoggingPrefChange('voice')}
                 />
                 <ToggleChip
-                  label="Type"
-                  selected={profile.loggingPreference === 'type'}
-                  onClick={() => handleLoggingPrefChange('type')}
+                  label="Text"
+                  selected={profile.loggingPreference === 'text'}
+                  onClick={() => handleLoggingPrefChange('text')}
                 />
               </div>
             </SettingsRow>
@@ -293,7 +294,7 @@ export function Settings({ onBack }: SettingsProps) {
           </div>
         </section>
 
-        {/* Developer Tools Section */}
+        {/* Demo Mode Section */}
         <section>
           <h2 style={{
             fontFamily: 'var(--font-heading)',
@@ -304,44 +305,81 @@ export function Settings({ onBack }: SettingsProps) {
             color: 'var(--color-gray-500)',
             marginBottom: 'var(--space-md)',
           }}>
-            Developer Tools
+            Demo Mode
           </h2>
 
           <div style={{
             backgroundColor: 'var(--color-gray-900)',
             borderRadius: 'var(--radius-lg)',
             padding: 'var(--space-lg)',
-            border: '1px dashed var(--color-gray-600)',
+            border: isDemoMode ? '2px solid var(--color-accent)' : '1px dashed var(--color-gray-600)',
           }}>
+            {/* Demo Mode Status Banner */}
+            {isDemoMode && (
+              <div style={{
+                backgroundColor: 'rgba(252, 211, 77, 0.15)',
+                borderRadius: 'var(--radius-md)',
+                padding: 'var(--space-md)',
+                marginBottom: 'var(--space-lg)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+                <div>
+                  <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--color-accent)' }}>
+                    Demo Mode Active
+                  </div>
+                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-gray-400)', marginTop: 2 }}>
+                    Viewing as {activeDemoProfile?.displayName}
+                  </div>
+                </div>
+                <button
+                  onClick={exitDemoMode}
+                  style={{
+                    padding: 'var(--space-xs) var(--space-sm)',
+                    backgroundColor: 'var(--color-gray-700)',
+                    border: 'none',
+                    borderRadius: 'var(--radius-sm)',
+                    color: 'var(--color-white)',
+                    fontSize: 'var(--text-xs)',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Exit Demo
+                </button>
+              </div>
+            )}
+
             <div style={{
               fontSize: 'var(--text-base)',
               color: 'var(--color-white)',
               fontWeight: 500,
               marginBottom: 'var(--space-xs)',
             }}>
-              Demo Belt Level
+              Preview Belt Experiences
             </div>
             <div style={{
               fontSize: 'var(--text-sm)',
               color: 'var(--color-gray-400)',
               marginBottom: 'var(--space-lg)',
             }}>
-              Switch belts to see how the app personalizes the experience
+              Load complete mock profiles to preview how the app personalizes for each belt level
             </div>
 
             <div style={{
-              display: 'flex',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
               gap: 'var(--space-sm)',
-              flexWrap: 'wrap',
             }}>
-              {BELT_OPTIONS.map((option) => {
-                const isSelected = profile.belt === option.value;
+              {DEMO_BELT_OPTIONS.map((option) => {
+                const isSelected = isDemoMode && activeDemoProfile?.key === option.value;
                 const isWhiteBelt = option.value === 'white';
+                const mockProfile = mockProfiles.find(p => p.key === option.value);
 
                 return (
                   <button
                     key={option.value}
-                    onClick={() => updateProfile({ belt: option.value })}
+                    onClick={() => switchDemoProfile(option.value)}
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
@@ -355,31 +393,47 @@ export function Settings({ onBack }: SettingsProps) {
                       borderRadius: 'var(--radius-md)',
                       cursor: 'pointer',
                       transition: 'all 0.2s ease',
-                      minWidth: 56,
                     }}
-                    aria-label={`Switch to ${option.label} belt`}
+                    aria-label={`Preview ${option.label} belt experience`}
                     aria-pressed={isSelected}
                   >
                     {/* Belt visual */}
                     <div style={{
-                      width: 48,
-                      height: 12,
+                      width: 56,
+                      height: 14,
                       backgroundColor: option.color,
                       borderRadius: 2,
                       border: isWhiteBelt ? '1px solid var(--color-gray-400)' : 'none',
                       boxShadow: isSelected ? '0 0 8px rgba(252, 211, 77, 0.4)' : 'none',
                     }} />
 
-                    {/* Label */}
+                    {/* Belt Label */}
                     <span style={{
-                      fontSize: 'var(--text-xs)',
-                      fontWeight: isSelected ? 600 : 400,
-                      color: isSelected ? 'var(--color-accent)' : 'var(--color-gray-400)',
+                      fontSize: 'var(--text-sm)',
+                      fontWeight: isSelected ? 600 : 500,
+                      color: isSelected ? 'var(--color-accent)' : 'var(--color-white)',
                       textTransform: 'uppercase',
                       letterSpacing: '0.05em',
                     }}>
                       {option.label}
                     </span>
+
+                    {/* Persona Name */}
+                    <span style={{
+                      fontSize: 'var(--text-xs)',
+                      color: 'var(--color-gray-400)',
+                    }}>
+                      {option.persona}
+                    </span>
+
+                    {/* Stats Preview */}
+                    <div style={{
+                      fontSize: 'var(--text-xs)',
+                      color: 'var(--color-gray-500)',
+                      marginTop: 'var(--space-xs)',
+                    }}>
+                      {mockProfile?.trainingStats.totalSessions} sessions
+                    </div>
 
                     {/* Selected indicator */}
                     {isSelected && (
@@ -390,7 +444,7 @@ export function Settings({ onBack }: SettingsProps) {
                         fill="none"
                         stroke="var(--color-accent)"
                         strokeWidth="3"
-                        style={{ marginTop: -4 }}
+                        style={{ marginTop: 2 }}
                       >
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
@@ -399,6 +453,46 @@ export function Settings({ onBack }: SettingsProps) {
                 );
               })}
             </div>
+
+            {/* Profile Details */}
+            {isDemoMode && activeDemoProfile && (
+              <div style={{
+                marginTop: 'var(--space-lg)',
+                padding: 'var(--space-md)',
+                backgroundColor: 'var(--color-gray-800)',
+                borderRadius: 'var(--radius-md)',
+              }}>
+                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-gray-500)', marginBottom: 'var(--space-sm)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                  Active Profile
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-sm)', fontSize: 'var(--text-sm)' }}>
+                  <div>
+                    <span style={{ color: 'var(--color-gray-400)' }}>Sessions: </span>
+                    <span style={{ color: 'var(--color-white)' }}>{activeDemoProfile.trainingStats.totalSessions}</span>
+                  </div>
+                  <div>
+                    <span style={{ color: 'var(--color-gray-400)' }}>Hours: </span>
+                    <span style={{ color: 'var(--color-white)' }}>{activeDemoProfile.trainingStats.totalHours}</span>
+                  </div>
+                  <div>
+                    <span style={{ color: 'var(--color-gray-400)' }}>Streak: </span>
+                    <span style={{ color: 'var(--color-white)' }}>{activeDemoProfile.trainingStats.currentStreak} days</span>
+                  </div>
+                  <div>
+                    <span style={{ color: 'var(--color-gray-400)' }}>Win Rate: </span>
+                    <span style={{ color: 'var(--color-white)' }}>
+                      {Math.round((activeDemoProfile.trainingStats.sparringRecord.wins /
+                        (activeDemoProfile.trainingStats.sparringRecord.wins +
+                         activeDemoProfile.trainingStats.sparringRecord.losses +
+                         activeDemoProfile.trainingStats.sparringRecord.draws)) * 100)}%
+                    </span>
+                  </div>
+                </div>
+                <div style={{ marginTop: 'var(--space-sm)', fontSize: 'var(--text-xs)', color: 'var(--color-gray-500)' }}>
+                  {activeDemoProfile.journalEntries.length} journal entries loaded
+                </div>
+              </div>
+            )}
 
             <div style={{
               marginTop: 'var(--space-lg)',
@@ -409,7 +503,11 @@ export function Settings({ onBack }: SettingsProps) {
               color: 'var(--color-gray-500)',
               textAlign: 'center',
             }}>
-              Currently viewing as: <strong style={{ color: 'var(--color-white)' }}>{profile.belt.charAt(0).toUpperCase() + profile.belt.slice(1)} Belt</strong>
+              {isDemoMode ? (
+                <>Currently viewing as: <strong style={{ color: 'var(--color-accent)' }}>{activeDemoProfile?.user.firstName} {activeDemoProfile?.user.lastName}</strong> ({profile.belt.charAt(0).toUpperCase() + profile.belt.slice(1)} Belt {profile.stripes} Stripes)</>
+              ) : (
+                <>Your profile: <strong style={{ color: 'var(--color-white)' }}>{profile.name || 'Not set'}</strong> ({profile.belt.charAt(0).toUpperCase() + profile.belt.slice(1)} Belt)</>
+              )}
             </div>
           </div>
         </section>

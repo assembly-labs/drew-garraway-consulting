@@ -1,6 +1,22 @@
 /**
  * Mock Training Journal Data
  * Session logs, sparring records, and personal notes
+ *
+ * DATA SCIENCE AUDIT (Dec 2024):
+ * Some fields in this mock data are UNRELIABLE in production:
+ * - partnerBelt: Users roll with multiple partners, don't know/report belts
+ * - outcome (W/L/draw): Users don't track per-roll outcomes
+ * - mood/energyLevel: Users won't submit feeling scores
+ *
+ * These fields remain in mock data for prototype demonstration but
+ * should not be relied upon in production features.
+ *
+ * RELIABLE DATA (users will provide):
+ * - date, type, duration
+ * - lessonTopic, techniquesDrilled
+ * - didSpar, sparringRounds (count)
+ * - submissionsGiven, submissionsReceived (technique names only)
+ * - notes
  */
 
 export type TrainingType = 'gi' | 'nogi' | 'openmat' | 'private' | 'competition';
@@ -9,9 +25,9 @@ export type SparringOutcome = 'submission-win' | 'submission-loss' | 'points-win
 export interface SparringRound {
   partnerId: string;
   partnerName: string;
-  partnerBelt: string;
-  outcome: SparringOutcome;
-  submissionType?: string;
+  partnerBelt: string; // DEPRECATED: Users don't reliably provide this
+  outcome: SparringOutcome; // DEPRECATED: Users don't track per-roll outcomes
+  submissionType?: string; // RELIABLE: Users remember submissions
   notes?: string;
 }
 
@@ -28,12 +44,23 @@ export interface JournalEntry {
   date: string;
   type: TrainingType;
   duration: number; // minutes
+
+  // NEW: Learning section (reliable data)
+  lessonTopic?: string; // What did the coach teach?
+  techniquesDrilled?: string[]; // Simple list of technique names
+
+  // Sparring section
+  didSpar?: boolean;
+  sparringRounds: SparringRound[]; // Legacy: Contains deprecated fields
+  submissionsGiven?: string[]; // NEW: Technique names only (reliable)
+  submissionsReceived?: string[]; // NEW: Technique names only (reliable)
+
+  // Legacy fields (kept for prototype, may not be reliable in production)
   techniques: TechniqueDrilled[];
-  sparringRounds: SparringRound[];
   notes: string;
   privateNotes?: string;
-  energyLevel: 1 | 2 | 3 | 4 | 5;
-  mood: 1 | 2 | 3 | 4 | 5;
+  energyLevel: 1 | 2 | 3 | 4 | 5; // DEPRECATED: Users won't submit
+  mood: 1 | 2 | 3 | 4 | 5; // DEPRECATED: Users won't submit
   injury?: string;
   isPrivate: boolean;
 }

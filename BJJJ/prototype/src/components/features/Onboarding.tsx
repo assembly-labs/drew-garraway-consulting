@@ -414,7 +414,7 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
           </button>
 
           <button
-            onClick={() => handleMicChoice('type')}
+            onClick={() => handleMicChoice('text')}
             style={{
               width: '100%',
               padding: 'var(--space-md)',

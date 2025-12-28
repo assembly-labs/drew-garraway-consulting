@@ -9,14 +9,23 @@
  * - Gold accents on black
  * - GREEN = positive, RED = negative
  * - NO EMOJIS - lineart only
+ *
+ * Demo Mode: Uses mock profile data for prototype approval
  */
 
+import { useState, useMemo } from 'react';
 import { currentUser } from '../../data/users';
 import { mockTrainingStats, mockJournalEntries } from '../../data/journal';
 import { mockProgressSummary, mockTonyChenPromotionReadiness } from '../../data/progress';
 import { mockSubmissionStats } from '../../data/submissions';
-import { BeltBadge, TrainingBadge, DeadliestAttackCard, AchillesHeelCard, BodyHeatMap } from '../ui';
+import { BeltBadge, TrainingBadge, DeadliestAttackCard, AchillesHeelCard, BodyHeatMap, BreakthroughHero } from '../ui';
 import { useCountUp, useBeltPersonalization } from '../../hooks';
+import { useUserProfile } from '../../context/UserProfileContext';
+import {
+  detectBreakthroughs,
+  getMostSignificantBreakthrough,
+  type BreakthroughDetectionInput,
+} from '../../utils/breakthrough-detection';
 
 // ===========================================
 // SPECIALIST NICKNAME LOGIC
@@ -142,7 +151,7 @@ function getHeroMetricData(
       return {
         value: stats.thisMonth.sparringRounds,
         label: 'rounds this month',
-        sublabel: `${stats.sparringRecord.wins} submissions landed. Time on the mat matters.`,
+        sublabel: `${stats.thisMonth.sessions} sessions logged. Time on the mat matters.`,
       };
     case 'teaching_sessions': {
       // Derive from sessions (prototype approximation: ~20% of sessions involve teaching)
@@ -199,14 +208,60 @@ function getInsightMessage(insightFocus: string): { working: string; focus: stri
 }
 
 export function Dashboard({ onNavigate }: DashboardProps) {
-  const user = currentUser;
-  const stats = mockTrainingStats;
-  const progress = mockProgressSummary;
-  const readiness = mockTonyChenPromotionReadiness;
-  const recentEntries = mockJournalEntries.slice(0, 3);
+  // Check for demo mode
+  const { isDemoMode, activeDemoProfile } = useUserProfile();
+
+  // State for dismissing breakthrough hero
+  const [breakthroughDismissed, setBreakthroughDismissed] = useState(false);
+
+  // Use demo profile data if in demo mode, otherwise use default mock data
+  const user = isDemoMode && activeDemoProfile ? activeDemoProfile.user : currentUser;
+  const stats = isDemoMode && activeDemoProfile
+    ? activeDemoProfile.trainingStats as typeof mockTrainingStats
+    : mockTrainingStats;
+  const progress = isDemoMode && activeDemoProfile ? activeDemoProfile.progressSummary : mockProgressSummary;
+  const readiness = isDemoMode && activeDemoProfile
+    ? {
+        ...mockTonyChenPromotionReadiness,
+        technicalProgress: {
+          ...mockTonyChenPromotionReadiness.technicalProgress,
+          overallPercentage: activeDemoProfile.progressSummary.overallCompletion,
+        },
+      }
+    : mockTonyChenPromotionReadiness;
+  const recentEntries = isDemoMode && activeDemoProfile
+    ? activeDemoProfile.journalEntries.slice(0, 3)
+    : mockJournalEntries.slice(0, 3);
+  const allJournalEntries = isDemoMode && activeDemoProfile
+    ? activeDemoProfile.journalEntries
+    : mockJournalEntries;
 
   // Belt personalization for adaptive dashboard behavior
   const { profile, dashboard, isInRiskWindow } = useBeltPersonalization();
+
+  // ===========================================
+  // BREAKTHROUGH DETECTION
+  // ===========================================
+  const breakthrough = useMemo(() => {
+    const input: BreakthroughDetectionInput = {
+      journalEntries: allJournalEntries,
+      trainingStats: {
+        totalSessions: stats.totalSessions,
+        currentStreak: stats.currentStreak,
+        longestStreak: stats.longestStreak,
+        sparringRecord: stats.sparringRecord,
+        submissionsMade: stats.submissionsMade,
+        submissionsReceived: stats.submissionsReceived,
+      },
+      belt: profile.belt,
+    };
+
+    const detectedBreakthroughs = detectBreakthroughs(input);
+    return getMostSignificantBreakthrough(detectedBreakthroughs);
+  }, [allJournalEntries, stats, profile.belt]);
+
+  // Show breakthrough hero if we have one and it hasn't been dismissed
+  const showBreakthroughHero = breakthrough !== null && !breakthroughDismissed;
 
   // Get belt-specific hero metric
   const heroMetric = getHeroMetricData(dashboard.primaryMetric, stats);
@@ -252,103 +307,110 @@ export function Dashboard({ onNavigate }: DashboardProps) {
     <div style={{ background: 'var(--color-black)', minHeight: '100vh' }}>
 
       {/* ============================================
-          HERO - Massive session count
+          HERO - Breakthrough or Session Count
           ============================================ */}
-      <section
-        style={{
-          minHeight: '70vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-          padding: '24px',
-          paddingBottom: '48px',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
-        {/* Gold glow */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '-30%',
-            right: '-30%',
-            width: '150%',
-            height: '150%',
-            background: 'radial-gradient(circle at 70% 30%, rgba(245, 166, 35, 0.12) 0%, transparent 50%)',
-            pointerEvents: 'none',
-          }}
+      {showBreakthroughHero && breakthrough ? (
+        <BreakthroughHero
+          breakthrough={breakthrough}
+          onDismiss={() => setBreakthroughDismissed(true)}
         />
-
-        <div
+      ) : (
+        <section
           style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: 'var(--text-xs)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.25em',
-            color: 'var(--color-gold)',
-            marginBottom: '12px',
+            minHeight: '70vh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            padding: '24px',
+            paddingBottom: '48px',
+            position: 'relative',
+            overflow: 'hidden',
           }}
         >
-          {monthName}
-        </div>
+          {/* Gold glow */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '-30%',
+              right: '-30%',
+              width: '150%',
+              height: '150%',
+              background: 'radial-gradient(circle at 70% 30%, rgba(245, 166, 35, 0.12) 0%, transparent 50%)',
+              pointerEvents: 'none',
+            }}
+          />
 
-        <div
-          style={{
-            fontSize: 'clamp(100px, 30vw, 160px)',
-            fontWeight: 700,
-            lineHeight: 0.85,
-            letterSpacing: '-0.04em',
-            background: 'linear-gradient(180deg, #ffffff 0%, #666666 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}
-        >
-          {animatedHeroValue}
-        </div>
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.25em',
+              color: 'var(--color-gold)',
+              marginBottom: '12px',
+            }}
+          >
+            {monthName}
+          </div>
 
-        <div
-          style={{
-            fontSize: 'var(--text-xl)',
-            fontWeight: 300,
-            color: 'var(--color-gray-400)',
-            marginTop: '-4px',
-            marginBottom: '24px',
-          }}
-        >
-          {heroMetric.label}
-        </div>
+          <div
+            style={{
+              fontSize: 'clamp(100px, 30vw, 160px)',
+              fontWeight: 700,
+              lineHeight: 0.85,
+              letterSpacing: '-0.04em',
+              background: 'linear-gradient(180deg, #ffffff 0%, #666666 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            {animatedHeroValue}
+          </div>
 
-        <p
-          style={{
-            fontSize: 'var(--text-base)',
-            color: 'var(--color-gray-400)',
-            maxWidth: '300px',
-            lineHeight: 1.6,
-            margin: 0,
-          }}
-        >
-          {heroMetric.sublabel}
-          {' '}{getBeltMotivationalMessage()}
-        </p>
+          <div
+            style={{
+              fontSize: 'var(--text-xl)',
+              fontWeight: 300,
+              color: 'var(--color-gray-400)',
+              marginTop: '-4px',
+              marginBottom: '24px',
+            }}
+          >
+            {heroMetric.label}
+          </div>
 
-        {/* Scroll hint */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '20px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            color: 'var(--color-gray-600)',
-            fontSize: 'var(--text-xs)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.2em',
-            opacity: 0.6,
-          }}
-        >
-          scroll
-        </div>
-      </section>
+          <p
+            style={{
+              fontSize: 'var(--text-base)',
+              color: 'var(--color-gray-400)',
+              maxWidth: '300px',
+              lineHeight: 1.6,
+              margin: 0,
+            }}
+          >
+            {heroMetric.sublabel}
+            {' '}{getBeltMotivationalMessage()}
+          </p>
+
+          {/* Scroll hint */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '20px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              color: 'var(--color-gray-600)',
+              fontSize: 'var(--text-xs)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.2em',
+              opacity: 0.6,
+            }}
+          >
+            scroll
+          </div>
+        </section>
+      )}
 
       {/* ============================================
           ATTACK PROFILE - Body heat map with specialist nickname
@@ -468,7 +530,7 @@ export function Dashboard({ onNavigate }: DashboardProps) {
           background: 'var(--color-gray-800)',
         }}
       >
-        {/* SUBMISSIONS - GREEN (positive) */}
+        {/* SUBS GIVEN - GREEN (positive) */}
         <div
           style={{
             background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, var(--color-black) 100%)',
@@ -485,7 +547,7 @@ export function Dashboard({ onNavigate }: DashboardProps) {
               marginBottom: '12px',
             }}
           >
-            Submissions
+            Subs Given
           </div>
           <div
             style={{
@@ -505,11 +567,11 @@ export function Dashboard({ onNavigate }: DashboardProps) {
               marginTop: '8px',
             }}
           >
-            you landed
+            total finishes
           </div>
         </div>
 
-        {/* TAPPED - RED (negative) */}
+        {/* SUBMITTED BY - RED (negative) */}
         <div
           style={{
             background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, var(--color-black) 100%)',
@@ -526,7 +588,7 @@ export function Dashboard({ onNavigate }: DashboardProps) {
               marginBottom: '12px',
             }}
           >
-            Tapped Out
+            Submitted By
           </div>
           <div
             style={{
@@ -546,7 +608,7 @@ export function Dashboard({ onNavigate }: DashboardProps) {
               marginTop: '8px',
             }}
           >
-            this month
+            times caught
           </div>
         </div>
       </div>

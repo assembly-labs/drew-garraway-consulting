@@ -7,16 +7,18 @@
  * - Progressive profiling data (collected over 20 sessions)
  * - Session count tracking for nudge triggers
  * - Profile completion percentage
+ * - Demo mode with full mock profiles for prototype approval
  *
  * Persists to localStorage for prototype; would be API-backed in production.
  */
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { getProfileByBelt, type MockProfile, type ActiveProfileKey } from '../data/mock-profiles';
 
 // Belt types
 export type BeltLevel = 'white' | 'blue' | 'purple' | 'brown' | 'black';
 export type TrainingGoal = 'competition' | 'fitness' | 'self-defense' | 'mental' | 'community';
-export type LoggingPreference = 'voice' | 'type' | 'undecided';
+export type LoggingPreference = 'voice' | 'text' | 'undecided';
 
 // Generate a simple unique ID for local-first users
 function generateUserId(): string {
@@ -218,18 +220,48 @@ interface UserProfileContextType {
 
   // Reset (for testing)
   resetProfile: () => void;
+
+  // Demo mode - for prototype approval
+  isDemoMode: boolean;
+  activeDemoProfile: MockProfile | null;
+  switchDemoProfile: (belt: ActiveProfileKey) => void;
+  exitDemoMode: () => void;
 }
 
 const UserProfileContext = createContext<UserProfileContextType | null>(null);
 
 const STORAGE_KEY = 'bjj-user-profile';
+const DEMO_MODE_KEY = 'bjj-demo-mode';
 
 export function UserProfileProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<UserProfile>(DEFAULT_PROFILE);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Demo mode state
+  const [isDemoMode, setIsDemoMode] = useState(false);
+  const [activeDemoProfile, setActiveDemoProfile] = useState<MockProfile | null>(null);
+
   // Load profile from localStorage on mount
   useEffect(() => {
+    // Check for demo mode first
+    const demoModeStored = localStorage.getItem(DEMO_MODE_KEY);
+    if (demoModeStored) {
+      try {
+        const { enabled, belt } = JSON.parse(demoModeStored);
+        if (enabled && belt) {
+          const demoProfile = getProfileByBelt(belt);
+          setActiveDemoProfile(demoProfile);
+          setProfile(demoProfile.contextProfile);
+          setIsDemoMode(true);
+          setIsLoading(false);
+          return;
+        }
+      } catch {
+        console.error('Failed to parse demo mode settings');
+      }
+    }
+
+    // Normal profile loading
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
       try {
@@ -373,7 +405,40 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
   // Reset profile (for testing)
   const resetProfile = () => {
     localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(DEMO_MODE_KEY);
     setProfile(DEFAULT_PROFILE);
+    setIsDemoMode(false);
+    setActiveDemoProfile(null);
+  };
+
+  // Switch to a demo profile (for prototype approval)
+  const switchDemoProfile = (belt: ActiveProfileKey) => {
+    const demoProfile = getProfileByBelt(belt);
+    setActiveDemoProfile(demoProfile);
+    setProfile(demoProfile.contextProfile);
+    setIsDemoMode(true);
+    localStorage.setItem(DEMO_MODE_KEY, JSON.stringify({ enabled: true, belt }));
+  };
+
+  // Exit demo mode and return to normal profile
+  const exitDemoMode = () => {
+    localStorage.removeItem(DEMO_MODE_KEY);
+    setIsDemoMode(false);
+    setActiveDemoProfile(null);
+
+    // Reload the real profile
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        const userId = parsed.userId || generateUserId();
+        setProfile({ ...DEFAULT_PROFILE, ...parsed, userId });
+      } catch {
+        setProfile(DEFAULT_PROFILE);
+      }
+    } else {
+      setProfile(DEFAULT_PROFILE);
+    }
   };
 
   return (
@@ -391,6 +456,10 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
         getProfileCompletion,
         getMissingFields,
         resetProfile,
+        isDemoMode,
+        activeDemoProfile,
+        switchDemoProfile,
+        exitDemoMode,
       }}
     >
       {children}

@@ -361,7 +361,7 @@ export function ProfileScreen({ onNavigate }: ProfileScreenProps) {
           <ProfileField
             label="Logging Preference"
             value={profile.loggingPreference === 'voice' ? 'Voice' :
-                   profile.loggingPreference === 'type' ? 'Type' : null}
+                   profile.loggingPreference === 'text' ? 'Text' : null}
             completed={profile.loggingPreference !== 'undecided'}
           />
         </div>

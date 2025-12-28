@@ -2,7 +2,10 @@
  * Header Component
  * App header with title and optional actions
  * Includes profile avatar in top-right for navigation to Profile screen
+ * Shows demo mode indicator when viewing mock profiles
  */
+
+import { useUserProfile } from '../../context/UserProfileContext';
 
 interface HeaderProps {
   title?: string;
@@ -21,6 +24,8 @@ export function Header({
   userInitial,
   onProfileClick,
 }: HeaderProps) {
+  // Get demo mode status for indicator
+  const { isDemoMode, activeDemoProfile } = useUserProfile();
   return (
     <header style={{
       backgroundColor: 'var(--color-primary)',
@@ -68,6 +73,22 @@ export function Header({
         }}>
           {title}
         </h1>
+        {/* Demo Mode Badge */}
+        {isDemoMode && activeDemoProfile && (
+          <div style={{
+            backgroundColor: 'var(--color-accent)',
+            color: 'var(--color-primary)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 700,
+            padding: '2px 8px',
+            borderRadius: 'var(--radius-sm)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            marginLeft: 'var(--space-sm)',
+          }}>
+            Demo: {activeDemoProfile.key.charAt(0).toUpperCase() + activeDemoProfile.key.slice(1)}
+          </div>
+        )}
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
         {rightAction && (
