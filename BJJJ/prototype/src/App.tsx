@@ -9,9 +9,10 @@ import { SessionHistory } from './components/features/SessionHistory'
 import { TechniqueLibrary } from './components/features/TechniqueLibrary'
 import { TrainingFeedback } from './components/features/TrainingFeedback'
 import { ProfileScreen } from './components/features/ProfileScreen'
+import { Settings } from './components/features/Settings'
 import { useUserProfile } from './context/UserProfileContext'
 
-type View = 'stats' | 'journal' | 'library' | 'insights' | 'profile' | 'design-system'
+type View = 'stats' | 'journal' | 'library' | 'insights' | 'profile' | 'settings' | 'design-system'
 
 function App() {
   // Get user profile for header avatar
@@ -106,11 +107,11 @@ function App() {
     <div style={{ minHeight: '100vh', backgroundColor: 'var(--color-black)' }}>
       {/* Header - changes based on current view */}
       <Header
-        title={currentView === 'profile' ? 'PROFILE' : 'BJJJ'}
-        showBackButton={currentView === 'profile'}
-        onBack={() => setCurrentView(lastTabView)}
-        userInitial={currentView !== 'profile' ? userInitial : undefined}
-        onProfileClick={currentView !== 'profile' ? handleProfileClick : undefined}
+        title={currentView === 'profile' ? 'PROFILE' : currentView === 'settings' ? 'SETTINGS' : 'BJJJ'}
+        showBackButton={currentView === 'profile' || currentView === 'settings'}
+        onBack={() => currentView === 'settings' ? setCurrentView('profile') : setCurrentView(lastTabView)}
+        userInitial={currentView !== 'profile' && currentView !== 'settings' ? userInitial : undefined}
+        onProfileClick={currentView !== 'profile' && currentView !== 'settings' ? handleProfileClick : undefined}
       />
 
       {/* Main Content */}
@@ -142,11 +143,15 @@ function App() {
             <ProfileScreen onNavigate={handleNavigate} />
           </div>
         )}
+
+        {currentView === 'settings' && (
+          <Settings onBack={() => setCurrentView('profile')} />
+        )}
       </main>
 
-      {/* Bottom Navigation - show last valid tab when on profile screen */}
+      {/* Bottom Navigation - show last valid tab when on profile/settings screen */}
       <TabBar
-        activeTab={currentView === 'profile' ? lastTabView : currentView as TabId}
+        activeTab={currentView === 'profile' || currentView === 'settings' ? lastTabView : currentView as TabId}
         onTabChange={(tab) => setCurrentView(tab)}
       />
 
