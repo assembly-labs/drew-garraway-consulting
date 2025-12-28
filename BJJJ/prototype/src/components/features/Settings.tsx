@@ -48,7 +48,7 @@ export function Settings({ onBack }: SettingsProps) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'ally-export.json';
+    a.download = 'bjjj-export.json';
     a.click();
     URL.revokeObjectURL(url);
   };
