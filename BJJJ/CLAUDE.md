@@ -26,33 +26,19 @@ BJJ Journal is a voice-first training journal app for Brazilian Jiu-Jitsu practi
 
 ```
 LOCAL (your laptop)  →  REMOTE (GitHub)  →  PRODUCTION (live site)
-    npm run dev           git push            wrangler deploy
+    npm run dev           git push            (user deploys manually)
    localhost:5173                            bjjj.pages.dev
 ```
 
-### The One Command You Need
+### Claude's Workflow
 
-After making any changes you want to keep:
+When making changes:
 
-```bash
-npm run ship
-```
+1. **Build** - Run `npm run build` (from `/prototype`) to check for errors
+2. **Commit** - Commit changes to git with a clear message
+3. **Push** - Push to `main` branch
 
-This single command does everything:
-1. **Builds** - Compiles TypeScript, checks for errors
-2. **Commits** - Saves to git history (with timestamp)
-3. **Pushes** - Backs up to GitHub
-4. **Deploys** - Publishes to bjjj.pages.dev
-
-### Rollback If Needed
-
-Every `ship` creates a save point in git history:
-
-```bash
-git log --oneline           # See all save points
-git revert <commit-id>      # Undo a specific change
-npm run ship                # Deploy the rollback
-```
+**DO NOT deploy.** User handles deployment manually.
 
 ### Available Commands
 
@@ -60,8 +46,6 @@ npm run ship                # Deploy the rollback
 |---------|--------------|
 | `npm run dev` | Local preview at localhost:5173 |
 | `npm run build` | Compile and check for errors |
-| `npm run ship` | **Build + Commit + Push + Deploy → LIVE** |
-| `npm run deploy` | Deploy only (no commit) |
 
 ### Testing Belt Personalization
 
@@ -70,13 +54,6 @@ npm run ship                # Deploy the rollback
 3. Use Demo Mode belt switcher
 4. Select White / Blue / Purple / Brown
 5. Navigate app to see personalized content
-
-### Process Checklist
-
-Before ending any work session:
-- [ ] Run `npm run ship`
-- [ ] Verify changes at bjjj.pages.dev
-- [ ] Hard refresh browser if needed (Cmd+Shift+R)
 
 ---
 
