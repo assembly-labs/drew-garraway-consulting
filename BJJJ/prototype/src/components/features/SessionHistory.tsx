@@ -4,6 +4,7 @@
  */
 
 import { SessionCard, type Session } from './SessionCard';
+import { useBeltPersonalization } from '../../hooks';
 
 // Mock session data
 const MOCK_SESSIONS: Session[] = [
@@ -70,6 +71,26 @@ interface SessionHistoryProps {
 }
 
 export function SessionHistory({ onLogNew, onSelectSession }: SessionHistoryProps) {
+  // Belt personalization for empty states
+  const { profile: beltProfile } = useBeltPersonalization();
+
+  // Belt-aware empty state messages
+  const getEmptyStateMessage = () => {
+    switch (beltProfile.belt) {
+      case 'white':
+        return "Log your first training after class. Every session counts on your journey.";
+      case 'blue':
+        return "Start building your training history. The patterns you track become the game you build.";
+      case 'purple':
+      case 'brown':
+        return "Begin your session log. Tracking reveals patterns you might otherwise miss.";
+      case 'black':
+        return "Start your journal. Even at this level, documentation sharpens awareness.";
+      default:
+        return "Log your first training after class.";
+    }
+  };
+
   // Group sessions by date category
   const today = MOCK_SESSIONS.filter(s => s.date === 'Today');
   const yesterday = MOCK_SESSIONS.filter(s => s.date === 'Yesterday');
@@ -217,7 +238,7 @@ export function SessionHistory({ onLogNew, onSelectSession }: SessionHistoryProp
           </div>
           <h3 style={{ marginBottom: 'var(--space-sm)', color: 'var(--color-white)' }}>No Sessions Yet</h3>
           <p style={{ marginBottom: 'var(--space-lg)', color: 'var(--color-gray-400)' }}>
-            Log your first training after class.
+            {getEmptyStateMessage()}
           </p>
           <button
             onClick={onLogNew}

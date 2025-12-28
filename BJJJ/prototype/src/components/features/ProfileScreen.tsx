@@ -15,6 +15,7 @@ import { EditSheet } from './EditSheet';
 import { ProfileNudge } from './ProfileNudge';
 import { BodyHeatMap } from '../ui';
 import { mockSubmissionStats } from '../../data/submissions';
+import { useBeltPersonalization } from '../../hooks';
 
 interface ProfileScreenProps {
   onNavigate?: (view: string) => void;
@@ -47,6 +48,9 @@ export function ProfileScreen({ onNavigate }: ProfileScreenProps) {
   } = useUserProfile();
 
   const [activeQuestion, setActiveQuestion] = useState<typeof PROFILE_QUESTIONS[0] | null>(null);
+
+  // Belt personalization for profile display
+  const { profile: beltProfile } = useBeltPersonalization();
 
   const completion = getProfileCompletion();
   const missingFields = getMissingFields();
@@ -135,6 +139,30 @@ export function ProfileScreen({ onNavigate }: ProfileScreenProps) {
             )}
           </span>
         </div>
+
+        {/* Belt Stage Name */}
+        <div style={{
+          marginTop: 'var(--space-md)',
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--text-xs)',
+          color: 'var(--color-gold)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+        }}>
+          {beltProfile.stageName}
+        </div>
+
+        {/* Journey Encouragement */}
+        <p style={{
+          marginTop: 'var(--space-sm)',
+          fontSize: 'var(--text-sm)',
+          color: 'var(--color-gray-400)',
+          fontStyle: 'italic',
+          maxWidth: '280px',
+          margin: 'var(--space-sm) auto 0',
+        }}>
+          {beltProfile.mindsetShift}
+        </p>
       </div>
 
       {/* Profile Completion Card */}

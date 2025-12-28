@@ -8,14 +8,23 @@
  */
 
 import { useState } from 'react';
-import { useUserProfile, type LoggingPreference } from '../../context/UserProfileContext';
+import { useUserProfile, type LoggingPreference, type BeltLevel } from '../../context/UserProfileContext';
 
 interface SettingsProps {
   onBack: () => void;
 }
 
+// Belt options for the demo switcher
+const BELT_OPTIONS: { value: BeltLevel; label: string; color: string }[] = [
+  { value: 'white', label: 'White', color: 'var(--color-belt-white)' },
+  { value: 'blue', label: 'Blue', color: 'var(--color-belt-blue)' },
+  { value: 'purple', label: 'Purple', color: 'var(--color-belt-purple)' },
+  { value: 'brown', label: 'Brown', color: 'var(--color-belt-brown)' },
+  { value: 'black', label: 'Black', color: 'var(--color-belt-black)' },
+];
+
 export function Settings({ onBack }: SettingsProps) {
-  const { profile, setLoggingPreference } = useUserProfile();
+  const { profile, setLoggingPreference, updateProfile } = useUserProfile();
 
   // Local state for toggles (would connect to a settings context in production)
   const [notifications, setNotifications] = useState({
@@ -280,6 +289,127 @@ export function Settings({ onBack }: SettingsProps) {
               <span style={{ color: 'var(--color-gray-700)', fontSize: 'var(--text-sm)', fontWeight: 500 }}>
                 1.0.0 (Prototype)
               </span>
+            </div>
+          </div>
+        </section>
+
+        {/* Developer Tools Section */}
+        <section>
+          <h2 style={{
+            fontFamily: 'var(--font-heading)',
+            fontSize: 'var(--text-sm)',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: 'var(--tracking-widest)',
+            color: 'var(--color-gray-500)',
+            marginBottom: 'var(--space-md)',
+          }}>
+            Developer Tools
+          </h2>
+
+          <div style={{
+            backgroundColor: 'var(--color-gray-900)',
+            borderRadius: 'var(--radius-lg)',
+            padding: 'var(--space-lg)',
+            border: '1px dashed var(--color-gray-600)',
+          }}>
+            <div style={{
+              fontSize: 'var(--text-base)',
+              color: 'var(--color-white)',
+              fontWeight: 500,
+              marginBottom: 'var(--space-xs)',
+            }}>
+              Demo Belt Level
+            </div>
+            <div style={{
+              fontSize: 'var(--text-sm)',
+              color: 'var(--color-gray-400)',
+              marginBottom: 'var(--space-lg)',
+            }}>
+              Switch belts to see how the app personalizes the experience
+            </div>
+
+            <div style={{
+              display: 'flex',
+              gap: 'var(--space-sm)',
+              flexWrap: 'wrap',
+            }}>
+              {BELT_OPTIONS.map((option) => {
+                const isSelected = profile.belt === option.value;
+                const isWhiteBelt = option.value === 'white';
+
+                return (
+                  <button
+                    key={option.value}
+                    onClick={() => updateProfile({ belt: option.value })}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: 'var(--space-xs)',
+                      padding: 'var(--space-md)',
+                      backgroundColor: isSelected ? 'rgba(252, 211, 77, 0.15)' : 'var(--color-gray-800)',
+                      border: isSelected
+                        ? '2px solid var(--color-accent)'
+                        : '2px solid transparent',
+                      borderRadius: 'var(--radius-md)',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      minWidth: 56,
+                    }}
+                    aria-label={`Switch to ${option.label} belt`}
+                    aria-pressed={isSelected}
+                  >
+                    {/* Belt visual */}
+                    <div style={{
+                      width: 48,
+                      height: 12,
+                      backgroundColor: option.color,
+                      borderRadius: 2,
+                      border: isWhiteBelt ? '1px solid var(--color-gray-400)' : 'none',
+                      boxShadow: isSelected ? '0 0 8px rgba(252, 211, 77, 0.4)' : 'none',
+                    }} />
+
+                    {/* Label */}
+                    <span style={{
+                      fontSize: 'var(--text-xs)',
+                      fontWeight: isSelected ? 600 : 400,
+                      color: isSelected ? 'var(--color-accent)' : 'var(--color-gray-400)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                    }}>
+                      {option.label}
+                    </span>
+
+                    {/* Selected indicator */}
+                    {isSelected && (
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="var(--color-accent)"
+                        strokeWidth="3"
+                        style={{ marginTop: -4 }}
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div style={{
+              marginTop: 'var(--space-lg)',
+              padding: 'var(--space-sm) var(--space-md)',
+              backgroundColor: 'var(--color-gray-800)',
+              borderRadius: 'var(--radius-sm)',
+              fontSize: 'var(--text-xs)',
+              color: 'var(--color-gray-500)',
+              textAlign: 'center',
+            }}>
+              Currently viewing as: <strong style={{ color: 'var(--color-white)' }}>{profile.belt.charAt(0).toUpperCase() + profile.belt.slice(1)} Belt</strong>
             </div>
           </div>
         </section>

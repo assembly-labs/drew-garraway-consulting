@@ -15,6 +15,35 @@ BJJ Journal is a voice-first training journal app for Brazilian Jiu-Jitsu practi
 - **Storage:** localStorage (prototype), API-ready patterns
 - **No external UI libraries** - custom components only
 
+## Belt Personalization System (PRIORITY)
+
+> **Built Dec 2024** - Use this system to personalize ALL user-facing features.
+
+A comprehensive belt-aware personalization engine exists at `/prototype/src/config/belt-system/`. **Leverage this in all new feature work.**
+
+### Quick Access
+```typescript
+import { useBeltPersonalization } from '@/hooks';
+
+const { profile, dashboard, chatbot, videoTutorials, analyzeJournal } = useBeltPersonalization();
+```
+
+### What It Provides
+- **Belt Psychology Profiles** - Struggles, motivations, plateaus per belt
+- **Feature Adaptations** - Dashboard, session logger, chatbot, video recommendations
+- **Risk Detection** - Dropout warning signs with belt-specific interventions
+- **Journal Analysis** - Detect ego challenges, breakthroughs, injuries in text
+
+### Priority Integration Points
+1. **Chatbot/AI responses** - Use `chatbot.toneProfile`, `chatbot.technicalVocabulary`
+2. **Video suggestions** - Use `videoTutorials.recommendedCategories`
+3. **Dashboard metrics** - Use `dashboard.primaryMetric`, `dashboard.insightFocus`
+4. **Post-session messages** - Use `sessionLogger.postSessionMessage`
+
+See `/BELT_PERSONALIZATION_SYSTEM.md` for full documentation.
+
+---
+
 ## Project Structure
 
 ```
@@ -52,7 +81,17 @@ BJJ Journal is a voice-first training journal app for Brazilian Jiu-Jitsu practi
 │       ├── Toast.tsx      # Toast notification system
 │       └── Icons.tsx      # Icon components
 ├── config/
-│   └── app.ts             # App config, feature flags, API settings
+│   ├── app.ts             # App config, feature flags, API settings
+│   └── belt-system/       # Belt personalization engine (IMPORTANT)
+│       ├── index.ts       # Central exports
+│       ├── types.ts       # Type definitions
+│       ├── belt-profiles.ts    # Psychology profiles per belt
+│       ├── feature-adaptations.ts  # How features adapt by belt
+│       ├── risk-signals.ts     # Dropout risk detection
+│       └── journal-patterns.ts # Journal text analysis
+├── hooks/
+│   ├── index.ts           # Hook exports
+│   └── useBeltPersonalization.ts  # Belt personalization React hook
 ├── context/
 │   └── UserProfileContext.tsx   # Profile state + progressive profiling
 ├── data/                  # Mock data (FPO content)

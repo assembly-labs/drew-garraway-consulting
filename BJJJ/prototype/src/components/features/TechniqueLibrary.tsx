@@ -26,6 +26,7 @@ import {
   getMindsetVideos,
 } from '../../data/techniqueVideos';
 import { YouTubeEmbed, VideoThumbnail } from '../ui/YouTubeEmbed';
+import { useBeltPersonalization } from '../../hooks';
 import type { TechniqueVideo, VideoRecommendation, PositionCategory } from '../../types/techniqueVideos';
 
 // ===========================================
@@ -92,6 +93,9 @@ export function TechniqueLibrary({ onOpenFeedback }: TechniqueLibraryProps) {
   const [selectedVideo, setSelectedVideo] = useState<TechniqueVideo | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMindsetCategory, setSelectedMindsetCategory] = useState<MindsetCategoryId | null>(null);
+
+  // Belt personalization for video recommendations
+  const { videoTutorials, chatbot } = useBeltPersonalization();
 
   // Scroll to top when component mounts (user taps Techniques tab)
   useEffect(() => {
@@ -390,6 +394,8 @@ export function TechniqueLibrary({ onOpenFeedback }: TechniqueLibraryProps) {
             <ForYouView
               recommendations={mockForYouSection.recommendations}
               onOpenFeedback={onOpenFeedback}
+              playlistName={videoTutorials.personalizedPlaylistName}
+              emphasizeTopics={chatbot.emphasizeTopics}
             />
           )}
 
@@ -524,13 +530,17 @@ function SearchBar({
 function ForYouView({
   recommendations,
   onOpenFeedback,
+  playlistName,
+  emphasizeTopics,
 }: {
   recommendations: VideoRecommendation[];
   onOpenFeedback?: () => void;
+  playlistName: string;
+  emphasizeTopics: string[];
 }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
-      {/* Section Header */}
+      {/* Section Header - Belt-Personalized */}
       <div>
         <h2 style={{
           fontFamily: 'var(--font-mono)',
@@ -541,14 +551,14 @@ function ForYouView({
           color: 'var(--color-gold)',
           marginBottom: 'var(--space-sm)',
         }}>
-          Recommended For You
+          {playlistName}
         </h2>
         <p style={{
           color: 'var(--color-gray-400)',
           fontSize: 'var(--text-sm)',
           margin: 0,
         }}>
-          Based on your recent training and areas to improve
+          Focus areas: {emphasizeTopics.slice(0, 3).join(', ')}
         </p>
       </div>
 

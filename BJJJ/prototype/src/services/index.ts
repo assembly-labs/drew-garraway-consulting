@@ -5,5 +5,5 @@
  * Import from '@/services' for clean access.
  */
 
-export { api, profileService, sessionsService, techniqueProgressService } from './api';
+export { api, profileService, sessionsService, techniqueProgressService, submissionsService } from './api';
 export { authService } from './auth';

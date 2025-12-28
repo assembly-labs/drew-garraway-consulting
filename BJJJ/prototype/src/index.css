@@ -182,22 +182,38 @@
 
 /* ========================================
    CSS RESET & BASE STYLES
+   MOBILE-FIRST: This app is designed exclusively for mobile
    ======================================== */
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* Disable text selection for app-like feel */
+  -webkit-user-select: none;
+  user-select: none;
+  /* Remove tap highlight on iOS */
+  -webkit-tap-highlight-color: transparent;
+  /* Optimize touch interactions */
+  touch-action: manipulation;
+}
+
+/* Allow text selection in inputs/textareas */
+input, textarea {
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  /* Prevent iOS bounce scroll */
+  overscroll-behavior: none;
 }
 
 body {
   font-family: var(--font-body);
-  font-weight: 500;  /* Increased from 400 for better readability */
+  font-weight: 500;
   background: var(--color-black);
   color: var(--color-white);
   line-height: var(--leading-normal);
@@ -205,11 +221,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  /* Prevent pull-to-refresh */
+  overscroll-behavior-y: contain;
 }
 
 #root {
   min-height: 100vh;
+  min-height: 100dvh;
   background: var(--color-black);
+  /* MOBILE CONSTRAINT: Max width for tablet viewing */
+  max-width: 430px; /* iPhone 14 Pro Max width */
+  margin: 0 auto;
+  position: relative;
+  /* Add subtle shadow when centered on larger screens */
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
 }
 
 /* ========================================
@@ -519,8 +545,9 @@ a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  padding: 12px 24px;
+  min-height: 48px; /* Increased for mobile */
+  min-width: 48px; /* Ensure square touch target minimum */
+  padding: 14px 28px;
   border: none;
   border-radius: var(--radius-md);
   background-color: var(--color-gray-800);
@@ -530,17 +557,15 @@ a:hover {
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.1s ease, opacity 0.1s ease;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
 
-.btn:hover {
-  background-color: var(--color-gray-700);
-}
-
+/* MOBILE: Use :active instead of :hover */
 .btn:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
+  opacity: 0.9;
 }
 
 .btn-primary {
@@ -549,8 +574,8 @@ a:hover {
   font-weight: 700;
 }
 
-.btn-primary:hover {
-  background-color: #ffb733;
+.btn-primary:active {
+  background-color: #e09520;
 }
 
 .btn-dark {
@@ -559,7 +584,7 @@ a:hover {
   border: 1px solid var(--color-gray-800);
 }
 
-.btn-dark:hover {
+.btn-dark:active {
   background-color: var(--color-gray-800);
 }
 
@@ -569,9 +594,9 @@ a:hover {
   border: 1px solid var(--color-gray-600);
 }
 
-.btn-outline:hover {
+.btn-outline:active {
   background-color: var(--color-gray-800);
-  border-color: var(--color-gray-600);
+  border-color: var(--color-gray-500);
 }
 
 .btn-success {
@@ -585,15 +610,22 @@ a:hover {
 }
 
 .btn-sm {
-  padding: 8px 16px;
+  padding: 10px 18px;
   font-size: var(--text-sm);
-  min-height: 36px;
+  min-height: 44px; /* Minimum touch target */
 }
 
 .btn-lg {
   padding: 18px 36px;
   font-size: var(--text-lg);
   min-height: 56px;
+}
+
+/* MOBILE: All buttons need proper touch target */
+.btn-icon {
+  min-width: 48px;
+  min-height: 48px;
+  padding: 12px;
 }
 
 /* ========================================
@@ -1599,20 +1631,45 @@ a:hover {
 }
 
 /* ========================================
-   TOUCH & ACCESSIBILITY
+   MOBILE TOUCH TARGETS
+   Minimum 48px for primary actions, 44px for secondary
    ======================================== */
 
 button,
 a,
 input[type="button"],
 input[type="submit"],
-.tab-item {
+.tab-item,
+[role="button"] {
   min-height: 44px;
+  /* Ensure all interactive elements have proper touch behavior */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-@media (hover: none) {
+/* Primary action buttons need larger targets */
+.btn-primary,
+.btn-lg {
+  min-height: 56px;
+}
+
+/* Close/icon buttons need at least 44px touchable area */
+.icon-button,
+[aria-label="Close"],
+[aria-label="Go back"],
+[aria-label="Cancel"] {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* MOBILE-ONLY: No hover states needed */
+@media (hover: hover) {
+  /* Only apply hover styles on devices that support hover (desktop with mouse) */
   .btn:hover {
-    transform: none;
+    opacity: 0.95;
   }
 }
 
@@ -1625,13 +1682,20 @@ input[type="submit"],
 }
 
 /* ========================================
-   RESPONSIVE
+   MOBILE APP CONTAINER
+   No desktop responsive styles - this is mobile-only
    ======================================== */
 
-@media (min-width: 768px) {
-  .hero-stat { font-size: 180px; }
-  .hero-mega { font-size: 220px; }
-  .stat-value { font-size: var(--text-5xl); }
+/* Tablet/Desktop: Show phone-like frame */
+@media (min-width: 500px) {
+  body {
+    background: #000000;
+  }
+
+  #root {
+    border-radius: 0;
+    overflow: hidden;
+  }
 }
 
 /* ========================================

@@ -168,7 +168,7 @@ interface ProgressScreenProps {
   onNavigate?: (view: string) => void;
 }
 
-export function ProgressScreen({ onNavigate: _onNavigate }: ProgressScreenProps) {
+export function ProgressScreen(_props: ProgressScreenProps) {
   const data = mockProgressData;
 
   return (

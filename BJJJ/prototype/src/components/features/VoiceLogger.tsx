@@ -14,6 +14,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../services/api';
 import { useUserProfile } from '../../context/UserProfileContext';
+import { useBeltPersonalization } from '../../hooks/useBeltPersonalization';
 import type { SubmissionInsert } from '../../types/database';
 
 // Types for extracted session data
@@ -37,7 +38,7 @@ interface SessionData {
   energyLevel: 'high' | 'medium' | 'low' | null;
 }
 
-type Phase = 'idle' | 'recording' | 'processing' | 'gap-fill' | 'review' | 'success';
+type Phase = 'idle' | 'recording' | 'processing' | 'gap-fill' | 'review' | 'success' | 'error';
 
 // Mock extracted data (simulates AI processing)
 const MOCK_EXTRACTED_DATA: SessionData = {
@@ -70,10 +71,15 @@ interface VoiceLoggerProps {
 
 export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
   const { profile } = useUserProfile();
+  const { getPostSessionMessage, getSuggestedPrompts } = useBeltPersonalization();
   const [phase, setPhase] = useState<Phase>('idle');
   const [recordingTime, setRecordingTime] = useState(0);
   const [sessionData, setSessionData] = useState<SessionData | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Get belt-specific prompts
+  const beltPrompts = getSuggestedPrompts();
+  const postSessionMessage = getPostSessionMessage();
 
   // Smooth phase transition
   const transitionTo = useCallback((newPhase: Phase) => {
@@ -175,7 +181,7 @@ export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
       }, 2000);
     } catch (error) {
       console.error('Failed to save session:', error);
-      // TODO: Show error state
+      transitionTo('error');
     }
   }, [sessionData, transitionTo, onComplete, profile.userId]);
 
@@ -202,7 +208,7 @@ export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
       ...getPhaseStyle(),
     }}>
       {phase === 'idle' && (
-        <IdlePhase onStart={handleStartRecording} onCancel={handleCancel} />
+        <IdlePhase onStart={handleStartRecording} onCancel={handleCancel} prompts={beltPrompts} />
       )}
 
       {phase === 'recording' && (
@@ -211,6 +217,7 @@ export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
           formatTime={formatTime}
           onStop={handleStopRecording}
           onCancel={handleCancel}
+          prompts={beltPrompts}
         />
       )}
 
@@ -228,7 +235,14 @@ export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
         />
       )}
 
-      {phase === 'success' && <SuccessPhase sessionCount={MOCK_SESSION_COUNT} />}
+      {phase === 'success' && <SuccessPhase sessionCount={MOCK_SESSION_COUNT} postSessionMessage={postSessionMessage} />}
+
+      {phase === 'error' && (
+        <ErrorPhase
+          onRetry={handleSave}
+          onCancel={handleCancel}
+        />
+      )}
     </div>
   );
 }
@@ -236,7 +250,8 @@ export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
 // ============================================
 // IDLE PHASE - Call to action to start
 // ============================================
-const PROMPT_HINTS = [
+// Default prompts (fallback if belt personalization not available)
+const DEFAULT_PROMPT_HINTS = [
   "How'd today go?",
   "Tell me about the positions.",
   "Tap to anything?",
@@ -245,9 +260,12 @@ const PROMPT_HINTS = [
   "What didn't go well?",
 ];
 
-function IdlePhase({ onStart, onCancel }: { onStart: () => void; onCancel?: () => void }) {
+function IdlePhase({ onStart, onCancel, prompts }: { onStart: () => void; onCancel?: () => void; prompts?: string[] }) {
   const [currentHintIndex, setCurrentHintIndex] = useState(0);
   const [isHintVisible, setIsHintVisible] = useState(true);
+
+  // Use belt-specific prompts or fall back to defaults
+  const hintPrompts = prompts && prompts.length > 0 ? prompts : DEFAULT_PROMPT_HINTS;
 
   // Rotate through hints with fade effect
   useEffect(() => {
@@ -257,13 +275,13 @@ function IdlePhase({ onStart, onCancel }: { onStart: () => void; onCancel?: () =
 
       // After fade out, change text and fade in
       setTimeout(() => {
-        setCurrentHintIndex((prev) => (prev + 1) % PROMPT_HINTS.length);
+        setCurrentHintIndex((prev) => (prev + 1) % hintPrompts.length);
         setIsHintVisible(true);
       }, 400);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [hintPrompts.length]);
 
   return (
     <div style={{
@@ -289,19 +307,15 @@ function IdlePhase({ onStart, onCancel }: { onStart: () => void; onCancel?: () =
             left: 'var(--space-lg)',
             background: 'none',
             border: 'none',
-            color: 'var(--color-gray-500)',
+            color: 'var(--color-gray-400)',
             cursor: 'pointer',
-            padding: 'var(--space-sm)',
+            padding: '12px', /* 48px touch target with 24px icon */
             borderRadius: 'var(--radius-full)',
-            transition: 'color 0.2s, background-color 0.2s',
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.color = 'var(--color-white)';
-            e.currentTarget.style.backgroundColor = 'var(--color-gray-800)';
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.color = 'var(--color-gray-500)';
-            e.currentTarget.style.backgroundColor = 'transparent';
+            minWidth: '48px',
+            minHeight: '48px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
           aria-label="Close"
         >
@@ -360,35 +374,21 @@ function IdlePhase({ onStart, onCancel }: { onStart: () => void; onCancel?: () =
           transform: isHintVisible ? 'translateY(0)' : 'translateY(-8px)',
           transition: 'opacity 0.4s ease, transform 0.4s ease',
         }}>
-          {PROMPT_HINTS[currentHintIndex]}
+          {hintPrompts[currentHintIndex]}
         </p>
       </div>
 
       <button
         onClick={onStart}
+        className="btn btn-primary btn-lg"
         style={{
           width: '100%',
           maxWidth: 320,
-          padding: 'var(--space-lg)',
-          backgroundColor: 'var(--color-accent)',
-          color: 'var(--color-primary)',
-          border: 'none',
-          borderRadius: 'var(--radius-md)',
+          padding: '20px var(--space-lg)',
           fontFamily: 'var(--font-heading)',
           fontSize: 'var(--text-lg)',
-          fontWeight: 700,
           textTransform: 'uppercase',
           letterSpacing: 'var(--tracking-wide)',
-          cursor: 'pointer',
-          transition: 'transform 0.2s, background-color 0.2s',
-        }}
-        onMouseOver={(e) => {
-          e.currentTarget.style.backgroundColor = 'var(--color-accent-hover)';
-          e.currentTarget.style.transform = 'translateY(-2px)';
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.backgroundColor = 'var(--color-accent)';
-          e.currentTarget.style.transform = 'translateY(0)';
         }}
       >
         Start Recording
@@ -505,28 +505,24 @@ function TallyMarks({ count, color = 'currentColor' }: { count: number; color?: 
 // RECORDING PHASE - Active recording state
 // Bold, typography-forward design with strong motion
 // ============================================
-const RECORDING_HINTS = [
-  "How'd today go?",
-  "Tell me about the positions.",
-  "Tap to anything?",
-  "Tap anyone out?",
-  "What went well?",
-  "What didn't go well?",
-];
-
 function RecordingPhase({
   recordingTime,
   formatTime,
   onStop,
   onCancel,
+  prompts,
 }: {
   recordingTime: number;
   formatTime: (s: number) => string;
   onStop: () => void;
   onCancel: () => void;
+  prompts?: string[];
 }) {
   const [currentHintIndex, setCurrentHintIndex] = useState(0);
   const [animationPhase, setAnimationPhase] = useState<'visible' | 'exit' | 'enter'>('visible');
+
+  // Use belt-specific prompts or fall back to defaults
+  const hintPrompts = prompts && prompts.length > 0 ? prompts : DEFAULT_PROMPT_HINTS;
 
   // Rotate through hints with strong motion
   useEffect(() => {
@@ -536,7 +532,7 @@ function RecordingPhase({
 
       // After exit, change text and start enter animation
       setTimeout(() => {
-        setCurrentHintIndex((prev) => (prev + 1) % RECORDING_HINTS.length);
+        setCurrentHintIndex((prev) => (prev + 1) % hintPrompts.length);
         setAnimationPhase('enter');
       }, 300);
 
@@ -547,7 +543,7 @@ function RecordingPhase({
     }, 3500);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [hintPrompts.length]);
 
   // Animation styles based on phase
   const getHintStyle = (): React.CSSProperties => {
@@ -597,11 +593,15 @@ function RecordingPhase({
           style={{
             background: 'none',
             border: 'none',
-            color: 'var(--color-gray-500)',
+            color: 'var(--color-gray-400)',
             cursor: 'pointer',
-            padding: 'var(--space-sm)',
+            padding: '12px',
             borderRadius: 'var(--radius-full)',
-            transition: 'color 0.2s',
+            minWidth: '48px',
+            minHeight: '48px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
           aria-label="Cancel recording"
         >
@@ -667,7 +667,7 @@ function RecordingPhase({
             transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease',
             ...getHintStyle(),
           }}>
-            {RECORDING_HINTS[currentHintIndex]}
+            {hintPrompts[currentHintIndex]}
           </h2>
         </div>
 
@@ -689,6 +689,7 @@ function RecordingPhase({
       }}>
         <button
           onClick={onStop}
+          className="btn btn-lg"
           style={{
             width: '100%',
             padding: '20px',
@@ -701,23 +702,7 @@ function RecordingPhase({
             fontWeight: 700,
             textTransform: 'uppercase',
             letterSpacing: '0.1em',
-            cursor: 'pointer',
-            transition: 'transform 0.15s ease, box-shadow 0.15s ease',
             boxShadow: '0 8px 32px rgba(255,255,255,0.15)',
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.transform = 'scale(1.02)';
-            e.currentTarget.style.boxShadow = '0 12px 40px rgba(255,255,255,0.25)';
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.boxShadow = '0 8px 32px rgba(255,255,255,0.15)';
-          }}
-          onMouseDown={(e) => {
-            e.currentTarget.style.transform = 'scale(0.98)';
-          }}
-          onMouseUp={(e) => {
-            e.currentTarget.style.transform = 'scale(1.02)';
           }}
         >
           Done
@@ -858,56 +843,30 @@ function GapFillPhase({ onAnswer }: { onAnswer: (type: 'gi' | 'nogi') => void })
       }}>
         <button
           onClick={() => onAnswer('gi')}
+          className="btn btn-lg"
           style={{
             flex: 1,
-            padding: 'var(--space-lg)',
             backgroundColor: 'var(--color-training-gi)',
             color: 'var(--color-white)',
-            border: 'none',
-            borderRadius: 'var(--radius-md)',
             fontFamily: 'var(--font-heading)',
             fontSize: 'var(--text-lg)',
-            fontWeight: 700,
             textTransform: 'uppercase',
             letterSpacing: 'var(--tracking-wide)',
-            cursor: 'pointer',
-            transition: 'transform 0.2s, opacity 0.2s',
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.opacity = '0.9';
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.opacity = '1';
           }}
         >
           Gi
         </button>
         <button
           onClick={() => onAnswer('nogi')}
+          className="btn btn-lg"
           style={{
             flex: 1,
-            padding: 'var(--space-lg)',
             backgroundColor: 'var(--color-training-nogi)',
             color: 'var(--color-white)',
-            border: 'none',
-            borderRadius: 'var(--radius-md)',
             fontFamily: 'var(--font-heading)',
             fontSize: 'var(--text-lg)',
-            fontWeight: 700,
             textTransform: 'uppercase',
             letterSpacing: 'var(--tracking-wide)',
-            cursor: 'pointer',
-            transition: 'transform 0.2s, opacity 0.2s',
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.opacity = '0.9';
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.opacity = '1';
           }}
         >
           No-Gi
@@ -1188,31 +1147,16 @@ function ReviewPhase({
         </button>
         <button
           onClick={onSave}
+          className="btn btn-primary"
           style={{
             flex: 2,
-            padding: 'var(--space-md)',
-            backgroundColor: 'var(--color-accent)',
-            color: 'var(--color-primary)',
-            border: 'none',
-            borderRadius: 'var(--radius-md)',
             fontFamily: 'var(--font-heading)',
             fontSize: 'var(--text-base)',
-            fontWeight: 700,
             textTransform: 'uppercase',
             letterSpacing: 'var(--tracking-wide)',
-            cursor: 'pointer',
-            transition: 'transform 0.2s, background-color 0.2s',
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--color-accent-hover)';
-            e.currentTarget.style.transform = 'translateY(-1px)';
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--color-accent)';
-            e.currentTarget.style.transform = 'translateY(0)';
           }}
         >
-          Save ✓
+          Save
         </button>
       </div>
     </div>
@@ -1222,7 +1166,7 @@ function ReviewPhase({
 // ============================================
 // SUCCESS PHASE - Confirmation with session count
 // ============================================
-function SuccessPhase({ sessionCount }: { sessionCount: number }) {
+function SuccessPhase({ sessionCount, postSessionMessage }: { sessionCount: number; postSessionMessage?: string }) {
   return (
     <div style={{
       flex: 1,
@@ -1270,7 +1214,7 @@ function SuccessPhase({ sessionCount }: { sessionCount: number }) {
         maxWidth: 260,
         lineHeight: 'var(--leading-relaxed)',
       }}>
-        Keep showing up. Consistency compounds.
+        {postSessionMessage || "Keep showing up. Consistency compounds."}
       </p>
 
       <style>{`
@@ -1279,6 +1223,84 @@ function SuccessPhase({ sessionCount }: { sessionCount: number }) {
           to { transform: scale(1); opacity: 1; }
         }
       `}</style>
+    </div>
+  );
+}
+
+// ============================================
+// ERROR PHASE - Save failed, retry option
+// ============================================
+function ErrorPhase({ onRetry, onCancel }: { onRetry: () => void; onCancel?: () => void }) {
+  return (
+    <div style={{
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 'var(--space-xl)',
+      textAlign: 'center',
+      backgroundColor: 'var(--color-primary)',
+      color: 'var(--color-white)',
+    }}>
+      {/* Error icon */}
+      <div style={{
+        width: 100,
+        height: 100,
+        borderRadius: 'var(--radius-full)',
+        backgroundColor: 'var(--color-error)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 'var(--space-xl)',
+        boxShadow: '0 0 0 15px rgba(239, 68, 68, 0.2), 0 0 0 30px rgba(239, 68, 68, 0.1)',
+      }}>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
+      </div>
+
+      <h2 style={{
+        fontFamily: 'var(--font-heading)',
+        fontSize: 'var(--text-xl)',
+        fontWeight: 700,
+        textTransform: 'uppercase',
+        letterSpacing: 'var(--tracking-wide)',
+        marginBottom: 'var(--space-sm)',
+      }}>
+        Couldn't Save Session
+      </h2>
+
+      <p style={{
+        fontSize: 'var(--text-base)',
+        color: 'var(--color-gray-400)',
+        maxWidth: 260,
+        lineHeight: 'var(--leading-relaxed)',
+        marginBottom: 'var(--space-xl)',
+      }}>
+        Something went wrong. Your session data is still here—try again.
+      </p>
+
+      <div style={{ display: 'flex', gap: 'var(--space-md)' }}>
+        <button
+          onClick={onRetry}
+          className="btn btn-primary"
+          style={{ minWidth: 120 }}
+        >
+          Try Again
+        </button>
+        {onCancel && (
+          <button
+            onClick={onCancel}
+            className="btn btn-outline"
+            style={{ minWidth: 120 }}
+          >
+            Cancel
+          </button>
+        )}
+      </div>
     </div>
   );
 }

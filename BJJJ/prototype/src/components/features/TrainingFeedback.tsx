@@ -11,6 +11,7 @@
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { useBeltPersonalization } from '../../hooks';
 
 // ===========================================
 // TYPES
@@ -153,6 +154,9 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
   const [insightHistory, setInsightHistory] = useState<TrainingInsight[]>([]);
   const contentRef = useRef<HTMLDivElement>(null);
 
+  // Belt personalization for AI feedback tone
+  const { chatbot, profile: beltProfile } = useBeltPersonalization();
+
   const { displayedText, isComplete, isStarted, skip } = useTypewriter(
     currentInsight?.content || '',
     15,
@@ -218,7 +222,7 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
             margin: 0,
             marginTop: '2px',
           }}>
-            Insights based on your training history
+            {chatbot.toneProfile.primary} feedback on your training
           </p>
         </div>
         {onClose && (
@@ -291,10 +295,35 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
               maxWidth: '280px',
               lineHeight: 1.5,
               margin: 0,
-              marginBottom: 'var(--space-xl)',
+              marginBottom: 'var(--space-md)',
             }}>
               Based on your training history, I'll analyze patterns and suggest areas to focus on.
             </p>
+
+            {/* Belt-specific focus areas */}
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 'var(--space-xs)',
+              justifyContent: 'center',
+              marginBottom: 'var(--space-xl)',
+              maxWidth: '280px',
+            }}>
+              {chatbot.emphasizeTopics.slice(0, 3).map((topic, i) => (
+                <span
+                  key={i}
+                  style={{
+                    padding: '4px 8px',
+                    backgroundColor: 'var(--color-gray-900)',
+                    borderRadius: 'var(--radius-sm)',
+                    fontSize: 'var(--text-xs)',
+                    color: 'var(--color-gray-400)',
+                  }}
+                >
+                  {topic}
+                </span>
+              ))}
+            </div>
 
             <button
               onClick={generateInsight}
@@ -522,7 +551,7 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
               </div>
             )}
 
-            {/* Coach Reminder - shown when complete */}
+            {/* Coach Reminder - Belt-Aware Messaging */}
             {isComplete && (
               <div style={{
                 marginTop: 'var(--space-lg)',
@@ -537,7 +566,12 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
                   margin: 0,
                   lineHeight: 1.5,
                 }}>
-                  These insights are based on patterns in your training logs. Your coach can provide personalized guidance based on observing your actual technique. Always validate recommendations with them.
+                  {beltProfile.belt === 'white' || beltProfile.belt === 'blue'
+                    ? "These insights are based on patterns in your training logs. Your coach can provide personalized guidance based on observing your actual technique. Always validate recommendations with them."
+                    : beltProfile.belt === 'black'
+                    ? "These patterns come from your training data. You likely already know what needs work—consider this a reminder to stay intentional about areas you've identified."
+                    : "These insights highlight patterns from your logs. Your experience helps you filter what applies. Your coach remains a valuable sounding board for technique refinement."
+                  }
                 </p>
               </div>
             )}

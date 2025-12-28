@@ -16,10 +16,94 @@ import { mockTrainingStats, mockJournalEntries } from '../../data/journal';
 import { mockProgressSummary, mockTonyChenPromotionReadiness } from '../../data/progress';
 import { mockSubmissionStats } from '../../data/submissions';
 import { BeltBadge, TrainingBadge, DeadliestAttackCard, AchillesHeelCard } from '../ui';
-import { useCountUp } from '../../utils/useCountUp';
+import { useCountUp, useBeltPersonalization } from '../../hooks';
 
 interface DashboardProps {
   onNavigate: (view: string) => void;
+}
+
+// Hero metric configuration by primary metric type
+interface HeroMetric {
+  value: number;
+  label: string;
+  sublabel: string;
+}
+
+function getHeroMetricData(
+  primaryMetric: string,
+  stats: typeof mockTrainingStats
+): HeroMetric {
+  switch (primaryMetric) {
+    case 'session_streak':
+      return {
+        value: stats.currentStreak,
+        label: 'day streak',
+        sublabel: `Best: ${stats.longestStreak} days. Keep showing up.`,
+      };
+    case 'technique_variety':
+      return {
+        value: stats.thisMonth.techniques,
+        label: 'techniques this month',
+        sublabel: `${stats.thisMonth.sessions} sessions logged. Build your game.`,
+      };
+    case 'sparring_rounds':
+      return {
+        value: stats.thisMonth.sparringRounds,
+        label: 'rounds this month',
+        sublabel: `${stats.sparringRecord.wins} submissions landed. Time on the mat matters.`,
+      };
+    case 'teaching_sessions': {
+      // Derive from sessions (prototype approximation: ~20% of sessions involve teaching)
+      const teachingSessions = Math.round(stats.thisMonth.sessions * 0.2);
+      return {
+        value: teachingSessions || 2,
+        label: 'students helped',
+        sublabel: `${stats.totalSessions} total sessions. Teaching deepens understanding.`,
+      };
+    }
+    default:
+      return {
+        value: stats.totalSessions,
+        label: 'sessions logged',
+        sublabel: `${stats.totalHours} hours on the mat.`,
+      };
+  }
+}
+
+// Insight messages based on dashboard focus
+function getInsightMessage(insightFocus: string): { working: string; focus: string } {
+  switch (insightFocus) {
+    case 'survival_skills':
+      return {
+        working: "You're building your foundation. Every class counts.",
+        focus: 'Focus on escapes and position recognition.',
+      };
+    case 'game_development':
+      return {
+        working: 'Your guard retention is improving. Build on this.',
+        focus: 'Develop 2-3 techniques you can chain together.',
+      };
+    case 'systems_thinking':
+      return {
+        working: 'Your depth of understanding is growing.',
+        focus: 'Connect your positions into complete systems.',
+      };
+    case 'refinement':
+      return {
+        working: 'Efficiency is increasing. Details matter now.',
+        focus: 'Refine timing and leverage on your A-game.',
+      };
+    case 'legacy':
+      return {
+        working: 'Your teaching is shaping the next generation.',
+        focus: 'Continue exploring new concepts to share.',
+      };
+    default:
+      return {
+        working: 'Progress continues.',
+        focus: 'Stay consistent.',
+      };
+  }
 }
 
 export function Dashboard({ onNavigate }: DashboardProps) {
@@ -29,16 +113,48 @@ export function Dashboard({ onNavigate }: DashboardProps) {
   const readiness = mockTonyChenPromotionReadiness;
   const recentEntries = mockJournalEntries.slice(0, 3);
 
+  // Belt personalization for adaptive dashboard behavior
+  const { profile, dashboard, isInRiskWindow } = useBeltPersonalization();
+
+  // Get belt-specific hero metric
+  const heroMetric = getHeroMetricData(dashboard.primaryMetric, stats);
+  const animatedHeroValue = useCountUp(heroMetric.value, { duration: 600, delay: 100 });
+
+  // Get insight messages based on belt focus
+  const insightMessages = getInsightMessage(dashboard.insightFocus);
+
   const monthName = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
-  // Animated count-up for hero stats
-  const animatedSessions = useCountUp(stats.totalSessions, { duration: 600, delay: 100 });
+  // Animated count-up for stats
   const animatedStreak = useCountUp(stats.currentStreak, { duration: 500, delay: 200 });
   const animatedSubmissions = useCountUp(stats.sparringRecord.wins, { duration: 500, delay: 100 });
   const animatedTapped = useCountUp(stats.sparringRecord.losses, { duration: 500, delay: 150 });
 
-  // Streak glow threshold (7+ days gets the celebration glow)
-  const showStreakGlow = stats.currentStreak >= 7;
+  // Belt-adaptive streak glow threshold - higher threshold for more experienced practitioners
+  // White belts: glow at 7 days (encourage early), Brown/Black: glow at higher streaks
+  const streakGlowThreshold = dashboard.streakEmphasis === 'high' ? 7 : dashboard.streakEmphasis === 'medium' ? 10 : 14;
+  const showStreakGlow = stats.currentStreak >= streakGlowThreshold;
+
+  // Belt-specific motivational message based on current stage
+  const getBeltMotivationalMessage = () => {
+    if (isInRiskWindow) {
+      return `${profile.stageName} is challenging. You're not alone - and it passes.`;
+    }
+    switch (profile.belt) {
+      case 'white':
+        return "You're building your foundation. Every class counts.";
+      case 'blue':
+        return "Developing your game. The plateau is part of the process.";
+      case 'purple':
+        return "Systems thinking. Your depth of understanding is growing.";
+      case 'brown':
+        return "Refinement phase. The finish line is in sight.";
+      case 'black':
+        return "The journey continues. Teaching is the highest expression.";
+      default:
+        return "You're showing up.";
+    }
+  };
 
   return (
     <div style={{ background: 'var(--color-black)', minHeight: '100vh' }}>
@@ -96,7 +212,7 @@ export function Dashboard({ onNavigate }: DashboardProps) {
             backgroundClip: 'text',
           }}
         >
-          {animatedSessions}
+          {animatedHeroValue}
         </div>
 
         <div
@@ -108,7 +224,7 @@ export function Dashboard({ onNavigate }: DashboardProps) {
             marginBottom: '24px',
           }}
         >
-          sessions logged
+          {heroMetric.label}
         </div>
 
         <p
@@ -120,8 +236,8 @@ export function Dashboard({ onNavigate }: DashboardProps) {
             margin: 0,
           }}
         >
-          <strong style={{ color: 'var(--color-white)' }}>{stats.totalHours} hours</strong> on the mat.
-          You're showing up.
+          {heroMetric.sublabel}
+          {' '}{getBeltMotivationalMessage()}
         </p>
 
         {/* Scroll hint */}
@@ -144,7 +260,9 @@ export function Dashboard({ onNavigate }: DashboardProps) {
 
       {/* ============================================
           SPARRING DOMINANCE - Full bleed grid
+          Only shown for blue+ belts (showCompetitionStats)
           ============================================ */}
+      {dashboard.showCompetitionStats && (
       <div
         style={{
           display: 'grid',
@@ -235,14 +353,17 @@ export function Dashboard({ onNavigate }: DashboardProps) {
           </div>
         </div>
       </div>
+      )}
 
       {/* ============================================
           SUBMISSION PROFILE - Deadliest & Achilles Heel
+          Only shown for blue+ belts (showCompetitionStats)
           ============================================ */}
+      {dashboard.showCompetitionStats && (
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: mockSubmissionStats.deadliestAttack && (user.belt === 'white' || user.belt === 'blue') && mockSubmissionStats.achillesHeel
+          gridTemplateColumns: mockSubmissionStats.deadliestAttack && (profile.belt === 'white' || profile.belt === 'blue') && mockSubmissionStats.achillesHeel
             ? '1fr 1fr'
             : '1fr',
           gap: '1px',
@@ -258,13 +379,14 @@ export function Dashboard({ onNavigate }: DashboardProps) {
         )}
 
         {/* Achilles Heel - only for white and blue belts */}
-        {(user.belt === 'white' || user.belt === 'blue') && mockSubmissionStats.achillesHeel && (
+        {(profile.belt === 'white' || profile.belt === 'blue') && mockSubmissionStats.achillesHeel && (
           <AchillesHeelCard
             technique={mockSubmissionStats.achillesHeel.technique}
             count={mockSubmissionStats.achillesHeel.count}
           />
         )}
       </div>
+      )}
 
       {/* ============================================
           STREAK - Massive typographic statement
@@ -378,7 +500,7 @@ export function Dashboard({ onNavigate }: DashboardProps) {
             letterSpacing: '0.15em',
             color: 'var(--color-white)',
           }}>
-            {user.belt === 'blue' ? 'Purple' : 'Next'} Belt Progress
+            {profile.belt === 'blue' ? 'Purple' : profile.belt === 'purple' ? 'Brown' : profile.belt === 'brown' ? 'Black' : 'Next'} Belt Progress
           </span>
           <span style={{
             fontSize: 'var(--text-xs)',
@@ -402,13 +524,13 @@ export function Dashboard({ onNavigate }: DashboardProps) {
             {readiness.technicalProgress.overallPercentage}%
           </div>
           <div>
-            <BeltBadge belt={user.belt} stripes={user.stripes} size="lg" />
+            <BeltBadge belt={profile.belt} stripes={user.stripes} size="lg" />
             <div style={{
               fontSize: 'var(--text-sm)',
               color: 'var(--color-gray-400)',
               marginTop: '8px',
             }}>
-              {progress.timeAtBelt} at {user.belt} belt
+              {progress.timeAtBelt} at {profile.belt} belt
             </div>
           </div>
         </div>
@@ -625,72 +747,69 @@ export function Dashboard({ onNavigate }: DashboardProps) {
       </section>
 
       {/* ============================================
-          CALLOUTS - Strength & Watch
+          CALLOUTS - Belt-personalized insights
           ============================================ */}
-      {readiness.areasNeedingWork && readiness.areasNeedingWork.length > 0 && (
-        <>
-          {/* GREEN - What's working */}
+      <>
+        {/* GREEN - What's working (belt-personalized) */}
+        <div
+          style={{
+            padding: '32px 24px',
+            background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, transparent 100%)',
+            borderLeft: '3px solid var(--color-positive)',
+          }}
+        >
           <div
             style={{
-              padding: '32px 24px',
-              background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, transparent 100%)',
-              borderLeft: '3px solid var(--color-positive)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.25em',
+              color: 'var(--color-positive)',
+              marginBottom: '12px',
             }}
           >
-            <div
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'var(--text-xs)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.25em',
-                color: 'var(--color-positive)',
-                marginBottom: '12px',
-              }}
-            >
-              What's Working
-            </div>
-            <p style={{
-              fontSize: 'var(--text-base)',
-              color: 'var(--color-gray-100)',
-              lineHeight: 1.6,
-              margin: 0,
-            }}>
-              Progress toward {user.belt === 'blue' ? 'purple' : 'next'} belt at {readiness.technicalProgress.overallPercentage}%.
-              {readiness.meetsTimeRequirement ? ' Time requirement met.' : ` ${readiness.timeAtCurrentBelt}/${readiness.timeRequired} months.`}
-            </p>
+            What's Working
           </div>
+          <p style={{
+            fontSize: 'var(--text-base)',
+            color: 'var(--color-gray-100)',
+            lineHeight: 1.6,
+            margin: 0,
+          }}>
+            {insightMessages.working}
+          </p>
+        </div>
 
-          {/* RED - Needs work */}
+        {/* GOLD - Focus area (belt-personalized) */}
+        <div
+          style={{
+            padding: '32px 24px',
+            background: 'linear-gradient(135deg, rgba(252, 211, 77, 0.12) 0%, transparent 100%)',
+            borderLeft: '3px solid var(--color-accent)',
+          }}
+        >
           <div
             style={{
-              padding: '32px 24px',
-              background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, transparent 100%)',
-              borderLeft: '3px solid var(--color-negative)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.25em',
+              color: 'var(--color-accent)',
+              marginBottom: '12px',
             }}
           >
-            <div
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'var(--text-xs)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.25em',
-                color: 'var(--color-negative)',
-                marginBottom: '12px',
-              }}
-            >
-              Needs Work
-            </div>
-            <p style={{
-              fontSize: 'var(--text-base)',
-              color: 'var(--color-gray-100)',
-              lineHeight: 1.6,
-              margin: 0,
-            }}>
-              {readiness.areasNeedingWork[0]} is a gap. Focus here during your next few sessions.
-            </p>
+            Focus Area
           </div>
-        </>
-      )}
+          <p style={{
+            fontSize: 'var(--text-base)',
+            color: 'var(--color-gray-100)',
+            lineHeight: 1.6,
+            margin: 0,
+          }}>
+            {insightMessages.focus}
+          </p>
+        </div>
+      </>
 
       {/* Bottom spacer for tab bar */}
       <div style={{ height: '100px' }} />

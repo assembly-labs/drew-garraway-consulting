@@ -12,6 +12,7 @@
 import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { api } from '../../services/api';
 import { useUserProfile } from '../../context/UserProfileContext';
+import { useBeltPersonalization } from '../../hooks/useBeltPersonalization';
 import type { SubmissionInsert } from '../../types/database';
 
 // Types for extracted session data (matches VoiceLogger)
@@ -330,15 +331,23 @@ interface TextLoggerProps {
   onSwitchToVoice?: () => void;
 }
 
-type Phase = 'input' | 'processing' | 'gap-fill' | 'review' | 'success';
+type Phase = 'input' | 'processing' | 'gap-fill' | 'review' | 'success' | 'error';
 
 export function TextLogger({ onComplete, onCancel, onSwitchToVoice }: TextLoggerProps) {
   const { profile } = useUserProfile();
+  const { getPostSessionMessage, getSuggestedPrompts, analyzeJournal } = useBeltPersonalization();
+
+  // Get belt-specific prompts for placeholder/suggestions
+  const beltPrompts = getSuggestedPrompts();
   const [phase, setPhase] = useState<Phase>('input');
   const [text, setText] = useState('');
   const [sessionData, setSessionData] = useState<SessionData | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [journalResponse, setJournalResponse] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Get belt-specific post-session message
+  const postSessionMessage = getPostSessionMessage();
 
   // Auto-focus textarea
   useEffect(() => {
@@ -449,15 +458,23 @@ export function TextLogger({ onComplete, onCancel, onSwitchToVoice }: TextLogger
         await api.submissions.createBatch(submissionInserts);
       }
 
+      // Analyze journal text for belt-contextualized response
+      if (sessionResult.data && sessionData.rawText) {
+        const analysis = analyzeJournal(sessionResult.data.id, sessionData.rawText);
+        if (analysis.beltAppropriateResponse) {
+          setJournalResponse(analysis.beltAppropriateResponse);
+        }
+      }
+
       transitionTo('success');
       setTimeout(() => {
         onComplete?.();
-      }, 2000);
+      }, 2500); // Slightly longer to read contextual message
     } catch (error) {
       console.error('Failed to save session:', error);
-      // TODO: Show error state
+      transitionTo('error');
     }
-  }, [sessionData, transitionTo, onComplete, profile.userId]);
+  }, [sessionData, transitionTo, onComplete, profile.userId, analyzeJournal]);
 
   // Handle cancel
   const handleCancel = useCallback(() => {
@@ -491,6 +508,7 @@ export function TextLogger({ onComplete, onCancel, onSwitchToVoice }: TextLogger
           onCancel={handleCancel}
           onSwitchToVoice={onSwitchToVoice}
           textareaRef={textareaRef}
+          beltPrompts={beltPrompts}
         />
       )}
 
@@ -508,7 +526,19 @@ export function TextLogger({ onComplete, onCancel, onSwitchToVoice }: TextLogger
         />
       )}
 
-      {phase === 'success' && <SuccessPhase />}
+      {phase === 'success' && (
+        <SuccessPhase
+          postSessionMessage={postSessionMessage}
+          journalResponse={journalResponse}
+        />
+      )}
+
+      {phase === 'error' && (
+        <ErrorPhase
+          onRetry={handleSave}
+          onCancel={handleCancel}
+        />
+      )}
     </div>
   );
 }
@@ -524,6 +554,7 @@ function InputPhase({
   onCancel,
   onSwitchToVoice,
   textareaRef,
+  beltPrompts,
 }: {
   text: string;
   setText: (text: string) => void;
@@ -532,8 +563,12 @@ function InputPhase({
   onCancel?: () => void;
   onSwitchToVoice?: () => void;
   textareaRef: React.RefObject<HTMLTextAreaElement | null>;
+  beltPrompts: string[];
 }) {
   const hasContent = text.trim().length > 0;
+
+  // Use first belt prompt as placeholder, with fallback
+  const placeholderPrompt = beltPrompts[0] || 'What did you work on today?';
 
   return (
     <div style={{
@@ -645,7 +680,7 @@ function InputPhase({
             ref={textareaRef}
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="90 min gi class. Worked on knee slice passing. Got caught in a triangle during rolls but my guard retention felt good..."
+            placeholder={placeholderPrompt}
             style={{
               flex: 1,
               minHeight: 180,
@@ -1330,9 +1365,19 @@ function ReviewPhase({
 }
 
 // ============================================
-// SUCCESS PHASE
+// SUCCESS PHASE - Belt-contextualized response
 // ============================================
-function SuccessPhase() {
+function SuccessPhase({
+  postSessionMessage,
+  journalResponse,
+}: {
+  postSessionMessage?: string;
+  journalResponse?: string | null;
+}) {
+  // Prefer contextual response if we detected meaningful patterns
+  const displayMessage = journalResponse || postSessionMessage || "Keep showing up. Consistency compounds.";
+  const hasContextualResponse = !!journalResponse;
+
   return (
     <div style={{
       flex: 1,
@@ -1372,14 +1417,38 @@ function SuccessPhase() {
         Session Logged
       </h2>
 
-      <p style={{
-        fontSize: 'var(--text-base)',
-        color: 'var(--color-gray-300)',
-        maxWidth: 260,
-        lineHeight: 'var(--leading-relaxed)',
-      }}>
-        Keep showing up. Consistency compounds.
-      </p>
+      {/* Contextual response with special styling */}
+      {hasContextualResponse && (
+        <div style={{
+          backgroundColor: 'rgba(252, 211, 77, 0.1)',
+          border: '1px solid rgba(252, 211, 77, 0.3)',
+          borderRadius: 'var(--radius-md)',
+          padding: 'var(--space-md)',
+          marginBottom: 'var(--space-md)',
+          maxWidth: 320,
+        }}>
+          <p style={{
+            fontSize: 'var(--text-sm)',
+            color: 'var(--color-gray-200)',
+            lineHeight: 'var(--leading-relaxed)',
+            margin: 0,
+          }}>
+            {displayMessage}
+          </p>
+        </div>
+      )}
+
+      {/* Fallback message when no contextual response */}
+      {!hasContextualResponse && (
+        <p style={{
+          fontSize: 'var(--text-base)',
+          color: 'var(--color-gray-300)',
+          maxWidth: 260,
+          lineHeight: 'var(--leading-relaxed)',
+        }}>
+          {displayMessage}
+        </p>
+      )}
 
       <style>{`
         @keyframes scaleIn {
@@ -1387,6 +1456,84 @@ function SuccessPhase() {
           to { transform: scale(1); opacity: 1; }
         }
       `}</style>
+    </div>
+  );
+}
+
+// ============================================
+// ERROR PHASE - Save failed, retry option
+// ============================================
+function ErrorPhase({ onRetry, onCancel }: { onRetry: () => void; onCancel?: () => void }) {
+  return (
+    <div style={{
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 'var(--space-xl)',
+      textAlign: 'center',
+      backgroundColor: 'var(--color-primary)',
+      color: 'var(--color-white)',
+    }}>
+      {/* Error icon */}
+      <div style={{
+        width: 100,
+        height: 100,
+        borderRadius: 'var(--radius-full)',
+        backgroundColor: 'var(--color-error)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 'var(--space-xl)',
+        boxShadow: '0 0 0 15px rgba(239, 68, 68, 0.2), 0 0 0 30px rgba(239, 68, 68, 0.1)',
+      }}>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
+      </div>
+
+      <h2 style={{
+        fontFamily: 'var(--font-heading)',
+        fontSize: 'var(--text-xl)',
+        fontWeight: 700,
+        textTransform: 'uppercase',
+        letterSpacing: 'var(--tracking-wide)',
+        marginBottom: 'var(--space-sm)',
+      }}>
+        Couldn't Save Session
+      </h2>
+
+      <p style={{
+        fontSize: 'var(--text-base)',
+        color: 'var(--color-gray-400)',
+        maxWidth: 260,
+        lineHeight: 'var(--leading-relaxed)',
+        marginBottom: 'var(--space-xl)',
+      }}>
+        Something went wrong. Your session data is still here—try again.
+      </p>
+
+      <div style={{ display: 'flex', gap: 'var(--space-md)' }}>
+        <button
+          onClick={onRetry}
+          className="btn btn-primary"
+          style={{ minWidth: 120 }}
+        >
+          Try Again
+        </button>
+        {onCancel && (
+          <button
+            onClick={onCancel}
+            className="btn btn-outline"
+            style={{ minWidth: 120 }}
+          >
+            Cancel
+          </button>
+        )}
+      </div>
     </div>
   );
 }

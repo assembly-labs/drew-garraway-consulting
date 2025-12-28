@@ -49,7 +49,8 @@ export function useJournal() {
 
   const deleteEntry = (date: string) => {
     setData((prev) => {
-      const { [date]: _, ...rest } = prev.entries;
+      const { [date]: _deleted, ...rest } = prev.entries;
+      void _deleted; // Explicitly acknowledge unused variable
       return { ...prev, entries: rest };
     });
   };

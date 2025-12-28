@@ -18,6 +18,7 @@
 import { useMemo } from 'react';
 import { mockBeltHistory } from '../../data/progress';
 import { mockJournalEntries, mockTrainingStats } from '../../data/journal';
+import { useBeltPersonalization } from '../../hooks';
 
 // ===========================================
 // HELPER FUNCTIONS
@@ -88,6 +89,7 @@ function getNextBelt(current: string): string | null {
 
 export function BeltProgress() {
   const stats = mockTrainingStats;
+  const { profile: beltProfile, currentPlateau } = useBeltPersonalization();
 
   // Derive current belt info from history (most recent entry)
   const currentBeltInfo = useMemo(() => {
@@ -264,7 +266,78 @@ export function BeltProgress() {
         }}>
           Since {formatDate(lastBeltPromotion?.date || '')}
         </p>
+
+        {/* Belt Stage Name */}
+        <div style={{
+          marginTop: '16px',
+          padding: '8px 16px',
+          backgroundColor: 'var(--color-gray-900)',
+          borderRadius: 'var(--radius-md)',
+          display: 'inline-block',
+        }}>
+          <span style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            color: 'var(--color-gold)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+          }}>
+            {beltProfile.stageName}
+          </span>
+        </div>
       </section>
+
+      {/* ============================================
+          MINDSET - Belt Psychology
+          ============================================ */}
+      <section style={{
+        padding: '24px',
+        margin: '0 24px 0',
+        marginTop: '24px',
+        backgroundColor: 'var(--color-gray-900)',
+        borderRadius: 'var(--radius-lg)',
+        borderLeft: '3px solid var(--color-gold)',
+      }}>
+        <p style={{
+          color: 'var(--color-gray-200)',
+          fontSize: 'var(--text-sm)',
+          lineHeight: 1.6,
+          margin: 0,
+          fontStyle: 'italic',
+        }}>
+          "{beltProfile.mindsetShift}"
+        </p>
+      </section>
+
+      {/* Plateau Pattern Warning (if applicable) */}
+      {currentPlateau && (
+        <section style={{
+          padding: '24px',
+          margin: '16px 24px 0',
+          backgroundColor: 'rgba(245, 158, 11, 0.1)',
+          borderRadius: 'var(--radius-lg)',
+          borderLeft: '3px solid var(--color-warning)',
+        }}>
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            color: 'var(--color-warning)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            marginBottom: '8px',
+          }}>
+            Common at This Stage
+          </div>
+          <p style={{
+            color: 'var(--color-gray-300)',
+            fontSize: 'var(--text-sm)',
+            lineHeight: 1.6,
+            margin: 0,
+          }}>
+            {currentPlateau.description} {currentPlateau.breakthroughTrigger}
+          </p>
+        </section>
+      )}
 
       {/* ============================================
           TIME AT BELT
@@ -778,7 +851,7 @@ export function BeltProgress() {
       </section>
 
       {/* ============================================
-          COACH DISCLAIMER
+          COACH DISCLAIMER - Belt-Aware Messaging
           ============================================ */}
       <section style={{
         padding: '24px',
@@ -811,7 +884,12 @@ export function BeltProgress() {
               lineHeight: 1.6,
               margin: 0,
             }}>
-              This shows your logged training activity. Your coach determines promotion readiness based on technique, understanding, and mat behavior—not just time and volume.
+              {currentBeltInfo?.toBelt === 'white' || currentBeltInfo?.toBelt === 'blue'
+                ? "This shows your logged training activity. Your coach determines promotion readiness based on technique, understanding, and mat behavior—not just time and volume. Trust the process."
+                : currentBeltInfo?.toBelt === 'black'
+                ? "Your journey data. You know what these numbers mean—and what they don't. The real progress lives on the mat."
+                : "This tracks your logged activity. Promotion readiness goes beyond numbers—your coach sees the full picture of your development."
+              }
             </p>
           </div>
         </div>

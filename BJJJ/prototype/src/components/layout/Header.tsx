@@ -43,9 +43,15 @@ export function Header({
               border: 'none',
               color: 'var(--color-white)',
               cursor: 'pointer',
-              padding: 'var(--space-xs)',
+              padding: '12px', /* Increased for 48px touch target */
+              margin: '-12px', /* Offset to maintain visual position */
+              marginRight: '0',
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'center',
+              minWidth: '48px',
+              minHeight: '48px',
+              borderRadius: 'var(--radius-md)',
             }}
             aria-label="Go back"
           >
@@ -71,20 +77,19 @@ export function Header({
           <button
             onClick={onProfileClick}
             style={{
-              width: 36,
-              height: 36,
+              width: 44, /* Minimum touch target */
+              height: 44, /* Minimum touch target */
               borderRadius: 'var(--radius-full)',
               backgroundColor: 'var(--color-gray-800)',
               border: '2px solid var(--color-gray-600)',
               color: 'var(--color-white)',
-              fontSize: 'var(--text-sm)',
+              fontSize: 'var(--text-base)',
               fontWeight: 700,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               textTransform: 'uppercase',
-              transition: 'border-color 0.2s ease, background-color 0.2s ease',
             }}
             aria-label="Open profile"
           >
