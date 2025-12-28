@@ -14,11 +14,9 @@
  */
 
 import { useState, useMemo } from 'react';
-import { currentUser } from '../../data/users';
 import { mockTrainingStats, mockJournalEntries } from '../../data/journal';
-import { mockProgressSummary, mockTonyChenPromotionReadiness } from '../../data/progress';
 import { mockSubmissionStats } from '../../data/submissions';
-import { BeltBadge, TrainingBadge, DeadliestAttackCard, AchillesHeelCard, BreakthroughHero } from '../ui';
+import { TrainingBadge, DeadliestAttackCard, AchillesHeelCard, BreakthroughHero } from '../ui';
 import { AttackProfile } from './AttackProfile';
 import { useCountUp, useBeltPersonalization } from '../../hooks';
 import { useUserProfile } from '../../context/UserProfileContext';
@@ -124,20 +122,9 @@ export function Dashboard({ onNavigate }: DashboardProps) {
   const [breakthroughDismissed, setBreakthroughDismissed] = useState(false);
 
   // Use demo profile data if in demo mode, otherwise use default mock data
-  const user = isDemoMode && activeDemoProfile ? activeDemoProfile.user : currentUser;
   const stats = isDemoMode && activeDemoProfile
     ? activeDemoProfile.trainingStats as typeof mockTrainingStats
     : mockTrainingStats;
-  const progress = isDemoMode && activeDemoProfile ? activeDemoProfile.progressSummary : mockProgressSummary;
-  const readiness = isDemoMode && activeDemoProfile
-    ? {
-        ...mockTonyChenPromotionReadiness,
-        technicalProgress: {
-          ...mockTonyChenPromotionReadiness.technicalProgress,
-          overallPercentage: activeDemoProfile.progressSummary.overallCompletion,
-        },
-      }
-    : mockTonyChenPromotionReadiness;
   const recentEntries = isDemoMode && activeDemoProfile
     ? activeDemoProfile.journalEntries.slice(0, 3)
     : mockJournalEntries.slice(0, 3);
@@ -560,111 +547,6 @@ export function Dashboard({ onNavigate }: DashboardProps) {
         </div>
       </section>
 
-      {/* ============================================
-          BELT PROGRESS - Arsenal style grid
-          ============================================ */}
-      <section
-        style={{
-          padding: '48px 24px',
-          borderTop: '1px solid var(--color-gray-800)',
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '32px' }}>
-          <span style={{
-            fontSize: 'var(--text-sm)',
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: '0.15em',
-            color: 'var(--color-white)',
-          }}>
-            {profile.belt === 'blue' ? 'Purple' : profile.belt === 'purple' ? 'Brown' : profile.belt === 'brown' ? 'Black' : 'Next'} Belt Progress
-          </span>
-          <span style={{
-            fontSize: 'var(--text-xs)',
-            color: 'var(--color-gray-400)',
-          }}>
-            {readiness.technicalProgress.overallPercentage}% ready
-          </span>
-        </div>
-
-        {/* Big percentage + belt */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '32px' }}>
-          <div
-            style={{
-              fontSize: '72px',
-              fontWeight: 700,
-              color: readiness.technicalProgress.overallPercentage >= 70 ? 'var(--color-positive)' : 'var(--color-gold)',
-              lineHeight: 1,
-              letterSpacing: '-0.03em',
-            }}
-          >
-            {readiness.technicalProgress.overallPercentage}%
-          </div>
-          <div>
-            <BeltBadge belt={profile.belt} stripes={user.stripes} size="lg" />
-            <div style={{
-              fontSize: 'var(--text-sm)',
-              color: 'var(--color-gray-400)',
-              marginTop: '8px',
-            }}>
-              {progress.timeAtBelt} at {profile.belt} belt
-            </div>
-          </div>
-        </div>
-
-        {/* Category breakdown - arsenal grid style */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '2px',
-            background: 'var(--color-gray-800)',
-            marginBottom: '24px',
-          }}
-        >
-          {readiness.technicalProgress.byCategory.slice(0, 4).map((cat) => {
-            const isStrong = cat.percentage >= 70;
-            const isWeak = cat.percentage < 40;
-            return (
-              <div
-                key={cat.category}
-                style={{
-                  background: isStrong
-                    ? 'linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, var(--color-gray-900) 100%)'
-                    : isWeak
-                    ? 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, var(--color-gray-900) 100%)'
-                    : 'var(--color-gray-900)',
-                  padding: '20px 12px',
-                  textAlign: 'center',
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: '28px',
-                    fontWeight: 700,
-                    color: isStrong ? 'var(--color-positive)' : isWeak ? 'var(--color-negative)' : 'var(--color-white)',
-                    lineHeight: 1,
-                  }}
-                >
-                  {cat.percentage}%
-                </div>
-                <div
-                  style={{
-                    fontSize: 'var(--text-xs)',
-                    color: 'var(--color-gray-400)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.1em',
-                    marginTop: '8px',
-                  }}
-                >
-                  {cat.category.replace('-', ' ').split(' ')[0]}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-      </section>
 
       {/* ============================================
           QUICK ACTIONS - Bold buttons
