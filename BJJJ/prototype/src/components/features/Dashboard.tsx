@@ -16,7 +16,7 @@
 import { useState, useMemo } from 'react';
 import { mockTrainingStats, mockJournalEntries } from '../../data/journal';
 import { mockSubmissionStats } from '../../data/submissions';
-import { TrainingBadge, DeadliestAttackCard, AchillesHeelCard, BreakthroughHero } from '../ui';
+import { DeadliestAttackCard, AchillesHeelCard, BreakthroughHero } from '../ui';
 import { AttackProfile } from './AttackProfile';
 import { useCountUp, useBeltPersonalization } from '../../hooks';
 import { useUserProfile } from '../../context/UserProfileContext';
@@ -114,7 +114,7 @@ function getInsightMessage(insightFocus: string): { working: string; focus: stri
   }
 }
 
-export function Dashboard({ onNavigate }: DashboardProps) {
+export function Dashboard(_props: DashboardProps) {
   // Check for demo mode
   const { isDemoMode, activeDemoProfile } = useUserProfile();
 
@@ -125,9 +125,6 @@ export function Dashboard({ onNavigate }: DashboardProps) {
   const stats = isDemoMode && activeDemoProfile
     ? activeDemoProfile.trainingStats as typeof mockTrainingStats
     : mockTrainingStats;
-  const recentEntries = isDemoMode && activeDemoProfile
-    ? activeDemoProfile.journalEntries.slice(0, 3)
-    : mockJournalEntries.slice(0, 3);
   const allJournalEntries = isDemoMode && activeDemoProfile
     ? activeDemoProfile.journalEntries
     : mockJournalEntries;
@@ -545,147 +542,6 @@ export function Dashboard({ onNavigate }: DashboardProps) {
             </div>
           </div>
         </div>
-      </section>
-
-
-      {/* ============================================
-          QUICK ACTIONS - Bold buttons
-          ============================================ */}
-      <section style={{ padding: '24px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-          <button
-            onClick={() => onNavigate('voice-logger')}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '32px 24px',
-              background: 'var(--color-gold)',
-              border: 'none',
-              color: 'var(--color-black)',
-              cursor: 'pointer',
-              gap: '12px',
-            }}
-          >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-              <line x1="12" y1="19" x2="12" y2="23" />
-              <line x1="8" y1="23" x2="16" y2="23" />
-            </svg>
-            <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-              Log Training
-            </span>
-          </button>
-
-          <button
-            onClick={() => onNavigate('library')}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '32px 24px',
-              background: 'var(--color-gray-900)',
-              border: '1px solid var(--color-gray-800)',
-              color: 'var(--color-white)',
-              cursor: 'pointer',
-              gap: '12px',
-            }}
-          >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="3" width="7" height="7" />
-              <rect x="14" y="3" width="7" height="7" />
-              <rect x="14" y="14" width="7" height="7" />
-              <rect x="3" y="14" width="7" height="7" />
-            </svg>
-            <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-              Techniques
-            </span>
-          </button>
-        </div>
-      </section>
-
-      {/* ============================================
-          RECENT SESSIONS - Clean list
-          ============================================ */}
-      <section
-        style={{
-          padding: '48px 24px',
-          borderTop: '1px solid var(--color-gray-800)',
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '24px' }}>
-          <span style={{
-            fontSize: 'var(--text-sm)',
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: '0.15em',
-            color: 'var(--color-white)',
-          }}>
-            Recent Sessions
-          </span>
-          <button
-            onClick={() => onNavigate('journal')}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: 'var(--color-gold)',
-              cursor: 'pointer',
-              fontSize: 'var(--text-xs)',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: '0.1em',
-            }}
-          >
-            View All
-          </button>
-        </div>
-
-        {recentEntries.map((entry) => {
-          const date = new Date(entry.date);
-          const today = new Date();
-          const yesterday = new Date(today);
-          yesterday.setDate(yesterday.getDate() - 1);
-
-          let dateLabel: string;
-          if (date.toDateString() === today.toDateString()) {
-            dateLabel = 'Today';
-          } else if (date.toDateString() === yesterday.toDateString()) {
-            dateLabel = 'Yesterday';
-          } else {
-            dateLabel = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-          }
-
-          return (
-            <div
-              key={entry.id}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '16px 0',
-                borderBottom: '1px solid var(--color-gray-800)',
-              }}
-            >
-              <div>
-                <div style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--color-white)' }}>
-                  {dateLabel}
-                </div>
-                <div style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: 'var(--text-xs)',
-                  color: 'var(--color-gray-400)',
-                  marginTop: '4px',
-                }}>
-                  {entry.duration}min / {entry.techniques.length} tech / {entry.sparringRounds.length} rolls
-                </div>
-              </div>
-              <TrainingBadge type={entry.type} size="sm" />
-            </div>
-          );
-        })}
       </section>
 
       {/* ============================================
