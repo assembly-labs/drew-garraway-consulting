@@ -14,6 +14,71 @@ BJJ Journal is a voice-first training journal app for Brazilian Jiu-Jitsu practi
 - **State Management:** React Context (UserProfileContext)
 - **Storage:** localStorage (prototype), API-ready patterns
 - **No external UI libraries** - custom components only
+- **Hosting:** Cloudflare Pages (bjjj.pages.dev)
+
+---
+
+## Development Process (PROTOTYPE PHASE)
+
+> **IMPORTANT:** This process is for the prototype phase only. It will change when we move to App Store deployment or backend development.
+
+### Where Code Lives
+
+```
+LOCAL (your laptop)  →  REMOTE (GitHub)  →  PRODUCTION (live site)
+    npm run dev           git push            wrangler deploy
+   localhost:5173                            bjjj.pages.dev
+```
+
+### The One Command You Need
+
+After making any changes you want to keep:
+
+```bash
+npm run ship
+```
+
+This single command does everything:
+1. **Builds** - Compiles TypeScript, checks for errors
+2. **Commits** - Saves to git history (with timestamp)
+3. **Pushes** - Backs up to GitHub
+4. **Deploys** - Publishes to bjjj.pages.dev
+
+### Rollback If Needed
+
+Every `ship` creates a save point in git history:
+
+```bash
+git log --oneline           # See all save points
+git revert <commit-id>      # Undo a specific change
+npm run ship                # Deploy the rollback
+```
+
+### Available Commands
+
+| Command | What it does |
+|---------|--------------|
+| `npm run dev` | Local preview at localhost:5173 |
+| `npm run build` | Compile and check for errors |
+| `npm run ship` | **Build + Commit + Push + Deploy → LIVE** |
+| `npm run deploy` | Deploy only (no commit) |
+
+### Testing Belt Personalization
+
+1. Go to Profile (tap avatar top-right)
+2. Tap "Settings" at bottom
+3. Use Demo Mode belt switcher
+4. Select White / Blue / Purple / Brown
+5. Navigate app to see personalized content
+
+### Process Checklist
+
+Before ending any work session:
+- [ ] Run `npm run ship`
+- [ ] Verify changes at bjjj.pages.dev
+- [ ] Hard refresh browser if needed (Cmd+Shift+R)
+
+---
 
 ## Belt Personalization System (PRIORITY)
 
@@ -334,7 +399,7 @@ See `/internal-docs/research/USER_PERSONAS_AND_RESEARCH.md` for:
 | Crash Reporting | Sentry | Not started |
 | Analytics | PostHog | Not started |
 | iOS Builds | Expo EAS | Not started |
-| Web Hosting | Cloudflare Pages | Not started |
+| Web Hosting | Cloudflare Pages | **Active** (bjjj.pages.dev) |
 
 ### Why AssemblyAI for Voice Transcription
 - **24% better accuracy** on proper nouns (critical for BJJ terminology like "kimura", "de la Riva")
