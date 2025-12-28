@@ -802,6 +802,131 @@
                 explanation: "Time value is greatest when the option is at the money (strike price equals market price) because there's maximum uncertainty about whether it will end up profitable.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> ATM options are peak uncertainty - could go either way, so time has maximum value. Deep ITM options move like stock (mostly intrinsic value). Deep OTM options are lottery tickets (all time value, usually dying). Theta decay hurts ATM options the most as expiration nears."
             },
 
+            // EQUITY SECURITIES (6 questions)
+            {
+                topic: "Equity Securities",
+                question: "Common stockholders have all of the following rights EXCEPT:",
+                answers: ["Right to vote on board of directors", "Right to receive dividends if declared", "Right to a fixed dividend rate", "Right to inspect corporate books"],
+                correct: 2,
+                explanation: "Common stockholders do NOT have a right to fixed dividends. Dividends are discretionary and decided by the board. Preferred stockholders get fixed dividends.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> This is the trade-off with common stock. You get voting rights and unlimited upside, but no guarantee of income. The board can slash or suspend dividends anytime - looking at you, every company in March 2020. Preferred stock gets fixed dividends but usually no voting rights."
+            },
+            {
+                topic: "Equity Securities",
+                question: "Preferred stock is 'preferred' because:",
+                answers: ["It has voting rights", "Dividends are paid before common stock dividends", "It always pays higher dividends", "It can be converted to bonds"],
+                correct: 1,
+                explanation: "Preferred stock has preference (priority) in dividend payments and in liquidation over common stock. Dividends must be paid to preferred shareholders before common shareholders receive anything.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Think of preferred as the 'hybrid' security - acts like a bond (fixed dividend) but it's still equity. Banks love issuing preferred stock. When a company goes bust, the pecking order is: secured creditors, unsecured creditors, preferred shareholders, then common shareholders get the scraps (usually nothing)."
+            },
+            {
+                topic: "Equity Securities",
+                question: "American Depositary Receipts (ADRs) allow U.S. investors to:",
+                answers: ["Trade foreign stocks in U.S. dollars on U.S. exchanges", "Avoid all currency risk", "Receive tax-free dividends", "Vote in foreign corporate elections"],
+                correct: 0,
+                explanation: "ADRs allow U.S. investors to own foreign stocks that trade in U.S. dollars on U.S. exchanges. Currency risk still exists, and dividends may face foreign withholding taxes.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Want to own Alibaba, Samsung, or Toyota without dealing with foreign exchanges? ADRs are your ticket. U.S. banks hold the actual foreign shares and issue receipts (ADRs) that trade on NYSE/NASDAQ. You still have currency risk - if the yen weakens, your Toyota ADR loses value even if the stock goes up in Japan."
+            },
+            {
+                topic: "Equity Securities",
+                question: "A stock split will result in:",
+                answers: ["Increased total market value for shareholders", "More shares at a lower price per share", "Taxable income for shareholders", "Change in the company's market capitalization"],
+                correct: 1,
+                explanation: "A stock split increases the number of shares and decreases the price proportionally. Total value stays the same, no tax event occurs, and market cap is unchanged.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> NVDA at $1,200 does a 10-for-1 split. You had 1 share worth $1,200, now you have 10 shares at $120 each. Same $1,200 total value. Why split? Psychology - retail investors more likely to buy at $120 than $1,200. Amazon and Google both split in 2022 for this reason."
+            },
+            {
+                topic: "Equity Securities",
+                question: "Rights are typically:",
+                answers: ["Short-term (30-45 days) and trade below intrinsic value", "Long-term (3-5 years) and issued with bonds", "Non-transferable and last 90 days", "Issued to bondholders only"],
+                correct: 0,
+                explanation: "Rights are short-term (typically 30-45 days), transferable, issued to existing shareholders to buy new shares at a discount, and trade separately from the stock.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Company wants to raise capital without paying investment bankers. They give existing shareholders 'rights' to buy more shares cheap. You can exercise them (buy the shares) or sell the rights themselves. They expire quickly - use 'em or lose 'em. Rights usually trade at a tiny discount to intrinsic value due to time pressure."
+            },
+            {
+                topic: "Equity Securities",
+                question: "Warrants differ from rights in that warrants:",
+                answers: ["Are short-term (30-45 days)", "Are issued to existing shareholders", "Have exercise prices above current market price", "Cannot be traded separately"],
+                correct: 2,
+                explanation: "Warrants are LONG-term (often years), have exercise prices ABOVE current market at issuance, and are often attached to bond offerings as 'sweeteners.'<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Warrants are the 'long-dated lottery ticket' attached to bonds or preferred stock. Company issues bonds with warrants at $50 when stock is at $30. If the stock hits $60 in 3 years, warrant holders win big. SPACs made warrants famous - SPAC warrants were the real speculation play, not the shares."
+            },
+
+            // MUTUAL FUNDS (6 questions)
+            {
+                topic: "Mutual Funds",
+                question: "A mutual fund's Net Asset Value (NAV) is calculated:",
+                answers: ["Once per week at market close", "Continuously during trading hours", "Once per business day at 4pm ET", "Only when shares are purchased"],
+                correct: 2,
+                explanation: "NAV is calculated once per business day at 4:00 PM ET (market close). Formula: (Total Assets - Liabilities) / Shares Outstanding.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Unlike stocks that tick every second, mutual fund NAV is calculated once daily after markets close. Submit a buy order at 10am? You get that day's 4pm price - forward pricing. This is why day traders don't use mutual funds. Want real-time pricing? Buy the ETF version (SPY vs VFIAX)."
+            },
+            {
+                topic: "Mutual Funds",
+                question: "Class A shares typically have:",
+                answers: ["Back-end load when sold", "No sales charges at all", "Front-end load when purchased", "Higher 12b-1 fees than Class C"],
+                correct: 2,
+                explanation: "Class A shares have FRONT-END loads (charged when you buy) but lower ongoing 12b-1 fees. They offer breakpoints for large purchases.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Class A is 'pay now, save later.' You eat a 5.75% load upfront, but then enjoy low ongoing fees forever. Best for long-term holders with serious money. Invest $100K? You hit breakpoints and that load drops to 3-4%. Your advisor loves selling Class A to big accounts - they get paid immediately."
+            },
+            {
+                topic: "Mutual Funds",
+                question: "Class B shares typically have:",
+                answers: ["Front-end load", "Back-end load (CDSC)", "No loads or 12b-1 fees", "Breakpoint discounts"],
+                correct: 1,
+                explanation: "Class B shares have BACK-END loads (Contingent Deferred Sales Charge - CDSC) that decrease over time, usually disappearing after 6-8 years. Higher 12b-1 fees than Class A.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Class B is 'pay later' - no upfront load, but if you sell within 6-8 years, you pay a surrender charge that decreases annually (6%, 5%, 4%...). Higher ongoing fees than Class A. Most firms stopped offering Class B after 2000s scandals - they were being pushed on investors who qualified for Class A discounts."
+            },
+            {
+                topic: "Mutual Funds",
+                question: "Class C shares (level load) are best for investors who:",
+                answers: ["Plan to hold for 10+ years", "Have $1 million to invest", "Want low ongoing fees", "May need liquidity within 1-2 years"],
+                correct: 3,
+                explanation: "Class C shares have small or no front-end loads, typically 1% CDSC if sold within 1 year, but HIGH ongoing 12b-1 fees (often 1% annually). Best for short-term holders.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Class C is the 'rent, don't buy' option. Low/no upfront cost, tiny surrender charge (usually gone after 1 year), but you bleed 1% annually in 12b-1 fees. Perfect if you might need the money in 2-3 years. Hold for 10 years? Those 1% annual fees kill you - Class A would've been way cheaper."
+            },
+            {
+                topic: "Mutual Funds",
+                question: "The 12b-1 fee pays for:",
+                answers: ["Investment advisory services", "Portfolio management", "Distribution and marketing expenses", "Custodial services"],
+                correct: 2,
+                explanation: "The 12b-1 fee covers distribution and marketing costs, including compensating brokers. Maximum is 0.75% for distribution plus 0.25% for shareholder services = 1% total.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The controversial fee named after SEC Rule 12b-1. It's your money paying to advertise the fund and compensate your advisor. Vanguard famously has zero 12b-1 fees. American Funds and others charge up to 1%. Over 30 years, that 1% difference is MASSIVE - John Bogle built an empire explaining this math."
+            },
+            {
+                topic: "Mutual Funds",
+                question: "Open-end mutual funds must redeem shares within:",
+                answers: ["Same business day", "7 calendar days", "30 calendar days", "No time requirement"],
+                correct: 1,
+                explanation: "Open-end funds must redeem (buy back) shares within 7 calendar days of request. They issue unlimited shares and redeem on demand at NAV.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Open-end funds are the 'normal' mutual funds - they create and destroy shares daily based on demand. Sell your shares? The fund has 7 days to pay you (though most settle in 1-2 days). This is why funds keep 3-5% in cash - to meet redemptions. Closed-end funds trade on exchanges like stocks - no redemption requirement."
+            },
+
+            // MUNICIPAL BONDS (5 questions)
+            {
+                topic: "Municipal Bonds",
+                question: "General Obligation (GO) bonds are backed by:",
+                answers: ["Revenue from a specific project", "The full faith, credit, and taxing power of the issuer", "Federal government guarantee", "Corporate guarantees"],
+                correct: 1,
+                explanation: "GO bonds are backed by the issuer's full faith, credit, and TAXING POWER. They can raise property, sales, or income taxes to pay bondholders.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> GO bonds are as close to 'guaranteed' as munis get. The city/state can raise taxes to pay you. This is why GO bonds typically have lower yields than revenue bonds - they're safer. Voter approval usually required for issuance since it's essentially the public agreeing to be taxed if needed."
+            },
+            {
+                topic: "Municipal Bonds",
+                question: "Revenue bonds are backed by:",
+                answers: ["Taxing power of the municipality", "Income from a specific project or facility", "Federal tax revenues", "State income taxes"],
+                correct: 1,
+                explanation: "Revenue bonds are backed by revenues from the SPECIFIC project they financed - tolls from a bridge, fees from a hospital, rents from housing projects, etc.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Revenue bonds live or die by their project. Toll road brings in cash? Bondholders get paid. Highway goes unused? You might get stiffed. This is why revenue bonds yield more than GO bonds - higher risk. The pandemic crushed airport revenue bonds when travel stopped. No passengers = no revenue = nervous bondholders."
+            },
+            {
+                topic: "Municipal Bonds",
+                question: "Municipal bond interest is:",
+                answers: ["Fully taxable at federal and state levels", "Exempt from federal tax, may be exempt from state/local tax", "Only exempt for residents of the issuing state", "Subject to capital gains tax only"],
+                correct: 1,
+                explanation: "Muni bond interest is EXEMPT from federal income tax. If you live in the issuing state, it's often exempt from state and local taxes too (triple tax-free).<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The tax-exempt magic that makes munis attractive to high earners. A 4% muni yield in the 37% federal bracket equals a 6.35% taxable yield. Buy California munis while living in California? Triple tax-free - no federal, state, or local tax. But capital gains from selling munis at a profit? Still taxable."
+            },
+            {
+                topic: "Municipal Bonds",
+                question: "To compare a municipal bond yield to a taxable bond, an investor in the 32% tax bracket should:",
+                answers: ["Multiply muni yield by 0.32", "Divide muni yield by 0.68", "Multiply muni yield by 1.32", "Divide muni yield by 0.32"],
+                correct: 1,
+                explanation: "Tax-Equivalent Yield = Muni Yield / (1 - Tax Bracket). For 32% bracket: divide by 0.68. A 4% muni equals 5.88% taxable (4 / 0.68).<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The formula every muni investor needs: TEY = Muni Yield / (1 - Tax Rate). In the 37% bracket, a 4% muni equals 6.35% taxable. This is why munis are wasted in IRAs or 401(k)s - you're already tax-deferred, so you want the highest yield possible, not tax-exempt."
+            },
+            {
+                topic: "Municipal Bonds",
+                question: "Which bond is LEAST suitable for a tax-deferred account like an IRA?",
+                answers: ["Corporate bonds", "Treasury bonds", "Municipal bonds", "Zero-coupon bonds"],
+                correct: 2,
+                explanation: "Municipal bonds are LEAST suitable for IRAs/401(k)s because their tax-exempt feature is wasted in an already tax-deferred account. You want maximum yield in retirement accounts.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Classic mistake - buying munis in your IRA. Your IRA is already tax-deferred, so the muni's tax exemption does nothing for you. Worse, munis typically yield LESS than corporate bonds because of their tax advantage. You're leaving money on the table. Put high-yield corporates and REITs in your IRA, munis in your taxable brokerage account."
+            },
+
             // BONDS (12 questions)
             {
                 topic: "Bonds",
@@ -1246,6 +1371,236 @@
                 answers: ["The commission charged to customers", "The difference between bid and ask prices", "The underwriting discount", "The margin requirement"],
                 correct: 1,
                 explanation: "The spread is the difference between the BID (what dealers pay to buy) and ASK (what dealers charge to sell). This is how market makers profit.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> You see AAPL at $185.00 x $185.02. That $0.02 spread is the market maker's edge. They buy at $185.00, sell at $185.02, pocket the difference millions of times a day. Tight spreads = liquid stocks. Wide spreads = illiquid, proceed with caution."
+            },
+
+            // ========== SECOND SET OF QUESTIONS FOR PRACTICE VARIETY ==========
+
+            // OPTIONS - Additional Set (5 questions)
+            {
+                topic: "Options",
+                question: "An investor pays $400 for a call option. What is the maximum potential loss?",
+                answers: ["Unlimited", "$400", "The strike price", "The strike price minus $400"],
+                correct: 1,
+                explanation: "The maximum loss for any option BUYER is limited to the premium paid. Paid $400? Maximum loss is $400, period.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> This is why buying options is 'safer' than selling them - your risk is defined upfront. You can't lose more than your initial investment. Sellers face unlimited risk (especially naked call sellers). This is the fundamental trade-off in options."
+            },
+            {
+                topic: "Options",
+                question: "Which option position benefits from a DECREASE in stock price?",
+                answers: ["Long call", "Short put", "Long put", "Short call and short put equally"],
+                correct: 2,
+                explanation: "LONG PUT benefits when stock price falls. You have the right to sell at a high strike price when the market price is lower.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Long puts are your bearish play. Stock at $100, you buy $95 puts thinking it'll crash. Stock drops to $70? Your puts are now worth bank - you can sell at $95 what's only worth $70. This is how traders profit from crashes without short selling."
+            },
+            {
+                topic: "Options",
+                question: "An option with intrinsic value is considered:",
+                answers: ["Out of the money", "At the money", "In the money", "Worthless"],
+                correct: 2,
+                explanation: "Options with intrinsic value are IN THE MONEY. Intrinsic value = the amount the option would be worth if exercised immediately.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Intrinsic value is 'real money' - what you'd pocket if you exercised now. TSLA trading at $250, your $230 call has $20 intrinsic value. The rest of the option's price is time value (hope it goes higher). At expiration, only intrinsic value remains."
+            },
+            {
+                topic: "Options",
+                question: "Which options strategy involves selling a call against stock you own?",
+                answers: ["Protective put", "Covered call", "Naked call", "Married put"],
+                correct: 1,
+                explanation: "Covered call = own the stock + sell a call against it. You collect premium in exchange for capping your upside.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The income investor's bread and butter. Own 100 AAPL shares at $170, sell a $180 call for $500. AAPL stays below $180? You keep the $500 and your shares. Goes above $180? Shares get called away but you still profit. It's like collecting rent on stocks you own."
+            },
+            {
+                topic: "Options",
+                question: "Standard equity options contracts represent how many shares?",
+                answers: ["1 share", "10 shares", "100 shares", "1,000 shares"],
+                correct: 2,
+                explanation: "Each standard equity option contract represents 100 shares of the underlying stock. This is why option quotes are multiplied by 100 for total cost.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> See a call quoted at $3.50? That's $3.50 PER SHARE, but you're buying 100 shares worth = $350 total cost. This catches beginners - they think $3.50 means three dollars and fifty cents total. Nope. It's $350. And if you own the option when it goes ITM, you need $23,000 cash to exercise a $230 call (100 shares × $230)."
+            },
+
+            // BONDS & MUNICIPAL BONDS - Additional Set (5 questions)
+            {
+                topic: "Bonds",
+                question: "A bond purchased at 95 will have a yield to maturity that is:",
+                answers: ["Lower than the coupon rate", "Equal to the coupon rate", "Higher than the coupon rate", "Impossible to determine"],
+                correct: 2,
+                explanation: "A bond bought at a DISCOUNT (below 100) has YTM HIGHER than the coupon rate. You're getting the coupon payments PLUS the price appreciation to par at maturity.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The discount bond yield ladder: Nominal (coupon) is the floor, YTM is higher because you paid $950 but get $1,000 back at maturity. That extra $50 boosts your total return. This is why discount bonds are attractive in rising rate environments."
+            },
+            {
+                topic: "Bonds",
+                question: "Which bonds have the HIGHEST credit risk?",
+                answers: ["U.S. Treasury bonds", "AAA-rated corporate bonds", "BBB-rated corporate bonds", "BB-rated (junk) bonds"],
+                correct: 3,
+                explanation: "BB-rated bonds (below BBB) are considered 'junk' or 'high-yield' bonds - they have the highest credit risk but offer higher yields as compensation.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The rating line: BBB and above = 'investment grade' (institutions can buy). BB and below = 'junk' or 'high-yield' (riskier, higher yields). Tesla was junk-rated until 2020. Investors who bought TSLA bonds at 8% yields when they were junk-rated made a killing when they got upgraded."
+            },
+            {
+                topic: "Bonds",
+                question: "A bond's duration measures:",
+                answers: ["Time until maturity", "Credit risk", "Interest rate sensitivity", "Liquidity risk"],
+                correct: 2,
+                explanation: "Duration measures a bond's price SENSITIVITY to interest rate changes. Higher duration = more price volatility when rates change.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Duration is the key metric bond traders watch. A duration of 7 means if rates rise 1%, the bond drops ~7%. Long-term bonds have high duration (15-20), short-term bonds have low duration (1-3). This is why TLT (20+ year Treasuries) got murdered in 2022 when rates spiked."
+            },
+            {
+                topic: "Municipal Bonds",
+                question: "An investor in the 24% tax bracket receives $1,000 in municipal bond interest. How much is taxable at the federal level?",
+                answers: ["$0", "$240", "$760", "$1,000"],
+                correct: 0,
+                explanation: "Municipal bond interest is EXEMPT from federal income tax. $0 is taxable. This is the primary advantage of munis.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Zero federal taxes on muni interest - that's the whole point. But watch out: capital gains from SELLING munis at a profit are still taxable. And some munis (private activity bonds) may trigger AMT (Alternative Minimum Tax). But regular interest? Tax-free money, baby."
+            },
+            {
+                topic: "Municipal Bonds",
+                question: "Which municipal bond typically requires voter approval?",
+                answers: ["Revenue bond", "Industrial development bond", "General Obligation bond", "Private activity bond"],
+                correct: 2,
+                explanation: "General Obligation bonds typically require voter approval because they're backed by the issuer's taxing power - voters are essentially agreeing to be taxed if needed.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> GO bonds need voter blessing because politicians are committing to raise YOUR taxes if needed to pay bondholders. Revenue bonds don't need voter approval - they're paid from project revenue (tolls, fees), not taxes. This is why GO bond elections appear on ballots - 'Proposition A: Issue $500M in bonds for schools.'"
+            },
+
+            // EQUITY SECURITIES - Additional Set (4 questions)
+            {
+                topic: "Equity Securities",
+                question: "Cumulative preferred stock means:",
+                answers: ["Dividends accumulate and compound annually", "Missed dividends must be paid before common dividends", "Shareholders get multiple votes per share", "Dividends increase each year"],
+                correct: 1,
+                explanation: "Cumulative preferred means if dividends are skipped, they ACCUMULATE and must be paid in full (including all past missed dividends) before ANY common stock dividends can be paid.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> This is preferred shareholders' insurance policy. Company skips dividends for 3 years? With cumulative preferred, you're owed 3 years' worth. Before common shareholders get a penny, you get paid EVERYTHING owed. Non-cumulative preferred? You're out of luck - missed dividends are gone forever."
+            },
+            {
+                topic: "Equity Securities",
+                question: "Pre-emptive rights protect existing shareholders from:",
+                answers: ["Market downturns", "Dilution of ownership", "Dividend cuts", "Hostile takeovers"],
+                correct: 1,
+                explanation: "Pre-emptive rights give existing shareholders the RIGHT to maintain their proportional ownership by buying new shares before they're offered to outsiders, preventing DILUTION.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> You own 10% of a company (10,000 of 100,000 shares). They issue 50,000 new shares - suddenly you only own 6.7%. Pre-emptive rights let you buy 5,000 of those new shares to maintain your 10%. Not all stocks have these rights, but when they do, it protects you from getting watered down."
+            },
+            {
+                topic: "Equity Securities",
+                question: "Which type of stock typically has NO voting rights?",
+                answers: ["Common stock", "Preferred stock", "Treasury stock", "Authorized stock"],
+                correct: 1,
+                explanation: "PREFERRED stock typically has NO voting rights. It's the trade-off - you get fixed dividends and priority in liquidation, but you give up voting power.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Preferred shareholders are like creditors lite - you get paid before common shareholders, get fixed income, but you don't run the company. Common shareholders elect the board and vote on major decisions. Some companies issue multiple share classes (GOOGL vs GOOG) where one has votes, one doesn't - same game."
+            },
+            {
+                topic: "Equity Securities",
+                question: "The ex-dividend date is:",
+                answers: ["The date dividends are paid", "The date the board declares the dividend", "The first day a stock trades WITHOUT the dividend", "The last day to own stock and receive the dividend"],
+                correct: 2,
+                explanation: "The ex-dividend date is the first day the stock trades WITHOUT the dividend. Buy on or after the ex-date, you DON'T get the dividend.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The dividend timeline: Declaration → Ex-Dividend → Record → Payment. The ex-date is T+1 BEFORE record date (due to settlement). Buy BEFORE ex-date, you get the dividend. Buy ON or AFTER ex-date, you don't. The stock typically drops by the dividend amount on ex-date. Chasing dividends? Make sure you buy before ex-date."
+            },
+
+            // MUTUAL FUNDS - Additional Set (4 questions)
+            {
+                topic: "Mutual Funds",
+                question: "A mutual fund with $100 million in assets, $5 million in liabilities, and 10 million shares outstanding has a NAV of:",
+                answers: ["$9.50", "$10.00", "$10.50", "$11.00"],
+                correct: 0,
+                explanation: "NAV = (Assets - Liabilities) / Shares Outstanding. ($100M - $5M) / 10M shares = $95M / 10M = $9.50 per share.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> This is the only mutual fund calculation you need cold. Assets minus liabilities gives you net assets. Divide by shares outstanding. That $9.50 is what you'll pay (for no-load funds) or the base price before loads are added. Calculated daily at 4pm ET like clockwork."
+            },
+            {
+                topic: "Mutual Funds",
+                question: "Closed-end funds differ from open-end funds because they:",
+                answers: ["Cannot be sold by investors", "Trade on exchanges at market prices", "Never pay dividends", "Are not regulated by the SEC"],
+                correct: 1,
+                explanation: "Closed-end funds have a FIXED number of shares that trade on exchanges like stocks at market prices (which can be above or below NAV). Open-end funds issue/redeem shares at NAV.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Closed-end funds are the weird cousins. They IPO once, then trade on NYSE/NASDAQ. Supply and demand sets the price, not NAV. They often trade at 5-15% discounts to NAV - free money? Not quite. There's usually a reason (high fees, poor performance). Some traders hunt for deep discounts."
+            },
+            {
+                topic: "Mutual Funds",
+                question: "Which mutual fund fee is NOT included in the expense ratio?",
+                answers: ["Management fee", "12b-1 fee", "Administrative costs", "Sales load"],
+                correct: 3,
+                explanation: "Sales LOADS (front-end or back-end) are NOT part of the expense ratio. Expense ratio includes management fees, 12b-1 fees, and administrative costs.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Sneaky distinction the SIE loves. Expense ratio = ongoing annual costs (management, 12b-1, admin). Loads = one-time sales charges. A fund can have a 0.50% expense ratio but a 5.75% front-end load. The load isn't 'annual' so it's separate. Always look at BOTH when comparing funds."
+            },
+            {
+                topic: "Mutual Funds",
+                question: "Breakpoints in mutual fund sales:",
+                answers: ["Allow investors to pay lower sales charges on large purchases", "Are available for all share classes", "Can be retroactively applied to past purchases", "Increase the expense ratio"],
+                correct: 0,
+                explanation: "Breakpoints reduce the front-end load for large purchases. For example, 5.75% load for $0-$50K, 5.00% for $50K-$100K, etc. Available for Class A shares.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The volume discount of mutual funds. Invest $49,000? Pay 5.75% load. Invest $51,000? Pay 5.00% load. The jump from $49K to $51K saves you hundreds. Pro tip: you can combine family accounts (rights of accumulation) or sign a letter of intent to hit breakpoints. Advisors who don't tell you about breakpoints? That's a violation."
+            },
+
+            // PROHIBITED ACTIVITIES - Additional Set (3 questions)
+            {
+                topic: "Prohibited Activities",
+                question: "Selling away refers to:",
+                answers: ["Selling securities at excessive markups", "Selling securities not approved by the firm", "Selling securities below market price", "Selling securities after market hours"],
+                correct: 1,
+                explanation: "Selling away is when a registered rep sells securities or makes private deals NOT approved or offered by their broker-dealer. This is prohibited without firm approval.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The side hustle that ends careers. Your buddy's startup wants to raise money, you help sell shares without telling your firm? That's selling away. Even if it's legit, even if you don't get paid - if your firm doesn't know and approve, it's a violation. FINRA Rule 3280. Penalties include termination and industry bans."
+            },
+            {
+                topic: "Prohibited Activities",
+                question: "Which is an example of interpositioning?",
+                answers: ["Charging a commission plus a markup", "Using an unnecessary third party to execute a trade", "Buying securities before customer orders", "Misrepresenting bond yields"],
+                correct: 1,
+                explanation: "Interpositioning is inserting an unnecessary third party into a transaction to generate extra fees, increasing costs to the customer without benefit.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The middleman scam. You have direct access to the market maker, but you route through your buddy's firm first so he can take a cut - then to the market maker. Customer pays extra, gets nothing. FINRA Rule 5310 requires 'best execution' - interpositioning violates this. Classic exam question."
+            },
+            {
+                topic: "Prohibited Activities",
+                question: "Guaranteeing a customer against loss is:",
+                answers: ["Allowed with written customer consent", "Allowed for accounts over $100,000", "Prohibited in all circumstances", "Allowed for institutional accounts only"],
+                correct: 2,
+                explanation: "Guaranteeing customers against losses is ALWAYS prohibited. You cannot promise 'you won't lose money' or 'I'll cover any losses.' No exceptions.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The promise that ends careers. 'Don't worry, if you lose money I'll make you whole' sounds customer-friendly but it's fraud. Investments have risks - period. Even if you're wealthy and could actually cover losses, making the guarantee is still prohibited. If it sounds too good to be true, it's probably a violation."
+            },
+
+            // ORDER TYPES - Additional Set (3 questions)
+            {
+                topic: "Order Types",
+                question: "A stop-limit order combines features of:",
+                answers: ["Market and limit orders", "Stop and limit orders", "Day and GTC orders", "Buy and sell orders"],
+                correct: 1,
+                explanation: "A stop-limit order triggers at the stop price but then becomes a LIMIT order (not a market order). You get price protection but risk non-execution.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The control freak's order. Stock at $50, you set stop-limit at $48 stop/$47.50 limit. At $48 it triggers and becomes a limit order to sell at $47.50 or better. If it gaps down to $45? Your order won't fill. Regular stop would've filled at $45. Trade-off: price certainty vs execution certainty."
+            },
+            {
+                topic: "Order Types",
+                question: "An investor owns stock currently trading at $55. To protect profits, they should place:",
+                answers: ["Buy stop at $60", "Sell stop at $50", "Buy limit at $50", "Sell limit at $50"],
+                correct: 1,
+                explanation: "To protect profits on a LONG position, place a sell stop BELOW current market. If the stock drops to your stop price, you're automatically sold out.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Your automatic exit strategy. Bought NVDA at $30, it's now $55, you want to lock in gains. Set a sell stop at $50 - if it drops there, you're out with a $20/share profit protected. This is the 'trailing stop' concept - as the stock rises, you raise your stop to lock in more gains."
+            },
+            {
+                topic: "Order Types",
+                question: "Fill or Kill (FOK) orders must be:",
+                answers: ["Filled immediately and completely or canceled", "Filled by end of trading day", "Filled at the opening price", "Filled within one hour"],
+                correct: 0,
+                explanation: "Fill or Kill means the ENTIRE order must execute IMMEDIATELY at the specified price or better, or the entire order is canceled. No partial fills, no waiting.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The all-or-nothing, right-now order. Want 10,000 shares at $50, only if you can get them ALL instantly? FOK. Only 5,000 available? Entire order canceled. This is for traders who need large positions at specific prices without tipping their hand with multiple small fills."
+            },
+
+            // ACCOUNTS - Additional Set (3 questions)
+            {
+                topic: "Accounts",
+                question: "In a joint tenants in common (JTIC) account, when one owner dies:",
+                answers: ["Their portion goes to the surviving owner", "Their portion goes to their estate", "The account is frozen permanently", "The account converts to individual ownership"],
+                correct: 1,
+                explanation: "In JTIC accounts, each owner's portion goes to THEIR ESTATE when they die, not to the surviving account holder(s). This differs from JTWROS.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> JTIC vs JTWROS is huge for estate planning. JTIC = 'we're business partners, if I die my share goes to my kids.' JTWROS (joint tenants with rights of survivorship) = 'we're married, if I die it's all yours.' Business accounts usually JTIC, married couples usually JTWROS."
+            },
+            {
+                topic: "Accounts",
+                question: "A pattern day trader must maintain minimum equity of:",
+                answers: ["$2,000", "$10,000", "$25,000", "$100,000"],
+                correct: 2,
+                explanation: "Pattern day traders (4+ day trades in 5 business days) must maintain $25,000 minimum equity. Fall below, you're restricted to cash trading only.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> The rule that killed small-account day trading. Execute 4 day trades in a week with under $25K? Your account gets flagged PDT and restricted. You can only close positions, no new day trades for 90 days. This is why traders use cash accounts (no PDT rule) or keep exactly $25,001 in their margin account."
+            },
+            {
+                topic: "Accounts",
+                question: "Fiduciary accounts include all of the following EXCEPT:",
+                answers: ["Trust accounts", "Guardian accounts", "UTMA/UGMA accounts", "Joint tenants with rights of survivorship"],
+                correct: 3,
+                explanation: "JTWROS is NOT a fiduciary account - both owners have equal rights. Trust, guardian, and custodial accounts have a fiduciary managing assets for a beneficiary.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Fiduciary = you're managing someone else's money and have a legal duty to put their interests first. Trusts, guardians, UTMA custodians - all fiduciaries. JTWROS? Both owners control the account equally, no fiduciary duty. This matters for suitability and legal liability."
+            },
+
+            // REGULATORY - Additional Set (2 questions)
+            {
+                topic: "Regulatory",
+                question: "Which entity has the authority to suspend trading in a security?",
+                answers: ["FINRA only", "The SEC only", "Both FINRA and the SEC", "The Federal Reserve"],
+                correct: 2,
+                explanation: "Both FINRA and the SEC have authority to suspend trading. The SEC can suspend trading for up to 10 business days; FINRA can halt trading on securities in its markets.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> When weird stuff happens - manipulation suspected, pending news, compliance issues - the SEC can freeze a stock for 10 days (renewable). Recent example: they suspended dozens of Chinese reverse-merger stocks suspected of fraud. FINRA halts happen daily for volatility, news pending, or regulatory concerns."
+            },
+            {
+                topic: "Regulatory",
+                question: "Under FINRA rules, customer complaints must be preserved for:",
+                answers: ["3 years", "4 years", "6 years", "Permanently"],
+                correct: 1,
+                explanation: "Customer complaints must be kept for 4 years. Complaints can destroy careers, so firms take documentation seriously.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Everything's a record. Customer emails you 'I'm unhappy with my returns' - that's a complaint, goes in your file for 4 years, shows up on your U5 if it's serious. This is why reps are paranoid about written customer communications. Verbal complaints should be documented too. One frivolous complaint? Usually fine. Pattern of complaints? Career killer."
+            },
+
+            // CAPITAL MARKETS - Additional Set (1 question)
+            {
+                topic: "Capital Markets",
+                question: "In a rights offering, the subscription price is typically set:",
+                answers: ["Above current market price", "At current market price", "Below current market price", "At par value"],
+                correct: 2,
+                explanation: "Subscription prices in rights offerings are set BELOW current market price to make them attractive to existing shareholders and ensure the offering succeeds.<br><br><span style=\"color:#7C9885;font-weight:600;\">💡 Street Wisdom:</span> Company wants to raise cash without paying investment bankers. They offer existing shareholders rights to buy new shares at a discount - maybe $18 when the stock's at $20. It's a 'thank you' to loyal shareholders. Rights trade separately. You can exercise them (buy the discounted shares) or sell the rights themselves for quick cash."
             }
         ];
 
