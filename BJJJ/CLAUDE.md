@@ -37,8 +37,9 @@ When making changes:
 1. **Build** - Run `npm run build` (from `/prototype`) to check for errors
 2. **Commit** - Commit changes to git with a clear message
 3. **Push** - Push to `main` branch
+4. **Deploy** - Run `wrangler pages deploy dist --project-name=bjjj --branch=main` (from `/prototype`)
 
-**Deployment is automatic.** GitHub Actions will build and deploy to Cloudflare Pages on every push to main that changes files in `BJJJ/prototype/`.
+**Deployment happens immediately** via wrangler CLI. Changes are live on bjjj.pages.dev within seconds.
 
 ### Available Commands
 
@@ -46,12 +47,7 @@ When making changes:
 |---------|--------------|
 | `npm run dev` | Local preview at localhost:5173 |
 | `npm run build` | Compile and check for errors |
-
-### GitHub Secrets Required
-
-For automatic deployment, these secrets must be configured in GitHub:
-- `CLOUDFLARE_API_TOKEN` - API token with Cloudflare Pages edit permissions
-- `CLOUDFLARE_ACCOUNT_ID` - Your Cloudflare account ID
+| `wrangler pages deploy dist --project-name=bjjj --branch=main` | Deploy to production |
 
 ### Testing Belt Personalization
 
