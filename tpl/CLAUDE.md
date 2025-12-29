@@ -7,13 +7,13 @@ Documentation project for Tredyffrin Township Libraries' Toshiba e-STUDIO 2525AC
 ## Key Directories
 
 - `docs/` - Markdown source files (edit these)
-- `public/` - Deployable HTML output (deploy this folder to `printer-help/`)
-- `public/assets/` - CSS, images, fonts
+- `printer-help/` - Deployable HTML output (served at drewgarraway.com/tpl/printer-help/)
+- `printer-help/assets/` - CSS, images, fonts
 - `reference/` - Toshiba PDF manuals for fact-checking
 
 ## Deployment
 
-Deploy contents of `public/` to `drewgarraway.com/tpl/printer-help/`
+Auto-deploys via GitHub Pages when pushed to main branch.
 
 URLs will be:
 - `/tpl/printer-help/` (index)
@@ -24,7 +24,7 @@ URLs will be:
 
 ## Style Requirements
 
-- Follow TTL brand colors from `public/assets/css/variables.css`
+- Follow TTL brand colors from `printer-help/assets/css/variables.css`
 - Use Poppins for headings, Lato for body text
 - Maintain WCAG 2.1 AA accessibility
 - No emojis in documentation
@@ -32,7 +32,7 @@ URLs will be:
 
 ## When Converting MD to HTML
 
-1. Use `public/_template.html` as base
+1. Use `printer-help/_template.html` as base
 2. Apply semantic HTML (`<article>`, `<section>`, proper heading hierarchy)
 3. Add `.steps` class to numbered instruction lists
 4. Add `.callout` class for tips/warnings

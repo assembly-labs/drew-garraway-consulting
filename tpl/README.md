@@ -6,7 +6,7 @@ User guides, staff documentation, and print-ready signage for the **Toshiba e-ST
 
 ```
 tpl/
-├── public/              # Deploy this folder to printer-help/
+├── printer-help/        # Live site (auto-deploys via GitHub Pages)
 │   ├── index.html
 │   ├── quick-start.html
 │   ├── faq.html
@@ -21,11 +21,9 @@ tpl/
 └── reference/           # Toshiba PDF manuals
 ```
 
-## Deployment
+## Live Site
 
-Deploy contents of `public/` to your web server.
-
-**Target:** `drewgarraway.com/tpl/printer-help/`
+**URL:** [drewgarraway.com/tpl/printer-help/](https://drewgarraway.com/tpl/printer-help/)
 
 | Page | URL |
 |------|-----|
