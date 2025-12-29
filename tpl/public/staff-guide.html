@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Staff operations guide for the Toshiba e-STUDIO 2525AC at Tredyffrin Libraries. Troubleshooting, configuration, and patron assistance.">
+
+  <link rel="icon" type="image/svg+xml" href="assets/images/tredy-icon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/print.css" media="print">
+
+  <title>Staff Operations Guide - Tredyffrin Libraries</title>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a href="index.html" class="site-logo" aria-label="Tredyffrin Libraries Home">
+        <img src="assets/images/tredy-icon.svg" alt="" width="40" height="40" aria-hidden="true">
+        <span>Tredyffrin Libraries</span>
+      </a>
+      <p class="page-title">Staff Guide</p>
+    </div>
+  </header>
+
+  <main id="main-content" class="main-content" role="main">
+    <div class="container">
+
+      <article>
+        <h1>Staff Operations Guide</h1>
+        <p class="text-muted">Toshiba e-STUDIO 2525AC — Tredyffrin Public Library</p>
+        <p><em>Internal document for Reference Desk staff, front-desk staff, and IT liaison</em></p>
+
+        <nav aria-label="Page contents">
+          <ul>
+            <li><a href="#overview">Section A: System Overview</a></li>
+            <li><a href="#modes">Section B: Mode-by-Mode Deep Dive</a></li>
+            <li><a href="#troubleshooting">Section C: Troubleshooting Playbook</a></li>
+            <li><a href="#admin">Section D: Admin-Dependent Features</a></li>
+            <li><a href="#scripts">Section E: Staff Scripts</a></li>
+            <li><a href="#sources">Section F: Source List</a></li>
+            <li><a href="#questions">Section G: Open Questions</a></li>
+          </ul>
+        </nav>
+
+        <hr>
+
+        <!-- Section A -->
+        <section id="overview">
+          <h2>Section A: System Overview</h2>
+
+          <h3>What the e-STUDIO 2525AC Can Do</h3>
+          <p>The Toshiba e-STUDIO 2525AC is a multifunction device (MFP) that provides:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Function</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Copy</strong></td>
+                <td>Photocopy documents in B/W or color, single or duplex</td>
+              </tr>
+              <tr>
+                <td><strong>Scan</strong></td>
+                <td>Digitize documents to USB, email, or network folder</td>
+              </tr>
+              <tr>
+                <td><strong>Print</strong></td>
+                <td>Output documents sent from library computers via Cloud Print / Elevate Sky Print</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Key Specifications</h4>
+          <ul>
+            <li><strong>Speed:</strong> Up to 25 pages per minute (color and B/W)</li>
+            <li><strong>Paper Sizes:</strong> Letter, Legal, Ledger (11x17)</li>
+            <li><strong>Paper Capacity:</strong> Multiple drawers + bypass tray</li>
+            <li><strong>Duplex:</strong> Automatic two-sided copying, scanning, and printing</li>
+            <li><strong>Scan Formats:</strong> PDF, TIFF, JPEG, XPS, PDF/A, DOCX, XLSX, PPTX (some require OCR)</li>
+          </ul>
+
+          <h3>Tredyffrin-Specific Configuration</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Configuration at TPL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Print Release System</strong></td>
+                <td>Elevate Sky Print (not native Toshiba hold/release)</td>
+              </tr>
+              <tr>
+                <td><strong>Printer Name</strong></td>
+                <td>Cloud Print (selected at public computers)</td>
+              </tr>
+              <tr>
+                <td><strong>Authentication</strong></td>
+                <td>User ID and Password taped to computer monitors</td>
+              </tr>
+              <tr>
+                <td><strong>Payment</strong></td>
+                <td>Pay at Front Desk immediately after printing</td>
+              </tr>
+              <tr>
+                <td><strong>Scan to Email</strong></td>
+                <td>Available (check SMTP status if issues arise)</td>
+              </tr>
+              <tr>
+                <td><strong>Scan to USB</strong></td>
+                <td>Enabled</td>
+              </tr>
+              <tr>
+                <td><strong>Scan to Network</strong></td>
+                <td>Not available for patrons</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Common Library-Specific Limitations</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Limitation</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Patrons cannot refill paper</td>
+                <td>Staff responsibility; prevents jams from incorrect loading</td>
+              </tr>
+              <tr>
+                <td>Patrons cannot clear jams</td>
+                <td>Safety (hot fuser) and equipment protection</td>
+              </tr>
+              <tr>
+                <td>No bypass tray for patrons</td>
+                <td>Special media requires staff assistance</td>
+              </tr>
+              <tr>
+                <td>No network folder scanning</td>
+                <td>Security; not configured for public use</td>
+              </tr>
+              <tr>
+                <td>No USB printing</td>
+                <td>Security risk; disabled</td>
+              </tr>
+              <tr>
+                <td>Hold/Private Print unavailable</td>
+                <td>Library uses Elevate Sky Print instead</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Features to Keep Disabled/Hidden in Public Mode</h3>
+          <ul>
+            <li><strong>e-Filing and Overlay printing</strong> — Privacy concerns</li>
+            <li><strong>USB printing</strong> — Security risk (malware)</li>
+            <li><strong>Scan-to-FTP/SMTP settings</strong> — Admin-only</li>
+            <li><strong>Twin Color and Proof Print</strong> — Confuses patrons</li>
+            <li><strong>Admin menus</strong> — Should be password-protected</li>
+          </ul>
+        </section>
+
+        <hr>
+
+        <!-- Section B -->
+        <section id="modes">
+          <h2>Section B: Mode-by-Mode Deep Dive</h2>
+
+          <h3>Copy Mode</h3>
+
+          <h4>Accessing Copy Mode</h4>
+          <ul>
+            <li>Press the <kbd>COPY</kbd> hard key, OR</li>
+            <li>Tap <strong>Home &#8594; Copy</strong> on touch panel</li>
+            <li>PaperCut environments may require <strong>Access Device &#8594; Copy</strong></li>
+          </ul>
+
+          <h4>Color Settings</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Use When</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Black</strong></td>
+                <td>Default for cost savings; text documents</td>
+              </tr>
+              <tr>
+                <td><strong>Full Color</strong></td>
+                <td>Patron explicitly needs color output</td>
+              </tr>
+              <tr>
+                <td><strong>Auto Color</strong></td>
+                <td>NOT recommended — may misjudge light colors</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout">
+            <p><strong>Staff Note:</strong> Default is set to Black to reduce costs. If patron complains about B/W output, verify they selected Full Color before pressing Start.</p>
+          </div>
+
+          <h4>Duplex Logic</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Setting</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1&#8594;1</strong></td>
+                <td>Single-sided original &#8594; single-sided copy (default)</td>
+              </tr>
+              <tr>
+                <td><strong>1&#8594;2</strong></td>
+                <td>Single-sided original &#8594; double-sided copy</td>
+              </tr>
+              <tr>
+                <td><strong>2&#8594;2</strong></td>
+                <td>Double-sided original &#8594; double-sided copy</td>
+              </tr>
+              <tr>
+                <td><strong>2&#8594;1</strong></td>
+                <td>Double-sided original &#8594; single-sided copy</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Tray Selection Behavior</h4>
+          <ul>
+            <li>Machine auto-selects drawer based on detected original size</li>
+            <li>To override: tap <kbd>Paper</kbd> and select specific drawer or <strong>Bypass tray</strong></li>
+            <li>Bypass tray requires specifying paper size/type manually</li>
+          </ul>
+
+          <h4>Common Copy Misconfigurations</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Issue</th>
+                <th>Cause</th>
+                <th>Fix</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Blank output</td>
+                <td>Document placed wrong way</td>
+                <td>ADF = face up; Glass = face down</td>
+              </tr>
+              <tr>
+                <td>Unexpected B/W</td>
+                <td>Auto Color selected or default is Black</td>
+                <td>Select Full Color explicitly</td>
+              </tr>
+              <tr>
+                <td>Wrong paper size</td>
+                <td>Auto-select chose wrong drawer</td>
+                <td>Manually select Paper &#8594; correct drawer</td>
+              </tr>
+              <tr>
+                <td>Partial image</td>
+                <td>Original not aligned to corner arrow</td>
+                <td>Re-position on glass</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Scan Mode</h3>
+
+          <h4>Accessing Scan Mode</h4>
+          <ul>
+            <li>Press <kbd>SCAN</kbd> hard key, OR</li>
+            <li>Tap <strong>Home &#8594; Scan</strong></li>
+            <li>Some models have <kbd>Simple Scan</kbd> button for quick access</li>
+          </ul>
+
+          <h4>Scan Destinations</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Destination</th>
+                <th>Button Path</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>USB</strong></td>
+                <td>Scan &#8594; USB or File/USB &#8594; USB Media</td>
+                <td>Must wait for "Found USB Device" first</td>
+              </tr>
+              <tr>
+                <td><strong>Email</strong></td>
+                <td>Scan &#8594; E-mail</td>
+                <td>Requires SMTP configuration</td>
+              </tr>
+              <tr>
+                <td><strong>Network Folder</strong></td>
+                <td>Scan &#8594; File &#8594; Remote 1</td>
+                <td>Staff only; not for patrons</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>File Formats</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Format</th>
+                <th>Best For</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>PDF</strong></td>
+                <td>Multi-page documents</td>
+                <td>Default recommendation</td>
+              </tr>
+              <tr>
+                <td><strong>JPEG</strong></td>
+                <td>Photos, single images</td>
+                <td>Color/grayscale only</td>
+              </tr>
+              <tr>
+                <td><strong>TIFF</strong></td>
+                <td>Archival quality</td>
+                <td>Large files</td>
+              </tr>
+              <tr>
+                <td><strong>Slim PDF</strong></td>
+                <td>Smaller files</td>
+                <td>Reduced quality</td>
+              </tr>
+              <tr>
+                <td><strong>DOCX/XLSX/PPTX</strong></td>
+                <td>Editable documents</td>
+                <td>Requires OCR enabled</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Resolution (DPI) Guidelines</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Use Case</th>
+                <th>Recommended DPI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Email attachment</td>
+                <td>200 dpi</td>
+              </tr>
+              <tr>
+                <td>Print-quality archive</td>
+                <td>300 dpi</td>
+              </tr>
+              <tr>
+                <td>OCR processing</td>
+                <td>200-300 dpi minimum</td>
+              </tr>
+              <tr>
+                <td>Quick preview</td>
+                <td>100-150 dpi</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><strong>Note:</strong> Higher DPI = larger file size = longer email transmission time</p>
+
+          <h4>Duplex Scanning</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Single</strong></td>
+                <td>Scans one side only</td>
+              </tr>
+              <tr>
+                <td><strong>Book</strong></td>
+                <td>Scans both sides, same orientation</td>
+              </tr>
+              <tr>
+                <td><strong>Tablet</strong></td>
+                <td>Scans both sides, back rotated 180 degrees</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout-warning">
+            <p><strong>Critical: Job Finish</strong></p>
+            <p>Patrons MUST press <kbd>Job Finish</kbd> after scanning. Without this step:</p>
+            <ul>
+              <li>Multi-page scans may not save</li>
+              <li>Email may not send</li>
+              <li>USB file may be incomplete</li>
+            </ul>
+          </div>
+
+          <h3>Print Mode (Elevate Sky Print)</h3>
+
+          <h4>How Printing Works at TPL</h4>
+          <ol>
+            <li><strong>At the computer:</strong> Patron selects <strong>Cloud Print</strong> and clicks Print</li>
+            <li><strong>At the printer:</strong> Patron uses <strong>Elevate Sky Print</strong> to release</li>
+          </ol>
+
+          <h4>Elevate Sky Print Release Steps</h4>
+          <ol class="steps">
+            <li>Touch the orange <strong>Elevate Sky Print</strong> icon</li>
+            <li>Enter User ID and Password from computer monitor</li>
+            <li>Touch green <kbd>Go</kbd> button</li>
+            <li>Touch icon with <strong>number in white circle</strong> (job count)</li>
+            <li>Select document(s) to print</li>
+            <li>Confirm settings (Color, 2-Sided, Copies)</li>
+            <li>Touch <kbd>Print</kbd></li>
+          </ol>
+
+          <h4>Print Settings at Release</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Setting</th>
+                <th>Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Color</strong></td>
+                <td>Auto Color, B&amp;W</td>
+              </tr>
+              <tr>
+                <td><strong>Duplex</strong></td>
+                <td>Single, 2-Sided</td>
+              </tr>
+              <tr>
+                <td><strong>Copies</strong></td>
+                <td>Adjust quantity</td>
+              </tr>
+              <tr>
+                <td><strong>Paper</strong></td>
+                <td>Auto, Letter, Tabloid</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Common Print Issues</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Issue</th>
+                <th>Likely Cause</th>
+                <th>Staff Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Job not appearing</td>
+                <td>Wrong printer selected</td>
+                <td>Have patron re-print to Cloud Print</td>
+              </tr>
+              <tr>
+                <td>No number in circle</td>
+                <td>Job didn't send</td>
+                <td>Check computer print queue</td>
+              </tr>
+              <tr>
+                <td>Job expired</td>
+                <td>Jobs timeout after ~2 hours</td>
+                <td>Re-send from computer</td>
+              </tr>
+              <tr>
+                <td>Wrong orientation</td>
+                <td>Driver setting mismatch</td>
+                <td>Adjust Portrait/Landscape before printing</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <hr>
+
+        <!-- Section C -->
+        <section id="troubleshooting">
+          <h2>Section C: Troubleshooting Playbook</h2>
+          <p><em>Organized by symptom. Work top-to-bottom: fastest check first.</em></p>
+
+          <h3>Printed Blank Pages</h3>
+          <ol>
+            <li><strong>Check document placement</strong>
+              <ul>
+                <li>ADF: Face UP</li>
+                <li>Glass: Face DOWN, aligned to corner arrow</li>
+              </ul>
+            </li>
+            <li><strong>Check original has content</strong> (not blank page)</li>
+            <li><strong>Check color mode</strong> — may have printed white text on white</li>
+            <li>If persists: Test with known good document</li>
+          </ol>
+
+          <h3>Wrong Paper Size Output</h3>
+          <ol>
+            <li><strong>Check paper size setting</strong> in Copy &#8594; Paper</li>
+            <li><strong>Verify drawer contents</strong> match expected size</li>
+            <li><strong>Check original size</strong> — machine may have auto-detected incorrectly</li>
+            <li>For printing: Check driver paper size setting at computer</li>
+          </ol>
+
+          <h3>Won't Print Double-Sided</h3>
+          <ol>
+            <li><strong>Verify duplex is enabled</strong> at printer (Elevate Sky Print settings)</li>
+            <li><strong>Check driver settings</strong> on computer for 2-Sided option</li>
+            <li><strong>Confirm paper type supports duplex</strong> (some heavy stock cannot duplex)</li>
+            <li>If option is grayed out: May be admin-disabled — escalate to IT</li>
+          </ol>
+
+          <h3>Scan Didn't Arrive (Email)</h3>
+          <ol>
+            <li><strong>Patron check spam/junk folder</strong></li>
+            <li><strong>Confirm Job Finish was pressed</strong></li>
+            <li><strong>Check file size</strong> — large scans may timeout</li>
+            <li><strong>Verify email address</strong> was entered correctly</li>
+            <li>If repeated failures: Check SMTP server status (admin task)</li>
+          </ol>
+
+          <div class="callout">
+            <p><strong>Workaround:</strong> Use Scan to USB for long documents (10+ pages)</p>
+          </div>
+
+          <h3>USB Not Recognized</h3>
+          <ol>
+            <li><strong>Re-insert firmly</strong> — wait 5 seconds between attempts</li>
+            <li><strong>Try different USB port</strong> if available</li>
+            <li><strong>Check drive format</strong> — must be FAT32 or exFAT (not NTFS)</li>
+            <li><strong>Try different USB drive</strong> to rule out drive failure</li>
+            <li>If no drives work: USB port may be disabled or malfunctioning — escalate</li>
+          </ol>
+
+          <h3>Machine Asks for Login</h3>
+          <p><strong>For printing (Elevate Sky Print):</strong></p>
+          <ul>
+            <li>User ID and Password are on computer monitor (e.g., "0001")</li>
+          </ul>
+
+          <p><strong>For copying/scanning:</strong></p>
+          <ul>
+            <li>May require library card swipe or credentials</li>
+            <li>If patron doesn't have credentials: Assist with guest access if available</li>
+          </ul>
+
+          <h3>Orientation Is Wrong</h3>
+          <p><strong>For copies:</strong></p>
+          <ol>
+            <li>Check document placement orientation</li>
+            <li>Use <kbd>Rotation</kbd> setting in scan options</li>
+          </ol>
+
+          <p><strong>For prints:</strong></p>
+          <ol>
+            <li>Check Portrait/Landscape in computer print settings</li>
+            <li>Verify document orientation before sending</li>
+          </ol>
+
+          <h3>Paper Jam</h3>
+
+          <div class="callout callout-error">
+            <p><strong>DO NOT let patrons attempt to clear jams.</strong></p>
+          </div>
+
+          <h4>Staff Jam Clearance (High-Level)</h4>
+          <ol>
+            <li>Follow on-screen instructions indicating jam location</li>
+            <li>Open indicated cover (look for flashing indicator)</li>
+            <li>Remove jammed paper carefully — pull in direction of paper path</li>
+            <li><strong>CAUTION:</strong> Fuser unit is HOT — allow cooling if needed</li>
+            <li>Close all covers securely</li>
+            <li>Machine should auto-resume or prompt to restart job</li>
+          </ol>
+
+          <p><strong>When to escalate to vendor:</strong></p>
+          <ul>
+            <li>Repeated jams in same location</li>
+            <li>Paper fragments remain inside</li>
+            <li>Error persists after clearing</li>
+            <li>Unusual noises from paper path</li>
+          </ul>
+
+          <h3>Job Stuck in Queue</h3>
+          <ol>
+            <li>Try canceling and re-sending</li>
+            <li>Check for error messages on device</li>
+            <li>Power cycle printer (last resort — notify IT first)</li>
+            <li>If pattern continues: May indicate network or driver issue</li>
+          </ol>
+        </section>
+
+        <hr>
+
+        <!-- Section D -->
+        <section id="admin">
+          <h2>Section D: Admin-Dependent Features</h2>
+          <p><em>These features depend on administrator configuration and may vary.</em></p>
+
+          <h3>Scan-to-Email Requirements</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Requirement</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>SMTP Server</td>
+                <td>Must be configured with valid server address</td>
+              </tr>
+              <tr>
+                <td>Authentication</td>
+                <td>May require username/password for SMTP</td>
+              </tr>
+              <tr>
+                <td>Sender Address</td>
+                <td>Often locked to authenticated user's email</td>
+              </tr>
+              <tr>
+                <td>Attachment Limits</td>
+                <td>Server may reject large files</td>
+              </tr>
+              <tr>
+                <td>TLS/SSL</td>
+                <td>May be required for secure transmission</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><strong>If scan-to-email fails repeatedly:</strong> Check SMTP configuration in admin panel or contact IT.</p>
+
+          <h3>Job Accounting (Elevate Sky Print)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>TPL Configuration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>System</strong></td>
+                <td>Elevate Sky Print</td>
+              </tr>
+              <tr>
+                <td><strong>Authentication</strong></td>
+                <td>User ID + Password (on monitor)</td>
+              </tr>
+              <tr>
+                <td><strong>Tracking</strong></td>
+                <td>Jobs tracked by user ID</td>
+              </tr>
+              <tr>
+                <td><strong>Payment</strong></td>
+                <td>Collected at Front Desk</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><strong>Note:</strong> Native Toshiba Hold Print/Private Print are NOT used.</p>
+
+          <h3>Network Folder Scanning</h3>
+          <table>
+            <tr>
+              <th>Status</th>
+              <td>Not available for patrons</td>
+            </tr>
+            <tr>
+              <th>Reason</th>
+              <td>Security; requires network credentials</td>
+            </tr>
+            <tr>
+              <th>Staff Use</th>
+              <td>May be available via Remote 1, Remote 2 if configured</td>
+            </tr>
+          </table>
+
+          <h3>USB Port Status</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Setting</th>
+                <th>Expected</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Scan to USB</td>
+                <td>Enabled</td>
+              </tr>
+              <tr>
+                <td>Print from USB</td>
+                <td>Disabled (security)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>If USB scanning stops working: Check if port was disabled in admin settings.</p>
+
+          <h3>Features That May Be Disabled</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>OCR (DOCX/XLSX output)</td>
+                <td>May not be licensed</td>
+              </tr>
+              <tr>
+                <td>PDF encryption</td>
+                <td>Admin decision</td>
+              </tr>
+              <tr>
+                <td>Color copying</td>
+                <td>May be restricted to reduce costs</td>
+              </tr>
+              <tr>
+                <td>Duplex</td>
+                <td>Rarely, but may be limited</td>
+              </tr>
+              <tr>
+                <td>High-resolution scanning</td>
+                <td>To control file sizes</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <hr>
+
+        <!-- Section E -->
+        <section id="scripts">
+          <h2>Section E: Staff Scripts</h2>
+          <p><em>Short verbal guides for assisting patrons without touching their documents.</em></p>
+
+          <h3>"Let me show you the quick fix"</h3>
+
+          <h4>For wrong document orientation:</h4>
+          <blockquote>
+            <p>"The feeder needs documents face-up, but the glass needs them face-down. Let me show you where the arrow is — line up your corner there."</p>
+          </blockquote>
+
+          <h4>For missing Job Finish:</h4>
+          <blockquote>
+            <p>"After you scan all your pages, you need to press Job Finish — that's the button that actually saves your file. Without it, the scan doesn't complete."</p>
+          </blockquote>
+
+          <h4>For print job not appearing:</h4>
+          <blockquote>
+            <p>"Let's check — did you select Cloud Print at the computer? If you see a number in this white circle, that's your job. No number means it didn't come through."</p>
+          </blockquote>
+
+          <h3>"Here's how to avoid this next time"</h3>
+
+          <h4>For USB corruption:</h4>
+          <blockquote>
+            <p>"The machine needs a moment to finish writing to your USB drive. Always wait until you see 'USB Device can be removed' on the screen before pulling it out."</p>
+          </blockquote>
+
+          <h4>For wrong color output:</h4>
+          <blockquote>
+            <p>"The machine defaults to black and white to save money. If you need color, tap Full Color before you press Start, and you'll see it change on the screen."</p>
+          </blockquote>
+
+          <h4>For email scan not arriving:</h4>
+          <blockquote>
+            <p>"Email scans can be slow if the file is large. Check your spam folder first. For longer documents — more than 10 pages or so — USB is more reliable."</p>
+          </blockquote>
+
+          <h3>"When it's okay to ask for help"</h3>
+          <p>Standard phrases for reassuring patrons:</p>
+
+          <blockquote>
+            <p>"This machine can be tricky — you're not the first person to have this question."</p>
+          </blockquote>
+
+          <blockquote>
+            <p>"Paper jams happen. Just let us know and we'll take care of it."</p>
+          </blockquote>
+
+          <blockquote>
+            <p>"There's no way to break it by pressing the wrong button. You can always press Stop or Home to start over."</p>
+          </blockquote>
+        </section>
+
+        <hr>
+
+        <!-- Section F -->
+        <section id="sources">
+          <h2>Section F: Source List</h2>
+
+          <h3>Official Toshiba Documentation</h3>
+          <ol>
+            <li>Multifunctional Digital Color Systems – Copy (Copying manual)</li>
+            <li>Multifunctional Digital Color Systems – Scan (Scanning manual)</li>
+            <li>Printing Guide (color MFP printers)</li>
+            <li>Troubleshooting Guide (color MFPs)</li>
+            <li>Quick Start Guide (e-STUDIO 2020AC/2520AC/2525AC)</li>
+          </ol>
+
+          <h3>Institutional Guides (Cross-Validation)</h3>
+          <ol start="6">
+            <li>Dickinson College ITS — Toshiba Scanning Step-by-Step</li>
+            <li>Dickinson College ITS — Scanning to Department Shared Folder</li>
+            <li>Milford Library Cooperative — Scan Documents to USB Drive</li>
+            <li>Clarendon Hills Library — How to Scan Using Toshiba Copier</li>
+            <li>Bank Street Library — Scanning to USB Drive</li>
+            <li>Stony Brook University IT — Copying on Toshiba Printers</li>
+            <li>Mount Saint Mary College — Copying with PaperCut</li>
+            <li>Western University Schulich — Scan to USB on Toshiba e-Studio</li>
+            <li>Western University SSTS — Printing/Copying/Scanning Instructions</li>
+            <li>Kenmore-Town of Tonawanda UFSD — Hold or Private Printing</li>
+            <li>MHA Help Desk — Hold Print and Private Printing</li>
+          </ol>
+        </section>
+
+        <hr>
+
+        <!-- Section G -->
+        <section id="questions">
+          <h2>Section G: Open Questions / Verify On-Site</h2>
+          <p>The following items are configuration-dependent and should be verified for TPL:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Question</th>
+                <th>How to Verify</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Paper tray assignments</td>
+                <td>Which drawer has Letter? Legal?</td>
+                <td>Check drawer labels</td>
+              </tr>
+              <tr>
+                <td>Default color setting</td>
+                <td>Is B/W the default?</td>
+                <td>Test at copier</td>
+              </tr>
+              <tr>
+                <td>Auto-logout timeout</td>
+                <td>How long before auto-logout?</td>
+                <td>Check admin settings</td>
+              </tr>
+              <tr>
+                <td>Scan-to-email limits</td>
+                <td>Max attachment size?</td>
+                <td>Test or check SMTP config</td>
+              </tr>
+              <tr>
+                <td>USB port location</td>
+                <td>Which ports are active?</td>
+                <td>Physical inspection</td>
+              </tr>
+              <tr>
+                <td>Job retention time</td>
+                <td>How long before jobs expire?</td>
+                <td>Check Elevate Sky Print settings</td>
+              </tr>
+              <tr>
+                <td>Guest access</td>
+                <td>Available for patrons without ID?</td>
+                <td>Policy decision</td>
+              </tr>
+              <tr>
+                <td>Color copy restrictions</td>
+                <td>Any limits on color copying?</td>
+                <td>Check admin settings</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>Tredyffrin Township Libraries</p>
+      <p class="text-muted">Toshiba e-STUDIO 2525AC Documentation</p>
+    </div>
+  </footer>
+
+</body>
+</html>

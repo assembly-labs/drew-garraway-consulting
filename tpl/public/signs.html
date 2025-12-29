@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Print-ready signs for the Toshiba e-STUDIO 2525AC copier at Tredyffrin Libraries. Designed for posting near the machine.">
+
+  <link rel="icon" type="image/svg+xml" href="assets/images/tredy-icon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/print.css" media="print">
+
+  <title>Print-Ready Signs - Tredyffrin Libraries</title>
+
+  <style>
+    @media screen {
+      .sign {
+        border: 2px solid var(--color-gray-300);
+        border-radius: var(--radius-lg);
+        padding: var(--space-8);
+        margin: var(--space-6) 0;
+        background: var(--color-white);
+        max-width: 600px;
+      }
+      .sign h2 {
+        margin-top: 0;
+        border-bottom: none;
+        text-align: center;
+      }
+      .sign-footer {
+        margin-top: var(--space-6);
+        padding-top: var(--space-4);
+        border-top: 1px solid var(--color-gray-200);
+        text-align: center;
+        font-size: var(--text-sm);
+      }
+      .print-instructions {
+        background: var(--color-primary-bg);
+        padding: var(--space-4);
+        border-radius: var(--radius-md);
+        margin-bottom: var(--space-8);
+      }
+    }
+    @media print {
+      .print-instructions, .no-print { display: none !important; }
+      .sign { page-break-after: always; }
+      .sign:last-of-type { page-break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header no-print" role="banner">
+    <div class="container">
+      <a href="index.html" class="site-logo" aria-label="Tredyffrin Libraries Home">
+        <img src="assets/images/tredy-icon.svg" alt="" width="40" height="40" aria-hidden="true">
+        <span>Tredyffrin Libraries</span>
+      </a>
+      <p class="page-title">Print-Ready Signs</p>
+    </div>
+  </header>
+
+  <main id="main-content" class="main-content" role="main">
+    <div class="container">
+
+      <h1 class="no-print">Print-Ready Signs</h1>
+      <p class="text-muted no-print">Tredyffrin Public Library</p>
+
+      <div class="print-instructions no-print">
+        <p><strong>Printing these signs:</strong> Use your browser's print function (<kbd>Ctrl</kbd>+<kbd>P</kbd> or <kbd>Cmd</kbd>+<kbd>P</kbd>). Each sign will print on a separate page. Designed to be readable from 3-5 feet.</p>
+      </div>
+
+      <!-- Sign 1: How to Copy -->
+      <article class="sign" aria-label="How to Copy sign">
+        <h2>How to Copy</h2>
+
+        <ol class="steps">
+          <li>Place your document
+            <ul>
+              <li><strong>Feeder:</strong> Face <strong>UP</strong></li>
+              <li><strong>Glass:</strong> Face <strong>DOWN</strong></li>
+            </ul>
+          </li>
+          <li>Press <kbd>Copy</kbd></li>
+          <li>Choose <kbd>Black</kbd> or <kbd>Full Color</kbd></li>
+          <li>Enter number of copies</li>
+          <li>Press <kbd>Start</kbd></li>
+          <li>Take your copies and original</li>
+        </ol>
+
+        <div class="sign-footer">
+          <p><strong>Black &amp; White:</strong> $0.10/page &nbsp;|&nbsp; <strong>Color:</strong> $0.30/page</p>
+          <p><em>Pay at Front Desk</em></p>
+        </div>
+      </article>
+
+      <!-- Sign 2: Scan to USB -->
+      <article class="sign" aria-label="Scan to USB sign">
+        <h2>Scan to USB Drive</h2>
+
+        <ol class="steps">
+          <li>Insert your USB drive
+            <ul><li>Wait for <strong>"Found USB Device"</strong></li></ul>
+          </li>
+          <li>Press <kbd>Scan</kbd>, then tap <kbd>USB</kbd></li>
+          <li>Place your document
+            <ul>
+              <li><strong>Feeder:</strong> Face <strong>UP</strong></li>
+              <li><strong>Glass:</strong> Face <strong>DOWN</strong></li>
+            </ul>
+          </li>
+          <li>Press <kbd>Scan</kbd>
+            <ul><li>Repeat for more pages</li></ul>
+          </li>
+          <li>Press <kbd>Job Finish</kbd></li>
+          <li><strong>WAIT</strong> for <strong>"USB Device can be removed"</strong>
+            <ul><li>Then remove your drive</li></ul>
+          </li>
+        </ol>
+
+        <div class="sign-footer">
+          <p><strong>Scanning is FREE</strong></p>
+        </div>
+      </article>
+
+      <!-- Sign 3: Scan to Email -->
+      <article class="sign" aria-label="Scan to Email sign">
+        <h2>Scan to Email</h2>
+
+        <ol class="steps">
+          <li>Press <kbd>Scan</kbd>, then tap <kbd>E-mail</kbd></li>
+          <li>Enter your email address</li>
+          <li>Choose <strong>PDF</strong> as the format</li>
+          <li>Place your document
+            <ul>
+              <li><strong>Feeder:</strong> Face <strong>UP</strong></li>
+              <li><strong>Glass:</strong> Face <strong>DOWN</strong></li>
+            </ul>
+          </li>
+          <li>Press <kbd>Scan</kbd>
+            <ul><li>Repeat for more pages</li></ul>
+          </li>
+          <li>Press <kbd>Job Finish</kbd>
+            <ul><li>Check your inbox (and spam folder)</li></ul>
+          </li>
+        </ol>
+
+        <div class="sign-footer">
+          <p><strong>Scanning is FREE</strong></p>
+          <p><em>Long documents? Use USB instead.</em></p>
+        </div>
+      </article>
+
+      <!-- Sign 4: How to Print -->
+      <article class="sign" aria-label="How to Print sign">
+        <h2>How to Print</h2>
+
+        <h3>At the Computer:</h3>
+        <ol class="steps">
+          <li>Click <strong>Print</strong> &rarr; Select <strong>Cloud Print</strong> &rarr; Click <strong>Print</strong></li>
+          <li>Note the <strong>User ID</strong> on the monitor (example: "0001")</li>
+        </ol>
+
+        <h3>At the Printer:</h3>
+        <ol class="steps" start="3">
+          <li>Touch the orange <strong>Elevate Sky Print</strong> icon</li>
+          <li>Enter <strong>User ID</strong> and <strong>Password</strong> &rarr; Touch green <kbd>Go</kbd></li>
+          <li>Touch the icon with <strong>a number in a white circle</strong></li>
+          <li>Select your document &rarr; Touch <kbd>Print</kbd></li>
+        </ol>
+
+        <div class="sign-footer">
+          <p><strong>Pay at Front Desk immediately after printing</strong></p>
+          <table style="margin: 0 auto;">
+            <tr>
+              <td><strong>Black &amp; White</strong></td>
+              <td><strong>Color</strong></td>
+            </tr>
+            <tr>
+              <td>$0.10/page</td>
+              <td>$0.30/page</td>
+            </tr>
+          </table>
+        </div>
+      </article>
+
+      <!-- Sign 5: Double-Sided Copies -->
+      <article class="sign" aria-label="Double-Sided Copies sign">
+        <h2>Double-Sided Copies</h2>
+
+        <p><strong>To copy double-sided:</strong></p>
+
+        <ol class="steps">
+          <li>Press <kbd>Copy</kbd></li>
+          <li>Tap <kbd>1-Sided/2-Sided</kbd></li>
+          <li>Choose your option:
+            <ul>
+              <li><strong>1&#8594;2</strong> = Single original &rarr; Double-sided copy</li>
+              <li><strong>2&#8594;2</strong> = Double original &rarr; Double-sided copy</li>
+            </ul>
+          </li>
+          <li>Press <kbd>Start</kbd></li>
+        </ol>
+
+        <div class="sign-footer">
+          <p><em>Need help? Ask the Reference Desk Librarian.</em></p>
+        </div>
+      </article>
+
+      <!-- Sign 6: Troubleshooting -->
+      <article class="sign" aria-label="Troubleshooting sign">
+        <h2>If Something Goes Wrong</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Problem</th>
+              <th>What To Do</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Paper Jam</strong></td>
+              <td>STOP. Notify staff.</td>
+            </tr>
+            <tr>
+              <td><strong>Blank pages</strong></td>
+              <td>Check document: Feeder = UP, Glass = DOWN</td>
+            </tr>
+            <tr>
+              <td><strong>Print job missing</strong></td>
+              <td>Look for number in white circle. No number = not sent.</td>
+            </tr>
+            <tr>
+              <td><strong>Scan didn't arrive</strong></td>
+              <td>Check spam folder. Try USB instead.</td>
+            </tr>
+            <tr>
+              <td><strong>USB not recognized</strong></td>
+              <td>Remove, wait 5 seconds, reinsert firmly.</td>
+            </tr>
+            <tr>
+              <td><strong>Screen frozen</strong></td>
+              <td>Press <kbd>Home</kbd> or <kbd>Function Clear</kbd></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="sign-footer">
+          <p><strong>Don't panic. You can't break it.</strong></p>
+          <p>Press <kbd>Stop</kbd> to cancel any job.</p>
+          <p><em>Questions? Ask the Reference Desk Librarian.</em></p>
+        </div>
+      </article>
+
+      <!-- Sign 7: Printing Prices -->
+      <article class="sign" aria-label="Printing Prices sign">
+        <h2>Printing Prices</h2>
+
+        <h3>Black and White</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Letter (8.5" x 11")</td>
+              <td>$0.10 + tax</td>
+            </tr>
+            <tr>
+              <td>Legal (8.5" x 14")</td>
+              <td>$0.15 + tax</td>
+            </tr>
+            <tr>
+              <td>Ledger (11" x 17")</td>
+              <td>$0.20 + tax</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Color</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Letter (8.5" x 11")</td>
+              <td>$0.30 + tax</td>
+            </tr>
+            <tr>
+              <td>Legal (8.5" x 14")</td>
+              <td>$0.45 + tax</td>
+            </tr>
+            <tr>
+              <td>Ledger (11" x 17")</td>
+              <td>$0.60 + tax</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="sign-footer">
+          <p><strong>Payment Options</strong></p>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li>Credit for totals $1.00 or more</li>
+            <li>Cash for any total</li>
+          </ul>
+          <p><strong>Pay at the Front Desk immediately after printing.</strong></p>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer no-print" role="contentinfo">
+    <div class="container">
+      <p>Tredyffrin Township Libraries</p>
+      <p class="text-muted">Toshiba e-STUDIO 2525AC Documentation</p>
+    </div>
+  </footer>
+
+</body>
+</html>
