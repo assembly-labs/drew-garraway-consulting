@@ -225,3 +225,142 @@ export const mockCompetitionStats = {
   averagePointsScored: 4,
   averagePointsAllowed: 2.5,
 };
+
+// ===========================================
+// BELT-SPECIFIC COMPETITION STATS
+// ===========================================
+
+export type BeltLevel = 'white' | 'blue' | 'purple' | 'brown' | 'black';
+
+export interface BeltCompetitionStats {
+  totalCompetitions: number;
+  totalMatches: number;
+  wins: number;
+  losses: number;
+  submissionWins: number;
+  submissionLosses: number;
+  medals: { gold: number; silver: number; bronze: number };
+}
+
+export const beltCompetitionStats: Record<BeltLevel, BeltCompetitionStats> = {
+  white: {
+    // David - never competed, considering first comp
+    totalCompetitions: 0,
+    totalMatches: 0,
+    wins: 0,
+    losses: 0,
+    submissionWins: 0,
+    submissionLosses: 0,
+    medals: { gold: 0, silver: 0, bronze: 0 },
+  },
+  blue: {
+    // Marcus - 2 competitions, 1 silver medal
+    totalCompetitions: 2,
+    totalMatches: 5,
+    wins: 3,
+    losses: 2,
+    submissionWins: 2,
+    submissionLosses: 1,
+    medals: { gold: 0, silver: 1, bronze: 0 },
+  },
+  purple: {
+    // Sofia - experienced competitor, 8 competitions
+    totalCompetitions: 8,
+    totalMatches: 24,
+    wins: 18,
+    losses: 6,
+    submissionWins: 12,
+    submissionLosses: 2,
+    medals: { gold: 3, silver: 2, bronze: 1 },
+  },
+  brown: {
+    // Elena - veteran competitor, 12 competitions
+    totalCompetitions: 12,
+    totalMatches: 38,
+    wins: 28,
+    losses: 10,
+    submissionWins: 18,
+    submissionLosses: 3,
+    medals: { gold: 4, silver: 3, bronze: 2 },
+  },
+  black: {
+    // Default black belt competitor
+    totalCompetitions: 20,
+    totalMatches: 58,
+    wins: 42,
+    losses: 16,
+    submissionWins: 28,
+    submissionLosses: 5,
+    medals: { gold: 8, silver: 4, bronze: 3 },
+  },
+};
+
+// ===========================================
+// BELT-SPECIFIC UPCOMING COMPETITIONS
+// ===========================================
+
+export const beltUpcomingCompetitions: Record<BeltLevel, Competition | null> = {
+  white: {
+    // David considering first comp - local beginner friendly
+    id: 'comp-white-001',
+    userId: 'user-white-001',
+    name: 'Austin Beginners Open',
+    organization: 'Good Fight',
+    date: '2025-04-12',
+    location: 'Austin, TX',
+    weightClass: 'Heavy',
+    beltDivision: 'White Belt Masters',
+    gi: true,
+    matches: [],
+  },
+  blue: {
+    // Marcus - IBJJF in March
+    id: 'comp-003',
+    userId: 'user-001',
+    name: 'Austin Spring Open',
+    organization: 'IBJJF',
+    date: '2025-03-15',
+    location: 'Austin, TX',
+    weightClass: 'Medium Heavy',
+    beltDivision: 'Blue Belt Adult',
+    gi: true,
+    matches: [],
+  },
+  purple: {
+    // Sofia - Pans in February
+    id: 'comp-purple-001',
+    userId: 'user-purple-001',
+    name: 'Pan American Championship',
+    organization: 'IBJJF',
+    date: '2025-02-20',
+    location: 'Orlando, FL',
+    weightClass: 'Light Feather',
+    beltDivision: 'Purple Belt Adult',
+    gi: true,
+    matches: [],
+  },
+  brown: {
+    // Elena - Worlds in June
+    id: 'comp-brown-001',
+    userId: 'user-brown-001',
+    name: 'World Championship',
+    organization: 'IBJJF',
+    date: '2025-06-05',
+    location: 'Anaheim, CA',
+    weightClass: 'Light',
+    beltDivision: 'Brown Belt Adult',
+    gi: true,
+    matches: [],
+  },
+  black: null, // No upcoming competition set
+};
+
+// Helper to get competition stats by belt
+export function getCompetitionStatsByBelt(belt: BeltLevel): BeltCompetitionStats {
+  return beltCompetitionStats[belt];
+}
+
+// Helper to get upcoming competition by belt
+export function getUpcomingCompetitionByBelt(belt: BeltLevel): Competition | null {
+  return beltUpcomingCompetitions[belt];
+}

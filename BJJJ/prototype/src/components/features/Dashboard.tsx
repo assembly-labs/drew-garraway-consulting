@@ -16,7 +16,11 @@
 import { useState, useMemo } from 'react';
 import { mockTrainingStats, mockJournalEntries } from '../../data/journal';
 import { mockSubmissionStats } from '../../data/submissions';
-import { mockCompetitionStats, mockUpcomingCompetition } from '../../data/competitions';
+import {
+  getCompetitionStatsByBelt,
+  getUpcomingCompetitionByBelt,
+  type BeltLevel as CompetitionBeltLevel,
+} from '../../data/competitions';
 import {
   DeadliestAttackCard,
   AchillesHeelCard,
@@ -160,44 +164,182 @@ export function Dashboard(_props: DashboardProps) {
 
     const detected = detectBreakthroughs(input);
 
-    // Add some mock historical breakthroughs for demo purposes
-    const mockHistoricalBreakthroughs: Breakthrough[] = [
-      {
-        id: 'hist-1',
-        type: 'first_submission',
-        detectedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-        confidence: 'high',
-        title: 'First Triangle',
-        description: 'You landed your first triangle in live rolling.',
-        stat: { value: 'Triangle', label: 'NEW SUBMISSION' },
-        beltContext: 'Your first triangle! This is huge.',
-        icon: 'trophy',
-      },
-      {
-        id: 'hist-2',
-        type: 'streak_record',
-        detectedAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
-        confidence: 'high',
-        title: '10 Day Streak',
-        description: 'You hit a new personal best training streak.',
-        stat: { value: 10, label: 'DAY STREAK' },
-        beltContext: 'Consistency builds champions.',
-        icon: 'zap',
-      },
-      {
-        id: 'hist-3',
-        type: 'pattern_break',
-        detectedAt: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString(),
-        confidence: 'medium',
-        title: 'Armbar Defense Up',
-        description: 'You stopped getting caught in armbars.',
-        stat: { value: '4 → 0', label: 'TIMES CAUGHT' },
-        beltContext: 'That hole is closing.',
-        icon: 'shield',
-      },
-    ];
+    // Belt-specific mock historical breakthroughs for demo purposes
+    const getBeltBreakthroughs = (): Breakthrough[] => {
+      switch (profile.belt) {
+        case 'white':
+          return [
+            {
+              id: 'hist-white-1',
+              type: 'first_submission',
+              detectedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'high',
+              title: 'First Americana',
+              description: 'You landed your first americana on a training partner.',
+              stat: { value: 'Americana', label: 'FIRST SUBMISSION' },
+              beltContext: 'Your first submission! The journey has begun.',
+              icon: 'trophy',
+            },
+            {
+              id: 'hist-white-2',
+              type: 'consistency_milestone',
+              detectedAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'high',
+              title: '50 Sessions',
+              description: 'You reached 50 training sessions.',
+              stat: { value: 50, label: 'SESSIONS' },
+              beltContext: 'Most white belts quit before 20. You\'re ahead.',
+              icon: 'award',
+            },
+            {
+              id: 'hist-white-3',
+              type: 'pattern_break',
+              detectedAt: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'medium',
+              title: 'Survived a Round',
+              description: 'You went a full round without getting submitted.',
+              stat: { value: '5 min', label: 'SURVIVED' },
+              beltContext: 'Defense is the first step. Well done.',
+              icon: 'shield',
+            },
+          ];
+        case 'blue':
+          return [
+            {
+              id: 'hist-blue-1',
+              type: 'first_submission',
+              detectedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'high',
+              title: 'First Triangle',
+              description: 'You landed your first triangle in live rolling.',
+              stat: { value: 'Triangle', label: 'NEW SUBMISSION' },
+              beltContext: 'Your closed guard game is evolving.',
+              icon: 'trophy',
+            },
+            {
+              id: 'hist-blue-2',
+              type: 'streak_record',
+              detectedAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'high',
+              title: '10 Day Streak',
+              description: 'You hit a new personal best training streak.',
+              stat: { value: 10, label: 'DAY STREAK' },
+              beltContext: 'Blue belt is about consistency. This is it.',
+              icon: 'zap',
+            },
+            {
+              id: 'hist-blue-3',
+              type: 'pattern_break',
+              detectedAt: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'medium',
+              title: 'Armbar Defense Up',
+              description: 'You stopped getting caught in armbars.',
+              stat: { value: '4 → 0', label: 'TIMES CAUGHT' },
+              beltContext: 'That hole is closing.',
+              icon: 'shield',
+            },
+          ];
+        case 'purple':
+          return [
+            {
+              id: 'hist-purple-1',
+              type: 'technique_streak',
+              detectedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'high',
+              title: 'Berimbolo Chain Working',
+              description: 'Your berimbolo to back take hit 5 times this week.',
+              stat: { value: 5, label: 'SUCCESSFUL CHAINS' },
+              beltContext: 'Your system is coming together.',
+              icon: 'trending-up',
+            },
+            {
+              id: 'hist-purple-2',
+              type: 'consistency_milestone',
+              detectedAt: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'high',
+              title: '200 Sessions',
+              description: 'Two hundred training sessions logged.',
+              stat: { value: 200, label: 'SESSIONS' },
+              beltContext: 'The middle of the journey. Depth over breadth.',
+              icon: 'award',
+            },
+            {
+              id: 'hist-purple-3',
+              type: 'first_submission',
+              detectedAt: new Date(Date.now() - 18 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'high',
+              title: 'First Leg Lock',
+              description: 'You caught your first heel hook in competition.',
+              stat: { value: 'Heel Hook', label: 'COMP SUBMISSION' },
+              beltContext: 'Your leg game is dangerous now.',
+              icon: 'trophy',
+            },
+          ];
+        case 'brown':
+          return [
+            {
+              id: 'hist-brown-1',
+              type: 'technique_streak',
+              detectedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'high',
+              title: 'Pressure Passing Streak',
+              description: 'Your pressure passing scored in 8 consecutive rounds.',
+              stat: { value: 8, label: 'ROUND STREAK' },
+              beltContext: 'Efficiency at brown belt level.',
+              icon: 'trending-up',
+            },
+            {
+              id: 'hist-brown-2',
+              type: 'consistency_milestone',
+              detectedAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'high',
+              title: '500 Sessions',
+              description: 'Five hundred sessions on the mat.',
+              stat: { value: 500, label: 'LIFETIME SESSIONS' },
+              beltContext: 'The finish line is in sight.',
+              icon: 'award',
+            },
+            {
+              id: 'hist-brown-3',
+              type: 'pattern_break',
+              detectedAt: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'medium',
+              title: 'Teaching Breakthrough',
+              description: 'Three students hit the technique you taught.',
+              stat: { value: 3, label: 'STUDENT SUCCESSES' },
+              beltContext: 'Your teaching deepens your own understanding.',
+              icon: 'check-circle',
+            },
+          ];
+        default: // black
+          return [
+            {
+              id: 'hist-black-1',
+              type: 'consistency_milestone',
+              detectedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'high',
+              title: '1000 Sessions',
+              description: 'One thousand sessions logged.',
+              stat: { value: '1000', label: 'LIFETIME SESSIONS' },
+              beltContext: 'A lifetime on the mat. The journey continues.',
+              icon: 'award',
+            },
+            {
+              id: 'hist-black-2',
+              type: 'technique_streak',
+              detectedAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+              confidence: 'high',
+              title: 'New Concept Explored',
+              description: 'You integrated a new guard concept into your game.',
+              stat: { value: 'Mikey Lock', label: 'NEW ADDITION' },
+              beltContext: 'Even at black belt, the art reveals new layers.',
+              icon: 'zap',
+            },
+          ];
+      }
+    };
 
-    const combinedBreakthroughs = [...detected, ...mockHistoricalBreakthroughs];
+    const combinedBreakthroughs = [...detected, ...getBeltBreakthroughs()];
 
     return {
       breakthrough: getMostSignificantBreakthrough(detected),
@@ -212,40 +354,68 @@ export function Dashboard(_props: DashboardProps) {
   // TOURNAMENT READINESS DATA
   // ===========================================
   const tournamentReadinessInput: TournamentReadinessInput = useMemo(() => {
-    // Calculate days until upcoming competition
-    const upcomingDate = new Date(mockUpcomingCompetition.date);
-    const today = new Date();
-    const daysUntil = Math.ceil((upcomingDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+    // Get belt-specific competition data
+    const competitionStats = getCompetitionStatsByBelt(profile.belt as CompetitionBeltLevel);
+    const upcomingCompetition = getUpcomingCompetitionByBelt(profile.belt as CompetitionBeltLevel);
+
+    // Calculate days until upcoming competition (if any)
+    let daysUntil = -1;
+    if (upcomingCompetition) {
+      const upcomingDate = new Date(upcomingCompetition.date);
+      const today = new Date();
+      daysUntil = Math.ceil((upcomingDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+    }
+
+    // Belt-specific technique category distribution
+    const getTechniqueCategories = () => {
+      switch (profile.belt) {
+        case 'white':
+          return { guards: 4, passes: 3, submissions: 3, escapes: 6, takedowns: 2 };
+        case 'blue':
+          return { guards: 14, passes: 9, submissions: 12, escapes: 6, takedowns: 6 };
+        case 'purple':
+          return { guards: 22, passes: 18, submissions: 20, escapes: 12, takedowns: 10 };
+        case 'brown':
+          return { guards: 28, passes: 25, submissions: 28, escapes: 18, takedowns: 15 };
+        default:
+          return { guards: 35, passes: 30, submissions: 35, escapes: 22, takedowns: 18 };
+      }
+    };
+
+    // Belt-specific technique count
+    const getTechniquesLogged = () => {
+      switch (profile.belt) {
+        case 'white': return 18;
+        case 'blue': return 47;
+        case 'purple': return 82;
+        case 'brown': return 114;
+        default: return 140;
+      }
+    };
 
     return {
       belt: profile.belt as TournamentReadinessInput['belt'],
       // Consistency metrics
       currentStreak: stats.currentStreak,
       sessionsThisMonth: stats.thisMonth.sessions,
-      sessionsLastMonth: 10, // Mock previous month
-      weeklyTarget: 3,
-      weeksHitTarget: 11,
+      sessionsLastMonth: Math.max(6, stats.thisMonth.sessions - 2),
+      weeklyTarget: profile.belt === 'white' ? 2 : profile.belt === 'purple' ? 5 : 3,
+      weeksHitTarget: profile.belt === 'purple' ? 12 : profile.belt === 'brown' ? 11 : 8,
       totalWeeksTracked: 13,
       // Technical metrics
-      techniquesLogged: 47,
-      techniqueCategories: {
-        guards: 14,
-        passes: 9,
-        submissions: 12,
-        escapes: 6,
-        takedowns: 6,
-      },
+      techniquesLogged: getTechniquesLogged(),
+      techniqueCategories: getTechniqueCategories(),
       // Sparring metrics
       submissionsLanded: stats.sparringRecord.wins,
       timesTapped: stats.sparringRecord.losses,
       sparringRoundsThisMonth: stats.thisMonth.sparringRounds,
-      // Competition history
-      totalCompetitions: mockCompetitionStats.totalCompetitions,
-      totalMatches: mockCompetitionStats.totalMatches,
-      competitionWins: mockCompetitionStats.wins,
-      medals: mockCompetitionStats.medals,
-      // Upcoming competition
-      hasUpcomingCompetition: daysUntil > 0 && daysUntil < 90,
+      // Competition history (belt-specific)
+      totalCompetitions: competitionStats.totalCompetitions,
+      totalMatches: competitionStats.totalMatches,
+      competitionWins: competitionStats.wins,
+      medals: competitionStats.medals,
+      // Upcoming competition (belt-specific)
+      hasUpcomingCompetition: daysUntil > 0 && daysUntil < 180,
       daysUntilCompetition: daysUntil > 0 ? daysUntil : undefined,
     };
   }, [profile.belt, stats]);
