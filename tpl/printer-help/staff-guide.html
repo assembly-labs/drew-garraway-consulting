@@ -25,40 +25,77 @@
         <img src="assets/images/tredy-icon.svg" alt="" width="40" height="40" aria-hidden="true">
         <span>Tredyffrin Libraries</span>
       </a>
-      <p class="page-title">Staff Guide</p>
+      <div class="header-right">
+        <p class="page-title">Staff Guide</p>
+        <div class="search-box">
+          <label for="staff-search" class="visually-hidden">Search staff guide</label>
+          <input
+            type="search"
+            id="staff-search"
+            class="search-input"
+            placeholder="Search guide..."
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button type="button" id="search-clear" class="search-clear" aria-label="Clear search">
+            &times;
+          </button>
+          <div id="search-results" class="search-results" hidden aria-live="polite"></div>
+        </div>
+      </div>
     </div>
   </header>
 
   <main id="main-content" class="main-content" role="main">
     <div class="container">
 
-      <article>
-        <h1>Staff Operations Guide</h1>
-        <p class="text-muted">Toshiba e-STUDIO 2525AC — Tredyffrin Public Library</p>
-        <p><em>Internal document for Reference Desk staff, front-desk staff, and IT liaison</em></p>
+      <!-- Mobile section selector -->
+      <div class="page-nav-mobile">
+        <select id="section-nav" aria-label="Jump to section">
+          <option value="">Jump to section...</option>
+          <option value="#overview">A: System Overview</option>
+          <option value="#modes">B: Mode-by-Mode Deep Dive</option>
+          <option value="#troubleshooting">C: Troubleshooting Playbook</option>
+          <option value="#admin">D: Admin-Dependent Features</option>
+          <option value="#sources">E: Source List</option>
+          <option value="#questions">F: Open Questions</option>
+        </select>
+      </div>
 
-        <nav aria-label="Page contents">
-          <ul>
-            <li><a href="#overview">Section A: System Overview</a></li>
-            <li><a href="#modes">Section B: Mode-by-Mode Deep Dive</a></li>
-            <li><a href="#troubleshooting">Section C: Troubleshooting Playbook</a></li>
-            <li><a href="#admin">Section D: Admin-Dependent Features</a></li>
-            <li><a href="#scripts">Section E: Staff Scripts</a></li>
-            <li><a href="#sources">Section F: Source List</a></li>
-            <li><a href="#questions">Section G: Open Questions</a></li>
-          </ul>
-        </nav>
+      <div class="page-with-nav">
+        <!-- Sticky sidebar TOC -->
+        <aside class="page-nav" aria-label="Section navigation">
+          <nav class="page-nav-sticky">
+            <p class="page-nav-title">On this page</p>
+            <ul class="page-nav-list">
+              <li><a href="#overview">System Overview</a></li>
+              <li><a href="#modes">Mode-by-Mode</a></li>
+              <li><a href="#troubleshooting">Troubleshooting</a></li>
+              <li><a href="#admin">Admin Features</a></li>
+              <li><a href="#sources">Source List</a></li>
+              <li><a href="#questions">Open Questions</a></li>
+            </ul>
+          </nav>
+        </aside>
 
-        <hr>
+        <article>
+          <h1>Staff Operations Guide</h1>
+          <p class="text-muted">Toshiba e-STUDIO 2525AC — Tredyffrin Public Library</p>
+          <p><em>Internal document for Reference Desk staff, front-desk staff, and IT liaison</em></p>
+
+          <p>This guide provides staff with the technical knowledge and troubleshooting procedures needed to assist patrons with our multifunction copier. Use it as a quick reference when helping patrons or resolving common issues.</p>
+
+          <hr>
 
         <!-- Section A -->
         <section id="overview">
           <h2>Section A: System Overview</h2>
+          <p class="section-intro">Machine capabilities, library-specific configuration, and feature limitations.</p>
 
           <h3>What the e-STUDIO 2525AC Can Do</h3>
           <p>The Toshiba e-STUDIO 2525AC is a multifunction device (MFP) that provides:</p>
 
-          <table>
+          <table class="table-lookup">
             <thead>
               <tr>
                 <th>Function</th>
@@ -91,7 +128,7 @@
           </ul>
 
           <h3>Tredyffrin-Specific Configuration</h3>
-          <table>
+          <table class="table-lookup">
             <thead>
               <tr>
                 <th>Feature</th>
@@ -179,8 +216,9 @@
         <hr>
 
         <!-- Section B -->
-        <section id="modes">
+        <section id="modes" class="section-shaded">
           <h2>Section B: Mode-by-Mode Deep Dive</h2>
+          <p class="section-intro">Detailed settings and options for Copy, Scan, and Print modes.</p>
 
           <h3>Copy Mode</h3>
 
@@ -255,7 +293,7 @@
           </ul>
 
           <h4>Common Copy Misconfigurations</h4>
-          <table>
+          <table class="table-actions">
             <thead>
               <tr>
                 <th>Issue</th>
@@ -416,7 +454,7 @@
             </tbody>
           </table>
 
-          <div class="callout callout-warning">
+          <div class="callout callout-error">
             <p><strong>Critical: Job Finish</strong></p>
             <p>Patrons MUST press <kbd>Job Finish</kbd> after scanning. Without this step:</p>
             <ul>
@@ -474,7 +512,7 @@
           </table>
 
           <h4>Common Print Issues</h4>
-          <table>
+          <table class="table-actions">
             <thead>
               <tr>
                 <th>Issue</th>
@@ -512,7 +550,7 @@
         <!-- Section C -->
         <section id="troubleshooting">
           <h2>Section C: Troubleshooting Playbook</h2>
-          <p><em>Organized by symptom. Work top-to-bottom: fastest check first.</em></p>
+          <p class="section-intro">Step-by-step solutions organized by symptom, starting with the quickest fixes.</p>
 
           <h3>Printed Blank Pages</h3>
           <ol>
@@ -592,7 +630,7 @@
 
           <h3>Paper Jam</h3>
 
-          <div class="callout callout-error">
+          <div class="callout callout-critical">
             <p><strong>DO NOT let patrons attempt to clear jams.</strong></p>
           </div>
 
@@ -626,9 +664,9 @@
         <hr>
 
         <!-- Section D -->
-        <section id="admin">
+        <section id="admin" class="section-shaded">
           <h2>Section D: Admin-Dependent Features</h2>
-          <p><em>These features depend on administrator configuration and may vary.</em></p>
+          <p class="section-intro">Features that require IT configuration and may vary by location.</p>
 
           <h3>Scan-to-Email Requirements</h3>
           <table>
@@ -768,65 +806,9 @@
         <hr>
 
         <!-- Section E -->
-        <section id="scripts">
-          <h2>Section E: Staff Scripts</h2>
-          <p><em>Short verbal guides for assisting patrons without touching their documents.</em></p>
-
-          <h3>"Let me show you the quick fix"</h3>
-
-          <h4>For wrong document orientation:</h4>
-          <blockquote>
-            <p>"The feeder needs documents face-up, but the glass needs them face-down. Let me show you where the arrow is — line up your corner there."</p>
-          </blockquote>
-
-          <h4>For missing Job Finish:</h4>
-          <blockquote>
-            <p>"After you scan all your pages, you need to press Job Finish — that's the button that actually saves your file. Without it, the scan doesn't complete."</p>
-          </blockquote>
-
-          <h4>For print job not appearing:</h4>
-          <blockquote>
-            <p>"Let's check — did you select Cloud Print at the computer? If you see a number in this white circle, that's your job. No number means it didn't come through."</p>
-          </blockquote>
-
-          <h3>"Here's how to avoid this next time"</h3>
-
-          <h4>For USB corruption:</h4>
-          <blockquote>
-            <p>"The machine needs a moment to finish writing to your USB drive. Always wait until you see 'USB Device can be removed' on the screen before pulling it out."</p>
-          </blockquote>
-
-          <h4>For wrong color output:</h4>
-          <blockquote>
-            <p>"The machine defaults to black and white to save money. If you need color, tap Full Color before you press Start, and you'll see it change on the screen."</p>
-          </blockquote>
-
-          <h4>For email scan not arriving:</h4>
-          <blockquote>
-            <p>"Email scans can be slow if the file is large. Check your spam folder first. For longer documents — more than 10 pages or so — USB is more reliable."</p>
-          </blockquote>
-
-          <h3>"When it's okay to ask for help"</h3>
-          <p>Standard phrases for reassuring patrons:</p>
-
-          <blockquote>
-            <p>"This machine can be tricky — you're not the first person to have this question."</p>
-          </blockquote>
-
-          <blockquote>
-            <p>"Paper jams happen. Just let us know and we'll take care of it."</p>
-          </blockquote>
-
-          <blockquote>
-            <p>"There's no way to break it by pressing the wrong button. You can always press Stop or Home to start over."</p>
-          </blockquote>
-        </section>
-
-        <hr>
-
-        <!-- Section F -->
-        <section id="sources">
-          <h2>Section F: Source List</h2>
+        <section id="sources" class="section-shaded">
+          <h2>Section E: Source List</h2>
+          <p class="section-intro">Documentation and reference materials used to compile this guide.</p>
 
           <h3>Official Toshiba Documentation</h3>
           <ol>
@@ -855,12 +837,12 @@
 
         <hr>
 
-        <!-- Section G -->
+        <!-- Section F -->
         <section id="questions">
-          <h2>Section G: Open Questions / Verify On-Site</h2>
-          <p>The following items are configuration-dependent and should be verified for TPL:</p>
+          <h2>Section F: Open Questions / Verify On-Site</h2>
+          <p class="section-intro">Configuration items that need to be confirmed at each library location.</p>
 
-          <table>
+          <table class="table-actions">
             <thead>
               <tr>
                 <th>Item</th>
@@ -913,7 +895,8 @@
           </table>
         </section>
 
-      </article>
+        </article>
+      </div><!-- /.page-with-nav -->
 
     </div>
   </main>
@@ -925,5 +908,7 @@
     </div>
   </footer>
 
+  <script src="assets/js/search.js"></script>
+  <script src="assets/js/page-nav.js"></script>
 </body>
 </html>

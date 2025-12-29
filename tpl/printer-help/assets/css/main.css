@@ -104,15 +104,30 @@ h2 {
   border-bottom: var(--border-width-2) solid var(--color-primary);
 }
 
+/* First h2 in a section shouldn't have top margin */
+section > h2:first-child {
+  margin-top: 0;
+}
+
 h3 {
   font-size: var(--text-2xl);
-  margin-top: var(--space-8);
+  margin-top: var(--space-10);
   color: var(--color-primary);
+}
+
+/* Tighter spacing when h3 follows h2 directly */
+h2 + h3 {
+  margin-top: var(--space-6);
 }
 
 h4 {
   font-size: var(--text-xl);
-  margin-top: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+/* Tighter spacing when h4 follows h3 directly */
+h3 + h4 {
+  margin-top: var(--space-4);
 }
 
 h5 {
@@ -196,8 +211,8 @@ ol.steps {
 
 ol.steps > li {
   position: relative;
-  padding-left: var(--space-10);
-  margin-bottom: var(--space-4);
+  padding-left: var(--space-12);
+  margin-bottom: var(--space-5);
   counter-increment: step-counter;
 }
 
@@ -217,6 +232,57 @@ ol.steps > li::before {
   font-weight: var(--font-bold);
   font-size: var(--text-sm);
   border-radius: var(--radius-full);
+}
+
+/* Bold action word at start of step */
+ol.steps > li > strong:first-child {
+  color: var(--color-black);
+}
+
+/* Nested lists within steps - visual sub-grouping */
+ol.steps > li > ul {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-1);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-gray-200);
+  background: var(--color-gray-50);
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+  padding-right: var(--space-3);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+ol.steps > li > ul > li {
+  margin-bottom: var(--space-1);
+  font-size: var(--text-sm);
+}
+
+ol.steps > li > ul > li:last-child {
+  margin-bottom: 0;
+}
+
+/* Step detail block - for additional context */
+.step-detail {
+  display: block;
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-gray-50);
+  border-left: 2px solid var(--color-primary-bg);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: var(--text-sm);
+  color: var(--color-gray-700);
+}
+
+/* Compact steps variant for signs/smaller spaces */
+ol.steps-compact > li {
+  padding-left: var(--space-8);
+  margin-bottom: var(--space-3);
+}
+
+ol.steps-compact > li::before {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: var(--text-xs);
 }
 
 /* ========================================
@@ -303,26 +369,102 @@ ol.steps > li::before {
 }
 
 .callout {
+  position: relative;
   padding: var(--space-4) var(--space-5);
-  border-left: 4px solid var(--color-primary);
+  padding-left: var(--space-12);
+  border-left: 5px solid var(--color-primary);
   background: var(--color-primary-bg);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  margin-bottom: var(--space-4);
+  margin: var(--space-6) 0;
+  box-shadow: var(--shadow-sm);
 }
 
+/* Callout icon placeholder - positioned left */
+.callout::before {
+  content: "i";
+  position: absolute;
+  left: var(--space-4);
+  top: var(--space-4);
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-weight: var(--font-bold);
+  font-size: var(--text-sm);
+  font-style: italic;
+  border-radius: var(--radius-full);
+}
+
+/* Callout paragraph styling */
+.callout p {
+  margin: 0;
+}
+
+.callout p + p {
+  margin-top: var(--space-2);
+}
+
+/* Warning callout - caution/attention needed */
 .callout-warning {
   border-left-color: var(--color-gold);
   background: var(--color-gold-light);
 }
 
+.callout-warning::before {
+  content: "!";
+  background: var(--color-gold);
+  color: var(--color-black);
+  font-style: normal;
+}
+
+/* Success callout - positive confirmation */
 .callout-success {
   border-left-color: var(--color-success);
   background: #e8f5e9;
 }
 
+.callout-success::before {
+  content: "\2713";
+  background: var(--color-success);
+  font-style: normal;
+}
+
+/* Error/Critical callout - important warnings */
 .callout-error {
   border-left-color: var(--color-error);
   background: #ffebee;
+  border-left-width: 6px;
+  box-shadow: var(--shadow-md);
+}
+
+.callout-error::before {
+  content: "!";
+  background: var(--color-error);
+  font-style: normal;
+  font-size: var(--text-base);
+}
+
+/* Critical callout - highest priority (e.g., safety warnings) */
+.callout-critical {
+  border-left-color: var(--color-error);
+  background: linear-gradient(to right, rgba(196, 30, 58, 0.1), #ffebee);
+  border-left-width: 8px;
+  box-shadow: var(--shadow-md);
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-5);
+}
+
+.callout-critical::before {
+  content: "\2716";
+  background: var(--color-error);
+  font-style: normal;
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: var(--text-base);
 }
 
 /* ========================================
@@ -334,6 +476,8 @@ table {
   border-collapse: collapse;
   margin-bottom: var(--space-6);
   font-size: var(--text-sm);
+  position: relative;
+  z-index: 0;
 }
 
 th, td {
@@ -345,12 +489,74 @@ th, td {
 th {
   font-family: var(--font-heading);
   font-weight: var(--font-semibold);
+  background: var(--color-gray-100);
+  color: var(--color-black);
+  border-bottom-width: var(--border-width-2);
+}
+
+/* Permanent zebra striping for better scannability */
+tbody tr:nth-child(even) {
   background: var(--color-gray-50);
+}
+
+tbody tr:hover {
+  background: var(--color-primary-bg);
+}
+
+/* Price/data tables - right-align numeric columns */
+.table-prices td:not(:first-child),
+.table-prices th:not(:first-child) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Compact table variant */
+.table-compact th,
+.table-compact td {
+  padding: var(--space-2) var(--space-3);
+}
+
+/* Table with highlighted action column (e.g., "Try This") */
+.table-actions td:last-child {
+  background: var(--color-primary-bg);
+  font-weight: var(--font-medium);
+}
+
+/* First column emphasis for lookup tables */
+.table-lookup td:first-child {
+  font-weight: var(--font-semibold);
   color: var(--color-black);
 }
 
-tr:hover {
-  background: var(--color-gray-50);
+/* ========================================
+   TABLE OF CONTENTS
+   ======================================== */
+
+.toc dl {
+  margin: 0;
+}
+
+.toc dt {
+  font-weight: var(--font-semibold);
+  margin-top: var(--space-3);
+}
+
+.toc dt:first-child {
+  margin-top: 0;
+}
+
+.toc dt a {
+  text-decoration: none;
+}
+
+.toc dt a:hover {
+  text-decoration: underline;
+}
+
+.toc dd {
+  margin: var(--space-1) 0 0 var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-gray-600);
 }
 
 /* ========================================
@@ -455,6 +661,91 @@ hr {
 }
 
 /* ========================================
+   SECTION RHYTHM
+   Increased vertical spacing for scannability
+   ======================================== */
+
+/* Major section breaks within articles */
+article > section + section {
+  margin-top: var(--space-12);
+}
+
+/* Sections following horizontal rules get extra breathing room */
+article > hr + section {
+  margin-top: var(--space-10);
+}
+
+/* Content pages: space between major content blocks */
+article > section {
+  padding-bottom: var(--space-6);
+}
+
+/* Reduce spacing when hr is used as visual separator */
+article > section + hr {
+  margin-top: var(--space-10);
+  margin-bottom: var(--space-10);
+}
+
+/* Scroll margin for anchor navigation (clears sticky header) */
+section[id] {
+  scroll-margin-top: calc(80px + var(--space-4));
+}
+
+h2[id], h3[id] {
+  scroll-margin-top: calc(80px + var(--space-4));
+}
+
+/* ========================================
+   ALTERNATING SECTION BACKGROUNDS
+   Creates visual separation between major sections
+   ======================================== */
+
+/* Explicit shaded section - use .section-shaded class */
+.section-shaded {
+  background: var(--color-gray-50);
+  margin-left: calc(-1 * var(--space-4));
+  margin-right: calc(-1 * var(--space-4));
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
+  border-top: var(--border-width) solid var(--color-gray-200);
+  border-bottom: var(--border-width) solid var(--color-gray-200);
+}
+
+/* Remove top border if preceded by hr */
+hr + .section-shaded {
+  border-top: none;
+}
+
+/* Shaded section heading adjustments */
+.section-shaded > h2:first-child {
+  margin-top: 0;
+}
+
+/* Auto-alternating sections within .content-sections wrapper */
+.content-sections > section:nth-of-type(even) {
+  background: var(--color-gray-50);
+  margin-left: calc(-1 * var(--space-4));
+  margin-right: calc(-1 * var(--space-4));
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
+}
+
+/* Responsive: extend backgrounds on larger screens */
+@media (min-width: 769px) {
+  .section-shaded,
+  .content-sections > section:nth-of-type(even) {
+    margin-left: calc(-1 * var(--space-8));
+    margin-right: calc(-1 * var(--space-8));
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+}
+
+/* ========================================
    ICONS (Line Art SVG)
    ======================================== */
 
@@ -478,6 +769,12 @@ hr {
 .icon-lg {
   width: 1.5em;
   height: 1.5em;
+}
+
+/* Task card icons - larger for prominent display */
+.icon-task {
+  width: 2rem;
+  height: 2rem;
 }
 
 /* ========================================
@@ -506,6 +803,7 @@ hr {
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
+  isolation: isolate;
 }
 
 .site-header .container {
@@ -542,11 +840,20 @@ hr {
   margin: 0;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+
 /* ========================================
    MAIN CONTENT
    ======================================== */
 
 .main-content {
+  position: relative;
+  z-index: 0;
   padding: var(--space-8) 0 var(--space-16);
   min-height: calc(100vh - 200px);
 }
@@ -671,6 +978,191 @@ hr {
   font-size: var(--text-sm);
 }
 
+/* ========================================
+   TASK SELECTOR CARDS
+   "I want to..." progressive disclosure pattern
+   ======================================== */
+
+.task-selector {
+  margin: var(--space-8) 0;
+}
+
+.task-selector-heading {
+  font-size: var(--text-xl);
+  text-align: center;
+  margin-bottom: var(--space-6);
+  color: var(--color-gray-700);
+  font-weight: var(--font-medium);
+  border: none;
+  padding: 0;
+}
+
+.task-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.task-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-4);
+  background: var(--color-white);
+  border: var(--border-width-2) solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: var(--color-black);
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  transition: all var(--transition-fast);
+  min-height: 120px;
+}
+
+.task-card:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-bg);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.task-card:focus {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Task card icons */
+.task-card-icon {
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+.task-card-label {
+  text-align: center;
+}
+
+.task-card-sublabel {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: var(--font-normal);
+  color: var(--color-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--space-1);
+}
+
+/* ========================================
+   PAGE NAVIGATION (Sticky TOC)
+   ======================================== */
+
+.page-with-nav {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .page-with-nav {
+    grid-template-columns: 220px 1fr;
+  }
+}
+
+.page-nav {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .page-nav {
+    display: block;
+  }
+}
+
+.page-nav-sticky {
+  position: sticky;
+  top: calc(80px + var(--space-4));
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding-right: var(--space-4);
+}
+
+.page-nav-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-gray-500);
+  margin-bottom: var(--space-3);
+}
+
+.page-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.page-nav-list li {
+  margin-bottom: var(--space-1);
+}
+
+.page-nav-list a {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-gray-600);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  transition: all var(--transition-fast);
+}
+
+.page-nav-list a:hover {
+  color: var(--color-primary);
+  background: var(--color-gray-50);
+}
+
+.page-nav-list a.is-active {
+  color: var(--color-primary);
+  background: var(--color-primary-bg);
+  border-left-color: var(--color-primary);
+  font-weight: var(--font-medium);
+}
+
+/* Mobile: Sticky section indicator */
+.page-nav-mobile {
+  display: none;
+  position: sticky;
+  top: 60px;
+  z-index: var(--z-sticky);
+  background: var(--color-white);
+  border-bottom: var(--border-width) solid var(--color-gray-200);
+  padding: var(--space-2) var(--space-4);
+}
+
+@media (max-width: 1023px) {
+  .page-nav-mobile {
+    display: block;
+  }
+}
+
+.page-nav-mobile select {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-gray-900);
+  background: var(--color-white);
+  border: var(--border-width) solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
 .guide-card .card-meta {
   font-size: var(--text-xs);
   color: var(--color-gray-500);
@@ -741,6 +1233,285 @@ hr {
 }
 
 /* ========================================
+   SEARCH COMPONENT
+   ======================================== */
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.search-input {
+  width: 200px;
+  padding: var(--space-2) var(--space-3);
+  padding-right: var(--space-8);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-gray-900);
+  background: var(--color-white);
+  border: var(--border-width) solid var(--color-gray-300);
+  border-radius: var(--radius-full);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), width var(--transition-base);
+}
+
+.search-input::placeholder {
+  color: var(--color-gray-500);
+}
+
+.search-input:focus {
+  width: 240px;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-bg);
+  outline: none;
+}
+
+.search-clear {
+  position: absolute;
+  right: var(--space-2);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  background: var(--color-gray-200);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  color: var(--color-gray-600);
+  font-size: var(--text-sm);
+  line-height: 1;
+  transition: background var(--transition-fast);
+}
+
+.search-clear:hover {
+  background: var(--color-gray-300);
+  color: var(--color-gray-900);
+}
+
+.search-clear:focus {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-white);
+  border: var(--border-width) solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.search-match-count {
+  color: var(--color-teal);
+  font-weight: var(--font-semibold);
+}
+
+.search-no-results {
+  color: var(--color-gray-600);
+}
+
+/* Search highlighting */
+.search-highlight {
+  background: var(--color-gold-light);
+  color: var(--color-black);
+  padding: 0.1em 0.2em;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 1px var(--color-gold);
+}
+
+/* Section visibility during search */
+.search-hidden {
+  display: none;
+}
+
+.search-visible {
+  animation: searchFadeIn 0.2s ease;
+}
+
+@keyframes searchFadeIn {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   ACCORDION / FAQ
+   ======================================== */
+
+.accordion-controls {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.accordion-expand-all,
+.accordion-collapse-all {
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-primary);
+  background: transparent;
+  border: var(--border-width) solid var(--color-primary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.accordion-expand-all:hover,
+.accordion-collapse-all:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.accordion-expand-all:disabled,
+.accordion-collapse-all:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.accordion-expand-all:disabled:hover,
+.accordion-collapse-all:disabled:hover {
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.accordion-expand-all:focus,
+.accordion-collapse-all:focus {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Accordion item */
+.accordion .accordion-item {
+  border-bottom: var(--border-width) solid var(--color-gray-200);
+}
+
+.accordion .accordion-item:last-child {
+  border-bottom: none;
+}
+
+/* Accordion trigger (question) */
+.accordion-trigger {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-3);
+  align-items: start;
+  width: 100%;
+  padding: var(--space-4) 0;
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  text-align: left;
+  color: var(--color-black);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.accordion-trigger:hover {
+  color: var(--color-primary);
+}
+
+.accordion-trigger:focus {
+  outline: none;
+  color: var(--color-primary);
+}
+
+.accordion-trigger:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Question text wrapper */
+.accordion-question {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* Answer preview - visible when collapsed */
+.accordion-preview {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-normal);
+  color: var(--color-gray-500);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  transition: opacity var(--transition-fast);
+}
+
+/* Hide preview when expanded */
+.accordion-trigger[aria-expanded="true"] .accordion-preview {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Chevron icon */
+.accordion-trigger::after {
+  content: '';
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: var(--space-3);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23015e8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: transform var(--transition-fast);
+}
+
+.accordion-trigger[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+
+/* Accordion content (answer) */
+.accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--transition-base) ease-out;
+}
+
+.accordion-content.is-open {
+  grid-template-rows: 1fr;
+}
+
+.accordion-content-inner {
+  overflow: hidden;
+  padding: 0 0 0 0;
+  color: var(--color-gray-700);
+  line-height: var(--leading-relaxed);
+}
+
+.accordion-content.is-open .accordion-content-inner {
+  padding: 0 0 var(--space-4) 0;
+}
+
+.accordion-content-inner p {
+  margin: 0;
+}
+
+.accordion-content-inner kbd {
+  font-size: var(--text-xs);
+}
+
+/* ========================================
    RESPONSIVE DESIGN
    ======================================== */
 
@@ -752,6 +1523,31 @@ hr {
   .site-header .container {
     flex-direction: column;
     align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .site-header .header-right {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .search-input:focus {
+    width: 100%;
+  }
+
+  .search-results {
+    left: 0;
+    right: auto;
   }
 
   .site-footer .container {
@@ -761,5 +1557,57 @@ hr {
 
   .hero {
     padding: var(--space-8) 0 var(--space-6);
+  }
+
+  /* Mobile: Increased touch targets for accordions */
+  .accordion-trigger {
+    padding: var(--space-5) 0;
+    min-height: 56px; /* Minimum touch target per WCAG */
+  }
+
+  /* Mobile: Collapse accordion controls to single toggle */
+  .accordion-controls {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .accordion-expand-all,
+  .accordion-collapse-all {
+    width: 100%;
+    justify-content: center;
+    padding: var(--space-3);
+  }
+
+  /* Mobile: Task cards stack vertically */
+  .task-selector-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  .task-card {
+    flex-direction: row;
+    justify-content: flex-start;
+    min-height: auto;
+    padding: var(--space-4);
+    gap: var(--space-4);
+  }
+
+  .task-card-icon {
+    font-size: 1.5rem;
+  }
+
+  .task-card-label {
+    text-align: left;
+  }
+
+  /* Mobile: Better callout spacing */
+  .callout {
+    padding-left: var(--space-10);
+  }
+
+  .callout::before {
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: var(--text-xs);
   }
 }
