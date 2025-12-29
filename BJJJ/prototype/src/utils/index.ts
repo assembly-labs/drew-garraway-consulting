@@ -17,6 +17,16 @@ export {
   type PlateauDetection,
 } from './breakthrough-detection';
 
+// Tournament Readiness exports
+export {
+  calculateTournamentReadiness,
+  readinessLevelConfig,
+  type TournamentReadinessInput,
+  type TournamentReadinessResult,
+  type PillarScore,
+  type Belt,
+} from './tournament-readiness';
+
 // ===========================================
 // DATE UTILITIES
 // ===========================================

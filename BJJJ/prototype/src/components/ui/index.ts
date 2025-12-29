@@ -14,4 +14,6 @@ export { BodyHeatMap } from './BodyHeatMap';
 export { StyleFingerprint, calculateStyleFingerprint } from './StyleFingerprint';
 export type { StyleFingerprintData, StyleDimension, StyleArchetype } from './StyleFingerprint';
 export { BreakthroughHero, BreakthroughCard } from './BreakthroughHero';
+export { BreakthroughList } from './BreakthroughList';
+export { TournamentReadinessCard } from './TournamentReadinessCard';
 export { SubmissionPicker } from './SubmissionPicker';

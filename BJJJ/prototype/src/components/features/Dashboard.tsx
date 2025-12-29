@@ -16,7 +16,14 @@
 import { useState, useMemo } from 'react';
 import { mockTrainingStats, mockJournalEntries } from '../../data/journal';
 import { mockSubmissionStats } from '../../data/submissions';
-import { DeadliestAttackCard, AchillesHeelCard, BreakthroughHero } from '../ui';
+import { mockCompetitionStats, mockUpcomingCompetition } from '../../data/competitions';
+import {
+  DeadliestAttackCard,
+  AchillesHeelCard,
+  BreakthroughHero,
+  BreakthroughList,
+  TournamentReadinessCard,
+} from '../ui';
 import { AttackProfile } from './AttackProfile';
 import { useCountUp, useBeltPersonalization } from '../../hooks';
 import { useUserProfile } from '../../context/UserProfileContext';
@@ -24,7 +31,9 @@ import {
   detectBreakthroughs,
   getMostSignificantBreakthrough,
   type BreakthroughDetectionInput,
+  type Breakthrough,
 } from '../../utils/breakthrough-detection';
+import type { TournamentReadinessInput } from '../../utils/tournament-readiness';
 
 interface DashboardProps {
   onNavigate: (view: string) => void;
@@ -135,7 +144,7 @@ export function Dashboard(_props: DashboardProps) {
   // ===========================================
   // BREAKTHROUGH DETECTION
   // ===========================================
-  const breakthrough = useMemo(() => {
+  const { breakthrough, allBreakthroughs } = useMemo(() => {
     const input: BreakthroughDetectionInput = {
       journalEntries: allJournalEntries,
       trainingStats: {
@@ -149,12 +158,97 @@ export function Dashboard(_props: DashboardProps) {
       belt: profile.belt,
     };
 
-    const detectedBreakthroughs = detectBreakthroughs(input);
-    return getMostSignificantBreakthrough(detectedBreakthroughs);
+    const detected = detectBreakthroughs(input);
+
+    // Add some mock historical breakthroughs for demo purposes
+    const mockHistoricalBreakthroughs: Breakthrough[] = [
+      {
+        id: 'hist-1',
+        type: 'first_submission',
+        detectedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+        confidence: 'high',
+        title: 'First Triangle',
+        description: 'You landed your first triangle in live rolling.',
+        stat: { value: 'Triangle', label: 'NEW SUBMISSION' },
+        beltContext: 'Your first triangle! This is huge.',
+        icon: 'trophy',
+      },
+      {
+        id: 'hist-2',
+        type: 'streak_record',
+        detectedAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+        confidence: 'high',
+        title: '10 Day Streak',
+        description: 'You hit a new personal best training streak.',
+        stat: { value: 10, label: 'DAY STREAK' },
+        beltContext: 'Consistency builds champions.',
+        icon: 'zap',
+      },
+      {
+        id: 'hist-3',
+        type: 'pattern_break',
+        detectedAt: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString(),
+        confidence: 'medium',
+        title: 'Armbar Defense Up',
+        description: 'You stopped getting caught in armbars.',
+        stat: { value: '4 → 0', label: 'TIMES CAUGHT' },
+        beltContext: 'That hole is closing.',
+        icon: 'shield',
+      },
+    ];
+
+    const combinedBreakthroughs = [...detected, ...mockHistoricalBreakthroughs];
+
+    return {
+      breakthrough: getMostSignificantBreakthrough(detected),
+      allBreakthroughs: combinedBreakthroughs,
+    };
   }, [allJournalEntries, stats, profile.belt]);
 
   // Show breakthrough hero if we have one and it hasn't been dismissed
   const showBreakthroughHero = breakthrough !== null && !breakthroughDismissed;
+
+  // ===========================================
+  // TOURNAMENT READINESS DATA
+  // ===========================================
+  const tournamentReadinessInput: TournamentReadinessInput = useMemo(() => {
+    // Calculate days until upcoming competition
+    const upcomingDate = new Date(mockUpcomingCompetition.date);
+    const today = new Date();
+    const daysUntil = Math.ceil((upcomingDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+
+    return {
+      belt: profile.belt as TournamentReadinessInput['belt'],
+      // Consistency metrics
+      currentStreak: stats.currentStreak,
+      sessionsThisMonth: stats.thisMonth.sessions,
+      sessionsLastMonth: 10, // Mock previous month
+      weeklyTarget: 3,
+      weeksHitTarget: 11,
+      totalWeeksTracked: 13,
+      // Technical metrics
+      techniquesLogged: 47,
+      techniqueCategories: {
+        guards: 14,
+        passes: 9,
+        submissions: 12,
+        escapes: 6,
+        takedowns: 6,
+      },
+      // Sparring metrics
+      submissionsLanded: stats.sparringRecord.wins,
+      timesTapped: stats.sparringRecord.losses,
+      sparringRoundsThisMonth: stats.thisMonth.sparringRounds,
+      // Competition history
+      totalCompetitions: mockCompetitionStats.totalCompetitions,
+      totalMatches: mockCompetitionStats.totalMatches,
+      competitionWins: mockCompetitionStats.wins,
+      medals: mockCompetitionStats.medals,
+      // Upcoming competition
+      hasUpcomingCompetition: daysUntil > 0 && daysUntil < 90,
+      daysUntilCompetition: daysUntil > 0 ? daysUntil : undefined,
+    };
+  }, [profile.belt, stats]);
 
   // Get belt-specific hero metric
   const heroMetric = getHeroMetricData(dashboard.primaryMetric, stats);
@@ -608,6 +702,24 @@ export function Dashboard(_props: DashboardProps) {
           </p>
         </div>
       </>
+
+      {/* ============================================
+          TOURNAMENT READINESS - Competition prep score
+          ============================================ */}
+      <TournamentReadinessCard
+        input={tournamentReadinessInput}
+        showFullBreakdown={false}
+      />
+
+      {/* ============================================
+          BREAKTHROUGH HISTORY - Recent wins and achievements
+          ============================================ */}
+      <BreakthroughList
+        breakthroughs={allBreakthroughs}
+        maxVisible={5}
+        showEmptyState={true}
+        belt={profile.belt}
+      />
 
       {/* Bottom spacer for tab bar */}
       <div style={{ height: '100px' }} />
