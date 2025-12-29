@@ -26,7 +26,7 @@ BJJ Journal is a voice-first training journal app for Brazilian Jiu-Jitsu practi
 
 ```
 LOCAL (your laptop)  →  REMOTE (GitHub)  →  PRODUCTION (live site)
-    npm run dev           git push            (user deploys manually)
+    npm run dev           git push            GitHub Actions auto-deploys
    localhost:5173                            bjjj.pages.dev
 ```
 
@@ -38,7 +38,7 @@ When making changes:
 2. **Commit** - Commit changes to git with a clear message
 3. **Push** - Push to `main` branch
 
-**DO NOT deploy.** User handles deployment manually.
+**Deployment is automatic.** GitHub Actions will build and deploy to Cloudflare Pages on every push to main that changes files in `BJJJ/prototype/`.
 
 ### Available Commands
 
@@ -46,6 +46,12 @@ When making changes:
 |---------|--------------|
 | `npm run dev` | Local preview at localhost:5173 |
 | `npm run build` | Compile and check for errors |
+
+### GitHub Secrets Required
+
+For automatic deployment, these secrets must be configured in GitHub:
+- `CLOUDFLARE_API_TOKEN` - API token with Cloudflare Pages edit permissions
+- `CLOUDFLARE_ACCOUNT_ID` - Your Cloudflare account ID
 
 ### Testing Belt Personalization
 
