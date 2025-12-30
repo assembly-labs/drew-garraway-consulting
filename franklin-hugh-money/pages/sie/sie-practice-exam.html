@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="SIE Practice Exam - FINRA-style questions with immediate feedback">
+
+    <title>SIE Practice Exam | Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --fh-navy: #002D62;
+            --fh-cream: #FFFDF7;
+            --fh-gray: #54585A;
+            --fh-sage: #7C9885;
+            --fh-burgundy: #6B2737;
+            --fh-gold: #B08D57;
+            --fh-gray-900: #1A1A1A;
+            --fh-gray-700: #404040;
+            --fh-gray-600: #595959;
+            --fh-gray-500: #737373;
+            --fh-gray-400: #8a8a8a;
+            --fh-gray-300: #D4D4D4;
+            --fh-gray-200: #E5E5E5;
+            --fh-gray-100: #F5F5F5;
+            --fh-white: #FFFFFF;
+            --fh-font-display: 'Crimson Pro', Georgia, serif;
+            --fh-font-body: 'Inter', -apple-system, sans-serif;
+            --fh-font-mono: 'IBM Plex Mono', monospace;
+            --fh-space-xs: 0.25rem;
+            --fh-space-sm: 0.5rem;
+            --fh-space-md: 1rem;
+            --fh-space-lg: 1.5rem;
+            --fh-space-xl: 2rem;
+            --fh-space-2xl: 3rem;
+            --fh-space-3xl: 4rem;
+            --fh-correct: #10B981;
+            --fh-incorrect: #EF4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--fh-font-body);
+            font-size: 16px;
+            line-height: 1.75;
+            color: var(--fh-gray-900);
+            background: var(--fh-cream);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--fh-space-xl);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--fh-navy) 0%, #003d82 100%);
+            color: var(--fh-white);
+            padding: var(--fh-space-xl) 0;
+        }
+
+        .header__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--fh-space-md);
+        }
+
+        .header__title-group {
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-md);
+        }
+
+        .header__title {
+            font-family: var(--fh-font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--fh-white);
+        }
+
+        .header__badge {
+            background: var(--fh-sage);
+            padding: var(--fh-space-xs) var(--fh-space-md);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .header__nav {
+            display: flex;
+            gap: var(--fh-space-lg);
+        }
+
+        .header__nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .header__nav a:hover,
+        .header__nav a.active {
+            color: var(--fh-white);
+        }
+
+        /* Score Bar */
+        .score-bar {
+            background: var(--fh-white);
+            border-bottom: 1px solid var(--fh-gray-200);
+            padding: var(--fh-space-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .score-bar__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--fh-space-sm);
+        }
+
+        .score-bar__progress {
+            font-family: var(--fh-font-mono);
+            font-size: 0.875rem;
+            color: var(--fh-gray-600);
+        }
+
+        .score-bar__score {
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-md);
+        }
+
+        .score-bar__correct {
+            color: var(--fh-correct);
+            font-weight: 600;
+        }
+
+        .score-bar__incorrect {
+            color: var(--fh-incorrect);
+            font-weight: 600;
+        }
+
+        .score-bar__percent {
+            font-family: var(--fh-font-mono);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--fh-navy);
+        }
+
+        .progress-track {
+            height: 4px;
+            background: var(--fh-gray-200);
+            border-radius: 2px;
+            margin-top: var(--fh-space-sm);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--fh-sage);
+            transition: width 0.3s ease;
+        }
+
+        /* Setup Screen */
+        .setup-screen {
+            padding: var(--fh-space-3xl) 0;
+            text-align: center;
+        }
+
+        .setup-screen h1 {
+            font-family: var(--fh-font-display);
+            font-size: 2.5rem;
+            color: var(--fh-navy);
+            margin-bottom: var(--fh-space-md);
+        }
+
+        .setup-screen__subtitle {
+            font-size: 1.125rem;
+            color: var(--fh-gray-600);
+            margin-bottom: var(--fh-space-2xl);
+        }
+
+        .info-box {
+            background: var(--fh-white);
+            border-radius: 12px;
+            padding: var(--fh-space-xl);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: var(--fh-space-2xl);
+            text-align: left;
+        }
+
+        .info-box h3 {
+            font-family: var(--fh-font-display);
+            font-size: 1.25rem;
+            color: var(--fh-navy);
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        .info-box ul {
+            list-style: none;
+            color: var(--fh-gray-700);
+        }
+
+        .info-box li {
+            padding: var(--fh-space-sm) 0;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--fh-space-md);
+        }
+
+        .info-box li::before {
+            content: "✓";
+            color: var(--fh-sage);
+            font-weight: bold;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--fh-space-md);
+            margin: var(--fh-space-xl) 0;
+            text-align: left;
+        }
+
+        .topic-btn {
+            background: var(--fh-white);
+            border: 2px solid var(--fh-gray-200);
+            border-radius: 8px;
+            padding: var(--fh-space-lg);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .topic-btn:hover {
+            border-color: var(--fh-sage);
+        }
+
+        .topic-btn.selected {
+            border-color: var(--fh-navy);
+            background: rgba(0, 45, 98, 0.05);
+        }
+
+        .topic-btn__name {
+            font-weight: 600;
+            color: var(--fh-gray-900);
+            margin-bottom: var(--fh-space-xs);
+        }
+
+        .topic-btn__count {
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            color: var(--fh-gray-500);
+        }
+
+        .start-btn {
+            background: var(--fh-navy);
+            color: var(--fh-white);
+            border: none;
+            padding: var(--fh-space-md) var(--fh-space-2xl);
+            border-radius: 8px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            margin-top: var(--fh-space-xl);
+        }
+
+        .start-btn:hover {
+            background: #003d82;
+            transform: translateY(-2px);
+        }
+
+        .start-btn:disabled {
+            background: var(--fh-gray-300);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #questionCount {
+            color: var(--fh-gray-600);
+            margin-top: var(--fh-space-md);
+        }
+
+        /* Quiz Screen */
+        .quiz-screen {
+            display: none;
+            padding: var(--fh-space-2xl) 0 var(--fh-space-3xl);
+        }
+
+        .question-card {
+            background: var(--fh-white);
+            border-radius: 12px;
+            padding: var(--fh-space-xl);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .question-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        .question-topic {
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--fh-sage);
+            background: rgba(124, 152, 133, 0.1);
+            padding: var(--fh-space-xs) var(--fh-space-sm);
+            border-radius: 4px;
+        }
+
+        .question-number {
+            font-family: var(--fh-font-mono);
+            font-size: 0.875rem;
+            color: var(--fh-gray-500);
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--fh-gray-900);
+            line-height: 1.6;
+            margin-bottom: var(--fh-space-xl);
+        }
+
+        .answers-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--fh-space-md);
+        }
+
+        .answer-btn {
+            background: var(--fh-gray-100);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: var(--fh-space-md) var(--fh-space-lg);
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            color: var(--fh-gray-700);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--fh-space-md);
+        }
+
+        .answer-btn:hover:not(:disabled) {
+            background: var(--fh-white);
+            border-color: var(--fh-navy);
+        }
+
+        .answer-btn:disabled {
+            cursor: default;
+        }
+
+        .answer-btn.selected {
+            background: var(--fh-white);
+            border-color: var(--fh-navy);
+        }
+
+        .answer-btn.correct {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--fh-correct);
+        }
+
+        .answer-btn.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--fh-incorrect);
+        }
+
+        .answer-btn.was-correct {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--fh-correct);
+        }
+
+        .answer-letter {
+            font-family: var(--fh-font-mono);
+            font-weight: 600;
+            color: var(--fh-navy);
+            flex-shrink: 0;
+        }
+
+        .answer-btn.correct .answer-letter,
+        .answer-btn.was-correct .answer-letter {
+            color: var(--fh-correct);
+        }
+
+        .answer-btn.incorrect .answer-letter {
+            color: var(--fh-incorrect);
+        }
+
+        /* Feedback */
+        .feedback {
+            display: none;
+            margin-top: var(--fh-space-xl);
+            padding: var(--fh-space-lg);
+            border-radius: 8px;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--fh-correct);
+        }
+
+        .feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--fh-incorrect);
+        }
+
+        .feedback__title {
+            font-weight: 700;
+            margin-bottom: var(--fh-space-sm);
+            font-size: 1.1rem;
+        }
+
+        .feedback.correct .feedback__title {
+            color: var(--fh-correct);
+        }
+
+        .feedback.incorrect .feedback__title {
+            color: var(--fh-incorrect);
+        }
+
+        .feedback__explanation {
+            color: var(--fh-gray-700);
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+        .quiz-nav {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: var(--fh-space-xl);
+        }
+
+        .next-btn {
+            background: var(--fh-navy);
+            color: var(--fh-white);
+            border: none;
+            padding: var(--fh-space-md) var(--fh-space-xl);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .next-btn:hover {
+            background: #003d82;
+        }
+
+        .next-btn:disabled {
+            background: var(--fh-gray-300);
+            cursor: not-allowed;
+        }
+
+        /* Results Screen */
+        .results-screen {
+            display: none;
+            padding: var(--fh-space-3xl) 0;
+            text-align: center;
+        }
+
+        .results-card {
+            background: var(--fh-white);
+            border-radius: 12px;
+            padding: var(--fh-space-2xl);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: var(--fh-space-2xl);
+        }
+
+        .results-badge {
+            display: inline-block;
+            padding: var(--fh-space-sm) var(--fh-space-lg);
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.875rem;
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        .results-badge.pass {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--fh-correct);
+        }
+
+        .results-badge.fail {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--fh-incorrect);
+        }
+
+        .results-score {
+            font-family: var(--fh-font-display);
+            font-size: 4rem;
+            font-weight: 600;
+            margin-bottom: var(--fh-space-sm);
+        }
+
+        .results-score.pass { color: var(--fh-correct); }
+        .results-score.fail { color: var(--fh-incorrect); }
+
+        .results-label {
+            font-size: 1.25rem;
+            color: var(--fh-gray-600);
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        .results-breakdown {
+            display: flex;
+            justify-content: center;
+            gap: var(--fh-space-2xl);
+            padding: var(--fh-space-lg) 0;
+            border-top: 1px solid var(--fh-gray-200);
+        }
+
+        .results-stat {
+            text-align: center;
+        }
+
+        .results-stat__value {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .results-stat__value.correct { color: var(--fh-correct); }
+        .results-stat__value.incorrect { color: var(--fh-incorrect); }
+
+        .results-stat__label {
+            font-size: 0.875rem;
+            color: var(--fh-gray-500);
+        }
+
+        .results-message {
+            font-size: 1.125rem;
+            color: var(--fh-gray-700);
+            margin: var(--fh-space-lg) 0;
+            padding: var(--fh-space-lg);
+            background: var(--fh-gray-100);
+            border-radius: 8px;
+        }
+
+        /* Missed Questions Review */
+        .missed-section {
+            background: var(--fh-white);
+            border-radius: 12px;
+            padding: var(--fh-space-xl);
+            margin-bottom: var(--fh-space-2xl);
+            text-align: left;
+        }
+
+        .missed-section h3 {
+            font-family: var(--fh-font-display);
+            font-size: 1.5rem;
+            color: var(--fh-navy);
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        .missed-item {
+            border: 1px solid var(--fh-gray-200);
+            border-left: 4px solid var(--fh-incorrect);
+            border-radius: 8px;
+            padding: var(--fh-space-lg);
+            margin-bottom: var(--fh-space-lg);
+        }
+
+        .missed-item__question {
+            font-weight: 600;
+            margin-bottom: var(--fh-space-md);
+            color: var(--fh-gray-900);
+        }
+
+        .missed-item__answers {
+            font-size: 0.9rem;
+            margin-bottom: var(--fh-space-md);
+        }
+
+        .missed-item__your-answer {
+            color: var(--fh-incorrect);
+            margin-bottom: var(--fh-space-xs);
+        }
+
+        .missed-item__correct-answer {
+            color: var(--fh-correct);
+            font-weight: 600;
+        }
+
+        .missed-item__explanation {
+            background: var(--fh-gray-100);
+            padding: var(--fh-space-md);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--fh-gray-700);
+        }
+
+        .restart-btn {
+            background: var(--fh-navy);
+            color: var(--fh-white);
+            border: none;
+            padding: var(--fh-space-md) var(--fh-space-2xl);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .restart-btn:hover {
+            background: #003d82;
+        }
+
+        /* Select All Button */
+        .select-all-btn {
+            background: var(--fh-white);
+            border: 2px solid var(--fh-gray-300);
+            border-radius: 8px;
+            padding: var(--fh-space-md) var(--fh-space-lg);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--fh-gray-700);
+            transition: all 0.2s;
+            margin-bottom: var(--fh-space-md);
+        }
+
+        .select-all-btn:hover {
+            border-color: var(--fh-navy);
+            color: var(--fh-navy);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .header__inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header__nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="header__title-group">
+                    <h1 class="header__title">SIE Practice Exam</h1>
+                    <span class="header__badge">Instant Feedback</span>
+                </div>
+                <nav class="header__nav">
+                    <a href="sie-study-materials.html">Study Materials</a>
+                    <a href="sie-quiz.html">Quiz Drill</a>
+                    <a href="sie-exam-simulation.html">Exam Sim</a>
+                    <a href="#" class="active">Practice Exam</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Score Bar (hidden until quiz starts) -->
+    <div class="score-bar" id="scoreBar" style="display: none;">
+        <div class="container">
+            <div class="score-bar__inner">
+                <span class="score-bar__progress">Question <span id="currentQ">1</span> of <span id="totalQ">75</span></span>
+                <div class="score-bar__score">
+                    <span class="score-bar__correct"><span id="correctCount">0</span> correct</span>
+                    <span class="score-bar__incorrect"><span id="incorrectCount">0</span> wrong</span>
+                    <span class="score-bar__percent" id="percentScore">0%</span>
+                </div>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Setup Screen -->
+    <div class="setup-screen" id="setupScreen">
+        <div class="container">
+            <h1>SIE Practice Exam</h1>
+            <p class="setup-screen__subtitle">FINRA-style questions with immediate feedback after each answer</p>
+
+            <div class="info-box">
+                <h3>How This Works</h3>
+                <ul>
+                    <li>Real FINRA-style questions - EXCEPT questions, scenarios, calculations</li>
+                    <li>Immediate feedback after each answer - see if you're right or wrong instantly</li>
+                    <li>Full explanation shown after every question</li>
+                    <li>No time pressure - learn at your own pace</li>
+                    <li>Review all missed questions at the end</li>
+                </ul>
+            </div>
+
+            <h3 style="font-family: var(--fh-font-display); color: var(--fh-navy); margin-bottom: var(--fh-space-md);">Select Topics</h3>
+
+            <div class="topic-grid" id="topicGrid">
+                <!-- Topics populated by JS -->
+            </div>
+
+            <button class="select-all-btn" id="selectAllBtn">Select All Topics</button>
+
+            <p id="questionCount">Select at least one topic to start</p>
+
+            <button class="start-btn" id="startBtn" disabled>Start Practice Exam</button>
+        </div>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="quiz-screen" id="quizScreen">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-meta">
+                    <span class="question-topic" id="questionTopic">CAPITAL MARKETS</span>
+                    <span class="question-number" id="questionNumber">Question 1</span>
+                </div>
+                <p class="question-text" id="questionText">Loading question...</p>
+                <div class="answers-list" id="answersList">
+                    <!-- Answers populated by JS -->
+                </div>
+                <div class="feedback" id="feedback">
+                    <div class="feedback__title" id="feedbackTitle">Correct!</div>
+                    <p class="feedback__explanation" id="feedbackExplanation"></p>
+                </div>
+            </div>
+            <div class="quiz-nav">
+                <button class="next-btn" id="nextBtn" disabled>Next Question</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div class="results-screen" id="resultsScreen">
+        <div class="container">
+            <div class="results-card">
+                <div class="results-badge" id="resultsBadge">PASS</div>
+                <div class="results-score" id="finalScore">0%</div>
+                <div class="results-label">Final Score</div>
+                <div class="results-breakdown">
+                    <div class="results-stat">
+                        <div class="results-stat__value correct" id="finalCorrect">0</div>
+                        <div class="results-stat__label">Correct</div>
+                    </div>
+                    <div class="results-stat">
+                        <div class="results-stat__value incorrect" id="finalIncorrect">0</div>
+                        <div class="results-stat__label">Incorrect</div>
+                    </div>
+                </div>
+                <p class="results-message" id="resultsMessage"></p>
+            </div>
+
+            <div class="missed-section" id="missedSection" style="display: none;">
+                <h3>Review Missed Questions</h3>
+                <div id="missedList">
+                    <!-- Missed questions populated by JS -->
+                </div>
+            </div>
+
+            <button class="restart-btn" id="restartBtn">Start New Practice Exam</button>
+        </div>
+    </div>
+
+    <script>
+        // FINRA-Style Question Bank - Same hard questions with topic categories
+        const questionBank = [
+            // ========== CAPITAL MARKETS ==========
+            {
+                topic: "Capital Markets",
+                question: "A company is conducting an initial public offering (IPO). During the cooling-off period, which of the following activities is PERMITTED?",
+                answers: [
+                    "Accepting indications of interest from potential investors",
+                    "Confirming sales and collecting payments",
+                    "Distributing the final prospectus to customers",
+                    "Guaranteeing allocation of shares to preferred clients"
+                ],
+                correct: 0,
+                explanation: "During the cooling-off period (between filing and effective date), firms may only accept indications of interest - not actual orders or payments. The red herring prospectus can be distributed, but sales cannot be confirmed until the registration becomes effective."
+            },
+            {
+                topic: "Capital Markets",
+                question: "An investor purchases a corporate bond at 97.50. At maturity, the investor will receive:",
+                answers: [
+                    "$975.00 plus accrued interest",
+                    "$1,000.00 regardless of purchase price",
+                    "$975.00 only",
+                    "$1,000.00 minus accrued interest"
+                ],
+                correct: 1,
+                explanation: "Bonds mature at par value ($1,000) regardless of the purchase price. The investor bought at a discount (97.50 = $975), but will receive the full $1,000 at maturity. The difference represents additional yield (capital gain) to the investor."
+            },
+            {
+                topic: "Capital Markets",
+                question: "In a best efforts underwriting, all of the following are TRUE except:",
+                answers: [
+                    "The underwriter acts as agent for the issuer",
+                    "Unsold shares are returned to the issuer",
+                    "The underwriter guarantees the issuer will receive the proceeds",
+                    "The underwriter receives a fee for shares sold"
+                ],
+                correct: 2,
+                explanation: "In a best efforts underwriting, there is NO guarantee to the issuer. The underwriter acts as agent, sells what they can, returns unsold shares, and only earns fees on shares actually sold. Firm commitment underwriting provides the guarantee."
+            },
+            {
+                topic: "Capital Markets",
+                question: "The Federal Reserve announces a 25 basis point increase in the federal funds rate. Which of the following is the MOST LIKELY immediate effect?",
+                answers: [
+                    "Stock prices will increase due to higher corporate earnings expectations",
+                    "Long-term bond prices will decrease more than short-term bond prices",
+                    "The value of the U.S. dollar will decrease against foreign currencies",
+                    "Money market fund yields will remain unchanged"
+                ],
+                correct: 1,
+                explanation: "When the Fed raises rates, bond prices fall (inverse relationship). Long-term bonds have greater duration and are more sensitive to rate changes than short-term bonds, so they experience larger price declines. This is a fundamental concept of interest rate risk."
+            },
+            {
+                topic: "Capital Markets",
+                question: "A broker-dealer is acting as a market maker in XYZ stock. The firm's quote is 25.50 - 25.75. A customer enters a market order to sell 500 shares. At what price will the order be executed?",
+                answers: [
+                    "$25.50 (the bid price)",
+                    "$25.75 (the ask price)",
+                    "$25.625 (the midpoint)",
+                    "The price cannot be determined without knowing the current market"
+                ],
+                correct: 0,
+                explanation: "When a customer sells, they sell at the BID price (what the dealer is willing to pay). When a customer buys, they pay the ASK price. The bid-ask spread ($0.25 in this case) represents the market maker's profit."
+            },
+            {
+                topic: "Capital Markets",
+                question: "Which of the following securities would be EXEMPT from registration under the Securities Act of 1933?",
+                answers: [
+                    "Common stock of a Fortune 500 company",
+                    "Municipal general obligation bonds",
+                    "Corporate bonds rated BBB by S&P",
+                    "American Depositary Receipts (ADRs)"
+                ],
+                correct: 1,
+                explanation: "Municipal securities are exempt from SEC registration under the Securities Act of 1933. Other exempt securities include U.S. government securities, bank securities, and commercial paper (under certain conditions). Corporate securities must register regardless of rating."
+            },
+            {
+                topic: "Capital Markets",
+                question: "An investor in the 32% federal tax bracket is comparing a 4.5% municipal bond to a corporate bond. What taxable equivalent yield must the corporate bond offer to be equivalent?",
+                answers: [
+                    "5.94%",
+                    "6.62%",
+                    "6.25%",
+                    "4.86%"
+                ],
+                correct: 1,
+                explanation: "Tax-Equivalent Yield = Municipal Yield / (1 - Tax Rate). 4.5% / (1 - 0.32) = 4.5% / 0.68 = 6.62%. The corporate bond must yield 6.62% to equal the after-tax return of the 4.5% municipal bond."
+            },
+            {
+                topic: "Capital Markets",
+                question: "The third market refers to:",
+                answers: [
+                    "Trading of unlisted securities between dealers",
+                    "Trading of exchange-listed securities in the OTC market",
+                    "Direct trading between institutional investors without broker-dealers",
+                    "Trading of municipal securities"
+                ],
+                correct: 1,
+                explanation: "The third market is the trading of exchange-listed securities in the OTC market. The fourth market is direct institutional trading. The first market is exchange trading, and the second market is OTC trading of unlisted securities."
+            },
+            {
+                topic: "Capital Markets",
+                question: "Which of the following has the GREATEST reinvestment risk?",
+                answers: [
+                    "A 30-year zero-coupon bond",
+                    "A 30-year bond with a 7% coupon",
+                    "A 5-year bond with a 7% coupon",
+                    "A 5-year Treasury bill"
+                ],
+                correct: 1,
+                explanation: "A 30-year bond with a 7% coupon has the highest reinvestment risk because it pays the most coupons over the longest period. Zero-coupon bonds have NO reinvestment risk (no coupons). T-bills are short-term with no coupons."
+            },
+            {
+                topic: "Capital Markets",
+                question: "An investor purchases 100 shares of XYZ at $50 per share using the maximum margin allowed under Regulation T. If XYZ rises to $70, the investor's equity is:",
+                answers: [
+                    "$2,500",
+                    "$4,500",
+                    "$5,000",
+                    "$7,000"
+                ],
+                correct: 1,
+                explanation: "Initial purchase: 100 shares × $50 = $5,000. With 50% Reg T margin, investor deposits $2,500, borrows $2,500. At $70: Market Value = $7,000. Equity = Market Value - Debit Balance = $7,000 - $2,500 = $4,500."
+            },
+            {
+                topic: "Capital Markets",
+                question: "A customer has a margin account with the following: Market value $40,000, Debit balance $15,000. What is the customer's SMA (Special Memorandum Account) if Regulation T is 50%?",
+                answers: [
+                    "$0",
+                    "$5,000",
+                    "$10,000",
+                    "$25,000"
+                ],
+                correct: 1,
+                explanation: "Equity = $40,000 - $15,000 = $25,000. Required equity at 50% Reg T = $40,000 × 50% = $20,000. Excess equity = $25,000 - $20,000 = $5,000. SMA = $5,000 (excess equity available for buying power)."
+            },
+            {
+                topic: "Capital Markets",
+                question: "All of the following are characteristics of commercial paper EXCEPT:",
+                answers: [
+                    "It is issued at a discount",
+                    "Maximum maturity is 270 days",
+                    "It is typically secured by corporate assets",
+                    "It is exempt from SEC registration"
+                ],
+                correct: 2,
+                explanation: "Commercial paper is UNSECURED short-term corporate debt. It's issued at a discount, has max maturity of 270 days (to avoid SEC registration), and is exempt from registration. Only highly-rated corporations can issue CP because it's unsecured."
+            },
+
+            // ========== PRODUCTS AND RISKS ==========
+            {
+                topic: "Products & Risks",
+                question: "An investor owns a convertible bond with a conversion ratio of 40. If the bond is trading at $1,100 and the underlying stock is at $25, what is the conversion premium?",
+                answers: [
+                    "10%",
+                    "9.09%",
+                    "15%",
+                    "4.55%"
+                ],
+                correct: 0,
+                explanation: "Conversion value = 40 shares × $25 = $1,000. Premium = (Bond Price - Conversion Value) / Conversion Value = ($1,100 - $1,000) / $1,000 = 10%. The bond trades at a 10% premium to its conversion value."
+            },
+            {
+                topic: "Products & Risks",
+                question: "Which of the following statements about American Depositary Receipts (ADRs) is FALSE?",
+                answers: [
+                    "ADRs trade in U.S. dollars on U.S. exchanges",
+                    "ADR holders are exposed to currency exchange risk",
+                    "ADR dividends are exempt from foreign withholding taxes",
+                    "ADRs represent shares of foreign companies held by U.S. banks"
+                ],
+                correct: 2,
+                explanation: "ADR dividends are NOT exempt from foreign withholding taxes. Foreign countries typically withhold taxes on dividends before they're paid to ADR holders. Investors may receive a foreign tax credit but are still subject to the withholding."
+            },
+            {
+                topic: "Products & Risks",
+                question: "A municipal bond has a 5% coupon and is callable at 102 in 5 years. The bond is currently trading at 108. Which yield will be LOWEST?",
+                answers: [
+                    "Nominal yield",
+                    "Current yield",
+                    "Yield to maturity",
+                    "Yield to call"
+                ],
+                correct: 3,
+                explanation: "For a premium bond, yields from lowest to highest: YTC < YTM < CY < Nominal. The bond trades at a premium (108), so if called early at 102, the investor loses more premium faster, resulting in the lowest yield to call."
+            },
+            {
+                topic: "Products & Risks",
+                question: "An investor writes an uncovered call option. All of the following describe this position EXCEPT:",
+                answers: [
+                    "Maximum gain is limited to the premium received",
+                    "The position is bearish or neutral on the underlying stock",
+                    "Maximum loss is unlimited",
+                    "The investor has a right to buy the underlying stock"
+                ],
+                correct: 3,
+                explanation: "An option WRITER has an OBLIGATION, not a right. The uncovered call writer is obligated to SELL (not buy) shares if assigned. The buyer has rights; the writer has obligations. This is a fundamental options concept."
+            },
+            {
+                topic: "Products & Risks",
+                question: "An investor purchases 1 XYZ Dec 60 call at 4 and writes 1 XYZ Dec 70 call at 1.50. What is the maximum profit potential?",
+                answers: [
+                    "$250",
+                    "$750",
+                    "$1,000",
+                    "Unlimited"
+                ],
+                correct: 1,
+                explanation: "This is a bull call spread. Max profit = difference between strikes - net premium paid. Strikes differ by $10 = $1,000. Net premium = $4 - $1.50 = $2.50 = $250. Max profit = $1,000 - $250 = $750."
+            },
+            {
+                topic: "Products & Risks",
+                question: "An investor owns 100 shares of ABC stock at $50 and writes an ABC 55 call for $3. If the stock is at $60 at expiration and the call is exercised, what is the investor's total profit?",
+                answers: [
+                    "$300",
+                    "$500",
+                    "$800",
+                    "$1,000"
+                ],
+                correct: 2,
+                explanation: "Stock appreciation: $55 - $50 = $5 × 100 = $500 (capped at strike). Premium received: $3 × 100 = $300. Total profit = $500 + $300 = $800. The stock went to $60, but the investor only gets $55 because the call was exercised."
+            },
+            {
+                topic: "Products & Risks",
+                question: "Which of the following options strategies provides the MOST downside protection for a stock portfolio?",
+                answers: [
+                    "Buying calls",
+                    "Writing covered calls",
+                    "Buying puts",
+                    "Writing naked puts"
+                ],
+                correct: 2,
+                explanation: "Buying puts provides the most downside protection - you have the right to sell at the strike price no matter how low the stock goes. Covered calls provide limited protection (premium only). Naked puts and long calls don't protect existing positions."
+            },
+            {
+                topic: "Products & Risks",
+                question: "A mutual fund has a NAV of $25.00 and a POP of $26.50. The sales load is:",
+                answers: [
+                    "5.66%",
+                    "6.00%",
+                    "6.38%",
+                    "1.50%"
+                ],
+                correct: 0,
+                explanation: "Sales Load % = (POP - NAV) / POP = ($26.50 - $25.00) / $26.50 = $1.50 / $26.50 = 5.66%. Note: Load is calculated on POP (what you pay), not NAV. This is a common exam trap."
+            },
+            {
+                topic: "Products & Risks",
+                question: "An investor has $100,000 to invest in Class A shares with a 5% front-end load. A breakpoint at $100,000 reduces the load to 4%. Without informing the investor of the breakpoint, the registered representative sells $99,000 of shares. This is an example of:",
+                answers: [
+                    "Churning",
+                    "Breakpoint selling",
+                    "Free-riding",
+                    "Best execution"
+                ],
+                correct: 1,
+                explanation: "Breakpoint selling is selling just below a breakpoint to avoid giving the customer a discount. This is a serious violation. The rep should have informed the investor about the $100,000 breakpoint and the available discount."
+            },
+            {
+                topic: "Products & Risks",
+                question: "All of the following are characteristics of closed-end funds EXCEPT:",
+                answers: [
+                    "They trade on exchanges throughout the day",
+                    "They can trade at a premium or discount to NAV",
+                    "They issue a fixed number of shares",
+                    "They must redeem shares at NAV within 7 days"
+                ],
+                correct: 3,
+                explanation: "OPEN-end funds must redeem at NAV within 7 days. CLOSED-end funds have a fixed number of shares trading on exchanges and don't redeem shares - investors sell on the secondary market. They often trade at discounts to NAV."
+            },
+            {
+                topic: "Products & Risks",
+                question: "An investor in an equity mutual fund receives a capital gains distribution. For tax purposes, this distribution is:",
+                answers: [
+                    "Taxed as ordinary income regardless of holding period",
+                    "Tax-free if reinvested in additional shares",
+                    "Taxed based on the fund's holding period, not the investor's",
+                    "Taxed as a return of principal"
+                ],
+                correct: 2,
+                explanation: "Capital gains distributions are taxed based on the FUND'S holding period (long-term vs short-term), not the investor's. Even if you just bought the fund yesterday, you pay taxes on distributions at the fund's rate. Reinvesting doesn't avoid taxes."
+            },
+            {
+                topic: "Products & Risks",
+                question: "Which of the following investments would be LEAST suitable for an IRA account?",
+                answers: [
+                    "Growth stocks",
+                    "Corporate bonds",
+                    "Municipal bonds",
+                    "Real estate investment trusts (REITs)"
+                ],
+                correct: 2,
+                explanation: "Municipal bonds are LEAST suitable for IRAs because their tax-exempt feature is wasted in an already tax-deferred account. IRAs defer taxes anyway, so you want the highest yielding investments, not tax-exempt ones with lower yields."
+            },
+            {
+                topic: "Products & Risks",
+                question: "A general obligation bond differs from a revenue bond in that a GO bond:",
+                answers: [
+                    "Is backed by a specific revenue stream",
+                    "Is backed by the full faith and credit and taxing power of the issuer",
+                    "Typically offers higher yields due to greater risk",
+                    "Does not require voter approval for issuance"
+                ],
+                correct: 1,
+                explanation: "GO bonds are backed by the issuer's full faith, credit, and TAXING POWER. Revenue bonds are backed by specific project revenues. GO bonds typically yield LESS (safer) and usually require voter approval since they can lead to tax increases."
+            },
+            {
+                topic: "Products & Risks",
+                question: "An investor in the 35% tax bracket purchases a municipal bond yielding 4.2%. What corporate bond yield would provide an equivalent after-tax return?",
+                answers: [
+                    "5.60%",
+                    "6.46%",
+                    "5.67%",
+                    "6.00%"
+                ],
+                correct: 1,
+                explanation: "Tax-Equivalent Yield = Muni Yield / (1 - Tax Rate) = 4.2% / (1 - 0.35) = 4.2% / 0.65 = 6.46%. A taxable bond must yield 6.46% to equal the after-tax return of the 4.2% muni."
+            },
+            {
+                topic: "Products & Risks",
+                question: "A Treasury Inflation-Protected Security (TIPS) adjusts which of the following based on inflation?",
+                answers: [
+                    "The coupon rate only",
+                    "The principal value only",
+                    "Both the coupon rate and principal value",
+                    "Neither - TIPS adjust only at maturity"
+                ],
+                correct: 1,
+                explanation: "TIPS adjust the PRINCIPAL based on inflation (CPI). The coupon rate stays fixed, but since the principal grows with inflation, the actual dollar amount of interest paid increases. At maturity, you receive the greater of adjusted or original principal."
+            },
+            {
+                topic: "Products & Risks",
+                question: "All of the following are TRUE regarding zero-coupon bonds EXCEPT:",
+                answers: [
+                    "They are purchased at a discount to par value",
+                    "They have no reinvestment risk",
+                    "Annual phantom income must be reported for tax purposes",
+                    "They have lower interest rate risk than coupon bonds"
+                ],
+                correct: 3,
+                explanation: "Zero-coupon bonds have HIGHER interest rate risk (more price volatility) than comparable coupon bonds because all cash flows are received at maturity. They have no reinvestment risk (no coupons to reinvest) but maximum duration/interest rate sensitivity."
+            },
+            {
+                topic: "Products & Risks",
+                question: "A customer owns 500 shares of XYZ stock and is concerned about a potential short-term decline. Which strategy provides protection while maintaining upside potential?",
+                answers: [
+                    "Writing 5 XYZ covered calls",
+                    "Buying 5 XYZ puts",
+                    "Selling 500 shares and buying calls",
+                    "Writing 5 XYZ naked puts"
+                ],
+                correct: 1,
+                explanation: "Buying puts (protective puts or married puts) provides downside protection while maintaining unlimited upside. Covered calls limit upside. Selling shares eliminates the position. Naked puts provide no protection for existing shares."
+            },
+            {
+                topic: "Products & Risks",
+                question: "Which of the following statements about variable annuities is TRUE?",
+                answers: [
+                    "They guarantee a fixed return on investment",
+                    "They are not considered securities and do not require registration",
+                    "The insurance company bears the investment risk",
+                    "Payments during the annuity phase vary based on account performance"
+                ],
+                correct: 3,
+                explanation: "Variable annuity payments VARY based on the performance of the underlying investments. The investor bears the investment risk, not the insurance company. They ARE securities requiring registration and do not guarantee returns."
+            },
+            {
+                topic: "Products & Risks",
+                question: "A customer purchases a variable annuity and begins receiving payments. In the first year, the customer receives $10,000, of which $7,000 represents a return of principal. The customer's ordinary income for tax purposes is:",
+                answers: [
+                    "$0",
+                    "$3,000",
+                    "$7,000",
+                    "$10,000"
+                ],
+                correct: 1,
+                explanation: "Only the earnings portion is taxable as ordinary income. Payment = $10,000, Return of principal = $7,000, Taxable income = $10,000 - $7,000 = $3,000. Return of principal (cost basis) is not taxable."
+            },
+            {
+                topic: "Products & Risks",
+                question: "Which of the following Unit Investment Trusts (UITs) characteristics distinguishes it from a mutual fund?",
+                answers: [
+                    "UITs have actively managed portfolios",
+                    "UITs have a fixed portfolio that is not actively traded",
+                    "UITs can only invest in bonds",
+                    "UITs are not registered investment companies"
+                ],
+                correct: 1,
+                explanation: "UITs have FIXED, unmanaged portfolios - securities are selected at creation and typically held until maturity/termination. Mutual funds are actively managed. UITs can hold stocks or bonds and ARE registered investment companies."
+            },
+            {
+                topic: "Products & Risks",
+                question: "An investor owns 1,000 shares of XYZ at $30. The stock is going ex-dividend tomorrow with a $0.50 dividend. All else being equal, what should the opening price be on the ex-dividend date?",
+                answers: [
+                    "$29.50",
+                    "$30.00",
+                    "$30.50",
+                    "$29.00"
+                ],
+                correct: 0,
+                explanation: "On the ex-dividend date, the stock price is adjusted DOWN by the dividend amount. $30.00 - $0.50 = $29.50. This reflects that new buyers won't receive the dividend, so the price reflects the reduced value."
+            },
+            {
+                topic: "Products & Risks",
+                question: "A corporation announces a 3-for-2 stock split. An investor who owns 100 shares at $60 before the split will have:",
+                answers: [
+                    "150 shares at $40 each",
+                    "66 shares at $90 each",
+                    "100 shares at $40 each",
+                    "150 shares at $60 each"
+                ],
+                correct: 0,
+                explanation: "In a 3-for-2 split: Shares = 100 × 3/2 = 150 shares. Price = $60 × 2/3 = $40. Total value unchanged: 100 × $60 = $6,000 = 150 × $40. The investor has more shares at a lower price."
+            },
+            {
+                topic: "Products & Risks",
+                question: "Which of the following options positions has UNLIMITED loss potential?",
+                answers: [
+                    "Long call",
+                    "Long put",
+                    "Short put",
+                    "Short call"
+                ],
+                correct: 3,
+                explanation: "A short (naked) call has UNLIMITED loss potential because the stock can rise to infinity. The writer is obligated to sell at the strike price no matter how high the stock goes. Long calls/puts have limited loss (premium). Short puts have large but limited loss."
+            },
+            {
+                topic: "Products & Risks",
+                question: "An investor buys 1 XYZ Jan 50 put at $4 when XYZ is trading at $52. At expiration, XYZ is at $43. The investor's profit or loss is:",
+                answers: [
+                    "$300 profit",
+                    "$700 profit",
+                    "$400 loss",
+                    "$700 loss"
+                ],
+                correct: 0,
+                explanation: "The put is in the money. Intrinsic value at expiration = $50 - $43 = $7 = $700. Cost of put = $4 = $400. Profit = $700 - $400 = $300."
+            },
+            {
+                topic: "Products & Risks",
+                question: "All of the following are TRUE regarding cumulative preferred stock EXCEPT:",
+                answers: [
+                    "Missed dividends accumulate as dividends in arrears",
+                    "All accumulated dividends must be paid before common dividends",
+                    "Accumulated dividends earn compound interest",
+                    "The board may choose not to declare dividends"
+                ],
+                correct: 2,
+                explanation: "Cumulative preferred dividends do NOT earn interest - they simply accumulate. The amount owed is the stated dividend times the periods missed, with no compounding. The board can still skip dividends, but they accumulate as arrears."
+            },
+            {
+                topic: "Products & Risks",
+                question: "A bond with a 6% coupon is purchased at 90 and matures in 10 years at par. The yield to maturity is MOST LIKELY:",
+                answers: [
+                    "Less than 6%",
+                    "Exactly 6%",
+                    "Greater than 6% but less than the current yield",
+                    "Greater than the current yield"
+                ],
+                correct: 3,
+                explanation: "For a discount bond: Nominal (6%) < Current Yield < YTM. Current yield = $60/$900 = 6.67%. YTM is higher because it includes the gain from $900 to $1,000 at maturity, annualized. YTM is approximately 7.4%."
+            },
+            {
+                topic: "Products & Risks",
+                question: "An investor buys an XYZ Oct 40 call for $3 and an XYZ Oct 40 put for $2. What is the breakeven on the upside?",
+                answers: [
+                    "$35",
+                    "$40",
+                    "$43",
+                    "$45"
+                ],
+                correct: 3,
+                explanation: "This is a long straddle. Total premium = $3 + $2 = $5. Breakeven (upside) = Strike + Total Premium = $40 + $5 = $45. Breakeven (downside) = Strike - Total Premium = $40 - $5 = $35. Stock must move beyond these points for profit."
+            },
+            {
+                topic: "Products & Risks",
+                question: "Which of the following ETFs would be MOST suitable for an investor seeking to profit from a declining market?",
+                answers: [
+                    "S&P 500 Index ETF",
+                    "Inverse S&P 500 ETF",
+                    "Leveraged S&P 500 ETF (2x)",
+                    "Dividend-focused ETF"
+                ],
+                correct: 1,
+                explanation: "An INVERSE ETF is designed to move opposite to the index - it gains when the index falls. A 2x leveraged ETF amplifies gains AND losses on the upside. Regular index and dividend ETFs would lose value in a declining market."
+            },
+            {
+                topic: "Products & Risks",
+                question: "A customer has $200,000 in securities and $50,000 in cash in a brokerage account. If the broker-dealer fails, SIPC protection would cover:",
+                answers: [
+                    "Up to $250,000 total",
+                    "Up to $500,000 total, with $250,000 maximum for cash",
+                    "$200,000 in securities only",
+                    "Nothing, SIPC only covers market losses"
+                ],
+                correct: 1,
+                explanation: "SIPC covers up to $500,000 per customer, including a maximum of $250,000 for cash. Here, the full $200,000 in securities and $50,000 in cash would be covered. SIPC protects against broker-dealer failure, NOT market losses."
+            },
+            {
+                topic: "Products & Risks",
+                question: "An investor owns 100 shares of ABC at $75 and writes 1 ABC Jul 80 call at $3. If ABC rises to $90, what is the investor's maximum profit?",
+                answers: [
+                    "$300",
+                    "$500",
+                    "$800",
+                    "$1,500"
+                ],
+                correct: 2,
+                explanation: "Covered call max profit = (Strike - Purchase Price) + Premium. ($80 - $75) × 100 + $300 = $500 + $300 = $800. The stock appreciation is capped at the strike ($80), even though it went to $90."
+            },
+            {
+                topic: "Products & Risks",
+                question: "All of the following are characteristics of hedge funds EXCEPT:",
+                answers: [
+                    "They are typically limited to accredited investors",
+                    "They may use leverage and short selling",
+                    "They must register with the SEC under the Investment Company Act of 1940",
+                    "They typically charge performance-based fees"
+                ],
+                correct: 2,
+                explanation: "Hedge funds use exemptions to AVOID registration under the Investment Company Act of 1940. They're sold through private placements to accredited investors, can use various strategies, and typically charge '2 and 20' fees."
+            },
+            {
+                topic: "Products & Risks",
+                question: "A mutual fund has $100 million in assets, $5 million in liabilities, and 10 million shares outstanding. The NAV per share is:",
+                answers: [
+                    "$9.50",
+                    "$10.00",
+                    "$10.50",
+                    "$11.00"
+                ],
+                correct: 0,
+                explanation: "NAV = (Assets - Liabilities) / Shares Outstanding. ($100M - $5M) / 10M shares = $95M / 10M = $9.50 per share."
+            },
+            {
+                topic: "Products & Risks",
+                question: "A bond purchased at 95 will have a yield to maturity that is:",
+                answers: [
+                    "Lower than the coupon rate",
+                    "Equal to the coupon rate",
+                    "Higher than the coupon rate",
+                    "Impossible to determine"
+                ],
+                correct: 2,
+                explanation: "A bond bought at a DISCOUNT (below 100) has YTM HIGHER than the coupon rate. You're getting the coupon payments PLUS the price appreciation to par at maturity."
+            },
+
+            // ========== TRADING, ACCOUNTS & PROHIBITED ACTIVITIES ==========
+            {
+                topic: "Trading & Accounts",
+                question: "A registered representative discovers that a customer has been structuring cash deposits to avoid Currency Transaction Reports. The representative should:",
+                answers: [
+                    "Inform the customer that structuring is illegal",
+                    "File a Suspicious Activity Report without informing the customer",
+                    "Close the customer's account immediately",
+                    "Report the activity to the branch manager and take no further action"
+                ],
+                correct: 1,
+                explanation: "A SAR must be filed within 30 days, and the customer must NOT be informed ('tipping off' is a violation). Structuring deposits to avoid CTR reporting is illegal, and the firm must file a SAR without alerting the customer."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "Which of the following activities would require a customer's PRIOR written authorization?",
+                answers: [
+                    "Selecting the time to execute a customer's order",
+                    "Selecting the price at which to execute a customer's order",
+                    "Selecting which securities to purchase for a customer",
+                    "Determining the appropriate exchange for execution"
+                ],
+                correct: 2,
+                explanation: "Selecting the SECURITY (asset) requires written discretionary authority. Time and price decisions are NOT discretionary. The 'AAA' test: Asset, Amount, or Action = discretionary. Time/price = not discretionary."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "An investor enters a sell stop order at $45 for 100 shares of stock currently trading at $48. The following trades occur: $47, $46, $45, $44.50, $45.50. At what price will the order MOST LIKELY be executed?",
+                answers: [
+                    "$45.00",
+                    "$44.50",
+                    "$45.50",
+                    "The order will not be executed"
+                ],
+                correct: 1,
+                explanation: "When the stop price ($45) is reached, the order becomes a MARKET order. It executes at the next available price after triggering. The stop was triggered at $45, then the next trade was $44.50, which is where it would likely fill."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "Under FINRA's suitability rule, a registered representative must have a reasonable basis to believe that a recommendation is suitable based on all of the following EXCEPT:",
+                answers: [
+                    "The customer's investment objectives",
+                    "The customer's financial situation",
+                    "The customer's tax status",
+                    "The customer's political affiliations"
+                ],
+                correct: 3,
+                explanation: "Suitability factors include investment objectives, financial situation, tax status, risk tolerance, time horizon, and liquidity needs. Political affiliations are NOT a suitability factor and are irrelevant to investment recommendations."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "Which of the following would be considered 'front running'?",
+                answers: [
+                    "A broker buys stock for his own account before executing a large customer buy order",
+                    "A broker executes a customer order at the best available price",
+                    "A broker sells stock after receiving negative research from the analyst",
+                    "A broker purchases shares based on a stock tip from a friend"
+                ],
+                correct: 0,
+                explanation: "Front running is trading ahead of a customer order to benefit from the anticipated price movement the customer order will cause. This is a serious violation of fiduciary duty and securities laws."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "A customer has a margin account with long market value of $50,000 and a debit balance of $20,000. If the minimum maintenance requirement is 25%, at what price would a margin call be issued if the customer owns 500 shares?",
+                answers: [
+                    "$26.67",
+                    "$40.00",
+                    "$53.33",
+                    "$80.00"
+                ],
+                correct: 2,
+                explanation: "Margin Call Price = Debit Balance / (1 - Maintenance %). $20,000 / (1 - 0.25) = $20,000 / 0.75 = $26,666.67 for the account. Per share: $26,666.67 / 500 shares = $53.33."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "Under Regulation T, payment for securities purchased in a cash account must be made within:",
+                answers: [
+                    "The same day (T+0)",
+                    "Two business days (T+2)",
+                    "Four business days from trade date",
+                    "Seven calendar days"
+                ],
+                correct: 2,
+                explanation: "Regulation T requires payment within 4 BUSINESS days from trade date. Note: Settlement is T+1, but Reg T allows 4 business days for payment. If not paid, the account may be frozen for 90 days."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "All of the following information must be included on a customer's trade confirmation EXCEPT:",
+                answers: [
+                    "Whether the firm acted as agent or principal",
+                    "The commission charged on an agency trade",
+                    "The markup on a principal trade",
+                    "The time of execution"
+                ],
+                correct: 2,
+                explanation: "The markup on a principal trade does NOT need to be disclosed on the confirmation. Commission must be disclosed on agency trades. Whether the firm acted as agent/principal and time of execution must be disclosed."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "A husband and wife open a joint account with rights of survivorship (JTWROS). If one spouse dies, the account assets:",
+                answers: [
+                    "Pass to the deceased spouse's estate",
+                    "Are frozen until probate is complete",
+                    "Pass directly to the surviving spouse",
+                    "Are divided equally between the estate and surviving spouse"
+                ],
+                correct: 2,
+                explanation: "In JTWROS, assets pass DIRECTLY to the surviving owner, avoiding probate. This differs from Tenants in Common (TIC/JTIC), where the deceased's share goes to their estate."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "Which of the following custodial account activities is PROHIBITED?",
+                answers: [
+                    "Purchasing blue chip stocks",
+                    "Purchasing municipal bonds",
+                    "Trading on margin",
+                    "Opening the account at a discount broker"
+                ],
+                correct: 2,
+                explanation: "Margin trading, short selling, and uncovered options are PROHIBITED in UTMA/UGMA custodial accounts. Only cash account activities are permitted because these accounts are for minors who cannot be held to margin agreements."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "A Currency Transaction Report (CTR) must be filed for cash transactions exceeding:",
+                answers: [
+                    "$3,000 in a single transaction",
+                    "$5,000 in a single day",
+                    "$10,000 in a single day",
+                    "$15,000 in a single month"
+                ],
+                correct: 2,
+                explanation: "CTRs are required for cash transactions exceeding $10,000 in a single day. 'Structuring' - breaking up transactions to avoid this threshold - is illegal. SARs are filed for suspicious activity involving $5,000 or more."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "Under the SEC's Regulation Best Interest (Reg BI), a broker-dealer must:",
+                answers: [
+                    "Act as a fiduciary for all customer accounts",
+                    "Always recommend the lowest-cost investment option",
+                    "Act in the best interest of the retail customer at the time of recommendation",
+                    "Provide investment advice for an annual fee"
+                ],
+                correct: 2,
+                explanation: "Reg BI requires broker-dealers to act in the retail customer's best interest at the TIME of recommendation. It doesn't impose a fiduciary standard, doesn't require lowest cost, and applies to recommendations, not ongoing advice."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "A pattern day trader must maintain minimum equity of:",
+                answers: [
+                    "$10,000",
+                    "$25,000",
+                    "$50,000",
+                    "$100,000"
+                ],
+                correct: 1,
+                explanation: "A Pattern Day Trader (PDT) - someone who executes 4+ day trades in 5 business days - must maintain minimum equity of $25,000 in their margin account. Falling below triggers restrictions."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "An investor enters a buy limit order at $50 for a stock currently trading at $52. The order will be executed:",
+                answers: [
+                    "Immediately at $52",
+                    "Only if the stock falls to $50 or lower",
+                    "At the market close if the stock is at $50",
+                    "Never, because the limit is below the current price"
+                ],
+                correct: 1,
+                explanation: "Buy limit orders are placed BELOW current market. The order only executes if the stock falls to $50 or lower. It will not execute at $52. Remember: 'Buy low' - buy limits are below market."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "Which of the following is TRUE regarding discretionary accounts?",
+                answers: [
+                    "The representative can determine price and time without written authorization",
+                    "Each discretionary order must be marked as such and approved by a principal",
+                    "Discretionary authority automatically transfers when a representative changes firms",
+                    "Verbal authorization is sufficient for first 30 days"
+                ],
+                correct: 1,
+                explanation: "Each discretionary trade must be marked as discretionary and approved by a principal on the day of the trade. Written authorization is required. Authority doesn't transfer between firms. Price/time alone isn't discretionary."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "A broker-dealer must deliver the options disclosure document (ODD) to a customer:",
+                answers: [
+                    "After the first options trade is executed",
+                    "At or before account approval",
+                    "Only if requested by the customer",
+                    "Within 30 days of account opening"
+                ],
+                correct: 1,
+                explanation: "The ODD (Characteristics and Risks of Standardized Options) must be delivered AT or BEFORE options account approval. This ensures customers understand options risks before trading."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "Which of the following best describes 'painting the tape'?",
+                answers: [
+                    "Executing fictitious trades to create the appearance of activity",
+                    "Providing misleading research to customers",
+                    "Executing trades at the close to affect valuations",
+                    "Trading ahead of customer orders"
+                ],
+                correct: 0,
+                explanation: "Painting the tape is executing fictitious or collusive trades to create the false appearance of trading activity, misleading other investors. Marking the close is manipulating closing prices. Front running is trading ahead of orders."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "Selling away refers to:",
+                answers: [
+                    "Selling securities at excessive markups",
+                    "Selling securities not approved by the firm",
+                    "Selling securities below market price",
+                    "Selling securities after market hours"
+                ],
+                correct: 1,
+                explanation: "Selling away is when a registered rep sells securities or makes private deals NOT approved or offered by their broker-dealer. This is prohibited without firm approval."
+            },
+            {
+                topic: "Trading & Accounts",
+                question: "Guaranteeing a customer against loss is:",
+                answers: [
+                    "Allowed with written customer consent",
+                    "Allowed for accounts over $100,000",
+                    "Prohibited in all circumstances",
+                    "Allowed for institutional accounts only"
+                ],
+                correct: 2,
+                explanation: "Guaranteeing customers against losses is ALWAYS prohibited. You cannot promise 'you won't lose money' or 'I'll cover any losses.' No exceptions."
+            },
+
+            // ========== REGULATORY ==========
+            {
+                topic: "Regulatory",
+                question: "The Securities Exchange Act of 1934 created which of the following?",
+                answers: [
+                    "The Municipal Securities Rulemaking Board",
+                    "The Securities and Exchange Commission",
+                    "The Financial Industry Regulatory Authority",
+                    "The Options Clearing Corporation"
+                ],
+                correct: 1,
+                explanation: "The Securities Exchange Act of 1934 created the SEC. The '34 Act regulates secondary market trading and broker-dealers. FINRA was created in 2007 from NASD/NYSE merger. MSRB was created in 1975. OCC was created in 1973."
+            },
+            {
+                topic: "Regulatory",
+                question: "FINRA is classified as a:",
+                answers: [
+                    "Federal government agency",
+                    "Self-regulatory organization (SRO)",
+                    "Division of the SEC",
+                    "Stock exchange"
+                ],
+                correct: 1,
+                explanation: "FINRA is a Self-Regulatory Organization (SRO), not a government agency. It's a private non-profit that regulates broker-dealers under SEC oversight. It writes rules, administers exams, and handles enforcement."
+            },
+            {
+                topic: "Regulatory",
+                question: "Form U4 must be filed when:",
+                answers: [
+                    "A broker-dealer is registered with the SEC",
+                    "A customer opens a new account",
+                    "An associated person joins a broker-dealer",
+                    "A registered representative is terminated"
+                ],
+                correct: 2,
+                explanation: "Form U4 (Uniform Application for Securities Industry Registration) is filed when an associated person JOINS a firm. Form U5 is filed when they leave. U4 contains background information, employment history, and disclosures."
+            },
+            {
+                topic: "Regulatory",
+                question: "Under the Securities Act of 1933, registration is required for which of the following securities?",
+                answers: [
+                    "U.S. Treasury bills",
+                    "Municipal bonds",
+                    "Common stock of a new technology company",
+                    "Commercial paper with 180-day maturity"
+                ],
+                correct: 2,
+                explanation: "Corporate securities (like common stock) must be registered under the 1933 Act. Treasuries, munis, and commercial paper (under 270 days) are EXEMPT. The '33 Act regulates primary market/new issues."
+            },
+            {
+                topic: "Regulatory",
+                question: "Which regulatory body writes rules for municipal securities but cannot enforce them?",
+                answers: [
+                    "SEC",
+                    "FINRA",
+                    "MSRB",
+                    "Federal Reserve"
+                ],
+                correct: 2,
+                explanation: "The MSRB (Municipal Securities Rulemaking Board) writes rules for municipal securities dealers but CANNOT enforce them. FINRA and SEC enforce MSRB rules. This is because muni issuers are state/local governments."
+            },
+            {
+                topic: "Regulatory",
+                question: "The SEC has the authority to do all of the following EXCEPT:",
+                answers: [
+                    "Impose civil fines",
+                    "Bar individuals from the securities industry",
+                    "File criminal charges",
+                    "Issue cease and desist orders"
+                ],
+                correct: 2,
+                explanation: "The SEC has CIVIL enforcement authority only - it cannot file criminal charges. Criminal violations are prosecuted by the Department of Justice. The SEC can fine, bar, disgorge profits, and issue cease and desist orders."
+            },
+            {
+                topic: "Regulatory",
+                question: "Customer complaints regarding a registered representative must be maintained for:",
+                answers: [
+                    "3 years",
+                    "4 years",
+                    "6 years",
+                    "The lifetime of the account"
+                ],
+                correct: 1,
+                explanation: "Customer complaints must be maintained for 4 years under FINRA rules. These records can impact a representative's record and appear on their CRD/BrokerCheck. General account records are kept for 6 years."
+            },
+            {
+                topic: "Regulatory",
+                question: "Form U5 must be filed within how many days of termination?",
+                answers: [
+                    "10 days",
+                    "30 days",
+                    "60 days",
+                    "90 days"
+                ],
+                correct: 1,
+                explanation: "Form U5 must be filed within 30 days of an associated person's termination from a firm."
+            }
+        ];
+
+        // Quiz State
+        let selectedTopics = new Set();
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let correctAnswers = 0;
+        let incorrectAnswers = 0;
+        let answered = false;
+        let missedQuestions = [];
+
+        // DOM Elements
+        const setupScreen = document.getElementById('setupScreen');
+        const quizScreen = document.getElementById('quizScreen');
+        const resultsScreen = document.getElementById('resultsScreen');
+        const scoreBar = document.getElementById('scoreBar');
+        const topicGrid = document.getElementById('topicGrid');
+        const startBtn = document.getElementById('startBtn');
+        const selectAllBtn = document.getElementById('selectAllBtn');
+        const questionCountEl = document.getElementById('questionCount');
+        const nextBtn = document.getElementById('nextBtn');
+        const restartBtn = document.getElementById('restartBtn');
+
+        // Get unique topics
+        const topics = [...new Set(questionBank.map(q => q.topic))];
+
+        // Initialize topic buttons
+        function initTopics() {
+            topicGrid.innerHTML = '';
+            topics.forEach(topic => {
+                const count = questionBank.filter(q => q.topic === topic).length;
+                const btn = document.createElement('button');
+                btn.className = 'topic-btn';
+                btn.innerHTML = `
+                    <div class="topic-btn__name">${topic}</div>
+                    <div class="topic-btn__count">${count} questions</div>
+                `;
+                btn.addEventListener('click', () => toggleTopic(topic, btn));
+                topicGrid.appendChild(btn);
+            });
+        }
+
+        function toggleTopic(topic, btn) {
+            if (selectedTopics.has(topic)) {
+                selectedTopics.delete(topic);
+                btn.classList.remove('selected');
+            } else {
+                selectedTopics.add(topic);
+                btn.classList.add('selected');
+            }
+            updateQuestionCount();
+        }
+
+        function updateQuestionCount() {
+            const count = questionBank.filter(q => selectedTopics.has(q.topic)).length;
+            questionCountEl.textContent = count > 0
+                ? `${count} questions selected`
+                : 'Select at least one topic to start';
+            startBtn.disabled = count === 0;
+        }
+
+        selectAllBtn.addEventListener('click', () => {
+            const allSelected = selectedTopics.size === topics.length;
+            document.querySelectorAll('.topic-btn').forEach((btn, i) => {
+                if (allSelected) {
+                    selectedTopics.delete(topics[i]);
+                    btn.classList.remove('selected');
+                } else {
+                    selectedTopics.add(topics[i]);
+                    btn.classList.add('selected');
+                }
+            });
+            selectAllBtn.textContent = allSelected ? 'Select All Topics' : 'Deselect All';
+            updateQuestionCount();
+        });
+
+        // Start Quiz
+        startBtn.addEventListener('click', startQuiz);
+
+        function startQuiz() {
+            // Filter and shuffle questions
+            currentQuestions = questionBank
+                .filter(q => selectedTopics.has(q.topic))
+                .sort(() => Math.random() - 0.5);
+
+            currentIndex = 0;
+            correctAnswers = 0;
+            incorrectAnswers = 0;
+            missedQuestions = [];
+
+            setupScreen.style.display = 'none';
+            quizScreen.style.display = 'block';
+            scoreBar.style.display = 'block';
+
+            document.getElementById('totalQ').textContent = currentQuestions.length;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            answered = false;
+            const q = currentQuestions[currentIndex];
+
+            document.getElementById('questionTopic').textContent = q.topic.toUpperCase();
+            document.getElementById('questionNumber').textContent = `Question ${currentIndex + 1}`;
+            document.getElementById('currentQ').textContent = currentIndex + 1;
+            document.getElementById('questionText').textContent = q.question;
+
+            // Update progress bar
+            const progress = ((currentIndex) / currentQuestions.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+
+            // Build answers
+            const answersList = document.getElementById('answersList');
+            answersList.innerHTML = '';
+            const letters = ['A', 'B', 'C', 'D'];
+
+            q.answers.forEach((answer, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.innerHTML = `<span class="answer-letter">${letters[i]}.</span><span>${answer}</span>`;
+                btn.addEventListener('click', () => selectAnswer(i));
+                answersList.appendChild(btn);
+            });
+
+            // Hide feedback
+            const feedback = document.getElementById('feedback');
+            feedback.classList.remove('show', 'correct', 'incorrect');
+
+            // Reset next button
+            nextBtn.disabled = true;
+            nextBtn.textContent = currentIndex === currentQuestions.length - 1 ? 'See Results' : 'Next Question';
+        }
+
+        function selectAnswer(selected) {
+            if (answered) return;
+            answered = true;
+
+            const q = currentQuestions[currentIndex];
+            const isCorrect = selected === q.correct;
+            const buttons = document.querySelectorAll('.answer-btn');
+
+            // Update score
+            if (isCorrect) {
+                correctAnswers++;
+            } else {
+                incorrectAnswers++;
+                missedQuestions.push({
+                    question: q.question,
+                    yourAnswer: q.answers[selected],
+                    correctAnswer: q.answers[q.correct],
+                    explanation: q.explanation
+                });
+            }
+
+            // Update score display
+            document.getElementById('correctCount').textContent = correctAnswers;
+            document.getElementById('incorrectCount').textContent = incorrectAnswers;
+            const total = correctAnswers + incorrectAnswers;
+            const percent = total > 0 ? Math.round((correctAnswers / total) * 100) : 0;
+            document.getElementById('percentScore').textContent = `${percent}%`;
+
+            // Highlight answers
+            buttons.forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === q.correct) {
+                    btn.classList.add(i === selected ? 'correct' : 'was-correct');
+                } else if (i === selected) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            // Show feedback
+            const feedback = document.getElementById('feedback');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackExplanation = document.getElementById('feedbackExplanation');
+
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            feedbackTitle.textContent = isCorrect ? 'Correct!' : 'Incorrect';
+            feedbackExplanation.innerHTML = q.explanation;
+
+            // Enable next button
+            nextBtn.disabled = false;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < currentQuestions.length - 1) {
+                currentIndex++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        function showResults() {
+            quizScreen.style.display = 'none';
+            scoreBar.style.display = 'none';
+            resultsScreen.style.display = 'block';
+
+            const total = correctAnswers + incorrectAnswers;
+            const percent = Math.round((correctAnswers / total) * 100);
+            const passed = percent >= 70;
+
+            // Update badge
+            const badge = document.getElementById('resultsBadge');
+            badge.textContent = passed ? 'PASS' : 'FAIL';
+            badge.className = 'results-badge ' + (passed ? 'pass' : 'fail');
+
+            // Update score
+            const scoreEl = document.getElementById('finalScore');
+            scoreEl.textContent = `${percent}%`;
+            scoreEl.className = 'results-score ' + (passed ? 'pass' : 'fail');
+
+            document.getElementById('finalCorrect').textContent = correctAnswers;
+            document.getElementById('finalIncorrect').textContent = incorrectAnswers;
+
+            // Results message
+            const message = document.getElementById('resultsMessage');
+            if (percent >= 90) {
+                message.textContent = "Outstanding! You're well-prepared for the SIE exam.";
+            } else if (percent >= 70) {
+                message.textContent = "You passed! Review the questions you missed to strengthen weak areas.";
+            } else if (percent >= 50) {
+                message.textContent = "Keep studying. Focus on the topics where you missed questions.";
+            } else {
+                message.textContent = "More preparation needed. Review the study materials and try again.";
+            }
+
+            // Show missed questions
+            const missedSection = document.getElementById('missedSection');
+            const missedList = document.getElementById('missedList');
+
+            if (missedQuestions.length > 0) {
+                missedSection.style.display = 'block';
+                missedList.innerHTML = '';
+
+                missedQuestions.forEach((q, i) => {
+                    const div = document.createElement('div');
+                    div.className = 'missed-item';
+                    div.innerHTML = `
+                        <div class="missed-item__question">${i + 1}. ${q.question}</div>
+                        <div class="missed-item__answers">
+                            <div class="missed-item__your-answer">Your answer: ${q.yourAnswer}</div>
+                            <div class="missed-item__correct-answer">Correct answer: ${q.correctAnswer}</div>
+                        </div>
+                        <div class="missed-item__explanation">${q.explanation}</div>
+                    `;
+                    missedList.appendChild(div);
+                });
+            } else {
+                missedSection.style.display = 'none';
+            }
+        }
+
+        restartBtn.addEventListener('click', () => {
+            resultsScreen.style.display = 'none';
+            setupScreen.style.display = 'block';
+        });
+
+        // Initialize
+        initTopics();
+    </script>
+</body>
+</html>
