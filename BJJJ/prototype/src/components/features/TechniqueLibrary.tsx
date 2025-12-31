@@ -377,11 +377,11 @@ export function TechniqueLibrary({ onOpenFeedback }: TechniqueLibraryProps) {
         <>
           <div style={{
             display: 'flex',
-            gap: '2px',
+            gap: '4px',
             backgroundColor: 'var(--color-gray-800)',
-            borderRadius: 'var(--radius-md)',
-            padding: '2px',
-            marginBottom: 'var(--space-lg)',
+            borderRadius: 'var(--radius-lg)',
+            padding: '4px',
+            marginBottom: 'var(--space-xl)',
           }}>
             <TabButton
               active={viewMode === 'for_you'}
@@ -407,13 +407,20 @@ export function TechniqueLibrary({ onOpenFeedback }: TechniqueLibraryProps) {
 
           {/* Browse View */}
           {viewMode === 'browse' && (
-            <BrowseView
-              positions={POSITIONS}
-              mindsetCategories={MINDSET_CATEGORIES}
-              videoStats={videoStats}
-              onSelectPosition={openPosition}
-              onSelectMindsetCategory={openMindsetCategory}
-            />
+            <>
+              {/* Belt-specific suggestions at top */}
+              <BeltSuggestedTechniques
+                belt={profile.belt}
+                onSelectPosition={openPosition}
+              />
+              <BrowseView
+                positions={POSITIONS}
+                mindsetCategories={MINDSET_CATEGORIES}
+                videoStats={videoStats}
+                onSelectPosition={openPosition}
+                onSelectMindsetCategory={openMindsetCategory}
+              />
+            </>
           )}
         </>
       )}
@@ -423,6 +430,7 @@ export function TechniqueLibrary({ onOpenFeedback }: TechniqueLibraryProps) {
 
 // ===========================================
 // TAB BUTTON
+// Larger touch targets (56px min), clearer active states
 // ===========================================
 
 function TabButton({
@@ -439,18 +447,23 @@ function TabButton({
       onClick={onClick}
       style={{
         flex: 1,
-        padding: 'var(--space-md)',
+        height: 52,
+        minHeight: 52,
+        padding: '0 var(--space-lg)',
         backgroundColor: active ? 'var(--color-gray-900)' : 'transparent',
         border: 'none',
-        borderRadius: 'var(--radius-sm)',
-        color: active ? 'var(--color-white)' : 'var(--color-gray-400)',
+        borderRadius: 'var(--radius-md)',
+        color: active ? 'var(--color-gold)' : 'var(--color-gray-500)',
         fontFamily: 'var(--font-mono)',
         fontSize: 'var(--text-sm)',
-        fontWeight: 600,
+        fontWeight: 700,
         textTransform: 'uppercase',
         letterSpacing: 'var(--tracking-wider)',
         cursor: 'pointer',
         transition: 'all 0.15s ease',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       {label}
@@ -460,6 +473,7 @@ function TabButton({
 
 // ===========================================
 // SEARCH BAR
+// Larger touch targets, more whitespace for exhausted users
 // ===========================================
 
 function SearchBar({
@@ -475,12 +489,15 @@ function SearchBar({
     <div style={{ position: 'relative' }}>
       <div style={{
         position: 'absolute',
-        left: 'var(--space-md)',
+        left: 'var(--space-lg)',
         top: '50%',
         transform: 'translateY(-50%)',
         color: 'var(--color-gray-500)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="11" cy="11" r="8" />
           <path d="M21 21l-4.35-4.35" />
         </svg>
@@ -492,10 +509,12 @@ function SearchBar({
         onChange={(e) => onChange(e.target.value)}
         style={{
           width: '100%',
-          padding: 'var(--space-md) var(--space-md) var(--space-md) 48px',
+          height: 56,
+          padding: '0 56px 0 56px',
           fontSize: 'var(--text-base)',
+          fontWeight: 500,
           border: '1px solid var(--color-gray-700)',
-          borderRadius: 'var(--radius-md)',
+          borderRadius: 'var(--radius-lg)',
           backgroundColor: 'var(--color-gray-900)',
           color: 'var(--color-white)',
         }}
@@ -503,16 +522,19 @@ function SearchBar({
       {value && (
         <button
           onClick={onClear}
+          aria-label="Clear search"
           style={{
             position: 'absolute',
-            right: 'var(--space-md)',
+            right: 'var(--space-sm)',
             top: '50%',
             transform: 'translateY(-50%)',
             background: 'var(--color-gray-700)',
             border: 'none',
             borderRadius: 'var(--radius-full)',
-            width: 24,
-            height: 24,
+            width: 40,
+            height: 40,
+            minWidth: 44,
+            minHeight: 44,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -520,7 +542,7 @@ function SearchBar({
             color: 'var(--color-gray-300)',
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M18 6L6 18M6 6l12 12" />
           </svg>
         </button>
@@ -530,7 +552,200 @@ function SearchBar({
 }
 
 // ===========================================
+// BELT SUGGESTIONS EMPTY STATE
+// Shows suggested techniques based on user's belt level when search is empty
+// ===========================================
+
+// Belt-specific focus areas for suggestions
+const BELT_FOCUS_AREAS: Record<string, { positions: PositionCategory[]; message: string }> = {
+  white: {
+    positions: ['closed_guard', 'mount', 'side_control', 'back_control'],
+    message: 'Start with the fundamentals. Master these positions first.',
+  },
+  blue: {
+    positions: ['half_guard', 'open_guard', 'guard_passing', 'submissions'],
+    message: 'Expand your game. Build on your foundation.',
+  },
+  purple: {
+    positions: ['open_guard', 'guard_passing', 'takedowns', 'submissions'],
+    message: 'Refine your A-game. Develop your signature style.',
+  },
+  brown: {
+    positions: ['clinch', 'takedowns', 'turtle', 'submissions'],
+    message: 'Polish the details. Fill gaps in your game.',
+  },
+  black: {
+    positions: ['submissions', 'clinch', 'takedowns', 'turtle'],
+    message: 'Master the subtle details. Share your knowledge.',
+  },
+};
+
+function BeltSuggestedTechniques({
+  belt,
+  onSelectPosition,
+}: {
+  belt: string;
+  onSelectPosition: (position: PositionCategory) => void;
+}) {
+  const focusAreas = BELT_FOCUS_AREAS[belt] || BELT_FOCUS_AREAS.white;
+  const suggestedPositions = POSITIONS.filter(p => focusAreas.positions.includes(p.id));
+
+  return (
+    <div style={{
+      backgroundColor: 'var(--color-gray-900)',
+      borderRadius: 'var(--radius-lg)',
+      padding: 'var(--space-lg)',
+      marginBottom: 'var(--space-lg)',
+    }}>
+      {/* Header */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 'var(--space-sm)',
+        marginBottom: 'var(--space-sm)',
+      }}>
+        <div style={{
+          width: 10,
+          height: 10,
+          borderRadius: 'var(--radius-full)',
+          backgroundColor: `var(--color-belt-${belt})`,
+          border: belt === 'white' ? '1px solid var(--color-gray-600)' : 'none',
+        }} />
+        <span style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--text-xs)',
+          fontWeight: 700,
+          textTransform: 'uppercase',
+          letterSpacing: 'var(--tracking-widest)',
+          color: 'var(--color-gold)',
+        }}>
+          Suggested for {belt} belt
+        </span>
+      </div>
+
+      {/* Message */}
+      <p style={{
+        color: 'var(--color-gray-300)',
+        fontSize: 'var(--text-sm)',
+        lineHeight: 1.5,
+        margin: 0,
+        marginBottom: 'var(--space-lg)',
+      }}>
+        {focusAreas.message}
+      </p>
+
+      {/* Quick access cards */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: 'var(--space-sm)',
+      }}>
+        {suggestedPositions.slice(0, 4).map(position => (
+          <button
+            key={position.id}
+            onClick={() => onSelectPosition(position.id)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--space-sm)',
+              padding: 'var(--space-md)',
+              backgroundColor: 'var(--color-gray-800)',
+              border: 'none',
+              borderRadius: 'var(--radius-md)',
+              cursor: 'pointer',
+              textAlign: 'left',
+              minHeight: 56,
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <span style={{
+              color: 'var(--color-white)',
+              fontSize: 'var(--text-sm)',
+              fontWeight: 600,
+            }}>
+              {position.name}
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ===========================================
+// SECTION HEADER
+// Creates clear visual breaks between content sections
+// ===========================================
+
+function SectionHeader({
+  title,
+  subtitle,
+  count,
+  accentColor = 'var(--color-gold)',
+}: {
+  title: string;
+  subtitle?: string;
+  count?: number;
+  accentColor?: string;
+}) {
+  return (
+    <div style={{
+      marginBottom: 'var(--space-lg)',
+      paddingTop: 'var(--space-lg)',
+    }}>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 'var(--space-sm)',
+        marginBottom: subtitle ? 'var(--space-xs)' : 0,
+      }}>
+        <div style={{
+          width: 3,
+          height: 16,
+          backgroundColor: accentColor,
+          borderRadius: 2,
+        }} />
+        <h3 style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--text-xs)',
+          fontWeight: 700,
+          textTransform: 'uppercase',
+          letterSpacing: 'var(--tracking-widest)',
+          color: accentColor,
+          margin: 0,
+        }}>
+          {title}
+        </h3>
+        {count !== undefined && (
+          <span style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 600,
+            color: 'var(--color-gray-500)',
+          }}>
+            {count}
+          </span>
+        )}
+      </div>
+      {subtitle && (
+        <p style={{
+          fontSize: 'var(--text-sm)',
+          color: 'var(--color-gray-400)',
+          margin: 0,
+          marginLeft: 'calc(3px + var(--space-sm))',
+        }}>
+          {subtitle}
+        </p>
+      )}
+    </div>
+  );
+}
+
+// ===========================================
 // FOR YOU VIEW
+// Clean, reduced density, better spacing
 // ===========================================
 
 function ForYouView({
@@ -545,129 +760,122 @@ function ForYouView({
   emphasizeTopics: string[];
 }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       {/* Section Header - Belt-Personalized */}
-      <div>
-        <h2 style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--text-xs)',
-          fontWeight: 700,
-          textTransform: 'uppercase',
-          letterSpacing: 'var(--tracking-widest)',
-          color: 'var(--color-gold)',
-          marginBottom: 'var(--space-sm)',
-        }}>
-          {playlistName}
-        </h2>
-        <p style={{
-          color: 'var(--color-gray-400)',
-          fontSize: 'var(--text-sm)',
-          margin: 0,
-        }}>
-          Focus areas: {emphasizeTopics.slice(0, 3).join(', ')}
-        </p>
-      </div>
+      <SectionHeader
+        title={playlistName}
+        subtitle={`Focus: ${emphasizeTopics.slice(0, 3).join(', ')}`}
+      />
 
-      {/* Recommendation Cards */}
-      {recommendations.map((rec, index) => (
-        <div
-          key={`${rec.video.youtube_id}-${index}`}
-          style={{
-            backgroundColor: 'var(--color-gray-900)',
-            borderRadius: 'var(--radius-lg)',
-            overflow: 'hidden',
-            border: rec.priority === 'high' ? '1px solid var(--color-gold-dim)' : '1px solid var(--color-gray-800)',
-          }}
-        >
-          {/* Priority Badge */}
-          {rec.priority === 'high' && (
-            <div style={{
-              padding: 'var(--space-sm) var(--space-md)',
-              backgroundColor: 'var(--color-gold-dim)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 'var(--space-sm)',
-            }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-              </svg>
-              <span style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'var(--text-xs)',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: 'var(--tracking-wider)',
-                color: 'var(--color-gold)',
-              }}>
-                Priority
-              </span>
-            </div>
-          )}
-
-          {/* Video Player / Thumbnail */}
-          <div style={{ padding: 'var(--space-md)' }}>
-            <YouTubeEmbed
-              videoId={rec.video.youtube_id}
-              title={rec.video.title}
-              instructor={rec.video.instructor}
-              duration={rec.video.duration_seconds}
-            />
-          </div>
-
-          {/* Recommendation Reason */}
-          <div style={{ padding: '0 var(--space-md) var(--space-md)' }}>
-            <p style={{
-              color: 'var(--color-gray-300)',
-              fontSize: 'var(--text-sm)',
-              lineHeight: 1.5,
-              margin: 0,
-              marginBottom: 'var(--space-md)',
-            }}>
-              {rec.reason_text}
-            </p>
-
-            {/* User Progress Indicator */}
-            {rec.user_proficiency && (
+      {/* Recommendation Cards - More whitespace */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)' }}>
+        {recommendations.map((rec, index) => (
+          <div
+            key={`${rec.video.youtube_id}-${index}`}
+            style={{
+              backgroundColor: 'var(--color-gray-900)',
+              borderRadius: 'var(--radius-lg)',
+              overflow: 'hidden',
+              border: rec.priority === 'high' ? '1px solid var(--color-gold-dim)' : '1px solid var(--color-gray-800)',
+            }}
+          >
+            {/* Priority Badge - Cleaner */}
+            {rec.priority === 'high' && (
               <div style={{
+                padding: 'var(--space-sm) var(--space-lg)',
+                backgroundColor: 'var(--color-gold-dim)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 'var(--space-sm)',
-                padding: 'var(--space-sm) var(--space-md)',
-                backgroundColor: PROFICIENCY_CONFIG[rec.user_proficiency].bgColor,
-                borderRadius: 'var(--radius-sm)',
-                width: 'fit-content',
               }}>
-                <span style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: '50%',
-                  backgroundColor: PROFICIENCY_CONFIG[rec.user_proficiency].color,
-                }} />
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
                 <span style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: 'var(--text-xs)',
-                  fontWeight: 600,
-                  color: PROFICIENCY_CONFIG[rec.user_proficiency].color,
+                  fontWeight: 700,
                   textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
+                  letterSpacing: 'var(--tracking-wider)',
+                  color: 'var(--color-gold)',
                 }}>
-                  {PROFICIENCY_CONFIG[rec.user_proficiency].label}
+                  Priority Focus
                 </span>
-                {rec.times_practiced > 0 && (
-                  <span style={{
-                    color: 'var(--color-gray-400)',
-                    fontSize: 'var(--text-xs)',
-                  }}>
-                    • {rec.times_practiced}x practiced
-                  </span>
-                )}
               </div>
             )}
-          </div>
-        </div>
-      ))}
 
-      {/* Training Feedback CTA */}
+            {/* Video Player / Thumbnail - More padding */}
+            <div style={{ padding: 'var(--space-lg)' }}>
+              <YouTubeEmbed
+                videoId={rec.video.youtube_id}
+                title={rec.video.title}
+                instructor={rec.video.instructor}
+                duration={rec.video.duration_seconds}
+              />
+            </div>
+
+            {/* Recommendation Reason - Cleaner layout */}
+            <div style={{ padding: '0 var(--space-lg) var(--space-lg)' }}>
+              <p style={{
+                color: 'var(--color-gray-300)',
+                fontSize: 'var(--text-sm)',
+                lineHeight: 1.6,
+                margin: 0,
+              }}>
+                {rec.reason_text}
+              </p>
+
+              {/* User Progress Indicator - Only show if exists */}
+              {rec.user_proficiency && (
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--space-sm)',
+                  marginTop: 'var(--space-md)',
+                  padding: 'var(--space-sm) var(--space-md)',
+                  backgroundColor: PROFICIENCY_CONFIG[rec.user_proficiency].bgColor,
+                  borderRadius: 'var(--radius-md)',
+                  width: 'fit-content',
+                }}>
+                  <span style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: '50%',
+                    backgroundColor: PROFICIENCY_CONFIG[rec.user_proficiency].color,
+                  }} />
+                  <span style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 'var(--text-xs)',
+                    fontWeight: 600,
+                    color: PROFICIENCY_CONFIG[rec.user_proficiency].color,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                  }}>
+                    {PROFICIENCY_CONFIG[rec.user_proficiency].label}
+                  </span>
+                  {rec.times_practiced > 0 && (
+                    <span style={{
+                      color: 'var(--color-gray-400)',
+                      fontSize: 'var(--text-xs)',
+                    }}>
+                      {rec.times_practiced}x practiced
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Divider */}
+      <div style={{
+        height: 1,
+        backgroundColor: 'var(--color-gray-800)',
+        margin: 'var(--space-xl) calc(var(--space-md) * -1)',
+      }} />
+
+      {/* Training Feedback CTA - Larger touch target */}
       {onOpenFeedback && (
         <button
           onClick={onOpenFeedback}
@@ -681,12 +889,14 @@ function ForYouView({
             textAlign: 'left',
             display: 'flex',
             alignItems: 'center',
-            gap: 'var(--space-md)',
+            gap: 'var(--space-lg)',
+            marginTop: 'var(--space-lg)',
+            minHeight: 80,
           }}
         >
           <div style={{
-            width: 48,
-            height: 48,
+            width: 56,
+            height: 56,
             borderRadius: 'var(--radius-full)',
             backgroundColor: 'var(--color-gold-dim)',
             display: 'flex',
@@ -694,55 +904,58 @@ function ForYouView({
             justifyContent: 'center',
             flexShrink: 0,
           }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.5">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.5">
               <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
             </svg>
           </div>
-          <div>
+          <div style={{ flex: 1 }}>
             <div style={{
               fontFamily: 'var(--font-heading)',
               fontSize: 'var(--text-base)',
               fontWeight: 700,
               color: 'var(--color-white)',
-              marginBottom: '4px',
+              marginBottom: 'var(--space-xs)',
             }}>
               Get Training Feedback
             </div>
             <div style={{
               color: 'var(--color-gray-400)',
               fontSize: 'var(--text-sm)',
+              lineHeight: 1.4,
             }}>
-              AI-powered insights based on your training history
+              AI-powered insights based on your history
             </div>
           </div>
           <svg
-            width="20"
-            height="20"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="var(--color-gray-500)"
             strokeWidth="2"
-            style={{ marginLeft: 'auto' }}
+            style={{ flexShrink: 0 }}
           >
             <path d="M9 18l6-6-6-6" />
           </svg>
         </button>
       )}
 
-      {/* Ask Coach Reminder */}
+      {/* Ask Coach Reminder - More prominent */}
       <div style={{
-        padding: 'var(--space-md)',
+        padding: 'var(--space-lg)',
         backgroundColor: 'var(--color-gray-900)',
-        borderRadius: 'var(--radius-md)',
-        borderLeft: '3px solid var(--color-info)',
+        borderRadius: 'var(--radius-lg)',
+        borderLeft: '4px solid var(--color-info)',
+        marginTop: 'var(--space-lg)',
+        marginBottom: 'var(--space-xl)',
       }}>
         <p style={{
           color: 'var(--color-gray-300)',
           fontSize: 'var(--text-sm)',
           margin: 0,
-          lineHeight: 1.5,
+          lineHeight: 1.6,
         }}>
-          These recommendations are based on general patterns. Your coach knows your game best - ask them to validate what to focus on next.
+          These recommendations are based on general patterns. Your coach knows your game best.
         </p>
       </div>
     </div>
@@ -751,6 +964,7 @@ function ForYouView({
 
 // ===========================================
 // BROWSE VIEW
+// Clean layout with clear section breaks, larger touch targets
 // ===========================================
 
 function BrowseView({
@@ -767,50 +981,49 @@ function BrowseView({
   onSelectMindsetCategory: (category: MindsetCategoryId) => void;
 }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
-      {/* Stats Header */}
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      {/* Stats Hero - Clean, prominent */}
       <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'baseline',
+        textAlign: 'center',
+        paddingBottom: 'var(--space-xl)',
+        marginBottom: 'var(--space-md)',
+        borderBottom: '1px solid var(--color-gray-800)',
       }}>
-        <div>
-          <span style={{
-            fontFamily: 'var(--font-heading)',
-            fontSize: 'var(--text-3xl)',
-            fontWeight: 700,
-            color: 'var(--color-white)',
-          }}>
-            {videoStats.techniquesWithVideos}
-          </span>
-          <span style={{
-            color: 'var(--color-gray-400)',
-            fontSize: 'var(--text-sm)',
-            marginLeft: 'var(--space-sm)',
-          }}>
-            techniques with videos
-          </span>
+        <div style={{
+          fontFamily: 'var(--font-heading)',
+          fontSize: 'clamp(48px, 15vw, 72px)',
+          fontWeight: 700,
+          color: 'var(--color-white)',
+          lineHeight: 0.9,
+          letterSpacing: '-0.03em',
+        }}>
+          {videoStats.techniquesWithVideos}
+        </div>
+        <div style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--text-xs)',
+          fontWeight: 600,
+          color: 'var(--color-gray-500)',
+          textTransform: 'uppercase',
+          letterSpacing: 'var(--tracking-widest)',
+          marginTop: 'var(--space-sm)',
+        }}>
+          Techniques with videos
         </div>
       </div>
 
-      {/* Section Header: Techniques */}
-      <h3 style={{
-        fontFamily: 'var(--font-mono)',
-        fontSize: 'var(--text-xs)',
-        fontWeight: 700,
-        textTransform: 'uppercase',
-        letterSpacing: 'var(--tracking-widest)',
-        color: 'var(--color-gold)',
-        margin: 0,
-      }}>
-        Techniques
-      </h3>
+      {/* Techniques Section */}
+      <SectionHeader
+        title="Positions"
+        count={positions.length}
+      />
 
-      {/* Position Grid */}
+      {/* Position Grid - Larger cards, more whitespace */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(2, 1fr)',
-        gap: 'var(--space-sm)',
+        gap: 'var(--space-md)',
+        marginBottom: 'var(--space-xl)',
       }}>
         {positions.map(position => (
           <button
@@ -819,14 +1032,15 @@ function BrowseView({
             style={{
               display: 'flex',
               flexDirection: 'column',
-              padding: 'var(--space-lg) var(--space-md)',
+              justifyContent: 'space-between',
+              padding: 'var(--space-lg)',
               backgroundColor: 'var(--color-gray-900)',
               border: '1px solid var(--color-gray-800)',
-              borderRadius: 'var(--radius-md)',
+              borderRadius: 'var(--radius-lg)',
               cursor: 'pointer',
               textAlign: 'left',
-              transition: 'border-color 0.15s ease',
-              minHeight: 100,
+              transition: 'border-color 0.15s ease, transform 0.1s ease',
+              minHeight: 120,
             }}
           >
             <span style={{
@@ -834,7 +1048,7 @@ function BrowseView({
               fontSize: 'var(--text-base)',
               fontWeight: 600,
               color: 'var(--color-white)',
-              marginBottom: 'var(--space-xs)',
+              lineHeight: 1.2,
             }}>
               {position.name}
             </span>
@@ -843,6 +1057,7 @@ function BrowseView({
               fontSize: 'var(--text-xs)',
               color: 'var(--color-gray-500)',
               lineHeight: 1.4,
+              marginTop: 'var(--space-sm)',
             }}>
               {position.description}
             </span>
@@ -850,27 +1065,91 @@ function BrowseView({
         ))}
       </div>
 
-      {/* Instructor Stats */}
+      {/* Divider */}
+      <div style={{
+        height: 1,
+        backgroundColor: 'var(--color-gray-800)',
+        margin: '0 calc(var(--space-md) * -1)',
+        marginBottom: 'var(--space-md)',
+      }} />
+
+      {/* Mindset & Lifestyle Section */}
+      <SectionHeader
+        title="Mindset & Lifestyle"
+        count={mindsetCategories.length}
+        subtitle="Training psychology and lifestyle"
+      />
+
+      {/* Mindset Categories Grid */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: 'var(--space-md)',
+        marginBottom: 'var(--space-xl)',
+      }}>
+        {mindsetCategories.map(category => (
+          <button
+            key={category.id}
+            onClick={() => onSelectMindsetCategory(category.id)}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              padding: 'var(--space-lg)',
+              backgroundColor: 'var(--color-gray-900)',
+              border: '1px solid var(--color-gray-800)',
+              borderRadius: 'var(--radius-lg)',
+              cursor: 'pointer',
+              textAlign: 'left',
+              transition: 'border-color 0.15s ease, transform 0.1s ease',
+              minHeight: 120,
+            }}
+          >
+            <span style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'var(--text-base)',
+              fontWeight: 600,
+              color: 'var(--color-white)',
+              lineHeight: 1.2,
+            }}>
+              {category.name}
+            </span>
+            <span style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              color: 'var(--color-gray-500)',
+              lineHeight: 1.4,
+              marginTop: 'var(--space-sm)',
+            }}>
+              {category.description}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {/* Divider */}
+      <div style={{
+        height: 1,
+        backgroundColor: 'var(--color-gray-800)',
+        margin: '0 calc(var(--space-md) * -1)',
+        marginBottom: 'var(--space-md)',
+      }} />
+
+      {/* Instructor Stats - Clean card */}
+      <SectionHeader
+        title="Featured Instructors"
+        accentColor="var(--color-gray-400)"
+      />
       <div style={{
         padding: 'var(--space-lg)',
         backgroundColor: 'var(--color-gray-900)',
-        borderRadius: 'var(--radius-md)',
+        borderRadius: 'var(--radius-lg)',
+        marginBottom: 'var(--space-xl)',
       }}>
-        <h3 style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--text-xs)',
-          fontWeight: 700,
-          textTransform: 'uppercase',
-          letterSpacing: 'var(--tracking-widest)',
-          color: 'var(--color-gray-400)',
-          marginBottom: 'var(--space-md)',
-        }}>
-          Featured Instructors
-        </h3>
         <div style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: 'var(--space-sm)',
+          gap: 'var(--space-md)',
         }}>
           {Object.entries(videoStats.byInstructor)
             .sort(([, a], [, b]) => b - a)
@@ -882,82 +1161,28 @@ function BrowseView({
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
+                  paddingBottom: 'var(--space-md)',
+                  borderBottom: '1px solid var(--color-gray-800)',
                 }}
               >
                 <span style={{
                   color: 'var(--color-white)',
-                  fontSize: 'var(--text-sm)',
+                  fontSize: 'var(--text-base)',
+                  fontWeight: 500,
                 }}>
                   {instructor}
                 </span>
                 <span style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: 'var(--text-xs)',
-                  color: 'var(--color-gray-500)',
+                  fontSize: 'var(--text-sm)',
+                  fontWeight: 600,
+                  color: 'var(--color-gray-400)',
                 }}>
-                  {count} videos
+                  {count}
                 </span>
               </div>
             ))}
         </div>
-      </div>
-
-      {/* Section Header: Mindset & Lifestyle */}
-      <h3 style={{
-        fontFamily: 'var(--font-mono)',
-        fontSize: 'var(--text-xs)',
-        fontWeight: 700,
-        textTransform: 'uppercase',
-        letterSpacing: 'var(--tracking-widest)',
-        color: 'var(--color-gold)',
-        margin: 0,
-        marginTop: 'var(--space-md)',
-      }}>
-        Mindset & Lifestyle
-      </h3>
-
-      {/* Mindset Categories Grid */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
-        gap: 'var(--space-sm)',
-      }}>
-        {mindsetCategories.map(category => (
-          <button
-            key={category.id}
-            onClick={() => onSelectMindsetCategory(category.id)}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              padding: 'var(--space-lg) var(--space-md)',
-              backgroundColor: 'var(--color-gray-900)',
-              border: '1px solid var(--color-gray-800)',
-              borderRadius: 'var(--radius-md)',
-              cursor: 'pointer',
-              textAlign: 'left',
-              transition: 'border-color 0.15s ease',
-              minHeight: 100,
-            }}
-          >
-            <span style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'var(--text-base)',
-              fontWeight: 600,
-              color: 'var(--color-white)',
-              marginBottom: 'var(--space-xs)',
-            }}>
-              {category.name}
-            </span>
-            <span style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'var(--text-xs)',
-              color: 'var(--color-gray-500)',
-              lineHeight: 1.4,
-            }}>
-              {category.description}
-            </span>
-          </button>
-        ))}
       </div>
     </div>
   );
