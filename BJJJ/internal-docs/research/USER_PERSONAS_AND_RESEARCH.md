@@ -73,253 +73,98 @@ Internal research indicates users have approximately **90 seconds of willingness
 
 ## Primary Personas
 
-### Persona 1: "The Dedicated Hobbyist" — Marcus
+> **Canonical Source:** `/internal-docs/personas/PERSONA_PROFILES.md`
+>
+> The detailed persona profiles—including full demographics, psychology, journal voice samples, and TypeScript mock data—live in the personas folder. This section provides a summary for quick reference.
 
-**The largest segment. The backbone of any gym.**
+### Persona Overview
 
-#### Demographics
-- **Age:** 34
-- **Gender:** Male
-- **Occupation:** Software engineer
-- **Income:** $95K/year
-- **Location:** Suburban, 15-min drive to gym
-- **Belt:** Blue belt, 1 stripe (18 months at blue)
-- **Training frequency:** 3x/week (targets 4x)
-- **Training time:** Evening classes (6:30-8pm)
-
-#### Psychographics
-- **Primary motivation:** Personal growth, fitness, stress relief
-- **Secondary motivation:** Building a skill he can do into old age
-- **BJJ goal:** "Make it to purple belt. Maybe brown someday."
-- **Life context:** Married, one kid (age 4), demanding job, limited free time
-- **Personality:** Analytical, introverted, methodical learner
-- **Self-identity:** "BJJ is my thing. It's the one space that's just for me."
-
-#### Training Behavior
-- Arrives 10 min early to warm up
-- Takes mental notes during technique instruction
-- Struggles to remember details after sparring
-- Gets frustrated when he "knows" a technique but can't execute it
-- Has a paper notebook at home but rarely uses it (too much friction)
-- Watches YouTube techniques but can't remember which ones
-
-#### The Post-Training Moment
-> After class, Marcus is drenched. His gi is soaked, his fingers are sore from gripping, and his brain feels like static. He checks his phone—his wife texted asking when he'll be home. He replies "20 min" and shoves his phone in his bag. He showers, drives home, kisses his kid goodnight, and collapses on the couch.
-
-> Tomorrow, he'll vaguely remember "we did something from half guard" but not the key detail his coach showed.
-
-#### Frustrations
-- "I feel like I'm not progressing, but I don't know if that's true."
-- "Coach promoted the other blue belt before me. I don't know what I'm missing."
-- "I have a notebook but who has energy to write after class?"
-- "I see the same white belts catching me. That's embarrassing."
-
-#### Goals
-- Track what he's learning so he can see progress
-- Know what to work on next
-- Feel confident he's not wasting time
-- Have something to show his wife when she asks "how was class?"
-
-#### Technology Profile
-- **Phone:** iPhone 14
-- **App comfort:** High (uses Notion, fitness trackers)
-- **Voice comfort:** Medium (uses Siri sometimes)
-- **Logging tolerance:** 60-90 seconds MAX post-training
-
-#### Design Implications for Marcus
-- Voice-first logging (he can talk while walking to car)
-- Quick visual confirmation (card shows what was captured)
-- Progress visualization he can show his wife
-- Offline support (gym may have poor signal)
-- Session history he can review during lunch breaks
+| Key | Belt | Archetype | Name | Age | Occupation | Status | Risk |
+|-----|------|-----------|------|-----|------------|--------|------|
+| `white-excelling` | White (3 stripes) | The Natural | Jake Thompson | 26 | Software Developer | Thriving | Low |
+| `white-at-risk` | White (2 stripes) | The Late Starter | David Morrison | 52 | IT Manager | Struggling | High |
+| `blue-excelling` | Blue (2 stripes) | The Dedicated Hobbyist | Marcus Chen | 34 | Marketing Manager | Progressing | Moderate |
+| `blue-at-risk` | Blue (1 stripe) | The Fading Fire | Ryan Torres | 31 | Financial Analyst | Declining | Critical |
+| `purple-average` | Purple (1 stripe) | The Grinder | Sofia Rodriguez | 28 | Physical Therapist | Stable | Low |
+| `brown-average` | Brown (2 stripes) | The Veteran | Elena Kim | 38 | CrossFit Gym Owner | Refined | Very Low |
 
 ---
 
-### Persona 2: "The Grinder" — Sofia
+### Persona 1: Jake Thompson — "The Natural" (White, Excelling)
 
-**The competitor who treats BJJ like a second career.**
+**The athletic newcomer who's progressing fast.**
 
-#### Demographics
-- **Age:** 27
-- **Gender:** Female
-- **Occupation:** Personal trainer / gig work
-- **Income:** $45K/year
-- **Location:** Urban, lives 5 min from gym
-- **Belt:** Purple belt, 2 stripes (4.5 years total)
-- **Training frequency:** 5-6x/week + open mats
-- **Training time:** Morning (7am) and sometimes evening
-
-#### Psychographics
-- **Primary motivation:** Win competitions, prove herself
-- **Secondary motivation:** Potentially coach or open a gym someday
-- **BJJ goal:** "Black belt by 30. IBJJF Worlds podium."
-- **Life context:** Single, flexible schedule built around training
-- **Personality:** Intense, goal-driven, self-critical, resilient
-- **Self-identity:** "I'm a competitor first. Everything else comes second."
-
-#### Training Behavior
-- Trains twice a day when preparing for competition
-- Keeps a physical notebook with match analysis
-- Films her sparring rounds and reviews them
-- Tracks weight meticulously for competition
-- Gets frustrated when training partners don't match her intensity
-- Has tried 3 different BJJ apps, abandoned all of them
-
-#### The Post-Training Moment
-> Sofia finishes morning class and immediately starts thinking about what went wrong. She got swept twice from her best position. That's a problem. She grabs her phone, voice-memos herself "need to work on butterfly hook clear from HQ" while changing out of her rashguard. She has 45 minutes before her next client. There's no time for a complicated app.
-
-#### Frustrations
-- "The apps I've tried are made for hobbyists. I need real data."
-- "I can't see patterns in my sparring. I know I'm getting caught but I don't know how often."
-- "Coach says I'm ready for worlds but I don't feel ready. I need proof."
-- "Other apps make me feel like I'm playing a game. This isn't a game."
-
-#### Goals
-- Identify patterns in her losses (who catches her, with what, from where)
-- Track competition results and opponent analysis
-- See her submission success rate over time
-- Know exactly how many hours until she meets time-in-grade requirements
-- Have data to review with her coach
-
-#### Technology Profile
-- **Phone:** Android (Google Pixel)
-- **App comfort:** Very high (uses Strava, MyFitnessPal, spreadsheets)
-- **Voice comfort:** High (voice memos are core workflow)
-- **Logging tolerance:** Up to 2-3 minutes if data is valuable
-
-#### Design Implications for Sofia
-- Detailed sparring tracking (opponent, outcome, submission type)
-- Competition mode with match logging
-- Exportable data for coach review
-- Pattern analysis ("You've been caught in triangles 4x this month")
-- No gamification—she'll find it insulting
-- Time-in-grade tracking against IBJJF requirements
+- **Age:** 26 | **Location:** Austin, TX | **Belt:** White (3 stripes, 8 months)
+- **Background:** College wrestler (D3), recreational CrossFit
+- **Training:** 3-4x/week, 87 sessions logged, 12-session current streak
+- **Mindset:** Confident but humble. Wrestling gives him an advantage but he knows he needs to develop guard.
+- **Risk:** Low — highly engaged, strong consistency
+- **Design needs:** Competition tracking, guard development focus, pacing reminders
 
 ---
 
-### Persona 3: "The Late Starter" — David
+### Persona 2: David Morrison — "The Late Starter" (White, At-Risk)
 
-**The 40+ crowd discovering BJJ as a midlife pursuit.**
+**The 50+ crowd discovering BJJ as a midlife pursuit.**
 
-#### Demographics
-- **Age:** 47
-- **Gender:** Male
-- **Occupation:** Financial analyst
-- **Income:** $140K/year
-- **Location:** Suburban, 25-min drive to gym
-- **Belt:** White belt, 3 stripes (14 months training)
-- **Training frequency:** 2x/week (body can't handle more)
-- **Training time:** Lunchtime classes when possible, Saturday open mat
-
-#### Psychographics
-- **Primary motivation:** Fitness, mental challenge, something "real"
-- **Secondary motivation:** Bonding with teenage son (who also trains)
-- **BJJ goal:** "Survive to blue belt without major injury."
-- **Life context:** Married 20 years, two kids (16, 13), high-stress career, bad back
-- **Personality:** Patient, analytical, self-deprecating humor about being "old"
-- **Self-identity:** "I'm not trying to be a world champion. I just want to not suck."
-
-#### Training Behavior
-- Arrives early, stretches extensively
-- Asks a lot of questions during technique
-- Avoids rolling with 20-year-old wrestlers
-- Taps early and often (protecting joints)
-- Gets injured more often than younger practitioners
-- Extremely consistent—hasn't missed a week in 10 months
-
-#### The Post-Training Moment
-> David sits in his car for five minutes before driving. His shoulder is flaring up again. He mentally catalogs: the sweep from half guard was interesting, but he can barely remember the grips. He's tired. Not "young person tired"—the kind of tired that makes him wonder if he should even be doing this. He drives home, ices his shoulder, and answers work emails.
-
-> The techniques are already fading. By tomorrow, they'll be gone.
-
-#### Frustrations
-- "I learn so slowly compared to the younger guys."
-- "I keep forgetting what we drilled last week."
-- "I don't know if I'm getting better or just getting older."
-- "My coach doesn't have time to track my progress individually."
-- "The injury recovery time is getting longer."
-
-#### Goals
-- Capture techniques before he forgets them
-- Track injuries and recovery (so he knows when to push vs. rest)
-- See that his consistency IS progress, even if it's slow
-- Have reference material to review before class
-- Not feel embarrassed about being the "old guy"
-
-#### Technology Profile
-- **Phone:** iPhone 13 Pro
-- **App comfort:** Medium (uses what's necessary)
-- **Voice comfort:** Low-medium (feels self-conscious talking to phone)
-- **Logging tolerance:** 60 seconds MAX—he's tired and his body hurts
-
-#### Design Implications for David
-- Large touch targets (his fingers are swollen post-training)
-- Injury tracking and return-to-mat guidance
-- Consistency celebration ("You've trained 40 weeks straight")
-- Technique review mode (before class, refresh what was drilled)
-- Simple, calm interface—no overwhelming data
-- Comparisons to HIMSELF, not others
+- **Age:** 52 | **Location:** Portland, OR | **Belt:** White (2 stripes, 18 months)
+- **Background:** IT Manager, recreational basketball in 30s
+- **Training:** 1-2x/week (declining), 47 sessions logged, 9 days since last session
+- **Mindset:** Loves BJJ but constantly questions if he belongs. Recovery takes 2-3 days.
+- **Risk:** High — multiple risk factors (age, injuries, declining attendance)
+- **Design needs:** Large touch targets, injury tracking, consistency celebration, self-comparisons only
 
 ---
 
-### Persona 4: "The Skeptic" — Rachel
+### Persona 3: Marcus Chen — "The Dedicated Hobbyist" (Blue, Excelling)
 
-**The data-resistant user who needs to be won over.**
+**The backbone of any gym. Balancing life with training.**
 
-#### Demographics
-- **Age:** 31
-- **Gender:** Female
-- **Occupation:** Nurse (ER)
-- **Income:** $72K/year
-- **Location:** Urban, gym near hospital
-- **Belt:** Blue belt, 3 stripes (3 years training)
-- **Training frequency:** 3x/week
-- **Training time:** After night shifts, variable
+- **Age:** 34 | **Location:** Denver, CO | **Belt:** Blue (2 stripes, 10 months at blue)
+- **Background:** Marketing Manager, high school soccer
+- **Training:** 2-3x/week, 247 sessions logged, consistent despite family
+- **Mindset:** Working through "Blue Belt Blues" with healthy perspective. Married with one kid.
+- **Risk:** Moderate — normal blue belt plateau, coping well
+- **Design needs:** Progress visualization for spouse, technique development focus, work-life balance support
 
-#### Psychographics
-- **Primary motivation:** Self-defense, fitness, community
-- **Secondary motivation:** Mental health—BJJ is her therapy
-- **BJJ goal:** "Just keep training. Purple belt would be cool."
-- **Life context:** Single, high-stress job, irregular schedule
-- **Personality:** Skeptical, private, values authenticity
-- **Self-identity:** "I train because I love it, not to track anything."
+---
 
-#### Training Behavior
-- Shows up, trains hard, leaves
-- Doesn't overthink techniques—trusts her body to learn
-- Has never kept a journal or tracked anything
-- Gets annoyed by people who are "too serious" about BJJ
-- Loyal to her gym community
-- Suspicious of apps collecting her data
+### Persona 4: Ryan Torres — "The Fading Fire" (Blue, At-Risk)
 
-#### The Post-Training Moment
-> Rachel peels off her rashguard, throws it in her bag, and chats with training partners for 10 minutes. She's not thinking about logging anything—she's thinking about the beer she's going to have and whether she should text that guy back. BJJ is her escape FROM tracking and metrics, not another thing to optimize.
+**The blue belt who's slipping away.**
 
-#### Frustrations
-- "I don't need an app to tell me I'm training."
-- "Why would I want to track my losses? That's depressing."
-- "Tech companies just want my data to sell it."
-- "I'm not a 'biohacker.' I just like choking people."
+- **Age:** 31 | **Location:** Chicago, IL | **Belt:** Blue (1 stripe, 14 months at blue)
+- **Background:** Financial Analyst, college rugby
+- **Training:** Was 4x/week, now 1x or less. 21 days since last session.
+- **Mindset:** Started with fire, now questioning everything. Work stress + recent breakup.
+- **Risk:** Critical — 75% training frequency drop, imposter syndrome, isolation
+- **Design needs:** Gentle re-engagement, no shame messaging, one-tap check-in option
 
-#### Goals (she doesn't know she has these)
-- See that she's actually progressing (she secretly doubts it)
-- Have something to show when people ask "what's BJJ?"
-- Know when she's close to purple belt
-- Feel connected to her training even when work chaos hits
+---
 
-#### Technology Profile
-- **Phone:** iPhone 12
-- **App comfort:** Low (uses apps begrudgingly)
-- **Voice comfort:** Very low (feels weird talking to phone)
-- **Logging tolerance:** 30 seconds OR zero—no middle ground
+### Persona 5: Sofia Rodriguez — "The Grinder" (Purple, Average)
 
-#### Design Implications for Rachel
-- Value proposition must be immediately clear ("see your progress")
-- Privacy-first messaging (data is hers, not ours)
-- Zero-friction option (check-in only, no details required)
-- Community features (see training partner stats, gym leaderboard)
-- No pushy notifications—she'll delete the app
-- Gentle onboarding—don't ask for everything upfront
+**The systems thinker building a complete game.**
+
+- **Age:** 28 | **Location:** San Diego, CA | **Belt:** Purple (1 stripe, 8 months at purple)
+- **Background:** Physical Therapist, high school volleyball
+- **Training:** 4-5x/week, 612 sessions logged, 15-session current streak
+- **Mindset:** No longer chasing techniques—building interconnected systems. Starting to teach.
+- **Risk:** Low — deeply committed, past the danger zone
+- **Design needs:** Pattern analysis, teaching session tracking, competition prep mode
+
+---
+
+### Persona 6: Elena Kim — "The Veteran" (Brown, Average)
+
+**The teacher and mentor preparing for black belt.**
+
+- **Age:** 38 | **Location:** Seattle, WA | **Belt:** Brown (2 stripes, 18 months at brown)
+- **Background:** CrossFit gym owner, college judo
+- **Training:** 3-4x/week, 1,247 sessions logged, significant teaching time
+- **Mindset:** In refinement mode. Thinking about legacy and what black belt means.
+- **Risk:** Very Low — trains for life, found sustainable rhythm
+- **Design needs:** Teaching session tracking, recovery/body awareness, mentee progress visibility
 
 ---
 

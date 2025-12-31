@@ -331,12 +331,18 @@ When editing saved sessions:
 
 ## User Personas
 
-### Primary Personas
+> **Canonical Source:** `/internal-docs/personas/PERSONA_PROFILES.md`
 
-1. **Marcus (The Dedicated Hobbyist)** - 35yo, Blue belt 2 stripes, 2-3x/week
-2. **Sofia (The Grinder)** - 28yo, Purple belt, 5-6x/week, competitor
-3. **David (The Late Starter)** - 52yo, White belt 3 stripes, 2x/week
-4. **Rachel (The Skeptic)** - 31yo, Blue belt 1 stripe, inconsistent
+### Primary Personas (6 Test Profiles)
+
+| Key | Name | Belt | Age | Archetype | Status |
+|-----|------|------|-----|-----------|--------|
+| `white-excelling` | Jake Thompson | White (3 str) | 26 | The Natural | Thriving |
+| `white-at-risk` | David Morrison | White (2 str) | 52 | The Late Starter | Struggling |
+| `blue-excelling` | Marcus Chen | Blue (2 str) | 34 | The Dedicated Hobbyist | Progressing |
+| `blue-at-risk` | Ryan Torres | Blue (1 str) | 31 | The Fading Fire | Declining |
+| `purple-average` | Sofia Rodriguez | Purple (1 str) | 28 | The Grinder | Stable |
+| `brown-average` | Elena Kim | Brown (2 str) | 38 | The Veteran | Refined |
 
 ### The Exhausted User State (Post-Training)
 Every user becomes this persona after training:

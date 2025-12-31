@@ -48,6 +48,8 @@ export interface Persona extends Omit<MockProfile, 'key'> {
   archetype: string;
   riskLevel: RiskLevel;
   status: PersonaStatus;
+  // Profile avatar image
+  avatarUrl?: string;
 }
 
 // ===========================================
@@ -75,6 +77,7 @@ const whiteExcellingPersona: Persona = {
   archetype: 'The Natural',
   riskLevel: 'low',
   status: 'thriving',
+  avatarUrl: '/avatars/jake-thompson.jpg',
   // Override context profile for Jake
   contextProfile: {
     ...existingWhite.contextProfile,
@@ -128,6 +131,7 @@ const whiteAtRiskPersona: Persona = {
   archetype: 'The Late Starter',
   riskLevel: 'high',
   status: 'struggling',
+  avatarUrl: '/avatars/david-morrison.jpg',
 };
 
 /**
@@ -143,6 +147,7 @@ const blueExcellingPersona: Persona = {
   archetype: 'The Dedicated Hobbyist',
   riskLevel: 'moderate',
   status: 'progressing',
+  avatarUrl: '/avatars/marcus-chen.jpg',
 };
 
 /**
@@ -160,6 +165,7 @@ const blueAtRiskPersona: Persona = {
   archetype: 'The Fading Fire',
   riskLevel: 'critical',
   status: 'declining',
+  avatarUrl: '/avatars/ryan-torres.jpg',
   // Override user data
   user: {
     ...existingBlue.user,
@@ -228,6 +234,7 @@ const purpleAveragePersona: Persona = {
   archetype: 'The Grinder',
   riskLevel: 'low',
   status: 'stable',
+  avatarUrl: '/avatars/sofia-rodriguez.jpg',
 };
 
 /**
@@ -243,6 +250,7 @@ const brownAveragePersona: Persona = {
   archetype: 'The Veteran',
   riskLevel: 'very-low',
   status: 'refined',
+  avatarUrl: '/avatars/elena-kim.jpg',
 };
 
 // ===========================================

@@ -14,7 +14,7 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { getProfileByBelt, type MockProfile, type ActiveProfileKey } from '../data/mock-profiles';
-import { getPersonaByKey, type Persona, type PersonaKey } from '../data/personas';
+import { getPersonaByKey, personas, type Persona, type PersonaKey } from '../data/personas';
 
 // Combined profile type for demo mode (supports both legacy and new persona system)
 type DemoProfile = MockProfile | Persona;
@@ -234,6 +234,7 @@ interface UserProfileContextType {
   // Persona mode - enhanced demo with 6 personas
   activePersona: Persona | null;
   switchPersona: (personaKey: PersonaKey) => void;
+  cycleToNextPersona: () => void;
 }
 
 const UserProfileContext = createContext<UserProfileContextType | null>(null);
@@ -455,6 +456,20 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(DEMO_MODE_KEY, JSON.stringify({ enabled: true, persona: personaKey }));
   };
 
+  // Cycle to the next persona in the list (wraps around)
+  const cycleToNextPersona = () => {
+    // Find current index, default to -1 if not in demo mode
+    const currentIndex = activePersona
+      ? personas.findIndex(p => p.key === activePersona.key)
+      : -1;
+
+    // Get next index, wrapping around to 0 if at end
+    const nextIndex = (currentIndex + 1) % personas.length;
+    const nextPersona = personas[nextIndex];
+
+    switchPersona(nextPersona.key);
+  };
+
   // Exit demo mode and return to normal profile
   const exitDemoMode = () => {
     localStorage.removeItem(DEMO_MODE_KEY);
@@ -498,6 +513,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
         exitDemoMode,
         activePersona,
         switchPersona,
+        cycleToNextPersona,
       }}
     >
       {children}

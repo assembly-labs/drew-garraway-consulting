@@ -16,6 +16,18 @@ interface HeaderProps {
   onProfileClick?: () => void;
 }
 
+// Map belt level to border color (black belt uses red per design system)
+const getBeltBorderColor = (belt: string): string => {
+  const colors: Record<string, string> = {
+    white: 'var(--color-belt-white)',
+    blue: 'var(--color-belt-blue)',
+    purple: 'var(--color-belt-purple)',
+    brown: 'var(--color-belt-brown)',
+    black: 'var(--color-negative)', // Red for black belt (stands out on dark UI)
+  };
+  return colors[belt] || 'var(--color-gray-600)';
+};
+
 export function Header({
   title = 'ALLY',
   showBackButton = false,
@@ -24,8 +36,11 @@ export function Header({
   userInitial,
   onProfileClick,
 }: HeaderProps) {
-  // Get demo mode status for indicator
-  const { isDemoMode, activeDemoProfile } = useUserProfile();
+  // Get profile and demo mode status
+  const { profile, isDemoMode, activeDemoProfile, cycleToNextPersona } = useUserProfile();
+
+  // Get belt color for avatar border
+  const beltBorderColor = getBeltBorderColor(profile.belt);
   return (
     <header style={{
       backgroundColor: 'var(--color-primary)',
@@ -73,22 +88,31 @@ export function Header({
         }}>
           {title}
         </h1>
-        {/* Demo Mode Badge */}
-        {isDemoMode && activeDemoProfile && (
-          <div style={{
-            backgroundColor: 'var(--color-accent)',
-            color: 'var(--color-primary)',
+        {/* Demo Mode Badge - Tap to cycle through personas */}
+        <button
+          onClick={cycleToNextPersona}
+          style={{
+            backgroundColor: isDemoMode ? 'var(--color-accent)' : 'var(--color-gray-700)',
+            color: isDemoMode ? 'var(--color-primary)' : 'var(--color-gray-300)',
             fontSize: 'var(--text-xs)',
             fontWeight: 700,
-            padding: '2px 8px',
+            padding: '6px 12px',
             borderRadius: 'var(--radius-sm)',
             textTransform: 'uppercase',
             letterSpacing: '0.05em',
             marginLeft: 'var(--space-sm)',
-          }}>
-            Demo: {activeDemoProfile.key.charAt(0).toUpperCase() + activeDemoProfile.key.slice(1)}
-          </div>
-        )}
+            border: 'none',
+            cursor: 'pointer',
+            minHeight: '32px',
+            transition: 'background-color 0.15s ease',
+          }}
+          aria-label={isDemoMode ? `Current persona: ${activeDemoProfile?.key}. Tap to cycle to next persona.` : 'Enter demo mode'}
+        >
+          {isDemoMode && activeDemoProfile
+            ? `Demo: ${activeDemoProfile.key.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}`
+            : 'Demo'
+          }
+        </button>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
         {rightAction && (
@@ -102,7 +126,7 @@ export function Header({
               height: 44, /* Minimum touch target */
               borderRadius: 'var(--radius-full)',
               backgroundColor: 'var(--color-gray-800)',
-              border: '2px solid var(--color-gray-600)',
+              border: `3px solid ${beltBorderColor}`,
               color: 'var(--color-white)',
               fontSize: 'var(--text-base)',
               fontWeight: 700,
@@ -111,10 +135,25 @@ export function Header({
               alignItems: 'center',
               justifyContent: 'center',
               textTransform: 'uppercase',
+              overflow: 'hidden',
+              padding: 0,
             }}
             aria-label="Open profile"
           >
-            {userInitial}
+            {/* Show avatar image if available (from Persona), otherwise show initial */}
+            {activeDemoProfile && 'avatarUrl' in activeDemoProfile && activeDemoProfile.avatarUrl ? (
+              <img
+                src={activeDemoProfile.avatarUrl}
+                alt="Profile"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+              />
+            ) : (
+              userInitial
+            )}
           </button>
         )}
       </div>
