@@ -79,7 +79,7 @@ function BodySilhouette({
         }}
       />
 
-      {/* Body silhouette image - tinted gold to match design system */}
+      {/* Body silhouette image with gold accent glow */}
       <img
         src="/human-body-silo.png"
         alt="Body silhouette"
@@ -88,7 +88,7 @@ function BodySilhouette({
           width: '100%',
           height: '100%',
           objectFit: 'contain',
-          filter: 'brightness(0) invert(1) sepia(0.5) saturate(3) hue-rotate(10deg) brightness(0.85) drop-shadow(0 0 8px rgba(245, 166, 35, 0.3))',
+          filter: 'drop-shadow(0 0 10px rgba(245, 166, 35, 0.2)) drop-shadow(0 0 3px rgba(245, 166, 35, 0.35)) brightness(1.05)',
           zIndex: 1,
         }}
       />
