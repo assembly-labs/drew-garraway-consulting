@@ -20,21 +20,173 @@ interface BodyHeatMapProps {
   };
 }
 
-// Heat zone positions (center points for radial gradients)
+// Heat zone positions (center points for targeting overlays)
 // Mapped to 160x300 viewport matching the silhouette proportions
-// Increased sizes for more visible heat zones
 const HEAT_ZONES = {
-  // Neck/throat area - chokes target here
-  neck: { cx: 80, cy: 62, rx: 24, ry: 18 },
+  // Neck/throat area - chokes target here (moved higher)
+  neck: { cx: 80, cy: 48, rx: 20, ry: 14 },
   // Left arm - elbow/forearm area for armbars, kimuras
-  leftArm: { cx: 38, cy: 138, rx: 28, ry: 50 },
+  leftArm: { cx: 38, cy: 138, rx: 24, ry: 45 },
   // Right arm - mirror of left
-  rightArm: { cx: 122, cy: 138, rx: 28, ry: 50 },
+  rightArm: { cx: 122, cy: 138, rx: 24, ry: 45 },
   // Left leg - knee/ankle area for leg locks
-  leftLeg: { cx: 68, cy: 240, rx: 22, ry: 55 },
+  leftLeg: { cx: 68, cy: 240, rx: 20, ry: 50 },
   // Right leg - mirror of left
-  rightLeg: { cx: 92, cy: 240, rx: 22, ry: 55 },
+  rightLeg: { cx: 92, cy: 240, rx: 20, ry: 50 },
 };
+
+// Targeting bracket component - Terminator HUD style with dynamic weight
+function TargetingBracket({
+  cx,
+  cy,
+  size,
+  color,
+  intensity,
+}: {
+  cx: number;
+  cy: number;
+  size: number;
+  color: string;
+  intensity: number;
+}) {
+  // Scale visual weight based on intensity
+  const scaledSize = size * (0.85 + intensity * 0.3);
+  const strokeWeight = 1.5 + intensity * 1.5; // 1.5px to 3px based on intensity
+  const bracketLength = scaledSize * 0.4;
+  const offset = scaledSize / 2;
+  const opacity = 0.5 + intensity * 0.5;
+  const glowOpacity = 0.2 + intensity * 0.6;
+
+  // High intensity threshold for extra elements
+  const isHighIntensity = intensity > 0.4;
+  const isCritical = intensity > 0.6;
+
+  return (
+    <g>
+      {/* Outer pulse ring - only for high intensity */}
+      {isHighIntensity && (
+        <circle
+          cx={cx}
+          cy={cy}
+          r={scaledSize * 0.75}
+          fill="none"
+          stroke={color}
+          strokeWidth="0.5"
+          opacity={glowOpacity * 0.4}
+          strokeDasharray="2 4"
+        />
+      )}
+
+      {/* Outer glow ring */}
+      <circle
+        cx={cx}
+        cy={cy}
+        r={scaledSize * 0.6}
+        fill="none"
+        stroke={color}
+        strokeWidth={strokeWeight * 0.5}
+        opacity={glowOpacity * 0.5}
+        filter="url(#targetGlow)"
+      />
+
+      {/* Corner brackets - top left */}
+      <path
+        d={`M ${cx - offset} ${cy - offset + bracketLength} L ${cx - offset} ${cy - offset} L ${cx - offset + bracketLength} ${cy - offset}`}
+        fill="none"
+        stroke={color}
+        strokeWidth={strokeWeight}
+        strokeLinecap="square"
+        opacity={opacity}
+      />
+
+      {/* Corner brackets - top right */}
+      <path
+        d={`M ${cx + offset - bracketLength} ${cy - offset} L ${cx + offset} ${cy - offset} L ${cx + offset} ${cy - offset + bracketLength}`}
+        fill="none"
+        stroke={color}
+        strokeWidth={strokeWeight}
+        strokeLinecap="square"
+        opacity={opacity}
+      />
+
+      {/* Corner brackets - bottom left */}
+      <path
+        d={`M ${cx - offset} ${cy + offset - bracketLength} L ${cx - offset} ${cy + offset} L ${cx - offset + bracketLength} ${cy + offset}`}
+        fill="none"
+        stroke={color}
+        strokeWidth={strokeWeight}
+        strokeLinecap="square"
+        opacity={opacity}
+      />
+
+      {/* Corner brackets - bottom right */}
+      <path
+        d={`M ${cx + offset - bracketLength} ${cy + offset} L ${cx + offset} ${cy + offset} L ${cx + offset} ${cy + offset - bracketLength}`}
+        fill="none"
+        stroke={color}
+        strokeWidth={strokeWeight}
+        strokeLinecap="square"
+        opacity={opacity}
+      />
+
+      {/* Edge tick marks for critical zones */}
+      {isCritical && (
+        <>
+          <line x1={cx} y1={cy - offset - 4} x2={cx} y2={cy - offset - 8} stroke={color} strokeWidth="1.5" opacity={opacity} />
+          <line x1={cx} y1={cy + offset + 4} x2={cx} y2={cy + offset + 8} stroke={color} strokeWidth="1.5" opacity={opacity} />
+          <line x1={cx - offset - 4} y1={cy} x2={cx - offset - 8} y2={cy} stroke={color} strokeWidth="1.5" opacity={opacity} />
+          <line x1={cx + offset + 4} y1={cy} x2={cx + offset + 8} y2={cy} stroke={color} strokeWidth="1.5" opacity={opacity} />
+        </>
+      )}
+
+      {/* Center crosshair - horizontal */}
+      <line
+        x1={cx - scaledSize * 0.18}
+        y1={cy}
+        x2={cx + scaledSize * 0.18}
+        y2={cy}
+        stroke={color}
+        strokeWidth={strokeWeight * 0.6}
+        opacity={opacity * 0.9}
+      />
+
+      {/* Center crosshair - vertical */}
+      <line
+        x1={cx}
+        y1={cy - scaledSize * 0.18}
+        x2={cx}
+        y2={cy + scaledSize * 0.18}
+        stroke={color}
+        strokeWidth={strokeWeight * 0.6}
+        opacity={opacity * 0.9}
+      />
+
+      {/* Inner targeting ring - dashed */}
+      <circle
+        cx={cx}
+        cy={cy}
+        r={scaledSize * 0.28}
+        fill={color}
+        fillOpacity={intensity * 0.2}
+        stroke={color}
+        strokeWidth={strokeWeight * 0.5}
+        strokeDasharray={isHighIntensity ? "3 2" : "2 3"}
+        opacity={opacity}
+      />
+
+      {/* Center dot for high intensity */}
+      {isHighIntensity && (
+        <circle
+          cx={cx}
+          cy={cy}
+          r={2 + intensity * 2}
+          fill={color}
+          opacity={opacity}
+        />
+      )}
+    </g>
+  );
+}
 
 // Human body silhouette with PNG image and radial gradient heat overlays
 function BodySilhouette({
@@ -55,8 +207,7 @@ function BodySilhouette({
   };
 
   // Get heat color based on mode (green for given, red for received)
-  const getHeatRgb = () => isGiven ? '34, 197, 94' : '239, 68, 68';
-  const heatRgb = getHeatRgb();
+  const heatColor = isGiven ? '#22c55e' : '#ef4444';
 
   return (
     <div
@@ -66,7 +217,7 @@ function BodySilhouette({
         height: 300,
       }}
     >
-      {/* Gradient background to make black silhouette visible against dark bg */}
+      {/* Gold accent glow background */}
       <div
         style={{
           position: 'absolute',
@@ -75,13 +226,13 @@ function BodySilhouette({
           transform: 'translate(-50%, -50%)',
           width: '140px',
           height: '280px',
-          background: 'radial-gradient(ellipse at center, rgba(60, 60, 70, 0.8) 0%, rgba(40, 40, 50, 0.5) 40%, transparent 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(245, 166, 35, 0.15) 0%, rgba(245, 166, 35, 0.08) 40%, transparent 70%)',
           borderRadius: '50%',
           pointerEvents: 'none',
         }}
       />
 
-      {/* Body silhouette image with enhanced glow */}
+      {/* Body silhouette image with gold accent glow */}
       <img
         src="/human-body-silo.png"
         alt="Body silhouette"
@@ -90,12 +241,12 @@ function BodySilhouette({
           width: '100%',
           height: '100%',
           objectFit: 'contain',
-          filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 3px rgba(255, 255, 255, 0.5)) brightness(1.1)',
+          filter: 'drop-shadow(0 0 12px rgba(245, 166, 35, 0.25)) drop-shadow(0 0 4px rgba(245, 166, 35, 0.4)) brightness(1.05)',
           zIndex: 1,
         }}
       />
 
-      {/* Heat map overlay with radial gradients - increased opacity for visibility */}
+      {/* Tactical targeting overlay - Terminator HUD style */}
       <svg
         width="160"
         height="300"
@@ -105,95 +256,72 @@ function BodySilhouette({
           top: 0,
           left: 0,
           pointerEvents: 'none',
-          mixBlendMode: 'screen',
           zIndex: 2,
         }}
       >
         <defs>
-          {/* Radial gradient for neck - boosted opacity */}
-          <radialGradient id="neckHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(1, neckIntensity * 1.5 + 0.3)} />
-            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(0.8, neckIntensity * 0.9 + 0.2)} />
-            <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
-          </radialGradient>
-
-          {/* Radial gradient for arms - boosted opacity */}
-          <radialGradient id="armsHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(1, armsIntensity * 1.5 + 0.3)} />
-            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(0.8, armsIntensity * 0.9 + 0.2)} />
-            <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
-          </radialGradient>
-
-          {/* Radial gradient for legs - boosted opacity */}
-          <radialGradient id="legsHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(1, legsIntensity * 1.5 + 0.3)} />
-            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(0.8, legsIntensity * 0.9 + 0.2)} />
-            <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
-          </radialGradient>
-
-          {/* Blur filter for softer glow - reduced blur for sharper visibility */}
-          <filter id="heatBlur" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
+          {/* Glow filter for targeting elements */}
+          <filter id="targetGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
           </filter>
         </defs>
 
-        {/* Neck heat zone */}
+        {/* Neck targeting bracket */}
         {neckIntensity > 0 && (
-          <ellipse
+          <TargetingBracket
             cx={HEAT_ZONES.neck.cx}
             cy={HEAT_ZONES.neck.cy}
-            rx={HEAT_ZONES.neck.rx}
-            ry={HEAT_ZONES.neck.ry}
-            fill="url(#neckHeat)"
-            filter="url(#heatBlur)"
+            size={36}
+            color={heatColor}
+            intensity={neckIntensity}
           />
         )}
 
-        {/* Left arm heat zone */}
+        {/* Left arm targeting bracket */}
         {armsIntensity > 0 && (
-          <ellipse
+          <TargetingBracket
             cx={HEAT_ZONES.leftArm.cx}
             cy={HEAT_ZONES.leftArm.cy}
-            rx={HEAT_ZONES.leftArm.rx}
-            ry={HEAT_ZONES.leftArm.ry}
-            fill="url(#armsHeat)"
-            filter="url(#heatBlur)"
+            size={44}
+            color={heatColor}
+            intensity={armsIntensity}
           />
         )}
 
-        {/* Right arm heat zone */}
+        {/* Right arm targeting bracket */}
         {armsIntensity > 0 && (
-          <ellipse
+          <TargetingBracket
             cx={HEAT_ZONES.rightArm.cx}
             cy={HEAT_ZONES.rightArm.cy}
-            rx={HEAT_ZONES.rightArm.rx}
-            ry={HEAT_ZONES.rightArm.ry}
-            fill="url(#armsHeat)"
-            filter="url(#heatBlur)"
+            size={44}
+            color={heatColor}
+            intensity={armsIntensity}
           />
         )}
 
-        {/* Left leg heat zone */}
+        {/* Left leg targeting bracket */}
         {legsIntensity > 0 && (
-          <ellipse
+          <TargetingBracket
             cx={HEAT_ZONES.leftLeg.cx}
             cy={HEAT_ZONES.leftLeg.cy}
-            rx={HEAT_ZONES.leftLeg.rx}
-            ry={HEAT_ZONES.leftLeg.ry}
-            fill="url(#legsHeat)"
-            filter="url(#heatBlur)"
+            size={40}
+            color={heatColor}
+            intensity={legsIntensity}
           />
         )}
 
-        {/* Right leg heat zone */}
+        {/* Right leg targeting bracket */}
         {legsIntensity > 0 && (
-          <ellipse
+          <TargetingBracket
             cx={HEAT_ZONES.rightLeg.cx}
             cy={HEAT_ZONES.rightLeg.cy}
-            rx={HEAT_ZONES.rightLeg.rx}
-            ry={HEAT_ZONES.rightLeg.ry}
-            fill="url(#legsHeat)"
-            filter="url(#heatBlur)"
+            size={40}
+            color={heatColor}
+            intensity={legsIntensity}
           />
         )}
       </svg>
