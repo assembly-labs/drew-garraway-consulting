@@ -514,7 +514,7 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
       </div>{/* End Card 1: The Basics */}
 
       {/* ============================================ */}
-      {/* CARD 2: WHAT YOU WORKED ON */}
+      {/* CARD 2: WHAT YOU WORKED ON (Multi-Select) */}
       {/* ============================================ */}
       <div style={{
         backgroundColor: 'var(--color-gray-900)',
@@ -533,21 +533,95 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
           marginBottom: 'var(--space-md)',
         }}>
           What You Worked On
+          {sessionData.techniquesDrilled.length > 0 && (
+            <span style={{
+              marginLeft: 'var(--space-sm)',
+              color: 'var(--color-gold)',
+            }}>
+              ({sessionData.techniquesDrilled.length})
+            </span>
+          )}
         </div>
 
+        {/* Selected Techniques (shown as removable chips) */}
+        {sessionData.techniquesDrilled.length > 0 && (
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 'var(--space-xs)',
+            marginBottom: 'var(--space-md)',
+          }}>
+            {sessionData.techniquesDrilled.map(technique => (
+              <div
+                key={technique}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  backgroundColor: 'var(--color-gold-dim)',
+                  border: '1px solid var(--color-gold)',
+                  borderRadius: 'var(--radius-full)',
+                  overflow: 'hidden',
+                }}
+              >
+                <span style={{
+                  padding: 'var(--space-xs) var(--space-sm)',
+                  color: 'var(--color-gold)',
+                  fontSize: 'var(--text-sm)',
+                  fontWeight: 500,
+                }}>
+                  {technique}
+                </span>
+                <button
+                  onClick={() => {
+                    const updated = sessionData.techniquesDrilled.filter(t => t !== technique);
+                    updateField('techniquesDrilled', updated);
+                    // Update lessonTopic to reflect remaining or clear
+                    if (updated.length > 0) {
+                      updateField('lessonTopic', updated.join(', '));
+                    } else {
+                      updateField('lessonTopic', null);
+                    }
+                  }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '0 var(--space-sm)',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    borderLeft: '1px solid var(--color-gold)',
+                    color: 'var(--color-gray-400)',
+                    cursor: 'pointer',
+                    minHeight: '28px',
+                  }}
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Custom Input */}
         <input
           type="text"
-          value={sessionData.lessonTopic || ''}
+          value={sessionData.lessonTopic && !sessionData.techniquesDrilled.includes(sessionData.lessonTopic) ? sessionData.lessonTopic : ''}
           onChange={e => {
             updateField('lessonTopic', e.target.value);
-            // Also add to techniques drilled as first item
-            if (e.target.value.trim()) {
-              updateField('techniquesDrilled', [e.target.value.trim()]);
-            } else {
-              updateField('techniquesDrilled', []);
+          }}
+          onKeyDown={e => {
+            if (e.key === 'Enter' && sessionData.lessonTopic?.trim()) {
+              const newTechnique = sessionData.lessonTopic.trim();
+              if (!sessionData.techniquesDrilled.includes(newTechnique)) {
+                updateField('techniquesDrilled', [...sessionData.techniquesDrilled, newTechnique]);
+              }
+              updateField('lessonTopic', null);
             }
           }}
-          placeholder={getPrompt()}
+          placeholder={sessionData.techniquesDrilled.length > 0 ? 'Add another...' : getPrompt()}
           style={{
             width: '100%',
             padding: 'var(--space-md)',
@@ -560,7 +634,7 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
           }}
         />
 
-        {/* Recent Topics Chips */}
+        {/* Quick Add Chips (Multi-Select Toggle) */}
         <div>
           <div style={{
             fontFamily: 'var(--font-mono)',
@@ -571,41 +645,56 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
             color: 'var(--color-gray-500)',
             marginBottom: 'var(--space-xs)',
           }}>
-            Quick add
+            Tap to add
           </div>
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
             gap: 'var(--space-xs)',
           }}>
-            {RECENT_TOPICS.map(topic => (
-              <button
-                key={topic}
-                onClick={() => {
-                  updateField('lessonTopic', topic);
-                  updateField('techniquesDrilled', [topic]);
-                }}
-                style={{
-                  padding: 'var(--space-xs) var(--space-sm)',
-                  backgroundColor: sessionData.lessonTopic === topic
-                    ? 'var(--color-gold-dim)'
-                    : 'var(--color-gray-800)',
-                  border: sessionData.lessonTopic === topic
-                    ? '1px solid var(--color-gold)'
-                    : '1px solid var(--color-gray-700)',
-                  borderRadius: 'var(--radius-full)',
-                  color: sessionData.lessonTopic === topic
-                    ? 'var(--color-gold)'
-                    : 'var(--color-gray-400)',
-                  fontSize: 'var(--text-xs)',
-                  fontWeight: 500,
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                }}
-              >
-                {topic}
-              </button>
-            ))}
+            {RECENT_TOPICS.map(topic => {
+              const isSelected = sessionData.techniquesDrilled.includes(topic);
+              return (
+                <button
+                  key={topic}
+                  onClick={() => {
+                    if (isSelected) {
+                      // Remove
+                      const updated = sessionData.techniquesDrilled.filter(t => t !== topic);
+                      updateField('techniquesDrilled', updated);
+                      updateField('lessonTopic', updated.length > 0 ? updated.join(', ') : null);
+                    } else {
+                      // Add
+                      const updated = [...sessionData.techniquesDrilled, topic];
+                      updateField('techniquesDrilled', updated);
+                      updateField('lessonTopic', updated.join(', '));
+                    }
+                  }}
+                  style={{
+                    padding: 'var(--space-xs) var(--space-sm)',
+                    backgroundColor: isSelected
+                      ? 'var(--color-gold-dim)'
+                      : 'var(--color-gray-800)',
+                    border: isSelected
+                      ? '1px solid var(--color-gold)'
+                      : '1px solid var(--color-gray-700)',
+                    borderRadius: 'var(--radius-full)',
+                    color: isSelected
+                      ? 'var(--color-gold)'
+                      : 'var(--color-gray-400)',
+                    fontSize: 'var(--text-xs)',
+                    fontWeight: isSelected ? 600 : 500,
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  {isSelected && (
+                    <span style={{ marginRight: '4px' }}>✓</span>
+                  )}
+                  {topic}
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>{/* End Card 2: What You Worked On */}

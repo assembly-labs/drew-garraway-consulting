@@ -8,14 +8,14 @@
  * 1. User's go-to submissions (learned from history) shown first
  * 2. Body region buttons (Neck, Arms, Legs)
  * 3. Expand to see common submissions for that region
- * 4. "Other" option for new/uncommon moves
- * 5. Voice input option for quick entry
+ * 4. Tap to add/increment count (shows "×2" badge)
+ * 5. X to remove entirely
  *
  * Design: Large touch targets (56px+), minimal cognitive load
  */
 
 import { useState } from 'react';
-import type { BodyRegion } from '../../types/database';
+import type { BodyRegion, SubmissionCount } from '../../types/database';
 
 // ===========================================
 // SUBMISSION DATA BY BODY REGION
@@ -89,8 +89,8 @@ void _COMMON_SUBMISSIONS; // Suppress unused warning
 
 interface SubmissionPickerProps {
   label: string; // "Subs given" or "Submitted by"
-  selectedSubmissions: string[];
-  onSubmissionsChange: (submissions: string[]) => void;
+  selectedSubmissions: SubmissionCount[];
+  onSubmissionsChange: (submissions: SubmissionCount[]) => void;
   userHistory?: string[]; // User's historical submissions for "Your Go-Tos"
   onVoiceInput?: () => void; // Callback to trigger voice input
 }
@@ -110,39 +110,69 @@ export function SubmissionPicker({
   const [showOtherInput, setShowOtherInput] = useState(false);
   const [otherValue, setOtherValue] = useState('');
 
-  // Get user's go-to submissions (top 4 from history)
+  // Helper: get names of selected submissions
+  const selectedNames = selectedSubmissions.map(s => s.name);
+
+  // Get user's go-to submissions (top 4 from history, not already selected)
   const userGoTos = userHistory
     .slice(0, 4)
-    .filter(sub => !selectedSubmissions.includes(sub));
+    .filter(sub => !selectedNames.includes(sub));
 
-  // Toggle submission selection
-  const toggleSubmission = (submission: string) => {
-    if (selectedSubmissions.includes(submission)) {
-      onSubmissionsChange(selectedSubmissions.filter(s => s !== submission));
+  // Add or increment a submission (tap-to-increment pattern)
+  const addOrIncrement = (submissionName: string) => {
+    const existing = selectedSubmissions.find(s => s.name === submissionName);
+    if (existing) {
+      // Increment count
+      onSubmissionsChange(
+        selectedSubmissions.map(s =>
+          s.name === submissionName ? { ...s, count: s.count + 1 } : s
+        )
+      );
     } else {
-      onSubmissionsChange([...selectedSubmissions, submission]);
+      // Add new with count 1
+      onSubmissionsChange([...selectedSubmissions, { name: submissionName, count: 1 }]);
     }
   };
 
+  // Decrement submission count (for future long-press behavior)
+  const decrementOrRemove = (submissionName: string) => {
+    const existing = selectedSubmissions.find(s => s.name === submissionName);
+    if (existing && existing.count > 1) {
+      onSubmissionsChange(
+        selectedSubmissions.map(s =>
+          s.name === submissionName ? { ...s, count: s.count - 1 } : s
+        )
+      );
+    } else {
+      onSubmissionsChange(selectedSubmissions.filter(s => s.name !== submissionName));
+    }
+  };
+  void decrementOrRemove; // Reserved for long-press gesture
+
   // Add custom submission
   const addOtherSubmission = () => {
-    if (otherValue.trim() && !selectedSubmissions.includes(otherValue.trim())) {
-      onSubmissionsChange([...selectedSubmissions, otherValue.trim()]);
+    const trimmed = otherValue.trim();
+    if (trimmed && !selectedNames.includes(trimmed)) {
+      onSubmissionsChange([...selectedSubmissions, { name: trimmed, count: 1 }]);
       setOtherValue('');
       setShowOtherInput(false);
     }
   };
 
-  // Remove a selected submission
-  const removeSubmission = (submission: string) => {
-    onSubmissionsChange(selectedSubmissions.filter(s => s !== submission));
+  // Remove a selected submission entirely
+  const removeSubmission = (submissionName: string) => {
+    onSubmissionsChange(selectedSubmissions.filter(s => s.name !== submissionName));
   };
 
-  // Get submissions for expanded region
+  // Get submissions for expanded region (excluding already selected)
   const getRegionSubmissions = (region: BodyRegion) => {
-    return SUBMISSIONS_BY_REGION[region].filter(
-      sub => !selectedSubmissions.includes(sub.name)
-    );
+    return SUBMISSIONS_BY_REGION[region];
+  };
+
+  // Get count for a submission (0 if not selected)
+  const getCount = (submissionName: string): number => {
+    const found = selectedSubmissions.find(s => s.name === submissionName);
+    return found ? found.count : 0;
   };
 
   return (
@@ -165,7 +195,7 @@ export function SubmissionPicker({
         {label}
       </div>
 
-      {/* Selected Submissions */}
+      {/* Selected Submissions with Count Badges */}
       {selectedSubmissions.length > 0 && (
         <div
           style={{
@@ -175,36 +205,82 @@ export function SubmissionPicker({
             marginBottom: 'var(--space-md)',
           }}
         >
-          {selectedSubmissions.map(sub => (
-            <button
-              key={sub}
-              onClick={() => removeSubmission(sub)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 'var(--space-xs)',
-                padding: 'var(--space-xs) var(--space-sm)',
-                backgroundColor: label.toLowerCase().includes('given')
-                  ? 'rgba(34, 197, 94, 0.2)'
-                  : 'rgba(239, 68, 68, 0.2)',
-                border: `1px solid ${
-                  label.toLowerCase().includes('given')
-                    ? 'var(--color-positive)'
-                    : 'var(--color-negative)'
-                }`,
-                borderRadius: 'var(--radius-full)',
-                color: 'var(--color-white)',
-                fontSize: 'var(--text-sm)',
-                cursor: 'pointer',
-              }}
-            >
-              {sub}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-          ))}
+          {selectedSubmissions.map(sub => {
+            const isGiven = label.toLowerCase().includes('given');
+            const accentColor = isGiven ? 'var(--color-positive)' : 'var(--color-negative)';
+            const bgColor = isGiven ? 'rgba(34, 197, 94, 0.2)' : 'rgba(239, 68, 68, 0.2)';
+
+            return (
+              <div
+                key={sub.name}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  backgroundColor: bgColor,
+                  border: `1px solid ${accentColor}`,
+                  borderRadius: 'var(--radius-full)',
+                  overflow: 'hidden',
+                }}
+              >
+                {/* Tap to increment */}
+                <button
+                  onClick={() => addOrIncrement(sub.name)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 'var(--space-xs)',
+                    padding: 'var(--space-xs) var(--space-sm)',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    color: 'var(--color-white)',
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: 500,
+                    cursor: 'pointer',
+                  }}
+                >
+                  {sub.name}
+                  {sub.count > 1 && (
+                    <span
+                      style={{
+                        backgroundColor: accentColor,
+                        color: 'var(--color-black)',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        padding: '2px 6px',
+                        borderRadius: 'var(--radius-full)',
+                        minWidth: '20px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      ×{sub.count}
+                    </span>
+                  )}
+                </button>
+                {/* X to remove */}
+                <button
+                  onClick={() => removeSubmission(sub.name)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '0 var(--space-sm)',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    borderLeft: `1px solid ${accentColor}`,
+                    color: 'var(--color-gray-400)',
+                    cursor: 'pointer',
+                    height: '100%',
+                    minHeight: '32px',
+                  }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              </div>
+            );
+          })}
         </div>
       )}
 
@@ -226,7 +302,7 @@ export function SubmissionPicker({
             {userGoTos.map(sub => (
               <button
                 key={sub}
-                onClick={() => toggleSubmission(sub)}
+                onClick={() => addOrIncrement(sub)}
                 style={{
                   padding: 'var(--space-sm) var(--space-md)',
                   backgroundColor: 'var(--color-gray-800)',
@@ -307,26 +383,58 @@ export function SubmissionPicker({
             {expandedRegion === 'legs' && 'Leg Attacks'}
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-xs)' }}>
-            {getRegionSubmissions(expandedRegion).map(sub => (
-              <button
-                key={sub.name}
-                onClick={() => toggleSubmission(sub.name)}
-                style={{
-                  padding: 'var(--space-sm) var(--space-md)',
-                  backgroundColor: sub.common
-                    ? 'var(--color-gray-800)'
-                    : 'var(--color-gray-850)',
-                  border: '1px solid var(--color-gray-700)',
-                  borderRadius: 'var(--radius-md)',
-                  color: sub.common ? 'var(--color-white)' : 'var(--color-gray-400)',
-                  fontSize: 'var(--text-sm)',
-                  cursor: 'pointer',
-                  minHeight: '44px',
-                }}
-              >
-                {sub.name}
-              </button>
-            ))}
+            {getRegionSubmissions(expandedRegion).map(sub => {
+              const count = getCount(sub.name);
+              const isSelected = count > 0;
+              const isGiven = label.toLowerCase().includes('given');
+              const accentColor = isGiven ? 'var(--color-positive)' : 'var(--color-negative)';
+
+              return (
+                <button
+                  key={sub.name}
+                  onClick={() => addOrIncrement(sub.name)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 'var(--space-xs)',
+                    padding: 'var(--space-sm) var(--space-md)',
+                    backgroundColor: isSelected
+                      ? (isGiven ? 'rgba(34, 197, 94, 0.15)' : 'rgba(239, 68, 68, 0.15)')
+                      : (sub.common ? 'var(--color-gray-800)' : 'var(--color-gray-850)'),
+                    border: isSelected
+                      ? `1px solid ${accentColor}`
+                      : '1px solid var(--color-gray-700)',
+                    borderRadius: 'var(--radius-md)',
+                    color: isSelected
+                      ? 'var(--color-white)'
+                      : (sub.common ? 'var(--color-white)' : 'var(--color-gray-400)'),
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: isSelected ? 600 : 400,
+                    cursor: 'pointer',
+                    minHeight: '44px',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  {sub.name}
+                  {count > 0 && (
+                    <span
+                      style={{
+                        backgroundColor: accentColor,
+                        color: 'var(--color-black)',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        padding: '2px 6px',
+                        borderRadius: 'var(--radius-full)',
+                        minWidth: '20px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      {count > 1 ? `×${count}` : '+'}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}

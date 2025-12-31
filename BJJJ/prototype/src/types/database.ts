@@ -276,8 +276,8 @@ export interface SessionData {
   // Sparring section (gated by didSpar)
   didSpar: boolean;
   sparringRounds: number | null;
-  submissionsGiven: string[]; // Technique names only (no partner context)
-  submissionsReceived: string[]; // Technique names only
+  submissionsGiven: SubmissionCount[]; // Technique with count (e.g., 3 armbars)
+  submissionsReceived: SubmissionCount[]; // Technique with count
 
   // Qualitative (parsed from voice/text)
   workedWell: string[];
@@ -342,6 +342,15 @@ export interface ProgressStats {
 
 export type SubmissionOutcome = 'given' | 'received';
 export type BodyRegion = 'neck' | 'arms' | 'legs';
+
+/**
+ * Submission with count - for tracking multiple of the same submission in a session
+ * e.g., { name: 'Armbar', count: 3 } means 3 armbars in one session
+ */
+export interface SubmissionCount {
+  name: string;
+  count: number;
+}
 
 export interface SubmissionRecord {
   id: string; // UUID
