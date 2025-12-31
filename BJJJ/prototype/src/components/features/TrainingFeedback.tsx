@@ -12,9 +12,6 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useBeltPersonalization } from '../../hooks';
-import { useUserProfile } from '../../context/UserProfileContext';
-import { StyleFingerprint } from '../ui';
-import type { StyleFingerprintData } from '../ui';
 
 // ===========================================
 // TYPES
@@ -97,29 +94,6 @@ Keep showing up. The consistency you're building now compounds over time. Your c
   },
 ];
 
-// Default mock style fingerprint (blue belt profile)
-const mockStyleFingerprint: StyleFingerprintData = {
-  dimensions: [
-    { id: 'guard', label: 'Guard Game', shortLabel: 'Guard', value: 65, description: 'Bottom position offense - sweeps and submissions from guard' },
-    { id: 'passing', label: 'Passing', shortLabel: 'Pass', value: 52, description: "Ability to navigate and pass opponent's guard" },
-    { id: 'top', label: 'Top Control', shortLabel: 'Top', value: 58, description: 'Dominance from mount, side control, and knee on belly' },
-    { id: 'back', label: 'Back Attacks', shortLabel: 'Back', value: 72, description: 'Taking the back and finishing from back control' },
-    { id: 'takedowns', label: 'Takedowns', shortLabel: 'TD', value: 35, description: 'Standing game - wrestling, judo, and guard pulls' },
-    { id: 'leglocks', label: 'Leg Locks', shortLabel: 'Legs', value: 48, description: 'Modern leg attack game - heel hooks, knee bars, ankle locks' },
-  ],
-  archetype: {
-    name: 'BACK HUNTER',
-    description: 'Constantly seeking the back. Once there, the finish is inevitable.',
-    icon: 'back',
-    famousExamples: ['Marcelo Garcia', 'Rubens Charles (Cobrinha)'],
-  },
-  dominantStyle: 'Back Attacks',
-  weakestArea: 'Takedowns',
-  balanceScore: 55,
-};
-
-// Minimum sessions required before showing style profile
-const STYLE_PROFILE_MIN_SESSIONS = 20;
 
 // ===========================================
 // TYPEWRITER HOOK
@@ -179,26 +153,10 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [currentInsight, setCurrentInsight] = useState<TrainingInsight | null>(null);
   const [insightHistory, setInsightHistory] = useState<TrainingInsight[]>([]);
-  const [activeTab, setActiveTab] = useState<'feedback' | 'style'>('feedback');
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Belt personalization for AI feedback tone
   const { chatbot, profile: beltProfile } = useBeltPersonalization();
-
-  // Get demo mode data
-  const { isDemoMode, activeDemoProfile, profile } = useUserProfile();
-
-  // Get style fingerprint data (from demo profile or mock)
-  const styleFingerprint = isDemoMode && activeDemoProfile
-    ? activeDemoProfile.styleFingerprint
-    : mockStyleFingerprint;
-
-  // Get session count (from demo profile or user profile)
-  const sessionCount = isDemoMode && activeDemoProfile
-    ? activeDemoProfile.trainingStats.totalSessions
-    : profile.sessionCount;
-
-  const hasEnoughDataForStyle = sessionCount >= STYLE_PROFILE_MIN_SESSIONS;
 
   const { displayedText, isComplete, isStarted, skip } = useTypewriter(
     currentInsight?.content || '',
@@ -256,7 +214,7 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
             color: 'var(--color-white)',
             margin: 0,
           }}>
-            Training Feedback
+            AI Feedback
           </h2>
           <p style={{
             fontFamily: 'var(--font-mono)',
@@ -265,7 +223,7 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
             margin: 0,
             marginTop: '2px',
           }}>
-            {chatbot.toneProfile.primary} feedback on your training
+            {chatbot.toneProfile.primary} insights on your training
           </p>
         </div>
         {onClose && (
@@ -287,46 +245,6 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
         )}
       </div>
 
-      {/* Tab Selector */}
-      <div style={{
-        display: 'flex',
-        borderBottom: '1px solid var(--color-gray-800)',
-        padding: '0 var(--space-lg)',
-      }}>
-        <button
-          onClick={() => setActiveTab('feedback')}
-          style={{
-            padding: 'var(--space-md) var(--space-lg)',
-            background: 'none',
-            border: 'none',
-            borderBottom: activeTab === 'feedback' ? '2px solid var(--color-gold)' : '2px solid transparent',
-            color: activeTab === 'feedback' ? 'var(--color-white)' : 'var(--color-gray-500)',
-            fontWeight: activeTab === 'feedback' ? 600 : 500,
-            fontSize: 'var(--text-sm)',
-            cursor: 'pointer',
-            transition: 'all 0.2s ease',
-          }}
-        >
-          AI Feedback
-        </button>
-        <button
-          onClick={() => setActiveTab('style')}
-          style={{
-            padding: 'var(--space-md) var(--space-lg)',
-            background: 'none',
-            border: 'none',
-            borderBottom: activeTab === 'style' ? '2px solid var(--color-gold)' : '2px solid transparent',
-            color: activeTab === 'style' ? 'var(--color-white)' : 'var(--color-gray-500)',
-            fontWeight: activeTab === 'style' ? 600 : 500,
-            fontSize: 'var(--text-sm)',
-            cursor: 'pointer',
-            transition: 'all 0.2s ease',
-          }}
-        >
-          Style Profile
-        </button>
-      </div>
-
       {/* Content */}
       <div
         ref={contentRef}
@@ -336,189 +254,8 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
           padding: 'var(--space-lg)',
         }}
       >
-        {/* ============================================
-            STYLE PROFILE TAB
-            ============================================ */}
-        {activeTab === 'style' && (
-          <div>
-            {/* Not enough data state */}
-            {!hasEnoughDataForStyle && (
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minHeight: '300px',
-                textAlign: 'center',
-              }}>
-                <div style={{
-                  width: 80,
-                  height: 80,
-                  borderRadius: '50%',
-                  backgroundColor: 'var(--color-gray-900)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: 'var(--space-lg)',
-                }}>
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-600)" strokeWidth="1.5">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 6v6l4 2" />
-                  </svg>
-                </div>
-
-                <h3 style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
-                  color: 'var(--color-white)',
-                  margin: 0,
-                  marginBottom: 'var(--space-sm)',
-                }}>
-                  Building Your Style Profile
-                </h3>
-
-                <p style={{
-                  color: 'var(--color-gray-400)',
-                  fontSize: 'var(--text-sm)',
-                  maxWidth: '280px',
-                  lineHeight: 1.5,
-                  margin: 0,
-                  marginBottom: 'var(--space-lg)',
-                }}>
-                  Log {STYLE_PROFILE_MIN_SESSIONS - sessionCount} more sessions to unlock your style fingerprint. We need enough data to identify patterns.
-                </p>
-
-                {/* Progress bar */}
-                <div style={{
-                  width: '200px',
-                  height: '8px',
-                  backgroundColor: 'var(--color-gray-800)',
-                  borderRadius: '4px',
-                  overflow: 'hidden',
-                }}>
-                  <div style={{
-                    width: `${Math.min((sessionCount / STYLE_PROFILE_MIN_SESSIONS) * 100, 100)}%`,
-                    height: '100%',
-                    backgroundColor: 'var(--color-gold)',
-                    borderRadius: '4px',
-                    transition: 'width 0.3s ease',
-                  }} />
-                </div>
-                <div style={{
-                  marginTop: 'var(--space-sm)',
-                  fontSize: 'var(--text-xs)',
-                  color: 'var(--color-gray-500)',
-                }}>
-                  {sessionCount} / {STYLE_PROFILE_MIN_SESSIONS} sessions
-                </div>
-              </div>
-            )}
-
-            {/* Style Profile with data */}
-            {hasEnoughDataForStyle && (
-              <div>
-                {/* Data confidence warning */}
-                <div style={{
-                  padding: 'var(--space-md)',
-                  marginBottom: 'var(--space-lg)',
-                  backgroundColor: 'rgba(251, 191, 36, 0.1)',
-                  borderRadius: 'var(--radius-md)',
-                  borderLeft: '3px solid var(--color-warning)',
-                }}>
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: 'var(--space-sm)',
-                  }}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-warning)" strokeWidth="2" style={{ flexShrink: 0, marginTop: '2px' }}>
-                      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-                      <line x1="12" y1="9" x2="12" y2="13" />
-                      <line x1="12" y1="17" x2="12.01" y2="17" />
-                    </svg>
-                    <div>
-                      <div style={{
-                        fontSize: 'var(--text-xs)',
-                        fontWeight: 600,
-                        color: 'var(--color-warning)',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em',
-                        marginBottom: '4px',
-                      }}>
-                        Experimental Feature
-                      </div>
-                      <p style={{
-                        fontSize: 'var(--text-xs)',
-                        color: 'var(--color-gray-400)',
-                        margin: 0,
-                        lineHeight: 1.4,
-                      }}>
-                        This analysis is derived from submission types you've logged. We don't yet track which position you finished from, so some dimensions (Guard, Passing, Top Control) are approximations. Back Attacks and Leg Locks are more reliable.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Style Fingerprint Radar Chart */}
-                <div style={{
-                  backgroundColor: 'var(--color-gray-900)',
-                  borderRadius: 'var(--radius-lg)',
-                  padding: 'var(--space-lg)',
-                }}>
-                  <StyleFingerprint
-                    data={styleFingerprint}
-                    size={280}
-                    showLabels={true}
-                    showArchetype={true}
-                    animated={true}
-                  />
-                </div>
-
-                {/* Session count context */}
-                <div style={{
-                  marginTop: 'var(--space-lg)',
-                  textAlign: 'center',
-                  fontSize: 'var(--text-xs)',
-                  color: 'var(--color-gray-500)',
-                }}>
-                  Based on {sessionCount} logged sessions
-                </div>
-
-                {/* Future improvement hint */}
-                <div style={{
-                  marginTop: 'var(--space-xl)',
-                  padding: 'var(--space-md)',
-                  backgroundColor: 'var(--color-gray-900)',
-                  borderRadius: 'var(--radius-md)',
-                }}>
-                  <div style={{
-                    fontSize: 'var(--text-xs)',
-                    color: 'var(--color-gray-500)',
-                    marginBottom: 'var(--space-sm)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.1em',
-                  }}>
-                    Improve accuracy
-                  </div>
-                  <p style={{
-                    fontSize: 'var(--text-sm)',
-                    color: 'var(--color-gray-400)',
-                    margin: 0,
-                    lineHeight: 1.5,
-                  }}>
-                    When logging sessions, include notes about what position you finished from (e.g., "armbar from mount" or "triangle from closed guard"). This helps us build a more accurate picture of your game.
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* ============================================
-            AI FEEDBACK TAB
-            ============================================ */}
         {/* Empty State - Request Insight */}
-        {activeTab === 'feedback' && !currentInsight && !isGenerating && (
+        {!currentInsight && !isGenerating && (
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -665,7 +402,7 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
         )}
 
         {/* Generating State */}
-        {activeTab === 'feedback' && isGenerating && (
+        {isGenerating && (
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -700,7 +437,7 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
         )}
 
         {/* Insight Display */}
-        {activeTab === 'feedback' && currentInsight && !isGenerating && (
+        {currentInsight && !isGenerating && (
           <div>
             {/* Title */}
             <h3 style={{

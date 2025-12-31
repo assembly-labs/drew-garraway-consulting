@@ -28,7 +28,9 @@ import {
   BreakthroughList,
   TournamentReadinessCard,
   BodyHeatMap,
+  StyleFingerprint,
 } from '../ui';
+import type { StyleFingerprintData } from '../ui';
 import { AttackProfile } from './AttackProfile';
 import {
   JourneyTimeline,
@@ -62,6 +64,30 @@ import type { TournamentReadinessInput } from '../../utils/tournament-readiness'
 interface DashboardProps {
   onNavigate: (view: string) => void;
 }
+
+// Minimum sessions required before showing style profile
+const STYLE_PROFILE_MIN_SESSIONS = 20;
+
+// Default mock style fingerprint (for non-demo mode)
+const mockStyleFingerprint: StyleFingerprintData = {
+  dimensions: [
+    { id: 'guard', label: 'Guard Game', shortLabel: 'Guard', value: 65, description: 'Bottom position offense - sweeps and submissions from guard' },
+    { id: 'passing', label: 'Passing', shortLabel: 'Pass', value: 52, description: "Ability to navigate and pass opponent's guard" },
+    { id: 'top', label: 'Top Control', shortLabel: 'Top', value: 58, description: 'Dominance from mount, side control, and knee on belly' },
+    { id: 'back', label: 'Back Attacks', shortLabel: 'Back', value: 72, description: 'Taking the back and finishing from back control' },
+    { id: 'takedowns', label: 'Takedowns', shortLabel: 'TD', value: 35, description: 'Standing game - wrestling, judo, and guard pulls' },
+    { id: 'leglocks', label: 'Leg Locks', shortLabel: 'Legs', value: 48, description: 'Modern leg attack game - heel hooks, knee bars, ankle locks' },
+  ],
+  archetype: {
+    name: 'BACK HUNTER',
+    description: 'Constantly seeking the back. Once there, the finish is inevitable.',
+    icon: 'back',
+    famousExamples: ['Marcelo Garcia', 'Rubens Charles (Cobrinha)'],
+  },
+  dominantStyle: 'Back Attacks',
+  weakestArea: 'Takedowns',
+  balanceScore: 55,
+};
 
 // Hero metric configuration by primary metric type
 interface HeroMetric {
@@ -164,6 +190,14 @@ export function Dashboard(_props: DashboardProps) {
 
   // Belt personalization for adaptive dashboard behavior
   const { profile, dashboard, isInRiskWindow } = useBeltPersonalization();
+
+  // Get style fingerprint data (from demo profile or mock)
+  const styleFingerprint = isDemoMode && activeDemoProfile
+    ? activeDemoProfile.styleFingerprint
+    : mockStyleFingerprint;
+
+  // Check if we have enough sessions to show style profile
+  const hasEnoughDataForStyle = stats.totalSessions >= STYLE_PROFILE_MIN_SESSIONS;
 
   // ===========================================
   // BREAKTHROUGH DETECTION
@@ -649,6 +683,151 @@ export function Dashboard(_props: DashboardProps) {
           </div>
         </section>
       )}
+
+      {/* ============================================
+          STYLE PROFILE - Hero radar chart visualization
+          ============================================ */}
+      <section
+        style={{
+          padding: '32px 24px',
+          borderTop: '1px solid var(--color-gray-800)',
+          position: 'relative',
+        }}
+      >
+        {/* Section header */}
+        <div style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--text-xs)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.25em',
+          color: hasEnoughDataForStyle ? 'var(--color-gold)' : 'var(--color-gray-600)',
+          marginBottom: 'var(--space-lg)',
+          textAlign: 'center',
+        }}>
+          Style Profile
+        </div>
+
+        {/* Has enough data - show full style fingerprint */}
+        {hasEnoughDataForStyle && (
+          <div style={{
+            backgroundColor: 'var(--color-gray-900)',
+            borderRadius: 'var(--radius-lg)',
+            padding: 'var(--space-lg)',
+          }}>
+            <StyleFingerprint
+              data={styleFingerprint}
+              size={280}
+              showLabels={true}
+              showArchetype={true}
+              animated={true}
+            />
+          </div>
+        )}
+
+        {/* Not enough data - greyed out state */}
+        {!hasEnoughDataForStyle && (
+          <div style={{
+            position: 'relative',
+          }}>
+            {/* Greyed out radar chart */}
+            <div style={{
+              opacity: 0.25,
+              filter: 'grayscale(100%)',
+              pointerEvents: 'none',
+            }}>
+              <div style={{
+                backgroundColor: 'var(--color-gray-900)',
+                borderRadius: 'var(--radius-lg)',
+                padding: 'var(--space-lg)',
+              }}>
+                <StyleFingerprint
+                  data={styleFingerprint}
+                  size={280}
+                  showLabels={true}
+                  showArchetype={false}
+                  animated={false}
+                />
+              </div>
+            </div>
+
+            {/* Overlay message */}
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              padding: 'var(--space-xl)',
+            }}>
+              {/* Lock icon */}
+              <div style={{
+                width: 64,
+                height: 64,
+                borderRadius: '50%',
+                backgroundColor: 'var(--color-gray-800)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: 'var(--space-md)',
+                border: '2px solid var(--color-gray-700)',
+              }}>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-500)" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>
+              </div>
+
+              <div style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: 'var(--text-lg)',
+                fontWeight: 700,
+                color: 'var(--color-gray-400)',
+                marginBottom: 'var(--space-xs)',
+              }}>
+                Awaiting More Data
+              </div>
+
+              <p style={{
+                color: 'var(--color-gray-500)',
+                fontSize: 'var(--text-sm)',
+                maxWidth: '240px',
+                lineHeight: 1.5,
+                margin: 0,
+                marginBottom: 'var(--space-md)',
+              }}>
+                Log {STYLE_PROFILE_MIN_SESSIONS - stats.totalSessions} more sessions to unlock your style fingerprint.
+              </p>
+
+              {/* Progress bar */}
+              <div style={{
+                width: '180px',
+                height: '6px',
+                backgroundColor: 'var(--color-gray-800)',
+                borderRadius: '3px',
+                overflow: 'hidden',
+              }}>
+                <div style={{
+                  width: `${Math.min((stats.totalSessions / STYLE_PROFILE_MIN_SESSIONS) * 100, 100)}%`,
+                  height: '100%',
+                  backgroundColor: 'var(--color-gray-600)',
+                  borderRadius: '3px',
+                  transition: 'width 0.3s ease',
+                }} />
+              </div>
+              <div style={{
+                marginTop: 'var(--space-xs)',
+                fontSize: 'var(--text-xs)',
+                color: 'var(--color-gray-600)',
+                fontFamily: 'var(--font-mono)',
+              }}>
+                {stats.totalSessions} / {STYLE_PROFILE_MIN_SESSIONS} sessions
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
 
       {/* ============================================
           BODY HEAT MAP - Attack Profile with HUD targeting
