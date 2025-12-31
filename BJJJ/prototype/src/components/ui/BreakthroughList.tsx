@@ -153,33 +153,14 @@ function BreakthroughItem({ breakthrough }: { breakthrough: Breakthrough }) {
 
       {/* Content */}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          gap: '12px',
-          marginBottom: '4px',
+        <h4 style={{
+          fontSize: 'var(--text-base)',
+          fontWeight: 600,
+          color: 'var(--color-white)',
+          margin: '0 0 4px 0',
         }}>
-          <h4 style={{
-            fontSize: 'var(--text-base)',
-            fontWeight: 600,
-            color: 'var(--color-white)',
-            margin: 0,
-          }}>
-            {breakthrough.title}
-          </h4>
-          {breakthrough.stat && (
-            <span style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'var(--text-lg)',
-              fontWeight: 700,
-              color: color,
-              flexShrink: 0,
-            }}>
-              {breakthrough.stat.value}
-            </span>
-          )}
-        </div>
+          {breakthrough.title}
+        </h4>
 
         <p style={{
           fontSize: 'var(--text-sm)',
@@ -190,35 +171,12 @@ function BreakthroughItem({ breakthrough }: { breakthrough: Breakthrough }) {
           {breakthrough.description}
         </p>
 
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px',
+        <span style={{
+          fontSize: 'var(--text-xs)',
+          color: 'var(--color-gray-500)',
         }}>
-          <span style={{
-            fontSize: 'var(--text-xs)',
-            color: 'var(--color-gray-500)',
-          }}>
-            {timeAgo}
-          </span>
-          {breakthrough.confidence !== 'high' && (
-            <span style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '4px',
-              fontSize: 'var(--text-xs)',
-              color: 'var(--color-gray-500)',
-            }}>
-              <span style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                background: color,
-              }} />
-              {breakthrough.confidence === 'medium' ? 'Pattern detected' : 'Early signal'}
-            </span>
-          )}
-        </div>
+          {timeAgo}
+        </span>
       </div>
     </div>
   );

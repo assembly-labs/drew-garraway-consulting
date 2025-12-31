@@ -468,7 +468,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   heroGlow: {
     position: 'absolute' as const,
-    top: '50%',
+    top: '35%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '300px',

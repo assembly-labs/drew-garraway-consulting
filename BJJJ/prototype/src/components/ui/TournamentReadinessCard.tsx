@@ -248,14 +248,16 @@ export function TournamentReadinessCard({
           position: 'relative',
         }}>
           {animatedScore}
-          <span style={{
-            fontSize: '0.3em',
-            verticalAlign: 'super',
-            color: 'var(--color-gray-500)',
-            marginLeft: '4px',
-          }}>
-            /100
-          </span>
+        </div>
+        <div style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--text-sm)',
+          fontWeight: 500,
+          letterSpacing: '0.25em',
+          color: 'rgba(255, 255, 255, 0.5)',
+          marginTop: '12px',
+        }}>
+          O U T  O F  1 0 0
         </div>
 
         {/* Readiness Level Badge */}
