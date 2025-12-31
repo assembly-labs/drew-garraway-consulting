@@ -609,7 +609,7 @@ export function Dashboard(_props: DashboardProps) {
           <div
             style={{
               fontSize: 'var(--text-xl)',
-              fontWeight: 300,
+              fontWeight: 500,
               color: 'var(--color-gray-400)',
               marginTop: '-4px',
               marginBottom: '24px',

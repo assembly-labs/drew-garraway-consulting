@@ -217,7 +217,7 @@ export function ProgressScreen(_props: ProgressScreenProps) {
 
         <div style={{
           fontSize: 'var(--text-xl)',
-          fontWeight: 300,
+          fontWeight: 500,
           color: 'var(--color-gray-400)',
           marginTop: 'var(--space-xs)',
           marginBottom: 'var(--space-lg)',
@@ -273,7 +273,7 @@ export function ProgressScreen(_props: ProgressScreenProps) {
 
         <p style={{
           fontSize: 'var(--text-xl)',
-          fontWeight: 400,
+          fontWeight: 500,
           lineHeight: 1.5,
           color: 'var(--color-gray-100)',
           position: 'relative',

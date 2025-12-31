@@ -773,7 +773,7 @@ export function BeltProgress() {
                 <div style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: 'var(--text-xs)',
-                  fontWeight: entry.isCurrent ? 700 : 400,
+                  fontWeight: entry.isCurrent ? 700 : 500,
                   color: entry.isCurrent ? 'var(--color-white)' : 'var(--color-gray-500)',
                   marginTop: '8px',
                   textTransform: 'uppercase',

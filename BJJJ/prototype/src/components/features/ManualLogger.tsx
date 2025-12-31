@@ -47,6 +47,16 @@ const DURATION_OPTIONS = [
 // COMPONENT
 // ===========================================
 
+// Training type color mapping
+const TRAINING_TYPE_COLORS: Record<TrainingType, string> = {
+  gi: 'var(--color-training-gi)',
+  nogi: 'var(--color-training-nogi)',
+  openmat: 'var(--color-training-openmat)',
+  private: 'var(--color-training-private)',
+  competition: 'var(--color-training-competition)',
+  drilling: 'var(--color-gold)', // Drilling uses gold accent
+};
+
 export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLoggerProps) {
   const { sessionLogger } = useBeltPersonalization();
 
@@ -96,13 +106,22 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
   return (
     <div
       style={{
-        minHeight: '100vh',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
         backgroundColor: 'var(--color-black)',
-        padding: 'var(--space-lg)',
-        paddingTop: 'max(var(--space-lg), env(safe-area-inset-top))',
-        paddingBottom: 'max(120px, env(safe-area-inset-bottom))',
       }}
     >
+      {/* Scrollable content area */}
+      <div
+        style={{
+          flex: 1,
+          overflowY: 'auto',
+          padding: 'var(--space-lg)',
+          paddingTop: 'max(var(--space-lg), env(safe-area-inset-top))',
+          paddingBottom: 'var(--space-xl)',
+        }}
+      >
       {/* Header */}
       <div
         style={{
@@ -121,17 +140,20 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
             cursor: 'pointer',
             padding: 'var(--space-sm)',
             fontSize: 'var(--text-sm)',
+            fontWeight: 500,
+            minHeight: '44px',
           }}
         >
           Cancel
         </button>
         <h1
           style={{
+            fontFamily: 'var(--font-heading)',
             fontSize: 'var(--text-lg)',
-            fontWeight: 600,
+            fontWeight: 700,
             color: 'var(--color-white)',
             textTransform: 'uppercase',
-            letterSpacing: '0.1em',
+            letterSpacing: 'var(--tracking-wider)',
           }}
         >
           Log Session
@@ -151,12 +173,15 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
             gap: 'var(--space-sm)',
             padding: 'var(--space-md) var(--space-lg)',
             backgroundColor: 'var(--color-gray-900)',
-            border: '1px solid var(--color-gray-700)',
+            border: '1px dashed var(--color-gray-600)',
             borderRadius: 'var(--radius-md)',
             color: 'var(--color-gray-300)',
             fontSize: 'var(--text-sm)',
+            fontWeight: 500,
             cursor: 'pointer',
             marginBottom: 'var(--space-xl)',
+            minHeight: '56px',
+            transition: 'all 0.2s ease',
           }}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -170,14 +195,15 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
       )}
 
       {/* Training Type */}
-      <div style={{ marginBottom: 'var(--space-lg)' }}>
+      <div style={{ marginBottom: 'var(--space-xl)' }}>
         <label
           style={{
             display: 'block',
-            fontSize: 'var(--text-sm)',
-            fontWeight: 600,
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 700,
             textTransform: 'uppercase',
-            letterSpacing: '0.1em',
+            letterSpacing: 'var(--tracking-wider)',
             color: 'var(--color-gray-400)',
             marginBottom: 'var(--space-sm)',
           }}
@@ -191,44 +217,46 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
             gap: 'var(--space-sm)',
           }}
         >
-          {(['gi', 'nogi', 'openmat', 'private'] as TrainingType[]).map(type => (
-            <button
-              key={type}
-              onClick={() => updateField('trainingType', type)}
-              style={{
-                padding: 'var(--space-md)',
-                backgroundColor: sessionData.trainingType === type
-                  ? 'var(--color-accent)'
-                  : 'var(--color-gray-800)',
-                border: sessionData.trainingType === type
-                  ? '1px solid var(--color-accent)'
-                  : '1px solid var(--color-gray-700)',
-                borderRadius: 'var(--radius-md)',
-                color: sessionData.trainingType === type
-                  ? 'var(--color-primary)'
-                  : 'var(--color-white)',
-                fontSize: 'var(--text-sm)',
-                fontWeight: 600,
-                cursor: 'pointer',
-                minHeight: '56px',
-                textTransform: 'capitalize',
-              }}
-            >
-              {type === 'openmat' ? 'Open Mat' : type === 'nogi' ? 'No-Gi' : type}
-            </button>
-          ))}
+          {(['gi', 'nogi', 'openmat', 'private'] as TrainingType[]).map(type => {
+            const isSelected = sessionData.trainingType === type;
+            const typeColor = TRAINING_TYPE_COLORS[type];
+            return (
+              <button
+                key={type}
+                onClick={() => updateField('trainingType', type)}
+                style={{
+                  padding: 'var(--space-md)',
+                  backgroundColor: isSelected ? typeColor : 'var(--color-gray-800)',
+                  border: isSelected
+                    ? `2px solid ${typeColor}`
+                    : '1px solid var(--color-gray-700)',
+                  borderRadius: 'var(--radius-md)',
+                  color: isSelected ? 'var(--color-white)' : 'var(--color-gray-300)',
+                  fontSize: 'var(--text-sm)',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  minHeight: '56px',
+                  textTransform: 'capitalize',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {type === 'openmat' ? 'Open Mat' : type === 'nogi' ? 'No-Gi' : type.charAt(0).toUpperCase() + type.slice(1)}
+              </button>
+            );
+          })}
         </div>
       </div>
 
       {/* Duration */}
-      <div style={{ marginBottom: 'var(--space-lg)' }}>
+      <div style={{ marginBottom: 'var(--space-xl)' }}>
         <label
           style={{
             display: 'block',
-            fontSize: 'var(--text-sm)',
-            fontWeight: 600,
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 700,
             textTransform: 'uppercase',
-            letterSpacing: '0.1em',
+            letterSpacing: 'var(--tracking-wider)',
             color: 'var(--color-gray-400)',
             marginBottom: 'var(--space-sm)',
           }}
@@ -241,54 +269,47 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
             gap: 'var(--space-sm)',
           }}
         >
-          {DURATION_OPTIONS.map(opt => (
-            <button
-              key={opt.value}
-              onClick={() => {
-                updateField('durationMinutes', opt.value);
-                setShowCustomDuration(false);
-              }}
-              style={{
-                flex: 1,
-                padding: 'var(--space-md)',
-                backgroundColor: sessionData.durationMinutes === opt.value && !showCustomDuration
-                  ? 'var(--color-accent)'
-                  : 'var(--color-gray-800)',
-                border: sessionData.durationMinutes === opt.value && !showCustomDuration
-                  ? '1px solid var(--color-accent)'
-                  : '1px solid var(--color-gray-700)',
-                borderRadius: 'var(--radius-md)',
-                color: sessionData.durationMinutes === opt.value && !showCustomDuration
-                  ? 'var(--color-primary)'
-                  : 'var(--color-white)',
-                fontSize: 'var(--text-sm)',
-                fontWeight: 600,
-                cursor: 'pointer',
-                minHeight: '56px',
-              }}
-            >
-              {opt.label}
-            </button>
-          ))}
+          {DURATION_OPTIONS.map(opt => {
+            const isSelected = sessionData.durationMinutes === opt.value && !showCustomDuration;
+            return (
+              <button
+                key={opt.value}
+                onClick={() => {
+                  updateField('durationMinutes', opt.value);
+                  setShowCustomDuration(false);
+                }}
+                style={{
+                  flex: 1,
+                  padding: 'var(--space-md)',
+                  backgroundColor: isSelected ? 'var(--color-gold)' : 'var(--color-gray-800)',
+                  border: isSelected ? '2px solid var(--color-gold)' : '1px solid var(--color-gray-700)',
+                  borderRadius: 'var(--radius-md)',
+                  color: isSelected ? 'var(--color-black)' : 'var(--color-gray-300)',
+                  fontSize: 'var(--text-sm)',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  minHeight: '56px',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {opt.label}
+              </button>
+            );
+          })}
           <button
             onClick={() => setShowCustomDuration(true)}
             style={{
               flex: 1,
               padding: 'var(--space-md)',
-              backgroundColor: showCustomDuration
-                ? 'var(--color-accent)'
-                : 'var(--color-gray-800)',
-              border: showCustomDuration
-                ? '1px solid var(--color-accent)'
-                : '1px solid var(--color-gray-700)',
+              backgroundColor: showCustomDuration ? 'var(--color-gold)' : 'var(--color-gray-800)',
+              border: showCustomDuration ? '2px solid var(--color-gold)' : '1px solid var(--color-gray-700)',
               borderRadius: 'var(--radius-md)',
-              color: showCustomDuration
-                ? 'var(--color-primary)'
-                : 'var(--color-white)',
+              color: showCustomDuration ? 'var(--color-black)' : 'var(--color-gray-300)',
               fontSize: 'var(--text-sm)',
               fontWeight: 600,
               cursor: 'pointer',
               minHeight: '56px',
+              transition: 'all 0.15s ease',
             }}
           >
             Other
@@ -323,14 +344,15 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
       </div>
 
       {/* What did you learn/drill? */}
-      <div style={{ marginBottom: 'var(--space-lg)' }}>
+      <div style={{ marginBottom: 'var(--space-xl)' }}>
         <label
           style={{
             display: 'block',
-            fontSize: 'var(--text-sm)',
-            fontWeight: 600,
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 700,
             textTransform: 'uppercase',
-            letterSpacing: '0.1em',
+            letterSpacing: 'var(--tracking-wider)',
             color: 'var(--color-gray-400)',
             marginBottom: 'var(--space-sm)',
           }}
@@ -362,9 +384,10 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
         />
         <p
           style={{
+            fontFamily: 'var(--font-mono)',
             fontSize: 'var(--text-xs)',
             color: 'var(--color-gray-500)',
-            marginTop: 'var(--space-xs)',
+            marginTop: 'var(--space-sm)',
           }}
         >
           e.g., "Half guard sweeps" or "Knee slice passing"
@@ -372,14 +395,15 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
       </div>
 
       {/* Did you spar? */}
-      <div style={{ marginBottom: 'var(--space-lg)' }}>
+      <div style={{ marginBottom: 'var(--space-xl)' }}>
         <label
           style={{
             display: 'block',
-            fontSize: 'var(--text-sm)',
-            fontWeight: 600,
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 700,
             textTransform: 'uppercase',
-            letterSpacing: '0.1em',
+            letterSpacing: 'var(--tracking-wider)',
             color: 'var(--color-gray-400)',
             marginBottom: 'var(--space-sm)',
           }}
@@ -398,19 +422,20 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
             style={{
               padding: 'var(--space-md)',
               backgroundColor: sessionData.didSpar
-                ? 'var(--color-accent)'
+                ? 'var(--color-positive)'
                 : 'var(--color-gray-800)',
               border: sessionData.didSpar
-                ? '1px solid var(--color-accent)'
+                ? '2px solid var(--color-positive)'
                 : '1px solid var(--color-gray-700)',
               borderRadius: 'var(--radius-md)',
               color: sessionData.didSpar
-                ? 'var(--color-primary)'
-                : 'var(--color-white)',
+                ? 'var(--color-black)'
+                : 'var(--color-gray-300)',
               fontSize: 'var(--text-sm)',
               fontWeight: 600,
               cursor: 'pointer',
               minHeight: '56px',
+              transition: 'all 0.15s ease',
             }}
           >
             Yes
@@ -424,18 +449,19 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
             }}
             style={{
               padding: 'var(--space-md)',
-              backgroundColor: !sessionData.didSpar
-                ? 'var(--color-gray-700)'
+              backgroundColor: sessionData.didSpar === false
+                ? 'var(--color-gray-600)'
                 : 'var(--color-gray-800)',
-              border: !sessionData.didSpar
-                ? '1px solid var(--color-gray-600)'
+              border: sessionData.didSpar === false
+                ? '2px solid var(--color-gray-500)'
                 : '1px solid var(--color-gray-700)',
               borderRadius: 'var(--radius-md)',
-              color: 'var(--color-white)',
+              color: 'var(--color-gray-300)',
               fontSize: 'var(--text-sm)',
               fontWeight: 600,
               cursor: 'pointer',
               minHeight: '56px',
+              transition: 'all 0.15s ease',
             }}
           >
             No
@@ -449,9 +475,10 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
           style={{
             backgroundColor: 'var(--color-gray-900)',
             border: '1px solid var(--color-gray-800)',
+            borderLeft: '3px solid var(--color-positive)',
             borderRadius: 'var(--radius-md)',
             padding: 'var(--space-lg)',
-            marginBottom: 'var(--space-lg)',
+            marginBottom: 'var(--space-xl)',
           }}
         >
           {/* Rounds */}
@@ -459,10 +486,11 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
             <label
               style={{
                 display: 'block',
-                fontSize: 'var(--text-sm)',
-                fontWeight: 600,
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 700,
                 textTransform: 'uppercase',
-                letterSpacing: '0.1em',
+                letterSpacing: 'var(--tracking-wider)',
                 color: 'var(--color-gray-400)',
                 marginBottom: 'var(--space-sm)',
               }}
@@ -476,31 +504,29 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
                 gap: 'var(--space-xs)',
               }}
             >
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => (
-                <button
-                  key={n}
-                  onClick={() => updateField('sparringRounds', n)}
-                  style={{
-                    width: '48px',
-                    height: '48px',
-                    backgroundColor: sessionData.sparringRounds === n
-                      ? 'var(--color-accent)'
-                      : 'var(--color-gray-800)',
-                    border: sessionData.sparringRounds === n
-                      ? '1px solid var(--color-accent)'
-                      : '1px solid var(--color-gray-700)',
-                    borderRadius: 'var(--radius-md)',
-                    color: sessionData.sparringRounds === n
-                      ? 'var(--color-primary)'
-                      : 'var(--color-white)',
-                    fontSize: 'var(--text-sm)',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                  }}
-                >
-                  {n}
-                </button>
-              ))}
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => {
+                const isSelected = sessionData.sparringRounds === n;
+                return (
+                  <button
+                    key={n}
+                    onClick={() => updateField('sparringRounds', n)}
+                    style={{
+                      width: '48px',
+                      height: '48px',
+                      backgroundColor: isSelected ? 'var(--color-gold)' : 'var(--color-gray-800)',
+                      border: isSelected ? '2px solid var(--color-gold)' : '1px solid var(--color-gray-700)',
+                      borderRadius: 'var(--radius-md)',
+                      color: isSelected ? 'var(--color-black)' : 'var(--color-gray-300)',
+                      fontSize: 'var(--text-sm)',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease',
+                    }}
+                  >
+                    {n}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -523,14 +549,15 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
       )}
 
       {/* Notes (optional) */}
-      <div style={{ marginBottom: 'var(--space-xl)' }}>
+      <div style={{ marginBottom: 'var(--space-lg)' }}>
         <label
           style={{
             display: 'block',
-            fontSize: 'var(--text-sm)',
-            fontWeight: 600,
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 700,
             textTransform: 'uppercase',
-            letterSpacing: '0.1em',
+            letterSpacing: 'var(--tracking-wider)',
             color: 'var(--color-gray-400)',
             marginBottom: 'var(--space-sm)',
           }}
@@ -554,14 +581,12 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
           }}
         />
       </div>
+      </div>{/* End scrollable content area */}
 
-      {/* Save Button (fixed at bottom) */}
+      {/* Save Button (sticky at bottom) */}
       <div
         style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
+          flexShrink: 0,
           padding: 'var(--space-lg)',
           paddingBottom: 'max(var(--space-lg), env(safe-area-inset-bottom))',
           backgroundColor: 'var(--color-black)',
@@ -575,19 +600,21 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
             width: '100%',
             padding: 'var(--space-lg)',
             backgroundColor: isValid()
-              ? 'var(--color-accent)'
-              : 'var(--color-gray-700)',
+              ? 'var(--color-gold)'
+              : 'var(--color-gray-800)',
             border: 'none',
             borderRadius: 'var(--radius-md)',
             color: isValid()
-              ? 'var(--color-primary)'
+              ? 'var(--color-black)'
               : 'var(--color-gray-500)',
+            fontFamily: 'var(--font-heading)',
             fontSize: 'var(--text-base)',
             fontWeight: 700,
             textTransform: 'uppercase',
-            letterSpacing: '0.1em',
+            letterSpacing: 'var(--tracking-wide)',
             cursor: isValid() ? 'pointer' : 'not-allowed',
             minHeight: '56px',
+            transition: 'all 0.2s ease',
           }}
         >
           {isSubmitting ? 'Saving...' : 'Save Session'}

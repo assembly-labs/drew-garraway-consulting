@@ -1,265 +1,327 @@
 /**
- * SessionHistory Component
- * Displays list of past training sessions with ability to log new
+ * SessionHistory (Journal) Component
+ *
+ * Scrolling feed of saved journal entries with belt-adaptive cards.
+ * Shows only the data that was captured, validated by the user.
+ *
+ * Card complexity scales by belt level:
+ * - WHITE: date, type, duration, lesson topic, notes
+ * - BLUE: + techniques drilled, sparring rounds, worked well/struggles
+ * - PURPLE+: + submissions given/received
  */
 
-import { SessionCard, type Session } from './SessionCard';
+import { useState, useMemo } from 'react';
+import { JournalEntryCard, type JournalEntry } from './JournalEntryCard';
 import { useBeltPersonalization } from '../../hooks';
-import { mockJournalEntries, type JournalEntry } from '../../data/journal';
+import { mockJournalEntriesV2 } from '../../data/journal-entries';
+import { Icons } from '../ui/Icons';
 
-/**
- * Transform JournalEntry to Session display format
- */
-function transformToSession(entry: JournalEntry): Session {
-  const entryDate = new Date(entry.date);
-  const today = new Date();
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
-
-  // Format date display
-  const isToday = entryDate.toDateString() === today.toDateString();
-  const isYesterday = entryDate.toDateString() === yesterday.toDateString();
-
-  let dateDisplay: string;
-  if (isToday) {
-    dateDisplay = 'Today';
-  } else if (isYesterday) {
-    dateDisplay = 'Yesterday';
-  } else {
-    dateDisplay = entryDate.toLocaleDateString('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric'
-    });
-  }
-
-  // Count submissions from sparring rounds
-  const submissionsGiven = entry.sparringRounds.filter(
-    r => r.outcome === 'submission-win'
-  ).length;
-  const submissionsReceived = entry.sparringRounds.filter(
-    r => r.outcome === 'submission-loss'
-  ).length;
-
-  // Extract struggles from notes that mention difficulties
-  const struggles: string[] = [];
-  if (entry.notes.toLowerCase().includes('caught') ||
-      entry.notes.toLowerCase().includes('struggle') ||
-      entry.notes.toLowerCase().includes('need to work')) {
-    // Extract relevant struggle phrases from sparring rounds
-    entry.sparringRounds
-      .filter(r => r.outcome === 'submission-loss' && r.submissionType)
-      .forEach(r => struggles.push(`Got caught in ${r.submissionType}`));
-  }
-
-  return {
-    id: entry.id,
-    date: dateDisplay,
-    time: '7:00 PM', // Default time since JournalEntry doesn't store time
-    trainingType: entry.type,
-    durationMinutes: entry.duration,
-    techniques: entry.techniques.map(t => t.techniqueName),
-    submissionsGiven,
-    submissionsReceived,
-    struggles,
-    sparringRounds: entry.sparringRounds.length,
-  };
-}
-
-// Transform journal entries to sessions - single source of truth
-const sessions: Session[] = mockJournalEntries.map(transformToSession);
+// ===========================================
+// TYPES
+// ===========================================
 
 interface SessionHistoryProps {
   onLogNew: () => void;
-  onSelectSession?: (session: Session) => void;
+  onSelectSession?: (entry: JournalEntry) => void;
 }
 
+type FilterType = 'all' | 'gi' | 'nogi';
+
+// ===========================================
+// HELPERS
+// ===========================================
+
+function groupEntriesByDate(entries: JournalEntry[]): Map<string, JournalEntry[]> {
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const lastWeek = new Date(today);
+  lastWeek.setDate(lastWeek.getDate() - 7);
+
+  const groups = new Map<string, JournalEntry[]>();
+
+  entries.forEach((entry) => {
+    const entryDate = new Date(entry.date);
+    let groupKey: string;
+
+    if (entryDate.toDateString() === today.toDateString()) {
+      groupKey = 'Today';
+    } else if (entryDate.toDateString() === yesterday.toDateString()) {
+      groupKey = 'Yesterday';
+    } else if (entryDate > lastWeek) {
+      groupKey = 'This Week';
+    } else {
+      groupKey = 'Earlier';
+    }
+
+    if (!groups.has(groupKey)) {
+      groups.set(groupKey, []);
+    }
+    groups.get(groupKey)!.push(entry);
+  });
+
+  return groups;
+}
+
+// ===========================================
+// COMPONENT
+// ===========================================
+
 export function SessionHistory({ onLogNew, onSelectSession }: SessionHistoryProps) {
-  // Belt personalization for empty states
-  const { profile: beltProfile } = useBeltPersonalization();
+  const { profile } = useBeltPersonalization();
+  const [filter, setFilter] = useState<FilterType>('all');
+
+  // Filter entries by training type
+  const filteredEntries = useMemo(() => {
+    if (filter === 'all') return mockJournalEntriesV2;
+    return mockJournalEntriesV2.filter((entry) => {
+      if (filter === 'gi') return entry.training_type === 'gi' || entry.training_type === 'both';
+      if (filter === 'nogi') return entry.training_type === 'nogi' || entry.training_type === 'both';
+      return true;
+    });
+  }, [filter]);
+
+  // Group by date
+  const groupedEntries = useMemo(
+    () => groupEntriesByDate(filteredEntries),
+    [filteredEntries]
+  );
 
   // Belt-aware empty state messages
   const getEmptyStateMessage = () => {
-    switch (beltProfile.belt) {
+    switch (profile.belt) {
       case 'white':
-        return "Log your first training after class. Every session counts on your journey.";
+        return 'Log your first training. Every session counts on your journey.';
       case 'blue':
-        return "Start building your training history. The patterns you track become the game you build.";
+        return 'Start building your training history. The patterns you track become the game you build.';
       case 'purple':
       case 'brown':
-        return "Begin your session log. Tracking reveals patterns you might otherwise miss.";
+        return 'Begin your session log. Tracking reveals patterns you might otherwise miss.';
       case 'black':
-        return "Start your journal. Even at this level, documentation sharpens awareness.";
+        return 'Start your journal. Even at this level, documentation sharpens awareness.';
       default:
-        return "Log your first training after class.";
+        return 'Log your first training after class.';
     }
   };
 
-  // Group sessions by date category
-  const today = sessions.filter(s => s.date === 'Today');
-  const yesterday = sessions.filter(s => s.date === 'Yesterday');
-  const earlier = sessions.filter(s => s.date !== 'Today' && s.date !== 'Yesterday');
+  // Total stats
+  const totalSessions = mockJournalEntriesV2.length;
+  const totalRounds = mockJournalEntriesV2.reduce(
+    (sum, e) => sum + (e.sparring_rounds || 0),
+    0
+  );
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 'var(--space-lg)',
-      padding: 'var(--space-lg)',
-    }}>
-      {/* Header with Log Button */}
-      <div style={{
+    <div
+      style={{
         display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}>
-        <div>
-          <h2 style={{ marginBottom: 'var(--space-xs)', color: 'var(--color-white)' }}>JOURNAL</h2>
-          <p style={{ color: 'var(--color-gray-500)', fontSize: 'var(--text-sm)' }}>{sessions.length} sessions logged</p>
-        </div>
-        <button
-          onClick={onLogNew}
+        flexDirection: 'column',
+        minHeight: '100%',
+      }}
+    >
+      {/* Header Section */}
+      <div
+        style={{
+          padding: 'var(--space-lg)',
+          paddingBottom: 0,
+        }}
+      >
+        {/* Title Row */}
+        <div
           style={{
             display: 'flex',
-            alignItems: 'center',
-            gap: 'var(--space-sm)',
-            backgroundColor: 'var(--color-accent)',
-            color: 'var(--color-primary)',
-            border: 'none',
-            borderRadius: 'var(--radius-md)',
-            padding: 'var(--space-sm) var(--space-md)',
-            fontWeight: 600,
-            cursor: 'pointer',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            marginBottom: 'var(--space-md)',
           }}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-            <line x1="12" y1="19" x2="12" y2="23" />
-            <line x1="8" y1="23" x2="16" y2="23" />
-          </svg>
-          Log
-        </button>
-      </div>
-
-      {/* Today */}
-      {today.length > 0 && (
-        <div>
-          <h3 style={{
-            fontSize: 'var(--text-xs)',
-            textTransform: 'uppercase',
-            letterSpacing: 'var(--tracking-widest)',
-            color: 'var(--color-gray-500)',
-            marginBottom: 'var(--space-sm)',
-          }}>
-            Today
-          </h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-            {today.map(session => (
-              <SessionCard
-                key={session.id}
-                session={session}
-                onClick={() => onSelectSession?.(session)}
-              />
-            ))}
+          <div>
+            <h2
+              style={{
+                fontSize: 'var(--text-2xl)',
+                fontWeight: 800,
+                color: 'var(--color-white)',
+                marginBottom: 'var(--space-xs)',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              JOURNAL
+            </h2>
+            <p
+              style={{
+                fontSize: 'var(--text-sm)',
+                fontWeight: 500,
+                color: 'var(--color-gray-500)',
+              }}
+            >
+              {totalSessions} session{totalSessions !== 1 ? 's' : ''} logged
+              {totalRounds > 0 && ` · ${totalRounds} rounds`}
+            </p>
           </div>
-        </div>
-      )}
 
-      {/* Yesterday */}
-      {yesterday.length > 0 && (
-        <div>
-          <h3 style={{
-            fontSize: 'var(--text-xs)',
-            textTransform: 'uppercase',
-            letterSpacing: 'var(--tracking-widest)',
-            color: 'var(--color-gray-500)',
-            marginBottom: 'var(--space-sm)',
-          }}>
-            Yesterday
-          </h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-            {yesterday.map(session => (
-              <SessionCard
-                key={session.id}
-                session={session}
-                onClick={() => onSelectSession?.(session)}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Earlier */}
-      {earlier.length > 0 && (
-        <div>
-          <h3 style={{
-            fontSize: 'var(--text-xs)',
-            textTransform: 'uppercase',
-            letterSpacing: 'var(--tracking-widest)',
-            color: 'var(--color-gray-500)',
-            marginBottom: 'var(--space-sm)',
-          }}>
-            Earlier
-          </h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-            {earlier.map(session => (
-              <SessionCard
-                key={session.id}
-                session={session}
-                onClick={() => onSelectSession?.(session)}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Empty State */}
-      {sessions.length === 0 && (
-        <div style={{
-          textAlign: 'center',
-          padding: 'var(--space-2xl)',
-          backgroundColor: 'var(--color-gray-900)',
-          border: '1px solid var(--color-gray-800)',
-          borderRadius: 'var(--radius-md)',
-        }}>
-          <div style={{
-            width: 64,
-            height: 64,
-            borderRadius: 'var(--radius-full)',
-            backgroundColor: 'var(--color-gray-800)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '0 auto var(--space-lg)',
-          }}>
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-500)" strokeWidth="2">
-              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-              <line x1="12" y1="19" x2="12" y2="23" />
-              <line x1="8" y1="23" x2="16" y2="23" />
-            </svg>
-          </div>
-          <h3 style={{ marginBottom: 'var(--space-sm)', color: 'var(--color-white)' }}>No Sessions Yet</h3>
-          <p style={{ marginBottom: 'var(--space-lg)', color: 'var(--color-gray-400)' }}>
-            {getEmptyStateMessage()}
-          </p>
+          {/* Log Button */}
           <button
             onClick={onLogNew}
             style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--space-sm)',
               backgroundColor: 'var(--color-accent)',
-              color: 'var(--color-primary)',
+              color: 'var(--color-black)',
               border: 'none',
               borderRadius: 'var(--radius-md)',
-              padding: 'var(--space-sm) var(--space-lg)',
+              padding: 'var(--space-sm) var(--space-md)',
               fontWeight: 600,
+              fontSize: 'var(--text-sm)',
               cursor: 'pointer',
+              transition: 'opacity 0.15s ease',
             }}
+            onMouseOver={(e) => (e.currentTarget.style.opacity = '0.9')}
+            onMouseOut={(e) => (e.currentTarget.style.opacity = '1')}
           >
-            Log Training
+            <Icons.Mic size={18} />
+            Log
           </button>
         </div>
-      )}
+
+        {/* Filter Pills */}
+        <div
+          style={{
+            display: 'flex',
+            gap: 'var(--space-xs)',
+            marginBottom: 'var(--space-lg)',
+          }}
+        >
+          {(['all', 'gi', 'nogi'] as FilterType[]).map((f) => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              style={{
+                padding: '6px 12px',
+                borderRadius: 'var(--radius-full)',
+                border: 'none',
+                fontSize: 'var(--text-sm)',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+                backgroundColor:
+                  filter === f ? 'var(--color-white)' : 'var(--color-gray-800)',
+                color:
+                  filter === f ? 'var(--color-black)' : 'var(--color-gray-400)',
+              }}
+            >
+              {f === 'all' ? 'All' : f === 'gi' ? 'Gi' : 'No-Gi'}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Scrolling Feed */}
+      <div
+        style={{
+          flex: 1,
+          padding: '0 var(--space-lg)',
+          paddingBottom: 'var(--space-2xl)',
+        }}
+      >
+        {filteredEntries.length === 0 ? (
+          /* Empty State */
+          <div
+            style={{
+              textAlign: 'center',
+              padding: 'var(--space-2xl)',
+              backgroundColor: 'var(--color-gray-900)',
+              border: '1px solid var(--color-gray-800)',
+              borderRadius: 'var(--radius-md)',
+            }}
+          >
+            <div
+              style={{
+                width: 64,
+                height: 64,
+                borderRadius: 'var(--radius-full)',
+                backgroundColor: 'var(--color-gray-800)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto var(--space-lg)',
+              }}
+            >
+              <Icons.Mic size={28} color="var(--color-gray-500)" />
+            </div>
+            <h3
+              style={{
+                marginBottom: 'var(--space-sm)',
+                color: 'var(--color-white)',
+                fontWeight: 600,
+              }}
+            >
+              No Sessions Yet
+            </h3>
+            <p
+              style={{
+                marginBottom: 'var(--space-lg)',
+                color: 'var(--color-gray-400)',
+                fontWeight: 500,
+                fontSize: 'var(--text-sm)',
+                lineHeight: 1.5,
+              }}
+            >
+              {getEmptyStateMessage()}
+            </p>
+            <button
+              onClick={onLogNew}
+              style={{
+                backgroundColor: 'var(--color-accent)',
+                color: 'var(--color-black)',
+                border: 'none',
+                borderRadius: 'var(--radius-md)',
+                padding: 'var(--space-sm) var(--space-lg)',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
+            >
+              Log Training
+            </button>
+          </div>
+        ) : (
+          /* Grouped Entries */
+          Array.from(groupedEntries.entries()).map(([groupName, entries]) => (
+            <div key={groupName} style={{ marginBottom: 'var(--space-xl)' }}>
+              {/* Group Label */}
+              <h3
+                style={{
+                  fontSize: 'var(--text-xs)',
+                  fontWeight: 600,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.1em',
+                  color: 'var(--color-gray-500)',
+                  marginBottom: 'var(--space-sm)',
+                }}
+              >
+                {groupName}
+              </h3>
+
+              {/* Entry Cards */}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 'var(--space-sm)',
+                }}
+              >
+                {entries.map((entry) => (
+                  <JournalEntryCard
+                    key={entry.id}
+                    entry={entry}
+                    onClick={onSelectSession ? () => onSelectSession(entry) : undefined}
+                  />
+                ))}
+              </div>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }

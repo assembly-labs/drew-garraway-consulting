@@ -265,7 +265,7 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
                   color: belt === option.value
                     ? 'var(--color-accent)'
                     : 'var(--color-gray-400)',
-                  fontWeight: belt === option.value ? 600 : 400,
+                  fontWeight: belt === option.value ? 600 : 500,
                 }}>
                   {option.label}
                 </span>
