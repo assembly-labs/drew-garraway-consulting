@@ -15,19 +15,22 @@
  */
 
 import { useState } from 'react';
-import type { BodyRegion, SubmissionCount } from '../../types/database';
+import type { SubmissionCount } from '../../types/database';
 
 // ===========================================
 // SUBMISSION DATA BY BODY REGION
 // ===========================================
 
+// Simplified 3-region type for UI picker (groups granular regions)
+type PickerRegion = 'neck' | 'arms' | 'legs';
+
 interface SubmissionOption {
   name: string;
-  region: BodyRegion;
+  region: PickerRegion;
   common: boolean; // Show in quick picks
 }
 
-const SUBMISSIONS_BY_REGION: Record<BodyRegion, SubmissionOption[]> = {
+const SUBMISSIONS_BY_REGION: Record<PickerRegion, SubmissionOption[]> = {
   neck: [
     { name: 'RNC', region: 'neck', common: true },
     { name: 'Triangle', region: 'neck', common: true },
@@ -106,7 +109,7 @@ export function SubmissionPicker({
   userHistory = [],
   onVoiceInput,
 }: SubmissionPickerProps) {
-  const [expandedRegion, setExpandedRegion] = useState<BodyRegion | null>(null);
+  const [expandedRegion, setExpandedRegion] = useState<PickerRegion | null>(null);
   const [showOtherInput, setShowOtherInput] = useState(false);
   const [otherValue, setOtherValue] = useState('');
 
@@ -165,7 +168,7 @@ export function SubmissionPicker({
   };
 
   // Get submissions for expanded region (excluding already selected)
-  const getRegionSubmissions = (region: BodyRegion) => {
+  const getRegionSubmissions = (region: PickerRegion) => {
     return SUBMISSIONS_BY_REGION[region];
   };
 
@@ -330,7 +333,7 @@ export function SubmissionPicker({
           marginBottom: 'var(--space-md)',
         }}
       >
-        {(['neck', 'arms', 'legs'] as BodyRegion[]).map(region => (
+        {(['neck', 'arms', 'legs'] as PickerRegion[]).map(region => (
           <button
             key={region}
             onClick={() => setExpandedRegion(expandedRegion === region ? null : region)}

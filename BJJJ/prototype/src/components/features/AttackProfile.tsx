@@ -21,6 +21,20 @@ interface TechniqueCount {
   count: number;
 }
 
+// Simplified 3-region type for display (aggregates granular regions)
+type DisplayRegion = 'neck' | 'arms' | 'legs';
+
+// Helper to aggregate granular body regions into display regions
+function aggregateBodyRegions(
+  granular: Record<BodyRegion, number>
+): Record<DisplayRegion, number> {
+  return {
+    neck: granular.neck,
+    arms: granular.shoulders + granular.elbows + granular.wrists,
+    legs: granular.knees + granular.ankles,
+  };
+}
+
 interface AttackProfileProps {
   /** Submission data */
   submissionStats: {
@@ -240,7 +254,7 @@ function getOpponentQuote(technique: string): string {
 // ===========================================
 
 function getSpecialistProfile(
-  bodyStats: Record<BodyRegion, number>,
+  bodyStats: Record<DisplayRegion, number>,
   techniqueBreakdown: TechniqueCount[]
 ): SpecialistProfile {
   const total = bodyStats.neck + bodyStats.arms + bodyStats.legs;
@@ -400,7 +414,7 @@ function SubmissionTreemap({
   bodyStats,
   techniqueBreakdown
 }: {
-  bodyStats: Record<BodyRegion, number>;
+  bodyStats: Record<DisplayRegion, number>;
   techniqueBreakdown: TechniqueCount[];
 }) {
   const total = bodyStats.neck + bodyStats.arms + bodyStats.legs;
@@ -663,10 +677,16 @@ export function AttackProfile({ submissionStats, belt: _belt = 'blue' }: AttackP
   // Belt can be used for future personalization (e.g., hiding certain stats for white belts)
   const { totalGiven, totalReceived, bodyHeatMap, techniqueBreakdown } = submissionStats;
 
+  // Aggregate granular regions into display regions
+  const displayHeatMap = useMemo(() => ({
+    given: aggregateBodyRegions(bodyHeatMap.given),
+    received: aggregateBodyRegions(bodyHeatMap.received),
+  }), [bodyHeatMap]);
+
   // Calculate specialist profile
   const specialist = useMemo(() => {
-    return getSpecialistProfile(bodyHeatMap.given, techniqueBreakdown.given);
-  }, [bodyHeatMap.given, techniqueBreakdown.given]);
+    return getSpecialistProfile(displayHeatMap.given, techniqueBreakdown.given);
+  }, [displayHeatMap.given, techniqueBreakdown.given]);
 
   // Get opponent quote based on top technique
   const topTechnique = techniqueBreakdown.given[0]?.technique || 'Armbar';
@@ -707,7 +727,7 @@ export function AttackProfile({ submissionStats, belt: _belt = 'blue' }: AttackP
               TREEMAP VISUALIZATION
               ============================================ */}
           <SubmissionTreemap
-            bodyStats={bodyHeatMap.given}
+            bodyStats={displayHeatMap.given}
             techniqueBreakdown={techniqueBreakdown.given}
           />
 

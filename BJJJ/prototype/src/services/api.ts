@@ -497,10 +497,10 @@ const submissionsService = {
       ? { technique: receivedSorted[0].technique, count: receivedSorted[0].count }
       : null;
 
-    // Body heat map
+    // Body heat map (6 granular regions)
     const bodyHeatMap: SubmissionStats['bodyHeatMap'] = {
-      given: { neck: 0, arms: 0, legs: 0 },
-      received: { neck: 0, arms: 0, legs: 0 },
+      given: { neck: 0, shoulders: 0, elbows: 0, wrists: 0, knees: 0, ankles: 0 },
+      received: { neck: 0, shoulders: 0, elbows: 0, wrists: 0, knees: 0, ankles: 0 },
     };
 
     given.forEach(s => {

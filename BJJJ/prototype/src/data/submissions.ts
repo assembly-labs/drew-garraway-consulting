@@ -173,14 +173,20 @@ export const mockSubmissionStats = {
   },
   bodyHeatMap: {
     given: {
-      neck: 53, // RNC (22) + Triangle (15) + Guillotine (12) + Bow and Arrow (4)
-      arms: 30, // Armbar (18) + Kimura (8) + Americana (4)
-      legs: 6,  // Heel Hook (6)
+      neck: 53,      // RNC (22) + Triangle (15) + Guillotine (12) + Bow and Arrow (4)
+      shoulders: 12, // Kimura (8) + Americana (4)
+      elbows: 18,    // Armbar (18)
+      wrists: 0,     // No wristlocks in mock data
+      knees: 0,      // No kneebars in mock data
+      ankles: 6,     // Heel Hook (6)
     },
     received: {
-      neck: 34, // Triangle (14) + RNC (8) + Guillotine (8) + Darce (4)
-      arms: 18, // Armbar (12) + Kimura (6)
-      legs: 15, // Heel Hook (6) + Kneebar (5) + Ankle Lock (4)
+      neck: 34,      // Triangle (14) + RNC (8) + Guillotine (8) + Darce (4)
+      shoulders: 6,  // Kimura (6)
+      elbows: 12,    // Armbar (12)
+      wrists: 0,     // No wristlocks in mock data
+      knees: 5,      // Kneebar (5)
+      ankles: 10,    // Heel Hook (6) + Ankle Lock (4)
     },
   },
   techniqueBreakdown: {

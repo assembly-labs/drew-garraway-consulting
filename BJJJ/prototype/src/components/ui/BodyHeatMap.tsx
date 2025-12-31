@@ -2,7 +2,14 @@
  * BodyHeatMap Component
  *
  * Visualizes submission attack patterns on a human body silhouette.
- * Shows heat intensity by body region (neck, arms, legs).
+ * Shows heat intensity by granular body region:
+ * - neck: chokes/strangles
+ * - shoulders: shoulder locks (kimura, americana)
+ * - elbows: armbars, omoplata
+ * - wrists: wristlocks
+ * - knees: kneebars, calf slicers
+ * - ankles: ankle locks, heel hooks, toe holds
+ *
  * Toggle between "attacks given" and "attacks received" views.
  */
 
@@ -23,29 +30,60 @@ interface BodyHeatMapProps {
 // Heat zone positions (center points for radial gradients)
 // Mapped to 160x300 viewport matching the silhouette proportions
 const HEAT_ZONES = {
-  // Neck/throat area - chokes target here (moved higher to actual neck)
-  neck: { cx: 80, cy: 48, rx: 22, ry: 16 },
-  // Left arm - elbow/forearm area for armbars, kimuras
-  leftArm: { cx: 38, cy: 138, rx: 26, ry: 48 },
-  // Right arm - mirror of left
-  rightArm: { cx: 122, cy: 138, rx: 26, ry: 48 },
-  // Left leg - knee/ankle area for leg locks
-  leftLeg: { cx: 68, cy: 240, rx: 22, ry: 52 },
-  // Right leg - mirror of left
-  rightLeg: { cx: 92, cy: 240, rx: 22, ry: 52 },
+  // Neck/throat area - chokes target here
+  neck: { cx: 80, cy: 38, rx: 18, ry: 14 },
+
+  // Shoulders - kimura, americana target here (bilateral)
+  leftShoulder: { cx: 48, cy: 62, rx: 16, ry: 14 },
+  rightShoulder: { cx: 112, cy: 62, rx: 16, ry: 14 },
+
+  // Elbows - armbars target here (bilateral)
+  leftElbow: { cx: 32, cy: 115, rx: 14, ry: 18 },
+  rightElbow: { cx: 128, cy: 115, rx: 14, ry: 18 },
+
+  // Wrists - wristlocks target here (bilateral)
+  leftWrist: { cx: 22, cy: 168, rx: 12, ry: 14 },
+  rightWrist: { cx: 138, cy: 168, rx: 12, ry: 14 },
+
+  // Knees - kneebars, calf slicers target here (bilateral)
+  leftKnee: { cx: 62, cy: 200, rx: 14, ry: 18 },
+  rightKnee: { cx: 98, cy: 200, rx: 14, ry: 18 },
+
+  // Ankles - heel hooks, ankle locks, toe holds target here (bilateral)
+  leftAnkle: { cx: 58, cy: 272, rx: 12, ry: 16 },
+  rightAnkle: { cx: 102, cy: 272, rx: 12, ry: 16 },
+};
+
+// All body regions for iteration
+const ALL_REGIONS: BodyRegion[] = ['neck', 'shoulders', 'elbows', 'wrists', 'knees', 'ankles'];
+
+// Region display labels
+const REGION_LABELS: Record<BodyRegion, string> = {
+  neck: 'Neck',
+  shoulders: 'Shoulders',
+  elbows: 'Elbows',
+  wrists: 'Wrists',
+  knees: 'Knees',
+  ankles: 'Ankles',
 };
 
 // Human body silhouette with PNG image and radial gradient heat overlays
 function BodySilhouette({
   neckIntensity,
-  armsIntensity,
-  legsIntensity,
+  shouldersIntensity,
+  elbowsIntensity,
+  wristsIntensity,
+  kneesIntensity,
+  anklesIntensity,
   isGiven,
   onRegionClick,
 }: {
   neckIntensity: number;
-  armsIntensity: number;
-  legsIntensity: number;
+  shouldersIntensity: number;
+  elbowsIntensity: number;
+  wristsIntensity: number;
+  kneesIntensity: number;
+  anklesIntensity: number;
   isGiven: boolean;
   onRegionClick?: (region: BodyRegion) => void;
 }) {
@@ -55,6 +93,12 @@ function BodySilhouette({
 
   // Get heat color RGB based on mode (green for given, red for received)
   const heatRgb = isGiven ? '34, 197, 94' : '239, 68, 68';
+
+  // Generate gradient stops based on intensity
+  const getGradientStops = (intensity: number) => ({
+    inner: Math.min(1, intensity * 1.5 + 0.3),
+    mid: Math.min(0.7, intensity * 0.8 + 0.15),
+  });
 
   return (
     <div
@@ -81,7 +125,7 @@ function BodySilhouette({
 
       {/* Body silhouette image with gold accent glow */}
       <img
-        src="/human-body-silo.png"
+        src="/human-body-silhouette.png"
         alt="Body silhouette"
         style={{
           position: 'relative',
@@ -110,22 +154,43 @@ function BodySilhouette({
         <defs>
           {/* Radial gradient for neck */}
           <radialGradient id="neckHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(1, neckIntensity * 1.5 + 0.3)} />
-            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(0.7, neckIntensity * 0.8 + 0.15)} />
+            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={getGradientStops(neckIntensity).inner} />
+            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={getGradientStops(neckIntensity).mid} />
             <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
           </radialGradient>
 
-          {/* Radial gradient for arms */}
-          <radialGradient id="armsHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(1, armsIntensity * 1.5 + 0.3)} />
-            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(0.7, armsIntensity * 0.8 + 0.15)} />
+          {/* Radial gradient for shoulders */}
+          <radialGradient id="shouldersHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={getGradientStops(shouldersIntensity).inner} />
+            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={getGradientStops(shouldersIntensity).mid} />
             <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
           </radialGradient>
 
-          {/* Radial gradient for legs */}
-          <radialGradient id="legsHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(1, legsIntensity * 1.5 + 0.3)} />
-            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={Math.min(0.7, legsIntensity * 0.8 + 0.15)} />
+          {/* Radial gradient for elbows */}
+          <radialGradient id="elbowsHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={getGradientStops(elbowsIntensity).inner} />
+            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={getGradientStops(elbowsIntensity).mid} />
+            <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
+          </radialGradient>
+
+          {/* Radial gradient for wrists */}
+          <radialGradient id="wristsHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={getGradientStops(wristsIntensity).inner} />
+            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={getGradientStops(wristsIntensity).mid} />
+            <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
+          </radialGradient>
+
+          {/* Radial gradient for knees */}
+          <radialGradient id="kneesHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={getGradientStops(kneesIntensity).inner} />
+            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={getGradientStops(kneesIntensity).mid} />
+            <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
+          </radialGradient>
+
+          {/* Radial gradient for ankles */}
+          <radialGradient id="anklesHeat" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stopColor={`rgb(${heatRgb})`} stopOpacity={getGradientStops(anklesIntensity).inner} />
+            <stop offset="50%" stopColor={`rgb(${heatRgb})`} stopOpacity={getGradientStops(anklesIntensity).mid} />
             <stop offset="100%" stopColor={`rgb(${heatRgb})`} stopOpacity="0" />
           </radialGradient>
 
@@ -147,52 +212,114 @@ function BodySilhouette({
           />
         )}
 
-        {/* Left arm heat zone */}
-        {armsIntensity > 0 && (
-          <ellipse
-            cx={HEAT_ZONES.leftArm.cx}
-            cy={HEAT_ZONES.leftArm.cy}
-            rx={HEAT_ZONES.leftArm.rx}
-            ry={HEAT_ZONES.leftArm.ry}
-            fill="url(#armsHeat)"
-            filter="url(#heatBlur)"
-          />
+        {/* Shoulder heat zones (bilateral) */}
+        {shouldersIntensity > 0 && (
+          <>
+            <ellipse
+              cx={HEAT_ZONES.leftShoulder.cx}
+              cy={HEAT_ZONES.leftShoulder.cy}
+              rx={HEAT_ZONES.leftShoulder.rx}
+              ry={HEAT_ZONES.leftShoulder.ry}
+              fill="url(#shouldersHeat)"
+              filter="url(#heatBlur)"
+            />
+            <ellipse
+              cx={HEAT_ZONES.rightShoulder.cx}
+              cy={HEAT_ZONES.rightShoulder.cy}
+              rx={HEAT_ZONES.rightShoulder.rx}
+              ry={HEAT_ZONES.rightShoulder.ry}
+              fill="url(#shouldersHeat)"
+              filter="url(#heatBlur)"
+            />
+          </>
         )}
 
-        {/* Right arm heat zone */}
-        {armsIntensity > 0 && (
-          <ellipse
-            cx={HEAT_ZONES.rightArm.cx}
-            cy={HEAT_ZONES.rightArm.cy}
-            rx={HEAT_ZONES.rightArm.rx}
-            ry={HEAT_ZONES.rightArm.ry}
-            fill="url(#armsHeat)"
-            filter="url(#heatBlur)"
-          />
+        {/* Elbow heat zones (bilateral) */}
+        {elbowsIntensity > 0 && (
+          <>
+            <ellipse
+              cx={HEAT_ZONES.leftElbow.cx}
+              cy={HEAT_ZONES.leftElbow.cy}
+              rx={HEAT_ZONES.leftElbow.rx}
+              ry={HEAT_ZONES.leftElbow.ry}
+              fill="url(#elbowsHeat)"
+              filter="url(#heatBlur)"
+            />
+            <ellipse
+              cx={HEAT_ZONES.rightElbow.cx}
+              cy={HEAT_ZONES.rightElbow.cy}
+              rx={HEAT_ZONES.rightElbow.rx}
+              ry={HEAT_ZONES.rightElbow.ry}
+              fill="url(#elbowsHeat)"
+              filter="url(#heatBlur)"
+            />
+          </>
         )}
 
-        {/* Left leg heat zone */}
-        {legsIntensity > 0 && (
-          <ellipse
-            cx={HEAT_ZONES.leftLeg.cx}
-            cy={HEAT_ZONES.leftLeg.cy}
-            rx={HEAT_ZONES.leftLeg.rx}
-            ry={HEAT_ZONES.leftLeg.ry}
-            fill="url(#legsHeat)"
-            filter="url(#heatBlur)"
-          />
+        {/* Wrist heat zones (bilateral) */}
+        {wristsIntensity > 0 && (
+          <>
+            <ellipse
+              cx={HEAT_ZONES.leftWrist.cx}
+              cy={HEAT_ZONES.leftWrist.cy}
+              rx={HEAT_ZONES.leftWrist.rx}
+              ry={HEAT_ZONES.leftWrist.ry}
+              fill="url(#wristsHeat)"
+              filter="url(#heatBlur)"
+            />
+            <ellipse
+              cx={HEAT_ZONES.rightWrist.cx}
+              cy={HEAT_ZONES.rightWrist.cy}
+              rx={HEAT_ZONES.rightWrist.rx}
+              ry={HEAT_ZONES.rightWrist.ry}
+              fill="url(#wristsHeat)"
+              filter="url(#heatBlur)"
+            />
+          </>
         )}
 
-        {/* Right leg heat zone */}
-        {legsIntensity > 0 && (
-          <ellipse
-            cx={HEAT_ZONES.rightLeg.cx}
-            cy={HEAT_ZONES.rightLeg.cy}
-            rx={HEAT_ZONES.rightLeg.rx}
-            ry={HEAT_ZONES.rightLeg.ry}
-            fill="url(#legsHeat)"
-            filter="url(#heatBlur)"
-          />
+        {/* Knee heat zones (bilateral) */}
+        {kneesIntensity > 0 && (
+          <>
+            <ellipse
+              cx={HEAT_ZONES.leftKnee.cx}
+              cy={HEAT_ZONES.leftKnee.cy}
+              rx={HEAT_ZONES.leftKnee.rx}
+              ry={HEAT_ZONES.leftKnee.ry}
+              fill="url(#kneesHeat)"
+              filter="url(#heatBlur)"
+            />
+            <ellipse
+              cx={HEAT_ZONES.rightKnee.cx}
+              cy={HEAT_ZONES.rightKnee.cy}
+              rx={HEAT_ZONES.rightKnee.rx}
+              ry={HEAT_ZONES.rightKnee.ry}
+              fill="url(#kneesHeat)"
+              filter="url(#heatBlur)"
+            />
+          </>
+        )}
+
+        {/* Ankle heat zones (bilateral) */}
+        {anklesIntensity > 0 && (
+          <>
+            <ellipse
+              cx={HEAT_ZONES.leftAnkle.cx}
+              cy={HEAT_ZONES.leftAnkle.cy}
+              rx={HEAT_ZONES.leftAnkle.rx}
+              ry={HEAT_ZONES.leftAnkle.ry}
+              fill="url(#anklesHeat)"
+              filter="url(#heatBlur)"
+            />
+            <ellipse
+              cx={HEAT_ZONES.rightAnkle.cx}
+              cy={HEAT_ZONES.rightAnkle.cy}
+              rx={HEAT_ZONES.rightAnkle.rx}
+              ry={HEAT_ZONES.rightAnkle.ry}
+              fill="url(#anklesHeat)"
+              filter="url(#heatBlur)"
+            />
+          </>
         )}
       </svg>
 
@@ -219,47 +346,103 @@ function BodySilhouette({
           style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
         />
 
-        {/* Left arm click area */}
+        {/* Shoulder click areas */}
         <ellipse
-          cx={HEAT_ZONES.leftArm.cx}
-          cy={HEAT_ZONES.leftArm.cy}
-          rx={HEAT_ZONES.leftArm.rx + 5}
-          ry={HEAT_ZONES.leftArm.ry + 5}
+          cx={HEAT_ZONES.leftShoulder.cx}
+          cy={HEAT_ZONES.leftShoulder.cy}
+          rx={HEAT_ZONES.leftShoulder.rx + 5}
+          ry={HEAT_ZONES.leftShoulder.ry + 5}
           fill="transparent"
-          onClick={() => handleClick('arms')}
+          onClick={() => handleClick('shoulders')}
+          style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
+        />
+        <ellipse
+          cx={HEAT_ZONES.rightShoulder.cx}
+          cy={HEAT_ZONES.rightShoulder.cy}
+          rx={HEAT_ZONES.rightShoulder.rx + 5}
+          ry={HEAT_ZONES.rightShoulder.ry + 5}
+          fill="transparent"
+          onClick={() => handleClick('shoulders')}
           style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
         />
 
-        {/* Right arm click area */}
+        {/* Elbow click areas */}
         <ellipse
-          cx={HEAT_ZONES.rightArm.cx}
-          cy={HEAT_ZONES.rightArm.cy}
-          rx={HEAT_ZONES.rightArm.rx + 5}
-          ry={HEAT_ZONES.rightArm.ry + 5}
+          cx={HEAT_ZONES.leftElbow.cx}
+          cy={HEAT_ZONES.leftElbow.cy}
+          rx={HEAT_ZONES.leftElbow.rx + 5}
+          ry={HEAT_ZONES.leftElbow.ry + 5}
           fill="transparent"
-          onClick={() => handleClick('arms')}
+          onClick={() => handleClick('elbows')}
+          style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
+        />
+        <ellipse
+          cx={HEAT_ZONES.rightElbow.cx}
+          cy={HEAT_ZONES.rightElbow.cy}
+          rx={HEAT_ZONES.rightElbow.rx + 5}
+          ry={HEAT_ZONES.rightElbow.ry + 5}
+          fill="transparent"
+          onClick={() => handleClick('elbows')}
           style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
         />
 
-        {/* Left leg click area */}
+        {/* Wrist click areas */}
         <ellipse
-          cx={HEAT_ZONES.leftLeg.cx}
-          cy={HEAT_ZONES.leftLeg.cy}
-          rx={HEAT_ZONES.leftLeg.rx + 5}
-          ry={HEAT_ZONES.leftLeg.ry + 5}
+          cx={HEAT_ZONES.leftWrist.cx}
+          cy={HEAT_ZONES.leftWrist.cy}
+          rx={HEAT_ZONES.leftWrist.rx + 5}
+          ry={HEAT_ZONES.leftWrist.ry + 5}
           fill="transparent"
-          onClick={() => handleClick('legs')}
+          onClick={() => handleClick('wrists')}
+          style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
+        />
+        <ellipse
+          cx={HEAT_ZONES.rightWrist.cx}
+          cy={HEAT_ZONES.rightWrist.cy}
+          rx={HEAT_ZONES.rightWrist.rx + 5}
+          ry={HEAT_ZONES.rightWrist.ry + 5}
+          fill="transparent"
+          onClick={() => handleClick('wrists')}
           style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
         />
 
-        {/* Right leg click area */}
+        {/* Knee click areas */}
         <ellipse
-          cx={HEAT_ZONES.rightLeg.cx}
-          cy={HEAT_ZONES.rightLeg.cy}
-          rx={HEAT_ZONES.rightLeg.rx + 5}
-          ry={HEAT_ZONES.rightLeg.ry + 5}
+          cx={HEAT_ZONES.leftKnee.cx}
+          cy={HEAT_ZONES.leftKnee.cy}
+          rx={HEAT_ZONES.leftKnee.rx + 5}
+          ry={HEAT_ZONES.leftKnee.ry + 5}
           fill="transparent"
-          onClick={() => handleClick('legs')}
+          onClick={() => handleClick('knees')}
+          style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
+        />
+        <ellipse
+          cx={HEAT_ZONES.rightKnee.cx}
+          cy={HEAT_ZONES.rightKnee.cy}
+          rx={HEAT_ZONES.rightKnee.rx + 5}
+          ry={HEAT_ZONES.rightKnee.ry + 5}
+          fill="transparent"
+          onClick={() => handleClick('knees')}
+          style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
+        />
+
+        {/* Ankle click areas */}
+        <ellipse
+          cx={HEAT_ZONES.leftAnkle.cx}
+          cy={HEAT_ZONES.leftAnkle.cy}
+          rx={HEAT_ZONES.leftAnkle.rx + 5}
+          ry={HEAT_ZONES.leftAnkle.ry + 5}
+          fill="transparent"
+          onClick={() => handleClick('ankles')}
+          style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
+        />
+        <ellipse
+          cx={HEAT_ZONES.rightAnkle.cx}
+          cy={HEAT_ZONES.rightAnkle.cy}
+          rx={HEAT_ZONES.rightAnkle.rx + 5}
+          ry={HEAT_ZONES.rightAnkle.ry + 5}
+          fill="transparent"
+          onClick={() => handleClick('ankles')}
           style={{ cursor: onRegionClick ? 'pointer' : 'default', pointerEvents: 'auto' }}
         />
       </svg>
@@ -272,7 +455,7 @@ export function BodyHeatMap({ data, techniqueBreakdown }: BodyHeatMapProps) {
   const [selectedRegion, setSelectedRegion] = useState<BodyRegion | null>(null);
 
   const currentData = view === 'given' ? data.given : data.received;
-  const total = currentData.neck + currentData.arms + currentData.legs;
+  const total = ALL_REGIONS.reduce((sum, region) => sum + currentData[region], 0);
 
   // Calculate percentages for heat intensity
   const getIntensity = (region: BodyRegion): number => {
@@ -288,8 +471,11 @@ export function BodyHeatMap({ data, techniqueBreakdown }: BodyHeatMapProps) {
     // Filter techniques by body region mapping
     const regionTechniques: Record<BodyRegion, string[]> = {
       neck: ['rnc', 'rear naked', 'guillotine', 'triangle', 'darce', 'anaconda', 'ezekiel', 'collar choke', 'bow and arrow', 'arm triangle'],
-      arms: ['armbar', 'kimura', 'americana', 'omoplata', 'wristlock'],
-      legs: ['heel hook', 'kneebar', 'toe hold', 'ankle lock', 'calf slicer'],
+      shoulders: ['kimura', 'americana', 'tarikoplata', 'baratoplata', 'monoplata'],
+      elbows: ['armbar', 'omoplata', 'bicep slicer'],
+      wrists: ['wristlock', 'wrist lock', 'gooseneck'],
+      knees: ['kneebar', 'calf slicer', 'texas cloverleaf', 'electric chair', 'banana split', 'twister'],
+      ankles: ['heel hook', 'ankle lock', 'toe hold', 'achilles lock', 'estima lock'],
     };
 
     return breakdown.filter(t =>
@@ -400,8 +586,11 @@ export function BodyHeatMap({ data, techniqueBreakdown }: BodyHeatMapProps) {
         <div style={{ flexShrink: 0 }}>
           <BodySilhouette
             neckIntensity={getIntensity('neck')}
-            armsIntensity={getIntensity('arms')}
-            legsIntensity={getIntensity('legs')}
+            shouldersIntensity={getIntensity('shoulders')}
+            elbowsIntensity={getIntensity('elbows')}
+            wristsIntensity={getIntensity('wrists')}
+            kneesIntensity={getIntensity('knees')}
+            anklesIntensity={getIntensity('ankles')}
             isGiven={view === 'given'}
             onRegionClick={setSelectedRegion}
           />
@@ -409,129 +598,143 @@ export function BodyHeatMap({ data, techniqueBreakdown }: BodyHeatMapProps) {
 
         {/* Stats breakdown */}
         <div style={{ flex: 1, minWidth: 0 }}>
-          {/* Region stats */}
-          {(['neck', 'arms', 'legs'] as BodyRegion[]).map((region) => {
-            const count = currentData[region];
-            const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
-            const isSelected = selectedRegion === region;
+          {/* Region stats - 2 column grid for 6 regions */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '8px',
+            }}
+          >
+            {ALL_REGIONS.map((region) => {
+              const count = currentData[region];
+              const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
+              const isSelected = selectedRegion === region;
 
-            return (
-              <div
-                key={region}
-                onClick={() => setSelectedRegion(isSelected ? null : region)}
-                style={{
-                  padding: '12px',
-                  marginBottom: '8px',
-                  background: isSelected
-                    ? (view === 'given' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)')
-                    : 'var(--color-gray-800)',
-                  borderRadius: 'var(--radius-md)',
-                  border: isSelected
-                    ? `1px solid ${view === 'given' ? 'var(--color-positive)' : 'var(--color-negative)'}`
-                    : '1px solid transparent',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span
-                    style={{
-                      fontSize: 'var(--text-sm)',
-                      fontWeight: 600,
-                      color: 'var(--color-white)',
-                      textTransform: 'capitalize',
-                    }}
-                  >
-                    {region}
-                  </span>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                    <span
-                      style={{
-                        fontSize: 'var(--text-lg)',
-                        fontWeight: 700,
-                        color: view === 'given' ? 'var(--color-positive)' : 'var(--color-negative)',
-                      }}
-                    >
-                      {count}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: 'var(--text-xs)',
-                        color: 'var(--color-gray-500)',
-                      }}
-                    >
-                      ({percentage}%)
-                    </span>
-                  </div>
-                </div>
-
-                {/* Progress bar */}
+              return (
                 <div
+                  key={region}
+                  onClick={() => setSelectedRegion(isSelected ? null : region)}
                   style={{
-                    height: 4,
-                    background: 'var(--color-gray-700)',
-                    borderRadius: 2,
-                    marginTop: '8px',
-                    overflow: 'hidden',
+                    padding: '10px',
+                    background: isSelected
+                      ? (view === 'given' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)')
+                      : 'var(--color-gray-800)',
+                    borderRadius: 'var(--radius-md)',
+                    border: isSelected
+                      ? `1px solid ${view === 'given' ? 'var(--color-positive)' : 'var(--color-negative)'}`
+                      : '1px solid transparent',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
                   }}
                 >
-                  <div
-                    style={{
-                      height: '100%',
-                      width: `${percentage}%`,
-                      background: view === 'given' ? 'var(--color-positive)' : 'var(--color-negative)',
-                      borderRadius: 2,
-                      transition: 'width 0.3s ease',
-                    }}
-                  />
-                </div>
-
-                {/* Expanded technique breakdown */}
-                {isSelected && techniqueBreakdown && (
-                  <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid var(--color-gray-700)' }}>
-                    <div
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span
                       style={{
                         fontSize: 'var(--text-xs)',
-                        color: 'var(--color-gray-500)',
-                        marginBottom: '8px',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.1em',
+                        fontWeight: 600,
+                        color: 'var(--color-white)',
                       }}
                     >
-                      Top techniques
+                      {REGION_LABELS[region]}
+                    </span>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+                      <span
+                        style={{
+                          fontSize: 'var(--text-sm)',
+                          fontWeight: 700,
+                          color: view === 'given' ? 'var(--color-positive)' : 'var(--color-negative)',
+                        }}
+                      >
+                        {count}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: '10px',
+                          color: 'var(--color-gray-500)',
+                        }}
+                      >
+                        ({percentage}%)
+                      </span>
                     </div>
-                    {getRegionTechniques(region).length > 0 ? (
-                      getRegionTechniques(region).map((t) => (
-                        <div
-                          key={t.technique}
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            fontSize: 'var(--text-sm)',
-                            color: 'var(--color-gray-300)',
-                            marginBottom: '4px',
-                          }}
-                        >
-                          <span style={{ textTransform: 'capitalize' }}>{t.technique}</span>
-                          <span style={{ color: 'var(--color-gray-500)' }}>{t.count}</span>
-                        </div>
-                      ))
-                    ) : (
-                      <div style={{ fontSize: 'var(--text-sm)', color: 'var(--color-gray-500)' }}>
-                        No data yet
-                      </div>
-                    )}
                   </div>
-                )}
+
+                  {/* Progress bar */}
+                  <div
+                    style={{
+                      height: 3,
+                      background: 'var(--color-gray-700)',
+                      borderRadius: 2,
+                      marginTop: '6px',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    <div
+                      style={{
+                        height: '100%',
+                        width: `${percentage}%`,
+                        background: view === 'given' ? 'var(--color-positive)' : 'var(--color-negative)',
+                        borderRadius: 2,
+                        transition: 'width 0.3s ease',
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Expanded technique breakdown for selected region */}
+          {selectedRegion && techniqueBreakdown && (
+            <div
+              style={{
+                marginTop: '12px',
+                padding: '12px',
+                background: 'var(--color-gray-800)',
+                borderRadius: 'var(--radius-md)',
+                border: `1px solid ${view === 'given' ? 'var(--color-positive)' : 'var(--color-negative)'}`,
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 'var(--text-xs)',
+                  color: 'var(--color-gray-500)',
+                  marginBottom: '8px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.1em',
+                }}
+              >
+                {REGION_LABELS[selectedRegion]} - Top techniques
               </div>
-            );
-          })}
+              {getRegionTechniques(selectedRegion).length > 0 ? (
+                getRegionTechniques(selectedRegion).map((t) => (
+                  <div
+                    key={t.technique}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      fontSize: 'var(--text-sm)',
+                      color: 'var(--color-gray-300)',
+                      marginBottom: '4px',
+                    }}
+                  >
+                    <span style={{ textTransform: 'capitalize' }}>{t.technique}</span>
+                    <span style={{ color: 'var(--color-gray-500)' }}>{t.count}</span>
+                  </div>
+                ))
+              ) : (
+                <div style={{ fontSize: 'var(--text-sm)', color: 'var(--color-gray-500)' }}>
+                  No data yet
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Total */}
           <div
             style={{
-              marginTop: '16px',
-              paddingTop: '16px',
+              marginTop: '12px',
+              paddingTop: '12px',
               borderTop: '1px solid var(--color-gray-700)',
               display: 'flex',
               justifyContent: 'space-between',
@@ -540,7 +743,7 @@ export function BodyHeatMap({ data, techniqueBreakdown }: BodyHeatMapProps) {
           >
             <span
               style={{
-                fontSize: 'var(--text-sm)',
+                fontSize: 'var(--text-xs)',
                 color: 'var(--color-gray-400)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
@@ -550,7 +753,7 @@ export function BodyHeatMap({ data, techniqueBreakdown }: BodyHeatMapProps) {
             </span>
             <span
               style={{
-                fontSize: 'var(--text-xl)',
+                fontSize: 'var(--text-lg)',
                 fontWeight: 700,
                 color: view === 'given' ? 'var(--color-positive)' : 'var(--color-negative)',
               }}

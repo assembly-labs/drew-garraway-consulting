@@ -341,7 +341,7 @@ export interface ProgressStats {
 // ===========================================
 
 export type SubmissionOutcome = 'given' | 'received';
-export type BodyRegion = 'neck' | 'arms' | 'legs';
+export type BodyRegion = 'neck' | 'shoulders' | 'elbows' | 'wrists' | 'knees' | 'ankles';
 
 /**
  * Submission with count - for tracking multiple of the same submission in a session
@@ -387,6 +387,14 @@ export interface SubmissionInsert {
 /**
  * Maps submission techniques to their target body region
  * Used for heat map visualization
+ *
+ * Granular regions:
+ * - neck: chokes/strangles
+ * - shoulders: shoulder locks (kimura, americana)
+ * - elbows: armbars, omoplata
+ * - wrists: wristlocks
+ * - knees: kneebars, calf slicers
+ * - ankles: ankle locks, heel hooks, toe holds
  */
 export const TECHNIQUE_BODY_MAP: Record<string, BodyRegion> = {
   // Neck/Head submissions (chokes, strangles)
@@ -430,47 +438,54 @@ export const TECHNIQUE_BODY_MAP: Record<string, BodyRegion> = {
   'brabo choke': 'neck',
   'brabo': 'neck',
 
-  // Arm submissions (armlocks, shoulder locks)
-  'armbar': 'arms',
-  'arm bar': 'arms',
-  'juji gatame': 'arms',
-  'kimura': 'arms',
-  'double wristlock': 'arms',
-  'americana': 'arms',
-  'keylock': 'arms',
-  'key lock': 'arms',
-  'omoplata': 'arms',
-  'straight armlock': 'arms',
-  'straight arm lock': 'arms',
-  'wristlock': 'arms',
-  'wrist lock': 'arms',
-  'bicep slicer': 'arms',
-  'bicep crusher': 'arms',
-  'tarikoplata': 'arms',
-  'baratoplata': 'arms',
-  'monoplata': 'arms',
+  // Shoulder submissions (shoulder locks)
+  'kimura': 'shoulders',
+  'double wristlock': 'shoulders',
+  'americana': 'shoulders',
+  'keylock': 'shoulders',
+  'key lock': 'shoulders',
+  'tarikoplata': 'shoulders',
+  'baratoplata': 'shoulders',
+  'monoplata': 'shoulders',
 
-  // Leg submissions (leg locks)
-  'heel hook': 'legs',
-  'inside heel hook': 'legs',
-  'outside heel hook': 'legs',
-  'kneebar': 'legs',
-  'knee bar': 'legs',
-  'toe hold': 'legs',
-  'toehold': 'legs',
-  'ankle lock': 'legs',
-  'straight ankle lock': 'legs',
-  'straight ankle': 'legs',
-  'achilles lock': 'legs',
-  'calf slicer': 'legs',
-  'calf crusher': 'legs',
-  'estima lock': 'legs',
-  'texas cloverleaf': 'legs',
-  'electric chair': 'legs',
-  'banana split': 'legs',
-  'vaporizer': 'legs',
-  'aoki lock': 'legs',
-  'twister': 'legs', // Technically spine but often grouped with leg attacks
+  // Elbow submissions (armbars)
+  'armbar': 'elbows',
+  'arm bar': 'elbows',
+  'juji gatame': 'elbows',
+  'omoplata': 'elbows',
+  'straight armlock': 'elbows',
+  'straight arm lock': 'elbows',
+  'bicep slicer': 'elbows',
+  'bicep crusher': 'elbows',
+
+  // Wrist submissions (wristlocks)
+  'wristlock': 'wrists',
+  'wrist lock': 'wrists',
+  'gooseneck': 'wrists',
+
+  // Knee submissions (kneebars, calf slicers)
+  'kneebar': 'knees',
+  'knee bar': 'knees',
+  'calf slicer': 'knees',
+  'calf crusher': 'knees',
+  'texas cloverleaf': 'knees',
+  'electric chair': 'knees',
+  'banana split': 'knees',
+  'vaporizer': 'knees',
+  'twister': 'knees', // Technically spine but often grouped with leg attacks
+
+  // Ankle submissions (ankle locks, heel hooks, toe holds)
+  'heel hook': 'ankles',
+  'inside heel hook': 'ankles',
+  'outside heel hook': 'ankles',
+  'toe hold': 'ankles',
+  'toehold': 'ankles',
+  'ankle lock': 'ankles',
+  'straight ankle lock': 'ankles',
+  'straight ankle': 'ankles',
+  'achilles lock': 'ankles',
+  'estima lock': 'ankles',
+  'aoki lock': 'ankles',
 };
 
 /**
