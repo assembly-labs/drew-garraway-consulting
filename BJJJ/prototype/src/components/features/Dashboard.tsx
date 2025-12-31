@@ -27,6 +27,7 @@ import {
   BreakthroughHero,
   BreakthroughList,
   TournamentReadinessCard,
+  BodyHeatMap,
 } from '../ui';
 import { AttackProfile } from './AttackProfile';
 import {
@@ -648,6 +649,21 @@ export function Dashboard(_props: DashboardProps) {
           </div>
         </section>
       )}
+
+      {/* ============================================
+          BODY HEAT MAP - Attack Profile with HUD targeting
+          ============================================ */}
+      <section
+        style={{
+          padding: '24px',
+          borderTop: '1px solid var(--color-gray-800)',
+        }}
+      >
+        <BodyHeatMap
+          data={mockSubmissionStats.bodyHeatMap}
+          techniqueBreakdown={mockSubmissionStats.techniqueBreakdown}
+        />
+      </section>
 
       {/* ============================================
           WHITE BELT MODULES - Retention-focused stats
