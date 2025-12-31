@@ -29,6 +29,25 @@ import {
   TournamentReadinessCard,
 } from '../ui';
 import { AttackProfile } from './AttackProfile';
+import {
+  JourneyTimeline,
+  ConsistencyScore,
+  FoundationsProgress,
+  YourStyle,
+  VulnerabilityMap,
+  TechniquePairings,
+  BluesDetector,
+  LongGame,
+  SubmissionTrends,
+  TechniqueMastery,
+} from './stats-modules';
+import {
+  MOCK_BLUE_BELT_STATS,
+  MOCK_WHITE_BELT_STATS,
+  MOCK_PURPLE_BELT_STATS,
+  MOCK_PURPLE_TECHNIQUE_MASTERY,
+  type SubmissionRecord,
+} from '../../data/stats-modules';
 import { useCountUp, useBeltPersonalization } from '../../hooks';
 import { useUserProfile } from '../../context/UserProfileContext';
 import {
@@ -439,6 +458,67 @@ export function Dashboard(_props: DashboardProps) {
   const streakGlowThreshold = dashboard.streakEmphasis === 'high' ? 7 : dashboard.streakEmphasis === 'medium' ? 10 : 14;
   const showStreakGlow = stats.currentStreak >= streakGlowThreshold;
 
+  // Derive technique history for Foundations Progress module
+  const techniqueHistory = useMemo(() => {
+    return allJournalEntries.slice(0, 20).map((entry) => ({
+      date: entry.date,
+      techniques: [
+        ...(entry.techniquesDrilled || []),
+        ...entry.techniques.map((t) => t.techniqueName),
+      ],
+    }));
+  }, [allJournalEntries]);
+
+  // Check if we should show belt-specific modules
+  const showWhiteBeltModules = profile.belt === 'white';
+  const showBlueBeltModules = profile.belt === 'blue';
+  const showPurpleBeltModules = profile.belt === 'purple' || profile.belt === 'brown' || profile.belt === 'black';
+
+  // Derive submission data for Blue Belt modules
+  const blueBeltData = useMemo(() => {
+    // Use mock data based on belt level for demo
+    const mockStats = profile.belt === 'blue' ? MOCK_BLUE_BELT_STATS : MOCK_WHITE_BELT_STATS;
+
+    // Calculate days since last session (approximate from current streak)
+    const daysSinceLastSession = stats.currentStreak > 0 ? 0 : 3; // Mock: 0 if on streak, 3 otherwise
+
+    // Calculate sessions last month (approximate from this month)
+    const sessionsLastMonth = Math.max(6, stats.thisMonth.sessions - 2);
+
+    // Get recent notes for sentiment analysis
+    const recentNotes = allJournalEntries
+      .slice(0, 5)
+      .map((entry) => entry.notes || '')
+      .filter((note) => note.length > 0);
+
+    return {
+      submissionsGiven: mockStats.submissionsGiven as SubmissionRecord[],
+      submissionsReceived: mockStats.submissionsReceived as SubmissionRecord[],
+      sessionsThisMonth: stats.thisMonth.sessions,
+      sessionsLastMonth,
+      daysSinceLastSession,
+      daysSincePromotion: 180, // Mock: 6 months since getting blue belt
+      recentNotes,
+    };
+  }, [profile.belt, stats, allJournalEntries]);
+
+  // Derive data for Purple Belt modules
+  const purpleBeltData = useMemo(() => {
+    // Use purple belt mock data for demo
+    const mockStats = MOCK_PURPLE_BELT_STATS;
+
+    return {
+      yearlyData: mockStats.yearlySessionCounts,
+      totalSessions: mockStats.sessionCount,
+      totalMinutes: mockStats.totalMinutes,
+      sparringRounds: mockStats.sparringRounds,
+      trainingStartDate: mockStats.trainingStartDate,
+      submissionsGiven: mockStats.submissionsGiven as SubmissionRecord[],
+      submissionsReceived: mockStats.submissionsReceived as SubmissionRecord[],
+      techniqueMastery: MOCK_PURPLE_TECHNIQUE_MASTERY,
+    };
+  }, []);
+
   // Belt-specific motivational message based on current stage
   const getBeltMotivationalMessage = () => {
     if (isInRiskWindow) {
@@ -567,6 +647,100 @@ export function Dashboard(_props: DashboardProps) {
             scroll
           </div>
         </section>
+      )}
+
+      {/* ============================================
+          WHITE BELT MODULES - Retention-focused stats
+          Only shown for white belts to maximize retention
+          ============================================ */}
+      {showWhiteBeltModules && (
+        <>
+          {/* Journey Timeline - Milestones and dropout cliff positioning */}
+          <JourneyTimeline
+            sessionCount={stats.totalSessions}
+            trainingStartDate={isDemoMode && activeDemoProfile
+              ? '2024-07-15' // Mock start date for demo
+              : null
+            }
+          />
+
+          {/* Consistency Score - Session count and streak emphasis */}
+          <ConsistencyScore
+            sessionCount={stats.totalSessions}
+            currentStreak={stats.currentStreak}
+            longestStreak={stats.longestStreak}
+            sessionsThisWeek={stats.thisMonth.sessions > 4 ? Math.min(3, Math.ceil(stats.thisMonth.sessions / 4)) : 2}
+            sessionsThisMonth={stats.thisMonth.sessions}
+            targetFrequency={3}
+          />
+
+          {/* Foundations Progress - Fundamental technique checklist */}
+          <FoundationsProgress
+            techniqueHistory={techniqueHistory}
+          />
+        </>
+      )}
+
+      {/* ============================================
+          BLUE BELT MODULES - Identity & Game Development
+          Only shown for blue belts
+          ============================================ */}
+      {showBlueBeltModules && (
+        <>
+          {/* Your Style - Submission balance and emerging style */}
+          <YourStyle
+            submissionsGiven={blueBeltData.submissionsGiven}
+            submissionsReceived={blueBeltData.submissionsReceived}
+          />
+
+          {/* Vulnerability Map - Where you're getting caught */}
+          <VulnerabilityMap
+            submissionsReceived={blueBeltData.submissionsReceived}
+          />
+
+          {/* Technique Pairings - Co-occurrence analysis */}
+          <TechniquePairings
+            techniqueHistory={techniqueHistory}
+          />
+
+          {/* Blues Detector - Dropout risk interventions */}
+          <BluesDetector
+            sessionsThisMonth={blueBeltData.sessionsThisMonth}
+            sessionsLastMonth={blueBeltData.sessionsLastMonth}
+            daysSinceLastSession={blueBeltData.daysSinceLastSession}
+            daysSincePromotion={blueBeltData.daysSincePromotion}
+            recentNotes={blueBeltData.recentNotes}
+          />
+        </>
+      )}
+
+      {/* ============================================
+          PURPLE BELT MODULES - Depth & Systems
+          Shown for purple, brown, and black belts
+          ============================================ */}
+      {showPurpleBeltModules && (
+        <>
+          {/* Long Game - Multi-year progression visualization */}
+          <LongGame
+            yearlyData={purpleBeltData.yearlyData}
+            totalSessions={purpleBeltData.totalSessions}
+            totalMinutes={purpleBeltData.totalMinutes}
+            sparringRounds={purpleBeltData.sparringRounds}
+            trainingStartDate={purpleBeltData.trainingStartDate}
+          />
+
+          {/* Submission Trends - Finishing trends over time */}
+          <SubmissionTrends
+            yearlyData={purpleBeltData.yearlyData}
+            submissionsGiven={purpleBeltData.submissionsGiven}
+            submissionsReceived={purpleBeltData.submissionsReceived}
+          />
+
+          {/* Technique Mastery - Specialization depth */}
+          <TechniqueMastery
+            techniques={purpleBeltData.techniqueMastery}
+          />
+        </>
       )}
 
       {/* ============================================

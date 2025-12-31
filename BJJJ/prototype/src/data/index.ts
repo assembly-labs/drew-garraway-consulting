@@ -17,6 +17,9 @@ export * from './progress';
 export * from './feedback';
 export * from './competitions';
 
+// Stats Modules (Belt-Adaptive)
+export * from './stats-modules';
+
 // Belt Ranking Criteria (IBJJF-based)
 export * from './belt-criteria';
 
