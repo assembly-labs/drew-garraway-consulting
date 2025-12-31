@@ -44,6 +44,54 @@ const DURATION_OPTIONS = [
 ];
 
 // ===========================================
+// RECENT TOPICS (would come from user history in production)
+// ===========================================
+
+const RECENT_TOPICS = [
+  'Half guard',
+  'Armbar',
+  'Sweeps',
+  'Guard passing',
+  'Back takes',
+  'Escapes',
+];
+
+// ===========================================
+// SMART DEFAULTS (would come from user context/API in production)
+// Based on: most frequent training type, typical session length
+// ===========================================
+
+interface UserTrainingPatterns {
+  mostCommonTrainingType: TrainingType;
+  typicalDurationMinutes: number;
+  recentTopics: string[];
+}
+
+// Mock user patterns - in production, this would come from UserProfileContext
+const getUserTrainingPatterns = (): UserTrainingPatterns => {
+  // These would be computed from user's session history
+  // For now, return sensible defaults based on BJJ norms
+  return {
+    mostCommonTrainingType: 'gi',       // Most gyms are Gi-focused
+    typicalDurationMinutes: 90,          // Standard class length
+    recentTopics: RECENT_TOPICS,
+  };
+};
+
+// ===========================================
+// TRAINING TYPE LABELS
+// ===========================================
+
+const TRAINING_TYPE_LABELS: Record<TrainingType, string> = {
+  gi: 'Gi',
+  nogi: 'No-Gi',
+  openmat: 'Open Mat',
+  private: 'Private',
+  competition: 'Competition',
+  drilling: 'Drilling',
+};
+
+// ===========================================
 // COMPONENT
 // ===========================================
 
@@ -60,9 +108,14 @@ const TRAINING_TYPE_COLORS: Record<TrainingType, string> = {
 export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLoggerProps) {
   const { sessionLogger } = useBeltPersonalization();
 
-  // Form state
+  // Get smart defaults based on user's training patterns
+  const userPatterns = getUserTrainingPatterns();
+
+  // Form state - pre-filled with smart defaults so Quick Save is available immediately
   const [sessionData, setSessionData] = useState<SessionData>({
     ...DEFAULT_SESSION_DATA,
+    trainingType: userPatterns.mostCommonTrainingType,
+    durationMinutes: userPatterns.typicalDurationMinutes,
   });
   const [customDuration, setCustomDuration] = useState('');
   const [showCustomDuration, setShowCustomDuration] = useState(false);
@@ -82,7 +135,44 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
     );
   };
 
-  // Handle save
+  // Check if Quick Save is available (minimal data for fast exit)
+  const canQuickSave = () => {
+    return sessionData.trainingType !== null && sessionData.durationMinutes !== null;
+  };
+
+  // Generate smart description for Quick Save
+  const getQuickSaveDescription = () => {
+    const timeOfDay = new Date().getHours();
+    const period = timeOfDay < 12 ? 'Morning' : timeOfDay < 17 ? 'Afternoon' : 'Evening';
+    const type = sessionData.trainingType ? TRAINING_TYPE_LABELS[sessionData.trainingType] : '';
+    const duration = sessionData.durationMinutes ? `${sessionData.durationMinutes} min` : '';
+    return `${period} ${type} session${duration ? ` • ${duration}` : ''}`;
+  };
+
+  // Handle Quick Save (saves with minimal data + auto-generated description)
+  const handleQuickSave = async () => {
+    if (!canQuickSave()) return;
+
+    setIsSubmitting(true);
+
+    // Auto-fill technique with generic description if empty
+    const dataToSave = {
+      ...sessionData,
+      techniquesDrilled: sessionData.techniquesDrilled.length > 0
+        ? sessionData.techniquesDrilled
+        : ['General training'],
+      lessonTopic: sessionData.lessonTopic || getQuickSaveDescription(),
+    };
+
+    // In production, this would call api.sessions.create()
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    console.log('Quick save:', dataToSave);
+    setIsSubmitting(false);
+    onComplete?.();
+  };
+
+  // Handle full save
   const handleSave = async () => {
     if (!isValid()) return;
 
@@ -161,8 +251,65 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
         <div style={{ width: 60 }} /> {/* Spacer for centering */}
       </div>
 
+      {/* Quick Save Banner - appears when minimal data is entered */}
+      {canQuickSave() && (
+        <button
+          onClick={handleQuickSave}
+          disabled={isSubmitting}
+          style={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: 'var(--space-md) var(--space-lg)',
+            backgroundColor: 'var(--color-gold-dim)',
+            border: '1px solid var(--color-gold)',
+            borderRadius: 'var(--radius-md)',
+            cursor: 'pointer',
+            marginBottom: 'var(--space-lg)',
+            minHeight: '56px',
+            transition: 'all 0.2s ease',
+          }}
+        >
+          <div style={{ textAlign: 'left' }}>
+            <div style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: 'var(--tracking-wider)',
+              color: 'var(--color-gold)',
+              marginBottom: '2px',
+            }}>
+              Quick Save
+            </div>
+            <div style={{
+              fontSize: 'var(--text-sm)',
+              fontWeight: 500,
+              color: 'var(--color-gray-200)',
+            }}>
+              {getQuickSaveDescription()}
+            </div>
+          </div>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--space-xs)',
+            color: 'var(--color-gold)',
+            fontWeight: 600,
+            fontSize: 'var(--text-sm)',
+          }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+              <polyline points="13 2 13 9 20 9" />
+            </svg>
+            Save
+          </div>
+        </button>
+      )}
+
       {/* Voice Assist Button */}
-      {onVoiceAssist && (
+      {onVoiceAssist && !canQuickSave() && (
         <button
           onClick={onVoiceAssist}
           style={{
@@ -179,7 +326,7 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
             fontSize: 'var(--text-sm)',
             fontWeight: 500,
             cursor: 'pointer',
-            marginBottom: 'var(--space-xl)',
+            marginBottom: 'var(--space-lg)',
             minHeight: '56px',
             transition: 'all 0.2s ease',
           }}
@@ -194,8 +341,30 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
         </button>
       )}
 
-      {/* Training Type */}
-      <div style={{ marginBottom: 'var(--space-xl)' }}>
+      {/* ============================================ */}
+      {/* CARD 1: THE BASICS */}
+      {/* ============================================ */}
+      <div style={{
+        backgroundColor: 'var(--color-gray-900)',
+        border: '1px solid var(--color-gray-800)',
+        borderRadius: 'var(--radius-md)',
+        padding: 'var(--space-lg)',
+        marginBottom: 'var(--space-lg)',
+      }}>
+        <div style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--text-xs)',
+          fontWeight: 700,
+          textTransform: 'uppercase',
+          letterSpacing: 'var(--tracking-widest)',
+          color: 'var(--color-gray-500)',
+          marginBottom: 'var(--space-lg)',
+        }}>
+          The Basics
+        </div>
+
+        {/* Training Type */}
+        <div style={{ marginBottom: 'var(--space-lg)' }}>
         <label
           style={{
             display: 'block',
@@ -341,24 +510,31 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
             />
           </div>
         )}
-      </div>
+        </div>
+      </div>{/* End Card 1: The Basics */}
 
-      {/* What did you learn/drill? */}
-      <div style={{ marginBottom: 'var(--space-xl)' }}>
-        <label
-          style={{
-            display: 'block',
-            fontFamily: 'var(--font-mono)',
-            fontSize: 'var(--text-xs)',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: 'var(--tracking-wider)',
-            color: 'var(--color-gray-400)',
-            marginBottom: 'var(--space-sm)',
-          }}
-        >
-          What did you learn/drill? *
-        </label>
+      {/* ============================================ */}
+      {/* CARD 2: WHAT YOU WORKED ON */}
+      {/* ============================================ */}
+      <div style={{
+        backgroundColor: 'var(--color-gray-900)',
+        border: '1px solid var(--color-gray-800)',
+        borderRadius: 'var(--radius-md)',
+        padding: 'var(--space-lg)',
+        marginBottom: 'var(--space-lg)',
+      }}>
+        <div style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--text-xs)',
+          fontWeight: 700,
+          textTransform: 'uppercase',
+          letterSpacing: 'var(--tracking-widest)',
+          color: 'var(--color-gray-500)',
+          marginBottom: 'var(--space-md)',
+        }}>
+          What You Worked On
+        </div>
+
         <input
           type="text"
           value={sessionData.lessonTopic || ''}
@@ -375,180 +551,213 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
           style={{
             width: '100%',
             padding: 'var(--space-md)',
-            backgroundColor: 'var(--color-gray-900)',
+            backgroundColor: 'var(--color-gray-800)',
             border: '1px solid var(--color-gray-700)',
             borderRadius: 'var(--radius-md)',
             color: 'var(--color-white)',
             fontSize: 'var(--text-base)',
+            marginBottom: 'var(--space-md)',
           }}
         />
-        <p
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: 'var(--text-xs)',
-            color: 'var(--color-gray-500)',
-            marginTop: 'var(--space-sm)',
-          }}
-        >
-          e.g., "Half guard sweeps" or "Knee slice passing"
-        </p>
-      </div>
 
-      {/* Did you spar? */}
-      <div style={{ marginBottom: 'var(--space-xl)' }}>
-        <label
-          style={{
-            display: 'block',
+        {/* Recent Topics Chips */}
+        <div>
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '10px',
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            letterSpacing: 'var(--tracking-wider)',
+            color: 'var(--color-gray-500)',
+            marginBottom: 'var(--space-xs)',
+          }}>
+            Quick add
+          </div>
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 'var(--space-xs)',
+          }}>
+            {RECENT_TOPICS.map(topic => (
+              <button
+                key={topic}
+                onClick={() => {
+                  updateField('lessonTopic', topic);
+                  updateField('techniquesDrilled', [topic]);
+                }}
+                style={{
+                  padding: 'var(--space-xs) var(--space-sm)',
+                  backgroundColor: sessionData.lessonTopic === topic
+                    ? 'var(--color-gold-dim)'
+                    : 'var(--color-gray-800)',
+                  border: sessionData.lessonTopic === topic
+                    ? '1px solid var(--color-gold)'
+                    : '1px solid var(--color-gray-700)',
+                  borderRadius: 'var(--radius-full)',
+                  color: sessionData.lessonTopic === topic
+                    ? 'var(--color-gold)'
+                    : 'var(--color-gray-400)',
+                  fontSize: 'var(--text-xs)',
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {topic}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>{/* End Card 2: What You Worked On */}
+
+      {/* ============================================ */}
+      {/* CARD 3: SPARRING (Optional) */}
+      {/* ============================================ */}
+      <div style={{
+        backgroundColor: 'var(--color-gray-900)',
+        border: '1px solid var(--color-gray-800)',
+        borderLeft: sessionData.didSpar ? '3px solid var(--color-positive)' : '1px solid var(--color-gray-800)',
+        borderRadius: 'var(--radius-md)',
+        padding: 'var(--space-lg)',
+        marginBottom: 'var(--space-lg)',
+      }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: sessionData.didSpar ? 'var(--space-lg)' : 0,
+        }}>
+          <div style={{
             fontFamily: 'var(--font-mono)',
             fontSize: 'var(--text-xs)',
             fontWeight: 700,
             textTransform: 'uppercase',
-            letterSpacing: 'var(--tracking-wider)',
-            color: 'var(--color-gray-400)',
-            marginBottom: 'var(--space-sm)',
-          }}
-        >
-          Did you spar?
-        </label>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 'var(--space-sm)',
-          }}
-        >
-          <button
-            onClick={() => updateField('didSpar', true)}
-            style={{
-              padding: 'var(--space-md)',
-              backgroundColor: sessionData.didSpar
-                ? 'var(--color-positive)'
-                : 'var(--color-gray-800)',
-              border: sessionData.didSpar
-                ? '2px solid var(--color-positive)'
-                : '1px solid var(--color-gray-700)',
-              borderRadius: 'var(--radius-md)',
-              color: sessionData.didSpar
-                ? 'var(--color-black)'
-                : 'var(--color-gray-300)',
-              fontSize: 'var(--text-sm)',
-              fontWeight: 600,
-              cursor: 'pointer',
-              minHeight: '56px',
-              transition: 'all 0.15s ease',
-            }}
-          >
-            Yes
-          </button>
-          <button
-            onClick={() => {
-              updateField('didSpar', false);
-              updateField('sparringRounds', null);
-              updateField('submissionsGiven', []);
-              updateField('submissionsReceived', []);
-            }}
-            style={{
-              padding: 'var(--space-md)',
-              backgroundColor: sessionData.didSpar === false
-                ? 'var(--color-gray-600)'
-                : 'var(--color-gray-800)',
-              border: sessionData.didSpar === false
-                ? '2px solid var(--color-gray-500)'
-                : '1px solid var(--color-gray-700)',
-              borderRadius: 'var(--radius-md)',
-              color: 'var(--color-gray-300)',
-              fontSize: 'var(--text-sm)',
-              fontWeight: 600,
-              cursor: 'pointer',
-              minHeight: '56px',
-              transition: 'all 0.15s ease',
-            }}
-          >
-            No
-          </button>
-        </div>
-      </div>
+            letterSpacing: 'var(--tracking-widest)',
+            color: 'var(--color-gray-500)',
+          }}>
+            Sparring
+            <span style={{
+              marginLeft: 'var(--space-sm)',
+              fontWeight: 500,
+              color: 'var(--color-gray-600)',
+              textTransform: 'none',
+              letterSpacing: 'normal',
+            }}>
+              optional
+            </span>
+          </div>
 
-      {/* Sparring Section (gated) */}
-      {sessionData.didSpar && (
-        <div
-          style={{
-            backgroundColor: 'var(--color-gray-900)',
-            border: '1px solid var(--color-gray-800)',
-            borderLeft: '3px solid var(--color-positive)',
-            borderRadius: 'var(--radius-md)',
-            padding: 'var(--space-lg)',
-            marginBottom: 'var(--space-xl)',
-          }}
-        >
-          {/* Rounds */}
-          <div style={{ marginBottom: 'var(--space-lg)' }}>
-            <label
+          {/* Toggle */}
+          <div style={{
+            display: 'flex',
+            gap: 'var(--space-xs)',
+          }}>
+            <button
+              onClick={() => updateField('didSpar', true)}
               style={{
+                padding: 'var(--space-xs) var(--space-md)',
+                backgroundColor: sessionData.didSpar ? 'var(--color-positive)' : 'transparent',
+                border: sessionData.didSpar ? '1px solid var(--color-positive)' : '1px solid var(--color-gray-700)',
+                borderRadius: 'var(--radius-sm)',
+                color: sessionData.didSpar ? 'var(--color-black)' : 'var(--color-gray-400)',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+              }}
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => {
+                updateField('didSpar', false);
+                updateField('sparringRounds', null);
+                updateField('submissionsGiven', []);
+                updateField('submissionsReceived', []);
+              }}
+              style={{
+                padding: 'var(--space-xs) var(--space-md)',
+                backgroundColor: sessionData.didSpar === false ? 'var(--color-gray-700)' : 'transparent',
+                border: sessionData.didSpar === false ? '1px solid var(--color-gray-600)' : '1px solid var(--color-gray-700)',
+                borderRadius: 'var(--radius-sm)',
+                color: sessionData.didSpar === false ? 'var(--color-white)' : 'var(--color-gray-400)',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+              }}
+            >
+              No
+            </button>
+          </div>
+        </div>
+
+        {/* Sparring Details (expanded when Yes) */}
+        {sessionData.didSpar && (
+          <div>
+            {/* Rounds */}
+            <div style={{ marginBottom: 'var(--space-lg)' }}>
+              <label style={{
                 display: 'block',
                 fontFamily: 'var(--font-mono)',
                 fontSize: 'var(--text-xs)',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: 'var(--tracking-wider)',
+                fontWeight: 600,
                 color: 'var(--color-gray-400)',
                 marginBottom: 'var(--space-sm)',
-              }}
-            >
-              How many rounds?
-            </label>
-            <div
-              style={{
+              }}>
+                Rounds
+              </label>
+              <div style={{
                 display: 'flex',
                 flexWrap: 'wrap',
                 gap: 'var(--space-xs)',
-              }}
-            >
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => {
-                const isSelected = sessionData.sparringRounds === n;
-                return (
-                  <button
-                    key={n}
-                    onClick={() => updateField('sparringRounds', n)}
-                    style={{
-                      width: '48px',
-                      height: '48px',
-                      backgroundColor: isSelected ? 'var(--color-gold)' : 'var(--color-gray-800)',
-                      border: isSelected ? '2px solid var(--color-gold)' : '1px solid var(--color-gray-700)',
-                      borderRadius: 'var(--radius-md)',
-                      color: isSelected ? 'var(--color-black)' : 'var(--color-gray-300)',
-                      fontSize: 'var(--text-sm)',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease',
-                    }}
-                  >
-                    {n}
-                  </button>
-                );
-              })}
+              }}>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => {
+                  const isSelected = sessionData.sparringRounds === n;
+                  return (
+                    <button
+                      key={n}
+                      onClick={() => updateField('sparringRounds', n)}
+                      style={{
+                        width: '40px',
+                        height: '40px',
+                        backgroundColor: isSelected ? 'var(--color-gold)' : 'var(--color-gray-800)',
+                        border: isSelected ? '2px solid var(--color-gold)' : '1px solid var(--color-gray-700)',
+                        borderRadius: 'var(--radius-sm)',
+                        color: isSelected ? 'var(--color-black)' : 'var(--color-gray-300)',
+                        fontSize: 'var(--text-sm)',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      {n}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
+
+            {/* Subs Given */}
+            <SubmissionPicker
+              label="Subs given"
+              selectedSubmissions={sessionData.submissionsGiven}
+              onSubmissionsChange={subs => updateField('submissionsGiven', subs)}
+              userHistory={[]}
+            />
+
+            {/* Submitted By */}
+            <SubmissionPicker
+              label="Submitted by"
+              selectedSubmissions={sessionData.submissionsReceived}
+              onSubmissionsChange={subs => updateField('submissionsReceived', subs)}
+              userHistory={[]}
+            />
           </div>
+        )}
+      </div>{/* End Card 3: Sparring */}
 
-          {/* Subs Given */}
-          <SubmissionPicker
-            label="Subs given"
-            selectedSubmissions={sessionData.submissionsGiven}
-            onSubmissionsChange={subs => updateField('submissionsGiven', subs)}
-            userHistory={[]} // Would come from user's history in production
-          />
-
-          {/* Submitted By */}
-          <SubmissionPicker
-            label="Submitted by"
-            selectedSubmissions={sessionData.submissionsReceived}
-            onSubmissionsChange={subs => updateField('submissionsReceived', subs)}
-            userHistory={[]} // Would come from user's history in production
-          />
-        </div>
-      )}
-
-      {/* Notes (optional) */}
+      {/* Notes (optional, de-emphasized) */}
       <div style={{ marginBottom: 'var(--space-lg)' }}>
         <label
           style={{
