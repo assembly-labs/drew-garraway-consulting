@@ -9,17 +9,20 @@
 <body>
   <!-- Header -->
   <div class="header">
-    <div class="header-eyebrow">Design System v2.0</div>
+    <div class="header-eyebrow">Design System v2.1</div>
     <h1>BJJ JOURNAL</h1>
-    <p>Bold, dark, typography-forward. No emojis. Large numbers. Full-bleed sections. Linear/Palantir inspired.</p>
+    <p>Bold, dark, typography-forward. Inter + JetBrains Mono. No emojis. Large numbers. Full-bleed sections. Linear/Palantir inspired.</p>
   </div>
 
   <!-- Tab Navigation -->
   <div class="tabs">
+    <a href="typography.html" class="tab">Typography</a>
+    <a href="icons.html" class="tab">Icons</a>
     <button class="tab active" data-tab="foundations">Foundations</button>
     <button class="tab" data-tab="components">Components</button>
     <button class="tab" data-tab="patterns">Patterns</button>
     <button class="tab" data-tab="motion">Motion</button>
+    <a href="font-test.html" class="tab" style="margin-left:auto;color:#22c55e" title="Archived - Decision Made">Font Test ✓</a>
   </div>
 
   <!-- Content -->
@@ -133,11 +136,11 @@
           <div style="display:flex;flex-direction:column;gap:24px">
             <div>
               <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.15em;color:#fff">Section Title</div>
-              <code style="font-size:10px;color:#525252">12px / 600 / uppercase / 0.15em tracking</code>
+              <code style="font-size:12px;color:#525252">12px / 600 / uppercase / 0.15em tracking</code>
             </div>
             <div>
-              <div style="font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:#F5A623">Eyebrow Label</div>
-              <code style="font-size:10px;color:#525252">Space Mono / 10px / uppercase / 0.2em tracking / gold</code>
+              <div style="font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:0.2em;color:#F5A623">Eyebrow Label</div>
+              <code style="font-size:12px;color:#525252">JetBrains Mono / 12px (min) / uppercase / 0.2em tracking / gold</code>
             </div>
           </div>
         </div>
@@ -145,7 +148,7 @@
         <div class="subsection">
           <h3 class="subsection-title">Body Text</h3>
           <p style="font-size:16px;color:#f5f5f5;line-height:1.6;max-width:500px;margin:0">
-            Body text uses Space Grotesk at 16px with 1.6 line height. Keep paragraphs concise for exhausted users post-training.
+            Body text uses Inter at 15px with weight 500 and 1.6 line height. Keep paragraphs concise for exhausted users post-training.
           </p>
         </div>
       </section>
@@ -304,67 +307,168 @@
 
       <!-- Icons -->
       <section class="section">
-        <h2 class="section-title">Lineart Icons</h2>
-        <p class="text-muted" style="margin-bottom:24px;max-width:400px">
-          Never use emojis. Always use SVG lineart icons from the Icons component.
+        <h2 class="section-title">Icon Library (106 Icons)</h2>
+        <p class="text-muted" style="margin-bottom:16px;max-width:500px">
+          Never use emojis. Always use SVG lineart icons from the Icons component. All icons are 24x24, stroke-based.
         </p>
-        <div class="flex flex-wrap gap-lg">
-          <div class="text-center">
-            <div class="icon-demo">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
+        <p style="margin-bottom:24px">
+          <a href="../../prototype/public/icons.html" style="color:#F5A623;text-decoration:underline">View Full Icon Library →</a>
+        </p>
+
+        <div class="subsection">
+          <h3 class="subsection-title">BJJ Training</h3>
+          <div class="flex flex-wrap gap-lg">
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 3h10v18H7z"/>
+                  <path d="M7 4H3v5h4"/>
+                  <path d="M17 4h4v5h-4"/>
+                  <path d="M10 3v5l2 2 2-2V3"/>
+                  <rect x="7" y="12" width="10" height="2"/>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Gi</span>
             </div>
-            <span class="text-muted" style="font-size:9px;display:block;margin-top:8px">Check</span>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 2h8l1 1v8l-.5 10h-3l-1.5-5-1.5 5h-3L7 11V3l1-1z"/>
+                  <path d="M7 4H4l.5 5H7"/>
+                  <path d="M17 4h3l-.5 5H17"/>
+                  <path d="M10 2c0 1 1 1.5 2 1.5s2-.5 2-1.5"/>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">NoGi</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="7" cy="5" r="2"/>
+                  <circle cx="17" cy="5" r="2"/>
+                  <path d="M5 10h4l2 4-2 4H5"/>
+                  <path d="M19 10h-4l-2 4 2 4h4"/>
+                  <path d="M10 14h4"/>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Sparring</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="9" width="20" height="6" rx="1"/>
+                  <path d="M12 9v6"/>
+                  <path d="M12 15v4l-2 2"/>
+                  <path d="M12 19l2 2"/>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Belt</span>
+            </div>
           </div>
-          <div class="text-center">
-            <div class="icon-demo">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
-              </svg>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Progress & Status</h3>
+          <div class="flex flex-wrap gap-lg">
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Check</span>
             </div>
-            <span class="text-muted" style="font-size:9px;display:block;margin-top:8px">Streak</span>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Flame</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                  <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                  <path d="M4 22h16"></path>
+                  <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                  <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                  <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Trophy</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="6"></circle>
+                  <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Target</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                  <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">TrendUp</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+                  <polyline points="17 18 23 18 23 12"></polyline>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">TrendDown</span>
+            </div>
           </div>
-          <div class="text-center">
-            <div class="icon-demo">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                <path d="M4 22h16"></path>
-                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-              </svg>
-            </div>
-            <span class="text-muted" style="font-size:9px;display:block;margin-top:8px">Trophy</span>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Icon Usage</h3>
+          <div style="background:var(--color-gray-900);padding:20px;font-family:var(--font-mono);font-size:12px;color:var(--color-gray-300)">
+            <code style="display:block;margin-bottom:8px;color:#F5A623">// Import from Icons component</code>
+            <code style="display:block;margin-bottom:16px">import { Icons } from '@/components/ui/Icons';</code>
+            <code style="display:block;margin-bottom:8px;color:#F5A623">// Usage</code>
+            <code style="display:block;margin-bottom:4px">&lt;Icons.Gi size={24} /&gt;</code>
+            <code style="display:block;margin-bottom:4px">&lt;Icons.NoGi size={24} /&gt;</code>
+            <code style="display:block;margin-bottom:4px">&lt;Icons.Trophy size={24} color="var(--color-gold)" /&gt;</code>
           </div>
-          <div class="text-center">
-            <div class="icon-demo">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <circle cx="12" cy="12" r="6"></circle>
-                <circle cx="12" cy="12" r="2"></circle>
-              </svg>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Icon Categories</h3>
+          <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:16px;font-size:12px">
+            <div>
+              <div style="color:var(--color-gold);margin-bottom:8px;font-weight:600">Navigation (10)</div>
+              <div style="color:var(--color-gray-400)">Home, Journal, Progress, Library, Profile, Menu, Search, Settings, Back, Close</div>
             </div>
-            <span class="text-muted" style="font-size:9px;display:block;margin-top:8px">Target</span>
-          </div>
-          <div class="text-center">
-            <div class="icon-demo">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                <polyline points="17 6 23 6 23 12"></polyline>
-              </svg>
+            <div>
+              <div style="color:var(--color-gold);margin-bottom:8px;font-weight:600">Session Logging (10)</div>
+              <div style="color:var(--color-gray-400)">Mic, MicOff, Keyboard, Play, Pause, Stop, Timer, Hourglass, Calendar, Clock</div>
             </div>
-            <span class="text-muted" style="font-size:9px;display:block;margin-top:8px">TrendUp</span>
-          </div>
-          <div class="text-center">
-            <div class="icon-demo">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
-                <polyline points="17 18 23 18 23 12"></polyline>
-              </svg>
+            <div>
+              <div style="color:var(--color-gold);margin-bottom:8px;font-weight:600">BJJ Training (6)</div>
+              <div style="color:var(--color-gray-400)">Gi, NoGi, Sparring, MapPin, Dumbbell, Belt</div>
             </div>
-            <span class="text-muted" style="font-size:9px;display:block;margin-top:8px">TrendDown</span>
+            <div>
+              <div style="color:var(--color-gold);margin-bottom:8px;font-weight:600">Techniques (6)</div>
+              <div style="color:var(--color-gray-400)">Hand, Shield, Sweep, Pass, Escape, Takedown</div>
+            </div>
+            <div>
+              <div style="color:var(--color-gold);margin-bottom:8px;font-weight:600">Progress (11)</div>
+              <div style="color:var(--color-gray-400)">Trophy, Medal, Flame, Target, Crown, Flag, Award, TrendUp, TrendDown, BarChart, Activity</div>
+            </div>
+            <div>
+              <div style="color:var(--color-gold);margin-bottom:8px;font-weight:600">Actions (19)</div>
+              <div style="color:var(--color-gray-400)">Plus, Minus, Edit, Trash, Copy, Refresh, Filter, Sort, Share, Download, Upload...</div>
+            </div>
           </div>
         </div>
       </section>
@@ -703,7 +807,7 @@
     }
 
     .streak-unit-mini {
-      font-size: 11px;
+      font-size: 12px;  /* Changed from 11px - 12px minimum */
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.3em;

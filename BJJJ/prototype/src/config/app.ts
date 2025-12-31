@@ -123,8 +123,17 @@ export const API_CONFIG = {
 // UI CONFIGURATION
 // ===========================================
 
+/**
+ * UI Configuration
+ *
+ * NOTE: For design tokens (colors, typography, spacing, motion), use:
+ * import { colors, typography, spacing, motion } from './design-tokens';
+ *
+ * Source of truth: /internal-docs/design-system/tokens.md
+ */
 export const UI_CONFIG = {
   // Touch targets (for exhausted users)
+  // See also: design-tokens.ts touchTargets
   touchTargets: {
     minimum: 44, // iOS minimum
     recommended: 56, // Our standard
@@ -132,6 +141,7 @@ export const UI_CONFIG = {
   },
 
   // Animation durations (ms)
+  // See also: design-tokens.ts motion.duration
   animations: {
     fast: 150,
     normal: 300,

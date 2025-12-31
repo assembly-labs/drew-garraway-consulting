@@ -178,39 +178,101 @@ Our app speaks like a knowledgeable, warm, and grounded training partner:
 
 ## Design System
 
-### Colors (CSS Variables)
+> **CRITICAL: Source of Truth**
+>
+> The authoritative design system lives in `/internal-docs/design-system/`. All UI decisions MUST reference these files:
+>
+> | File | Purpose |
+> |------|---------|
+> | `tokens.md` | Complete design token reference (colors, typography, spacing) |
+> | `styles.css` | Production-ready CSS with all tokens and components |
+> | `index.html` | Interactive design system browser (open in browser) |
+> | `icons.html` | Full icon library (95+ icons) |
+> | `typography.html` | Typography demonstrations |
+>
+> **When making UI changes, Claude MUST:**
+> 1. Reference `/internal-docs/design-system/tokens.md` for correct values
+> 2. Use existing CSS classes from `/internal-docs/design-system/styles.css`
+> 3. Never invent new colors, spacing, or typography values
+
+### Design Principles (Non-Negotiable)
+
+1. **NO EMOJIS** - Use SVG lineart icons from `Icons.tsx` only
+2. **Dark Theme** - `#111111` background with gold accents
+3. **Large Typography** - Hero numbers up to 144-180px
+4. **Semantic Colors** - GREEN = positive, RED = negative (never swap)
+5. **Full-Bleed Sections** - Minimal rounded corners, gradient backgrounds
+6. **Inter + JetBrains Mono** - Maximum legibility for exhausted users
+7. **Font Weight 500+ Only** - Weight 400 is PROHIBITED (too thin for dark backgrounds)
+8. **12px Minimum Font Size** - Nothing smaller, ever
+
+### Quick Token Reference
+
+See `/internal-docs/design-system/tokens.md` for complete reference. Key values:
+
+**Primary Colors:**
+- `--color-black`: `#111111` (background)
+- `--color-gold`: `#F5A623` (accent)
+- `--color-positive`: `#22c55e` (wins, success)
+- `--color-negative`: `#ef4444` (losses, errors)
+
+**Typography:**
+- Headings: Inter, weight 800 (ExtraBold)
+- Body: Inter, weight 500 (Medium) - REQUIRED MINIMUM
+- Labels: JetBrains Mono, weight 500-600
+
+**Spacing (4px base unit):**
+- `--space-xs`: 4px | `--space-sm`: 8px | `--space-md`: 16px
+- `--space-lg`: 24px | `--space-xl`: 32px | `--space-2xl`: 48px
+
+**Touch Targets:**
+- Primary actions: 56-80px minimum
+- Secondary actions: 44px minimum
+
+### Component Classes
+
+Use existing classes from the design system. Key patterns:
+
 ```css
---color-primary: #0a0a0a        /* Black - primary brand */
---color-accent: #fcd34d         /* Gold - Alliance BJJ inspired */
---color-accent-text: #b45309    /* Amber for text on light */
---color-success: #22c55e        /* Green */
---color-warning: #f59e0b        /* Amber */
---color-error: #ef4444          /* Red */
---color-info: #3b82f6           /* Blue */
+/* Stat displays */
+.stat-cell, .stat-cell--positive, .stat-cell--negative
+.stat-label, .stat-value
 
-/* Belt colors */
---color-belt-white, --color-belt-blue, --color-belt-purple,
---color-belt-brown, --color-belt-black
+/* Buttons */
+.btn, .btn-primary, .btn-dark, .btn-outline
+.btn-positive, .btn-negative
 
-/* Training type colors */
---color-training-gi: #3b82f6
---color-training-nogi: #8b5cf6
+/* Badges */
+.belt-badge, .belt-white, .belt-blue, .belt-purple, .belt-brown
+.training-badge, .training-gi, .training-nogi
+
+/* Callouts */
+.callout, .callout--positive, .callout--negative
+
+/* Forms */
+.form-group, .form-label, .form-input, .form-textarea
 ```
 
-### Typography
-- **Headings:** `var(--font-heading)` - Bold, uppercase, wide tracking
-- **Body:** `var(--font-body)` - Clean, readable
-- Text sizes: `--text-xs` through `--text-3xl`
+### Icon Usage
 
-### Spacing
-- Use `var(--space-*)` tokens: xs, sm, md, lg, xl, 2xl
+```tsx
+import { Icons } from '@/components/ui/Icons';
 
-### Components
-- `.card` - Standard card container
-- `.btn`, `.btn-primary`, `.btn-secondary` - Buttons
-- `.belt-badge` - Belt rank display
-- `.training-badge` - Training type indicator
-- `.progress-bar` - Progress visualization
+<Icons.Check size={24} />
+<Icons.Trophy size={24} color="var(--color-gold)" />
+```
+
+See `/internal-docs/design-system/icons.html` for the full 95+ icon library.
+
+### Propagation: Design System → Code
+
+When the design system is updated:
+1. Update `/internal-docs/design-system/styles.css` first
+2. Sync changes to `/prototype/src/index.css`
+3. Update `/prototype/src/config/design-tokens.ts` if tokens change
+4. This file (CLAUDE.md) reflects the summary, not the source
+
+**The design system is the source. Code implements it. Never the reverse.**
 
 ## Critical UX Principle: The Exhausted User
 

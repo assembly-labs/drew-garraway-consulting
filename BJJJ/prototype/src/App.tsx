@@ -10,9 +10,10 @@ import { TechniqueLibrary } from './components/features/TechniqueLibrary'
 import { TrainingFeedback } from './components/features/TrainingFeedback'
 import { ProfileScreen } from './components/features/ProfileScreen'
 import { Settings } from './components/features/Settings'
+import { IconShowcase } from './components/features/IconShowcase'
 import { useUserProfile } from './context/UserProfileContext'
 
-type View = 'stats' | 'journal' | 'library' | 'insights' | 'profile' | 'settings' | 'design-system'
+type View = 'stats' | 'journal' | 'library' | 'insights' | 'profile' | 'settings' | 'design-system' | 'icons'
 
 function App() {
   // Get user profile for header avatar
@@ -22,10 +23,11 @@ function App() {
   // Track if session logger should be shown (overlay)
   const [showSessionLogger, setShowSessionLogger] = useState(true) // Auto-open on load
 
-  // Check URL for design system mode
+  // Check URL for design system mode or icons
   const [currentView, setCurrentView] = useState<View>(() => {
-    if (typeof window !== 'undefined' && window.location.hash === '#design-system') {
-      return 'design-system'
+    if (typeof window !== 'undefined') {
+      if (window.location.hash === '#design-system') return 'design-system'
+      if (window.location.hash === '#icons') return 'icons'
     }
     return 'stats'
   })
@@ -33,11 +35,13 @@ function App() {
   // Track last tab view for back navigation from profile
   const [lastTabView, setLastTabView] = useState<TabId>('stats')
 
-  // Update URL hash when switching to/from design system
+  // Update URL hash when switching to/from design system or icons
   useEffect(() => {
     if (currentView === 'design-system') {
       window.location.hash = 'design-system'
-    } else if (window.location.hash === '#design-system') {
+    } else if (currentView === 'icons') {
+      window.location.hash = 'icons'
+    } else if (window.location.hash === '#design-system' || window.location.hash === '#icons') {
       window.location.hash = ''
     }
   }, [currentView])
@@ -65,6 +69,11 @@ function App() {
   // Handle session logger cancel
   const handleLogCancel = () => {
     setShowSessionLogger(false)
+  }
+
+  // Show Icon Showcase page
+  if (currentView === 'icons') {
+    return <IconShowcase onBack={() => setCurrentView('stats')} />
   }
 
   // Show Design System page

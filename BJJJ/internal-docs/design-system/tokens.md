@@ -11,9 +11,10 @@ Bold, dark, editorial design system. Linear/Palantir inspired aesthetic.
 3. **Large Typography** - Hero numbers up to 144px-180px
 4. **Semantic Colors** - GREEN = positive, RED = negative
 5. **Full-Bleed Sections** - No rounded corners, gradient backgrounds
-6. **Space Grotesk + Space Mono** - Modern geometric typography
+6. **Inter + JetBrains Mono** - Maximum legibility for exhausted users
 7. **Medium Font Weight** - Body text uses 500 weight for better readability
 8. **Lightened Grays** - All gray values lifted for better contrast on dark backgrounds
+9. **12px Minimum Font Size** - Nothing smaller than 12px for mobile readability
 
 ---
 
@@ -89,27 +90,56 @@ All grays are lightened for better contrast on dark backgrounds.
 
 | Type | Font | Weight | Fallbacks |
 |------|------|--------|-----------|
-| Headings | Space Grotesk | 700 | -apple-system, sans-serif |
-| Body | Space Grotesk | **500** | -apple-system, sans-serif |
-| Monospace | Space Mono | 400/700 | monospace |
+| Headings | Inter | **800** (ExtraBold) | -apple-system, sans-serif |
+| Subheads | Inter | **600-700** | -apple-system, sans-serif |
+| Body | Inter | **500** (Medium) | -apple-system, sans-serif |
+| Labels | JetBrains Mono | **500-600** | monospace |
+| Data Values | JetBrains Mono | **700** | monospace |
 
-**Note:** Body text uses weight 500 (medium) instead of 400 (regular) for better readability on dark backgrounds.
+### Font Weight Guidelines
+
+> **Weight 400 (Regular) is PROHIBITED for user-facing text.** It's too thin for dark backgrounds and exhausted users.
+
+| Weight | Name | Usage | Status |
+|--------|------|-------|--------|
+| 400 | Regular | N/A | **AVOID** |
+| 500 | Medium | Body text, descriptions, secondary text | **Required minimum** |
+| 600 | SemiBold | Subheadings, section titles, badges | OK |
+| 700 | Bold | List items, card titles, emphasis | OK |
+| 800 | ExtraBold | Primary headlines, hero stats | **Preferred for headlines** |
+| 900 | Black | Hero numbers only | OK |
+
+**Rationale:** Our users are exhausted post-training. Thin fonts lose contrast on dark backgrounds, making text harder to read. Weight 500+ ensures maximum legibility.
+
+### Minimum Font Size (CRITICAL)
+
+> **12px is the absolute minimum font size.** Nothing in the app should be smaller than 12px.
+>
+> Our users are exhausted post-training with reduced cognitive capacity. Text smaller than 12px becomes illegible on mobile devices in this state.
+
+| Size | Status | Usage |
+|------|--------|-------|
+| < 12px | **PROHIBITED** | Never use |
+| 12px | Minimum | Eyebrow labels, metadata only |
+| 13px | Small | Secondary text, timestamps |
+| 15px | Base | Body text, descriptions |
+| 17px+ | Preferred | Headlines, key information |
 
 ### Type Scale
 
-| Token | Size | Pixels |
-|-------|------|--------|
-| `--text-xs` | 0.625rem | 10px |
-| `--text-sm` | 0.8125rem | 13px |
-| `--text-base` | 0.9375rem | 15px |
-| `--text-lg` | 1.0625rem | 17px |
-| `--text-xl` | 1.375rem | 22px |
-| `--text-2xl` | 1.5rem | 24px |
-| `--text-3xl` | 2rem | 32px |
-| `--text-4xl` | 3rem | 48px |
-| `--text-5xl` | 4.5rem | 72px |
-| `--text-hero` | 9rem | 144px |
-| `--text-mega` | 11.25rem | 180px |
+| Token | Size | Pixels | Status |
+|-------|------|--------|--------|
+| `--text-xs` | 0.75rem | 12px | Minimum allowed |
+| `--text-sm` | 0.8125rem | 13px | OK |
+| `--text-base` | 0.9375rem | 15px | OK |
+| `--text-lg` | 1.0625rem | 17px | OK |
+| `--text-xl` | 1.375rem | 22px | OK |
+| `--text-2xl` | 1.5rem | 24px | OK |
+| `--text-3xl` | 2rem | 32px | OK |
+| `--text-4xl` | 3rem | 48px | OK |
+| `--text-5xl` | 4.5rem | 72px | OK |
+| `--text-hero` | 9rem | 144px | OK |
+| `--text-mega` | 11.25rem | 180px | OK |
 
 ### Line Heights
 
@@ -300,30 +330,34 @@ Minimal radius - sharp edges for bold aesthetic.
 
 **NEVER USE EMOJIS.**
 
-Always use SVG lineart icons from the Icons component:
+Always use SVG lineart icons from the Icons component. See the full [Icon Library (95 icons)](../../prototype/public/icons.html) for visual reference.
 
 ```tsx
-import { IconCheck, IconFlame, IconTrophy, IconTarget } from './ui/Icons';
+import { Icons } from '@/components/ui/Icons';
 
 // Usage
-<IconCheck size={24} />
-<IconFlame size={24} />
+<Icons.Check size={24} />
+<Icons.Gi size={24} />
+<Icons.NoGi size={24} />
+<Icons.Trophy size={24} color="var(--color-gold)" />
 ```
 
-Available icons:
-- IconCheck, IconX
-- IconPlus, IconMinus
-- IconChevronRight, IconChevronDown
-- IconSearch, IconFilter
-- IconMic, IconMicOff
-- IconStar, IconStarFilled
-- IconFlame, IconTrophy, IconTarget
-- IconCalendar, IconClock, IconTimer
-- IconUser, IconSettings, IconLogOut
-- IconHome, IconBook, IconBarChart
-- IconTrendUp, IconTrendDown
-- IconBelt, IconMedal, IconAward
-- And more...
+### Icon Categories
+
+| Category | Count | Examples |
+|----------|-------|----------|
+| Navigation | 10 | Home, Journal, Progress, Library, Profile, Menu, Search, Settings, Back, Close |
+| Chevrons & Arrows | 8 | ChevronRight, ChevronLeft, ChevronDown, ChevronUp, ArrowUp, ArrowDown |
+| Session Logging | 10 | Mic, MicOff, Keyboard, Play, Pause, Stop, Timer, Hourglass, Calendar, Clock |
+| BJJ Training | 6 | **Gi, NoGi**, Sparring, MapPin, Dumbbell, Belt |
+| Technique Categories | 6 | Hand, Shield, Sweep, Pass, Escape, Takedown |
+| Progress & Achievements | 11 | Trophy, Medal, Flame, Target, Crown, Flag, Award, TrendUp, TrendDown |
+| Status & Feedback | 15 | Check, CheckCircle, XCircle, AlertCircle, Star, StarFilled, Heart |
+| Actions | 19 | Plus, Minus, Edit, Trash, Copy, Refresh, Filter, Sort, Share |
+| Media & Content | 5 | Video, Camera, Image, Message, Zap |
+| Body & Recovery | 5 | User, Users, Bandage, Moon, Sun |
+| App State | 10 | Loader, Cloud, Wifi, WifiOff, Lock, Unlock, Eye, EyeOff, Bell |
+| Utility | 11 | Hundred, Grid, List, Logout, Sliders, ToggleLeft, ToggleRight |
 
 ---
 

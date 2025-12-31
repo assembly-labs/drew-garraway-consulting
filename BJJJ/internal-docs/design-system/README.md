@@ -1,5 +1,9 @@
 # Design System
 
+> **THIS IS THE SOURCE OF TRUTH**
+>
+> All design decisions, tokens, and components are defined here. The rest of the codebase implements this system. Changes flow FROM here TO the code, never the reverse.
+
 **BJJ Progress Tracker Design System Documentation**
 
 This folder contains the complete design system for the BJJ Progress Tracker app. Use these resources to ensure visual consistency, accessibility, and brand alignment across all UI development.
@@ -10,24 +14,67 @@ This folder contains the complete design system for the BJJ Progress Tracker app
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Interactive design system browser (open in browser to explore) |
+| `tokens.md` | **Primary reference** - Complete design token documentation |
 | `styles.css` | Production-ready CSS implementing all design tokens and components |
-| `script.js` | Tab navigation and interactive functionality for the design system browser |
-| `tokens.md` | Design token reference (colors, typography, spacing) |
+| `index.html` | Interactive design system browser (open in browser to explore) |
+| `icons.html` | Full icon library (95+ icons) |
+| `typography.html` | Typography demonstrations |
+| `script.js` | Tab navigation and interactive functionality |
+
+---
+
+## Propagation Workflow
+
+When the design system changes, updates flow in this order:
+
+```
+/internal-docs/design-system/tokens.md      ← DEFINE HERE FIRST
+                ↓
+/internal-docs/design-system/styles.css     ← Update CSS second
+                ↓
+/prototype/src/index.css                    ← Sync to prototype
+                ↓
+/prototype/src/config/design-tokens.ts      ← Update TypeScript tokens
+                ↓
+Component inline styles                      ← Uses tokens automatically
+```
+
+### How to Make Design Changes
+
+1. **Define the change** in `tokens.md` (document the token)
+2. **Implement in CSS** in `styles.css` (add the CSS variable)
+3. **Sync to prototype** - Update `/prototype/src/index.css`
+4. **Update TypeScript** - Update `/prototype/src/config/design-tokens.ts`
+5. **Update CLAUDE.md** if it's a key token referenced there
+
+### Files That Reference This System
+
+| File | Purpose | Update Required |
+|------|---------|-----------------|
+| `/CLAUDE.md` | Project context for Claude | Summary only |
+| `/.claude/design-system-rules.md` | Detailed guardrails for Claude | Key rules |
+| `/prototype/src/index.css` | Production CSS | Full sync |
+| `/prototype/src/config/design-tokens.ts` | TypeScript tokens | Full sync |
 
 ---
 
 ## How to Use
 
+### For Claude (AI Assistant)
+1. **Read `tokens.md` before any UI work** - Contains all valid values
+2. **Never invent values** - If it's not in the design system, ask first
+3. **Follow `/.claude/design-system-rules.md`** - Mandatory guardrails
+
 ### For Designers
 1. Open `index.html` in a browser to explore the complete design system
-2. Navigate through the 4 tabs: **Foundations**, **Components**, **Patterns**, **Voice & Copy**
+2. Navigate through the tabs: **Foundations**, **Components**, **Patterns**, **Motion**
 3. Reference `tokens.md` for design token values when creating mockups
 
 ### For Developers
-1. Import `styles.css` into your project or reference the CSS custom properties
-2. Use the component classes documented in the Components tab
-3. Follow the mobile-first responsive patterns in the Foundations tab
+1. Import styles from `styles.css` or use CSS custom properties
+2. Use TypeScript tokens from `/prototype/src/config/design-tokens.ts`
+3. Use the component classes documented in the Components tab
+4. Follow the mobile-first responsive patterns in the Foundations tab
 
 ### For Content/Copy
 1. Navigate to the **Voice & Copy** tab in `index.html`
@@ -39,15 +86,17 @@ This folder contains the complete design system for the BJJ Progress Tracker app
 ## Key Design Decisions
 
 ### Color Palette
-- **Primary:** Alliance BJJ Black (#0a0a0a)
-- **Accent:** Alliance Gold (#d4af37)
-- **Backgrounds:** Dark (#121212), Surface (#1a1a1a)
+- **Primary:** Softened Black (#111111) - better readability than pure black
+- **Accent:** Alliance Gold (#F5A623)
+- **Positive:** Green (#22c55e) - wins, submissions, streaks
+- **Negative:** Red (#ef4444) - losses, taps, weaknesses
 - **Belt colors:** Authentic IBJJF belt progression colors
 
 ### Typography
-- **Font:** Inter (Google Fonts)
-- **Scale:** 12px (xs) → 48px (4xl)
-- **Approach:** Mobile-first responsive sizing
+- **Fonts:** Inter (headings/body) + JetBrains Mono (labels/data)
+- **Scale:** 12px (xs) → 180px (mega)
+- **Minimum weight:** 500 (Medium) - weight 400 is prohibited
+- **Minimum size:** 12px - nothing smaller, ever
 
 ### Touch Targets
 - **Standard:** 44px minimum (WAI guidelines)
@@ -62,20 +111,31 @@ This folder contains the complete design system for the BJJ Progress Tracker app
 
 ---
 
-## Design Principles
+## Design Principles (Non-Negotiable)
 
-1. **Mobile-first, post-training aware** — Users log sessions after exhausting training
-2. **Tap-first input** — Presets over text entry wherever possible
-3. **Belt-aware theming** — Colors and feedback respect BJJ culture
-4. **Accessibility-first** — High contrast, large touch targets, clear hierarchy
+1. **NO EMOJIS** — Use SVG lineart icons from Icons.tsx only
+2. **Dark Theme** — #111111 background with gold accents
+3. **Large Typography** — Hero numbers up to 144-180px
+4. **Semantic Colors** — GREEN = positive, RED = negative (never swap)
+5. **Full-Bleed Sections** — Minimal rounded corners, gradient backgrounds
+6. **Inter + JetBrains Mono** — Maximum legibility for exhausted users
+7. **Font Weight 500+ Only** — Weight 400 is PROHIBITED
+8. **12px Minimum Font Size** — Nothing smaller, ever
+9. **Mobile-first, post-training aware** — Users log sessions after exhausting training
+10. **Accessibility-first** — High contrast, large touch targets, WCAG AA compliant
 
 ---
 
 ## Related Documentation
 
-- `/brand-voice-and-philosophy/` — Complete voice and copy guidelines
-- `/FEATURE_TRACKER.md` — Design decisions log with rationale
-- `/prototype/` — Working React prototype implementing this system
+| File | Purpose |
+|------|---------|
+| `/CLAUDE.md` | Project context with design system summary |
+| `/.claude/design-system-rules.md` | Mandatory guardrails for Claude |
+| `/prototype/src/index.css` | Production CSS implementation |
+| `/prototype/src/config/design-tokens.ts` | TypeScript token exports |
+| `/prototype/src/components/ui/Icons.tsx` | 95+ SVG icon components |
+| `/internal-docs/brand-voice-and-philosophy/` | Voice and copy guidelines |
 
 ---
 
