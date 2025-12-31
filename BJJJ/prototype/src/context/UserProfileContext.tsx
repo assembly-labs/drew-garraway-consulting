@@ -14,6 +14,10 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { getProfileByBelt, type MockProfile, type ActiveProfileKey } from '../data/mock-profiles';
+import { getPersonaByKey, type Persona, type PersonaKey } from '../data/personas';
+
+// Combined profile type for demo mode (supports both legacy and new persona system)
+type DemoProfile = MockProfile | Persona;
 
 // Belt types
 export type BeltLevel = 'white' | 'blue' | 'purple' | 'brown' | 'black';
@@ -223,9 +227,13 @@ interface UserProfileContextType {
 
   // Demo mode - for prototype approval
   isDemoMode: boolean;
-  activeDemoProfile: MockProfile | null;
+  activeDemoProfile: DemoProfile | null;
   switchDemoProfile: (belt: ActiveProfileKey) => void;
   exitDemoMode: () => void;
+
+  // Persona mode - enhanced demo with 6 personas
+  activePersona: Persona | null;
+  switchPersona: (personaKey: PersonaKey) => void;
 }
 
 const UserProfileContext = createContext<UserProfileContextType | null>(null);
@@ -239,7 +247,8 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
 
   // Demo mode state
   const [isDemoMode, setIsDemoMode] = useState(false);
-  const [activeDemoProfile, setActiveDemoProfile] = useState<MockProfile | null>(null);
+  const [activeDemoProfile, setActiveDemoProfile] = useState<DemoProfile | null>(null);
+  const [activePersona, setActivePersona] = useState<Persona | null>(null);
 
   // Load profile from localStorage on mount
   useEffect(() => {
@@ -247,7 +256,21 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
     const demoModeStored = localStorage.getItem(DEMO_MODE_KEY);
     if (demoModeStored) {
       try {
-        const { enabled, belt } = JSON.parse(demoModeStored);
+        const parsed = JSON.parse(demoModeStored);
+        const { enabled, belt, persona } = parsed;
+
+        // Handle new persona format
+        if (enabled && persona) {
+          const personaProfile = getPersonaByKey(persona);
+          setActivePersona(personaProfile);
+          setActiveDemoProfile(personaProfile);
+          setProfile(personaProfile.contextProfile);
+          setIsDemoMode(true);
+          setIsLoading(false);
+          return;
+        }
+
+        // Handle legacy belt format
         if (enabled && belt) {
           const demoProfile = getProfileByBelt(belt);
           setActiveDemoProfile(demoProfile);
@@ -409,15 +432,27 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
     setProfile(DEFAULT_PROFILE);
     setIsDemoMode(false);
     setActiveDemoProfile(null);
+    setActivePersona(null);
   };
 
-  // Switch to a demo profile (for prototype approval)
+  // Switch to a demo profile (for prototype approval) - legacy 4-belt system
   const switchDemoProfile = (belt: ActiveProfileKey) => {
     const demoProfile = getProfileByBelt(belt);
     setActiveDemoProfile(demoProfile);
+    setActivePersona(null); // Clear persona when using legacy belt switch
     setProfile(demoProfile.contextProfile);
     setIsDemoMode(true);
     localStorage.setItem(DEMO_MODE_KEY, JSON.stringify({ enabled: true, belt }));
+  };
+
+  // Switch to a persona (enhanced 6-persona system)
+  const switchPersona = (personaKey: PersonaKey) => {
+    const persona = getPersonaByKey(personaKey);
+    setActivePersona(persona);
+    setActiveDemoProfile(persona); // Also set as demo profile for backward compatibility
+    setProfile(persona.contextProfile);
+    setIsDemoMode(true);
+    localStorage.setItem(DEMO_MODE_KEY, JSON.stringify({ enabled: true, persona: personaKey }));
   };
 
   // Exit demo mode and return to normal profile
@@ -425,6 +460,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem(DEMO_MODE_KEY);
     setIsDemoMode(false);
     setActiveDemoProfile(null);
+    setActivePersona(null);
 
     // Reload the real profile
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -460,6 +496,8 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
         activeDemoProfile,
         switchDemoProfile,
         exitDemoMode,
+        activePersona,
+        switchPersona,
       }}
     >
       {children}

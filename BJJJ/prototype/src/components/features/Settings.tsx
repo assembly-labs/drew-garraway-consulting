@@ -10,22 +10,31 @@
 
 import { useState } from 'react';
 import { useUserProfile, type LoggingPreference } from '../../context/UserProfileContext';
-import { mockProfiles, type ActiveProfileKey } from '../../data/mock-profiles';
+import { PERSONA_OPTIONS } from '../../data/personas';
 
 interface SettingsProps {
   onBack: () => void;
 }
 
-// Belt options for the demo switcher (only white through brown for demo)
-const DEMO_BELT_OPTIONS: { value: ActiveProfileKey; label: string; color: string; persona: string }[] = [
-  { value: 'white', label: 'White', color: 'var(--color-belt-white)', persona: 'David Morrison' },
-  { value: 'blue', label: 'Blue', color: 'var(--color-belt-blue)', persona: 'Marcus Chen' },
-  { value: 'purple', label: 'Purple', color: 'var(--color-belt-purple)', persona: 'Sofia Rodriguez' },
-  { value: 'brown', label: 'Brown', color: 'var(--color-belt-brown)', persona: 'Elena Kim' },
-];
+// Belt color mapping for persona display
+const BELT_COLORS: Record<string, string> = {
+  white: 'var(--color-belt-white)',
+  blue: 'var(--color-belt-blue)',
+  purple: 'var(--color-belt-purple)',
+  brown: 'var(--color-belt-brown)',
+};
+
+// Risk level colors
+const RISK_COLORS: Record<string, string> = {
+  'very-low': 'var(--color-success)',
+  'low': 'var(--color-success)',
+  'moderate': 'var(--color-warning)',
+  'high': 'var(--color-error)',
+  'critical': 'var(--color-error)',
+};
 
 export function Settings({ onBack }: SettingsProps) {
-  const { profile, setLoggingPreference, isDemoMode, activeDemoProfile, switchDemoProfile, exitDemoMode } = useUserProfile();
+  const { profile, setLoggingPreference, isDemoMode, activeDemoProfile, activePersona, switchPersona, exitDemoMode } = useUserProfile();
 
   // Local state for toggles (would connect to a settings context in production)
   const [notifications, setNotifications] = useState({
@@ -317,7 +326,9 @@ export function Settings({ onBack }: SettingsProps) {
             {/* Demo Mode Status Banner */}
             {isDemoMode && (
               <div style={{
-                backgroundColor: 'rgba(252, 211, 77, 0.15)',
+                backgroundColor: activePersona?.riskLevel === 'critical' || activePersona?.riskLevel === 'high'
+                  ? 'rgba(239, 68, 68, 0.15)'
+                  : 'rgba(252, 211, 77, 0.15)',
                 borderRadius: 'var(--radius-md)',
                 padding: 'var(--space-md)',
                 marginBottom: 'var(--space-lg)',
@@ -326,11 +337,17 @@ export function Settings({ onBack }: SettingsProps) {
                 justifyContent: 'space-between',
               }}>
                 <div>
-                  <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--color-accent)' }}>
-                    Demo Mode Active
+                  <div style={{
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: 600,
+                    color: activePersona?.riskLevel === 'critical' || activePersona?.riskLevel === 'high'
+                      ? 'var(--color-error)'
+                      : 'var(--color-accent)',
+                  }}>
+                    {activePersona ? `${activePersona.archetype}` : 'Demo Mode Active'}
                   </div>
                   <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-gray-400)', marginTop: 2 }}>
-                    Viewing as {activeDemoProfile?.displayName}
+                    Viewing as {activePersona?.displayName || activeDemoProfile?.displayName}
                   </div>
                 </div>
                 <button
@@ -356,14 +373,14 @@ export function Settings({ onBack }: SettingsProps) {
               fontWeight: 500,
               marginBottom: 'var(--space-xs)',
             }}>
-              Preview Belt Experiences
+              Preview Persona Experiences
             </div>
             <div style={{
               fontSize: 'var(--text-sm)',
               color: 'var(--color-gray-400)',
               marginBottom: 'var(--space-lg)',
             }}>
-              Load complete mock profiles to preview how the app personalizes for each belt level
+              Load complete mock profiles to preview personalization for different user archetypes and risk levels
             </div>
 
             <div style={{
@@ -371,15 +388,15 @@ export function Settings({ onBack }: SettingsProps) {
               gridTemplateColumns: 'repeat(2, 1fr)',
               gap: 'var(--space-sm)',
             }}>
-              {DEMO_BELT_OPTIONS.map((option) => {
-                const isSelected = isDemoMode && activeDemoProfile?.key === option.value;
-                const isWhiteBelt = option.value === 'white';
-                const mockProfile = mockProfiles.find(p => p.key === option.value);
+              {PERSONA_OPTIONS.map((option) => {
+                const isSelected = isDemoMode && activePersona?.key === option.value;
+                const isWhiteBelt = option.belt === 'white';
+                const isAtRisk = option.riskLevel === 'high' || option.riskLevel === 'critical';
 
                 return (
                   <button
                     key={option.value}
-                    onClick={() => switchDemoProfile(option.value)}
+                    onClick={() => switchPersona(option.value)}
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
@@ -389,31 +406,32 @@ export function Settings({ onBack }: SettingsProps) {
                       backgroundColor: isSelected ? 'rgba(252, 211, 77, 0.15)' : 'var(--color-gray-800)',
                       border: isSelected
                         ? '2px solid var(--color-accent)'
-                        : '2px solid transparent',
+                        : isAtRisk
+                          ? '1px solid rgba(239, 68, 68, 0.4)'
+                          : '2px solid transparent',
                       borderRadius: 'var(--radius-md)',
                       cursor: 'pointer',
                       transition: 'all 0.2s ease',
                     }}
-                    aria-label={`Preview ${option.label} belt experience`}
+                    aria-label={`Preview ${option.label} persona: ${option.name}`}
                     aria-pressed={isSelected}
                   >
                     {/* Belt visual */}
                     <div style={{
                       width: 56,
                       height: 14,
-                      backgroundColor: option.color,
+                      backgroundColor: BELT_COLORS[option.belt],
                       borderRadius: 2,
                       border: isWhiteBelt ? '1px solid var(--color-gray-400)' : 'none',
                       boxShadow: isSelected ? '0 0 8px rgba(252, 211, 77, 0.4)' : 'none',
                     }} />
 
-                    {/* Belt Label */}
+                    {/* Status Label */}
                     <span style={{
                       fontSize: 'var(--text-sm)',
                       fontWeight: isSelected ? 600 : 500,
                       color: isSelected ? 'var(--color-accent)' : 'var(--color-white)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
+                      letterSpacing: '0.02em',
                     }}>
                       {option.label}
                     </span>
@@ -423,16 +441,20 @@ export function Settings({ onBack }: SettingsProps) {
                       fontSize: 'var(--text-xs)',
                       color: 'var(--color-gray-400)',
                     }}>
-                      {option.persona}
+                      {option.name}
                     </span>
 
-                    {/* Stats Preview */}
+                    {/* Risk indicator */}
                     <div style={{
                       fontSize: 'var(--text-xs)',
-                      color: 'var(--color-gray-500)',
+                      color: RISK_COLORS[option.riskLevel] || 'var(--color-gray-500)',
                       marginTop: 'var(--space-xs)',
+                      fontWeight: 500,
                     }}>
-                      {mockProfile?.trainingStats.totalSessions} sessions
+                      {option.riskLevel === 'critical' ? 'Critical Risk' :
+                       option.riskLevel === 'high' ? 'High Risk' :
+                       option.riskLevel === 'moderate' ? 'Moderate Risk' :
+                       option.riskLevel === 'low' ? 'Low Risk' : 'Very Low Risk'}
                     </div>
 
                     {/* Selected indicator */}
@@ -462,8 +484,22 @@ export function Settings({ onBack }: SettingsProps) {
                 backgroundColor: 'var(--color-gray-800)',
                 borderRadius: 'var(--radius-md)',
               }}>
-                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-gray-500)', marginBottom: 'var(--space-sm)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                  Active Profile
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-sm)' }}>
+                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-gray-500)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                    Active Persona
+                  </div>
+                  {activePersona && (
+                    <div style={{
+                      fontSize: 'var(--text-xs)',
+                      color: RISK_COLORS[activePersona.riskLevel] || 'var(--color-gray-400)',
+                      fontWeight: 600,
+                      padding: '2px 8px',
+                      backgroundColor: 'rgba(0,0,0,0.3)',
+                      borderRadius: 'var(--radius-sm)',
+                    }}>
+                      {activePersona.archetype}
+                    </div>
+                  )}
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-sm)', fontSize: 'var(--text-sm)' }}>
                   <div>
@@ -476,7 +512,9 @@ export function Settings({ onBack }: SettingsProps) {
                   </div>
                   <div>
                     <span style={{ color: 'var(--color-gray-400)' }}>Streak: </span>
-                    <span style={{ color: 'var(--color-white)' }}>{activeDemoProfile.trainingStats.currentStreak} days</span>
+                    <span style={{ color: activeDemoProfile.trainingStats.currentStreak === 0 ? 'var(--color-error)' : 'var(--color-white)' }}>
+                      {activeDemoProfile.trainingStats.currentStreak} {activeDemoProfile.trainingStats.currentStreak === 0 ? '(broken)' : 'days'}
+                    </span>
                   </div>
                   <div>
                     <span style={{ color: 'var(--color-gray-400)' }}>Win Rate: </span>
@@ -503,7 +541,9 @@ export function Settings({ onBack }: SettingsProps) {
               color: 'var(--color-gray-500)',
               textAlign: 'center',
             }}>
-              {isDemoMode ? (
+              {isDemoMode && activePersona ? (
+                <>Viewing as: <strong style={{ color: 'var(--color-accent)' }}>{activePersona.displayName}</strong> ({profile.belt.charAt(0).toUpperCase() + profile.belt.slice(1)} Belt, {activePersona.status})</>
+              ) : isDemoMode ? (
                 <>Currently viewing as: <strong style={{ color: 'var(--color-accent)' }}>{activeDemoProfile?.user.firstName} {activeDemoProfile?.user.lastName}</strong> ({profile.belt.charAt(0).toUpperCase() + profile.belt.slice(1)} Belt {profile.stripes} Stripes)</>
               ) : (
                 <>Your profile: <strong style={{ color: 'var(--color-white)' }}>{profile.name || 'Not set'}</strong> ({profile.belt.charAt(0).toUpperCase() + profile.belt.slice(1)} Belt)</>
