@@ -11,9 +11,10 @@ import { TrainingFeedback } from './components/features/TrainingFeedback'
 import { ProfileScreen } from './components/features/ProfileScreen'
 import { Settings } from './components/features/Settings'
 import { IconShowcase } from './components/features/IconShowcase'
+import { HeatMapDesignShowcase } from './components/features/HeatMapDesignShowcase'
 import { useUserProfile } from './context/UserProfileContext'
 
-type View = 'stats' | 'journal' | 'library' | 'insights' | 'profile' | 'settings' | 'design-system' | 'icons'
+type View = 'stats' | 'journal' | 'library' | 'insights' | 'profile' | 'settings' | 'design-system' | 'icons' | 'heatmap-designs'
 
 function App() {
   // Get user profile for header avatar
@@ -28,6 +29,7 @@ function App() {
     if (typeof window !== 'undefined') {
       if (window.location.hash === '#design-system') return 'design-system'
       if (window.location.hash === '#icons') return 'icons'
+      if (window.location.hash === '#heatmap-designs') return 'heatmap-designs'
     }
     return 'stats'
   })
@@ -41,7 +43,9 @@ function App() {
       window.location.hash = 'design-system'
     } else if (currentView === 'icons') {
       window.location.hash = 'icons'
-    } else if (window.location.hash === '#design-system' || window.location.hash === '#icons') {
+    } else if (currentView === 'heatmap-designs') {
+      window.location.hash = 'heatmap-designs'
+    } else if (window.location.hash === '#design-system' || window.location.hash === '#icons' || window.location.hash === '#heatmap-designs') {
       window.location.hash = ''
     }
   }, [currentView])
@@ -74,6 +78,11 @@ function App() {
   // Show Icon Showcase page
   if (currentView === 'icons') {
     return <IconShowcase onBack={() => setCurrentView('stats')} />
+  }
+
+  // Show Heat Map Design Showcase
+  if (currentView === 'heatmap-designs') {
+    return <HeatMapDesignShowcase />
   }
 
   // Show Design System page
