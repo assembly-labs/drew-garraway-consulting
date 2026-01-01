@@ -3,7 +3,7 @@
   "rules": {
     "block-no-empty": true,
     "color-no-invalid-hex": true,
-    "declaration-block-no-duplicate-properties": true,
+    "declaration-block-no-duplicate-properties": [true, { "ignoreProperties": ["min-height"] }],
     "font-family-no-duplicate-names": true,
     "no-duplicate-selectors": true,
     "property-no-unknown": true,

@@ -1,4627 +1,2154 @@
 {
-  "generated": "2026-01-01T00:00:00.000Z",
-  "version": "2.0",
-  "format": "optimized-recall",
-  "totalCards": 352,
-  "methodology": {
-    "cloze": "60% - atomic facts forcing recall",
-    "discrimination": "20% - distinguishing similar concepts",
-    "scenario": "20% - exam-like application"
-  },
-  "sections": [
-    {
-      "id": 1,
-      "name": "Knowledge of Capital Markets",
-      "weight": 0.16,
-      "examQuestions": 12
-    },
-    {
-      "id": 2,
-      "name": "Understanding Products and Their Risks",
-      "weight": 0.44,
-      "examQuestions": 33
-    },
-    {
-      "id": 3,
-      "name": "Trading, Customer Accounts, and Prohibited Activities",
-      "weight": 0.31,
-      "examQuestions": 23
-    },
-    {
-      "id": 4,
-      "name": "Overview of Regulatory Framework",
-      "weight": 0.09,
-      "examQuestions": 7
-    }
-  ],
+  "generated": "2026-01-01T18:07:04.237Z",
+  "totalCards": 179,
   "cards": [
     {
-      "id": "ch05-s1-001",
-      "front": "New securities are sold for the first time in the _____ market.",
-      "back": "PRIMARY - Key concept for SIE exam",
+      "id": "ch5-s1-001",
+      "front": "What is a general obligation bond (GO bond)?",
+      "back": "Backed by the full faith, credit, and taxing power of the issuer. GO bonds are typically backed by tax revenue",
       "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch05-s1-002",
-      "front": "Existing securities trade between investors in the _____ market.",
-      "back": "SECONDARY - Key concept for SIE exam",
+      "id": "ch5-s1-002",
+      "front": "What is a revenue bond?",
+      "back": "Backed by revenue from a specific source, such as a public hospital, a toll bridge, or a sports arena. Revenue bonds are not backed by the full faith and credit of the issuer and are often issued by a separate authority such as a transportation authority",
       "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch05-s1-003",
-      "front": "In the primary market, proceeds from the sale go to the _____.",
-      "back": "ISSUER - Key concept for SIE exam",
+      "id": "ch5-s1-003",
+      "front": "What is a trust indenture?",
+      "back": "A legal requirement for corporate issuers under the Trust Indenture Act of 1939. Municipal issues are exempt from this act",
       "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch05-s1-004",
-      "front": "In the secondary market, proceeds from the sale go to the _____ (not the issuer).",
-      "back": "SELLING INVESTOR - Key concept for SIE exam",
+      "id": "ch5-s1-004",
+      "front": "What is Legality?",
+      "back": "It is legally binding on the issuer",
       "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch05-s1-005",
-      "front": "Primary vs Secondary market: In which does the issuing company receive money?",
-      "back": "PRIMARY - issuer receives proceeds from new securities sales",
+      "id": "ch5-s1-005",
+      "front": "What is Validity?",
+      "back": "Fully authorized and issued by municipality",
       "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-006",
+      "front": "What is Tax-exempt status?",
+      "back": "The interest is exempt from federal tax under current law",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-007",
+      "front": "What is Qualified?",
+      "back": "The opinion will be qualified if the counsel finds a problem. The qualifier will state that there is a legal uncertainty of which any purchaser should be aware",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-008",
+      "front": "What is Unqualified?",
+      "back": "The bond counsel determines that they have found no problems with the issue",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-009",
+      "front": "What is Test-Taking Tip?",
+      "back": "Issuers want an unqualified legal opinion because this means there are no outstanding legal issues associated with the issue",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-010",
+      "front": "What is Example?",
+      "back": "New streetlights or sidewalks may be put in one area, and only that area is assessed higher taxes to pay for the improvement",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-011",
+      "front": "What is The Solution?",
+      "back": "The state of New York (NY) assumed the moral obligation to pay if the city of NY could not. NY's state legislature was authorized, but not obligated, to provide the funds needed to service the debt, if necessary",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-012",
+      "front": "What is Note?",
+      "back": "The interest income received from corporate issues is taxable at the federal, state, and local level. Interest income received from the privatized agency issuers, such as FNMA (Fannie Mae) and FHLMC (Freddie Mac), is taxed the same way",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-013",
+      "front": "What is Municipal debt characteristics?",
+      "back": "Exemptions, the role of a bond counsel, bond contract, bond resolution, common practices",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-014",
+      "front": "What is General obligation (GO) bonds?",
+      "back": "Backed by taxes including ad valorem taxes; concepts including mill rates, debt limits",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-015",
+      "front": "What is Revenue bonds?",
+      "back": "Self-supporting debt backed by user fees; trust indentures",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-016",
+      "front": "What is Special types of muni debt?",
+      "back": "Special tax, special assessment, moral obligation, parity bonds, double barreled, lease rental, industrial development, and build America bonds; COPs",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-017",
+      "front": "What is Short-term muni debt?",
+      "back": "BANs, CLNs, BANs, TANs, RANs, TRANs, GANs, tax-exempt commercial paper, variable rate notes",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-018",
+      "front": "What is Municipal debt trading?",
+      "back": "Trade OTC, thin market, no short sales, trade settlement",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-019",
+      "front": "What is Municipal debt tax status?",
+      "back": "Interest income is exempt from federal tax, triple tax exempt for in-state residents, territory bonds triple tax exempt for all",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s1-020",
+      "front": "Revenue Bonds: What is the backed by ad valorem taxes, and by the full faith and credit of the municipality?",
+      "back": "Backed by revenues from a specific project (e.g., sports arena)",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
       "tags": [
         "comparison"
-      ],
-      "type": "discrimination"
+      ]
     },
     {
-      "id": "ch05-s1-006",
-      "front": "ABC Corp conducts an IPO selling 10 million new shares. Is this a primary or secondary market transaction?",
-      "back": "PRIMARY - new shares being sold, issuer receives proceeds",
+      "id": "ch5-s1-021",
+      "front": "Revenue Bonds: What is the issued to fund a municipality's budget?",
+      "back": "Issued to fund a specific project",
       "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch05-s1-007",
-      "front": "A hedge fund sells 500,000 shares of ABC Corp stock on the NYSE. Primary or secondary market?",
-      "back": "SECONDARY - existing shares trading between investors, issuer gets nothing",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch05-s1-008",
-      "front": "The _____ market is where securities trade on exchanges like NYSE and Nasdaq.",
-      "back": "FIRST - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-009",
-      "front": "The _____ market is the OTC market for UNLISTED securities.",
-      "back": "SECOND - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-010",
-      "front": "The _____ market is where exchange-LISTED securities trade OTC (off the exchange).",
-      "back": "THIRD - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-011",
-      "front": "The _____ market is direct institution-to-institution trading using ECNs and dark pools.",
-      "back": "FOURTH - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-012",
-      "front": "Second vs Third market: Which trades LISTED securities off-exchange?",
-      "back": "THIRD market trades listed securities OTC. Second market trades UNLISTED securities.",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
       "tags": [
         "comparison"
-      ],
-      "type": "discrimination"
+      ]
     },
     {
-      "id": "ch05-s1-013",
-      "front": "Fidelity and Vanguard trade 1 million shares of AAPL directly between themselves without using the NYSE. Which market?",
-      "back": "FOURTH market - institution-to-institution, no broker intermediary",
+      "id": "ch5-s1-022",
+      "front": "Revenue Bonds: What is the debt limits can apply?",
+      "back": "Debt limits do not apply",
       "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch05-s1-014",
-      "front": "The _____ is the PRIMARY federal regulator of the securities industry.",
-      "back": "SEC (Securities and Exchange Commission)",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-015",
-      "front": "The SEC was created by the Securities Exchange Act of _____.",
-      "back": "1934 - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-016",
-      "front": "_____ is the largest self-regulatory organization (SRO) for broker-dealers.",
-      "back": "FINRA - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-017",
-      "front": "FINRA stands for Financial Industry _____ Authority.",
-      "back": "REGULATORY - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-018",
-      "front": "An SRO is a _____-regulatory organization authorized to regulate its members.",
-      "back": "SELF - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-019",
-      "front": "The _____ writes rules for municipal securities but does NOT enforce them.",
-      "back": "MSRB (Municipal Securities Rulemaking Board)",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-020",
-      "front": "MSRB rules are enforced by _____ and bank regulators, not the MSRB itself.",
-      "back": "FINRA - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-021",
-      "front": "SEC vs FINRA: Which is a government agency and which is an SRO?",
-      "back": "SEC = government agency. FINRA = SRO (self-regulatory organization)",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
       "tags": [
         "comparison"
-      ],
-      "type": "discrimination"
+      ]
     },
     {
-      "id": "ch05-s1-022",
-      "front": "FINRA vs MSRB: Which can enforce its own rules?",
-      "back": "FINRA can enforce. MSRB writes rules but cannot enforce them.",
+      "id": "ch5-s1-023",
+      "front": "Revenue Bonds: What is the typically, safer than revenue bonds?",
+      "back": "Typically, riskier than GO bonds",
       "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
       "tags": [
         "comparison"
-      ],
-      "type": "discrimination"
+      ]
     },
     {
-      "id": "ch05-s1-023",
-      "front": "The Federal Reserve Board sets _____ requirements through Regulation T.",
-      "back": "MARGIN - Key concept for SIE exam",
+      "id": "ch5-s1-025",
+      "front": "Test-Taking Tip: What should you remember?",
+      "back": "Issuers want an unqualified legal opinion because this means there are no outstanding legal issues associated with the issue.",
       "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "exam-tip"
+      ]
+    },
+    {
+      "id": "ch5-s1-028",
+      "front": "What are the characteristics of municipal bonds?",
+      "back": "• Interest income not taxed at the federal level\n• Exempt from registration, but not from anti-fraud requirements\n• Come with an official statement instead of a prospectus\n• Good for investors in higher tax brackets\n• Typically, lower yields than corporate bonds, but higher than Treasuries\n• Typically, less risky than corporate bonds\n• Good for portfolio diversification",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "list"
+      ]
+    },
+    {
+      "id": "ch5-s1-030",
+      "front": "What does MSRB stand for?",
+      "back": "the Municipal Securities Rulemaking Board",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "acronym"
+      ]
+    },
+    {
+      "id": "ch5-s1-033",
+      "front": "What does NY stand for?",
+      "back": "The state of New York",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "acronym"
+      ]
+    },
+    {
+      "id": "ch5-s1-042",
+      "front": "What does TRANs stand for?",
+      "back": "Tax and revenue anticipation notes",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "acronym"
+      ]
+    },
+    {
+      "id": "ch5-s2-045",
+      "front": "What is Characteristics of Money Market Instruments?",
+      "back": "Understanding what makes these securities unique",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch05-s1-024",
-      "front": "Regulation T currently requires _____% initial margin for stocks.",
-      "back": "50 - Key concept for SIE exam",
+      "id": "ch5-s2-046",
+      "front": "What is Types of Money Market Instruments?",
+      "back": "From Treasury bills to commercial paper",
       "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch05-s1-025",
-      "front": "Who sets the rule that customers must deposit 50% when buying stocks on margin?",
-      "back": "FEDERAL RESERVE BOARD (through Regulation T)",
+      "id": "ch5-s2-047",
+      "front": "What is Long-Term Certificates of Deposit?",
+      "back": "Why they're different from traditional money market instruments",
       "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s2-048",
+      "front": "What is When the Fed buys money market instruments?",
+      "back": "It puts cash into banks, increasing credit availability (loosening monetary policy)",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s2-049",
+      "front": "What is When the Fed sells money market instruments?",
+      "back": "It drains cash from banks, decreasing credit availability (tightening monetary policy)",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s2-051",
+      "front": "What is CDs are subject to market risk?",
+      "back": "Their value fluctuates with interest rates",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s2-052",
+      "front": "What is Pre-maturity sale prices may be less than purchase price?",
+      "back": "Selling before maturity could mean taking a loss",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s2-053",
+      "front": "What is CDs have a limited secondary market?",
+      "back": "They're not as liquid as Treasury securities",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s2-054",
+      "front": "What is Callable CDs are subject to reinvestment risk?",
+      "back": "If called, you might have to reinvest at lower rates",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s2-055",
+      "front": "What is Step-up/step-down CD yields may not reflect current market rates?",
+      "back": "The predetermined rate adjustments might lag the market",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s2-056",
+      "front": "What is FDIC insurance only applies if titled in the customer's name?",
+      "back": "And only up to $250,000 per depositor, per institution",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s2-057",
+      "front": "What is Banker's acceptances?",
+      "back": "Bank-guaranteed instruments for international trade",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch5-s2-060",
+      "front": "What does SEC stand for?",
+      "back": "exempt from Securities and Exchange Commission",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "acronym"
+      ]
+    },
+    {
+      "id": "ch5-s2-062",
+      "front": "What does FDIC stand for?",
+      "back": "receive Federal Deposit Insurance Corporation",
+      "chapter": "chapter-05",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "acronym"
+      ]
+    },
+    {
+      "id": "ch6-s1-063",
+      "front": "What is Can issue stocks or bonds?",
+      "back": "One-time stock issuance — after the IPO, no new shares are created",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s1-064",
+      "front": "What is Three types of investment companies?",
+      "back": "Face-amount certificate companies (rare), management companies, and UITs",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s1-065",
+      "front": "What is Open-end funds?",
+      "back": "Create and redeem shares continuously at NAV",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s1-066",
+      "front": "What is Closed-end funds?",
+      "back": "Fixed number of shares trading on exchanges",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s1-067",
+      "front": "What is UITs?",
+      "back": "Fixed portfolio, no active management, have termination dates",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s1-068",
+      "front": "What is Key Terms:?",
+      "back": "Investment Company: Entity that pools investor capital to invest in securities",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s1-069",
+      "front": "Exam Focus: What is important to know?",
+      "back": "UITs are different from management companies in THREE critical ways the exam tests:",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
       "tags": [
         "exam-focus"
-      ],
-      "type": "scenario"
+      ]
     },
     {
-      "id": "ch05-s1-026",
-      "front": "SIPC protects customers if a _____ fails.",
-      "back": "BROKER-DEALER - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-027",
-      "front": "SIPC coverage limit is $_____ per customer.",
-      "back": "500,000 - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-028",
-      "front": "SIPC's $500,000 limit includes a maximum of $_____ for cash.",
-      "back": "250,000 - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-029",
-      "front": "SIPC does NOT protect against _____ losses.",
-      "back": "MARKET (investment losses) - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-030",
-      "front": "FDIC insures _____ deposits up to $250,000 per depositor.",
-      "back": "BANK - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-031",
-      "front": "FDIC does NOT cover _____ or mutual funds.",
-      "back": "SECURITIES - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-032",
-      "front": "SIPC vs FDIC: Which covers brokerage accounts?",
-      "back": "SIPC covers brokerage. FDIC covers bank deposits.",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch05-s1-033",
-      "front": "A broker-dealer goes bankrupt. Customer has $400,000 in stocks and $300,000 cash. How much does SIPC cover?",
-      "back": "$500,000 total - all $400K stocks but only $100K of cash (cash limit is $250K, but total limit is $500K)",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch05-s1-034",
-      "front": "A customer's stock portfolio drops from $100,000 to $60,000. Does SIPC cover the $40,000 loss?",
-      "back": "NO - SIPC does not protect against market/investment losses",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch05-s1-035",
-      "front": "The Securities Act of 1933 regulates the _____ market (new issues).",
-      "back": "PRIMARY - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-036",
-      "front": "The Securities Act of 1933 requires registration and delivery of a _____.",
-      "back": "PROSPECTUS - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-037",
-      "front": "The 1933 Act is known as the '_____ Act' or 'Truth in Securities Act.'",
-      "back": "PAPER - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-038",
-      "front": "The Securities Exchange Act of 1934 regulates the _____ market.",
-      "back": "SECONDARY - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-039",
-      "front": "The 1934 Act created the _____.",
-      "back": "SEC - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-040",
-      "front": "The 1934 Act is known as the '_____ Act.'",
-      "back": "PEOPLE - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-041",
-      "front": "1933 Act vs 1934 Act: Which regulates new issues?",
-      "back": "1933 ACT regulates primary market (new issues). 1934 Act regulates secondary market.",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch05-s1-042",
-      "front": "1933 Act vs 1934 Act: Which created the SEC?",
-      "back": "1934 ACT created the SEC",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch05-s1-043",
-      "front": "The Investment Company Act of _____ regulates mutual funds, closed-end funds, and UITs.",
-      "back": "1940 - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-044",
-      "front": "The Investment Advisers Act of _____ regulates investment advisers.",
-      "back": "1940 - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-045",
-      "front": "An _____ market uses competing bids and offers (like the NYSE).",
-      "back": "AUCTION - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-046",
-      "front": "A _____ market uses dealers who post their own prices (like Nasdaq).",
-      "back": "NEGOTIATED - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-047",
-      "front": "The NYSE uses _____ (formerly called specialists) to maintain orderly markets.",
-      "back": "DMMs (Designated Market Makers) - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-048",
-      "front": "Each stock on the NYSE has _____ DMM(s) assigned to it.",
-      "back": "ONE - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-049",
-      "front": "Nasdaq has _____ market makers competing to post prices for each stock.",
-      "back": "MULTIPLE - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-050",
-      "front": "NYSE vs Nasdaq: Which is an auction market?",
-      "back": "NYSE is auction. Nasdaq is negotiated/dealer market.",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch05-s1-051",
-      "front": "NYSE vs Nasdaq: Which has multiple market makers per stock?",
-      "back": "NASDAQ has multiple. NYSE has one DMM per stock.",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch05-s1-052",
-      "front": "A market maker profits from the _____-_____ spread.",
-      "back": "BID-ASK - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-053",
-      "front": "Market makers provide _____ to the market by standing ready to buy and sell.",
-      "back": "LIQUIDITY - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-054",
-      "front": "An IPO is an _____ Public Offering - a company's first stock sale to the public.",
-      "back": "INITIAL - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-055",
-      "front": "In a secondary offering, proceeds go to _____ shareholders, not the issuer.",
-      "back": "SELLING/EXISTING - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-056",
-      "front": "When interest rates RISE, bond prices _____.",
-      "back": "FALL - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-057",
-      "front": "When interest rates FALL, bond prices _____.",
-      "back": "RISE - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-058",
-      "front": "Bond prices and interest rates have an _____ relationship.",
-      "back": "INVERSE - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-059",
-      "front": "_____ risk is when rising prices erode purchasing power of returns.",
-      "back": "INFLATION - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch05-s1-060",
-      "front": "_____-income investments are most vulnerable to inflation risk.",
-      "back": "FIXED - Key concept for SIE exam",
-      "chapter": "chapter-05",
-      "section": 1,
-      "weight": 0.16,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-061",
-      "front": "Common stockholders can _____ for the board of directors.",
-      "back": "VOTE - Key concept for SIE exam",
+      "id": "ch6-s1-070",
+      "front": "What is Investment Company?",
+      "back": "value of fund assets minus liabilities - Redemption: Fund buying back shares from investors at N",
       "chapter": "chapter-06",
       "section": 2,
       "weight": 0.44,
-      "source": "manual",
+      "source": "auto",
       "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-062",
-      "front": "Common stockholders receive _____ if the board declares them.",
-      "back": "DIVIDENDS - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-063",
-      "front": "_____ rights let shareholders buy new shares before the public to prevent dilution.",
-      "back": "PREEMPTIVE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-064",
-      "front": "In liquidation, common stockholders have the _____ priority claim.",
-      "back": "LOWEST - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-065",
-      "front": "Liquidation priority order: Secured creditors > Unsecured > Subordinated > _____ > Common.",
-      "back": "PREFERRED - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-066",
-      "front": "XYZ Corp is liquidating. Who gets paid first - bondholders, preferred, or common?",
-      "back": "BONDHOLDERS (creditors before any stockholders)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-067",
-      "front": "XYZ Corp is liquidating. Only $1M remains after paying all creditors. Who gets it - preferred or common?",
-      "back": "PREFERRED stockholders (priority over common)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-068",
-      "front": "Preferred stock pays _____ dividends (like bonds).",
-      "back": "FIXED - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-069",
-      "front": "Preferred stock typically has _____ voting rights.",
-      "back": "NO - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-070",
-      "front": "_____ preferred stock accumulates unpaid dividends that must be paid before common.",
-      "back": "CUMULATIVE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-071",
-      "front": "_____ preferred stock can be exchanged for common shares.",
-      "back": "CONVERTIBLE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-072",
-      "front": "Common vs Preferred: Which typically has voting rights?",
-      "back": "COMMON stockholders vote. Preferred typically cannot.",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch06-s2-073",
-      "front": "Common vs Preferred: Which has higher dividend priority?",
-      "back": "PREFERRED receives dividends before common",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch06-s2-074",
-      "front": "A company skipped preferred dividends for 2 years. The stock is cumulative. What happens before common gets dividends?",
-      "back": "ALL missed preferred dividends must be paid first",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-075",
-      "front": "A 2-for-1 stock split _____ shares and _____ price per share.",
-      "back": "DOUBLES / HALVES - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-076",
-      "front": "A reverse stock split _____ shares and _____ price per share.",
-      "back": "REDUCES / INCREASES - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-077",
-      "front": "After a stock split, total value of holdings stays the _____.",
-      "back": "SAME - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-078",
-      "front": "You own 100 shares at $80. After a 2:1 split, what do you have?",
-      "back": "200 shares at $40 (same $8,000 total value)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-079",
-      "front": "You own 1,000 shares at $2. After a 1:10 reverse split, what do you have?",
-      "back": "100 shares at $20 (same $2,000 total value)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-080",
-      "front": "An ADR represents shares of a _____ company traded on U.S. exchanges.",
-      "back": "FOREIGN - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-081",
-      "front": "ADRs are denominated in U.S. _____ but subject to currency risk.",
-      "back": "DOLLARS - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-082",
-      "front": "Bondholders are _____ of the company, not owners.",
-      "back": "CREDITORS - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition",
         "key-term"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-083",
-      "front": "A bond's _____ rate is the fixed annual interest stated on the bond.",
-      "back": "COUPON - Key concept for SIE exam",
+      "id": "ch6-s1-072",
+      "front": "What does NAV stand for?",
+      "back": "at the Net Asset Value",
       "chapter": "chapter-06",
       "section": 2,
       "weight": 0.44,
-      "source": "manual",
+      "source": "auto",
       "tags": [
-        "definition",
+        "acronym"
+      ]
+    },
+    {
+      "id": "ch6-s2-074",
+      "front": "What is 75-5-10 Rule?",
+      "back": "| Requirement | Meaning |",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s2-075",
+      "front": "What is Misconception?",
+      "back": "All mutual funds are diversified",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s2-076",
+      "front": "What is Reality?",
+      "back": "Non-diversified funds exist and are legal—they just don't meet the 75-5-10 standard",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s2-078",
+      "front": "What is Important Numbers:?",
+      "back": "75% minimum in securities (for diversified funds)",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s2-079",
+      "front": "Role: What is the custodian bank?",
+      "back": "Safeguards fund assets; may act as Transfer Agent and Paying Agent",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s2-081",
+      "front": "Role: What is the investment adviser?",
+      "back": "Manages fund within stated objectives; contract approved by shareholders",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s2-082",
+      "front": "Compensation: What is the investment adviser?",
+      "back": "Management fees (% of AUM)",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s2-083",
+      "front": "Role: What is the fund sponsor (underwriter)?",
+      "back": "Creates and distributes the fund",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s2-085",
+      "front": "Role: What is the selling group?",
+      "back": "Acts as agent selling shares at POP",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s2-087",
+      "front": "Role: What is the 75%?",
+      "back": "At least 75% of the fund's assets must be invested in securities",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s2-088",
+      "front": "Role: What is the 5%?",
+      "back": "No more than 5% of the fund's assets can be invested in any one issuer",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s2-089",
+      "front": "Role: What is the 10%?",
+      "back": "A maximum of 10% of the voting securities of one issuer is allowed",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s2-091",
+      "front": "What is custodian bank?",
+      "back": "like the vault keeper—they hold the actual securities and ensure they're properly safeguarded",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
         "key-term"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-084",
-      "front": "A 5% coupon on a $1,000 bond pays $_____ per year.",
-      "back": "50 - Key concept for SIE exam",
+      "id": "ch6-s3-092",
+      "front": "What is fund family?",
+      "back": "Combined purchases across related accounts (spouses, minor children, IRAs)",
       "chapter": "chapter-06",
       "section": 2,
       "weight": 0.44,
-      "source": "manual",
+      "source": "auto",
       "tags": [
-        "definition",
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s3-093",
+      "front": "What is Forward pricing?",
+      "back": "Orders filled at next calculated NAV",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s3-094",
+      "front": "What is LOI?",
+      "back": "90-day backdate, 13-month completion period",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s3-095",
+      "front": "What is Rights of Accumulation?",
+      "back": "Based on current value including appreciation",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s3-096",
+      "front": "What is Investment clubs?",
+      "back": "Do NOT qualify for breakpoints",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s3-097",
+      "front": "What is Key Formulas:?",
+      "back": "NAV = (Total Assets - Total Liabilities) / Shares Outstanding",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s3-099",
+      "front": "Prospectus Delivery: What is the closed-end fund?",
+      "back": "No longer required once securities trade in secondary market",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s3-100",
+      "front": "Prospectus Delivery: What is the open-end fund?",
+      "back": "Required upon every purchase—it's a continuous primary offering",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s3-102",
+      "front": "Prospectus Delivery: What is the buy at?",
+      "back": "POP (NAV + sales charge)",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s3-103",
+      "front": "Prospectus Delivery: What is the pricing?",
+      "back": "Forward pricing (typically 4:00 PM)",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s3-107",
+      "front": "What is NAV?",
+      "back": "value, computed daily: - Add up all securities at current market prices - Deduct fees and liabilities - Divide by shares outstanding `` NAV = (Total Assets - Total Liabilities) / Shares Outstanding `` ### Public Offering Price (POP) Whe",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
         "key-term"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-085",
-      "front": "Bond par value is typically $_____.",
-      "back": "1,000 - Key concept for SIE exam",
+      "id": "ch6-s4-113",
+      "front": "What is Best for?",
+      "back": "Long-term investors with significant assets",
       "chapter": "chapter-06",
       "section": 2,
       "weight": 0.44,
-      "source": "manual",
+      "source": "auto",
       "tags": [
-        "definition",
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s4-114",
+      "front": "What is No up-front charge?",
+      "back": "Contingent Deferred Sales Charge (CDSC) if you sell early",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s4-115",
+      "front": "What is Higher 12b-1 fees?",
+      "back": "Often converts to Class A after CDSC period (typically 5-7 years)",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s4-116",
+      "front": "What is Higher 12b-1 fees that don't decline?",
+      "back": "No conversion to Class A",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s4-117",
+      "front": "What is NOT eligible for breakpoints?",
+      "back": "Best for: Short-term investors (1-3 years)",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s4-118",
+      "front": "What is Class A?",
+      "back": "Front-end load, lower 12b-1, breakpoints available",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s4-119",
+      "front": "What is Class B?",
+      "back": "Back-end CDSC, higher 12b-1, converts to A",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s4-120",
+      "front": "What is Class C?",
+      "back": "Level load, higher ongoing 12b-1, no conversion",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s4-125",
+      "front": "Limit: What is the maximum 12b-1 fee?",
+      "back": "1% of average annual net assets",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s4-127",
+      "front": "Limit: What is the approval required from?",
+      "back": "Shareholders, board, AND independent board members",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s4-130",
+      "front": "Limit: What is the sales charge?",
+      "back": "Up to 8.5%, reduced by breakpoints",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s5-138",
+      "front": "What is What it is?",
+      "back": "Selling shares just below a breakpoint to avoid giving the customer a discount",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s5-140",
+      "front": "What is Also prohibited?",
+      "back": "Spreading purchases across different fund families to prevent reaching breakpoints within any single family",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s5-141",
+      "front": "What is Why it happens?",
+      "back": "Class B shares have no up-front charge, which sounds appealing to customers. But:",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s5-142",
+      "front": "What is Why it's harmful?",
+      "back": "The day after a dividend, the NAV drops by exactly the dividend amount. The customer hasn't gained anything—they just converted NAV into a taxable dividend",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s5-143",
+      "front": "What is Subchapter M?",
+      "back": "90% distribution requirement to avoid fund-level taxation",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s5-144",
+      "front": "What is Breakpoint sales?",
+      "back": "Never sell just below a breakpoint",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s5-145",
+      "front": "What is Churning?",
+      "back": "Never recommend unnecessary trades for commissions",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s5-146",
+      "front": "What is Class B inappropriateness?",
+      "back": "Large, long-term investors should be in Class A",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s5-147",
+      "front": "What is Selling dividends?",
+      "back": "Never encourage buying right before ex-dividend date",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s5-150",
+      "front": "Tax Treatment: What is the distributes 90%+?",
+      "back": "Fund pays no tax on distributed income",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s5-151",
+      "front": "Tax Treatment: What is the distributes less than 90%?",
+      "back": "Fund pays corporate tax on retained income",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s5-153",
+      "front": "Tax Treatment: What is the open-end fund?",
+      "back": "Fund's Board of Directors (usually day AFTER payment)",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s5-156",
+      "front": "What is cost basis?",
+      "back": "matters when you eventually sell",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
         "key-term"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-086",
-      "front": "Most bonds pay interest _____-annually (twice per year).",
-      "back": "SEMI - Key concept for SIE exam",
+      "id": "ch6-s6-157",
+      "front": "What is 2X ETF?",
+      "back": "If the index goes up 10%, the ETF goes up 20%",
       "chapter": "chapter-06",
       "section": 2,
       "weight": 0.44,
-      "source": "manual",
+      "source": "auto",
       "tags": [
-        "definition",
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s6-158",
+      "front": "What is Accredited investors only?",
+      "back": "High minimum investments — often $250,000+",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s6-159",
+      "front": "What is ETFs?",
+      "back": "Trade like stocks, use creation units, generally lower costs",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s6-160",
+      "front": "What is ETNs?",
+      "back": "Debt securities, issuer credit risk, no underlying assets",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s6-161",
+      "front": "What is REITs?",
+      "back": "75%/90% tests, dividends taxed as ordinary income",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s6-162",
+      "front": "What is Hedge funds?",
+      "back": "Accredited investors, 2-and-20 fees, illiquid",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s6-163",
+      "front": "What is DPPs?",
+      "back": "Pass-through taxation, passive income, illiquid",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s6-166",
+      "front": "What is Liquidity?",
+      "back": "Daily redemption? Exchange traded? Lock-up period?",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s6-167",
+      "front": "What is Costs?",
+      "back": "Front-end load? 12b-1 fees? Expense ratio? Performance fees?",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s6-168",
+      "front": "What is Taxes?",
+      "back": "Pass-through? Corporate level? Ordinary income? Capital gains?",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "definition"
+      ]
+    },
+    {
+      "id": "ch6-s6-170",
+      "front": "Mutual Fund: What is the trading?",
+      "back": "Once daily at 4 PM NAV",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s6-179",
+      "front": "Mutual Fund: What is the maturity?",
+      "back": "Maturity date set by issuer",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s6-182",
+      "front": "ETF: What is the ownership?",
+      "back": "Own piece of underlying portfolio",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s6-185",
+      "front": "ETF: What is the 75% income test?",
+      "back": "At least 75% of income from real estate (rentals, mortgage interest, property sales)",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s6-186",
+      "front": "ETF: What is the 75% asset test?",
+      "back": "At least 75% of assets in real estate, government securities, or cash",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s6-187",
+      "front": "ETF: What is the structure?",
+      "back": "Unincorporated entity managed by Trustee(s)",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s6-188",
+      "front": "ETF: What is the 90% distribution?",
+      "back": "At least 90% of net investment income distributed",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s6-191",
+      "front": "ETF: What is the net worth?",
+      "back": ">$1 million (excluding primary residence)",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s6-192",
+      "front": "ETF: What is the or annual income?",
+      "back": ">$200K individual / >$300K joint",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s6-196",
+      "front": "Mutual Fund: What is the exploratory?",
+      "back": "Drilling where no one has drilled before",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s6-198",
+      "front": "Mutual Fund: What is the developmental?",
+      "back": "Drilling near existing oil fields",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s6-200",
+      "front": "Mutual Fund: What is the income?",
+      "back": "Buying producing wells with proven reserves",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "ch6-s6-201",
+      "front": "What is creation units?",
+      "back": "arbitrage mechanism keeps prices near NAV ### ETFs vs",
+      "chapter": "chapter-06",
+      "section": 2,
+      "weight": 0.44,
+      "source": "auto",
+      "tags": [
         "key-term"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-087",
-      "front": "Current yield = Annual Interest / _____ Price.",
-      "back": "MARKET - Key concept for SIE exam",
+      "id": "ch6-s6-205",
+      "front": "What are the characteristics?",
+      "back": "• Illiquid — capital locked up for years\n• Accredited investors only\n• High minimum investments — often $250,000+\n• Performance fees — similar to hedge funds",
       "chapter": "chapter-06",
       "section": 2,
       "weight": 0.44,
-      "source": "manual",
+      "source": "auto",
       "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-088",
-      "front": "_____ to maturity (YTM) is the total return if held until maturity.",
-      "back": "YIELD - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-089",
-      "front": "YTM is the most _____ yield measure because it includes capital gain/loss.",
-      "back": "COMPREHENSIVE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-090",
-      "front": "A bond trading BELOW par is at a _____.",
-      "back": "DISCOUNT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-091",
-      "front": "A bond trading ABOVE par is at a _____.",
-      "back": "PREMIUM - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-092",
-      "front": "A discount bond has a coupon rate _____ than current market rates.",
-      "back": "LOWER - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-093",
-      "front": "A premium bond has a coupon rate _____ than current market rates.",
-      "back": "HIGHER - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-094",
-      "front": "For a discount bond: YTM > Current Yield > _____ Rate.",
-      "back": "COUPON - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-095",
-      "front": "For a premium bond: Coupon Rate > Current Yield > _____.",
-      "back": "YTM - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-096",
-      "front": "A bond with 4% coupon trades at $900. Is it at premium or discount?",
-      "back": "DISCOUNT (below $1,000 par) - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-097",
-      "front": "Market rates are 6%. A bond with 4% coupon would trade at _____ to par.",
-      "back": "DISCOUNT (coupon < market rate)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-098",
-      "front": "_____ rate risk is when rising rates cause bond prices to fall.",
-      "back": "INTEREST - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-099",
-      "front": "LONGER maturity bonds have _____ interest rate risk.",
-      "back": "MORE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-100",
-      "front": "_____ risk is when an issuer fails to make payments.",
-      "back": "CREDIT (or DEFAULT) - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-101",
-      "front": "Treasury bonds have virtually _____ credit risk.",
-      "back": "NO/ZERO - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-102",
-      "front": "_____ risk is when a callable bond is redeemed early.",
-      "back": "CALL - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-103",
-      "front": "Bonds are typically called when interest rates _____.",
-      "back": "FALL - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-104",
-      "front": "_____ risk is having to reinvest at lower rates.",
-      "back": "REINVESTMENT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-105",
-      "front": "A 30-year bond vs a 5-year bond - which has more interest rate risk?",
-      "back": "30-YEAR (longer maturity = more sensitive to rate changes)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-106",
-      "front": "Rates drop from 5% to 3%. Your 6% callable bond gets called. What risk materialized?",
-      "back": "CALL RISK (and reinvestment risk - must reinvest at 3%)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-107",
-      "front": "A _____ bond can be redeemed early by the ISSUER.",
-      "back": "CALLABLE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-108",
-      "front": "A _____ bond can be exchanged for common stock by the HOLDER.",
-      "back": "CONVERTIBLE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-109",
-      "front": "A zero-coupon bond pays _____ periodic interest.",
-      "back": "NO - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-110",
-      "front": "Zero-coupon bonds are sold at a deep _____ to par.",
-      "back": "DISCOUNT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-111",
-      "front": "Callable vs Convertible: Which benefits the issuer?",
-      "back": "CALLABLE benefits issuer (can refinance at lower rates). Convertible benefits holder.",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch06-s2-112",
-      "front": "Treasury securities are backed by the U.S. _____ and have virtually no credit risk.",
-      "back": "GOVERNMENT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-113",
-      "front": "Treasury interest is exempt from _____ and local taxes.",
-      "back": "STATE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-114",
-      "front": "T-bills mature in _____ year or less.",
-      "back": "ONE (1) - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-115",
-      "front": "T-bills are sold at a _____ and mature at par (no coupon payments).",
-      "back": "DISCOUNT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-116",
-      "front": "T-notes mature in _____ to _____ years.",
-      "back": "2 / 10 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-117",
-      "front": "T-bonds mature in more than _____ years (typically 20-30).",
-      "back": "10 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-118",
-      "front": "_____ adjust principal for inflation based on CPI.",
-      "back": "TIPS (Treasury Inflation-Protected Securities) - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-119",
-      "front": "T-bill vs T-note: Which pays periodic interest?",
-      "back": "T-NOTE pays semi-annual interest. T-bills sold at discount, no coupon.",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch06-s2-120",
-      "front": "An investor wants inflation protection. Which Treasury product?",
-      "back": "TIPS (principal adjusts with CPI)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-121",
-      "front": "A GO bond is backed by full faith, credit, and _____ power.",
-      "back": "TAXING - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-122",
-      "front": "GO bonds are typically backed by _____ (ad valorem) taxes.",
-      "back": "PROPERTY - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-123",
-      "front": "A _____ bond is backed by income from a specific project.",
-      "back": "REVENUE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-124",
-      "front": "Revenue bonds are NOT backed by _____.",
-      "back": "TAXING POWER - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-125",
-      "front": "Municipal bond interest is exempt from _____ income tax.",
-      "back": "FEDERAL - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-126",
-      "front": "Munis may be '_____ tax-free' if investor lives in issuing state.",
-      "back": "TRIPLE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-127",
-      "front": "GO bond vs Revenue bond: Which is typically safer?",
-      "back": "GO BOND (backed by taxing power vs single project revenue)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch06-s2-128",
-      "front": "A bond funds a toll road and is paid from toll revenues. GO or Revenue?",
-      "back": "REVENUE bond (backed by specific project income)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-129",
-      "front": "A California resident buys California muni bonds. Tax advantage?",
-      "back": "TRIPLE TAX-FREE (exempt from federal, state, and local)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-130",
-      "front": "Investment grade bonds are rated _____ or higher by S&P.",
-      "back": "BBB - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-131",
-      "front": "Below investment grade bonds are called _____ or high-yield bonds.",
-      "back": "JUNK - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-132",
-      "front": "The three major rating agencies are Moody's, S&P, and _____.",
-      "back": "FITCH - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-133",
-      "front": "An open-end fund continuously _____ and redeems shares at NAV.",
-      "back": "ISSUES - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-134",
-      "front": "Mutual fund NAV is calculated at _____ PM ET daily.",
-      "back": "4:00 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-135",
-      "front": "NAV = (Total Assets - Total Liabilities) / _____ Outstanding.",
-      "back": "SHARES - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-136",
-      "front": "POP = NAV + _____ Charge.",
-      "back": "SALES - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-137",
-      "front": "For a no-load fund, POP = _____.",
-      "back": "NAV - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-138",
-      "front": "Mutual funds use _____ pricing - orders filled at next calculated NAV.",
-      "back": "FORWARD - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-139",
-      "front": "A closed-end fund issues a _____ number of shares through an IPO.",
-      "back": "FIXED - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-140",
-      "front": "Closed-end funds trade on _____ at market price (not NAV).",
-      "back": "EXCHANGES - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-141",
-      "front": "Closed-end funds can trade at a premium or _____ to NAV.",
-      "back": "DISCOUNT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-142",
-      "front": "Open-end vs Closed-end: Which redeems shares at NAV?",
-      "back": "OPEN-END redeems at NAV. Closed-end trades on exchange at market price.",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch06-s2-143",
-      "front": "Open-end vs Closed-end: Which can trade at a discount to NAV?",
-      "back": "CLOSED-END (market price can differ from NAV)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch06-s2-144",
-      "front": "Class A shares have a _____-end load (paid at purchase).",
-      "back": "FRONT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-145",
-      "front": "Class A shares are eligible for _____ discounts on large purchases.",
-      "back": "BREAKPOINT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-146",
-      "front": "Class B shares have a CDSC (Contingent _____ Sales Charge) at redemption.",
-      "back": "DEFERRED - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-147",
-      "front": "Class B CDSC typically _____ over 5-7 years.",
-      "back": "DECLINES - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-148",
-      "front": "Class B shares typically convert to Class _____ after the CDSC period.",
-      "back": "A - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-149",
-      "front": "Class C shares have higher ongoing _____-1 fees that never decline.",
-      "back": "12b - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-150",
-      "front": "Class C shares are best for _____-term investors.",
-      "back": "SHORT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-151",
-      "front": "Class A vs Class B: Which has breakpoints?",
-      "back": "CLASS A has breakpoints. Class B does not.",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch06-s2-152",
-      "front": "Class B vs Class C: Which converts to Class A?",
-      "back": "CLASS B converts. Class C does not.",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch06-s2-153",
-      "front": "A long-term investor with $100,000 to invest. Best share class?",
-      "back": "CLASS A (breakpoint discount, lower ongoing expenses)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-154",
-      "front": "12b-1 fees pay for _____ and distribution expenses.",
-      "back": "MARKETING - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
+        "list"
+      ]
     },
     {
-      "id": "ch06-s2-155",
-      "front": "Maximum 12b-1 fee is _____% of average net assets.",
-      "back": "1 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s0-214",
+      "front": "What is \"Fair and reasonable\"?",
+      "back": "3% on liquid stock? Could be excessive",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-156",
-      "front": "Maximum sales charge for mutual funds is _____% (reduced by breakpoints).",
-      "back": "8.5 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s0-215",
+      "front": "What is \"Which market...\"?",
+      "back": "Trades unlisted securities? → Second (OTC)",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-157",
-      "front": "A breakpoint is a dollar amount where sales charge is _____.",
-      "back": "REDUCED - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s0-216",
+      "front": "What is Third?",
+      "back": "Uses dark pools? → Fourth",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-158",
-      "front": "A Letter of Intent (LOI) commits to invest over _____ months for breakpoint.",
-      "back": "13 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s0-217",
+      "front": "What is \"Who regulates...\"?",
+      "back": "Exchanges? → Themselves (SROs) + SEC",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-159",
-      "front": "An LOI can be backdated up to _____ days.",
-      "back": "90 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s0-218",
+      "front": "What is \"What's prohibited?\"?",
+      "back": "Commission + markup on same trade → Hidden profit",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-160",
-      "front": "Rights of Accumulation base breakpoints on _____ value (not original cost).",
-      "back": "CURRENT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-227",
+      "front": "What is NYSE (auction)?",
+      "back": "One DMM per stock, competing bids and offers",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-161",
-      "front": "A customer invested $40,000. Their holdings are now worth $50,000. What value is used for Rights of Accumulation?",
-      "back": "$50,000 (current value, including appreciation)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
+      ]
     },
     {
-      "id": "ch06-s2-162",
-      "front": "For a diversified fund, at least _____% of assets must be diversified.",
-      "back": "75 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-228",
+      "front": "What is Nasdaq (negotiated)?",
+      "back": "Multiple market makers per stock, each posting their own prices",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-163",
-      "front": "In the diversified portion, no more than _____% can be in any one issuer.",
-      "back": "5 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-229",
+      "front": "What is Less liquidity?",
+      "back": "Fewer buyers and sellers means harder execution",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-164",
-      "front": "In the diversified portion, no more than _____% of any issuer's voting securities.",
-      "back": "10 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-230",
+      "front": "What is Wider spreads?",
+      "back": "Less competition means you pay more to trade",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-165",
-      "front": "The diversification test is called the 75-5-_____ rule.",
-      "back": "10 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-231",
+      "front": "What is Higher volatility?",
+      "back": "Thin trading amplifies price swings",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-166",
-      "front": "A UIT has a _____ portfolio (not actively managed).",
-      "back": "FIXED - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-232",
+      "front": "What is Stale prices?",
+      "back": "Quotes may not reflect current market conditions",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-167",
-      "front": "UITs have a _____ date when the trust terminates.",
-      "back": "TERMINATION/MATURITY - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-233",
+      "front": "What is NYSE blue chip?",
+      "back": "Spread of $0.01 (Bid $4",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-168",
-      "front": "UITs have no board of _____ (unlike mutual funds).",
-      "back": "DIRECTORS - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-234",
+      "front": "What is OTC Pink stock?",
+      "back": "Spread of $0.50 or more (Bid $1",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-169",
-      "front": "ETFs trade on exchanges throughout the _____ like stocks.",
-      "back": "DAY - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-235",
+      "front": "What is Primary vs. Secondary?",
+      "back": "Primary = new issues to issuer; Secondary = existing securities between investors",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-170",
-      "front": "ETFs trade at _____ price, not NAV.",
-      "back": "MARKET - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-236",
+      "front": "What is Four Markets?",
+      "back": "First (exchanges), Second (OTC unlisted), Third (OTC listed), Fourth (institutional/dark pools)",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-171",
-      "front": "ETFs generally have _____ expenses than mutual funds.",
-      "back": "LOWER - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-237",
+      "front": "What is NYSE vs. Nasdaq?",
+      "back": "Auction market with DMMs vs. negotiated market with multiple market makers",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-172",
-      "front": "ETF vs Mutual fund: Which can you buy at 2 PM?",
-      "back": "ETF (trades throughout day). Mutual funds priced once at 4 PM.",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
+      ]
     },
     {
-      "id": "ch06-s2-173",
-      "front": "An ETN is an unsecured _____ security (not equity).",
-      "back": "DEBT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-238",
+      "front": "What is Broker vs. Dealer?",
+      "back": "Agent earns commissions, principal earns markups/markdowns",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-174",
-      "front": "ETNs have _____ credit risk because they're issuer obligations.",
-      "back": "ISSUER - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-239",
+      "front": "What is Hidden Profit?",
+      "back": "Cannot charge both commission AND markup on same transaction",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-175",
-      "front": "ETF vs ETN: Which has credit risk from the issuer?",
-      "back": "ETN (unsecured debt). ETF owns underlying assets.",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
+      ]
     },
     {
-      "id": "ch06-s2-176",
-      "front": "Variable annuity returns depend on the _____ account performance.",
-      "back": "SEPARATE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-240",
+      "front": "What is 5% Policy?",
+      "back": "Guideline, not rule; must be \"fair and reasonable\"; mutual funds and munis exempt",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-177",
-      "front": "Annuity earnings grow tax-_____.",
-      "back": "DEFERRED - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-241",
+      "front": "What is After-hours risks?",
+      "back": "Less liquid, wider spreads, more volatile",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-178",
-      "front": "The _____ phase is when you contribute to an annuity.",
-      "back": "ACCUMULATION - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-242",
+      "front": "What is Primary vs. Secondary Markets:?",
+      "back": "Primary market: New securities sold by issuer",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-179",
-      "front": "The _____ phase is when the annuity makes payments to you.",
-      "back": "ANNUITIZATION/PAYOUT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-243",
+      "front": "What is The Four Secondary Markets:?",
+      "back": "First market: Regulated exchanges (NYSE, Nasdaq)",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-180",
-      "front": "A fixed annuity pays a _____ rate and is NOT a security.",
-      "back": "FIXED/GUARANTEED - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-245",
+      "front": "What is Compensation:?",
+      "back": "Commission: Paid to brokers (agents)",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-181",
-      "front": "Variable vs Fixed annuity: Which is a security?",
-      "back": "VARIABLE is a security (regulated by SEC). Fixed is not.",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
+      ]
     },
     {
-      "id": "ch06-s2-182",
-      "front": "An annuity's value fluctuates with the stock market. Variable or fixed?",
-      "back": "VARIABLE (separate account invested in securities)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-183",
-      "front": "An option gives the holder the _____ (not obligation) to buy or sell.",
-      "back": "RIGHT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-246",
+      "front": "What is primary market?",
+      "back": "sold to the public for the first time—think IPOs and new bond offerings",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
-        "definition",
         "key-term"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-184",
-      "front": "A _____ option is the right to BUY at the strike price.",
-      "back": "CALL - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-249",
+      "front": "What is listing standards?",
+      "back": "price, market capitalization, earnings history, and corporate governance",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
-        "definition",
         "key-term"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-185",
-      "front": "A _____ option is the right to SELL at the strike price.",
-      "back": "PUT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-250",
+      "front": "What is second market?",
+      "back": "the over-the-counter market for securities that don't trade on exchanges",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
-        "definition",
         "key-term"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-186",
-      "front": "Call buyers are _____ (expect price to rise).",
-      "back": "BULLISH - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-251",
+      "front": "What is OTC Markets Group?",
+      "back": "not an exchange and not an SRO",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
-        "definition",
         "key-term"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-187",
-      "front": "Put buyers are _____ (expect price to fall).",
-      "back": "BEARISH - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-252",
+      "front": "What is penny stocks?",
+      "back": "prices measured in pennies rather than dollars",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
-        "definition",
         "key-term"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-188",
-      "front": "The _____ is the price paid for an option contract.",
-      "back": "PREMIUM - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-253",
+      "front": "What is third market?",
+      "back": "where listed securities trade over-the-counter, outside the exchanges",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
-        "definition",
         "key-term"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-189",
-      "front": "The _____ price is where the holder can buy (call) or sell (put).",
-      "back": "STRIKE/EXERCISE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
+      "id": "ch7-s1-254",
+      "front": "What is fourth market?",
+      "back": "where institutions trade directly with each other, cutting out brokers entirely",
+      "chapter": "chapter-07",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
-        "definition",
         "key-term"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch06-s2-190",
-      "front": "Call vs Put: Which profits when stock rises?",
-      "back": "CALL buyer profits when stock rises",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch06-s2-191",
-      "front": "Call vs Put: Which profits when stock falls?",
-      "back": "PUT buyer profits when stock falls",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch06-s2-192",
-      "front": "A call is in-the-money when market price is _____ the strike.",
-      "back": "ABOVE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-193",
-      "front": "A put is in-the-money when market price is _____ the strike.",
-      "back": "BELOW - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-194",
-      "front": "Intrinsic value is the amount an option is _____-the-money.",
-      "back": "IN - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-195",
-      "front": "Call intrinsic value = Market Price - _____ Price.",
-      "back": "STRIKE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-196",
-      "front": "Put intrinsic value = Strike Price - _____ Price.",
-      "back": "MARKET - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-197",
-      "front": "Time value = Premium - _____ Value.",
-      "back": "INTRINSIC - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-198",
-      "front": "Time value _____ as expiration approaches (time decay).",
-      "back": "DECLINES - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-199",
-      "front": "Stock at $55, Call strike $50. In or out of the money?",
-      "back": "IN-THE-MONEY ($5 intrinsic value) - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-200",
-      "front": "Stock at $45, Put strike $50. In or out of the money?",
-      "back": "IN-THE-MONEY ($5 intrinsic value) - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-201",
-      "front": "Maximum loss for an option BUYER is the _____ paid.",
-      "back": "PREMIUM - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-202",
-      "front": "Maximum loss for a naked call WRITER is _____.",
-      "back": "UNLIMITED - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-203",
-      "front": "A _____ call is writing a call while owning the underlying stock.",
-      "back": "COVERED - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-204",
-      "front": "A _____ put is buying a put while owning the underlying stock.",
-      "back": "PROTECTIVE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-205",
-      "front": "A protective put provides _____ protection (like insurance).",
-      "back": "DOWNSIDE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-206",
-      "front": "You own stock and want income but are willing to cap upside. Strategy?",
-      "back": "COVERED CALL (sell call, collect premium)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-207",
-      "front": "You own stock and want protection against decline. Strategy?",
-      "back": "PROTECTIVE PUT (buy put as insurance)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-208",
-      "front": "_____ risk affects the entire market (cannot be diversified away).",
-      "back": "SYSTEMATIC/MARKET - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-209",
-      "front": "_____ risk is specific to one company (CAN be diversified away).",
-      "back": "UNSYSTEMATIC - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-210",
-      "front": "_____ risk is difficulty selling quickly at a fair price.",
-      "back": "LIQUIDITY - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-211",
-      "front": "_____ risk is when exchange rates reduce foreign investment value.",
-      "back": "CURRENCY/EXCHANGE RATE - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-212",
-      "front": "_____ risk is government actions harming investments.",
-      "back": "POLITICAL - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-213",
-      "front": "Systematic vs Unsystematic: Which can diversification reduce?",
-      "back": "UNSYSTEMATIC (company-specific). Systematic affects whole market.",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch06-s2-214",
-      "front": "A recession causes all stocks to decline. What type of risk?",
-      "back": "SYSTEMATIC/MARKET risk (affects entire market)",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-215",
-      "front": "A company's CEO resigns in scandal, stock drops 20%. What risk?",
-      "back": "UNSYSTEMATIC (company-specific event) - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch06-s2-216",
-      "front": "A REIT must distribute _____% of taxable income to shareholders.",
-      "back": "90 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-217",
-      "front": "REIT dividends are taxed as _____ income (not qualified dividends).",
-      "back": "ORDINARY - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-218",
-      "front": "Hedge funds are available only to _____ investors.",
-      "back": "ACCREDITED - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-219",
-      "front": "Accredited investor net worth requirement: $_____ million (excluding primary residence).",
-      "back": "1 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-220",
-      "front": "Accredited investor income requirement: $_____ individual or $300K joint.",
-      "back": "200,000 (or 200K) - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-221",
-      "front": "A DPP passes income, losses, and tax benefits directly to _____.",
-      "back": "INVESTORS - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-222",
-      "front": "Money market funds invest in _____-term, high-quality debt.",
-      "back": "SHORT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-223",
-      "front": "Money market funds seek to maintain $_____NAV.",
-      "back": "1.00 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-224",
-      "front": "Commercial paper matures in a maximum of _____ days.",
-      "back": "270 - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-225",
-      "front": "A banker's acceptance is typically used in _____ trade.",
-      "back": "INTERNATIONAL - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch06-s2-226",
-      "front": "A repurchase agreement (repo) is typically _____ (one day).",
-      "back": "OVERNIGHT - Key concept for SIE exam",
-      "chapter": "chapter-06",
-      "section": 2,
-      "weight": 0.44,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-227",
-      "front": "A _____ order executes immediately at best available price.",
-      "back": "MARKET - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-228",
-      "front": "A market order guarantees _____ but not price.",
-      "back": "EXECUTION - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-229",
-      "front": "A _____ order specifies a maximum buy price or minimum sell price.",
-      "back": "LIMIT - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-230",
-      "front": "A limit order guarantees _____ but not execution.",
-      "back": "PRICE - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-231",
-      "front": "A buy limit executes at the limit price or _____.",
-      "back": "LOWER - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-232",
-      "front": "A sell limit executes at the limit price or _____.",
-      "back": "HIGHER - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-233",
-      "front": "A _____ order becomes a market order when triggered.",
-      "back": "STOP - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-234",
-      "front": "A stop-_____ order becomes a limit order when triggered.",
-      "back": "LIMIT - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-235",
-      "front": "Buy stops are placed _____ the current market price.",
-      "back": "ABOVE - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-236",
-      "front": "Sell stops are placed _____ the current market price.",
-      "back": "BELOW - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-237",
-      "front": "Market vs Limit: Which guarantees execution?",
-      "back": "MARKET order guarantees execution. Limit guarantees price.",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch07-s3-238",
-      "front": "Stock at $50. You want to buy only if price drops to $45. Order type?",
-      "back": "BUY LIMIT at $45 - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch07-s3-239",
-      "front": "You own stock at $50. You want to sell if it drops to $45 to limit loss. Order?",
-      "back": "SELL STOP at $45 (becomes market order when triggered)",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch07-s3-240",
-      "front": "A _____ order expires at end of trading day (default).",
-      "back": "DAY - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-241",
-      "front": "A _____ order remains until executed or canceled.",
-      "back": "GTC (Good-Til-Canceled) - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-242",
-      "front": "A short sale involves selling _____ shares.",
-      "back": "BORROWED - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-243",
-      "front": "Short sellers profit when the stock price _____.",
-      "back": "FALLS - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-244",
-      "front": "Short sale risk is _____ (price can rise infinitely).",
-      "back": "UNLIMITED - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-245",
-      "front": "In a _____ account, customer pays in full for purchases.",
-      "back": "CASH - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-246",
-      "front": "In a _____ account, customer can borrow from the broker.",
-      "back": "MARGIN - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-247",
-      "front": "Regulation T sets _____ margin at 50% for stocks.",
-      "back": "INITIAL - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-248",
-      "front": "FINRA minimum _____ margin is 25% for long positions.",
-      "back": "MAINTENANCE - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-249",
-      "front": "A margin _____ demands more funds when equity falls below maintenance.",
-      "back": "CALL - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-250",
-      "front": "Customer buys $10,000 of stock on margin. Minimum deposit under Reg T?",
-      "back": "$5,000 (50% initial margin) - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch07-s3-251",
-      "front": "Regular way settlement is T+_____.",
-      "back": "1 - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-252",
-      "front": "T+1 means trade date plus _____ business day.",
-      "back": "ONE - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-253",
-      "front": "T+1 settlement became effective May _____, 2024.",
-      "back": "28 - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-254",
-      "front": "Cash settlement is _____-day settlement.",
-      "back": "SAME - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-255",
-      "front": "Customer buys stock on Monday. When must they pay (regular way)?",
-      "back": "TUESDAY (T+1) - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch07-s3-256",
-      "front": "With T+1, the ex-dividend date and record date are the _____ day.",
-      "back": "SAME - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-257",
-      "front": "To receive a dividend, you must buy _____ the ex-date.",
-      "back": "BEFORE - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-258",
-      "front": "On the ex-date, the stock price typically drops by the _____ amount.",
-      "back": "DIVIDEND - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-259",
-      "front": "Record date is Tuesday. Ex-date is _____.",
-      "back": "TUESDAY (same day under T+1)",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch07-s3-260",
-      "front": "A _____ account gives the rep authority to trade without prior approval.",
-      "back": "DISCRETIONARY - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-261",
-      "front": "Discretionary authority requires written _____ of attorney.",
-      "back": "POWER - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-262",
-      "front": "Choosing WHAT, HOW MUCH, or WHETHER to buy/sell requires _____ authority.",
-      "back": "DISCRETIONARY - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-263",
-      "front": "Choosing only TIME and PRICE does _____ require discretionary authority.",
-      "back": "NOT - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-264",
-      "front": "JTWROS stands for Joint Tenants with Rights of _____.",
-      "back": "SURVIVORSHIP - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-265",
-      "front": "In JTWROS, assets pass directly to _____ upon death.",
-      "back": "SURVIVING OWNER(S) - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-266",
-      "front": "In TIC (Tenants in Common), deceased's share goes to their _____.",
-      "back": "ESTATE - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-267",
-      "front": "JTWROS vs TIC: Which avoids probate?",
-      "back": "JTWROS (assets pass directly to survivor)",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch07-s3-268",
-      "front": "UGMA/UTMA are _____ accounts for minors.",
-      "back": "CUSTODIAL - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-269",
-      "front": "Gifts to UGMA/UTMA accounts are _____ (cannot be taken back).",
-      "back": "IRREVOCABLE - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-270",
-      "front": "UGMA/UTMA accounts have _____ custodian and _____ minor.",
-      "back": "ONE / ONE - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-271",
-      "front": "_____ requires recommendations be appropriate for the customer.",
-      "back": "SUITABILITY - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-272",
-      "front": "The three suitability obligations: Reasonable-basis, Customer-specific, _____.",
-      "back": "QUANTITATIVE - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-273",
-      "front": "Regulation _____ Interest requires broker-dealers act in customer's best interest.",
-      "back": "BEST (Reg BI) - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-274",
-      "front": "Form _____ is the 2-page Customer Relationship Summary.",
-      "back": "CRS - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-275",
-      "front": "_____ is excessive trading to generate commissions.",
-      "back": "CHURNING - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-276",
-      "front": "_____ is trading ahead of a large customer order.",
-      "back": "FRONT RUNNING - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-277",
-      "front": "_____ trading is based on material, non-public information.",
-      "back": "INSIDER - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-278",
-      "front": "A _____ sale is selling just below a breakpoint to deny discount.",
-      "back": "BREAKPOINT - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-279",
-      "front": "'Selling _____' is encouraging purchase right before ex-dividend date.",
-      "back": "DIVIDENDS - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-280",
-      "front": "A _____ sale is selling and repurchasing within 30 days for artificial activity.",
-      "back": "WASH - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-281",
-      "front": "A rep makes 200 trades in a customer's account to earn commissions. Violation?",
-      "back": "CHURNING - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch07-s3-282",
-      "front": "A rep learns a client is about to buy 1M shares. Rep buys first. Violation?",
-      "back": "FRONT RUNNING - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch07-s3-283",
-      "front": "A fund rep sells client $49,000 when $50,000 would get a breakpoint. Violation?",
-      "back": "BREAKPOINT SALE violation - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch07-s3-284",
-      "front": "A broker acts as _____ (earns commission).",
-      "back": "AGENT - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-285",
-      "front": "A dealer acts as _____ (earns markup/markdown).",
-      "back": "PRINCIPAL - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-286",
-      "front": "A _____ is added when a dealer sells from inventory.",
-      "back": "MARKUP - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-287",
-      "front": "A _____ is subtracted when a dealer buys into inventory.",
-      "back": "MARKDOWN - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-288",
-      "front": "Markups must be fair and reasonable (_____ % guideline, not rule).",
-      "back": "5 - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-289",
-      "front": "Broker vs Dealer: Which earns commission?",
-      "back": "BROKER (agent). Dealer earns markup.",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch07-s3-290",
-      "front": "_____ execution requires orders at most favorable terms available.",
-      "back": "BEST - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-291",
-      "front": "The _____ is the highest price a buyer will pay.",
-      "back": "BID - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-292",
-      "front": "The _____ is the lowest price a seller will accept.",
-      "back": "ASK/OFFER - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-293",
-      "front": "Customers BUY at the _____ and SELL at the _____.",
-      "back": "ASK / BID - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-294",
-      "front": "The _____ is the difference between bid and ask.",
-      "back": "SPREAD - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-295",
-      "front": "Wider spreads indicate _____ liquidity.",
-      "back": "LOWER - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-296",
-      "front": "Traditional IRA contributions may be tax-_____.",
-      "back": "DEDUCTIBLE - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-297",
-      "front": "Traditional IRA earnings grow tax-_____.",
-      "back": "DEFERRED - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-298",
-      "front": "Traditional IRA withdrawals are taxed as _____ income.",
-      "back": "ORDINARY - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-299",
-      "front": "Roth IRA contributions are made with _____-tax dollars.",
-      "back": "AFTER - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-300",
-      "front": "Qualified Roth IRA withdrawals are _____-free.",
-      "back": "TAX - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-301",
-      "front": "Roth IRAs have _____ RMDs during owner's lifetime.",
-      "back": "NO - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-302",
-      "front": "RMDs begin at age _____.",
-      "back": "73 - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-303",
-      "front": "Early withdrawal penalty (before 59½) is _____% for IRAs.",
-      "back": "10 - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-304",
-      "front": "Traditional vs Roth IRA: Which has tax-free withdrawals?",
-      "back": "ROTH (qualified withdrawals are tax-free)",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch07-s3-305",
-      "front": "Traditional vs Roth IRA: Which has no RMDs?",
-      "back": "ROTH (during owner's lifetime) - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch07-s3-306",
-      "front": "401(k) contributions are made _____-tax.",
-      "back": "PRE - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-307",
-      "front": "401(k) plans are sponsored by the _____.",
-      "back": "EMPLOYER - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-308",
-      "front": "529 plans are for _____ expenses.",
-      "back": "EDUCATION - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-309",
-      "front": "529 earnings and qualified withdrawals are _____-free.",
-      "back": "TAX - Key concept for SIE exam",
-      "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch07-s3-310",
-      "front": "Coverdell ESA annual contribution limit is $_____.",
-      "back": "2,000 - Key concept for SIE exam",
+      "id": "ch7-s1-255",
+      "front": "What is commission?",
+      "back": "earned ### Acting as Dealer (Principal) When a firm acts as a dealer, it trades from its own inventory as a principal",
       "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
-        "definition"
-      ],
-      "type": "cloze"
+        "key-term"
+      ]
     },
     {
-      "id": "ch07-s3-311",
-      "front": "Dollar cost averaging invests a _____ amount at regular intervals.",
-      "back": "FIXED - Key concept for SIE exam",
+      "id": "ch7-s1-259",
+      "front": "What does AMEX stand for?",
+      "back": "including the American Stock Exchange",
       "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
-        "definition"
-      ],
-      "type": "cloze"
+        "acronym"
+      ]
     },
     {
-      "id": "ch07-s3-312",
-      "front": "With DCA, you buy more shares when prices are _____.",
-      "back": "LOW - Key concept for SIE exam",
+      "id": "ch7-s1-262",
+      "front": "What does DMMs stand for?",
+      "back": "are wholesalers of securities assigned to",
       "chapter": "chapter-07",
-      "section": 3,
-      "weight": 0.31,
-      "source": "manual",
+      "section": 1,
+      "weight": 0.16,
+      "source": "auto",
       "tags": [
-        "definition"
-      ],
-      "type": "cloze"
+        "acronym"
+      ]
     },
     {
-      "id": "ch08-s4-313",
-      "front": "To sell securities, you must pass SIE plus a _____-off exam (like Series 7).",
-      "back": "TOP - Key concept for SIE exam",
+      "id": "ch8-s1-269",
+      "front": "What is Buy or Sell:?",
+      "back": "Buy = taking a long position",
       "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch08-s4-314",
-      "front": "The SIE can be taken _____ association with a firm.",
-      "back": "BEFORE/WITHOUT - Key concept for SIE exam",
+      "id": "ch8-s1-270",
+      "front": "What is Duration:?",
+      "back": "Day order = expires at market close",
       "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch08-s4-315",
-      "front": "SIE results are valid for _____ years.",
-      "back": "4 - Key concept for SIE exam",
+      "id": "ch8-s1-271",
+      "front": "What is Buy?",
+      "back": "marked) Security Name: Typically the ticker symbol—AAPL, not \"Ap",
       "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s1-272",
+      "front": "What is Sell long?",
+      "back": "marked) Security Name: Typically the ticker symbol—AAPL, not \"Apple Inc",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s1-273",
+      "front": "What is Sell short?",
+      "back": "marked) Security Name: Typically the ticker symbol—AAPL, not \"Apple Inc",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s1-275",
+      "front": "What is Front running?",
+      "back": "trading ahead of large block orders",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s1-276",
+      "front": "What is Marking the close?",
+      "back": "trading at or near market close, or falsely reporting trades at the close, specifically to affect the closing price",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s1-277",
+      "front": "What is Marking the open?",
+      "back": "the same scheme at market open",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s2-278",
+      "front": "What is Clearing firms?",
+      "back": "large broker-dealers that clear and settle trades for themselves and their customers",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s2-279",
+      "front": "What is Introducing firms?",
+      "back": "smaller broker-dealers that focus on customer relationships",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s2-280",
+      "front": "What is Settlement?",
+      "back": "when transactions officially complete—cash and securities actually change hands",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s2-281",
+      "front": "What is regular way settlement?",
+      "back": "T+1—one business day after the trade date",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s2-282",
+      "front": "What is Cash settlement?",
+      "back": "same-day settlement, for trades entered before 2:30 p",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s2-283",
+      "front": "What is cash account?",
+      "back": "typically used for: - Index options (you can't physically deliver",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s2-284",
+      "front": "What is signature guarantee?",
+      "back": "who they claim to be",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s2-285",
+      "front": "What is medallion?",
+      "back": "who they claim to be",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s2-286",
+      "front": "What is payment for order flow?",
+      "back": "generally NOT disclosed on the confirmation—except for principal transactions in Nasdaq s",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s2-287",
+      "front": "What is flat?",
+      "back": "only paid when the is",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "key-term"
+      ]
+    },
+    {
+      "id": "ch8-s2-289",
+      "front": "What does NSCC stand for?",
+      "back": "The National Securities Clearing Corporation",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
+      "tags": [
+        "acronym"
+      ]
+    },
+    {
+      "id": "ch8-s3-294",
+      "front": "What is Example using the Acme dividend:?",
+      "back": "Record date: Tuesday, April 8",
+      "chapter": "chapter-08",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
       "tags": [
         "definition"
-      ],
-      "type": "cloze"
+      ]
     },
     {
-      "id": "ch08-s4-316",
-      "front": "The SIE passing score is _____% or higher.",
-      "back": "70 - Key concept for SIE exam",
+      "id": "ch8-s3-295",
+      "front": "What is ex-date?",
+      "back": "now the same day for cash dividends",
       "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
       "tags": [
-        "definition"
-      ],
-      "type": "cloze"
+        "key-term"
+      ]
     },
     {
-      "id": "ch08-s4-317",
-      "front": "Series 7 is the _____ Securities Representative license.",
-      "back": "GENERAL - Key concept for SIE exam",
+      "id": "ch8-s3-296",
+      "front": "What is record date?",
+      "back": "now the same day for cash dividends",
       "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
       "tags": [
-        "definition"
-      ],
-      "type": "cloze"
+        "key-term"
+      ]
     },
     {
-      "id": "ch08-s4-318",
-      "front": "Series 6 allows selling mutual funds, variable annuities, and _____ life.",
-      "back": "VARIABLE - Key concept for SIE exam",
+      "id": "ch8-s3-297",
+      "front": "What is stock dividend?",
+      "back": "similar to a forward split but typically smaller",
       "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
+      "section": 3,
+      "weight": 0.31,
+      "source": "auto",
       "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-319",
-      "front": "Series 6 does NOT allow selling individual _____ or bonds.",
-      "back": "STOCKS - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-320",
-      "front": "Series 6 vs Series 7: Which allows selling individual stocks?",
-      "back": "SERIES 7 (general securities). Series 6 limited to packaged products.",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch08-s4-321",
-      "front": "Form _____ is filed to register an individual.",
-      "back": "U4 - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-322",
-      "front": "Form _____ is filed when a rep leaves a firm.",
-      "back": "U5 - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-323",
-      "front": "Form U5 must be filed within _____ days of termination.",
-      "back": "30 - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-324",
-      "front": "U4 vs U5: Which is for registration?",
-      "back": "U4 is registration. U5 is termination.",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch08-s4-325",
-      "front": "A _____ disqualification bars someone from the industry.",
-      "back": "STATUTORY - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-326",
-      "front": "Felony conviction disqualifies for _____ years.",
-      "back": "10 - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-327",
-      "front": "Continuing education has two elements: Regulatory and _____ Element.",
-      "back": "FIRM - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-328",
-      "front": "Both CE elements are now completed _____.",
-      "back": "ANNUALLY - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-329",
-      "front": "The _____ Secrecy Act requires detecting money laundering.",
-      "back": "BANK - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-330",
-      "front": "SAR stands for _____ Activity Report.",
-      "back": "SUSPICIOUS - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-331",
-      "front": "SARs are filed for suspicious transactions of $_____ or more.",
-      "back": "5,000 - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-332",
-      "front": "Customers must _____ be told about SAR filings.",
-      "back": "NOT/NEVER - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-333",
-      "front": "CTR stands for _____ Transaction Report.",
-      "back": "CURRENCY - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-334",
-      "front": "CTRs are filed for cash transactions over $_____.",
-      "back": "10,000 - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-335",
-      "front": "Customers _____ be informed about CTR filings.",
-      "back": "CAN - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-336",
-      "front": "SAR vs CTR: Which can the customer be told about?",
-      "back": "CTR only. Never disclose SAR filings.",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch08-s4-337",
-      "front": "SAR vs CTR: Which has the lower dollar threshold?",
-      "back": "SAR ($5,000). CTR is $10,000.",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch08-s4-338",
-      "front": "CIP stands for Customer _____ Program.",
-      "back": "IDENTIFICATION - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-339",
-      "front": "CIP requires: name, date of birth, address, and _____ number.",
-      "back": "ID (SSN or tax ID)",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-340",
-      "front": "Customer makes multiple $9,000 cash deposits to avoid reporting. Red flag?",
-      "back": "YES - structuring to avoid CTR filing",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "exam-focus"
-      ],
-      "type": "scenario"
-    },
-    {
-      "id": "ch08-s4-341",
-      "front": "FINRA sanctions include censure, fine, suspension, _____, and expulsion.",
-      "back": "BAR - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-342",
-      "front": "FINRA _____ is binding for industry disputes.",
-      "back": "ARBITRATION - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-343",
-      "front": "_____ is voluntary and NOT binding.",
-      "back": "MEDIATION - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-344",
-      "front": "Arbitration vs Mediation: Which is binding?",
-      "back": "ARBITRATION is binding. Mediation is voluntary.",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "comparison"
-      ],
-      "type": "discrimination"
-    },
-    {
-      "id": "ch08-s4-345",
-      "front": "_____ is FINRA's free public database to research brokers.",
-      "back": "BROKERCHECK - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-346",
-      "front": "A _____ supervises sales activities and reviews advertising.",
-      "back": "PRINCIPAL - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-347",
-      "front": "WSPs are _____ Supervisory Procedures.",
-      "back": "WRITTEN - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-348",
-      "front": "FINRA Rule _____ requires firms to establish supervisory systems.",
-      "back": "3110 - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-349",
-      "front": "_____ communications go to 25+ retail investors within 30 days.",
-      "back": "RETAIL - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-350",
-      "front": "Retail communications require principal approval _____ first use.",
-      "back": "BEFORE - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-351",
-      "front": "'Selling away' is participating in securities transactions _____ the firm.",
-      "back": "OUTSIDE - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
-    },
-    {
-      "id": "ch08-s4-352",
-      "front": "Private securities transactions require _____ notice to the firm.",
-      "back": "WRITTEN - Key concept for SIE exam",
-      "chapter": "chapter-08",
-      "section": 4,
-      "weight": 0.09,
-      "source": "manual",
-      "tags": [
-        "definition"
-      ],
-      "type": "cloze"
+        "key-term"
+      ]
     }
   ]
 }

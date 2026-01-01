@@ -810,8 +810,8 @@
                     </div>
                 </div>
                 <div class="timer-bar__actions">
-                    <button class="btn-flag" id="flagBtn" title="Flag for review">Flag</button>
-                    <button class="nav-btn" id="gridToggle">Question Grid</button>
+                    <button type="button" class="btn-flag" id="flagBtn" title="Flag for review">Flag</button>
+                    <button type="button" class="nav-btn" id="gridToggle">Question Grid</button>
                 </div>
             </div>
             <div class="progress-track">
@@ -865,7 +865,7 @@
                 <p>This simulation uses <strong>FINRA-style questions</strong> that mirror the actual SIE exam format. Questions include complex scenarios, EXCEPT-style questions, calculations, and close answer choices designed to test true understanding. Timer is enforced. Good luck!</p>
             </div>
 
-            <button class="start-btn" id="startBtn">Begin Exam</button>
+            <button type="button" class="start-btn" id="startBtn">Begin Exam</button>
         </div>
     </div>
 
@@ -881,9 +881,9 @@
             </div>
 
             <div class="exam-nav">
-                <button class="nav-btn" id="prevBtn" disabled>Previous</button>
-                <button class="nav-btn primary" id="nextBtn">Next</button>
-                <button class="nav-btn submit" id="submitBtn" style="display: none;">Submit Exam</button>
+                <button type="button" class="nav-btn" id="prevBtn" disabled>Previous</button>
+                <button type="button" class="nav-btn primary" id="nextBtn">Next</button>
+                <button type="button" class="nav-btn submit" id="submitBtn" style="display: none;">Submit Exam</button>
             </div>
 
             <div class="question-grid" id="questionGrid">
@@ -923,9 +923,9 @@
             <div class="review-section">
                 <h3>Review Your Answers</h3>
                 <div class="review-tabs">
-                    <button class="review-tab active" data-filter="all">All Questions</button>
-                    <button class="review-tab" data-filter="incorrect">Incorrect Only</button>
-                    <button class="review-tab" data-filter="flagged">Flagged</button>
+                    <button type="button" class="review-tab active" data-filter="all">All Questions</button>
+                    <button type="button" class="review-tab" data-filter="incorrect">Incorrect Only</button>
+                    <button type="button" class="review-tab" data-filter="flagged">Flagged</button>
                 </div>
                 <div id="reviewList">
                     <!-- Review items populated by JS -->
@@ -933,7 +933,7 @@
             </div>
 
             <div style="text-align: center;">
-                <button class="restart-btn" id="restartBtn">Take New Exam</button>
+                <button type="button" class="restart-btn" id="restartBtn">Take New Exam</button>
             </div>
         </div>
     </div>
