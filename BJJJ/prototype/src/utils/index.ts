@@ -148,8 +148,12 @@ export function parseDuration(input: string): number | null {
 // COLOR UTILITIES
 // ===========================================
 
-export type BeltColor = 'white' | 'blue' | 'purple' | 'brown' | 'black';
-export type TrainingType = 'gi' | 'nogi' | 'openmat' | 'open-mat' | 'drilling' | 'private' | 'competition';
+// Re-export canonical types from database.ts
+export type { BeltColor, TrainingType } from '../types/database';
+import type { BeltColor, TrainingType } from '../types/database';
+
+// Extended type for parsing user input (allows 'open-mat' variant)
+export type TrainingTypeInput = TrainingType | 'open-mat';
 
 /**
  * Get CSS variable for belt color
@@ -161,7 +165,7 @@ export function getBeltColorVar(belt: BeltColor): string {
 /**
  * Get CSS variable for training type color
  */
-export function getTrainingTypeColorVar(type: TrainingType): string {
+export function getTrainingTypeColorVar(type: TrainingType | TrainingTypeInput): string {
   const normalized = type === 'open-mat' ? 'openmat' : type;
   return `var(--color-training-${normalized})`;
 }
@@ -169,7 +173,7 @@ export function getTrainingTypeColorVar(type: TrainingType): string {
 /**
  * Get display label for training type
  */
-export function getTrainingTypeLabel(type: TrainingType): string {
+export function getTrainingTypeLabel(type: TrainingType | TrainingTypeInput): string {
   const labels: Record<string, string> = {
     gi: 'Gi',
     nogi: 'No-Gi',

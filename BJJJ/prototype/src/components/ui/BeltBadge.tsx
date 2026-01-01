@@ -3,7 +3,7 @@
  * Visual representation of a BJJ belt with stripes
  */
 
-import type { BeltColor } from '../../data/users';
+import type { BeltColor } from '../../types/database';
 
 interface BeltBadgeProps {
   belt: BeltColor;

@@ -5,7 +5,7 @@
  * This module works with belt-criteria.ts for IBJJF-based requirements
  */
 
-import type { BeltColor } from './users';
+import type { BeltColor } from '../types/database';
 import type { RequirementCategory } from './belt-criteria';
 
 // Note: TechnicalRequirement and SubjectiveCriterion types are available

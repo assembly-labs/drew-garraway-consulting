@@ -19,7 +19,9 @@
  * - notes
  */
 
-export type TrainingType = 'gi' | 'nogi' | 'openmat' | 'private' | 'competition';
+// Re-export from database.ts for backwards compatibility
+export type { TrainingType } from '../types/database';
+import type { TrainingType } from '../types/database';
 export type SparringOutcome = 'submission-win' | 'submission-loss' | 'points-win' | 'points-loss' | 'draw' | 'positional';
 
 export interface SparringRound {

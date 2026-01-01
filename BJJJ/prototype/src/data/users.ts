@@ -3,7 +3,10 @@
  * User types: Practitioner, Coach, Gym Owner
  */
 
-export type BeltColor = 'white' | 'blue' | 'purple' | 'brown' | 'black';
+// Re-export from database.ts for backwards compatibility
+export type { BeltColor } from '../types/database';
+import type { BeltColor } from '../types/database';
+
 export type UserRole = 'practitioner' | 'coach' | 'owner';
 
 export interface UserProfile {

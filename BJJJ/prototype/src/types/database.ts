@@ -14,6 +14,8 @@
 // ===========================================
 
 export type BeltLevel = 'white' | 'blue' | 'purple' | 'brown' | 'black';
+/** @deprecated Use BeltLevel - kept for backwards compatibility */
+export type BeltColor = BeltLevel;
 export type TrainingType = 'gi' | 'nogi' | 'openmat' | 'drilling' | 'private' | 'competition';
 export type ProficiencyLevel = 'learning' | 'developing' | 'proficient' | 'advanced';
 export type LoggingPreference = 'voice' | 'text' | 'undecided';

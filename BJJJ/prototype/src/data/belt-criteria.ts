@@ -15,7 +15,7 @@
  * - Major academy curriculum references
  */
 
-import type { BeltColor } from './users';
+import type { BeltColor } from '../types/database';
 
 // ===========================================
 // TYPE DEFINITIONS

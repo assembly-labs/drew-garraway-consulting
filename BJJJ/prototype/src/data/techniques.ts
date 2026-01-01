@@ -6,7 +6,7 @@
  * Production version requires BJJ subject matter expert validation.
  */
 
-import type { BeltColor } from './users';
+import type { BeltColor } from '../types/database';
 
 export type Position =
   | 'closed-guard'

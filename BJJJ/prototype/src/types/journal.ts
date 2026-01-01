@@ -1,6 +1,6 @@
-export type BeltColor = 'white' | 'blue' | 'purple' | 'brown' | 'black';
-
-export type TrainingType = 'gi' | 'nogi' | 'openmat' | 'private' | 'competition';
+// Re-export from database.ts for backwards compatibility
+export type { BeltColor, TrainingType } from './database';
+import type { BeltColor, TrainingType } from './database';
 
 export interface Technique {
   id: string;

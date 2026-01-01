@@ -13,8 +13,7 @@
 import { useState } from 'react';
 import { BeltBadge, TrainingBadge } from './ui';
 import { IconCheck, IconFlame, IconTrophy, IconTarget, IconTrendUp, IconTrendDown } from './ui/Icons';
-import type { BeltColor } from '../data/users';
-import type { TrainingType } from '../data/journal';
+import type { BeltColor, TrainingType } from '../types/database';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (

@@ -7,10 +7,15 @@
 
 // User & Profile Data
 export * from './users';
+export * from './mock-profiles';
+export * from './personas';
 
 // Training & Techniques
 export * from './techniques';
 export * from './journal';
+export * from './journal-entries';
+export * from './submissions';
+export * from './techniqueVideos';
 
 // Progress & Tracking
 export * from './progress';

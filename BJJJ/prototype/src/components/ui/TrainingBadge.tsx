@@ -3,7 +3,7 @@
  * Visual indicator for training type (gi, no-gi, open mat, etc.)
  */
 
-import type { TrainingType } from '../../data/journal';
+import type { TrainingType } from '../../types/database';
 
 interface TrainingBadgeProps {
   type: TrainingType;
@@ -14,6 +14,7 @@ const typeLabels: Record<TrainingType, string> = {
   gi: 'GI',
   nogi: 'NO-GI',
   openmat: 'OPEN MAT',
+  drilling: 'DRILLING',
   private: 'PRIVATE',
   competition: 'COMP',
 };
@@ -22,6 +23,7 @@ const typeColors: Record<TrainingType, string> = {
   gi: 'var(--color-training-gi)',
   nogi: 'var(--color-training-nogi)',
   openmat: 'var(--color-training-openmat)',
+  drilling: 'var(--color-training-drilling, var(--color-training-gi))',
   private: 'var(--color-training-private)',
   competition: 'var(--color-training-competition)',
 };

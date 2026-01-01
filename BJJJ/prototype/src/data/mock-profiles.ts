@@ -11,7 +11,8 @@
  * - BROWN BELT: Elena Kim (Veteran, 38yo, refinement mode)
  */
 
-import type { BeltColor, UserProfile as UsersUserProfile } from './users';
+import type { BeltColor } from '../types/database';
+import type { UserProfile as UsersUserProfile } from './users';
 import type { JournalEntry } from './journal';
 import type {
   BeltPromotion,
