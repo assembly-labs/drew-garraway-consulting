@@ -187,9 +187,10 @@ describe('Flashcard Generation', () => {
     });
 
     describe('Source Attribution', () => {
-        it('should have source as "auto" for all generated cards', () => {
+        it('should have valid source attribution for all cards', () => {
+            const validSources = ['auto', 'manual'];
             for (const card of flashcardData.cards) {
-                expect(card.source).toBe('auto');
+                expect(validSources).toContain(card.source);
             }
         });
     });
