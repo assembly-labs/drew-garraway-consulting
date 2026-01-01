@@ -238,6 +238,42 @@
     white-space: nowrap;
 }
 
+/* Session Counter */
+.session-counter {
+    display: flex;
+    justify-content: center;
+    gap: var(--fh-space-xl);
+    margin-bottom: var(--fh-space-md);
+}
+
+.counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--fh-space-xs);
+}
+
+.counter__value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: var(--fh-font-mono);
+}
+
+.counter__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fh-gray-500);
+}
+
+.counter--got-it .counter__value {
+    color: var(--fh-sage);
+}
+
+.counter--dont-know .counter__value {
+    color: var(--fh-burgundy);
+}
+
 /* ============================================
    Flashcard
    ============================================ */
@@ -478,6 +514,10 @@
 
     .progress-text {
         color: var(--fh-gray-400);
+    }
+
+    .counter__label {
+        color: var(--fh-gray-500);
     }
 
     .flashcard__front {

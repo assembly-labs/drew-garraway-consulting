@@ -75,6 +75,17 @@ const FlashcardUI = (function () {
                         <span class="progress-text">0 / 0</span>
                     </div>
 
+                    <div class="session-counter" id="session-counter">
+                        <span class="counter counter--got-it">
+                            <span class="counter__value" id="counter-got-it">0</span>
+                            <span class="counter__label">Got It</span>
+                        </span>
+                        <span class="counter counter--dont-know">
+                            <span class="counter__value" id="counter-dont-know">0</span>
+                            <span class="counter__label">Don't Know</span>
+                        </span>
+                    </div>
+
                     <div class="flashcard-container" id="flashcard-container">
                         <div class="flashcard" id="flashcard">
                             <div class="flashcard__inner">
@@ -122,7 +133,7 @@ const FlashcardUI = (function () {
                             </div>
                             <div class="summary-stat summary-stat--learning">
                                 <span class="summary-stat__value" id="summary-learning">0</span>
-                                <span class="summary-stat__label">Still Learning</span>
+                                <span class="summary-stat__label">Don't Know</span>
                             </div>
                         </div>
                         <div class="summary-actions">
@@ -172,6 +183,18 @@ const FlashcardUI = (function () {
     }
 
     /**
+     * Update the session counter display
+     */
+    function updateCounter() {
+        const stats = FlashcardSession.getStats();
+        const gotItEl = document.getElementById('counter-got-it');
+        const dontKnowEl = document.getElementById('counter-dont-know');
+
+        if (gotItEl) gotItEl.textContent = stats.markedProficient;
+        if (dontKnowEl) dontKnowEl.textContent = stats.markedLearning;
+    }
+
+    /**
      * Show the current card
      */
     function showCurrentCard() {
@@ -189,6 +212,9 @@ const FlashcardUI = (function () {
 
         progressBar.style.width = `${progress.percentage}%`;
         progressText.textContent = `${progress.current} / ${progress.total}`;
+
+        // Update counter
+        updateCounter();
 
         // Update card content
         const frontText = cardElement.querySelector('.flashcard__front .flashcard__text');
