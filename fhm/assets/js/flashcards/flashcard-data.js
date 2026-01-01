@@ -18,7 +18,8 @@ const FlashcardData = (function () {
         }
 
         try {
-            const response = await fetch('/assets/data/flashcards.json');
+            // Path relative to the HTML page (pages/sie/sie-flashcards.html)
+            const response = await fetch('../../assets/data/flashcards.json');
             if (!response.ok) {
                 throw new Error(`Failed to load flashcards: ${response.status}`);
             }

@@ -42,11 +42,14 @@ const FlashcardUI = (function () {
         // Render initial UI
         render();
 
+        // Auto-start session immediately
+        startSession();
+
         return true;
     }
 
     /**
-     * Render the main flashcard UI
+     * Render the main flashcard UI and auto-start session
      */
     function render() {
         const stats = FlashcardProgress.getOverallStats(FlashcardData.getAll());
@@ -62,42 +65,7 @@ const FlashcardUI = (function () {
                     </div>
                 </header>
 
-                <div class="flashcard-start-screen">
-                    <div class="start-content">
-                        <div class="progress-ring">
-                            <svg viewBox="0 0 100 100">
-                                <circle class="progress-ring__bg" cx="50" cy="50" r="45"/>
-                                <circle class="progress-ring__fill" cx="50" cy="50" r="45"
-                                    stroke-dasharray="${2 * Math.PI * 45}"
-                                    stroke-dashoffset="${2 * Math.PI * 45 * (1 - stats.masteryPercentage / 100)}"/>
-                            </svg>
-                            <span class="progress-ring__text">${stats.masteryPercentage}%</span>
-                        </div>
-
-                        <h2 class="start-title">Ready to Study?</h2>
-                        <p class="start-description">
-                            ${stats.unseen > 0
-                                ? `${stats.unseen} new cards to discover`
-                                : 'Review your cards to strengthen retention'}
-                        </p>
-
-                        <button class="btn btn--primary btn--start" onclick="FlashcardUI.startSession()">
-                            Start Session
-                        </button>
-
-                        <div class="session-options">
-                            <label class="option-label">
-                                Cards per session:
-                                <select id="session-size" class="option-select">
-                                    <option value="10">10 cards</option>
-                                    <option value="20" selected>20 cards</option>
-                                    <option value="30">30 cards</option>
-                                    <option value="50">50 cards</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                </div>
+                <div class="flashcard-start-screen" style="display: none;"></div>
 
                 <div class="flashcard-session" style="display: none;">
                     <div class="session-progress" id="session-progress">
@@ -161,9 +129,6 @@ const FlashcardUI = (function () {
                             <button class="btn btn--primary" onclick="FlashcardUI.startSession()">
                                 Study Again
                             </button>
-                            <button class="btn btn--secondary" onclick="FlashcardUI.showStart()">
-                                Back to Overview
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -177,13 +142,11 @@ const FlashcardUI = (function () {
     }
 
     /**
-     * Start a new study session
+     * Start a new study session (cycles through all cards)
      */
     function startSession() {
-        const sizeSelect = document.getElementById('session-size');
-        const sessionSize = sizeSelect ? parseInt(sizeSelect.value) : 20;
-
-        const success = FlashcardSession.start(FlashcardData.getAll(), sessionSize);
+        const allCards = FlashcardData.getAll();
+        const success = FlashcardSession.start(allCards, allCards.length);
 
         if (!success) {
             alert('No flashcards available. Please generate cards first.');
