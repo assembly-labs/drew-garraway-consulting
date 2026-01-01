@@ -131,7 +131,7 @@ This document records a major restructuring of the Franklin Hugh Money SIE study
 
 ### Before
 ```
-franklin-hugh-money/
+fhm/
 ├── index.html (with inline CSS)
 ├── franklin-hugh-money-treasury.html
 ├── sie-chapter-5.html
@@ -156,7 +156,7 @@ franklin-hugh-money/
 
 ### After
 ```
-franklin-hugh-money/
+fhm/
 ├── index.html (links to main.css)
 ├── pages/
 │   ├── franklin-hugh-money-treasury.html
@@ -258,7 +258,7 @@ npm uninstall vitest @vitest/coverage-v8 jsdom
 ```bash
 rm assets/css/main.css
 # Manually restore inline <style> blocks to HTML files
-# (Check git history: git show ab70b06^:franklin-hugh-money/index.html)
+# (Check git history: git show ab70b06^:fhm/index.html)
 ```
 
 ---

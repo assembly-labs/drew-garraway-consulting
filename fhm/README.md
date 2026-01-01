@@ -48,7 +48,7 @@ npm run lint:js
 ## Project Structure
 
 ```
-franklin-hugh-money/
+fhm/
 ├── content/               # Markdown content source
 │   └── sie-exam/          # SIE exam study materials
 ├── design/                # Design system and brand
@@ -133,7 +133,7 @@ This project is designed for AI pair programming. Before each session:
 ## Contributing
 
 This is a personal project, but if you're interested in the journey:
-- Visit: https://franklin-hugh-money.drewgarraway.com
+- Visit: https://drewgarraway.com/fhm
 - Follow the main site: https://drewgarraway.com
 
 ## Legal

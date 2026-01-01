@@ -9,7 +9,7 @@ This document defines the organizational structure for all SIE exam study materi
 ## 🗂️ Folder Structure
 
 ```
-franklin-hugh-money/
+fhm/
 ├── content/                        # Source content (markdown)
 │   └── sie-exam/
 │       ├── chapters/               # Organized by chapter

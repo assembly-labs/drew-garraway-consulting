@@ -5,7 +5,7 @@
 
 ## Current Deployment Structure
 
-**The site is served via Cloudflare Pages from the `franklin-hugh-money/` subdirectory.**
+**The site is served via Cloudflare Pages from the `fhm/` subdirectory.**
 
 No more copying files to the repository root. The deploy script handles everything.
 
@@ -13,15 +13,15 @@ No more copying files to the repository root. The deploy script handles everythi
 
 | Page | URL |
 |------|-----|
-| Main Site | https://drewgarraway.com/franklin-hugh-money/ |
-| SIE Study Materials | https://drewgarraway.com/franklin-hugh-money/sie-study-materials.html |
-| Treasury Analysis | https://drewgarraway.com/franklin-hugh-money/franklin-hugh-money-treasury.html |
+| Main Site | https://drewgarraway.com/fhm/ |
+| SIE Study Materials | https://drewgarraway.com/fhm/sie-study-materials.html |
+| Treasury Analysis | https://drewgarraway.com/fhm/franklin-hugh-money-treasury.html |
 
 ---
 
 ## Quick Deployment
 
-From the `franklin-hugh-money` directory:
+From the `fhm` directory:
 
 ```bash
 ./deploy.sh
@@ -41,14 +41,14 @@ If you prefer to deploy manually:
 
 ```bash
 # 1. Navigate to project directory
-cd franklin-hugh-money
+cd fhm
 
 # 2. Run cache-bust (updates version hashes in HTML files)
 node scripts/cache-bust.js
 
 # 3. Stage changes
 cd ..
-git add franklin-hugh-money/
+git add fhm/
 
 # 4. Commit with descriptive message
 git commit -m "Your commit message"
@@ -96,7 +96,7 @@ ssh -T git@github.com
 
 ```
 drew-garraway-consulting/           # Repository root
-└── franklin-hugh-money/            # This project (deployment root)
+└── fhm/                            # This project (deployment root)
     ├── index.html                  # Main landing page
     ├── sie-study-materials.html    # SIE course index
     ├── sie-chapter-*.html          # Chapter pages

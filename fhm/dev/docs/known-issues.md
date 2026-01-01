@@ -79,7 +79,7 @@ input:-webkit-autofill {
 **Date Found**: 2024-12-05
 **Severity**: High
 **Description**: Changes to HTML files weren't appearing on live site
-**Root Cause**: File location mismatch - site serves from repository root, not from `franklin-hugh-money/public/`
+**Root Cause**: File location mismatch - site serves from repository root, not from `fhm/public/`
 **Resolution**:
 - Files must be copied to root directory for deployment
 - Renamed `treasury-analysis.html` → `franklin-hugh-money-treasury.html` to match live URL
@@ -127,13 +127,13 @@ if (loadingDiv) {
 ### Deployment Structure (CRITICAL)
 **The live site serves files from the repository ROOT directory, not from subdirectories!**
 
-- **Development Location**: `franklin-hugh-money/public/`
+- **Development Location**: `fhm/public/`
 - **Deployment Location**: Repository root (`/`)
 - **Required Action**: Copy files from `public/` to root after changes
 
 Example workflow:
 ```bash
-# After editing in franklin-hugh-money/public/
+# After editing in fhm/public/
 cp public/franklin-hugh-money-treasury.html ../franklin-hugh-money-treasury.html
 cp public/index.html ../franklin-hugh-money.html
 

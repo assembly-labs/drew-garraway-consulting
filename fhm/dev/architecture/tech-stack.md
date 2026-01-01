@@ -35,7 +35,7 @@
 ### Hosting
 **Platform**: Cloudflare Pages
 **CDN**: Cloudflare
-**Domain**: franklin-hugh-money.drewgarraway.com
+**Domain**: drewgarraway.com/fhm
 **SSL**: Cloudflare automatic
 
 ### Version Control

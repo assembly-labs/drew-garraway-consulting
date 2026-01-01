@@ -123,4 +123,4 @@ cp public/sie-study-materials.html ../sie-study-materials.html
 
 ---
 
-**Remember:** The live site serves from the **repo root**, not from `franklin-hugh-money/public/`. Always copy updated files to both locations.
+**Remember:** The live site serves from the **repo root**, not from `fhm/public/`. Always copy updated files to both locations.

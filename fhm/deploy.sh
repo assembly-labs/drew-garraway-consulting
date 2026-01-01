@@ -10,7 +10,7 @@ echo ""
 
 # Check if we're in the right directory
 if [ ! -f "package.json" ] || [ ! -d "assets" ]; then
-    echo "❌ Error: Must run from franklin-hugh-money directory"
+    echo "❌ Error: Must run from fhm directory"
     echo "   Current directory: $(pwd)"
     exit 1
 fi
@@ -46,10 +46,10 @@ cd ..
 
 # Check git status for FHM files
 echo "   Current changes:"
-git status --short franklin-hugh-money/
+git status --short fhm/
 
 # Add all FHM files
-git add franklin-hugh-money/
+git add fhm/
 
 # Get commit message from user or use default
 echo ""
@@ -90,10 +90,10 @@ echo ""
 echo "✅ Deployment complete!"
 echo ""
 echo "📍 Your changes will be live in 1-2 minutes at:"
-echo "   • https://drewgarraway.com/franklin-hugh-money/"
-echo "   • https://drewgarraway.com/franklin-hugh-money/sie-study-materials.html"
+echo "   • https://drewgarraway.com/fhm/"
+echo "   • https://drewgarraway.com/fhm/pages/sie/sie-study-materials.html"
 echo ""
 echo "💡 Tip: Use incognito mode to avoid cache issues when checking"
 
 # Return to original directory
-cd franklin-hugh-money
+cd fhm

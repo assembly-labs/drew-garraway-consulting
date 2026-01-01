@@ -5,7 +5,7 @@
 ### 1. Start the Server
 
 ```bash
-cd /Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/franklin-hugh-money
+cd /Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/fhm
 npx serve .
 ```
 

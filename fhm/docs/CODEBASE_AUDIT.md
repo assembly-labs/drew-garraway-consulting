@@ -9,7 +9,7 @@
 - `../franklin-hugh-money.html` - Main homepage (root level for GitHub Pages)
 - `../franklin-hugh-money-treasury.html` - Treasury analysis page (root level)
 
-#### **Development Files (Source in franklin-hugh-money/)**
+#### **Development Files (Source in fhm/)**
 - `public/index.html` - Original homepage
 - `public/treasury-analysis.html` - Original treasury page
 - `public/robots.txt` - SEO configuration
@@ -25,7 +25,7 @@
 
 #### 1. **Duplicate Files** ⚠️
 **Issue:** Files exist in both `public/` and root directory
-- Development versions in `franklin-hugh-money/public/`
+- Development versions in `fhm/public/`
 - Production versions in root (`../`)
 - Links differ between versions (expected behavior)
 
@@ -58,7 +58,7 @@
 drewgarraway.com/
 ├── franklin-hugh-money.html (Live)
 ├── franklin-hugh-money-treasury.html (Live)
-└── franklin-hugh-money/
+└── fhm/
     └── public/
         ├── index.html (Development)
         └── treasury-analysis.html (Development)

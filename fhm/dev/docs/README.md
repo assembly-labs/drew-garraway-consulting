@@ -88,7 +88,7 @@ This directory contains documentation for the Franklin Hugh Money SIE study site
 ## File Structure Overview
 
 ```
-franklin-hugh-money/
+fhm/
 ├── dev/
 │   └── docs/
 │       ├── README.md                    # This file

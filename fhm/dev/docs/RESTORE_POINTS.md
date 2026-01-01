@@ -61,12 +61,12 @@ git checkout main
 
 **View**:
 ```bash
-git show fbb1654:franklin-hugh-money/index.html
+git show fbb1654:fhm/index.html
 ```
 
 **Restore**:
 ```bash
-git checkout fbb1654 -- franklin-hugh-money/index.html
+git checkout fbb1654 -- fhm/index.html
 ```
 
 ### Original scripts/cache-bust.js (Before ESM)
@@ -76,12 +76,12 @@ git checkout fbb1654 -- franklin-hugh-money/index.html
 
 **View**:
 ```bash
-git show fbb1654:franklin-hugh-money/scripts/cache-bust.js
+git show fbb1654:fhm/scripts/cache-bust.js
 ```
 
 **Restore**:
 ```bash
-git checkout fbb1654 -- franklin-hugh-money/scripts/cache-bust.js
+git checkout fbb1654 -- fhm/scripts/cache-bust.js
 ```
 
 ### Original file locations (Before Reorganization)
@@ -90,7 +90,7 @@ git checkout fbb1654 -- franklin-hugh-money/scripts/cache-bust.js
 
 **View all chapter files**:
 ```bash
-git ls-tree fbb1654 -- franklin-hugh-money/ | grep "sie-chapter"
+git ls-tree fbb1654 -- fhm/ | grep "sie-chapter"
 ```
 
 **Restore all to root**:
@@ -133,7 +133,7 @@ git revert ab70b06
 
 **View diff**:
 ```bash
-git diff fbb1654..ab70b06 -- franklin-hugh-money/package.json
+git diff fbb1654..ab70b06 -- fhm/package.json
 ```
 
 ---
@@ -169,7 +169,7 @@ git commit -m "Remove test infrastructure"
 ```bash
 # This requires manual work:
 # 1. Get original index.html CSS
-git show fbb1654:franklin-hugh-money/index.html > /tmp/original-index.html
+git show fbb1654:fhm/index.html > /tmp/original-index.html
 # 2. Extract <style> block from /tmp/original-index.html
 # 3. Paste into current index.html
 # 4. Remove <link> to main.css
@@ -236,9 +236,9 @@ scripts/validate-content.js
 
 To revert all modified files:
 ```bash
-git checkout fbb1654 -- franklin-hugh-money/index.html
-git checkout fbb1654 -- franklin-hugh-money/package.json
-git checkout fbb1654 -- franklin-hugh-money/scripts/
+git checkout fbb1654 -- fhm/index.html
+git checkout fbb1654 -- fhm/package.json
+git checkout fbb1654 -- fhm/scripts/
 # ... etc
 ```
 
@@ -311,7 +311,7 @@ git push origin main  # Preserves history
 
 - **Git history**: `git log --oneline --graph --all`
 - **Specific file history**: `git log --follow -- path/to/file`
-- **Compare states**: `git diff fbb1654..ffbff65 -- franklin-hugh-money/`
+- **Compare states**: `git diff fbb1654..ffbff65 -- fhm/`
 - **This documentation**: `dev/docs/`
 
 ---
