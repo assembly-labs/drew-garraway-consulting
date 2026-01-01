@@ -333,50 +333,11 @@
 }
 
 /* ============================================
-   Swipe Hints
+   Swipe Hints (hidden - users discover gestures naturally)
    ============================================ */
-.swipe-hints {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--fh-space-md) var(--fh-space-lg);
-    margin-top: var(--fh-space-md);
-}
-
-.hint {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--fh-space-xs);
-    opacity: 0.6;
-}
-
-.hint--up {
-    flex-direction: column;
-}
-
-.hint-icon {
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: var(--fh-gray-500);
-}
-
-.hint--up .hint-icon {
-    color: var(--fh-sage);
-}
-
-.hint-text {
-    font-size: 0.75rem;
-    color: var(--fh-gray-500);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
+.swipe-hints,
 .tap-hint {
-    text-align: center;
-    padding: var(--fh-space-sm);
-    font-size: 0.875rem;
-    color: var(--fh-gray-400);
+    display: none;
 }
 
 /* ============================================
@@ -526,15 +487,6 @@
 
     .flashcard__front .flashcard__text {
         color: var(--fh-cream);
-    }
-
-    .hint-icon,
-    .hint-text {
-        color: var(--fh-gray-500);
-    }
-
-    .tap-hint {
-        color: var(--fh-gray-600);
     }
 
     .summary-stat__value {
