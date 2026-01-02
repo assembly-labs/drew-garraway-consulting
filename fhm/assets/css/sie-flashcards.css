@@ -11,8 +11,13 @@
     flex-direction: column;
     min-height: 100vh;
     min-height: 100dvh; /* Dynamic viewport height for mobile */
+    min-height: -webkit-fill-available; /* iOS Safari fallback */
     background: var(--fh-cream);
     overflow: hidden;
+    /* Safe area insets for notched devices */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* ============================================
@@ -22,24 +27,42 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--fh-space-md) var(--fh-space-lg);
+    padding: var(--fh-space-sm) var(--fh-space-md);
+    padding-top: calc(var(--fh-space-sm) + env(safe-area-inset-top));
     background: var(--fh-navy);
     color: var(--fh-white);
+    /* Leave room for back button on left */
+    padding-left: 80px;
+}
+
+@media (max-width: 360px) {
+    .flashcard-header {
+        flex-direction: column;
+        gap: var(--fh-space-xs);
+        padding-left: 70px;
+        padding-right: var(--fh-space-sm);
+    }
 }
 
 .flashcard-title {
     font-family: var(--fh-font-display);
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 500;
     color: var(--fh-white);
     margin: 0;
 }
 
+@media (max-width: 360px) {
+    .flashcard-title {
+        font-size: 1rem;
+    }
+}
+
 .flashcard-stats {
     display: flex;
     align-items: center;
-    gap: var(--fh-space-sm);
-    font-size: 0.875rem;
+    gap: var(--fh-space-xs);
+    font-size: 0.75rem;
     opacity: 0.9;
 }
 
@@ -204,65 +227,72 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: var(--fh-space-md);
+    padding: var(--fh-space-sm);
+    padding-bottom: 0;
     overflow: hidden;
+    min-height: 0; /* Allow flex shrinking */
 }
 
 /* Progress Bar */
 .session-progress {
     display: flex;
     align-items: center;
-    gap: var(--fh-space-md);
-    margin-bottom: var(--fh-space-md);
+    gap: var(--fh-space-sm);
+    margin-bottom: var(--fh-space-xs);
+    flex-shrink: 0;
 }
 
 .progress-bar {
     flex: 1;
-    height: 6px;
+    height: 4px;
     background: var(--fh-gray-200);
-    border-radius: 3px;
+    border-radius: 2px;
     overflow: hidden;
 }
 
 .progress-bar__fill {
     height: 100%;
     background: var(--fh-sage);
-    border-radius: 3px;
+    border-radius: 2px;
     transition: width 0.3s ease;
 }
 
 .progress-text {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     font-weight: 500;
     color: var(--fh-gray-600);
     white-space: nowrap;
+    font-family: var(--fh-font-mono);
 }
 
-/* Session Counter */
+/* Session Counter - inline on mobile */
 .session-counter {
     display: flex;
     justify-content: center;
-    gap: var(--fh-space-xl);
-    margin-bottom: var(--fh-space-md);
+    gap: var(--fh-space-lg);
+    margin-bottom: var(--fh-space-xs);
+    flex-shrink: 0;
 }
 
 .counter {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     gap: var(--fh-space-xs);
 }
 
 .counter__value {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 600;
     font-family: var(--fh-font-mono);
+    min-width: 1.5ch;
+    text-align: center;
 }
 
 .counter__label {
-    font-size: 0.75rem;
+    font-size: 0.625rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
     color: var(--fh-gray-500);
 }
 
@@ -272,6 +302,21 @@
 
 .counter--dont-know .counter__value {
     color: var(--fh-burgundy);
+}
+
+/* Larger counters on bigger screens */
+@media (min-width: 400px) {
+    .counter {
+        flex-direction: column;
+    }
+
+    .counter__value {
+        font-size: 1.5rem;
+    }
+
+    .counter__label {
+        font-size: 0.75rem;
+    }
 }
 
 /* ============================================
@@ -285,17 +330,28 @@
     perspective: 1000px;
     touch-action: none; /* Enable custom touch handling */
     user-select: none;
+    min-height: 0; /* Allow flex shrinking */
+    padding: var(--fh-space-xs);
 }
 
 .flashcard {
-    width: 85%;
+    width: 100%;
     max-width: 400px;
-    height: 60vh;
-    max-height: 500px;
-    min-height: 300px;
+    /* Use flex-based height instead of fixed vh */
+    height: 100%;
+    max-height: min(55vh, 450px);
+    min-height: 200px;
     cursor: pointer;
     transform-style: preserve-3d;
     transition: transform 0.4s ease;
+}
+
+/* Taller cards on larger viewports */
+@media (min-height: 700px) {
+    .flashcard {
+        max-height: min(60vh, 500px);
+        min-height: 280px;
+    }
 }
 
 .flashcard--flipped {
@@ -319,13 +375,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--fh-space-xl);
+    padding: var(--fh-space-md);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    border-radius: 16px;
+    border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08),
                 0 8px 40px rgba(0, 0, 0, 0.04);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Larger padding on bigger screens */
+@media (min-width: 400px) {
+    .flashcard__front,
+    .flashcard__back {
+        padding: var(--fh-space-lg);
+        border-radius: 16px;
+    }
 }
 
 .flashcard__front {
@@ -341,7 +407,7 @@
 
 .flashcard__text {
     font-family: var(--fh-font-body);
-    font-size: clamp(1.125rem, 4vw, 1.5rem);
+    font-size: clamp(1rem, 4vw, 1.375rem);
     line-height: 1.5;
     text-align: center;
     margin: 0;
@@ -369,6 +435,77 @@
 }
 
 /* ============================================
+   Action Buttons (mobile-friendly alternative to swipe)
+   ============================================ */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--fh-space-md);
+    padding: var(--fh-space-sm) var(--fh-space-md);
+    padding-bottom: calc(var(--fh-space-md) + env(safe-area-inset-bottom));
+    flex-shrink: 0;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: var(--fh-space-sm) var(--fh-space-md);
+    min-width: 80px;
+    min-height: 56px;
+    font-family: var(--fh-font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.action-btn__icon {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.action-btn--dont-know {
+    background: var(--fh-burgundy);
+    color: var(--fh-white);
+}
+
+.action-btn--dont-know:hover {
+    background: #5a2230;
+}
+
+.action-btn--dont-know:active {
+    transform: scale(0.96);
+}
+
+.action-btn--got-it {
+    background: var(--fh-sage);
+    color: var(--fh-white);
+}
+
+.action-btn--got-it:hover {
+    background: #6b8774;
+}
+
+.action-btn--got-it:active {
+    transform: scale(0.96);
+}
+
+/* Hide action buttons on desktop (swipe/keyboard works well) */
+@media (min-width: 768px) and (hover: hover) {
+    .action-buttons {
+        display: none;
+    }
+}
+
+/* ============================================
    Swipe Hints (hidden - users discover gestures naturally)
    ============================================ */
 .swipe-hints,
@@ -384,7 +521,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--fh-space-xl);
+    padding: var(--fh-space-lg);
+    padding-bottom: calc(var(--fh-space-lg) + env(safe-area-inset-bottom));
 }
 
 .summary-content {
@@ -395,16 +533,30 @@
 
 .summary-title {
     font-family: var(--fh-font-display);
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: var(--fh-navy);
-    margin-bottom: var(--fh-space-xl);
+    margin-bottom: var(--fh-space-lg);
+}
+
+@media (min-width: 400px) {
+    .summary-title {
+        font-size: 2rem;
+        margin-bottom: var(--fh-space-xl);
+    }
 }
 
 .summary-stats {
     display: flex;
     justify-content: center;
-    gap: var(--fh-space-xl);
-    margin-bottom: var(--fh-space-2xl);
+    gap: var(--fh-space-lg);
+    margin-bottom: var(--fh-space-xl);
+}
+
+@media (min-width: 400px) {
+    .summary-stats {
+        gap: var(--fh-space-xl);
+        margin-bottom: var(--fh-space-2xl);
+    }
 }
 
 .summary-stat {
@@ -416,9 +568,15 @@
 
 .summary-stat__value {
     font-family: var(--fh-font-display);
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 600;
     color: var(--fh-navy);
+}
+
+@media (min-width: 400px) {
+    .summary-stat__value {
+        font-size: 2.5rem;
+    }
 }
 
 .summary-stat--proficient .summary-stat__value {
@@ -430,16 +588,26 @@
 }
 
 .summary-stat__label {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     color: var(--fh-gray-500);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+@media (min-width: 400px) {
+    .summary-stat__label {
+        font-size: 0.875rem;
+    }
 }
 
 .summary-actions {
     display: flex;
     flex-direction: column;
     gap: var(--fh-space-md);
+}
+
+.summary-actions .btn {
+    min-height: 52px;
 }
 
 /* ============================================

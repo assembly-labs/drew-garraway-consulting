@@ -62,6 +62,13 @@
         html, body {
             overscroll-behavior: none;
             touch-action: pan-x pan-y;
+            height: 100%;
+            height: -webkit-fill-available;
+        }
+
+        html {
+            /* Fix iOS Safari 100vh issue */
+            height: -webkit-fill-available;
         }
 
         body {
@@ -71,35 +78,64 @@
             background: var(--fh-cream);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            /* Prevent iOS rubber-banding */
+            position: fixed;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #flashcard-app {
+            height: 100%;
+            overflow: hidden;
         }
 
         /* Back link */
         .back-link {
             position: fixed;
-            top: var(--fh-space-md);
-            left: var(--fh-space-md);
+            top: calc(var(--fh-space-sm) + env(safe-area-inset-top));
+            left: calc(var(--fh-space-sm) + env(safe-area-inset-left));
             z-index: 100;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: var(--fh-space-xs);
-            padding: var(--fh-space-sm) var(--fh-space-md);
-            font-size: 0.875rem;
+            padding: var(--fh-space-xs) var(--fh-space-sm);
+            min-width: 44px;
+            min-height: 44px;
+            font-size: 0.75rem;
             font-weight: 500;
             color: var(--fh-white);
             text-decoration: none;
-            background: rgba(0, 45, 98, 0.9);
-            border-radius: 20px;
+            background: rgba(0, 45, 98, 0.95);
+            border-radius: 22px;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             transition: background-color 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .back-link:hover {
             background: var(--fh-navy);
         }
 
+        .back-link:active {
+            transform: scale(0.95);
+        }
+
         .back-link__icon {
             font-size: 1rem;
+        }
+
+        /* Hide text on very small screens */
+        @media (max-width: 360px) {
+            .back-link span:not(.back-link__icon) {
+                display: none;
+            }
+            .back-link {
+                padding: var(--fh-space-xs);
+            }
         }
 
         /* Loading state */

@@ -99,23 +99,15 @@ const FlashcardUI = (function () {
                         </div>
                     </div>
 
-                    <div class="swipe-hints">
-                        <div class="hint hint--left">
-                            <span class="hint-icon">←</span>
-                            <span class="hint-text">Still learning</span>
-                        </div>
-                        <div class="hint hint--up">
-                            <span class="hint-icon">↑</span>
-                            <span class="hint-text">Got it!</span>
-                        </div>
-                        <div class="hint hint--right">
-                            <span class="hint-icon">→</span>
-                            <span class="hint-text">Still learning</span>
-                        </div>
-                    </div>
-
-                    <div class="tap-hint">
-                        <span>Tap card to flip</span>
+                    <div class="action-buttons" id="action-buttons">
+                        <button class="action-btn action-btn--dont-know" id="btn-dont-know" type="button">
+                            <span class="action-btn__icon">&#x2190;</span>
+                            <span>Don't Know</span>
+                        </button>
+                        <button class="action-btn action-btn--got-it" id="btn-got-it" type="button">
+                            <span class="action-btn__icon">&#x2191;</span>
+                            <span>Got It</span>
+                        </button>
                     </div>
                 </div>
 
@@ -261,6 +253,28 @@ const FlashcardUI = (function () {
 
         // Keyboard support
         document.addEventListener('keydown', handleKeydown);
+
+        // Action button handlers (mobile-friendly alternative to swipe)
+        const btnGotIt = document.getElementById('btn-got-it');
+        const btnDontKnow = document.getElementById('btn-dont-know');
+
+        if (btnGotIt) {
+            btnGotIt.onclick = function() {
+                animateCardOut('up', () => {
+                    FlashcardSession.markCurrentProficient();
+                    showCurrentCard();
+                });
+            };
+        }
+
+        if (btnDontKnow) {
+            btnDontKnow.onclick = function() {
+                animateCardOut('left', () => {
+                    FlashcardSession.markCurrentLearning();
+                    showCurrentCard();
+                });
+            };
+        }
     }
 
     /**
