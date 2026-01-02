@@ -373,7 +373,8 @@
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
+    /* Use flex-start to prevent content from being pushed above scroll area */
+    align-items: flex-start;
     justify-content: center;
     padding: var(--fh-space-md);
     backface-visibility: hidden;
@@ -381,6 +382,7 @@
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08),
                 0 8px 40px rgba(0, 0, 0, 0.04);
+    overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -410,9 +412,16 @@
     font-size: clamp(1rem, 4vw, 1.375rem);
     line-height: 1.5;
     text-align: center;
-    margin: 0;
+    /* Use margin auto for vertical centering with flex-start parent */
+    margin: auto 0;
+    /* Ensure text stays within card bounds */
+    width: 100%;
+    max-width: 100%;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    /* Prevent horizontal overflow */
+    hyphens: auto;
+    -webkit-hyphens: auto;
 }
 
 .flashcard__front .flashcard__text {
