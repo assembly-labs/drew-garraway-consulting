@@ -50,12 +50,18 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
     }
 
     .logo {
       height: 40px;
       width: auto;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .header-badge {
@@ -67,6 +73,30 @@
       border-radius: 4px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+    }
+
+    .export-btn {
+      background: var(--travelers-blue);
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    .export-btn:hover {
+      background: #00527A;
+    }
+
+    .export-btn svg {
+      width: 16px;
+      height: 16px;
     }
 
     /* Main Content */
@@ -101,6 +131,13 @@
 
     .title-section .subtitle strong {
       color: #fff;
+    }
+
+    .print-date {
+      display: none;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      opacity: 0.8;
     }
 
     /* Progress Bar */
@@ -277,6 +314,72 @@
       padding-top: 4px;
     }
 
+    /* Notes Section */
+    .notes-container {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 2px solid var(--travelers-border);
+    }
+
+    .notes-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .notes-label span {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--travelers-blue);
+    }
+
+    .notes-saved {
+      font-size: 0.7rem;
+      color: var(--travelers-success);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .notes-saved.visible {
+      opacity: 1;
+    }
+
+    .notes-textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 12px;
+      border: 2px solid var(--travelers-border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 16px; /* Prevents iOS zoom */
+      line-height: 1.5;
+      resize: vertical;
+      transition: border-color 0.2s;
+    }
+
+    .notes-textarea:focus {
+      outline: none;
+      border-color: var(--travelers-light-blue);
+    }
+
+    .notes-textarea::placeholder {
+      color: #999;
+    }
+
+    /* Print view for notes */
+    .notes-print {
+      display: none;
+      background: var(--travelers-light-gray);
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
     /* Footer */
     .footer {
       text-align: center;
@@ -297,13 +400,30 @@
         padding: 12px 16px;
       }
 
+      .header-inner {
+        flex-wrap: wrap;
+      }
+
       .logo {
         height: 32px;
+      }
+
+      .header-actions {
+        gap: 8px;
       }
 
       .header-badge {
         font-size: 0.6rem;
         padding: 3px 8px;
+      }
+
+      .export-btn {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+      }
+
+      .export-btn span {
+        display: none;
       }
 
       .container {
@@ -346,18 +466,27 @@
         margin-top: 8px;
         padding: 10px 14px;
       }
+
+      .notes-textarea {
+        min-height: 100px;
+      }
     }
 
     /* Print Styles */
     @media print {
       body {
         background: #fff;
+        font-size: 11pt;
       }
 
       .header {
         position: relative;
         box-shadow: none;
         border-bottom-width: 2px;
+      }
+
+      .export-btn {
+        display: none !important;
       }
 
       .container {
@@ -368,21 +497,86 @@
         background: var(--travelers-blue) !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
+        padding: 20px;
+      }
+
+      .print-date {
+        display: block;
+      }
+
+      .progress-container {
+        display: none;
       }
 
       .section {
         box-shadow: none;
         border: 1px solid var(--travelers-border);
         page-break-inside: avoid;
+        margin-bottom: 12px;
       }
 
       .section-header {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
+        padding: 10px 16px;
       }
 
-      .progress-container {
+      .section-content {
+        padding: 12px 16px;
+      }
+
+      .checklist li {
+        padding: 6px 0;
+      }
+
+      /* Hide interactive elements, show print versions */
+      .notes-textarea {
+        display: none !important;
+      }
+
+      .notes-label .notes-saved {
         display: none;
+      }
+
+      .notes-print {
+        display: block;
+      }
+
+      .notes-print:empty {
+        display: none;
+      }
+
+      .notes-container:has(.notes-print:empty) {
+        display: none;
+      }
+
+      /* Show checkmarks instead of checkboxes */
+      .checklist input[type="checkbox"] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 2px solid var(--travelers-gray);
+        border-radius: 3px;
+        position: relative;
+      }
+
+      .checklist input[type="checkbox"]:checked {
+        background: var(--travelers-red);
+        border-color: var(--travelers-red);
+      }
+
+      .checklist input[type="checkbox"]:checked::after {
+        content: "✓";
+        color: #fff;
+        font-size: 12px;
+        position: absolute;
+        top: -2px;
+        left: 2px;
+      }
+
+      .footer {
+        padding: 16px;
       }
     }
   </style>
@@ -390,8 +584,16 @@
 <body>
   <header class="header">
     <div class="header-inner">
-      <img src="https://www.travelers.com/iw-images/resources/TRV/Logo/travelers-logo.svg" alt="Travelers Insurance" class="logo">
-      <span class="header-badge">Property Claim</span>
+      <img src="https://companieslogo.com/img/orig/TRV_BIG-84f85255.png" alt="Travelers Insurance" class="logo">
+      <div class="header-actions">
+        <span class="header-badge">Property Claim</span>
+        <button class="export-btn" onclick="exportPDF()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <span>Export PDF</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -399,6 +601,7 @@
     <div class="title-section">
       <h1>Roof Project Review Checklist</h1>
       <p class="subtitle"><strong>Goal:</strong> Verify completed work, document issues, and resolve open items before final sign-off.</p>
+      <p class="print-date" id="printDate"></p>
     </div>
 
     <div class="progress-container">
@@ -411,7 +614,7 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" data-section="a">
       <div class="section-header">
         <span class="section-letter">A</span>
         <h2 class="section-title">Valleys (Quality & Method)</h2>
@@ -429,10 +632,18 @@
           <li><input type="checkbox" id="a5"><label for="a5">Does this woven method meet the <strong>manufacturer's specs</strong> for the shingles used?</label></li>
           <li><input type="checkbox" id="a6"><label for="a6">Was this choice based on cost, speed, or a technical recommendation?</label></li>
         </ul>
+        <div class="notes-container">
+          <div class="notes-label">
+            <span>Notes</span>
+            <span class="notes-saved" id="saved-a">Saved</span>
+          </div>
+          <textarea class="notes-textarea" id="notes-a" placeholder="Add observations, contractor responses, follow-ups..."></textarea>
+          <div class="notes-print" id="notes-print-a"></div>
+        </div>
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" data-section="b">
       <div class="section-header">
         <span class="section-letter">B</span>
         <h2 class="section-title">Ice & Water Shield</h2>
@@ -456,10 +667,18 @@
         <ul class="checklist">
           <li><input type="checkbox" id="b4"><label for="b4">Is there documentation (photos / job log) confirming this?</label></li>
         </ul>
+        <div class="notes-container">
+          <div class="notes-label">
+            <span>Notes</span>
+            <span class="notes-saved" id="saved-b">Saved</span>
+          </div>
+          <textarea class="notes-textarea" id="notes-b" placeholder="Add observations, contractor responses, follow-ups..."></textarea>
+          <div class="notes-print" id="notes-print-b"></div>
+        </div>
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" data-section="c">
       <div class="section-header">
         <span class="section-letter">C</span>
         <h2 class="section-title">Synthetic Underlayment / Vapor Barrier</h2>
@@ -474,10 +693,18 @@
           <li><input type="checkbox" id="c2"><label for="c2">Was a <strong>synthetic vapor barrier</strong> applied to remaining roof deck?</label></li>
           <li><input type="checkbox" id="c3"><label for="c3">Was it installed across the <strong>entire roof</strong> or only certain sections?</label></li>
         </ul>
+        <div class="notes-container">
+          <div class="notes-label">
+            <span>Notes</span>
+            <span class="notes-saved" id="saved-c">Saved</span>
+          </div>
+          <textarea class="notes-textarea" id="notes-c" placeholder="Add observations, contractor responses, follow-ups..."></textarea>
+          <div class="notes-print" id="notes-print-c"></div>
+        </div>
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" data-section="d">
       <div class="section-header">
         <span class="section-letter">D</span>
         <h2 class="section-title">Roof Edge / Aluminum Edging</h2>
@@ -498,10 +725,18 @@
         <ul class="checklist">
           <li><input type="checkbox" id="d3"><label for="d3">How can I visually confirm new vs old edging?</label></li>
         </ul>
+        <div class="notes-container">
+          <div class="notes-label">
+            <span>Notes</span>
+            <span class="notes-saved" id="saved-d">Saved</span>
+          </div>
+          <textarea class="notes-textarea" id="notes-d" placeholder="Add observations, contractor responses, follow-ups..."></textarea>
+          <div class="notes-print" id="notes-print-d"></div>
+        </div>
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" data-section="e">
       <div class="section-header">
         <span class="section-letter">E</span>
         <h2 class="section-title">Metal Roof Areas (Sunroom / Porches)</h2>
@@ -519,10 +754,18 @@
         <ul class="checklist">
           <li><input type="checkbox" id="e3"><label for="e3">What is the plan to correct the <strong>tar work</strong> per metal-roof best practice?</label></li>
         </ul>
+        <div class="notes-container">
+          <div class="notes-label">
+            <span>Notes</span>
+            <span class="notes-saved" id="saved-e">Saved</span>
+          </div>
+          <textarea class="notes-textarea" id="notes-e" placeholder="Add observations, contractor responses, follow-ups..."></textarea>
+          <div class="notes-print" id="notes-print-e"></div>
+        </div>
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" data-section="f">
       <div class="section-header">
         <span class="section-letter">F</span>
         <h2 class="section-title">Cleanup & Safety</h2>
@@ -543,10 +786,18 @@
         <ul class="checklist">
           <li><input type="checkbox" id="f6"><label for="f6">When will final cleanup and safety sweep be completed?</label></li>
         </ul>
+        <div class="notes-container">
+          <div class="notes-label">
+            <span>Notes</span>
+            <span class="notes-saved" id="saved-f">Saved</span>
+          </div>
+          <textarea class="notes-textarea" id="notes-f" placeholder="Add observations, contractor responses, follow-ups..."></textarea>
+          <div class="notes-print" id="notes-print-f"></div>
+        </div>
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" data-section="g">
       <div class="section-header">
         <span class="section-letter">G</span>
         <h2 class="section-title">Site Management / Bathroom Damage</h2>
@@ -567,10 +818,18 @@
           <li><input type="checkbox" id="g8"><label for="g8">Why was <strong>no porta-potty</strong> provided for a multi-day job?</label></li>
           <li><input type="checkbox" id="g9"><label for="g9">How will we <strong>reimburse / reconcile</strong> plumbing and damage costs?</label></li>
         </ul>
+        <div class="notes-container">
+          <div class="notes-label">
+            <span>Notes</span>
+            <span class="notes-saved" id="saved-g">Saved</span>
+          </div>
+          <textarea class="notes-textarea" id="notes-g" placeholder="Add observations, contractor responses, follow-ups..."></textarea>
+          <div class="notes-print" id="notes-print-g"></div>
+        </div>
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" data-section="h">
       <div class="section-header">
         <span class="section-letter">H</span>
         <h2 class="section-title">Close-Out Documentation</h2>
@@ -586,17 +845,77 @@
         <ul class="checklist">
           <li><input type="checkbox" id="h4"><label for="h4">Confirm all items resolved before <strong>final sign-off</strong></label></li>
         </ul>
+        <div class="notes-container">
+          <div class="notes-label">
+            <span>Notes</span>
+            <span class="notes-saved" id="saved-h">Saved</span>
+          </div>
+          <textarea class="notes-textarea" id="notes-h" placeholder="Add observations, contractor responses, follow-ups..."></textarea>
+          <div class="notes-print" id="notes-print-h"></div>
+        </div>
       </div>
     </div>
 
     <footer class="footer">
-      <img src="https://www.travelers.com/iw-images/resources/TRV/Logo/travelers-logo.svg" alt="Travelers" class="footer-logo">
+      <img src="https://companieslogo.com/img/orig/TRV_BIG-84f85255.png" alt="Travelers" class="footer-logo">
       <p>This checklist is provided for reference purposes only.</p>
     </footer>
   </main>
 
   <script>
-    // Progress tracking
+    // Debounce utility - prevents excessive saves while typing
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
+    // Show "Saved" indicator briefly
+    function showSaved(section) {
+      const indicator = document.getElementById('saved-' + section);
+      if (indicator) {
+        indicator.classList.add('visible');
+        setTimeout(() => indicator.classList.remove('visible'), 1500);
+      }
+    }
+
+    // Save all data to localStorage
+    function saveAll() {
+      const data = {
+        checkboxes: {},
+        notes: {},
+        lastUpdated: new Date().toISOString()
+      };
+
+      // Save checkbox states
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        data.checkboxes[cb.id] = cb.checked;
+      });
+
+      // Save notes
+      ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].forEach(section => {
+        const textarea = document.getElementById('notes-' + section);
+        if (textarea) {
+          data.notes[section] = textarea.value;
+        }
+      });
+
+      localStorage.setItem('roofChecklist', JSON.stringify(data));
+    }
+
+    // Save with debounce for notes (300ms delay)
+    const debouncedSave = debounce((section) => {
+      saveAll();
+      showSaved(section);
+    }, 300);
+
+    // Update progress bar
     function updateProgress() {
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
       const checked = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -611,40 +930,105 @@
       // Update visual state for checked items
       checkboxes.forEach(cb => {
         const li = cb.closest('li');
-        if (cb.checked) {
-          li.classList.add('checked');
-        } else {
-          li.classList.remove('checked');
+        if (li) {
+          if (cb.checked) {
+            li.classList.add('checked');
+          } else {
+            li.classList.remove('checked');
+          }
         }
       });
-
-      // Save state to localStorage
-      const state = {};
-      checkboxes.forEach(cb => {
-        state[cb.id] = cb.checked;
-      });
-      localStorage.setItem('roofChecklist', JSON.stringify(state));
     }
 
-    // Load saved state
+    // Load saved state from localStorage
     function loadState() {
       const saved = localStorage.getItem('roofChecklist');
       if (saved) {
-        const state = JSON.parse(saved);
-        Object.keys(state).forEach(id => {
-          const cb = document.getElementById(id);
-          if (cb) cb.checked = state[id];
-        });
+        try {
+          const data = JSON.parse(saved);
+
+          // Load checkboxes
+          if (data.checkboxes) {
+            Object.keys(data.checkboxes).forEach(id => {
+              const cb = document.getElementById(id);
+              if (cb) cb.checked = data.checkboxes[id];
+            });
+          }
+
+          // Load notes
+          if (data.notes) {
+            Object.keys(data.notes).forEach(section => {
+              const textarea = document.getElementById('notes-' + section);
+              if (textarea) textarea.value = data.notes[section];
+            });
+          }
+        } catch (e) {
+          console.error('Error loading saved state:', e);
+        }
       }
       updateProgress();
+    }
+
+    // Prepare print view - copy notes to print divs
+    function preparePrintView() {
+      ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].forEach(section => {
+        const textarea = document.getElementById('notes-' + section);
+        const printDiv = document.getElementById('notes-print-' + section);
+        if (textarea && printDiv) {
+          printDiv.textContent = textarea.value;
+        }
+      });
+
+      // Set print date
+      const printDate = document.getElementById('printDate');
+      if (printDate) {
+        const now = new Date();
+        printDate.textContent = 'Generated: ' + now.toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit'
+        });
+      }
+    }
+
+    // Export to PDF via print dialog
+    function exportPDF() {
+      preparePrintView();
+      window.print();
+    }
+
+    // Auto-expand textarea as user types
+    function autoExpand(textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = Math.max(80, textarea.scrollHeight) + 'px';
     }
 
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
       loadState();
 
+      // Checkbox change handlers
       document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-        cb.addEventListener('change', updateProgress);
+        cb.addEventListener('change', () => {
+          updateProgress();
+          saveAll();
+        });
+      });
+
+      // Notes change handlers with debounced save
+      ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].forEach(section => {
+        const textarea = document.getElementById('notes-' + section);
+        if (textarea) {
+          textarea.addEventListener('input', () => {
+            autoExpand(textarea);
+            debouncedSave(section);
+          });
+          // Initial auto-expand for loaded content
+          autoExpand(textarea);
+        }
       });
     });
   </script>
