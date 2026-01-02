@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roof Project Review Checklist | Travelers Insurance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --travelers-red: #E31837;
+      --travelers-dark-red: #B71234;
+      --travelers-blue: #003B5C;
+      --travelers-light-blue: #0077B6;
+      --travelers-gray: #4A4A4A;
+      --travelers-light-gray: #F5F5F5;
+      --travelers-border: #E0E0E0;
+      --travelers-success: #2E7D32;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--travelers-gray);
+      background: var(--travelers-light-gray);
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      background: #fff;
+      border-bottom: 4px solid var(--travelers-red);
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      height: 40px;
+      width: auto;
+    }
+
+    .header-badge {
+      background: var(--travelers-red);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    /* Title Section */
+    .title-section {
+      background: linear-gradient(135deg, var(--travelers-blue) 0%, #00527A 100%);
+      color: #fff;
+      padding: 32px 24px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(0,59,92,0.2);
+    }
+
+    .title-section h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .title-section .subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    .title-section .subtitle strong {
+      color: #fff;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .progress-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--travelers-blue);
+    }
+
+    .progress-count {
+      font-size: 0.85rem;
+      color: var(--travelers-gray);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--travelers-border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--travelers-red) 0%, var(--travelers-dark-red) 100%);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    /* Section Cards */
+    .section {
+      background: #fff;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+
+    .section-header {
+      background: var(--travelers-blue);
+      color: #fff;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-letter {
+      background: var(--travelers-red);
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .section-badge {
+      margin-left: auto;
+      background: rgba(255,255,255,0.2);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .section-badge.critical {
+      background: var(--travelers-red);
+    }
+
+    .section-content {
+      padding: 16px 20px;
+    }
+
+    /* Subsection headers */
+    .subsection-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--travelers-light-blue);
+      margin: 16px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--travelers-border);
+    }
+
+    .subsection-title:first-child {
+      margin-top: 0;
+    }
+
+    /* Checklist */
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--travelers-border);
+    }
+
+    .checklist li:last-child {
+      border-bottom: none;
+    }
+
+    .checklist input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      margin-top: 1px;
+      flex-shrink: 0;
+      accent-color: var(--travelers-red);
+      cursor: pointer;
+    }
+
+    .checklist label {
+      flex: 1;
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .checklist label strong {
+      color: var(--travelers-blue);
+    }
+
+    .checklist li.checked label {
+      text-decoration: line-through;
+      color: #999;
+    }
+
+    /* Nested items */
+    .nested {
+      margin-left: 34px;
+      background: var(--travelers-light-gray);
+      border-radius: 8px;
+      padding: 8px 16px;
+      margin-top: -8px;
+      margin-bottom: 8px;
+    }
+
+    .nested li {
+      padding: 8px 0;
+    }
+
+    .nested li:first-child {
+      padding-top: 4px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 24px;
+      color: #888;
+      font-size: 0.8rem;
+    }
+
+    .footer-logo {
+      height: 24px;
+      margin-bottom: 8px;
+      opacity: 0.6;
+    }
+
+    /* Mobile Optimizations */
+    @media (max-width: 600px) {
+      .header {
+        padding: 12px 16px;
+      }
+
+      .logo {
+        height: 32px;
+      }
+
+      .header-badge {
+        font-size: 0.6rem;
+        padding: 3px 8px;
+      }
+
+      .container {
+        padding: 16px 12px 32px;
+      }
+
+      .title-section {
+        padding: 24px 18px;
+        border-radius: 10px;
+      }
+
+      .title-section h1 {
+        font-size: 1.25rem;
+      }
+
+      .section-header {
+        padding: 12px 16px;
+      }
+
+      .section-content {
+        padding: 14px 16px;
+      }
+
+      .checklist li {
+        padding: 10px 0;
+        gap: 10px;
+      }
+
+      .checklist input[type="checkbox"] {
+        width: 24px;
+        height: 24px;
+      }
+
+      .checklist label {
+        font-size: 0.9rem;
+      }
+
+      .nested {
+        margin-left: 0;
+        margin-top: 8px;
+        padding: 10px 14px;
+      }
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .header {
+        position: relative;
+        box-shadow: none;
+        border-bottom-width: 2px;
+      }
+
+      .container {
+        padding: 16px 0;
+      }
+
+      .title-section {
+        background: var(--travelers-blue) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .section {
+        box-shadow: none;
+        border: 1px solid var(--travelers-border);
+        page-break-inside: avoid;
+      }
+
+      .section-header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .progress-container {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <img src="https://www.travelers.com/iw-images/resources/TRV/Logo/travelers-logo.svg" alt="Travelers Insurance" class="logo">
+      <span class="header-badge">Property Claim</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="title-section">
+      <h1>Roof Project Review Checklist</h1>
+      <p class="subtitle"><strong>Goal:</strong> Verify completed work, document issues, and resolve open items before final sign-off.</p>
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-header">
+        <span class="progress-label">Completion Progress</span>
+        <span class="progress-count"><span id="checkedCount">0</span> of <span id="totalCount">0</span> items</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-letter">A</span>
+        <h2 class="section-title">Valleys (Quality & Method)</h2>
+      </div>
+      <div class="section-content">
+        <h3 class="subsection-title">Observations</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="a1"><label for="a1">Valleys are <strong>woven</strong> (confirmed visually)</label></li>
+          <li><input type="checkbox" id="a2"><label for="a2">No straight cut line visible</label></li>
+          <li><input type="checkbox" id="a3"><label for="a3">Previous roof had <strong>metal valleys</strong></label></li>
+        </ul>
+        <h3 class="subsection-title">Questions</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="a4"><label for="a4">Why did you choose <strong>woven valleys</strong> instead of closed-cut or metal?</label></li>
+          <li><input type="checkbox" id="a5"><label for="a5">Does this woven method meet the <strong>manufacturer's specs</strong> for the shingles used?</label></li>
+          <li><input type="checkbox" id="a6"><label for="a6">Was this choice based on cost, speed, or a technical recommendation?</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-letter">B</span>
+        <h2 class="section-title">Ice & Water Shield</h2>
+        <span class="section-badge critical">Critical</span>
+      </div>
+      <div class="section-content">
+        <h3 class="subsection-title">Observations</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="b1"><label for="b1">Can't visually confirm under shingles</label></li>
+          <li><input type="checkbox" id="b2"><label for="b2">Valleys conceal underlayment</label></li>
+        </ul>
+        <h3 class="subsection-title">Questions</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="b3"><label for="b3">Was <strong>self-adhering ice & water shield</strong> installed:</label></li>
+        </ul>
+        <ul class="checklist nested">
+          <li><input type="checkbox" id="b3a"><label for="b3a">Directly to roof deck</label></li>
+          <li><input type="checkbox" id="b3b"><label for="b3b">In <strong>all valleys</strong></label></li>
+          <li><input type="checkbox" id="b3c"><label for="b3c">Extending <strong>24" inside exterior wall</strong> (as quoted)</label></li>
+        </ul>
+        <ul class="checklist">
+          <li><input type="checkbox" id="b4"><label for="b4">Is there documentation (photos / job log) confirming this?</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-letter">C</span>
+        <h2 class="section-title">Synthetic Underlayment / Vapor Barrier</h2>
+      </div>
+      <div class="section-content">
+        <h3 class="subsection-title">Observations</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c1"><label for="c1">Not visually confirmed</label></li>
+        </ul>
+        <h3 class="subsection-title">Questions</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c2"><label for="c2">Was a <strong>synthetic vapor barrier</strong> applied to remaining roof deck?</label></li>
+          <li><input type="checkbox" id="c3"><label for="c3">Was it installed across the <strong>entire roof</strong> or only certain sections?</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-letter">D</span>
+        <h2 class="section-title">Roof Edge / Aluminum Edging</h2>
+      </div>
+      <div class="section-content">
+        <h3 class="subsection-title">Observations</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="d1"><label for="d1">Unsure if new edging is present on all edges</label></li>
+        </ul>
+        <h3 class="subsection-title">Questions</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="d2"><label for="d2">Was <strong>C4 ½" aluminum edging</strong> installed on:</label></li>
+        </ul>
+        <ul class="checklist nested">
+          <li><input type="checkbox" id="d2a"><label for="d2a">Bottom (eave) edges</label></li>
+          <li><input type="checkbox" id="d2b"><label for="d2b">Side (rake) edges</label></li>
+        </ul>
+        <ul class="checklist">
+          <li><input type="checkbox" id="d3"><label for="d3">How can I visually confirm new vs old edging?</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-letter">E</span>
+        <h2 class="section-title">Metal Roof Areas (Sunroom / Porches)</h2>
+      </div>
+      <div class="section-content">
+        <h3 class="subsection-title">Observations</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="e1"><label for="e1">Tar visible on metal shingle area above sunroom</label></li>
+        </ul>
+        <h3 class="subsection-title">Action Required</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="e2"><label for="e2">Tar work on metal roof needs correction / cleanup</label></li>
+        </ul>
+        <h3 class="subsection-title">Questions</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="e3"><label for="e3">What is the plan to correct the <strong>tar work</strong> per metal-roof best practice?</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-letter">F</span>
+        <h2 class="section-title">Cleanup & Safety</h2>
+      </div>
+      <div class="section-content">
+        <h3 class="subsection-title">Observations</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="f1"><label for="f1">Metal shavings present</label></li>
+          <li><input type="checkbox" id="f2"><label for="f2">Nails found and picked up by homeowner</label></li>
+          <li><input type="checkbox" id="f3"><label for="f3">Nail visible on front door overhang</label></li>
+        </ul>
+        <h3 class="subsection-title">Actions Required</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="f4"><label for="f4">Full magnetic sweep of property</label></li>
+          <li><input type="checkbox" id="f5"><label for="f5">Remove nail on front overhang</label></li>
+        </ul>
+        <h3 class="subsection-title">Questions</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="f6"><label for="f6">When will final cleanup and safety sweep be completed?</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-letter">G</span>
+        <h2 class="section-title">Site Management / Bathroom Damage</h2>
+      </div>
+      <div class="section-content">
+        <h3 class="subsection-title">Documented Issues</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="g1"><label for="g1">No porta-potty provided</label></li>
+          <li><input type="checkbox" id="g2"><label for="g2">Crew used homeowner bathroom</label></li>
+          <li><input type="checkbox" id="g3"><label for="g3">Toilet clogged</label></li>
+          <li><input type="checkbox" id="g4"><label for="g4">$425 plumber bill</label></li>
+          <li><input type="checkbox" id="g5"><label for="g5">Sanitizing required</label></li>
+          <li><input type="checkbox" id="g6"><label for="g6">Floor damage</label></li>
+          <li><input type="checkbox" id="g7"><label for="g7">Personal time lost</label></li>
+        </ul>
+        <h3 class="subsection-title">Questions</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="g8"><label for="g8">Why was <strong>no porta-potty</strong> provided for a multi-day job?</label></li>
+          <li><input type="checkbox" id="g9"><label for="g9">How will we <strong>reimburse / reconcile</strong> plumbing and damage costs?</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-letter">H</span>
+        <h2 class="section-title">Close-Out Documentation</h2>
+      </div>
+      <div class="section-content">
+        <h3 class="subsection-title">Required Documents</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="h1"><label for="h1">Permit confirmation</label></li>
+          <li><input type="checkbox" id="h2"><label for="h2">Written <strong>10-year workmanship warranty</strong></label></li>
+          <li><input type="checkbox" id="h3"><label for="h3">Written answers to valley & underlayment questions</label></li>
+        </ul>
+        <h3 class="subsection-title">Final Sign-Off</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="h4"><label for="h4">Confirm all items resolved before <strong>final sign-off</strong></label></li>
+        </ul>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <img src="https://www.travelers.com/iw-images/resources/TRV/Logo/travelers-logo.svg" alt="Travelers" class="footer-logo">
+      <p>This checklist is provided for reference purposes only.</p>
+    </footer>
+  </main>
+
+  <script>
+    // Progress tracking
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      const checked = document.querySelectorAll('input[type="checkbox"]:checked');
+      const total = checkboxes.length;
+      const checkedCount = checked.length;
+      const percentage = total > 0 ? (checkedCount / total) * 100 : 0;
+
+      document.getElementById('checkedCount').textContent = checkedCount;
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('progressFill').style.width = percentage + '%';
+
+      // Update visual state for checked items
+      checkboxes.forEach(cb => {
+        const li = cb.closest('li');
+        if (cb.checked) {
+          li.classList.add('checked');
+        } else {
+          li.classList.remove('checked');
+        }
+      });
+
+      // Save state to localStorage
+      const state = {};
+      checkboxes.forEach(cb => {
+        state[cb.id] = cb.checked;
+      });
+      localStorage.setItem('roofChecklist', JSON.stringify(state));
+    }
+
+    // Load saved state
+    function loadState() {
+      const saved = localStorage.getItem('roofChecklist');
+      if (saved) {
+        const state = JSON.parse(saved);
+        Object.keys(state).forEach(id => {
+          const cb = document.getElementById(id);
+          if (cb) cb.checked = state[id];
+        });
+      }
+      updateProgress();
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      loadState();
+
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', updateProgress);
+      });
+    });
+  </script>
+</body>
+</html>
