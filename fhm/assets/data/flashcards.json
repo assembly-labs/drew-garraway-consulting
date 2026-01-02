@@ -1,6 +1,6 @@
 {
   "generated": "2026-01-01T20:00:00.000Z",
-  "totalCards": 100,
+  "totalCards": 116,
   "cards": [
     {
       "id": "opt-001",
@@ -1001,6 +1001,166 @@
       "weight": 0.8,
       "source": "manual",
       "tags": ["regulation", "AML"]
+    },
+    {
+      "id": "exam-001",
+      "front": "How are funds deposited into a fixed annuity?",
+      "back": "Into a GENERAL ACCOUNT. Fixed annuity funds go into the insurer's general account (not a separate account, which is for variable annuities).",
+      "chapter": "annuities",
+      "section": 1,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "annuities", "fixed-annuity"]
+    },
+    {
+      "id": "exam-002",
+      "front": "A customer has $6,000 of capital gains and $10,000 of capital losses. How much loss is deductible from this year's tax return?",
+      "back": "$3,000. Net capital loss is $4,000 ($10,000 - $6,000). Only $3,000 of net capital losses can be deducted in a tax year. The remaining $1,000 is carried forward to the next tax year.",
+      "chapter": "taxation",
+      "section": 1,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "taxation", "capital-gains"]
+    },
+    {
+      "id": "exam-003",
+      "front": "A registered representative offers to repurchase a customer's shares at $18 when the market is $10-$10.50. Is this permitted?",
+      "back": "NO - this is PROHIBITED. FINRA Conduct Rules do not allow customer accounts to be guaranteed against loss. If the market moves up, customer wins; if it moves down, customer loses.",
+      "chapter": "prohibited",
+      "section": 2,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "prohibited", "guarantees"]
+    },
+    {
+      "id": "exam-004",
+      "front": "What is TRUE about the FINRA 5% Mark-Up Policy?",
+      "back": "5% is a GUIDE, not a rule. Mark-ups can be MORE or LESS than 5% depending on the transaction. Easy transactions = lower markup; difficult transactions = higher markup. Applies to both principal (markup) and agency (commission) transactions.",
+      "chapter": "broker-dealer",
+      "section": 3,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "FINRA", "markup"]
+    },
+    {
+      "id": "exam-005",
+      "front": "Can a registered representative direct customers to a friend's private placement?",
+      "back": "ONLY with prior WRITTEN approval from employer. RRs are prohibited from 'private securities transactions' unless they: (1) provide written notice to member firm, (2) detail compensation in writing, (3) obtain express written approval from member firm.",
+      "chapter": "regulation",
+      "section": 4,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "private-placement", "selling-away"]
+    },
+    {
+      "id": "exam-006",
+      "front": "Which communications do NOT need principal review? Letters to clients, complaint letters, form letters to customers, or internal form letters?",
+      "back": "INTERNAL form letters (for internal use within a firm). Retail communications (>25 clients) need principal approval. Correspondence (≤25 clients) needs post-use review. Internal documents don't need review because the public doesn't see them.",
+      "chapter": "regulation",
+      "section": 4,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "communications", "principal-approval"]
+    },
+    {
+      "id": "exam-007",
+      "front": "What must be disclosed on a U4 Form? Residence, employers, foreign bank accounts, or bankruptcies?",
+      "back": "NOT foreign bank accounts. U4 requires: residence for past 5 years, employers for past 10 years, and any bankruptcies/judgments/liens. No requirement to disclose bank accounts.",
+      "chapter": "regulation",
+      "section": 4,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "U4", "registration"]
+    },
+    {
+      "id": "exam-008",
+      "front": "What is NOT covered under the Securities Exchange Act of 1934?",
+      "back": "REGISTRATION OF NEW ISSUES (that's the 1933 Act). The 1934 Act covers: registration of broker-dealers, registration of exchanges, and stabilization of new issues in the secondary market.",
+      "chapter": "regulation",
+      "section": 4,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "1933-act", "1934-act"]
+    },
+    {
+      "id": "exam-009",
+      "front": "During variable annuity accumulation phase, what happens to interest, dividends, and capital gains?",
+      "back": "Automatically reinvested to buy more ACCUMULATION UNITS (not annuity units) and build up TAX DEFERRED. This tax deferral is the major advantage over direct mutual fund investment.",
+      "chapter": "annuities",
+      "section": 1,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "variable-annuity", "accumulation"]
+    },
+    {
+      "id": "exam-010",
+      "front": "How are payments from a TAX-QUALIFIED variable annuity taxed?",
+      "back": "100% TAXABLE as ordinary income. Contributions were tax-deductible, so the plan has a zero cost basis. ALL distributions are taxable. (Non-qualified annuities only tax the earnings portion.)",
+      "chapter": "annuities",
+      "section": 1,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "variable-annuity", "taxation"]
+    },
+    {
+      "id": "exam-011",
+      "front": "What does a rep NOT need to disclose when recommending a variable annuity?",
+      "back": "NOT 'premium reductions for enhanced riders' - enhanced riders INCREASE premium cost. Must disclose: surrender period/charge, tax penalties, mortality & expense fees, and charges for enhanced riders.",
+      "chapter": "annuities",
+      "section": 1,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "variable-annuity", "disclosure"]
+    },
+    {
+      "id": "exam-012",
+      "front": "An open-end fund has NAV of $10/share. What is the minimum purchase price?",
+      "back": "$10 (the NAV). Open-end funds are purchased at NAV plus any sales load. A no-load fund = just NAV. Closed-end funds trade at market price (which can differ from NAV) plus commission.",
+      "chapter": "funds",
+      "section": 1,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "mutual-funds", "NAV"]
+    },
+    {
+      "id": "exam-013",
+      "front": "How often must mutual funds send financial statements to shareholders?",
+      "back": "SEMI-ANNUALLY (twice per year). Mutual funds must send financial statements to shareholders two times per year.",
+      "chapter": "funds",
+      "section": 1,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "mutual-funds", "reporting"]
+    },
+    {
+      "id": "exam-014",
+      "front": "What does the municipal bond counsel NOT opine on?",
+      "back": "NOT FEASIBILITY (economic viability). Bond counsel opines on: validity, legality, and tax-exempt status. They examine legal/tax issues, not economic opinions.",
+      "chapter": "municipal",
+      "section": 1,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "municipal", "bond-counsel"]
+    },
+    {
+      "id": "exam-015",
+      "front": "A bond rated BBB by S&P is what quality?",
+      "back": "LOWEST QUALITY INVESTMENT GRADE. Investment grade ratings: AAA (highest), AA, A, BBB (lowest investment grade). Below BBB = speculative/junk.",
+      "chapter": "bonds",
+      "section": 1,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "bonds", "ratings"]
+    },
+    {
+      "id": "exam-016",
+      "front": "What is interpositioning and is it permitted?",
+      "back": "PROHIBITED. Interpositioning is adding unnecessary middlemen to a transaction, which increases costs to the customer. A registered representative cannot interposition themselves between customer and market.",
+      "chapter": "prohibited",
+      "section": 2,
+      "weight": 1.0,
+      "source": "exam-review",
+      "tags": ["exam-missed", "prohibited", "interpositioning"]
     }
   ]
 }
