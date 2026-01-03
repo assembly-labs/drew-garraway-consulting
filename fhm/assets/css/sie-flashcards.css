@@ -336,11 +336,11 @@
 
 .flashcard {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     /* Use flex-based height instead of fixed vh */
     height: 100%;
-    max-height: min(55vh, 450px);
-    min-height: 200px;
+    max-height: min(65vh, 550px);
+    min-height: 320px;
     cursor: pointer;
     transform-style: preserve-3d;
     transition: transform 0.4s ease;
@@ -349,8 +349,8 @@
 /* Taller cards on larger viewports */
 @media (min-height: 700px) {
     .flashcard {
-        max-height: min(60vh, 500px);
-        min-height: 280px;
+        max-height: min(70vh, 600px);
+        min-height: 400px;
     }
 }
 
@@ -373,17 +373,16 @@
     width: 100%;
     height: 100%;
     display: flex;
-    /* Use flex-start to prevent content from being pushed above scroll area */
-    align-items: flex-start;
+    /* Center content vertically and horizontally */
+    align-items: center;
     justify-content: center;
-    padding: var(--fh-space-md);
+    padding: var(--fh-space-lg);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08),
                 0 8px 40px rgba(0, 0, 0, 0.04);
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: visible;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -391,7 +390,7 @@
 @media (min-width: 400px) {
     .flashcard__front,
     .flashcard__back {
-        padding: var(--fh-space-lg);
+        padding: var(--fh-space-xl);
         border-radius: 16px;
     }
 }
@@ -409,17 +408,15 @@
 
 .flashcard__text {
     font-family: var(--fh-font-body);
-    font-size: clamp(1rem, 4vw, 1.375rem);
-    line-height: 1.5;
+    font-size: clamp(1.125rem, 4.5vw, 1.5rem);
+    line-height: 1.6;
     text-align: center;
-    /* Use margin auto for vertical centering with flex-start parent */
-    margin: auto 0;
+    margin: 0;
     /* Ensure text stays within card bounds */
     width: 100%;
     max-width: 100%;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    /* Prevent horizontal overflow */
     hyphens: auto;
     -webkit-hyphens: auto;
 }
@@ -698,12 +695,21 @@
     }
 
     .flashcard__front {
-        background: var(--fh-gray-800);
-        border-color: var(--fh-gray-700);
+        background: var(--fh-white);
+        border: 2px solid var(--fh-gray-600);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                    0 4px 16px rgba(0, 0, 0, 0.2);
     }
 
     .flashcard__front .flashcard__text {
-        color: var(--fh-cream);
+        color: var(--fh-gray-900);
+    }
+
+    .flashcard__back {
+        background: var(--fh-navy);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                    0 4px 16px rgba(0, 0, 0, 0.2);
     }
 
     .summary-stat__value {
