@@ -4,7 +4,7 @@
  */
 
 /* ============================================
-   Flashcard App Container
+   Flashcard App Container - Dark theme default
    ============================================ */
 .flashcard-app {
     display: flex;
@@ -12,7 +12,7 @@
     min-height: 100vh;
     min-height: 100dvh; /* Dynamic viewport height for mobile */
     min-height: -webkit-fill-available; /* iOS Safari fallback */
-    background: var(--fh-cream);
+    background: #1a1f2e; /* Dark blue-gray, easy on eyes */
     overflow: hidden;
     /* Safe area insets for notched devices */
     padding-left: env(safe-area-inset-left);
@@ -99,7 +99,7 @@
 
 .progress-ring__bg {
     fill: none;
-    stroke: var(--fh-gray-200);
+    stroke: rgba(255, 255, 255, 0.1);
     stroke-width: 8;
 }
 
@@ -119,18 +119,18 @@
     font-family: var(--fh-font-display);
     font-size: 1.75rem;
     font-weight: 600;
-    color: var(--fh-navy);
+    color: #e8eaed;
 }
 
 .start-title {
     font-family: var(--fh-font-display);
     font-size: 1.75rem;
-    color: var(--fh-navy);
+    color: #e8eaed;
     margin-bottom: var(--fh-space-sm);
 }
 
 .start-description {
-    color: var(--fh-gray-600);
+    color: rgba(255, 255, 255, 0.6);
     margin-bottom: var(--fh-space-xl);
 }
 
@@ -144,24 +144,24 @@
     flex-direction: column;
     gap: var(--fh-space-sm);
     font-size: 0.875rem;
-    color: var(--fh-gray-600);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .option-select {
     padding: var(--fh-space-sm) var(--fh-space-md);
     font-family: var(--fh-font-body);
     font-size: 1rem;
-    border: 1px solid var(--fh-gray-300);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 8px;
-    background: var(--fh-white);
-    color: var(--fh-gray-900);
+    background: #2a3142;
+    color: #e8eaed;
     cursor: pointer;
 }
 
 .option-select:focus {
     outline: none;
-    border-color: var(--fh-navy);
-    box-shadow: 0 0 0 3px rgba(0, 45, 98, 0.1);
+    border-color: var(--fh-sage);
+    box-shadow: 0 0 0 3px rgba(124, 152, 133, 0.2);
 }
 
 /* ============================================
@@ -240,7 +240,7 @@
 .progress-bar {
     flex: 1;
     height: 8px;
-    background: var(--fh-gray-200);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     overflow: hidden;
 }
@@ -255,7 +255,7 @@
 .progress-text {
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--fh-gray-700);
+    color: rgba(255, 255, 255, 0.7);
     white-space: nowrap;
     font-family: var(--fh-font-mono);
     min-width: 5ch;
@@ -290,7 +290,7 @@
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    color: var(--fh-gray-600);
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .counter--got-it .counter__value {
@@ -388,8 +388,8 @@
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border-radius: 20px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1),
-                0 12px 48px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                0 16px 48px rgba(0, 0, 0, 0.2);
     overflow: visible;
     -webkit-overflow-scrolling: touch;
 }
@@ -404,14 +404,15 @@
 }
 
 .flashcard__front {
-    background: var(--fh-white);
-    border: 2px solid var(--fh-gray-200);
+    background: #2a3142; /* Soft dark blue-gray */
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .flashcard__back {
-    background: var(--fh-navy);
+    background: #1e3a5f; /* Deep navy, slightly lighter than before */
     color: var(--fh-white);
     transform: rotateY(180deg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .flashcard__text {
@@ -430,12 +431,12 @@
 }
 
 .flashcard__front .flashcard__text {
-    color: var(--fh-navy);
-    font-weight: 600;
+    color: #e8eaed; /* Soft white, not harsh */
+    font-weight: 500;
 }
 
 .flashcard__back .flashcard__text {
-    color: var(--fh-white);
+    color: #f0f4f8; /* Slightly warm white */
     font-weight: 400;
 }
 
@@ -567,7 +568,7 @@
 .summary-title {
     font-family: var(--fh-font-display);
     font-size: 1.75rem;
-    color: var(--fh-navy);
+    color: #e8eaed; /* Soft white for dark theme */
     margin-bottom: var(--fh-space-lg);
 }
 
@@ -603,7 +604,7 @@
     font-family: var(--fh-font-display);
     font-size: 2rem;
     font-weight: 600;
-    color: var(--fh-navy);
+    color: #e8eaed; /* Soft white for dark theme */
 }
 
 @media (min-width: 400px) {
@@ -622,7 +623,7 @@
 
 .summary-stat__label {
     font-size: 0.75rem;
-    color: var(--fh-gray-500);
+    color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -764,80 +765,6 @@
 
     .action-btn__icon {
         font-size: 1.25rem;
-    }
-}
-
-/* ============================================
-   Dark Mode Support
-   ============================================ */
-@media (prefers-color-scheme: dark) {
-    .flashcard-app {
-        background: var(--fh-gray-900);
-    }
-
-    .start-title,
-    .summary-title {
-        color: var(--fh-cream);
-    }
-
-    .start-description {
-        color: var(--fh-gray-400);
-    }
-
-    .progress-ring__text {
-        color: var(--fh-cream);
-    }
-
-    .progress-ring__bg {
-        stroke: var(--fh-gray-700);
-    }
-
-    .option-label {
-        color: var(--fh-gray-400);
-    }
-
-    .option-select {
-        background: var(--fh-gray-800);
-        border-color: var(--fh-gray-700);
-        color: var(--fh-cream);
-    }
-
-    .progress-bar {
-        background: var(--fh-gray-700);
-    }
-
-    .progress-text {
-        color: var(--fh-gray-400);
-    }
-
-    .counter__label {
-        color: var(--fh-gray-500);
-    }
-
-    .flashcard__front {
-        background: var(--fh-white);
-        border: 2px solid var(--fh-gray-600);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
-                    0 4px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    .flashcard__front .flashcard__text {
-        color: var(--fh-gray-900);
-    }
-
-    .flashcard__back {
-        background: var(--fh-navy);
-        border: 2px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
-                    0 4px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    .summary-stat__value {
-        color: var(--fh-cream);
-    }
-
-    .summary-stat__label {
-        color: var(--fh-gray-500);
     }
 }
 
