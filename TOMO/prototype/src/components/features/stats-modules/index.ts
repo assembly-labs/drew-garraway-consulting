@@ -2,39 +2,45 @@
  * Stats Modules - Belt-Adaptive Dashboard Components
  *
  * Phase 1: White Belt Modules (Retention-focused)
- * - JourneyTimeline: Milestone tracking, dropout cliff positioning
- * - ConsistencyScore: Session count emphasis, streak tracking
+ * - YourProgress: Consolidated progress to 50 + weekly/monthly frequency
  * - FoundationsProgress: Fundamental technique checklist
  *
  * Phase 2: Blue Belt Modules (Identity & Game Development)
- * - YourStyle: Submission balance, emerging style label
- * - VulnerabilityMap: Where you're getting caught, defense suggestions
  * - TechniquePairings: Co-occurrence analysis, emerging chains
  * - BluesDetector: Dropout risk detection, interventions
  *
- * Phase 3: Purple Belt Modules (Depth & Systems)
- * - LongGame: Multi-year progression visualization
- * - SubmissionTrends: Finishing trends over time
- * - TechniqueMastery: Specialization depth by proficiency
+ * Phase 3: Purple/Brown Belt Modules (Depth & Systems)
+ * - YourJourney: Multi-year progression + submission trends (merged LongGame + SubmissionTrends)
+ * - TechniqueMastery: Specialization depth by proficiency (simplified)
+ *
+ * Universal Modules (shown to all belts):
+ * - RecentRolls: Defense coaching with video links
+ * - AttackProfile: Comprehensive submission story (in parent features/)
+ *
+ * REMOVED (consolidated into other modules):
+ * - JourneyTimeline, ConsistencyScore → merged into YourProgress
+ * - YourStyle, VulnerabilityMap → consolidated into AttackProfile
+ * - LongGame, SubmissionTrends → merged into YourJourney
  *
  * See: /internal-docs/research/STATS_MODULE_IMPLEMENTATION.md
  */
 
 // White Belt Modules
-export { JourneyTimeline } from './JourneyTimeline';
-export { ConsistencyScore } from './ConsistencyScore';
+export { YourProgress } from './YourProgress';
 export { FoundationsProgress } from './FoundationsProgress';
 
 // Blue Belt Modules
-export { YourStyle } from './YourStyle';
-export { VulnerabilityMap } from './VulnerabilityMap';
 export { TechniquePairings } from './TechniquePairings';
 export { BluesDetector } from './BluesDetector';
 
-// Purple Belt Modules
-export { LongGame } from './LongGame';
-export { SubmissionTrends } from './SubmissionTrends';
+// Purple/Brown Belt Modules
+export { YourJourney } from './YourJourney';
 export { TechniqueMastery } from './TechniqueMastery';
+
+// Archived modules (see _archived/README.md):
+// - JourneyTimeline, ConsistencyScore → merged into YourProgress
+// - YourStyle, VulnerabilityMap → consolidated into AttackProfile
+// - LongGame, SubmissionTrends → merged into YourJourney
 
 // Universal Modules
 export { RecentRolls } from './RecentRolls';

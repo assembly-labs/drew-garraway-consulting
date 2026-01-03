@@ -19,8 +19,10 @@
 
 **Web Prototype: COMPLETE**
 - All core features implemented
-- Deployed to tomo.pages.dev
+- Deployed to https://bjjj.pages.dev
 - Ready for TestFlight planning
+
+> **Note:** Deployment is manual. After pushing to GitHub, run `npm run deploy` from `/prototype` to publish changes. See `PROJECT_STATUS.md` for full workflow.
 
 **Next Phase: iOS TestFlight**
 - See `IOS_TESTFLIGHT_DEPLOYMENT_PLAN.md` for details

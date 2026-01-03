@@ -1,11 +1,14 @@
 /**
- * Technique Mastery - Purple Belt Stats Module
+ * Technique Mastery - Purple Belt Stats Module (Simplified)
  *
  * Shows specialization depth - techniques grouped by proficiency level.
  * Highlights signature moves and developing areas.
  *
  * Design: Proficiency tiers with drill counts
  * Data: TechniqueMasteryRecord[]
+ *
+ * What was REMOVED (handled elsewhere):
+ * - Depth analysis / primary system detection (AttackProfile has specialist nickname)
  */
 
 import { useMemo } from 'react';
@@ -93,38 +96,6 @@ export function TechniqueMastery({
       total: techniques.length,
     };
   }, [grouped, techniques]);
-
-  // Find primary system (most common category in advanced/proficient)
-  const primarySystem = useMemo(() => {
-    const advancedNames = grouped.advanced.map((t) => t.techniqueName.toLowerCase());
-
-    // Simple heuristic for system detection
-    const guardAttacks = ['triangle', 'armbar', 'omoplata', 'kimura'].filter((t) =>
-      advancedNames.some((n) => n.includes(t))
-    );
-
-    if (guardAttacks.length >= 2) {
-      return 'Closed guard attacks';
-    }
-
-    const chokes = ['rnc', 'rear naked', 'guillotine', 'darce', 'anaconda'].filter((t) =>
-      advancedNames.some((n) => n.includes(t))
-    );
-
-    if (chokes.length >= 2) {
-      return 'Choke specialist';
-    }
-
-    const legLocks = ['heel hook', 'knee bar', 'toe hold', 'calf'].filter((t) =>
-      advancedNames.some((n) => n.includes(t))
-    );
-
-    if (legLocks.length >= 2) {
-      return 'Leg lock system';
-    }
-
-    return null;
-  }, [grouped]);
 
   const copy = MODULE_COPY.find((c) => c.moduleId === 'technique-mastery');
 
@@ -228,24 +199,6 @@ export function TechniqueMastery({
           </div>
         );
       })}
-
-      {/* Depth Analysis */}
-      {primarySystem && (
-        <div style={styles.analysisBox}>
-          <div style={styles.analysisHeader}>
-            <Icons.Zap size={16} color="var(--color-gold)" />
-            <span style={styles.analysisTitle}>DEPTH ANALYSIS</span>
-          </div>
-          <p style={styles.analysisText}>
-            Primary system: <strong>{primarySystem}</strong>
-            {signatureMove && (
-              <>
-                {' '}({signatureMove.techniqueName} → chain)
-              </>
-            )}
-          </p>
-        </div>
-      )}
 
       {/* Insight */}
       <div style={styles.insightBox}>
@@ -457,33 +410,6 @@ const styles: Record<string, React.CSSProperties> = {
     fontStyle: 'italic',
     color: 'var(--color-gray-600)',
     paddingLeft: 'var(--space-sm)',
-  },
-  analysisBox: {
-    marginBottom: 'var(--space-lg)',
-    padding: 'var(--space-md)',
-    background: 'var(--color-gold-dim)',
-    borderLeft: '3px solid var(--color-gold)',
-  },
-  analysisHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 'var(--space-sm)',
-    marginBottom: 'var(--space-sm)',
-  },
-  analysisTitle: {
-    fontFamily: 'var(--font-mono)',
-    fontSize: 'var(--text-xs)',
-    fontWeight: 600,
-    letterSpacing: 'var(--tracking-wider)',
-    color: 'var(--color-gold)',
-  },
-  analysisText: {
-    fontFamily: 'var(--font-body)',
-    fontSize: 'var(--text-sm)',
-    fontWeight: 500,
-    color: 'var(--color-gray-300)',
-    margin: 0,
-    lineHeight: 'var(--leading-normal)',
   },
   insightBox: {
     padding: 'var(--space-md)',

@@ -22,8 +22,6 @@ import {
   type BeltLevel as CompetitionBeltLevel,
 } from '../../data/competitions';
 import {
-  DeadliestAttackCard,
-  AchillesHeelCard,
   BreakthroughHero,
   BreakthroughList,
   TournamentReadinessCard,
@@ -32,15 +30,11 @@ import {
 import type { StyleFingerprintData } from '../ui';
 import { AttackProfile } from './AttackProfile';
 import {
-  JourneyTimeline,
-  ConsistencyScore,
+  YourProgress,
   FoundationsProgress,
-  YourStyle,
-  VulnerabilityMap,
   TechniquePairings,
   BluesDetector,
-  LongGame,
-  SubmissionTrends,
+  YourJourney,
   TechniqueMastery,
   RecentRolls,
   type SubmissionReceived,
@@ -514,8 +508,6 @@ export function Dashboard(_props: DashboardProps) {
 
   // Animated count-up for stats
   const animatedStreak = useCountUp(stats.currentStreak, { duration: 500, delay: 200 });
-  const animatedSubmissions = useCountUp(stats.sparringRecord.wins, { duration: 500, delay: 100 });
-  const animatedTapped = useCountUp(stats.sparringRecord.losses, { duration: 500, delay: 150 });
 
   // Belt-adaptive streak glow threshold - higher threshold for more experienced practitioners
   // White belts: glow at 7 days (encourage early), Brown/Black: glow at higher streaks
@@ -880,23 +872,17 @@ export function Dashboard(_props: DashboardProps) {
       {/* ============================================
           WHITE BELT MODULES - Retention-focused stats
           Only shown for white belts to maximize retention
+
+          Consolidated: JourneyTimeline + ConsistencyScore → YourProgress
+          - Session count shown in Hero (not duplicated here)
+          - Streak shown in Streak Section (not duplicated here)
+          - Focus on progress to 50 + weekly/monthly frequency
           ============================================ */}
       {showWhiteBeltModules && (
         <>
-          {/* Journey Timeline - Milestones and dropout cliff positioning */}
-          <JourneyTimeline
+          {/* Your Progress - Progress to 50 and frequency tracking */}
+          <YourProgress
             sessionCount={stats.totalSessions}
-            trainingStartDate={isDemoMode && activeDemoProfile
-              ? '2024-07-15' // Mock start date for demo
-              : null
-            }
-          />
-
-          {/* Consistency Score - Session count and streak emphasis */}
-          <ConsistencyScore
-            sessionCount={stats.totalSessions}
-            currentStreak={stats.currentStreak}
-            longestStreak={stats.longestStreak}
             sessionsThisWeek={stats.thisMonth.sessions > 4 ? Math.min(3, Math.ceil(stats.thisMonth.sessions / 4)) : 2}
             sessionsThisMonth={stats.thisMonth.sessions}
             targetFrequency={3}
@@ -912,20 +898,15 @@ export function Dashboard(_props: DashboardProps) {
       {/* ============================================
           BLUE BELT MODULES - Identity & Game Development
           Only shown for blue belts
+
+          Consolidated:
+          - YourStyle, VulnerabilityMap → AttackProfile handles submission story
+          - RecentRolls handles defense coaching with videos
+          - Keep: TechniquePairings (unique drilling analysis)
+          - Keep: BluesDetector (unique intervention system)
           ============================================ */}
       {showBlueBeltModules && (
         <>
-          {/* Your Style - Submission balance and emerging style */}
-          <YourStyle
-            submissionsGiven={blueBeltData.submissionsGiven}
-            submissionsReceived={blueBeltData.submissionsReceived}
-          />
-
-          {/* Vulnerability Map - Where you're getting caught */}
-          <VulnerabilityMap
-            submissionsReceived={blueBeltData.submissionsReceived}
-          />
-
           {/* Technique Pairings - Co-occurrence analysis */}
           <TechniquePairings
             techniqueHistory={techniqueHistory}
@@ -945,23 +926,21 @@ export function Dashboard(_props: DashboardProps) {
       {/* ============================================
           PURPLE BELT MODULES - Depth & Systems
           Shown for purple, brown, and black belts
+
+          Consolidated:
+          - LongGame + SubmissionTrends → YourJourney
+          - TechniqueMastery simplified (depth analysis removed, in AttackProfile)
           ============================================ */}
       {showPurpleBeltModules && (
         <>
-          {/* Long Game - Multi-year progression visualization */}
-          <LongGame
+          {/* Your Journey - Multi-year progression + submission trends */}
+          <YourJourney
             yearlyData={purpleBeltData.yearlyData}
             totalSessions={purpleBeltData.totalSessions}
             totalMinutes={purpleBeltData.totalMinutes}
             sparringRounds={purpleBeltData.sparringRounds}
             trainingStartDate={purpleBeltData.trainingStartDate}
-          />
-
-          {/* Submission Trends - Finishing trends over time */}
-          <SubmissionTrends
-            yearlyData={purpleBeltData.yearlyData}
             submissionsGiven={purpleBeltData.submissionsGiven}
-            submissionsReceived={purpleBeltData.submissionsReceived}
           />
 
           {/* Technique Mastery - Specialization depth */}
@@ -986,134 +965,13 @@ export function Dashboard(_props: DashboardProps) {
       </section>
 
       {/* ============================================
-          SPARRING DOMINANCE - Full bleed grid
-          Only shown for blue+ belts (showCompetitionStats)
+          REMOVED: Sparring Dominance Grid + Submission Profile Cards
+
+          These were redundant with AttackProfile which shows:
+          - Subs Given / Tapped Out / Win Rate in footer
+          - Top 5 weapons (better than DeadliestAttackCard)
+          - Top 5 vulnerabilities (covered by RecentRolls)
           ============================================ */}
-      {dashboard.showCompetitionStats && (
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '1px',
-          background: 'var(--color-gray-800)',
-        }}
-      >
-        {/* SUBS GIVEN - GREEN (positive) */}
-        <div
-          style={{
-            background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, var(--color-black) 100%)',
-            padding: '40px 24px',
-          }}
-        >
-          <div
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'var(--text-xs)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.2em',
-              color: 'var(--color-positive)',
-              marginBottom: '12px',
-            }}
-          >
-            Subs Given
-          </div>
-          <div
-            style={{
-              fontSize: '64px',
-              fontWeight: 700,
-              color: 'var(--color-positive)',
-              lineHeight: 1,
-              letterSpacing: '-0.03em',
-            }}
-          >
-            {animatedSubmissions}
-          </div>
-          <div
-            style={{
-              fontSize: 'var(--text-sm)',
-              color: 'var(--color-gray-400)',
-              marginTop: '8px',
-            }}
-          >
-            total finishes
-          </div>
-        </div>
-
-        {/* SUBMITTED BY - RED (negative) */}
-        <div
-          style={{
-            background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, var(--color-black) 100%)',
-            padding: '40px 24px',
-          }}
-        >
-          <div
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'var(--text-xs)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.2em',
-              color: 'var(--color-negative)',
-              marginBottom: '12px',
-            }}
-          >
-            Submitted By
-          </div>
-          <div
-            style={{
-              fontSize: '64px',
-              fontWeight: 700,
-              color: 'var(--color-negative)',
-              lineHeight: 1,
-              letterSpacing: '-0.03em',
-            }}
-          >
-            {animatedTapped}
-          </div>
-          <div
-            style={{
-              fontSize: 'var(--text-sm)',
-              color: 'var(--color-gray-400)',
-              marginTop: '8px',
-            }}
-          >
-            times caught
-          </div>
-        </div>
-      </div>
-      )}
-
-      {/* ============================================
-          SUBMISSION PROFILE - Deadliest & Achilles Heel
-          Only shown for blue+ belts (showCompetitionStats)
-          ============================================ */}
-      {dashboard.showCompetitionStats && (
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: mockSubmissionStats.deadliestAttack && (profile.belt === 'white' || profile.belt === 'blue') && mockSubmissionStats.achillesHeel
-            ? '1fr 1fr'
-            : '1fr',
-          gap: '1px',
-          background: 'var(--color-gray-800)',
-        }}
-      >
-        {/* Deadliest Attack - only show after 50 total submissions */}
-        {mockSubmissionStats.deadliestAttack && mockSubmissionStats.totalGiven >= 50 && (
-          <DeadliestAttackCard
-            technique={mockSubmissionStats.deadliestAttack.technique}
-            count={mockSubmissionStats.deadliestAttack.count}
-          />
-        )}
-
-        {/* Achilles Heel - only for white and blue belts */}
-        {(profile.belt === 'white' || profile.belt === 'blue') && mockSubmissionStats.achillesHeel && (
-          <AchillesHeelCard
-            technique={mockSubmissionStats.achillesHeel.technique}
-            count={mockSubmissionStats.achillesHeel.count}
-          />
-        )}
-      </div>
-      )}
 
       {/* ============================================
           STREAK - Massive typographic statement

@@ -1,6 +1,6 @@
 # BJJ Progress Tracker - Project Status
 
-**Last Updated:** December 21, 2025 (Evening)
+**Last Updated:** January 3, 2026
 **Current Phase:** Voice Logging Feature Complete → Session History Built
 **Build Status:** ✅ PASSING
 
@@ -16,6 +16,46 @@
 | Design | Alliance BJJ-inspired (black/gold) |
 | **Next Priority** | Session Detail View, Edit Flow, First-Time Experience |
 | **Test Locally** | `cd prototype && npm run dev` → http://localhost:5173 |
+| **Production URL** | https://bjjj.pages.dev |
+
+---
+
+## Deployment
+
+> **Important:** Pushing to GitHub does NOT auto-deploy. Deployment is manual via wrangler CLI.
+
+### Commands
+
+```bash
+cd prototype
+
+# Build only (check for errors)
+npm run build
+
+# Deploy to production (requires build first)
+npm run deploy
+
+# Full workflow: build + commit + push + deploy
+npm run ship
+```
+
+### Workflow
+
+1. **Make changes** in `/prototype/src/`
+2. **Build** - `npm run build` (catches TypeScript/build errors)
+3. **Commit & Push** - `git add . && git commit -m "message" && git push`
+4. **Deploy** - `npm run deploy` (pushes to Cloudflare Pages)
+
+Or use `npm run ship` for steps 2-4 in one command.
+
+### Verify Deployment
+
+After `npm run deploy`, you'll see:
+```
+✨ Deployment complete! Take a peek over at https://[hash].bjjj.pages.dev
+```
+
+The production URL https://bjjj.pages.dev updates within seconds.
 
 ---
 
@@ -23,6 +63,7 @@
 
 | Date | Work Completed | Next Steps |
 |------|----------------|------------|
+| **Jan 3, 2026** | **Purple/Brown Belt Module Consolidation**: Merged LongGame + SubmissionTrends → YourJourney. Simplified TechniqueMastery (removed depth analysis, handled by AttackProfile). Archived old modules. Same consolidation pattern as white/blue belts. | Continue with session detail view, iOS prep |
 | **Dec 21, 2025 (Evening)** | **Voice Logger feature complete**: 6-phase flow (Idle→Recording→Processing→Gap-Fill→Review→Success), audio waveform visualization, smooth transitions, brand voice copy, session count. **Session History**: SessionHistory + SessionCard components, past sessions list grouped by date. **UX Flow**: App auto-opens voice logger on load, post-log navigates to journal history. **Conversation Design**: Created `/conversation-design/` folder with `CONVERSATION_DESIGN_FOUNDATION.md`. **File cleanup**: Removed duplicate .docx, renamed files, added .md extensions. | Session Detail View, Edit Mode, First-Time Experience, Error States |
 | Dec 21, 2025 (PM) | Research ingestion: 21 sources analyzed, data-requirements-analysis.md created, sources-bibliography.md created, Dashboard component built, UI components created (Header, TabBar, BeltBadge, StatCard, TrainingBadge, ProgressRing) | Voice Logger feature |
 | Dec 21, 2025 (AM) | Session continued - verified build, established session protocol | Start Phase 1 UI screens |
@@ -259,6 +300,24 @@ npm run build
 ---
 
 ## Change Log
+
+### January 3, 2026
+
+**Purple/Brown Belt Stats Module Consolidation:**
+- Merged `LongGame.tsx` + `SubmissionTrends.tsx` → `YourJourney.tsx`
+- Simplified `TechniqueMastery.tsx` (removed depth analysis section, already in AttackProfile)
+- Archived LongGame and SubmissionTrends to `_archived/` folder
+- Updated Dashboard.tsx to use YourJourney
+- Updated index.ts exports
+
+**Module Reduction Summary:**
+| Belt | Before | After |
+|------|--------|-------|
+| White | 3 → 2 | JourneyTimeline, ConsistencyScore → YourProgress |
+| Blue | 4 → 2 | YourStyle, VulnerabilityMap → AttackProfile |
+| Purple+ | 3 → 2 | LongGame, SubmissionTrends → YourJourney |
+
+**Principle Applied:** Show each insight ONCE, in the best possible way.
 
 ### December 21, 2025 (Evening Session)
 
