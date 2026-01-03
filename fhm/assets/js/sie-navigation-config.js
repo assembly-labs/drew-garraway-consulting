@@ -85,9 +85,9 @@ const SIECourseStructure = {
         },
         {
             number: 11,
-            title: "Securities Exchange Act of 1934",
+            title: "Margin Accounts",
             sections: [
-                { id: "11.1", title: "Exchange Act Provisions", file: "pages/sie/sie-chapter-11-provisions.html", locked: true }
+                { id: "11.1", title: "Margin Accounts", file: "pages/sie/sie-chapter-11-margin-accounts.html", locked: false }
             ]
         },
         {
