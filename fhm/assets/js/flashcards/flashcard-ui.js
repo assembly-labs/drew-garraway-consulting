@@ -203,7 +203,13 @@ const FlashcardUI = (function () {
         const progressText = progressElement.querySelector('.progress-text');
 
         progressBar.style.width = `${progress.percentage}%`;
-        progressText.textContent = `${progress.current} / ${progress.total}`;
+
+        // Show requeued count if there are cards to retry
+        if (progress.cardsRequeued > 0) {
+            progressText.textContent = `${progress.current} / ${progress.total} (${progress.cardsRequeued} to retry)`;
+        } else {
+            progressText.textContent = `${progress.current} / ${progress.total}`;
+        }
 
         // Update counter
         updateCounter();

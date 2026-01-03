@@ -11,6 +11,10 @@
 const FlashcardSession = (function () {
     let queue = [];
     let currentIndex = 0;
+    let originalQueueLength = 0;
+    let uniqueCardsCompleted = 0;
+    let cardsRequeued = 0;
+    let requeuedCardIds = new Set();
     let sessionStats = {
         seen: 0,
         markedProficient: 0,
@@ -111,6 +115,10 @@ const FlashcardSession = (function () {
     function start(allCards, sessionSize) {
         queue = buildQueue(allCards, sessionSize);
         currentIndex = 0;
+        originalQueueLength = queue.length;
+        uniqueCardsCompleted = 0;
+        cardsRequeued = 0;
+        requeuedCardIds = new Set();
         sessionStats = {
             seen: 0,
             markedProficient: 0,
@@ -141,6 +149,7 @@ const FlashcardSession = (function () {
             FlashcardProgress.markProficient(card.id);
             sessionStats.seen++;
             sessionStats.markedProficient++;
+            uniqueCardsCompleted++;
             currentIndex++;
         }
     }
@@ -154,6 +163,12 @@ const FlashcardSession = (function () {
             FlashcardProgress.markLearning(card.id);
             sessionStats.seen++;
             sessionStats.markedLearning++;
+
+            // Track if this is the first time this card is being requeued
+            if (!requeuedCardIds.has(card.id)) {
+                requeuedCardIds.add(card.id);
+                cardsRequeued++;
+            }
 
             // Move card to end of queue for another attempt
             queue.push(queue[currentIndex]);
@@ -183,12 +198,14 @@ const FlashcardSession = (function () {
      * @returns {Object} Progress info
      */
     function getProgress() {
+        const remaining = originalQueueLength - uniqueCardsCompleted;
         return {
-            current: Math.min(currentIndex + 1, queue.length),
-            total: queue.length,
-            remaining: Math.max(0, queue.length - currentIndex),
-            percentage: queue.length > 0
-                ? Math.round((currentIndex / queue.length) * 100)
+            current: uniqueCardsCompleted,
+            total: originalQueueLength,
+            remaining: remaining,
+            cardsRequeued: cardsRequeued,
+            percentage: originalQueueLength > 0
+                ? Math.round((uniqueCardsCompleted / originalQueueLength) * 100)
                 : 0
         };
     }
