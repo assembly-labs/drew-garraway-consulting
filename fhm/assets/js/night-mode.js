@@ -7,9 +7,8 @@
     'use strict';
 
     function isNightTime() {
-        const hour = new Date().getHours();
+        var hour = new Date().getHours();
         // Night mode: 5pm (17) to 9am (9)
-        // This means: hour >= 17 OR hour < 9
         return hour >= 17 || hour < 9;
     }
 
@@ -21,14 +20,18 @@
         }
     }
 
-    // Apply immediately when script loads
-    if (document.body) {
-        applyNightMode();
-    } else {
-        // If body isn't ready yet, wait for DOMContentLoaded
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', applyNightMode);
+    } else {
+        // DOM already loaded
+        applyNightMode();
     }
 
-    // Check every minute for time changes (in case user leaves page open)
-    setInterval(applyNightMode, 60000);
+    // Check every minute for time changes
+    setInterval(function() {
+        if (document.body) {
+            applyNightMode();
+        }
+    }, 60000);
 })();
