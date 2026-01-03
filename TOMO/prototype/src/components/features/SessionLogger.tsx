@@ -2,22 +2,26 @@
  * SessionLogger Component
  *
  * Unified entry point for logging training sessions.
- * Uses manual-first approach with voice assist option.
+ * Uses voice-first approach with memory-jogging core fields.
  *
  * Flow:
- * 1. ManualLogger form with "Tell me" button for voice assist
- * 2. Voice input fills form fields automatically
- * 3. User completes any missing required fields
- * 4. Review & Save
+ * 1. Entry screen with core fields (type, duration, sparring) + RECORD button
+ * 2. Voice recording captures session details
+ * 3. AI extracts structured data
+ * 4. Review screen shows filled form for editing
+ * 5. Save
  *
  * Data Collection Philosophy:
- * Only collect data users will reliably provide (exhausted post-training).
- * See: Data Science Audit (Dec 2024)
+ * - Tier 1 (Core): Training type, duration, sparring Y/N - captured via quick taps
+ * - Tier 2 (Details): Techniques, submissions, notes - captured via voice
+ * - User reviews and edits before saving
+ *
+ * See: Data Requirements Analysis, Voice Logging Conversation Design
  */
 
 import { useState, useCallback } from 'react';
+import { VoiceFirstLogger } from './VoiceFirstLogger';
 import { ManualLogger } from './ManualLogger';
-import { VoiceLogger } from './VoiceLogger';
 
 interface SessionLoggerProps {
   onComplete?: () => void;
@@ -25,35 +29,35 @@ interface SessionLoggerProps {
 }
 
 export function SessionLogger({ onComplete, onCancel }: SessionLoggerProps) {
-  const [showVoiceAssist, setShowVoiceAssist] = useState(false);
+  const [useManualEntry, setUseManualEntry] = useState(false);
 
-  // Handle voice assist request
-  const handleVoiceAssist = useCallback(() => {
-    setShowVoiceAssist(true);
+  // Handle "type instead" request
+  const handleTypeInstead = useCallback(() => {
+    setUseManualEntry(true);
   }, []);
 
-  // Handle voice assist completion (would fill form in production)
-  const handleVoiceComplete = useCallback(() => {
-    // In production, this would extract data from voice and fill the form
-    setShowVoiceAssist(false);
+  // Handle switching back to voice
+  const handleBackToVoice = useCallback(() => {
+    setUseManualEntry(false);
   }, []);
 
-  // If voice assist is active, show VoiceLogger overlay
-  if (showVoiceAssist) {
+  // Manual entry mode (fallback)
+  if (useManualEntry) {
     return (
-      <VoiceLogger
-        onComplete={handleVoiceComplete}
-        onCancel={() => setShowVoiceAssist(false)}
+      <ManualLogger
+        onComplete={onComplete}
+        onCancel={onCancel}
+        onVoiceAssist={handleBackToVoice}
       />
     );
   }
 
-  // Default: Manual-first form with voice assist option
+  // Default: Voice-first logger
   return (
-    <ManualLogger
+    <VoiceFirstLogger
       onComplete={onComplete}
       onCancel={onCancel}
-      onVoiceAssist={handleVoiceAssist}
+      onTypeInstead={handleTypeInstead}
     />
   );
 }
