@@ -116,7 +116,7 @@ function App() {
     <div style={{ minHeight: '100vh', backgroundColor: 'var(--color-black)' }}>
       {/* Header - changes based on current view */}
       <Header
-        title={currentView === 'profile' ? 'PROFILE' : currentView === 'settings' ? 'SETTINGS' : 'BJJJ'}
+        title={currentView === 'profile' ? 'PROFILE' : currentView === 'settings' ? 'SETTINGS' : 'TOMO'}
         showBackButton={currentView === 'profile' || currentView === 'settings'}
         onBack={() => currentView === 'settings' ? setCurrentView('profile') : setCurrentView(lastTabView)}
         userInitial={currentView !== 'profile' && currentView !== 'settings' ? userInitial : undefined}

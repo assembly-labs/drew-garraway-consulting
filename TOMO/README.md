@@ -1,4 +1,4 @@
-# BJJJ - BJJ Training Journal
+# TOMO - BJJ Training Journal
 
 A voice-first training journal for Brazilian Jiu-Jitsu practitioners to log sessions, track belt progression, and build a technique library.
 

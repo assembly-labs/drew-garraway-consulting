@@ -1,12 +1,12 @@
 /**
- * BJJ JOURNAL - BOLD DESIGN SYSTEM
+ * TOMO - BOLD DESIGN SYSTEM
  * Dark, editorial, typography-forward
  * Linear/Palantir inspired aesthetic
  *
  * DESIGN PRINCIPLES:
  * 1. NO EMOJIS - Use SVG lineart icons only
  * 2. Dark theme (#111111) with gold accents - softened for readability
- * 3. Inter + JetBrains Mono typography (thick, bold, readable)
+ * 3. Unbounded for headlines/numbers, Inter for body, JetBrains Mono for labels
  * 4. Large hero numbers (144px-180px)
  * 5. Editorial narrative sections
  * 6. Full-bleed sections with gradient backgrounds
@@ -15,8 +15,8 @@
  * 9. Lightened grays for better contrast on dark backgrounds
  */
 
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+/* Google Fonts - Unbounded for headlines/numbers, Inter for body, JetBrains Mono for labels */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800;900&display=swap');
 
 /* ========================================
    CSS VARIABLES (Design Tokens)
@@ -68,9 +68,10 @@
   --color-training-competition: #EF4444;
 
   /* Typography */
-  --font-heading: 'Inter', -apple-system, sans-serif;
-  --font-body: 'Inter', -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Unbounded', sans-serif;  /* Headlines, hero numbers */
+  --font-heading: 'Unbounded', sans-serif;  /* Page titles, section headers */
+  --font-body: 'Inter', -apple-system, sans-serif;  /* Body text, descriptions */
+  --font-mono: 'JetBrains Mono', monospace;  /* Labels, data values */
 
   /* Text Sizes
      CRITICAL: 12px is the MINIMUM font size.
@@ -367,8 +368,9 @@ code {
    ======================================== */
 
 .hero-demo {
+  font-family: var(--font-display);
   font-size: clamp(80px, 20vw, 144px);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 0.85;
   letter-spacing: -0.04em;
   background: linear-gradient(180deg, #ffffff 0%, #666666 100%);
@@ -429,8 +431,9 @@ code {
 .stat-label--negative { color: var(--color-negative); }
 
 .stat-value {
+  font-family: var(--font-display);
   font-size: 64px;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1;
   letter-spacing: -0.03em;
   color: var(--color-white);
@@ -746,8 +749,9 @@ code {
 }
 
 .streak-number {
+  font-family: var(--font-display);
   font-size: clamp(100px, 30vw, 160px);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 0.8;
   letter-spacing: -0.05em;
   color: var(--color-positive);

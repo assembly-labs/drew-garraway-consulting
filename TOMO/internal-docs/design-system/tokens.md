@@ -11,7 +11,7 @@ Bold, dark, editorial design system. Linear/Palantir inspired aesthetic.
 3. **Large Typography** - Hero numbers up to 144px-180px
 4. **Semantic Colors** - GREEN = positive, RED = negative
 5. **Full-Bleed Sections** - No rounded corners, gradient backgrounds
-6. **Inter + JetBrains Mono** - Maximum legibility for exhausted users
+6. **Unbounded + Inter + JetBrains Mono** - Headlines/numbers use Unbounded for bold impact, body text uses Inter for legibility
 7. **Medium Font Weight** - Body text uses 500 weight for better readability
 8. **Lightened Grays** - All gray values lifted for better contrast on dark backgrounds
 9. **12px Minimum Font Size** - Nothing smaller than 12px for mobile readability
@@ -88,13 +88,19 @@ All grays are lightened for better contrast on dark backgrounds.
 
 ### Font Families
 
-| Type | Font | Weight | Fallbacks |
-|------|------|--------|-----------|
-| Headings | Inter | **800** (ExtraBold) | -apple-system, sans-serif |
-| Subheads | Inter | **600-700** | -apple-system, sans-serif |
-| Body | Inter | **500** (Medium) | -apple-system, sans-serif |
-| Labels | JetBrains Mono | **500-600** | monospace |
-| Data Values | JetBrains Mono | **700** | monospace |
+| Type | Font | Weight | Fallbacks | Usage |
+|------|------|--------|-----------|-------|
+| Hero Numbers | Unbounded | **800-900** | sans-serif | Large stat displays (72px+) |
+| Headlines | Unbounded | **700-800** | sans-serif | Page titles, section headers |
+| Subheads | Inter | **600-700** | -apple-system, sans-serif | Card titles, list headings |
+| Body | Inter | **500** (Medium) | -apple-system, sans-serif | All body text, descriptions |
+| Labels | JetBrains Mono | **500-600** | monospace | Eyebrows, metadata, badges |
+| Data Values | JetBrains Mono | **700** | monospace | Small numbers, timestamps |
+
+> **Typography System:**
+> - **Unbounded** - Bold geometric display font for hero numbers and headlines. Creates strong visual impact.
+> - **Inter** - Clean, highly legible body font for all readable content. Optimized for exhausted users.
+> - **JetBrains Mono** - Monospace font for labels, data, and technical elements.
 
 ### Font Weight Guidelines
 

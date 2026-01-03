@@ -27,7 +27,6 @@ import {
   BreakthroughHero,
   BreakthroughList,
   TournamentReadinessCard,
-  BodyHeatMap,
   StyleFingerprint,
 } from '../ui';
 import type { StyleFingerprintData } from '../ui';
@@ -43,6 +42,8 @@ import {
   LongGame,
   SubmissionTrends,
   TechniqueMastery,
+  RecentRolls,
+  type SubmissionReceived,
 } from './stats-modules';
 import {
   MOCK_BLUE_BELT_STATS,
@@ -88,6 +89,34 @@ const mockStyleFingerprint: StyleFingerprintData = {
   weakestArea: 'Takedowns',
   balanceScore: 55,
 };
+
+// Mock submissions received - WHITE BELT (common upper body submissions)
+const MOCK_WHITE_BELT_SUBMISSIONS: SubmissionReceived[] = [
+  { technique: 'Triangle', daysAgo: 1 },
+  { technique: 'Armbar', daysAgo: 2 },
+  { technique: 'Triangle', daysAgo: 3 },
+  { technique: 'RNC', daysAgo: 4 },
+  { technique: 'Triangle', daysAgo: 5 },
+  { technique: 'Guillotine', daysAgo: 6 },
+];
+
+// Mock submissions received - BLUE BELT (leg lock focus)
+const MOCK_BLUE_BELT_SUBMISSIONS: SubmissionReceived[] = [
+  { technique: 'Heel Hook', daysAgo: 1 },
+  { technique: 'Ankle Lock', daysAgo: 2 },
+  { technique: 'Heel Hook', daysAgo: 3 },
+  { technique: 'Kneebar', daysAgo: 4 },
+  { technique: 'Heel Hook', daysAgo: 5 },
+  { technique: 'Ankle Lock', daysAgo: 7 },
+];
+
+// Mock submissions received - PURPLE+ BELT (varied advanced attacks)
+const MOCK_PURPLE_BELT_SUBMISSIONS: SubmissionReceived[] = [
+  { technique: 'Heel Hook', daysAgo: 2 },
+  { technique: 'Darce', daysAgo: 3 },
+  { technique: 'Kimura', daysAgo: 5 },
+  { technique: 'Kneebar', daysAgo: 6 },
+];
 
 // Hero metric configuration by primary metric type
 interface HeroMetric {
@@ -830,7 +859,8 @@ export function Dashboard(_props: DashboardProps) {
       </section>
 
       {/* ============================================
-          BODY HEAT MAP - Attack Profile with HUD targeting
+          WATCH OUT - Vulnerability alert with defense coaching
+          Belt-specific: White belts see common subs, Blue belts see leg locks
           ============================================ */}
       <section
         style={{
@@ -838,9 +868,12 @@ export function Dashboard(_props: DashboardProps) {
           borderTop: '1px solid var(--color-gray-800)',
         }}
       >
-        <BodyHeatMap
-          data={mockSubmissionStats.bodyHeatMap}
-          techniqueBreakdown={mockSubmissionStats.techniqueBreakdown}
+        <RecentRolls
+          submissionsReceived={
+            profile.belt === 'white' ? MOCK_WHITE_BELT_SUBMISSIONS :
+            profile.belt === 'blue' ? MOCK_BLUE_BELT_SUBMISSIONS :
+            MOCK_PURPLE_BELT_SUBMISSIONS
+          }
         />
       </section>
 

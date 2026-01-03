@@ -1,16 +1,16 @@
-/* Google Fonts - Inter & JetBrains Mono (must be first) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+/* Google Fonts - Unbounded for headlines/numbers, Inter for body, JetBrains Mono for labels (must be first) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800;900&display=swap');
 
 @import "tailwindcss";
 
 /* ========================================
-   ALLY - BOLD NEW DESIGN SYSTEM
+   TOMO - BOLD DESIGN SYSTEM
    Dark, editorial, typography-forward
 
    DESIGN PRINCIPLES:
    1. NO EMOJIS - Use SVG lineart icons only
-   2. Dark theme (#0a0a0a) with gold accents
-   3. Inter + JetBrains Mono typography (thick, bold, readable)
+   2. Dark theme (#111111) with gold accents
+   3. Unbounded for headlines/numbers, Inter for body, JetBrains Mono for labels
    4. Large hero numbers (144px-180px)
    5. Editorial narrative sections
    6. Full-bleed sections with gradient backgrounds
@@ -102,11 +102,12 @@
   --color-training-competition: #EF4444;
 
   /* ========================================
-     TYPOGRAPHY - Inter System (thick & bold)
+     TYPOGRAPHY - Unbounded + Inter + JetBrains Mono
      ======================================== */
-  --font-heading: 'Inter', -apple-system, sans-serif;
-  --font-body: 'Inter', -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Unbounded', sans-serif;  /* Hero numbers, headlines */
+  --font-heading: 'Unbounded', sans-serif;  /* Page titles, section headers */
+  --font-body: 'Inter', -apple-system, sans-serif;  /* Body text, descriptions */
+  --font-mono: 'JetBrains Mono', monospace;  /* Labels, data values */
 
   /* Text sizes - Bold editorial scale
      CRITICAL: 12px is the MINIMUM font size.
@@ -300,8 +301,9 @@ a:hover {
    ======================================== */
 
 .hero-stat {
+  font-family: var(--font-display);
   font-size: var(--text-hero);
-  font-weight: 900;  /* Black weight for maximum impact */
+  font-weight: 800;  /* Unbounded ExtraBold for maximum impact */
   line-height: var(--leading-none);
   letter-spacing: var(--tracking-tight);
   background: linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-400) 100%);
@@ -311,8 +313,9 @@ a:hover {
 }
 
 .hero-mega {
+  font-family: var(--font-display);
   font-size: var(--text-mega);
-  font-weight: 900;  /* Black weight for maximum impact */
+  font-weight: 900;  /* Unbounded Black for maximum impact */
   line-height: var(--leading-none);
   letter-spacing: var(--tracking-tighter);
   color: var(--color-white);
@@ -443,8 +446,9 @@ a:hover {
 }
 
 .insight-value {
+  font-family: var(--font-display);
   font-size: var(--text-4xl);
-  font-weight: 800;  /* Extra bold for insight numbers */
+  font-weight: 800;  /* Unbounded ExtraBold for insight numbers */
   letter-spacing: var(--tracking-tight);
   line-height: 1;
 }
@@ -800,9 +804,9 @@ a:hover {
 }
 
 .stat-value {
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
   font-size: var(--text-4xl);
-  font-weight: 800;  /* Extra bold for stat numbers */
+  font-weight: 800;  /* Unbounded ExtraBold for stat numbers */
   color: var(--color-white);
   letter-spacing: var(--tracking-tight);
 }
@@ -1233,8 +1237,9 @@ a:hover {
 }
 
 .streak-number {
+  font-family: var(--font-display);
   font-size: clamp(120px, 35vw, 180px);
-  font-weight: 900;  /* Black weight for streak hero */
+  font-weight: 800;  /* Unbounded ExtraBold for streak hero */
   line-height: 0.8;
   letter-spacing: -0.05em;
   color: var(--color-white);

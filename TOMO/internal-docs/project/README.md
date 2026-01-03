@@ -19,7 +19,7 @@
 
 **Web Prototype: COMPLETE**
 - All core features implemented
-- Deployed to bjjj.pages.dev
+- Deployed to tomo.pages.dev
 - Ready for TestFlight planning
 
 **Next Phase: iOS TestFlight**

@@ -57,7 +57,7 @@ export function Settings({ onBack }: SettingsProps) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'bjjj-export.json';
+    a.download = 'tomo-export.json';
     a.click();
     URL.revokeObjectURL(url);
   };

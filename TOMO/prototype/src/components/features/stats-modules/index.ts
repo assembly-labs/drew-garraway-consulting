@@ -36,6 +36,10 @@ export { LongGame } from './LongGame';
 export { SubmissionTrends } from './SubmissionTrends';
 export { TechniqueMastery } from './TechniqueMastery';
 
+// Universal Modules
+export { RecentRolls } from './RecentRolls';
+export type { SubmissionReceived, RollRecord, BeltLevel as RollBeltLevel } from './RecentRolls';
+
 // Re-export types and utilities from data
 export {
   JOURNEY_MILESTONES,

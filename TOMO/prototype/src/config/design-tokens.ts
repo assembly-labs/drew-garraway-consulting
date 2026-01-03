@@ -1,8 +1,13 @@
 /**
- * BJJ Journal Design Tokens
+ * TOMO Design Tokens
  *
  * THIS FILE IS DERIVED FROM THE DESIGN SYSTEM.
  * Source of truth: /internal-docs/design-system/tokens.md
+ *
+ * Typography System:
+ * - Unbounded: Hero numbers, headlines (display font)
+ * - Inter: Body text, descriptions (readable font)
+ * - JetBrains Mono: Labels, data values (monospace)
  *
  * When the design system changes:
  * 1. Update /internal-docs/design-system/styles.css first
@@ -73,9 +78,10 @@ export const colors = {
 
 export const typography = {
   fontFamily: {
-    heading: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-    body: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-    mono: 'JetBrains Mono, SF Mono, Monaco, monospace',
+    display: 'Unbounded, sans-serif',  // Hero numbers, headlines
+    heading: 'Unbounded, sans-serif',  // Page titles, section headers
+    body: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',  // Body text
+    mono: 'JetBrains Mono, SF Mono, Monaco, monospace',  // Labels, data
   },
 
   /**
@@ -232,6 +238,7 @@ export const cssVars = {
   colorNegative: cssVar('color-negative'),
 
   // Typography
+  fontDisplay: cssVar('font-display'),
   fontHeading: cssVar('font-heading'),
   fontBody: cssVar('font-body'),
   fontMono: cssVar('font-mono'),

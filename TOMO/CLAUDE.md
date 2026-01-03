@@ -1,4 +1,4 @@
-# BJJ Journal - Project Context for Claude
+# TOMO (友) - BJJ Training Journal - Project Context for Claude
 
 ## Project Overview
 
@@ -26,7 +26,7 @@ BJJ Journal is a voice-first training journal app for Brazilian Jiu-Jitsu practi
 
 ```
 LOCAL (your laptop)  →  REMOTE (GitHub)  →  PRODUCTION (live site)
-    npm run dev           git push            GitHub Actions auto-deploys
+    npm run dev           git push            wrangler deploy
    localhost:5173                            bjjj.pages.dev
 ```
 
@@ -37,7 +37,7 @@ When making changes:
 1. **Build** - Run `npm run build` (from `/prototype`) to check for errors
 2. **Commit** - Commit changes to git with a clear message
 3. **Push** - Push to `main` branch
-4. **Deploy** - Run `wrangler pages deploy dist --project-name=bjjj --branch=main` (from `/prototype`)
+4. **Deploy** - Run `npm run deploy` (from `/prototype`)
 
 **Deployment happens immediately** via wrangler CLI. Changes are live on bjjj.pages.dev within seconds.
 
@@ -47,7 +47,8 @@ When making changes:
 |---------|--------------|
 | `npm run dev` | Local preview at localhost:5173 |
 | `npm run build` | Compile and check for errors |
-| `wrangler pages deploy dist --project-name=bjjj --branch=main` | Deploy to production |
+| `npm run deploy` | Deploy to production (bjjj.pages.dev) |
+| `npm run ship` | Build + commit + push + deploy (full workflow) |
 
 ### Testing Belt Personalization
 
@@ -202,7 +203,7 @@ Our app speaks like a knowledgeable, warm, and grounded training partner:
 3. **Large Typography** - Hero numbers up to 144-180px
 4. **Semantic Colors** - GREEN = positive, RED = negative (never swap)
 5. **Full-Bleed Sections** - Minimal rounded corners, gradient backgrounds
-6. **Inter + JetBrains Mono** - Maximum legibility for exhausted users
+6. **Unbounded + Inter + JetBrains Mono** - Unbounded for headlines/numbers, Inter for body, JetBrains Mono for labels
 7. **Font Weight 500+ Only** - Weight 400 is PROHIBITED (too thin for dark backgrounds)
 8. **12px Minimum Font Size** - Nothing smaller, ever
 
@@ -217,7 +218,8 @@ See `/internal-docs/design-system/tokens.md` for complete reference. Key values:
 - `--color-negative`: `#ef4444` (losses, errors)
 
 **Typography:**
-- Headings: Inter, weight 800 (ExtraBold)
+- Hero Numbers: Unbounded, weight 800-900 (for stats 72px+)
+- Headlines: Unbounded, weight 700-800 (page titles, section headers)
 - Body: Inter, weight 500 (Medium) - REQUIRED MINIMUM
 - Labels: JetBrains Mono, weight 500-600
 
