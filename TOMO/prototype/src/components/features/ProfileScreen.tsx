@@ -14,6 +14,7 @@ import { useUserProfile, PROFILE_QUESTIONS, type BeltLevel } from '../../context
 import { EditSheet } from './EditSheet';
 import { ProfileNudge } from './ProfileNudge';
 import { useBeltPersonalization } from '../../hooks';
+import type { Persona } from '../../data/personas';
 
 interface ProfileScreenProps {
   onNavigate?: (view: string) => void;
@@ -43,6 +44,7 @@ export function ProfileScreen({ onNavigate }: ProfileScreenProps) {
     getNextNudgeQuestion,
     skipQuestion,
     resetProfile,
+    activeDemoProfile,
   } = useUserProfile();
 
   const [activeQuestion, setActiveQuestion] = useState<typeof PROFILE_QUESTIONS[0] | null>(null);
@@ -79,10 +81,10 @@ export function ProfileScreen({ onNavigate }: ProfileScreenProps) {
     }}>
       {/* Profile Header */}
       <div className="card" style={{ textAlign: 'center' }}>
-        {/* Avatar placeholder */}
+        {/* Avatar */}
         <div style={{
-          width: 80,
-          height: 80,
+          width: 120,
+          height: 120,
           borderRadius: 'var(--radius-full)',
           backgroundColor: 'var(--color-gray-800)',
           margin: '0 auto var(--space-md)',
@@ -92,8 +94,22 @@ export function ProfileScreen({ onNavigate }: ProfileScreenProps) {
           fontSize: 'var(--text-2xl)',
           fontWeight: 700,
           color: 'var(--color-white)',
+          overflow: 'hidden',
+          border: `3px solid ${BELT_COLORS[profile.belt]}`,
         }}>
-          {profile.name.charAt(0).toUpperCase()}
+          {activeDemoProfile && (activeDemoProfile as Persona).avatarUrl ? (
+            <img
+              src={(activeDemoProfile as Persona).avatarUrl}
+              alt={profile.name}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+            />
+          ) : (
+            profile.name.charAt(0).toUpperCase()
+          )}
         </div>
 
         <h2 style={{
