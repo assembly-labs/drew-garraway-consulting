@@ -21,49 +21,44 @@
 }
 
 /* ============================================
-   Header
+   Header - Compact for mobile
    ============================================ */
 .flashcard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--fh-space-sm) var(--fh-space-md);
-    padding-top: calc(var(--fh-space-sm) + env(safe-area-inset-top));
+    padding: var(--fh-space-xs) var(--fh-space-md);
+    padding-top: calc(var(--fh-space-xs) + env(safe-area-inset-top));
     background: var(--fh-navy);
     color: var(--fh-white);
     /* Leave room for back button on left */
-    padding-left: 80px;
+    padding-left: 72px;
+    min-height: 44px;
+    flex-shrink: 0;
 }
 
 @media (max-width: 360px) {
     .flashcard-header {
-        flex-direction: column;
-        gap: var(--fh-space-xs);
-        padding-left: 70px;
+        padding-left: 64px;
         padding-right: var(--fh-space-sm);
     }
 }
 
 .flashcard-title {
     font-family: var(--fh-font-display);
-    font-size: 1.125rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
     color: var(--fh-white);
     margin: 0;
-}
-
-@media (max-width: 360px) {
-    .flashcard-title {
-        font-size: 1rem;
-    }
 }
 
 .flashcard-stats {
     display: flex;
     align-items: center;
     gap: var(--fh-space-xs);
-    font-size: 0.75rem;
-    opacity: 0.9;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    opacity: 0.95;
 }
 
 .stat-divider {
@@ -221,56 +216,57 @@
 }
 
 /* ============================================
-   Session View
+   Session View - Optimized for iPhone 12 Pro
    ============================================ */
 .flashcard-session {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: var(--fh-space-sm);
+    padding: var(--fh-space-sm) var(--fh-space-md);
     padding-bottom: 0;
     overflow: hidden;
     min-height: 0; /* Allow flex shrinking */
+    gap: var(--fh-space-xs);
 }
 
-/* Progress Bar */
+/* Progress Bar - More prominent */
 .session-progress {
     display: flex;
     align-items: center;
-    gap: var(--fh-space-sm);
-    margin-bottom: var(--fh-space-xs);
+    gap: var(--fh-space-md);
     flex-shrink: 0;
 }
 
 .progress-bar {
     flex: 1;
-    height: 4px;
+    height: 8px;
     background: var(--fh-gray-200);
-    border-radius: 2px;
+    border-radius: 4px;
     overflow: hidden;
 }
 
 .progress-bar__fill {
     height: 100%;
-    background: var(--fh-sage);
-    border-radius: 2px;
+    background: linear-gradient(90deg, var(--fh-sage), #8fb099);
+    border-radius: 4px;
     transition: width 0.3s ease;
 }
 
 .progress-text {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--fh-gray-600);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--fh-gray-700);
     white-space: nowrap;
     font-family: var(--fh-font-mono);
+    min-width: 5ch;
+    text-align: right;
 }
 
-/* Session Counter - inline on mobile */
+/* Session Counter - Compact inline display */
 .session-counter {
     display: flex;
     justify-content: center;
-    gap: var(--fh-space-lg);
-    margin-bottom: var(--fh-space-xs);
+    gap: var(--fh-space-xl);
     flex-shrink: 0;
 }
 
@@ -278,22 +274,23 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: var(--fh-space-xs);
+    gap: var(--fh-space-sm);
 }
 
 .counter__value {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 700;
     font-family: var(--fh-font-mono);
-    min-width: 1.5ch;
+    min-width: 2ch;
     text-align: center;
 }
 
 .counter__label {
-    font-size: 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: var(--fh-gray-500);
+    letter-spacing: 0.02em;
+    color: var(--fh-gray-600);
 }
 
 .counter--got-it .counter__value {
@@ -304,23 +301,24 @@
     color: var(--fh-burgundy);
 }
 
-/* Larger counters on bigger screens */
-@media (min-width: 400px) {
+/* Stacked counters on larger screens */
+@media (min-width: 500px) {
     .counter {
         flex-direction: column;
+        gap: var(--fh-space-xs);
     }
 
     .counter__value {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
     }
 
     .counter__label {
-        font-size: 0.75rem;
+        font-size: 0.8125rem;
     }
 }
 
 /* ============================================
-   Flashcard
+   Flashcard - Optimized for iPhone 12 Pro (390x844)
    ============================================ */
 .flashcard-container {
     flex: 1;
@@ -331,26 +329,36 @@
     touch-action: none; /* Enable custom touch handling */
     user-select: none;
     min-height: 0; /* Allow flex shrinking */
-    padding: var(--fh-space-xs);
+    padding: var(--fh-space-sm);
 }
 
 .flashcard {
     width: 100%;
-    max-width: 500px;
-    /* Use flex-based height instead of fixed vh */
+    max-width: 380px;
+    /* Flexible height that adapts to available space */
     height: 100%;
-    max-height: min(65vh, 550px);
-    min-height: 320px;
+    max-height: min(52vh, 420px);
+    min-height: 280px;
     cursor: pointer;
     transform-style: preserve-3d;
-    transition: transform 0.4s ease;
+    transition: transform 0.35s ease;
 }
 
-/* Taller cards on larger viewports */
-@media (min-height: 700px) {
+/* iPhone 12 Pro and similar (390px width, 844px height) */
+@media (min-width: 380px) and (min-height: 800px) {
     .flashcard {
-        max-height: min(70vh, 600px);
-        min-height: 400px;
+        max-width: 360px;
+        max-height: min(50vh, 400px);
+        min-height: 320px;
+    }
+}
+
+/* Larger phones and tablets */
+@media (min-height: 900px) {
+    .flashcard {
+        max-width: 420px;
+        max-height: min(55vh, 480px);
+        min-height: 360px;
     }
 }
 
@@ -376,22 +384,22 @@
     /* Center content vertically and horizontally */
     align-items: center;
     justify-content: center;
-    padding: var(--fh-space-lg);
+    padding: var(--fh-space-xl);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08),
-                0 8px 40px rgba(0, 0, 0, 0.04);
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1),
+                0 12px 48px rgba(0, 0, 0, 0.05);
     overflow: visible;
     -webkit-overflow-scrolling: touch;
 }
 
-/* Larger padding on bigger screens */
-@media (min-width: 400px) {
+/* Even more padding on larger screens */
+@media (min-width: 500px) {
     .flashcard__front,
     .flashcard__back {
-        padding: var(--fh-space-xl);
-        border-radius: 16px;
+        padding: var(--fh-space-2xl);
+        border-radius: 24px;
     }
 }
 
@@ -408,8 +416,8 @@
 
 .flashcard__text {
     font-family: var(--fh-font-body);
-    font-size: clamp(1.125rem, 4.5vw, 1.5rem);
-    line-height: 1.6;
+    font-size: clamp(1.125rem, 5vw, 1.625rem);
+    line-height: 1.5;
     text-align: center;
     margin: 0;
     /* Ensure text stays within card bounds */
@@ -423,7 +431,7 @@
 
 .flashcard__front .flashcard__text {
     color: var(--fh-navy);
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .flashcard__back .flashcard__text {
@@ -431,77 +439,96 @@
     font-weight: 400;
 }
 
-/* Swipe visual feedback */
+/* Swipe visual feedback - Brand colors */
 .flashcard--swiping-horizontal {
-    box-shadow: 0 0 20px rgba(255, 165, 0, 0.4);
+    box-shadow: 0 0 30px rgba(107, 39, 55, 0.4);
 }
 
 .flashcard--swiping-up {
-    box-shadow: 0 0 20px rgba(124, 152, 133, 0.5);
+    box-shadow: 0 0 30px rgba(124, 152, 133, 0.5);
 }
 
 /* ============================================
-   Action Buttons (mobile-friendly alternative to swipe)
+   Action Buttons - Large tap targets for mobile
    ============================================ */
 .action-buttons {
     display: flex;
     justify-content: center;
     gap: var(--fh-space-md);
-    padding: var(--fh-space-sm) var(--fh-space-md);
-    padding-bottom: calc(var(--fh-space-md) + env(safe-area-inset-bottom));
+    padding: var(--fh-space-md);
+    padding-bottom: calc(var(--fh-space-lg) + env(safe-area-inset-bottom));
     flex-shrink: 0;
 }
 
 .action-btn {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 2px;
-    padding: var(--fh-space-sm) var(--fh-space-md);
-    min-width: 80px;
-    min-height: 56px;
+    gap: var(--fh-space-sm);
+    padding: var(--fh-space-md) var(--fh-space-xl);
+    flex: 1;
+    max-width: 180px;
+    min-height: 60px;
     font-family: var(--fh-font-body);
-    font-size: 0.6875rem;
+    font-size: 0.9375rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
     border: none;
-    border-radius: 12px;
+    border-radius: 16px;
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
     -webkit-tap-highlight-color: transparent;
 }
 
 .action-btn__icon {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     line-height: 1;
 }
 
 .action-btn--dont-know {
     background: var(--fh-burgundy);
     color: var(--fh-white);
+    box-shadow: 0 4px 12px rgba(107, 39, 55, 0.3);
 }
 
 .action-btn--dont-know:hover {
-    background: #5a2230;
+    background: #7a3040;
+    box-shadow: 0 6px 16px rgba(107, 39, 55, 0.4);
 }
 
 .action-btn--dont-know:active {
-    transform: scale(0.96);
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(107, 39, 55, 0.3);
 }
 
 .action-btn--got-it {
     background: var(--fh-sage);
     color: var(--fh-white);
+    box-shadow: 0 4px 12px rgba(124, 152, 133, 0.3);
 }
 
 .action-btn--got-it:hover {
-    background: #6b8774;
+    background: #8ba990;
+    box-shadow: 0 6px 16px rgba(124, 152, 133, 0.4);
 }
 
 .action-btn--got-it:active {
-    transform: scale(0.96);
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(124, 152, 133, 0.3);
+}
+
+/* Full-width buttons on very small screens */
+@media (max-width: 360px) {
+    .action-buttons {
+        flex-direction: column;
+        gap: var(--fh-space-sm);
+    }
+
+    .action-btn {
+        max-width: 100%;
+    }
 }
 
 /* Hide action buttons on desktop (swipe/keyboard works well) */
@@ -644,6 +671,99 @@
         min-height: calc(100vh - 4rem);
         border-radius: 0 0 16px 16px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+}
+
+/* ============================================
+   Landscape Mode - Horizontal layout for phones
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+    .flashcard-header {
+        padding-top: var(--fh-space-xs);
+        padding-bottom: var(--fh-space-xs);
+        min-height: 36px;
+    }
+
+    .flashcard-title {
+        font-size: 0.875rem;
+    }
+
+    .flashcard-stats {
+        font-size: 0.75rem;
+    }
+
+    .flashcard-session {
+        flex-direction: row;
+        padding: var(--fh-space-xs) var(--fh-space-md);
+        gap: var(--fh-space-md);
+    }
+
+    .session-progress {
+        display: none; /* Hide progress bar in landscape */
+    }
+
+    .session-counter {
+        flex-direction: column;
+        justify-content: center;
+        gap: var(--fh-space-sm);
+        min-width: 80px;
+    }
+
+    .counter {
+        flex-direction: row;
+        gap: var(--fh-space-xs);
+    }
+
+    .counter__value {
+        font-size: 1.25rem;
+    }
+
+    .counter__label {
+        font-size: 0.625rem;
+    }
+
+    .flashcard-container {
+        flex: 1;
+        padding: var(--fh-space-xs);
+    }
+
+    .flashcard {
+        max-width: none;
+        max-height: 100%;
+        min-height: 180px;
+    }
+
+    .flashcard__front,
+    .flashcard__back {
+        padding: var(--fh-space-md);
+        border-radius: 12px;
+    }
+
+    .flashcard__text {
+        font-size: clamp(0.9375rem, 3vw, 1.25rem);
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        justify-content: center;
+        padding: var(--fh-space-xs);
+        padding-right: calc(var(--fh-space-sm) + env(safe-area-inset-right));
+        padding-bottom: var(--fh-space-xs);
+        gap: var(--fh-space-sm);
+    }
+
+    .action-btn {
+        flex-direction: column;
+        min-width: 70px;
+        max-width: 70px;
+        min-height: 70px;
+        padding: var(--fh-space-sm);
+        font-size: 0.625rem;
+        gap: 2px;
+    }
+
+    .action-btn__icon {
+        font-size: 1.25rem;
     }
 }
 
