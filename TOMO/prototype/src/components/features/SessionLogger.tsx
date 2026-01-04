@@ -19,9 +19,7 @@
  * See: Data Requirements Analysis, Voice Logging Conversation Design
  */
 
-import { useState, useCallback } from 'react';
 import { VoiceFirstLogger } from './VoiceFirstLogger';
-import { ManualLogger } from './ManualLogger';
 
 interface SessionLoggerProps {
   onComplete?: () => void;
@@ -29,35 +27,11 @@ interface SessionLoggerProps {
 }
 
 export function SessionLogger({ onComplete, onCancel }: SessionLoggerProps) {
-  const [useManualEntry, setUseManualEntry] = useState(false);
-
-  // Handle "type instead" request
-  const handleTypeInstead = useCallback(() => {
-    setUseManualEntry(true);
-  }, []);
-
-  // Handle switching back to voice
-  const handleBackToVoice = useCallback(() => {
-    setUseManualEntry(false);
-  }, []);
-
-  // Manual entry mode (fallback)
-  if (useManualEntry) {
-    return (
-      <ManualLogger
-        onComplete={onComplete}
-        onCancel={onCancel}
-        onVoiceAssist={handleBackToVoice}
-      />
-    );
-  }
-
-  // Default: Voice-first logger
+  // Voice-first logger (primary mode)
   return (
     <VoiceFirstLogger
       onComplete={onComplete}
       onCancel={onCancel}
-      onTypeInstead={handleTypeInstead}
     />
   );
 }

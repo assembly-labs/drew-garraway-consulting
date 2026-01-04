@@ -184,18 +184,49 @@ export function SubmissionPicker({
         marginBottom: 'var(--space-lg)',
       }}
     >
-      {/* Label */}
+      {/* Label with + Add button */}
       <div
         style={{
-          fontSize: 'var(--text-sm)',
-          fontWeight: 600,
-          textTransform: 'uppercase',
-          letterSpacing: '0.1em',
-          color: 'var(--color-gray-400)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
           marginBottom: 'var(--space-sm)',
         }}
       >
-        {label}
+        <span
+          style={{
+            fontSize: 'var(--text-sm)',
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            color: 'var(--color-gray-400)',
+          }}
+        >
+          {label}
+        </span>
+        <button
+          onClick={() => setExpandedRegion(expandedRegion ? null : 'neck')}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            padding: 'var(--space-xs) var(--space-sm)',
+            backgroundColor: 'transparent',
+            border: '1px dashed var(--color-gray-600)',
+            borderRadius: 'var(--radius-full)',
+            color: 'var(--color-gray-400)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 500,
+            cursor: 'pointer',
+            transition: 'all 0.15s ease',
+          }}
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+          Add
+        </button>
       </div>
 
       {/* Selected Submissions with Count Badges */}

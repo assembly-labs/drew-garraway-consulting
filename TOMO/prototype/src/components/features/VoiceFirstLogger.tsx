@@ -94,14 +94,13 @@ const MOCK_SESSION_COUNT = 48;
 interface VoiceFirstLoggerProps {
   onComplete?: () => void;
   onCancel?: () => void;
-  onTypeInstead?: () => void;
 }
 
 // ===========================================
 // COMPONENT
 // ===========================================
 
-export function VoiceFirstLogger({ onComplete, onCancel, onTypeInstead }: VoiceFirstLoggerProps) {
+export function VoiceFirstLogger({ onComplete, onCancel }: VoiceFirstLoggerProps) {
   const { profile } = useUserProfile();
   const { getPostSessionMessage, getSuggestedPrompts } = useBeltPersonalization();
 
@@ -277,10 +276,12 @@ export function VoiceFirstLogger({ onComplete, onCancel, onTypeInstead }: VoiceF
 
   return (
     <div style={{
-      minHeight: '100vh',
+      position: 'fixed',
+      inset: 0,
       display: 'flex',
       flexDirection: 'column',
       backgroundColor: 'var(--color-black)',
+      overflow: 'hidden',
       ...getPhaseStyle(),
     }}>
       {phase === 'entry' && (
@@ -291,7 +292,6 @@ export function VoiceFirstLogger({ onComplete, onCancel, onTypeInstead }: VoiceF
           setSparringSelected={setSparringSelected}
           onRecord={handleStartRecording}
           onCancel={onCancel}
-          onTypeInstead={onTypeInstead}
           onSave={handleSave}
           isValid={isValid()}
         />
@@ -348,7 +348,6 @@ interface EntryPhaseProps {
   setSparringSelected: (value: boolean | null) => void;
   onRecord: () => void;
   onCancel?: () => void;
-  onTypeInstead?: () => void;
   onSave: () => void;
   isValid: boolean;
 }
@@ -360,7 +359,6 @@ function EntryPhase({
   setSparringSelected,
   onRecord,
   onCancel,
-  onTypeInstead,
   onSave,
   isValid,
 }: EntryPhaseProps) {
@@ -372,6 +370,7 @@ function EntryPhase({
       flex: 1,
       display: 'flex',
       flexDirection: 'column',
+      overflow: 'hidden',
     }}>
       {/* Header */}
       <div style={{
@@ -380,22 +379,9 @@ function EntryPhase({
         alignItems: 'center',
         padding: 'var(--space-lg)',
         paddingTop: 'max(var(--space-lg), env(safe-area-inset-top))',
+        flexShrink: 0,
       }}>
-        <button
-          onClick={onCancel}
-          style={{
-            background: 'none',
-            border: 'none',
-            color: 'var(--color-gray-400)',
-            cursor: 'pointer',
-            padding: 'var(--space-sm)',
-            fontSize: 'var(--text-sm)',
-            fontWeight: 500,
-            minHeight: '44px',
-          }}
-        >
-          Cancel
-        </button>
+        <div style={{ width: 48 }} />
         <h1 style={{
           fontFamily: 'var(--font-heading)',
           fontSize: 'var(--text-lg)',
@@ -406,7 +392,27 @@ function EntryPhase({
         }}>
           Log Session
         </h1>
-        <div style={{ width: 60 }} />
+        <button
+          onClick={onCancel}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: 'var(--color-gray-400)',
+            cursor: 'pointer',
+            padding: '12px',
+            borderRadius: 'var(--radius-full)',
+            minWidth: '48px',
+            minHeight: '48px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          aria-label="Close"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
       </div>
 
       {/* Scrollable content */}
@@ -415,7 +421,67 @@ function EntryPhase({
         overflowY: 'auto',
         padding: 'var(--space-lg)',
         paddingTop: 0,
+        WebkitOverflowScrolling: 'touch',
       }}>
+        {/* === RECORD BUTTON (Primary CTA at top) === */}
+        <div style={{
+          marginBottom: 'var(--space-xl)',
+        }}>
+          <button
+            onClick={onRecord}
+            style={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 'var(--space-xl)',
+              backgroundColor: 'var(--color-gold-dim)',
+              border: '2px solid var(--color-gold)',
+              borderRadius: 'var(--radius-lg)',
+              cursor: 'pointer',
+              minHeight: '120px',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            {/* Mic icon */}
+            <div style={{
+              width: 56,
+              height: 56,
+              borderRadius: 'var(--radius-full)',
+              backgroundColor: 'var(--color-gold)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 'var(--space-sm)',
+            }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-black)" strokeWidth="2.5">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                <line x1="12" y1="19" x2="12" y2="23" />
+                <line x1="8" y1="23" x2="16" y2="23" />
+              </svg>
+            </div>
+            <span style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'var(--text-base)',
+              fontWeight: 700,
+              color: 'var(--color-gold)',
+              textTransform: 'uppercase',
+              letterSpacing: 'var(--tracking-wide)',
+            }}>
+              Tap to Record
+            </span>
+            <span style={{
+              fontSize: 'var(--text-sm)',
+              color: 'var(--color-gray-400)',
+              marginTop: '4px',
+            }}>
+              Tell me what you worked on
+            </span>
+          </button>
+        </div>
+
         {/* === CORE FIELDS (Tier 1) === */}
 
         {/* Training Type */}
@@ -618,84 +684,6 @@ function EntryPhase({
               No
             </button>
           </div>
-        </div>
-
-        {/* === RECORD BUTTON === */}
-        <div style={{
-          marginBottom: 'var(--space-xl)',
-        }}>
-          <button
-            onClick={onRecord}
-            style={{
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 'var(--space-xl)',
-              backgroundColor: 'var(--color-gold-dim)',
-              border: '2px solid var(--color-gold)',
-              borderRadius: 'var(--radius-lg)',
-              cursor: 'pointer',
-              minHeight: '120px',
-              transition: 'all 0.2s ease',
-            }}
-          >
-            {/* Mic icon */}
-            <div style={{
-              width: 56,
-              height: 56,
-              borderRadius: 'var(--radius-full)',
-              backgroundColor: 'var(--color-gold)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 'var(--space-sm)',
-            }}>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-black)" strokeWidth="2.5">
-                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                <line x1="12" y1="19" x2="12" y2="23" />
-                <line x1="8" y1="23" x2="16" y2="23" />
-              </svg>
-            </div>
-            <span style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'var(--text-base)',
-              fontWeight: 700,
-              color: 'var(--color-gold)',
-              textTransform: 'uppercase',
-              letterSpacing: 'var(--tracking-wide)',
-            }}>
-              Tap to Record
-            </span>
-            <span style={{
-              fontSize: 'var(--text-sm)',
-              color: 'var(--color-gray-400)',
-              marginTop: '4px',
-            }}>
-              Tell me what you worked on
-            </span>
-          </button>
-
-          {/* Type instead link */}
-          {onTypeInstead && (
-            <button
-              onClick={onTypeInstead}
-              style={{
-                width: '100%',
-                padding: 'var(--space-sm)',
-                marginTop: 'var(--space-sm)',
-                background: 'none',
-                border: 'none',
-                color: 'var(--color-gray-500)',
-                fontSize: 'var(--text-sm)',
-                cursor: 'pointer',
-              }}
-            >
-              or type instead
-            </button>
-          )}
         </div>
 
         {/* === OPTIONAL FIELDS (Tier 2) === */}
@@ -1032,7 +1020,7 @@ function RecordingPhase({ recordingTime, formatTime, onStop, onCancel, prompts }
               textAlign: 'center',
               color: 'var(--color-white)',
               margin: 0,
-              animation: 'boldSwing 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              animation: 'fadeSlideIn 0.4s ease-out',
             }}
           >
             {prompts[currentHintIndex]}
@@ -1081,18 +1069,14 @@ function RecordingPhase({ recordingTime, formatTime, onStop, onCancel, prompts }
           0%, 100% { opacity: 1; transform: scale(1); }
           50% { opacity: 0.4; transform: scale(1.2); }
         }
-        @keyframes boldSwing {
+        @keyframes fadeSlideIn {
           0% {
             opacity: 0;
-            transform: scale(0.5) rotate(-3deg);
-          }
-          50% {
-            opacity: 1;
-            transform: scale(1.08) rotate(1deg);
+            transform: translateY(8px);
           }
           100% {
             opacity: 1;
-            transform: scale(1) rotate(0deg);
+            transform: translateY(0);
           }
         }
       `}</style>
