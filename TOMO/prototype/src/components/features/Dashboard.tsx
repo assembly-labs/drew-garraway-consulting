@@ -32,6 +32,7 @@ import { AttackProfile } from './AttackProfile';
 import {
   YourProgress,
   FoundationsProgress,
+  DefenseFocus,
   TechniquePairings,
   BluesDetector,
   YourJourney,
@@ -92,6 +93,23 @@ const MOCK_WHITE_BELT_SUBMISSIONS: SubmissionReceived[] = [
   { technique: 'RNC', daysAgo: 4 },
   { technique: 'Triangle', daysAgo: 5 },
   { technique: 'Guillotine', daysAgo: 6 },
+];
+
+// Mock technique stats for white belts (aggregated counts)
+const MOCK_WHITE_BELT_OFFENSE = [
+  { technique: 'RNC', count: 8 },
+  { technique: 'Armbar', count: 6 },
+  { technique: 'Triangle', count: 4 },
+  { technique: 'Guillotine', count: 3 },
+  { technique: 'Americana', count: 2 },
+];
+
+const MOCK_WHITE_BELT_DEFENSE = [
+  { technique: 'Triangle', count: 14 },
+  { technique: 'Armbar', count: 12 },
+  { technique: 'RNC', count: 8 },
+  { technique: 'Guillotine', count: 8 },
+  { technique: 'Kimura', count: 6 },
 ];
 
 // Mock submissions received - BLUE BELT (leg lock focus)
@@ -883,9 +901,16 @@ export function Dashboard(_props: DashboardProps) {
           {/* Your Progress - Progress to 50 and frequency tracking */}
           <YourProgress
             sessionCount={stats.totalSessions}
-            sessionsThisWeek={stats.thisMonth.sessions > 4 ? Math.min(3, Math.ceil(stats.thisMonth.sessions / 4)) : 2}
+            sessionsThisWeek={4}
             sessionsThisMonth={stats.thisMonth.sessions}
             targetFrequency={3}
+          />
+
+          {/* Defense Focus - Toggleable offense/defense stats */}
+          <DefenseFocus
+            submissionsGiven={MOCK_WHITE_BELT_OFFENSE}
+            submissionsReceived={MOCK_WHITE_BELT_DEFENSE}
+            defaultView="defense"
           />
 
           {/* Foundations Progress - Fundamental technique checklist */}
@@ -952,17 +977,20 @@ export function Dashboard(_props: DashboardProps) {
 
       {/* ============================================
           ATTACK PROFILE - Full submission story visualization
+          Hidden for white belts (they see defense-focused modules instead)
           ============================================ */}
-      <section
-        style={{
-          borderTop: '1px solid var(--color-gray-800)',
-        }}
-      >
-        <AttackProfile
-          submissionStats={mockSubmissionStats}
-          belt={profile.belt}
-        />
-      </section>
+      {!showWhiteBeltModules && (
+        <section
+          style={{
+            borderTop: '1px solid var(--color-gray-800)',
+          }}
+        >
+          <AttackProfile
+            submissionStats={mockSubmissionStats}
+            belt={profile.belt}
+          />
+        </section>
+      )}
 
       {/* ============================================
           REMOVED: Sparring Dominance Grid + Submission Profile Cards

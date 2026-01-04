@@ -28,6 +28,7 @@
 // White Belt Modules
 export { YourProgress } from './YourProgress';
 export { FoundationsProgress } from './FoundationsProgress';
+export { DefenseFocus } from './DefenseFocus';
 
 // Blue Belt Modules
 export { TechniquePairings } from './TechniquePairings';

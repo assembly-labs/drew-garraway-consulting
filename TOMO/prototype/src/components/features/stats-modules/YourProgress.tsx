@@ -46,6 +46,15 @@ export function YourProgress({
     return Math.min(100, Math.round((sessionsThisWeek / targetFrequency) * 100));
   }, [sessionsThisWeek, targetFrequency]);
 
+  // Calculate monthly target (weekly goal × 4 weeks)
+  const monthlyTarget = targetFrequency ? targetFrequency * 4 : null;
+
+  // Calculate monthly goal progress
+  const monthlyProgress = useMemo(() => {
+    if (!monthlyTarget) return null;
+    return Math.min(100, Math.round((sessionsThisMonth / monthlyTarget) * 100));
+  }, [sessionsThisMonth, monthlyTarget]);
+
   // Progress message based on where they are
   const getProgressMessage = () => {
     if (hasPassed50) {
@@ -132,8 +141,26 @@ export function YourProgress({
           </div>
           <div style={styles.statValueRow}>
             <span style={styles.statValue}>{sessionsThisMonth}</span>
-            <span style={styles.statUnit}>sessions</span>
+            {monthlyTarget ? (
+              <span style={styles.statTarget}>/ {monthlyTarget}</span>
+            ) : (
+              <span style={styles.statUnit}>sessions</span>
+            )}
           </div>
+          {monthlyProgress !== null && (
+            <div style={styles.miniProgressBar}>
+              <div
+                style={{
+                  ...styles.miniProgressFill,
+                  width: `${monthlyProgress}%`,
+                  background:
+                    monthlyProgress >= 100
+                      ? 'var(--color-positive)'
+                      : 'var(--color-gold)',
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
     </section>
