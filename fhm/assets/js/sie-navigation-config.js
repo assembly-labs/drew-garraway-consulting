@@ -78,23 +78,28 @@ const SIECourseStructure = {
         },
         {
             number: 10,
-            title: "Securities Act of 1933",
+            title: "Individual Accounts & Suitability",
             sections: [
-                { id: "10.1", title: "Registration & Exemptions", file: "pages/sie/sie-chapter-10-registration.html", locked: true }
+                { id: "10.1", title: "Customer Accounts for Individuals", file: "pages/sie/sie-chapter-10-section-1-customer-accounts.html", locked: false },
+                { id: "10.2", title: "Suitability & Account Maintenance", file: "pages/sie/sie-chapter-10-section-2-suitability.html", locked: false }
             ]
         },
         {
             number: 11,
-            title: "Margin Accounts",
+            title: "Other Account Types",
             sections: [
-                { id: "11.1", title: "Margin Accounts", file: "pages/sie/sie-chapter-11-margin-accounts.html", locked: false }
+                { id: "11.1", title: "Margin Accounts", file: "pages/sie/sie-chapter-11-margin-accounts.html", locked: false },
+                { id: "11.2", title: "Fiduciary Accounts", file: "pages/sie/sie-chapter-11-fiduciary-accounts.html", locked: false },
+                { id: "11.3", title: "Joint, Business & Options Accounts", file: "pages/sie/sie-chapter-11-joint-business-options.html", locked: false }
             ]
         },
         {
             number: 12,
-            title: "FINRA Rules",
+            title: "Retirement Plans, Annuities & Muni Funds",
             sections: [
-                { id: "12.1", title: "Conduct & Suitability", file: "pages/sie/sie-chapter-12-conduct.html", locked: true }
+                { id: "12.1", title: "Retirement Plans", file: "pages/sie/sie-chapter-12-retirement-plans.html", locked: false },
+                { id: "12.2", title: "Variable Annuities", file: "pages/sie/sie-chapter-12-variable-annuities.html", locked: false },
+                { id: "12.3", title: "Municipal Fund Securities", file: "pages/sie/sie-chapter-12-municipal-fund-securities.html", locked: false }
             ]
         },
         {
