@@ -60,12 +60,6 @@ export function YourProgress({
     if (hasPassed50) {
       return 'Past the cliff. Keep building.';
     }
-    if (sessionsRemaining <= 5) {
-      return `${sessionsRemaining} more to pass the cliff`;
-    }
-    if (sessionsRemaining <= 15) {
-      return `${sessionsRemaining} more to pass the cliff`;
-    }
     return `${sessionsRemaining} more to pass the cliff`;
   };
 

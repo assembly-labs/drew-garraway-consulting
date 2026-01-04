@@ -328,33 +328,6 @@ export function TournamentReadinessCard({
         />
       </div>
 
-      {/* Recommendation Callout */}
-      <div style={{
-        padding: '20px 24px',
-        background: 'linear-gradient(135deg, rgba(252, 211, 77, 0.08) 0%, transparent 100%)',
-        borderLeft: '3px solid var(--color-gold)',
-        margin: '0',
-      }}>
-        <div style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--text-xs)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.2em',
-          color: 'var(--color-gold)',
-          marginBottom: '8px',
-        }}>
-          Focus This Week
-        </div>
-        <p style={{
-          fontSize: 'var(--text-base)',
-          color: 'var(--color-gray-100)',
-          lineHeight: 1.6,
-          margin: 0,
-        }}>
-          {result.recommendation}
-        </p>
-      </div>
-
       {/* Expand Button */}
       {!showFullBreakdown && onExpand && (
         <button

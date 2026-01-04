@@ -82,7 +82,6 @@ export function DefenseFocus({
             onClick={() => setViewMode('offense')}
             style={{
               ...styles.toggleButton,
-              ...(isOffense ? styles.toggleButtonActive : {}),
               borderColor: isOffense ? 'var(--color-positive)' : 'var(--color-gray-700)',
               color: isOffense ? 'var(--color-positive)' : 'var(--color-gray-500)',
             }}
@@ -95,7 +94,6 @@ export function DefenseFocus({
           onClick={() => setViewMode('defense')}
           style={{
             ...styles.toggleButton,
-            ...(viewMode === 'defense' ? styles.toggleButtonActive : {}),
             borderColor: viewMode === 'defense' ? 'var(--color-gold)' : 'var(--color-gray-700)',
             color: viewMode === 'defense' ? 'var(--color-gold)' : 'var(--color-gray-500)',
             ...(hideOffense ? { flex: 1 } : {}),
@@ -180,9 +178,6 @@ const styles: Record<string, React.CSSProperties> = {
     textTransform: 'uppercase' as const,
     cursor: 'pointer',
     transition: 'all 0.2s ease',
-  },
-  toggleButtonActive: {
-    background: 'var(--color-gray-900)',
   },
   list: {
     display: 'flex',

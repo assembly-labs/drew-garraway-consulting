@@ -180,7 +180,7 @@ export function SessionHistory({ onLogNew, onSelectSession }: SessionHistoryProp
             onMouseOut={(e) => (e.currentTarget.style.opacity = '1')}
           >
             <Icons.Mic size={18} />
-            Log
+            Log Session
           </button>
         </div>
 

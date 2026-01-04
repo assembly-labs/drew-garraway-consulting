@@ -121,17 +121,73 @@ const whiteExcellingPersona: Persona = {
  * WHITE BELT - AT RISK: David Morrison
  * "The Late Starter" - Struggling
  *
- * Uses existing white belt profile as-is,
- * representing a struggling older white belt
+ * 52-year-old IT Manager who started 18 months ago.
+ * Training frequency declining. Questioning if he belongs.
+ * High risk of dropout - needs encouragement about attendance.
+ *
+ * Reference: /internal-docs/personas/PERSONA_PROFILES.md
  */
 const whiteAtRiskPersona: Persona = {
   ...existingWhite,
   id: 'persona-white-at-risk',
   key: 'white-at-risk',
+  displayName: 'David Morrison',
   archetype: 'The Late Starter',
   riskLevel: 'high',
   status: 'struggling',
   avatarUrl: '/avatars/david-morrison.jpg',
+  // Override context profile for David's struggling situation
+  contextProfile: {
+    ...existingWhite.contextProfile,
+    userId: 'user-white-at-risk-001',
+    name: 'David Morrison',
+    stripes: 2, // Only 2 stripes after 18 months
+    trainingStartDate: '2023-06-01', // 18 months ago
+    currentBeltDate: '2023-06-01',
+    gymName: 'Gracie Barra Portland',
+    trainingGoals: ['fitness', 'mental'] as const,
+    targetFrequency: 2, // His goal is just 2x/week
+    birthYear: 1972,
+    loggingPreference: 'text',
+    sessionCount: 47, // Low for 18 months
+  },
+  // Override training stats - LOW performance numbers
+  trainingStats: {
+    ...existingWhite.trainingStats,
+    totalSessions: 47,
+    totalHours: 70,
+    currentStreak: 1, // Barely maintaining
+    longestStreak: 6,
+    thisMonth: {
+      sessions: 3, // Only 3 sessions this month (target: 8)
+      hours: 4.5,
+      techniques: 4,
+      sparringRounds: 6,
+      targetSessions: 8,
+    },
+    thisYear: {
+      sessions: 24,
+      hours: 36,
+    },
+    // Rough sparring record - losing most of the time
+    sparringRecord: { wins: 12, losses: 48, draws: 15 },
+    // Limited submissions
+    submissionsMade: {
+      'Americana': 4,
+      'Kimura': 3,
+      'RNC': 2,
+    },
+  },
+  // Override progress summary
+  progressSummary: {
+    ...existingWhite.progressSummary,
+    currentStripes: 2,
+    timeAtBelt: '18 months',
+    overallCompletion: 42,
+    estimatedTimeToPromotion: '8-12 months',
+    strengths: ['Coachable', 'Calm under pressure', 'Asks good questions'],
+    weaknesses: ['Athleticism', 'Recovery time', 'Consistency', 'Guard retention'],
+  },
 };
 
 /**

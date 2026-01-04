@@ -96,6 +96,7 @@ const MOCK_WHITE_BELT_SUBMISSIONS: SubmissionReceived[] = [
 ];
 
 // Mock technique stats for white belts (aggregated counts)
+// Excelling white belt (Jake Thompson) - good submission numbers
 const MOCK_WHITE_BELT_OFFENSE = [
   { technique: 'RNC', count: 8 },
   { technique: 'Armbar', count: 6 },
@@ -110,6 +111,23 @@ const MOCK_WHITE_BELT_DEFENSE = [
   { technique: 'RNC', count: 8 },
   { technique: 'Guillotine', count: 8 },
   { technique: 'Kimura', count: 6 },
+];
+
+// At-risk white belt (David Morrison) - struggling, low offense, high defense
+// Per persona: Americana: 4, Kimura: 3, RNC: 2
+const MOCK_WHITE_BELT_AT_RISK_OFFENSE = [
+  { technique: 'Americana', count: 4 },
+  { technique: 'Kimura', count: 3 },
+  { technique: 'RNC', count: 2 },
+];
+
+// David gets caught a lot - "Everything: Too many to count"
+const MOCK_WHITE_BELT_AT_RISK_DEFENSE = [
+  { technique: 'RNC', count: 18 },
+  { technique: 'Armbar', count: 16 },
+  { technique: 'Triangle', count: 14 },
+  { technique: 'Kimura', count: 12 },
+  { technique: 'Guillotine', count: 10 },
 ];
 
 // Mock submissions received - BLUE BELT (leg lock focus)
@@ -179,7 +197,16 @@ function getHeroMetricData(
 }
 
 // Insight messages based on dashboard focus
-function getInsightMessage(insightFocus: string): { working: string; focus: string } {
+// At-risk personas get attendance-focused messaging
+function getInsightMessage(insightFocus: string, isAtRisk?: boolean): { working: string; focus: string } {
+  // Special messaging for at-risk users - emphasize attendance
+  if (isAtRisk) {
+    return {
+      working: "Every session you complete is a win. You're still here.",
+      focus: 'Showing up matters. Aim for one more session this week.',
+    };
+  }
+
   switch (insightFocus) {
     case 'survival_skills':
       return {
@@ -215,8 +242,8 @@ function getInsightMessage(insightFocus: string): { working: string; focus: stri
 }
 
 export function Dashboard(_props: DashboardProps) {
-  // Check for demo mode
-  const { isDemoMode, activeDemoProfile } = useUserProfile();
+  // Check for demo mode and get persona info
+  const { isDemoMode, activeDemoProfile, activePersona } = useUserProfile();
 
   // State for dismissing breakthrough hero
   const [breakthroughDismissed, setBreakthroughDismissed] = useState(false);
@@ -231,6 +258,12 @@ export function Dashboard(_props: DashboardProps) {
 
   // Belt personalization for adaptive dashboard behavior
   const { profile, dashboard, isInRiskWindow } = useBeltPersonalization();
+
+  // Check if current persona is at-risk (high/critical risk or struggling/declining)
+  const isAtRiskPersona = activePersona?.riskLevel === 'high' ||
+    activePersona?.riskLevel === 'critical' ||
+    activePersona?.status === 'struggling' ||
+    activePersona?.status === 'declining';
 
   // Get style fingerprint data (from demo profile or mock)
   const styleFingerprint = isDemoMode && activeDemoProfile
@@ -519,8 +552,8 @@ export function Dashboard(_props: DashboardProps) {
   const heroMetric = getHeroMetricData(dashboard.primaryMetric, stats);
   const animatedHeroValue = useCountUp(heroMetric.value, { duration: 600, delay: 100 });
 
-  // Get insight messages based on belt focus
-  const insightMessages = getInsightMessage(dashboard.insightFocus);
+  // Get insight messages based on belt focus (at-risk personas get attendance-focused messaging)
+  const insightMessages = getInsightMessage(dashboard.insightFocus, isAtRiskPersona);
 
   const monthName = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
@@ -704,22 +737,6 @@ export function Dashboard(_props: DashboardProps) {
             {' '}{getBeltMotivationalMessage()}
           </p>
 
-          {/* Scroll hint */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '20px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              color: 'var(--color-gray-600)',
-              fontSize: 'var(--text-xs)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.2em',
-              opacity: 0.6,
-            }}
-          >
-            scroll
-          </div>
         </section>
       )}
 
@@ -899,17 +916,19 @@ export function Dashboard(_props: DashboardProps) {
       {showWhiteBeltModules && (
         <>
           {/* Your Progress - Progress to 50 and frequency tracking */}
+          {/* At-risk personas show low session counts; excelling personas show higher */}
           <YourProgress
             sessionCount={stats.totalSessions}
-            sessionsThisWeek={4}
+            sessionsThisWeek={isAtRiskPersona ? 1 : 4}
             sessionsThisMonth={stats.thisMonth.sessions}
-            targetFrequency={3}
+            targetFrequency={activeDemoProfile?.contextProfile?.targetFrequency || 3}
           />
 
           {/* Defense Focus - Toggleable offense/defense stats */}
+          {/* At-risk personas see their low offense and high defense numbers */}
           <DefenseFocus
-            submissionsGiven={MOCK_WHITE_BELT_OFFENSE}
-            submissionsReceived={MOCK_WHITE_BELT_DEFENSE}
+            submissionsGiven={isAtRiskPersona ? MOCK_WHITE_BELT_AT_RISK_OFFENSE : MOCK_WHITE_BELT_OFFENSE}
+            submissionsReceived={isAtRiskPersona ? MOCK_WHITE_BELT_AT_RISK_DEFENSE : MOCK_WHITE_BELT_DEFENSE}
             defaultView="defense"
           />
 
