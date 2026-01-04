@@ -84,7 +84,7 @@ export function Header({
           fontSize: 'var(--text-xl)',
           margin: 0,
           letterSpacing: 'var(--tracking-wider)',
-          fontWeight: 700,
+          fontWeight: 900, /* Unbounded Black - fattest weight */
         }}>
           {title}
         </h1>
