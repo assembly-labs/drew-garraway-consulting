@@ -649,7 +649,7 @@ export function Dashboard(_props: DashboardProps) {
           <div
             style={{
               fontSize: 'clamp(100px, 30vw, 160px)',
-              fontWeight: 700,
+              fontWeight: 800, /* Extra Bold for hero numbers */
               lineHeight: 0.85,
               letterSpacing: '-0.04em',
               background: 'linear-gradient(180deg, #ffffff 0%, #666666 100%)',
@@ -1003,7 +1003,7 @@ export function Dashboard(_props: DashboardProps) {
         <div
           style={{
             fontSize: 'clamp(120px, 40vw, 200px)',
-            fontWeight: 700,
+            fontWeight: 800, /* Extra Bold for hero numbers */
             lineHeight: 0.75,
             letterSpacing: '-0.05em',
             color: 'var(--color-positive)',

@@ -241,7 +241,7 @@ export function TournamentReadinessCard({
       }}>
         <div style={{
           fontSize: 'clamp(80px, 25vw, 120px)',
-          fontWeight: 700,
+          fontWeight: 800, /* Extra Bold for hero numbers */
           lineHeight: 0.85,
           letterSpacing: '-0.04em',
           color: levelConfig.color,

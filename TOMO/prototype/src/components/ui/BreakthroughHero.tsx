@@ -250,7 +250,7 @@ export function BreakthroughHero({ breakthrough, onDismiss }: BreakthroughHeroPr
             <div
               style={{
                 fontSize: 'clamp(64px, 20vw, 120px)',
-                fontWeight: 700,
+                fontWeight: 800, /* Extra Bold for hero numbers */
                 lineHeight: 0.9,
                 letterSpacing: '-0.04em',
                 background: `linear-gradient(180deg, ${colors.primary} 0%, rgba(255,255,255,0.6) 100%)`,
