@@ -14,12 +14,16 @@ export * from './auth';
 // Technique video and recommendation types
 export * from './techniqueVideos';
 
+// Journal entry type (V2 - canonical)
+export * from './journal-entry';
+
 // Legacy journal types (for backward compatibility)
-// Note: Some types have been superseded by database.ts
+// Note: Some types have been superseded by database.ts and journal-entry.ts
 // Use explicit imports if you need legacy types:
-// import { JournalEntry, TrainingSession } from '@/types/journal';
+// import { TrainingSession, JournalData } from '@/types/journal';
 export {
-  type JournalEntry,
+  // Renamed to avoid conflict with journal-entry.ts JournalEntry
+  type JournalEntry as LegacyJournalEntry,
   type TrainingSession,
   type JournalData,
   // Renamed exports to avoid conflicts with database.ts

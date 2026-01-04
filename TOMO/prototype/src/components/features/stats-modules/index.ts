@@ -2,8 +2,10 @@
  * Stats Modules - Belt-Adaptive Dashboard Components
  *
  * Phase 1: White Belt Modules (Retention-focused)
- * - YourProgress: Consolidated progress to 50 + weekly/monthly frequency
- * - FoundationsProgress: Fundamental technique checklist
+ * - WeeklyProgressRing: Apple Watch-style circular progress toward weekly goal
+ * - CalendarHeatMap: GitHub-style training consistency visualization
+ * - DashboardSummaryCard: Key metrics at-a-glance (sessions, hours, streak, belt)
+ * - DefenseFocus: Offense/defense bar charts
  *
  * Phase 2: Blue Belt Modules (Identity & Game Development)
  * - TechniquePairings: Co-occurrence analysis, emerging chains
@@ -17,22 +19,33 @@
  * - RecentRolls: Defense coaching with video links
  * - AttackProfile: Comprehensive submission story (in parent features/)
  *
- * REMOVED (consolidated into other modules):
- * - JourneyTimeline, ConsistencyScore → merged into YourProgress
+ * REMOVED/ARCHIVED:
+ * - YourProgress, FoundationsProgress → replaced by Tier 1 infographic modules
+ * - JourneyTimeline, ConsistencyScore → merged into YourProgress (then deprecated)
  * - YourStyle, VulnerabilityMap → consolidated into AttackProfile
  * - LongGame, SubmissionTrends → merged into YourJourney
  *
- * See: /internal-docs/research/STATS_MODULE_IMPLEMENTATION.md
+ * See: /internal-docs/data-visualization/INFOGRAPHIC_STRATEGY.md
  */
 
-// White Belt Modules
-export { YourProgress } from './YourProgress';
-export { FoundationsProgress } from './FoundationsProgress';
+// White Belt Modules - Tier 1 Infographics
+export { WeeklyProgressRing } from './WeeklyProgressRing';
+export { CalendarHeatMap } from './CalendarHeatMap';
+export { DashboardSummaryCard } from './DashboardSummaryCard';
 export { DefenseFocus } from './DefenseFocus';
+
+// REMOVED: YourProgress, FoundationsProgress
+// These legacy modules were replaced by WeeklyProgressRing, CalendarHeatMap, DashboardSummaryCard, DefenseFocus
+// If you need them, import directly from the files (not recommended)
 
 // Blue Belt Modules
 export { TechniquePairings } from './TechniquePairings';
 export { BluesDetector } from './BluesDetector';
+
+// Blue/Purple Belt Modules (Tier 1 Infographics)
+export { SessionTypeDistribution } from './SessionTypeDistribution';
+export { SparringPatternAnalysis } from './SparringPatternAnalysis';
+export { AchievementTimeline } from './AchievementTimeline';
 
 // Purple/Brown Belt Modules
 export { YourJourney } from './YourJourney';

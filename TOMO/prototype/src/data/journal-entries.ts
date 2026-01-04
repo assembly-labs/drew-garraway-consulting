@@ -1,15 +1,18 @@
 /**
- * Mock Journal Entries
+ * Mock Journal Entries - V2 FORMAT (CURRENT)
  *
- * Simplified data model for the Journal page.
+ * ✓ CURRENT: This is the preferred data format for new features.
+ * Uses the JournalEntry type from types/journal-entry.ts
+ *
+ * USED BY: SessionHistory.tsx, JournalEntryCard.tsx
+ *
  * Data complexity scales by belt level:
- *
  * WHITE: date, type, duration, lesson_topic, notes
  * BLUE: + techniques_drilled, sparring_rounds, worked_well, struggles
  * PURPLE+: + submissions_given, submissions_received
  */
 
-import type { JournalEntry } from '../components/features/JournalEntryCard';
+import type { JournalEntry } from '../types/journal-entry';
 
 // ===========================================
 // MOCK DATA - Recent Sessions

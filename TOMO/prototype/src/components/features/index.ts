@@ -13,7 +13,11 @@ export { Settings } from './Settings';
 export { Onboarding } from './Onboarding';
 
 // Session Logging
-export { SessionLogger } from './SessionLogger';
+export { SessionLogger } from './SessionLogger';  // Primary: wraps VoiceFirstLogger
+
+// Alternative loggers (not currently used in app, kept for potential A/B testing)
+// VoiceLogger: Original voice-first approach
+// ManualLogger: Form-first with voice assist option
 export { VoiceLogger } from './VoiceLogger';
 export { ManualLogger } from './ManualLogger';
 

@@ -11,36 +11,10 @@
 
 import { useBeltPersonalization } from '../../hooks';
 import type { BeltLevel } from '../../types/database';
+import type { JournalEntry } from '../../types/journal-entry';
 
-// ===========================================
-// TYPES
-// ===========================================
-
-export interface JournalEntry {
-  id: string;
-  date: string;           // ISO date
-  time: string | null;    // e.g., "18:30"
-  training_type: 'gi' | 'nogi' | 'both';
-  duration_minutes: number | null;
-
-  // All belts
-  lesson_topic: string | null;
-  notes: string | null;
-
-  // Blue+ belts
-  techniques_drilled: string[];
-  did_spar: boolean;
-  sparring_rounds: number | null;
-  worked_well: string[];
-  struggles: string[];
-
-  // Purple+ belts
-  submissions_given: string[];
-  submissions_received: string[];
-
-  // Optional: for teaching tracking
-  taught_something?: boolean;
-}
+// Re-export for backwards compatibility
+export type { JournalEntry } from '../../types/journal-entry';
 
 interface JournalEntryCardProps {
   entry: JournalEntry;

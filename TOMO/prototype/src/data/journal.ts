@@ -1,6 +1,11 @@
 /**
- * Mock Training Journal Data
- * Session logs, sparring records, and personal notes
+ * Mock Training Journal Data - LEGACY FORMAT
+ *
+ * ⚠️  LEGACY: This is the old data format with detailed sparring records.
+ * For new features, use mockJournalEntriesV2 from './journal-entries'.
+ *
+ * USED BY: Dashboard.tsx, BeltProgress.tsx, mock-profiles.ts, breakthrough-detection.ts
+ * These components rely on the detailed sparringRounds structure.
  *
  * DATA SCIENCE AUDIT (Dec 2024):
  * Some fields in this mock data are UNRELIABLE in production:
