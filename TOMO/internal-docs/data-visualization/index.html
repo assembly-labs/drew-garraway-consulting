@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMO Data Visualizations</title>
+  <link rel="stylesheet" href="../design-system/styles.css">
+  <style>
+    /* Data Visualization Specific Styles */
+
+    /* ========================================
+       WEEKLY PROGRESS RING
+       ======================================== */
+    .progress-ring-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px;
+      background: var(--color-gray-900);
+    }
+
+    .progress-ring {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .progress-ring svg {
+      transform: rotate(-90deg);
+      width: 100%;
+      height: 100%;
+    }
+
+    .progress-ring-bg {
+      fill: none;
+      stroke: var(--color-gray-800);
+      stroke-width: 12;
+    }
+
+    .progress-ring-fill {
+      fill: none;
+      stroke: var(--color-gold);
+      stroke-width: 12;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.5s ease;
+    }
+
+    .progress-ring-fill--positive {
+      stroke: var(--color-positive);
+    }
+
+    .progress-ring-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .progress-ring-value {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--color-white);
+      line-height: 1;
+    }
+
+    .progress-ring-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-gray-400);
+      margin-top: 4px;
+    }
+
+    .progress-ring-goal {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-gray-400);
+      margin-top: 24px;
+    }
+
+    /* ========================================
+       CALENDAR HEAT MAP
+       ======================================== */
+    .heat-map-container {
+      padding: 32px 24px;
+      background: var(--color-gray-900);
+      overflow-x: auto;
+    }
+
+    .heat-map-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .heat-map-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-white);
+    }
+
+    .heat-map-subtitle {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-gray-400);
+    }
+
+    .heat-map-months {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 8px;
+      padding-left: 28px;
+    }
+
+    .heat-map-month {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--color-gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      width: 52px;
+      text-align: center;
+    }
+
+    .heat-map-grid {
+      display: flex;
+      gap: 4px;
+    }
+
+    .heat-map-days {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-right: 4px;
+    }
+
+    .heat-map-day-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-gray-600);
+      height: 12px;
+      line-height: 12px;
+      width: 24px;
+    }
+
+    .heat-map-weeks {
+      display: flex;
+      gap: 4px;
+    }
+
+    .heat-map-week {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .heat-map-cell {
+      width: 12px;
+      height: 12px;
+      background: var(--color-gray-800);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .heat-map-cell:hover {
+      transform: scale(1.3);
+    }
+
+    .heat-map-cell[data-level="0"] { background: var(--color-gray-800); }
+    .heat-map-cell[data-level="1"] { background: rgba(34, 197, 94, 0.25); }
+    .heat-map-cell[data-level="2"] { background: rgba(34, 197, 94, 0.5); }
+    .heat-map-cell[data-level="3"] { background: rgba(34, 197, 94, 0.75); }
+    .heat-map-cell[data-level="4"] { background: var(--color-positive); }
+
+    .heat-map-legend {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      justify-content: flex-end;
+    }
+
+    .heat-map-legend-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-gray-500);
+    }
+
+    .heat-map-legend-cells {
+      display: flex;
+      gap: 3px;
+    }
+
+    .heat-map-legend-cell {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    /* ========================================
+       DASHBOARD SUMMARY CARD
+       ======================================== */
+    .summary-card {
+      background: var(--color-gray-900);
+      padding: 32px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .summary-metric {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .summary-metric-value {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--color-white);
+    }
+
+    .summary-metric-value--gold { color: var(--color-gold); }
+    .summary-metric-value--positive { color: var(--color-positive); }
+
+    .summary-metric-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-gray-400);
+      margin-top: 8px;
+    }
+
+    .summary-metric-context {
+      font-size: 13px;
+      color: var(--color-gray-500);
+      margin-top: 4px;
+    }
+
+    .summary-card-full {
+      grid-column: span 2;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-gray-800);
+    }
+
+    /* ========================================
+       SESSION TYPE DONUT CHART
+       ======================================== */
+    .donut-container {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      padding: 32px;
+      background: var(--color-gray-900);
+    }
+
+    .donut-chart {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      flex-shrink: 0;
+    }
+
+    .donut-chart svg {
+      transform: rotate(-90deg);
+      width: 100%;
+      height: 100%;
+    }
+
+    .donut-segment {
+      fill: none;
+      stroke-width: 24;
+      transition: opacity 0.2s;
+    }
+
+    .donut-segment:hover {
+      opacity: 0.8;
+    }
+
+    .donut-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .donut-center-value {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--color-white);
+    }
+
+    .donut-center-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .donut-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .donut-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .donut-legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .donut-legend-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-white);
+      flex: 1;
+    }
+
+    .donut-legend-value {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-gray-300);
+    }
+
+    /* ========================================
+       TREND LINE CHART
+       ======================================== */
+    .trend-container {
+      padding: 32px;
+      background: var(--color-gray-900);
+    }
+
+    .trend-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 24px;
+    }
+
+    .trend-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-white);
+    }
+
+    .trend-value {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--color-positive);
+    }
+
+    .trend-chart {
+      position: relative;
+      height: 160px;
+      border-bottom: 1px solid var(--color-gray-700);
+      border-left: 1px solid var(--color-gray-700);
+    }
+
+    .trend-chart svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .trend-line {
+      fill: none;
+      stroke: var(--color-gold);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .trend-area {
+      fill: url(#trend-gradient);
+    }
+
+    .trend-dot {
+      fill: var(--color-gold);
+    }
+
+    .trend-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+
+    .trend-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-gray-500);
+    }
+
+    /* ========================================
+       TECHNIQUE COVERAGE MATRIX
+       ======================================== */
+    .matrix-container {
+      padding: 32px;
+      background: var(--color-gray-900);
+      overflow-x: auto;
+    }
+
+    .matrix-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 24px;
+    }
+
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: 120px repeat(5, 1fr);
+      gap: 2px;
+    }
+
+    .matrix-header {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-gray-400);
+      padding: 12px 8px;
+      text-align: center;
+      background: var(--color-gray-800);
+    }
+
+    .matrix-row-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-white);
+      padding: 16px 12px;
+      background: var(--color-gray-800);
+      display: flex;
+      align-items: center;
+    }
+
+    .matrix-cell {
+      padding: 16px;
+      text-align: center;
+      background: var(--color-black);
+      transition: background 0.2s;
+    }
+
+    .matrix-cell:hover {
+      background: var(--color-gray-800);
+    }
+
+    .matrix-cell[data-level="0"] .matrix-dot { background: var(--color-gray-700); }
+    .matrix-cell[data-level="1"] .matrix-dot { background: rgba(245, 166, 35, 0.3); }
+    .matrix-cell[data-level="2"] .matrix-dot { background: rgba(245, 166, 35, 0.5); }
+    .matrix-cell[data-level="3"] .matrix-dot { background: rgba(245, 166, 35, 0.75); }
+    .matrix-cell[data-level="4"] .matrix-dot { background: var(--color-gold); }
+
+    .matrix-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      margin: 0 auto;
+    }
+
+    /* ========================================
+       RADAR CHART
+       ======================================== */
+    .radar-container {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      padding: 32px;
+      background: var(--color-gray-900);
+    }
+
+    .radar-chart {
+      width: 280px;
+      height: 280px;
+      flex-shrink: 0;
+    }
+
+    .radar-chart svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .radar-grid {
+      fill: none;
+      stroke: var(--color-gray-700);
+      stroke-width: 1;
+    }
+
+    .radar-axis {
+      stroke: var(--color-gray-700);
+      stroke-width: 1;
+    }
+
+    .radar-area {
+      fill: rgba(245, 166, 35, 0.2);
+      stroke: var(--color-gold);
+      stroke-width: 2;
+    }
+
+    .radar-point {
+      fill: var(--color-gold);
+    }
+
+    .radar-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      fill: var(--color-gray-300);
+    }
+
+    .radar-legend {
+      flex: 1;
+    }
+
+    .radar-legend-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 16px;
+    }
+
+    .radar-stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-gray-800);
+    }
+
+    .radar-stat:last-child {
+      border-bottom: none;
+    }
+
+    .radar-stat-label {
+      font-size: 14px;
+      color: var(--color-gray-300);
+    }
+
+    .radar-stat-value {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-gold);
+    }
+
+    /* ========================================
+       MILESTONE TIMELINE
+       ======================================== */
+    .timeline-container {
+      padding: 32px;
+      background: var(--color-gray-900);
+    }
+
+    .timeline-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 32px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--color-gray-700);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 32px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -32px;
+      top: 4px;
+      width: 16px;
+      height: 16px;
+      background: var(--color-gold);
+      border-radius: 50%;
+      border: 3px solid var(--color-gray-900);
+    }
+
+    .timeline-dot--completed {
+      background: var(--color-positive);
+    }
+
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .timeline-event {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-white);
+      margin-bottom: 4px;
+    }
+
+    .timeline-description {
+      font-size: 13px;
+      color: var(--color-gray-400);
+    }
+
+    /* ========================================
+       SPARRING BAR CHART
+       ======================================== */
+    .sparring-container {
+      padding: 32px;
+      background: var(--color-gray-900);
+    }
+
+    .sparring-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 24px;
+    }
+
+    .sparring-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .sparring-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .sparring-bar-label {
+      width: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-white);
+      text-align: right;
+    }
+
+    .sparring-bar-track {
+      flex: 1;
+      height: 32px;
+      background: var(--color-gray-800);
+      display: flex;
+      overflow: hidden;
+    }
+
+    .sparring-bar-positive {
+      background: var(--color-positive);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 8px;
+    }
+
+    .sparring-bar-negative {
+      background: var(--color-negative);
+      display: flex;
+      align-items: center;
+      padding-left: 8px;
+    }
+
+    .sparring-bar-value {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--color-black);
+    }
+
+    .sparring-bar-negative .sparring-bar-value {
+      color: var(--color-white);
+    }
+
+    /* ========================================
+       GOAL PROGRESS BARS
+       ======================================== */
+    .goals-container {
+      padding: 32px;
+      background: var(--color-gray-900);
+    }
+
+    .goals-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 24px;
+    }
+
+    .goal-item {
+      margin-bottom: 24px;
+    }
+
+    .goal-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .goal-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .goal-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-white);
+    }
+
+    .goal-progress-text {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-gray-400);
+    }
+
+    .goal-track {
+      height: 8px;
+      background: var(--color-gray-800);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .goal-fill {
+      height: 100%;
+      background: var(--color-gold);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .goal-fill--positive {
+      background: var(--color-positive);
+    }
+
+    /* ========================================
+       BELT PROGRESSION CHECKLIST
+       ======================================== */
+    .checklist-container {
+      padding: 32px;
+      background: var(--color-gray-900);
+    }
+
+    .checklist-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 8px;
+    }
+
+    .checklist-subtitle {
+      font-size: 13px;
+      color: var(--color-gray-400);
+      margin-bottom: 24px;
+    }
+
+    .checklist-section {
+      margin-bottom: 24px;
+    }
+
+    .checklist-section-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-gray-500);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--color-gray-800);
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+    }
+
+    .checklist-checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--color-gray-600);
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .checklist-checkbox--checked {
+      background: var(--color-positive);
+      border-color: var(--color-positive);
+    }
+
+    .checklist-checkbox--partial {
+      background: var(--color-gold);
+      border-color: var(--color-gold);
+    }
+
+    .checklist-check {
+      width: 12px;
+      height: 12px;
+      stroke: var(--color-black);
+      stroke-width: 3;
+      fill: none;
+    }
+
+    .checklist-text {
+      flex: 1;
+    }
+
+    .checklist-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-white);
+    }
+
+    .checklist-name--completed {
+      color: var(--color-gray-400);
+    }
+
+    .checklist-meta {
+      font-size: 12px;
+      color: var(--color-gray-500);
+      margin-top: 2px;
+    }
+
+    /* ========================================
+       VIZ GRID LAYOUT
+       ======================================== */
+    .viz-gallery {
+      padding: 32px;
+    }
+
+    .viz-section {
+      margin-bottom: 64px;
+    }
+
+    .viz-section-header {
+      margin-bottom: 24px;
+    }
+
+    .viz-section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-gold);
+      margin-bottom: 8px;
+    }
+
+    .viz-section-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 8px;
+    }
+
+    .viz-section-desc {
+      font-size: 15px;
+      color: var(--color-gray-400);
+      max-width: 600px;
+    }
+
+    .viz-card {
+      margin-bottom: 32px;
+      border: 1px solid var(--color-gray-800);
+      overflow: hidden;
+    }
+
+    .viz-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: var(--color-gray-800);
+    }
+
+    .viz-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-white);
+    }
+
+    .viz-card-meta {
+      display: flex;
+      gap: 16px;
+    }
+
+    .viz-card-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 8px;
+      background: var(--color-gray-700);
+      color: var(--color-gray-300);
+    }
+
+    .viz-card-tag--belt {
+      background: var(--color-belt-white);
+      color: var(--color-black);
+    }
+
+    .viz-card-tag--blue {
+      background: var(--color-belt-blue);
+      color: var(--color-white);
+    }
+
+    .viz-card-tag--purple {
+      background: var(--color-belt-purple);
+      color: var(--color-white);
+    }
+
+    .viz-card-tag--all {
+      background: var(--color-gold);
+      color: var(--color-black);
+    }
+
+    .viz-card-tag--confidence {
+      background: var(--color-positive-dim);
+      color: var(--color-positive);
+    }
+
+    /* Mobile responsiveness for viz layouts */
+    @media (max-width: 768px) {
+      .donut-container,
+      .radar-container {
+        flex-direction: column;
+      }
+
+      .donut-chart,
+      .radar-chart {
+        margin-bottom: 24px;
+      }
+
+      .summary-card {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-card-full {
+        grid-column: span 1;
+      }
+
+      .matrix-grid {
+        grid-template-columns: 100px repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-eyebrow">TOMO Design System</div>
+    <h1>Data Visualizations</h1>
+    <p>Infographic components for BJJ training analytics, organized by belt level and implementation priority.</p>
+  </div>
+
+  <!-- Tab Navigation -->
+  <nav class="tabs">
+    <button class="tab active" data-tab="tier1">Tier 1 (High Priority)</button>
+    <button class="tab" data-tab="tier2">Tier 2 (Medium-High)</button>
+    <button class="tab" data-tab="tier3">Tier 3 (Advanced)</button>
+    <a href="../design-system/index.html" class="tab">Design System</a>
+  </nav>
+
+  <!-- Tier 1 Content -->
+  <div id="tier1" class="tab-content active">
+    <div class="viz-gallery">
+
+      <!-- Weekly Progress Ring -->
+      <section class="viz-section">
+        <div class="viz-section-header">
+          <div class="viz-section-eyebrow">Universal Component</div>
+          <h2 class="viz-section-title">Weekly Progress Ring</h2>
+          <p class="viz-section-desc">Apple Watch-style circular progress indicator. Creates "close the ring" motivation for weekly training goals. Works at every belt level.</p>
+        </div>
+
+        <div class="viz-card">
+          <div class="viz-card-header">
+            <span class="viz-card-title">Progress Ring</span>
+            <div class="viz-card-meta">
+              <span class="viz-card-tag viz-card-tag--all">All Belts</span>
+              <span class="viz-card-tag viz-card-tag--confidence">Confidence: 10</span>
+            </div>
+          </div>
+          <div class="progress-ring-container">
+            <div class="progress-ring" id="progressRing1">
+              <svg viewBox="0 0 200 200">
+                <circle class="progress-ring-bg" cx="100" cy="100" r="85"></circle>
+                <circle class="progress-ring-fill progress-ring-fill--positive" cx="100" cy="100" r="85"
+                        stroke-dasharray="534" stroke-dashoffset="178"></circle>
+              </svg>
+              <div class="progress-ring-center">
+                <div class="progress-ring-value">3</div>
+                <div class="progress-ring-label">of 4</div>
+              </div>
+            </div>
+            <div class="progress-ring-goal">Weekly Goal: 4 Sessions</div>
+          </div>
+        </div>
+
+        <!-- Ring Variants -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+          <div class="viz-card">
+            <div class="viz-card-header">
+              <span class="viz-card-title">Goal Complete</span>
+            </div>
+            <div class="progress-ring-container" style="padding: 32px 16px;">
+              <div class="progress-ring" style="width: 140px; height: 140px;">
+                <svg viewBox="0 0 200 200">
+                  <circle class="progress-ring-bg" cx="100" cy="100" r="85"></circle>
+                  <circle class="progress-ring-fill progress-ring-fill--positive" cx="100" cy="100" r="85"
+                          stroke-dasharray="534" stroke-dashoffset="0"></circle>
+                </svg>
+                <div class="progress-ring-center">
+                  <div class="progress-ring-value" style="font-size: 36px;">4</div>
+                  <div class="progress-ring-label">of 4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="viz-card">
+            <div class="viz-card-header">
+              <span class="viz-card-title">Half Progress</span>
+            </div>
+            <div class="progress-ring-container" style="padding: 32px 16px;">
+              <div class="progress-ring" style="width: 140px; height: 140px;">
+                <svg viewBox="0 0 200 200">
+                  <circle class="progress-ring-bg" cx="100" cy="100" r="85"></circle>
+                  <circle class="progress-ring-fill" cx="100" cy="100" r="85"
+                          stroke-dasharray="534" stroke-dashoffset="267"></circle>
+                </svg>
+                <div class="progress-ring-center">
+                  <div class="progress-ring-value" style="font-size: 36px;">2</div>
+                  <div class="progress-ring-label">of 4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="viz-card">
+            <div class="viz-card-header">
+              <span class="viz-card-title">Just Started</span>
+            </div>
+            <div class="progress-ring-container" style="padding: 32px 16px;">
+              <div class="progress-ring" style="width: 140px; height: 140px;">
+                <svg viewBox="0 0 200 200">
+                  <circle class="progress-ring-bg" cx="100" cy="100" r="85"></circle>
+                  <circle class="progress-ring-fill" cx="100" cy="100" r="85"
+                          stroke-dasharray="534" stroke-dashoffset="400"></circle>
+                </svg>
+                <div class="progress-ring-center">
+                  <div class="progress-ring-value" style="font-size: 36px;">1</div>
+                  <div class="progress-ring-label">of 4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Calendar Heat Map -->
+      <section class="viz-section">
+        <div class="viz-section-header">
+          <div class="viz-section-eyebrow">White Belt Focus</div>
+          <h2 class="viz-section-title">Calendar Heat Map</h2>
+          <p class="viz-section-desc">GitHub-style contribution graph showing training consistency. Critical for habit formation during the white belt dropout phase.</p>
+        </div>
+
+        <div class="viz-card">
+          <div class="viz-card-header">
+            <span class="viz-card-title">Training Activity</span>
+            <div class="viz-card-meta">
+              <span class="viz-card-tag viz-card-tag--belt">White Belt</span>
+              <span class="viz-card-tag viz-card-tag--confidence">Confidence: 9</span>
+            </div>
+          </div>
+          <div class="heat-map-container" id="heatMap">
+            <div class="heat-map-header">
+              <div>
+                <div class="heat-map-title">127 Sessions in 2024</div>
+                <div class="heat-map-subtitle">Avg 2.4 sessions/week</div>
+              </div>
+            </div>
+            <div class="heat-map-months">
+              <span class="heat-map-month">Oct</span>
+              <span class="heat-map-month">Nov</span>
+              <span class="heat-map-month">Dec</span>
+            </div>
+            <div class="heat-map-grid">
+              <div class="heat-map-days">
+                <span class="heat-map-day-label">Mon</span>
+                <span class="heat-map-day-label"></span>
+                <span class="heat-map-day-label">Wed</span>
+                <span class="heat-map-day-label"></span>
+                <span class="heat-map-day-label">Fri</span>
+                <span class="heat-map-day-label"></span>
+                <span class="heat-map-day-label">Sun</span>
+              </div>
+              <div class="heat-map-weeks" id="heatMapWeeks">
+                <!-- Generated by JS -->
+              </div>
+            </div>
+            <div class="heat-map-legend">
+              <span class="heat-map-legend-label">Less</span>
+              <div class="heat-map-legend-cells">
+                <div class="heat-map-legend-cell" style="background: var(--color-gray-800);"></div>
+                <div class="heat-map-legend-cell" style="background: rgba(34, 197, 94, 0.25);"></div>
+                <div class="heat-map-legend-cell" style="background: rgba(34, 197, 94, 0.5);"></div>
+                <div class="heat-map-legend-cell" style="background: rgba(34, 197, 94, 0.75);"></div>
+                <div class="heat-map-legend-cell" style="background: var(--color-positive);"></div>
+              </div>
+              <span class="heat-map-legend-label">More</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard Summary Card -->
+      <section class="viz-section">
+        <div class="viz-section-header">
+          <div class="viz-section-eyebrow">Universal Component</div>
+          <h2 class="viz-section-title">Dashboard Summary Card</h2>
+          <p class="viz-section-desc">At-a-glance overview showing key metrics in a card-based layout. Entry point to deeper analytics.</p>
+        </div>
+
+        <div class="viz-card">
+          <div class="viz-card-header">
+            <span class="viz-card-title">Training Overview</span>
+            <div class="viz-card-meta">
+              <span class="viz-card-tag viz-card-tag--all">All Belts</span>
+              <span class="viz-card-tag viz-card-tag--confidence">Confidence: 9</span>
+            </div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-metric">
+              <div class="summary-metric-value summary-metric-value--gold">127</div>
+              <div class="summary-metric-label">Total Sessions</div>
+              <div class="summary-metric-context">Since Mar 2023</div>
+            </div>
+            <div class="summary-metric">
+              <div class="summary-metric-value">186</div>
+              <div class="summary-metric-label">Hours on Mat</div>
+              <div class="summary-metric-context">Avg 88 min/session</div>
+            </div>
+            <div class="summary-metric">
+              <div class="summary-metric-value summary-metric-value--positive">7</div>
+              <div class="summary-metric-label">Day Streak</div>
+              <div class="summary-metric-context">Best: 14 days</div>
+            </div>
+            <div class="summary-metric">
+              <div class="summary-metric-value">3</div>
+              <div class="summary-metric-label">Stripes</div>
+              <div class="summary-metric-context">White Belt</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Belt Progression Checklist -->
+      <section class="viz-section">
+        <div class="viz-section-header">
+          <div class="viz-section-eyebrow">White Belt Focus</div>
+          <h2 class="viz-section-title">Belt Progression Checklist</h2>
+          <p class="viz-section-desc">Demystifies promotion criteria with visual indicators. Shows clear path to next belt. Reduces "am I getting better?" anxiety.</p>
+        </div>
+
+        <div class="viz-card">
+          <div class="viz-card-header">
+            <span class="viz-card-title">Requirements for Blue Belt</span>
+            <div class="viz-card-meta">
+              <span class="viz-card-tag viz-card-tag--belt">White Belt</span>
+              <span class="viz-card-tag viz-card-tag--confidence">Confidence: 8</span>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Path to Blue Belt</div>
+            <div class="checklist-subtitle">12 of 18 requirements completed</div>
+
+            <div class="checklist-section">
+              <div class="checklist-section-title">Foundational Skills</div>
+
+              <div class="checklist-item">
+                <div class="checklist-checkbox checklist-checkbox--checked">
+                  <svg class="checklist-check" viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <div class="checklist-text">
+                  <div class="checklist-name checklist-name--completed">Basic breakfalls (forward, backward, side)</div>
+                  <div class="checklist-meta">Completed Nov 2023</div>
+                </div>
+              </div>
+
+              <div class="checklist-item">
+                <div class="checklist-checkbox checklist-checkbox--checked">
+                  <svg class="checklist-check" viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <div class="checklist-text">
+                  <div class="checklist-name checklist-name--completed">Hip escape (shrimp) proficiency</div>
+                  <div class="checklist-meta">Completed Oct 2023</div>
+                </div>
+              </div>
+
+              <div class="checklist-item">
+                <div class="checklist-checkbox checklist-checkbox--partial">
+                  <svg class="checklist-check" viewBox="0 0 24 24" style="stroke: var(--color-black);">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </div>
+                <div class="checklist-text">
+                  <div class="checklist-name">Technical standup</div>
+                  <div class="checklist-meta">In progress - needs more drilling</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="checklist-section">
+              <div class="checklist-section-title">Guard Techniques</div>
+
+              <div class="checklist-item">
+                <div class="checklist-checkbox checklist-checkbox--checked">
+                  <svg class="checklist-check" viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <div class="checklist-text">
+                  <div class="checklist-name checklist-name--completed">Closed guard maintenance</div>
+                </div>
+              </div>
+
+              <div class="checklist-item">
+                <div class="checklist-checkbox checklist-checkbox--checked">
+                  <svg class="checklist-check" viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <div class="checklist-text">
+                  <div class="checklist-name checklist-name--completed">Scissor sweep</div>
+                </div>
+              </div>
+
+              <div class="checklist-item">
+                <div class="checklist-checkbox">
+                </div>
+                <div class="checklist-text">
+                  <div class="checklist-name">Hip bump sweep</div>
+                  <div class="checklist-meta">Not started</div>
+                </div>
+              </div>
+
+              <div class="checklist-item">
+                <div class="checklist-checkbox">
+                </div>
+                <div class="checklist-text">
+                  <div class="checklist-name">Triangle from guard</div>
+                  <div class="checklist-meta">Not started</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Goal Progress -->
+      <section class="viz-section">
+        <div class="viz-section-header">
+          <div class="viz-section-eyebrow">Universal Component</div>
+          <h2 class="viz-section-title">Goal Progress Visualization</h2>
+          <p class="viz-section-desc">Visual progress bars for technique mastery, attendance, and belt promotion targets. Research shows goals with visual feedback outperform abstract goals.</p>
+        </div>
+
+        <div class="viz-card">
+          <div class="viz-card-header">
+            <span class="viz-card-title">Active Goals</span>
+            <div class="viz-card-meta">
+              <span class="viz-card-tag viz-card-tag--all">All Belts</span>
+              <span class="viz-card-tag viz-card-tag--confidence">Confidence: 10</span>
+            </div>
+          </div>
+          <div class="goals-container">
+            <div class="goals-title">Your Goals</div>
+
+            <div class="goal-item">
+              <div class="goal-header">
+                <span class="goal-name">100 Sessions Milestone</span>
+                <span class="goal-progress-text">87 / 100</span>
+              </div>
+              <div class="goal-track">
+                <div class="goal-fill goal-fill--positive" style="width: 87%;"></div>
+              </div>
+            </div>
+
+            <div class="goal-item">
+              <div class="goal-header">
+                <span class="goal-name">Master Closed Guard Sweeps</span>
+                <span class="goal-progress-text">3 / 5 techniques</span>
+              </div>
+              <div class="goal-track">
+                <div class="goal-fill" style="width: 60%;"></div>
+              </div>
+            </div>
+
+            <div class="goal-item">
+              <div class="goal-header">
+                <span class="goal-name">Train 3x per week (8 week streak)</span>
+                <span class="goal-progress-text">5 / 8 weeks</span>
+              </div>
+              <div class="goal-track">
+                <div class="goal-fill" style="width: 62.5%;"></div>
+              </div>
+            </div>
+
+            <div class="goal-item">
+              <div class="goal-header">
+                <span class="goal-name">Compete in Local Tournament</span>
+                <span class="goal-progress-text">Registration pending</span>
+              </div>
+              <div class="goal-track">
+                <div class="goal-fill" style="width: 25%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Tier 2 Content -->
+  <div id="tier2" class="tab-content">
+    <div class="viz-gallery">
+
+      <!-- Session Type Distribution -->
+      <section class="viz-section">
+        <div class="viz-section-header">
+          <div class="viz-section-eyebrow">Blue Belt Focus</div>
+          <h2 class="viz-section-title">Session Type Distribution</h2>
+          <p class="viz-section-desc">Donut chart showing training balance across session types. Reveals if training is imbalanced (gi-only, drilling-only, etc.).</p>
+        </div>
+
+        <div class="viz-card">
+          <div class="viz-card-header">
+            <span class="viz-card-title">Training Distribution</span>
+            <div class="viz-card-meta">
+              <span class="viz-card-tag viz-card-tag--blue">Blue+</span>
+              <span class="viz-card-tag viz-card-tag--confidence">Confidence: 9</span>
+            </div>
+          </div>
+          <div class="donut-container">
+            <div class="donut-chart">
+              <svg viewBox="0 0 200 200">
+                <defs>
+                  <linearGradient id="giGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#3B82F6" />
+                    <stop offset="100%" style="stop-color:#2563EB" />
+                  </linearGradient>
+                </defs>
+                <!-- Gi: 45% = 162 degrees -->
+                <circle class="donut-segment" cx="100" cy="100" r="70"
+                        stroke="#3B82F6" stroke-dasharray="198 440" stroke-dashoffset="0"></circle>
+                <!-- No-Gi: 30% = 108 degrees -->
+                <circle class="donut-segment" cx="100" cy="100" r="70"
+                        stroke="#F97316" stroke-dasharray="132 440" stroke-dashoffset="-198"></circle>
+                <!-- Open Mat: 15% = 54 degrees -->
+                <circle class="donut-segment" cx="100" cy="100" r="70"
+                        stroke="#A855F7" stroke-dasharray="66 440" stroke-dashoffset="-330"></circle>
+                <!-- Competition: 10% = 36 degrees -->
+                <circle class="donut-segment" cx="100" cy="100" r="70"
+                        stroke="#EF4444" stroke-dasharray="44 440" stroke-dashoffset="-396"></circle>
+              </svg>
+              <div class="donut-center">
+                <div class="donut-center-value">127</div>
+                <div class="donut-center-label">Sessions</div>
+              </div>
+            </div>
+            <div class="donut-legend">
+              <div class="donut-legend-item">
+                <div class="donut-legend-color" style="background: #3B82F6;"></div>
+                <span class="donut-legend-label">Gi Classes</span>
+                <span class="donut-legend-value">57 (45%)</span>
+              </div>
+              <div class="donut-legend-item">
+                <div class="donut-legend-color" style="background: #F97316;"></div>
+                <span class="donut-legend-label">No-Gi Classes</span>
+                <span class="donut-legend-value">38 (30%)</span>
+              </div>
+              <div class="donut-legend-item">
+                <div class="donut-legend-color" style="background: #A855F7;"></div>
+                <span class="donut-legend-label">Open Mat</span>
+                <span class="donut-legend-value">19 (15%)</span>
+              </div>
+              <div class="donut-legend-item">
+                <div class="donut-legend-color" style="background: #EF4444;"></div>
+                <span class="donut-legend-label">Competition Prep</span>
+                <span class="donut-legend-value">13 (10%)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Training Frequency Trend -->
+      <section class="viz-section">
+        <div class="viz-section-header">
+          <div class="viz-section-eyebrow">Blue Belt Focus</div>
+          <h2 class="viz-section-title">Training Frequency Trend</h2>
+          <p class="viz-section-desc">Line chart with rolling averages tracking consistency over months. Normalizes plateaus through data visualization.</p>
+        </div>
+
+        <div class="viz-card">
+          <div class="viz-card-header">
+            <span class="viz-card-title">Sessions Per Week (6 Month Trend)</span>
+            <div class="viz-card-meta">
+              <span class="viz-card-tag viz-card-tag--blue">Blue Belt</span>
+              <span class="viz-card-tag viz-card-tag--confidence">Confidence: 9</span>
+            </div>
+          </div>
+          <div class="trend-container">
+            <div class="trend-header">
+              <div>
+                <div class="trend-title">Weekly Training Frequency</div>
+              </div>
+              <div class="trend-value">+23%</div>
+            </div>
+            <div class="trend-chart">
+              <svg viewBox="0 0 600 160" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="trend-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:rgba(245, 166, 35, 0.3)" />
+                    <stop offset="100%" style="stop-color:rgba(245, 166, 35, 0)" />
+                  </linearGradient>
+                </defs>
+                <!-- Area fill -->
+                <path class="trend-area" d="M0,120 L50,100 L100,110 L150,80 L200,90 L250,60 L300,70 L350,50 L400,55 L450,40 L500,45 L550,30 L600,35 L600,160 L0,160 Z"></path>
+                <!-- Line -->
+                <path class="trend-line" d="M0,120 L50,100 L100,110 L150,80 L200,90 L250,60 L300,70 L350,50 L400,55 L450,40 L500,45 L550,30 L600,35"></path>
+                <!-- Dots -->
+                <circle class="trend-dot" cx="0" cy="120" r="4"></circle>
+                <circle class="trend-dot" cx="100" cy="110" r="4"></circle>
+                <circle class="trend-dot" cx="200" cy="90" r="4"></circle>
+                <circle class="trend-dot" cx="300" cy="70" r="4"></circle>
+                <circle class="trend-dot" cx="400" cy="55" r="4"></circle>
+                <circle class="trend-dot" cx="500" cy="45" r="4"></circle>
+                <circle class="trend-dot" cx="600" cy="35" r="4"></circle>
+              </svg>
+            </div>
+            <div class="trend-labels">
+              <span class="trend-label">Jul</span>
+              <span class="trend-label">Aug</span>
+              <span class="trend-label">Sep</span>
+              <span class="trend-label">Oct</span>
+              <span class="trend-label">Nov</span>
+              <span class="trend-label">Dec</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technique Coverage Matrix -->
+      <section class="viz-section">
+        <div class="viz-section-header">
+          <div class="viz-section-eyebrow">Blue Belt Focus</div>
+          <h2 class="viz-section-title">Technique Coverage Matrix</h2>
+          <p class="viz-section-desc">Position vs. Category grid with color-coded mastery levels. Identifies gaps in curriculum knowledge and prevents "only playing guard" syndrome.</p>
+        </div>
+
+        <div class="viz-card">
+          <div class="viz-card-header">
+            <span class="viz-card-title">Technique Proficiency by Position</span>
+            <div class="viz-card-meta">
+              <span class="viz-card-tag viz-card-tag--blue">Blue Belt</span>
+              <span class="viz-card-tag viz-card-tag--confidence">Confidence: 7</span>
+            </div>
+          </div>
+          <div class="matrix-container">
+            <div class="matrix-grid">
+              <div class="matrix-header"></div>
+              <div class="matrix-header">Sweeps</div>
+              <div class="matrix-header">Submissions</div>
+              <div class="matrix-header">Escapes</div>
+              <div class="matrix-header">Passes</div>
+              <div class="matrix-header">Transitions</div>
+
+              <div class="matrix-row-label">Closed Guard</div>
+              <div class="matrix-cell" data-level="4"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="3"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="2"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="0"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="3"><div class="matrix-dot"></div></div>
+
+              <div class="matrix-row-label">Half Guard</div>
+              <div class="matrix-cell" data-level="3"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="2"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="3"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="1"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="2"><div class="matrix-dot"></div></div>
+
+              <div class="matrix-row-label">Side Control</div>
+              <div class="matrix-cell" data-level="0"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="2"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="4"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="0"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="1"><div class="matrix-dot"></div></div>
+
+              <div class="matrix-row-label">Mount</div>
+              <div class="matrix-cell" data-level="0"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="3"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="2"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="0"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="2"><div class="matrix-dot"></div></div>
+
+              <div class="matrix-row-label">Back Control</div>
+              <div class="matrix-cell" data-level="1"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="4"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="1"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="0"><div class="matrix-dot"></div></div>
+              <div class="matrix-cell" data-level="3"><div class="matrix-dot"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sparring Pattern Analysis -->
+      <section class="viz-section">
+        <div class="viz-section-header">
+          <div class="viz-section-eyebrow">Purple Belt Focus</div>
+          <h2 class="viz-section-title">Sparring Pattern Analysis</h2>
+          <p class="viz-section-desc">Horizontal bar charts showing submission success rates and position time. Shows what's working in live rolling vs. just drilling.</p>
+        </div>
+
+        <div class="viz-card">
+          <div class="viz-card-header">
+            <span class="viz-card-title">Submission Exchange (Last 30 Rolls)</span>
+            <div class="viz-card-meta">
+              <span class="viz-card-tag viz-card-tag--purple">Purple Belt</span>
+              <span class="viz-card-tag viz-card-tag--confidence">Confidence: 8</span>
+            </div>
+          </div>
+          <div class="sparring-container">
+            <div class="sparring-bars">
+              <div class="sparring-bar-row">
+                <div class="sparring-bar-label">Rear Naked</div>
+                <div class="sparring-bar-track">
+                  <div class="sparring-bar-positive" style="width: 70%;">
+                    <span class="sparring-bar-value">7</span>
+                  </div>
+                  <div class="sparring-bar-negative" style="width: 30%;">
+                    <span class="sparring-bar-value">3</span>
+                  </div>
+                </div>
+              </div>
+              <div class="sparring-bar-row">
+                <div class="sparring-bar-label">Triangle</div>
+                <div class="sparring-bar-track">
+                  <div class="sparring-bar-positive" style="width: 55%;">
+                    <span class="sparring-bar-value">5</span>
+                  </div>
+                  <div class="sparring-bar-negative" style="width: 45%;">
+                    <span class="sparring-bar-value">4</span>
+                  </div>
+                </div>
+              </div>
+              <div class="sparring-bar-row">
+                <div class="sparring-bar-label">Armbar</div>
+                <div class="sparring-bar-track">
+                  <div class="sparring-bar-positive" style="width: 40%;">
+                    <span class="sparring-bar-value">4</span>
+                  </div>
+                  <div class="sparring-bar-negative" style="width: 60%;">
+                    <span class="sparring-bar-value">6</span>
+                  </div>
+                </div>
+              </div>
+              <div class="sparring-bar-row">
+                <div class="sparring-bar-label">Guillotine</div>
+                <div class="sparring-bar-track">
+                  <div class="sparring-bar-positive" style="width: 35%;">
+                    <span class="sparring-bar-value">3</span>
+                  </div>
+                  <div class="sparring-bar-negative" style="width: 65%;">
+                    <span class="sparring-bar-value">5</span>
+                  </div>
+                </div>
+              </div>
+              <div class="sparring-bar-row">
+                <div class="sparring-bar-label">Kimura</div>
+                <div class="sparring-bar-track">
+                  <div class="sparring-bar-positive" style="width: 60%;">
+                    <span class="sparring-bar-value">6</span>
+                  </div>
+                  <div class="sparring-bar-negative" style="width: 40%;">
+                    <span class="sparring-bar-value">4</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 32px; margin-top: 24px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 16px; height: 16px; background: var(--color-positive);"></div>
+                <span style="font-size: 13px; color: var(--color-gray-400);">Landed</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 16px; height: 16px; background: var(--color-negative);"></div>
+                <span style="font-size: 13px; color: var(--color-gray-400);">Received</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Milestone Timeline -->
+      <section class="viz-section">
+        <div class="viz-section-header">
+          <div class="viz-section-eyebrow">Universal Component</div>
+          <h2 class="viz-section-title">Milestone Timeline</h2>
+          <p class="viz-section-desc">Horizontal timeline showing earned milestones with dates. Non-intrusive celebration of progress.</p>
+        </div>
+
+        <div class="viz-card">
+          <div class="viz-card-header">
+            <span class="viz-card-title">Your Journey</span>
+            <div class="viz-card-meta">
+              <span class="viz-card-tag viz-card-tag--all">All Belts</span>
+              <span class="viz-card-tag viz-card-tag--confidence">Confidence: 8</span>
+            </div>
+          </div>
+          <div class="timeline-container">
+            <div class="timeline-title">Achievement Timeline</div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot timeline-dot--completed"></div>
+                <div class="timeline-date">Dec 2024</div>
+                <div class="timeline-event">3rd Stripe Earned</div>
+                <div class="timeline-description">White belt - 3 stripes</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot timeline-dot--completed"></div>
+                <div class="timeline-date">Nov 2024</div>
+                <div class="timeline-event">100 Sessions Milestone</div>
+                <div class="timeline-description">Century club member</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot timeline-dot--completed"></div>
+                <div class="timeline-date">Oct 2024</div>
+                <div class="timeline-event">First Competition</div>
+                <div class="timeline-description">NAGA - Bronze Medal</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot timeline-dot--completed"></div>
+                <div class="timeline-date">Aug 2024</div>
+                <div class="timeline-event">2nd Stripe Earned</div>
+                <div class="timeline-description">White belt - 2 stripes</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot timeline-dot--completed"></div>
+                <div class="timeline-date">Mar 2024</div>
+                <div class="timeline-event">Started Training</div>
+                <div class="timeline-description">First day on the mats</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Tier 3 Content -->
+  <div id="tier3" class="tab-content">
+    <div class="viz-gallery">
+
+      <!-- Positional Radar Chart -->
+      <section class="viz-section">
+        <div class="viz-section-header">
+          <div class="viz-section-eyebrow">Purple Belt Focus</div>
+          <h2 class="viz-section-title">Positional Strength Radar</h2>
+          <p class="viz-section-desc">Spider/web chart visualizing game balance across BJJ positions. Immediately reveals specialization vs. well-rounded approach.</p>
+        </div>
+
+        <div class="viz-card">
+          <div class="viz-card-header">
+            <span class="viz-card-title">Positional Game Analysis</span>
+            <div class="viz-card-meta">
+              <span class="viz-card-tag viz-card-tag--purple">Purple Belt</span>
+              <span class="viz-card-tag viz-card-tag--confidence">Confidence: 6</span>
+            </div>
+          </div>
+          <div class="radar-container">
+            <div class="radar-chart">
+              <svg viewBox="0 0 300 300">
+                <!-- Grid circles -->
+                <circle class="radar-grid" cx="150" cy="150" r="120"></circle>
+                <circle class="radar-grid" cx="150" cy="150" r="90"></circle>
+                <circle class="radar-grid" cx="150" cy="150" r="60"></circle>
+                <circle class="radar-grid" cx="150" cy="150" r="30"></circle>
+
+                <!-- Axis lines (6 positions) -->
+                <line class="radar-axis" x1="150" y1="150" x2="150" y2="30"></line>
+                <line class="radar-axis" x1="150" y1="150" x2="254" y2="90"></line>
+                <line class="radar-axis" x1="150" y1="150" x2="254" y2="210"></line>
+                <line class="radar-axis" x1="150" y1="150" x2="150" y2="270"></line>
+                <line class="radar-axis" x1="150" y1="150" x2="46" y2="210"></line>
+                <line class="radar-axis" x1="150" y1="150" x2="46" y2="90"></line>
+
+                <!-- Data area (normalized to 120px radius) -->
+                <polygon class="radar-area" points="150,54 230,102 218,222 150,234 70,186 82,90"></polygon>
+
+                <!-- Data points -->
+                <circle class="radar-point" cx="150" cy="54" r="5"></circle>
+                <circle class="radar-point" cx="230" cy="102" r="5"></circle>
+                <circle class="radar-point" cx="218" cy="222" r="5"></circle>
+                <circle class="radar-point" cx="150" cy="234" r="5"></circle>
+                <circle class="radar-point" cx="70" cy="186" r="5"></circle>
+                <circle class="radar-point" cx="82" cy="90" r="5"></circle>
+
+                <!-- Labels -->
+                <text class="radar-label" x="150" y="15" text-anchor="middle">Guard</text>
+                <text class="radar-label" x="275" y="90" text-anchor="start">Half Guard</text>
+                <text class="radar-label" x="275" y="220" text-anchor="start">Side Control</text>
+                <text class="radar-label" x="150" y="295" text-anchor="middle">Mount</text>
+                <text class="radar-label" x="25" y="220" text-anchor="end">Back</text>
+                <text class="radar-label" x="25" y="90" text-anchor="end">Standing</text>
+              </svg>
+            </div>
+            <div class="radar-legend">
+              <div class="radar-legend-title">Position Breakdown</div>
+              <div class="radar-stat">
+                <span class="radar-stat-label">Guard (Top)</span>
+                <span class="radar-stat-value">85%</span>
+              </div>
+              <div class="radar-stat">
+                <span class="radar-stat-label">Half Guard</span>
+                <span class="radar-stat-value">72%</span>
+              </div>
+              <div class="radar-stat">
+                <span class="radar-stat-label">Side Control</span>
+                <span class="radar-stat-value">65%</span>
+              </div>
+              <div class="radar-stat">
+                <span class="radar-stat-label">Mount</span>
+                <span class="radar-stat-value">58%</span>
+              </div>
+              <div class="radar-stat">
+                <span class="radar-stat-label">Back Control</span>
+                <span class="radar-stat-value">45%</span>
+              </div>
+              <div class="radar-stat">
+                <span class="radar-stat-label">Standing/Takedowns</span>
+                <span class="radar-stat-value">52%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes about advanced visualizations -->
+      <section class="viz-section">
+        <div class="viz-section-header">
+          <div class="viz-section-eyebrow">Implementation Notes</div>
+          <h2 class="viz-section-title">Advanced Visualizations</h2>
+          <p class="viz-section-desc">These visualizations require more complex data or have mobile optimization challenges. Consider for desktop or future phases.</p>
+        </div>
+
+        <div style="display: grid; gap: 16px;">
+          <div class="callout callout--positive">
+            <div class="callout-label">Position Transition Flow (Sankey)</div>
+            <p class="callout-text">Shows position sequences during rolling. Powerful for strategic planning but complex on mobile. Confidence: 5. Consider desktop-only implementation.</p>
+          </div>
+
+          <div class="callout callout--positive">
+            <div class="callout-label">Coach Feedback Theme Timeline</div>
+            <p class="callout-text">Stream graph showing how feedback themes evolve over time. Requires NLP categorization of feedback text. Confidence: 6. May simplify to stacked bar chart.</p>
+          </div>
+
+          <div class="callout callout--positive">
+            <div class="callout-label">Technique Drilling Frequency</div>
+            <p class="callout-text">Word cloud or bubble chart showing drilling distribution. Word clouds are trendy but hard to read on mobile. Bubble charts more reliable. Confidence: 7.</p>
+          </div>
+
+          <div class="callout callout--positive">
+            <div class="callout-label">Injury Timeline & Recovery</div>
+            <p class="callout-text">Critical for safety tracking. 66% of BJJ athletes injured within 3 years. Implement as dedicated section, not main dashboard. Confidence: 8.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      if (tab.tagName === 'BUTTON') {
+        tab.addEventListener('click', () => {
+          // Remove active from all tabs and content
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+          // Add active to clicked tab and corresponding content
+          tab.classList.add('active');
+          const tabId = tab.dataset.tab;
+          document.getElementById(tabId).classList.add('active');
+        });
+      }
+    });
+
+    // Generate heat map
+    function generateHeatMap() {
+      const container = document.getElementById('heatMapWeeks');
+      const weeks = 13; // ~3 months
+
+      for (let w = 0; w < weeks; w++) {
+        const week = document.createElement('div');
+        week.className = 'heat-map-week';
+
+        for (let d = 0; d < 7; d++) {
+          const cell = document.createElement('div');
+          cell.className = 'heat-map-cell';
+
+          // Generate realistic training pattern
+          // More likely to train Mon, Wed, Fri, Sat
+          let level = 0;
+          const dayWeight = [0.7, 0.3, 0.8, 0.4, 0.6, 0.9, 0.5][d];
+          const random = Math.random();
+
+          if (random < dayWeight * 0.3) {
+            level = Math.floor(Math.random() * 3) + 2; // 2-4
+          } else if (random < dayWeight * 0.5) {
+            level = 1;
+          }
+
+          // Some vacation/rest weeks
+          if ((w === 4 || w === 5) && random > 0.3) {
+            level = 0;
+          }
+
+          cell.dataset.level = level;
+          cell.title = `${level} session${level !== 1 ? 's' : ''}`;
+          week.appendChild(cell);
+        }
+
+        container.appendChild(week);
+      }
+    }
+
+    generateHeatMap();
+
+    // Animate progress rings on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.progress-ring').forEach(ring => {
+      observer.observe(ring);
+    });
+  </script>
+</body>
+</html>
