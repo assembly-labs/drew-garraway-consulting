@@ -30,14 +30,18 @@ import {
 import type { StyleFingerprintData } from '../ui';
 import { AttackProfile } from './AttackProfile';
 import {
-  YourProgress,
-  FoundationsProgress,
+  WeeklyProgressRing,
+  CalendarHeatMap,
+  DashboardSummaryCard,
   DefenseFocus,
   TechniquePairings,
   BluesDetector,
   YourJourney,
   TechniqueMastery,
   RecentRolls,
+  SessionTypeDistribution,
+  SparringPatternAnalysis,
+  AchievementTimeline,
   type SubmissionReceived,
 } from './stats-modules';
 import {
@@ -148,6 +152,60 @@ const MOCK_PURPLE_BELT_SUBMISSIONS: SubmissionReceived[] = [
   { technique: 'Kneebar', daysAgo: 6 },
 ];
 
+// Mock session type data for blue belts
+const MOCK_BLUE_BELT_SESSION_TYPES = [
+  { type: 'gi' as const, count: 18, label: 'Gi', color: '#3B82F6' },
+  { type: 'nogi' as const, count: 12, label: 'No-Gi', color: '#F97316' },
+  { type: 'openmat' as const, count: 8, label: 'Open Mat', color: '#A855F7' },
+  { type: 'drilling' as const, count: 4, label: 'Drilling', color: '#22C55E' },
+];
+
+// Mock session type data for purple+ belts (more variety)
+const MOCK_PURPLE_BELT_SESSION_TYPES = [
+  { type: 'gi' as const, count: 24, label: 'Gi', color: '#3B82F6' },
+  { type: 'nogi' as const, count: 20, label: 'No-Gi', color: '#F97316' },
+  { type: 'openmat' as const, count: 14, label: 'Open Mat', color: '#A855F7' },
+  { type: 'drilling' as const, count: 8, label: 'Drilling', color: '#22C55E' },
+  { type: 'competition' as const, count: 6, label: 'Comp Prep', color: '#EF4444' },
+];
+
+// Mock sparring exchange data for blue belts
+const MOCK_BLUE_BELT_EXCHANGES = [
+  { technique: 'Armbar', landed: 8, received: 6 },
+  { technique: 'Triangle', landed: 5, received: 8 },
+  { technique: 'RNC', landed: 12, received: 4 },
+  { technique: 'Heel Hook', landed: 2, received: 7 },
+  { technique: 'Guillotine', landed: 6, received: 5 },
+];
+
+// Mock sparring exchange data for purple+ belts
+const MOCK_PURPLE_BELT_EXCHANGES = [
+  { technique: 'Heel Hook', landed: 15, received: 8 },
+  { technique: 'RNC', landed: 22, received: 6 },
+  { technique: 'Armbar', landed: 18, received: 10 },
+  { technique: 'Darce', landed: 12, received: 4 },
+  { technique: 'Triangle', landed: 14, received: 7 },
+];
+
+// Mock achievements for blue belts
+const MOCK_BLUE_BELT_ACHIEVEMENTS = [
+  { id: 'ach-1', type: 'promotion' as const, title: 'Blue Belt Earned', description: 'Promoted after 18 months of training', date: new Date(Date.now() - 180 * 24 * 60 * 60 * 1000).toISOString(), highlight: true },
+  { id: 'ach-2', type: 'technique' as const, title: 'First Triangle in Sparring', description: 'Landed your first triangle on a resisting opponent', date: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString() },
+  { id: 'ach-3', type: 'streak' as const, title: '10 Day Training Streak', description: 'Trained 10 days in a row', date: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString() },
+  { id: 'ach-4', type: 'session' as const, title: '100 Sessions', description: 'Reached 100 training sessions', date: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString() },
+  { id: 'ach-5', type: 'competition' as const, title: 'First Competition', description: 'Competed in local tournament', date: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString() },
+];
+
+// Mock achievements for purple+ belts
+const MOCK_PURPLE_BELT_ACHIEVEMENTS = [
+  { id: 'ach-p1', type: 'promotion' as const, title: 'Purple Belt Earned', description: 'Promoted after 4 years of dedication', date: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString(), highlight: true },
+  { id: 'ach-p2', type: 'technique' as const, title: 'Berimbolo Chain Working', description: 'Berimbolo to back take hitting consistently', date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() },
+  { id: 'ach-p3', type: 'milestone' as const, title: '200 Sessions', description: 'Two hundred training sessions logged', date: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString() },
+  { id: 'ach-p4', type: 'competition' as const, title: 'Gold at Regionals', description: 'Won gold in purple belt division', date: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString(), highlight: true },
+  { id: 'ach-p5', type: 'streak' as const, title: '21 Day Streak', description: 'Three weeks of consistent training', date: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString() },
+  { id: 'ach-p6', type: 'technique' as const, title: 'First Heel Hook', description: 'Caught first heel hook in competition', date: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString() },
+];
+
 // Hero metric configuration by primary metric type
 interface HeroMetric {
   value: number;
@@ -239,6 +297,48 @@ function getInsightMessage(insightFocus: string, isAtRisk?: boolean): { working:
         focus: 'Stay consistent.',
       };
   }
+}
+
+// Generate mock session dates for heat map visualization
+// Creates a realistic training pattern based on total sessions and persona type
+function generateMockSessionDates(
+  totalSessions: number,
+  isAtRisk: boolean
+): Record<string, number> {
+  const sessionsByDate: Record<string, number> = {};
+  const today = new Date();
+  const weeksBack = 13;
+
+  // Training frequency patterns (probability of training each day)
+  // At-risk: sporadic, gaps; Healthy: consistent Mon/Wed/Fri/Sat
+  const dayWeights = isAtRisk
+    ? [0.15, 0.1, 0.15, 0.1, 0.2, 0.25, 0.1] // Lower, more random
+    : [0.6, 0.2, 0.7, 0.2, 0.5, 0.8, 0.3];   // Higher on Mon, Wed, Fri, Sat
+
+  // Distribute sessions across the weeks
+  const sessionsToDistribute = Math.min(totalSessions, weeksBack * 4);
+  let remaining = sessionsToDistribute;
+
+  for (let week = 0; week < weeksBack && remaining > 0; week++) {
+    // At-risk users have "gap weeks" where they skip
+    const isGapWeek = isAtRisk && (week === 4 || week === 5 || week === 8);
+
+    for (let day = 0; day < 7 && remaining > 0; day++) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - (weeksBack - week - 1) * 7 - (6 - day));
+      const dateStr = date.toISOString().split('T')[0];
+
+      if (!isGapWeek && Math.random() < dayWeights[day]) {
+        // Sometimes train twice on weekends (open mat + class)
+        const isSaturday = day === 5;
+        const sessionCount = isSaturday && Math.random() > 0.7 ? 2 : 1;
+        sessionsByDate[dateStr] = sessionCount;
+        remaining -= sessionCount;
+      }
+    }
+  }
+
+  return sessionsByDate;
 }
 
 export function Dashboard(_props: DashboardProps) {
@@ -905,23 +1005,38 @@ export function Dashboard(_props: DashboardProps) {
       </section>
 
       {/* ============================================
-          WHITE BELT MODULES - Retention-focused stats
+          WHITE BELT MODULES - Tier 1 Infographics
           Only shown for white belts to maximize retention
 
-          Consolidated: JourneyTimeline + ConsistencyScore → YourProgress
-          - Session count shown in Hero (not duplicated here)
-          - Streak shown in Streak Section (not duplicated here)
-          - Focus on progress to 50 + weekly/monthly frequency
+          NEW: Weekly Progress Ring, Calendar Heat Map, Dashboard Summary
+          REMOVED: YourProgress, FoundationsProgress (replaced by above)
+          KEPT: DefenseFocus (offense/defense bar charts)
           ============================================ */}
       {showWhiteBeltModules && (
         <>
-          {/* Your Progress - Progress to 50 and frequency tracking */}
-          {/* At-risk personas show low session counts; excelling personas show higher */}
-          <YourProgress
-            sessionCount={stats.totalSessions}
-            sessionsThisWeek={isAtRiskPersona ? 1 : 4}
-            sessionsThisMonth={stats.thisMonth.sessions}
-            targetFrequency={activeDemoProfile?.contextProfile?.targetFrequency || 3}
+          {/* Weekly Progress Ring - Apple Watch-style weekly goal */}
+          <WeeklyProgressRing
+            sessionsThisWeek={isAtRiskPersona ? 1 : stats.thisMonth.sessions > 0 ? Math.min(4, Math.ceil(stats.thisMonth.sessions / 4)) : 2}
+            weeklyGoal={activeDemoProfile?.contextProfile?.targetFrequency || 3}
+          />
+
+          {/* Calendar Heat Map - GitHub-style consistency visualization */}
+          <CalendarHeatMap
+            sessionsByDate={generateMockSessionDates(stats.totalSessions, isAtRiskPersona)}
+            weeks={13}
+            totalSessions={stats.totalSessions}
+            avgPerWeek={isAtRiskPersona ? 1.5 : 2.8}
+          />
+
+          {/* Dashboard Summary Card - Key metrics at-a-glance */}
+          <DashboardSummaryCard
+            totalSessions={stats.totalSessions}
+            totalHours={stats.totalHours}
+            currentStreak={stats.currentStreak}
+            bestStreak={stats.longestStreak}
+            belt={profile.belt}
+            stripes={activeDemoProfile?.contextProfile?.stripes || 0}
+            trainingStartDate={activeDemoProfile?.contextProfile?.trainingStartDate || undefined}
           />
 
           {/* Defense Focus - Toggleable offense/defense stats */}
@@ -931,11 +1046,6 @@ export function Dashboard(_props: DashboardProps) {
             submissionsReceived={isAtRiskPersona ? MOCK_WHITE_BELT_AT_RISK_DEFENSE : MOCK_WHITE_BELT_DEFENSE}
             defaultView="defense"
           />
-
-          {/* Foundations Progress - Fundamental technique checklist */}
-          <FoundationsProgress
-            techniqueHistory={techniqueHistory}
-          />
         </>
       )}
 
@@ -943,14 +1053,34 @@ export function Dashboard(_props: DashboardProps) {
           BLUE BELT MODULES - Identity & Game Development
           Only shown for blue belts
 
-          Consolidated:
-          - YourStyle, VulnerabilityMap → AttackProfile handles submission story
-          - RecentRolls handles defense coaching with videos
-          - Keep: TechniquePairings (unique drilling analysis)
-          - Keep: BluesDetector (unique intervention system)
+          Tier 1 Infographics:
+          - SessionTypeDistribution: Donut chart of training mix
+          - SparringPatternAnalysis: Submission exchange rates
+          - AchievementTimeline: Personal journey milestones
+
+          Legacy modules (kept for unique functionality):
+          - TechniquePairings: Unique drilling co-occurrence analysis
+          - BluesDetector: Unique dropout intervention system
           ============================================ */}
       {showBlueBeltModules && (
         <>
+          {/* Session Type Distribution - Donut chart of training mix */}
+          <SessionTypeDistribution
+            sessionTypes={MOCK_BLUE_BELT_SESSION_TYPES}
+          />
+
+          {/* Sparring Pattern Analysis - Submission exchange rates */}
+          <SparringPatternAnalysis
+            exchanges={MOCK_BLUE_BELT_EXCHANGES}
+            periodLabel="Last 30 Rolls"
+          />
+
+          {/* Achievement Timeline - Personal journey milestones */}
+          <AchievementTimeline
+            achievements={MOCK_BLUE_BELT_ACHIEVEMENTS}
+            maxItems={5}
+          />
+
           {/* Technique Pairings - Co-occurrence analysis */}
           <TechniquePairings
             techniqueHistory={techniqueHistory}
@@ -971,12 +1101,34 @@ export function Dashboard(_props: DashboardProps) {
           PURPLE BELT MODULES - Depth & Systems
           Shown for purple, brown, and black belts
 
-          Consolidated:
-          - LongGame + SubmissionTrends → YourJourney
-          - TechniqueMastery simplified (depth analysis removed, in AttackProfile)
+          Tier 1 Infographics:
+          - SessionTypeDistribution: Donut chart of training mix
+          - SparringPatternAnalysis: Submission exchange rates
+          - AchievementTimeline: Personal journey milestones
+
+          Legacy modules (kept for unique functionality):
+          - YourJourney: Multi-year progression + submission trends
+          - TechniqueMastery: Specialization depth analysis
           ============================================ */}
       {showPurpleBeltModules && (
         <>
+          {/* Session Type Distribution - Donut chart of training mix */}
+          <SessionTypeDistribution
+            sessionTypes={MOCK_PURPLE_BELT_SESSION_TYPES}
+          />
+
+          {/* Sparring Pattern Analysis - Submission exchange rates */}
+          <SparringPatternAnalysis
+            exchanges={MOCK_PURPLE_BELT_EXCHANGES}
+            periodLabel="Last 30 Rolls"
+          />
+
+          {/* Achievement Timeline - Personal journey milestones */}
+          <AchievementTimeline
+            achievements={MOCK_PURPLE_BELT_ACHIEVEMENTS}
+            maxItems={6}
+          />
+
           {/* Your Journey - Multi-year progression + submission trends */}
           <YourJourney
             yearlyData={purpleBeltData.yearlyData}
