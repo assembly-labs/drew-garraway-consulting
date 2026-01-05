@@ -1585,22 +1585,47 @@
     <script src="../../assets/js/sie-navigation-config.js"></script>
     <script src="../../assets/js/sie-navigation-component.js"></script>
     <script>
+        // Switch to a specific tab
+        function switchToTab(panelId) {
+            const tab = document.querySelector(`[data-panel="${panelId}"]`);
+            if (tab) {
+                // Remove active from all tabs and panels
+                document.querySelectorAll('.viz-tab').forEach(t => t.classList.remove('viz-tab--active'));
+                document.querySelectorAll('.viz-panel').forEach(p => p.classList.remove('viz-panel--active'));
+
+                // Activate the target tab and panel
+                tab.classList.add('viz-tab--active');
+                document.getElementById(panelId).classList.add('viz-panel--active');
+
+                // Update URL hash without scrolling
+                history.replaceState(null, null, '#' + panelId);
+            }
+        }
+
         // Visualization Tab Switching
         document.querySelectorAll('.viz-tab').forEach(tab => {
             tab.addEventListener('click', function() {
-                // Remove active from all tabs
-                document.querySelectorAll('.viz-tab').forEach(t => t.classList.remove('viz-tab--active'));
-                // Remove active from all panels
-                document.querySelectorAll('.viz-panel').forEach(p => p.classList.remove('viz-panel--active'));
-
-                // Add active to clicked tab
-                this.classList.add('viz-tab--active');
-
-                // Show corresponding panel
-                const panelId = this.dataset.panel;
-                document.getElementById(panelId).classList.add('viz-panel--active');
+                switchToTab(this.dataset.panel);
             });
         });
+
+        // Deep link support - check URL hash on load
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                switchToTab(hash);
+                // Scroll to the tabs area
+                setTimeout(() => {
+                    document.querySelector('.viz-tabs').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+
+        // Handle initial load and hash changes
+        window.addEventListener('hashchange', handleHashChange);
+        if (window.location.hash) {
+            handleHashChange();
+        }
 
         // Smooth scroll for TOC links
         document.querySelectorAll('a[href^="#"]').forEach(link => {
