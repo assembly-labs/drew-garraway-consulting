@@ -13,17 +13,6 @@ interface Tab {
 
 const tabs: Tab[] = [
   {
-    id: 'stats',
-    label: 'Stats',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 20V10" />
-        <path d="M18 20V4" />
-        <path d="M6 20v-4" />
-      </svg>
-    ),
-  },
-  {
     id: 'journal',
     label: 'Journal',
     icon: (
@@ -33,6 +22,15 @@ const tabs: Tab[] = [
         <line x1="16" y1="13" x2="8" y2="13" />
         <line x1="16" y1="17" x2="8" y2="17" />
         <polyline points="10 9 9 9 8 9" />
+      </svg>
+    ),
+  },
+  {
+    id: 'insights',
+    label: 'Insights',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
       </svg>
     ),
   },
@@ -47,11 +45,13 @@ const tabs: Tab[] = [
     ),
   },
   {
-    id: 'insights',
-    label: 'Insights',
+    id: 'stats',
+    label: 'Stats',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+        <path d="M12 20V10" />
+        <path d="M18 20V4" />
+        <path d="M6 20v-4" />
       </svg>
     ),
   },
@@ -67,6 +67,11 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
     <nav
       className="tab-bar"
       style={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
         display: 'grid',
         gridTemplateColumns: `repeat(${tabs.length}, 1fr)`,
         gap: 0,
