@@ -346,6 +346,274 @@
             display: block;
         }
 
+        /* ========== OTC TRADE FLOW STYLES ========== */
+        .otc-section {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .entity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--fh-space-lg);
+            margin-bottom: var(--fh-space-2xl);
+        }
+
+        .entity-card {
+            background: var(--fh-white);
+            border-radius: 12px;
+            padding: var(--fh-space-lg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid var(--fh-gray-200);
+        }
+
+        .entity-card__header {
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-md);
+            margin-bottom: var(--fh-space-md);
+            padding-bottom: var(--fh-space-md);
+            border-bottom: 1px solid var(--fh-gray-200);
+        }
+
+        .entity-card__icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .entity-card__icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .entity-card__icon--platform { background: #EDE9FE; color: #7C3AED; }
+        .entity-card__icon--dealer { background: #DBEAFE; color: #2563EB; }
+        .entity-card__icon--regulator { background: #FEF3C7; color: #D97706; }
+        .entity-card__icon--investor { background: #DCFCE7; color: #16A34A; }
+
+        .entity-card__name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--fh-navy);
+            margin: 0;
+        }
+
+        .entity-card__type {
+            font-size: 0.75rem;
+            color: var(--fh-gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .entity-card__desc {
+            font-size: 0.875rem;
+            color: var(--fh-gray-600);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .entity-card__examples {
+            margin-top: var(--fh-space-sm);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .entity-card__example {
+            background: var(--fh-gray-100);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--fh-gray-700);
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--fh-space-xl);
+            margin: var(--fh-space-2xl) 0;
+        }
+
+        .comparison-box {
+            background: var(--fh-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .comparison-box__header {
+            padding: var(--fh-space-md) var(--fh-space-lg);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-sm);
+        }
+
+        .comparison-box__header--exchange {
+            background: linear-gradient(135deg, #3B82F6, #2563EB);
+            color: white;
+        }
+
+        .comparison-box__header--otc {
+            background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+            color: white;
+        }
+
+        .comparison-box__body {
+            padding: var(--fh-space-lg);
+        }
+
+        .trade-step {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--fh-space-md);
+            margin-bottom: var(--fh-space-md);
+            position: relative;
+        }
+
+        .trade-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .trade-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 36px;
+            bottom: -8px;
+            width: 2px;
+            background: var(--fh-gray-200);
+        }
+
+        .trade-step__number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--fh-gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--fh-gray-600);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .trade-step__content {
+            flex: 1;
+            padding-top: 4px;
+        }
+
+        .trade-step__title {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--fh-navy);
+            margin-bottom: 2px;
+        }
+
+        .trade-step__desc {
+            font-size: 0.8125rem;
+            color: var(--fh-gray-600);
+            line-height: 1.5;
+        }
+
+        .key-difference {
+            background: linear-gradient(135deg, #FDF4FF, #FAE8FF);
+            border: 1px solid #E879F9;
+            border-radius: 8px;
+            padding: var(--fh-space-lg);
+            margin-top: var(--fh-space-xl);
+        }
+
+        .key-difference__title {
+            font-weight: 600;
+            color: #86198F;
+            margin-bottom: var(--fh-space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-sm);
+        }
+
+        .key-difference__content {
+            font-size: 0.9375rem;
+            color: #701A75;
+            line-height: 1.6;
+        }
+
+        .otc-tiers {
+            background: var(--fh-white);
+            border-radius: 12px;
+            padding: var(--fh-space-lg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-top: var(--fh-space-xl);
+        }
+
+        .otc-tiers__title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--fh-navy);
+            margin-bottom: var(--fh-space-md);
+            text-align: center;
+        }
+
+        .otc-tiers__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--fh-space-sm);
+        }
+
+        .otc-tier {
+            text-align: center;
+            padding: var(--fh-space-md);
+            border-radius: 8px;
+            border: 2px solid;
+        }
+
+        .otc-tier--qx {
+            background: #F0FDF4;
+            border-color: #22C55E;
+        }
+
+        .otc-tier--qb {
+            background: #EFF6FF;
+            border-color: #3B82F6;
+        }
+
+        .otc-tier--pink {
+            background: #FDF2F8;
+            border-color: #EC4899;
+        }
+
+        .otc-tier--grey {
+            background: #F3F4F6;
+            border-color: #9CA3AF;
+        }
+
+        .otc-tier__name {
+            font-weight: 700;
+            font-size: 0.9375rem;
+            margin-bottom: 4px;
+        }
+
+        .otc-tier--qx .otc-tier__name { color: #166534; }
+        .otc-tier--qb .otc-tier__name { color: #1E40AF; }
+        .otc-tier--pink .otc-tier__name { color: #9D174D; }
+        .otc-tier--grey .otc-tier__name { color: #4B5563; }
+
+        .otc-tier__desc {
+            font-size: 0.75rem;
+            color: var(--fh-gray-600);
+            line-height: 1.4;
+        }
+
         /* ========== PRINT STYLES ========== */
         @media print {
             .viz-tabs { display: none; }
@@ -416,6 +684,19 @@
             .market-card__content {
                 font-size: 0.875rem;
             }
+
+            /* OTC Section Responsive */
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+
+            .otc-tiers__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .entity-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 480px) {
@@ -478,6 +759,64 @@
             .market-card__label {
                 font-size: 0.625rem;
             }
+
+            /* OTC Section Small Screen */
+            .otc-tiers__grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .otc-tier {
+                padding: var(--fh-space-sm);
+            }
+
+            .otc-tier__name {
+                font-size: 0.8125rem;
+            }
+
+            .otc-tier__desc {
+                font-size: 0.6875rem;
+            }
+
+            .entity-card {
+                padding: var(--fh-space-md);
+            }
+
+            .entity-card__icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .entity-card__icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .entity-card__name {
+                font-size: 0.9375rem;
+            }
+
+            .trade-step__number {
+                width: 28px;
+                height: 28px;
+                font-size: 0.75rem;
+            }
+
+            .trade-step__title {
+                font-size: 0.8125rem;
+            }
+
+            .trade-step__desc {
+                font-size: 0.75rem;
+            }
+
+            .comparison-box__header {
+                font-size: 0.8125rem;
+                padding: var(--fh-space-sm) var(--fh-space-md);
+            }
+
+            .comparison-box__body {
+                padding: var(--fh-space-md);
+            }
         }
     </style>
 </head>
@@ -520,6 +859,7 @@
         <!-- Visualization Selector Tabs -->
         <div class="viz-tabs" role="tablist">
             <button class="viz-tab viz-tab--active" data-panel="flowchart" role="tab">Hierarchy Flowchart</button>
+            <button class="viz-tab" data-panel="otc-flow" role="tab">How OTC Works</button>
             <button class="viz-tab" data-panel="matrix" role="tab">Comparison Matrix</button>
             <button class="viz-tab" data-panel="cards" role="tab">Detail Cards</button>
         </div>
@@ -698,7 +1038,210 @@
             </div>
         </section>
 
-        <!-- ========== 2. COMPARISON MATRIX ========== -->
+        <!-- ========== 2. HOW OTC WORKS ========== -->
+        <section id="otc-flow" class="infographic-section viz-panel">
+            <h2>How OTC Trading Actually Works</h2>
+            <p class="viz-description">Put faces and places to the OTC market. Unlike exchanges, OTC is a network of dealers—here's who they are and how trades happen.</p>
+
+            <div class="otc-section">
+                <!-- The Key Players -->
+                <h3 style="text-align: center; color: var(--fh-navy); margin-bottom: var(--fh-space-lg);">The Key Players</h3>
+
+                <div class="entity-grid">
+                    <!-- OTC Markets Group -->
+                    <div class="entity-card">
+                        <div class="entity-card__header">
+                            <div class="entity-card__icon entity-card__icon--platform">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1zm-1 9h-4v-7h4v7z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="entity-card__name">OTC Markets Group</h4>
+                                <span class="entity-card__type">Platform Operator</span>
+                            </div>
+                        </div>
+                        <p class="entity-card__desc">A private company (headquarters: NYC) that operates the electronic quotation platform where dealers post bid/ask prices. Think of it as a bulletin board—not where trades execute, but where quotes are displayed.</p>
+                        <div class="entity-card__examples">
+                            <span class="entity-card__example">otcmarkets.com</span>
+                            <span class="entity-card__example">Est. 1913</span>
+                        </div>
+                    </div>
+
+                    <!-- Dealers/Market Makers -->
+                    <div class="entity-card">
+                        <div class="entity-card__header">
+                            <div class="entity-card__icon entity-card__icon--dealer">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="entity-card__name">Dealers / Market Makers</h4>
+                                <span class="entity-card__type">Trade Counterparties</span>
+                            </div>
+                        </div>
+                        <p class="entity-card__desc">Broker-dealer firms that hold inventory and quote prices. They buy from sellers and sell to buyers, profiting on the spread. These are the actual trading counterparties.</p>
+                        <div class="entity-card__examples">
+                            <span class="entity-card__example">Citadel Securities</span>
+                            <span class="entity-card__example">Virtu Financial</span>
+                            <span class="entity-card__example">GTS</span>
+                        </div>
+                    </div>
+
+                    <!-- FINRA -->
+                    <div class="entity-card">
+                        <div class="entity-card__header">
+                            <div class="entity-card__icon entity-card__icon--regulator">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="entity-card__name">FINRA</h4>
+                                <span class="entity-card__type">Regulator</span>
+                            </div>
+                        </div>
+                        <p class="entity-card__desc">Financial Industry Regulatory Authority—the self-regulatory organization that oversees broker-dealers. Operates TRACE for bond trade reporting. All OTC trades must be reported here.</p>
+                        <div class="entity-card__examples">
+                            <span class="entity-card__example">Trade Reporting</span>
+                            <span class="entity-card__example">Dealer Oversight</span>
+                        </div>
+                    </div>
+
+                    <!-- Investors -->
+                    <div class="entity-card">
+                        <div class="entity-card__header">
+                            <div class="entity-card__icon entity-card__icon--investor">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="entity-card__name">Investors & Brokers</h4>
+                                <span class="entity-card__type">Order Originators</span>
+                            </div>
+                        </div>
+                        <p class="entity-card__desc">Retail investors use brokers (Schwab, Fidelity) who route orders to dealers. Institutional investors may trade directly with dealers for large blocks.</p>
+                        <div class="entity-card__examples">
+                            <span class="entity-card__example">Retail via Broker</span>
+                            <span class="entity-card__example">Institutional Direct</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trade Flow Comparison -->
+                <h3 style="text-align: center; color: var(--fh-navy); margin: var(--fh-space-2xl) 0 var(--fh-space-lg);">Exchange vs OTC: How Trades Flow</h3>
+
+                <div class="comparison-container">
+                    <!-- Exchange Trade Flow -->
+                    <div class="comparison-box">
+                        <div class="comparison-box__header comparison-box__header--exchange">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
+                            Exchange (First Market)
+                        </div>
+                        <div class="comparison-box__body">
+                            <div class="trade-step">
+                                <div class="trade-step__number">1</div>
+                                <div class="trade-step__content">
+                                    <div class="trade-step__title">You Place Order</div>
+                                    <div class="trade-step__desc">Buy 100 shares AAPL at market</div>
+                                </div>
+                            </div>
+                            <div class="trade-step">
+                                <div class="trade-step__number">2</div>
+                                <div class="trade-step__content">
+                                    <div class="trade-step__title">Broker Routes to Exchange</div>
+                                    <div class="trade-step__desc">Order goes to Nasdaq's central order book</div>
+                                </div>
+                            </div>
+                            <div class="trade-step">
+                                <div class="trade-step__number">3</div>
+                                <div class="trade-step__content">
+                                    <div class="trade-step__title">Matched Automatically</div>
+                                    <div class="trade-step__desc">Exchange matches you with a seller at best price</div>
+                                </div>
+                            </div>
+                            <div class="trade-step">
+                                <div class="trade-step__number">4</div>
+                                <div class="trade-step__content">
+                                    <div class="trade-step__title">Trade Executes</div>
+                                    <div class="trade-step__desc">Instant, transparent, public price</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OTC Trade Flow -->
+                    <div class="comparison-box">
+                        <div class="comparison-box__header comparison-box__header--otc">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                            OTC (Second Market)
+                        </div>
+                        <div class="comparison-box__body">
+                            <div class="trade-step">
+                                <div class="trade-step__number">1</div>
+                                <div class="trade-step__content">
+                                    <div class="trade-step__title">You Place Order</div>
+                                    <div class="trade-step__desc">Buy 100 shares NSRGY (Nestlé) at market</div>
+                                </div>
+                            </div>
+                            <div class="trade-step">
+                                <div class="trade-step__number">2</div>
+                                <div class="trade-step__content">
+                                    <div class="trade-step__title">Broker Contacts Dealer</div>
+                                    <div class="trade-step__desc">Checks OTC Markets for dealer quotes, calls for price</div>
+                                </div>
+                            </div>
+                            <div class="trade-step">
+                                <div class="trade-step__number">3</div>
+                                <div class="trade-step__content">
+                                    <div class="trade-step__title">Dealer Quotes Price</div>
+                                    <div class="trade-step__desc">"I'll sell at $98.50" — negotiated, not matched</div>
+                                </div>
+                            </div>
+                            <div class="trade-step">
+                                <div class="trade-step__number">4</div>
+                                <div class="trade-step__content">
+                                    <div class="trade-step__title">Trade Executes</div>
+                                    <div class="trade-step__desc">Reported to FINRA, wider spread, less transparency</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Difference Callout -->
+                <div class="key-difference">
+                    <div class="key-difference__title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        The Core Difference
+                    </div>
+                    <div class="key-difference__content">
+                        <strong>Exchange</strong> = Centralized order book (like an auction house)<br>
+                        <strong>OTC</strong> = Decentralized dealer network (like calling car dealerships for quotes)<br><br>
+                        On an exchange, you're matched with another investor. In OTC, you're trading with a dealer who holds inventory.
+                    </div>
+                </div>
+
+                <!-- OTC Markets Tiers -->
+                <div class="otc-tiers">
+                    <h4 class="otc-tiers__title">OTC Markets Group Platform Tiers</h4>
+                    <div class="otc-tiers__grid">
+                        <div class="otc-tier otc-tier--qx">
+                            <div class="otc-tier__name">OTCQX</div>
+                            <div class="otc-tier__desc">Best Market — Highest quality, SEC reporting required</div>
+                        </div>
+                        <div class="otc-tier otc-tier--qb">
+                            <div class="otc-tier__name">OTCQB</div>
+                            <div class="otc-tier__desc">Venture Market — Early-stage companies, some requirements</div>
+                        </div>
+                        <div class="otc-tier otc-tier--pink">
+                            <div class="otc-tier__name">Pink</div>
+                            <div class="otc-tier__desc">Open Market — Minimal requirements, higher risk</div>
+                        </div>
+                        <div class="otc-tier otc-tier--grey">
+                            <div class="otc-tier__name">Expert</div>
+                            <div class="otc-tier__desc">Expert Market — No public quotes, limited to professional investors</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 3. COMPARISON MATRIX ========== -->
         <section id="matrix" class="infographic-section viz-panel">
             <h2>Complete Market Comparison Matrix</h2>
             <p class="viz-description">Side-by-side comparison of all five markets. Perfect for drilling the details before exam day.</p>
