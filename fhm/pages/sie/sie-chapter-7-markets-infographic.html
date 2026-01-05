@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="Visual infographic explaining all financial markets for the SIE Exam - Primary, First, Second, Third, and Fourth Markets with examples.">
+
+    <title>Financial Markets Infographic | SIE Study Materials | Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Shared Navigation Styles -->
+    <link rel="stylesheet" href="../../assets/css/sie-chapter.css">
+    <link rel="stylesheet" href="../../assets/css/sie-navigation.css">
+    <!-- Night Mode (5pm - 9am) -->
+    <script src="../../assets/js/night-mode.js"></script>
+
+    <style>
+        /* Infographic-Specific Styles */
+        .infographic-section {
+            margin: var(--fh-space-3xl) 0;
+            padding: var(--fh-space-2xl) 0;
+        }
+
+        .infographic-section h2 {
+            text-align: center;
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .infographic-section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--fh-sage);
+            margin: var(--fh-space-md) auto 0;
+        }
+
+        .viz-description {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto var(--fh-space-xl);
+            color: var(--fh-gray-600);
+            font-size: 0.9375rem;
+        }
+
+        /* ========== FLOWCHART STYLES ========== */
+        .flowchart-wrapper {
+            position: relative;
+        }
+
+        .flowchart-scroll-hint {
+            display: none;
+            text-align: center;
+            padding: var(--fh-space-sm);
+            background: var(--fh-gray-100);
+            border-radius: 6px 6px 0 0;
+            font-size: 0.75rem;
+            color: var(--fh-gray-600);
+        }
+
+        .flowchart-container {
+            background: var(--fh-white);
+            border: 1px solid var(--fh-gray-200);
+            border-radius: 8px;
+            padding: var(--fh-space-xl);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .flowchart-svg {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 750px) {
+            .flowchart-scroll-hint {
+                display: block;
+            }
+
+            .flowchart-container {
+                border-radius: 0 0 8px 8px;
+            }
+        }
+
+        /* ========== COMPARISON MATRIX ========== */
+        .matrix-container {
+            overflow-x: auto;
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--fh-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            min-width: 800px;
+        }
+
+        .matrix-table thead {
+            background: var(--fh-navy);
+        }
+
+        .matrix-table th {
+            color: var(--fh-white);
+            padding: var(--fh-space-lg);
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .matrix-table th:first-child {
+            border-radius: 8px 0 0 0;
+        }
+
+        .matrix-table th:last-child {
+            border-radius: 0 8px 0 0;
+        }
+
+        .matrix-table td {
+            padding: var(--fh-space-md) var(--fh-space-lg);
+            border-bottom: 1px solid var(--fh-gray-200);
+            vertical-align: top;
+        }
+
+        .matrix-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .matrix-table tbody tr:nth-child(even) {
+            background: var(--fh-gray-100);
+        }
+
+        .matrix-table tbody tr:hover {
+            background: rgba(124, 152, 133, 0.1);
+        }
+
+        .market-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--fh-space-sm);
+            padding: var(--fh-space-sm) var(--fh-space-md);
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            white-space: nowrap;
+        }
+
+        .market-badge--primary { background: #DCFCE7; color: #166534; }
+        .market-badge--first { background: #DBEAFE; color: #1E40AF; }
+        .market-badge--second { background: #EDE9FE; color: #5B21B6; }
+        .market-badge--third { background: #FEF3C7; color: #92400E; }
+        .market-badge--fourth { background: #FCE7F3; color: #9D174D; }
+
+        .market-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .example-tag {
+            display: inline-block;
+            background: var(--fh-gray-100);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+            margin: 2px;
+            color: var(--fh-gray-700);
+        }
+
+        /* ========== MARKET CARDS ========== */
+        .market-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--fh-space-xl);
+        }
+
+        .market-card {
+            background: var(--fh-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .market-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -4px rgba(0,0,0,0.15);
+        }
+
+        .market-card__header {
+            padding: var(--fh-space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--fh-space-md);
+        }
+
+        .market-card__header--primary { background: linear-gradient(135deg, #22C55E, #16A34A); }
+        .market-card__header--first { background: linear-gradient(135deg, #3B82F6, #2563EB); }
+        .market-card__header--second { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
+        .market-card__header--third { background: linear-gradient(135deg, #F59E0B, #D97706); }
+        .market-card__header--fourth { background: linear-gradient(135deg, #EC4899, #DB2777); }
+
+        .market-card__icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .market-card__icon svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        .market-card__title {
+            color: white;
+            font-family: var(--fh-font-display);
+            font-size: 1.25rem;
+            margin: 0;
+        }
+
+        .market-card__subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.8125rem;
+            margin-top: 2px;
+        }
+
+        .market-card__body {
+            padding: var(--fh-space-lg);
+        }
+
+        .market-card__section {
+            margin-bottom: var(--fh-space-md);
+        }
+
+        .market-card__section:last-child {
+            margin-bottom: 0;
+        }
+
+        .market-card__label {
+            font-family: var(--fh-font-mono);
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--fh-gray-500);
+            margin-bottom: var(--fh-space-xs);
+        }
+
+        .market-card__content {
+            font-size: 0.9375rem;
+            color: var(--fh-gray-700);
+            line-height: 1.6;
+        }
+
+        .market-card__examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--fh-space-xs);
+        }
+
+        .market-card__example {
+            background: var(--fh-gray-100);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8125rem;
+            color: var(--fh-gray-700);
+        }
+
+        /* ========== QUICK REFERENCE NOTE ========== */
+        .quick-reference {
+            background: linear-gradient(135deg, var(--fh-sage), #6B8A72);
+            color: white;
+            padding: var(--fh-space-xl);
+            border-radius: 8px;
+            margin: var(--fh-space-2xl) 0;
+        }
+
+        .quick-reference__title {
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+            margin-bottom: var(--fh-space-sm);
+        }
+
+        .quick-reference__content {
+            font-size: 1.125rem;
+            line-height: 1.7;
+        }
+
+        .quick-reference__content strong {
+            color: white;
+        }
+
+        /* ========== VISUALIZATION TABS ========== */
+        .viz-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--fh-space-sm);
+            justify-content: center;
+            margin-bottom: var(--fh-space-xl);
+            padding: var(--fh-space-md);
+            background: var(--fh-gray-100);
+            border-radius: 8px;
+        }
+
+        .viz-tab {
+            padding: var(--fh-space-sm) var(--fh-space-lg);
+            border: none;
+            background: transparent;
+            font-family: var(--fh-font-body);
+            font-size: 0.875rem;
+            color: var(--fh-gray-600);
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .viz-tab:hover {
+            background: var(--fh-white);
+            color: var(--fh-navy);
+        }
+
+        .viz-tab--active {
+            background: var(--fh-navy);
+            color: white;
+        }
+
+        .viz-panel {
+            display: none;
+        }
+
+        .viz-panel--active {
+            display: block;
+        }
+
+        /* ========== PRINT STYLES ========== */
+        @media print {
+            .viz-tabs { display: none; }
+            .viz-panel { display: block !important; page-break-inside: avoid; }
+            .market-card { break-inside: avoid; }
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            .flowchart-container {
+                padding: var(--fh-space-md);
+            }
+
+            .flowchart-svg {
+                min-width: 700px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .market-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .viz-tabs {
+                flex-direction: column;
+            }
+
+            .viz-tab {
+                width: 100%;
+                text-align: center;
+            }
+
+            .quick-reference {
+                padding: var(--fh-space-lg);
+            }
+
+            .quick-reference__content {
+                font-size: 1rem;
+            }
+
+            .infographic-section h2 {
+                font-size: 1.25rem;
+            }
+
+            .viz-description {
+                font-size: 0.875rem;
+                padding: 0 var(--fh-space-md);
+            }
+
+            .matrix-table th,
+            .matrix-table td {
+                padding: var(--fh-space-sm) var(--fh-space-md);
+                font-size: 0.8125rem;
+            }
+
+            .market-card__header {
+                padding: var(--fh-space-md);
+            }
+
+            .market-card__title {
+                font-size: 1.125rem;
+            }
+
+            .market-card__body {
+                padding: var(--fh-space-md);
+            }
+
+            .market-card__content {
+                font-size: 0.875rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .infographic-section {
+                margin: var(--fh-space-xl) 0;
+                padding: var(--fh-space-lg) 0;
+            }
+
+            .viz-tabs {
+                padding: var(--fh-space-sm);
+                gap: var(--fh-space-xs);
+            }
+
+            .viz-tab {
+                padding: var(--fh-space-sm) var(--fh-space-md);
+                font-size: 0.8125rem;
+            }
+
+            .quick-reference {
+                padding: var(--fh-space-md);
+                margin: var(--fh-space-xl) 0;
+                border-radius: 6px;
+            }
+
+            .quick-reference__content {
+                font-size: 0.9375rem;
+                line-height: 1.6;
+            }
+
+            .market-badge {
+                padding: var(--fh-space-xs) var(--fh-space-sm);
+                font-size: 0.75rem;
+            }
+
+            .market-icon {
+                width: 16px;
+                height: 16px;
+            }
+
+            .example-tag {
+                font-size: 0.75rem;
+                padding: 2px 6px;
+            }
+
+            .market-card__icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .market-card__icon svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .market-card__example {
+                font-size: 0.75rem;
+                padding: 3px 8px;
+            }
+
+            .market-card__label {
+                font-size: 0.625rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header__inner">
+            <h1 class="header__title">Financial Markets Infographic</h1>
+            <nav class="breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span>/</span>
+                <a href="sie-study-materials.html">SIE Study Materials</a>
+                <span>/</span>
+                <a href="sie-chapter-7-one-pager.html">Chapter 7</a>
+                <span>/</span>
+                <span>Markets Infographic</span>
+            </nav>
+        </div>
+        <div class="progress">
+            <div class="progress__bar"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 style="text-align: center; margin-top: var(--fh-space-2xl);">SIE Exam: Breakdown of Financial Markets</h1>
+
+        <div class="intro">
+            <p>
+                Understanding where securities trade is fundamental to the SIE exam. This visual guide breaks down the five market types using multiple learning approaches. Pick the visualization that clicks for you, or study them all for complete mastery.
+            </p>
+        </div>
+
+        <!-- Quick Reference Note -->
+        <div class="quick-reference">
+            <div class="quick-reference__title">Key Takeaway</div>
+            <div class="quick-reference__content">
+                <strong>Primary</strong> raises cash for issuers (IPOs, new bonds). <strong>Secondary</strong> (First &amp; Second Markets) is everyday trading on exchanges and OTC. <strong>Third &amp; Fourth</strong> are for institutions bypassing exchanges for better execution or privacy.
+            </div>
+        </div>
+
+        <!-- Visualization Selector Tabs -->
+        <div class="viz-tabs" role="tablist">
+            <button class="viz-tab viz-tab--active" data-panel="flowchart" role="tab">Hierarchy Flowchart</button>
+            <button class="viz-tab" data-panel="matrix" role="tab">Comparison Matrix</button>
+            <button class="viz-tab" data-panel="cards" role="tab">Detail Cards</button>
+        </div>
+
+        <!-- ========== 1. HIERARCHICAL FLOWCHART ========== -->
+        <section id="flowchart" class="infographic-section viz-panel viz-panel--active">
+            <h2>Market Hierarchy Flowchart</h2>
+            <p class="viz-description">See how markets relate to each other. Securities are born in the Primary Market, then live their trading life in various Secondary Markets.</p>
+
+            <div class="flowchart-wrapper">
+                <div class="flowchart-scroll-hint">← Scroll horizontally to view full diagram →</div>
+                <div class="flowchart-container">
+                    <svg class="flowchart-svg" viewBox="0 0 700 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Definitions -->
+                    <defs>
+                        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+                        </filter>
+                        <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#22C55E"/>
+                            <stop offset="100%" style="stop-color:#16A34A"/>
+                        </linearGradient>
+                        <linearGradient id="secondaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3B82F6"/>
+                            <stop offset="100%" style="stop-color:#2563EB"/>
+                        </linearGradient>
+                        <linearGradient id="firstGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3B82F6"/>
+                            <stop offset="100%" style="stop-color:#1D4ED8"/>
+                        </linearGradient>
+                        <linearGradient id="secondGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8B5CF6"/>
+                            <stop offset="100%" style="stop-color:#7C3AED"/>
+                        </linearGradient>
+                        <linearGradient id="thirdGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#F59E0B"/>
+                            <stop offset="100%" style="stop-color:#D97706"/>
+                        </linearGradient>
+                        <linearGradient id="fourthGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#EC4899"/>
+                            <stop offset="100%" style="stop-color:#DB2777"/>
+                        </linearGradient>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#9CA3AF"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Background -->
+                    <rect width="700" height="600" fill="#FAFAFA"/>
+
+                    <!-- ===== PRIMARY MARKET ===== -->
+                    <g filter="url(#shadow)">
+                        <rect x="250" y="30" width="200" height="70" rx="8" fill="url(#primaryGrad)"/>
+                    </g>
+                    <text x="350" y="60" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="600" font-size="15">PRIMARY MARKET</text>
+                    <text x="350" y="80" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="Inter, sans-serif" font-size="11">New Securities Issued</text>
+
+                    <!-- Money flows annotation -->
+                    <text x="470" y="70" fill="#6B7280" font-family="Inter, sans-serif" font-size="10" font-style="italic">$ → Issuer</text>
+
+                    <!-- Arrow: Primary to Secondary -->
+                    <line x1="350" y1="100" x2="350" y2="130" stroke="#9CA3AF" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                    <!-- ===== SECONDARY MARKET (Made more prominent) ===== -->
+                    <rect x="130" y="132" width="440" height="66" rx="12" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1" stroke-dasharray="4,2"/>
+                    <g filter="url(#shadow)">
+                        <rect x="150" y="140" width="400" height="50" rx="8" fill="url(#secondaryGrad)"/>
+                    </g>
+                    <text x="350" y="162" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="700" font-size="16">SECONDARY MARKET</text>
+                    <text x="350" y="180" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="Inter, sans-serif" font-size="11">Existing Securities Trade Here ($ flows between investors)</text>
+
+                    <!-- Branching lines from Secondary -->
+                    <line x1="350" y1="190" x2="350" y2="220" stroke="#9CA3AF" stroke-width="2"/>
+                    <line x1="175" y1="220" x2="525" y2="220" stroke="#9CA3AF" stroke-width="2"/>
+
+                    <!-- Vertical drops to each market -->
+                    <line x1="175" y1="220" x2="175" y2="250" stroke="#9CA3AF" stroke-width="2"/>
+                    <line x1="292" y1="220" x2="292" y2="250" stroke="#9CA3AF" stroke-width="2"/>
+                    <line x1="408" y1="220" x2="408" y2="250" stroke="#9CA3AF" stroke-width="2"/>
+                    <line x1="525" y1="220" x2="525" y2="250" stroke="#9CA3AF" stroke-width="2"/>
+
+                    <!-- Connection dots -->
+                    <circle cx="175" cy="250" r="4" fill="#9CA3AF"/>
+                    <circle cx="292" cy="250" r="4" fill="#9CA3AF"/>
+                    <circle cx="408" cy="250" r="4" fill="#9CA3AF"/>
+                    <circle cx="525" cy="250" r="4" fill="#9CA3AF"/>
+
+                    <!-- ===== FIRST MARKET ===== -->
+                    <g filter="url(#shadow)">
+                        <rect x="100" y="260" width="150" height="150" rx="8" fill="white" stroke="#3B82F6" stroke-width="2"/>
+                        <rect x="100" y="260" width="150" height="40" rx="8" fill="url(#firstGrad)"/>
+                        <rect x="100" y="292" width="150" height="8" fill="url(#firstGrad)"/>
+                    </g>
+                    <text x="175" y="286" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="600" font-size="13">FIRST MARKET</text>
+                    <text x="175" y="325" text-anchor="middle" fill="#1E40AF" font-family="Inter, sans-serif" font-weight="600" font-size="11">Exchange-Listed</text>
+                    <text x="175" y="345" text-anchor="middle" fill="#4B5563" font-family="Inter, sans-serif" font-size="10">NYSE, Nasdaq</text>
+                    <text x="175" y="365" text-anchor="middle" fill="#6B7280" font-family="Inter, sans-serif" font-size="9">Retail &amp; Institutions</text>
+                    <rect x="115" y="382" width="120" height="18" rx="4" fill="#DBEAFE"/>
+                    <text x="175" y="394" text-anchor="middle" fill="#1E40AF" font-family="IBM Plex Mono, monospace" font-size="9">AAPL, MSFT</text>
+
+                    <!-- ===== SECOND MARKET ===== -->
+                    <g filter="url(#shadow)">
+                        <rect x="217" y="260" width="150" height="150" rx="8" fill="white" stroke="#8B5CF6" stroke-width="2"/>
+                        <rect x="217" y="260" width="150" height="40" rx="8" fill="url(#secondGrad)"/>
+                        <rect x="217" y="292" width="150" height="8" fill="url(#secondGrad)"/>
+                    </g>
+                    <text x="292" y="286" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="600" font-size="13">SECOND MARKET</text>
+                    <text x="292" y="325" text-anchor="middle" fill="#5B21B6" font-family="Inter, sans-serif" font-weight="600" font-size="11">OTC / Unlisted</text>
+                    <text x="292" y="345" text-anchor="middle" fill="#4B5563" font-family="Inter, sans-serif" font-size="10">Dealer Networks</text>
+                    <text x="292" y="365" text-anchor="middle" fill="#6B7280" font-family="Inter, sans-serif" font-size="9">Brokers, Dealers</text>
+                    <rect x="222" y="382" width="140" height="18" rx="4" fill="#EDE9FE"/>
+                    <text x="292" y="394" text-anchor="middle" fill="#5B21B6" font-family="IBM Plex Mono, monospace" font-size="8">NSRGY, TCEHY, Bonds</text>
+
+                    <!-- ===== THIRD MARKET ===== -->
+                    <g filter="url(#shadow)">
+                        <rect x="333" y="260" width="150" height="150" rx="8" fill="white" stroke="#F59E0B" stroke-width="2"/>
+                        <rect x="333" y="260" width="150" height="40" rx="8" fill="url(#thirdGrad)"/>
+                        <rect x="333" y="292" width="150" height="8" fill="url(#thirdGrad)"/>
+                    </g>
+                    <text x="408" y="286" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="600" font-size="13">THIRD MARKET</text>
+                    <text x="408" y="325" text-anchor="middle" fill="#92400E" font-family="Inter, sans-serif" font-weight="600" font-size="11">Listed Off-Exchange</text>
+                    <text x="408" y="345" text-anchor="middle" fill="#4B5563" font-family="Inter, sans-serif" font-size="10">OTC for Listed Stocks</text>
+                    <text x="408" y="365" text-anchor="middle" fill="#6B7280" font-family="Inter, sans-serif" font-size="9">Institutions, Block Trades</text>
+                    <rect x="348" y="382" width="120" height="18" rx="4" fill="#FEF3C7"/>
+                    <text x="408" y="394" text-anchor="middle" fill="#92400E" font-family="IBM Plex Mono, monospace" font-size="9">AMZN via Dealer</text>
+
+                    <!-- ===== FOURTH MARKET ===== -->
+                    <g filter="url(#shadow)">
+                        <rect x="450" y="260" width="150" height="150" rx="8" fill="white" stroke="#EC4899" stroke-width="2"/>
+                        <rect x="450" y="260" width="150" height="40" rx="8" fill="url(#fourthGrad)"/>
+                        <rect x="450" y="292" width="150" height="8" fill="url(#fourthGrad)"/>
+                    </g>
+                    <text x="525" y="286" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="600" font-size="13">FOURTH MARKET</text>
+                    <text x="525" y="325" text-anchor="middle" fill="#9D174D" font-family="Inter, sans-serif" font-weight="600" font-size="11">Dark Pools / ECNs</text>
+                    <text x="525" y="345" text-anchor="middle" fill="#4B5563" font-family="Inter, sans-serif" font-size="10">Institution-to-Institution</text>
+                    <text x="525" y="365" text-anchor="middle" fill="#6B7280" font-family="Inter, sans-serif" font-size="9">Private, Large Blocks</text>
+                    <rect x="465" y="382" width="120" height="18" rx="4" fill="#FCE7F3"/>
+                    <text x="525" y="394" text-anchor="middle" fill="#9D174D" font-family="IBM Plex Mono, monospace" font-size="9">Liquidnet, GOOGL</text>
+
+                    <!-- ===== CATEGORY LABELS ===== -->
+                    <!-- Public Trading Group -->
+                    <rect x="100" y="425" width="267" height="24" rx="4" fill="#E5E7EB"/>
+                    <text x="233" y="441" text-anchor="middle" fill="#374151" font-family="Inter, sans-serif" font-size="10" font-weight="600">PUBLIC TRADING VENUES</text>
+
+                    <!-- Institutional Group -->
+                    <rect x="333" y="425" width="267" height="24" rx="4" fill="#FDF2F8"/>
+                    <text x="466" y="441" text-anchor="middle" fill="#9D174D" font-family="Inter, sans-serif" font-size="10" font-weight="600">INSTITUTIONAL / PRIVATE</text>
+
+                    <!-- ===== LEGEND ===== -->
+                    <g transform="translate(100, 470)">
+                        <rect width="500" height="110" rx="8" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+                        <text x="250" y="22" text-anchor="middle" fill="#374151" font-family="Inter, sans-serif" font-size="11" font-weight="600">Quick Reference</text>
+
+                        <!-- Row 1 -->
+                        <circle cx="30" cy="45" r="6" fill="#22C55E"/>
+                        <text x="45" y="49" fill="#374151" font-family="Inter, sans-serif" font-size="10"><tspan font-weight="600">Primary:</tspan> IPOs, new bonds — money goes to issuer</text>
+
+                        <!-- Row 2 -->
+                        <circle cx="30" cy="65" r="6" fill="#3B82F6"/>
+                        <text x="45" y="69" fill="#374151" font-family="Inter, sans-serif" font-size="10"><tspan font-weight="600">First:</tspan> NYSE/Nasdaq — normal exchange trading</text>
+
+                        <!-- Row 3 -->
+                        <circle cx="30" cy="85" r="6" fill="#8B5CF6"/>
+                        <text x="45" y="89" fill="#374151" font-family="Inter, sans-serif" font-size="10"><tspan font-weight="600">Second:</tspan> OTC dealer networks — unlisted securities</text>
+
+                        <!-- Row 4 -->
+                        <circle cx="280" cy="65" r="6" fill="#F59E0B"/>
+                        <text x="295" y="69" fill="#374151" font-family="Inter, sans-serif" font-size="10"><tspan font-weight="600">Third:</tspan> Listed stocks traded off-exchange</text>
+
+                        <!-- Row 5 -->
+                        <circle cx="280" cy="85" r="6" fill="#EC4899"/>
+                        <text x="295" y="89" fill="#374151" font-family="Inter, sans-serif" font-size="10"><tspan font-weight="600">Fourth:</tspan> Dark pools — private institutional trades</text>
+                    </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 2. COMPARISON MATRIX ========== -->
+        <section id="matrix" class="infographic-section viz-panel">
+            <h2>Complete Market Comparison Matrix</h2>
+            <p class="viz-description">Side-by-side comparison of all five markets. Perfect for drilling the details before exam day.</p>
+
+            <div class="matrix-container">
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Market</th>
+                            <th style="width: 20%;">What It Trades</th>
+                            <th style="width: 20%;">Where</th>
+                            <th style="width: 25%;">Who / Main Use</th>
+                            <th style="width: 20%;">Examples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="market-badge market-badge--primary">
+                                    <svg class="market-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l4.59-4.58L18 11l-6 6z"/></svg>
+                                    Primary
+                                </span>
+                            </td>
+                            <td><strong>New securities</strong> (stocks, bonds) issued for the first time</td>
+                            <td>Directly from the <strong>issuer</strong> through underwriters/investment banks</td>
+                            <td>Issuers (companies/governments) <strong>raising capital</strong>; investors buying new issues</td>
+                            <td>
+                                <span class="example-tag">Tesla's 2010 IPO</span>
+                                <span class="example-tag">US Treasury bonds</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="market-badge market-badge--first">
+                                    <svg class="market-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+                                    First
+                                </span>
+                                <div style="font-size: 0.7rem; color: #6B7280; margin-top: 4px;">(Secondary)</div>
+                            </td>
+                            <td><strong>Exchange-listed</strong> stocks and securities</td>
+                            <td>On <strong>exchanges</strong> (NYSE floor, Nasdaq electronic system)</td>
+                            <td><strong>Retail &amp; institutional</strong> investors; everyday trading for liquidity and price discovery</td>
+                            <td>
+                                <span class="example-tag">AAPL on Nasdaq</span>
+                                <span class="example-tag">MSFT on NYSE</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="market-badge market-badge--second">
+                                    <svg class="market-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                                    Second
+                                </span>
+                                <div style="font-size: 0.7rem; color: #6B7280; margin-top: 4px;">(Secondary)</div>
+                            </td>
+                            <td><strong>Unlisted securities</strong> (OTC stocks, bonds)</td>
+                            <td><strong>Over-the-counter</strong> (OTC) via dealer networks—no central exchange</td>
+                            <td><strong>Dealers, brokers, investors</strong> in smaller or non-listed assets; trading less liquid securities</td>
+                            <td>
+                                <span class="example-tag">NSRGY (Nestlé ADR)</span>
+                                <span class="example-tag">TCEHY (Tencent ADR)</span>
+                                <span class="example-tag">Corporate bonds</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="market-badge market-badge--third">
+                                    <svg class="market-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                                    Third
+                                </span>
+                            </td>
+                            <td><strong>Exchange-listed</strong> stocks traded <strong>off-exchange</strong></td>
+                            <td><strong>OTC</strong>, bypassing the exchange</td>
+                            <td><strong>Large institutions</strong> avoiding fees, negotiating big blocks</td>
+                            <td>
+                                <span class="example-tag">AMZN via OTC dealer</span>
+                                <span class="example-tag">Goldman Sachs trades</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="market-badge market-badge--fourth">
+                                    <svg class="market-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                                    Fourth
+                                </span>
+                            </td>
+                            <td><strong>Any securities</strong> (often listed stocks) in large blocks</td>
+                            <td>Direct between institutions via <strong>ECNs or dark pools</strong></td>
+                            <td><strong>Hedge funds, pensions</strong> for private, low-fee trades without public visibility</td>
+                            <td>
+                                <span class="example-tag">Liquidnet dark pool</span>
+                                <span class="example-tag">GOOGL block trades</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ========== 3. DETAIL CARDS ========== -->
+        <section id="cards" class="infographic-section viz-panel">
+            <h2>Market Detail Cards</h2>
+            <p class="viz-description">Deep-dive into each market with complete details. Great for thorough review.</p>
+
+            <div class="market-cards">
+                <!-- Primary Market Card -->
+                <article class="market-card">
+                    <div class="market-card__header market-card__header--primary">
+                        <div class="market-card__icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="market-card__title">Primary Market</h3>
+                            <div class="market-card__subtitle">Where Securities Are Born</div>
+                        </div>
+                    </div>
+                    <div class="market-card__body">
+                        <div class="market-card__section">
+                            <div class="market-card__label">What It Trades</div>
+                            <div class="market-card__content">New securities (stocks, bonds) issued for the first time. This is the only market where money goes directly to the issuer.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Where</div>
+                            <div class="market-card__content">Directly from the issuer through underwriters and investment banks. Think IPO roadshows and bond auctions.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Who / Main Use</div>
+                            <div class="market-card__content">Companies and governments raising capital. Investors buying new issues to get in at offering price.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Real Examples</div>
+                            <div class="market-card__examples">
+                                <span class="market-card__example">Tesla 2010 IPO ($17/share)</span>
+                                <span class="market-card__example">US Treasury Bond Auction</span>
+                                <span class="market-card__example">Airbnb 2020 IPO</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- First Market Card -->
+                <article class="market-card">
+                    <div class="market-card__header market-card__header--first">
+                        <div class="market-card__icon">
+                            <svg viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="market-card__title">First Market</h3>
+                            <div class="market-card__subtitle">Exchange Trading</div>
+                        </div>
+                    </div>
+                    <div class="market-card__body">
+                        <div class="market-card__section">
+                            <div class="market-card__label">What It Trades</div>
+                            <div class="market-card__content">Exchange-listed stocks and securities. The blue chips and tech giants you see on CNBC.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Where</div>
+                            <div class="market-card__content">On actual exchanges—NYSE trading floor (auction) or Nasdaq electronic system (negotiated/dealer).</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Who / Main Use</div>
+                            <div class="market-card__content">Retail and institutional investors. Primary purpose: liquidity and price discovery. This is "normal" stock trading.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Real Examples</div>
+                            <div class="market-card__examples">
+                                <span class="market-card__example">AAPL on Nasdaq</span>
+                                <span class="market-card__example">MSFT on NYSE</span>
+                                <span class="market-card__example">TSLA daily trading</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Second Market Card -->
+                <article class="market-card">
+                    <div class="market-card__header market-card__header--second">
+                        <div class="market-card__icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="market-card__title">Second Market</h3>
+                            <div class="market-card__subtitle">OTC / Over-the-Counter</div>
+                        </div>
+                    </div>
+                    <div class="market-card__body">
+                        <div class="market-card__section">
+                            <div class="market-card__label">What It Trades</div>
+                            <div class="market-card__content">Unlisted securities—OTC stocks (foreign ADRs, penny stocks), corporate bonds, government bonds. Almost ALL bonds trade here.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Where</div>
+                            <div class="market-card__content">Over-the-counter via dealer networks (OTC Markets Group tiers: OTCQX, OTCQB, Pink). No central exchange—dealers negotiate directly.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Who / Main Use</div>
+                            <div class="market-card__content">Dealers, brokers, and investors seeking smaller or non-exchange-listed assets. Less liquid, wider spreads.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Real Examples</div>
+                            <div class="market-card__examples">
+                                <span class="market-card__example">NSRGY (Nestlé ADR)</span>
+                                <span class="market-card__example">TCEHY (Tencent ADR)</span>
+                                <span class="market-card__example">NTDOY (Nintendo ADR)</span>
+                                <span class="market-card__example">Corporate bonds</span>
+                            </div>
+                        </div>
+                        <div class="market-card__section" style="background: #FDF4FF; padding: 12px; border-radius: 8px; border-left: 3px solid #8B5CF6;">
+                            <div class="market-card__label" style="color: #7C3AED;">Don't Confuse With...</div>
+                            <div class="market-card__content" style="font-size: 0.875rem;">
+                                <strong>Private secondary markets</strong> (Forge Global, EquityZen, Carta) are where shares of private companies like <strong>SpaceX</strong> and <strong>OpenAI</strong> trade among accredited investors. This is different from the SIE "Second Market"—those platforms deal with truly private company equity, not unlisted public securities.
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Third Market Card -->
+                <article class="market-card">
+                    <div class="market-card__header market-card__header--third">
+                        <div class="market-card__icon">
+                            <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="market-card__title">Third Market</h3>
+                            <div class="market-card__subtitle">Listed Stocks, Off-Exchange</div>
+                        </div>
+                    </div>
+                    <div class="market-card__body">
+                        <div class="market-card__section">
+                            <div class="market-card__label">What It Trades</div>
+                            <div class="market-card__content">Exchange-listed stocks (like AAPL, AMZN) but traded OFF the exchange. Same securities, different venue.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Where</div>
+                            <div class="market-card__content">OTC, bypassing the exchange. ECNs (Electronic Communication Networks) compete with exchanges here.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Who / Main Use</div>
+                            <div class="market-card__content">Large institutions avoiding exchange fees and negotiating big block trades. Sometimes offers better price improvement.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Real Examples</div>
+                            <div class="market-card__examples">
+                                <span class="market-card__example">AMZN via OTC dealer</span>
+                                <span class="market-card__example">Goldman Sachs block trades</span>
+                                <span class="market-card__example">Hedge fund executions</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Fourth Market Card -->
+                <article class="market-card">
+                    <div class="market-card__header market-card__header--fourth">
+                        <div class="market-card__icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="market-card__title">Fourth Market</h3>
+                            <div class="market-card__subtitle">Dark Pools & Direct Trading</div>
+                        </div>
+                    </div>
+                    <div class="market-card__body">
+                        <div class="market-card__section">
+                            <div class="market-card__label">What It Trades</div>
+                            <div class="market-card__content">Any securities (often listed stocks) in large blocks. Massive institutional trades that would move markets if public.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Where</div>
+                            <div class="market-card__content">Direct between institutions via ECNs or dark pools (private networks). No public quotes until after execution.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Who / Main Use</div>
+                            <div class="market-card__content">Hedge funds, pension funds, mutual funds. Private, low-fee trades without showing their hand to the market.</div>
+                        </div>
+                        <div class="market-card__section">
+                            <div class="market-card__label">Real Examples</div>
+                            <div class="market-card__examples">
+                                <span class="market-card__example">Liquidnet dark pool</span>
+                                <span class="market-card__example">BlackRock/Vanguard blocks</span>
+                                <span class="market-card__example">GOOGL pension trades</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Test Tip -->
+        <div class="test-tip" style="margin-top: var(--fh-space-2xl);">
+            <p><strong>Exam Day Memory Trick:</strong></p>
+            <p style="margin-top: var(--fh-space-sm);">
+                <strong>P</strong>rimary = <strong>P</strong>roceeds go to issuer<br>
+                <strong>1st</strong> = On the exchange (#1 place for trading)<br>
+                <strong>2nd</strong> = Secondary venue (OTC, less regulated)<br>
+                <strong>3rd</strong> = Third-party route (skip the exchange)<br>
+                <strong>4th</strong> = "For" institutions only (dark/private)
+            </p>
+        </div>
+
+        <!-- Critical Concept Box -->
+        <div class="critical-concept">
+            <div class="critical-concept__label">Critical Concept</div>
+            <p><strong>The Key Distinction:</strong></p>
+            <table>
+                <tr>
+                    <th>Market</th>
+                    <th>Money Flows To...</th>
+                    <th>Securities Are...</th>
+                </tr>
+                <tr>
+                    <td><strong>Primary</strong></td>
+                    <td>The issuer (company/government)</td>
+                    <td>New (first-time issuance)</td>
+                </tr>
+                <tr>
+                    <td><strong>Secondary (1st-4th)</strong></td>
+                    <td>The selling investor</td>
+                    <td>Existing (already issued)</td>
+                </tr>
+            </table>
+        </div>
+
+        <nav class="chapter-nav">
+            <a href="sie-chapter-7-trading-markets.html" class="chapter-nav__link">
+                ← Section 7.1: Types of Trading Markets
+            </a>
+            <a href="sie-chapter-8-trade-processing.html" class="chapter-nav__link">
+                Section 8.1: Trade Processing →
+            </a>
+        </nav>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__text">© 2024 Franklin Hugh Money. An Investment in Knowledge.</p>
+        </div>
+    </footer>
+
+    <script src="../../assets/js/sie-navigation-config.js"></script>
+    <script src="../../assets/js/sie-navigation-component.js"></script>
+    <script>
+        // Visualization Tab Switching
+        document.querySelectorAll('.viz-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active from all tabs
+                document.querySelectorAll('.viz-tab').forEach(t => t.classList.remove('viz-tab--active'));
+                // Remove active from all panels
+                document.querySelectorAll('.viz-panel').forEach(p => p.classList.remove('viz-panel--active'));
+
+                // Add active to clicked tab
+                this.classList.add('viz-tab--active');
+
+                // Show corresponding panel
+                const panelId = this.dataset.panel;
+                document.getElementById(panelId).classList.add('viz-panel--active');
+            });
+        });
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
