@@ -209,6 +209,11 @@ strong {
     font-weight: 600;
 }
 
+.nav__link--gold {
+    color: var(--fh-gold);
+    font-weight: 600;
+}
+
 .nav .active {
     color: var(--fh-navy);
     font-weight: 600;
