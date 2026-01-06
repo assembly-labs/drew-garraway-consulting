@@ -221,16 +221,16 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
   return (
     <div style={{
       minHeight: '100vh',
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: 'var(--color-black)',
       display: 'flex',
       flexDirection: 'column',
     }}>
       {/* Header */}
       <div style={{
-        backgroundColor: 'var(--color-primary)',
+        backgroundColor: 'var(--color-black)',
         padding: 'var(--space-lg)',
         paddingTop: 'max(var(--space-lg), env(safe-area-inset-top))',
-        borderBottom: isEditing ? '3px solid var(--color-accent)' : 'none',
+        borderBottom: isEditing ? '3px solid var(--color-gold)' : '1px solid var(--color-gray-800)',
         transition: 'border-color 0.3s',
       }}>
         <div style={{
@@ -338,17 +338,18 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
             gap: 'var(--space-sm)',
             marginBottom: 'var(--space-md)',
             padding: 'var(--space-sm) var(--space-md)',
-            backgroundColor: 'rgba(252, 211, 77, 0.1)',
+            backgroundColor: 'rgba(245, 166, 35, 0.1)',
             borderRadius: 'var(--radius-md)',
-            border: '1px solid rgba(252, 211, 77, 0.3)',
+            border: '1px solid rgba(245, 166, 35, 0.3)',
           }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2">
               <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
               <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
             </svg>
             <span style={{
               fontSize: 'var(--text-sm)',
-              color: 'var(--color-accent)',
+              fontWeight: 500,
+              color: 'var(--color-gold)',
             }}>
               Tap any section to edit
             </span>
@@ -356,7 +357,7 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
               <span style={{
                 marginLeft: 'auto',
                 fontSize: 'var(--text-xs)',
-                color: 'var(--color-accent)',
+                color: 'var(--color-gold)',
                 fontWeight: 600,
               }}>
                 Unsaved changes
@@ -427,9 +428,11 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
         gap: 'var(--space-md)',
       }}>
         {/* AI Narrative Summary - Collapsible */}
-        <div className="card" style={{
-          borderLeft: '4px solid var(--color-accent)',
-          backgroundColor: 'var(--color-gray-50)',
+        <div style={{
+          borderLeft: '4px solid var(--color-gold)',
+          backgroundColor: 'var(--color-gray-900)',
+          borderRadius: 'var(--radius-md)',
+          padding: 'var(--space-md)',
         }}>
           <button
             onClick={() => setIsSummaryExpanded(!isSummaryExpanded)}
@@ -447,12 +450,12 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
           >
             <div>
               <div style={{
-                fontFamily: 'var(--font-heading)',
+                fontFamily: 'var(--font-mono)',
                 fontSize: 'var(--text-xs)',
-                fontWeight: 700,
+                fontWeight: 600,
                 textTransform: 'uppercase',
-                letterSpacing: 'var(--tracking-widest)',
-                color: 'var(--color-gray-500)',
+                letterSpacing: '0.1em',
+                color: 'var(--color-gold)',
                 marginBottom: 'var(--space-xs)',
               }}>
                 Session Summary
@@ -460,7 +463,8 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
               {isSummaryExpanded && (
                 <p style={{
                   fontSize: 'var(--text-base)',
-                  color: 'var(--color-gray-700)',
+                  fontWeight: 500,
+                  color: 'var(--color-gray-300)',
                   lineHeight: 'var(--leading-relaxed)',
                   fontStyle: 'italic',
                 }}>
@@ -473,7 +477,7 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
               height="20"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="var(--color-gray-400)"
+              stroke="var(--color-gray-500)"
               strokeWidth="2"
               style={{
                 transform: isSummaryExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -489,21 +493,22 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
 
         {/* Energy & Mood Section */}
         <div
-          className="card"
           onClick={() => isEditing && setActiveSheet('energy')}
           style={{
+            backgroundColor: 'var(--color-gray-900)',
+            borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-md)',
             cursor: isEditing ? 'pointer' : 'default',
-            transition: 'box-shadow 0.2s, transform 0.2s',
+            transition: 'all 0.2s',
+            border: '1px solid var(--color-gray-800)',
           }}
           onMouseOver={(e) => {
             if (isEditing) {
-              e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-              e.currentTarget.style.transform = 'translateY(-1px)';
+              e.currentTarget.style.borderColor = 'var(--color-gold)';
             }
           }}
           onMouseOut={(e) => {
-            e.currentTarget.style.boxShadow = 'none';
-            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.borderColor = 'var(--color-gray-800)';
           }}
         >
           <div style={{
@@ -513,11 +518,11 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
             marginBottom: 'var(--space-sm)',
           }}>
             <div style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'var(--text-sm)',
-              fontWeight: 700,
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              fontWeight: 600,
               textTransform: 'uppercase',
-              letterSpacing: 'var(--tracking-widest)',
+              letterSpacing: '0.1em',
               color: 'var(--color-gray-500)',
             }}>
               How You Felt
@@ -526,32 +531,32 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
           </div>
           <div style={{ display: 'flex', gap: 'var(--space-xl)' }}>
             <div>
-              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--color-gray-400)', marginBottom: 'var(--space-xs)' }}>Energy</div>
-              <div style={{ display: 'flex', gap: 2 }}>
+              <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--color-gray-400)', marginBottom: 'var(--space-xs)' }}>Energy</div>
+              <div style={{ display: 'flex', gap: 3 }}>
                 {[1, 2, 3, 4, 5].map((level) => (
                   <div
                     key={level}
                     style={{
-                      width: 24,
+                      width: 28,
                       height: 8,
                       borderRadius: 2,
-                      backgroundColor: level <= data.energyLevel ? 'var(--color-warning)' : 'var(--color-gray-200)',
+                      backgroundColor: level <= data.energyLevel ? 'var(--color-gold)' : 'var(--color-gray-700)',
                     }}
                   />
                 ))}
               </div>
             </div>
             <div>
-              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--color-gray-400)', marginBottom: 'var(--space-xs)' }}>Mood</div>
-              <div style={{ display: 'flex', gap: 2 }}>
+              <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--color-gray-400)', marginBottom: 'var(--space-xs)' }}>Mood</div>
+              <div style={{ display: 'flex', gap: 3 }}>
                 {[1, 2, 3, 4, 5].map((level) => (
                   <div
                     key={level}
                     style={{
-                      width: 24,
+                      width: 28,
                       height: 8,
                       borderRadius: 2,
-                      backgroundColor: level <= data.mood ? 'var(--color-info)' : 'var(--color-gray-200)',
+                      backgroundColor: level <= data.mood ? 'var(--color-gold)' : 'var(--color-gray-700)',
                     }}
                   />
                 ))}
@@ -562,21 +567,22 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
 
         {/* Techniques Section */}
         <div
-          className="card"
           onClick={() => isEditing && setActiveSheet('techniques')}
           style={{
+            backgroundColor: 'var(--color-gray-900)',
+            borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-md)',
             cursor: isEditing ? 'pointer' : 'default',
-            transition: 'box-shadow 0.2s, transform 0.2s',
+            transition: 'all 0.2s',
+            border: '1px solid var(--color-gray-800)',
           }}
           onMouseOver={(e) => {
             if (isEditing) {
-              e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-              e.currentTarget.style.transform = 'translateY(-1px)';
+              e.currentTarget.style.borderColor = 'var(--color-gold)';
             }
           }}
           onMouseOut={(e) => {
-            e.currentTarget.style.boxShadow = 'none';
-            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.borderColor = 'var(--color-gray-800)';
           }}
         >
           <div style={{
@@ -586,11 +592,11 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
             marginBottom: 'var(--space-sm)',
           }}>
             <div style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'var(--text-sm)',
-              fontWeight: 700,
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              fontWeight: 600,
               textTransform: 'uppercase',
-              letterSpacing: 'var(--tracking-widest)',
+              letterSpacing: '0.1em',
               color: 'var(--color-gray-500)',
             }}>
               Techniques Drilled
@@ -606,12 +612,13 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: 'var(--space-sm) 0',
-                  borderBottom: i < data.techniques.length - 1 ? '1px solid var(--color-gray-200)' : 'none',
+                  borderBottom: i < data.techniques.length - 1 ? '1px solid var(--color-gray-800)' : 'none',
                 }}
               >
                 <span style={{
                   fontSize: 'var(--text-base)',
-                  color: 'var(--color-gray-800)',
+                  fontWeight: 500,
+                  color: 'var(--color-white)',
                 }}>
                   {tech}
                 </span>
@@ -621,8 +628,9 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
             <div style={{
               padding: 'var(--space-md)',
               textAlign: 'center',
-              color: 'var(--color-gray-400)',
-              border: '2px dashed var(--color-gray-200)',
+              fontWeight: 500,
+              color: 'var(--color-gray-500)',
+              border: '2px dashed var(--color-gray-700)',
               borderRadius: 'var(--radius-md)',
             }}>
               {isEditing ? 'Tap to add techniques' : 'No techniques recorded'}
@@ -633,21 +641,22 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
         {/* Sparring Section */}
         {(data.sparringRounds || isEditing) && (
           <div
-            className="card"
             onClick={() => isEditing && setActiveSheet('sparring')}
             style={{
+              backgroundColor: 'var(--color-gray-900)',
+              borderRadius: 'var(--radius-md)',
+              padding: 'var(--space-md)',
               cursor: isEditing ? 'pointer' : 'default',
-              transition: 'box-shadow 0.2s, transform 0.2s',
+              transition: 'all 0.2s',
+              border: '1px solid var(--color-gray-800)',
             }}
             onMouseOver={(e) => {
               if (isEditing) {
-                e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-                e.currentTarget.style.transform = 'translateY(-1px)';
+                e.currentTarget.style.borderColor = 'var(--color-gold)';
               }
             }}
             onMouseOut={(e) => {
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.borderColor = 'var(--color-gray-800)';
             }}
           >
             <div style={{
@@ -657,11 +666,11 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
               marginBottom: 'var(--space-sm)',
             }}>
               <div style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 'var(--text-sm)',
-                fontWeight: 700,
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 600,
                 textTransform: 'uppercase',
-                letterSpacing: 'var(--tracking-widest)',
+                letterSpacing: '0.1em',
                 color: 'var(--color-gray-500)',
               }}>
                 Sparring ({data.sparringRounds || 0} rounds)
@@ -677,16 +686,17 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     padding: 'var(--space-sm) 0',
-                    borderBottom: i < data.sparringDetails.length - 1 ? '1px solid var(--color-gray-200)' : 'none',
+                    borderBottom: i < data.sparringDetails.length - 1 ? '1px solid var(--color-gray-800)' : 'none',
                   }}
                 >
-                  <span style={{ color: 'var(--color-gray-700)' }}>
+                  <span style={{ fontWeight: 500, color: 'var(--color-gray-300)' }}>
                     vs {round.partnerName} ({round.partnerBelt})
                   </span>
                   <span style={{
-                    color: round.outcome.includes('win') ? 'var(--color-success)' :
-                           round.outcome.includes('loss') ? 'var(--color-error)' :
-                           'var(--color-gray-500)',
+                    fontWeight: 600,
+                    color: round.outcome.includes('win') ? 'var(--color-positive)' :
+                           round.outcome.includes('loss') ? 'var(--color-negative)' :
+                           'var(--color-gray-400)',
                     fontSize: 'var(--text-sm)',
                   }}>
                     {round.outcome.replace('-', ' ')}
@@ -697,8 +707,9 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
               <div style={{
                 padding: 'var(--space-md)',
                 textAlign: 'center',
-                color: 'var(--color-gray-400)',
-                border: '2px dashed var(--color-gray-200)',
+                fontWeight: 500,
+                color: 'var(--color-gray-500)',
+                border: '2px dashed var(--color-gray-700)',
                 borderRadius: 'var(--radius-md)',
               }}>
                 {isEditing ? 'Tap to add round details' : 'No round details recorded'}
@@ -709,23 +720,22 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
 
         {/* What's Working Section */}
         <div
-          className="card"
           onClick={() => isEditing && setActiveSheet('working')}
           style={{
-            backgroundColor: 'rgba(34, 197, 94, 0.08)',
-            border: '1px solid rgba(34, 197, 94, 0.2)',
+            backgroundColor: 'rgba(34, 197, 94, 0.1)',
+            borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-md)',
+            border: '1px solid rgba(34, 197, 94, 0.3)',
             cursor: isEditing ? 'pointer' : 'default',
-            transition: 'box-shadow 0.2s, transform 0.2s',
+            transition: 'all 0.2s',
           }}
           onMouseOver={(e) => {
             if (isEditing) {
-              e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-              e.currentTarget.style.transform = 'translateY(-1px)';
+              e.currentTarget.style.borderColor = 'var(--color-positive)';
             }
           }}
           onMouseOut={(e) => {
-            e.currentTarget.style.boxShadow = 'none';
-            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.borderColor = 'rgba(34, 197, 94, 0.3)';
           }}
         >
           <div style={{
@@ -735,12 +745,12 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
             marginBottom: 'var(--space-sm)',
           }}>
             <div style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'var(--text-sm)',
-              fontWeight: 700,
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              fontWeight: 600,
               textTransform: 'uppercase',
-              letterSpacing: 'var(--tracking-widest)',
-              color: 'var(--color-success)',
+              letterSpacing: '0.1em',
+              color: 'var(--color-positive)',
             }}>
               What's Working
             </div>
@@ -757,16 +767,13 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
                   padding: 'var(--space-xs) 0',
                 }}
               >
-                <span style={{
-                  color: 'var(--color-success)',
-                  fontWeight: 600,
-                  fontSize: 'var(--text-lg)',
-                }}>
-                  ✓
-                </span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-positive)" strokeWidth="3" style={{ marginTop: 2, flexShrink: 0 }}>
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
                 <span style={{
                   fontSize: 'var(--text-base)',
-                  color: 'var(--color-gray-700)',
+                  fontWeight: 500,
+                  color: 'var(--color-white)',
                 }}>
                   {item}
                 </span>
@@ -776,7 +783,9 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
             <div style={{
               padding: 'var(--space-md)',
               textAlign: 'center',
-              color: 'var(--color-success-text)',
+              fontWeight: 500,
+              color: 'var(--color-positive)',
+              opacity: 0.7,
             }}>
               {isEditing ? 'Tap to add what went well' : 'Nothing recorded yet'}
             </div>
@@ -785,23 +794,22 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
 
         {/* Needs Work Section */}
         <div
-          className="card"
           onClick={() => isEditing && setActiveSheet('struggles')}
           style={{
-            backgroundColor: 'rgba(239, 68, 68, 0.08)',
-            border: '1px solid rgba(239, 68, 68, 0.2)',
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-md)',
+            border: '1px solid rgba(239, 68, 68, 0.3)',
             cursor: isEditing ? 'pointer' : 'default',
-            transition: 'box-shadow 0.2s, transform 0.2s',
+            transition: 'all 0.2s',
           }}
           onMouseOver={(e) => {
             if (isEditing) {
-              e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-              e.currentTarget.style.transform = 'translateY(-1px)';
+              e.currentTarget.style.borderColor = 'var(--color-negative)';
             }
           }}
           onMouseOut={(e) => {
-            e.currentTarget.style.boxShadow = 'none';
-            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.3)';
           }}
         >
           <div style={{
@@ -811,12 +819,12 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
             marginBottom: 'var(--space-sm)',
           }}>
             <div style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'var(--text-sm)',
-              fontWeight: 700,
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              fontWeight: 600,
               textTransform: 'uppercase',
-              letterSpacing: 'var(--tracking-widest)',
-              color: 'var(--color-error)',
+              letterSpacing: '0.1em',
+              color: 'var(--color-negative)',
             }}>
               Needs Work
             </div>
@@ -833,16 +841,14 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
                   padding: 'var(--space-xs) 0',
                 }}
               >
-                <span style={{
-                  color: 'var(--color-error)',
-                  fontWeight: 600,
-                  fontSize: 'var(--text-lg)',
-                }}>
-                  ✗
-                </span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-negative)" strokeWidth="3" style={{ marginTop: 2, flexShrink: 0 }}>
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
                 <span style={{
                   fontSize: 'var(--text-base)',
-                  color: 'var(--color-gray-700)',
+                  fontWeight: 500,
+                  color: 'var(--color-white)',
                 }}>
                   {struggle}
                 </span>
@@ -852,7 +858,9 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
             <div style={{
               padding: 'var(--space-md)',
               textAlign: 'center',
-              color: 'var(--color-error-text)',
+              fontWeight: 500,
+              color: 'var(--color-negative)',
+              opacity: 0.7,
             }}>
               {isEditing ? 'Tap to add areas for improvement' : 'Nothing recorded yet'}
             </div>
@@ -861,21 +869,22 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
 
         {/* Notes/Reflection Section */}
         <div
-          className="card"
           onClick={() => isEditing && setActiveSheet('notes')}
           style={{
+            backgroundColor: 'var(--color-gray-900)',
+            borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-md)',
             cursor: isEditing ? 'pointer' : 'default',
-            transition: 'box-shadow 0.2s, transform 0.2s',
+            transition: 'all 0.2s',
+            border: '1px solid var(--color-gray-800)',
           }}
           onMouseOver={(e) => {
             if (isEditing) {
-              e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-              e.currentTarget.style.transform = 'translateY(-1px)';
+              e.currentTarget.style.borderColor = 'var(--color-gold)';
             }
           }}
           onMouseOut={(e) => {
-            e.currentTarget.style.boxShadow = 'none';
-            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.borderColor = 'var(--color-gray-800)';
           }}
         >
           <div style={{
@@ -890,17 +899,17 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
               gap: 'var(--space-sm)',
             }}>
               <span style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 'var(--text-sm)',
-                fontWeight: 700,
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 600,
                 textTransform: 'uppercase',
-                letterSpacing: 'var(--tracking-widest)',
+                letterSpacing: '0.1em',
                 color: 'var(--color-gray-500)',
               }}>
                 Personal Notes
               </span>
               {data.isPrivate && (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-400)" strokeWidth="2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-500)" strokeWidth="2">
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                   <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                 </svg>
@@ -911,7 +920,8 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
           {data.notes ? (
             <p style={{
               fontSize: 'var(--text-base)',
-              color: 'var(--color-gray-700)',
+              fontWeight: 500,
+              color: 'var(--color-gray-300)',
               lineHeight: 'var(--leading-relaxed)',
               whiteSpace: 'pre-wrap',
             }}>
@@ -921,8 +931,9 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
             <div style={{
               padding: 'var(--space-lg)',
               textAlign: 'center',
-              color: 'var(--color-gray-400)',
-              border: '2px dashed var(--color-gray-200)',
+              fontWeight: 500,
+              color: 'var(--color-gray-500)',
+              border: '2px dashed var(--color-gray-700)',
               borderRadius: 'var(--radius-md)',
             }}>
               {isEditing ? 'Tap to add a reflection' : 'No notes added'}
@@ -1018,14 +1029,15 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
           position: 'fixed',
           inset: 0,
           zIndex: 2000,
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          backgroundColor: 'rgba(0, 0, 0, 0.85)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           padding: 'var(--space-lg)',
         }}>
           <div style={{
-            backgroundColor: 'var(--color-white)',
+            backgroundColor: 'var(--color-gray-900)',
+            border: '1px solid var(--color-gray-800)',
             borderRadius: 'var(--radius-lg)',
             padding: 'var(--space-xl)',
             maxWidth: 340,
@@ -1035,12 +1047,15 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
             <h3 style={{
               fontFamily: 'var(--font-heading)',
               fontSize: 'var(--text-lg)',
+              fontWeight: 700,
+              color: 'var(--color-white)',
               marginBottom: 'var(--space-sm)',
             }}>
               Discard changes?
             </h3>
             <p style={{
-              color: 'var(--color-gray-600)',
+              color: 'var(--color-gray-400)',
+              fontWeight: 500,
               marginBottom: 'var(--space-xl)',
               lineHeight: 'var(--leading-relaxed)',
             }}>
@@ -1052,10 +1067,10 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
                 style={{
                   flex: 1,
                   padding: 'var(--space-md)',
-                  border: '1px solid var(--color-gray-300)',
+                  border: '1px solid var(--color-gray-700)',
                   borderRadius: 'var(--radius-md)',
                   backgroundColor: 'transparent',
-                  color: 'var(--color-gray-700)',
+                  color: 'var(--color-gray-300)',
                   fontWeight: 600,
                   cursor: 'pointer',
                 }}
@@ -1069,7 +1084,7 @@ export function SessionDetail({ session, onBack, onSave }: SessionDetailProps) {
                   padding: 'var(--space-md)',
                   border: 'none',
                   borderRadius: 'var(--radius-md)',
-                  backgroundColor: 'var(--color-error)',
+                  backgroundColor: 'var(--color-negative)',
                   color: 'var(--color-white)',
                   fontWeight: 600,
                   cursor: 'pointer',
