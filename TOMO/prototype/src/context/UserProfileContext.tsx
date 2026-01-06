@@ -454,6 +454,26 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
     setProfile(persona.contextProfile);
     setIsDemoMode(true);
     localStorage.setItem(DEMO_MODE_KEY, JSON.stringify({ enabled: true, persona: personaKey }));
+
+    // Seed insight tracking data for demo personas
+    // Only white-at-risk has no session data (to show empty state)
+    const INSIGHT_STORAGE_KEY = 'bjj-insight-tracking';
+    if (personaKey === 'white-at-risk') {
+      // Clear insight tracking to show "no session" state
+      localStorage.removeItem(INSIGHT_STORAGE_KEY);
+    } else {
+      // Seed with session data so insights can be generated
+      // Use yesterday's date so a new insight will generate on first view
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+      localStorage.setItem(INSIGHT_STORAGE_KEY, JSON.stringify({
+        lastInsightDate: null, // No insight generated yet
+        lastSessionDate: yesterdayStr, // Session logged yesterday
+        todaysInsight: null,
+      }));
+    }
   };
 
   // Cycle to the next persona in the list (wraps around)
