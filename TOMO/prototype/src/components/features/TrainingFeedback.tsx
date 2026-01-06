@@ -140,16 +140,25 @@ Keep showing up. The consistency you're building now compounds over time. Your c
 
 
 // ===========================================
-// TYPEWRITER HOOK
+// BIOLUMINESCENCE TYPEWRITER HOOK
 // ===========================================
 
+// Track each character with its "age" for the glow fade effect
+interface CharState {
+  char: string;
+  addedAt: number; // timestamp when character was added
+}
+
 function useTypewriter(text: string, speed: number = 20, startDelay: number = 500) {
-  const [displayedText, setDisplayedText] = useState('');
+  const [charStates, setCharStates] = useState<CharState[]>([]);
   const [isComplete, setIsComplete] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
 
+  // Derived displayedText for compatibility
+  const displayedText = charStates.map(c => c.char).join('');
+
   useEffect(() => {
-    setDisplayedText('');
+    setCharStates([]);
     setIsComplete(false);
     setIsStarted(false);
 
@@ -166,7 +175,8 @@ function useTypewriter(text: string, speed: number = 20, startDelay: number = 50
     let index = 0;
     const timer = setInterval(() => {
       if (index < text.length) {
-        setDisplayedText(text.slice(0, index + 1));
+        const now = Date.now();
+        setCharStates(prev => [...prev, { char: text[index], addedAt: now }]);
         index++;
       } else {
         setIsComplete(true);
@@ -178,11 +188,104 @@ function useTypewriter(text: string, speed: number = 20, startDelay: number = 50
   }, [text, speed, isStarted]);
 
   const skip = useCallback(() => {
-    setDisplayedText(text);
+    const now = Date.now();
+    setCharStates(text.split('').map(char => ({ char, addedAt: now - 1000 })));
     setIsComplete(true);
   }, [text]);
 
-  return { displayedText, isComplete, isStarted, skip };
+  return { displayedText, charStates, isComplete, isStarted, skip };
+}
+
+// Component to render text with bioluminescent glow effect
+interface GlowTextProps {
+  charStates: CharState[];
+  isComplete: boolean;
+}
+
+function GlowText({ charStates, isComplete }: GlowTextProps) {
+  const [, forceUpdate] = useState(0);
+
+  // Re-render periodically to update glow states while animating
+  useEffect(() => {
+    if (isComplete) return;
+
+    const interval = setInterval(() => {
+      forceUpdate(n => n + 1);
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [isComplete]);
+
+  const now = Date.now();
+  const glowDuration = 600; // ms for glow to fade
+
+  // Convert charStates to text with spans for glowing characters
+  let result: React.ReactNode[] = [];
+  let currentParagraph: React.ReactNode[] = [];
+  let paragraphIndex = 0;
+
+  charStates.forEach((charState, i) => {
+    const age = now - charState.addedAt;
+    const isGlowing = age < glowDuration && !isComplete;
+
+    // Calculate glow intensity (1 = full glow, 0 = no glow)
+    const glowIntensity = isGlowing ? Math.max(0, 1 - (age / glowDuration)) : 0;
+
+    // Handle newlines - create paragraph breaks
+    if (charState.char === '\n') {
+      if (currentParagraph.length > 0) {
+        result.push(
+          <p key={`p-${paragraphIndex}`} style={{ margin: 0, marginBottom: 'var(--space-md)' }}>
+            {currentParagraph}
+          </p>
+        );
+        paragraphIndex++;
+        currentParagraph = [];
+      }
+      return;
+    }
+
+    // Check if this char is part of bold text (**)
+    // For simplicity, we'll handle bold at the paragraph level below
+
+    if (isGlowing) {
+      // Bioluminescent glow - soft gold that fades to white
+      const goldOpacity = glowIntensity * 0.9;
+      const shadowBlur = 8 + (glowIntensity * 12); // 8-20px blur
+      const shadowOpacity = glowIntensity * 0.6;
+
+      currentParagraph.push(
+        <span
+          key={i}
+          style={{
+            color: `rgba(245, 166, 35, ${0.3 + goldOpacity * 0.7})`,
+            textShadow: `0 0 ${shadowBlur}px rgba(245, 166, 35, ${shadowOpacity})`,
+            transition: 'color 0.3s ease-out, text-shadow 0.3s ease-out',
+          }}
+        >
+          {charState.char}
+        </span>
+      );
+    } else {
+      // Settled text - white
+      currentParagraph.push(
+        <span key={i} style={{ color: 'var(--color-gray-200)' }}>
+          {charState.char}
+        </span>
+      );
+    }
+  });
+
+  // Don't forget the last paragraph
+  if (currentParagraph.length > 0) {
+    result.push(
+      <p key={`p-${paragraphIndex}`} style={{ margin: 0, marginBottom: 'var(--space-md)' }}>
+        {currentParagraph}
+      </p>
+    );
+  }
+
+  return <>{result}</>;
 }
 
 // ===========================================
@@ -274,7 +377,7 @@ export function TrainingFeedback({ onClose, onLogSession }: TrainingFeedbackProp
     }, 2000);
   }, []);
 
-  const { displayedText, isComplete, isStarted, skip } = useTypewriter(
+  const { displayedText, charStates, isComplete, isStarted, skip } = useTypewriter(
     currentInsight?.content || '',
     2,
     800
@@ -620,40 +723,23 @@ export function TrainingFeedback({ onClose, onLogSession }: TrainingFeedbackProp
               {currentInsight.title}
             </h3>
 
-            {/* Typewriter Content */}
+            {/* Bioluminescent Typewriter Content */}
             <div style={{
-              color: 'var(--color-gray-200)',
               fontSize: 'var(--text-base)',
               lineHeight: 1.7,
-              whiteSpace: 'pre-wrap',
             }}>
-              {displayedText.split('\n').map((paragraph, i) => {
-                // Parse bold text (wrapped in **)
-                const parts = paragraph.split(/(\*\*[^*]+\*\*)/g);
-                return (
-                  <p key={i} style={{ margin: 0, marginBottom: 'var(--space-md)' }}>
-                    {parts.map((part, j) => {
-                      if (part.startsWith('**') && part.endsWith('**')) {
-                        return (
-                          <strong key={j} style={{ color: 'var(--color-white)', fontWeight: 600 }}>
-                            {part.slice(2, -2)}
-                          </strong>
-                        );
-                      }
-                      return part;
-                    })}
-                  </p>
-                );
-              })}
-              {/* Cursor */}
+              <GlowText charStates={charStates} isComplete={isComplete} />
+              {/* Cursor - soft glow */}
               {!isComplete && isStarted && (
                 <span style={{
                   display: 'inline-block',
-                  width: '2px',
-                  height: '1em',
-                  backgroundColor: 'var(--color-gold)',
+                  width: '3px',
+                  height: '1.1em',
+                  backgroundColor: 'rgba(245, 166, 35, 0.8)',
                   marginLeft: '2px',
-                  animation: 'blink 1s step-end infinite',
+                  borderRadius: '1px',
+                  boxShadow: '0 0 8px rgba(245, 166, 35, 0.6), 0 0 16px rgba(245, 166, 35, 0.3)',
+                  animation: 'pulse-glow 1.5s ease-in-out infinite',
                 }} />
               )}
             </div>
@@ -768,6 +854,16 @@ export function TrainingFeedback({ onClose, onLogSession }: TrainingFeedbackProp
             <style>{`
               @keyframes blink {
                 50% { opacity: 0; }
+              }
+              @keyframes pulse-glow {
+                0%, 100% {
+                  opacity: 0.8;
+                  box-shadow: 0 0 8px rgba(245, 166, 35, 0.6), 0 0 16px rgba(245, 166, 35, 0.3);
+                }
+                50% {
+                  opacity: 0.4;
+                  box-shadow: 0 0 4px rgba(245, 166, 35, 0.3), 0 0 8px rgba(245, 166, 35, 0.15);
+                }
               }
             `}</style>
           </div>
