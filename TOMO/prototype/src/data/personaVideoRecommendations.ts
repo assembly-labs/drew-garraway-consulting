@@ -76,6 +76,14 @@ const jakeThompsonVideos: PersonaVideoConfig = {
   },
   levelUpVideos: [
     {
+      video: getVideoById('CG_FS_001')!,
+      headline: 'Featured: Low-Risk Flower Sweep',
+      personalizedReason: "MMALeech's Gustavo Gasperin breaks down the safest sweep in BJJ. Low risk, high reward - perfect for building your bottom game without losing position.",
+      category: 'technique',
+      priority: 1,
+      oneLiner: 'Your first reliable sweep from guard.',
+    },
+    {
       video: getVideoById('CG_008')!,
       headline: 'Add the Triangle',
       personalizedReason: "You've got the top control. Now develop the submission that catches people when they pass into your guard. This chains perfectly with your armbar attempts.",
@@ -218,6 +226,14 @@ const marcusChenVideos: PersonaVideoConfig = {
     oneLiner: 'Your guard is getting passed. This is why.',
   },
   levelUpVideos: [
+    {
+      video: getVideoById('GP_KS_001')!,
+      headline: 'Featured: Knee Slice Mastery',
+      personalizedReason: "MMALeech's Gustavo Gasperin shows the most reliable pass at blue belt. The knee slice opens everything - chain it into half guard passes and leg drags.",
+      category: 'technique',
+      priority: 1,
+      oneLiner: 'The pass that opens your top game.',
+    },
     {
       video: getVideoById('HG_001')!,
       headline: 'Build Half Guard',
@@ -362,6 +378,14 @@ const sofiaRodriguezVideos: PersonaVideoConfig = {
     oneLiner: 'The generational gap ends here.',
   },
   levelUpVideos: [
+    {
+      video: getVideoById('SC_PC_001')!,
+      headline: 'Featured: Paper Cutter Combo',
+      personalizedReason: "MMALeech's Gustavo Gasperin connects the paper cutter choke to armbar threats. Your top game needs this - when they defend one, they give you the other.",
+      category: 'technique',
+      priority: 1,
+      oneLiner: 'Turn side control into a submission machine.',
+    },
     {
       video: getVideoById('GP_024')!,
       headline: 'Systems-Level Passing',

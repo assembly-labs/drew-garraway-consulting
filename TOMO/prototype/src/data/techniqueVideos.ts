@@ -200,6 +200,26 @@ export const techniqueVideos: TechniqueVideo[] = [
   { technique_id: 'BC_006', video_type: 'instructional', youtube_id: 'k-lCzVAzJpg', instructor: 'Lachlan Giles', title: 'Escaping The Back - Pay Attention To The Leg Work', duration_seconds: 600 },
 
   // ===========================================
+  // FEATURED INSTRUCTOR: GUSTAVO GASPERIN (MMALeech)
+  // Clear, high-quality BJJ techniques suitable for white to purple belt
+  // ===========================================
+
+  // De La Riva Guard - Blue/Purple belt level
+  { technique_id: 'OG_DLR_001', video_type: 'instructional', youtube_id: 'R9U6Fbnlv2g', instructor: 'Gustavo Gasperin', title: '3 De La Riva Sweeps Combo', duration_seconds: 540 },
+
+  // Closed Guard - White/Blue belt level (fundamental sweep)
+  { technique_id: 'CG_FS_001', video_type: 'instructional', youtube_id: 'LU7bEi96ink', instructor: 'Gustavo Gasperin', title: 'Low Risk Sweep From Closed Guard - Flower Sweep', duration_seconds: 420 },
+
+  // Submissions - Blue/Purple belt level (armbar variation)
+  { technique_id: 'SM_AB_001', video_type: 'instructional', youtube_id: 's7Fp2Qegr6w', instructor: 'Gustavo Gasperin', title: 'The Most Hated Armbar Finish: Dog Pee Armbar', duration_seconds: 480 },
+
+  // Guard Passing - Blue/Purple belt level (fundamental pass)
+  { technique_id: 'GP_KS_001', video_type: 'instructional', youtube_id: '3yyc7ZdoBVY', instructor: 'Gustavo Gasperin', title: 'Knee Slice Pass & Combos', duration_seconds: 600 },
+
+  // Side Control Attacks - Blue/Purple belt level
+  { technique_id: 'SC_PC_001', video_type: 'instructional', youtube_id: '3jnfMMh_tkQ', instructor: 'Gustavo Gasperin', title: 'Paper Cutter Choke & Armbar Combo From Side Control', duration_seconds: 540 },
+
+  // ===========================================
   // MINDSET & LIFESTYLE VIDEOS
   // Verified YouTube video IDs from reputable BJJ instructors
   // ===========================================
