@@ -1,0 +1,52 @@
+{
+  "deck_meta": {
+    "deck_name": "[TOPIC] Flashcards",
+    "section": 3,
+    "subsection": "[SUBSECTION_NAME]",
+    "topic": "[SPECIFIC_TOPIC]",
+    "card_count": 0,
+    "last_updated": "YYYY-MM-DD"
+  },
+  "cards": [
+    {
+      "id": "[prefix]-001",
+      "front": "What is [term/concept]?",
+      "back": "[Direct answer first. Brief explanation if needed.]",
+      "type": "term",
+      "difficulty": "easy",
+      "tags": ["[topic]", "[subtopic]"],
+      "related_lesson": "3.X.X",
+      "memory_aid": "[Optional mnemonic]"
+    },
+    {
+      "id": "[prefix]-002",
+      "front": "How do you calculate [formula name]?",
+      "back": "[Formula] = [Expression]. Example: [Quick worked example]",
+      "type": "formula",
+      "difficulty": "medium",
+      "tags": ["[topic]", "formula"],
+      "related_lesson": "3.X.X",
+      "memory_aid": "[Memory trick if applicable]"
+    },
+    {
+      "id": "[prefix]-003",
+      "front": "[Concept A] vs. [Concept B]: What's the key difference?",
+      "back": "[A] = [characteristic]. [B] = [characteristic]. Key distinction: [main difference]",
+      "type": "comparison",
+      "difficulty": "medium",
+      "tags": ["[topic]", "comparison"],
+      "related_lesson": "3.X.X",
+      "memory_aid": null
+    },
+    {
+      "id": "[prefix]-004",
+      "front": "What is the [rule/requirement] for [topic]?",
+      "back": "[Rule statement]. Example: [Application]. Consequence: [What happens if violated]",
+      "type": "rule",
+      "difficulty": "medium",
+      "tags": ["[topic]", "regulation"],
+      "related_lesson": "3.X.X",
+      "memory_aid": null
+    }
+  ]
+}
