@@ -1,6 +1,15 @@
 /* Google Fonts - Unbounded for headlines/numbers, Inter for body, JetBrains Mono for labels (must be first) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800;900&display=swap');
 
+/* Barcade Bold - Logo font */
+@font-face {
+  font-family: 'Barcade Bold';
+  src: url('/fonts/barcade/barcadbold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import "tailwindcss";
 
 /* ========================================
@@ -102,12 +111,13 @@
   --color-training-competition: #EF4444;
 
   /* ========================================
-     TYPOGRAPHY - Unbounded + Inter + JetBrains Mono
+     TYPOGRAPHY - Unbounded + Inter + JetBrains Mono + Barcade
      ======================================== */
   --font-display: 'Unbounded', sans-serif;  /* Hero numbers, headlines */
   --font-heading: 'Unbounded', sans-serif;  /* Page titles, section headers */
   --font-body: 'Inter', -apple-system, sans-serif;  /* Body text, descriptions */
   --font-mono: 'JetBrains Mono', monospace;  /* Labels, data values */
+  --font-logo: 'Barcade Bold', sans-serif;  /* TOMO logo */
 
   /* Text sizes - Bold editorial scale
      CRITICAL: 12px is the MINIMUM font size.

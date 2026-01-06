@@ -29,7 +29,7 @@ const getBeltBorderColor = (belt: string): string => {
 };
 
 export function Header({
-  title = 'ALLY',
+  title = 'TOMO',
   showBackButton = false,
   onBack,
   rightAction,
@@ -81,10 +81,11 @@ export function Header({
           </button>
         )}
         <h1 style={{
+          fontFamily: 'var(--font-logo)',
           fontSize: 'var(--text-xl)',
           margin: 0,
-          letterSpacing: 'var(--tracking-wider)',
-          fontWeight: 900, /* Unbounded Black - fattest weight */
+          letterSpacing: '0.05em',
+          fontWeight: 'normal', /* Barcade Bold is already bold */
         }}>
           {title}
         </h1>

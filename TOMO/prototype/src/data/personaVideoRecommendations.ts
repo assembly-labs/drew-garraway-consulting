@@ -236,8 +236,8 @@ const marcusChenVideos: PersonaVideoConfig = {
   levelUpVideos: [
     {
       video: getVideoById('GP_KS_001')!,
-      headline: 'Featured: Knee Slice Mastery',
-      personalizedReason: "MMALeech's Gustavo Gasperin shows the most reliable pass at blue belt. The knee slice opens everything - chain it into half guard passes and leg drags.",
+      headline: 'Master the Knee Cut',
+      personalizedReason: "Gustavo Gasperin breaks down 6 knee cut variations. This is the most reliable pass at blue belt - master these and your top game opens up.",
       category: 'technique',
       priority: 1,
       oneLiner: 'The pass that opens your top game.',
@@ -310,12 +310,12 @@ const ryanTorresVideos: PersonaVideoConfig = {
   },
   levelUpVideos: [
     {
-      video: getVideoById('OG_DLR_001')!,
-      headline: 'Featured: De La Riva Sweeps',
-      personalizedReason: "MMALeech's Gustavo Gasperin shows 3 sweeps that chain together. When you come back, this gives you something fun to drill. New techniques reignite the spark.",
+      video: getVideoById('HG_KS_001')!,
+      headline: 'Beat the Knee Shield',
+      personalizedReason: "Gustavo Gasperin shows how to pass the knee shield. Fundamental, satisfying, and immediately useful when you get back on the mats.",
       category: 'technique',
       priority: 1,
-      oneLiner: 'Something new to work on when you return.',
+      oneLiner: 'A passing problem you can solve.',
     },
     {
       video: getVideoById('BJ_003')!,
@@ -468,6 +468,14 @@ const elenaKimVideos: PersonaVideoConfig = {
     oneLiner: 'The difference between good and great is details.',
   },
   levelUpVideos: [
+    {
+      video: getVideoById('HG_KS_001')!,
+      headline: 'Knee Shield Solutions',
+      personalizedReason: "Gustavo Gasperin's passing details for the knee shield. At brown belt, it's not about knowing the pass - it's about the micro-adjustments that make it inevitable.",
+      category: 'technique',
+      priority: 1,
+      oneLiner: 'Refine what you already know.',
+    },
     {
       video: getVideoById('SM_028')!,
       headline: 'Modern Leg Lock Meta',

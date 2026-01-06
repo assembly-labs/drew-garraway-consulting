@@ -576,33 +576,6 @@ export function UpNextVideos({
         </h2>
       </div>
 
-      {/* Featured Instructor Banner */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 'var(--space-xs)',
-          marginBottom: 'var(--space-lg)',
-          padding: 'var(--space-xs) var(--space-sm)',
-          backgroundColor: 'rgba(245, 166, 35, 0.1)',
-          borderRadius: 'var(--radius-sm)',
-          borderLeft: '2px solid var(--color-gold)',
-        }}
-      >
-        <span
-          style={{
-            fontSize: 'var(--text-xs)',
-            color: 'var(--color-gray-400)',
-          }}
-        >
-          Featured techniques by{' '}
-          <span style={{ color: 'var(--color-gold)', fontWeight: 600 }}>
-            Gustavo Gasperin
-          </span>
-          {' '}(MMALeech)
-        </span>
-      </div>
-
       {/* Hero Video */}
       <div style={{ marginBottom: 'var(--space-xl)' }}>
         <VideoCard recommendation={heroVideo} variant="hero" onPlay={handlePlayVideo} />

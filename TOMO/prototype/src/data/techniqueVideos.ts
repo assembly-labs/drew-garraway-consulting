@@ -207,14 +207,17 @@ export const techniqueVideos: TechniqueVideo[] = [
   // De La Riva Guard - Blue/Purple belt level
   { technique_id: 'OG_DLR_001', video_type: 'instructional', youtube_id: 'R9U6Fbnlv2g', instructor: 'Gustavo Gasperin', title: '3 De La Riva Sweeps Combo', duration_seconds: 540 },
 
+  // Half Guard Passing - Blue/Purple/Brown belt level
+  { technique_id: 'HG_KS_001', video_type: 'instructional', youtube_id: 'kzTdXfDIndw', instructor: 'Gustavo Gasperin', title: 'Knee Shield Half Guard Pass Combo', duration_seconds: 480 },
+
   // Closed Guard - White/Blue belt level (fundamental sweep)
   { technique_id: 'CG_FS_001', video_type: 'instructional', youtube_id: 'LU7bEi96ink', instructor: 'Gustavo Gasperin', title: 'Low Risk Sweep From Closed Guard - Flower Sweep', duration_seconds: 420 },
 
   // Submissions - Blue/Purple belt level (armbar variation)
   { technique_id: 'SM_AB_001', video_type: 'instructional', youtube_id: 's7Fp2Qegr6w', instructor: 'Gustavo Gasperin', title: 'The Most Hated Armbar Finish: Dog Pee Armbar', duration_seconds: 480 },
 
-  // Guard Passing - Blue/Purple belt level (fundamental pass)
-  { technique_id: 'GP_KS_001', video_type: 'instructional', youtube_id: '3yyc7ZdoBVY', instructor: 'Gustavo Gasperin', title: 'Knee Slice Pass & Combos', duration_seconds: 600 },
+  // Guard Passing - Blue belt level (fundamental pass variations)
+  { technique_id: 'GP_KS_001', video_type: 'instructional', youtube_id: 'I66SzufFJT0', instructor: 'Gustavo Gasperin', title: 'Top 6 Knee Cut Pass Variations - BJJ Fundamentals', duration_seconds: 600 },
 
   // Side Control Attacks - Blue/Purple belt level
   { technique_id: 'SC_PC_001', video_type: 'instructional', youtube_id: '3jnfMMh_tkQ', instructor: 'Gustavo Gasperin', title: 'Paper Cutter Choke & Armbar Combo From Side Control', duration_seconds: 540 },
