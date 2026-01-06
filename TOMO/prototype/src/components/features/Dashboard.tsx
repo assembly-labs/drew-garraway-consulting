@@ -341,7 +341,8 @@ function generateMockSessionDates(
   return sessionsByDate;
 }
 
-export function Dashboard(_props: DashboardProps) {
+export function Dashboard(_: DashboardProps) {
+  void _; // Props reserved for future use
   // Check for demo mode and get persona info
   const { isDemoMode, activeDemoProfile, activePersona } = useUserProfile();
 
@@ -377,6 +378,10 @@ export function Dashboard(_props: DashboardProps) {
   // BREAKTHROUGH DETECTION
   // ===========================================
   const { breakthrough, allBreakthroughs } = useMemo(() => {
+    // Stable reference date for mock data (avoids impure Date.now() calls)
+    const referenceDate = new Date('2026-01-05T12:00:00Z').getTime();
+    const daysAgo = (days: number) => new Date(referenceDate - days * 24 * 60 * 60 * 1000).toISOString();
+
     const input: BreakthroughDetectionInput = {
       journalEntries: allJournalEntries,
       trainingStats: {
@@ -400,7 +405,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-white-1',
               type: 'first_submission',
-              detectedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(4),
               confidence: 'high',
               title: 'First Americana',
               description: 'You landed your first americana on a training partner.',
@@ -411,7 +416,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-white-2',
               type: 'consistency_milestone',
-              detectedAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(14),
               confidence: 'high',
               title: '50 Sessions',
               description: 'You reached 50 training sessions.',
@@ -422,7 +427,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-white-3',
               type: 'pattern_break',
-              detectedAt: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(21),
               confidence: 'medium',
               title: 'Survived a Round',
               description: 'You went a full round without getting submitted.',
@@ -436,7 +441,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-blue-1',
               type: 'first_submission',
-              detectedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(7),
               confidence: 'high',
               title: 'First Triangle',
               description: 'You landed your first triangle in live rolling.',
@@ -447,7 +452,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-blue-2',
               type: 'streak_record',
-              detectedAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(14),
               confidence: 'high',
               title: '10 Day Streak',
               description: 'You hit a new personal best training streak.',
@@ -458,7 +463,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-blue-3',
               type: 'pattern_break',
-              detectedAt: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(21),
               confidence: 'medium',
               title: 'Armbar Defense Up',
               description: 'You stopped getting caught in armbars.',
@@ -472,7 +477,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-purple-1',
               type: 'technique_streak',
-              detectedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(5),
               confidence: 'high',
               title: 'Berimbolo Chain Working',
               description: 'Your berimbolo to back take hit 5 times this week.',
@@ -483,7 +488,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-purple-2',
               type: 'consistency_milestone',
-              detectedAt: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(12),
               confidence: 'high',
               title: '200 Sessions',
               description: 'Two hundred training sessions logged.',
@@ -494,7 +499,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-purple-3',
               type: 'first_submission',
-              detectedAt: new Date(Date.now() - 18 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(18),
               confidence: 'high',
               title: 'First Leg Lock',
               description: 'You caught your first heel hook in competition.',
@@ -508,7 +513,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-brown-1',
               type: 'technique_streak',
-              detectedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(3),
               confidence: 'high',
               title: 'Pressure Passing Streak',
               description: 'Your pressure passing scored in 8 consecutive rounds.',
@@ -519,7 +524,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-brown-2',
               type: 'consistency_milestone',
-              detectedAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(10),
               confidence: 'high',
               title: '500 Sessions',
               description: 'Five hundred sessions on the mat.',
@@ -530,7 +535,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-brown-3',
               type: 'pattern_break',
-              detectedAt: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(25),
               confidence: 'medium',
               title: 'Teaching Breakthrough',
               description: 'Three students hit the technique you taught.',
@@ -544,7 +549,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-black-1',
               type: 'consistency_milestone',
-              detectedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(7),
               confidence: 'high',
               title: '1000 Sessions',
               description: 'One thousand sessions logged.',
@@ -555,7 +560,7 @@ export function Dashboard(_props: DashboardProps) {
             {
               id: 'hist-black-2',
               type: 'technique_streak',
-              detectedAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+              detectedAt: daysAgo(14),
               confidence: 'high',
               title: 'New Concept Explored',
               description: 'You integrated a new guard concept into your game.',

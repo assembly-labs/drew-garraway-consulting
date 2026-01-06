@@ -745,7 +745,7 @@ function SectionHeader({
 
 // ===========================================
 // FOR YOU VIEW
-// Clean, reduced density, better spacing
+// Hero + Up Next layout for focused recommendations
 // ===========================================
 
 function ForYouView({
@@ -759,114 +759,166 @@ function ForYouView({
   playlistName: string;
   emphasizeTopics: string[];
 }) {
+  const [showMoreSuggestions, setShowMoreSuggestions] = useState(false);
+
+  // Split recommendations: hero (1), up next (1), more (3)
+  const heroRec = recommendations[0];
+  const upNextRec = recommendations[1];
+  const moreRecs = recommendations.slice(2, 5);
+
+  if (!heroRec) return null;
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       {/* Section Header - Belt-Personalized */}
       <SectionHeader
         title={playlistName}
-        subtitle={`Focus: ${emphasizeTopics.slice(0, 3).join(', ')}`}
+        subtitle={`Focus: ${emphasizeTopics.slice(0, 2).join(', ')}`}
       />
 
-      {/* Recommendation Cards - More whitespace */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)' }}>
-        {recommendations.map((rec, index) => (
-          <div
-            key={`${rec.video.youtube_id}-${index}`}
+      {/* HERO CARD - Primary recommendation */}
+      <div
+        style={{
+          backgroundColor: 'var(--color-gray-900)',
+          borderRadius: 'var(--radius-lg)',
+          overflow: 'hidden',
+          border: '1px solid var(--color-gold-dim)',
+          marginBottom: 'var(--space-lg)',
+        }}
+      >
+        {/* Position Category Label */}
+        <div style={{
+          padding: 'var(--space-sm) var(--space-lg)',
+          backgroundColor: 'var(--color-gold-dim)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--space-sm)',
+        }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+          <span style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: 'var(--tracking-wider)',
+            color: 'var(--color-gold)',
+          }}>
+            {heroRec.position_category}
+          </span>
+        </div>
+
+        {/* Large Video Thumbnail */}
+        <div style={{ padding: 'var(--space-lg)' }}>
+          <YouTubeEmbed
+            videoId={heroRec.video.youtube_id}
+            title={heroRec.video.title}
+            instructor={heroRec.video.instructor}
+            duration={heroRec.video.duration_seconds}
+          />
+        </div>
+
+        {/* Reason Text - Prominent */}
+        <div style={{ padding: '0 var(--space-lg) var(--space-lg)' }}>
+          <p style={{
+            color: 'var(--color-white)',
+            fontSize: 'var(--text-base)',
+            fontWeight: 500,
+            lineHeight: 1.5,
+            margin: 0,
+          }}>
+            {heroRec.reason_text}
+          </p>
+        </div>
+      </div>
+
+      {/* UP NEXT - Secondary recommendation */}
+      {upNextRec && (
+        <>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--space-sm)',
+            marginBottom: 'var(--space-sm)',
+          }}>
+            <div style={{
+              width: 3,
+              height: 14,
+              backgroundColor: 'var(--color-gray-500)',
+              borderRadius: 2,
+            }} />
+            <span style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: 'var(--tracking-widest)',
+              color: 'var(--color-gray-500)',
+            }}>
+              Up Next
+            </span>
+          </div>
+
+          <UpNextCard recommendation={upNextRec} />
+        </>
+      )}
+
+      {/* SEE MORE - Expandable section */}
+      {moreRecs.length > 0 && (
+        <div style={{ marginTop: 'var(--space-lg)' }}>
+          <button
+            onClick={() => setShowMoreSuggestions(!showMoreSuggestions)}
             style={{
-              backgroundColor: 'var(--color-gray-900)',
-              borderRadius: 'var(--radius-lg)',
-              overflow: 'hidden',
-              border: rec.priority === 'high' ? '1px solid var(--color-gold-dim)' : '1px solid var(--color-gray-800)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--space-sm)',
+              padding: 'var(--space-md) 0',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              width: '100%',
             }}
           >
-            {/* Priority Badge - Cleaner */}
-            {rec.priority === 'high' && (
-              <div style={{
-                padding: 'var(--space-sm) var(--space-lg)',
-                backgroundColor: 'var(--color-gold-dim)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 'var(--space-sm)',
-              }}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-                <span style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: 'var(--text-xs)',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: 'var(--tracking-wider)',
-                  color: 'var(--color-gold)',
-                }}>
-                  Priority Focus
-                </span>
-              </div>
-            )}
+            <span style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-sm)',
+              fontWeight: 600,
+              color: 'var(--color-gray-400)',
+            }}>
+              {showMoreSuggestions ? 'Hide' : `See ${moreRecs.length} more suggestions`}
+            </span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--color-gray-500)"
+              strokeWidth="2"
+              style={{
+                transform: showMoreSuggestions ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'transform 0.2s ease',
+              }}
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
 
-            {/* Video Player / Thumbnail - More padding */}
-            <div style={{ padding: 'var(--space-lg)' }}>
-              <YouTubeEmbed
-                videoId={rec.video.youtube_id}
-                title={rec.video.title}
-                instructor={rec.video.instructor}
-                duration={rec.video.duration_seconds}
-              />
+          {/* Expanded suggestions */}
+          {showMoreSuggestions && (
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 'var(--space-sm)',
+              paddingTop: 'var(--space-sm)',
+            }}>
+              {moreRecs.map((rec, index) => (
+                <UpNextCard key={`more-${rec.video.youtube_id}-${index}`} recommendation={rec} />
+              ))}
             </div>
-
-            {/* Recommendation Reason - Cleaner layout */}
-            <div style={{ padding: '0 var(--space-lg) var(--space-lg)' }}>
-              <p style={{
-                color: 'var(--color-gray-300)',
-                fontSize: 'var(--text-sm)',
-                lineHeight: 1.6,
-                margin: 0,
-              }}>
-                {rec.reason_text}
-              </p>
-
-              {/* User Progress Indicator - Only show if exists */}
-              {rec.user_proficiency && (
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 'var(--space-sm)',
-                  marginTop: 'var(--space-md)',
-                  padding: 'var(--space-sm) var(--space-md)',
-                  backgroundColor: PROFICIENCY_CONFIG[rec.user_proficiency].bgColor,
-                  borderRadius: 'var(--radius-md)',
-                  width: 'fit-content',
-                }}>
-                  <span style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: '50%',
-                    backgroundColor: PROFICIENCY_CONFIG[rec.user_proficiency].color,
-                  }} />
-                  <span style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: 'var(--text-xs)',
-                    fontWeight: 600,
-                    color: PROFICIENCY_CONFIG[rec.user_proficiency].color,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                  }}>
-                    {PROFICIENCY_CONFIG[rec.user_proficiency].label}
-                  </span>
-                  {rec.times_practiced > 0 && (
-                    <span style={{
-                      color: 'var(--color-gray-400)',
-                      fontSize: 'var(--text-xs)',
-                    }}>
-                      {rec.times_practiced}x practiced
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+          )}
+        </div>
+      )}
 
       {/* Divider */}
       <div style={{
@@ -875,7 +927,25 @@ function ForYouView({
         margin: 'var(--space-xl) calc(var(--space-md) * -1)',
       }} />
 
-      {/* Training Feedback CTA - Larger touch target */}
+      {/* Ask Coach Reminder */}
+      <div style={{
+        padding: 'var(--space-md)',
+        backgroundColor: 'var(--color-gray-900)',
+        borderRadius: 'var(--radius-md)',
+        borderLeft: '3px solid var(--color-gray-600)',
+        marginBottom: 'var(--space-lg)',
+      }}>
+        <p style={{
+          color: 'var(--color-gray-400)',
+          fontSize: 'var(--text-sm)',
+          margin: 0,
+          lineHeight: 1.5,
+        }}>
+          Your coach knows your game best. Use these as starting points.
+        </p>
+      </div>
+
+      {/* Training Feedback CTA */}
       {onOpenFeedback && (
         <button
           onClick={onOpenFeedback}
@@ -883,55 +953,52 @@ function ForYouView({
             width: '100%',
             padding: 'var(--space-lg)',
             backgroundColor: 'var(--color-gray-900)',
-            border: '1px solid var(--color-gold-dim)',
+            border: '1px solid var(--color-gray-700)',
             borderRadius: 'var(--radius-lg)',
             cursor: 'pointer',
             textAlign: 'left',
             display: 'flex',
             alignItems: 'center',
-            gap: 'var(--space-lg)',
-            marginTop: 'var(--space-lg)',
-            minHeight: 80,
+            gap: 'var(--space-md)',
+            marginBottom: 'var(--space-xl)',
+            minHeight: 64,
           }}
         >
           <div style={{
-            width: 56,
-            height: 56,
+            width: 44,
+            height: 44,
             borderRadius: 'var(--radius-full)',
-            backgroundColor: 'var(--color-gold-dim)',
+            backgroundColor: 'var(--color-gray-800)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0,
           }}>
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.5">
-              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-400)" strokeWidth="1.5">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             </svg>
           </div>
           <div style={{ flex: 1 }}>
             <div style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'var(--text-base)',
-              fontWeight: 700,
+              fontSize: 'var(--text-sm)',
+              fontWeight: 600,
               color: 'var(--color-white)',
-              marginBottom: 'var(--space-xs)',
             }}>
               Get Training Feedback
             </div>
             <div style={{
-              color: 'var(--color-gray-400)',
-              fontSize: 'var(--text-sm)',
-              lineHeight: 1.4,
+              color: 'var(--color-gray-500)',
+              fontSize: 'var(--text-xs)',
             }}>
-              AI-powered insights based on your history
+              AI insights from your session logs
             </div>
           </div>
           <svg
-            width="24"
-            height="24"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="var(--color-gray-500)"
+            stroke="var(--color-gray-600)"
             strokeWidth="2"
             style={{ flexShrink: 0 }}
           >
@@ -939,26 +1006,177 @@ function ForYouView({
           </svg>
         </button>
       )}
+    </div>
+  );
+}
 
-      {/* Ask Coach Reminder - More prominent */}
+// ===========================================
+// UP NEXT CARD
+// Compact horizontal card for secondary recommendations
+// ===========================================
+
+function UpNextCard({ recommendation }: { recommendation: VideoRecommendation }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  if (isPlaying) {
+    return (
       <div style={{
-        padding: 'var(--space-lg)',
         backgroundColor: 'var(--color-gray-900)',
         borderRadius: 'var(--radius-lg)',
-        borderLeft: '4px solid var(--color-info)',
-        marginTop: 'var(--space-lg)',
-        marginBottom: 'var(--space-xl)',
+        overflow: 'hidden',
+        border: '1px solid var(--color-gray-800)',
       }}>
-        <p style={{
-          color: 'var(--color-gray-300)',
-          fontSize: 'var(--text-sm)',
-          margin: 0,
-          lineHeight: 1.6,
-        }}>
-          These recommendations are based on general patterns. Your coach knows your game best.
-        </p>
+        <div style={{ padding: 'var(--space-md)' }}>
+          <YouTubeEmbed
+            videoId={recommendation.video.youtube_id}
+            title={recommendation.video.title}
+            instructor={recommendation.video.instructor}
+            duration={recommendation.video.duration_seconds}
+          />
+        </div>
+        <div style={{ padding: '0 var(--space-md) var(--space-md)' }}>
+          <p style={{
+            color: 'var(--color-gray-300)',
+            fontSize: 'var(--text-sm)',
+            margin: 0,
+          }}>
+            {recommendation.reason_text}
+          </p>
+        </div>
       </div>
-    </div>
+    );
+  }
+
+  return (
+    <button
+      onClick={() => setIsPlaying(true)}
+      style={{
+        display: 'flex',
+        gap: 'var(--space-md)',
+        padding: 'var(--space-md)',
+        backgroundColor: 'var(--color-gray-900)',
+        border: '1px solid var(--color-gray-800)',
+        borderRadius: 'var(--radius-lg)',
+        cursor: 'pointer',
+        width: '100%',
+        textAlign: 'left',
+        minHeight: 88,
+      }}
+    >
+      {/* Thumbnail */}
+      <div
+        style={{
+          position: 'relative',
+          width: 120,
+          minWidth: 120,
+          aspectRatio: '16/9',
+          borderRadius: 'var(--radius-md)',
+          overflow: 'hidden',
+          backgroundColor: 'var(--color-gray-800)',
+        }}
+      >
+        <img
+          src={`https://img.youtube.com/vi/${recommendation.video.youtube_id}/mqdefault.jpg`}
+          alt=""
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+        {/* Play overlay */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 32,
+            height: 32,
+            borderRadius: '50%',
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="none">
+            <path d="M11 7L1 13V1L11 7Z" fill="white" />
+          </svg>
+        </div>
+        {/* Duration badge */}
+        {recommendation.video.duration_seconds && (
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 4,
+              right: 4,
+              padding: '2px 6px',
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              borderRadius: 'var(--radius-sm)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '10px',
+              fontWeight: 600,
+              color: 'white',
+            }}
+          >
+            {Math.floor(recommendation.video.duration_seconds / 60)}:{(recommendation.video.duration_seconds % 60).toString().padStart(2, '0')}
+          </div>
+        )}
+      </div>
+
+      {/* Text content */}
+      <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div
+          style={{
+            fontSize: 'var(--text-sm)',
+            fontWeight: 600,
+            color: 'var(--color-white)',
+            lineHeight: 1.3,
+            marginBottom: 4,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+          }}
+        >
+          {recommendation.video.title}
+        </div>
+        <div
+          style={{
+            fontSize: 'var(--text-xs)',
+            color: 'var(--color-gray-400)',
+            marginBottom: 6,
+          }}
+        >
+          {recommendation.video.instructor}
+        </div>
+        <div
+          style={{
+            fontSize: 'var(--text-xs)',
+            color: 'var(--color-gray-500)',
+            lineHeight: 1.4,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {recommendation.reason_text}
+        </div>
+      </div>
+
+      {/* Chevron */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        color: 'var(--color-gray-600)',
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </div>
+    </button>
   );
 }
 

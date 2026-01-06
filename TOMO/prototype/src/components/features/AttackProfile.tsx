@@ -673,8 +673,9 @@ function Top5List({ title, techniques, variant }: Top5ListProps) {
 // MAIN COMPONENT
 // ===========================================
 
-export function AttackProfile({ submissionStats, belt: _belt = 'blue' }: AttackProfileProps) {
-  // Belt can be used for future personalization (e.g., hiding certain stats for white belts)
+export function AttackProfile({ submissionStats, belt = 'blue' }: AttackProfileProps) {
+  // Belt used for future personalization (e.g., hiding certain stats for white belts)
+  void belt; // Reserved for future belt-specific UI adaptations
   const { totalGiven, totalReceived, bodyHeatMap, techniqueBreakdown } = submissionStats;
 
   // Aggregate granular regions into display regions

@@ -115,6 +115,13 @@ export function BluesDetector({
 
   const copy = MODULE_COPY.find((c) => c.moduleId === 'blues-detector');
 
+  // Stable random insight selection (computed once per mount)
+  const randomInsight = useMemo(() => {
+    if (!copy?.insights?.length) return "You're showing up. That's what matters.";
+    const index = Math.floor(Math.random() * copy.insights.length);
+    return copy.insights[index];
+  }, [copy?.insights]);
+
   // No active interventions - show positive reinforcement
   if (activeInterventions.length === 0) {
     if (variant === 'compact') {
@@ -133,8 +140,7 @@ export function BluesDetector({
           <div style={styles.positiveTextContainer}>
             <span style={styles.positiveTitle}>No blues detected</span>
             <p style={styles.positiveMessage}>
-              {copy?.insights[Math.floor(Math.random() * copy.insights.length)] ||
-                "You're showing up. That's what matters."}
+              {randomInsight}
             </p>
           </div>
         </div>

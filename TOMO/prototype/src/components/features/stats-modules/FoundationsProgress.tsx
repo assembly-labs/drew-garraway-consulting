@@ -51,6 +51,13 @@ export function FoundationsProgress({
 
   const copy = MODULE_COPY.find((c) => c.moduleId === 'foundations-progress');
 
+  // Stable random insight selection (computed once per mount)
+  const randomInsight = useMemo(() => {
+    if (!copy?.insights?.length) return 'The basics become your superpowers.';
+    const index = Math.floor(Math.random() * copy.insights.length);
+    return copy.insights[index];
+  }, [copy?.insights]);
+
   if (variant === 'compact') {
     return (
       <CompactFoundations
@@ -161,8 +168,7 @@ export function FoundationsProgress({
       <div style={styles.insightBox}>
         <Icons.Info size={14} color="var(--color-gray-500)" />
         <p style={styles.insight}>
-          {copy?.insights[Math.floor(Math.random() * copy.insights.length)] ||
-            'The basics become your superpowers.'}
+          {randomInsight}
         </p>
       </div>
     </section>
