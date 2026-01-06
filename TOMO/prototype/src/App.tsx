@@ -6,14 +6,47 @@ import { TabBar, type TabId } from './components/layout/TabBar'
 import { Dashboard } from './components/features/Dashboard'
 import { SessionLogger } from './components/features/SessionLogger'
 import { SessionHistory } from './components/features/SessionHistory'
+import { SessionDetail } from './components/features/SessionDetail'
 import { TechniqueLibrary } from './components/features/TechniqueLibrary'
 import { TrainingFeedback } from './components/features/TrainingFeedback'
 import { ProfileScreen } from './components/features/ProfileScreen'
 import { Settings } from './components/features/Settings'
 import { IconShowcase } from './components/features/IconShowcase'
 import { useUserProfile } from './context/UserProfileContext'
+import type { JournalEntry } from './components/features/JournalEntryCard'
+import type { Session } from './components/features/SessionCard'
 
-type View = 'stats' | 'journal' | 'library' | 'insights' | 'profile' | 'settings' | 'design-system' | 'icons'
+type View = 'stats' | 'journal' | 'library' | 'insights' | 'profile' | 'settings' | 'design-system' | 'icons' | 'session-detail'
+
+// Transform JournalEntry (V2 format) to Session (legacy format for SessionDetail)
+function journalEntryToSession(entry: JournalEntry): Session {
+  // Map training_type to trainingType (handle 'both' as 'openmat')
+  const trainingTypeMap: Record<JournalEntry['training_type'], Session['trainingType']> = {
+    gi: 'gi',
+    nogi: 'nogi',
+    both: 'openmat',
+  };
+
+  return {
+    id: entry.id,
+    date: new Date(entry.date).toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+    }),
+    time: entry.time || '19:00',
+    trainingType: trainingTypeMap[entry.training_type],
+    durationMinutes: entry.duration_minutes || 60,
+    techniques: entry.techniques_drilled,
+    submissionsGiven: entry.submissions_given.length,
+    submissionsReceived: entry.submissions_received.length,
+    struggles: entry.struggles,
+    workedWell: entry.worked_well,
+    sparringRounds: entry.sparring_rounds || 0,
+    lessonTopic: entry.lesson_topic || undefined,
+    techniquesDrilled: entry.techniques_drilled,
+  };
+}
 
 function App() {
   // Get user profile for header avatar
@@ -22,6 +55,9 @@ function App() {
 
   // Track if session logger should be shown (overlay)
   const [showSessionLogger, setShowSessionLogger] = useState(true) // Auto-open on load
+
+  // Track selected session for detail view
+  const [selectedSession, setSelectedSession] = useState<JournalEntry | null>(null)
 
   // Check URL for design system mode or icons
   const [currentView, setCurrentView] = useState<View>(() => {
@@ -115,13 +151,16 @@ function App() {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'var(--color-black)' }}>
       {/* Header - changes based on current view */}
-      <Header
-        title={currentView === 'profile' ? 'PROFILE' : currentView === 'settings' ? 'SETTINGS' : 'TOMO'}
-        showBackButton={currentView === 'profile' || currentView === 'settings'}
-        onBack={() => currentView === 'settings' ? setCurrentView('profile') : setCurrentView(lastTabView)}
-        userInitial={currentView !== 'profile' && currentView !== 'settings' ? userInitial : undefined}
-        onProfileClick={currentView !== 'profile' && currentView !== 'settings' ? handleProfileClick : undefined}
-      />
+      {/* Hide header on session-detail (it has its own header) */}
+      {currentView !== 'session-detail' && (
+        <Header
+          title={currentView === 'profile' ? 'PROFILE' : currentView === 'settings' ? 'SETTINGS' : 'TOMO'}
+          showBackButton={currentView === 'profile' || currentView === 'settings'}
+          onBack={() => currentView === 'settings' ? setCurrentView('profile') : setCurrentView(lastTabView)}
+          userInitial={currentView !== 'profile' && currentView !== 'settings' ? userInitial : undefined}
+          onProfileClick={currentView !== 'profile' && currentView !== 'settings' ? handleProfileClick : undefined}
+        />
+      )}
 
       {/* Main Content */}
       <main style={{ paddingBottom: '100px' }}>
@@ -133,8 +172,18 @@ function App() {
           <SessionHistory
             onLogNew={() => setShowSessionLogger(true)}
             onSelectSession={(session) => {
-              // Session detail view would go here
-              console.log('Selected session:', session)
+              setSelectedSession(session)
+              setCurrentView('session-detail')
+            }}
+          />
+        )}
+
+        {currentView === 'session-detail' && selectedSession && (
+          <SessionDetail
+            session={journalEntryToSession(selectedSession)}
+            onBack={() => {
+              setSelectedSession(null)
+              setCurrentView('journal')
             }}
           />
         )}
@@ -158,11 +207,13 @@ function App() {
         )}
       </main>
 
-      {/* Bottom Navigation - show last valid tab when on profile/settings screen */}
-      <TabBar
-        activeTab={currentView === 'profile' || currentView === 'settings' ? lastTabView : currentView as TabId}
-        onTabChange={(tab) => setCurrentView(tab)}
-      />
+      {/* Bottom Navigation - show last valid tab when on profile/settings/session-detail screen */}
+      {currentView !== 'session-detail' && (
+        <TabBar
+          activeTab={currentView === 'profile' || currentView === 'settings' ? lastTabView : currentView as TabId}
+          onTabChange={(tab) => setCurrentView(tab)}
+        />
+      )}
 
       {/* Session Logger Overlay - Full Screen */}
       {showSessionLogger && (
