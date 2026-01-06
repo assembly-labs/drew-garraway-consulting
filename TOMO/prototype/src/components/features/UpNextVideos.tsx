@@ -501,11 +501,14 @@ interface UpNextVideosProps {
   maxLevelUpVideos?: number;
   /** Whether to show support videos for at-risk personas */
   showSupportSection?: boolean;
+  /** Callback to open training feedback (optional) */
+  onOpenFeedback?: () => void;
 }
 
 export function UpNextVideos({
   maxLevelUpVideos = 4,
   showSupportSection = true,
+  onOpenFeedback,
 }: UpNextVideosProps) {
   const { isDemoMode, activePersona } = useUserProfile();
 
@@ -650,6 +653,86 @@ export function UpNextVideos({
             ))}
           </div>
         </div>
+      )}
+
+      {/* Ask Coach Reminder */}
+      <div style={{
+        padding: 'var(--space-md)',
+        backgroundColor: 'var(--color-gray-900)',
+        borderRadius: 'var(--radius-md)',
+        borderLeft: '3px solid var(--color-gray-600)',
+        marginTop: 'var(--space-xl)',
+      }}>
+        <p style={{
+          color: 'var(--color-gray-400)',
+          fontSize: 'var(--text-sm)',
+          margin: 0,
+          lineHeight: 1.5,
+        }}>
+          Your coach knows your game best. Use these as starting points.
+        </p>
+      </div>
+
+      {/* Training Feedback CTA */}
+      {onOpenFeedback && (
+        <button
+          onClick={onOpenFeedback}
+          style={{
+            width: '100%',
+            padding: 'var(--space-lg)',
+            backgroundColor: 'var(--color-gray-900)',
+            border: '1px solid var(--color-gray-700)',
+            borderRadius: 'var(--radius-lg)',
+            cursor: 'pointer',
+            textAlign: 'left',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--space-md)',
+            marginTop: 'var(--space-lg)',
+            minHeight: 64,
+          }}
+        >
+          <div style={{
+            width: 44,
+            height: 44,
+            borderRadius: 'var(--radius-full)',
+            backgroundColor: 'var(--color-gray-800)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+          }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-400)" strokeWidth="1.5">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{
+              fontSize: 'var(--text-sm)',
+              fontWeight: 600,
+              color: 'var(--color-white)',
+            }}>
+              Get Training Feedback
+            </div>
+            <div style={{
+              color: 'var(--color-gray-500)',
+              fontSize: 'var(--text-xs)',
+            }}>
+              AI insights from your session logs
+            </div>
+          </div>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--color-gray-600)"
+            strokeWidth="2"
+            style={{ flexShrink: 0 }}
+          >
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
       )}
     </section>
     </>
