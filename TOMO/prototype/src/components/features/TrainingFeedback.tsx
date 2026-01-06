@@ -140,25 +140,20 @@ Keep showing up. The consistency you're building now compounds over time. Your c
 
 
 // ===========================================
-// BIOLUMINESCENCE TYPEWRITER HOOK
+// TYPEWRITER HOOK WITH TRAILING GLOW
 // ===========================================
 
-// Track each character with its "age" for the glow fade effect
-interface CharState {
-  char: string;
-  addedAt: number; // timestamp when character was added
-}
-
 function useTypewriter(text: string, speed: number = 20, startDelay: number = 500) {
-  const [charStates, setCharStates] = useState<CharState[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
 
-  // Derived displayedText for compatibility
-  const displayedText = charStates.map(c => c.char).join('');
+  // Strip markdown bold markers from text for display
+  const cleanText = text.replace(/\*\*/g, '');
+  const displayedText = cleanText.slice(0, currentIndex);
 
   useEffect(() => {
-    setCharStates([]);
+    setCurrentIndex(0);
     setIsComplete(false);
     setIsStarted(false);
 
@@ -170,122 +165,102 @@ function useTypewriter(text: string, speed: number = 20, startDelay: number = 50
   }, [text, startDelay]);
 
   useEffect(() => {
-    if (!isStarted) return;
+    if (!isStarted || !cleanText) return;
 
-    let index = 0;
     const timer = setInterval(() => {
-      if (index < text.length) {
-        const now = Date.now();
-        setCharStates(prev => [...prev, { char: text[index], addedAt: now }]);
-        index++;
-      } else {
-        setIsComplete(true);
-        clearInterval(timer);
-      }
+      setCurrentIndex(prev => {
+        if (prev < cleanText.length) {
+          return prev + 1;
+        } else {
+          setIsComplete(true);
+          clearInterval(timer);
+          return prev;
+        }
+      });
     }, speed);
 
     return () => clearInterval(timer);
-  }, [text, speed, isStarted]);
+  }, [cleanText, speed, isStarted]);
 
   const skip = useCallback(() => {
-    const now = Date.now();
-    setCharStates(text.split('').map(char => ({ char, addedAt: now - 1000 })));
+    setCurrentIndex(cleanText.length);
     setIsComplete(true);
-  }, [text]);
+  }, [cleanText]);
 
-  return { displayedText, charStates, isComplete, isStarted, skip };
+  return { displayedText, currentIndex, isComplete, isStarted, skip, totalLength: cleanText.length };
 }
 
-// Component to render text with bioluminescent glow effect
+// Component to render text with trailing ember glow effect
 interface GlowTextProps {
-  charStates: CharState[];
+  text: string;
+  currentIndex: number;
   isComplete: boolean;
 }
 
-function GlowText({ charStates, isComplete }: GlowTextProps) {
-  const [, forceUpdate] = useState(0);
+function GlowText({ text, currentIndex, isComplete }: GlowTextProps) {
+  // Strip markdown bold markers
+  const cleanText = text.replace(/\*\*/g, '');
+  const displayedText = cleanText.slice(0, currentIndex);
 
-  // Re-render periodically to update glow states while animating
-  useEffect(() => {
-    if (isComplete) return;
+  // Number of characters in the glowing "trail"
+  const trailLength = 12;
 
-    const interval = setInterval(() => {
-      forceUpdate(n => n + 1);
-    }, 50);
+  // Split into paragraphs and render
+  const paragraphs = displayedText.split('\n');
 
-    return () => clearInterval(interval);
-  }, [isComplete]);
+  let globalCharIndex = 0;
 
-  const now = Date.now();
-  const glowDuration = 600; // ms for glow to fade
+  return (
+    <>
+      {paragraphs.map((paragraph, pIndex) => {
+        const startIndex = globalCharIndex;
+        globalCharIndex += paragraph.length + 1; // +1 for newline
 
-  // Convert charStates to text with spans for glowing characters
-  let result: React.ReactNode[] = [];
-  let currentParagraph: React.ReactNode[] = [];
-  let paragraphIndex = 0;
+        if (paragraph.length === 0 && pIndex < paragraphs.length - 1) {
+          return <p key={pIndex} style={{ margin: 0, marginBottom: 'var(--space-md)' }}>&nbsp;</p>;
+        }
 
-  charStates.forEach((charState, i) => {
-    const age = now - charState.addedAt;
-    const isGlowing = age < glowDuration && !isComplete;
+        return (
+          <p key={pIndex} style={{ margin: 0, marginBottom: 'var(--space-md)' }}>
+            {paragraph.split('').map((char, cIndex) => {
+              const absoluteIndex = startIndex + cIndex;
+              const distanceFromEnd = currentIndex - absoluteIndex - 1;
 
-    // Calculate glow intensity (1 = full glow, 0 = no glow)
-    const glowIntensity = isGlowing ? Math.max(0, 1 - (age / glowDuration)) : 0;
+              // Only glow if within trail and not complete
+              const isInTrail = distanceFromEnd >= 0 && distanceFromEnd < trailLength && !isComplete;
 
-    // Handle newlines - create paragraph breaks
-    if (charState.char === '\n') {
-      if (currentParagraph.length > 0) {
-        result.push(
-          <p key={`p-${paragraphIndex}`} style={{ margin: 0, marginBottom: 'var(--space-md)' }}>
-            {currentParagraph}
+              if (isInTrail) {
+                // Calculate glow intensity (1 = newest, 0 = oldest in trail)
+                const intensity = 1 - (distanceFromEnd / trailLength);
+                const goldAmount = intensity * 0.8;
+                const shadowOpacity = intensity * 0.5;
+                const shadowBlur = 6 + (intensity * 10);
+
+                return (
+                  <span
+                    key={cIndex}
+                    style={{
+                      color: `rgba(245, 166, 35, ${0.4 + goldAmount * 0.6})`,
+                      textShadow: `0 0 ${shadowBlur}px rgba(245, 166, 35, ${shadowOpacity})`,
+                    }}
+                  >
+                    {char}
+                  </span>
+                );
+              }
+
+              // Settled text
+              return (
+                <span key={cIndex} style={{ color: 'var(--color-gray-200)' }}>
+                  {char}
+                </span>
+              );
+            })}
           </p>
         );
-        paragraphIndex++;
-        currentParagraph = [];
-      }
-      return;
-    }
-
-    // Check if this char is part of bold text (**)
-    // For simplicity, we'll handle bold at the paragraph level below
-
-    if (isGlowing) {
-      // Bioluminescent glow - soft gold that fades to white
-      const goldOpacity = glowIntensity * 0.9;
-      const shadowBlur = 8 + (glowIntensity * 12); // 8-20px blur
-      const shadowOpacity = glowIntensity * 0.6;
-
-      currentParagraph.push(
-        <span
-          key={i}
-          style={{
-            color: `rgba(245, 166, 35, ${0.3 + goldOpacity * 0.7})`,
-            textShadow: `0 0 ${shadowBlur}px rgba(245, 166, 35, ${shadowOpacity})`,
-            transition: 'color 0.3s ease-out, text-shadow 0.3s ease-out',
-          }}
-        >
-          {charState.char}
-        </span>
-      );
-    } else {
-      // Settled text - white
-      currentParagraph.push(
-        <span key={i} style={{ color: 'var(--color-gray-200)' }}>
-          {charState.char}
-        </span>
-      );
-    }
-  });
-
-  // Don't forget the last paragraph
-  if (currentParagraph.length > 0) {
-    result.push(
-      <p key={`p-${paragraphIndex}`} style={{ margin: 0, marginBottom: 'var(--space-md)' }}>
-        {currentParagraph}
-      </p>
-    );
-  }
-
-  return <>{result}</>;
+      })}
+    </>
+  );
 }
 
 // ===========================================
@@ -377,7 +352,7 @@ export function TrainingFeedback({ onClose, onLogSession }: TrainingFeedbackProp
     }, 2000);
   }, []);
 
-  const { displayedText, charStates, isComplete, isStarted, skip } = useTypewriter(
+  const { displayedText, currentIndex, isComplete, isStarted, skip } = useTypewriter(
     currentInsight?.content || '',
     2,
     800
@@ -723,12 +698,12 @@ export function TrainingFeedback({ onClose, onLogSession }: TrainingFeedbackProp
               {currentInsight.title}
             </h3>
 
-            {/* Bioluminescent Typewriter Content */}
+            {/* Trailing Ember Typewriter Content */}
             <div style={{
               fontSize: 'var(--text-base)',
               lineHeight: 1.7,
             }}>
-              <GlowText charStates={charStates} isComplete={isComplete} />
+              <GlowText text={currentInsight?.content || ''} currentIndex={currentIndex} isComplete={isComplete} />
               {/* Cursor - soft glow */}
               {!isComplete && isStarted && (
                 <span style={{
