@@ -15,6 +15,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../services/api';
 import { useUserProfile } from '../../context/UserProfileContext';
 import { useBeltPersonalization } from '../../hooks/useBeltPersonalization';
+import { markSessionLogged } from './TrainingFeedback';
 import type { SubmissionInsert } from '../../types/database';
 
 // Types for extracted session data
@@ -174,6 +175,9 @@ export function VoiceLogger({ onComplete, onCancel }: VoiceLoggerProps) {
 
         await api.submissions.createBatch(submissionInserts);
       }
+
+      // Mark session logged for insight generation
+      markSessionLogged();
 
       transitionTo('success');
       setTimeout(() => {

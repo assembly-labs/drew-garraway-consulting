@@ -30,25 +30,49 @@ LOCAL (your laptop)  →  REMOTE (GitHub)  →  PRODUCTION (live site)
    localhost:5173                            bjjj.pages.dev
 ```
 
-### Claude's Workflow
+### One-Command Deploy: `npm run ship`
 
-When making changes:
+**This is the standard workflow.** From the `/prototype` directory:
 
-1. **Build** - Run `npm run build` (from `/prototype`) to check for errors
-2. **Commit** - Commit changes to git with a clear message
-3. **Push** - Push to `main` branch
-4. **Deploy** - Run `npm run deploy` (from `/prototype`)
+```bash
+npm run ship
+```
 
-**Deployment happens immediately** via wrangler CLI. Changes are live on bjjj.pages.dev within seconds.
+This single command runs the full pipeline:
+1. **Build** - Compiles TypeScript, catches errors
+2. **Lint** - Runs ESLint, catches code quality issues
+3. **Commit** - Stages all changes, auto-generates timestamped commit
+4. **Push** - Pushes to `main` branch on GitHub
+5. **Deploy** - Deploys to Cloudflare Pages via Wrangler
+6. **Confirm** - Prints success message with live URL
 
-### Available Commands
+**If any step fails, the pipeline stops.** Broken code never reaches production.
+
+### Custom Commit Messages
+
+When you need a descriptive commit message instead of auto-generated:
+
+```bash
+npm run ship:m "Add new feature" && git push origin main && npm run deploy
+```
+
+### All Available Commands
 
 | Command | What it does |
 |---------|--------------|
-| `npm run dev` | Local preview at localhost:5173 |
-| `npm run build` | Compile and check for errors |
-| `npm run deploy` | Deploy to production (bjjj.pages.dev) |
-| `npm run ship` | Build + commit + push + deploy (full workflow) |
+| `npm run dev` | Local dev server at localhost:5173 |
+| `npm run build` | Compile TypeScript + Vite build |
+| `npm run lint` | Run ESLint checks |
+| `npm run preview` | Preview production build locally |
+| `npm run deploy` | Deploy `dist/` to bjjj.pages.dev |
+| `npm run ship` | **Full pipeline:** build → lint → commit → push → deploy |
+| `npm run ship:m "msg"` | Build + lint + commit with custom message (then push/deploy manually) |
+
+### Local Testing
+
+1. Run `npm run dev` to start local server
+2. Test changes at http://localhost:5173
+3. When satisfied, run `npm run ship` to deploy
 
 ### Testing Belt Personalization
 

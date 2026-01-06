@@ -21,6 +21,7 @@ import { api } from '../../services/api';
 import { useUserProfile } from '../../context/UserProfileContext';
 import { useBeltPersonalization } from '../../hooks/useBeltPersonalization';
 import { SubmissionPicker } from '../ui';
+import { markSessionLogged } from './TrainingFeedback';
 import type { TrainingType, SessionData, SubmissionInsert, SubmissionCount } from '../../types/database';
 import { DEFAULT_SESSION_DATA } from '../../types/database';
 
@@ -242,6 +243,9 @@ export function VoiceFirstLogger({ onComplete, onCancel }: VoiceFirstLoggerProps
           await api.submissions.createBatch(submissionInserts);
         }
       }
+
+      // Mark session logged for insight generation
+      markSessionLogged();
 
       transitionTo('success');
       setTimeout(() => {

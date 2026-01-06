@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "wrangler pages deploy dist --project-name bjjj",
-    "ship": "npm run build && git add -A && git commit -m \"Update $(date '+%Y-%m-%d %H:%M')\" && git push origin main && npm run deploy && echo '✅ Live at https://bjjj.pages.dev'"
+    "ship": "npm run build && npm run lint && git add -A && git commit -m \"Update $(date '+%Y-%m-%d %H:%M')\" && git push origin main && npm run deploy && echo '✅ Live at https://bjjj.pages.dev'",
+    "ship:m": "npm run build && npm run lint && git add -A && git commit -m"
   },
   "dependencies": {
     "react": "^19.2.0",

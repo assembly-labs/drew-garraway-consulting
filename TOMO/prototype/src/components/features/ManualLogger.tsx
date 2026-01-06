@@ -20,6 +20,7 @@
 import { useState } from 'react';
 import { useBeltPersonalization } from '../../hooks';
 import { SubmissionPicker } from '../ui';
+import { markSessionLogged } from './TrainingFeedback';
 import type { TrainingType, SessionData } from '../../types/database';
 import { DEFAULT_SESSION_DATA } from '../../types/database';
 
@@ -181,6 +182,9 @@ export function ManualLogger({ onComplete, onCancel, onVoiceAssist }: ManualLogg
     // In production, this would call api.sessions.create()
     // For prototype, simulate save
     await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Mark session logged for insight generation
+    markSessionLogged();
 
     console.log('Session saved:', sessionData);
     setIsSubmitting(false);
