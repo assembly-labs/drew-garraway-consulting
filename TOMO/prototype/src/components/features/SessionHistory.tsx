@@ -27,6 +27,9 @@ interface SessionHistoryProps {
 
 type FilterType = 'all' | 'gi' | 'nogi';
 
+// Maximum entries to display (prototype limit)
+const MAX_VISIBLE_ENTRIES = 6;
+
 // ===========================================
 // HELPERS
 // ===========================================
@@ -71,15 +74,25 @@ export function SessionHistory({ onLogNew, onSelectSession }: SessionHistoryProp
   const { profile } = useBeltPersonalization();
   const [filter, setFilter] = useState<FilterType>('all');
 
-  // Filter entries by training type
+  // Filter entries by training type, then limit to MAX_VISIBLE_ENTRIES
   const filteredEntries = useMemo(() => {
-    if (filter === 'all') return mockJournalEntriesV2;
-    return mockJournalEntriesV2.filter((entry) => {
-      if (filter === 'gi') return entry.training_type === 'gi' || entry.training_type === 'both';
-      if (filter === 'nogi') return entry.training_type === 'nogi' || entry.training_type === 'both';
-      return true;
-    });
+    let entries = mockJournalEntriesV2;
+
+    // Apply filter
+    if (filter !== 'all') {
+      entries = entries.filter((entry) => {
+        if (filter === 'gi') return entry.training_type === 'gi' || entry.training_type === 'both';
+        if (filter === 'nogi') return entry.training_type === 'nogi' || entry.training_type === 'both';
+        return true;
+      });
+    }
+
+    // Limit to 6 most recent (already sorted chronologically)
+    return entries.slice(0, MAX_VISIBLE_ENTRIES);
   }, [filter]);
+
+  // Check if there are more entries beyond visible
+  const hasMoreEntries = mockJournalEntriesV2.length > MAX_VISIBLE_ENTRIES;
 
   // Group by date
   const groupedEntries = useMemo(
@@ -286,40 +299,90 @@ export function SessionHistory({ onLogNew, onSelectSession }: SessionHistoryProp
           </div>
         ) : (
           /* Grouped Entries */
-          Array.from(groupedEntries.entries()).map(([groupName, entries]) => (
-            <div key={groupName} style={{ marginBottom: 'var(--space-xl)' }}>
-              {/* Group Label */}
-              <h3
-                style={{
-                  fontSize: 'var(--text-xs)',
-                  fontWeight: 600,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                  color: 'var(--color-gray-500)',
-                  marginBottom: 'var(--space-sm)',
-                }}
-              >
-                {groupName}
-              </h3>
+          <>
+            {Array.from(groupedEntries.entries()).map(([groupName, entries]) => (
+              <div key={groupName} style={{ marginBottom: 'var(--space-xl)' }}>
+                {/* Group Label */}
+                <h3
+                  style={{
+                    fontSize: 'var(--text-xs)',
+                    fontWeight: 600,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                    color: 'var(--color-gray-500)',
+                    marginBottom: 'var(--space-sm)',
+                  }}
+                >
+                  {groupName}
+                </h3>
 
-              {/* Entry Cards */}
-              <div
+                {/* Entry Cards */}
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 'var(--space-sm)',
+                  }}
+                >
+                  {entries.map((entry) => (
+                    <JournalEntryCard
+                      key={entry.id}
+                      entry={entry}
+                      onClick={onSelectSession ? () => onSelectSession(entry) : undefined}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {/* See More Button (non-functional prototype affordance) */}
+            {hasMoreEntries && (
+              <button
+                onClick={() => {
+                  // Intentionally does nothing in prototype
+                }}
                 style={{
+                  width: '100%',
+                  padding: 'var(--space-md) var(--space-lg)',
+                  backgroundColor: 'var(--color-gray-900)',
+                  border: '1px solid var(--color-gray-800)',
+                  borderRadius: 'var(--radius-md)',
+                  color: 'var(--color-gray-400)',
+                  fontSize: 'var(--text-sm)',
+                  fontWeight: 600,
+                  cursor: 'pointer',
                   display: 'flex',
-                  flexDirection: 'column',
-                  gap: 'var(--space-sm)',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 'var(--space-xs)',
+                  transition: 'all 0.15s ease',
+                  marginTop: 'var(--space-md)',
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--color-gray-800)';
+                  e.currentTarget.style.borderColor = 'var(--color-gray-700)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--color-gray-900)';
+                  e.currentTarget.style.borderColor = 'var(--color-gray-800)';
                 }}
               >
-                {entries.map((entry) => (
-                  <JournalEntryCard
-                    key={entry.id}
-                    entry={entry}
-                    onClick={onSelectSession ? () => onSelectSession(entry) : undefined}
-                  />
-                ))}
-              </div>
-            </div>
-          ))
+                See More
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+            )}
+          </>
         )}
       </div>
     </div>
