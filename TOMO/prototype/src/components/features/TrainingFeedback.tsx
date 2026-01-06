@@ -143,6 +143,33 @@ Keep showing up. The consistency you're building now compounds over time. Your c
 // TYPEWRITER HOOK WITH TRAILING GLOW
 // ===========================================
 
+/**
+ * NOTE FOR LLM STREAMING INTEGRATION:
+ *
+ * When we connect to a real LLM, the GlowText component will work with streaming responses.
+ * Instead of using useTypewriter to reveal pre-loaded text character by character,
+ * we'll feed streamed chunks directly to GlowText:
+ *
+ * ```typescript
+ * const [streamedText, setStreamedText] = useState('');
+ * const [streamComplete, setStreamComplete] = useState(false);
+ *
+ * // As chunks arrive from LLM API:
+ * onStreamChunk((chunk) => setStreamedText(prev => prev + chunk));
+ * onStreamEnd(() => setStreamComplete(true));
+ *
+ * // Render with trailing ember effect:
+ * <GlowText
+ *   text={streamedText}
+ *   currentIndex={streamedText.length}  // Always show all streamed text
+ *   isComplete={streamComplete}
+ * />
+ * ```
+ *
+ * The trailing ember effect will naturally follow the end of incoming text,
+ * creating the same visual whether text arrives all at once or in chunks.
+ */
+
 function useTypewriter(text: string, speed: number = 20, startDelay: number = 500) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
