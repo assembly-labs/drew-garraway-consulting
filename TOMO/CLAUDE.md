@@ -196,10 +196,11 @@ Our app speaks like a knowledgeable, warm, and grounded training partner:
 
 ### Writing Style
 - Use active voice
-- Be concise (exhausted users don't read walls of text)
 - Use BJJ terminology naturally
 - Celebrate consistency over perfection
 - Never use hollow superlatives ("Amazing job!")
+- **Session logging:** Ultra-concise (90-second window)
+- **Stats/Techniques/Journal:** Longer content OK—users are browsing leisurely
 
 ## Design System
 
@@ -300,16 +301,34 @@ When the design system is updated:
 
 **The design system is the source. Code implements it. Never the reverse.**
 
-## Critical UX Principle: The Exhausted User
+## User States: Context-Aware Design
 
-**Users log sessions immediately after training when they are:**
-- Physically exhausted
-- Cognitively fatigued (reduced decision-making capacity)
-- Sweaty, possibly still in gym
-- Motivated but with limited patience
-- Time-constrained (90-second tolerance window)
+### Understanding User Context by Feature
 
-### Design Mandates
+**CRITICAL:** Users exist in different states depending on what they're doing. Design must match their context.
+
+| Feature Area | User State | Time Tolerance | Design Approach |
+|--------------|------------|----------------|-----------------|
+| **Session Logging** | EXHAUSTED | 90 seconds max | Minimal friction, voice-first, one question at a time |
+| **Stats/Dashboard** | RELAXED | Unlimited | Rich data, deep dives, multiple visualizations welcome |
+| **Techniques Library** | RELAXED | Unlimited | Detailed content, searchable, comprehensive |
+| **Journal/History** | RELAXED | Unlimited | Full entries, filtering, exploration encouraged |
+| **Profile/Settings** | RELAXED | Moderate | Standard forms, can handle complexity |
+
+---
+
+### The Exhausted User (Session Logging ONLY)
+
+**This principle applies ONLY to the session logging flow—when users are capturing data immediately post-training.**
+
+**Physical/cognitive state during logging:**
+- Physically exhausted, elevated heart rate
+- Cognitively fatigued (20-40% reduced decision-making)
+- Sweaty, possibly still in gym parking lot
+- Motivated but with 90-second tolerance window
+- Hands may be swollen, grip depleted
+
+### Session Logging Design Mandates
 
 1. **Touch targets:** 56-80px minimum for primary actions
 2. **One question at a time:** Don't overwhelm
@@ -318,6 +337,26 @@ When the design system is updated:
 5. **Instant feedback:** Show what was captured immediately
 6. **Generous defaults:** Pre-fill when possible
 7. **Forgiving input:** Parse natural language, don't require formats
+
+---
+
+### The Relaxed User (Stats, Techniques, Journal)
+
+**When users browse Stats, Techniques, or Journal pages, they are:**
+- At home, on the couch, or commuting
+- Curious about their progress
+- Not time-pressured
+- Wanting depth, detail, and insight
+- Able to handle complexity and exploration
+
+### Browse Mode Design Principles
+
+1. **Rich visualizations welcome:** Charts, graphs, timelines—users want to explore
+2. **Deep information hierarchies:** Multiple sections, expandable details
+3. **Dense data displays:** Show more, not less—users are engaged
+4. **Progressive disclosure optional:** Users can handle seeing everything
+5. **Long-form content OK:** Coaching text, technique descriptions, historical analysis
+6. **Standard touch targets:** 44px minimum is fine for relaxed browsing
 
 ## Key Patterns
 
@@ -370,12 +409,14 @@ When editing saved sessions:
 | `purple-average` | Sofia Rodriguez | Purple (1 str) | 28 | The Grinder | Stable |
 | `brown-average` | Elena Kim | Brown (2 str) | 38 | The Veteran | Refined |
 
-### The Exhausted User State (Post-Training)
-Every user becomes this persona after training:
+### User State During Session Logging
+When logging a session (immediately post-training):
 - Decision fatigue is real
 - Fine motor control is reduced
 - Attention span is minimal
 - Wants to be DONE, not engaged
+
+**Note:** This state does NOT apply to Stats, Techniques, or Journal browsing. See "User States: Context-Aware Design" above.
 
 ## MVP Status
 

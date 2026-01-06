@@ -52,16 +52,34 @@ Research confirms what every practitioner knows intuitively:
 
 Before diving into personas, we must understand that every persona exists in multiple *states*. The same person behaves completely differently based on context.
 
-### States Our Users Cycle Through
+### CRITICAL: Context-Aware Design
+
+**The "exhausted user" principle applies ONLY to session logging.** When users browse Stats, Techniques, or Journal pages, they are relaxed and can engage with rich, detailed content.
+
+| App Feature | User State | Time Pressure | Design Approach |
+|-------------|------------|---------------|-----------------|
+| **Session Logging** | EXHAUSTED | 90 seconds | Minimal friction, voice-first |
+| **Stats/Dashboard** | RELAXED | None | Rich visualizations, deep data, exploration welcome |
+| **Techniques Library** | RELAXED | None | Comprehensive content, detailed descriptions |
+| **Journal/History** | RELAXED | None | Full entries, filtering, leisurely browsing |
+| **Profile/Settings** | RELAXED | Low | Standard forms acceptable |
+
+### States During Session Logging (Exhausted Context)
 
 | State | Physical | Cognitive | Emotional | Design Implication |
 |-------|----------|-----------|-----------|-------------------|
-| **Pre-Training** | Energized, warming up | Focused, anticipating | Motivated, sometimes anxious | Can handle complexity |
-| **During Training** | Engaged, sweating | Flow state or struggle | Competitive, learning | No app interaction |
 | **Post-Training (0-5 min)** | Gasping, sweaty | Depleted, foggy | High (win) or low (humbled) | **CRITICAL CAPTURE WINDOW** |
 | **Post-Training (5-30 min)** | Cooling down, showering | Slowly recovering | Reflective, social | Secondary capture window |
 | **Post-Training (30+ min)** | Normal | Normal | Neutral, memory fading | Too late—details lost |
-| **Evening/Next Day** | Sore, recovering | Normal | Disconnected from session | Review mode, not capture |
+
+### States During Browse Mode (Relaxed Context)
+
+| State | Physical | Cognitive | Emotional | Design Implication |
+|-------|----------|-----------|-----------|-------------------|
+| **Evening at Home** | Relaxed, comfortable | Full capacity | Curious, reflective | Can handle complexity |
+| **Commuting** | Seated, idle | Moderate capacity | Neutral, browsing | Rich content OK |
+| **Pre-Training** | Energized, warming up | Focused, anticipating | Motivated | Review mode, previews |
+| **Rest Day** | Recovered | Full capacity | Engaged or bored | Deep exploration welcome |
 
 ### The 90-Second Window
 
@@ -190,13 +208,13 @@ Internal research indicates users have approximately **90 seconds of willingness
 
 ---
 
-## The Exhausted User: A State Persona
+## The Exhausted User: Session Logging Context
 
-Beyond who our users ARE, we must design for HOW they are at the critical moment.
+> **IMPORTANT:** This section describes user state **only during session logging**—the post-training capture moment. It does NOT apply to Stats, Techniques, or Journal browsing, where users are relaxed and can engage with rich content.
 
-### "The Post-Training State"
+### "The Post-Training State" (Session Logging Only)
 
-**This is everyone—Marcus, Sofia, David, Rachel—at 8:15pm, standing in the gym parking lot.**
+**This is everyone—Marcus, Sofia, David, Rachel—at 8:15pm, standing in the gym parking lot, trying to log their session.**
 
 #### Physical State
 - Heart rate elevated (100-140 BPM)
@@ -234,7 +252,9 @@ Beyond who our users ARE, we must design for HOW they are at the critical moment
 - May be in poorly lit parking lot
 - Definitely wants to leave soon
 
-### Design Mandates for This State
+### Design Mandates for Session Logging
+
+> These mandates apply **only to session logging flows**—not Stats, Techniques, or Journal browsing.
 
 | Challenge | Mandate |
 |-----------|---------|
@@ -313,40 +333,72 @@ Design: Quick reference cards. 2-min review sessions.
 
 ---
 
-## Design Principles Derived from Research
+## Design Principles by Context
 
-### 1. The 90-Second Rule
+### Session Logging Principles (Exhausted User)
+
+These principles apply **only during session logging**, when users are post-training and exhausted.
+
+#### 1. The 90-Second Rule
 Every logging flow must complete in under 90 seconds. If it can't, it won't be used.
 
-### 2. Talk, Don't Type
+#### 2. Talk, Don't Type
 Voice-first input is mandatory for primary capture. Typing is for editing, not creating.
 
-### 3. One Question at a Time
+#### 3. One Question at a Time
 Never present more than one decision simultaneously. Tired brains can't parallel process.
 
-### 4. Capture Essentials, Details Optional
+#### 4. Capture Essentials, Details Optional
 **Tier 1 (Must):** Date, type (gi/nogi), duration
 **Tier 2 (Should):** Techniques, sparring rounds
 **Tier 3 (Could):** Partners, energy, mood, notes
 Always capture Tier 1. Make Tier 2+ optional.
 
-### 5. Progress, Not Perfection
-Show users their consistency wins even when data is incomplete. "You logged 12 sessions this month" matters more than perfect technique tracking.
-
-### 6. Celebrate the Grind
-Acknowledge the hard thing they just did. "90 minutes on the mat. That's commitment." before asking for anything.
-
-### 7. Fat Fingers, Big Targets
+#### 5. Fat Fingers, Big Targets
 Minimum 56px touch targets. Primary actions 80px. Swollen, tired hands can't hit small buttons.
 
-### 8. High Contrast, Large Text
-Post-training vision is impaired. Dark mode default. High contrast. 16px minimum text.
+#### 6. Celebrate the Grind
+Acknowledge the hard thing they just did. "90 minutes on the mat. That's commitment." before asking for anything.
 
-### 9. Offline-First
+#### 7. Offline-First
 Many gyms have poor signal. The app must work completely offline and sync later.
 
-### 10. No Shame in Gaps
+---
+
+### Browse Mode Principles (Relaxed User)
+
+These principles apply when users view **Stats, Techniques, Journal, or Profile** pages at their leisure.
+
+#### 1. Rich Data Welcome
+Users are curious and engaged. Show comprehensive visualizations, detailed charts, and deep metrics. They want to explore their data.
+
+#### 2. Dense Information OK
+Multiple sections, expandable details, and long-form content are appropriate. Users have time and cognitive capacity.
+
+#### 3. Standard Touch Targets
+44px minimum is fine. Users aren't exhausted; fine motor control is normal.
+
+#### 4. Encourage Exploration
+Deep hierarchies, filters, and drill-downs enhance the experience. Users are in discovery mode.
+
+#### 5. Long-Form Content Appropriate
+Coaching text, technique descriptions, historical analysis, and detailed breakdowns are valued—not friction.
+
+---
+
+### Universal Principles (All Contexts)
+
+#### 1. Progress, Not Perfection
+Show users their consistency wins even when data is incomplete. "You logged 12 sessions this month" matters more than perfect technique tracking.
+
+#### 2. No Shame in Gaps
 If they miss a day, don't punish them. "Welcome back" beats "You broke your streak."
+
+#### 3. High Contrast, Large Text
+Dark mode default. High contrast. 16px minimum text. Good for all contexts.
+
+#### 4. Offline-First
+Many gyms have poor signal. The app must work completely offline and sync later.
 
 ---
 

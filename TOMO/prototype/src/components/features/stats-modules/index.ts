@@ -60,6 +60,10 @@ export { TechniqueMastery } from './TechniqueMastery';
 export { RecentRolls } from './RecentRolls';
 export type { SubmissionReceived, RollRecord, BeltLevel as RollBeltLevel } from './RecentRolls';
 
+// Dashboard Restructure Components
+export { LockedFeaturesFooter, type LockedFeature } from './LockedFeaturesFooter';
+export { TournamentConfirmationSheet } from './TournamentConfirmationSheet';
+
 // Re-export types and utilities from data
 export {
   JOURNEY_MILESTONES,

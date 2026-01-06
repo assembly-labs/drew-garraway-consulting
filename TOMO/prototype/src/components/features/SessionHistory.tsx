@@ -139,63 +139,47 @@ export function SessionHistory({ onLogNew, onSelectSession }: SessionHistoryProp
           paddingBottom: 0,
         }}
       >
-        {/* Title Row */}
-        <div
+        {/* Full-Width Log Button */}
+        <button
+          onClick={onLogNew}
           style={{
             display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 'var(--space-sm)',
+            width: '100%',
+            backgroundColor: 'var(--color-accent)',
+            color: 'var(--color-black)',
+            border: 'none',
+            borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-lg) var(--space-md)',
+            minHeight: '64px',
+            fontWeight: 700,
+            fontSize: 'var(--text-lg)',
+            cursor: 'pointer',
+            transition: 'opacity 0.15s ease',
+          }}
+          onMouseOver={(e) => (e.currentTarget.style.opacity = '0.9')}
+          onMouseOut={(e) => (e.currentTarget.style.opacity = '1')}
+        >
+          <Icons.Mic size={24} />
+          Log Session
+        </button>
+
+        {/* Stats below button */}
+        <p
+          style={{
+            fontSize: 'var(--text-sm)',
+            fontWeight: 500,
+            color: 'var(--color-gray-500)',
+            textAlign: 'center',
+            marginTop: 'var(--space-sm)',
             marginBottom: 'var(--space-md)',
           }}
         >
-          <div>
-            <h2
-              style={{
-                fontSize: 'var(--text-2xl)',
-                fontWeight: 800,
-                color: 'var(--color-white)',
-                marginBottom: 'var(--space-xs)',
-                letterSpacing: '-0.02em',
-              }}
-            >
-              JOURNAL
-            </h2>
-            <p
-              style={{
-                fontSize: 'var(--text-sm)',
-                fontWeight: 500,
-                color: 'var(--color-gray-500)',
-              }}
-            >
-              {totalSessions} session{totalSessions !== 1 ? 's' : ''} logged
-              {totalRounds > 0 && ` · ${totalRounds} rounds`}
-            </p>
-          </div>
-
-          {/* Log Button */}
-          <button
-            onClick={onLogNew}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 'var(--space-sm)',
-              backgroundColor: 'var(--color-accent)',
-              color: 'var(--color-black)',
-              border: 'none',
-              borderRadius: 'var(--radius-md)',
-              padding: 'var(--space-sm) var(--space-md)',
-              fontWeight: 600,
-              fontSize: 'var(--text-sm)',
-              cursor: 'pointer',
-              transition: 'opacity 0.15s ease',
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.opacity = '0.9')}
-            onMouseOut={(e) => (e.currentTarget.style.opacity = '1')}
-          >
-            <Icons.Mic size={18} />
-            Log Session
-          </button>
-        </div>
+          {totalSessions} session{totalSessions !== 1 ? 's' : ''} logged
+          {totalRounds > 0 && ` · ${totalRounds} rounds`}
+        </p>
 
         {/* Filter Pills */}
         <div

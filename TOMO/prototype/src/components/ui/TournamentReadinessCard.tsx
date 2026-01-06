@@ -14,6 +14,14 @@ import {
   type TournamentReadinessInput,
   type TournamentReadinessResult,
 } from '../../utils/tournament-readiness';
+import {
+  generateCoachingText,
+  type CoachingTextOutput,
+} from '../../utils/tournament-coaching';
+import {
+  TRAINING_BENCHMARKS,
+  type BeltLevel,
+} from '../../data/training-benchmarks';
 import { useCountUp } from '../../hooks';
 
 // ===========================================
@@ -158,6 +166,59 @@ function UrgencyBadge({ level, daysUntil }: { level: string; daysUntil?: number 
 }
 
 // ===========================================
+// BENCHMARK ROW
+// ===========================================
+
+function BenchmarkRow({
+  label,
+  sessions,
+  hours,
+  isHighlighted,
+}: {
+  label: string;
+  sessions: number;
+  hours: number;
+  isHighlighted?: boolean;
+}) {
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '12px',
+      padding: isHighlighted ? '8px 12px' : '4px 0',
+      background: isHighlighted ? 'var(--color-gray-900)' : 'transparent',
+      borderRadius: isHighlighted ? '4px' : '0',
+      borderLeft: isHighlighted ? '3px solid var(--color-gold)' : 'none',
+    }}>
+      <span style={{
+        fontFamily: 'var(--font-mono)',
+        fontSize: 'var(--text-xs)',
+        fontWeight: 600,
+        color: isHighlighted ? 'var(--color-gold)' : 'var(--color-gray-500)',
+        textTransform: 'uppercase',
+        letterSpacing: '0.1em',
+        width: '80px',
+      }}>
+        {label}
+      </span>
+      <span style={{
+        fontSize: 'var(--text-sm)',
+        fontWeight: 600,
+        color: isHighlighted ? 'var(--color-white)' : 'var(--color-gray-400)',
+      }}>
+        {sessions}x/week
+      </span>
+      <span style={{
+        fontSize: 'var(--text-xs)',
+        color: 'var(--color-gray-500)',
+      }}>
+        ({hours}h)
+      </span>
+    </div>
+  );
+}
+
+// ===========================================
 // MAIN COMPONENT
 // ===========================================
 
@@ -170,6 +231,25 @@ export function TournamentReadinessCard({
     () => calculateTournamentReadiness(input),
     [input]
   );
+
+  // Generate coaching text
+  const coachingText: CoachingTextOutput = useMemo(() => {
+    // Calculate sessions per week (approximate from this month)
+    const weeksInMonth = 4;
+    const sessionsPerWeek = Math.round(input.sessionsThisMonth / weeksInMonth);
+
+    return generateCoachingText({
+      belt: input.belt as BeltLevel,
+      score: result.overallScore,
+      sessionsPerWeek,
+      totalSessions: 0, // Not used directly, passed from input
+      competitionHistory: input.totalCompetitions,
+      daysUntilCompetition: input.daysUntilCompetition,
+    });
+  }, [input, result.overallScore]);
+
+  // Get benchmarks for current belt
+  const benchmarks = TRAINING_BENCHMARKS[input.belt as BeltLevel];
 
   const animatedScore = useCountUp(result.overallScore, { duration: 800, delay: 100 });
   const levelConfig = readinessLevelConfig[result.readinessLevel];
@@ -327,6 +407,164 @@ export function TournamentReadinessCard({
           isExpanded={showFullBreakdown}
         />
       </div>
+
+      {/* Coaching Section - Only in full breakdown */}
+      {showFullBreakdown && (
+        <div style={{
+          padding: '24px',
+          borderTop: '1px solid var(--color-gray-800)',
+        }}>
+          {/* Coaching Headline */}
+          <div style={{
+            background: 'var(--color-gray-900)',
+            borderLeft: '3px solid var(--color-gold)',
+            padding: '16px',
+            marginBottom: '20px',
+          }}>
+            <p style={{
+              fontSize: 'var(--text-base)',
+              fontWeight: 600,
+              color: 'var(--color-white)',
+              margin: 0,
+              lineHeight: 1.5,
+            }}>
+              {coachingText.headline}
+            </p>
+          </div>
+
+          {/* Volume Insight */}
+          <div style={{ marginBottom: '20px' }}>
+            <div style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.15em',
+              color: 'var(--color-gray-500)',
+              marginBottom: '8px',
+            }}>
+              Training Volume
+            </div>
+            <p style={{
+              fontSize: 'var(--text-sm)',
+              color: 'var(--color-gray-300)',
+              margin: 0,
+              lineHeight: 1.6,
+            }}>
+              {coachingText.volumeInsight}
+            </p>
+          </div>
+
+          {/* Coaching Paragraphs */}
+          {coachingText.coachingParagraphs.map((paragraph, index) => (
+            <p key={index} style={{
+              fontSize: 'var(--text-sm)',
+              color: 'var(--color-gray-400)',
+              margin: '0 0 16px 0',
+              lineHeight: 1.6,
+            }}>
+              {paragraph}
+            </p>
+          ))}
+
+          {/* Action Items */}
+          <div style={{
+            background: 'var(--color-gray-900)',
+            padding: '16px',
+            marginTop: '16px',
+          }}>
+            <div style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.15em',
+              color: 'var(--color-gold)',
+              marginBottom: '12px',
+            }}>
+              Action Items
+            </div>
+            <ul style={{
+              margin: 0,
+              padding: '0 0 0 20px',
+              listStyleType: 'none',
+            }}>
+              {coachingText.actionItems.map((item, index) => (
+                <li key={index} style={{
+                  fontSize: 'var(--text-sm)',
+                  color: 'var(--color-gray-300)',
+                  marginBottom: '8px',
+                  lineHeight: 1.5,
+                  position: 'relative',
+                  paddingLeft: '4px',
+                }}>
+                  <span style={{
+                    position: 'absolute',
+                    left: '-20px',
+                    color: 'var(--color-gold)',
+                  }}>•</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {/* Training Benchmarks - Only in full breakdown */}
+      {showFullBreakdown && benchmarks && (
+        <div style={{
+          padding: '24px',
+          borderTop: '1px solid var(--color-gray-800)',
+        }}>
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.15em',
+            color: 'var(--color-gray-500)',
+            marginBottom: '16px',
+          }}>
+            {input.belt.charAt(0).toUpperCase() + input.belt.slice(1)} Belt Training Benchmarks
+          </div>
+
+          {/* Benchmark bars */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <BenchmarkRow
+              label="Casual"
+              sessions={benchmarks.casual.sessions}
+              hours={benchmarks.casual.hours}
+            />
+            <BenchmarkRow
+              label="Average"
+              sessions={benchmarks.average.sessions}
+              hours={benchmarks.average.hours}
+              isHighlighted
+            />
+            <BenchmarkRow
+              label="Competitor"
+              sessions={benchmarks.competitor.sessions}
+              hours={benchmarks.competitor.hours}
+            />
+          </div>
+
+          {/* Comp prep recommendation */}
+          <div style={{
+            marginTop: '16px',
+            padding: '12px',
+            background: 'var(--color-gray-900)',
+            borderRadius: '4px',
+          }}>
+            <p style={{
+              fontSize: 'var(--text-xs)',
+              color: 'var(--color-gray-400)',
+              margin: 0,
+              lineHeight: 1.5,
+            }}>
+              <strong style={{ color: 'var(--color-gold)' }}>Comp Prep Recommended:</strong>{' '}
+              {benchmarks.compPrepRecommended.sessions} sessions/week ({benchmarks.compPrepRecommended.hours} hours)
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Expand Button */}
       {!showFullBreakdown && onExpand && (

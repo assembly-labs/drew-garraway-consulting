@@ -24,6 +24,7 @@ import {
 import {
   BreakthroughHero,
   BreakthroughList,
+  BreakthroughPills,
   TournamentReadinessCard,
   StyleFingerprint,
 } from '../ui';
@@ -42,7 +43,10 @@ import {
   SessionTypeDistribution,
   SparringPatternAnalysis,
   AchievementTimeline,
+  LockedFeaturesFooter,
+  TournamentConfirmationSheet,
   type SubmissionReceived,
+  type LockedFeature,
 } from './stats-modules';
 import { UpNextVideos } from './UpNextVideos';
 import {
@@ -350,6 +354,13 @@ export function Dashboard(_: DashboardProps) {
   // State for dismissing breakthrough hero
   const [breakthroughDismissed, setBreakthroughDismissed] = useState(false);
 
+  // State for Tournament Readiness confirmation flow
+  const [showTournamentSheet, setShowTournamentSheet] = useState(false);
+  const [tournamentConfirmed, setTournamentConfirmed] = useState(false);
+
+  // State for "See More" collapsed section
+  const [seeMoreExpanded, setSeeMoreExpanded] = useState(false);
+
   // Use demo profile data if in demo mode, otherwise use default mock data
   const stats = isDemoMode && activeDemoProfile
     ? activeDemoProfile.trainingStats as typeof mockTrainingStats
@@ -372,8 +383,10 @@ export function Dashboard(_: DashboardProps) {
     ? activeDemoProfile.styleFingerprint
     : mockStyleFingerprint;
 
-  // Check if we have enough sessions to show style profile
-  const hasEnoughDataForStyle = stats.totalSessions >= STYLE_PROFILE_MIN_SESSIONS;
+  // Check if we have enough sessions and belt level to show style profile
+  // Style Profile requires: blue belt or higher AND 20+ sessions
+  const isStyleProfileBelt = profile.belt !== 'white';
+  const hasEnoughDataForStyle = stats.totalSessions >= STYLE_PROFILE_MIN_SESSIONS && isStyleProfileBelt;
 
   // ===========================================
   // BREAKTHROUGH DETECTION
@@ -663,14 +676,6 @@ export function Dashboard(_: DashboardProps) {
 
   const monthName = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
-  // Animated count-up for stats
-  const animatedStreak = useCountUp(stats.currentStreak, { duration: 500, delay: 200 });
-
-  // Belt-adaptive streak glow threshold - higher threshold for more experienced practitioners
-  // White belts: glow at 7 days (encourage early), Brown/Black: glow at higher streaks
-  const streakGlowThreshold = dashboard.streakEmphasis === 'high' ? 7 : dashboard.streakEmphasis === 'medium' ? 10 : 14;
-  const showStreakGlow = stats.currentStreak >= streakGlowThreshold;
-
   // Derive technique history for Foundations Progress module
   const techniqueHistory = useMemo(() => {
     return allJournalEntries.slice(0, 20).map((entry) => ({
@@ -803,6 +808,12 @@ export function Dashboard(_: DashboardProps) {
             {monthName}
           </div>
 
+          {/* Breakthrough Pills - compact badges for recent wins */}
+          <BreakthroughPills
+            breakthroughs={allBreakthroughs}
+            maxVisible={2}
+          />
+
           <div
             style={{
               fontSize: 'clamp(100px, 30vw, 160px)',
@@ -848,148 +859,151 @@ export function Dashboard(_: DashboardProps) {
 
       {/* ============================================
           STYLE PROFILE - Hero radar chart visualization
+          Only shown for blue belt and above with enough sessions
           ============================================ */}
-      <section
-        style={{
-          padding: '32px 24px',
-          borderTop: '1px solid var(--color-gray-800)',
-          position: 'relative',
-        }}
-      >
-        {/* Section header */}
-        <div style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--text-xs)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.25em',
-          color: hasEnoughDataForStyle ? 'var(--color-gold)' : 'var(--color-gray-600)',
-          marginBottom: 'var(--space-lg)',
-          textAlign: 'center',
-        }}>
-          Style Profile
-        </div>
-
-        {/* Has enough data - show full style fingerprint */}
-        {hasEnoughDataForStyle && (
-          <div style={{
-            backgroundColor: 'var(--color-gray-900)',
-            borderRadius: 'var(--radius-lg)',
-            padding: 'var(--space-lg)',
-          }}>
-            <StyleFingerprint
-              data={styleFingerprint}
-              size={280}
-              showLabels={true}
-              showArchetype={true}
-              animated={true}
-            />
-          </div>
-        )}
-
-        {/* Not enough data - greyed out state */}
-        {!hasEnoughDataForStyle && (
-          <div style={{
+      {isStyleProfileBelt && (
+        <section
+          style={{
+            padding: '32px 24px',
+            borderTop: '1px solid var(--color-gray-800)',
             position: 'relative',
+          }}
+        >
+          {/* Section header */}
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.25em',
+            color: hasEnoughDataForStyle ? 'var(--color-gold)' : 'var(--color-gray-600)',
+            marginBottom: 'var(--space-lg)',
+            textAlign: 'center',
           }}>
-            {/* Greyed out radar chart */}
+            Style Profile
+          </div>
+
+          {/* Has enough data - show full style fingerprint */}
+          {hasEnoughDataForStyle && (
             <div style={{
-              opacity: 0.25,
-              filter: 'grayscale(100%)',
-              pointerEvents: 'none',
+              backgroundColor: 'var(--color-gray-900)',
+              borderRadius: 'var(--radius-lg)',
+              padding: 'var(--space-lg)',
             }}>
-              <div style={{
-                backgroundColor: 'var(--color-gray-900)',
-                borderRadius: 'var(--radius-lg)',
-                padding: 'var(--space-lg)',
-              }}>
-                <StyleFingerprint
-                  data={styleFingerprint}
-                  size={280}
-                  showLabels={true}
-                  showArchetype={false}
-                  animated={false}
-                />
-              </div>
+              <StyleFingerprint
+                data={styleFingerprint}
+                size={280}
+                showLabels={true}
+                showArchetype={true}
+                animated={true}
+              />
             </div>
+          )}
 
-            {/* Overlay message */}
+          {/* Not enough data - greyed out state */}
+          {!hasEnoughDataForStyle && (
             <div style={{
-              position: 'absolute',
-              inset: 0,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center',
-              padding: 'var(--space-xl)',
+              position: 'relative',
             }}>
-              {/* Lock icon */}
+              {/* Greyed out radar chart */}
               <div style={{
-                width: 64,
-                height: 64,
-                borderRadius: '50%',
-                backgroundColor: 'var(--color-gray-800)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: 'var(--space-md)',
-                border: '2px solid var(--color-gray-700)',
-              }}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-500)" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg>
-              </div>
-
-              <div style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 'var(--text-lg)',
-                fontWeight: 700,
-                color: 'var(--color-gray-400)',
-                marginBottom: 'var(--space-xs)',
-              }}>
-                Awaiting More Data
-              </div>
-
-              <p style={{
-                color: 'var(--color-gray-500)',
-                fontSize: 'var(--text-sm)',
-                maxWidth: '240px',
-                lineHeight: 1.5,
-                margin: 0,
-                marginBottom: 'var(--space-md)',
-              }}>
-                Log {STYLE_PROFILE_MIN_SESSIONS - stats.totalSessions} more sessions to unlock your style fingerprint.
-              </p>
-
-              {/* Progress bar */}
-              <div style={{
-                width: '180px',
-                height: '6px',
-                backgroundColor: 'var(--color-gray-800)',
-                borderRadius: '3px',
-                overflow: 'hidden',
+                opacity: 0.25,
+                filter: 'grayscale(100%)',
+                pointerEvents: 'none',
               }}>
                 <div style={{
-                  width: `${Math.min((stats.totalSessions / STYLE_PROFILE_MIN_SESSIONS) * 100, 100)}%`,
-                  height: '100%',
-                  backgroundColor: 'var(--color-gray-600)',
-                  borderRadius: '3px',
-                  transition: 'width 0.3s ease',
-                }} />
+                  backgroundColor: 'var(--color-gray-900)',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: 'var(--space-lg)',
+                }}>
+                  <StyleFingerprint
+                    data={styleFingerprint}
+                    size={280}
+                    showLabels={true}
+                    showArchetype={false}
+                    animated={false}
+                  />
+                </div>
               </div>
+
+              {/* Overlay message */}
               <div style={{
-                marginTop: 'var(--space-xs)',
-                fontSize: 'var(--text-xs)',
-                color: 'var(--color-gray-600)',
-                fontFamily: 'var(--font-mono)',
+                position: 'absolute',
+                inset: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                padding: 'var(--space-xl)',
               }}>
-                {stats.totalSessions} / {STYLE_PROFILE_MIN_SESSIONS} sessions
+                {/* Lock icon */}
+                <div style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--color-gray-800)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 'var(--space-md)',
+                  border: '2px solid var(--color-gray-700)',
+                }}>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-500)" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                  </svg>
+                </div>
+
+                <div style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: 'var(--text-lg)',
+                  fontWeight: 700,
+                  color: 'var(--color-gray-400)',
+                  marginBottom: 'var(--space-xs)',
+                }}>
+                  Awaiting More Data
+                </div>
+
+                <p style={{
+                  color: 'var(--color-gray-500)',
+                  fontSize: 'var(--text-sm)',
+                  maxWidth: '240px',
+                  lineHeight: 1.5,
+                  margin: 0,
+                  marginBottom: 'var(--space-md)',
+                }}>
+                  Log {STYLE_PROFILE_MIN_SESSIONS - stats.totalSessions} more sessions to unlock your style fingerprint.
+                </p>
+
+                {/* Progress bar */}
+                <div style={{
+                  width: '180px',
+                  height: '6px',
+                  backgroundColor: 'var(--color-gray-800)',
+                  borderRadius: '3px',
+                  overflow: 'hidden',
+                }}>
+                  <div style={{
+                    width: `${Math.min((stats.totalSessions / STYLE_PROFILE_MIN_SESSIONS) * 100, 100)}%`,
+                    height: '100%',
+                    backgroundColor: 'var(--color-gray-600)',
+                    borderRadius: '3px',
+                    transition: 'width 0.3s ease',
+                  }} />
+                </div>
+                <div style={{
+                  marginTop: 'var(--space-xs)',
+                  fontSize: 'var(--text-xs)',
+                  color: 'var(--color-gray-600)',
+                  fontFamily: 'var(--font-mono)',
+                }}>
+                  {stats.totalSessions} / {STYLE_PROFILE_MIN_SESSIONS} sessions
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </section>
+          )}
+        </section>
+      )}
 
       {/* ============================================
           UP NEXT - Personalized video recommendations
@@ -1180,110 +1194,6 @@ export function Dashboard(_: DashboardProps) {
       )}
 
       {/* ============================================
-          REMOVED: Sparring Dominance Grid + Submission Profile Cards
-
-          These were redundant with AttackProfile which shows:
-          - Subs Given / Tapped Out / Win Rate in footer
-          - Top 5 weapons (better than DeadliestAttackCard)
-          - Top 5 vulnerabilities (covered by RecentRolls)
-          ============================================ */}
-
-      {/* ============================================
-          STREAK - Massive typographic statement
-          ============================================ */}
-      <section
-        style={{
-          padding: '80px 24px',
-          textAlign: 'center',
-          position: 'relative',
-          borderTop: '1px solid var(--color-gray-800)',
-        }}
-      >
-        {/* Glow behind number - animated pulse for 7+ day streaks */}
-        <div
-          className={showStreakGlow ? 'animate-streak-glow' : undefined}
-          style={{
-            position: 'absolute',
-            top: '35%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '280px',
-            height: '280px',
-            background: 'radial-gradient(circle, var(--color-positive-glow) 0%, transparent 70%)',
-            pointerEvents: 'none',
-            borderRadius: '50%',
-          }}
-        />
-
-        <div
-          style={{
-            fontSize: 'clamp(120px, 40vw, 200px)',
-            fontWeight: 800, /* Extra Bold for hero numbers */
-            lineHeight: 0.75,
-            letterSpacing: '-0.05em',
-            color: 'var(--color-positive)',
-            position: 'relative',
-          }}
-        >
-          {animatedStreak}
-        </div>
-
-        <div
-          style={{
-            fontSize: 'var(--text-sm)',
-            fontWeight: 500,
-            textTransform: 'uppercase',
-            letterSpacing: '0.35em',
-            color: 'var(--color-positive)',
-            marginTop: '20px',
-          }}
-        >
-          Day Streak
-        </div>
-
-        {/* Meta stats */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '64px',
-            marginTop: '48px',
-            paddingTop: '32px',
-            borderTop: '1px solid var(--color-gray-800)',
-          }}
-        >
-          <div>
-            <div style={{ fontSize: 'var(--text-3xl)', fontWeight: 700, color: 'var(--color-white)' }}>
-              {stats.longestStreak}
-            </div>
-            <div style={{
-              fontSize: 'var(--text-xs)',
-              color: 'var(--color-gray-400)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.15em',
-              marginTop: '4px',
-            }}>
-              Best Ever
-            </div>
-          </div>
-          <div>
-            <div style={{ fontSize: 'var(--text-3xl)', fontWeight: 700, color: 'var(--color-gold)' }}>
-              {Math.round((stats.thisMonth.sessions / stats.thisMonth.targetSessions) * 100)}%
-            </div>
-            <div style={{
-              fontSize: 'var(--text-xs)',
-              color: 'var(--color-gray-400)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.15em',
-              marginTop: '4px',
-            }}>
-              Monthly Goal
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================
           CALLOUTS - Belt-personalized insights
           ============================================ */}
       <>
@@ -1349,25 +1259,193 @@ export function Dashboard(_: DashboardProps) {
       </>
 
       {/* ============================================
-          TOURNAMENT READINESS - Competition prep score
+          TOURNAMENT READINESS - Competition prep (button + confirmation)
           ============================================ */}
-      <TournamentReadinessCard
-        input={tournamentReadinessInput}
-        showFullBreakdown={false}
+      <section
+        style={{
+          padding: '24px',
+          borderTop: '1px solid var(--color-gray-800)',
+        }}
+      >
+        {!tournamentConfirmed ? (
+          // Button state - user hasn't confirmed tournament prep yet
+          <button
+            onClick={() => setShowTournamentSheet(true)}
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '12px',
+              padding: '20px 24px',
+              background: 'var(--color-gray-900)',
+              border: '1px solid var(--color-gray-700)',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease',
+            }}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+            <span style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 'var(--text-base)',
+              fontWeight: 600,
+              color: 'var(--color-gray-300)',
+            }}>
+              Am I Tournament Ready?
+            </span>
+          </button>
+        ) : (
+          // Expanded state - show full tournament readiness card
+          <TournamentReadinessCard
+            input={tournamentReadinessInput}
+            showFullBreakdown={true}
+          />
+        )}
+      </section>
+
+      {/* Tournament Confirmation Sheet */}
+      <TournamentConfirmationSheet
+        isOpen={showTournamentSheet}
+        beltLevel={profile.belt}
+        onConfirm={() => {
+          setShowTournamentSheet(false);
+          setTournamentConfirmed(true);
+        }}
+        onCancel={() => setShowTournamentSheet(false)}
       />
 
       {/* ============================================
-          BREAKTHROUGH HISTORY - Recent wins and achievements
+          SEE MORE - Collapsed section for secondary stats
           ============================================ */}
-      <BreakthroughList
-        breakthroughs={allBreakthroughs}
-        maxVisible={5}
-        showEmptyState={true}
-        belt={profile.belt}
+      <section
+        style={{
+          padding: '24px',
+          borderTop: '1px solid var(--color-gray-800)',
+        }}
+      >
+        <button
+          onClick={() => setSeeMoreExpanded(!seeMoreExpanded)}
+          style={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '16px 0',
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+          }}
+        >
+          <span style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 600,
+            letterSpacing: '0.15em',
+            color: 'var(--color-gray-500)',
+            textTransform: 'uppercase',
+          }}>
+            {seeMoreExpanded ? 'Show Less' : 'See More Stats'}
+          </span>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--color-gray-500)"
+            strokeWidth="2"
+            style={{
+              transform: seeMoreExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+              transition: 'transform 0.2s ease',
+            }}
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+
+        {/* Expanded content */}
+        {seeMoreExpanded && (
+          <div style={{ marginTop: '16px' }}>
+            {/* Breakthrough History */}
+            <BreakthroughList
+              breakthroughs={allBreakthroughs}
+              maxVisible={5}
+              showEmptyState={true}
+              belt={profile.belt}
+            />
+          </div>
+        )}
+      </section>
+
+      {/* ============================================
+          LOCKED FEATURES FOOTER - Coming soon features
+          Shows features that unlock with progression
+          ============================================ */}
+      <LockedFeaturesFooter
+        lockedFeatures={getLockedFeatures(profile.belt, stats.totalSessions)}
       />
 
       {/* Bottom spacer for tab bar */}
       <div style={{ height: '100px' }} />
     </div>
   );
+}
+
+// Helper function to determine locked features based on belt and sessions
+function getLockedFeatures(belt: string, totalSessions: number): LockedFeature[] {
+  const features: LockedFeature[] = [];
+
+  // Style Profile - unlocks at blue belt with 20+ sessions
+  if (belt === 'white') {
+    features.push({
+      id: 'style-profile',
+      name: 'Style Fingerprint',
+      description: 'Discover your unique grappling style and archetype based on your training patterns.',
+      unlockCriteria: 'Reach Blue Belt',
+      unlockType: 'belt',
+    });
+  } else if (totalSessions < STYLE_PROFILE_MIN_SESSIONS) {
+    features.push({
+      id: 'style-profile',
+      name: 'Style Fingerprint',
+      description: 'Discover your unique grappling style and archetype based on your training patterns.',
+      unlockCriteria: `Log ${STYLE_PROFILE_MIN_SESSIONS} sessions`,
+      progress: {
+        current: totalSessions,
+        target: STYLE_PROFILE_MIN_SESSIONS,
+      },
+      unlockType: 'sessions',
+    });
+  }
+
+  // Competition Analytics - unlocks at 3+ competitions
+  if (belt === 'white' || belt === 'blue') {
+    features.push({
+      id: 'competition-analytics',
+      name: 'Competition Analytics',
+      description: 'Deep analysis of your tournament performance, win patterns, and growth areas.',
+      unlockCriteria: 'Complete 3 competitions',
+      progress: {
+        current: belt === 'white' ? 0 : 1,
+        target: 3,
+      },
+      unlockType: 'sessions',
+    });
+  }
+
+  // Teaching Tracker - unlocks at purple belt
+  if (belt === 'white' || belt === 'blue') {
+    features.push({
+      id: 'teaching-tracker',
+      name: 'Teaching Tracker',
+      description: 'Track your impact as an instructor and mentor to lower belts.',
+      unlockCriteria: 'Reach Purple Belt',
+      unlockType: 'belt',
+    });
+  }
+
+  return features;
 }
