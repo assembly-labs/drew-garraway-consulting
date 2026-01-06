@@ -150,6 +150,14 @@ const davidMorrisonVideos: PersonaVideoConfig = {
   },
   levelUpVideos: [
     {
+      video: getVideoById('CG_FS_001')!,
+      headline: 'Featured: Low-Risk Flower Sweep',
+      personalizedReason: "MMALeech's Gustavo Gasperin breaks down the safest sweep in BJJ. Low risk, high reward - perfect for building confidence when you return to the mats.",
+      category: 'technique',
+      priority: 1,
+      oneLiner: 'Your first reliable sweep from guard.',
+    },
+    {
       video: getVideoById('SC_016')!,
       headline: 'Escape the Crush',
       personalizedReason: "You mentioned getting stuck in side control. This escape uses frames and timing, not athleticism. It works regardless of age or strength.",
@@ -301,6 +309,14 @@ const ryanTorresVideos: PersonaVideoConfig = {
     oneLiner: "Missed 3 weeks? GOOD. Fresh start.",
   },
   levelUpVideos: [
+    {
+      video: getVideoById('OG_DLR_001')!,
+      headline: 'Featured: De La Riva Sweeps',
+      personalizedReason: "MMALeech's Gustavo Gasperin shows 3 sweeps that chain together. When you come back, this gives you something fun to drill. New techniques reignite the spark.",
+      category: 'technique',
+      priority: 1,
+      oneLiner: 'Something new to work on when you return.',
+    },
     {
       video: getVideoById('BJ_003')!,
       headline: 'When the Fire Dies',
