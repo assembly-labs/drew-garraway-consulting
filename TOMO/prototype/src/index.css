@@ -1,10 +1,10 @@
 /* Google Fonts - Unbounded for headlines/numbers, Inter for body, JetBrains Mono for labels (must be first) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800;900&display=swap');
 
-/* Barcade Bold - Logo font */
+/* Barcade No Bar Bold - Logo font (clean version without horizontal bars) */
 @font-face {
-  font-family: 'Barcade Bold';
-  src: url('/fonts/barcade/barcadbold.ttf') format('truetype');
+  font-family: 'Barcade';
+  src: url('/fonts/barcade/barcadnobarbold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -117,7 +117,7 @@
   --font-heading: 'Unbounded', sans-serif;  /* Page titles, section headers */
   --font-body: 'Inter', -apple-system, sans-serif;  /* Body text, descriptions */
   --font-mono: 'JetBrains Mono', monospace;  /* Labels, data values */
-  --font-logo: 'Barcade Bold', sans-serif;  /* TOMO logo */
+  --font-logo: 'Barcade', sans-serif;  /* TOMO logo */
 
   /* Text sizes - Bold editorial scale
      CRITICAL: 12px is the MINIMUM font size.

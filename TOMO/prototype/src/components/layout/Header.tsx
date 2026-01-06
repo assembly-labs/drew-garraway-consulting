@@ -54,8 +54,9 @@ export function Header({
       top: 0,
       zIndex: 100,
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-md)' }}>
-        {showBackButton && (
+      {/* Left: Back button or Demo button */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-md)', minWidth: 80 }}>
+        {showBackButton ? (
           <button
             onClick={onBack}
             style={{
@@ -63,8 +64,8 @@ export function Header({
               border: 'none',
               color: 'var(--color-white)',
               cursor: 'pointer',
-              padding: '12px', /* Increased for 48px touch target */
-              margin: '-12px', /* Offset to maintain visual position */
+              padding: '12px',
+              margin: '-12px',
               marginRight: '0',
               display: 'flex',
               alignItems: 'center',
@@ -79,43 +80,49 @@ export function Header({
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
           </button>
+        ) : (
+          <button
+            onClick={cycleToNextPersona}
+            style={{
+              backgroundColor: isDemoMode ? 'var(--color-accent)' : 'var(--color-gray-700)',
+              color: isDemoMode ? 'var(--color-primary)' : 'var(--color-gray-300)',
+              fontSize: 'var(--text-xs)',
+              fontWeight: 700,
+              padding: '6px 12px',
+              borderRadius: 'var(--radius-sm)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              border: 'none',
+              cursor: 'pointer',
+              minHeight: '32px',
+              transition: 'background-color 0.15s ease',
+            }}
+            aria-label={isDemoMode ? `Current persona: ${activeDemoProfile?.key}. Tap to cycle to next persona.` : 'Enter demo mode'}
+          >
+            {isDemoMode && activeDemoProfile
+              ? activeDemoProfile.key.split('-')[0].charAt(0).toUpperCase() + activeDemoProfile.key.split('-')[0].slice(1)
+              : 'Demo'
+            }
+          </button>
         )}
-        <h1 style={{
-          fontFamily: 'var(--font-logo)',
-          fontSize: 'var(--text-xl)',
-          margin: 0,
-          letterSpacing: '0.05em',
-          fontWeight: 'normal', /* Barcade Bold is already bold */
-        }}>
-          {title}
-        </h1>
-        {/* Demo Mode Badge - Tap to cycle through personas */}
-        <button
-          onClick={cycleToNextPersona}
-          style={{
-            backgroundColor: isDemoMode ? 'var(--color-accent)' : 'var(--color-gray-700)',
-            color: isDemoMode ? 'var(--color-primary)' : 'var(--color-gray-300)',
-            fontSize: 'var(--text-xs)',
-            fontWeight: 700,
-            padding: '6px 12px',
-            borderRadius: 'var(--radius-sm)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
-            marginLeft: 'var(--space-sm)',
-            border: 'none',
-            cursor: 'pointer',
-            minHeight: '32px',
-            transition: 'background-color 0.15s ease',
-          }}
-          aria-label={isDemoMode ? `Current persona: ${activeDemoProfile?.key}. Tap to cycle to next persona.` : 'Enter demo mode'}
-        >
-          {isDemoMode && activeDemoProfile
-            ? `Demo: ${activeDemoProfile.key.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}`
-            : 'Demo'
-          }
-        </button>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
+
+      {/* Center: TOMO logo */}
+      <h1 style={{
+        fontFamily: 'var(--font-logo)',
+        fontSize: 'var(--text-xl)',
+        margin: 0,
+        letterSpacing: '0.05em',
+        fontWeight: 'normal',
+        position: 'absolute',
+        left: '50%',
+        transform: 'translateX(-50%)',
+      }}>
+        {title}
+      </h1>
+
+      {/* Right: Avatar and actions */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', minWidth: 80, justifyContent: 'flex-end' }}>
         {rightAction && (
           <div>{rightAction}</div>
         )}
@@ -123,8 +130,8 @@ export function Header({
           <button
             onClick={onProfileClick}
             style={{
-              width: 44, /* Minimum touch target */
-              height: 44, /* Minimum touch target */
+              width: 44,
+              height: 44,
               borderRadius: 'var(--radius-full)',
               backgroundColor: 'var(--color-gray-800)',
               border: `3px solid ${beltBorderColor}`,
@@ -141,7 +148,6 @@ export function Header({
             }}
             aria-label="Open profile"
           >
-            {/* Show avatar image if available (from Persona), otherwise show initial */}
             {activeDemoProfile && 'avatarUrl' in activeDemoProfile && activeDemoProfile.avatarUrl ? (
               <img
                 src={activeDemoProfile.avatarUrl}
