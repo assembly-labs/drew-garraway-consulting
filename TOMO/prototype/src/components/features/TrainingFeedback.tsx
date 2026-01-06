@@ -276,7 +276,7 @@ export function TrainingFeedback({ onClose, onLogSession }: TrainingFeedbackProp
 
   const { displayedText, isComplete, isStarted, skip } = useTypewriter(
     currentInsight?.content || '',
-    8,
+    2,
     800
   );
 
