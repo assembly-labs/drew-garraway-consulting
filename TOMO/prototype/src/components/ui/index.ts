@@ -44,6 +44,4 @@ export { SubmissionPicker } from './SubmissionPicker';
 export { StyleFingerprint, calculateStyleFingerprint } from './StyleFingerprint';
 export type { StyleFingerprintData, StyleDimension, StyleArchetype } from './StyleFingerprint';
 export { BreakthroughHero, BreakthroughCard } from './BreakthroughHero';
-export { BreakthroughList } from './BreakthroughList';
-export { BreakthroughPills } from './BreakthroughPills';
 export { TournamentReadinessCard } from './TournamentReadinessCard';

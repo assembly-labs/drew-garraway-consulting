@@ -23,8 +23,6 @@ import {
 } from '../../data/competitions';
 import {
   BreakthroughHero,
-  BreakthroughList,
-  BreakthroughPills,
   TournamentReadinessCard,
   StyleFingerprint,
 } from '../ui';
@@ -62,7 +60,6 @@ import {
   detectBreakthroughs,
   getMostSignificantBreakthrough,
   type BreakthroughDetectionInput,
-  type Breakthrough,
 } from '../../utils/breakthrough-detection';
 import type { TournamentReadinessInput } from '../../utils/tournament-readiness';
 
@@ -358,9 +355,6 @@ export function Dashboard(_: DashboardProps) {
   const [showTournamentSheet, setShowTournamentSheet] = useState(false);
   const [tournamentConfirmed, setTournamentConfirmed] = useState(false);
 
-  // State for "See More" collapsed section
-  const [seeMoreExpanded, setSeeMoreExpanded] = useState(false);
-
   // Use demo profile data if in demo mode, otherwise use default mock data
   const stats = isDemoMode && activeDemoProfile
     ? activeDemoProfile.trainingStats as typeof mockTrainingStats
@@ -391,11 +385,7 @@ export function Dashboard(_: DashboardProps) {
   // ===========================================
   // BREAKTHROUGH DETECTION
   // ===========================================
-  const { breakthrough, allBreakthroughs } = useMemo(() => {
-    // Stable reference date for mock data (avoids impure Date.now() calls)
-    const referenceDate = new Date('2026-01-05T12:00:00Z').getTime();
-    const daysAgo = (days: number) => new Date(referenceDate - days * 24 * 60 * 60 * 1000).toISOString();
-
+  const breakthrough = useMemo(() => {
     const input: BreakthroughDetectionInput = {
       journalEntries: allJournalEntries,
       trainingStats: {
@@ -410,188 +400,7 @@ export function Dashboard(_: DashboardProps) {
     };
 
     const detected = detectBreakthroughs(input);
-
-    // Belt-specific mock historical breakthroughs for demo purposes
-    const getBeltBreakthroughs = (): Breakthrough[] => {
-      switch (profile.belt) {
-        case 'white':
-          return [
-            {
-              id: 'hist-white-1',
-              type: 'first_submission',
-              detectedAt: daysAgo(4),
-              confidence: 'high',
-              title: 'First Americana',
-              description: 'You landed your first americana on a training partner.',
-              stat: { value: 'Americana', label: 'FIRST SUBMISSION' },
-              beltContext: 'Your first submission! The journey has begun.',
-              icon: 'trophy',
-            },
-            {
-              id: 'hist-white-2',
-              type: 'consistency_milestone',
-              detectedAt: daysAgo(14),
-              confidence: 'high',
-              title: '50 Sessions',
-              description: 'You reached 50 training sessions.',
-              stat: { value: 50, label: 'SESSIONS' },
-              beltContext: 'Most white belts quit before 20. You\'re ahead.',
-              icon: 'award',
-            },
-            {
-              id: 'hist-white-3',
-              type: 'pattern_break',
-              detectedAt: daysAgo(21),
-              confidence: 'medium',
-              title: 'Survived a Round',
-              description: 'You went a full round without getting submitted.',
-              stat: { value: '5 min', label: 'SURVIVED' },
-              beltContext: 'Defense is the first step. Well done.',
-              icon: 'shield',
-            },
-          ];
-        case 'blue':
-          return [
-            {
-              id: 'hist-blue-1',
-              type: 'first_submission',
-              detectedAt: daysAgo(7),
-              confidence: 'high',
-              title: 'First Triangle',
-              description: 'You landed your first triangle in live rolling.',
-              stat: { value: 'Triangle', label: 'NEW SUBMISSION' },
-              beltContext: 'Your closed guard game is evolving.',
-              icon: 'trophy',
-            },
-            {
-              id: 'hist-blue-2',
-              type: 'streak_record',
-              detectedAt: daysAgo(14),
-              confidence: 'high',
-              title: '10 Day Streak',
-              description: 'You hit a new personal best training streak.',
-              stat: { value: 10, label: 'DAY STREAK' },
-              beltContext: 'Blue belt is about consistency. This is it.',
-              icon: 'zap',
-            },
-            {
-              id: 'hist-blue-3',
-              type: 'pattern_break',
-              detectedAt: daysAgo(21),
-              confidence: 'medium',
-              title: 'Armbar Defense Up',
-              description: 'You stopped getting caught in armbars.',
-              stat: { value: '4 → 0', label: 'TIMES CAUGHT' },
-              beltContext: 'That hole is closing.',
-              icon: 'shield',
-            },
-          ];
-        case 'purple':
-          return [
-            {
-              id: 'hist-purple-1',
-              type: 'technique_streak',
-              detectedAt: daysAgo(5),
-              confidence: 'high',
-              title: 'Berimbolo Chain Working',
-              description: 'Your berimbolo to back take hit 5 times this week.',
-              stat: { value: 5, label: 'SUCCESSFUL CHAINS' },
-              beltContext: 'Your system is coming together.',
-              icon: 'trending-up',
-            },
-            {
-              id: 'hist-purple-2',
-              type: 'consistency_milestone',
-              detectedAt: daysAgo(12),
-              confidence: 'high',
-              title: '200 Sessions',
-              description: 'Two hundred training sessions logged.',
-              stat: { value: 200, label: 'SESSIONS' },
-              beltContext: 'The middle of the journey. Depth over breadth.',
-              icon: 'award',
-            },
-            {
-              id: 'hist-purple-3',
-              type: 'first_submission',
-              detectedAt: daysAgo(18),
-              confidence: 'high',
-              title: 'First Leg Lock',
-              description: 'You caught your first heel hook in competition.',
-              stat: { value: 'Heel Hook', label: 'COMP SUBMISSION' },
-              beltContext: 'Your leg game is dangerous now.',
-              icon: 'trophy',
-            },
-          ];
-        case 'brown':
-          return [
-            {
-              id: 'hist-brown-1',
-              type: 'technique_streak',
-              detectedAt: daysAgo(3),
-              confidence: 'high',
-              title: 'Pressure Passing Streak',
-              description: 'Your pressure passing scored in 8 consecutive rounds.',
-              stat: { value: 8, label: 'ROUND STREAK' },
-              beltContext: 'Efficiency at brown belt level.',
-              icon: 'trending-up',
-            },
-            {
-              id: 'hist-brown-2',
-              type: 'consistency_milestone',
-              detectedAt: daysAgo(10),
-              confidence: 'high',
-              title: '500 Sessions',
-              description: 'Five hundred sessions on the mat.',
-              stat: { value: 500, label: 'LIFETIME SESSIONS' },
-              beltContext: 'The finish line is in sight.',
-              icon: 'award',
-            },
-            {
-              id: 'hist-brown-3',
-              type: 'pattern_break',
-              detectedAt: daysAgo(25),
-              confidence: 'medium',
-              title: 'Teaching Breakthrough',
-              description: 'Three students hit the technique you taught.',
-              stat: { value: 3, label: 'STUDENT SUCCESSES' },
-              beltContext: 'Your teaching deepens your own understanding.',
-              icon: 'check-circle',
-            },
-          ];
-        default: // black
-          return [
-            {
-              id: 'hist-black-1',
-              type: 'consistency_milestone',
-              detectedAt: daysAgo(7),
-              confidence: 'high',
-              title: '1000 Sessions',
-              description: 'One thousand sessions logged.',
-              stat: { value: '1000', label: 'LIFETIME SESSIONS' },
-              beltContext: 'A lifetime on the mat. The journey continues.',
-              icon: 'award',
-            },
-            {
-              id: 'hist-black-2',
-              type: 'technique_streak',
-              detectedAt: daysAgo(14),
-              confidence: 'high',
-              title: 'New Concept Explored',
-              description: 'You integrated a new guard concept into your game.',
-              stat: { value: 'Mikey Lock', label: 'NEW ADDITION' },
-              beltContext: 'Even at black belt, the art reveals new layers.',
-              icon: 'zap',
-            },
-          ];
-      }
-    };
-
-    const combinedBreakthroughs = [...detected, ...getBeltBreakthroughs()];
-
-    return {
-      breakthrough: getMostSignificantBreakthrough(detected),
-      allBreakthroughs: combinedBreakthroughs,
-    };
+    return getMostSignificantBreakthrough(detected);
   }, [allJournalEntries, stats, profile.belt]);
 
   // Show breakthrough hero if we have one and it hasn't been dismissed
@@ -807,12 +616,6 @@ export function Dashboard(_: DashboardProps) {
           >
             {monthName}
           </div>
-
-          {/* Breakthrough Pills - compact badges for recent wins */}
-          <BreakthroughPills
-            breakthroughs={allBreakthroughs}
-            maxVisible={2}
-          />
 
           <div
             style={{
@@ -1317,68 +1120,6 @@ export function Dashboard(_: DashboardProps) {
         }}
         onCancel={() => setShowTournamentSheet(false)}
       />
-
-      {/* ============================================
-          SEE MORE - Collapsed section for secondary stats
-          ============================================ */}
-      <section
-        style={{
-          padding: '24px',
-          borderTop: '1px solid var(--color-gray-800)',
-        }}
-      >
-        <button
-          onClick={() => setSeeMoreExpanded(!seeMoreExpanded)}
-          style={{
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '16px 0',
-            background: 'transparent',
-            border: 'none',
-            cursor: 'pointer',
-          }}
-        >
-          <span style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: 'var(--text-xs)',
-            fontWeight: 600,
-            letterSpacing: '0.15em',
-            color: 'var(--color-gray-500)',
-            textTransform: 'uppercase',
-          }}>
-            {seeMoreExpanded ? 'Show Less' : 'See More Stats'}
-          </span>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="var(--color-gray-500)"
-            strokeWidth="2"
-            style={{
-              transform: seeMoreExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
-              transition: 'transform 0.2s ease',
-            }}
-          >
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </button>
-
-        {/* Expanded content */}
-        {seeMoreExpanded && (
-          <div style={{ marginTop: '16px' }}>
-            {/* Breakthrough History */}
-            <BreakthroughList
-              breakthroughs={allBreakthroughs}
-              maxVisible={5}
-              showEmptyState={true}
-              belt={profile.belt}
-            />
-          </div>
-        )}
-      </section>
 
       {/* ============================================
           LOCKED FEATURES FOOTER - Coming soon features
