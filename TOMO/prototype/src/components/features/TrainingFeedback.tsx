@@ -191,6 +191,7 @@ function useTypewriter(text: string, speed: number = 20, startDelay: number = 50
 
 interface TrainingFeedbackProps {
   onClose?: () => void;
+  onLogSession?: () => void; // Navigate to session logger
 }
 
 // Insight generation status
@@ -201,7 +202,7 @@ type InsightStatus =
   | 'already_generated' // Already generated today, no new session
   | 'no_session';       // No session logged yet to analyze
 
-export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
+export function TrainingFeedback({ onClose, onLogSession }: TrainingFeedbackProps) {
   const [status, setStatus] = useState<InsightStatus>('loading');
   const [currentInsight, setCurrentInsight] = useState<TrainingInsight | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -438,6 +439,7 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
               gap: 'var(--space-xs)',
               justifyContent: 'center',
               maxWidth: '280px',
+              marginBottom: 'var(--space-xl)',
             }}>
               {chatbot.emphasizeTopics.slice(0, 3).map((topic, i) => (
                 <span
@@ -454,6 +456,26 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
                 </span>
               ))}
             </div>
+
+            {onLogSession && (
+              <button
+                onClick={onLogSession}
+                className="btn btn-primary"
+                style={{
+                  minWidth: '200px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 'var(--space-sm)',
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 8v8M8 12h8" />
+                </svg>
+                Log Session
+              </button>
+            )}
           </div>
         )}
 
@@ -506,11 +528,33 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
               You've already received today's insight. Log a new training session to unlock your next one.
             </p>
 
+            {onLogSession && (
+              <button
+                onClick={onLogSession}
+                className="btn btn-primary"
+                style={{
+                  minWidth: '200px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 'var(--space-sm)',
+                  marginBottom: 'var(--space-lg)',
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 8v8M8 12h8" />
+                </svg>
+                Log Session
+              </button>
+            )}
+
             <div style={{
               padding: 'var(--space-md) var(--space-lg)',
               backgroundColor: 'var(--color-gray-900)',
               borderRadius: 'var(--radius-md)',
               borderLeft: '3px solid var(--color-info)',
+              maxWidth: '300px',
             }}>
               <p style={{
                 color: 'var(--color-gray-300)',
@@ -518,7 +562,7 @@ export function TrainingFeedback({ onClose }: TrainingFeedbackProps) {
                 margin: 0,
                 lineHeight: 1.5,
               }}>
-                New insights are generated once per day after you log a session. This ensures each insight is based on fresh training data.
+                New insights are generated once per day after you log a session.
               </p>
             </div>
           </div>

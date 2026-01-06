@@ -144,7 +144,7 @@ function App() {
         )}
 
         {currentView === 'insights' && (
-          <TrainingFeedback />
+          <TrainingFeedback onLogSession={() => setShowSessionLogger(true)} />
         )}
 
         {currentView === 'profile' && (
