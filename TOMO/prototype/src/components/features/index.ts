@@ -36,5 +36,8 @@ export { ProfileNudge } from './ProfileNudge';
 export { TrainingFeedback } from './TrainingFeedback';
 export { AttackProfile } from './AttackProfile';
 
+// Video Recommendations
+export { UpNextVideos } from './UpNextVideos';
+
 // Development/Showcase
 export { IconShowcase } from './IconShowcase';

@@ -44,6 +44,7 @@ import {
   AchievementTimeline,
   type SubmissionReceived,
 } from './stats-modules';
+import { UpNextVideos } from './UpNextVideos';
 import {
   MOCK_BLUE_BELT_STATS,
   MOCK_WHITE_BELT_STATS,
@@ -989,6 +990,16 @@ export function Dashboard(_: DashboardProps) {
           </div>
         )}
       </section>
+
+      {/* ============================================
+          UP NEXT - Personalized video recommendations
+          Belt-specific videos based on what each persona is working on
+          At-risk personas see psychological support content
+          ============================================ */}
+      <UpNextVideos
+        maxLevelUpVideos={4}
+        showSupportSection={true}
+      />
 
       {/* ============================================
           WATCH OUT - Vulnerability alert with defense coaching

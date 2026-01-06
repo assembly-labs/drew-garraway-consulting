@@ -24,6 +24,7 @@ export * from './journal';           // Legacy format: used by Dashboard, BeltPr
 export * from './journal-entries';   // V2 format: used by SessionHistory
 export * from './submissions';
 export * from './techniqueVideos';
+export * from './personaVideoRecommendations';  // Persona-specific video recommendations
 
 // Progress & Tracking
 export * from './progress';
