@@ -271,27 +271,6 @@
             margin: 0 auto;
         }
 
-        .demo-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(143, 184, 138, 0.15);
-            border: 1px solid rgba(143, 184, 138, 0.3);
-            color: var(--sage);
-            padding: 0.5rem 1rem;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 1.5rem;
-        }
-
-        .demo-badge svg {
-            width: 16px;
-            height: 16px;
-        }
-
         .demo h2 {
             color: var(--cream);
             font-size: 1.75rem;
@@ -499,15 +478,19 @@
 
         .solution-insight {
             text-align: center;
-            margin-top: 2.5rem;
-            padding-top: 2rem;
+            margin-top: 3rem;
+            padding-top: 2.5rem;
             border-top: 1px solid var(--border);
         }
 
         .solution-insight p {
             margin: 0 auto;
-            font-style: italic;
+            font-family: var(--font-serif);
+            font-size: 1.75rem;
+            font-weight: 700;
             color: var(--foreground);
+            line-height: 1.4;
+            letter-spacing: -0.01em;
         }
 
         /* ============================================
@@ -1422,19 +1405,6 @@
         </div>
     </section>
 
-    <!-- Demo -->
-    <section class="demo" id="demo">
-        <div class="demo-content">
-            <span class="demo-badge">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                Live Demo
-            </span>
-            <h2>See Scout in action</h2>
-            <p class="demo-text">Experience how natural conversation transforms library discovery. Ask Scout anything—from book recommendations to museum passes—and watch it surface resources you never knew existed.</p>
-            <a href="https://searchwithscout.com/" target="_blank" class="demo-cta">Try the Demo</a>
-        </div>
-    </section>
-
     <!-- Problem -->
     <section class="problem" id="problem">
         <div class="container">
@@ -1525,7 +1495,7 @@
                 </div>
 
                 <div class="solution-insight">
-                    <p>"One question. Many answers. One, great library experience. Resources that parent never knew existed."</p>
+                    <p>One question. Many answers. A better library experience.</p>
                 </div>
             </div>
         </div>
@@ -1900,6 +1870,15 @@
             </div>
 
             <a href="mailto:drew@searchwithscout.com" class="ask-cta">Let's Talk</a>
+        </div>
+    </section>
+
+    <!-- Demo -->
+    <section class="demo" id="demo">
+        <div class="demo-content">
+            <h2>See Scout in action</h2>
+            <p class="demo-text">Experience how natural conversation transforms library discovery. Ask anything and watch Scout surface resources you never knew existed.</p>
+            <a href="https://searchwithscout.com/" target="_blank" class="demo-cta">Try the Demo</a>
         </div>
     </section>
 
