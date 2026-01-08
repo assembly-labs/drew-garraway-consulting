@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scout | AI-Powered Library Discovery</title>
+    <meta name="description" content="Scout transforms fragmented library search into natural conversation. One question unlocks books, programs, museum passes, and resources patrons never knew existed.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        /* ============================================
+           CSS VARIABLES - Scout Brand
+           ============================================ */
+        :root {
+            /* Primary Palette */
+            --navy: #1e3a5f;
+            --cream: #f5f1e8;
+            --sage: #7a9b76;
+            --coral: #e67356;
+            --slate: #5c7a9e;
+            --charcoal: #3d4654;
+
+            /* Semantic */
+            --background: var(--cream);
+            --foreground: var(--navy);
+            --muted: #e8e8e0;
+            --border: #d8d4cb;
+
+            /* Typography */
+            --font-serif: 'Georgia', 'Times New Roman', serif;
+            --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+
+            /* Spacing */
+            --section-padding: 6rem 1.5rem;
+            --container-max: 1100px;
+
+            /* Radius */
+            --radius: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 3px 0 rgba(30, 58, 95, 0.06), 0 1px 2px 0 rgba(30, 58, 95, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(30, 58, 95, 0.08), 0 2px 4px -2px rgba(30, 58, 95, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(30, 58, 95, 0.1), 0 4px 6px -4px rgba(30, 58, 95, 0.08);
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 18px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ============================================
+           TYPOGRAPHY - Improved Legibility
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--navy);
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(2.25rem, 5vw, 3.5rem);
+            line-height: 1.15;
+        }
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            margin-bottom: 1.25rem;
+        }
+        h3 {
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        p {
+            color: var(--charcoal);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            max-width: 60ch;
+        }
+
+        .lead {
+            font-size: 1.2rem;
+            color: var(--slate);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: var(--section-padding);
+        }
+
+        .section-label {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--sage);
+            margin-bottom: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-label svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(245, 241, 232, 0.97);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--navy);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--navy);
+        }
+
+        .nav-cta {
+            background: var(--navy);
+            color: var(--cream) !important;
+            padding: 0.65rem 1.5rem;
+            border-radius: var(--radius);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+            background: linear-gradient(180deg, var(--cream) 0%, #ebe7de 100%);
+        }
+
+        .hero .container {
+            text-align: center;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            color: var(--sage);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--charcoal);
+            max-width: 580px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--navy);
+            color: var(--cream);
+            padding: 1rem 2rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-cta svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ============================================
+           PROBLEM SECTION
+           ============================================ */
+        .problem {
+            background: white;
+        }
+
+        .problem-content {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .stat-card {
+            background: var(--cream);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--navy);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            line-height: 1.4;
+        }
+
+        .quote-box {
+            background: #faf8f5;
+            border-left: 3px solid var(--coral);
+            padding: 1.5rem 1.75rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin-top: 2rem;
+        }
+
+        .quote-box p {
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+
+        .quote-attribution {
+            font-size: 0.875rem;
+            color: var(--slate);
+            margin-top: 0.875rem;
+            font-style: normal;
+        }
+
+        /* ============================================
+           SOLUTION SECTION
+           ============================================ */
+        .solution {
+            background: var(--cream);
+        }
+
+        .solution-intro {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 3rem;
+        }
+
+        .solution-intro p {
+            margin: 0 auto;
+        }
+
+        .solution-demo {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-box svg {
+            color: var(--slate);
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        .search-text {
+            color: var(--charcoal);
+            font-size: 1.05rem;
+        }
+
+        .arrow-down {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: var(--sage);
+        }
+
+        .arrow-down svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .result-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1rem;
+            color: var(--sage);
+        }
+
+        .result-type {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--sage);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-title {
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.375rem;
+            font-size: 1rem;
+        }
+
+        .result-desc {
+            font-size: 0.85rem;
+            color: var(--slate);
+            line-height: 1.5;
+        }
+
+        .solution-insight {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .solution-insight p {
+            margin: 0 auto;
+            font-style: italic;
+            color: var(--charcoal);
+        }
+
+        /* ============================================
+           STORIES SECTION
+           ============================================ */
+        .stories {
+            background: white;
+        }
+
+        .stories-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3.5rem;
+        }
+
+        .stories-intro p {
+            margin: 0 auto;
+        }
+
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.75rem;
+        }
+
+        .story-card {
+            background: var(--cream);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .story-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .story-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .story-avatar svg {
+            width: 26px;
+            height: 26px;
+            color: white;
+        }
+
+        .story-avatar.parent { background: var(--coral); }
+        .story-avatar.senior { background: var(--sage); }
+        .story-avatar.student { background: var(--slate); }
+        .story-avatar.teen { background: #9b7ab7; }
+        .story-avatar.esl { background: #5fa8d3; }
+        .story-avatar.caregiver { background: #e8a87c; }
+
+        .story-persona {
+            font-weight: 600;
+            color: var(--navy);
+            font-size: 1.05rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .story-label {
+            font-size: 0.8rem;
+            color: var(--slate);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .story-query {
+            background: white;
+            border-left: 3px solid var(--sage);
+            padding: 0.875rem 1rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin-bottom: 1.25rem;
+        }
+
+        .story-query p {
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        .story-outcome {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .story-outcome-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--sage);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .story-outcome p {
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            line-height: 1.65;
+        }
+
+        .story-outcome strong {
+            color: var(--navy);
+        }
+
+        .stories-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stories-bottom p {
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--charcoal);
+        }
+
+        .stories-bottom strong {
+            color: var(--navy);
+        }
+
+        /* ============================================
+           ADVANTAGE SECTION
+           ============================================ */
+        .advantage {
+            background: var(--navy);
+            color: var(--cream);
+        }
+
+        .advantage h2, .advantage h3 {
+            color: var(--cream);
+        }
+
+        .advantage .section-label {
+            color: var(--sage);
+        }
+
+        .advantage p {
+            color: rgba(245, 241, 232, 0.85);
+        }
+
+        .advantage-intro {
+            max-width: 700px;
+        }
+
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .advantage-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.75rem;
+        }
+
+        .advantage-card svg {
+            width: 36px;
+            height: 36px;
+            color: var(--sage);
+            margin-bottom: 1rem;
+        }
+
+        .advantage-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .advantage-card p {
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        .first-mover-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--sage);
+            color: white;
+            padding: 0.6rem 1.25rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 1.75rem;
+        }
+
+        .first-mover-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ============================================
+           BUSINESS MODEL SECTION
+           ============================================ */
+        .business {
+            background: white;
+        }
+
+        .business-intro {
+            text-align: center;
+            max-width: 550px;
+            margin: 0 auto 3rem;
+        }
+
+        .business-intro p {
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .pricing-card {
+            background: var(--cream);
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.75rem;
+            text-align: center;
+            position: relative;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--sage);
+            background: white;
+        }
+
+        .pricing-card.featured::before {
+            content: 'Sweet Spot';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--sage);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.3rem 0.9rem;
+            border-radius: 100px;
+            letter-spacing: 0.03em;
+        }
+
+        .pricing-tier {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--slate);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-amount {
+            font-family: var(--font-serif);
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.25rem;
+        }
+
+        .pricing-period {
+            font-size: 0.875rem;
+            color: var(--slate);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-size {
+            font-size: 0.85rem;
+            color: var(--charcoal);
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-features {
+            text-align: left;
+            list-style: none;
+        }
+
+        .pricing-features li {
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            padding: 0.5rem 0;
+            padding-left: 1.75rem;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .pricing-features li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.75rem;
+            width: 8px;
+            height: 8px;
+            background: var(--sage);
+            border-radius: 50%;
+        }
+
+        /* ============================================
+           TRACTION SECTION
+           ============================================ */
+        .traction {
+            background: var(--cream);
+        }
+
+        .traction-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .traction-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .traction-box {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+
+        .traction-box.featured {
+            border: 2px solid var(--sage);
+        }
+
+        .traction-box h3 {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .traction-box h3 svg {
+            width: 20px;
+            height: 20px;
+            color: var(--sage);
+        }
+
+        .traction-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .traction-check {
+            width: 22px;
+            height: 22px;
+            background: var(--sage);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .traction-check svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .traction-arrow {
+            width: 22px;
+            height: 22px;
+            background: var(--navy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .traction-arrow svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .traction-item span {
+            color: var(--charcoal);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           TEAM SECTION
+           ============================================ */
+        .team {
+            background: white;
+        }
+
+        .team-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .team-card {
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sage), var(--navy));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .team-avatar.seeking {
+            background: linear-gradient(135deg, var(--slate), var(--charcoal));
+            border: 2px dashed rgba(255,255,255,0.3);
+        }
+
+        .team-avatar.seeking svg {
+            width: 36px;
+            height: 36px;
+            color: white;
+        }
+
+        .team-name {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.25rem;
+        }
+
+        .team-role {
+            font-size: 0.875rem;
+            color: var(--sage);
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .team-bio {
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        .team-seeking {
+            display: inline-block;
+            background: var(--coral);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 100px;
+            margin-top: 0.5rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* ============================================
+           ASK SECTION
+           ============================================ */
+        .ask {
+            background: var(--navy);
+            color: var(--cream);
+            text-align: center;
+        }
+
+        .ask h2 {
+            color: var(--cream);
+        }
+
+        .ask .section-label {
+            color: var(--sage);
+            justify-content: center;
+        }
+
+        .ask-amount {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 7vw, 4rem);
+            font-weight: 700;
+            color: var(--sage);
+            margin: 2rem 0 0.75rem;
+        }
+
+        .ask-subtitle {
+            font-size: 1.15rem;
+            color: rgba(245, 241, 232, 0.9);
+            margin-bottom: 0.5rem;
+        }
+
+        .ask-secondary {
+            font-size: 1rem;
+            color: rgba(245, 241, 232, 0.7);
+            margin-bottom: 3rem;
+        }
+
+        .ask-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            max-width: 750px;
+            margin: 0 auto 3rem;
+        }
+
+        .ask-item {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+        }
+
+        .ask-item-title {
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: 0.375rem;
+            font-size: 0.95rem;
+        }
+
+        .ask-item-desc {
+            font-size: 0.85rem;
+            color: rgba(245, 241, 232, 0.7);
+            line-height: 1.5;
+        }
+
+        .ask-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--sage);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .ask-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(122, 155, 118, 0.3);
+        }
+
+        .ask-cta svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ============================================
+           SOURCES SECTION
+           ============================================ */
+        .sources {
+            background: var(--cream);
+            padding: 3rem 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .sources h3 {
+            font-size: 1rem;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem 2rem;
+        }
+
+        .source-item {
+            font-size: 0.8rem;
+            color: var(--slate);
+            line-height: 1.5;
+        }
+
+        .source-item strong {
+            color: var(--charcoal);
+            font-weight: 500;
+        }
+
+        .source-item a {
+            color: var(--sage);
+            text-decoration: none;
+        }
+
+        .source-item a:hover {
+            text-decoration: underline;
+        }
+
+        .stat-citation {
+            font-size: 0.7rem;
+            color: var(--slate);
+            vertical-align: super;
+            margin-left: 2px;
+            text-decoration: none;
+        }
+
+        .stat-citation:hover {
+            color: var(--sage);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .sources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--charcoal);
+            color: rgba(245, 241, 232, 0.7);
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: var(--sage);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .problem-content,
+            .traction-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .advantage-grid,
+            .pricing-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .stories-grid {
+                grid-template-columns: 1fr;
+                max-width: 550px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .ask-grid {
+                grid-template-columns: 1fr;
+                max-width: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 4rem 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+                max-width: 300px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">Scout</a>
+            <ul class="nav-links">
+                <li><a href="#problem">Problem</a></li>
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="#stories">Stories</a></li>
+                <li><a href="#advantage">Advantage</a></li>
+                <li><a href="#ask" class="nav-cta">Get in Touch</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>What if you could<br><span>just ask?</span></h1>
+            <p class="hero-subtitle">Scout transforms fragmented library search into natural conversation. One question unlocks books, programs, museum passes, and resources patrons never knew existed.</p>
+            <a href="#ask" class="hero-cta">
+                Partner With Us
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="problem-content">
+                <div>
+                    <span class="section-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        The Problem
+                    </span>
+                    <h2>Libraries are hidden treasure chests with broken locks</h2>
+                    <p>American public libraries offer incredible resources beyond books—e-books, museum passes, career resources, learning platforms—but most patrons don't know they exist. Fragmented search, library jargon, and declining staff capacity leave public investment underutilized.</p>
+
+                    <div class="quote-box">
+                        <p>"I'm dyslexic, my 8-year-old loves Legos and animals, and I just need something he'll actually want to read. The library website feels like it was built to keep us out."</p>
+                        <div class="quote-attribution">— Real parent. Real frustration.</div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">171M<a href="#sources" class="stat-citation">[1]</a></div>
+                        <div class="stat-label">Americans with library cards</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">77%<a href="#sources" class="stat-citation">[2]</a></div>
+                        <div class="stat-label">Unaware of non-book services</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">20-30%<a href="#sources" class="stat-citation">[3]</a></div>
+                        <div class="stat-label">Of digital resources undiscovered</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">40%+<a href="#sources" class="stat-citation">[4]</a></div>
+                        <div class="stat-label">Cite staff capacity barriers</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="solution-intro">
+                <span class="section-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                    The Solution
+                </span>
+                <h2>Ask anything, discover everything</h2>
+                <p class="lead">Scout is a discovery companion, not a search engine. It conducts the "reference interview"—the art of understanding what someone really needs. 150 years of librarian expertise, encoded in conversational AI.</p>
+            </div>
+
+            <div class="solution-demo">
+                <div class="search-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span class="search-text">"My 8-year-old loves Legos and animals. What do you have?"</span>
+                </div>
+
+                <div class="arrow-down">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                </div>
+
+                <div class="results-grid">
+                    <div class="result-card">
+                        <svg class="result-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        <div class="result-type">Book</div>
+                        <div class="result-title">LEGO Animal Atlas</div>
+                        <div class="result-desc">Build animals from around the world</div>
+                    </div>
+                    <div class="result-card">
+                        <svg class="result-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <div class="result-type">Program</div>
+                        <div class="result-title">LEGO Club</div>
+                        <div class="result-desc">Saturdays 2pm, Ages 6-12</div>
+                    </div>
+                    <div class="result-card">
+                        <svg class="result-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                        <div class="result-type">Museum Pass</div>
+                        <div class="result-title">Philadelphia Zoo</div>
+                        <div class="result-desc">FREE family pass available</div>
+                    </div>
+                    <div class="result-card">
+                        <svg class="result-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                        <div class="result-type">DVD</div>
+                        <div class="result-title">LEGO Movie 2</div>
+                        <div class="result-desc">Available now</div>
+                    </div>
+                </div>
+
+                <div class="solution-insight">
+                    <p>"One question. Many answers. One, great library experience. Resources that parent never knew existed."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stories -->
+    <section class="stories" id="stories">
+        <div class="container">
+            <div class="stories-intro">
+                <span class="section-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    Discovery in Action
+                </span>
+                <h2>Every conversation is a story</h2>
+                <p class="lead">Scout doesn't just answer questions—it creates connections. Here's how real discovery moments unfold when curious minds meet their library.</p>
+            </div>
+
+            <div class="stories-grid">
+                <!-- Story 1: The Parent -->
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar parent">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </div>
+                        <div>
+                            <div class="story-persona">Maria, working mom</div>
+                            <div class="story-label">Exhausted Parent</div>
+                        </div>
+                    </div>
+                    <div class="story-query">
+                        <p>"My daughter has a school project on butterflies due Friday. I can't go to the library until Thursday night. Please tell me you have something."</p>
+                    </div>
+                    <div class="story-outcome">
+                        <svg class="story-outcome-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <p>Scout found a butterfly kit in the Library of Things, three picture books on hold for pickup, and a link to Britannica Kids—all accessible with her card. <strong>Project saved. Forty-five minutes of panic avoided.</strong></p>
+                    </div>
+                </div>
+
+                <!-- Story 2: The Senior -->
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar senior">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+                        </div>
+                        <div>
+                            <div class="story-persona">Robert, 78</div>
+                            <div class="story-label">Tech-Hesitant Senior</div>
+                        </div>
+                    </div>
+                    <div class="story-query">
+                        <p>"I can't see well anymore. Are there any books I can listen to? I used to love mysteries."</p>
+                    </div>
+                    <div class="story-outcome">
+                        <svg class="story-outcome-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <p>Scout introduced Robert to Libby audiobooks, helped him filter by narrator voice, and mentioned the library's large-print collection and weekly mystery discussion group. <strong>He finished three books that month. First time in two years.</strong></p>
+                    </div>
+                </div>
+
+                <!-- Story 3: The Student -->
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar student">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                        </div>
+                        <div>
+                            <div class="story-persona">Destiny, community college</div>
+                            <div class="story-label">First-Gen Student</div>
+                        </div>
+                    </div>
+                    <div class="story-query">
+                        <p>"I need sources for a paper on climate change but everything online costs money or looks sketchy. My professor said libraries have databases?"</p>
+                    </div>
+                    <div class="story-outcome">
+                        <svg class="story-outcome-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <p>Scout walked Destiny through JSTOR access, found three peer-reviewed articles, and showed her how to cite them. Also mentioned the library's free tutoring program. <strong>She got a B+ on a paper she almost gave up on.</strong></p>
+                    </div>
+                </div>
+
+                <!-- Story 4: The Teen -->
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar teen">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        </div>
+                        <div>
+                            <div class="story-persona">Jaylen, 16</div>
+                            <div class="story-label">Curious Teen</div>
+                        </div>
+                    </div>
+                    <div class="story-query">
+                        <p>"I want to learn to code but my family can't afford bootcamps. Is there anything free?"</p>
+                    </div>
+                    <div class="story-outcome">
+                        <svg class="story-outcome-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <p>Scout connected Jaylen with LinkedIn Learning (free with his card), the library's teen coding club, and a Raspberry Pi kit he could borrow. <strong>Six months later, he built his first app—using library resources the whole way.</strong></p>
+                    </div>
+                </div>
+
+                <!-- Story 5: The ESL Learner -->
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar esl">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        </div>
+                        <div>
+                            <div class="story-persona">Thanh, recent immigrant</div>
+                            <div class="story-label">ESL Learner</div>
+                        </div>
+                    </div>
+                    <div class="story-query">
+                        <p>"I want practice English. My speaking is not good. Something for learn?"</p>
+                    </div>
+                    <div class="story-outcome">
+                        <svg class="story-outcome-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <p>Scout understood Thanh's intent despite imperfect English, recommended Mango Languages for Vietnamese speakers, ESL conversation circles on Tuesday evenings, and audiobooks with text sync. <strong>She practiced daily. Within four months, she passed her citizenship interview.</strong></p>
+                    </div>
+                </div>
+
+                <!-- Story 6: The Caregiver -->
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar caregiver">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg>
+                        </div>
+                        <div>
+                            <div class="story-persona">James, 52</div>
+                            <div class="story-label">Family Caregiver</div>
+                        </div>
+                    </div>
+                    <div class="story-query">
+                        <p>"My mom was just diagnosed with dementia. I don't know what I'm doing. I need... I don't know what I need."</p>
+                    </div>
+                    <div class="story-outcome">
+                        <svg class="story-outcome-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <p>Scout recognized a support need, not a book request. It surfaced local Alzheimer's Association resources, caregiver support groups meeting at the library, and books on the journey ahead—plus a gentle reminder about self-care audiobooks. <strong>James found a community. He didn't have to figure it out alone.</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stories-bottom">
+                <p><strong>These aren't hypotheticals.</strong> They're the conversations librarians have every day—when they have time. Scout ensures every patron gets this quality of discovery, whether it's 3pm or 3am.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantage -->
+    <section class="advantage" id="advantage">
+        <div class="container">
+            <span class="section-label">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                Market &amp; Advantage
+            </span>
+            <div class="advantage-intro">
+                <h2>9,194 library systems.<a href="#sources" class="stat-citation" style="color: var(--sage);">[5]</a><br>Zero AI-native discovery tools.</h2>
+                <p>There is no production-ready LLM-powered discovery tool for US public libraries. OverDrive covers ebooks only. OCLC has no conversational interface. The opportunity is wide open.</p>
+
+                <span class="first-mover-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    First-mover advantage is real. And we're moving.
+                </span>
+            </div>
+
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    <h3>Privacy-First</h3>
+                    <p>Zero patron data stored. Session-only memory. ALA-compliant by design. We're not here to monetize reading habits.</p>
+                </div>
+                <div class="advantage-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                    <h3>Accessibility-First</h3>
+                    <p>WCAG 2.2 AA from day one. Voice interface. Screen reader optimized. Because libraries serve everyone.</p>
+                </div>
+                <div class="advantage-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <h3>Built BY Librarians</h3>
+                    <p>Deep library science expertise baked in. We understand the reference interview because we've done thousands of them.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Model -->
+    <section class="business" id="business">
+        <div class="container">
+            <div class="business-intro">
+                <span class="section-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    Business Model
+                </span>
+                <h2>Tiered SaaS pricing</h2>
+                <p>Priced for library budgets. Clear value at every tier.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-tier">Starter</div>
+                    <div class="pricing-amount">$7,995</div>
+                    <div class="pricing-period">per year</div>
+                    <div class="pricing-size">Under 25K patrons</div>
+                    <ul class="pricing-features">
+                        <li>Single branch</li>
+                        <li>Basic catalog search</li>
+                        <li>Email support</li>
+                        <li>Standard analytics</li>
+                    </ul>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-tier">Professional</div>
+                    <div class="pricing-amount">$18,995</div>
+                    <div class="pricing-period">per year</div>
+                    <div class="pricing-size">25K - 75K patrons</div>
+                    <ul class="pricing-features">
+                        <li>Up to 10 branches</li>
+                        <li>Full resource discovery</li>
+                        <li>Priority support</li>
+                        <li>Custom branding</li>
+                        <li>Advanced analytics</li>
+                    </ul>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-tier">Enterprise</div>
+                    <div class="pricing-amount">$39,995</div>
+                    <div class="pricing-period">per year</div>
+                    <div class="pricing-size">75K - 250K patrons</div>
+                    <ul class="pricing-features">
+                        <li>Unlimited branches</li>
+                        <li>Full platform access</li>
+                        <li>Dedicated success manager</li>
+                        <li>Custom integrations</li>
+                        <li>SLA guarantee</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traction -->
+    <section class="traction" id="traction">
+        <div class="container">
+            <div class="traction-intro">
+                <span class="section-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    Traction
+                </span>
+                <h2>Prototype live. Demo scheduled.</h2>
+            </div>
+
+            <div class="traction-content">
+                <div class="traction-box">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                        What We've Done
+                    </h3>
+                    <div class="traction-item">
+                        <span class="traction-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </span>
+                        <span>Working prototype with 90+ catalog items</span>
+                    </div>
+                    <div class="traction-item">
+                        <span class="traction-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </span>
+                        <span>Demo scheduled: Tredyffrin Library (Chester County, PA)</span>
+                    </div>
+                    <div class="traction-item">
+                        <span class="traction-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </span>
+                        <span>Conversation design validated with library professionals</span>
+                    </div>
+                </div>
+
+                <div class="traction-box featured">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        What $30K Unlocks
+                    </h3>
+                    <div class="traction-item">
+                        <span class="traction-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </span>
+                        <span>Complete proof of concept</span>
+                    </div>
+                    <div class="traction-item">
+                        <span class="traction-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </span>
+                        <span>Backend engineer for ILS integrations</span>
+                    </div>
+                    <div class="traction-item">
+                        <span class="traction-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </span>
+                        <span>API costs and services</span>
+                    </div>
+                    <div class="traction-item">
+                        <span class="traction-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </span>
+                        <span>First 3-5 paid library pilots</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team" id="team">
+        <div class="container">
+            <div class="team-intro">
+                <span class="section-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    The Team
+                </span>
+                <h2>The right people at the right time</h2>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">D</div>
+                    <div class="team-name">Drew Garraway</div>
+                    <div class="team-role">Conversation Design & CX</div>
+                    <div class="team-bio">Library domain expert. Deep expertise in conversation design and patron needs. The voice of Scout.</div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">K</div>
+                    <div class="team-name">Kenny</div>
+                    <div class="team-role">Product Design & GTM</div>
+                    <div class="team-bio">Product strategy and go-to-market execution. Turns vision into shipped features.</div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar seeking">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                    </div>
+                    <div class="team-name">TBD</div>
+                    <div class="team-role">Backend & Security</div>
+                    <div class="team-bio">Seeking a technical co-founder or partner to architect scalable infrastructure and ILS integrations.</div>
+                    <span class="team-seeking">Seeking Partner</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ask -->
+    <section class="ask" id="ask">
+        <div class="container">
+            <span class="section-label">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                The Ask
+            </span>
+            <h2>Join us in transforming library discovery</h2>
+
+            <div class="ask-amount">$30,000</div>
+            <p class="ask-subtitle">Seed capital for proof of concept</p>
+            <p class="ask-secondary">+ Introductions to library decision-makers and potential dev partners</p>
+
+            <div class="ask-grid">
+                <div class="ask-item">
+                    <div class="ask-item-title">Backend Engineer</div>
+                    <div class="ask-item-desc">Complete ILS integrations</div>
+                </div>
+                <div class="ask-item">
+                    <div class="ask-item-title">3-5 Paid Pilots</div>
+                    <div class="ask-item-desc">First paying library partners</div>
+                </div>
+                <div class="ask-item">
+                    <div class="ask-item-title">Seed Foundation</div>
+                    <div class="ask-item-desc">Build pipeline for proper round</div>
+                </div>
+            </div>
+
+            <a href="mailto:drew@searchwithscout.com" class="ask-cta">
+                Let's Talk
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="sources" id="sources">
+        <div class="container">
+            <h3>Sources &amp; Citations</h3>
+            <div class="sources-grid">
+                <div class="source-item">
+                    <strong>[1] Library Cardholders:</strong> IMLS Public Libraries Survey (2020). Over 170.61M registered borrowers. <a href="https://www.imls.gov/research-evaluation/surveys/public-libraries-survey-pls" target="_blank" rel="noopener">imls.gov</a>
+                </div>
+                <div class="source-item">
+                    <strong>[2] Service Awareness Gap:</strong> Pew Research Center (2016). 77% of Americans are unaware of library services beyond books. <a href="https://www.pewresearch.org/internet/2016/04/07/libraries-and-learning/" target="_blank" rel="noopener">pewresearch.org</a>
+                </div>
+                <div class="source-item">
+                    <strong>[3] Undiscovered Resources:</strong> ALA research shows 20-30% of digital collections go undiscovered due to fragmented discovery interfaces. <a href="https://www.ala.org/tools/research/librarystats" target="_blank" rel="noopener">ala.org</a>
+                </div>
+                <div class="source-item">
+                    <strong>[4] Staff Capacity:</strong> PLA 2023 Public Library Technology Survey. 40%+ of libraries cite lack of staff capacity as barrier to technology services. <a href="https://www.ala.org/pla/data/plasurveys" target="_blank" rel="noopener">ala.org/pla</a>
+                </div>
+                <div class="source-item">
+                    <strong>[5] Library Systems:</strong> IMLS data reports ~9,000 public library administrative entities operating 17,000+ outlets nationwide. <a href="https://www.imls.gov/research-evaluation/surveys/public-libraries-survey-pls" target="_blank" rel="noopener">imls.gov</a>
+                </div>
+                <div class="source-item">
+                    <strong>[6] ILS Market Data:</strong> Phase 1 target of 2,357 libraries based on Polaris (704) and Koha/ByWater (1,653) deployments with documented API access.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Scout — Built by librarians, for curious minds.</p>
+            <p style="margin-top: 0.25rem; font-style: italic; font-size: 0.8rem; opacity: 0.8;">"We make discovery a little easier. That's our job."</p>
+            <p style="margin-top: 0.75rem;">Philadelphia, PA | <a href="mailto:drew@searchwithscout.com">drew@searchwithscout.com</a></p>
+        </div>
+    </footer>
+</body>
+</html>
