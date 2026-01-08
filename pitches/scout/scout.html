@@ -41,7 +41,7 @@
             --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
 
             /* Spacing */
-            --section-padding: 6rem 1.5rem;
+            --section-padding: 4.5rem 1.5rem;
             --container-max: 1100px;
 
             /* Radius */
@@ -213,7 +213,7 @@
            HERO SECTION
            ============================================ */
         .hero {
-            min-height: 100vh;
+            min-height: 70vh;
             display: flex;
             align-items: center;
             padding-top: 5rem;
@@ -255,6 +255,74 @@
         .hero-cta:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
+        }
+
+        /* ============================================
+           DEMO SECTION
+           ============================================ */
+        .demo {
+            background: linear-gradient(135deg, var(--navy-light) 0%, #162a42 100%);
+            padding: 4rem 1.5rem;
+            text-align: center;
+        }
+
+        .demo-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .demo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(143, 184, 138, 0.15);
+            border: 1px solid rgba(143, 184, 138, 0.3);
+            color: var(--sage);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .demo h2 {
+            color: var(--cream);
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .demo-text {
+            color: rgba(245, 241, 232, 0.8);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .demo-cta {
+            display: inline-block;
+            background: var(--sage);
+            color: #0a0f16;
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .demo-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(143, 184, 138, 0.35);
         }
 
         /* ============================================
@@ -1143,7 +1211,7 @@
             }
 
             section {
-                padding: 3.5rem 1rem;
+                padding: 3rem 1rem;
             }
 
             .container {
@@ -1157,7 +1225,7 @@
             /* Hero responsive */
             .hero {
                 min-height: auto;
-                padding: 6rem 1rem 4rem;
+                padding: 5rem 1rem 3rem;
             }
 
             .hero h1 {
@@ -1171,6 +1239,24 @@
 
             .hero-cta {
                 padding: 0.875rem 1.75rem;
+                font-size: 0.95rem;
+            }
+
+            /* Demo responsive */
+            .demo {
+                padding: 3rem 1rem;
+            }
+
+            .demo h2 {
+                font-size: 1.5rem;
+            }
+
+            .demo-text {
+                font-size: 0.95rem;
+            }
+
+            .demo-cta {
+                padding: 0.875rem 2rem;
                 font-size: 0.95rem;
             }
 
@@ -1333,6 +1419,19 @@
             <h1>What if you could<br><span>just ask?</span></h1>
             <p class="hero-subtitle">Scout transforms fragmented library search into natural conversation. One question unlocks books, programs, museum passes, and resources patrons never knew existed.</p>
             <a href="#ask" class="hero-cta">Partner With Us</a>
+        </div>
+    </section>
+
+    <!-- Demo -->
+    <section class="demo" id="demo">
+        <div class="demo-content">
+            <span class="demo-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                Live Demo
+            </span>
+            <h2>See Scout in action</h2>
+            <p class="demo-text">Experience how natural conversation transforms library discovery. Ask Scout anything—from book recommendations to museum passes—and watch it surface resources you never knew existed.</p>
+            <a href="https://searchwithscout.com/" target="_blank" class="demo-cta">Try the Demo</a>
         </div>
     </section>
 
