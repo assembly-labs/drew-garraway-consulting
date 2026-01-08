@@ -267,14 +267,32 @@
         }
 
         .demo-content {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
         }
 
-        .demo h2 {
+        .demo-tagline {
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-tagline .tagline-top {
+            display: block;
+            font-family: var(--font-serif);
+            font-size: 2.25rem;
+            font-weight: 700;
             color: var(--cream);
-            font-size: 1.75rem;
-            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .demo-tagline .tagline-bottom {
+            display: block;
+            font-family: var(--font-serif);
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--sage);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
         }
 
         .demo-text {
@@ -475,24 +493,6 @@
             color: var(--slate);
             line-height: 1.5;
         }
-
-        .solution-insight {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2.5rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .solution-insight p {
-            margin: 0 auto;
-            font-family: var(--font-serif);
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--foreground);
-            line-height: 1.4;
-            letter-spacing: -0.01em;
-        }
-
         /* ============================================
            STORIES SECTION
            ============================================ */
@@ -1230,8 +1230,9 @@
                 padding: 3rem 1rem;
             }
 
-            .demo h2 {
-                font-size: 1.5rem;
+            .demo-tagline .tagline-top,
+            .demo-tagline .tagline-bottom {
+                font-size: 1.75rem;
             }
 
             .demo-text {
@@ -1494,9 +1495,6 @@
                     </div>
                 </div>
 
-                <div class="solution-insight">
-                    <p>One question. Many answers. A better library experience.</p>
-                </div>
             </div>
         </div>
     </section>
@@ -1876,7 +1874,10 @@
     <!-- Demo -->
     <section class="demo" id="demo">
         <div class="demo-content">
-            <h2>See Scout in action</h2>
+            <div class="demo-tagline">
+                <span class="tagline-top">One question. Many answers.</span>
+                <span class="tagline-bottom">A better library experience.</span>
+            </div>
             <p class="demo-text">Experience how natural conversation transforms library discovery. Ask anything and watch Scout surface resources you never knew existed.</p>
             <a href="https://searchwithscout.com/" target="_blank" class="demo-cta">Try the Demo</a>
         </div>
