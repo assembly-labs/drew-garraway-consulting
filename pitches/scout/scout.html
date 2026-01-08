@@ -241,9 +241,7 @@
         }
 
         .hero-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
+            display: inline-block;
             background: var(--sage);
             color: #0a0f16;
             padding: 1rem 2rem;
@@ -257,11 +255,6 @@
         .hero-cta:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
-        }
-
-        .hero-cta svg {
-            width: 20px;
-            height: 20px;
         }
 
         /* ============================================
@@ -1011,11 +1004,9 @@
         }
 
         .ask-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
+            display: inline-block;
             background: var(--sage);
-            color: white;
+            color: #0a0f16;
             padding: 1rem 2.5rem;
             border-radius: var(--radius);
             text-decoration: none;
@@ -1026,12 +1017,7 @@
 
         .ask-cta:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(122, 155, 118, 0.3);
-        }
-
-        .ask-cta svg {
-            width: 20px;
-            height: 20px;
+            box-shadow: 0 10px 20px rgba(143, 184, 138, 0.3);
         }
 
         /* ============================================
@@ -1157,22 +1143,171 @@
             }
 
             section {
-                padding: 4rem 1rem;
+                padding: 3.5rem 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
             }
 
             .nav-links {
                 display: none;
             }
 
+            /* Hero responsive */
+            .hero {
+                min-height: auto;
+                padding: 6rem 1rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero-cta {
+                padding: 0.875rem 1.75rem;
+                font-size: 0.95rem;
+            }
+
+            /* Stats grid responsive */
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.75rem;
+            }
+
+            .stat-label {
+                font-size: 0.8rem;
+            }
+
+            /* Results grid responsive */
+            .results-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem;
+            }
+
+            .result-card {
+                padding: 1rem;
+            }
+
+            .result-icon {
+                width: 36px;
+                height: 36px;
+                margin-bottom: 0.75rem;
+            }
+
+            .result-title {
+                font-size: 0.9rem;
+            }
+
+            .result-desc {
+                font-size: 0.75rem;
+            }
+
+            /* Story cards responsive */
+            .story-card {
+                padding: 1.5rem;
+            }
+
+            .story-avatar {
+                width: 44px;
+                height: 44px;
+            }
+
+            .story-avatar svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            /* Pricing cards responsive */
+            .pricing-card {
+                padding: 1.5rem;
+            }
+
+            .pricing-amount {
+                font-size: 1.75rem;
+            }
+
+            /* Traction boxes responsive */
+            .traction-box {
+                padding: 1.5rem;
+            }
+
+            /* Team cards responsive */
+            .team-avatar {
+                width: 70px;
+                height: 70px;
+                font-size: 1.5rem;
+            }
+
+            /* Ask section responsive */
+            .ask-amount {
+                font-size: 2.5rem;
+            }
+
+            .ask-cta {
+                padding: 0.875rem 2rem;
+                font-size: 0.95rem;
+            }
+
+            /* Sources responsive */
+            .sources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .source-item {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html {
+                font-size: 15px;
+            }
+
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
             }
 
             .results-grid {
                 grid-template-columns: 1fr;
-                max-width: 300px;
+                max-width: 280px;
                 margin-left: auto;
                 margin-right: auto;
+            }
+
+            .advantage-card,
+            .pricing-card,
+            .traction-box {
+                padding: 1.25rem;
+            }
+
+            .search-box {
+                padding: 1rem;
+            }
+
+            .search-text {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -1197,10 +1332,7 @@
         <div class="container">
             <h1>What if you could<br><span>just ask?</span></h1>
             <p class="hero-subtitle">Scout transforms fragmented library search into natural conversation. One question unlocks books, programs, museum passes, and resources patrons never knew existed.</p>
-            <a href="#ask" class="hero-cta">
-                Partner With Us
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
+            <a href="#ask" class="hero-cta">Partner With Us</a>
         </div>
     </section>
 
@@ -1668,10 +1800,7 @@
                 </div>
             </div>
 
-            <a href="mailto:drew@searchwithscout.com" class="ask-cta">
-                Let's Talk
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
+            <a href="mailto:drew@searchwithscout.com" class="ask-cta">Let's Talk</a>
         </div>
     </section>
 
