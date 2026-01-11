@@ -3,7 +3,7 @@
  * Academy info, rosters, and owner dashboard data
  */
 
-import type { BeltColor } from '../types/database';
+import type { BeltColor } from '../../types/database';
 
 export interface Gym {
   id: string;

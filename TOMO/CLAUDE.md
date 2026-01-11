@@ -109,7 +109,7 @@ const { profile, dashboard, chatbot, videoTutorials, analyzeJournal } = useBeltP
 3. **Dashboard metrics** - Use `dashboard.primaryMetric`, `dashboard.insightFocus`
 4. **Post-session messages** - Use `sessionLogger.postSessionMessage`
 
-See `/BELT_PERSONALIZATION_SYSTEM.md` for full documentation.
+See `/docs/product/BELT_PERSONALIZATION_SYSTEM.md` for full documentation.
 
 ---
 
@@ -120,68 +120,47 @@ See `/BELT_PERSONALIZATION_SYSTEM.md` for full documentation.
 ├── components/
 │   ├── features/          # Feature components (screens)
 │   │   ├── Dashboard.tsx
-│   │   ├── SessionLogger.tsx    # Unified voice/text logging
-│   │   ├── VoiceLogger.tsx
-│   │   ├── TextLogger.tsx       # Type-to-log alternative
+│   │   ├── SessionLogger.tsx    # Primary logger (wraps VoiceFirstLogger)
+│   │   ├── VoiceFirstLogger.tsx # Active voice logging implementation
 │   │   ├── SessionHistory.tsx
 │   │   ├── SessionDetail.tsx
-│   │   ├── SessionCard.tsx
 │   │   ├── BeltProgress.tsx
 │   │   ├── TechniqueLibrary.tsx
 │   │   ├── ProfileScreen.tsx
-│   │   ├── ProfileNudge.tsx     # Progressive profiling
-│   │   ├── Onboarding.tsx
-│   │   ├── EditSheet.tsx        # Reusable bottom sheet
-│   │   ├── EditSections.tsx     # Section-specific editors
-│   │   └── Settings.tsx         # App settings screen
+│   │   ├── Settings.tsx
+│   │   └── _archived/     # Unused alternative loggers
 │   ├── layout/            # Layout components
 │   │   ├── Header.tsx
 │   │   └── TabBar.tsx
 │   └── ui/                # Reusable UI primitives
-│       ├── index.ts       # Central exports for all UI components
-│       ├── BeltBadge.tsx  # Belt color with stripes
-│       ├── StatCard.tsx   # Metric display card
-│       ├── ProgressRing.tsx # Circular progress indicator
-│       ├── TrainingBadge.tsx # Training type badge (gi/nogi)
-│       ├── ErrorState.tsx # Error state displays
-│       ├── EmptyState.tsx # Empty state displays
-│       ├── NotFound.tsx   # 404 fallback screen
-│       ├── Skeleton.tsx   # Loading skeleton components
-│       ├── Toast.tsx      # Toast notification system
-│       └── Icons.tsx      # Icon components
+│       ├── Icons.tsx      # 95+ SVG icons
+│       ├── StatCard.tsx, BeltBadge.tsx, ProgressRing.tsx
+│       ├── ErrorState.tsx, EmptyState.tsx, Skeleton.tsx
+│       └── Toast.tsx, NotFound.tsx
 ├── config/
-│   ├── app.ts             # App config, feature flags, API settings
-│   └── belt-system/       # Belt personalization engine (IMPORTANT)
-│       ├── index.ts       # Central exports
-│       ├── types.ts       # Type definitions
-│       ├── belt-profiles.ts    # Psychology profiles per belt
-│       ├── feature-adaptations.ts  # How features adapt by belt
-│       ├── risk-signals.ts     # Dropout risk detection
-│       └── journal-patterns.ts # Journal text analysis
+│   ├── app.ts             # App config, feature flags
+│   └── belt-system/       # Belt personalization engine
 ├── hooks/
-│   ├── index.ts           # Hook exports
-│   └── useBeltPersonalization.ts  # Belt personalization React hook
+│   └── useBeltPersonalization.ts
 ├── context/
-│   └── UserProfileContext.tsx   # Profile state + progressive profiling
-├── data/                  # Mock data (FPO content)
-│   ├── techniques.ts      # 50 techniques with full details
-│   ├── progress.ts        # Belt requirements, milestones
-│   ├── journal.ts         # Session entries
-│   ├── users.ts           # User profiles
-│   └── belt-criteria.ts   # IBJJF requirements
-├── services/              # API abstraction layer (Supabase-ready)
-│   ├── index.ts           # Service exports
-│   ├── api.ts             # Profile, Sessions, TechniqueProgress CRUD
-│   └── auth.ts            # Authentication service (mock for prototype)
-├── types/                 # TypeScript type definitions
-│   ├── index.ts           # Type exports
-│   ├── database.ts        # Supabase schema types (Profile, Session, etc.)
-│   ├── auth.ts            # Authentication types
-│   └── journal.ts         # Legacy journal types
-├── utils/                 # Utility functions
-│   └── index.ts           # Date, color, validation, accessibility helpers
-├── App.tsx                # Main app with routing
-└── index.css              # Design system CSS variables
+│   └── UserProfileContext.tsx
+├── data/                  # Mock data
+│   ├── techniques.ts, progress.ts, journal.ts, users.ts
+│   └── _inactive/         # Spec files not yet integrated
+├── services/              # API abstraction (Supabase-ready)
+├── types/                 # TypeScript definitions
+├── utils/                 # Helper functions
+├── App.tsx
+└── index.css              # Design system CSS
+
+/docs/                     # All documentation
+├── design-system/         # Source of truth for UI
+├── product/               # Feature specs, belt personalization
+├── project/               # Status, feature tracker
+├── deployment/            # iOS plans, GTM
+├── personas/              # User profiles
+├── research/              # Market research
+└── brand/                 # Voice guidelines
 ```
 
 ## Brand Voice: "The Dedicated Training Partner"
@@ -206,7 +185,7 @@ Our app speaks like a knowledgeable, warm, and grounded training partner:
 
 > **CRITICAL: Source of Truth**
 >
-> The authoritative design system lives in `/internal-docs/design-system/`. All UI decisions MUST reference these files:
+> The authoritative design system lives in `/docs/design-system/`. All UI decisions MUST reference these files:
 >
 > | File | Purpose |
 > |------|---------|
@@ -217,8 +196,8 @@ Our app speaks like a knowledgeable, warm, and grounded training partner:
 > | `typography.html` | Typography demonstrations |
 >
 > **When making UI changes, Claude MUST:**
-> 1. Reference `/internal-docs/design-system/tokens.md` for correct values
-> 2. Use existing CSS classes from `/internal-docs/design-system/styles.css`
+> 1. Reference `/docs/design-system/tokens.md` for correct values
+> 2. Use existing CSS classes from `/docs/design-system/styles.css`
 > 3. Never invent new colors, spacing, or typography values
 
 ### Design Principles (Non-Negotiable)
@@ -234,7 +213,7 @@ Our app speaks like a knowledgeable, warm, and grounded training partner:
 
 ### Quick Token Reference
 
-See `/internal-docs/design-system/tokens.md` for complete reference. Key values:
+See `/docs/design-system/tokens.md` for complete reference. Key values:
 
 **Primary Colors:**
 - `--color-black`: `#111111` (background)
@@ -289,12 +268,12 @@ import { Icons } from '@/components/ui/Icons';
 <Icons.Trophy size={24} color="var(--color-gold)" />
 ```
 
-See `/internal-docs/design-system/icons.html` for the full 95+ icon library.
+See `/docs/design-system/icons.html` for the full 95+ icon library.
 
 ### Propagation: Design System → Code
 
 When the design system is updated:
-1. Update `/internal-docs/design-system/styles.css` first
+1. Update `/docs/design-system/styles.css` first
 2. Sync changes to `/prototype/src/index.css`
 3. Update `/prototype/src/config/design-tokens.ts` if tokens change
 4. This file (CLAUDE.md) reflects the summary, not the source
@@ -396,7 +375,7 @@ When editing saved sessions:
 
 ## User Personas
 
-> **Canonical Source:** `/internal-docs/personas/PERSONA_PROFILES.md`
+> **Canonical Source:** `/docs/personas/PERSONA_PROFILES.md`
 
 ### Primary Personas (6 Test Profiles)
 
@@ -450,7 +429,7 @@ When logging a session (immediately post-training):
 - Screen reader support
 
 ### Next Phase: iOS TestFlight
-See `/internal-docs/IOS_DEPLOYMENT_CHECKLIST.md` for full plan.
+See `/docs/IOS_DEPLOYMENT_CHECKLIST.md` for full plan.
 
 ## Development Guidelines
 
@@ -488,7 +467,7 @@ The prototype uses mock data throughout. Key mock files:
 
 ## Research Documents
 
-See `/internal-docs/research/USER_PERSONAS_AND_RESEARCH.md` for:
+See `/docs/research/USER_PERSONAS_AND_RESEARCH.md` for:
 - Detailed user personas
 - Market research data
 - BJJ demographic statistics
@@ -500,8 +479,8 @@ See `/internal-docs/research/USER_PERSONAS_AND_RESEARCH.md` for:
 ## iOS TestFlight Deployment
 
 ### Deployment Documents
-- **Full Plan:** `/internal-docs/IOS_TESTFLIGHT_DEPLOYMENT_PLAN.md`
-- **Checklist:** `/internal-docs/IOS_DEPLOYMENT_CHECKLIST.md`
+- **Full Plan:** `/docs/IOS_TESTFLIGHT_DEPLOYMENT_PLAN.md`
+- **Checklist:** `/docs/IOS_DEPLOYMENT_CHECKLIST.md`
 
 ### Technology Decisions
 | Layer | Technology | Status |

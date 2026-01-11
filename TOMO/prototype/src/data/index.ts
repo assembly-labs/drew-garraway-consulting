@@ -34,13 +34,12 @@ export * from './competitions';
 export * from './stats-modules';
 
 // ===========================================
-// INACTIVE EXPORTS (specs/planning, not in UI)
-// Uncomment when integrating these features
+// INACTIVE DATA (moved to _inactive/ folder)
 // ===========================================
+// - feedback.ts      - Coach feedback
+// - gym.ts           - Gym data
+// - media.ts         - Photos/videos
+// - legal.ts         - Legal docs
+// - payments.ts      - Monetization
 
-// export * from './feedback';      // Coach feedback - not yet integrated
-// export * from './belt-criteria'; // IBJJF requirements - reference only
-// export * from './gym';           // Gym data - not yet integrated
-// export * from './media';         // Photos/videos - not yet integrated
-// export * from './legal';         // Legal docs - not yet integrated
-// export * from './payments';      // Monetization - not yet integrated
+// Note: belt-criteria.ts stays in active folder (used by progress.ts)
