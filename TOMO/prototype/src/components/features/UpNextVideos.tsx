@@ -24,6 +24,113 @@ import { Icons } from '../ui/Icons';
 import type { TechniqueVideo } from '../../types/techniqueVideos';
 
 // ===========================================
+// YOUTUBE THUMBNAIL WITH FALLBACK CHAIN
+// ===========================================
+
+/**
+ * YouTube thumbnail URL patterns by quality:
+ * - maxresdefault.jpg (1280×720) - HD videos only
+ * - hqdefault.jpg (480×360) - Most videos
+ * - mqdefault.jpg (320×180) - Guaranteed to exist
+ */
+type ThumbnailQuality = 'maxresdefault' | 'hqdefault' | 'mqdefault';
+
+const THUMBNAIL_FALLBACK_CHAIN: ThumbnailQuality[] = [
+  'maxresdefault',
+  'hqdefault',
+  'mqdefault',
+];
+
+interface YouTubeThumbnailProps {
+  youtubeId: string;
+  alt: string;
+  style?: React.CSSProperties;
+  /** Instructor name for placeholder fallback */
+  instructor?: string;
+}
+
+function YouTubeThumbnail({ youtubeId, alt, style, instructor }: YouTubeThumbnailProps) {
+  const [qualityIndex, setQualityIndex] = useState(0);
+  const [showPlaceholder, setShowPlaceholder] = useState(false);
+
+  // Reset state when youtubeId changes
+  useEffect(() => {
+    setQualityIndex(0);
+    setShowPlaceholder(false);
+  }, [youtubeId]);
+
+  const currentQuality = THUMBNAIL_FALLBACK_CHAIN[qualityIndex];
+  const thumbnailUrl = `https://img.youtube.com/vi/${youtubeId}/${currentQuality}.jpg`;
+
+  const handleError = useCallback(() => {
+    const nextIndex = qualityIndex + 1;
+    if (nextIndex < THUMBNAIL_FALLBACK_CHAIN.length) {
+      // Try next quality level
+      setQualityIndex(nextIndex);
+    } else {
+      // All YouTube options exhausted, show CSS placeholder
+      setShowPlaceholder(true);
+    }
+  }, [qualityIndex]);
+
+  // CSS Placeholder - gradient with play icon
+  if (showPlaceholder) {
+    return (
+      <div
+        style={{
+          ...style,
+          background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          gap: 8,
+        }}
+        aria-label={alt}
+      >
+        <div
+          style={{
+            width: 48,
+            height: 48,
+            borderRadius: '50%',
+            backgroundColor: 'rgba(245, 166, 35, 0.15)',
+            border: '2px solid rgba(245, 166, 35, 0.3)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Icons.Play size={24} color="var(--color-gold)" />
+        </div>
+        {instructor && (
+          <span
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 10,
+              fontWeight: 600,
+              color: 'var(--color-gray-500)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+            }}
+          >
+            {instructor}
+          </span>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={thumbnailUrl}
+      alt={alt}
+      onError={handleError}
+      style={style}
+    />
+  );
+}
+
+// ===========================================
 // FULL-SCREEN VIDEO PLAYER MODAL
 // ===========================================
 
@@ -163,10 +270,6 @@ interface VideoCardProps {
 function VideoCard({ recommendation, variant, onPlay }: VideoCardProps) {
   const { video, headline, oneLiner, category } = recommendation;
 
-  // YouTube thumbnail URL
-  const thumbnailUrl = `https://img.youtube.com/vi/${video.youtube_id}/maxresdefault.jpg`;
-  const fallbackThumbnailUrl = `https://img.youtube.com/vi/${video.youtube_id}/hqdefault.jpg`;
-
   // Format duration
   const formatDuration = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
@@ -210,12 +313,10 @@ function VideoCard({ recommendation, variant, onPlay }: VideoCardProps) {
             marginBottom: 'var(--space-md)',
           }}
         >
-          <img
-            src={thumbnailUrl}
+          <YouTubeThumbnail
+            youtubeId={video.youtube_id}
             alt={video.title}
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = fallbackThumbnailUrl;
-            }}
+            instructor={video.instructor}
             style={{
               width: '100%',
               height: '100%',
@@ -368,12 +469,10 @@ function VideoCard({ recommendation, variant, onPlay }: VideoCardProps) {
           overflow: 'hidden',
         }}
       >
-        <img
-          src={thumbnailUrl}
+        <YouTubeThumbnail
+          youtubeId={video.youtube_id}
           alt={video.title}
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = fallbackThumbnailUrl;
-          }}
+          instructor={video.instructor}
           style={{
             width: '100%',
             height: '100%',
