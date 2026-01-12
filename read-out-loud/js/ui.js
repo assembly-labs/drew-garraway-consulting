@@ -10,7 +10,6 @@ class UIController {
     this.autoSaveTimer = null;
     this.isHighlighting = false;
     this.currentTextId = null;
-    this.showAllVoices = false; // Toggle for voice list view
   }
 
   initialize() {
@@ -441,19 +440,16 @@ class UIController {
   }
 
   renderVoiceList(filter = '') {
-    // Get voices based on mode (curated top voices vs all voices)
+    // Get top 8 curated voices only
     let voices;
-    const totalVoiceCount = this.speechEngine.voices.length;
 
     if (filter) {
-      // When searching, search all voices
-      voices = this.speechEngine.voices.filter(voice =>
+      // When searching, search within top voices only
+      const topVoices = this.speechEngine.getTopVoices(8);
+      voices = topVoices.filter(voice =>
         voice.name.toLowerCase().includes(filter.toLowerCase()) ||
         voice.lang.toLowerCase().includes(filter.toLowerCase())
       );
-    } else if (this.showAllVoices) {
-      // Show all voices when toggle is on
-      voices = this.speechEngine.voices;
     } else {
       // Default: show only top 8 curated voices
       voices = this.speechEngine.getTopVoices(8);
@@ -462,21 +458,14 @@ class UIController {
     // Build the voice list HTML
     let html = '';
 
-    // Add header with voice count and toggle
+    // Add simple header
     const voiceCountText = filter
-      ? `${voices.length} matching voices`
-      : this.showAllVoices
-        ? `All ${totalVoiceCount} voices`
-        : `Top ${voices.length} voices`;
+      ? `${voices.length} matching`
+      : 'Select a voice';
 
     html += `
       <div class="voice-list-header">
         <span class="voice-count">${voiceCountText}</span>
-        ${!filter ? `
-          <button class="voice-toggle-btn" id="toggleAllVoices">
-            ${this.showAllVoices ? 'Show recommended' : `Show all (${totalVoiceCount})`}
-          </button>
-        ` : ''}
       </div>
     `;
 
@@ -516,12 +505,6 @@ class UIController {
 
     this.elements.voiceList.innerHTML = html;
 
-    // Attach toggle button listener
-    const toggleBtn = document.getElementById('toggleAllVoices');
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', () => this.toggleShowAllVoices());
-    }
-
     // Attach event listeners to voice items
     this.elements.voiceList.querySelectorAll('.voice-item').forEach(item => {
       item.addEventListener('click', (e) => {
@@ -548,11 +531,6 @@ class UIController {
       'standard': 'Standard'
     };
     return labels[quality] || quality;
-  }
-
-  toggleShowAllVoices() {
-    this.showAllVoices = !this.showAllVoices;
-    this.renderVoiceList(this.elements.voiceSearch.value);
   }
 
   selectVoice(voiceURI) {
