@@ -246,6 +246,60 @@ body::before {
   color: var(--text-muted);
 }
 
+/* Text Display (for highlighting during playback) */
+.text-display {
+  flex: 1;
+  background: var(--bg-surface);
+  border: 1px solid var(--primary-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  overflow-y: auto;
+  min-height: 280px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Current word highlight */
+.text-display .current-word,
+.text-display mark.current-word {
+  background: var(--primary-color);
+  color: white;
+  padding: 2px 4px;
+  border-radius: var(--radius-xs);
+  animation: pulse-highlight 0.3s ease;
+}
+
+@keyframes pulse-highlight {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.5);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
+}
+
+/* Premium button style */
+.action-btn.premium {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.action-btn.premium:hover {
+  background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
 /* Text Stats */
 .text-stats {
   display: flex;
