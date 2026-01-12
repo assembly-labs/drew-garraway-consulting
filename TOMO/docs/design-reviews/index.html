@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMO Design Review Index</title>
+  <link rel="stylesheet" href="../design-system/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      color: var(--color-white);
+      min-height: 100vh;
+      padding: 60px 40px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .header h1 {
+      font-family: var(--font-heading);
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--color-gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+
+    .header p {
+      font-size: 16px;
+      color: var(--color-gray-400);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .phase-card {
+      background: var(--color-gray-900);
+      border-radius: 16px;
+      padding: 32px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 1px solid var(--color-gray-800);
+    }
+
+    .phase-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-gold);
+      box-shadow: 0 12px 40px rgba(245, 166, 35, 0.15);
+    }
+
+    .phase-card.pending {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .phase-number {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+
+    .phase-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-white);
+      margin-bottom: 8px;
+    }
+
+    .phase-desc {
+      font-size: 14px;
+      color: var(--color-gray-400);
+      line-height: 1.5;
+    }
+
+    .status-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 16px;
+    }
+
+    .status-badge.complete {
+      background: rgba(34, 197, 94, 0.2);
+      color: var(--color-positive);
+    }
+
+    .status-badge.pending {
+      background: rgba(107, 114, 128, 0.3);
+      color: var(--color-gray-400);
+    }
+
+    .quick-links {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid var(--color-gray-800);
+    }
+
+    .quick-links h2 {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+
+    .quick-links-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .quick-link {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-gray-300);
+      background: var(--color-gray-800);
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .quick-link:hover {
+      background: var(--color-gray-700);
+      color: var(--color-gold);
+    }
+
+    .personas {
+      margin-top: 40px;
+      background: var(--color-gray-900);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .personas h3 {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-gray-300);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .persona-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .persona-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .persona-belt {
+      width: 32px;
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    .persona-belt.white { background: #FFFFFF; border: 1px solid #999; }
+    .persona-belt.blue { background: #0033A0; }
+    .persona-belt.purple { background: #4B0082; }
+    .persona-belt.brown { background: #8B4513; }
+
+    .persona-text {
+      font-size: 13px;
+      color: var(--color-gray-400);
+    }
+
+    .persona-text strong {
+      color: var(--color-gray-200);
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 40px 20px; }
+      .header h1 { font-size: 28px; }
+      .phase-card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>TOMO DESIGN REVIEW</h1>
+      <p>Visual mood boards for each app feature, organized by phase. Click any card to view the design review.</p>
+    </header>
+
+    <div class="phase-grid">
+      <a href="onboarding-moodboard.html" class="phase-card">
+        <div class="phase-number">PHASE 1</div>
+        <div class="phase-title">Onboarding</div>
+        <div class="phase-desc">Welcome flow, identity setup, mic permission, ready screen</div>
+        <span class="status-badge complete">Complete</span>
+      </a>
+
+      <a href="stats-moodboard.html" class="phase-card">
+        <div class="phase-number">PHASE 2</div>
+        <div class="phase-title">Stats / Dashboard</div>
+        <div class="phase-desc">Training stats, weekly progress, heatmaps, technique modules</div>
+        <span class="status-badge complete">Complete</span>
+      </a>
+
+      <a href="journal-moodboard.html" class="phase-card">
+        <div class="phase-number">PHASE 3</div>
+        <div class="phase-title">Journal</div>
+        <div class="phase-desc">Session history feed, session detail view, edit sheets</div>
+        <span class="status-badge complete">Complete</span>
+      </a>
+
+      <a href="library-moodboard.html" class="phase-card">
+        <div class="phase-number">PHASE 4</div>
+        <div class="phase-title">Technique Library</div>
+        <div class="phase-desc">For You recommendations, Browse categories, video components</div>
+        <span class="status-badge complete">Complete</span>
+      </a>
+
+      <a href="insights-moodboard.html" class="phase-card">
+        <div class="phase-number">PHASE 5</div>
+        <div class="phase-title">Insights</div>
+        <div class="phase-desc">AI training feedback, coaching text, focus areas</div>
+        <span class="status-badge complete">Complete</span>
+      </a>
+
+      <a href="profile-settings-moodboard.html" class="phase-card">
+        <div class="phase-number">PHASE 6</div>
+        <div class="phase-title">Profile & Settings</div>
+        <div class="phase-desc">User profile, progressive profiling, app settings</div>
+        <span class="status-badge complete">Complete</span>
+      </a>
+
+      <a href="logger-moodboard.html" class="phase-card">
+        <div class="phase-number">PHASE 7</div>
+        <div class="phase-title">Session Logger</div>
+        <div class="phase-desc">Voice-first logging flow, form fields, success states</div>
+        <span class="status-badge complete">Complete</span>
+      </a>
+
+      <div class="phase-card pending">
+        <div class="phase-number">PHASE 8</div>
+        <div class="phase-title">Belt Progress</div>
+        <div class="phase-desc">Current belt, IBJJF requirements, promotion estimates</div>
+        <span class="status-badge pending">Pending</span>
+      </div>
+    </div>
+
+    <div class="quick-links">
+      <h2>Quick Links</h2>
+      <div class="quick-links-grid">
+        <a href="../design-system/index.html" class="quick-link">Design System</a>
+        <a href="../design-system/icons.html" class="quick-link">Icon Library</a>
+        <a href="../design-system/tokens.md" class="quick-link">Design Tokens</a>
+        <a href="DESIGN_REVIEW_PLAN.md" class="quick-link">Review Plan</a>
+      </div>
+    </div>
+
+    <div class="personas">
+      <h3>Test Personas (6)</h3>
+      <div class="persona-list">
+        <div class="persona-item">
+          <div class="persona-belt white"></div>
+          <div class="persona-text"><strong>Jake</strong> - White (Thriving)</div>
+        </div>
+        <div class="persona-item">
+          <div class="persona-belt white"></div>
+          <div class="persona-text"><strong>David</strong> - White (At-Risk)</div>
+        </div>
+        <div class="persona-item">
+          <div class="persona-belt blue"></div>
+          <div class="persona-text"><strong>Marcus</strong> - Blue (Progressing)</div>
+        </div>
+        <div class="persona-item">
+          <div class="persona-belt blue"></div>
+          <div class="persona-text"><strong>Ryan</strong> - Blue (Declining)</div>
+        </div>
+        <div class="persona-item">
+          <div class="persona-belt purple"></div>
+          <div class="persona-text"><strong>Sofia</strong> - Purple (Stable)</div>
+        </div>
+        <div class="persona-item">
+          <div class="persona-belt brown"></div>
+          <div class="persona-text"><strong>Elena</strong> - Brown (Refined)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

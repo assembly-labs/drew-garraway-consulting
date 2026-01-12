@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMO Design Review - Insights / Training Feedback</title>
+  <link rel="stylesheet" href="../design-system/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      color: var(--color-white);
+      padding: 40px;
+      min-height: 100vh;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--color-gray-800);
+    }
+
+    .header h1 {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--color-gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: var(--color-gray-400);
+    }
+
+    .section {
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-white);
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--color-gray-800);
+    }
+
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 40px;
+    }
+
+    .persona-card {
+      background: var(--color-gray-900);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .persona-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--color-gray-800);
+    }
+
+    .persona-belt {
+      width: 48px;
+      height: 14px;
+      border-radius: 2px;
+    }
+
+    .persona-belt.white { background: #FFFFFF; border: 1px solid #999; }
+    .persona-belt.blue { background: #0033A0; }
+    .persona-belt.purple { background: #4B0082; }
+    .persona-belt.brown { background: #8B4513; }
+
+    .persona-info h3 {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-white);
+      margin-bottom: 4px;
+    }
+
+    .persona-info p {
+      font-size: 12px;
+      color: var(--color-gray-400);
+    }
+
+    .risk-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      margin-left: auto;
+    }
+
+    .risk-badge.low { background: rgba(34, 197, 94, 0.2); color: var(--color-positive); }
+    .risk-badge.moderate { background: rgba(245, 166, 35, 0.2); color: var(--color-gold); }
+    .risk-badge.high { background: rgba(239, 68, 68, 0.2); color: var(--color-negative); }
+    .risk-badge.critical { background: rgba(239, 68, 68, 0.4); color: #ff6b6b; }
+    .risk-badge.very-low { background: rgba(34, 197, 94, 0.3); color: #4ade80; }
+
+    .phone-container {
+      background: var(--color-black);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      max-height: 800px;
+      overflow-y: auto;
+    }
+
+    .phone-container img {
+      width: 100%;
+      display: block;
+    }
+
+    .screen-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-gold);
+      text-align: center;
+      margin-top: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .legend {
+      background: var(--color-gray-900);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 60px;
+    }
+
+    .legend h3 {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-gray-300);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .legend-code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-gold);
+      background: var(--color-gray-800);
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .legend-text {
+      font-size: 13px;
+      color: var(--color-gray-400);
+    }
+
+    .notes {
+      background: var(--color-gray-900);
+      border-left: 4px solid var(--color-gold);
+      padding: 20px;
+      margin-top: 40px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .notes h4 {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-gold);
+      margin-bottom: 12px;
+    }
+
+    .notes ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .notes li {
+      font-size: 13px;
+      color: var(--color-gray-400);
+      padding: 4px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .notes li::before {
+      content: "-";
+      position: absolute;
+      left: 0;
+      color: var(--color-gray-600);
+    }
+
+    .state-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .state-card {
+      background: var(--color-gray-800);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .state-card h5 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-gold);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .state-card p {
+      font-size: 13px;
+      color: var(--color-gray-400);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      body { padding: 20px; }
+      .persona-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>TOMO DESIGN REVIEW</h1>
+    <p>Phase 5: Insights / Training Feedback | Generated: January 2026</p>
+  </header>
+
+  <!-- Legend -->
+  <div class="legend">
+    <h3>Reference ID Format</h3>
+    <div class="legend-grid">
+      <div class="legend-item">
+        <span class="legend-code">INSIGHTS</span>
+        <span class="legend-text">Insights screens</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-code">WHITE-EXC</span>
+        <span class="legend-text">Jake (White, Thriving)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-code">WHITE-RISK</span>
+        <span class="legend-text">David (White, At-Risk)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-code">BLUE-EXC</span>
+        <span class="legend-text">Marcus (Blue, Progressing)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-code">BLUE-RISK</span>
+        <span class="legend-text">Ryan (Blue, Declining)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-code">PURPLE</span>
+        <span class="legend-text">Sofia (Purple, Stable)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-code">BROWN</span>
+        <span class="legend-text">Elena (Brown, Refined)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- White Belt Personas -->
+  <section class="section">
+    <h2 class="section-title">White Belt Personas</h2>
+    <div class="persona-grid">
+      <!-- Jake - White Excelling -->
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-belt white"></div>
+          <div class="persona-info">
+            <h3>Jake Thompson</h3>
+            <p>"The Natural" - White Belt, 3 stripes</p>
+          </div>
+          <span class="risk-badge low">Low Risk</span>
+        </div>
+        <div class="phone-container">
+          <img src="screenshots/full-pages/INSIGHTS-WHITE-EXC.png" alt="Insights - Jake">
+        </div>
+        <div class="screen-label">INSIGHTS-WHITE-EXC</div>
+      </div>
+
+      <!-- David - White At Risk -->
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-belt white"></div>
+          <div class="persona-info">
+            <h3>David Morrison</h3>
+            <p>"The Late Starter" - White Belt, 2 stripes</p>
+          </div>
+          <span class="risk-badge high">High Risk</span>
+        </div>
+        <div class="phone-container">
+          <img src="screenshots/full-pages/INSIGHTS-WHITE-RISK.png" alt="Insights - David">
+        </div>
+        <div class="screen-label">INSIGHTS-WHITE-RISK</div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <h4>White Belt Insights Notes</h4>
+      <ul>
+        <li>Encouraging, consistency-focused tone</li>
+        <li>"Every session counts" messaging</li>
+        <li>At-risk users see "When It Gets Hard" support content</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Blue Belt Personas -->
+  <section class="section">
+    <h2 class="section-title">Blue Belt Personas</h2>
+    <div class="persona-grid">
+      <!-- Marcus - Blue Excelling -->
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-belt blue"></div>
+          <div class="persona-info">
+            <h3>Marcus Chen</h3>
+            <p>"The Dedicated Hobbyist" - Blue Belt, 2 stripes</p>
+          </div>
+          <span class="risk-badge moderate">Moderate Risk</span>
+        </div>
+        <div class="phone-container">
+          <img src="screenshots/full-pages/INSIGHTS-BLUE-EXC.png" alt="Insights - Marcus">
+        </div>
+        <div class="screen-label">INSIGHTS-BLUE-EXC</div>
+      </div>
+
+      <!-- Ryan - Blue At Risk -->
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-belt blue"></div>
+          <div class="persona-info">
+            <h3>Ryan Torres</h3>
+            <p>"The Fading Fire" - Blue Belt, 1 stripe</p>
+          </div>
+          <span class="risk-badge critical">Critical Risk</span>
+        </div>
+        <div class="phone-container">
+          <img src="screenshots/full-pages/INSIGHTS-BLUE-RISK.png" alt="Insights - Ryan">
+        </div>
+        <div class="screen-label">INSIGHTS-BLUE-RISK</div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <h4>Blue Belt Insights Notes</h4>
+      <ul>
+        <li>Game development, identity building tone</li>
+        <li>"Developing your style" messaging</li>
+        <li>Critical risk personas see Blues Detector interventions</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Purple & Brown Belt Personas -->
+  <section class="section">
+    <h2 class="section-title">Purple & Brown Belt Personas</h2>
+    <div class="persona-grid">
+      <!-- Sofia - Purple -->
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-belt purple"></div>
+          <div class="persona-info">
+            <h3>Sofia Rodriguez</h3>
+            <p>"The Grinder" - Purple Belt, 1 stripe</p>
+          </div>
+          <span class="risk-badge low">Low Risk</span>
+        </div>
+        <div class="phone-container">
+          <img src="screenshots/full-pages/INSIGHTS-PURPLE.png" alt="Insights - Sofia">
+        </div>
+        <div class="screen-label">INSIGHTS-PURPLE</div>
+      </div>
+
+      <!-- Elena - Brown -->
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-belt brown"></div>
+          <div class="persona-info">
+            <h3>Elena Kim</h3>
+            <p>"The Veteran" - Brown Belt, 2 stripes</p>
+          </div>
+          <span class="risk-badge very-low">Very Low Risk</span>
+        </div>
+        <div class="phone-container">
+          <img src="screenshots/full-pages/INSIGHTS-BROWN.png" alt="Insights - Elena">
+        </div>
+        <div class="screen-label">INSIGHTS-BROWN</div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <h4>Purple/Brown Belt Insights Notes</h4>
+      <ul>
+        <li>Technical depth, teaching perspective</li>
+        <li>"Refining your approach" and "Polishing the details" messaging</li>
+        <li>Mastery refinement focus</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Insight States -->
+  <section class="section">
+    <h2 class="section-title">Insight States</h2>
+
+    <div class="state-cards">
+      <div class="state-card">
+        <h5>INS-READY</h5>
+        <p>New session logged. "Generate Insight" button available. Shows session summary that will be analyzed.</p>
+      </div>
+
+      <div class="state-card">
+        <h5>INS-GENERATING</h5>
+        <p>Typewriter animation in progress. Loading indicator. "Analyzing your training..." message.</p>
+      </div>
+
+      <div class="state-card">
+        <h5>INS-COMPLETE</h5>
+        <p>Full insight displayed with AI-generated headline, coaching text, focus areas, and recommended videos.</p>
+      </div>
+
+      <div class="state-card">
+        <h5>INS-ALREADY</h5>
+        <p>"You've already generated today's insight. Come back tomorrow!" with the previous insight still visible.</p>
+      </div>
+
+      <div class="state-card">
+        <h5>INS-EMPTY</h5>
+        <p>"Log some sessions first to get personalized insights." CTA to log a session.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Insight Components -->
+  <section class="section">
+    <h2 class="section-title">Insight Components</h2>
+
+    <div class="notes" style="margin-top: 0;">
+      <h4>Component Reference</h4>
+      <ul>
+        <li><strong>INS-TITLE</strong> - AI-generated headline (e.g., "Your Guard Game is Evolving")</li>
+        <li><strong>INS-BODY</strong> - Coaching text with specific observations and advice</li>
+        <li><strong>INS-FOCUS</strong> - Focus areas: 2-3 technique recommendations</li>
+        <li><strong>INS-VIDEO</strong> - Recommended videos section linking to TechniqueLibrary</li>
+      </ul>
+    </div>
+
+    <div class="notes" style="margin-top: 20px; border-left-color: var(--color-positive);">
+      <h4>Belt-Adaptive Tone</h4>
+      <ul>
+        <li><strong>White:</strong> Encouraging, consistency-focused, "Every session counts"</li>
+        <li><strong>Blue:</strong> Game development, identity building, "Developing your style"</li>
+        <li><strong>Purple:</strong> Technical depth, teaching perspective, "Refining your approach"</li>
+        <li><strong>Brown:</strong> Mastery refinement, legacy thinking, "Polishing the details"</li>
+      </ul>
+    </div>
+
+    <div class="notes" style="margin-top: 20px; border-left-color: var(--color-negative);">
+      <h4>At-Risk Persona Messaging</h4>
+      <ul>
+        <li>Detects gap in training frequency</li>
+        <li>Acknowledges struggle without judgment</li>
+        <li>Provides "When It Gets Hard" support content</li>
+        <li>Links to mindset videos (mental game, motivation)</li>
+      </ul>
+    </div>
+  </section>
+
+</body>
+</html>

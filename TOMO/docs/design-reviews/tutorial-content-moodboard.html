@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMO Design Review: Tutorial & Onboarding Content</title>
+
+  <!-- Production CSS from design system -->
+  <link rel="stylesheet" href="../design-system/styles.css">
+
+  <style>
+    /* ===========================================
+       MOOD BOARD SPECIFIC STYLES
+       =========================================== */
+    body {
+      background: #0a0a0a;
+      padding: var(--space-xl);
+    }
+
+    .moodboard-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid var(--color-gray-800);
+    }
+
+    .moodboard-title {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--color-gold);
+      margin-bottom: var(--space-sm);
+    }
+
+    .moodboard-subtitle {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--color-gray-500);
+    }
+
+    .moodboard-nav {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--space-lg);
+    }
+
+    .moodboard-nav a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-gray-400);
+      text-decoration: none;
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--color-gray-700);
+      border-radius: var(--radius-md);
+      transition: all 0.2s;
+    }
+
+    .moodboard-nav a:hover {
+      color: var(--color-gold);
+      border-color: var(--color-gold);
+    }
+
+    /* Section Container */
+    .review-section {
+      margin-bottom: var(--space-3xl);
+      padding-bottom: var(--space-2xl);
+      border-bottom: 1px solid var(--color-gray-800);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+
+    .section-id {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-black);
+      background: var(--color-gold);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius-sm);
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-white);
+    }
+
+    .section-description {
+      font-size: 15px;
+      color: var(--color-gray-400);
+      margin-bottom: var(--space-lg);
+      max-width: 800px;
+    }
+
+    /* Phone Mockup Container */
+    .phone-grid {
+      display: flex;
+      gap: var(--space-xl);
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    .phone-container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .phone-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-gray-500);
+      padding: var(--space-xs) var(--space-sm);
+      background: var(--color-gray-900);
+      border-radius: var(--radius-sm);
+      display: inline-block;
+    }
+
+    .phone-label-name {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--color-gray-600);
+      margin-top: var(--space-xs);
+    }
+
+    .phone-frame {
+      width: 375px;
+      height: 667px;
+      background: var(--color-black);
+      border-radius: 40px;
+      border: 3px solid var(--color-gray-800);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 30px;
+      background: var(--color-black);
+      border-radius: 0 0 20px 20px;
+      z-index: 10;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      background: var(--color-black);
+    }
+
+    /* Persona Info */
+    .persona-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+
+    .persona-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-gray-500);
+    }
+
+    .belt-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+    }
+
+    .belt-indicator--white { background: var(--color-belt-white); }
+    .belt-indicator--blue { background: var(--color-belt-blue); }
+    .belt-indicator--purple { background: var(--color-belt-purple); }
+    .belt-indicator--brown { background: var(--color-belt-brown); }
+
+    /* Risk Indicator */
+    .risk-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .risk-indicator--low {
+      background: var(--color-positive-dim);
+      color: var(--color-positive);
+    }
+
+    .risk-indicator--moderate {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--color-warning);
+    }
+
+    .risk-indicator--high {
+      background: var(--color-negative-dim);
+      color: var(--color-negative);
+    }
+
+    .risk-indicator--critical {
+      background: var(--color-negative-dim);
+      color: var(--color-negative);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* Category colors - matching UpNextVideos.tsx */
+    .category--technique { color: var(--color-gold); }
+    .category--mindset { color: #60a5fa; }
+    .category--lifestyle { color: var(--color-positive); }
+
+    .category-tag {
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .category-tag--technique {
+      background: var(--color-gold);
+      color: var(--color-black);
+    }
+
+    .category-tag--mindset {
+      background: #60a5fa;
+      color: var(--color-white);
+    }
+
+    .category-tag--lifestyle {
+      background: var(--color-positive);
+      color: var(--color-white);
+    }
+  </style>
+</head>
+<body>
+  <!-- ===========================================
+       MOOD BOARD HEADER
+       =========================================== -->
+  <header class="moodboard-header">
+    <h1 class="moodboard-title">Tutorial & Onboarding Content</h1>
+    <p class="moodboard-subtitle">Design Review Mood Board | TOMO BJJ Journal</p>
+
+    <nav class="moodboard-nav">
+      <a href="#onboarding">Onboarding Flow</a>
+      <a href="#videos-white">White Belt Videos</a>
+      <a href="#videos-blue">Blue Belt Videos</a>
+      <a href="#videos-purple">Purple Belt Videos</a>
+      <a href="#videos-brown">Brown Belt Videos</a>
+      <a href="#support">At-Risk Support</a>
+    </nav>
+  </header>
+
+  <!-- ===========================================
+       SECTION 1: ONBOARDING FLOW (Shared)
+       Uses actual styles from Onboarding.tsx
+       =========================================== -->
+  <section class="review-section" id="onboarding">
+    <div class="section-header">
+      <span class="section-id">ONB-01</span>
+      <h2 class="section-title">Onboarding Flow</h2>
+    </div>
+    <p class="section-description">
+      4-step onboarding shared by all users. Designed for the exhausted user state: large touch targets, minimal decisions, completable in &lt;30 seconds. Actual implementation from <code>Onboarding.tsx</code>.
+    </p>
+
+    <div class="phone-grid">
+      <!-- ONB-01-A: Welcome -->
+      <div class="phone-container">
+        <div>
+          <span class="phone-label">ONB-01-A: Welcome</span>
+          <p class="phone-label-name">All Users</p>
+        </div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <!-- Exact styles from Onboarding.tsx welcome step -->
+            <div style="
+              min-height: 100%;
+              background-color: var(--color-black);
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              padding: var(--space-xl);
+              text-align: center;
+            ">
+              <div style="
+                font-family: var(--font-heading);
+                font-size: var(--text-3xl);
+                font-weight: 700;
+                color: var(--color-white);
+                letter-spacing: var(--tracking-wider);
+                margin-bottom: var(--space-md);
+              ">ALLY</div>
+
+              <p style="
+                font-size: var(--text-lg);
+                color: var(--color-gray-400);
+                margin-bottom: var(--space-xl);
+                max-width: 300px;
+                line-height: 1.6;
+              ">
+                Track your journey.<br>
+                See your progress.<br>
+                Know what's next.
+              </p>
+
+              <div style="
+                width: 80px;
+                height: 4px;
+                background-color: var(--color-gold);
+                border-radius: 9999px;
+                margin-bottom: var(--space-2xl);
+              "></div>
+
+              <button style="
+                padding: var(--space-lg) var(--space-2xl);
+                background-color: var(--color-gold);
+                color: var(--color-black);
+                border: none;
+                border-radius: var(--radius-md);
+                font-family: var(--font-heading);
+                font-size: var(--text-lg);
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: var(--tracking-wide);
+                cursor: pointer;
+                min-width: 200px;
+              ">Get Started</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ONB-01-B: Identity -->
+      <div class="phone-container">
+        <div>
+          <span class="phone-label">ONB-01-B: Identity</span>
+          <p class="phone-label-name">Name + Belt Selection</p>
+        </div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <!-- Exact styles from Onboarding.tsx identity step -->
+            <div style="
+              min-height: 100%;
+              background-color: var(--color-black);
+              display: flex;
+              flex-direction: column;
+              padding: var(--space-xl);
+              padding-top: 60px;
+            ">
+              <!-- Header -->
+              <div style="margin-bottom: var(--space-2xl);">
+                <div style="
+                  font-family: var(--font-heading);
+                  font-size: var(--text-xl);
+                  font-weight: 700;
+                  color: var(--color-white);
+                  margin-bottom: var(--space-xs);
+                ">Let's get you started.</div>
+                <p style="
+                  font-size: var(--text-base);
+                  color: var(--color-gray-400);
+                  margin: 0;
+                ">Just two quick questions.</p>
+              </div>
+
+              <!-- Name Input -->
+              <div style="margin-bottom: var(--space-xl);">
+                <label style="
+                  display: block;
+                  font-family: var(--font-heading);
+                  font-size: var(--text-xs);
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  letter-spacing: var(--tracking-widest);
+                  color: var(--color-gray-400);
+                  margin-bottom: var(--space-sm);
+                ">What should we call you?</label>
+                <input type="text" value="Jake" placeholder="First name" style="
+                  width: 100%;
+                  padding: var(--space-lg);
+                  font-size: var(--text-xl);
+                  font-weight: 600;
+                  background-color: var(--color-gray-900);
+                  border: 2px solid var(--color-gold);
+                  border-radius: var(--radius-md);
+                  color: var(--color-white);
+                  outline: none;
+                ">
+              </div>
+
+              <!-- Belt Selector -->
+              <div style="margin-bottom: var(--space-xl); flex: 1;">
+                <label style="
+                  display: block;
+                  font-family: var(--font-heading);
+                  font-size: var(--text-xs);
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  letter-spacing: var(--tracking-widest);
+                  color: var(--color-gray-400);
+                  margin-bottom: var(--space-md);
+                ">What's your current belt?</label>
+                <div style="display: flex; gap: var(--space-sm); justify-content: center;">
+                  <!-- White - Selected -->
+                  <button style="
+                    width: 64px;
+                    height: 80px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: var(--space-xs);
+                    background-color: var(--color-gray-800);
+                    border: 3px solid var(--color-gold);
+                    border-radius: var(--radius-md);
+                    cursor: pointer;
+                  ">
+                    <div style="width: 40px; height: 12px; background-color: #FFFFFF; border: 1px solid #999; border-radius: 2px; box-shadow: 0 0 8px rgba(252, 211, 77, 0.5);"></div>
+                    <span style="font-size: var(--text-xs); color: var(--color-gold); font-weight: 600;">White</span>
+                  </button>
+                  <!-- Blue -->
+                  <button style="
+                    width: 64px;
+                    height: 80px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: var(--space-xs);
+                    background-color: transparent;
+                    border: 2px solid var(--color-gray-700);
+                    border-radius: var(--radius-md);
+                    cursor: pointer;
+                  ">
+                    <div style="width: 40px; height: 12px; background-color: #0033A0; border-radius: 2px;"></div>
+                    <span style="font-size: var(--text-xs); color: var(--color-gray-400); font-weight: 500;">Blue</span>
+                  </button>
+                  <!-- Purple -->
+                  <button style="
+                    width: 64px;
+                    height: 80px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: var(--space-xs);
+                    background-color: transparent;
+                    border: 2px solid var(--color-gray-700);
+                    border-radius: var(--radius-md);
+                    cursor: pointer;
+                  ">
+                    <div style="width: 40px; height: 12px; background-color: #4B0082; border-radius: 2px;"></div>
+                    <span style="font-size: var(--text-xs); color: var(--color-gray-400); font-weight: 500;">Purple</span>
+                  </button>
+                  <!-- Brown -->
+                  <button style="
+                    width: 64px;
+                    height: 80px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: var(--space-xs);
+                    background-color: transparent;
+                    border: 2px solid var(--color-gray-700);
+                    border-radius: var(--radius-md);
+                    cursor: pointer;
+                  ">
+                    <div style="width: 40px; height: 12px; background-color: #8B4513; border-radius: 2px;"></div>
+                    <span style="font-size: var(--text-xs); color: var(--color-gray-400); font-weight: 500;">Brown</span>
+                  </button>
+                  <!-- Black -->
+                  <button style="
+                    width: 64px;
+                    height: 80px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: var(--space-xs);
+                    background-color: transparent;
+                    border: 2px solid var(--color-gray-700);
+                    border-radius: var(--radius-md);
+                    cursor: pointer;
+                  ">
+                    <div style="width: 40px; height: 12px; background-color: #000000; border: 1px solid #333; border-radius: 2px;"></div>
+                    <span style="font-size: var(--text-xs); color: var(--color-gray-400); font-weight: 500;">Black</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Continue Button -->
+              <button style="
+                width: 100%;
+                padding: var(--space-lg);
+                background-color: var(--color-gold);
+                color: var(--color-black);
+                border: none;
+                border-radius: var(--radius-md);
+                font-family: var(--font-heading);
+                font-size: var(--text-lg);
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: var(--tracking-wide);
+                cursor: pointer;
+              ">Continue</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ONB-01-C: Mic Permission -->
+      <div class="phone-container">
+        <div>
+          <span class="phone-label">ONB-01-C: Mic Permission</span>
+          <p class="phone-label-name">Voice Logging Option</p>
+        </div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <!-- Exact styles from Onboarding.tsx mic step -->
+            <div style="
+              min-height: 100%;
+              background-color: var(--color-black);
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              padding: var(--space-xl);
+              text-align: center;
+            ">
+              <!-- Mic icon -->
+              <div style="
+                width: 100px;
+                height: 100px;
+                border-radius: 9999px;
+                background-color: var(--color-gray-900);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: var(--space-xl);
+              ">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                  <line x1="12" y1="19" x2="12" y2="23" />
+                  <line x1="8" y1="23" x2="16" y2="23" />
+                </svg>
+              </div>
+
+              <h2 style="
+                font-family: var(--font-heading);
+                font-size: var(--text-2xl);
+                font-weight: 700;
+                color: var(--color-white);
+                margin-bottom: var(--space-md);
+              ">After class, just talk.</h2>
+
+              <p style="
+                font-size: var(--text-base);
+                color: var(--color-gray-400);
+                margin-bottom: var(--space-sm);
+                max-width: 300px;
+                line-height: 1.6;
+              ">
+                Voice logging captures your session in 60 seconds.
+                No typing with tired hands.
+              </p>
+
+              <p style="
+                font-size: var(--text-sm);
+                color: var(--color-gray-500);
+                margin-bottom: var(--space-2xl);
+                max-width: 280px;
+                font-style: italic;
+              ">
+                "90 minute gi class, drilled armbars, got caught in a triangle..."
+              </p>
+
+              <div style="
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-md);
+                width: 100%;
+                max-width: 300px;
+              ">
+                <button style="
+                  width: 100%;
+                  padding: var(--space-lg);
+                  background-color: var(--color-gold);
+                  color: var(--color-black);
+                  border: none;
+                  border-radius: var(--radius-md);
+                  font-family: var(--font-heading);
+                  font-size: var(--text-base);
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  letter-spacing: var(--tracking-wide);
+                  cursor: pointer;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: var(--space-sm);
+                ">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                  </svg>
+                  Enable Voice Logging
+                </button>
+
+                <button style="
+                  width: 100%;
+                  padding: var(--space-md);
+                  background-color: transparent;
+                  color: var(--color-gray-400);
+                  border: 1px solid var(--color-gray-700);
+                  border-radius: var(--radius-md);
+                  font-size: var(--text-base);
+                  cursor: pointer;
+                ">I'd rather type</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ONB-01-D: Ready -->
+      <div class="phone-container">
+        <div>
+          <span class="phone-label">ONB-01-D: Ready</span>
+          <p class="phone-label-name">Success + First Action</p>
+        </div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <!-- Exact styles from Onboarding.tsx ready step -->
+            <div style="
+              min-height: 100%;
+              background-color: var(--color-black);
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              padding: var(--space-xl);
+              text-align: center;
+            ">
+              <!-- Success checkmark -->
+              <div style="
+                width: 80px;
+                height: 80px;
+                border-radius: 9999px;
+                background-color: var(--color-positive);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: var(--space-xl);
+              ">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+
+              <h2 style="
+                font-family: var(--font-heading);
+                font-size: var(--text-2xl);
+                font-weight: 700;
+                color: var(--color-white);
+                margin-bottom: var(--space-sm);
+              ">You're all set, Jake.</h2>
+
+              <p style="
+                font-size: var(--text-base);
+                color: var(--color-gray-400);
+                margin-bottom: var(--space-2xl);
+                max-width: 280px;
+                line-height: 1.6;
+              ">
+                Your journey is now being tracked.
+                After your next session, come back and log it.
+              </p>
+
+              <div style="
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-md);
+                width: 100%;
+                max-width: 300px;
+              ">
+                <button style="
+                  width: 100%;
+                  padding: var(--space-lg);
+                  background-color: var(--color-gold);
+                  color: var(--color-black);
+                  border: none;
+                  border-radius: var(--radius-md);
+                  font-family: var(--font-heading);
+                  font-size: var(--text-base);
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  letter-spacing: var(--tracking-wide);
+                  cursor: pointer;
+                ">Just trained? Log it now</button>
+
+                <button style="
+                  width: 100%;
+                  padding: var(--space-md);
+                  background-color: transparent;
+                  color: var(--color-gray-400);
+                  border: 1px solid var(--color-gray-700);
+                  border-radius: var(--radius-md);
+                  font-size: var(--text-base);
+                  cursor: pointer;
+                ">Explore the app first</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SECTION 2: VIDEO RECOMMENDATIONS - WHITE BELT
+       Uses actual styles from UpNextVideos.tsx
+       =========================================== -->
+  <section class="review-section" id="videos-white">
+    <div class="section-header">
+      <span class="section-id">VID-WHITE</span>
+      <h2 class="section-title">White Belt Video Recommendations</h2>
+    </div>
+    <p class="section-description">
+      Two distinct personas: Jake Thompson (Thriving) and David Morrison (At-Risk). Notice how the hero video and supporting content adapt to each user's psychological state. Actual implementation from <code>UpNextVideos.tsx</code> and <code>personaVideoRecommendations.ts</code>.
+    </p>
+
+    <div class="phone-grid">
+      <!-- VID-WHITE-EXCELLING: Jake Thompson -->
+      <div class="phone-container">
+        <div>
+          <span class="phone-label">VID-WHITE-EXCELLING</span>
+          <div class="persona-info">
+            <div class="belt-indicator belt-indicator--white"></div>
+            <span class="persona-name">Jake Thompson - "The Natural"</span>
+            <span class="risk-indicator risk-indicator--low">Low Risk</span>
+          </div>
+        </div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen" style="overflow-y: auto;">
+            <!-- UpNextVideos section - exact styles from component -->
+            <section style="
+              padding: var(--space-lg);
+              border-top: 1px solid var(--color-gray-800);
+              margin-top: 50px;
+            ">
+              <!-- Section Header -->
+              <div style="
+                display: flex;
+                align-items: center;
+                gap: var(--space-sm);
+                margin-bottom: var(--space-sm);
+              ">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--color-gold)">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                <h2 style="
+                  font-family: var(--font-mono);
+                  font-size: var(--text-xs);
+                  font-weight: 600;
+                  text-transform: uppercase;
+                  letter-spacing: 0.25em;
+                  color: var(--color-gold);
+                  margin: 0;
+                ">Up Next</h2>
+              </div>
+
+              <!-- Hero Video -->
+              <div style="margin-bottom: var(--space-xl);">
+                <button style="
+                  width: 100%;
+                  padding: 0;
+                  border: none;
+                  background: none;
+                  cursor: pointer;
+                  text-align: left;
+                ">
+                  <!-- Hero Thumbnail -->
+                  <div style="
+                    position: relative;
+                    width: 100%;
+                    aspect-ratio: 16/9;
+                    border-radius: var(--radius-lg);
+                    overflow: hidden;
+                    margin-bottom: var(--space-md);
+                    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+                  ">
+                    <!-- Play Overlay -->
+                    <div style="
+                      position: absolute;
+                      inset: 0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      background: rgba(0, 0, 0, 0.3);
+                    ">
+                      <div style="
+                        width: 72px;
+                        height: 72px;
+                        border-radius: 50%;
+                        background-color: rgba(245, 166, 35, 0.95);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+                      ">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="#111111">
+                          <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                      </div>
+                    </div>
+
+                    <!-- Duration Badge -->
+                    <div style="
+                      position: absolute;
+                      bottom: 12px;
+                      right: 12px;
+                      padding: 4px 8px;
+                      background-color: rgba(0, 0, 0, 0.8);
+                      border-radius: var(--radius-sm);
+                      font-family: var(--font-mono);
+                      font-size: var(--text-xs);
+                      font-weight: 600;
+                      color: var(--color-white);
+                    ">12:34</div>
+
+                    <!-- Category Tag -->
+                    <div class="category-tag category-tag--technique" style="
+                      position: absolute;
+                      top: 12px;
+                      left: 12px;
+                    ">Technique</div>
+                  </div>
+
+                  <!-- Hero Content -->
+                  <div style="padding: 0 4px;">
+                    <h3 style="
+                      font-family: var(--font-heading);
+                      font-size: var(--text-xl);
+                      font-weight: 700;
+                      color: var(--color-white);
+                      margin: 0 0 var(--space-xs) 0;
+                    ">Your Guard Needs This</h3>
+
+                    <p style="
+                      font-size: var(--text-base);
+                      font-weight: 500;
+                      color: var(--color-gray-300);
+                      margin: 0 0 var(--space-sm) 0;
+                      line-height: 1.5;
+                    ">Your wrestling base is a weapon. Now add a guard.</p>
+
+                    <span style="
+                      font-size: var(--text-sm);
+                      font-weight: 500;
+                      color: var(--color-gray-500);
+                    ">John Danaher</span>
+                  </div>
+                </button>
+              </div>
+
+              <!-- Level Up Section -->
+              <div>
+                <h3 style="
+                  font-family: var(--font-mono);
+                  font-size: var(--text-xs);
+                  font-weight: 600;
+                  text-transform: uppercase;
+                  letter-spacing: 0.2em;
+                  color: var(--color-gray-500);
+                  margin: 0 0 var(--space-md) 0;
+                ">Level Up</h3>
+
+                <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+                  <!-- Compact Video Card 1 -->
+                  <button style="
+                    display: flex;
+                    gap: var(--space-md);
+                    padding: var(--space-sm);
+                    border: none;
+                    background: var(--color-gray-900);
+                    border-radius: var(--radius-md);
+                    cursor: pointer;
+                    text-align: left;
+                    width: 100%;
+                  ">
+                    <div style="
+                      position: relative;
+                      width: 120px;
+                      min-width: 120px;
+                      aspect-ratio: 16/9;
+                      border-radius: var(--radius-sm);
+                      overflow: hidden;
+                      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+                    ">
+                      <div style="
+                        position: absolute;
+                        inset: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: rgba(0, 0, 0, 0.25);
+                      ">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)">
+                          <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                      </div>
+                      <div style="
+                        position: absolute;
+                        bottom: 4px;
+                        right: 4px;
+                        padding: 2px 5px;
+                        background-color: rgba(0, 0, 0, 0.8);
+                        border-radius: 2px;
+                        font-family: var(--font-mono);
+                        font-size: 10px;
+                        font-weight: 600;
+                        color: var(--color-white);
+                      ">8:45</div>
+                    </div>
+                    <div style="
+                      flex: 1;
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: center;
+                      gap: var(--space-xs);
+                      overflow: hidden;
+                    ">
+                      <h4 style="
+                        font-family: var(--font-heading);
+                        font-size: var(--text-sm);
+                        font-weight: 600;
+                        color: var(--color-white);
+                        margin: 0;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                      ">Featured: Low-Risk Flower Sweep</h4>
+                      <p style="
+                        font-size: var(--text-xs);
+                        font-weight: 500;
+                        color: var(--color-gray-400);
+                        margin: 0;
+                        line-height: 1.4;
+                      ">Your first reliable sweep from guard.</p>
+                      <div style="display: flex; align-items: center; gap: var(--space-xs);">
+                        <span class="category--technique" style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Technique</span>
+                        <span style="color: var(--color-gray-600); font-size: 11px;">|</span>
+                        <span style="font-size: 11px; font-weight: 500; color: var(--color-gray-500);">MMALeech</span>
+                      </div>
+                    </div>
+                  </button>
+
+                  <!-- Compact Video Card 2 -->
+                  <button style="
+                    display: flex;
+                    gap: var(--space-md);
+                    padding: var(--space-sm);
+                    border: none;
+                    background: var(--color-gray-900);
+                    border-radius: var(--radius-md);
+                    cursor: pointer;
+                    text-align: left;
+                    width: 100%;
+                  ">
+                    <div style="
+                      position: relative;
+                      width: 120px;
+                      min-width: 120px;
+                      aspect-ratio: 16/9;
+                      border-radius: var(--radius-sm);
+                      overflow: hidden;
+                      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+                    ">
+                      <div style="
+                        position: absolute;
+                        inset: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: rgba(0, 0, 0, 0.25);
+                      ">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)">
+                          <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                      </div>
+                      <div style="
+                        position: absolute;
+                        bottom: 4px;
+                        right: 4px;
+                        padding: 2px 5px;
+                        background-color: rgba(0, 0, 0, 0.8);
+                        border-radius: 2px;
+                        font-family: var(--font-mono);
+                        font-size: 10px;
+                        font-weight: 600;
+                        color: var(--color-white);
+                      ">15:22</div>
+                    </div>
+                    <div style="
+                      flex: 1;
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: center;
+                      gap: var(--space-xs);
+                      overflow: hidden;
+                    ">
+                      <h4 style="
+                        font-family: var(--font-heading);
+                        font-size: var(--text-sm);
+                        font-weight: 600;
+                        color: var(--color-white);
+                        margin: 0;
+                      ">Add the Triangle</h4>
+                      <p style="
+                        font-size: var(--text-xs);
+                        font-weight: 500;
+                        color: var(--color-gray-400);
+                        margin: 0;
+                        line-height: 1.4;
+                      ">Stop muscling. Start finishing.</p>
+                      <div style="display: flex; align-items: center; gap: var(--space-xs);">
+                        <span class="category--technique" style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Technique</span>
+                        <span style="color: var(--color-gray-600); font-size: 11px;">|</span>
+                        <span style="font-size: 11px; font-weight: 500; color: var(--color-gray-500);">Roger Gracie</span>
+                      </div>
+                    </div>
+                  </button>
+
+                  <!-- Compact Video Card 3 - Mindset -->
+                  <button style="
+                    display: flex;
+                    gap: var(--space-md);
+                    padding: var(--space-sm);
+                    border: none;
+                    background: var(--color-gray-900);
+                    border-radius: var(--radius-md);
+                    cursor: pointer;
+                    text-align: left;
+                    width: 100%;
+                  ">
+                    <div style="
+                      position: relative;
+                      width: 120px;
+                      min-width: 120px;
+                      aspect-ratio: 16/9;
+                      border-radius: var(--radius-sm);
+                      overflow: hidden;
+                      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+                    ">
+                      <div style="
+                        position: absolute;
+                        inset: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: rgba(0, 0, 0, 0.25);
+                      ">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)">
+                          <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                      </div>
+                      <div style="
+                        position: absolute;
+                        bottom: 4px;
+                        right: 4px;
+                        padding: 2px 5px;
+                        background-color: rgba(0, 0, 0, 0.8);
+                        border-radius: 2px;
+                        font-family: var(--font-mono);
+                        font-size: 10px;
+                        font-weight: 600;
+                        color: var(--color-white);
+                      ">6:18</div>
+                    </div>
+                    <div style="
+                      flex: 1;
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: center;
+                      gap: var(--space-xs);
+                      overflow: hidden;
+                    ">
+                      <h4 style="
+                        font-family: var(--font-heading);
+                        font-size: var(--text-sm);
+                        font-weight: 600;
+                        color: var(--color-white);
+                        margin: 0;
+                      ">The Ego Check</h4>
+                      <p style="
+                        font-size: var(--text-xs);
+                        font-weight: 500;
+                        color: var(--color-gray-400);
+                        margin: 0;
+                        line-height: 1.4;
+                      ">Humility accelerates progress.</p>
+                      <div style="display: flex; align-items: center; gap: var(--space-xs);">
+                        <span class="category--mindset" style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Mindset</span>
+                        <span style="color: var(--color-gray-600); font-size: 11px;">|</span>
+                        <span style="font-size: 11px; font-weight: 500; color: var(--color-gray-500);">Jocko Willink</span>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Ask Coach Reminder - exact from component -->
+              <div style="
+                padding: var(--space-md);
+                background-color: var(--color-gray-900);
+                border-radius: var(--radius-md);
+                border-left: 3px solid var(--color-gray-600);
+                margin-top: var(--space-xl);
+              ">
+                <p style="
+                  color: var(--color-gray-400);
+                  font-size: var(--text-sm);
+                  margin: 0;
+                  line-height: 1.5;
+                ">Your coach knows your game best. Use these as starting points.</p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <!-- VID-WHITE-AT-RISK: David Morrison -->
+      <div class="phone-container">
+        <div>
+          <span class="phone-label">VID-WHITE-AT-RISK</span>
+          <div class="persona-info">
+            <div class="belt-indicator belt-indicator--white"></div>
+            <span class="persona-name">David Morrison - "The Late Starter"</span>
+            <span class="risk-indicator risk-indicator--high">High Risk</span>
+          </div>
+        </div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen" style="overflow-y: auto;">
+            <section style="
+              padding: var(--space-lg);
+              border-top: 1px solid var(--color-gray-800);
+              margin-top: 50px;
+            ">
+              <!-- Section Header -->
+              <div style="
+                display: flex;
+                align-items: center;
+                gap: var(--space-sm);
+                margin-bottom: var(--space-sm);
+              ">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--color-gold)">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                <h2 style="
+                  font-family: var(--font-mono);
+                  font-size: var(--text-xs);
+                  font-weight: 600;
+                  text-transform: uppercase;
+                  letter-spacing: 0.25em;
+                  color: var(--color-gold);
+                  margin: 0;
+                ">Up Next</h2>
+              </div>
+
+              <!-- Hero Video - LIFESTYLE focused for at-risk -->
+              <div style="margin-bottom: var(--space-xl);">
+                <button style="
+                  width: 100%;
+                  padding: 0;
+                  border: none;
+                  background: none;
+                  cursor: pointer;
+                  text-align: left;
+                ">
+                  <div style="
+                    position: relative;
+                    width: 100%;
+                    aspect-ratio: 16/9;
+                    border-radius: var(--radius-lg);
+                    overflow: hidden;
+                    margin-bottom: var(--space-md);
+                    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+                  ">
+                    <div style="
+                      position: absolute;
+                      inset: 0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      background: rgba(0, 0, 0, 0.3);
+                    ">
+                      <div style="
+                        width: 72px;
+                        height: 72px;
+                        border-radius: 50%;
+                        background-color: rgba(245, 166, 35, 0.95);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+                      ">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="#111111">
+                          <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <div style="
+                      position: absolute;
+                      bottom: 12px;
+                      right: 12px;
+                      padding: 4px 8px;
+                      background-color: rgba(0, 0, 0, 0.8);
+                      border-radius: var(--radius-sm);
+                      font-family: var(--font-mono);
+                      font-size: var(--text-xs);
+                      font-weight: 600;
+                      color: var(--color-white);
+                    ">18:42</div>
+                    <div class="category-tag category-tag--lifestyle" style="position: absolute; top: 12px; left: 12px;">Lifestyle</div>
+                  </div>
+                  <div style="padding: 0 4px;">
+                    <h3 style="
+                      font-family: var(--font-heading);
+                      font-size: var(--text-xl);
+                      font-weight: 700;
+                      color: var(--color-white);
+                      margin: 0 0 var(--space-xs) 0;
+                    ">Train Smart, Train Forever</h3>
+                    <p style="
+                      font-size: var(--text-base);
+                      font-weight: 500;
+                      color: var(--color-gray-300);
+                      margin: 0 0 var(--space-sm) 0;
+                      line-height: 1.5;
+                    ">Training smart isn't weak. It's wise.</p>
+                    <span style="font-size: var(--text-sm); font-weight: 500; color: var(--color-gray-500);">Firas Zahabi</span>
+                  </div>
+                </button>
+              </div>
+
+              <!-- Level Up Section (abbreviated) -->
+              <div style="margin-bottom: var(--space-xl);">
+                <h3 style="
+                  font-family: var(--font-mono);
+                  font-size: var(--text-xs);
+                  font-weight: 600;
+                  text-transform: uppercase;
+                  letter-spacing: 0.2em;
+                  color: var(--color-gray-500);
+                  margin: 0 0 var(--space-md) 0;
+                ">Level Up</h3>
+
+                <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+                  <!-- Abbreviated compact cards -->
+                  <button style="display: flex; gap: var(--space-md); padding: var(--space-sm); border: none; background: var(--color-gray-900); border-radius: var(--radius-md); cursor: pointer; text-align: left; width: 100%;">
+                    <div style="position: relative; width: 120px; min-width: 120px; aspect-ratio: 16/9; border-radius: var(--radius-sm); overflow: hidden; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);">
+                      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.25);"><svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                      <div style="position: absolute; bottom: 4px; right: 4px; padding: 2px 5px; background-color: rgba(0, 0, 0, 0.8); border-radius: 2px; font-family: var(--font-mono); font-size: 10px; font-weight: 600; color: var(--color-white);">11:30</div>
+                    </div>
+                    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: var(--space-xs); overflow: hidden;">
+                      <h4 style="font-family: var(--font-heading); font-size: var(--text-sm); font-weight: 600; color: var(--color-white); margin: 0;">Escape the Crush</h4>
+                      <p style="font-size: var(--text-xs); font-weight: 500; color: var(--color-gray-400); margin: 0; line-height: 1.4;">Frames over force. Every time.</p>
+                      <div style="display: flex; align-items: center; gap: var(--space-xs);">
+                        <span class="category--technique" style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Technique</span>
+                        <span style="color: var(--color-gray-600); font-size: 11px;">|</span>
+                        <span style="font-size: 11px; font-weight: 500; color: var(--color-gray-500);">Priit Mihkelson</span>
+                      </div>
+                    </div>
+                  </button>
+
+                  <button style="display: flex; gap: var(--space-md); padding: var(--space-sm); border: none; background: var(--color-gray-900); border-radius: var(--radius-md); cursor: pointer; text-align: left; width: 100%;">
+                    <div style="position: relative; width: 120px; min-width: 120px; aspect-ratio: 16/9; border-radius: var(--radius-sm); overflow: hidden; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);">
+                      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.25);"><svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                      <div style="position: absolute; bottom: 4px; right: 4px; padding: 2px 5px; background-color: rgba(0, 0, 0, 0.8); border-radius: 2px; font-family: var(--font-mono); font-size: 10px; font-weight: 600; color: var(--color-white);">9:15</div>
+                    </div>
+                    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: var(--space-xs); overflow: hidden;">
+                      <h4 style="font-family: var(--font-heading); font-size: var(--text-sm); font-weight: 600; color: var(--color-white); margin: 0;">Protect Your Body</h4>
+                      <p style="font-size: var(--text-xs); font-weight: 500; color: var(--color-gray-400); margin: 0; line-height: 1.4;">Longevity is a strategy.</p>
+                      <div style="display: flex; align-items: center; gap: var(--space-xs);">
+                        <span class="category--lifestyle" style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Lifestyle</span>
+                        <span style="color: var(--color-gray-600); font-size: 11px;">|</span>
+                        <span style="font-size: 11px; font-weight: 500; color: var(--color-gray-500);">Rener Gracie</span>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              <!-- SUPPORT SECTION (At-Risk Only) - exact from component -->
+              <div style="margin-bottom: var(--space-xl);">
+                <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-md);">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--color-positive)">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                  </svg>
+                  <h3 style="
+                    font-family: var(--font-mono);
+                    font-size: var(--text-xs);
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.2em;
+                    color: var(--color-positive);
+                    margin: 0;
+                  ">When It Gets Hard</h3>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+                  <button style="display: flex; gap: var(--space-md); padding: var(--space-sm); border: none; background: var(--color-gray-900); border-radius: var(--radius-md); cursor: pointer; text-align: left; width: 100%;">
+                    <div style="position: relative; width: 120px; min-width: 120px; aspect-ratio: 16/9; border-radius: var(--radius-sm); overflow: hidden; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);">
+                      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.25);"><svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                      <div style="position: absolute; bottom: 4px; right: 4px; padding: 2px 5px; background-color: rgba(0, 0, 0, 0.8); border-radius: 2px; font-family: var(--font-mono); font-size: 10px; font-weight: 600; color: var(--color-white);">3:12</div>
+                    </div>
+                    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: var(--space-xs); overflow: hidden;">
+                      <h4 style="font-family: var(--font-heading); font-size: var(--text-sm); font-weight: 600; color: var(--color-white); margin: 0;">When It Gets Hard: GOOD</h4>
+                      <p style="font-size: var(--text-xs); font-weight: 500; color: var(--color-gray-400); margin: 0; line-height: 1.4;">Missed sessions? GOOD. Start again.</p>
+                      <div style="display: flex; align-items: center; gap: var(--space-xs);">
+                        <span class="category--mindset" style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Mindset</span>
+                        <span style="color: var(--color-gray-600); font-size: 11px;">|</span>
+                        <span style="font-size: 11px; font-weight: 500; color: var(--color-gray-500);">Jocko Willink</span>
+                      </div>
+                    </div>
+                  </button>
+
+                  <button style="display: flex; gap: var(--space-md); padding: var(--space-sm); border: none; background: var(--color-gray-900); border-radius: var(--radius-md); cursor: pointer; text-align: left; width: 100%;">
+                    <div style="position: relative; width: 120px; min-width: 120px; aspect-ratio: 16/9; border-radius: var(--radius-sm); overflow: hidden; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);">
+                      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.25);"><svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                      <div style="position: absolute; bottom: 4px; right: 4px; padding: 2px 5px; background-color: rgba(0, 0, 0, 0.8); border-radius: 2px; font-family: var(--font-mono); font-size: 10px; font-weight: 600; color: var(--color-white);">14:08</div>
+                    </div>
+                    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: var(--space-xs); overflow: hidden;">
+                      <h4 style="font-family: var(--font-heading); font-size: var(--text-sm); font-weight: 600; color: var(--color-white); margin: 0;">Training After 40</h4>
+                      <p style="font-size: var(--text-xs); font-weight: 500; color: var(--color-gray-400); margin: 0; line-height: 1.4;">You're not behind. You're playing a different game.</p>
+                      <div style="display: flex; align-items: center; gap: var(--space-xs);">
+                        <span class="category--lifestyle" style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Lifestyle</span>
+                        <span style="color: var(--color-gray-600); font-size: 11px;">|</span>
+                        <span style="font-size: 11px; font-weight: 500; color: var(--color-gray-500);">Anthony Bourdain</span>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              <div style="
+                padding: var(--space-md);
+                background-color: var(--color-gray-900);
+                border-radius: var(--radius-md);
+                border-left: 3px solid var(--color-gray-600);
+              ">
+                <p style="
+                  color: var(--color-gray-400);
+                  font-size: var(--text-sm);
+                  margin: 0;
+                  line-height: 1.5;
+                ">Your coach knows your game best. Use these as starting points.</p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SECTION 3-5: Additional Belt Levels
+       (Abbreviated for brevity - same pattern)
+       =========================================== -->
+  <section class="review-section" id="videos-blue">
+    <div class="section-header">
+      <span class="section-id">VID-BLUE</span>
+      <h2 class="section-title">Blue Belt Video Recommendations</h2>
+    </div>
+    <p class="section-description">
+      Marcus Chen (Progressing) vs Ryan Torres (Critical Risk). Blue belt is where most dropouts happen. See <code>personaVideoRecommendations.ts</code> for full content definitions.
+    </p>
+    <p style="color: var(--color-gray-500); font-size: 14px;">
+      <strong>Key differences:</strong> Marcus gets technique-focused hero (Stop Collecting, Start Connecting). Ryan gets mindset-first hero (When Everything Falls Apart) plus emergency support section.
+    </p>
+  </section>
+
+  <section class="review-section" id="videos-purple">
+    <div class="section-header">
+      <span class="section-id">VID-PURPLE</span>
+      <h2 class="section-title">Purple Belt Video Recommendations</h2>
+    </div>
+    <p class="section-description">
+      Sofia Rodriguez is stable and grinding. Content focuses on closing the leg lock generational gap and systems-level thinking.
+    </p>
+    <p style="color: var(--color-gray-500); font-size: 14px;">
+      <strong>Hero video:</strong> "Close the Leg Lock Gap" - The generational gap ends here.
+    </p>
+  </section>
+
+  <section class="review-section" id="videos-brown">
+    <div class="section-header">
+      <span class="section-id">VID-BROWN</span>
+      <h2 class="section-title">Brown Belt Video Recommendations</h2>
+    </div>
+    <p class="section-description">
+      Elena Kim is refined and approaching black belt. Content focuses on efficiency, longevity, and philosophical readiness.
+    </p>
+    <p style="color: var(--color-gray-500); font-size: 14px;">
+      <strong>Hero video:</strong> "Efficiency Over Everything" - The difference between good and great is details.
+    </p>
+  </section>
+
+  <section class="review-section" id="support">
+    <div class="section-header">
+      <span class="section-id">SUPPORT</span>
+      <h2 class="section-title">At-Risk Support Section</h2>
+    </div>
+    <p class="section-description">
+      The "When It Gets Hard" section only appears for at-risk personas (David Morrison, Ryan Torres). This is implemented via the <code>isAtRiskPersona()</code> check in <code>UpNextVideos.tsx:642</code>.
+    </p>
+    <p style="color: var(--color-gray-500); font-size: 14px;">
+      <strong>Trigger:</strong> <code>personaKey === 'white-at-risk' || personaKey === 'blue-at-risk'</code>
+    </p>
+  </section>
+
+  <!-- ===========================================
+       FOOTER
+       =========================================== -->
+  <footer style="text-align: center; padding: var(--space-2xl); color: var(--color-gray-600);">
+    <p style="font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em;">
+      TOMO Design Review | Tutorial Content Mood Board | v2.0
+    </p>
+    <p style="font-size: 13px; margin-top: var(--space-sm);">
+      Built from production code: Onboarding.tsx, UpNextVideos.tsx, personaVideoRecommendations.ts
+    </p>
+  </footer>
+</body>
+</html>

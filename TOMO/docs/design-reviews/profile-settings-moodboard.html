@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMO Design Review - Profile & Settings</title>
+  <link rel="stylesheet" href="../design-system/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      color: var(--color-white);
+      padding: 40px;
+      min-height: 100vh;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--color-gray-800);
+    }
+
+    .header h1 {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--color-gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: var(--color-gray-400);
+    }
+
+    .section {
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-white);
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--color-gray-800);
+    }
+
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 40px;
+    }
+
+    .persona-card {
+      background: var(--color-gray-900);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .persona-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--color-gray-800);
+    }
+
+    .persona-belt {
+      width: 48px;
+      height: 14px;
+      border-radius: 2px;
+    }
+
+    .persona-belt.white { background: #FFFFFF; border: 1px solid #999; }
+    .persona-belt.blue { background: #0033A0; }
+    .persona-belt.purple { background: #4B0082; }
+    .persona-belt.brown { background: #8B4513; }
+
+    .persona-info h3 {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-white);
+      margin-bottom: 4px;
+    }
+
+    .persona-info p {
+      font-size: 12px;
+      color: var(--color-gray-400);
+    }
+
+    .risk-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      margin-left: auto;
+    }
+
+    .risk-badge.low { background: rgba(34, 197, 94, 0.2); color: var(--color-positive); }
+    .risk-badge.moderate { background: rgba(245, 166, 35, 0.2); color: var(--color-gold); }
+    .risk-badge.high { background: rgba(239, 68, 68, 0.2); color: var(--color-negative); }
+    .risk-badge.critical { background: rgba(239, 68, 68, 0.4); color: #ff6b6b; }
+    .risk-badge.very-low { background: rgba(34, 197, 94, 0.3); color: #4ade80; }
+
+    .phone-container {
+      background: var(--color-black);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      max-height: 800px;
+      overflow-y: auto;
+    }
+
+    .phone-container img {
+      width: 100%;
+      display: block;
+    }
+
+    .screen-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-gold);
+      text-align: center;
+      margin-top: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .legend {
+      background: var(--color-gray-900);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 60px;
+    }
+
+    .legend h3 {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-gray-300);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .legend-code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-gold);
+      background: var(--color-gray-800);
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .legend-text {
+      font-size: 13px;
+      color: var(--color-gray-400);
+    }
+
+    .notes {
+      background: var(--color-gray-900);
+      border-left: 4px solid var(--color-gold);
+      padding: 20px;
+      margin-top: 40px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .notes h4 {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-gold);
+      margin-bottom: 12px;
+    }
+
+    .notes ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .notes li {
+      font-size: 13px;
+      color: var(--color-gray-400);
+      padding: 4px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .notes li::before {
+      content: "-";
+      position: absolute;
+      left: 0;
+      color: var(--color-gray-600);
+    }
+
+    .nudge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .nudge-card {
+      background: var(--color-gray-800);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .nudge-card code {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-gold);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .nudge-card .session {
+      font-size: 11px;
+      color: var(--color-gray-500);
+      margin-bottom: 8px;
+    }
+
+    .nudge-card .question {
+      font-size: 13px;
+      color: var(--color-gray-300);
+    }
+
+    .dual-screen {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .dual-screen .screen-col {
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      body { padding: 20px; }
+      .persona-grid { grid-template-columns: 1fr; }
+      .dual-screen { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>TOMO DESIGN REVIEW</h1>
+    <p>Phase 6: Profile & Settings | Generated: January 2026</p>
+  </header>
+
+  <!-- Legend -->
+  <div class="legend">
+    <h3>Reference ID Format</h3>
+    <div class="legend-grid">
+      <div class="legend-item">
+        <span class="legend-code">PROFILE</span>
+        <span class="legend-text">Profile screens</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-code">SETTINGS</span>
+        <span class="legend-text">Settings screens</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-code">WHITE-EXC</span>
+        <span class="legend-text">Jake (White, Thriving)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-code">WHITE-RISK</span>
+        <span class="legend-text">David (White, At-Risk)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-code">BLUE-EXC</span>
+        <span class="legend-text">Marcus (Blue, Progressing)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-code">BLUE-RISK</span>
+        <span class="legend-text">Ryan (Blue, Declining)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-code">PURPLE</span>
+        <span class="legend-text">Sofia (Purple, Stable)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-code">BROWN</span>
+        <span class="legend-text">Elena (Brown, Refined)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Screen - All Personas -->
+  <section class="section">
+    <h2 class="section-title">Profile Screen - All Personas</h2>
+    <div class="persona-grid">
+      <!-- Jake - White Excelling -->
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-belt white"></div>
+          <div class="persona-info">
+            <h3>Jake Thompson</h3>
+            <p>"The Natural" - White Belt, 3 stripes</p>
+          </div>
+          <span class="risk-badge low">Low Risk</span>
+        </div>
+        <div class="phone-container">
+          <img src="screenshots/full-pages/PROFILE-WHITE-EXC.png" alt="Profile - Jake">
+        </div>
+        <div class="screen-label">PROFILE-WHITE-EXC</div>
+      </div>
+
+      <!-- David - White At Risk -->
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-belt white"></div>
+          <div class="persona-info">
+            <h3>David Morrison</h3>
+            <p>"The Late Starter" - White Belt, 2 stripes</p>
+          </div>
+          <span class="risk-badge high">High Risk</span>
+        </div>
+        <div class="phone-container">
+          <img src="screenshots/full-pages/PROFILE-WHITE-RISK.png" alt="Profile - David">
+        </div>
+        <div class="screen-label">PROFILE-WHITE-RISK</div>
+      </div>
+
+      <!-- Marcus - Blue Excelling -->
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-belt blue"></div>
+          <div class="persona-info">
+            <h3>Marcus Chen</h3>
+            <p>"The Dedicated Hobbyist" - Blue Belt, 2 stripes</p>
+          </div>
+          <span class="risk-badge moderate">Moderate Risk</span>
+        </div>
+        <div class="phone-container">
+          <img src="screenshots/full-pages/PROFILE-BLUE-EXC.png" alt="Profile - Marcus">
+        </div>
+        <div class="screen-label">PROFILE-BLUE-EXC</div>
+      </div>
+
+      <!-- Ryan - Blue At Risk -->
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-belt blue"></div>
+          <div class="persona-info">
+            <h3>Ryan Torres</h3>
+            <p>"The Fading Fire" - Blue Belt, 1 stripe</p>
+          </div>
+          <span class="risk-badge critical">Critical Risk</span>
+        </div>
+        <div class="phone-container">
+          <img src="screenshots/full-pages/PROFILE-BLUE-RISK.png" alt="Profile - Ryan">
+        </div>
+        <div class="screen-label">PROFILE-BLUE-RISK</div>
+      </div>
+
+      <!-- Sofia - Purple -->
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-belt purple"></div>
+          <div class="persona-info">
+            <h3>Sofia Rodriguez</h3>
+            <p>"The Grinder" - Purple Belt, 1 stripe</p>
+          </div>
+          <span class="risk-badge low">Low Risk</span>
+        </div>
+        <div class="phone-container">
+          <img src="screenshots/full-pages/PROFILE-PURPLE.png" alt="Profile - Sofia">
+        </div>
+        <div class="screen-label">PROFILE-PURPLE</div>
+      </div>
+
+      <!-- Elena - Brown -->
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-belt brown"></div>
+          <div class="persona-info">
+            <h3>Elena Kim</h3>
+            <p>"The Veteran" - Brown Belt, 2 stripes</p>
+          </div>
+          <span class="risk-badge very-low">Very Low Risk</span>
+        </div>
+        <div class="phone-container">
+          <img src="screenshots/full-pages/PROFILE-BROWN.png" alt="Profile - Elena">
+        </div>
+        <div class="screen-label">PROFILE-BROWN</div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <h4>Profile Screen Sections</h4>
+      <ul>
+        <li><strong>PROF-CARD</strong> - Avatar, name, belt badge</li>
+        <li><strong>PROF-COMPLETE</strong> - Profile completion progress bar</li>
+        <li><strong>PROF-STATS</strong> - Training stats summary (years, sessions)</li>
+        <li><strong>PROF-BELT</strong> - Belt history timeline</li>
+        <li><strong>PROF-NUDGE</strong> - Progressive profiling card (if applicable)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Settings Screen -->
+  <section class="section">
+    <h2 class="section-title">Settings Screen</h2>
+    <div class="persona-grid">
+      <!-- Marcus - Blue Excelling (representative) -->
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-belt blue"></div>
+          <div class="persona-info">
+            <h3>Marcus Chen</h3>
+            <p>"The Dedicated Hobbyist" - Blue Belt, 2 stripes</p>
+          </div>
+          <span class="risk-badge moderate">Moderate Risk</span>
+        </div>
+        <div class="phone-container">
+          <img src="screenshots/full-pages/SETTINGS-BLUE-EXC.png" alt="Settings - Marcus">
+        </div>
+        <div class="screen-label">SETTINGS-BLUE-EXC</div>
+      </div>
+    </div>
+
+    <div class="notes" style="margin-top: 40px;">
+      <h4>Settings Screen Sections</h4>
+      <ul>
+        <li><strong>SET-LOGGING</strong> - Logging Preference: Voice vs Text toggle</li>
+        <li><strong>SET-NOTIF</strong> - Notifications: Reminder toggles (training days, insights)</li>
+        <li><strong>SET-DEMO</strong> - Demo Mode: Persona switcher (dev/testing only)</li>
+        <li><strong>SET-ACCOUNT</strong> - Account: Reset data, export data options</li>
+        <li><strong>SET-INFO</strong> - App Info: Version number, legal links</li>
+      </ul>
+    </div>
+
+    <div class="notes" style="margin-top: 20px; border-left-color: var(--color-gray-500);">
+      <h4>Demo Mode (Development)</h4>
+      <ul>
+        <li>Belt switcher: White / Blue / Purple / Brown</li>
+        <li>Persona switcher: 6 test personas</li>
+        <li>Shows different UI personalization per selection</li>
+        <li>Not visible in production builds</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Progressive Profiling Nudges -->
+  <section class="section">
+    <h2 class="section-title">Progressive Profiling Nudges</h2>
+
+    <div class="notes" style="margin-top: 0; border-left-color: var(--color-positive);">
+      <h4>Progressive Profiling Strategy</h4>
+      <ul>
+        <li>Instead of long onboarding, collect profile data over ~20 sessions</li>
+        <li>Nudges appear at specific session count milestones</li>
+        <li>Users can skip questions up to 3 times before we stop asking</li>
+        <li>Critical fields (name, belt) required at onboarding</li>
+      </ul>
+    </div>
+
+    <div class="nudge-grid">
+      <div class="nudge-card">
+        <code>NUDGE-03</code>
+        <div class="session">Session 3</div>
+        <div class="question">Training start date</div>
+      </div>
+      <div class="nudge-card">
+        <code>NUDGE-05</code>
+        <div class="session">Session 5</div>
+        <div class="question">Stripes count</div>
+      </div>
+      <div class="nudge-card">
+        <code>NUDGE-07</code>
+        <div class="session">Session 7</div>
+        <div class="question">Gym name</div>
+      </div>
+      <div class="nudge-card">
+        <code>NUDGE-10</code>
+        <div class="session">Session 10</div>
+        <div class="question">Training goals</div>
+      </div>
+      <div class="nudge-card">
+        <code>NUDGE-12</code>
+        <div class="session">Session 12</div>
+        <div class="question">Target frequency</div>
+      </div>
+      <div class="nudge-card">
+        <code>NUDGE-15</code>
+        <div class="session">Session 15</div>
+        <div class="question">Current belt date</div>
+      </div>
+      <div class="nudge-card">
+        <code>NUDGE-18</code>
+        <div class="session">Session 18</div>
+        <div class="question">Birth year</div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
