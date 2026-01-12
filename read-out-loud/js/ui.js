@@ -530,9 +530,10 @@ class UIController {
     if (!this.premiumTTS || !this.premiumTTS.isConfigured) {
       // Prompt for API key
       const apiKey = prompt(
-        'MP3 download requires an OpenAI API key.\n\n' +
-        'Enter your OpenAI API key (get one at platform.openai.com):\n\n' +
-        'Cost: ~$0.015 per 1,000 characters'
+        'MP3 download uses ElevenLabs (best voice quality).\n\n' +
+        'Free tier: 10,000 characters/month\n\n' +
+        'Get your free API key at elevenlabs.io\n\n' +
+        'Enter your ElevenLabs API key:'
       );
 
       if (!apiKey) {
@@ -550,16 +551,21 @@ class UIController {
       }
 
       this.premiumTTS.saveApiKey(apiKey);
-      this.showToast('API key saved successfully', 'success');
+
+      // Show usage info
+      const remaining = validation.charactersLimit - validation.charactersUsed;
+      this.showToast(`Connected! ${remaining.toLocaleString()} chars remaining this month`, 'success');
     }
 
-    // Show cost estimate
+    // Show usage estimate
     const estimate = this.premiumTTS.estimateCost(text);
+    const voiceName = this.premiumTTS.getSelectedVoiceName();
     const proceed = confirm(
-      `Generate MP3 audio?\n\n` +
+      `Generate MP3 with ElevenLabs?\n\n` +
+      `Voice: ${voiceName}\n` +
       `Characters: ${estimate.characters.toLocaleString()}\n` +
-      `Estimated cost: ${estimate.formatted}\n\n` +
-      `This will use your OpenAI API credits.`
+      `Cost: Free (10K chars/month)\n\n` +
+      `Continue?`
     );
 
     if (!proceed) {

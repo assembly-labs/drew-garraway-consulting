@@ -1,24 +1,29 @@
-// Premium TTS Module - OpenAI TTS Integration
+// Premium TTS Module - ElevenLabs Integration
 // Enables MP3 download and background audio playback on iOS
+// Free tier: 10,000 characters/month
 
 class PremiumTTS {
   constructor() {
     this.apiKey = null;
-    this.baseUrl = 'https://api.openai.com/v1/audio/speech';
+    this.baseUrl = 'https://api.elevenlabs.io/v1';
     this.isConfigured = false;
 
-    // Available OpenAI voices
+    // ElevenLabs voices (curated selection of best voices)
     this.voices = [
-      { id: 'alloy', name: 'Alloy', description: 'Neutral and balanced' },
-      { id: 'echo', name: 'Echo', description: 'Warm and engaging' },
-      { id: 'fable', name: 'Fable', description: 'Expressive and dynamic' },
-      { id: 'onyx', name: 'Onyx', description: 'Deep and authoritative' },
-      { id: 'nova', name: 'Nova', description: 'Friendly and upbeat' },
-      { id: 'shimmer', name: 'Shimmer', description: 'Clear and pleasant' }
+      { id: 'EXAVITQu4vr4xnSDxMaL', name: 'Sarah', description: 'Soft, young female' },
+      { id: 'FGY2WhTYpPnrIDTdsKH5', name: 'Laura', description: 'Calm, professional female' },
+      { id: 'IKne3meq5aSn9XLyUdCD', name: 'Charlie', description: 'Natural, conversational male' },
+      { id: 'JBFqnCBsd6RMkjVDRZzb', name: 'George', description: 'Warm, mature male' },
+      { id: 'TX3LPaxmHKxFdv7VOQHJ', name: 'Liam', description: 'Young, articulate male' },
+      { id: 'XB0fDUnXU5powFXDhCwa', name: 'Charlotte', description: 'Warm, engaging female' },
+      { id: 'Xb7hH8MSUJpSbSDYk0k2', name: 'Alice', description: 'Confident, clear female' },
+      { id: 'onwK4e9ZLuTAKqWW03F9', name: 'Daniel', description: 'Authoritative British male' },
+      { id: 'pFZP5JQG7iQjIQuC4Bku', name: 'Lily', description: 'Warm British female' },
+      { id: 'pqHfZKP75CvOlQylNhV4', name: 'Bill', description: 'Trustworthy American male' }
     ];
 
-    this.selectedVoice = 'nova';
-    this.model = 'tts-1'; // or 'tts-1-hd' for higher quality
+    this.selectedVoice = 'EXAVITQu4vr4xnSDxMaL'; // Sarah (default)
+    this.model = 'eleven_monolingual_v1'; // or 'eleven_multilingual_v2'
 
     // Audio playback
     this.audioElement = null;
@@ -30,25 +35,30 @@ class PremiumTTS {
     this.onEnd = null;
     this.onError = null;
 
-    // Load saved API key
-    this.loadApiKey();
+    // Load saved settings
+    this.loadSettings();
   }
 
-  loadApiKey() {
+  loadSettings() {
     try {
-      const key = localStorage.getItem('premium_tts_api_key');
+      const key = localStorage.getItem('elevenlabs_api_key');
       if (key) {
         this.apiKey = key;
         this.isConfigured = true;
       }
+
+      const voice = localStorage.getItem('elevenlabs_voice');
+      if (voice) {
+        this.selectedVoice = voice;
+      }
     } catch (e) {
-      console.warn('Could not load API key from storage');
+      console.warn('Could not load ElevenLabs settings from storage');
     }
   }
 
   saveApiKey(key) {
     try {
-      localStorage.setItem('premium_tts_api_key', key);
+      localStorage.setItem('elevenlabs_api_key', key);
       this.apiKey = key;
       this.isConfigured = true;
       return true;
@@ -60,7 +70,7 @@ class PremiumTTS {
 
   clearApiKey() {
     try {
-      localStorage.removeItem('premium_tts_api_key');
+      localStorage.removeItem('elevenlabs_api_key');
       this.apiKey = null;
       this.isConfigured = false;
       return true;
@@ -72,7 +82,7 @@ class PremiumTTS {
   setVoice(voiceId) {
     if (this.voices.find(v => v.id === voiceId)) {
       this.selectedVoice = voiceId;
-      localStorage.setItem('premium_tts_voice', voiceId);
+      localStorage.setItem('elevenlabs_voice', voiceId);
       return true;
     }
     return false;
@@ -82,52 +92,68 @@ class PremiumTTS {
     return this.voices;
   }
 
+  getSelectedVoiceName() {
+    const voice = this.voices.find(v => v.id === this.selectedVoice);
+    return voice ? voice.name : 'Sarah';
+  }
+
   /**
-   * Estimate cost for text
-   * OpenAI TTS: $0.015 per 1K characters (tts-1), $0.030 per 1K characters (tts-1-hd)
+   * Estimate usage for text
+   * ElevenLabs free tier: 10,000 chars/month
    */
   estimateCost(text) {
     const chars = text.length;
-    const costPer1K = this.model === 'tts-1-hd' ? 0.030 : 0.015;
-    const cost = (chars / 1000) * costPer1K;
     return {
       characters: chars,
-      cost: cost.toFixed(4),
-      formatted: `$${cost.toFixed(2)}`
+      cost: '0.00', // Free tier
+      formatted: 'Free tier',
+      freeRemaining: '~10K chars/month'
     };
   }
 
   /**
-   * Generate audio from text using OpenAI TTS API
+   * Generate audio from text using ElevenLabs API
    * Returns a Blob containing the audio data
    */
   async generateAudio(text, options = {}) {
     if (!this.isConfigured) {
-      throw new Error('Premium TTS not configured. Please add your OpenAI API key.');
+      throw new Error('ElevenLabs not configured. Please add your API key.');
     }
 
-    const voice = options.voice || this.selectedVoice;
+    const voiceId = options.voiceId || this.selectedVoice;
     const model = options.model || this.model;
-    const format = options.format || 'mp3';
 
     try {
-      const response = await fetch(this.baseUrl, {
+      const response = await fetch(`${this.baseUrl}/text-to-speech/${voiceId}`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json'
+          'Accept': 'audio/mpeg',
+          'Content-Type': 'application/json',
+          'xi-api-key': this.apiKey
         },
         body: JSON.stringify({
-          model: model,
-          input: text,
-          voice: voice,
-          response_format: format
+          text: text,
+          model_id: model,
+          voice_settings: {
+            stability: 0.5,
+            similarity_boost: 0.75,
+            style: 0.0,
+            use_speaker_boost: true
+          }
         })
       });
 
       if (!response.ok) {
         const error = await response.json().catch(() => ({}));
-        throw new Error(error.error?.message || `API error: ${response.status}`);
+
+        if (response.status === 401) {
+          throw new Error('Invalid API key. Please check your ElevenLabs API key.');
+        }
+        if (response.status === 429) {
+          throw new Error('Character limit reached. Free tier allows 10K chars/month.');
+        }
+
+        throw new Error(error.detail?.message || `API error: ${response.status}`);
       }
 
       const audioBlob = await response.blob();
@@ -135,7 +161,7 @@ class PremiumTTS {
       return audioBlob;
 
     } catch (error) {
-      console.error('Premium TTS generation failed:', error);
+      console.error('ElevenLabs TTS generation failed:', error);
       throw error;
     }
   }
@@ -246,35 +272,69 @@ class PremiumTTS {
   }
 
   /**
-   * Check if API key is valid by making a minimal request
+   * Check if API key is valid by getting user info
    */
   async validateApiKey(key) {
     try {
-      const response = await fetch(this.baseUrl, {
-        method: 'POST',
+      const response = await fetch(`${this.baseUrl}/user`, {
+        method: 'GET',
         headers: {
-          'Authorization': `Bearer ${key}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          model: 'tts-1',
-          input: 'Test',
-          voice: 'nova',
-          response_format: 'mp3'
-        })
+          'xi-api-key': key
+        }
       });
 
       if (response.ok) {
-        return { valid: true };
+        const data = await response.json();
+        return {
+          valid: true,
+          subscription: data.subscription?.tier || 'free',
+          charactersUsed: data.subscription?.character_count || 0,
+          charactersLimit: data.subscription?.character_limit || 10000
+        };
       } else {
         const error = await response.json().catch(() => ({}));
         return {
           valid: false,
-          error: error.error?.message || 'Invalid API key'
+          error: error.detail?.message || 'Invalid API key'
         };
       }
     } catch (e) {
       return { valid: false, error: 'Network error' };
+    }
+  }
+
+  /**
+   * Get current usage stats
+   */
+  async getUsage() {
+    if (!this.isConfigured) {
+      return null;
+    }
+
+    try {
+      const response = await fetch(`${this.baseUrl}/user`, {
+        method: 'GET',
+        headers: {
+          'xi-api-key': this.apiKey
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const used = data.subscription?.character_count || 0;
+        const limit = data.subscription?.character_limit || 10000;
+        const remaining = limit - used;
+
+        return {
+          used,
+          limit,
+          remaining,
+          percentUsed: Math.round((used / limit) * 100)
+        };
+      }
+      return null;
+    } catch (e) {
+      return null;
     }
   }
 }
