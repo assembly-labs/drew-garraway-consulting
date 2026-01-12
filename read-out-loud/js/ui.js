@@ -10,6 +10,7 @@ class UIController {
     this.autoSaveTimer = null;
     this.isHighlighting = false;
     this.currentTextId = null;
+    this.showAllVoices = false; // Toggle for voice list view
   }
 
   initialize() {
@@ -440,52 +441,91 @@ class UIController {
   }
 
   renderVoiceList(filter = '') {
-    const voices = filter
-      ? this.speechEngine.voices.filter(voice =>
-          voice.name.toLowerCase().includes(filter.toLowerCase()) ||
-          voice.lang.toLowerCase().includes(filter.toLowerCase())
-        )
-      : this.speechEngine.voices;
+    // Get voices based on mode (curated top voices vs all voices)
+    let voices;
+    const totalVoiceCount = this.speechEngine.voices.length;
 
-    // Group voices by language
-    const grouped = {};
-    voices.forEach(voice => {
-      const lang = voice.lang;
-      if (!grouped[lang]) grouped[lang] = [];
-      grouped[lang].push(voice);
-    });
+    if (filter) {
+      // When searching, search all voices
+      voices = this.speechEngine.voices.filter(voice =>
+        voice.name.toLowerCase().includes(filter.toLowerCase()) ||
+        voice.lang.toLowerCase().includes(filter.toLowerCase())
+      );
+    } else if (this.showAllVoices) {
+      // Show all voices when toggle is on
+      voices = this.speechEngine.voices;
+    } else {
+      // Default: show only top 8 curated voices
+      voices = this.speechEngine.getTopVoices(8);
+    }
 
-    // Render grouped voices
+    // Build the voice list HTML
     let html = '';
-    Object.keys(grouped).sort().forEach(lang => {
-      html += `<div class="voice-group">`;
-      html += `<div class="voice-group-header">${lang}</div>`;
 
-      grouped[lang].forEach(voice => {
-        const quality = this.speechEngine.getVoiceQuality(voice);
-        const isSelected = voice === this.speechEngine.selectedVoice;
+    // Add header with voice count and toggle
+    const voiceCountText = filter
+      ? `${voices.length} matching voices`
+      : this.showAllVoices
+        ? `All ${totalVoiceCount} voices`
+        : `Top ${voices.length} voices`;
 
-        html += `
-          <div class="voice-item ${isSelected ? 'selected' : ''}" data-voice-uri="${voice.voiceURI}">
-            <div class="voice-name">
-              ${voice.name}
-              <span class="voice-quality ${quality}">${quality}</span>
+    html += `
+      <div class="voice-list-header">
+        <span class="voice-count">${voiceCountText}</span>
+        ${!filter ? `
+          <button class="voice-toggle-btn" id="toggleAllVoices">
+            ${this.showAllVoices ? 'Show recommended' : `Show all (${totalVoiceCount})`}
+          </button>
+        ` : ''}
+      </div>
+    `;
+
+    // Render voice cards (no grouping for cleaner UX)
+    voices.forEach(voice => {
+      const quality = this.speechEngine.getVoiceQuality(voice);
+      const isSelected = voice.voiceURI === this.speechEngine.selectedVoice?.voiceURI;
+      const displayName = this.speechEngine.getDisplayName(voice);
+      const qualityLabel = this.getQualityLabel(quality);
+
+      html += `
+        <div class="voice-item ${isSelected ? 'selected' : ''}" data-voice-uri="${voice.voiceURI}">
+          <div class="voice-info">
+            <div class="voice-name">${displayName}</div>
+            <div class="voice-meta">
+              <span class="voice-lang">${voice.lang}</span>
+              <span class="voice-quality ${quality}">${qualityLabel}</span>
             </div>
-            <div class="voice-lang">${voice.lang}</div>
-            <button class="voice-preview" data-voice-uri="${voice.voiceURI}">Preview</button>
           </div>
-        `;
-      });
-
-      html += `</div>`;
+          <button class="voice-preview" data-voice-uri="${voice.voiceURI}" title="Preview voice">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </button>
+        </div>
+      `;
     });
+
+    // Show helpful message if no voices found
+    if (voices.length === 0) {
+      html += `
+        <div class="voice-empty">
+          ${filter ? 'No voices match your search' : 'No voices available'}
+        </div>
+      `;
+    }
 
     this.elements.voiceList.innerHTML = html;
+
+    // Attach toggle button listener
+    const toggleBtn = document.getElementById('toggleAllVoices');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => this.toggleShowAllVoices());
+    }
 
     // Attach event listeners to voice items
     this.elements.voiceList.querySelectorAll('.voice-item').forEach(item => {
       item.addEventListener('click', (e) => {
-        if (!e.target.classList.contains('voice-preview')) {
+        if (!e.target.closest('.voice-preview')) {
           this.selectVoice(item.dataset.voiceUri);
         }
       });
@@ -498,6 +538,21 @@ class UIController {
         this.previewVoice(btn.dataset.voiceUri);
       });
     });
+  }
+
+  getQualityLabel(quality) {
+    const labels = {
+      'premium': 'Premium',
+      'enhanced': 'Enhanced',
+      'good': 'Good',
+      'standard': 'Standard'
+    };
+    return labels[quality] || quality;
+  }
+
+  toggleShowAllVoices() {
+    this.showAllVoices = !this.showAllVoices;
+    this.renderVoiceList(this.elements.voiceSearch.value);
   }
 
   selectVoice(voiceURI) {

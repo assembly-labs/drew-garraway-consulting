@@ -80,47 +80,182 @@ class SpeechEngine {
     const uri = voice.voiceURI.toLowerCase();
     const name = voice.name.toLowerCase();
 
-    // Premium indicators
-    if (uri.includes('premium')) score += 100;
-    if (uri.includes('enhanced')) score += 80;
-    if (uri.includes('natural')) score += 60;
+    // ============================================
+    // TIER 1: Premium/Neural Voices (Score: 200+)
+    // ============================================
 
-    // Apple-specific high-quality voices
-    if (uri.includes('com.apple.voice.premium')) score += 100;
-    if (uri.includes('com.apple.voice.enhanced')) score += 80;
-    if (uri.includes('com.apple.ttsbundle')) score += 70;
-    if (uri.includes('com.apple.eloquence')) score += 60;
+    // Apple Premium voices (highest quality on macOS/iOS)
+    if (uri.includes('com.apple.voice.premium')) score += 250;
+    if (uri.includes('premium')) score += 200;
 
-    // Prefer local voices
+    // Neural/AI voices (Windows, Edge, Chrome)
+    if (name.includes('neural') || uri.includes('neural')) score += 200;
+    if (name.includes('natural') || uri.includes('natural')) score += 180;
+
+    // Microsoft Edge neural voices
+    if (uri.includes('microsoft') && (name.includes('online') || name.includes('neural'))) score += 200;
+
+    // Google neural voices
+    if (uri.includes('google') && name.includes('wavenet')) score += 200;
+
+    // ============================================
+    // TIER 2: Enhanced Voices (Score: 100-199)
+    // ============================================
+
+    // Apple Enhanced voices
+    if (uri.includes('com.apple.voice.enhanced')) score += 150;
+    if (uri.includes('enhanced')) score += 120;
+
+    // Apple TTSBundle (good quality default voices)
+    if (uri.includes('com.apple.ttsbundle')) score += 100;
+
+    // Known high-quality voice names (cross-platform)
+    const premiumNames = [
+      'samantha', 'alex', 'siri',           // Apple
+      'zira', 'david', 'mark', 'eva',       // Microsoft
+      'google us english', 'google uk english' // Google
+    ];
+    if (premiumNames.some(pn => name.includes(pn))) score += 100;
+
+    // ============================================
+    // TIER 3: Good Quality Voices (Score: 50-99)
+    // ============================================
+
+    // Known decent voice names
+    const goodNames = [
+      'karen', 'daniel', 'moira', 'rishi', 'tessa', 'fiona', // Apple regional
+      'hazel', 'george', 'susan',           // Microsoft
+      'allison', 'ava', 'tom', 'kate'       // Various
+    ];
+    if (goodNames.some(gn => name.includes(gn))) score += 60;
+
+    // Apple Eloquence (accessible but robotic)
+    if (uri.includes('com.apple.eloquence')) score += 40;
+
+    // ============================================
+    // MODIFIERS
+    // ============================================
+
+    // Strongly prefer local voices (no latency, works offline)
     if (voice.localService) score += 50;
 
-    // English preference for default
-    if (voice.lang.startsWith('en-')) score += 20;
-    if (voice.lang === 'en-US') score += 10;
+    // Prefer US/UK English for consistency
+    if (voice.lang === 'en-US') score += 15;
+    if (voice.lang === 'en-GB') score += 12;
+    if (voice.lang === 'en-AU') score += 10;
 
-    // Specific high-quality voice names
-    const highQualityNames = ['samantha', 'alex', 'siri', 'karen', 'daniel', 'moira', 'rishi', 'tessa', 'fiona'];
-    if (highQualityNames.some(hqName => name.includes(hqName))) {
-      score += 40;
-    }
+    // ============================================
+    // PENALTIES
+    // ============================================
 
-    // Avoid network voices
-    if (uri.includes('network')) score -= 50;
-    if (!voice.localService) score -= 20;
+    // Network-only voices (latency, may fail offline)
+    if (uri.includes('network')) score -= 30;
+    if (!voice.localService) score -= 15;
+
+    // Compact/low-quality indicators
+    if (name.includes('compact')) score -= 50;
+    if (uri.includes('compact')) score -= 50;
+
+    // espeak/festival (very robotic)
+    if (uri.includes('espeak') || uri.includes('festival')) score -= 100;
 
     return score;
   }
 
   getVoiceQuality(voice) {
-    const uri = voice.voiceURI.toLowerCase();
+    const score = this.scoreVoice(voice);
 
-    if (uri.includes('premium') || uri.includes('com.apple.voice.premium')) {
-      return 'premium';
-    }
-    if (uri.includes('enhanced') || uri.includes('natural') || uri.includes('com.apple.voice.enhanced')) {
-      return 'enhanced';
-    }
+    if (score >= 200) return 'premium';
+    if (score >= 100) return 'enhanced';
+    if (score >= 50) return 'good';
     return 'standard';
+  }
+
+  /**
+   * Get the top N best voices, deduplicated by display name
+   * @param {number} limit - Maximum number of voices to return (default: 8)
+   * @returns {Array} - Top voices sorted by quality
+   */
+  getTopVoices(limit = 8) {
+    // Create a map to deduplicate by cleaned voice name
+    const seenNames = new Map();
+
+    for (const voice of this.voices) {
+      // Clean the name for deduplication (remove quality suffixes)
+      const cleanName = this.getCleanVoiceName(voice);
+      const score = this.scoreVoice(voice);
+
+      // Keep the highest-scoring version of each voice name
+      if (!seenNames.has(cleanName) || seenNames.get(cleanName).score < score) {
+        seenNames.set(cleanName, { voice, score });
+      }
+    }
+
+    // Convert back to array, sort by score, and take top N
+    const dedupedVoices = Array.from(seenNames.values())
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit)
+      .map(item => item.voice);
+
+    return dedupedVoices;
+  }
+
+  /**
+   * Get a clean display name for the voice (removes quality suffixes)
+   * @param {SpeechSynthesisVoice} voice
+   * @returns {string}
+   */
+  getCleanVoiceName(voice) {
+    let name = voice.name;
+
+    // Remove common suffixes/prefixes
+    const removePatterns = [
+      /\s*\(Premium\)/i,
+      /\s*\(Enhanced\)/i,
+      /\s*\(Natural\)/i,
+      /\s*\(Online\)/i,
+      /\s*\(Network\)/i,
+      /\s*- English.*$/i,
+      /\s*English \(.*\)$/i,
+      /^Microsoft\s+/i,
+      /^Google\s+/i
+    ];
+
+    for (const pattern of removePatterns) {
+      name = name.replace(pattern, '');
+    }
+
+    return name.trim().toLowerCase();
+  }
+
+  /**
+   * Get a user-friendly display name for the voice
+   * @param {SpeechSynthesisVoice} voice
+   * @returns {string}
+   */
+  getDisplayName(voice) {
+    let name = voice.name;
+
+    // Clean up common prefixes while keeping it readable
+    name = name.replace(/^Microsoft\s+/i, '');
+    name = name.replace(/^Google\s+/i, '');
+
+    // Remove redundant language info if it's in the name
+    name = name.replace(/\s*- English.*$/i, '');
+
+    return name;
+  }
+
+  /**
+   * Check if we have enough high-quality voices
+   * @returns {boolean}
+   */
+  hasQualityVoices() {
+    const topVoices = this.getTopVoices(3);
+    if (topVoices.length === 0) return false;
+
+    // Check if at least one voice scores above "good" threshold
+    return topVoices.some(v => this.scoreVoice(v) >= 100);
   }
 
   chunkText(text) {
