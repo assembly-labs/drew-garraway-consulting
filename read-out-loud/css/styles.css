@@ -300,6 +300,19 @@ body::before {
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
+/* Optional feature button style (e.g., MP3 download) */
+.action-btn.optional {
+  border-style: dashed;
+  border-color: var(--border-color);
+  opacity: 0.7;
+}
+
+.action-btn.optional:hover {
+  opacity: 1;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
 /* Text Stats */
 .text-stats {
   display: flex;
