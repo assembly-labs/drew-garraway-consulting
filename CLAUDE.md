@@ -1,0 +1,155 @@
+# Drew Garraway Consulting - Monorepo Context for Claude
+
+## What This Is
+
+This is a multi-project monorepo containing client work, personal projects, and consulting deliverables. Each project is independent with its own tech stack, deployment, and documentation.
+
+**Before working on any task, identify which project you're in.** If unclear, ask.
+
+---
+
+## Project Directory
+
+| Project | Directory | Description | Has CLAUDE.md |
+|---------|-----------|-------------|---------------|
+| **TOMO** | `/TOMO/` | BJJ training journal - voice-first mobile app | Yes |
+| **Scout** | `/scout/` | AI library discovery system for Tredyffrin Libraries | Yes |
+| **FHM** | `/fhm/` | Franklin Hugh Money - personal finance education site | Partial (series-7 only) |
+| **CareerChat** | `/career-chat/` | AI career chatbot about Drew's background | Yes |
+| **F_This_App** | `/f_this_app/` | Next.js social game app | Yes |
+| **Mikey-real** | `/Mikey-real/` | PA flashcard PWA with offline support | Yes |
+| **Cool Curriculum** | `/cool-curriculum/` | AI lesson planner for K-4 educators | Yes |
+| **Prompt Property** | `/prompt-property/` | AI assistant for property managers | Yes |
+| **TPL** | `/tpl/` | Tredyffrin Libraries printer documentation | Yes |
+| **Gather** | `/gather/` | Farmers market platform | Yes |
+| **Read Out Loud** | `/read-out-loud/` | Text-to-speech PWA for reading documents | Yes |
+
+---
+
+## Quick Reference: Tech Stacks
+
+| Project | Framework | Build | Styling | Deployment |
+|---------|-----------|-------|---------|------------|
+| TOMO | React 18 + TS | Vite | CSS Variables | Cloudflare Pages |
+| Scout | React 18 + TS | Vite | Tailwind | Netlify |
+| FHM | Vanilla HTML/CSS/JS | Node scripts | Custom CSS | Cloudflare Pages |
+| CareerChat | React 18 + TS | Vite | Custom CSS | Cloudflare Pages |
+| F_This_App | Next.js 16 + TS | Next.js | Tailwind v4 | Cloudflare Pages |
+| Mikey-real | React 19 + TS | Vite | Tailwind v4 | PWA |
+| Cool Curriculum | React 19 + TS | CRA | Tailwind | TBD |
+| Prompt Property | Vanilla JS | N/A | CSS3 | Static HTML |
+| TPL | Vanilla HTML | N/A | Custom CSS | GitHub Pages |
+| Gather | Next.js 14 | Next.js | Tailwind | Vercel |
+| Read Out Loud | Vanilla JS | N/A | Custom CSS | PWA |
+
+---
+
+## Working in This Monorepo
+
+### Step 1: Identify the Project
+
+When you receive a task, first determine which project it belongs to. Look for:
+- Directory paths in the request
+- Project names mentioned
+- Tech stack clues (e.g., "the Next.js app" = F_This_App)
+- Feature context (e.g., "BJJ journal" = TOMO, "library search" = Scout)
+
+### Step 2: Read Project-Specific CLAUDE.md
+
+If the project has its own `CLAUDE.md`, read it before making changes:
+- `/TOMO/CLAUDE.md` - Comprehensive guide with design system, voice, deployment
+- `/tpl/CLAUDE.md` - Style requirements, deployment, HTML conversion rules
+- `/fhm/content/series-7/CLAUDE.md` - Brand voice, content workflow, templates
+
+### Step 3: Understand Project Conventions
+
+Each project may have different:
+- Code style and linting rules
+- Deployment processes
+- Design systems
+- Brand voice guidelines
+
+---
+
+## Directory Structure Overview
+
+```
+drew-garraway-consulting/
+├── Active Projects
+│   ├── TOMO/                    # BJJ training journal
+│   ├── scout/                   # Library discovery AI
+│   ├── fhm/                     # Personal finance site
+│   ├── career-chat/             # Career chatbot
+│   ├── f_this_app/              # Social game app
+│   ├── Mikey-real/              # Flashcard PWA
+│   ├── cool-curriculum/         # Lesson planner
+│   ├── prompt-property/         # Property assistant
+│   ├── gather/                  # Farmers market platform
+│   ├── tpl/                     # Printer documentation
+│   └── read-out-loud/           # Text-to-speech PWA
+│
+├── Supporting Directories
+│   ├── _archived/               # Previous versions (ignore)
+│   ├── docs/                    # Repo-level docs
+│   ├── scripts/                 # Repo-level automation
+│   ├── pitches/                 # Business pitches
+│   └── roofing/                 # Roofing checklist deliverable
+│
+├── Root Static Site
+│   ├── index.html               # drewgarraway.com landing
+│   ├── products.html
+│   ├── resume.html
+│   └── contact.html
+│
+└── Configuration
+    ├── .eslintrc.base.json      # Shared ESLint config
+    ├── .prettierrc.base.json    # Shared Prettier config
+    └── .github/                 # GitHub Actions
+```
+
+---
+
+## Common Patterns Across Projects
+
+### Styling Preferences
+- **No emojis** in UI unless user explicitly requests
+- **Dark themes** preferred for apps (TOMO, F_This_App)
+- **Accessibility** - WCAG 2.1 AA minimum
+- **Touch targets** - 44px minimum for interactive elements
+
+### Code Preferences
+- TypeScript for all React projects
+- Functional components with hooks
+- Explicit types, avoid `any`
+- Descriptive variable names
+
+### Deployment
+- Most projects auto-deploy on push to `main`
+- Check individual project README or CLAUDE.md for specific commands
+
+---
+
+## When Unsure
+
+If you can't determine which project a task belongs to, ask:
+
+> "This monorepo contains multiple projects. Which project should I work in?
+> - TOMO (BJJ journal)
+> - Scout (library search)
+> - FHM (finance education)
+> - [other project]
+> - Or are you working on the root site?"
+
+---
+
+## Project-Specific Instructions
+
+For detailed instructions, read the project's own documentation:
+
+| Project | Key Docs |
+|---------|----------|
+| TOMO | `/TOMO/CLAUDE.md`, `/TOMO/docs/design-system/` |
+| Scout | `/scout/README.md` |
+| FHM | `/fhm/content/series-7/CLAUDE.md`, `/fhm/design/brand/brand-voice.md` |
+| TPL | `/tpl/CLAUDE.md` |
+| Others | Check `README.md` in project directory |
