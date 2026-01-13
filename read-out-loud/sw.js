@@ -1,5 +1,5 @@
 // Service Worker for offline functionality
-const CACHE_VERSION = 'v2.0.0';
+const CACHE_VERSION = 'v2.1.0';
 const CACHE_NAME = `tts-reader-${CACHE_VERSION}`;
 
 // Assets to cache
@@ -160,18 +160,4 @@ self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'GET_VERSION') {
     event.ports[0].postMessage({ version: CACHE_VERSION });
   }
-});
-
-// Background sync for future enhancement
-self.addEventListener('sync', (event) => {
-  if (event.tag === 'sync-saved-texts') {
-    // Future: Sync saved texts with cloud storage
-    console.log('Service Worker: Background sync triggered');
-  }
-});
-
-// Push notifications for future enhancement
-self.addEventListener('push', (event) => {
-  // Future: Handle push notifications
-  console.log('Service Worker: Push notification received');
 });

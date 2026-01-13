@@ -40,8 +40,6 @@ class TextReaderApp {
       // Handle PWA install prompt
       this.handleInstallPrompt();
 
-      // Check for app updates
-      this.checkForUpdates();
 
       // Mark as initialized
       this.isInitialized = true;
@@ -289,15 +287,6 @@ class TextReaderApp {
         document.body.removeChild(notification);
       }
     }, 10000);
-  }
-
-  checkForUpdates() {
-    // Check for app updates periodically
-    setInterval(() => {
-      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-        navigator.serviceWorker.controller.postMessage({ type: 'CHECK_UPDATE' });
-      }
-    }, 60000); // Check every minute
   }
 
   showWelcomeMessage() {

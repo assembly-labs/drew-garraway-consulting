@@ -641,11 +641,6 @@ class UIController {
     }
   }
 
-  openSettings() {
-    // Future: Implement settings modal
-    this.showToast('Settings coming soon', 'info');
-  }
-
   handleKeyboardShortcuts(event) {
     // Skip if user is typing in an input field
     if (event.target.tagName === 'TEXTAREA' || event.target.tagName === 'INPUT') {

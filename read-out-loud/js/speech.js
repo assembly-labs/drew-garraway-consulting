@@ -319,9 +319,6 @@ class SpeechEngine {
     return (this.getCurrentPosition() / total) * 100;
   }
 
-  // Skip functions removed - no longer needed after UI update
-  // These were used for sentence-by-sentence navigation
-
   // Preview a voice with sample text
   previewVoice(voice, text = "Hello, this is how I sound when reading your text.") {
     this.synth.cancel(); // Stop any current speech
@@ -333,10 +330,6 @@ class SpeechEngine {
     utterance.volume = this.volume;
 
     this.synth.speak(utterance);
-  }
-
-  isSupported() {
-    return 'speechSynthesis' in window;
   }
 }
 
