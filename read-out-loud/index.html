@@ -6,14 +6,11 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#6366f1">
+    <meta name="theme-color" content="#0a0a0b">
     <title>READ OUT LOUD - Free Text-to-Speech</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=20260113d">
+    <link rel="stylesheet" href="css/styles.css?v=20260114a">
 </head>
 <body>
     <div id="app" class="app-container">
@@ -190,46 +187,23 @@
                 <div class="modal-body">
                     <!-- TTS Engine Selection -->
                     <div class="settings-section">
-                        <h3 class="settings-title">Voice Engine</h3>
-                        <p class="settings-description">Choose your text-to-speech engine</p>
+                        <h3 class="settings-title">Voice Quality</h3>
+                        <p class="settings-description">Choose between standard browser voices or premium cloud voices</p>
                         <div class="engine-toggle">
                             <button id="engineBrowser" class="engine-btn active" data-engine="browser">
-                                <span class="engine-name">Browser</span>
-                                <span class="engine-detail">Free, works offline</span>
+                                <span class="engine-name">Standard</span>
+                                <span class="engine-detail">Offline, instant</span>
                             </button>
                             <button id="engineGoogle" class="engine-btn" data-engine="google">
-                                <span class="engine-name">Google Cloud</span>
-                                <span class="engine-detail">Premium quality</span>
+                                <span class="engine-name">Premium</span>
+                                <span class="engine-detail">Neural voices</span>
                             </button>
                         </div>
-                    </div>
-
-                    <!-- Google Cloud API Key -->
-                    <div id="googleApiSection" class="settings-section" style="display: none;">
-                        <h3 class="settings-title">Google Cloud API Key</h3>
-                        <p class="settings-description">
-                            1M characters/month free with WaveNet voices.
-                            <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Get your key</a>
-                        </p>
-                        <div class="api-key-input-group">
-                            <input type="password" id="googleApiKeyInput" class="api-key-input" placeholder="Enter your API key">
-                            <button id="toggleApiKeyVisibility" class="toggle-visibility-btn" aria-label="Toggle visibility">
-                                <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="api-key-actions">
-                            <button id="saveApiKeyBtn" class="save-api-key-btn">Save Key</button>
-                            <button id="clearApiKeyBtn" class="clear-api-key-btn">Clear</button>
-                        </div>
-                        <div id="apiKeyStatus" class="api-key-status"></div>
                     </div>
 
                     <!-- Voice Quality Info -->
                     <div class="settings-section">
-                        <h3 class="settings-title">About Voice Quality</h3>
+                        <h3 class="settings-title">Voice Tiers</h3>
                         <div class="quality-info">
                             <div class="quality-tier">
                                 <span class="voice-quality premium">Premium</span>
@@ -237,11 +211,7 @@
                             </div>
                             <div class="quality-tier">
                                 <span class="voice-quality enhanced">Enhanced</span>
-                                <span>WaveNet - Great quality, free tier</span>
-                            </div>
-                            <div class="quality-tier">
-                                <span class="voice-quality good">Good</span>
-                                <span>Standard Google voices</span>
+                                <span>WaveNet - Great quality</span>
                             </div>
                             <div class="quality-tier">
                                 <span class="voice-quality standard">Standard</span>
@@ -264,12 +234,12 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/storage.js?v=20260113d"></script>
-    <script src="js/speech.js?v=20260113d"></script>
-    <script src="js/premiumTTS.js?v=20260113d"></script>
-    <script src="js/googleTTS.js?v=20260113d"></script>
-    <script src="js/fileImport.js?v=20260113d"></script>
-    <script src="js/ui.js?v=20260113d"></script>
-    <script src="js/app.js?v=20260113d"></script>
+    <script src="js/storage.js?v=20260114a"></script>
+    <script src="js/speech.js?v=20260114a"></script>
+    <script src="js/premiumTTS.js?v=20260114a"></script>
+    <script src="js/googleTTS.js?v=20260114a"></script>
+    <script src="js/fileImport.js?v=20260114a"></script>
+    <script src="js/ui.js?v=20260114a"></script>
+    <script src="js/app.js?v=20260114a"></script>
 </body>
 </html>

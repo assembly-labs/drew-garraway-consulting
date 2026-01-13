@@ -72,17 +72,6 @@ class UIController {
   initializeSettingsModal() {
     // Load current engine state into UI
     this.updateEngineUI();
-
-    // Show Google API section if Google is selected
-    if (this.currentEngine === 'google') {
-      this.showGoogleApiSection(true);
-    }
-
-    // Load saved API key into input (masked)
-    if (this.googleTTS?.isConfigured) {
-      this.elements.googleApiKeyInput.value = '••••••••••••••••••••';
-      this.showApiKeyStatus('Connected to Google Cloud TTS', 'success');
-    }
   }
 
   cacheElements() {
@@ -145,12 +134,6 @@ class UIController {
     this.elements.closeSettingsModal = document.getElementById('closeSettingsModal');
     this.elements.engineBrowser = document.getElementById('engineBrowser');
     this.elements.engineGoogle = document.getElementById('engineGoogle');
-    this.elements.googleApiSection = document.getElementById('googleApiSection');
-    this.elements.googleApiKeyInput = document.getElementById('googleApiKeyInput');
-    this.elements.toggleApiKeyVisibility = document.getElementById('toggleApiKeyVisibility');
-    this.elements.saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
-    this.elements.clearApiKeyBtn = document.getElementById('clearApiKeyBtn');
-    this.elements.apiKeyStatus = document.getElementById('apiKeyStatus');
   }
 
   attachEventListeners() {
@@ -258,17 +241,6 @@ class UIController {
     }
     if (this.elements.engineGoogle) {
       this.elements.engineGoogle.addEventListener('click', () => this.setEngine('google'));
-    }
-
-    // API key management
-    if (this.elements.toggleApiKeyVisibility) {
-      this.elements.toggleApiKeyVisibility.addEventListener('click', () => this.toggleApiKeyVisibility());
-    }
-    if (this.elements.saveApiKeyBtn) {
-      this.elements.saveApiKeyBtn.addEventListener('click', () => this.saveGoogleApiKey());
-    }
-    if (this.elements.clearApiKeyBtn) {
-      this.elements.clearApiKeyBtn.addEventListener('click', () => this.clearGoogleApiKey());
     }
   }
 
@@ -866,96 +838,22 @@ class UIController {
     this.stopPlayback();
 
     if (engine === 'google') {
-      this.showGoogleApiSection(true);
-
       // If Google TTS is configured, load voices
       if (this.googleTTS?.isConfigured) {
         this.loadGoogleVoices();
       }
     } else {
-      this.showGoogleApiSection(false);
       // Re-render browser voices
       this.renderVoiceList();
     }
 
-    this.showToast(`Switched to ${engine === 'google' ? 'Google Cloud' : 'Browser'} TTS`, 'success');
+    this.showToast(`Switched to ${engine === 'google' ? 'Premium' : 'Standard'} voices`, 'success');
   }
 
   updateEngineUI() {
     if (this.elements.engineBrowser && this.elements.engineGoogle) {
       this.elements.engineBrowser.classList.toggle('active', this.currentEngine === 'browser');
       this.elements.engineGoogle.classList.toggle('active', this.currentEngine === 'google');
-    }
-
-    // Show/hide Google API section based on engine
-    this.showGoogleApiSection(this.currentEngine === 'google');
-  }
-
-  showGoogleApiSection(show) {
-    if (this.elements.googleApiSection) {
-      this.elements.googleApiSection.style.display = show ? 'block' : 'none';
-    }
-  }
-
-  toggleApiKeyVisibility() {
-    const input = this.elements.googleApiKeyInput;
-    if (input.type === 'password') {
-      input.type = 'text';
-    } else {
-      input.type = 'password';
-    }
-  }
-
-  async saveGoogleApiKey() {
-    const key = this.elements.googleApiKeyInput.value.trim();
-
-    if (!key || key === '••••••••••••••••••••') {
-      this.showApiKeyStatus('Please enter an API key', 'error');
-      return;
-    }
-
-    this.showApiKeyStatus('Validating API key...', 'loading');
-
-    try {
-      const result = await this.googleTTS.validateApiKey(key);
-
-      if (result.valid) {
-        this.googleTTS.saveApiKey(key);
-        this.elements.googleApiKeyInput.value = '••••••••••••••••••••';
-        this.elements.googleApiKeyInput.type = 'password';
-        this.showApiKeyStatus(`Connected! Found ${result.voiceCount} voices.`, 'success');
-
-        // Load Google voices
-        await this.loadGoogleVoices();
-
-        this.showToast('Google Cloud TTS connected!', 'success');
-      } else {
-        this.showApiKeyStatus(`Invalid: ${result.error}`, 'error');
-      }
-    } catch (error) {
-      this.showApiKeyStatus(`Error: ${error.message}`, 'error');
-    }
-  }
-
-  clearGoogleApiKey() {
-    if (confirm('Remove Google Cloud API key?')) {
-      this.googleTTS.clearApiKey();
-      this.elements.googleApiKeyInput.value = '';
-      this.showApiKeyStatus('', '');
-      this.elements.apiKeyStatus.style.display = 'none';
-
-      // Switch back to browser engine
-      this.setEngine('browser');
-      this.showToast('API key removed', 'success');
-    }
-  }
-
-  showApiKeyStatus(message, type) {
-    const status = this.elements.apiKeyStatus;
-    status.textContent = message;
-    status.className = 'api-key-status';
-    if (type) {
-      status.classList.add(type);
     }
   }
 

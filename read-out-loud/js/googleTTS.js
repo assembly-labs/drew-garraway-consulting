@@ -42,14 +42,8 @@ class GoogleTTS {
   loadSettings() {
     try {
       // Pre-configured API key (domain-restricted to read-out-loud.pages.dev)
-      const preConfiguredKey = 'AIzaSyCoSmPdMc6cgri3PWm3nx7BZ0ZA2PV49Bg';
-
-      // Use pre-configured key or localStorage
-      const key = preConfiguredKey || localStorage.getItem('google_tts_api_key');
-      if (key) {
-        this.apiKey = key;
-        this.isConfigured = true;
-      }
+      this.apiKey = 'AIzaSyCoSmPdMc6cgri3PWm3nx7BZ0ZA2PV49Bg';
+      this.isConfigured = true;
 
       const voice = localStorage.getItem('google_tts_voice');
       if (voice) {
@@ -62,29 +56,6 @@ class GoogleTTS {
       }
     } catch (e) {
       console.warn('Could not load Google TTS settings from storage');
-    }
-  }
-
-  saveApiKey(key) {
-    try {
-      localStorage.setItem('google_tts_api_key', key);
-      this.apiKey = key;
-      this.isConfigured = true;
-      return true;
-    } catch (e) {
-      console.error('Failed to save API key:', e);
-      return false;
-    }
-  }
-
-  clearApiKey() {
-    try {
-      localStorage.removeItem('google_tts_api_key');
-      this.apiKey = null;
-      this.isConfigured = false;
-      return true;
-    } catch (e) {
-      return false;
     }
   }
 
