@@ -37,17 +37,10 @@ class TextReaderApp {
       // Register service worker for PWA
       this.registerServiceWorker();
 
-      // Handle PWA install prompt
-      this.handleInstallPrompt();
-
-
       // Mark as initialized
       this.isInitialized = true;
 
       console.log('Text Reader App initialized successfully');
-
-      // Show welcome message for first-time users
-      this.showWelcomeMessage();
 
     } catch (error) {
       console.error('Failed to initialize app:', error);
@@ -150,115 +143,6 @@ class TextReaderApp {
     }
   }
 
-  handleInstallPrompt() {
-    let deferredPrompt = null;
-
-    window.addEventListener('beforeinstallprompt', (event) => {
-      event.preventDefault();
-      deferredPrompt = event;
-
-      // Show custom install button/banner
-      const installBanner = document.createElement('div');
-      installBanner.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--primary-color);
-        color: white;
-        padding: 12px 20px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        cursor: pointer;
-        z-index: 1000;
-        font-weight: 500;
-      `;
-      installBanner.textContent = 'Install App';
-      installBanner.id = 'installBanner';
-
-      installBanner.addEventListener('click', async () => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          const result = await deferredPrompt.userChoice;
-          console.log('Install prompt result:', result);
-
-          if (result.outcome === 'accepted') {
-            // Track installation
-            console.log('App installed');
-          }
-
-          deferredPrompt = null;
-          document.body.removeChild(installBanner);
-        }
-      });
-
-      // Add to body after a delay
-      setTimeout(() => {
-        if (!document.getElementById('installBanner')) {
-          document.body.appendChild(installBanner);
-        }
-      }, 3000);
-    });
-
-    // iOS specific install instructions
-    if (this.isIOS() && !this.isInStandaloneMode()) {
-      setTimeout(() => {
-        this.showiOSInstallInstructions();
-      }, 5000);
-    }
-  }
-
-  isIOS() {
-    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  }
-
-  isInStandaloneMode() {
-    return window.matchMedia('(display-mode: standalone)').matches ||
-           window.navigator.standalone === true;
-  }
-
-  showiOSInstallInstructions() {
-    if (localStorage.getItem('iosInstallShown')) {
-      return;
-    }
-
-    const instructions = document.createElement('div');
-    instructions.style.cssText = `
-      position: fixed;
-      bottom: 20px;
-      left: 10px;
-      right: 10px;
-      background: var(--surface);
-      color: var(--text-primary);
-      padding: 16px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 1000;
-      font-size: 14px;
-      line-height: 1.5;
-    `;
-    instructions.innerHTML = `
-      <div style="font-weight: 600; margin-bottom: 8px;">Install This App</div>
-      <div>Tap the share button <span style="color: var(--primary-color);">⬆</span> and select "Add to Home Screen"</div>
-      <button id="dismissInstall" style="
-        background: var(--primary-color);
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 8px;
-        margin-top: 12px;
-        cursor: pointer;
-      ">Got it</button>
-    `;
-
-    document.body.appendChild(instructions);
-
-    document.getElementById('dismissInstall').addEventListener('click', () => {
-      document.body.removeChild(instructions);
-      localStorage.setItem('iosInstallShown', 'true');
-    });
-  }
-
   showUpdateNotification() {
     const notification = document.createElement('div');
     notification.style.cssText = `
@@ -287,23 +171,6 @@ class TextReaderApp {
         document.body.removeChild(notification);
       }
     }, 10000);
-  }
-
-  showWelcomeMessage() {
-    if (localStorage.getItem('welcomeShown')) {
-      return;
-    }
-
-    setTimeout(() => {
-      if (this.uiController) {
-        this.uiController.showToast(
-          'Welcome! Paste or import text to get started.',
-          'info',
-          5000
-        );
-        localStorage.setItem('welcomeShown', 'true');
-      }
-    }, 1000);
   }
 }
 
