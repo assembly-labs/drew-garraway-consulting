@@ -1,48 +1,7 @@
 /* SIE Formula Flashcard Styles
  * Mobile-first design for formula reference cards
- * Uses existing design tokens pattern
+ * Requires main.css to be loaded first for CSS variables
  */
-
-/* ============================================
-   CSS Variables (Design Tokens)
-   ============================================ */
-:root {
-    /* Primary Institutional Colors */
-    --fh-navy: #002D62;
-    --fh-cream: #FFFDF7;
-    --fh-gray: #54585A;
-
-    /* Secondary Colors */
-    --fh-sage: #7C9885;
-    --fh-burgundy: #6B2737;
-    --fh-gold: #B08D57;
-
-    /* Neutral Scale */
-    --fh-gray-900: #1A1A1A;
-    --fh-gray-800: #2A2A2A;
-    --fh-gray-700: #404040;
-    --fh-gray-600: #595959;
-    --fh-gray-500: #737373;
-    --fh-gray-400: #8a8a8a;
-    --fh-gray-300: #D4D4D4;
-    --fh-gray-200: #E5E5E5;
-    --fh-gray-100: #F5F5F5;
-    --fh-white: #FFFFFF;
-
-    /* Typography */
-    --fh-font-display: 'Crimson Pro', Georgia, serif;
-    --fh-font-body: 'Inter', -apple-system, sans-serif;
-    --fh-font-mono: 'IBM Plex Mono', monospace;
-
-    /* Spacing Scale (8px base) */
-    --fh-space-xs: 0.25rem;
-    --fh-space-sm: 0.5rem;
-    --fh-space-md: 1rem;
-    --fh-space-lg: 1.5rem;
-    --fh-space-xl: 2rem;
-    --fh-space-2xl: 3rem;
-    --fh-space-3xl: 4rem;
-}
 
 /* ============================================
    Base Reset
@@ -50,7 +9,6 @@
 html, body {
     overscroll-behavior: none;
     touch-action: pan-x pan-y;
-    height: 100%;
     height: -webkit-fill-available;
 }
 
@@ -879,26 +837,4 @@ body {
 .flashcard:focus-visible {
     outline: 3px solid var(--fh-gold);
     outline-offset: 4px;
-}
-
-/* ============================================
-   Night Mode Overrides
-   ============================================ */
-body.night-mode {
-    --fh-navy: #4A90C2;
-    --fh-cream: #1a1f2e;
-    --fh-gray: #9CA3AF;
-    --fh-sage: #8FB89A;
-    --fh-burgundy: #C77A8A;
-    --fh-gold: #D4A85A;
-    --fh-gray-900: #F5F5F5;
-    --fh-gray-800: #E8E8E8;
-    --fh-gray-700: #E5E5E5;
-    --fh-gray-600: #D4D4D4;
-    --fh-gray-500: #9CA3AF;
-    --fh-gray-400: #6B7280;
-    --fh-gray-300: #4B5563;
-    --fh-gray-200: #374151;
-    --fh-gray-100: #252d3d;
-    --fh-white: #1e2536;
 }

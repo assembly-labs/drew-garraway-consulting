@@ -395,6 +395,8 @@
 .flashcard__front {
     position: relative;
     width: 100%;
+    background: #2a3142; /* Soft dark blue-gray */
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Back is absolutely positioned on top of front */
@@ -404,6 +406,10 @@
     left: 0;
     width: 100%;
     height: 100%;
+    background: #1e3a5f; /* Deep navy, slightly lighter than before */
+    color: var(--fh-white);
+    transform: rotateY(180deg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Even more padding on larger screens */
@@ -413,18 +419,6 @@
         padding: var(--fh-space-2xl);
         border-radius: 24px;
     }
-}
-
-.flashcard__front {
-    background: #2a3142; /* Soft dark blue-gray */
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.flashcard__back {
-    background: #1e3a5f; /* Deep navy, slightly lighter than before */
-    color: var(--fh-white);
-    transform: rotateY(180deg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .flashcard__text {
