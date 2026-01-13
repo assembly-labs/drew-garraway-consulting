@@ -14,7 +14,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 |---------|-----------|-------------|---------------|
 | **TOMO** | `/TOMO/` | BJJ training journal - voice-first mobile app | Yes |
 | **Scout** | `/scout/` | AI library discovery system for Tredyffrin Libraries | Yes |
-| **FHM** | `/fhm/` | Franklin Hugh Money - personal finance education site | Partial (series-7 only) |
+| **FHM** | `/fhm/` | Franklin Hugh Money - securities exam prep & finance insights | Yes (README + series-7) |
 | **CareerChat** | `/career-chat/` | AI career chatbot about Drew's background | Yes |
 | **F_This_App** | `/f_this_app/` | Next.js social game app | Yes |
 | **Mikey-real** | `/Mikey-real/` | PA flashcard PWA with offline support | Yes |
@@ -150,6 +150,6 @@ For detailed instructions, read the project's own documentation:
 |---------|----------|
 | TOMO | `/TOMO/CLAUDE.md`, `/TOMO/docs/design-system/` |
 | Scout | `/scout/README.md` |
-| FHM | `/fhm/content/series-7/CLAUDE.md`, `/fhm/design/brand/brand-voice.md` |
+| FHM | `/fhm/README.md`, `/fhm/content/series-7/CLAUDE.md`, `/fhm/design/brand/brand-voice.md` |
 | TPL | `/tpl/CLAUDE.md` |
 | Others | Check `README.md` in project directory |

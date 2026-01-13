@@ -8,11 +8,25 @@ Franklin Hugh Money is a personal finance documentation project chronicling one 
 
 ## Project Status
 
-🚧 **Phase 1: Foundation** (Current)
-- Basic site structure ✅
-- Manifesto page ✅
-- Development documentation ✅
-- Content architecture planned ✅
+**Phase 2: Training Programs** (Current)
+- Site structure and navigation ✅
+- Training hub with SIE and Series 7 ✅
+- SIE exam materials (~80% complete) ✅
+- Series 7 framework (in progress)
+- Insights section (Treasury Analysis) ✅
+
+## Site Navigation
+
+```
+Home → Philosophy, Introduction
+  │
+  ├── Training → Training Programs Hub
+  │   ├── SIE Exam Prep (31 pages, mostly complete)
+  │   └── Series 7 Exam Prep (framework ready)
+  │
+  └── Insights → Financial Analysis
+      └── Treasury Market Analysis
+```
 
 ## Quick Start
 
@@ -20,7 +34,9 @@ Franklin Hugh Money is a personal finance documentation project chronicling one 
 
 1. **Simple Python Server** (Recommended):
 ```bash
-python3 -m http.server 8000 --directory public
+npm run dev
+# or
+python3 -m http.server 8000
 ```
 Then visit: http://localhost:8000
 
@@ -39,36 +55,39 @@ npm run format
 # Lint files
 npm run lint
 
-# Run specific linters
-npm run lint:html
-npm run lint:css
-npm run lint:js
+# Build (generate flashcards, validate, cache-bust)
+npm run build
+
+# Deploy
+./deploy.sh
 ```
 
 ## Project Structure
 
 ```
 fhm/
+├── index.html             # Home page (manifesto)
+├── pages/                 # Deployed HTML pages
+│   ├── training/          # Training hub
+│   │   └── index.html     # Training programs landing
+│   ├── sie/               # SIE exam materials (31 pages)
+│   │   ├── sie-study-materials.html
+│   │   ├── sie-chapter-*.html
+│   │   └── [flashcards, quizzes, tools]
+│   ├── series-7/          # Series 7 materials
+│   │   └── series-7-study-materials.html
+│   └── fhm-treasury.html  # Treasury analysis (Insights)
+├── assets/                # Shared CSS and JS
+│   ├── css/               # Stylesheets
+│   └── js/                # JavaScript modules
 ├── content/               # Markdown content source
-│   └── sie-exam/          # SIE exam study materials
+│   ├── sie-exam/          # SIE source content
+│   └── series-7/          # Series 7 source content
 ├── design/                # Design system and brand
-│   ├── brand/             # Brand manifesto and guidelines
-│   ├── ui/                # Design system
-│   └── ux/                # User experience docs
+│   ├── brand/             # Brand voice and guidelines
+│   └── ui/                # Design system
 ├── dev/                   # Development documentation
-│   ├── CLAUDE_COLLABORATION_PROTOCOL.md
-│   ├── architecture/      # Technical documentation
-│   ├── roadmap/           # Sprint planning
-│   ├── docs/              # Additional documentation
-│   └── logs/              # Development session logs
 ├── docs/                  # Project documentation
-├── public/                # Live website files
-│   ├── assets/            # Shared CSS and JS
-│   │   ├── css/           # Stylesheets
-│   │   └── js/            # JavaScript modules
-│   ├── index.html         # Main manifesto page
-│   ├── sie-chapter-*.html # SIE exam chapters
-│   └── robots.txt         # Bot blocking (no indexing)
 └── scripts/               # Build and automation scripts
 ```
 
