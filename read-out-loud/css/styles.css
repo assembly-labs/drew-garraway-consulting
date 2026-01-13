@@ -1,16 +1,17 @@
 /* Minimalist Design System */
 :root {
-  /* Monochromatic Palette */
-  --bg-primary: #0a0a0b;
-  --bg-secondary: #111113;
-  --bg-elevated: #18181b;
-  --bg-surface: #1f1f23;
-  --bg-hover: #27272a;
+  /* Monochromatic Palette - Better contrast */
+  --bg-primary: #09090b;
+  --bg-secondary: #131316;
+  --bg-elevated: #1c1c21;
+  --bg-surface: #26262c;
+  --bg-hover: #32323a;
+  --bg-content: #1a1a1f;
 
   /* Text - High contrast hierarchy */
   --text-primary: #fafafa;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
+  --text-secondary: #b4b4bc;
+  --text-muted: #8a8a96;
 
   /* Single Accent */
   --accent: #6366f1;
@@ -88,7 +89,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-4) 0;
+  padding: var(--space-4) var(--space-5);
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-surface);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-4);
 }
 
 .app-title {
@@ -110,10 +115,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
+  background: var(--bg-surface);
   border: none;
   border-radius: var(--radius-md);
-  color: var(--text-muted);
+  color: var(--text-secondary);
   cursor: pointer;
   transition: color var(--duration) var(--ease-out),
               background var(--duration) var(--ease-out);
@@ -121,7 +126,7 @@ body {
 
 .settings-btn:hover {
   color: var(--text-primary);
-  background: var(--bg-surface);
+  background: var(--bg-hover);
 }
 
 .settings-btn svg {
@@ -167,7 +172,7 @@ body {
   min-height: 300px;
 }
 
-/* Action Buttons - Minimal, icon-forward */
+/* Action Buttons - Visible, icon-forward */
 .text-actions {
   display: flex;
   gap: var(--space-2);
@@ -180,7 +185,7 @@ body {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  background: transparent;
+  background: var(--bg-surface);
   border: none;
   border-radius: var(--radius-md);
   color: var(--text-secondary);
@@ -193,7 +198,7 @@ body {
 
 .action-btn:hover {
   color: var(--text-primary);
-  background: var(--bg-surface);
+  background: var(--bg-hover);
 }
 
 .action-btn.danger:hover {
@@ -217,27 +222,27 @@ body {
   background: var(--accent-muted);
 }
 
-/* Text Input - Clean, spacious */
+/* Text Input - Clean, spacious, readable */
 .text-input {
   flex: 1;
   min-height: 280px;
   padding: var(--space-5);
-  background: var(--bg-elevated);
-  border: none;
+  background: var(--bg-content);
+  border: 1px solid var(--bg-surface);
   border-radius: var(--radius-lg);
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: 1.0625rem;
   line-height: 1.75;
   resize: none;
-  transition: background var(--duration) var(--ease-out),
+  transition: border-color var(--duration) var(--ease-out),
               box-shadow var(--duration) var(--ease-out);
 }
 
 .text-input:focus {
   outline: none;
-  background: var(--bg-surface);
-  box-shadow: 0 0 0 2px var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
 }
 
 .text-input::placeholder {
@@ -249,7 +254,7 @@ body {
   flex: 1;
   min-height: 280px;
   padding: var(--space-5);
-  background: var(--bg-elevated);
+  background: var(--bg-content);
   border: 2px solid var(--accent);
   border-radius: var(--radius-lg);
   color: var(--text-primary);
@@ -283,7 +288,8 @@ body {
    FOOTER / PLAYBACK CONTROLS
    ======================================== */
 .app-footer {
-  background: var(--bg-elevated);
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-surface);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
 }
@@ -345,17 +351,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-surface);
-  border: none;
+  background: var(--bg-hover);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   color: var(--text-primary);
   cursor: pointer;
   transition: transform var(--duration) var(--ease-out),
-              background var(--duration) var(--ease-out);
+              background var(--duration) var(--ease-out),
+              border-color var(--duration) var(--ease-out);
 }
 
 .control-btn:hover {
-  background: var(--bg-hover);
+  background: var(--bg-surface);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .control-btn:active {
