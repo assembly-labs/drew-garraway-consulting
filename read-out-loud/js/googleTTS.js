@@ -41,7 +41,11 @@ class GoogleTTS {
 
   loadSettings() {
     try {
-      const key = localStorage.getItem('google_tts_api_key');
+      // Pre-configured API key (domain-restricted to read-out-loud.pages.dev)
+      const preConfiguredKey = 'AIzaSyCoSmPdMc6cgri3PWm3nx7BZ0ZA2PV49Bg';
+
+      // Use pre-configured key or localStorage
+      const key = preConfiguredKey || localStorage.getItem('google_tts_api_key');
       if (key) {
         this.apiKey = key;
         this.isConfigured = true;

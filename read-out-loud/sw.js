@@ -1,5 +1,5 @@
 // Service Worker for offline functionality
-const CACHE_VERSION = 'v2.3.1';
+const CACHE_VERSION = 'v2.4.0';
 const CACHE_NAME = `tts-reader-${CACHE_VERSION}`;
 
 // Assets to cache
