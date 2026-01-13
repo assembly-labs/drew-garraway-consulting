@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOMO Product Architecture | Drew Garraway</title>
+    <meta name="description" content="Product architecture overview for TOMO - a voice-first BJJ training journal with belt-adaptive personalization.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111111'/%3E%3Ctext x='50%25' y='50%25' font-size='14' font-weight='bold' text-anchor='middle' dy='.35em' fill='%23F5A623'%3E友%3C/text%3E%3C/svg%3E">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-code: #f1f3f5;
+            --text: #1a1a1a;
+            --text-secondary: #555;
+            --text-muted: #888;
+            --border: #e1e4e8;
+            --accent: #F5A623;
+            --accent-bg: rgba(245, 166, 35, 0.1);
+            --link: #0969da;
+            --white-belt: #f5f5f5;
+            --blue-belt: #1a73e8;
+            --purple-belt: #9333ea;
+            --brown-belt: #92400e;
+            --black-belt: #1a1a1a;
+            --positive: #22c55e;
+            --negative: #ef4444;
+            --warning: #f59e0b;
+            --max-width: 900px;
+            --header-height: 64px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0d1117;
+                --bg-secondary: #161b22;
+                --bg-code: #21262d;
+                --text: #e6edf3;
+                --text-secondary: #8b949e;
+                --text-muted: #6e7681;
+                --border: #30363d;
+                --link: #58a6ff;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--header-height) + 24px);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .doc-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+        }
+
+        .doc-header-inner {
+            max-width: var(--max-width);
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .doc-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .doc-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: #111;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 18px;
+        }
+
+        .doc-nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        .doc-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .doc-nav a:hover {
+            color: var(--text);
+        }
+
+        /* Main layout */
+        .doc-layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Sidebar TOC */
+        .doc-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: var(--header-height);
+            height: calc(100vh - var(--header-height));
+            overflow-y: auto;
+            padding: 32px 24px;
+            border-right: 1px solid var(--border);
+        }
+
+        .toc-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border-left: 2px solid transparent;
+        }
+
+        .toc-list a:hover {
+            background: var(--bg-secondary);
+            color: var(--text);
+        }
+
+        .toc-list a.active {
+            background: var(--accent-bg);
+            color: var(--accent);
+            border-left-color: var(--accent);
+            font-weight: 500;
+        }
+
+        .toc-list .toc-h3 {
+            padding-left: 24px;
+            font-size: 13px;
+        }
+
+        /* Main content */
+        .doc-content {
+            flex: 1;
+            min-width: 0;
+            padding: 48px 64px;
+            max-width: var(--max-width);
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        h1 .kanji {
+            color: var(--accent);
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: 64px;
+            margin-bottom: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            letter-spacing: -0.01em;
+        }
+
+        h2:first-of-type {
+            margin-top: 48px;
+            border-top: none;
+            padding-top: 0;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+
+        h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        .lead {
+            font-size: 18px;
+            color: var(--text);
+            margin-bottom: 32px;
+        }
+
+        .meta {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        li strong {
+            color: var(--text);
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 24px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: var(--bg-secondary);
+        }
+
+        /* Code */
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            background: var(--bg-code);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--text);
+        }
+
+        pre {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 24px 0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 20px 24px;
+            border-radius: 8px;
+            margin: 24px 0;
+            border-left: 4px solid;
+        }
+
+        .callout-info {
+            background: rgba(88, 166, 255, 0.1);
+            border-color: var(--link);
+        }
+
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: var(--warning);
+        }
+
+        .callout-success {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: var(--positive);
+        }
+
+        .callout-critical {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--negative);
+        }
+
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .callout p {
+            margin: 0;
+        }
+
+        /* Belt badges */
+        .belt-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .belt-white { background: var(--white-belt); color: #333; border: 1px solid #ddd; }
+        .belt-blue { background: var(--blue-belt); color: white; }
+        .belt-purple { background: var(--purple-belt); color: white; }
+        .belt-brown { background: var(--brown-belt); color: white; }
+        .belt-black { background: var(--black-belt); color: white; }
+
+        /* Architecture diagrams */
+        .diagram {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 24px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        /* Collapsible sections */
+        details {
+            margin: 16px 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 16px 20px;
+            background: var(--bg-secondary);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        summary:hover {
+            background: var(--bg-code);
+        }
+
+        summary::before {
+            content: '▶';
+            font-size: 10px;
+            transition: transform 0.2s;
+        }
+
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        details .content {
+            padding: 20px;
+        }
+
+        /* Status badges */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-complete {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--positive);
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+
+        .status-critical {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--negative);
+        }
+
+        .status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* Feature grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .feature-card h4 {
+            margin: 0 0 8px 0;
+            color: var(--text);
+        }
+
+        .feature-card p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Links */
+        a {
+            color: var(--link);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .doc-sidebar {
+                display: none;
+            }
+
+            .doc-content {
+                padding: 32px 24px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            .doc-header {
+                padding: 0 16px;
+            }
+
+            .doc-content {
+                padding: 24px 16px;
+            }
+
+            .table-wrapper {
+                margin-left: -16px;
+                margin-right: -16px;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+            }
+
+            pre {
+                margin-left: -16px;
+                margin-right: -16px;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .doc-header, .doc-sidebar {
+                display: none;
+            }
+
+            .doc-content {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
+
+            table, pre, .diagram {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Smooth section reveal */
+        section {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="doc-header">
+        <div class="doc-header-inner">
+            <a href="/" class="doc-logo">
+                <span class="doc-logo-icon">友</span>
+                <span>TOMO Docs</span>
+            </a>
+            <nav class="doc-nav">
+                <a href="/">Home</a>
+                <a href="/products.html">Products</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="doc-layout">
+        <!-- Sidebar TOC -->
+        <aside class="doc-sidebar">
+            <div class="toc-title">On This Page</div>
+            <ul class="toc-list">
+                <li><a href="#summary">Executive Summary</a></li>
+                <li><a href="#overview">10,000ft View</a></li>
+                <li><a href="#architecture">Site Architecture</a></li>
+                <li><a href="#pages">Page Breakdown</a></li>
+                <li><a href="#pages" class="toc-h3">Dashboard</a></li>
+                <li><a href="#pages" class="toc-h3">Session History</a></li>
+                <li><a href="#pages" class="toc-h3">Session Logger</a></li>
+                <li><a href="#pages" class="toc-h3">Technique Library</a></li>
+                <li><a href="#personalization">Belt Personalization</a></li>
+                <li><a href="#variations">Feature Variations</a></li>
+                <li><a href="#data-flow">Data Flow</a></li>
+                <li><a href="#risks">Risk Analysis</a></li>
+                <li><a href="#recommendations">Recommendations</a></li>
+                <li><a href="#appendix">Technical Appendix</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="doc-content">
+            <h1>TOMO <span class="kanji">(友)</span> Product Architecture</h1>
+
+            <p class="lead">A comprehensive overview of TOMO's product architecture, broken down by pages, features, and belt-level personalization. Use this as your source of truth before moving into development.</p>
+
+            <p class="meta">
+                <strong>Audience:</strong> Product managers, developers, designers<br>
+                <strong>Status:</strong> <span class="status status-complete">Prototype Complete</span><br>
+                <strong>Last Updated:</strong> January 2025
+            </p>
+
+            <!-- Section 1: Executive Summary -->
+            <section id="summary">
+                <h2>1. Executive Summary</h2>
+
+                <h3>What is TOMO?</h3>
+                <p>TOMO (友 - "friend" in Japanese) is a <strong>voice-first training journal</strong> for Brazilian Jiu-Jitsu practitioners. It helps users log training sessions at the critical post-training moment when information is fresh but users are exhausted.</p>
+
+                <h3>Core Differentiator</h3>
+                <p>Unlike generic fitness apps, TOMO uses a <strong>psychology-based personalization engine</strong> that adapts every feature based on the user's belt level. The app doesn't just show different data—it fundamentally changes:</p>
+
+                <ul>
+                    <li><strong>What metrics are shown</strong> (white belts see streak, purple belts see teaching sessions)</li>
+                    <li><strong>How we communicate</strong> (encouraging for white, analytical for brown)</li>
+                    <li><strong>What content we recommend</strong> (basic escapes vs. advanced leg lock systems)</li>
+                    <li><strong>When we intervene</strong> (dropout risk detection varies by belt)</li>
+                </ul>
+
+                <h3>The Problem We're Solving</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>BJJ Problem</th>
+                                <th>TOMO Solution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>70-90% of white belts quit within 6 months</td>
+                                <td>Streak-focused metrics, survival framing, dropout risk detection</td>
+                            </tr>
+                            <tr>
+                                <td>Post-training exhaustion = poor recall</td>
+                                <td>Voice-first logging, 90-second capture window</td>
+                            </tr>
+                            <tr>
+                                <td>"Blue belt blues" identity crisis</td>
+                                <td>Game development focus, plateau normalization</td>
+                            </tr>
+                            <tr>
+                                <td>Progress feels invisible</td>
+                                <td>Belt-adaptive visualizations, breakthrough detection</td>
+                            </tr>
+                            <tr>
+                                <td>Generic apps don't understand BJJ</td>
+                                <td>BJJ-native terminology, technique library, sparring tracking</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Current Status</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Web Prototype</td>
+                                <td><span class="status status-complete">Complete</span> Production at bjjj.pages.dev</td>
+                            </tr>
+                            <tr>
+                                <td>iOS TestFlight</td>
+                                <td><span class="status status-pending">Not started</span></td>
+                            </tr>
+                            <tr>
+                                <td>Backend (Supabase)</td>
+                                <td><span class="status status-pending">Not started</span></td>
+                            </tr>
+                            <tr>
+                                <td>Voice Transcription (AssemblyAI)</td>
+                                <td><span class="status status-pending">Not started</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 2: 10,000ft View -->
+            <section id="overview">
+                <h2>2. The 10,000ft View</h2>
+
+                <h3>Product Vision</h3>
+                <div class="diagram">┌─────────────────────────────────────────────────────────────────┐
+│                         TOMO ECOSYSTEM                          │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│   ┌─────────────────────────────────────────────────────────┐   │
+│   │                    PRACTITIONER APP                      │   │
+│   │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐    │   │
+│   │  │Dashboard │ │ Journal  │ │Technique │ │ Insights │    │   │
+│   │  │  (Stats) │ │(Sessions)│ │ Library  │ │(Coaching)│    │   │
+│   │  └──────────┘ └──────────┘ └──────────┘ └──────────┘    │   │
+│   │                      │                                   │   │
+│   │              ┌───────┴───────┐                          │   │
+│   │              │Session Logger │  ← Voice-first entry     │   │
+│   │              │ (Voice/Text)  │                          │   │
+│   │              └───────────────┘                          │   │
+│   └─────────────────────────────────────────────────────────┘   │
+│                              │                                   │
+│                    ┌─────────┴─────────┐                        │
+│                    │  PERSONALIZATION  │                        │
+│                    │      ENGINE       │                        │
+│                    │  (Belt-Adaptive)  │                        │
+│                    └───────────────────┘                        │
+│                              │                                   │
+│              ┌───────────────┼───────────────┐                  │
+│              ▼               ▼               ▼                  │
+│       ┌──────────┐    ┌──────────┐    ┌──────────┐             │
+│       │  WHITE   │    │   BLUE   │    │  PURPLE+ │             │
+│       │ Survival │    │ Identity │    │ Systems  │             │
+│       │   Mode   │    │  Crisis  │    │ Thinking │             │
+│       └──────────┘    └──────────┘    └──────────┘             │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘</div>
+
+                <h3>User Journey Overview</h3>
+                <div class="diagram">NEW USER                    ACTIVE USER                    RETAINED USER
+────────                    ───────────                    ─────────────
+
+Onboarding                  Training Session               Long-term
+(Name + Belt)               └─→ Voice Log (90 sec)         └─→ Session History
+    │                           │                              └─→ Progress Tracking
+    ▼                           ▼                              └─→ Technique Mastery
+Dashboard ←─────────────────────┴──────────────────────────────────┘
+    │
+    ├─→ View Stats (belt-adaptive)
+    ├─→ Browse Techniques (belt-filtered)
+    ├─→ Read Insights (belt-toned)
+    └─→ Track Progress (belt-contextualized)</div>
+
+                <h3>Core User States</h3>
+                <div class="callout callout-critical">
+                    <div class="callout-title">Critical Design Distinction</div>
+                    <p>This affects ALL design decisions. Session logging is designed completely differently from every other screen.</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Context</th>
+                                <th>User State</th>
+                                <th>Time Window</th>
+                                <th>Design Approach</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Session Logging</strong></td>
+                                <td><span class="status status-critical">EXHAUSTED</span></td>
+                                <td>90 seconds</td>
+                                <td>Voice-first, minimal friction, one question at a time</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Everything Else</strong></td>
+                                <td><span class="status status-complete">RELAXED</span></td>
+                                <td>Unlimited</td>
+                                <td>Rich data, deep exploration, detailed content OK</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 3: Site Architecture -->
+            <section id="architecture">
+                <h2>3. Site Architecture Map</h2>
+
+                <h3>Navigation Structure</h3>
+                <div class="diagram">┌─────────────────────────────────────────────────────────────────┐
+│                          HEADER                                  │
+│  [← Back]              TOMO              [Demo] [Avatar]        │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                       MAIN CONTENT                               │
+│                                                                  │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │                   PRIMARY SCREENS                        │    │
+│  │                                                          │    │
+│  │   Dashboard ──────► Session History ──────► Session      │    │
+│  │   (stats)           (journal)              Detail        │    │
+│  │      │                                        │          │    │
+│  │      │                                        ▼          │    │
+│  │      │                                    Edit Sheet     │    │
+│  │      │                                                   │    │
+│  │   Technique ──────► Video Player                         │    │
+│  │   Library           (UpNextVideos)                       │    │
+│  │      │                                                   │    │
+│  │   Training ──────► Insight Detail                        │    │
+│  │   Feedback                                               │    │
+│  └─────────────────────────────────────────────────────────┘    │
+│                                                                  │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │                  SECONDARY SCREENS                       │    │
+│  │   Profile ──────► Settings                               │    │
+│  └─────────────────────────────────────────────────────────┘    │
+│                                                                  │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │                    OVERLAY SCREENS                       │    │
+│  │   Session Logger ──────► Voice Recording ──────► Review  │    │
+│  │   Profile Nudge ──────► (Progressive profiling modal)    │    │
+│  └─────────────────────────────────────────────────────────┘    │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                          TAB BAR                                 │
+│     [Stats]       [Journal]       [Library]       [Insights]    │
+└─────────────────────────────────────────────────────────────────┘</div>
+
+                <h3>Screen Inventory</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Screen</th>
+                                <th>File</th>
+                                <th>Tab</th>
+                                <th>Belt-Adaptive?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dashboard</td>
+                                <td><code>Dashboard.tsx</code></td>
+                                <td>stats</td>
+                                <td><strong>YES</strong> - metrics, messaging</td>
+                            </tr>
+                            <tr>
+                                <td>Session History</td>
+                                <td><code>SessionHistory.tsx</code></td>
+                                <td>journal</td>
+                                <td><strong>YES</strong> - card complexity</td>
+                            </tr>
+                            <tr>
+                                <td>Session Detail</td>
+                                <td><code>SessionDetail.tsx</code></td>
+                                <td>journal→</td>
+                                <td><strong>YES</strong> - sections shown</td>
+                            </tr>
+                            <tr>
+                                <td>Technique Library</td>
+                                <td><code>TechniqueLibrary.tsx</code></td>
+                                <td>library</td>
+                                <td><strong>YES</strong> - categories, difficulty</td>
+                            </tr>
+                            <tr>
+                                <td>Training Feedback</td>
+                                <td><code>TrainingFeedback.tsx</code></td>
+                                <td>insights</td>
+                                <td><strong>YES</strong> - tone, focus areas</td>
+                            </tr>
+                            <tr>
+                                <td>Profile Screen</td>
+                                <td><code>ProfileScreen.tsx</code></td>
+                                <td>header→</td>
+                                <td><strong>YES</strong> - profiling questions</td>
+                            </tr>
+                            <tr>
+                                <td>Settings</td>
+                                <td><code>Settings.tsx</code></td>
+                                <td>profile→</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td>Session Logger</td>
+                                <td><code>VoiceFirstLogger.tsx</code></td>
+                                <td>overlay</td>
+                                <td><strong>YES</strong> - prompts, suggestions</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 4: Page Breakdown -->
+            <section id="pages">
+                <h2>4. Page-by-Page Breakdown</h2>
+
+                <details open>
+                    <summary>4.1 Dashboard (stats tab)</summary>
+                    <div class="content">
+                        <p><strong>Purpose:</strong> Primary hub showing training statistics and insights</p>
+
+                        <h4>Components</h4>
+<pre>Dashboard
+├── Hero Stats Section
+│   ├── Primary Metric (belt-dependent)
+│   ├── Secondary Metrics (2-3, belt-dependent)
+│   └── Streak Visualization
+│
+├── Insights Grid
+│   ├── Breakthrough Detection Card
+│   ├── Training Pattern Analysis
+│   └── Belt-Specific Recommendations
+│
+├── Attack Profile (blue+)
+│   ├── Style Fingerprint (6-axis radar)
+│   ├── Deadliest Attack Card
+│   └── Achilles Heel Card
+│
+├── Sparring Overview (purple+)
+│   ├── Body Heat Map
+│   └── Submission Breakdown
+│
+└── Quick Actions
+    └── "Log Session" Button</pre>
+
+                        <h4>Belt Variations</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Element</th>
+                                        <th><span class="belt-badge belt-white">White</span></th>
+                                        <th><span class="belt-badge belt-blue">Blue</span></th>
+                                        <th><span class="belt-badge belt-purple">Purple</span></th>
+                                        <th><span class="belt-badge belt-brown">Brown</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Primary Metric</td>
+                                        <td>Session Streak</td>
+                                        <td>Technique Variety</td>
+                                        <td>Sparring Rounds</td>
+                                        <td>Teaching Sessions</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Attack Profile</td>
+                                        <td>Hidden</td>
+                                        <td>Shown</td>
+                                        <td>Shown</td>
+                                        <td>Shown</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sparring Grid</td>
+                                        <td>Hidden</td>
+                                        <td>Hidden</td>
+                                        <td>Shown</td>
+                                        <td>Shown</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Insight Focus</td>
+                                        <td>Survival</td>
+                                        <td>Game Development</td>
+                                        <td>Systems</td>
+                                        <td>Refinement</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Celebration</td>
+                                        <td>Every 10 sessions</td>
+                                        <td>Every 25</td>
+                                        <td>Every 50</td>
+                                        <td>Every 100</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>4.2 Session History (journal tab)</summary>
+                    <div class="content">
+                        <p><strong>Purpose:</strong> Scrollable feed of training sessions</p>
+
+                        <h4>Components</h4>
+<pre>Session History
+├── Filter Pills
+│   ├── All / This Week / This Month
+│   └── Gi / NoGi / Both
+│
+├── Session Cards (JournalEntryCard)
+│   ├── Date + Time
+│   ├── Training Type Badge
+│   ├── Duration
+│   ├── Lesson Topic
+│   ├── Techniques Drilled (blue+)
+│   ├── Sparring Rounds (blue+)
+│   ├── Submissions Given/Received (purple+)
+│   └── Worked Well / Struggled (blue+)
+│
+└── Empty State (if no sessions)
+    └── Belt-specific encouragement message</pre>
+
+                        <h4>Belt Variations</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Card Element</th>
+                                        <th><span class="belt-badge belt-white">White</span></th>
+                                        <th><span class="belt-badge belt-blue">Blue</span></th>
+                                        <th><span class="belt-badge belt-purple">Purple+</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Basic info (date, type, duration)</td>
+                                        <td>Shown</td>
+                                        <td>Shown</td>
+                                        <td>Shown</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Techniques drilled</td>
+                                        <td>Hidden</td>
+                                        <td>Shown</td>
+                                        <td>Shown</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sparring rounds</td>
+                                        <td>Hidden</td>
+                                        <td>Shown</td>
+                                        <td>Shown</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Submissions breakdown</td>
+                                        <td>Hidden</td>
+                                        <td>Hidden</td>
+                                        <td>Shown</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>4.3 Session Logger (overlay)</summary>
+                    <div class="content">
+                        <p><strong>Purpose:</strong> Capture training details immediately post-session</p>
+
+                        <div class="callout callout-warning">
+                            <div class="callout-title">Design Philosophy</div>
+                            <p>This is the ONLY screen where users are exhausted. Every other screen assumes relaxed browsing.</p>
+                        </div>
+
+                        <h4>Components</h4>
+<pre>Voice First Logger
+├── Entry Phase
+│   ├── Quick Fields (date, type, duration)
+│   └── "Start Recording" Button (primary action)
+│
+├── Recording Phase
+│   ├── Waveform Visualization
+│   ├── Belt-Adaptive Prompt (displayed during recording)
+│   ├── Timer
+│   └── Stop Button
+│
+├── Review Phase
+│   ├── Transcription Display
+│   ├── Extracted Data Chips
+│   │   ├── Techniques (auto-detected)
+│   │   ├── Submissions (auto-parsed)
+│   │   └── Struggles/Wins (identified)
+│   ├── Edit Fields (tap to modify)
+│   └── Save Button
+│
+└── Success Phase
+    ├── Confirmation Animation
+    ├── Post-Session Message (belt-specific)
+    └── Return to Journal</pre>
+
+                        <h4>Belt Variations</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Element</th>
+                                        <th><span class="belt-badge belt-white">White</span></th>
+                                        <th><span class="belt-badge belt-blue">Blue</span></th>
+                                        <th><span class="belt-badge belt-purple">Purple</span></th>
+                                        <th><span class="belt-badge belt-brown">Brown</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Prompt Tone</td>
+                                        <td>Encouraging</td>
+                                        <td>Neutral</td>
+                                        <td>Analytical</td>
+                                        <td>Analytical</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Example Prompts</td>
+                                        <td>"Did anything feel less chaotic?"</td>
+                                        <td>"What techniques did you work on?"</td>
+                                        <td>"What systems did you focus on?"</td>
+                                        <td>"What did you refine?"</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Technique Suggestions</td>
+                                        <td>5 (basic)</td>
+                                        <td>10 (intermediate)</td>
+                                        <td>15 (advanced)</td>
+                                        <td>20 (expert)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Post-Session Message</td>
+                                        <td>"Consistency beats intensity..."</td>
+                                        <td>"Keep developing your game..."</td>
+                                        <td>"Your depth grows..."</td>
+                                        <td>"The final approach continues..."</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>4.4 Technique Library (library tab)</summary>
+                    <div class="content">
+                        <p><strong>Purpose:</strong> Browsable technique catalog with video recommendations</p>
+
+                        <h4>Belt Variations</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Element</th>
+                                        <th><span class="belt-badge belt-white">White</span></th>
+                                        <th><span class="belt-badge belt-blue">Blue</span></th>
+                                        <th><span class="belt-badge belt-purple">Purple</span></th>
+                                        <th><span class="belt-badge belt-brown">Brown</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Categories Shown</td>
+                                        <td>Escapes, Basic Guards</td>
+                                        <td>+ Guard Systems, Passing</td>
+                                        <td>+ Leg Locks, Combinations</td>
+                                        <td>All Categories</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Video Difficulty</td>
+                                        <td>1-3</td>
+                                        <td>2-5</td>
+                                        <td>4-8</td>
+                                        <td>6-10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Recommendations/Week</td>
+                                        <td>3</td>
+                                        <td>5</td>
+                                        <td>5</td>
+                                        <td>3 (quality focus)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>4.5 Training Feedback (insights tab)</summary>
+                    <div class="content">
+                        <p><strong>Purpose:</strong> AI-generated coaching insights based on session data</p>
+
+                        <h4>Belt Variations</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Element</th>
+                                        <th><span class="belt-badge belt-white">White</span></th>
+                                        <th><span class="belt-badge belt-blue">Blue</span></th>
+                                        <th><span class="belt-badge belt-purple">Purple</span></th>
+                                        <th><span class="belt-badge belt-brown">Brown</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Tone</td>
+                                        <td>Warm, Supportive</td>
+                                        <td>Coaching, Direct</td>
+                                        <td>Collaborative, Technical</td>
+                                        <td>Peer-to-Peer</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Encouragement Level</td>
+                                        <td>High</td>
+                                        <td>Moderate</td>
+                                        <td>Low</td>
+                                        <td>Minimal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Topics Emphasized</td>
+                                        <td>Survival, escapes</td>
+                                        <td>Game development</td>
+                                        <td>Systems, teaching</td>
+                                        <td>Refinement, efficiency</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Topics Avoided</td>
+                                        <td>Competition, leg locks</td>
+                                        <td>Advanced competition</td>
+                                        <td>None</td>
+                                        <td>None</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>4.6 Progressive Profiling Schedule</summary>
+                    <div class="content">
+                        <p>Instead of long onboarding, we collect profile data over ~20 sessions:</p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Session #</th>
+                                        <th>Question Asked</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>3</td><td>Training start date</td></tr>
+                                    <tr><td>5</td><td>Stripes count</td></tr>
+                                    <tr><td>7</td><td>Gym name</td></tr>
+                                    <tr><td>10</td><td>Training goals</td></tr>
+                                    <tr><td>12</td><td>Target frequency</td></tr>
+                                    <tr><td>15</td><td>Current belt date</td></tr>
+                                    <tr><td>18</td><td>Birth year</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Users can skip questions up to 3 times before we stop asking.</p>
+                    </div>
+                </details>
+            </section>
+
+            <!-- Section 5: Belt Personalization -->
+            <section id="personalization">
+                <h2>5. Belt Personalization Matrix</h2>
+
+                <h3>Psychology by Belt Level</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Belt</th>
+                                <th>Stage Name</th>
+                                <th>Dropout Risk</th>
+                                <th>Peak Risk Window</th>
+                                <th>Core Psychology</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="belt-badge belt-white">White</span></td>
+                                <td>Survival Mode</td>
+                                <td><span class="status status-critical">CRITICAL (70-90%)</span></td>
+                                <td>Months 3-6</td>
+                                <td>Ego death, analysis paralysis, novelty fading</td>
+                            </tr>
+                            <tr>
+                                <td><span class="belt-badge belt-blue">Blue</span></td>
+                                <td>Identity Crisis</td>
+                                <td><span class="status status-critical">HIGH (50-60%)</span></td>
+                                <td>Months 0-12 post-promo</td>
+                                <td>Post-goal emptiness, imposter syndrome</td>
+                            </tr>
+                            <tr>
+                                <td><span class="belt-badge belt-purple">Purple</span></td>
+                                <td>Systems Thinking</td>
+                                <td><span class="status status-pending">MODERATE</span></td>
+                                <td>Life circumstances</td>
+                                <td>"Loneliest belt", teaching vs training balance</td>
+                            </tr>
+                            <tr>
+                                <td><span class="belt-badge belt-brown">Brown</span></td>
+                                <td>Refinement</td>
+                                <td><span class="status status-complete">LOW</span></td>
+                                <td>None</td>
+                                <td>Almost-there psychology, responsibility mindset</td>
+                            </tr>
+                            <tr>
+                                <td><span class="belt-badge belt-black">Black</span></td>
+                                <td>Mastery & Contribution</td>
+                                <td><span class="status status-complete">LOW</span></td>
+                                <td>None</td>
+                                <td>Teaching identity, physical wear management</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Feature Adaptation Summary</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature Area</th>
+                                <th><span class="belt-badge belt-white">White</span></th>
+                                <th><span class="belt-badge belt-blue">Blue</span></th>
+                                <th><span class="belt-badge belt-purple">Purple</span></th>
+                                <th><span class="belt-badge belt-brown">Brown</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Primary Metric</strong></td>
+                                <td>Streak</td>
+                                <td>Technique Variety</td>
+                                <td>Sparring Rounds</td>
+                                <td>Teaching Sessions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Messaging Tone</strong></td>
+                                <td>Encouraging</td>
+                                <td>Neutral</td>
+                                <td>Analytical</td>
+                                <td>Peer-to-Peer</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Video Difficulty</strong></td>
+                                <td>1-3</td>
+                                <td>2-5</td>
+                                <td>4-8</td>
+                                <td>6-10</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Technique Suggestions</strong></td>
+                                <td>5</td>
+                                <td>10</td>
+                                <td>15</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Streak Emphasis</strong></td>
+                                <td>HIGH</td>
+                                <td>Moderate</td>
+                                <td>Low</td>
+                                <td>Low</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Show Timeline Estimates</strong></td>
+                                <td>NO</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Profiling Speed</strong></td>
+                                <td>Fast</td>
+                                <td>Standard</td>
+                                <td>Delayed</td>
+                                <td>Minimal</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 6: Feature Variations -->
+            <section id="variations">
+                <h2>6. Feature Variations by Belt</h2>
+
+                <h3>Dashboard Comparison</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4><span class="belt-badge belt-white">White</span> Dashboard</h4>
+                        <p>Primary: <strong>Session Streak</strong><br>
+                        Secondary: Sessions this week, Total<br>
+                        Focus: Survival skills<br>
+                        Celebrate every 10 sessions</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><span class="belt-badge belt-blue">Blue</span> Dashboard</h4>
+                        <p>Primary: <strong>Technique Variety</strong><br>
+                        Secondary: Streak, Rounds, Time at belt<br>
+                        Shows: Attack Profile<br>
+                        Celebrate every 25 sessions</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><span class="belt-badge belt-purple">Purple</span> Dashboard</h4>
+                        <p>Primary: <strong>Sparring Rounds</strong><br>
+                        Secondary: Teaching, Variety, Sub ratio<br>
+                        Shows: Sparring Grid<br>
+                        Celebrate every 50 sessions</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><span class="belt-badge belt-brown">Brown</span> Dashboard</h4>
+                        <p>Primary: <strong>Teaching Sessions</strong><br>
+                        Secondary: Rounds, Sub ratio<br>
+                        Focus: Refinement<br>
+                        Celebrate every 100 sessions</p>
+                    </div>
+                </div>
+
+                <h3>Session Card Complexity</h3>
+                <div class="diagram">WHITE BELT CARD                     PURPLE+ CARD
+┌────────────────────────────┐     ┌────────────────────────────┐
+│ Today, 7:15 PM      [Gi]  │     │ Today, 7:15 PM      [Gi]  │
+├────────────────────────────┤     ├────────────────────────────┤
+│ 90 minutes                 │     │ 90 minutes • 5 rounds      │
+│                            │     │                            │
+│ Lesson: Guard basics       │     │ Lesson: Berimbolo system   │
+│                            │     │                            │
+│                            │     │ Drilled: Kiss of dragon,   │
+│                            │     │          crab ride, bolo   │
+│                            │     │                            │
+│                            │     │ Sparring:                  │
+│                            │     │  Given: Triangle, Armbar   │
+│                            │     │  Received: RNC             │
+│                            │     │                            │
+│                            │     │ ✓ Back takes improving     │
+│                            │     │ ✗ Top pressure needs work  │
+└────────────────────────────┘     └────────────────────────────┘</div>
+            </section>
+
+            <!-- Section 7: Data Flow -->
+            <section id="data-flow">
+                <h2>7. Data Flow Architecture</h2>
+
+                <h3>State Management</h3>
+                <div class="diagram">┌─────────────────────────────────────────────────────────────────┐
+│                     UserProfileContext                          │
+│  (Central state hub - persisted to localStorage)                │
+├─────────────────────────────────────────────────────────────────┤
+│   profile: { userId, name, belt, stripes, trainingStartDate,   │
+│              gymName, trainingGoals[], targetFrequency,         │
+│              loggingPreference, sessionCount, skipCounts{} }    │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                   useBeltPersonalization()                      │
+│  (Derives belt-specific config from profile)                    │
+├─────────────────────────────────────────────────────────────────┤
+│   Returns: { profile, dashboard, sessionLogger, chatbot,       │
+│              videoTutorials, isInRiskWindow, analyzeJournal,    │
+│              getPostSessionMessage, getSuggestedPrompts }       │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      COMPONENTS                                  │
+│  (Use hooks to render belt-adaptive UI)                         │
+├─────────────────────────────────────────────────────────────────┤
+│   Dashboard      → useBeltPersonalization().dashboard           │
+│   SessionLogger  → useBeltPersonalization().sessionLogger       │
+│   TechniqueLib   → useBeltPersonalization().videoTutorials      │
+│   Feedback       → useBeltPersonalization().chatbot             │
+└─────────────────────────────────────────────────────────────────┘</div>
+            </section>
+
+            <!-- Section 8: Risk Analysis -->
+            <section id="risks">
+                <h2>8. Risk Analysis</h2>
+
+                <h3>Technical Risks</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Risk</th>
+                                <th>Impact</th>
+                                <th>Mitigation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Spaghetti conditionals</strong></td>
+                                <td>Belt checks scattered everywhere, hard to maintain</td>
+                                <td>Centralize ALL belt logic in <code>useBeltPersonalization</code> hook</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Inconsistent adaptations</strong></td>
+                                <td>Some screens adapt, others don't</td>
+                                <td>Use feature adaptation matrix as source of truth</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hard-coded belt logic</strong></td>
+                                <td>Changes require editing many files</td>
+                                <td>All belt config lives in <code>/config/belt-system/</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Development Anti-Patterns</h3>
+<pre>❌ BAD: Belt check inline in component
+─────────────────────────────────────
+function Dashboard() {
+  const { profile } = useUserProfile();
+
+  if (profile.belt === 'white') {
+    return &lt;WhiteBeltDashboard /&gt;;
+  } else if (profile.belt === 'blue') {
+    return &lt;BlueBeltDashboard /&gt;;
+  }
+}
+
+✅ GOOD: Use adaptation config
+─────────────────────────────────────
+function Dashboard() {
+  const { dashboard } = useBeltPersonalization();
+
+  return (
+    &lt;DashboardLayout
+      primaryMetric={dashboard.primaryMetric}
+      secondaryMetrics={dashboard.secondaryMetrics}
+      showAttackProfile={dashboard.showAttackProfile}
+    /&gt;
+  );
+}</pre>
+            </section>
+
+            <!-- Section 9: Recommendations -->
+            <section id="recommendations">
+                <h2>9. Development Recommendations</h2>
+
+                <h3>Architecture Principles</h3>
+                <ol>
+                    <li><strong>Single Source of Belt Logic</strong> - All belt-specific configuration lives in <code>/config/belt-system/</code>. Components NEVER contain <code>if (belt === 'white')</code> checks.</li>
+                    <li><strong>Adaptation Over Branching</strong> - Don't create separate components per belt. Create ONE component that adapts based on config.</li>
+                    <li><strong>Progressive Enhancement</strong> - Start with white belt (simplest) experience. Add complexity as belt level increases.</li>
+                    <li><strong>Clear Data Contracts</strong> - Each feature adaptation has a defined interface. Components receive typed config, not raw belt level.</li>
+                </ol>
+
+                <h3>Implementation Checklist</h3>
+                <p>Before building any feature, answer these questions:</p>
+                <ul>
+                    <li>What is the PRIMARY purpose for each belt level?</li>
+                    <li>What should be SHOWN at each belt level?</li>
+                    <li>What should be HIDDEN at each belt level?</li>
+                    <li>What is the TONE for each belt level?</li>
+                    <li>What METRICS are relevant for each belt level?</li>
+                    <li>Is there any RISK DETECTION relevant to this feature?</li>
+                </ul>
+
+                <h3>Testing Strategy</h3>
+                <div class="callout callout-info">
+                    <div class="callout-title">Persona-Based Testing</div>
+                    <p>Use the 6 pre-built personas to test all belt variations. Demo mode allows instant switching. Each persona has pre-populated data representing different user archetypes and risk levels.</p>
+                </div>
+            </section>
+
+            <!-- Section 10: Appendix -->
+            <section id="appendix">
+                <h2>10. Technical Appendix</h2>
+
+                <h3>Key File Paths</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Purpose</th>
+                                <th>File Path</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Belt profiles</td>
+                                <td><code>/prototype/src/config/belt-system/belt-profiles.ts</code></td>
+                            </tr>
+                            <tr>
+                                <td>Feature adaptations</td>
+                                <td><code>/prototype/src/config/belt-system/feature-adaptations.ts</code></td>
+                            </tr>
+                            <tr>
+                                <td>Main hook</td>
+                                <td><code>/prototype/src/hooks/useBeltPersonalization.ts</code></td>
+                            </tr>
+                            <tr>
+                                <td>User context</td>
+                                <td><code>/prototype/src/context/UserProfileContext.tsx</code></td>
+                            </tr>
+                            <tr>
+                                <td>Test personas</td>
+                                <td><code>/prototype/src/data/personas.ts</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Belt Level Enum</h3>
+<pre>type BeltLevel = 'white' | 'blue' | 'purple' | 'brown' | 'black';</pre>
+
+                <h3>Feature Adaptation Interfaces</h3>
+<pre>interface DashboardAdaptation {
+  primaryMetric: MetricType;
+  secondaryMetrics: MetricType[];
+  insightFocus: InsightFocusArea;
+  visualizationMode: 'survival' | 'breadth' | 'depth' | 'refinement';
+  streakEmphasis: 'high' | 'moderate' | 'low';
+  showAttackProfile: boolean;
+  showSparringGrid: boolean;
+  celebrationThreshold: number;
+}
+
+interface SessionLoggerAdaptation {
+  toneProfile: 'encouraging' | 'neutral' | 'analytical';
+  examplePrompts: string[];
+  techniqueSuggestionsCount: number;
+  postSessionMessage: string;
+}</pre>
+            </section>
+
+            <!-- Footer -->
+            <footer style="margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 14px;">
+                <p><strong>TOMO Product Architecture</strong></p>
+                <p>Document generated January 2025 | For development guidelines, see <code>/TOMO/CLAUDE.md</code></p>
+                <p style="margin-top: 16px;"><a href="/">← Back to drewgarraway.com</a></p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Highlight active TOC item on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.toc-list a').forEach(a => a.classList.remove('active'));
+                    const activeLink = document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-100px 0px -66%' });
+
+        document.querySelectorAll('section[id]').forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
