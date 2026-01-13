@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOMO Product Architecture | Drew Garraway</title>
-    <meta name="description" content="Product architecture overview for TOMO - a voice-first BJJ training journal with belt-adaptive personalization.">
+    <title>TOMO Product Architecture</title>
     <meta name="robots" content="noindex, nofollow">
 
     <!-- Favicon -->
@@ -116,21 +115,14 @@
             font-size: 18px;
         }
 
-        .doc-nav {
-            display: flex;
-            gap: 24px;
-        }
-
-        .doc-nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .doc-nav a:hover {
-            color: var(--text);
+        .private-badge {
+            background: var(--negative);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
         /* Main layout */
@@ -597,14 +589,11 @@
     <!-- Header -->
     <header class="doc-header">
         <div class="doc-header-inner">
-            <a href="/" class="doc-logo">
+            <div class="doc-logo">
                 <span class="doc-logo-icon">友</span>
                 <span>TOMO Docs</span>
-            </a>
-            <nav class="doc-nav">
-                <a href="/">Home</a>
-                <a href="/products.html">Products</a>
-            </nav>
+            </div>
+            <span class="private-badge">Private Document</span>
         </div>
     </header>
 
@@ -1087,32 +1076,6 @@ Dashboard ←─────────────────────┴�
                             <div class="callout-title">Design Philosophy</div>
                             <p>This is the ONLY screen where users are exhausted. Every other screen assumes relaxed browsing.</p>
                         </div>
-
-                        <h4>Components</h4>
-<pre>Voice First Logger
-├── Entry Phase
-│   ├── Quick Fields (date, type, duration)
-│   └── "Start Recording" Button (primary action)
-│
-├── Recording Phase
-│   ├── Waveform Visualization
-│   ├── Belt-Adaptive Prompt (displayed during recording)
-│   ├── Timer
-│   └── Stop Button
-│
-├── Review Phase
-│   ├── Transcription Display
-│   ├── Extracted Data Chips
-│   │   ├── Techniques (auto-detected)
-│   │   ├── Submissions (auto-parsed)
-│   │   └── Struggles/Wins (identified)
-│   ├── Edit Fields (tap to modify)
-│   └── Save Button
-│
-└── Success Phase
-    ├── Confirmation Animation
-    ├── Post-Session Message (belt-specific)
-    └── Return to Journal</pre>
 
                         <h4>Belt Variations</h4>
                         <div class="table-wrapper">
@@ -1660,7 +1623,7 @@ interface SessionLoggerAdaptation {
             <footer style="margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 14px;">
                 <p><strong>TOMO Product Architecture</strong></p>
                 <p>Document generated January 2025 | For development guidelines, see <code>/TOMO/CLAUDE.md</code></p>
-                <p style="margin-top: 16px;"><a href="/">← Back to drewgarraway.com</a></p>
+                <p style="margin-top: 16px;">This is a private document for internal use only.</p>
             </footer>
         </main>
     </div>
