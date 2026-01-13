@@ -9,7 +9,7 @@ Text-to-speech PWA that reads documents aloud. Supports TXT, PDF, and DOCX files
 - **Framework:** Vanilla JavaScript
 - **Styling:** Custom CSS (glassmorphism, dark theme)
 - **APIs:** Web Speech API
-- **Deployment:** PWA (Netlify, Vercel, or Cloudflare)
+- **Deployment:** Cloudflare Pages (PWA)
 
 ## Key Files
 
