@@ -8,8 +8,10 @@ class UIController {
     // UI Elements
     this.elements = {};
     this.autoSaveTimer = null;
-    this.isHighlighting = false;
+    this.isHighlighting = true; // Enable word highlighting
     this.currentTextId = null;
+    this.savedPosition = 0; // For resume functionality
+    this.premiumTTS = null; // Premium TTS instance
   }
 
   initialize() {
@@ -17,16 +19,25 @@ class UIController {
     this.attachEventListeners();
     this.loadSavedState();
     this.initializeVoiceList();
+    this.initializePremiumTTS();
+  }
+
+  initializePremiumTTS() {
+    if (window.PremiumTTS) {
+      this.premiumTTS = new PremiumTTS();
+    }
   }
 
   cacheElements() {
     // Text area
     this.elements.textInput = document.getElementById('textInput');
+    this.elements.textDisplay = document.getElementById('textDisplay');
 
     // Action buttons
     this.elements.pasteBtn = document.getElementById('pasteBtn');
     this.elements.importBtn = document.getElementById('importBtn');
     this.elements.saveBtn = document.getElementById('saveBtn');
+    this.elements.downloadBtn = document.getElementById('downloadBtn');
     this.elements.clearBtn = document.getElementById('clearBtn');
     this.elements.fileInput = document.getElementById('fileInput');
 
@@ -90,6 +101,9 @@ class UIController {
     }
     if (this.elements.clearBtn) {
       this.elements.clearBtn.addEventListener('click', () => this.clearText());
+    }
+    if (this.elements.downloadBtn) {
+      this.elements.downloadBtn.addEventListener('click', () => this.downloadMP3());
     }
     if (this.elements.fileInput) {
       this.elements.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
@@ -324,7 +338,23 @@ class UIController {
       return;
     }
 
-    this.speechEngine.play(text);
+    // Check for saved position to resume from
+    const savedPos = this.loadSavedPosition();
+    if (savedPos > 0 && savedPos < text.length) {
+      // Ask user if they want to resume
+      const resumePercent = Math.round((savedPos / text.length) * 100);
+      if (confirm(`Resume from ${resumePercent}%?`)) {
+        this.speechEngine.play(text, savedPos);
+      } else {
+        this.clearSavedPosition();
+        this.speechEngine.play(text);
+      }
+    } else {
+      this.speechEngine.play(text);
+    }
+
+    // Show text display with highlighting
+    this.showTextDisplay();
     this.updatePlayPauseButton(true);
     this.startProgressTracking();
   }
@@ -343,6 +373,7 @@ class UIController {
     this.speechEngine.stop();
     this.updatePlayPauseButton(false);
     this.resetProgress();
+    this.hideTextDisplay();
   }
 
   updatePlayPauseButton(isPlaying) {
@@ -407,22 +438,153 @@ class UIController {
   }
 
   handleWordBoundary(data) {
-    // Future: Implement word highlighting
-    if (this.isHighlighting) {
-      // Update highlighted word in text display
+    // Save current position for resume functionality
+    this.savedPosition = data.charIndex;
+    this.saveCurrentPosition();
+
+    // Update word highlighting in text display
+    if (this.isHighlighting && this.elements.textDisplay) {
+      this.highlightWordAt(data.charIndex, data.charLength);
     }
+  }
+
+  highlightWordAt(charIndex, charLength) {
+    const text = this.elements.textInput.value;
+    if (!text) return;
+
+    // Build highlighted HTML
+    const before = this.escapeHtml(text.substring(0, charIndex));
+    const word = this.escapeHtml(text.substring(charIndex, charIndex + charLength));
+    const after = this.escapeHtml(text.substring(charIndex + charLength));
+
+    this.elements.textDisplay.innerHTML = `${before}<mark class="current-word">${word}</mark>${after}`;
+
+    // Auto-scroll to keep highlighted word visible
+    const mark = this.elements.textDisplay.querySelector('.current-word');
+    if (mark) {
+      mark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML.replace(/\n/g, '<br>');
+  }
+
+  showTextDisplay() {
+    if (this.elements.textDisplay && this.elements.textInput) {
+      // Copy text to display
+      this.elements.textDisplay.innerHTML = this.escapeHtml(this.elements.textInput.value);
+      this.elements.textDisplay.style.display = 'block';
+      this.elements.textInput.style.display = 'none';
+    }
+  }
+
+  hideTextDisplay() {
+    if (this.elements.textDisplay && this.elements.textInput) {
+      this.elements.textDisplay.style.display = 'none';
+      this.elements.textInput.style.display = 'block';
+    }
+  }
+
+  saveCurrentPosition() {
+    const textId = this.currentTextId || 'current';
+    this.storageManager.saveLastPosition(textId, this.savedPosition);
+  }
+
+  loadSavedPosition() {
+    const textId = this.currentTextId || 'current';
+    return this.storageManager.getLastPosition(textId);
+  }
+
+  clearSavedPosition() {
+    const textId = this.currentTextId || 'current';
+    this.storageManager.saveLastPosition(textId, 0);
+    this.savedPosition = 0;
   }
 
   handlePlaybackEnd() {
     this.updatePlayPauseButton(false);
     this.resetProgress();
+    this.hideTextDisplay();
+    this.clearSavedPosition(); // Clear position on completion
     this.showToast('Finished reading', 'success');
   }
 
   handlePlaybackError(error) {
     this.updatePlayPauseButton(false);
     this.resetProgress();
+    this.hideTextDisplay();
     this.showToast('Playback error: ' + error.error, 'error');
+  }
+
+  async downloadMP3() {
+    const text = this.elements.textInput.value;
+    if (!text) {
+      this.showToast('No text to convert', 'error');
+      return;
+    }
+
+    // Check if premium TTS is configured
+    if (!this.premiumTTS || !this.premiumTTS.isConfigured) {
+      // Prompt for API key
+      const apiKey = prompt(
+        'MP3 download uses ElevenLabs (best voice quality).\n\n' +
+        'Free tier: 10,000 characters/month\n\n' +
+        'Get your free API key at elevenlabs.io\n\n' +
+        'Enter your ElevenLabs API key:'
+      );
+
+      if (!apiKey) {
+        return;
+      }
+
+      // Validate and save API key
+      this.showLoading('Validating API key...');
+      const validation = await this.premiumTTS.validateApiKey(apiKey);
+      this.hideLoading();
+
+      if (!validation.valid) {
+        this.showToast('Invalid API key: ' + validation.error, 'error');
+        return;
+      }
+
+      this.premiumTTS.saveApiKey(apiKey);
+
+      // Show usage info
+      const remaining = validation.charactersLimit - validation.charactersUsed;
+      this.showToast(`Connected! ${remaining.toLocaleString()} chars remaining this month`, 'success');
+    }
+
+    // Show usage estimate
+    const estimate = this.premiumTTS.estimateCost(text);
+    const voiceName = this.premiumTTS.getSelectedVoiceName();
+    const proceed = confirm(
+      `Generate MP3 with ElevenLabs?\n\n` +
+      `Voice: ${voiceName}\n` +
+      `Characters: ${estimate.characters.toLocaleString()}\n` +
+      `Cost: Free (10K chars/month)\n\n` +
+      `Continue?`
+    );
+
+    if (!proceed) {
+      return;
+    }
+
+    // Generate and download MP3
+    this.showLoading('Generating MP3 audio...');
+
+    try {
+      // Generate filename from first few words
+      const filename = text.substring(0, 30).replace(/[^a-z0-9]/gi, '-').toLowerCase() + '.mp3';
+      await this.premiumTTS.generateDownload(text, filename);
+      this.hideLoading();
+      this.showToast('MP3 downloaded successfully!', 'success');
+    } catch (error) {
+      this.hideLoading();
+      this.showToast('Failed to generate MP3: ' + error.message, 'error');
+    }
   }
 
   initializeVoiceList() {
@@ -440,52 +602,75 @@ class UIController {
   }
 
   renderVoiceList(filter = '') {
-    const voices = filter
-      ? this.speechEngine.voices.filter(voice =>
-          voice.name.toLowerCase().includes(filter.toLowerCase()) ||
-          voice.lang.toLowerCase().includes(filter.toLowerCase())
-        )
-      : this.speechEngine.voices;
+    // Get top 8 curated voices only
+    let voices;
 
-    // Group voices by language
-    const grouped = {};
-    voices.forEach(voice => {
-      const lang = voice.lang;
-      if (!grouped[lang]) grouped[lang] = [];
-      grouped[lang].push(voice);
-    });
+    if (filter) {
+      // When searching, search within top voices only
+      const topVoices = this.speechEngine.getTopVoices(8);
+      voices = topVoices.filter(voice =>
+        voice.name.toLowerCase().includes(filter.toLowerCase()) ||
+        voice.lang.toLowerCase().includes(filter.toLowerCase())
+      );
+    } else {
+      // Default: show only top 8 curated voices
+      voices = this.speechEngine.getTopVoices(8);
+    }
 
-    // Render grouped voices
+    // Build the voice list HTML
     let html = '';
-    Object.keys(grouped).sort().forEach(lang => {
-      html += `<div class="voice-group">`;
-      html += `<div class="voice-group-header">${lang}</div>`;
 
-      grouped[lang].forEach(voice => {
-        const quality = this.speechEngine.getVoiceQuality(voice);
-        const isSelected = voice === this.speechEngine.selectedVoice;
+    // Add simple header
+    const voiceCountText = filter
+      ? `${voices.length} matching`
+      : 'Select a voice';
 
-        html += `
-          <div class="voice-item ${isSelected ? 'selected' : ''}" data-voice-uri="${voice.voiceURI}">
-            <div class="voice-name">
-              ${voice.name}
-              <span class="voice-quality ${quality}">${quality}</span>
+    html += `
+      <div class="voice-list-header">
+        <span class="voice-count">${voiceCountText}</span>
+      </div>
+    `;
+
+    // Render voice cards (no grouping for cleaner UX)
+    voices.forEach(voice => {
+      const quality = this.speechEngine.getVoiceQuality(voice);
+      const isSelected = voice.voiceURI === this.speechEngine.selectedVoice?.voiceURI;
+      const displayName = this.speechEngine.getDisplayName(voice);
+      const qualityLabel = this.getQualityLabel(quality);
+
+      html += `
+        <div class="voice-item ${isSelected ? 'selected' : ''}" data-voice-uri="${voice.voiceURI}">
+          <div class="voice-info">
+            <div class="voice-name">${displayName}</div>
+            <div class="voice-meta">
+              <span class="voice-lang">${voice.lang}</span>
+              <span class="voice-quality ${quality}">${qualityLabel}</span>
             </div>
-            <div class="voice-lang">${voice.lang}</div>
-            <button class="voice-preview" data-voice-uri="${voice.voiceURI}">Preview</button>
           </div>
-        `;
-      });
-
-      html += `</div>`;
+          <button class="voice-preview" data-voice-uri="${voice.voiceURI}" title="Preview voice">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </button>
+        </div>
+      `;
     });
+
+    // Show helpful message if no voices found
+    if (voices.length === 0) {
+      html += `
+        <div class="voice-empty">
+          ${filter ? 'No voices match your search' : 'No voices available'}
+        </div>
+      `;
+    }
 
     this.elements.voiceList.innerHTML = html;
 
     // Attach event listeners to voice items
     this.elements.voiceList.querySelectorAll('.voice-item').forEach(item => {
       item.addEventListener('click', (e) => {
-        if (!e.target.classList.contains('voice-preview')) {
+        if (!e.target.closest('.voice-preview')) {
           this.selectVoice(item.dataset.voiceUri);
         }
       });
@@ -498,6 +683,16 @@ class UIController {
         this.previewVoice(btn.dataset.voiceUri);
       });
     });
+  }
+
+  getQualityLabel(quality) {
+    const labels = {
+      'premium': 'Premium',
+      'enhanced': 'Enhanced',
+      'good': 'Good',
+      'standard': 'Standard'
+    };
+    return labels[quality] || quality;
   }
 
   selectVoice(voiceURI) {

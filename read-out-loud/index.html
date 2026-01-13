@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=20260112">
 </head>
 <body>
     <div id="app" class="app-container">
@@ -55,6 +55,14 @@
                         </svg>
                         <span>Save</span>
                     </button>
+                    <button id="downloadBtn" class="action-btn optional" title="Download as MP3 (Optional - requires free ElevenLabs account)">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        <span>MP3</span>
+                    </button>
                     <button id="clearBtn" class="action-btn danger">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="3 6 5 6 21 6"></polyline>
@@ -68,6 +76,8 @@
                     class="text-input"
                     placeholder="Paste or type your text here..."
                     aria-label="Text input area"></textarea>
+                <!-- Reading display with word highlighting -->
+                <div id="textDisplay" class="text-display" style="display: none;"></div>
                 <div class="text-stats">
                     <span id="charCount">0 characters</span>
                     <span id="wordCount">0 words</span>
@@ -175,10 +185,11 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/storage.js"></script>
-    <script src="js/speech.js"></script>
-    <script src="js/fileImport.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/storage.js?v=20260112"></script>
+    <script src="js/speech.js?v=20260112"></script>
+    <script src="js/premiumTTS.js?v=20260112"></script>
+    <script src="js/fileImport.js?v=20260112"></script>
+    <script src="js/ui.js?v=20260112"></script>
+    <script src="js/app.js?v=20260112"></script>
 </body>
 </html>
