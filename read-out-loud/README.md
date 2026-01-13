@@ -2,6 +2,8 @@
 
 Text-to-speech PWA that reads documents aloud. Supports TXT, PDF, and DOCX files. 100% client-side, no data leaves your device.
 
+**Live:** https://read-out-loud.pages.dev
+
 ## Features
 
 - Text-to-speech using Web Speech API
@@ -29,13 +31,15 @@ python3 server_https.py
 
 ## Deployment
 
-Deploy to any static host (GitHub Pages, Vercel, Netlify, Cloudflare Pages).
+Hosted on Cloudflare Pages with auto-deploy on push to main.
 
 ```bash
+# Manual deploy
+wrangler pages deploy . --project-name read-out-loud
+
+# Or just push to main
 git add . && git commit -m "Deploy" && git push
 ```
-
-Config files included for Vercel, Netlify, and Cloudflare.
 
 ## Browser Support
 
@@ -53,4 +57,4 @@ Firefox has limited support (no Web Speech API).
 | File import fails on iOS | Use HTTPS (`server_https.py`) |
 | PWA won't install | Must use Safari, check HTTPS |
 | No audio | Check silent switch on iOS |
-| PDF won't load | Needs internet (CDN) |
+| PDF won't load | Needs internet first time (CDN libraries) |
