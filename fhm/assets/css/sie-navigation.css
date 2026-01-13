@@ -1,24 +1,6 @@
 /* SIE Navigation Component Styles */
 /* Shared navigation styles for all SIE study material pages */
-
-/* Night Mode Overrides (5pm - 9am) */
-body.night-mode {
-    --fh-navy: #4A90C2;
-    --fh-cream: #1a1f2e;
-    --fh-gray: #9CA3AF;
-    --fh-sage: #8FB89A;
-    --fh-burgundy: #C77A8A;
-    --fh-gold: #D4A85A;
-    --fh-gray-900: #F5F5F5;
-    --fh-gray-700: #E5E5E5;
-    --fh-gray-600: #D4D4D4;
-    --fh-gray-500: #9CA3AF;
-    --fh-gray-400: #6B7280;
-    --fh-gray-300: #4B5563;
-    --fh-gray-200: #374151;
-    --fh-gray-100: #252d3d;
-    --fh-white: #1e2536;
-}
+/* Requires main.css to be loaded first for CSS variables and night mode */
 
 /* Navigation Bar */
 .sie-nav-bar {
