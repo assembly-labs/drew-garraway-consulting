@@ -1,5 +1,5 @@
 // Service Worker for offline functionality
-const CACHE_VERSION = 'v2.1.0';
+const CACHE_VERSION = 'v2.2.0';
 const CACHE_NAME = `tts-reader-${CACHE_VERSION}`;
 
 // Assets to cache
@@ -12,6 +12,8 @@ const STATIC_ASSETS = [
   './js/storage.js',
   './js/ui.js',
   './js/fileImport.js',
+  './js/premiumTTS.js',
+  './js/googleTTS.js',
   './manifest.json'
 ];
 

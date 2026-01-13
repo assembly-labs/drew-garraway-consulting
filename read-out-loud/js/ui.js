@@ -11,7 +11,9 @@ class UIController {
     this.isHighlighting = true; // Enable word highlighting
     this.currentTextId = null;
     this.savedPosition = 0; // For resume functionality
-    this.premiumTTS = null; // Premium TTS instance
+    this.premiumTTS = null; // Premium TTS instance (ElevenLabs)
+    this.googleTTS = null; // Google Cloud TTS instance
+    this.currentEngine = 'browser'; // 'browser' or 'google'
   }
 
   initialize() {
@@ -20,11 +22,66 @@ class UIController {
     this.loadSavedState();
     this.initializeVoiceList();
     this.initializePremiumTTS();
+    this.initializeGoogleTTS();
+    this.initializeSettingsModal();
   }
 
   initializePremiumTTS() {
     if (window.PremiumTTS) {
       this.premiumTTS = new PremiumTTS();
+    }
+  }
+
+  initializeGoogleTTS() {
+    if (window.GoogleTTS) {
+      this.googleTTS = new GoogleTTS();
+
+      // Set up callbacks
+      this.googleTTS.onProgress = (data) => {
+        this.elements.progressFill.style.width = `${data.progress}%`;
+        this.elements.progressPercent.textContent = `${Math.round(data.progress)}%`;
+      };
+
+      this.googleTTS.onBoundary = (data) => {
+        if (this.isHighlighting && this.elements.textDisplay) {
+          this.highlightWordAt(data.charIndex, data.charLength);
+        }
+        this.savedPosition = data.charIndex;
+        this.saveCurrentPosition();
+      };
+
+      this.googleTTS.onEnd = () => {
+        this.handlePlaybackEnd();
+      };
+
+      this.googleTTS.onError = (error) => {
+        this.handlePlaybackError({ error: error.message || 'Google TTS error' });
+      };
+
+      // Load saved engine preference
+      const savedEngine = localStorage.getItem('tts_engine') || 'browser';
+      this.currentEngine = savedEngine;
+
+      // If Google was selected and is configured, use it
+      if (savedEngine === 'google' && this.googleTTS.isConfigured) {
+        this.currentEngine = 'google';
+      }
+    }
+  }
+
+  initializeSettingsModal() {
+    // Load current engine state into UI
+    this.updateEngineUI();
+
+    // Show Google API section if Google is selected
+    if (this.currentEngine === 'google') {
+      this.showGoogleApiSection(true);
+    }
+
+    // Load saved API key into input (masked)
+    if (this.googleTTS?.isConfigured) {
+      this.elements.googleApiKeyInput.value = '••••••••••••••••••••';
+      this.showApiKeyStatus('Connected to Google Cloud TTS', 'success');
     }
   }
 
@@ -81,6 +138,19 @@ class UIController {
     this.elements.loadingIndicator = document.getElementById('loadingIndicator');
     this.elements.loadingMessage = document.getElementById('loadingMessage');
     this.elements.toastContainer = document.getElementById('toastContainer');
+
+    // Settings modal
+    this.elements.settingsBtn = document.getElementById('settingsBtn');
+    this.elements.settingsModal = document.getElementById('settingsModal');
+    this.elements.closeSettingsModal = document.getElementById('closeSettingsModal');
+    this.elements.engineBrowser = document.getElementById('engineBrowser');
+    this.elements.engineGoogle = document.getElementById('engineGoogle');
+    this.elements.googleApiSection = document.getElementById('googleApiSection');
+    this.elements.googleApiKeyInput = document.getElementById('googleApiKeyInput');
+    this.elements.toggleApiKeyVisibility = document.getElementById('toggleApiKeyVisibility');
+    this.elements.saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
+    this.elements.clearApiKeyBtn = document.getElementById('clearApiKeyBtn');
+    this.elements.apiKeyStatus = document.getElementById('apiKeyStatus');
   }
 
   attachEventListeners() {
@@ -167,6 +237,38 @@ class UIController {
       this.elements.libraryModal.addEventListener('click', (e) => {
         if (e.target === this.elements.libraryModal) this.closeLibraryModal();
       });
+    }
+
+    // Settings modal
+    if (this.elements.settingsBtn) {
+      this.elements.settingsBtn.addEventListener('click', () => this.openSettingsModal());
+    }
+    if (this.elements.closeSettingsModal) {
+      this.elements.closeSettingsModal.addEventListener('click', () => this.closeSettingsModal());
+    }
+    if (this.elements.settingsModal) {
+      this.elements.settingsModal.addEventListener('click', (e) => {
+        if (e.target === this.elements.settingsModal) this.closeSettingsModal();
+      });
+    }
+
+    // Engine toggle
+    if (this.elements.engineBrowser) {
+      this.elements.engineBrowser.addEventListener('click', () => this.setEngine('browser'));
+    }
+    if (this.elements.engineGoogle) {
+      this.elements.engineGoogle.addEventListener('click', () => this.setEngine('google'));
+    }
+
+    // API key management
+    if (this.elements.toggleApiKeyVisibility) {
+      this.elements.toggleApiKeyVisibility.addEventListener('click', () => this.toggleApiKeyVisibility());
+    }
+    if (this.elements.saveApiKeyBtn) {
+      this.elements.saveApiKeyBtn.addEventListener('click', () => this.saveGoogleApiKey());
+    }
+    if (this.elements.clearApiKeyBtn) {
+      this.elements.clearApiKeyBtn.addEventListener('click', () => this.clearGoogleApiKey());
     }
   }
 
@@ -321,60 +423,7 @@ class UIController {
     this.showToast('Text cleared', 'success');
   }
 
-  togglePlayPause() {
-    if (this.speechEngine.state === 'IDLE') {
-      this.startPlayback();
-    } else if (this.speechEngine.state === 'PLAYING') {
-      this.pausePlayback();
-    } else if (this.speechEngine.state === 'PAUSED') {
-      this.resumePlayback();
-    }
-  }
-
-  startPlayback() {
-    const text = this.elements.textInput.value;
-    if (!text) {
-      this.showToast('No text to read', 'error');
-      return;
-    }
-
-    // Check for saved position to resume from
-    const savedPos = this.loadSavedPosition();
-    if (savedPos > 0 && savedPos < text.length) {
-      // Ask user if they want to resume
-      const resumePercent = Math.round((savedPos / text.length) * 100);
-      if (confirm(`Resume from ${resumePercent}%?`)) {
-        this.speechEngine.play(text, savedPos);
-      } else {
-        this.clearSavedPosition();
-        this.speechEngine.play(text);
-      }
-    } else {
-      this.speechEngine.play(text);
-    }
-
-    // Show text display with highlighting
-    this.showTextDisplay();
-    this.updatePlayPauseButton(true);
-    this.startProgressTracking();
-  }
-
-  pausePlayback() {
-    this.speechEngine.pause();
-    this.updatePlayPauseButton(false);
-  }
-
-  resumePlayback() {
-    this.speechEngine.resume();
-    this.updatePlayPauseButton(true);
-  }
-
-  stopPlayback() {
-    this.speechEngine.stop();
-    this.updatePlayPauseButton(false);
-    this.resetProgress();
-    this.hideTextDisplay();
-  }
+  // Playback methods are defined at the end of the class to support both engines
 
   updatePlayPauseButton(isPlaying) {
     if (isPlaying) {
@@ -601,89 +650,7 @@ class UIController {
     }
   }
 
-  renderVoiceList(filter = '') {
-    // Get top 8 curated voices only
-    let voices;
-
-    if (filter) {
-      // When searching, search within top voices only
-      const topVoices = this.speechEngine.getTopVoices(8);
-      voices = topVoices.filter(voice =>
-        voice.name.toLowerCase().includes(filter.toLowerCase()) ||
-        voice.lang.toLowerCase().includes(filter.toLowerCase())
-      );
-    } else {
-      // Default: show only top 8 curated voices
-      voices = this.speechEngine.getTopVoices(8);
-    }
-
-    // Build the voice list HTML
-    let html = '';
-
-    // Add simple header
-    const voiceCountText = filter
-      ? `${voices.length} matching`
-      : 'Select a voice';
-
-    html += `
-      <div class="voice-list-header">
-        <span class="voice-count">${voiceCountText}</span>
-      </div>
-    `;
-
-    // Render voice cards (no grouping for cleaner UX)
-    voices.forEach(voice => {
-      const quality = this.speechEngine.getVoiceQuality(voice);
-      const isSelected = voice.voiceURI === this.speechEngine.selectedVoice?.voiceURI;
-      const displayName = this.speechEngine.getDisplayName(voice);
-      const qualityLabel = this.getQualityLabel(quality);
-
-      html += `
-        <div class="voice-item ${isSelected ? 'selected' : ''}" data-voice-uri="${voice.voiceURI}">
-          <div class="voice-info">
-            <div class="voice-name">${displayName}</div>
-            <div class="voice-meta">
-              <span class="voice-lang">${voice.lang}</span>
-              <span class="voice-quality ${quality}">${qualityLabel}</span>
-            </div>
-          </div>
-          <button class="voice-preview" data-voice-uri="${voice.voiceURI}" title="Preview voice">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-          </button>
-        </div>
-      `;
-    });
-
-    // Show helpful message if no voices found
-    if (voices.length === 0) {
-      html += `
-        <div class="voice-empty">
-          ${filter ? 'No voices match your search' : 'No voices available'}
-        </div>
-      `;
-    }
-
-    this.elements.voiceList.innerHTML = html;
-
-    // Attach event listeners to voice items
-    this.elements.voiceList.querySelectorAll('.voice-item').forEach(item => {
-      item.addEventListener('click', (e) => {
-        if (!e.target.closest('.voice-preview')) {
-          this.selectVoice(item.dataset.voiceUri);
-        }
-      });
-    });
-
-    // Attach preview button listeners
-    this.elements.voiceList.querySelectorAll('.voice-preview').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.previewVoice(btn.dataset.voiceUri);
-      });
-    });
-  }
+  // renderVoiceList is defined at the end of the class to support both browser and Google engines
 
   getQualityLabel(quality) {
     const labels = {
@@ -875,6 +842,433 @@ class UIController {
         this.elements.toastContainer.removeChild(toast);
       }, 300);
     }, duration);
+  }
+
+  // ==========================================
+  // Settings Modal Methods
+  // ==========================================
+
+  openSettingsModal() {
+    this.elements.settingsModal.style.display = 'flex';
+    this.updateEngineUI();
+  }
+
+  closeSettingsModal() {
+    this.elements.settingsModal.style.display = 'none';
+  }
+
+  setEngine(engine) {
+    this.currentEngine = engine;
+    localStorage.setItem('tts_engine', engine);
+    this.updateEngineUI();
+
+    // Stop any current playback when switching engines
+    this.stopPlayback();
+
+    if (engine === 'google') {
+      this.showGoogleApiSection(true);
+
+      // If Google TTS is configured, load voices
+      if (this.googleTTS?.isConfigured) {
+        this.loadGoogleVoices();
+      }
+    } else {
+      this.showGoogleApiSection(false);
+      // Re-render browser voices
+      this.renderVoiceList();
+    }
+
+    this.showToast(`Switched to ${engine === 'google' ? 'Google Cloud' : 'Browser'} TTS`, 'success');
+  }
+
+  updateEngineUI() {
+    if (this.elements.engineBrowser && this.elements.engineGoogle) {
+      this.elements.engineBrowser.classList.toggle('active', this.currentEngine === 'browser');
+      this.elements.engineGoogle.classList.toggle('active', this.currentEngine === 'google');
+    }
+
+    // Show/hide Google API section based on engine
+    this.showGoogleApiSection(this.currentEngine === 'google');
+  }
+
+  showGoogleApiSection(show) {
+    if (this.elements.googleApiSection) {
+      this.elements.googleApiSection.style.display = show ? 'block' : 'none';
+    }
+  }
+
+  toggleApiKeyVisibility() {
+    const input = this.elements.googleApiKeyInput;
+    if (input.type === 'password') {
+      input.type = 'text';
+    } else {
+      input.type = 'password';
+    }
+  }
+
+  async saveGoogleApiKey() {
+    const key = this.elements.googleApiKeyInput.value.trim();
+
+    if (!key || key === '••••••••••••••••••••') {
+      this.showApiKeyStatus('Please enter an API key', 'error');
+      return;
+    }
+
+    this.showApiKeyStatus('Validating API key...', 'loading');
+
+    try {
+      const result = await this.googleTTS.validateApiKey(key);
+
+      if (result.valid) {
+        this.googleTTS.saveApiKey(key);
+        this.elements.googleApiKeyInput.value = '••••••••••••••••••••';
+        this.elements.googleApiKeyInput.type = 'password';
+        this.showApiKeyStatus(`Connected! Found ${result.voiceCount} voices.`, 'success');
+
+        // Load Google voices
+        await this.loadGoogleVoices();
+
+        this.showToast('Google Cloud TTS connected!', 'success');
+      } else {
+        this.showApiKeyStatus(`Invalid: ${result.error}`, 'error');
+      }
+    } catch (error) {
+      this.showApiKeyStatus(`Error: ${error.message}`, 'error');
+    }
+  }
+
+  clearGoogleApiKey() {
+    if (confirm('Remove Google Cloud API key?')) {
+      this.googleTTS.clearApiKey();
+      this.elements.googleApiKeyInput.value = '';
+      this.showApiKeyStatus('', '');
+      this.elements.apiKeyStatus.style.display = 'none';
+
+      // Switch back to browser engine
+      this.setEngine('browser');
+      this.showToast('API key removed', 'success');
+    }
+  }
+
+  showApiKeyStatus(message, type) {
+    const status = this.elements.apiKeyStatus;
+    status.textContent = message;
+    status.className = 'api-key-status';
+    if (type) {
+      status.classList.add(type);
+    }
+  }
+
+  async loadGoogleVoices() {
+    if (!this.googleTTS?.isConfigured) return;
+
+    this.showLoading('Loading Google voices...');
+
+    try {
+      await this.googleTTS.fetchVoices();
+      this.renderVoiceList();
+      this.hideLoading();
+    } catch (error) {
+      this.hideLoading();
+      this.showToast('Failed to load Google voices: ' + error.message, 'error');
+    }
+  }
+
+  // ==========================================
+  // Override playback methods for Google TTS
+  // ==========================================
+
+  startPlayback() {
+    const text = this.elements.textInput.value;
+    if (!text) {
+      this.showToast('No text to read', 'error');
+      return;
+    }
+
+    // Check for saved position to resume from
+    const savedPos = this.loadSavedPosition();
+
+    // Use Google TTS if selected and configured
+    if (this.currentEngine === 'google' && this.googleTTS?.isConfigured) {
+      this.startGooglePlayback(text, savedPos);
+    } else {
+      // Use browser speech synthesis
+      if (savedPos > 0 && savedPos < text.length) {
+        const resumePercent = Math.round((savedPos / text.length) * 100);
+        if (confirm(`Resume from ${resumePercent}%?`)) {
+          this.speechEngine.play(text, savedPos);
+        } else {
+          this.clearSavedPosition();
+          this.speechEngine.play(text);
+        }
+      } else {
+        this.speechEngine.play(text);
+      }
+
+      this.showTextDisplay();
+      this.updatePlayPauseButton(true);
+      this.startProgressTracking();
+    }
+  }
+
+  async startGooglePlayback(text, savedPos = 0) {
+    // Show text display immediately
+    this.showTextDisplay();
+    this.updatePlayPauseButton(true);
+
+    try {
+      if (savedPos > 0 && savedPos < text.length) {
+        const resumePercent = Math.round((savedPos / text.length) * 100);
+        if (confirm(`Resume from ${resumePercent}%?`)) {
+          await this.googleTTS.play(text, savedPos);
+        } else {
+          this.clearSavedPosition();
+          await this.googleTTS.play(text);
+        }
+      } else {
+        await this.googleTTS.play(text);
+      }
+    } catch (error) {
+      this.handlePlaybackError({ error: error.message });
+    }
+  }
+
+  pausePlayback() {
+    if (this.currentEngine === 'google' && this.googleTTS) {
+      this.googleTTS.pause();
+    } else {
+      this.speechEngine.pause();
+    }
+    this.updatePlayPauseButton(false);
+  }
+
+  resumePlayback() {
+    if (this.currentEngine === 'google' && this.googleTTS) {
+      this.googleTTS.resume();
+    } else {
+      this.speechEngine.resume();
+    }
+    this.updatePlayPauseButton(true);
+  }
+
+  stopPlayback() {
+    if (this.currentEngine === 'google' && this.googleTTS) {
+      this.googleTTS.stop();
+    } else {
+      this.speechEngine.stop();
+    }
+    this.updatePlayPauseButton(false);
+    this.resetProgress();
+    this.hideTextDisplay();
+  }
+
+  togglePlayPause() {
+    // Check state based on current engine
+    if (this.currentEngine === 'google' && this.googleTTS) {
+      if (!this.googleTTS.isPlaying && !this.googleTTS.isPaused) {
+        this.startPlayback();
+      } else if (this.googleTTS.isPlaying && !this.googleTTS.isPaused) {
+        this.pausePlayback();
+      } else if (this.googleTTS.isPaused) {
+        this.resumePlayback();
+      }
+    } else {
+      if (this.speechEngine.state === 'IDLE') {
+        this.startPlayback();
+      } else if (this.speechEngine.state === 'PLAYING') {
+        this.pausePlayback();
+      } else if (this.speechEngine.state === 'PAUSED') {
+        this.resumePlayback();
+      }
+    }
+  }
+
+  // ==========================================
+  // Voice list with Google voices
+  // ==========================================
+
+  renderVoiceList(filter = '') {
+    let voices;
+    let isGoogleEngine = this.currentEngine === 'google' && this.googleTTS?.isConfigured;
+
+    if (isGoogleEngine && this.googleTTS.voicesLoaded) {
+      // Use Google voices
+      voices = this.googleTTS.getTopVoices(12);
+
+      if (filter) {
+        voices = voices.filter(voice =>
+          voice.displayName.toLowerCase().includes(filter.toLowerCase()) ||
+          voice.name.toLowerCase().includes(filter.toLowerCase())
+        );
+      }
+
+      this.renderGoogleVoiceList(voices, filter);
+    } else {
+      // Use browser voices
+      if (filter) {
+        const topVoices = this.speechEngine.getTopVoices(8);
+        voices = topVoices.filter(voice =>
+          voice.name.toLowerCase().includes(filter.toLowerCase()) ||
+          voice.lang.toLowerCase().includes(filter.toLowerCase())
+        );
+      } else {
+        voices = this.speechEngine.getTopVoices(8);
+      }
+
+      this.renderBrowserVoiceList(voices, filter);
+    }
+  }
+
+  renderBrowserVoiceList(voices, filter) {
+    let html = '';
+
+    const voiceCountText = filter
+      ? `${voices.length} matching`
+      : 'Select a voice';
+
+    html += `
+      <div class="voice-list-header">
+        <span class="voice-count">${voiceCountText}</span>
+      </div>
+    `;
+
+    voices.forEach(voice => {
+      const quality = this.speechEngine.getVoiceQuality(voice);
+      const isSelected = voice.voiceURI === this.speechEngine.selectedVoice?.voiceURI;
+      const displayName = this.speechEngine.getDisplayName(voice);
+      const qualityLabel = this.getQualityLabel(quality);
+
+      html += `
+        <div class="voice-item ${isSelected ? 'selected' : ''}" data-voice-uri="${voice.voiceURI}">
+          <div class="voice-info">
+            <div class="voice-name">${displayName}</div>
+            <div class="voice-meta">
+              <span class="voice-lang">${voice.lang}</span>
+              <span class="voice-quality ${quality}">${qualityLabel}</span>
+            </div>
+          </div>
+          <button class="voice-preview" data-voice-uri="${voice.voiceURI}" title="Preview voice">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </button>
+        </div>
+      `;
+    });
+
+    if (voices.length === 0) {
+      html += `
+        <div class="voice-empty">
+          ${filter ? 'No voices match your search' : 'No voices available'}
+        </div>
+      `;
+    }
+
+    this.elements.voiceList.innerHTML = html;
+    this.attachBrowserVoiceListeners();
+  }
+
+  renderGoogleVoiceList(voices, filter) {
+    let html = '';
+
+    const voiceCountText = filter
+      ? `${voices.length} matching`
+      : `${voices.length} Google voices`;
+
+    html += `
+      <div class="voice-list-header">
+        <span class="voice-count">${voiceCountText}</span>
+        <span class="voice-source google">Google Cloud</span>
+      </div>
+    `;
+
+    voices.forEach(voice => {
+      const isSelected = this.googleTTS.selectedVoice?.name === voice.name;
+      const qualityLabel = this.getQualityLabel(voice.quality);
+
+      html += `
+        <div class="voice-item ${isSelected ? 'selected' : ''}" data-google-voice="${voice.name}">
+          <div class="voice-info">
+            <div class="voice-name">${voice.displayName}</div>
+            <div class="voice-meta">
+              <span class="voice-lang">${voice.languageCodes?.[0] || 'en-US'}</span>
+              <span class="voice-quality ${voice.quality}">${qualityLabel}</span>
+            </div>
+          </div>
+          <button class="voice-preview" data-google-voice="${voice.name}" title="Preview voice">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </button>
+        </div>
+      `;
+    });
+
+    if (voices.length === 0) {
+      html += `
+        <div class="voice-empty">
+          ${filter ? 'No voices match your search' : 'No Google voices available'}
+        </div>
+      `;
+    }
+
+    this.elements.voiceList.innerHTML = html;
+    this.attachGoogleVoiceListeners();
+  }
+
+  attachBrowserVoiceListeners() {
+    this.elements.voiceList.querySelectorAll('.voice-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        if (!e.target.closest('.voice-preview')) {
+          this.selectVoice(item.dataset.voiceUri);
+        }
+      });
+    });
+
+    this.elements.voiceList.querySelectorAll('.voice-preview').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.previewVoice(btn.dataset.voiceUri);
+      });
+    });
+  }
+
+  attachGoogleVoiceListeners() {
+    this.elements.voiceList.querySelectorAll('.voice-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        if (!e.target.closest('.voice-preview')) {
+          this.selectGoogleVoice(item.dataset.googleVoice);
+        }
+      });
+    });
+
+    this.elements.voiceList.querySelectorAll('.voice-preview').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.previewGoogleVoice(btn.dataset.googleVoice);
+      });
+    });
+  }
+
+  selectGoogleVoice(voiceName) {
+    const voice = this.googleTTS.voices.find(v => v.name === voiceName);
+    if (voice) {
+      this.googleTTS.setVoice(voice);
+      this.updateVoiceDisplay({ name: voice.displayName });
+      this.renderVoiceList(this.elements.voiceSearch.value);
+      this.showToast(`Selected: ${voice.displayName}`, 'success');
+    }
+  }
+
+  async previewGoogleVoice(voiceName) {
+    const voice = this.googleTTS.voices.find(v => v.name === voiceName);
+    if (voice) {
+      try {
+        await this.googleTTS.previewVoice(voice);
+      } catch (error) {
+        this.showToast('Preview failed: ' + error.message, 'error');
+      }
+    }
   }
 }
 

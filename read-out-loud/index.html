@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=20260112">
+    <link rel="stylesheet" href="css/styles.css?v=20260113">
 </head>
 <body>
     <div id="app" class="app-container">
@@ -21,6 +21,12 @@
         <header class="app-header">
             <h1 class="app-title">READ OUT LOUD</h1>
             <div class="header-actions">
+                <button id="settingsBtn" class="settings-btn" aria-label="Settings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
                 <button id="libraryBtn" class="cta-library-btn" aria-label="Library">
                     LIBRARY
                 </button>
@@ -174,6 +180,79 @@
             </div>
         </div>
 
+        <!-- Settings Modal -->
+        <div id="settingsModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Settings</h2>
+                    <button id="closeSettingsModal" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- TTS Engine Selection -->
+                    <div class="settings-section">
+                        <h3 class="settings-title">Voice Engine</h3>
+                        <p class="settings-description">Choose your text-to-speech engine</p>
+                        <div class="engine-toggle">
+                            <button id="engineBrowser" class="engine-btn active" data-engine="browser">
+                                <span class="engine-name">Browser</span>
+                                <span class="engine-detail">Free, works offline</span>
+                            </button>
+                            <button id="engineGoogle" class="engine-btn" data-engine="google">
+                                <span class="engine-name">Google Cloud</span>
+                                <span class="engine-detail">Premium quality</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Google Cloud API Key -->
+                    <div id="googleApiSection" class="settings-section" style="display: none;">
+                        <h3 class="settings-title">Google Cloud API Key</h3>
+                        <p class="settings-description">
+                            1M characters/month free with WaveNet voices.
+                            <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Get your key</a>
+                        </p>
+                        <div class="api-key-input-group">
+                            <input type="password" id="googleApiKeyInput" class="api-key-input" placeholder="Enter your API key">
+                            <button id="toggleApiKeyVisibility" class="toggle-visibility-btn" aria-label="Toggle visibility">
+                                <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="api-key-actions">
+                            <button id="saveApiKeyBtn" class="save-api-key-btn">Save Key</button>
+                            <button id="clearApiKeyBtn" class="clear-api-key-btn">Clear</button>
+                        </div>
+                        <div id="apiKeyStatus" class="api-key-status"></div>
+                    </div>
+
+                    <!-- Voice Quality Info -->
+                    <div class="settings-section">
+                        <h3 class="settings-title">About Voice Quality</h3>
+                        <div class="quality-info">
+                            <div class="quality-tier">
+                                <span class="voice-quality premium">Premium</span>
+                                <span>Neural2/Studio - Most natural</span>
+                            </div>
+                            <div class="quality-tier">
+                                <span class="voice-quality enhanced">Enhanced</span>
+                                <span>WaveNet - Great quality, free tier</span>
+                            </div>
+                            <div class="quality-tier">
+                                <span class="voice-quality good">Good</span>
+                                <span>Standard Google voices</span>
+                            </div>
+                            <div class="quality-tier">
+                                <span class="voice-quality standard">Standard</span>
+                                <span>Browser built-in voices</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Loading Indicator -->
         <div id="loadingIndicator" class="loading-indicator" style="display: none;">
             <div class="spinner"></div>
@@ -185,11 +264,12 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/storage.js?v=20260112"></script>
-    <script src="js/speech.js?v=20260112"></script>
-    <script src="js/premiumTTS.js?v=20260112"></script>
-    <script src="js/fileImport.js?v=20260112"></script>
-    <script src="js/ui.js?v=20260112"></script>
-    <script src="js/app.js?v=20260112"></script>
+    <script src="js/storage.js?v=20260113"></script>
+    <script src="js/speech.js?v=20260113"></script>
+    <script src="js/premiumTTS.js?v=20260113"></script>
+    <script src="js/googleTTS.js?v=20260113"></script>
+    <script src="js/fileImport.js?v=20260113"></script>
+    <script src="js/ui.js?v=20260113"></script>
+    <script src="js/app.js?v=20260113"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@ Text-to-speech PWA that reads documents aloud. Supports TXT, PDF, and DOCX files
 
 - **Framework:** Vanilla JavaScript (no build step)
 - **Styling:** Custom CSS (glassmorphism, dark theme)
-- **APIs:** Web Speech API
+- **APIs:** Web Speech API + Google Cloud Text-to-Speech (optional)
 - **Deployment:** Cloudflare Pages (auto-deploy on push to main)
 
 ## Project Structure
@@ -27,6 +27,8 @@ read-out-loud/
 │   ├── app.js          # App orchestration
 │   ├── ui.js           # UI interactions
 │   ├── speech.js       # Web Speech API wrapper
+│   ├── googleTTS.js    # Google Cloud TTS integration
+│   ├── premiumTTS.js   # ElevenLabs integration (MP3 download)
 │   ├── storage.js      # LocalStorage management
 │   └── fileImport.js   # PDF/DOCX/TXT parsing
 ├── css/
@@ -51,10 +53,29 @@ Deploy to Cloudflare Pages:
 wrangler pages deploy . --project-name read-out-loud
 ```
 
+## TTS Engines
+
+### Browser (Default)
+- Uses Web Speech API
+- Free, works offline
+- Quality varies by browser/OS
+
+### Google Cloud TTS (Optional)
+- Premium neural voices (WaveNet, Neural2)
+- 1M characters/month FREE
+- Requires API key (stored in localStorage, never in code)
+
+**Setup:**
+1. Enable Cloud Text-to-Speech API in Google Cloud Console
+2. Create API key with restrictions (Cloud Text-to-Speech API only)
+3. Add website restrictions: `https://read-out-loud.pages.dev/*`, `http://localhost/*`
+4. In app: Settings > Google Cloud > Paste API key
+
 ## Key Patterns
 
 - Offline-first via service worker caching
 - All data stored in localStorage (private, no backend)
+- API keys stored locally, never committed to code
 - HTTPS required for iOS file imports and PWA installation
 - Glassmorphism UI with gradient animations
 - English voices only (filtered and scored by quality)
