@@ -61,6 +61,12 @@ real-data/
 actual-numbers/
 portfolio-data/
 
+# Course screenshots (copyrighted - DO NOT PUBLISH)
+# These are study materials from CERiFi/Vanguard courses
+# Keep local only, never commit to git
+**/screenshots/
+content/**/screenshots/
+
 # Session logs (keep only index)
 dev/logs/*.md
 !dev/logs/session-log.md

@@ -4,6 +4,18 @@ Copy and paste this prompt to Claude when you have new Series 7 screenshots to p
 
 ---
 
+## IMPORTANT: Copyright Notice
+
+**Screenshots are copyrighted course materials and must NEVER be published online.**
+
+- Screenshots are stored locally in `screenshots/` folders
+- All `screenshots/` folders are excluded from git via `.gitignore`
+- These images are for personal study reference only
+- Never commit, push, or deploy screenshot files
+- Use screenshots as reference to create original FHM content
+
+---
+
 ## The Prompt
 
 ```

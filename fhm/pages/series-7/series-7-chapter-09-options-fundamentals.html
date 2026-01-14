@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="Chapter 9: Fundamentals of Options - Series 7 Exam Study Guide. Covers options basics, pricing, speculative strategies, protective strategies, and income strategies.">
+
+    <title>Chapter 9: Fundamentals of Options | Series 7 Study Materials | Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/sie-chapter.css">
+    <script src="../../assets/js/night-mode.js"></script>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="header__inner">
+            <h1 class="header__title">Chapter 9: Fundamentals of Options</h1>
+            <nav class="breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span>/</span>
+                <a href="series-7-study-materials.html">Series 7</a>
+                <span>/</span>
+                <span>Chapter 9</span>
+            </nav>
+        </div>
+        <div class="progress">
+            <div class="progress__bar" id="progress-bar"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="chapter-meta">
+            <div class="chapter-meta__item">
+                <svg class="chapter-meta__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>~45 min read</span>
+            </div>
+            <div class="chapter-meta__item">
+                <svg class="chapter-meta__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                <span>~20-25 exam questions (15-18%)</span>
+            </div>
+        </div>
+
+        <div class="intro">
+            <p>
+                In 1973, the Chicago Board Options Exchange opened its doors and changed finance forever.
+                Before then, options were obscure contracts traded informally. The CBOE standardized everything
+                and created a clearinghouse to guarantee every trade.
+            </p>
+            <p>
+                Options are among the most heavily tested topics on the Series 7. Master the fundamentals
+                in this chapter before tackling advanced strategies in Chapter 10.
+            </p>
+        </div>
+
+        <nav class="toc">
+            <h2 class="toc__title">In This Chapter</h2>
+            <ul class="toc__list">
+                <li class="toc__item">
+                    <a href="#section-1" class="toc__link">
+                        <span class="toc__number">01</span>
+                        Options Basics
+                    </a>
+                </li>
+                <li class="toc__item">
+                    <a href="#section-2" class="toc__link">
+                        <span class="toc__number">02</span>
+                        Options Pricing
+                    </a>
+                </li>
+                <li class="toc__item">
+                    <a href="#section-3" class="toc__link">
+                        <span class="toc__number">03</span>
+                        Speculative Strategies
+                    </a>
+                </li>
+                <li class="toc__item">
+                    <a href="#section-4" class="toc__link">
+                        <span class="toc__number">04</span>
+                        Protective Strategies
+                    </a>
+                </li>
+                <li class="toc__item">
+                    <a href="#section-5" class="toc__link">
+                        <span class="toc__number">05</span>
+                        Options Income Strategies
+                    </a>
+                </li>
+                <li class="toc__item">
+                    <a href="#glossary" class="toc__link">
+                        <span class="toc__number">06</span>
+                        Key Terms Glossary
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Section 1: Options Basics -->
+        <section id="section-1">
+            <h2>Section 1: Options Basics</h2>
+
+            <h3>What Is an Option?</h3>
+            <p>
+                An option is a contract between two parties. The <span class="key-term">holder</span> (buyer)
+                pays a <span class="key-term">premium</span> to the <span class="key-term">writer</span> (seller).
+                In exchange, the holder receives a <strong>right</strong>, while the writer takes on an
+                <strong>obligation</strong>.
+            </p>
+
+            <div class="critical-concept">
+                <div class="critical-concept__label">The Three Uses of Options</div>
+                <ul>
+                    <li><strong>Speculation:</strong> Betting on price direction</li>
+                    <li><strong>Hedging:</strong> Protecting an existing position</li>
+                    <li><strong>Income generation:</strong> Earning premium on existing positions</li>
+                </ul>
+            </div>
+
+            <h3>Call Options</h3>
+            <p>
+                A <span class="key-term">call option</span> gives the holder the right to BUY the underlying
+                security at the strike price. The writer has the obligation to SELL if exercised.
+            </p>
+
+            <div class="info-box">
+                <div class="info-box__title">Call Example</div>
+                <p>Buy 1 ABC Jan 50 Call @ $5</p>
+                <p>The holder can buy 100 shares of ABC at $50/share until January expiration, regardless of market price. Premium paid: $500.</p>
+            </div>
+
+            <h3>Put Options</h3>
+            <p>
+                A <span class="key-term">put option</span> gives the holder the right to SELL the underlying
+                security at the strike price. The writer has the obligation to BUY if exercised.
+            </p>
+
+            <div class="info-box">
+                <div class="info-box__title">Put Example</div>
+                <p>Buy 1 ABC Jan 50 Put @ $5</p>
+                <p>The holder can sell 100 shares of ABC at $50/share until January expiration, regardless of market price. Premium paid: $500.</p>
+            </div>
+
+            <h3>Contract Outcomes</h3>
+            <p>The holder has three choices:</p>
+            <ol>
+                <li><strong>Exercise</strong> - Use the right (buy/sell at strike price)</li>
+                <li><strong>Let expire</strong> - Lose the premium paid</li>
+                <li><strong>Trade</strong> - Sell the contract to close the position</li>
+            </ol>
+
+            <div class="test-tip">
+                <p>
+                    <strong>Test Tip:</strong> Stock options are <span class="key-term">American style</span>
+                    (can exercise any time). Most index options are <span class="key-term">European style</span>
+                    (can only exercise at expiration).
+                </p>
+            </div>
+
+            <h3>The OCC</h3>
+            <p>
+                The <span class="key-term">Options Clearing Corporation (OCC)</span> creates standardized
+                contracts, guarantees settlement, and acts as the clearinghouse for all listed options.
+            </p>
+
+            <div class="critical-concept">
+                <div class="critical-concept__label">Section 1 Key Points</div>
+                <table>
+                    <tr>
+                        <th>Position</th>
+                        <th>Role</th>
+                        <th>Has</th>
+                    </tr>
+                    <tr>
+                        <td>Call Buyer</td>
+                        <td>Long</td>
+                        <td>RIGHT to BUY</td>
+                    </tr>
+                    <tr>
+                        <td>Call Writer</td>
+                        <td>Short</td>
+                        <td>OBLIGATION to SELL</td>
+                    </tr>
+                    <tr>
+                        <td>Put Buyer</td>
+                        <td>Long</td>
+                        <td>RIGHT to SELL</td>
+                    </tr>
+                    <tr>
+                        <td>Put Writer</td>
+                        <td>Short</td>
+                        <td>OBLIGATION to BUY</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 2: Options Pricing -->
+        <section id="section-2">
+            <h2>Section 2: Options Pricing</h2>
+
+            <div class="critical-concept">
+                <div class="critical-concept__label">Premium Formula</div>
+                <p><strong>Premium = Intrinsic Value + Time Value</strong></p>
+            </div>
+
+            <h3>Intrinsic Value</h3>
+            <p>
+                <span class="key-term">Intrinsic value</span> is the amount an option is
+                <span class="key-term">in the money (ITM)</span>. It's the immediate exercise value.
+            </p>
+
+            <div class="comparison-table">
+                <table>
+                    <tr>
+                        <th>Option Type</th>
+                        <th>In the Money When...</th>
+                    </tr>
+                    <tr>
+                        <td>Call</td>
+                        <td>Market price &gt; Strike price</td>
+                    </tr>
+                    <tr>
+                        <td>Put</td>
+                        <td>Market price &lt; Strike price</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Time Value</h3>
+            <p>
+                <span class="key-term">Time value</span> is the premium amount beyond intrinsic value.
+                It represents the possibility that the option will become more valuable before expiration.
+                Time value decreases as expiration approaches (time decay).
+            </p>
+
+            <div class="test-tip">
+                <p>
+                    <strong>Test Tip:</strong> Intrinsic value can never be negative—it's either positive
+                    (in the money) or zero (at/out of the money). Buyers want intrinsic value; writers want
+                    time value only (option expires worthless).
+                </p>
+            </div>
+
+            <div class="critical-concept">
+                <div class="critical-concept__label">Section 2 Key Points</div>
+                <table>
+                    <tr>
+                        <th>Term</th>
+                        <th>Definition</th>
+                    </tr>
+                    <tr>
+                        <td>In the Money (ITM)</td>
+                        <td>Option has intrinsic value</td>
+                    </tr>
+                    <tr>
+                        <td>At the Money (ATM)</td>
+                        <td>Strike = Market price</td>
+                    </tr>
+                    <tr>
+                        <td>Out of the Money (OTM)</td>
+                        <td>No intrinsic value</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 3: Speculative Strategies -->
+        <section id="section-3">
+            <h2>Section 3: Speculative Strategies</h2>
+
+            <p>
+                Speculative strategies involve betting on price direction. Buyers profit when the market
+                moves in their favor; writers profit when it stays stable or moves against buyers.
+            </p>
+
+            <h3>Long Call (Bullish)</h3>
+            <div class="comparison-table">
+                <table>
+                    <tr><td><strong>Market Bias</strong></td><td>Bullish</td></tr>
+                    <tr><td><strong>Max Gain</strong></td><td>Unlimited</td></tr>
+                    <tr><td><strong>Max Loss</strong></td><td>Premium paid</td></tr>
+                    <tr><td><strong>Breakeven</strong></td><td>Strike + Premium</td></tr>
+                </table>
+            </div>
+
+            <h3>Short Call (Bearish)</h3>
+            <div class="comparison-table">
+                <table>
+                    <tr><td><strong>Market Bias</strong></td><td>Bearish</td></tr>
+                    <tr><td><strong>Max Gain</strong></td><td>Premium received</td></tr>
+                    <tr><td><strong>Max Loss</strong></td><td>Unlimited</td></tr>
+                    <tr><td><strong>Breakeven</strong></td><td>Strike + Premium</td></tr>
+                </table>
+            </div>
+
+            <h3>Long Put (Bearish)</h3>
+            <div class="comparison-table">
+                <table>
+                    <tr><td><strong>Market Bias</strong></td><td>Bearish</td></tr>
+                    <tr><td><strong>Max Gain</strong></td><td>Strike - Premium (stock goes to zero)</td></tr>
+                    <tr><td><strong>Max Loss</strong></td><td>Premium paid</td></tr>
+                    <tr><td><strong>Breakeven</strong></td><td>Strike - Premium</td></tr>
+                </table>
+            </div>
+
+            <h3>Short Put (Bullish)</h3>
+            <div class="comparison-table">
+                <table>
+                    <tr><td><strong>Market Bias</strong></td><td>Bullish</td></tr>
+                    <tr><td><strong>Max Gain</strong></td><td>Premium received</td></tr>
+                    <tr><td><strong>Max Loss</strong></td><td>Strike - Premium (stock goes to zero)</td></tr>
+                    <tr><td><strong>Breakeven</strong></td><td>Strike - Premium</td></tr>
+                </table>
+            </div>
+
+            <div class="test-tip">
+                <p>
+                    <strong>Test Tip:</strong> The call buyer has unlimited upside; the call writer has unlimited
+                    downside. For puts, both max gain and max loss are limited (stock can only go to zero).
+                </p>
+            </div>
+
+            <div class="critical-concept">
+                <div class="critical-concept__label">Section 3 Key Points</div>
+                <table>
+                    <tr>
+                        <th>Strategy</th>
+                        <th>Bias</th>
+                        <th>Max Gain</th>
+                        <th>Max Loss</th>
+                    </tr>
+                    <tr>
+                        <td>Long Call</td>
+                        <td>Bullish</td>
+                        <td>Unlimited</td>
+                        <td>Premium</td>
+                    </tr>
+                    <tr>
+                        <td>Short Call</td>
+                        <td>Bearish</td>
+                        <td>Premium</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>Long Put</td>
+                        <td>Bearish</td>
+                        <td>Strike - Premium</td>
+                        <td>Premium</td>
+                    </tr>
+                    <tr>
+                        <td>Short Put</td>
+                        <td>Bullish</td>
+                        <td>Premium</td>
+                        <td>Strike - Premium</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 4: Protective Strategies -->
+        <section id="section-4">
+            <h2>Section 4: Protective Strategies</h2>
+
+            <p>
+                Protective strategies use options to hedge existing stock positions against adverse price moves.
+            </p>
+
+            <h3>Protective Put (Long Stock + Long Put)</h3>
+            <p>
+                A customer who owns stock can buy a put to protect against downside risk. If the stock falls,
+                they can sell at the strike price. If it rises, they keep the upside (minus premium paid).
+            </p>
+
+            <div class="info-box">
+                <div class="info-box__title">Protective Put</div>
+                <ul>
+                    <li><strong>Protection:</strong> Full downside protection</li>
+                    <li><strong>Max Loss:</strong> Premium paid</li>
+                    <li><strong>Max Gain:</strong> Unlimited (stock can rise infinitely)</li>
+                    <li><strong>Cost:</strong> Reduces return by premium amount</li>
+                </ul>
+            </div>
+
+            <h3>Protective Call (Short Stock + Long Call)</h3>
+            <p>
+                A customer who is short stock can buy a call to protect against upside risk. If the stock rises,
+                they can buy at the strike price to cover. If it falls, they profit on the short (minus premium).
+            </p>
+
+            <div class="info-box">
+                <div class="info-box__title">Protective Call</div>
+                <ul>
+                    <li><strong>Protection:</strong> Full upside protection</li>
+                    <li><strong>Max Loss:</strong> Premium paid</li>
+                    <li><strong>Max Gain:</strong> Stock price - Premium (stock goes to zero)</li>
+                </ul>
+            </div>
+
+            <div class="critical-concept">
+                <div class="critical-concept__label">Section 4 Key Points</div>
+                <table>
+                    <tr>
+                        <th>Stock Position</th>
+                        <th>Hedge With</th>
+                        <th>Protection Type</th>
+                    </tr>
+                    <tr>
+                        <td>Long Stock</td>
+                        <td>Buy Put</td>
+                        <td>Downside protection</td>
+                    </tr>
+                    <tr>
+                        <td>Short Stock</td>
+                        <td>Buy Call</td>
+                        <td>Upside protection</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 5: Options Income Strategies -->
+        <section id="section-5">
+            <h2>Section 5: Options Income Strategies</h2>
+
+            <p>
+                Income strategies involve writing (selling) options against existing stock positions
+                to generate premium income. This provides partial protection but limits potential gains.
+            </p>
+
+            <h3>Covered Call (Long Stock + Short Call)</h3>
+            <p>
+                The most common income strategy. The customer owns stock and sells a call against it.
+                Premium received provides income and partial downside protection.
+            </p>
+
+            <div class="info-box">
+                <div class="info-box__title">Covered Call Characteristics</div>
+                <ul>
+                    <li><strong>Market Bias:</strong> Neutral to mildly bullish</li>
+                    <li><strong>Income:</strong> Premium received</li>
+                    <li><strong>Trade-off:</strong> Upside is capped at strike price</li>
+                    <li><strong>Protection:</strong> Partial (limited to premium received)</li>
+                </ul>
+            </div>
+
+            <h3>Covered Put (Short Stock + Short Put)</h3>
+            <p>
+                The customer is short stock and sells a put against it. Premium received provides income
+                and partial upside protection.
+            </p>
+
+            <div class="info-box">
+                <div class="info-box__title">Covered Put Characteristics</div>
+                <ul>
+                    <li><strong>Market Bias:</strong> Neutral to mildly bearish</li>
+                    <li><strong>Income:</strong> Premium received</li>
+                    <li><strong>Trade-off:</strong> Downside profit is capped</li>
+                    <li><strong>Protection:</strong> Partial (limited to premium received)</li>
+                </ul>
+            </div>
+
+            <div class="critical-concept">
+                <div class="critical-concept__label">Section 5 Key Points</div>
+                <table>
+                    <tr>
+                        <th>Stock Position</th>
+                        <th>Write Option</th>
+                        <th>Market Bias</th>
+                    </tr>
+                    <tr>
+                        <td>Long Stock</td>
+                        <td>Sell Call</td>
+                        <td>Neutral to mildly bullish</td>
+                    </tr>
+                    <tr>
+                        <td>Short Stock</td>
+                        <td>Sell Put</td>
+                        <td>Neutral to mildly bearish</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Glossary -->
+        <section id="glossary">
+            <h2>Chapter 9 Key Terms Glossary</h2>
+
+            <div class="comparison-table">
+                <table>
+                    <tr>
+                        <th>Term</th>
+                        <th>Definition</th>
+                    </tr>
+                    <tr><td><strong>Call option</strong></td><td>Right to BUY at strike price</td></tr>
+                    <tr><td><strong>Put option</strong></td><td>Right to SELL at strike price</td></tr>
+                    <tr><td><strong>Holder/Buyer</strong></td><td>Has rights; pays premium</td></tr>
+                    <tr><td><strong>Writer/Seller</strong></td><td>Has obligation; receives premium</td></tr>
+                    <tr><td><strong>Premium</strong></td><td>Price paid for option contract</td></tr>
+                    <tr><td><strong>Strike price</strong></td><td>Exercise price of option</td></tr>
+                    <tr><td><strong>Intrinsic value</strong></td><td>Amount option is in the money</td></tr>
+                    <tr><td><strong>Time value</strong></td><td>Premium beyond intrinsic value</td></tr>
+                    <tr><td><strong>In the money (ITM)</strong></td><td>Has intrinsic value</td></tr>
+                    <tr><td><strong>Out of the money (OTM)</strong></td><td>No intrinsic value</td></tr>
+                    <tr><td><strong>American style</strong></td><td>Can exercise any time</td></tr>
+                    <tr><td><strong>European style</strong></td><td>Can only exercise at expiration</td></tr>
+                    <tr><td><strong>OCC</strong></td><td>Options Clearing Corporation</td></tr>
+                    <tr><td><strong>Covered call</strong></td><td>Long stock + short call</td></tr>
+                    <tr><td><strong>Protective put</strong></td><td>Long stock + long put</td></tr>
+                </table>
+            </div>
+
+            <p style="margin-top: var(--fh-space-2xl); font-style: italic; color: var(--fh-gray-600);">
+                Chapter 9 introduces the fundamentals of options. Master these concepts before moving to
+                Chapter 10: Index Options and Advanced Options Strategies.
+            </p>
+        </section>
+
+        <nav class="chapter-nav">
+            <a href="series-7-chapter-08-trade-processing.html" class="chapter-nav__link chapter-nav__link--prev">
+                <span class="chapter-nav__label">Previous Chapter</span>
+                <span class="chapter-nav__title">&larr; Chapter 8: Trade Processing</span>
+            </a>
+            <a href="series-7-chapter-10-index-options.html" class="chapter-nav__link chapter-nav__link--next">
+                <span class="chapter-nav__label">Next Chapter</span>
+                <span class="chapter-nav__title">Chapter 10: Index Options &rarr;</span>
+            </a>
+        </nav>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__text">Franklin Hugh Money | Series 7 Study Materials</p>
+        <div class="footer__links">
+            <a href="series-7-study-materials.html">Series 7 Home</a>
+            <span>|</span>
+            <a href="../../index.html">FHM Home</a>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <script>
+        const progressBar = document.getElementById('progress-bar');
+        const header = document.getElementById('header');
+
+        function updateProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            progressBar.style.width = progress + '%';
+            if (scrollTop > 50) {
+                header.classList.add('header--scrolled');
+            } else {
+                header.classList.remove('header--scrolled');
+            }
+        }
+
+        const backToTop = document.getElementById('back-to-top');
+        function toggleBackToTop() {
+            if (window.scrollY > 400) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const tocLinks = document.querySelectorAll('.toc__link');
+        const sections = document.querySelectorAll('section[id]');
+
+        function updateTocActive() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateProgress();
+                    toggleBackToTop();
+                    updateTocActive();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        updateProgress();
+        toggleBackToTop();
+        updateTocActive();
+    </script>
+</body>
+</html>
