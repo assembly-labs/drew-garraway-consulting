@@ -48,13 +48,15 @@ This document outlines the UX design for Series 7 flashcards, building on the su
 - [ ] Progress persistence (localStorage)
 - [ ] Basic stats: cards seen, mastered, learning
 - [ ] Formula cards with special formatting
+- [ ] Spaced repetition scheduling (Leitner 5-box system)
+- [ ] Study streak tracking
+- [ ] "Due for Review" session mode
 
 ### Should Have (V1.1)
-- [ ] Spaced repetition scheduling
-- [ ] Difficulty rating per card
-- [ ] Study streak tracking
-- [ ] Quick review of missed cards
+- [ ] Difficulty rating per card (manual adjustment)
+- [ ] Quick review of missed cards (separate mode)
 - [ ] Keyboard shortcuts
+- [ ] Weak area summary on session complete
 
 ### Nice to Have (Future)
 - [ ] Offline support (service worker)
@@ -442,19 +444,27 @@ This document outlines the UX design for Series 7 flashcards, building on the su
 
 ---
 
-## Progress & Spaced Repetition
+## Progress & Spaced Repetition (MVP Feature)
 
-### Mastery Levels
+The spaced repetition system is built into MVP - no point building flashcards without it.
 
-| Level | Criteria | Next Review |
-|-------|----------|-------------|
-| **New** | Never seen | Immediate |
-| **Learning** | Seen but missed | Same session |
-| **Familiar** | Got it 1-2 times | 1 day |
-| **Proficient** | Got it 3-4 times | 3 days |
-| **Mastered** | Got it 5+ times | 7 days |
+### Leitner 5-Box System
 
-### Algorithm (Simplified Leitner System)
+Cards move between boxes based on correct/incorrect responses:
+
+| Box | Level | Review Interval | Criteria |
+|-----|-------|-----------------|----------|
+| 0 | New | Immediate | Never seen OR missed twice |
+| 1 | Learning | 1 day | Got it once |
+| 2 | Familiar | 3 days | Got it twice in a row |
+| 3 | Proficient | 7 days | Got it 3x in a row |
+| 4 | Mastered | 14 days | Got it 4x in a row |
+| 5 | Expert | 30 days | Got it 5+ times |
+
+**On correct**: Move up one box (max 5)
+**On incorrect**: Drop back 2 boxes (min 0)
+
+### Algorithm Implementation
 
 ```javascript
 // On "Got It"
