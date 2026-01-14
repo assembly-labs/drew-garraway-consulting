@@ -30,17 +30,18 @@ This is a multi-project monorepo containing client work, personal projects, and 
 
 | Project | Framework | Build | Styling | Deployment |
 |---------|-----------|-------|---------|------------|
-| TOMO | React 18 + TS | Vite | CSS Variables | Cloudflare Pages |
-| Scout | React 18 + TS | Vite | Tailwind | Netlify |
+| **Root Site** | Static HTML | None | Inline CSS | Cloudflare Pages |
+| TOMO | React 19 + TS | Vite | CSS Variables | Cloudflare Pages |
+| Scout | React 18 + TS | Vite | Tailwind | Cloudflare Pages |
 | FHM | Vanilla HTML/CSS/JS | Node scripts | Custom CSS | Cloudflare Pages |
 | CareerChat | React 18 + TS | Vite | Custom CSS | Cloudflare Pages |
 | F_This_App | Next.js 16 + TS | Next.js | Tailwind v4 | Cloudflare Pages |
-| Mikey-real | React 19 + TS | Vite | Tailwind v4 | PWA |
+| Mikey-real | React 19 + TS | Vite | Tailwind v4 | Cloudflare Pages |
 | Cool Curriculum | React 19 + TS | CRA | Tailwind | TBD |
-| Prompt Property | Vanilla JS | N/A | CSS3 | Static HTML |
+| Prompt Property | Vanilla JS | N/A | CSS3 | TBD |
 | TPL | Vanilla HTML | N/A | Custom CSS | GitHub Pages |
-| Gather | Next.js 14 | Next.js | Tailwind | Vercel |
-| Read Out Loud | Vanilla JS | N/A | Custom CSS | PWA |
+| Gather | Next.js 14 | Next.js | Tailwind | TBD |
+| Read Out Loud | Vanilla JS | N/A | Custom CSS | Cloudflare Pages |
 
 ---
 
@@ -126,6 +127,80 @@ drew-garraway-consulting/
 ### Deployment
 - Most projects auto-deploy on push to `main`
 - Check individual project README or CLAUDE.md for specific commands
+
+---
+
+## Deployment Architecture
+
+All automated deployments use **Cloudflare Pages** via GitHub Actions.
+
+### GitHub Actions Workflows
+
+| Workflow | File | Triggers On | Deploys To |
+|----------|------|-------------|------------|
+| Root Site | `deploy-root-site.yml` | `*.html`, `robots.txt` | Cloudflare Pages → drewgarraway.com |
+| TOMO | `deploy-tomo.yml` | `TOMO/prototype/**` | Cloudflare Pages → bjjj.pages.dev |
+| Scout | `deploy-scout.yml` | `scout/**` | Cloudflare Pages → searchwithscout.com |
+| F This App | `deploy-f-this-app.yml` | `f_this_app/**` | Cloudflare Pages |
+| FHM | `deploy-fhm.yml` | `fhm/**` | Cloudflare Pages |
+| Mikey Real | `deploy-mikey-real.yml` | `Mikey-real/**` | Cloudflare Pages |
+| Read Out Loud | `deploy-read-out-loud.yml` | `read-out-loud/**` | Cloudflare Pages |
+| Career Chat | `deploy-career-chat.yml` | `career-chat/**` | Cloudflare Pages |
+
+### Adding a New Project Workflow
+
+Copy the template and customize:
+```bash
+cp .github/workflows/_template-deploy.yml.example .github/workflows/deploy-{project}.yml
+```
+
+Then update placeholders: `{PROJECT_NAME}`, `{project-folder}`, `{cloudflare-project-name}`, `{output-dir}`.
+
+### Required GitHub Secrets
+
+These secrets must be configured in **GitHub → Settings → Secrets and variables → Actions**:
+
+| Secret | Description | Used By |
+|--------|-------------|---------|
+| `CLOUDFLARE_API_TOKEN` | Cloudflare API token with Pages permission | All workflows |
+| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account ID | All workflows |
+
+### How to Get Cloudflare Credentials
+
+1. Go to **Cloudflare Dashboard → My Profile → API Tokens**
+2. Create token with **Cloudflare Pages: Edit** permission
+3. Account ID is in **Cloudflare → Overview → right sidebar**
+
+### Deployment Flow
+
+```
+Push to main → GitHub Actions → Build (if needed) → Cloudflare Pages → Live
+```
+
+- No cache purging needed - Cloudflare handles automatically
+- Deploys complete in ~30 seconds for static sites
+- Each project has path filters so only relevant changes trigger deploys
+
+### Manual Deployment
+
+Each project can also be deployed manually (requires wrangler CLI):
+
+```bash
+# TOMO
+cd TOMO/prototype && npm run build && wrangler pages deploy dist --project-name=bjjj
+
+# Scout
+cd scout && npm run deploy
+
+# F This App
+cd f_this_app && npm run build && npm run pages:build && npm run pages:deploy
+
+# FHM
+cd fhm && npm run build && wrangler pages deploy public --project-name=fhm
+
+# Root site
+wrangler pages deploy _site --project-name=drewgarraway
+```
 
 ---
 
