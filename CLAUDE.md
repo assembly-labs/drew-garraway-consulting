@@ -13,6 +13,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | Project | Directory | Description | Has CLAUDE.md |
 |---------|-----------|-------------|---------------|
 | **TOMO** | `/TOMO/` | BJJ training journal - voice-first mobile app | Yes |
+| **TOMO_voice** | `/TOMO_voice/` | Voice-first BJJ transcription app | Yes |
 | **Scout** | `/scout/` | AI library discovery system for Tredyffrin Libraries | Yes |
 | **FHM** | `/fhm/` | Franklin Hugh Money - securities exam prep & finance insights | Yes (README + series-7) |
 | **CareerChat** | `/career-chat/` | AI career chatbot about Drew's background | Yes |
@@ -32,6 +33,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 |---------|-----------|-------|---------|------------|
 | **Root Site** | Static HTML | None | Inline CSS | Cloudflare Pages |
 | TOMO | React 19 + TS | Vite | CSS Variables | Cloudflare Pages |
+| TOMO_voice | React 19 + TS | Vite | CSS Variables | Cloudflare Pages |
 | Scout | React 18 + TS | Vite | Tailwind | Cloudflare Pages |
 | FHM | Vanilla HTML/CSS/JS | Node scripts | Custom CSS | Cloudflare Pages |
 | CareerChat | React 18 + TS | Vite | Custom CSS | Cloudflare Pages |
@@ -78,6 +80,7 @@ Each project may have different:
 drew-garraway-consulting/
 ├── Active Projects
 │   ├── TOMO/                    # BJJ training journal
+│   ├── TOMO_voice/              # Voice-first BJJ journal (new)
 │   ├── scout/                   # Library discovery AI
 │   ├── fhm/                     # Personal finance site
 │   ├── career-chat/             # Career chatbot

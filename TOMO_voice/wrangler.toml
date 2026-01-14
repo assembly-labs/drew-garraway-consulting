@@ -1,0 +1,14 @@
+# TOMO Voice - Cloudflare Pages Configuration
+name = "tomo-voice"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "dist"
+
+# Environment variables (set via Cloudflare dashboard or wrangler secret)
+# OPENAI_API_KEY - Your OpenAI API key (set as secret, not here)
+
+[vars]
+# Non-secret environment variables can go here
+
+# For local development with wrangler pages dev
+[dev]
+port = 8788
