@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Library | Drew Garraway</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #0f0f0f;
+      color: #e5e5e5;
+      min-height: 100vh;
+      padding-bottom: 2rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: #0f0f0f;
+      padding: 1.5rem 1rem 1rem;
+      z-index: 100;
+      border-bottom: 1px solid #222;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      color: #999;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .filter-pill:hover {
+      border-color: #555;
+      color: #ccc;
+    }
+
+    .filter-pill.active {
+      background: #2563eb;
+      border-color: #2563eb;
+      color: #fff;
+    }
+
+    main {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .audio-card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .audio-card:hover {
+      border-color: #3a3a3a;
+      background: #1f1f1f;
+    }
+
+    .audio-card.playing {
+      border-color: #2563eb;
+      background: #1a1a2a;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .card-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: #fff;
+    }
+
+    .card-description {
+      font-size: 0.875rem;
+      color: #888;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .card-meta {
+      font-size: 0.75rem;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .category-tag {
+      background: #2a2a2a;
+      padding: 0.125rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .category-tag.series-7 {
+      background: #1e3a5f;
+      color: #60a5fa;
+    }
+
+    .category-tag.misc {
+      background: #3f2a1e;
+      color: #f59e0b;
+    }
+
+    .play-btn {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      background: #2563eb;
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .play-btn:hover {
+      background: #1d4ed8;
+      transform: scale(1.05);
+    }
+
+    .play-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Player controls (shown when playing) */
+    .player-controls {
+      display: none;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    .audio-card.playing .player-controls {
+      display: block;
+    }
+
+    .progress-container {
+      margin-bottom: 1rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #2a2a2a;
+      border-radius: 3px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #2563eb;
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .progress-handle {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border-radius: 50%;
+      left: 0%;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .progress-bar:hover .progress-handle,
+    .progress-bar:active .progress-handle {
+      opacity: 1;
+    }
+
+    .time-display {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
+    .controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .control-btn {
+      background: #2a2a2a;
+      border: 1px solid #3a3a3a;
+      color: #ccc;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.8125rem;
+      cursor: pointer;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: all 0.2s ease;
+    }
+
+    .control-btn:hover {
+      background: #333;
+      border-color: #444;
+    }
+
+    .control-btn.active {
+      background: #1e3a5f;
+      border-color: #2563eb;
+      color: #60a5fa;
+    }
+
+    .speed-select {
+      background: #2a2a2a;
+      border: 1px solid #3a3a3a;
+      color: #ccc;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.8125rem;
+      min-height: 44px;
+      cursor: pointer;
+    }
+
+    .loop-indicator {
+      font-weight: 600;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #666;
+    }
+
+    .empty-state p {
+      margin-bottom: 0.5rem;
+    }
+
+    @media (min-width: 640px) {
+      header, main {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      header {
+        padding: 2rem 1rem 1rem;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Audio Library</h1>
+    <div class="filters">
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="series-7">Series 7</button>
+      <button class="filter-pill" data-filter="misc">Misc</button>
+    </div>
+  </header>
+
+  <main id="audio-list">
+    <!-- Cards generated by JS -->
+  </main>
+
+  <script>
+    // Audio library data - edit this array to add/remove files
+    const audioFiles = [
+      {
+        id: 1,
+        title: "Equity Stock Defined",
+        description: "From Buttonwood to ADRs - the history and types of equity securities",
+        duration: "30:40",
+        category: "series-7",
+        file: "files/Equity_Stock_Defined_From_Buttonwood_to_ADRs.m4a"
+      },
+      {
+        id: 2,
+        title: "The $180M Library AI Investment",
+        description: "The opportunity in library AI technology",
+        duration: "1:36",
+        category: "misc",
+        file: "files/The_$180M_Library_AI_Investment_Opportunity.m4a"
+      }
+      // Add more files here as needed
+    ];
+
+    // State
+    let currentFilter = 'all';
+    let currentlyPlaying = null;
+    let audioElement = null;
+    let loopCount = 2;
+
+    // DOM elements
+    const audioList = document.getElementById('audio-list');
+    const filterPills = document.querySelectorAll('.filter-pill');
+
+    // Initialize
+    function init() {
+      renderCards();
+      setupFilters();
+    }
+
+    // Render audio cards
+    function renderCards() {
+      const filtered = currentFilter === 'all'
+        ? audioFiles
+        : audioFiles.filter(f => f.category === currentFilter);
+
+      if (filtered.length === 0) {
+        audioList.innerHTML = `
+          <div class="empty-state">
+            <p>No audio files in this category</p>
+          </div>
+        `;
+        return;
+      }
+
+      audioList.innerHTML = filtered.map(file => `
+        <div class="audio-card" data-id="${file.id}">
+          <div class="card-header">
+            <div class="card-info">
+              <div class="card-title">${file.title}</div>
+              <div class="card-description">${file.description}</div>
+              <div class="card-meta">
+                <span>${file.duration}</span>
+                <span class="category-tag ${file.category}">${file.category === 'series-7' ? 'Series 7' : 'Misc'}</span>
+              </div>
+            </div>
+            <button class="play-btn" aria-label="Play ${file.title}">
+              <span class="play-icon">&#9654;</span>
+            </button>
+          </div>
+          <div class="player-controls">
+            <div class="progress-container">
+              <div class="progress-bar">
+                <div class="progress-fill"></div>
+                <div class="progress-handle"></div>
+              </div>
+              <div class="time-display">
+                <span class="current-time">0:00</span>
+                <span class="total-time">${file.duration}</span>
+              </div>
+            </div>
+            <div class="controls-row">
+              <select class="speed-select" aria-label="Playback speed">
+                <option value="0.75">0.75x</option>
+                <option value="1" selected>1x</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2">2x</option>
+              </select>
+              <button class="control-btn loop-btn active">
+                <span>Loop</span>
+                <span class="loop-indicator">2x</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Add event listeners to new cards
+      document.querySelectorAll('.audio-card').forEach(card => {
+        const playBtn = card.querySelector('.play-btn');
+        const progressBar = card.querySelector('.progress-bar');
+        const speedSelect = card.querySelector('.speed-select');
+        const loopBtn = card.querySelector('.loop-btn');
+
+        playBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          togglePlay(card);
+        });
+
+        card.addEventListener('click', () => {
+          togglePlay(card);
+        });
+
+        progressBar.addEventListener('click', (e) => {
+          e.stopPropagation();
+          seekAudio(e, progressBar);
+        });
+
+        speedSelect.addEventListener('click', (e) => e.stopPropagation());
+        speedSelect.addEventListener('change', (e) => {
+          if (audioElement) {
+            audioElement.playbackRate = parseFloat(e.target.value);
+          }
+        });
+
+        loopBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          cycleLoop(loopBtn);
+        });
+      });
+    }
+
+    // Setup filter buttons
+    function setupFilters() {
+      filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          filterPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          currentFilter = pill.dataset.filter;
+          renderCards();
+        });
+      });
+    }
+
+    // Toggle play/pause
+    function togglePlay(card) {
+      const id = parseInt(card.dataset.id);
+      const file = audioFiles.find(f => f.id === id);
+      const playBtn = card.querySelector('.play-btn');
+      const playIcon = card.querySelector('.play-icon');
+
+      // If clicking same card that's playing, toggle pause
+      if (currentlyPlaying === id && audioElement) {
+        if (audioElement.paused) {
+          audioElement.play();
+          playIcon.innerHTML = '&#10074;&#10074;';
+        } else {
+          audioElement.pause();
+          playIcon.innerHTML = '&#9654;';
+        }
+        return;
+      }
+
+      // Stop current audio if different
+      if (audioElement) {
+        audioElement.pause();
+        audioElement = null;
+        document.querySelectorAll('.audio-card').forEach(c => {
+          c.classList.remove('playing');
+          c.querySelector('.play-icon').innerHTML = '&#9654;';
+        });
+      }
+
+      // Start new audio
+      currentlyPlaying = id;
+      loopCount = 2;
+      card.classList.add('playing');
+      playIcon.innerHTML = '&#10074;&#10074;';
+
+      audioElement = new Audio(file.file);
+      audioElement.play().catch(err => {
+        console.error('Playback failed:', err);
+        card.classList.remove('playing');
+        playIcon.innerHTML = '&#9654;';
+      });
+
+      // Update progress
+      audioElement.addEventListener('timeupdate', () => {
+        updateProgress(card);
+      });
+
+      // Handle loop on end
+      audioElement.addEventListener('ended', () => {
+        handleEnded(card);
+      });
+
+      // Apply current speed
+      const speedSelect = card.querySelector('.speed-select');
+      audioElement.playbackRate = parseFloat(speedSelect.value);
+    }
+
+    // Update progress bar
+    function updateProgress(card) {
+      if (!audioElement) return;
+      const progressFill = card.querySelector('.progress-fill');
+      const progressHandle = card.querySelector('.progress-handle');
+      const currentTimeEl = card.querySelector('.current-time');
+
+      const percent = (audioElement.currentTime / audioElement.duration) * 100;
+      progressFill.style.width = percent + '%';
+      progressHandle.style.left = percent + '%';
+      currentTimeEl.textContent = formatTime(audioElement.currentTime);
+    }
+
+    // Seek audio
+    function seekAudio(e, progressBar) {
+      if (!audioElement) return;
+      const rect = progressBar.getBoundingClientRect();
+      const percent = (e.clientX - rect.left) / rect.width;
+      audioElement.currentTime = percent * audioElement.duration;
+    }
+
+    // Handle audio ended
+    function handleEnded(card) {
+      const loopBtn = card.querySelector('.loop-btn');
+      const loopIndicator = card.querySelector('.loop-indicator');
+      const playIcon = card.querySelector('.play-icon');
+
+      if (loopCount > 1) {
+        loopCount--;
+        loopIndicator.textContent = loopCount + 'x';
+        audioElement.currentTime = 0;
+        audioElement.play();
+      } else {
+        // Stop after loops complete
+        card.classList.remove('playing');
+        playIcon.innerHTML = '&#9654;';
+        loopCount = 2;
+        loopIndicator.textContent = '2x';
+        currentlyPlaying = null;
+        audioElement = null;
+      }
+    }
+
+    // Cycle loop count
+    function cycleLoop(btn) {
+      const indicator = btn.querySelector('.loop-indicator');
+      loopCount = loopCount >= 3 ? 1 : loopCount + 1;
+      indicator.textContent = loopCount + 'x';
+    }
+
+    // Format time as m:ss
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Start
+    init();
+  </script>
+</body>
+</html>
