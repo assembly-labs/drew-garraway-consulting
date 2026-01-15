@@ -480,10 +480,20 @@ class UIController {
 
     this.elements.textDisplay.innerHTML = `${before}<mark class="current-word">${word}</mark>${after}`;
 
-    // Auto-scroll to keep highlighted word visible
+    // Smart scroll: only scroll if word is outside visible area
     const mark = this.elements.textDisplay.querySelector('.current-word');
     if (mark) {
-      mark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const container = this.elements.textDisplay;
+      const markRect = mark.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+
+      // Check if word is outside the visible area of the container
+      const isAbove = markRect.top < containerRect.top;
+      const isBelow = markRect.bottom > containerRect.bottom;
+
+      if (isAbove || isBelow) {
+        mark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
   }
 
