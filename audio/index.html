@@ -94,6 +94,58 @@
       background: #1a1a2a;
     }
 
+    .audio-card.loading {
+      border-color: #f59e0b;
+      background: #1a1a1a;
+    }
+
+    .audio-card.error {
+      border-color: #ef4444;
+    }
+
+    .error-message {
+      color: #ef4444;
+      font-size: 0.8125rem;
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      background: rgba(239, 68, 68, 0.1);
+      border-radius: 0.25rem;
+      display: none;
+    }
+
+    .audio-card.error .error-message {
+      display: block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #333;
+      border-top-color: #f59e0b;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .play-btn.loading {
+      background: #f59e0b;
+    }
+
+    .play-btn.loading .play-icon {
+      display: none;
+    }
+
+    .play-btn .loading-spinner {
+      display: none;
+    }
+
+    .play-btn.loading .loading-spinner {
+      display: block;
+    }
+
     .card-header {
       display: flex;
       justify-content: space-between;
@@ -337,7 +389,7 @@
         description: "The opportunity in library AI technology",
         duration: "1:36",
         category: "misc",
-        file: "files/The_$180M_Library_AI_Investment_Opportunity.m4a"
+        file: "files/Library_AI_Investment_Opportunity.m4a"
       }
       // Add more files here as needed
     ];
@@ -386,7 +438,10 @@
             </div>
             <button class="play-btn" aria-label="Play ${file.title}">
               <span class="play-icon">&#9654;</span>
+              <div class="loading-spinner"></div>
             </button>
+          </div>
+          <div class="error-message">Unable to play audio. Check your connection and try again.
           </div>
           <div class="player-controls">
             <div class="progress-container">
@@ -470,10 +525,13 @@
       const playBtn = card.querySelector('.play-btn');
       const playIcon = card.querySelector('.play-icon');
 
+      // Clear any previous error state
+      card.classList.remove('error');
+
       // If clicking same card that's playing, toggle pause
       if (currentlyPlaying === id && audioElement) {
         if (audioElement.paused) {
-          audioElement.play();
+          audioElement.play().catch(handlePlayError.bind(null, card, playBtn, playIcon));
           playIcon.innerHTML = '&#10074;&#10074;';
         } else {
           audioElement.pause();
@@ -483,26 +541,35 @@
       }
 
       // Stop current audio if different
-      if (audioElement) {
-        audioElement.pause();
-        audioElement = null;
-        document.querySelectorAll('.audio-card').forEach(c => {
-          c.classList.remove('playing');
-          c.querySelector('.play-icon').innerHTML = '&#9654;';
-        });
-      }
+      stopAudio();
 
-      // Start new audio
+      // Start loading new audio
       currentlyPlaying = id;
       loopCount = 2;
-      card.classList.add('playing');
-      playIcon.innerHTML = '&#10074;&#10074;';
+      card.classList.add('loading');
+      playBtn.classList.add('loading');
 
-      audioElement = new Audio(file.file);
-      audioElement.play().catch(err => {
-        console.error('Playback failed:', err);
-        card.classList.remove('playing');
-        playIcon.innerHTML = '&#9654;';
+      audioElement = new Audio();
+      audioElement.preload = 'auto';
+
+      // Set up event listeners BEFORE setting src
+      audioElement.addEventListener('canplay', function onCanPlay() {
+        audioElement.removeEventListener('canplay', onCanPlay);
+        card.classList.remove('loading');
+        card.classList.add('playing');
+        playBtn.classList.remove('loading');
+        playIcon.innerHTML = '&#10074;&#10074;';
+
+        // Apply current speed
+        const speedSelect = card.querySelector('.speed-select');
+        audioElement.playbackRate = parseFloat(speedSelect.value);
+
+        audioElement.play().catch(err => handlePlayError(card, playBtn, playIcon, err));
+      });
+
+      audioElement.addEventListener('error', (e) => {
+        console.error('Audio load error:', audioElement.error);
+        handlePlayError(card, playBtn, playIcon, audioElement.error);
       });
 
       // Update progress
@@ -515,9 +582,52 @@
         handleEnded(card);
       });
 
-      // Apply current speed
-      const speedSelect = card.querySelector('.speed-select');
-      audioElement.playbackRate = parseFloat(speedSelect.value);
+      // Now set the source to start loading
+      audioElement.src = file.file;
+      audioElement.load();
+    }
+
+    // Stop any playing audio
+    function stopAudio() {
+      if (audioElement) {
+        audioElement.pause();
+        audioElement.src = '';
+        audioElement = null;
+      }
+      document.querySelectorAll('.audio-card').forEach(c => {
+        c.classList.remove('playing', 'loading', 'error');
+        const btn = c.querySelector('.play-btn');
+        btn.classList.remove('loading');
+        c.querySelector('.play-icon').innerHTML = '&#9654;';
+      });
+      currentlyPlaying = null;
+    }
+
+    // Handle playback errors
+    function handlePlayError(card, playBtn, playIcon, err) {
+      console.error('Playback failed:', err);
+      card.classList.remove('loading', 'playing');
+      card.classList.add('error');
+      playBtn.classList.remove('loading');
+      playIcon.innerHTML = '&#9654;';
+      currentlyPlaying = null;
+
+      // Update error message with specific info if available
+      const errorMsg = card.querySelector('.error-message');
+      if (err && err.message) {
+        errorMsg.textContent = `Playback error: ${err.message}`;
+      } else if (audioElement && audioElement.error) {
+        const mediaError = audioElement.error;
+        const errorMessages = {
+          1: 'Audio loading was aborted.',
+          2: 'Network error while loading audio.',
+          3: 'Audio decoding failed.',
+          4: 'Audio format not supported.'
+        };
+        errorMsg.textContent = errorMessages[mediaError.code] || 'Unable to play audio.';
+      } else {
+        errorMsg.textContent = 'Unable to play audio. Check your connection and try again.';
+      }
     }
 
     // Update progress bar

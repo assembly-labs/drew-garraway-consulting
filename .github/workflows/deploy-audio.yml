@@ -1,0 +1,31 @@
+name: Deploy Audio to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'audio/**'
+      - '.github/workflows/deploy-audio.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Audio Library
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      # No build step needed - static HTML with audio files
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy . --project-name=audio-library
+          workingDirectory: audio
