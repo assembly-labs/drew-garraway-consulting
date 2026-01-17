@@ -817,24 +817,27 @@
 </header>
 
 <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('voice')">Voice Guide</button>
+    <button class="tab-btn active" onclick="switchTab('voice')">Brand Guide</button>
     <button class="tab-btn" onclick="switchTab('calendar')">Cultural Calendar</button>
     <button class="tab-btn" onclick="switchTab('holidays')">National Holidays</button>
 </div>
 
-<!-- VOICE GUIDE TAB -->
+<!-- BRAND GUIDE TAB -->
 <div id="voice" class="tab-content active">
 
 <nav>
     <ul>
         <li><a href="#how-to-use">How to Use</a></li>
-        <li><a href="#voice-principles">Voice Principles</a></li>
+        <li><a href="#brand-messaging">Messaging</a></li>
+        <li><a href="#voice-pillars">Voice</a></li>
+        <li><a href="#copy-guidelines">Copy</a></li>
         <li><a href="#platforms">Platforms</a></li>
         <li><a href="#frameworks">Frameworks</a></li>
-        <li><a href="#scenarios">Scenarios</a></li>
+        <li><a href="#copy-examples">Examples</a></li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#content-strategy">Strategy</a></li>
         <li><a href="#approval">Approval</a></li>
-        <li><a href="#planning">Planning</a></li>
-        <li><a href="#workflow">Workflow</a></li>
+        <li><a href="#photography">Photography</a></li>
     </ul>
 </nav>
 
@@ -845,132 +848,163 @@
     <span class="section-number">00</span>
     <h2>How to Use This Document</h2>
 
-    <p>The Brand Voice Guide is our creative brief. This document is the campaign execution plan.</p>
+    <p>This is the single source of truth for Agency Brewing's brand voice, social media strategy, and content execution.</p>
 
     <div class="role-card">
-        <p class="role-name">For Jonathan (Creative Director Review)</p>
+        <p class="role-name">For Jonathan (Creative Director)</p>
         <ul>
-            <li>Section 1: Approve platform voice adaptations</li>
-            <li>Section 2: Review content frameworks - these become your approval templates</li>
-            <li>Section 3: Sign off on social scenarios and response templates</li>
-            <li>Section 4: Flag anything that doesn't sound like us</li>
+            <li>Voice pillars and platform adaptations</li>
+            <li>Content frameworks for approval templates</li>
+            <li>Photography and visual standards</li>
+            <li>Final sign-off on anything that goes live</li>
         </ul>
     </div>
 
     <div class="role-card">
         <p class="role-name">For Drew (Content Generation)</p>
         <ul>
-            <li>Feed relevant sections to LLMs with master Brand Voice Guide</li>
-            <li>Use content frameworks as campaign templates</li>
-            <li>Reference approval criteria before sending to Jonathan</li>
-            <li>Track engagement patterns for iteration</li>
+            <li>Copy guidelines and examples for LLM prompts</li>
+            <li>Platform-specific tone and cadence</li>
+            <li>Quarterly strategy and content pillars</li>
+            <li>Approval criteria checklist before submission</li>
         </ul>
     </div>
 </section>
 
-<!-- VOICE PRINCIPLES -->
-<section id="voice-principles">
+<!-- BRAND MESSAGING -->
+<section id="brand-messaging">
     <span class="section-number">01</span>
-    <h2>Voice Principles for Social Media</h2>
+    <h2>Brand Messaging</h2>
 
-    <h3>What Never Changes (Across All Platforms)</h3>
+    <div class="highlight-box">
+        <p>At its core, Agency Brewing celebrates the idea that great work and great beer both benefit from <strong>balance, restraint, and intention</strong>. This is a beer for people who appreciate quality but don't need it explained, who value culture as much as craft, and who see beer as part of a broader social rhythm - not the main event, but an essential one.</p>
+    </div>
 
-    <h4>Core DNA</h4>
+    <h3>The Brand Lives at the Intersection of</h3>
     <ul>
-        <li>Advertising creativity × brewing craft obsession</li>
-        <li>Confident without arrogance</li>
-        <li>Process-driven, execution-focused</li>
-        <li>Story-led, community-building</li>
-        <li>LA creative energy</li>
+        <li>Creative and advertising culture</li>
+        <li>Modern social clubs and shared spaces</li>
+        <li>Premium, sessionable, and approachable beers</li>
     </ul>
+
+    <div class="principle">
+        <strong>Each beer is treated as a new brief.</strong>
+        <p>Distinct in expression, consistent in standards. Different styles, same mindset.</p>
+    </div>
+
+    <h3>Our Audience</h3>
+    <ul>
+        <li>Light and thoughtful beer drinkers</li>
+        <li>Those drawn to brands that feel considered, not commercial</li>
+    </ul>
+</section>
+
+<!-- VOICE PILLARS -->
+<section id="voice-pillars">
+    <span class="section-number">02</span>
+    <h2>Voice Pillars</h2>
 
     <div class="voice-grid">
         <div class="voice-card">
-            <p class="voice-card-title">Creative</p>
-            <p class="voice-card-score">10/10</p>
-            <p>Everything flows from creative thinking</p>
+            <p class="voice-card-title">Effortless Intelligence</p>
+            <p class="voice-card-score">Pillar 1</p>
+            <p>Short, sharp thoughts. Minimal punctuation. No exclamation points unless earned. Confident but never loud. Clever without winking too hard.</p>
         </div>
         <div class="voice-card">
-            <p class="voice-card-title">Craft-Focused</p>
-            <p class="voice-card-score">9/10</p>
-            <p>Obsessive about quality, transparent about process</p>
+            <p class="voice-card-title">Creative Culture, Translated</p>
+            <p class="voice-card-score">Pillar 2</p>
+            <p>Advertising references used sparingly, only if they land for non-industry folks too. Inside jokes that still feel inclusive. Culture > credentials.</p>
         </div>
         <div class="voice-card">
-            <p class="voice-card-title">Confident</p>
-            <p class="voice-card-score">8/10</p>
-            <p>We know good work when we see it (and brew it)</p>
+            <p class="voice-card-title">Lightness in All Forms</p>
+            <p class="voice-card-score">Pillar 3</p>
+            <p>Sessionable beer. Sessionable copy. Short sentences. Breathing room. Nothing overwrought.</p>
         </div>
         <div class="voice-card">
-            <p class="voice-card-title">Storytelling</p>
-            <p class="voice-card-score">9/10</p>
-            <p>Every beer has a narrative</p>
+            <p class="voice-card-title">Social Club Energy</p>
+            <p class="voice-card-score">Pillar 4</p>
+            <p>Feels like being "in," without needing a membership card. Welcoming. Conversational. Community-forward.</p>
         </div>
     </div>
 
-    <div class="highlight-box">
-        <h4>This means on social:</h4>
-        <ul>
-            <li>We lead with concepts, not apologies</li>
-            <li>We show process because execution matters</li>
-            <li>We build community through shared creative values</li>
-            <li>We're confident in our craft, period</li>
-        </ul>
-    </div>
-
-    <h3>The Campaign Mindset</h3>
-    <p>Every social media initiative is a <strong>campaign</strong>, not just "posting."</p>
-
-    <h4>Campaign Elements</h4>
-    <ul>
-        <li><strong>Brief:</strong> What's the insight or objective?</li>
-        <li><strong>Concept:</strong> What's the big idea?</li>
-        <li><strong>Execution:</strong> How do we bring it to life?</li>
-        <li><strong>Activation:</strong> How do we launch and engage?</li>
-        <li><strong>Results:</strong> How do we measure and iterate?</li>
-    </ul>
-
-    <h4>Apply this to:</h4>
-    <ul>
-        <li>Product launches</li>
-        <li>Seasonal releases</li>
-        <li>Festival participation</li>
-        <li>Community initiatives</li>
-        <li>Content series</li>
-    </ul>
-
-    <h3>Language Locked & Loaded</h3>
-
-    <h4>Always Use</h4>
-    <div class="word-list approved">
-        <span>Crafted</span>
-        <span>Create</span>
-        <span>Concept</span>
-        <span>Campaign-worthy</span>
-        <span>Breakthrough</span>
-        <span>Process</span>
-        <span>Iteration</span>
-        <span>Execution</span>
-        <span>Creative director approved</span>
-        <span>Like the best campaigns</span>
-        <span>Like great advertising</span>
-    </div>
-
-    <h4>Never Use</h4>
+    <h3>What We Avoid</h3>
     <div class="word-list rejected">
+        <span>Beer snob language</span>
+        <span>IBUs, hop varietals</span>
+        <span>Long tasting notes</span>
+        <span>Forced humor</span>
+        <span>Meme chasing</span>
+        <span>Slang that ages fast</span>
+        <span>Over-explaining the brand</span>
         <span>Artisanal</span>
         <span>Curated</span>
         <span>Elevated</span>
-        <span>Passion project</span>
-        <span>Journey</span>
-        <span>Experience</span>
         <span>Apologetic language</span>
     </div>
 </section>
 
+<!-- COPY GUIDELINES -->
+<section id="copy-guidelines">
+    <span class="section-number">03</span>
+    <h2>Copy Guidelines</h2>
+
+    <div class="highlight-box">
+        <p>Copy at Agency Brewing is not there to sell first - it's there to set tone, create familiarity, and signal taste. Social copy should feel like overhearing a smart, relaxed comment at the end of a table, not a brand announcement.</p>
+    </div>
+
+    <h3>Sentence Structure</h3>
+    <ul>
+        <li>Short lines</li>
+        <li>Occasional fragments</li>
+        <li>White space matters</li>
+    </ul>
+
+    <div class="do-dont">
+        <div class="dont">
+            <h5>Bad</h5>
+            <ul>
+                <li>Our Session IPA is designed for creatives who value balance and quality craftsmanship.</li>
+                <li>This is the perfect beer to enjoy after a long day of work with friends or coworkers.</li>
+            </ul>
+        </div>
+        <div class="do">
+            <h5>Good</h5>
+            <ul>
+                <li>Made for the moment you log off.</li>
+                <li>Work's done.</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Punctuation</h3>
+    <ul>
+        <li><strong>Periods</strong> signal confidence</li>
+        <li><strong>Exclamation points</strong> are minimal and rare - intentional only</li>
+        <li><strong>Line breaks</strong> create rhythm</li>
+        <li><strong>Lowercase</strong> is acceptable when it fits the mood</li>
+    </ul>
+
+    <h3>Hashtags</h3>
+    <ul>
+        <li>Minimal</li>
+        <li>Purposeful</li>
+        <li>Often none at all</li>
+    </ul>
+
+    <h3>Humor & Wit</h3>
+    <ul>
+        <li><strong>Dry > loud</strong></li>
+        <li><strong>Observational > jokey</strong></li>
+        <li>If it needs explaining, it doesn't ship</li>
+    </ul>
+</section>
+
 <!-- PLATFORMS -->
 <section id="platforms">
-    <span class="section-number">02</span>
-    <h2>Platform-Specific Executions</h2>
+    <span class="section-number">04</span>
+    <h2>Platform-Specific Tone</h2>
+
+    <p>The voice stays consistent; the delivery flexes by platform.</p>
 
     <div class="platform-card">
         <div class="platform-header">
@@ -979,85 +1013,126 @@
         </div>
         <dl class="platform-meta">
             <div>
-                <dt>Voice DNA</dt>
-                <dd>Confident creative energy, visually led</dd>
-            </div>
-            <div>
-                <dt>Post Length</dt>
-                <dd>2-4 sentences</dd>
-            </div>
-            <div>
-                <dt>Hashtags</dt>
-                <dd>5-8 strategic (never generic)</dd>
-            </div>
-            <div>
                 <dt>Tone</dt>
-                <dd>Like a creative director presenting a concept</dd>
+                <dd>Most refined, visual-first, editorial</dd>
+            </div>
+            <div>
+                <dt>How We Sound</dt>
+                <dd>Confident, minimal, aware of design and pacing</dd>
             </div>
         </dl>
-        <h4>Caption Formula</h4>
-        <ol>
-            <li><strong>Hook:</strong> Lead with the insight or creative angle</li>
-            <li><strong>Execution:</strong> How we brought the concept to life</li>
-            <li><strong>Activation:</strong> Where/when (brief, confident)</li>
-        </ol>
+        <h4>Copy Guidelines</h4>
+        <ul>
+            <li>1-3 short lines</li>
+            <li>Often fewer than 20 words</li>
+            <li>Let the image do the heavy lifting</li>
+        </ul>
         <div class="example">
-            <span class="example-label">Example</span>
-            <p>Like the best campaigns, this started with obsessive attention to a single idea. Session IPA - citrus-forward, crushable, campaign-worthy. Available now, Eagle Rock and Silver Lake.</p>
+            <span class="example-label">Examples</span>
+            <p>"Good taste travels well." / "Same mindset. New pour." / "Office closed. Conversation open."</p>
         </div>
+    </div>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">X (Twitter)</span>
+            <span class="platform-tag">Secondary</span>
+        </div>
+        <dl class="platform-meta">
+            <div>
+                <dt>Tone</dt>
+                <dd>Sharper, more conversational, culturally responsive</dd>
+            </div>
+            <div>
+                <dt>How We Sound</dt>
+                <dd>Smart, timely, slightly more playful</dd>
+            </div>
+        </dl>
+        <h4>Copy Guidelines</h4>
+        <ul>
+            <li>One strong line</li>
+            <li>Occasional commentary on work, culture, or time</li>
+            <li>Still restrained - never ranty</li>
+        </ul>
         <div class="example">
-            <span class="example-label">Example</span>
-            <p>Six months of recipe iteration. Every great creative concept requires killing your darlings to find the breakthrough. This is it. Link in bio.</p>
+            <span class="example-label">Examples</span>
+            <p>"Logging off is a skill." / "Great ideas hate fluorescent lighting." / "This meeting could've been a beer."</p>
         </div>
     </div>
 
     <div class="platform-card">
         <div class="platform-header">
             <span class="platform-name">Facebook</span>
-            <span class="platform-tag">Community Headquarters</span>
+            <span class="platform-tag">Community</span>
         </div>
         <dl class="platform-meta">
             <div>
-                <dt>Voice DNA</dt>
-                <dd>Conversational but still confident creative</dd>
-            </div>
-            <div>
-                <dt>Post Length</dt>
-                <dd>3-5 sentences</dd>
-            </div>
-            <div>
                 <dt>Tone</dt>
-                <dd>Creative director speaking to the neighborhood</dd>
+                <dd>Warm, clear, slightly more explanatory</dd>
+            </div>
+            <div>
+                <dt>How We Sound</dt>
+                <dd>Welcoming, community-minded, still elevated - never corporate</dd>
             </div>
         </dl>
+        <h4>Copy Guidelines</h4>
+        <ul>
+            <li>2-3 short sentences max</li>
+            <li>Light context is okay</li>
+            <li>Avoid jargon</li>
+        </ul>
         <div class="example">
-            <span class="example-label">Example</span>
-            <p>Agency Brewing is what happens when you bring advertising's creative obsession to brewing. Every beer conceptualized like a campaign, executed like a masterpiece. Session IPA available now in Eagle Rock and Silver Lake. This is where Madison Avenue meets LA brewing.</p>
+            <span class="example-label">Examples</span>
+            <p>"Out with friends. In good company. That's the idea." / "Same beer. New table."</p>
+        </div>
+    </div>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">TikTok</span>
+            <span class="platform-tag">Behind the Scenes</span>
+        </div>
+        <dl class="platform-meta">
+            <div>
+                <dt>Tone</dt>
+                <dd>Observational, relaxed, human - never try-hard</dd>
+            </div>
+            <div>
+                <dt>How We Sound</dt>
+                <dd>Casual but considered, self-aware, slightly looser but still intentional</dd>
+            </div>
+        </dl>
+        <h4>Copy Guidelines</h4>
+        <ul>
+            <li>Short captions (1 line preferred)</li>
+            <li>Often lowercase</li>
+            <li>Feels like a passing thought, not a setup</li>
+            <li>Let the video do the talking</li>
+        </ul>
+        <div class="example">
+            <span class="example-label">Examples</span>
+            <p>"this is the part of the day we like." / "nothing urgent. just good timing." / "no notes."</p>
         </div>
     </div>
 
     <div class="platform-card">
         <div class="platform-header">
             <span class="platform-name">LinkedIn</span>
-            <span class="platform-tag">Optional - Industry Connection</span>
+            <span class="platform-tag">Optional - Industry</span>
         </div>
         <dl class="platform-meta">
             <div>
-                <dt>Voice DNA</dt>
+                <dt>Tone</dt>
                 <dd>Professional creative, strategic insights</dd>
             </div>
             <div>
-                <dt>Post Length</dt>
-                <dd>4-6 sentences</dd>
-            </div>
-            <div>
                 <dt>Use For</dt>
-                <dd>Industry partnerships, creative process deep-dives, festival strategy</dd>
+                <dd>Industry partnerships, creative process deep-dives</dd>
             </div>
         </dl>
         <div class="example">
             <span class="example-label">Example</span>
-            <p>The best advertising campaigns start with a focused brief. We applied that same discipline to our first beer: one exceptional Session IPA, executed with obsessive attention to craft. For creative professionals who understand that process drives results. Available now in LA.</p>
+            <p>The best advertising campaigns start with a focused brief. We applied that same discipline to our first beer. For creative professionals who understand that process drives results.</p>
         </div>
     </div>
 
@@ -1072,25 +1147,21 @@
                 <dd>Warm, confident, let the beer speak</dd>
             </div>
         </dl>
-        <h4>Elevator Pitch (15 seconds)</h4>
+        <h4>Elevator Pitch</h4>
         <div class="example">
-            <p>Agency Brewing - where advertising creativity meets brewing craft. Every beer conceptualized like a breakthrough campaign. Try this Session IPA and taste what obsessive execution looks like.</p>
+            <p>Agency Brewing - where advertising creativity meets brewing craft. Try the Session IPA.</p>
         </div>
-        <h4>When they ask about the advertising connection</h4>
+        <h4>When Asked About the Advertising Connection</h4>
         <div class="example">
-            <p>We're creatives who got obsessed with brewing. Turns out the same discipline that drives great campaigns - concept, iteration, flawless execution - makes exceptional beer.</p>
-        </div>
-        <h4>When they ask about the beer</h4>
-        <div class="example">
-            <p>Session IPA - citrus-forward, balanced, designed for drinkability. Six months of recipe development to get it campaign-worthy. What are you tasting?</p>
+            <p>We're creatives who got obsessed with brewing. Same discipline - concept, iteration, execution.</p>
         </div>
     </div>
 </section>
 
 <!-- FRAMEWORKS -->
 <section id="frameworks">
-    <span class="section-number">03</span>
-    <h2>Content Campaign Frameworks</h2>
+    <span class="section-number">05</span>
+    <h2>Content Frameworks</h2>
 
     <div class="framework">
         <div class="framework-header">
@@ -1188,124 +1259,203 @@
     </div>
 </section>
 
-<!-- SCENARIOS -->
-<section id="scenarios">
-    <span class="section-number">04</span>
-    <h2>Social Scenarios & Response Templates</h2>
+<!-- COPY EXAMPLES -->
+<section id="copy-examples">
+    <span class="section-number">06</span>
+    <h2>Copy Examples</h2>
 
+    <h3>Product-Focused (Soft Sell)</h3>
+    <div class="word-list approved">
+        <span>"Built with intention."</span>
+        <span>"Nothing extra. Everything considered."</span>
+        <span>"A beer that knows when to step back."</span>
+    </div>
+
+    <h3>Brand Philosophy</h3>
+    <div class="word-list approved">
+        <span>"Good work deserves good pauses."</span>
+        <span>"Balance is part of the craft."</span>
+        <span>"Taste is quiet confidence."</span>
+    </div>
+
+    <h3>Creative Culture</h3>
+    <div class="word-list approved">
+        <span>"Process matters."</span>
+        <span>"Strong opinions. Loosely held."</span>
+        <span>"Finished is better than perfect."</span>
+    </div>
+
+    <h3>Light Humor</h3>
+    <div class="word-list approved">
+        <span>"We support early outs."</span>
+        <span>"Another meeting that could've been avoided."</span>
+        <span>"Deadline met. Thirst remains."</span>
+    </div>
+
+    <h3>Engagement Responses</h3>
+    <div class="word-list approved">
+        <span>"Exactly."</span>
+        <span>"Couldn't agree more."</span>
+        <span>"We'll save you one."</span>
+        <span>"That's the spirit."</span>
+    </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+    <span class="section-number">07</span>
+    <h2>Community & Engagement</h2>
+
+    <div class="principle">
+        <strong>Agency Brewing doesn't dominate conversations - it joins them.</strong>
+        <p>Response style: Timely. Calm. Human. Often brief.</p>
+    </div>
+
+    <h3>Engagement Principles</h3>
+    <div class="voice-grid">
+        <div class="voice-card">
+            <p class="voice-card-title">Acknowledge > Amplify</p>
+            <p>Respond to comments without redirecting everything back to sales.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Reward the Creatives</p>
+            <p>Repost thoughtful tags. Highlight photographers, designers, bartenders. Credit always.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">IRL to URL Loop</p>
+            <p>Encourage: Bar sightings, casual moments, design-forward UGC.</p>
+        </div>
+    </div>
+
+    <h3>Emergency Response</h3>
     <div class="scenario">
-        <p class="scenario-title">When Someone Tags Us / Posts Our Beer</p>
-        <p class="scenario-approach">Approach: Confident acknowledgment, build community</p>
-        <div class="do-dont">
-            <div class="do">
-                <h5>Do</h5>
-                <ul>
-                    <li>Reshare to stories with "Campaign-worthy"</li>
-                    <li>Comment: "Great taste" or "What's your take on the citrus notes?"</li>
-                    <li>Keep it brief, confident, genuine</li>
-                </ul>
+        <p class="scenario-title">Quality Issue</p>
+        <div class="example">
+            <p>"Every can matters. DM us and we'll make this right."</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTENT STRATEGY -->
+<section id="content-strategy">
+    <span class="section-number">08</span>
+    <h2>Content Strategy</h2>
+
+    <h3>Content Pillars</h3>
+    <div class="voice-grid">
+        <div class="voice-card">
+            <p class="voice-card-title">Product, Quietly</p>
+            <p>Can details. Pour shots. Natural light. No hard sell.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Out Of Office Philosophy</p>
+            <p>Leaving work. Reclaiming time. Small freedoms. Everyday rituals.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Creative Culture</p>
+            <p>Process. Inspiration. Analog moments. Studio life.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Community & Social Club</p>
+            <p>Events. Gatherings. Shared tables. Familiar faces.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Design & Timelessness</p>
+            <p>Aesthetic appreciation. Intentional choices. Visual craft.</p>
+        </div>
+    </div>
+
+    <h3>Posting Cadence</h3>
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <p class="metric-label">Feed Posts</p>
+            <p class="metric-value">8 / month</p>
+        </div>
+        <div class="metric-card">
+            <p class="metric-label">Stories</p>
+            <p class="metric-value">8-10 / month</p>
+        </div>
+        <div class="metric-card">
+            <p class="metric-label">Reels</p>
+            <p class="metric-value">1-2 / month</p>
+        </div>
+    </div>
+
+    <h3>Quarterly Strategy: 2026</h3>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Q1: Tease Phase</span>
+            <span class="framework-number">Jan-Mar</span>
+        </div>
+        <div class="framework-body">
+            <p><strong>Goal:</strong> Build intrigue before full availability. Signals, not announcements.</p>
+            <ul>
+                <li>Partial can reveals, typography studies, packaging materials</li>
+                <li>Visual-forward, copy-light</li>
+            </ul>
+            <div class="example">
+                <p>"Something's taking shape." / "Almost ready." / "Details matter."</p>
             </div>
-            <div class="dont">
-                <h5>Don't</h5>
-                <ul>
-                    <li>Over-effusive responses</li>
-                    <li>Generic "thanks for the support!"</li>
-                    <li>Turn their post into our sales pitch</li>
-                </ul>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Q2: Awareness & Placement</span>
+            <span class="framework-number">Apr-Jun</span>
+        </div>
+        <div class="framework-body">
+            <p><strong>Goal:</strong> Be seen in the right places. Show up IRL.</p>
+            <ul>
+                <li>Bar and retail placements, spring energy, event visibility</li>
+                <li>Document events quietly - before/after moments, candid conversations</li>
+            </ul>
+            <div class="example">
+                <p>"Good company. Good timing." / "We brought enough." / "Nice crowd tonight."</p>
             </div>
         </div>
     </div>
 
-    <div class="scenario">
-        <p class="scenario-title">When Someone Gives Positive Feedback</p>
-        <p class="scenario-approach">Framework: Brief acknowledgment + Creative angle or process note</p>
-        <div class="example">
-            <p>This is why we obsess over every batch. Great to hear the concept landed.</p>
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Q3: Community & Rhythm</span>
+            <span class="framework-number">Jul-Sep</span>
         </div>
-        <div class="example">
-            <p>Creative director approved. Seriously though, feedback like this keeps us iterating.</p>
-        </div>
-    </div>
-
-    <div class="scenario">
-        <p class="scenario-title">When Someone Gives Constructive Criticism</p>
-        <p class="scenario-approach">Framework: Acknowledge + Process/iteration mindset + Confidence</p>
-        <div class="example">
-            <p>Appreciate the feedback on the bitterness. We're constantly iterating - that's how breakthrough concepts develop.</p>
-        </div>
-        <div class="example">
-            <p>Good call on carbonation levels. Like any creative work, refinement is endless. Next batch addresses this.</p>
+        <div class="framework-body">
+            <p><strong>Goal:</strong> Feel like part of the routine. Consistently present.</p>
+            <ul>
+                <li>End-of-week rituals, summer evenings, familiar tables</li>
+                <li>Repeating formats (OOO Fridays)</li>
+            </ul>
+            <div class="example">
+                <p>"Right on time." / "Same table." / "You know the drill."</p>
+            </div>
         </div>
     </div>
 
-    <div class="scenario">
-        <p class="scenario-title">When Someone Compares Us to Another Brewery</p>
-        <p class="scenario-approach">Approach: Confident differentiation without disparagement</p>
-        <div class="example">
-            <p>[Brewery] makes excellent beer. We're approaching craft from a different creative angle - advertising rigor meets brewing obsession. Different stories, same dedication to quality.</p>
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Q4: Reflection & Restraint</span>
+            <span class="framework-number">Oct-Dec</span>
         </div>
-    </div>
-
-    <div class="scenario">
-        <p class="scenario-title">When Asked About Price/Value</p>
-        <p class="scenario-approach">Framework: Confident position on quality and craft</p>
-        <div class="example">
-            <p>Obsessive ingredient sourcing, rigorous process, local production. We're not competing on price - we're focused on making campaign-worthy beer.</p>
-        </div>
-    </div>
-
-    <div class="scenario">
-        <p class="scenario-title">When Beer Sells Out</p>
-        <p class="scenario-approach">Framework: What happened + Next availability + Process note</p>
-        <div class="example">
-            <p>Batch #[X] sold out. Next cans drop [date]. Like limited campaign runs, scarcity means we're executing at the right scale.</p>
-        </div>
-    </div>
-
-    <div class="scenario">
-        <p class="scenario-title">When Asked About Distribution/Availability</p>
-        <p class="scenario-approach">Framework: Clear current state + Forward-looking (when accurate)</p>
-        <div class="example">
-            <p>Currently in Eagle Rock, Silver Lake, and downtown LA. Email jonathan@agencybrewing.com to order or check our locations page. We're growing thoughtfully, not rapidly.</p>
-        </div>
-    </div>
-
-    <h3>Emergency Scenarios</h3>
-
-    <div class="scenario">
-        <p class="scenario-title">Quality Issue with Beer</p>
-        <h4>Individual complaint:</h4>
-        <div class="example">
-            <p>Appreciate you letting us know. Every can matters when you're obsessed with quality. DM us and we'll make this right. Your feedback helps us iterate.</p>
-        </div>
-        <h4>Widespread issue:</h4>
-        <div class="example">
-            <p>We've identified a quality issue with batch #[X]. Not the standard we hold ourselves to. If you purchased from this batch, DM for replacement. Like creative work, we own our mistakes and execute solutions.</p>
-        </div>
-    </div>
-
-    <div class="scenario">
-        <p class="scenario-title">Can't Meet Demand / Sold Out</p>
-        <div class="example">
-            <p>Batch #[X] sold out faster than projected. We're scaling production while maintaining obsessive quality standards. Next cans: [date]. Want first access? Email list in bio.</p>
-        </div>
-    </div>
-
-    <div class="scenario">
-        <p class="scenario-title">Licensing/Regulatory Questions</p>
-        <div class="highlight-box warning">
-            <p><strong>Never discuss:</strong> Regulatory challenges, specific licensing obstacles, or anything creating legal complications.</p>
-        </div>
-        <div class="example">
-            <p>Fully licensed through California ABC - Type 09 and Type 17. Questions about our licensing? Email jonathan@agencybrewing.com for details.</p>
+        <div class="framework-body">
+            <p><strong>Goal:</strong> Close the year with confidence and calm. Quieter by design.</p>
+            <ul>
+                <li>Low-light, warm visuals. Small gatherings. 6-8 posts/month.</li>
+                <li>Avoid loud holiday language, gimmicks, countdowns</li>
+            </ul>
+            <div class="example">
+                <p>"Same feeling. Different season." / "Still pouring." / "Onward."</p>
+            </div>
         </div>
     </div>
 </section>
 
 <!-- APPROVAL -->
 <section id="approval">
-    <span class="section-number">05</span>
-    <h2>Jonathan's Approval Criteria</h2>
+    <span class="section-number">09</span>
+    <h2>Approval Process</h2>
 
     <h3>Pre-Approval Self-Check</h3>
     <p>Before sending content to Jonathan, verify:</p>
@@ -1380,191 +1530,87 @@
     </div>
 </section>
 
-<!-- PLANNING -->
-<section id="planning">
-    <span class="section-number">06</span>
-    <h2>Content Campaign Planning</h2>
+<!-- PHOTOGRAPHY -->
+<section id="photography">
+    <span class="section-number">10</span>
+    <h2>Photography Guidelines</h2>
 
-    <h3>Campaign Thinking for Social</h3>
-    <p>Every content initiative = A campaign with:</p>
-    <ul>
-        <li><strong>Brief:</strong> What are we achieving?</li>
-        <li><strong>Concept:</strong> What's the creative idea?</li>
-        <li><strong>Execution:</strong> How do we bring it to life?</li>
-        <li><strong>Timeline:</strong> When does it run?</li>
-        <li><strong>Success Metrics:</strong> What defines campaign-worthy results?</li>
-    </ul>
-
-    <h3>Sample Campaign: Product Launch</h3>
     <div class="highlight-box">
-        <p><strong>Brief:</strong> Introduce Session IPA to LA creative community</p>
-        <p><strong>Concept:</strong> "Where advertising creativity meets brewing craft"</p>
-        <p><strong>Execution:</strong></p>
-        <ul>
-            <li>Week 1: Product reveal with process story</li>
-            <li>Week 2: Behind-the-creative development</li>
-            <li>Week 3: Community tasting and feedback</li>
-            <li>Week 4: Availability and where to find</li>
-        </ul>
-        <p><strong>Success Metrics:</strong> Engagement quality, direct inquiries, festival booth visits, community language adoption</p>
+        <p>Our photography is an essential essence of our brand. It showcases the wide range of experiences and hospitality we offer.</p>
     </div>
 
-    <h3>Ongoing Content Rhythm</h3>
-    <h4>Weekly Posting Cadence</h4>
+    <h3>Photographic Attributes</h3>
+    <div class="word-list approved">
+        <span>Authentic</span>
+        <span>Spontaneous</span>
+        <span>Inspired</span>
+        <span>Connected</span>
+        <span>Nostalgic</span>
+        <span>Contemporary</span>
+        <span>Creative</span>
+        <span>Craftsmanship</span>
+    </div>
+
+    <h3>Lighting</h3>
+    <div class="do-dont">
+        <div class="do">
+            <h5>Daytime</h5>
+            <ul>
+                <li>Sensorial, reflecting the moment</li>
+                <li>Explore color nuances</li>
+                <li>Silhouettes welcome</li>
+            </ul>
+        </div>
+        <div class="dont">
+            <h5>Nightlife</h5>
+            <ul>
+                <li>Hard strobe or high-contrast shadows</li>
+                <li>Less branded, more living in the moment</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Subject Guidelines</h3>
     <ul>
-        <li><strong>2-3x per week</strong> on Instagram (M/W/F pattern)</li>
-        <li><strong>1-2x per week</strong> on Facebook</li>
-        <li><strong>Stories</strong> when there's genuine process/community content</li>
+        <li><strong>Spaces:</strong> Always feel authentic and real, never artificial</li>
+        <li><strong>Experience:</strong> Capture enjoyment - mix of close-ups and longer shots for intimate and collective moments</li>
+        <li><strong>Products:</strong> Detail shots - pops of color, interesting compositions, authentic feel</li>
+        <li><strong>Events:</strong> Capture freedom and energy through sensorial, exciting imagery</li>
+        <li><strong>Locations:</strong> Candid, in-action shots of community activities - never staged</li>
     </ul>
-
-    <h4>Monthly Content Mix</h4>
-    <div class="metrics-grid">
-        <div class="metric-card">
-            <p class="metric-label">Product / Availability</p>
-            <p class="metric-value">40%</p>
-        </div>
-        <div class="metric-card">
-            <p class="metric-label">Process / Creative Development</p>
-            <p class="metric-value">30%</p>
-        </div>
-        <div class="metric-card">
-            <p class="metric-label">Community / Engagement</p>
-            <p class="metric-value">30%</p>
-        </div>
-    </div>
 
     <div class="highlight-box warning">
-        <p><strong>Never post just to post.</strong> Every piece should:</p>
-        <ul>
-            <li>Advance the advertising × brewing narrative</li>
-            <li>Build desire for the beer</li>
-            <li>Strengthen community connection</li>
-            <li>Reflect obsessive creative craft</li>
-        </ul>
+        <p><strong>Note:</strong> Placeholder images should never be used for public-facing communications.</p>
     </div>
-</section>
-
-<!-- WORKFLOW -->
-<section id="workflow">
-    <span class="section-number">07</span>
-    <h2>Content Creation Workflow</h2>
-
-    <h3>For Drew: Generating Content</h3>
-    <ol>
-        <li>Identify need (product drop, festival, community moment)</li>
-        <li>Choose appropriate framework from Section 3</li>
-        <li>Generate 2-3 options using LLM + both brand docs</li>
-        <li>Self-check against approval criteria (Section 5)</li>
-        <li>Send to Jonathan with context</li>
-    </ol>
-
-    <h3>For Jonathan: Reviewing Content</h3>
-    <h4>Quick Review (Fast-track items)</h4>
-    <ul>
-        <li>Does it sound like us?</li>
-        <li>Does visual work with copy?</li>
-        <li>Approve or quick edit</li>
-    </ul>
-
-    <h4>Full Review (New campaigns, major announcements)</h4>
-    <ul>
-        <li>Does this advance our narrative?</li>
-        <li>Is the creative angle compelling?</li>
-        <li>Does execution match concept?</li>
-        <li>Would I approve this as a campaign?</li>
-    </ul>
-
-    <h3>LLM Prompt Templates</h3>
-
-    <div class="framework">
-        <div class="framework-header">
-            <span class="framework-title">For Product Posts</span>
-        </div>
-        <div class="framework-body">
-            <div class="framework-structure">Using Agency Brewing Brand Voice Guide and Social Strategy doc, write an Instagram caption announcing [product/batch]. Use Framework 1. Maintain confident creative voice - advertising creativity meets brewing craft. Focus on concept and execution quality, not startup positioning. Keep under 3 sentences.</div>
-        </div>
-    </div>
-
-    <div class="framework">
-        <div class="framework-header">
-            <span class="framework-title">For Process Content</span>
-        </div>
-        <div class="framework-body">
-            <div class="framework-structure">Using Agency Brewing Brand Voice Guide and Social Strategy doc, write Instagram caption about [brewing process]. Use Framework 2. Connect to advertising creative development. Confident tone showing craft obsession. Avoid apologetic or 'building in public' language.</div>
-        </div>
-    </div>
-
-    <div class="framework">
-        <div class="framework-header">
-            <span class="framework-title">For Community Posts</span>
-        </div>
-        <div class="framework-body">
-            <div class="framework-structure">Using Agency Brewing Brand Voice Guide and Social Strategy doc, write response to [situation]. Reference appropriate scenario from Section 4. Brief, confident, builds community without over-effusiveness.</div>
-        </div>
-    </div>
-
-    <h3>Success Metrics & Iteration</h3>
-
-    <h4>Track These for Voice Validation</h4>
-    <div class="metrics-grid">
-        <div class="metric-card">
-            <p class="metric-label">High Value Engagement</p>
-            <p class="metric-value">Process questions, using our language back</p>
-        </div>
-        <div class="metric-card">
-            <p class="metric-label">Medium Value</p>
-            <p class="metric-value">Purchase questions, location inquiries</p>
-        </div>
-        <div class="metric-card">
-            <p class="metric-label">Low Value</p>
-            <p class="metric-value">Generic emoji reactions</p>
-        </div>
-    </div>
-
-    <h4>Monthly Voice Check</h4>
-    <p>Every 30 days, review content against Brand Voice Guide:</p>
-    <ul class="checklist">
-        <li>Creative obsession focus (not just beer talk)?</li>
-        <li>Advertising × brewing DNA (not forcing it)?</li>
-        <li>Confidence without arrogance?</li>
-        <li>Community building through shared creative values?</li>
-        <li>Process transparency showing craft excellence?</li>
-    </ul>
 </section>
 
 <!-- FINAL PRINCIPLES -->
 <section id="final">
-    <span class="section-number">08</span>
+    <span class="section-number">11</span>
     <h2>Final Principles</h2>
 
-    <div class="principle">
-        <strong>The beer speaks louder than the words.</strong>
-        <p>Social media builds awareness and community, but Session IPA has to deliver on the promise. Voice without substance is noise.</p>
-    </div>
-
-    <div class="principle">
-        <strong>Confidence comes from craft obsession.</strong>
-        <p>We're confident because we're obsessive about quality, not because we're trying to seem bigger than we are.</p>
-    </div>
-
-    <div class="principle">
-        <strong>Every post is part of the campaign.</strong>
-        <p>Nothing goes out that doesn't advance the "advertising creativity × brewing craft" narrative.</p>
-    </div>
-
-    <div class="principle">
-        <strong>Community over broadcasting.</strong>
-        <p>We're building connections with people who share our creative values, not just collecting followers.</p>
-    </div>
-
-    <div class="principle">
-        <strong>Jonathan has final creative authority.</strong>
-        <p>If it doesn't feel right to the creative director, it doesn't go out. Trust the process.</p>
+    <div class="voice-grid">
+        <div class="voice-card">
+            <p class="voice-card-title">The beer speaks louder than the words.</p>
+            <p>Voice without substance is noise.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Confidence comes from craft obsession.</p>
+            <p>Not from trying to seem bigger than we are.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Community over broadcasting.</p>
+            <p>Connections with people who share our values.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Jonathan has final creative authority.</p>
+            <p>If it doesn't feel right, it doesn't go out.</p>
+        </div>
     </div>
 </section>
 
 <div class="cta">
-    <h2>Now go make something campaign-worthy.</h2>
+    <h2>Sessionable beer. Sessionable copy.</h2>
 </div>
 
 </main>
