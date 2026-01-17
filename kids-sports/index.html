@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Flag Football Programs - Devon, PA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #22c55e;
+        }
+
+        .section-header.calendar {
+            border-bottom-color: #3b82f6;
+        }
+
+        .section-header.action {
+            border-bottom-color: #f59e0b;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            color: #1e293b;
+        }
+
+        .program-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .program-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        .program-card.football {
+            border-left: 4px solid #22c55e;
+        }
+
+        .program-card.top-pick {
+            border-left: 4px solid #f59e0b;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+
+        .top-pick-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #f59e0b;
+            color: white;
+            padding: 0.25rem 1rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 0 12px 0 8px;
+        }
+
+        .program-card h3 {
+            font-size: 1.25rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-distance {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .badge-type {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .badge-open {
+            background: #dcfce7;
+            color: #166534;
+            animation: pulse 2s infinite;
+        }
+
+        .badge-schedule {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .program-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .detail-item {
+            background: #f8fafc;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+        }
+
+        .top-pick .detail-item {
+            background: rgba(255,255,255,0.7);
+        }
+
+        .detail-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748b;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-value {
+            font-size: 0.95rem;
+            color: #1e293b;
+        }
+
+        .cost {
+            font-weight: 700;
+            color: #059669;
+        }
+
+        .contact-info {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #e2e8f0;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .contact-info a {
+            color: #6366f1;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Calendar Styles */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .calendar-day {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1rem;
+            min-height: 180px;
+        }
+
+        .calendar-day.has-bjj {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+        }
+
+        .calendar-day h4 {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .calendar-event {
+            padding: 0.5rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .calendar-event.bjj {
+            background: #dc2626;
+            color: white;
+        }
+
+        .calendar-event.flag-ysc {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .calendar-event.flag-dubc {
+            background: #22c55e;
+            color: white;
+        }
+
+        .calendar-event.flag-other {
+            background: #6366f1;
+            color: white;
+        }
+
+        .event-time {
+            font-weight: 700;
+            display: block;
+        }
+
+        .event-name {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .calendar-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .legend-color.bjj { background: #dc2626; }
+        .legend-color.ysc { background: #f59e0b; }
+        .legend-color.dubc { background: #22c55e; }
+        .legend-color.other { background: #6366f1; }
+
+        .action-list {
+            list-style: none;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #fffbeb;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .action-item.urgent {
+            background: #fef2f2;
+            border-left-color: #ef4444;
+        }
+
+        .action-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: #f59e0b;
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        .action-item.urgent .action-number {
+            background: #ef4444;
+        }
+
+        .action-content h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .action-content p {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .deadline {
+            font-weight: 600;
+            color: #dc2626;
+        }
+
+        .comparison-note {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #166534;
+        }
+
+        .comparison-note strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .print-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #1e293b;
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .print-btn:hover {
+            transform: scale(1.05);
+            background: #334155;
+        }
+
+        .schedule-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .schedule-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .schedule-box h4 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: #1e293b;
+        }
+
+        .schedule-box.ysc {
+            border: 2px solid #f59e0b;
+        }
+
+        .schedule-box.dubc {
+            border: 2px solid #22c55e;
+        }
+
+        .schedule-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        .schedule-row:last-child {
+            border-bottom: none;
+        }
+
+        .conflict-warning {
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .no-conflict {
+            background: #dcfce7;
+            color: #166534;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 1rem;
+            }
+
+            .print-btn {
+                display: none;
+            }
+
+            .section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+
+            .program-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .calendar-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .schedule-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            header h1 {
+                font-size: 1.75rem;
+            }
+
+            .section {
+                padding: 1.25rem;
+            }
+
+            .program-details {
+                grid-template-columns: 1fr;
+            }
+
+            .calendar-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Flag Football Programs</h1>
+            <p>Devon, PA 19087 Area - Spring 2026</p>
+        </header>
+
+        <!-- WEEKLY CALENDAR -->
+        <section class="section">
+            <div class="section-header calendar">
+                <span class="section-icon">📅</span>
+                <h2>Weekly Schedule Overview</h2>
+            </div>
+
+            <p style="color: #64748b; margin-bottom: 1rem;">Comparing your BJJ schedule with flag football options</p>
+
+            <div class="calendar-grid">
+                <div class="calendar-day has-bjj">
+                    <h4>Monday</h4>
+                    <div class="calendar-event bjj">
+                        <span class="event-time">5:00 PM</span>
+                        <span class="event-name">BJJ</span>
+                    </div>
+                    <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b;">
+                        No flag football conflicts
+                    </div>
+                </div>
+
+                <div class="calendar-day">
+                    <h4>Tuesday</h4>
+                    <div class="calendar-event flag-dubc">
+                        <span class="event-time">Evening (TBD)</span>
+                        <span class="event-name">DubC Practice (Wks 1-2)</span>
+                    </div>
+                    <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b;">
+                        Possible practice night
+                    </div>
+                </div>
+
+                <div class="calendar-day has-bjj">
+                    <h4>Wednesday</h4>
+                    <div class="calendar-event bjj">
+                        <span class="event-time">5:00 PM</span>
+                        <span class="event-name">BJJ</span>
+                    </div>
+                    <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b;">
+                        Check if DubC practice conflicts
+                    </div>
+                </div>
+
+                <div class="calendar-day">
+                    <h4>Thursday</h4>
+                    <div class="calendar-event flag-dubc">
+                        <span class="event-time">Evening (TBD)</span>
+                        <span class="event-name">DubC Practice (Wks 1-2)</span>
+                    </div>
+                    <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b;">
+                        Possible practice night
+                    </div>
+                </div>
+
+                <div class="calendar-day">
+                    <h4>Friday</h4>
+                    <div class="calendar-event flag-ysc">
+                        <span class="event-time">Evening</span>
+                        <span class="event-name">YSC Games (Friday Night Lights)</span>
+                    </div>
+                    <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #22c55e; font-weight: 600;">
+                        No BJJ conflict!
+                    </div>
+                </div>
+
+                <div class="calendar-day has-bjj">
+                    <h4>Saturday</h4>
+                    <div class="calendar-event bjj">
+                        <span class="event-time">9:00 AM</span>
+                        <span class="event-name">BJJ</span>
+                    </div>
+                    <div class="calendar-event flag-other" style="margin-top: 0.5rem;">
+                        <span class="event-time">Afternoon</span>
+                        <span class="event-name">Other leagues games</span>
+                    </div>
+                    <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b;">
+                        Most leagues: afternoon games
+                    </div>
+                </div>
+
+                <div class="calendar-day">
+                    <h4>Sunday</h4>
+                    <div class="calendar-event flag-dubc">
+                        <span class="event-time">10AM - 2:30PM</span>
+                        <span class="event-name">DubC Games</span>
+                    </div>
+                    <div class="calendar-event flag-other" style="margin-top: 0.5rem;">
+                        <span class="event-time">Various</span>
+                        <span class="event-name">Upper Merion, Next Level</span>
+                    </div>
+                    <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #22c55e; font-weight: 600;">
+                        No BJJ conflict!
+                    </div>
+                </div>
+            </div>
+
+            <div class="calendar-legend">
+                <div class="legend-item">
+                    <div class="legend-color bjj"></div>
+                    <span>BJJ (Your schedule)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color ysc"></div>
+                    <span>YSC Sports</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color dubc"></div>
+                    <span>DubC/United Sports</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color other"></div>
+                    <span>Other Programs</span>
+                </div>
+            </div>
+
+            <div class="schedule-comparison">
+                <div class="schedule-box ysc">
+                    <h4>YSC Sports Schedule</h4>
+                    <div class="schedule-row">
+                        <span>Games</span>
+                        <span><strong>Friday evenings</strong> (under lights)</span>
+                    </div>
+                    <div class="schedule-row">
+                        <span>Practices</span>
+                        <span>TBD (check with league)</span>
+                    </div>
+                    <div class="schedule-row">
+                        <span>BJJ Conflict?</span>
+                        <span class="no-conflict">Games: No conflict</span>
+                    </div>
+                    <div class="schedule-row">
+                        <span>Format</span>
+                        <span>7v7 indoor, Grades K-11</span>
+                    </div>
+                </div>
+
+                <div class="schedule-box dubc">
+                    <h4>DubC/United Sports Schedule</h4>
+                    <div class="schedule-row">
+                        <span>Games</span>
+                        <span><strong>Sundays</strong> 10AM-2:30PM</span>
+                    </div>
+                    <div class="schedule-row">
+                        <span>Practices</span>
+                        <span>Weeknights (first 2 weeks only)</span>
+                    </div>
+                    <div class="schedule-row">
+                        <span>BJJ Conflict?</span>
+                        <span class="no-conflict">Games: No conflict</span>
+                    </div>
+                    <div class="schedule-row">
+                        <span>Format</span>
+                        <span>2 practices + 7 games</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-note">
+                <strong>Bottom Line:</strong>
+                Both YSC (Friday games) and DubC (Sunday games) work well with your BJJ schedule. DubC only has 2 weeknight practices at the start of the season, so check if those fall on Mon/Wed to potentially skip or adjust.
+            </div>
+        </section>
+
+        <!-- TOP PICKS -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">🏈</span>
+                <h2>Top Picks - Flag Football</h2>
+            </div>
+            <div class="program-grid">
+                <!-- DubC/United Sports - TOP PICK -->
+                <div class="program-card top-pick">
+                    <div class="top-pick-badge">Top Pick #1</div>
+                    <h3>DubC/United Sports</h3>
+                    <span class="badge badge-distance">~8 mi (East Goshen)</span>
+                    <span class="badge badge-type">K-6th Grade</span>
+                    <span class="badge badge-schedule">Sun Games</span>
+                    <span class="badge badge-open">Early Bird Open</span>
+                    <div class="program-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Season</div>
+                            <div class="detail-value">Apr 4 - May 30, 2026</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Game Days</div>
+                            <div class="detail-value"><strong>Sundays</strong> 10AM - 2:30PM</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Practices</div>
+                            <div class="detail-value">Weeknights (first 2 weeks only)</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Format</div>
+                            <div class="detail-value">2 practices + 7 games (no travel)</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Cost</div>
+                            <div class="detail-value cost">$150 (early bird thru Jan 19) · $160 (reg) · $180 (late)</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Location</div>
+                            <div class="detail-value">East Goshen Park, West Chester</div>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="mailto:rknowles@unitedsports.net">rknowles@unitedsports.net</a> · <a href="https://unitedsports.net/programs/dub-c-youth-nfl-flag-football-league/" target="_blank">unitedsports.net</a>
+                    </div>
+                </div>
+
+                <!-- YSC Sports - TOP PICK -->
+                <div class="program-card top-pick">
+                    <div class="top-pick-badge">Top Pick #2</div>
+                    <h3>YSC Sports</h3>
+                    <span class="badge badge-distance">2-3 mi (Wayne)</span>
+                    <span class="badge badge-type">Grades K-11</span>
+                    <span class="badge badge-schedule">Fri Games</span>
+                    <span class="badge badge-open">Registration Open</span>
+                    <div class="program-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Season</div>
+                            <div class="detail-value">Spring 2026</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Game Days</div>
+                            <div class="detail-value"><strong>Friday evenings</strong> (Friday Night Lights)</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Format</div>
+                            <div class="detail-value">7v7 NFL Flag</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Facility</div>
+                            <div class="detail-value">Indoor turf (4 fields), weather-proof</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Cost</div>
+                            <div class="detail-value cost">TBD (check site)</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Contact</div>
+                            <div class="detail-value">Kyle Strunk: kstrunk@yscsports.com · 610.293.0888</div>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://yscsports.com/flag-football" target="_blank">yscsports.com/flag-football</a> · <a href="https://quickscores.com/yscsports" target="_blank">quickscores.com/yscsports</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OTHER OPTIONS -->
+        <section class="section">
+            <div class="section-header" style="border-bottom-color: #94a3b8;">
+                <span class="section-icon">📋</span>
+                <h2>Other Options</h2>
+            </div>
+            <div class="program-grid">
+                <!-- YMCA Flag Football -->
+                <div class="program-card football">
+                    <h3>YMCA Upper Main Line</h3>
+                    <span class="badge badge-distance">2 mi (Berwyn)</span>
+                    <span class="badge badge-type">Ages 10-11 Co-ed</span>
+                    <span class="badge badge-schedule">Sat Games</span>
+                    <div class="program-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Season</div>
+                            <div class="detail-value">April - June 2026</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Schedule</div>
+                            <div class="detail-value">1 practice/wk + <strong>Saturday games</strong></div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">BJJ Note</div>
+                            <div class="detail-value" style="color: #f59e0b;">Sat games may conflict with 9AM BJJ</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Cost</div>
+                            <div class="detail-value cost">Member rates, financial aid available</div>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        (610) 647-9622 · <a href="https://ymcagbw.org" target="_blank">ymcagbw.org</a>
+                    </div>
+                </div>
+
+                <!-- Upper Merion -->
+                <div class="program-card football">
+                    <h3>Upper Merion Parks & Rec</h3>
+                    <span class="badge badge-distance">~10 mi (KOP)</span>
+                    <span class="badge badge-type">Youth Divisions</span>
+                    <span class="badge badge-schedule">Sun Games</span>
+                    <span class="badge badge-open">Registration Open</span>
+                    <div class="program-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Season</div>
+                            <div class="detail-value">Mar 29 - Jun 7, 2026</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Schedule</div>
+                            <div class="detail-value"><strong>Sundays</strong> 9AM-3PM</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Cost</div>
+                            <div class="detail-value cost">$179</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Location</div>
+                            <div class="detail-value">Heuser Park, KOP</div>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="mailto:philadelphiaflagfootball@gmail.com">philadelphiaflagfootball@gmail.com</a>
+                    </div>
+                </div>
+
+                <!-- Next Level Sports -->
+                <div class="program-card football">
+                    <h3>Next Level Sports</h3>
+                    <span class="badge badge-distance">~5 mi (Malvern)</span>
+                    <span class="badge badge-type">Youth Divisions</span>
+                    <span class="badge badge-schedule">Sun Only</span>
+                    <div class="program-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Season</div>
+                            <div class="detail-value">8-week spring, Sundays only</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Cost</div>
+                            <div class="detail-value cost">$225</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Includes</div>
+                            <div class="detail-value">Jersey, shorts, flags, equipment</div>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://nextlevelsports.com" target="_blank">nextlevelsports.com</a>
+                    </div>
+                </div>
+
+                <!-- West Chester NFL Flag -->
+                <div class="program-card football">
+                    <h3>West Chester NFL Flag</h3>
+                    <span class="badge badge-distance">~12 mi</span>
+                    <span class="badge badge-type">Ages 5-13</span>
+                    <span class="badge badge-open">Registration Open</span>
+                    <div class="program-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Season</div>
+                            <div class="detail-value">Mar 16 - May 17, 2026</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Cost</div>
+                            <div class="detail-value cost">TBD</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Location</div>
+                            <div class="detail-value">Bayard Rustin HS, West Chester</div>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="mailto:wcnflag@gmail.com">wcnflag@gmail.com</a> · (610) 453-9898
+                    </div>
+                </div>
+
+                <!-- LAFA -->
+                <div class="program-card football">
+                    <h3>LAFA West Chester Shamrocks</h3>
+                    <span class="badge badge-distance">~10 mi</span>
+                    <span class="badge badge-type">10U (4th-5th Grade)</span>
+                    <span class="badge badge-schedule">Fri Games</span>
+                    <div class="program-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Season</div>
+                            <div class="detail-value">Spring TBD</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Schedule</div>
+                            <div class="detail-value"><strong>Friday Night Lights</strong> games</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Cost</div>
+                            <div class="detail-value cost">$150</div>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="mailto:flag@lafawc.com">flag@lafawc.com</a>
+                    </div>
+                </div>
+
+                <!-- i9 Sports -->
+                <div class="program-card football">
+                    <h3>i9 Sports</h3>
+                    <span class="badge badge-distance">5-8 mi</span>
+                    <span class="badge badge-type">Youth</span>
+                    <span class="badge badge-schedule">1 Day/Wk</span>
+                    <div class="program-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Format</div>
+                            <div class="detail-value">Practice + game same day, no tryouts</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Season</div>
+                            <div class="detail-value">Rolling seasons</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Cost</div>
+                            <div class="detail-value cost">TBD</div>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://i9sports.com" target="_blank">i9sports.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTION ITEMS -->
+        <section class="section">
+            <div class="section-header action">
+                <span class="section-icon">⚡</span>
+                <h2>Action Items</h2>
+            </div>
+
+            <h3 style="color: #dc2626; margin-bottom: 1rem; font-size: 1.1rem;">BY JAN 19 (2 DAYS!)</h3>
+            <ul class="action-list">
+                <li class="action-item urgent">
+                    <span class="action-number">1</span>
+                    <div class="action-content">
+                        <h4>DubC/United Sports</h4>
+                        <p>Lock in <span class="deadline">$150 early bird pricing</span> before it increases to $160</p>
+                    </div>
+                </li>
+            </ul>
+
+            <h3 style="color: #f59e0b; margin: 1.5rem 0 1rem; font-size: 1.1rem;">THIS WEEK</h3>
+            <ul class="action-list">
+                <li class="action-item">
+                    <span class="action-number">2</span>
+                    <div class="action-content">
+                        <h4>YSC Sports</h4>
+                        <p>Contact Kyle Strunk (kstrunk@yscsports.com) to confirm 3rd grade division schedule and pricing</p>
+                    </div>
+                </li>
+            </ul>
+
+            <h3 style="color: #6366f1; margin: 1.5rem 0 1rem; font-size: 1.1rem;">QUESTIONS TO ASK</h3>
+            <ul class="action-list">
+                <li class="action-item">
+                    <span class="action-number">?</span>
+                    <div class="action-content">
+                        <h4>DubC - Practice Days</h4>
+                        <p>Ask if weeknight practices (first 2 weeks) are on Mon/Wed (BJJ conflict) or Tue/Thu (no conflict)</p>
+                    </div>
+                </li>
+                <li class="action-item">
+                    <span class="action-number">?</span>
+                    <div class="action-content">
+                        <h4>YSC - Practice Schedule</h4>
+                        <p>Confirm if there are weeknight practices or just Friday games</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">
+        Print
+    </button>
+</body>
+</html>
