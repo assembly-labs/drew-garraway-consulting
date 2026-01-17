@@ -1,0 +1,2398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agency Brewing | Brand Voice Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-black: #0a0a0a;
+            --color-charcoal: #1a1a1a;
+            --color-dark-gray: #2a2a2a;
+            --color-gray: #666;
+            --color-light-gray: #999;
+            --color-off-white: #f5f5f3;
+            --color-white: #ffffff;
+            --color-amber: #d4a84b;
+            --color-amber-light: #e8c882;
+            --color-amber-dark: #b8923f;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-black);
+            color: var(--color-off-white);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(180deg, var(--color-charcoal) 0%, var(--color-black) 100%);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--color-dark-gray);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-white);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--color-amber);
+        }
+
+        .tagline {
+            font-size: 0.875rem;
+            color: var(--color-light-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1.5rem;
+        }
+
+        .doc-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--color-amber);
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-subtitle {
+            font-size: 0.875rem;
+            color: var(--color-gray);
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            background: var(--color-charcoal);
+            border-bottom: 1px solid var(--color-dark-gray);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-light-gray);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-btn:hover {
+            color: var(--color-white);
+            background: var(--color-dark-gray);
+        }
+
+        .tab-btn.active {
+            color: var(--color-amber);
+            border-bottom-color: var(--color-amber);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--color-charcoal);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--color-dark-gray);
+            position: sticky;
+            top: 49px;
+            z-index: 99;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 1.5rem;
+        }
+
+        nav a {
+            color: var(--color-light-gray);
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--color-amber);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-number {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: var(--color-dark-gray);
+            line-height: 1;
+            margin-bottom: -1rem;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-white);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--color-dark-gray);
+        }
+
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-amber);
+            margin: 2rem 0 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-white);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        p {
+            color: var(--color-off-white);
+            margin-bottom: 1rem;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0 1.5rem 1.5rem;
+            color: var(--color-off-white);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        li::marker {
+            color: var(--color-amber);
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: var(--color-charcoal);
+            border-left: 3px solid var(--color-amber);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box.warning {
+            border-left-color: #c44;
+        }
+
+        .highlight-box.success {
+            border-left-color: #4a8;
+        }
+
+        /* Voice Principles Grid */
+        .voice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .voice-card {
+            background: var(--color-charcoal);
+            padding: 1.25rem;
+            border: 1px solid var(--color-dark-gray);
+        }
+
+        .voice-card-title {
+            font-weight: 600;
+            color: var(--color-white);
+            margin-bottom: 0.25rem;
+        }
+
+        .voice-card-score {
+            font-size: 0.875rem;
+            color: var(--color-amber);
+            margin-bottom: 0.5rem;
+        }
+
+        .voice-card p {
+            font-size: 0.875rem;
+            color: var(--color-light-gray);
+            margin: 0;
+        }
+
+        /* Word Lists */
+        .word-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .word-list span {
+            background: var(--color-dark-gray);
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 2px;
+        }
+
+        .word-list.approved span {
+            border: 1px solid var(--color-amber);
+            color: var(--color-amber-light);
+        }
+
+        .word-list.rejected span {
+            border: 1px solid #c44;
+            color: #e88;
+            text-decoration: line-through;
+        }
+
+        /* Example Blocks */
+        .example {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            padding: 1.25rem;
+            margin: 1rem 0;
+            font-style: italic;
+            color: var(--color-off-white);
+            position: relative;
+        }
+
+        .example::before {
+            content: '"';
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--color-amber);
+            position: absolute;
+            top: 0.25rem;
+            left: 0.75rem;
+            opacity: 0.5;
+        }
+
+        .example p {
+            padding-left: 1.5rem;
+            margin: 0;
+        }
+
+        .example-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-amber);
+            font-style: normal;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Platform Cards */
+        .platform-card {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .platform-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--color-dark-gray);
+        }
+
+        .platform-name {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--color-white);
+        }
+
+        .platform-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-amber);
+            background: var(--color-dark-gray);
+            padding: 0.25rem 0.75rem;
+        }
+
+        .platform-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .platform-meta dt {
+            color: var(--color-light-gray);
+            margin-bottom: 0.25rem;
+        }
+
+        .platform-meta dd {
+            color: var(--color-off-white);
+        }
+
+        /* Framework Cards */
+        .framework {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .framework-header {
+            background: var(--color-dark-gray);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .framework-title {
+            font-weight: 600;
+            color: var(--color-white);
+        }
+
+        .framework-number {
+            font-family: var(--font-display);
+            color: var(--color-amber);
+        }
+
+        .framework-body {
+            padding: 1.5rem;
+        }
+
+        .framework-structure {
+            background: var(--color-black);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-family: monospace;
+            font-size: 0.875rem;
+            color: var(--color-amber-light);
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            color: var(--color-amber);
+        }
+
+        /* Approval Tiers */
+        .approval-tier {
+            margin: 1rem 0;
+            padding: 1rem 1.5rem;
+            border-left: 3px solid;
+        }
+
+        .approval-tier.approved {
+            background: rgba(68, 170, 136, 0.1);
+            border-color: #4a8;
+        }
+
+        .approval-tier.revision {
+            background: rgba(212, 168, 75, 0.1);
+            border-color: var(--color-amber);
+        }
+
+        .approval-tier.rejected {
+            background: rgba(204, 68, 68, 0.1);
+            border-color: #c44;
+        }
+
+        .approval-tier h5 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .approval-tier.approved h5 { color: #4a8; }
+        .approval-tier.revision h5 { color: var(--color-amber); }
+        .approval-tier.rejected h5 { color: #c44; }
+
+        /* Scenario Cards */
+        .scenario {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+        }
+
+        .scenario-title {
+            font-weight: 600;
+            color: var(--color-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .scenario-approach {
+            font-size: 0.875rem;
+            color: var(--color-amber);
+            margin-bottom: 1rem;
+        }
+
+        .do-dont {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .do-dont > div {
+            padding: 1rem;
+        }
+
+        .do-dont .do {
+            background: rgba(68, 170, 136, 0.1);
+            border: 1px solid rgba(68, 170, 136, 0.3);
+        }
+
+        .do-dont .dont {
+            background: rgba(204, 68, 68, 0.1);
+            border: 1px solid rgba(204, 68, 68, 0.3);
+        }
+
+        .do-dont h5 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+
+        .do h5 { color: #4a8; }
+        .dont h5 { color: #c44; }
+
+        .do-dont ul {
+            margin: 0;
+            padding-left: 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            padding: 1.25rem;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-light-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-white);
+        }
+
+        /* How To Use Section */
+        .role-card {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .role-name {
+            font-weight: 600;
+            color: var(--color-amber);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Final Principles */
+        .principle {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--color-charcoal);
+            border-left: 3px solid var(--color-amber);
+        }
+
+        .principle strong {
+            display: block;
+            color: var(--color-white);
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .principle p {
+            color: var(--color-light-gray);
+            margin: 0;
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(180deg, var(--color-black) 0%, var(--color-charcoal) 100%);
+            border-top: 1px solid var(--color-dark-gray);
+            margin-top: 3rem;
+        }
+
+        .cta h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            color: var(--color-amber);
+            border: none;
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--color-charcoal);
+            border-top: 1px solid var(--color-dark-gray);
+        }
+
+        footer p {
+            font-size: 0.75rem;
+            color: var(--color-gray);
+            margin: 0;
+        }
+
+        /* Calendar Styles */
+        .calendar-intro {
+            background: var(--color-charcoal);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 3px solid var(--color-amber);
+        }
+
+        .month-section {
+            margin-bottom: 3rem;
+        }
+
+        .month-header {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-white);
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--color-amber);
+            margin-bottom: 1.5rem;
+        }
+
+        .event-card {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            margin-bottom: 1.25rem;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .event-card:hover {
+            border-color: var(--color-amber);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1.25rem 1.5rem;
+            background: var(--color-dark-gray);
+            gap: 1rem;
+        }
+
+        .event-date {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--color-amber);
+            white-space: nowrap;
+        }
+
+        .event-title {
+            font-weight: 600;
+            color: var(--color-white);
+            flex: 1;
+        }
+
+        .event-body {
+            padding: 1.25rem 1.5rem;
+        }
+
+        .event-description {
+            color: var(--color-off-white);
+            font-size: 0.9375rem;
+            margin-bottom: 1rem;
+        }
+
+        .event-connection {
+            background: var(--color-black);
+            padding: 1rem;
+            border-left: 2px solid var(--color-amber);
+        }
+
+        .connection-label {
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-amber);
+            margin-bottom: 0.375rem;
+        }
+
+        .event-connection p {
+            font-size: 0.875rem;
+            color: var(--color-light-gray);
+            margin: 0;
+            font-style: italic;
+        }
+
+        .event-highlight {
+            border-color: var(--color-amber);
+        }
+
+        .event-highlight .event-header {
+            background: linear-gradient(90deg, var(--color-amber-dark) 0%, var(--color-dark-gray) 100%);
+        }
+
+        .event-highlight .event-date {
+            color: var(--color-white);
+        }
+
+        /* Calendar Legend */
+        .calendar-legend {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--color-light-gray);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .legend-dot.highlight {
+            background: var(--color-amber);
+        }
+
+        .legend-dot.standard {
+            background: var(--color-dark-gray);
+            border: 1px solid var(--color-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.75rem;
+            }
+
+            nav ul {
+                gap: 0.5rem 1rem;
+            }
+
+            main {
+                padding: 2rem 1rem;
+            }
+
+            .section-number {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .voice-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .do-dont {
+                grid-template-columns: 1fr;
+            }
+
+            .event-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .tab-btn {
+                padding: 0.75rem 1rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media print {
+            nav, .tab-nav {
+                display: none;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            .tab-content {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Agency <span>Brewing</span></div>
+    <p class="tagline">Where Advertising Creativity Meets Brewing Craft</p>
+    <h1 class="doc-title">Brand Voice & Strategy Guide</h1>
+    <p class="doc-subtitle">Companion Document for Social Content Creation</p>
+</header>
+
+<div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('voice')">Voice Guide</button>
+    <button class="tab-btn" onclick="switchTab('calendar')">Cultural Calendar</button>
+    <button class="tab-btn" onclick="switchTab('holidays')">National Holidays</button>
+</div>
+
+<!-- VOICE GUIDE TAB -->
+<div id="voice" class="tab-content active">
+
+<nav>
+    <ul>
+        <li><a href="#how-to-use">How to Use</a></li>
+        <li><a href="#voice-principles">Voice Principles</a></li>
+        <li><a href="#platforms">Platforms</a></li>
+        <li><a href="#frameworks">Frameworks</a></li>
+        <li><a href="#scenarios">Scenarios</a></li>
+        <li><a href="#approval">Approval</a></li>
+        <li><a href="#planning">Planning</a></li>
+        <li><a href="#workflow">Workflow</a></li>
+    </ul>
+</nav>
+
+<main>
+
+<!-- HOW TO USE -->
+<section id="how-to-use">
+    <span class="section-number">00</span>
+    <h2>How to Use This Document</h2>
+
+    <p>The Brand Voice Guide is our creative brief. This document is the campaign execution plan.</p>
+
+    <div class="role-card">
+        <p class="role-name">For Jonathan (Creative Director Review)</p>
+        <ul>
+            <li>Section 1: Approve platform voice adaptations</li>
+            <li>Section 2: Review content frameworks - these become your approval templates</li>
+            <li>Section 3: Sign off on social scenarios and response templates</li>
+            <li>Section 4: Flag anything that doesn't sound like us</li>
+        </ul>
+    </div>
+
+    <div class="role-card">
+        <p class="role-name">For Drew (Content Generation)</p>
+        <ul>
+            <li>Feed relevant sections to LLMs with master Brand Voice Guide</li>
+            <li>Use content frameworks as campaign templates</li>
+            <li>Reference approval criteria before sending to Jonathan</li>
+            <li>Track engagement patterns for iteration</li>
+        </ul>
+    </div>
+</section>
+
+<!-- VOICE PRINCIPLES -->
+<section id="voice-principles">
+    <span class="section-number">01</span>
+    <h2>Voice Principles for Social Media</h2>
+
+    <h3>What Never Changes (Across All Platforms)</h3>
+
+    <h4>Core DNA</h4>
+    <ul>
+        <li>Advertising creativity × brewing craft obsession</li>
+        <li>Confident without arrogance</li>
+        <li>Process-driven, execution-focused</li>
+        <li>Story-led, community-building</li>
+        <li>LA creative energy</li>
+    </ul>
+
+    <div class="voice-grid">
+        <div class="voice-card">
+            <p class="voice-card-title">Creative</p>
+            <p class="voice-card-score">10/10</p>
+            <p>Everything flows from creative thinking</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Craft-Focused</p>
+            <p class="voice-card-score">9/10</p>
+            <p>Obsessive about quality, transparent about process</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Confident</p>
+            <p class="voice-card-score">8/10</p>
+            <p>We know good work when we see it (and brew it)</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Storytelling</p>
+            <p class="voice-card-score">9/10</p>
+            <p>Every beer has a narrative</p>
+        </div>
+    </div>
+
+    <div class="highlight-box">
+        <h4>This means on social:</h4>
+        <ul>
+            <li>We lead with concepts, not apologies</li>
+            <li>We show process because execution matters</li>
+            <li>We build community through shared creative values</li>
+            <li>We're confident in our craft, period</li>
+        </ul>
+    </div>
+
+    <h3>The Campaign Mindset</h3>
+    <p>Every social media initiative is a <strong>campaign</strong>, not just "posting."</p>
+
+    <h4>Campaign Elements</h4>
+    <ul>
+        <li><strong>Brief:</strong> What's the insight or objective?</li>
+        <li><strong>Concept:</strong> What's the big idea?</li>
+        <li><strong>Execution:</strong> How do we bring it to life?</li>
+        <li><strong>Activation:</strong> How do we launch and engage?</li>
+        <li><strong>Results:</strong> How do we measure and iterate?</li>
+    </ul>
+
+    <h4>Apply this to:</h4>
+    <ul>
+        <li>Product launches</li>
+        <li>Seasonal releases</li>
+        <li>Festival participation</li>
+        <li>Community initiatives</li>
+        <li>Content series</li>
+    </ul>
+
+    <h3>Language Locked & Loaded</h3>
+
+    <h4>Always Use</h4>
+    <div class="word-list approved">
+        <span>Crafted</span>
+        <span>Create</span>
+        <span>Concept</span>
+        <span>Campaign-worthy</span>
+        <span>Breakthrough</span>
+        <span>Process</span>
+        <span>Iteration</span>
+        <span>Execution</span>
+        <span>Creative director approved</span>
+        <span>Like the best campaigns</span>
+        <span>Like great advertising</span>
+    </div>
+
+    <h4>Never Use</h4>
+    <div class="word-list rejected">
+        <span>Artisanal</span>
+        <span>Curated</span>
+        <span>Elevated</span>
+        <span>Passion project</span>
+        <span>Journey</span>
+        <span>Experience</span>
+        <span>Apologetic language</span>
+    </div>
+</section>
+
+<!-- PLATFORMS -->
+<section id="platforms">
+    <span class="section-number">02</span>
+    <h2>Platform-Specific Executions</h2>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">Instagram</span>
+            <span class="platform-tag">Primary Platform</span>
+        </div>
+        <dl class="platform-meta">
+            <div>
+                <dt>Voice DNA</dt>
+                <dd>Confident creative energy, visually led</dd>
+            </div>
+            <div>
+                <dt>Post Length</dt>
+                <dd>2-4 sentences</dd>
+            </div>
+            <div>
+                <dt>Hashtags</dt>
+                <dd>5-8 strategic (never generic)</dd>
+            </div>
+            <div>
+                <dt>Tone</dt>
+                <dd>Like a creative director presenting a concept</dd>
+            </div>
+        </dl>
+        <h4>Caption Formula</h4>
+        <ol>
+            <li><strong>Hook:</strong> Lead with the insight or creative angle</li>
+            <li><strong>Execution:</strong> How we brought the concept to life</li>
+            <li><strong>Activation:</strong> Where/when (brief, confident)</li>
+        </ol>
+        <div class="example">
+            <span class="example-label">Example</span>
+            <p>Like the best campaigns, this started with obsessive attention to a single idea. Session IPA - citrus-forward, crushable, campaign-worthy. Available now, Eagle Rock and Silver Lake.</p>
+        </div>
+        <div class="example">
+            <span class="example-label">Example</span>
+            <p>Six months of recipe iteration. Every great creative concept requires killing your darlings to find the breakthrough. This is it. Link in bio.</p>
+        </div>
+    </div>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">Facebook</span>
+            <span class="platform-tag">Community Headquarters</span>
+        </div>
+        <dl class="platform-meta">
+            <div>
+                <dt>Voice DNA</dt>
+                <dd>Conversational but still confident creative</dd>
+            </div>
+            <div>
+                <dt>Post Length</dt>
+                <dd>3-5 sentences</dd>
+            </div>
+            <div>
+                <dt>Tone</dt>
+                <dd>Creative director speaking to the neighborhood</dd>
+            </div>
+        </dl>
+        <div class="example">
+            <span class="example-label">Example</span>
+            <p>Agency Brewing is what happens when you bring advertising's creative obsession to brewing. Every beer conceptualized like a campaign, executed like a masterpiece. Session IPA available now in Eagle Rock and Silver Lake. This is where Madison Avenue meets LA brewing.</p>
+        </div>
+    </div>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">LinkedIn</span>
+            <span class="platform-tag">Optional - Industry Connection</span>
+        </div>
+        <dl class="platform-meta">
+            <div>
+                <dt>Voice DNA</dt>
+                <dd>Professional creative, strategic insights</dd>
+            </div>
+            <div>
+                <dt>Post Length</dt>
+                <dd>4-6 sentences</dd>
+            </div>
+            <div>
+                <dt>Use For</dt>
+                <dd>Industry partnerships, creative process deep-dives, festival strategy</dd>
+            </div>
+        </dl>
+        <div class="example">
+            <span class="example-label">Example</span>
+            <p>The best advertising campaigns start with a focused brief. We applied that same discipline to our first beer: one exceptional Session IPA, executed with obsessive attention to craft. For creative professionals who understand that process drives results. Available now in LA.</p>
+        </div>
+    </div>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">Festival / In-Person</span>
+            <span class="platform-tag">Live Activation</span>
+        </div>
+        <dl class="platform-meta">
+            <div>
+                <dt>Tone</dt>
+                <dd>Warm, confident, let the beer speak</dd>
+            </div>
+        </dl>
+        <h4>Elevator Pitch (15 seconds)</h4>
+        <div class="example">
+            <p>Agency Brewing - where advertising creativity meets brewing craft. Every beer conceptualized like a breakthrough campaign. Try this Session IPA and taste what obsessive execution looks like.</p>
+        </div>
+        <h4>When they ask about the advertising connection</h4>
+        <div class="example">
+            <p>We're creatives who got obsessed with brewing. Turns out the same discipline that drives great campaigns - concept, iteration, flawless execution - makes exceptional beer.</p>
+        </div>
+        <h4>When they ask about the beer</h4>
+        <div class="example">
+            <p>Session IPA - citrus-forward, balanced, designed for drinkability. Six months of recipe development to get it campaign-worthy. What are you tasting?</p>
+        </div>
+    </div>
+</section>
+
+<!-- FRAMEWORKS -->
+<section id="frameworks">
+    <span class="section-number">03</span>
+    <h2>Content Campaign Frameworks</h2>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Product as Campaign</span>
+            <span class="framework-number">01</span>
+        </div>
+        <div class="framework-body">
+            <div class="framework-structure">[Beer/Batch] + [Creative insight or process] + [Where/When]</div>
+            <p><strong>Tone:</strong> Confident presentation, like launching a campaign</p>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Session IPA. Six months of obsessive iteration, one breakthrough concept. Available now at [location]. This is what happens when creative directors brew beer.</p>
+            </div>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Batch #3 sealed. Like any great campaign, refinement is endless. Same concept, even better execution. Cans dropping this week.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Process as Creative Development</span>
+            <span class="framework-number">02</span>
+        </div>
+        <div class="framework-body">
+            <div class="framework-structure">[What we're doing] + [Advertising parallel] + [Why it matters]</div>
+            <p><strong>Tone:</strong> Behind-the-creative, transparent about craft obsession</p>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Cold conditioning for two weeks because great concepts need time to develop. Like creative work, rushing the execution kills the idea. Patience equals quality.</p>
+            </div>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Taste-testing batch #4 today. In advertising, you kill your darlings to find breakthrough concepts. Brewing's no different. Iteration is everything.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Community as Collaboration</span>
+            <span class="framework-number">03</span>
+        </div>
+        <div class="framework-body">
+            <div class="framework-structure">[Acknowledge/Build connection] + [Invite participation] + [Creative angle]</div>
+            <p><strong>Tone:</strong> Collaborative but confident, building creative community</p>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>To everyone who grabbed cans this week - your feedback is gold. Great creative work requires dialogue. What are you tasting? Drop notes below.</p>
+            </div>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Festival season starts soon. Come taste what happens when advertising creativity meets brewing craft. Great beer, like great ideas, starts conversations.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Milestones as Campaign Results</span>
+            <span class="framework-number">04</span>
+        </div>
+        <div class="framework-body">
+            <div class="framework-structure">[What happened] + [Creative interpretation] + [Forward momentum]</div>
+            <p><strong>Tone:</strong> Confident acknowledgment, not celebration for its own sake</p>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Batch #1 sold out. When execution meets concept, people respond. Batch #2 drops next week. This is what campaign-worthy results look like.</p>
+            </div>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>First festival pour complete. Watching people discover our Session IPA for the first time - that creative validation drives everything. More events coming.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Differentiation Through Creative DNA</span>
+            <span class="framework-number">05</span>
+        </div>
+        <div class="framework-body">
+            <div class="framework-structure">[What we do differently] + [Advertising parallel] + [The result]</div>
+            <p><strong>Use when:</strong> Explaining what makes Agency Brewing different</p>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Most breweries focus on tradition. We focus on concept and execution - the same rigor that drives breakthrough advertising. Different DNA, exceptional beer.</p>
+            </div>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Advertising taught us that process drives results. Every batch gets the same attention a creative director gives their best work. Taste the difference.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SCENARIOS -->
+<section id="scenarios">
+    <span class="section-number">04</span>
+    <h2>Social Scenarios & Response Templates</h2>
+
+    <div class="scenario">
+        <p class="scenario-title">When Someone Tags Us / Posts Our Beer</p>
+        <p class="scenario-approach">Approach: Confident acknowledgment, build community</p>
+        <div class="do-dont">
+            <div class="do">
+                <h5>Do</h5>
+                <ul>
+                    <li>Reshare to stories with "Campaign-worthy"</li>
+                    <li>Comment: "Great taste" or "What's your take on the citrus notes?"</li>
+                    <li>Keep it brief, confident, genuine</li>
+                </ul>
+            </div>
+            <div class="dont">
+                <h5>Don't</h5>
+                <ul>
+                    <li>Over-effusive responses</li>
+                    <li>Generic "thanks for the support!"</li>
+                    <li>Turn their post into our sales pitch</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <p class="scenario-title">When Someone Gives Positive Feedback</p>
+        <p class="scenario-approach">Framework: Brief acknowledgment + Creative angle or process note</p>
+        <div class="example">
+            <p>This is why we obsess over every batch. Great to hear the concept landed.</p>
+        </div>
+        <div class="example">
+            <p>Creative director approved. Seriously though, feedback like this keeps us iterating.</p>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <p class="scenario-title">When Someone Gives Constructive Criticism</p>
+        <p class="scenario-approach">Framework: Acknowledge + Process/iteration mindset + Confidence</p>
+        <div class="example">
+            <p>Appreciate the feedback on the bitterness. We're constantly iterating - that's how breakthrough concepts develop.</p>
+        </div>
+        <div class="example">
+            <p>Good call on carbonation levels. Like any creative work, refinement is endless. Next batch addresses this.</p>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <p class="scenario-title">When Someone Compares Us to Another Brewery</p>
+        <p class="scenario-approach">Approach: Confident differentiation without disparagement</p>
+        <div class="example">
+            <p>[Brewery] makes excellent beer. We're approaching craft from a different creative angle - advertising rigor meets brewing obsession. Different stories, same dedication to quality.</p>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <p class="scenario-title">When Asked About Price/Value</p>
+        <p class="scenario-approach">Framework: Confident position on quality and craft</p>
+        <div class="example">
+            <p>Obsessive ingredient sourcing, rigorous process, local production. We're not competing on price - we're focused on making campaign-worthy beer.</p>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <p class="scenario-title">When Beer Sells Out</p>
+        <p class="scenario-approach">Framework: What happened + Next availability + Process note</p>
+        <div class="example">
+            <p>Batch #[X] sold out. Next cans drop [date]. Like limited campaign runs, scarcity means we're executing at the right scale.</p>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <p class="scenario-title">When Asked About Distribution/Availability</p>
+        <p class="scenario-approach">Framework: Clear current state + Forward-looking (when accurate)</p>
+        <div class="example">
+            <p>Currently in Eagle Rock, Silver Lake, and downtown LA. Email jonathan@agencybrewing.com to order or check our locations page. We're growing thoughtfully, not rapidly.</p>
+        </div>
+    </div>
+
+    <h3>Emergency Scenarios</h3>
+
+    <div class="scenario">
+        <p class="scenario-title">Quality Issue with Beer</p>
+        <h4>Individual complaint:</h4>
+        <div class="example">
+            <p>Appreciate you letting us know. Every can matters when you're obsessed with quality. DM us and we'll make this right. Your feedback helps us iterate.</p>
+        </div>
+        <h4>Widespread issue:</h4>
+        <div class="example">
+            <p>We've identified a quality issue with batch #[X]. Not the standard we hold ourselves to. If you purchased from this batch, DM for replacement. Like creative work, we own our mistakes and execute solutions.</p>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <p class="scenario-title">Can't Meet Demand / Sold Out</p>
+        <div class="example">
+            <p>Batch #[X] sold out faster than projected. We're scaling production while maintaining obsessive quality standards. Next cans: [date]. Want first access? Email list in bio.</p>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <p class="scenario-title">Licensing/Regulatory Questions</p>
+        <div class="highlight-box warning">
+            <p><strong>Never discuss:</strong> Regulatory challenges, specific licensing obstacles, or anything creating legal complications.</p>
+        </div>
+        <div class="example">
+            <p>Fully licensed through California ABC - Type 09 and Type 17. Questions about our licensing? Email jonathan@agencybrewing.com for details.</p>
+        </div>
+    </div>
+</section>
+
+<!-- APPROVAL -->
+<section id="approval">
+    <span class="section-number">05</span>
+    <h2>Jonathan's Approval Criteria</h2>
+
+    <h3>Pre-Approval Self-Check</h3>
+    <p>Before sending content to Jonathan, verify:</p>
+
+    <h4>1. Voice Authenticity</h4>
+    <ul class="checklist">
+        <li>Sounds like Agency Brewing, not generic craft beer</li>
+        <li>Advertising connection is natural, not forced</li>
+        <li>Confidence without arrogance</li>
+        <li>Creative obsession comes through</li>
+    </ul>
+
+    <h4>2. Strategic Alignment</h4>
+    <ul class="checklist">
+        <li>Builds the "advertising × brewing" narrative</li>
+        <li>Focuses on craft and execution</li>
+        <li>Creates desire for the beer</li>
+        <li>Strengthens community connection</li>
+    </ul>
+
+    <h4>3. Execution Quality</h4>
+    <ul class="checklist">
+        <li>Concise, impactful language</li>
+        <li>No unnecessary formatting or emojis</li>
+        <li>Free of clichés or tired craft beer tropes</li>
+        <li>Photography/visuals support the copy (when applicable)</li>
+    </ul>
+
+    <h3>Approval Tiers</h3>
+
+    <div class="approval-tier approved">
+        <h5>Approved As-Is</h5>
+        <ul>
+            <li>Clear advertising × brewing DNA</li>
+            <li>Natural voice, zero "trying too hard" moments</li>
+            <li>Focuses on beer/craft/creative process</li>
+            <li>Visuals and copy work together (Jonathan's call)</li>
+        </ul>
+    </div>
+
+    <div class="approval-tier revision">
+        <h5>Needs Revision</h5>
+        <ul>
+            <li>Too generic (could be any brewery)</li>
+            <li>Agency speak feels forced or cliché</li>
+            <li>Lacks confidence or sounds apologetic</li>
+            <li>Promises we can't deliver</li>
+            <li>Visual/copy mismatch</li>
+        </ul>
+    </div>
+
+    <div class="approval-tier rejected">
+        <h5>Rejected</h5>
+        <ul>
+            <li>Violates core brand voice principles</li>
+            <li>Sounds like someone else</li>
+            <li>Negative or comparative in wrong way</li>
+            <li>Makes unsubstantiated claims</li>
+        </ul>
+    </div>
+
+    <h3>Fast-Track Approval Items</h3>
+    <p>Once frameworks validated, these need minimal Jonathan review:</p>
+    <ul>
+        <li>Standard product drops (Framework 1)</li>
+        <li>Simple customer post reshares</li>
+        <li>Brief behind-the-scenes with 1-2 sentence captions</li>
+        <li>Event announcements using approved templates</li>
+    </ul>
+    <div class="highlight-box">
+        <p><strong>Everything else: Full creative director review.</strong></p>
+    </div>
+</section>
+
+<!-- PLANNING -->
+<section id="planning">
+    <span class="section-number">06</span>
+    <h2>Content Campaign Planning</h2>
+
+    <h3>Campaign Thinking for Social</h3>
+    <p>Every content initiative = A campaign with:</p>
+    <ul>
+        <li><strong>Brief:</strong> What are we achieving?</li>
+        <li><strong>Concept:</strong> What's the creative idea?</li>
+        <li><strong>Execution:</strong> How do we bring it to life?</li>
+        <li><strong>Timeline:</strong> When does it run?</li>
+        <li><strong>Success Metrics:</strong> What defines campaign-worthy results?</li>
+    </ul>
+
+    <h3>Sample Campaign: Product Launch</h3>
+    <div class="highlight-box">
+        <p><strong>Brief:</strong> Introduce Session IPA to LA creative community</p>
+        <p><strong>Concept:</strong> "Where advertising creativity meets brewing craft"</p>
+        <p><strong>Execution:</strong></p>
+        <ul>
+            <li>Week 1: Product reveal with process story</li>
+            <li>Week 2: Behind-the-creative development</li>
+            <li>Week 3: Community tasting and feedback</li>
+            <li>Week 4: Availability and where to find</li>
+        </ul>
+        <p><strong>Success Metrics:</strong> Engagement quality, direct inquiries, festival booth visits, community language adoption</p>
+    </div>
+
+    <h3>Ongoing Content Rhythm</h3>
+    <h4>Weekly Posting Cadence</h4>
+    <ul>
+        <li><strong>2-3x per week</strong> on Instagram (M/W/F pattern)</li>
+        <li><strong>1-2x per week</strong> on Facebook</li>
+        <li><strong>Stories</strong> when there's genuine process/community content</li>
+    </ul>
+
+    <h4>Monthly Content Mix</h4>
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <p class="metric-label">Product / Availability</p>
+            <p class="metric-value">40%</p>
+        </div>
+        <div class="metric-card">
+            <p class="metric-label">Process / Creative Development</p>
+            <p class="metric-value">30%</p>
+        </div>
+        <div class="metric-card">
+            <p class="metric-label">Community / Engagement</p>
+            <p class="metric-value">30%</p>
+        </div>
+    </div>
+
+    <div class="highlight-box warning">
+        <p><strong>Never post just to post.</strong> Every piece should:</p>
+        <ul>
+            <li>Advance the advertising × brewing narrative</li>
+            <li>Build desire for the beer</li>
+            <li>Strengthen community connection</li>
+            <li>Reflect obsessive creative craft</li>
+        </ul>
+    </div>
+</section>
+
+<!-- WORKFLOW -->
+<section id="workflow">
+    <span class="section-number">07</span>
+    <h2>Content Creation Workflow</h2>
+
+    <h3>For Drew: Generating Content</h3>
+    <ol>
+        <li>Identify need (product drop, festival, community moment)</li>
+        <li>Choose appropriate framework from Section 3</li>
+        <li>Generate 2-3 options using LLM + both brand docs</li>
+        <li>Self-check against approval criteria (Section 5)</li>
+        <li>Send to Jonathan with context</li>
+    </ol>
+
+    <h3>For Jonathan: Reviewing Content</h3>
+    <h4>Quick Review (Fast-track items)</h4>
+    <ul>
+        <li>Does it sound like us?</li>
+        <li>Does visual work with copy?</li>
+        <li>Approve or quick edit</li>
+    </ul>
+
+    <h4>Full Review (New campaigns, major announcements)</h4>
+    <ul>
+        <li>Does this advance our narrative?</li>
+        <li>Is the creative angle compelling?</li>
+        <li>Does execution match concept?</li>
+        <li>Would I approve this as a campaign?</li>
+    </ul>
+
+    <h3>LLM Prompt Templates</h3>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">For Product Posts</span>
+        </div>
+        <div class="framework-body">
+            <div class="framework-structure">Using Agency Brewing Brand Voice Guide and Social Strategy doc, write an Instagram caption announcing [product/batch]. Use Framework 1. Maintain confident creative voice - advertising creativity meets brewing craft. Focus on concept and execution quality, not startup positioning. Keep under 3 sentences.</div>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">For Process Content</span>
+        </div>
+        <div class="framework-body">
+            <div class="framework-structure">Using Agency Brewing Brand Voice Guide and Social Strategy doc, write Instagram caption about [brewing process]. Use Framework 2. Connect to advertising creative development. Confident tone showing craft obsession. Avoid apologetic or 'building in public' language.</div>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">For Community Posts</span>
+        </div>
+        <div class="framework-body">
+            <div class="framework-structure">Using Agency Brewing Brand Voice Guide and Social Strategy doc, write response to [situation]. Reference appropriate scenario from Section 4. Brief, confident, builds community without over-effusiveness.</div>
+        </div>
+    </div>
+
+    <h3>Success Metrics & Iteration</h3>
+
+    <h4>Track These for Voice Validation</h4>
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <p class="metric-label">High Value Engagement</p>
+            <p class="metric-value">Process questions, using our language back</p>
+        </div>
+        <div class="metric-card">
+            <p class="metric-label">Medium Value</p>
+            <p class="metric-value">Purchase questions, location inquiries</p>
+        </div>
+        <div class="metric-card">
+            <p class="metric-label">Low Value</p>
+            <p class="metric-value">Generic emoji reactions</p>
+        </div>
+    </div>
+
+    <h4>Monthly Voice Check</h4>
+    <p>Every 30 days, review content against Brand Voice Guide:</p>
+    <ul class="checklist">
+        <li>Creative obsession focus (not just beer talk)?</li>
+        <li>Advertising × brewing DNA (not forcing it)?</li>
+        <li>Confidence without arrogance?</li>
+        <li>Community building through shared creative values?</li>
+        <li>Process transparency showing craft excellence?</li>
+    </ul>
+</section>
+
+<!-- FINAL PRINCIPLES -->
+<section id="final">
+    <span class="section-number">08</span>
+    <h2>Final Principles</h2>
+
+    <div class="principle">
+        <strong>The beer speaks louder than the words.</strong>
+        <p>Social media builds awareness and community, but Session IPA has to deliver on the promise. Voice without substance is noise.</p>
+    </div>
+
+    <div class="principle">
+        <strong>Confidence comes from craft obsession.</strong>
+        <p>We're confident because we're obsessive about quality, not because we're trying to seem bigger than we are.</p>
+    </div>
+
+    <div class="principle">
+        <strong>Every post is part of the campaign.</strong>
+        <p>Nothing goes out that doesn't advance the "advertising creativity × brewing craft" narrative.</p>
+    </div>
+
+    <div class="principle">
+        <strong>Community over broadcasting.</strong>
+        <p>We're building connections with people who share our creative values, not just collecting followers.</p>
+    </div>
+
+    <div class="principle">
+        <strong>Jonathan has final creative authority.</strong>
+        <p>If it doesn't feel right to the creative director, it doesn't go out. Trust the process.</p>
+    </div>
+</section>
+
+<div class="cta">
+    <h2>Now go make something campaign-worthy.</h2>
+</div>
+
+</main>
+
+</div>
+
+<!-- CULTURAL CALENDAR TAB -->
+<div id="calendar" class="tab-content">
+
+<main>
+
+<section>
+    <span class="section-number">LA</span>
+    <h2>Cultural Calendar: February - April 2026</h2>
+
+    <div class="calendar-intro">
+        <p><strong>Strategic content opportunities for Agency Brewing.</strong> Each event includes brand connection notes for social media tie-ins. Highlighted events represent prime opportunities where advertising and creative culture intersect with our brand DNA.</p>
+    </div>
+
+    <div class="calendar-legend">
+        <div class="legend-item">
+            <span class="legend-dot highlight"></span>
+            <span>Prime Brand Opportunity</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-dot standard"></span>
+            <span>Standard Opportunity</span>
+        </div>
+    </div>
+</section>
+
+<!-- FEBRUARY -->
+<section class="month-section">
+    <h2 class="month-header">February 2026</h2>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Feb 1</span>
+            <span class="event-title">68th Grammy Awards</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Crypto.com Arena. Trevor Noah's final year hosting. Grammy Week events include the Clio Music Awards at Saban Theatre in Beverly Hills on January 29.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Clio Music Awards literally blend advertising and music creativity - direct Agency Brewing territory</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Feb 6</span>
+            <span class="event-title">Dine LA Ends / Clio Entries Due</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Dine LA Restaurant Week wraps as 400+ LA restaurants serve prix-fixe menus. Same day: Clio Awards physical components deadline.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Client entertainment culture meets creative award hustle - the dual life of agency professionals</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Feb 7</span>
+            <span class="event-title">DGA Awards</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">The Directors Guild Awards serve as a crucial Oscar bellwether.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Directorial craft parallels the creative director role in advertising</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Feb 12-22</span>
+            <span class="event-title">Palm Springs Modernism Week</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">11-day design pilgrimage featuring 450+ experiences including Frank Sinatra estate tours, Kaufmann Desert House access, and architectural bus tours.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Midcentury aesthetic directly invokes Mad Men-era advertising's golden age</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Feb 13-15</span>
+            <span class="event-title">NBA All-Star Weekend</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Intuit Dome, Inglewood. NBA's 75th All-Star edition returns to LA with new Team USA vs. Team World format. Major brand activations dominate.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Experiential marketing showcase; brand activation heaven</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Feb 15</span>
+            <span class="event-title">Spirit Awards</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Hollywood Palladium. 41st Film Independent Spirit Awards celebrate independent cinema with budgets under $30M.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Celebrates scrappy, independent creative spirit - same ethos as craft brewing</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Feb 17</span>
+            <span class="event-title">ThinkLA AI Brunch</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Skirball Cultural Center. LA's advertising community gathers for fireside chat on AI's role in marketing and creativity.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Direct industry networking opportunity; Agency Brewing's core audience in one room</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Feb 21</span>
+            <span class="event-title">Golden Dragon Parade</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Chinatown. 127th Golden Dragon Parade - oldest Lunar New Year celebration in America - draws 100,000+ spectators. Year of the Snake.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>LA cultural heritage meets creative spectacle; Chinatown near creative eastside breweries</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Feb 26</span>
+            <span class="event-title">Frieze Los Angeles Opens</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Santa Monica Airport. Frieze LA (through March 1) brings 95+ international galleries. Frieze Week extends events citywide starting February 23. Same evening: ThinkLA Connections & Cocktails at Kargo offices.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Art world meets advertising; galleries and agencies share creative DNA</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Feb 27-28</span>
+            <span class="event-title">ACE Eddie / PGA / ADG Awards</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">American Cinema Editors (Feb 27), then Producers Guild and Art Directors Guild (Feb 28). ADG honors production design.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>ADG celebrates visual craft central to advertising; production designers are film's art directors</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Feb 28 - Mar 1</span>
+            <span class="event-title">Skyline Festival</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Grand Park, DTLA. EDM festival celebrating LA's creative underground with immersive digital installations and bold murals.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Where music, visual art, and technology collide - creative culture after dark</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MARCH -->
+<section class="month-section">
+    <h2 class="month-header">March 2026</h2>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Mar 1</span>
+            <span class="event-title">The Actor Awards (SAG-AFTRA)</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Newly rebranded from SAG Awards, honoring outstanding performances as voted by actors themselves.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Actors bring scripts to life like voice talent brings spots to life; authenticity in performance</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Mar 6</span>
+            <span class="event-title">Disney California Adventure Food & Wine Festival</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Running through April 27, celebrating California's culinary and craft beverage culture with tastings and demonstrations.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Craft beer mainstream moment; family-friendly craft culture exposure</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Mar 8</span>
+            <span class="event-title">LA Marathon / WGA + ASC Awards</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">40th LA Marathon runs Dodger Stadium to Century City. Same day: Writers Guild and American Society of Cinematographers Awards.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>WGA celebrates cinema's copywriters; visual craft from ASC cinematographers</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Mar 11</span>
+            <span class="event-title">Noma LA Pop-Up Opens</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Rene Redzepi's three-Michelin-Star Copenhagen restaurant relocates to LA for 5-6 month residency (through June 26).</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Craft obsession at the highest level; parallels between world-class brewing and world-class cuisine</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Mar 15</span>
+            <span class="event-title">98th Academy Awards</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Dolby Theatre. Conan O'Brien hosts. First-ever Best Casting Oscar - historic moment for the craft.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Ultimate convergence of advertising, entertainment, and creative excellence; Oscar campaigns mirror product launches</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Mar 21</span>
+            <span class="event-title">Central Coast Craft Beer Fest</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Atascadero. Presented by Central Coast Brewers Guild at Sunken Gardens, featuring craft breweries, food trucks, and lawn games.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>California craft beer trail content; regional brewery community</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Mar 27-29</span>
+            <span class="event-title">WonderCon</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Anaheim Convention Center. Second-largest pop culture convention in LA area features 900+ exhibitors, celebrity guests, exclusive screenings, and Artists Alley.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Pop culture marketing showcase; where entertainment marketing meets passionate audiences</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- APRIL -->
+<section class="month-section">
+    <h2 class="month-header">April 2026</h2>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 1-3</span>
+            <span class="event-title">DigiMarCon West</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Loews Hollywood Hotel. 7th annual Digital Marketing, Media, and Advertising Conference featuring AI, marketing automation, content marketing, social media, programmatic advertising.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Direct industry conference for Agency Brewing's core audience; networking opportunity</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 4</span>
+            <span class="event-title">LA Beer Fest 20th Anniversary</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">LA Center Studios. LA's largest craft beer festival celebrates 20 years with 80+ breweries, 200+ beers, food trucks, bands, and DJs.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Perfect convergence of craft beer culture and LA creative energy; milestone celebration</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Apr 6-12</span>
+            <span class="event-title">Knott's Boysenberry Festival</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Buena Park. Annual celebration featuring boysenberry-infused foods and craft beverages.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Fruit beer innovation angle; regional SoCal culture</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 7</span>
+            <span class="event-title">National Beer Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Commemorates the 1933 Cullen-Harrison Act that legalized beer post-Prohibition.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Prohibition history meets advertising history - 1930s were transformative for both industries</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Early Apr (TBD)</span>
+            <span class="event-title">Sabroso Craft Beer, Taco & Music Festival</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Doheny State Beach, Dana Point. 150+ craft beers, gourmet tacos, Lucha Libre wrestling, live music headlined by The Offspring. Powered by Gringo Bandito hot sauce.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Counter-cultural creative energy; music, food, and beer as creative fuel; LA's punk heritage</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 10-12 / 17-19</span>
+            <span class="event-title">Coachella</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Indio. Iconic music and arts festival with headliners Justin Bieber, Sabrina Carpenter, and Karol G. Brand activations dominate.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Peak creative culture moment; brand activation showcase; fashion, music, and festival culture</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Apr 18-19</span>
+            <span class="event-title">LA Times Festival of Books</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">USC Campus. 31st annual Festival of Books - largest literary event in America - draws 150,000+ attendees with 300+ exhibitors and famous authors.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Storytelling and content creation; writers and copywriters share DNA; brand narrative craft</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Apr 19-22</span>
+            <span class="event-title">Adobe Summit</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Las Vegas + online. Adobe's flagship conference exploring creativity and AI in business with keynotes, hands-on labs, and innovation showcases.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Creative technology at the intersection of tools and craft; AI in creative work</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 21</span>
+            <span class="event-title">World Creativity and Innovation Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">UN-designated international day celebrating creativity. World Creativity Week runs April 15-21.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p><strong>The holiday built for Agency Brewing.</strong> Creativity is the brewery's core brand pillar</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 23</span>
+            <span class="event-title">AAF Advertising Hall of Fame Induction Gala</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">NYC. 75th Anniversary celebration inducts six industry legends plus American Express as corporate honoree.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Advertising heritage celebration; industry history; Madison Avenue legacy</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Apr 24-26</span>
+            <span class="event-title">Stagecoach</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Indio. Country music festival following Coachella at Empire Polo Club.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Americana aesthetic; different creative audience than Coachella</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Apr 26</span>
+            <span class="event-title">Fiesta Broadway</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">DTLA. One of America's largest Cinco de Mayo celebrations featuring Latin American culture, Fiesta Taco Fest, Lucha Libre, and two music stages.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>LA's multicultural creative energy; Latin American creative influence on advertising</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 28-30</span>
+            <span class="event-title">Social Media Marketing World</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Anaheim Convention Center. 13th annual flagship conference from Social Media Examiner. Features AI Business World (April 29-30) with 20 hands-on AI sessions.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Direct industry conference; social media strategy for craft beverage brands</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Apr 30</span>
+            <span class="event-title">TCM Classic Film Festival Begins</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Hollywood. 17th annual festival runs through May 3 at TCL Chinese Theatre, Egyptian Theatre, and Hollywood Roosevelt Hotel. Theme: "The World Comes to Hollywood."</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Classic Hollywood and golden age advertising share heritage; timeless creative excellence</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Apr 2026</span>
+            <span class="event-title">LACMA David Geffen Galleries Open</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Peter Zumthor's Pritzker Prize-winning design opens with 347,500 sq ft amoeba-shaped structure spanning Wilshire Boulevard.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Architecture and design excellence; LA cultural landmark; creative pilgrimage destination</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="cta">
+    <h2>Plan campaigns around these cultural moments.</h2>
+</div>
+
+</main>
+
+</div>
+
+<!-- NATIONAL HOLIDAYS TAB -->
+<div id="holidays" class="tab-content">
+
+<main>
+
+<section>
+    <span class="section-number">US</span>
+    <h2>National Holidays: February - April 2026</h2>
+
+    <div class="calendar-intro">
+        <p><strong>Key national holidays and cultural moments for content planning.</strong> These dates represent consistent annual opportunities to connect with audiences through shared cultural experiences. Use these alongside the LA Cultural Calendar for comprehensive campaign planning.</p>
+    </div>
+
+    <div class="calendar-legend">
+        <div class="legend-item">
+            <span class="legend-dot highlight"></span>
+            <span>Major Beer/Brand Opportunity</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-dot standard"></span>
+            <span>Cultural Moment</span>
+        </div>
+    </div>
+</section>
+
+<!-- FEBRUARY HOLIDAYS -->
+<section class="month-section">
+    <h2 class="month-header">February 2026</h2>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Feb 2</span>
+            <span class="event-title">Groundhog Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Punxsutawney Phil predicts six more weeks of winter or early spring.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Weather folklore meets cultural tradition; beer for every season content</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Feb 8</span>
+            <span class="event-title">Super Bowl LX</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">New Orleans. Second Sunday in February. Beer is one of the most-consumed beverages on Super Bowl Sunday.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Advertising's biggest stage; $7M/30-second spots showcase creativity's highest value; viewing party culture</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Feb 14</span>
+            <span class="event-title">Valentine's Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Saturday. Valentine's Day falls on a Saturday in 2026 - prime date night territory.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Romantic dining culture; craft beer as elevated date night beverage; couples sharing experiences</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Feb 16</span>
+            <span class="event-title">Presidents' Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Federal Holiday. Third Monday in February honoring Washington's birthday (Feb 22, 1732).</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Three-day weekend; retail sales; patriotic Americana aesthetic</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Feb 17</span>
+            <span class="event-title">Mardi Gras / Fat Tuesday</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">The day before Ash Wednesday; indulgence before Lenten fasting. Major celebrations in New Orleans.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Celebration culture; "last call" before restraint; festive excess as creative expression</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Feb 18</span>
+            <span class="event-title">Ash Wednesday</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Beginning of Lent (40 days of fasting and prayer ending April 2).</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Discipline and craft; constraints breed creativity; the reset button</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MARCH HOLIDAYS -->
+<section class="month-section">
+    <h2 class="month-header">March 2026</h2>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Mar 8</span>
+            <span class="event-title">Daylight Saving Time Begins</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">"Spring forward" at 2:00 AM - lose one hour of sleep.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Time change survival; "We lost an hour but gained daylight"; coffee and beer content</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Mar 17</span>
+            <span class="event-title">St. Patrick's Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Tuesday. Global celebration of Irish culture; major beer consumption day.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Beer culture holiday; green beer debates; craft vs. corporate; Irish pub tradition meets LA craft scene</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Mar 20</span>
+            <span class="event-title">First Day of Spring / Spring Equinox</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Friday. Astronomical spring begins; equal day and night.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Seasonal beer releases; spring awakening; renewal and fresh starts; lighter beer styles</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Mar 29</span>
+            <span class="event-title">Palm Sunday</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">The Sunday before Easter; beginning of Holy Week.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Reflection before celebration; one-week countdown to Easter</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- APRIL HOLIDAYS -->
+<section class="month-section">
+    <h2 class="month-header">April 2026</h2>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 1</span>
+            <span class="event-title">April Fools' Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Wednesday. Global day of pranks and jokes.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Creative mischief; advertising's history of memorable April Fools' campaigns; playful brand voice</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Apr 2</span>
+            <span class="event-title">Passover Begins</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Sundown. Eight-day Jewish holiday commemorating exodus from Egypt.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Heritage and tradition; family gatherings; storytelling over shared meals</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Apr 3</span>
+            <span class="event-title">Good Friday</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Commemoration of Jesus's crucifixion; many businesses closed or reduced hours.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Reflection and contemplation; quiet before Easter celebration</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 5</span>
+            <span class="event-title">Easter Sunday</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">The resurrection of Jesus Christ; major spring celebration with egg hunts, family dinners, pastel colors.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Family gatherings; celebration meals; spring symbolism; brunch culture; chocolate and eggs</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Apr 6</span>
+            <span class="event-title">Easter Monday</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Post-Easter recovery day (not a federal holiday).</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>"The day after" recovery culture; leftover feast content</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 22</span>
+            <span class="event-title">Earth Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Annual environmental awareness day; focus on sustainability.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Sustainable brewing practices; local sourcing; environmental responsibility; craft beer's smaller carbon footprint</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Apr 24</span>
+            <span class="event-title">Arbor Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Last Friday in April. Tree planting and environmental appreciation.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Growth and cultivation; organic ingredients; sustainability; nature as creative inspiration</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="cta">
+    <h2>Build campaigns around cultural moments that matter.</h2>
+</div>
+
+</main>
+
+</div>
+
+<footer>
+    <p>Agency Brewing Brand Voice Guide | Confidential | 2026</p>
+</footer>
+
+<script>
+function switchTab(tabId) {
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+
+    // Remove active class from all buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // Show selected tab content
+    document.getElementById(tabId).classList.add('active');
+
+    // Add active class to clicked button
+    event.target.classList.add('active');
+
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
