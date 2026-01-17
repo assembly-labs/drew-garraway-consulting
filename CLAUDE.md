@@ -107,8 +107,7 @@ drew-garraway-consulting/
 │
 └── Configuration
     ├── .eslintrc.base.json      # Shared ESLint config
-    ├── .prettierrc.base.json    # Shared Prettier config
-    └── .github/                 # GitHub Actions
+    └── .prettierrc.base.json    # Shared Prettier config
 ```
 
 ---
@@ -135,54 +134,26 @@ drew-garraway-consulting/
 
 ## Deployment Architecture
 
-All automated deployments use **Cloudflare Pages** via GitHub Actions.
+All projects use **Cloudflare Pages** with automatic deployments via GitHub integration.
 
-### GitHub Actions Workflows
+### How It Works
 
-| Workflow | File | Triggers On | Deploys To |
-|----------|------|-------------|------------|
-| Root Site | `deploy-root-site.yml` | `*.html`, `robots.txt` | Cloudflare Pages → drewgarraway.com |
-| TOMO | `deploy-tomo.yml` | `TOMO/prototype/**` | Cloudflare Pages → bjjj.pages.dev |
-| Scout | `deploy-scout.yml` | `scout/**` | Cloudflare Pages → searchwithscout.com |
-| F This App | `deploy-f-this-app.yml` | `f_this_app/**` | Cloudflare Pages |
-| FHM | `deploy-fhm.yml` | `fhm/**` | Cloudflare Pages |
-| Mikey Real | `deploy-mikey-real.yml` | `Mikey-real/**` | Cloudflare Pages |
-| Read Out Loud | `deploy-read-out-loud.yml` | `read-out-loud/**` | Cloudflare Pages |
-| Career Chat | `deploy-career-chat.yml` | `career-chat/**` | Cloudflare Pages |
+Cloudflare Pages is connected directly to the GitHub repository. When you push to `main`, Cloudflare automatically:
+1. Detects changes
+2. Builds the project (if configured)
+3. Deploys to the live site
 
-### Adding a New Project Workflow
-
-Copy the template and customize:
-```bash
-cp .github/workflows/_template-deploy.yml.example .github/workflows/deploy-{project}.yml
-```
-
-Then update placeholders: `{PROJECT_NAME}`, `{project-folder}`, `{cloudflare-project-name}`, `{output-dir}`.
-
-### Required GitHub Secrets
-
-These secrets must be configured in **GitHub → Settings → Secrets and variables → Actions**:
-
-| Secret | Description | Used By |
-|--------|-------------|---------|
-| `CLOUDFLARE_API_TOKEN` | Cloudflare API token with Pages permission | All workflows |
-| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account ID | All workflows |
-
-### How to Get Cloudflare Credentials
-
-1. Go to **Cloudflare Dashboard → My Profile → API Tokens**
-2. Create token with **Cloudflare Pages: Edit** permission
-3. Account ID is in **Cloudflare → Overview → right sidebar**
+No GitHub Actions workflows are needed - Cloudflare handles everything.
 
 ### Deployment Flow
 
 ```
-Push to main → GitHub Actions → Build (if needed) → Cloudflare Pages → Live
+Push to main → Cloudflare Pages detects changes → Build → Live
 ```
 
+- Deploys complete in ~1-2 minutes
 - No cache purging needed - Cloudflare handles automatically
-- Deploys complete in ~30 seconds for static sites
-- Each project has path filters so only relevant changes trigger deploys
+- Check deployment status in the Cloudflare Pages dashboard
 
 ### Manual Deployment
 
