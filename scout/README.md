@@ -100,14 +100,14 @@ scout/
 
 ## 🚢 Deployment
 
-This project is deployed on **Netlify** with serverless functions for secure API key management.
+This project is deployed on **Cloudflare Pages** with Workers functions for secure API key management.
 
 ### Quick Deploy:
 ```bash
 npm run build
 npm run deploy  # or git push origin main for auto-deploy
 ```
-Netlify automatically builds and deploys when you push to GitHub.
+Cloudflare Pages automatically builds and deploys when you push to GitHub via GitHub Actions.
 
 ### Detailed Instructions:
 See [DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) for complete setup and deployment guide.
@@ -138,10 +138,10 @@ See [DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) for complete setup and deplo
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `claude_api_key` | Claude API key (for local dev only, managed by Netlify function in production) | Yes |
+| `CLAUDE_API_KEY` | Claude API key (for local dev only, managed by Cloudflare Workers in production) | Yes |
 | `VITE_ENV` | Environment (development/production) | No |
 
-⚠️ **Security Note:** API key is stored securely in Netlify environment variables for production. For local development, use `.env` file (never commit to version control). See [docs/DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) for full deployment guide.
+⚠️ **Security Note:** API key is stored securely in Cloudflare environment variables for production. For local development, use `.env` file (never commit to version control). See [docs/DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) for full deployment guide.
 
 ## 📝 Development
 

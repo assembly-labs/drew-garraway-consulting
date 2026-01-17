@@ -104,7 +104,7 @@
     {
       "label": "Clean All Build Artifacts",
       "type": "shell",
-      "command": "find . -type d \\( -name 'dist' -o -name 'build' -o -name '.netlify' \\) -not -path './node_modules/*' -not -path './_archived/*' -prune -exec rm -rf {} +",
+      "command": "find . -type d \\( -name 'dist' -o -name 'build' -o -name '.wrangler' \\) -not -path './node_modules/*' -not -path './_archived/*' -prune -exec rm -rf {} +",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always"

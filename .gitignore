@@ -43,8 +43,8 @@ out/
 .env*.local
 *.env
 
-# Netlify
-.netlify/
+# Cloudflare
+.wrangler/
 
 # IDE / Editor
 .vscode/settings.json
