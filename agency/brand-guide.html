@@ -805,12 +805,132 @@
                 display: block !important;
             }
         }
+
+        /* Copy Library Styles */
+        .copy-event {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+        }
+
+        .copy-event-header {
+            background: linear-gradient(90deg, var(--color-amber-dark) 0%, var(--color-dark-gray) 100%);
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-event-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--color-white);
+        }
+
+        .copy-event-date {
+            font-size: 0.875rem;
+            color: var(--color-amber-light);
+        }
+
+        .copy-platform {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--color-dark-gray);
+        }
+
+        .copy-platform:last-child {
+            border-bottom: none;
+        }
+
+        .copy-platform-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .copy-platform-name {
+            font-weight: 600;
+            color: var(--color-amber);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+        }
+
+        .copy-platform-count {
+            font-size: 0.6875rem;
+            color: var(--color-light-gray);
+            background: var(--color-dark-gray);
+            padding: 0.25rem 0.5rem;
+            border-radius: 2px;
+        }
+
+        .copy-version {
+            background: var(--color-black);
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 2px solid var(--color-dark-gray);
+            transition: border-color 0.2s;
+        }
+
+        .copy-version:hover {
+            border-left-color: var(--color-amber);
+        }
+
+        .copy-version:last-child {
+            margin-bottom: 0;
+        }
+
+        .copy-version-label {
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-light-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .copy-text {
+            color: var(--color-off-white);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .copy-note {
+            font-size: 0.75rem;
+            color: var(--color-gray);
+            margin-top: 0.5rem;
+            font-style: normal;
+        }
+
+        .month-divider {
+            text-align: center;
+            padding: 2rem 0;
+            margin: 2rem 0;
+            border-top: 1px solid var(--color-dark-gray);
+            border-bottom: 1px solid var(--color-dark-gray);
+        }
+
+        .month-divider h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--color-amber);
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .month-divider p {
+            color: var(--color-light-gray);
+            font-size: 0.875rem;
+            margin: 0.5rem 0 0;
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">Agency <span>Brewing</span></div>
+    <div class="logo">AGENCY <span>BREWING</span></div>
     <p class="tagline">Where Advertising Creativity Meets Brewing Craft</p>
     <h1 class="doc-title">Brand Voice & Strategy Guide</h1>
     <p class="doc-subtitle">Companion Document for Social Content Creation</p>
@@ -820,6 +940,7 @@
     <button class="tab-btn active" onclick="switchTab('voice')">Brand Guide</button>
     <button class="tab-btn" onclick="switchTab('calendar')">Cultural Calendar</button>
     <button class="tab-btn" onclick="switchTab('holidays')">National Holidays</button>
+    <button class="tab-btn" onclick="switchTab('copy')">Content Copy</button>
 </div>
 
 <!-- BRAND GUIDE TAB -->
@@ -997,6 +1118,29 @@
         <li><strong>Observational > jokey</strong></li>
         <li>If it needs explaining, it doesn't ship</li>
     </ul>
+
+    <h3>Copy Length Flexibility</h3>
+    <p style="color: var(--color-light-gray); margin-bottom: 1rem; font-size: 0.9rem;">The brand voice works in two modes. Default to short form; use longer form when the moment calls for it.</p>
+    <div class="do-dont">
+        <div class="do">
+            <h5>Short Form (Default)</h5>
+            <ul>
+                <li>1-3 words to one short sentence</li>
+                <li>Minimal punctuation</li>
+                <li>Let the image carry the weight</li>
+                <li>"Desert bound." / "No agenda." / "Earned it."</li>
+            </ul>
+        </div>
+        <div class="do">
+            <h5>Longer Form (When Needed)</h5>
+            <ul>
+                <li>2-3 proper sentences</li>
+                <li>Same voice principles apply</li>
+                <li>Best for milestones, cultural moments, or when context adds value</li>
+                <li>"LA Beer Fest turns 20 this weekend. Two decades of showing up. That's a milestone."</li>
+            </ul>
+        </div>
+    </div>
 </section>
 
 <!-- PLATFORMS -->
@@ -1291,6 +1435,31 @@
         <span>"Another meeting that could've been avoided."</span>
         <span>"Deadline met. Thirst remains."</span>
     </div>
+
+    <h3>Out-of-Office Voice</h3>
+    <p style="color: var(--color-light-gray); margin-bottom: 1rem; font-size: 0.9rem;">Agency Brewing has permission to be cheeky about work culture. Dry observations about logging off, leaving early, inbox avoidance, and deserved breaks. This isn't complaining about work—it's celebrating the moments away from it. Think: the relief of closing the laptop, not the dread of Monday.</p>
+    <div class="word-list approved">
+        <span>"Laptop closed."</span>
+        <span>"Inbox can wait."</span>
+        <span>"Left early. No regrets."</span>
+        <span>"Auto-reply: ON."</span>
+        <span>"Signed off."</span>
+        <span>"The brief can wait."</span>
+    </div>
+
+    <h3>Agency Insider Voice</h3>
+    <p style="color: var(--color-light-gray); margin-bottom: 1rem; font-size: 0.9rem;">Agency Brewing has permission to reference the creative industry grind—the inside baseball of agency life. Late nights, revision rounds, client calls, deadline pushes. The key: this is a knowing nod to shared experience, not venting or complaining. Dry acknowledgment of the work that makes the escape meaningful.</p>
+    <div class="word-list approved">
+        <span>"Survived Q1."</span>
+        <span>"One more round of revisions."</span>
+        <span>"Zero client calls."</span>
+        <span>"No 'quick questions.'"</span>
+        <span>"After the late nights..."</span>
+        <span>"We've sat through the brainstorms."</span>
+        <span>"Twenty years of early setups and late nights."</span>
+        <span>"Nothing due until Monday."</span>
+    </div>
+    <p style="color: var(--color-light-gray); margin-top: 1rem; font-size: 0.85rem;"><strong>Use sparingly:</strong> ~10% of content. Best paired with festival escapes, long weekends, and earned moments. The grind is acknowledged, not celebrated.</p>
 
     <h3>Engagement Responses</h3>
     <div class="word-list approved">
@@ -1642,238 +1811,9 @@
     </div>
 </section>
 
-<!-- FEBRUARY -->
-<section class="month-section">
-    <h2 class="month-header">February 2026</h2>
-
-    <div class="event-card event-highlight">
-        <div class="event-header">
-            <span class="event-date">Feb 1</span>
-            <span class="event-title">68th Grammy Awards</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Crypto.com Arena. Trevor Noah's final year hosting. Grammy Week events include the Clio Music Awards at Saban Theatre in Beverly Hills on January 29.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Clio Music Awards literally blend advertising and music creativity - direct Agency Brewing territory</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Feb 6</span>
-            <span class="event-title">Dine LA Ends / Clio Entries Due</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Dine LA Restaurant Week wraps as 400+ LA restaurants serve prix-fixe menus. Same day: Clio Awards physical components deadline.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Client entertainment culture meets creative award hustle - the dual life of agency professionals</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Feb 7</span>
-            <span class="event-title">DGA Awards</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">The Directors Guild Awards serve as a crucial Oscar bellwether.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Directorial craft parallels the creative director role in advertising</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card event-highlight">
-        <div class="event-header">
-            <span class="event-date">Feb 12-22</span>
-            <span class="event-title">Palm Springs Modernism Week</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">11-day design pilgrimage featuring 450+ experiences including Frank Sinatra estate tours, Kaufmann Desert House access, and architectural bus tours.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Midcentury aesthetic directly invokes Mad Men-era advertising's golden age</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Feb 13-15</span>
-            <span class="event-title">NBA All-Star Weekend</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Intuit Dome, Inglewood. NBA's 75th All-Star edition returns to LA with new Team USA vs. Team World format. Major brand activations dominate.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Experiential marketing showcase; brand activation heaven</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Feb 15</span>
-            <span class="event-title">Spirit Awards</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Hollywood Palladium. 41st Film Independent Spirit Awards celebrate independent cinema with budgets under $30M.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Celebrates scrappy, independent creative spirit - same ethos as craft brewing</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card event-highlight">
-        <div class="event-header">
-            <span class="event-date">Feb 17</span>
-            <span class="event-title">ThinkLA AI Brunch</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Skirball Cultural Center. LA's advertising community gathers for fireside chat on AI's role in marketing and creativity.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Direct industry networking opportunity; Agency Brewing's core audience in one room</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Feb 21</span>
-            <span class="event-title">Golden Dragon Parade</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Chinatown. 127th Golden Dragon Parade - oldest Lunar New Year celebration in America - draws 100,000+ spectators. Year of the Snake.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>LA cultural heritage meets creative spectacle; Chinatown near creative eastside breweries</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card event-highlight">
-        <div class="event-header">
-            <span class="event-date">Feb 26</span>
-            <span class="event-title">Frieze Los Angeles Opens</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Santa Monica Airport. Frieze LA (through March 1) brings 95+ international galleries. Frieze Week extends events citywide starting February 23. Same evening: ThinkLA Connections & Cocktails at Kargo offices.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Art world meets advertising; galleries and agencies share creative DNA</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Feb 27-28</span>
-            <span class="event-title">ACE Eddie / PGA / ADG Awards</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">American Cinema Editors (Feb 27), then Producers Guild and Art Directors Guild (Feb 28). ADG honors production design.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>ADG celebrates visual craft central to advertising; production designers are film's art directors</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Feb 28 - Mar 1</span>
-            <span class="event-title">Skyline Festival</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Grand Park, DTLA. EDM festival celebrating LA's creative underground with immersive digital installations and bold murals.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Where music, visual art, and technology collide - creative culture after dark</p>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- MARCH -->
 <section class="month-section">
     <h2 class="month-header">March 2026</h2>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Mar 1</span>
-            <span class="event-title">The Actor Awards (SAG-AFTRA)</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Newly rebranded from SAG Awards, honoring outstanding performances as voted by actors themselves.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Actors bring scripts to life like voice talent brings spots to life; authenticity in performance</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Mar 6</span>
-            <span class="event-title">Disney California Adventure Food & Wine Festival</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Running through April 27, celebrating California's culinary and craft beverage culture with tastings and demonstrations.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Craft beer mainstream moment; family-friendly craft culture exposure</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card event-highlight">
-        <div class="event-header">
-            <span class="event-date">Mar 8</span>
-            <span class="event-title">LA Marathon / WGA + ASC Awards</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">40th LA Marathon runs Dodger Stadium to Century City. Same day: Writers Guild and American Society of Cinematographers Awards.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>WGA celebrates cinema's copywriters; visual craft from ASC cinematographers</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Mar 11</span>
-            <span class="event-title">Noma LA Pop-Up Opens</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Rene Redzepi's three-Michelin-Star Copenhagen restaurant relocates to LA for 5-6 month residency (through June 26).</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Craft obsession at the highest level; parallels between world-class brewing and world-class cuisine</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card event-highlight">
-        <div class="event-header">
-            <span class="event-date">Mar 15</span>
-            <span class="event-title">98th Academy Awards</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Dolby Theatre. Conan O'Brien hosts. First-ever Best Casting Oscar - historic moment for the craft.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Ultimate convergence of advertising, entertainment, and creative excellence; Oscar campaigns mirror product launches</p>
-            </div>
-        </div>
-    </div>
 
     <div class="event-card">
         <div class="event-header">
@@ -1888,39 +1828,11 @@
             </div>
         </div>
     </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Mar 27-29</span>
-            <span class="event-title">WonderCon</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Anaheim Convention Center. Second-largest pop culture convention in LA area features 900+ exhibitors, celebrity guests, exclusive screenings, and Artists Alley.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Pop culture marketing showcase; where entertainment marketing meets passionate audiences</p>
-            </div>
-        </div>
-    </div>
 </section>
 
 <!-- APRIL -->
 <section class="month-section">
     <h2 class="month-header">April 2026</h2>
-
-    <div class="event-card event-highlight">
-        <div class="event-header">
-            <span class="event-date">Apr 1-3</span>
-            <span class="event-title">DigiMarCon West</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Loews Hollywood Hotel. 7th annual Digital Marketing, Media, and Advertising Conference featuring AI, marketing automation, content marketing, social media, programmatic advertising.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Direct industry conference for Agency Brewing's core audience; networking opportunity</p>
-            </div>
-        </div>
-    </div>
 
     <div class="event-card event-highlight">
         <div class="event-header">
@@ -1936,20 +1848,6 @@
         </div>
     </div>
 
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Apr 6-12</span>
-            <span class="event-title">Knott's Boysenberry Festival</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Buena Park. Annual celebration featuring boysenberry-infused foods and craft beverages.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Fruit beer innovation angle; regional SoCal culture</p>
-            </div>
-        </div>
-    </div>
-
     <div class="event-card event-highlight">
         <div class="event-header">
             <span class="event-date">Apr 7</span>
@@ -1960,20 +1858,6 @@
             <div class="event-connection">
                 <p class="connection-label">Brand Connection</p>
                 <p>Prohibition history meets advertising history - 1930s were transformative for both industries</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Early Apr (TBD)</span>
-            <span class="event-title">Sabroso Craft Beer, Taco & Music Festival</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Doheny State Beach, Dana Point. 150+ craft beers, gourmet tacos, Lucha Libre wrestling, live music headlined by The Offspring. Powered by Gringo Bandito hot sauce.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Counter-cultural creative energy; music, food, and beer as creative fuel; LA's punk heritage</p>
             </div>
         </div>
     </div>
@@ -1994,62 +1878,6 @@
 
     <div class="event-card">
         <div class="event-header">
-            <span class="event-date">Apr 18-19</span>
-            <span class="event-title">LA Times Festival of Books</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">USC Campus. 31st annual Festival of Books - largest literary event in America - draws 150,000+ attendees with 300+ exhibitors and famous authors.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Storytelling and content creation; writers and copywriters share DNA; brand narrative craft</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Apr 19-22</span>
-            <span class="event-title">Adobe Summit</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Las Vegas + online. Adobe's flagship conference exploring creativity and AI in business with keynotes, hands-on labs, and innovation showcases.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Creative technology at the intersection of tools and craft; AI in creative work</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card event-highlight">
-        <div class="event-header">
-            <span class="event-date">Apr 21</span>
-            <span class="event-title">World Creativity and Innovation Day</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">UN-designated international day celebrating creativity. World Creativity Week runs April 15-21.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p><strong>The holiday built for Agency Brewing.</strong> Creativity is the brewery's core brand pillar</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card event-highlight">
-        <div class="event-header">
-            <span class="event-date">Apr 23</span>
-            <span class="event-title">AAF Advertising Hall of Fame Induction Gala</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">NYC. 75th Anniversary celebration inducts six industry legends plus American Express as corporate honoree.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Advertising heritage celebration; industry history; Madison Avenue legacy</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
             <span class="event-date">Apr 24-26</span>
             <span class="event-title">Stagecoach</span>
         </div>
@@ -2058,62 +1886,6 @@
             <div class="event-connection">
                 <p class="connection-label">Brand Connection</p>
                 <p>Americana aesthetic; different creative audience than Coachella</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Apr 26</span>
-            <span class="event-title">Fiesta Broadway</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">DTLA. One of America's largest Cinco de Mayo celebrations featuring Latin American culture, Fiesta Taco Fest, Lucha Libre, and two music stages.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>LA's multicultural creative energy; Latin American creative influence on advertising</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card event-highlight">
-        <div class="event-header">
-            <span class="event-date">Apr 28-30</span>
-            <span class="event-title">Social Media Marketing World</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Anaheim Convention Center. 13th annual flagship conference from Social Media Examiner. Features AI Business World (April 29-30) with 20 hands-on AI sessions.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Direct industry conference; social media strategy for craft beverage brands</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Apr 30</span>
-            <span class="event-title">TCM Classic Film Festival Begins</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Hollywood. 17th annual festival runs through May 3 at TCL Chinese Theatre, Egyptian Theatre, and Hollywood Roosevelt Hotel. Theme: "The World Comes to Hollywood."</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Classic Hollywood and golden age advertising share heritage; timeless creative excellence</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Apr 2026</span>
-            <span class="event-title">LACMA David Geffen Galleries Open</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Peter Zumthor's Pritzker Prize-winning design opens with 347,500 sq ft amoeba-shaped structure spanning Wilshire Boulevard.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Architecture and design excellence; LA cultural landmark; creative pilgrimage destination</p>
             </div>
         </div>
     </div>
@@ -2155,20 +1927,6 @@
 <!-- FEBRUARY HOLIDAYS -->
 <section class="month-section">
     <h2 class="month-header">February 2026</h2>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Feb 2</span>
-            <span class="event-title">Groundhog Day</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Punxsutawney Phil predicts six more weeks of winter or early spring.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Weather folklore meets cultural tradition; beer for every season content</p>
-            </div>
-        </div>
-    </div>
 
     <div class="event-card event-highlight">
         <div class="event-header">
@@ -2225,20 +1983,6 @@
             </div>
         </div>
     </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Feb 18</span>
-            <span class="event-title">Ash Wednesday</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Beginning of Lent (40 days of fasting and prayer ending April 2).</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Discipline and craft; constraints breed creativity; the reset button</p>
-            </div>
-        </div>
-    </div>
 </section>
 
 <!-- MARCH HOLIDAYS -->
@@ -2272,34 +2016,6 @@
             </div>
         </div>
     </div>
-
-    <div class="event-card event-highlight">
-        <div class="event-header">
-            <span class="event-date">Mar 20</span>
-            <span class="event-title">First Day of Spring / Spring Equinox</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Friday. Astronomical spring begins; equal day and night.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Seasonal beer releases; spring awakening; renewal and fresh starts; lighter beer styles</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Mar 29</span>
-            <span class="event-title">Palm Sunday</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">The Sunday before Easter; beginning of Holy Week.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Reflection before celebration; one-week countdown to Easter</p>
-            </div>
-        </div>
-    </div>
 </section>
 
 <!-- APRIL HOLIDAYS -->
@@ -2319,94 +2035,1268 @@
             </div>
         </div>
     </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Apr 2</span>
-            <span class="event-title">Passover Begins</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Sundown. Eight-day Jewish holiday commemorating exodus from Egypt.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Heritage and tradition; family gatherings; storytelling over shared meals</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Apr 3</span>
-            <span class="event-title">Good Friday</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Commemoration of Jesus's crucifixion; many businesses closed or reduced hours.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Reflection and contemplation; quiet before Easter celebration</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card event-highlight">
-        <div class="event-header">
-            <span class="event-date">Apr 5</span>
-            <span class="event-title">Easter Sunday</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">The resurrection of Jesus Christ; major spring celebration with egg hunts, family dinners, pastel colors.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Family gatherings; celebration meals; spring symbolism; brunch culture; chocolate and eggs</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Apr 6</span>
-            <span class="event-title">Easter Monday</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Post-Easter recovery day (not a federal holiday).</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>"The day after" recovery culture; leftover feast content</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card event-highlight">
-        <div class="event-header">
-            <span class="event-date">Apr 22</span>
-            <span class="event-title">Earth Day</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Annual environmental awareness day; focus on sustainability.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Sustainable brewing practices; local sourcing; environmental responsibility; craft beer's smaller carbon footprint</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-header">
-            <span class="event-date">Apr 24</span>
-            <span class="event-title">Arbor Day</span>
-        </div>
-        <div class="event-body">
-            <p class="event-description">Last Friday in April. Tree planting and environmental appreciation.</p>
-            <div class="event-connection">
-                <p class="connection-label">Brand Connection</p>
-                <p>Growth and cultivation; organic ingredients; sustainability; nature as creative inspiration</p>
-            </div>
-        </div>
-    </div>
 </section>
 
 <div class="cta">
     <h2>Build campaigns around cultural moments that matter.</h2>
+</div>
+
+</main>
+
+</div>
+
+<!-- CONTENT COPY TAB -->
+<div id="copy" class="tab-content">
+
+<main>
+
+<section>
+    <span class="section-number">01</span>
+    <h2>Content Copy Library</h2>
+
+    <div class="calendar-intro">
+        <p><strong>Ready-to-use social copy for each calendar moment.</strong> All copy follows Agency Brewing's voice guidelines: short, confident, clever without trying too hard. Select the version that best fits your visual and moment. Jonathan has final approval on all content.</p>
+    </div>
+</section>
+
+<!-- FEBRUARY COPY -->
+<div class="month-divider">
+    <h2>February 2026</h2>
+    <p>4 Events | 28 Copy Versions</p>
+</div>
+
+<!-- Super Bowl LX -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Super Bowl LX</span>
+        <span class="copy-event-date">Feb 8</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Industry Cheeky</p>
+            <p class="copy-text">Working on Sunday.</p>
+            <p class="copy-note">Pairs with: TV setup, couch view. Double meaning: watching ads = "work" for ad people.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Social Club</p>
+            <p class="copy-text">Full house. Full glasses.</p>
+            <p class="copy-note">Pairs with: group gathering shot, casual atmosphere</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Industry Respect</p>
+            <p class="copy-text">The biggest stage for craft.</p>
+            <p class="copy-note">Pairs with: TV glow in background, game day atmosphere. Nods to advertising as craft.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Industry Cheeky</p>
+            <p class="copy-text">Busy at work.</p>
+            <p class="copy-note">Same double meaning: watching the ads IS the work. Dry, insider humor.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Industry Nod</p>
+            <p class="copy-text">The one night people actually watch the ads. Respect.</p>
+            <p class="copy-note">Dry observation, doesn't over-explain</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Gathering</p>
+            <p class="copy-text">Full house. Full glasses. That's the idea.</p>
+            <p class="copy-note">Warm, community-focused</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Simple</p>
+            <p class="copy-text">Game on.</p>
+            <p class="copy-note">Minimal, works with any visual</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">The one day everyone watches the commercials on purpose. Some of us call that research. Most of us call it Sunday.</p>
+            <p class="copy-note">Industry insider angle that works for everyone</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Super Bowl Sunday. The only time of year when advertising gets the attention it deserves. And the beer flows accordingly.</p>
+            <p class="copy-note">Celebrates both advertising and beer culture</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">Watching the game. Watching the ads. Watching the halftime show. Either way, you need something good in your hand.</p>
+            <p class="copy-note">Inclusive of all Super Bowl viewing styles</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">The spots this year cost $7 million for 30 seconds. We'll be watching from the couch with something that cost considerably less. Cheers to the creatives.</p>
+            <p class="copy-note">Industry-aware, celebrates ad spend while being grounded</p>
+        </div>
+    </div>
+</div>
+
+<!-- Valentine's Day -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Valentine's Day</span>
+        <span class="copy-event-date">Feb 14</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Agency Cheeky</p>
+            <p class="copy-text">Date night. No agenda.</p>
+            <p class="copy-note">Pairs with: intimate table setting. Work/life crossover - meetings have agendas, dates don't.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Anti-Cliche</p>
+            <p class="copy-text">Better than roses.</p>
+            <p class="copy-note">Pairs with: close-up pour shot, two glasses</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Agency Cheeky</p>
+            <p class="copy-text">Off hours collaboration.</p>
+            <p class="copy-note">Pairs with: couple moment, warm lighting. Agency-speak meets romance.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Double Meaning</p>
+            <p class="copy-text">Good partners are hard to find.</p>
+            <p class="copy-note">Works for business or personal interpretation. Intentionally ambiguous.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Agency Cheeky</p>
+            <p class="copy-text">Cheers to off hours collaboration.</p>
+            <p class="copy-note">Agency-speak meets romance. Celebrates the blur between work relationships and real ones.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Agency Cheeky</p>
+            <p class="copy-text">The best meetings don't have agendas.</p>
+            <p class="copy-note">Work/life crossover. Warm but clever.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Simple</p>
+            <p class="copy-text">Saturday plans: handled.</p>
+            <p class="copy-note">Casual, confident</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">Valentine's Day falls on a Saturday this year. Which means the reservation can run late, the conversation can linger, and nobody has to check their phone. That's the kind of night worth planning.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Roses are fine. Chocolate is expected. But sitting across from someone with something actually good in your glass? That's the move.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">The best partnerships don't come with decks or deliverables. They come with good conversation, shared interests, and maybe a second round.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">Saturday night. No agenda. No talking points. Just two people who actually want to be there. That's what we're here for.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Presidents' Day -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Presidents' Day</span>
+        <span class="copy-event-date">Feb 16</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - OOO Energy</p>
+            <p class="copy-text">Office closed. Conversation open.</p>
+            <p class="copy-note">Pairs with: relaxed daytime setting, natural light</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - OOO Cheeky</p>
+            <p class="copy-text">Auto-reply: ON.</p>
+            <p class="copy-note">Pairs with: any casual moment</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Dry</p>
+            <p class="copy-text">Three days. No notes.</p>
+            <p class="copy-note">Pairs with: relaxed visual, unhurried vibe</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Brief</p>
+            <p class="copy-text">Long weekend. Take it.</p>
+            <p class="copy-note">Permission without preaching</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - OOO Cheeky</p>
+            <p class="copy-text">Laptop closed until Tuesday.</p>
+            <p class="copy-note">Dry, relatable, specific</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Social</p>
+            <p class="copy-text">Three days off. No agenda required.</p>
+            <p class="copy-note">Warm, community-focused</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Minimal</p>
+            <p class="copy-text">Long weekend energy.</p>
+            <p class="copy-note">Simple, works with any visual</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">Three-day weekends hit different when you actually take the third day. No laptop. No Slack. Just good beer and better company.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Presidents' Day weekend. The inbox will be there Tuesday. Right now, there's nowhere else to be but here.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">Monday off. Auto-reply set. Phone on silent. This is what a long weekend is supposed to feel like.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">Some holidays are about celebrating something specific. This one's about having an extra day to do absolutely nothing work-related. We're in.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Mardi Gras -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Mardi Gras / Fat Tuesday</span>
+        <span class="copy-event-date">Feb 17</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Observational</p>
+            <p class="copy-text">Tuesday, but make it count.</p>
+            <p class="copy-note">Pairs with: rich lighting, warm tones</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Minimal</p>
+            <p class="copy-text">Fat Tuesday.</p>
+            <p class="copy-note">Pairs with: bold product shot, festive setting</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Celebration</p>
+            <p class="copy-text">One night to overdo it.</p>
+            <p class="copy-note">Pairs with: celebration moment, group energy. Permission to indulge.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Dry</p>
+            <p class="copy-text">One day to overdo it. Then back to work.</p>
+            <p class="copy-note">Acknowledges the rhythm without over-explaining</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Tradition</p>
+            <p class="copy-text">Some traditions are worth keeping.</p>
+            <p class="copy-note">Respects the cultural moment</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Social</p>
+            <p class="copy-text">Fat Tuesday. Act accordingly.</p>
+            <p class="copy-note">Permission to indulge, warm tone</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Celebration</p>
+            <p class="copy-text">Tuesday calls for something extra.</p>
+            <p class="copy-note">Celebratory, indulgent tone</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">Fat Tuesday. The one day of the year when excess isn't just allowed, it's expected. Tomorrow's a different story, but tonight? Tonight we indulge.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Mardi Gras is about doing it right before you have to do it responsibly. Good food, good drinks, and the kind of night that earns the name Fat Tuesday.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's something about a midweek celebration that hits different. Maybe it's the permission to break routine. Maybe it's the beer. Probably both.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">One night a year, excess is the point. Mardi Gras isn't about moderation—it's about earning tomorrow's restraint with tonight's indulgence.</p>
+        </div>
+    </div>
+</div>
+
+<!-- MARCH COPY -->
+<div class="month-divider">
+    <h2>March 2026</h2>
+    <p>3 Events | 21 Copy Versions</p>
+</div>
+
+<!-- Daylight Saving Time -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Daylight Saving Time Begins</span>
+        <span class="copy-event-date">Mar 8</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Observational</p>
+            <p class="copy-text">Lost an hour. Found this.</p>
+            <p class="copy-note">Pairs with: product in natural daylight, golden hour</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Minimal</p>
+            <p class="copy-text">Spring forward.</p>
+            <p class="copy-note">Pairs with: bright, optimistic visual</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Seasonal</p>
+            <p class="copy-text">Daylight's back. So are we.</p>
+            <p class="copy-note">Pairs with: bright natural light, spring energy</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Observational</p>
+            <p class="copy-text">Lost an hour. Gained some daylight. Fair trade.</p>
+            <p class="copy-note">Brief, relatable</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Optimistic</p>
+            <p class="copy-text">More light. More energy. Spring's here.</p>
+            <p class="copy-note">Forward momentum, seasonal shift</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Warm</p>
+            <p class="copy-text">Clocks moved. Longer evenings ahead.</p>
+            <p class="copy-note">Optimistic, community energy</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Simple</p>
+            <p class="copy-text">More daylight. More time outside.</p>
+            <p class="copy-note">Brief, confident</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">We lost an hour of sleep but gained an extra hour of daylight. That's the kind of trade we can get behind. Patio season is officially approaching.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Spring forward. The clocks just stole an hour from your weekend, but they gave it back as longer evenings. We'll call it even.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">One less hour of sleep. One more hour of golden light. Feels like a fair deal when you're sitting outside with something cold.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">The sun's staying out later, which means happy hour just got an extension. Adjust your clocks and your expectations accordingly.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version E - Momentum</p>
+            <p class="copy-text">Spring forward. The light shifts, the energy shifts, and suddenly everything feels like it's moving again. Good time to be making things.</p>
+        </div>
+    </div>
+</div>
+
+<!-- St. Patrick's Day -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">St. Patrick's Day</span>
+        <span class="copy-event-date">Mar 17</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Confident Stance</p>
+            <p class="copy-text">No green beer.</p>
+            <p class="copy-note">Pairs with: clean product shot, craft-forward</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Classic</p>
+            <p class="copy-text">Sláinte.</p>
+            <p class="copy-note">Pairs with: toast moment, warm lighting</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Beer Culture</p>
+            <p class="copy-text">The one day everyone orders beer.</p>
+            <p class="copy-note">Pairs with: crowded pub energy, celebration visual</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Dry</p>
+            <p class="copy-text">The one day everyone drinks beer. We'll take it.</p>
+            <p class="copy-note">Industry-aware, self-deprecating</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Minimal</p>
+            <p class="copy-text">Sláinte.</p>
+            <p class="copy-note">Simple toast, respectful</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Community</p>
+            <p class="copy-text">The tradition continues. Cheers.</p>
+            <p class="copy-note">Warm, values-forward</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Simple</p>
+            <p class="copy-text">March 17. You know what to do.</p>
+            <p class="copy-note">Brief acknowledgment</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">St. Patrick's Day. The one day of the year when everyone drinks beer, even the people who usually order wine. We'll take the company.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Quick take on green beer: no. But the sentiment is right. Today's for celebrating, for toasting strangers, for forgetting it's only Tuesday. Sláinte.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's something about St. Patrick's Day that reminds everyone why beer culture matters. The pubs fill up, strangers become friends, and for one night, everyone's in on it together.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">March 17. The tradition continues. The pubs fill up, the toasts get louder, and for one night, everyone remembers why we gather in the first place.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Central Coast Craft Beer Fest -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Central Coast Craft Beer Fest</span>
+        <span class="copy-event-date">Mar 21</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Location</p>
+            <p class="copy-text">Central Coast.</p>
+            <p class="copy-note">Pairs with: California landscape, golden light</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Seasonal</p>
+            <p class="copy-text">Fest season kicks off.</p>
+            <p class="copy-note">Pairs with: outdoor energy, crowd or setup shot</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - California Craft</p>
+            <p class="copy-text">California craft. Central Coast.</p>
+            <p class="copy-note">Pairs with: festival atmosphere, regional pride</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D - Community</p>
+            <p class="copy-text">The people who make it. The people who drink it.</p>
+            <p class="copy-note">Pairs with: crowd shot, maker community energy</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Industry</p>
+            <p class="copy-text">Central Coast Craft Beer Fest this weekend. Kicking off the season.</p>
+            <p class="copy-note">Brief acknowledgment of calendar</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - California Pride</p>
+            <p class="copy-text">Good time to be making beer in California.</p>
+            <p class="copy-note">Regional, confident</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Community</p>
+            <p class="copy-text">Central Coast this weekend. Full crowd up north.</p>
+            <p class="copy-note">Warm, acknowledges the moment</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Simple</p>
+            <p class="copy-text">Atascadero. Saturday.</p>
+            <p class="copy-note">Specific, minimal</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">Central Coast Craft Beer Fest kicks off this weekend. Sunken Gardens in Atascadero, surrounded by California craft and the people who make it happen.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Festival season starts up north. Food trucks, lawn games, and some of the best craft beer in the state. This is the good part of spring.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's a reason California craft beer has a reputation. Days like this remind you why. Central Coast, good weather, better beer.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">Atascadero this weekend for the Central Coast Craft Beer Fest. Good beer, good people, and the kind of energy that reminds you why craft matters.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version E - Craft Community</p>
+            <p class="copy-text">Central Coast Craft Beer Fest brings together the brewers, the makers, and the people who care about what goes into a glass. Sunken Gardens in Atascadero. This is California craft at its best.</p>
+        </div>
+    </div>
+</div>
+
+<!-- APRIL COPY -->
+<div class="month-divider">
+    <h2>April 2026</h2>
+    <p>5 Events | 35 Copy Versions</p>
+</div>
+
+<!-- April Fools' Day -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">April Fools' Day</span>
+        <span class="copy-event-date">Apr 1</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Anti-Stunt</p>
+            <p class="copy-text">No stunts.</p>
+            <p class="copy-note">Pairs with: straightforward product shot, clean composition</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Reassuring</p>
+            <p class="copy-text">The beer is real.</p>
+            <p class="copy-note">Pairs with: honest pour shot, natural light</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Steady</p>
+            <p class="copy-text">April 1. Still here.</p>
+            <p class="copy-note">Pairs with: any consistent brand visual</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Self-Aware</p>
+            <p class="copy-text">April Fools'. We'll sit this one out.</p>
+            <p class="copy-note">Acknowledges without participating</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Industry Dry</p>
+            <p class="copy-text">No fake product launches.</p>
+            <p class="copy-note">Nods to brand stunt culture</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Direct</p>
+            <p class="copy-text">No tricks. Just beer.</p>
+            <p class="copy-note">Warm, honest</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Steady</p>
+            <p class="copy-text">April 1. Business as usual.</p>
+            <p class="copy-note">Reliable, grounded</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">April Fools' Day. The day brands everywhere unveil their most creative fake products. We're sitting this one out. The beer is real, and that's the whole point.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">No fake launches. No prank announcements. No "we're actually making this" posts. Just beer, made the way it's supposed to be made. April 1 or otherwise.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's something to be said for a brand that knows when to stay in its lane. Today, everyone's a comedian. We'll be here when you need something real.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">April Fools' Day. We've seen the fake product decks. We've sat through the brainstorms. We're good. Sometimes the most creative thing you can do is nothing at all.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LA Beer Fest 20th Anniversary -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">LA Beer Fest 20th Anniversary</span>
+        <span class="copy-event-date">Apr 4</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Milestone</p>
+            <p class="copy-text">20 years of LA beer.</p>
+            <p class="copy-note">Pairs with: festival atmosphere or archival nod</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Event Callout</p>
+            <p class="copy-text">LA Beer Fest. Saturday.</p>
+            <p class="copy-note">Pairs with: event setup, crowd energy</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Respect</p>
+            <p class="copy-text">Two decades. Still pouring.</p>
+            <p class="copy-note">Pairs with: pour shot, timeless feel</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Industry Acknowledgment</p>
+            <p class="copy-text">LA Beer Fest turns 20 this weekend. That's a milestone.</p>
+            <p class="copy-note">Respectful of the scene</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Brief Respect</p>
+            <p class="copy-text">Two decades of craft beer in LA. Respect.</p>
+            <p class="copy-note">Nods to community, not self</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Agency Insider</p>
+            <p class="copy-text">Twenty years of early setups and late nights. LA Beer Fest gets it.</p>
+            <p class="copy-note">Speaks to anyone who's put in the hours to build something.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Community</p>
+            <p class="copy-text">LA Beer Fest this Saturday. 20 years strong.</p>
+            <p class="copy-note">Warm, celebratory without being loud</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Simple</p>
+            <p class="copy-text">Two decades of LA beer.</p>
+            <p class="copy-note">Lets the milestone speak</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">LA Beer Fest turns 20 this weekend. Two decades of breweries, food trucks, and people who actually care about what's in their glass. That's worth celebrating.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">80+ breweries. 200+ beers. 20 years running. LA Beer Fest is the kind of anniversary that deserves more than a post. We'll be there.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's something about a milestone that makes you appreciate the grind. LA Beer Fest has been doing this for two decades. The city's craft beer scene is better for it.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">Twenty years ago, someone decided LA needed a craft beer festival. They were right. LA Center Studios, this Saturday. Come through.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version E - Agency Insider</p>
+            <p class="copy-text">Twenty years of showing up, rain or shine, client crisis or not. LA Beer Fest knows what it takes to build something that lasts. We've been through enough all-nighters to respect the grind.</p>
+        </div>
+    </div>
+</div>
+
+<!-- National Beer Day -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">National Beer Day</span>
+        <span class="copy-event-date">Apr 7</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Ultra Minimal</p>
+            <p class="copy-text">April 7.</p>
+            <p class="copy-note">Pairs with: hero product shot. Trusts audience to know.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - History</p>
+            <p class="copy-text">1933. The day beer came back.</p>
+            <p class="copy-note">Pairs with: vintage-inspired or heritage visual</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Ownership</p>
+            <p class="copy-text">Our day.</p>
+            <p class="copy-note">Pairs with: any confident brand moment</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Craft Pride</p>
+            <p class="copy-text">National Beer Day. A reminder that craft matters.</p>
+            <p class="copy-note">Industry respect, values-forward</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Historical Nod</p>
+            <p class="copy-text">April 7, 1933. Beer came back. Still going.</p>
+            <p class="copy-note">Brief history without lecturing</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Warm</p>
+            <p class="copy-text">National Beer Day. Cheers to that.</p>
+            <p class="copy-note">Simple celebration</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Confident</p>
+            <p class="copy-text">April 7. Our kind of day.</p>
+            <p class="copy-note">Ownership without shouting</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">National Beer Day. The one that commemorates April 7, 1933, when Prohibition ended and Americans could legally buy beer again. Some days deserve to be remembered.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">April 7, 1933. The day Prohibition ended and Americans could legally buy beer again. Ninety-three years later, we're still grateful for the craft that followed.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's a reason craft beer exists. It started on this day in 1933, when the law changed and people could finally drink what they wanted again. We're still enjoying the benefits.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">National Beer Day is a reminder of what happens when people are free to make and drink what they believe in. Craft over convenience. Quality over shortcuts. Cheers to that.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Coachella -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Coachella</span>
+        <span class="copy-event-date">Apr 10-12 / 17-19</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Location Drop</p>
+            <p class="copy-text">Indio.</p>
+            <p class="copy-note">Pairs with: desert light, festival atmosphere. Works either weekend.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - OOO Cheeky</p>
+            <p class="copy-text">OOO until Monday. (Maybe Tuesday.)</p>
+            <p class="copy-note">Pairs with: crowd energy, golden hour</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Observational</p>
+            <p class="copy-text">Desert weekend.</p>
+            <p class="copy-note">Pairs with: wide shot, scale of the moment</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - OOO Cheeky</p>
+            <p class="copy-text">Coachella weekend. Some meetings got moved.</p>
+            <p class="copy-note">Dry acknowledgment of festival priorities</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Minimal</p>
+            <p class="copy-text">Coachella weekend.</p>
+            <p class="copy-note">Simple acknowledgment</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Energy</p>
+            <p class="copy-text">Coachella weekend. Right place, right time.</p>
+            <p class="copy-note">Warm, acknowledges the cultural moment</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Simple</p>
+            <p class="copy-text">Desert bound.</p>
+            <p class="copy-note">Minimal, movement energy</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">Coachella weekend. The one where everyone's out of office, schedules get cleared, and the desert becomes the center of the universe for a few days. We'll be there.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Some meetings got moved this week. Some emails won't get answered until Monday. That's the deal when Coachella comes around. No apologies.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's a reason Coachella is the thing it is. Music, art, people, and the kind of energy you can't manufacture in a deck. Out of office until further notice.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">Indio this weekend. Two stages, one beer, and the kind of experience you can't get anywhere else. See you in the desert.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Stagecoach -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Stagecoach</span>
+        <span class="copy-event-date">Apr 24-26</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Minimal</p>
+            <p class="copy-text">Stagecoach.</p>
+            <p class="copy-note">Pairs with: country festival atmosphere, golden light</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Continuity</p>
+            <p class="copy-text">Back to the desert.</p>
+            <p class="copy-note">Pairs with: landscape, connects to Coachella rhythm</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - OOO Cheeky</p>
+            <p class="copy-text">Still out here.</p>
+            <p class="copy-note">Pairs with: crowd shot, extended OOO energy</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D - Agency Insider</p>
+            <p class="copy-text">Survived Q1. Desert bound.</p>
+            <p class="copy-note">Pairs with: road trip energy. The payoff after the grind.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Continuity</p>
+            <p class="copy-text">Stagecoach weekend. April's been good to us.</p>
+            <p class="copy-note">Positions as part of larger moment</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Brief</p>
+            <p class="copy-text">Back to Indio.</p>
+            <p class="copy-note">Minimal, connects the calendar</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Warm</p>
+            <p class="copy-text">Stagecoach this weekend.</p>
+            <p class="copy-note">Simple acknowledgment</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - OOO Cheeky</p>
+            <p class="copy-text">One more weekend in the desert. Earned it.</p>
+            <p class="copy-note">Permission, work-life balance</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">Stagecoach weekend. Two weeks in Indio might seem like a lot, but when the lineup's this good and the weather's this perfect, you don't ask questions. See you out there.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Back to the desert for round two. Different sound, same energy. April's been good to us. Stagecoach this weekend.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">One more weekend in the desert before the calendar takes over again. Stagecoach wraps up what's been an excellent April. We earned this.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">Country music, cold beer, and a reason to stay out of the office one more weekend. Stagecoach closes out April the right way.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version E - Agency Insider</p>
+            <p class="copy-text">After the Q1 push, the late nights, the revision rounds, and the "one more pass" requests, this is the payoff. Stagecoach weekend. Country music, cold beer, and absolutely nothing due until Monday.</p>
+        </div>
+    </div>
+</div>
+
+<div class="cta">
+    <h2>Copy complete. Now make it real.</h2>
 </div>
 
 </main>
