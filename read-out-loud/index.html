@@ -10,7 +10,7 @@
     <title>READ OUT LOUD - Free Text-to-Speech</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
-    <link rel="stylesheet" href="css/styles.css?v=20260115b">
+    <link rel="stylesheet" href="css/styles.css?v=20260118">
 </head>
 <body>
     <div id="app" class="app-container">
@@ -188,36 +188,26 @@
                     <!-- TTS Engine Selection -->
                     <div class="settings-section">
                         <h3 class="settings-title">Voice Quality</h3>
-                        <p class="settings-description">Choose between standard browser voices or premium cloud voices</p>
+                        <p class="settings-description">Premium voices are selected by default. Offline voices are used automatically when needed.</p>
                         <div class="engine-toggle">
-                            <button id="engineBrowser" class="engine-btn active" data-engine="browser">
-                                <span class="engine-name">Standard</span>
-                                <span class="engine-detail">Offline, instant</span>
-                            </button>
-                            <button id="engineGoogle" class="engine-btn" data-engine="google">
+                            <button id="engineGoogle" class="engine-btn active" data-engine="google">
                                 <span class="engine-name">Premium</span>
-                                <span class="engine-detail">Neural voices</span>
+                                <span class="engine-detail">Best quality neural voices</span>
+                            </button>
+                            <button id="engineBrowser" class="engine-btn" data-engine="browser">
+                                <span class="engine-name">Offline</span>
+                                <span class="engine-detail">Works without internet</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Voice Quality Info -->
+                    <!-- Info about automatic fallback -->
                     <div class="settings-section">
-                        <h3 class="settings-title">Voice Tiers</h3>
-                        <div class="quality-info">
-                            <div class="quality-tier">
-                                <span class="voice-quality premium">Premium</span>
-                                <span>Neural2/Studio - Most natural</span>
-                            </div>
-                            <div class="quality-tier">
-                                <span class="voice-quality enhanced">Enhanced</span>
-                                <span>WaveNet - Great quality</span>
-                            </div>
-                            <div class="quality-tier">
-                                <span class="voice-quality standard">Standard</span>
-                                <span>Browser built-in voices</span>
-                            </div>
-                        </div>
+                        <h3 class="settings-title">How It Works</h3>
+                        <p class="settings-description">
+                            Premium voices use Google's neural technology for the most natural reading experience.
+                            If you're offline or premium voices are unavailable, the app automatically switches to your device's built-in voices.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -234,12 +224,12 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/storage.js?v=20260115b"></script>
-    <script src="js/speech.js?v=20260115b"></script>
-    <script src="js/premiumTTS.js?v=20260115b"></script>
-    <script src="js/googleTTS.js?v=20260115b"></script>
-    <script src="js/fileImport.js?v=20260115b"></script>
-    <script src="js/ui.js?v=20260115b"></script>
-    <script src="js/app.js?v=20260115b"></script>
+    <script src="js/storage.js?v=20260118"></script>
+    <script src="js/speech.js?v=20260118"></script>
+    <script src="js/premiumTTS.js?v=20260118"></script>
+    <script src="js/googleTTS.js?v=20260118"></script>
+    <script src="js/fileImport.js?v=20260118"></script>
+    <script src="js/ui.js?v=20260118"></script>
+    <script src="js/app.js?v=20260118"></script>
 </body>
 </html>

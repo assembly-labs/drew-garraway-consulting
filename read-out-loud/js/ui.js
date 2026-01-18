@@ -55,17 +55,56 @@ class UIController {
       };
 
       this.googleTTS.onError = (error) => {
+        // On Google TTS error, fall back to browser voices
+        this.fallbackToBrowserVoices('Playback error, using offline voices');
         this.handlePlaybackError({ error: error.message || 'Google TTS error' });
       };
 
-      // Load saved engine preference
-      const savedEngine = localStorage.getItem('tts_engine') || 'browser';
-      this.currentEngine = savedEngine;
-
-      // If Google was selected and is configured, use it
-      if (savedEngine === 'google' && this.googleTTS.isConfigured) {
+      // Auto-select premium (Google) engine if configured
+      if (this.googleTTS.isConfigured) {
         this.currentEngine = 'google';
+        localStorage.setItem('tts_engine', 'google');
+        // Load premium voices automatically
+        this.autoLoadPremiumVoices();
+      } else {
+        // Fall back to browser if Google not configured
+        this.currentEngine = 'browser';
       }
+    }
+  }
+
+  /**
+   * Automatically load premium voices on startup
+   */
+  async autoLoadPremiumVoices() {
+    try {
+      await this.googleTTS.fetchVoices();
+      const selectedVoice = this.googleTTS.selectedVoice;
+      if (selectedVoice) {
+        this.updateVoiceDisplay({ name: selectedVoice.displayName });
+      }
+    } catch (error) {
+      console.warn('Failed to load premium voices, falling back to browser:', error);
+      this.fallbackToBrowserVoices('Using offline voices');
+    }
+  }
+
+  /**
+   * Fall back to browser voices when premium fails
+   */
+  fallbackToBrowserVoices(message = null) {
+    this.currentEngine = 'browser';
+    localStorage.setItem('tts_engine', 'browser');
+    this.updateEngineUI();
+    this.renderVoiceList();
+
+    // Update voice display to browser voice
+    if (this.speechEngine.selectedVoice) {
+      this.updateVoiceDisplay(this.speechEngine.selectedVoice);
+    }
+
+    if (message) {
+      this.showToast(message, 'info');
     }
   }
 
@@ -851,13 +890,20 @@ class UIController {
       // If Google TTS is configured, load voices
       if (this.googleTTS?.isConfigured) {
         this.loadGoogleVoices();
+        // Update voice display to show selected Google voice
+        if (this.googleTTS.selectedVoice) {
+          this.updateVoiceDisplay({ name: this.googleTTS.selectedVoice.displayName });
+        }
       }
     } else {
-      // Re-render browser voices
+      // Re-render browser voices and update display
       this.renderVoiceList();
+      if (this.speechEngine.selectedVoice) {
+        this.updateVoiceDisplay(this.speechEngine.selectedVoice);
+      }
     }
 
-    this.showToast(`Switched to ${engine === 'google' ? 'Premium' : 'Standard'} voices`, 'success');
+    this.showToast(`Switched to ${engine === 'google' ? 'premium' : 'offline'} voices`, 'success');
   }
 
   updateEngineUI() {
@@ -937,7 +983,18 @@ class UIController {
         await this.googleTTS.play(text);
       }
     } catch (error) {
-      this.handlePlaybackError({ error: error.message });
+      // Fall back to browser voices on premium failure
+      this.fallbackToBrowserVoices('Premium unavailable, using offline voices');
+      this.hideTextDisplay();
+      this.updatePlayPauseButton(false);
+
+      // Try playing with browser engine instead
+      if (this.speechEngine) {
+        this.showTextDisplay();
+        this.updatePlayPauseButton(true);
+        this.speechEngine.play(text, savedPos > 0 ? savedPos : 0);
+        this.startProgressTracking();
+      }
     }
   }
 
@@ -1081,41 +1138,76 @@ class UIController {
 
     const voiceCountText = filter
       ? `${voices.length} matching`
-      : `${voices.length} Google voices`;
+      : `${voices.length} premium voices`;
 
     html += `
       <div class="voice-list-header">
         <span class="voice-count">${voiceCountText}</span>
-        <span class="voice-source google">Google Cloud</span>
+        <span class="voice-source premium">Premium</span>
       </div>
     `;
 
+    // Group voices by region for easier selection
+    const voicesByRegion = {};
     voices.forEach(voice => {
-      const isSelected = this.googleTTS.selectedVoice?.name === voice.name;
-      const qualityLabel = this.getQualityLabel(voice.quality);
+      const lang = voice.languageCodes?.[0] || 'en-US';
+      const region = lang.split('-')[1] || 'US';
+      if (!voicesByRegion[region]) {
+        voicesByRegion[region] = [];
+      }
+      voicesByRegion[region].push(voice);
+    });
 
-      html += `
-        <div class="voice-item ${isSelected ? 'selected' : ''}" data-google-voice="${voice.name}">
-          <div class="voice-info">
-            <div class="voice-name">${voice.displayName}</div>
-            <div class="voice-meta">
-              <span class="voice-lang">${voice.languageCodes?.[0] || 'en-US'}</span>
-              <span class="voice-quality ${voice.quality}">${qualityLabel}</span>
+    // Render voices grouped by region
+    const regionOrder = ['US', 'GB', 'AU', 'IN'];
+    regionOrder.forEach(region => {
+      const regionVoices = voicesByRegion[region];
+      if (regionVoices && regionVoices.length > 0) {
+        regionVoices.forEach(voice => {
+          const isSelected = this.googleTTS.selectedVoice?.name === voice.name;
+
+          html += `
+            <div class="voice-item ${isSelected ? 'selected' : ''}" data-google-voice="${voice.name}">
+              <div class="voice-info">
+                <div class="voice-name">${voice.displayName}</div>
+              </div>
+              <button class="voice-preview" data-google-voice="${voice.name}" title="Preview voice">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </button>
             </div>
-          </div>
-          <button class="voice-preview" data-google-voice="${voice.name}" title="Preview voice">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-          </button>
-        </div>
-      `;
+          `;
+        });
+      }
+    });
+
+    // Handle any other regions not in the order list
+    Object.keys(voicesByRegion).forEach(region => {
+      if (!regionOrder.includes(region)) {
+        voicesByRegion[region].forEach(voice => {
+          const isSelected = this.googleTTS.selectedVoice?.name === voice.name;
+
+          html += `
+            <div class="voice-item ${isSelected ? 'selected' : ''}" data-google-voice="${voice.name}">
+              <div class="voice-info">
+                <div class="voice-name">${voice.displayName}</div>
+              </div>
+              <button class="voice-preview" data-google-voice="${voice.name}" title="Preview voice">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </button>
+            </div>
+          `;
+        });
+      }
     });
 
     if (voices.length === 0) {
       html += `
         <div class="voice-empty">
-          ${filter ? 'No voices match your search' : 'No Google voices available'}
+          ${filter ? 'No voices match your search' : 'Loading premium voices...'}
         </div>
       `;
     }

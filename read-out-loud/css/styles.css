@@ -740,6 +740,11 @@ body {
   color: #4285f4;
 }
 
+.voice-source.premium {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 .voice-preview {
   width: 36px;
   height: 36px;
