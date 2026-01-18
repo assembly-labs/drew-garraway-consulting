@@ -15,7 +15,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | **TOMO** | `/TOMO/` | BJJ training journal - voice-first mobile app | Yes |
 | **TOMO_voice** | `/TOMO_voice/` | Voice-first BJJ transcription app | Yes |
 | **Scout** | `/scout/` | AI library discovery system for Tredyffrin Libraries | Yes |
-| **FHM** | `/fhm/` | Franklin Hugh Money - securities exam prep & finance insights | Yes (README + series-7) |
+| **FHM** | `/fhm/` | Franklin Hugh Money - securities exam prep & finance insights | Yes |
 | **CareerChat** | `/career-chat/` | AI career chatbot about Drew's background | Yes |
 | **F_This_App** | `/f_this_app/` | Next.js social game app | Yes |
 | **Mikey-real** | `/Mikey-real/` | PA flashcard PWA with offline support | Yes |
@@ -24,6 +24,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | **TPL** | `/tpl/` | Tredyffrin Libraries printer documentation | Yes |
 | **Gather** | `/gather/` | Farmers market platform | Yes |
 | **Read Out Loud** | `/read-out-loud/` | Text-to-speech PWA for reading documents | Yes |
+| **Agency** | `/agency/` | Agency Brewing brand assets and style guide | Yes |
 
 ---
 
@@ -44,6 +45,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | TPL | Vanilla HTML | N/A | Custom CSS | GitHub Pages |
 | Gather | Next.js 14 | Next.js | Tailwind | TBD |
 | Read Out Loud | Vanilla JS | N/A | Custom CSS | Cloudflare Pages |
+| Agency | Static HTML | N/A | Custom CSS | N/A |
 
 ---
 
@@ -62,7 +64,7 @@ When you receive a task, first determine which project it belongs to. Look for:
 If the project has its own `CLAUDE.md`, read it before making changes:
 - `/TOMO/CLAUDE.md` - Comprehensive guide with design system, voice, deployment
 - `/tpl/CLAUDE.md` - Style requirements, deployment, HTML conversion rules
-- `/fhm/content/series-7/CLAUDE.md` - Brand voice, content workflow, templates
+- `/fhm/CLAUDE.md` - Project overview, brand voice, content guides
 
 ### Step 3: Understand Project Conventions
 
@@ -90,7 +92,8 @@ drew-garraway-consulting/
 │   ├── prompt-property/         # Property assistant
 │   ├── gather/                  # Farmers market platform
 │   ├── tpl/                     # Printer documentation
-│   └── read-out-loud/           # Text-to-speech PWA
+│   ├── read-out-loud/           # Text-to-speech PWA
+│   └── agency/                  # Agency Brewing brand guide
 │
 ├── Supporting Directories
 │   ├── _archived/               # Previous versions (ignore)
@@ -199,6 +202,6 @@ For detailed instructions, read the project's own documentation:
 |---------|----------|
 | TOMO | `/TOMO/CLAUDE.md`, `/TOMO/docs/design-system/` |
 | Scout | `/scout/README.md` |
-| FHM | `/fhm/README.md`, `/fhm/content/series-7/CLAUDE.md`, `/fhm/design/brand/brand-voice.md` |
+| FHM | `/fhm/CLAUDE.md`, `/fhm/content/series-7/CLAUDE.md` |
 | TPL | `/tpl/CLAUDE.md` |
 | Others | Check `README.md` in project directory |
