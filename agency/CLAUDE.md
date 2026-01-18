@@ -73,7 +73,6 @@ Today's agency language reflects remote work culture, startup influence, and Gen
 | Term | What it means | How it's used |
 |------|---------------|---------------|
 | **"Circle back"** | Return to discuss later | *The* most mocked phrase in agency culture |
-| **"Synergy"** | Collaboration creating greater combined effect | Pitched seriously; mocked internally |
 | **"Bandwidth"** | Capacity to take on work | "I don't have the bandwidth" = professional decline |
 | **"Deep dive"** | Thorough analysis | Research phases; competitive analysis |
 | **"Low-hanging fruit"** | Easy wins with minimal effort | Quick-win recommendations |
@@ -94,32 +93,6 @@ Today's agency language reflects remote work culture, startup influence, and Gen
 - **"OOO"** — Out of Office
 - **"Per my last email"** — Passive-aggressive classic meaning "I already answered this"
 
-**Emoji as communication:** 💀 = hilarious ("I'm dead"); 🔥 = excellent; 👀 = watching with interest. Note: Gen Z considers 😂 a "millennial emoji"—authenticity matters.
-
-### Gen Z Agency Speak
-
-**Currently sincere expressions:**
-- **"Slay"** — Do something excellently ("Slay that presentation")
-- **"Understood the assignment"** — Executed perfectly
-- **"It's giving..."** — It resembles/evokes ("This design is giving 90s nostalgia")
-- **"Main character energy"** — Confident, in control
-- **"Hits different"** — Feels unique or special
-- **"No cap"** — No lie, for real
-- **"W / L"** — Win / Loss
-- **"Red flag / Green flag"** — Warning sign / positive sign
-
-### Startup-Influenced Terminology
-
-| Term | Origin | Agency usage |
-|------|--------|--------------|
-| **"Ship it"** | Tech culture | Launch/release something |
-| **"MVP"** | Startup methodology | Minimum Viable Product; simplest working version |
-| **"Iterate"** | Agile development | Make incremental improvements |
-| **"Sprint"** | Scrum framework | Time-boxed work period |
-| **"Growth hacking"** | Startup marketing | Rapid, low-cost user acquisition (eye-roll territory) |
-| **"10x"** | Tech culture | Exponential improvement (hyperbolic) |
-| **"Move fast and break things"** | Facebook motto | Often ironic now |
-
 ---
 
 ## The Cynical Insider Glossary: Gallows Humor and Self-Aware Mockery
@@ -133,7 +106,6 @@ The universally mocked disconnect between what clients say and what they mean:
 | What the client says | What the agency hears |
 |---------------------|----------------------|
 | **"Make it POP!"** | "The design is fine. I simply have a very short attention span." |
-| **"Take it to the next level"** | "What if you did better work—at no expense to me?" |
 | **"Just a few small changes..."** | "Change everything." |
 | **"I'll know it when I see it"** | "I have terrible taste and I'd rather you accidentally stumble upon my aesthetic." |
 | **"Make it classic but modern"** | "I'm throwing keywords to sound like I know what I'm talking about." |
@@ -156,11 +128,11 @@ Related client-isms: "Can you jazz it up?" / "Make it like Apple" / "Make it go 
 
 ### Buzzword Bingo
 
-Originated at Silicon Graphics in 1993, popularized by Dilbert. Players mark off buzzwords during meetings; first to fill a row wins (silently).
+These terms are fair game for humor—**but only when you're actually using them in context**. The jest comes from deploying the buzzword while acknowledging its absurdity. Don't just list them or mock them in isolation.
 
-**Classic bingo card terms:** Synergy, Pivot, Low-hanging fruit, Blue-sky thinking, Thought leadership, Best in class, Paradigm shift, Think outside the box, Holistic approach, Game-changing, AI-powered, Data-driven, Helicopter view
+**Classic bingo card terms:** Pivot, Low-hanging fruit, Blue-sky thinking, Thought leadership, Best in class, Paradigm shift, Think outside the box, Holistic approach, Game-changing, AI-powered, Data-driven, Helicopter view
 
-Agency Blattner Brunner created an official bingo card with the tagline: **"Be original. Do something that works."**
+**Example of proper usage:** "Let's circle back after this beer. Or maybe just stay here."
 
 ### Agency Life Dark Humor
 
@@ -404,12 +376,10 @@ The vocabulary of big ideas, strategic brilliance, and award-winning work—used
 
 2. **Mix eras thoughtfully** — Mad Men nostalgia ("three-martini lunch") pairs well with modern irony ("bandwidth," "circle back")
 
-3. **Know when terms are sincere vs. ironic** — "Synergy" is always mocked; "the work has legs" is genuine respect
+3. **Know when terms are sincere vs. ironic** — "Circle back" is always mocked; "the work has legs" is genuine respect
 
 4. **Embrace gallows humor** — Scope creep, death by committee, and "it's agency life" resignation are bonding agents
 
-5. **Match Gen Z communication patterns** — Shorter, more direct, emoji-literate, allergic to hollow buzzwords
-
-6. **Respect the craft vocabulary** — Terms like "brief," "concepting," "executions," and "comps" signal genuine industry fluency
+5. **Respect the craft vocabulary** — Terms like "brief," "concepting," "executions," and "comps" signal genuine industry fluency
 
 This lexicon gives your brewery brand voice the authentic texture to connect with creatives who've lived these expressions—whether they're celebrating a pitch win or drowning the sorrows of yet another round of "minor revisions."
