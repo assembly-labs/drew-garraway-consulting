@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="Common Mistakes on the Series 7 Exam - Learn from others' errors. 24 mistakes to avoid.">
+
+    <title>Common Mistakes | Series 7 Study Materials | Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/sie-chapter.css">
+    <script src="../../assets/js/night-mode.js"></script>
+
+    <style>
+        .mistake-card {
+            background: var(--fh-white);
+            border: 1px solid var(--fh-gray-200);
+            border-left: 4px solid var(--fh-burgundy);
+            border-radius: 0 8px 8px 0;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .mistake-card h4 {
+            color: var(--fh-burgundy);
+            margin-bottom: 0.5rem;
+        }
+        .mistake-number {
+            font-family: var(--fh-font-mono);
+            font-size: 0.75rem;
+            color: var(--fh-gray-500);
+            margin-bottom: 0.25rem;
+        }
+        .mistake-label {
+            background: var(--fh-burgundy);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        .truth-label {
+            background: var(--fh-sage);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 0.75rem 0 0.5rem 0;
+        }
+        .memory-aid {
+            background: linear-gradient(135deg, var(--fh-gold), #c9a050);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+        .example-box {
+            background: var(--fh-gray-100);
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 0.75rem 0;
+            font-family: var(--fh-font-mono);
+            font-size: 0.9rem;
+        }
+        .wrong { color: var(--fh-burgundy); }
+        .right { color: var(--fh-sage); font-weight: 600; }
+        .category-header {
+            background: var(--fh-navy);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 2.5rem 0 1.5rem 0;
+        }
+        .category-header h3 { color: white; margin: 0; }
+        .big-picture {
+            background: linear-gradient(135deg, var(--fh-navy), #003d82);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 3rem;
+        }
+        .big-picture h3 { color: var(--fh-gold); margin-bottom: 1rem; }
+        .big-picture ol { margin: 0; padding-left: 1.5rem; }
+        .big-picture li { padding: 0.25rem 0; }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="header__inner">
+            <h1 class="header__title">Common Mistakes</h1>
+            <nav class="breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span>/</span>
+                <a href="series-7-study-materials.html">Series 7</a>
+                <span>/</span>
+                <span>Common Mistakes</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="intro">
+            <p>Learn from others' errors. Making mistakes while studying is good. Making the same mistake twice is bad.</p>
+        </div>
+
+        <!-- Options Mistakes -->
+        <div class="category-header"><h3>Options Mistakes</h3></div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#1</div>
+            <h4>Forgetting to Multiply by 100</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Calculating option profit/loss using the quoted premium without multiplying by 100.</p>
+            <div class="example-box">
+                Buy 1 call at $3, sell at $5<br>
+                <span class="wrong">WRONG: Profit = $2</span><br>
+                <span class="right">RIGHT: Profit = $2 x 100 = $200</span>
+            </div>
+            <div class="memory-aid"><strong>Memory Aid:</strong> Options are ALWAYS quoted per share. One contract = 100 shares. ALWAYS multiply.</div>
+        </div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#2</div>
+            <h4>Confusing Buyer vs. Seller Breakeven</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Thinking buyers and sellers have different breakeven points.</p>
+            <span class="truth-label">The Truth</span>
+            <p>Both buyer and seller have the SAME breakeven point—it's the profit/loss that's different.</p>
+            <div class="example-box">
+                Long call BE = Strike + Premium (buyer needs stock above this)<br>
+                Short call BE = Strike + Premium (seller needs stock below this)<br>
+                Same number, different goals!
+            </div>
+        </div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#3</div>
+            <h4>Getting Spread Direction Backwards</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Calling a bull spread a bear spread (or vice versa).</p>
+            <span class="truth-label">Remember</span>
+            <p><strong>Bull spreads:</strong> Want market to rise. Buy lower strike, sell higher strike (calls) OR sell higher strike, buy lower strike (puts)</p>
+            <p><strong>Bear spreads:</strong> Want market to fall. Buy higher strike, sell lower strike (calls) OR sell lower strike, buy higher strike (puts)</p>
+            <div class="memory-aid"><strong>Memory Aid:</strong> Bull Call = Buy Lower. The word "Lower" has an "L" like "buLL"</div>
+        </div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#4</div>
+            <h4>Max Loss on Naked Short Calls</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Saying max loss is "the stock price minus premium received"</p>
+            <span class="truth-label">The Truth</span>
+            <p>Max loss on uncovered short calls is <strong>UNLIMITED</strong> because the stock can rise indefinitely.</p>
+        </div>
+
+        <!-- Margin Mistakes -->
+        <div class="category-header"><h3>Margin Mistakes</h3></div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#5</div>
+            <h4>Using Wrong Maintenance Percentages</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Using 25% for both long and short positions.</p>
+            <span class="truth-label">The Truth</span>
+            <p><strong>LONG</strong> positions: 25% maintenance<br>
+            <strong>SHORT</strong> positions: 30% maintenance</p>
+            <div class="memory-aid"><strong>Memory Aid:</strong> "Shorts are riskier, so they require more." (30% > 25%)</div>
+        </div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#6</div>
+            <h4>SMA Calculation Errors</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Thinking SMA is just excess equity.</p>
+            <span class="truth-label">The Truth</span>
+            <p>SMA only increases when equity exceeds Reg T requirement (50% of market value).</p>
+            <div class="example-box">
+                Equity = Market Value - Debit<br>
+                Reg T Requirement = Market Value x 50%<br>
+                SMA = Equity - Reg T Requirement (only if positive)
+            </div>
+        </div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#7</div>
+            <h4>Margin Call Trigger Formula Mix-Up</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Using the wrong formula for long vs. short positions.</p>
+            <span class="truth-label">Correct Formulas</span>
+            <div class="example-box">
+                LONG trigger: Debit Balance / 0.75<br>
+                SHORT trigger: Credit Balance / 1.30
+            </div>
+            <div class="memory-aid"><strong>Memory Aid:</strong> Long: 75% (Debit / 0.75) | Short: 130% (Credit / 1.30)</div>
+        </div>
+
+        <!-- Bond Mistakes -->
+        <div class="category-header"><h3>Bond Mistakes</h3></div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#8</div>
+            <h4>Yield Relationship Confusion</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Getting the yield relationship backwards for premium/discount bonds.</p>
+            <span class="truth-label">The Truth</span>
+            <p><strong>PREMIUM</strong> (price above par): Nominal > Current > YTM<br>
+            <strong>DISCOUNT</strong> (price below par): YTM > Current > Nominal</p>
+            <div class="memory-aid"><strong>Memory Aid:</strong> "Premium Decreases Yields" (P-D-Y = N > C > YTM decreasing)</div>
+        </div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#9</div>
+            <h4>Tax-Equivalent Yield Math</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Multiplying by the tax rate instead of dividing by (1 - tax rate).</p>
+            <span class="truth-label">Correct Formula</span>
+            <p>TEY = Municipal yield / (1 - tax bracket)</p>
+            <div class="example-box">
+                4% muni, 32% bracket<br>
+                <span class="wrong">WRONG: 4% x 0.32 = 1.28%</span><br>
+                <span class="right">RIGHT: 4% / (1 - 0.32) = 4% / 0.68 = 5.88%</span>
+            </div>
+        </div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#10</div>
+            <h4>Accrued Interest Day Count</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Using the wrong day count convention.</p>
+            <span class="truth-label">The Truth</span>
+            <p><strong>Corporate & Municipal:</strong> 30/360 (30-day months, 360-day year)<br>
+            <strong>Government (T-bills, etc.):</strong> Actual/Actual (real calendar days)</p>
+        </div>
+
+        <!-- Municipal Bond Mistakes -->
+        <div class="category-header"><h3>Municipal Bond Mistakes</h3></div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#11</div>
+            <h4>GO vs. Revenue Backing</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Confusing what backs each type of bond.</p>
+            <span class="truth-label">The Truth</span>
+            <p><strong>GO Bonds:</strong> Backed by taxing power (property taxes)<br>
+            <strong>Revenue Bonds:</strong> Backed ONLY by project revenue (tolls, fees, etc.)</p>
+            <p><strong>Key Point:</strong> Revenue bondholders CANNOT sue for taxes if project fails.</p>
+        </div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#12</div>
+            <h4>In-State vs. Out-of-State Tax Treatment</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Assuming all munis are tax-free at all levels.</p>
+            <span class="truth-label">The Truth</span>
+            <p><strong>Federal:</strong> Always exempt (except private activity bonds with AMT)<br>
+            <strong>State:</strong> Only exempt if issued by YOUR state<br>
+            <strong>Local:</strong> Usually exempt, varies by jurisdiction</p>
+        </div>
+
+        <!-- Investment Company Mistakes -->
+        <div class="category-header"><h3>Investment Company Mistakes</h3></div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#13</div>
+            <h4>NAV Calculation Errors</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Forgetting to subtract liabilities OR dividing incorrectly.</p>
+            <span class="truth-label">Correct Formula</span>
+            <p>NAV = (Total Assets - Liabilities) / Shares Outstanding</p>
+            <div class="example-box">
+                Assets: $100M, Liabilities: $5M, Shares: 5M<br>
+                NAV = ($100M - $5M) / 5M = $95M / 5M = <span class="right">$19.00</span>
+            </div>
+        </div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#14</div>
+            <h4>Open-End vs. Closed-End Fund Trading</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Thinking both trade the same way.</p>
+            <span class="truth-label">The Truth</span>
+            <p><strong>Open-end (mutual funds):</strong> Always trade at NAV (plus any sales charge)<br>
+            <strong>Closed-end:</strong> Trade on exchanges at market price (can be above OR below NAV)</p>
+        </div>
+
+        <!-- Suitability Mistakes -->
+        <div class="category-header"><h3>Suitability Mistakes</h3></div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#16</div>
+            <h4>Institutional ≠ Accredited</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Treating wealthy individuals as institutional customers.</p>
+            <span class="truth-label">The Truth</span>
+            <p><strong>Institutional:</strong> Banks, insurance companies, registered investment companies, entities with $50M+ assets<br>
+            <strong>Accredited:</strong> Individuals meeting income/net worth thresholds for private placements</p>
+            <p><strong>Key Point:</strong> A billionaire is still a RETAIL customer for FINRA purposes.</p>
+        </div>
+
+        <!-- Order/Settlement Mistakes -->
+        <div class="category-header"><h3>Order & Settlement Mistakes</h3></div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#18</div>
+            <h4>Limit Order Execution Price</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Thinking limit orders execute exactly at the limit price.</p>
+            <span class="truth-label">The Truth</span>
+            <p><strong>Buy limit:</strong> Execute at limit price OR LOWER<br>
+            <strong>Sell limit:</strong> Execute at limit price OR HIGHER</p>
+            <div class="memory-aid"><strong>Memory Aid:</strong> BLiSS (Buy Limit is Set Below); SeLLS (Sell Limit is Set Above)</div>
+        </div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#20</div>
+            <h4>Wrong Settlement Date</h4>
+            <span class="mistake-label">The Mistake</span>
+            <p>Using old settlement rules.</p>
+            <span class="truth-label">Current Rules (2024)</span>
+            <p>Stocks and corporate bonds: <strong>T+1</strong><br>
+            Government securities: <strong>T+1</strong><br>
+            Options: <strong>T+1</strong><br>
+            Mutual funds: <strong>T+1</strong> (at NAV calculated that day)</p>
+        </div>
+
+        <!-- Test-Taking Mistakes -->
+        <div class="category-header"><h3>Test-Taking Mistakes</h3></div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#21</div>
+            <h4>Rushing Through Calculations</h4>
+            <span class="truth-label">The Solution</span>
+            <p>1. Write out the formula FIRST<br>
+            2. Plug in numbers SECOND<br>
+            3. Double-check your math THIRD<br>
+            4. Verify units make sense FOURTH</p>
+        </div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#22</div>
+            <h4>Not Reading "EXCEPT" Questions Carefully</h4>
+            <span class="truth-label">The Solution</span>
+            <p>Circle or underline "EXCEPT," "NOT," "FALSE"<br>
+            Find the three TRUE statements<br>
+            The FALSE one is your answer</p>
+        </div>
+
+        <div class="mistake-card">
+            <div class="mistake-number">#24</div>
+            <h4>Running Out of Time</h4>
+            <span class="truth-label">Pacing Guide</span>
+            <p>225 minutes / 135 questions = ~1.67 minutes/question<br>
+            Check at Q45: Should be ~75 min in<br>
+            Check at Q90: Should be ~150 min in<br>
+            Save 20-30 minutes for review</p>
+        </div>
+
+        <div class="big-picture">
+            <h3>Most Common Areas for Mistakes</h3>
+            <ol>
+                <li>Options calculations (especially spreads)</li>
+                <li>Margin mathematics</li>
+                <li>Bond yield relationships</li>
+                <li>Institutional vs. retail classification</li>
+                <li>Settlement dates</li>
+            </ol>
+            <p style="margin-top: 1rem;"><strong>Focus extra review time on these topics.</strong></p>
+        </div>
+
+        <p style="text-align: center; margin-top: 3rem; font-style: italic; color: var(--fh-gray-600);">
+            Don't memorize mistakes. Memorize corrections.
+        </p>
+
+        <nav class="chapter-nav" style="margin-top: 3rem;">
+            <a href="series-7-study-materials.html" class="chapter-nav__link">
+                <span class="chapter-nav__label">Back to</span>
+                <span class="chapter-nav__title">&larr; Study Materials</span>
+            </a>
+        </nav>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__text">Franklin Hugh Money | Series 7 Study Materials</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="Series 7 Practice Exam - 30-question sample test proportioned by exam weight.">
+
+    <title>Practice Exam | Series 7 Study Materials | Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/sie-chapter.css">
+    <script src="../../assets/js/night-mode.js"></script>
+
+    <style>
+        .exam-header {
+            background: linear-gradient(135deg, var(--fh-navy), #003d82);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        .exam-header h3 { color: white; margin-bottom: 1rem; }
+        .exam-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .exam-stat {
+            text-align: center;
+        }
+        .exam-stat__number {
+            font-family: var(--fh-font-mono);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--fh-gold);
+        }
+        .exam-stat__label { font-size: 0.875rem; opacity: 0.9; }
+        .section-header {
+            background: var(--fh-gray-100);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0 1rem 0;
+        }
+        .section-header h3 {
+            color: var(--fh-navy);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .question-card {
+            background: var(--fh-white);
+            border: 1px solid var(--fh-gray-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .question-number {
+            font-family: var(--fh-font-mono);
+            font-size: 0.875rem;
+            color: var(--fh-gold);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .question-topic {
+            font-size: 0.75rem;
+            color: var(--fh-gray-500);
+            margin-bottom: 0.75rem;
+        }
+        .question-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .answer-options {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .answer-options li {
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--fh-gray-200);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .answer-options li:hover {
+            border-color: var(--fh-gold);
+            background: rgba(176, 141, 87, 0.05);
+        }
+        .answer-options input[type="radio"] {
+            margin-top: 2px;
+            accent-color: var(--fh-gold);
+        }
+        .answer-key {
+            background: var(--fh-navy);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 3rem;
+        }
+        .answer-key h3 { color: var(--fh-gold); margin-bottom: 1rem; }
+        .answer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 0.5rem;
+        }
+        .answer-item {
+            font-family: var(--fh-font-mono);
+            font-size: 0.875rem;
+            padding: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            text-align: center;
+        }
+        .score-section {
+            background: var(--fh-gold);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        .score-section h4 { color: white; margin-bottom: 0.5rem; }
+        .timer-note {
+            background: rgba(176, 141, 87, 0.1);
+            border: 1px solid var(--fh-gold);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        @media print {
+            .header, .footer, .answer-key { display: none; }
+            body { background: white; }
+            .question-card { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="header__inner">
+            <h1 class="header__title">Practice Exam 1</h1>
+            <nav class="breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span>/</span>
+                <a href="series-7-study-materials.html">Series 7</a>
+                <span>/</span>
+                <span>Practice Exam</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="exam-header">
+            <h3>Series 7 Practice Exam</h3>
+            <p>30 questions proportioned by exam weight</p>
+            <div class="exam-stats">
+                <div class="exam-stat">
+                    <div class="exam-stat__number">30</div>
+                    <div class="exam-stat__label">Questions</div>
+                </div>
+                <div class="exam-stat">
+                    <div class="exam-stat__number">55</div>
+                    <div class="exam-stat__label">Minutes</div>
+                </div>
+                <div class="exam-stat">
+                    <div class="exam-stat__number">72%</div>
+                    <div class="exam-stat__label">Passing</div>
+                </div>
+                <div class="exam-stat">
+                    <div class="exam-stat__number">22+</div>
+                    <div class="exam-stat__label">To Pass</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timer-note">
+            <strong>Timing:</strong> Time yourself. If you finish in less than 40 minutes, you may have rushed. If you take more than 60 minutes, you need to improve your pace.
+        </div>
+
+        <!-- Section 1 -->
+        <div class="section-header">
+            <h3>Section 1: Seeks Business (Questions 1-3)</h3>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 1</div>
+            <p class="question-text">A registered representative wants to cold call prospective clients about investment opportunities. According to Do-Not-Call regulations, which of the following individuals may the rep call?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q1" id="q1a"><label for="q1a">A) Anyone not on the national Do-Not-Call registry</label></li>
+                <li><input type="radio" name="q1" id="q1b"><label for="q1b">B) A person who has had a business relationship with the firm in the past 18 months</label></li>
+                <li><input type="radio" name="q1" id="q1c"><label for="q1c">C) A person on the state Do-Not-Call list but not the national list</label></li>
+                <li><input type="radio" name="q1" id="q1d"><label for="q1d">D) Anyone during business hours</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 2</div>
+            <p class="question-text">Which of the following requires principal pre-approval before first use?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q2" id="q2a"><label for="q2a">A) A letter to an existing customer about their account</label></li>
+                <li><input type="radio" name="q2" id="q2b"><label for="q2b">B) Sales literature sent to 30 retail investors</label></li>
+                <li><input type="radio" name="q2" id="q2c"><label for="q2c">C) An email to an institutional customer</label></li>
+                <li><input type="radio" name="q2" id="q2d"><label for="q2d">D) Internal training materials</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 3</div>
+            <p class="question-text">Under FINRA rules, which entity is automatically considered an institutional customer regardless of its assets under management?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q3" id="q3a"><label for="q3a">A) A hedge fund with $30 million in assets</label></li>
+                <li><input type="radio" name="q3" id="q3b"><label for="q3b">B) A corporation with $40 million in assets</label></li>
+                <li><input type="radio" name="q3" id="q3c"><label for="q3c">C) A registered investment adviser</label></li>
+                <li><input type="radio" name="q3" id="q3d"><label for="q3d">D) A wealthy individual with $100 million net worth</label></li>
+            </ul>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section-header">
+            <h3>Section 2: Opens Accounts (Questions 4-6)</h3>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 4</div>
+            <p class="question-text">An investor opens a joint account with the right of survivorship (JTWROS). If one owner dies, what happens to the account?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q4" id="q4a"><label for="q4a">A) The account is frozen until probate is complete</label></li>
+                <li><input type="radio" name="q4" id="q4b"><label for="q4b">B) The deceased owner's share passes to their estate</label></li>
+                <li><input type="radio" name="q4" id="q4c"><label for="q4c">C) The surviving owner automatically inherits the entire account</label></li>
+                <li><input type="radio" name="q4" id="q4d"><label for="q4d">D) The account must be closed and assets distributed</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 5</div>
+            <p class="question-text">Which of the following is NOT a component of the three-part suitability obligation under FINRA Rule 2111?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q5" id="q5a"><label for="q5a">A) Reasonable-basis suitability</label></li>
+                <li><input type="radio" name="q5" id="q5b"><label for="q5b">B) Customer-specific suitability</label></li>
+                <li><input type="radio" name="q5" id="q5c"><label for="q5c">C) Product-specific suitability</label></li>
+                <li><input type="radio" name="q5" id="q5d"><label for="q5d">D) Quantitative suitability</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 6</div>
+            <p class="question-text">Before a customer can trade options, the firm must:</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q6" id="q6a"><label for="q6a">A) Obtain a signed options agreement within 15 days of account approval</label></li>
+                <li><input type="radio" name="q6" id="q6b"><label for="q6b">B) Verify the customer has at least $50,000 in liquid assets</label></li>
+                <li><input type="radio" name="q6" id="q6c"><label for="q6c">C) Ensure the customer has passed the Series 7 exam</label></li>
+                <li><input type="radio" name="q6" id="q6d"><label for="q6d">D) Wait 30 days after account opening</label></li>
+            </ul>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="section-header">
+            <h3>Section 3: Provides Information (Questions 7-28)</h3>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 7</div>
+            <div class="question-topic">Options</div>
+            <p class="question-text">An investor buys 1 XYZ Jan 50 call at $4. What is the breakeven point?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q7" id="q7a"><label for="q7a">A) $46</label></li>
+                <li><input type="radio" name="q7" id="q7b"><label for="q7b">B) $50</label></li>
+                <li><input type="radio" name="q7" id="q7c"><label for="q7c">C) $54</label></li>
+                <li><input type="radio" name="q7" id="q7d"><label for="q7d">D) $58</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 8</div>
+            <div class="question-topic">Options</div>
+            <p class="question-text">An investor writes 1 ABC Dec 40 put at $3. The stock falls to $32 at expiration. What is the investor's profit or loss?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q8" id="q8a"><label for="q8a">A) $500 profit</label></li>
+                <li><input type="radio" name="q8" id="q8b"><label for="q8b">B) $500 loss</label></li>
+                <li><input type="radio" name="q8" id="q8c"><label for="q8c">C) $800 profit</label></li>
+                <li><input type="radio" name="q8" id="q8d"><label for="q8d">D) $800 loss</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 9</div>
+            <div class="question-topic">Options</div>
+            <p class="question-text">A covered call position has which of the following risk/reward characteristics?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q9" id="q9a"><label for="q9a">A) Limited gain potential, unlimited loss potential</label></li>
+                <li><input type="radio" name="q9" id="q9b"><label for="q9b">B) Limited gain potential, limited loss potential</label></li>
+                <li><input type="radio" name="q9" id="q9c"><label for="q9c">C) Unlimited gain potential, limited loss potential</label></li>
+                <li><input type="radio" name="q9" id="q9d"><label for="q9d">D) Unlimited gain potential, unlimited loss potential</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 10</div>
+            <div class="question-topic">Options</div>
+            <p class="question-text">An investor buys 1 XYZ Jan 60 call at $5 and sells 1 XYZ Jan 70 call at $2. This is a:</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q10" id="q10a"><label for="q10a">A) Bear call spread with max gain of $300</label></li>
+                <li><input type="radio" name="q10" id="q10b"><label for="q10b">B) Bull call spread with max gain of $700</label></li>
+                <li><input type="radio" name="q10" id="q10c"><label for="q10c">C) Bear call spread with max loss of $300</label></li>
+                <li><input type="radio" name="q10" id="q10d"><label for="q10d">D) Bull call spread with max loss of $300</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 11</div>
+            <div class="question-topic">Options</div>
+            <p class="question-text">Which position has UNLIMITED maximum loss potential?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q11" id="q11a"><label for="q11a">A) Long call</label></li>
+                <li><input type="radio" name="q11" id="q11b"><label for="q11b">B) Long put</label></li>
+                <li><input type="radio" name="q11" id="q11c"><label for="q11c">C) Short put</label></li>
+                <li><input type="radio" name="q11" id="q11d"><label for="q11d">D) Short call (uncovered)</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 12</div>
+            <div class="question-topic">Municipal Bonds</div>
+            <p class="question-text">A general obligation bond is backed by:</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q12" id="q12a"><label for="q12a">A) Revenue from a specific project</label></li>
+                <li><input type="radio" name="q12" id="q12b"><label for="q12b">B) The full faith, credit, and taxing power of the issuer</label></li>
+                <li><input type="radio" name="q12" id="q12c"><label for="q12c">C) Federal government guarantees</label></li>
+                <li><input type="radio" name="q12" id="q12d"><label for="q12d">D) User fees and charges</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 13</div>
+            <div class="question-topic">Municipal Bonds</div>
+            <p class="question-text">An investor in the 32% federal tax bracket is comparing a 4.5% municipal bond to taxable alternatives. What taxable yield would be equivalent?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q13" id="q13a"><label for="q13a">A) 5.88%</label></li>
+                <li><input type="radio" name="q13" id="q13b"><label for="q13b">B) 6.62%</label></li>
+                <li><input type="radio" name="q13" id="q13c"><label for="q13c">C) 6.25%</label></li>
+                <li><input type="radio" name="q13" id="q13d"><label for="q13d">D) 7.50%</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 14</div>
+            <div class="question-topic">Municipal Bonds</div>
+            <p class="question-text">Under MSRB Rule G-37, a municipal securities professional who makes a political contribution to an issuer official can:</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q14" id="q14a"><label for="q14a">A) Continue doing business with the issuer with principal approval</label></li>
+                <li><input type="radio" name="q14" id="q14b"><label for="q14b">B) Do business with the issuer after a 6-month cooling off period</label></li>
+                <li><input type="radio" name="q14" id="q14c"><label for="q14c">C) Not do business with the issuer for 2 years</label></li>
+                <li><input type="radio" name="q14" id="q14d"><label for="q14d">D) Do business if the contribution was under $500</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 15</div>
+            <div class="question-topic">Margin</div>
+            <p class="question-text">An investor buys 200 shares of XYZ at $80 per share in a margin account. Under Regulation T, what is the initial margin requirement?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q15" id="q15a"><label for="q15a">A) $4,000</label></li>
+                <li><input type="radio" name="q15" id="q15b"><label for="q15b">B) $8,000</label></li>
+                <li><input type="radio" name="q15" id="q15c"><label for="q15c">C) $12,000</label></li>
+                <li><input type="radio" name="q15" id="q15d"><label for="q15d">D) $16,000</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 16</div>
+            <div class="question-topic">Margin</div>
+            <p class="question-text">An investor has a long margin account with a market value of $60,000 and a debit balance of $25,000. The SMA is:</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q16" id="q16a"><label for="q16a">A) $0</label></li>
+                <li><input type="radio" name="q16" id="q16b"><label for="q16b">B) $2,500</label></li>
+                <li><input type="radio" name="q16" id="q16c"><label for="q16c">C) $5,000</label></li>
+                <li><input type="radio" name="q16" id="q16d"><label for="q16d">D) $35,000</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 17</div>
+            <div class="question-topic">Margin</div>
+            <p class="question-text">In a long margin account, at what price would a margin call be triggered if the debit balance is $30,000 and the maintenance requirement is 25%?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q17" id="q17a"><label for="q17a">A) $35.00</label></li>
+                <li><input type="radio" name="q17" id="q17b"><label for="q17b">B) $40.00</label></li>
+                <li><input type="radio" name="q17" id="q17c"><label for="q17c">C) $50.00</label></li>
+                <li><input type="radio" name="q17" id="q17d"><label for="q17d">D) $60.00</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 18</div>
+            <div class="question-topic">Debt Securities</div>
+            <p class="question-text">A 6% corporate bond is trading at 105. The current yield is approximately:</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q18" id="q18a"><label for="q18a">A) 5.00%</label></li>
+                <li><input type="radio" name="q18" id="q18b"><label for="q18b">B) 5.71%</label></li>
+                <li><input type="radio" name="q18" id="q18c"><label for="q18c">C) 6.00%</label></li>
+                <li><input type="radio" name="q18" id="q18d"><label for="q18d">D) 6.30%</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 19</div>
+            <div class="question-topic">Debt Securities</div>
+            <p class="question-text">When interest rates rise, what happens to bond prices?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q19" id="q19a"><label for="q19a">A) Bond prices rise</label></li>
+                <li><input type="radio" name="q19" id="q19b"><label for="q19b">B) Bond prices fall</label></li>
+                <li><input type="radio" name="q19" id="q19c"><label for="q19c">C) Bond prices remain unchanged</label></li>
+                <li><input type="radio" name="q19" id="q19d"><label for="q19d">D) Only short-term bonds are affected</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 20</div>
+            <div class="question-topic">Debt Securities</div>
+            <p class="question-text">For a bond trading at a premium, which yield is highest?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q20" id="q20a"><label for="q20a">A) Nominal yield</label></li>
+                <li><input type="radio" name="q20" id="q20b"><label for="q20b">B) Current yield</label></li>
+                <li><input type="radio" name="q20" id="q20c"><label for="q20c">C) Yield to maturity</label></li>
+                <li><input type="radio" name="q20" id="q20d"><label for="q20d">D) All yields are equal</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 21</div>
+            <div class="question-topic">Investment Companies</div>
+            <p class="question-text">A mutual fund has total assets of $100 million, liabilities of $5 million, and 5 million shares outstanding. What is the NAV?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q21" id="q21a"><label for="q21a">A) $18.00</label></li>
+                <li><input type="radio" name="q21" id="q21b"><label for="q21b">B) $19.00</label></li>
+                <li><input type="radio" name="q21" id="q21c"><label for="q21c">C) $20.00</label></li>
+                <li><input type="radio" name="q21" id="q21d"><label for="q21d">D) $21.00</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 22</div>
+            <div class="question-topic">Investment Companies</div>
+            <p class="question-text">Which of the following is TRUE about closed-end funds?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q22" id="q22a"><label for="q22a">A) They continuously issue and redeem shares at NAV</label></li>
+                <li><input type="radio" name="q22" id="q22b"><label for="q22b">B) They trade on exchanges and may trade at a premium or discount</label></li>
+                <li><input type="radio" name="q22" id="q22c"><label for="q22c">C) They cannot issue bonds or preferred stock</label></li>
+                <li><input type="radio" name="q22" id="q22d"><label for="q22d">D) They must redeem shares upon request</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 23</div>
+            <div class="question-topic">Retirement</div>
+            <p class="question-text">Which of the following is TRUE about a Roth IRA?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q23" id="q23a"><label for="q23a">A) Contributions are tax-deductible</label></li>
+                <li><input type="radio" name="q23" id="q23b"><label for="q23b">B) Qualified distributions are tax-free</label></li>
+                <li><input type="radio" name="q23" id="q23c"><label for="q23c">C) Required minimum distributions must begin at age 72</label></li>
+                <li><input type="radio" name="q23" id="q23d"><label for="q23d">D) There is no income limit for contributions</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 24</div>
+            <div class="question-topic">Variable Products</div>
+            <p class="question-text">During the accumulation phase of a variable annuity, earnings are:</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q24" id="q24a"><label for="q24a">A) Taxed annually as ordinary income</label></li>
+                <li><input type="radio" name="q24" id="q24b"><label for="q24b">B) Taxed annually as capital gains</label></li>
+                <li><input type="radio" name="q24" id="q24c"><label for="q24c">C) Tax-deferred until withdrawal</label></li>
+                <li><input type="radio" name="q24" id="q24d"><label for="q24d">D) Tax-free if held for more than one year</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 25</div>
+            <div class="question-topic">Equity</div>
+            <p class="question-text">A company declares a 3:2 stock split. An investor owns 200 shares at $90 per share. After the split, the investor will have:</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q25" id="q25a"><label for="q25a">A) 300 shares at $60</label></li>
+                <li><input type="radio" name="q25" id="q25b"><label for="q25b">B) 300 shares at $90</label></li>
+                <li><input type="radio" name="q25" id="q25c"><label for="q25c">C) 133 shares at $135</label></li>
+                <li><input type="radio" name="q25" id="q25d"><label for="q25d">D) 200 shares at $60</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 26</div>
+            <div class="question-topic">Equity</div>
+            <p class="question-text">Which type of preferred stock allows the investor to exchange the shares for common stock?</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q26" id="q26a"><label for="q26a">A) Callable preferred</label></li>
+                <li><input type="radio" name="q26" id="q26b"><label for="q26b">B) Convertible preferred</label></li>
+                <li><input type="radio" name="q26" id="q26c"><label for="q26c">C) Cumulative preferred</label></li>
+                <li><input type="radio" name="q26" id="q26d"><label for="q26d">D) Participating preferred</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 27</div>
+            <div class="question-topic">DPPs</div>
+            <p class="question-text">In a limited partnership, the general partner has:</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q27" id="q27a"><label for="q27a">A) Limited liability for partnership debts</label></li>
+                <li><input type="radio" name="q27" id="q27b"><label for="q27b">B) Unlimited liability for partnership debts</label></li>
+                <li><input type="radio" name="q27" id="q27c"><label for="q27c">C) No management responsibilities</label></li>
+                <li><input type="radio" name="q27" id="q27d"><label for="q27d">D) Liability limited to their investment</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 28</div>
+            <div class="question-topic">Analysis</div>
+            <p class="question-text">A high P/E ratio typically indicates:</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q28" id="q28a"><label for="q28a">A) The stock is undervalued</label></li>
+                <li><input type="radio" name="q28" id="q28b"><label for="q28b">B) Investors expect high future growth</label></li>
+                <li><input type="radio" name="q28" id="q28c"><label for="q28c">C) The company has high dividend payments</label></li>
+                <li><input type="radio" name="q28" id="q28d"><label for="q28d">D) The company has declining earnings</label></li>
+            </ul>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="section-header">
+            <h3>Section 4: Processes Transactions (Questions 29-30)</h3>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 29</div>
+            <p class="question-text">A customer places a buy limit order at $45 when the stock is trading at $48. This order will be executed:</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q29" id="q29a"><label for="q29a">A) Immediately at $48</label></li>
+                <li><input type="radio" name="q29" id="q29b"><label for="q29b">B) At $45 or lower</label></li>
+                <li><input type="radio" name="q29" id="q29c"><label for="q29c">C) At any price between $45 and $48</label></li>
+                <li><input type="radio" name="q29" id="q29d"><label for="q29d">D) Only at exactly $45</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">Question 30</div>
+            <p class="question-text">Regular way settlement for corporate stocks is:</p>
+            <ul class="answer-options">
+                <li><input type="radio" name="q30" id="q30a"><label for="q30a">A) Same day</label></li>
+                <li><input type="radio" name="q30" id="q30b"><label for="q30b">B) T+1 (trade date plus one business day)</label></li>
+                <li><input type="radio" name="q30" id="q30c"><label for="q30c">C) T+2 (trade date plus two business days)</label></li>
+                <li><input type="radio" name="q30" id="q30d"><label for="q30d">D) T+3 (trade date plus three business days)</label></li>
+            </ul>
+        </div>
+
+        <!-- Answer Key -->
+        <div class="answer-key">
+            <h3>Answer Key</h3>
+            <p style="margin-bottom: 1rem;">Scroll down only after completing the exam.</p>
+            <div class="answer-grid">
+                <div class="answer-item">1. B</div>
+                <div class="answer-item">2. B</div>
+                <div class="answer-item">3. C</div>
+                <div class="answer-item">4. C</div>
+                <div class="answer-item">5. C</div>
+                <div class="answer-item">6. A</div>
+                <div class="answer-item">7. C</div>
+                <div class="answer-item">8. B</div>
+                <div class="answer-item">9. B</div>
+                <div class="answer-item">10. B</div>
+                <div class="answer-item">11. D</div>
+                <div class="answer-item">12. B</div>
+                <div class="answer-item">13. B</div>
+                <div class="answer-item">14. C</div>
+                <div class="answer-item">15. B</div>
+                <div class="answer-item">16. C</div>
+                <div class="answer-item">17. B</div>
+                <div class="answer-item">18. B</div>
+                <div class="answer-item">19. B</div>
+                <div class="answer-item">20. A</div>
+                <div class="answer-item">21. B</div>
+                <div class="answer-item">22. B</div>
+                <div class="answer-item">23. B</div>
+                <div class="answer-item">24. C</div>
+                <div class="answer-item">25. A</div>
+                <div class="answer-item">26. B</div>
+                <div class="answer-item">27. B</div>
+                <div class="answer-item">28. B</div>
+                <div class="answer-item">29. B</div>
+                <div class="answer-item">30. B</div>
+            </div>
+            <div class="score-section">
+                <h4>Score Calculation</h4>
+                <p>Correct answers: _____ / 30</p>
+                <p>Percentage: _____ %</p>
+                <p><strong>Passing (72%):</strong> 22+ correct</p>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 2rem; font-style: italic; color: var(--fh-gray-600);">
+            Review all missed questions before moving on.
+        </p>
+
+        <nav class="chapter-nav" style="margin-top: 3rem;">
+            <a href="series-7-study-materials.html" class="chapter-nav__link">
+                <span class="chapter-nav__label">Back to</span>
+                <span class="chapter-nav__title">&larr; Study Materials</span>
+            </a>
+        </nav>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__text">Franklin Hugh Money | Series 7 Study Materials</p>
+    </footer>
+</body>
+</html>
