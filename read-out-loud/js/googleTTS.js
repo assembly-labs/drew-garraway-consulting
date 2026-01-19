@@ -114,10 +114,8 @@ class GoogleTTS {
         // Cache failure is non-critical
       }
 
-      // Set default voice if not set
-      if (!this.selectedVoice && this.voices.length > 0) {
-        this.setVoice(this.voices[0]);
-      }
+      // Auto-select best premium voice
+      this.autoSelectBestVoice();
 
       return this.voices;
     } catch (error) {
@@ -140,13 +138,73 @@ class GoogleTTS {
       ...voice,
       score: this.scoreVoice(voice),
       quality: this.getVoiceQuality(voice),
-      displayName: this.getDisplayName(voice)
+      displayName: this.getDisplayName(voice),
+      isPremium: this.isPremiumVoice(voice)
     }));
 
     // Sort by score (highest first)
     scoredVoices.sort((a, b) => b.score - a.score);
 
     return scoredVoices;
+  }
+
+  /**
+   * Check if voice is premium (Neural2 or Studio)
+   */
+  isPremiumVoice(voice) {
+    const name = voice.name || '';
+    return name.includes('Neural2') || name.includes('Studio');
+  }
+
+  /**
+   * Get only premium voices for display
+   */
+  getPremiumVoices() {
+    return this.voices.filter(v => v.isPremium);
+  }
+
+  /**
+   * Get standard voices (fallback)
+   */
+  getStandardVoices() {
+    return this.voices.filter(v => !v.isPremium);
+  }
+
+  /**
+   * Get the best premium voice (for auto-selection)
+   */
+  getBestPremiumVoice() {
+    const premiumVoices = this.getPremiumVoices();
+    if (premiumVoices.length > 0) {
+      // Return highest scored premium voice (already sorted by score)
+      return premiumVoices[0];
+    }
+    return null;
+  }
+
+  /**
+   * Auto-select best premium voice if none selected
+   */
+  autoSelectBestVoice() {
+    // If already have a premium voice selected, keep it
+    if (this.selectedVoice && this.isPremiumVoice(this.selectedVoice)) {
+      return this.selectedVoice;
+    }
+
+    // Try to select best premium voice
+    const bestPremium = this.getBestPremiumVoice();
+    if (bestPremium) {
+      this.setVoice(bestPremium);
+      return bestPremium;
+    }
+
+    // Fallback to any available voice
+    if (this.voices.length > 0) {
+      this.setVoice(this.voices[0]);
+      return this.voices[0];
+    }
+
+    return null;
   }
 
   scoreVoice(voice) {
@@ -196,22 +254,37 @@ class GoogleTTS {
 
   getDisplayName(voice) {
     // Extract readable name from voice name
-    // e.g., "en-US-Neural2-A" -> "Neural2 A (US)"
+    // e.g., "en-US-Neural2-A" -> "American Female A" (friendly name)
     const name = voice.name || '';
     const parts = name.split('-');
 
     if (parts.length >= 4) {
       const region = parts[1]; // US, GB, AU
-      const type = parts[2]; // Neural2, Wavenet, Standard
       const variant = parts.slice(3).join('-'); // A, B, C, etc.
-      return `${type} ${variant} (${region})`;
+
+      // Map region codes to friendly names
+      const regionNames = {
+        'US': 'American',
+        'GB': 'British',
+        'AU': 'Australian',
+        'IN': 'Indian'
+      };
+
+      // Map variants to gender (based on Google's voice assignments)
+      // Neural2: A, C, E, I = Female; B, D, F, G, H, J = Male
+      // Studio: O, Q = Female; M = Male
+      const femaleVariants = ['A', 'C', 'E', 'I', 'O', 'Q'];
+      const gender = femaleVariants.includes(variant) ? 'Female' : 'Male';
+
+      const regionName = regionNames[region] || region;
+      return `${regionName} ${gender} ${variant}`;
     }
 
     return name;
   }
 
   /**
-   * Get top voices for display
+   * Get top voices for display (premium only)
    */
   getTopVoices(limit = 12) {
     if (!this.voicesLoaded) {
@@ -231,7 +304,8 @@ class GoogleTTS {
       }
     }
 
-    return this.voices.slice(0, limit);
+    // Return only premium voices for display
+    return this.getPremiumVoices().slice(0, limit);
   }
 
   /**

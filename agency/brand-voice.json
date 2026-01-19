@@ -1,0 +1,495 @@
+{
+  "brand": {
+    "name": "Agency Brewing",
+    "tagline": "Where Advertising Creativity Meets Brewing Craft",
+    "target_audience": [
+      "Light and thoughtful beer drinkers",
+      "Creative professionals who understand agency culture",
+      "Those drawn to brands that feel considered, not commercial",
+      "People who appreciate quality without needing it explained"
+    ],
+    "positioning": "Each beer is treated as a new brief. Distinct in expression, consistent in standards.",
+    "core_philosophy": "Great work and great beer both benefit from balance, restraint, and intention."
+  },
+
+  "voice_pillars": [
+    {
+      "name": "Effortless Intelligence",
+      "description": "Short, sharp thoughts. Minimal punctuation. No exclamation points unless earned. Confident but never loud. Clever without winking too hard.",
+      "examples": ["Work's done.", "Made for the moment you log off.", "Details matter."]
+    },
+    {
+      "name": "Creative Culture, Translated",
+      "description": "Advertising references used sparingly, only if they land for non-industry folks too. Inside jokes that still feel inclusive. Culture > credentials.",
+      "examples": ["Process matters.", "Same discipline—concept, iteration, execution.", "This meeting could've been a beer."]
+    },
+    {
+      "name": "Lightness in All Forms",
+      "description": "Sessionable beer. Sessionable copy. Short sentences. Breathing room. Nothing overwrought.",
+      "examples": ["Nothing extra. Everything considered.", "Balance is part of the craft.", "Good timing."]
+    },
+    {
+      "name": "Social Club Energy",
+      "description": "Feels like being 'in,' without needing a membership card. Welcoming. Conversational. Community-forward.",
+      "examples": ["Same table.", "You know the drill.", "Good company."]
+    }
+  ],
+
+  "avoid": {
+    "words_and_phrases": [
+      "Artisanal",
+      "Curated",
+      "Elevated",
+      "IBUs",
+      "hop varietals",
+      "long tasting notes"
+    ],
+    "approaches": [
+      "Beer snob language",
+      "Forced humor",
+      "Meme chasing",
+      "Slang that ages fast",
+      "Over-explaining the brand",
+      "Apologetic language"
+    ],
+    "tones": [
+      "Loud or attention-seeking",
+      "Try-hard or desperate",
+      "Generic craft beer speak",
+      "Corporate or stiff",
+      "Ranty or complainy",
+      "Overly technical",
+      "Preachy or self-important"
+    ]
+  },
+
+  "copy_guidelines": {
+    "fundamental_principle": "Copy is not there to sell first—it's there to set tone, create familiarity, and signal taste. Social copy should feel like overhearing a smart, relaxed comment at the end of a table, not a brand announcement.",
+    "sentence_structure": {
+      "rules": [
+        "Short lines",
+        "Occasional fragments",
+        "White space matters",
+        "Let the image carry the weight"
+      ],
+      "bad_example": "Our Session IPA is designed for creatives who value balance and quality craftsmanship. This is the perfect beer to enjoy after a long day of work with friends or coworkers.",
+      "good_example": "Made for the moment you log off. Work's done."
+    },
+    "punctuation": {
+      "periods": "Signal confidence. Use them.",
+      "exclamation_points": "Minimal and rare—intentional only",
+      "line_breaks": "Create rhythm",
+      "lowercase": "Acceptable when it fits the mood"
+    },
+    "hashtags": "Minimal, purposeful, often none at all",
+    "humor": {
+      "preference": "Dry > loud, Observational > jokey",
+      "rule": "If it needs explaining, it doesn't ship"
+    },
+    "length": {
+      "short_form": {
+        "description": "Default mode. 1-3 words to one short sentence. Minimal punctuation. Let the image carry the weight.",
+        "examples": ["Desert bound.", "No agenda.", "Earned it."]
+      },
+      "longer_form": {
+        "description": "When needed. 2-3 proper sentences. Same voice principles apply. Best for milestones, cultural moments, or when context adds value.",
+        "examples": ["LA Beer Fest turns 20 this weekend. Two decades of showing up. That's a milestone."]
+      }
+    }
+  },
+
+  "platforms": {
+    "instagram": {
+      "priority": "Primary",
+      "tone": "Most refined, visual-first, editorial",
+      "voice": "Confident, minimal, aware of design and pacing",
+      "guidelines": [
+        "1-3 short lines",
+        "Often fewer than 20 words",
+        "Let the image do the heavy lifting"
+      ],
+      "examples": [
+        "Good taste travels well.",
+        "Same mindset. New pour.",
+        "Office closed. Conversation open."
+      ]
+    },
+    "twitter": {
+      "priority": "Secondary",
+      "tone": "Sharper, more conversational, culturally responsive",
+      "voice": "Smart, timely, slightly more playful",
+      "guidelines": [
+        "One strong line",
+        "Occasional commentary on work, culture, or time",
+        "Still restrained—never ranty"
+      ],
+      "examples": [
+        "Logging off is a skill.",
+        "Great ideas hate fluorescent lighting.",
+        "This meeting could've been a beer."
+      ]
+    },
+    "facebook": {
+      "priority": "Community",
+      "tone": "Warm, clear, slightly more explanatory",
+      "voice": "Welcoming, community-minded, still elevated—never corporate",
+      "guidelines": [
+        "2-3 short sentences max",
+        "Light context is okay",
+        "Avoid jargon"
+      ],
+      "examples": [
+        "Out with friends. In good company. That's the idea.",
+        "Same beer. New table."
+      ]
+    },
+    "tiktok": {
+      "priority": "Behind the Scenes",
+      "tone": "Observational, relaxed, human—never try-hard",
+      "voice": "Casual but considered, self-aware, slightly looser but still intentional",
+      "guidelines": [
+        "Short captions (1 line preferred)",
+        "Often lowercase",
+        "Feels like a passing thought, not a setup",
+        "Let the video do the talking"
+      ],
+      "examples": [
+        "this is the part of the day we like.",
+        "nothing urgent. just good timing.",
+        "no notes."
+      ]
+    },
+    "linkedin": {
+      "priority": "Optional - Industry",
+      "tone": "Professional creative, strategic insights",
+      "use_for": "Industry partnerships, creative process deep-dives",
+      "examples": [
+        "The best advertising campaigns start with a focused brief. We applied that same discipline to our first beer. For creative professionals who understand that process drives results."
+      ]
+    },
+    "in_person": {
+      "priority": "Live Activation",
+      "tone": "Warm, confident, let the beer speak",
+      "elevator_pitch": "Agency Brewing—where advertising creativity meets brewing craft. Try the Session IPA.",
+      "advertising_connection_response": "We're creatives who got obsessed with brewing. Same discipline—concept, iteration, execution."
+    }
+  },
+
+  "content_frameworks": [
+    {
+      "name": "Product as Campaign",
+      "structure": "[Beer/Batch] + [Creative insight or process] + [Where/When]",
+      "tone": "Confident presentation, like launching a campaign",
+      "examples": [
+        "Session IPA. Six months of obsessive iteration, one breakthrough concept. Available now at [location]. This is what happens when creative directors brew beer.",
+        "Batch #3 sealed. Like any great campaign, refinement is endless. Same concept, even better execution. Cans dropping this week."
+      ]
+    },
+    {
+      "name": "Process as Creative Development",
+      "structure": "[What we're doing] + [Advertising parallel] + [Why it matters]",
+      "tone": "Behind-the-creative, transparent about craft obsession",
+      "examples": [
+        "Cold conditioning for two weeks because great concepts need time to develop. Like creative work, rushing the execution kills the idea. Patience equals quality.",
+        "Taste-testing batch #4 today. In advertising, you kill your darlings to find breakthrough concepts. Brewing's no different. Iteration is everything."
+      ]
+    },
+    {
+      "name": "Community as Collaboration",
+      "structure": "[Acknowledge/Build connection] + [Invite participation] + [Creative angle]",
+      "tone": "Collaborative but confident, building creative community",
+      "examples": [
+        "To everyone who grabbed cans this week—your feedback is gold. Great creative work requires dialogue. What are you tasting? Drop notes below.",
+        "Festival season starts soon. Come taste what happens when advertising creativity meets brewing craft. Great beer, like great ideas, starts conversations."
+      ]
+    },
+    {
+      "name": "Milestones as Campaign Results",
+      "structure": "[What happened] + [Creative interpretation] + [Forward momentum]",
+      "tone": "Confident acknowledgment, not celebration for its own sake",
+      "examples": [
+        "Batch #1 sold out. When execution meets concept, people respond. Batch #2 drops next week. This is what campaign-worthy results look like.",
+        "First festival pour complete. Watching people discover our Session IPA for the first time—that creative validation drives everything. More events coming."
+      ]
+    },
+    {
+      "name": "Differentiation Through Creative DNA",
+      "structure": "[What we do differently] + [Advertising parallel] + [The result]",
+      "use_when": "Explaining what makes Agency Brewing different",
+      "examples": [
+        "Most breweries focus on tradition. We focus on concept and execution—the same rigor that drives breakthrough advertising. Different DNA, exceptional beer.",
+        "Advertising taught us that process drives results. Every batch gets the same attention a creative director gives their best work. Taste the difference."
+      ]
+    }
+  ],
+
+  "copy_examples": {
+    "product_focused": [
+      "Built with intention.",
+      "Nothing extra. Everything considered.",
+      "A beer that knows when to step back."
+    ],
+    "brand_philosophy": [
+      "Good work deserves good pauses.",
+      "Balance is part of the craft.",
+      "Taste is quiet confidence."
+    ],
+    "creative_culture": [
+      "Process matters.",
+      "Strong opinions. Loosely held.",
+      "Finished is better than perfect."
+    ],
+    "light_humor": [
+      "We support early outs.",
+      "Another meeting that could've been avoided.",
+      "Deadline met. Thirst remains."
+    ],
+    "out_of_office": {
+      "description": "Dry observations about logging off, leaving early, inbox avoidance, and deserved breaks. Celebrating moments away from work, not complaining about it.",
+      "examples": [
+        "Laptop closed.",
+        "Inbox can wait.",
+        "Left early. No regrets.",
+        "Auto-reply: ON.",
+        "Signed off.",
+        "The brief can wait."
+      ]
+    },
+    "agency_insider": {
+      "description": "Knowing nod to shared agency experiences—late nights, revision rounds, client calls, deadline pushes. Dry acknowledgment, not venting.",
+      "usage_frequency": "~10% of content",
+      "best_paired_with": "Festival escapes, long weekends, earned moments",
+      "examples": [
+        "Survived Q1.",
+        "One more round of revisions.",
+        "Zero client calls.",
+        "No 'quick questions.'",
+        "After the late nights...",
+        "We've sat through the brainstorms.",
+        "Twenty years of early setups and late nights.",
+        "Nothing due until Monday."
+      ]
+    },
+    "engagement_responses": [
+      "Exactly.",
+      "Couldn't agree more.",
+      "We'll save you one.",
+      "That's the spirit."
+    ]
+  },
+
+  "agency_lexicon": {
+    "buzzword_bingo": {
+      "description": "Fair game for humor—but only when actually using them in context. The jest comes from deploying the buzzword while acknowledging its absurdity. Don't just list or mock in isolation.",
+      "terms": [
+        "Circle back",
+        "Bandwidth",
+        "Deep dive",
+        "Low-hanging fruit",
+        "Move the needle",
+        "Touch base",
+        "Take this offline"
+      ],
+      "example_usage": "Let's circle back after this beer. Or maybe just stay here."
+    },
+    "client_feedback_classics": {
+      "description": "Universal creative frustrations that bond the community (gallows humor)",
+      "terms": [
+        "Make the logo bigger",
+        "Just a few small changes",
+        "I'll know it when I see it",
+        "Make it pop"
+      ]
+    },
+    "scope_creep_language": {
+      "terms": [
+        "One more thing...",
+        "While you're at it...",
+        "Just a small tweak",
+        "Out of scope",
+        "Change order"
+      ]
+    },
+    "slack_era_communication": {
+      "description": "Modern agency vernacular",
+      "terms": [
+        "Per my last email",
+        "Async",
+        "Heads down",
+        "OOO",
+        "Ping me"
+      ]
+    },
+    "agency_life_dark_humor": {
+      "description": "Shared experiences that resonate",
+      "terms": [
+        "Death by committee",
+        "Feedback-draft tennis",
+        "Pitch prep",
+        "It's agency life",
+        "Kill your darlings"
+      ]
+    },
+    "terms_of_genuine_respect": {
+      "description": "Use sincerely—they signal craft appreciation",
+      "terms": [
+        "The work has legs",
+        "This idea travels",
+        "Ship it",
+        "On-brief",
+        "The Big Idea"
+      ]
+    }
+  },
+
+  "content_pillars": [
+    {
+      "name": "Product, Quietly",
+      "description": "Can details. Pour shots. Natural light. No hard sell."
+    },
+    {
+      "name": "Out Of Office Philosophy",
+      "description": "Leaving work. Reclaiming time. Small freedoms. Everyday rituals."
+    },
+    {
+      "name": "Creative Culture",
+      "description": "Process. Inspiration. Analog moments. Studio life."
+    },
+    {
+      "name": "Community & Social Club",
+      "description": "Events. Gatherings. Shared tables. Familiar faces."
+    },
+    {
+      "name": "Design & Timelessness",
+      "description": "Aesthetic appreciation. Intentional choices. Visual craft."
+    }
+  ],
+
+  "engagement": {
+    "core_principle": "Agency Brewing doesn't dominate conversations—it joins them.",
+    "response_style": "Timely. Calm. Human. Often brief.",
+    "principles": {
+      "acknowledge_over_amplify": "Respond to comments without redirecting everything back to sales",
+      "reward_creatives": "Repost thoughtful tags. Highlight photographers, designers, bartenders. Credit always.",
+      "irl_to_url_loop": "Encourage bar sightings, casual moments, design-forward UGC"
+    },
+    "emergency_response": {
+      "quality_issue": "Every can matters. DM us and we'll make this right."
+    }
+  },
+
+  "approval_criteria": {
+    "voice_authenticity": [
+      "Sounds like Agency Brewing, not generic craft beer",
+      "Advertising connection is natural, not forced",
+      "Confidence without arrogance",
+      "Creative obsession comes through"
+    ],
+    "strategic_alignment": [
+      "Builds the 'advertising × brewing' narrative",
+      "Focuses on craft and execution",
+      "Creates desire for the beer",
+      "Strengthens community connection"
+    ],
+    "execution_quality": [
+      "Concise, impactful language",
+      "No unnecessary formatting or emojis",
+      "Free of clichés or tired craft beer tropes",
+      "Photography/visuals support the copy"
+    ],
+    "tiers": {
+      "approved": [
+        "Clear advertising × brewing DNA",
+        "Natural voice, zero 'trying too hard' moments",
+        "Focuses on beer/craft/creative process"
+      ],
+      "needs_revision": [
+        "Too generic (could be any brewery)",
+        "Agency speak feels forced or cliché",
+        "Lacks confidence or sounds apologetic",
+        "Visual/copy mismatch"
+      ],
+      "rejected": [
+        "Violates core brand voice principles",
+        "Sounds like someone else",
+        "Negative or comparative in wrong way",
+        "Makes unsubstantiated claims"
+      ]
+    }
+  },
+
+  "photography": {
+    "attributes": [
+      "Authentic",
+      "Spontaneous",
+      "Inspired",
+      "Connected",
+      "Nostalgic",
+      "Contemporary",
+      "Creative",
+      "Craftsmanship"
+    ],
+    "lighting": {
+      "daytime": [
+        "Sensorial, reflecting the moment",
+        "Explore color nuances",
+        "Silhouettes welcome"
+      ],
+      "nightlife": [
+        "Hard strobe or high-contrast shadows acceptable",
+        "Less branded, more living in the moment"
+      ]
+    },
+    "subjects": {
+      "spaces": "Always feel authentic and real, never artificial",
+      "experience": "Capture enjoyment—mix of close-ups and longer shots for intimate and collective moments",
+      "products": "Detail shots—pops of color, interesting compositions, authentic feel",
+      "events": "Capture freedom and energy through sensorial, exciting imagery",
+      "locations": "Candid, in-action shots of community activities—never staged"
+    }
+  },
+
+  "final_principles": [
+    {
+      "principle": "The beer speaks louder than the words.",
+      "explanation": "Voice without substance is noise."
+    },
+    {
+      "principle": "Confidence comes from craft obsession.",
+      "explanation": "Not from trying to seem bigger than we are."
+    },
+    {
+      "principle": "Community over broadcasting.",
+      "explanation": "Connections with people who share our values."
+    },
+    {
+      "principle": "Sessionable beer. Sessionable copy.",
+      "explanation": "Short, balanced, easy to enjoy."
+    }
+  ],
+
+  "quick_reference": {
+    "writing_checklist": [
+      "Is this short enough? Default to fewer words.",
+      "Does this sound like us? Not generic craft beer.",
+      "Is the advertising connection natural? Never forced.",
+      "Would a creative professional nod at this? Insider recognition.",
+      "Is there confidence without arrogance? Quiet assurance.",
+      "Does this need the image to work? Let visuals carry weight."
+    ],
+    "voice_summary": {
+      "length": "Short, minimal, breathing room",
+      "tone": "Confident, warm, knowing",
+      "humor": "Dry, observational, never loud",
+      "references": "Inclusive insider nods",
+      "punctuation": "Periods > exclamation points",
+      "selling": "Soft, never pushy"
+    }
+  },
+
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2026-01",
+    "purpose": "Training AI content generation systems and human content creators"
+  }
+}

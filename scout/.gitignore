@@ -46,9 +46,8 @@ lerna-debug.log*
 # TypeScript
 *.tsbuildinfo
 
-# Deployment files - netlify.toml tracked, example kept
-netlify.toml
-!netlify.toml.example
+# Cloudflare
+.wrangler/
 
 # Test outputs and local scripts
 test-results/

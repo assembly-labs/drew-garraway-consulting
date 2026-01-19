@@ -15,6 +15,26 @@ This is the Series 7 exam preparation framework, built using the same organizati
 
 ---
 
+## Screenshot Policy (CRITICAL)
+
+**Course screenshots are copyrighted and must NEVER be published online.**
+
+| What | Policy |
+|------|--------|
+| Storage | Local only in `chapters/ch-XX-*/screenshots/` folders |
+| Git | All `screenshots/` folders excluded via `.gitignore` |
+| Purpose | Personal study reference to create original FHM content |
+| Publishing | NEVER commit, push, or deploy screenshot files |
+| Deployment | Screenshots will NOT appear on Cloudflare/GitHub |
+
+### Workflow with Screenshots
+1. Process screenshots using `SCREENSHOT_INTAKE_PROMPT.md`
+2. Read screenshots to extract concepts and information
+3. Transform into original FHM-voice content (never copy verbatim)
+4. Publish only original content, never the source screenshots
+
+---
+
 ## Framework Structure
 
 ```

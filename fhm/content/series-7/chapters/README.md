@@ -1,6 +1,13 @@
 # Series 7 Chapters
 
-Source: Pass Perfect / Cerifi course material
+Source: Pass Perfect / CERiFi course material (personal study reference)
+
+## Copyright Notice
+
+**Screenshots are copyrighted course materials and are NOT published online.**
+- All `screenshots/` folders are git-ignored
+- Screenshots are stored locally only for personal study
+- Only original FHM content is committed and deployed
 
 ## Chapter Index
 
@@ -31,10 +38,13 @@ Source: Pass Perfect / Cerifi course material
 ## Folder Structure
 
 Each chapter folder contains:
-- `screenshots/` - Raw screenshot images from course
-- `content/` - Markdown files converted from screenshots
+- `screenshots/` - Raw screenshot images from course (LOCAL ONLY - git-ignored)
+- `content/` - Original FHM markdown content (committed to git)
 
 ## Workflow
 
-1. Add screenshots to `ch-XX-*/screenshots/`
-2. Claude reads images and converts to markdown in `ch-XX-*/content/`
+1. Process screenshots using `SCREENSHOT_INTAKE_PROMPT.md`
+2. Screenshots stored locally in `ch-XX-*/screenshots/` (never committed)
+3. Claude reads images and creates original FHM-voice content
+4. Original content saved to `ch-XX-*/content/` (committed to git)
+5. Only original content is deployed - never source screenshots

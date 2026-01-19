@@ -1,0 +1,3952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agency Brewing | Brand Voice Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-black: #0a0a0a;
+            --color-charcoal: #1a1a1a;
+            --color-dark-gray: #2a2a2a;
+            --color-gray: #666;
+            --color-light-gray: #999;
+            --color-off-white: #f5f5f3;
+            --color-white: #ffffff;
+            --color-amber: #d4a84b;
+            --color-amber-light: #e8c882;
+            --color-amber-dark: #b8923f;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-black);
+            color: var(--color-off-white);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(180deg, var(--color-charcoal) 0%, var(--color-black) 100%);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--color-dark-gray);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-white);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--color-amber);
+        }
+
+        .tagline {
+            font-size: 0.875rem;
+            color: var(--color-light-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1.5rem;
+        }
+
+        .doc-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--color-amber);
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-subtitle {
+            font-size: 0.875rem;
+            color: var(--color-gray);
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            background: var(--color-charcoal);
+            border-bottom: 1px solid var(--color-dark-gray);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-light-gray);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-btn:hover {
+            color: var(--color-white);
+            background: var(--color-dark-gray);
+        }
+
+        .tab-btn.active {
+            color: var(--color-amber);
+            border-bottom-color: var(--color-amber);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--color-charcoal);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--color-dark-gray);
+            position: sticky;
+            top: 49px;
+            z-index: 99;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 1.5rem;
+        }
+
+        nav a {
+            color: var(--color-light-gray);
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--color-amber);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-number {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: var(--color-dark-gray);
+            line-height: 1;
+            margin-bottom: -1rem;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-white);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--color-dark-gray);
+        }
+
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-amber);
+            margin: 2rem 0 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-white);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        p {
+            color: var(--color-off-white);
+            margin-bottom: 1rem;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0 1.5rem 1.5rem;
+            color: var(--color-off-white);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        li::marker {
+            color: var(--color-amber);
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: var(--color-charcoal);
+            border-left: 3px solid var(--color-amber);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box.warning {
+            border-left-color: #c44;
+        }
+
+        .highlight-box.success {
+            border-left-color: #4a8;
+        }
+
+        /* Voice Principles Grid */
+        .voice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .voice-card {
+            background: var(--color-charcoal);
+            padding: 1.25rem;
+            border: 1px solid var(--color-dark-gray);
+        }
+
+        .voice-card-title {
+            font-weight: 600;
+            color: var(--color-white);
+            margin-bottom: 0.25rem;
+        }
+
+        .voice-card-score {
+            font-size: 0.875rem;
+            color: var(--color-amber);
+            margin-bottom: 0.5rem;
+        }
+
+        .voice-card p {
+            font-size: 0.875rem;
+            color: var(--color-light-gray);
+            margin: 0;
+        }
+
+        /* Word Lists */
+        .word-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .word-list span {
+            background: var(--color-dark-gray);
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 2px;
+        }
+
+        .word-list.approved span {
+            border: 1px solid var(--color-amber);
+            color: var(--color-amber-light);
+        }
+
+        .word-list.rejected span {
+            border: 1px solid #c44;
+            color: #e88;
+            text-decoration: line-through;
+        }
+
+        /* Example Blocks */
+        .example {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            padding: 1.25rem;
+            margin: 1rem 0;
+            font-style: italic;
+            color: var(--color-off-white);
+            position: relative;
+        }
+
+        .example::before {
+            content: '"';
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--color-amber);
+            position: absolute;
+            top: 0.25rem;
+            left: 0.75rem;
+            opacity: 0.5;
+        }
+
+        .example p {
+            padding-left: 1.5rem;
+            margin: 0;
+        }
+
+        .example-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-amber);
+            font-style: normal;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Platform Cards */
+        .platform-card {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .platform-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--color-dark-gray);
+        }
+
+        .platform-name {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--color-white);
+        }
+
+        .platform-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-amber);
+            background: var(--color-dark-gray);
+            padding: 0.25rem 0.75rem;
+        }
+
+        .platform-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .platform-meta dt {
+            color: var(--color-light-gray);
+            margin-bottom: 0.25rem;
+        }
+
+        .platform-meta dd {
+            color: var(--color-off-white);
+        }
+
+        /* Framework Cards */
+        .framework {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .framework-header {
+            background: var(--color-dark-gray);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .framework-title {
+            font-weight: 600;
+            color: var(--color-white);
+        }
+
+        .framework-number {
+            font-family: var(--font-display);
+            color: var(--color-amber);
+        }
+
+        .framework-body {
+            padding: 1.5rem;
+        }
+
+        .framework-structure {
+            background: var(--color-black);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-family: monospace;
+            font-size: 0.875rem;
+            color: var(--color-amber-light);
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            color: var(--color-amber);
+        }
+
+        /* Approval Tiers */
+        .approval-tier {
+            margin: 1rem 0;
+            padding: 1rem 1.5rem;
+            border-left: 3px solid;
+        }
+
+        .approval-tier.approved {
+            background: rgba(68, 170, 136, 0.1);
+            border-color: #4a8;
+        }
+
+        .approval-tier.revision {
+            background: rgba(212, 168, 75, 0.1);
+            border-color: var(--color-amber);
+        }
+
+        .approval-tier.rejected {
+            background: rgba(204, 68, 68, 0.1);
+            border-color: #c44;
+        }
+
+        .approval-tier h5 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .approval-tier.approved h5 { color: #4a8; }
+        .approval-tier.revision h5 { color: var(--color-amber); }
+        .approval-tier.rejected h5 { color: #c44; }
+
+        /* Scenario Cards */
+        .scenario {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+        }
+
+        .scenario-title {
+            font-weight: 600;
+            color: var(--color-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .scenario-approach {
+            font-size: 0.875rem;
+            color: var(--color-amber);
+            margin-bottom: 1rem;
+        }
+
+        .do-dont {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .do-dont > div {
+            padding: 1rem;
+        }
+
+        .do-dont .do {
+            background: rgba(68, 170, 136, 0.1);
+            border: 1px solid rgba(68, 170, 136, 0.3);
+        }
+
+        .do-dont .dont {
+            background: rgba(204, 68, 68, 0.1);
+            border: 1px solid rgba(204, 68, 68, 0.3);
+        }
+
+        .do-dont h5 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+
+        .do h5 { color: #4a8; }
+        .dont h5 { color: #c44; }
+
+        .do-dont ul {
+            margin: 0;
+            padding-left: 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            padding: 1.25rem;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-light-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-white);
+        }
+
+        /* How To Use Section */
+        .role-card {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .role-name {
+            font-weight: 600;
+            color: var(--color-amber);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Final Principles */
+        .principle {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--color-charcoal);
+            border-left: 3px solid var(--color-amber);
+        }
+
+        .principle strong {
+            display: block;
+            color: var(--color-white);
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .principle p {
+            color: var(--color-light-gray);
+            margin: 0;
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(180deg, var(--color-black) 0%, var(--color-charcoal) 100%);
+            border-top: 1px solid var(--color-dark-gray);
+            margin-top: 3rem;
+        }
+
+        .cta h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            color: var(--color-amber);
+            border: none;
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--color-charcoal);
+            border-top: 1px solid var(--color-dark-gray);
+        }
+
+        footer p {
+            font-size: 0.75rem;
+            color: var(--color-gray);
+            margin: 0;
+        }
+
+        /* Calendar Styles */
+        .calendar-intro {
+            background: var(--color-charcoal);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 3px solid var(--color-amber);
+        }
+
+        .month-section {
+            margin-bottom: 3rem;
+        }
+
+        .month-header {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-white);
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--color-amber);
+            margin-bottom: 1.5rem;
+        }
+
+        .event-card {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            margin-bottom: 1.25rem;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .event-card:hover {
+            border-color: var(--color-amber);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1.25rem 1.5rem;
+            background: var(--color-dark-gray);
+            gap: 1rem;
+        }
+
+        .event-date {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--color-amber);
+            white-space: nowrap;
+        }
+
+        .event-title {
+            font-weight: 600;
+            color: var(--color-white);
+            flex: 1;
+        }
+
+        .event-body {
+            padding: 1.25rem 1.5rem;
+        }
+
+        .event-description {
+            color: var(--color-off-white);
+            font-size: 0.9375rem;
+            margin-bottom: 1rem;
+        }
+
+        .event-connection {
+            background: var(--color-black);
+            padding: 1rem;
+            border-left: 2px solid var(--color-amber);
+        }
+
+        .connection-label {
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-amber);
+            margin-bottom: 0.375rem;
+        }
+
+        .event-connection p {
+            font-size: 0.875rem;
+            color: var(--color-light-gray);
+            margin: 0;
+            font-style: italic;
+        }
+
+        .event-highlight {
+            border-color: var(--color-amber);
+        }
+
+        .event-highlight .event-header {
+            background: linear-gradient(90deg, var(--color-amber-dark) 0%, var(--color-dark-gray) 100%);
+        }
+
+        .event-highlight .event-date {
+            color: var(--color-white);
+        }
+
+        /* Calendar Legend */
+        .calendar-legend {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--color-light-gray);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .legend-dot.highlight {
+            background: var(--color-amber);
+        }
+
+        .legend-dot.standard {
+            background: var(--color-dark-gray);
+            border: 1px solid var(--color-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.75rem;
+            }
+
+            nav ul {
+                gap: 0.5rem 1rem;
+            }
+
+            main {
+                padding: 2rem 1rem;
+            }
+
+            .section-number {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .voice-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .do-dont {
+                grid-template-columns: 1fr;
+            }
+
+            .event-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .tab-btn {
+                padding: 0.75rem 1rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media print {
+            nav, .tab-nav {
+                display: none;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            .tab-content {
+                display: block !important;
+            }
+        }
+
+        /* Copy Library Styles */
+        .copy-event {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-dark-gray);
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+        }
+
+        .copy-event-header {
+            background: linear-gradient(90deg, var(--color-amber-dark) 0%, var(--color-dark-gray) 100%);
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-event-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--color-white);
+        }
+
+        .copy-event-date {
+            font-size: 0.875rem;
+            color: var(--color-amber-light);
+        }
+
+        .copy-platform {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--color-dark-gray);
+        }
+
+        .copy-platform:last-child {
+            border-bottom: none;
+        }
+
+        .copy-platform-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .copy-platform-name {
+            font-weight: 600;
+            color: var(--color-amber);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+        }
+
+        .copy-platform-count {
+            font-size: 0.6875rem;
+            color: var(--color-light-gray);
+            background: var(--color-dark-gray);
+            padding: 0.25rem 0.5rem;
+            border-radius: 2px;
+        }
+
+        .copy-version {
+            background: var(--color-black);
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 2px solid var(--color-dark-gray);
+            transition: border-color 0.2s;
+        }
+
+        .copy-version:hover {
+            border-left-color: var(--color-amber);
+        }
+
+        .copy-version:last-child {
+            margin-bottom: 0;
+        }
+
+        .copy-version-label {
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-light-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .copy-text {
+            color: var(--color-off-white);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .copy-note {
+            font-size: 0.75rem;
+            color: var(--color-gray);
+            margin-top: 0.5rem;
+            font-style: normal;
+        }
+
+        .month-divider {
+            text-align: center;
+            padding: 2rem 0;
+            margin: 2rem 0;
+            border-top: 1px solid var(--color-dark-gray);
+            border-bottom: 1px solid var(--color-dark-gray);
+        }
+
+        .month-divider h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--color-amber);
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .month-divider p {
+            color: var(--color-light-gray);
+            font-size: 0.875rem;
+            margin: 0.5rem 0 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">AGENCY <span>BREWING</span></div>
+    <p class="tagline">Where Advertising Creativity Meets Brewing Craft</p>
+    <h1 class="doc-title">Brand Voice & Strategy Guide</h1>
+    <p class="doc-subtitle">Companion Document for Social Content Creation</p>
+</header>
+
+<div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('voice')">Brand Guide</button>
+    <button class="tab-btn" onclick="switchTab('calendar')">Cultural Calendar</button>
+    <button class="tab-btn" onclick="switchTab('holidays')">National Holidays</button>
+    <button class="tab-btn" onclick="switchTab('copy')">Content Copy</button>
+    <button class="tab-btn" onclick="switchTab('lexicon')">Lexicon</button>
+</div>
+
+<!-- BRAND GUIDE TAB -->
+<div id="voice" class="tab-content active">
+
+<nav>
+    <ul>
+        <li><a href="#how-to-use">How to Use</a></li>
+        <li><a href="#brand-messaging">Messaging</a></li>
+        <li><a href="#voice-pillars">Voice</a></li>
+        <li><a href="#copy-guidelines">Copy</a></li>
+        <li><a href="#platforms">Platforms</a></li>
+        <li><a href="#frameworks">Frameworks</a></li>
+        <li><a href="#copy-examples">Examples</a></li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#content-strategy">Strategy</a></li>
+        <li><a href="#approval">Approval</a></li>
+        <li><a href="#photography">Photography</a></li>
+    </ul>
+</nav>
+
+<main>
+
+<!-- HOW TO USE -->
+<section id="how-to-use">
+    <span class="section-number">00</span>
+    <h2>How to Use This Document</h2>
+
+    <p>This is the single source of truth for Agency Brewing's brand voice, social media strategy, and content execution.</p>
+
+    <div class="role-card">
+        <p class="role-name">For Jonathan (Creative Director)</p>
+        <ul>
+            <li>Voice pillars and platform adaptations</li>
+            <li>Content frameworks for approval templates</li>
+            <li>Photography and visual standards</li>
+            <li>Final sign-off on anything that goes live</li>
+        </ul>
+    </div>
+
+    <div class="role-card">
+        <p class="role-name">For Drew (Content Generation)</p>
+        <ul>
+            <li>Copy guidelines and examples for LLM prompts</li>
+            <li>Platform-specific tone and cadence</li>
+            <li>Quarterly strategy and content pillars</li>
+            <li>Approval criteria checklist before submission</li>
+        </ul>
+    </div>
+</section>
+
+<!-- BRAND MESSAGING -->
+<section id="brand-messaging">
+    <span class="section-number">01</span>
+    <h2>Brand Messaging</h2>
+
+    <div class="highlight-box">
+        <p>At its core, Agency Brewing celebrates the idea that great work and great beer both benefit from <strong>balance, restraint, and intention</strong>. This is a beer for people who appreciate quality but don't need it explained, who value culture as much as craft, and who see beer as part of a broader social rhythm - not the main event, but an essential one.</p>
+    </div>
+
+    <h3>The Brand Lives at the Intersection of</h3>
+    <ul>
+        <li>Creative and advertising culture</li>
+        <li>Modern social clubs and shared spaces</li>
+        <li>Premium, sessionable, and approachable beers</li>
+    </ul>
+
+    <div class="principle">
+        <strong>Each beer is treated as a new brief.</strong>
+        <p>Distinct in expression, consistent in standards. Different styles, same mindset.</p>
+    </div>
+
+    <h3>Our Audience</h3>
+    <ul>
+        <li>Light and thoughtful beer drinkers</li>
+        <li>Those drawn to brands that feel considered, not commercial</li>
+    </ul>
+</section>
+
+<!-- VOICE PILLARS -->
+<section id="voice-pillars">
+    <span class="section-number">02</span>
+    <h2>Voice Pillars</h2>
+
+    <div class="voice-grid">
+        <div class="voice-card">
+            <p class="voice-card-title">Effortless Intelligence</p>
+            <p class="voice-card-score">Pillar 1</p>
+            <p>Short, sharp thoughts. Minimal punctuation. No exclamation points unless earned. Confident but never loud. Clever without winking too hard.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Creative Culture, Translated</p>
+            <p class="voice-card-score">Pillar 2</p>
+            <p>Advertising references used sparingly, only if they land for non-industry folks too. Inside jokes that still feel inclusive. Culture > credentials.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Lightness in All Forms</p>
+            <p class="voice-card-score">Pillar 3</p>
+            <p>Sessionable beer. Sessionable copy. Short sentences. Breathing room. Nothing overwrought.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Social Club Energy</p>
+            <p class="voice-card-score">Pillar 4</p>
+            <p>Feels like being "in," without needing a membership card. Welcoming. Conversational. Community-forward.</p>
+        </div>
+    </div>
+
+    <h3>What We Avoid</h3>
+    <div class="word-list rejected">
+        <span>Beer snob language</span>
+        <span>IBUs, hop varietals</span>
+        <span>Long tasting notes</span>
+        <span>Forced humor</span>
+        <span>Meme chasing</span>
+        <span>Slang that ages fast</span>
+        <span>Over-explaining the brand</span>
+        <span>Artisanal</span>
+        <span>Curated</span>
+        <span>Elevated</span>
+        <span>Apologetic language</span>
+    </div>
+</section>
+
+<!-- COPY GUIDELINES -->
+<section id="copy-guidelines">
+    <span class="section-number">03</span>
+    <h2>Copy Guidelines</h2>
+
+    <div class="highlight-box">
+        <p>Copy at Agency Brewing is not there to sell first - it's there to set tone, create familiarity, and signal taste. Social copy should feel like overhearing a smart, relaxed comment at the end of a table, not a brand announcement.</p>
+    </div>
+
+    <h3>Sentence Structure</h3>
+    <ul>
+        <li>Short lines</li>
+        <li>Occasional fragments</li>
+        <li>White space matters</li>
+    </ul>
+
+    <div class="do-dont">
+        <div class="dont">
+            <h5>Bad</h5>
+            <ul>
+                <li>Our Session IPA is designed for creatives who value balance and quality craftsmanship.</li>
+                <li>This is the perfect beer to enjoy after a long day of work with friends or coworkers.</li>
+            </ul>
+        </div>
+        <div class="do">
+            <h5>Good</h5>
+            <ul>
+                <li>Made for the moment you log off.</li>
+                <li>Work's done.</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Punctuation</h3>
+    <ul>
+        <li><strong>Periods</strong> signal confidence</li>
+        <li><strong>Exclamation points</strong> are minimal and rare - intentional only</li>
+        <li><strong>Line breaks</strong> create rhythm</li>
+        <li><strong>Lowercase</strong> is acceptable when it fits the mood</li>
+    </ul>
+
+    <h3>Hashtags</h3>
+    <ul>
+        <li>Minimal</li>
+        <li>Purposeful</li>
+        <li>Often none at all</li>
+    </ul>
+
+    <h3>Humor & Wit</h3>
+    <ul>
+        <li><strong>Dry > loud</strong></li>
+        <li><strong>Observational > jokey</strong></li>
+        <li>If it needs explaining, it doesn't ship</li>
+    </ul>
+
+    <h3>Copy Length Flexibility</h3>
+    <p style="color: var(--color-light-gray); margin-bottom: 1rem; font-size: 0.9rem;">The brand voice works in two modes. Default to short form; use longer form when the moment calls for it.</p>
+    <div class="do-dont">
+        <div class="do">
+            <h5>Short Form (Default)</h5>
+            <ul>
+                <li>1-3 words to one short sentence</li>
+                <li>Minimal punctuation</li>
+                <li>Let the image carry the weight</li>
+                <li>"Desert bound." / "No agenda." / "Earned it."</li>
+            </ul>
+        </div>
+        <div class="do">
+            <h5>Longer Form (When Needed)</h5>
+            <ul>
+                <li>2-3 proper sentences</li>
+                <li>Same voice principles apply</li>
+                <li>Best for milestones, cultural moments, or when context adds value</li>
+                <li>"LA Beer Fest turns 20 this weekend. Two decades of showing up. That's a milestone."</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- PLATFORMS -->
+<section id="platforms">
+    <span class="section-number">04</span>
+    <h2>Platform-Specific Tone</h2>
+
+    <p>The voice stays consistent; the delivery flexes by platform.</p>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">Instagram</span>
+            <span class="platform-tag">Primary Platform</span>
+        </div>
+        <dl class="platform-meta">
+            <div>
+                <dt>Tone</dt>
+                <dd>Most refined, visual-first, editorial</dd>
+            </div>
+            <div>
+                <dt>How We Sound</dt>
+                <dd>Confident, minimal, aware of design and pacing</dd>
+            </div>
+        </dl>
+        <h4>Copy Guidelines</h4>
+        <ul>
+            <li>1-3 short lines</li>
+            <li>Often fewer than 20 words</li>
+            <li>Let the image do the heavy lifting</li>
+        </ul>
+        <div class="example">
+            <span class="example-label">Examples</span>
+            <p>"Good taste travels well." / "Same mindset. New pour." / "Office closed. Conversation open."</p>
+        </div>
+    </div>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">X (Twitter)</span>
+            <span class="platform-tag">Secondary</span>
+        </div>
+        <dl class="platform-meta">
+            <div>
+                <dt>Tone</dt>
+                <dd>Sharper, more conversational, culturally responsive</dd>
+            </div>
+            <div>
+                <dt>How We Sound</dt>
+                <dd>Smart, timely, slightly more playful</dd>
+            </div>
+        </dl>
+        <h4>Copy Guidelines</h4>
+        <ul>
+            <li>One strong line</li>
+            <li>Occasional commentary on work, culture, or time</li>
+            <li>Still restrained - never ranty</li>
+        </ul>
+        <div class="example">
+            <span class="example-label">Examples</span>
+            <p>"Logging off is a skill." / "Great ideas hate fluorescent lighting." / "This meeting could've been a beer."</p>
+        </div>
+    </div>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">Facebook</span>
+            <span class="platform-tag">Community</span>
+        </div>
+        <dl class="platform-meta">
+            <div>
+                <dt>Tone</dt>
+                <dd>Warm, clear, slightly more explanatory</dd>
+            </div>
+            <div>
+                <dt>How We Sound</dt>
+                <dd>Welcoming, community-minded, still elevated - never corporate</dd>
+            </div>
+        </dl>
+        <h4>Copy Guidelines</h4>
+        <ul>
+            <li>2-3 short sentences max</li>
+            <li>Light context is okay</li>
+            <li>Avoid jargon</li>
+        </ul>
+        <div class="example">
+            <span class="example-label">Examples</span>
+            <p>"Out with friends. In good company. That's the idea." / "Same beer. New table."</p>
+        </div>
+    </div>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">TikTok</span>
+            <span class="platform-tag">Behind the Scenes</span>
+        </div>
+        <dl class="platform-meta">
+            <div>
+                <dt>Tone</dt>
+                <dd>Observational, relaxed, human - never try-hard</dd>
+            </div>
+            <div>
+                <dt>How We Sound</dt>
+                <dd>Casual but considered, self-aware, slightly looser but still intentional</dd>
+            </div>
+        </dl>
+        <h4>Copy Guidelines</h4>
+        <ul>
+            <li>Short captions (1 line preferred)</li>
+            <li>Often lowercase</li>
+            <li>Feels like a passing thought, not a setup</li>
+            <li>Let the video do the talking</li>
+        </ul>
+        <div class="example">
+            <span class="example-label">Examples</span>
+            <p>"this is the part of the day we like." / "nothing urgent. just good timing." / "no notes."</p>
+        </div>
+    </div>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">LinkedIn</span>
+            <span class="platform-tag">Optional - Industry</span>
+        </div>
+        <dl class="platform-meta">
+            <div>
+                <dt>Tone</dt>
+                <dd>Professional creative, strategic insights</dd>
+            </div>
+            <div>
+                <dt>Use For</dt>
+                <dd>Industry partnerships, creative process deep-dives</dd>
+            </div>
+        </dl>
+        <div class="example">
+            <span class="example-label">Example</span>
+            <p>The best advertising campaigns start with a focused brief. We applied that same discipline to our first beer. For creative professionals who understand that process drives results.</p>
+        </div>
+    </div>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">Festival / In-Person</span>
+            <span class="platform-tag">Live Activation</span>
+        </div>
+        <dl class="platform-meta">
+            <div>
+                <dt>Tone</dt>
+                <dd>Warm, confident, let the beer speak</dd>
+            </div>
+        </dl>
+        <h4>Elevator Pitch</h4>
+        <div class="example">
+            <p>Agency Brewing - where advertising creativity meets brewing craft. Try the Session IPA.</p>
+        </div>
+        <h4>When Asked About the Advertising Connection</h4>
+        <div class="example">
+            <p>We're creatives who got obsessed with brewing. Same discipline - concept, iteration, execution.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FRAMEWORKS -->
+<section id="frameworks">
+    <span class="section-number">05</span>
+    <h2>Content Frameworks</h2>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Product as Campaign</span>
+            <span class="framework-number">01</span>
+        </div>
+        <div class="framework-body">
+            <div class="framework-structure">[Beer/Batch] + [Creative insight or process] + [Where/When]</div>
+            <p><strong>Tone:</strong> Confident presentation, like launching a campaign</p>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Session IPA. Six months of obsessive iteration, one breakthrough concept. Available now at [location]. This is what happens when creative directors brew beer.</p>
+            </div>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Batch #3 sealed. Like any great campaign, refinement is endless. Same concept, even better execution. Cans dropping this week.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Process as Creative Development</span>
+            <span class="framework-number">02</span>
+        </div>
+        <div class="framework-body">
+            <div class="framework-structure">[What we're doing] + [Advertising parallel] + [Why it matters]</div>
+            <p><strong>Tone:</strong> Behind-the-creative, transparent about craft obsession</p>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Cold conditioning for two weeks because great concepts need time to develop. Like creative work, rushing the execution kills the idea. Patience equals quality.</p>
+            </div>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Taste-testing batch #4 today. In advertising, you kill your darlings to find breakthrough concepts. Brewing's no different. Iteration is everything.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Community as Collaboration</span>
+            <span class="framework-number">03</span>
+        </div>
+        <div class="framework-body">
+            <div class="framework-structure">[Acknowledge/Build connection] + [Invite participation] + [Creative angle]</div>
+            <p><strong>Tone:</strong> Collaborative but confident, building creative community</p>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>To everyone who grabbed cans this week - your feedback is gold. Great creative work requires dialogue. What are you tasting? Drop notes below.</p>
+            </div>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Festival season starts soon. Come taste what happens when advertising creativity meets brewing craft. Great beer, like great ideas, starts conversations.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Milestones as Campaign Results</span>
+            <span class="framework-number">04</span>
+        </div>
+        <div class="framework-body">
+            <div class="framework-structure">[What happened] + [Creative interpretation] + [Forward momentum]</div>
+            <p><strong>Tone:</strong> Confident acknowledgment, not celebration for its own sake</p>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Batch #1 sold out. When execution meets concept, people respond. Batch #2 drops next week. This is what campaign-worthy results look like.</p>
+            </div>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>First festival pour complete. Watching people discover our Session IPA for the first time - that creative validation drives everything. More events coming.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Differentiation Through Creative DNA</span>
+            <span class="framework-number">05</span>
+        </div>
+        <div class="framework-body">
+            <div class="framework-structure">[What we do differently] + [Advertising parallel] + [The result]</div>
+            <p><strong>Use when:</strong> Explaining what makes Agency Brewing different</p>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Most breweries focus on tradition. We focus on concept and execution - the same rigor that drives breakthrough advertising. Different DNA, exceptional beer.</p>
+            </div>
+            <div class="example">
+                <span class="example-label">Example</span>
+                <p>Advertising taught us that process drives results. Every batch gets the same attention a creative director gives their best work. Taste the difference.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COPY EXAMPLES -->
+<section id="copy-examples">
+    <span class="section-number">06</span>
+    <h2>Copy Examples</h2>
+
+    <h3>Product-Focused (Soft Sell)</h3>
+    <div class="word-list approved">
+        <span>"Built with intention."</span>
+        <span>"Nothing extra. Everything considered."</span>
+        <span>"A beer that knows when to step back."</span>
+    </div>
+
+    <h3>Brand Philosophy</h3>
+    <div class="word-list approved">
+        <span>"Good work deserves good pauses."</span>
+        <span>"Balance is part of the craft."</span>
+        <span>"Taste is quiet confidence."</span>
+    </div>
+
+    <h3>Creative Culture</h3>
+    <div class="word-list approved">
+        <span>"Process matters."</span>
+        <span>"Strong opinions. Loosely held."</span>
+        <span>"Finished is better than perfect."</span>
+    </div>
+
+    <h3>Light Humor</h3>
+    <div class="word-list approved">
+        <span>"We support early outs."</span>
+        <span>"Another meeting that could've been avoided."</span>
+        <span>"Deadline met. Thirst remains."</span>
+    </div>
+
+    <h3>Out-of-Office Voice</h3>
+    <p style="color: var(--color-light-gray); margin-bottom: 1rem; font-size: 0.9rem;">Agency Brewing has permission to be cheeky about work culture. Dry observations about logging off, leaving early, inbox avoidance, and deserved breaks. This isn't complaining about work—it's celebrating the moments away from it. Think: the relief of closing the laptop, not the dread of Monday.</p>
+    <div class="word-list approved">
+        <span>"Laptop closed."</span>
+        <span>"Inbox can wait."</span>
+        <span>"Left early. No regrets."</span>
+        <span>"Auto-reply: ON."</span>
+        <span>"Signed off."</span>
+        <span>"The brief can wait."</span>
+    </div>
+
+    <h3>Agency Insider Voice</h3>
+    <p style="color: var(--color-light-gray); margin-bottom: 1rem; font-size: 0.9rem;">Agency Brewing has permission to reference the creative industry grind—the inside baseball of agency life. Late nights, revision rounds, client calls, deadline pushes. The key: this is a knowing nod to shared experience, not venting or complaining. Dry acknowledgment of the work that makes the escape meaningful.</p>
+    <div class="word-list approved">
+        <span>"Survived Q1."</span>
+        <span>"One more round of revisions."</span>
+        <span>"Zero client calls."</span>
+        <span>"No 'quick questions.'"</span>
+        <span>"After the late nights..."</span>
+        <span>"We've sat through the brainstorms."</span>
+        <span>"Twenty years of early setups and late nights."</span>
+        <span>"Nothing due until Monday."</span>
+    </div>
+    <p style="color: var(--color-light-gray); margin-top: 1rem; font-size: 0.85rem;"><strong>Use sparingly:</strong> ~10% of content. Best paired with festival escapes, long weekends, and earned moments. The grind is acknowledged, not celebrated.</p>
+
+    <h3>Agency Lexicon Quick Reference</h3>
+    <p style="color: var(--color-light-gray); margin-bottom: 1rem; font-size: 0.9rem;">Key terms from the creative industry lexicon. Use these sparingly to signal insider status—knowing when terms are sincere vs. ironic is brand currency.</p>
+
+    <h4>Buzzwords to Mock (Use Ironically)</h4>
+    <div class="word-list rejected">
+        <span>"Circle back"</span>
+        <span>"Bandwidth"</span>
+        <span>"Deep dive"</span>
+        <span>"Low-hanging fruit"</span>
+        <span>"Move the needle"</span>
+        <span>"Touch base"</span>
+        <span>"Take this offline"</span>
+    </div>
+
+    <h4>Client Feedback Classics (Gallows Humor)</h4>
+    <div class="word-list approved">
+        <span>"Make the logo bigger"</span>
+        <span>"Just a few small changes"</span>
+        <span>"I'll know it when I see it"</span>
+        <span>"Make it pop"</span>
+    </div>
+
+    <h4>Scope Creep Survival Language</h4>
+    <div class="word-list approved">
+        <span>"One more thing..."</span>
+        <span>"While you're at it..."</span>
+        <span>"Just a small tweak"</span>
+        <span>"Out of scope"</span>
+        <span>"Change order"</span>
+    </div>
+
+    <h4>Slack-Era Communication</h4>
+    <div class="word-list approved">
+        <span>"Per my last email"</span>
+        <span>"Async"</span>
+        <span>"Heads down"</span>
+        <span>"OOO"</span>
+        <span>"Ping me"</span>
+    </div>
+
+    <h4>Agency Life Dark Humor</h4>
+    <div class="word-list approved">
+        <span>"Death by committee"</span>
+        <span>"Feedback-draft tennis"</span>
+        <span>"Pitch prep" (weekend destroyer)</span>
+        <span>"It's agency life"</span>
+        <span>"Kill your darlings"</span>
+    </div>
+
+    <h4>Terms of Genuine Respect</h4>
+    <div class="word-list approved">
+        <span>"The work has legs"</span>
+        <span>"This idea travels"</span>
+        <span>"Ship it"</span>
+        <span>"On-brief"</span>
+        <span>"The Big Idea"</span>
+    </div>
+
+    <h3>Engagement Responses</h3>
+    <div class="word-list approved">
+        <span>"Exactly."</span>
+        <span>"Couldn't agree more."</span>
+        <span>"We'll save you one."</span>
+        <span>"That's the spirit."</span>
+    </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+    <span class="section-number">07</span>
+    <h2>Community & Engagement</h2>
+
+    <div class="principle">
+        <strong>Agency Brewing doesn't dominate conversations - it joins them.</strong>
+        <p>Response style: Timely. Calm. Human. Often brief.</p>
+    </div>
+
+    <h3>Engagement Principles</h3>
+    <div class="voice-grid">
+        <div class="voice-card">
+            <p class="voice-card-title">Acknowledge > Amplify</p>
+            <p>Respond to comments without redirecting everything back to sales.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Reward the Creatives</p>
+            <p>Repost thoughtful tags. Highlight photographers, designers, bartenders. Credit always.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">IRL to URL Loop</p>
+            <p>Encourage: Bar sightings, casual moments, design-forward UGC.</p>
+        </div>
+    </div>
+
+    <h3>Emergency Response</h3>
+    <div class="scenario">
+        <p class="scenario-title">Quality Issue</p>
+        <div class="example">
+            <p>"Every can matters. DM us and we'll make this right."</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTENT STRATEGY -->
+<section id="content-strategy">
+    <span class="section-number">08</span>
+    <h2>Content Strategy</h2>
+
+    <h3>Content Pillars</h3>
+    <div class="voice-grid">
+        <div class="voice-card">
+            <p class="voice-card-title">Product, Quietly</p>
+            <p>Can details. Pour shots. Natural light. No hard sell.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Out Of Office Philosophy</p>
+            <p>Leaving work. Reclaiming time. Small freedoms. Everyday rituals.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Creative Culture</p>
+            <p>Process. Inspiration. Analog moments. Studio life.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Community & Social Club</p>
+            <p>Events. Gatherings. Shared tables. Familiar faces.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Design & Timelessness</p>
+            <p>Aesthetic appreciation. Intentional choices. Visual craft.</p>
+        </div>
+    </div>
+
+    <h3>Posting Cadence</h3>
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <p class="metric-label">Feed Posts</p>
+            <p class="metric-value">8 / month</p>
+        </div>
+        <div class="metric-card">
+            <p class="metric-label">Stories</p>
+            <p class="metric-value">8-10 / month</p>
+        </div>
+        <div class="metric-card">
+            <p class="metric-label">Reels</p>
+            <p class="metric-value">1-2 / month</p>
+        </div>
+    </div>
+
+    <h3>Quarterly Strategy: 2026</h3>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Q1: Tease Phase</span>
+            <span class="framework-number">Jan-Mar</span>
+        </div>
+        <div class="framework-body">
+            <p><strong>Goal:</strong> Build intrigue before full availability. Signals, not announcements.</p>
+            <ul>
+                <li>Partial can reveals, typography studies, packaging materials</li>
+                <li>Visual-forward, copy-light</li>
+            </ul>
+            <div class="example">
+                <p>"Something's taking shape." / "Almost ready." / "Details matter."</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Q2: Awareness & Placement</span>
+            <span class="framework-number">Apr-Jun</span>
+        </div>
+        <div class="framework-body">
+            <p><strong>Goal:</strong> Be seen in the right places. Show up IRL.</p>
+            <ul>
+                <li>Bar and retail placements, spring energy, event visibility</li>
+                <li>Document events quietly - before/after moments, candid conversations</li>
+            </ul>
+            <div class="example">
+                <p>"Good company. Good timing." / "We brought enough." / "Nice crowd tonight."</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Q3: Community & Rhythm</span>
+            <span class="framework-number">Jul-Sep</span>
+        </div>
+        <div class="framework-body">
+            <p><strong>Goal:</strong> Feel like part of the routine. Consistently present.</p>
+            <ul>
+                <li>End-of-week rituals, summer evenings, familiar tables</li>
+                <li>Repeating formats (OOO Fridays)</li>
+            </ul>
+            <div class="example">
+                <p>"Right on time." / "Same table." / "You know the drill."</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="framework">
+        <div class="framework-header">
+            <span class="framework-title">Q4: Reflection & Restraint</span>
+            <span class="framework-number">Oct-Dec</span>
+        </div>
+        <div class="framework-body">
+            <p><strong>Goal:</strong> Close the year with confidence and calm. Quieter by design.</p>
+            <ul>
+                <li>Low-light, warm visuals. Small gatherings. 6-8 posts/month.</li>
+                <li>Avoid loud holiday language, gimmicks, countdowns</li>
+            </ul>
+            <div class="example">
+                <p>"Same feeling. Different season." / "Still pouring." / "Onward."</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- APPROVAL -->
+<section id="approval">
+    <span class="section-number">09</span>
+    <h2>Approval Process</h2>
+
+    <h3>Pre-Approval Self-Check</h3>
+    <p>Before sending content to Jonathan, verify:</p>
+
+    <h4>1. Voice Authenticity</h4>
+    <ul class="checklist">
+        <li>Sounds like Agency Brewing, not generic craft beer</li>
+        <li>Advertising connection is natural, not forced</li>
+        <li>Confidence without arrogance</li>
+        <li>Creative obsession comes through</li>
+    </ul>
+
+    <h4>2. Strategic Alignment</h4>
+    <ul class="checklist">
+        <li>Builds the "advertising × brewing" narrative</li>
+        <li>Focuses on craft and execution</li>
+        <li>Creates desire for the beer</li>
+        <li>Strengthens community connection</li>
+    </ul>
+
+    <h4>3. Execution Quality</h4>
+    <ul class="checklist">
+        <li>Concise, impactful language</li>
+        <li>No unnecessary formatting or emojis</li>
+        <li>Free of clichés or tired craft beer tropes</li>
+        <li>Photography/visuals support the copy (when applicable)</li>
+    </ul>
+
+    <h3>Approval Tiers</h3>
+
+    <div class="approval-tier approved">
+        <h5>Approved As-Is</h5>
+        <ul>
+            <li>Clear advertising × brewing DNA</li>
+            <li>Natural voice, zero "trying too hard" moments</li>
+            <li>Focuses on beer/craft/creative process</li>
+            <li>Visuals and copy work together (Jonathan's call)</li>
+        </ul>
+    </div>
+
+    <div class="approval-tier revision">
+        <h5>Needs Revision</h5>
+        <ul>
+            <li>Too generic (could be any brewery)</li>
+            <li>Agency speak feels forced or cliché</li>
+            <li>Lacks confidence or sounds apologetic</li>
+            <li>Promises we can't deliver</li>
+            <li>Visual/copy mismatch</li>
+        </ul>
+    </div>
+
+    <div class="approval-tier rejected">
+        <h5>Rejected</h5>
+        <ul>
+            <li>Violates core brand voice principles</li>
+            <li>Sounds like someone else</li>
+            <li>Negative or comparative in wrong way</li>
+            <li>Makes unsubstantiated claims</li>
+        </ul>
+    </div>
+
+    <h3>Fast-Track Approval Items</h3>
+    <p>Once frameworks validated, these need minimal Jonathan review:</p>
+    <ul>
+        <li>Standard product drops (Framework 1)</li>
+        <li>Simple customer post reshares</li>
+        <li>Brief behind-the-scenes with 1-2 sentence captions</li>
+        <li>Event announcements using approved templates</li>
+    </ul>
+    <div class="highlight-box">
+        <p><strong>Everything else: Full creative director review.</strong></p>
+    </div>
+</section>
+
+<!-- PHOTOGRAPHY -->
+<section id="photography">
+    <span class="section-number">10</span>
+    <h2>Photography Guidelines</h2>
+
+    <div class="highlight-box">
+        <p>Our photography is an essential essence of our brand. It showcases the wide range of experiences and hospitality we offer.</p>
+    </div>
+
+    <h3>Photographic Attributes</h3>
+    <div class="word-list approved">
+        <span>Authentic</span>
+        <span>Spontaneous</span>
+        <span>Inspired</span>
+        <span>Connected</span>
+        <span>Nostalgic</span>
+        <span>Contemporary</span>
+        <span>Creative</span>
+        <span>Craftsmanship</span>
+    </div>
+
+    <h3>Lighting</h3>
+    <div class="do-dont">
+        <div class="do">
+            <h5>Daytime</h5>
+            <ul>
+                <li>Sensorial, reflecting the moment</li>
+                <li>Explore color nuances</li>
+                <li>Silhouettes welcome</li>
+            </ul>
+        </div>
+        <div class="dont">
+            <h5>Nightlife</h5>
+            <ul>
+                <li>Hard strobe or high-contrast shadows</li>
+                <li>Less branded, more living in the moment</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Subject Guidelines</h3>
+    <ul>
+        <li><strong>Spaces:</strong> Always feel authentic and real, never artificial</li>
+        <li><strong>Experience:</strong> Capture enjoyment - mix of close-ups and longer shots for intimate and collective moments</li>
+        <li><strong>Products:</strong> Detail shots - pops of color, interesting compositions, authentic feel</li>
+        <li><strong>Events:</strong> Capture freedom and energy through sensorial, exciting imagery</li>
+        <li><strong>Locations:</strong> Candid, in-action shots of community activities - never staged</li>
+    </ul>
+
+    <div class="highlight-box warning">
+        <p><strong>Note:</strong> Placeholder images should never be used for public-facing communications.</p>
+    </div>
+</section>
+
+<!-- FINAL PRINCIPLES -->
+<section id="final">
+    <span class="section-number">11</span>
+    <h2>Final Principles</h2>
+
+    <div class="voice-grid">
+        <div class="voice-card">
+            <p class="voice-card-title">The beer speaks louder than the words.</p>
+            <p>Voice without substance is noise.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Confidence comes from craft obsession.</p>
+            <p>Not from trying to seem bigger than we are.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Community over broadcasting.</p>
+            <p>Connections with people who share our values.</p>
+        </div>
+        <div class="voice-card">
+            <p class="voice-card-title">Jonathan has final creative authority.</p>
+            <p>If it doesn't feel right, it doesn't go out.</p>
+        </div>
+    </div>
+</section>
+
+<div class="cta">
+    <h2>Sessionable beer. Sessionable copy.</h2>
+</div>
+
+</main>
+
+</div>
+
+<!-- CULTURAL CALENDAR TAB -->
+<div id="calendar" class="tab-content">
+
+<main>
+
+<section>
+    <span class="section-number">LA</span>
+    <h2>Cultural Calendar: February - April 2026</h2>
+
+    <div class="calendar-intro">
+        <p><strong>Strategic content opportunities for Agency Brewing.</strong> Each event includes brand connection notes for social media tie-ins. Highlighted events represent prime opportunities where advertising and creative culture intersect with our brand DNA.</p>
+    </div>
+
+    <div class="calendar-legend">
+        <div class="legend-item">
+            <span class="legend-dot highlight"></span>
+            <span>Prime Brand Opportunity</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-dot standard"></span>
+            <span>Standard Opportunity</span>
+        </div>
+    </div>
+</section>
+
+<!-- MARCH -->
+<section class="month-section">
+    <h2 class="month-header">March 2026</h2>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Mar 21</span>
+            <span class="event-title">Central Coast Craft Beer Fest</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Atascadero. Presented by Central Coast Brewers Guild at Sunken Gardens, featuring craft breweries, food trucks, and lawn games.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>California craft beer trail content; regional brewery community</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- APRIL -->
+<section class="month-section">
+    <h2 class="month-header">April 2026</h2>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 4</span>
+            <span class="event-title">LA Beer Fest 20th Anniversary</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">LA Center Studios. LA's largest craft beer festival celebrates 20 years with 80+ breweries, 200+ beers, food trucks, bands, and DJs.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Perfect convergence of craft beer culture and LA creative energy; milestone celebration</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 7</span>
+            <span class="event-title">National Beer Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Commemorates the 1933 Cullen-Harrison Act that legalized beer post-Prohibition.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Prohibition history meets advertising history - 1930s were transformative for both industries</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 10-12 / 17-19</span>
+            <span class="event-title">Coachella</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Indio. Iconic music and arts festival with headliners Justin Bieber, Sabrina Carpenter, and Karol G. Brand activations dominate.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Peak creative culture moment; brand activation showcase; fashion, music, and festival culture</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Apr 24-26</span>
+            <span class="event-title">Stagecoach</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Indio. Country music festival following Coachella at Empire Polo Club.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Americana aesthetic; different creative audience than Coachella</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="cta">
+    <h2>Plan campaigns around these cultural moments.</h2>
+</div>
+
+</main>
+
+</div>
+
+<!-- NATIONAL HOLIDAYS TAB -->
+<div id="holidays" class="tab-content">
+
+<main>
+
+<section>
+    <span class="section-number">US</span>
+    <h2>National Holidays: February - April 2026</h2>
+
+    <div class="calendar-intro">
+        <p><strong>Key national holidays and cultural moments for content planning.</strong> These dates represent consistent annual opportunities to connect with audiences through shared cultural experiences. Use these alongside the LA Cultural Calendar for comprehensive campaign planning.</p>
+    </div>
+
+    <div class="calendar-legend">
+        <div class="legend-item">
+            <span class="legend-dot highlight"></span>
+            <span>Major Beer/Brand Opportunity</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-dot standard"></span>
+            <span>Cultural Moment</span>
+        </div>
+    </div>
+</section>
+
+<!-- FEBRUARY HOLIDAYS -->
+<section class="month-section">
+    <h2 class="month-header">February 2026</h2>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Feb 8</span>
+            <span class="event-title">Super Bowl LX</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">New Orleans. Second Sunday in February. Beer is one of the most-consumed beverages on Super Bowl Sunday.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Advertising's biggest stage; $7M/30-second spots showcase creativity's highest value; viewing party culture</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Feb 14</span>
+            <span class="event-title">Valentine's Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Saturday. Valentine's Day falls on a Saturday in 2026 - prime date night territory.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Romantic dining culture; craft beer as elevated date night beverage; couples sharing experiences</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Feb 16</span>
+            <span class="event-title">Presidents' Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Federal Holiday. Third Monday in February honoring Washington's birthday (Feb 22, 1732).</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Three-day weekend; retail sales; patriotic Americana aesthetic</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Feb 17</span>
+            <span class="event-title">Mardi Gras / Fat Tuesday</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">The day before Ash Wednesday; indulgence before Lenten fasting. Major celebrations in New Orleans.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Celebration culture; "last call" before restraint; festive excess as creative expression</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MARCH HOLIDAYS -->
+<section class="month-section">
+    <h2 class="month-header">March 2026</h2>
+
+    <div class="event-card">
+        <div class="event-header">
+            <span class="event-date">Mar 8</span>
+            <span class="event-title">Daylight Saving Time Begins</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">"Spring forward" at 2:00 AM - lose one hour of sleep.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Time change survival; "We lost an hour but gained daylight"; coffee and beer content</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Mar 17</span>
+            <span class="event-title">St. Patrick's Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Tuesday. Global celebration of Irish culture; major beer consumption day.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Beer culture holiday; green beer debates; craft vs. corporate; Irish pub tradition meets LA craft scene</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- APRIL HOLIDAYS -->
+<section class="month-section">
+    <h2 class="month-header">April 2026</h2>
+
+    <div class="event-card event-highlight">
+        <div class="event-header">
+            <span class="event-date">Apr 1</span>
+            <span class="event-title">April Fools' Day</span>
+        </div>
+        <div class="event-body">
+            <p class="event-description">Wednesday. Global day of pranks and jokes.</p>
+            <div class="event-connection">
+                <p class="connection-label">Brand Connection</p>
+                <p>Creative mischief; advertising's history of memorable April Fools' campaigns; playful brand voice</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="cta">
+    <h2>Build campaigns around cultural moments that matter.</h2>
+</div>
+
+</main>
+
+</div>
+
+<!-- CONTENT COPY TAB -->
+<div id="copy" class="tab-content">
+
+<main>
+
+<section>
+    <span class="section-number">01</span>
+    <h2>Content Copy Library</h2>
+
+    <div class="calendar-intro">
+        <p><strong>Ready-to-use social copy for each calendar moment.</strong> All copy follows Agency Brewing's voice guidelines: short, confident, clever without trying too hard. Select the version that best fits your visual and moment. Jonathan has final approval on all content.</p>
+    </div>
+</section>
+
+<!-- FEBRUARY COPY -->
+<div class="month-divider">
+    <h2>February 2026</h2>
+    <p>4 Events | 28 Copy Versions</p>
+</div>
+
+<!-- Super Bowl LX -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Super Bowl LX</span>
+        <span class="copy-event-date">Feb 8</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Industry Cheeky</p>
+            <p class="copy-text">Working on Sunday.</p>
+            <p class="copy-note">Pairs with: TV setup, couch view. Double meaning: watching ads = "work" for ad people.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Social Club</p>
+            <p class="copy-text">Full house. Full glasses.</p>
+            <p class="copy-note">Pairs with: group gathering shot, casual atmosphere</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Industry Respect</p>
+            <p class="copy-text">The biggest stage for craft.</p>
+            <p class="copy-note">Pairs with: TV glow in background, game day atmosphere. Nods to advertising as craft.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Industry Cheeky</p>
+            <p class="copy-text">Busy at work.</p>
+            <p class="copy-note">Same double meaning: watching the ads IS the work. Dry, insider humor.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Industry Nod</p>
+            <p class="copy-text">The one night people actually watch the ads. Respect.</p>
+            <p class="copy-note">Dry observation, doesn't over-explain</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Gathering</p>
+            <p class="copy-text">Full house. Full glasses. That's the idea.</p>
+            <p class="copy-note">Warm, community-focused</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Simple</p>
+            <p class="copy-text">Game on.</p>
+            <p class="copy-note">Minimal, works with any visual</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">The one day everyone watches the commercials on purpose. Some of us call that research. Most of us call it Sunday.</p>
+            <p class="copy-note">Industry insider angle that works for everyone</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Super Bowl Sunday. The only time of year when advertising gets the attention it deserves. And the beer flows accordingly.</p>
+            <p class="copy-note">Celebrates both advertising and beer culture</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">Watching the game. Watching the ads. Watching the halftime show. Either way, you need something good in your hand.</p>
+            <p class="copy-note">Inclusive of all Super Bowl viewing styles</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">The spots this year cost $7 million for 30 seconds. We'll be watching from the couch with something that cost considerably less. Cheers to the creatives.</p>
+            <p class="copy-note">Industry-aware, celebrates ad spend while being grounded</p>
+        </div>
+    </div>
+</div>
+
+<!-- Valentine's Day -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Valentine's Day</span>
+        <span class="copy-event-date">Feb 14</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Agency Cheeky</p>
+            <p class="copy-text">Date night. No agenda.</p>
+            <p class="copy-note">Pairs with: intimate table setting. Work/life crossover - meetings have agendas, dates don't.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Anti-Cliche</p>
+            <p class="copy-text">Better than roses.</p>
+            <p class="copy-note">Pairs with: close-up pour shot, two glasses</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Agency Cheeky</p>
+            <p class="copy-text">Off hours collaboration.</p>
+            <p class="copy-note">Pairs with: couple moment, warm lighting. Agency-speak meets romance.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Double Meaning</p>
+            <p class="copy-text">Good partners are hard to find.</p>
+            <p class="copy-note">Works for business or personal interpretation. Intentionally ambiguous.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Agency Cheeky</p>
+            <p class="copy-text">Cheers to off hours collaboration.</p>
+            <p class="copy-note">Agency-speak meets romance. Celebrates the blur between work relationships and real ones.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Agency Cheeky</p>
+            <p class="copy-text">The best meetings don't have agendas.</p>
+            <p class="copy-note">Work/life crossover. Warm but clever.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Simple</p>
+            <p class="copy-text">Saturday plans: handled.</p>
+            <p class="copy-note">Casual, confident</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">Valentine's Day falls on a Saturday this year. Which means the reservation can run late, the conversation can linger, and nobody has to check their phone. That's the kind of night worth planning.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Roses are fine. Chocolate is expected. But sitting across from someone with something actually good in your glass? That's the move.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">The best partnerships don't come with decks or deliverables. They come with good conversation, shared interests, and maybe a second round.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">Saturday night. No agenda. No talking points. Just two people who actually want to be there. That's what we're here for.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Presidents' Day -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Presidents' Day</span>
+        <span class="copy-event-date">Feb 16</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - OOO Energy</p>
+            <p class="copy-text">Office closed. Conversation open.</p>
+            <p class="copy-note">Pairs with: relaxed daytime setting, natural light</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - OOO Cheeky</p>
+            <p class="copy-text">Auto-reply: ON.</p>
+            <p class="copy-note">Pairs with: any casual moment</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Dry</p>
+            <p class="copy-text">Three days. No notes.</p>
+            <p class="copy-note">Pairs with: relaxed visual, unhurried vibe</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Brief</p>
+            <p class="copy-text">Long weekend. Take it.</p>
+            <p class="copy-note">Permission without preaching</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Agency Insider</p>
+            <p class="copy-text">Per my last email: OOO until Tuesday.</p>
+            <p class="copy-note">Passive-aggressive classic. Insider humor.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Social</p>
+            <p class="copy-text">Three days off. No agenda required.</p>
+            <p class="copy-note">Warm, community-focused</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Agency Insider</p>
+            <p class="copy-text">Three days. Zero revision rounds.</p>
+            <p class="copy-note">Speaks to feedback-draft tennis survivors.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Agency Insider</p>
+            <p class="copy-text">Three-day weekends hit different when you actually take them. No "quick questions." No "circling back." No "just one more pass." Just good beer and the people who get it.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Presidents' Day weekend. The inbox will be there Tuesday. Right now, there's nowhere else to be but here.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">Monday off. Auto-reply set. Phone on silent. This is what a long weekend is supposed to feel like.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">Some holidays are about celebrating something specific. This one's about having an extra day to do absolutely nothing work-related. We're in.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Mardi Gras -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Mardi Gras / Fat Tuesday</span>
+        <span class="copy-event-date">Feb 17</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Observational</p>
+            <p class="copy-text">Tuesday, but make it count.</p>
+            <p class="copy-note">Pairs with: rich lighting, warm tones</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Minimal</p>
+            <p class="copy-text">Fat Tuesday.</p>
+            <p class="copy-note">Pairs with: bold product shot, festive setting</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Celebration</p>
+            <p class="copy-text">One night to overdo it.</p>
+            <p class="copy-note">Pairs with: celebration moment, group energy. Permission to indulge.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Dry</p>
+            <p class="copy-text">One day to overdo it. Then back to work.</p>
+            <p class="copy-note">Acknowledges the rhythm without over-explaining</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Agency Insider</p>
+            <p class="copy-text">No revisions tonight. Just indulgence.</p>
+            <p class="copy-note">Escape from feedback-draft tennis.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Social</p>
+            <p class="copy-text">Fat Tuesday. Act accordingly.</p>
+            <p class="copy-note">Permission to indulge, warm tone</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Agency Insider</p>
+            <p class="copy-text">Tuesday. Approved as-is. No changes.</p>
+            <p class="copy-note">Plays on approval tier language.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">Fat Tuesday. The one day of the year when excess isn't just allowed, it's expected. Tomorrow's a different story, but tonight? Tonight we indulge.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Mardi Gras is about doing it right before you have to do it responsibly. Good food, good drinks, and the kind of night that earns the name Fat Tuesday.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's something about a midweek celebration that hits different. Maybe it's the permission to break routine. Maybe it's the beer. Probably both.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">One night a year, excess is the point. Mardi Gras isn't about moderation—it's about earning tomorrow's restraint with tonight's indulgence.</p>
+        </div>
+    </div>
+</div>
+
+<!-- MARCH COPY -->
+<div class="month-divider">
+    <h2>March 2026</h2>
+    <p>3 Events | 21 Copy Versions</p>
+</div>
+
+<!-- Daylight Saving Time -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Daylight Saving Time Begins</span>
+        <span class="copy-event-date">Mar 8</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Observational</p>
+            <p class="copy-text">Lost an hour. Found this.</p>
+            <p class="copy-note">Pairs with: product in natural daylight, golden hour</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Agency Insider</p>
+            <p class="copy-text">Spring forward. Ship it.</p>
+            <p class="copy-note">Tech-culture crossover. Time to launch.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Seasonal</p>
+            <p class="copy-text">Daylight's back. So are we.</p>
+            <p class="copy-note">Pairs with: bright natural light, spring energy</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Observational</p>
+            <p class="copy-text">Lost an hour. Gained some daylight. Fair trade.</p>
+            <p class="copy-note">Brief, relatable</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Agency Insider</p>
+            <p class="copy-text">More bandwidth for evenings. Finally.</p>
+            <p class="copy-note">Reclaims "bandwidth" for actual time, not capacity.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Agency Insider</p>
+            <p class="copy-text">Longer evenings. Shorter meetings.</p>
+            <p class="copy-note">The trade everyone wants to make.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Simple</p>
+            <p class="copy-text">More daylight. More time outside.</p>
+            <p class="copy-note">Brief, confident</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">We lost an hour of sleep but gained an extra hour of daylight. That's the kind of trade we can get behind. Patio season is officially approaching.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Spring forward. The clocks just stole an hour from your weekend, but they gave it back as longer evenings. We'll call it even.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">One less hour of sleep. One more hour of golden light. Feels like a fair deal when you're sitting outside with something cold.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">The sun's staying out later, which means happy hour just got an extension. Adjust your clocks and your expectations accordingly.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version E - Momentum</p>
+            <p class="copy-text">Spring forward. The light shifts, the energy shifts, and suddenly everything feels like it's moving again. Good time to be making things.</p>
+        </div>
+    </div>
+</div>
+
+<!-- St. Patrick's Day -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">St. Patrick's Day</span>
+        <span class="copy-event-date">Mar 17</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Confident Stance</p>
+            <p class="copy-text">No green beer.</p>
+            <p class="copy-note">Pairs with: clean product shot, craft-forward</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Classic</p>
+            <p class="copy-text">Sláinte.</p>
+            <p class="copy-note">Pairs with: toast moment, warm lighting</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Beer Culture</p>
+            <p class="copy-text">The one day everyone orders beer.</p>
+            <p class="copy-note">Pairs with: crowded pub energy, celebration visual</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Dry</p>
+            <p class="copy-text">The one day everyone drinks beer. We'll take it.</p>
+            <p class="copy-note">Industry-aware, self-deprecating</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Minimal</p>
+            <p class="copy-text">Sláinte.</p>
+            <p class="copy-note">Simple toast, respectful</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Agency Insider</p>
+            <p class="copy-text">No client calls. Just Sláinte.</p>
+            <p class="copy-note">Tonight's meeting has been cancelled.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Simple</p>
+            <p class="copy-text">March 17. You know what to do.</p>
+            <p class="copy-note">Brief acknowledgment</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">5 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">St. Patrick's Day. The one day of the year when everyone drinks beer, even the people who usually order wine. We'll take the company.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Quick take on green beer: no. But the sentiment is right. Today's for celebrating, for toasting strangers, for forgetting it's only Tuesday. Sláinte.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's something about St. Patrick's Day that reminds everyone why beer culture matters. The pubs fill up, strangers become friends, and for one night, everyone's in on it together.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">March 17. The tradition continues. The pubs fill up, the toasts get louder, and for one night, everyone remembers why we gather in the first place.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version E - Agency Insider</p>
+            <p class="copy-text">St. Patrick's Day. The one night where drinking with clients isn't a strategy meeting. No talking points. No deliverables. Just the kind of conversation that only happens when the laptop stays closed. Sláinte.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Central Coast Craft Beer Fest -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Central Coast Craft Beer Fest</span>
+        <span class="copy-event-date">Mar 21</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Location</p>
+            <p class="copy-text">Central Coast.</p>
+            <p class="copy-note">Pairs with: California landscape, golden light</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Agency Insider</p>
+            <p class="copy-text">Fest season. Out of scope until Monday.</p>
+            <p class="copy-note">Plays on "out of scope" as escape, not billing.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - California Craft</p>
+            <p class="copy-text">California craft. Central Coast.</p>
+            <p class="copy-note">Pairs with: festival atmosphere, regional pride</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D - Community</p>
+            <p class="copy-text">The people who make it. The people who drink it.</p>
+            <p class="copy-note">Pairs with: crowd shot, maker community energy</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Industry</p>
+            <p class="copy-text">Central Coast Craft Beer Fest this weekend. Kicking off the season.</p>
+            <p class="copy-note">Brief acknowledgment of calendar</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Agency Insider</p>
+            <p class="copy-text">Making things that people actually want. Central Coast this weekend.</p>
+            <p class="copy-note">The dream that keeps us in the game.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Community</p>
+            <p class="copy-text">Central Coast this weekend. Full crowd up north.</p>
+            <p class="copy-note">Warm, acknowledges the moment</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Agency Insider</p>
+            <p class="copy-text">No decks. No rounds of feedback. Just craft.</p>
+            <p class="copy-note">The escape from death by committee.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">Central Coast Craft Beer Fest kicks off this weekend. Sunken Gardens in Atascadero, surrounded by California craft and the people who make it happen.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Festival season starts up north. Food trucks, lawn games, and some of the best craft beer in the state. This is the good part of spring.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's a reason California craft beer has a reputation. Days like this remind you why. Central Coast, good weather, better beer.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">Atascadero this weekend for the Central Coast Craft Beer Fest. Good beer, good people, and the kind of energy that reminds you why craft matters.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version E - Craft Community</p>
+            <p class="copy-text">Central Coast Craft Beer Fest brings together the brewers, the makers, and the people who care about what goes into a glass. Sunken Gardens in Atascadero. This is California craft at its best.</p>
+        </div>
+    </div>
+</div>
+
+<!-- APRIL COPY -->
+<div class="month-divider">
+    <h2>April 2026</h2>
+    <p>5 Events | 35 Copy Versions</p>
+</div>
+
+<!-- April Fools' Day -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">April Fools' Day</span>
+        <span class="copy-event-date">Apr 1</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Anti-Stunt</p>
+            <p class="copy-text">No stunts.</p>
+            <p class="copy-note">Pairs with: straightforward product shot, clean composition</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Reassuring</p>
+            <p class="copy-text">The beer is real.</p>
+            <p class="copy-note">Pairs with: honest pour shot, natural light</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Steady</p>
+            <p class="copy-text">April 1. Still here.</p>
+            <p class="copy-note">Pairs with: any consistent brand visual</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Self-Aware</p>
+            <p class="copy-text">April Fools'. We'll sit this one out.</p>
+            <p class="copy-note">Acknowledges without participating</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Industry Dry</p>
+            <p class="copy-text">No fake product launches.</p>
+            <p class="copy-note">Nods to brand stunt culture</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Direct</p>
+            <p class="copy-text">No tricks. Just beer.</p>
+            <p class="copy-note">Warm, honest</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Steady</p>
+            <p class="copy-text">April 1. Business as usual.</p>
+            <p class="copy-note">Reliable, grounded</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">April Fools' Day. The day brands everywhere unveil their most creative fake products. We're sitting this one out. The beer is real, and that's the whole point.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">No fake launches. No prank announcements. No "we're actually making this" posts. Just beer, made the way it's supposed to be made. April 1 or otherwise.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's something to be said for a brand that knows when to stay in its lane. Today, everyone's a comedian. We'll be here when you need something real.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">April Fools' Day. We've seen the fake product decks. We've sat through the brainstorms. We're good. Sometimes the most creative thing you can do is nothing at all.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LA Beer Fest 20th Anniversary -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">LA Beer Fest 20th Anniversary</span>
+        <span class="copy-event-date">Apr 4</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Milestone</p>
+            <p class="copy-text">20 years of LA beer.</p>
+            <p class="copy-note">Pairs with: festival atmosphere or archival nod</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Event Callout</p>
+            <p class="copy-text">LA Beer Fest. Saturday.</p>
+            <p class="copy-note">Pairs with: event setup, crowd energy</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Respect</p>
+            <p class="copy-text">Two decades. Still pouring.</p>
+            <p class="copy-note">Pairs with: pour shot, timeless feel</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Industry Acknowledgment</p>
+            <p class="copy-text">LA Beer Fest turns 20 this weekend. That's a milestone.</p>
+            <p class="copy-note">Respectful of the scene</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Brief Respect</p>
+            <p class="copy-text">Two decades of craft beer in LA. Respect.</p>
+            <p class="copy-note">Nods to community, not self</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Agency Insider</p>
+            <p class="copy-text">Twenty years of early setups and late nights. LA Beer Fest gets it.</p>
+            <p class="copy-note">Speaks to anyone who's put in the hours to build something.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Community</p>
+            <p class="copy-text">LA Beer Fest this Saturday. 20 years strong.</p>
+            <p class="copy-note">Warm, celebratory without being loud</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Simple</p>
+            <p class="copy-text">Two decades of LA beer.</p>
+            <p class="copy-note">Lets the milestone speak</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">LA Beer Fest turns 20 this weekend. Two decades of breweries, food trucks, and people who actually care about what's in their glass. That's worth celebrating.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">80+ breweries. 200+ beers. 20 years running. LA Beer Fest is the kind of anniversary that deserves more than a post. We'll be there.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's something about a milestone that makes you appreciate the grind. LA Beer Fest has been doing this for two decades. The city's craft beer scene is better for it.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">Twenty years ago, someone decided LA needed a craft beer festival. They were right. LA Center Studios, this Saturday. Come through.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version E - Agency Insider</p>
+            <p class="copy-text">Twenty years of showing up, rain or shine, client crisis or not. LA Beer Fest knows what it takes to build something that lasts. We've been through enough all-nighters to respect the grind.</p>
+        </div>
+    </div>
+</div>
+
+<!-- National Beer Day -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">National Beer Day</span>
+        <span class="copy-event-date">Apr 7</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Ultra Minimal</p>
+            <p class="copy-text">April 7.</p>
+            <p class="copy-note">Pairs with: hero product shot. Trusts audience to know.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - History</p>
+            <p class="copy-text">1933. The day beer came back.</p>
+            <p class="copy-note">Pairs with: vintage-inspired or heritage visual</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Ownership</p>
+            <p class="copy-text">Our day.</p>
+            <p class="copy-note">Pairs with: any confident brand moment</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Craft Pride</p>
+            <p class="copy-text">National Beer Day. A reminder that craft matters.</p>
+            <p class="copy-note">Industry respect, values-forward</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Historical Nod</p>
+            <p class="copy-text">April 7, 1933. Beer came back. Still going.</p>
+            <p class="copy-note">Brief history without lecturing</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Agency Insider</p>
+            <p class="copy-text">National Beer Day. Approved without revisions.</p>
+            <p class="copy-note">The rare approval that needs no feedback.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Confident</p>
+            <p class="copy-text">April 7. Our kind of day.</p>
+            <p class="copy-note">Ownership without shouting</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">5 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">National Beer Day. The one that commemorates April 7, 1933, when Prohibition ended and Americans could legally buy beer again. Some days deserve to be remembered.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">April 7, 1933. The day Prohibition ended and Americans could legally buy beer again. Ninety-three years later, we're still grateful for the craft that followed.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's a reason craft beer exists. It started on this day in 1933, when the law changed and people could finally drink what they wanted again. We're still enjoying the benefits.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">National Beer Day is a reminder of what happens when people are free to make and drink what they believe in. Craft over convenience. Quality over shortcuts. Cheers to that.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version E - Agency Insider</p>
+            <p class="copy-text">National Beer Day. April 7, 1933—when the approval finally came through and the work could ship. No more revisions. No more waiting on legal. Just beer, the way it was meant to be. Some approvals take 13 years. This one was worth it.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Coachella -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Coachella</span>
+        <span class="copy-event-date">Apr 10-12 / 17-19</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Location Drop</p>
+            <p class="copy-text">Indio.</p>
+            <p class="copy-note">Pairs with: desert light, festival atmosphere. Works either weekend.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - OOO Cheeky</p>
+            <p class="copy-text">OOO until Monday. (Maybe Tuesday.)</p>
+            <p class="copy-note">Pairs with: crowd energy, golden hour</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Agency Insider</p>
+            <p class="copy-text">Desert weekend. Brief declined.</p>
+            <p class="copy-note">The one time saying no is the right call.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Agency Insider</p>
+            <p class="copy-text">Coachella weekend. Calendar blocked. "Busy" is an understatement.</p>
+            <p class="copy-note">The calendar hold everyone respects.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Minimal</p>
+            <p class="copy-text">Coachella weekend.</p>
+            <p class="copy-note">Simple acknowledgment</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Energy</p>
+            <p class="copy-text">Coachella weekend. Right place, right time.</p>
+            <p class="copy-note">Warm, acknowledges the cultural moment</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Agency Insider</p>
+            <p class="copy-text">Desert bound. Deck can wait.</p>
+            <p class="copy-note">The escape from deliverables.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">4 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">Coachella weekend. The one where everyone's out of office, schedules get cleared, and the desert becomes the center of the universe for a few days. We'll be there.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Some meetings got moved this week. Some emails won't get answered until Monday. That's the deal when Coachella comes around. No apologies.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">There's a reason Coachella is the thing it is. Music, art, people, and the kind of energy you can't manufacture in a deck. Out of office until further notice.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">Indio this weekend. Two stages, one beer, and the kind of experience you can't get anywhere else. See you in the desert.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Stagecoach -->
+<div class="copy-event">
+    <div class="copy-event-header">
+        <span class="copy-event-title">Stagecoach</span>
+        <span class="copy-event-date">Apr 24-26</span>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Instagram</span>
+            <span class="copy-platform-count">3 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Agency Insider</p>
+            <p class="copy-text">Stagecoach. Round two approved.</p>
+            <p class="copy-note">Plays on approval language for double dipping.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Continuity</p>
+            <p class="copy-text">Back to the desert.</p>
+            <p class="copy-note">Pairs with: landscape, connects to Coachella rhythm</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C - Agency Insider</p>
+            <p class="copy-text">Still out here. Per my auto-reply.</p>
+            <p class="copy-note">Extended OOO with passive-aggressive callback.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D - Agency Insider</p>
+            <p class="copy-text">Survived Q1. Desert bound.</p>
+            <p class="copy-note">Pairs with: road trip energy. The payoff after the grind.</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">LinkedIn</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Continuity</p>
+            <p class="copy-text">Stagecoach weekend. April's been good to us.</p>
+            <p class="copy-note">Positions as part of larger moment</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - Brief</p>
+            <p class="copy-text">Back to Indio.</p>
+            <p class="copy-note">Minimal, connects the calendar</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Facebook</span>
+            <span class="copy-platform-count">2 versions</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A - Agency Insider</p>
+            <p class="copy-text">Stagecoach. The retainer continues.</p>
+            <p class="copy-note">Plays on ongoing engagement language.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B - OOO Cheeky</p>
+            <p class="copy-text">One more weekend in the desert. Earned it.</p>
+            <p class="copy-note">Permission, work-life balance</p>
+        </div>
+    </div>
+
+    <div class="copy-platform">
+        <div class="copy-platform-header">
+            <span class="copy-platform-name">Longer Form</span>
+            <span class="copy-platform-count">5 versions - any platform</span>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version A</p>
+            <p class="copy-text">Stagecoach weekend. Two weeks in Indio might seem like a lot, but when the lineup's this good and the weather's this perfect, you don't ask questions. See you out there.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version B</p>
+            <p class="copy-text">Back to the desert for round two. Different sound, same energy. April's been good to us. Stagecoach this weekend.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version C</p>
+            <p class="copy-text">One more weekend in the desert before the calendar takes over again. Stagecoach wraps up what's been an excellent April. We earned this.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version D</p>
+            <p class="copy-text">Country music, cold beer, and a reason to stay out of the office one more weekend. Stagecoach closes out April the right way.</p>
+        </div>
+
+        <div class="copy-version">
+            <p class="copy-version-label">Version E - Agency Insider</p>
+            <p class="copy-text">After the Q1 push, the late nights, the revision rounds, and the "one more pass" requests, this is the payoff. Stagecoach weekend. Country music, cold beer, and absolutely nothing due until Monday.</p>
+        </div>
+    </div>
+</div>
+
+<div class="cta">
+    <h2>Copy complete. Now make it real.</h2>
+</div>
+
+</main>
+
+</div>
+
+<!-- LEXICON TAB -->
+<div id="lexicon" class="tab-content">
+
+<nav>
+    <ul>
+        <li><a href="#lexicon-intro">Introduction</a></li>
+        <li><a href="#mad-men">Mad Men Era</a></li>
+        <li><a href="#contemporary">Contemporary Slang</a></li>
+        <li><a href="#cynical">Cynical Insider</a></li>
+        <li><a href="#aspirational">Aspirational Pitch</a></li>
+        <li><a href="#role-specific">Role-Specific</a></li>
+        <li><a href="#universal">Universal Terms</a></li>
+        <li><a href="#lexicon-usage">Brand Usage</a></li>
+    </ul>
+</nav>
+
+<main>
+
+<!-- INTRO -->
+<section id="lexicon-intro">
+    <span class="section-number">00</span>
+    <h2>The Complete Lexicon of Ad-Speak</h2>
+
+    <p>For a craft brewery targeting LA's creative professionals, fluency in agency vernacular is brand currency. This glossary delivers <strong>both the aspirational pitch-deck polish and the cynical, self-aware humor</strong> that defines advertising culture.</p>
+
+    <div class="highlight-box">
+        <p>The terminology spans serious professional jargon, ironic insider mockery, and everything in between, giving your brand voice authentic texture that resonates with creatives who've lived these expressions.</p>
+    </div>
+</section>
+
+<!-- MAD MEN ERA -->
+<section id="mad-men">
+    <span class="section-number">01</span>
+    <h2>Mad Men Era: The Golden Age Lexicon</h2>
+
+    <p>The 1950s-1980s established advertising's foundational vocabulary, much of which survives today&mdash;some sincerely, some as nostalgic callbacks perfect for a heritage-conscious brand.</p>
+
+    <h3>Agency Hierarchy and Culture</h3>
+
+    <h4>The Essential Divide</h4>
+    <ul>
+        <li><strong>"The Suits"</strong> &mdash; Account management and business-side personnel; still used (often pejoratively) by creatives</li>
+        <li><strong>"The Creatives"</strong> &mdash; Art directors, copywriters, and creative department staff</li>
+        <li><strong>"Mad Men"</strong> &mdash; 1950s slang coined by Madison Avenue advertisers themselves ("Mad" = Madison); now culturally iconic</li>
+        <li><strong>"Rainmaker"</strong> &mdash; Executive who brings in major new business; carries genuine respect</li>
+    </ul>
+
+    <h4>Madison Avenue Vernacular</h4>
+    <ul>
+        <li><strong>"Full-service shop"</strong> &mdash; Agency offering complete creative, media, and account services</li>
+        <li><strong>"Adland"</strong> &mdash; The advertising industry as a whole (now in Merriam-Webster)</li>
+        <li><strong>"Three-Martini Lunch"</strong> &mdash; The legendary, leisurely, alcohol-fueled business lunch; became synonymous with 1960s Madison Avenue</li>
+        <li><strong>"The Gray Flannel Suit"</strong> &mdash; 1950s executive uniform; from the 1955 novel that defined the era's conformity</li>
+    </ul>
+
+    <h3>Foundational Strategic Concepts</h3>
+
+    <p>These philosophies shaped modern marketing language:</p>
+
+    <ul>
+        <li><strong>USP (Unique Selling Proposition)</strong> &mdash; Rosser Reeves' 1940s concept: the single distinct benefit making a product superior. Still fundamental</li>
+        <li><strong>"Reason Why" Advertising</strong> &mdash; John E. Kennedy/Claude Hopkins concept that ads must provide rational purchase justification; "salesmanship in print"</li>
+        <li><strong>"Sell the sizzle, not the steak"</strong> &mdash; Promote emotional benefits over features; quintessential golden-age wisdom</li>
+        <li><strong>Brand Image</strong> &mdash; David Ogilvy's emphasis on building consistent brand personality</li>
+        <li><strong>The Big Idea</strong> &mdash; Central creative concept; Ogilvy: "Unless your advertising contains a big idea, it will pass like a ship in the night"</li>
+    </ul>
+
+    <h3>Classic Creative Terminology</h3>
+
+    <h4>Print Craft Terms (Many Still Current)</h4>
+    <ul>
+        <li><strong>Copy/Body Copy/Headline</strong> &mdash; The written elements of advertising</li>
+        <li><strong>Tagline/Strapline</strong> &mdash; Short memorable phrase (UK prefers "strapline")</li>
+        <li><strong>Comp (Comprehensive)</strong> &mdash; Detailed layout resembling finished ad</li>
+        <li><strong>Rough</strong> &mdash; Preliminary concept sketch</li>
+        <li><strong>Swipe File</strong> &mdash; Collection of good design examples for inspiration</li>
+        <li><strong>Above the Fold</strong> &mdash; Premium newspaper position; adapted perfectly to digital</li>
+    </ul>
+
+    <div class="highlight-box">
+        <p><strong>Legacy terms with nostalgic flavor:</strong> Paste-up, Camera-Ready Art, Station Break</p>
+    </div>
+</section>
+
+<!-- CONTEMPORARY SLANG -->
+<section id="contemporary">
+    <span class="section-number">02</span>
+    <h2>Contemporary Agency Slang</h2>
+
+    <p>Today's agency language reflects remote work culture, startup influence, and Gen Z communication patterns&mdash;with heavy doses of irony.</p>
+
+    <h3>The Buzzword Hall of Fame</h3>
+    <p>Used sincerely but constantly mocked:</p>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">Most Mocked Phrases</span>
+        </div>
+        <ul>
+            <li><strong>"Circle back"</strong> &mdash; Return to discuss later. <em>The</em> most mocked phrase in agency culture</li>
+            <li><strong>"Bandwidth"</strong> &mdash; Capacity to take on work. "I don't have the bandwidth" = professional decline</li>
+            <li><strong>"Deep dive"</strong> &mdash; Thorough analysis. Research phases; competitive analysis</li>
+            <li><strong>"Low-hanging fruit"</strong> &mdash; Easy wins with minimal effort. Quick-win recommendations</li>
+            <li><strong>"Move the needle"</strong> &mdash; Create measurable impact. Client reporting; strategy discussions</li>
+            <li><strong>"Pivot"</strong> &mdash; Change direction/strategy. Startup culture crossover</li>
+            <li><strong>"Touch base"</strong> &mdash; Quick check-in. Universally recognized, universally mocked</li>
+        </ul>
+    </div>
+
+    <h3>Slack-Era Communication</h3>
+
+    <ul>
+        <li><strong>"Async"</strong> &mdash; Not in real-time; remote-native terminology</li>
+        <li><strong>"Ping me"</strong> &mdash; Send a message (verb form of the notification)</li>
+        <li><strong>"Heads down"</strong> &mdash; Focused work mode; don't disturb</li>
+        <li><strong>"Let's align"</strong> &mdash; Get on the same page</li>
+        <li><strong>"Hop on a huddle"</strong> &mdash; Quick Slack audio call</li>
+        <li><strong>"OOO"</strong> &mdash; Out of Office</li>
+        <li><strong>"Per my last email"</strong> &mdash; Passive-aggressive classic meaning "I already answered this"</li>
+    </ul>
+
+</section>
+
+<!-- CYNICAL INSIDER -->
+<section id="cynical">
+    <span class="section-number">03</span>
+    <h2>The Cynical Insider Glossary</h2>
+
+    <p>This is where the authentic agency voice lives&mdash;the sarcastic, self-deprecating humor that bonds creative professionals over shared frustrations. <strong>Gold for a brewery brand targeting this audience.</strong></p>
+
+    <h3>Client Feedback Translations</h3>
+    <p>The universally mocked disconnect between what clients say and what they mean:</p>
+
+    <div class="platform-card">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+            <thead>
+                <tr style="border-bottom: 1px solid var(--color-dark-gray);">
+                    <th style="text-align: left; padding: 0.75rem 0; color: var(--color-amber);">What the client says</th>
+                    <th style="text-align: left; padding: 0.75rem 0; color: var(--color-light-gray);">What the agency hears</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td style="padding: 0.5rem 0;"><strong>"Make it POP!"</strong></td><td style="padding: 0.5rem 0; color: var(--color-light-gray);">"The design is fine. I simply have a very short attention span."</td></tr>
+                <tr><td style="padding: 0.5rem 0;"><strong>"Just a few small changes..."</strong></td><td style="padding: 0.5rem 0; color: var(--color-light-gray);">"Change everything."</td></tr>
+                <tr><td style="padding: 0.5rem 0;"><strong>"I'll know it when I see it"</strong></td><td style="padding: 0.5rem 0; color: var(--color-light-gray);">"I have terrible taste and I'd rather you accidentally stumble upon my aesthetic."</td></tr>
+                <tr><td style="padding: 0.5rem 0;"><strong>"Make it classic but modern"</strong></td><td style="padding: 0.5rem 0; color: var(--color-light-gray);">"I'm throwing keywords to sound like I know what I'm talking about."</td></tr>
+                <tr><td style="padding: 0.5rem 0;"><strong>"Do what you think is best"</strong></td><td style="padding: 0.5rem 0; color: var(--color-light-gray);">"I won't tell you what I like, but I definitely won't like whatever you do."</td></tr>
+                <tr><td style="padding: 0.5rem 0;"><strong>"This doesn't feel right"</strong></td><td style="padding: 0.5rem 0; color: var(--color-light-gray);">"This design has misaligned my chakras."</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>The Immortal "MAKE THE LOGO BIGGER"</h3>
+
+    <div class="highlight-box">
+        <p>So universal it spawned <strong>a song by an agency band</strong>, Chrome browser extensions for "instant logo biggification," and endless memes. It's the rallying cry of graphic designers everywhere&mdash;and perfect brewery coaster material.</p>
+        <p style="margin-top: 1rem; color: var(--color-light-gray);"><strong>Related client-isms:</strong> "Can you jazz it up?" / "Make it like Apple" / "Make it go viral"</p>
+    </div>
+
+    <h3>Scope Creep Survival Language</h3>
+
+    <ul>
+        <li><strong>"One more thing..."</strong> &mdash; The phrase signaling scope creep is incoming</li>
+        <li><strong>"Just a small tweak"</strong> &mdash; Code for complete overhaul</li>
+        <li><strong>"While you're at it..."</strong> &mdash; Scope creep's opening salvo</li>
+        <li><strong>"The Scope Creep"</strong> &mdash; Client archetype who "thinks they're getting a Rolls-Royce for the price of a bicycle"</li>
+    </ul>
+
+    <h3>Buzzword Bingo</h3>
+
+    <p>These terms are fair game for humor&mdash;<strong>but only when you're actually using them in context</strong>. The jest comes from deploying the buzzword while acknowledging its absurdity. Don't just list them or mock them in isolation.</p>
+
+    <div class="word-list approved">
+        <span>Pivot</span>
+        <span>Low-hanging fruit</span>
+        <span>Blue-sky thinking</span>
+        <span>Thought leadership</span>
+        <span>Best in class</span>
+        <span>Paradigm shift</span>
+        <span>Think outside the box</span>
+        <span>Holistic approach</span>
+        <span>Game-changing</span>
+        <span>AI-powered</span>
+        <span>Data-driven</span>
+        <span>Helicopter view</span>
+    </div>
+
+    <div class="example">
+        <span class="example-label">Proper Usage</span>
+        <p>"Let's circle back after this beer. Or maybe just stay here."</p>
+    </div>
+
+    <h3>Agency Life Dark Humor</h3>
+
+    <h4>Work Culture Expressions</h4>
+    <ul>
+        <li><strong>"It's agency life"</strong> &mdash; Resignation/justification for unhealthy work culture</li>
+        <li><strong>"What other business has so many young men anxious to break in and so many older men anxious to break out?"</strong> &mdash; Classic industry quote</li>
+        <li><strong>"Pitch prep"</strong> &mdash; Euphemism for weekend-destroying work</li>
+    </ul>
+
+    <h4>Award Show Cynicism</h4>
+    <ul>
+        <li><strong>"Award Whore"</strong> &mdash; Person obsessed with winning</li>
+        <li><strong>"Scam Ad"</strong> &mdash; Work created primarily to win awards, not actually run for clients</li>
+        <li><strong>"More craft, care, and effort went into the case study video than the actual creative work"</strong> &mdash; Common admission</li>
+    </ul>
+
+    <h4>Committee and Approval Humor</h4>
+    <ul>
+        <li><strong>"Death by committee"</strong> &mdash; When too many stakeholders kill an idea</li>
+        <li><strong>"Feedback-draft Tennis"</strong> &mdash; Mile-long email chains of revisions</li>
+        <li><strong>"Round file"</strong> &mdash; The trash can for rejected ideas</li>
+        <li><strong>"Kill your darlings"</strong> &mdash; Remove beloved but unnecessary elements</li>
+    </ul>
+
+    <h4>Layoff Euphemisms (Dark Humor Territory)</h4>
+    <ul>
+        <li><strong>"Right-sizing"</strong> &mdash; "Is there a more insidious compound word?"</li>
+        <li><strong>"Restructuring"</strong> &mdash; Layoffs with extra steps</li>
+        <li><strong>"Resource optimization"</strong> &mdash; Firing people</li>
+        <li><strong>"Shaping the path forward"</strong> &mdash; Making cuts</li>
+    </ul>
+</section>
+
+<!-- ASPIRATIONAL PITCH -->
+<section id="aspirational">
+    <span class="section-number">04</span>
+    <h2>Aspirational Pitch Language</h2>
+
+    <p>The vocabulary of big ideas, strategic brilliance, and award-winning work&mdash;used sincerely in pitches and ironically in internal eye-rolls.</p>
+
+    <h3>Big Idea Terminology</h3>
+
+    <h4>Genuine Creative Descriptors</h4>
+    <ul>
+        <li><strong>"The work has legs"</strong> &mdash; Genuinely campaignable concept</li>
+        <li><strong>"This idea travels"</strong> &mdash; Works across markets</li>
+        <li><strong>"Platform thinking"</strong> &mdash; Strategic creative frameworks</li>
+        <li><strong>"Campaign platform"</strong> &mdash; Overarching creative framework for multiple executions</li>
+        <li><strong>"The Creative Leap"</strong> &mdash; The mysterious moment where insight transforms into breakthrough creative</li>
+    </ul>
+
+    <h4>Aspirational Descriptors (Use Carefully)</h4>
+    <div class="word-list approved">
+        <span>Breakthrough</span>
+        <span>Iconic</span>
+        <span>Unskippable</span>
+        <span>Category-defining</span>
+        <span>Culture-creating</span>
+    </div>
+
+    <h4>Eye-Roll Territory (Overused)</h4>
+    <div class="word-list rejected">
+        <span>"Disruptive"</span>
+        <span>"Game-changing"</span>
+        <span>"Revolutionary"</span>
+        <span>"World-class"</span>
+    </div>
+
+    <h3>Award Culture Vocabulary</h3>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">Cannes Lions</span>
+            <span class="platform-tag">The Oscars of Advertising</span>
+        </div>
+        <p>Gold/Silver/Bronze Lion, Grand Prix (highest honor), Titanium Lion (breaks new ground), Shortlist, Case Film</p>
+    </div>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">The One Show</span>
+            <span class="platform-tag">Creative Excellence</span>
+        </div>
+        <p>Pencil (Gold, Silver, Bronze), Best of Show Pencil, Penta Pencil (5+ year partnerships)</p>
+    </div>
+
+    <div class="platform-card">
+        <div class="platform-header">
+            <span class="platform-name">Clios</span>
+            <span class="platform-tag">Unexpected & Unconventional</span>
+        </div>
+        <p>Grand Clio, "unexpected, imaginative, or otherwise unconventional" work</p>
+    </div>
+
+    <h3>Strategy and Brief Terminology</h3>
+
+    <h4>Core Strategic Concepts</h4>
+    <ul>
+        <li><strong>Key Insight</strong> &mdash; The discovered consumer truth presenting an opportunity</li>
+        <li><strong>Tension</strong> &mdash; A conflict or paradox the creative needs to resolve</li>
+        <li><strong>Consumer Truth</strong> &mdash; An authentic, relatable observation about human behavior</li>
+        <li><strong>Single-Minded Proposition (SMP)</strong> &mdash; The one thing you want the audience to take away</li>
+        <li><strong>Opportunity Space</strong> &mdash; Strategic territory where the brand can meaningfully operate</li>
+        <li><strong>Reasons to Believe (RTB)</strong> &mdash; Supporting proof points for claims</li>
+    </ul>
+
+    <h4>Brand Strategy Jargon</h4>
+    <ul>
+        <li><strong>Brand Essence</strong> &mdash; The brand's promise in simplest terms (Volvo = safety)</li>
+        <li><strong>Brand DNA</strong> &mdash; Fundamental, unchanging elements</li>
+        <li><strong>White Space</strong> &mdash; Unexploited market opportunities</li>
+        <li><strong>Point of Parity</strong> &mdash; Where you must match competitors</li>
+        <li><strong>Point of Difference</strong> &mdash; Where you distinguish yourself</li>
+        <li><strong>Mental Availability</strong> &mdash; Likelihood of being thought of in buying situations</li>
+        <li><strong>Challenger Brand</strong> &mdash; Emerging brand competing against category leaders</li>
+    </ul>
+</section>
+
+<!-- ROLE-SPECIFIC -->
+<section id="role-specific">
+    <span class="section-number">05</span>
+    <h2>Role-Specific Vernacular</h2>
+
+    <p>Speaking each department's language.</p>
+
+    <h3>Creative Department</h3>
+
+    <div class="highlight-box">
+        <p><strong>Hierarchy:</strong> CCO (Chief Creative Officer) &rarr; ECD (Executive Creative Director) &rarr; CD (Creative Director) &rarr; ACD (Associate Creative Director) &rarr; Senior Creative &rarr; Middleweight/Heavyweight &rarr; Junior</p>
+    </div>
+
+    <h4>Art Director Terms</h4>
+    <ul>
+        <li><strong>Key art</strong> &mdash; Primary visual representing a campaign</li>
+        <li><strong>Visual language</strong> &mdash; Consistent aesthetic system</li>
+        <li><strong>Look and feel</strong> &mdash; Overall visual style and tone</li>
+        <li><strong>Gestalt</strong> &mdash; The overall presence or impression</li>
+        <li><strong>Whitespace/Negative space</strong> &mdash; The empty areas that matter</li>
+    </ul>
+
+    <h4>Copywriter Terms</h4>
+    <ul>
+        <li><strong>The line</strong> &mdash; The clever, central phrase capturing the campaign idea</li>
+        <li><strong>Long-form/Short-form</strong> &mdash; Length of written content</li>
+        <li><strong>Voice</strong> &mdash; The personality and tone of brand writing</li>
+        <li><strong>Script</strong> &mdash; Written dialogue for broadcast</li>
+    </ul>
+
+    <h4>Team Dynamics</h4>
+    <ul>
+        <li><strong>Creative team/Pairing</strong> &mdash; Art director + copywriter (originated with Bill Bernbach at DDB)</li>
+        <li><strong>Words and pictures team</strong> &mdash; Traditional AD/CW partnership</li>
+        <li><strong>Concepting/Brainstorming</strong> &mdash; Generating ideas</li>
+        <li><strong>Pushing the work</strong> &mdash; Making creative bolder</li>
+        <li><strong>Safe work</strong> &mdash; Conservative creative that won't challenge the client (pejorative)</li>
+    </ul>
+
+    <h4>Feedback Language</h4>
+    <ul>
+        <li><strong>"It's not there yet"</strong> &mdash; Needs further development</li>
+        <li><strong>"This feels safe"</strong> &mdash; Too conservative/boring</li>
+        <li><strong>"Let's push this further"</strong> &mdash; Needs more development</li>
+        <li><strong>"Where's the insight?"</strong> &mdash; Missing consumer truth</li>
+        <li><strong>"Needs more cowbell"</strong> &mdash; Needs something extra</li>
+    </ul>
+
+    <h3>Account/Client Services</h3>
+
+    <div class="highlight-box">
+        <p><strong>Hierarchy:</strong> Client Services Director &rarr; Account Director &rarr; Account Supervisor &rarr; Account Manager (AM) &rarr; Account Executive (AE) &rarr; Account Coordinator</p>
+    </div>
+
+    <h4>Key Terms</h4>
+    <ul>
+        <li><strong>"Bridge"</strong> &mdash; The connector between client and agency</li>
+        <li><strong>"Trusted advisor"</strong> &mdash; Aspirational relationship status (not just vendor)</li>
+        <li><strong>"Managing expectations"</strong> &mdash; Setting realistic timelines</li>
+        <li><strong>"Navigating feedback"</strong> &mdash; Dealing with extensive revisions</li>
+        <li><strong>"Pushback"</strong> &mdash; Client resistance or objection</li>
+    </ul>
+
+    <h4>Status and Scope</h4>
+    <ul>
+        <li><strong>SOW (Statement of Work)</strong> &mdash; Document outlining project scope</li>
+        <li><strong>Scope creep</strong> &mdash; When requirements expand beyond agreement</li>
+        <li><strong>Change order</strong> &mdash; Formal request to modify SOW</li>
+        <li><strong>"Out of scope"</strong> &mdash; Work not covered (favorite phrase for additional billing)</li>
+        <li><strong>Retainer vs. Project-based</strong> &mdash; Ongoing monthly fee vs. one-time engagement</li>
+        <li><strong>AoR (Agency of Record)</strong> &mdash; Primary agency relationship</li>
+    </ul>
+
+    <h3>Production</h3>
+
+    <div class="highlight-box">
+        <p><strong>Hierarchy:</strong> Executive Producer &rarr; Producer &rarr; Associate Producer &rarr; Production Manager/Line Producer &rarr; Production Coordinator</p>
+    </div>
+
+    <h4>Pre-Production</h4>
+    <ul>
+        <li><strong>Pre-pro</strong> &mdash; All planning before filming</li>
+        <li><strong>Treatment</strong> &mdash; Director's vision document</li>
+        <li><strong>Recce</strong> &mdash; Location scout visit</li>
+        <li><strong>Call sheet</strong> &mdash; Daily schedule for crew and talent</li>
+    </ul>
+
+    <h4>On Set</h4>
+    <ul>
+        <li><strong>Talent</strong> &mdash; Performers (actors, models)</li>
+        <li><strong>DP/DOP</strong> &mdash; Director of Photography</li>
+        <li><strong>Gaffer</strong> &mdash; Chief lighting technician</li>
+        <li><strong>Wrap</strong> &mdash; End of filming day</li>
+        <li><strong>Martini shot</strong> &mdash; Final shot of the day</li>
+        <li><strong>Abby Singer</strong> &mdash; Second-to-last shot</li>
+    </ul>
+
+    <h4>Post-Production</h4>
+    <ul>
+        <li><strong>Rough cut &rarr; Fine cut &rarr; Picture lock</strong> &mdash; Edit progression</li>
+        <li><strong>Color grading</strong> &mdash; Adjusting visual appearance</li>
+        <li><strong>Deliverables</strong> &mdash; Final files in required formats</li>
+    </ul>
+
+    <h3>Media Planning and Buying</h3>
+
+    <h4>Core Metrics</h4>
+    <ul>
+        <li><strong>Reach</strong> &mdash; Percentage of target exposed at least once</li>
+        <li><strong>Frequency</strong> &mdash; Average number of exposures</li>
+        <li><strong>GRP (Gross Rating Points)</strong> &mdash; Reach &times; Frequency</li>
+        <li><strong>CPM (Cost Per Thousand)</strong> &mdash; Cost per 1,000 impressions</li>
+        <li><strong>Impressions</strong> &mdash; Total ad exposures</li>
+    </ul>
+
+    <h4>Media Types</h4>
+    <ul>
+        <li><strong>ATL (Above The Line)</strong> &mdash; Mass media (TV, radio, print, OOH)</li>
+        <li><strong>BTL (Below The Line)</strong> &mdash; Targeted/direct marketing</li>
+        <li><strong>Programmatic</strong> &mdash; Automated digital buying</li>
+        <li><strong>Earned/Owned/Paid media</strong> &mdash; The media trinity</li>
+    </ul>
+</section>
+
+<!-- UNIVERSAL TERMS -->
+<section id="universal">
+    <span class="section-number">06</span>
+    <h2>Universal Agency Expressions</h2>
+
+    <p>Daily vocabulary across all departments.</p>
+
+    <h3>Creative Process Terms</h3>
+
+    <div class="highlight-box">
+        <p><strong>Phases:</strong> Discovery &rarr; Brief &rarr; Concepting &rarr; Comps &rarr; Pre-production &rarr; Production &rarr; Post &rarr; Deliverables</p>
+    </div>
+
+    <h4>Common Usage</h4>
+    <ul>
+        <li><strong>"On-brief / Off-brief"</strong> &mdash; Whether work addresses the strategy document</li>
+        <li><strong>"Executions"</strong> &mdash; Individual tactical pieces from master concept</li>
+        <li><strong>"Hero"</strong> &mdash; Main featured image/element</li>
+        <li><strong>"Assets"</strong> &mdash; Creative materials (logos, imagery, videos)</li>
+        <li><strong>"Lorem ipsum"</strong> &mdash; Placeholder text</li>
+        <li><strong>"Sacred cows"</strong> &mdash; Elements client won't change</li>
+    </ul>
+
+    <h3>Feedback and Approval</h3>
+    <ul>
+        <li><strong>"This doesn't quite land"</strong> &mdash; It's not working</li>
+        <li><strong>"Can we elevate this?"</strong> &mdash; Make it better/more premium</li>
+        <li><strong>"This doesn't pop"</strong> &mdash; Not attention-grabbing</li>
+        <li><strong>"Let's punch it up"</strong> &mdash; Make it more impactful</li>
+        <li><strong>"Noodle on it"</strong> &mdash; Think it over</li>
+    </ul>
+
+    <h3>Timeline and Deadline Expressions</h3>
+    <ul>
+        <li><strong>EOD/COB</strong> &mdash; End of Day / Close of Business</li>
+        <li><strong>"Hard deadline"</strong> &mdash; Non-negotiable</li>
+        <li><strong>"The timeline is aggressive"</strong> &mdash; This deadline is unrealistic</li>
+        <li><strong>"Rounds"</strong> &mdash; Iterations of revisions (Round 1, Round 2, Round 17...)</li>
+        <li><strong>V1, V2, V3</strong> &mdash; Version numbers</li>
+        <li><strong>WIP</strong> &mdash; Work in Progress</li>
+    </ul>
+
+    <h3>Client Communication Euphemisms</h3>
+
+    <div class="platform-card">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+            <thead>
+                <tr style="border-bottom: 1px solid var(--color-dark-gray);">
+                    <th style="text-align: left; padding: 0.75rem 0; color: var(--color-amber);">What they say</th>
+                    <th style="text-align: left; padding: 0.75rem 0; color: var(--color-light-gray);">What they mean</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td style="padding: 0.5rem 0;"><strong>"Let's circle back on that"</strong></td><td style="padding: 0.5rem 0; color: var(--color-light-gray);">Not a priority right now</td></tr>
+                <tr><td style="padding: 0.5rem 0;"><strong>"That's an interesting direction"</strong></td><td style="padding: 0.5rem 0; color: var(--color-light-gray);">I'm not sure about this</td></tr>
+                <tr><td style="padding: 0.5rem 0;"><strong>"This is a great starting point"</strong></td><td style="padding: 0.5rem 0; color: var(--color-light-gray);">Needs significant work</td></tr>
+                <tr><td style="padding: 0.5rem 0;"><strong>"We're still iterating"</strong></td><td style="padding: 0.5rem 0; color: var(--color-light-gray);">We're behind</td></tr>
+                <tr><td style="padding: 0.5rem 0;"><strong>"Let's manage expectations"</strong></td><td style="padding: 0.5rem 0; color: var(--color-light-gray);">This might not work</td></tr>
+                <tr><td style="padding: 0.5rem 0;"><strong>"We're taking a phased approach"</strong></td><td style="padding: 0.5rem 0; color: var(--color-light-gray);">We can't do everything</td></tr>
+                <tr><td style="padding: 0.5rem 0;"><strong>"That's outside current scope"</strong></td><td style="padding: 0.5rem 0; color: var(--color-light-gray);">Pay more for that</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- LEXICON USAGE -->
+<section id="lexicon-usage">
+    <span class="section-number">07</span>
+    <h2>Using This Lexicon for Brand Voice</h2>
+
+    <p>For authentic resonance with LA creative professionals:</p>
+
+    <div class="principle">
+        <strong>1. Lead with cynical self-awareness</strong>
+        <p>Creatives bond over shared frustrations; "Make the logo bigger" energy signals insider status</p>
+    </div>
+
+    <div class="principle">
+        <strong>2. Mix eras thoughtfully</strong>
+        <p>Mad Men nostalgia ("three-martini lunch") pairs well with modern irony ("bandwidth," "circle back")</p>
+    </div>
+
+    <div class="principle">
+        <strong>3. Know when terms are sincere vs. ironic</strong>
+        <p>"Circle back" is always mocked; "the work has legs" is genuine respect</p>
+    </div>
+
+    <div class="principle">
+        <strong>4. Embrace gallows humor</strong>
+        <p>Scope creep, death by committee, and "it's agency life" resignation are bonding agents</p>
+    </div>
+
+    <div class="principle">
+        <strong>5. Match Gen Z communication patterns</strong>
+        <p>Shorter, more direct, emoji-literate, allergic to hollow buzzwords</p>
+    </div>
+
+    <div class="principle">
+        <strong>6. Respect the craft vocabulary</strong>
+        <p>Terms like "brief," "concepting," "executions," and "comps" signal genuine industry fluency</p>
+    </div>
+
+    <div class="highlight-box success">
+        <p>This lexicon gives your brewery brand voice the authentic texture to connect with creatives who've lived these expressions&mdash;whether they're celebrating a pitch win or drowning the sorrows of yet another round of "minor revisions."</p>
+    </div>
+</section>
+
+<div class="cta">
+    <h2>Now speak their language.</h2>
+</div>
+
+</main>
+
+</div>
+
+<footer>
+    <p>Agency Brewing Brand Voice Guide | Confidential | 2026</p>
+</footer>
+
+<script>
+function switchTab(tabId) {
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+
+    // Remove active class from all buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // Show selected tab content
+    document.getElementById(tabId).classList.add('active');
+
+    // Add active class to clicked button
+    event.target.classList.add('active');
+
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>

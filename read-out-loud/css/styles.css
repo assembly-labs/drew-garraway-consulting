@@ -70,16 +70,17 @@ body {
   min-height: 100dvh;
 }
 
-/* App Container */
+/* App Container - Fixed height layout with sticky footer */
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   max-width: 800px;
   margin: 0 auto;
   padding: var(--space-5);
   gap: var(--space-5);
+  overflow: hidden;
 }
 
 /* ========================================
@@ -162,6 +163,8 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: 0; /* Allow flex child to shrink below content size */
+  overflow: hidden;
 }
 
 .text-container {
@@ -169,7 +172,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  min-height: 300px;
+  min-height: 0; /* Allow flex child to shrink */
+  overflow: hidden;
 }
 
 /* Action Buttons - Visible, icon-forward */
@@ -225,7 +229,7 @@ body {
 /* Text Input - Clean, spacious, readable */
 .text-input {
   flex: 1;
-  min-height: 280px;
+  min-height: 120px;
   padding: var(--space-5);
   background: var(--bg-content);
   border: 1px solid var(--bg-surface);
@@ -235,6 +239,7 @@ body {
   font-size: 1.0625rem;
   line-height: 1.75;
   resize: none;
+  overflow-y: auto; /* Enable internal scrolling */
   transition: border-color var(--duration) var(--ease-out),
               box-shadow var(--duration) var(--ease-out);
 }
@@ -252,7 +257,7 @@ body {
 /* Text Display (during playback) */
 .text-display {
   flex: 1;
-  min-height: 280px;
+  min-height: 120px;
   padding: var(--space-5);
   background: var(--bg-content);
   border: 2px solid var(--accent);
@@ -285,9 +290,10 @@ body {
 }
 
 /* ========================================
-   FOOTER / PLAYBACK CONTROLS
+   FOOTER / PLAYBACK CONTROLS - Always visible
    ======================================== */
 .app-footer {
+  flex-shrink: 0; /* Never shrink - always visible */
   background: var(--bg-secondary);
   border: 1px solid var(--bg-surface);
   border-radius: var(--radius-lg);
@@ -734,6 +740,11 @@ body {
   color: #4285f4;
 }
 
+.voice-source.premium {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 .voice-preview {
   width: 36px;
   height: 36px;
@@ -1010,7 +1021,7 @@ body {
 
   .text-input,
   .text-display {
-    min-height: 220px;
+    min-height: 100px;
     padding: var(--space-4);
   }
 

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="Series 7 Formula Sheet - All calculations in one place. Options, margin, bonds, and investment company formulas.">
+
+    <title>Formula Sheet | Series 7 Study Materials | Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/sie-chapter.css">
+    <script src="../../assets/js/night-mode.js"></script>
+
+    <style>
+        .formula-section { margin-bottom: 3rem; }
+        .formula-section h3 {
+            color: var(--fh-navy);
+            border-bottom: 2px solid var(--fh-gold);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .formula-card {
+            background: var(--fh-white);
+            border: 1px solid var(--fh-gray-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .formula-card h4 {
+            color: var(--fh-gold);
+            font-family: var(--fh-font-mono);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        .formula-card table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .formula-card th, .formula-card td {
+            padding: 0.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--fh-gray-200);
+        }
+        .formula-card th {
+            font-weight: 600;
+            color: var(--fh-navy);
+        }
+        .formula-code {
+            background: var(--fh-gray-100);
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: var(--fh-font-mono);
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+            white-space: pre-wrap;
+        }
+        .memory-aid {
+            background: linear-gradient(135deg, var(--fh-gold), #c9a050);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .memory-aid strong { color: white; }
+        .critical-numbers {
+            background: var(--fh-navy);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        .critical-numbers th, .critical-numbers td {
+            padding: 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .critical-numbers th { color: var(--fh-gold); }
+        @media print {
+            .header, .footer, .back-to-top { display: none; }
+            body { background: white; }
+            .formula-card { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="header__inner">
+            <h1 class="header__title">Formula Sheet</h1>
+            <nav class="breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span>/</span>
+                <a href="series-7-study-materials.html">Series 7</a>
+                <span>/</span>
+                <span>Formula Sheet</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="intro">
+            <p>All the calculations you need for the Series 7 exam in one place. Print this page and review before the exam.</p>
+        </div>
+
+        <!-- Options Formulas -->
+        <div class="formula-section">
+            <h3>Options Formulas</h3>
+
+            <div class="formula-card">
+                <h4>Long Call</h4>
+                <table>
+                    <tr><th>Metric</th><th>Formula</th></tr>
+                    <tr><td>Max Gain</td><td>Unlimited</td></tr>
+                    <tr><td>Max Loss</td><td>Premium paid</td></tr>
+                    <tr><td>Breakeven</td><td>Strike price + Premium</td></tr>
+                </table>
+            </div>
+
+            <div class="formula-card">
+                <h4>Long Put</h4>
+                <table>
+                    <tr><th>Metric</th><th>Formula</th></tr>
+                    <tr><td>Max Gain</td><td>Strike - Premium (x100 for dollars)</td></tr>
+                    <tr><td>Max Loss</td><td>Premium paid</td></tr>
+                    <tr><td>Breakeven</td><td>Strike price - Premium</td></tr>
+                </table>
+            </div>
+
+            <div class="formula-card">
+                <h4>Short Call (Naked)</h4>
+                <table>
+                    <tr><th>Metric</th><th>Formula</th></tr>
+                    <tr><td>Max Gain</td><td>Premium received</td></tr>
+                    <tr><td>Max Loss</td><td>Unlimited</td></tr>
+                    <tr><td>Breakeven</td><td>Strike price + Premium</td></tr>
+                </table>
+            </div>
+
+            <div class="formula-card">
+                <h4>Short Put</h4>
+                <table>
+                    <tr><th>Metric</th><th>Formula</th></tr>
+                    <tr><td>Max Gain</td><td>Premium received</td></tr>
+                    <tr><td>Max Loss</td><td>Strike - Premium (x100 for dollars)</td></tr>
+                    <tr><td>Breakeven</td><td>Strike price - Premium</td></tr>
+                </table>
+            </div>
+
+            <div class="formula-card">
+                <h4>Covered Call</h4>
+                <table>
+                    <tr><th>Metric</th><th>Formula</th></tr>
+                    <tr><td>Max Gain</td><td>(Strike - Stock Cost) + Premium</td></tr>
+                    <tr><td>Max Loss</td><td>Stock Cost - Premium</td></tr>
+                    <tr><td>Breakeven</td><td>Stock Cost - Premium</td></tr>
+                </table>
+            </div>
+
+            <div class="formula-card">
+                <h4>Protective Put</h4>
+                <table>
+                    <tr><th>Metric</th><th>Formula</th></tr>
+                    <tr><td>Max Gain</td><td>Unlimited</td></tr>
+                    <tr><td>Max Loss</td><td>(Stock Cost - Strike) + Premium</td></tr>
+                    <tr><td>Breakeven</td><td>Stock Cost + Premium</td></tr>
+                </table>
+            </div>
+
+            <div class="formula-card">
+                <h4>Spreads</h4>
+                <table>
+                    <tr><th>Type</th><th>Max Gain</th><th>Max Loss</th></tr>
+                    <tr><td>Debit Spread</td><td>Width of spread - Net premium paid</td><td>Net premium paid</td></tr>
+                    <tr><td>Credit Spread</td><td>Net premium received</td><td>Width of spread - Net premium received</td></tr>
+                </table>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">
+                    <strong>Spread Breakeven:</strong><br>
+                    Call Spread: Lower strike + Net premium<br>
+                    Put Spread: Higher strike - Net premium
+                </p>
+            </div>
+
+            <div class="memory-aid">
+                <strong>Options Memory Aids:</strong><br>
+                Call Up, Put Down: Call ITM when market ABOVE strike; Put ITM when market BELOW strike<br>
+                Breakeven: Calls add premium to strike; Puts subtract premium from strike<br>
+                Max Loss for Buyers = Premium paid | Max Gain for Sellers = Premium received
+            </div>
+        </div>
+
+        <!-- Margin Formulas -->
+        <div class="formula-section">
+            <h3>Margin Formulas</h3>
+
+            <div class="formula-card">
+                <h4>Initial Margin (Reg T = 50%)</h4>
+                <div class="formula-code">Long Margin:
+Margin Required = Market Value x 50%
+Loan Amount = Market Value x 50%
+
+Short Margin:
+Margin Required = Short Market Value x 50%
+Credit Balance = Short Proceeds + Margin Deposit</div>
+            </div>
+
+            <div class="formula-card">
+                <h4>Equity Calculations</h4>
+                <div class="formula-code">Long Margin Equity = Market Value - Debit Balance
+
+Short Margin Equity = Credit Balance - Short Market Value</div>
+            </div>
+
+            <div class="formula-card">
+                <h4>SMA (Special Memorandum Account)</h4>
+                <div class="formula-code">SMA = Equity - (Market Value x 50%)
+     (Only when equity > 50%)
+
+SMA increases when:
+- Stock price rises (50% of increase)
+- Dividends received
+- Cash deposits
+- Sale proceeds above loan value</div>
+            </div>
+
+            <div class="formula-card">
+                <h4>Buying Power</h4>
+                <div class="formula-code">Buying Power = SMA / Reg T
+Buying Power = SMA / 0.50
+Buying Power = SMA x 2</div>
+            </div>
+
+            <div class="formula-card">
+                <h4>Maintenance Margin</h4>
+                <div class="formula-code">LONG Positions (25% maintenance):
+Margin Call when: Equity < 25% of Market Value
+Trigger Price: Debit Balance / 0.75
+
+SHORT Positions (30% maintenance):
+Margin Call when: Equity < 30% of Market Value
+Trigger Price: Credit Balance / 1.30</div>
+            </div>
+
+            <div class="memory-aid">
+                <strong>Margin Memory Aids:</strong><br>
+                SMA x 2 = Buying Power<br>
+                Long trigger: Debit / 0.75 | Short trigger: Credit / 1.30<br>
+                Shorts are riskier = higher maintenance (30% > 25%)
+            </div>
+        </div>
+
+        <!-- Bond Formulas -->
+        <div class="formula-section">
+            <h3>Bond Formulas</h3>
+
+            <div class="formula-card">
+                <h4>Current Yield</h4>
+                <div class="formula-code">Current Yield = Annual Interest / Market Price
+
+Example: 5% coupon, trading at 95 ($950)
+CY = $50 / $950 = 5.26%</div>
+            </div>
+
+            <div class="formula-card">
+                <h4>Yield Relationships</h4>
+                <table>
+                    <tr><th>Price</th><th>Yield Order</th></tr>
+                    <tr><td>At Par</td><td>Nominal = Current = YTM</td></tr>
+                    <tr><td>At Premium</td><td>Nominal > Current > YTM</td></tr>
+                    <tr><td>At Discount</td><td>Nominal < Current < YTM</td></tr>
+                </table>
+            </div>
+
+            <div class="formula-card">
+                <h4>Tax-Equivalent Yield</h4>
+                <div class="formula-code">TEY = Municipal Yield / (1 - Tax Bracket)
+
+Example: 4% muni, 32% tax bracket
+TEY = 0.04 / (1 - 0.32) = 0.04 / 0.68 = 5.88%</div>
+            </div>
+
+            <div class="formula-card">
+                <h4>Accrued Interest</h4>
+                <div class="formula-code">Accrued Interest = (Annual Interest / Days in Year) x Days Since Last Payment
+
+Corporate & Municipal: 30/360 (30-day months, 360-day year)
+Government: Actual/Actual (real calendar days)</div>
+            </div>
+
+            <div class="memory-aid">
+                <strong>Bond Memory Aids:</strong><br>
+                PDY / DIY: Premium Decreases Yield; Discount Increases Yield<br>
+                Premium: N > C > YTM (decreasing) | Discount: YTM > C > N (decreasing)
+            </div>
+        </div>
+
+        <!-- Investment Company Formulas -->
+        <div class="formula-section">
+            <h3>Investment Company Formulas</h3>
+
+            <div class="formula-card">
+                <h4>NAV and Sales Charges</h4>
+                <div class="formula-code">NAV = (Total Assets - Liabilities) / Shares Outstanding
+
+POP = NAV + Sales Charge
+POP = NAV / (1 - Sales Charge %)
+
+Sales Charge % = (POP - NAV) / POP
+
+Maximum Sales Charge = 8.5% of POP</div>
+            </div>
+        </div>
+
+        <!-- Critical Numbers -->
+        <div class="formula-section">
+            <h3>Critical Numbers</h3>
+            <div class="critical-numbers">
+                <table style="width: 100%;">
+                    <tr><th>Item</th><th>Number</th></tr>
+                    <tr><td>Options contract size</td><td>100 shares</td></tr>
+                    <tr><td>Reg T initial margin</td><td>50%</td></tr>
+                    <tr><td>Long maintenance margin</td><td>25%</td></tr>
+                    <tr><td>Short maintenance margin</td><td>30%</td></tr>
+                    <tr><td>Max mutual fund sales charge</td><td>8.5%</td></tr>
+                    <tr><td>Settlement (stocks/bonds)</td><td>T+1</td></tr>
+                    <tr><td>Regular IRA contribution limit</td><td>$7,000 (2024)</td></tr>
+                    <tr><td>401(k) contribution limit</td><td>$23,000 (2024)</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 3rem; font-style: italic; color: var(--fh-gray-600);">
+            Print this page. Review before the exam. Formulas should be automatic.
+        </p>
+
+        <nav class="chapter-nav" style="margin-top: 3rem;">
+            <a href="series-7-study-materials.html" class="chapter-nav__link">
+                <span class="chapter-nav__label">Back to</span>
+                <span class="chapter-nav__title">&larr; Study Materials</span>
+            </a>
+        </nav>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__text">Franklin Hugh Money | Series 7 Study Materials</p>
+    </footer>
+</body>
+</html>

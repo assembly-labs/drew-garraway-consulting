@@ -171,18 +171,6 @@
             line-height: 1.8;
         }
 
-        /* Progress Badge */
-        .progress-badge {
-            display: inline-block;
-            padding: var(--fh-space-sm) var(--fh-space-lg);
-            background: var(--fh-gold);
-            color: var(--fh-white);
-            border-radius: 24px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-top: var(--fh-space-lg);
-        }
-
         /* Exam Info Card */
         .exam-info {
             background: linear-gradient(135deg, var(--fh-navy), #003d82);
@@ -249,11 +237,6 @@
             border-width: 2px;
         }
 
-        .section-card--coming {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
         .section-number {
             font-family: var(--fh-font-mono);
             font-size: 0.875rem;
@@ -261,13 +244,6 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-        }
-
-        .section-weight {
-            font-family: var(--fh-font-mono);
-            font-size: 0.75rem;
-            color: var(--fh-gray-500);
-            margin-left: 0.5rem;
         }
 
         .section-title {
@@ -282,27 +258,6 @@
             font-size: 0.95rem;
             color: var(--fh-gray-600);
             line-height: 1.6;
-        }
-
-        .section-status {
-            display: inline-block;
-            margin-top: var(--fh-space-md);
-            padding: var(--fh-space-xs) var(--fh-space-md);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-            border-radius: 12px;
-        }
-
-        .section-status--available {
-            background: var(--fh-gold);
-            color: var(--fh-white);
-        }
-
-        .section-status--coming {
-            background: var(--fh-gray-200);
-            color: var(--fh-gray-600);
         }
 
         /* Study Tools Section */
@@ -430,11 +385,6 @@
                     125 questions, 225 minutes, and a lot of options calculations. These materials are designed
                     to make the complex stuff stick.
                 </p>
-                <p>
-                    Fair warning: Section 3 is 73% of this exam. Options alone can be 25-30%.
-                    Plan accordingly.
-                </p>
-                <span class="progress-badge">Framework Ready • Content In Progress</span>
             </div>
 
             <!-- Exam Info -->
@@ -460,54 +410,102 @@
                 </div>
             </div>
 
-            <!-- Section Cards -->
-            <h2>Exam Sections</h2>
+            <!-- Chapters -->
+            <h2>Chapters</h2>
             <div class="sections-grid">
-                <!-- Section 1 -->
-                <div class="section-card section-card--coming">
-                    <span class="section-number">Section 1<span class="section-weight">9% • ~11 questions</span></span>
-                    <h3 class="section-title">Seeks Business for the Broker-Dealer</h3>
-                    <p class="section-topics">Prospecting, cold calling rules, communications with the public, advertising compliance</p>
-                    <span class="section-status section-status--coming">Content Coming</span>
-                </div>
+                <!-- Chapter 1 -->
+                <a href="series-7-chapter-01-equities.html" class="section-card">
+                    <span class="section-number">Chapter 1</span>
+                    <h3 class="section-title">Equities</h3>
+                    <p class="section-topics">Common and preferred stock, rights, warrants, ADRs, and equity securities fundamentals</p>
+                </a>
 
-                <!-- Section 2 -->
-                <div class="section-card section-card--coming">
-                    <span class="section-number">Section 2<span class="section-weight">11% • ~14 questions</span></span>
-                    <h3 class="section-title">Opens Accounts</h3>
-                    <p class="section-topics">Account types, customer profiles, KYC, suitability obligations, documentation</p>
-                    <span class="section-status section-status--coming">Content Coming</span>
-                </div>
+                <!-- Chapter 2 -->
+                <a href="series-7-chapter-02-debt-fundamentals.html" class="section-card">
+                    <span class="section-number">Chapter 2</span>
+                    <h3 class="section-title">Debt Fundamentals</h3>
+                    <p class="section-topics">Bond basics, pricing, yields, and the inverse relationship between price and interest rates</p>
+                </a>
 
-                <!-- Section 3 - THE BIG ONE -->
-                <div class="section-card section-card--highlight section-card--coming">
-                    <span class="section-number">Section 3<span class="section-weight">73% • ~91 questions</span></span>
-                    <h3 class="section-title">Provides Information &amp; Recommendations</h3>
-                    <p class="section-topics">
-                        <strong>Options</strong> (25-30%), Municipal Bonds, Margin Accounts, Debt Securities,
-                        Equity Securities, Investment Companies, Retirement Plans, Variable Products, DPPs, Analysis
-                    </p>
-                    <span class="section-status section-status--coming">Content Coming</span>
-                </div>
+                <!-- Chapter 3 -->
+                <a href="series-7-chapter-03-additional-bond-features.html" class="section-card">
+                    <span class="section-number">Chapter 3</span>
+                    <h3 class="section-title">Additional Bond Features and Risks</h3>
+                    <p class="section-topics">Call and put provisions, yield to call, bond ratings, and risk types</p>
+                </a>
 
-                <!-- Section 4 -->
-                <div class="section-card section-card--coming">
-                    <span class="section-number">Section 4<span class="section-weight">7% • ~9 questions</span></span>
-                    <h3 class="section-title">Processes Transactions</h3>
-                    <p class="section-topics">Order handling, trade execution, settlement, record-keeping requirements</p>
-                    <span class="section-status section-status--coming">Content Coming</span>
-                </div>
+                <!-- Chapter 4 -->
+                <a href="series-7-chapter-04-corporate-government-debt.html" class="section-card">
+                    <span class="section-number">Chapter 4</span>
+                    <h3 class="section-title">Corporate & Government Debt</h3>
+                    <p class="section-topics">Secured vs unsecured bonds, T-bills, T-notes, T-bonds, agency securities, CMOs</p>
+                </a>
+
+                <!-- Chapter 5 -->
+                <a href="series-7-chapter-05-municipal-money-market.html" class="section-card">
+                    <span class="section-number">Chapter 5</span>
+                    <h3 class="section-title">Municipal Debt & Money Market</h3>
+                    <p class="section-topics">GO bonds, revenue bonds, tax treatment, and short-term instruments</p>
+                </a>
+
+                <!-- Chapter 6 -->
+                <a href="series-7-chapter-06-packaged-products.html" class="section-card">
+                    <span class="section-number">Chapter 6</span>
+                    <h3 class="section-title">Packaged Products</h3>
+                    <p class="section-topics">Mutual funds, ETFs, UITs, variable annuities, and investment company structures</p>
+                </a>
+
+                <!-- Chapter 7 -->
+                <a href="series-7-chapter-07-trading-markets.html" class="section-card">
+                    <span class="section-number">Chapter 7</span>
+                    <h3 class="section-title">Trading Markets</h3>
+                    <p class="section-topics">Primary vs secondary markets, exchanges, OTC, market makers, and order types</p>
+                </a>
+
+                <!-- Chapter 8 -->
+                <a href="series-7-chapter-08-trade-processing.html" class="section-card">
+                    <span class="section-number">Chapter 8</span>
+                    <h3 class="section-title">Trade Processing and Settlement</h3>
+                    <p class="section-topics">Settlement dates, good delivery, transfer of ownership, and clearing</p>
+                </a>
+
+                <!-- Chapter 9 -->
+                <a href="series-7-chapter-09-options-fundamentals.html" class="section-card section-card--highlight">
+                    <span class="section-number">Chapter 9</span>
+                    <h3 class="section-title">Fundamentals of Options</h3>
+                    <p class="section-topics">Calls, puts, premiums, intrinsic value, time value, and basic strategies</p>
+                </a>
+
+                <!-- Chapter 10 -->
+                <a href="series-7-chapter-10-index-options.html" class="section-card section-card--highlight">
+                    <span class="section-number">Chapter 10</span>
+                    <h3 class="section-title">Index Options and Advanced Strategies</h3>
+                    <p class="section-topics">Spreads, straddles, combinations, and index option settlement</p>
+                </a>
+            </div>
+
+            <!-- Audio Library -->
+            <div style="margin-top: var(--fh-space-2xl);">
+                <a href="series-7-audio-library.html" class="section-card" style="max-width: 400px; display: flex; align-items: center; gap: var(--fh-space-lg);">
+                    <div class="tool-icon" style="flex-shrink: 0;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1rem; color: var(--fh-navy); margin-bottom: 0.25rem;">Audio Library</h4>
+                        <p style="font-size: 0.875rem; color: var(--fh-gray-600); margin: 0;">Listen to chapter summaries and key concepts</p>
+                    </div>
+                </a>
             </div>
 
             <!-- Study Tools -->
             <div class="tools-section">
                 <h2>Study Tools</h2>
                 <p style="color: var(--fh-gray-600); margin-bottom: var(--fh-space-lg);">
-                    These tools are ready to use while content is being developed.
+                    Supplementary resources to help you prepare.
                 </p>
 
                 <div class="tools-grid">
-                    <div class="tool-card">
+                    <a href="series-7-formula-sheet.html" class="tool-card">
                         <div class="tool-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
                         </div>
@@ -515,9 +513,9 @@
                             <h4>Formula Sheet</h4>
                             <p>All calculations in one place</p>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="tool-card">
+                    <a href="series-7-study-schedule.html" class="tool-card">
                         <div class="tool-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
                         </div>
@@ -525,9 +523,9 @@
                             <h4>Study Schedule</h4>
                             <p>10-week preparation plan</p>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="tool-card">
+                    <a href="series-7-progress-tracker.html" class="tool-card">
                         <div class="tool-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                         </div>
@@ -535,9 +533,9 @@
                             <h4>Progress Tracker</h4>
                             <p>Track your completion</p>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="tool-card">
+                    <a href="series-7-common-mistakes.html" class="tool-card">
                         <div class="tool-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
                         </div>
@@ -545,9 +543,9 @@
                             <h4>Common Mistakes</h4>
                             <p>24 errors to avoid</p>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="tool-card">
+                    <a href="series-7-exam-prep.html" class="tool-card">
                         <div class="tool-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l4.59-4.58L18 11l-6 6z"/></svg>
                         </div>
@@ -555,9 +553,9 @@
                             <h4>Exam Day Prep</h4>
                             <p>Final checklist</p>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="tool-card">
+                    <a href="series-7-practice-exam.html" class="tool-card">
                         <div class="tool-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zM10 9h8v2h-8zm0 3h4v2h-4zm0-6h8v2h-8z"/></svg>
                         </div>
@@ -565,7 +563,7 @@
                             <h4>Practice Exam</h4>
                             <p>30-question sample test</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 
@@ -574,8 +572,8 @@
                 <h2 style="text-align: center;">Study Approach</h2>
                 <div style="background: var(--fh-white); border: 1px solid var(--fh-gray-200); border-radius: 4px; padding: var(--fh-space-xl); margin-top: var(--fh-space-xl);">
                     <p style="margin-bottom: var(--fh-space-lg);">
-                        <strong>The reality:</strong> 73% of this exam is in Section 3. Options alone can be a quarter of your questions.
-                        If you're not comfortable with options max gain/loss/breakeven calculations, you're not ready.
+                        <strong>The reality:</strong> Options alone can be 25-30% of your questions.
+                        If you're not comfortable with max gain/loss/breakeven calculations, you're not ready.
                     </p>
                     <p style="margin-bottom: var(--fh-space-lg);">
                         <strong>The strategy:</strong> Master calculations first. The formula sheet exists for a reason—
@@ -584,7 +582,7 @@
                     </p>
                     <p style="margin-bottom: 0;">
                         <strong>Time investment:</strong> Plan for 100-150 hours over 8-10 weeks.
-                        That's 2-3 hours daily. Front-load Section 3 content.
+                        That's 2-3 hours daily. Prioritize options content (Chapters 9-10).
                     </p>
                 </div>
             </div>
@@ -594,7 +592,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p class="footer__text">© 2024 Franklin Hugh Money. An Investment in Knowledge.</p>
+            <p class="footer__text">© 2025 Franklin Hugh Money. An Investment in Knowledge.</p>
         </div>
     </footer>
 </body>
