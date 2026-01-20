@@ -84,7 +84,7 @@ const whiteExcellingPersona: Persona = {
     userId: 'user-white-excelling-001',
     name: 'Jake Thompson',
     stripes: 3,
-    gymName: 'ALLIANCE (Paoli, PA)',
+    gymName: 'Atos Austin',
     targetFrequency: 4,
     birthYear: 1998,
     loggingPreference: 'voice',
@@ -143,8 +143,8 @@ const whiteAtRiskPersona: Persona = {
     userId: 'user-white-at-risk-001',
     name: 'David Morrison',
     stripes: 2, // Only 2 stripes after 18 months
-    trainingStartDate: '2023-06-01', // 18 months ago
-    currentBeltDate: '2023-06-01',
+    trainingStartDate: '2024-07-01', // 18 months ago from Jan 2026
+    currentBeltDate: '2024-07-01',
     gymName: 'Gracie Barra Portland',
     trainingGoals: ['fitness', 'mental'] as const,
     targetFrequency: 2, // His goal is just 2x/week
@@ -195,7 +195,7 @@ const whiteAtRiskPersona: Persona = {
  * BLUE BELT - EXCELLING: Marcus Chen
  * "The Dedicated Hobbyist" - Progressing
  *
- * 34-year-old Software Engineer, 2.5 years training.
+ * 34-year-old Marketing Manager, 2.5 years training.
  * Consistent 3x/week, developing his guard game.
  * Moderate risk - blue belt blues are real but he's managing.
  *
@@ -226,8 +226,8 @@ const blueExcellingPersona: Persona = {
     userId: 'user-blue-excelling-001',
     name: 'Marcus Chen',
     stripes: 2,
-    trainingStartDate: '2022-06-15',
-    currentBeltDate: '2024-02-20',
+    trainingStartDate: '2023-07-15', // 2.5 years ago from Jan 2026
+    currentBeltDate: '2025-03-20', // 10 months at blue from Jan 2026
     gymName: '10th Planet Denver',
     trainingGoals: ['fitness', 'mental', 'community'] as const,
     targetFrequency: 3,
@@ -299,6 +299,8 @@ const blueAtRiskPersona: Persona = {
     userId: 'user-blue-at-risk-001',
     name: 'Ryan Torres',
     stripes: 1,
+    trainingStartDate: '2023-01-01', // 3 years ago from Jan 2026
+    currentBeltDate: '2024-11-15', // 14 months at blue from Jan 2026
     gymName: 'Carlson Gracie Chicago',
     targetFrequency: 3,
     birthYear: 1993,
@@ -373,8 +375,8 @@ const purpleAveragePersona: Persona = {
     userId: 'user-purple-average-001',
     name: 'Sofia Rodriguez',
     stripes: 1,
-    trainingStartDate: '2019-12-01',
-    currentBeltDate: '2024-04-15',
+    trainingStartDate: '2021-01-01', // 5 years ago from Jan 2026
+    currentBeltDate: '2025-05-15', // 8 months at purple from Jan 2026
     gymName: 'Atos HQ San Diego',
     trainingGoals: ['competition', 'fitness', 'community'] as const,
     targetFrequency: 5,
@@ -418,7 +420,7 @@ const purpleAveragePersona: Persona = {
  * BROWN BELT - AVERAGE: Elena Kim
  * "The Veteran" - Refined
  *
- * 38-year-old Marketing Director, 8.5 years training.
+ * 38-year-old CrossFit gym owner, 8.5 years training.
  * Focus on refinement and teaching, sustainable pace.
  * Very low risk - BJJ is integral to her identity.
  *
@@ -449,8 +451,8 @@ const brownAveragePersona: Persona = {
     userId: 'user-brown-average-001',
     name: 'Elena Kim',
     stripes: 2,
-    trainingStartDate: '2016-06-01',
-    currentBeltDate: '2023-06-15',
+    trainingStartDate: '2017-06-01', // 8.5 years ago from Jan 2026
+    currentBeltDate: '2024-07-15', // 18 months at brown from Jan 2026
     gymName: 'Marcelo Garcia Seattle',
     trainingGoals: ['community', 'mental', 'fitness'] as const,
     targetFrequency: 4,

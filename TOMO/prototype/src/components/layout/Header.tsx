@@ -41,11 +41,25 @@ export function Header({
 
   // Get belt color for avatar border
   const beltBorderColor = getBeltBorderColor(profile.belt);
+  // Format persona key for display: "white-excelling" -> "W-EXCEL"
+  const formatPersonaLabel = (key: string): string => {
+    const [belt, status] = key.split('-');
+    const beltLetter = belt.charAt(0).toUpperCase();
+    const statusLabel = status === 'excelling' ? 'EXCEL'
+      : status === 'at-risk' ? 'RISK'
+      : status === 'average' ? 'AVG'
+      : status.toUpperCase().slice(0, 5);
+    return `${beltLetter}-${statusLabel}`;
+  };
+
   return (
     <header style={{
       backgroundColor: 'var(--color-primary)',
       color: 'var(--color-white)',
-      padding: 'var(--space-md) var(--space-lg)',
+      paddingTop: 'max(var(--space-md), env(safe-area-inset-top))',
+      paddingBottom: 'var(--space-md)',
+      paddingLeft: 'var(--space-lg)',
+      paddingRight: 'var(--space-lg)',
       boxShadow: 'var(--shadow-md)',
       display: 'flex',
       alignItems: 'center',
@@ -100,7 +114,7 @@ export function Header({
             aria-label={isDemoMode ? `Current persona: ${activeDemoProfile?.key}. Tap to cycle to next persona.` : 'Enter demo mode'}
           >
             {isDemoMode && activeDemoProfile
-              ? activeDemoProfile.key.split('-')[0].charAt(0).toUpperCase() + activeDemoProfile.key.split('-')[0].slice(1)
+              ? formatPersonaLabel(activeDemoProfile.key)
               : 'Demo'
             }
           </button>
