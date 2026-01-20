@@ -24,11 +24,14 @@ This folder contains strategy and specification documents for:
 | `CONVERSATION_DESIGN_FOUNDATION.md` | Active | Voice/chatbot conversation design principles |
 | `VOICE_LOGGING_CONVERSATION_DESIGN.md` | Active | Voice logger conversation flow specification |
 | `INFOGRAPHIC_STRATEGY.md` | Active | Charts, infographics, and data visualization strategy |
+| `INSIGHTS_GENERATION_SPEC.md` | **Active** | **LLM-powered insight generation: system prompts, data payloads, validation rules** |
+| `IOS_HANDOFF_READINESS_ASSESSMENT.md` | **Active** | **Handoff readiness evaluation with gap analysis** |
 | `index.html` | Active | Interactive infographic preview/demo |
 | `AI_EXTRACTION_SPEC.md` | TODO | Technical spec for NLP pipeline, entity extraction, confidence scoring |
 | `VOICE_TRANSCRIPTION_SPEC.md` | TODO | AssemblyAI integration, custom vocabulary, accuracy requirements |
 | `PERSONALIZATION_ENGINE.md` | TODO | How captured data flows to dashboard, chatbot, recommendations |
 | `RISK_DETECTION_SIGNALS.md` | TODO | Dropout prediction, intervention triggers, re-engagement flows |
+| `LLM_INTEGRATION_ARCHITECTURE.md` | TODO | Overall architecture for AI service calls, rate limiting, caching |
 
 ---
 
