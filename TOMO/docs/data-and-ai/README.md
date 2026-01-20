@@ -25,7 +25,7 @@ This folder contains strategy and specification documents for:
 | `VOICE_LOGGING_CONVERSATION_DESIGN.md` | Active | Voice logger conversation flow specification |
 | `INFOGRAPHIC_STRATEGY.md` | Active | Charts, infographics, and data visualization strategy |
 | `index.html` | Active | Interactive infographic preview/demo |
-| `AI_EXTRACTION_SPEC.md` | TODO | Technical spec for NLP pipeline, entity extraction, confidence scoring |
+| `AI_EXTRACTION_SPEC.md` | **DRAFT** | Technical spec for NLP pipeline, entity extraction, confidence scoring |
 | `VOICE_TRANSCRIPTION_SPEC.md` | TODO | AssemblyAI integration, custom vocabulary, accuracy requirements |
 | `PERSONALIZATION_ENGINE.md` | TODO | How captured data flows to dashboard, chatbot, recommendations |
 | `RISK_DETECTION_SIGNALS.md` | TODO | Dropout prediction, intervention triggers, re-engagement flows |
