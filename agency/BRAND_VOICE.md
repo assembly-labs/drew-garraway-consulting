@@ -229,14 +229,6 @@ The voice stays consistent; the delivery flexes by platform.
 - "nothing urgent. just good timing."
 - "no notes."
 
-### LinkedIn
-
-**Tone:** Professional creative, strategic insights
-**Use For:** Industry partnerships, creative process deep-dives
-
-**Example:**
-> "The best advertising campaigns start with a focused brief. We applied that same discipline to our first beer. For creative professionals who understand that process drives results."
-
 ### Festival / In-Person
 
 **Tone:** Warm, confident, let the beer speak
