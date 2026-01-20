@@ -69,14 +69,16 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
       style={{
         position: 'fixed',
         bottom: 0,
-        left: '50%',
-        transform: 'translateX(-50%)',
+        left: 0,
+        right: 0,
         width: '100%',
         maxWidth: '430px',
+        margin: '0 auto',
         zIndex: 100,
         display: 'grid',
         gridTemplateColumns: `repeat(${tabs.length}, 1fr)`,
         gap: 0,
+        paddingBottom: 'max(12px, env(safe-area-inset-bottom))',
       }}
     >
       {tabs.map((tab) => {

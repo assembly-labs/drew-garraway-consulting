@@ -147,7 +147,7 @@ export const purpleBeltProfile: BeltPsychologyProfile = {
   stageDescription:
     'Purple belt represents the gateway to advanced play. As Roy Dean notes: "At Blue Belt you learned WORDS, at Purple Belt you start making SENTENCES." The shift moves from viewing BJJ as a collection of individual techniques to understanding interconnected systems. Purple belts are "generally qualified to help instruct lower-ranked students."',
 
-  typicalDurationMonths: { min: 36, max: 48 },
+  typicalDurationMonths: { min: 18, max: 36 },
   dropoutRiskLevel: 'moderate',
   dropoutPeakWindow: null, // No specific window - life circumstances dominate
 

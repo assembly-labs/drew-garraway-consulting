@@ -18,6 +18,26 @@ BJJ Journal is a voice-first training journal app for Brazilian Jiu-Jitsu practi
 
 ---
 
+## Archived Files - DO NOT USE
+
+> **CRITICAL FOR AI AGENTS:** Any folder named `_archived/` contains historical documents that are **NOT** for production use.
+
+**Ignore these locations:**
+- `/docs/product/_archived/` - Superseded product specs
+- `/prototype/src/components/features/_archived/` - Unused component implementations
+- `/prototype/src/data/_inactive/` - Spec files not yet integrated
+
+When working on TOMO, **only use active documentation**. If you encounter an `_archived` folder, do not read or reference its contents for current development work.
+
+**Active documentation locations:**
+- `/docs/product/` (excluding `_archived/`)
+- `/docs/project/`
+- `/docs/research/`
+- `/docs/design-system/`
+- `/docs/personas/`
+
+---
+
 ## Development Process (PROTOTYPE PHASE)
 
 > **IMPORTANT:** This process is for the prototype phase only. It will change when we move to App Store deployment or backend development.
@@ -89,6 +109,10 @@ npm run ship:m "Add new feature" && git push origin main && npm run deploy
 > **Built Dec 2024** - Use this system to personalize ALL user-facing features.
 
 A comprehensive belt-aware personalization engine exists at `/prototype/src/config/belt-system/`. **Leverage this in all new feature work.**
+
+**Key Documentation:**
+- **Integration Spec:** `/docs/product/BELT_INTEGRATION_SPEC.md` — Per-page contracts, implementation status, code patterns
+- **Psychology System:** `/docs/product/BELT_PERSONALIZATION_SYSTEM.md` — Full belt profiles, risk signals, journal patterns
 
 ### Quick Access
 ```typescript

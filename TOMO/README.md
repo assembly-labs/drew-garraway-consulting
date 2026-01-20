@@ -30,4 +30,5 @@ MVP web prototype complete. iOS TestFlight deployment planned.
 
 ## Documentation
 
-See `CLAUDE.md` for detailed project guide and `BJJ_Progress_Tracker_Feature_List.md` for feature roadmap.
+- `CLAUDE.md` - Development guide (code patterns, deployment, design system)
+- `docs/` - Internal documentation
