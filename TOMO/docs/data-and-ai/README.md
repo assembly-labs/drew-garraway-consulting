@@ -6,7 +6,9 @@
 
 ## For Agentic Coding Partners
 
-**Start here:** [`DATA_AND_AI_BY_PAGE.md`](./DATA_AND_AI_BY_PAGE.md)
+**Quick Start:** [`AI_QUICK_START.md`](./AI_QUICK_START.md) — 5-minute overview of AI implementation
+
+**Deep Dive:** [`DATA_AND_AI_BY_PAGE.md`](./DATA_AND_AI_BY_PAGE.md) — Per-page AI behavior reference
 
 This document maps exactly how data and AI operate for each major page:
 - **STATS (Dashboard)** — Pattern analysis, breakthrough detection, belt-adaptive visualizations
@@ -32,7 +34,8 @@ This folder contains strategy and specification documents for:
 
 | Document | Status | Description |
 |----------|--------|-------------|
-| `DATA_AND_AI_BY_PAGE.md` | **Active** | **START HERE** - Master reference for how data & AI operate on each page (Stats, Insights, Journal, Techniques) |
+| `AI_QUICK_START.md` | **Active** | **FOR DEVELOPERS** - 5-minute overview, code snippets, key files map |
+| `DATA_AND_AI_BY_PAGE.md` | **Active** | Master reference for how data & AI operate on each page (Stats, Insights, Journal, Techniques) |
 | `JOURNAL_DATA_CAPTURE_STRATEGY.md` | Active | Three-tier data capture pyramid, persona adaptations, implementation roadmap |
 | `CONVERSATION_DESIGN_FOUNDATION.md` | Active | Voice/chatbot conversation design principles |
 | `VOICE_LOGGING_CONVERSATION_DESIGN.md` | Active | Voice logger conversation flow specification |
