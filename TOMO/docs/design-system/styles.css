@@ -1,0 +1,834 @@
+/**
+ * TOMO - BOLD DESIGN SYSTEM
+ * Dark, editorial, typography-forward
+ * Linear/Palantir inspired aesthetic
+ *
+ * DESIGN PRINCIPLES:
+ * 1. NO EMOJIS - Use SVG lineart icons only
+ * 2. Dark theme (#111111) with gold accents - softened for readability
+ * 3. Unbounded for headlines/numbers, Inter for body, JetBrains Mono for labels
+ * 4. Large hero numbers (144px-180px)
+ * 5. Editorial narrative sections
+ * 6. Full-bleed sections with gradient backgrounds
+ * 7. Semantic colors: GREEN = positive, RED = negative
+ * 8. Medium font weight (500) for body text - better readability
+ * 9. Lightened grays for better contrast on dark backgrounds
+ */
+
+/* Google Fonts - Unbounded for headlines/numbers, Inter for body, JetBrains Mono for labels */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800;900&display=swap');
+
+/* ========================================
+   CSS VARIABLES (Design Tokens)
+   ======================================== */
+
+:root {
+  /* Primary - Dark Theme (softened for readability) */
+  --color-black: #111111;
+  --color-white: #ffffff;
+  --color-gold: #F5A623;
+  --color-gold-dim: rgba(245, 166, 35, 0.15);
+  --color-gold-glow: rgba(245, 166, 35, 0.25);
+
+  /* Grayscale - Lightened for better contrast on dark backgrounds */
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #e5e5e5;
+  --color-gray-300: #d4d4d4;
+  --color-gray-400: #b3b3b3;
+  --color-gray-500: #8b8b8b;
+  --color-gray-600: #6b6b6b;
+  --color-gray-700: #4a4a4a;
+  --color-gray-800: #1f1f1f;
+  --color-gray-900: #161616;
+
+  /* Semantic Colors */
+  --color-positive: #22c55e;
+  --color-positive-dim: rgba(34, 197, 94, 0.15);
+  --color-positive-glow: rgba(34, 197, 94, 0.25);
+
+  --color-negative: #ef4444;
+  --color-negative-dim: rgba(239, 68, 68, 0.15);
+  --color-negative-glow: rgba(239, 68, 68, 0.25);
+
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+
+  /* Belt Colors */
+  --color-belt-white: #FFFFFF;
+  --color-belt-blue: #0033A0;
+  --color-belt-purple: #4B0082;
+  --color-belt-brown: #8B4513;
+  --color-belt-black: #000000;
+
+  /* Training Types */
+  --color-training-gi: #3B82F6;
+  --color-training-nogi: #F97316;
+  --color-training-openmat: #A855F7;
+  --color-training-private: #22C55E;
+  --color-training-competition: #EF4444;
+
+  /* Typography */
+  --font-display: 'Unbounded', sans-serif;  /* Headlines, hero numbers */
+  --font-heading: 'Unbounded', sans-serif;  /* Page titles, section headers */
+  --font-body: 'Inter', -apple-system, sans-serif;  /* Body text, descriptions */
+  --font-mono: 'JetBrains Mono', monospace;  /* Labels, data values */
+
+  /* Text Sizes
+     CRITICAL: 12px is the MINIMUM font size.
+     Nothing smaller than 12px for mobile readability. */
+  --text-xs: 0.75rem;      /* 12px - MINIMUM ALLOWED */
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-lg: 1.0625rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 3rem;
+  --text-5xl: 4.5rem;
+  --text-hero: 9rem;
+  --text-mega: 11.25rem;
+
+  /* Line Heights */
+  --leading-none: 0.8;
+  --leading-tight: 0.85;
+  --leading-snug: 1;
+  --leading-normal: 1.5;
+
+  /* Letter Spacing */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.04em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+  --tracking-widest: 0.15em;
+  --tracking-ultra: 0.2em;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Borders */
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+}
+
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 500;  /* Medium weight for better readability on dark backgrounds */
+  background: var(--color-black);
+  color: var(--color-white);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  color: var(--color-white);
+  margin: 0;
+}
+
+h1 { font-size: var(--text-4xl); letter-spacing: var(--tracking-tight); }
+h2 { font-size: var(--text-3xl); letter-spacing: var(--tracking-tight); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+
+p {
+  margin-bottom: var(--space-md);
+  color: var(--color-gray-100);
+}
+
+a {
+  color: var(--color-gold);
+  text-decoration: none;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: var(--color-gray-900);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+/* ========================================
+   LAYOUT
+   ======================================== */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+.header {
+  padding: 80px var(--space-xl) 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header h1 {
+  font-size: clamp(48px, 10vw, 80px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-lg);
+}
+
+.header p {
+  font-size: var(--text-base);
+  color: var(--color-gray-400);
+  max-width: 400px;
+}
+
+.header-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-gold);
+  margin-bottom: var(--space-md);
+}
+
+/* ========================================
+   PAGE HEADER (shared across design system pages)
+   ======================================== */
+
+.page-header {
+  padding: 48px 32px;
+  border-bottom: 1px solid var(--color-gray-800);
+}
+
+.page-header h1 {
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  color: var(--color-gray-400);
+  margin: 0;
+  font-weight: 500;
+}
+
+.header-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;  /* 12px minimum */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-gold);
+  margin-bottom: 8px;
+}
+
+/* ========================================
+   TAB NAVIGATION
+   ======================================== */
+
+.tabs {
+  position: sticky;
+  top: 0;
+  background: rgba(17, 17, 17, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-gray-800);
+  z-index: 100;
+  display: flex;
+  gap: 0;
+  padding: 0 var(--space-lg);
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: 20px 24px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 12px;  /* 12px minimum */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-gray-500);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.2s;
+  text-decoration: none;  /* For link tabs */
+}
+
+.tab:hover {
+  color: var(--color-gray-400);
+}
+
+.tab.active {
+  color: var(--color-gold);
+  border-bottom-color: var(--color-gold);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* ========================================
+   SECTIONS
+   ======================================== */
+
+.section {
+  margin-bottom: 64px;
+  padding-top: 48px;
+  border-top: 1px solid var(--color-gray-800);
+}
+
+.section-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-gold);
+  margin-bottom: 32px;
+}
+
+.subsection {
+  margin-bottom: 48px;
+}
+
+.subsection-title {
+  font-size: 12px;  /* 12px minimum */
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-gray-400);
+  margin-bottom: 24px;
+}
+
+/* ========================================
+   COLOR SWATCHES
+   ======================================== */
+
+.swatch {
+  text-align: center;
+}
+
+.swatch-color {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 8px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.swatch-label {
+  font-size: 10px;
+  color: var(--color-gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 8px;
+  display: block;
+}
+
+/* ========================================
+   HERO TYPOGRAPHY DEMO
+   ======================================== */
+
+.hero-demo {
+  font-family: var(--font-display);
+  font-size: clamp(80px, 20vw, 144px);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  background: linear-gradient(180deg, #ffffff 0%, #666666 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-unit {
+  font-size: 22px;
+  font-weight: 500;  /* Changed from 300 - never use thin weights */
+  color: var(--color-gray-400);
+  margin-top: -8px;
+}
+
+/* ========================================
+   STAT DISPLAYS
+   ======================================== */
+
+.stat-grid {
+  display: grid;
+  gap: 1px;
+  background: var(--color-gray-800);
+}
+
+.stat-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.stat-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.stat-grid-5 { grid-template-columns: repeat(5, 1fr); }
+
+.stat-cell {
+  background: var(--color-gray-900);
+  padding: 40px 24px;
+}
+
+.stat-cell--positive {
+  background: linear-gradient(135deg, var(--color-positive-dim) 0%, var(--color-black) 100%);
+}
+
+.stat-cell--negative {
+  background: linear-gradient(135deg, var(--color-negative-dim) 0%, var(--color-black) 100%);
+}
+
+.stat-cell--compact {
+  padding: 20px 12px;
+  text-align: center;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-gray-400);
+  margin-bottom: 12px;
+}
+
+.stat-label--positive { color: var(--color-positive); }
+.stat-label--negative { color: var(--color-negative); }
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+}
+
+.stat-value--positive { color: var(--color-positive); }
+.stat-value--negative { color: var(--color-negative); }
+.stat-value--gold { color: var(--color-gold); }
+
+.stat-value--medium { font-size: 28px; }
+
+.stat-subtext {
+  font-size: 12px;
+  color: var(--color-gray-400);
+  margin-top: 8px;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 16px 32px;
+  border: none;
+  background: var(--color-gray-800);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background: var(--color-gray-700);
+}
+
+.btn-primary {
+  background: var(--color-gold);
+  color: var(--color-black);
+}
+
+.btn-primary:hover {
+  background: #ffb733;
+}
+
+.btn-dark {
+  background: var(--color-gray-900);
+  border: 1px solid var(--color-gray-800);
+}
+
+.btn-dark:hover {
+  background: var(--color-gray-800);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--color-gray-700);
+}
+
+.btn-outline:hover {
+  background: var(--color-gray-800);
+}
+
+.btn-positive {
+  background: var(--color-positive);
+  color: var(--color-black);
+}
+
+.btn-negative {
+  background: var(--color-negative);
+  color: var(--color-white);
+}
+
+.btn-sm {
+  padding: 12px 24px;
+  font-size: 12px;
+}
+
+/* ========================================
+   BADGES
+   ======================================== */
+
+.belt-badge {
+  display: inline-block;
+  width: 80px;
+  height: 20px;
+  border-radius: 2px;
+  position: relative;
+  border: 1px solid var(--color-gray-700);
+}
+
+.belt-white { background: var(--color-belt-white); }
+.belt-blue { background: var(--color-belt-blue); }
+.belt-purple { background: var(--color-belt-purple); }
+.belt-brown { background: var(--color-belt-brown); }
+.belt-black { background: var(--color-belt-black); }
+
+.training-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.training-gi { background: var(--color-training-gi); color: var(--color-white); }
+.training-nogi { background: var(--color-training-nogi); color: var(--color-black); }
+.training-openmat { background: var(--color-training-openmat); color: var(--color-white); }
+.training-private { background: var(--color-training-private); color: var(--color-black); }
+.training-competition { background: var(--color-training-competition); color: var(--color-white); }
+
+/* ========================================
+   CALLOUTS
+   ======================================== */
+
+.callout {
+  padding: 32px 24px;
+  position: relative;
+}
+
+.callout--positive {
+  background: linear-gradient(135deg, var(--color-positive-dim) 0%, transparent 100%);
+  border-left: 3px solid var(--color-positive);
+}
+
+.callout--negative {
+  background: linear-gradient(135deg, var(--color-negative-dim) 0%, transparent 100%);
+  border-left: 3px solid var(--color-negative);
+}
+
+.callout-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  margin-bottom: 12px;
+}
+
+.callout--positive .callout-label { color: var(--color-positive); }
+.callout--negative .callout-label { color: var(--color-negative); }
+
+.callout-text {
+  font-size: 16px;
+  color: var(--color-gray-100);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ========================================
+   BAR CHARTS
+   ======================================== */
+
+.bar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.bar-rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-gray-600);
+  width: 20px;
+}
+
+.bar-container {
+  flex: 1;
+  height: 32px;
+  background: var(--color-gray-900);
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+}
+
+.bar-fill--gold { background: var(--color-gold); }
+.bar-fill--gray { background: var(--color-gray-600); }
+
+.bar-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bar-fill--gold .bar-label { color: var(--color-black); }
+.bar-fill--gray .bar-label { color: var(--color-white); }
+
+.bar-count {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-white);
+  min-width: 32px;
+  text-align: right;
+}
+
+/* ========================================
+   LIST ITEMS
+   ======================================== */
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-gray-800);
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.list-item-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-gray-400);
+  margin-top: 4px;
+}
+
+/* ========================================
+   FORMS
+   ======================================== */
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-gray-400);
+  margin-bottom: 8px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 16px;
+  background: var(--color-gray-900);
+  border: 1px solid var(--color-gray-800);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 15px;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-gray-400);  /* Lightened for readability */
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px var(--color-gold-dim);
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ========================================
+   STREAK DISPLAY
+   ======================================== */
+
+.streak-display {
+  padding: 64px 24px;
+  text-align: center;
+  position: relative;
+  background: var(--color-gray-900);
+}
+
+.streak-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--color-positive-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.streak-number {
+  font-family: var(--font-display);
+  font-size: clamp(100px, 30vw, 160px);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  color: var(--color-positive);
+  position: relative;
+}
+
+.streak-unit {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  color: var(--color-positive);
+  margin-top: 16px;
+}
+
+/* ========================================
+   ICON CONTAINER
+   ======================================== */
+
+.icon-demo {
+  width: 48px;
+  height: 48px;
+  background: var(--color-gray-900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gold);
+}
+
+/* ========================================
+   SPACING DEMO
+   ======================================== */
+
+.spacing-demo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.spacing-bar {
+  height: 24px;
+  background: var(--color-gold);
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.flex { display: flex; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-xs { gap: 4px; }
+.gap-sm { gap: 8px; }
+.gap-md { gap: 16px; }
+.gap-lg { gap: 24px; }
+.gap-xl { gap: 32px; }
+
+.text-center { text-align: center; }
+.text-small { font-size: var(--text-sm); }
+.text-muted { color: var(--color-gray-400); }
+.text-mono { font-family: var(--font-mono); }
+.text-gold { color: var(--color-gold); }
+.text-positive { color: var(--color-positive); }
+.text-negative { color: var(--color-negative); }
+
+.grid { display: grid; gap: 16px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-auto { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (min-width: 768px) {
+  .hero-demo { font-size: 180px; }
+  .stat-value { font-size: 72px; }
+}

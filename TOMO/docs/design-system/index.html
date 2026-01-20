@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMO - Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-eyebrow">Design System v2.1</div>
+    <h1>TOMO</h1>
+    <p>Bold, dark, typography-forward. Unbounded for headlines/numbers, Inter for body, JetBrains Mono for labels. No emojis. Large numbers. Full-bleed sections. Linear/Palantir inspired.</p>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="tabs">
+    <a href="typography.html" class="tab">Typography</a>
+    <a href="icons.html" class="tab">Icons</a>
+    <button class="tab active" data-tab="foundations">Foundations</button>
+    <button class="tab" data-tab="components">Components</button>
+    <button class="tab" data-tab="patterns">Patterns</button>
+    <button class="tab" data-tab="motion">Motion</button>
+    <a href="logo-test.html" class="tab" style="margin-left:auto;color:#F5A623" title="Logo Exploration">Logo Test</a>
+    <a href="font-test.html" class="tab" style="color:#22c55e" title="Archived - Decision Made">Font Test ✓</a>
+  </div>
+
+  <!-- Content -->
+  <div class="container">
+    <!-- FOUNDATIONS TAB -->
+    <div class="tab-content active" id="foundations">
+
+      <!-- Colors -->
+      <section class="section">
+        <h2 class="section-title">Colors</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Core Palette</h3>
+          <div class="flex flex-wrap gap-xs">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#0a0a0a;color:#fff">#0a0a0a</div>
+              <span class="swatch-label">Black</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#0f0f0f;color:#fff">#0f0f0f</div>
+              <span class="swatch-label">Gray 900</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#1a1a1a;color:#fff">#1a1a1a</div>
+              <span class="swatch-label">Gray 800</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#404040;color:#fff">#404040</div>
+              <span class="swatch-label">Gray 700</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#a3a3a3;color:#000">#a3a3a3</div>
+              <span class="swatch-label">Gray 400</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#ffffff;color:#000">#ffffff</div>
+              <span class="swatch-label">White</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#F5A623;color:#000">#F5A623</div>
+              <span class="swatch-label">Gold</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Semantic Colors</h3>
+          <div class="flex flex-wrap gap-xs">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#22c55e;color:#000">#22c55e</div>
+              <span class="swatch-label">Positive</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#ef4444;color:#fff">#ef4444</div>
+              <span class="swatch-label">Negative</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#f59e0b;color:#000">#f59e0b</div>
+              <span class="swatch-label">Warning</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#3b82f6;color:#fff">#3b82f6</div>
+              <span class="swatch-label">Info</span>
+            </div>
+          </div>
+          <p style="font-size:13px;color:#a3a3a3;margin-top:24px;max-width:500px">
+            <strong style="color:#22c55e">Green</strong> = positive outcomes (submissions landed, wins, progress).<br>
+            <strong style="color:#ef4444">Red</strong> = negative outcomes (times tapped, losses, weaknesses).
+          </p>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Belt Colors</h3>
+          <div class="flex flex-wrap gap-xs">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#FFFFFF;border:1px solid #404040;color:#000">#FFFFFF</div>
+              <span class="swatch-label">White</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#0033A0;color:#fff">#0033A0</div>
+              <span class="swatch-label">Blue</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#4B0082;color:#fff">#4B0082</div>
+              <span class="swatch-label">Purple</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#8B4513;color:#fff">#8B4513</div>
+              <span class="swatch-label">Brown</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#000000;border:1px solid #404040;color:#fff">#000000</div>
+              <span class="swatch-label">Black</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Typography -->
+      <section class="section">
+        <h2 class="section-title">Typography</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Hero Numbers</h3>
+          <div class="hero-demo">127</div>
+          <div class="hero-unit">sessions logged</div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Section Titles</h3>
+          <div style="display:flex;flex-direction:column;gap:24px">
+            <div>
+              <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.15em;color:#fff">Section Title</div>
+              <code style="font-size:12px;color:#525252">12px / 600 / uppercase / 0.15em tracking</code>
+            </div>
+            <div>
+              <div style="font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:0.2em;color:#F5A623">Eyebrow Label</div>
+              <code style="font-size:12px;color:#525252">JetBrains Mono / 12px (min) / uppercase / 0.2em tracking / gold</code>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Body Text</h3>
+          <p style="font-size:16px;color:#f5f5f5;line-height:1.6;max-width:500px;margin:0">
+            Body text uses Inter at 15px with weight 500 and 1.6 line height. Keep paragraphs concise for exhausted users post-training.
+          </p>
+        </div>
+      </section>
+
+      <!-- Spacing -->
+      <section class="section">
+        <h2 class="section-title">Spacing</h2>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="spacing-demo"><div class="spacing-bar" style="width:4px"></div><span class="text-mono text-muted" style="min-width:40px">xs</span><span class="text-mono" style="color:#525252">4px</span></div>
+          <div class="spacing-demo"><div class="spacing-bar" style="width:8px"></div><span class="text-mono text-muted" style="min-width:40px">sm</span><span class="text-mono" style="color:#525252">8px</span></div>
+          <div class="spacing-demo"><div class="spacing-bar" style="width:16px"></div><span class="text-mono text-muted" style="min-width:40px">md</span><span class="text-mono" style="color:#525252">16px</span></div>
+          <div class="spacing-demo"><div class="spacing-bar" style="width:24px"></div><span class="text-mono text-muted" style="min-width:40px">lg</span><span class="text-mono" style="color:#525252">24px</span></div>
+          <div class="spacing-demo"><div class="spacing-bar" style="width:32px"></div><span class="text-mono text-muted" style="min-width:40px">xl</span><span class="text-mono" style="color:#525252">32px</span></div>
+          <div class="spacing-demo"><div class="spacing-bar" style="width:48px"></div><span class="text-mono text-muted" style="min-width:40px">2xl</span><span class="text-mono" style="color:#525252">48px</span></div>
+          <div class="spacing-demo"><div class="spacing-bar" style="width:64px"></div><span class="text-mono text-muted" style="min-width:40px">3xl</span><span class="text-mono" style="color:#525252">64px</span></div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- COMPONENTS TAB -->
+    <div class="tab-content" id="components">
+
+      <!-- Stat Displays -->
+      <section class="section">
+        <h2 class="section-title">Stat Displays</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Large Metric Grid (2-col)</h3>
+          <div class="stat-grid stat-grid-2">
+            <div class="stat-cell stat-cell--positive">
+              <div class="stat-label stat-label--positive">Submissions</div>
+              <div class="stat-value stat-value--positive">18</div>
+              <div class="stat-subtext">you landed</div>
+            </div>
+            <div class="stat-cell stat-cell--negative">
+              <div class="stat-label stat-label--negative">Tapped Out</div>
+              <div class="stat-value stat-value--negative">24</div>
+              <div class="stat-subtext">this month</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Arsenal Grid (5-col)</h3>
+          <div class="stat-grid stat-grid-5">
+            <div class="stat-cell stat-cell--compact">
+              <div class="stat-value stat-value--medium">12</div>
+              <div class="stat-label">Subs</div>
+            </div>
+            <div class="stat-cell stat-cell--compact">
+              <div class="stat-value stat-value--medium">8</div>
+              <div class="stat-label">Sweeps</div>
+            </div>
+            <div class="stat-cell stat-cell--compact">
+              <div class="stat-value stat-value--medium">15</div>
+              <div class="stat-label">Passes</div>
+            </div>
+            <div class="stat-cell stat-cell--compact">
+              <div class="stat-value stat-value--medium">6</div>
+              <div class="stat-label">Escapes</div>
+            </div>
+            <div class="stat-cell stat-cell--compact">
+              <div class="stat-value stat-value--medium">4</div>
+              <div class="stat-label">Takedowns</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Progress Categories (4-col)</h3>
+          <div class="stat-grid stat-grid-4">
+            <div class="stat-cell stat-cell--compact stat-cell--positive">
+              <div class="stat-value stat-value--medium stat-value--positive">85%</div>
+              <div class="stat-label">Guard</div>
+            </div>
+            <div class="stat-cell stat-cell--compact stat-cell--positive">
+              <div class="stat-value stat-value--medium stat-value--positive">72%</div>
+              <div class="stat-label">Pass</div>
+            </div>
+            <div class="stat-cell stat-cell--compact">
+              <div class="stat-value stat-value--medium">45%</div>
+              <div class="stat-label">Mount</div>
+            </div>
+            <div class="stat-cell stat-cell--compact stat-cell--negative">
+              <div class="stat-value stat-value--medium stat-value--negative">28%</div>
+              <div class="stat-label">Back</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Buttons -->
+      <section class="section">
+        <h2 class="section-title">Buttons</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Primary Actions</h3>
+          <div class="flex flex-wrap gap-md">
+            <button class="btn btn-primary">Log Training</button>
+            <button class="btn btn-dark">View Details</button>
+            <button class="btn btn-outline">Outline</button>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Semantic Buttons</h3>
+          <div class="flex flex-wrap gap-md">
+            <button class="btn btn-positive btn-sm">Confirm</button>
+            <button class="btn btn-negative btn-sm">Delete</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Badges -->
+      <section class="section">
+        <h2 class="section-title">Badges</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Belt Badges</h3>
+          <div class="flex flex-wrap gap-lg items-center">
+            <div class="text-center">
+              <div class="belt-badge belt-white"></div>
+              <p class="text-muted text-small" style="margin-top:8px;margin-bottom:0">White</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-blue"></div>
+              <p class="text-muted text-small" style="margin-top:8px;margin-bottom:0">Blue</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-purple"></div>
+              <p class="text-muted text-small" style="margin-top:8px;margin-bottom:0">Purple</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-brown"></div>
+              <p class="text-muted text-small" style="margin-top:8px;margin-bottom:0">Brown</p>
+            </div>
+            <div class="text-center">
+              <div class="belt-badge belt-black"></div>
+              <p class="text-muted text-small" style="margin-top:8px;margin-bottom:0">Black</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Training Types</h3>
+          <div class="flex flex-wrap gap-sm">
+            <span class="training-badge training-gi">Gi</span>
+            <span class="training-badge training-nogi">No-Gi</span>
+            <span class="training-badge training-openmat">Open Mat</span>
+            <span class="training-badge training-private">Private</span>
+            <span class="training-badge training-competition">Competition</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Icons -->
+      <section class="section">
+        <h2 class="section-title">Icon Library (106 Icons)</h2>
+        <p class="text-muted" style="margin-bottom:16px;max-width:500px">
+          Never use emojis. Always use SVG lineart icons from the Icons component. All icons are 24x24, stroke-based.
+        </p>
+        <p style="margin-bottom:24px">
+          <a href="../../prototype/public/icons.html" style="color:#F5A623;text-decoration:underline">View Full Icon Library →</a>
+        </p>
+
+        <div class="subsection">
+          <h3 class="subsection-title">BJJ Training</h3>
+          <div class="flex flex-wrap gap-lg">
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 3h10v18H7z"/>
+                  <path d="M7 4H3v5h4"/>
+                  <path d="M17 4h4v5h-4"/>
+                  <path d="M10 3v5l2 2 2-2V3"/>
+                  <rect x="7" y="12" width="10" height="2"/>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Gi</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 2h8l1 1v8l-.5 10h-3l-1.5-5-1.5 5h-3L7 11V3l1-1z"/>
+                  <path d="M7 4H4l.5 5H7"/>
+                  <path d="M17 4h3l-.5 5H17"/>
+                  <path d="M10 2c0 1 1 1.5 2 1.5s2-.5 2-1.5"/>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">NoGi</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="7" cy="5" r="2"/>
+                  <circle cx="17" cy="5" r="2"/>
+                  <path d="M5 10h4l2 4-2 4H5"/>
+                  <path d="M19 10h-4l-2 4 2 4h4"/>
+                  <path d="M10 14h4"/>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Sparring</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="9" width="20" height="6" rx="1"/>
+                  <path d="M12 9v6"/>
+                  <path d="M12 15v4l-2 2"/>
+                  <path d="M12 19l2 2"/>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Belt</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Progress & Status</h3>
+          <div class="flex flex-wrap gap-lg">
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Check</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Flame</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                  <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                  <path d="M4 22h16"></path>
+                  <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                  <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                  <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Trophy</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="6"></circle>
+                  <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">Target</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                  <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">TrendUp</span>
+            </div>
+            <div class="text-center">
+              <div class="icon-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+                  <polyline points="17 18 23 18 23 12"></polyline>
+                </svg>
+              </div>
+              <span class="text-muted" style="font-size:12px;display:block;margin-top:8px">TrendDown</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Icon Usage</h3>
+          <div style="background:var(--color-gray-900);padding:20px;font-family:var(--font-mono);font-size:12px;color:var(--color-gray-300)">
+            <code style="display:block;margin-bottom:8px;color:#F5A623">// Import from Icons component</code>
+            <code style="display:block;margin-bottom:16px">import { Icons } from '@/components/ui/Icons';</code>
+            <code style="display:block;margin-bottom:8px;color:#F5A623">// Usage</code>
+            <code style="display:block;margin-bottom:4px">&lt;Icons.Gi size={24} /&gt;</code>
+            <code style="display:block;margin-bottom:4px">&lt;Icons.NoGi size={24} /&gt;</code>
+            <code style="display:block;margin-bottom:4px">&lt;Icons.Trophy size={24} color="var(--color-gold)" /&gt;</code>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Icon Categories</h3>
+          <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:16px;font-size:12px">
+            <div>
+              <div style="color:var(--color-gold);margin-bottom:8px;font-weight:600">Navigation (10)</div>
+              <div style="color:var(--color-gray-400)">Home, Journal, Progress, Library, Profile, Menu, Search, Settings, Back, Close</div>
+            </div>
+            <div>
+              <div style="color:var(--color-gold);margin-bottom:8px;font-weight:600">Session Logging (10)</div>
+              <div style="color:var(--color-gray-400)">Mic, MicOff, Keyboard, Play, Pause, Stop, Timer, Hourglass, Calendar, Clock</div>
+            </div>
+            <div>
+              <div style="color:var(--color-gold);margin-bottom:8px;font-weight:600">BJJ Training (6)</div>
+              <div style="color:var(--color-gray-400)">Gi, NoGi, Sparring, MapPin, Dumbbell, Belt</div>
+            </div>
+            <div>
+              <div style="color:var(--color-gold);margin-bottom:8px;font-weight:600">Techniques (6)</div>
+              <div style="color:var(--color-gray-400)">Hand, Shield, Sweep, Pass, Escape, Takedown</div>
+            </div>
+            <div>
+              <div style="color:var(--color-gold);margin-bottom:8px;font-weight:600">Progress (11)</div>
+              <div style="color:var(--color-gray-400)">Trophy, Medal, Flame, Target, Crown, Flag, Award, TrendUp, TrendDown, BarChart, Activity</div>
+            </div>
+            <div>
+              <div style="color:var(--color-gold);margin-bottom:8px;font-weight:600">Actions (19)</div>
+              <div style="color:var(--color-gray-400)">Plus, Minus, Edit, Trash, Copy, Refresh, Filter, Sort, Share, Download, Upload...</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- PATTERNS TAB -->
+    <div class="tab-content" id="patterns">
+
+      <!-- Callouts -->
+      <section class="section">
+        <h2 class="section-title">Callouts</h2>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div class="callout callout--positive">
+            <div class="callout-label">What's Working</div>
+            <p class="callout-text">Your guard game is developing. Sweep attempts up 40%. That's your game emerging.</p>
+          </div>
+          <div class="callout callout--negative">
+            <div class="callout-label">Needs Work</div>
+            <p class="callout-text">Mount escapes have dropped off. Zero drills in 3 weeks. Focus here.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bar Charts -->
+      <section class="section">
+        <h2 class="section-title">Horizontal Bars</h2>
+        <div class="bar-list" style="max-width:400px">
+          <div class="bar-row">
+            <span class="bar-rank">1</span>
+            <div class="bar-container">
+              <div class="bar-fill bar-fill--gold" style="width:100%">
+                <span class="bar-label">Armbar</span>
+              </div>
+            </div>
+            <span class="bar-count">16</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-rank">2</span>
+            <div class="bar-container">
+              <div class="bar-fill bar-fill--gray" style="width:62%">
+                <span class="bar-label">Triangle</span>
+              </div>
+            </div>
+            <span class="bar-count">10</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-rank">3</span>
+            <div class="bar-container">
+              <div class="bar-fill bar-fill--gray" style="width:37%">
+                <span class="bar-label">RNC</span>
+              </div>
+            </div>
+            <span class="bar-count">6</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-rank">4</span>
+            <div class="bar-container">
+              <div class="bar-fill bar-fill--gray" style="width:25%">
+                <span class="bar-label">Kimura</span>
+              </div>
+            </div>
+            <span class="bar-count">4</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- List Items -->
+      <section class="section">
+        <h2 class="section-title">List Items</h2>
+        <div style="max-width:400px">
+          <div class="list-item">
+            <div>
+              <div class="list-item-title">Today</div>
+              <div class="list-item-meta">90min / 3 tech / 5 rolls</div>
+            </div>
+            <span class="training-badge training-gi">Gi</span>
+          </div>
+          <div class="list-item">
+            <div>
+              <div class="list-item-title">Yesterday</div>
+              <div class="list-item-meta">60min / 2 tech / 3 rolls</div>
+            </div>
+            <span class="training-badge training-nogi">No-Gi</span>
+          </div>
+          <div class="list-item">
+            <div>
+              <div class="list-item-title">Dec 18</div>
+              <div class="list-item-meta">120min / Open mat</div>
+            </div>
+            <span class="training-badge training-openmat">Open Mat</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Streak Display -->
+      <section class="section">
+        <h2 class="section-title">Streak Display</h2>
+        <div class="streak-display">
+          <div class="streak-glow"></div>
+          <div class="streak-number">14</div>
+          <div class="streak-unit">Day Streak</div>
+        </div>
+      </section>
+
+      <!-- Forms -->
+      <section class="section">
+        <h2 class="section-title">Form Elements</h2>
+        <div style="max-width:400px">
+          <div class="form-group">
+            <label class="form-label">Session Notes</label>
+            <textarea class="form-textarea" placeholder="What did you work on today?"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Duration (minutes)</label>
+            <input type="number" class="form-input" placeholder="60">
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- MOTION TAB -->
+    <div class="tab-content" id="motion">
+
+      <!-- Philosophy -->
+      <section class="section">
+        <h2 class="section-title">Motion Philosophy</h2>
+        <p style="font-size:15px;color:#b3b3b3;max-width:600px;line-height:1.7;margin-bottom:32px">
+          Our users are <strong style="color:#fff">exhausted post-training</strong>. Motion is minimal and functional. No entrance animations. No hover states. Mobile-first means touch-first.
+        </p>
+        <div class="stat-grid stat-grid-2" style="max-width:400px">
+          <div class="stat-cell stat-cell--compact">
+            <div class="stat-value stat-value--medium stat-value--gold">0.1s</div>
+            <div class="stat-label">Button Press</div>
+          </div>
+          <div class="stat-cell stat-cell--compact">
+            <div class="stat-value stat-value--medium stat-value--gold">0.5s</div>
+            <div class="stat-label">Count-Up</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Number Animation -->
+      <section class="section">
+        <h2 class="section-title">Number Count-Up</h2>
+        <p class="text-muted" style="margin-bottom:24px">Numbers count up to confirm data loaded. Fast start, slow finish (easeOut).</p>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Hero Stat</h3>
+          <p class="text-muted" style="margin-bottom:16px">Large numbers count up over 0.5s</p>
+          <div class="motion-demo-row">
+            <div class="streak-display-mini" id="number-demo">
+              <div class="streak-number-mini count-up" data-target="127">0</div>
+              <div class="streak-unit-mini">Sessions</div>
+            </div>
+            <button class="btn btn-dark btn-sm" onclick="replayCountUp()">Replay</button>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Stat Grid</h3>
+          <p class="text-muted" style="margin-bottom:16px">Multiple stats count up together</p>
+          <div class="motion-demo-row">
+            <div class="stat-grid stat-grid-4" style="max-width:500px" id="stat-count-demo">
+              <div class="stat-cell stat-cell--compact">
+                <div class="stat-value stat-value--medium stat-value--positive count-up" data-target="18">0</div>
+                <div class="stat-label">Subs</div>
+              </div>
+              <div class="stat-cell stat-cell--compact">
+                <div class="stat-value stat-value--medium count-up" data-target="42">0</div>
+                <div class="stat-label">Hours</div>
+              </div>
+              <div class="stat-cell stat-cell--compact">
+                <div class="stat-value stat-value--medium stat-value--gold count-up" data-target="14">0</div>
+                <div class="stat-label">Streak</div>
+              </div>
+              <div class="stat-cell stat-cell--compact">
+                <div class="stat-value stat-value--medium stat-value--negative count-up" data-target="7">0</div>
+                <div class="stat-label">Tapped</div>
+              </div>
+            </div>
+            <button class="btn btn-dark btn-sm" onclick="replayStatCountUp()">Replay</button>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Percentage Increment</h3>
+          <p class="text-muted" style="margin-bottom:16px">Small increments feel like real-time updates, not loading</p>
+          <div class="motion-demo-row">
+            <div style="display:flex;gap:24px">
+              <div style="text-align:center">
+                <div class="stat-value stat-value--medium stat-value--positive count-up-increment" data-start="82" data-target="85" data-suffix="%" id="pct-demo-1">82%</div>
+                <div class="stat-label">Guard</div>
+              </div>
+              <div style="text-align:center">
+                <div class="stat-value stat-value--medium count-up-increment" data-start="70" data-target="72" data-suffix="%" id="pct-demo-2">70%</div>
+                <div class="stat-label">Pass</div>
+              </div>
+              <div style="text-align:center">
+                <div class="stat-value stat-value--medium stat-value--negative count-up-increment" data-start="25" data-target="28" data-suffix="%" id="pct-demo-3">25%</div>
+                <div class="stat-label">Back</div>
+              </div>
+            </div>
+            <button class="btn btn-dark btn-sm" onclick="replayPctIncrement()">Replay</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Progress Fills -->
+      <section class="section">
+        <h2 class="section-title">Progress Fills</h2>
+        <p class="text-muted" style="margin-bottom:24px">Bars animate to show completion</p>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Progress Bar</h3>
+          <div class="motion-demo-row">
+            <div class="progress-demo">
+              <div class="progress-bar-demo">
+                <div class="progress-fill-demo" id="progress-demo" style="width:0"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:8px">
+                <span class="stat-label">Belt Progress</span>
+                <span class="stat-label" style="color:#F5A623">72%</span>
+              </div>
+            </div>
+            <button class="btn btn-dark btn-sm" onclick="replayProgressFill()">Replay</button>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Horizontal Bar Chart</h3>
+          <div class="motion-demo-row">
+            <div class="bar-list" id="bar-demo" style="width:300px">
+              <div class="bar-row">
+                <span class="bar-rank">1</span>
+                <div class="bar-container">
+                  <div class="bar-fill bar-fill--gold bar-demo-fill" style="width:0">
+                    <span class="bar-label">Armbar</span>
+                  </div>
+                </div>
+                <span class="bar-count">16</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-rank">2</span>
+                <div class="bar-container">
+                  <div class="bar-fill bar-fill--gray bar-demo-fill" style="width:0" data-width="62%">
+                    <span class="bar-label">Triangle</span>
+                  </div>
+                </div>
+                <span class="bar-count">10</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-rank">3</span>
+                <div class="bar-container">
+                  <div class="bar-fill bar-fill--gray bar-demo-fill" style="width:0" data-width="37%">
+                    <span class="bar-label">RNC</span>
+                  </div>
+                </div>
+                <span class="bar-count">6</span>
+              </div>
+            </div>
+            <button class="btn btn-dark btn-sm" onclick="replayBarFill()">Replay</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Button Feedback -->
+      <section class="section">
+        <h2 class="section-title">Button Press</h2>
+        <p class="text-muted" style="margin-bottom:24px">Scales to 97% on press for tactile feedback. The only interaction state we use.</p>
+        <div class="flex gap-md">
+          <button class="btn btn-primary">Log Training</button>
+          <button class="btn btn-dark">View Details</button>
+        </div>
+      </section>
+
+      <!-- Glow Effects -->
+      <section class="section">
+        <h2 class="section-title">Achievement Glow</h2>
+        <p class="text-muted" style="margin-bottom:24px">Subtle pulse to draw attention to milestones. Used sparingly.</p>
+        <div class="glow-demo">
+          <div class="achievement-glow">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+              <path d="M4 22h16"></path>
+              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+              <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="stat-label" style="color:#F5A623">New Achievement</div>
+            <div style="font-size:15px;font-weight:600;color:#fff">100 Session Club</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <style>
+    /* ========================================
+       MOTION TAB STYLES
+       Minimal motion: count-up, progress fills, button press only
+       ======================================== */
+
+    /* Achievement glow pulse */
+    @keyframes glow-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.25); }
+      50% { box-shadow: 0 0 20px 4px rgba(245, 166, 35, 0.25); }
+    }
+
+    /* Motion Demo Layout */
+    .motion-demo-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    /* Streak Mini */
+    .streak-display-mini {
+      background: var(--color-gray-900);
+      padding: 32px 48px;
+      text-align: center;
+      position: relative;
+    }
+
+    .streak-number-mini {
+      font-size: 80px;
+      font-weight: 700;
+      line-height: 0.8;
+      letter-spacing: -0.05em;
+      color: var(--color-positive);
+    }
+
+    .streak-unit-mini {
+      font-size: 12px;  /* Changed from 11px - 12px minimum */
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--color-positive);
+      margin-top: 12px;
+    }
+
+    /* Progress Demo */
+    .progress-demo {
+      width: 250px;
+    }
+
+    .progress-bar-demo {
+      width: 100%;
+      height: 8px;
+      background: var(--color-gray-800);
+      overflow: hidden;
+    }
+
+    .progress-fill-demo {
+      height: 100%;
+      background: var(--color-gold);
+      transition: width 0.5s ease-out;
+    }
+
+    /* Bar Fill Demo */
+    .bar-demo-fill {
+      transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* Glow Demo */
+    .glow-demo {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: var(--color-gray-900);
+      padding: 24px;
+      max-width: 320px;
+    }
+
+    .achievement-glow {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-gold);
+      animation: glow-pulse 2s ease-in-out infinite;
+      border-radius: 50%;
+    }
+
+    /* Button active state */
+    .btn {
+      transition: transform 0.1s ease, background-color 0.15s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active from all tabs and content
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+        // Add active to clicked tab and corresponding content
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    // ========================================
+    // COUNT-UP ANIMATION
+    // Numbers scroll from 0 to target value
+    // Uses easeOutQuart for fast start, slow finish
+    // ========================================
+
+    function easeOutQuart(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
+
+    // Count from 0 to target
+    function countUp(element, target, duration = 500, suffix = '') {
+      const start = 0;
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeOutQuart(progress);
+        const current = Math.floor(start + (target - start) * easedProgress);
+
+        element.textContent = current + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          element.textContent = target + suffix;
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    // Count from start to target (small increment)
+    function countIncrement(element, start, target, duration = 400, suffix = '') {
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeOutQuart(progress);
+        const current = Math.floor(start + (target - start) * easedProgress);
+
+        element.textContent = current + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          element.textContent = target + suffix;
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    function animateCountUp(selector) {
+      const elements = document.querySelectorAll(selector);
+      elements.forEach(el => {
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '';
+        el.textContent = '0' + suffix;
+        countUp(el, target, 500, suffix);
+      });
+    }
+
+    // Replay functions
+    function replayCountUp() {
+      const el = document.querySelector('#number-demo .count-up');
+      el.textContent = '0';
+      setTimeout(() => {
+        countUp(el, parseInt(el.dataset.target, 10), 500);
+      }, 50);
+    }
+
+    function replayStatCountUp() {
+      animateCountUp('#stat-count-demo .count-up');
+    }
+
+    function replayPctIncrement() {
+      const elements = document.querySelectorAll('.count-up-increment');
+      elements.forEach(el => {
+        const start = parseInt(el.dataset.start, 10);
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '';
+        el.textContent = start + suffix;
+        setTimeout(() => {
+          countIncrement(el, start, target, 400, suffix);
+        }, 50);
+      });
+    }
+
+    function replayProgressFill() {
+      const el = document.getElementById('progress-demo');
+      el.style.width = '0';
+      setTimeout(() => {
+        el.style.width = '72%';
+      }, 50);
+    }
+
+    function replayBarFill() {
+      const bars = document.querySelectorAll('.bar-demo-fill');
+      bars.forEach(bar => bar.style.width = '0');
+      setTimeout(() => {
+        bars[0].style.width = '100%';
+        setTimeout(() => bars[1].style.width = '62%', 100);
+        setTimeout(() => bars[2].style.width = '37%', 200);
+      }, 50);
+    }
+
+    // Auto-play animations when motion tab is shown
+    document.querySelector('[data-tab="motion"]').addEventListener('click', () => {
+      setTimeout(() => {
+        replayCountUp();
+        replayStatCountUp();
+        replayPctIncrement();
+        replayProgressFill();
+        replayBarFill();
+      }, 100);
+    });
+  </script>
+</body>
+</html>

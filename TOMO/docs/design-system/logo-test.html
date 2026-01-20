@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMO Logo Variations - Barcade Fonts</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Barcade Font Faces */
+    @font-face {
+      font-family: 'Barcade';
+      src: url('../../prototype/public/fonts/barcade/barcade.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Barcade Bold';
+      src: url('../../prototype/public/fonts/barcade/barcadbold.ttf') format('truetype');
+      font-weight: bold;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Barcade Italic';
+      src: url('../../prototype/public/fonts/barcade/barcadeital.ttf') format('truetype');
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Barcade Bold Italic';
+      src: url('../../prototype/public/fonts/barcade/barcadboldital.ttf') format('truetype');
+      font-weight: bold;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Barcade 3D';
+      src: url('../../prototype/public/fonts/barcade/barcade3d.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Barcade 3D Italic';
+      src: url('../../prototype/public/fonts/barcade/barcade3dital.ttf') format('truetype');
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Barcade Condensed';
+      src: url('../../prototype/public/fonts/barcade/barcadecond.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Barcade Condensed Italic';
+      src: url('../../prototype/public/fonts/barcade/barcadecondital.ttf') format('truetype');
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Barcade Expanded';
+      src: url('../../prototype/public/fonts/barcade/barcadeexpand.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Barcade Expanded Italic';
+      src: url('../../prototype/public/fonts/barcade/barcadeexpandital.ttf') format('truetype');
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Barcade Left';
+      src: url('../../prototype/public/fonts/barcade/barcadeleft.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Barcade No Bar';
+      src: url('../../prototype/public/fonts/barcade/barcadenobar.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Barcade No Bar Italic';
+      src: url('../../prototype/public/fonts/barcade/barcadenobarital.ttf') format('truetype');
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Barcade No Bar Bold';
+      src: url('../../prototype/public/fonts/barcade/barcadnobarbold.ttf') format('truetype');
+      font-weight: bold;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Barcade No Bar Bold Italic';
+      src: url('../../prototype/public/fonts/barcade/barcadnobarboldital.ttf') format('truetype');
+      font-weight: bold;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Barcade Outline';
+      src: url('../../prototype/public/fonts/barcade/barcadeout.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Barcade Outline Italic';
+      src: url('../../prototype/public/fonts/barcade/barcadeoutital.ttf') format('truetype');
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Barcade Semi Italic';
+      src: url('../../prototype/public/fonts/barcade/barcadesemital.ttf') format('truetype');
+      font-weight: normal;
+      font-style: italic;
+    }
+
+    /* Logo Grid */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-top: 32px;
+    }
+
+    .logo-card {
+      background: var(--color-gray-900);
+      padding: 48px 32px;
+      text-align: center;
+      position: relative;
+      border: 1px solid var(--color-gray-800);
+      transition: border-color 0.2s ease;
+    }
+
+    .logo-card:hover {
+      border-color: var(--color-gold);
+    }
+
+    .logo-card.selected {
+      border-color: var(--color-gold);
+      box-shadow: 0 0 20px rgba(245, 166, 35, 0.2);
+    }
+
+    .logo-text {
+      font-size: 64px;
+      color: #fff;
+      margin-bottom: 24px;
+      line-height: 1;
+    }
+
+    .logo-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-gray-400);
+      margin-bottom: 8px;
+    }
+
+    .logo-filename {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-gray-600);
+    }
+
+    .logo-number {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-gold);
+    }
+
+    .select-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--color-gray-600);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .select-btn:hover {
+      border-color: var(--color-gold);
+    }
+
+    .logo-card.selected .select-btn {
+      background: var(--color-gold);
+      border-color: var(--color-gold);
+    }
+
+    .select-btn svg {
+      opacity: 0;
+      color: #000;
+    }
+
+    .logo-card.selected .select-btn svg {
+      opacity: 1;
+    }
+
+    /* Size Variants */
+    .size-variants {
+      display: flex;
+      gap: 48px;
+      align-items: flex-end;
+      justify-content: center;
+      margin-top: 48px;
+      padding: 48px;
+      background: var(--color-gray-900);
+    }
+
+    .size-variant {
+      text-align: center;
+    }
+
+    .size-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-gray-500);
+      margin-top: 16px;
+    }
+
+    /* Color Variants */
+    .color-row {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .color-card {
+      padding: 32px 48px;
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .color-card.dark {
+      background: var(--color-black);
+      border: 1px solid var(--color-gray-800);
+    }
+
+    .color-card.gold {
+      background: var(--color-gold);
+    }
+
+    .color-card.white {
+      background: #fff;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--color-gray-400);
+      font-size: 14px;
+      text-decoration: none;
+      margin-bottom: 24px;
+    }
+
+    .back-link:hover {
+      color: var(--color-gold);
+    }
+
+    /* Selection summary */
+    .selection-summary {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-gray-900);
+      border: 1px solid var(--color-gold);
+      padding: 16px 24px;
+      display: none;
+      align-items: center;
+      gap: 16px;
+      z-index: 100;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .selection-summary.visible {
+      display: flex;
+    }
+
+    .selection-summary span {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--color-gold);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <a href="index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to Design System
+    </a>
+    <div class="header-eyebrow">Logo Exploration</div>
+    <h1>TOMO Logo Variations</h1>
+    <p>10 variations using Barcade font family. Click to select your favorite.</p>
+  </div>
+
+  <div class="container">
+    <!-- Main Variations -->
+    <section class="section">
+      <h2 class="section-title">Barcade Font Variants</h2>
+
+      <div class="logo-grid">
+        <!-- 1. Regular -->
+        <div class="logo-card" data-font="barcade">
+          <span class="logo-number">01</span>
+          <button class="select-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+          <div class="logo-text" style="font-family: 'Barcade'">TOMO</div>
+          <div class="logo-label">Barcade Regular</div>
+          <div class="logo-filename">barcade.ttf</div>
+        </div>
+
+        <!-- 2. Bold -->
+        <div class="logo-card" data-font="barcade-bold">
+          <span class="logo-number">02</span>
+          <button class="select-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+          <div class="logo-text" style="font-family: 'Barcade Bold'">TOMO</div>
+          <div class="logo-label">Barcade Bold</div>
+          <div class="logo-filename">barcadbold.ttf</div>
+        </div>
+
+        <!-- 3. 3D -->
+        <div class="logo-card" data-font="barcade-3d">
+          <span class="logo-number">03</span>
+          <button class="select-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+          <div class="logo-text" style="font-family: 'Barcade 3D'">TOMO</div>
+          <div class="logo-label">Barcade 3D</div>
+          <div class="logo-filename">barcade3d.ttf</div>
+        </div>
+
+        <!-- 4. Condensed -->
+        <div class="logo-card" data-font="barcade-condensed">
+          <span class="logo-number">04</span>
+          <button class="select-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+          <div class="logo-text" style="font-family: 'Barcade Condensed'">TOMO</div>
+          <div class="logo-label">Barcade Condensed</div>
+          <div class="logo-filename">barcadecond.ttf</div>
+        </div>
+
+        <!-- 5. Expanded -->
+        <div class="logo-card" data-font="barcade-expanded">
+          <span class="logo-number">05</span>
+          <button class="select-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+          <div class="logo-text" style="font-family: 'Barcade Expanded'">TOMO</div>
+          <div class="logo-label">Barcade Expanded</div>
+          <div class="logo-filename">barcadeexpand.ttf</div>
+        </div>
+
+        <!-- 6. Outline -->
+        <div class="logo-card" data-font="barcade-outline">
+          <span class="logo-number">06</span>
+          <button class="select-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+          <div class="logo-text" style="font-family: 'Barcade Outline'">TOMO</div>
+          <div class="logo-label">Barcade Outline</div>
+          <div class="logo-filename">barcadeout.ttf</div>
+        </div>
+
+        <!-- 7. No Bar -->
+        <div class="logo-card" data-font="barcade-nobar">
+          <span class="logo-number">07</span>
+          <button class="select-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+          <div class="logo-text" style="font-family: 'Barcade No Bar'">TOMO</div>
+          <div class="logo-label">Barcade No Bar</div>
+          <div class="logo-filename">barcadenobar.ttf</div>
+        </div>
+
+        <!-- 8. No Bar Bold -->
+        <div class="logo-card" data-font="barcade-nobar-bold">
+          <span class="logo-number">08</span>
+          <button class="select-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+          <div class="logo-text" style="font-family: 'Barcade No Bar Bold'">TOMO</div>
+          <div class="logo-label">Barcade No Bar Bold</div>
+          <div class="logo-filename">barcadnobarbold.ttf</div>
+        </div>
+
+        <!-- 9. Italic -->
+        <div class="logo-card" data-font="barcade-italic">
+          <span class="logo-number">09</span>
+          <button class="select-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+          <div class="logo-text" style="font-family: 'Barcade Italic'">TOMO</div>
+          <div class="logo-label">Barcade Italic</div>
+          <div class="logo-filename">barcadeital.ttf</div>
+        </div>
+
+        <!-- 10. Left (Scanline variant) -->
+        <div class="logo-card" data-font="barcade-left">
+          <span class="logo-number">10</span>
+          <button class="select-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+          <div class="logo-text" style="font-family: 'Barcade Left'">TOMO</div>
+          <div class="logo-label">Barcade Left</div>
+          <div class="logo-filename">barcadeleft.ttf</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Size Comparison -->
+    <section class="section">
+      <h2 class="section-title">Size Comparison</h2>
+      <p class="text-muted" style="margin-bottom:16px">How the selected font scales across typical use cases</p>
+
+      <div class="size-variants" id="size-comparison">
+        <div class="size-variant">
+          <div style="font-family: 'Barcade Bold'; font-size: 96px; color: #fff; line-height: 1;">TOMO</div>
+          <div class="size-label">Hero (96px)</div>
+        </div>
+        <div class="size-variant">
+          <div style="font-family: 'Barcade Bold'; font-size: 48px; color: #fff; line-height: 1;">TOMO</div>
+          <div class="size-label">Header (48px)</div>
+        </div>
+        <div class="size-variant">
+          <div style="font-family: 'Barcade Bold'; font-size: 24px; color: #fff; line-height: 1;">TOMO</div>
+          <div class="size-label">Nav (24px)</div>
+        </div>
+        <div class="size-variant">
+          <div style="font-family: 'Barcade Bold'; font-size: 16px; color: #fff; line-height: 1;">TOMO</div>
+          <div class="size-label">Small (16px)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Color Variants -->
+    <section class="section">
+      <h2 class="section-title">Color Applications</h2>
+      <p class="text-muted" style="margin-bottom:16px">Testing legibility across brand color combinations</p>
+
+      <div class="color-row" id="color-comparison">
+        <div class="color-card dark">
+          <div style="font-family: 'Barcade Bold'; font-size: 48px; color: #fff; line-height: 1;">TOMO</div>
+          <div class="size-label">White on Black</div>
+        </div>
+        <div class="color-card dark">
+          <div style="font-family: 'Barcade Bold'; font-size: 48px; color: #F5A623; line-height: 1;">TOMO</div>
+          <div class="size-label">Gold on Black</div>
+        </div>
+        <div class="color-card gold">
+          <div style="font-family: 'Barcade Bold'; font-size: 48px; color: #000; line-height: 1;">TOMO</div>
+          <div class="size-label">Black on Gold</div>
+        </div>
+        <div class="color-card white">
+          <div style="font-family: 'Barcade Bold'; font-size: 48px; color: #000; line-height: 1;">TOMO</div>
+          <div class="size-label">Black on White</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- With Tagline -->
+    <section class="section">
+      <h2 class="section-title">With Tagline</h2>
+      <p class="text-muted" style="margin-bottom:16px">Logo lockup with brand tagline</p>
+
+      <div style="background: var(--color-gray-900); padding: 64px; text-align: center;" id="tagline-demo">
+        <div style="font-family: 'Barcade Bold'; font-size: 72px; color: #fff; line-height: 1; margin-bottom: 16px;">TOMO</div>
+        <div style="font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--color-gray-400);">Your BJJ Training Partner</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Selection Summary -->
+  <div class="selection-summary" id="selection-summary">
+    <span id="selected-font">No selection</span>
+    <button class="btn btn-primary btn-sm" onclick="copySelection()">Copy Font Name</button>
+  </div>
+
+  <script>
+    // Font mapping for the comparison sections
+    const fontMap = {
+      'barcade': "'Barcade'",
+      'barcade-bold': "'Barcade Bold'",
+      'barcade-3d': "'Barcade 3D'",
+      'barcade-condensed': "'Barcade Condensed'",
+      'barcade-expanded': "'Barcade Expanded'",
+      'barcade-outline': "'Barcade Outline'",
+      'barcade-nobar': "'Barcade No Bar'",
+      'barcade-nobar-bold': "'Barcade No Bar Bold'",
+      'barcade-italic': "'Barcade Italic'",
+      'barcade-left': "'Barcade Left'"
+    };
+
+    const fontLabels = {
+      'barcade': "Barcade Regular",
+      'barcade-bold': "Barcade Bold",
+      'barcade-3d': "Barcade 3D",
+      'barcade-condensed': "Barcade Condensed",
+      'barcade-expanded': "Barcade Expanded",
+      'barcade-outline': "Barcade Outline",
+      'barcade-nobar': "Barcade No Bar",
+      'barcade-nobar-bold': "Barcade No Bar Bold",
+      'barcade-italic': "Barcade Italic",
+      'barcade-left': "Barcade Left"
+    };
+
+    let selectedFont = null;
+
+    // Card selection
+    document.querySelectorAll('.logo-card').forEach(card => {
+      card.addEventListener('click', () => {
+        // Remove selection from all cards
+        document.querySelectorAll('.logo-card').forEach(c => c.classList.remove('selected'));
+
+        // Add selection to clicked card
+        card.classList.add('selected');
+
+        // Get font info
+        selectedFont = card.dataset.font;
+        const fontFamily = fontMap[selectedFont];
+        const fontLabel = fontLabels[selectedFont];
+
+        // Update comparison sections
+        updateComparisons(fontFamily);
+
+        // Show selection summary
+        document.getElementById('selected-font').textContent = fontLabel;
+        document.getElementById('selection-summary').classList.add('visible');
+      });
+    });
+
+    function updateComparisons(fontFamily) {
+      // Update size comparison
+      document.querySelectorAll('#size-comparison .size-variant > div:first-child').forEach(el => {
+        el.style.fontFamily = fontFamily;
+      });
+
+      // Update color comparison
+      document.querySelectorAll('#color-comparison .color-card > div:first-child').forEach(el => {
+        el.style.fontFamily = fontFamily;
+      });
+
+      // Update tagline demo
+      document.querySelector('#tagline-demo > div:first-child').style.fontFamily = fontFamily;
+    }
+
+    function copySelection() {
+      if (selectedFont) {
+        const fontLabel = fontLabels[selectedFont];
+        navigator.clipboard.writeText(fontLabel).then(() => {
+          const btn = document.querySelector('.selection-summary .btn');
+          const originalText = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(() => {
+            btn.textContent = originalText;
+          }, 1500);
+        });
+      }
+    }
+
+    // Set default selection to Bold
+    document.querySelector('[data-font="barcade-bold"]').click();
+  </script>
+</body>
+</html>

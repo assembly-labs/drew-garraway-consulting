@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOMO Product Review & Launch Roadmap</title>
+    <style>
+        /*
+         * Design optimized for comfortable reading:
+         * - 18px base font (easier on 40+ eyes)
+         * - 1.7 line height (reduces eye strain)
+         * - Warm off-white background (less harsh than pure white)
+         * - Dark gray text (softer than pure black)
+         * - Max 70ch line width (optimal reading length)
+         */
+
+        :root {
+            /* Warm, easy-on-the-eyes color palette */
+            --bg-primary: #FAFAF8;
+            --bg-secondary: #F5F5F0;
+            --bg-card: #FFFFFF;
+            --bg-code: #2D3748;
+
+            --text-primary: #1A202C;
+            --text-secondary: #4A5568;
+            --text-muted: #718096;
+            --text-inverse: #F7FAFC;
+
+            --accent-blue: #3182CE;
+            --accent-green: #38A169;
+            --accent-orange: #DD6B20;
+            --accent-red: #E53E3E;
+            --accent-purple: #805AD5;
+
+            --border-light: #E2E8F0;
+            --border-medium: #CBD5E0;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1rem 2rem;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            list-style: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 0.25rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+        }
+
+        /* Main content */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin: 1.5rem 0 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            max-width: 70ch;
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            padding: 3rem;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border-light);
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hero .date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Status badges */
+        .status {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-good {
+            background: #C6F6D5;
+            color: #22543D;
+        }
+
+        .status-warning {
+            background: #FEEBC8;
+            color: #744210;
+        }
+
+        .status-critical {
+            background: #FED7D7;
+            color: #822727;
+        }
+
+        .status-info {
+            background: #BEE3F8;
+            color: #2A4365;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .card-icon.green { background: #C6F6D5; }
+        .card-icon.orange { background: #FEEBC8; }
+        .card-icon.red { background: #FED7D7; }
+        .card-icon.blue { background: #BEE3F8; }
+        .card-icon.purple { background: #E9D8FD; }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 1rem;
+            border-top: 1px solid var(--border-light);
+            vertical-align: top;
+        }
+
+        tr:hover td {
+            background: var(--bg-secondary);
+        }
+
+        /* Code blocks */
+        code {
+            font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+            font-size: 0.9em;
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            color: var(--accent-purple);
+        }
+
+        pre {
+            background: var(--bg-code);
+            color: var(--text-inverse);
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0 1.5rem 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        li::marker {
+            color: var(--accent-blue);
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+
+        .callout-info {
+            background: #EBF8FF;
+            border-color: var(--accent-blue);
+        }
+
+        .callout-success {
+            background: #F0FFF4;
+            border-color: var(--accent-green);
+        }
+
+        .callout-warning {
+            background: #FFFAF0;
+            border-color: var(--accent-orange);
+        }
+
+        .callout-danger {
+            background: #FFF5F5;
+            border-color: var(--accent-red);
+        }
+
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Progress indicators */
+        .progress-bar {
+            height: 8px;
+            background: var(--border-light);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .progress-fill.green { background: var(--accent-green); }
+        .progress-fill.orange { background: var(--accent-orange); }
+        .progress-fill.blue { background: var(--accent-blue); }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-medium);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.4rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 3px solid var(--accent-blue);
+        }
+
+        .timeline-item.done::before {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .timeline-phase {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Two column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Skill level indicators */
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .skill-beginner {
+            background: #C6F6D5;
+            color: #22543D;
+        }
+
+        .skill-intermediate {
+            background: #FEEBC8;
+            color: #744210;
+        }
+
+        .skill-advanced {
+            background: #FED7D7;
+            color: #822727;
+        }
+
+        /* Emphasis boxes */
+        .key-point {
+            background: linear-gradient(135deg, #EBF8FF 0%, #E6FFFA 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 1px solid #81E6D9;
+        }
+
+        .key-point-title {
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-light);
+            margin-top: 4rem;
+        }
+
+        /* Smooth section anchors */
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        /* Print styles */
+        @media print {
+            nav { display: none; }
+            main { padding-top: 0; }
+            .card { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#summary">Summary</a></li>
+            <li><a href="#whats-working">What's Working</a></li>
+            <li><a href="#whats-missing">What's Missing</a></li>
+            <li><a href="#glossary">Glossary</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#claude-code">Claude Code Tips</a></li>
+            <li><a href="#next-steps">Next Steps</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <h1>TOMO Product Review</h1>
+            <p class="subtitle">Your roadmap from prototype to App Store, explained simply</p>
+            <p class="date">Generated: January 2026</p>
+            <div style="margin-top: 1.5rem;">
+                <span class="status status-good">Architecture: Solid</span>
+                <span class="status status-warning">Backend: Not Started</span>
+                <span class="status status-critical">Tests: None</span>
+                <span class="status status-info">Feature Completion: ~50%</span>
+            </div>
+        </section>
+
+        <!-- Executive Summary -->
+        <section id="summary">
+            <h2>The Big Picture</h2>
+
+            <div class="callout callout-success">
+                <div class="callout-title">Good News First</div>
+                <p style="margin-bottom: 0;">Your code is well-organized and ready for production. The patterns you've established are exactly what professional teams use. When you add a real database (Supabase), you won't need to rewrite your components.</p>
+            </div>
+
+            <h3>What This Document Covers</h3>
+            <p>I reviewed every file in your TOMO project (112 TypeScript files, 31,000+ lines of code) to answer these questions:</p>
+            <ul>
+                <li><strong>Is your code ready for real users?</strong> - Yes, with some additions</li>
+                <li><strong>What's missing for the App Store?</strong> - Backend, tests, and iOS shell</li>
+                <li><strong>Can you bootstrap this yourself?</strong> - Yes, with targeted professional help</li>
+                <li><strong>How should you work with Claude Code?</strong> - Follow specific patterns I'll explain</li>
+            </ul>
+
+            <h3>Current State at a Glance</h3>
+
+            <div class="two-col">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon green">&#10003;</div>
+                        <h4 style="margin: 0;">Done & Working</h4>
+                    </div>
+                    <ul style="margin-left: 1rem;">
+                        <li>Dashboard with real stats</li>
+                        <li>Voice session logger (UI)</li>
+                        <li>Session history & details</li>
+                        <li>Profile with progressive questions</li>
+                        <li>Belt personalization engine</li>
+                        <li>Design system (colors, fonts, components)</li>
+                        <li>95+ custom icons</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon orange">!</div>
+                        <h4 style="margin: 0;">Not Built Yet</h4>
+                    </div>
+                    <ul style="margin-left: 1rem;">
+                        <li>Real database (using browser storage)</li>
+                        <li>User accounts & login</li>
+                        <li>Voice transcription (AssemblyAI)</li>
+                        <li>iOS app (React Native)</li>
+                        <li>Automated tests</li>
+                        <li>Crash monitoring</li>
+                        <li>Analytics tracking</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-point">
+                <div class="key-point-title">The Key Insight</div>
+                <p style="margin-bottom: 0;">Your code uses a smart pattern called "abstraction" - all your screens talk to a service layer (<code>api.ts</code>) instead of directly to storage. This means when you swap localStorage (browser storage) for Supabase (real database), your screens don't change at all. This is exactly how professional apps are built.</p>
+            </div>
+        </section>
+
+        <!-- Glossary -->
+        <section id="glossary">
+            <h2>Quick Glossary</h2>
+            <p>Before we dive in, here are the technical terms you'll see throughout this document:</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Term</th>
+                            <th>What It Means</th>
+                            <th>Why It Matters</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>localStorage</strong></td>
+                            <td>Built-in browser storage. Data stays on one device, disappears if you clear browser data.</td>
+                            <td>Fine for prototypes, not for real apps. Limited to ~5MB.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Supabase</strong></td>
+                            <td>A service that gives you a real database, user authentication, and file storage. Like Firebase but with standard SQL.</td>
+                            <td>Your data syncs across devices, survives browser clears, and scales to millions of users.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>API / Service Layer</strong></td>
+                            <td>A middleman between your screens and your data storage. In TOMO, this is the <code>api.ts</code> file.</td>
+                            <td>Lets you change how data is stored without changing your screens. You have this!</td>
+                        </tr>
+                        <tr>
+                            <td><strong>React Native / Expo</strong></td>
+                            <td>Tools that let you build iOS and Android apps using React (what you already know).</td>
+                            <td>You don't need to learn Swift. Most of your code transfers over.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TestFlight</strong></td>
+                            <td>Apple's system for testing apps before they go live on the App Store.</td>
+                            <td>You can get your app on real iPhones without App Store approval.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CI/CD</strong></td>
+                            <td>Continuous Integration / Continuous Deployment. Automated checks that run when you push code.</td>
+                            <td>Catches bugs automatically. If tests fail, code doesn't deploy.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RLS (Row Level Security)</strong></td>
+                            <td>Database rules that say "User A can only see User A's data."</td>
+                            <td>Prevents one user from seeing another user's sessions. Critical for privacy.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AssemblyAI</strong></td>
+                            <td>A voice-to-text service that's especially good at recognizing unusual words (like BJJ terms).</td>
+                            <td>Turns your users' voice recordings into text they can search and review.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- What's Working -->
+        <section id="whats-working">
+            <h2>What's Working Well</h2>
+            <p>These are patterns you should <strong>keep and protect</strong>. When Claude Code works on your project, make sure it follows these established patterns.</p>
+
+            <div class="card">
+                <h3>1. The Service Layer Pattern</h3>
+                <p><strong>Where:</strong> <code>prototype/src/services/api.ts</code></p>
+                <p><strong>What it does:</strong> All your components (Dashboard, SessionLogger, etc.) talk to this one file to get or save data. They never directly touch localStorage.</p>
+
+                <pre><code>// How your code works now (this is GOOD):
+const { data } = await api.sessions.create({
+    date: '2026-01-13',
+    training_type: 'gi',
+    duration_minutes: 90
+});
+
+// What happens behind the scenes:
+// api.ts saves to localStorage
+
+// After Supabase migration:
+// api.ts saves to Supabase instead
+// YOUR COMPONENT CODE STAYS EXACTLY THE SAME</code></pre>
+
+                <div class="callout callout-info">
+                    <div class="callout-title">Why This Matters</div>
+                    <p style="margin-bottom: 0;">Many prototype codebases have localStorage calls scattered everywhere. Yours doesn't. This single decision saves weeks of refactoring work.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>2. TypeScript Types Match Database Schema</h3>
+                <p><strong>Where:</strong> <code>prototype/src/types/database.ts</code></p>
+                <p><strong>What it does:</strong> You've defined exactly what a Session, Profile, and Technique look like. These definitions already match what your Supabase tables will look like.</p>
+
+                <pre><code>// From your types/database.ts:
+interface Session {
+    id: string;
+    user_id: string;
+    date: string;
+    training_type: 'gi' | 'nogi' | 'both';
+    duration_minutes: number | null;
+    // ... more fields
+}
+
+// This becomes a Supabase table with the same columns.
+// No translation needed.</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>3. Feature Flags Ready</h3>
+                <p><strong>Where:</strong> <code>prototype/src/config/app.ts</code></p>
+                <p><strong>What it does:</strong> You can turn features on/off without changing code. This is how real apps do gradual rollouts.</p>
+
+                <pre><code>// Your existing feature flags:
+featureFlags: {
+    voiceLogging: true,      // Already on
+    techniqueLibrary: true,  // Already on
+    errorTracking: false,    // Ready to enable
+    analytics: false,        // Ready to enable
+    offlineMode: false,      // Ready to enable
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>4. Belt Personalization Engine</h3>
+                <p><strong>Where:</strong> <code>prototype/src/config/belt-system/</code></p>
+                <p><strong>What it does:</strong> Tailors the entire app experience based on user's belt level. This is your competitive advantage - most fitness apps are one-size-fits-all.</p>
+
+                <ul>
+                    <li><strong>White Belt:</strong> Focuses on survival metrics, beginner-friendly language</li>
+                    <li><strong>Blue Belt:</strong> Emphasizes technique breadth, addresses "blue belt blues"</li>
+                    <li><strong>Purple/Brown:</strong> Deep stats, teaching-oriented features</li>
+                </ul>
+
+                <p>The system even detects dropout risk signals in journal entries. This is sophisticated product thinking.</p>
+            </div>
+
+            <div class="card">
+                <h3>5. Design System Discipline</h3>
+                <p><strong>Where:</strong> <code>docs/design-system/</code></p>
+                <p><strong>What it does:</strong> Single source of truth for colors, fonts, spacing, and components. No guessing.</p>
+
+                <div class="two-col">
+                    <div>
+                        <h4>Colors (examples)</h4>
+                        <ul style="font-size: 0.95rem;">
+                            <li><code>--color-black: #111111</code></li>
+                            <li><code>--color-gold: #F5A623</code></li>
+                            <li><code>--color-positive: #22c55e</code></li>
+                            <li><code>--color-negative: #ef4444</code></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Rules (examples)</h4>
+                        <ul style="font-size: 0.95rem;">
+                            <li>No emojis, ever</li>
+                            <li>Font weight 500+ only</li>
+                            <li>44px minimum touch targets</li>
+                            <li>Green = positive, Red = negative</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What's Missing -->
+        <section id="whats-missing">
+            <h2>What's Missing (The Gap Analysis)</h2>
+            <p>These are the things you need to add before launching. I've sorted them by who should do them.</p>
+
+            <h3>Critical Gaps</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Gap</th>
+                            <th>Current State</th>
+                            <th>What's Needed</th>
+                            <th>Difficulty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>No Real Database</strong></td>
+                            <td>Data lives in browser storage. Disappears if user clears browser. Can't sync across devices.</td>
+                            <td>Set up Supabase project. Create tables. Update <code>api.ts</code> to use Supabase client.</td>
+                            <td><span class="skill-tag skill-intermediate">Medium - Get Help</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>No User Authentication</strong></td>
+                            <td>Everyone is logged in as <code>user-001</code>. No real accounts.</td>
+                            <td>Implement Supabase Auth. Add login/signup screens. Add Apple Sign-In for iOS.</td>
+                            <td><span class="skill-tag skill-intermediate">Medium - Get Help</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>No Voice Transcription</strong></td>
+                            <td>Voice UI exists but doesn't actually transcribe audio.</td>
+                            <td>Integrate AssemblyAI. Record audio, send to API, display text.</td>
+                            <td><span class="skill-tag skill-beginner">Doable - Claude Code</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>No iOS App</strong></td>
+                            <td>Web-only prototype.</td>
+                            <td>Create Expo project. Port screens to React Native. Submit to TestFlight.</td>
+                            <td><span class="skill-tag skill-advanced">Hard - Get Help First</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>No Automated Tests</strong></td>
+                            <td>0% test coverage. You manually test everything.</td>
+                            <td>Add Vitest. Write tests for api.ts and key components.</td>
+                            <td><span class="skill-tag skill-beginner">Doable - Claude Code</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Medium Priority Gaps</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Gap</th>
+                            <th>Why It Matters</th>
+                            <th>When to Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>No CI/CD Pipeline</strong></td>
+                            <td>Currently you run <code>npm run ship</code> manually. If you break something, it still deploys.</td>
+                            <td>Before iOS work. Set up GitHub Actions to run tests on every push.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>No Crash Monitoring</strong></td>
+                            <td>If the app crashes for a user, you won't know. Can't fix what you can't see.</td>
+                            <td>Before TestFlight. Set up Sentry.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>No Analytics</strong></td>
+                            <td>You won't know which features people use or where they get stuck.</td>
+                            <td>Before TestFlight. Set up PostHog.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>No Offline Support</strong></td>
+                            <td>Users often log sessions in gym parking lots with bad signal.</td>
+                            <td>Phase 4. Add AsyncStorage queue that syncs when online.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>No Input Validation</strong></td>
+                            <td>Bad data could sneak into your database. Minor security concern.</td>
+                            <td>Before Supabase migration. Add Zod schemas.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Scalability Considerations</h3>
+            <p>These won't bite you until you have hundreds of active users, but good to know:</p>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">localStorage Has a 5-10MB Limit</div>
+                <p>A dedicated user logging 3x/week for 2 years = ~300 sessions. With voice transcripts, that could hit the limit. Supabase migration solves this permanently.</p>
+            </div>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">Session List Loads All Data</div>
+                <p>Currently, viewing your session history loads every session ever. Fine for 50 sessions, slow for 500. You have pagination infrastructure in <code>api.ts</code> (offset/limit) - the UI just needs infinite scroll.</p>
+            </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section id="roadmap">
+            <h2>The Launch Roadmap</h2>
+            <p>Here's the path from where you are now to TestFlight. I've broken it into phases so you can see the journey.</p>
+
+            <div style="text-align: center; margin: 2rem 0;">
+                <div class="progress-bar" style="max-width: 600px; margin: 0 auto;">
+                    <div class="progress-fill blue" style="width: 20%;"></div>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Current Progress: ~20% to TestFlight</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item done">
+                    <div class="timeline-phase">Completed</div>
+                    <div class="timeline-title">Web Prototype</div>
+                    <p>Core screens working, design system established, service layer built.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 0 (You Are Here)</div>
+                    <div class="timeline-title">Foundation Hardening</div>
+                    <p>Add tests, set up CI/CD, document patterns. Makes everything after this safer and faster.</p>
+
+                    <div class="card" style="margin-top: 1rem; background: var(--bg-secondary);">
+                        <h4 style="margin-top: 0;">Tasks in This Phase</h4>
+                        <div class="table-wrapper" style="margin: 1rem 0;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Who</th>
+                                        <th>Effort</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Add Vitest testing framework</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>1 day</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Write tests for api.ts</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>2-3 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Write tests for UserProfileContext</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>1-2 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Set up GitHub Actions CI</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>1 day</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Create DEVELOPMENT_PROTOCOL.md</td>
+                                        <td><span class="skill-tag skill-beginner">You + Claude</span></td>
+                                        <td>1 day</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Document Supabase schema (SQL file)</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>1 day</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="margin-bottom: 0; color: var(--text-secondary); font-size: 0.9rem;"><strong>Why do this first?</strong> Tests catch bugs automatically. Once tests exist, Claude Code can make changes confidently because if something breaks, the tests will fail.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 1</div>
+                    <div class="timeline-title">Backend Foundation</div>
+                    <p>Real database, real user accounts. Your data survives browser clears and syncs across devices.</p>
+
+                    <div class="card" style="margin-top: 1rem; background: var(--bg-secondary);">
+                        <h4 style="margin-top: 0;">Tasks in This Phase</h4>
+                        <div class="table-wrapper" style="margin: 1rem 0;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Who</th>
+                                        <th>Effort</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Create Supabase project</td>
+                                        <td><span class="skill-tag skill-beginner">You</span></td>
+                                        <td>1 hour</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Apply database schema (run SQL)</td>
+                                        <td><span class="skill-tag skill-beginner">You</span></td>
+                                        <td>1 hour</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Configure RLS (security rules)</td>
+                                        <td><span class="skill-tag skill-intermediate">Get Review</span></td>
+                                        <td>1 day</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Update api.ts to use Supabase</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>2-3 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Implement email authentication</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>2 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Create login/signup screens</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>2 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Test all API operations</td>
+                                        <td><span class="skill-tag skill-beginner">You + Claude</span></td>
+                                        <td>2 days</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="margin-bottom: 0; color: var(--text-secondary); font-size: 0.9rem;"><strong>Get professional help for:</strong> RLS policies (security rules). A mistake here could let users see each other's data.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 2</div>
+                    <div class="timeline-title">Voice Integration</div>
+                    <p>Your core differentiator. Users speak, app transcribes and parses BJJ terminology.</p>
+
+                    <div class="card" style="margin-top: 1rem; background: var(--bg-secondary);">
+                        <h4 style="margin-top: 0;">Tasks in This Phase</h4>
+                        <div class="table-wrapper" style="margin: 1rem 0;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Who</th>
+                                        <th>Effort</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Create AssemblyAI account</td>
+                                        <td><span class="skill-tag skill-beginner">You</span></td>
+                                        <td>30 min</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Configure BJJ custom vocabulary</td>
+                                        <td><span class="skill-tag skill-beginner">You</span></td>
+                                        <td>1 hour</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Implement audio capture</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>2 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Connect to AssemblyAI API</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>2 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Test with real BJJ terms</td>
+                                        <td><span class="skill-tag skill-beginner">You</span></td>
+                                        <td>1 day</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="margin-bottom: 0; color: var(--text-secondary); font-size: 0.9rem;"><strong>AssemblyAI gives $50 free credits</strong> (~135 hours of transcription). Plenty for testing.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 3</div>
+                    <div class="timeline-title">React Native Foundation</div>
+                    <p>Port your web app to iOS. Most business logic transfers directly.</p>
+
+                    <div class="card" style="margin-top: 1rem; background: var(--bg-secondary);">
+                        <h4 style="margin-top: 0;">Tasks in This Phase</h4>
+                        <div class="table-wrapper" style="margin: 1rem 0;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Who</th>
+                                        <th>Effort</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Buy Apple Developer Account ($99/yr)</td>
+                                        <td><span class="skill-tag skill-beginner">You</span></td>
+                                        <td>1 hour</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Initialize Expo project</td>
+                                        <td><span class="skill-tag skill-intermediate">Get Help</span></td>
+                                        <td>1 day</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Set up Expo Router navigation</td>
+                                        <td><span class="skill-tag skill-intermediate">Get Help</span></td>
+                                        <td>2 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Connect to Supabase</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>1 day</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Implement Apple Sign-In</td>
+                                        <td><span class="skill-tag skill-intermediate">Get Help</span></td>
+                                        <td>2 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Port design tokens to React Native</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>2 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Port Dashboard screen</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>3 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Port SessionLogger screen</td>
+                                        <td><span class="skill-tag skill-beginner">Claude Code</span></td>
+                                        <td>3 days</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="margin-bottom: 0; color: var(--text-secondary); font-size: 0.9rem;"><strong>Get professional help for:</strong> Initial Expo setup and Apple Sign-In. These have tricky platform-specific configurations.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 4</div>
+                    <div class="timeline-title">Production Polish</div>
+                    <p>Offline support, crash reporting, analytics, and App Store assets.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 5</div>
+                    <div class="timeline-title">TestFlight Launch</div>
+                    <p>Submit to TestFlight, recruit testers, gather feedback, iterate.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Claude Code Tips -->
+        <section id="claude-code">
+            <h2>Working with Claude Code</h2>
+            <p>Claude Code can do a lot of the implementation work for you, but it needs clear guardrails. Here's how to get the best results.</p>
+
+            <h3>The Golden Rules</h3>
+
+            <div class="card">
+                <h4 style="margin-top: 0;">Rule 1: Always Point to Existing Patterns</h4>
+                <p>Claude Code will invent new patterns if you don't show it existing ones. Start every task with:</p>
+                <pre><code>"Look at how [existing feature] works in [file path], then implement [new feature] following the same pattern."</code></pre>
+                <p style="margin-bottom: 0;"><strong>Example:</strong> "Look at how sessions.create() works in services/api.ts, then add a goals.create() method following the same pattern."</p>
+            </div>
+
+            <div class="card">
+                <h4 style="margin-top: 0;">Rule 2: Specification Before Code</h4>
+                <p>Don't say "add a goals feature." Instead:</p>
+                <ol>
+                    <li>Write a spec first (what fields? what screens? what behaviors?)</li>
+                    <li>Add types to <code>types/database.ts</code></li>
+                    <li>Add a feature flag to <code>config/app.ts</code></li>
+                    <li>THEN ask Claude Code to implement</li>
+                </ol>
+                <p style="margin-bottom: 0;">This prevents Claude from making design decisions that should be yours.</p>
+            </div>
+
+            <div class="card">
+                <h4 style="margin-top: 0;">Rule 3: Tests as Safety Rails</h4>
+                <p>Once you have tests, every Claude Code change runs against them. If tests fail, you know something broke before it reaches users.</p>
+                <pre><code>"Implement [feature]. Run npm test before and after. All tests must pass."</code></pre>
+            </div>
+
+            <div class="card">
+                <h4 style="margin-top: 0;">Rule 4: Review Security-Sensitive Code</h4>
+                <p>Have a professional review anything that touches:</p>
+                <ul style="margin-bottom: 0;">
+                    <li>Authentication (login, signup, password reset)</li>
+                    <li>Database security rules (RLS policies)</li>
+                    <li>API keys and secrets</li>
+                    <li>User data access patterns</li>
+                </ul>
+            </div>
+
+            <h3>Create a Development Protocol Document</h3>
+            <p>Create a file called <code>DEVELOPMENT_PROTOCOL.md</code> in your TOMO folder. Claude Code will read this before any task. Here's a template:</p>
+
+            <pre><code># TOMO Development Protocol
+
+## Before Any Feature Work
+1. Read CLAUDE.md for project context
+2. Check config/app.ts for existing feature flags
+3. Check types/database.ts for related types
+4. Check services/api.ts for existing service methods
+5. Follow existing patterns - never invent new ones
+
+## Code Patterns (Non-Negotiable)
+- Use api.* service layer for all data operations
+- Use useUserProfile() for profile data
+- Use CSS variables from design tokens
+- Use Icons.* components, never inline SVG or emojis
+- Match existing TypeScript strictness (no "any" types)
+
+## Before Commit
+- npm run build passes
+- npm run lint passes
+- npm run test passes (once tests exist)
+- New feature has feature flag in config/app.ts
+- Types are explicit and match database.ts patterns</code></pre>
+        </section>
+
+        <!-- Next Steps -->
+        <section id="next-steps">
+            <h2>Your Immediate Next Steps</h2>
+            <p>Here's exactly what to do this week and next week.</p>
+
+            <div class="card" style="border-left: 4px solid var(--accent-blue);">
+                <h3 style="margin-top: 0;">This Week: Foundation Work</h3>
+
+                <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem;">
+                    <input type="checkbox" id="task1" style="width: 20px; height: 20px;">
+                    <label for="task1"><strong>Day 1-2:</strong> Have Claude Code add Vitest to the project</label>
+                </div>
+
+                <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem;">
+                    <input type="checkbox" id="task2" style="width: 20px; height: 20px;">
+                    <label for="task2"><strong>Day 2-4:</strong> Have Claude Code write tests for <code>api.ts</code></label>
+                </div>
+
+                <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem;">
+                    <input type="checkbox" id="task3" style="width: 20px; height: 20px;">
+                    <label for="task3"><strong>Day 4-5:</strong> Have Claude Code set up GitHub Actions CI</label>
+                </div>
+
+                <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem;">
+                    <input type="checkbox" id="task4" style="width: 20px; height: 20px;">
+                    <label for="task4"><strong>Day 5:</strong> Create <code>DEVELOPMENT_PROTOCOL.md</code> (use template above)</label>
+                </div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--accent-green);">
+                <h3 style="margin-top: 0;">Next Week: Supabase Setup</h3>
+
+                <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem;">
+                    <input type="checkbox" id="task5" style="width: 20px; height: 20px;">
+                    <label for="task5"><strong>Day 1:</strong> Create free Supabase account at supabase.com</label>
+                </div>
+
+                <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem;">
+                    <input type="checkbox" id="task6" style="width: 20px; height: 20px;">
+                    <label for="task6"><strong>Day 1:</strong> Have Claude Code generate the SQL schema file</label>
+                </div>
+
+                <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem;">
+                    <input type="checkbox" id="task7" style="width: 20px; height: 20px;">
+                    <label for="task7"><strong>Day 2:</strong> Run the SQL schema in Supabase SQL editor</label>
+                </div>
+
+                <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem;">
+                    <input type="checkbox" id="task8" style="width: 20px; height: 20px;">
+                    <label for="task8"><strong>Day 2-4:</strong> Have Claude Code update api.ts to use Supabase</label>
+                </div>
+
+                <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem;">
+                    <input type="checkbox" id="task9" style="width: 20px; height: 20px;">
+                    <label for="task9"><strong>Day 5:</strong> Test everything still works (run your tests!)</label>
+                </div>
+            </div>
+
+            <div class="callout callout-info">
+                <div class="callout-title">When to Get Professional Help</div>
+                <p>Schedule a session with a professional developer for:</p>
+                <ul style="margin-bottom: 0;">
+                    <li>RLS policy review (after Supabase schema is created)</li>
+                    <li>Initial Expo/React Native project setup</li>
+                    <li>Apple Sign-In implementation</li>
+                    <li>First TestFlight submission</li>
+                </ul>
+            </div>
+
+            <h3>Estimated Costs</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Cost</th>
+                            <th>When</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Supabase (Free Tier)</td>
+                            <td>$0/month</td>
+                            <td>Until you hit 500MB or 50K requests</td>
+                        </tr>
+                        <tr>
+                            <td>AssemblyAI</td>
+                            <td>$50 free, then ~$0.006/minute</td>
+                            <td>~135 hours free testing</td>
+                        </tr>
+                        <tr>
+                            <td>Apple Developer Account</td>
+                            <td>$99/year</td>
+                            <td>Required for TestFlight</td>
+                        </tr>
+                        <tr>
+                            <td>Sentry (Free Tier)</td>
+                            <td>$0/month</td>
+                            <td>Until 5K errors/month</td>
+                        </tr>
+                        <tr>
+                            <td>PostHog (Free Tier)</td>
+                            <td>$0/month</td>
+                            <td>Until 1M events/month</td>
+                        </tr>
+                        <tr style="background: var(--bg-secondary);">
+                            <td><strong>Total to TestFlight</strong></td>
+                            <td><strong>~$100</strong></td>
+                            <td>One-time + monthly free tiers</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>Final Thoughts</h2>
+
+            <div class="key-point">
+                <div class="key-point-title">You're in Good Shape</div>
+                <p>Many prototype codebases require major rewrites before production. Yours doesn't. The service abstraction layer, typed database schema, and design system discipline mean you've already done the hard architectural work.</p>
+                <p style="margin-bottom: 0;">The path to TestFlight is straightforward: add tests, add backend, port to native. Each step builds on what you have. You can bootstrap most of this with Claude Code, getting professional help for the security-sensitive parts (auth, RLS) and platform-specific complexities (Expo setup, Apple Sign-In).</p>
+            </div>
+
+            <p>Questions? Re-read the relevant section of this document, then ask Claude Code to help you implement it.</p>
+        </section>
+
+        <footer>
+            <p>Generated by Claude Code | January 2026</p>
+            <p style="margin-top: 0.5rem;">TOMO (友) - Your BJJ Training Partner</p>
+        </footer>
+    </main>
+</body>
+</html>

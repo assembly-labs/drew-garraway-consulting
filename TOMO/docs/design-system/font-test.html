@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[ARCHIVED] Font Comparison Test - BJJ Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      padding: 24px;
+      padding-bottom: 100px;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: #F5A623;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 32px;
+    }
+
+    .archived-banner {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, transparent 100%);
+      border: 2px solid #22c55e;
+      padding: 20px;
+      margin-bottom: 32px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .archived-banner h2 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #22c55e;
+      margin-bottom: 8px;
+    }
+
+    .archived-banner p {
+      font-size: 15px;
+      font-weight: 500;
+      color: #fff;
+      margin: 0;
+    }
+
+    .instructions {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      padding: 16px;
+      margin-bottom: 32px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    .instructions strong {
+      color: #F5A623;
+    }
+
+    /* Toggle Controls */
+    .toggle-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #1a1a1a;
+      border-top: 1px solid #333;
+      padding: 16px 24px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .toggle-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .toggle-btn {
+      padding: 10px 20px;
+      background: #333;
+      border: none;
+      color: #888;
+      cursor: pointer;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .toggle-btn.active {
+      background: #F5A623;
+      color: #000;
+    }
+
+    /* Comparison Grid */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: #333;
+      margin-bottom: 48px;
+    }
+
+    @media (max-width: 768px) {
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .font-column {
+      background: #0a0a0a;
+      padding: 24px;
+    }
+
+    .font-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: #F5A623;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #222;
+    }
+
+    /* Section Headers */
+    .section-header {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin: 32px 0 16px;
+      padding-top: 24px;
+      border-top: 1px solid #222;
+    }
+
+    .section-header:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    /* Inter Styles */
+    .inter .hero-number {
+      font-family: 'Inter', sans-serif;
+      font-size: 72px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 0.9;
+      color: #fff;
+    }
+
+    .inter .hero-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .inter .section-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #fff;
+    }
+
+    .inter .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #F5A623;
+    }
+
+    .inter .body-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
+      color: #e5e5e5;
+    }
+
+    .inter .body-text-small {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.5;
+      color: #a3a3a3;
+    }
+
+    .inter .stat-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 24px;
+      font-weight: 700;
+      color: #22c55e;
+    }
+
+    .inter .stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #666;
+    }
+
+    .inter .data-row {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #a3a3a3;
+    }
+
+    .inter .list-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .inter .list-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #666;
+    }
+
+    .inter .button {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* Space Styles */
+    .space .hero-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 72px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 0.9;
+      color: #fff;
+    }
+
+    .space .hero-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .space .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #fff;
+    }
+
+    .space .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #F5A623;
+    }
+
+    .space .body-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
+      color: #e5e5e5;
+    }
+
+    .space .body-text-small {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.5;
+      color: #a3a3a3;
+    }
+
+    .space .stat-value {
+      font-family: 'Space Mono', monospace;
+      font-size: 24px;
+      font-weight: 700;
+      color: #22c55e;
+    }
+
+    .space .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #666;
+    }
+
+    .space .data-row {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: #a3a3a3;
+    }
+
+    .space .list-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .space .list-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: #666;
+    }
+
+    .space .button {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* Shared Component Styles */
+    .hero-block {
+      margin-bottom: 24px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .stat-cell {
+      background: #111;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-cell .stat-value {
+      margin-bottom: 4px;
+    }
+
+    .list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .btn-demo {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #F5A623;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .callout {
+      padding: 16px;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, transparent 100%);
+      border-left: 3px solid #22c55e;
+    }
+
+    .callout-negative {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, transparent 100%);
+      border-left-color: #ef4444;
+    }
+
+    /* Single Column View */
+    .single-view {
+      display: none;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .single-view.active {
+      display: block;
+    }
+
+    .comparison.hidden {
+      display: none;
+    }
+
+    /* Readability Test Section */
+    .readability-test {
+      background: #111;
+      padding: 24px;
+      margin-bottom: 48px;
+    }
+
+    .readability-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #F5A623;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 24px;
+    }
+
+    .test-string {
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #222;
+    }
+
+    .test-string:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .test-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .test-inter {
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 8px;
+    }
+
+    .test-space {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .size-13 { font-size: 13px; font-weight: 500; color: #a3a3a3; }
+    .size-15 { font-size: 15px; font-weight: 500; color: #e5e5e5; }
+    .size-11 { font-size: 11px; font-weight: 500; color: #888; }
+
+    .mono-inter { font-family: 'JetBrains Mono', monospace; }
+    .mono-space { font-family: 'Space Mono', monospace; }
+
+    /* Side by Side Test Rows */
+    .test-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+
+    .test-col {
+      min-width: 0;
+    }
+
+    .test-font-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #F5A623;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #333;
+      margin-bottom: 8px;
+    }
+
+    .test-section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 24px 0 12px;
+      padding-top: 16px;
+      border-top: 1px solid #222;
+    }
+
+    .test-section-label:first-of-type {
+      margin-top: 16px;
+      padding-top: 0;
+      border-top: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- ARCHIVED BANNER -->
+  <div class="archived-banner">
+    <h2>Decision Made: Inter + JetBrains Mono</h2>
+    <p>This test page is archived. The font decision was made: <strong>Inter</strong> for body/headings + <strong>JetBrains Mono</strong> for labels/data. Selected for maximum legibility on dark backgrounds for exhausted post-training users.</p>
+  </div>
+
+  <h1>Font Comparison Test</h1>
+  <p class="subtitle">Test on mobile to decide</p>
+
+  <div class="instructions">
+    <strong>Instructions:</strong> View this page on your phone. Scroll through and compare readability, especially the small text. Use the toggle at the bottom to view each font system in isolation (simulates actual app). Pay attention to:
+    <br><br>
+    • Hero numbers (72px) - impact and style<br>
+    • Body text (15px) - readability after training<br>
+    • Small text (13px, 11px) - session metadata<br>
+    • Monospace data - times, percentages, counts
+  </div>
+
+  <!-- Critical Readability Test - Side by Side -->
+  <div class="readability-test">
+    <div class="readability-title">Readability Test - Side by Side</div>
+
+    <div class="test-row">
+      <div class="test-col">
+        <div class="test-font-label">Inter</div>
+      </div>
+      <div class="test-col">
+        <div class="test-font-label">Space Grotesk</div>
+      </div>
+    </div>
+
+    <div class="test-section-label">72px Hero Numbers</div>
+    <div class="test-row">
+      <div class="test-col">
+        <div class="test-inter" style="font-size:72px;font-weight:700;letter-spacing:-0.03em;line-height:1">127</div>
+      </div>
+      <div class="test-col">
+        <div class="test-space" style="font-size:72px;font-weight:700;letter-spacing:-0.03em;line-height:1">127</div>
+      </div>
+    </div>
+
+    <div class="test-section-label">48px Display</div>
+    <div class="test-row">
+      <div class="test-col">
+        <div class="test-inter" style="font-size:48px;font-weight:700;letter-spacing:-0.02em;line-height:1">Your Arsenal</div>
+      </div>
+      <div class="test-col">
+        <div class="test-space" style="font-size:48px;font-weight:700;letter-spacing:-0.02em;line-height:1">Your Arsenal</div>
+      </div>
+    </div>
+
+    <div class="test-section-label">24px Section Header</div>
+    <div class="test-row">
+      <div class="test-col">
+        <div class="test-inter" style="font-size:24px;font-weight:600">Recent Sessions</div>
+      </div>
+      <div class="test-col">
+        <div class="test-space" style="font-size:24px;font-weight:600">Recent Sessions</div>
+      </div>
+    </div>
+
+    <div class="test-section-label">15px Body Text</div>
+    <div class="test-row">
+      <div class="test-col">
+        <div class="test-inter size-15">Your guard game is developing. Sweep attempts up 40% from last month.</div>
+      </div>
+      <div class="test-col">
+        <div class="test-space size-15">Your guard game is developing. Sweep attempts up 40% from last month.</div>
+      </div>
+    </div>
+
+    <div class="test-section-label">13px Secondary Text</div>
+    <div class="test-row">
+      <div class="test-col">
+        <div class="test-inter size-13">90 minutes / 3 techniques / 5 rolls. Worked on closed guard sweeps and back takes.</div>
+      </div>
+      <div class="test-col">
+        <div class="test-space size-13">90 minutes / 3 techniques / 5 rolls. Worked on closed guard sweeps and back takes.</div>
+      </div>
+    </div>
+
+    <div class="test-section-label">11px Metadata</div>
+    <div class="test-row">
+      <div class="test-col">
+        <div class="test-inter size-11">Session logged at 10:01am • Alliance HQ • Gi Training</div>
+      </div>
+      <div class="test-col">
+        <div class="test-space size-11">Session logged at 10:01am • Alliance HQ • Gi Training</div>
+      </div>
+    </div>
+
+    <div class="test-row" style="margin-top:32px">
+      <div class="test-col">
+        <div class="test-font-label">JetBrains Mono</div>
+      </div>
+      <div class="test-col">
+        <div class="test-font-label">Space Mono</div>
+      </div>
+    </div>
+
+    <div class="test-section-label">24px Stat Values</div>
+    <div class="test-row">
+      <div class="test-col">
+        <div class="mono-inter" style="font-size:24px;font-weight:700;color:#22c55e">85%</div>
+      </div>
+      <div class="test-col">
+        <div class="mono-space" style="font-size:24px;font-weight:700;color:#22c55e">85%</div>
+      </div>
+    </div>
+
+    <div class="test-section-label">12px Data Row</div>
+    <div class="test-row">
+      <div class="test-col">
+        <div class="mono-inter" style="font-size:12px;color:#a3a3a3">Guard: 85% | Subs: 18 | Time: 42:30</div>
+      </div>
+      <div class="test-col">
+        <div class="mono-space" style="font-size:12px;color:#a3a3a3">Guard: 85% | Subs: 18 | Time: 42:30</div>
+      </div>
+    </div>
+
+    <div class="test-section-label">10px Labels (Uppercase)</div>
+    <div class="test-row">
+      <div class="test-col">
+        <div class="mono-inter" style="font-size:10px;color:#F5A623;text-transform:uppercase;letter-spacing:0.2em">Your Journey</div>
+      </div>
+      <div class="test-col">
+        <div class="mono-space" style="font-size:10px;color:#F5A623;text-transform:uppercase;letter-spacing:0.2em">Your Journey</div>
+      </div>
+    </div>
+
+    <div class="test-section-label">14px Character Distinction (1 l I 0 O)</div>
+    <div class="test-row">
+      <div class="test-col">
+        <div class="mono-inter" style="font-size:14px;color:#fff">1lI0O Illinois 10101</div>
+      </div>
+      <div class="test-col">
+        <div class="mono-space" style="font-size:14px;color:#fff">1lI0O Illinois 10101</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Side by Side Comparison -->
+  <div class="comparison" id="comparison">
+    <!-- INTER COLUMN -->
+    <div class="font-column inter">
+      <div class="font-label">Inter + JetBrains Mono</div>
+
+      <div class="section-header">Hero Numbers</div>
+      <div class="hero-block">
+        <div class="eyebrow">Your Journey</div>
+        <div class="hero-number">127</div>
+        <div class="hero-label">sessions logged</div>
+      </div>
+
+      <div class="section-header">Stats Grid</div>
+      <div class="stat-grid">
+        <div class="stat-cell">
+          <div class="stat-value">18</div>
+          <div class="stat-label">Subs</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-value" style="color:#ef4444">24</div>
+          <div class="stat-label">Tapped</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-value" style="color:#F5A623">14</div>
+          <div class="stat-label">Streak</div>
+        </div>
+      </div>
+
+      <div class="section-header">Section Title</div>
+      <div class="section-title">Recent Sessions</div>
+
+      <div class="section-header">List Items</div>
+      <div class="list-item">
+        <div>
+          <div class="list-title">Today</div>
+          <div class="list-meta">90min / 3 tech / 5 rolls</div>
+        </div>
+      </div>
+      <div class="list-item">
+        <div>
+          <div class="list-title">Yesterday</div>
+          <div class="list-meta">60min / 2 tech / 3 rolls</div>
+        </div>
+      </div>
+
+      <div class="section-header">Body Text</div>
+      <p class="body-text">Your guard game is developing. Sweep attempts up 40% from last month. That's your game emerging.</p>
+      <br>
+      <p class="body-text-small">Mount escapes have dropped off. Zero drills in 3 weeks. Focus here next session.</p>
+
+      <div class="section-header">Callout</div>
+      <div class="callout">
+        <div class="eyebrow">What's Working</div>
+        <p class="body-text" style="margin-top:8px">Your guard game is developing. Sweep attempts up 40%.</p>
+      </div>
+
+      <div class="section-header">Button</div>
+      <a href="#" class="btn-demo button">Log Training</a>
+
+      <div class="section-header">Data Row</div>
+      <div class="data-row">Dec 28, 2024 • 10:01am • 90 min</div>
+    </div>
+
+    <!-- SPACE COLUMN -->
+    <div class="font-column space">
+      <div class="font-label">Space Grotesk + Space Mono</div>
+
+      <div class="section-header">Hero Numbers</div>
+      <div class="hero-block">
+        <div class="eyebrow">Your Journey</div>
+        <div class="hero-number">127</div>
+        <div class="hero-label">sessions logged</div>
+      </div>
+
+      <div class="section-header">Stats Grid</div>
+      <div class="stat-grid">
+        <div class="stat-cell">
+          <div class="stat-value">18</div>
+          <div class="stat-label">Subs</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-value" style="color:#ef4444">24</div>
+          <div class="stat-label">Tapped</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-value" style="color:#F5A623">14</div>
+          <div class="stat-label">Streak</div>
+        </div>
+      </div>
+
+      <div class="section-header">Section Title</div>
+      <div class="section-title">Recent Sessions</div>
+
+      <div class="section-header">List Items</div>
+      <div class="list-item">
+        <div>
+          <div class="list-title">Today</div>
+          <div class="list-meta">90min / 3 tech / 5 rolls</div>
+        </div>
+      </div>
+      <div class="list-item">
+        <div>
+          <div class="list-title">Yesterday</div>
+          <div class="list-meta">60min / 2 tech / 3 rolls</div>
+        </div>
+      </div>
+
+      <div class="section-header">Body Text</div>
+      <p class="body-text">Your guard game is developing. Sweep attempts up 40% from last month. That's your game emerging.</p>
+      <br>
+      <p class="body-text-small">Mount escapes have dropped off. Zero drills in 3 weeks. Focus here next session.</p>
+
+      <div class="section-header">Callout</div>
+      <div class="callout">
+        <div class="eyebrow">What's Working</div>
+        <p class="body-text" style="margin-top:8px">Your guard game is developing. Sweep attempts up 40%.</p>
+      </div>
+
+      <div class="section-header">Button</div>
+      <a href="#" class="btn-demo button">Log Training</a>
+
+      <div class="section-header">Data Row</div>
+      <div class="data-row">Dec 28, 2024 • 10:01am • 90 min</div>
+    </div>
+  </div>
+
+  <!-- Single View (Inter) -->
+  <div class="single-view inter" id="single-inter">
+    <div class="font-label">Inter + JetBrains Mono</div>
+
+    <div class="hero-block" style="margin-top:24px">
+      <div class="eyebrow">Your Journey</div>
+      <div class="hero-number">127</div>
+      <div class="hero-label">sessions logged</div>
+    </div>
+
+    <div class="stat-grid" style="margin-top:32px">
+      <div class="stat-cell">
+        <div class="stat-value">18</div>
+        <div class="stat-label">Subs</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value" style="color:#ef4444">24</div>
+        <div class="stat-label">Tapped</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value" style="color:#F5A623">14</div>
+        <div class="stat-label">Streak</div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:32px">Recent Sessions</div>
+
+    <div class="list-item">
+      <div>
+        <div class="list-title">Today</div>
+        <div class="list-meta">90min / 3 tech / 5 rolls</div>
+      </div>
+    </div>
+    <div class="list-item">
+      <div>
+        <div class="list-title">Yesterday</div>
+        <div class="list-meta">60min / 2 tech / 3 rolls</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:24px">
+      <div class="eyebrow">What's Working</div>
+      <p class="body-text" style="margin-top:8px">Your guard game is developing. Sweep attempts up 40% from last month.</p>
+    </div>
+
+    <div class="callout callout-negative" style="margin-top:16px">
+      <div class="eyebrow" style="color:#ef4444">Needs Work</div>
+      <p class="body-text" style="margin-top:8px">Mount escapes have dropped off. Zero drills in 3 weeks.</p>
+    </div>
+
+    <a href="#" class="btn-demo button" style="display:block;text-align:center;margin-top:32px">Log Training</a>
+  </div>
+
+  <!-- Single View (Space) -->
+  <div class="single-view space" id="single-space">
+    <div class="font-label">Space Grotesk + Space Mono</div>
+
+    <div class="hero-block" style="margin-top:24px">
+      <div class="eyebrow">Your Journey</div>
+      <div class="hero-number">127</div>
+      <div class="hero-label">sessions logged</div>
+    </div>
+
+    <div class="stat-grid" style="margin-top:32px">
+      <div class="stat-cell">
+        <div class="stat-value">18</div>
+        <div class="stat-label">Subs</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value" style="color:#ef4444">24</div>
+        <div class="stat-label">Tapped</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value" style="color:#F5A623">14</div>
+        <div class="stat-label">Streak</div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:32px">Recent Sessions</div>
+
+    <div class="list-item">
+      <div>
+        <div class="list-title">Today</div>
+        <div class="list-meta">90min / 3 tech / 5 rolls</div>
+      </div>
+    </div>
+    <div class="list-item">
+      <div>
+        <div class="list-title">Yesterday</div>
+        <div class="list-meta">60min / 2 tech / 3 rolls</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:24px">
+      <div class="eyebrow">What's Working</div>
+      <p class="body-text" style="margin-top:8px">Your guard game is developing. Sweep attempts up 40% from last month.</p>
+    </div>
+
+    <div class="callout callout-negative" style="margin-top:16px">
+      <div class="eyebrow" style="color:#ef4444">Needs Work</div>
+      <p class="body-text" style="margin-top:8px">Mount escapes have dropped off. Zero drills in 3 weeks.</p>
+    </div>
+
+    <a href="#" class="btn-demo button" style="display:block;text-align:center;margin-top:32px">Log Training</a>
+  </div>
+
+  <!-- Toggle Controls -->
+  <div class="toggle-bar">
+    <span class="toggle-label">View:</span>
+    <button class="toggle-btn active" onclick="showView('both')">Both</button>
+    <button class="toggle-btn" onclick="showView('inter')">Inter</button>
+    <button class="toggle-btn" onclick="showView('space')">Space</button>
+  </div>
+
+  <script>
+    function showView(view) {
+      // Update buttons
+      document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      // Update views
+      const comparison = document.getElementById('comparison');
+      const singleInter = document.getElementById('single-inter');
+      const singleSpace = document.getElementById('single-space');
+
+      comparison.classList.add('hidden');
+      singleInter.classList.remove('active');
+      singleSpace.classList.remove('active');
+
+      if (view === 'both') {
+        comparison.classList.remove('hidden');
+      } else if (view === 'inter') {
+        singleInter.classList.add('active');
+      } else if (view === 'space') {
+        singleSpace.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>
