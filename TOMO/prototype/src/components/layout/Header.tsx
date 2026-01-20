@@ -56,7 +56,7 @@ export function Header({
     <header style={{
       backgroundColor: 'var(--color-primary)',
       color: 'var(--color-white)',
-      paddingTop: 'max(var(--space-md), env(safe-area-inset-top))',
+      paddingTop: 'calc(var(--space-md) + env(safe-area-inset-top))',
       paddingBottom: 'var(--space-md)',
       paddingLeft: 'var(--space-lg)',
       paddingRight: 'var(--space-lg)',
