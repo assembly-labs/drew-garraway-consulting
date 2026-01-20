@@ -13,6 +13,7 @@ This folder contains strategy and specification documents for:
 3. **Personalization** — How data drives belt-specific experiences
 4. **Risk Detection** — How we identify at-risk users early
 5. **Data Visualization** — How we present data through charts and infographics
+6. **Content Recommendations** — How journal data drives technique video recommendations
 
 ---
 
@@ -24,6 +25,7 @@ This folder contains strategy and specification documents for:
 | `CONVERSATION_DESIGN_FOUNDATION.md` | Active | Voice/chatbot conversation design principles |
 | `VOICE_LOGGING_CONVERSATION_DESIGN.md` | Active | Voice logger conversation flow specification |
 | `INFOGRAPHIC_STRATEGY.md` | Active | Charts, infographics, and data visualization strategy |
+| `TECHNIQUE_RECOMMENDATION_ENGINE.md` | Active | **How journal data drives video recommendations** - scoring algorithm, AI prompts, personalization logic |
 | `index.html` | Active | Interactive infographic preview/demo |
 | `AI_EXTRACTION_SPEC.md` | TODO | Technical spec for NLP pipeline, entity extraction, confidence scoring |
 | `VOICE_TRANSCRIPTION_SPEC.md` | TODO | AssemblyAI integration, custom vocabulary, accuracy requirements |
