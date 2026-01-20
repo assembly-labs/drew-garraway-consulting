@@ -401,16 +401,6 @@ Modern agency vernacular:
 - "OOO"
 - "Ping me"
 
-### Agency Life Dark Humor
-
-Shared experiences that resonate:
-
-- "Death by committee"
-- "Feedback-draft tennis"
-- "Pitch prep" (weekend destroyer)
-- "It's agency life"
-- "Kill your darlings"
-
 ### Terms of Genuine Respect
 
 Use these sincerely—they signal craft appreciation:

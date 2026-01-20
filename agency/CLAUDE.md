@@ -134,44 +134,6 @@ These terms are fair game for humor—**but only when you're actually using them
 
 **Example of proper usage:** "Let's circle back after this beer. Or maybe just stay here."
 
-### Agency Life Dark Humor
-
-**Work culture expressions:**
-- **"It's agency life"** — Resignation/justification for unhealthy work culture
-- **"What other business has so many young men anxious to break in and so many older men anxious to break out?"** — Classic industry quote
-- **"Pitch prep"** — Euphemism for weekend-destroying work
-- **"So was it worth it? Well, of course not. It turns out it was just advertising."** — Industry veteran's verdict
-
-**Award show cynicism:**
-- **"Award Whore"** — Person obsessed with winning
-- **"Scam Ad"** — Work created primarily to win awards, not actually run for clients
-- **"An ECD once told me the best idea doesn't win an award, the best case study video does."** — Industry truth
-- **"More craft, care, and effort went into the case study video than the actual creative work"** — Common admission
-
-### Committee and Approval Humor
-
-- **"Death by committee"** — When too many stakeholders kill an idea
-- **"Everyone has a voice, but not everyone should have a vote"**
-- **"Feedback-draft Tennis"** — Mile-long email chains of revisions
-- **"Round file"** — The trash can for rejected ideas
-- **"Kill your darlings"** — Remove beloved but unnecessary elements
-
-### Layoff Euphemisms (Dark Humor Territory)
-
-- **"Right-sizing"** — "Is there a more insidious compound word?"
-- **"Restructuring"** — Layoffs with extra steps
-- **"Resource optimization"** — Firing people
-- **"Shaping the path forward"** — Making cuts
-
-### Satirical Job Titles
-
-From the Adland glossary and agency culture:
-- **Copywronger** — Play on Copywriter
-- **Account Consecutive** — Play on Account Executive
-- **Creative Cockblocker** — Anyone who kills ideas
-- **Timesheet-Nazi** — Person enforcing timesheets
-- **Vendor-handler** — Person who alerts you when vendor reps arrive
-
 ---
 
 ## Aspirational Pitch Language: When Agencies Talk About Excellence
