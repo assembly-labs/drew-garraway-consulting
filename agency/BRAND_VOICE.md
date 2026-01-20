@@ -359,57 +359,122 @@ Agency Brewing has permission to reference the creative industry grind—the ins
 
 Key terms from the creative industry lexicon. Use these sparingly to signal insider status—**knowing when terms are sincere vs. ironic is brand currency.**
 
-### Buzzword Bingo (Use With Knowing Jest)
+The lexicon spans two eras: the **Golden Age** of Madison Avenue and the **present-day** agency experience. Mixing eras thoughtfully signals deep industry fluency.
 
-These terms are fair game for humor—**but only when you're actually using them in context**. The jest comes from deploying the buzzword while acknowledging its absurdity. Don't just list them or mock them in isolation.
+---
 
-- "Circle back"
-- "Bandwidth"
-- "Deep dive"
-- "Low-hanging fruit"
-- "Move the needle"
-- "Touch base"
-- "Take this offline"
+### The Golden Age (Mad Men Era)
+
+The 1950s-1980s established advertising's foundational vocabulary. These terms carry nostalgic weight—use them to evoke craft heritage and the romance of the pitch.
+
+#### Madison Avenue Vernacular
+
+- "The Suits" — Account management; still used (often pejoratively) by creatives
+- "The Creatives" — Art directors, copywriters, creative department
+- "Mad Men" — 1950s slang coined by Madison Avenue advertisers themselves
+- "Rainmaker" — Executive who brings in major new business
+- "Three-Martini Lunch" — The legendary, leisurely business lunch of the 1960s
+- "Full-service shop" — Agency offering complete creative, media, and account services
+- "Adland" — The advertising industry as a whole
+
+#### Foundational Creative Concepts
+
+- "The Big Idea" — Ogilvy: "Unless your advertising contains a big idea, it will pass like a ship in the night"
+- "Sell the sizzle, not the steak" — Promote emotional benefits over features
+- "USP (Unique Selling Proposition)" — The single distinct benefit; still fundamental
+- "Brand Image" — David Ogilvy's emphasis on consistent brand personality
+- "Reason Why" Advertising — Ads must provide rational purchase justification
+
+#### Classic Craft Terms
+
+- "Copy/Body Copy/Headline" — The written elements
+- "Tagline/Strapline" — Short memorable phrase
+- "Comp (Comprehensive)" — Detailed layout resembling finished ad
+- "Swipe File" — Collection of good design examples for inspiration
+- "Above the Fold" — Premium position; adapted perfectly to digital
+
+**Example usage:**
+> "Same pitch. Different century."
+> "Three-martini energy. Session IPA reality."
+
+---
+
+### Present Day (Slack Age)
+
+Today's agency language reflects remote work culture, startup influence, and heavy doses of irony.
+
+#### Buzzword Bingo (Use With Knowing Jest)
+
+These terms are fair game for humor—**but only when you're actually using them in context**. The jest comes from deploying the buzzword while acknowledging its absurdity.
+
+- "Circle back" — The most mocked phrase in agency culture
+- "Bandwidth" — "I don't have the bandwidth" = professional decline
+- "Deep dive" — Thorough analysis
+- "Low-hanging fruit" — Easy wins with minimal effort
+- "Move the needle" — Create measurable impact
+- "Pivot" — Change direction; startup culture crossover
+- "Touch base" — Universally recognized, universally mocked
+- "Take this offline" — Discuss privately later
 
 **Example of proper usage:**
 > "Let's circle back after this beer. Or maybe just stay here."
 
-### Client Feedback Classics (Gallows Humor)
-
-Universal creative frustrations that bond the community:
-
-- "Make the logo bigger"
-- "Just a few small changes"
-- "I'll know it when I see it"
-- "Make it pop"
-
-### Scope Creep Survival Language
-
-- "One more thing..."
-- "While you're at it..."
-- "Just a small tweak"
-- "Out of scope"
-- "Change order"
-
-### Slack-Era Communication
+#### Slack-Era Communication
 
 Modern agency vernacular:
 
-- "Per my last email"
-- "Async"
-- "Heads down"
-- "OOO"
-- "Ping me"
+- "Per my last email" — Passive-aggressive classic meaning "I already answered this"
+- "Async" — Not in real-time; remote-native terminology
+- "Heads down" — Focused work mode; don't disturb
+- "Ping me" — Send a message
+- "Let's align" — Get on the same page
+- "OOO" — Out of Office
+- "Hop on a huddle" — Quick audio call
 
-### Terms of Genuine Respect
+#### Client Feedback Classics (Gallows Humor)
 
-Use these sincerely—they signal craft appreciation:
+Universal creative frustrations that bond the community:
 
-- "The work has legs"
-- "This idea travels"
-- "Ship it"
-- "On-brief"
-- "The Big Idea"
+- "Make the logo bigger" — So universal it spawned songs, browser extensions, and endless memes
+- "Just a few small changes" — Code for complete overhaul
+- "I'll know it when I see it" — No direction, infinite revisions
+- "Make it pop" — Meaningless aesthetic instruction
+- "Make it classic but modern" — Contradictory keyword salad
+- "Do what you think is best" — "I won't tell you what I like, but I definitely won't like whatever you do"
+
+#### Scope Creep Survival Language
+
+- "One more thing..." — The phrase signaling scope creep is incoming
+- "While you're at it..." — Scope creep's opening salvo
+- "Just a small tweak" — Never small
+- "Out of scope" — Favorite phrase for additional billing
+- "Change order" — Formal request to modify SOW
+
+---
+
+### Timeless (Bridge Both Eras)
+
+Terms that carry genuine respect across generations. Use these sincerely—they signal craft appreciation.
+
+- "The work has legs" — Genuinely campaignable concept
+- "This idea travels" — Works across markets
+- "Ship it" — Approval to launch
+- "On-brief" — Work that addresses the strategy
+- "Kill your darlings" — Cut what you love for the greater good
+- "The Creative Leap" — The mysterious moment insight transforms into breakthrough
+- "Concepting" — Generating ideas (Bernbach would recognize it)
+
+---
+
+### Usage Guidelines
+
+| Era | When to Use | Tone |
+|-----|-------------|------|
+| **Golden Age** | Nostalgia, heritage, craft reverence | Warm, aspirational |
+| **Present Day** | Shared frustrations, insider bonding | Dry, ironic |
+| **Timeless** | Genuine craft appreciation | Sincere, respectful |
+
+**Key principle:** Mix eras thoughtfully. "Three-martini lunch" nostalgia pairs well with "bandwidth" irony. The contrast signals someone who knows the craft's history and lives its present reality.
 
 ---
 

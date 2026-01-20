@@ -271,56 +271,109 @@
   },
 
   "agency_lexicon": {
-    "buzzword_bingo": {
-      "description": "Fair game for humor—but only when actually using them in context. The jest comes from deploying the buzzword while acknowledging its absurdity. Don't just list or mock in isolation.",
-      "terms": [
-        "Circle back",
-        "Bandwidth",
-        "Deep dive",
-        "Low-hanging fruit",
-        "Move the needle",
-        "Touch base",
-        "Take this offline"
-      ],
-      "example_usage": "Let's circle back after this beer. Or maybe just stay here."
-    },
-    "client_feedback_classics": {
-      "description": "Universal creative frustrations that bond the community (gallows humor)",
-      "terms": [
-        "Make the logo bigger",
-        "Just a few small changes",
-        "I'll know it when I see it",
-        "Make it pop"
+    "overview": "The lexicon spans two eras: the Golden Age of Madison Avenue and the present-day agency experience. Mixing eras thoughtfully signals deep industry fluency.",
+    "golden_age": {
+      "description": "The 1950s-1980s established advertising's foundational vocabulary. These terms carry nostalgic weight—use them to evoke craft heritage and the romance of the pitch.",
+      "madison_avenue_vernacular": {
+        "terms": [
+          { "term": "The Suits", "meaning": "Account management; still used (often pejoratively) by creatives" },
+          { "term": "The Creatives", "meaning": "Art directors, copywriters, creative department" },
+          { "term": "Mad Men", "meaning": "1950s slang coined by Madison Avenue advertisers themselves" },
+          { "term": "Rainmaker", "meaning": "Executive who brings in major new business" },
+          { "term": "Three-Martini Lunch", "meaning": "The legendary, leisurely business lunch of the 1960s" },
+          { "term": "Full-service shop", "meaning": "Agency offering complete creative, media, and account services" },
+          { "term": "Adland", "meaning": "The advertising industry as a whole" }
+        ]
+      },
+      "foundational_concepts": {
+        "terms": [
+          { "term": "The Big Idea", "meaning": "Ogilvy: 'Unless your advertising contains a big idea, it will pass like a ship in the night'" },
+          { "term": "Sell the sizzle, not the steak", "meaning": "Promote emotional benefits over features" },
+          { "term": "USP (Unique Selling Proposition)", "meaning": "The single distinct benefit; still fundamental" },
+          { "term": "Brand Image", "meaning": "David Ogilvy's emphasis on consistent brand personality" },
+          { "term": "Reason Why Advertising", "meaning": "Ads must provide rational purchase justification" }
+        ]
+      },
+      "classic_craft_terms": {
+        "terms": [
+          { "term": "Copy/Body Copy/Headline", "meaning": "The written elements" },
+          { "term": "Tagline/Strapline", "meaning": "Short memorable phrase" },
+          { "term": "Comp (Comprehensive)", "meaning": "Detailed layout resembling finished ad" },
+          { "term": "Swipe File", "meaning": "Collection of good design examples for inspiration" },
+          { "term": "Above the Fold", "meaning": "Premium position; adapted perfectly to digital" }
+        ]
+      },
+      "example_usage": [
+        "Same pitch. Different century.",
+        "Three-martini energy. Session IPA reality."
       ]
     },
-    "scope_creep_language": {
+    "present_day": {
+      "description": "Today's agency language reflects remote work culture, startup influence, and heavy doses of irony.",
+      "buzzword_bingo": {
+        "description": "Fair game for humor—but only when actually using them in context. The jest comes from deploying the buzzword while acknowledging its absurdity.",
+        "terms": [
+          { "term": "Circle back", "meaning": "The most mocked phrase in agency culture" },
+          { "term": "Bandwidth", "meaning": "'I don't have the bandwidth' = professional decline" },
+          { "term": "Deep dive", "meaning": "Thorough analysis" },
+          { "term": "Low-hanging fruit", "meaning": "Easy wins with minimal effort" },
+          { "term": "Move the needle", "meaning": "Create measurable impact" },
+          { "term": "Pivot", "meaning": "Change direction; startup culture crossover" },
+          { "term": "Touch base", "meaning": "Universally recognized, universally mocked" },
+          { "term": "Take this offline", "meaning": "Discuss privately later" }
+        ],
+        "example_usage": "Let's circle back after this beer. Or maybe just stay here."
+      },
+      "slack_era_communication": {
+        "description": "Modern agency vernacular",
+        "terms": [
+          { "term": "Per my last email", "meaning": "Passive-aggressive classic meaning 'I already answered this'" },
+          { "term": "Async", "meaning": "Not in real-time; remote-native terminology" },
+          { "term": "Heads down", "meaning": "Focused work mode; don't disturb" },
+          { "term": "Ping me", "meaning": "Send a message" },
+          { "term": "Let's align", "meaning": "Get on the same page" },
+          { "term": "OOO", "meaning": "Out of Office" },
+          { "term": "Hop on a huddle", "meaning": "Quick audio call" }
+        ]
+      },
+      "client_feedback_classics": {
+        "description": "Universal creative frustrations that bond the community (gallows humor)",
+        "terms": [
+          { "term": "Make the logo bigger", "meaning": "So universal it spawned songs, browser extensions, and endless memes" },
+          { "term": "Just a few small changes", "meaning": "Code for complete overhaul" },
+          { "term": "I'll know it when I see it", "meaning": "No direction, infinite revisions" },
+          { "term": "Make it pop", "meaning": "Meaningless aesthetic instruction" },
+          { "term": "Make it classic but modern", "meaning": "Contradictory keyword salad" },
+          { "term": "Do what you think is best", "meaning": "I won't tell you what I like, but I definitely won't like whatever you do" }
+        ]
+      },
+      "scope_creep_language": {
+        "terms": [
+          { "term": "One more thing...", "meaning": "The phrase signaling scope creep is incoming" },
+          { "term": "While you're at it...", "meaning": "Scope creep's opening salvo" },
+          { "term": "Just a small tweak", "meaning": "Never small" },
+          { "term": "Out of scope", "meaning": "Favorite phrase for additional billing" },
+          { "term": "Change order", "meaning": "Formal request to modify SOW" }
+        ]
+      }
+    },
+    "timeless": {
+      "description": "Terms that carry genuine respect across generations. Use sincerely—they signal craft appreciation.",
       "terms": [
-        "One more thing...",
-        "While you're at it...",
-        "Just a small tweak",
-        "Out of scope",
-        "Change order"
+        { "term": "The work has legs", "meaning": "Genuinely campaignable concept" },
+        { "term": "This idea travels", "meaning": "Works across markets" },
+        { "term": "Ship it", "meaning": "Approval to launch" },
+        { "term": "On-brief", "meaning": "Work that addresses the strategy" },
+        { "term": "Kill your darlings", "meaning": "Cut what you love for the greater good" },
+        { "term": "The Creative Leap", "meaning": "The mysterious moment insight transforms into breakthrough" },
+        { "term": "Concepting", "meaning": "Generating ideas (Bernbach would recognize it)" }
       ]
     },
-    "slack_era_communication": {
-      "description": "Modern agency vernacular",
-      "terms": [
-        "Per my last email",
-        "Async",
-        "Heads down",
-        "OOO",
-        "Ping me"
-      ]
-    },
-    "terms_of_genuine_respect": {
-      "description": "Use sincerely—they signal craft appreciation",
-      "terms": [
-        "The work has legs",
-        "This idea travels",
-        "Ship it",
-        "On-brief",
-        "The Big Idea"
-      ]
+    "usage_guidelines": {
+      "golden_age": { "when": "Nostalgia, heritage, craft reverence", "tone": "Warm, aspirational" },
+      "present_day": { "when": "Shared frustrations, insider bonding", "tone": "Dry, ironic" },
+      "timeless": { "when": "Genuine craft appreciation", "tone": "Sincere, respectful" },
+      "key_principle": "Mix eras thoughtfully. 'Three-martini lunch' nostalgia pairs well with 'bandwidth' irony. The contrast signals someone who knows the craft's history and lives its present reality."
     }
   },
 
