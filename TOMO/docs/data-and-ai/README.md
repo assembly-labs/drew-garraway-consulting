@@ -4,6 +4,18 @@
 
 ---
 
+## For Agentic Coding Partners
+
+**Start here:** [`DATA_AND_AI_BY_PAGE.md`](./DATA_AND_AI_BY_PAGE.md)
+
+This document maps exactly how data and AI operate for each major page:
+- **STATS (Dashboard)** — Pattern analysis, breakthrough detection, belt-adaptive visualizations
+- **INSIGHTS** — Journal text analysis, AI coaching generation, risk-aware messaging
+- **JOURNAL** — Voice-to-text extraction, sentiment analysis, belt-adaptive cards
+- **TECHNIQUES** — Recommendation algorithm, difficulty filtering, content gates
+
+---
+
 ## Overview
 
 This folder contains strategy and specification documents for:
@@ -20,15 +32,16 @@ This folder contains strategy and specification documents for:
 
 | Document | Status | Description |
 |----------|--------|-------------|
+| `DATA_AND_AI_BY_PAGE.md` | **Active** | **START HERE** - Master reference for how data & AI operate on each page (Stats, Insights, Journal, Techniques) |
 | `JOURNAL_DATA_CAPTURE_STRATEGY.md` | Active | Three-tier data capture pyramid, persona adaptations, implementation roadmap |
 | `CONVERSATION_DESIGN_FOUNDATION.md` | Active | Voice/chatbot conversation design principles |
 | `VOICE_LOGGING_CONVERSATION_DESIGN.md` | Active | Voice logger conversation flow specification |
-| `INFOGRAPHIC_STRATEGY.md` | Active | Charts, infographics, and data visualization strategy |
+| `INFOGRAPHIC_STRATEGY.md` | **Updated** | Charts, infographics, and data visualization strategy (aligned with implementation) |
 | `index.html` | Active | Interactive infographic preview/demo |
-| `AI_EXTRACTION_SPEC.md` | TODO | Technical spec for NLP pipeline, entity extraction, confidence scoring |
-| `VOICE_TRANSCRIPTION_SPEC.md` | TODO | AssemblyAI integration, custom vocabulary, accuracy requirements |
-| `PERSONALIZATION_ENGINE.md` | TODO | How captured data flows to dashboard, chatbot, recommendations |
-| `RISK_DETECTION_SIGNALS.md` | TODO | Dropout prediction, intervention triggers, re-engagement flows |
+| `VOICE_TRANSCRIPTION_SPEC.md` | **Active** | AssemblyAI integration, 180+ BJJ vocabulary terms, accuracy targets, cost management |
+| `AI_EXTRACTION_SPEC.md` | MERGED | Covered in VOICE_LOGGING_CONVERSATION_DESIGN.md (lines 204-450) |
+| `PERSONALIZATION_ENGINE.md` | MERGED | Covered in DATA_AND_AI_BY_PAGE.md |
+| `RISK_DETECTION_SIGNALS.md` | MERGED | Covered in DATA_AND_AI_BY_PAGE.md |
 
 ---
 
