@@ -18,7 +18,13 @@ This library powers multiple features in the BJJ Journal app:
 bjj-techniques/
 ├── README.md                    # This file
 ├── bjj-techniques-research      # Source research document (490+ techniques)
-└── bjj_library/                 # CSV files
+│
+├── VIDEO CONTENT LIBRARY (January 2025)
+├── videos.csv                   # Master video list (53 unique videos)
+├── technique_video_map.csv      # Video-to-technique mappings (166 mappings)
+├── technique_videos.csv         # [DEPRECATED] Legacy format, kept for reference
+│
+└── bjj_library/                 # Technique CSV files
     ├── guard_closed.csv         # CG_001-030 (30 techniques)
     ├── guard_half.csv           # HG_001-030 (30 techniques)
     ├── guard_open.csv           # OG_001-045 (45 techniques)
@@ -34,6 +40,63 @@ bjj-techniques/
     ├── leg_entanglements.csv    # LE_001-018 (18 techniques)
     └── submissions_master.csv   # SM_001-050 (50 techniques)
 ```
+
+---
+
+## Video Content Library
+
+> **Full specification:** See `/docs/data-and-ai/VIDEO_CONTENT_LIBRARY_SPEC.md`
+
+### Overview
+
+The video library uses a normalized schema with two CSV files:
+
+1. **`videos.csv`** - Master list of 53 unique YouTube videos with full metadata
+2. **`technique_video_map.csv`** - Many-to-many mapping between videos and techniques
+
+This replaces the legacy `technique_videos.csv` which had duplicate entries.
+
+### videos.csv Schema (Key Fields)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `video_id` | string | Unique identifier (VID_001, VID_002, etc.) |
+| `youtube_id` | string | YouTube video ID (11 characters) |
+| `title` | string | Video title |
+| `instructor` | string | Primary instructor name |
+| `belt_level_min` | enum | Minimum belt level (white-black) |
+| `belt_level_max` | enum | Maximum belt level (white-black) |
+| `difficulty_score` | integer | 1-10, **empty if needs review** |
+| `gi_nogi` | enum | gi, nogi, both |
+| `position_category` | string | Primary position covered |
+| `addresses_struggles` | string | **Empty - needs human review** |
+| `teaches_defense_for` | string | **Empty - needs human review** |
+| `verified` | boolean | Currently `false` for all videos |
+
+### technique_video_map.csv Schema
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `video_id` | string | References videos.csv |
+| `technique_id` | string | References technique library (CG_001, etc.) |
+| `relevance_score` | decimal | 0.0-1.0, how directly video teaches technique |
+| `is_primary` | boolean | Is this the main video for this technique? |
+
+### Content Review Status
+
+**Fields requiring human review before Phase 2 (AI recommendations):**
+
+| Field | Status | Work Required |
+|-------|--------|---------------|
+| `difficulty_score` | Empty | Watch video, assign 1-10 rating |
+| `addresses_struggles` | Empty | Map to struggle categories |
+| `teaches_defense_for` | Empty | Map to submission types |
+| `tags` | Empty | Add search/filter tags |
+| `verified` | false | Set to true after review |
+
+See `CONTENT_REVIEW_CHECKLIST.md` (below) for the human review workflow.
+
+---
 
 ## CSV Schema
 
@@ -320,10 +383,13 @@ The techniques in this library were compiled from:
 
 ## Future Enhancements
 
-Potential additions to consider:
-- [ ] Video URL column for technique demonstrations
+**Completed (January 2025):**
+- [x] Video library with full metadata schema (`videos.csv`)
+- [x] Video-to-technique many-to-many mapping (`technique_video_map.csv`)
+- [x] Difficulty rating (1-10) field added (needs human population)
+
+**Remaining:**
 - [ ] Prerequisite techniques column for curriculum sequencing
-- [ ] Difficulty rating (1-5) independent of belt level
 - [ ] Competition frequency data
 - [ ] Body type suitability indicators
 - [ ] Drill/warm-up variations

@@ -3,6 +3,10 @@
  *
  * Types for the technique video library and recommendation system.
  * Videos are sourced from curated YouTube content by priority instructors.
+ *
+ * Schema aligned with VIDEO_CONTENT_LIBRARY_SPEC.md
+ * Data files: /docs/domain-knowledge/bjj-techniques/videos.csv
+ *             /docs/domain-knowledge/bjj-techniques/technique_video_map.csv
  */
 
 import type { BeltLevel, ProficiencyLevel } from './database';
@@ -23,38 +27,122 @@ export type VideoType =
   | 'lifestyle';     // Training lifestyle, recovery, longevity
 
 /**
+ * Pedagogical content approach
+ */
+export type ContentType =
+  | 'concept'         // Explains principles, not specific moves
+  | 'technique'       // Step-by-step technique breakdown
+  | 'drill'           // Repetition exercises, solo or partner
+  | 'troubleshooting' // Fixes common problems
+  | 'system';         // Complete positional system
+
+/**
+ * Struggle categories for recommendation matching
+ * Maps to user journal struggles
+ */
+export type StruggleCategory =
+  | 'guard_passed'
+  | 'sweep_defense'
+  | 'submission_defense_choke'
+  | 'submission_defense_arm'
+  | 'submission_defense_leg'
+  | 'mount_escape'
+  | 'side_control_escape'
+  | 'back_escape'
+  | 'takedown_defense'
+  | 'no_attacks'
+  | 'timing_issues'
+  | 'cardio_fatigue';
+
+/**
+ * Submission types for defense mapping
+ */
+export type SubmissionType =
+  | 'triangle'
+  | 'armbar'
+  | 'kimura'
+  | 'americana'
+  | 'guillotine'
+  | 'rear_naked_choke'
+  | 'heel_hook'
+  | 'knee_bar'
+  | 'toe_hold'
+  | 'wrist_lock'
+  | 'ezekiel'
+  | 'darce'
+  | 'anaconda';
+
+/**
  * Priority instructors per brand philosophy
  *
  * Technique instructors: World-class competitors and coaches
  * Mindset instructors: Respected voices on BJJ psychology and lifestyle
  */
 export type Instructor =
-  // Technique instructors
+  // Technique instructors - Tier 1
   | 'John Danaher'
   | 'Gordon Ryan'
   | 'Lachlan Giles'
+  // Technique instructors - Tier 2
   | 'Craig Jones'
-  | 'Roger Gracie'
-  | 'André Galvão'
-  | 'Mikey Musumeci'
-  | 'Mayssa Bastos'
-  | 'Tom DeBlass'
-  | 'Renzo Gracie'
-  | 'Leo Vieira'
-  | 'Darragh O\'Conaill'
-  | 'Fabio Gurgel'
+  | 'Gustavo Gasperin'
+  | 'Keenan Cornelius'
+  | 'Firas Zahabi'
+  | 'Bernardo Faria'
+  // Other approved instructors - Tier 3
   | 'Stephan Kesting'
-  // Mindset & lifestyle instructors
-  | 'Chewjitsu'           // Nick Albin - motivation, belt psychology
-  | 'Rob Biernacki'       // Conceptual BJJ, older grapplers
-  | 'Jon Thomas'          // Training methodology, mindset
-  | 'Bernardo Faria'      // Journey stories, motivation
-  | 'Firas Zahabi'        // Mental game, training philosophy
-  | 'Jocko Willink'       // Discipline, mindset
+  | 'Jocko Willink'
+  | 'Chewjitsu'
+  | 'Rob Biernacki'
+  | 'Jon Thomas'
   | string; // Allow other instructors
 
 /**
- * A single video entry for a technique
+ * Instructor quality tier for recommendation weighting
+ */
+export type InstructorTier = 1 | 2 | 3;
+
+/**
+ * A single video entry (unique by video_id)
+ * This is the master video record from videos.csv
+ */
+export interface Video {
+  video_id: string;              // Unique: VID_001, VID_002, etc.
+  youtube_id: string;            // YouTube video ID (11 chars)
+  title: string;
+  instructor: Instructor;
+  duration_seconds: number;
+  video_type: VideoType;
+  content_type: ContentType;
+  belt_level_min: BeltLevel;     // Minimum belt for this content
+  belt_level_max: BeltLevel;     // Maximum belt relevance
+  difficulty_score: number | null;  // 1-10, null if not yet reviewed
+  gi_nogi: 'gi' | 'nogi' | 'both';
+  position_category: PositionCategory;
+  addresses_struggles: StruggleCategory[];  // What struggles this helps with
+  teaches_defense_for: SubmissionType[];    // What submissions it helps defend
+  tags: string[];
+  instructor_tier: InstructorTier;
+  verified: boolean;             // Has metadata been human-verified?
+  added_date: string;            // ISO date
+  last_verified: string | null;  // ISO date
+  notes: string | null;          // Internal curation notes
+}
+
+/**
+ * Video-to-technique mapping (many-to-many relationship)
+ * From technique_video_map.csv
+ */
+export interface VideoTechniqueMapping {
+  video_id: string;              // References Video.video_id
+  technique_id: string;          // References technique library (CG_001, etc.)
+  relevance_score: number;       // 0.0-1.0, how directly video teaches technique
+  is_primary: boolean;           // Is this the main video for this technique?
+}
+
+/**
+ * @deprecated Use Video interface instead
+ * Legacy interface for backwards compatibility during migration
  */
 export interface TechniqueVideo {
   technique_id: string;        // References bjj-techniques CSV technique_id

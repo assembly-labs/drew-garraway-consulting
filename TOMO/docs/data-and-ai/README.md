@@ -26,6 +26,7 @@ This folder contains strategy and specification documents for:
 | `VOICE_LOGGING_CONVERSATION_DESIGN.md` | Active | Voice logger conversation flow specification |
 | `INFOGRAPHIC_STRATEGY.md` | Active | Charts, infographics, and data visualization strategy |
 | `TECHNIQUE_RECOMMENDATION_ENGINE.md` | Active | **How journal data drives video recommendations** - scoring algorithm, AI prompts, personalization logic |
+| `VIDEO_CONTENT_LIBRARY_SPEC.md` | Active | **Video library schema, curation criteria, update process** - defines videos.csv structure and content requirements |
 | `index.html` | Active | Interactive infographic preview/demo |
 | `AI_EXTRACTION_SPEC.md` | TODO | Technical spec for NLP pipeline, entity extraction, confidence scoring |
 | `VOICE_TRANSCRIPTION_SPEC.md` | TODO | AssemblyAI integration, custom vocabulary, accuracy requirements |
