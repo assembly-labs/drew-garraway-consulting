@@ -84,6 +84,7 @@ const whiteExcellingPersona: Persona = {
     userId: 'user-white-excelling-001',
     name: 'Jake Thompson',
     stripes: 3,
+    gymName: 'ALLIANCE (Paoli, PA)',
     targetFrequency: 4,
     birthYear: 1998,
     loggingPreference: 'voice',
@@ -194,16 +195,76 @@ const whiteAtRiskPersona: Persona = {
  * BLUE BELT - EXCELLING: Marcus Chen
  * "The Dedicated Hobbyist" - Progressing
  *
- * Uses existing blue belt profile as-is
+ * 34-year-old Software Engineer, 2.5 years training.
+ * Consistent 3x/week, developing his guard game.
+ * Moderate risk - blue belt blues are real but he's managing.
+ *
+ * Reference: /docs/personas/PERSONA_PROFILES.md
  */
 const blueExcellingPersona: Persona = {
   ...existingBlue,
   id: 'persona-blue-excelling',
   key: 'blue-excelling',
+  displayName: 'Marcus Chen',
   archetype: 'The Dedicated Hobbyist',
   riskLevel: 'moderate',
   status: 'progressing',
   avatarUrl: '/avatars/marcus-chen.jpg',
+  // Override user data
+  user: {
+    ...existingBlue.user,
+    id: 'user-blue-excelling-001',
+    firstName: 'Marcus',
+    lastName: 'Chen',
+    email: 'marcus.c@email.com',
+    stripes: 2,
+    goals: ['Develop complete guard game', 'Compete at local level', 'Stay consistent through plateau'],
+  },
+  // Override context profile for Marcus
+  contextProfile: {
+    ...existingBlue.contextProfile,
+    userId: 'user-blue-excelling-001',
+    name: 'Marcus Chen',
+    stripes: 2,
+    trainingStartDate: '2022-06-15',
+    currentBeltDate: '2024-02-20',
+    gymName: '10th Planet Denver',
+    trainingGoals: ['fitness', 'mental', 'community'] as const,
+    targetFrequency: 3,
+    birthYear: 1990,
+    loggingPreference: 'voice',
+    sessionCount: 247,
+  },
+  // Override training stats for consistent engagement
+  trainingStats: {
+    ...existingBlue.trainingStats,
+    totalSessions: 247,
+    totalHours: 370,
+    currentStreak: 8,
+    longestStreak: 24,
+    thisMonth: {
+      sessions: 11,
+      hours: 16.5,
+      techniques: 18,
+      sparringRounds: 33,
+      targetSessions: 12,
+    },
+    thisYear: {
+      sessions: 127,
+      hours: 190,
+    },
+    sparringRecord: { wins: 124, losses: 108, draws: 67 },
+  },
+  // Override progress summary
+  progressSummary: {
+    ...existingBlue.progressSummary,
+    currentStripes: 2,
+    timeAtBelt: '10 months',
+    overallCompletion: 55,
+    estimatedTimeToPromotion: '14-20 months',
+    strengths: ['Closed guard', 'Sweeps', 'Patience', 'Consistency'],
+    weaknesses: ['Guard retention', 'Leg locks', 'Top pressure', 'Submissions from top'],
+  },
 };
 
 /**
@@ -281,32 +342,152 @@ const blueAtRiskPersona: Persona = {
  * PURPLE BELT - AVERAGE: Sofia Rodriguez
  * "The Grinder" - Stable
  *
- * Uses existing purple belt profile as-is
+ * 28-year-old Physical Therapist, 5 years training.
+ * Competitor mindset, trains 5x/week, systematic approach.
+ * Low risk - deeply committed to the journey.
+ *
+ * Reference: /docs/personas/PERSONA_PROFILES.md
  */
 const purpleAveragePersona: Persona = {
   ...existingPurple,
   id: 'persona-purple-average',
   key: 'purple-average',
+  displayName: 'Sofia Rodriguez',
   archetype: 'The Grinder',
   riskLevel: 'low',
   status: 'stable',
   avatarUrl: '/avatars/sofia-rodriguez.jpg',
+  // Override user data
+  user: {
+    ...existingPurple.user,
+    id: 'user-purple-average-001',
+    firstName: 'Sofia',
+    lastName: 'Rodriguez',
+    email: 'sofia.r@email.com',
+    stripes: 1,
+    goals: ['Win at Pans', 'Develop complete leg lock game', 'Start teaching fundamentals'],
+  },
+  // Override context profile for Sofia
+  contextProfile: {
+    ...existingPurple.contextProfile,
+    userId: 'user-purple-average-001',
+    name: 'Sofia Rodriguez',
+    stripes: 1,
+    trainingStartDate: '2019-12-01',
+    currentBeltDate: '2024-04-15',
+    gymName: 'Atos HQ San Diego',
+    trainingGoals: ['competition', 'fitness', 'community'] as const,
+    targetFrequency: 5,
+    birthYear: 1996,
+    loggingPreference: 'voice',
+    sessionCount: 612,
+  },
+  // Override training stats for high-volume competitor
+  trainingStats: {
+    ...existingPurple.trainingStats,
+    totalSessions: 612,
+    totalHours: 918,
+    currentStreak: 15,
+    longestStreak: 42,
+    thisMonth: {
+      sessions: 18,
+      hours: 27,
+      techniques: 12,
+      sparringRounds: 54,
+      targetSessions: 20,
+    },
+    thisYear: {
+      sessions: 198,
+      hours: 297,
+    },
+    sparringRecord: { wins: 298, losses: 189, draws: 145 },
+  },
+  // Override progress summary
+  progressSummary: {
+    ...existingPurple.progressSummary,
+    currentStripes: 1,
+    timeAtBelt: '8 months',
+    overallCompletion: 45,
+    estimatedTimeToPromotion: '18-24 months',
+    strengths: ['Guard (lasso/spider)', 'Armbars', 'Triangles', 'Teaching', 'Competition mindset'],
+    weaknesses: ['Leg locks', 'Top pressure', 'Wrestling'],
+  },
 };
 
 /**
  * BROWN BELT - AVERAGE: Elena Kim
  * "The Veteran" - Refined
  *
- * Uses existing brown belt profile as-is
+ * 38-year-old Marketing Director, 8.5 years training.
+ * Focus on refinement and teaching, sustainable pace.
+ * Very low risk - BJJ is integral to her identity.
+ *
+ * Reference: /docs/personas/PERSONA_PROFILES.md
  */
 const brownAveragePersona: Persona = {
   ...existingBrown,
   id: 'persona-brown-average',
   key: 'brown-average',
+  displayName: 'Elena Kim',
   archetype: 'The Veteran',
   riskLevel: 'very-low',
   status: 'refined',
   avatarUrl: '/avatars/elena-kim.jpg',
+  // Override user data
+  user: {
+    ...existingBrown.user,
+    id: 'user-brown-average-001',
+    firstName: 'Elena',
+    lastName: 'Kim',
+    email: 'elena.k@email.com',
+    stripes: 2,
+    goals: ['Refine A-game', 'Develop teaching methodology', 'Stay healthy for black belt'],
+  },
+  // Override context profile for Elena
+  contextProfile: {
+    ...existingBrown.contextProfile,
+    userId: 'user-brown-average-001',
+    name: 'Elena Kim',
+    stripes: 2,
+    trainingStartDate: '2016-06-01',
+    currentBeltDate: '2023-06-15',
+    gymName: 'Marcelo Garcia Seattle',
+    trainingGoals: ['community', 'mental', 'fitness'] as const,
+    targetFrequency: 4,
+    birthYear: 1986,
+    loggingPreference: 'text',
+    sessionCount: 1247,
+  },
+  // Override training stats for veteran practitioner
+  trainingStats: {
+    ...existingBrown.trainingStats,
+    totalSessions: 1247,
+    totalHours: 1870,
+    currentStreak: 6,
+    longestStreak: 58,
+    thisMonth: {
+      sessions: 14,
+      hours: 21,
+      techniques: 5,
+      sparringRounds: 42,
+      targetSessions: 16,
+    },
+    thisYear: {
+      sessions: 156,
+      hours: 234,
+    },
+    sparringRecord: { wins: 589, losses: 312, draws: 284 },
+  },
+  // Override progress summary
+  progressSummary: {
+    ...existingBrown.progressSummary,
+    currentStripes: 2,
+    timeAtBelt: '18 months',
+    overallCompletion: 78,
+    estimatedTimeToPromotion: '6-12 months (when ready)',
+    strengths: ['Chokes', 'Pressure passing', 'Teaching', 'Game IQ', 'Composure'],
+    weaknesses: ['Leg locks (generational gap)', 'Recovery time', 'Wrestling'],
+  },
 };
 
 // ===========================================
