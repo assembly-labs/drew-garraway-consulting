@@ -163,7 +163,7 @@ function App() {
       )}
 
       {/* Main Content */}
-      <main style={{ paddingBottom: 'calc(100px + env(safe-area-inset-bottom))' }}>
+      <main style={{ paddingBottom: 'calc(120px + env(safe-area-inset-bottom))' }}>
         {currentView === 'stats' && (
           <Dashboard onNavigate={handleNavigate} />
         )}
