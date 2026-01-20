@@ -189,174 +189,581 @@ Split on:
 
 ```typescript
 const TECHNIQUE_SYNONYMS: Record<string, string> = {
-  // Submissions - Chokes
+  // ==========================================================
+  // SUBMISSIONS - CHOKES
+  // ==========================================================
   'rnc': 'Rear Naked Choke',
   'rear naked': 'Rear Naked Choke',
+  'rear naked choke': 'Rear Naked Choke',
   'mata leão': 'Rear Naked Choke',
   'mata leao': 'Rear Naked Choke',
+  'nogi choke': 'Rear Naked Choke',           // Common generic term in nogi
+  'short choke': 'Short Choke',               // Danaher system - arm under chin
+  'long choke': 'Long Choke',                 // Danaher system - arm over shoulder
   'bow and arrow': 'Bow and Arrow Choke',
   'bow & arrow': 'Bow and Arrow Choke',
   'cross collar': 'Cross Collar Choke',
+  'cross collar choke': 'Cross Collar Choke',
+  'cross choke': 'Cross Collar Choke',
+  'palm up palm down': 'Cross Collar Choke',  // Description becomes name
   'x choke': 'Cross Collar Choke',
   'ezekiel': 'Ezekiel Choke',
+  'ezekial': 'Ezekiel Choke',                 // Common misspelling
+  'ezequiel': 'Ezekiel Choke',                // Portuguese spelling
   'zeke': 'Ezekiel Choke',
   'guillotine': 'Guillotine',
+  'gilatine': 'Guillotine',                   // Common misspelling
+  'guillotene': 'Guillotine',                 // Common misspelling
+  'gullotine': 'Guillotine',                  // Common misspelling
+  'gillatine': 'Guillotine',                  // Common misspelling
   'gillie': 'Guillotine',
+  'gilly': 'Guillotine',
+  'arm in guillotine': 'Arm-In Guillotine',
+  'arm out guillotine': 'High Elbow Guillotine',
+  'high elbow': 'High Elbow Guillotine',
+  'high elbow guillotine': 'High Elbow Guillotine',
+  'marcelo guillotine': 'Marcelotine',
+  'marcelotine': 'Marcelotine',
+  'marcelotina': 'Marcelotine',
+  'power guillotine': 'Power Guillotine',
   'darce': "D'Arce Choke",
   "d'arce": "D'Arce Choke",
+  'darse': "D'Arce Choke",                    // Common misspelling
+  'dark choke': "D'Arce Choke",               // Phonetic
   'anaconda': 'Anaconda Choke',
+  'anaconda choke': 'Anaconda Choke',
+  'gator roll': 'Anaconda Choke',             // Setup often called this
   'arm triangle': 'Arm Triangle',
   'head and arm': 'Arm Triangle',
+  'head and arm choke': 'Arm Triangle',
   'kata gatame': 'Arm Triangle',
+  'side choke': 'Arm Triangle',
   'north south choke': 'North South Choke',
+  'ns choke': 'North South Choke',
   'paper cutter': 'Paper Cutter Choke',
+  'paper cutter choke': 'Paper Cutter Choke',
+  'breadcutter': 'Breadcutter Choke',
+  'bread cutter': 'Breadcutter Choke',
   'baseball bat': 'Baseball Bat Choke',
+  'baseball bat choke': 'Baseball Bat Choke',
+  'baseball choke': 'Baseball Bat Choke',     // More common name
   'loop choke': 'Loop Choke',
   'clock choke': 'Clock Choke',
   'brabo': 'Brabo Choke',
+  'brabo choke': 'Brabo Choke',
+  'von flue': 'Von Flue Choke',
+  'von flue choke': 'Von Flue Choke',
+  'von flu': 'Von Flue Choke',                // Common misspelling
+  'step over choke': 'Step Over Choke',
+  'monoplata choke': 'Monoplata Choke',
+  'punch choke': 'Punch Choke',
+  'lapel choke': 'Lapel Choke',
+  'worm choke': 'Worm Guard Choke',
+  'peruvian necktie': 'Peruvian Necktie',
+  'japanese necktie': 'Japanese Necktie',
+  'ten finger': 'Ten Finger Choke',
+  'ten finger guillotine': 'Ten Finger Choke',
 
-  // Submissions - Arm Locks
+  // ==========================================================
+  // SUBMISSIONS - ARM LOCKS
+  // ==========================================================
   'armbar': 'Armbar',
   'arm bar': 'Armbar',
+  'arm-bar': 'Armbar',
+  'armbah': 'Armbar',                         // Phonetic/accent
   'juji gatame': 'Armbar',
+  'juji': 'Armbar',
   'straight armbar': 'Armbar',
+  'belly down armbar': 'Belly Down Armbar',
+  'spinning armbar': 'Spinning Armbar',
+  'flying armbar': 'Flying Armbar',
   'kimura': 'Kimura',
+  'kimmura': 'Kimura',                        // Very common misspelling
+  'kemura': 'Kimura',                         // Common misspelling
+  'kimora': 'Kimura',                         // Common misspelling
   'double wristlock': 'Kimura',
   'chicken wing': 'Kimura',
+  'reverse kimura': 'Reverse Kimura',
   'americana': 'Americana',
+  'americano': 'Americana',                   // Coffee confusion
   'keylock': 'Americana',
   'v armlock': 'Americana',
+  'paintbrush': 'Americana',                  // Nickname
   'omoplata': 'Omoplata',
+  'omaplata': 'Omoplata',                     // Common misspelling
+  'omoplotta': 'Omoplata',                    // Common misspelling
+  'omo plata': 'Omoplata',                    // Spaced version
   'omo': 'Omoplata',
   'wrist lock': 'Wrist Lock',
   'wristlock': 'Wrist Lock',
+  'bicep slicer': 'Bicep Slicer',
+  'bicep cutter': 'Bicep Slicer',
+  'arm crush': 'Bicep Slicer',
+  'tarikoplata': 'Tarikoplata',
+  'baratoplata': 'Baratoplata',
+  'monoplata': 'Monoplata',
 
-  // Submissions - Leg Locks
+  // ==========================================================
+  // SUBMISSIONS - LEG LOCKS (Modern Danaher-era vocabulary)
+  // ==========================================================
   'heel hook': 'Heel Hook',
   'inside heel hook': 'Inside Heel Hook',
+  'inside heel': 'Inside Heel Hook',
   'outside heel hook': 'Outside Heel Hook',
+  'outside heel': 'Outside Heel Hook',
+  'inverted heel hook': 'Inverted Heel Hook',
   'knee bar': 'Knee Bar',
   'kneebar': 'Knee Bar',
+  'knee bah': 'Knee Bar',                     // Phonetic
   'toe hold': 'Toe Hold',
   'toehold': 'Toe Hold',
   'calf slicer': 'Calf Slicer',
   'calf crush': 'Calf Slicer',
+  'calf crank': 'Calf Slicer',
   'straight ankle': 'Straight Ankle Lock',
+  'straight ankle lock': 'Straight Ankle Lock',
   'ankle lock': 'Straight Ankle Lock',
   'achilles lock': 'Straight Ankle Lock',
+  'achilles': 'Straight Ankle Lock',
   'estima lock': 'Estima Lock',
+  'estima': 'Estima Lock',
+  'aoki lock': 'Aoki Lock',
+  'texas cloverleaf': 'Texas Cloverleaf',
+  'cloverleaf': 'Texas Cloverleaf',
+  'banana split': 'Banana Split',
+  'electric chair': 'Electric Chair',         // Also a sweep but primarily leg attack
+  'mikey lock': 'Mikey Lock',                 // Mikey Musumeci's ankle lock variation
+  'vaporizer': 'Vaporizer',                   // 10th Planet leg attack
+  'twister': 'Twister',                       // 10th Planet - spine lock
+  'the twister': 'Twister',
 
-  // Sweeps
+  // ==========================================================
+  // LEG ENTANGLEMENT POSITIONS (Drilled as "techniques")
+  // ==========================================================
+  'ashi garami': 'Ashi Garami',
+  'ashi': 'Ashi Garami',
+  'single leg x': 'Single Leg X',
+  'slx': 'Single Leg X',
+  'outside ashi': 'Outside Ashi',
+  'cross ashi': 'Cross Ashi',
+  'irimi ashi': 'Cross Ashi',
+  'double trouble': 'Double Trouble',         // Gordon Ryan term
+  'inside sankaku': 'Inside Sankaku',
+  '411': 'Inside Sankaku',
+  'four eleven': 'Inside Sankaku',
+  'honeyhole': 'Inside Sankaku',
+  'honey hole': 'Inside Sankaku',
+  'saddle': 'Inside Sankaku',
+  'inside position': 'Inside Sankaku',
+  'outside sankaku': 'Outside Sankaku',
+  '50/50': 'Fifty-Fifty',
+  'fifty fifty': 'Fifty-Fifty',
+  '50 50': 'Fifty-Fifty',
+  'fifty-fifty': 'Fifty-Fifty',
+  'backside 50 50': 'Backside Fifty-Fifty',
+  'backside fifty fifty': 'Backside Fifty-Fifty',
+  '80 20': '80/20 Position',                  // Danaher system
+  '80/20': '80/20 Position',
+  'eighty twenty': '80/20 Position',
+  '90 10': '90/10 Position',
+  '90/10': '90/10 Position',
+  'game over': 'Game Over Position',          // Craig Jones term
+  'leg knot': 'Leg Knot',
+  'truck': 'Truck Position',                  // 10th Planet
+  'the truck': 'Truck Position',
+  'lockdown': 'Lockdown',                     // Very common in US
+  'lock down': 'Lockdown',
+
+  // ==========================================================
+  // SWEEPS
+  // ==========================================================
   'scissor sweep': 'Scissor Sweep',
+  'scissor': 'Scissor Sweep',
   'hip bump': 'Hip Bump Sweep',
   'hip bump sweep': 'Hip Bump Sweep',
   'flower sweep': 'Flower Sweep',
   'pendulum sweep': 'Pendulum Sweep',
+  'pendulum': 'Pendulum Sweep',
   'elevator sweep': 'Elevator Sweep',
+  'elevator': 'Elevator Sweep',
   'hook sweep': 'Hook Sweep',
   'butterfly sweep': 'Butterfly Sweep',
   'sickle sweep': 'Sickle Sweep',
   'tripod sweep': 'Tripod Sweep',
   'lumberjack sweep': 'Lumberjack Sweep',
+  'lumberjack': 'Lumberjack Sweep',
   'dummy sweep': 'Dummy Sweep',
   'balloon sweep': 'Balloon Sweep',
   'waiter sweep': 'Waiter Sweep',
   'old school sweep': 'Old School Sweep',
-  'electric chair': 'Electric Chair Sweep',
+  'old school': 'Old School Sweep',
+  'x guard sweep': 'X Guard Sweep',
+  'technical lift': 'Technical Lift Sweep',
+  'idiot sweep': 'Idiot Sweep',               // Simple sweep from closed guard
+  'star sweep': 'Star Sweep',
+  'overhead sweep': 'Overhead Sweep',
+  'tomoe nage': 'Tomoe Nage',                 // Sacrifice throw/sweep
+  'sumi gaeshi': 'Sumi Gaeshi',
+  'lasso sweep': 'Lasso Sweep',
+  'spider sweep': 'Spider Sweep',
+  'k guard sweep': 'K Guard Sweep',
+  'baby bolo': 'Baby Bolo',                   // Mini berimbolo sweep
+  'crab sweep': 'Crab Sweep',
+  'reverse dlr sweep': 'Reverse DLR Sweep',
+  'kiss of the dragon': 'Kiss of the Dragon', // Back take/sweep
+  'windshield wiper': 'Windshield Wiper Sweep',
+  'windshield wiper sweep': 'Windshield Wiper Sweep',
 
-  // Guard Passes
+  // ==========================================================
+  // GUARD PASSES
+  // ==========================================================
   'knee cut': 'Knee Cut Pass',
   'knee slice': 'Knee Cut Pass',
   'knee slide': 'Knee Cut Pass',
+  'knee cut pass': 'Knee Cut Pass',
   'toreando': 'Toreando Pass',
-  'toreano': 'Toreando Pass',
+  'toreando pass': 'Toreando Pass',
+  'toreano': 'Toreando Pass',                 // Common misspelling
+  'toreanado': 'Toreando Pass',               // Common misspelling
+  'toriando': 'Toreando Pass',                // Common misspelling
+  'toranado': 'Toreando Pass',                // Common misspelling
   'bullfighter': 'Toreando Pass',
+  'bullfighter pass': 'Toreando Pass',
+  'bull fighter': 'Toreando Pass',
   'stack pass': 'Stack Pass',
+  'stacking': 'Stack Pass',
   'smash pass': 'Smash Pass',
+  'smashing': 'Smash Pass',
   'over under': 'Over Under Pass',
   'over-under': 'Over Under Pass',
+  'over under pass': 'Over Under Pass',
   'leg drag': 'Leg Drag Pass',
+  'leg drag pass': 'Leg Drag Pass',
   'x pass': 'X Pass',
   'double under': 'Double Under Pass',
+  'double unders': 'Double Under Pass',
+  'double under pass': 'Double Under Pass',
   'single under': 'Single Under Pass',
   'leg weave': 'Leg Weave Pass',
+  'leg weave pass': 'Leg Weave Pass',
   'body lock pass': 'Body Lock Pass',
+  'bodylock pass': 'Body Lock Pass',
   'pressure pass': 'Pressure Pass',
+  'pressure passing': 'Pressure Pass',
   'long step': 'Long Step Pass',
+  'long step pass': 'Long Step Pass',
+  'backstep': 'Backstep Pass',
+  'back step': 'Backstep Pass',
+  'backstep pass': 'Backstep Pass',
+  'floating pass': 'Floating Pass',
+  'float pass': 'Floating Pass',
+  'folding pass': 'Folding Pass',
+  'headquarters': 'Headquarters Position',    // Danaher passing position
+  'hq': 'Headquarters Position',
+  'headquarters pass': 'Headquarters Pass',
+  'gordon pass': 'Headquarters Pass',         // Gordon Ryan signature
+  'leg pummeling': 'Leg Pummeling',
+  'leg pummel': 'Leg Pummeling',
+  'standing pass': 'Standing Guard Pass',
+  'standing guard pass': 'Standing Guard Pass',
 
-  // Escapes
+  // ==========================================================
+  // ESCAPES
+  // ==========================================================
   'hip escape': 'Hip Escape',
   'shrimp': 'Hip Escape',
   'shrimping': 'Hip Escape',
   'elbow escape': 'Elbow Knee Escape',
   'elbow knee': 'Elbow Knee Escape',
+  'elbow knee escape': 'Elbow Knee Escape',
   'upa': 'Bridge Escape',
   'bridge escape': 'Bridge Escape',
+  'bridge': 'Bridge Escape',
+  'bridging': 'Bridge Escape',
   'trap and roll': 'Bridge Escape',
+  'bump and roll': 'Bridge Escape',
   'technical standup': 'Technical Stand Up',
   'tech standup': 'Technical Stand Up',
+  'technical stand up': 'Technical Stand Up',
   'back escape': 'Back Escape',
   'side control escape': 'Side Control Escape',
   'mount escape': 'Mount Escape',
+  'knee elbow escape': 'Knee Elbow Escape',
+  'running escape': 'Running Escape',         // Marcelo Garcia style
+  'ghost escape': 'Ghost Escape',
+  'frame escape': 'Frame Escape',
+  'leg drag escape': 'Leg Drag Escape',
+  'submission defense': 'Submission Defense',
+  'sub defense': 'Submission Defense',
+  'guard recovery': 'Guard Recovery',
+  'guard retention': 'Guard Retention',
+  'pummel escape': 'Pummel Escape',
 
-  // Takedowns
+  // ==========================================================
+  // TAKEDOWNS - BJJ & WRESTLING CROSSOVER
+  // ==========================================================
   'double leg': 'Double Leg Takedown',
+  'double leg takedown': 'Double Leg Takedown',
+  'blast double': 'Blast Double',             // Wrestling term
   'single leg': 'Single Leg Takedown',
+  'single leg takedown': 'Single Leg Takedown',
+  'low single': 'Low Single Leg',             // Wrestling term
+  'sweep single': 'Sweep Single',             // Wrestling term
+  'high crotch': 'High Crotch',               // Wrestling term
+  'high c': 'High Crotch',
   'ankle pick': 'Ankle Pick',
   'arm drag': 'Arm Drag',
+  'arm drag takedown': 'Arm Drag',
   'snap down': 'Snap Down',
+  'snapdown': 'Snap Down',
   'duck under': 'Duck Under',
+  'go behind': 'Go Behind',                   // Wrestling term
+  'knee tap': 'Knee Tap',                     // Wrestling term
+  'inside trip': 'Inside Trip',               // Wrestling term
+  'outside trip': 'Outside Trip',             // Wrestling term
+  'body fold': 'Body Fold Takedown',          // Wrestling term
+  'body lock takedown': 'Body Lock Takedown',
+  'lateral drop': 'Lateral Drop',             // Wrestling term
+  'suplex': 'Suplex',                         // Wrestling term
+  'arm spin': 'Arm Spin',                     // Wrestling term
   'fireman carry': "Fireman's Carry",
   "fireman's carry": "Fireman's Carry",
+  'firemans carry': "Fireman's Carry",
+  'collar drag': 'Collar Drag',
+  'sleeve drag': 'Sleeve Drag',
+  'pull guard': 'Guard Pull',
+  'guard pull': 'Guard Pull',
+  'pulling guard': 'Guard Pull',
+  'jump guard': 'Guard Pull',
+
+  // Judo throws (common in BJJ)
   'o goshi': 'O Goshi',
   'ogoshi': 'O Goshi',
   'hip throw': 'Hip Throw',
   'foot sweep': 'Foot Sweep',
   'osoto gari': 'Osoto Gari',
+  'osoto': 'Osoto Gari',
+  'ouchi gari': 'Ouchi Gari',
+  'ouchi': 'Ouchi Gari',
+  'kouchi gari': 'Kouchi Gari',
+  'kouchi': 'Kouchi Gari',
   'uchi mata': 'Uchi Mata',
   'seoi nage': 'Seoi Nage',
   'drop seoi': 'Drop Seoi Nage',
+  'drop seoi nage': 'Drop Seoi Nage',
   'harai goshi': 'Harai Goshi',
+  'sasae': 'Sasae Tsurikomi Ashi',
+  'tomoe nage': 'Tomoe Nage',                 // Sacrifice throw
+  'tani otoshi': 'Tani Otoshi',
+  'sumi gaeshi': 'Sumi Gaeshi',
+  'tai otoshi': 'Tai Otoshi',
+  'koshi guruma': 'Koshi Guruma',
 
-  // Guard Types (when mentioned as technique focus)
+  // ==========================================================
+  // STANDING CLINCH & WRESTLING POSITIONS
+  // ==========================================================
+  'clinch': 'Clinch',
+  'over under clinch': 'Over Under Clinch',
+  'fifty fifty clinch': 'Fifty Fifty Clinch',
+  'collar tie': 'Collar Tie',
+  'front headlock': 'Front Headlock',
+  'front head': 'Front Headlock',
+  'sprawl': 'Sprawl',
+  'sprawling': 'Sprawl',
+  'wizzer': 'Whizzer',                        // Common misspelling
+  'whizzer': 'Whizzer',
+  'overhook': 'Overhook',
+  'underhook': 'Underhook',
+  'pummeling': 'Pummeling',
+  'pummel': 'Pummeling',
+  'two on one': 'Two on One',
+  'russian tie': 'Russian Tie',
+  'russian': 'Russian Tie',
+  'wrist control': 'Wrist Control',
+
+  // ==========================================================
+  // GUARD TYPES & POSITIONS
+  // ==========================================================
   'closed guard': 'Closed Guard',
+  'full guard': 'Closed Guard',
   'open guard': 'Open Guard',
   'half guard': 'Half Guard',
+  'bottom half': 'Half Guard',
+  'top half': 'Half Guard Top',
+  'z guard': 'Z Guard',
+  'z-guard': 'Z Guard',
+  'knee shield': 'Knee Shield',
+  'knee shield half': 'Knee Shield',
+  'deep half': 'Deep Half Guard',
+  'deep half guard': 'Deep Half Guard',
   'butterfly guard': 'Butterfly Guard',
+  'butterfly': 'Butterfly Guard',
+  'seated guard': 'Seated Guard',
+  'sitting guard': 'Seated Guard',
+  'shin to shin': 'Shin to Shin Guard',
+  'shin on shin': 'Shin to Shin Guard',
   'spider guard': 'Spider Guard',
+  'spider': 'Spider Guard',
   'lasso guard': 'Lasso Guard',
+  'lasso': 'Lasso Guard',
   'de la riva': 'De La Riva Guard',
+  'de la riva guard': 'De La Riva Guard',
+  'dela riva': 'De La Riva Guard',            // Common misspelling
+  'delariva': 'De La Riva Guard',             // Common misspelling
   'dlr': 'De La Riva Guard',
+  'dlr guard': 'De La Riva Guard',
   'reverse de la riva': 'Reverse De La Riva',
   'rdlr': 'Reverse De La Riva',
+  'reverse dlr': 'Reverse De La Riva',
   'x guard': 'X Guard',
-  'single leg x': 'Single Leg X',
-  'slx': 'Single Leg X',
-  'deep half': 'Deep Half Guard',
+  'x-guard': 'X Guard',
+  'k guard': 'K Guard',
+  'k-guard': 'K Guard',
+  'collar sleeve': 'Collar Sleeve Guard',
+  'collar sleeve guard': 'Collar Sleeve Guard',
   'rubber guard': 'Rubber Guard',
   'worm guard': 'Worm Guard',
   'lapel guard': 'Lapel Guard',
-  '50/50': 'Fifty-Fifty',
-  'fifty fifty': 'Fifty-Fifty',
-  'saddle': 'Saddle Position',
-  'ashi garami': 'Ashi Garami',
-  'inside sankaku': 'Inside Sankaku',
-  'outside sankaku': 'Outside Sankaku',
-  '411': 'Inside Sankaku',
-  'honeyhole': 'Inside Sankaku',
+  'squid guard': 'Squid Guard',
+  'mantis guard': 'Mantis Guard',
+  'koala guard': 'Koala Guard',
+  'williams guard': 'Williams Guard',
+  'body lock guard': 'Body Lock Guard',
 
-  // Transitions & Movements
+  // ==========================================================
+  // 10TH PLANET SYSTEM (Major US following)
+  // ==========================================================
+  'mission control': 'Mission Control',
+  'zombie': 'Zombie',
+  'crackhead control': 'Crackhead Control',
+  'twister side control': 'Twister Side Control',
+  'dead orchard': 'Dead Orchard',
+  'carni': 'Carni',
+  'gangster lean': 'Gangster Lean',
+  'stomp': 'Stomp',
+  'london': 'London',
+  'chill dog': 'Chill Dog',
+  'dogfight': 'Dogfight',                     // Also used in general half guard
+  'dog fight': 'Dogfight',
+  'plan b': 'Plan B',
+  'monkey mount': 'Monkey Mount',
+  'jiu claw': 'Jiu Claw',
+  'meathook': 'Meathook',
+  'meat hook': 'Meathook',
+  'spiderweb': 'Spiderweb',                   // Armbar position
+  'spider web': 'Spiderweb',
+
+  // ==========================================================
+  // TOP POSITIONS
+  // ==========================================================
+  'mount': 'Mount',
+  'full mount': 'Mount',
+  'mounted': 'Mount',
+  'high mount': 'High Mount',
+  'low mount': 'Low Mount',
+  's mount': 'S Mount',
+  'technical mount': 'Technical Mount',
+  'tech mount': 'Technical Mount',
+  'gift wrap mount': 'Gift Wrap Mount',
+  'modified mount': 'Modified Mount',
+  'reverse mount': 'Reverse Mount',
+  'side control': 'Side Control',
+  'side mount': 'Side Control',
+  'cross side': 'Side Control',
+  'hundred kilos': 'Side Control',
+  '100 kilos': 'Side Control',
+  'kesa gatame': 'Kesa Gatame',
+  'scarf hold': 'Kesa Gatame',
+  'reverse kesa': 'Reverse Kesa Gatame',
+  'knee on belly': 'Knee on Belly',
+  'knee on chest': 'Knee on Belly',
+  'kob': 'Knee on Belly',
+  'north south': 'North South',
+  'n/s': 'North South',
+  'back control': 'Back Control',
+  'back mount': 'Back Control',
+  'rear mount': 'Back Control',
+  'the back': 'Back Control',
+  'seatbelt': 'Seatbelt Grip',
+  'seat belt': 'Seatbelt Grip',
+  'body triangle': 'Body Triangle',
+  'crucifix': 'Crucifix',
+  'turtle': 'Turtle',
+  'front turtle': 'Front Turtle',
+  'crab ride': 'Crab Ride',                   // Modern back control entry
+
+  // ==========================================================
+  // TRANSITIONS & MOVEMENTS
+  // ==========================================================
   'berimbolo': 'Berimbolo',
-  'kiss of the dragon': 'Kiss of the Dragon',
+  'berimobolo': 'Berimbolo',                  // Common misspelling
+  'bolo': 'Berimbolo',                        // Common abbreviation
+  'bolos': 'Berimbolo',
+  "bolo'd": 'Berimbolo',
+  "berimbolo'd": 'Berimbolo',
   'granby roll': 'Granby Roll',
+  'granby': 'Granby Roll',
   'inversion': 'Inversion',
+  'inverting': 'Inversion',
   'back take': 'Back Take',
   'taking the back': 'Back Take',
+  'took the back': 'Back Take',
   'mount transition': 'Mount Transition',
-  'knee on belly': 'Knee on Belly',
-  'kob': 'Knee on Belly',
-  'north south': 'North South Position',
+  'matrix': 'Matrix Back Take',               // Modern back take
+  'hip switch': 'Hip Switch',
+  'truck roll': 'Truck Roll',
+  'twister hook': 'Twister Hook',
+  'gift wrap': 'Gift Wrap',
+  'giftwrap': 'Gift Wrap',
+  'false reap': 'False Reap',
+
+  // ==========================================================
+  // FUNDAMENTALS & CONCEPTS
+  // ==========================================================
+  'frames': 'Framing',
+  'framing': 'Framing',
+  'frame': 'Framing',
+  'posture': 'Posture',
+  'posturing': 'Posture',
+  'base': 'Base',
+  'pressure': 'Pressure',
+  'weight distribution': 'Weight Distribution',
+  'grip fighting': 'Grip Fighting',
+  'grip fight': 'Grip Fighting',
+  'grip breaks': 'Grip Breaks',
+  'breaking grips': 'Grip Breaks',
+  'guard pass defense': 'Guard Retention',
+  'sweep defense': 'Sweep Defense',
+  'positional escapes': 'Positional Escapes',
+
+  // ==========================================================
+  // COMMON ABBREVIATIONS & SLANG
+  // ==========================================================
+  'sub': 'Submission',
+  'subs': 'Submissions',
+  'gi choke': 'Collar Choke',
 };
+
+// ==========================================================
+// ACTION VERBS FOR CONTEXT DETECTION
+// ==========================================================
+// These help distinguish: drilled vs. attempted vs. landed vs. received
+
+const OFFENSIVE_SUCCESS_VERBS = [
+  'submitted', 'tapped', 'finished', 'caught', 'got',
+  'swept', 'passed', 'mounted', 'took back', 'took the back',
+  'choked', 'armbarred', 'triangled', 'kimuraed',
+  'heel hooked', 'toe holded', 'ankle locked',
+  "berimbolo'd", "bolo'd",
+  'subbed',  // "I subbed him"
+];
+
+const DEFENSIVE_FAILURE_VERBS = [
+  'got caught', 'got tapped', 'got submitted', 'got swept',
+  'got passed', 'got mounted', 'lost position', 'gave up',
+  'tapped to', 'tapped out to', 'had to tap',
+  'got subbed',
+];
 ```
 
 #### 1.2 Technique Extraction Algorithm
@@ -574,75 +981,239 @@ function extractCountFromContext(text: string, index: number): number | null {
 
 ```typescript
 const POSITIONS: Record<string, string> = {
-  // Top positions
+  // ==========================================================
+  // TOP POSITIONS
+  // ==========================================================
   'mount': 'Mount',
   'full mount': 'Mount',
   'mounted': 'Mount',
+  'high mount': 'High Mount',
+  'low mount': 'Low Mount',
+  's mount': 'S Mount',
+  'technical mount': 'Technical Mount',
+  'tech mount': 'Technical Mount',
+  'gift wrap mount': 'Gift Wrap Mount',
+
   'side control': 'Side Control',
   'side mount': 'Side Control',
   'cross side': 'Side Control',
   'hundred kilos': 'Side Control',
+  '100 kilos': 'Side Control',
+  'kesa gatame': 'Kesa Gatame',
+  'scarf hold': 'Kesa Gatame',
+  'reverse kesa': 'Reverse Kesa Gatame',
+
   'knee on belly': 'Knee on Belly',
   'knee on chest': 'Knee on Belly',
   'kob': 'Knee on Belly',
+
   'north south': 'North South',
   'n/s': 'North South',
+
   'back control': 'Back Control',
   'back mount': 'Back Control',
   'rear mount': 'Back Control',
   'back': 'Back Control',
-  'turtle': 'Turtle',
-  'crucifix': 'Crucifix',
+  'the back': 'Back Control',
+  'seatbelt': 'Back Control',           // Seatbelt implies back control
+  'body triangle': 'Back Control',      // Body triangle implies back
 
-  // Guard positions
+  'turtle': 'Turtle',
+  'front turtle': 'Front Turtle',
+  'crucifix': 'Crucifix',
+  'crab ride': 'Crab Ride',
+  'twister side control': 'Twister Side Control',
+
+  // ==========================================================
+  // GUARD POSITIONS
+  // ==========================================================
   'closed guard': 'Closed Guard',
   'full guard': 'Closed Guard',
+  'guard': 'Guard',                     // Generic
+
   'open guard': 'Open Guard',
+
   'half guard': 'Half Guard',
   'bottom half': 'Half Guard',
   'top half': 'Half Guard Top',
-  'butterfly': 'Butterfly Guard',
-  'spider': 'Spider Guard',
-  'lasso': 'Lasso Guard',
-  'de la riva': 'De La Riva',
-  'dlr': 'De La Riva',
-  'x guard': 'X Guard',
-  'single leg x': 'Single Leg X',
-  'deep half': 'Deep Half Guard',
   'z guard': 'Z Guard',
+  'z-guard': 'Z Guard',
   'knee shield': 'Knee Shield',
-  '50/50': 'Fifty-Fifty',
-  'fifty fifty': 'Fifty-Fifty',
+  'knee shield half': 'Knee Shield',
+  'deep half': 'Deep Half Guard',
+  'deep half guard': 'Deep Half Guard',
+  'lockdown': 'Lockdown',
+  'lock down': 'Lockdown',
+  'dogfight': 'Dogfight',
+  'dog fight': 'Dogfight',
 
-  // Leg entanglements
+  'butterfly': 'Butterfly Guard',
+  'butterfly guard': 'Butterfly Guard',
+
+  'seated guard': 'Seated Guard',
+  'sitting guard': 'Seated Guard',
+  'shin to shin': 'Shin to Shin Guard',
+  'shin on shin': 'Shin to Shin Guard',
+
+  'spider': 'Spider Guard',
+  'spider guard': 'Spider Guard',
+  'lasso': 'Lasso Guard',
+  'lasso guard': 'Lasso Guard',
+
+  'de la riva': 'De La Riva',
+  'dela riva': 'De La Riva',
+  'delariva': 'De La Riva',
+  'dlr': 'De La Riva',
+  'reverse de la riva': 'Reverse De La Riva',
+  'rdlr': 'Reverse De La Riva',
+  'reverse dlr': 'Reverse De La Riva',
+
+  'x guard': 'X Guard',
+  'x-guard': 'X Guard',
+  'single leg x': 'Single Leg X',
+  'slx': 'Single Leg X',
+
+  'k guard': 'K Guard',
+  'k-guard': 'K Guard',
+
+  'collar sleeve': 'Collar Sleeve Guard',
+  'collar sleeve guard': 'Collar Sleeve Guard',
+
+  'rubber guard': 'Rubber Guard',
+  'mission control': 'Mission Control',   // 10th Planet
+
+  'worm guard': 'Worm Guard',
+  'lapel guard': 'Lapel Guard',
+  'squid guard': 'Squid Guard',
+
+  'body lock guard': 'Body Lock Guard',
+  'williams guard': 'Williams Guard',
+
+  // ==========================================================
+  // LEG ENTANGLEMENT POSITIONS
+  // ==========================================================
   'ashi': 'Ashi Garami',
   'ashi garami': 'Ashi Garami',
-  'saddle': 'Inside Sankaku',
-  'inside sankaku': 'Inside Sankaku',
-  '411': 'Inside Sankaku',
   'outside ashi': 'Outside Ashi',
+  'cross ashi': 'Cross Ashi',
   'irimi ashi': 'Cross Ashi',
 
-  // Neutral
+  'saddle': 'Inside Sankaku',
+  'inside sankaku': 'Inside Sankaku',
+  'inside position': 'Inside Sankaku',
+  '411': 'Inside Sankaku',
+  'four eleven': 'Inside Sankaku',
+  'honeyhole': 'Inside Sankaku',
+  'honey hole': 'Inside Sankaku',
+  'outside sankaku': 'Outside Sankaku',
+
+  '50/50': 'Fifty-Fifty',
+  'fifty fifty': 'Fifty-Fifty',
+  '50 50': 'Fifty-Fifty',
+  'backside 50 50': 'Backside Fifty-Fifty',
+
+  '80/20': '80/20 Position',
+  '80 20': '80/20 Position',
+  'game over': 'Game Over Position',
+
+  'truck': 'Truck Position',
+  'the truck': 'Truck Position',
+
+  // ==========================================================
+  // STANDING / NEUTRAL POSITIONS
+  // ==========================================================
   'standing': 'Standing',
+  'on the feet': 'Standing',
+
   'clinch': 'Clinch',
   'over under clinch': 'Over Under Clinch',
+  'collar tie': 'Collar Tie',
+  'front headlock': 'Front Headlock',
+  'front head': 'Front Headlock',
+  'russian tie': 'Russian Tie',
+  'two on one': 'Two on One',
+
+  // ==========================================================
+  // TRANSITIONAL POSITIONS
+  // ==========================================================
+  'headquarters': 'Headquarters Position',
+  'hq': 'Headquarters Position',
+  'combat base': 'Combat Base',
+  'spiderweb': 'Spiderweb',           // Armbar finishing position
 };
 
-const POSITION_CONTEXTS: Record<string, 'top' | 'bottom' | 'neutral'> = {
+const POSITION_CONTEXTS: Record<string, 'top' | 'bottom' | 'neutral' | 'leg_entanglement'> = {
+  // Top positions
   'Mount': 'top',
+  'High Mount': 'top',
+  'Low Mount': 'top',
+  'S Mount': 'top',
+  'Technical Mount': 'top',
+  'Gift Wrap Mount': 'top',
   'Side Control': 'top',
+  'Kesa Gatame': 'top',
+  'Reverse Kesa Gatame': 'top',
   'Knee on Belly': 'top',
   'North South': 'top',
   'Back Control': 'top',
+  'Turtle': 'top',  // When attacking turtle
+  'Front Turtle': 'top',
+  'Crucifix': 'top',
+  'Crab Ride': 'top',
+  'Twister Side Control': 'top',
+  'Headquarters Position': 'top',
+  'Spiderweb': 'top',
+
+  // Bottom/Guard positions
   'Closed Guard': 'bottom',
+  'Guard': 'bottom',
   'Open Guard': 'bottom',
-  'Half Guard': 'bottom', // Can be top but usually bottom
+  'Half Guard': 'bottom',
+  'Z Guard': 'bottom',
+  'Knee Shield': 'bottom',
+  'Deep Half Guard': 'bottom',
+  'Lockdown': 'bottom',
+  'Dogfight': 'bottom',  // Usually from bottom half
   'Butterfly Guard': 'bottom',
+  'Seated Guard': 'bottom',
+  'Shin to Shin Guard': 'bottom',
   'Spider Guard': 'bottom',
+  'Lasso Guard': 'bottom',
   'De La Riva': 'bottom',
+  'Reverse De La Riva': 'bottom',
+  'X Guard': 'bottom',
+  'Single Leg X': 'bottom',
+  'K Guard': 'bottom',
+  'Collar Sleeve Guard': 'bottom',
+  'Rubber Guard': 'bottom',
+  'Mission Control': 'bottom',
+  'Worm Guard': 'bottom',
+  'Lapel Guard': 'bottom',
+  'Squid Guard': 'bottom',
+  'Body Lock Guard': 'bottom',
+  'Williams Guard': 'bottom',
+
+  // Leg entanglements (neither clearly top nor bottom)
+  'Ashi Garami': 'leg_entanglement',
+  'Outside Ashi': 'leg_entanglement',
+  'Cross Ashi': 'leg_entanglement',
+  'Inside Sankaku': 'leg_entanglement',
+  'Outside Sankaku': 'leg_entanglement',
+  'Fifty-Fifty': 'leg_entanglement',
+  'Backside Fifty-Fifty': 'leg_entanglement',
+  '80/20 Position': 'leg_entanglement',
+  'Game Over Position': 'leg_entanglement',
+  'Truck Position': 'leg_entanglement',
+
+  // Neutral
   'Standing': 'neutral',
   'Clinch': 'neutral',
+  'Over Under Clinch': 'neutral',
+  'Collar Tie': 'neutral',
+  'Front Headlock': 'neutral',
+  'Russian Tie': 'neutral',
+  'Two on One': 'neutral',
+  'Combat Base': 'neutral',
 };
 ```
 
