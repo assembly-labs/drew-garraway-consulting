@@ -6,7 +6,7 @@
 
 ## iOS Handoff Status
 
-**Status: 95% READY FOR HANDOFF** | [Full Assessment](./IOS_HANDOFF_READINESS_ASSESSMENT.md)
+**Status: 95% READY FOR HANDOFF** | [Full Assessment](../project/handoff/DATA_AI_HANDOFF_ASSESSMENT.md)
 
 All critical AI specifications are complete:
 - LLM system prompts for all belt levels
@@ -82,7 +82,7 @@ This folder contains strategy and specification documents for:
 | `CONVERSATION_DESIGN_FOUNDATION.md` | Active | Voice/chatbot conversation design principles |
 | `VOICE_LOGGING_CONVERSATION_DESIGN.md` | Active | Voice logger conversation flow specification |
 | `INFOGRAPHIC_STRATEGY.md` | Active | Charts, infographics, and data visualization strategy |
-| `IOS_HANDOFF_READINESS_ASSESSMENT.md` | **Ready** | Handoff readiness evaluation — **95% complete, ready for iOS development** |
+| [`DATA_AI_HANDOFF_ASSESSMENT.md`](../project/handoff/DATA_AI_HANDOFF_ASSESSMENT.md) | **Ready** | Handoff readiness evaluation — **95% complete, ready for iOS development** |
 | `index.html` | Active | Interactive infographic preview/demo |
 
 ### Merged/Deprecated

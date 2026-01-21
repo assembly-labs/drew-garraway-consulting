@@ -16,24 +16,81 @@ This library powers multiple features in the BJJ Journal app:
 
 ```
 bjj-techniques/
-├── README.md                    # This file
-├── bjj-techniques-research      # Source research document (490+ techniques)
-└── bjj_library/                 # CSV files
-    ├── guard_closed.csv         # CG_001-030 (30 techniques)
-    ├── guard_half.csv           # HG_001-030 (30 techniques)
-    ├── guard_open.csv           # OG_001-045 (45 techniques)
-    ├── mount.csv                # MT_001-020 (20 techniques)
-    ├── side_control.csv         # SC_001-025 (25 techniques)
-    ├── back_control.csv         # BC_001-020 (20 techniques)
-    ├── knee_on_belly.csv        # KB_001-015 (15 techniques)
-    ├── north_south.csv          # NS_001-015 (15 techniques)
-    ├── turtle.csv               # TT_001-018 (18 techniques)
-    ├── standing_takedowns.csv   # TD_001-025 (25 techniques)
-    ├── standing_clinch.csv      # CL_001-020 (20 techniques)
-    ├── guard_passing.csv        # GP_001-030 (30 techniques)
-    ├── leg_entanglements.csv    # LE_001-018 (18 techniques)
-    └── submissions_master.csv   # SM_001-050 (50 techniques)
+├── README.md                      # This file
+├── bjj-techniques-research        # Source research document (490+ techniques)
+│
+├── VIDEO LIBRARY
+├── videos.csv                     # Master video list (53 unique videos, deduplicated)
+├── technique_video_map.csv        # Video-to-technique mappings (170 mappings)
+├── technique_videos.csv           # Legacy video mappings (deprecated)
+├── CONTENT_REVIEW_CHECKLIST.md    # Human content review workflow
+│
+└── bjj_library/                   # Technique CSV files
+    ├── guard_closed.csv           # CG_001-030 (30 techniques)
+    ├── guard_half.csv             # HG_001-030 (30 techniques)
+    ├── guard_open.csv             # OG_001-045 (45 techniques)
+    ├── mount.csv                  # MT_001-020 (20 techniques)
+    ├── side_control.csv           # SC_001-025 (25 techniques)
+    ├── back_control.csv           # BC_001-020 (20 techniques)
+    ├── knee_on_belly.csv          # KB_001-015 (15 techniques)
+    ├── north_south.csv            # NS_001-015 (15 techniques)
+    ├── turtle.csv                 # TT_001-018 (18 techniques)
+    ├── standing_takedowns.csv     # TD_001-025 (25 techniques)
+    ├── standing_clinch.csv        # CL_001-020 (20 techniques)
+    ├── guard_passing.csv          # GP_001-030 (30 techniques)
+    ├── leg_entanglements.csv      # LE_001-018 (18 techniques)
+    └── submissions_master.csv     # SM_001-050 (50 techniques)
 ```
+
+---
+
+## Video Content Library
+
+The video library provides curated instructional videos for technique recommendations. The library uses a normalized structure to eliminate duplicate video entries.
+
+### videos.csv
+
+Master list of unique videos (53 videos, deduplicated by YouTube ID):
+
+| Column | Description |
+|--------|-------------|
+| video_id | Unique ID: VID_001, VID_002, etc. |
+| youtube_id | 11-character YouTube video ID |
+| video_type | instructional, quicktip, competition, chain, mindset, lifestyle |
+| instructor | Instructor name |
+| title | Video title |
+| duration_seconds | Video length |
+| belt_level_min/max | Belt appropriateness range |
+| gi_nogi | gi, nogi, or both |
+| position_category | Primary position covered |
+| difficulty_score | 1-10 rating (null if not reviewed) |
+| addresses_struggles | Pipe-delimited struggle categories |
+| teaches_defense_for | Pipe-delimited submission types for defense videos |
+| tags | Comma-delimited searchable tags |
+| verified | true if human-reviewed |
+
+### technique_video_map.csv
+
+Maps videos to techniques (many-to-many relationship, 170 mappings):
+
+| Column | Description |
+|--------|-------------|
+| video_id | References videos.csv |
+| technique_id | References bjj_library technique_id |
+| relevance_score | 1-100, how relevant video is to technique |
+| is_primary | true if main technique covered in video |
+
+### Content Review Process
+
+See `CONTENT_REVIEW_CHECKLIST.md` for the human review workflow:
+- Priority order for reviewing videos
+- Difficulty score calibration guidelines
+- Struggle category mapping process
+- Progress tracking template
+
+**Full specification:** `/docs/data-and-ai/VIDEO_CONTENT_LIBRARY_SPEC.md`
+
+---
 
 ## CSV Schema
 
@@ -321,9 +378,9 @@ The techniques in this library were compiled from:
 ## Future Enhancements
 
 Potential additions to consider:
-- [ ] Video URL column for technique demonstrations
+- [x] Video URL column for technique demonstrations — **DONE:** See `videos.csv` and `technique_video_map.csv`
+- [x] Difficulty rating independent of belt level — **DONE:** `difficulty_score` (1-10) in `videos.csv`
 - [ ] Prerequisite techniques column for curriculum sequencing
-- [ ] Difficulty rating (1-5) independent of belt level
 - [ ] Competition frequency data
 - [ ] Body type suitability indicators
 - [ ] Drill/warm-up variations

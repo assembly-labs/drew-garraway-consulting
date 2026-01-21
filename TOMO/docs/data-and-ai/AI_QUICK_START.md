@@ -237,7 +237,7 @@ For agentic coding partners and developers needing full technical specifications
 
 ## Handoff Status
 
-See **[IOS_HANDOFF_READINESS_ASSESSMENT.md](./IOS_HANDOFF_READINESS_ASSESSMENT.md)** for the complete documentation readiness assessment.
+See **[DATA_AI_HANDOFF_ASSESSMENT.md](../project/handoff/DATA_AI_HANDOFF_ASSESSMENT.md)** for the complete documentation readiness assessment.
 
 **Status: 95% Ready — All critical AI specs are complete.**
 

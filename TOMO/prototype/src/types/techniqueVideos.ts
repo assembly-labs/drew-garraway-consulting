@@ -3,9 +3,149 @@
  *
  * Types for the technique video library and recommendation system.
  * Videos are sourced from curated YouTube content by priority instructors.
+ *
+ * @see /docs/data-and-ai/VIDEO_CONTENT_LIBRARY_SPEC.md for full schema documentation
  */
 
 import type { BeltLevel, ProficiencyLevel } from './database';
+
+// ===========================================
+// NEW VIDEO SCHEMA (videos.csv)
+// ===========================================
+
+/**
+ * Content type for videos
+ */
+export type ContentType =
+  | 'instructional'  // Full technique breakdown (5-15 min)
+  | 'quicktip'       // Short tip or detail (1-3 min)
+  | 'competition'    // Competition footage with analysis
+  | 'chain'          // Technique combination/chain
+  | 'mindset'        // Mental game content
+  | 'lifestyle';     // Training lifestyle content
+
+/**
+ * Struggle categories that videos can address
+ * Used for recommendation matching from journal entries
+ */
+export type StruggleCategory =
+  | 'guard_retention'
+  | 'guard_passing'
+  | 'mount_escape'
+  | 'side_control_escape'
+  | 'back_escape'
+  | 'submission_defense'
+  | 'sweep_timing'
+  | 'takedown_defense'
+  | 'top_pressure'
+  | 'submission_finish'
+  | 'half_guard_retention'
+  | 'underhook_battle'
+  | 'framing'
+  | 'posture'
+  | 'leg_lock_defense';
+
+/**
+ * Submission types for defense video matching
+ */
+export type SubmissionType =
+  | 'armbar'
+  | 'triangle'
+  | 'kimura'
+  | 'americana'
+  | 'guillotine'
+  | 'rear_naked_choke'
+  | 'heel_hook'
+  | 'ankle_lock'
+  | 'toe_hold'
+  | 'kneebar'
+  | 'darce'
+  | 'anaconda'
+  | 'north_south_choke'
+  | 'omoplata';
+
+/**
+ * Master video record (matches videos.csv schema)
+ *
+ * This is the new canonical Video type. Each YouTube video appears exactly once.
+ * Videos are mapped to techniques via VideoTechniqueMapping.
+ *
+ * @see /docs/domain-knowledge/bjj-techniques/videos.csv
+ */
+export interface Video {
+  /** Unique ID: VID_001, VID_002, etc. */
+  video_id: string;
+
+  /** YouTube video ID (11 characters) */
+  youtube_id: string;
+
+  /** Type of instructional content */
+  video_type: ContentType;
+
+  /** Instructor name */
+  instructor: string;
+
+  /** Video title (human-readable) */
+  title: string;
+
+  /** Video length in seconds */
+  duration_seconds: number;
+
+  /** Minimum belt level for recommendation */
+  belt_level_min: BeltLevel;
+
+  /** Maximum belt level for recommendation */
+  belt_level_max: BeltLevel;
+
+  /** Training type applicability */
+  gi_nogi: 'gi' | 'nogi' | 'both';
+
+  /** Primary position category */
+  position_category: PositionCategory;
+
+  /** Difficulty rating 1-10 (null if not yet reviewed) */
+  difficulty_score: number | null;
+
+  /** Struggle categories this video helps with (pipe-delimited in CSV) */
+  addresses_struggles: StruggleCategory[];
+
+  /** Submission types this video teaches defense for (pipe-delimited in CSV) */
+  teaches_defense_for: SubmissionType[];
+
+  /** Searchable tags (comma-delimited in CSV) */
+  tags: string[];
+
+  /** Whether video has been reviewed by content curator */
+  verified: boolean;
+
+  /** ISO timestamp of creation */
+  created_at: string;
+
+  /** ISO timestamp of last update */
+  updated_at: string;
+}
+
+/**
+ * Video-to-technique mapping (matches technique_video_map.csv schema)
+ *
+ * Represents the many-to-many relationship between videos and techniques.
+ * A video can cover multiple techniques, and a technique can have multiple videos.
+ *
+ * @see /docs/domain-knowledge/bjj-techniques/technique_video_map.csv
+ */
+export interface VideoTechniqueMapping {
+  /** References videos.csv video_id */
+  video_id: string;
+
+  /** References bjj_library technique_id (e.g., CG_001) */
+  technique_id: string;
+
+  /** How relevant the video is to this technique (1-100) */
+  relevance_score: number;
+
+  /** True if this is the main technique covered in the video */
+  is_primary: boolean;
+}
 
 // ===========================================
 // VIDEO TYPES
@@ -55,6 +195,17 @@ export type Instructor =
 
 /**
  * A single video entry for a technique
+ *
+ * @deprecated Use {@link Video} and {@link VideoTechniqueMapping} instead.
+ * This interface is maintained for backward compatibility but will be removed
+ * in a future version. The new schema separates video metadata from technique
+ * mappings to eliminate duplication.
+ *
+ * Migration guide:
+ * - Video metadata (youtube_id, instructor, title, duration_seconds) → Video
+ * - technique_id relationship → VideoTechniqueMapping
+ *
+ * @see /docs/data-and-ai/VIDEO_CONTENT_LIBRARY_SPEC.md for new schema
  */
 export interface TechniqueVideo {
   technique_id: string;        // References bjj-techniques CSV technique_id
