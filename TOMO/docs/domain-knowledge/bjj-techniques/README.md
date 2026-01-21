@@ -21,9 +21,10 @@ bjj-techniques/
 │
 ├── VIDEO LIBRARY
 ├── videos.csv                     # Master video list (53 unique videos, deduplicated)
-├── technique_video_map.csv        # Video-to-technique mappings (170 mappings)
-├── technique_videos.csv           # Legacy video mappings (deprecated)
+├── technique_video_map.csv        # Video-to-technique mappings (169 mappings)
 ├── CONTENT_REVIEW_CHECKLIST.md    # Human content review workflow
+├── _archived/                     # Deprecated files (do not use)
+│   └── technique_videos.csv       # Legacy flat format, superseded by normalized CSVs
 │
 └── bjj_library/                   # Technique CSV files
     ├── guard_closed.csv           # CG_001-030 (30 techniques)

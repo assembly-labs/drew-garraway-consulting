@@ -1,7 +1,8 @@
 /**
  * Technique Videos Data
  *
- * Video catalog for technique library, parsed from technique_videos.csv
+ * Video catalog for technique library.
+ * Source data: /docs/domain-knowledge/bjj-techniques/videos.csv + technique_video_map.csv
  * Videos are curated from priority instructors per brand philosophy.
  */
 
@@ -17,12 +18,14 @@ import type { BeltLevel } from '../types/database';
 import type { ProficiencyLevel } from '../types/database';
 
 // ===========================================
-// VIDEO DATA (from technique_videos.csv)
+// VIDEO DATA
 // ===========================================
 
 /**
  * All curated technique videos
- * Source: /internal-docs/BJJ Ranking Criteria/bjj-techniques/technique_videos.csv
+ * Hardcoded for prototype. For iOS, import from normalized CSVs:
+ * - /docs/domain-knowledge/bjj-techniques/videos.csv (53 unique videos)
+ * - /docs/domain-knowledge/bjj-techniques/technique_video_map.csv (169 mappings)
  */
 export const techniqueVideos: TechniqueVideo[] = [
   // Closed Guard
