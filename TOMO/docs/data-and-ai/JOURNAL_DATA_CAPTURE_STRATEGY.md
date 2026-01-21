@@ -316,8 +316,8 @@ stat modules       responses           interventions
 
 ## Related Documents
 
-- `/internal-docs/research/data-requirements-analysis.md` — Four pillars framework
-- `/internal-docs/research/USER_PERSONAS_AND_RESEARCH.md` — Persona details
-- `/internal-docs/personas/PERSONA_PROFILES.md` — Full persona specifications
-- `/internal-docs/data-and-ai/AI_EXTRACTION_SPEC.md` — Technical extraction details (TODO)
-- `/internal-docs/data-and-ai/VOICE_TRANSCRIPTION_SPEC.md` — AssemblyAI integration (TODO)
+- `/docs/research/data-requirements-analysis.md` — Four pillars framework
+- `/docs/research/USER_PERSONAS_AND_RESEARCH.md` — Persona details
+- `/docs/personas/PERSONA_PROFILES.md` — Full persona specifications
+- `/docs/data-and-ai/AI_EXTRACTION_SPEC.md` — Technical extraction details, confidence scoring, 180+ BJJ vocabulary
+- `/docs/data-and-ai/VOICE_TRANSCRIPTION_SPEC.md` — AssemblyAI integration, accuracy targets, cost management

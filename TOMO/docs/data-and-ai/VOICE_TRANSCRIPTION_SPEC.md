@@ -35,6 +35,107 @@ TOMO uses AssemblyAI for voice-to-text transcription. This document covers:
 
 ---
 
+## Recording Specifications
+
+### Audio Parameters
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| **Maximum duration** | 5 minutes (300 sec) | Cost control; longer recordings indicate rambling |
+| **Typical duration** | 60-90 seconds | Matches 90-second friction budget |
+| **Minimum useful** | 10 seconds | Anything shorter lacks meaningful content |
+| **Sample rate** | 16kHz minimum | AssemblyAI requirement for accuracy |
+| **Format** | AAC (preferred) or WAV | AAC for smaller files, WAV for max quality |
+| **Channels** | Mono | Sufficient for voice; reduces file size |
+| **Bitrate** | 128kbps (AAC) | Good balance of quality and size |
+
+### File Size Estimates
+
+| Duration | AAC (128kbps) | WAV (16kHz) |
+|----------|---------------|-------------|
+| 30 sec | ~480 KB | ~960 KB |
+| 60 sec | ~960 KB | ~1.9 MB |
+| 90 sec | ~1.4 MB | ~2.9 MB |
+| 5 min | ~4.8 MB | ~9.6 MB |
+
+### Auto-Stop Behavior
+
+```typescript
+interface RecordingConfig {
+  maxDuration: 300;           // 5 minutes hard cap
+  silenceTimeout: 3000;       // 3 seconds of silence triggers stop prompt
+  silenceThreshold: -40;      // dB level considered silence
+  showTimerAt: 240;           // Show countdown at 4 minutes
+}
+```
+
+---
+
+## Integration Approach: Batch vs Streaming
+
+### Recommendation: **Post-Recording Batch** (Not Real-Time Streaming)
+
+For TOMO's voice logging use case, **batch processing after recording completes** is the right choice.
+
+### Why Batch Over Streaming
+
+| Factor | Batch (Recommended) | Streaming |
+|--------|---------------------|-----------|
+| **Complexity** | Simple REST API | WebSocket management |
+| **Recording length** | 60-90 sec typical | Better for 5+ min |
+| **Accuracy** | Full context = better | Incremental = worse |
+| **Error handling** | Retry whole request | Complex reconnection |
+| **Offline support** | Queue and sync | Not possible |
+| **Custom vocabulary** | Full support | Limited support |
+| **Cost** | Same | Same |
+| **User context** | Post-training, okay with 5-10 sec wait | Would need instant feedback |
+
+### When Streaming Would Be Better
+
+Streaming transcription makes sense when:
+- User needs real-time feedback (e.g., live captioning)
+- Recordings are very long (5+ minutes)
+- Latency is more critical than accuracy
+
+**None of these apply to TOMO's session logging flow.** Users record for 60-90 seconds, then wait for processing. A 5-10 second processing wait is acceptable given they're about to review and edit anyway.
+
+### Latency Requirements
+
+| Phase | Target | Maximum |
+|-------|--------|---------|
+| Recording end → Upload start | <500ms | 1s |
+| Upload (90 sec audio) | <3s | 5s |
+| AssemblyAI processing | 5-8s | 15s |
+| **Total transcription** | **<10s** | 20s |
+| LLM extraction | 2-4s | 8s |
+| **End-to-end** | **<15s** | 30s |
+
+### Implementation: Batch Flow
+
+```typescript
+async function processVoiceRecording(audioUri: string): Promise<SessionData> {
+  // 1. Upload audio (non-blocking UI shows "Processing...")
+  const audioUrl = await uploadAudio(audioUri);
+
+  // 2. Submit transcription job
+  const transcriptId = await submitTranscription(audioUrl);
+
+  // 3. Poll for completion (with timeout)
+  const transcript = await pollTranscription(transcriptId, {
+    maxAttempts: 30,
+    intervalMs: 1000,
+    timeoutMs: 30000,
+  });
+
+  // 4. Extract entities
+  const sessionData = await extractEntities(transcript.text);
+
+  return sessionData;
+}
+```
+
+---
+
 ## Integration Architecture
 
 ```
@@ -412,8 +513,16 @@ export const BJJ_VOCABULARY: string[] = [
   ...GENERAL_TERMS,
 ];
 
-// Total: ~180 terms
+// Note: This is a simplified subset. See AI_EXTRACTION_SPEC.md for the
+// complete 450+ term vocabulary including:
+// - Modern leg lock system (Danaher era)
+// - 10th Planet terminology
+// - Wrestling crossover terms
+// - Common misspellings
+// - No-gi slang
+//
 // AssemblyAI limit: 1000 words per request
+// Full vocabulary is well within this limit
 ```
 
 ---
@@ -572,10 +681,240 @@ const syncQueuedRecordings = async () => {
 
 ---
 
+## Testing Approach
+
+### Testing BJJ-Specific Vocabulary
+
+The primary challenge is ensuring AssemblyAI accurately transcribes BJJ terminology. Testing requires a systematic approach.
+
+### Test Corpus Requirements
+
+| Category | Minimum Samples | Coverage |
+|----------|-----------------|----------|
+| **Technique names** | 50 recordings | All major submissions, sweeps, passes |
+| **Position names** | 30 recordings | Guards, top positions, leg entanglements |
+| **Mixed terminology** | 20 recordings | Natural speech with multiple BJJ terms |
+| **Accent variation** | 20 recordings | Different English accents |
+| **Audio quality** | 20 recordings | Gym noise, car, outdoor, quiet room |
+
+### Sample Test Recordings
+
+Create recordings that specifically test vocabulary accuracy:
+
+**Test Case 1: Submission Chain**
+```
+"Rolled with Marcus today, caught him with a darce from front headlock.
+Almost had an anaconda earlier but he defended well. Finished Jake
+with a bow and arrow choke from the back."
+```
+Expected extraction: `darce`, `anaconda`, `bow and arrow choke`, `front headlock`
+
+**Test Case 2: Guard Work**
+```
+"Spent the whole class on de la riva. Worked the kiss of the dragon
+to berimbolo sequence, then some baby bolo entries from single leg x."
+```
+Expected extraction: `de la riva`, `kiss of the dragon`, `berimbolo`, `baby bolo`, `single leg x`
+
+**Test Case 3: Leg Lock Terminology**
+```
+"Did positional sparring from the saddle. Hit two inside heel hooks
+and one outside heel hook. Got caught in a toe hold because I was
+too focused on the kneebar."
+```
+Expected extraction: `saddle`, `inside heel hook`, `outside heel hook`, `toe hold`, `kneebar`
+
+**Test Case 4: Japanese/Portuguese Terms**
+```
+"Professor taught osoto gari into kesa gatame. Drilled the escape
+to butterfly guard, then uchi mata counter."
+```
+Expected extraction: `osoto gari`, `kesa gatame`, `butterfly guard`, `uchi mata`
+
+### Accuracy Measurement
+
+```typescript
+interface TranscriptionTest {
+  audioFile: string;
+  groundTruth: string;           // Human-verified transcript
+  expectedTerms: string[];       // BJJ terms that should be detected
+  audioQuality: 'clean' | 'noisy' | 'muffled';
+  accent?: string;
+}
+
+interface TestResult {
+  wordErrorRate: number;         // Overall WER
+  termAccuracy: number;          // % of BJJ terms correctly transcribed
+  missedTerms: string[];         // Terms that were mistranscribed
+  falsePositives: string[];      // Incorrectly detected terms
+}
+
+// WER calculation
+function calculateWER(reference: string, hypothesis: string): number {
+  const refWords = reference.toLowerCase().split(/\s+/);
+  const hypWords = hypothesis.toLowerCase().split(/\s+/);
+
+  // Levenshtein distance at word level
+  const distance = levenshteinDistance(refWords, hypWords);
+  return distance / refWords.length;
+}
+
+// BJJ term accuracy
+function calculateTermAccuracy(
+  expected: string[],
+  transcript: string
+): { accuracy: number; missed: string[] } {
+  const lowerTranscript = transcript.toLowerCase();
+  const found = expected.filter(term =>
+    lowerTranscript.includes(term.toLowerCase())
+  );
+
+  return {
+    accuracy: found.length / expected.length,
+    missed: expected.filter(t => !found.includes(t)),
+  };
+}
+```
+
+### Testing Checklist
+
+#### Pre-Integration Testing
+- [ ] Create test corpus with 50+ recordings
+- [ ] Verify AssemblyAI account and API key
+- [ ] Test basic transcription without custom vocabulary
+- [ ] Add BJJ vocabulary and compare accuracy
+- [ ] Document baseline accuracy metrics
+
+#### Integration Testing
+- [ ] Test expo-av recording → upload flow
+- [ ] Verify audio format compatibility (AAC, WAV)
+- [ ] Test upload with various file sizes
+- [ ] Verify polling mechanism with timeouts
+- [ ] Test error handling (network failure, API errors)
+
+#### Offline Testing
+- [ ] Record while offline
+- [ ] Verify local queue persistence
+- [ ] Test sync when connection restored
+- [ ] Verify order-preservation in queue
+- [ ] Test queue with 5+ pending recordings
+
+#### Performance Testing
+- [ ] Measure upload latency (various connection speeds)
+- [ ] Measure transcription latency (30s, 60s, 90s recordings)
+- [ ] Test under rate limiting conditions
+- [ ] Measure battery impact of recording
+
+### Continuous Monitoring
+
+After launch, track these metrics:
+
+```typescript
+interface TranscriptionMetrics {
+  // Performance
+  avgLatencyMs: number;
+  p95LatencyMs: number;
+
+  // Quality
+  userEditRate: number;          // % of sessions where user edited transcript
+  avgEditsPerSession: number;
+
+  // Reliability
+  failureRate: number;
+  retryRate: number;
+  offlineQueueSize: number;
+
+  // Cost
+  avgAudioLengthSec: number;
+  monthlyTranscriptionMinutes: number;
+  monthlyCost: number;
+}
+```
+
+---
+
+## iOS Implementation Notes
+
+### expo-av Recording Setup
+
+```typescript
+import { Audio } from 'expo-av';
+
+const RECORDING_OPTIONS: Audio.RecordingOptions = {
+  android: {
+    extension: '.m4a',
+    outputFormat: Audio.AndroidOutputFormat.MPEG_4,
+    audioEncoder: Audio.AndroidAudioEncoder.AAC,
+    sampleRate: 16000,
+    numberOfChannels: 1,
+    bitRate: 128000,
+  },
+  ios: {
+    extension: '.m4a',
+    outputFormat: Audio.IOSOutputFormat.MPEG4AAC,
+    audioQuality: Audio.IOSAudioQuality.HIGH,
+    sampleRate: 16000,
+    numberOfChannels: 1,
+    bitRate: 128000,
+  },
+  web: {
+    mimeType: 'audio/webm',
+    bitsPerSecond: 128000,
+  },
+};
+
+async function startRecording(): Promise<Audio.Recording> {
+  await Audio.requestPermissionsAsync();
+  await Audio.setAudioModeAsync({
+    allowsRecordingIOS: true,
+    playsInSilentModeIOS: true,
+  });
+
+  const recording = new Audio.Recording();
+  await recording.prepareToRecordAsync(RECORDING_OPTIONS);
+  await recording.startAsync();
+
+  return recording;
+}
+```
+
+### Upload to AssemblyAI
+
+```typescript
+async function uploadAudio(localUri: string): Promise<string> {
+  const fileInfo = await FileSystem.getInfoAsync(localUri);
+
+  if (!fileInfo.exists) {
+    throw new Error('Recording file not found');
+  }
+
+  // Read file as base64
+  const base64 = await FileSystem.readAsStringAsync(localUri, {
+    encoding: FileSystem.EncodingType.Base64,
+  });
+
+  // Upload to AssemblyAI
+  const response = await fetch('https://api.assemblyai.com/v2/upload', {
+    method: 'POST',
+    headers: {
+      'Authorization': ASSEMBLYAI_API_KEY,
+      'Content-Type': 'application/octet-stream',
+    },
+    body: Buffer.from(base64, 'base64'),
+  });
+
+  const { upload_url } = await response.json();
+  return upload_url;
+}
+```
+
+---
+
 ## Related Documents
 
 | Document | Purpose |
 |----------|---------|
+| `AI_EXTRACTION_SPEC.md` | LLM entity extraction from transcripts |
 | `VOICE_LOGGING_CONVERSATION_DESIGN.md` | Full conversation flow and extraction rules |
 | `DATA_AND_AI_BY_PAGE.md` | How transcription feeds into Journal page |
 | `JOURNAL_DATA_CAPTURE_STRATEGY.md` | Three-tier data capture strategy |

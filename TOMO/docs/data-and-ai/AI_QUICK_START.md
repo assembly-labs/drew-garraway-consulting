@@ -6,12 +6,13 @@
 
 ## 5-Minute Overview
 
-TOMO uses AI/LLM technology for three core capabilities:
+TOMO uses AI/LLM technology for four core capabilities:
 
 | Capability | What It Does | Key Document |
 |------------|--------------|--------------|
-| **Voice Extraction** | Transcribe + extract structured data from voice logs | `VOICE_TRANSCRIPTION_SPEC.md` |
+| **Voice Extraction** | Transcribe + extract structured data from voice logs | `AI_EXTRACTION_SPEC.md`, `VOICE_TRANSCRIPTION_SPEC.md` |
 | **Insight Generation** | Generate personalized, belt-appropriate coaching text | `INSIGHTS_GENERATION_SPEC.md` |
+| **Content Recommendations** | Personalized video suggestions based on training data | `TECHNIQUE_RECOMMENDATION_ENGINE.md` |
 | **Pattern Detection** | Identify training patterns, risks, and breakthroughs | `DATA_AND_AI_BY_PAGE.md` |
 
 ---
@@ -109,6 +110,9 @@ const FORBIDDEN = [
 │   ├── AI_QUICK_START.md            ← YOU ARE HERE
 │   ├── DATA_AND_AI_BY_PAGE.md       ← Per-page AI behavior
 │   ├── INSIGHTS_GENERATION_SPEC.md  ← LLM prompts & payloads
+│   ├── AI_EXTRACTION_SPEC.md        ← NLP pipeline & BJJ vocabulary
+│   ├── TECHNIQUE_RECOMMENDATION_ENGINE.md ← Video recommendation algorithm
+│   ├── VIDEO_CONTENT_LIBRARY_SPEC.md ← Video schema & curation
 │   ├── VOICE_TRANSCRIPTION_SPEC.md  ← AssemblyAI integration
 │   └── VOICE_LOGGING_CONVERSATION_DESIGN.md ← Voice UX flow
 ├── product/
@@ -121,9 +125,39 @@ const FORBIDDEN = [
 │   ├── feature-adaptations.ts       ← UI/AI config per belt
 │   ├── risk-signals.ts              ← Dropout detection
 │   └── journal-patterns.ts          ← Text analysis patterns
+├── data/
+│   └── techniqueVideos.ts           ← Video catalog & recommendations
 └── hooks/
     └── useBeltPersonalization.ts    ← React hook for all above
 ```
+
+---
+
+## Deep Dive Documents
+
+For agentic coding partners and developers needing full technical specifications:
+
+### Voice & Extraction
+
+| Document | Purpose |
+|----------|---------|
+| **[AI_EXTRACTION_SPEC.md](./AI_EXTRACTION_SPEC.md)** | Full NLP pipeline: entity extraction, confidence scoring, 450+ BJJ vocabulary |
+| **[VOICE_TRANSCRIPTION_SPEC.md](./VOICE_TRANSCRIPTION_SPEC.md)** | AssemblyAI integration, cost management, audio processing |
+| **[VOICE_LOGGING_CONVERSATION_DESIGN.md](./VOICE_LOGGING_CONVERSATION_DESIGN.md)** | Complete voice logging UX flow |
+
+### Content Recommendations
+
+| Document | Purpose |
+|----------|---------|
+| **[TECHNIQUE_RECOMMENDATION_ENGINE.md](./TECHNIQUE_RECOMMENDATION_ENGINE.md)** | Scoring algorithm, AI prompts for personalization, belt filtering |
+| **[VIDEO_CONTENT_LIBRARY_SPEC.md](./VIDEO_CONTENT_LIBRARY_SPEC.md)** | Video schema, curation criteria, maintenance process |
+
+### Insights & Coaching
+
+| Document | Purpose |
+|----------|---------|
+| **[INSIGHTS_GENERATION_SPEC.md](./INSIGHTS_GENERATION_SPEC.md)** | System prompts, data payloads, validation rules |
+| **[DATA_AND_AI_BY_PAGE.md](./DATA_AND_AI_BY_PAGE.md)** | Per-page AI behavior and data contracts |
 
 ---
 
@@ -160,6 +194,17 @@ const FORBIDDEN = [
 
 **Full spec:** `DATA_AND_AI_BY_PAGE.md` → Insights section
 
+### Task: Generate Video Recommendations
+
+1. Extract struggles from recent journal entries
+2. Map struggles to technique IDs using pattern matching
+3. Apply belt-level difficulty filtering
+4. Score videos using the recommendation algorithm
+5. Generate reason text for each recommendation
+6. Display "For You" section
+
+**Full spec:** `TECHNIQUE_RECOMMENDATION_ENGINE.md`
+
 ---
 
 ## Checklist Before Shipping AI Features
@@ -184,7 +229,18 @@ const FORBIDDEN = [
 | "How do belt levels change behavior?" | `BELT_INTEGRATION_SPEC.md` |
 | "What's the voice transcription flow?" | `VOICE_TRANSCRIPTION_SPEC.md` |
 | "How do I detect dropout risk?" | `DATA_AND_AI_BY_PAGE.md` |
+| "How do I extract entities from voice?" | `AI_EXTRACTION_SPEC.md` |
+| "How does the recommendation algorithm work?" | `TECHNIQUE_RECOMMENDATION_ENGINE.md` |
+| "How do I add or curate videos?" | `VIDEO_CONTENT_LIBRARY_SPEC.md` |
 
 ---
 
-*Last updated: January 2026*
+## Handoff Status
+
+See **[IOS_HANDOFF_READINESS_ASSESSMENT.md](./IOS_HANDOFF_READINESS_ASSESSMENT.md)** for the complete documentation readiness assessment.
+
+**Status: 95% Ready — All critical AI specs are complete.**
+
+---
+
+*Last updated: January 21, 2026*
