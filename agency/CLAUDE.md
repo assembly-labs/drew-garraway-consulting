@@ -8,13 +8,13 @@ Agency Brewing is a craft brewery concept targeting LA's creative professionals.
 
 ## Style and Tone
 
-The brand voice balances **aspirational pitch-deck polish with cynical, self-aware humor** that defines advertising culture. We speak to creatives who've lived agency life—the late nights, the scope creep, the "minor revisions."
+The brand voice balances **aspirational pitch-deck polish with self-aware humor** that defines advertising culture. We speak to creatives who've lived agency life—the late nights, the scope creep, the "minor revisions."
 
 ---
 
 # The Complete Lexicon of Ad-Speak for Creative Insiders
 
-For a craft brewery targeting LA's creative professionals, fluency in agency vernacular is brand currency. This glossary delivers **both the aspirational pitch-deck polish and the cynical, self-aware humor** that defines advertising culture—from Madison Avenue's golden age through today's Slack-driven agency life. The terminology spans serious professional jargon, ironic insider mockery, and everything in between, giving your brand voice authentic texture that resonates with creatives who've lived these expressions.
+For a craft brewery targeting LA's creative professionals, fluency in agency vernacular is brand currency. This glossary delivers **aspirational pitch-deck polish and self-aware humor** that defines advertising culture—from Madison Avenue's golden age through today's Slack-driven agency life. The terminology spans serious professional jargon and everything in between, giving your brand voice authentic texture that resonates with creatives who've lived these expressions.
 
 ---
 
@@ -92,47 +92,6 @@ Today's agency language reflects remote work culture, startup influence, and Gen
 - **"Hop on a huddle"** — Quick Slack audio call
 - **"OOO"** — Out of Office
 - **"Per my last email"** — Passive-aggressive classic meaning "I already answered this"
-
----
-
-## The Cynical Insider Glossary: Gallows Humor and Self-Aware Mockery
-
-This is where the authentic agency voice lives—the sarcastic, self-deprecating humor that bonds creative professionals over shared frustrations. **Gold for a brewery brand targeting this audience.**
-
-### Client Feedback Translations
-
-The universally mocked disconnect between what clients say and what they mean:
-
-| What the client says | What the agency hears |
-|---------------------|----------------------|
-| **"Make it POP!"** | "The design is fine. I simply have a very short attention span." |
-| **"Just a few small changes..."** | "Change everything." |
-| **"I'll know it when I see it"** | "I have terrible taste and I'd rather you accidentally stumble upon my aesthetic." |
-| **"Make it classic but modern"** | "I'm throwing keywords to sound like I know what I'm talking about." |
-| **"Do what you think is best"** | "I won't tell you what I like, but I definitely won't like whatever you do." |
-| **"This doesn't feel right"** | "This design has misaligned my chakras." |
-
-### The Immortal "MAKE THE LOGO BIGGER"
-
-So universal it spawned **a song by an agency band**, Chrome browser extensions for "instant logo biggification," and endless memes. It's the rallying cry of graphic designers everywhere—and perfect brewery coaster material.
-
-Related client-isms: "Can you jazz it up?" / "Make it like Apple" / "Make it go viral"
-
-### Scope Creep Survival Language
-
-- **"One more thing..."** — The phrase signaling scope creep is incoming
-- **"Just a small tweak"** — Code for complete overhaul
-- **"While you're at it..."** — Scope creep's opening salvo
-- **"The Scope Creep"** — Client archetype who "thinks they're getting a Rolls-Royce for the price of a bicycle"
-- **"Scope creep is like a virus. It spreads quickly and can kill your project."** — Paul Boag, quoted as gallows wisdom
-
-### Buzzword Bingo
-
-These terms are fair game for humor—**but only when you're actually using them in context**. The jest comes from deploying the buzzword while acknowledging its absurdity. Don't just list them or mock them in isolation.
-
-**Classic bingo card terms:** Pivot, Low-hanging fruit, Blue-sky thinking, Thought leadership, Best in class, Paradigm shift, Think outside the box, Holistic approach, Game-changing, AI-powered, Data-driven, Helicopter view
-
-**Example of proper usage:** "Let's circle back after this beer. Or maybe just stay here."
 
 ---
 
@@ -334,14 +293,10 @@ The vocabulary of big ideas, strategic brilliance, and award-winning work—used
 
 **For authentic resonance with LA creative professionals:**
 
-1. **Lead with cynical self-awareness** — Creatives bond over shared frustrations; "Make the logo bigger" energy signals insider status
+1. **Mix eras thoughtfully** — Mad Men nostalgia ("three-martini lunch") pairs well with modern irony ("bandwidth," "circle back")
 
-2. **Mix eras thoughtfully** — Mad Men nostalgia ("three-martini lunch") pairs well with modern irony ("bandwidth," "circle back")
+2. **Know when terms are sincere vs. ironic** — "Circle back" is always mocked; "the work has legs" is genuine respect
 
-3. **Know when terms are sincere vs. ironic** — "Circle back" is always mocked; "the work has legs" is genuine respect
+3. **Respect the craft vocabulary** — Terms like "brief," "concepting," "executions," and "comps" signal genuine industry fluency
 
-4. **Embrace gallows humor** — Scope creep, death by committee, and "it's agency life" resignation are bonding agents
-
-5. **Respect the craft vocabulary** — Terms like "brief," "concepting," "executions," and "comps" signal genuine industry fluency
-
-This lexicon gives your brewery brand voice the authentic texture to connect with creatives who've lived these expressions—whether they're celebrating a pitch win or drowning the sorrows of yet another round of "minor revisions."
+This lexicon gives your brewery brand voice the authentic texture to connect with creatives who've lived these expressions—whether they're celebrating a pitch win or commiserating over yet another round of "minor revisions."
