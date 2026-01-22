@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS for interactive map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 </head>
 <body>
     <!-- App Container -->
@@ -26,6 +28,13 @@
                 Discover LA
                 <span class="title-icon">☀️</span>
             </h1>
+            <button class="map-toggle-btn" id="map-toggle-btn" aria-label="Open explore map">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span class="map-btn-text">Explore Map</span>
+            </button>
             <div class="header-progress" id="header-progress">
                 <span class="progress-text" id="progress-text">0/10</span>
                 <div class="progress-ring">
@@ -70,6 +79,26 @@
 
                 <div class="sessions-grid" id="sessions-grid">
                     <!-- Session cards will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Map View -->
+            <section id="map-view" class="view map-view">
+                <div class="map-header">
+                    <h2>Explore California & LA</h2>
+                    <p>Discover locations as you complete sessions! <span id="map-unlock-count">0</span> of <span id="map-total-count">0</span> locations unlocked.</p>
+                </div>
+                <div class="map-container">
+                    <div id="leaflet-map" class="leaflet-map"></div>
+                    <div class="map-legend" id="map-legend">
+                        <h4>Sessions Completed</h4>
+                        <div class="legend-items" id="legend-items">
+                            <!-- Dynamically populated -->
+                        </div>
+                    </div>
+                </div>
+                <div class="map-instructions">
+                    <p>Click on pins to learn about each location. Complete more sessions to unlock new places!</p>
                 </div>
             </section>
 
@@ -184,7 +213,10 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="sessions.js"></script>
+    <script src="map-data.js"></script>
+    <script src="video-data.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

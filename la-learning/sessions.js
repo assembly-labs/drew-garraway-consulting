@@ -241,113 +241,116 @@ const SESSIONS_DATA = [
         id: 'session-3',
         number: 3,
         title: 'LA Sports Teams',
-        subtitle: 'From Lakers to Dodgers and beyond',
+        subtitle: 'Rams, Dodgers, and Championship Glory',
         duration: 8,
-        icon: '🏀',
+        icon: '🏈',
         sections: [
             {
-                heading: 'Basketball: Lakers & Clippers',
-                icon: '🏀',
-                paragraphs: [
-                    "Los Angeles is home to two NBA basketball teams, and the most famous one is the Los Angeles Lakers! The Lakers have won 17 NBA championships, making them one of the most successful teams in basketball history. They play at the Crypto.com Arena (which used to be called Staples Center) in downtown LA.",
-                    "Some of the greatest basketball players ever have worn the purple and gold Lakers jersey. Magic Johnson amazed fans with his incredible passing skills in the 1980s. Kobe Bryant became a legend, playing his entire 20-year career with the Lakers and winning 5 championships. Shaquille O'Neal was an unstoppable force in the early 2000s. Today, players like LeBron James continue the Lakers' winning tradition!",
-                    "The LA Clippers are the city's other NBA team, and they share the arena with the Lakers. While they haven't won as many championships, the Clippers have become very competitive in recent years. Having two basketball teams means LA fans can watch NBA games almost every night during basketball season!"
-                ]
-            },
-            {
-                heading: 'Baseball: The Dodgers',
-                icon: '⚾',
-                paragraphs: [
-                    "The Los Angeles Dodgers are one of the most beloved baseball teams in America! They play at Dodger Stadium, which is the largest baseball stadium in the world by seating capacity, holding over 56,000 fans. The stadium sits on a hill in Chavez Ravine with amazing views of the mountains and downtown LA.",
-                    "The Dodgers have a rich history going back to 1883 when they started in Brooklyn, New York. They moved to LA in 1958 and have won 7 World Series championships, including recent wins in 2020 and 2024! Famous Dodgers include Jackie Robinson, who bravely broke baseball's color barrier in 1947, and Sandy Koufax, one of the greatest pitchers ever."
-                ]
-            },
-            {
-                heading: 'Football, Hockey & Soccer',
+                heading: 'The Los Angeles Rams',
                 icon: '🏈',
                 paragraphs: [
-                    "Football fans in LA cheer for the Los Angeles Rams, who play at the incredible SoFi Stadium in Inglewood. This stadium is one of the most amazing in the world, with a massive video screen and a see-through roof! The Rams won the Super Bowl in 2022, bringing a championship to LA. The LA Chargers also play at SoFi Stadium.",
-                    "Hockey fans root for the LA Kings, who play at Crypto.com Arena. The Kings won the Stanley Cup in 2012 and 2014, making hockey very popular in sunny Southern California. For soccer, LA has three professional teams: the LA Galaxy (who have won 5 MLS Cups), LAFC (who won in 2022), and Angel City FC, a women's soccer team that started in 2022 with famous owners like actress Natalie Portman!",
-                    "With so many professional sports teams, Los Angeles truly is a sports lover's paradise. Whether you like basketball, baseball, football, hockey, or soccer, there's always a game to watch in LA!"
+                    "The Los Angeles Rams are one of the most exciting football teams in the NFL! In February 2022, the Rams won Super Bowl LVI right here in their home stadium, SoFi Stadium, beating the Cincinnati Bengals 23-20 in an incredible game. It was a dream come true for LA football fans!",
+                    "The Rams play at SoFi Stadium in Inglewood, which is the most amazing football stadium in the world. It cost $5 billion to build, making it the most expensive stadium ever constructed! The stadium has a giant see-through roof made of a special material called ETFE, and the Infinity Screen inside is as long as a football field and weighs 2.2 million pounds - that's heavier than three Boeing 747 airplanes!",
+                    "The Rams have a long history in Los Angeles. They first came to LA in 1946, then moved to St. Louis in 1995, and finally came back home to LA in 2016. Some of the greatest players in NFL history have been Rams, including the 'Fearsome Foursome' defensive line in the 1960s. In the Super Bowl winning team, stars like quarterback Matthew Stafford, wide receiver Cooper Kupp (who was the Super Bowl MVP!), and defensive tackle Aaron Donald led the team to victory.",
+                    "The Rams wear blue and yellow (sometimes called 'sol' which means sun in Spanish), honoring LA's sunny weather. Their helmet has the famous curled ram horns on the sides. On game days, SoFi Stadium fills with over 70,000 fans cheering 'Whose house? RAMS HOUSE!'"
+                ]
+            },
+            {
+                heading: 'The Los Angeles Dodgers',
+                icon: '⚾',
+                paragraphs: [
+                    "The Los Angeles Dodgers are one of the most legendary baseball teams in history! They play at Dodger Stadium in Chavez Ravine, which opened in 1962 and is the largest baseball stadium in the world. It can hold over 56,000 fans, and on game nights the stadium lights up beautifully against the LA skyline and San Gabriel Mountains.",
+                    "The Dodgers have won 7 World Series championships, including exciting wins in 2020 and 2024! The team has some of the best players in baseball today, like Mookie Betts, Freddie Freeman, and pitcher Clayton Kershaw, who has spent his whole career with the Dodgers. In 2024, Japanese superstar Shohei Ohtani joined the team in the biggest contract in sports history!",
+                    "The Dodgers have an incredibly important place in American history. In 1947, when the team was still in Brooklyn, New York, Jackie Robinson became the first African American to play Major League Baseball in the modern era. He faced terrible racism but showed incredible courage, becoming a hero and opening the door for all players of color. The Dodgers retired his number 42, and now every player in baseball wears #42 on Jackie Robinson Day each year.",
+                    "Going to a Dodgers game is a classic LA experience. Fans arrive early for batting practice, eat Dodger Dogs (the stadium sells over 2 million each season!), and stay for fireworks on Friday nights. The team's rivalry with the San Francisco Giants is one of the oldest and most intense in all of sports!"
+                ]
+            },
+            {
+                heading: 'More LA Sports: Lakers, Kings & Galaxy',
+                icon: '🏀',
+                paragraphs: [
+                    "Beyond football and baseball, LA has amazing teams in every sport! The Los Angeles Lakers are one of the most famous basketball teams in history, with 17 NBA championships. Legends like Magic Johnson, Kareem Abdul-Jabbar, Shaquille O'Neal, Kobe Bryant, and now LeBron James have worn the purple and gold. The LA Clippers are the other NBA team, and both play at Crypto.com Arena downtown.",
+                    "The LA Kings brought hockey to sunny Southern California and have won 2 Stanley Cups (2012 and 2014). For soccer fans, the LA Galaxy have won 5 MLS Cup championships - more than any other team! Stars like David Beckham helped make soccer popular in LA. There's also LAFC, a newer team that won the MLS Cup in 2022, and Angel City FC, a women's soccer team with celebrity owners.",
+                    "LA also hosts amazing college sports. USC and UCLA both play in Los Angeles and have legendary football and basketball programs. The Rose Bowl in Pasadena hosts the famous Rose Bowl Game every New Year's Day and was the site of many World Cup and Olympic soccer matches. With so many teams and world-class stadiums, Los Angeles truly is a sports paradise!"
                 ]
             }
         ],
         images: [
             {
-                src: 'https://images.pexels.com/photos/1752757/pexels-photo-1752757.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Basketball going through the hoop',
-                caption: 'Lakers and Clippers basketball!'
+                src: 'https://images.pexels.com/photos/270071/pexels-photo-270071.jpeg?auto=compress&cs=tinysrgb&w=800',
+                alt: 'Football stadium with bright lights',
+                caption: 'SoFi Stadium - Home of the LA Rams'
             },
             {
                 src: 'https://images.pexels.com/photos/269948/pexels-photo-269948.jpeg?auto=compress&cs=tinysrgb&w=800',
                 alt: 'Baseball stadium during evening game',
-                caption: 'Beautiful Dodger Stadium'
+                caption: 'Legendary Dodger Stadium'
             },
             {
-                src: 'https://images.pexels.com/photos/270071/pexels-photo-270071.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Football stadium aerial view',
-                caption: 'The amazing SoFi Stadium'
+                src: 'https://images.pexels.com/photos/1752757/pexels-photo-1752757.jpeg?auto=compress&cs=tinysrgb&w=800',
+                alt: 'Basketball going through the hoop',
+                caption: 'Lakers basketball action'
             },
             {
                 src: 'https://images.pexels.com/photos/3159812/pexels-photo-3159812.jpeg?auto=compress&cs=tinysrgb&w=800',
                 alt: 'Hockey players on the ice',
-                caption: 'LA Kings hockey action'
+                caption: 'LA Kings on the ice'
             },
             {
-                src: 'https://images.pexels.com/photos/46798/pexels-photo-46798.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Soccer ball on green field',
+                src: 'https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg?auto=compress&cs=tinysrgb&w=800',
+                alt: 'Soccer ball on green grass field',
                 caption: 'LA Galaxy and LAFC soccer'
             },
             {
                 src: 'https://images.pexels.com/photos/2466407/pexels-photo-2466407.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Excited fans at sports stadium',
-                caption: 'LA sports fans love their teams!'
+                alt: 'Excited fans cheering at sports stadium',
+                caption: 'LA fans are the best!'
             }
         ],
         facts: [
             {
                 title: 'Did You Know?',
-                content: 'Dodger Stadium is so big that it has its own zip code! It also serves over 2 million Dodger Dogs (hot dogs) every season.'
+                content: 'SoFi Stadium\'s giant video screen is called the "Infinity Screen" and has over 70,000 square feet of LED lights - it\'s the largest video board in sports!'
             },
             {
                 title: 'Did You Know?',
-                content: 'The Lakers got their name when they were in Minneapolis, Minnesota - the "Land of 10,000 Lakes." They kept the name when they moved to LA in 1960, even though LA doesn\'t have many lakes!'
+                content: 'The Dodgers have retired 11 jersey numbers, including #42 for Jackie Robinson. His number was retired across ALL of Major League Baseball - the only player to ever have that honor!'
             },
             {
                 title: 'Did You Know?',
-                content: 'SoFi Stadium cost about $5 billion to build, making it the most expensive stadium ever constructed in the world!'
+                content: 'The LA Rams\' Super Bowl LVI win in 2022 was the second time a team won the Super Bowl in their own home stadium. The first was the Tampa Bay Buccaneers just one year earlier!'
             }
         ],
         quiz: [
             {
-                question: 'How many NBA championships have the Lakers won?',
-                options: ['10', '13', '17', '20'],
+                question: 'When did the LA Rams win their most recent Super Bowl?',
+                options: ['2018', '2020', '2022', '2024'],
                 correctIndex: 2,
-                explanation: 'The Lakers have won 17 NBA championships, making them one of the most successful teams in basketball history!'
+                explanation: 'The Rams won Super Bowl LVI in February 2022, beating the Cincinnati Bengals 23-20 at SoFi Stadium!'
             },
             {
                 question: 'What is special about Dodger Stadium?',
-                options: ['It\'s the oldest stadium', 'It\'s the largest baseball stadium', 'It\'s indoors', 'It\'s on the beach'],
+                options: ['It\'s the newest stadium', 'It\'s the largest baseball stadium in the world', 'It\'s indoors', 'It\'s the smallest stadium'],
                 correctIndex: 1,
                 explanation: 'Dodger Stadium is the largest baseball stadium in the world by seating capacity, holding over 56,000 fans!'
             },
             {
-                question: 'Which LA football team won the Super Bowl in 2022?',
-                options: ['LA Chargers', 'LA Rams', 'LA Raiders', 'LA Trojans'],
-                correctIndex: 1,
-                explanation: 'The Los Angeles Rams won Super Bowl LVI in 2022 at their home stadium, SoFi Stadium!'
+                question: 'Who broke baseball\'s color barrier playing for the Dodgers in 1947?',
+                options: ['Sandy Koufax', 'Shohei Ohtani', 'Jackie Robinson', 'Mookie Betts'],
+                correctIndex: 2,
+                explanation: 'Jackie Robinson became the first African American to play in MLB in the modern era, showing incredible courage and becoming an American hero.'
             },
             {
-                question: 'Who was the Dodgers player who broke baseball\'s color barrier?',
-                options: ['Sandy Koufax', 'Kobe Bryant', 'Jackie Robinson', 'Magic Johnson'],
+                question: 'How much did SoFi Stadium cost to build?',
+                options: ['$1 billion', '$3 billion', '$5 billion', '$10 billion'],
                 correctIndex: 2,
-                explanation: 'Jackie Robinson bravely broke baseball\'s color barrier in 1947, becoming the first African American to play in Major League Baseball in the modern era.'
+                explanation: 'SoFi Stadium cost about $5 billion to build, making it the most expensive stadium ever constructed in the world!'
             },
             {
-                question: 'Which arena do the Lakers, Clippers, and Kings all share?',
-                options: ['SoFi Stadium', 'Dodger Stadium', 'Crypto.com Arena', 'Rose Bowl'],
+                question: 'Who was the MVP of the Rams\' Super Bowl LVI victory?',
+                options: ['Matthew Stafford', 'Aaron Donald', 'Cooper Kupp', 'Odell Beckham Jr.'],
                 correctIndex: 2,
-                explanation: 'The Crypto.com Arena (formerly Staples Center) is home to the Lakers, Clippers, and Kings!'
+                explanation: 'Wide receiver Cooper Kupp caught 8 passes for 92 yards and 2 touchdowns, including the game-winning score, earning Super Bowl MVP!'
             }
         ]
     },
@@ -635,8 +638,8 @@ const SESSIONS_DATA = [
                 caption: 'Colorful Venice Beach'
             },
             {
-                src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-                alt: 'Malibu beach with mountains',
+                src: 'https://images.pexels.com/photos/2422588/pexels-photo-2422588.jpeg?auto=compress&cs=tinysrgb&w=800',
+                alt: 'California beach with waves and coastline',
                 caption: 'Beautiful Malibu coastline'
             },
             {
@@ -645,9 +648,9 @@ const SESSIONS_DATA = [
                 caption: 'Surfing is huge in LA!'
             },
             {
-                src: 'https://images.unsplash.com/photo-1505245208761-ba872912fac0?w=800&q=80',
-                alt: 'Venice Canals with houses and palm trees',
-                caption: 'The unique Venice Canals'
+                src: 'https://images.pexels.com/photos/2901209/pexels-photo-2901209.jpeg?auto=compress&cs=tinysrgb&w=800',
+                alt: 'Palm trees and neighborhood in Los Angeles',
+                caption: 'The unique Venice neighborhood'
             }
         ],
         facts: [
@@ -1081,9 +1084,9 @@ const SESSIONS_DATA = [
         ],
         images: [
             {
-                src: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80',
-                alt: 'Beautiful parade float with roses',
-                caption: 'The famous Rose Parade'
+                src: 'https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=800',
+                alt: 'Beautiful roses in bloom',
+                caption: 'The famous Rose Parade features millions of flowers'
             },
             {
                 src: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&q=80',
@@ -1096,9 +1099,9 @@ const SESSIONS_DATA = [
                 caption: 'Charming Old Town Pasadena'
             },
             {
-                src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
-                alt: 'San Fernando Valley panoramic view',
-                caption: 'The San Fernando Valley'
+                src: 'https://images.pexels.com/photos/6447217/pexels-photo-6447217.jpeg?auto=compress&cs=tinysrgb&w=800',
+                alt: 'Movie studio production area',
+                caption: 'The San Fernando Valley is home to major film studios'
             },
             {
                 src: 'https://images.unsplash.com/photo-1515896769750-31548aa180ed?w=800&q=80',
