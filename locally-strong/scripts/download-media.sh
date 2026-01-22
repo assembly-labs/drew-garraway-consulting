@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Download free stock media for Locally Strong website
-# All videos are from Pexels.com - free for commercial use, no attribution required
+# Videos from Mixkit.co, Images from Unsplash.com - all free for commercial use
 #
 # IMPORTANT: Run this script to download media files after cloning.
-# Media files are not committed to git due to size.
+# Video files are not committed to git due to size.
 
 echo "=========================================="
 echo "Downloading free stock media for Locally Strong"
@@ -15,12 +15,12 @@ IMAGES_DIR="$(dirname "$0")/../images"
 mkdir -p "$IMAGES_DIR"
 cd "$IMAGES_DIR"
 
-# Hero video - Vegetables in market (works reliably)
-# Source: https://www.pexels.com/video/vegetables-in-the-market-2889410/
-# Credit: Sabel Blanco on Pexels
+# Hero video - Outdoor marketplace with people buying produce (slow motion)
+# Source: https://mixkit.co/free-stock-video/slow-motion-video-of-a-fruit-and-veggie-stand-991/
+# License: Mixkit Free License (commercial use OK)
 if [ ! -f "hero-video.mp4" ]; then
-  echo "[1/4] Downloading hero video (vegetables at market)..."
-  curl -L -o hero-video.mp4 "https://videos.pexels.com/video-files/2889410/2889410-hd_1920_1080_30fps.mp4"
+  echo "[1/4] Downloading hero video (farmers market with people)..."
+  curl -L -o hero-video.mp4 "https://assets.mixkit.co/videos/991/991-720.mp4"
 else
   echo "[1/4] Hero video already exists, skipping..."
 fi
@@ -106,9 +106,9 @@ echo "=========================================="
 echo "Download complete!"
 echo "=========================================="
 echo ""
-echo "Media credits (all free from Pexels.com, no attribution required):"
-echo "- Hero video: Sabel Blanco - https://www.pexels.com/video/2889410/"
-echo "- Photos: Various Pexels contributors"
+echo "Media credits (all free for commercial use, no attribution required):"
+echo "- Hero video: Mixkit - https://mixkit.co/free-stock-video/slow-motion-video-of-a-fruit-and-veggie-stand-991/"
+echo "- Photos: Unsplash and Pexels contributors"
 echo ""
 echo "Files saved to: $(pwd)"
 ls -lh
