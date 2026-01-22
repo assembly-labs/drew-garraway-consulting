@@ -1,0 +1,1178 @@
+/**
+ * DISCOVER LA - Main Application
+ * Interactive Learning Program for Kids
+ * Phase 2: Enhanced with sentence-level TTS highlighting
+ */
+
+// ============================================
+// APP STATE
+// ============================================
+const AppState = {
+    currentView: 'home', // 'home' or 'session'
+    currentSessionIndex: null,
+    completedSessions: [],
+    sessionScores: {},
+    lastSessionPosition: {}, // Track reading position per session
+    tts: {
+        isPlaying: false,
+        isPaused: false,
+        currentSentenceIndex: 0,
+        speed: 1,
+        sentences: [] // Flattened array of all sentences
+    },
+    quiz: {
+        currentAnswers: {},
+        submitted: false
+    }
+};
+
+// ============================================
+// LOCAL STORAGE
+// ============================================
+const Storage = {
+    KEY: 'discover-la-progress',
+
+    save() {
+        const data = {
+            completedSessions: AppState.completedSessions,
+            sessionScores: AppState.sessionScores,
+            lastSessionPosition: AppState.lastSessionPosition
+        };
+        localStorage.setItem(this.KEY, JSON.stringify(data));
+    },
+
+    load() {
+        try {
+            const data = localStorage.getItem(this.KEY);
+            if (data) {
+                const parsed = JSON.parse(data);
+                AppState.completedSessions = parsed.completedSessions || [];
+                AppState.sessionScores = parsed.sessionScores || {};
+                AppState.lastSessionPosition = parsed.lastSessionPosition || {};
+            }
+        } catch (e) {
+            console.error('Error loading progress:', e);
+        }
+    },
+
+    clear() {
+        localStorage.removeItem(this.KEY);
+        AppState.completedSessions = [];
+        AppState.sessionScores = {};
+        AppState.lastSessionPosition = {};
+    },
+
+    savePosition(sessionIndex, sentenceIndex) {
+        AppState.lastSessionPosition[sessionIndex] = sentenceIndex;
+        this.save();
+    }
+};
+
+// ============================================
+// UTILITIES
+// ============================================
+const Utils = {
+    /**
+     * Split text into sentences, handling common edge cases
+     */
+    splitIntoSentences(text) {
+        // Split on sentence-ending punctuation, but keep the punctuation
+        // Handle abbreviations like "U.S." and "Dr." by not splitting after single letters
+        const sentences = text.match(/[^.!?]+[.!?]+[\s]*/g) || [text];
+
+        return sentences
+            .map(s => s.trim())
+            .filter(s => s.length > 0);
+    },
+
+    /**
+     * Debounce function for performance
+     */
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    },
+
+    /**
+     * Generate unique ID
+     */
+    generateId() {
+        return 'id-' + Math.random().toString(36).substr(2, 9);
+    }
+};
+
+// ============================================
+// DOM ELEMENTS
+// ============================================
+const Elements = {
+    // Views
+    homeView: document.getElementById('home-view'),
+    sessionView: document.getElementById('session-view'),
+
+    // Header
+    backBtn: document.getElementById('back-btn'),
+    appTitle: document.getElementById('app-title'),
+    progressText: document.getElementById('progress-text'),
+    progressRingFill: document.getElementById('progress-ring-fill'),
+
+    // Home
+    overallProgressBar: document.getElementById('overall-progress-bar'),
+    overallProgressLabel: document.getElementById('overall-progress-label'),
+    sessionsGrid: document.getElementById('sessions-grid'),
+
+    // Session
+    sessionHeader: document.getElementById('session-header'),
+    sessionBadge: document.getElementById('session-badge'),
+    sessionTitle: document.getElementById('session-title'),
+    sessionSubtitle: document.getElementById('session-subtitle'),
+    sessionContent: document.getElementById('session-content'),
+
+    // TTS
+    ttsPlayBtn: document.getElementById('tts-play-btn'),
+    ttsSpeed: document.getElementById('tts-speed'),
+    ttsStatus: document.getElementById('tts-status'),
+
+    // Quiz
+    quizContainer: document.getElementById('quiz-container'),
+    quizResults: document.getElementById('quiz-results'),
+    resultsScore: document.getElementById('results-score'),
+    resultsMessage: document.getElementById('results-message'),
+
+    // Session Footer
+    completeSessionBtn: document.getElementById('complete-session-btn'),
+    reviewSessionBtn: document.getElementById('review-session-btn'),
+
+    // Celebration
+    celebrationOverlay: document.getElementById('celebration-overlay'),
+    celebrationScore: document.getElementById('celebration-score'),
+    celebrationProgress: document.getElementById('celebration-progress'),
+    celebrationMessage: document.getElementById('celebration-message'),
+    confettiContainer: document.getElementById('confetti-container'),
+    nextSessionBtn: document.getElementById('next-session-btn'),
+    backHomeBtn: document.getElementById('back-home-btn')
+};
+
+// ============================================
+// NAVIGATION
+// ============================================
+const Navigation = {
+    showHome() {
+        AppState.currentView = 'home';
+        AppState.currentSessionIndex = null;
+
+        // Stop TTS if playing
+        TTS.stop();
+
+        // Update UI
+        Elements.homeView.classList.add('active');
+        Elements.sessionView.classList.remove('active');
+        Elements.backBtn.classList.add('hidden');
+
+        // Refresh home content
+        UI.renderSessionCards();
+        UI.updateProgress();
+
+        // Announce for screen readers
+        this.announce('Returned to session list');
+    },
+
+    showSession(index) {
+        const session = SESSIONS_DATA[index];
+        if (!session) return;
+
+        // Check if session is unlocked
+        if (!this.isSessionUnlocked(index)) {
+            this.announce('This session is locked. Complete the previous session first.');
+            return;
+        }
+
+        AppState.currentView = 'session';
+        AppState.currentSessionIndex = index;
+
+        // Reset quiz state
+        AppState.quiz.currentAnswers = {};
+        AppState.quiz.submitted = false;
+
+        // Reset TTS state but check for saved position
+        const savedPosition = AppState.lastSessionPosition[index] || 0;
+        AppState.tts.currentSentenceIndex = savedPosition;
+        AppState.tts.isPlaying = false;
+        AppState.tts.isPaused = false;
+        AppState.tts.sentences = [];
+
+        // Update UI
+        Elements.homeView.classList.remove('active');
+        Elements.sessionView.classList.add('active');
+        Elements.backBtn.classList.remove('hidden');
+
+        // Render session content
+        UI.renderSession(session);
+        UI.updateProgress();
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Announce for screen readers
+        this.announce(`Starting Session ${session.number}: ${session.title}`);
+    },
+
+    isSessionUnlocked(index) {
+        if (index === 0) return true; // First session always unlocked
+        // Session is unlocked if previous session is completed
+        return AppState.completedSessions.includes(index - 1);
+    },
+
+    getSessionStatus(index) {
+        if (AppState.completedSessions.includes(index)) {
+            return 'completed';
+        }
+        if (this.isSessionUnlocked(index)) {
+            return 'current';
+        }
+        return 'locked';
+    },
+
+    // Screen reader announcements
+    announce(message) {
+        const announcement = document.createElement('div');
+        announcement.setAttribute('role', 'status');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.className = 'sr-only';
+        announcement.textContent = message;
+        document.body.appendChild(announcement);
+        setTimeout(() => announcement.remove(), 1000);
+    }
+};
+
+// ============================================
+// UI RENDERING
+// ============================================
+const UI = {
+    renderSessionCards() {
+        Elements.sessionsGrid.innerHTML = '';
+
+        SESSIONS_DATA.forEach((session, index) => {
+            const status = Navigation.getSessionStatus(index);
+            const card = this.createSessionCard(session, index, status);
+            Elements.sessionsGrid.appendChild(card);
+        });
+    },
+
+    createSessionCard(session, index, status) {
+        const card = document.createElement('article');
+        card.className = `session-card ${status}`;
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', status === 'locked' ? '-1' : '0');
+        card.setAttribute('aria-label', `Session ${session.number}: ${session.title}. Status: ${status === 'locked' ? 'Locked' : status === 'completed' ? 'Completed' : 'Available'}. Duration: ${session.duration} minutes.`);
+
+        // Check if there's a saved position for this session
+        const hasProgress = AppState.lastSessionPosition[index] > 0 && !AppState.completedSessions.includes(index);
+        const ctaText = status === 'completed' ? 'Review' : hasProgress ? 'Continue' : status === 'current' ? 'Start' : 'Locked';
+
+        const ctaIcon = status === 'locked'
+            ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>'
+            : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+
+        card.innerHTML = `
+            <div class="card-status">
+                ${status === 'completed' ? `
+                    <span class="status-icon completed" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <path d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </span>
+                ` : status === 'locked' ? `
+                    <span class="status-icon locked" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/>
+                        </svg>
+                    </span>
+                ` : ''}
+            </div>
+            <div class="card-header">
+                <div class="session-number" aria-hidden="true">${session.icon || session.number}</div>
+                <div class="card-title-area">
+                    <h4 class="card-title">${session.title}</h4>
+                    <p class="card-subtitle">${session.subtitle}</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="card-time">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                    <span>${session.duration} min</span>
+                </span>
+                <span class="card-cta">
+                    ${ctaText}
+                    ${ctaIcon}
+                </span>
+            </div>
+        `;
+
+        if (status !== 'locked') {
+            card.addEventListener('click', () => Navigation.showSession(index));
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    Navigation.showSession(index);
+                }
+            });
+        }
+
+        return card;
+    },
+
+    renderSession(session) {
+        // Update header
+        Elements.sessionBadge.textContent = session.number;
+        Elements.sessionTitle.textContent = session.title;
+        Elements.sessionSubtitle.textContent = session.subtitle;
+
+        // Build sentences array for TTS
+        AppState.tts.sentences = [];
+        let globalSentenceIndex = 0;
+
+        // Render content sections
+        Elements.sessionContent.innerHTML = '';
+
+        session.sections.forEach((section, sectionIndex) => {
+            const sectionEl = document.createElement('div');
+            sectionEl.className = 'content-section';
+
+            // Section heading
+            const heading = document.createElement('h3');
+            heading.className = 'section-heading';
+            heading.id = `section-${sectionIndex}`;
+            heading.innerHTML = `<span class="icon" aria-hidden="true">${section.icon || ''}</span> ${section.heading}`;
+            sectionEl.appendChild(heading);
+
+            // Paragraphs with sentence-level markup
+            section.paragraphs.forEach((para, paraIndex) => {
+                const p = document.createElement('p');
+                p.className = 'content-paragraph';
+                p.setAttribute('data-section', sectionIndex);
+                p.setAttribute('data-paragraph', paraIndex);
+
+                // Split paragraph into sentences and wrap each
+                const sentences = Utils.splitIntoSentences(para);
+                sentences.forEach((sentence, sentenceIndex) => {
+                    const span = document.createElement('span');
+                    span.className = 'sentence';
+                    span.setAttribute('data-sentence-index', globalSentenceIndex);
+                    span.textContent = sentence + ' ';
+                    p.appendChild(span);
+
+                    // Add to TTS sentences array
+                    AppState.tts.sentences.push({
+                        text: sentence,
+                        element: span,
+                        sectionIndex,
+                        paraIndex,
+                        localIndex: sentenceIndex,
+                        globalIndex: globalSentenceIndex
+                    });
+
+                    globalSentenceIndex++;
+                });
+
+                sectionEl.appendChild(p);
+            });
+
+            // Add images after first section
+            if (sectionIndex === 0 && session.images && session.images.length > 0) {
+                const gallery = this.createImageGallery(session.images.slice(0, 2));
+                sectionEl.appendChild(gallery);
+            }
+
+            // Add a fact box after second section
+            if (sectionIndex === 1 && session.facts && session.facts.length > 0) {
+                const factBox = this.createFactBox(session.facts[0]);
+                sectionEl.appendChild(factBox);
+            }
+
+            Elements.sessionContent.appendChild(sectionEl);
+        });
+
+        // Add remaining images
+        if (session.images && session.images.length > 2) {
+            const gallery = this.createImageGallery(session.images.slice(2));
+            Elements.sessionContent.appendChild(gallery);
+        }
+
+        // Add remaining facts
+        if (session.facts && session.facts.length > 1) {
+            session.facts.slice(1).forEach(fact => {
+                const factBox = this.createFactBox(fact);
+                Elements.sessionContent.appendChild(factBox);
+            });
+        }
+
+        // Render quiz
+        this.renderQuiz(session.quiz);
+
+        // Update footer buttons
+        const isCompleted = AppState.completedSessions.includes(AppState.currentSessionIndex);
+        Elements.completeSessionBtn.classList.toggle('hidden', isCompleted);
+        Elements.reviewSessionBtn.textContent = isCompleted ? 'Review Content' : 'Scroll to Top';
+
+        // Reset quiz results
+        Elements.quizResults.classList.add('hidden');
+
+        // Update TTS status
+        const savedPosition = AppState.lastSessionPosition[AppState.currentSessionIndex] || 0;
+        if (savedPosition > 0 && savedPosition < AppState.tts.sentences.length) {
+            Elements.ttsStatus.textContent = `Resume from sentence ${savedPosition + 1}`;
+        } else {
+            Elements.ttsStatus.textContent = 'Click play to listen';
+        }
+        this.updateTTSButton(false);
+    },
+
+    createImageGallery(images) {
+        const gallery = document.createElement('div');
+        gallery.className = 'image-gallery';
+        gallery.setAttribute('role', 'group');
+        gallery.setAttribute('aria-label', 'Image gallery');
+
+        images.forEach((img, index) => {
+            const item = document.createElement('figure');
+            item.className = 'gallery-item';
+
+            // Create skeleton placeholder
+            const skeleton = document.createElement('div');
+            skeleton.className = 'image-skeleton';
+            skeleton.setAttribute('aria-hidden', 'true');
+            item.appendChild(skeleton);
+
+            const imgEl = document.createElement('img');
+            imgEl.src = img.src;
+            imgEl.alt = img.alt;
+            imgEl.loading = 'lazy';
+            imgEl.style.opacity = '0';
+            imgEl.style.transition = 'opacity 0.3s ease';
+
+            imgEl.onload = () => {
+                skeleton.style.display = 'none';
+                imgEl.style.opacity = '1';
+            };
+
+            imgEl.onerror = () => {
+                skeleton.style.display = 'none';
+                imgEl.style.opacity = '1';
+                imgEl.src = 'data:image/svg+xml,' + encodeURIComponent(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+                        <rect fill="#e9ecef" width="400" height="300"/>
+                        <text fill="#6c757d" font-family="sans-serif" font-size="14" x="50%" y="45%" text-anchor="middle">Image unavailable</text>
+                        <text fill="#adb5bd" font-family="sans-serif" font-size="12" x="50%" y="55%" text-anchor="middle">${img.caption || 'Photo'}</text>
+                    </svg>
+                `);
+                imgEl.alt = 'Image could not be loaded: ' + img.alt;
+            };
+
+            item.appendChild(imgEl);
+
+            if (img.caption) {
+                const caption = document.createElement('figcaption');
+                caption.className = 'gallery-caption';
+                caption.textContent = img.caption;
+                item.appendChild(caption);
+            }
+
+            gallery.appendChild(item);
+        });
+
+        return gallery;
+    },
+
+    createFactBox(fact) {
+        const box = document.createElement('div');
+        box.className = 'fact-box';
+        box.setAttribute('role', 'button');
+        box.setAttribute('tabindex', '0');
+        box.setAttribute('aria-expanded', 'false');
+        box.setAttribute('aria-label', `${fact.title} - Click to expand`);
+
+        const factId = Utils.generateId();
+
+        box.innerHTML = `
+            <div class="fact-header">
+                <span class="icon" aria-hidden="true">💡</span>
+                <span>${fact.title}</span>
+                <svg class="fact-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6"/>
+                </svg>
+            </div>
+            <div class="fact-content" id="${factId}" role="region">
+                <p>${fact.content}</p>
+            </div>
+        `;
+
+        const toggle = () => {
+            const isExpanded = box.classList.contains('expanded');
+            box.classList.toggle('expanded');
+            box.setAttribute('aria-expanded', !isExpanded);
+            box.setAttribute('aria-label', `${fact.title} - Click to ${isExpanded ? 'expand' : 'collapse'}`);
+        };
+
+        box.addEventListener('click', toggle);
+        box.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggle();
+            }
+        });
+
+        return box;
+    },
+
+    renderQuiz(questions) {
+        Elements.quizContainer.innerHTML = '';
+
+        questions.forEach((q, index) => {
+            const questionEl = document.createElement('div');
+            questionEl.className = 'quiz-question';
+            questionEl.setAttribute('data-question-index', index);
+            questionEl.setAttribute('role', 'group');
+            questionEl.setAttribute('aria-labelledby', `question-${index}-text`);
+
+            const letters = ['A', 'B', 'C', 'D'];
+
+            questionEl.innerHTML = `
+                <span class="question-number" aria-hidden="true">Question ${index + 1}</span>
+                <p class="question-text" id="question-${index}-text">${q.question}</p>
+                <div class="answer-options" role="radiogroup" aria-labelledby="question-${index}-text">
+                    ${q.options.map((opt, optIndex) => `
+                        <button class="answer-option"
+                                data-question="${index}"
+                                data-option="${optIndex}"
+                                role="radio"
+                                aria-checked="false"
+                                aria-label="Option ${letters[optIndex]}: ${opt}">
+                            <span class="option-letter" aria-hidden="true">${letters[optIndex]}</span>
+                            <span class="option-text">${opt}</span>
+                        </button>
+                    `).join('')}
+                </div>
+                <div class="answer-feedback" data-question="${index}" role="alert" aria-live="polite"></div>
+            `;
+
+            Elements.quizContainer.appendChild(questionEl);
+        });
+
+        // Add click handlers
+        Elements.quizContainer.querySelectorAll('.answer-option').forEach(btn => {
+            btn.addEventListener('click', () => Quiz.selectAnswer(btn));
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    Quiz.selectAnswer(btn);
+                }
+            });
+        });
+    },
+
+    updateProgress() {
+        const completed = AppState.completedSessions.length;
+        const total = SESSIONS_DATA.length;
+        const percentage = Math.round((completed / total) * 100);
+
+        // Header progress
+        Elements.progressText.textContent = `${completed}/${total}`;
+
+        // Progress ring (circumference = 2 * PI * 16 = 100.53)
+        const circumference = 100.53;
+        const offset = circumference - (completed / total) * circumference;
+        Elements.progressRingFill.style.strokeDashoffset = offset;
+
+        // Overall progress bar
+        Elements.overallProgressBar.style.width = `${percentage}%`;
+        Elements.overallProgressLabel.textContent = `${percentage}% Complete`;
+    },
+
+    updateTTSButton(isPlaying) {
+        const playIcon = Elements.ttsPlayBtn.querySelector('.play-icon');
+        const pauseIcon = Elements.ttsPlayBtn.querySelector('.pause-icon');
+
+        if (isPlaying) {
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+            Elements.ttsPlayBtn.setAttribute('aria-label', 'Pause reading');
+        } else {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            Elements.ttsPlayBtn.setAttribute('aria-label', 'Play reading');
+        }
+    },
+
+    showCelebration(score, total) {
+        const completed = AppState.completedSessions.length;
+        const percentage = Math.round((completed / SESSIONS_DATA.length) * 100);
+
+        Elements.celebrationScore.textContent = `${score}/${total}`;
+        Elements.celebrationProgress.textContent = `${percentage}%`;
+
+        // Set message based on score
+        const scorePercent = (score / total) * 100;
+        let message;
+        if (scorePercent === 100) {
+            message = "Perfect score! You're amazing!";
+        } else if (scorePercent >= 80) {
+            message = "Great job! You're doing fantastic!";
+        } else if (scorePercent >= 60) {
+            message = "Nice work! Keep learning!";
+        } else {
+            message = "Good effort! Review and try again!";
+        }
+        Elements.celebrationMessage.textContent = message;
+
+        // Show/hide next session button
+        const hasNextSession = AppState.currentSessionIndex < SESSIONS_DATA.length - 1;
+        Elements.nextSessionBtn.classList.toggle('hidden', !hasNextSession);
+
+        // Create confetti
+        this.createConfetti();
+
+        // Show overlay
+        Elements.celebrationOverlay.classList.remove('hidden');
+
+        // Focus management for accessibility
+        Elements.nextSessionBtn.focus();
+
+        // Announce for screen readers
+        Navigation.announce(`Session complete! ${message} Quiz score: ${score} out of ${total}. Overall progress: ${percentage} percent.`);
+    },
+
+    hideCelebration() {
+        Elements.celebrationOverlay.classList.add('hidden');
+        Elements.confettiContainer.innerHTML = '';
+    },
+
+    createConfetti() {
+        Elements.confettiContainer.innerHTML = '';
+        const colors = ['#FFB703', '#FB8500', '#00B4D8', '#90E0EF', '#74C69D', '#E63946'];
+
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = `${Math.random() * 100}%`;
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDelay = `${Math.random() * 0.5}s`;
+            confetti.style.animationDuration = `${2 + Math.random() * 2}s`;
+            confetti.setAttribute('aria-hidden', 'true');
+            Elements.confettiContainer.appendChild(confetti);
+        }
+    },
+
+    highlightSentence(sentenceIndex) {
+        // Remove all highlights
+        document.querySelectorAll('.sentence.highlight').forEach(s => {
+            s.classList.remove('highlight');
+        });
+
+        // Add highlight to current sentence
+        const sentence = AppState.tts.sentences[sentenceIndex];
+        if (sentence && sentence.element) {
+            sentence.element.classList.add('highlight');
+            sentence.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    },
+
+    clearHighlights() {
+        document.querySelectorAll('.sentence.highlight').forEach(s => {
+            s.classList.remove('highlight');
+        });
+    }
+};
+
+// ============================================
+// TEXT-TO-SPEECH (Enhanced with sentence highlighting)
+// ============================================
+const TTS = {
+    synth: window.speechSynthesis,
+    utterance: null,
+    voicesLoaded: false,
+    preferredVoice: null,
+
+    init() {
+        if (!this.synth) {
+            Elements.ttsPlayBtn.disabled = true;
+            Elements.ttsStatus.textContent = 'Text-to-speech not supported';
+            return;
+        }
+
+        // Load voices
+        this.loadVoices();
+
+        // Some browsers need this event
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => this.loadVoices();
+        }
+    },
+
+    loadVoices() {
+        const voices = this.synth.getVoices();
+        if (voices.length > 0) {
+            this.voicesLoaded = true;
+            // Prefer natural-sounding voices
+            this.preferredVoice = voices.find(v =>
+                v.lang.startsWith('en') &&
+                (v.name.includes('Samantha') ||
+                 v.name.includes('Karen') ||
+                 v.name.includes('Google') ||
+                 v.name.includes('Natural'))
+            ) || voices.find(v => v.lang.startsWith('en-US'))
+              || voices.find(v => v.lang.startsWith('en'));
+        }
+    },
+
+    play() {
+        if (!this.synth) return;
+
+        // If paused, resume
+        if (AppState.tts.isPaused) {
+            this.synth.resume();
+            AppState.tts.isPaused = false;
+            AppState.tts.isPlaying = true;
+            UI.updateTTSButton(true);
+            Elements.ttsStatus.textContent = 'Reading...';
+            return;
+        }
+
+        // Check if we have sentences
+        if (AppState.tts.sentences.length === 0) {
+            Elements.ttsStatus.textContent = 'No content to read';
+            return;
+        }
+
+        AppState.tts.isPlaying = true;
+        UI.updateTTSButton(true);
+        this.speakSentence(AppState.tts.currentSentenceIndex);
+    },
+
+    pause() {
+        if (!this.synth) return;
+
+        this.synth.pause();
+        AppState.tts.isPaused = true;
+        AppState.tts.isPlaying = false;
+        UI.updateTTSButton(false);
+        Elements.ttsStatus.textContent = 'Paused';
+
+        // Save position
+        Storage.savePosition(AppState.currentSessionIndex, AppState.tts.currentSentenceIndex);
+    },
+
+    stop() {
+        if (!this.synth) return;
+
+        this.synth.cancel();
+        AppState.tts.isPlaying = false;
+        AppState.tts.isPaused = false;
+        UI.updateTTSButton(false);
+        UI.clearHighlights();
+    },
+
+    toggle() {
+        if (AppState.tts.isPlaying) {
+            this.pause();
+        } else {
+            this.play();
+        }
+    },
+
+    speakSentence(index) {
+        if (index >= AppState.tts.sentences.length) {
+            // Finished all sentences
+            this.stop();
+            AppState.tts.currentSentenceIndex = 0;
+            Elements.ttsStatus.textContent = 'Finished! Click play to start again.';
+
+            // Clear saved position since we finished
+            Storage.savePosition(AppState.currentSessionIndex, 0);
+            return;
+        }
+
+        const sentenceData = AppState.tts.sentences[index];
+        AppState.tts.currentSentenceIndex = index;
+
+        // Highlight current sentence
+        UI.highlightSentence(index);
+
+        // Create utterance
+        this.utterance = new SpeechSynthesisUtterance(sentenceData.text);
+        this.utterance.rate = AppState.tts.speed;
+        this.utterance.pitch = 1;
+
+        if (this.preferredVoice) {
+            this.utterance.voice = this.preferredVoice;
+        }
+
+        const totalSentences = AppState.tts.sentences.length;
+        Elements.ttsStatus.textContent = `Reading sentence ${index + 1} of ${totalSentences}`;
+
+        this.utterance.onend = () => {
+            if (AppState.tts.isPlaying && !AppState.tts.isPaused) {
+                // Small pause between sentences for natural flow
+                setTimeout(() => {
+                    this.speakSentence(index + 1);
+                }, 200);
+            }
+        };
+
+        this.utterance.onerror = (event) => {
+            // Ignore 'interrupted' errors (happens on stop/cancel)
+            if (event.error === 'interrupted') return;
+
+            console.error('TTS Error:', event);
+            Elements.ttsStatus.textContent = 'Error reading text. Trying next sentence...';
+
+            // Try to continue with next sentence
+            setTimeout(() => {
+                if (AppState.tts.isPlaying) {
+                    this.speakSentence(index + 1);
+                }
+            }, 500);
+        };
+
+        // Chrome has a bug where long utterances stop working
+        // This is a workaround
+        this.synth.speak(this.utterance);
+    },
+
+    setSpeed(speed) {
+        AppState.tts.speed = parseFloat(speed);
+
+        // If currently playing, restart from current sentence with new speed
+        if (AppState.tts.isPlaying && !AppState.tts.isPaused) {
+            this.synth.cancel();
+            setTimeout(() => {
+                this.speakSentence(AppState.tts.currentSentenceIndex);
+            }, 100);
+        }
+    },
+
+    // Skip to specific sentence (for future click-to-read feature)
+    skipTo(sentenceIndex) {
+        if (sentenceIndex < 0 || sentenceIndex >= AppState.tts.sentences.length) return;
+
+        this.synth.cancel();
+        AppState.tts.currentSentenceIndex = sentenceIndex;
+
+        if (AppState.tts.isPlaying) {
+            setTimeout(() => {
+                this.speakSentence(sentenceIndex);
+            }, 100);
+        } else {
+            UI.highlightSentence(sentenceIndex);
+        }
+    }
+};
+
+// ============================================
+// QUIZ
+// ============================================
+const Quiz = {
+    selectAnswer(btn) {
+        const questionIndex = parseInt(btn.dataset.question);
+        const optionIndex = parseInt(btn.dataset.option);
+        const session = SESSIONS_DATA[AppState.currentSessionIndex];
+        const question = session.quiz[questionIndex];
+
+        // If already answered this question, ignore
+        if (AppState.quiz.currentAnswers.hasOwnProperty(questionIndex)) {
+            return;
+        }
+
+        // Record answer
+        AppState.quiz.currentAnswers[questionIndex] = optionIndex;
+
+        // Mark selected
+        btn.classList.add('selected');
+        btn.setAttribute('aria-checked', 'true');
+
+        // Check if correct
+        const isCorrect = optionIndex === question.correctIndex;
+
+        // Show feedback with slight delay for visual effect
+        setTimeout(() => {
+            // Update button styles
+            if (isCorrect) {
+                btn.classList.remove('selected');
+                btn.classList.add('correct');
+            } else {
+                btn.classList.remove('selected');
+                btn.classList.add('incorrect');
+
+                // Highlight correct answer
+                const correctBtn = document.querySelector(
+                    `.answer-option[data-question="${questionIndex}"][data-option="${question.correctIndex}"]`
+                );
+                if (correctBtn) {
+                    correctBtn.classList.add('correct');
+                }
+            }
+
+            // Show feedback text
+            const feedbackEl = document.querySelector(`.answer-feedback[data-question="${questionIndex}"]`);
+            if (feedbackEl) {
+                feedbackEl.className = `answer-feedback show ${isCorrect ? 'correct' : 'incorrect'}`;
+                feedbackEl.innerHTML = isCorrect
+                    ? `<strong>Great job!</strong> ${question.explanation}`
+                    : `<strong>Not quite.</strong> ${question.explanation}`;
+            }
+
+            // Disable all options for this question
+            document.querySelectorAll(`.answer-option[data-question="${questionIndex}"]`).forEach(b => {
+                b.setAttribute('aria-disabled', 'true');
+                b.style.pointerEvents = 'none';
+            });
+
+            // Check if quiz is complete
+            this.checkQuizComplete();
+        }, 300);
+    },
+
+    checkQuizComplete() {
+        const session = SESSIONS_DATA[AppState.currentSessionIndex];
+        const totalQuestions = session.quiz.length;
+        const answeredQuestions = Object.keys(AppState.quiz.currentAnswers).length;
+
+        if (answeredQuestions === totalQuestions) {
+            // Calculate score
+            let correct = 0;
+            Object.entries(AppState.quiz.currentAnswers).forEach(([qIndex, answer]) => {
+                if (answer === session.quiz[parseInt(qIndex)].correctIndex) {
+                    correct++;
+                }
+            });
+
+            // Show results
+            Elements.resultsScore.textContent = `${correct}/${totalQuestions}`;
+
+            const percentage = (correct / totalQuestions) * 100;
+            let message;
+            if (percentage === 100) {
+                message = "Perfect score! Amazing work!";
+            } else if (percentage >= 80) {
+                message = "Great job! You really know your stuff!";
+            } else if (percentage >= 60) {
+                message = "Nice work! Keep learning!";
+            } else {
+                message = "Good effort! Review the content and try again!";
+            }
+            Elements.resultsMessage.textContent = message;
+
+            Elements.quizResults.classList.remove('hidden');
+
+            // Show complete button (if not already completed)
+            const isCompleted = AppState.completedSessions.includes(AppState.currentSessionIndex);
+            if (!isCompleted) {
+                Elements.completeSessionBtn.classList.remove('hidden');
+
+                // Scroll to button
+                setTimeout(() => {
+                    Elements.completeSessionBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 500);
+            }
+
+            // Save score
+            AppState.sessionScores[AppState.currentSessionIndex] = {
+                correct,
+                total: totalQuestions
+            };
+            Storage.save();
+        }
+    },
+
+    getScore() {
+        const session = SESSIONS_DATA[AppState.currentSessionIndex];
+        let correct = 0;
+
+        Object.entries(AppState.quiz.currentAnswers).forEach(([qIndex, answer]) => {
+            if (answer === session.quiz[parseInt(qIndex)].correctIndex) {
+                correct++;
+            }
+        });
+
+        return {
+            correct,
+            total: session.quiz.length
+        };
+    }
+};
+
+// ============================================
+// SESSION COMPLETION
+// ============================================
+const Session = {
+    complete() {
+        const index = AppState.currentSessionIndex;
+
+        // Mark as completed
+        if (!AppState.completedSessions.includes(index)) {
+            AppState.completedSessions.push(index);
+        }
+
+        // Clear saved position since session is complete
+        delete AppState.lastSessionPosition[index];
+
+        Storage.save();
+
+        // Get quiz score
+        const score = Quiz.getScore();
+
+        // Stop TTS
+        TTS.stop();
+
+        // Show celebration
+        UI.showCelebration(score.correct, score.total);
+    },
+
+    goToNext() {
+        UI.hideCelebration();
+
+        const nextIndex = AppState.currentSessionIndex + 1;
+        if (nextIndex < SESSIONS_DATA.length) {
+            Navigation.showSession(nextIndex);
+        } else {
+            Navigation.showHome();
+        }
+    }
+};
+
+// ============================================
+// KEYBOARD NAVIGATION
+// ============================================
+const Keyboard = {
+    init() {
+        document.addEventListener('keydown', (e) => {
+            // Escape key to go back/close
+            if (e.key === 'Escape') {
+                if (!Elements.celebrationOverlay.classList.contains('hidden')) {
+                    UI.hideCelebration();
+                    Navigation.showHome();
+                } else if (AppState.currentView === 'session') {
+                    TTS.stop();
+                    Navigation.showHome();
+                }
+            }
+
+            // Space to toggle TTS when in session view (if not focused on button/input)
+            if (e.key === ' ' && AppState.currentView === 'session') {
+                const focusedTag = document.activeElement.tagName.toLowerCase();
+                if (!['button', 'input', 'select', 'textarea'].includes(focusedTag)) {
+                    e.preventDefault();
+                    TTS.toggle();
+                }
+            }
+
+            // Arrow keys for speed control when TTS controls are focused
+            if (document.activeElement === Elements.ttsSpeed) {
+                // Let default behavior handle it
+                return;
+            }
+        });
+    }
+};
+
+// ============================================
+// EVENT LISTENERS
+// ============================================
+function initEventListeners() {
+    // Back button
+    Elements.backBtn.addEventListener('click', () => {
+        TTS.stop();
+        Navigation.showHome();
+    });
+
+    // TTS controls
+    Elements.ttsPlayBtn.addEventListener('click', () => TTS.toggle());
+    Elements.ttsSpeed.addEventListener('change', (e) => TTS.setSpeed(e.target.value));
+
+    // Session completion
+    Elements.completeSessionBtn.addEventListener('click', () => Session.complete());
+
+    // Review/scroll button
+    Elements.reviewSessionBtn.addEventListener('click', () => {
+        Elements.sessionContent.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Celebration buttons
+    Elements.nextSessionBtn.addEventListener('click', () => Session.goToNext());
+    Elements.backHomeBtn.addEventListener('click', () => {
+        UI.hideCelebration();
+        Navigation.showHome();
+    });
+
+    // Close celebration on overlay click (outside content)
+    Elements.celebrationOverlay.addEventListener('click', (e) => {
+        if (e.target === Elements.celebrationOverlay) {
+            UI.hideCelebration();
+            Navigation.showHome();
+        }
+    });
+
+    // Handle browser back button
+    window.addEventListener('popstate', () => {
+        if (AppState.currentView === 'session') {
+            TTS.stop();
+            Navigation.showHome();
+        }
+    });
+
+    // Handle visibility change (pause TTS when tab hidden)
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden && AppState.tts.isPlaying) {
+            TTS.pause();
+        }
+    });
+
+    // Click on sentences to jump TTS there (optional feature)
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('sentence') && AppState.currentView === 'session') {
+            const sentenceIndex = parseInt(e.target.dataset.sentenceIndex);
+            if (!isNaN(sentenceIndex)) {
+                TTS.skipTo(sentenceIndex);
+            }
+        }
+    });
+}
+
+// ============================================
+// INITIALIZATION
+// ============================================
+function init() {
+    // Load saved progress
+    Storage.load();
+
+    // Initialize TTS
+    TTS.init();
+
+    // Initialize keyboard navigation
+    Keyboard.init();
+
+    // Set up event listeners
+    initEventListeners();
+
+    // Render initial UI
+    UI.renderSessionCards();
+    UI.updateProgress();
+
+    console.log('Discover LA initialized! Phase 2 with sentence-level TTS.');
+}
+
+// Start the app when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate | Locally Strong</title>
+  <meta name="description" content="Your gift empowers small businesses, strengthens local food systems, and builds more resilient communities.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="flex flex-col min-h-screen">
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-cream/95 backdrop-blur border-b border-charcoal/10">
+    <div class="container">
+      <nav class="flex items-center justify-between h-16 md:h-20">
+        <a href="/" class="font-heading text-xl md:text-2xl text-forest">Locally Strong</a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="/about.html" class="text-charcoal hover:text-forest transition-colors">About</a>
+          <a href="/get-involved.html" class="text-charcoal hover:text-forest transition-colors">Get Involved</a>
+          <a href="/stories/" class="text-charcoal hover:text-forest transition-colors">Stories</a>
+          <a href="/contact.html" class="text-charcoal hover:text-forest transition-colors">Contact</a>
+          <a href="/donate.html" class="btn btn-primary">Donate</a>
+        </div>
+        <button id="menu-toggle" class="md:hidden p-2 -mr-2" aria-label="Open menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div id="nav-overlay" class="nav-overlay"></div>
+  <div id="mobile-nav" class="mobile-nav">
+    <div class="flex items-center justify-between p-4 border-b border-charcoal/10">
+      <span class="font-heading text-xl text-forest">Menu</span>
+      <button id="menu-close" class="p-2 -mr-2" aria-label="Close menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="p-4 space-y-4">
+      <a href="/about.html" class="block py-2 text-lg text-charcoal hover:text-forest">About</a>
+      <a href="/get-involved.html" class="block py-2 text-lg text-charcoal hover:text-forest">Get Involved</a>
+      <a href="/stories/" class="block py-2 text-lg text-charcoal hover:text-forest">Stories</a>
+      <a href="/contact.html" class="block py-2 text-lg text-charcoal hover:text-forest">Contact</a>
+      <a href="/donate.html" class="btn btn-primary w-full text-center mt-4">Donate</a>
+    </nav>
+  </div>
+
+  <main id="main" class="flex-1">
+    <section class="py-12 md:py-16 bg-white">
+      <div class="container max-w-3xl">
+        <h1 class="section-heading">Support Local Communities</h1>
+        <p class="section-subheading">Your gift empowers small businesses, strengthens local food systems, and builds more resilient communities.</p>
+      </div>
+    </section>
+
+    <section class="py-12 bg-cream">
+      <div class="container max-w-4xl">
+
+        <!-- Impact Examples -->
+        <div class="mb-16">
+          <h2 class="font-heading text-2xl text-charcoal text-center mb-8">Your Gift at Work</h2>
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div class="card text-center">
+              <p class="text-2xl font-heading text-forest">$25</p>
+              <p class="text-sm text-charcoal/70 mt-2">Marketing materials for one new vendor</p>
+            </div>
+            <div class="card text-center">
+              <p class="text-2xl font-heading text-forest">$50</p>
+              <p class="text-sm text-charcoal/70 mt-2">Vendor's market fee for one week</p>
+            </div>
+            <div class="card text-center">
+              <p class="text-2xl font-heading text-forest">$100</p>
+              <p class="text-sm text-charcoal/70 mt-2">Workshop for 10 entrepreneurs</p>
+            </div>
+            <div class="card text-center">
+              <p class="text-2xl font-heading text-forest">$500</p>
+              <p class="text-sm text-charcoal/70 mt-2">Mentorship program support</p>
+            </div>
+            <div class="card text-center">
+              <p class="text-2xl font-heading text-forest">$1,000</p>
+              <p class="text-sm text-charcoal/70 mt-2">Technology for a small business</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Donation CTA -->
+        <div class="bg-forest rounded-xl p-8 md:p-12 text-center text-white mb-16">
+          <h2 class="font-heading text-2xl md:text-3xl mb-4">Make a Donation</h2>
+          <p class="text-white/80 max-w-lg mx-auto mb-8">
+            Choose an amount below or enter a custom amount to support our mission.
+          </p>
+          <div class="flex flex-wrap justify-center gap-3 mb-8">
+            <button class="donate-btn rounded-full border-2 border-white px-6 py-3 font-medium text-white hover:bg-white hover:text-forest transition-colors">$25</button>
+            <button class="donate-btn rounded-full border-2 border-white px-6 py-3 font-medium text-white hover:bg-white hover:text-forest transition-colors">$50</button>
+            <button class="donate-btn rounded-full border-2 border-white px-6 py-3 font-medium text-white hover:bg-white hover:text-forest transition-colors">$100</button>
+            <button class="donate-btn rounded-full border-2 border-white px-6 py-3 font-medium text-white hover:bg-white hover:text-forest transition-colors">$250</button>
+            <button class="donate-btn rounded-full border-2 border-white px-6 py-3 font-medium text-white hover:bg-white hover:text-forest transition-colors">$500</button>
+            <button class="donate-btn rounded-full border-2 border-white px-6 py-3 font-medium text-white hover:bg-white hover:text-forest transition-colors">Other</button>
+          </div>
+          <p class="text-sm text-white/60 italic">
+            [PLACEHOLDER - Integrate with Stripe, PayPal Giving, or Every Action]
+          </p>
+        </div>
+
+        <!-- Monthly Giving -->
+        <div class="bg-wheat rounded-xl p-8 md:p-12 mb-16">
+          <div class="flex flex-col md:flex-row items-center gap-8">
+            <div class="flex-1 text-center md:text-left">
+              <h2 class="font-heading text-2xl text-charcoal mb-4">Become a Monthly Supporter</h2>
+              <p class="text-charcoal/70">Monthly gifts provide reliable funding that allows us to plan and grow our programs.</p>
+            </div>
+            <button class="btn btn-primary whitespace-nowrap">Become a Monthly Donor</button>
+          </div>
+        </div>
+
+        <!-- Other Ways -->
+        <div>
+          <h2 class="font-heading text-2xl text-charcoal text-center mb-8">Other Ways to Give</h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="card flex gap-4">
+              <div class="w-12 h-12 rounded-full bg-forest/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-heading text-lg text-charcoal">Corporate Matching</h3>
+                <p class="text-sm text-charcoal/70 mt-1">Many employers match charitable gifts. Check if yours does!</p>
+              </div>
+            </div>
+            <div class="card flex gap-4">
+              <div class="w-12 h-12 rounded-full bg-forest/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-heading text-lg text-charcoal">Stock Donations</h3>
+                <p class="text-sm text-charcoal/70 mt-1">Donating appreciated stock can provide tax advantages.</p>
+              </div>
+            </div>
+            <div class="card flex gap-4">
+              <div class="w-12 h-12 rounded-full bg-forest/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-heading text-lg text-charcoal">Planned Giving</h3>
+                <p class="text-sm text-charcoal/70 mt-1">Include Locally Strong in your estate plans.</p>
+              </div>
+            </div>
+            <div class="card flex gap-4">
+              <div class="w-12 h-12 rounded-full bg-forest/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-heading text-lg text-charcoal">In-Kind Donations</h3>
+                <p class="text-sm text-charcoal/70 mt-1">We accept equipment, supplies, and professional services.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center text-charcoal/70 mt-12">
+          Questions about donating? <a href="/contact.html" class="text-forest font-medium hover:underline">Contact us</a> and we'll be happy to help.
+        </p>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-charcoal text-white py-12">
+    <div class="container">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div class="md:col-span-2">
+          <h3 class="font-heading text-xl mb-4">Locally Strong</h3>
+          <p class="text-white/70 max-w-sm">Strengthening local communities by empowering small businesses, farmers, and producers.</p>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Quick Links</h4>
+          <nav class="space-y-2">
+            <a href="/about.html" class="block text-white/70 hover:text-white">About</a>
+            <a href="/get-involved.html" class="block text-white/70 hover:text-white">Get Involved</a>
+            <a href="/stories/" class="block text-white/70 hover:text-white">Stories</a>
+            <a href="/contact.html" class="block text-white/70 hover:text-white">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Contact</h4>
+          <address class="not-italic text-white/70 space-y-2">
+            <p>123 Market Street<br>Wayne, PA 19087</p>
+            <p><a href="mailto:hello@locallystrong.org" class="hover:text-white">hello@locallystrong.org</a></p>
+          </address>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-white/50 text-sm">&copy; 2025 Locally Strong. All rights reserved.</p>
+        <nav class="flex gap-6 text-sm">
+          <a href="/privacy.html" class="text-white/50 hover:text-white">Privacy Policy</a>
+          <a href="/terms.html" class="text-white/50 hover:text-white">Terms of Use</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

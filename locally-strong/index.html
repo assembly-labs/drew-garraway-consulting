@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Locally Strong - Empowering Local Communities</title>
+  <meta name="description" content="Strengthening local communities by empowering small businesses, farmers, and producers through collaboration, education, and innovation.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Locally Strong">
+  <meta property="og:description" content="Strengthening local communities by empowering small businesses, farmers, and producers.">
+  <meta property="og:url" content="https://locallystrong.org">
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="flex flex-col min-h-screen">
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-cream/95 backdrop-blur border-b border-charcoal/10">
+    <div class="container">
+      <nav class="flex items-center justify-between h-16 md:h-20">
+        <a href="/" class="font-heading text-xl md:text-2xl text-forest">Locally Strong</a>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="/about.html" class="text-charcoal hover:text-forest transition-colors">About</a>
+          <a href="/get-involved.html" class="text-charcoal hover:text-forest transition-colors">Get Involved</a>
+          <a href="/stories/" class="text-charcoal hover:text-forest transition-colors">Stories</a>
+          <a href="/contact.html" class="text-charcoal hover:text-forest transition-colors">Contact</a>
+          <a href="/donate.html" class="btn btn-primary">Donate</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-toggle" class="md:hidden p-2 -mr-2" aria-label="Open menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div id="nav-overlay" class="nav-overlay"></div>
+  <div id="mobile-nav" class="mobile-nav">
+    <div class="flex items-center justify-between p-4 border-b border-charcoal/10">
+      <span class="font-heading text-xl text-forest">Menu</span>
+      <button id="menu-close" class="p-2 -mr-2" aria-label="Close menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="p-4 space-y-4">
+      <a href="/about.html" class="block py-2 text-lg text-charcoal hover:text-forest">About</a>
+      <a href="/get-involved.html" class="block py-2 text-lg text-charcoal hover:text-forest">Get Involved</a>
+      <a href="/stories/" class="block py-2 text-lg text-charcoal hover:text-forest">Stories</a>
+      <a href="/contact.html" class="block py-2 text-lg text-charcoal hover:text-forest">Contact</a>
+      <a href="/donate.html" class="btn btn-primary w-full text-center mt-4">Donate</a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <main id="main" class="flex-1">
+
+    <!-- Hero -->
+    <section class="relative bg-forest text-white py-20 md:py-32">
+      <div class="container text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading mb-6">
+          Rooted in Tradition.<br>Growing with Purpose.
+        </h1>
+        <p class="text-xl md:text-2xl text-white/80 max-w-2xl mx-auto mb-8">
+          Strengthening local communities by empowering small businesses, farmers, and producers.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="/get-involved.html" class="btn btn-secondary">Get Involved</a>
+          <a href="/about.html" class="btn border-2 border-white text-white hover:bg-white/10">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission Triad -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container">
+        <h2 class="section-heading mb-12">What We Do</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-forest/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+              </svg>
+            </div>
+            <h3 class="font-heading text-xl mb-2">Connect</h3>
+            <p class="text-charcoal/70">Building bridges between local producers, businesses, and the communities they serve.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-forest/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              </svg>
+            </div>
+            <h3 class="font-heading text-xl mb-2">Educate</h3>
+            <p class="text-charcoal/70">Providing resources, mentorship, and workshops to help small businesses thrive.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-forest/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+              </svg>
+            </div>
+            <h3 class="font-heading text-xl mb-2">Grow</h3>
+            <p class="text-charcoal/70">Creating sustainable economic growth that benefits the entire community.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact Stats -->
+    <section class="py-16 md:py-24 bg-wheat">
+      <div class="container">
+        <h2 class="section-heading mb-12">Our Impact</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <p class="text-4xl md:text-5xl font-heading text-forest">50+</p>
+            <p class="text-charcoal/70 mt-2">Local Vendors</p>
+          </div>
+          <div>
+            <p class="text-4xl md:text-5xl font-heading text-forest">12K+</p>
+            <p class="text-charcoal/70 mt-2">Community Members</p>
+          </div>
+          <div>
+            <p class="text-4xl md:text-5xl font-heading text-forest">$2M+</p>
+            <p class="text-charcoal/70 mt-2">Local Economic Impact</p>
+          </div>
+          <div>
+            <p class="text-4xl md:text-5xl font-heading text-forest">8</p>
+            <p class="text-charcoal/70 mt-2">Years Strong</p>
+          </div>
+        </div>
+        <p class="text-center text-sm text-charcoal/50 mt-8 italic">[PLACEHOLDER - Replace with real statistics]</p>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 md:py-24 bg-forest text-white">
+      <div class="container text-center">
+        <h2 class="text-3xl md:text-4xl font-heading mb-4">Stay Connected</h2>
+        <p class="text-white/80 max-w-lg mx-auto mb-8">
+          Get updates on market events, vendor spotlights, and ways to support local businesses.
+        </p>
+        <form id="newsletter-form" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+            class="flex-1 px-4 py-3 rounded-full text-charcoal focus:outline-none focus:ring-2 focus:ring-white/50"
+          >
+          <button type="submit" class="btn btn-secondary whitespace-nowrap">Subscribe</button>
+        </form>
+        <p id="newsletter-message" class="mt-4 text-sm hidden"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-charcoal text-white py-12">
+    <div class="container">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div class="md:col-span-2">
+          <h3 class="font-heading text-xl mb-4">Locally Strong</h3>
+          <p class="text-white/70 max-w-sm">
+            Strengthening local communities by empowering small businesses, farmers, and producers.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Quick Links</h4>
+          <nav class="space-y-2">
+            <a href="/about.html" class="block text-white/70 hover:text-white transition-colors">About</a>
+            <a href="/get-involved.html" class="block text-white/70 hover:text-white transition-colors">Get Involved</a>
+            <a href="/stories/" class="block text-white/70 hover:text-white transition-colors">Stories</a>
+            <a href="/contact.html" class="block text-white/70 hover:text-white transition-colors">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Contact</h4>
+          <address class="not-italic text-white/70 space-y-2">
+            <p>123 Market Street<br>Wayne, PA 19087</p>
+            <p><a href="mailto:hello@locallystrong.org" class="hover:text-white">hello@locallystrong.org</a></p>
+            <p><a href="tel:+16105550123" class="hover:text-white">(610) 555-0123</a></p>
+          </address>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-white/50 text-sm">&copy; 2025 Locally Strong. All rights reserved.</p>
+        <nav class="flex gap-6 text-sm">
+          <a href="/privacy.html" class="text-white/50 hover:text-white">Privacy Policy</a>
+          <a href="/terms.html" class="text-white/50 hover:text-white">Terms of Use</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

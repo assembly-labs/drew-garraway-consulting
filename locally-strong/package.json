@@ -1,0 +1,14 @@
+{
+  "name": "locally-strong",
+  "version": "1.0.0",
+  "description": "Locally Strong - Empowering local communities",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./css/input.css -o ./css/style.css --minify",
+    "watch:css": "npx tailwindcss -i ./css/input.css -o ./css/style.css --watch",
+    "dev": "npm run watch:css",
+    "build": "npm run build:css"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

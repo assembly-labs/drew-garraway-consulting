@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body text-charcoal bg-cream antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-forest text-white hover:bg-forest/90;
+  }
+
+  .btn-secondary {
+    @apply bg-earth text-white hover:bg-earth/90;
+  }
+
+  .btn-ghost {
+    @apply border-2 border-forest text-forest bg-transparent hover:bg-forest/10;
+  }
+
+  .btn-outline {
+    @apply border-2 border-charcoal text-charcoal bg-transparent hover:bg-charcoal/10;
+  }
+
+  .card {
+    @apply rounded-xl border border-charcoal/10 bg-white p-6 transition-shadow hover:shadow-md;
+  }
+
+  .form-input {
+    @apply w-full rounded-lg border border-charcoal/20 bg-white px-4 py-3 text-charcoal;
+    @apply focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/20;
+    @apply disabled:cursor-not-allowed disabled:bg-charcoal/5 disabled:opacity-50;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-charcoal mb-2;
+  }
+
+  .section-heading {
+    @apply font-heading text-3xl md:text-4xl text-charcoal text-center;
+  }
+
+  .section-subheading {
+    @apply text-lg text-charcoal/70 text-center mt-4 max-w-2xl mx-auto;
+  }
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  @apply sr-only;
+}
+
+.skip-link:focus {
+  @apply not-sr-only absolute left-4 top-4 z-50 rounded-lg bg-forest px-4 py-2 text-white outline-none;
+}
+
+/* Mobile nav overlay */
+.nav-overlay {
+  @apply fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none transition-opacity;
+}
+
+.nav-overlay.active {
+  @apply opacity-100 pointer-events-auto;
+}
+
+.mobile-nav {
+  @apply fixed top-0 right-0 h-full w-80 max-w-full bg-white z-50 transform translate-x-full transition-transform;
+}
+
+.mobile-nav.active {
+  @apply translate-x-0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Locally Strong</title>
+  <meta name="description" content="Learn about our mission to strengthen local communities by empowering small businesses, farmers, and producers.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="flex flex-col min-h-screen">
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-cream/95 backdrop-blur border-b border-charcoal/10">
+    <div class="container">
+      <nav class="flex items-center justify-between h-16 md:h-20">
+        <a href="/" class="font-heading text-xl md:text-2xl text-forest">Locally Strong</a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="/about.html" class="text-forest font-medium">About</a>
+          <a href="/get-involved.html" class="text-charcoal hover:text-forest transition-colors">Get Involved</a>
+          <a href="/stories/" class="text-charcoal hover:text-forest transition-colors">Stories</a>
+          <a href="/contact.html" class="text-charcoal hover:text-forest transition-colors">Contact</a>
+          <a href="/donate.html" class="btn btn-primary">Donate</a>
+        </div>
+        <button id="menu-toggle" class="md:hidden p-2 -mr-2" aria-label="Open menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div id="nav-overlay" class="nav-overlay"></div>
+  <div id="mobile-nav" class="mobile-nav">
+    <div class="flex items-center justify-between p-4 border-b border-charcoal/10">
+      <span class="font-heading text-xl text-forest">Menu</span>
+      <button id="menu-close" class="p-2 -mr-2" aria-label="Close menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="p-4 space-y-4">
+      <a href="/about.html" class="block py-2 text-lg text-forest font-medium">About</a>
+      <a href="/get-involved.html" class="block py-2 text-lg text-charcoal hover:text-forest">Get Involved</a>
+      <a href="/stories/" class="block py-2 text-lg text-charcoal hover:text-forest">Stories</a>
+      <a href="/contact.html" class="block py-2 text-lg text-charcoal hover:text-forest">Contact</a>
+      <a href="/donate.html" class="btn btn-primary w-full text-center mt-4">Donate</a>
+    </nav>
+  </div>
+
+  <main id="main" class="flex-1">
+    <!-- Page Header -->
+    <section class="py-12 md:py-16 bg-white">
+      <div class="container max-w-3xl">
+        <h1 class="section-heading">About Locally Strong</h1>
+        <p class="section-subheading">Strengthening communities through local commerce</p>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="py-12 bg-cream">
+      <div class="container max-w-3xl">
+        <article class="prose max-w-none space-y-12">
+
+          <div>
+            <h2 class="font-heading text-2xl text-charcoal mb-4">Our Mission</h2>
+            <p class="text-charcoal/80 leading-relaxed">
+              Locally Strong is dedicated to strengthening local communities by empowering small businesses, farmers, and producers. Through collaboration, education, strategic partnerships, and thoughtful innovation, we create a thriving network that fosters growth, sustainability, and economic resilience.
+            </p>
+            <p class="text-charcoal/80 leading-relaxed mt-4">
+              Our mission is to amplify public awareness of the benefits of shopping locally, highlighting the positive impact on health, the environment, and the economy, while thoughtfully evolving traditional farmers markets to meet the needs of today's consumers.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-heading text-2xl text-charcoal mb-6">Our Values</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="card">
+                <h3 class="font-heading text-lg text-charcoal mb-2">Community First</h3>
+                <p class="text-charcoal/70 text-sm">Every decision we make centers on strengthening the communities we serve.</p>
+              </div>
+              <div class="card">
+                <h3 class="font-heading text-lg text-charcoal mb-2">Collaboration Over Competition</h3>
+                <p class="text-charcoal/70 text-sm">We accomplish more together than any of us can alone.</p>
+              </div>
+              <div class="card">
+                <h3 class="font-heading text-lg text-charcoal mb-2">Accessible to All</h3>
+                <p class="text-charcoal/70 text-sm">Local food and commerce should be accessible to everyone.</p>
+              </div>
+              <div class="card">
+                <h3 class="font-heading text-lg text-charcoal mb-2">Sustainable Growth</h3>
+                <p class="text-charcoal/70 text-sm">We prioritize approaches that create lasting impact.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-wheat rounded-xl p-6 md:p-8">
+            <h2 class="font-heading text-2xl text-charcoal mb-4">Our Story</h2>
+            <p class="text-charcoal/70 italic">
+              [PLACEHOLDER - Add founding story, key milestones, evolution of the organization]
+            </p>
+            <p class="text-charcoal/80 mt-4">
+              Locally Strong was founded with a simple belief: when local businesses thrive, communities thrive. What started as a conversation between market vendors has grown into a regional network dedicated to supporting small businesses, farmers, and producers.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-heading text-2xl text-charcoal mb-6">Our Team</h2>
+            <p class="text-charcoal/70 italic mb-6">[PLACEHOLDER - Add team member bios and photos]</p>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="card">
+                <div class="w-16 h-16 rounded-full bg-sage/30 mb-4"></div>
+                <h3 class="font-heading text-lg text-charcoal">[Name]</h3>
+                <p class="text-forest text-sm">Executive Director</p>
+                <p class="text-charcoal/70 text-sm mt-2">Brief bio placeholder</p>
+              </div>
+              <div class="card">
+                <div class="w-16 h-16 rounded-full bg-sage/30 mb-4"></div>
+                <h3 class="font-heading text-lg text-charcoal">[Name]</h3>
+                <p class="text-forest text-sm">Programs Director</p>
+                <p class="text-charcoal/70 text-sm mt-2">Brief bio placeholder</p>
+              </div>
+            </div>
+          </div>
+
+        </article>
+
+        <!-- CTA -->
+        <div class="mt-12 bg-forest rounded-xl p-8 text-center text-white">
+          <h2 class="font-heading text-2xl mb-4">Ready to get involved?</h2>
+          <p class="text-white/80 mb-6">There are many ways to support our mission.</p>
+          <div class="flex flex-wrap gap-4 justify-center">
+            <a href="/get-involved.html" class="btn btn-secondary">Get Involved</a>
+            <a href="/donate.html" class="btn border-2 border-white text-white hover:bg-white/10">Make a Gift</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-charcoal text-white py-12">
+    <div class="container">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div class="md:col-span-2">
+          <h3 class="font-heading text-xl mb-4">Locally Strong</h3>
+          <p class="text-white/70 max-w-sm">Strengthening local communities by empowering small businesses, farmers, and producers.</p>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Quick Links</h4>
+          <nav class="space-y-2">
+            <a href="/about.html" class="block text-white/70 hover:text-white">About</a>
+            <a href="/get-involved.html" class="block text-white/70 hover:text-white">Get Involved</a>
+            <a href="/stories/" class="block text-white/70 hover:text-white">Stories</a>
+            <a href="/contact.html" class="block text-white/70 hover:text-white">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Contact</h4>
+          <address class="not-italic text-white/70 space-y-2">
+            <p>123 Market Street<br>Wayne, PA 19087</p>
+            <p><a href="mailto:hello@locallystrong.org" class="hover:text-white">hello@locallystrong.org</a></p>
+          </address>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-white/50 text-sm">&copy; 2025 Locally Strong. All rights reserved.</p>
+        <nav class="flex gap-6 text-sm">
+          <a href="/privacy.html" class="text-white/50 hover:text-white">Privacy Policy</a>
+          <a href="/terms.html" class="text-white/50 hover:text-white">Terms of Use</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

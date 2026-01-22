@@ -1,0 +1,10 @@
+# Locally Strong - robots.txt
+User-agent: *
+Allow: /
+
+# Disallow internal pages
+Disallow: /ui
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://locallystrong.org/sitemap.xml
