@@ -337,6 +337,101 @@ p {
     white-space: nowrap;
 }
 
+/* Continue Learning Section */
+.continue-learning {
+    margin-bottom: var(--space-8);
+}
+
+.continue-learning.hidden {
+    display: none;
+}
+
+.continue-heading {
+    color: var(--ocean-deep);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.continue-heading::before {
+    content: '▶';
+    font-size: var(--text-base);
+}
+
+.continue-card {
+    background: linear-gradient(135deg, var(--ocean-light) 0%, var(--ocean-pale) 100%);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    border: 3px solid var(--ocean-mid);
+}
+
+.continue-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--ocean-deep);
+}
+
+.continue-card .session-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-xl);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-2xl);
+    flex-shrink: 0;
+}
+
+.continue-card .continue-info {
+    flex: 1;
+}
+
+.continue-card .continue-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: var(--space-1);
+}
+
+.continue-card .continue-subtitle {
+    color: var(--gray-600);
+    font-size: var(--text-base);
+    margin-bottom: var(--space-2);
+}
+
+.continue-card .continue-status {
+    font-size: var(--text-sm);
+    color: var(--ocean-deep);
+    font-weight: 600;
+}
+
+.continue-card .continue-cta {
+    background: var(--ocean-deep);
+    color: var(--white);
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-display);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    transition: background var(--transition-fast);
+}
+
+.continue-card:hover .continue-cta {
+    background: var(--ocean-mid);
+}
+
 /* Sessions Grid */
 .sessions-heading {
     color: var(--gray-700);
@@ -482,9 +577,11 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: var(--space-3);
     margin-top: var(--space-4);
     padding-top: var(--space-4);
     border-top: 1px solid var(--gray-200);
+    flex-wrap: wrap;
 }
 
 .card-time {
@@ -506,6 +603,26 @@ p {
 
 .session-card.completed .card-cta {
     color: var(--palm-dark);
+}
+
+/* Quiz Score Display on Completed Cards */
+.card-score {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--palm-dark);
+    font-weight: 600;
+}
+
+.card-score .score-icon {
+    font-size: var(--text-base);
+}
+
+.card-score .score-value {
+    background: var(--success-light);
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
 }
 
 .session-card.locked .card-cta {
@@ -614,6 +731,30 @@ p {
     margin-left: auto;
     font-size: var(--text-sm);
     color: var(--gray-500);
+}
+
+.keyboard-hint {
+    display: none;
+    font-size: var(--text-xs);
+    color: var(--gray-400);
+    align-items: center;
+    gap: var(--space-2);
+}
+
+@media (min-width: 769px) {
+    .keyboard-hint {
+        display: flex;
+    }
+}
+
+.keyboard-hint kbd {
+    background: var(--white);
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    padding: 2px 6px;
+    font-family: monospace;
+    font-size: var(--text-xs);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 /* Session Content */
@@ -1168,6 +1309,16 @@ p {
 
     .sessions-grid {
         grid-template-columns: 1fr;
+    }
+
+    .continue-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .continue-card .continue-cta {
+        width: 100%;
+        justify-content: center;
     }
 
     .session-header {

@@ -126,6 +126,8 @@ const Elements = {
     overallProgressBar: document.getElementById('overall-progress-bar'),
     overallProgressLabel: document.getElementById('overall-progress-label'),
     sessionsGrid: document.getElementById('sessions-grid'),
+    continueLearning: document.getElementById('continue-learning'),
+    continueCard: document.getElementById('continue-card'),
 
     // Session
     sessionHeader: document.getElementById('session-header'),
@@ -224,19 +226,16 @@ const Navigation = {
     },
 
     isSessionUnlocked(index) {
-        if (index === 0) return true; // First session always unlocked
-        // Session is unlocked if previous session is completed
-        return AppState.completedSessions.includes(index - 1);
+        // All sessions are always unlocked - users can access any lesson
+        return true;
     },
 
     getSessionStatus(index) {
         if (AppState.completedSessions.includes(index)) {
             return 'completed';
         }
-        if (this.isSessionUnlocked(index)) {
-            return 'current';
-        }
-        return 'locked';
+        // All sessions are available (no locked state)
+        return 'current';
     },
 
     // Screen reader announcements
@@ -263,22 +262,83 @@ const UI = {
             const card = this.createSessionCard(session, index, status);
             Elements.sessionsGrid.appendChild(card);
         });
+
+        // Render continue learning section
+        this.renderContinueLearning();
+    },
+
+    renderContinueLearning() {
+        // Find the first incomplete session (or one with saved progress)
+        let continueIndex = -1;
+        let hasProgress = false;
+
+        // First, check if there's a session with saved reading progress
+        for (let i = 0; i < SESSIONS_DATA.length; i++) {
+            if (!AppState.completedSessions.includes(i) && AppState.lastSessionPosition[i] > 0) {
+                continueIndex = i;
+                hasProgress = true;
+                break;
+            }
+        }
+
+        // If no saved progress, find first incomplete session
+        if (continueIndex === -1) {
+            for (let i = 0; i < SESSIONS_DATA.length; i++) {
+                if (!AppState.completedSessions.includes(i)) {
+                    continueIndex = i;
+                    break;
+                }
+            }
+        }
+
+        // Hide section if all sessions complete or no sessions exist
+        if (continueIndex === -1) {
+            Elements.continueLearning.classList.add('hidden');
+            return;
+        }
+
+        // Show continue learning section
+        Elements.continueLearning.classList.remove('hidden');
+        const session = SESSIONS_DATA[continueIndex];
+        const statusText = hasProgress ? 'Continue reading...' : `Session ${session.number} of ${SESSIONS_DATA.length}`;
+        const ctaText = hasProgress ? 'Continue' : 'Start';
+
+        Elements.continueCard.innerHTML = `
+            <div class="session-icon">${session.icon || session.number}</div>
+            <div class="continue-info">
+                <div class="continue-title">${session.title}</div>
+                <div class="continue-subtitle">${session.subtitle}</div>
+                <div class="continue-status">${statusText}</div>
+            </div>
+            <div class="continue-cta">
+                ${ctaText}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </div>
+        `;
+
+        Elements.continueCard.onclick = () => Navigation.showSession(continueIndex);
     },
 
     createSessionCard(session, index, status) {
         const card = document.createElement('article');
         card.className = `session-card ${status}`;
         card.setAttribute('role', 'button');
-        card.setAttribute('tabindex', status === 'locked' ? '-1' : '0');
-        card.setAttribute('aria-label', `Session ${session.number}: ${session.title}. Status: ${status === 'locked' ? 'Locked' : status === 'completed' ? 'Completed' : 'Available'}. Duration: ${session.duration} minutes.`);
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `Session ${session.number}: ${session.title}. Status: ${status === 'completed' ? 'Completed' : 'Available'}. Duration: ${session.duration} minutes.`);
 
         // Check if there's a saved position for this session
         const hasProgress = AppState.lastSessionPosition[index] > 0 && !AppState.completedSessions.includes(index);
-        const ctaText = status === 'completed' ? 'Review' : hasProgress ? 'Continue' : status === 'current' ? 'Start' : 'Locked';
+        const ctaText = status === 'completed' ? 'Review' : hasProgress ? 'Continue' : 'Start';
 
-        const ctaIcon = status === 'locked'
-            ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>'
-            : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        const ctaIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+
+        // Get quiz score for completed sessions
+        const score = AppState.sessionScores[index];
+        const scoreDisplay = status === 'completed' && score
+            ? `<span class="card-score"><span class="score-icon">✓</span><span class="score-value">${score.correct}/${score.total}</span></span>`
+            : '';
 
         card.innerHTML = `
             <div class="card-status">
@@ -286,12 +346,6 @@ const UI = {
                     <span class="status-icon completed" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                             <path d="M5 13l4 4L19 7"/>
-                        </svg>
-                    </span>
-                ` : status === 'locked' ? `
-                    <span class="status-icon locked" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/>
                         </svg>
                     </span>
                 ` : ''}
@@ -311,6 +365,7 @@ const UI = {
                     </svg>
                     <span>${session.duration} min</span>
                 </span>
+                ${scoreDisplay}
                 <span class="card-cta">
                     ${ctaText}
                     ${ctaIcon}
@@ -318,15 +373,13 @@ const UI = {
             </div>
         `;
 
-        if (status !== 'locked') {
-            card.addEventListener('click', () => Navigation.showSession(index));
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    Navigation.showSession(index);
-                }
-            });
-        }
+        card.addEventListener('click', () => Navigation.showSession(index));
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                Navigation.showSession(index);
+            }
+        });
 
         return card;
     },
