@@ -12,28 +12,31 @@
   <meta property="og:description" content="Strengthening local communities by empowering small businesses, farmers, and producers.">
   <meta property="og:url" content="https://locallystrong.org">
 
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="flex flex-col min-h-screen">
   <a href="#main" class="skip-link">Skip to main content</a>
 
   <!-- Header -->
-  <header class="sticky top-0 z-30 bg-cream/95 backdrop-blur border-b border-charcoal/10">
+  <header class="fixed top-0 left-0 right-0 z-30 bg-transparent transition-all duration-300" id="header">
     <div class="container">
       <nav class="flex items-center justify-between h-16 md:h-20">
-        <a href="/" class="font-heading text-xl md:text-2xl text-forest">Locally Strong</a>
+        <a href="/" class="font-heading text-xl md:text-2xl text-white header-logo">Locally Strong</a>
 
         <!-- Desktop Nav -->
         <div class="hidden md:flex items-center gap-8">
-          <a href="/about.html" class="text-charcoal hover:text-forest transition-colors">About</a>
-          <a href="/get-involved.html" class="text-charcoal hover:text-forest transition-colors">Get Involved</a>
-          <a href="/stories/" class="text-charcoal hover:text-forest transition-colors">Stories</a>
-          <a href="/contact.html" class="text-charcoal hover:text-forest transition-colors">Contact</a>
-          <a href="/donate.html" class="btn btn-primary">Donate</a>
+          <a href="about.html" class="text-white/90 hover:text-white transition-colors header-link">About</a>
+          <a href="get-involved.html" class="text-white/90 hover:text-white transition-colors header-link">Get Involved</a>
+          <a href="stories/" class="text-white/90 hover:text-white transition-colors header-link">Stories</a>
+          <a href="contact.html" class="text-white/90 hover:text-white transition-colors header-link">Contact</a>
+          <a href="donate.html" class="btn btn-secondary header-btn">Donate</a>
         </div>
 
         <!-- Mobile Menu Button -->
-        <button id="menu-toggle" class="md:hidden p-2 -mr-2" aria-label="Open menu" aria-expanded="false">
+        <button id="menu-toggle" class="md:hidden p-2 -mr-2 text-white" aria-label="Open menu" aria-expanded="false">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
@@ -54,113 +57,278 @@
       </button>
     </div>
     <nav class="p-4 space-y-4">
-      <a href="/about.html" class="block py-2 text-lg text-charcoal hover:text-forest">About</a>
-      <a href="/get-involved.html" class="block py-2 text-lg text-charcoal hover:text-forest">Get Involved</a>
-      <a href="/stories/" class="block py-2 text-lg text-charcoal hover:text-forest">Stories</a>
-      <a href="/contact.html" class="block py-2 text-lg text-charcoal hover:text-forest">Contact</a>
-      <a href="/donate.html" class="btn btn-primary w-full text-center mt-4">Donate</a>
+      <a href="about.html" class="block py-2 text-lg text-charcoal hover:text-forest">About</a>
+      <a href="get-involved.html" class="block py-2 text-lg text-charcoal hover:text-forest">Get Involved</a>
+      <a href="stories/" class="block py-2 text-lg text-charcoal hover:text-forest">Stories</a>
+      <a href="contact.html" class="block py-2 text-lg text-charcoal hover:text-forest">Contact</a>
+      <a href="donate.html" class="btn btn-primary w-full text-center mt-4">Donate</a>
     </nav>
   </div>
 
   <!-- Main Content -->
   <main id="main" class="flex-1">
 
-    <!-- Hero -->
-    <section class="relative bg-forest text-white py-20 md:py-32">
-      <div class="container text-center">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading mb-6">
+    <!-- Video Hero -->
+    <section class="hero-video relative flex items-center justify-center min-h-screen overflow-hidden" aria-label="Hero section">
+      <!-- Video Background -->
+      <video
+        id="hero-video"
+        class="absolute inset-0 w-full h-full object-cover"
+        muted
+        loop
+        playsinline
+        poster="images/fresh-veggies.jpg"
+      >
+        <source src="images/hero-video.mp4" type="video/mp4">
+      </video>
+
+      <!-- Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+
+      <!-- Content -->
+      <div class="relative z-10 container text-center text-white px-4">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading mb-6 leading-tight">
           Rooted in Tradition.<br>Growing with Purpose.
         </h1>
-        <p class="text-xl md:text-2xl text-white/80 max-w-2xl mx-auto mb-8">
+        <p class="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed">
           Strengthening local communities by empowering small businesses, farmers, and producers.
         </p>
         <div class="flex flex-wrap gap-4 justify-center">
-          <a href="/get-involved.html" class="btn btn-secondary">Get Involved</a>
-          <a href="/about.html" class="btn border-2 border-white text-white hover:bg-white/10">Learn More</a>
+          <a href="get-involved.html" class="btn btn-secondary text-lg px-8 py-4">Get Involved</a>
+          <a href="about.html" class="btn border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-4">Learn More</a>
         </div>
+      </div>
+
+      <!-- Video Controls -->
+      <button
+        id="video-toggle"
+        class="absolute bottom-6 right-6 z-20 w-12 h-12 rounded-full bg-black/50 text-white backdrop-blur-sm flex items-center justify-center hover:bg-black/70 transition-colors"
+        aria-label="Pause video"
+      >
+        <svg id="pause-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6"/>
+        </svg>
+        <svg id="play-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+        </svg>
+      </button>
+
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+        <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
       </div>
     </section>
 
     <!-- Mission Triad -->
     <section class="py-16 md:py-24 bg-white">
       <div class="container">
-        <h2 class="section-heading mb-12">What We Do</h2>
+        <h2 class="section-heading mb-4">What We Do</h2>
+        <p class="section-subheading mb-12">Three pillars guide our work in building stronger local economies.</p>
         <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="w-16 h-16 rounded-full bg-forest/10 flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+          <div class="text-center p-6">
+            <div class="w-20 h-20 rounded-full bg-forest/10 flex items-center justify-center mx-auto mb-6">
+              <svg class="w-10 h-10 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
               </svg>
             </div>
-            <h3 class="font-heading text-xl mb-2">Connect</h3>
-            <p class="text-charcoal/70">Building bridges between local producers, businesses, and the communities they serve.</p>
+            <h3 class="font-heading text-2xl mb-3 text-charcoal">Connect</h3>
+            <p class="text-charcoal/70 leading-relaxed">Building bridges between local producers, businesses, and the communities they serve through markets, events, and partnerships.</p>
           </div>
-          <div class="text-center">
-            <div class="w-16 h-16 rounded-full bg-forest/10 flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          <div class="text-center p-6">
+            <div class="w-20 h-20 rounded-full bg-forest/10 flex items-center justify-center mx-auto mb-6">
+              <svg class="w-10 h-10 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
               </svg>
             </div>
-            <h3 class="font-heading text-xl mb-2">Educate</h3>
-            <p class="text-charcoal/70">Providing resources, mentorship, and workshops to help small businesses thrive.</p>
+            <h3 class="font-heading text-2xl mb-3 text-charcoal">Educate</h3>
+            <p class="text-charcoal/70 leading-relaxed">Providing resources, mentorship, and hands-on workshops to help small businesses develop the skills they need to thrive.</p>
           </div>
-          <div class="text-center">
-            <div class="w-16 h-16 rounded-full bg-forest/10 flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+          <div class="text-center p-6">
+            <div class="w-20 h-20 rounded-full bg-forest/10 flex items-center justify-center mx-auto mb-6">
+              <svg class="w-10 h-10 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
               </svg>
             </div>
-            <h3 class="font-heading text-xl mb-2">Grow</h3>
-            <p class="text-charcoal/70">Creating sustainable economic growth that benefits the entire community.</p>
+            <h3 class="font-heading text-2xl mb-3 text-charcoal">Grow</h3>
+            <p class="text-charcoal/70 leading-relaxed">Creating sustainable economic growth that keeps dollars local and benefits the entire community for generations to come.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Programs Preview -->
+    <section class="py-16 md:py-24 bg-cream">
+      <div class="container">
+        <h2 class="section-heading mb-4">Our Programs</h2>
+        <p class="section-subheading mb-12">Discover the initiatives driving positive change in our community.</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Program Card 1 -->
+          <a href="get-involved.html" class="group card hover:shadow-lg">
+            <img src="images/market-overview.jpg" alt="Farmers market with fresh produce" class="aspect-video object-cover rounded-lg mb-4 w-full">
+            <span class="text-xs font-medium text-earth uppercase tracking-wide">Markets</span>
+            <h3 class="font-heading text-xl mt-2 mb-2 text-charcoal group-hover:text-forest transition-colors">Farmers Markets</h3>
+            <p class="text-charcoal/70 text-sm">Weekly markets connecting local farmers directly with community members seeking fresh, local produce.</p>
+          </a>
+          <!-- Program Card 2 -->
+          <a href="get-involved.html" class="group card hover:shadow-lg">
+            <img src="images/workshop.jpg" alt="Business workshop and education" class="aspect-video object-cover rounded-lg mb-4 w-full">
+            <span class="text-xs font-medium text-earth uppercase tracking-wide">Education</span>
+            <h3 class="font-heading text-xl mt-2 mb-2 text-charcoal group-hover:text-forest transition-colors">Business Incubator</h3>
+            <p class="text-charcoal/70 text-sm">12-week program helping entrepreneurs transform their ideas into thriving local businesses.</p>
+          </a>
+          <!-- Program Card 3 -->
+          <a href="get-involved.html" class="group card hover:shadow-lg">
+            <img src="images/local-farmer.jpg" alt="Local vendor at market" class="aspect-video object-cover rounded-lg mb-4 w-full">
+            <span class="text-xs font-medium text-earth uppercase tracking-wide">Community</span>
+            <h3 class="font-heading text-xl mt-2 mb-2 text-charcoal group-hover:text-forest transition-colors">Vendor Network</h3>
+            <p class="text-charcoal/70 text-sm">A collaborative network of local vendors sharing resources, knowledge, and opportunities.</p>
+          </a>
+        </div>
+        <div class="text-center mt-10">
+          <a href="get-involved.html" class="btn btn-primary">View All Programs</a>
         </div>
       </div>
     </section>
 
     <!-- Impact Stats -->
-    <section class="py-16 md:py-24 bg-wheat">
+    <section class="py-16 md:py-24 bg-forest text-white">
       <div class="container">
-        <h2 class="section-heading mb-12">Our Impact</h2>
+        <h2 class="text-3xl md:text-4xl font-heading text-center mb-12">Our Impact</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div>
-            <p class="text-4xl md:text-5xl font-heading text-forest">50+</p>
-            <p class="text-charcoal/70 mt-2">Local Vendors</p>
+            <p class="text-5xl md:text-6xl font-heading">50+</p>
+            <p class="text-white/70 mt-2">Local Vendors</p>
           </div>
           <div>
-            <p class="text-4xl md:text-5xl font-heading text-forest">12K+</p>
-            <p class="text-charcoal/70 mt-2">Community Members</p>
+            <p class="text-5xl md:text-6xl font-heading">12K+</p>
+            <p class="text-white/70 mt-2">Community Members</p>
           </div>
           <div>
-            <p class="text-4xl md:text-5xl font-heading text-forest">$2M+</p>
-            <p class="text-charcoal/70 mt-2">Local Economic Impact</p>
+            <p class="text-5xl md:text-6xl font-heading">$2M+</p>
+            <p class="text-white/70 mt-2">Local Economic Impact</p>
           </div>
           <div>
-            <p class="text-4xl md:text-5xl font-heading text-forest">8</p>
-            <p class="text-charcoal/70 mt-2">Years Strong</p>
+            <p class="text-5xl md:text-6xl font-heading">8</p>
+            <p class="text-white/70 mt-2">Years Strong</p>
           </div>
         </div>
-        <p class="text-center text-sm text-charcoal/50 mt-8 italic">[PLACEHOLDER - Replace with real statistics]</p>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 md:py-24 bg-cream" id="testimonials">
+      <div class="container max-w-4xl">
+        <h2 class="section-heading mb-12">What People Are Saying</h2>
+
+        <div class="testimonial-carousel relative">
+          <!-- Testimonial Slides -->
+          <div class="testimonial-slides">
+            <div class="testimonial-slide active text-center px-4">
+              <blockquote>
+                <p class="font-heading text-xl md:text-2xl lg:text-3xl italic text-charcoal leading-relaxed">
+                  "Locally Strong didn't just help me start a business. They helped me believe I could. The mentorship and community support changed my life."
+                </p>
+                <footer class="mt-8">
+                  <cite class="not-italic">
+                    <span class="block font-medium text-charcoal text-lg">Maria Chen</span>
+                    <span class="block text-charcoal/60">Founder, Chen's Kitchen</span>
+                  </cite>
+                </footer>
+              </blockquote>
+            </div>
+            <div class="testimonial-slide text-center px-4">
+              <blockquote>
+                <p class="font-heading text-xl md:text-2xl lg:text-3xl italic text-charcoal leading-relaxed">
+                  "The farmers market gave us direct access to customers who truly value quality, local produce. Our sales have tripled since joining."
+                </p>
+                <footer class="mt-8">
+                  <cite class="not-italic">
+                    <span class="block font-medium text-charcoal text-lg">James & Sarah Mitchell</span>
+                    <span class="block text-charcoal/60">Green Valley Farm</span>
+                  </cite>
+                </footer>
+              </blockquote>
+            </div>
+            <div class="testimonial-slide text-center px-4">
+              <blockquote>
+                <p class="font-heading text-xl md:text-2xl lg:text-3xl italic text-charcoal leading-relaxed">
+                  "As a customer, I love knowing exactly where my food comes from. Locally Strong has connected me with amazing producers I never knew existed."
+                </p>
+                <footer class="mt-8">
+                  <cite class="not-italic">
+                    <span class="block font-medium text-charcoal text-lg">Patricia Williams</span>
+                    <span class="block text-charcoal/60">Community Member</span>
+                  </cite>
+                </footer>
+              </blockquote>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="flex items-center justify-center gap-4 mt-10">
+            <button
+              class="testimonial-prev w-12 h-12 rounded-full border border-charcoal/20 flex items-center justify-center hover:border-forest hover:text-forest transition-colors"
+              aria-label="Previous testimonial"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </button>
+
+            <div class="testimonial-dots flex gap-2">
+              <button class="testimonial-dot w-3 h-3 rounded-full bg-forest" aria-label="Go to testimonial 1" data-index="0"></button>
+              <button class="testimonial-dot w-3 h-3 rounded-full bg-charcoal/20 hover:bg-charcoal/40" aria-label="Go to testimonial 2" data-index="1"></button>
+              <button class="testimonial-dot w-3 h-3 rounded-full bg-charcoal/20 hover:bg-charcoal/40" aria-label="Go to testimonial 3" data-index="2"></button>
+            </div>
+
+            <button
+              class="testimonial-next w-12 h-12 rounded-full border border-charcoal/20 flex items-center justify-center hover:border-forest hover:text-forest transition-colors"
+              aria-label="Next testimonial"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Newsletter -->
-    <section class="py-16 md:py-24 bg-forest text-white">
+    <section class="py-16 md:py-24 bg-wheat">
       <div class="container text-center">
-        <h2 class="text-3xl md:text-4xl font-heading mb-4">Stay Connected</h2>
-        <p class="text-white/80 max-w-lg mx-auto mb-8">
+        <h2 class="text-3xl md:text-4xl font-heading text-charcoal mb-4">Stay Connected</h2>
+        <p class="text-charcoal/70 max-w-lg mx-auto mb-8">
           Get updates on market events, vendor spotlights, and ways to support local businesses.
         </p>
-        <form id="newsletter-form" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+        <form id="newsletter-form" data-newsletter class="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
           <input
             type="email"
             name="email"
             placeholder="Enter your email"
             required
-            class="flex-1 px-4 py-3 rounded-full text-charcoal focus:outline-none focus:ring-2 focus:ring-white/50"
+            class="form-input flex-1 rounded-full"
           >
-          <button type="submit" class="btn btn-secondary whitespace-nowrap">Subscribe</button>
+          <button type="submit" class="btn btn-primary whitespace-nowrap">Subscribe</button>
         </form>
-        <p id="newsletter-message" class="mt-4 text-sm hidden"></p>
+      </div>
+    </section>
+
+    <!-- Action Strip -->
+    <section class="py-12 bg-forest text-white">
+      <div class="container">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-heading">Ready to make a difference?</h2>
+            <p class="text-white/70 mt-2">Join us in building a stronger local economy.</p>
+          </div>
+          <div class="flex flex-wrap gap-4">
+            <a href="donate.html" class="btn btn-secondary">Donate Now</a>
+            <a href="get-involved.html" class="btn border-2 border-white text-white hover:bg-white/10">Volunteer</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -179,10 +347,10 @@
         <div>
           <h4 class="font-medium mb-4">Quick Links</h4>
           <nav class="space-y-2">
-            <a href="/about.html" class="block text-white/70 hover:text-white transition-colors">About</a>
-            <a href="/get-involved.html" class="block text-white/70 hover:text-white transition-colors">Get Involved</a>
-            <a href="/stories/" class="block text-white/70 hover:text-white transition-colors">Stories</a>
-            <a href="/contact.html" class="block text-white/70 hover:text-white transition-colors">Contact</a>
+            <a href="about.html" class="block text-white/70 hover:text-white transition-colors">About</a>
+            <a href="get-involved.html" class="block text-white/70 hover:text-white transition-colors">Get Involved</a>
+            <a href="stories/" class="block text-white/70 hover:text-white transition-colors">Stories</a>
+            <a href="contact.html" class="block text-white/70 hover:text-white transition-colors">Contact</a>
           </nav>
         </div>
         <div>
@@ -197,13 +365,13 @@
       <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
         <p class="text-white/50 text-sm">&copy; 2025 Locally Strong. All rights reserved.</p>
         <nav class="flex gap-6 text-sm">
-          <a href="/privacy.html" class="text-white/50 hover:text-white">Privacy Policy</a>
-          <a href="/terms.html" class="text-white/50 hover:text-white">Terms of Use</a>
+          <a href="privacy.html" class="text-white/50 hover:text-white">Privacy Policy</a>
+          <a href="terms.html" class="text-white/50 hover:text-white">Terms of Use</a>
         </nav>
       </div>
     </div>
   </footer>
 
-  <script src="/js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

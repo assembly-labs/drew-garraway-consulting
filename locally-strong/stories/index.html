@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stories | Locally Strong</title>
+  <meta name="description" content="Stories of resilience, growth, and community from local entrepreneurs and farmers supported by Locally Strong.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="flex flex-col min-h-screen">
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-cream/95 backdrop-blur border-b border-charcoal/10">
+    <div class="container">
+      <nav class="flex items-center justify-between h-16 md:h-20">
+        <a href="../index.html" class="font-heading text-xl md:text-2xl text-forest">Locally Strong</a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="../about.html" class="text-charcoal hover:text-forest transition-colors">About</a>
+          <a href="../get-involved.html" class="text-charcoal hover:text-forest transition-colors">Get Involved</a>
+          <a href="./" class="text-forest font-medium">Stories</a>
+          <a href="../contact.html" class="text-charcoal hover:text-forest transition-colors">Contact</a>
+          <a href="../donate.html" class="btn btn-primary">Donate</a>
+        </div>
+        <button id="menu-toggle" class="md:hidden p-2 -mr-2" aria-label="Open menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div id="nav-overlay" class="nav-overlay"></div>
+  <div id="mobile-nav" class="mobile-nav">
+    <div class="flex items-center justify-between p-4 border-b border-charcoal/10">
+      <span class="font-heading text-xl text-forest">Menu</span>
+      <button id="menu-close" class="p-2 -mr-2" aria-label="Close menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="p-4 space-y-4">
+      <a href="../about.html" class="block py-2 text-lg text-charcoal hover:text-forest">About</a>
+      <a href="../get-involved.html" class="block py-2 text-lg text-charcoal hover:text-forest">Get Involved</a>
+      <a href="./" class="block py-2 text-lg text-forest font-medium">Stories</a>
+      <a href="../contact.html" class="block py-2 text-lg text-charcoal hover:text-forest">Contact</a>
+      <a href="../donate.html" class="btn btn-primary w-full text-center mt-4">Donate</a>
+    </nav>
+  </div>
+
+  <main id="main" class="flex-1">
+    <!-- Hero -->
+    <section class="py-12 md:py-16 bg-white">
+      <div class="container max-w-3xl">
+        <h1 class="section-heading">Community Stories</h1>
+        <p class="section-subheading">Real stories from the entrepreneurs, farmers, and community members who are building a more resilient local economy.</p>
+      </div>
+    </section>
+
+    <!-- Stories Grid -->
+    <section class="py-12 bg-cream">
+      <div class="container">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <!-- Story Card 1 -->
+          <article class="card group">
+            <img src="../images/local-business.jpg" alt="Local entrepreneur at work" class="aspect-video object-cover rounded-lg mb-4 w-full">
+            <span class="text-xs font-medium text-earth uppercase tracking-wide">Entrepreneur</span>
+            <h2 class="font-heading text-xl text-charcoal mt-2 mb-3 group-hover:text-forest transition-colors">
+              <a href="marias-kitchen.html" class="hover:underline">From Kitchen Table to Farmers Market</a>
+            </h2>
+            <p class="text-charcoal/70 text-sm mb-4">How Maria Chen turned her family recipes into a thriving prepared foods business with support from our incubator program.</p>
+            <div class="flex items-center gap-3 text-sm text-charcoal/60">
+              <span>Maria Chen</span>
+              <span class="w-1 h-1 rounded-full bg-charcoal/30"></span>
+              <span>December 2024</span>
+            </div>
+          </article>
+
+          <!-- Story Card 2 -->
+          <article class="card group">
+            <img src="../images/local-farmer.jpg" alt="Local farmer with produce" class="aspect-video object-cover rounded-lg mb-4 w-full">
+            <span class="text-xs font-medium text-forest uppercase tracking-wide">Farmer</span>
+            <h2 class="font-heading text-xl text-charcoal mt-2 mb-3 group-hover:text-forest transition-colors">
+              <a href="green-valley-farm.html" class="hover:underline">Regenerative Farming, Community Roots</a>
+            </h2>
+            <p class="text-charcoal/70 text-sm mb-4">The Johnson family transitioned to regenerative practices and found a new market through our local food network.</p>
+            <div class="flex items-center gap-3 text-sm text-charcoal/60">
+              <span>Tom Johnson</span>
+              <span class="w-1 h-1 rounded-full bg-charcoal/30"></span>
+              <span>November 2024</span>
+            </div>
+          </article>
+
+          <!-- Story Card 3 -->
+          <article class="card group">
+            <img src="../images/community-gathering.jpg" alt="Community gathering" class="aspect-video object-cover rounded-lg mb-4 w-full">
+            <span class="text-xs font-medium text-earth uppercase tracking-wide">Community</span>
+            <h2 class="font-heading text-xl text-charcoal mt-2 mb-3 group-hover:text-forest transition-colors">
+              <a href="main-street-revival.html" class="hover:underline">Main Street Revival</a>
+            </h2>
+            <p class="text-charcoal/70 text-sm mb-4">When three storefronts sat empty, our community came together to create a small business collective that's now thriving.</p>
+            <div class="flex items-center gap-3 text-sm text-charcoal/60">
+              <span>Sarah Williams</span>
+              <span class="w-1 h-1 rounded-full bg-charcoal/30"></span>
+              <span>October 2024</span>
+            </div>
+          </article>
+
+          <!-- Story Card 4 -->
+          <article class="card group">
+            <img src="../images/fresh-veggies.jpg" alt="Fresh vegetables at market" class="aspect-video object-cover rounded-lg mb-4 w-full">
+            <span class="text-xs font-medium text-forest uppercase tracking-wide">Entrepreneur</span>
+            <h2 class="font-heading text-xl text-charcoal mt-2 mb-3 group-hover:text-forest transition-colors">
+              <a href="/stories/craft-and-code.html" class="hover:underline">Where Craft Meets Code</a>
+            </h2>
+            <p class="text-charcoal/70 text-sm mb-4">A local artisan learned digital marketing through our workshops and now ships handmade goods nationwide.</p>
+            <div class="flex items-center gap-3 text-sm text-charcoal/60">
+              <span>James Rodriguez</span>
+              <span class="w-1 h-1 rounded-full bg-charcoal/30"></span>
+              <span>September 2024</span>
+            </div>
+          </article>
+
+          <!-- Story Card 5 -->
+          <article class="card group">
+            <img src="../images/market-overview.jpg" alt="Farmers market overview" class="aspect-video object-cover rounded-lg mb-4 w-full">
+            <span class="text-xs font-medium text-earth uppercase tracking-wide">Farmer</span>
+            <h2 class="font-heading text-xl text-charcoal mt-2 mb-3 group-hover:text-forest transition-colors">
+              <a href="urban-roots.html" class="hover:underline">Urban Roots, Community Fruits</a>
+            </h2>
+            <p class="text-charcoal/70 text-sm mb-4">An abandoned lot became a thriving urban farm that now supplies fresh produce to three local restaurants.</p>
+            <div class="flex items-center gap-3 text-sm text-charcoal/60">
+              <span>Angela Morris</span>
+              <span class="w-1 h-1 rounded-full bg-charcoal/30"></span>
+              <span>August 2024</span>
+            </div>
+          </article>
+
+          <!-- Story Card 6 -->
+          <article class="card group">
+            <img src="../images/workshop.jpg" alt="Mentorship workshop" class="aspect-video object-cover rounded-lg mb-4 w-full">
+            <span class="text-xs font-medium text-forest uppercase tracking-wide">Mentor</span>
+            <h2 class="font-heading text-xl text-charcoal mt-2 mb-3 group-hover:text-forest transition-colors">
+              <a href="paying-it-forward.html" class="hover:underline">Paying It Forward</a>
+            </h2>
+            <p class="text-charcoal/70 text-sm mb-4">A retired business owner finds new purpose mentoring the next generation of local entrepreneurs.</p>
+            <div class="flex items-center gap-3 text-sm text-charcoal/60">
+              <span>Robert Kim</span>
+              <span class="w-1 h-1 rounded-full bg-charcoal/30"></span>
+              <span>July 2024</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Share Your Story CTA -->
+    <section class="py-16 bg-forest text-white">
+      <div class="container text-center">
+        <h2 class="font-heading text-3xl md:text-4xl mb-4">Share Your Story</h2>
+        <p class="text-white/80 max-w-xl mx-auto mb-8">Has Locally Strong made a difference in your business or community? We'd love to hear from you and share your journey.</p>
+        <a href="../contact.html?subject=story" class="btn bg-white text-forest hover:bg-white/90">Submit Your Story</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-charcoal text-white py-12">
+    <div class="container">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div class="md:col-span-2">
+          <h3 class="font-heading text-xl mb-4">Locally Strong</h3>
+          <p class="text-white/70 max-w-sm">Strengthening local communities by empowering small businesses, farmers, and producers.</p>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Quick Links</h4>
+          <nav class="space-y-2">
+            <a href="../about.html" class="block text-white/70 hover:text-white">About</a>
+            <a href="../get-involved.html" class="block text-white/70 hover:text-white">Get Involved</a>
+            <a href="./" class="block text-white/70 hover:text-white">Stories</a>
+            <a href="../contact.html" class="block text-white/70 hover:text-white">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Contact</h4>
+          <address class="not-italic text-white/70 space-y-2">
+            <p>123 Market Street<br>Wayne, PA 19087</p>
+            <p><a href="mailto:hello@locallystrong.org" class="hover:text-white">hello@locallystrong.org</a></p>
+          </address>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-white/50 text-sm">&copy; 2025 Locally Strong. All rights reserved.</p>
+        <nav class="flex gap-6 text-sm">
+          <a href="../privacy.html" class="text-white/50 hover:text-white">Privacy Policy</a>
+          <a href="../terms.html" class="text-white/50 hover:text-white">Terms of Use</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

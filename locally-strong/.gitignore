@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Build output (regenerated from source)
+css/style.css
+
+# Large media files (download with scripts/download-media.sh)
+images/*.mp4
+images/*.webm
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.idea/
+.vscode/

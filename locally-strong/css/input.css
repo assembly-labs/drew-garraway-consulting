@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap');
-
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -24,7 +22,7 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-colors duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-all duration-200;
   }
 
   .btn-primary {
@@ -44,7 +42,7 @@
   }
 
   .card {
-    @apply rounded-xl border border-charcoal/10 bg-white p-6 transition-shadow hover:shadow-md;
+    @apply block rounded-xl border border-charcoal/10 bg-white p-6 transition-all hover:shadow-lg no-underline;
   }
 
   .form-input {
@@ -62,7 +60,7 @@
   }
 
   .section-subheading {
-    @apply text-lg text-charcoal/70 text-center mt-4 max-w-2xl mx-auto;
+    @apply text-lg text-charcoal/70 text-center max-w-2xl mx-auto;
   }
 }
 
@@ -92,6 +90,68 @@
   @apply translate-x-0;
 }
 
+/* Header scroll state */
+.header-scrolled {
+  @apply bg-cream/95 backdrop-blur shadow-sm;
+}
+
+.header-scrolled .header-logo,
+.header-scrolled .header-link {
+  @apply text-charcoal;
+}
+
+.header-scrolled .header-link:hover {
+  @apply text-forest;
+}
+
+.header-scrolled #menu-toggle {
+  @apply text-charcoal;
+}
+
+/* Video hero */
+.hero-video {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* Fallback background for video hero when video doesn't load */
+.hero-video-fallback {
+  @apply bg-gradient-to-br from-forest to-forest/80;
+}
+
+/* Testimonial carousel */
+.testimonial-slides {
+  position: relative;
+  min-height: 200px;
+}
+
+.testimonial-slide {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.testimonial-slide.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Animations */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%) translateX(-50%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0) translateX(-50%);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -102,5 +162,9 @@
 
   html {
     scroll-behavior: auto;
+  }
+
+  .animate-bounce {
+    animation: none;
   }
 }

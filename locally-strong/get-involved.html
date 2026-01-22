@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Involved | Locally Strong</title>
+  <meta name="description" content="Join our mission to strengthen local communities. Volunteer, partner with us, or support our programs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="flex flex-col min-h-screen">
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-cream/95 backdrop-blur border-b border-charcoal/10">
+    <div class="container">
+      <nav class="flex items-center justify-between h-16 md:h-20">
+        <a href="index.html" class="font-heading text-xl md:text-2xl text-forest">Locally Strong</a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="about.html" class="text-charcoal hover:text-forest transition-colors">About</a>
+          <a href="get-involved.html" class="text-forest font-medium">Get Involved</a>
+          <a href="stories/" class="text-charcoal hover:text-forest transition-colors">Stories</a>
+          <a href="contact.html" class="text-charcoal hover:text-forest transition-colors">Contact</a>
+          <a href="donate.html" class="btn btn-primary">Donate</a>
+        </div>
+        <button id="menu-toggle" class="md:hidden p-2 -mr-2" aria-label="Open menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div id="nav-overlay" class="nav-overlay"></div>
+  <div id="mobile-nav" class="mobile-nav">
+    <div class="flex items-center justify-between p-4 border-b border-charcoal/10">
+      <span class="font-heading text-xl text-forest">Menu</span>
+      <button id="menu-close" class="p-2 -mr-2" aria-label="Close menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="p-4 space-y-4">
+      <a href="about.html" class="block py-2 text-lg text-charcoal hover:text-forest">About</a>
+      <a href="get-involved.html" class="block py-2 text-lg text-forest font-medium">Get Involved</a>
+      <a href="stories/" class="block py-2 text-lg text-charcoal hover:text-forest">Stories</a>
+      <a href="contact.html" class="block py-2 text-lg text-charcoal hover:text-forest">Contact</a>
+      <a href="donate.html" class="btn btn-primary w-full text-center mt-4">Donate</a>
+    </nav>
+  </div>
+
+  <main id="main" class="flex-1">
+    <!-- Hero -->
+    <section class="py-12 md:py-16 bg-white">
+      <div class="container max-w-3xl">
+        <h1 class="section-heading">Get Involved</h1>
+        <p class="section-subheading">There are many ways to support our mission. Whether you have time, skills, or resources to share, we'd love to work with you.</p>
+      </div>
+    </section>
+
+    <!-- Ways to Help -->
+    <section class="py-12 bg-cream">
+      <div class="container">
+        <div class="grid md:grid-cols-3 gap-8">
+
+          <!-- Volunteer -->
+          <div class="card">
+            <div class="w-12 h-12 rounded-full bg-forest/10 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+            </div>
+            <h2 class="font-heading text-xl text-charcoal mb-3">Volunteer</h2>
+            <p class="text-charcoal/70 mb-4">Join our team of dedicated volunteers who help run markets, mentor entrepreneurs, and support community events.</p>
+            <ul class="text-sm text-charcoal/70 space-y-2 mb-6">
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-forest mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Market day assistance
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-forest mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Business mentorship
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-forest mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Event coordination
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-forest mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Administrative support
+              </li>
+            </ul>
+            <a href="contact.html?subject=volunteer" class="btn btn-primary w-full">Apply to Volunteer</a>
+          </div>
+
+          <!-- Partner -->
+          <div class="card">
+            <div class="w-12 h-12 rounded-full bg-earth/10 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-earth" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <h2 class="font-heading text-xl text-charcoal mb-3">Partner With Us</h2>
+            <p class="text-charcoal/70 mb-4">Businesses and organizations can partner with us to amplify community impact and support local economic development.</p>
+            <ul class="text-sm text-charcoal/70 space-y-2 mb-6">
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-earth mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Corporate sponsorships
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-earth mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Event hosting
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-earth mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                In-kind donations
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-earth mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Pro bono services
+              </li>
+            </ul>
+            <a href="contact.html?subject=partnership" class="btn btn-secondary w-full">Become a Partner</a>
+          </div>
+
+          <!-- Donate -->
+          <div class="card">
+            <div class="w-12 h-12 rounded-full bg-sage/30 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+            </div>
+            <h2 class="font-heading text-xl text-charcoal mb-3">Make a Gift</h2>
+            <p class="text-charcoal/70 mb-4">Your financial support directly funds programs that empower entrepreneurs and strengthen local food systems.</p>
+            <ul class="text-sm text-charcoal/70 space-y-2 mb-6">
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-forest mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                One-time donations
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-forest mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Monthly giving
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-forest mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Stock transfers
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-forest mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Planned giving
+              </li>
+            </ul>
+            <a href="donate.html" class="btn btn-primary w-full">Donate Now</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Current Partners -->
+    <section class="py-16 bg-white">
+      <div class="container">
+        <h2 class="section-heading mb-4">Our Partners</h2>
+        <p class="section-subheading mb-12">We're grateful to work alongside these organizations committed to local community development.</p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="bg-cream rounded-lg p-6 flex items-center justify-center h-24">
+            <span class="text-charcoal/40 text-sm">Partner Logo</span>
+          </div>
+          <div class="bg-cream rounded-lg p-6 flex items-center justify-center h-24">
+            <span class="text-charcoal/40 text-sm">Partner Logo</span>
+          </div>
+          <div class="bg-cream rounded-lg p-6 flex items-center justify-center h-24">
+            <span class="text-charcoal/40 text-sm">Partner Logo</span>
+          </div>
+          <div class="bg-cream rounded-lg p-6 flex items-center justify-center h-24">
+            <span class="text-charcoal/40 text-sm">Partner Logo</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-forest text-white">
+      <div class="container text-center">
+        <h2 class="font-heading text-3xl md:text-4xl mb-4">Ready to Make a Difference?</h2>
+        <p class="text-white/80 max-w-xl mx-auto mb-8">Whatever your capacity, there's a place for you in our community. Let's build something strong together.</p>
+        <a href="contact.html" class="btn bg-white text-forest hover:bg-white/90">Get Started</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-charcoal text-white py-12">
+    <div class="container">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div class="md:col-span-2">
+          <h3 class="font-heading text-xl mb-4">Locally Strong</h3>
+          <p class="text-white/70 max-w-sm">Strengthening local communities by empowering small businesses, farmers, and producers.</p>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Quick Links</h4>
+          <nav class="space-y-2">
+            <a href="about.html" class="block text-white/70 hover:text-white">About</a>
+            <a href="get-involved.html" class="block text-white/70 hover:text-white">Get Involved</a>
+            <a href="stories/" class="block text-white/70 hover:text-white">Stories</a>
+            <a href="contact.html" class="block text-white/70 hover:text-white">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Contact</h4>
+          <address class="not-italic text-white/70 space-y-2">
+            <p>123 Market Street<br>Wayne, PA 19087</p>
+            <p><a href="mailto:hello@locallystrong.org" class="hover:text-white">hello@locallystrong.org</a></p>
+          </address>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-white/50 text-sm">&copy; 2025 Locally Strong. All rights reserved.</p>
+        <nav class="flex gap-6 text-sm">
+          <a href="privacy.html" class="text-white/50 hover:text-white">Privacy Policy</a>
+          <a href="terms.html" class="text-white/50 hover:text-white">Terms of Use</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
