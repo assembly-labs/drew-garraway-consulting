@@ -511,8 +511,8 @@ const SESSIONS_DATA = [
         ],
         images: [
             {
-                src: 'https://images.unsplash.com/photo-1534190760961-74e8c1c5c3da?w=800&q=80',
-                alt: 'The Hollywood Sign',
+                src: 'https://images.unsplash.com/photo-1542204637-e67bc7d41e48?w=800&q=80',
+                alt: 'The Hollywood Sign on Mount Lee',
                 caption: 'The iconic Hollywood Sign'
             },
             {
@@ -749,8 +749,8 @@ const SESSIONS_DATA = [
                 caption: 'The stunning Getty Center'
             },
             {
-                src: 'https://images.unsplash.com/photo-1580655653885-65763b2597d0?w=800&q=80',
-                alt: 'Urban Light installation at LACMA',
+                src: 'https://images.unsplash.com/photo-1494023070108-9d731ed6f0da?w=800&q=80',
+                alt: 'Urban Light installation at LACMA with vintage street lamps',
                 caption: 'LACMA\'s famous Urban Light'
             },
             {
@@ -859,11 +859,11 @@ const SESSIONS_DATA = [
             },
             {
                 src: 'https://images.unsplash.com/photo-1534190760961-74e8c1c5c3da?w=800&q=80',
-                alt: 'Downtown LA skyscrapers',
+                alt: 'Downtown LA skyscrapers at sunset',
                 caption: 'Modern downtown LA skyline'
             },
             {
-                src: 'https://images.unsplash.com/photo-1580655653885-65763b2597d0?w=800&q=80',
+                src: 'https://images.unsplash.com/photo-1534438097545-a2c22c57f2ad?w=800&q=80',
                 alt: 'Walt Disney Concert Hall silver architecture',
                 caption: 'The stunning Disney Concert Hall'
             },
@@ -1096,8 +1096,8 @@ const SESSIONS_DATA = [
                 caption: 'Charming Old Town Pasadena'
             },
             {
-                src: 'https://images.unsplash.com/photo-1580655653885-65763b2597d0?w=800&q=80',
-                alt: 'Valley panoramic view',
+                src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+                alt: 'San Fernando Valley panoramic view',
                 caption: 'The San Fernando Valley'
             },
             {
