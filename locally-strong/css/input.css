@@ -83,7 +83,9 @@
 }
 
 .mobile-nav {
-  @apply fixed top-0 right-0 h-full w-80 max-w-full bg-white z-50 transform translate-x-full transition-transform;
+  @apply fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white z-50 transform translate-x-full transition-transform;
+  /* Safe area for notched devices */
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .mobile-nav.active {
@@ -112,6 +114,16 @@
 .hero-video {
   min-height: 100vh;
   min-height: 100svh;
+  /* Safe area for notched devices */
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Video toggle - better positioning on mobile */
+@media (max-width: 640px) {
+  #video-toggle {
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    right: 1rem;
+  }
 }
 
 /* Fallback background for video hero when video doesn't load */
@@ -123,6 +135,25 @@
 .testimonial-slides {
   position: relative;
   min-height: 200px;
+}
+
+/* Better touch targets for mobile carousel controls */
+@media (max-width: 640px) {
+  .testimonial-prev,
+  .testimonial-next {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  /* Larger tap area for dots while keeping visual size small */
+  .testimonial-dots {
+    gap: 0.75rem;
+  }
+
+  .testimonial-dot {
+    padding: 0.5rem;
+    margin: -0.5rem;
+  }
 }
 
 .testimonial-slide {
@@ -150,6 +181,43 @@
 
 .animate-bounce {
   animation: bounce 1s infinite;
+}
+
+/* Safe area insets for modern devices */
+@supports (padding: env(safe-area-inset-bottom)) {
+  footer {
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom));
+  }
+
+  /* Fixed header safe area */
+  header.fixed,
+  header.sticky {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Improve text readability on small screens */
+@media (max-width: 640px) {
+  .section-heading {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+
+  .section-subheading {
+    font-size: 1rem;
+  }
+
+  /* Better spacing for mobile forms */
+  .form-input {
+    font-size: 16px; /* Prevents iOS zoom on input focus */
+  }
+
+  /* Ensure buttons have adequate touch targets */
+  .btn {
+    min-height: 44px;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
 }
 
 /* Reduced motion */

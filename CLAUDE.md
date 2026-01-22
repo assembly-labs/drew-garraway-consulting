@@ -25,6 +25,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | **Gather** | `/gather/` | Farmers market platform | Yes |
 | **Read Out Loud** | `/read-out-loud/` | Text-to-speech PWA for reading documents | Yes |
 | **Agency** | `/agency/` | Agency Brewing brand assets and style guide | Yes |
+| **Locally Strong** | `/locally-strong/` | Nonprofit website for local community empowerment | Yes |
 
 ---
 
@@ -46,6 +47,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | Gather | Next.js 14 | Next.js | Tailwind | TBD |
 | Read Out Loud | Vanilla JS | N/A | Custom CSS | Cloudflare Pages |
 | Agency | Static HTML | N/A | Custom CSS | N/A |
+| Locally Strong | Static HTML | Tailwind CLI | Tailwind | Cloudflare Pages |
 
 ---
 

@@ -62,11 +62,67 @@ All media is free from [Pexels.com](https://pexels.com) - no attribution require
 
 ## Deployment
 
-The site deploys to Cloudflare Pages. Connect the repository and configure:
+The site deploys to Cloudflare Pages via GitHub integration.
 
+### Automatic Deployment (Recommended)
+
+Push to `main` branch to trigger automatic deployment:
+
+```bash
+# After making changes, build CSS first
+npm run build
+
+# Commit all changes including compiled CSS
+git add .
+git commit -m "Your commit message"
+git push origin main
+```
+
+Cloudflare Pages will automatically detect the push and deploy within 1-2 minutes.
+
+### Cloudflare Pages Configuration
+
+If setting up a new project:
 - **Build command**: `npm run build`
 - **Build output directory**: `/` (root)
 - **Root directory**: `locally-strong`
+
+### Manual Deployment (Optional)
+
+For manual deployment using wrangler CLI:
+
+```bash
+# Install wrangler if needed
+npm install -g wrangler
+
+# Build CSS
+npm run build
+
+# Deploy to Cloudflare Pages
+wrangler pages deploy . --project-name=locally-strong
+```
+
+## Responsive Design
+
+The site is built mobile-first using Tailwind CSS responsive utilities:
+
+### Breakpoints
+- **sm** (640px): Small devices
+- **md** (768px): Tablets
+- **lg** (1024px): Desktops
+
+### Mobile Considerations
+- **Safe area insets**: Supports notched devices (iPhone X+)
+- **Touch targets**: Minimum 44px for interactive elements
+- **Form inputs**: 16px font size to prevent iOS zoom on focus
+- **Mobile navigation**: Slide-out drawer with overlay
+- **Video controls**: Repositioned for safe areas on mobile
+
+### Accessibility
+- Skip to main content link
+- ARIA labels on interactive elements
+- Keyboard navigation support (Escape to close menu, arrow keys for carousel)
+- `prefers-reduced-motion` support for animations
 
 ## Design System
 
