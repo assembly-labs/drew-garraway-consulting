@@ -25,6 +25,11 @@ const SESSIONS_DATA = [
         subtitle: 'Discover the Golden State',
         duration: 7,
         icon: '🌟',
+        heroImage: {
+            src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=80',
+            alt: 'Dramatic Big Sur coastline with rocky cliffs meeting the Pacific Ocean',
+            credit: 'Big Sur Coast'
+        },
         sections: [
             {
                 heading: 'The Golden State',
@@ -60,23 +65,23 @@ const SESSIONS_DATA = [
                 caption: 'The California Bear Flag'
             },
             {
-                src: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&q=80',
-                alt: 'Golden Gate Bridge in San Francisco',
+                src: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=1000&q=80',
+                alt: 'Golden Gate Bridge spanning San Francisco Bay at sunset',
                 caption: 'San Francisco\'s Golden Gate Bridge'
             },
             {
-                src: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80',
-                alt: 'Giant redwood trees in California forest',
+                src: 'https://images.unsplash.com/photo-1604537466158-719b1972feb8?w=1000&q=80',
+                alt: 'Towering giant sequoia redwood trees reaching toward the sky',
                 caption: 'California\'s giant redwood trees'
             },
             {
-                src: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80',
-                alt: 'Beautiful San Diego beach with Pacific Ocean',
+                src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1000&q=80',
+                alt: 'Golden sand beach with turquoise Pacific Ocean waves',
                 caption: 'California\'s stunning Pacific coastline'
             },
             {
-                src: 'https://upload.wikimedia.org/wikipedia/commons/6/69/California_poppy.jpg',
-                alt: 'Orange California Golden Poppies in bloom',
+                src: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1000&q=80',
+                alt: 'Vibrant orange California poppies blooming in a field',
                 caption: 'California\'s state flower - the Golden Poppy'
             }
         ],
@@ -138,6 +143,11 @@ const SESSIONS_DATA = [
         subtitle: 'Meet America\'s second largest city',
         duration: 8,
         icon: '😇',
+        heroImage: {
+            src: 'https://images.unsplash.com/photo-1580655653885-65763b2597d0?w=1400&q=80',
+            alt: 'Downtown Los Angeles skyline with palm trees at golden hour',
+            credit: 'LA Skyline'
+        },
         sections: [
             {
                 heading: 'Welcome to LA!',
@@ -167,29 +177,29 @@ const SESSIONS_DATA = [
         ],
         images: [
             {
-                src: 'https://images.pexels.com/photos/29276388/pexels-photo-29276388.jpeg?auto=compress&cs=tinysrgb&w=800',
+                src: 'https://images.unsplash.com/photo-1534190760961-74e8c1c5c3da?w=1000&q=80',
                 alt: 'Los Angeles skyline with palm trees at sunset',
                 caption: 'Downtown LA\'s impressive skyline'
             },
             {
-                src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Hollywood_Sign_%28Zuschnitt%29.jpg/1280px-Hollywood_Sign_%28Zuschnitt%29.jpg',
+                src: 'https://images.unsplash.com/photo-1568454537842-d933259bb258?w=1000&q=80',
                 alt: 'The famous Hollywood Sign on Mount Lee',
                 caption: 'The iconic Hollywood Sign'
             },
             {
-                src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Griffith_Observatory_entrance_lawn_with_Hollywood_sign.jpg/1280px-Griffith_Observatory_entrance_lawn_with_Hollywood_sign.jpg',
-                alt: 'Griffith Observatory with Hollywood Sign in background',
-                caption: 'Griffith Observatory and the Hollywood Sign'
+                src: 'https://images.unsplash.com/photo-1566232392379-afd9298e6a46?w=1000&q=80',
+                alt: 'Griffith Observatory at dusk with LA city lights',
+                caption: 'Griffith Observatory overlooking the city'
             },
             {
-                src: 'https://images.pexels.com/photos/4432246/pexels-photo-4432246.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Los Angeles at night with city lights',
-                caption: 'LA lights up at night'
+                src: 'https://images.pexels.com/photos/2263683/pexels-photo-2263683.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Tall palm trees lining a Los Angeles street',
+                caption: 'Palm-lined LA streets'
             },
             {
-                src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Los_Angeles_City_Hall_%28color%29_edit1.jpg/800px-Los_Angeles_City_Hall_%28color%29_edit1.jpg',
-                alt: 'Los Angeles City Hall tower',
-                caption: 'Historic LA City Hall'
+                src: 'https://images.unsplash.com/photo-1515896769750-31548aa180ed?w=1000&q=80',
+                alt: 'Aerial view of Los Angeles basin stretching to the horizon',
+                caption: 'LA stretches for miles'
             }
         ],
         facts: [
@@ -244,6 +254,11 @@ const SESSIONS_DATA = [
         subtitle: 'Rams, Dodgers, and Championship Glory',
         duration: 8,
         icon: '🏈',
+        heroImage: {
+            src: 'https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg?auto=compress&cs=tinysrgb&w=1400',
+            alt: 'Green football field inside a massive stadium under bright lights',
+            credit: 'Football Stadium'
+        },
         sections: [
             {
                 heading: 'The Los Angeles Rams',
@@ -277,32 +292,32 @@ const SESSIONS_DATA = [
         ],
         images: [
             {
-                src: 'https://images.pexels.com/photos/270071/pexels-photo-270071.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Football stadium with bright lights',
+                src: 'https://images.pexels.com/photos/270071/pexels-photo-270071.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Football stadium filled with fans under bright lights',
                 caption: 'SoFi Stadium - Home of the LA Rams'
             },
             {
-                src: 'https://images.pexels.com/photos/269948/pexels-photo-269948.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Baseball stadium during evening game',
-                caption: 'Legendary Dodger Stadium'
+                src: 'https://images.pexels.com/photos/1374546/pexels-photo-1374546.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Baseball player swinging bat at night game',
+                caption: 'Legendary Dodger Stadium action'
             },
             {
-                src: 'https://images.pexels.com/photos/1752757/pexels-photo-1752757.jpeg?auto=compress&cs=tinysrgb&w=800',
+                src: 'https://images.pexels.com/photos/1752757/pexels-photo-1752757.jpeg?auto=compress&cs=tinysrgb&w=1000',
                 alt: 'Basketball going through the hoop',
                 caption: 'Lakers basketball action'
             },
             {
-                src: 'https://images.pexels.com/photos/3159812/pexels-photo-3159812.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Hockey players on the ice',
-                caption: 'LA Kings on the ice'
+                src: 'https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Basketball player dunking during a game',
+                caption: 'High-flying basketball action'
             },
             {
-                src: 'https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg?auto=compress&cs=tinysrgb&w=800',
+                src: 'https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg?auto=compress&cs=tinysrgb&w=1000',
                 alt: 'Soccer ball on green grass field',
                 caption: 'LA Galaxy and LAFC soccer'
             },
             {
-                src: 'https://images.pexels.com/photos/2466407/pexels-photo-2466407.jpeg?auto=compress&cs=tinysrgb&w=800',
+                src: 'https://images.pexels.com/photos/2466407/pexels-photo-2466407.jpeg?auto=compress&cs=tinysrgb&w=1000',
                 alt: 'Excited fans cheering at sports stadium',
                 caption: 'LA fans are the best!'
             }
@@ -365,6 +380,11 @@ const SESSIONS_DATA = [
         subtitle: 'Tacos, In-N-Out, and world cuisines',
         duration: 7,
         icon: '🌮',
+        heroImage: {
+            src: 'https://images.pexels.com/photos/4958641/pexels-photo-4958641.jpeg?auto=compress&cs=tinysrgb&w=1400',
+            alt: 'Delicious authentic street tacos with fresh toppings',
+            credit: 'LA Street Tacos'
+        },
         sections: [
             {
                 heading: 'Taco Paradise',
@@ -395,34 +415,34 @@ const SESSIONS_DATA = [
         ],
         images: [
             {
-                src: 'https://images.pexels.com/photos/7613568/pexels-photo-7613568.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Street tacos with cilantro and onions',
+                src: 'https://images.pexels.com/photos/7613568/pexels-photo-7613568.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Authentic street tacos with fresh cilantro and onions',
                 caption: 'LA\'s famous street tacos'
             },
             {
-                src: 'https://images.pexels.com/photos/2271107/pexels-photo-2271107.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Cheeseburger with crispy fries',
+                src: 'https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Juicy cheeseburger with crispy fries',
                 caption: 'Classic California burger and fries'
             },
             {
-                src: 'https://images.pexels.com/photos/5774145/pexels-photo-5774145.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Korean BBQ meat on cutting board',
-                caption: 'Sizzling Korean BBQ'
+                src: 'https://images.pexels.com/photos/2313686/pexels-photo-2313686.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Korean BBQ meat sizzling on the grill',
+                caption: 'Sizzling Korean BBQ in Koreatown'
             },
             {
-                src: 'https://images.pexels.com/photos/5531005/pexels-photo-5531005.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Colorful food truck on sunny street',
+                src: 'https://images.pexels.com/photos/1766686/pexels-photo-1766686.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Colorful food truck serving customers',
                 caption: 'LA\'s famous food trucks'
             },
             {
-                src: 'https://images.pexels.com/photos/15426317/pexels-photo-15426317.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Grand Central Market food stalls',
-                caption: 'Grand Central Market'
+                src: 'https://images.pexels.com/photos/3184188/pexels-photo-3184188.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Fresh produce at a farmers market stall',
+                caption: 'Fresh food at LA farmers markets'
             },
             {
-                src: 'https://images.pexels.com/photos/11176614/pexels-photo-11176614.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Colorful sushi platter',
-                caption: 'LA\'s diverse Asian cuisine'
+                src: 'https://images.pexels.com/photos/357756/pexels-photo-357756.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Fresh sushi rolls beautifully arranged',
+                caption: 'LA\'s world-class sushi'
             }
         ],
         facts: [
@@ -483,6 +503,11 @@ const SESSIONS_DATA = [
         subtitle: 'Hollywood, movies, and theme parks',
         duration: 8,
         icon: '🎬',
+        heroImage: {
+            src: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=1400&q=80',
+            alt: 'Vintage movie projector with dramatic lighting in a cinema',
+            credit: 'Hollywood Magic'
+        },
         sections: [
             {
                 heading: 'Hollywood & The Movie Industry',
@@ -514,29 +539,29 @@ const SESSIONS_DATA = [
         ],
         images: [
             {
-                src: 'https://images.unsplash.com/photo-1542204637-e67bc7d41e48?w=800&q=80',
-                alt: 'The Hollywood Sign on Mount Lee',
+                src: 'https://images.unsplash.com/photo-1568454537842-d933259bb258?w=1000&q=80',
+                alt: 'The iconic Hollywood Sign on Mount Lee',
                 caption: 'The iconic Hollywood Sign'
             },
             {
-                src: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80',
-                alt: 'Movie studio lot with film equipment',
-                caption: 'A Hollywood movie studio'
+                src: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1000&q=80',
+                alt: 'Film camera and crew on a movie set',
+                caption: 'Behind the scenes in Hollywood'
             },
             {
-                src: 'https://images.unsplash.com/photo-1581351123004-757df051db8e?w=800&q=80',
-                alt: 'Universal Studios Hollywood globe',
-                caption: 'Universal Studios Hollywood'
+                src: 'https://images.pexels.com/photos/2507025/pexels-photo-2507025.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Theme park roller coaster against blue sky',
+                caption: 'Thrilling theme park rides'
             },
             {
-                src: 'https://images.unsplash.com/photo-1597466599360-3b9775841aec?w=800&q=80',
-                alt: 'Disneyland Castle',
-                caption: 'Sleeping Beauty Castle at Disneyland'
+                src: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=1000&q=80',
+                alt: 'Ferris wheel at amusement park at night',
+                caption: 'Theme park magic at night'
             },
             {
-                src: 'https://images.unsplash.com/photo-1598387993281-cecf8b71a8f8?w=800&q=80',
-                alt: 'Hollywood Bowl amphitheater',
-                caption: 'The famous Hollywood Bowl'
+                src: 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Concert crowd with hands up and colorful lights',
+                caption: 'Live music in LA'
             }
         ],
         facts: [
@@ -597,6 +622,11 @@ const SESSIONS_DATA = [
         subtitle: 'Santa Monica, Venice, Malibu and more',
         duration: 7,
         icon: '🏖️',
+        heroImage: {
+            src: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1400&q=80',
+            alt: 'Santa Monica Pier with Ferris wheel at golden hour',
+            credit: 'Santa Monica Pier'
+        },
         sections: [
             {
                 heading: 'Santa Monica - The Classic Beach',
@@ -628,29 +658,29 @@ const SESSIONS_DATA = [
         ],
         images: [
             {
-                src: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=80',
-                alt: 'Santa Monica Pier with Ferris wheel',
-                caption: 'The iconic Santa Monica Pier'
+                src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1000&q=80',
+                alt: 'Beautiful golden sand beach with turquoise waves',
+                caption: 'LA\'s stunning beaches'
             },
             {
-                src: 'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800&q=80',
-                alt: 'Venice Beach boardwalk',
+                src: 'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=1000&q=80',
+                alt: 'Venice Beach boardwalk with palm trees',
                 caption: 'Colorful Venice Beach'
             },
             {
-                src: 'https://images.pexels.com/photos/2422588/pexels-photo-2422588.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'California beach with waves and coastline',
-                caption: 'Beautiful Malibu coastline'
-            },
-            {
-                src: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&q=80',
-                alt: 'Surfer riding a wave',
+                src: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=1000&q=80',
+                alt: 'Surfer riding a wave at sunset',
                 caption: 'Surfing is huge in LA!'
             },
             {
-                src: 'https://images.pexels.com/photos/2901209/pexels-photo-2901209.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Palm trees and neighborhood in Los Angeles',
-                caption: 'The unique Venice neighborhood'
+                src: 'https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Beach volleyball players diving for the ball',
+                caption: 'Beach volleyball on the sand'
+            },
+            {
+                src: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Silhouette of people on beach at sunset',
+                caption: 'Sunset at the beach'
             }
         ],
         facts: [
@@ -711,6 +741,11 @@ const SESSIONS_DATA = [
         subtitle: 'Griffith Observatory, museums, and artsy areas',
         duration: 8,
         icon: '🎨',
+        heroImage: {
+            src: 'https://images.unsplash.com/photo-1566232392379-afd9298e6a46?w=1400&q=80',
+            alt: 'Griffith Observatory at dusk with LA city lights in the background',
+            credit: 'Griffith Observatory'
+        },
         sections: [
             {
                 heading: 'Griffith Observatory & Park',
@@ -742,29 +777,29 @@ const SESSIONS_DATA = [
         ],
         images: [
             {
-                src: 'https://images.unsplash.com/photo-1566232392379-afd9298e6a46?w=800&q=80',
-                alt: 'Griffith Observatory at dusk',
-                caption: 'The iconic Griffith Observatory'
-            },
-            {
-                src: 'https://images.unsplash.com/photo-1580655653885-65763b2597d0?w=800&q=80',
-                alt: 'The Getty Center museum architecture',
+                src: 'https://images.unsplash.com/photo-1580655653885-65763b2597d0?w=1000&q=80',
+                alt: 'The Getty Center museum with stunning modern architecture',
                 caption: 'The stunning Getty Center'
             },
             {
-                src: 'https://images.unsplash.com/photo-1494023070108-9d731ed6f0da?w=800&q=80',
-                alt: 'Urban Light installation at LACMA with vintage street lamps',
+                src: 'https://images.pexels.com/photos/2082103/pexels-photo-2082103.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Row of vintage street lamps glowing at dusk',
                 caption: 'LACMA\'s famous Urban Light'
             },
             {
-                src: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=800&q=80',
-                alt: 'Colorful street art mural',
-                caption: 'Street art in Silver Lake'
+                src: 'https://images.pexels.com/photos/1209843/pexels-photo-1209843.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Colorful street art mural on building wall',
+                caption: 'Street art in the Arts District'
             },
             {
-                src: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80',
-                alt: 'Hiking trail with scenic view',
+                src: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=1000&q=80',
+                alt: 'Hiker on trail with scenic mountain view',
                 caption: 'Hiking in Griffith Park'
+            },
+            {
+                src: 'https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Cozy hipster coffee shop interior',
+                caption: 'Silver Lake coffee culture'
             }
         ],
         facts: [
@@ -825,6 +860,11 @@ const SESSIONS_DATA = [
         subtitle: 'Historic Olvera Street to modern skyscrapers',
         duration: 7,
         icon: '🏛️',
+        heroImage: {
+            src: 'https://images.unsplash.com/photo-1534438097545-a2c22c57f2ad?w=1400&q=80',
+            alt: 'Walt Disney Concert Hall silver architecture against blue sky',
+            credit: 'Disney Concert Hall'
+        },
         sections: [
             {
                 heading: 'Where LA Began: Olvera Street',
@@ -856,29 +896,29 @@ const SESSIONS_DATA = [
         ],
         images: [
             {
-                src: 'https://images.unsplash.com/photo-1575223970966-76ae61ee7838?w=800&q=80',
-                alt: 'Colorful Mexican marketplace',
+                src: 'https://images.pexels.com/photos/2901209/pexels-photo-2901209.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Colorful Mexican marketplace with pinatas and crafts',
                 caption: 'Historic Olvera Street'
             },
             {
-                src: 'https://images.unsplash.com/photo-1534190760961-74e8c1c5c3da?w=800&q=80',
-                alt: 'Downtown LA skyscrapers at sunset',
+                src: 'https://images.unsplash.com/photo-1534190760961-74e8c1c5c3da?w=1000&q=80',
+                alt: 'Downtown LA skyscrapers at sunset with palm trees',
                 caption: 'Modern downtown LA skyline'
             },
             {
-                src: 'https://images.unsplash.com/photo-1534438097545-a2c22c57f2ad?w=800&q=80',
-                alt: 'Walt Disney Concert Hall silver architecture',
+                src: 'https://images.unsplash.com/photo-1534438097545-a2c22c57f2ad?w=1000&q=80',
+                alt: 'Walt Disney Concert Hall dramatic silver curves',
                 caption: 'The stunning Disney Concert Hall'
             },
             {
-                src: 'https://images.unsplash.com/photo-1544531585-9847b68c8c86?w=800&q=80',
-                alt: 'Union Station interior with arched ceilings',
-                caption: 'Beautiful Union Station'
+                src: 'https://images.pexels.com/photos/1209843/pexels-photo-1209843.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Large colorful street art mural',
+                caption: 'Arts District street murals'
             },
             {
-                src: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800&q=80',
-                alt: 'Colorful street art mural in Arts District',
-                caption: 'Arts District street murals'
+                src: 'https://images.pexels.com/photos/2263683/pexels-photo-2263683.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Los Angeles palm trees lining a street',
+                caption: 'LA\'s iconic palm tree streets'
             }
         ],
         facts: [
@@ -939,6 +979,11 @@ const SESSIONS_DATA = [
         subtitle: 'Walk of Fame, Rodeo Drive, and celebrity culture',
         duration: 8,
         icon: '⭐',
+        heroImage: {
+            src: 'https://images.unsplash.com/photo-1568454537842-d933259bb258?w=1400&q=80',
+            alt: 'Hollywood Walk of Fame stars embedded in the sidewalk',
+            credit: 'Walk of Fame'
+        },
         sections: [
             {
                 heading: 'Hollywood Boulevard & Walk of Fame',
@@ -970,29 +1015,29 @@ const SESSIONS_DATA = [
         ],
         images: [
             {
-                src: 'https://images.unsplash.com/photo-1568454537842-d933259bb258?w=800&q=80',
-                alt: 'Hollywood Walk of Fame stars',
-                caption: 'The famous Walk of Fame'
+                src: 'https://images.pexels.com/photos/2263683/pexels-photo-2263683.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Tall palm trees against blue sky in Hollywood',
+                caption: 'Hollywood palm trees'
             },
             {
-                src: 'https://images.unsplash.com/photo-1595769816263-9b910be24d5f?w=800&q=80',
-                alt: 'TCL Chinese Theatre facade',
-                caption: 'The legendary Chinese Theatre'
+                src: 'https://images.pexels.com/photos/3617500/pexels-photo-3617500.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Neon signs lit up on a night street',
+                caption: 'The Sunset Strip at night'
             },
             {
-                src: 'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=800&q=80',
-                alt: 'Sunset Boulevard at night with lights',
-                caption: 'The Sunset Strip'
-            },
-            {
-                src: 'https://images.unsplash.com/photo-1597411216673-01c1de06087e?w=800&q=80',
-                alt: 'Rodeo Drive shopping street with palm trees',
+                src: 'https://images.pexels.com/photos/1722183/pexels-photo-1722183.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Elegant shopping street with designer stores',
                 caption: 'Luxurious Rodeo Drive'
             },
             {
-                src: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80',
-                alt: 'Beautiful luxury home',
+                src: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1000&q=80',
+                alt: 'Beautiful modern luxury home with pool',
                 caption: 'Beverly Hills mansions'
+            },
+            {
+                src: 'https://images.pexels.com/photos/2507025/pexels-photo-2507025.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Hollywood hills at sunset with city views',
+                caption: 'Views from Beverly Hills'
             }
         ],
         facts: [
@@ -1053,6 +1098,11 @@ const SESSIONS_DATA = [
         subtitle: 'Pasadena, The Valley, and continued exploration',
         duration: 7,
         icon: '💎',
+        heroImage: {
+            src: 'https://images.unsplash.com/photo-1515896769750-31548aa180ed?w=1400&q=80',
+            alt: 'Aerial view of Los Angeles with mountains and city stretching to the horizon',
+            credit: 'LA Aerial View'
+        },
         sections: [
             {
                 heading: 'Pasadena: Rose Bowl & More',
@@ -1084,28 +1134,28 @@ const SESSIONS_DATA = [
         ],
         images: [
             {
-                src: 'https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Beautiful roses in bloom',
-                caption: 'The famous Rose Parade features millions of flowers'
+                src: 'https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Beautiful red and pink roses in full bloom',
+                caption: 'The Rose Parade features millions of flowers'
             },
             {
-                src: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&q=80',
-                alt: 'Rose Bowl Stadium aerial view',
+                src: 'https://images.pexels.com/photos/270071/pexels-photo-270071.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Large football stadium packed with fans',
                 caption: 'The legendary Rose Bowl'
             },
             {
-                src: 'https://images.unsplash.com/photo-1578301978018-3005759f48f7?w=800&q=80',
-                alt: 'Historic shopping street with trees',
+                src: 'https://images.pexels.com/photos/3617500/pexels-photo-3617500.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Historic shopping district with neon signs',
                 caption: 'Charming Old Town Pasadena'
             },
             {
-                src: 'https://images.pexels.com/photos/6447217/pexels-photo-6447217.jpeg?auto=compress&cs=tinysrgb&w=800',
-                alt: 'Movie studio production area',
-                caption: 'The San Fernando Valley is home to major film studios'
+                src: 'https://images.pexels.com/photos/66134/pexels-photo-66134.jpeg?auto=compress&cs=tinysrgb&w=1000',
+                alt: 'Professional film camera on a movie set',
+                caption: 'The Valley is home to major film studios'
             },
             {
-                src: 'https://images.unsplash.com/photo-1515896769750-31548aa180ed?w=800&q=80',
-                alt: 'Aerial view of Los Angeles skyline',
+                src: 'https://images.unsplash.com/photo-1515896769750-31548aa180ed?w=1000&q=80',
+                alt: 'Panoramic aerial view of Los Angeles skyline',
                 caption: 'Beautiful Los Angeles awaits!'
             }
         ],

@@ -328,7 +328,12 @@ const UI = {
         const mapCounts = ExploreMap.getUnlockedCount();
 
         teaser.innerHTML = `
-            <div class="map-teaser-icon">🗺️</div>
+            <div class="map-teaser-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+            </div>
             <div class="map-teaser-content">
                 <h3>Explore the Map</h3>
                 <p>Discover California and LA locations as you learn!</p>
@@ -348,6 +353,57 @@ const UI = {
                 </svg>
             </div>
         `;
+    },
+
+    renderHeroImage(session) {
+        // Remove existing hero if present
+        const existingHero = document.querySelector('.session-hero');
+        if (existingHero) {
+            existingHero.remove();
+        }
+
+        // Check if session has a hero image
+        if (!session.heroImage) {
+            return;
+        }
+
+        // Create hero element
+        const hero = document.createElement('div');
+        hero.className = 'session-hero';
+        hero.innerHTML = `
+            <div class="session-hero-skeleton"></div>
+            <img
+                class="session-hero-image"
+                src="${session.heroImage.src}"
+                alt="${session.heroImage.alt}"
+                loading="eager"
+                style="opacity: 0; transition: opacity 0.4s ease;"
+            >
+            <div class="session-hero-overlay">
+                <div class="session-hero-badge">${session.icon || session.number}</div>
+                <h2 class="session-hero-title">${session.title}</h2>
+                <p class="session-hero-subtitle">${session.subtitle}</p>
+            </div>
+        `;
+
+        // Handle image load
+        const img = hero.querySelector('.session-hero-image');
+        const skeleton = hero.querySelector('.session-hero-skeleton');
+
+        img.onload = () => {
+            skeleton.style.display = 'none';
+            img.style.opacity = '1';
+        };
+
+        img.onerror = () => {
+            // Fallback to a gradient if image fails
+            skeleton.style.display = 'none';
+            hero.style.background = 'linear-gradient(135deg, var(--ocean-deep) 0%, var(--ocean-mid) 50%, var(--sun-orange) 100%)';
+            img.style.display = 'none';
+        };
+
+        // Insert hero before the session header
+        Elements.sessionHeader.parentNode.insertBefore(hero, Elements.sessionHeader);
     },
 
     renderContinueLearning() {
@@ -387,7 +443,7 @@ const UI = {
         const ctaText = hasProgress ? 'Continue' : 'Start';
 
         Elements.continueCard.innerHTML = `
-            <div class="session-icon">${session.icon || session.number}</div>
+            <div class="session-icon">${session.number}</div>
             <div class="continue-info">
                 <div class="continue-title">${session.title}</div>
                 <div class="continue-subtitle">${session.subtitle}</div>
@@ -423,7 +479,12 @@ const UI = {
             ? `<span class="card-score"><span class="score-icon">✓</span><span class="score-value">${score.correct}/${score.total}</span></span>`
             : '';
 
+        // Get background image from hero image or first session image
+        const bgImage = session.heroImage?.src || (session.images && session.images[0]?.src) || '';
+
         card.innerHTML = `
+            ${bgImage ? `<div class="card-bg-image" style="background-image: url('${bgImage}')"></div>` : ''}
+            <div class="card-overlay"></div>
             <div class="card-status">
                 ${status === 'completed' ? `
                     <span class="status-icon completed" aria-hidden="true">
@@ -434,7 +495,7 @@ const UI = {
                 ` : ''}
             </div>
             <div class="card-header">
-                <div class="session-number" aria-hidden="true">${session.icon || session.number}</div>
+                <div class="session-number" aria-hidden="true">${session.number}</div>
                 <div class="card-title-area">
                     <h4 class="card-title">${session.title}</h4>
                     <p class="card-subtitle">${session.subtitle}</p>
@@ -468,6 +529,9 @@ const UI = {
     },
 
     renderSession(session) {
+        // Render hero image first (before the header)
+        this.renderHeroImage(session);
+
         // Update header
         Elements.sessionBadge.textContent = session.number;
         Elements.sessionTitle.textContent = session.title;
@@ -480,6 +544,17 @@ const UI = {
         // Render content sections
         Elements.sessionContent.innerHTML = '';
 
+        // Prepare images and facts for intelligent distribution
+        const images = session.images ? [...session.images] : [];
+        const facts = session.facts ? [...session.facts] : [];
+        const totalSections = session.sections.length;
+
+        // Calculate how to distribute images across sections
+        // Strategy: Feature image after first paragraph, then alternate positions
+        let imageIndex = 0;
+        let factIndex = 0;
+        const imagePositions = ['right', 'left', 'full', 'right', 'left', 'full']; // Cycling positions
+
         session.sections.forEach((section, sectionIndex) => {
             const sectionEl = document.createElement('div');
             sectionEl.className = 'content-section';
@@ -491,7 +566,14 @@ const UI = {
             heading.innerHTML = `<span class="icon" aria-hidden="true">${section.icon || ''}</span> ${section.heading}`;
             sectionEl.appendChild(heading);
 
-            // Paragraphs with sentence-level markup
+            // Calculate images per section for even distribution
+            const imagesPerSection = Math.ceil(images.length / totalSections);
+            const sectionImages = images.slice(
+                sectionIndex * imagesPerSection,
+                (sectionIndex + 1) * imagesPerSection
+            );
+
+            // Paragraphs with sentence-level markup and integrated images
             section.paragraphs.forEach((para, paraIndex) => {
                 const p = document.createElement('p');
                 p.className = 'content-paragraph';
@@ -521,35 +603,57 @@ const UI = {
                 });
 
                 sectionEl.appendChild(p);
+
+                // Insert images at strategic points within the section
+                // First section: Feature image after first paragraph
+                if (sectionIndex === 0 && paraIndex === 0 && sectionImages.length > 0) {
+                    const featuredImage = this.createInlineImage(sectionImages[0], 'featured');
+                    featuredImage.classList.add('reveal-on-scroll');
+                    sectionEl.appendChild(featuredImage);
+                }
+                // First section: Float image after second paragraph
+                else if (sectionIndex === 0 && paraIndex === 1 && sectionImages.length > 1) {
+                    const floatImage = this.createInlineImage(sectionImages[1], 'float-right');
+                    floatImage.classList.add('reveal-on-scroll');
+                    sectionEl.appendChild(floatImage);
+                }
+                // Other sections: Alternate between positions
+                else if (sectionIndex > 0 && paraIndex === 0 && sectionImages.length > 0) {
+                    // Use alternating layout for subsequent sections
+                    const position = imagePositions[(sectionIndex + paraIndex) % imagePositions.length];
+                    const inlineImage = this.createInlineImage(sectionImages[0], position);
+                    inlineImage.classList.add('reveal-on-scroll');
+                    sectionEl.appendChild(inlineImage);
+                }
+                // Additional images after middle paragraphs
+                else if (paraIndex === Math.floor(section.paragraphs.length / 2) && sectionImages.length > 1) {
+                    const additionalImageIndex = Math.min(1, sectionImages.length - 1);
+                    if (sectionImages[additionalImageIndex] && sectionIndex > 0) {
+                        const position = imagePositions[(sectionIndex + paraIndex + 1) % imagePositions.length];
+                        const inlineImage = this.createInlineImage(sectionImages[additionalImageIndex], position);
+                        inlineImage.classList.add('reveal-on-scroll');
+                        sectionEl.appendChild(inlineImage);
+                    }
+                }
             });
 
-            // Add images after first section
-            if (sectionIndex === 0 && session.images && session.images.length > 0) {
-                const gallery = this.createImageGallery(session.images.slice(0, 2));
-                sectionEl.appendChild(gallery);
-            }
-
-            // Add a fact box after second section
-            if (sectionIndex === 1 && session.facts && session.facts.length > 0) {
-                const factBox = this.createFactBox(session.facts[0]);
+            // Add fact boxes strategically - one per section if available
+            if (facts[sectionIndex]) {
+                const factBox = this.createFactBox(facts[sectionIndex]);
+                factBox.classList.add('reveal-on-scroll');
                 sectionEl.appendChild(factBox);
             }
 
             Elements.sessionContent.appendChild(sectionEl);
         });
 
-        // Add remaining images
-        if (session.images && session.images.length > 2) {
-            const gallery = this.createImageGallery(session.images.slice(2));
+        // Add any remaining images as a compact gallery at the end
+        const usedImageCount = Math.ceil(images.length / totalSections) * totalSections;
+        const remainingImages = images.slice(Math.min(usedImageCount, images.length - 2));
+        if (remainingImages.length > 0 && images.length > 3) {
+            const gallery = this.createImageGallery(remainingImages.slice(-2));
+            gallery.classList.add('reveal-on-scroll', 'end-gallery');
             Elements.sessionContent.appendChild(gallery);
-        }
-
-        // Add remaining facts
-        if (session.facts && session.facts.length > 1) {
-            session.facts.slice(1).forEach(fact => {
-                const factBox = this.createFactBox(fact);
-                Elements.sessionContent.appendChild(factBox);
-            });
         }
 
         // Add video section
@@ -557,7 +661,9 @@ const UI = {
         if (videoSectionHtml) {
             const videoContainer = document.createElement('div');
             videoContainer.innerHTML = videoSectionHtml;
-            Elements.sessionContent.appendChild(videoContainer.firstElementChild);
+            const videoSection = videoContainer.firstElementChild;
+            videoSection.classList.add('reveal-on-scroll');
+            Elements.sessionContent.appendChild(videoSection);
         }
 
         // Render quiz
@@ -579,6 +685,89 @@ const UI = {
             Elements.ttsStatus.textContent = 'Click play to listen';
         }
         this.updateTTSButton(false);
+
+        // Initialize scroll reveal animations
+        this.initScrollReveal();
+    },
+
+    /**
+     * Create an inline image with various layout options
+     * @param {Object} img - Image object with src, alt, caption
+     * @param {string} layout - 'featured', 'float-left', 'float-right', 'full', 'left', 'right'
+     */
+    createInlineImage(img, layout = 'full') {
+        const figure = document.createElement('figure');
+        figure.className = `inline-image inline-image--${layout}`;
+
+        // Create skeleton placeholder
+        const skeleton = document.createElement('div');
+        skeleton.className = 'image-skeleton';
+        skeleton.setAttribute('aria-hidden', 'true');
+        figure.appendChild(skeleton);
+
+        const imgEl = document.createElement('img');
+        imgEl.src = img.src;
+        imgEl.alt = img.alt;
+        imgEl.loading = 'lazy';
+        imgEl.style.opacity = '0';
+        imgEl.style.transition = 'opacity 0.4s ease';
+
+        imgEl.onload = () => {
+            skeleton.style.display = 'none';
+            imgEl.style.opacity = '1';
+        };
+
+        imgEl.onerror = () => {
+            skeleton.style.display = 'none';
+            imgEl.style.opacity = '1';
+            imgEl.src = 'data:image/svg+xml,' + encodeURIComponent(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+                    <rect fill="#e9ecef" width="400" height="300"/>
+                    <text fill="#6c757d" font-family="sans-serif" font-size="14" x="50%" y="45%" text-anchor="middle">Image unavailable</text>
+                    <text fill="#adb5bd" font-family="sans-serif" font-size="12" x="50%" y="55%" text-anchor="middle">${img.caption || 'Photo'}</text>
+                </svg>
+            `);
+            imgEl.alt = 'Image could not be loaded: ' + img.alt;
+        };
+
+        figure.appendChild(imgEl);
+
+        if (img.caption) {
+            const caption = document.createElement('figcaption');
+            caption.className = 'inline-image__caption';
+            caption.textContent = img.caption;
+            figure.appendChild(caption);
+        }
+
+        return figure;
+    },
+
+    /**
+     * Initialize scroll reveal animations for images and content
+     */
+    initScrollReveal() {
+        const revealElements = document.querySelectorAll('.reveal-on-scroll');
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            revealElements.forEach(el => {
+                observer.observe(el);
+            });
+        } else {
+            // Fallback for browsers without IntersectionObserver
+            revealElements.forEach(el => el.classList.add('revealed'));
+        }
     },
 
     createImageGallery(images) {
@@ -1594,6 +1783,91 @@ const VideoPlayer = {
 };
 
 // ============================================
+// IMAGE LIGHTBOX
+// ============================================
+const Lightbox = {
+    overlay: null,
+    image: null,
+    caption: null,
+    closeBtn: null,
+
+    init() {
+        this.overlay = document.getElementById('lightbox-overlay');
+        this.image = document.getElementById('lightbox-image');
+        this.caption = document.getElementById('lightbox-caption');
+        this.closeBtn = document.getElementById('lightbox-close');
+
+        if (!this.overlay) return;
+
+        // Close button click
+        this.closeBtn.addEventListener('click', () => this.close());
+
+        // Click outside to close
+        this.overlay.addEventListener('click', (e) => {
+            if (e.target === this.overlay) {
+                this.close();
+            }
+        });
+
+        // Escape key to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !this.overlay.classList.contains('hidden')) {
+                this.close();
+            }
+        });
+
+        // Set up click listeners on images
+        this.setupImageListeners();
+    },
+
+    setupImageListeners() {
+        // Add click listeners to all inline images and gallery images
+        document.addEventListener('click', (e) => {
+            const imgEl = e.target.closest('.inline-image img, .gallery-item img');
+            if (imgEl && AppState.currentView === 'session') {
+                e.preventDefault();
+                this.open(imgEl);
+            }
+        });
+    },
+
+    open(imgEl) {
+        if (!this.overlay) return;
+
+        // Get the full-size image source and caption
+        const src = imgEl.src;
+        const alt = imgEl.alt;
+
+        // Try to find caption from parent figure/figcaption
+        const figure = imgEl.closest('figure');
+        const figcaption = figure ? figure.querySelector('figcaption, .inline-image__caption, .gallery-caption') : null;
+        const captionText = figcaption ? figcaption.textContent : alt;
+
+        this.image.src = src;
+        this.image.alt = alt;
+        this.caption.textContent = captionText;
+
+        // Show overlay
+        this.overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+
+        // Focus close button for accessibility
+        this.closeBtn.focus();
+
+        // Stop TTS if playing
+        TTS.stop();
+    },
+
+    close() {
+        if (!this.overlay) return;
+
+        this.overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+        this.image.src = '';
+    }
+};
+
+// ============================================
 // SESSION COMPLETION
 // ============================================
 const Session = {
@@ -1754,6 +2028,9 @@ async function init() {
 
     // Initialize video player
     VideoPlayer.init();
+
+    // Initialize lightbox
+    Lightbox.init();
 
     // Initialize keyboard navigation
     Keyboard.init();

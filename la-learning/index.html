@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Leaflet CSS for interactive map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 </head>
@@ -23,11 +23,7 @@
                 </svg>
                 <span>Back</span>
             </button>
-            <h1 class="app-title" id="app-title">
-                <span class="title-icon">🌴</span>
-                Discover LA
-                <span class="title-icon">☀️</span>
-            </h1>
+            <h1 class="app-title" id="app-title">Discover LA</h1>
             <button class="map-toggle-btn" id="map-toggle-btn" aria-label="Open explore map">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
@@ -207,9 +203,18 @@
 
         <!-- Footer -->
         <footer class="app-footer">
-            <p>Made with ❤️ for curious kids exploring California!</p>
+            <p>Made for curious kids exploring California!</p>
         </footer>
 
+    </div>
+
+    <!-- Image Lightbox Overlay -->
+    <div class="lightbox-overlay hidden" id="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&times;</button>
+        <div class="lightbox-content">
+            <img id="lightbox-image" src="" alt="">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
     </div>
 
     <!-- Scripts -->
