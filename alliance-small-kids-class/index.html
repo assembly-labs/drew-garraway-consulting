@@ -178,17 +178,124 @@
             margin: var(--space-lg) 0;
         }
 
+        /* ========================================
+           MOBILE RESPONSIVE
+           ======================================== */
+
         @media (max-width: 640px) {
             .two-col {
                 grid-template-columns: 1fr;
+                gap: var(--space-md);
             }
 
             header {
-                padding: 48px 24px 32px;
+                padding: 40px 20px 32px;
+                padding-top: max(40px, env(safe-area-inset-top));
+            }
+
+            header h1 {
+                font-size: 28px;
+                line-height: 1.1;
+            }
+
+            .eyebrow {
+                font-size: 11px;
             }
 
             .section {
-                padding: var(--space-xl) 24px;
+                padding: var(--space-xl) 20px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .box {
+                padding: 20px;
+            }
+
+            .class-structure {
+                padding: 20px;
+            }
+
+            .class-structure h4 {
+                font-size: 12px;
+            }
+
+            .philosophy {
+                padding: 20px;
+            }
+
+            .highlight {
+                padding: 20px;
+            }
+
+            /* Larger touch targets for list items */
+            li {
+                padding: 8px 0;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+
+            .clickable-item {
+                display: inline-block;
+                padding: 4px 0;
+            }
+
+            footer {
+                padding: var(--space-xl) 20px;
+                padding-bottom: max(var(--space-xl), env(safe-area-inset-bottom));
+            }
+
+            /* Modal mobile optimizations */
+            .modal-content {
+                margin: 5% auto;
+                padding: 24px 20px;
+                width: 94%;
+                max-height: 85vh;
+                overflow-y: auto;
+            }
+
+            .modal-content h3 {
+                font-size: 16px;
+                padding-right: 32px;
+            }
+
+            .close {
+                font-size: 32px;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                right: 8px;
+                top: 8px;
+            }
+
+            .modal-content {
+                position: relative;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 380px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            .box, .class-structure, .philosophy, .highlight {
+                padding: 16px;
+            }
+
+            header, .section, footer {
+                padding-left: 16px;
+                padding-right: 16px;
             }
         }
 
@@ -292,9 +399,12 @@
             text-decoration: underline;
             text-decoration-color: var(--color-gray-700);
             text-underline-offset: 3px;
+            -webkit-tap-highlight-color: rgba(245, 166, 35, 0.2);
+            touch-action: manipulation;
         }
 
-        .clickable-item:hover {
+        .clickable-item:hover,
+        .clickable-item:active {
             color: var(--color-gold);
             text-decoration-color: var(--color-gold);
         }
@@ -349,10 +459,23 @@
             cursor: pointer;
             line-height: 20px;
             transition: color 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .close:hover {
+        .close:hover,
+        .close:active {
             color: var(--color-gold);
+        }
+
+        /* Prevent body scroll when modal is open */
+        body.modal-open {
+            overflow: hidden;
         }
 
         /* ========================================
@@ -579,21 +702,25 @@
             modalTitle.textContent = title;
             modalDescription.textContent = descriptions[title] || 'Description not available.';
             modal.style.display = 'block';
+            document.body.classList.add('modal-open');
         }
 
-        closeBtn.onclick = function() {
+        function closeModal() {
             modal.style.display = 'none';
+            document.body.classList.remove('modal-open');
         }
+
+        closeBtn.onclick = closeModal;
 
         window.onclick = function(event) {
             if (event.target == modal) {
-                modal.style.display = 'none';
+                closeModal();
             }
         }
 
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape' && modal.style.display === 'block') {
-                modal.style.display = 'none';
+                closeModal();
             }
         });
 
