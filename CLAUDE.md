@@ -26,6 +26,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | **Read Out Loud** | `/read-out-loud/` | Text-to-speech PWA for reading documents | Yes |
 | **Agency** | `/agency/` | Agency Brewing brand assets and style guide | Yes |
 | **Locally Strong** | `/locally-strong/` | Nonprofit website for local community empowerment | Yes |
+| **Alliance Small Kids** | `/alliance-small-kids-class/` | Alliance BJJ kids curriculum proposal (ages 4-8) | Yes |
 
 ---
 
@@ -48,6 +49,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | Read Out Loud | Vanilla JS | N/A | Custom CSS | Cloudflare Pages |
 | Agency | Static HTML | N/A | Custom CSS | N/A |
 | Locally Strong | Static HTML | Tailwind CLI | Tailwind | Cloudflare Pages |
+| Alliance Small Kids | Static HTML | N/A | Inline CSS | Cloudflare Pages |
 
 ---
 
@@ -95,7 +97,8 @@ drew-garraway-consulting/
 │   ├── gather/                  # Farmers market platform
 │   ├── tpl/                     # Printer documentation
 │   ├── read-out-loud/           # Text-to-speech PWA
-│   └── agency/                  # Agency Brewing brand guide
+│   ├── agency/                  # Agency Brewing brand guide
+│   └── alliance-small-kids-class/ # BJJ kids curriculum
 │
 ├── Supporting Directories
 │   ├── _archived/               # Previous versions (ignore)

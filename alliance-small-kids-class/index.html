@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <title>Alliance BJJ Kids Program - Ages 4-8</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           TOMO DESIGN SYSTEM - DARK THEME
+           ======================================== */
+
+        :root {
+            /* Primary Colors */
+            --color-black: #111111;
+            --color-white: #ffffff;
+            --color-gold: #F5A623;
+            --color-gold-dim: rgba(245, 166, 35, 0.15);
+
+            /* Grayscale (lightened for dark backgrounds) */
+            --color-gray-100: #f5f5f5;
+            --color-gray-200: #e5e5e5;
+            --color-gray-300: #d4d4d4;
+            --color-gray-400: #b3b3b3;
+            --color-gray-500: #8b8b8b;
+            --color-gray-600: #6b6b6b;
+            --color-gray-700: #4a4a4a;
+            --color-gray-800: #1f1f1f;
+            --color-gray-900: #161616;
+
+            /* Typography */
+            --font-display: 'Unbounded', sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 500;
+            background: var(--color-black);
+            color: var(--color-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+
+        header {
+            padding: 64px 32px 48px;
+            border-bottom: 1px solid var(--color-gray-800);
+        }
+
+        .eyebrow {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-gold);
+            margin-bottom: var(--space-md);
+        }
+
+        header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 8vw, 48px);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--color-white);
+            margin-bottom: var(--space-md);
+        }
+
+        header p {
+            font-size: 15px;
+            color: var(--color-gray-400);
+            font-weight: 500;
+        }
+
+        /* ========================================
+           SECTIONS
+           ======================================== */
+
+        .section {
+            padding: var(--space-2xl) 32px;
+            border-bottom: 1px solid var(--color-gray-800);
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: var(--space-lg);
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        p {
+            color: var(--color-gray-100);
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: var(--space-md);
+        }
+
+        /* ========================================
+           PHILOSOPHY BOX (Callout)
+           ======================================== */
+
+        .philosophy {
+            background: linear-gradient(135deg, var(--color-gold-dim) 0%, transparent 100%);
+            border-left: 3px solid var(--color-gold);
+            padding: var(--space-lg);
+            margin: var(--space-lg) 0;
+        }
+
+        .philosophy p {
+            color: var(--color-gray-100);
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        .philosophy strong {
+            color: var(--color-white);
+        }
+
+        /* ========================================
+           TWO COLUMN GRID
+           ======================================== */
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            margin: var(--space-lg) 0;
+        }
+
+        @media (max-width: 640px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 48px 24px 32px;
+            }
+
+            .section {
+                padding: var(--space-xl) 24px;
+            }
+        }
+
+        /* ========================================
+           CONTENT BOXES
+           ======================================== */
+
+        .box {
+            background: var(--color-gray-900);
+            padding: var(--space-lg);
+            border-left: 3px solid var(--color-gray-700);
+        }
+
+        .box h3 {
+            color: var(--color-gold);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--color-gray-800);
+        }
+
+        ul {
+            margin: var(--space-sm) 0 var(--space-sm) var(--space-lg);
+        }
+
+        li {
+            margin: var(--space-sm) 0;
+            color: var(--color-gray-200);
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* ========================================
+           CLASS STRUCTURE
+           ======================================== */
+
+        .class-structure {
+            background: var(--color-gray-900);
+            border: 1px solid var(--color-gray-800);
+            padding: var(--space-xl);
+            margin: var(--space-lg) 0;
+        }
+
+        .class-structure h4 {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-gold);
+            margin: var(--space-lg) 0 var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .class-structure h4:first-child {
+            margin-top: 0;
+        }
+
+        .class-structure p {
+            font-size: 14px;
+            color: var(--color-gray-300);
+            margin-bottom: 0;
+        }
+
+        /* ========================================
+           HIGHLIGHT BOX
+           ======================================== */
+
+        .highlight {
+            background: var(--color-gold);
+            color: var(--color-black);
+            padding: var(--space-lg);
+            margin: var(--space-lg) 0;
+        }
+
+        .highlight p {
+            color: var(--color-black);
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .highlight strong {
+            font-weight: 800;
+        }
+
+        /* ========================================
+           CLICKABLE ITEMS
+           ======================================== */
+
+        .clickable-hint {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--color-gray-500);
+            margin-bottom: var(--space-md);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .clickable-item {
+            cursor: pointer;
+            color: var(--color-gray-200);
+            transition: color 0.15s ease;
+            text-decoration: underline;
+            text-decoration-color: var(--color-gray-700);
+            text-underline-offset: 3px;
+        }
+
+        .clickable-item:hover {
+            color: var(--color-gold);
+            text-decoration-color: var(--color-gold);
+        }
+
+        /* ========================================
+           MODAL
+           ======================================== */
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+        }
+
+        .modal-content {
+            background-color: var(--color-gray-900);
+            margin: 10% auto;
+            padding: var(--space-xl);
+            border: 1px solid var(--color-gray-800);
+            width: 90%;
+            max-width: 560px;
+        }
+
+        .modal-content h3 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-white);
+            text-transform: none;
+            letter-spacing: -0.01em;
+            padding-bottom: var(--space-md);
+            border-bottom: 2px solid var(--color-gold);
+            margin-bottom: var(--space-md);
+        }
+
+        .modal-content p {
+            color: var(--color-gray-200);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .close {
+            color: var(--color-gray-500);
+            float: right;
+            font-size: 28px;
+            font-weight: 500;
+            cursor: pointer;
+            line-height: 20px;
+            transition: color 0.15s ease;
+        }
+
+        .close:hover {
+            color: var(--color-gold);
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+
+        footer {
+            background: var(--color-gray-900);
+            padding: var(--space-xl) 32px;
+            text-align: center;
+            border-top: 1px solid var(--color-gray-800);
+        }
+
+        footer p {
+            color: var(--color-gray-400);
+            margin: var(--space-xs) 0;
+            font-size: 14px;
+        }
+
+        footer p:first-child {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 12px;
+            color: var(--color-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        /* ========================================
+           PRINT STYLES
+           ======================================== */
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            .modal {
+                display: none !important;
+            }
+            .box, .philosophy, .class-structure {
+                background: #f5f5f5;
+            }
+            .clickable-item {
+                color: black;
+                text-decoration: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="eyebrow">Ages 4-8 Curriculum</div>
+            <h1>Alliance BJJ Kids Program</h1>
+            <p>Positions, Escapes, Sweeps When Possible</p>
+        </header>
+
+        <div class="section">
+            <h2>The Approach</h2>
+
+            <div class="philosophy">
+                <p><strong>Each class teaches one defensive position (with escapes) and one offensive position.</strong> We work sweeps when possible. At ages 4-8, mastering weight distribution and positional awareness is what matters. Attacks are bonus content - most kids this age can't retain the details. The goal: build strong positional foundations so when they move to the bigger kids class, they already have the movements down.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>50-Minute Class Structure</h2>
+
+            <div class="class-structure">
+                <h4>1. Line Up & Bow In (2 min)</h4>
+
+                <h4>2. Warm-up With Counting (8 min)</h4>
+                <p>Bear crawls, shrimp crawls, duck walks, spiderman crawls, bridges, mat slaps, frog jumps, sumos, lunges, cheetahs (racing). Gets them tired so they listen better. All movements they'll see in real BJJ classes.</p>
+
+                <h4>3. Defensive Position + Escapes (12 min)</h4>
+                <p>Example: Mount bottom - frames, bridge, turn, shrimp. Partner drill with counting.</p>
+
+                <h4>4. Offensive Position (10 min)</h4>
+                <p>Example: Mount top - wide base, weight distribution, posting hands. Partner drill with counting.</p>
+
+                <h4>5. Position Games (15 min)</h4>
+                <p>King of the Mount, Backpack Control, Side Control, Chicken Judo, Shrimp Races, etc. Rotate partners.</p>
+
+                <h4>6. Positional Sparring (10 min)</h4>
+                <p>Start in the position learned. Light resistance, 2-min rounds, switch partners.</p>
+
+                <h4>7. Mat Chat & Bow Out (2 min)</h4>
+                <p>Review positions, character focus, count together, bow out.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Warm-ups & Games</h2>
+
+            <div class="two-col">
+                <div class="box">
+                    <h3>Warm-up Movements</h3>
+                    <p class="clickable-hint">Click for description</p>
+                    <ul>
+                        <li><span class="clickable-item">Bear Crawl</span></li>
+                        <li><span class="clickable-item">Shrimp Crawl (hip escapes)</span></li>
+                        <li><span class="clickable-item">Front Hip Escapes</span></li>
+                        <li><span class="clickable-item">Duck Walks</span></li>
+                        <li><span class="clickable-item">Spiderman Crawls</span></li>
+                        <li><span class="clickable-item">Bridges</span></li>
+                        <li><span class="clickable-item">Monkey Rolls</span></li>
+                        <li><span class="clickable-item">Mat Slaps (breakfalls)</span></li>
+                        <li><span class="clickable-item">Frog Jumps</span></li>
+                        <li><span class="clickable-item">Sumos</span></li>
+                        <li><span class="clickable-item">Lunges</span></li>
+                        <li><span class="clickable-item">Leg Stretches</span></li>
+                        <li><span class="clickable-item">Cheetahs (racing)</span></li>
+                    </ul>
+                </div>
+
+                <div class="box">
+                    <h3>Position Games</h3>
+                    <p class="clickable-hint">Click for description</p>
+                    <ul>
+                        <li><span class="clickable-item">King of the Mount</span></li>
+                        <li><span class="clickable-item">Backpack Control</span></li>
+                        <li><span class="clickable-item">Side Control</span></li>
+                        <li><span class="clickable-item">Guard Control</span></li>
+                        <li><span class="clickable-item">Bridge Battle</span></li>
+                        <li><span class="clickable-item">Shrimp Races</span></li>
+                        <li><span class="clickable-item">Turtle Power</span></li>
+                        <li><span class="clickable-item">Chicken Judo</span></li>
+                        <li><span class="clickable-item">Sumo Circle</span></li>
+                        <li><span class="clickable-item">Animal Relay Races</span></li>
+                        <li><span class="clickable-item">Escape Counter</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>What Students Will Learn</h2>
+
+            <div class="two-col">
+                <div class="box">
+                    <h3>Defensive Skills</h3>
+                    <ul>
+                        <li>Mount bottom escapes (bridge, shrimp)</li>
+                        <li>Side control escapes (frames, space)</li>
+                        <li>Closed guard maintenance</li>
+                        <li>Turtle defense (stay tight)</li>
+                        <li>Back defense (protect neck)</li>
+                    </ul>
+                </div>
+
+                <div class="box">
+                    <h3>Offensive Skills</h3>
+                    <ul>
+                        <li>Mount top (weight, base)</li>
+                        <li>Side control (pressure, shoulder)</li>
+                        <li>North South (chest pressure, control)</li>
+                        <li>Back control (hooks, seatbelt)</li>
+                        <li>Top pressure basics</li>
+                        <li>Maintaining positions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="box" style="margin-top: var(--space-lg);">
+                <h3>Core Movements</h3>
+                <p style="margin: 0;">Shrimping (hip escape), Bridging (upa), Base maintenance, Breakfalls, Forward rolls, Weight distribution awareness</p>
+            </div>
+
+            <div class="highlight" style="margin-top: var(--space-lg);">
+                <p><strong>Goal:</strong> When students graduate to bigger kids class, they have movements locked in and understand positions. Then the bigger kids class can teach attacks, complex sweeps, and guard breaks without having to also teach basic movement patterns.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Alliance BJJ Paoli - Kids Program Proposal</p>
+            <p>Defensive + Offensive positions each class | Escapes | Sweeps when possible</p>
+        </footer>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="descriptionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="modalTitle"></h3>
+            <p id="modalDescription"></p>
+        </div>
+    </div>
+
+    <script>
+        const descriptions = {
+            'Bear Crawl': 'On hands and feet, crawl forward keeping hips low. Builds base and shoulder strength for maintaining top control positions.',
+            'Shrimp Crawl (hip escapes)': 'Lie on side, push with top foot, move hips away from partner. This is the core BJJ escape movement used in nearly every bottom position.',
+            'Front Hip Escapes': 'Forward shrimping motion, pushing hips toward partner. Sets up guard recovery and creates angles for escapes.',
+            'Duck Walks': 'Squat position, walk forward keeping low. Builds leg strength and balance while maintaining a low stance.',
+            'Spiderman Crawls': 'Crawl forward bringing knee to same-side elbow. Develops hip mobility and coordination needed for guard work.',
+            'Bridges': 'Lie on back, push through feet, lift hips high off the mat. Essential movement for mount escapes and creating space.',
+            'Monkey Rolls': 'Forward roll with control, tucking chin and protecting head. Safe falling and body awareness.',
+            'Mat Slaps (breakfalls)': 'Slap mat with full arm when falling to side. Protects body during rolls, throws, and takedowns. Safety fundamental.',
+            'Frog Jumps': 'Squat down low, jump forward explosively. Develops power needed for takedowns and explosive escapes.',
+            'Sumos': 'Squat walk sideways in low stance. Leg strength and stance awareness for base maintenance.',
+            'Lunges': 'Step forward into lunge, drop back knee toward mat. Builds leg strength and balance.',
+            'Leg Stretches': 'Various stretches targeting hips and legs. Mobility work essential for BJJ movements and injury prevention.',
+            'Cheetahs (racing)': 'Sprint across mat as fast as possible. Burns energy so kids focus better, adds competitive fun element.',
+            'King of the Mount': 'Top person holds mount position while bottom person tries to escape with bridges. First person to count to 10 wins. Teaches mount maintenance and escape fundamentals.',
+            'Backpack Control': 'Top person maintains back position with hooks (feet inside thighs) and seatbelt grip (one arm under armpit, one over shoulder) while partner tries to escape.',
+            'Side Control': 'Top person holds heavy shoulder pressure across chest, bottom person works to create frames (forearms creating space) and recover guard.',
+            'Guard Control': 'Bottom person keeps closed guard (legs wrapped and locked) while top person tries to open guard or stand. Count successful defenses.',
+            'Bridge Battle': 'From mount bottom position, count how many big explosive bridges you can do in 30 seconds. Focus on height, not speed.',
+            'Shrimp Races': 'Race across the mat using only hip escape (shrimp) movements. Reinforces proper shrimping technique with fun competitive element.',
+            'Turtle Power': 'Bottom person stays in tight turtle position (on hands and knees, elbows tight to knees) while partner tries to flatten them or take back control.',
+            'Chicken Judo': 'Both partners stand on one leg only. Try to push partner off balance to make them put their other foot down. Develops balance and single-leg stability.',
+            'Sumo Circle': 'On knees with wide base, partners try to push each other over while maintaining their own balance. Teaches base awareness and pressure.',
+            'Animal Relay Races': 'Team races using different animal movements in sequence - bear crawl down, shrimp back, duck walk down, etc. Reinforces all warm-up movements with competition.',
+            'Escape Counter': 'Start in a bad position (mount bottom, side control bottom, etc.). 2-minute rounds, count each successful escape out loud. Focus on clean technique.'
+        };
+
+        const modal = document.getElementById('descriptionModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        function showDescription(title) {
+            modalTitle.textContent = title;
+            modalDescription.textContent = descriptions[title] || 'Description not available.';
+            modal.style.display = 'block';
+        }
+
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const clickableItems = document.querySelectorAll('.clickable-item');
+            clickableItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    showDescription(this.textContent);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
