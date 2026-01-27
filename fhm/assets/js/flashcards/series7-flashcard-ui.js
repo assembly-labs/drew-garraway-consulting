@@ -92,8 +92,10 @@ const Series7FlashcardUI = (function () {
                                     <p class="flashcard__text"></p>
                                 </div>
                                 <div class="flashcard__back">
-                                    <p class="flashcard__text"></p>
-                                    <p class="flashcard__memory-aid" id="memory-aid"></p>
+                                    <div class="flashcard__back-content">
+                                        <p class="flashcard__text"></p>
+                                        <p class="flashcard__memory-aid" id="memory-aid"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

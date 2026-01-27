@@ -446,6 +446,35 @@
     font-weight: 400;
 }
 
+/* Back content wrapper - stacks answer and tip vertically */
+.flashcard__back-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Memory Aid - tip shown below the answer */
+.flashcard__memory-aid {
+    display: block;
+    width: 100%;
+    margin-top: var(--fh-space-lg);
+    padding-top: var(--fh-space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--fh-sage);
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* Hide empty memory aids */
+.flashcard__memory-aid:empty {
+    display: none;
+}
+
 /* Swipe visual feedback - Brand colors */
 .flashcard--swiping-horizontal {
     box-shadow: 0 0 30px rgba(107, 39, 55, 0.4);
