@@ -84,7 +84,7 @@ const whiteExcellingPersona: Persona = {
     userId: 'user-white-excelling-001',
     name: 'Jake Thompson',
     stripes: 3,
-    gymName: 'Atos Austin',
+    gym: { gymId: 'atos-austin', gymName: 'Atos Austin', isCustom: false, city: 'Austin', stateOrCountry: 'TX', affiliation: 'Atos' },
     targetFrequency: 4,
     birthYear: 1998,
     loggingPreference: 'voice',
@@ -145,7 +145,7 @@ const whiteAtRiskPersona: Persona = {
     stripes: 2, // Only 2 stripes after 18 months
     trainingStartDate: '2024-07-01', // 18 months ago from Jan 2026
     currentBeltDate: '2024-07-01',
-    gymName: 'Gracie Barra Portland',
+    gym: { gymId: 'gb-portland', gymName: 'Gracie Barra Portland', isCustom: false, city: 'Portland', stateOrCountry: 'OR', affiliation: 'Gracie Barra' },
     trainingGoals: ['fitness', 'mental'] as const,
     targetFrequency: 2, // His goal is just 2x/week
     birthYear: 1972,
@@ -228,7 +228,7 @@ const blueExcellingPersona: Persona = {
     stripes: 2,
     trainingStartDate: '2023-07-15', // 2.5 years ago from Jan 2026
     currentBeltDate: '2025-03-20', // 10 months at blue from Jan 2026
-    gymName: '10th Planet Denver',
+    gym: { gymId: '10p-denver', gymName: '10th Planet Denver', isCustom: false, city: 'Denver', stateOrCountry: 'CO', affiliation: '10th Planet' },
     trainingGoals: ['fitness', 'mental', 'community'] as const,
     targetFrequency: 3,
     birthYear: 1990,
@@ -301,7 +301,7 @@ const blueAtRiskPersona: Persona = {
     stripes: 1,
     trainingStartDate: '2023-01-01', // 3 years ago from Jan 2026
     currentBeltDate: '2024-11-15', // 14 months at blue from Jan 2026
-    gymName: 'Carlson Gracie Chicago',
+    gym: { gymId: 'carlson-chicago', gymName: 'Carlson Gracie Chicago', isCustom: false, city: 'Chicago', stateOrCountry: 'IL', affiliation: 'Carlson Gracie' },
     targetFrequency: 3,
     birthYear: 1993,
     loggingPreference: 'text',
@@ -377,7 +377,7 @@ const purpleAveragePersona: Persona = {
     stripes: 1,
     trainingStartDate: '2021-01-01', // 5 years ago from Jan 2026
     currentBeltDate: '2025-05-15', // 8 months at purple from Jan 2026
-    gymName: 'Atos HQ San Diego',
+    gym: { gymId: 'atos-hq', gymName: 'Atos HQ', isCustom: false, city: 'San Diego', stateOrCountry: 'CA', affiliation: 'Atos' },
     trainingGoals: ['competition', 'fitness', 'community'] as const,
     targetFrequency: 5,
     birthYear: 1996,
@@ -453,7 +453,7 @@ const brownAveragePersona: Persona = {
     stripes: 2,
     trainingStartDate: '2017-06-01', // 8.5 years ago from Jan 2026
     currentBeltDate: '2024-07-15', // 18 months at brown from Jan 2026
-    gymName: 'Marcelo Garcia Seattle',
+    gym: { gymId: 'mg-seattle', gymName: 'Marcelo Garcia Seattle', isCustom: false, city: 'Seattle', stateOrCountry: 'WA', affiliation: 'Marcelo Garcia' },
     trainingGoals: ['community', 'mental', 'fitness'] as const,
     targetFrequency: 4,
     birthYear: 1986,

@@ -36,7 +36,7 @@ export function ProfileNudge({ question, onComplete, onSkip }: ProfileNudgeProps
     // Convert value to appropriate type
     let finalValue: unknown = value;
 
-    if (question.id === 'stripes' || question.id === 'targetFrequency' || question.id === 'birthYear') {
+    if (question.id === 'birthYear') {
       finalValue = parseInt(value as string, 10);
     }
 

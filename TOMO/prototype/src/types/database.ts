@@ -19,6 +19,7 @@ export type BeltColor = BeltLevel;
 export type TrainingType = 'gi' | 'nogi' | 'openmat' | 'drilling' | 'private' | 'competition';
 export type ProficiencyLevel = 'learning' | 'developing' | 'proficient' | 'advanced';
 export type LoggingPreference = 'voice' | 'text' | 'undecided';
+export type PracticeLogSource = 'technique_library' | 'session_logger' | 'quick_add';
 
 // ===========================================
 // PROFILES TABLE
@@ -530,4 +531,46 @@ export interface SubmissionStats {
     given: Array<{ technique: string; count: number }>;
     received: Array<{ technique: string; count: number }>;
   };
+}
+
+// ===========================================
+// PRACTICE LOGS TABLE
+// ===========================================
+
+/**
+ * PracticeLog captures deliberate practice events from the Technique Library.
+ * Distinct from Session Logging - this is lightweight, single-technique focus.
+ *
+ * See: /docs/data-and-ai/PRACTICE_TRACKING.md
+ */
+export interface PracticeLog {
+  id: string; // UUID
+  user_id: string; // UUID, references profiles.id
+  technique_id: string; // Reference to technique catalog
+  technique_name: string; // Denormalized for quick display
+  position: string; // Technique's position category
+  timestamp: string; // ISO 8601 datetime
+  source: PracticeLogSource;
+  notes: string | null; // Optional quick note
+  created_at: string; // ISO timestamp
+}
+
+// Insert type
+export interface PracticeLogInsert {
+  user_id: string;
+  technique_id: string;
+  technique_name: string;
+  position: string;
+  source?: PracticeLogSource;
+  notes?: string | null;
+}
+
+// Filters for querying
+export interface PracticeLogFilters {
+  startDate?: string;
+  endDate?: string;
+  techniqueId?: string;
+  position?: string;
+  limit?: number;
+  offset?: number;
 }

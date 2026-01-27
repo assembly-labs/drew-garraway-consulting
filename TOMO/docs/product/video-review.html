@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMO Video Review</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #eee; padding: 16px; line-height: 1.4; }
+
+    .header { background: #111; padding: 20px; border-radius: 10px; margin-bottom: 14px; border: 1px solid #222; }
+    h1 { color: #F5A623; font-size: 22px; margin-bottom: 4px; }
+    .subtitle { color: #666; font-size: 12px; }
+    .stats { display: flex; gap: 20px; margin-top: 14px; flex-wrap: wrap; }
+    .stat { text-align: center; }
+    .stat-value { font-size: 24px; font-weight: 700; color: #F5A623; }
+    .stat-value.verified { color: #22c55e; }
+    .stat-value.unverified { color: #f59e0b; }
+    .stat-value.invalid { color: #ef4444; }
+    .stat-label { font-size: 10px; color: #666; text-transform: uppercase; }
+    .generated { color: #555; font-size: 10px; margin-top: 12px; }
+
+    .filters { background: #111; border: 1px solid #222; border-radius: 8px; padding: 14px; margin-bottom: 14px; display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+    .filter-group { display: flex; flex-direction: column; gap: 3px; }
+    .filter-label { font-size: 9px; text-transform: uppercase; color: #555; font-weight: 600; }
+    select { background: #1a1a1a; border: 1px solid #333; color: #eee; padding: 6px 8px; border-radius: 5px; font-size: 12px; min-width: 110px; }
+    select:focus { border-color: #F5A623; outline: none; }
+    .btn { padding: 6px 14px; border-radius: 5px; font-size: 12px; cursor: pointer; border: none; background: #222; color: #888; }
+    .btn:hover { background: #333; color: #eee; }
+
+    .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .results-count { color: #666; font-size: 12px; }
+
+    .legend { background: #111; border: 1px solid #222; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; display: flex; gap: 20px; font-size: 11px; }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-icon { width: 16px; height: 16px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+    .legend-icon.verified { background: #22c55e33; color: #22c55e; }
+    .legend-icon.unverified { background: #f59e0b33; color: #f59e0b; }
+    .legend-icon.invalid { background: #ef444433; color: #ef4444; }
+
+    /* List View */
+    #list-view { display: flex; flex-direction: column; gap: 1px; }
+    .list-row { display: flex; align-items: center; gap: 12px; padding: 8px 10px; background: #111; border-radius: 6px; border-left: 3px solid transparent; }
+    .list-row:hover { background: #151515; }
+    .list-row.hidden { display: none; }
+    .list-row.verified { border-left-color: #22c55e; }
+    .list-row.unverified { border-left-color: #f59e0b; background: #1a1a0a; }
+    .list-row.invalid { border-left-color: #ef4444; background: #1a0a0a; }
+    .list-status { width: 20px; flex-shrink: 0; text-align: center; font-size: 12px; }
+    .list-status.verified { color: #22c55e; }
+    .list-status.unverified { color: #f59e0b; }
+    .list-status.invalid { color: #ef4444; }
+    .list-thumb { width: 80px; height: 45px; object-fit: cover; border-radius: 3px; flex-shrink: 0; cursor: pointer; }
+    .list-thumb:hover { opacity: 0.8; }
+    .list-id { font-family: monospace; color: #F5A623; font-size: 11px; width: 90px; flex-shrink: 0; }
+    .list-title { flex: 1; font-size: 13px; font-weight: 500; min-width: 0; }
+    .list-instructor { color: #88c0d0; font-size: 12px; width: 120px; flex-shrink: 0; }
+    .list-tags { display: flex; gap: 4px; flex-shrink: 0; }
+    .mini { padding: 2px 5px; border-radius: 3px; font-size: 9px; font-weight: 500; }
+    .list-cat { color: #555; font-size: 11px; width: 100px; flex-shrink: 0; }
+    .list-link { color: #ef4444; text-decoration: none; padding: 4px 10px; background: #ef444422; border-radius: 4px; font-size: 11px; flex-shrink: 0; }
+    .list-link:hover { background: #ef444433; }
+    .list-youtube-id { font-family: monospace; font-size: 10px; color: #555; width: 100px; flex-shrink: 0; }
+
+    .badge-white { background: #f5f5f5; color: #111; }
+    .badge-blue { background: #3b82f6; color: white; }
+    .badge-purple { background: #8b5cf6; color: white; }
+    .meta-new-wave { background: #ef444422; color: #ef4444; }
+    .meta-mixed { background: #8b5cf622; color: #a78bfa; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>TOMO Video Review</h1>
+    <p class="subtitle">Video database with validation status</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-value">138</div><div class="stat-label">Total Entries</div></div>
+      <div class="stat"><div class="stat-value">47</div><div class="stat-label">Unique Videos</div></div>
+      <div class="stat"><div class="stat-value verified">138</div><div class="stat-label">Verified</div></div>
+      <div class="stat"><div class="stat-value unverified">0</div><div class="stat-label">Unverified</div></div>
+      <div class="stat"><div class="stat-value invalid">0</div><div class="stat-label">Invalid</div></div>
+      <div class="stat"><div class="stat-value">6</div><div class="stat-label">Instructors</div></div>
+    </div>
+    <p class="generated">Generated: 2026-01-26 22:12:12 UTC</p>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-icon verified">&#10003;</div><span>Verified via noembed API</span></div>
+    <div class="legend-item"><div class="legend-icon unverified">?</div><span>Needs verification</span></div>
+    <div class="legend-item"><div class="legend-icon invalid">&#10005;</div><span>Invalid (not BJJ content)</span></div>
+  </div>
+
+  <div class="filters">
+    <div class="filter-group"><label class="filter-label">Validation</label><select id="f-valid"><option value="">All</option><option value="verified">Verified Only</option><option value="unverified">Unverified Only</option><option value="invalid">Invalid Only</option></select></div>
+    <div class="filter-group"><label class="filter-label">Style</label><select id="f-style"><option value="">All</option><option value="new-wave">New Wave</option><option value="mixed">Mixed</option></select></div>
+    <div class="filter-group"><label class="filter-label">Belt</label><select id="f-belt"><option value="">All</option><option value="white">White</option><option value="blue">Blue</option><option value="purple">Purple</option></select></div>
+    <div class="filter-group"><label class="filter-label">Instructor</label><select id="f-inst"><option value="">All</option><option value="Craig Jones">Craig Jones</option><option value="Gordon Ryan">Gordon Ryan</option><option value="Gustavo Gasperin">Gustavo Gasperin</option><option value="John Danaher">John Danaher</option><option value="Lachlan Giles">Lachlan Giles</option><option value="Stephan Kesting">Stephan Kesting</option></select></div>
+    <div class="filter-group"><label class="filter-label">Position</label><select id="f-cat"><option value="">All</option><option value="Back Control">Back Control</option><option value="Clinch">Clinch</option><option value="Closed Guard">Closed Guard</option><option value="Guard Passing">Guard Passing</option><option value="Half Guard">Half Guard</option><option value="Knee on Belly">Knee on Belly</option><option value="Mount">Mount</option><option value="North-South">North-South</option><option value="Open Guards">Open Guards</option><option value="Side Control">Side Control</option><option value="Submissions">Submissions</option><option value="Takedowns">Takedowns</option><option value="Turtle">Turtle</option></select></div>
+    <button class="btn" onclick="reset()">Reset</button>
+  </div>
+
+  <div class="toolbar">
+    <span class="results-count"><span id="count">138</span> videos</span>
+  </div>
+
+  <div id="list-view">
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_001</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_002</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_003</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_004</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=LDE0fkzZT6I" target="_blank"><img src="https://img.youtube.com/vi/LDE0fkzZT6I/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_008</span>
+      <span class="list-title">How To Do The Perfect Triangle Choke Even If You Have Short Legs</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">LDE0fkzZT6I</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=LDE0fkzZT6I" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=VA6zjDN690s" target="_blank"><img src="https://img.youtube.com/vi/VA6zjDN690s/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_008</span>
+      <span class="list-title">Wrist Controls To Triangles</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">VA6zjDN690s</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=VA6zjDN690s" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_009</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_010</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_012</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_013</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_015</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_016</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_017</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_025</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_030</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Half Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank"><img src="https://img.youtube.com/vi/Ze10eulM1xg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">HG_001</span>
+      <span class="list-title">How To Build The Perfect Half Guard Game For No Gi</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">Ze10eulM1xg</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Half Guard</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Half Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=E8x1Cva8hJ8" target="_blank"><img src="https://img.youtube.com/vi/E8x1Cva8hJ8/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">HG_001</span>
+      <span class="list-title">How To Build The Perfect Half Guard Game</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">E8x1Cva8hJ8</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Half Guard</span>
+      <a href="https://youtube.com/watch?v=E8x1Cva8hJ8" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Half Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank"><img src="https://img.youtube.com/vi/Ze10eulM1xg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">HG_016</span>
+      <span class="list-title">How To Build The Perfect Half Guard Game For No Gi</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">Ze10eulM1xg</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Half Guard</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Half Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank"><img src="https://img.youtube.com/vi/Ze10eulM1xg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">HG_019</span>
+      <span class="list-title">How To Build The Perfect Half Guard Game For No Gi</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">Ze10eulM1xg</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Half Guard</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="John Danaher" data-cat="Half Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank"><img src="https://img.youtube.com/vi/Ze10eulM1xg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">HG_020</span>
+      <span class="list-title">How To Build The Perfect Half Guard Game For No Gi</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">Ze10eulM1xg</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Half Guard</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="John Danaher" data-cat="Half Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank"><img src="https://img.youtube.com/vi/Ze10eulM1xg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">HG_024</span>
+      <span class="list-title">How To Build The Perfect Half Guard Game For No Gi</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">Ze10eulM1xg</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Half Guard</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Open Guards">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=MXcQfCIh7n4" target="_blank"><img src="https://img.youtube.com/vi/MXcQfCIh7n4/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">OG_019</span>
+      <span class="list-title">The Most Basic Principles Of Butterfly And Open Guard</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">MXcQfCIh7n4</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Open Guards</span>
+      <a href="https://youtube.com/watch?v=MXcQfCIh7n4" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Open Guards">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Fcg4mtegux0" target="_blank"><img src="https://img.youtube.com/vi/Fcg4mtegux0/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">OG_019</span>
+      <span class="list-title">Understanding The Open Guard In BJJ</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">Fcg4mtegux0</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Open Guards</span>
+      <a href="https://youtube.com/watch?v=Fcg4mtegux0" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="Gordon Ryan" data-cat="Open Guards">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=MXcQfCIh7n4" target="_blank"><img src="https://img.youtube.com/vi/MXcQfCIh7n4/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">OG_020</span>
+      <span class="list-title">The Most Basic Principles Of Butterfly And Open Guard</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">MXcQfCIh7n4</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Open Guards</span>
+      <a href="https://youtube.com/watch?v=MXcQfCIh7n4" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Gordon Ryan" data-cat="Mount">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank"><img src="https://img.youtube.com/vi/tyI3aszI4qo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">MT_001</span>
+      <span class="list-title">Early Hand Fighting From Mount</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">tyI3aszI4qo</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Mount</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Gordon Ryan" data-cat="Mount">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank"><img src="https://img.youtube.com/vi/tyI3aszI4qo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">MT_004</span>
+      <span class="list-title">Early Hand Fighting From Mount</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">tyI3aszI4qo</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Mount</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Gordon Ryan" data-cat="Mount">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank"><img src="https://img.youtube.com/vi/tyI3aszI4qo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">MT_007</span>
+      <span class="list-title">Early Hand Fighting From Mount</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">tyI3aszI4qo</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Mount</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Gordon Ryan" data-cat="Mount">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank"><img src="https://img.youtube.com/vi/tyI3aszI4qo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">MT_008</span>
+      <span class="list-title">Early Hand Fighting From Mount</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">tyI3aszI4qo</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Mount</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Gordon Ryan" data-cat="Mount">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank"><img src="https://img.youtube.com/vi/tyI3aszI4qo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">MT_009</span>
+      <span class="list-title">Early Hand Fighting From Mount</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">tyI3aszI4qo</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Mount</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Mount">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank"><img src="https://img.youtube.com/vi/tyI3aszI4qo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">MT_010</span>
+      <span class="list-title">Early Hand Fighting From Mount</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">tyI3aszI4qo</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Mount</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Mount">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank"><img src="https://img.youtube.com/vi/tyI3aszI4qo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">MT_015</span>
+      <span class="list-title">Early Hand Fighting From Mount</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">tyI3aszI4qo</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Mount</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Lachlan Giles" data-cat="Side Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank"><img src="https://img.youtube.com/vi/gnAhAdE_A90/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SC_001</span>
+      <span class="list-title">The Best Way To Escape Side Control</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">gnAhAdE_A90</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Side Control</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Lachlan Giles" data-cat="Side Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=swEcP2QWHs8" target="_blank"><img src="https://img.youtube.com/vi/swEcP2QWHs8/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SC_001</span>
+      <span class="list-title">Linking 4 Different Side Control Escapes</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">swEcP2QWHs8</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Side Control</span>
+      <a href="https://youtube.com/watch?v=swEcP2QWHs8" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Lachlan Giles" data-cat="Side Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank"><img src="https://img.youtube.com/vi/gnAhAdE_A90/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SC_002</span>
+      <span class="list-title">The Best Way To Escape Side Control</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">gnAhAdE_A90</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Side Control</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Lachlan Giles" data-cat="Side Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank"><img src="https://img.youtube.com/vi/gnAhAdE_A90/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SC_006</span>
+      <span class="list-title">The Best Way To Escape Side Control</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">gnAhAdE_A90</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Side Control</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Lachlan Giles" data-cat="Side Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank"><img src="https://img.youtube.com/vi/gnAhAdE_A90/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SC_007</span>
+      <span class="list-title">The Best Way To Escape Side Control</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">gnAhAdE_A90</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Side Control</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Side Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank"><img src="https://img.youtube.com/vi/gnAhAdE_A90/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SC_012</span>
+      <span class="list-title">The Best Way To Escape Side Control</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">gnAhAdE_A90</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Side Control</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Side Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank"><img src="https://img.youtube.com/vi/gnAhAdE_A90/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SC_013</span>
+      <span class="list-title">The Best Way To Escape Side Control</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">gnAhAdE_A90</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Side Control</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Side Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=cuXq-k__9lQ" target="_blank"><img src="https://img.youtube.com/vi/cuXq-k__9lQ/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SC_016</span>
+      <span class="list-title">How To Do The Perfect BJJ Side Control Escape</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">cuXq-k__9lQ</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Side Control</span>
+      <a href="https://youtube.com/watch?v=cuXq-k__9lQ" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Side Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank"><img src="https://img.youtube.com/vi/gnAhAdE_A90/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SC_016</span>
+      <span class="list-title">The Best Way To Escape Side Control</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">gnAhAdE_A90</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Side Control</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Side Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=rhYdYtMhDac" target="_blank"><img src="https://img.youtube.com/vi/rhYdYtMhDac/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SC_016</span>
+      <span class="list-title">The Best Way To Escape Side Control Part 2</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">rhYdYtMhDac</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Side Control</span>
+      <a href="https://youtube.com/watch?v=rhYdYtMhDac" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Side Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=59NfnauqwIQ" target="_blank"><img src="https://img.youtube.com/vi/59NfnauqwIQ/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SC_016</span>
+      <span class="list-title">Escape Side Control Fundamentals Part 2</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">59NfnauqwIQ</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Side Control</span>
+      <a href="https://youtube.com/watch?v=59NfnauqwIQ" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Side Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank"><img src="https://img.youtube.com/vi/gnAhAdE_A90/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SC_019</span>
+      <span class="list-title">The Best Way To Escape Side Control</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">gnAhAdE_A90</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Side Control</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Lachlan Giles" data-cat="Back Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank"><img src="https://img.youtube.com/vi/k-lCzVAzJpg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">BC_001</span>
+      <span class="list-title">Escaping The Back - Pay Attention To The Leg Work</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">k-lCzVAzJpg</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Back Control</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Lachlan Giles" data-cat="Back Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank"><img src="https://img.youtube.com/vi/k-lCzVAzJpg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">BC_003</span>
+      <span class="list-title">Escaping The Back - Pay Attention To The Leg Work</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">k-lCzVAzJpg</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Back Control</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Craig Jones" data-cat="Back Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=FpJTnOEkqYI" target="_blank"><img src="https://img.youtube.com/vi/FpJTnOEkqYI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">BC_005</span>
+      <span class="list-title">Finishing A Mandible Rear Naked</span>
+      <span class="list-instructor">Craig Jones</span>
+      <span class="list-youtube-id">FpJTnOEkqYI</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Back Control</span>
+      <a href="https://youtube.com/watch?v=FpJTnOEkqYI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Craig Jones" data-cat="Back Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=WnNtD9kPBvs" target="_blank"><img src="https://img.youtube.com/vi/WnNtD9kPBvs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">BC_005</span>
+      <span class="list-title">Rear Ezekiel</span>
+      <span class="list-instructor">Craig Jones</span>
+      <span class="list-youtube-id">WnNtD9kPBvs</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Back Control</span>
+      <a href="https://youtube.com/watch?v=WnNtD9kPBvs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Back Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank"><img src="https://img.youtube.com/vi/k-lCzVAzJpg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">BC_011</span>
+      <span class="list-title">Escaping The Back - Pay Attention To The Leg Work</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">k-lCzVAzJpg</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Back Control</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Back Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank"><img src="https://img.youtube.com/vi/k-lCzVAzJpg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">BC_014</span>
+      <span class="list-title">Escaping The Back - Pay Attention To The Leg Work</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">k-lCzVAzJpg</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Back Control</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Back Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=8XBJboAGzRk" target="_blank"><img src="https://img.youtube.com/vi/8XBJboAGzRk/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">BC_014</span>
+      <span class="list-title">Escape The Back PT2 - Clearing The Arm To The Other Side</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">8XBJboAGzRk</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Back Control</span>
+      <a href="https://youtube.com/watch?v=8XBJboAGzRk" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Craig Jones" data-cat="Back Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=uT-7lJxykCg" target="_blank"><img src="https://img.youtube.com/vi/uT-7lJxykCg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">BC_014</span>
+      <span class="list-title">Back Escape Technique</span>
+      <span class="list-instructor">Craig Jones</span>
+      <span class="list-youtube-id">uT-7lJxykCg</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Back Control</span>
+      <a href="https://youtube.com/watch?v=uT-7lJxykCg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="North-South">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=KG916GxW-88" target="_blank"><img src="https://img.youtube.com/vi/KG916GxW-88/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">NS_007</span>
+      <span class="list-title">Escaping North South And Choosing The Correct Escape</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">KG916GxW-88</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">North-South</span>
+      <a href="https://youtube.com/watch?v=KG916GxW-88" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="mixed" data-belt="white" data-inst="Stephan Kesting" data-cat="Takedowns">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=FksRO4JgQck" target="_blank"><img src="https://img.youtube.com/vi/FksRO4JgQck/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">TD_001</span>
+      <span class="list-title">Single And Double Leg Takedowns For Beginners</span>
+      <span class="list-instructor">Stephan Kesting</span>
+      <span class="list-youtube-id">FksRO4JgQck</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-mixed">mix</span></span>
+      <span class="list-cat">Takedowns</span>
+      <a href="https://youtube.com/watch?v=FksRO4JgQck" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="mixed" data-belt="white" data-inst="Stephan Kesting" data-cat="Takedowns">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=FksRO4JgQck" target="_blank"><img src="https://img.youtube.com/vi/FksRO4JgQck/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">TD_002</span>
+      <span class="list-title">Single And Double Leg Takedowns For Beginners</span>
+      <span class="list-instructor">Stephan Kesting</span>
+      <span class="list-youtube-id">FksRO4JgQck</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-mixed">mix</span></span>
+      <span class="list-cat">Takedowns</span>
+      <a href="https://youtube.com/watch?v=FksRO4JgQck" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Gordon Ryan" data-cat="Takedowns">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank"><img src="https://img.youtube.com/vi/JX0HL0WpYPs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">TD_006</span>
+      <span class="list-title">How To Do The Perfect Front Headlock And Turtle Escapes</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">JX0HL0WpYPs</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Takedowns</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="John Danaher" data-cat="Takedowns">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=-zgwLkCoWDw" target="_blank"><img src="https://img.youtube.com/vi/-zgwLkCoWDw/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">TD_008</span>
+      <span class="list-title">The Importance Of BJJ Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">-zgwLkCoWDw</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Takedowns</span>
+      <a href="https://youtube.com/watch?v=-zgwLkCoWDw" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="John Danaher" data-cat="Takedowns">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=-zgwLkCoWDw" target="_blank"><img src="https://img.youtube.com/vi/-zgwLkCoWDw/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">TD_009</span>
+      <span class="list-title">The Importance Of BJJ Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">-zgwLkCoWDw</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Takedowns</span>
+      <a href="https://youtube.com/watch?v=-zgwLkCoWDw" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Takedowns">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=-zgwLkCoWDw" target="_blank"><img src="https://img.youtube.com/vi/-zgwLkCoWDw/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">TD_010</span>
+      <span class="list-title">The Importance Of BJJ Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">-zgwLkCoWDw</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Takedowns</span>
+      <a href="https://youtube.com/watch?v=-zgwLkCoWDw" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Takedowns">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=nU9YxDabnSU" target="_blank"><img src="https://img.youtube.com/vi/nU9YxDabnSU/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">TD_018</span>
+      <span class="list-title">Understanding The Closed Guard</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">nU9YxDabnSU</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Takedowns</span>
+      <a href="https://youtube.com/watch?v=nU9YxDabnSU" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Clinch">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank"><img src="https://img.youtube.com/vi/JX0HL0WpYPs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CL_001</span>
+      <span class="list-title">How To Do The Perfect Front Headlock And Turtle Escapes</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">JX0HL0WpYPs</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Clinch</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Clinch">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank"><img src="https://img.youtube.com/vi/JX0HL0WpYPs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CL_002</span>
+      <span class="list-title">How To Do The Perfect Front Headlock And Turtle Escapes</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">JX0HL0WpYPs</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Clinch</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Clinch">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank"><img src="https://img.youtube.com/vi/JX0HL0WpYPs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CL_003</span>
+      <span class="list-title">How To Do The Perfect Front Headlock And Turtle Escapes</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">JX0HL0WpYPs</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Clinch</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Clinch">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank"><img src="https://img.youtube.com/vi/JX0HL0WpYPs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CL_005</span>
+      <span class="list-title">How To Do The Perfect Front Headlock And Turtle Escapes</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">JX0HL0WpYPs</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Clinch</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Clinch">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank"><img src="https://img.youtube.com/vi/JX0HL0WpYPs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CL_006</span>
+      <span class="list-title">How To Do The Perfect Front Headlock And Turtle Escapes</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">JX0HL0WpYPs</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Clinch</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Clinch">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank"><img src="https://img.youtube.com/vi/JX0HL0WpYPs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CL_007</span>
+      <span class="list-title">How To Do The Perfect Front Headlock And Turtle Escapes</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">JX0HL0WpYPs</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Clinch</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Clinch">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank"><img src="https://img.youtube.com/vi/JX0HL0WpYPs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CL_008</span>
+      <span class="list-title">How To Do The Perfect Front Headlock And Turtle Escapes</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">JX0HL0WpYPs</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Clinch</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Clinch">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank"><img src="https://img.youtube.com/vi/JX0HL0WpYPs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CL_009</span>
+      <span class="list-title">How To Do The Perfect Front Headlock And Turtle Escapes</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">JX0HL0WpYPs</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Clinch</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Clinch">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank"><img src="https://img.youtube.com/vi/JX0HL0WpYPs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CL_012</span>
+      <span class="list-title">How To Do The Perfect Front Headlock And Turtle Escapes</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">JX0HL0WpYPs</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Clinch</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Clinch">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank"><img src="https://img.youtube.com/vi/JX0HL0WpYPs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CL_014</span>
+      <span class="list-title">How To Do The Perfect Front Headlock And Turtle Escapes</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">JX0HL0WpYPs</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Clinch</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Clinch">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Zvn--8vW1sI" target="_blank"><img src="https://img.youtube.com/vi/Zvn--8vW1sI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CL_017</span>
+      <span class="list-title">Head And Arm Guillotine Choke Escape</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">Zvn--8vW1sI</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Clinch</span>
+      <a href="https://youtube.com/watch?v=Zvn--8vW1sI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=r-FNcolHsg4" target="_blank"><img src="https://img.youtube.com/vi/r-FNcolHsg4/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_002</span>
+      <span class="list-title">Learn How To Do The Perfect Jiu Jitsu Body Lock Pass</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">r-FNcolHsg4</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=r-FNcolHsg4" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=isv_6Hd1Iac" target="_blank"><img src="https://img.youtube.com/vi/isv_6Hd1Iac/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_003</span>
+      <span class="list-title">How To Perfect Your Guard Passing No Gi</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">isv_6Hd1Iac</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=isv_6Hd1Iac" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=isv_6Hd1Iac" target="_blank"><img src="https://img.youtube.com/vi/isv_6Hd1Iac/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_004</span>
+      <span class="list-title">How To Perfect Your Guard Passing No Gi</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">isv_6Hd1Iac</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=isv_6Hd1Iac" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Jz4oLDOHxLM" target="_blank"><img src="https://img.youtube.com/vi/Jz4oLDOHxLM/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_005</span>
+      <span class="list-title">How To Do The Perfect Jiu Jitsu Half Guard Passing</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">Jz4oLDOHxLM</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=Jz4oLDOHxLM" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=qrlXfEOk_44" target="_blank"><img src="https://img.youtube.com/vi/qrlXfEOk_44/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_005</span>
+      <span class="list-title">How To Pass The BJJ Half Guard No Gi</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">qrlXfEOk_44</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=qrlXfEOk_44" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ODuQCA88oY4" target="_blank"><img src="https://img.youtube.com/vi/ODuQCA88oY4/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_008</span>
+      <span class="list-title">5 Tips To Pass ANY Guard</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ODuQCA88oY4</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=ODuQCA88oY4" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Zp9O6YpHKeE" target="_blank"><img src="https://img.youtube.com/vi/Zp9O6YpHKeE/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_008</span>
+      <span class="list-title">5 Tips To Pass Any Guard No Gi</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">Zp9O6YpHKeE</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=Zp9O6YpHKeE" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ODuQCA88oY4" target="_blank"><img src="https://img.youtube.com/vi/ODuQCA88oY4/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_010</span>
+      <span class="list-title">5 Tips To Pass ANY Guard</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ODuQCA88oY4</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=ODuQCA88oY4" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=LLSSUrds01E" target="_blank"><img src="https://img.youtube.com/vi/LLSSUrds01E/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_016</span>
+      <span class="list-title">Passing Butterfly Guard With The Body Lock</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">LLSSUrds01E</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=LLSSUrds01E" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=isv_6Hd1Iac" target="_blank"><img src="https://img.youtube.com/vi/isv_6Hd1Iac/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_017</span>
+      <span class="list-title">How To Perfect Your Guard Passing No Gi</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">isv_6Hd1Iac</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=isv_6Hd1Iac" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="John Danaher" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Jz4oLDOHxLM" target="_blank"><img src="https://img.youtube.com/vi/Jz4oLDOHxLM/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_020</span>
+      <span class="list-title">How To Do The Perfect Jiu Jitsu Half Guard Passing</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">Jz4oLDOHxLM</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=Jz4oLDOHxLM" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="Lachlan Giles" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=qrlXfEOk_44" target="_blank"><img src="https://img.youtube.com/vi/qrlXfEOk_44/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_020</span>
+      <span class="list-title">How To Pass The BJJ Half Guard No Gi</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">qrlXfEOk_44</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=qrlXfEOk_44" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="Lachlan Giles" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=yZ4mrxCUl_Q" target="_blank"><img src="https://img.youtube.com/vi/yZ4mrxCUl_Q/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_020</span>
+      <span class="list-title">6 Approaches To Passing The Knee Shield</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">yZ4mrxCUl_Q</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=yZ4mrxCUl_Q" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="John Danaher" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=isv_6Hd1Iac" target="_blank"><img src="https://img.youtube.com/vi/isv_6Hd1Iac/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_021</span>
+      <span class="list-title">How To Perfect Your Guard Passing No Gi</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">isv_6Hd1Iac</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=isv_6Hd1Iac" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="Lachlan Giles" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=GCWfLiI51ds" target="_blank"><img src="https://img.youtube.com/vi/GCWfLiI51ds/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_024</span>
+      <span class="list-title">Understanding Guard Passing - Concepts And Heuristics</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">GCWfLiI51ds</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=GCWfLiI51ds" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="Lachlan Giles" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Zp9O6YpHKeE" target="_blank"><img src="https://img.youtube.com/vi/Zp9O6YpHKeE/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_025</span>
+      <span class="list-title">5 Tips To Pass Any Guard No Gi</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">Zp9O6YpHKeE</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=Zp9O6YpHKeE" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Turtle">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=A8JVwd_OoSY" target="_blank"><img src="https://img.youtube.com/vi/A8JVwd_OoSY/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">TT_001</span>
+      <span class="list-title">Jiu Jitsu vs Wrestling - Understanding Turtle Position</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">A8JVwd_OoSY</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Turtle</span>
+      <a href="https://youtube.com/watch?v=A8JVwd_OoSY" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Turtle">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=iMI43_ct0_o" target="_blank"><img src="https://img.youtube.com/vi/iMI43_ct0_o/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">TT_001</span>
+      <span class="list-title">Intro To Escaping Turtle Position</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">iMI43_ct0_o</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Turtle</span>
+      <a href="https://youtube.com/watch?v=iMI43_ct0_o" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Turtle">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank"><img src="https://img.youtube.com/vi/JX0HL0WpYPs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">TT_002</span>
+      <span class="list-title">How To Do The Perfect Front Headlock And Turtle Escapes</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">JX0HL0WpYPs</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Turtle</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Turtle">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank"><img src="https://img.youtube.com/vi/JX0HL0WpYPs/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">TT_005</span>
+      <span class="list-title">How To Do The Perfect Front Headlock And Turtle Escapes</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">JX0HL0WpYPs</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Turtle</span>
+      <a href="https://youtube.com/watch?v=JX0HL0WpYPs" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Turtle">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=7c_QyTpJy-k" target="_blank"><img src="https://img.youtube.com/vi/7c_QyTpJy-k/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">TT_015</span>
+      <span class="list-title">Guard Recovery And Inverting</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">7c_QyTpJy-k</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Turtle</span>
+      <a href="https://youtube.com/watch?v=7c_QyTpJy-k" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Knee on Belly">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank"><img src="https://img.youtube.com/vi/gnAhAdE_A90/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">KB_008</span>
+      <span class="list-title">The Best Way To Escape Side Control</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">gnAhAdE_A90</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Knee on Belly</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Craig Jones" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=FpJTnOEkqYI" target="_blank"><img src="https://img.youtube.com/vi/FpJTnOEkqYI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_001</span>
+      <span class="list-title">Finishing A Mandible Rear Naked</span>
+      <span class="list-instructor">Craig Jones</span>
+      <span class="list-youtube-id">FpJTnOEkqYI</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=FpJTnOEkqYI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_004</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=LDE0fkzZT6I" target="_blank"><img src="https://img.youtube.com/vi/LDE0fkzZT6I/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_005</span>
+      <span class="list-title">How To Do The Perfect Triangle Choke Even If You Have Short Legs</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">LDE0fkzZT6I</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=LDE0fkzZT6I" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Craig Jones" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=xnlx_hNfuZ4" target="_blank"><img src="https://img.youtube.com/vi/xnlx_hNfuZ4/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_005</span>
+      <span class="list-title">Triangle Choke Set Up On The Mount</span>
+      <span class="list-instructor">Craig Jones</span>
+      <span class="list-youtube-id">xnlx_hNfuZ4</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=xnlx_hNfuZ4" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Zvn--8vW1sI" target="_blank"><img src="https://img.youtube.com/vi/Zvn--8vW1sI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_010</span>
+      <span class="list-title">Head And Arm Guillotine Choke Escape</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">Zvn--8vW1sI</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=Zvn--8vW1sI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="John Danaher" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_020</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="Gordon Ryan" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank"><img src="https://img.youtube.com/vi/tyI3aszI4qo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_021</span>
+      <span class="list-title">Early Hand Fighting From Mount</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">tyI3aszI4qo</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="Craig Jones" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=i-GjsFQbziE" target="_blank"><img src="https://img.youtube.com/vi/i-GjsFQbziE/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_022</span>
+      <span class="list-title">Kimura Escape From Top Half Guard</span>
+      <span class="list-instructor">Craig Jones</span>
+      <span class="list-youtube-id">i-GjsFQbziE</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=i-GjsFQbziE" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="Lachlan Giles" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=CFTLb8iywJg" target="_blank"><img src="https://img.youtube.com/vi/CFTLb8iywJg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_028</span>
+      <span class="list-title">Defending And Escaping The Saddle</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">CFTLb8iywJg</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=CFTLb8iywJg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="purple" data-inst="Lachlan Giles" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=DrjbaXt-nTo" target="_blank"><img src="https://img.youtube.com/vi/DrjbaXt-nTo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_028</span>
+      <span class="list-title">Rolling Out Of Heel Hooks</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">DrjbaXt-nTo</span>
+      <span class="list-tags"><span class="mini badge-purple">P</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=DrjbaXt-nTo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=PLa07zdiPZk" target="_blank"><img src="https://img.youtube.com/vi/PLa07zdiPZk/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_011</span>
+      <span class="list-title">Omoplata From Open Guard Explained</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">PLa07zdiPZk</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=PLa07zdiPZk" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_005</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_006</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="John Danaher" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_007</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank"><img src="https://img.youtube.com/vi/k-lCzVAzJpg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_014</span>
+      <span class="list-title">Escaping The Back - Pay Attention To The Leg Work</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">k-lCzVAzJpg</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=MXcQfCIh7n4" target="_blank"><img src="https://img.youtube.com/vi/MXcQfCIh7n4/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_019</span>
+      <span class="list-title">The Most Basic Principles Of Butterfly And Open Guard</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">MXcQfCIh7n4</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=MXcQfCIh7n4" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Gordon Ryan" data-cat="Mount">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank"><img src="https://img.youtube.com/vi/tyI3aszI4qo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">MT_002</span>
+      <span class="list-title">Early Hand Fighting From Mount</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">tyI3aszI4qo</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Mount</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Gordon Ryan" data-cat="Mount">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank"><img src="https://img.youtube.com/vi/tyI3aszI4qo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">MT_003</span>
+      <span class="list-title">Early Hand Fighting From Mount</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">tyI3aszI4qo</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Mount</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Gordon Ryan" data-cat="Mount">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank"><img src="https://img.youtube.com/vi/tyI3aszI4qo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">MT_005</span>
+      <span class="list-title">Early Hand Fighting From Mount</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">tyI3aszI4qo</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Mount</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Gordon Ryan" data-cat="Mount">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank"><img src="https://img.youtube.com/vi/tyI3aszI4qo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">MT_006</span>
+      <span class="list-title">Early Hand Fighting From Mount</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">tyI3aszI4qo</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Mount</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Knee on Belly">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank"><img src="https://img.youtube.com/vi/gnAhAdE_A90/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">KB_001</span>
+      <span class="list-title">The Best Way To Escape Side Control</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">gnAhAdE_A90</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Knee on Belly</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Knee on Belly">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank"><img src="https://img.youtube.com/vi/gnAhAdE_A90/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">KB_002</span>
+      <span class="list-title">The Best Way To Escape Side Control</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">gnAhAdE_A90</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Knee on Belly</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="Knee on Belly">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank"><img src="https://img.youtube.com/vi/gnAhAdE_A90/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">KB_003</span>
+      <span class="list-title">The Best Way To Escape Side Control</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">gnAhAdE_A90</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Knee on Belly</span>
+      <a href="https://youtube.com/watch?v=gnAhAdE_A90" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="North-South">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=KG916GxW-88" target="_blank"><img src="https://img.youtube.com/vi/KG916GxW-88/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">NS_001</span>
+      <span class="list-title">Escaping North South And Choosing The Correct Escape</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">KG916GxW-88</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">North-South</span>
+      <a href="https://youtube.com/watch?v=KG916GxW-88" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="North-South">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=KG916GxW-88" target="_blank"><img src="https://img.youtube.com/vi/KG916GxW-88/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">NS_002</span>
+      <span class="list-title">Escaping North South And Choosing The Correct Escape</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">KG916GxW-88</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">North-South</span>
+      <a href="https://youtube.com/watch?v=KG916GxW-88" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Lachlan Giles" data-cat="North-South">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=KG916GxW-88" target="_blank"><img src="https://img.youtube.com/vi/KG916GxW-88/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">NS_003</span>
+      <span class="list-title">Escaping North South And Choosing The Correct Escape</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">KG916GxW-88</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">North-South</span>
+      <a href="https://youtube.com/watch?v=KG916GxW-88" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Half Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank"><img src="https://img.youtube.com/vi/Ze10eulM1xg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">HG_002</span>
+      <span class="list-title">How To Build The Perfect Half Guard Game For No Gi</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">Ze10eulM1xg</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Half Guard</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Half Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank"><img src="https://img.youtube.com/vi/Ze10eulM1xg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">HG_003</span>
+      <span class="list-title">How To Build The Perfect Half Guard Game For No Gi</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">Ze10eulM1xg</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Half Guard</span>
+      <a href="https://youtube.com/watch?v=Ze10eulM1xg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Half Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=E8x1Cva8hJ8" target="_blank"><img src="https://img.youtube.com/vi/E8x1Cva8hJ8/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">HG_004</span>
+      <span class="list-title">How To Build The Perfect Half Guard Game</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">E8x1Cva8hJ8</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Half Guard</span>
+      <a href="https://youtube.com/watch?v=E8x1Cva8hJ8" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Craig Jones" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=FpJTnOEkqYI" target="_blank"><img src="https://img.youtube.com/vi/FpJTnOEkqYI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_002</span>
+      <span class="list-title">Finishing A Mandible Rear Naked</span>
+      <span class="list-instructor">Craig Jones</span>
+      <span class="list-youtube-id">FpJTnOEkqYI</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=FpJTnOEkqYI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=LDE0fkzZT6I" target="_blank"><img src="https://img.youtube.com/vi/LDE0fkzZT6I/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_003</span>
+      <span class="list-title">How To Do The Perfect Triangle Choke Even If You Have Short Legs</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">LDE0fkzZT6I</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=LDE0fkzZT6I" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Zvn--8vW1sI" target="_blank"><img src="https://img.youtube.com/vi/Zvn--8vW1sI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_006</span>
+      <span class="list-title">Head And Arm Guillotine Choke Escape</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">Zvn--8vW1sI</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=Zvn--8vW1sI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank"><img src="https://img.youtube.com/vi/ypi3ie6hKTI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_007</span>
+      <span class="list-title">John Danaher Explains Closed Guard Fundamentals</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">ypi3ie6hKTI</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=ypi3ie6hKTI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank"><img src="https://img.youtube.com/vi/tyI3aszI4qo/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_008</span>
+      <span class="list-title">Early Hand Fighting From Mount</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">tyI3aszI4qo</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=tyI3aszI4qo" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Open Guards">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=MXcQfCIh7n4" target="_blank"><img src="https://img.youtube.com/vi/MXcQfCIh7n4/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">OG_001</span>
+      <span class="list-title">The Most Basic Principles Of Butterfly And Open Guard</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">MXcQfCIh7n4</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Open Guards</span>
+      <a href="https://youtube.com/watch?v=MXcQfCIh7n4" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="Gordon Ryan" data-cat="Open Guards">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=MXcQfCIh7n4" target="_blank"><img src="https://img.youtube.com/vi/MXcQfCIh7n4/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">OG_002</span>
+      <span class="list-title">The Most Basic Principles Of Butterfly And Open Guard</span>
+      <span class="list-instructor">Gordon Ryan</span>
+      <span class="list-youtube-id">MXcQfCIh7n4</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Open Guards</span>
+      <a href="https://youtube.com/watch?v=MXcQfCIh7n4" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="blue" data-inst="John Danaher" data-cat="Open Guards">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=Fcg4mtegux0" target="_blank"><img src="https://img.youtube.com/vi/Fcg4mtegux0/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">OG_003</span>
+      <span class="list-title">Understanding The Open Guard In BJJ</span>
+      <span class="list-instructor">John Danaher</span>
+      <span class="list-youtube-id">Fcg4mtegux0</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Open Guards</span>
+      <a href="https://youtube.com/watch?v=Fcg4mtegux0" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Lachlan Giles" data-cat="Back Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank"><img src="https://img.youtube.com/vi/k-lCzVAzJpg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">BC_002</span>
+      <span class="list-title">Escaping The Back - Pay Attention To The Leg Work</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">k-lCzVAzJpg</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Back Control</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Craig Jones" data-cat="Back Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=FpJTnOEkqYI" target="_blank"><img src="https://img.youtube.com/vi/FpJTnOEkqYI/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">BC_004</span>
+      <span class="list-title">Finishing A Mandible Rear Naked</span>
+      <span class="list-instructor">Craig Jones</span>
+      <span class="list-youtube-id">FpJTnOEkqYI</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Back Control</span>
+      <a href="https://youtube.com/watch?v=FpJTnOEkqYI" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="new-wave" data-belt="white" data-inst="Lachlan Giles" data-cat="Back Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank"><img src="https://img.youtube.com/vi/k-lCzVAzJpg/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">BC_006</span>
+      <span class="list-title">Escaping The Back - Pay Attention To The Leg Work</span>
+      <span class="list-instructor">Lachlan Giles</span>
+      <span class="list-youtube-id">k-lCzVAzJpg</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-new-wave">new</span></span>
+      <span class="list-cat">Back Control</span>
+      <a href="https://youtube.com/watch?v=k-lCzVAzJpg" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="mixed" data-belt="blue" data-inst="Gustavo Gasperin" data-cat="Open Guards">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=R9U6Fbnlv2g" target="_blank"><img src="https://img.youtube.com/vi/R9U6Fbnlv2g/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">OG_DLR_001</span>
+      <span class="list-title">3 De La Riva Sweeps Combo</span>
+      <span class="list-instructor">Gustavo Gasperin</span>
+      <span class="list-youtube-id">R9U6Fbnlv2g</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-mixed">mix</span></span>
+      <span class="list-cat">Open Guards</span>
+      <a href="https://youtube.com/watch?v=R9U6Fbnlv2g" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="mixed" data-belt="blue" data-inst="Gustavo Gasperin" data-cat="Half Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=kzTdXfDIndw" target="_blank"><img src="https://img.youtube.com/vi/kzTdXfDIndw/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">HG_KS_001</span>
+      <span class="list-title">Knee Shield Half Guard Pass Combo</span>
+      <span class="list-instructor">Gustavo Gasperin</span>
+      <span class="list-youtube-id">kzTdXfDIndw</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-mixed">mix</span></span>
+      <span class="list-cat">Half Guard</span>
+      <a href="https://youtube.com/watch?v=kzTdXfDIndw" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="mixed" data-belt="white" data-inst="Gustavo Gasperin" data-cat="Closed Guard">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=LU7bEi96ink" target="_blank"><img src="https://img.youtube.com/vi/LU7bEi96ink/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">CG_FS_001</span>
+      <span class="list-title">Low Risk Sweep From Closed Guard - Flower Sweep</span>
+      <span class="list-instructor">Gustavo Gasperin</span>
+      <span class="list-youtube-id">LU7bEi96ink</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-mixed">mix</span></span>
+      <span class="list-cat">Closed Guard</span>
+      <a href="https://youtube.com/watch?v=LU7bEi96ink" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="mixed" data-belt="blue" data-inst="Gustavo Gasperin" data-cat="Submissions">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=s7Fp2Qegr6w" target="_blank"><img src="https://img.youtube.com/vi/s7Fp2Qegr6w/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SM_AB_001</span>
+      <span class="list-title">The Most Hated Armbar Finish: Dog Pee Armbar</span>
+      <span class="list-instructor">Gustavo Gasperin</span>
+      <span class="list-youtube-id">s7Fp2Qegr6w</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-mixed">mix</span></span>
+      <span class="list-cat">Submissions</span>
+      <a href="https://youtube.com/watch?v=s7Fp2Qegr6w" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="mixed" data-belt="blue" data-inst="Gustavo Gasperin" data-cat="Guard Passing">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=I66SzufFJT0" target="_blank"><img src="https://img.youtube.com/vi/I66SzufFJT0/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">GP_KS_001</span>
+      <span class="list-title">Top 6 Knee Cut Pass Variations - BJJ Fundamentals</span>
+      <span class="list-instructor">Gustavo Gasperin</span>
+      <span class="list-youtube-id">I66SzufFJT0</span>
+      <span class="list-tags"><span class="mini badge-blue">B</span><span class="mini meta-mixed">mix</span></span>
+      <span class="list-cat">Guard Passing</span>
+      <a href="https://youtube.com/watch?v=I66SzufFJT0" target="_blank" class="list-link">Watch</a>
+    </div>
+    <div class="list-row verified" data-valid="verified" data-style="mixed" data-belt="white" data-inst="Gustavo Gasperin" data-cat="Side Control">
+      <span class="list-status verified" title="verified">&#10003;</span>
+      <a href="https://youtube.com/watch?v=3jnfMMh_tkQ" target="_blank"><img src="https://img.youtube.com/vi/3jnfMMh_tkQ/mqdefault.jpg" class="list-thumb" loading="lazy"></a>
+      <span class="list-id">SC_PC_001</span>
+      <span class="list-title">Paper Cutter Choke & Armbar Combo From Side Control</span>
+      <span class="list-instructor">Gustavo Gasperin</span>
+      <span class="list-youtube-id">3jnfMMh_tkQ</span>
+      <span class="list-tags"><span class="mini badge-white">W</span><span class="mini meta-mixed">mix</span></span>
+      <span class="list-cat">Side Control</span>
+      <a href="https://youtube.com/watch?v=3jnfMMh_tkQ" target="_blank" class="list-link">Watch</a>
+    </div>
+  </div>
+
+  <script>
+    const f = {valid:document.getElementById('f-valid'),style:document.getElementById('f-style'),belt:document.getElementById('f-belt'),inst:document.getElementById('f-inst'),cat:document.getElementById('f-cat')};
+    function filter() {
+      let c = 0;
+      document.querySelectorAll('.list-row').forEach(el => {
+        let show = true;
+        if (f.valid.value && el.dataset.valid !== f.valid.value) show = false;
+        if (f.style.value && el.dataset.style !== f.style.value) show = false;
+        if (f.belt.value && el.dataset.belt !== f.belt.value) show = false;
+        if (f.inst.value && el.dataset.inst !== f.inst.value) show = false;
+        if (f.cat.value && el.dataset.cat !== f.cat.value) show = false;
+        el.classList.toggle('hidden', !show);
+        if (show) c++;
+      });
+      document.getElementById('count').textContent = c;
+    }
+    function reset() { Object.values(f).forEach(s => s.value = ''); filter(); }
+    Object.values(f).forEach(s => s.addEventListener('change', filter));
+  </script>
+</body>
+</html>

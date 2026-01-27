@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMO Feature Inventory</title>
+  <style>
+    :root {
+      --bg: #111111;
+      --bg-elevated: #1a1a1a;
+      --bg-card: #222222;
+      --gold: #F5A623;
+      --gold-dim: rgba(245, 166, 35, 0.2);
+      --text: #ffffff;
+      --text-muted: #888888;
+      --positive: #22c55e;
+      --negative: #ef4444;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --border: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-weight: 500;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .meta-label {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .meta-value {
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .summary-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .summary-card.highlight {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--gold-dim) 100%);
+    }
+
+    .summary-number {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .summary-card.highlight .summary-number {
+      color: var(--gold);
+    }
+
+    .summary-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    nav {
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 48px;
+      border: 1px solid var(--border);
+    }
+
+    nav h2 {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .nav-links a:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    section {
+      margin-bottom: 48px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-number {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--gold);
+      opacity: 0.5;
+    }
+
+    h2 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .section-meta {
+      display: flex;
+      gap: 16px;
+      margin-left: auto;
+      font-size: 13px;
+    }
+
+    .component-tag {
+      background: var(--bg-card);
+      padding: 4px 12px;
+      border-radius: 4px;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .status-badge {
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .status-done { background: rgba(34, 197, 94, 0.2); color: var(--positive); }
+    .status-partial { background: rgba(245, 166, 35, 0.2); color: var(--gold); }
+    .status-planned { background: rgba(59, 130, 246, 0.2); color: var(--blue); }
+
+    .feature-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+    }
+
+    .feature-table th {
+      text-align: left;
+      padding: 12px 16px;
+      background: var(--bg-elevated);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .feature-table td {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .feature-table tr:hover td { background: var(--bg-elevated); }
+
+    .feature-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .feature-name { font-weight: 600; }
+
+    .feature-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .data-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      background: var(--bg-card);
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    .access-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .access-all { background: rgba(255,255,255,0.1); color: var(--text); }
+    .access-w { background: rgba(255,255,255,0.2); color: white; }
+    .access-b { background: rgba(59, 130, 246, 0.3); color: #93c5fd; }
+    .access-b-plus { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+    .access-p-plus { background: rgba(139, 92, 246, 0.2); color: #c4b5fd; }
+
+    .belt-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+
+    .belt-table th,
+    .belt-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .belt-table th {
+      background: var(--bg-elevated);
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .belt-table td:first-child { font-weight: 600; }
+
+    .info-box {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0;
+      border-left: 4px solid var(--gold);
+    }
+
+    .info-box h4 {
+      color: var(--gold);
+      margin-bottom: 8px;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .info-box p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg-card);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 24px 0 16px;
+      color: var(--text);
+    }
+
+    ul {
+      margin: 12px 0;
+      padding-left: 24px;
+    }
+
+    li {
+      margin: 8px 0;
+      color: var(--text-muted);
+    }
+
+    li strong { color: var(--text); }
+
+    footer {
+      text-align: center;
+      padding: 32px;
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .visibility-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+
+    .visibility-grid > div {
+      background: var(--bg-card);
+      padding: 12px;
+      font-size: 13px;
+    }
+
+    .visibility-grid .header {
+      background: var(--bg-elevated);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .visibility-yes { color: var(--positive); }
+    .visibility-no { color: var(--text-muted); opacity: 0.5; }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 32px; }
+      .section-header { flex-wrap: wrap; }
+      .section-meta { margin-left: 0; width: 100%; margin-top: 12px; }
+      .feature-table { font-size: 14px; }
+      .meta { flex-direction: column; gap: 12px; }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>TOMO Features</h1>
+      <p class="subtitle">Complete feature inventory for the BJJ training journal</p>
+      <div class="meta">
+        <div class="meta-item">
+          <span class="meta-label">Total Features:</span>
+          <span class="meta-value">88</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Pages:</span>
+          <span class="meta-value">11</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Status:</span>
+          <span class="meta-value">Prototype Complete</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Updated:</span>
+          <span class="meta-value">Jan 25, 2026</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="summary-grid">
+      <div class="summary-card highlight">
+        <div class="summary-number">88</div>
+        <div class="summary-label">Total Features</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-number">58</div>
+        <div class="summary-label">All Belts</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-number">18</div>
+        <div class="summary-label">Blue+ Only</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-number">4</div>
+        <div class="summary-label">White Only</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-number">5</div>
+        <div class="summary-label">Purple+ Only</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-number">3</div>
+        <div class="summary-label">Blue Only</div>
+      </div>
+    </div>
+
+    <nav>
+      <h2>Quick Navigation</h2>
+      <div class="nav-links">
+        <a href="#onboarding">Onboarding</a>
+        <a href="#session-logger">Session Logger</a>
+        <a href="#session-history">Journal</a>
+        <a href="#session-detail">Session Detail</a>
+        <a href="#stats">Stats</a>
+        <a href="#technique-library">Techniques</a>
+        <a href="#insights">Insights</a>
+        <a href="#belt-progress">Belt Progress</a>
+        <a href="#profile">Profile</a>
+        <a href="#settings">Settings</a>
+        <a href="#cross-cutting">Systems</a>
+        <a href="#ai-tech">AI & Tech</a>
+        <a href="#planned">Planned</a>
+      </div>
+    </nav>
+
+    <!-- Section 1: Onboarding -->
+    <section id="onboarding">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2>Onboarding Flow</h2>
+        <div class="section-meta">
+          <span class="component-tag">Onboarding.tsx</span>
+          <span class="status-badge status-done">Done</span>
+        </div>
+      </div>
+
+      <p style="color: var(--text-muted); margin-bottom: 24px;">
+        Capture essential data (name + belt) to unlock personalization. Only 2 required fields.
+      </p>
+
+      <table class="feature-table">
+        <thead>
+          <tr>
+            <th style="width: 60px;">#</th>
+            <th>Feature</th>
+            <th>Data</th>
+            <th style="width: 80px;">Access</th>
+            <th style="width: 80px;">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="feature-id">1.1</span></td>
+            <td>
+              <div class="feature-name">Welcome Screen</div>
+              <div class="feature-desc">Sets tone, explains value proposition</div>
+            </td>
+            <td>-</td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">1.2</span></td>
+            <td>
+              <div class="feature-name">Name Input</div>
+              <div class="feature-desc">Enables personalized experience</div>
+            </td>
+            <td><span class="data-tag">user.name</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">1.3</span></td>
+            <td>
+              <div class="feature-name">Belt Selection</div>
+              <div class="feature-desc">Unlocks all personalization (80px touch targets)</div>
+            </td>
+            <td><span class="data-tag">user.belt</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">1.4</span></td>
+            <td>
+              <div class="feature-name">Mic Permission</div>
+              <div class="feature-desc">Enables voice-first logging, handles denial gracefully</div>
+            </td>
+            <td><span class="data-tag">user.loggingPreference</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">1.5</span></td>
+            <td>
+              <div class="feature-name">Ready Screen</div>
+              <div class="feature-desc">CTA to log first session</div>
+            </td>
+            <td>-</td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 2: Session Logger -->
+    <section id="session-logger">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2>Session Logger (Journaling)</h2>
+        <div class="section-meta">
+          <span class="component-tag">VoiceFirstLogger.tsx</span>
+          <span class="status-badge status-done">Done</span>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h4>The 90-Second Window</h4>
+        <p>Users are exhausted post-training: depleted glucose, elevated cortisol, 20-40% reduced decision-making capacity. Voice-first, one question at a time, 56-80px touch targets, skip always available.</p>
+      </div>
+
+      <table class="feature-table">
+        <thead>
+          <tr>
+            <th style="width: 60px;">#</th>
+            <th>Feature</th>
+            <th>Data</th>
+            <th style="width: 80px;">Access</th>
+            <th style="width: 80px;">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="feature-id">2.1</span></td>
+            <td>
+              <div class="feature-name">Training Type Selection</div>
+              <div class="feature-desc">Quick categorization (gi/nogi/open mat)</div>
+            </td>
+            <td><span class="data-tag">session.trainingType</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">2.2</span></td>
+            <td>
+              <div class="feature-name">Duration Selection</div>
+              <div class="feature-desc">Log training time (60/90/120 min)</div>
+            </td>
+            <td><span class="data-tag">session.durationMinutes</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">2.3</span></td>
+            <td>
+              <div class="feature-name">Sparring Toggle</div>
+              <div class="feature-desc">Indicate if they rolled</div>
+            </td>
+            <td><span class="data-tag">session.didSpar</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">2.4</span></td>
+            <td>
+              <div class="feature-name">Voice Recording</div>
+              <div class="feature-desc">Talk naturally about session (mock in prototype)</div>
+            </td>
+            <td><span class="data-tag">audio</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-partial">Partial</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">2.5</span></td>
+            <td>
+              <div class="feature-name">AI Processing</div>
+              <div class="feature-desc">Extract structured data from voice</div>
+            </td>
+            <td><span class="data-tag">transcription</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-partial">Partial</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">2.6</span></td>
+            <td>
+              <div class="feature-name">Review Phase</div>
+              <div class="feature-desc">Confirm/edit extracted data</div>
+            </td>
+            <td><span class="data-tag">all session fields</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">2.7</span></td>
+            <td>
+              <div class="feature-name">Submission Picker</div>
+              <div class="feature-desc">Visual picker for subs given/received</div>
+            </td>
+            <td><span class="data-tag">submissions[]</span></td>
+            <td><span class="access-badge access-b-plus">B+</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">2.8</span></td>
+            <td>
+              <div class="feature-name">Technique Suggestions</div>
+              <div class="feature-desc">Help name techniques based on history</div>
+            </td>
+            <td><span class="data-tag">history + belt</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">2.9</span></td>
+            <td>
+              <div class="feature-name">Success Confirmation</div>
+              <div class="feature-desc">Belt-personalized post-session message</div>
+            </td>
+            <td><span class="data-tag">sessionCount</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Belt Personalization</h3>
+      <table class="belt-table">
+        <thead>
+          <tr>
+            <th>Adaptation</th>
+            <th>White</th>
+            <th>Blue</th>
+            <th>Purple+</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Prompt Style</td>
+            <td>Encouraging</td>
+            <td>Neutral</td>
+            <td>Analytical</td>
+          </tr>
+          <tr>
+            <td>Technique Suggestions</td>
+            <td>5</td>
+            <td>10</td>
+            <td>15-25</td>
+          </tr>
+          <tr>
+            <td>Show Submission Picker</td>
+            <td class="visibility-no">NO</td>
+            <td class="visibility-yes">YES</td>
+            <td class="visibility-yes">YES</td>
+          </tr>
+          <tr>
+            <td>Default Duration</td>
+            <td>60 min</td>
+            <td>90 min</td>
+            <td>90-120 min</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 3: Session History -->
+    <section id="session-history">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2>Session History (Journal)</h2>
+        <div class="section-meta">
+          <span class="component-tag">SessionHistory.tsx</span>
+          <span class="status-badge status-done">Done</span>
+        </div>
+      </div>
+
+      <table class="feature-table">
+        <thead>
+          <tr>
+            <th style="width: 60px;">#</th>
+            <th>Feature</th>
+            <th>Data</th>
+            <th style="width: 80px;">Access</th>
+            <th style="width: 80px;">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="feature-id">3.1</span></td>
+            <td><div class="feature-name">Log New Session Button</div></td>
+            <td>-</td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">3.2</span></td>
+            <td><div class="feature-name">Session Count & Rounds</div></td>
+            <td><span class="data-tag">sessions.length</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">3.3</span></td>
+            <td><div class="feature-name">Training Type Filter</div></td>
+            <td><span class="data-tag">trainingType</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">3.4</span></td>
+            <td><div class="feature-name">Grouped Entries</div></td>
+            <td><span class="data-tag">sessions[].date</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">3.5</span></td>
+            <td><div class="feature-name">Journal Entry Cards</div></td>
+            <td><span class="data-tag">session data</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">3.6</span></td>
+            <td><div class="feature-name">Empty State</div></td>
+            <td><span class="data-tag">user.belt</span></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 4: Session Detail -->
+    <section id="session-detail">
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <h2>Session Detail & Edit</h2>
+        <div class="section-meta">
+          <span class="component-tag">SessionDetail.tsx</span>
+          <span class="status-badge status-done">Done</span>
+        </div>
+      </div>
+
+      <table class="feature-table">
+        <thead>
+          <tr>
+            <th style="width: 60px;">#</th>
+            <th>Feature</th>
+            <th style="width: 80px;">Access</th>
+            <th style="width: 80px;">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="feature-id">4.1</span></td>
+            <td><div class="feature-name">AI Narrative Summary</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">4.2</span></td>
+            <td><div class="feature-name">Training Details Edit</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">4.3</span></td>
+            <td><div class="feature-name">Techniques Edit</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">4.4</span></td>
+            <td><div class="feature-name">Sparring Details Edit</div></td>
+            <td><span class="access-badge access-b-plus">B+</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">4.5</span></td>
+            <td><div class="feature-name">Insights Edit</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">4.6</span></td>
+            <td><div class="feature-name">Notes Edit</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">4.7</span></td>
+            <td><div class="feature-name">Energy & Mood Edit</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">4.8</span></td>
+            <td><div class="feature-name">Bottom Sheet Modal</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 5: Stats Dashboard -->
+    <section id="stats">
+      <div class="section-header">
+        <span class="section-number">05</span>
+        <h2>Stats (Dashboard)</h2>
+        <div class="section-meta">
+          <span class="component-tag">Dashboard.tsx</span>
+          <span class="status-badge status-done">Done</span>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h4>Belt-Adaptive Design</h4>
+        <p>The dashboard fundamentally changes based on belt level - not just what data is shown, but what story the data tells. White belts see survival metrics; purple belts see systems.</p>
+      </div>
+
+      <h3>Module Visibility Matrix</h3>
+      <div class="visibility-grid">
+        <div class="header">Module</div>
+        <div class="header">White</div>
+        <div class="header">Blue</div>
+        <div class="header">Purple+</div>
+
+        <div>Weekly Progress Ring</div>
+        <div class="visibility-yes">YES</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-no">NO</div>
+
+        <div>Calendar Heat Map</div>
+        <div class="visibility-yes">YES</div>
+        <div class="visibility-yes">YES</div>
+        <div class="visibility-yes">YES</div>
+
+        <div>Defense Focus</div>
+        <div class="visibility-yes">YES</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-no">NO</div>
+
+        <div>Style Profile (Radar)</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-yes">YES</div>
+        <div class="visibility-yes">YES</div>
+
+        <div>Session Type Distribution</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-yes">YES</div>
+        <div class="visibility-yes">YES</div>
+
+        <div>Sparring Pattern Analysis</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-yes">YES</div>
+        <div class="visibility-yes">YES</div>
+
+        <div>Achievement Timeline</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-yes">YES</div>
+        <div class="visibility-yes">YES</div>
+
+        <div>Attack Profile</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-yes">YES</div>
+        <div class="visibility-yes">YES</div>
+
+        <div>Tournament Readiness</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-yes">YES</div>
+        <div class="visibility-yes">YES</div>
+
+        <div>Technique Pairings</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-yes">YES</div>
+        <div class="visibility-no">NO</div>
+
+        <div>Blues Detector</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-yes">YES</div>
+        <div class="visibility-no">NO</div>
+
+        <div>Your Journey</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-yes">YES</div>
+
+        <div>Technique Mastery</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-no">NO</div>
+        <div class="visibility-yes">YES</div>
+      </div>
+    </section>
+
+    <!-- Section 6: Technique Library -->
+    <section id="technique-library">
+      <div class="section-header">
+        <span class="section-number">06</span>
+        <h2>Technique Library</h2>
+        <div class="section-meta">
+          <span class="component-tag">TechniqueLibrary.tsx</span>
+          <span class="status-badge status-done">Done</span>
+        </div>
+      </div>
+
+      <table class="feature-table">
+        <thead>
+          <tr>
+            <th style="width: 60px;">#</th>
+            <th>Feature</th>
+            <th style="width: 80px;">Access</th>
+            <th style="width: 80px;">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="feature-id">6.1</span></td>
+            <td><div class="feature-name">View Toggle (For You / Browse)</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">6.2</span></td>
+            <td><div class="feature-name">"For You" Recommendations</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">6.3</span></td>
+            <td><div class="feature-name">Position Categories</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">6.4</span></td>
+            <td><div class="feature-name">Mindset Categories</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">6.5</span></td>
+            <td><div class="feature-name">Priority Instructors</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">6.6</span></td>
+            <td><div class="feature-name">Technique Progress</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">6.7</span></td>
+            <td><div class="feature-name">Video Embeds</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">6.8</span></td>
+            <td><div class="feature-name">Search</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Gated Categories</h3>
+      <table class="belt-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>White</th>
+            <th>Blue</th>
+            <th>Purple+</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Basic Guards</td>
+            <td class="visibility-yes">YES</td>
+            <td class="visibility-yes">YES</td>
+            <td class="visibility-yes">YES</td>
+          </tr>
+          <tr>
+            <td>Advanced Guards</td>
+            <td class="visibility-no">NO</td>
+            <td class="visibility-yes">YES</td>
+            <td class="visibility-yes">YES</td>
+          </tr>
+          <tr>
+            <td>Leg Locks</td>
+            <td class="visibility-no">NO</td>
+            <td>Basic</td>
+            <td class="visibility-yes">YES</td>
+          </tr>
+          <tr>
+            <td>Advanced Systems</td>
+            <td class="visibility-no">NO</td>
+            <td class="visibility-no">NO</td>
+            <td class="visibility-yes">YES</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 7: Insights -->
+    <section id="insights">
+      <div class="section-header">
+        <span class="section-number">07</span>
+        <h2>Training Feedback (Insights)</h2>
+        <div class="section-meta">
+          <span class="component-tag">TrainingFeedback.tsx</span>
+          <span class="status-badge status-partial">Partial</span>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h4>Brand Voice: "The Dedicated Training Partner"</h4>
+        <p>Knowledgeable but humble. Warm but direct. Supportive but honest. Always defers to the user's coach as the real authority.</p>
+      </div>
+
+      <table class="feature-table">
+        <thead>
+          <tr>
+            <th style="width: 60px;">#</th>
+            <th>Feature</th>
+            <th style="width: 80px;">Access</th>
+            <th style="width: 80px;">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="feature-id">7.1</span></td>
+            <td><div class="feature-name">Daily Insight Generation</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">7.2</span></td>
+            <td><div class="feature-name">Typewriter Animation</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">7.3</span></td>
+            <td><div class="feature-name">Belt-Personalized Tone</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-partial">Partial</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">7.4</span></td>
+            <td><div class="feature-name">Video Suggestions</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">7.5</span></td>
+            <td><div class="feature-name">Coach Deferral</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-done">Done</span></td>
+          </tr>
+          <tr>
+            <td><span class="feature-id">7.6</span></td>
+            <td><div class="feature-name">Risk-Aware Messaging</div></td>
+            <td><span class="access-badge access-all">All</span></td>
+            <td><span class="status-badge status-planned">Planned</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 8-10 abbreviated for space -->
+    <section id="belt-progress">
+      <div class="section-header">
+        <span class="section-number">08</span>
+        <h2>Belt Progress</h2>
+        <div class="section-meta">
+          <span class="component-tag">BeltProgress.tsx</span>
+          <span class="status-badge status-partial">Partial</span>
+        </div>
+      </div>
+      <p style="color: var(--text-muted);">7 features including belt history timeline, time at current belt, session volume, IBJJF reference, techniques at belt, struggles log, and plateau guidance.</p>
+    </section>
+
+    <section id="profile">
+      <div class="section-header">
+        <span class="section-number">09</span>
+        <h2>Profile</h2>
+        <div class="section-meta">
+          <span class="component-tag">ProfileScreen.tsx</span>
+          <span class="status-badge status-done">Done</span>
+        </div>
+      </div>
+      <p style="color: var(--text-muted);">7 features including avatar, completion tracker, progressive profiling, editable fields, belt journey viz, training stats summary, and settings access.</p>
+    </section>
+
+    <section id="settings">
+      <div class="section-header">
+        <span class="section-number">10</span>
+        <h2>Settings</h2>
+        <div class="section-meta">
+          <span class="component-tag">Settings.tsx</span>
+          <span class="status-badge status-done">Done</span>
+        </div>
+      </div>
+      <p style="color: var(--text-muted);">8 features including logging preference, notification toggles, data export, demo mode, persona switcher, persona info, profile reset, and app info.</p>
+    </section>
+
+    <!-- Section 11: Cross-Cutting Systems -->
+    <section id="cross-cutting">
+      <div class="section-header">
+        <span class="section-number">11</span>
+        <h2>Cross-Cutting Systems</h2>
+        <div class="section-meta">
+          <span class="status-badge status-partial">Partial</span>
+        </div>
+      </div>
+
+      <h3>Risk Detection (11 Signals)</h3>
+      <table class="belt-table">
+        <thead>
+          <tr>
+            <th>Signal</th>
+            <th>White</th>
+            <th>Blue</th>
+            <th>Purple+</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gap 14+ days</td>
+            <td>1.8x</td>
+            <td>1.5x</td>
+            <td>0.8x</td>
+          </tr>
+          <tr>
+            <td>Attendance -30%</td>
+            <td>1.6x</td>
+            <td>1.4x</td>
+            <td>0.9x</td>
+          </tr>
+          <tr>
+            <td>Negative sentiment</td>
+            <td>1.7x</td>
+            <td>1.3x</td>
+            <td>0.7x</td>
+          </tr>
+          <tr>
+            <td>Technique stagnation</td>
+            <td>0.8x</td>
+            <td>1.4x</td>
+            <td>1.0x</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="color: var(--text-muted); font-size: 14px; margin-top: 8px;">
+        Higher multiplier = higher risk at that belt level
+      </p>
+    </section>
+
+    <!-- Section 12: AI & Tech -->
+    <section id="ai-tech">
+      <div class="section-header">
+        <span class="section-number">12</span>
+        <h2>AI, Data & Technology</h2>
+      </div>
+
+      <h3>How AI Is Used</h3>
+      <table class="belt-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>AI Role</th>
+            <th>Current State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Voice Transcription</td>
+            <td>Convert speech to text</td>
+            <td>Mock (AssemblyAI planned)</td>
+          </tr>
+          <tr>
+            <td>Session Extraction</td>
+            <td>Parse transcription into fields</td>
+            <td>Mock logic</td>
+          </tr>
+          <tr>
+            <td>Daily Insights</td>
+            <td>Generate coaching observations</td>
+            <td>Template-based</td>
+          </tr>
+          <tr>
+            <td>Risk Detection</td>
+            <td>Calculate dropout probability</td>
+            <td>Algorithm-based</td>
+          </tr>
+          <tr>
+            <td>Video Recommendations</td>
+            <td>Match content to user needs</td>
+            <td>Rule-based filtering</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 13: Planned Features -->
+    <section id="planned">
+      <div class="section-header">
+        <span class="section-number">13</span>
+        <h2>Planned Features (MVP)</h2>
+      </div>
+
+      <div class="summary-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="summary-card">
+          <h4 style="color: var(--gold); margin-bottom: 8px;">Real Voice Transcription</h4>
+          <p style="color: var(--text-muted); font-size: 14px;">AssemblyAI with custom BJJ vocabulary</p>
+          <span class="status-badge status-planned" style="margin-top: 12px; display: inline-block;">Phase 1</span>
+        </div>
+        <div class="summary-card">
+          <h4 style="color: var(--gold); margin-bottom: 8px;">Injury Tracking</h4>
+          <p style="color: var(--text-muted); font-size: 14px;">Quick-flag with pattern detection</p>
+          <span class="status-badge status-planned" style="margin-top: 12px; display: inline-block;">Phase 1</span>
+        </div>
+        <div class="summary-card">
+          <h4 style="color: var(--gold); margin-bottom: 8px;">Coach Share</h4>
+          <p style="color: var(--text-muted); font-size: 14px;">AI-generated training summary for coach</p>
+          <span class="status-badge status-planned" style="margin-top: 12px; display: inline-block;">Phase 1</span>
+        </div>
+        <div class="summary-card">
+          <h4 style="color: var(--gold); margin-bottom: 8px;">Backend & Auth</h4>
+          <p style="color: var(--text-muted); font-size: 14px;">Supabase + Apple Sign-In</p>
+          <span class="status-badge status-planned" style="margin-top: 12px; display: inline-block;">Phase 1</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>TOMO Feature Inventory</p>
+      <p style="margin-top: 8px;">Last Updated: January 25, 2026 | Source: <code>FEATURES.md</code></p>
+    </footer>
+  </div>
+</body>
+</html>

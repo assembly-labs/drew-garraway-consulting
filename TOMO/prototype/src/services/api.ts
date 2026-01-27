@@ -30,6 +30,9 @@ import type {
   SubmissionInsert,
   SubmissionStats,
   BeltLevel,
+  PracticeLog,
+  PracticeLogInsert,
+  PracticeLogFilters,
 } from '../types/database';
 import { getBodyRegion } from '../types/database';
 
@@ -42,6 +45,7 @@ const STORAGE_KEYS = {
   SESSIONS: 'bjj-sessions',
   TECHNIQUE_PROGRESS: 'bjj-technique-progress',
   SUBMISSIONS: 'bjj-submissions',
+  PRACTICE_LOGS: 'bjj-practice-logs',
 } as const;
 
 // ===========================================
@@ -527,6 +531,98 @@ const submissionsService = {
 };
 
 // ===========================================
+// PRACTICE LOGS SERVICE
+// ===========================================
+
+const practiceLogsService = {
+  async list(userId: string, filters?: PracticeLogFilters): Promise<ApiResponse<PracticeLog[]>> {
+    let logs = getFromStorage<PracticeLog[]>(STORAGE_KEYS.PRACTICE_LOGS, [])
+      .filter(l => l.user_id === userId);
+
+    // Apply filters
+    if (filters) {
+      if (filters.startDate) {
+        logs = logs.filter(l => l.timestamp >= filters.startDate!);
+      }
+      if (filters.endDate) {
+        logs = logs.filter(l => l.timestamp <= filters.endDate!);
+      }
+      if (filters.techniqueId) {
+        logs = logs.filter(l => l.technique_id === filters.techniqueId);
+      }
+      if (filters.position) {
+        logs = logs.filter(l => l.position === filters.position);
+      }
+    }
+
+    // Sort by timestamp descending (most recent first)
+    logs.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+
+    // Apply pagination
+    if (filters?.offset) {
+      logs = logs.slice(filters.offset);
+    }
+    if (filters?.limit) {
+      logs = logs.slice(0, filters.limit);
+    }
+
+    return { data: logs, error: null };
+  },
+
+  async listByTechnique(userId: string, techniqueId: string): Promise<ApiResponse<PracticeLog[]>> {
+    const logs = getFromStorage<PracticeLog[]>(STORAGE_KEYS.PRACTICE_LOGS, [])
+      .filter(l => l.user_id === userId && l.technique_id === techniqueId)
+      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    return { data: logs, error: null };
+  },
+
+  async create(data: PracticeLogInsert): Promise<ApiResponse<PracticeLog>> {
+    const logs = getFromStorage<PracticeLog[]>(STORAGE_KEYS.PRACTICE_LOGS, []);
+    const now = getTimestamp();
+
+    const log: PracticeLog = {
+      id: generateId(),
+      user_id: data.user_id,
+      technique_id: data.technique_id,
+      technique_name: data.technique_name,
+      position: data.position,
+      timestamp: now,
+      source: data.source || 'technique_library',
+      notes: data.notes || null,
+      created_at: now,
+    };
+
+    logs.push(log);
+    saveToStorage(STORAGE_KEYS.PRACTICE_LOGS, logs);
+    return { data: log, error: null };
+  },
+
+  async countByTechnique(userId: string, techniqueId: string): Promise<ApiResponse<number>> {
+    const logs = getFromStorage<PracticeLog[]>(STORAGE_KEYS.PRACTICE_LOGS, [])
+      .filter(l => l.user_id === userId && l.technique_id === techniqueId);
+    return { data: logs.length, error: null };
+  },
+
+  async getLastPracticed(userId: string, techniqueId: string): Promise<ApiResponse<string | null>> {
+    const logs = getFromStorage<PracticeLog[]>(STORAGE_KEYS.PRACTICE_LOGS, [])
+      .filter(l => l.user_id === userId && l.technique_id === techniqueId)
+      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+
+    if (logs.length === 0) {
+      return { data: null, error: null };
+    }
+    return { data: logs[0].timestamp.split('T')[0], error: null };
+  },
+
+  async delete(id: string): Promise<ApiResponse<null>> {
+    const logs = getFromStorage<PracticeLog[]>(STORAGE_KEYS.PRACTICE_LOGS, []);
+    const filtered = logs.filter(l => l.id !== id);
+    saveToStorage(STORAGE_KEYS.PRACTICE_LOGS, filtered);
+    return { data: null, error: null };
+  },
+};
+
+// ===========================================
 // EXPORTED API
 // ===========================================
 
@@ -535,7 +631,8 @@ export const api = {
   sessions: sessionsService,
   techniqueProgress: techniqueProgressService,
   submissions: submissionsService,
+  practiceLogs: practiceLogsService,
 };
 
 // Export individual services for direct import if needed
-export { profileService, sessionsService, techniqueProgressService, submissionsService };
+export { profileService, sessionsService, techniqueProgressService, submissionsService, practiceLogsService };

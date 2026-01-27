@@ -1,63 +1,127 @@
 /**
  * Onboarding Flow Component
  *
- * Minimal critical-path onboarding:
- * 1. Name + Belt (required, cannot skip)
- * 2. Mic permission (contextual, can skip)
- * 3. First action (log now or explore)
+ * 4-screen onboarding flow:
+ * 1. Welcome - Set the tone
+ * 2. About You - Name, Belt, Stripes (all mandatory)
+ * 3. Your Training - Gym (mandatory), Frequency (mandatory), Goals/Experience (optional)
+ * 4. Get Started - Voice/Text preference (mandatory), CTAs
  *
  * Design principles:
- * - 2 required fields only
- * - Large touch targets (80px belts)
- * - Can complete in <30 seconds
- * - Respects exhausted user state if coming right after training
+ * - 6 mandatory fields
+ * - 2 optional fields (captured via progressive profiling if skipped)
+ * - Large touch targets (56-80px for mandatory actions)
+ * - Can complete in <60 seconds (mandatory only)
  */
 
 import { useState } from 'react';
-import { type BeltLevel, type LoggingPreference } from '../../context/UserProfileContext';
+import { Icons } from '../ui/Icons';
+import { GymPicker } from '../ui/GymPicker';
+import {
+  type BeltLevel,
+  type TrainingGoal,
+  type ExperienceLevel,
+  type OnboardingData,
+} from '../../context/UserProfileContext';
+import { type GymSelection } from '../../data/gyms';
 
 interface OnboardingProps {
-  onComplete: (name: string, belt: BeltLevel, loggingPref: LoggingPreference) => void;
+  onComplete: (data: OnboardingData) => void;
   onStartLogging: () => void;
 }
 
-type OnboardingStep = 'welcome' | 'identity' | 'mic' | 'ready';
+type OnboardingStep = 'welcome' | 'about' | 'training' | 'start';
 
-const BELT_OPTIONS: { value: BeltLevel; label: string; color: string; borderColor: string }[] = [
-  { value: 'white', label: 'White', color: '#FFFFFF', borderColor: '#D4D4D4' },
-  { value: 'blue', label: 'Blue', color: '#0033A0', borderColor: '#0033A0' },
-  { value: 'purple', label: 'Purple', color: '#4B0082', borderColor: '#4B0082' },
-  { value: 'brown', label: 'Brown', color: '#8B4513', borderColor: '#8B4513' },
-  { value: 'black', label: 'Black', color: '#000000', borderColor: '#333333' },
+const BELT_OPTIONS: { value: BeltLevel; label: string; color: string }[] = [
+  { value: 'white', label: 'White', color: '#FFFFFF' },
+  { value: 'blue', label: 'Blue', color: '#0033A0' },
+  { value: 'purple', label: 'Purple', color: '#4B0082' },
+  { value: 'brown', label: 'Brown', color: '#8B4513' },
+  { value: 'black', label: 'Black', color: '#000000' },
+];
+
+const STRIPE_OPTIONS = [0, 1, 2, 3, 4];
+
+const FREQUENCY_OPTIONS = [
+  { value: 2, label: '1-2x', sublabel: '/week' },
+  { value: 4, label: '3-4x', sublabel: '/week' },
+  { value: 5, label: '5+', sublabel: '/week' },
+];
+
+const GOAL_OPTIONS: { value: TrainingGoal; label: string }[] = [
+  { value: 'competition', label: 'Compete' },
+  { value: 'fitness', label: 'Fitness' },
+  { value: 'hobby', label: 'Hobby' },
+  { value: 'mental', label: 'Mental' },
+];
+
+const EXPERIENCE_OPTIONS: { value: ExperienceLevel; label: string }[] = [
+  { value: 'new', label: 'New' },
+  { value: 'beginner', label: '< 1yr' },
+  { value: 'intermediate', label: '1-3y' },
+  { value: 'experienced', label: '3y+' },
 ];
 
 export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
   const [step, setStep] = useState<OnboardingStep>('welcome');
+
+  // Mandatory fields
   const [name, setName] = useState('');
   const [belt, setBelt] = useState<BeltLevel | null>(null);
-  const [loggingPref, setLoggingPref] = useState<LoggingPreference>('undecided');
+  const [stripes, setStripes] = useState<number | null>(null);
+  const [gym, setGym] = useState<GymSelection | null>(null);
+  const [targetFrequency, setTargetFrequency] = useState<number | null>(null);
+  const [loggingPreference, setLoggingPreference] = useState<'voice' | 'text' | null>(null);
 
-  const canProceedFromIdentity = name.trim().length > 0 && belt !== null;
+  // Optional fields
+  const [trainingGoals, setTrainingGoals] = useState<TrainingGoal[]>([]);
+  const [experienceLevel, setExperienceLevel] = useState<ExperienceLevel | null>(null);
 
-  const handleIdentitySubmit = () => {
-    if (canProceedFromIdentity) {
-      setStep('mic');
-    }
-  };
+  // Validation
+  const canProceedFromAbout = name.trim().length > 0 && belt !== null && stripes !== null;
+  const canProceedFromTraining = gym !== null && targetFrequency !== null;
 
-  const handleMicChoice = (pref: LoggingPreference) => {
-    setLoggingPref(pref);
-    setStep('ready');
-  };
-
+  // Handle finish
   const handleFinish = (startLogging: boolean) => {
-    onComplete(name.trim(), belt!, loggingPref);
-    if (startLogging) {
-      onStartLogging();
+    if (loggingPreference) {
+      onComplete({
+        name: name.trim(),
+        belt: belt!,
+        stripes: stripes!,
+        gym: gym!,
+        targetFrequency: targetFrequency!,
+        loggingPreference,
+        trainingGoals: trainingGoals.length > 0 ? trainingGoals : undefined,
+        experienceLevel: experienceLevel || undefined,
+      });
+      if (startLogging) {
+        onStartLogging();
+      }
     }
   };
 
-  // Welcome screen
+  // Toggle training goal (multi-select)
+  const toggleGoal = (goal: TrainingGoal) => {
+    setTrainingGoals(prev =>
+      prev.includes(goal)
+        ? prev.filter(g => g !== goal)
+        : [...prev, goal]
+    );
+  };
+
+  // Common styles
+  const sectionLabelStyle: React.CSSProperties = {
+    display: 'block',
+    fontFamily: 'var(--font-mono)',
+    fontSize: 'var(--text-xs)',
+    fontWeight: 600,
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+    color: 'var(--color-gray-400)',
+    marginBottom: 'var(--space-md)',
+  };
+
+  // Screen 1: Welcome
   if (step === 'welcome') {
     return (
       <div style={{
@@ -76,9 +140,17 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
           fontWeight: 700,
           color: 'var(--color-white)',
           letterSpacing: 'var(--tracking-wider)',
-          marginBottom: 'var(--space-md)',
+          marginBottom: 'var(--space-xs)',
         }}>
-          ALLY
+          TOMO
+        </div>
+
+        <div style={{
+          fontSize: 'var(--text-2xl)',
+          color: 'var(--color-accent)',
+          marginBottom: 'var(--space-lg)',
+        }}>
+          友
         </div>
 
         <p style={{
@@ -102,7 +174,7 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
         }} />
 
         <button
-          onClick={() => setStep('identity')}
+          onClick={() => setStep('about')}
           style={{
             padding: 'var(--space-lg) var(--space-2xl)',
             backgroundColor: 'var(--color-accent)',
@@ -115,17 +187,7 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
             textTransform: 'uppercase',
             letterSpacing: 'var(--tracking-wide)',
             cursor: 'pointer',
-            transition: 'transform 0.1s',
             minWidth: 200,
-          }}
-          onMouseDown={(e) => {
-            e.currentTarget.style.transform = 'scale(0.98)';
-          }}
-          onMouseUp={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
           }}
         >
           Get Started
@@ -134,8 +196,8 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
     );
   }
 
-  // Identity screen (Name + Belt - REQUIRED)
-  if (step === 'identity') {
+  // Screen 2: About You
+  if (step === 'about') {
     return (
       <div style={{
         minHeight: '100vh',
@@ -146,38 +208,20 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
         paddingTop: 'max(var(--space-2xl), env(safe-area-inset-top))',
       }}>
         {/* Header */}
-        <div style={{
-          marginBottom: 'var(--space-2xl)',
-        }}>
+        <div style={{ marginBottom: 'var(--space-xl)' }}>
           <div style={{
             fontFamily: 'var(--font-heading)',
-            fontSize: 'var(--text-xl)',
+            fontSize: 'var(--text-2xl)',
             fontWeight: 700,
             color: 'var(--color-white)',
-            marginBottom: 'var(--space-xs)',
           }}>
-            Let's get you started.
+            About You
           </div>
-          <p style={{
-            fontSize: 'var(--text-base)',
-            color: 'var(--color-gray-400)',
-          }}>
-            Just two quick questions.
-          </p>
         </div>
 
         {/* Name Input */}
         <div style={{ marginBottom: 'var(--space-xl)' }}>
-          <label style={{
-            display: 'block',
-            fontFamily: 'var(--font-heading)',
-            fontSize: 'var(--text-xs)',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: 'var(--tracking-widest)',
-            color: 'var(--color-gray-400)',
-            marginBottom: 'var(--space-sm)',
-          }}>
+          <label style={sectionLabelStyle}>
             What should we call you?
           </label>
           <input
@@ -186,17 +230,17 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
             onChange={(e) => setName(e.target.value)}
             placeholder="First name"
             autoFocus
+            maxLength={30}
             style={{
               width: '100%',
-              padding: 'var(--space-lg)',
-              fontSize: 'var(--text-xl)',
-              fontWeight: 600,
+              padding: 'var(--space-md) var(--space-lg)',
+              fontSize: 'var(--text-lg)',
+              fontWeight: 500,
               backgroundColor: 'var(--color-gray-900)',
               border: '2px solid var(--color-gray-700)',
               borderRadius: 'var(--radius-md)',
               color: 'var(--color-white)',
               outline: 'none',
-              transition: 'border-color 0.2s',
             }}
             onFocus={(e) => {
               e.currentTarget.style.borderColor = 'var(--color-accent)';
@@ -208,17 +252,8 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
         </div>
 
         {/* Belt Selector */}
-        <div style={{ marginBottom: 'var(--space-xl)', flex: 1 }}>
-          <label style={{
-            display: 'block',
-            fontFamily: 'var(--font-heading)',
-            fontSize: 'var(--text-xs)',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: 'var(--tracking-widest)',
-            color: 'var(--color-gray-400)',
-            marginBottom: 'var(--space-md)',
-          }}>
+        <div style={{ marginBottom: 'var(--space-xl)' }}>
+          <label style={sectionLabelStyle}>
             What's your current belt?
           </label>
           <div style={{
@@ -231,8 +266,8 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
                 key={option.value}
                 onClick={() => setBelt(option.value)}
                 style={{
-                  width: 64,
-                  height: 80,
+                  width: 56,
+                  height: 72,
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
@@ -246,29 +281,65 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
                     : '2px solid var(--color-gray-700)',
                   borderRadius: 'var(--radius-md)',
                   cursor: 'pointer',
-                  transition: 'all 0.2s',
                 }}
               >
-                {/* Belt visual */}
                 <div style={{
-                  width: 40,
-                  height: 12,
+                  width: 36,
+                  height: 10,
                   backgroundColor: option.color,
-                  border: option.value === 'white' ? '1px solid #999' : 'none',
+                  border: option.value === 'white' ? '1px solid #666' : 'none',
                   borderRadius: 2,
-                  boxShadow: belt === option.value
-                    ? '0 0 8px rgba(252, 211, 77, 0.5)'
-                    : 'none',
                 }} />
                 <span style={{
                   fontSize: 'var(--text-xs)',
+                  fontWeight: 500,
                   color: belt === option.value
                     ? 'var(--color-accent)'
                     : 'var(--color-gray-400)',
-                  fontWeight: belt === option.value ? 600 : 500,
                 }}>
                   {option.label}
                 </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Stripes Selector */}
+        <div style={{ marginBottom: 'var(--space-xl)', flex: 1 }}>
+          <label style={sectionLabelStyle}>
+            How many stripes?
+          </label>
+          <div style={{
+            display: 'flex',
+            gap: 'var(--space-sm)',
+            justifyContent: 'center',
+          }}>
+            {STRIPE_OPTIONS.map((count) => (
+              <button
+                key={count}
+                onClick={() => setStripes(count)}
+                style={{
+                  width: 48,
+                  height: 48,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: stripes === count
+                    ? 'var(--color-gray-800)'
+                    : 'transparent',
+                  border: stripes === count
+                    ? '3px solid var(--color-accent)'
+                    : '2px solid var(--color-gray-700)',
+                  borderRadius: 'var(--radius-md)',
+                  cursor: 'pointer',
+                  fontSize: 'var(--text-lg)',
+                  fontWeight: 600,
+                  color: stripes === count
+                    ? 'var(--color-accent)'
+                    : 'var(--color-gray-400)',
+                }}
+              >
+                {count}
               </button>
             ))}
           </div>
@@ -279,15 +350,15 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
           paddingBottom: 'max(var(--space-lg), env(safe-area-inset-bottom))',
         }}>
           <button
-            onClick={handleIdentitySubmit}
-            disabled={!canProceedFromIdentity}
+            onClick={() => setStep('training')}
+            disabled={!canProceedFromAbout}
             style={{
               width: '100%',
               padding: 'var(--space-lg)',
-              backgroundColor: canProceedFromIdentity
+              backgroundColor: canProceedFromAbout
                 ? 'var(--color-accent)'
                 : 'var(--color-gray-700)',
-              color: canProceedFromIdentity
+              color: canProceedFromAbout
                 ? 'var(--color-primary)'
                 : 'var(--color-gray-500)',
               border: 'none',
@@ -297,8 +368,7 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
               fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: 'var(--tracking-wide)',
-              cursor: canProceedFromIdentity ? 'pointer' : 'not-allowed',
-              transition: 'all 0.2s',
+              cursor: canProceedFromAbout ? 'pointer' : 'not-allowed',
             }}
           >
             Continue
@@ -308,204 +378,471 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
     );
   }
 
-  // Mic permission screen (can skip)
-  if (step === 'mic') {
+  // Screen 3: Your Training
+  if (step === 'training') {
     return (
       <div style={{
         minHeight: '100vh',
         backgroundColor: 'var(--color-primary)',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
         padding: 'var(--space-xl)',
-        textAlign: 'center',
+        paddingTop: 'max(var(--space-2xl), env(safe-area-inset-top))',
       }}>
-        {/* Mic icon */}
+        {/* Header with Back Button */}
         <div style={{
-          width: 100,
-          height: 100,
-          borderRadius: 'var(--radius-full)',
-          backgroundColor: 'var(--color-gray-900)',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
+          gap: 'var(--space-sm)',
           marginBottom: 'var(--space-xl)',
         }}>
-          <svg
-            width="48"
-            height="48"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="var(--color-accent)"
-            strokeWidth="2"
-          >
-            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-            <line x1="12" y1="19" x2="12" y2="23" />
-            <line x1="8" y1="23" x2="16" y2="23" />
-          </svg>
-        </div>
-
-        <h2 style={{
-          fontFamily: 'var(--font-heading)',
-          fontSize: 'var(--text-2xl)',
-          fontWeight: 700,
-          color: 'var(--color-white)',
-          marginBottom: 'var(--space-md)',
-        }}>
-          After class, just talk.
-        </h2>
-
-        <p style={{
-          fontSize: 'var(--text-base)',
-          color: 'var(--color-gray-400)',
-          marginBottom: 'var(--space-sm)',
-          maxWidth: 300,
-          lineHeight: 'var(--leading-relaxed)',
-        }}>
-          Voice logging captures your session in 60 seconds.
-          No typing with tired hands.
-        </p>
-
-        <p style={{
-          fontSize: 'var(--text-sm)',
-          color: 'var(--color-gray-500)',
-          marginBottom: 'var(--space-2xl)',
-          maxWidth: 280,
-          fontStyle: 'italic',
-        }}>
-          "90 minute gi class, drilled armbars, got caught in a triangle..."
-        </p>
-
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 'var(--space-md)',
-          width: '100%',
-          maxWidth: 300,
-        }}>
           <button
-            onClick={() => handleMicChoice('voice')}
+            onClick={() => setStep('about')}
             style={{
-              width: '100%',
-              padding: 'var(--space-lg)',
-              backgroundColor: 'var(--color-accent)',
-              color: 'var(--color-primary)',
-              border: 'none',
-              borderRadius: 'var(--radius-md)',
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'var(--text-base)',
-              fontWeight: 700,
-              textTransform: 'uppercase',
-              letterSpacing: 'var(--tracking-wide)',
-              cursor: 'pointer',
+              width: 40,
+              height: 40,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: 'var(--space-sm)',
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'var(--color-gray-400)',
+              marginLeft: -8,
             }}
+            aria-label="Back"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-            </svg>
-            Enable Voice Logging
+            <Icons.ChevronLeft size={24} />
           </button>
+          <div style={{
+            fontFamily: 'var(--font-heading)',
+            fontSize: 'var(--text-2xl)',
+            fontWeight: 700,
+            color: 'var(--color-white)',
+          }}>
+            Your Training
+          </div>
+        </div>
 
+        {/* Gym Picker - Mandatory */}
+        <div style={{ marginBottom: 'var(--space-xl)' }}>
+          <label style={sectionLabelStyle}>
+            Where do you train? *
+          </label>
+          <GymPicker value={gym} onChange={setGym} />
+        </div>
+
+        {/* Frequency - Mandatory */}
+        <div style={{ marginBottom: 'var(--space-xl)' }}>
+          <label style={sectionLabelStyle}>
+            How often do you want to train? *
+          </label>
+          <div style={{
+            display: 'flex',
+            gap: 'var(--space-sm)',
+          }}>
+            {FREQUENCY_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setTargetFrequency(option.value)}
+                style={{
+                  flex: 1,
+                  padding: 'var(--space-md)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 2,
+                  backgroundColor: targetFrequency === option.value
+                    ? 'var(--color-gray-800)'
+                    : 'transparent',
+                  border: targetFrequency === option.value
+                    ? '3px solid var(--color-accent)'
+                    : '2px solid var(--color-gray-700)',
+                  borderRadius: 'var(--radius-md)',
+                  cursor: 'pointer',
+                }}
+              >
+                <span style={{
+                  fontSize: 'var(--text-lg)',
+                  fontWeight: 700,
+                  color: targetFrequency === option.value
+                    ? 'var(--color-accent)'
+                    : 'var(--color-white)',
+                }}>
+                  {option.label}
+                </span>
+                <span style={{
+                  fontSize: 'var(--text-xs)',
+                  color: 'var(--color-gray-500)',
+                }}>
+                  {option.sublabel}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Optional Section Divider */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--space-md)',
+          marginBottom: 'var(--space-lg)',
+        }}>
+          <div style={{
+            flex: 1,
+            height: 1,
+            backgroundColor: 'var(--color-gray-700)',
+          }} />
+          <span style={{
+            fontSize: 'var(--text-xs)',
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            color: 'var(--color-gray-500)',
+          }}>
+            Tell us more (optional)
+          </span>
+          <div style={{
+            flex: 1,
+            height: 1,
+            backgroundColor: 'var(--color-gray-700)',
+          }} />
+        </div>
+
+        {/* Training Goals - Optional */}
+        <div style={{ marginBottom: 'var(--space-lg)' }}>
+          <label style={{ ...sectionLabelStyle, marginBottom: 'var(--space-sm)' }}>
+            Why do you train?
+          </label>
+          <div style={{
+            display: 'flex',
+            gap: 'var(--space-sm)',
+            flexWrap: 'wrap',
+          }}>
+            {GOAL_OPTIONS.map((option) => {
+              const isSelected = trainingGoals.includes(option.value);
+              return (
+                <button
+                  key={option.value}
+                  onClick={() => toggleGoal(option.value)}
+                  style={{
+                    padding: 'var(--space-sm) var(--space-md)',
+                    backgroundColor: isSelected
+                      ? 'var(--color-gray-800)'
+                      : 'transparent',
+                    border: isSelected
+                      ? '2px solid var(--color-accent)'
+                      : '1px solid var(--color-gray-700)',
+                    borderRadius: 'var(--radius-full)',
+                    cursor: 'pointer',
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: 500,
+                    color: isSelected
+                      ? 'var(--color-accent)'
+                      : 'var(--color-gray-400)',
+                  }}
+                >
+                  {option.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Experience Level - Optional */}
+        <div style={{ marginBottom: 'var(--space-xl)', flex: 1 }}>
+          <label style={{ ...sectionLabelStyle, marginBottom: 'var(--space-sm)' }}>
+            How long have you trained?
+          </label>
+          <div style={{
+            display: 'flex',
+            gap: 'var(--space-sm)',
+          }}>
+            {EXPERIENCE_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setExperienceLevel(
+                  experienceLevel === option.value ? null : option.value
+                )}
+                style={{
+                  flex: 1,
+                  padding: 'var(--space-sm) var(--space-xs)',
+                  backgroundColor: experienceLevel === option.value
+                    ? 'var(--color-gray-800)'
+                    : 'transparent',
+                  border: experienceLevel === option.value
+                    ? '2px solid var(--color-accent)'
+                    : '1px solid var(--color-gray-700)',
+                  borderRadius: 'var(--radius-md)',
+                  cursor: 'pointer',
+                  fontSize: 'var(--text-sm)',
+                  fontWeight: 500,
+                  color: experienceLevel === option.value
+                    ? 'var(--color-accent)'
+                    : 'var(--color-gray-400)',
+                }}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Continue Button */}
+        <div style={{
+          paddingBottom: 'max(var(--space-lg), env(safe-area-inset-bottom))',
+        }}>
           <button
-            onClick={() => handleMicChoice('text')}
+            onClick={() => setStep('start')}
+            disabled={!canProceedFromTraining}
             style={{
               width: '100%',
-              padding: 'var(--space-md)',
-              backgroundColor: 'transparent',
-              color: 'var(--color-gray-400)',
-              border: '1px solid var(--color-gray-700)',
+              padding: 'var(--space-lg)',
+              backgroundColor: canProceedFromTraining
+                ? 'var(--color-accent)'
+                : 'var(--color-gray-700)',
+              color: canProceedFromTraining
+                ? 'var(--color-primary)'
+                : 'var(--color-gray-500)',
+              border: 'none',
               borderRadius: 'var(--radius-md)',
-              fontSize: 'var(--text-base)',
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.borderColor = 'var(--color-gray-500)';
-              e.currentTarget.style.color = 'var(--color-gray-300)';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.borderColor = 'var(--color-gray-700)';
-              e.currentTarget.style.color = 'var(--color-gray-400)';
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'var(--text-lg)',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: 'var(--tracking-wide)',
+              cursor: canProceedFromTraining ? 'pointer' : 'not-allowed',
             }}
           >
-            I'd rather type
+            Continue
           </button>
         </div>
       </div>
     );
   }
 
-  // Ready screen
-  if (step === 'ready') {
+  // Screen 4: Get Started
+  if (step === 'start') {
     return (
       <div style={{
         minHeight: '100vh',
         backgroundColor: 'var(--color-primary)',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
         padding: 'var(--space-xl)',
-        textAlign: 'center',
+        paddingTop: 'max(var(--space-2xl), env(safe-area-inset-top))',
       }}>
-        {/* Success checkmark */}
+        {/* Header with Back Button */}
         <div style={{
-          width: 80,
-          height: 80,
-          borderRadius: 'var(--radius-full)',
-          backgroundColor: 'var(--color-success)',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
+          gap: 'var(--space-sm)',
           marginBottom: 'var(--space-xl)',
         }}>
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
+          <button
+            onClick={() => setStep('training')}
+            style={{
+              width: 40,
+              height: 40,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'var(--color-gray-400)',
+              marginLeft: -8,
+            }}
+            aria-label="Back"
+          >
+            <Icons.ChevronLeft size={24} />
+          </button>
+          <div style={{
+            fontFamily: 'var(--font-heading)',
+            fontSize: 'var(--text-2xl)',
+            fontWeight: 700,
+            color: 'var(--color-white)',
+          }}>
+            Almost there!
+          </div>
         </div>
 
-        <h2 style={{
-          fontFamily: 'var(--font-heading)',
-          fontSize: 'var(--text-2xl)',
-          fontWeight: 700,
-          color: 'var(--color-white)',
-          marginBottom: 'var(--space-sm)',
-        }}>
-          You're all set, {name}.
-        </h2>
+        {/* Logging Preference Label */}
+        <label style={sectionLabelStyle}>
+          How do you want to log sessions?
+        </label>
 
-        <p style={{
-          fontSize: 'var(--text-base)',
-          color: 'var(--color-gray-400)',
-          marginBottom: 'var(--space-2xl)',
-          maxWidth: 280,
-          lineHeight: 'var(--leading-relaxed)',
-        }}>
-          Your journey is now being tracked.
-          After your next session, come back and log it.
-        </p>
+        {/* Voice Option */}
+        <button
+          onClick={() => setLoggingPreference('voice')}
+          style={{
+            width: '100%',
+            padding: 'var(--space-lg)',
+            marginBottom: 'var(--space-md)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--space-md)',
+            backgroundColor: loggingPreference === 'voice'
+              ? 'var(--color-gray-800)'
+              : 'var(--color-gray-900)',
+            border: loggingPreference === 'voice'
+              ? '3px solid var(--color-accent)'
+              : '2px solid var(--color-gray-700)',
+            borderRadius: 'var(--radius-md)',
+            cursor: 'pointer',
+            textAlign: 'left',
+          }}
+        >
+          <div style={{
+            width: 48,
+            height: 48,
+            borderRadius: 'var(--radius-md)',
+            backgroundColor: 'var(--color-gray-700)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <Icons.Mic size={24} color={loggingPreference === 'voice' ? 'var(--color-accent)' : 'var(--color-gray-400)'} />
+          </div>
+          <div>
+            <div style={{
+              fontSize: 'var(--text-lg)',
+              fontWeight: 600,
+              color: loggingPreference === 'voice'
+                ? 'var(--color-accent)'
+                : 'var(--color-white)',
+              marginBottom: 2,
+            }}>
+              Voice
+            </div>
+            <div style={{
+              fontSize: 'var(--text-sm)',
+              color: 'var(--color-gray-500)',
+            }}>
+              Just talk after class. 60 seconds, hands-free.
+            </div>
+          </div>
+        </button>
 
+        {/* Text Option */}
+        <button
+          onClick={() => setLoggingPreference('text')}
+          style={{
+            width: '100%',
+            padding: 'var(--space-lg)',
+            marginBottom: 'var(--space-xl)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--space-md)',
+            backgroundColor: loggingPreference === 'text'
+              ? 'var(--color-gray-800)'
+              : 'var(--color-gray-900)',
+            border: loggingPreference === 'text'
+              ? '3px solid var(--color-accent)'
+              : '2px solid var(--color-gray-700)',
+            borderRadius: 'var(--radius-md)',
+            cursor: 'pointer',
+            textAlign: 'left',
+          }}
+        >
+          <div style={{
+            width: 48,
+            height: 48,
+            borderRadius: 'var(--radius-md)',
+            backgroundColor: 'var(--color-gray-700)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <Icons.Edit size={24} color={loggingPreference === 'text' ? 'var(--color-accent)' : 'var(--color-gray-400)'} />
+          </div>
+          <div>
+            <div style={{
+              fontSize: 'var(--text-lg)',
+              fontWeight: 600,
+              color: loggingPreference === 'text'
+                ? 'var(--color-accent)'
+                : 'var(--color-white)',
+              marginBottom: 2,
+            }}>
+              Text
+            </div>
+            <div style={{
+              fontSize: 'var(--text-sm)',
+              color: 'var(--color-gray-500)',
+            }}>
+              Type your notes. Traditional journaling.
+            </div>
+          </div>
+        </button>
+
+        {/* Success Section - Only shows after preference selected */}
+        {loggingPreference && (
+          <div style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+          }}>
+            {/* Checkmark */}
+            <div style={{
+              width: 64,
+              height: 64,
+              borderRadius: 'var(--radius-full)',
+              backgroundColor: 'var(--color-success)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 'var(--space-lg)',
+            }}>
+              <Icons.Check size={32} color="white" />
+            </div>
+
+            <div style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'var(--text-xl)',
+              fontWeight: 700,
+              color: 'var(--color-white)',
+              marginBottom: 'var(--space-sm)',
+            }}>
+              You're all set, {name}!
+            </div>
+
+            <p style={{
+              fontSize: 'var(--text-base)',
+              color: 'var(--color-gray-400)',
+              marginBottom: 'var(--space-xl)',
+              maxWidth: 280,
+            }}>
+              Your journey is now being tracked.
+            </p>
+          </div>
+        )}
+
+        {/* Spacer when no preference selected */}
+        {!loggingPreference && <div style={{ flex: 1 }} />}
+
+        {/* CTAs */}
         <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 'var(--space-md)',
-          width: '100%',
-          maxWidth: 300,
+          paddingBottom: 'max(var(--space-lg), env(safe-area-inset-bottom))',
         }}>
           <button
             onClick={() => handleFinish(true)}
+            disabled={!loggingPreference}
             style={{
               width: '100%',
               padding: 'var(--space-lg)',
-              backgroundColor: 'var(--color-accent)',
-              color: 'var(--color-primary)',
+              marginBottom: 'var(--space-md)',
+              backgroundColor: loggingPreference
+                ? 'var(--color-accent)'
+                : 'var(--color-gray-700)',
+              color: loggingPreference
+                ? 'var(--color-primary)'
+                : 'var(--color-gray-500)',
               border: 'none',
               borderRadius: 'var(--radius-md)',
               fontFamily: 'var(--font-heading)',
@@ -513,23 +850,26 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
               fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: 'var(--tracking-wide)',
-              cursor: 'pointer',
+              cursor: loggingPreference ? 'pointer' : 'not-allowed',
             }}
           >
-            Just trained? Log it now
+            Log Your First Session
           </button>
 
           <button
             onClick={() => handleFinish(false)}
+            disabled={!loggingPreference}
             style={{
               width: '100%',
               padding: 'var(--space-md)',
               backgroundColor: 'transparent',
-              color: 'var(--color-gray-400)',
-              border: '1px solid var(--color-gray-700)',
+              color: loggingPreference
+                ? 'var(--color-gray-400)'
+                : 'var(--color-gray-600)',
+              border: 'none',
               borderRadius: 'var(--radius-md)',
               fontSize: 'var(--text-base)',
-              cursor: 'pointer',
+              cursor: loggingPreference ? 'pointer' : 'not-allowed',
             }}
           >
             Explore the app first

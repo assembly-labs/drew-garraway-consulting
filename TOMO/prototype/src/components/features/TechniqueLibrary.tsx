@@ -17,6 +17,9 @@ import {
   type Technique,
   type TechniqueProgress,
 } from '../../data/techniques';
+import { useToast } from '../ui/Toast';
+import { api } from '../../services/api';
+import { useUserProfile } from '../../context/UserProfileContext';
 import {
   techniqueVideos,
   positionNames,
@@ -96,6 +99,9 @@ export function TechniqueLibrary({ onOpenFeedback }: TechniqueLibraryProps) {
 
   // Belt personalization for Browse view suggestions
   const { profile } = useBeltPersonalization();
+
+  // User profile for practice log persistence
+  const { profile: userProfile } = useUserProfile();
 
   // Scroll to top when component mounts (user taps Techniques tab)
   useEffect(() => {
@@ -208,6 +214,7 @@ export function TechniqueLibrary({ onOpenFeedback }: TechniqueLibraryProps) {
         selectedVideo={selectedVideo}
         onBack={goBack}
         onSelectVideo={setSelectedVideo}
+        userId={userProfile?.userId || 'demo-user'}
       />
     );
   }
@@ -1252,13 +1259,65 @@ function TechniqueDetail({
   selectedVideo,
   onBack,
   onSelectVideo,
+  userId,
 }: {
   technique: Technique;
   progress?: TechniqueProgress;
   selectedVideo: TechniqueVideo | null;
   onBack: () => void;
   onSelectVideo: (video: TechniqueVideo | null) => void;
+  userId: string;
 }) {
+  // Toast for feedback
+  const { showToast } = useToast();
+
+  // Local state for practice count (increments during session, resets on navigation)
+  const [additionalDrills, setAdditionalDrills] = useState(0);
+  const [isPersisting, setIsPersisting] = useState(false);
+
+  // Handle logging practice - persists to localStorage
+  const handleLogPractice = useCallback(async () => {
+    if (isPersisting) return;
+
+    setIsPersisting(true);
+    try {
+      // Create practice log entry
+      await api.practiceLogs.create({
+        user_id: userId,
+        technique_id: technique.id,
+        technique_name: technique.name,
+        position: technique.position,
+        source: 'technique_library',
+      });
+
+      // Update technique progress (upsert - creates if doesn't exist)
+      const currentTimesDrilled = (progress?.timesDrilled || 0) + additionalDrills;
+      await api.techniqueProgress.upsert({
+        user_id: userId,
+        technique_id: technique.id,
+        times_drilled: currentTimesDrilled + 1,
+        last_practiced: new Date().toISOString().split('T')[0],
+        proficiency: progress?.proficiency || 'learning',
+      });
+
+      // Update local state for immediate feedback
+      setAdditionalDrills(prev => prev + 1);
+      const newCount = currentTimesDrilled + 1;
+      showToast({
+        message: `Practice logged! ${currentTimesDrilled} → ${newCount} drills`,
+        type: 'success',
+      });
+    } catch (error) {
+      console.error('Failed to log practice:', error);
+      showToast({
+        message: 'Failed to save practice log',
+        type: 'error',
+      });
+    } finally {
+      setIsPersisting(false);
+    }
+  }, [userId, technique, progress, additionalDrills, isPersisting, showToast]);
+
   // Get videos for this technique (mock - would map IDs properly in production)
   const videos = useMemo(() => {
     // Try to find videos that might match this technique
@@ -1460,9 +1519,12 @@ function TechniqueDetail({
               <span style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: 'var(--text-xs)',
-                color: 'var(--color-gray-500)',
+                color: additionalDrills > 0 ? 'var(--color-positive)' : 'var(--color-gray-500)',
               }}>
-                Drilled {progress.timesDrilled}x
+                Drilled {progress.timesDrilled + additionalDrills}x
+                {additionalDrills > 0 && (
+                  <span style={{ color: 'var(--color-positive)' }}> (+{additionalDrills} today)</span>
+                )}
               </span>
             </div>
 
@@ -1470,11 +1532,12 @@ function TechniqueDetail({
               display: 'flex',
               justifyContent: 'space-between',
               fontSize: 'var(--text-sm)',
+              marginBottom: 'var(--space-md)',
             }}>
               <div>
                 <div style={{ color: 'var(--color-gray-500)', marginBottom: '2px' }}>Last practiced</div>
                 <div style={{ color: 'var(--color-white)' }}>
-                  {new Date(progress.lastDrilled).toLocaleDateString('en-US', {
+                  {additionalDrills > 0 ? 'Today' : new Date(progress.lastDrilled).toLocaleDateString('en-US', {
                     month: 'short',
                     day: 'numeric',
                   })}
@@ -1496,6 +1559,33 @@ function TechniqueDetail({
                 </div>
               )}
             </div>
+
+            {/* Log Practice Button - always available */}
+            <button
+              onClick={handleLogPractice}
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 'var(--space-sm)',
+                padding: 'var(--space-md) var(--space-lg)',
+                backgroundColor: 'var(--color-gray-800)',
+                border: '1px solid var(--color-gray-700)',
+                borderRadius: 'var(--radius-md)',
+                color: 'var(--color-white)',
+                fontWeight: 600,
+                fontSize: 'var(--text-sm)',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+                minHeight: 48,
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              Log Practice
+            </button>
           </div>
         ) : (
           <div style={{ textAlign: 'center' }}>
@@ -1504,13 +1594,16 @@ function TechniqueDetail({
               margin: 0,
               marginBottom: 'var(--space-md)',
             }}>
-              Not started yet
+              {additionalDrills > 0
+                ? `${additionalDrills} drill${additionalDrills > 1 ? 's' : ''} logged today`
+                : 'Not started yet'}
             </p>
             <button
+              onClick={handleLogPractice}
               className="btn btn-primary"
               style={{ width: '100%' }}
             >
-              Log Practice
+              {additionalDrills > 0 ? 'Log Another Practice' : 'Log Practice'}
             </button>
           </div>
         )}

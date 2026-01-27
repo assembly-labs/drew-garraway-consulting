@@ -12,7 +12,8 @@ import { TrainingFeedback } from './components/features/TrainingFeedback'
 import { ProfileScreen } from './components/features/ProfileScreen'
 import { Settings } from './components/features/Settings'
 import { IconShowcase } from './components/features/IconShowcase'
-import { useUserProfile } from './context/UserProfileContext'
+import { Onboarding } from './components/features/Onboarding'
+import { useUserProfile, type OnboardingData } from './context/UserProfileContext'
 import type { JournalEntry } from './components/features/JournalEntryCard'
 import type { Session } from './components/features/SessionCard'
 
@@ -50,11 +51,14 @@ function journalEntryToSession(entry: JournalEntry): Session {
 
 function App() {
   // Get user profile for header avatar
-  const { profile } = useUserProfile()
+  const { profile, completeOnboarding, isLoading } = useUserProfile()
   const userInitial = profile.name ? profile.name.charAt(0).toUpperCase() : 'U'
 
   // Track if session logger should be shown (overlay)
-  const [showSessionLogger, setShowSessionLogger] = useState(true) // Auto-open on load
+  const [showSessionLogger, setShowSessionLogger] = useState(false)
+
+  // Track if we should open session logger after onboarding
+  const [openLoggerAfterOnboarding, setOpenLoggerAfterOnboarding] = useState(false)
 
   // Track selected session for detail view
   const [selectedSession, setSelectedSession] = useState<JournalEntry | null>(null)
@@ -105,6 +109,51 @@ function App() {
   // Handle session logger cancel
   const handleLogCancel = () => {
     setShowSessionLogger(false)
+  }
+
+  // Handle onboarding completion
+  const handleOnboardingComplete = (data: OnboardingData) => {
+    completeOnboarding(data)
+    if (openLoggerAfterOnboarding) {
+      setShowSessionLogger(true)
+      setOpenLoggerAfterOnboarding(false)
+    }
+  }
+
+  // Handle starting session logger from onboarding
+  const handleStartLoggingFromOnboarding = () => {
+    setOpenLoggerAfterOnboarding(true)
+  }
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        backgroundColor: 'var(--color-primary)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <div style={{
+          fontFamily: 'var(--font-heading)',
+          fontSize: 'var(--text-2xl)',
+          color: 'var(--color-accent)',
+        }}>
+          TOMO
+        </div>
+      </div>
+    )
+  }
+
+  // Show Onboarding if not complete
+  if (!profile.onboardingComplete) {
+    return (
+      <Onboarding
+        onComplete={handleOnboardingComplete}
+        onStartLogging={handleStartLoggingFromOnboarding}
+      />
+    )
   }
 
   // Show Icon Showcase page

@@ -227,46 +227,22 @@ export const techniqueVideos: TechniqueVideo[] = [
   // Verified YouTube video IDs from reputable BJJ instructors
   // ===========================================
 
-  // Belt Journey (BJ_) - Psychology at each belt level
-  { technique_id: 'BJ_001', video_type: 'mindset', youtube_id: 'QorFNL9CRrU', instructor: 'Jocko Willink', title: 'BJJ Competition Mindset And Training Tips', duration_seconds: 720 },
-  { technique_id: 'BJ_002', video_type: 'mindset', youtube_id: 'yNN0dnB6ivY', instructor: 'Jocko Willink', title: 'Humility And Self Confidence In Jiu Jitsu', duration_seconds: 540 },
-  { technique_id: 'BJ_003', video_type: 'mindset', youtube_id: '6uFS3J4Hqyo', instructor: 'Jocko Willink', title: 'Overcoming Burnout - Where Discipline Comes From', duration_seconds: 900 },
-  { technique_id: 'BJ_004', video_type: 'mindset', youtube_id: 'IdTMDpizis8', instructor: 'Jocko Willink', title: 'GOOD - Turning Setbacks Into Opportunities', duration_seconds: 180 },
-  { technique_id: 'BJ_005', video_type: 'mindset', youtube_id: 'GqqrTLwxE_Y', instructor: 'Jocko Willink', title: 'Discipline Equals Freedom - Tim Ferriss Interview', duration_seconds: 7200 },
-  { technique_id: 'BJ_006', video_type: 'mindset', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Training Frequency And Flow - Joe Rogan Podcast', duration_seconds: 900 },
-  { technique_id: 'BJ_007', video_type: 'mindset', youtube_id: 'ypi3ie6hKTI', instructor: 'John Danaher', title: 'The BJJ Journey - Philosophy And Fundamentals', duration_seconds: 720 },
-
-  // Mental Game (MG_) - Competition anxiety, ego, flow state
-  { technique_id: 'MG_001', video_type: 'mindset', youtube_id: 'QorFNL9CRrU', instructor: 'Jocko Willink', title: 'Competition Anxiety And Mental Preparation', duration_seconds: 840 },
-  { technique_id: 'MG_002', video_type: 'mindset', youtube_id: 'yNN0dnB6ivY', instructor: 'Jocko Willink', title: 'Dealing With Losses And Learning Humility', duration_seconds: 600 },
-  { technique_id: 'MG_003', video_type: 'mindset', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Finding Flow State In Training', duration_seconds: 720 },
-  { technique_id: 'MG_004', video_type: 'mindset', youtube_id: 'IdTMDpizis8', instructor: 'Jocko Willink', title: 'When Things Go Wrong - Say GOOD', duration_seconds: 180 },
-  { technique_id: 'MG_005', video_type: 'mindset', youtube_id: '6uFS3J4Hqyo', instructor: 'Jocko Willink', title: 'Ego And The Martial Arts Journey', duration_seconds: 660 },
-  { technique_id: 'MG_006', video_type: 'mindset', youtube_id: 'GqqrTLwxE_Y', instructor: 'Jocko Willink', title: 'Mental Toughness And Leadership Lessons', duration_seconds: 540 },
-  { technique_id: 'MG_007', video_type: 'mindset', youtube_id: 'yNN0dnB6ivY', instructor: 'Jocko Willink', title: 'Building Confidence Through Training', duration_seconds: 600 },
-
-  // Age & Longevity (AL_) - Training over 40, injury prevention
-  { technique_id: 'AL_001', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Training Smart - Never Be Sore Philosophy', duration_seconds: 900 },
-  { technique_id: 'AL_002', video_type: 'lifestyle', youtube_id: 'ypi3ie6hKTI', instructor: 'John Danaher', title: 'Fundamental Principles For Long Term Training', duration_seconds: 840 },
-  { technique_id: 'AL_003', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Optimal Training Frequency For Longevity', duration_seconds: 780 },
-  { technique_id: 'AL_004', video_type: 'lifestyle', youtube_id: '6uFS3J4Hqyo', instructor: 'Jocko Willink', title: 'Recovery And Discipline In Training', duration_seconds: 600 },
-  { technique_id: 'AL_005', video_type: 'lifestyle', youtube_id: 'GqqrTLwxE_Y', instructor: 'Jocko Willink', title: 'Training Philosophy For The Long Haul', duration_seconds: 720 },
-  { technique_id: 'AL_006', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Quality Over Quantity In Training', duration_seconds: 660 },
-
-  // Lifestyle Balance (LB_) - Work-life, motivation, consistency
-  { technique_id: 'LB_001', video_type: 'lifestyle', youtube_id: 'GqqrTLwxE_Y', instructor: 'Jocko Willink', title: 'Balancing Training With Life Responsibilities', duration_seconds: 720 },
-  { technique_id: 'LB_002', video_type: 'lifestyle', youtube_id: '6uFS3J4Hqyo', instructor: 'Jocko Willink', title: 'Making Time For What Matters', duration_seconds: 600 },
-  { technique_id: 'LB_003', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Sustainable Training Without Burnout', duration_seconds: 660 },
-  { technique_id: 'LB_004', video_type: 'lifestyle', youtube_id: 'IdTMDpizis8', instructor: 'Jocko Willink', title: 'Finding Motivation In Difficult Times', duration_seconds: 180 },
-  { technique_id: 'LB_005', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Consistency Over Intensity In Training', duration_seconds: 480 },
-  { technique_id: 'LB_006', video_type: 'lifestyle', youtube_id: 'ypi3ie6hKTI', instructor: 'John Danaher', title: 'Creating The Right Training Mindset', duration_seconds: 720 },
-
-  // Injury & Recovery (IR_) - Coming back from injury, prehab
-  { technique_id: 'IR_001', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Smart Training To Prevent Injuries', duration_seconds: 840 },
-  { technique_id: 'IR_002', video_type: 'lifestyle', youtube_id: '6uFS3J4Hqyo', instructor: 'Jocko Willink', title: 'Training Through Setbacks And Injuries', duration_seconds: 600 },
-  { technique_id: 'IR_003', video_type: 'lifestyle', youtube_id: 'yNN0dnB6ivY', instructor: 'Jocko Willink', title: 'Ego Management And Injury Prevention', duration_seconds: 540 },
-  { technique_id: 'IR_004', video_type: 'lifestyle', youtube_id: '_fbCcWyYthQ', instructor: 'Firas Zahabi', title: 'Recovery Science For Martial Artists', duration_seconds: 720 },
-  { technique_id: 'IR_005', video_type: 'lifestyle', youtube_id: 'IdTMDpizis8', instructor: 'Jocko Willink', title: 'Mental Resilience During Injury Recovery', duration_seconds: 180 },
+  // ===========================================
+  // MINDSET & LIFESTYLE VIDEOS - NEEDS CURATION
+  // ===========================================
+  // NOTE: These sections need BJJ-specific mindset videos.
+  // The previous entries had fabricated titles that didn't match
+  // the actual video content. Removed until proper videos are sourced.
+  //
+  // Categories that need videos:
+  // - BJ_ (Belt Journey) - Psychology at each belt level
+  // - MG_ (Mental Game) - Competition anxiety, ego, flow state
+  // - AL_ (Age & Longevity) - Training over 40, injury prevention
+  // - LB_ (Lifestyle Balance) - Work-life, motivation, consistency
+  // - IR_ (Injury & Recovery) - Coming back from injury, prehab
+  //
+  // To add videos: Verify via noembed API, ensure title matches content.
+  // See /docs/data-and-ai/VIDEO_VERIFICATION.md for process.
 ];
 
 // ===========================================

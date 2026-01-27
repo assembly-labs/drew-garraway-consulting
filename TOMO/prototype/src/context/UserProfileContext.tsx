@@ -15,14 +15,19 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { getProfileByBelt, type MockProfile, type ActiveProfileKey } from '../data/mock-profiles';
 import { getPersonaByKey, personas, type Persona, type PersonaKey } from '../data/personas';
+import { type GymSelection } from '../data/gyms';
 
 // Combined profile type for demo mode (supports both legacy and new persona system)
 type DemoProfile = MockProfile | Persona;
 
 // Belt types
 export type BeltLevel = 'white' | 'blue' | 'purple' | 'brown' | 'black';
-export type TrainingGoal = 'competition' | 'fitness' | 'self-defense' | 'mental' | 'community';
+export type TrainingGoal = 'competition' | 'fitness' | 'self-defense' | 'mental' | 'community' | 'hobby';
 export type LoggingPreference = 'voice' | 'text' | 'undecided';
+export type ExperienceLevel = 'new' | 'beginner' | 'intermediate' | 'experienced';
+
+// Re-export GymSelection for convenience
+export type { GymSelection } from '../data/gyms';
 
 // Generate a simple unique ID for local-first users
 function generateUserId(): string {
@@ -37,16 +42,19 @@ export interface UserProfile {
   // Critical (required during onboarding)
   name: string;
   belt: BeltLevel;
+  stripes: number;  // Now required at onboarding (0-4)
+  gym: GymSelection | null;  // Now required at onboarding
+  targetFrequency: number;  // Now required at onboarding (sessions per week)
+  loggingPreference: LoggingPreference;
 
-  // Progressive profiling data
-  stripes: number | null;
+  // Optional at onboarding (captured via progressive profiling if skipped)
+  trainingGoals: TrainingGoal[];
+  experienceLevel: ExperienceLevel | null;
+
+  // Progressive profiling data (collected over time)
   trainingStartDate: string | null; // ISO date string
   currentBeltDate: string | null; // ISO date string
-  gymName: string | null;
-  trainingGoals: TrainingGoal[];
-  targetFrequency: number | null; // sessions per week
   birthYear: number | null;
-  loggingPreference: LoggingPreference;
   notificationsEnabled: boolean | null;
 
   // Metadata
@@ -57,12 +65,10 @@ export interface UserProfile {
 
   // Skip tracking (stop asking after 3 skips)
   skipCounts: {
-    stripes: number;
     trainingStartDate: number;
     currentBeltDate: number;
-    gymName: number;
     trainingGoals: number;
-    targetFrequency: number;
+    experienceLevel: number;
     birthYear: number;
   };
 
@@ -85,34 +91,26 @@ export interface ProfileQuestion {
 
 export const PROFILE_QUESTIONS: ProfileQuestion[] = [
   {
-    id: 'trainingStartDate',
+    id: 'experienceLevel',
     sessionTrigger: 3,
+    question: "How long have you been training?",
+    subtitle: "This helps us personalize your experience.",
+    type: 'chips',
+    options: [
+      { value: 'new', label: 'Brand new' },
+      { value: 'beginner', label: '< 1 year' },
+      { value: 'intermediate', label: '1-3 years' },
+      { value: 'experienced', label: '3+ years' },
+    ],
+    unlocks: "Experience-appropriate content and pacing",
+  },
+  {
+    id: 'trainingStartDate',
+    sessionTrigger: 5,
     question: "When did you start training?",
     subtitle: "This helps us calculate your time on the mat.",
     type: 'date',
     unlocks: "Time-in-grade tracking and 'X years training' stats",
-  },
-  {
-    id: 'stripes',
-    sessionTrigger: 5,
-    question: "How many stripes on your belt?",
-    type: 'chips',
-    options: [
-      { value: '0', label: 'None' },
-      { value: '1', label: '1' },
-      { value: '2', label: '2' },
-      { value: '3', label: '3' },
-      { value: '4', label: '4' },
-    ],
-    unlocks: "More precise progress percentage",
-  },
-  {
-    id: 'gymName',
-    sessionTrigger: 7,
-    question: "What's your gym called?",
-    subtitle: "This enables future coach connection features.",
-    type: 'text',
-    unlocks: "Gym connection and coach features",
   },
   {
     id: 'trainingGoals',
@@ -123,25 +121,12 @@ export const PROFILE_QUESTIONS: ProfileQuestion[] = [
     options: [
       { value: 'competition', label: 'Competition' },
       { value: 'fitness', label: 'Fitness' },
-      { value: 'self-defense', label: 'Self-defense' },
+      { value: 'hobby', label: 'Hobby' },
       { value: 'mental', label: 'Mental game' },
+      { value: 'self-defense', label: 'Self-defense' },
       { value: 'community', label: 'Community' },
     ],
     unlocks: "Personalized prompts and goal-aware messaging",
-  },
-  {
-    id: 'targetFrequency',
-    sessionTrigger: 12,
-    question: "How often do you want to train?",
-    subtitle: "Per week",
-    type: 'chips',
-    options: [
-      { value: '2', label: '2x' },
-      { value: '3', label: '3x' },
-      { value: '4', label: '4x' },
-      { value: '5', label: '5x+' },
-    ],
-    unlocks: "Consistency benchmarks and streak calibration",
   },
   {
     id: 'currentBeltDate',
@@ -173,30 +158,41 @@ const DEFAULT_PROFILE: UserProfile = {
   userId: generateUserId(),
   name: '',
   belt: 'white',
-  stripes: null,
+  stripes: 0,
+  gym: null,
+  targetFrequency: 3,
+  loggingPreference: 'undecided',
+  trainingGoals: [],
+  experienceLevel: null,
   trainingStartDate: null,
   currentBeltDate: null,
-  gymName: null,
-  trainingGoals: [],
-  targetFrequency: null,
   birthYear: null,
-  loggingPreference: 'undecided',
   notificationsEnabled: null,
   onboardingComplete: false,
   sessionCount: 0,
   createdAt: new Date().toISOString(),
   lastSessionAt: null,
   skipCounts: {
-    stripes: 0,
     trainingStartDate: 0,
     currentBeltDate: 0,
-    gymName: 0,
     trainingGoals: 0,
-    targetFrequency: 0,
+    experienceLevel: 0,
     birthYear: 0,
   },
   lastAskedSession: {},
 };
+
+// Onboarding data type
+export interface OnboardingData {
+  name: string;
+  belt: BeltLevel;
+  stripes: number;
+  gym: GymSelection;
+  targetFrequency: number;
+  loggingPreference: 'voice' | 'text';
+  trainingGoals?: TrainingGoal[];
+  experienceLevel?: ExperienceLevel;
+}
 
 // Context type
 interface UserProfileContextType {
@@ -204,7 +200,7 @@ interface UserProfileContextType {
   isLoading: boolean;
 
   // Onboarding
-  completeOnboarding: (name: string, belt: BeltLevel) => void;
+  completeOnboarding: (data: OnboardingData) => void;
 
   // Profile updates
   updateProfile: (updates: Partial<UserProfile>) => void;
@@ -307,12 +303,18 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
     }
   }, [profile, isLoading]);
 
-  // Complete onboarding with critical data
-  const completeOnboarding = (name: string, belt: BeltLevel) => {
+  // Complete onboarding with all mandatory + optional data
+  const completeOnboarding = (data: OnboardingData) => {
     setProfile(prev => ({
       ...prev,
-      name,
-      belt,
+      name: data.name,
+      belt: data.belt,
+      stripes: data.stripes,
+      gym: data.gym,
+      targetFrequency: data.targetFrequency,
+      loggingPreference: data.loggingPreference,
+      trainingGoals: data.trainingGoals || [],
+      experienceLevel: data.experienceLevel || null,
       onboardingComplete: true,
       createdAt: new Date().toISOString(),
     }));
@@ -395,16 +397,19 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
   // Calculate profile completion percentage
   const getProfileCompletion = (): number => {
     const fields = [
+      // Mandatory fields from onboarding
       profile.name,
       profile.belt,
-      profile.stripes,
+      profile.stripes !== null,
+      profile.gym !== null,
+      profile.targetFrequency !== null,
+      profile.loggingPreference !== 'undecided',
+      // Optional/progressive fields
+      profile.trainingGoals.length > 0,
+      profile.experienceLevel !== null,
       profile.trainingStartDate,
       profile.currentBeltDate,
-      profile.gymName,
-      profile.trainingGoals.length > 0,
-      profile.targetFrequency,
       profile.birthYear,
-      profile.loggingPreference !== 'undecided',
     ];
 
     const completed = fields.filter(Boolean).length;
@@ -415,12 +420,10 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
   const getMissingFields = (): string[] => {
     const missing: string[] = [];
 
-    if (profile.stripes === null) missing.push('Belt stripes');
+    if (profile.trainingGoals.length === 0) missing.push('Training goals');
+    if (profile.experienceLevel === null) missing.push('Experience level');
     if (!profile.trainingStartDate) missing.push('Training start date');
     if (!profile.currentBeltDate) missing.push('Current belt date');
-    if (!profile.gymName) missing.push('Gym name');
-    if (profile.trainingGoals.length === 0) missing.push('Training goals');
-    if (profile.targetFrequency === null) missing.push('Target frequency');
     if (profile.birthYear === null) missing.push('Birth year');
 
     return missing;

@@ -11,6 +11,7 @@
 import { useState } from 'react';
 import { useUserProfile, type LoggingPreference } from '../../context/UserProfileContext';
 import { PERSONA_OPTIONS } from '../../data/personas';
+import { Icons } from '../ui/Icons';
 
 interface SettingsProps {
   onBack: () => void;
@@ -34,7 +35,7 @@ const RISK_COLORS: Record<string, string> = {
 };
 
 export function Settings({ onBack }: SettingsProps) {
-  const { profile, setLoggingPreference, isDemoMode, activeDemoProfile, activePersona, switchPersona, exitDemoMode } = useUserProfile();
+  const { profile, setLoggingPreference, isDemoMode, activeDemoProfile, activePersona, switchPersona, exitDemoMode, resetProfile } = useUserProfile();
 
   // Local state for toggles (would connect to a settings context in production)
   const [notifications, setNotifications] = useState({
@@ -548,6 +549,84 @@ export function Settings({ onBack }: SettingsProps) {
               ) : (
                 <>Your profile: <strong style={{ color: 'var(--color-white)' }}>{profile.name || 'Not set'}</strong> ({profile.belt.charAt(0).toUpperCase() + profile.belt.slice(1)} Belt)</>
               )}
+            </div>
+          </div>
+        </section>
+
+        {/* Developer Tools Section */}
+        <section>
+          <h2 style={{
+            fontFamily: 'var(--font-heading)',
+            fontSize: 'var(--text-sm)',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: 'var(--tracking-widest)',
+            color: 'var(--color-gray-500)',
+            marginBottom: 'var(--space-md)',
+          }}>
+            Developer Tools
+          </h2>
+
+          <div style={{
+            backgroundColor: 'var(--color-gray-900)',
+            borderRadius: 'var(--radius-lg)',
+            padding: 'var(--space-lg)',
+            border: '1px dashed var(--color-gray-600)',
+          }}>
+            <div style={{
+              fontSize: 'var(--text-base)',
+              color: 'var(--color-white)',
+              fontWeight: 500,
+              marginBottom: 'var(--space-xs)',
+            }}>
+              Test Onboarding Flow
+            </div>
+            <div style={{
+              fontSize: 'var(--text-sm)',
+              color: 'var(--color-gray-400)',
+              marginBottom: 'var(--space-lg)',
+            }}>
+              Reset your profile to test the onboarding experience as a new user. This will clear all your data.
+            </div>
+
+            <button
+              onClick={() => {
+                if (confirm('This will reset all your profile data and restart onboarding. Continue?')) {
+                  resetProfile();
+                  // Force reload to restart the app from onboarding
+                  window.location.reload();
+                }
+              }}
+              style={{
+                width: '100%',
+                padding: 'var(--space-md)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 'var(--space-sm)',
+                backgroundColor: 'var(--color-gray-800)',
+                border: '2px solid var(--color-accent)',
+                borderRadius: 'var(--radius-md)',
+                cursor: 'pointer',
+                color: 'var(--color-accent)',
+                fontSize: 'var(--text-base)',
+                fontWeight: 600,
+              }}
+            >
+              <Icons.Refresh size={18} />
+              Restart Onboarding
+            </button>
+
+            <div style={{
+              marginTop: 'var(--space-md)',
+              padding: 'var(--space-sm) var(--space-md)',
+              backgroundColor: 'rgba(239, 68, 68, 0.1)',
+              borderRadius: 'var(--radius-sm)',
+              fontSize: 'var(--text-xs)',
+              color: 'var(--color-error)',
+              textAlign: 'center',
+            }}>
+              Warning: This action cannot be undone
             </div>
           </div>
         </section>

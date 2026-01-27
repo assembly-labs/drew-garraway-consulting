@@ -38,6 +38,38 @@ When working on TOMO, **only use active documentation**. If you encounter an `_a
 
 ---
 
+## CRITICAL: Data Integrity Rules
+
+> **NEVER FABRICATE DATA.** This is a non-negotiable rule.
+
+### What This Means:
+
+1. **External IDs must be verified** - YouTube video IDs, API keys, URLs, database IDs, or any external reference must be confirmed to exist before adding to the codebase. Never generate plausible-looking IDs.
+
+2. **If you can't verify, don't add it** - If a data source cannot be validated through web search, API, or direct confirmation, do NOT add it. Flag it for manual verification instead.
+
+3. **Document uncertainty** - If data quality is uncertain, add a comment like `// NEEDS_VERIFICATION: [reason]` so it can be reviewed.
+
+4. **Prefer gaps over fabrication** - It's better to have incomplete data than fake data. Leave fields empty or use explicit placeholders like `PLACEHOLDER_NEEDS_REAL_ID` rather than inventing values.
+
+### Video Database Specific Rules:
+
+For `/prototype/src/data/techniqueVideos.ts`:
+- Every `youtube_id` must link to a real, working YouTube video
+- The video content must actually teach the technique it's assigned to
+- Verify by fetching the video page or using YouTube Data API
+- If unable to verify, mark with `youtube_id: 'NEEDS_VERIFICATION'`
+
+### Why This Matters:
+
+Fabricated data causes:
+- Broken user experiences (dead links, 404s)
+- Lost trust in the product
+- Wasted debugging time
+- Potential legal/copyright issues with misattributed content
+
+---
+
 ## Development Process (PROTOTYPE PHASE)
 
 > **IMPORTANT:** This process is for the prototype phase only. It will change when we move to App Store deployment or backend development.

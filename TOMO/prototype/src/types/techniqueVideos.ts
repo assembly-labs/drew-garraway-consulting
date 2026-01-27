@@ -54,16 +54,120 @@ export type Instructor =
   | string; // Allow other instructors
 
 /**
+ * Gi/No-Gi applicability for videos
+ */
+export type GiNogiApplicability = 'gi' | 'nogi' | 'both';
+
+/**
+ * Difficulty level for belt-appropriate recommendations
+ * Matches belt progression:
+ * 1-2: White belt fundamentals
+ * 3-4: White/Blue transition
+ * 5-6: Blue belt
+ * 7-8: Purple belt
+ * 9-10: Brown/Black belt
+ */
+export type DifficultyLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
+/**
+ * Video production/instructional quality rating
+ * 1: Poor quality, hard to follow
+ * 2: Acceptable quality
+ * 3: Good quality, clear instruction
+ * 4: High quality, excellent instruction
+ * 5: World-class production and teaching
+ */
+export type QualityScore = 1 | 2 | 3 | 4 | 5;
+
+/**
+ * Conceptual tags for video content
+ * Used for cross-video discovery and learning paths
+ */
+export type ConceptTag =
+  | 'weight_distribution'
+  | 'leverage'
+  | 'timing'
+  | 'grip_fighting'
+  | 'hip_movement'
+  | 'frames'
+  | 'pressure'
+  | 'angle'
+  | 'connection'
+  | 'posture'
+  | 'base'
+  | 'transitions'
+  | 'combinations'
+  | 'setups'
+  | 'counters'
+  | 'defense'
+  | 'fundamentals'
+  | 'competition'
+  | 'mindset'
+  | 'longevity';
+
+/**
  * A single video entry for a technique
+ *
+ * CORE FIELDS (required):
+ * - technique_id, video_type, youtube_id, instructor, title, duration_seconds
+ *
+ * ENRICHMENT FIELDS (optional, added during curation):
+ * - difficulty_level, belt_prerequisite, gi_nogi, concepts
+ * - related_techniques, prerequisites, quality_score
+ *
+ * CLIP FIELDS (optional, for timestamped segments):
+ * - timestamp_start, timestamp_end
+ *
+ * METADATA FIELDS (optional):
+ * - language, has_subtitles, source_channel
  */
 export interface TechniqueVideo {
+  // === CORE FIELDS (required) ===
   technique_id: string;        // References bjj-techniques CSV technique_id
   video_type: VideoType;
   youtube_id: string;          // YouTube video ID (not full URL)
   instructor: Instructor;
   title: string;
   duration_seconds: number;
+
+  // === ENRICHMENT FIELDS (optional) ===
+  /** Difficulty level 1-10, maps to belt progression */
+  difficulty_level?: DifficultyLevel;
+  /** Minimum belt level to benefit from this video */
+  belt_prerequisite?: BeltLevel;
+  /** Gi, no-gi, or both */
+  gi_nogi?: GiNogiApplicability;
+  /** Conceptual tags for cross-video discovery */
+  concepts?: ConceptTag[];
+  /** Related technique IDs that chain well with this video's technique */
+  related_techniques?: string[];
+  /** YouTube IDs of videos to watch before this one */
+  prerequisites?: string[];
+  /** Video production and teaching quality 1-5 */
+  quality_score?: QualityScore;
+
+  // === CLIP FIELDS (optional) ===
+  /** Start timestamp in seconds (for clips from longer videos) */
+  timestamp_start?: number;
+  /** End timestamp in seconds (for clips from longer videos) */
+  timestamp_end?: number;
+
+  // === METADATA FIELDS (optional) ===
+  /** Video language (ISO 639-1 code, e.g., "en", "pt") */
+  language?: string;
+  /** Whether video has subtitles/captions */
+  has_subtitles?: boolean;
+  /** YouTube channel name for attribution */
+  source_channel?: string;
 }
+
+/**
+ * Legacy TechniqueVideo type without enrichment fields
+ * @deprecated Use TechniqueVideo with optional enrichment fields
+ */
+export type TechniqueVideoLegacy = Pick<TechniqueVideo,
+  'technique_id' | 'video_type' | 'youtube_id' | 'instructor' | 'title' | 'duration_seconds'
+>;
 
 /**
  * All videos for a specific technique
@@ -178,13 +282,16 @@ export type PositionCategory =
   | 'guard_passing'
   | 'knee_on_belly'
   | 'submissions'
+  | 'leg_entanglements'  // Modern leg lock positions (ashi garami, saddle, 50/50)
   | 'transitions'
   // Mindset & lifestyle categories
   | 'belt_journey'      // White belt survival, blue belt blues, etc.
   | 'mental_game'       // Competition anxiety, ego, flow state
   | 'age_longevity'     // Training over 40, injury prevention, recovery
   | 'lifestyle'         // Work-life balance, motivation, consistency
-  | 'injury_recovery';  // Coming back from injury, prehab mindset
+  | 'injury_recovery'   // Coming back from injury, prehab mindset
+  | 'new_to_bjj'        // Getting started: hygiene, etiquette, belt tying, first class
+  | 'belt_milestones';  // Promotion celebration: "life at this belt" + "road to next belt"
 
 /**
  * Extended technique from CSV catalog

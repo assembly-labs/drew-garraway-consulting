@@ -346,12 +346,8 @@ export function ProfileScreen({ onNavigate }: ProfileScreenProps) {
           />
           <ProfileField
             label="Gym"
-            value={profile.gymName}
-            completed={!!profile.gymName}
-            onAdd={() => {
-              const q = PROFILE_QUESTIONS.find(q => q.id === 'gymName');
-              if (q) setActiveQuestion(q);
-            }}
+            value={profile.gym?.gymName || null}
+            completed={!!profile.gym}
           />
           <ProfileField
             label="Training Goals"
