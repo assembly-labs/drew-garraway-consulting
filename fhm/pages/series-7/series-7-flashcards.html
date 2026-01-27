@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="Series 7 Exam Flashcards - Interactive flashcard training for the Series 7 Top-Off exam">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>Series 7 Flashcards | Franklin Hugh Money</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Flashcard Styles (shared with SIE) -->
+    <link rel="stylesheet" href="../../assets/css/sie-flashcards.css">
+
+    <style>
+        /* CSS Variables (Design Tokens) */
+        :root {
+            /* Primary Institutional Colors */
+            --fh-navy: #002D62;
+            --fh-cream: #FFFDF7;
+            --fh-gray: #54585A;
+
+            /* Secondary Colors */
+            --fh-sage: #7C9885;
+            --fh-burgundy: #6B2737;
+            --fh-gold: #B08D57;
+
+            /* Neutral Scale */
+            --fh-gray-900: #1A1A1A;
+            --fh-gray-800: #2A2A2A;
+            --fh-gray-700: #404040;
+            --fh-gray-600: #595959;
+            --fh-gray-500: #737373;
+            --fh-gray-400: #8a8a8a;
+            --fh-gray-300: #D4D4D4;
+            --fh-gray-200: #E5E5E5;
+            --fh-gray-100: #F5F5F5;
+            --fh-white: #FFFFFF;
+
+            /* Typography */
+            --fh-font-display: 'Crimson Pro', Georgia, serif;
+            --fh-font-body: 'Inter', -apple-system, sans-serif;
+            --fh-font-mono: 'IBM Plex Mono', monospace;
+
+            /* Spacing Scale (8px base) */
+            --fh-space-xs: 0.25rem;
+            --fh-space-sm: 0.5rem;
+            --fh-space-md: 1rem;
+            --fh-space-lg: 1.5rem;
+            --fh-space-xl: 2rem;
+            --fh-space-2xl: 3rem;
+            --fh-space-3xl: 4rem;
+            --fh-space-4xl: 6rem;
+        }
+
+        /* Prevent pull-to-refresh and overscroll on mobile */
+        html, body {
+            overscroll-behavior: none;
+            touch-action: pan-x pan-y;
+            height: 100%;
+            height: -webkit-fill-available;
+        }
+
+        html {
+            height: -webkit-fill-available;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--fh-font-body);
+            background: var(--fh-cream);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            position: fixed;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #flashcard-app {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* Back link */
+        .back-link {
+            position: fixed;
+            top: calc(var(--fh-space-sm) + env(safe-area-inset-top));
+            left: calc(var(--fh-space-sm) + env(safe-area-inset-left));
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--fh-space-xs);
+            padding: var(--fh-space-xs) var(--fh-space-sm);
+            min-width: 44px;
+            min-height: 44px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--fh-white);
+            text-decoration: none;
+            background: rgba(0, 45, 98, 0.95);
+            border-radius: 22px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: background-color 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .back-link:hover {
+            background: var(--fh-navy);
+        }
+
+        .back-link:active {
+            transform: scale(0.95);
+        }
+
+        .back-link__icon {
+            font-size: 1rem;
+        }
+
+        @media (max-width: 360px) {
+            .back-link span:not(.back-link__icon) {
+                display: none;
+            }
+            .back-link {
+                padding: var(--fh-space-xs);
+            }
+        }
+
+        /* Loading state */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: var(--fh-font-body);
+            color: var(--fh-gray-500);
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--fh-gray-200);
+            border-top-color: var(--fh-navy);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Error state */
+        .error-message {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: var(--fh-space-xl);
+            text-align: center;
+        }
+
+        .error-message h2 {
+            font-family: var(--fh-font-display);
+            color: var(--fh-burgundy);
+            margin-bottom: var(--fh-space-md);
+        }
+
+        .error-message p {
+            color: var(--fh-gray-600);
+            margin-bottom: var(--fh-space-xl);
+        }
+
+        .error-message a {
+            color: var(--fh-navy);
+        }
+
+        /* Memory aid styling */
+        .flashcard__memory-aid {
+            margin-top: var(--fh-space-md);
+            padding-top: var(--fh-space-md);
+            border-top: 1px solid var(--fh-gray-200);
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--fh-sage);
+        }
+
+        /* Night Mode Overrides (5pm - 9am) */
+        body.night-mode {
+            --fh-navy: #4A90C2;
+            --fh-cream: #1a1f2e;
+            --fh-gray: #9CA3AF;
+            --fh-sage: #8FB89A;
+            --fh-burgundy: #C77A8A;
+            --fh-gold: #D4A85A;
+            --fh-gray-900: #F5F5F5;
+            --fh-gray-800: #E8E8E8;
+            --fh-gray-700: #E5E5E5;
+            --fh-gray-600: #D4D4D4;
+            --fh-gray-500: #9CA3AF;
+            --fh-gray-400: #6B7280;
+            --fh-gray-300: #4B5563;
+            --fh-gray-200: #374151;
+            --fh-gray-100: #252d3d;
+            --fh-white: #1e2536;
+        }
+    </style>
+    <!-- Night Mode (5pm - 9am) -->
+    <script src="../../assets/js/night-mode.js"></script>
+</head>
+<body>
+    <a href="series-7-study-materials.html" class="back-link">
+        <span class="back-link__icon">&larr;</span>
+        <span>Back</span>
+    </a>
+
+    <div id="flashcard-app" class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <div class="error-message" id="error-message">
+        <h2>Unable to Load Flashcards</h2>
+        <p>There was a problem loading the Series 7 flashcard data. Please try refreshing the page.</p>
+        <a href="series-7-study-materials.html">Return to Study Materials</a>
+    </div>
+
+    <!-- Flashcard Modules -->
+    <script src="../../assets/js/flashcards/series7-flashcard-data.js"></script>
+    <script src="../../assets/js/flashcards/flashcard-progress.js"></script>
+    <script src="../../assets/js/flashcards/flashcard-session.js"></script>
+    <script src="../../assets/js/flashcards/series7-flashcard-ui.js"></script>
+
+    <script>
+        // Initialize Series 7 flashcard app
+        document.addEventListener('DOMContentLoaded', async function() {
+            const appContainer = document.getElementById('flashcard-app');
+            const errorMessage = document.getElementById('error-message');
+
+            try {
+                const success = await Series7FlashcardUI.init('flashcard-app');
+
+                if (!success) {
+                    throw new Error('Failed to initialize Series 7 flashcard UI');
+                }
+
+                appContainer.classList.remove('loading');
+            } catch (error) {
+                console.error('Series 7 flashcard initialization error:', error);
+                appContainer.style.display = 'none';
+                errorMessage.style.display = 'flex';
+            }
+        });
+
+        // Prevent default touch behaviors that interfere with swipe
+        document.addEventListener('touchmove', function(e) {
+            if (e.target.closest('.flashcard-container')) {
+                // Allow the flashcard container to handle touch
+            }
+        }, { passive: true });
+    </script>
+</body>
+</html>

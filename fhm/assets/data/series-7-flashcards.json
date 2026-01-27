@@ -2,7 +2,7 @@
   "meta": {
     "version": 1,
     "generated": "2026-01-14T00:00:00Z",
-    "totalCards": 50,
+    "totalCards": 58,
     "exam": "Series 7",
     "description": "Series 7 Top-Off Exam flashcards with spaced repetition support",
     "sections": {
@@ -563,6 +563,102 @@
       "tags": ["settlement", "regulations"],
       "weight": 1.0,
       "memoryAid": "T+1 = Tomorrow you settle"
+    },
+    {
+      "id": "s7-500",
+      "front": "What is nominal yield (coupon rate) and how is it calculated?",
+      "back": "Annual Interest ÷ Par Value. The fixed rate on the bond at issuance. Never changes.",
+      "type": "formula",
+      "section": 3,
+      "subsection": "debt-securities",
+      "difficulty": "easy",
+      "tags": ["bonds", "yields", "formulas", "high-yield"],
+      "weight": 1.4,
+      "memoryAid": "\"Nominal\" = in name only. The bond's name tag. Price moves? Coupon doesn't care."
+    },
+    {
+      "id": "s7-501",
+      "front": "How do you calculate current yield?",
+      "back": "Annual Interest ÷ Current Market Price. Changes when bond price changes.",
+      "type": "formula",
+      "section": 3,
+      "subsection": "debt-securities",
+      "difficulty": "easy",
+      "tags": ["bonds", "yields", "formulas", "high-yield"],
+      "weight": 1.4,
+      "memoryAid": "\"What am I earning RIGHT NOW?\" Divide by today's price, not par."
+    },
+    {
+      "id": "s7-502",
+      "front": "For a DISCOUNT bond, what is the yield order from lowest to highest?",
+      "back": "Nominal < Current Yield < YTM < YTC. All yields exceed the coupon when price is below par.",
+      "type": "rule",
+      "section": 3,
+      "subsection": "debt-securities",
+      "difficulty": "medium",
+      "tags": ["bonds", "yields", "high-yield"],
+      "weight": 1.5,
+      "memoryAid": "Discount = paid less = earning MORE than coupon says."
+    },
+    {
+      "id": "s7-503",
+      "front": "For a PREMIUM bond, what is the yield order from highest to lowest?",
+      "back": "Nominal > Current Yield > YTM > YTC. All yields are below the coupon when price is above par.",
+      "type": "rule",
+      "section": 3,
+      "subsection": "debt-securities",
+      "difficulty": "medium",
+      "tags": ["bonds", "yields", "high-yield"],
+      "weight": 1.5,
+      "memoryAid": "Premium = overpaid = earning LESS than coupon says."
+    },
+    {
+      "id": "s7-504",
+      "front": "What is a basis point?",
+      "back": "1 basis point = 0.01%. 100 basis points = 1%.",
+      "type": "term",
+      "section": 3,
+      "subsection": "debt-securities",
+      "difficulty": "easy",
+      "tags": ["bonds", "yields", "basics"],
+      "weight": 1.2,
+      "memoryAid": "\"Fed raised 25 bps\" = 0.25%. Precision for small yield changes."
+    },
+    {
+      "id": "s7-505",
+      "front": "What are serial bonds?",
+      "back": "Bonds issued at once but maturing in installments over multiple years. Spreads repayment over time.",
+      "type": "term",
+      "section": 3,
+      "subsection": "debt-securities",
+      "difficulty": "medium",
+      "tags": ["bonds", "bond-types"],
+      "weight": 1.2,
+      "memoryAid": "Serial = staggered MATURITIES. Like a car loan, not a balloon payment."
+    },
+    {
+      "id": "s7-506",
+      "front": "What are series bonds?",
+      "back": "Bonds issued in stages over time under one indenture. Each series may have different rates/maturities but shares the same collateral.",
+      "type": "term",
+      "section": 3,
+      "subsection": "debt-securities",
+      "difficulty": "medium",
+      "tags": ["bonds", "bond-types"],
+      "weight": 1.2,
+      "memoryAid": "Series = staggered ISSUANCE. Raise money in batches as needed."
+    },
+    {
+      "id": "s7-507",
+      "front": "Serial bonds vs. series bonds: what's the key difference?",
+      "back": "Serial = issued together, mature separately. Series = issued separately, may mature together.",
+      "type": "comparison",
+      "section": 3,
+      "subsection": "debt-securities",
+      "difficulty": "medium",
+      "tags": ["bonds", "bond-types", "comparison"],
+      "weight": 1.3,
+      "memoryAid": "Serial solves REPAYMENT. Series solves FUNDING."
     }
   ]
 }
