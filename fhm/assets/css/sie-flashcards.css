@@ -444,6 +444,19 @@
 .flashcard__back .flashcard__text {
     color: #f0f4f8; /* Slightly warm white */
     font-weight: 400;
+    /* Support line breaks in content */
+    white-space: pre-line;
+}
+
+/* Formula styling - monospace for calculations */
+.flashcard__formula {
+    display: block;
+    font-family: var(--fh-font-mono);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--fh-gold);
+    margin-bottom: var(--fh-space-md);
+    letter-spacing: 0.02em;
 }
 
 /* Back content wrapper - stacks answer and tip vertically */
