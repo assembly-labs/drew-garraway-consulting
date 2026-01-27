@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* Custom theme for Gather */
+@theme {
+  /* Sage Green - Primary */
+  --color-sage-50: #E8F5E9;
+  --color-sage-100: #C8E6C9;
+  --color-sage-200: #A5D6A7;
+  --color-sage-300: #81C784;
+  --color-sage-400: #66A043;
+  --color-sage-500: #4A7C28;
+  --color-sage-600: #3A6A1F;
+  --color-sage-700: #2D5016;
+  --color-sage-800: #234116;
+  --color-sage-900: #1C3A13;
+
+  /* Golden Hour - Secondary */
+  --color-gold-50: #FFF9C4;
+  --color-gold-100: #FFE082;
+  --color-gold-200: #FFCC80;
+  --color-gold-300: #FFB74D;
+  --color-gold-400: #FFA726;
+  --color-gold-500: #FF9800;
+  --color-gold-600: #FB8C00;
+  --color-gold-700: #F57C00;
+  --color-gold-800: #EF6C00;
+  --color-gold-900: #E65100;
+
+  /* Supporting */
+  --color-mint-500: #3DDC97;
+  --color-coral-500: #FF6B6B;
+
+  /* Neutrals (Notion-style) */
+  --color-dash-text: #37352F;
+  --color-dash-muted: #787774;
+  --color-dash-border: #E3E2E0;
+  --color-dash-hover: #F7F6F3;
+
+  /* Typography */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-display: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Shadows */
+  --shadow-soft: 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-card: 0 4px 6px -1px rgba(0,0,0,0.1);
+  --shadow-lifted: 0 10px 15px -3px rgba(0,0,0,0.1);
+  --shadow-golden: 0 4px 20px rgba(255, 183, 77, 0.3);
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-family-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  background-color: #ffffff;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Custom utilities */
+@utility font-display {
+  font-family: var(--font-family-display);
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+@utility shadow-lifted {
+  box-shadow: var(--shadow-lifted);
+}
+
+@utility shadow-golden {
+  box-shadow: var(--shadow-golden);
+}
+
+/* Placeholder for product images */
+.product-placeholder {
+  @apply bg-gradient-to-br from-sage-100 via-sage-50 to-gold-50 flex items-center justify-center text-sage-400;
+}
+
+/* Vendor placeholder */
+.vendor-placeholder {
+  @apply bg-gradient-to-br from-gold-100 via-gold-50 to-sage-50 flex items-center justify-center text-gold-400;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles */
+*:focus-visible {
+  @apply outline-none ring-2 ring-sage-500 ring-offset-2;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Hide scrollbar on horizontal scroll containers */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Slide-in animation for panels */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Print styles for pick lists */
+@media print {
+  body {
+    background: white !important;
+  }
+
+  .print\\:hidden {
+    display: none !important;
+  }
+
+  .print\\:block {
+    display: block !important;
+  }
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
