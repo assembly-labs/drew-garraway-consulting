@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive learning site about prosthetic arms and legs for young sports fans. Discover running blades, bionic arms, and amazing Paralympic athletes!">
+  <title>Superpowers Are Real: The Amazing World of Prosthetics</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="home">
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Navigation -->
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <span class="brand-icon" aria-hidden="true">&#x1F9BF;</span>
+        <span>Prosthetics Lab</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="pages/how-body-works.html">Body</a></li>
+        <li><a href="pages/running-blades.html">Blades</a></li>
+        <li><a href="pages/bionic-arms.html">Bionic</a></li>
+        <li><a href="pages/athletes.html">Athletes</a></li>
+        <li><a href="pages/videos.html">Videos</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- Hero Section -->
+    <section class="hero" aria-label="Welcome">
+      <div class="hero-inner">
+        <h1><span class="highlight">Superpowers Are Real.</span><br>The Amazing World of Prosthetics</h1>
+        <p class="hero-subtitle">
+          Discover how running blades are inspired by cheetahs, bionic arms are controlled by your brain,
+          and Paralympic athletes are breaking world records.
+        </p>
+
+        <!-- Brain Signal Visualization -->
+        <div class="brain-viz" aria-label="Interactive brain-to-muscle signal demonstration">
+          <div class="brain-viz-title">How Your Brain Makes You Move</div>
+          <div class="signal-path">
+            <div class="signal-node" tabindex="0" role="button" aria-label="Brain - sends the signal">
+              <span class="node-icon" aria-hidden="true">&#x1F9E0;</span>
+              <span class="node-label">Brain</span>
+            </div>
+            <span class="signal-arrow" aria-hidden="true">&#x27A1;</span>
+            <div class="signal-node" tabindex="0" role="button" aria-label="Nerves - carry the message">
+              <span class="node-icon" aria-hidden="true">&#x26A1;</span>
+              <span class="node-label">Nerves</span>
+            </div>
+            <span class="signal-arrow" aria-hidden="true">&#x27A1;</span>
+            <div class="signal-node" tabindex="0" role="button" aria-label="Muscles - make you move">
+              <span class="node-icon" aria-hidden="true">&#x1F4AA;</span>
+              <span class="node-label">Muscles</span>
+            </div>
+            <span class="signal-arrow" aria-hidden="true">&#x27A1;</span>
+            <div class="signal-node" tabindex="0" role="button" aria-label="Movement - you run, jump, throw">
+              <span class="node-icon" aria-hidden="true">&#x1F3C3;</span>
+              <span class="node-label">Movement!</span>
+            </div>
+          </div>
+          <p class="viz-instruction">
+            <button class="btn-primary viz-start-btn" style="margin-top: 1rem;">
+              &#x26A1; Send a Signal!
+            </button>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Cards -->
+    <section class="sections-grid" aria-label="Learning sections">
+      <h2 class="grid-title">Choose Your Adventure</h2>
+
+      <div class="cards-grid">
+        <!-- Card 1: How Your Body Works -->
+        <article class="section-card" data-section="body">
+          <span class="card-icon" aria-hidden="true">&#x1F9E0;</span>
+          <h3>How Your Body Moves</h3>
+          <p>Your brain is a supercomputer that sends signals faster than you can blink. Learn how your brain, nerves, and 600+ muscles work as a team.</p>
+          <div class="card-footer">
+            <a href="pages/how-body-works.html" class="card-link">
+              Start Learning <span aria-hidden="true">&#x2192;</span>
+            </a>
+            <span class="card-badge incomplete">Not yet</span>
+          </div>
+        </article>
+
+        <!-- Card 2: Mechanical Prosthetics -->
+        <article class="section-card" data-section="mechanical">
+          <span class="card-icon" aria-hidden="true">&#x1F527;</span>
+          <h3>Mechanical Prosthetics</h3>
+          <p>These clever tools work just like bicycle brakes! Pull a cable and the hook opens. No batteries needed, just your own body power.</p>
+          <div class="card-footer">
+            <a href="pages/mechanical-prosthetics.html" class="card-link">
+              Start Learning <span aria-hidden="true">&#x2192;</span>
+            </a>
+            <span class="card-badge incomplete">Not yet</span>
+          </div>
+        </article>
+
+        <!-- Card 3: Running Blades -->
+        <article class="section-card" data-section="blades">
+          <span class="card-icon" aria-hidden="true">&#x1F3C3;</span>
+          <h3>Running Blades</h3>
+          <p>Inspired by cheetahs and made from race car materials, these spring-powered blades return 90% of your running energy!</p>
+          <div class="card-footer">
+            <a href="pages/running-blades.html" class="card-link">
+              Start Learning <span aria-hidden="true">&#x2192;</span>
+            </a>
+            <span class="card-badge incomplete">Not yet</span>
+          </div>
+        </article>
+
+        <!-- Card 4: Bionic Arms -->
+        <article class="section-card" data-section="bionic">
+          <span class="card-icon" aria-hidden="true">&#x1F9BE;</span>
+          <h3>Bionic Arms</h3>
+          <p>These real-life superpowers read your muscle signals and turn thoughts into movement. Pick up an egg or throw a ball!</p>
+          <div class="card-footer">
+            <a href="pages/bionic-arms.html" class="card-link">
+              Start Learning <span aria-hidden="true">&#x2192;</span>
+            </a>
+            <span class="card-badge incomplete">Not yet</span>
+          </div>
+        </article>
+
+        <!-- Card 5: Amazing Athletes -->
+        <article class="section-card" data-section="athletes">
+          <span class="card-icon" aria-hidden="true">&#x1F3C5;</span>
+          <h3>Amazing Athletes</h3>
+          <p>Meet Paralympic heroes who prove prosthetics are empowering. Gold medals, world records, and incredible stories.</p>
+          <div class="card-footer">
+            <a href="pages/athletes.html" class="card-link">
+              Start Learning <span aria-hidden="true">&#x2192;</span>
+            </a>
+            <span class="card-badge incomplete">Not yet</span>
+          </div>
+        </article>
+
+        <!-- Card 6: Future Tech -->
+        <article class="section-card" data-section="future">
+          <span class="card-icon" aria-hidden="true">&#x1F680;</span>
+          <h3>Future Tech</h3>
+          <p>Hands that feel hot and cold, mind-controlled fingers, and 3D-printed prosthetics for $50. The future is here!</p>
+          <div class="card-footer">
+            <a href="pages/future-tech.html" class="card-link">
+              Start Learning <span aria-hidden="true">&#x2192;</span>
+            </a>
+            <span class="card-badge incomplete">Not yet</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Progress Tracker -->
+    <section class="progress-section" aria-label="Your progress">
+      <div class="progress-bar-container">
+        <div class="progress-header">
+          <h3>Your Progress</h3>
+          <span class="progress-count">0 of 6</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-fill"></div>
+        </div>
+        <div class="progress-dots">
+          <div class="progress-dot" data-section="body">
+            <span class="dot">1</span>
+            <span class="dot-label">Body</span>
+          </div>
+          <div class="progress-dot" data-section="mechanical">
+            <span class="dot">2</span>
+            <span class="dot-label">Mechanical</span>
+          </div>
+          <div class="progress-dot" data-section="blades">
+            <span class="dot">3</span>
+            <span class="dot-label">Blades</span>
+          </div>
+          <div class="progress-dot" data-section="bionic">
+            <span class="dot">4</span>
+            <span class="dot-label">Bionic</span>
+          </div>
+          <div class="progress-dot" data-section="athletes">
+            <span class="dot">5</span>
+            <span class="dot-label">Athletes</span>
+          </div>
+          <div class="progress-dot" data-section="future">
+            <span class="dot">6</span>
+            <span class="dot-label">Future</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Videos CTA -->
+    <section class="videos-cta" aria-label="Watch videos">
+      <a href="pages/videos.html" class="btn-videos">
+        <span class="btn-icon" aria-hidden="true">&#x25B6;</span>
+        Watch Amazing Videos
+      </a>
+    </section>
+
+    <!-- Achievement Badges -->
+    <section class="badges-section" aria-label="Achievement badges">
+      <div class="badges-container">
+        <h3 class="text-center mb-lg">Your Badges</h3>
+        <div class="badges-grid">
+          <div class="badge-item" data-badge="first_section">
+            <div class="badge-icon" aria-hidden="true">&#x1F3C3;</div>
+            <span class="badge-label">First Steps</span>
+          </div>
+          <div class="badge-item" data-badge="quiz_ace">
+            <div class="badge-icon" aria-hidden="true">&#x1F3AF;</div>
+            <span class="badge-label">Quiz Ace</span>
+          </div>
+          <div class="badge-item" data-badge="half_done">
+            <div class="badge-icon" aria-hidden="true">&#x2B50;</div>
+            <span class="badge-label">Halfway Hero</span>
+          </div>
+          <div class="badge-item" data-badge="all_done">
+            <div class="badge-icon" aria-hidden="true">&#x1F3C6;</div>
+            <span class="badge-label">Prosthetics Pro</span>
+          </div>
+          <div class="badge-item" data-badge="explorer">
+            <div class="badge-icon" aria-hidden="true">&#x1F50D;</div>
+            <span class="badge-label">Curious Mind</span>
+          </div>
+          <div class="badge-item" data-badge="bookworm">
+            <div class="badge-icon" aria-hidden="true">&#x1F4DA;</div>
+            <span class="badge-label">Bookworm</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>Prosthetics Learning Site &mdash; Built for curious kids who love sports.</p>
+    <p>Always keep learning. Always keep moving.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
