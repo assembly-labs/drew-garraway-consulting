@@ -1,7 +1,7 @@
 # Stats Page PRD: Current State
 
-**Version:** 1.0
-**Last Updated:** January 25, 2026
+**Version:** 1.1
+**Last Updated:** January 27, 2026
 **Status:** Implemented in Prototype (bjjj.pages.dev)
 
 ---
@@ -11,10 +11,12 @@
 This document describes the **current implementation** of the Stats (Dashboard) page in the TOMO prototype. The Stats page is a single scrolling view that presents belt-adaptive training data visualizations, celebrating progress while keeping practitioners engaged through compelling data displays.
 
 **Current State:**
-- 19 modules documented in FEATURES.md
-- 16+ component files implemented
+- 20 active modules across 10 sections
+- 18 component files implemented (2 deprecated)
 - Belt-adaptive visibility working
 - Mock data throughout (localStorage)
+
+> **Deprecation Note (Jan 2026):** Modules 6.3 (YourProgress) and 6.4 (FoundationsProgress) were deprecated and replaced by the Tier 1 infographic modules in Section 4 (WeeklyProgressRing, CalendarHeatMap, DashboardSummaryCard, DefenseFocus).
 
 ---
 
@@ -482,10 +484,12 @@ interface BluesDetectorInput {
 
 | ID | Module | Component | Purpose | Status |
 |----|--------|-----------|---------|--------|
-| **6.1** | Your Journey | `YourJourney.tsx` | Multi-year progression | Done |
-| **6.2** | Technique Mastery | `TechniqueMastery.tsx` | Specialization depth | Done |
-| **6.3** | Your Progress | `YourProgress.tsx` | Progress summary | Done |
-| **6.4** | Foundations Progress | `FoundationsProgress.tsx` | Foundation skills | Done |
+| **6.1** | Your Journey | `YourJourney.tsx` | Multi-year progression + submission trends | Done |
+| **6.2** | Technique Mastery | `TechniqueMastery.tsx` | Specialization depth by proficiency | Done |
+| ~~**6.3**~~ | ~~Your Progress~~ | ~~`YourProgress.tsx`~~ | ~~Progress summary~~ | **DEPRECATED** |
+| ~~**6.4**~~ | ~~Foundations Progress~~ | ~~`FoundationsProgress.tsx`~~ | ~~Foundation skills~~ | **DEPRECATED** |
+
+> **Deprecation Note:** Modules 6.3 and 6.4 were replaced by the Tier 1 infographic modules in Section 4. The files still exist in the codebase but are NOT exported from `stats-modules/index.ts` and are NOT rendered in `Dashboard.tsx`.
 
 #### Your Journey
 
@@ -808,7 +812,7 @@ interface TournamentReadinessInput {
 ├── CalendarHeatMap.tsx
 ├── DashboardSummaryCard.tsx
 ├── DefenseFocus.tsx
-├── FoundationsProgress.tsx
+├── FoundationsProgress.tsx      # DEPRECATED - not exported/used
 ├── LockedFeaturesFooter.tsx
 ├── RecentRolls.tsx
 ├── SessionTypeDistribution.tsx
@@ -818,7 +822,8 @@ interface TournamentReadinessInput {
 ├── TournamentConfirmationSheet.tsx
 ├── WeeklyProgressRing.tsx
 ├── YourJourney.tsx
-└── YourProgress.tsx
+├── YourProgress.tsx             # DEPRECATED - not exported/used
+└── index.ts                     # Exports only active modules
 ```
 
 ---
@@ -866,4 +871,4 @@ interface TournamentReadinessInput {
 
 ---
 
-*Document maintained by UX Team. Last verified against codebase: January 25, 2026*
+*Document maintained by UX Team. Last verified against codebase: January 27, 2026*
