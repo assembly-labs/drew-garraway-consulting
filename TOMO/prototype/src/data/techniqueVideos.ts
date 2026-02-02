@@ -379,6 +379,7 @@ export const positionNames: Record<PositionCategory, string> = {
   guard_passing: 'Guard Passing',
   knee_on_belly: 'Knee on Belly',
   submissions: 'Submissions',
+  leg_entanglements: 'Leg Entanglements',
   transitions: 'Transitions',
   // Mindset & lifestyle categories
   belt_journey: 'Belt Journey',
@@ -386,6 +387,8 @@ export const positionNames: Record<PositionCategory, string> = {
   age_longevity: 'Age & Longevity',
   lifestyle: 'Lifestyle',
   injury_recovery: 'Injury & Recovery',
+  new_to_bjj: 'New to BJJ',
+  belt_milestones: 'Belt Milestones',
 };
 
 // ===========================================
