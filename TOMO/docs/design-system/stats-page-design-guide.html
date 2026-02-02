@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMO Stats Page - Belt-Specific Design Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-black: #111111;
+      --color-white: #ffffff;
+      --color-gold: #F5A623;
+      --color-gold-dim: rgba(245, 166, 35, 0.15);
+      --color-gray-400: #c4c4c4;
+      --color-gray-500: #a3a3a3;
+      --color-gray-600: #8a8a8a;
+      --color-gray-700: #4a4a4a;
+      --color-gray-800: #1f1f1f;
+      --color-gray-900: #161616;
+      --color-positive: #22c55e;
+      --color-positive-dim: rgba(34, 197, 94, 0.15);
+      --color-negative: #ef4444;
+      --color-negative-dim: rgba(239, 68, 68, 0.15);
+      --color-warning: #f59e0b;
+      --color-belt-white: #FFFFFF;
+      --color-belt-blue: #0033A0;
+      --color-belt-purple: #4B0082;
+      --color-training-gi: #3B82F6;
+      --color-training-nogi: #F97316;
+      --color-training-openmat: #A855F7;
+      --font-display: 'Unbounded', sans-serif;
+      --font-heading: 'Unbounded', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --text-xs: 0.75rem;
+      --text-sm: 0.8125rem;
+      --text-base: 0.9375rem;
+      --text-lg: 1.0625rem;
+      --text-xl: 1.375rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 2rem;
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --radius-lg: 8px;
+      --radius-xl: 12px;
+      --radius-full: 9999px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      font-weight: 500;
+      background: #000;
+      color: var(--color-white);
+      line-height: 1.5;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .page-header {
+      max-width: 1400px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .page-header p {
+      color: var(--color-gray-400);
+      font-size: var(--text-base);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .page-header .meta {
+      margin-top: 12px;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-gray-500);
+    }
+    .belt-views {
+      display: flex;
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+      overflow-x: auto;
+      padding-bottom: 20px;
+    }
+    .belt-column {
+      flex: 0 0 auto;
+      width: 340px;
+    }
+    .belt-label {
+      text-align: center;
+      margin-bottom: 16px;
+      padding: 12px;
+      border-radius: var(--radius-lg);
+    }
+    .belt-label.white { background: rgba(255,255,255,0.1); border: 2px solid var(--color-belt-white); }
+    .belt-label.blue { background: rgba(0,51,160,0.2); border: 2px solid var(--color-belt-blue); }
+    .belt-label.purple { background: rgba(75,0,130,0.2); border: 2px solid var(--color-belt-purple); }
+    .belt-label h2 {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .belt-label p {
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+    }
+    .phone-frame {
+      width: 340px;
+      background: var(--color-black);
+      border-radius: 32px;
+      border: 6px solid #333;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    }
+    .phone-notch {
+      height: 28px;
+      background: var(--color-black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .phone-notch-inner {
+      width: 100px;
+      height: 20px;
+      background: #000;
+      border-radius: 10px;
+    }
+    .phone-content {
+      height: 680px;
+      overflow-y: auto;
+      background: var(--color-black);
+    }
+    .phone-content::-webkit-scrollbar { width: 0; }
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: rgba(17, 17, 17, 0.95);
+      border-bottom: 1px solid var(--color-gray-800);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .app-header-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--color-gray-700);
+      border: 2px solid var(--color-gold);
+    }
+    .app-header-logo {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      color: var(--color-gold);
+    }
+    .module-section { margin-bottom: 2px; }
+
+    /* Hero Section */
+    .hero-section {
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 32px 20px;
+      background: linear-gradient(180deg, rgba(245,166,35,0.08) 0%, transparent 100%);
+      text-align: center;
+    }
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: var(--color-gold);
+      margin-bottom: 12px;
+    }
+    .hero-stat {
+      font-family: var(--font-display);
+      font-size: 72px;
+      font-weight: 900;
+      color: var(--color-gold);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-gray-400);
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .hero-description {
+      font-size: var(--text-sm);
+      color: var(--color-gray-400);
+      max-width: 280px;
+    }
+
+    /* Style Fingerprint */
+    .style-fingerprint {
+      padding: var(--space-lg);
+      background: var(--color-gray-900);
+      text-align: center;
+    }
+    .fingerprint-archetype {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      font-weight: 800;
+      color: var(--color-gold);
+      margin-bottom: 4px;
+    }
+    .fingerprint-description {
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+      margin-bottom: 16px;
+    }
+    .fingerprint-chart {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .locked-overlay {
+      position: relative;
+      opacity: 0.3;
+      filter: blur(1px);
+    }
+    .locked-message {
+      text-align: center;
+      padding: var(--space-lg);
+    }
+    .locked-icon { color: var(--color-gray-500); margin-bottom: 8px; }
+    .locked-text {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-gray-400);
+      margin-bottom: 12px;
+    }
+    .locked-progress-bar {
+      height: 4px;
+      background: var(--color-gray-800);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .locked-progress-fill {
+      height: 100%;
+      background: var(--color-gold);
+    }
+    .locked-progress-text {
+      font-size: var(--text-xs);
+      color: var(--color-gray-500);
+    }
+
+    /* Watch Out */
+    .watch-out {
+      padding: var(--space-lg);
+      background: var(--color-gray-800);
+    }
+    .watch-out-header {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--color-negative);
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+    }
+    .watch-out-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--color-gray-700);
+    }
+    .watch-out-technique {
+      font-weight: 600;
+      font-size: var(--text-sm);
+    }
+    .watch-out-meta {
+      font-size: var(--text-xs);
+      color: var(--color-gray-500);
+    }
+    .watch-out-link {
+      font-size: var(--text-xs);
+      color: var(--color-gold);
+    }
+
+    /* Progress Ring (White Belt) */
+    .progress-ring-section {
+      padding: var(--space-xl);
+      background: var(--color-gray-800);
+      text-align: center;
+    }
+    .progress-ring-header {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.15em;
+      color: var(--color-gray-400);
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+    }
+    .progress-ring {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto var(--space-md);
+    }
+    .progress-ring svg { transform: rotate(-90deg); }
+    .progress-ring-bg {
+      fill: none;
+      stroke: var(--color-gray-700);
+      stroke-width: 12;
+    }
+    .progress-ring-fill {
+      fill: none;
+      stroke: var(--color-gold);
+      stroke-width: 12;
+      stroke-dasharray: 293;
+      stroke-dashoffset: 97;
+      stroke-linecap: round;
+    }
+    .progress-ring-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .progress-ring-value {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--color-gold);
+    }
+    .progress-ring-label {
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+    }
+    .progress-ring-text {
+      font-size: var(--text-sm);
+      color: var(--color-gray-400);
+    }
+
+    /* Heat Map */
+    .heatmap-section {
+      padding: var(--space-lg);
+      background: var(--color-gray-900);
+    }
+    .heatmap-header {
+      margin-bottom: var(--space-md);
+    }
+    .heatmap-title {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      font-weight: 700;
+    }
+    .heatmap-subtitle {
+      font-size: var(--text-xs);
+      color: var(--color-gray-500);
+    }
+    .heatmap-grid {
+      display: flex;
+      gap: 3px;
+      margin-bottom: var(--space-sm);
+    }
+    .heatmap-week {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .heatmap-cell {
+      width: 16px;
+      height: 16px;
+      background: var(--color-gray-800);
+      border-radius: 2px;
+    }
+    .heatmap-cell.level-1 { background: rgba(245,166,35,0.25); }
+    .heatmap-cell.level-2 { background: rgba(245,166,35,0.5); }
+    .heatmap-cell.level-3 { background: rgba(245,166,35,0.75); }
+    .heatmap-cell.level-4 { background: var(--color-gold); }
+
+    /* Summary Card */
+    .summary-card {
+      padding: var(--space-lg);
+      background: var(--color-gray-800);
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--color-gray-700);
+    }
+    .summary-cell {
+      background: var(--color-gray-900);
+      padding: var(--space-md);
+      text-align: center;
+    }
+    .summary-value {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 800;
+    }
+    .summary-value.gold { color: var(--color-gold); }
+    .summary-value.positive { color: var(--color-positive); }
+    .summary-label {
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+    }
+
+    /* Defense Focus */
+    .defense-focus {
+      padding: var(--space-lg);
+      background: var(--color-gray-900);
+    }
+    .defense-toggle {
+      display: flex;
+      gap: 2px;
+      margin-bottom: var(--space-md);
+    }
+    .defense-toggle-btn {
+      flex: 1;
+      padding: var(--space-sm);
+      background: var(--color-gray-800);
+      border: none;
+      color: var(--color-gray-400);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      cursor: pointer;
+    }
+    .defense-toggle-btn.active {
+      background: var(--color-positive);
+      color: var(--color-black);
+    }
+    .defense-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+    .defense-bar-name {
+      width: 70px;
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+    .defense-bar-track {
+      flex: 1;
+      height: 8px;
+      background: var(--color-gray-800);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .defense-bar-fill {
+      height: 100%;
+      background: var(--color-positive);
+      border-radius: 4px;
+    }
+    .defense-bar-count {
+      width: 24px;
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+    }
+
+    /* Session Distribution (Blue+) */
+    .session-distribution {
+      padding: var(--space-lg);
+      background: var(--color-gray-800);
+      text-align: center;
+    }
+    .distribution-header {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.15em;
+      color: var(--color-gray-400);
+      margin-bottom: var(--space-md);
+    }
+    .donut-chart {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto var(--space-md);
+    }
+    .donut-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .donut-total {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 800;
+    }
+    .donut-label {
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+    }
+    .distribution-legend {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .legend-color {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+    }
+    .legend-color.gi { background: var(--color-training-gi); }
+    .legend-color.nogi { background: var(--color-training-nogi); }
+    .legend-color.openmat { background: var(--color-training-openmat); }
+    .legend-text { font-size: var(--text-xs); }
+    .legend-percent {
+      font-size: var(--text-xs);
+      color: var(--color-gray-500);
+    }
+
+    /* Sparring Pattern */
+    .sparring-pattern {
+      padding: var(--space-lg);
+      background: var(--color-gray-900);
+    }
+    .sparring-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--space-md);
+    }
+    .sparring-header-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      color: var(--color-gray-400);
+    }
+    .sparring-header-period {
+      font-size: var(--text-xs);
+      color: var(--color-gray-500);
+    }
+    .sparring-win-rate-value {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 800;
+      color: var(--color-positive);
+    }
+    .sparring-win-rate-label {
+      font-size: 9px;
+      color: var(--color-gray-500);
+      display: block;
+    }
+    .sparring-bar-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: 6px;
+    }
+    .sparring-bar-label {
+      width: 60px;
+      font-size: var(--text-xs);
+      font-weight: 600;
+    }
+    .sparring-bar-track {
+      flex: 1;
+      display: flex;
+      height: 20px;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .sparring-bar-positive {
+      background: var(--color-positive);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sparring-bar-negative {
+      background: var(--color-negative);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sparring-bar-value {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .sparring-bar-value.light { color: var(--color-black); }
+    .sparring-bar-value.dark { color: var(--color-white); }
+
+    /* Achievement Timeline */
+    .achievement-timeline {
+      padding: var(--space-lg);
+      background: var(--color-gray-800);
+    }
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-md);
+    }
+    .timeline-header-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      color: var(--color-gray-400);
+    }
+    .timeline-count {
+      font-size: var(--text-xs);
+      color: var(--color-gray-500);
+    }
+    .timeline-item {
+      display: flex;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+    .timeline-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .timeline-icon.gold { background: var(--color-gold); }
+    .timeline-icon.green { background: var(--color-positive-dim); }
+    .timeline-content { flex: 1; }
+    .timeline-title {
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+    .timeline-title.gold { color: var(--color-gold); }
+    .timeline-date {
+      font-size: var(--text-xs);
+      color: var(--color-gray-500);
+      margin-left: 8px;
+    }
+    .timeline-description {
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+      margin-top: 2px;
+    }
+
+    /* Technique Pairings (Blue only) */
+    .technique-pairings {
+      padding: var(--space-lg);
+      background: var(--color-gray-900);
+    }
+    .pairings-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+    .pairings-header-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      color: var(--color-gray-400);
+    }
+    .pairings-intro {
+      font-size: var(--text-xs);
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-md);
+    }
+    .pairing-card {
+      background: var(--color-gray-800);
+      padding: var(--space-md);
+      margin-bottom: var(--space-sm);
+      border-left: 3px solid var(--color-gold);
+    }
+    .pairing-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--space-sm);
+    }
+    .pairing-rank {
+      color: var(--color-gray-500);
+      font-size: var(--text-sm);
+    }
+    .pairing-technique {
+      font-weight: 700;
+      font-size: var(--text-sm);
+    }
+    .pairing-count {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-gold);
+    }
+    .connections-label {
+      font-size: 10px;
+      color: var(--color-gray-500);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .connection-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: var(--text-xs);
+    }
+    .connection-technique { color: var(--color-gray-300); }
+    .connection-count { color: var(--color-gray-500); }
+
+    /* Blues Detector */
+    .blues-detector {
+      padding: var(--space-lg);
+      background: var(--color-gray-800);
+    }
+    .blues-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+    .blues-header-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      color: var(--color-warning);
+    }
+    .blues-card {
+      background: var(--color-gray-900);
+      padding: var(--space-md);
+      border-left: 3px solid var(--color-warning);
+    }
+    .blues-title {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      margin-bottom: var(--space-xs);
+    }
+    .blues-message {
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+      line-height: 1.4;
+      margin-bottom: var(--space-md);
+    }
+    .blues-btn-primary {
+      padding: 6px 12px;
+      background: var(--color-gold);
+      border: none;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--color-black);
+      cursor: pointer;
+      margin-right: 8px;
+    }
+    .blues-btn-secondary {
+      padding: 6px 12px;
+      background: transparent;
+      border: 1px solid var(--color-gray-600);
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+      cursor: pointer;
+    }
+
+    /* Your Journey (Purple+) */
+    .your-journey {
+      padding: var(--space-lg);
+      background: var(--color-gray-800);
+    }
+    .journey-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-md);
+    }
+    .journey-header-left {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .journey-header-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      color: var(--color-gray-400);
+    }
+    .journey-years-badge {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-gold);
+      padding: 4px 8px;
+      background: var(--color-gold-dim);
+      border-radius: 4px;
+    }
+    .journey-hero {
+      text-align: center;
+      margin-bottom: var(--space-lg);
+    }
+    .journey-hero-number {
+      font-family: var(--font-display);
+      font-size: 64px;
+      font-weight: 900;
+      color: var(--color-gold);
+    }
+    .journey-hero-text {
+      font-size: var(--text-sm);
+      color: var(--color-gray-400);
+    }
+    .journey-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--color-gray-700);
+    }
+    .journey-stat {
+      background: var(--color-gray-900);
+      padding: var(--space-md);
+      text-align: center;
+    }
+    .journey-stat-value {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 800;
+      color: var(--color-white);
+    }
+    .journey-stat-label {
+      font-size: 10px;
+      color: var(--color-gray-500);
+    }
+
+    /* Technique Mastery (Purple+) */
+    .technique-mastery {
+      padding: var(--space-lg);
+      background: var(--color-gray-900);
+    }
+    .mastery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-md);
+    }
+    .mastery-header-left {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .mastery-header-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      color: var(--color-gray-400);
+    }
+    .mastery-count {
+      font-size: var(--text-xs);
+      color: var(--color-gray-500);
+    }
+    .mastery-signature {
+      text-align: center;
+      padding: var(--space-md);
+      background: var(--color-gold-dim);
+      border-left: 3px solid var(--color-gold);
+      margin-bottom: var(--space-md);
+    }
+    .mastery-signature-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--color-gold);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .mastery-signature-name {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      font-weight: 800;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .mastery-signature-stat {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+    }
+    .mastery-tier {
+      margin-bottom: var(--space-md);
+    }
+    .mastery-tier-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xs);
+    }
+    .mastery-tier-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+    .mastery-tier-label.gold { color: var(--color-gold); }
+    .mastery-tier-label.green { color: var(--color-positive); }
+    .mastery-tier-count {
+      font-size: 10px;
+      color: var(--color-gray-500);
+    }
+    .mastery-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: 6px var(--space-sm);
+      background: var(--color-gray-800);
+      margin-bottom: 3px;
+    }
+    .mastery-name {
+      width: 80px;
+      font-size: var(--text-xs);
+      font-weight: 600;
+    }
+    .mastery-bar {
+      flex: 1;
+      height: 6px;
+      background: var(--color-gray-700);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .mastery-fill {
+      height: 100%;
+      border-radius: 3px;
+    }
+    .mastery-fill.gold { background: var(--color-gold); }
+    .mastery-fill.green { background: var(--color-positive); }
+    .mastery-drills {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-gray-400);
+      width: 24px;
+      text-align: right;
+    }
+
+    /* Attack Profile */
+    .attack-profile {
+      padding: var(--space-lg);
+      background: var(--color-black);
+    }
+    .attack-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--color-gray-500);
+      margin-bottom: 4px;
+    }
+    .attack-title {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin-bottom: var(--space-md);
+    }
+    .attack-treemap {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 3px;
+      height: 120px;
+      margin-bottom: var(--space-md);
+    }
+    .treemap-block {
+      padding: var(--space-sm);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .treemap-block.neck {
+      background: rgba(239,68,68,0.1);
+      border: 2px solid #ef4444;
+    }
+    .treemap-block.arms {
+      background: rgba(245,158,11,0.1);
+      border: 2px solid #f59e0b;
+    }
+    .treemap-block.legs {
+      background: rgba(6,182,212,0.1);
+      border: 2px solid #06b6d4;
+    }
+    .treemap-stacked {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .treemap-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+    .treemap-block.neck .treemap-label { color: #ef4444; }
+    .treemap-block.arms .treemap-label { color: #f59e0b; }
+    .treemap-block.legs .treemap-label { color: #06b6d4; }
+    .treemap-percent {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .treemap-block.neck .treemap-percent { color: #ef4444; }
+    .treemap-block.arms .treemap-percent { color: #f59e0b; }
+    .treemap-block.legs .treemap-percent { color: #06b6d4; }
+    .specialist-banner {
+      background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, var(--color-gray-900) 100%);
+      border-left: 3px solid #ef4444;
+      padding: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+    .specialist-title {
+      font-family: var(--font-heading);
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: #ef4444;
+    }
+    .specialist-desc {
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+    }
+    .attack-stats {
+      display: flex;
+      justify-content: space-around;
+      padding: var(--space-md);
+      background: var(--color-gray-900);
+      border-radius: 8px;
+    }
+    .attack-stat { text-align: center; }
+    .attack-stat-value {
+      font-size: var(--text-xl);
+      font-weight: 700;
+    }
+    .attack-stat-value.positive { color: var(--color-positive); }
+    .attack-stat-value.negative { color: var(--color-negative); }
+    .attack-stat-value.gold { color: var(--color-gold); }
+    .attack-stat-label {
+      font-size: 9px;
+      color: var(--color-gray-500);
+    }
+
+    /* AI Callouts */
+    .ai-callouts {
+      padding: var(--space-md);
+    }
+    .callout {
+      padding: var(--space-md);
+      margin-bottom: 2px;
+    }
+    .callout.positive {
+      background: linear-gradient(135deg, var(--color-positive-dim) 0%, transparent 100%);
+      border-left: 3px solid var(--color-positive);
+    }
+    .callout.gold {
+      background: linear-gradient(135deg, var(--color-gold-dim) 0%, transparent 100%);
+      border-left: 3px solid var(--color-gold);
+    }
+    .callout-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      margin-bottom: 6px;
+    }
+    .callout.positive .callout-label { color: var(--color-positive); }
+    .callout.gold .callout-label { color: var(--color-gold); }
+    .callout-text {
+      font-size: var(--text-sm);
+      color: var(--color-gray-300);
+      line-height: 1.5;
+    }
+
+    /* Tournament */
+    .tournament-section {
+      padding: var(--space-lg);
+      background: var(--color-gray-900);
+    }
+    .tournament-header {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      color: var(--color-gray-400);
+      margin-bottom: var(--space-md);
+    }
+    .tournament-score {
+      text-align: center;
+      margin-bottom: var(--space-md);
+    }
+    .tournament-score-value {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--color-gold);
+    }
+    .tournament-score-label {
+      font-size: var(--text-xs);
+      color: var(--color-gray-500);
+    }
+    .tournament-pillars {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--color-gray-700);
+    }
+    .tournament-pillar {
+      background: var(--color-gray-800);
+      padding: var(--space-sm);
+      text-align: center;
+    }
+    .pillar-score {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+    }
+    .pillar-score.high { color: var(--color-positive); }
+    .pillar-score.medium { color: var(--color-gold); }
+    .pillar-score.low { color: var(--color-negative); }
+    .pillar-label {
+      font-size: 9px;
+      color: var(--color-gray-500);
+    }
+
+    /* Locked Features */
+    .locked-features {
+      padding: var(--space-lg);
+      background: var(--color-gray-800);
+    }
+    .locked-features-header {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-md);
+    }
+    .locked-features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-sm);
+    }
+    .locked-feature-card {
+      background: var(--color-gray-900);
+      padding: var(--space-sm);
+      text-align: center;
+    }
+    .locked-feature-icon {
+      color: var(--color-gray-600);
+      margin-bottom: 4px;
+    }
+    .locked-feature-name {
+      font-size: 10px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .locked-feature-unlock {
+      font-size: 9px;
+      color: var(--color-gray-500);
+      margin-bottom: 4px;
+    }
+    .locked-feature-progress {
+      height: 3px;
+      background: var(--color-gray-700);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .locked-feature-progress-fill {
+      height: 100%;
+      background: var(--color-gold);
+    }
+
+    /* Tab Bar */
+    .tab-bar {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0 16px;
+      background: var(--color-gray-900);
+      border-top: 1px solid var(--color-gray-800);
+    }
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      color: var(--color-gray-500);
+      font-size: 9px;
+      text-decoration: none;
+    }
+    .tab-item.active { color: var(--color-gold); }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <h1>Stats Page - Belt-Specific Views</h1>
+    <p>Three side-by-side phone frames showing what each belt level sees with belt-appropriate data. Scroll horizontally to see all views.</p>
+    <div class="meta">TOMO v1.1 | Based on STATS_CURRENT_STATE_PRD.md | January 27, 2026</div>
+  </header>
+
+  <div class="belt-views">
+
+    <!-- ==================== WHITE BELT VIEW ==================== -->
+    <div class="belt-column">
+      <div class="belt-label white">
+        <h2>White Belt View</h2>
+        <p>Focus: Consistency & Retention</p>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-content">
+          <header class="app-header">
+            <div class="app-header-avatar"></div>
+            <div class="app-header-logo">TOMO</div>
+            <div style="width:30px;"></div>
+          </header>
+
+          <!-- 1.1/1.2 Hero -->
+          <section class="hero-section">
+            <div class="hero-label">BREAKTHROUGH</div>
+            <div class="hero-stat">7</div>
+            <div class="hero-stat-label">Day Streak</div>
+            <h2 class="hero-title">Consistency Milestone</h2>
+            <p class="hero-description">You've trained 7 days in a row. This is how champions are made.</p>
+          </section>
+
+          <!-- 2.1 Style Fingerprint - LOCKED -->
+          <section class="style-fingerprint">
+            <div class="locked-overlay">
+              <div class="fingerprint-archetype">BACK HUNTER</div>
+              <div class="fingerprint-chart">
+                <svg width="120" height="120" viewBox="0 0 200 200">
+                  <circle cx="100" cy="100" r="60" fill="none" stroke="var(--color-gray-700)" stroke-width="1"/>
+                  <polygon points="100,40 150,70 140,130 100,160 60,130 50,70" fill="rgba(245,166,35,0.1)" stroke="var(--color-gray-600)" stroke-width="1"/>
+                </svg>
+              </div>
+            </div>
+            <div class="locked-message">
+              <div class="locked-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <div class="locked-text">Unlocks at Blue Belt</div>
+              <div class="locked-progress-bar">
+                <div class="locked-progress-fill" style="width: 30%"></div>
+              </div>
+              <div class="locked-progress-text">6 sessions to unlock</div>
+            </div>
+          </section>
+
+          <!-- 3.1 Watch Out -->
+          <section class="watch-out">
+            <div class="watch-out-header">Watch Out For</div>
+            <div class="watch-out-item">
+              <div>
+                <div class="watch-out-technique">Triangle</div>
+                <div class="watch-out-meta">2 days ago</div>
+              </div>
+              <div class="watch-out-link">Watch Video</div>
+            </div>
+            <div class="watch-out-item">
+              <div>
+                <div class="watch-out-technique">RNC</div>
+                <div class="watch-out-meta">5 days ago</div>
+              </div>
+              <div class="watch-out-link">Watch Video</div>
+            </div>
+          </section>
+
+          <!-- 4.1 Weekly Progress Ring -->
+          <section class="progress-ring-section">
+            <div class="progress-ring-header">This Week</div>
+            <div class="progress-ring">
+              <svg width="140" height="140" viewBox="0 0 140 140">
+                <circle cx="70" cy="70" r="55" class="progress-ring-bg"/>
+                <circle cx="70" cy="70" r="55" class="progress-ring-fill"/>
+              </svg>
+              <div class="progress-ring-center">
+                <div class="progress-ring-value">2</div>
+                <div class="progress-ring-label">of 3</div>
+              </div>
+            </div>
+            <div class="progress-ring-text">1 more to hit your goal</div>
+          </section>
+
+          <!-- 4.2 Heat Map -->
+          <section class="heatmap-section">
+            <div class="heatmap-header">
+              <div class="heatmap-title">47 Sessions</div>
+              <div class="heatmap-subtitle">Avg 2.3 per week</div>
+            </div>
+            <div class="heatmap-grid">
+              <div class="heatmap-week"><div class="heatmap-cell"></div><div class="heatmap-cell level-1"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-2"></div><div class="heatmap-cell"></div><div class="heatmap-cell"></div><div class="heatmap-cell"></div></div>
+              <div class="heatmap-week"><div class="heatmap-cell level-1"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-3"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-1"></div><div class="heatmap-cell"></div><div class="heatmap-cell"></div></div>
+              <div class="heatmap-week"><div class="heatmap-cell"></div><div class="heatmap-cell level-2"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-1"></div><div class="heatmap-cell level-2"></div><div class="heatmap-cell"></div><div class="heatmap-cell"></div></div>
+              <div class="heatmap-week"><div class="heatmap-cell level-3"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-2"></div><div class="heatmap-cell"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-1"></div><div class="heatmap-cell"></div></div>
+              <div class="heatmap-week"><div class="heatmap-cell"></div><div class="heatmap-cell level-4"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-2"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-1"></div><div class="heatmap-cell"></div></div>
+              <div class="heatmap-week"><div class="heatmap-cell level-2"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-1"></div><div class="heatmap-cell level-3"></div><div class="heatmap-cell"></div><div class="heatmap-cell"></div><div class="heatmap-cell"></div></div>
+              <div class="heatmap-week"><div class="heatmap-cell"></div><div class="heatmap-cell level-1"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-2"></div><div class="heatmap-cell level-1"></div><div class="heatmap-cell"></div><div class="heatmap-cell"></div></div>
+              <div class="heatmap-week"><div class="heatmap-cell level-2"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-4"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-1"></div><div class="heatmap-cell"></div><div class="heatmap-cell"></div></div>
+              <div class="heatmap-week"><div class="heatmap-cell"></div><div class="heatmap-cell level-3"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-2"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-1"></div><div class="heatmap-cell"></div></div>
+              <div class="heatmap-week"><div class="heatmap-cell level-1"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-2"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-3"></div><div class="heatmap-cell"></div><div class="heatmap-cell"></div></div>
+              <div class="heatmap-week"><div class="heatmap-cell"></div><div class="heatmap-cell level-2"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-1"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-2"></div><div class="heatmap-cell"></div></div>
+              <div class="heatmap-week"><div class="heatmap-cell level-3"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-1"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-4"></div><div class="heatmap-cell"></div><div class="heatmap-cell"></div></div>
+              <div class="heatmap-week"><div class="heatmap-cell"></div><div class="heatmap-cell level-2"></div><div class="heatmap-cell"></div><div class="heatmap-cell level-1"></div><div class="heatmap-cell"></div><div class="heatmap-cell"></div><div class="heatmap-cell"></div></div>
+            </div>
+          </section>
+
+          <!-- 4.3 Summary Card -->
+          <section class="summary-card">
+            <div class="summary-grid">
+              <div class="summary-cell">
+                <div class="summary-value">47</div>
+                <div class="summary-label">Total Sessions</div>
+              </div>
+              <div class="summary-cell">
+                <div class="summary-value">62</div>
+                <div class="summary-label">Total Hours</div>
+              </div>
+              <div class="summary-cell">
+                <div class="summary-value gold">7</div>
+                <div class="summary-label">Current Streak</div>
+              </div>
+              <div class="summary-cell">
+                <div class="summary-value positive">14</div>
+                <div class="summary-label">Best Streak</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4.4 Defense Focus -->
+          <section class="defense-focus">
+            <div class="defense-toggle">
+              <button class="defense-toggle-btn active">Offense</button>
+              <button class="defense-toggle-btn">Defense</button>
+            </div>
+            <div class="defense-bar">
+              <div class="defense-bar-name">Armbar</div>
+              <div class="defense-bar-track"><div class="defense-bar-fill" style="width: 85%"></div></div>
+              <div class="defense-bar-count">12</div>
+            </div>
+            <div class="defense-bar">
+              <div class="defense-bar-name">Triangle</div>
+              <div class="defense-bar-track"><div class="defense-bar-fill" style="width: 65%"></div></div>
+              <div class="defense-bar-count">9</div>
+            </div>
+            <div class="defense-bar">
+              <div class="defense-bar-name">RNC</div>
+              <div class="defense-bar-track"><div class="defense-bar-fill" style="width: 50%"></div></div>
+              <div class="defense-bar-count">7</div>
+            </div>
+          </section>
+
+          <!-- 8.x AI Callouts (White Belt messaging) -->
+          <div class="ai-callouts">
+            <div class="callout positive">
+              <div class="callout-label">What's Working</div>
+              <p class="callout-text">You're building your foundation. Every session your body learns new patterns.</p>
+            </div>
+            <div class="callout gold">
+              <div class="callout-label">Focus Area</div>
+              <p class="callout-text">Focus on escapes and position recognition. Survival builds confidence.</p>
+            </div>
+          </div>
+
+          <!-- 9.x Tournament -->
+          <section class="tournament-section">
+            <div class="tournament-header">Competition Readiness</div>
+            <div class="tournament-score">
+              <div class="tournament-score-value">52</div>
+              <div class="tournament-score-label">Overall Readiness</div>
+            </div>
+            <div class="tournament-pillars">
+              <div class="tournament-pillar"><div class="pillar-score medium">65</div><div class="pillar-label">Consistency</div></div>
+              <div class="tournament-pillar"><div class="pillar-score low">38</div><div class="pillar-label">Tech Breadth</div></div>
+              <div class="tournament-pillar"><div class="pillar-score medium">55</div><div class="pillar-label">Sparring</div></div>
+              <div class="tournament-pillar"><div class="pillar-score low">25</div><div class="pillar-label">Comp Exp</div></div>
+            </div>
+          </section>
+
+          <!-- 10.1 Locked Features -->
+          <section class="locked-features">
+            <div class="locked-features-header">Coming Soon</div>
+            <div class="locked-features-grid">
+              <div class="locked-feature-card">
+                <div class="locked-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div>
+                <div class="locked-feature-name">Style Fingerprint</div>
+                <div class="locked-feature-unlock">Blue + 20 sessions</div>
+                <div class="locked-feature-progress"><div class="locked-feature-progress-fill" style="width: 30%"></div></div>
+              </div>
+              <div class="locked-feature-card">
+                <div class="locked-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+                <div class="locked-feature-name">Competition Analytics</div>
+                <div class="locked-feature-unlock">3+ competitions</div>
+                <div class="locked-feature-progress"><div class="locked-feature-progress-fill" style="width: 0%"></div></div>
+              </div>
+            </div>
+          </section>
+
+          <nav class="tab-bar">
+            <a class="tab-item active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>Stats</a>
+            <a class="tab-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Journal</a>
+            <a class="tab-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Log</a>
+            <a class="tab-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>Tech</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== BLUE BELT VIEW ==================== -->
+    <div class="belt-column">
+      <div class="belt-label blue">
+        <h2>Blue Belt View</h2>
+        <p>Focus: Game Development & Identity</p>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-content">
+          <header class="app-header">
+            <div class="app-header-avatar"></div>
+            <div class="app-header-logo">TOMO</div>
+            <div style="width:30px;"></div>
+          </header>
+
+          <!-- 1.1/1.2 Hero (technique variety) -->
+          <section class="hero-section">
+            <div class="hero-label">YOUR GAME</div>
+            <div class="hero-stat">23</div>
+            <div class="hero-stat-label">Techniques Practiced</div>
+            <h2 class="hero-title">Building Your Arsenal</h2>
+            <p class="hero-description">You're developing technique variety. Time to find your A-game.</p>
+          </section>
+
+          <!-- 2.1 Style Fingerprint - UNLOCKED -->
+          <section class="style-fingerprint">
+            <div class="fingerprint-archetype">BACK HUNTER</div>
+            <div class="fingerprint-description">Constantly seeking the back. Once there, the finish is inevitable.</div>
+            <div class="fingerprint-chart">
+              <svg width="140" height="140" viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="60" fill="none" stroke="var(--color-gray-700)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="40" fill="none" stroke="var(--color-gray-800)" stroke-width="1" stroke-dasharray="4 4"/>
+                <polygon points="100,45 145,70 140,130 100,155 55,125 60,70" fill="rgba(245,166,35,0.15)" stroke="var(--color-gold)" stroke-width="2"/>
+                <circle cx="100" cy="45" r="4" fill="var(--color-gold)"/>
+                <circle cx="145" cy="70" r="4" fill="var(--color-gold)"/>
+                <circle cx="140" cy="130" r="4" fill="var(--color-gold)"/>
+                <circle cx="100" cy="155" r="4" fill="var(--color-gold)"/>
+                <circle cx="55" cy="125" r="4" fill="var(--color-gold)"/>
+                <circle cx="60" cy="70" r="4" fill="var(--color-gold)"/>
+                <text x="100" y="25" text-anchor="middle" fill="white" font-size="9" font-weight="600">Guard</text>
+                <text x="165" y="72" fill="white" font-size="9" font-weight="600">Pass</text>
+                <text x="165" y="135" fill="white" font-size="9" font-weight="600">Top</text>
+                <text x="100" y="180" text-anchor="middle" fill="white" font-size="9" font-weight="600">Back</text>
+                <text x="30" y="130" fill="white" font-size="9" font-weight="600">TD</text>
+                <text x="30" y="72" fill="white" font-size="9" font-weight="600">Legs</text>
+              </svg>
+            </div>
+          </section>
+
+          <!-- 3.1 Watch Out (includes leg locks) -->
+          <section class="watch-out">
+            <div class="watch-out-header">Watch Out For</div>
+            <div class="watch-out-item">
+              <div><div class="watch-out-technique">Triangle</div><div class="watch-out-meta">2 days ago</div></div>
+              <div class="watch-out-link">Watch Video</div>
+            </div>
+            <div class="watch-out-item">
+              <div><div class="watch-out-technique">Heel Hook</div><div class="watch-out-meta">4 days ago</div></div>
+              <div class="watch-out-link">Watch Video</div>
+            </div>
+            <div class="watch-out-item">
+              <div><div class="watch-out-technique">RNC</div><div class="watch-out-meta">7 days ago</div></div>
+              <div class="watch-out-link">Watch Video</div>
+            </div>
+          </section>
+
+          <!-- 5.1 Session Type Distribution -->
+          <section class="session-distribution">
+            <div class="distribution-header">Training Mix</div>
+            <div class="donut-chart">
+              <svg width="140" height="140" viewBox="0 0 140 140">
+                <circle cx="70" cy="70" r="45" fill="none" stroke="var(--color-training-gi)" stroke-width="18" stroke-dasharray="155 283" stroke-dashoffset="0" transform="rotate(-90 70 70)"/>
+                <circle cx="70" cy="70" r="45" fill="none" stroke="var(--color-training-nogi)" stroke-width="18" stroke-dasharray="85 283" stroke-dashoffset="-155" transform="rotate(-90 70 70)"/>
+                <circle cx="70" cy="70" r="45" fill="none" stroke="var(--color-training-openmat)" stroke-width="18" stroke-dasharray="43 283" stroke-dashoffset="-240" transform="rotate(-90 70 70)"/>
+              </svg>
+              <div class="donut-center">
+                <div class="donut-total">127</div>
+                <div class="donut-label">Sessions</div>
+              </div>
+            </div>
+            <div class="distribution-legend">
+              <div class="legend-item"><div class="legend-color gi"></div><span class="legend-text">Gi</span><span class="legend-percent">55%</span></div>
+              <div class="legend-item"><div class="legend-color nogi"></div><span class="legend-text">No-Gi</span><span class="legend-percent">30%</span></div>
+              <div class="legend-item"><div class="legend-color openmat"></div><span class="legend-text">Open</span><span class="legend-percent">15%</span></div>
+            </div>
+          </section>
+
+          <!-- 5.2 Sparring Pattern -->
+          <section class="sparring-pattern">
+            <div class="sparring-header">
+              <div>
+                <div class="sparring-header-label">Submission Exchange</div>
+                <div class="sparring-header-period">Last 30 Rolls</div>
+              </div>
+              <div style="text-align:right;">
+                <span class="sparring-win-rate-value">58%</span>
+                <span class="sparring-win-rate-label">Win Rate</span>
+              </div>
+            </div>
+            <div class="sparring-bar-row">
+              <div class="sparring-bar-label">RNC</div>
+              <div class="sparring-bar-track">
+                <div class="sparring-bar-positive" style="width: 60%;"><span class="sparring-bar-value light">6</span></div>
+                <div class="sparring-bar-negative" style="width: 40%;"><span class="sparring-bar-value dark">4</span></div>
+              </div>
+            </div>
+            <div class="sparring-bar-row">
+              <div class="sparring-bar-label">Triangle</div>
+              <div class="sparring-bar-track">
+                <div class="sparring-bar-positive" style="width: 55%;"><span class="sparring-bar-value light">5</span></div>
+                <div class="sparring-bar-negative" style="width: 45%;"><span class="sparring-bar-value dark">4</span></div>
+              </div>
+            </div>
+            <div class="sparring-bar-row">
+              <div class="sparring-bar-label">Armbar</div>
+              <div class="sparring-bar-track">
+                <div class="sparring-bar-positive" style="width: 70%;"><span class="sparring-bar-value light">7</span></div>
+                <div class="sparring-bar-negative" style="width: 30%;"><span class="sparring-bar-value dark">3</span></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 5.3 Achievement Timeline -->
+          <section class="achievement-timeline">
+            <div class="timeline-header">
+              <span class="timeline-header-label">Your Journey</span>
+              <span class="timeline-count">12 milestones</span>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-icon gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-black)" stroke-width="2"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-title gold">Blue Belt Promotion</span>
+                <span class="timeline-date">3 months ago</span>
+                <p class="timeline-description">Promoted after 18 months of training</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-icon green">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-positive)" stroke-width="2"><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-title">100 Sessions</span>
+                <span class="timeline-date">4 months ago</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- 5.4 Technique Pairings -->
+          <section class="technique-pairings">
+            <div class="pairings-header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span class="pairings-header-label">Technique Pairings</span>
+            </div>
+            <p class="pairings-intro">Techniques you drill together form your systems.</p>
+            <div class="pairing-card">
+              <div class="pairing-header">
+                <div><span class="pairing-rank">1.</span> <span class="pairing-technique">Armbar</span></div>
+                <span class="pairing-count">24x</span>
+              </div>
+              <div>
+                <span class="connections-label">Often paired with:</span>
+                <div class="connection-item"><span class="connection-technique">Triangle</span> <span class="connection-count">12x</span></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 5.5 Blues Detector -->
+          <section class="blues-detector">
+            <div class="blues-header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-warning)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span class="blues-header-label">The Blues Check</span>
+            </div>
+            <div class="blues-card">
+              <h3 class="blues-title">The Plateau is Normal</h3>
+              <p class="blues-message">Your training frequency dropped 35% from last month. This is common at blue belt.</p>
+              <button class="blues-btn-primary">I'm Okay</button>
+              <button class="blues-btn-secondary">Learn More</button>
+            </div>
+          </section>
+
+          <!-- 7.1 Attack Profile -->
+          <section class="attack-profile">
+            <div class="attack-eyebrow">Your Submission Game</div>
+            <div class="attack-title">Attack Profile</div>
+            <div class="attack-treemap">
+              <div class="treemap-block neck"><div class="treemap-label">NECK</div><div class="treemap-percent">52%</div></div>
+              <div class="treemap-stacked">
+                <div class="treemap-block arms" style="flex:1;display:flex;justify-content:space-between;align-items:center;"><div class="treemap-label">ARMS</div><div class="treemap-percent" style="font-size:18px;">28%</div></div>
+                <div class="treemap-block legs" style="flex:1;display:flex;justify-content:space-between;align-items:center;"><div class="treemap-label">LEGS</div><div class="treemap-percent" style="font-size:18px;">20%</div></div>
+              </div>
+            </div>
+            <div class="specialist-banner">
+              <div class="specialist-title">HEAD HUNTER</div>
+              <div class="specialist-desc">Your opponents go to sleep.</div>
+            </div>
+            <div class="attack-stats">
+              <div class="attack-stat"><div class="attack-stat-value positive">59</div><div class="attack-stat-label">Subs Given</div></div>
+              <div class="attack-stat"><div class="attack-stat-value negative">42</div><div class="attack-stat-label">Tapped Out</div></div>
+              <div class="attack-stat"><div class="attack-stat-value gold">58%</div><div class="attack-stat-label">Win Rate</div></div>
+            </div>
+          </section>
+
+          <!-- 8.x AI Callouts (Blue Belt messaging) -->
+          <div class="ai-callouts">
+            <div class="callout positive">
+              <div class="callout-label">What's Working</div>
+              <p class="callout-text">Your guard retention is improving. You're staying calm under pressure.</p>
+            </div>
+            <div class="callout gold">
+              <div class="callout-label">Focus Area</div>
+              <p class="callout-text">Develop 2-3 techniques you can chain together. Build your A-game.</p>
+            </div>
+          </div>
+
+          <!-- 9.x Tournament -->
+          <section class="tournament-section">
+            <div class="tournament-header">Competition Readiness</div>
+            <div class="tournament-score">
+              <div class="tournament-score-value">72</div>
+              <div class="tournament-score-label">Overall Readiness</div>
+            </div>
+            <div class="tournament-pillars">
+              <div class="tournament-pillar"><div class="pillar-score high">85</div><div class="pillar-label">Consistency</div></div>
+              <div class="tournament-pillar"><div class="pillar-score medium">68</div><div class="pillar-label">Tech Breadth</div></div>
+              <div class="tournament-pillar"><div class="pillar-score high">78</div><div class="pillar-label">Sparring</div></div>
+              <div class="tournament-pillar"><div class="pillar-score low">45</div><div class="pillar-label">Comp Exp</div></div>
+            </div>
+          </section>
+
+          <!-- 10.1 Locked Features -->
+          <section class="locked-features">
+            <div class="locked-features-header">Coming Soon</div>
+            <div class="locked-features-grid">
+              <div class="locked-feature-card">
+                <div class="locked-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+                <div class="locked-feature-name">Competition Analytics</div>
+                <div class="locked-feature-unlock">3+ competitions</div>
+                <div class="locked-feature-progress"><div class="locked-feature-progress-fill" style="width: 33%"></div></div>
+              </div>
+              <div class="locked-feature-card">
+                <div class="locked-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+                <div class="locked-feature-name">Teaching Tracker</div>
+                <div class="locked-feature-unlock">Purple belt</div>
+                <div class="locked-feature-progress"><div class="locked-feature-progress-fill" style="width: 0%"></div></div>
+              </div>
+            </div>
+          </section>
+
+          <nav class="tab-bar">
+            <a class="tab-item active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>Stats</a>
+            <a class="tab-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Journal</a>
+            <a class="tab-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Log</a>
+            <a class="tab-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>Tech</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PURPLE+ BELT VIEW ==================== -->
+    <div class="belt-column">
+      <div class="belt-label purple">
+        <h2>Purple+ Belt View</h2>
+        <p>Focus: Systems & Depth</p>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-content">
+          <header class="app-header">
+            <div class="app-header-avatar"></div>
+            <div class="app-header-logo">TOMO</div>
+            <div style="width:30px;"></div>
+          </header>
+
+          <!-- 1.1/1.2 Hero (sparring rounds) -->
+          <section class="hero-section">
+            <div class="hero-label">THIS MONTH</div>
+            <div class="hero-stat">127</div>
+            <div class="hero-stat-label">Sparring Rounds</div>
+            <h2 class="hero-title">Volume Is Key</h2>
+            <p class="hero-description">High-level refinement comes from repetition under pressure.</p>
+          </section>
+
+          <!-- 2.1 Style Fingerprint -->
+          <section class="style-fingerprint">
+            <div class="fingerprint-archetype">BACK HUNTER</div>
+            <div class="fingerprint-description">Constantly seeking the back. Once there, the finish is inevitable.</div>
+            <div class="fingerprint-chart">
+              <svg width="140" height="140" viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="60" fill="none" stroke="var(--color-gray-700)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="40" fill="none" stroke="var(--color-gray-800)" stroke-width="1" stroke-dasharray="4 4"/>
+                <polygon points="100,45 145,70 140,130 100,155 55,125 60,70" fill="rgba(245,166,35,0.15)" stroke="var(--color-gold)" stroke-width="2"/>
+                <circle cx="100" cy="45" r="4" fill="var(--color-gold)"/>
+                <circle cx="145" cy="70" r="4" fill="var(--color-gold)"/>
+                <circle cx="140" cy="130" r="4" fill="var(--color-gold)"/>
+                <circle cx="100" cy="155" r="4" fill="var(--color-gold)"/>
+                <circle cx="55" cy="125" r="4" fill="var(--color-gold)"/>
+                <circle cx="60" cy="70" r="4" fill="var(--color-gold)"/>
+                <text x="100" y="25" text-anchor="middle" fill="white" font-size="9" font-weight="600">Guard</text>
+                <text x="165" y="72" fill="white" font-size="9" font-weight="600">Pass</text>
+                <text x="165" y="135" fill="white" font-size="9" font-weight="600">Top</text>
+                <text x="100" y="180" text-anchor="middle" fill="white" font-size="9" font-weight="600">Back</text>
+                <text x="30" y="130" fill="white" font-size="9" font-weight="600">TD</text>
+                <text x="30" y="72" fill="white" font-size="9" font-weight="600">Legs</text>
+              </svg>
+            </div>
+          </section>
+
+          <!-- 3.1 Watch Out (all subs) -->
+          <section class="watch-out">
+            <div class="watch-out-header">Watch Out For</div>
+            <div class="watch-out-item">
+              <div><div class="watch-out-technique">Inside Heel Hook</div><div class="watch-out-meta">3 days ago</div></div>
+              <div class="watch-out-link">Watch Video</div>
+            </div>
+            <div class="watch-out-item">
+              <div><div class="watch-out-technique">D'Arce Choke</div><div class="watch-out-meta">5 days ago</div></div>
+              <div class="watch-out-link">Watch Video</div>
+            </div>
+          </section>
+
+          <!-- 5.1 Session Type Distribution -->
+          <section class="session-distribution">
+            <div class="distribution-header">Training Mix</div>
+            <div class="donut-chart">
+              <svg width="140" height="140" viewBox="0 0 140 140">
+                <circle cx="70" cy="70" r="45" fill="none" stroke="var(--color-training-gi)" stroke-width="18" stroke-dasharray="127 283" stroke-dashoffset="0" transform="rotate(-90 70 70)"/>
+                <circle cx="70" cy="70" r="45" fill="none" stroke="var(--color-training-nogi)" stroke-width="18" stroke-dasharray="113 283" stroke-dashoffset="-127" transform="rotate(-90 70 70)"/>
+                <circle cx="70" cy="70" r="45" fill="none" stroke="var(--color-training-openmat)" stroke-width="18" stroke-dasharray="43 283" stroke-dashoffset="-240" transform="rotate(-90 70 70)"/>
+              </svg>
+              <div class="donut-center">
+                <div class="donut-total">247</div>
+                <div class="donut-label">Sessions</div>
+              </div>
+            </div>
+            <div class="distribution-legend">
+              <div class="legend-item"><div class="legend-color gi"></div><span class="legend-text">Gi</span><span class="legend-percent">45%</span></div>
+              <div class="legend-item"><div class="legend-color nogi"></div><span class="legend-text">No-Gi</span><span class="legend-percent">40%</span></div>
+              <div class="legend-item"><div class="legend-color openmat"></div><span class="legend-text">Open</span><span class="legend-percent">15%</span></div>
+            </div>
+          </section>
+
+          <!-- 5.2 Sparring Pattern -->
+          <section class="sparring-pattern">
+            <div class="sparring-header">
+              <div>
+                <div class="sparring-header-label">Submission Exchange</div>
+                <div class="sparring-header-period">Last 30 Rolls</div>
+              </div>
+              <div style="text-align:right;">
+                <span class="sparring-win-rate-value">68%</span>
+                <span class="sparring-win-rate-label">Win Rate</span>
+              </div>
+            </div>
+            <div class="sparring-bar-row">
+              <div class="sparring-bar-label">RNC</div>
+              <div class="sparring-bar-track">
+                <div class="sparring-bar-positive" style="width: 75%;"><span class="sparring-bar-value light">9</span></div>
+                <div class="sparring-bar-negative" style="width: 25%;"><span class="sparring-bar-value dark">3</span></div>
+              </div>
+            </div>
+            <div class="sparring-bar-row">
+              <div class="sparring-bar-label">Triangle</div>
+              <div class="sparring-bar-track">
+                <div class="sparring-bar-positive" style="width: 70%;"><span class="sparring-bar-value light">7</span></div>
+                <div class="sparring-bar-negative" style="width: 30%;"><span class="sparring-bar-value dark">3</span></div>
+              </div>
+            </div>
+            <div class="sparring-bar-row">
+              <div class="sparring-bar-label">Heel Hook</div>
+              <div class="sparring-bar-track">
+                <div class="sparring-bar-positive" style="width: 60%;"><span class="sparring-bar-value light">6</span></div>
+                <div class="sparring-bar-negative" style="width: 40%;"><span class="sparring-bar-value dark">4</span></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 6.1 Your Journey -->
+          <section class="your-journey">
+            <div class="journey-header">
+              <div class="journey-header-left">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span class="journey-header-label">Your Journey</span>
+              </div>
+              <span class="journey-years-badge">4 years</span>
+            </div>
+            <div class="journey-hero">
+              <span class="journey-hero-number">4</span>
+              <span class="journey-hero-text">years on the mat</span>
+            </div>
+            <div class="journey-stats-grid">
+              <div class="journey-stat"><span class="journey-stat-value">247</span><span class="journey-stat-label">Sessions</span></div>
+              <div class="journey-stat"><span class="journey-stat-value">412</span><span class="journey-stat-label">Mat Hours</span></div>
+              <div class="journey-stat"><span class="journey-stat-value">1,284</span><span class="journey-stat-label">Rounds</span></div>
+            </div>
+          </section>
+
+          <!-- 6.2 Technique Mastery -->
+          <section class="technique-mastery">
+            <div class="mastery-header">
+              <div class="mastery-header-left">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                <span class="mastery-header-label">Your Mastery</span>
+              </div>
+              <span class="mastery-count">42 techniques</span>
+            </div>
+            <div class="mastery-signature">
+              <span class="mastery-signature-label">Your Signature</span>
+              <span class="mastery-signature-name">Rear Naked Choke</span>
+              <span class="mastery-signature-stat">87 drills | 34 live</span>
+            </div>
+            <div class="mastery-tier">
+              <div class="mastery-tier-header"><span class="mastery-tier-label gold">ADVANCED</span><span class="mastery-tier-count">(5)</span></div>
+              <div class="mastery-row"><span class="mastery-name">RNC</span><div class="mastery-bar"><div class="mastery-fill gold" style="width: 100%;"></div></div><span class="mastery-drills">87</span></div>
+              <div class="mastery-row"><span class="mastery-name">Triangle</span><div class="mastery-bar"><div class="mastery-fill gold" style="width: 85%;"></div></div><span class="mastery-drills">74</span></div>
+              <div class="mastery-row"><span class="mastery-name">Armbar</span><div class="mastery-bar"><div class="mastery-fill gold" style="width: 78%;"></div></div><span class="mastery-drills">68</span></div>
+            </div>
+            <div class="mastery-tier">
+              <div class="mastery-tier-header"><span class="mastery-tier-label green">PROFICIENT</span><span class="mastery-tier-count">(12)</span></div>
+              <div class="mastery-row"><span class="mastery-name">Guillotine</span><div class="mastery-bar"><div class="mastery-fill green" style="width: 60%;"></div></div><span class="mastery-drills">52</span></div>
+              <div class="mastery-row"><span class="mastery-name">Kimura</span><div class="mastery-bar"><div class="mastery-fill green" style="width: 55%;"></div></div><span class="mastery-drills">48</span></div>
+            </div>
+          </section>
+
+          <!-- 7.1 Attack Profile -->
+          <section class="attack-profile">
+            <div class="attack-eyebrow">Your Submission Game</div>
+            <div class="attack-title">Attack Profile</div>
+            <div class="attack-treemap">
+              <div class="treemap-block neck"><div class="treemap-label">NECK</div><div class="treemap-percent">48%</div></div>
+              <div class="treemap-stacked">
+                <div class="treemap-block arms" style="flex:1;display:flex;justify-content:space-between;align-items:center;"><div class="treemap-label">ARMS</div><div class="treemap-percent" style="font-size:18px;">25%</div></div>
+                <div class="treemap-block legs" style="flex:1;display:flex;justify-content:space-between;align-items:center;"><div class="treemap-label">LEGS</div><div class="treemap-percent" style="font-size:18px;">27%</div></div>
+              </div>
+            </div>
+            <div class="specialist-banner">
+              <div class="specialist-title">THE COMPLETE GAME</div>
+              <div class="specialist-desc">Attacks from everywhere. Well-rounded predator.</div>
+            </div>
+            <div class="attack-stats">
+              <div class="attack-stat"><div class="attack-stat-value positive">142</div><div class="attack-stat-label">Subs Given</div></div>
+              <div class="attack-stat"><div class="attack-stat-value negative">67</div><div class="attack-stat-label">Tapped Out</div></div>
+              <div class="attack-stat"><div class="attack-stat-value gold">68%</div><div class="attack-stat-label">Win Rate</div></div>
+            </div>
+          </section>
+
+          <!-- 8.x AI Callouts (Purple Belt messaging) -->
+          <div class="ai-callouts">
+            <div class="callout positive">
+              <div class="callout-label">What's Working</div>
+              <p class="callout-text">Your depth of understanding is growing. Systems are connecting.</p>
+            </div>
+            <div class="callout gold">
+              <div class="callout-label">Focus Area</div>
+              <p class="callout-text">Connect your positions into complete systems. Teaching accelerates learning.</p>
+            </div>
+          </div>
+
+          <!-- 9.x Tournament -->
+          <section class="tournament-section">
+            <div class="tournament-header">Competition Readiness</div>
+            <div class="tournament-score">
+              <div class="tournament-score-value">85</div>
+              <div class="tournament-score-label">Overall Readiness</div>
+            </div>
+            <div class="tournament-pillars">
+              <div class="tournament-pillar"><div class="pillar-score high">92</div><div class="pillar-label">Consistency</div></div>
+              <div class="tournament-pillar"><div class="pillar-score high">88</div><div class="pillar-label">Tech Breadth</div></div>
+              <div class="tournament-pillar"><div class="pillar-score high">85</div><div class="pillar-label">Sparring</div></div>
+              <div class="tournament-pillar"><div class="pillar-score medium">72</div><div class="pillar-label">Comp Exp</div></div>
+            </div>
+          </section>
+
+          <!-- 10.1 Locked Features -->
+          <section class="locked-features">
+            <div class="locked-features-header">Coming Soon</div>
+            <div class="locked-features-grid">
+              <div class="locked-feature-card">
+                <div class="locked-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+                <div class="locked-feature-name">Competition Analytics</div>
+                <div class="locked-feature-unlock">3+ competitions</div>
+                <div class="locked-feature-progress"><div class="locked-feature-progress-fill" style="width: 66%"></div></div>
+              </div>
+              <div class="locked-feature-card">
+                <div class="locked-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></div>
+                <div class="locked-feature-name">Multi-Year View</div>
+                <div class="locked-feature-unlock">1+ year training</div>
+                <div class="locked-feature-progress"><div class="locked-feature-progress-fill" style="width: 100%"></div></div>
+              </div>
+            </div>
+          </section>
+
+          <nav class="tab-bar">
+            <a class="tab-item active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>Stats</a>
+            <a class="tab-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Journal</a>
+            <a class="tab-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Log</a>
+            <a class="tab-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>Tech</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

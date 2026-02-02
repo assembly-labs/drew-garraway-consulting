@@ -690,6 +690,72 @@ function EntryPhase({
           </div>
         </div>
 
+        {/* Sparring Details (expanded if Yes) */}
+        {sparringSelected === true && (
+          <div style={{
+            backgroundColor: 'var(--color-gray-900)',
+            border: '1px solid var(--color-gray-800)',
+            borderLeft: '3px solid var(--color-positive)',
+            borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-lg)',
+            marginBottom: 'var(--space-xl)',
+          }}>
+            {/* Rounds */}
+            <div style={{ marginBottom: 'var(--space-lg)' }}>
+              <label style={{
+                display: 'block',
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 600,
+                color: 'var(--color-gray-400)',
+                marginBottom: 'var(--space-sm)',
+              }}>
+                Rounds
+              </label>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-xs)' }}>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => {
+                  const isSelected = sessionData.sparringRounds === n;
+                  return (
+                    <button
+                      key={n}
+                      onClick={() => updateField('sparringRounds', n)}
+                      style={{
+                        width: '40px',
+                        height: '40px',
+                        backgroundColor: isSelected ? 'var(--color-gold)' : 'var(--color-gray-800)',
+                        border: isSelected ? '2px solid var(--color-gold)' : '1px solid var(--color-gray-700)',
+                        borderRadius: 'var(--radius-sm)',
+                        color: isSelected ? 'var(--color-black)' : 'var(--color-gray-300)',
+                        fontSize: 'var(--text-sm)',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {n}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Subs Given */}
+            <SubmissionPicker
+              label="Subs given"
+              selectedSubmissions={sessionData.submissionsGiven}
+              onSubmissionsChange={subs => updateField('submissionsGiven', subs)}
+              userHistory={[]}
+            />
+
+            {/* Submitted By */}
+            <SubmissionPicker
+              label="Submitted by"
+              selectedSubmissions={sessionData.submissionsReceived}
+              onSubmissionsChange={subs => updateField('submissionsReceived', subs)}
+              userHistory={[]}
+            />
+          </div>
+        )}
+
         {/* === OPTIONAL FIELDS (Tier 2) === */}
 
         {/* What You Worked On */}

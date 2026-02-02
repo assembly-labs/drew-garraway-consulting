@@ -14,11 +14,12 @@
 3. [Page Structure](#3-page-structure)
 4. [Feature Inventory](#4-feature-inventory)
 5. [Data Architecture](#5-data-architecture)
-6. [Belt Personalization](#6-belt-personalization)
-7. [Current Implementation Status](#7-current-implementation-status)
-8. [UI Polish Opportunities](#8-ui-polish-opportunities)
-9. [Design Specifications](#9-design-specifications)
-10. [Related Files](#10-related-files)
+6. [Content Management System](#6-content-management-system)
+7. [Belt Personalization](#7-belt-personalization)
+8. [Current Implementation Status](#8-current-implementation-status)
+9. [UI Polish Opportunities](#9-ui-polish-opportunities)
+10. [Design Specifications](#10-design-specifications)
+11. [Related Files](#11-related-files)
 
 ---
 
@@ -255,9 +256,153 @@ interface TechniqueVideo {
 
 ---
 
-## 6. Belt Personalization
+## 6. Content Management System
 
-### 6.1 For You Recommendations
+### 6.1 Overview
+
+The video library is managed via **Google Sheets** as a lightweight CMS. This allows the content manager to add, edit, and remove videos without touching code.
+
+```
+┌─────────────────────┐      ┌─────────────────────┐      ┌─────────────────────┐
+│   Google Sheet      │  →   │  npm run sync-videos │  →   │  techniqueVideos.ts │
+│   (you edit)        │      │  (manual command)    │      │  (app reads)        │
+└─────────────────────┘      └─────────────────────┘      └─────────────────────┘
+```
+
+**Key Decisions:**
+- **Google Sheets** - Free, accessible from any device, familiar interface
+- **Manual sync** - You run `npm run sync-videos` when ready to publish changes
+- **Trusted entries** - No YouTube API validation; your entries are the source of truth
+
+### 6.2 Google Sheet Structure
+
+| Column | Type | Required | Description |
+|--------|------|----------|-------------|
+| `technique_id` | string | Yes | Links to technique in `techniques.ts` (e.g., `armbar-closed-guard`) |
+| `youtube_id` | string | Yes | 11-character YouTube video ID (e.g., `dQw4w9WgXcQ`) |
+| `title` | string | Yes | Video title as displayed in app |
+| `instructor` | string | Yes | Instructor name (e.g., `John Danaher`) |
+| `channel` | string | No | YouTube channel name |
+| `duration_seconds` | number | No | Video length in seconds |
+| `difficulty` | number | No | 1-10 scale (1=beginner, 10=elite) |
+| `verified` | boolean | No | TRUE if manually verified working |
+| `active` | boolean | Yes | FALSE = soft delete (hidden but recoverable) |
+| `notes` | string | No | Internal notes (not shown in app) |
+
+**Example Row:**
+```
+technique_id: armbar-closed-guard
+youtube_id: abc123xyz99
+title: The Perfect Armbar Setup
+instructor: John Danaher
+channel: Bernardo Faria BJJ Fanatics
+duration_seconds: 847
+difficulty: 3
+verified: TRUE
+active: TRUE
+notes: Great for beginners, covers 3 entries
+```
+
+### 6.3 CRUD Operations
+
+#### Adding a Video
+1. Add a new row to the Google Sheet
+2. Fill required fields: `technique_id`, `youtube_id`, `title`, `instructor`, `active=TRUE`
+3. Run `npm run sync-videos` from `/prototype` directory
+4. Commit and deploy: `npm run ship`
+
+#### Editing a Video
+1. Find the row in the Google Sheet
+2. Update the fields you want to change
+3. Run `npm run sync-videos`
+4. Deploy
+
+#### Soft Delete (Recommended)
+1. Set `active = FALSE` on the row
+2. Video is hidden from app but row remains for recovery
+3. Run sync and deploy
+
+#### Hard Delete
+1. Delete the entire row from the sheet
+2. Video is permanently removed
+3. Run sync and deploy
+
+### 6.4 Sync Workflow
+
+```bash
+# From /prototype directory
+npm run sync-videos
+```
+
+**What the script does:**
+1. Authenticates with Google Sheets API (uses stored credentials)
+2. Fetches all rows where `active = TRUE`
+3. Validates required fields are present
+4. Generates `/prototype/src/data/techniqueVideos.ts`
+5. Prints summary: X videos synced, Y skipped, Z errors
+
+**Credentials Setup (one-time):**
+1. Create Google Cloud project
+2. Enable Google Sheets API
+3. Create service account with read access
+4. Download JSON credentials
+5. Store as `/prototype/.google-credentials.json` (gitignored)
+
+### 6.5 Content Guidelines
+
+#### What Makes a Good Tutorial Video
+
+| Criteria | Good | Avoid |
+|----------|------|-------|
+| Length | 5-15 minutes focused instruction | 30+ minute rambling sessions |
+| Production | Clear camera angles, good audio | Shaky phone footage, echo |
+| Instructor | Explains why, not just what | Silent drilling |
+| Technique match | Exactly matches `technique_id` | Vaguely related content |
+| Accessibility | English or subtitled | Non-subtitled foreign language |
+
+#### Priority Instructors
+
+Videos from these instructors are preferred:
+1. **John Danaher** - Systematic, conceptual, excellent for all levels
+2. **Gordon Ryan** - Practical application, competition-tested
+3. **Lachlan Giles** - Clear explanations, great for defense
+4. **Craig Jones** - Engaging, good for motivation content
+5. **Bernardo Faria** - Fundamentals, pressure passing
+6. **Andre Galvao** - Competition footage, modern game
+
+#### Technique-to-Video Mapping Rules
+
+- Each technique can have **multiple videos** (primary + alternatives)
+- Primary video should be from priority instructor when available
+- Secondary videos can show variations or different perspectives
+- Mindset videos use `technique_id` format: `mindset-{category}-{topic}`
+
+### 6.6 Troubleshooting
+
+| Issue | Cause | Fix |
+|-------|-------|-----|
+| Video shows broken thumbnail | YouTube ID incorrect | Verify ID, check video is public |
+| Sync fails with auth error | Credentials expired | Re-download credentials JSON |
+| Video not appearing | `active = FALSE` or missing `technique_id` | Check sheet, ensure active and ID matches |
+| Duplicate videos | Same `youtube_id` for multiple techniques | Intentional if video covers multiple techniques |
+
+### 6.7 Future Enhancements
+
+**Phase 2: Real-time CMS (if needed)**
+- Migrate to Supabase or Airtable for real-time updates
+- No manual sync required
+- Admin dashboard for content management
+
+**Phase 3: Community Contributions**
+- Users can suggest videos
+- Moderation queue in admin dashboard
+- Credit system for contributors
+
+---
+
+## 7. Belt Personalization
+
+### 7.1 For You Recommendations
 
 The "For You" tab uses persona-specific video configurations:
 
@@ -270,7 +415,7 @@ The "For You" tab uses persona-specific video configurations:
 | purple-average | Systems thinking | Teaching | None |
 | brown-average | Refinement | Legacy | None |
 
-### 6.2 Browse Suggestions by Belt
+### 7.2 Browse Suggestions by Belt
 
 | Belt | Suggested Positions | Message |
 |------|---------------------|---------|
@@ -280,7 +425,7 @@ The "For You" tab uses persona-specific video configurations:
 | Brown | Clinch, Takedowns, Turtle, Submissions | "Polish the details. Fill gaps in your game." |
 | Black | Submissions, Clinch, Takedowns, Turtle | "Master the subtle details. Share your knowledge." |
 
-### 6.3 Content Gating (Planned)
+### 7.3 Content Gating (Planned)
 
 | Category | White | Blue | Purple+ |
 |----------|-------|------|---------|
@@ -291,7 +436,7 @@ The "For You" tab uses persona-specific video configurations:
 
 **Current Status:** Not implemented. All content visible to all belts.
 
-### 6.4 Difficulty Filtering (Planned)
+### 7.4 Difficulty Filtering (Planned)
 
 | Belt | Difficulty Range | Defense Priority | Conceptual Content |
 |------|------------------|------------------|-------------------|
@@ -303,9 +448,9 @@ The "For You" tab uses persona-specific video configurations:
 
 ---
 
-## 7. Current Implementation Status
+## 8. Current Implementation Status
 
-### 7.1 What's Working Well
+### 8.1 What's Working Well
 
 | Feature | Status | Notes |
 |---------|--------|-------|
@@ -320,7 +465,7 @@ The "For You" tab uses persona-specific video configurations:
 | At-risk support | Done | "When It Gets Hard" section for struggling personas |
 | YouTube thumbnail fallback | Done | 3-tier fallback chain with CSS placeholder |
 
-### 7.2 Gaps & Issues
+### 8.2 Gaps & Issues
 
 | Issue | Severity | Description |
 |-------|----------|-------------|
@@ -331,7 +476,7 @@ The "For You" tab uses persona-specific video configurations:
 | Difficulty filtering missing | Medium | No belt-appropriate filtering |
 | Progress is read-only | Medium | Cannot update proficiency from this page |
 
-### 7.3 Integration Status
+### 8.3 Integration Status
 
 | System | Integration | Notes |
 |--------|-------------|-------|
@@ -342,9 +487,9 @@ The "For You" tab uses persona-specific video configurations:
 
 ---
 
-## 8. UI Polish Opportunities
+## 9. UI Polish Opportunities
 
-### 8.1 High Impact (Core Functionality)
+### 9.1 High Impact (Core Functionality)
 
 #### ~~Log Practice Integration~~ DONE
 - ~~**Current:** Button says "Log Practice" but does nothing~~
@@ -356,7 +501,7 @@ The "For You" tab uses persona-specific video configurations:
 - **Fix:** Add tap-to-update or swipe gesture for quick updates
 - **Simpler:** Infer proficiency from journal entries mentioning technique
 
-### 8.2 Medium Impact (Polish)
+### 9.2 Medium Impact (Polish)
 
 #### Position Card Visual Enhancement
 - Add subtle position icons or illustrations
@@ -373,7 +518,7 @@ The "For You" tab uses persona-specific video configurations:
 - Show "Also practiced by" social proof
 - Add bookmarking/favorites
 
-### 8.3 Low Impact (Nice-to-Have)
+### 9.3 Low Impact (Nice-to-Have)
 
 #### Featured Instructors Tap Action
 - Navigate to filtered view of that instructor's videos
@@ -389,9 +534,9 @@ The "For You" tab uses persona-specific video configurations:
 
 ---
 
-## 9. Design Specifications
+## 10. Design Specifications
 
-### 9.1 Layout
+### 10.1 Layout
 
 | Element | Specification |
 |---------|---------------|
@@ -401,7 +546,7 @@ The "For You" tab uses persona-specific video configurations:
 | Position card min-height | 120px |
 | Touch targets | 44px minimum, 56px preferred |
 
-### 9.2 Typography
+### 10.2 Typography
 
 | Element | Font | Size | Weight |
 |---------|------|------|--------|
@@ -412,7 +557,7 @@ The "For You" tab uses persona-specific video configurations:
 | Descriptions | Mono | xs | 500 |
 | Video titles | Heading | xl (hero), sm (compact) | 700, 600 |
 
-### 9.3 Colors
+### 10.3 Colors
 
 | Element | Color |
 |---------|-------|
@@ -427,7 +572,7 @@ The "For You" tab uses persona-specific video configurations:
 | Proficiency - Proficient/Advanced | `var(--color-positive)` |
 | Common Mistakes callout | `var(--color-negative)` |
 
-### 9.4 Animations
+### 10.4 Animations
 
 | Element | Transition |
 |---------|------------|
@@ -438,9 +583,9 @@ The "For You" tab uses persona-specific video configurations:
 
 ---
 
-## 10. Related Files
+## 11. Related Files
 
-### 10.1 Components
+### 11.1 Components
 
 | File | Purpose |
 |------|---------|
@@ -448,7 +593,7 @@ The "For You" tab uses persona-specific video configurations:
 | `/components/features/UpNextVideos.tsx` | For You tab content |
 | `/components/ui/YouTubeEmbed.tsx` | Video player component |
 
-### 10.2 Data
+### 11.2 Data
 
 | File | Purpose |
 |------|---------|
@@ -456,14 +601,14 @@ The "For You" tab uses persona-specific video configurations:
 | `/data/techniqueVideos.ts` | Video catalog |
 | `/data/personaVideoRecommendations.ts` | Persona video configs |
 
-### 10.3 Types
+### 11.3 Types
 
 | File | Purpose |
 |------|---------|
 | `/types/techniqueVideos.ts` | Video type definitions |
 | `/types/database.ts` | Belt, proficiency types |
 
-### 10.4 Hooks
+### 11.4 Hooks
 
 | File | Purpose |
 |------|---------|
