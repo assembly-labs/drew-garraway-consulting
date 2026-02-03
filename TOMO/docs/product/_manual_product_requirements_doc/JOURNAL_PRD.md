@@ -469,6 +469,8 @@ SESSION #48 LOGGED
 
 ## Data Model
 
+> **Data Model:** The canonical Session type is defined in code at `/prototype/src/types/database.ts`. This document describes product requirements; code is the source of truth for field names and types.
+
 ### JournalEntry (Existing)
 
 ```typescript

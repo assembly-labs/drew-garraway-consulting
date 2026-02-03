@@ -53,6 +53,8 @@ Belt-appropriate prompts and post-session messages:
 ### 5. Risk Detection & Interventions
 **Location**: `config/belt-system/risk-signals.ts`
 
+> **Risk Signals:** See [TECH_DATA_AI_OVERVIEW.md](./_manual_product_requirements_doc/TECH_DATA_AI_OVERVIEW.md) for canonical risk signal definitions, thresholds, and belt-specific risk modifiers. The code at `/prototype/src/config/belt-system/risk-signals.ts` is the source of truth for implementation.
+
 Proactively detect dropout risk:
 - Attendance decline, extended gaps, negative sentiment
 - Belt-specific risk modifiers (white/blue have higher risk)

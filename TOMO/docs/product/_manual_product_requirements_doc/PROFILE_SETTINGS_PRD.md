@@ -210,14 +210,47 @@ Gender impacts analytics and peer comparisons across the user's history. Changin
 
 ### Belt & Stripe Progression History
 
+> **This is a Profile module, not a standalone page.** Belt progression renders as a simple timeline card within the Profile page. The existing `BeltProgress.tsx` page component should be deprecated in favor of this module.
+
 #### Overview
 
-Belt and stripe changes are **progression events**, not simple edits. Every change creates a timestamped record that powers:
-- Belt Progress page visualization
+Belt and stripe changes are **progression events**, not simple edits. When a user updates their belt or stripes in the app, the system creates a timestamped record. These records power:
+- Profile page belt progress display (current belt + event history)
 - "Time at belt" calculations
-- Promotion timeline displays
-- Progress analytics and insights
-- Historical journey view
+- Stats page context (time-at-belt metric in hero area)
+- Milestone insights ("1 year at blue belt")
+
+#### Full IBJJF Belt Path
+
+The system tracks the complete IBJJF progression, not just the common 5 belts:
+
+```
+White (4 stripes) -> Blue (4 stripes) -> Purple (4 stripes) -> Brown (4 stripes)
+-> Black (6 degrees) -> Red/Black coral (7th degree) -> Red/White coral (8th degree)
+-> Red (9th-10th degree)
+```
+
+**`BeltLevel` type must be extended:**
+```typescript
+type BeltLevel =
+  | 'white' | 'blue' | 'purple' | 'brown'   // Color belts (0-4 stripes each)
+  | 'black'                                    // Black belt (0-6 degrees)
+  | 'red_black'                                // Coral belt (7th degree)
+  | 'red_white'                                // Coral belt (8th degree)
+  | 'red';                                     // Red belt (9th-10th degree)
+```
+
+**Stripe/degree rules by belt:**
+
+| Belt | Stripe/Degree Range | Term |
+|------|---------------------|------|
+| White through Brown | 0-4 | "stripes" |
+| Black | 0-6 | "degrees" |
+| Red/Black | 7 | "7th degree" (single value) |
+| Red/White | 8 | "8th degree" (single value) |
+| Red | 9-10 | "9th/10th degree" |
+
+> **Practical note:** 99%+ of users will be White through Black. The coral and red belts exist for completeness — they are valid values in the belt selector. No future or aspirational belts are displayed. The module only shows events the user has recorded.
 
 #### How It Works
 
@@ -337,18 +370,37 @@ const initialEvent: BeltProgressionEvent = {
 };
 ```
 
+#### Profile Module: Belt Progress
+
+A simple, compact card in the Profile page. Not a standalone page. Not a prefilled timeline.
+
+**How it works:** The module only displays events the user has manually recorded. When the user gets promoted or earns a stripe, they open the app and update their belt/stripes. That action creates a dated `BeltProgressionEvent`. The module is a log of those events — nothing more.
+
+**What it shows:**
+- Current belt and stripes
+- Time at current belt (calculated from most recent event date)
+- List of recorded progression events (date + change + optional note), most recent first
+- Empty state if only one event exists (onboarding): just shows current belt and time-at-belt
+
+**What it does NOT show:**
+- No future belts, aspirational nodes, or "next belt" projections
+- No IBJJF minimum time requirements or "on track" comparisons
+- No sparring stats, training volume, or patterns (those belong in Stats)
+- No coaching psychology or plateau warnings (those belong in Insights)
+
+**UI behavior:**
+- Shows current belt + time-at-belt inline in the Profile
+- If the user has 2+ progression events, shows a "View history" link that expands to the full event list
+
 #### Powered Features
 
-The progression history enables:
+The progression event log enables:
 
-| Feature | How It Uses History |
-|---------|---------------------|
-| **Belt Progress Page** | Visual timeline of all promotions |
-| **Time at Belt** | Calculate duration between promotion events |
-| **Promotion Velocity** | "You earned this belt faster than average" |
-| **Milestone Insights** | "1 year since you got your blue belt!" |
-| **Journey Visualization** | Full training timeline from start to current |
-| **Stripe Cadence** | Average time between stripes at each belt |
+| Feature | Location | How It Uses History |
+|---------|----------|---------------------|
+| **Belt Progress** | Profile page module | Shows recorded progression events and time at current belt |
+| **Time at Belt** | Stats hero area | Duration between most recent event date and today |
+| **Milestone Insights** | Insights page | "1 year since you got your blue belt!" |
 
 #### Data Integrity Rules
 

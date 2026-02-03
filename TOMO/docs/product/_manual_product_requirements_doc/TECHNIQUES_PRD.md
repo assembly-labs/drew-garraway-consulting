@@ -444,7 +444,7 @@ The "For You" tab uses persona-specific video configurations:
 | Blue | 2-5 | NO | YES |
 | Purple+ | 4-10 | NO | YES |
 
-**Current Status:** Not implemented. Basic filtering only.
+**Current Status:** Not implemented. No difficulty-based filtering exists. All content visible to all belts.
 
 ---
 

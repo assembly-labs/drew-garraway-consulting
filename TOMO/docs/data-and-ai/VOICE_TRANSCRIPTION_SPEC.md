@@ -29,7 +29,7 @@ TOMO uses AssemblyAI for voice-to-text transcription. This document covers:
 | **Custom vocabulary** | Yes (boost words) | No | Yes |
 | **Real-time streaming** | Yes | No (batch only) | Yes |
 | **BJJ term handling** | Excellent with custom vocab | Poor without fine-tuning | Good |
-| **Pricing** | $0.00025/sec ($0.015/min) | $0.006/min | $0.0044/min |
+| **Pricing** | $0.0062/min (Best) / $0.002/min (Nano) | $0.006/min | $0.0044/min |
 
 **Decision:** AssemblyAI's custom vocabulary support is critical for BJJ terminology. Without it, terms like "de la Riva," "berimbolo," and "omoplata" are frequently mistranscribed.
 
@@ -460,10 +460,10 @@ export const BJJ_VOCABULARY: string[] = [
 
 | Phase | Users | Sessions/User/Week | Avg Recording | Monthly Cost |
 |-------|-------|-------------------|---------------|--------------|
-| TestFlight | 10 | 3 | 90 sec | ~$3 |
-| Launch | 100 | 3 | 90 sec | ~$28 |
-| Growth | 1,000 | 3 | 90 sec | ~$280 |
-| Scale | 10,000 | 3 | 90 sec | ~$2,800 |
+| TestFlight | 10 | 3 | 90 sec | ~$1 |
+| Launch | 100 | 3 | 90 sec | ~$12 |
+| Growth | 1,000 | 3 | 90 sec | ~$120 |
+| Scale | 10,000 | 3 | 90 sec | ~$1,200 |
 
 ### Cost Optimization Strategies
 

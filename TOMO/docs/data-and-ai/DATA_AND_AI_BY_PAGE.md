@@ -64,26 +64,17 @@
 ├─────────────────────────────────────────────────────────────────────┤
 │  Hook: useBeltPersonalization() → { dashboard, profile }             │
 │                                                                      │
-│  WHITE BELT:                                                         │
-│  - Primary Metric: session_streak                                    │
-│  - Modules: WeeklyProgressRing, CalendarHeatMap, DefenseFocus       │
-│  - Celebrate every: 10 sessions                                      │
-│  - Insight focus: "survival_skills"                                  │
-│  - Show competition stats: NO                                        │
+│  PRIMARY METRIC & MODULE VISIBILITY:                                 │
+│  See STATS_CURRENT_STATE_PRD.md for authoritative definitions.       │
 │                                                                      │
-│  BLUE BELT:                                                          │
-│  - Primary Metric: technique_variety                                 │
-│  - Modules: + SessionTypeDistribution, BluesDetector, TechniquePairs │
-│  - Celebrate every: 25 sessions                                      │
-│  - Insight focus: "game_development"                                 │
-│  - Show competition stats: YES                                       │
-│                                                                      │
-│  PURPLE+ BELT:                                                       │
-│  - Primary Metric: sparring_rounds (purple), teaching_sessions (brown)│
-│  - Modules: + YourJourney, TechniqueMastery                         │
-│  - Celebrate every: 50 sessions                                      │
-│  - Insight focus: "systems_thinking" (purple), "refinement" (brown)  │
-│  - Show competition stats: YES                                       │
+│  OTHER BELT-SPECIFIC SETTINGS:                                       │
+│  - White: Celebrate every 10 sessions, insight: "survival_skills",   │
+│           show competition stats: NO                                 │
+│  - Blue: Celebrate every 25 sessions, insight: "game_development",   │
+│          show competition stats: YES                                 │
+│  - Purple+: Celebrate every 50 sessions,                             │
+│             insight: "systems_thinking" (purple) /                    │
+│             "refinement" (brown), show competition stats: YES        │
 └─────────────────────────────────────────────────────────────────────┘
                                    ↓
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -99,11 +90,17 @@
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-## Stats Modules by Belt
+> **Breakthrough Detection:** See [STATS_CURRENT_STATE_PRD.md](../product/_manual_product_requirements_doc/STATS_CURRENT_STATE_PRD.md) for canonical breakthrough type definitions and detection logic. The breakthrough detection described in the AI Processing block above is a summary; the Stats PRD defines the authoritative breakthrough types, trigger conditions, and visual specifications.
+
+## Stats Modules: Data Requirements & AI Processing
 
 > **Note:** Belt progress is shown in **Profile/Bio**, not Stats. Stats focuses on training patterns, not promotion milestones.
 
-### White Belt (Retention Focus)
+> **Module Visibility:** See [STATS_CURRENT_STATE_PRD.md](../_manual_product_requirements_doc/STATS_CURRENT_STATE_PRD.md) for the authoritative module visibility matrix by belt level.
+>
+> **Primary Metric by Belt:** See [STATS_CURRENT_STATE_PRD.md](../_manual_product_requirements_doc/STATS_CURRENT_STATE_PRD.md) for the authoritative hero metric definitions per belt.
+
+The tables below document **data requirements and AI processing** for each module. They do not define which modules are visible at which belt -- refer to the PRD linked above for that.
 
 | Module | Data Required | AI Processing |
 |--------|---------------|---------------|
@@ -111,37 +108,19 @@
 | `CalendarHeatMap` | Session dates (90 days) | Streak detection, gap identification |
 | `DashboardSummaryCard` | Total sessions, hours, belt, streak | Aggregation only |
 | `DefenseFocus` | Submissions given/received by type | Defense/offense ratio analysis |
-
-### Blue Belt (Game Development)
-
-| Module | Data Required | AI Processing |
-|--------|---------------|---------------|
 | `SessionTypeDistribution` | Session types (gi/nogi/open mat/drilling) | Distribution analysis |
 | `SparringPatternAnalysis` | Submission exchanges | Success rate calculation, trend analysis |
 | `AchievementTimeline` | Milestones, promotions, PRs | Milestone detection |
 | `TechniquePairings` | Techniques logged together | Co-occurrence analysis |
 | `BluesDetector` | Session gaps, sentiment, frequency trend | Risk signal aggregation |
-
-### Purple+ Belt (Systems & Mastery)
-
-| Module | Data Required | AI Processing |
-|--------|---------------|---------------|
-| `SessionTypeDistribution` | Session types + comp prep | Distribution analysis |
-| `SparringPatternAnalysis` | Advanced submission data | Success rate, technique granularity |
-| `AchievementTimeline` | Multi-year milestones | Milestone detection |
 | `YourJourney` | Multi-year session data, submissions | Long-term trend analysis |
 | `TechniqueMastery` | Technique frequency, outcomes | Specialization depth scoring |
-
-### All Belts (Universal)
-
-| Module | Data Required | AI Processing | Notes |
-|--------|---------------|---------------|-------|
-| `RecentRolls` | Last 5-10 submissions received | Defense coaching suggestions | "Watch Out" section |
-| `StyleFingerprint` | Positional strength data | Archetype detection | Blue+ with 20+ sessions |
-| `TournamentReadinessCard` | Consistency, technique, sparring, comp history | Readiness assessment | On-demand |
-| `AttackProfile` | Submission history | Submission story narrative | Blue+ only |
-| `BreakthroughHero` | Achievement data | Breakthrough detection | When triggered |
-| `LockedFeaturesFooter` | Belt level, session count | Feature gating | Shows unlock criteria |
+| `RecentRolls` | Last 5-10 submissions received | Defense coaching suggestions |
+| `StyleFingerprint` | Positional strength data | Archetype detection |
+| `TournamentReadinessCard` | Consistency, technique, sparring, comp history | Readiness assessment |
+| `AttackProfile` | Submission history | Submission story narrative |
+| `BreakthroughHero` | Achievement data | Breakthrough detection |
+| `LockedFeaturesFooter` | Belt level, session count | Feature gating |
 
 ## Implementation Notes
 
@@ -260,11 +239,15 @@ const Dashboard = () => {
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
+> **Belt Psychology:** See [BELT_PERSONALIZATION_SYSTEM.md](../product/BELT_PERSONALIZATION_SYSTEM.md) for canonical belt psychology profiles. The belt personalization block above summarizes insight-specific adaptations; the full psychology definitions (struggles, motivations, plateaus, dropout risks) live in that document.
+
+> **AI Tone Profiles:** See [BELT_INTEGRATION_SPEC.md](../product/BELT_INTEGRATION_SPEC.md) for canonical tone profile definitions. The tone profiles, vocabulary levels, and encouragement settings above are summaries; the integration spec is the authoritative source.
+
 ## Generation Rules
 
 | Rule | Implementation |
 |------|----------------|
-| **Frequency** | Max 1 insight per day |
+| **Frequency** | Max 1 insight per calendar day |
 | **Trigger** | Only if new session logged since last insight |
 | **Length** | 2-4 paragraphs, ~150-300 words |
 | **Coach Deferral** | ALWAYS include "worth discussing with your coach" |
@@ -545,6 +528,8 @@ const JournalEntryCard = ({ session }) => {
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
+> **Video Recommendations:** See [TECHNIQUES_PRD.md](../product/_manual_product_requirements_doc/TECHNIQUES_PRD.md) for the authoritative recommendation algorithm specification. The "For You" algorithm details above are a summary; the Techniques PRD defines the canonical belt personalization rules, content gating, and recommendation logic.
+
 ## Video Categories
 
 **Technical:**
@@ -598,6 +583,8 @@ const TechniqueLibrary = () => {
 # Cross-Cutting: Risk Detection System
 
 **Location:** `/prototype/src/config/belt-system/risk-signals.ts`
+
+> **Risk Signals:** See [TECH_DATA_AI_OVERVIEW.md](../product/_manual_product_requirements_doc/TECH_DATA_AI_OVERVIEW.md) for the canonical risk signal definitions and belt-specific risk modifiers. The code at `/prototype/src/config/belt-system/risk-signals.ts` is the source of truth for implementation; this section documents the operational context for how risk detection integrates with each page.
 
 Risk detection operates across all pages, feeding data into Insights and Dashboard.
 

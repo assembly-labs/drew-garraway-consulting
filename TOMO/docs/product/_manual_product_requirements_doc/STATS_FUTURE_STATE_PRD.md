@@ -809,56 +809,52 @@ interface EnhancedSessionLog {
 ### Phase 1: Retention Critical (White Belt)
 
 **Priority:** P0
-**Estimated Effort:** 2 sprints
 
-| Task | Effort | Dependencies |
-|------|--------|--------------|
-| Create `SurvivalScore` component | 3 days | Round duration data |
-| Create `FoundationBuilder` component | 2 days | Skill progress schema |
-| Create `JourneyTimeline` component | 2 days | Milestone definitions |
-| Update `useBeltPersonalization` hook | 1 day | — |
-| Add module visibility logic | 1 day | Hook updates |
-| Hide competition modules for white | 0.5 days | Visibility matrix |
+| Task | Dependencies |
+|------|--------------|
+| Create `SurvivalScore` component | Round duration data |
+| Create `FoundationBuilder` component | Skill progress schema |
+| Create `JourneyTimeline` component | Milestone definitions |
+| Update `useBeltPersonalization` hook | — |
+| Add module visibility logic | Hook updates |
+| Hide competition modules for white | Visibility matrix |
 
 ### Phase 2: Identity Development (Blue Belt)
 
 **Priority:** P0
-**Estimated Effort:** 2 sprints
 
-| Task | Effort | Dependencies |
-|------|--------|--------------|
-| Create `GameDNA` component | 4 days | Position tracking |
-| Create `TechniqueWeb` component | 5 days | Chain detection |
-| Create `PressureMeter` component | 2 days | Partner belt tracking |
-| Create `HoleFinder` component | 3 days | Gap detection |
-| Add `rollContext` to session logs | 1 day | Schema update |
-| Enhance `BluesDetector` | 3 days | Sentiment analysis |
+| Task | Dependencies |
+|------|--------------|
+| Create `GameDNA` component | Position tracking |
+| Create `TechniqueWeb` component | Chain detection |
+| Create `PressureMeter` component | Partner belt tracking |
+| Create `HoleFinder` component | Gap detection |
+| Add `rollContext` to session logs | Schema update |
+| Enhance `BluesDetector` | Sentiment analysis |
 
 ### Phase 3: Systems Thinking (Purple Belt)
 
 **Priority:** P1
-**Estimated Effort:** 2 sprints
 
-| Task | Effort | Dependencies |
-|------|--------|--------------|
-| Create `SystemMastery` component | 5 days | System schema |
-| Create `TeachingImpact` component | 3 days | Teaching tracking |
-| Create `EfficiencyMatrix` component | 3 days | Historical data |
-| Enhance `LongGame` component | 2 days | Multi-year aggregation |
-| Enhance `Specialization` component | 2 days | Position depth |
+| Task | Dependencies |
+|------|--------------|
+| Create `SystemMastery` component | System schema |
+| Create `TeachingImpact` component | Teaching tracking |
+| Create `EfficiencyMatrix` component | Historical data |
+| Enhance `LongGame` component | Multi-year aggregation |
+| Enhance `Specialization` component | Position depth |
 
 ### Phase 4: Polish & Integration
 
 **Priority:** P1
-**Estimated Effort:** 1 sprint
 
-| Task | Effort |
-|------|--------|
-| Animation and transitions | 2 days |
-| Accessibility audit | 1 day |
-| Performance optimization | 2 days |
-| A/B testing setup | 2 days |
-| Documentation | 1 day |
+| Task |
+|------|
+| Animation and transitions |
+| Accessibility audit |
+| Performance optimization |
+| A/B testing setup |
+| Documentation |
 
 ---
 

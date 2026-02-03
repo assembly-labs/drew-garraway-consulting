@@ -1,7 +1,7 @@
 # TOMO Feature Documentation
 
 **Last Updated:** January 25, 2026
-**Total Features:** 87 across 11 pages
+**Total Features:** 93 across 11 pages
 **Status:** Prototype complete at bjjj.pages.dev
 
 > This is the single source of truth for all TOMO features. For belt personalization deep-dive, see `BELT_INTEGRATION_SPEC.md`. For stats module vision, see `STATS_MODULE_STRATEGY.md`.
@@ -53,17 +53,17 @@
 | Page | Features | Status |
 |------|----------|--------|
 | Onboarding | 4 | Done |
-| Session Logger | 9 | Done |
-| Session History | 6 | Done |
-| Session Detail | 8 | Done |
+| Session Logger | 11 | Done |
+| Session History | 9 | Done |
+| Session Detail | 9 | Done |
 | Stats (Dashboard) | 19 | Done |
 | Technique Library | 8 | Done |
 | Training Feedback | 6 | Partial |
-| Belt Progress | 7 | Partial |
+| Belt Progress (Profile Module) | 3 | Partial |
 | Profile | 7 | Done |
 | Settings | 8 | Done |
 | Cross-Cutting | 5 | Partial |
-| **TOTAL** | **87** | |
+| **TOTAL** | **93** | |
 
 ---
 
@@ -173,6 +173,8 @@ Users are exhausted post-training: depleted glucose, elevated cortisol, 20-40% r
 | 2.7 | Submission Picker | Visual picker for subs given/received | `submissionsGiven/Received` | B+ | Done |
 | 2.8 | Technique Suggestions | Help name techniques | Based on history + belt | All | Done |
 | 2.9 | Success Confirmation | Belt-personalized message | `sessionCount` | All | Done |
+| 2.10 | "What's Clicking" / "What Needs Work" | Explicit capture of session wins and struggles as chips in the Review Phase, pre-populated from AI extraction and user-editable (max 5 per section) | `workedWell[]`, `struggles[]` | All | Planned |
+| 2.11 | Post-Save Summary Card | Mini journal entry card shown on Success screen after save, previewing how the session will appear in the Journal (auto-dismiss after 3 seconds or tap to continue) | Session summary data | All | Planned |
 
 *Mock transcription in prototype; AssemblyAI planned for iOS
 
@@ -236,6 +238,9 @@ Entry Screen          →  Recording        →  Processing    →  Review      
 | 3.4 | Grouped Entries | Today/Yesterday/This Week/Earlier | `sessions[].date` | All | Done |
 | 3.5 | Journal Entry Cards | Session preview cards | Session data | All | Done |
 | 3.6 | Empty State | Belt-specific encouragement | `user.belt` | All | Done |
+| 3.7 | Infinite Scroll | Lazy loading with month-grouped sticky headers, replacing fixed entry limit (initial load 10, load 10 more at 200px from bottom) | `sessions[]`, `sessions[].date` | All | Planned |
+| 3.8 | Delete Session | Soft delete via overflow menu in SessionDetail (sets `deleted_at` timestamp); requires confirmation dialog, navigates back to Journal with toast | `session.deleted_at` | All | Planned |
+| 3.9 | Backdate Session | "Add a past session" link below Log Session CTA; opens date picker (last 30 days, no future dates, default yesterday) then launches standard VoiceFirstLogger flow with selected date pre-filled | `session.date`, `session.createdAt` | All | Planned |
 
 ### Card Complexity by Belt
 
@@ -280,6 +285,7 @@ WHITE BELT CARD                    PURPLE BELT CARD
 | 4.6 | Notes Edit | Free-form notes | `notes` | All | Done |
 | 4.7 | Energy & Mood Edit | Physical/mental state | `energyLevel`, `mood` | All | Done |
 | 4.8 | Bottom Sheet Modal | Smooth section editing | Section data | All | Done |
+| 4.9 | Date/Time Editing | Edit session date and time in edit mode via date/time pickers; date limited to past only (last 90 days), changing date moves entry to correct position in history with confirmation prompt | `session.date`, `session.time` | All | Planned |
 
 ### Edit Flow
 
@@ -306,14 +312,7 @@ The dashboard fundamentally changes based on belt level—not just what data is 
 | 5.1.4 | Recent Rolls | Shows submissions received | `submissionsReceived[]` | Done |
 | 5.1.5 | Locked Features Footer | Shows what unlocks next | `user.belt`, `sessionCount` | Done |
 
-**Hero Metric by Belt:**
-
-| Belt | Primary Metric | Secondary Metrics |
-|------|----------------|-------------------|
-| White | Session streak | Sessions/week, total |
-| Blue | Technique variety | Streak, rounds, time at belt |
-| Purple | Sparring rounds | Teaching, variety, sub ratio |
-| Brown/Black | Teaching sessions | Rounds, sub ratio |
+**Hero Metric by Belt:** See [STATS_CURRENT_STATE_PRD.md](_manual_product_requirements_doc/STATS_CURRENT_STATE_PRD.md) for the authoritative hero metric definitions per belt level.
 
 ### 5.2 White Belt Modules
 
@@ -359,29 +358,16 @@ The dashboard fundamentally changes based on belt level—not just what data is 
 
 ### Module Visibility Matrix
 
-| Module | White | Blue | Purple+ |
-|--------|-------|------|---------|
-| Weekly Progress Ring | YES | NO | NO |
-| Calendar Heat Map | YES | YES | YES |
-| Defense Focus | YES | NO | NO |
-| Style Profile | NO | YES | YES |
-| Session Type Distribution | NO | YES | YES |
-| Sparring Pattern Analysis | NO | YES | YES |
-| Achievement Timeline | NO | YES | YES |
-| Attack Profile | NO | YES | YES |
-| Tournament Readiness | NO | YES | YES |
-| Technique Pairings | NO | YES | NO |
-| Blues Detector | NO | YES | NO |
-| Your Journey | NO | NO | YES |
-| Technique Mastery | NO | NO | YES |
+> **Authoritative source:** See [STATS_CURRENT_STATE_PRD.md](_manual_product_requirements_doc/STATS_CURRENT_STATE_PRD.md) for the complete module visibility matrix by belt level (White/Blue/Purple/Brown/Black). That document is the single source of truth for which modules are visible at each belt.
 
 ### Belt Personalization (Dashboard)
 
 **Hook:** `useBeltPersonalization()` → `{ dashboard, profile }`
 
+> **Primary Metric by Belt:** See [STATS_CURRENT_STATE_PRD.md](_manual_product_requirements_doc/STATS_CURRENT_STATE_PRD.md) for authoritative definitions.
+
 | Adaptation | White | Blue | Purple+ |
 |------------|-------|------|---------|
-| Primary Metric | `session_streak` | `technique_variety` | `sparring_rounds` |
 | Streak Emphasis | HIGH | MEDIUM | LOW |
 | Show Competition Stats | NO | YES | YES |
 | Insight Focus | "survival_skills" | "game_development" | "systems_thinking" |
@@ -442,7 +428,7 @@ John Danaher, Gordon Ryan, Lachlan Giles, Craig Jones
 | Include Conceptual | NO | YES | YES |
 | Weekly Recommendations | 3 | 5 | 3 (quality focus) |
 
-### Gated Categories
+### Gated Categories (Planned - Not Implemented)
 
 | Category | White | Blue | Purple+ |
 |----------|-------|------|---------|
@@ -451,7 +437,9 @@ John Danaher, Gordon Ryan, Lachlan Giles, Craig Jones
 | Leg Locks | NO | Basic | YES |
 | Advanced Systems | NO | NO | YES |
 
-**Integration Status:** 65% — Basic filtering works. Log Practice button persists to localStorage (`bjj-practice-logs`), updates TechniqueProgress, shows toast feedback. See `/docs/data-and-ai/PRACTICE_TRACKING.md` for data spec. Difficulty gating not implemented.
+**Current Status:** Not implemented. All content is visible to all belt levels. The table above represents the planned design.
+
+**Integration Status:** 65% — Belt suggestions work (recommended positions per belt). Log Practice button persists to localStorage (`bjj-practice-logs`), updates TechniqueProgress, shows toast feedback. See `/docs/data-and-ai/PRACTICE_TRACKING.md` for data spec. Content gating and difficulty filtering not implemented.
 
 ---
 
@@ -511,40 +499,30 @@ When dropout risk signals are detected:
 
 ---
 
-## 8. Belt Progress
+## 8. Belt Progress (Profile Module)
 
-**Component:** `BeltProgress.tsx`
-**Purpose:** Visualize belt journey with context and plateau support
+> **Not a standalone page.** Belt progress is a simple module within the Profile page. The existing `BeltProgress.tsx` page component should be deprecated.
+>
+> **Detailed spec:** See [PROFILE_SETTINGS_PRD.md](/_manual_product_requirements_doc/PROFILE_SETTINGS_PRD.md) — "Belt & Stripe Progression History" section.
+
+**Location:** Profile page module
+**Purpose:** Record belt and stripe changes as the user manually updates the app. Event-sourced — only shows what the user has recorded, no future projections or comparisons.
 
 ### Features
 
 | # | Feature | Description | Data Used | Access | Status |
 |---|---------|-------------|-----------|--------|--------|
-| 8.1 | Belt History Timeline | Visual promotion timeline | `beltHistory[]` | All | Done |
-| 8.2 | Time at Current Belt | Duration at level | `currentBeltDate` | All | Done |
-| 8.3 | Session Volume at Belt | Sessions logged at belt | `sessions[]` filtered | All | Done |
-| 8.4 | IBJJF Timeline Reference | Minimum time context | Static requirements | B+ | Done |
-| 8.5 | Techniques at Belt | Aggregate techniques practiced | `techniquesDrilled[]` | All | Done |
-| 8.6 | Struggles Log | Common struggles at belt | `struggles[]` | All | Done |
-| 8.7 | Plateau Guidance | Symptoms + breakthrough strategies | `currentPlateau` | All | Partial |
+| 8.1 | Belt Progress Display | Current belt + time at belt + recorded event history | `beltProgressionEvents[]` | All | Planned (redesign) |
+| 8.2 | Time at Current Belt | Duration since most recent progression event | Most recent event date | All | Done |
+| 8.3 | Belt/Stripe Edit | Tap to update belt or stripes, creates dated event | Profile edit flow | All | Planned |
+
+### Supported Belt Levels
+
+Full IBJJF path: White, Blue, Purple, Brown, Black, Red/Black, Red/White, Red.
 
 ### Critical Display Note
 
 Always include: **"Belt promotions are your coach's decision—this is for context only."**
-
-We illuminate progress. We don't dictate timelines or suggest readiness for promotion.
-
-### Plateau Phases
-
-| Belt | Timeframe | Plateau Name | Symptoms |
-|------|-----------|--------------|----------|
-| White | 3-6 months | "Novelty Wears Off" | Techniques don't work, getting smashed |
-| White | 6-9 months | "The Grind" | Progress invisible, doubt creeping in |
-| Blue | 0-6 months | "Post-Promo Letdown" | Skill didn't change overnight |
-| Blue | 6-12 months | "The Valley" | Flat learning curve, imposter syndrome |
-| Purple | Early | "Old Moves Fail" | Opponents know your game |
-
-**Integration Status:** 30% — Retrieves plateau data. Doesn't display guidance yet.
 
 ---
 

@@ -152,7 +152,6 @@ Call to action: "Log another session to unlock next insight"
 | **New Session Required** | Must log session since last insight | Ensures new data to analyze |
 | **Minimum Sessions** | 3+ total sessions | Need data for meaningful patterns |
 | **Same-Day Cache** | If generated today, show cached | No wasted LLM calls |
-| **Cooldown** | 24h minimum between generations | Value through scarcity |
 
 ### Eligibility Check (Pseudocode)
 
@@ -256,6 +255,8 @@ interface ComputedPatterns {
 ```
 
 ### Journal Text Analysis
+
+> **Risk Signals:** See [TECH_DATA_AI_OVERVIEW.md](TECH_DATA_AI_OVERVIEW.md) for canonical risk signal definitions. Risk detection thresholds and belt-specific modifiers are documented there; this section covers journal text pattern analysis only.
 
 The system analyzes freeform notes for patterns (from `journal-patterns.ts`):
 
@@ -474,6 +475,8 @@ FORMATTING:
 
 ### Belt Tone Profiles
 
+> **AI Tone Profiles:** See [BELT_INTEGRATION_SPEC.md](../BELT_INTEGRATION_SPEC.md) for canonical tone profile definitions. The table below is a summary; the integration spec is the authoritative source for tone profile names, vocabulary levels, and encouragement settings.
+
 | Belt | Tone | Warmth | Directness | Vocabulary | Encouragement |
 |------|------|--------|------------|------------|---------------|
 | White | Supportive | High | Gentle | Basic | HIGH |
@@ -544,6 +547,8 @@ EXAMPLE TONE:
 ---
 
 ## Belt Personalization
+
+> **Belt Psychology:** See [BELT_PERSONALIZATION_SYSTEM.md](../BELT_PERSONALIZATION_SYSTEM.md) for canonical belt psychology profiles. The section below summarizes insight-specific adaptations; the full psychology definitions (struggles, motivations, plateaus, dropout risks) live in that document.
 
 ### Insight Focus by Belt
 
