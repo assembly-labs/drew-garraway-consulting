@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luka Financial | Trusted Wealth Management & Financial Planning</title>
+    <meta name="description" content="Luka Financial provides personalized wealth management, financial planning, and investment advisory services. Build confidence in your financial future with a trusted partner.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Luka Financial | Trusted Wealth Management">
+    <meta property="og:description" content="Personalized wealth management and financial planning. Build confidence in your financial future.">
+    <meta property="og:url" content="https://lukafinancial.com">
+    <meta property="og:site_name" content="Luka Financial">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Luka Financial | Trusted Wealth Management">
+    <meta name="twitter:description" content="Personalized wealth management and financial planning. Build confidence in your financial future.">
+
+    <!-- Preconnect for fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Compiled Tailwind CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FinancialService",
+        "name": "Luka Financial",
+        "description": "Personalized wealth management, financial planning, and investment advisory services.",
+        "url": "https://lukafinancial.com",
+        "areaServed": "United States",
+        "serviceType": ["Wealth Management", "Financial Planning", "Investment Advisory", "Retirement Planning"],
+        "priceRange": "$$",
+        "sameAs": [],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "availableLanguage": "English"
+        }
+    }
+    </script>
+</head>
+
+<body x-data="{ mobileNavOpen: false }" class="flex flex-col min-h-screen">
+
+    <!-- Skip Navigation -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- ============================================
+         HEADER / NAVIGATION
+         ============================================ -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-30 transition-all duration-300" role="banner">
+        <div class="container-lg">
+            <nav class="flex items-center justify-between h-18 sm:h-20" role="navigation" aria-label="Main navigation">
+
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-2 z-10" aria-label="Luka Financial - Home">
+                    <span class="text-2xl font-heading font-bold text-navy-900">Luka</span>
+                    <span class="text-2xl font-heading font-light text-navy-500">Financial</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="#services" class="nav-link text-sm">Services</a>
+                    <a href="#about" class="nav-link text-sm">About</a>
+                    <a href="#approach" class="nav-link text-sm">Our Approach</a>
+                    <a href="#testimonials" class="nav-link text-sm">Testimonials</a>
+                    <a href="#contact" class="btn btn-primary text-sm">Schedule a Conversation</a>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button
+                    @click="mobileNavOpen = true"
+                    class="lg:hidden p-2 -mr-2 text-navy-700 hover:text-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 rounded-lg"
+                    aria-label="Open menu"
+                    :aria-expanded="mobileNavOpen.toString()"
+                >
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Mobile Navigation Overlay -->
+        <div
+            x-show="mobileNavOpen"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            @click="mobileNavOpen = false"
+            class="fixed inset-0 bg-navy-900/40 z-40"
+            x-cloak
+        ></div>
+
+        <!-- Mobile Navigation Panel -->
+        <div
+            x-show="mobileNavOpen"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="translate-x-full"
+            x-transition:enter-end="translate-x-0"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="translate-x-0"
+            x-transition:leave-end="translate-x-full"
+            @keydown.escape.window="mobileNavOpen = false"
+            class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white z-50 shadow-xl"
+            x-cloak
+        >
+            <div class="flex flex-col h-full p-6">
+                <div class="flex justify-end mb-8">
+                    <button
+                        @click="mobileNavOpen = false"
+                        class="p-2 -mr-2 text-navy-500 hover:text-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 rounded-lg"
+                        aria-label="Close menu"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="flex flex-col gap-1" aria-label="Mobile navigation">
+                    <a @click="mobileNavOpen = false" href="#services" class="px-4 py-3 text-navy-700 hover:text-navy-900 hover:bg-navy-50 rounded-lg font-medium transition-colors">Services</a>
+                    <a @click="mobileNavOpen = false" href="#about" class="px-4 py-3 text-navy-700 hover:text-navy-900 hover:bg-navy-50 rounded-lg font-medium transition-colors">About</a>
+                    <a @click="mobileNavOpen = false" href="#approach" class="px-4 py-3 text-navy-700 hover:text-navy-900 hover:bg-navy-50 rounded-lg font-medium transition-colors">Our Approach</a>
+                    <a @click="mobileNavOpen = false" href="#testimonials" class="px-4 py-3 text-navy-700 hover:text-navy-900 hover:bg-navy-50 rounded-lg font-medium transition-colors">Testimonials</a>
+                </nav>
+                <div class="mt-auto pt-6 border-t border-navy-100">
+                    <a href="#contact" @click="mobileNavOpen = false" class="btn btn-primary w-full text-center">Schedule a Conversation</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================
+         MAIN CONTENT
+         ============================================ -->
+    <main id="main" class="flex-1">
+
+        <!-- ============================================
+             HERO SECTION
+             ============================================ -->
+        <section class="relative pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36 bg-gradient-to-b from-navy-50/60 to-cream overflow-hidden">
+            <!-- Subtle decorative element -->
+            <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-gold-50/30 to-transparent pointer-events-none" aria-hidden="true"></div>
+
+            <div class="container-lg relative">
+                <div class="max-w-3xl">
+                    <p class="eyebrow mb-4 reveal">Wealth Management & Financial Planning</p>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-semibold text-navy-900 mb-6 reveal">
+                        Build Confidence in<br>
+                        <span class="text-navy-600">Your Financial Future</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-navy-600 leading-relaxed max-w-2xl mb-10 reveal">
+                        Personalized strategies for growing, protecting, and transitioning
+                        your wealth. We partner with professionals and families who value
+                        clarity, discipline, and a long-term perspective.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 reveal">
+                        <a href="#contact" class="btn btn-primary btn-lg">
+                            Schedule a Conversation
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                        <a href="#approach" class="btn btn-secondary btn-lg">Learn Our Approach</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             TRUST BAR / CREDENTIALS
+             ============================================ -->
+        <section class="py-8 sm:py-10 border-y border-navy-100/60 bg-white" aria-label="Credentials and affiliations">
+            <div class="container-lg">
+                <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-navy-400 text-sm">
+                    <span class="font-medium text-navy-500">Trusted By:</span>
+                    <span>CFP&reg; Certified</span>
+                    <span class="hidden sm:inline text-navy-200">|</span>
+                    <span>Series 65 Licensed</span>
+                    <span class="hidden sm:inline text-navy-200">|</span>
+                    <span>Fiduciary Standard</span>
+                    <span class="hidden sm:inline text-navy-200">|</span>
+                    <span>SEC Registered</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SERVICES SECTION
+             ============================================ -->
+        <section id="services" class="section bg-cream">
+            <div class="container-lg">
+                <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+                    <p class="eyebrow mb-3">What We Do</p>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-semibold text-navy-900 mb-4">
+                        Comprehensive Financial Guidance
+                    </h2>
+                    <p class="text-navy-600 leading-relaxed">
+                        Every financial plan is as unique as the individual behind it.
+                        We focus on what matters most to you.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 reveal">
+                    <!-- Service Card 1 -->
+                    <div class="card card-hover stagger">
+                        <div class="w-12 h-12 rounded-lg bg-navy-50 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-navy-900 mb-2">Wealth Management</h3>
+                        <p class="text-navy-600 text-sm leading-relaxed">
+                            Disciplined investment management tailored to your risk profile,
+                            time horizon, and financial objectives. We focus on long-term
+                            growth with downside protection.
+                        </p>
+                    </div>
+
+                    <!-- Service Card 2 -->
+                    <div class="card card-hover stagger">
+                        <div class="w-12 h-12 rounded-lg bg-navy-50 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-navy-900 mb-2">Financial Planning</h3>
+                        <p class="text-navy-600 text-sm leading-relaxed">
+                            Comprehensive plans covering cash flow, tax strategy, education
+                            funding, insurance needs, and estate considerations. A clear
+                            roadmap for every stage of life.
+                        </p>
+                    </div>
+
+                    <!-- Service Card 3 -->
+                    <div class="card card-hover stagger">
+                        <div class="w-12 h-12 rounded-lg bg-navy-50 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-navy-900 mb-2">Retirement Planning</h3>
+                        <p class="text-navy-600 text-sm leading-relaxed">
+                            Strategic retirement income planning, Social Security optimization,
+                            and distribution strategies. Know exactly where you stand and
+                            what it takes to get there.
+                        </p>
+                    </div>
+
+                    <!-- Service Card 4 -->
+                    <div class="card card-hover stagger">
+                        <div class="w-12 h-12 rounded-lg bg-navy-50 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-navy-900 mb-2">Risk Management</h3>
+                        <p class="text-navy-600 text-sm leading-relaxed">
+                            Insurance analysis, liability planning, and asset protection
+                            strategies. Safeguard what you have built against the
+                            unexpected.
+                        </p>
+                    </div>
+
+                    <!-- Service Card 5 -->
+                    <div class="card card-hover stagger">
+                        <div class="w-12 h-12 rounded-lg bg-navy-50 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-navy-900 mb-2">Estate Planning</h3>
+                        <p class="text-navy-600 text-sm leading-relaxed">
+                            Wealth transfer strategies, trust coordination, and legacy
+                            planning. Ensure your values and assets reach the next
+                            generation as intended.
+                        </p>
+                    </div>
+
+                    <!-- Service Card 6 -->
+                    <div class="card card-hover stagger">
+                        <div class="w-12 h-12 rounded-lg bg-navy-50 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-navy-900 mb-2">Business Owner Services</h3>
+                        <p class="text-navy-600 text-sm leading-relaxed">
+                            Succession planning, key-person strategies, and business
+                            valuation guidance. Align your business and personal wealth
+                            goals for a seamless transition.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             ABOUT / WHY US SECTION
+             ============================================ -->
+        <section id="about" class="section bg-white">
+            <div class="container-lg">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <!-- Content -->
+                    <div class="reveal">
+                        <p class="eyebrow mb-3">About Luka Financial</p>
+                        <h2 class="text-3xl sm:text-4xl font-heading font-semibold text-navy-900 mb-6">
+                            A Partnership Built on<br>Trust and Transparency
+                        </h2>
+                        <div class="divider mb-6"></div>
+                        <div class="space-y-4 text-navy-600 leading-relaxed">
+                            <p>
+                                Luka Financial was founded on a simple principle: financial
+                                advice should serve the client first. As a fee-only fiduciary,
+                                we have no hidden incentives &mdash; just an unwavering commitment
+                                to your best interests.
+                            </p>
+                            <p>
+                                With over 20 years of experience guiding professionals, families,
+                                and business owners, we bring institutional-quality thinking to
+                                personal wealth management. Our clients value straight talk,
+                                proactive planning, and a partner who understands that finances
+                                are deeply personal.
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-3 gap-6 mt-10">
+                            <div>
+                                <p class="stat-value" data-count="20">20+</p>
+                                <p class="stat-label">Years Experience</p>
+                            </div>
+                            <div>
+                                <p class="stat-value">$250M+</p>
+                                <p class="stat-label">Assets Managed</p>
+                            </div>
+                            <div>
+                                <p class="stat-value">98%</p>
+                                <p class="stat-label">Client Retention</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="reveal">
+                        <div class="relative">
+                            <div class="aspect-[4/5] rounded-2xl bg-gradient-to-br from-navy-100 to-navy-50 flex items-center justify-center overflow-hidden">
+                                <!-- Replace with actual headshot -->
+                                <div class="text-center p-8">
+                                    <div class="w-32 h-32 rounded-full bg-navy-200/60 mx-auto mb-6 flex items-center justify-center">
+                                        <svg class="w-16 h-16 text-navy-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                        </svg>
+                                    </div>
+                                    <p class="text-navy-500 text-sm font-medium">Professional headshot</p>
+                                    <p class="text-navy-400 text-xs mt-1">Replace with actual image</p>
+                                </div>
+                            </div>
+                            <!-- Decorative accent -->
+                            <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-gold-100 rounded-2xl -z-10" aria-hidden="true"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             OUR APPROACH SECTION
+             ============================================ -->
+        <section id="approach" class="section bg-navy-900 text-white">
+            <div class="container-lg">
+                <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+                    <p class="eyebrow !text-gold-400 mb-3">Our Approach</p>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-semibold text-white mb-4">
+                        A Process You Can Trust
+                    </h2>
+                    <p class="text-navy-300 leading-relaxed">
+                        We follow a disciplined, transparent process that puts your
+                        goals at the center of every decision.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 reveal">
+                    <!-- Step 1 -->
+                    <div class="text-center stagger">
+                        <div class="w-14 h-14 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center mx-auto mb-5">
+                            <span class="text-gold-400 font-heading font-bold text-xl">1</span>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-white mb-2">Discovery</h3>
+                        <p class="text-navy-300 text-sm leading-relaxed">
+                            We listen. Understanding your goals, concerns, and values
+                            is the foundation of everything we build together.
+                        </p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="text-center stagger">
+                        <div class="w-14 h-14 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center mx-auto mb-5">
+                            <span class="text-gold-400 font-heading font-bold text-xl">2</span>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-white mb-2">Strategy</h3>
+                        <p class="text-navy-300 text-sm leading-relaxed">
+                            We develop a comprehensive, personalized plan that addresses
+                            your complete financial picture &mdash; not just investments.
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="text-center stagger">
+                        <div class="w-14 h-14 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center mx-auto mb-5">
+                            <span class="text-gold-400 font-heading font-bold text-xl">3</span>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-white mb-2">Implementation</h3>
+                        <p class="text-navy-300 text-sm leading-relaxed">
+                            We execute with precision, coordinating across investments,
+                            tax planning, insurance, and estate considerations.
+                        </p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="text-center stagger">
+                        <div class="w-14 h-14 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center mx-auto mb-5">
+                            <span class="text-gold-400 font-heading font-bold text-xl">4</span>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-white mb-2">Partnership</h3>
+                        <p class="text-navy-300 text-sm leading-relaxed">
+                            We monitor, adjust, and communicate proactively. Your plan
+                            evolves as your life does. You are never on autopilot.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             TESTIMONIALS SECTION
+             ============================================ -->
+        <section id="testimonials" class="section bg-ivory">
+            <div class="container-lg">
+                <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+                    <p class="eyebrow mb-3">Client Stories</p>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-semibold text-navy-900 mb-4">
+                        Trusted by Those Who Plan Ahead
+                    </h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 lg:gap-8 reveal" x-data="{ activeTestimonial: null }">
+                    <!-- Testimonial 1 -->
+                    <div class="card relative stagger">
+                        <div class="quote-mark relative pl-6 mb-4">
+                            <p class="text-navy-700 text-sm leading-relaxed italic">
+                                Working with Luka Financial gave us clarity we never had before.
+                                For the first time, we feel genuinely confident about retirement.
+                                They took the complexity out of the equation and replaced it
+                                with a plan we actually understand.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-6 pt-4 border-t border-navy-100">
+                            <div class="w-10 h-10 rounded-full bg-navy-100 flex items-center justify-center flex-shrink-0">
+                                <span class="text-navy-500 font-medium text-sm">MR</span>
+                            </div>
+                            <div>
+                                <p class="text-navy-900 font-medium text-sm">Michael R.</p>
+                                <p class="text-navy-500 text-xs">Business Owner, 15-year client</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="card relative stagger">
+                        <div class="quote-mark relative pl-6 mb-4">
+                            <p class="text-navy-700 text-sm leading-relaxed italic">
+                                After my divorce, I needed someone I could trust with a fresh
+                                start. Luka Financial was patient, thorough, and never made me
+                                feel judged. They helped me rebuild with purpose and a real
+                                strategy.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-6 pt-4 border-t border-navy-100">
+                            <div class="w-10 h-10 rounded-full bg-navy-100 flex items-center justify-center flex-shrink-0">
+                                <span class="text-navy-500 font-medium text-sm">SK</span>
+                            </div>
+                            <div>
+                                <p class="text-navy-900 font-medium text-sm">Sarah K.</p>
+                                <p class="text-navy-500 text-xs">Healthcare Professional</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="card relative stagger">
+                        <div class="quote-mark relative pl-6 mb-4">
+                            <p class="text-navy-700 text-sm leading-relaxed italic">
+                                The team thinks about things we would never consider on our own.
+                                Tax-loss harvesting, Roth conversions, estate updates &mdash; they
+                                are always a step ahead. That proactive approach is worth its
+                                weight in gold.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-6 pt-4 border-t border-navy-100">
+                            <div class="w-10 h-10 rounded-full bg-navy-100 flex items-center justify-center flex-shrink-0">
+                                <span class="text-navy-500 font-medium text-sm">DL</span>
+                            </div>
+                            <div>
+                                <p class="text-navy-900 font-medium text-sm">David & Linda T.</p>
+                                <p class="text-navy-500 text-xs">Retired Educators</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             CTA / CONTACT SECTION
+             ============================================ -->
+        <section id="contact" class="section bg-white">
+            <div class="container-md">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+                    <!-- Content -->
+                    <div class="reveal">
+                        <p class="eyebrow mb-3">Get Started</p>
+                        <h2 class="text-3xl sm:text-4xl font-heading font-semibold text-navy-900 mb-6">
+                            Let's Start a Conversation
+                        </h2>
+                        <p class="text-navy-600 leading-relaxed mb-8">
+                            The best financial plans begin with an honest conversation.
+                            Tell us a little about your situation, and we will reach out
+                            to schedule a complimentary discovery meeting.
+                        </p>
+
+                        <div class="space-y-5">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-navy-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-5 h-5 text-navy-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-navy-900">No obligation, no pressure</p>
+                                    <p class="text-navy-500 text-sm">We want to understand if we are the right fit, too.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-navy-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-5 h-5 text-navy-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-navy-900">Your information is secure</p>
+                                    <p class="text-navy-500 text-sm">We take privacy seriously. Always.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-navy-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-5 h-5 text-navy-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-navy-900">Response within 24 hours</p>
+                                    <p class="text-navy-500 text-sm">We will personally follow up to schedule your meeting.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="reveal">
+                        <form
+                            x-data="contactForm()"
+                            @submit.prevent="submitForm"
+                            class="card !p-6 sm:!p-8"
+                            novalidate
+                        >
+                            <div class="space-y-5">
+                                <div class="grid sm:grid-cols-2 gap-5">
+                                    <div>
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input
+                                            type="text"
+                                            id="firstName"
+                                            name="firstName"
+                                            x-model="form.firstName"
+                                            class="form-input"
+                                            required
+                                            autocomplete="given-name"
+                                        >
+                                    </div>
+                                    <div>
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input
+                                            type="text"
+                                            id="lastName"
+                                            name="lastName"
+                                            x-model="form.lastName"
+                                            class="form-input"
+                                            required
+                                            autocomplete="family-name"
+                                        >
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="email" class="form-label">Email</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        x-model="form.email"
+                                        class="form-input"
+                                        required
+                                        autocomplete="email"
+                                    >
+                                </div>
+
+                                <div>
+                                    <label for="phone" class="form-label">Phone <span class="text-navy-400 font-normal">(optional)</span></label>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        x-model="form.phone"
+                                        class="form-input"
+                                        autocomplete="tel"
+                                    >
+                                </div>
+
+                                <div>
+                                    <label for="interest" class="form-label">I'm interested in...</label>
+                                    <select
+                                        id="interest"
+                                        name="interest"
+                                        x-model="form.interest"
+                                        class="form-input"
+                                    >
+                                        <option value="">Select a topic</option>
+                                        <option value="wealth-management">Wealth Management</option>
+                                        <option value="financial-planning">Financial Planning</option>
+                                        <option value="retirement">Retirement Planning</option>
+                                        <option value="estate-planning">Estate Planning</option>
+                                        <option value="business-services">Business Owner Services</option>
+                                        <option value="other">Something Else</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="message" class="form-label">Tell us a little about your situation</label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        x-model="form.message"
+                                        rows="4"
+                                        class="form-input resize-none"
+                                    ></textarea>
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary w-full btn-lg"
+                                    :disabled="submitting"
+                                    :class="{ 'opacity-60 cursor-not-allowed': submitting }"
+                                >
+                                    <span x-show="!submitting">Schedule a Conversation</span>
+                                    <span x-show="submitting" x-cloak class="flex items-center gap-2">
+                                        <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                                        </svg>
+                                        Sending...
+                                    </span>
+                                </button>
+
+                                <!-- Success message -->
+                                <div
+                                    x-show="submitted"
+                                    x-transition
+                                    x-cloak
+                                    class="rounded-lg bg-green-50 border border-green-200 p-4 text-center"
+                                >
+                                    <p class="text-green-800 font-medium text-sm">Thank you. We will be in touch within 24 hours.</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="bg-navy-950 text-navy-300 safe-bottom" role="contentinfo">
+        <div class="container-lg py-12 sm:py-16">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+                <!-- Brand -->
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <a href="/" class="flex items-center gap-2 mb-4" aria-label="Luka Financial - Home">
+                        <span class="text-xl font-heading font-bold text-white">Luka</span>
+                        <span class="text-xl font-heading font-light text-navy-400">Financial</span>
+                    </a>
+                    <p class="text-sm leading-relaxed text-navy-400 max-w-xs">
+                        Personalized wealth management for professionals and families
+                        who value clarity, discipline, and trust.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white font-medium text-sm mb-4">Quick Links</h3>
+                    <ul class="space-y-2.5">
+                        <li><a href="#services" class="text-sm text-navy-400 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#about" class="text-sm text-navy-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#approach" class="text-sm text-navy-400 hover:text-white transition-colors">Our Approach</a></li>
+                        <li><a href="#testimonials" class="text-sm text-navy-400 hover:text-white transition-colors">Testimonials</a></li>
+                        <li><a href="#contact" class="text-sm text-navy-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="text-white font-medium text-sm mb-4">Services</h3>
+                    <ul class="space-y-2.5">
+                        <li><a href="#services" class="text-sm text-navy-400 hover:text-white transition-colors">Wealth Management</a></li>
+                        <li><a href="#services" class="text-sm text-navy-400 hover:text-white transition-colors">Financial Planning</a></li>
+                        <li><a href="#services" class="text-sm text-navy-400 hover:text-white transition-colors">Retirement Planning</a></li>
+                        <li><a href="#services" class="text-sm text-navy-400 hover:text-white transition-colors">Estate Planning</a></li>
+                        <li><a href="#services" class="text-sm text-navy-400 hover:text-white transition-colors">Business Services</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-white font-medium text-sm mb-4">Contact</h3>
+                    <ul class="space-y-2.5">
+                        <li>
+                            <a href="#contact" class="text-sm text-navy-400 hover:text-white transition-colors">Schedule a Conversation</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="mt-12 pt-8 border-t border-navy-800">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <p class="text-xs text-navy-500">
+                        &copy; <span x-data x-text="new Date().getFullYear()">2026</span> Luka Financial. All rights reserved.
+                    </p>
+                    <div class="flex gap-6">
+                        <a href="#" class="text-xs text-navy-500 hover:text-navy-300 transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-xs text-navy-500 hover:text-navy-300 transition-colors">Disclosures</a>
+                        <a href="#" class="text-xs text-navy-500 hover:text-navy-300 transition-colors">ADV Part 2</a>
+                    </div>
+                </div>
+                <p class="text-xs text-navy-600 mt-4 leading-relaxed max-w-4xl">
+                    Luka Financial is a registered investment advisor. Information presented is for educational
+                    purposes only and does not intend to make an offer or solicitation for the sale or purchase
+                    of any specific securities, investments, or investment strategies. Investments involve risk
+                    and are not guaranteed. Past performance is not indicative of future results.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         SCRIPTS
+         ============================================ -->
+
+    <!-- Alpine.js (deferred for performance) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- GSAP (loaded only for animation enhancements) -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+
+</body>
+</html>

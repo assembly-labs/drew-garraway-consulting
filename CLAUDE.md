@@ -27,6 +27,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | **Agency** | `/agency/` | Agency Brewing brand assets and style guide | Yes |
 | **Locally Strong** | `/locally-strong/` | Nonprofit website for local community empowerment | Yes |
 | **Alliance Small Kids** | `/alliance-small-kids-class/` | Alliance BJJ kids curriculum proposal (ages 4-8) | Yes |
+| **Luka** | `/luka/` | Financial services professional website | Yes |
 
 ---
 
@@ -50,6 +51,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | Agency | Static HTML | N/A | Custom CSS | N/A |
 | Locally Strong | Static HTML | Tailwind CLI | Tailwind | Cloudflare Pages |
 | Alliance Small Kids | Static HTML | N/A | Inline CSS | Cloudflare Pages |
+| Luka | Static HTML | Tailwind CLI | Tailwind + Alpine.js + GSAP | Cloudflare Pages |
 
 ---
 
@@ -98,7 +100,8 @@ drew-garraway-consulting/
 │   ├── tpl/                     # Printer documentation
 │   ├── read-out-loud/           # Text-to-speech PWA
 │   ├── agency/                  # Agency Brewing brand guide
-│   └── alliance-small-kids-class/ # BJJ kids curriculum
+│   ├── alliance-small-kids-class/ # BJJ kids curriculum
+│   └── luka/                    # Financial services website
 │
 ├── Supporting Directories
 │   ├── _archived/               # Previous versions (ignore)
@@ -182,6 +185,9 @@ cd fhm && npm run build && wrangler pages deploy public --project-name=fhm
 
 # Root site
 wrangler pages deploy _site --project-name=drewgarraway
+
+# Luka
+cd luka && npm run build && wrangler pages deploy . --project-name=luka
 ```
 
 ---
@@ -209,4 +215,5 @@ For detailed instructions, read the project's own documentation:
 | Scout | `/scout/README.md` |
 | FHM | `/fhm/CLAUDE.md`, `/fhm/content/series-7/CLAUDE.md` |
 | TPL | `/tpl/CLAUDE.md` |
+| Luka | `/luka/CLAUDE.md` |
 | Others | Check `README.md` in project directory |

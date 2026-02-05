@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   LUKA - Financial Services Design System
+   ============================================ */
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply font-body text-navy-900 bg-cream antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-heading;
+    }
+
+    /* Prevent iOS zoom on input focus */
+    input, select, textarea {
+        font-size: 16px;
+    }
+}
+
+@layer components {
+    /* Layout */
+    .container-lg {
+        @apply max-w-7xl mx-auto px-5 sm:px-6 lg:px-8;
+    }
+
+    .container-md {
+        @apply max-w-5xl mx-auto px-5 sm:px-6 lg:px-8;
+    }
+
+    .container-sm {
+        @apply max-w-3xl mx-auto px-5 sm:px-6 lg:px-8;
+    }
+
+    /* Section spacing */
+    .section {
+        @apply py-16 sm:py-20 lg:py-24;
+    }
+
+    .section-lg {
+        @apply py-20 sm:py-28 lg:py-32;
+    }
+
+    /* Buttons */
+    .btn {
+        @apply inline-flex items-center justify-center px-7 py-3.5 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    }
+
+    .btn-primary {
+        @apply bg-navy-800 text-white hover:bg-navy-700 focus:ring-navy-500 active:bg-navy-900;
+    }
+
+    .btn-secondary {
+        @apply bg-white text-navy-800 border border-navy-200 hover:border-navy-300 hover:bg-navy-50 focus:ring-navy-300;
+    }
+
+    .btn-gold {
+        @apply bg-gold-500 text-white hover:bg-gold-600 focus:ring-gold-400 active:bg-gold-700;
+    }
+
+    .btn-ghost {
+        @apply text-navy-700 hover:text-navy-900 hover:bg-navy-50 focus:ring-navy-300;
+    }
+
+    .btn-lg {
+        @apply px-8 py-4 text-base;
+    }
+
+    /* Cards */
+    .card {
+        @apply bg-white rounded-xl border border-navy-100/60 p-6 sm:p-8 shadow-card transition-all duration-300;
+    }
+
+    .card-hover {
+        @apply hover:shadow-card-hover hover:-translate-y-0.5;
+    }
+
+    /* Form inputs */
+    .form-input {
+        @apply w-full rounded-lg border border-navy-200 bg-white px-4 py-3 text-navy-900 placeholder-navy-400 transition-colors duration-200 focus:border-navy-500 focus:ring-2 focus:ring-navy-500/20 focus:outline-none;
+    }
+
+    .form-label {
+        @apply block text-sm font-medium text-navy-700 mb-1.5;
+    }
+
+    /* Eyebrow / overline text */
+    .eyebrow {
+        @apply text-xs font-semibold uppercase tracking-[0.15em] text-gold-600;
+    }
+
+    /* Divider */
+    .divider {
+        @apply w-12 h-0.5 bg-gold-500;
+    }
+
+    /* Skip link for accessibility */
+    .skip-link {
+        @apply sr-only;
+    }
+
+    .skip-link:focus {
+        @apply not-sr-only absolute left-4 top-4 z-50 rounded-lg bg-navy-800 px-4 py-2 text-white outline-none;
+    }
+
+    /* Stat block */
+    .stat-value {
+        @apply text-4xl sm:text-5xl font-heading text-navy-900;
+    }
+
+    .stat-label {
+        @apply text-sm text-navy-500 mt-1;
+    }
+}
+
+@layer utilities {
+    /* Reveal animation base state */
+    .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Stagger children */
+    .reveal.is-visible .stagger:nth-child(1) { transition-delay: 0ms; }
+    .reveal.is-visible .stagger:nth-child(2) { transition-delay: 100ms; }
+    .reveal.is-visible .stagger:nth-child(3) { transition-delay: 200ms; }
+    .reveal.is-visible .stagger:nth-child(4) { transition-delay: 300ms; }
+    .reveal.is-visible .stagger:nth-child(5) { transition-delay: 400ms; }
+    .reveal.is-visible .stagger:nth-child(6) { transition-delay: 500ms; }
+
+    .stagger {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    .reveal.is-visible .stagger {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+}
+
+/* ============================================
+   Non-Tailwind custom styles
+   ============================================ */
+
+/* Mobile navigation overlay */
+.mobile-nav {
+    @apply fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white z-50 transform translate-x-full;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-nav.active {
+    transform: translateX(0);
+}
+
+.nav-overlay {
+    @apply fixed inset-0 bg-navy-900/40 z-40 opacity-0 pointer-events-none;
+    transition: opacity 0.3s ease;
+}
+
+.nav-overlay.active {
+    @apply opacity-100 pointer-events-auto;
+}
+
+/* Header scroll state */
+.header-scrolled {
+    @apply bg-white/95 shadow-nav;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Smooth line under active nav link */
+.nav-link {
+    @apply relative text-navy-600 font-medium transition-colors duration-200;
+}
+
+.nav-link::after {
+    content: '';
+    @apply absolute left-0 -bottom-1 w-0 h-0.5 bg-gold-500 transition-all duration-300;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    @apply w-full;
+}
+
+.nav-link:hover {
+    @apply text-navy-900;
+}
+
+/* Testimonial card quote mark */
+.quote-mark::before {
+    content: '\201C';
+    @apply absolute -top-2 -left-1 text-6xl text-gold-300 font-heading leading-none;
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+
+    .stagger {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: env(safe-area-inset-bottom)) {
+    .safe-bottom {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
