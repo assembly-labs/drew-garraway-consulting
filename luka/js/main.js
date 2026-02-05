@@ -152,8 +152,8 @@
                 );
             });
 
-            // Approach steps
-            gsap.utils.toArray('#approach .text-center').forEach(function (step, i) {
+            // How It Works steps
+            gsap.utils.toArray('#how-it-works .text-center').forEach(function (step, i) {
                 gsap.fromTo(
                     step,
                     { opacity: 0, y: 40 },
@@ -164,7 +164,7 @@
                         delay: i * 0.15,
                         ease: 'power3.out',
                         scrollTrigger: {
-                            trigger: '#approach',
+                            trigger: '#how-it-works',
                             start: 'top 60%',
                             once: true,
                         },

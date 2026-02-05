@@ -27,7 +27,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | **Agency** | `/agency/` | Agency Brewing brand assets and style guide | Yes |
 | **Locally Strong** | `/locally-strong/` | Nonprofit website for local community empowerment | Yes |
 | **Alliance Small Kids** | `/alliance-small-kids-class/` | Alliance BJJ kids curriculum proposal (ages 4-8) | Yes |
-| **Luka** | `/luka/` | Financial services professional website | Yes |
+| **Luka** | `/luka/` | PAGEONE Accounting & Finance website | Yes |
 
 ---
 
