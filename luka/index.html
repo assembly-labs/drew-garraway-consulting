@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAGEONE Accounting & Finance | Clear Books. Confident Decisions.</title>
+    <meta name="description" content="Premium accounting and finance services that give you the clarity to grow with confidence. Bookkeeping, tax preparation, fractional CFO services, and more for growing businesses.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PAGEONE Accounting & Finance">
+    <meta property="og:description" content="Premium accounting and finance services that give you the clarity to grow with confidence.">
+    <meta property="og:site_name" content="PAGEONE Accounting & Finance">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PAGEONE Accounting & Finance">
+    <meta name="twitter:description" content="Premium accounting and finance services that give you the clarity to grow with confidence.">
+
+    <!-- Preconnect for fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Compiled Tailwind CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AccountingService",
+        "name": "PAGEONE Accounting & Finance",
+        "description": "Premium accounting and finance services including bookkeeping, tax preparation, fractional CFO services, and financial reporting for growing businesses.",
+        "areaServed": "United States",
+        "serviceType": ["Bookkeeping", "Tax Preparation", "Fractional CFO", "Financial Reporting", "Budgeting", "1099 Preparation"],
+        "priceRange": "$$",
+        "sameAs": [],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "availableLanguage": "English"
+        }
+    }
+    </script>
+</head>
+
+<body x-data="{ mobileNavOpen: false }" class="flex flex-col min-h-screen">
+
+    <!-- Skip Navigation -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- ============================================
+         HEADER / NAVIGATION
+         ============================================ -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-30 transition-all duration-300" role="banner">
+        <div class="container-lg">
+            <nav class="flex items-center justify-between h-18 sm:h-20" role="navigation" aria-label="Main navigation">
+
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-1.5 z-10" aria-label="PAGEONE Accounting and Finance - Home">
+                    <span class="text-2xl font-heading font-bold text-navy-900">PAGE</span><span class="text-2xl font-heading font-bold text-gold-500">ONE</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="#services" class="nav-link text-sm">Services</a>
+                    <a href="#how-it-works" class="nav-link text-sm">How It Works</a>
+                    <a href="#testimonials" class="nav-link text-sm">Testimonials</a>
+                    <a href="#who-we-help" class="nav-link text-sm">Who We Help</a>
+                    <a href="#contact" class="btn btn-primary text-sm">Schedule a Call</a>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button
+                    @click="mobileNavOpen = true"
+                    class="lg:hidden p-2 -mr-2 text-navy-700 hover:text-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 rounded-lg"
+                    aria-label="Open menu"
+                    :aria-expanded="mobileNavOpen.toString()"
+                >
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Mobile Navigation Overlay -->
+        <div
+            x-show="mobileNavOpen"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            @click="mobileNavOpen = false"
+            class="fixed inset-0 bg-navy-900/40 z-40"
+            x-cloak
+        ></div>
+
+        <!-- Mobile Navigation Panel -->
+        <div
+            x-show="mobileNavOpen"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="translate-x-full"
+            x-transition:enter-end="translate-x-0"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="translate-x-0"
+            x-transition:leave-end="translate-x-full"
+            @keydown.escape.window="mobileNavOpen = false"
+            class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white z-50 shadow-xl"
+            x-cloak
+        >
+            <div class="flex flex-col h-full p-6">
+                <div class="flex justify-end mb-8">
+                    <button
+                        @click="mobileNavOpen = false"
+                        class="p-2 -mr-2 text-navy-500 hover:text-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 rounded-lg"
+                        aria-label="Close menu"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="flex flex-col gap-1" aria-label="Mobile navigation">
+                    <a @click="mobileNavOpen = false" href="#services" class="px-4 py-3 text-navy-700 hover:text-navy-900 hover:bg-navy-50 rounded-lg font-medium transition-colors">Services</a>
+                    <a @click="mobileNavOpen = false" href="#how-it-works" class="px-4 py-3 text-navy-700 hover:text-navy-900 hover:bg-navy-50 rounded-lg font-medium transition-colors">How It Works</a>
+                    <a @click="mobileNavOpen = false" href="#testimonials" class="px-4 py-3 text-navy-700 hover:text-navy-900 hover:bg-navy-50 rounded-lg font-medium transition-colors">Testimonials</a>
+                    <a @click="mobileNavOpen = false" href="#who-we-help" class="px-4 py-3 text-navy-700 hover:text-navy-900 hover:bg-navy-50 rounded-lg font-medium transition-colors">Who We Help</a>
+                </nav>
+                <div class="mt-auto pt-6 border-t border-navy-100 space-y-3">
+                    <a href="#contact" @click="mobileNavOpen = false" class="btn btn-primary w-full text-center">Schedule a Call</a>
+                    <a href="#contact" @click="mobileNavOpen = false" class="btn btn-secondary w-full text-center">Get a Quote</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================
+         MAIN CONTENT
+         ============================================ -->
+    <main id="main" class="flex-1">
+
+        <!-- ============================================
+             HERO SECTION
+             ============================================ -->
+        <section class="relative pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36 bg-gradient-to-b from-navy-50/60 to-cream overflow-hidden">
+            <!-- Subtle decorative element -->
+            <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-gold-50/30 to-transparent pointer-events-none" aria-hidden="true"></div>
+
+            <div class="container-lg relative">
+                <div class="max-w-3xl">
+                    <p class="eyebrow mb-4 reveal">Accounting &amp; Finance</p>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-semibold text-navy-900 mb-6 reveal">
+                        Clear books.<br>
+                        <span class="text-navy-600">Confident decisions.</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-navy-600 leading-relaxed max-w-2xl mb-10 reveal">
+                        Premium accounting and finance services that give you the clarity
+                        to grow with confidence. From bookkeeping to fractional CFO services,
+                        we're your partner in financial success.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 reveal">
+                        <a href="#contact" class="btn btn-primary btn-lg">
+                            Schedule a Call
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary btn-lg">Get a Quote</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             VALUE PROPOSITIONS BAR
+             ============================================ -->
+        <section class="py-8 sm:py-10 border-y border-navy-100/60 bg-white" aria-label="Value propositions">
+            <div class="container-lg">
+                <div class="grid sm:grid-cols-3 gap-6 sm:gap-8 text-center">
+                    <div class="flex items-center justify-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gold-50 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium text-navy-700">Free Consultation</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gold-50 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium text-navy-700">No Long-Term Contracts</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gold-50 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium text-navy-700">Tailored Solutions</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SERVICES SECTION
+             ============================================ -->
+        <section id="services" class="section bg-cream">
+            <div class="container-lg">
+                <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+                    <p class="eyebrow mb-3">What We Do</p>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-semibold text-navy-900 mb-4">
+                        Core Services
+                    </h2>
+                    <p class="text-navy-600 leading-relaxed">
+                        Comprehensive accounting and finance services tailored to help
+                        your business thrive.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 reveal">
+                    <!-- Service Card: Bookkeeping -->
+                    <article class="card card-hover stagger">
+                        <div class="w-12 h-12 rounded-lg bg-navy-50 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-navy-900 mb-2">Bookkeeping &amp; Monthly Close</h3>
+                        <p class="text-navy-600 text-sm leading-relaxed">
+                            Accurate, timely bookkeeping that keeps your finances organized
+                            and ready for growth. Clean books delivered by the 5th of every month.
+                        </p>
+                    </article>
+
+                    <!-- Service Card: Tax -->
+                    <article class="card card-hover stagger">
+                        <div class="w-12 h-12 rounded-lg bg-navy-50 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-navy-900 mb-2">Tax Preparation &amp; Filing</h3>
+                        <p class="text-navy-600 text-sm leading-relaxed">
+                            Strategic tax planning and preparation to minimize your tax
+                            burden legally. Year-round guidance, not just at filing time.
+                        </p>
+                    </article>
+
+                    <!-- Service Card: Fractional CFO -->
+                    <article class="card card-hover stagger">
+                        <div class="w-12 h-12 rounded-lg bg-navy-50 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-navy-900 mb-2">Fractional CFO / Controller</h3>
+                        <p class="text-navy-600 text-sm leading-relaxed">
+                            Executive-level financial guidance without the full-time cost.
+                            Strategic insight to drive smarter decisions and sustainable growth.
+                        </p>
+                    </article>
+
+                    <!-- Service Card: Financial Reporting -->
+                    <article class="card card-hover stagger">
+                        <div class="w-12 h-12 rounded-lg bg-navy-50 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-navy-900 mb-2">Financial Reporting &amp; Analysis</h3>
+                        <p class="text-navy-600 text-sm leading-relaxed">
+                            Clear insights into your business performance with actionable
+                            recommendations. Know your numbers, know your next move.
+                        </p>
+                    </article>
+
+                    <!-- Service Card: Budgeting -->
+                    <article class="card card-hover stagger">
+                        <div class="w-12 h-12 rounded-lg bg-navy-50 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-navy-900 mb-2">Budgeting &amp; Cash Flow</h3>
+                        <p class="text-navy-600 text-sm leading-relaxed">
+                            Plan for the future with confidence and maintain healthy cash
+                            reserves. Proactive forecasting that keeps surprises off the books.
+                        </p>
+                    </article>
+
+                    <!-- Service Card: 1099 -->
+                    <article class="card card-hover stagger">
+                        <div class="w-12 h-12 rounded-lg bg-navy-50 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-heading font-semibold text-navy-900 mb-2">1099 Preparation &amp; Filing</h3>
+                        <p class="text-navy-600 text-sm leading-relaxed">
+                            Stay compliant with contractor payments and avoid IRS penalties.
+                            We handle the paperwork so you can focus on your business.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             TRUSTED BY / INDUSTRIES
+             ============================================ -->
+        <section class="py-12 sm:py-16 bg-white" aria-label="Industries we serve">
+            <div class="container-lg">
+                <div class="text-center mb-10 reveal">
+                    <h2 class="text-2xl sm:text-3xl font-heading font-semibold text-navy-900">
+                        Trusted by Growing Businesses Across Industries
+                    </h2>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto reveal">
+                    <div class="card !p-5 text-center card-hover stagger">
+                        <div class="w-10 h-10 rounded-full bg-navy-50 flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-5 h-5 text-navy-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            </svg>
+                        </div>
+                        <p class="text-sm font-medium text-navy-700">Small Businesses</p>
+                    </div>
+                    <div class="card !p-5 text-center card-hover stagger">
+                        <div class="w-10 h-10 rounded-full bg-navy-50 flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-5 h-5 text-navy-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <p class="text-sm font-medium text-navy-700">Startups</p>
+                    </div>
+                    <div class="card !p-5 text-center card-hover stagger">
+                        <div class="w-10 h-10 rounded-full bg-navy-50 flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-5 h-5 text-navy-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+                            </svg>
+                        </div>
+                        <p class="text-sm font-medium text-navy-700">Contractors</p>
+                    </div>
+                    <div class="card !p-5 text-center card-hover stagger">
+                        <div class="w-10 h-10 rounded-full bg-navy-50 flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-5 h-5 text-navy-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <p class="text-sm font-medium text-navy-700">Professional Services</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             HOW IT WORKS SECTION
+             ============================================ -->
+        <section id="how-it-works" class="section bg-navy-900 text-white">
+            <div class="container-lg">
+                <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+                    <p class="eyebrow !text-gold-400 mb-3">How It Works</p>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-semibold text-white mb-4">
+                        A Simple, Proven Process
+                    </h2>
+                    <p class="text-navy-300 leading-relaxed">
+                        Three steps to transform your financial operations and give you
+                        the clarity to make confident decisions.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-3 gap-8 lg:gap-12 max-w-4xl mx-auto reveal">
+                    <!-- Step 1 -->
+                    <div class="text-center stagger">
+                        <div class="w-16 h-16 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center mx-auto mb-6">
+                            <span class="text-gold-400 font-heading font-bold text-2xl">1</span>
+                        </div>
+                        <h3 class="text-xl font-heading font-semibold text-white mb-3">Discover</h3>
+                        <p class="text-navy-300 text-sm leading-relaxed">
+                            We learn about your business, challenges, and goals through
+                            a complimentary consultation. No commitment required.
+                        </p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="text-center stagger">
+                        <div class="w-16 h-16 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center mx-auto mb-6">
+                            <span class="text-gold-400 font-heading font-bold text-2xl">2</span>
+                        </div>
+                        <h3 class="text-xl font-heading font-semibold text-white mb-3">Clean Up</h3>
+                        <p class="text-navy-300 text-sm leading-relaxed">
+                            Our team organizes your books, resolves discrepancies, and
+                            establishes efficient processes that scale with you.
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="text-center stagger">
+                        <div class="w-16 h-16 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center mx-auto mb-6">
+                            <span class="text-gold-400 font-heading font-bold text-2xl">3</span>
+                        </div>
+                        <h3 class="text-xl font-heading font-semibold text-white mb-3">Optimize</h3>
+                        <p class="text-navy-300 text-sm leading-relaxed">
+                            With clear financials, we help you make strategic decisions
+                            that drive growth. Ongoing support, not just a one-time fix.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             TESTIMONIALS SECTION
+             ============================================ -->
+        <section id="testimonials" class="section bg-ivory">
+            <div class="container-lg">
+                <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+                    <p class="eyebrow mb-3">Client Stories</p>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-semibold text-navy-900 mb-4">
+                        What Our Clients Say
+                    </h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 lg:gap-8 reveal">
+                    <!-- Testimonial 1 -->
+                    <blockquote class="card relative stagger">
+                        <div class="quote-mark relative pl-6 mb-4">
+                            <p class="text-navy-700 text-sm leading-relaxed italic">
+                                PAGEONE transformed our messy books into a clear financial
+                                picture. Their fractional CFO services helped us secure our
+                                Series A funding. They were instrumental in getting us
+                                investor-ready.
+                            </p>
+                        </div>
+                        <footer class="flex items-center gap-3 mt-6 pt-4 border-t border-navy-100">
+                            <div class="w-10 h-10 rounded-full bg-navy-100 flex items-center justify-center flex-shrink-0">
+                                <span class="text-navy-500 font-medium text-sm">SJ</span>
+                            </div>
+                            <div>
+                                <p class="text-navy-900 font-medium text-sm">Sarah Johnson</p>
+                                <p class="text-navy-500 text-xs">TechStart Inc.</p>
+                            </div>
+                        </footer>
+                    </blockquote>
+
+                    <!-- Testimonial 2 -->
+                    <blockquote class="card relative stagger">
+                        <div class="quote-mark relative pl-6 mb-4">
+                            <p class="text-navy-700 text-sm leading-relaxed italic">
+                                Finally, an accounting firm that understands contractors.
+                                They handle our 1099s flawlessly and keep us compliant.
+                                One less thing to worry about so I can focus on
+                                running my business.
+                            </p>
+                        </div>
+                        <footer class="flex items-center gap-3 mt-6 pt-4 border-t border-navy-100">
+                            <div class="w-10 h-10 rounded-full bg-navy-100 flex items-center justify-center flex-shrink-0">
+                                <span class="text-navy-500 font-medium text-sm">MC</span>
+                            </div>
+                            <div>
+                                <p class="text-navy-900 font-medium text-sm">Michael Chen</p>
+                                <p class="text-navy-500 text-xs">Chen Construction</p>
+                            </div>
+                        </footer>
+                    </blockquote>
+
+                    <!-- Testimonial 3 -->
+                    <blockquote class="card relative stagger">
+                        <div class="quote-mark relative pl-6 mb-4">
+                            <p class="text-navy-700 text-sm leading-relaxed italic">
+                                The monthly close process used to stress me out. Now I get
+                                clean financials by the 5th of every month. PAGEONE gave me
+                                back my time and my peace of mind.
+                            </p>
+                        </div>
+                        <footer class="flex items-center gap-3 mt-6 pt-4 border-t border-navy-100">
+                            <div class="w-10 h-10 rounded-full bg-navy-100 flex items-center justify-center flex-shrink-0">
+                                <span class="text-navy-500 font-medium text-sm">AR</span>
+                            </div>
+                            <div>
+                                <p class="text-navy-900 font-medium text-sm">Amanda Roberts</p>
+                                <p class="text-navy-500 text-xs">Roberts Consulting</p>
+                            </div>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             WHO WE HELP SECTION
+             ============================================ -->
+        <section id="who-we-help" class="section bg-cream">
+            <div class="container-lg">
+                <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+                    <p class="eyebrow mb-3">Who We Help</p>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-semibold text-navy-900 mb-4">
+                        From Startups to Established Businesses
+                    </h2>
+                    <p class="text-navy-600 leading-relaxed">
+                        We provide tailored financial solutions for businesses at every stage of growth.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto reveal">
+                    <div class="card !p-5 text-center stagger">
+                        <p class="font-medium text-navy-800 text-sm">Small Businesses</p>
+                    </div>
+                    <div class="card !p-5 text-center stagger">
+                        <p class="font-medium text-navy-800 text-sm">Startups</p>
+                    </div>
+                    <div class="card !p-5 text-center stagger">
+                        <p class="font-medium text-navy-800 text-sm">Contractors</p>
+                    </div>
+                    <div class="card !p-5 text-center stagger">
+                        <p class="font-medium text-navy-800 text-sm">Growing Companies</p>
+                    </div>
+                    <div class="card !p-5 text-center stagger">
+                        <p class="font-medium text-navy-800 text-sm">Professional Services</p>
+                    </div>
+                    <div class="card !p-5 text-center stagger">
+                        <p class="font-medium text-navy-800 text-sm">E-commerce Brands</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             CTA / CONTACT SECTION
+             ============================================ -->
+        <section id="contact" class="section bg-white">
+            <div class="container-md">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+                    <!-- Content -->
+                    <div class="reveal">
+                        <p class="eyebrow mb-3">Get Started</p>
+                        <h2 class="text-3xl sm:text-4xl font-heading font-semibold text-navy-900 mb-6">
+                            Ready for Clarity?
+                        </h2>
+                        <p class="text-navy-600 leading-relaxed mb-8">
+                            The best time to get your books in order is now. Tell us about
+                            your business, and we will reach out to schedule a complimentary
+                            consultation.
+                        </p>
+
+                        <div class="space-y-5">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-navy-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-5 h-5 text-navy-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-navy-900">Free consultation</p>
+                                    <p class="text-navy-500 text-sm">No obligation. We want to understand your needs first.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-navy-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-5 h-5 text-navy-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-navy-900">No long-term contracts</p>
+                                    <p class="text-navy-500 text-sm">We earn your business every month. No lock-ins.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-navy-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-5 h-5 text-navy-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-navy-900">Response within 24 hours</p>
+                                    <p class="text-navy-500 text-sm">We will personally follow up to schedule your call.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="reveal">
+                        <form
+                            x-data="contactForm()"
+                            @submit.prevent="submitForm"
+                            class="card !p-6 sm:!p-8"
+                            novalidate
+                        >
+                            <div class="space-y-5">
+                                <div class="grid sm:grid-cols-2 gap-5">
+                                    <div>
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input
+                                            type="text"
+                                            id="firstName"
+                                            name="firstName"
+                                            x-model="form.firstName"
+                                            class="form-input"
+                                            required
+                                            autocomplete="given-name"
+                                        >
+                                    </div>
+                                    <div>
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input
+                                            type="text"
+                                            id="lastName"
+                                            name="lastName"
+                                            x-model="form.lastName"
+                                            class="form-input"
+                                            required
+                                            autocomplete="family-name"
+                                        >
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="email" class="form-label">Email</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        x-model="form.email"
+                                        class="form-input"
+                                        required
+                                        autocomplete="email"
+                                    >
+                                </div>
+
+                                <div>
+                                    <label for="phone" class="form-label">Phone <span class="text-navy-400 font-normal">(optional)</span></label>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        x-model="form.phone"
+                                        class="form-input"
+                                        autocomplete="tel"
+                                    >
+                                </div>
+
+                                <div>
+                                    <label for="interest" class="form-label">I'm interested in...</label>
+                                    <select
+                                        id="interest"
+                                        name="interest"
+                                        x-model="form.interest"
+                                        class="form-input"
+                                    >
+                                        <option value="">Select a service</option>
+                                        <option value="bookkeeping">Bookkeeping &amp; Monthly Close</option>
+                                        <option value="tax">Tax Preparation &amp; Filing</option>
+                                        <option value="cfo">Fractional CFO / Controller</option>
+                                        <option value="reporting">Financial Reporting &amp; Analysis</option>
+                                        <option value="budgeting">Budgeting &amp; Cash Flow</option>
+                                        <option value="1099">1099 Preparation &amp; Filing</option>
+                                        <option value="other">Something Else</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="message" class="form-label">Tell us about your business</label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        x-model="form.message"
+                                        rows="4"
+                                        class="form-input resize-none"
+                                        placeholder="What does your business do? What financial challenges are you facing?"
+                                    ></textarea>
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary w-full btn-lg"
+                                    :disabled="submitting"
+                                    :class="{ 'opacity-60 cursor-not-allowed': submitting }"
+                                >
+                                    <span x-show="!submitting">Get Started</span>
+                                    <span x-show="submitting" x-cloak class="flex items-center gap-2">
+                                        <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                                        </svg>
+                                        Sending...
+                                    </span>
+                                </button>
+
+                                <!-- Success message -->
+                                <div
+                                    x-show="submitted"
+                                    x-transition
+                                    x-cloak
+                                    class="rounded-lg bg-green-50 border border-green-200 p-4 text-center"
+                                >
+                                    <p class="text-green-800 font-medium text-sm">Thank you. We will be in touch within 24 hours.</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="bg-navy-950 text-navy-300 safe-bottom" role="contentinfo">
+        <div class="container-lg py-12 sm:py-16">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+                <!-- Brand -->
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <a href="/" class="flex items-center gap-1.5 mb-4" aria-label="PAGEONE Accounting and Finance - Home">
+                        <span class="text-xl font-heading font-bold text-white">PAGE</span><span class="text-xl font-heading font-bold text-gold-400">ONE</span>
+                    </a>
+                    <p class="text-sm leading-relaxed text-navy-400 max-w-xs">
+                        Clear books. Confident decisions. Premium accounting and finance
+                        services for growing businesses.
+                    </p>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="text-white font-medium text-sm mb-4">Services</h3>
+                    <ul class="space-y-2.5">
+                        <li><a href="#services" class="text-sm text-navy-400 hover:text-white transition-colors">Bookkeeping &amp; Monthly Close</a></li>
+                        <li><a href="#services" class="text-sm text-navy-400 hover:text-white transition-colors">Tax Preparation &amp; Filing</a></li>
+                        <li><a href="#services" class="text-sm text-navy-400 hover:text-white transition-colors">Fractional CFO Services</a></li>
+                        <li><a href="#services" class="text-sm text-navy-400 hover:text-white transition-colors">Financial Reporting</a></li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white font-medium text-sm mb-4">Quick Links</h3>
+                    <ul class="space-y-2.5">
+                        <li><a href="#services" class="text-sm text-navy-400 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#how-it-works" class="text-sm text-navy-400 hover:text-white transition-colors">How It Works</a></li>
+                        <li><a href="#testimonials" class="text-sm text-navy-400 hover:text-white transition-colors">Testimonials</a></li>
+                        <li><a href="#who-we-help" class="text-sm text-navy-400 hover:text-white transition-colors">Who We Help</a></li>
+                        <li><a href="#contact" class="text-sm text-navy-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-white font-medium text-sm mb-4">Contact</h3>
+                    <ul class="space-y-2.5">
+                        <li class="text-sm text-navy-400">Phone: (XXX) XXX-XXXX</li>
+                        <li><a href="mailto:your@email.com" class="text-sm text-navy-400 hover:text-white transition-colors">your@email.com</a></li>
+                        <li class="pt-2">
+                            <a href="#contact" class="btn btn-secondary !py-2 !px-4 !text-xs">Schedule a Call</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="mt-12 pt-8 border-t border-navy-800">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <p class="text-xs text-navy-500">
+                        &copy; <span x-data x-text="new Date().getFullYear()">2026</span> PAGEONE Accounting &amp; Finance. All rights reserved.
+                    </p>
+                    <div class="flex gap-6">
+                        <a href="#" class="text-xs text-navy-500 hover:text-navy-300 transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-xs text-navy-500 hover:text-navy-300 transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         SCRIPTS
+         ============================================ -->
+
+    <!-- Alpine.js (deferred for performance) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- GSAP (loaded only for animation enhancements) -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+
+</body>
+</html>
