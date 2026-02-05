@@ -333,7 +333,7 @@ a:hover {
 
 .hero-unit {
   font-size: var(--text-2xl);
-  font-weight: 300;
+  font-weight: 500;
   color: var(--color-gray-400);
   margin-top: -8px;
 }
@@ -344,19 +344,19 @@ a:hover {
 
 .eyebrow {
   font-family: var(--font-mono);
-  font-size: 11px;  /* Bumped from 10px for readability */
-  font-weight: 700;  /* Bold for better visibility */
+  font-size: 12px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);  /* Reduced from ultra */
+  letter-spacing: var(--tracking-widest);
   color: var(--color-gold);
 }
 
 .label {
   font-family: var(--font-mono);
-  font-size: 11px;  /* Bumped from 10px */
-  font-weight: 700;  /* Bolder for readability */
+  font-size: 12px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: var(--tracking-wider);  /* Reduced for readability */
+  letter-spacing: var(--tracking-wider);
   color: var(--color-gray-200);  /* Brightened for contrast */
 }
 
@@ -385,9 +385,9 @@ a:hover {
 }
 
 .section-subtitle {
-  font-size: 11px;
-  font-weight: 600;  /* Bolder for readability */
-  color: var(--color-gray-300);  /* Brightened for contrast */
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-gray-300);
 }
 
 /* ========================================
@@ -413,7 +413,7 @@ a:hover {
 
 .narrative-text {
   font-size: var(--text-xl);
-  font-weight: 400;
+  font-weight: 500;
   line-height: var(--leading-normal);
   color: var(--color-gray-100);
   position: relative;
@@ -888,9 +888,9 @@ a:hover {
 
 .data-cell-label {
   font-family: var(--font-mono);
-  font-size: 10px;  /* Slightly larger for readability */
-  font-weight: 700;  /* Bolder for readability */
-  color: var(--color-gray-300);  /* Brightened for contrast */
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-gray-300);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
   margin-top: var(--space-xs);
@@ -922,7 +922,7 @@ a:hover {
 .position-cell--level-5::before { background: var(--color-gray-800); opacity: 0.4; }
 
 .position-name {
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
@@ -970,7 +970,7 @@ a:hover {
   gap: 4px;
   color: var(--color-gray-500);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
   text-decoration: none;
@@ -1157,7 +1157,7 @@ a:hover {
 
 .achievement-date {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 12px;
   color: var(--color-gray-500);
   margin-top: var(--space-xs);
 }
@@ -1190,7 +1190,7 @@ a:hover {
 
 .hero-eyebrow {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: var(--color-gold);
@@ -1220,7 +1220,7 @@ a:hover {
   align-items: center;
   gap: var(--space-sm);
   color: var(--color-gray-600);
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   animation: pulse 2s infinite;
@@ -1260,7 +1260,7 @@ a:hover {
 
 .streak-unit {
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.3em;
   color: var(--color-gold);
@@ -1287,9 +1287,9 @@ a:hover {
 }
 
 .streak-meta-label {
-  font-size: 11px;
-  font-weight: 600;  /* Bolder for readability */
-  color: var(--color-gray-300);  /* Brightened for contrast */
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-gray-300);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-top: var(--space-xs);
@@ -1313,7 +1313,7 @@ a:hover {
 
 .bar-rank {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--color-gray-600);
   width: 20px;
 }
@@ -1404,16 +1404,16 @@ a:hover {
 }
 
 .arsenal-cell-label {
-  font-size: 10px;  /* Slightly larger for readability */
-  font-weight: 700;  /* Bolder for readability */
-  color: var(--color-gray-300);  /* Brightened for contrast */
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-gray-300);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-top: var(--space-xs);
 }
 
 .arsenal-cell-trend {
-  font-size: 10px;
+  font-size: 12px;
   margin-top: var(--space-xs);
 }
 
@@ -1452,7 +1452,7 @@ a:hover {
 
 .signature-badge {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -1496,7 +1496,7 @@ a:hover {
 }
 
 .record-date {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--color-gray-500);
 }
 
@@ -1512,7 +1512,7 @@ a:hover {
 }
 
 .milestone-tag {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;

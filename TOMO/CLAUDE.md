@@ -8,7 +8,7 @@ BJJ Journal is a voice-first training journal app for Brazilian Jiu-Jitsu practi
 
 ## Tech Stack
 
-- **Framework:** React 18 with TypeScript
+- **Framework:** React 19 with TypeScript
 - **Build Tool:** Vite
 - **Styling:** CSS Variables + Inline Styles (design system in `/prototype/src/index.css`)
 - **State Management:** React Context (UserProfileContext)

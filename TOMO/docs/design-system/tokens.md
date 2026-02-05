@@ -55,9 +55,9 @@ All grays are lightened for better contrast on dark backgrounds.
 | `--color-gray-100` | `#f5f5f5` | Primary text on dark |
 | `--color-gray-200` | `#e5e5e5` | Secondary text on dark |
 | `--color-gray-300` | `#d4d4d4` | Tertiary text - readable on dark |
-| `--color-gray-400` | `#b3b3b3` | Muted text (lightened from #a3a3a3) |
-| `--color-gray-500` | `#8b8b8b` | Labels (lightened from #6b7280) |
-| `--color-gray-600` | `#6b6b6b` | Secondary labels (lightened from #525252) |
+| `--color-gray-400` | `#c4c4c4` | Muted text (brightened from #b3b3b3 for readability) |
+| `--color-gray-500` | `#a3a3a3` | Labels (brightened from #8b8b8b for contrast) |
+| `--color-gray-600` | `#8a8a8a` | Secondary labels (brightened from #6b6b6b for contrast) |
 | `--color-gray-700` | `#4a4a4a` | Borders (lightened from #404040) |
 | `--color-gray-800` | `#1f1f1f` | Card backgrounds (lightened from #1a1a1a) |
 | `--color-gray-900` | `#161616` | Elevated surfaces (lightened from #0f0f0f) |

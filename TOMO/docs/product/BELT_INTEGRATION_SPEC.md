@@ -1,6 +1,6 @@
 # Belt Personalization Integration Specification
 
-**Last Updated:** January 19, 2026
+**Last Updated:** February 3, 2026
 **Purpose:** Developer reference for integrating belt personalization across all TOMO features
 **Audience:** Developers implementing belt-aware UI and AI features
 
@@ -54,20 +54,22 @@ TOMO's belt personalization system adapts the entire app experience based on the
 
 | Page/Module | Uses Belt System | Integration Depth | Status | Priority |
 |-------------|------------------|-------------------|--------|----------|
-| **Dashboard** | Yes | 85% | Mostly Complete | - |
+| **Dashboard** | Yes | 70% | Module gating + primary metric done; celebration thresholds, streak emphasis, comp stats missing | P1 |
 | **Stats Modules** | Partial | 60% | Module gating done, celebration thresholds missing | P1 |
-| **Insights (TrainingFeedback)** | Yes | 70% | Uses belt tone, missing risk-aware messaging | P1 |
-| **Techniques (For You)** | Yes | 40% | Basic filtering, missing full difficulty gating | P1 |
+| **Insights (TrainingFeedback)** | Partial | 25% | Hook imported, uses `getPostSessionMessage()`; tone/risk/vocabulary not implemented | P1 |
+| **Techniques (For You)** | Yes | 45% | Basic filtering + belt recommendations; difficulty range, defense priority, playlist names missing | P1 |
 | **Techniques (Browse)** | No | 0% | No belt filtering on browse categories | P2 |
-| **Session Logger** | Partial | 40% | Post-session message done, prompts/complexity missing | P1 |
-| **Session History** | Imported | 10% | Hook imported, card complexity not implemented | P1 |
+| **Session Logger** | Partial | 55% | Post-session message + belt prompts done; field visibility, technique count, default duration missing | P1 |
+| **Session History** | Partial | 35% | Hook imported, basic rendering adapts; card complexity, field visibility, filter options missing | P1 |
 | **Session Detail** | No | 0% | No belt-specific field visibility | P2 |
-| **Belt Progress** | Partial | 30% | Retrieves plateau, doesn't display guidance | P1 |
-| **Profile Screen** | Partial | 50% | Progressive profiling adapted, journey display static | P2 |
+| **Belt Progress** | Partial | 50% | Belt visualization + plateau detection done; plateau guidance display, time estimates, motivational framing missing | P1 |
+| **Profile Screen** | Partial | 25% | Progressive profiling exists; belt-adapted question timing, question style not implemented | P2 |
 | **Settings** | N/A | - | Demo mode only, not user-facing | - |
 | **AI/Chatbot** | Designed | 0% | Full spec exists, not implemented | P1 |
 | **Risk Detection** | Designed | 0% | Full spec exists, not implemented | P1 |
 | **Re-engagement** | Designed | 0% | Full spec exists, not implemented | P1 |
+
+**Overall Average Integration Depth: ~39%** (across 8 measurable components)
 
 ### Legend
 - **Uses Belt System** — Component imports `useBeltPersonalization`
