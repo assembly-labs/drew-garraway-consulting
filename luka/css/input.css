@@ -69,6 +69,14 @@
         @apply text-charcoal-700 hover:text-charcoal-800 hover:bg-charcoal-50 focus:ring-charcoal-300;
     }
 
+    .btn-gold {
+        @apply bg-gold-500 text-evergreen-950 hover:bg-gold-400 focus:ring-gold-400 active:bg-gold-600 font-semibold;
+    }
+
+    .btn-outline-light {
+        @apply bg-transparent text-white border border-white/30 hover:border-white/60 hover:bg-white/10 focus:ring-white/30;
+    }
+
     .btn-lg {
         @apply px-8 py-4 text-base;
     }
@@ -180,12 +188,12 @@
 
 /* Header scroll state */
 .header-scrolled {
-    @apply bg-white/95 shadow-nav;
+    @apply bg-evergreen-950/95 shadow-lg;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 
-/* Smooth line under active nav link */
+/* Smooth line under active nav link (light theme) */
 .nav-link {
     @apply relative text-charcoal-500 font-medium transition-colors duration-200;
 }
@@ -202,6 +210,25 @@
 
 .nav-link:hover {
     @apply text-charcoal-700;
+}
+
+/* Nav link for dark background */
+.nav-link-dark {
+    @apply relative text-white/80 font-medium transition-colors duration-200;
+}
+
+.nav-link-dark::after {
+    content: '';
+    @apply absolute left-0 -bottom-1 w-0 h-0.5 bg-gold-400 transition-all duration-300;
+}
+
+.nav-link-dark:hover::after,
+.nav-link-dark.active::after {
+    @apply w-full;
+}
+
+.nav-link-dark:hover {
+    @apply text-white;
 }
 
 /* Testimonial card quote mark */

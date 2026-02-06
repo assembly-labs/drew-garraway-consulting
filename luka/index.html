@@ -54,28 +54,28 @@
     <!-- ============================================
          HEADER / NAVIGATION
          ============================================ -->
-    <header id="header" class="fixed top-0 left-0 right-0 z-30 transition-all duration-300" role="banner">
+    <header id="header" class="fixed top-0 left-0 right-0 z-30 transition-all duration-300 bg-evergreen-950" role="banner">
         <div class="container-lg">
-            <nav class="flex items-center justify-between h-18 sm:h-20" role="navigation" aria-label="Main navigation">
+            <nav class="relative flex items-center justify-center h-18 sm:h-20" role="navigation" aria-label="Main navigation">
 
-                <!-- Logo -->
-                <a href="/" class="flex items-center gap-1.5 z-10" aria-label="PAGEONE Accounting and Finance - Home">
-                    <span class="text-2xl font-heading font-bold text-charcoal-700">PAGE</span><span class="text-2xl font-heading font-bold text-evergreen-800">ONE</span>
+                <!-- Logo (Centered) -->
+                <a href="/" class="flex items-center" aria-label="PAGEONE Accounting and Finance - Home">
+                    <img src="images/logo.png" alt="PAGEONE" class="h-10 sm:h-12 w-auto">
                 </a>
 
-                <!-- Desktop Navigation -->
-                <div class="hidden lg:flex items-center gap-8">
-                    <a href="#services" class="nav-link text-sm">Services</a>
-                    <a href="#how-it-works" class="nav-link text-sm">How It Works</a>
-                    <a href="#testimonials" class="nav-link text-sm">Testimonials</a>
-                    <a href="#who-we-help" class="nav-link text-sm">Who We Help</a>
-                    <a href="#contact" class="btn btn-primary text-sm">Schedule a Call</a>
+                <!-- Desktop Navigation (Right) -->
+                <div class="hidden lg:flex items-center gap-8 absolute right-0">
+                    <a href="#services" class="nav-link-dark text-sm">Services</a>
+                    <a href="#how-it-works" class="nav-link-dark text-sm">How It Works</a>
+                    <a href="#testimonials" class="nav-link-dark text-sm">Testimonials</a>
+                    <a href="#who-we-help" class="nav-link-dark text-sm">Who We Help</a>
+                    <a href="#contact" class="btn btn-gold text-sm">Schedule a Call</a>
                 </div>
 
-                <!-- Mobile Menu Toggle -->
+                <!-- Mobile Menu Toggle (Right) -->
                 <button
                     @click="mobileNavOpen = true"
-                    class="lg:hidden p-2 -mr-2 text-charcoal-700 hover:text-charcoal-800 focus:outline-none focus:ring-2 focus:ring-evergreen-500 rounded-lg"
+                    class="lg:hidden p-2 absolute right-0 text-white/90 hover:text-white focus:outline-none focus:ring-2 focus:ring-gold-400 rounded-lg"
                     aria-label="Open menu"
                     :aria-expanded="mobileNavOpen.toString()"
                 >
@@ -110,14 +110,14 @@
             x-transition:leave-start="translate-x-0"
             x-transition:leave-end="translate-x-full"
             @keydown.escape.window="mobileNavOpen = false"
-            class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white z-50 shadow-xl"
+            class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-evergreen-950 z-50 shadow-xl"
             x-cloak
         >
             <div class="flex flex-col h-full p-6">
                 <div class="flex justify-end mb-8">
                     <button
                         @click="mobileNavOpen = false"
-                        class="p-2 -mr-2 text-charcoal-500 hover:text-charcoal-700 focus:outline-none focus:ring-2 focus:ring-evergreen-500 rounded-lg"
+                        class="p-2 -mr-2 text-white/70 hover:text-white focus:outline-none focus:ring-2 focus:ring-gold-400 rounded-lg"
                         aria-label="Close menu"
                     >
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -126,14 +126,14 @@
                     </button>
                 </div>
                 <nav class="flex flex-col gap-1" aria-label="Mobile navigation">
-                    <a @click="mobileNavOpen = false" href="#services" class="px-4 py-3 text-charcoal-700 hover:text-charcoal-800 hover:bg-charcoal-50 rounded-lg font-medium transition-colors">Services</a>
-                    <a @click="mobileNavOpen = false" href="#how-it-works" class="px-4 py-3 text-charcoal-700 hover:text-charcoal-800 hover:bg-charcoal-50 rounded-lg font-medium transition-colors">How It Works</a>
-                    <a @click="mobileNavOpen = false" href="#testimonials" class="px-4 py-3 text-charcoal-700 hover:text-charcoal-800 hover:bg-charcoal-50 rounded-lg font-medium transition-colors">Testimonials</a>
-                    <a @click="mobileNavOpen = false" href="#who-we-help" class="px-4 py-3 text-charcoal-700 hover:text-charcoal-800 hover:bg-charcoal-50 rounded-lg font-medium transition-colors">Who We Help</a>
+                    <a @click="mobileNavOpen = false" href="#services" class="px-4 py-3 text-white/80 hover:text-white hover:bg-evergreen-900 rounded-lg font-medium transition-colors">Services</a>
+                    <a @click="mobileNavOpen = false" href="#how-it-works" class="px-4 py-3 text-white/80 hover:text-white hover:bg-evergreen-900 rounded-lg font-medium transition-colors">How It Works</a>
+                    <a @click="mobileNavOpen = false" href="#testimonials" class="px-4 py-3 text-white/80 hover:text-white hover:bg-evergreen-900 rounded-lg font-medium transition-colors">Testimonials</a>
+                    <a @click="mobileNavOpen = false" href="#who-we-help" class="px-4 py-3 text-white/80 hover:text-white hover:bg-evergreen-900 rounded-lg font-medium transition-colors">Who We Help</a>
                 </nav>
-                <div class="mt-auto pt-6 border-t border-charcoal-200 space-y-3">
-                    <a href="#contact" @click="mobileNavOpen = false" class="btn btn-primary w-full text-center">Schedule a Call</a>
-                    <a href="#contact" @click="mobileNavOpen = false" class="btn btn-secondary w-full text-center">Get a Quote</a>
+                <div class="mt-auto pt-6 border-t border-evergreen-800 space-y-3">
+                    <a href="#contact" @click="mobileNavOpen = false" class="btn btn-gold w-full text-center">Schedule a Call</a>
+                    <a href="#contact" @click="mobileNavOpen = false" class="btn btn-outline-light w-full text-center">Get a Quote</a>
                 </div>
             </div>
         </div>
@@ -719,13 +719,13 @@
          ============================================ -->
     <footer class="bg-evergreen-950 text-charcoal-300 safe-bottom" role="contentinfo">
         <div class="container-lg py-12 sm:py-16">
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
                 <!-- Brand -->
-                <div class="sm:col-span-2 lg:col-span-1">
-                    <a href="/" class="flex items-center gap-1.5 mb-4" aria-label="PAGEONE Accounting and Finance - Home">
-                        <span class="text-xl font-heading font-bold text-white">PAGE</span><span class="text-xl font-heading font-bold text-gold-400">ONE</span>
+                <div class="sm:col-span-2 lg:col-span-3 flex flex-col items-center text-center mb-8">
+                    <a href="/" class="flex items-center justify-center mb-4" aria-label="PAGEONE Accounting and Finance - Home">
+                        <img src="images/Page_One_Accounting_Finance_Logo_smallcrop.jpeg" alt="PAGEONE Accounting & Finance" class="h-48 w-auto rounded-lg">
                     </a>
-                    <p class="text-sm leading-relaxed text-charcoal-400 max-w-xs">
+                    <p class="text-sm leading-relaxed text-charcoal-400 max-w-md">
                         Clear books. Confident decisions. Premium accounting and finance
                         services for growing businesses.
                     </p>

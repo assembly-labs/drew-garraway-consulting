@@ -7,57 +7,57 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                // Primary brand color - Dark Evergreen
+                // Primary brand color - Forest Green (from logo)
                 evergreen: {
-                    50: '#e8f2ee',
-                    100: '#d1e5dd',
-                    200: '#a3cbb9',
-                    300: '#75b196',
-                    400: '#479773',
-                    500: '#1E6F5C', // Success green / mid evergreen
-                    600: '#186350',
-                    700: '#125038',
-                    800: '#0F3D2E', // PRIMARY - Dark Evergreen
-                    900: '#0a2a1f',
-                    950: '#051812',
+                    50: '#f0f5f1',
+                    100: '#dce8df',
+                    200: '#b9d1bf',
+                    300: '#8fb89a',
+                    400: '#5c9a6b',
+                    500: '#3d7a4d', // Mid forest green
+                    600: '#2f5f3b',
+                    700: '#254a2f',
+                    800: '#1c3322', // PRIMARY - Dark Forest Green (logo)
+                    900: '#152618',
+                    950: '#0d1a0f', // Deepest forest (logo background)
                 },
-                // Neutral scale (replacing navy)
+                // Neutral scale
                 charcoal: {
-                    50: '#F4F6F8',  // Soft Off-White (backgrounds)
-                    100: '#e4e8ec',
-                    200: '#c8d0d8',
-                    300: '#9CA3AF', // Cool Gray (borders, dividers)
-                    400: '#737d8a',
-                    500: '#4B5563', // Slate Gray (secondary text)
-                    600: '#39424e',
-                    700: '#1F2933', // Blue-Gray Charcoal (headers, body)
-                    800: '#171e26',
-                    900: '#0f1419',
-                    950: '#0a0e12',
+                    50: '#F5F7F6',  // Warm Off-White (backgrounds)
+                    100: '#e6ebe8',
+                    200: '#ccd6d0',
+                    300: '#9CA8A0', // Cool Gray (borders, dividers)
+                    400: '#6b7a70',
+                    500: '#4a5850', // Slate Gray (secondary text)
+                    600: '#3a4540',
+                    700: '#1F2A24', // Dark Charcoal (headers, body)
+                    800: '#171f1a',
+                    900: '#0f1512',
+                    950: '#0a0f0c',
                 },
-                // Accent color - teal for links
+                // Accent color - forest teal for links
                 teal: {
-                    50: '#e6f3f3',
-                    100: '#cce7e7',
-                    200: '#99cfcf',
-                    300: '#66b7b8',
-                    400: '#449a9b',
-                    500: '#2C7A7B', // Muted Teal (links, secondary actions)
-                    600: '#246566',
-                    700: '#1c5051',
-                    800: '#143b3c',
-                    900: '#0c2627',
+                    50: '#e8f4f0',
+                    100: '#d0e9e1',
+                    200: '#a1d3c3',
+                    300: '#72bda5',
+                    400: '#4a9f84',
+                    500: '#357a62', // Muted Forest Teal (links)
+                    600: '#2a6350',
+                    700: '#204c3d',
+                    800: '#16362b',
+                    900: '#0d201a',
                 },
-                // Gold/Amber accent for highlights
+                // Gold/Amber accent (from logo)
                 gold: {
-                    50: '#fdf9ef',
-                    100: '#faf0d5',
-                    200: '#f4deaa',
-                    300: '#edc974', // Light gold (quote marks)
-                    400: '#e6b04a', // Bright gold (numbers on dark)
-                    500: '#d4982e', // Primary gold (eyebrows, accents)
-                    600: '#b87a22', // Hover state
-                    700: '#995c1e',
+                    50: '#fefbf3',
+                    100: '#fcf4de',
+                    200: '#f7e5b5',
+                    300: '#f0d080', // Light gold (quote marks)
+                    400: '#e5b84a', // Bright gold (numbers on dark, logo highlight)
+                    500: '#c9a227', // Primary gold (eyebrows, accents, logo main)
+                    600: '#a8871f', // Hover state
+                    700: '#876c19',
                 },
                 // Highlight / Focus accent
                 indigo: {
@@ -75,10 +75,10 @@ module.exports = {
                 warning: '#B45309',
                 error: '#991B1B',
                 info: '#1D4ED8',
-                // Background colors
-                offwhite: '#F4F6F8',
-                cream: '#F4F6F8', // Updated to match new palette
-                ivory: '#eef1f4',
+                // Background colors (warm tones to complement forest green)
+                offwhite: '#F5F7F6',
+                cream: '#F7F9F7', // Warm off-white with green undertone
+                ivory: '#f0f4f1',
             },
             fontFamily: {
                 heading: ['"Playfair Display"', 'Georgia', 'serif'],
