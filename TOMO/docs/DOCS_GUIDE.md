@@ -32,7 +32,7 @@ This is the project brain for TOMO. Use it to:
 ```
 docs/
 ├── FIRST_PRINCIPLES.md      # Non-negotiable beliefs (READ FIRST)
-├── CLAUDE.md                # This file
+├── DOCS_GUIDE.md                # This file
 ├── README.md                # Document index
 │
 ├── brand/                   # Voice, tone, messaging
@@ -143,7 +143,7 @@ data-and-ai/VOICE_LOGGING_*.md  →  VoiceFirstLogger.tsx
 
 1. Check `research/` for existing data before new research (includes sports psychology)
 2. Add new research to appropriate folder with clear naming
-3. Update this CLAUDE.md if adding new folders
+3. Update this DOCS_GUIDE.md if adding new folders
 
 ---
 

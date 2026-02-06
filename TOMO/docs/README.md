@@ -11,7 +11,7 @@
 | I need to... | Go to... |
 |--------------|----------|
 | Understand the product philosophy | `FIRST_PRINCIPLES.md` |
-| Learn how to use these docs | `CLAUDE.md` |
+| Learn how to use these docs | `DOCS_GUIDE.md` |
 | Understand user personas | `personas/` |
 | Check data/AI/visualization strategy | `data-and-ai/` |
 | Review design system | `design-system/` |
@@ -29,13 +29,12 @@
 ```
 docs/
 ├── FIRST_PRINCIPLES.md          # Non-negotiable product beliefs
-├── CLAUDE.md                    # Guide for using this knowledge base
+├── DOCS_GUIDE.md                    # Guide for using this knowledge base
 ├── README.md                    # This file - master index
 │
 ├── brand/                       # Voice, tone, philosophy
 ├── data-and-ai/                 # Data capture, AI strategy & visualization
 ├── deployment/                  # iOS TestFlight plans
-├── design-reviews/              # Design iteration snapshots and feedback
 ├── design-system/               # Visual design tokens & components
 ├── development/                 # Development practices & standards
 ├── domain-knowledge/            # BJJ-specific reference material
@@ -64,11 +63,6 @@ Everything related to how we collect data from exhausted users, process it with 
 **Purpose:** iOS TestFlight deployment plans and checklists.
 
 Technical documentation for deploying to iOS, including TestFlight setup, EAS build configuration, and deployment checklists.
-
-### `design-reviews/`
-**Purpose:** Design iteration history and feedback records.
-
-Snapshots of design decisions, UI feedback sessions, and iteration history. Useful for understanding why certain design choices were made.
 
 ### `design-system/`
 **Purpose:** Visual design tokens, CSS components, and interactive previews.
@@ -130,13 +124,13 @@ Request for Proposal documents, development contracts, and business-facing docum
 | Document | Location | Status |
 |----------|----------|--------|
 | First Principles | `FIRST_PRINCIPLES.md` | Active |
-| Knowledge Base Guide | `CLAUDE.md` | Active |
+| Knowledge Base Guide | `DOCS_GUIDE.md` | Active |
 
 ### Understanding Our Users
 
 | Document | Location | Status |
 |----------|----------|--------|
-| Persona Profiles (6 test users) | `personas/PERSONA_PROFILES.md` | Active |
+| User Personas (canonical) | `personas/TOMO_PERSONAS.md` | Active |
 | User Research Synthesis | `research/USER_PERSONAS_AND_RESEARCH.md` | Active |
 | Sports Psychology Research | `research/sports-psychology-research.md` | Active |
 
@@ -154,7 +148,7 @@ Request for Proposal documents, development contracts, and business-facing docum
 | Document | Location | Status |
 |----------|----------|--------|
 | Design Tokens | `design-system/tokens.md` | Active |
-| UI Strategy | `product/UI_STRATEGY.md` | Active |
+| Stats Page Design Guide | `design-system/stats-page-design-guide.html` | Active |
 | Stats Module Strategy | `product/STATS_MODULE_STRATEGY.md` | Active |
 | Infographic Strategy | `data-and-ai/INFOGRAPHIC_STRATEGY.md` | Active |
 
@@ -162,9 +156,9 @@ Request for Proposal documents, development contracts, and business-facing docum
 
 | Document | Location | Status |
 |----------|----------|--------|
-| Product Architecture | `product/PRODUCT_ARCHITECTURE_OVERVIEW.md` | Active |
+| Feature Specifications | `product/FEATURES.md` | Active |
 | Belt Personalization System | `product/BELT_PERSONALIZATION_SYSTEM.md` | Active |
-| Feature List | `product/BJJ_Progress_Tracker_Feature_List.md` | Active |
+| Belt Integration Spec | `product/BELT_INTEGRATION_SPEC.md` | Active |
 
 ### BJJ Domain Knowledge
 
@@ -208,7 +202,7 @@ FIRST_PRINCIPLES.md
         ↓
         ↓ guides
         ↓
-PERSONA_PROFILES.md
+TOMO_PERSONAS.md
         ↓
         ↓ informs
         ↓
@@ -241,6 +235,6 @@ When adding documents:
 
 1. Add to appropriate folder
 2. Update this README
-3. Update `CLAUDE.md` if adding new folders
+3. Update `DOCS_GUIDE.md` if adding new folders
 4. Link related documents
 5. Set status (Active/Draft/TODO)
