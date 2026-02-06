@@ -67,8 +67,9 @@ out/
 ehthumbs.db
 Thumbs.db
 
-# Security - local SSL certs
+# Security - local SSL certs and keys
 *.pem
+*.key
 
 # Testing
 coverage/

@@ -188,3 +188,66 @@ These projects retain their `node_modules/` as they may be in active development
 1. Move large audio files to CDN
 2. Remove source maps from production builds
 3. Add comprehensive test coverage
+
+---
+
+# Security Remediation Actions Taken (2026-02-05)
+
+## Build Artifacts with Exposed Keys - DELETED
+
+| Artifact | Issue | Action |
+|----------|-------|--------|
+| `cool-curriculum/ai-lesson-planner/build/` | Anthropic API key in minified JS | **DELETED** |
+| `_archived/nofomo/dist/` | Polygon API key in bundle | **DELETED** |
+
+## .gitignore Updates
+
+- Added `*.key` pattern for private key files (line 72)
+
+## PII Audit Results
+
+### Intentional Public PII (Business Use)
+- `drew@assemblylabs.co` - Public contact email
+- `310-739-4396` - Public phone in resume/career materials
+- `Wayne, PA` - Location in career materials
+- `garrawaydrew@gmail.com` - Personal email in career materials
+
+### Third-Party Business Contacts (Public Orgs)
+- Sports league contacts in `kids-sports/` (public directory info)
+- Library phone numbers in `scout/` (public info)
+
+### Mock/Test Data (No Action Needed)
+- Stripe test cards (4242...)
+- Placeholder emails (555-xxxx phones)
+- Development database credentials (localhost only)
+
+## Live Site Status
+
+| Site | Status | Notes |
+|------|--------|-------|
+| drewgarraway.com | LIVE | Footer updated, working |
+| scout.drewgarraway.com | DNS NOT CONFIGURED | Needs CNAME record |
+| tomo.drewgarraway.com | DNS NOT CONFIGURED | Needs CNAME record |
+| fhm.drewgarraway.com | DNS NOT CONFIGURED | Needs CNAME record |
+| locally-strong.drewgarraway.com | DNS NOT CONFIGURED | Needs CNAME record |
+| luka.drewgarraway.com | DNS NOT CONFIGURED | Needs CNAME record |
+
+## Keys Requiring Manual Rotation
+
+**ACTION REQUIRED - Rotate these keys in their respective dashboards:**
+
+1. **Anthropic Claude API Key**
+   - Dashboard: https://console.anthropic.com/
+   - Key prefix: `sk-ant-api03-zdg4pS...`
+   - Location: `cool-curriculum/ai-lesson-planner/.env.local`
+
+2. **Google Cloud Text-to-Speech API Key**
+   - Dashboard: https://console.cloud.google.com/apis/credentials
+   - Key prefix: `AIzaSyCoSmPdMc6...`
+   - Location: `read-out-loud/js/googleTTS.js`
+   - Note: May be domain-restricted to `read-out-loud.pages.dev`
+
+3. **Polygon.io API Key** (archived project)
+   - Dashboard: https://polygon.io/dashboard
+   - Key: `z37IuRmsdR5bzP6L1Eg_u3SCSeW2vUaM`
+   - Location: `_archived/nofomo/src/config.js`
