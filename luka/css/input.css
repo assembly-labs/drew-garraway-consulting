@@ -12,7 +12,7 @@
     }
 
     body {
-        @apply font-body text-navy-900 bg-cream antialiased;
+        @apply font-body text-charcoal-700 bg-cream antialiased;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -54,19 +54,19 @@
     }
 
     .btn-primary {
-        @apply bg-navy-800 text-white hover:bg-navy-700 focus:ring-navy-500 active:bg-navy-900;
+        @apply bg-evergreen-800 text-white hover:bg-evergreen-700 focus:ring-evergreen-500 active:bg-evergreen-900;
     }
 
     .btn-secondary {
-        @apply bg-white text-navy-800 border border-navy-200 hover:border-navy-300 hover:bg-navy-50 focus:ring-navy-300;
+        @apply bg-white text-charcoal-700 border border-charcoal-300 hover:border-charcoal-400 hover:bg-charcoal-50 focus:ring-charcoal-300;
     }
 
-    .btn-gold {
-        @apply bg-gold-500 text-white hover:bg-gold-600 focus:ring-gold-400 active:bg-gold-700;
+    .btn-teal {
+        @apply bg-teal-500 text-white hover:bg-teal-600 focus:ring-teal-400 active:bg-teal-700;
     }
 
     .btn-ghost {
-        @apply text-navy-700 hover:text-navy-900 hover:bg-navy-50 focus:ring-navy-300;
+        @apply text-charcoal-700 hover:text-charcoal-800 hover:bg-charcoal-50 focus:ring-charcoal-300;
     }
 
     .btn-lg {
@@ -75,7 +75,7 @@
 
     /* Cards */
     .card {
-        @apply bg-white rounded-xl border border-navy-100/60 p-6 sm:p-8 shadow-card transition-all duration-300;
+        @apply bg-white rounded-xl border border-charcoal-200/60 p-6 sm:p-8 shadow-card transition-all duration-300;
     }
 
     .card-hover {
@@ -84,16 +84,16 @@
 
     /* Form inputs */
     .form-input {
-        @apply w-full rounded-lg border border-navy-200 bg-white px-4 py-3 text-navy-900 placeholder-navy-400 transition-colors duration-200 focus:border-navy-500 focus:ring-2 focus:ring-navy-500/20 focus:outline-none;
+        @apply w-full rounded-lg border border-charcoal-300 bg-white px-4 py-3 text-charcoal-700 placeholder-charcoal-400 transition-colors duration-200 focus:border-evergreen-600 focus:ring-2 focus:ring-evergreen-500/20 focus:outline-none;
     }
 
     .form-label {
-        @apply block text-sm font-medium text-navy-700 mb-1.5;
+        @apply block text-sm font-medium text-charcoal-700 mb-1.5;
     }
 
     /* Eyebrow / overline text */
     .eyebrow {
-        @apply text-xs font-semibold uppercase tracking-[0.15em] text-gold-600;
+        @apply text-xs font-semibold uppercase tracking-[0.15em] text-gold-500;
     }
 
     /* Divider */
@@ -107,16 +107,16 @@
     }
 
     .skip-link:focus {
-        @apply not-sr-only absolute left-4 top-4 z-50 rounded-lg bg-navy-800 px-4 py-2 text-white outline-none;
+        @apply not-sr-only absolute left-4 top-4 z-50 rounded-lg bg-evergreen-800 px-4 py-2 text-white outline-none;
     }
 
     /* Stat block */
     .stat-value {
-        @apply text-4xl sm:text-5xl font-heading text-navy-900;
+        @apply text-4xl sm:text-5xl font-heading text-charcoal-700;
     }
 
     .stat-label {
-        @apply text-sm text-navy-500 mt-1;
+        @apply text-sm text-charcoal-500 mt-1;
     }
 }
 
@@ -170,7 +170,7 @@
 }
 
 .nav-overlay {
-    @apply fixed inset-0 bg-navy-900/40 z-40 opacity-0 pointer-events-none;
+    @apply fixed inset-0 bg-charcoal-900/40 z-40 opacity-0 pointer-events-none;
     transition: opacity 0.3s ease;
 }
 
@@ -187,7 +187,7 @@
 
 /* Smooth line under active nav link */
 .nav-link {
-    @apply relative text-navy-600 font-medium transition-colors duration-200;
+    @apply relative text-charcoal-500 font-medium transition-colors duration-200;
 }
 
 .nav-link::after {
@@ -201,7 +201,7 @@
 }
 
 .nav-link:hover {
-    @apply text-navy-900;
+    @apply text-charcoal-700;
 }
 
 /* Testimonial card quote mark */
