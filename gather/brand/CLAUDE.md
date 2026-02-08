@@ -88,6 +88,6 @@ This is the **single source of truth** for Gather's brand identity, voice, and v
 
 ## Important Notes
 
-- This guide supersedes the older `/design-system/DESIGN_SYSTEM.md` — use this for all new development
+- This is the authoritative design system for all Gather development
 - The brand guide includes Tailwind config extensions and React component patterns
 - Voice guidelines apply to ALL user-facing text: UI labels, error messages, emails, marketing

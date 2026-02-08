@@ -14,7 +14,7 @@ Before proposing UX strategies, thoroughly review these documents:
    - Data model (Orders, OrderItems, PickupSlots, Products, Vendors)
    - User flows for order preparation and customer pickup
 
-2. **`/gather/design-system/DESIGN_SYSTEM.md`** - Brand and design tokens:
+2. **`/gather/brand/BRAND_GUIDE.md`** - Brand and design tokens:
    - Color system (sage green + golden hour)
    - Typography (DM Sans headings, Inter body)
    - Components, spacing, accessibility requirements

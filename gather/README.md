@@ -30,7 +30,12 @@ npm run dev
 
 ## Documentation
 
-See `ROADMAP.md` for the 8-month phased development plan and `/private-docs/` for detailed product specifications.
+- `CLAUDE.md` — Complete project context (start here)
+- `PRD.md` — Product requirements document
+- `docs/FEATURE_ROADMAP.md` — Phased development plan
+- `docs/` — Feature specifications
+- `research/` — Market research and competitive analysis
+- `brand/BRAND_GUIDE.md` — Design system and brand voice
 
 ## Status
 

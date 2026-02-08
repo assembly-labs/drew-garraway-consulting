@@ -1000,7 +1000,7 @@ gather-app/
 
 ### Brand Application
 
-See `/design-system/DESIGN_SYSTEM.md` for:
+See `/brand/BRAND_GUIDE.md` for:
 - Color palette (sage green + golden hour)
 - Typography (DM Sans + Inter)
 - Component styles
