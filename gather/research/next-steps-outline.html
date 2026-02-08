@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Gather - Next Steps for Carlo & Dara</title>
+    <title>Gather - Next Steps</title>
     <style>
         :root {
             --color-black: #1a1a1a;
@@ -45,51 +45,40 @@
         }
 
         .header {
-            text-align: center;
             margin-bottom: 2.5rem;
             padding-bottom: 2rem;
             border-bottom: 2px solid var(--color-sage-100);
         }
 
         .logo {
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--color-sage-700);
             letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
 
-        .subtitle {
+        .date {
             color: var(--color-gray-600);
-            font-size: 0.95rem;
-        }
-
-        .meta {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: var(--color-gray-50);
-            border-radius: 8px;
             font-size: 0.9rem;
         }
 
-        .meta-item {
-            color: var(--color-gray-600);
-        }
-
-        .meta-item strong {
-            color: var(--color-black);
-        }
-
         h2 {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--color-sage-700);
             margin: 2.5rem 0 1rem 0;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--color-gray-200);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .intro {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .intro strong {
+            color: var(--color-sage-700);
         }
 
         .status-box {
@@ -98,15 +87,11 @@
             padding: 1.25rem 1.5rem;
             border-radius: 0 8px 8px 0;
             margin: 1.5rem 0;
+            font-size: 1.05rem;
         }
 
         .status-box p {
             margin: 0;
-        }
-
-        .status-box .highlight {
-            font-weight: 600;
-            color: var(--color-sage-700);
         }
 
         .action-item {
@@ -149,6 +134,10 @@
             margin-bottom: 1rem;
         }
 
+        .action-description:last-child {
+            margin-bottom: 0;
+        }
+
         .action-link {
             display: inline-flex;
             align-items: center;
@@ -172,16 +161,12 @@
             height: 16px;
         }
 
-        .note {
+        .callout {
             background: var(--color-gold-100);
             border-radius: 8px;
             padding: 1rem 1.25rem;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             margin-top: 0.75rem;
-        }
-
-        .note strong {
-            color: var(--color-gold-500);
         }
 
         .bullet-list {
@@ -191,7 +176,6 @@
 
         .bullet-list li {
             margin-bottom: 0.4rem;
-            color: var(--color-gray-600);
         }
 
         .meeting-box {
@@ -199,11 +183,11 @@
             border-radius: 8px;
             padding: 1.5rem;
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 1rem;
         }
 
         .meeting-box p {
-            margin: 0 0 0.5rem 0;
+            margin: 0 0 0.25rem 0;
             font-size: 1.05rem;
         }
 
@@ -212,28 +196,30 @@
             color: var(--color-sage-700);
         }
 
-        .signature {
-            margin-top: 3rem;
+        .bottom-line {
+            margin-top: 2.5rem;
             padding-top: 2rem;
             border-top: 1px solid var(--color-gray-200);
-            text-align: center;
+        }
+
+        .bottom-line p {
+            font-size: 1.05rem;
+        }
+
+        .signature {
+            margin-top: 2rem;
             color: var(--color-gray-600);
         }
 
         .signature .name {
             font-weight: 600;
             color: var(--color-black);
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         @media (max-width: 640px) {
             .container {
                 padding: 1.5rem;
-            }
-            .meta {
-                flex-direction: column;
-                gap: 0.5rem;
-                text-align: center;
             }
         }
     </style>
@@ -242,121 +228,102 @@
     <div class="container">
         <header class="header">
             <div class="logo">Gather</div>
-            <div class="subtitle">Next Steps & Status Update</div>
-            <div class="meta">
-                <span class="meta-item"><strong>To:</strong> Carlo & Dara</span>
-                <span class="meta-item"><strong>From:</strong> Drew</span>
-                <span class="meta-item"><strong>Date:</strong> February 2025</span>
-            </div>
+            <div class="date">February 2025</div>
         </header>
 
         <section>
-            <h2>Current Status</h2>
+            <p class="intro">Carlo, Dara &mdash;</p>
+            <p class="intro">I finished the market research. <strong>We're in a good position.</strong></p>
+
             <div class="status-box">
-                <p>I've completed extensive market research analyzing our competitive landscape and unique selling proposition. The research confirms we have a <span class="highlight">strong, differentiated position</span> in the market.</p>
-                <p style="margin-top: 1rem;"><span class="highlight">We should proceed with design and development.</span></p>
+                <p>Nobody else is building for the complete farmers market ecosystem &mdash; managers, vendors, AND customers &mdash; with both ops tools and a consumer marketplace. That's our gap.</p>
             </div>
-            <p><strong>Key takeaway:</strong> No one else is building for the complete farmers market ecosystem (managers + vendors + customers) with both operational tools AND a consumer marketplace. That's our gap to fill.</p>
+
+            <p>The research backs up what you already know from running Berwyn: there's a real opportunity here. Now we need to move.</p>
         </section>
 
         <section>
-            <h2>Action Items</h2>
+            <h2>What I Need From You</h2>
 
             <div class="action-item">
                 <div class="action-title">
                     <span class="action-number">1</span>
-                    Review the Gather Research Page
+                    Review the Research
                 </div>
                 <p class="action-description">
-                    Contains our competitive analysis, user personas, and business model overview. Please review and flag any questions or concerns.
+                    Competitive analysis, user personas, business model. Flag anything that doesn't match your on-the-ground experience.
                 </p>
                 <a href="gather-research-review.html" class="action-link">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    Open Research Review
+                    Open Research
                 </a>
             </div>
 
             <div class="action-item">
                 <div class="action-title">
                     <span class="action-number">2</span>
-                    Review the Operations Questionnaire
+                    Fill Out the Operations Questionnaire
                 </div>
                 <p class="action-description">
-                    We need clarity on your operations protocols so we can essentially franchise that system with our software.
+                    This is the important one. Your ops playbook is the real product &mdash; the software just scales it.
                 </p>
-                <div class="note">
-                    <strong>Critical:</strong> Your operational expertise is the true "secret sauce" &mdash; our software simply digitizes and scales what you've already built. The platform can only be as good as the operational playbook we're encoding into it.
+                <div class="callout">
+                    We're essentially franchising your system. The platform can only be as good as the playbook we encode into it. I need the details.
                 </div>
                 <br>
                 <a href="operations-questionnaire.html" class="action-link">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                     </svg>
-                    Open Operations Questionnaire
+                    Open Questionnaire
                 </a>
             </div>
 
             <div class="action-item">
                 <div class="action-title">
                     <span class="action-number">3</span>
-                    Development Cost Discussion
+                    Talk Through Build Costs
                 </div>
                 <p class="action-description">
-                    We need to discuss budget implications for each phase of development:
+                    I'll bring estimates. We need to align on phasing:
                 </p>
                 <ul class="bullet-list">
-                    <li><strong>Phase 1 (MVP):</strong> Core market management &mdash; vendor management, fee collection, communications</li>
-                    <li><strong>Phase 2:</strong> Consumer marketplace &mdash; online ordering, multi-vendor cart</li>
-                    <li><strong>Phase 3:</strong> Scale features &mdash; mobile apps, advanced analytics</li>
+                    <li><strong>MVP:</strong> Vendor management, fee collection, comms</li>
+                    <li><strong>Phase 2:</strong> Consumer marketplace, multi-vendor cart</li>
+                    <li><strong>Phase 3:</strong> Mobile apps, analytics</li>
                 </ul>
-                <p class="action-description">I'll prepare rough estimates for our conversation.</p>
             </div>
 
             <div class="action-item">
                 <div class="action-title">
                     <span class="action-number">4</span>
-                    Go-to-Market (GTM) Strategy
+                    Look at Competitor Marketing
                 </div>
                 <p class="action-description">
-                    We need to plan how to market the software:
+                    Check out how Barn2Door, LocalLine, and MarketWurks sell. They use short explainer videos. We can do better &mdash; my team can help strategize the GTM and customer acquisition.
                 </p>
-                <ul class="bullet-list">
-                    <li>Media buy (online ads targeting market managers)</li>
-                    <li>Video content showcasing our differentiation</li>
-                </ul>
-                <div class="note">
-                    <strong>Homework:</strong> Look at competitor marketing (Barn2Door, LocalLine, MarketWurks). They use short animation/explainer videos. We can leverage my team to strategize customer acquisition. Let's discuss what resonates and what we can do better.
-                </div>
             </div>
 
             <div class="action-item">
                 <div class="action-title">
                     <span class="action-number">5</span>
-                    Schedule a Meeting
+                    Let's Meet This Week
                 </div>
                 <div class="meeting-box">
-                    <p>Let's connect <span class="emphasis">this week</span></p>
-                    <p class="emphasis">After dinner hours</p>
-                    <p style="font-size: 0.9rem; color: var(--color-gray-600); margin-top: 0.75rem;">Let me know what evening works for you both.</p>
+                    <p class="emphasis">After dinner works best</p>
+                    <p style="font-size: 0.9rem; color: var(--color-gray-600);">Send me what evening works for you.</p>
                 </div>
             </div>
         </section>
 
-        <section>
-            <h2>Summary</h2>
-            <p>The research validates the opportunity. Now we need to:</p>
-            <ol style="padding-left: 1.25rem;">
-                <li>Lock down the operations playbook (your expertise)</li>
-                <li>Align on budget and phasing</li>
-                <li>Start building</li>
-            </ol>
-            <p>Looking forward to connecting this week.</p>
+        <section class="bottom-line">
+            <p><strong>Bottom line:</strong> Research validates the opportunity. Next step is locking down your ops playbook, aligning on budget, and starting the build.</p>
         </section>
 
         <div class="signature">
-            <div class="name">Drew</div>
+            <div class="name">&mdash; Drew</div>
         </div>
     </div>
 </body>
