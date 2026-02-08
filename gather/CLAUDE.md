@@ -24,7 +24,9 @@ gather/
 │   ├── COMPETITIVE_ANALYSIS.md # Competitor profiles & positioning
 │   ├── PERSONAS.md             # User personas (Margaret, Victor, Catherine)
 │   ├── BUSINESS_MODEL.md       # Pricing, metrics, GTM strategy
-│   └── gather-research-review.html   # Visual research summary
+│   ├── gather-research-review.html   # Visual research summary
+│   ├── operations-questionnaire.html # Operations protocol questions for Carlo & Dara
+│   └── next-steps-outline.html # Action items for Carlo & Dara
 │
 ├── brand/                      # Brand identity & design system
 │   ├── CLAUDE.md               # Brand folder context
@@ -46,6 +48,7 @@ gather/
 | User research | `research/PERSONAS.md` |
 | Competitor analysis | `research/COMPETITIVE_ANALYSIS.md` |
 | Business model | `research/BUSINESS_MODEL.md` |
+| Operations protocol | `research/operations-questionnaire.html` |
 | Brand voice & copy | `brand/BRAND_GUIDE.md` |
 | Visual design | `brand/BRAND_GUIDE.md` (includes full design system) |
 
