@@ -112,7 +112,11 @@
     }
 
     .section {
-      margin-bottom: 48px;
+      margin-bottom: 56px;
+      border: 1px solid var(--color-gray-200);
+      border-radius: 12px;
+      padding: 28px;
+      background: var(--color-white);
     }
 
     .section-header {
@@ -120,20 +124,19 @@
       align-items: center;
       gap: 12px;
       margin-bottom: 8px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--color-sage-100);
     }
 
-    .section-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      background: var(--color-sage-700);
-      color: var(--color-white);
+    .section-label {
+      font-size: 11px;
       font-weight: 600;
-      font-size: 14px;
-      border-radius: 50%;
-      flex-shrink: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-sage-700);
+      background: var(--color-sage-100);
+      padding: 4px 10px;
+      border-radius: 4px;
     }
 
     .section-title {
@@ -146,12 +149,11 @@
       font-size: 14px;
       color: var(--color-gray-600);
       margin-bottom: 24px;
-      padding-left: 40px;
+      margin-top: 12px;
     }
 
     .question {
       margin-bottom: 32px;
-      padding-left: 40px;
     }
 
     .question-text {
@@ -388,12 +390,11 @@
         font-size: 16px;
       }
 
-      .section-desc {
-        padding-left: 34px;
+      .section {
+        padding: 20px;
       }
 
       .question {
-        padding-left: 34px;
         margin-bottom: 28px;
       }
 
@@ -458,7 +459,7 @@
     <!-- SECTION 1: VENDOR MANAGEMENT -->
     <div class="section">
       <div class="section-header">
-        <span class="section-number">1</span>
+        <span class="section-label">Section 1</span>
         <h2 class="section-title">Vendor Management</h2>
       </div>
       <p class="section-desc">How you onboard vendors, manage rotation, and track compliance.</p>
@@ -499,7 +500,7 @@
     <!-- SECTION 2: FEES & PAYMENTS -->
     <div class="section">
       <div class="section-header">
-        <span class="section-number">2</span>
+        <span class="section-label">Section 2</span>
         <h2 class="section-title">Fees & Payments</h2>
       </div>
       <p class="section-desc">How you charge vendors and collect payment.</p>
@@ -524,7 +525,7 @@
     <!-- SECTION 3: VENDOR COMMUNICATION -->
     <div class="section">
       <div class="section-header">
-        <span class="section-number">3</span>
+        <span class="section-label">Section 3</span>
         <h2 class="section-title">Vendor Communication</h2>
       </div>
       <p class="section-desc">How you keep vendors informed and handle changes.</p>
@@ -549,7 +550,7 @@
     <!-- SECTION 4: CUSTOMER COMMUNICATION -->
     <div class="section">
       <div class="section-header">
-        <span class="section-number">4</span>
+        <span class="section-label">Section 4</span>
         <h2 class="section-title">Customer Communication</h2>
       </div>
       <p class="section-desc">Your Main Line customers value convenience and personal touch. How do you stay connected?</p>
@@ -582,7 +583,7 @@
     <!-- SECTION 5: ORDER FULFILLMENT & ADMIN -->
     <div class="section">
       <div class="section-header">
-        <span class="section-number">5</span>
+        <span class="section-label">Section 5</span>
         <h2 class="section-title">Order Fulfillment & Admin Operations</h2>
       </div>
       <p class="section-desc">The behind-the-scenes work — print sheets, packing lists, pickup management. This is core.</p>
@@ -623,7 +624,7 @@
     <!-- SECTION 6: LOOKING AHEAD -->
     <div class="section">
       <div class="section-header">
-        <span class="section-number">6</span>
+        <span class="section-label">Section 6</span>
         <h2 class="section-title">Looking Ahead</h2>
       </div>
       <p class="section-desc">What's missing, what would help, and anything else we should know.</p>
