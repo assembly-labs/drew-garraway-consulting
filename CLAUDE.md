@@ -22,7 +22,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | **Cool Curriculum** | `/cool-curriculum/` | AI lesson planner for K-4 educators | Yes |
 | **Prompt Property** | `/prompt-property/` | AI assistant for property managers | Yes |
 | **TPL** | `/tpl/` | Tredyffrin Libraries printer documentation | Yes |
-| **Gather** | `/gather/` | Farmers market platform | Yes |
+| **Gather** | `/gather/` | Instacart for farmers markets - B2B2C marketplace | Yes |
 | **Read Out Loud** | `/read-out-loud/` | Text-to-speech PWA for reading documents | Yes |
 | **Agency** | `/agency/` | Agency Brewing brand assets and style guide | Yes |
 | **Locally Strong** | `/locally-strong/` | Nonprofit website for local community empowerment | Yes |
@@ -69,6 +69,7 @@ When you receive a task, first determine which project it belongs to. Look for:
 
 If the project has its own `CLAUDE.md`, read it before making changes:
 - `/TOMO/CLAUDE.md` - Comprehensive guide with design system, voice, deployment
+- `/gather/CLAUDE.md` - Complete context: product, personas, architecture, brand, business model
 - `/tpl/CLAUDE.md` - Style requirements, deployment, HTML conversion rules
 - `/fhm/CLAUDE.md` - Project overview, brand voice, content guides
 
