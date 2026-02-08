@@ -277,15 +277,32 @@
         /* Tables */
         .table-container {
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
             margin-bottom: var(--space-6);
             border: 1px solid var(--color-gray-200);
             border-radius: var(--border-radius-lg);
+            position: relative;
+        }
+
+        /* Scroll hint gradient for tables on mobile */
+        .table-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 30px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.9));
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             font-size: var(--text-sm);
+            min-width: 100%;
         }
 
         thead { background: var(--color-gray-100); }
@@ -832,6 +849,11 @@
                 -webkit-overflow-scrolling: touch;
             }
 
+            /* Show scroll hint on tablet */
+            .table-container::after {
+                opacity: 1;
+            }
+
             .table-container::-webkit-scrollbar {
                 height: 8px;
             }
@@ -843,6 +865,11 @@
             .table-container::-webkit-scrollbar-thumb {
                 background: var(--color-gray-400);
                 border-radius: 4px;
+            }
+
+            /* Ensure tables have minimum width for scrolling */
+            table {
+                min-width: 600px;
             }
         }
 
@@ -946,10 +973,26 @@
                 gap: var(--space-3);
             }
 
-            /* Table cells reduced padding */
+            /* Table cells reduced padding but readable */
             th, td {
                 padding: var(--space-2) var(--space-3);
+                font-size: var(--text-xs); /* 12px - minimum readable size */
+            }
+
+            /* Add scroll hint text before table containers */
+            .table-container {
+                margin-top: var(--space-2);
+            }
+
+            .table-container::before {
+                content: 'Scroll horizontally for more';
+                display: block;
                 font-size: var(--text-xs);
+                color: var(--color-gray-500);
+                text-align: center;
+                padding: var(--space-2);
+                background: var(--color-gray-50);
+                border-bottom: 1px solid var(--color-gray-200);
             }
 
             /* Feature table adjustments */
@@ -1074,22 +1117,22 @@
             }
 
             .flow-box-details {
-                font-size: 0.625rem;
+                font-size: 0.6875rem; /* 11px - slightly larger for readability */
             }
 
-            /* Table extreme compact */
+            /* Table compact but readable - minimum 12px font */
             th, td {
-                padding: var(--space-1) var(--space-2);
-                font-size: 0.625rem;
+                padding: var(--space-2) var(--space-2);
+                font-size: 0.75rem; /* 12px minimum for readability */
             }
 
             .feature-number {
                 width: 30px;
             }
 
-            /* Blockquote compact */
+            /* Blockquote compact but readable */
             blockquote {
-                padding: var(--space-2) var(--space-3);
+                padding: var(--space-3) var(--space-3);
                 font-size: var(--text-sm);
             }
 
