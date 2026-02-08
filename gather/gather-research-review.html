@@ -660,30 +660,454 @@
 
         .expand-btn:hover { background: var(--color-gray-200); }
 
-        @media (max-width: 1024px) {
-            .sidebar { display: none; }
-            .main-content { margin-left: 0; padding: var(--space-6); }
-            .card-grid { grid-template-columns: 1fr; }
-            .phase-cards { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 768px) {
-            .page-title { font-size: var(--text-3xl); }
-            .page-meta { flex-direction: column; gap: var(--space-2); }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .flow-row { flex-direction: column; align-items: center; }
-            .flow-arrow { transform: rotate(90deg); padding: var(--space-2) 0; }
-        }
-
         @media print {
             .sidebar { display: none; }
             .main-content { margin-left: 0; padding: 0; max-width: 100%; }
             .collapsible.open .collapsible-content { display: block !important; }
             a[href]::after { content: " (" attr(href) ")"; font-size: var(--text-xs); color: var(--color-gray-500); }
         }
+
+        /* ============================================
+           MOBILE NAVIGATION & RESPONSIVE ENHANCEMENTS
+           ============================================ */
+
+        /* Mobile Menu Button (Hamburger) */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: var(--space-4);
+            right: var(--space-4);
+            z-index: 200;
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            min-height: 44px;
+            border: none;
+            background: var(--color-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 0;
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--color-gray-50);
+        }
+
+        .mobile-menu-btn:focus {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--color-black);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            border-radius: 1px;
+        }
+
+        /* Hamburger animation when open */
+        .mobile-menu-btn.open span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .mobile-menu-btn.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.open span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        /* Sidebar Overlay */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-overlay.open {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Table Responsive Wrapper Enhancement */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: var(--space-6);
+        }
+
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-responsive::-webkit-scrollbar-track {
+            background: var(--color-gray-100);
+            border-radius: 4px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb {
+            background: var(--color-gray-400);
+            border-radius: 4px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb:hover {
+            background: var(--color-gray-500);
+        }
+
+        /* ============================================
+           TABLET BREAKPOINT (max-width: 1024px)
+           ============================================ */
+        @media (max-width: 1024px) {
+            /* Show mobile menu button */
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            /* Sidebar: hidden by default, slides in when open */
+            .sidebar {
+                display: block;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                box-shadow: none;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+                box-shadow: var(--shadow-md);
+            }
+
+            /* Main content adjustments */
+            .main-content {
+                margin-left: 0;
+                padding: var(--space-6);
+                padding-top: calc(var(--space-6) + 60px); /* Account for mobile menu button */
+            }
+
+            /* Grid adjustments */
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .phase-cards {
+                grid-template-columns: 1fr;
+            }
+
+            /* Ensure touch targets meet 44px minimum */
+            .toc-link {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                padding: var(--space-3) var(--space-4);
+            }
+
+            .expand-btn {
+                min-height: 44px;
+                min-width: 44px;
+                padding: var(--space-3) var(--space-4);
+            }
+
+            .collapsible-header {
+                min-height: 44px;
+                padding: var(--space-4) var(--space-5);
+            }
+
+            /* Table containers get scroll styling */
+            .table-container {
+                position: relative;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .table-container::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .table-container::-webkit-scrollbar-track {
+                background: var(--color-gray-100);
+            }
+
+            .table-container::-webkit-scrollbar-thumb {
+                background: var(--color-gray-400);
+                border-radius: 4px;
+            }
+        }
+
+        /* ============================================
+           MOBILE BREAKPOINT (max-width: 768px)
+           ============================================ */
+        @media (max-width: 768px) {
+            /* Typography scaling */
+            .page-title {
+                font-size: var(--text-3xl);
+            }
+
+            .section-title {
+                font-size: var(--text-xl);
+            }
+
+            .section-subtitle {
+                font-size: var(--text-lg);
+            }
+
+            /* Reduced padding for mobile */
+            .main-content {
+                padding: var(--space-4);
+                padding-top: calc(var(--space-4) + 60px);
+            }
+
+            .page-header {
+                margin-bottom: var(--space-8);
+                padding-bottom: var(--space-6);
+            }
+
+            .section {
+                margin-bottom: var(--space-10);
+            }
+
+            /* Meta stacking */
+            .page-meta {
+                flex-direction: column;
+                gap: var(--space-2);
+            }
+
+            /* Stats grid 2 columns */
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-3);
+            }
+
+            .stat-card {
+                padding: var(--space-3);
+            }
+
+            .stat-value {
+                font-size: var(--text-xl);
+            }
+
+            /* Flowchart stacking */
+            .flow-row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+                padding: var(--space-2) 0;
+            }
+
+            .flow-box {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            /* Callout padding reduction */
+            .callout {
+                padding: var(--space-4);
+            }
+
+            /* Blockquote sizing */
+            blockquote {
+                padding: var(--space-3) var(--space-4);
+                font-size: var(--text-base);
+            }
+
+            /* Card grid single column */
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-4);
+            }
+
+            .card {
+                padding: var(--space-4);
+            }
+
+            /* Phase cards */
+            .phase-card {
+                padding: var(--space-4);
+            }
+
+            /* Action items */
+            .action-item {
+                padding: var(--space-3) var(--space-4);
+                gap: var(--space-3);
+            }
+
+            /* Table cells reduced padding */
+            th, td {
+                padding: var(--space-2) var(--space-3);
+                font-size: var(--text-xs);
+            }
+
+            /* Feature table adjustments */
+            .feature-table th,
+            .feature-table td {
+                padding: var(--space-2) var(--space-3);
+            }
+
+            /* Links and buttons touch targets */
+            .card-link {
+                min-height: 44px;
+                padding: var(--space-2) 0;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            /* Expand controls */
+            .expand-controls {
+                flex-wrap: wrap;
+                gap: var(--space-2);
+            }
+
+            .expand-btn {
+                flex: 1 1 auto;
+                min-width: 120px;
+                text-align: center;
+            }
+        }
+
+        /* ============================================
+           SMALL MOBILE BREAKPOINT (max-width: 480px)
+           ============================================ */
+        @media (max-width: 480px) {
+            /* Typography further scaling */
+            .page-title {
+                font-size: var(--text-2xl);
+            }
+
+            .page-subtitle {
+                font-size: var(--text-base);
+            }
+
+            .section-title {
+                font-size: var(--text-lg);
+            }
+
+            /* Stats grid single column */
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Minimal padding */
+            .main-content {
+                padding: var(--space-3);
+                padding-top: calc(var(--space-3) + 56px);
+            }
+
+            .sidebar {
+                width: 85vw;
+                max-width: 280px;
+            }
+
+            /* Callout minimal padding */
+            .callout {
+                padding: var(--space-3);
+            }
+
+            .callout-title {
+                font-size: var(--text-base);
+            }
+
+            /* Card minimal padding */
+            .card {
+                padding: var(--space-3);
+            }
+
+            .phase-card {
+                padding: var(--space-3);
+            }
+
+            .phase-title {
+                font-size: var(--text-lg);
+            }
+
+            /* Action items compact */
+            .action-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-2);
+            }
+
+            .action-priority {
+                margin-bottom: var(--space-1);
+            }
+
+            /* Collapsible compact */
+            .collapsible-header {
+                padding: var(--space-3) var(--space-4);
+            }
+
+            .collapsible-title {
+                font-size: var(--text-sm);
+                flex-wrap: wrap;
+            }
+
+            /* Flowchart adjustments */
+            .flowchart {
+                padding: var(--space-4);
+            }
+
+            .flowchart-title {
+                font-size: var(--text-base);
+            }
+
+            .flow-box {
+                min-width: unset;
+                padding: var(--space-2) var(--space-3);
+            }
+
+            .flow-box-title {
+                font-size: var(--text-xs);
+            }
+
+            .flow-box-details {
+                font-size: 0.625rem;
+            }
+
+            /* Table extreme compact */
+            th, td {
+                padding: var(--space-1) var(--space-2);
+                font-size: 0.625rem;
+            }
+
+            .feature-number {
+                width: 30px;
+            }
+
+            /* Blockquote compact */
+            blockquote {
+                padding: var(--space-2) var(--space-3);
+                font-size: var(--text-sm);
+            }
+
+            /* Page meta compact */
+            .page-meta-item {
+                flex-direction: column;
+                gap: var(--space-1);
+            }
+        }
     </style>
 </head>
 <body>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <div class="page-wrapper">
         <!-- SIDEBAR -->
         <aside class="sidebar">
@@ -1802,6 +2226,35 @@
 
         window.addEventListener('scroll', highlightTocLink);
         highlightTocLink();
+    </script>
+    <script>
+    (function() {
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const tocLinks = document.querySelectorAll('.toc-link');
+
+        function toggleMenu() {
+            menuBtn.classList.toggle('open');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('open');
+            document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+        }
+
+        function closeMenu() {
+            menuBtn.classList.remove('open');
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', closeMenu);
+
+        tocLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    })();
     </script>
 </body>
 </html>
