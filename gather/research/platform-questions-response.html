@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gather Platform Questions — Response for Carlo & Team</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.7;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .intro {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .intro p {
+            margin-bottom: 1rem;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .question-block {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .status {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .status.scoped {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.partial {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status.explore {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status.discussion {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .response {
+            color: #333;
+        }
+
+        .response p {
+            margin-bottom: 1rem;
+        }
+
+        .response p:last-child {
+            margin-bottom: 0;
+        }
+
+        .response strong {
+            color: #1a1a1a;
+        }
+
+        .detail-box {
+            background: #f8f9fa;
+            border-left: 3px solid #007bff;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .detail-box.warning {
+            border-left-color: #ffc107;
+            background: #fffef5;
+        }
+
+        .detail-box.success {
+            border-left-color: #28a745;
+            background: #f8fff8;
+        }
+
+        .next-steps {
+            background: #1a1a1a;
+            color: #fff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .next-steps h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .next-steps ul {
+            margin-left: 1.25rem;
+        }
+
+        .next-steps li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            color: #888;
+            font-size: 0.85rem;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        code {
+            background: #f0f0f0;
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        ul, ol {
+            margin-left: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gather Platform — Questions & Responses</h1>
+    <p class="subtitle">For Carlo, Dara & Culinary Harvest Team — February 2026</p>
+
+    <div class="intro">
+        <p>Carlo, thanks for putting these questions together. This is exactly the kind of detail we need to make sure Gather serves CH's real operational needs — not just a generic marketplace.</p>
+        <p>I've gone through each question and provided answers based on what's currently in scope, what needs further exploration, and where we might need to have a deeper conversation about the right approach.</p>
+        <p>— Drew</p>
+    </div>
+
+    <!-- Question 1: Delivery -->
+    <div class="question-block">
+        <div class="question-number">Question 1</div>
+        <div class="question">Connectivity to delivery subcontractors (Uber Eats, DoorDash, etc.)</div>
+        <span class="status discussion">Needs Discussion</span>
+
+        <div class="response">
+            <p>This is an interesting one that I want to think through with you carefully.</p>
+
+            <p><strong>Current architecture:</strong> Gather is designed as a pickup-first platform. This was a deliberate decision based on studying the failures of Good Eggs ($200M+ burned), Farmigo ($26M burned), and Webvan ($800M bankruptcy) — all of which tried last-mile fresh food delivery and couldn't make the economics work.</p>
+
+            <p><strong>That said, I'm not saying "no."</strong> I did some research on how platforms like Square, Toast, and Shopify connect to delivery services. Here's what's possible:</p>
+
+            <div class="detail-box">
+                <strong>Option A: Middleware Integration</strong><br>
+                Use a service like Deliverect or Cuboh that consolidates Uber Eats, DoorDash, and Grubhub into a single integration. This would add delivery as an optional toggle at checkout. The customer bears the delivery fee; vendor margins stay the same whether pickup or delivery. Implementation: 8-12 weeks, ~$5-15K setup.
+            </div>
+
+            <div class="detail-box warning">
+                <strong>The key question for you:</strong><br>
+                Is delivery a Phase 1 must-have, or can we nail the pickup experience first and explore delivery as a Phase 2 add-on? I'd advocate for proving the core model at Berwyn first, then layering in delivery for markets where it makes sense.
+            </div>
+
+            <p>The good news: if we do add delivery, the vendor's income stays identical whether the customer picks up or gets delivery. The customer pays the delivery fee directly to DoorDash/Uber. We're not changing the fundamental economics.</p>
+
+            <p><strong>What I need from you:</strong> Is there specific customer demand driving this? Or is this more "nice to have eventually"? That'll help me prioritize correctly.</p>
+        </div>
+    </div>
+
+    <!-- Question 2: Time Slots -->
+    <div class="question-block">
+        <div class="question-number">Question 2</div>
+        <div class="question">Time slots for pickup with set quantities per half hour — needs to be a dropdown during checkout</div>
+        <span class="status scoped">Already Planned</span>
+
+        <div class="response">
+            <p><strong>Yes, this is in scope.</strong></p>
+
+            <p>The checkout flow includes "Pickup time slot selection (aligned with market hours)" as a core feature. Here's how it'll work:</p>
+
+            <ul>
+                <li>Configurable time slots per location (30-minute windows, or whatever CH prefers)</li>
+                <li>Capacity limits per slot to prevent over-booking (e.g., max 15 orders in the 10:00-10:30 window)</li>
+                <li>Dropdown in checkout — customer selects their preferred window</li>
+                <li>Slot availability updates in real-time as orders come in</li>
+            </ul>
+
+            <div class="detail-box success">
+                <strong>Implementation:</strong> This is straightforward. We'll need you to tell us the slot durations (30 min? 1 hour?) and any capacity constraints so we can configure it correctly for Berwyn.
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 3: Multiple Locations -->
+    <div class="question-block">
+        <div class="question-number">Question 3</div>
+        <div class="question">Multiple CH locations dropdown (Berwyn, Princeton, Allentown, etc.)</div>
+        <span class="status scoped">Already Planned</span>
+
+        <div class="response">
+            <p><strong>Yes, the platform supports this natively.</strong></p>
+
+            <p>Gather is built as a multi-market platform from the ground up. Each location (Berwyn, Princeton, Allentown) would be a separate "Market" entity with:</p>
+
+            <ul>
+                <li>Its own vendor pool (some vendors may overlap across locations)</li>
+                <li>Its own product catalog and availability</li>
+                <li>Its own pickup schedule and time slots</li>
+                <li>Location-specific settings (fees, operating hours, etc.)</li>
+            </ul>
+
+            <p>Customers would select their market at the start of shopping. They can switch between locations, and their cart is location-specific (you can't mix items from Berwyn and Princeton in one order).</p>
+
+            <div class="detail-box success">
+                <strong>For launch:</strong> We'll start with Berwyn only. When you're ready to add Princeton or Allentown, it's a configuration task — not new development. The infrastructure is already there.
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 4: Revenue Model -->
+    <div class="question-block">
+        <div class="question-number">Question 4</div>
+        <div class="question">How do we make money? Hoping to set up service charges and/or transaction fees, not markup on products</div>
+        <span class="status scoped">Exactly as Planned</span>
+
+        <div class="response">
+            <p><strong>This is exactly how Gather is designed.</strong></p>
+
+            <p>The revenue model is transaction-based, not markup-based:</p>
+
+            <ul>
+                <li><strong>2.5% marketplace transaction fee</strong> on online orders</li>
+                <li><strong>1% on SNAP/EBT processing</strong> (when applicable)</li>
+                <li>Optional service fees configurable per market</li>
+            </ul>
+
+            <p>Key principle: <strong>We never take inventory risk, never hold stock, never set prices.</strong> Vendors control their products completely. We facilitate; we don't intermediate.</p>
+
+            <div class="detail-box success">
+                <strong>Example order:</strong><br>
+                Customer pays: $50.00<br>
+                Platform fee (2.5%): $1.25<br>
+                Vendor receives: $48.75<br>
+                <br>
+                Clean, simple math. Vendor sees exactly what they're paying.
+            </div>
+
+            <p>This model protects you from the "Good Eggs problem" — when you're marking up products, you have to predict demand perfectly or eat the losses on unsold inventory. We skip that entirely.</p>
+        </div>
+    </div>
+
+    <!-- Question 5: Order Sheets / Shelf-to-Sheet -->
+    <div class="question-block">
+        <div class="question-number">Question 5</div>
+        <div class="question">Order sheet info and Shelf-to-sheet — want items on pick lists to be in order with where they are kept in the warehouse</div>
+        <span class="status partial">Partially Scoped — Enhancement Needed</span>
+
+        <div class="response">
+            <p><strong>The pick list functionality is in scope. Warehouse location sorting needs to be added.</strong></p>
+
+            <p>Current spec includes:</p>
+            <ul>
+                <li>Consolidated packing lists per vendor</li>
+                <li>Pick lists organized by product (not by order) for efficiency</li>
+                <li>Order management hub with fulfillment status</li>
+            </ul>
+
+            <p><strong>What we need to add:</strong> A <code>warehouse_location</code> field on each product so pick lists can be sorted by physical location.</p>
+
+            <div class="detail-box">
+                <strong>Recommended location format:</strong><br>
+                <code>ZONE-POSITION-SHELF-BIN</code> (e.g., <code>A-02-2-01</code>)<br><br>
+                Zone A = Room temp produce<br>
+                Zone B = Cold/refrigerated<br>
+                Zone C = Shelf-stable/packaged<br><br>
+                Pick lists would then print in physical walking order: all Zone A items together, then Zone B, etc.
+            </div>
+
+            <p>I did some research on warehouse picking optimization. For your scale (50-100 orders/day), the best approach is:</p>
+
+            <ul>
+                <li><strong>Batch picking by time slot:</strong> Group all orders for the 10:00-10:30 pickup window, pick all those items at once</li>
+                <li><strong>Sort by location within batch:</strong> Staff walks the warehouse once, not back-and-forth</li>
+                <li><strong>Then organize by order for customer pickup</strong></li>
+            </ul>
+
+            <p>This saves ~50% picking time compared to picking one order at a time.</p>
+
+            <p><strong>What I need from you:</strong> A rough sketch of how your warehouse is organized (zones, aisles, refrigerated areas) so we can set up the location codes correctly.</p>
+        </div>
+    </div>
+
+    <!-- Question 6: Invoice Receiving -->
+    <div class="question-block">
+        <div class="question-number">Question 6</div>
+        <div class="question">Back of house invoice receiving verification — bookkeeper access, invoice uploads, driver sign-off on modifications</div>
+        <span class="status explore">Needs Exploration</span>
+
+        <div class="response">
+            <p><strong>This is outside the current scope, but I want to understand it better.</strong></p>
+
+            <p>What you're describing is a <strong>wholesale receiving workflow</strong> — the kind of thing restaurants use when they receive deliveries from distributors (Sysco, US Foods, local farms doing wholesale).</p>
+
+            <p>Help me understand the use case: Is CH receiving wholesale product deliveries that need to be verified against invoices? Or is this about tracking what vendors bring to market?</p>
+
+            <div class="detail-box warning">
+                <strong>If it's wholesale receiving:</strong><br>
+                This is a significant feature add. It would include:
+                <ul style="margin-top: 0.5rem;">
+                    <li>Mobile receiving app (scan delivery, photo condition, note discrepancies)</li>
+                    <li>Invoice upload portal</li>
+                    <li>3-way matching (PO vs. received vs. invoice)</li>
+                    <li>Driver signature capture for discrepancies</li>
+                    <li>Bookkeeper approval queue</li>
+                    <li>Integration with QuickBooks/Xero for AP</li>
+                </ul>
+                This is probably Phase 2 or 3 work — not MVP.
+            </div>
+
+            <div class="detail-box success">
+                <strong>If it's vendor packing verification at market:</strong><br>
+                This is simpler and closer to what we're already building. Staff would check in vendors, verify items match the pick list, note any shortages. This is in scope for the Operations Dashboard.
+            </div>
+
+            <p><strong>Let's talk through this one.</strong> I want to make sure we're solving the right problem. Can you walk me through a specific example of when invoice verification happens and what the pain point is?</p>
+        </div>
+    </div>
+
+    <!-- Question 7: Auto Text Reminders -->
+    <div class="question-block">
+        <div class="question-number">Question 7</div>
+        <div class="question">Auto text reminders for customers — day before and hours before their selected pickup time</div>
+        <span class="status scoped">Already Planned</span>
+
+        <div class="response">
+            <p><strong>Yes, this is in scope.</strong></p>
+
+            <p>The platform includes automated pickup reminders via SMS and email:</p>
+
+            <ul>
+                <li><strong>Day-before reminder:</strong> "Your order from Berwyn Farmers Market is ready for pickup tomorrow at 10:30am"</li>
+                <li><strong>Hours-before reminder:</strong> "Reminder: Your pickup window is in 2 hours (10:30-11:00am)"</li>
+                <li>Both SMS (via Twilio) and email options</li>
+                <li>Customers can set their notification preferences</li>
+            </ul>
+
+            <div class="detail-box success">
+                <strong>Implementation:</strong> We'll use Twilio for SMS and SendGrid for email. Timing is configurable — if you want the day-before reminder at 6pm instead of noon, that's a setting.
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 8: Inventory Tracking + POS -->
+    <div class="question-block">
+        <div class="question-number">Question 8</div>
+        <div class="question">Inventory tracking tied to warehouse AND retail store POS — so online sales deduct from store inventory in real-time</div>
+        <span class="status partial">Partially Scoped — POS Integration Needs Details</span>
+
+        <div class="response">
+            <p><strong>Real-time inventory sync is planned. POS integration depends on which system you use.</strong></p>
+
+            <p>The platform is designed for real-time inventory management:</p>
+
+            <ul>
+                <li><strong>Single source of truth:</strong> One inventory count that all channels draw from</li>
+                <li><strong>Soft reservation on cart add:</strong> When a customer adds 3 bottles of EVOO to their cart, those 3 are soft-reserved for 15 minutes</li>
+                <li><strong>Hard deduction on order confirm:</strong> When they complete checkout, the inventory is deducted</li>
+                <li><strong>Real-time sync:</strong> Updates propagate across all channels immediately</li>
+            </ul>
+
+            <p>For the <strong>retail store POS integration</strong>, I did some research. Here's what's possible:</p>
+
+            <div class="detail-box">
+                <strong>If you're using Square:</strong><br>
+                Square has mature inventory APIs with webhook support. When an in-store sale happens, Square fires a webhook to Gather, and we update the online inventory immediately. This is the best-case scenario — real-time, bi-directional sync.
+            </div>
+
+            <div class="detail-box">
+                <strong>If you're using Toast, Clover, or Lightspeed:</strong><br>
+                All have APIs, but webhook support varies. We can still sync, but it might be polling-based (every 60 seconds) rather than instant.
+            </div>
+
+            <p><strong>What I need from you:</strong> What POS system does the retail store use (or will use)? That'll determine the integration approach.</p>
+
+            <p>The scenario you described — "only sell 7 of 10 EVOO bottles if 3 were ordered online" — is exactly what we're building. The POS employee would see a notification (or the inventory would already be updated) showing only 7 available.</p>
+        </div>
+    </div>
+
+    <!-- Question 9: Out of Stock Notification -->
+    <div class="question-block">
+        <div class="question-number">Question 9</div>
+        <div class="question">Indicator when out of a particular item — notification to warehouse/store manager</div>
+        <span class="status scoped">Easy to Add</span>
+
+        <div class="response">
+            <p><strong>Yes, we can do this.</strong></p>
+
+            <p>The inventory system already tracks <code>available</code>, <code>limited</code>, and <code>sold_out</code> status. Adding manager notifications when items hit zero (or fall below a threshold) is straightforward.</p>
+
+            <p>Implementation:</p>
+            <ul>
+                <li><strong>Critical threshold:</strong> When inventory falls below X units (configurable per product), notify manager</li>
+                <li><strong>Sold out:</strong> When inventory hits zero, immediate notification</li>
+                <li><strong>Delivery method:</strong> SMS, email, or in-app notification (manager's choice)</li>
+            </ul>
+
+            <div class="detail-box success">
+                <strong>Example notification:</strong><br>
+                "Low Stock Alert: EVOO 16oz (3 remaining) — Warehouse Zone C-02"<br>
+                "Sold Out: Strawberry Jam — Last sold at 11:42am"
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 10: Hide Vendors -->
+    <div class="question-block">
+        <div class="question-number">Question 10</div>
+        <div class="question">Ability to hide vendors and their items if they have nothing to sell in a particular week</div>
+        <span class="status scoped">Already Planned</span>
+
+        <div class="response">
+            <p><strong>Yes, this is supported.</strong></p>
+
+            <p>Vendors can be enabled or disabled for online sales at any time. When disabled:</p>
+
+            <ul>
+                <li>Their profile doesn't appear in the marketplace</li>
+                <li>Their products don't show up in search or browse</li>
+                <li>They're still in the system (historical data preserved)</li>
+                <li>Re-enabling is one click</li>
+            </ul>
+
+            <p>This works for both "vendor is on vacation this week" and "vendor only sells once a month" scenarios.</p>
+        </div>
+    </div>
+
+    <!-- Question 11: Vendor Profile Activation -->
+    <div class="question-block">
+        <div class="question-number">Question 11</div>
+        <div class="question">Vendor profiles — don't show "market sold out" for vendors who only sell once a month. Activate their profile only when they upload products.</div>
+        <span class="status scoped">Easy to Add</span>
+
+        <div class="response">
+            <p><strong>Yes, we can handle this.</strong></p>
+
+            <p>Two approaches:</p>
+
+            <p><strong>Option A: Manual activation</strong><br>
+            Market manager enables/disables vendor profiles manually. When the monthly vendor is ready to sell, you flip the switch.</p>
+
+            <p><strong>Option B: Auto-activation based on products (recommended)</strong><br>
+            Vendor profile automatically hides when they have zero products available. When they upload products for the month, the profile automatically appears. No manual intervention needed.</p>
+
+            <div class="detail-box success">
+                <strong>How it would work:</strong><br>
+                - Vendor uploads products on Monday<br>
+                - Profile automatically becomes visible in marketplace<br>
+                - After market day, products marked as sold/removed<br>
+                - Profile automatically hides again<br>
+                - No "Sold Out" messaging — just not visible
+            </div>
+
+            <p>This is cleaner than showing "sold out" for vendors who aren't actively selling that week.</p>
+        </div>
+    </div>
+
+    <!-- Question 12: Videos in Vendor Profiles -->
+    <div class="question-block">
+        <div class="question-number">Question 12</div>
+        <div class="question">Videos within vendor profiles — some may want to tell a story, others a video of them farming with music or voiceover</div>
+        <span class="status partial">Not Currently Specified — Easy to Add</span>
+
+        <div class="response">
+            <p><strong>Not in the current spec, but this is a great idea and easy to add.</strong></p>
+
+            <p>Current vendor profiles include: farm story (text), photos, certifications, production methods, social media links.</p>
+
+            <p>Adding video support would mean:</p>
+
+            <ul>
+                <li><strong>Option A: Embed YouTube/Vimeo</strong> — Vendor pastes a video URL, we embed it. Lowest effort, leverages existing platforms.</li>
+                <li><strong>Option B: Direct upload</strong> — Vendor uploads video file, we host and stream it. More work, but better control.</li>
+            </ul>
+
+            <p>I'd recommend starting with Option A (embedded YouTube/Vimeo). Most vendors already have videos on social media — we just need to let them link to them. If we find vendors want to upload directly, we can add that later.</p>
+
+            <div class="detail-box success">
+                <strong>Implementation:</strong> Add a "Video URL" field to vendor profiles. Display as an embedded player on the public vendor page. This is probably 2-3 days of work.
+            </div>
+        </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="next-steps">
+        <h2>Next Steps & Questions for You</h2>
+        <p style="margin-bottom: 1rem;">To move forward on these features, I need a few things:</p>
+        <ul>
+            <li><strong>Delivery:</strong> Is this a Phase 1 must-have, or can we explore it after launch? What's driving the request?</li>
+            <li><strong>Warehouse layout:</strong> Can you sketch or describe how the CH warehouse is organized (zones, aisles, cold storage areas)?</li>
+            <li><strong>Invoice receiving:</strong> Can you walk me through a specific example of when invoice verification happens? I want to make sure I understand the workflow.</li>
+            <li><strong>POS system:</strong> What POS does the retail store use (or will use)? This determines our integration approach.</li>
+            <li><strong>Time slot preferences:</strong> 30-minute windows? 1-hour windows? Any capacity limits per slot?</li>
+        </ul>
+        <p style="margin-top: 1rem;">Let's set up a 30-minute call to walk through these. I can also do a screen share to show you the current dashboard mockups.</p>
+    </div>
+
+    <div class="footer">
+        <p>Prepared by Drew Garraway — February 2026</p>
+        <p>Questions? drew@assemblylabs.co</p>
+    </div>
+</body>
+</html>
