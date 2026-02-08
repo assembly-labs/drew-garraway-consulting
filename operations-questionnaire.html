@@ -12,322 +12,255 @@
     }
 
     body {
-      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-      line-height: 1.6;
-      color: #37352F;
-      background: #FAFAFA;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #fff;
+      font-size: 17px;
     }
 
     .container {
-      max-width: 700px;
+      max-width: 640px;
       margin: 0 auto;
-      background: #FFFFFF;
-      min-height: 100vh;
+      padding: 40px 24px 80px;
     }
 
-    .header {
-      background: linear-gradient(135deg, #2D5016 0%, #4A7C28 100%);
-      color: white;
-      padding: 40px 32px;
-      text-align: center;
-    }
-
-    .header h1 {
-      font-size: 28px;
+    h1 {
+      font-size: 32px;
       font-weight: 700;
       margin-bottom: 8px;
+      letter-spacing: -0.5px;
     }
 
-    .header .subtitle {
-      font-size: 16px;
-      opacity: 0.9;
+    .subtitle {
+      color: #666;
+      font-size: 18px;
+      margin-bottom: 40px;
     }
 
-    .personal-message {
-      background: #FFFEF7;
-      padding: 32px;
-      border-bottom: 3px solid #FFD93D;
-    }
-
-    .greeting {
-      font-size: 22px;
-      font-weight: 600;
-      color: #2D5016;
-      margin-bottom: 16px;
-    }
-
-    .message-body {
-      font-size: 15px;
-      line-height: 1.8;
-      color: #37352F;
-    }
-
-    .message-body p {
-      margin-bottom: 14px;
-    }
-
-    .message-signature {
-      margin-top: 20px;
-    }
-
-    .message-signature .name {
-      font-weight: 600;
-      color: #2D5016;
-    }
-
-    .cta-box {
-      background: #F0FDF4;
-      border: 2px solid #4A7C28;
-      border-radius: 12px;
+    .intro {
+      background: #f9f9f9;
       padding: 24px;
-      margin-top: 24px;
-      text-align: center;
-    }
-
-    .cta-box p {
-      margin-bottom: 16px;
-      font-weight: 500;
-    }
-
-    .cta-button {
-      display: inline-block;
-      background: linear-gradient(135deg, #E65100 0%, #FF8F00 100%);
-      color: white;
-      text-decoration: none;
-      padding: 14px 28px;
       border-radius: 8px;
-      font-size: 16px;
+      margin-bottom: 48px;
+    }
+
+    .intro p {
+      margin-bottom: 12px;
+    }
+
+    .intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    .intro strong {
       font-weight: 600;
-      box-shadow: 0 4px 12px rgba(230, 81, 0, 0.3);
-      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(230, 81, 0, 0.4);
-    }
-
-    .content {
-      padding: 32px;
-    }
-
-    .time-estimate {
-      background: #F7F6F3;
-      padding: 12px 16px;
-      border-radius: 8px;
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 32px;
-      text-align: center;
+    .signature {
+      margin-top: 20px;
+      font-weight: 600;
     }
 
     .question {
-      margin-bottom: 32px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid #E3E2E0;
-    }
-
-    .question:last-of-type {
-      border-bottom: none;
-    }
-
-    .question-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #4A7C28;
-      color: white;
-      font-size: 14px;
-      font-weight: 600;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      margin-right: 12px;
-      flex-shrink: 0;
+      margin-bottom: 40px;
     }
 
     .question-text {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 600;
-      color: #37352F;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       display: flex;
-      align-items: flex-start;
+      gap: 12px;
     }
 
-    .question-text span:last-child {
-      flex: 1;
-    }
-
-    .question-context {
-      font-size: 14px;
+    .question-number {
       color: #666;
-      margin-bottom: 16px;
-      padding-left: 44px;
-      font-style: italic;
+      flex-shrink: 0;
     }
 
-    .answer-field {
-      width: 100%;
-      min-height: 100px;
-      padding: 16px;
-      border: 2px solid #E3E2E0;
-      border-radius: 8px;
+    .question-hint {
       font-size: 15px;
+      color: #666;
+      margin-bottom: 12px;
+      padding-left: 28px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
       font-family: inherit;
+      line-height: 1.6;
       resize: vertical;
       transition: border-color 0.2s;
     }
 
-    .answer-field:focus {
+    textarea:focus {
       outline: none;
-      border-color: #4A7C28;
+      border-color: #333;
     }
 
-    .footer {
-      background: #2D5016;
-      color: white;
-      padding: 40px 32px;
+    textarea::placeholder {
+      color: #aaa;
+    }
+
+    .submit-section {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid #eee;
       text-align: center;
     }
 
-    .footer h3 {
-      font-size: 20px;
-      margin-bottom: 12px;
+    .submit-section p {
+      margin-bottom: 16px;
+      color: #666;
     }
 
-    .footer p {
-      opacity: 0.9;
-      font-size: 14px;
-      margin-bottom: 20px;
+    .submit-btn {
+      display: inline-block;
+      background: #1a1a1a;
+      color: #fff;
+      text-decoration: none;
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: #333;
     }
 
     @media (max-width: 600px) {
-      .header, .personal-message, .content, .footer {
-        padding-left: 20px;
-        padding-right: 20px;
+      body {
+        font-size: 16px;
+      }
+
+      .container {
+        padding: 32px 20px 60px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .question-text {
+        font-size: 17px;
+      }
+
+      textarea {
+        min-height: 100px;
+        padding: 14px;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <h1>Gather Questionnaire</h1>
-      <p class="subtitle">10 Questions to Shape Our Platform</p>
+    <h1>Gather Questionnaire</h1>
+    <p class="subtitle">10 questions, ~10 minutes</p>
+
+    <div class="intro">
+      <p>Hey Carlo & Dara,</p>
+      <p>Thanks for taking 10 minutes to help shape Gather. We've done our research, but you're the real experts.</p>
+      <p>These questions focus on what we can't learn from documentation: <strong>your priorities, your frustrations, and what would actually make your life easier.</strong></p>
+      <p class="signature">— Drew</p>
     </div>
 
-    <div class="personal-message">
-      <p class="greeting">Hey Carlo & Dara,</p>
-      <div class="message-body">
-        <p>Thank you for taking 10 minutes to help shape Gather.</p>
-        <p>We've done our research on farmers market operations, but you're the real experts. These 10 questions focus on what we can't learn from documentation: <strong>your priorities, your frustrations, and what would actually make your life easier.</strong></p>
-        <p>Be honest and specific. There are no wrong answers.</p>
-      </div>
-      <div class="message-signature">
-        <p class="name">Drew</p>
-      </div>
-      <div class="cta-box">
-        <p>Click below to email your answers directly to me:</p>
-        <a href="#" class="cta-button" id="emailCTA">Email My Answers to Drew</a>
-      </div>
+    <div class="question">
+      <p class="question-text">
+        <span class="question-number">1.</span>
+        <span>What's your single biggest operational headache right now?</span>
+      </p>
+      <p class="question-hint">The thing that wastes the most time or causes the most stress.</p>
+      <textarea id="q1" placeholder="Type your answer..."></textarea>
     </div>
 
-    <div class="content">
-      <div class="time-estimate">Estimated time: 10-15 minutes</div>
-
-      <div class="question">
-        <p class="question-text">
-          <span class="question-number">1</span>
-          <span>What's your single biggest operational headache right now?</span>
-        </p>
-        <p class="question-context">The thing that wastes the most time, causes the most stress, or keeps you up at night.</p>
-        <textarea class="answer-field" id="q1" placeholder="Type your answer..."></textarea>
-      </div>
-
-      <div class="question">
-        <p class="question-text">
-          <span class="question-number">2</span>
-          <span>If you could wave a magic wand and fix ONE thing about how you run the market, what would it be?</span>
-        </p>
-        <textarea class="answer-field" id="q2" placeholder="Type your answer..."></textarea>
-      </div>
-
-      <div class="question">
-        <p class="question-text">
-          <span class="question-number">3</span>
-          <span>What tools or systems have you tried that didn't work? Why did they fail?</span>
-        </p>
-        <p class="question-context">Software, apps, processes, workarounds that didn't stick.</p>
-        <textarea class="answer-field" id="q3" placeholder="Type your answer..."></textarea>
-      </div>
-
-      <div class="question">
-        <p class="question-text">
-          <span class="question-number">4</span>
-          <span>Describe your least tech-savvy vendor. What would it take for THEM to adopt a new system?</span>
-        </p>
-        <p class="question-context">This helps us design for the hardest case, not the easiest.</p>
-        <textarea class="answer-field" id="q4" placeholder="Type your answer..."></textarea>
-      </div>
-
-      <div class="question">
-        <p class="question-text">
-          <span class="question-number">5</span>
-          <span>Walk me through a "bad day" at the market. What goes wrong?</span>
-        </p>
-        <p class="question-context">The chaotic mornings, the vendor no-shows, the customer complaints.</p>
-        <textarea class="answer-field" id="q5" placeholder="Type your answer..."></textarea>
-      </div>
-
-      <div class="question">
-        <p class="question-text">
-          <span class="question-number">6</span>
-          <span>What do customers ask for that you currently can't provide?</span>
-        </p>
-        <textarea class="answer-field" id="q6" placeholder="Type your answer..."></textarea>
-      </div>
-
-      <div class="question">
-        <p class="question-text">
-          <span class="question-number">7</span>
-          <span>What's the #1 thing that would make your vendors happier?</span>
-        </p>
-        <textarea class="answer-field" id="q7" placeholder="Type your answer..."></textarea>
-      </div>
-
-      <div class="question">
-        <p class="question-text">
-          <span class="question-number">8</span>
-          <span>How much time do you spend on admin work each week? What takes the longest?</span>
-        </p>
-        <p class="question-context">Be specific: "3 hours on X, 2 hours on Y..."</p>
-        <textarea class="answer-field" id="q8" placeholder="Type your answer..."></textarea>
-      </div>
-
-      <div class="question">
-        <p class="question-text">
-          <span class="question-number">9</span>
-          <span>What would make you trust a new platform enough to actually use it?</span>
-        </p>
-        <p class="question-context">What would overcome your skepticism? What would you need to see?</p>
-        <textarea class="answer-field" id="q9" placeholder="Type your answer..."></textarea>
-      </div>
-
-      <div class="question">
-        <p class="question-text">
-          <span class="question-number">10</span>
-          <span>Anything else we should know that we haven't asked about?</span>
-        </p>
-        <textarea class="answer-field" id="q10" placeholder="Type your answer..."></textarea>
-      </div>
-
+    <div class="question">
+      <p class="question-text">
+        <span class="question-number">2.</span>
+        <span>If you could wave a magic wand and fix ONE thing about how you run the market, what would it be?</span>
+      </p>
+      <textarea id="q2" placeholder="Type your answer..."></textarea>
     </div>
 
-    <div class="footer">
-      <h3>Thank You!</h3>
-      <p>Your insights directly shape what we build.</p>
-      <a href="#" class="cta-button" id="emailCTAFooter">Email My Answers to Drew</a>
+    <div class="question">
+      <p class="question-text">
+        <span class="question-number">3.</span>
+        <span>What tools or systems have you tried that didn't work? Why did they fail?</span>
+      </p>
+      <p class="question-hint">Software, apps, processes, workarounds that didn't stick.</p>
+      <textarea id="q3" placeholder="Type your answer..."></textarea>
+    </div>
+
+    <div class="question">
+      <p class="question-text">
+        <span class="question-number">4.</span>
+        <span>Describe your least tech-savvy vendor. What would it take for them to adopt a new system?</span>
+      </p>
+      <p class="question-hint">This helps us design for the hardest case, not the easiest.</p>
+      <textarea id="q4" placeholder="Type your answer..."></textarea>
+    </div>
+
+    <div class="question">
+      <p class="question-text">
+        <span class="question-number">5.</span>
+        <span>Walk me through a "bad day" at the market. What goes wrong?</span>
+      </p>
+      <p class="question-hint">The chaotic mornings, the vendor no-shows, the customer complaints.</p>
+      <textarea id="q5" placeholder="Type your answer..."></textarea>
+    </div>
+
+    <div class="question">
+      <p class="question-text">
+        <span class="question-number">6.</span>
+        <span>What do customers ask for that you currently can't provide?</span>
+      </p>
+      <textarea id="q6" placeholder="Type your answer..."></textarea>
+    </div>
+
+    <div class="question">
+      <p class="question-text">
+        <span class="question-number">7.</span>
+        <span>What's the #1 thing that would make your vendors happier?</span>
+      </p>
+      <textarea id="q7" placeholder="Type your answer..."></textarea>
+    </div>
+
+    <div class="question">
+      <p class="question-text">
+        <span class="question-number">8.</span>
+        <span>How much time do you spend on admin work each week? What takes the longest?</span>
+      </p>
+      <p class="question-hint">Be specific: "3 hours on X, 2 hours on Y..."</p>
+      <textarea id="q8" placeholder="Type your answer..."></textarea>
+    </div>
+
+    <div class="question">
+      <p class="question-text">
+        <span class="question-number">9.</span>
+        <span>What would make you trust a new platform enough to actually use it?</span>
+      </p>
+      <p class="question-hint">What would overcome your skepticism?</p>
+      <textarea id="q9" placeholder="Type your answer..."></textarea>
+    </div>
+
+    <div class="question">
+      <p class="question-text">
+        <span class="question-number">10.</span>
+        <span>Anything else we should know?</span>
+      </p>
+      <textarea id="q10" placeholder="Type your answer..."></textarea>
+    </div>
+
+    <div class="submit-section">
+      <p>When you're done, click below to email your answers.</p>
+      <a href="#" class="submit-btn" id="submitBtn">Send Answers to Drew</a>
     </div>
   </div>
 
@@ -337,7 +270,7 @@
         { id: 'q1', text: '1. What\'s your single biggest operational headache right now?' },
         { id: 'q2', text: '2. If you could wave a magic wand and fix ONE thing, what would it be?' },
         { id: 'q3', text: '3. What tools or systems have you tried that didn\'t work? Why?' },
-        { id: 'q4', text: '4. Describe your least tech-savvy vendor. What would it take for THEM to adopt a new system?' },
+        { id: 'q4', text: '4. Describe your least tech-savvy vendor. What would it take for them to adopt a new system?' },
         { id: 'q5', text: '5. Walk me through a "bad day" at the market. What goes wrong?' },
         { id: 'q6', text: '6. What do customers ask for that you currently can\'t provide?' },
         { id: 'q7', text: '7. What\'s the #1 thing that would make your vendors happier?' },
@@ -346,32 +279,23 @@
         { id: 'q10', text: '10. Anything else we should know?' }
       ];
 
-      let body = 'Hi Drew,\n\nHere are my answers to the Gather questionnaire:\n\n';
+      let body = 'Hi Drew,\n\nHere are my answers:\n\n';
 
       questions.forEach(q => {
-        const answer = document.getElementById(q.id).value.trim() || '[Your answer here]';
+        const answer = document.getElementById(q.id).value.trim() || '[No answer]';
         body += `${q.text}\n${answer}\n\n`;
       });
 
-      body += '---\n[Your Name]';
+      body += '—\n[Your Name]';
       return body;
     }
 
-    function createMailtoLink() {
+    document.getElementById('submitBtn').addEventListener('click', function(e) {
+      e.preventDefault();
       const to = 'drew@assemblylabs.co';
       const subject = 'Gather Questionnaire Response';
       const body = buildEmailBody();
-      return `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    }
-
-    document.getElementById('emailCTA').addEventListener('click', function(e) {
-      e.preventDefault();
-      window.location.href = createMailtoLink();
-    });
-
-    document.getElementById('emailCTAFooter').addEventListener('click', function(e) {
-      e.preventDefault();
-      window.location.href = createMailtoLink();
+      window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
   </script>
 </body>
