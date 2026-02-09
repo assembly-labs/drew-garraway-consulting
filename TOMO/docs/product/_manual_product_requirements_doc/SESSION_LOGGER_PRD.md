@@ -2,7 +2,7 @@
 
 **Feature:** Voice-First Session Logging (Journaling)
 **Status:** Specification Complete
-**Last Updated:** January 25, 2026
+**Last Updated:** February 8, 2026
 **Component:** `VoiceFirstLogger.tsx`
 
 ---
@@ -85,6 +85,8 @@ Users have a **90-second window** of motivation post-training before fatigue win
 | `durationMinutes` | Pre-selected (default: 90) | Can override | Yes | Yes |
 | `didSpar` | Pre-selected (default: null) | Can override | Yes | No |
 | `transcript` | — | From voice | View only | If recorded |
+| `lessonTopic` | Review phase | Can override | Yes | No |
+| `energyLevel` | Review phase | No | Yes | No |
 
 ### Detail Fields (AI-Extracted)
 
@@ -94,6 +96,13 @@ Users have a **90-second window** of motivation post-training before fatigue win
 | `workedWell` | What clicked today | Yes | Yes (text) | All belts |
 | `struggles` | What gave trouble | Yes | Yes (text) | Blue+ active, White greyed |
 | `rawText` | Additional notes | Yes (overflow) | Yes (textarea) | All belts |
+
+### Context Fields (User Input)
+
+| Field | Description | AI Extracted? | Editable? | Belt Visibility |
+|-------|-------------|---------------|-----------|-----------------|
+| `lessonTopic` | What did coach teach today? | No | Yes (text input) | All belts |
+| `energyLevel` | How did you feel? (1-5 scale) | No | Yes (picker) | All belts |
 
 ### Sparring Fields (AI-Extracted, Belt-Gated)
 
@@ -353,12 +362,11 @@ Default prompts cycle through. Belt-personalized prompts override if available f
 │   look right                       │
 ├────────────────────────────────────┤
 │                                    │
-│  TRANSCRIPT                        │
+│  VOICE TRANSCRIPT           [▼]    │
 │  ┌──────────────────────────────┐  │
 │  │ "Worked on guard passing     │  │
 │  │  today. Hit a knee slice     │  │
-│  │  twice. Got caught in a      │  │
-│  │  triangle from closed..."    │  │
+│  │  twice. Got caught in a..."  │  │
 │  │              Show more ▼     │  │
 │  └──────────────────────────────┘  │
 │                                    │
@@ -367,6 +375,11 @@ Default prompts cycle through. Belt-personalized prompts override if available f
 │  ┌──────────────────────────────┐  │
 │  │  Gi  •  90 min  •  Sparred   │  │
 │  │                        Edit  │  │
+│  └──────────────────────────────┘  │
+│                                    │
+│  WHAT DID COACH TEACH?             │
+│  ┌──────────────────────────────┐  │
+│  │ e.g., "Half guard sweeps"   │  │
 │  └──────────────────────────────┘  │
 │                                    │
 │  TECHNIQUES WORKED                 │
@@ -400,6 +413,12 @@ Default prompts cycle through. Belt-personalized prompts override if available f
 │  │  + Add                       │  │
 │  └──────────────────────────────┘  │
 │                                    │
+│  HOW DID YOU FEEL TODAY?           │
+│  ┌──────────────────────────────┐  │
+│  │  [1]  [2]  [3]  [4]  [5]     │  │
+│  │  😫   😔   😐   🙂   💪     │  │
+│  └──────────────────────────────┘  │
+│                                    │
 │  NOTES                             │
 │  ┌──────────────────────────────┐  │
 │  │ "Knee feels tight but        │  │
@@ -419,12 +438,14 @@ Default prompts cycle through. Belt-personalized prompts override if available f
 | Element | Spec |
 |---------|------|
 | Header | "REVIEW SESSION" + helper text |
-| Transcript | Collapsible, 3 lines preview, "Show more" expands |
+| Transcript section | Collapsible, 3 lines preview, "Show more/less" toggle |
 | Training summary | Single row with type/duration/spar, Edit button |
+| Lesson topic input | Full-width text input, optional |
 | Technique chips | Gold chips with ✕ to remove, + Add button |
 | Text sections | workedWell, struggles, notes - inline text with Edit button |
 | Sparring section | Expandable if didSpar=true, contains rounds + submissions |
 | Submission picker | SubmissionPicker component for given/received |
+| Energy picker | 5 buttons (1-5), labels: Exhausted, Tired, Okay, Good, Great |
 | Re-Record button | Secondary, 1/3 width, outline style |
 | Save button | Primary, 2/3 width, gold background |
 
@@ -660,6 +681,13 @@ interface SessionData {
   submissionsGiven: SubmissionCount[];
   submissionsReceived: SubmissionCount[];
 
+  // Context fields (user input)
+  lessonTopic: string | null;  // What did coach teach?
+  energyLevel: number | null;  // 1-5 scale
+
+  // Transcript display
+  voiceTranscript: string;     // Displayed in collapsible section
+
   // Transcript (from voice)
   transcript: string;
 }
@@ -687,6 +715,8 @@ interface Session {
   worked_well: string[];
   struggles: string[];
   voice_transcript: string;
+  lesson_topic: string | null;
+  energy_level: number | null;
 }
 
 interface Submission {
@@ -877,23 +907,26 @@ interface AIExtractionResult {
 
 ### Current State (Prototype)
 
-The `VoiceFirstLogger.tsx` implementation is **85% complete** per this spec:
+The `VoiceFirstLogger.tsx` implementation is **90% complete** per this spec:
 
 | Feature | Status | Notes |
 |---------|--------|-------|
 | Entry phase | ✅ Done | Smart defaults, record button prominent |
 | Recording phase | ⚠️ Partial | Missing 80s warning and 90s hard stop |
 | Processing phase | ✅ Done | Mock extraction working |
-| Review phase | ⚠️ Partial | Missing transcript display |
+| Review phase | ✅ Done | Transcript display, lesson topic, energy level added |
 | Success phase | ✅ Done | Belt-personalized messages working |
 | Error phase | ✅ Done | Retry logic working |
 | Belt gating | ⚠️ Partial | Sparring visible to all, needs lock state for white |
+| Data alignment | ✅ Done | All fields properly mapped to database |
 
 ### MVP Priorities
 
-1. **Add 90-second limit** with 80-second warning
-2. **Add transcript display** in Review phase (collapsible)
-3. **Add belt gating visuals** for sparring section
+1. ✅ **Add transcript display** in Review phase (collapsible) - DONE Feb 2026
+2. ✅ **Add lesson topic field** - DONE Feb 2026
+3. ✅ **Add energy level picker** - DONE Feb 2026
+4. **Add 90-second limit** with 80-second warning
+5. **Add belt gating visuals** for sparring section
 
 ### Production Swap Points
 
@@ -905,4 +938,14 @@ The `VoiceFirstLogger.tsx` implementation is **85% complete** per this spec:
 
 ---
 
-*Last updated: January 25, 2026*
+*Last updated: February 8, 2026*
+
+---
+
+## Change Log
+
+| Date | Change | Author |
+|------|--------|--------|
+| Feb 8, 2026 | Added lesson topic field, energy level picker, transcript display | Claude |
+| Feb 8, 2026 | Fixed data alignment: techniques→techniques_drilled, added worked_well/struggles capture | Claude |
+| Jan 25, 2026 | Initial PRD specification complete | — |

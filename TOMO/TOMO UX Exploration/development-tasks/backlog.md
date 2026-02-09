@@ -6,23 +6,53 @@ Features that have been designed, approved, and documented. Ready for implementa
 
 ## Ready for Development
 
+*No features currently in queue.*
+
+---
+
+## Completed
+
+### Session Logger Data Alignment
+- **Completed:** 2026-02-08
+- **Complexity:** M
+- **Summary:** Fixed data alignment between UI and database, added new capture fields
+
+**Changes implemented:**
+1. Fixed field mapping: `techniques` → `techniques_drilled`
+2. Added `did_spar` field to session save
+3. Added `worked_well` and `struggles` reflection fields to ReviewPhase
+4. Added `lesson_topic` text input ("What Did Coach Teach?")
+5. Added `energy_level` 1-5 picker ("How Did You Feel Today?")
+6. Added collapsible voice transcript display at top of ReviewPhase
+7. Updated database types to include `energy_level` field
+8. All fields now properly flow from UI → state → database
+
+**Files changed:**
+- `prototype/src/types/database.ts` - Added energy_level to interfaces
+- `prototype/src/components/features/VoiceFirstLogger.tsx` - Updated save function
+- `prototype/src/components/features/voice-logger/ReviewPhase.tsx` - Added new UI fields
+- `prototype/src/services/api.ts` - Handle energy_level in session creation
+
+---
+
 ### Onboarding Flow
-- **Approved:** 2026-02-08
+- **Completed:** 2026-02-08
+- **Complexity:** M
+- **Summary:** 4-screen first-time user onboarding with text step counter, pre-selected voice preference, and settings note.
+
+**Original spec:**
 - **Prototype:** [2026-02-08-onboarding-flow.html](../prototypes/approved/2026-02-08-onboarding-flow.html)
 - **Docs:**
   - [Feature Spec](../documentation/feature-specs/ONBOARDING.md)
   - [User Guide](../documentation/user-guides/guide-onboarding.md)
   - [Technical](../documentation/technical/tech-onboarding.md)
-- **Complexity:** M (updates to existing component, ~200 lines changed)
-- **Priority:** P1 (blocks first-time user experience)
-- **Summary:** 4-screen first-time user onboarding with text step counter, pre-selected voice preference, and settings note.
 
 **Implementation notes:**
-- Existing `Onboarding.tsx` needs updates to match approved prototype
-- Add step counter ("1 of 3" format)
-- Pre-select Voice with "Recommended" badge
-- Add "You can change this later in Settings" note
-- Show success section immediately on Screen 4
+- Existing `Onboarding.tsx` updated to match approved prototype
+- Added step counter ("1 of 3" format)
+- Pre-selected Voice with "Recommended" badge
+- Added "You can change this later in Settings" note
+- Success section shown immediately on Screen 4
 
 ---
 

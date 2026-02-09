@@ -23,11 +23,11 @@
 | # | Feature | Design | Dev | Priority | Notes |
 |---|---------|--------|-----|----------|-------|
 | 1.1 | **Dashboard** | ✅ | ✅ | Critical | Integrated in App.tsx with real data |
-| 1.2 | **Journal Entry** | ⬜ | ⬜ | Critical | Quick entry (<60s) is key UX requirement |
+| 1.2 | **Journal Entry** | ✅ | 🔵 | Critical | Voice logger enhanced Feb 2026: lesson topic, energy level, transcript display |
 | 1.3 | **Belt Progress** | ⬜ | ⬜ | Critical | IBJJF requirements checklist + coach feedback |
 | 1.4 | **Technique Library** | ⬜ | ⬜ | High | Search, filter, proficiency tracking |
 | 1.5 | **Profile** | ⬜ | ⬜ | High | Belt history, stats, settings |
-| 1.6 | **Sparring Tracker** | ⬜ | ⬜ | High | Integrated into Journal Entry |
+| 1.6 | **Sparring Tracker** | ⬜ | ⬜ | High | Integrated into Journal Entry (see 1.2) |
 | 1.7 | **Goals Manager** | ⬜ | ⬜ | Medium | Short/long-term goal tracking |
 | 1.8 | **Injury Tracker** | ⬜ | ⬜ | Medium | 91% injury rate - critical for retention |
 | 1.9 | **Competition Tracker** | ⬜ | ⬜ | Low | Optional but accelerates progress |
@@ -124,7 +124,7 @@
 
 | Category | Total | Complete | In Progress | Not Started |
 |----------|-------|----------|-------------|-------------|
-| Phase 1 Features | 9 | 1 | 0 | 8 |
+| Phase 1 Features | 9 | 1 | 1 | 7 |
 | Phase 2 Features | 4 | 0 | 0 | 4 |
 | Phase 3 Features | 3 | 0 | 0 | 3 |
 | Phase 4 Features | 4 | 0 | 0 | 4 |
@@ -133,7 +133,7 @@
 | Visualizations | 8 | 3 | 0 | 5 |
 | Design System | 1 | 1 | 0 | 0 |
 
-**Overall: 54 items | 14 complete (26%) | 0 in progress | 40 not started**
+**Overall: 54 items | 14 complete (26%) | 1 in progress | 39 not started**
 
 ---
 
@@ -185,6 +185,10 @@ Record key UX decisions as we make them:
 | Feb 08, 2026 | Onboarding | Text step counter over dots | "1 of 3" is informative without feeling gamified |
 | Feb 08, 2026 | Onboarding | Voice pre-selected with "Recommended" badge | Guide users toward optimal experience while allowing choice |
 | Feb 08, 2026 | Onboarding | 4-screen consolidated flow | Fewer screens, more content per screen, <60s completion |
+| Feb 08, 2026 | Session Logger | Added lesson topic field | Enables insight correlation with coach curriculum |
+| Feb 08, 2026 | Session Logger | Added energy level 1-5 picker | Enables fatigue pattern detection in insights |
+| Feb 08, 2026 | Session Logger | Added collapsible transcript display | Users can verify AI extraction accuracy |
+| Feb 08, 2026 | Session Logger | Fixed data alignment (techniques_drilled, worked_well, struggles) | Database fields now properly captured |
 | | | | |
 
 ---
