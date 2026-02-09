@@ -1,6 +1,6 @@
 # BJJ Progress Tracker - Feature & UI Tracker
 
-**Last Updated:** December 21, 2025
+**Last Updated:** February 8, 2026
 **Purpose:** Track design and development status of all features and UI components
 
 ---
@@ -59,7 +59,7 @@
 
 | # | Feature | Design | Dev | Priority | Notes |
 |---|---------|--------|-----|----------|-------|
-| 4.1 | **Onboarding Flow** | ⬜ | ⬜ | Critical | First-run experience, gym selection |
+| 4.1 | **Onboarding Flow** | 🟠 | ⬜ | Critical | 4-screen flow approved 2026-02-08, ready for dev |
 | 4.2 | **Settings** | ⬜ | ⬜ | Medium | Privacy, notifications, subscription |
 | 4.3 | **Legal/Payment** | ⬜ | ⬜ | Medium | ToS, subscription management |
 | 4.4 | **Notifications** | ⬜ | ⬜ | Low | Reminders, coach feedback alerts |
@@ -182,6 +182,9 @@ Record key UX decisions as we make them:
 | Dec 21, 2025 | Brand Voice | Never contradict user's coach | Amplify coaches, never replace them |
 | Dec 21, 2025 | Brand Voice | Six instructor pedagogy influences documented | Systems, Fundamentals, High-Performance, Precision, Motivational, Adaptive |
 | Dec 21, 2025 | Design System | Added "Voice & Copy" tab | Visual reference for copy guidelines during development |
+| Feb 08, 2026 | Onboarding | Text step counter over dots | "1 of 3" is informative without feeling gamified |
+| Feb 08, 2026 | Onboarding | Voice pre-selected with "Recommended" badge | Guide users toward optimal experience while allowing choice |
+| Feb 08, 2026 | Onboarding | 4-screen consolidated flow | Fewer screens, more content per screen, <60s completion |
 | | | | |
 
 ---

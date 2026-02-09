@@ -71,7 +71,7 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
   const [stripes, setStripes] = useState<number | null>(null);
   const [gym, setGym] = useState<GymSelection | null>(null);
   const [targetFrequency, setTargetFrequency] = useState<number | null>(null);
-  const [loggingPreference, setLoggingPreference] = useState<'voice' | 'text' | null>(null);
+  const [loggingPreference, setLoggingPreference] = useState<'voice' | 'text'>('voice'); // Pre-selected per approved design
 
   // Optional fields
   const [trainingGoals, setTrainingGoals] = useState<TrainingGoal[]>([]);
@@ -83,20 +83,18 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
 
   // Handle finish
   const handleFinish = (startLogging: boolean) => {
-    if (loggingPreference) {
-      onComplete({
-        name: name.trim(),
-        belt: belt!,
-        stripes: stripes!,
-        gym: gym!,
-        targetFrequency: targetFrequency!,
-        loggingPreference,
-        trainingGoals: trainingGoals.length > 0 ? trainingGoals : undefined,
-        experienceLevel: experienceLevel || undefined,
-      });
-      if (startLogging) {
-        onStartLogging();
-      }
+    onComplete({
+      name: name.trim(),
+      belt: belt!,
+      stripes: stripes!,
+      gym: gym!,
+      targetFrequency: targetFrequency!,
+      loggingPreference,
+      trainingGoals: trainingGoals.length > 0 ? trainingGoals : undefined,
+      experienceLevel: experienceLevel || undefined,
+    });
+    if (startLogging) {
+      onStartLogging();
     }
   };
 
@@ -120,6 +118,20 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
     color: 'var(--color-gray-400)',
     marginBottom: 'var(--space-md)',
   };
+
+  // Step counter component
+  const StepCounter = ({ current, total }: { current: number; total: number }) => (
+    <div style={{
+      fontFamily: 'var(--font-mono)',
+      fontSize: '12px',
+      fontWeight: 600,
+      color: 'var(--color-gray-500)',
+      letterSpacing: '0.05em',
+      marginBottom: 'var(--space-lg)',
+    }}>
+      <span style={{ color: 'var(--color-accent)' }}>{current}</span> of {total}
+    </div>
+  );
 
   // Screen 1: Welcome
   if (step === 'welcome') {
@@ -207,6 +219,9 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
         padding: 'var(--space-xl)',
         paddingTop: 'max(var(--space-2xl), env(safe-area-inset-top))',
       }}>
+        {/* Step Counter */}
+        <StepCounter current={1} total={3} />
+
         {/* Header */}
         <div style={{ marginBottom: 'var(--space-xl)' }}>
           <div style={{
@@ -423,6 +438,9 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
             Your Training
           </div>
         </div>
+
+        {/* Step Counter */}
+        <StepCounter current={2} total={3} />
 
         {/* Gym Picker - Mandatory */}
         <div style={{ marginBottom: 'var(--space-xl)' }}>
@@ -669,6 +687,9 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
           </div>
         </div>
 
+        {/* Step Counter */}
+        <StepCounter current={3} total={3} />
+
         {/* Logging Preference Label */}
         <label style={sectionLabelStyle}>
           How do you want to log sessions?
@@ -714,8 +735,26 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
                 ? 'var(--color-accent)'
                 : 'var(--color-white)',
               marginBottom: 2,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--space-sm)',
             }}>
               Voice
+              <span style={{
+                display: 'inline-block',
+                padding: '2px 8px',
+                backgroundColor: 'rgba(245, 166, 35, 0.15)',
+                border: '1px solid var(--color-accent)',
+                borderRadius: '4px',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '10px',
+                fontWeight: 600,
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                color: 'var(--color-accent)',
+              }}>
+                Recommended
+              </span>
             </div>
             <div style={{
               fontSize: 'var(--text-sm)',
@@ -778,53 +817,60 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
           </div>
         </button>
 
-        {/* Success Section - Only shows after preference selected */}
-        {loggingPreference && (
+        {/* Settings Note */}
+        <p style={{
+          textAlign: 'center',
+          fontSize: '13px',
+          fontWeight: 500,
+          color: 'var(--color-gray-500)',
+          marginTop: 'var(--space-md)',
+          marginBottom: 'var(--space-lg)',
+        }}>
+          You can change this later in Settings
+        </p>
+
+        {/* Success Section - Always visible since Voice is pre-selected */}
+        <div style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+        }}>
+          {/* Checkmark */}
           <div style={{
-            flex: 1,
+            width: 64,
+            height: 64,
+            borderRadius: 'var(--radius-full)',
+            backgroundColor: 'var(--color-success)',
             display: 'flex',
-            flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            textAlign: 'center',
+            marginBottom: 'var(--space-lg)',
           }}>
-            {/* Checkmark */}
-            <div style={{
-              width: 64,
-              height: 64,
-              borderRadius: 'var(--radius-full)',
-              backgroundColor: 'var(--color-success)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 'var(--space-lg)',
-            }}>
-              <Icons.Check size={32} color="white" />
-            </div>
-
-            <div style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'var(--text-xl)',
-              fontWeight: 700,
-              color: 'var(--color-white)',
-              marginBottom: 'var(--space-sm)',
-            }}>
-              You're all set, {name}!
-            </div>
-
-            <p style={{
-              fontSize: 'var(--text-base)',
-              color: 'var(--color-gray-400)',
-              marginBottom: 'var(--space-xl)',
-              maxWidth: 280,
-            }}>
-              Your journey is now being tracked.
-            </p>
+            <Icons.Check size={32} color="white" />
           </div>
-        )}
 
-        {/* Spacer when no preference selected */}
-        {!loggingPreference && <div style={{ flex: 1 }} />}
+          <div style={{
+            fontFamily: 'var(--font-heading)',
+            fontSize: 'var(--text-xl)',
+            fontWeight: 700,
+            color: 'var(--color-white)',
+            marginBottom: 'var(--space-sm)',
+          }}>
+            You're all set{name ? `, ${name}` : ''}!
+          </div>
+
+          <p style={{
+            fontSize: 'var(--text-base)',
+            color: 'var(--color-gray-400)',
+            marginBottom: 'var(--space-xl)',
+            maxWidth: 280,
+          }}>
+            Your journey is now being tracked.
+          </p>
+        </div>
 
         {/* CTAs */}
         <div style={{
@@ -832,17 +878,12 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
         }}>
           <button
             onClick={() => handleFinish(true)}
-            disabled={!loggingPreference}
             style={{
               width: '100%',
               padding: 'var(--space-lg)',
               marginBottom: 'var(--space-md)',
-              backgroundColor: loggingPreference
-                ? 'var(--color-accent)'
-                : 'var(--color-gray-700)',
-              color: loggingPreference
-                ? 'var(--color-primary)'
-                : 'var(--color-gray-500)',
+              backgroundColor: 'var(--color-accent)',
+              color: 'var(--color-primary)',
               border: 'none',
               borderRadius: 'var(--radius-md)',
               fontFamily: 'var(--font-heading)',
@@ -850,7 +891,7 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
               fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: 'var(--tracking-wide)',
-              cursor: loggingPreference ? 'pointer' : 'not-allowed',
+              cursor: 'pointer',
             }}
           >
             Log Your First Session
@@ -858,18 +899,15 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
 
           <button
             onClick={() => handleFinish(false)}
-            disabled={!loggingPreference}
             style={{
               width: '100%',
               padding: 'var(--space-md)',
               backgroundColor: 'transparent',
-              color: loggingPreference
-                ? 'var(--color-gray-400)'
-                : 'var(--color-gray-600)',
+              color: 'var(--color-gray-400)',
               border: 'none',
               borderRadius: 'var(--radius-md)',
               fontSize: 'var(--text-base)',
-              cursor: loggingPreference ? 'pointer' : 'not-allowed',
+              cursor: 'pointer',
             }}
           >
             Explore the app first

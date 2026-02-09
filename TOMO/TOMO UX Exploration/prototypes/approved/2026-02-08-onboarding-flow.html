@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TOMO - Onboarding Flow</title>
+  <style>
+    /* ============================================
+       TOMO DESIGN TOKENS
+       Source: /docs/design-system/tokens.md
+       ============================================ */
+    @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap');
+
+    :root {
+      /* Primary Colors */
+      --color-black: #111111;
+      --color-white: #FFFFFF;
+      --color-gold: #F5A623;
+      --color-gold-dim: rgba(245, 166, 35, 0.15);
+      --color-gold-glow: rgba(245, 166, 35, 0.25);
+
+      /* Semantic Colors */
+      --color-positive: #22c55e;
+      --color-positive-dim: rgba(34, 197, 94, 0.15);
+      --color-negative: #ef4444;
+
+      /* Grayscale */
+      --color-gray-100: #f5f5f5;
+      --color-gray-200: #e5e5e5;
+      --color-gray-300: #d4d4d4;
+      --color-gray-400: #c4c4c4;
+      --color-gray-500: #a3a3a3;
+      --color-gray-600: #8a8a8a;
+      --color-gray-700: #4a4a4a;
+      --color-gray-800: #1f1f1f;
+      --color-gray-900: #161616;
+
+      /* Belt Colors */
+      --color-belt-white: #FFFFFF;
+      --color-belt-blue: #0033A0;
+      --color-belt-purple: #4B0082;
+      --color-belt-brown: #8B4513;
+      --color-belt-black: #000000;
+
+      /* Fonts */
+      --font-display: 'Unbounded', sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Spacing */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 500;
+      background: var(--color-black);
+      color: var(--color-white);
+      min-height: 100vh;
+      max-width: 375px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+
+    /* ============================================
+       SCREEN CONTAINER
+       ============================================ */
+    .screen {
+      display: none;
+      min-height: 100vh;
+      padding: var(--space-lg);
+      padding-bottom: 100px;
+      flex-direction: column;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    /* ============================================
+       HEADER / BACK BUTTON
+       ============================================ */
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--space-xl);
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      padding: var(--space-sm);
+      margin-left: -8px;
+      cursor: pointer;
+      color: var(--color-gray-400);
+      transition: color 0.2s;
+    }
+
+    .back-btn:hover {
+      color: var(--color-white);
+    }
+
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
+    .screen-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: var(--space-xl);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-gray-400);
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-label .required {
+      color: var(--color-gold);
+    }
+
+    .optional-divider {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin: var(--space-xl) 0;
+    }
+
+    .optional-divider::before,
+    .optional-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--color-gray-700);
+    }
+
+    .optional-divider span {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-gray-500);
+      white-space: nowrap;
+    }
+
+    /* ============================================
+       FORM INPUTS
+       ============================================ */
+    .form-group {
+      margin-bottom: var(--space-lg);
+    }
+
+    .form-input {
+      width: 100%;
+      height: 52px;
+      background: var(--color-gray-900);
+      border: 1px solid var(--color-gray-700);
+      border-radius: 4px;
+      padding: 0 var(--space-md);
+      font-family: var(--font-body);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--color-white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-input::placeholder {
+      color: var(--color-gray-500);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 3px var(--color-gold-dim);
+    }
+
+    /* ============================================
+       BELT SELECTOR
+       ============================================ */
+    .belt-selector {
+      display: flex;
+      gap: 6px;
+    }
+
+    .belt-btn {
+      flex: 1;
+      height: 72px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--color-gray-800);
+      border: 2px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .belt-btn:hover {
+      background: var(--color-gray-700);
+    }
+
+    .belt-btn.selected {
+      border-color: var(--color-gold);
+      background: var(--color-gold-dim);
+    }
+
+    .belt-swatch {
+      width: 24px;
+      height: 8px;
+      border-radius: 2px;
+    }
+
+    .belt-swatch.white { background: var(--color-belt-white); }
+    .belt-swatch.blue { background: var(--color-belt-blue); }
+    .belt-swatch.purple { background: var(--color-belt-purple); }
+    .belt-swatch.brown { background: var(--color-belt-brown); }
+    .belt-swatch.black { background: var(--color-belt-black); border: 1px solid var(--color-gray-700); }
+
+    .belt-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-gray-400);
+      text-transform: uppercase;
+    }
+
+    .belt-btn.selected .belt-label {
+      color: var(--color-gold);
+    }
+
+    /* ============================================
+       STRIPE SELECTOR
+       ============================================ */
+    .stripe-selector {
+      display: flex;
+      gap: 8px;
+    }
+
+    .stripe-btn {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-gray-800);
+      border: 2px solid transparent;
+      border-radius: 4px;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-gray-400);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .stripe-btn:hover {
+      background: var(--color-gray-700);
+    }
+
+    .stripe-btn.selected {
+      border-color: var(--color-gold);
+      background: var(--color-gold-dim);
+      color: var(--color-gold);
+    }
+
+    /* ============================================
+       FREQUENCY CHIPS
+       ============================================ */
+    .frequency-selector {
+      display: flex;
+      gap: 8px;
+    }
+
+    .frequency-chip {
+      flex: 1;
+      height: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-gray-800);
+      border: 2px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .frequency-chip:hover {
+      background: var(--color-gray-700);
+    }
+
+    .frequency-chip.selected {
+      border-color: var(--color-gold);
+      background: var(--color-gold-dim);
+    }
+
+    .frequency-number {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-white);
+    }
+
+    .frequency-chip.selected .frequency-number {
+      color: var(--color-gold);
+    }
+
+    .frequency-unit {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--color-gray-500);
+    }
+
+    /* ============================================
+       MULTI-SELECT CHIPS (Goals, Experience)
+       ============================================ */
+    .chip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 10px 16px;
+      background: var(--color-gray-800);
+      border: 2px solid transparent;
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-gray-300);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .chip:hover {
+      background: var(--color-gray-700);
+    }
+
+    .chip.selected {
+      border-color: var(--color-gold);
+      background: var(--color-gold-dim);
+      color: var(--color-gold);
+    }
+
+    /* ============================================
+       GYM PICKER
+       ============================================ */
+    .gym-search-container {
+      position: relative;
+    }
+
+    .gym-search {
+      width: 100%;
+      height: 52px;
+      background: var(--color-gray-900);
+      border: 1px solid var(--color-gray-700);
+      border-radius: 4px;
+      padding: 0 var(--space-md);
+      padding-left: 44px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--color-white);
+    }
+
+    .gym-search::placeholder {
+      color: var(--color-gray-500);
+    }
+
+    .gym-search:focus {
+      outline: none;
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 3px var(--color-gold-dim);
+    }
+
+    .gym-search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-gray-500);
+    }
+
+    .gym-results {
+      margin-top: var(--space-sm);
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .gym-result {
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-md);
+      background: var(--color-gray-800);
+      border-radius: 4px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .gym-result:hover {
+      background: var(--color-gray-700);
+    }
+
+    .gym-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-white);
+    }
+
+    .gym-location {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-gray-500);
+      margin-top: 2px;
+    }
+
+    .gym-add-manual {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-md);
+      background: var(--color-gray-800);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+      color: var(--color-gold);
+      font-weight: 600;
+    }
+
+    .gym-add-manual:hover {
+      background: var(--color-gray-700);
+    }
+
+    .gym-selected {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-md);
+      background: var(--color-gold-dim);
+      border: 1px solid var(--color-gold);
+      border-radius: 4px;
+    }
+
+    .gym-selected-name {
+      font-weight: 600;
+      color: var(--color-white);
+    }
+
+    .gym-clear-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-gray-400);
+      padding: 4px;
+    }
+
+    .gym-clear-btn:hover {
+      color: var(--color-white);
+    }
+
+    /* ============================================
+       LOGGING PREFERENCE CARDS
+       ============================================ */
+    .preference-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .preference-card {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      padding: var(--space-lg);
+      background: var(--color-gray-800);
+      border: 2px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .preference-card:hover {
+      background: var(--color-gray-700);
+    }
+
+    .preference-card.selected {
+      border-color: var(--color-gold);
+      background: var(--color-gold-dim);
+    }
+
+    .preference-card.dimmed {
+      opacity: 0.5;
+    }
+
+    .preference-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-gold);
+    }
+
+    .preference-card:not(.selected) .preference-icon {
+      color: var(--color-gray-400);
+    }
+
+    .preference-content {
+      flex: 1;
+    }
+
+    .preference-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 4px;
+    }
+
+    .preference-desc {
+      font-size: 14px;
+      color: var(--color-gray-400);
+      line-height: 1.4;
+    }
+
+    .recommended-badge {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      background: var(--color-gold-dim);
+      border: 1px solid var(--color-gold);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-gold);
+      vertical-align: middle;
+    }
+
+    .settings-note {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-gray-500);
+      margin-top: var(--space-md);
+    }
+
+    /* ============================================
+       SUCCESS STATE
+       ============================================ */
+    .success-section {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: var(--space-xl) 0;
+      animation: fadeSlideUp 0.3s ease-out;
+    }
+
+    .success-section.visible {
+      display: flex;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .success-checkmark {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--color-positive);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-lg);
+      animation: scaleIn 0.3s ease-out;
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+
+    .success-message {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* ============================================
+       BUTTONS
+       ============================================ */
+    .btn {
+      width: 100%;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--color-gold);
+      color: var(--color-black);
+    }
+
+    .btn-primary:hover {
+      background: #e09520;
+    }
+
+    .btn-primary:disabled {
+      background: var(--color-gray-700);
+      color: var(--color-gray-500);
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: none;
+      color: var(--color-gray-400);
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .btn-secondary:hover {
+      color: var(--color-white);
+    }
+
+    .fixed-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 375px;
+      padding: var(--space-lg);
+      background: linear-gradient(to top, var(--color-black) 80%, transparent);
+    }
+
+    /* ============================================
+       WELCOME SCREEN
+       ============================================ */
+    .welcome-screen {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: var(--space-2xl);
+    }
+
+    .welcome-logo {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--color-white);
+      margin-bottom: var(--space-sm);
+    }
+
+    .welcome-kanji {
+      font-size: 32px;
+      color: var(--color-gold);
+      margin-bottom: var(--space-xl);
+    }
+
+    .welcome-taglines {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .welcome-tagline {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--color-gray-300);
+      margin-bottom: var(--space-sm);
+    }
+
+    .welcome-divider {
+      width: 80px;
+      height: 2px;
+      background: var(--color-gray-700);
+      margin: var(--space-xl) auto;
+    }
+
+    /* ============================================
+       STEP COUNTER
+       ============================================ */
+    .step-counter {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-gray-500);
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-lg);
+    }
+
+    .step-counter .current {
+      color: var(--color-gold);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       SCREEN 1: WELCOME
+       ============================================ -->
+  <div class="screen welcome-screen active" id="screen-welcome">
+    <div class="welcome-logo">TOMO</div>
+    <div class="welcome-kanji">友</div>
+
+    <div class="welcome-taglines">
+      <div class="welcome-tagline">Track your journey.</div>
+      <div class="welcome-tagline">See your progress.</div>
+      <div class="welcome-tagline">Know what's next.</div>
+    </div>
+
+    <div class="welcome-divider"></div>
+
+    <button class="btn btn-primary" onclick="goToScreen('about')" style="margin-top: var(--space-xl);">
+      GET STARTED
+    </button>
+  </div>
+
+  <!-- ============================================
+       SCREEN 2: ABOUT YOU
+       ============================================ -->
+  <div class="screen" id="screen-about">
+    <div class="header">
+      <button class="back-btn" onclick="goToScreen('welcome')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="step-counter"><span class="current">1</span> of 3</div>
+
+    <h1 class="screen-title">About You</h1>
+
+    <div class="form-group">
+      <label class="section-label">WHAT SHOULD WE CALL YOU? <span class="required">*</span></label>
+      <input type="text" class="form-input" id="name-input" placeholder="First name" maxlength="30" oninput="validateAboutScreen()">
+    </div>
+
+    <div class="form-group">
+      <label class="section-label">WHAT'S YOUR CURRENT BELT? <span class="required">*</span></label>
+      <div class="belt-selector">
+        <button class="belt-btn" data-belt="white" onclick="selectBelt('white')">
+          <div class="belt-swatch white"></div>
+          <span class="belt-label">White</span>
+        </button>
+        <button class="belt-btn" data-belt="blue" onclick="selectBelt('blue')">
+          <div class="belt-swatch blue"></div>
+          <span class="belt-label">Blue</span>
+        </button>
+        <button class="belt-btn" data-belt="purple" onclick="selectBelt('purple')">
+          <div class="belt-swatch purple"></div>
+          <span class="belt-label">Purple</span>
+        </button>
+        <button class="belt-btn" data-belt="brown" onclick="selectBelt('brown')">
+          <div class="belt-swatch brown"></div>
+          <span class="belt-label">Brown</span>
+        </button>
+        <button class="belt-btn" data-belt="black" onclick="selectBelt('black')">
+          <div class="belt-swatch black"></div>
+          <span class="belt-label">Black</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="section-label">HOW MANY STRIPES? <span class="required">*</span></label>
+      <div class="stripe-selector">
+        <button class="stripe-btn" data-stripes="0" onclick="selectStripes(0)">0</button>
+        <button class="stripe-btn" data-stripes="1" onclick="selectStripes(1)">1</button>
+        <button class="stripe-btn" data-stripes="2" onclick="selectStripes(2)">2</button>
+        <button class="stripe-btn" data-stripes="3" onclick="selectStripes(3)">3</button>
+        <button class="stripe-btn" data-stripes="4" onclick="selectStripes(4)">4</button>
+      </div>
+    </div>
+
+    <div class="fixed-bottom">
+      <button class="btn btn-primary" id="about-continue-btn" disabled onclick="goToScreen('training')">
+        CONTINUE
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SCREEN 3: YOUR TRAINING
+       ============================================ -->
+  <div class="screen" id="screen-training">
+    <div class="header">
+      <button class="back-btn" onclick="goToScreen('about')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="step-counter"><span class="current">2</span> of 3</div>
+
+    <h1 class="screen-title">Your Training</h1>
+
+    <!-- Gym Picker -->
+    <div class="form-group">
+      <label class="section-label">WHERE DO YOU TRAIN? <span class="required">*</span></label>
+
+      <!-- Search state -->
+      <div class="gym-search-container" id="gym-search-container">
+        <svg class="gym-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="gym-search" id="gym-search" placeholder="Search gyms..." oninput="handleGymSearch()">
+      </div>
+
+      <div class="gym-results" id="gym-results">
+        <div class="gym-result" onclick="selectGym('UPRISE MMA', 'Los Angeles, CA')">
+          <span class="gym-name">UPRISE MMA</span>
+          <span class="gym-location">Los Angeles, CA</span>
+        </div>
+        <div class="gym-result" onclick="selectGym('Alliance Paoli', 'Paoli, PA')">
+          <span class="gym-name">Alliance Paoli</span>
+          <span class="gym-location">Paoli, PA</span>
+        </div>
+        <div class="gym-result" onclick="selectGym('Alliance HQ', 'Atlanta, GA')">
+          <span class="gym-name">Alliance HQ (Original)</span>
+          <span class="gym-location">Atlanta, GA</span>
+        </div>
+        <div class="gym-add-manual" onclick="selectGym('Custom Gym', '')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>Add my gym manually</span>
+        </div>
+      </div>
+
+      <!-- Selected state (hidden by default) -->
+      <div class="gym-selected" id="gym-selected" style="display: none;">
+        <span class="gym-selected-name" id="gym-selected-name"></span>
+        <button class="gym-clear-btn" onclick="clearGym()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Frequency Selector -->
+    <div class="form-group">
+      <label class="section-label">HOW OFTEN DO YOU WANT TO TRAIN? <span class="required">*</span></label>
+      <div class="frequency-selector">
+        <button class="frequency-chip" data-freq="2" onclick="selectFrequency(2)">
+          <span class="frequency-number">1-2x</span>
+          <span class="frequency-unit">/week</span>
+        </button>
+        <button class="frequency-chip" data-freq="4" onclick="selectFrequency(4)">
+          <span class="frequency-number">3-4x</span>
+          <span class="frequency-unit">/week</span>
+        </button>
+        <button class="frequency-chip" data-freq="5" onclick="selectFrequency(5)">
+          <span class="frequency-number">5+</span>
+          <span class="frequency-unit">/week</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Optional Section -->
+    <div class="optional-divider">
+      <span>TELL US MORE (OPTIONAL)</span>
+    </div>
+
+    <!-- Training Goals (Multi-select) -->
+    <div class="form-group">
+      <label class="section-label">WHY DO YOU TRAIN?</label>
+      <div class="chip-grid">
+        <button class="chip" data-goal="competition" onclick="toggleGoal('competition')">Compete</button>
+        <button class="chip" data-goal="fitness" onclick="toggleGoal('fitness')">Fitness</button>
+        <button class="chip" data-goal="hobby" onclick="toggleGoal('hobby')">Hobby</button>
+        <button class="chip" data-goal="mental" onclick="toggleGoal('mental')">Mental</button>
+      </div>
+    </div>
+
+    <!-- Experience Level (Single-select) -->
+    <div class="form-group">
+      <label class="section-label">HOW LONG HAVE YOU TRAINED?</label>
+      <div class="chip-grid">
+        <button class="chip" data-exp="new" onclick="selectExperience('new')">Brand new</button>
+        <button class="chip" data-exp="beginner" onclick="selectExperience('beginner')">&lt; 1 year</button>
+        <button class="chip" data-exp="intermediate" onclick="selectExperience('intermediate')">1-3 years</button>
+        <button class="chip" data-exp="experienced" onclick="selectExperience('experienced')">3+ years</button>
+      </div>
+    </div>
+
+    <div class="fixed-bottom">
+      <button class="btn btn-primary" id="training-continue-btn" disabled onclick="goToScreen('start')">
+        CONTINUE
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SCREEN 4: GET STARTED
+       ============================================ -->
+  <div class="screen" id="screen-start">
+    <div class="header">
+      <button class="back-btn" onclick="goToScreen('training')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="step-counter"><span class="current">3</span> of 3</div>
+
+    <h1 class="screen-title">Almost there!</h1>
+
+    <div class="form-group">
+      <label class="section-label">HOW DO YOU WANT TO LOG SESSIONS?</label>
+      <div class="preference-cards">
+        <div class="preference-card selected" id="pref-voice" onclick="selectPreference('voice')">
+          <div class="preference-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+          </div>
+          <div class="preference-content">
+            <div class="preference-title">Voice <span class="recommended-badge">Recommended</span></div>
+            <div class="preference-desc">Just talk after class. 60 seconds, hands-free.</div>
+          </div>
+        </div>
+
+        <div class="preference-card dimmed" id="pref-text" onclick="selectPreference('text')">
+          <div class="preference-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+              <path d="M6 8h.001M10 8h.001M14 8h.001M18 8h.001M8 12h.001M12 12h.001M16 12h.001M7 16h10"></path>
+            </svg>
+          </div>
+          <div class="preference-content">
+            <div class="preference-title">Text</div>
+            <div class="preference-desc">Type your notes. Traditional journaling.</div>
+          </div>
+        </div>
+      </div>
+      <p class="settings-note">You can change this later in Settings</p>
+    </div>
+
+    <!-- Success Section (shown by default since Voice is pre-selected) -->
+    <div class="success-section visible" id="success-section">
+      <div class="success-checkmark">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <div class="success-message">You're all set, <span id="success-name">there</span>!</div>
+
+      <button class="btn btn-primary" onclick="completeOnboarding('log')" style="margin-bottom: var(--space-md);">
+        LOG YOUR FIRST SESSION
+      </button>
+      <button class="btn btn-secondary" onclick="completeOnboarding('explore')">
+        Explore the app first
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================
+       JAVASCRIPT: STATE & INTERACTIONS
+       ============================================ -->
+  <script>
+    // Onboarding State
+    const state = {
+      name: '',
+      belt: null,
+      stripes: null,
+      gym: null,
+      frequency: null,
+      goals: [],
+      experience: null,
+      preference: 'voice' // Default to voice (recommended)
+    };
+
+    // Screen Navigation
+    function goToScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen-' + screenId).classList.add('active');
+
+      // Update success name when reaching start screen
+      if (screenId === 'start' && state.name) {
+        document.getElementById('success-name').textContent = state.name;
+      }
+    }
+
+    // About You Screen
+    function selectBelt(belt) {
+      state.belt = belt;
+      document.querySelectorAll('.belt-btn').forEach(b => b.classList.remove('selected'));
+      document.querySelector(`[data-belt="${belt}"]`).classList.add('selected');
+      validateAboutScreen();
+    }
+
+    function selectStripes(stripes) {
+      state.stripes = stripes;
+      document.querySelectorAll('.stripe-btn').forEach(b => b.classList.remove('selected'));
+      document.querySelector(`[data-stripes="${stripes}"]`).classList.add('selected');
+      validateAboutScreen();
+    }
+
+    function validateAboutScreen() {
+      state.name = document.getElementById('name-input').value.trim();
+      const isValid = state.name.length > 0 && state.belt !== null && state.stripes !== null;
+      document.getElementById('about-continue-btn').disabled = !isValid;
+    }
+
+    // Training Screen
+    function handleGymSearch() {
+      // In real implementation, this would filter the gym database
+      // For prototype, we just show/hide the results
+    }
+
+    function selectGym(name, location) {
+      state.gym = { name, location };
+      document.getElementById('gym-search-container').style.display = 'none';
+      document.getElementById('gym-results').style.display = 'none';
+      document.getElementById('gym-selected').style.display = 'flex';
+      document.getElementById('gym-selected-name').textContent = location ? `${name}, ${location}` : name;
+      validateTrainingScreen();
+    }
+
+    function clearGym() {
+      state.gym = null;
+      document.getElementById('gym-search-container').style.display = 'block';
+      document.getElementById('gym-results').style.display = 'block';
+      document.getElementById('gym-selected').style.display = 'none';
+      document.getElementById('gym-search').value = '';
+      validateTrainingScreen();
+    }
+
+    function selectFrequency(freq) {
+      state.frequency = freq;
+      document.querySelectorAll('.frequency-chip').forEach(c => c.classList.remove('selected'));
+      document.querySelector(`[data-freq="${freq}"]`).classList.add('selected');
+      validateTrainingScreen();
+    }
+
+    function toggleGoal(goal) {
+      const chip = document.querySelector(`[data-goal="${goal}"]`);
+      const index = state.goals.indexOf(goal);
+      if (index === -1) {
+        state.goals.push(goal);
+        chip.classList.add('selected');
+      } else {
+        state.goals.splice(index, 1);
+        chip.classList.remove('selected');
+      }
+    }
+
+    function selectExperience(exp) {
+      state.experience = exp;
+      document.querySelectorAll('[data-exp]').forEach(c => c.classList.remove('selected'));
+      document.querySelector(`[data-exp="${exp}"]`).classList.add('selected');
+    }
+
+    function validateTrainingScreen() {
+      const isValid = state.gym !== null && state.frequency !== null;
+      document.getElementById('training-continue-btn').disabled = !isValid;
+    }
+
+    // Get Started Screen
+    function selectPreference(pref) {
+      state.preference = pref;
+
+      // Update card states
+      const voiceCard = document.getElementById('pref-voice');
+      const textCard = document.getElementById('pref-text');
+
+      voiceCard.classList.remove('selected', 'dimmed');
+      textCard.classList.remove('selected', 'dimmed');
+
+      if (pref === 'voice') {
+        voiceCard.classList.add('selected');
+        textCard.classList.add('dimmed');
+      } else {
+        textCard.classList.add('selected');
+        voiceCard.classList.add('dimmed');
+      }
+
+      // Show success section
+      document.getElementById('success-section').classList.add('visible');
+    }
+
+    function completeOnboarding(destination) {
+      // In real app, this would save state and navigate
+      console.log('Onboarding complete!', state);
+      console.log('Destination:', destination);
+      alert(`Onboarding complete!\n\nName: ${state.name}\nBelt: ${state.belt} (${state.stripes} stripes)\nGym: ${state.gym?.name}\nFrequency: ${state.frequency}x/week\nGoals: ${state.goals.join(', ') || 'None'}\nExperience: ${state.experience || 'Not specified'}\nPreference: ${state.preference}\n\nDestination: ${destination === 'log' ? 'Session Logger' : 'Dashboard'}`);
+    }
+  </script>
+
+  <!--
+  ============================================
+  INTERACTION NOTES (for reviewer)
+  ============================================
+
+  ## What This Prototype Covers
+
+  This is a complete 4-screen onboarding flow for TOMO:
+
+  1. WELCOME SCREEN
+     - Brand intro with logo, kanji (友), and taglines
+     - Single "Get Started" CTA
+
+  2. ABOUT YOU SCREEN
+     - Name input (mandatory, 1-30 chars)
+     - Belt selector (5 belts, mandatory)
+     - Stripes selector (0-4, mandatory)
+     - Continue button disabled until all 3 filled
+
+  3. YOUR TRAINING SCREEN
+     - Gym picker with search (mandatory)
+       - Shows sample gyms from database
+       - "Add my gym manually" option
+       - Selected gym shows as chip with X to clear
+     - Frequency selector (1-2x, 3-4x, 5+ per week, mandatory)
+     - Optional section divider
+     - Training goals (multi-select: Compete, Fitness, Hobby, Mental)
+     - Experience level (single-select: New, <1yr, 1-3yr, 3+yr)
+     - Continue button disabled until gym + frequency selected
+
+  4. GET STARTED SCREEN
+     - Logging preference cards (Voice or Text)
+     - On selection:
+       - Selected card gets gold border
+       - Other card dims
+       - Success section animates in
+     - Success section shows:
+       - Green checkmark (animated)
+       - "You're all set, [Name]!" message
+       - "Log Your First Session" primary CTA
+       - "Explore the app first" secondary CTA
+
+  ## Design System Compliance
+
+  - All colors from tokens.md
+  - Fonts: Unbounded (headlines), Inter (body), JetBrains Mono (labels)
+  - Font weights: 500+ only (no 400)
+  - Touch targets: 56px+ for primary actions
+  - 4px spacing grid
+  - No emojis - SVG icons only
+  - Mobile-first (375px viewport)
+
+  ## Questions for Reviewer
+
+  1. Should the gym search show real results from the database, or is
+     the static list sufficient for prototyping?
+
+  2. Should "Black belt" require confirmation since stripes work
+     differently (degrees)?
+
+  3. Is the success animation timing right (300ms)?
+
+  4. Should we add haptic feedback notes for mobile?
+
+  ## Belt Personalization Notes
+
+  After onboarding, the selected belt affects the entire app:
+  - White belt: Survival framing, consistency celebration
+  - Blue belt: Identity support, plateau acknowledgment
+  - Purple+: Depth, systems tracking, teaching tools
+
+  This belt selection is the foundation of TOMO's personalization system.
+  See /docs/product/BELT_PERSONALIZATION_SYSTEM.md for details.
+
+  ## To Review in Browser
+
+  1. Open this file in a browser
+  2. Use mobile viewport (375px width) or responsive mode
+  3. Click through all 4 screens
+  4. Try validation (leave fields empty, then fill them)
+  5. Test back navigation (data should persist)
+  6. Complete the flow to see the alert with captured data
+  -->
+
+</body>
+</html>
