@@ -10,6 +10,67 @@ import { SubmissionPicker } from '../../ui';
 import { DURATION_OPTIONS, TRAINING_TYPE_OPTIONS, RECENT_TECHNIQUES } from './constants';
 import type { ReviewPhaseProps } from './types';
 
+function TranscriptSection({ transcript }: { transcript: string }) {
+  const [expanded, setExpanded] = useState(false);
+  const lines = transcript.split('\n');
+  const preview = lines.slice(0, 3).join('\n');
+  const hasMore = lines.length > 3;
+
+  return (
+    <div style={{
+      marginBottom: 'var(--space-lg)',
+      padding: 'var(--space-md)',
+      backgroundColor: 'var(--color-gray-900)',
+      border: '1px solid var(--color-gray-800)',
+      borderRadius: 'var(--radius-md)',
+    }}>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 'var(--space-sm)',
+      }}>
+        <span style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--text-xs)',
+          fontWeight: 600,
+          color: 'var(--color-gray-400)',
+          textTransform: 'uppercase',
+          letterSpacing: 'var(--tracking-wider)',
+        }}>
+          Voice Transcript
+        </span>
+        {hasMore && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: 'var(--color-gold)',
+              fontSize: 'var(--text-xs)',
+              fontWeight: 600,
+              cursor: 'pointer',
+              padding: 'var(--space-xs)',
+            }}
+          >
+            {expanded ? 'Show less' : 'Show more'}
+          </button>
+        )}
+      </div>
+      <p style={{
+        fontSize: 'var(--text-sm)',
+        color: 'var(--color-gray-300)',
+        lineHeight: 1.5,
+        margin: 0,
+        whiteSpace: 'pre-wrap',
+      }}>
+        {expanded ? transcript : preview}
+        {!expanded && hasMore && '...'}
+      </p>
+    </div>
+  );
+}
+
 export function ReviewPhase({ sessionData, updateField, onSave, onReRecord, isValid }: ReviewPhaseProps) {
   const [showCustomDuration, setShowCustomDuration] = useState(false);
   const [customDuration, setCustomDuration] = useState('');
@@ -55,6 +116,11 @@ export function ReviewPhase({ sessionData, updateField, onSave, onReRecord, isVa
         overflowY: 'auto',
         padding: 'var(--space-lg)',
       }}>
+        {/* Voice Transcript (collapsible) */}
+        {sessionData.voiceTranscript && (
+          <TranscriptSection transcript={sessionData.voiceTranscript} />
+        )}
+
         {/* Training Type */}
         <div style={{ marginBottom: 'var(--space-lg)' }}>
           <label style={{
@@ -94,6 +160,37 @@ export function ReviewPhase({ sessionData, updateField, onSave, onReRecord, isVa
               );
             })}
           </div>
+        </div>
+
+        {/* Lesson Topic */}
+        <div style={{ marginBottom: 'var(--space-lg)' }}>
+          <label style={{
+            display: 'block',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: 'var(--tracking-wider)',
+            color: 'var(--color-gray-400)',
+            marginBottom: 'var(--space-sm)',
+          }}>
+            What Did Coach Teach?
+          </label>
+          <input
+            type="text"
+            value={sessionData.lessonTopic || ''}
+            onChange={e => updateField('lessonTopic', e.target.value || null)}
+            placeholder="Today's lesson topic (optional)"
+            style={{
+              width: '100%',
+              padding: 'var(--space-md)',
+              backgroundColor: 'var(--color-gray-900)',
+              border: '1px solid var(--color-gray-700)',
+              borderRadius: 'var(--radius-md)',
+              color: 'var(--color-white)',
+              fontSize: 'var(--text-base)',
+            }}
+          />
         </div>
 
         {/* Duration */}
@@ -479,6 +576,54 @@ export function ReviewPhase({ sessionData, updateField, onSave, onReRecord, isVa
               resize: 'vertical',
             }}
           />
+        </div>
+
+        {/* Energy Level */}
+        <div style={{ marginBottom: 'var(--space-lg)' }}>
+          <label style={{
+            display: 'block',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: 'var(--tracking-wider)',
+            color: 'var(--color-gray-400)',
+            marginBottom: 'var(--space-sm)',
+          }}>
+            How Did You Feel Today?
+          </label>
+          <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
+            {[1, 2, 3, 4, 5].map(level => {
+              const isSelected = sessionData.energyLevel === level;
+              const labels = ['Exhausted', 'Tired', 'Okay', 'Good', 'Great'];
+              return (
+                <button
+                  key={level}
+                  onClick={() => updateField('energyLevel', level)}
+                  style={{
+                    flex: 1,
+                    padding: 'var(--space-sm) var(--space-xs)',
+                    backgroundColor: isSelected ? 'var(--color-gold)' : 'var(--color-gray-800)',
+                    border: isSelected ? '2px solid var(--color-gold)' : '1px solid var(--color-gray-700)',
+                    borderRadius: 'var(--radius-md)',
+                    color: isSelected ? 'var(--color-black)' : 'var(--color-gray-300)',
+                    fontSize: 'var(--text-xs)',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    minHeight: '48px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '2px',
+                  }}
+                >
+                  <span style={{ fontSize: 'var(--text-base)' }}>{level}</span>
+                  <span style={{ fontSize: '10px', opacity: 0.7 }}>{labels[level - 1]}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Notes */}

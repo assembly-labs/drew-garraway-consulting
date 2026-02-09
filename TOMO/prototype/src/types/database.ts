@@ -93,6 +93,7 @@ export interface Session {
 
   worked_well: string[]; // Things that went well
   struggles: string[]; // Areas of difficulty
+  energy_level: number | null; // 1-5 scale, how user felt
   notes: string | null;
   voice_transcript: string | null;
   created_at: string; // ISO timestamp
@@ -113,6 +114,7 @@ export interface SessionInsert {
   techniques?: string[]; // Legacy
   worked_well?: string[];
   struggles?: string[];
+  energy_level?: number | null;
   notes?: string | null;
   voice_transcript?: string | null;
 }
@@ -130,6 +132,7 @@ export interface SessionUpdate {
   techniques?: string[]; // Legacy
   worked_well?: string[];
   struggles?: string[];
+  energy_level?: number | null;
   notes?: string | null;
   voice_transcript?: string | null;
   updated_at?: string;
@@ -285,6 +288,7 @@ export interface SessionData {
   // Qualitative (parsed from voice/text)
   workedWell: string[];
   struggles: string[];
+  energyLevel: number | null; // 1-5 scale, how user felt
 
   // Legacy fields
   techniques: string[]; // Deprecated: use techniquesDrilled
@@ -311,6 +315,7 @@ export const DEFAULT_SESSION_DATA: SessionData = {
   submissionsReceived: [],
   workedWell: [],
   struggles: [],
+  energyLevel: null,
   techniques: [], // Legacy
 };
 

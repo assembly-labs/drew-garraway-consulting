@@ -183,6 +183,7 @@ const sessionsService = {
       training_type: data.training_type,
       duration_minutes: data.duration_minutes || null,
       lesson_topic: data.lesson_topic || null,
+      energy_level: data.energy_level || null,
       techniques_drilled: data.techniques_drilled || [],
       did_spar: data.did_spar ?? false,
       sparring_rounds: data.sparring_rounds || null,

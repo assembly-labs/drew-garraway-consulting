@@ -153,6 +153,8 @@ export function VoiceFirstLogger({ onComplete, onCancel }: VoiceFirstLoggerProps
         worked_well: sessionData.workedWell,
         struggles: sessionData.struggles,
         voice_transcript: sessionData.rawText || '',
+        lesson_topic: sessionData.lessonTopic,
+        energy_level: sessionData.energyLevel,
       });
 
       // Save submissions if we have any
