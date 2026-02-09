@@ -146,24 +146,53 @@ drew-garraway-consulting/
 
 ## Deployment Architecture
 
-All projects use **Cloudflare Pages** with automatic deployments via GitHub integration.
+All projects use **Cloudflare Pages** with automatic deployments via GitHub integration, with **GitHub Actions** providing quality gates on pull requests.
 
 ### How It Works
 
-Cloudflare Pages is connected directly to the GitHub repository. When you push to `main`, Cloudflare automatically:
-1. Detects changes
-2. Builds the project (if configured)
-3. Deploys to the live site
+**Pull Requests:**
+1. Open a PR to `main`
+2. GitHub Actions runs build/test/lint for changed projects
+3. PR is blocked if checks fail
+4. Merge when checks pass
 
-No GitHub Actions workflows are needed - Cloudflare handles everything.
+**Deployments:**
+1. Merge PR to `main`
+2. Cloudflare Pages auto-detects changes
+3. Builds and deploys to production
 
 ### Deployment Flow
 
 ```
-Push to main → Cloudflare Pages detects changes → Build → Live
+PR opened → GitHub Actions (build/test/lint) → ✓ Pass → Merge → Cloudflare auto-deploy → Live
+                                             → ✗ Fail → Fix issues → Re-run
 ```
 
-- Deploys complete in ~1-2 minutes
+### CI/CD Configuration
+
+Quality checks are defined in `.github/workflows/pr-checks.yml`:
+
+| Project | Checks Run |
+|---------|------------|
+| TOMO | build, lint |
+| Scout | build, lint |
+| Career-Chat | build, test, lint |
+| F_This_App | build, lint |
+| Mikey-real | build, lint |
+| Cool Curriculum | build |
+| Gather | build, lint |
+| Luka | build |
+| FHM | build, lint |
+
+**Key features:**
+- Only runs checks for projects with changes (fast)
+- Runs checks in parallel
+- Uses npm caching for speed
+- Cancels in-progress runs when new commits are pushed
+
+### Production Deploys
+
+- Deploys complete in ~1-2 minutes after merge
 - No cache purging needed - Cloudflare handles automatically
 - Check deployment status in the Cloudflare Pages dashboard
 
@@ -190,6 +219,73 @@ wrangler pages deploy _site --project-name=drewgarraway
 # Luka
 cd luka && npm run build && wrangler pages deploy . --project-name=luka
 ```
+
+---
+
+## Workflow Commands
+
+When the user asks to "test", "review", "stage", "launch", etc., follow these processes:
+
+### "Test" / "Run Tests"
+
+1. Identify the project
+2. Run the project's test command:
+   ```bash
+   cd <project> && npm run test
+   ```
+3. If no test script exists, run type checking:
+   ```bash
+   npm run build  # catches TypeScript errors
+   ```
+4. Report results clearly
+
+### "Review" / "Code Review"
+
+1. Run `git status` and `git diff` to see all changes
+2. Check for:
+   - TypeScript errors (`npm run build`)
+   - Lint issues (`npm run lint`)
+   - Test failures (`npm run test`)
+3. Summarize changes and flag any concerns
+4. If all checks pass, confirm ready for PR
+
+### "Stage" / "Staging" / "Preview"
+
+1. Create a feature branch if not already on one:
+   ```bash
+   git checkout -b feature/<name>
+   ```
+2. Commit changes with descriptive message
+3. Push to remote:
+   ```bash
+   git push -u origin <branch>
+   ```
+4. Open a PR to `main` - Cloudflare auto-creates preview URL
+5. Share the preview URL with user
+
+### "Launch" / "Deploy" / "Ship" / "Go Live"
+
+1. Ensure all changes are committed
+2. Verify CI checks pass:
+   - If on feature branch: merge PR to `main`
+   - If on `main`: push triggers auto-deploy
+3. Confirm deployment in Cloudflare Pages dashboard
+4. Share production URL with user
+
+### "Commit" / "Save"
+
+1. Run `git status` to see changes
+2. Run `git diff` to review what changed
+3. Stage relevant files
+4. Create commit with descriptive message
+5. Do NOT push unless explicitly asked
+
+### "Push" / "PR" / "Pull Request"
+
+1. Ensure changes are committed
+2. Push to remote branch
+3. If PR requested, create via `gh pr create`
+4. Share PR URL with user
 
 ---
 
