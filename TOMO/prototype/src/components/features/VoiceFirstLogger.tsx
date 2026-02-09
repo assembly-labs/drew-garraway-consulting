@@ -147,10 +147,11 @@ export function VoiceFirstLogger({ onComplete, onCancel }: VoiceFirstLoggerProps
         date: sessionDate,
         training_type: sessionData.trainingType || 'gi',
         duration_minutes: sessionData.durationMinutes,
+        did_spar: sessionData.didSpar,
         sparring_rounds: sessionData.sparringRounds,
-        techniques: sessionData.techniquesDrilled,
-        worked_well: [],
-        struggles: [],
+        techniques_drilled: sessionData.techniquesDrilled,
+        worked_well: sessionData.workedWell,
+        struggles: sessionData.struggles,
         voice_transcript: sessionData.rawText || '',
       });
 

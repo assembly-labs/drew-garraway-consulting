@@ -411,6 +411,76 @@ export function ReviewPhase({ sessionData, updateField, onSave, onReRecord, isVa
           </div>
         </div>
 
+        {/* Reflection: What Clicked */}
+        <div style={{ marginBottom: 'var(--space-lg)' }}>
+          <label style={{
+            display: 'block',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: 'var(--tracking-wider)',
+            color: 'var(--color-gray-400)',
+            marginBottom: 'var(--space-sm)',
+          }}>
+            What Clicked Today?
+          </label>
+          <textarea
+            value={sessionData.workedWell.join('\n')}
+            onChange={e => {
+              const lines = e.target.value.split('\n').filter(line => line.trim() !== '');
+              updateField('workedWell', lines.length > 0 ? lines : [e.target.value]);
+            }}
+            placeholder="A breakthrough, something that felt good..."
+            rows={2}
+            style={{
+              width: '100%',
+              padding: 'var(--space-md)',
+              backgroundColor: 'var(--color-gray-900)',
+              border: '1px solid var(--color-positive)',
+              borderRadius: 'var(--radius-md)',
+              color: 'var(--color-white)',
+              fontSize: 'var(--text-base)',
+              resize: 'vertical',
+            }}
+          />
+        </div>
+
+        {/* Reflection: What Gave Trouble */}
+        <div style={{ marginBottom: 'var(--space-lg)' }}>
+          <label style={{
+            display: 'block',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: 'var(--tracking-wider)',
+            color: 'var(--color-gray-400)',
+            marginBottom: 'var(--space-sm)',
+          }}>
+            What Gave You Trouble?
+          </label>
+          <textarea
+            value={sessionData.struggles.join('\n')}
+            onChange={e => {
+              const lines = e.target.value.split('\n').filter(line => line.trim() !== '');
+              updateField('struggles', lines.length > 0 ? lines : [e.target.value]);
+            }}
+            placeholder="Something you want to work on..."
+            rows={2}
+            style={{
+              width: '100%',
+              padding: 'var(--space-md)',
+              backgroundColor: 'var(--color-gray-900)',
+              border: '1px solid var(--color-negative)',
+              borderRadius: 'var(--radius-md)',
+              color: 'var(--color-white)',
+              fontSize: 'var(--text-base)',
+              resize: 'vertical',
+            }}
+          />
+        </div>
+
         {/* Notes */}
         <div style={{ marginBottom: 'var(--space-lg)' }}>
           <label style={{
