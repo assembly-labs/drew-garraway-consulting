@@ -1,7 +1,7 @@
 # Profile & Settings - Product Requirements Document
 
-**Last Updated:** January 25, 2026
-**Status:** MVP Specification
+**Last Updated:** February 8, 2026
+**Status:** MVP Implementation In Progress
 **Components:** `ProfileScreen.tsx`, `Settings.tsx`
 
 ---
@@ -150,16 +150,16 @@ Per First Principles:
 | **Training Goals** | Freely Editable | Multi-select chips | Goals evolve | Progressive |
 | **Experience Level** | Freely Editable | Chip selector | One-time question | Progressive |
 | **Training Start Date** | Freely Editable | Date picker | May remember later | Progressive |
-| **Birthdate** | **LOCKED** | View only (no edit) | Impacts age-based comparisons + birthday celebrations | Progressive |
-| **Gender** | **LOCKED** | View only (no edit) | Impacts competition categories + peer comparisons | Progressive |
+| **Birthdate** | **LOCKED** | View only (no edit) | Impacts age-based comparisons + birthday celebrations | **Onboarding** |
+| **Gender** | **LOCKED** | View only (no edit) | Impacts competition categories + peer comparisons | **Onboarding** |
 
 ---
 
 ### Locked Fields
 
-#### Birthdate (LOCKED after set)
+#### Birthdate (LOCKED - Captured at Onboarding)
 
-**Format:** Full date (MM/DD/YYYY)
+**Format:** Full date (YYYY-MM-DD stored, displayed as "34 years old")
 
 **Why we collect full birthdate:**
 - Age-based peer comparisons ("How do I compare to practitioners my age?")
@@ -170,7 +170,7 @@ Per First Principles:
 **Why it's locked:**
 Allowing changes would corrupt historical data integrity. Age impacts analytics, comparisons, and personalized insights throughout the app.
 
-**Collection:** Progressive profiling at Session 18, asked as "When's your birthday?"
+**Collection:** **Mandatory at onboarding** (About You screen). Users must provide birthday before completing onboarding. This ensures 100% data completeness for analytics.
 
 **Display:** Shows age (e.g., "34 years old") in profile, but stores full date for birthday detection.
 
@@ -179,13 +179,11 @@ Allowing changes would corrupt historical data integrity. Age impacts analytics,
 - Special insight: "Happy Birthday! You've trained X sessions in your [age-1] year of life"
 - Optional: birthday badge visible for 24 hours
 
-#### Gender (LOCKED after set)
+#### Gender (LOCKED - Captured at Onboarding)
 
 **Options:**
 - Male
 - Female
-- Non-binary
-- Prefer not to say
 
 **Why we collect gender:**
 - Weight class context (competition users)
@@ -196,13 +194,12 @@ Allowing changes would corrupt historical data integrity. Age impacts analytics,
 **Why it's locked:**
 Gender impacts analytics and peer comparisons across the user's history. Changing it would corrupt comparative data.
 
-**Collection:** Progressive profiling at Session 12, asked as "What's your gender? (This helps us personalize insights)"
+**Collection:** **Mandatory at onboarding** (About You screen). Users must select Male or Female before completing onboarding. This ensures 100% data completeness for analytics.
 
 **Display:** Only shown in Profile page, never exposed publicly. Used internally for analytics.
 
 **Privacy Considerations:**
-- Never required
-- "Prefer not to say" is a valid permanent choice
+- Required at onboarding (no skip option)
 - Not displayed in any shared/public contexts
 - Used only for internal personalization
 
@@ -453,10 +450,10 @@ Questions are triggered at session milestones (accelerated schedule):
 | 2 | "How long have you been training?" | `experienceLevel` | Quick context question |
 | 3 | "When did you start training?" | `trainingStartDate` | Context for progress |
 | 5 | "Why do you train?" | `trainingGoals` | Personalizes experience |
-| 7 | "What's your gender?" | `gender` | Peer comparisons (**LOCKED**) |
-| 10 | "When's your birthday?" | `birthDate` | Age insights + celebrations (**LOCKED**) |
 
 **Note:** Belt date is now captured at onboarding (mandatory), not via progressive profiling.
+
+**Feb 2026 Update:** Gender and Birthday are now mandatory at onboarding (About You screen). They are no longer part of progressive profiling. This ensures 100% data completeness for analytics and peer comparisons from day one.
 
 **Skip Tolerance:** Users can skip each question up to 3 times. After 3 skips, we stop asking that question.
 
@@ -583,7 +580,26 @@ For birthdate and gender (after set):
 | **Progress Updates** | Toggle | `true` | Weekly summaries, milestones | Done (UI) |
 | **Coach Feedback** | Toggle | `true` | When coach leaves feedback | Done (UI) |
 
-**Note:** Notification toggles are UI-complete. Actual push notifications require iOS implementation with APNs.
+> **IMPORTANT: Notification Settings are UI Placeholders Only**
+>
+> The notification toggle UI is complete and preferences persist via UserProfileContext. However, these toggles do NOT trigger actual notifications. They capture user preferences for future implementation.
+>
+> **What works:**
+> - Toggle UI renders correctly
+> - Preference values persist across sessions (saved to localStorage via profile context)
+> - Settings survive app refresh
+>
+> **What does NOT work (requires future implementation):**
+> - No push notifications are sent (requires APNs for iOS)
+> - No email notifications (requires backend email service)
+> - No reminder scheduling (requires backend cron jobs)
+>
+> **Future Requirements:**
+> - iOS: APNs integration via Expo Notifications
+> - Backend: Notification scheduling service
+> - Email: Transactional email provider (SendGrid, Postmark, etc.)
+>
+> For MVP, these toggles exist to capture user intent and demonstrate the settings UI pattern.
 
 #### 2. Account Section
 
@@ -746,9 +762,9 @@ interface UserProfile {
   // ─────────────────────────────────────────────────────────────
   trainingStartDate: string | null;                   // ISO date (YYYY-MM-DD)
 
-  // LOCKED fields - cannot be changed after set
-  birthDate: string | null;                           // ISO date (YYYY-MM-DD) - for birthday celebrations
-  gender: Gender | null;                              // LOCKED after set
+  // LOCKED fields - captured at onboarding, cannot be changed
+  birthDate: string;                                  // ISO date (YYYY-MM-DD) - mandatory at onboarding
+  gender: Gender;                                     // 'male' | 'female' - mandatory at onboarding
 
   // ─────────────────────────────────────────────────────────────
   // METADATA
@@ -760,13 +776,14 @@ interface UserProfile {
 
   // ─────────────────────────────────────────────────────────────
   // PROGRESSIVE PROFILING TRACKING
+  // Note: birthDate and gender removed - now captured at onboarding
   // ─────────────────────────────────────────────────────────────
   skipCounts: {
     trainingStartDate: number;
+    currentBeltDate: number;
     trainingGoals: number;
     experienceLevel: number;
-    birthDate: number;
-    gender: number;
+    birthYear: number;
   };
   lastAskedSession: { [key: string]: number };
 }
@@ -814,7 +831,7 @@ interface GymSelection {
 
 type TrainingGoal = 'competition' | 'fitness' | 'self-defense' | 'mental' | 'community' | 'hobby';
 type ExperienceLevel = 'new' | 'beginner' | 'intermediate' | 'experienced';
-type Gender = 'male' | 'female' | 'non-binary' | 'prefer-not-to-say';
+type Gender = 'male' | 'female';  // Only two options - mandatory at onboarding
 ```
 
 ### Helper Functions
@@ -897,8 +914,8 @@ interface UserPreferences {
 | **Belt progression editing** | Planned | Sheet with date picker, creates history event |
 | **Stripe progression editing** | Planned | Sheet with date picker, creates history event |
 | **Belt history storage** | Planned | Array of BeltProgressionEvent |
-| **Birthdate field** | Planned | Full date (MM/DD/YYYY), LOCKED after set |
-| **Gender field** | Planned | 4 options, LOCKED after set |
+| **Birthdate field** | ✅ Done | Captured at onboarding, LOCKED, displayed as age |
+| **Gender field** | ✅ Done | Male/Female only, captured at onboarding, LOCKED |
 | **Birthday celebration** | Planned | Special message on user's birthday |
 | Avatar image upload | Planned | Only initials currently |
 
@@ -907,7 +924,7 @@ interface UserPreferences {
 | Feature | Status | Notes |
 |---------|--------|-------|
 | Logging preference toggle | Done | Voice/Text chips |
-| Notification toggles | Done | UI only, no actual notifications |
+| Notification toggles | Done | UI only, preferences persist via profile context (no actual notifications) |
 | Export data | Done | Downloads JSON |
 | Delete account | Done | Confirmation + localStorage clear |
 | Privacy/Terms/Support | Done | Placeholder alerts |

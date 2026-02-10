@@ -13,7 +13,9 @@ import { ProfileScreen } from './components/features/ProfileScreen'
 import { Settings } from './components/features/Settings'
 import { IconShowcase } from './components/features/IconShowcase'
 import { Onboarding } from './components/features/Onboarding'
+import { LoginScreen } from './components/features/LoginScreen'
 import { useUserProfile, type OnboardingData } from './context/UserProfileContext'
+import { authService } from './services/auth'
 import type { JournalEntry } from './components/features/JournalEntryCard'
 import type { Session } from './components/features/SessionCard'
 
@@ -53,6 +55,26 @@ function App() {
   // Get user profile for header avatar
   const { profile, completeOnboarding, isLoading } = useUserProfile()
   const userInitial = profile.name ? profile.name.charAt(0).toUpperCase() : 'U'
+
+  // Auth state: check localStorage directly for initial state
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    // For prototype: auto-authenticate on first visit
+    // Only show LoginScreen if user has explicitly signed out
+    return localStorage.getItem('bjj-signed-out') !== 'true'
+  })
+
+  // Handle successful authentication
+  const handleAuthenticated = () => {
+    localStorage.removeItem('bjj-signed-out')
+    setIsAuthenticated(true)
+  }
+
+  // Handle sign out (called from Settings)
+  const handleSignOut = async () => {
+    await authService.signOut()
+    localStorage.setItem('bjj-signed-out', 'true')
+    setIsAuthenticated(false)
+  }
 
   // Track if session logger should be shown (overlay)
   const [showSessionLogger, setShowSessionLogger] = useState(false)
@@ -123,6 +145,11 @@ function App() {
   // Handle starting session logger from onboarding
   const handleStartLoggingFromOnboarding = () => {
     setOpenLoggerAfterOnboarding(true)
+  }
+
+  // Show login screen if not authenticated
+  if (isAuthenticated === false) {
+    return <LoginScreen onAuthenticated={handleAuthenticated} />
   }
 
   // Show loading state
@@ -252,7 +279,7 @@ function App() {
         )}
 
         {currentView === 'settings' && (
-          <Settings onBack={() => setCurrentView('profile')} />
+          <Settings onBack={() => setCurrentView('profile')} onSignOut={handleSignOut} />
         )}
       </main>
 

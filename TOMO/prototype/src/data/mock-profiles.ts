@@ -176,6 +176,14 @@ const whiteBeltContextProfile: ContextUserProfile = {
   sessionCount: 78,
   createdAt: monthsAgo(10),
   lastSessionAt: daysAgo(1),
+  birthDate: '1972-06-15',
+  gender: 'male',
+  beltHistory: [],
+  notifications: {
+    trainingReminders: true,
+    progressUpdates: true,
+    coachFeedback: true,
+  },
   skipCounts: {
     trainingStartDate: 0,
     currentBeltDate: 0,
@@ -561,6 +569,14 @@ const blueBeltContextProfile: ContextUserProfile = {
   sessionCount: 247,
   createdAt: yearsAgo(2) + '-06-15',
   lastSessionAt: daysAgo(0),
+  birthDate: '1990-03-20',
+  gender: 'male',
+  beltHistory: [],
+  notifications: {
+    trainingReminders: true,
+    progressUpdates: true,
+    coachFeedback: true,
+  },
   skipCounts: {
     trainingStartDate: 0,
     currentBeltDate: 0,
@@ -969,6 +985,14 @@ const purpleBeltContextProfile: ContextUserProfile = {
   sessionCount: 892,
   createdAt: yearsAgo(5) + '-03-10',
   lastSessionAt: daysAgo(0),
+  birthDate: '1997-08-12',
+  gender: 'female',
+  beltHistory: [],
+  notifications: {
+    trainingReminders: true,
+    progressUpdates: true,
+    coachFeedback: true,
+  },
   skipCounts: {
     trainingStartDate: 0,
     currentBeltDate: 0,
@@ -1344,6 +1368,14 @@ const brownBeltContextProfile: ContextUserProfile = {
   sessionCount: 1456,
   createdAt: yearsAgo(7) + '-08-20',
   lastSessionAt: daysAgo(0),
+  birthDate: '1987-11-05',
+  gender: 'female',
+  beltHistory: [],
+  notifications: {
+    trainingReminders: true,
+    progressUpdates: true,
+    coachFeedback: true,
+  },
   skipCounts: {
     trainingStartDate: 0,
     currentBeltDate: 0,

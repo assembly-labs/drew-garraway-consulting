@@ -19,6 +19,9 @@ export type BeltColor = BeltLevel;
 export type TrainingType = 'gi' | 'nogi' | 'openmat' | 'drilling' | 'private' | 'competition';
 export type ProficiencyLevel = 'learning' | 'developing' | 'proficient' | 'advanced';
 export type LoggingPreference = 'voice' | 'text' | 'undecided';
+
+// Gender (for insights personalization)
+export type Gender = 'male' | 'female';
 export type PracticeLogSource = 'technique_library' | 'session_logger' | 'quick_add';
 
 // ===========================================
@@ -67,6 +70,48 @@ export interface ProfileUpdate {
   session_count?: number;
   updated_at?: string;
 }
+
+// ===========================================
+// BELT PROGRESSION HISTORY
+// ===========================================
+
+/**
+ * Records each belt or stripe change for progression tracking.
+ * Enables "time at belt" calculations and milestone tracking.
+ */
+export interface BeltProgressionEvent {
+  id: string;
+  date: string;                    // ISO date when change occurred
+  type: 'belt_promotion' | 'stripe_promotion' | 'belt_correction' | 'stripe_correction';
+  fromBelt: BeltLevel | 'none';
+  fromStripes: number;
+  toBelt: BeltLevel;
+  toStripes: number;
+  createdAt: string;               // ISO timestamp
+  source: 'user_edit' | 'onboarding' | 'import';
+  dateEstimated?: boolean;         // True if user doesn't know exact date
+  notes?: string;                  // Optional: "Promoted by Professor X"
+}
+
+// ===========================================
+// NOTIFICATION SETTINGS
+// ===========================================
+
+/**
+ * User notification preferences.
+ * Persisted to profile, used by Settings page.
+ */
+export interface NotificationSettings {
+  trainingReminders: boolean;
+  progressUpdates: boolean;
+  coachFeedback: boolean;
+}
+
+export const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettings = {
+  trainingReminders: true,
+  progressUpdates: true,
+  coachFeedback: true,
+};
 
 // ===========================================
 // SESSIONS TABLE

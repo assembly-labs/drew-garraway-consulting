@@ -8,13 +8,13 @@
  * - Demo profile switcher for prototype approval
  */
 
-import { useState } from 'react';
 import { useUserProfile, type LoggingPreference } from '../../context/UserProfileContext';
 import { PERSONA_OPTIONS } from '../../data/personas';
 import { Icons } from '../ui/Icons';
 
 interface SettingsProps {
   onBack: () => void;
+  onSignOut?: () => void;
 }
 
 // Belt color mapping for persona display
@@ -34,15 +34,9 @@ const RISK_COLORS: Record<string, string> = {
   'critical': 'var(--color-error)',
 };
 
-export function Settings({ onBack }: SettingsProps) {
-  const { profile, setLoggingPreference, isDemoMode, activeDemoProfile, activePersona, switchPersona, exitDemoMode, resetProfile } = useUserProfile();
+export function Settings({ onBack, onSignOut }: SettingsProps) {
+  const { profile, setLoggingPreference, updateProfile, isDemoMode, activeDemoProfile, activePersona, switchPersona, exitDemoMode, resetProfile } = useUserProfile();
 
-  // Local state for toggles (would connect to a settings context in production)
-  const [notifications, setNotifications] = useState({
-    trainingReminders: true,
-    progressUpdates: true,
-    coachFeedback: true,
-  });
 
   const handleLoggingPrefChange = (pref: LoggingPreference) => {
     setLoggingPreference(pref);
@@ -152,8 +146,8 @@ export function Settings({ onBack }: SettingsProps) {
               description="Get reminded to log your sessions"
             >
               <Toggle
-                checked={notifications.trainingReminders}
-                onChange={(checked) => setNotifications(prev => ({ ...prev, trainingReminders: checked }))}
+                checked={profile.notifications?.trainingReminders ?? true}
+                onChange={(checked) => updateProfile({ notifications: { ...profile.notifications, trainingReminders: checked } })}
               />
             </SettingsRow>
 
@@ -165,8 +159,8 @@ export function Settings({ onBack }: SettingsProps) {
               description="Weekly summaries and milestone alerts"
             >
               <Toggle
-                checked={notifications.progressUpdates}
-                onChange={(checked) => setNotifications(prev => ({ ...prev, progressUpdates: checked }))}
+                checked={profile.notifications?.progressUpdates ?? true}
+                onChange={(checked) => updateProfile({ notifications: { ...profile.notifications, progressUpdates: checked } })}
               />
             </SettingsRow>
 
@@ -178,8 +172,8 @@ export function Settings({ onBack }: SettingsProps) {
               description="Notifications when coach leaves feedback"
             >
               <Toggle
-                checked={notifications.coachFeedback}
-                onChange={(checked) => setNotifications(prev => ({ ...prev, coachFeedback: checked }))}
+                checked={profile.notifications?.coachFeedback ?? true}
+                onChange={(checked) => updateProfile({ notifications: { ...profile.notifications, coachFeedback: checked } })}
               />
             </SettingsRow>
           </div>
@@ -231,6 +225,28 @@ export function Settings({ onBack }: SettingsProps) {
               }}
               danger
             />
+
+            {onSignOut && (
+              <>
+                <Divider />
+                <SettingsButton
+                  label="Sign Out"
+                  description="Sign out of your account"
+                  icon={
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                      <polyline points="16 17 21 12 16 7" />
+                      <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                  }
+                  onClick={() => {
+                    if (confirm('Sign out of your account?')) {
+                      onSignOut();
+                    }
+                  }}
+                />
+              </>
+            )}
           </div>
         </section>
 

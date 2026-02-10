@@ -1,6 +1,6 @@
 # BJJ Progress Tracker - Project Status
 
-**Last Updated:** January 19, 2026
+**Last Updated:** February 8, 2026
 **Current Phase:** Research Complete → UX Cleanup → Development Preparation
 **Build Status:** ✅ PASSING
 
@@ -14,7 +14,7 @@
 | Tech Stack | React 19 + TypeScript + Vite + Tailwind CSS v4 |
 | Deployment | Cloudflare Pages |
 | Design | Alliance BJJ-inspired (black/gold) |
-| **Next Priority** | Session Detail View, First-Time Experience, Screen Specifications |
+| **Next Priority** | Techniques Page Polish, Belt Progress Module, Login/Auth Implementation |
 | **Test Locally** | `cd prototype && npm run dev` → http://localhost:5173 |
 | **Production URL** | https://bjjj.pages.dev |
 
@@ -63,6 +63,7 @@ The production URL https://bjjj.pages.dev updates within seconds.
 
 | Date | Work Completed | Next Steps |
 |------|----------------|------------|
+| **Feb 8, 2026** | **Design Sprint**: Created 3 interactive HTML design reviews (Techniques enhancements, Belt Progress module, Login/Auth). Created Privacy Policy & Terms of Service. Created iOS Payment Strategy document. Updated FEATURE_TRACKER.md (now 26 of 57 items complete = 46%). Created Techniques page strategy document with 4 approaches. | Implement Techniques page enhancements, Build Belt Progress module in Profile |
 | **Jan 19, 2026** | **Research & Foundation Sprint**: Created FIRST_PRINCIPLES.md (12 core product beliefs), added sports-psychology-research.md (meta-analytic findings, effect sizes), added TOMO_Belt_Progression_Requirements_Reference.md (belt technical requirements, coach evaluation criteria). Fixed purple belt duration in belt-profiles.ts (36-48 → 18-36 months). Created comprehensive ROADMAP.md with UX cleanup sprints, documentation plan, and implementation phases. | Session Detail View, First-Time Experience, Screen Specifications |
 | **Jan 3, 2026** | **Purple/Brown Belt Module Consolidation**: Merged LongGame + SubmissionTrends → YourJourney. Simplified TechniqueMastery (removed depth analysis, handled by AttackProfile). Archived old modules. Same consolidation pattern as white/blue belts. | Continue with session detail view, iOS prep |
 | **Dec 21, 2025 (Evening)** | **Voice Logger feature complete**: 6-phase flow (Idle→Recording→Processing→Gap-Fill→Review→Success), audio waveform visualization, smooth transitions, brand voice copy, session count. **Session History**: SessionHistory + SessionCard components, past sessions list grouped by date. **UX Flow**: App auto-opens voice logger on load, post-log navigates to journal history. **Conversation Design**: Created `/conversation-design/` folder with `CONVERSATION_DESIGN_FOUNDATION.md`. **File cleanup**: Removed duplicate .docx, renamed files, added .md extensions. | Session Detail View, Edit Mode, First-Time Experience, Error States |
@@ -180,6 +181,14 @@ A digital training journal and progress tracking application for Brazilian Jiu-J
 - Dashboard "Log Training" button opens voice logger
 - Journal tab "Log" button opens voice logger
 
+### 10. Design Reviews (Feb 2026)
+- [x] Techniques page enhancement mockups (8 features)
+- [x] Belt Progress module design (Profile integration)
+- [x] Login/Auth screens (Email + Apple + Google)
+- [x] iOS Payment Strategy (StoreKit + RevenueCat)
+- [x] Privacy Policy (generic text)
+- [x] Terms of Service (generic text)
+
 ---
 
 ## What's Left: Design & Develop Prototype
@@ -191,10 +200,12 @@ A digital training journal and progress tracking application for Brazilian Jiu-J
 | **Dashboard** | Training summary, recent sessions, next goals, streak | ✅ Complete |
 | **Voice Logger** | Voice-first session logging with AI extraction | ✅ Complete |
 | **Session History** | Past sessions list with cards | ✅ Complete |
-| **Session Detail** | Full view of single session, edit capability | 🔲 Not Started |
-| **Belt Progress** | Requirements checklist, coach feedback, promotion readiness | 🔲 Not Started |
-| **Technique Library** | Browse/search techniques, video placeholders | 🔲 Not Started |
-| **Profile** | Belt history, stats, milestones, settings | ✅ Basic (needs polish) |
+| **Session Detail** | Full view of single session, edit capability | ✅ Complete |
+| **Belt Progress** | Requirements checklist, coach feedback, promotion readiness | 🟡 Designing (Design review created) |
+| **Technique Library** | Browse/search techniques, video placeholders | ✅ Complete (needs polish, design review created) |
+| **Profile** | Belt history, stats, milestones, settings | ✅ Complete (belt progress module designed) |
+| **Login/Auth** | Authentication screens for email + SSO | 🟡 Designing |
+| **Legal Pages** | Privacy Policy & Terms of Service | ✅ Designed |
 
 ### Immediate Next Steps (Voice Logger Polish)
 

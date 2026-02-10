@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMO - Belt Progress Module Design Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #111111;
+      --card-bg: #161616;
+      --card-border: #1f1f1f;
+      --gold: #F5A623;
+      --green: #22c55e;
+      --red: #ef4444;
+      --gray-400: #c4c4c4;
+      --gray-500: #a3a3a3;
+      --gray-600: #8a8a8a;
+      --gray-700: #4a4a4a;
+      --gray-800: #1f1f1f;
+      --white: #FFFFFF;
+      --belt-white: #FFFFFF;
+      --belt-blue: #0033A0;
+      --belt-purple: #4B0082;
+      --belt-brown: #8B4513;
+      --belt-black: #000000;
+      --font-heading: 'Unbounded', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --max-width: 430px;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 500;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== PAGE LAYOUT ========== */
+    .page-header {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 20px;
+      border-bottom: 1px solid var(--gray-800);
+    }
+
+    .page-header h1 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .page-header .subtitle {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--gray-500);
+      font-weight: 500;
+    }
+
+    .page-header .date {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .disclaimer-banner {
+      max-width: 1200px;
+      margin: 20px auto 0;
+      padding: 0 24px;
+    }
+
+    .disclaimer-banner .inner {
+      background: rgba(245, 166, 35, 0.08);
+      border: 1px solid rgba(245, 166, 35, 0.25);
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .disclaimer-banner .icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .disclaimer-banner .text {
+      font-size: 13px;
+      color: var(--gold);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    /* ========== TAB NAVIGATION ========== */
+    .tabs-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 24px 0;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 4px;
+      border-bottom: 1px solid var(--gray-800);
+      overflow-x: auto;
+    }
+
+    .tab {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--gray-500);
+      background: none;
+      border: none;
+      padding: 10px 16px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .tab:hover {
+      color: var(--gray-400);
+    }
+
+    .tab.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* ========== SCREEN CONTAINER ========== */
+    .screens-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+    }
+
+    .screen-section {
+      display: none;
+    }
+
+    .screen-section.active {
+      display: block;
+    }
+
+    .screen-label {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+    }
+
+    .phone-and-notes {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    /* ========== PHONE FRAME ========== */
+    .phone-frame {
+      width: var(--max-width);
+      min-height: 820px;
+      background: var(--bg);
+      border-radius: 40px;
+      border: 3px solid #2a2a2a;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .phone-frame::before {
+      content: '';
+      display: block;
+      width: 130px;
+      height: 28px;
+      background: #0a0a0a;
+      border-radius: 0 0 16px 16px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .phone-content {
+      padding: 0 20px 30px;
+      overflow-y: auto;
+      max-height: 780px;
+    }
+
+    /* ========== STATUS BAR ========== */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 20px 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-400);
+    }
+
+    /* ========== PROFILE HEADER ========== */
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 0 20px;
+    }
+
+    .avatar-ring {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .avatar-ring.blue-belt {
+      border: 3px solid var(--belt-blue);
+    }
+
+    .avatar-ring.purple-belt {
+      border: 3px solid var(--belt-purple);
+    }
+
+    .avatar-inner {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: var(--gray-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 28px;
+      color: var(--white);
+    }
+
+    .profile-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .profile-rank {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--gray-400);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rank-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .rank-dot.blue { background: var(--belt-blue); }
+    .rank-dot.purple { background: var(--belt-purple); }
+
+    /* ========== STATS GRID ========== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* ========== BELT PROGRESS MODULE ========== */
+    .module-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .module-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .current-belt-display {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--gray-800);
+    }
+
+    .belt-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .belt-badge.blue { background: var(--belt-blue); }
+    .belt-badge.purple {
+      background: var(--belt-purple);
+    }
+
+    .belt-badge-inner {
+      width: 36px;
+      height: 10px;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .belt-badge-inner.blue { background: #0044cc; border: 1px solid #0055dd; }
+    .belt-badge-inner.purple { background: #5c0099; border: 1px solid #6d00b3; }
+
+    .stripe-marks {
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 2px;
+    }
+
+    .stripe-mark {
+      width: 2px;
+      height: 6px;
+      background: var(--white);
+      border-radius: 1px;
+    }
+
+    .belt-info h3 {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .belt-info .stripes-text {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-400);
+    }
+
+    .time-at-belt {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-500);
+      margin-bottom: 20px;
+    }
+
+    /* ========== TIMELINE ========== */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--gray-700);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 18px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -20px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-700);
+      background: var(--bg);
+      z-index: 1;
+    }
+
+    .timeline-dot.blue {
+      background: var(--belt-blue);
+      border-color: var(--belt-blue);
+    }
+
+    .timeline-dot.purple {
+      background: var(--belt-purple);
+      border-color: var(--belt-purple);
+    }
+
+    .timeline-dot.white-belt {
+      background: var(--belt-white);
+      border-color: var(--gray-600);
+    }
+
+    .timeline-dot.star {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .timeline-dot.celebration {
+      box-shadow: 0 0 12px rgba(75, 0, 130, 0.6), 0 0 24px rgba(75, 0, 130, 0.3);
+    }
+
+    .timeline-event {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .timeline-event.highlight {
+      color: var(--belt-purple);
+      text-shadow: 0 0 20px rgba(75, 0, 130, 0.3);
+    }
+
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gray-600);
+      margin-top: 1px;
+    }
+
+    .timeline-new-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--gold);
+      background: rgba(245, 166, 35, 0.12);
+      border: 1px solid rgba(245, 166, 35, 0.25);
+      border-radius: 4px;
+      padding: 1px 5px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    /* ========== PROMOTION BUTTON ========== */
+    .btn-promotion {
+      width: 100%;
+      padding: 12px;
+      border: 1.5px solid var(--gold);
+      background: transparent;
+      color: var(--gold);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 13px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-bottom: 12px;
+    }
+
+    .btn-promotion:hover {
+      background: rgba(245, 166, 35, 0.08);
+    }
+
+    .module-disclaimer {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gray-600);
+      text-align: center;
+      line-height: 1.45;
+      font-style: italic;
+    }
+
+    /* ========== BOTTOM SHEET OVERLAY ========== */
+    .bottom-sheet-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 20;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .bottom-sheet {
+      background: var(--card-bg);
+      border-top: 1px solid var(--card-border);
+      border-radius: 20px 20px 0 0;
+      padding: 20px;
+      width: 100%;
+    }
+
+    .sheet-handle {
+      width: 36px;
+      height: 4px;
+      background: var(--gray-700);
+      border-radius: 2px;
+      margin: 0 auto 16px;
+    }
+
+    .sheet-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--white);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* ========== BELT SELECTOR ========== */
+    .field-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+
+    .belt-selector {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .belt-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-700);
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s;
+      position: relative;
+    }
+
+    .belt-circle:hover {
+      transform: scale(1.08);
+    }
+
+    .belt-circle.white-c { background: var(--belt-white); }
+    .belt-circle.blue-c { background: var(--belt-blue); }
+    .belt-circle.purple-c { background: var(--belt-purple); }
+    .belt-circle.brown-c { background: var(--belt-brown); }
+    .belt-circle.black-c { background: var(--belt-black); border-color: var(--gray-600); }
+
+    .belt-circle.selected {
+      border-color: var(--gold);
+      border-width: 3px;
+      box-shadow: 0 0 12px rgba(245, 166, 35, 0.3);
+    }
+
+    .belt-circle-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--gray-600);
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    .belt-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ========== STRIPE SELECTOR ========== */
+    .stripe-selector {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .stripe-btn {
+      width: 42px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--gray-700);
+      background: var(--bg);
+      color: var(--gray-400);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .stripe-btn.selected {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(245, 166, 35, 0.08);
+    }
+
+    /* ========== FORM FIELDS ========== */
+    .form-field {
+      margin-bottom: 18px;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--bg);
+      border: 1px solid var(--gray-700);
+      border-radius: 10px;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      outline: none;
+    }
+
+    .input-field::placeholder {
+      color: var(--gray-600);
+    }
+
+    .input-field.placeholder-shown {
+      color: var(--gray-600);
+    }
+
+    .textarea-field {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--bg);
+      border: 1px solid var(--gray-700);
+      border-radius: 10px;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      outline: none;
+      resize: none;
+      height: 72px;
+    }
+
+    .textarea-field::placeholder {
+      color: var(--gray-600);
+    }
+
+    .optional-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gray-600);
+      margin-top: 4px;
+    }
+
+    /* ========== SHEET BUTTONS ========== */
+    .sheet-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .btn-cancel {
+      flex: 1;
+      padding: 13px;
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      color: var(--gray-400);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .btn-save {
+      flex: 1;
+      padding: 13px;
+      background: var(--gold);
+      border: none;
+      color: #111111;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .sheet-warning {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gray-600);
+      text-align: center;
+      margin-top: 14px;
+      line-height: 1.45;
+    }
+
+    /* ========== ANNOTATIONS ========== */
+    .annotations {
+      flex: 1;
+      min-width: 280px;
+      max-width: 460px;
+    }
+
+    .annotation-title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--gold);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .annotation-list {
+      list-style: none;
+    }
+
+    .annotation-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-800);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-400);
+      line-height: 1.55;
+    }
+
+    .annotation-list li:last-child {
+      border-bottom: none;
+    }
+
+    .annotation-list li strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .annotation-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #111111;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      margin-right: 8px;
+      flex-shrink: 0;
+      vertical-align: middle;
+    }
+
+    /* ========== NAV BAR ========== */
+    .nav-bar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0 6px;
+      border-top: 1px solid var(--gray-800);
+      margin-top: 12px;
+      background: var(--bg);
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--gray-600);
+    }
+
+    .nav-item.active {
+      color: var(--gold);
+    }
+
+    .nav-icon {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* ========== SECTION DIVIDER ========== */
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+      margin-top: 4px;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .phone-and-notes {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .annotations {
+        max-width: 430px;
+      }
+
+      .phone-frame {
+        width: 100%;
+        max-width: var(--max-width);
+      }
+    }
+
+    /* Star icon for timeline */
+    .timeline-dot.star::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px;
+      height: 6px;
+      background: #111111;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PAGE HEADER ==================== -->
+  <header class="page-header">
+    <h1>TOMO - Belt Progress Module</h1>
+    <div class="subtitle">Design Review -- Profile Page Integration</div>
+    <div class="date">February 8, 2026</div>
+  </header>
+
+  <!-- ==================== DISCLAIMER BANNER ==================== -->
+  <div class="disclaimer-banner">
+    <div class="inner">
+      <svg class="icon" viewBox="0 0 20 20" fill="none">
+        <path d="M10 2L18 17H2L10 2Z" stroke="#F5A623" stroke-width="1.5" fill="none"/>
+        <line x1="10" y1="8" x2="10" y2="12" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="10" cy="14.5" r="0.75" fill="#F5A623"/>
+      </svg>
+      <div class="text">Belt promotions are your coach's decision -- this module is for personal context and tracking only. It does not replace or replicate any coach authority.</div>
+    </div>
+  </div>
+
+  <!-- ==================== TAB NAVIGATION ==================== -->
+  <div class="tabs-container">
+    <div class="tabs">
+      <button class="tab active" data-tab="screen1">Screen 1: Profile with Belt Progress</button>
+      <button class="tab" data-tab="screen2">Screen 2: Add Promotion Flow</button>
+      <button class="tab" data-tab="screen3">Screen 3: Updated Timeline</button>
+    </div>
+  </div>
+
+  <!-- ==================== SCREENS ==================== -->
+  <div class="screens-wrapper">
+
+    <!-- ========== SCREEN 1: PROFILE WITH BELT PROGRESS MODULE ========== -->
+    <section class="screen-section active" id="screen1">
+      <div class="screen-label">Screen 1 -- Profile with Belt Progress Module</div>
+      <div class="phone-and-notes">
+
+        <div class="phone-frame">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>TOMO</span>
+            <span>100%</span>
+          </div>
+          <div class="phone-content">
+
+            <!-- Profile Header -->
+            <div class="profile-header">
+              <div class="avatar-ring blue-belt">
+                <div class="avatar-inner">MC</div>
+              </div>
+              <div class="profile-name">Marcus Chen</div>
+              <div class="profile-rank">
+                <span class="rank-dot blue"></span>
+                Blue Belt &middot; 2 Stripes
+              </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-value">247</div>
+                <div class="stat-label">Sessions</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">38</div>
+                <div class="stat-label">Months</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Streak</div>
+              </div>
+            </div>
+
+            <!-- Belt & Stripe History Module -->
+            <div class="module-card">
+              <div class="module-title">Belt & Stripe History</div>
+
+              <!-- Current Belt Display -->
+              <div class="current-belt-display">
+                <div class="belt-badge blue">
+                  <div class="belt-badge-inner blue">
+                    <div class="stripe-marks">
+                      <div class="stripe-mark"></div>
+                      <div class="stripe-mark"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="belt-info">
+                  <h3>Blue Belt</h3>
+                  <div class="stripes-text">2 Stripes</div>
+                </div>
+              </div>
+
+              <div class="time-at-belt">Time at current belt: 15 months</div>
+
+              <!-- Timeline -->
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-dot blue"></div>
+                  <div class="timeline-event">Blue Belt</div>
+                  <div class="timeline-date">March 2024</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot white-belt"></div>
+                  <div class="timeline-event">White Belt &middot; 4 Stripes</div>
+                  <div class="timeline-date">January 2024</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot white-belt"></div>
+                  <div class="timeline-event">White Belt &middot; 3 Stripes</div>
+                  <div class="timeline-date">September 2023</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot white-belt"></div>
+                  <div class="timeline-event">White Belt &middot; 2 Stripes</div>
+                  <div class="timeline-date">May 2023</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot white-belt"></div>
+                  <div class="timeline-event">White Belt &middot; 1 Stripe</div>
+                  <div class="timeline-date">February 2023</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot star"></div>
+                  <div class="timeline-event">Started Training</div>
+                  <div class="timeline-date">November 2022</div>
+                </div>
+              </div>
+
+              <button class="btn-promotion">Record a Promotion</button>
+              <div class="module-disclaimer">Belt promotions are your coach's decision -- this is for context only.</div>
+            </div>
+
+            <!-- Bottom Nav -->
+            <div class="nav-bar">
+              <div class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+                <span>Home</span>
+              </div>
+              <div class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="12" x2="15" y2="15"/></svg>
+                <span>Log</span>
+              </div>
+              <div class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M6 20V14M18 20V4"/></svg>
+                <span>Stats</span>
+              </div>
+              <div class="nav-item active">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-7 8-7s8 3 8 7"/></svg>
+                <span>Profile</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Annotations -->
+        <div class="annotations">
+          <div class="annotation-title">Design Decisions</div>
+          <ul class="annotation-list">
+            <li><span class="annotation-number">1</span><strong>Module placement:</strong> The Belt & Stripe History lives below the stats grid on the Profile page. It is not a separate page -- it is contextual information about the practitioner, not a standalone workflow.</li>
+            <li><span class="annotation-number">2</span><strong>Avatar border color:</strong> The avatar ring border matches the user's current belt color, reinforcing identity at a glance without requiring text.</li>
+            <li><span class="annotation-number">3</span><strong>Vertical timeline:</strong> A simple top-to-bottom timeline with color-coded dots gives an immediate visual sense of progression. Each belt color renders as its actual color for instant recognition.</li>
+            <li><span class="annotation-number">4</span><strong>Time at belt:</strong> Displayed in monospace to signal that it is a computed value. This gives the user passive awareness of their tenure without gamifying it.</li>
+            <li><span class="annotation-number">5</span><strong>"Started Training" anchor:</strong> A gold star dot marks the origin point, grounding the entire timeline. This is not a belt event but a personal milestone.</li>
+            <li><span class="annotation-number">6</span><strong>Disclaimer text:</strong> Italicized and de-emphasized, but always present. Belt promotions belong to the coach. This module only records what has already happened, for the practitioner's own reference.</li>
+            <li><span class="annotation-number">7</span><strong>Gold outline button:</strong> "Record a Promotion" uses an outline style rather than a filled button to signal that this is an infrequent action, not a primary workflow.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 2: ADD PROMOTION FLOW ========== -->
+    <section class="screen-section" id="screen2">
+      <div class="screen-label">Screen 2 -- Add Promotion Flow (Bottom Sheet)</div>
+      <div class="phone-and-notes">
+
+        <div class="phone-frame">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>TOMO</span>
+            <span>100%</span>
+          </div>
+          <div class="phone-content" style="position: relative; min-height: 760px;">
+
+            <!-- Dimmed Profile Behind -->
+            <div style="opacity: 0.3; pointer-events: none;">
+              <div class="profile-header">
+                <div class="avatar-ring blue-belt">
+                  <div class="avatar-inner">MC</div>
+                </div>
+                <div class="profile-name">Marcus Chen</div>
+                <div class="profile-rank">
+                  <span class="rank-dot blue"></span>
+                  Blue Belt &middot; 2 Stripes
+                </div>
+              </div>
+              <div class="stats-grid">
+                <div class="stat-card">
+                  <div class="stat-value">247</div>
+                  <div class="stat-label">Sessions</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-value">38</div>
+                  <div class="stat-label">Months</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-value">12</div>
+                  <div class="stat-label">Streak</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Sheet Overlay -->
+            <div class="bottom-sheet-overlay">
+              <div class="bottom-sheet">
+                <div class="sheet-handle"></div>
+                <div class="sheet-title">Record a Promotion</div>
+
+                <!-- Belt Selector -->
+                <div class="form-field">
+                  <div class="field-label">Select Belt</div>
+                  <div class="belt-selector">
+                    <div class="belt-option">
+                      <div class="belt-circle white-c"></div>
+                      <div class="belt-circle-label">White</div>
+                    </div>
+                    <div class="belt-option">
+                      <div class="belt-circle blue-c selected"></div>
+                      <div class="belt-circle-label" style="color: var(--gold);">Blue</div>
+                    </div>
+                    <div class="belt-option">
+                      <div class="belt-circle purple-c"></div>
+                      <div class="belt-circle-label">Purple</div>
+                    </div>
+                    <div class="belt-option">
+                      <div class="belt-circle brown-c"></div>
+                      <div class="belt-circle-label">Brown</div>
+                    </div>
+                    <div class="belt-option">
+                      <div class="belt-circle black-c"></div>
+                      <div class="belt-circle-label">Black</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Stripe Selector -->
+                <div class="form-field">
+                  <div class="field-label">Stripes</div>
+                  <div class="stripe-selector">
+                    <button class="stripe-btn selected">0</button>
+                    <button class="stripe-btn">1</button>
+                    <button class="stripe-btn">2</button>
+                    <button class="stripe-btn">3</button>
+                    <button class="stripe-btn">4</button>
+                  </div>
+                </div>
+
+                <!-- Date Picker -->
+                <div class="form-field">
+                  <div class="field-label">When did this happen?</div>
+                  <div class="input-field placeholder-shown" style="display: flex; align-items: center; justify-content: space-between; color: var(--gray-600);">
+                    <span>Select date</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#8a8a8a" stroke-width="1.5"><rect x="2" y="3" width="12" height="11" rx="2"/><line x1="2" y1="6.5" x2="14" y2="6.5"/><line x1="5.5" y1="1.5" x2="5.5" y2="4.5"/><line x1="10.5" y1="1.5" x2="10.5" y2="4.5"/></svg>
+                  </div>
+                  <div class="optional-label">Limited to past dates only</div>
+                </div>
+
+                <!-- Notes -->
+                <div class="form-field">
+                  <div class="field-label">Notes</div>
+                  <textarea class="textarea-field" placeholder="Any notes about this promotion?"></textarea>
+                  <div class="optional-label">Optional</div>
+                </div>
+
+                <!-- Actions -->
+                <div class="sheet-actions">
+                  <button class="btn-cancel">Cancel</button>
+                  <button class="btn-save">Save</button>
+                </div>
+
+                <div class="sheet-warning">This creates a permanent record. You can add corrections but not delete entries.</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Annotations -->
+        <div class="annotations">
+          <div class="annotation-title">Design Decisions</div>
+          <ul class="annotation-list">
+            <li><span class="annotation-number">1</span><strong>Bottom sheet pattern:</strong> The promotion form appears as a bottom sheet modal rather than navigating to a new page. This keeps the user grounded in the Profile context and signals that this is a supplementary action.</li>
+            <li><span class="annotation-number">2</span><strong>Belt circles:</strong> Visual belt selection using actual belt colors. The selected belt gets a gold border and subtle glow. This is faster and more intuitive than a dropdown.</li>
+            <li><span class="annotation-number">3</span><strong>Stripe selector:</strong> Simple 0-4 toggle buttons. These map directly to the physical stripes on a belt. No abstraction needed -- practitioners already think in these terms.</li>
+            <li><span class="annotation-number">4</span><strong>Past-date restriction:</strong> The date picker is limited to past dates only. Promotions are recorded after they happen, never in advance. The helper text makes this explicit.</li>
+            <li><span class="annotation-number">5</span><strong>Optional notes field:</strong> Allows practitioners to capture context ("Promoted by Professor Silva at open mat") without requiring it. Keeps the flow fast for those who just want to record the fact.</li>
+            <li><span class="annotation-number">6</span><strong>Permanence warning:</strong> "You can add corrections but not delete entries" establishes trust and seriousness. This is a journal -- you correct forward, you do not erase history.</li>
+            <li><span class="annotation-number">7</span><strong>Gold "Save" button:</strong> Filled gold for the primary action, muted gray for cancel. The visual weight makes it clear which action is constructive.</li>
+            <li><span class="annotation-number">8</span><strong>No validation yet:</strong> The Save button is always enabled in this mockup. In implementation, it would be disabled until both belt and date are selected.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 3: UPDATED TIMELINE ========== -->
+    <section class="screen-section" id="screen3">
+      <div class="screen-label">Screen 3 -- After Recording: Updated Timeline</div>
+      <div class="phone-and-notes">
+
+        <div class="phone-frame">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>TOMO</span>
+            <span>100%</span>
+          </div>
+          <div class="phone-content">
+
+            <!-- Profile Header - Updated to Purple -->
+            <div class="profile-header">
+              <div class="avatar-ring purple-belt">
+                <div class="avatar-inner">MC</div>
+              </div>
+              <div class="profile-name">Marcus Chen</div>
+              <div class="profile-rank">
+                <span class="rank-dot purple"></span>
+                Purple Belt
+              </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-value">247</div>
+                <div class="stat-label">Sessions</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">38</div>
+                <div class="stat-label">Months</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Streak</div>
+              </div>
+            </div>
+
+            <!-- Belt & Stripe History Module - Updated -->
+            <div class="module-card">
+              <div class="module-title">Belt & Stripe History</div>
+
+              <!-- Current Belt Display - Updated to Purple -->
+              <div class="current-belt-display">
+                <div class="belt-badge purple" style="box-shadow: 0 0 20px rgba(75, 0, 130, 0.35);">
+                  <div class="belt-badge-inner purple"></div>
+                </div>
+                <div class="belt-info">
+                  <h3>Purple Belt</h3>
+                  <div class="stripes-text">0 Stripes</div>
+                </div>
+              </div>
+
+              <div class="time-at-belt" style="color: var(--green);">Time at current belt: Just started!</div>
+
+              <!-- Updated Timeline -->
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-dot purple celebration"></div>
+                  <div class="timeline-event highlight">Purple Belt <span class="timeline-new-badge">NEW</span></div>
+                  <div class="timeline-date">February 2026</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot blue"></div>
+                  <div class="timeline-event">Blue Belt &middot; 4 Stripes</div>
+                  <div class="timeline-date">December 2025</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot blue"></div>
+                  <div class="timeline-event">Blue Belt &middot; 2 Stripes</div>
+                  <div class="timeline-date">March 2024</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot white-belt"></div>
+                  <div class="timeline-event">White Belt &middot; 4 Stripes</div>
+                  <div class="timeline-date">January 2024</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot white-belt"></div>
+                  <div class="timeline-event">White Belt &middot; 3 Stripes</div>
+                  <div class="timeline-date">September 2023</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot white-belt"></div>
+                  <div class="timeline-event">White Belt &middot; 2 Stripes</div>
+                  <div class="timeline-date">May 2023</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot white-belt"></div>
+                  <div class="timeline-event">White Belt &middot; 1 Stripe</div>
+                  <div class="timeline-date">February 2023</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot star"></div>
+                  <div class="timeline-event">Started Training</div>
+                  <div class="timeline-date">November 2022</div>
+                </div>
+              </div>
+
+              <button class="btn-promotion">Record a Promotion</button>
+              <div class="module-disclaimer">Belt promotions are your coach's decision -- this is for context only.</div>
+            </div>
+
+            <!-- Bottom Nav -->
+            <div class="nav-bar">
+              <div class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+                <span>Home</span>
+              </div>
+              <div class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="12" x2="15" y2="15"/></svg>
+                <span>Log</span>
+              </div>
+              <div class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M6 20V14M18 20V4"/></svg>
+                <span>Stats</span>
+              </div>
+              <div class="nav-item active">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-7 8-7s8 3 8 7"/></svg>
+                <span>Profile</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Annotations -->
+        <div class="annotations">
+          <div class="annotation-title">Design Decisions</div>
+          <ul class="annotation-list">
+            <li><span class="annotation-number">1</span><strong>Immediate profile update:</strong> After recording a purple belt promotion, the entire profile reflects the change -- avatar border becomes purple, rank text updates, and the belt badge changes. The system should feel cohesive, not fragmented.</li>
+            <li><span class="annotation-number">2</span><strong>Celebration glow:</strong> The newest timeline entry gets a subtle purple glow on its dot and a "NEW" badge. This is a brief moment of recognition without being over-the-top. No confetti, no animations -- just a quiet acknowledgment.</li>
+            <li><span class="annotation-number">3</span><strong>"Just started!" text:</strong> The time-at-belt text changes to green and reads "Just started!" for a newly recorded belt. This gives a positive, forward-looking tone without gamifying the experience.</li>
+            <li><span class="annotation-number">4</span><strong>Gap filling:</strong> Notice that Blue Belt 3 Stripes is missing from the timeline. That is fine. Practitioners do not always record every stripe. The timeline shows what was recorded, not what "should" exist. No judgment, no completeness pressure.</li>
+            <li><span class="annotation-number">5</span><strong>Growing timeline:</strong> The timeline naturally grows longer as more events are recorded. For practitioners with many years of training, this could become quite long. A future iteration might consider collapsing older entries or showing a summary view.</li>
+            <li><span class="annotation-number">6</span><strong>Disclaimer persistence:</strong> The disclaimer text ("Belt promotions are your coach's decision") remains visible at all times, even after a promotion is recorded. This is a design principle, not just a legal precaution.</li>
+            <li><span class="annotation-number">7</span><strong>No delete action:</strong> There is intentionally no way to remove a timeline entry from this view. The permanence warning from the promotion flow is honored here. Corrections can be added as new entries.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ==================== TAB SWITCHING SCRIPT ==================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.tab');
+      const sections = document.querySelectorAll('.screen-section');
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          const targetId = this.getAttribute('data-tab');
+
+          // Deactivate all tabs and sections
+          tabs.forEach(function(t) { t.classList.remove('active'); });
+          sections.forEach(function(s) { s.classList.remove('active'); });
+
+          // Activate clicked tab and corresponding section
+          this.classList.add('active');
+          document.getElementById(targetId).classList.add('active');
+
+          // Scroll to top of screens wrapper
+          document.querySelector('.screens-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -10,9 +10,10 @@
  */
 
 import { useState } from 'react';
-import { useUserProfile, PROFILE_QUESTIONS, type BeltLevel } from '../../context/UserProfileContext';
+import { useUserProfile, PROFILE_QUESTIONS, type BeltLevel, type BeltProgressionEvent } from '../../context/UserProfileContext';
 import { EditSheet } from './EditSheet';
 import { ProfileNudge } from './ProfileNudge';
+import { useToast } from '../ui/Toast';
 import { useBeltPersonalization } from '../../hooks';
 import type { Persona } from '../../data/personas';
 
@@ -45,9 +46,13 @@ export function ProfileScreen({ onNavigate }: ProfileScreenProps) {
     skipQuestion,
     resetProfile,
     activeDemoProfile,
+    addBeltEvent,
+    getBeltHistory,
   } = useUserProfile();
 
+  const { showToast } = useToast();
   const [activeQuestion, setActiveQuestion] = useState<typeof PROFILE_QUESTIONS[0] | null>(null);
+  const [showAddPromotion, setShowAddPromotion] = useState(false);
 
   // Belt personalization for profile display
   const { profile: beltProfile } = useBeltPersonalization();
@@ -304,6 +309,36 @@ export function ProfileScreen({ onNavigate }: ProfileScreenProps) {
         </div>
       </div>
 
+      {/* Belt & Stripe History */}
+      <BeltHistoryModule
+        profile={profile}
+        getBeltHistory={getBeltHistory}
+        onRecordPromotion={() => setShowAddPromotion(true)}
+      />
+
+      {/* Add Promotion Sheet */}
+      {showAddPromotion && (
+        <EditSheet
+          isOpen={true}
+          onClose={() => setShowAddPromotion(false)}
+          title="Record a Promotion"
+          subtitle="Log a belt or stripe promotion"
+          showDoneButton={false}
+          height="auto"
+        >
+          <AddPromotionSheet
+            currentBelt={profile.belt}
+            currentStripes={profile.stripes}
+            onSave={(event) => {
+              addBeltEvent(event);
+              setShowAddPromotion(false);
+              showToast({ message: 'Promotion recorded', type: 'success' });
+            }}
+            onCancel={() => setShowAddPromotion(false)}
+          />
+        </EditSheet>
+      )}
+
       {/* Profile Details */}
       <div className="card">
         <h3 style={{
@@ -511,6 +546,465 @@ function ProfileField({
           + Add
         </button>
       )}
+    </div>
+  );
+}
+
+// Belt History Module component
+function BeltHistoryModule({
+  profile,
+  getBeltHistory,
+  onRecordPromotion,
+}: {
+  profile: { belt: BeltLevel; stripes: number };
+  getBeltHistory: () => BeltProgressionEvent[];
+  onRecordPromotion: () => void;
+}) {
+  const history = getBeltHistory();
+
+  // Compute time at current belt
+  const getTimeAtCurrentBelt = () => {
+    if (history.length === 0) return null;
+    // Find the most recent event for the current belt
+    const sorted = [...history].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const currentBeltEvent = sorted.find(e => e.toBelt === profile.belt);
+    if (!currentBeltEvent) return null;
+
+    const start = new Date(currentBeltEvent.date);
+    const now = new Date();
+    const totalMonths = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+    const years = Math.floor(totalMonths / 12);
+    const months = totalMonths % 12;
+
+    if (years > 0) {
+      return `${years}y ${months}m`;
+    }
+    return `${months}m`;
+  };
+
+  const timeAtBelt = getTimeAtCurrentBelt();
+
+  // Stripe marks for belt badge
+  const stripeMarks = [];
+  for (let i = 0; i < profile.stripes; i++) {
+    stripeMarks.push(
+      <div key={i} style={{
+        width: 3,
+        height: 10,
+        backgroundColor: profile.belt === 'white' ? '#333' : '#fff',
+        borderRadius: 1,
+      }} />
+    );
+  }
+
+  return (
+    <div className="card">
+      <h3 style={{
+        fontFamily: 'var(--font-heading)',
+        fontSize: 'var(--text-sm)',
+        fontWeight: 700,
+        textTransform: 'uppercase',
+        letterSpacing: 'var(--tracking-widest)',
+        color: 'var(--color-gray-500)',
+        marginBottom: 'var(--space-md)',
+      }}>
+        Belt & Stripe History
+      </h3>
+
+      {/* Current Belt Display */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 'var(--space-md)',
+        marginBottom: 'var(--space-md)',
+      }}>
+        {/* Belt Badge - 52px colored rectangle with stripe marks */}
+        <div style={{
+          width: 52,
+          height: 18,
+          backgroundColor: BELT_COLORS[profile.belt],
+          border: profile.belt === 'white' ? '1px solid var(--color-gray-600)' : 'none',
+          borderRadius: 3,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          gap: 2,
+          paddingRight: 4,
+          flexShrink: 0,
+        }}>
+          {stripeMarks}
+        </div>
+
+        <div style={{ flex: 1 }}>
+          <div style={{ fontWeight: 600, color: 'var(--color-white)', fontSize: 'var(--text-base)' }}>
+            {BELT_LABELS[profile.belt]} Belt
+            {profile.stripes > 0 && (
+              <span style={{ color: 'var(--color-gray-400)', fontWeight: 500 }}>
+                {' '}{profile.stripes} stripe{profile.stripes !== 1 ? 's' : ''}
+              </span>
+            )}
+          </div>
+          {timeAtBelt && (
+            <div style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              color: 'var(--color-gray-500)',
+              marginTop: 2,
+            }}>
+              Time at current belt: {timeAtBelt}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Timeline */}
+      {history.length > 0 && (
+        <div style={{
+          position: 'relative',
+          paddingLeft: 24,
+          marginBottom: 'var(--space-lg)',
+        }}>
+          {/* Vertical line */}
+          <div style={{
+            position: 'absolute',
+            left: 7,
+            top: 4,
+            bottom: 4,
+            width: 2,
+            backgroundColor: 'var(--color-gray-800)',
+          }} />
+
+          {[...history].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((event) => {
+            const isStarted = event.notes === 'Started Training' || event.fromBelt === 'none';
+            const dotColor = isStarted ? 'var(--color-accent)' : BELT_COLORS[event.toBelt];
+            const date = new Date(event.date);
+            const dateStr = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+
+            return (
+              <div key={event.id} style={{
+                position: 'relative',
+                paddingBottom: 'var(--space-md)',
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 'var(--space-sm)',
+              }}>
+                {/* Dot */}
+                <div style={{
+                  position: 'absolute',
+                  left: -20,
+                  top: 2,
+                  width: 12,
+                  height: 12,
+                  borderRadius: 'var(--radius-full)',
+                  backgroundColor: dotColor,
+                  border: `2px solid ${isStarted ? 'var(--color-accent)' : 'var(--color-gray-700)'}`,
+                  zIndex: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  {isStarted && (
+                    <svg width="6" height="6" viewBox="0 0 24 24" fill="var(--color-primary)">
+                      <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+                    </svg>
+                  )}
+                </div>
+
+                <div style={{ flex: 1 }}>
+                  <div style={{
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: 600,
+                    color: 'var(--color-white)',
+                  }}>
+                    {isStarted ? 'Started Training' : `${BELT_LABELS[event.toBelt]} Belt${event.toStripes > 0 ? ` (${event.toStripes} stripe${event.toStripes !== 1 ? 's' : ''})` : ''}`}
+                  </div>
+                  <div style={{
+                    fontSize: 'var(--text-xs)',
+                    color: 'var(--color-gray-500)',
+                    fontFamily: 'var(--font-mono)',
+                  }}>
+                    {dateStr}{event.dateEstimated ? ' (est.)' : ''}
+                  </div>
+                  {event.notes && !isStarted && (
+                    <div style={{
+                      fontSize: 'var(--text-xs)',
+                      color: 'var(--color-gray-400)',
+                      marginTop: 2,
+                      fontStyle: 'italic',
+                    }}>
+                      {event.notes}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Record a Promotion button */}
+      <button
+        onClick={onRecordPromotion}
+        style={{
+          width: '100%',
+          padding: 'var(--space-md)',
+          backgroundColor: 'transparent',
+          color: 'var(--color-accent)',
+          border: '2px solid var(--color-accent)',
+          borderRadius: 'var(--radius-md)',
+          fontWeight: 600,
+          fontSize: 'var(--text-sm)',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 'var(--space-sm)',
+        }}
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+        Record a Promotion
+      </button>
+
+      {/* Disclaimer */}
+      <p style={{
+        marginTop: 'var(--space-md)',
+        fontSize: 'var(--text-xs)',
+        color: 'var(--color-gray-600)',
+        textAlign: 'center',
+        fontStyle: 'italic',
+      }}>
+        Belt promotions are your coach's decision — this is for personal context and tracking only.
+      </p>
+    </div>
+  );
+}
+
+// Add Promotion Sheet content
+function AddPromotionSheet({
+  currentBelt,
+  currentStripes,
+  onSave,
+  onCancel,
+}: {
+  currentBelt: BeltLevel;
+  currentStripes: number;
+  onSave: (event: Omit<BeltProgressionEvent, 'id' | 'createdAt'>) => void;
+  onCancel: () => void;
+}) {
+  const [selectedBelt, setSelectedBelt] = useState<BeltLevel>(currentBelt);
+  const [selectedStripes, setSelectedStripes] = useState(currentStripes);
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [notes, setNotes] = useState('');
+
+  const belts: BeltLevel[] = ['white', 'blue', 'purple', 'brown', 'black'];
+
+  const handleSave = () => {
+    const isBeltChange = selectedBelt !== currentBelt;
+    onSave({
+      date,
+      type: isBeltChange ? 'belt_promotion' : 'stripe_promotion',
+      fromBelt: currentBelt,
+      fromStripes: currentStripes,
+      toBelt: selectedBelt,
+      toStripes: selectedStripes,
+      source: 'user_edit',
+      notes: notes || undefined,
+    });
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
+      {/* Belt Selector */}
+      <div>
+        <label style={{
+          display: 'block',
+          fontSize: 'var(--text-sm)',
+          fontWeight: 600,
+          color: 'var(--color-gray-400)',
+          marginBottom: 'var(--space-sm)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+        }}>
+          Belt
+        </label>
+        <div style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center' }}>
+          {belts.map(belt => (
+            <button
+              key={belt}
+              onClick={() => setSelectedBelt(belt)}
+              style={{
+                width: 44,
+                height: 44,
+                borderRadius: 'var(--radius-full)',
+                backgroundColor: BELT_COLORS[belt],
+                border: selectedBelt === belt
+                  ? '3px solid var(--color-accent)'
+                  : belt === 'white'
+                    ? '2px solid var(--color-gray-600)'
+                    : '2px solid transparent',
+                cursor: 'pointer',
+                transition: 'transform 0.15s ease',
+                transform: selectedBelt === belt ? 'scale(1.1)' : 'scale(1)',
+              }}
+              aria-label={`${BELT_LABELS[belt]} belt`}
+            />
+          ))}
+        </div>
+        <div style={{
+          textAlign: 'center',
+          marginTop: 'var(--space-xs)',
+          fontSize: 'var(--text-sm)',
+          color: 'var(--color-white)',
+          fontWeight: 500,
+        }}>
+          {BELT_LABELS[selectedBelt]}
+        </div>
+      </div>
+
+      {/* Stripe Selector */}
+      <div>
+        <label style={{
+          display: 'block',
+          fontSize: 'var(--text-sm)',
+          fontWeight: 600,
+          color: 'var(--color-gray-400)',
+          marginBottom: 'var(--space-sm)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+        }}>
+          Stripes
+        </label>
+        <div style={{ display: 'flex', gap: 'var(--space-sm)', justifyContent: 'center' }}>
+          {[0, 1, 2, 3, 4].map(stripe => (
+            <button
+              key={stripe}
+              onClick={() => setSelectedStripes(stripe)}
+              style={{
+                width: 44,
+                height: 44,
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: selectedStripes === stripe ? 'var(--color-accent)' : 'var(--color-gray-800)',
+                color: selectedStripes === stripe ? 'var(--color-primary)' : 'var(--color-white)',
+                border: 'none',
+                cursor: 'pointer',
+                fontWeight: 700,
+                fontSize: 'var(--text-base)',
+                transition: 'all 0.15s ease',
+              }}
+            >
+              {stripe}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Date Input */}
+      <div>
+        <label style={{
+          display: 'block',
+          fontSize: 'var(--text-sm)',
+          fontWeight: 600,
+          color: 'var(--color-gray-400)',
+          marginBottom: 'var(--space-sm)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+        }}>
+          Date
+        </label>
+        <input
+          type="date"
+          value={date}
+          max={new Date().toISOString().split('T')[0]}
+          onChange={(e) => setDate(e.target.value)}
+          style={{
+            width: '100%',
+            padding: 'var(--space-md)',
+            backgroundColor: 'var(--color-gray-800)',
+            border: '1px solid var(--color-gray-700)',
+            borderRadius: 'var(--radius-md)',
+            color: 'var(--color-white)',
+            fontSize: 'var(--text-base)',
+            fontFamily: 'var(--font-mono)',
+          }}
+        />
+      </div>
+
+      {/* Notes */}
+      <div>
+        <label style={{
+          display: 'block',
+          fontSize: 'var(--text-sm)',
+          fontWeight: 600,
+          color: 'var(--color-gray-400)',
+          marginBottom: 'var(--space-sm)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+        }}>
+          Notes (optional)
+        </label>
+        <textarea
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          placeholder="e.g. Promoted by Professor Garcia"
+          rows={3}
+          style={{
+            width: '100%',
+            padding: 'var(--space-md)',
+            backgroundColor: 'var(--color-gray-800)',
+            border: '1px solid var(--color-gray-700)',
+            borderRadius: 'var(--radius-md)',
+            color: 'var(--color-white)',
+            fontSize: 'var(--text-sm)',
+            resize: 'vertical',
+            fontFamily: 'inherit',
+          }}
+        />
+      </div>
+
+      {/* Warning */}
+      <p style={{
+        fontSize: 'var(--text-xs)',
+        color: 'var(--color-warning, #f59e0b)',
+        textAlign: 'center',
+      }}>
+        This creates a permanent record.
+      </p>
+
+      {/* Actions */}
+      <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
+        <button
+          onClick={onCancel}
+          style={{
+            flex: 1,
+            padding: 'var(--space-md)',
+            backgroundColor: 'var(--color-gray-800)',
+            color: 'var(--color-white)',
+            border: 'none',
+            borderRadius: 'var(--radius-md)',
+            fontWeight: 600,
+            cursor: 'pointer',
+          }}
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleSave}
+          style={{
+            flex: 1,
+            padding: 'var(--space-md)',
+            backgroundColor: 'var(--color-accent)',
+            color: 'var(--color-primary)',
+            border: 'none',
+            borderRadius: 'var(--radius-md)',
+            fontWeight: 700,
+            cursor: 'pointer',
+          }}
+        >
+          Save
+        </button>
+      </div>
     </div>
   );
 }

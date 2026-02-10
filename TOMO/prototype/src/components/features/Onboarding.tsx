@@ -22,6 +22,7 @@ import {
   type TrainingGoal,
   type ExperienceLevel,
   type OnboardingData,
+  type Gender,
 } from '../../context/UserProfileContext';
 import { type GymSelection } from '../../data/gyms';
 
@@ -62,6 +63,11 @@ const EXPERIENCE_OPTIONS: { value: ExperienceLevel; label: string }[] = [
   { value: 'experienced', label: '3y+' },
 ];
 
+const GENDER_OPTIONS: { value: Gender; label: string }[] = [
+  { value: 'male', label: 'Male' },
+  { value: 'female', label: 'Female' },
+];
+
 export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
   const [step, setStep] = useState<OnboardingStep>('welcome');
 
@@ -69,6 +75,8 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
   const [name, setName] = useState('');
   const [belt, setBelt] = useState<BeltLevel | null>(null);
   const [stripes, setStripes] = useState<number | null>(null);
+  const [gender, setGender] = useState<Gender | null>(null);
+  const [birthDate, setBirthDate] = useState<string>('');
   const [gym, setGym] = useState<GymSelection | null>(null);
   const [targetFrequency, setTargetFrequency] = useState<number | null>(null);
   const [loggingPreference, setLoggingPreference] = useState<'voice' | 'text'>('voice'); // Pre-selected per approved design
@@ -78,7 +86,7 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
   const [experienceLevel, setExperienceLevel] = useState<ExperienceLevel | null>(null);
 
   // Validation
-  const canProceedFromAbout = name.trim().length > 0 && belt !== null && stripes !== null;
+  const canProceedFromAbout = name.trim().length > 0 && belt !== null && stripes !== null && gender !== null && birthDate !== '';
   const canProceedFromTraining = gym !== null && targetFrequency !== null;
 
   // Handle finish
@@ -87,6 +95,8 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
       name: name.trim(),
       belt: belt!,
       stripes: stripes!,
+      gender: gender!,
+      birthDate: birthDate,
       gym: gym!,
       targetFrequency: targetFrequency!,
       loggingPreference,
@@ -320,7 +330,7 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
         </div>
 
         {/* Stripes Selector */}
-        <div style={{ marginBottom: 'var(--space-xl)', flex: 1 }}>
+        <div style={{ marginBottom: 'var(--space-xl)' }}>
           <label style={sectionLabelStyle}>
             How many stripes?
           </label>
@@ -358,6 +368,77 @@ export function Onboarding({ onComplete, onStartLogging }: OnboardingProps) {
               </button>
             ))}
           </div>
+        </div>
+
+        {/* Gender Selector */}
+        <div style={{ marginBottom: 'var(--space-xl)' }}>
+          <label style={sectionLabelStyle}>
+            Gender
+          </label>
+          <div style={{
+            display: 'flex',
+            gap: 'var(--space-md)',
+            justifyContent: 'center',
+          }}>
+            {GENDER_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setGender(option.value)}
+                style={{
+                  flex: 1,
+                  maxWidth: 140,
+                  padding: 'var(--space-md)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: gender === option.value
+                    ? 'var(--color-gray-800)'
+                    : 'transparent',
+                  border: gender === option.value
+                    ? '3px solid var(--color-accent)'
+                    : '2px solid var(--color-gray-700)',
+                  borderRadius: 'var(--radius-md)',
+                  cursor: 'pointer',
+                  fontSize: 'var(--text-lg)',
+                  fontWeight: 600,
+                  color: gender === option.value
+                    ? 'var(--color-accent)'
+                    : 'var(--color-gray-400)',
+                }}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Birthday Input */}
+        <div style={{ marginBottom: 'var(--space-xl)', flex: 1 }}>
+          <label style={sectionLabelStyle}>
+            Birthday
+          </label>
+          <input
+            type="date"
+            value={birthDate}
+            onChange={(e) => setBirthDate(e.target.value)}
+            style={{
+              width: '100%',
+              padding: 'var(--space-md) var(--space-lg)',
+              fontSize: 'var(--text-lg)',
+              fontWeight: 500,
+              backgroundColor: 'var(--color-gray-900)',
+              border: '2px solid var(--color-gray-700)',
+              borderRadius: 'var(--radius-md)',
+              color: 'var(--color-white)',
+              outline: 'none',
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = 'var(--color-accent)';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = 'var(--color-gray-700)';
+            }}
+          />
         </div>
 
         {/* Continue Button */}

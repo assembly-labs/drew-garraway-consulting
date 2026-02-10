@@ -1,0 +1,2519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMO - Techniques Page Enhancements</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Unbounded:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================
+       DESIGN TOKENS
+       ============================================ */
+    :root {
+      --bg: #111111;
+      --card-bg: #161616;
+      --card-border: #1f1f1f;
+      --gold: #F5A623;
+      --positive: #22c55e;
+      --negative: #ef4444;
+      --warning: #f59e0b;
+      --gray-400: #c4c4c4;
+      --gray-500: #a3a3a3;
+      --gray-600: #8a8a8a;
+      --gray-700: #4a4a4a;
+      --gray-800: #1f1f1f;
+      --white: #FFFFFF;
+
+      --font-heading: 'Unbounded', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--white);
+      background: #0a0a0a;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ============================================
+       PAGE HEADER
+       ============================================ */
+    .page-header {
+      text-align: center;
+      padding: var(--space-2xl) var(--space-lg);
+      background: var(--bg);
+      border-bottom: 1px solid var(--gray-800);
+    }
+
+    .page-header h1 {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 28px;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .page-header h1 span {
+      color: var(--gold);
+    }
+
+    .page-header .subtitle {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .page-header .date {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-top: var(--space-xs);
+    }
+
+    /* ============================================
+       TAB NAVIGATION
+       ============================================ */
+    .tab-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      padding: var(--space-md) var(--space-lg);
+      background: var(--bg);
+      border-bottom: 1px solid var(--gray-800);
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .tab-btn {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--gray-500);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .tab-btn:hover {
+      color: var(--white);
+      border-color: var(--gray-700);
+    }
+
+    .tab-btn.active {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: rgba(245, 166, 35, 0.08);
+    }
+
+    /* ============================================
+       PHONE FRAME
+       ============================================ */
+    .phone-container {
+      display: flex;
+      justify-content: center;
+      padding: var(--space-xl) var(--space-md);
+      min-height: 80vh;
+    }
+
+    .phone-frame {
+      width: 100%;
+      max-width: 430px;
+      background: var(--bg);
+      border: 2px solid var(--gray-700);
+      border-radius: 40px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    .phone-notch {
+      width: 150px;
+      height: 30px;
+      background: #0a0a0a;
+      margin: 0 auto;
+      border-radius: 0 0 20px 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .phone-screen {
+      padding: var(--space-md);
+      min-height: 750px;
+      overflow-y: auto;
+    }
+
+    /* ============================================
+       SCREEN SECTIONS (TAB PANELS)
+       ============================================ */
+    .screen-panel {
+      display: none;
+    }
+
+    .screen-panel.active {
+      display: block;
+    }
+
+    /* ============================================
+       STATUS BAR
+       ============================================ */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-sm) var(--space-md);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    /* ============================================
+       APP BAR
+       ============================================ */
+    .app-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-sm) 0 var(--space-md) 0;
+    }
+
+    .app-bar-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--white);
+    }
+
+    .app-bar-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--gray-400);
+      cursor: pointer;
+    }
+
+    /* ============================================
+       SEARCH BAR
+       ============================================ */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 12px var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .search-bar svg {
+      flex-shrink: 0;
+      color: var(--gray-600);
+    }
+
+    .search-bar input {
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--gray-500);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    /* ============================================
+       POSITION CARDS (GRID)
+       ============================================ */
+    .position-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .position-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      position: relative;
+      overflow: hidden;
+      min-height: 100px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .position-card:hover {
+      border-color: var(--gray-700);
+    }
+
+    .position-card-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--white);
+      margin-bottom: var(--space-xs);
+    }
+
+    .position-card-count {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--gray-600);
+    }
+
+    .position-card-icon {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      opacity: 0.15;
+      font-size: 32px;
+      color: var(--gray-500);
+    }
+
+    /* ============================================
+       LOCKED CARD
+       ============================================ */
+    .position-card.locked {
+      opacity: 0.5;
+    }
+
+    .position-card.locked .lock-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(17, 17, 17, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .lock-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card-bg);
+      border: 1px solid var(--gray-700);
+      border-radius: 50%;
+    }
+
+    .lock-icon svg {
+      width: 16px;
+      height: 16px;
+      color: var(--gray-500);
+    }
+
+    /* ============================================
+       BOTTOM SHEET
+       ============================================ */
+    .bottom-sheet-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 20;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .bottom-sheet {
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 20px 20px 0 0;
+      padding: var(--space-lg);
+      border-top: 1px solid var(--gray-700);
+    }
+
+    .bottom-sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: var(--gray-700);
+      border-radius: 2px;
+      margin: 0 auto var(--space-lg);
+    }
+
+    .bottom-sheet-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--white);
+      margin-bottom: var(--space-sm);
+    }
+
+    .bottom-sheet-text {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--gray-400);
+      margin-bottom: var(--space-lg);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       BELT INDICATORS
+       ============================================ */
+    .belt-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .belt-dot.white { background: #FFFFFF; border: 1px solid var(--gray-700); }
+    .belt-dot.blue { background: #2563eb; }
+    .belt-dot.purple { background: #7c3aed; }
+    .belt-dot.brown { background: #92400e; }
+    .belt-dot.black { background: #111111; border: 1px solid var(--gray-700); }
+
+    .belt-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(37, 99, 235, 0.12);
+      color: #60a5fa;
+    }
+
+    .belt-indicator.blue-belt {
+      background: rgba(37, 99, 235, 0.12);
+      color: #60a5fa;
+    }
+
+    .belt-indicator.purple-belt {
+      background: rgba(124, 58, 237, 0.12);
+      color: #a78bfa;
+    }
+
+    /* ============================================
+       FILTER CHIPS / PILLS
+       ============================================ */
+    .filter-row {
+      display: flex;
+      gap: var(--space-sm);
+      overflow-x: auto;
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-md);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-chip {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--gray-500);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 10px 16px;
+      white-space: nowrap;
+      cursor: pointer;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .filter-chip:hover {
+      border-color: var(--gray-700);
+      color: var(--white);
+    }
+
+    .filter-chip.active {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: rgba(245, 166, 35, 0.08);
+    }
+
+    /* ============================================
+       DIFFICULTY BADGE
+       ============================================ */
+    .difficulty-badge {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--gray-500);
+      background: var(--gray-800);
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: var(--space-xs);
+    }
+
+    .difficulty-badge.beginner {
+      color: var(--positive);
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    .difficulty-badge.intermediate {
+      color: var(--warning);
+      background: rgba(245, 158, 11, 0.1);
+    }
+
+    .difficulty-badge.advanced {
+      color: var(--negative);
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    /* ============================================
+       TECHNIQUE DETAIL VIEW
+       ============================================ */
+    .detail-header {
+      margin-bottom: var(--space-lg);
+    }
+
+    .detail-back {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-bottom: var(--space-md);
+      cursor: pointer;
+      min-height: 44px;
+    }
+
+    .detail-title {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--white);
+      margin-bottom: var(--space-xs);
+    }
+
+    .detail-subtitle {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--gray-600);
+    }
+
+    /* ============================================
+       PROFICIENCY SELECTOR
+       ============================================ */
+    .proficiency-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .proficiency-label {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .proficiency-read-only {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .proficiency-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .proficiency-dot.learning { background: var(--gray-500); }
+    .proficiency-dot.developing { background: var(--warning); }
+    .proficiency-dot.proficient { background: var(--positive); }
+    .proficiency-dot.advanced { background: var(--gold); }
+
+    .proficiency-text {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--white);
+    }
+
+    .proficiency-chips {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .proficiency-chip {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--gray-500);
+      cursor: pointer;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      transition: all 0.2s;
+    }
+
+    .proficiency-chip:hover {
+      border-color: var(--gray-700);
+      color: var(--white);
+    }
+
+    .proficiency-chip.selected {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(245, 166, 35, 0.08);
+    }
+
+    .proficiency-chip .chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .proficiency-chip .chip-dot.learning { background: var(--gray-500); }
+    .proficiency-chip .chip-dot.developing { background: var(--warning); }
+    .proficiency-chip .chip-dot.proficient { background: var(--positive); }
+    .proficiency-chip .chip-dot.advanced { background: var(--gold); }
+
+    /* ============================================
+       RELATED TECHNIQUES SCROLL
+       ============================================ */
+    .related-section {
+      margin-top: var(--space-lg);
+    }
+
+    .section-label {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--white);
+      margin-bottom: var(--space-md);
+    }
+
+    .horizontal-scroll {
+      display: flex;
+      gap: var(--space-sm);
+      overflow-x: auto;
+      padding-bottom: var(--space-sm);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .related-card {
+      flex-shrink: 0;
+      width: 160px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .related-card:hover {
+      border-color: var(--gray-700);
+    }
+
+    .related-card-name {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--white);
+      margin-bottom: var(--space-xs);
+    }
+
+    .related-card-position {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-bottom: var(--space-sm);
+    }
+
+    .related-card-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .related-card-belt {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .related-card-level {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--gray-600);
+    }
+
+    /* ============================================
+       INSTRUCTOR LIST
+       ============================================ */
+    .instructor-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-sm);
+      cursor: pointer;
+      transition: border-color 0.2s;
+      min-height: 56px;
+    }
+
+    .instructor-item:hover {
+      border-color: var(--gray-700);
+    }
+
+    .instructor-item.highlighted {
+      border-color: var(--gold);
+      background: rgba(245, 166, 35, 0.04);
+    }
+
+    .instructor-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--gray-800);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--gray-500);
+      flex-shrink: 0;
+    }
+
+    .instructor-info {
+      flex: 1;
+    }
+
+    .instructor-name {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--white);
+    }
+
+    .instructor-count {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--gray-600);
+    }
+
+    .instructor-arrow {
+      color: var(--gray-700);
+    }
+
+    /* ============================================
+       BOOKMARK/FAVORITE ICON
+       ============================================ */
+    .bookmark-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      border-radius: 50%;
+      background: rgba(17, 17, 17, 0.6);
+    }
+
+    .bookmark-icon svg {
+      width: 16px;
+      height: 16px;
+      color: var(--gray-600);
+      transition: all 0.2s;
+    }
+
+    .bookmark-icon.saved svg {
+      color: var(--gold);
+      fill: var(--gold);
+    }
+
+    /* ============================================
+       VIDEO CARDS
+       ============================================ */
+    .video-card {
+      display: flex;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-sm);
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .video-card:hover {
+      border-color: var(--gray-700);
+    }
+
+    .video-thumbnail {
+      width: 80px;
+      height: 56px;
+      background: var(--gray-800);
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-thumbnail svg {
+      color: var(--gray-600);
+    }
+
+    .video-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .video-title {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--white);
+      margin-bottom: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .video-instructor {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-bottom: 2px;
+    }
+
+    .video-duration {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--gray-600);
+    }
+
+    /* ============================================
+       SEARCH RESULTS
+       ============================================ */
+    .search-section-header {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--gray-600);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: var(--space-sm) 0;
+      margin-top: var(--space-md);
+      border-bottom: 1px solid var(--gray-800);
+      margin-bottom: var(--space-sm);
+    }
+
+    .search-result {
+      display: flex;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-sm);
+      cursor: pointer;
+      min-height: 56px;
+      align-items: center;
+    }
+
+    .search-result-thumb {
+      width: 48px;
+      height: 48px;
+      background: var(--gray-800);
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-result-info {
+      flex: 1;
+    }
+
+    .search-result-name {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .search-result-meta {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--gray-600);
+    }
+
+    .highlight {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ============================================
+       WATCHED STATE
+       ============================================ */
+    .watch-badge {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 20px;
+      height: 20px;
+      background: var(--positive);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .watch-badge svg {
+      width: 12px;
+      height: 12px;
+      color: var(--white);
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 3px;
+      background: var(--gray-800);
+      border-radius: 2px;
+      margin-top: var(--space-xs);
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+
+    .watch-counter {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-left: auto;
+    }
+
+    .category-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-md);
+    }
+
+    /* ============================================
+       TABS (For You / Browse)
+       ============================================ */
+    .view-toggle {
+      display: flex;
+      gap: 0;
+      margin-bottom: var(--space-md);
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--card-border);
+      overflow: hidden;
+    }
+
+    .view-toggle-btn {
+      flex: 1;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--gray-500);
+      background: none;
+      border: none;
+      padding: 12px;
+      cursor: pointer;
+      min-height: 44px;
+      transition: all 0.2s;
+    }
+
+    .view-toggle-btn.active {
+      color: var(--gold);
+      background: rgba(245, 166, 35, 0.08);
+    }
+
+    /* ============================================
+       SECTION DIVIDER
+       ============================================ */
+    .divider {
+      height: 1px;
+      background: var(--gray-800);
+      margin: var(--space-lg) 0;
+    }
+
+    /* ============================================
+       ANNOTATION
+       ============================================ */
+    .annotation-container {
+      max-width: 430px;
+      margin: var(--space-lg) auto 0;
+      padding: 0 var(--space-md) var(--space-2xl);
+    }
+
+    .annotation {
+      background: rgba(245, 166, 35, 0.06);
+      border: 1px solid rgba(245, 166, 35, 0.15);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .annotation-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--gold);
+      margin-bottom: var(--space-sm);
+    }
+
+    .annotation-text {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.7;
+    }
+
+    /* ============================================
+       COMPARISON LAYOUT
+       ============================================ */
+    .comparison {
+      display: flex;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .comparison-side {
+      flex: 1;
+    }
+
+    .comparison-label {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--gray-600);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: center;
+      margin-bottom: var(--space-sm);
+    }
+
+    .comparison-label.before { color: var(--gray-600); }
+    .comparison-label.after { color: var(--positive); }
+
+    /* ============================================
+       ARROW ICON
+       ============================================ */
+    .arrow-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-md) 0;
+    }
+
+    .arrow-right svg {
+      color: var(--gold);
+    }
+
+    /* ============================================
+       SAVED TAB
+       ============================================ */
+    .saved-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    .saved-count {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--gold);
+      background: rgba(245, 166, 35, 0.1);
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    /* ============================================
+       BUTTON
+       ============================================ */
+    .btn {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 14px 24px;
+      cursor: pointer;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      width: 100%;
+      transition: all 0.2s;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #111111;
+    }
+
+    .btn-gold:hover {
+      background: #e09620;
+    }
+
+    .btn-outline {
+      background: none;
+      color: var(--gray-400);
+      border: 1px solid var(--gray-700);
+    }
+
+    /* ============================================
+       STATE INDICATOR (NEW / CURRENT)
+       ============================================ */
+    .state-badge {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: var(--space-sm);
+    }
+
+    .state-badge.current {
+      color: var(--gray-500);
+      background: var(--gray-800);
+    }
+
+    .state-badge.new-state {
+      color: var(--positive);
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    /* ============================================
+       TRANSITION ARROW
+       ============================================ */
+    .transition-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-sm) 0;
+      color: var(--gray-700);
+    }
+
+    /* ============================================
+       FILTERED RESULT VIEW
+       ============================================ */
+    .filter-active-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: 10px var(--space-md);
+      background: rgba(245, 166, 35, 0.06);
+      border: 1px solid rgba(245, 166, 35, 0.15);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .filter-active-text {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--gold);
+      flex: 1;
+    }
+
+    .filter-clear {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--gray-500);
+      cursor: pointer;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-sm);
+    }
+
+    /* ============================================
+       PULSE ANIMATION
+       ============================================ */
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .pulse {
+      animation: subtlePulse 2s ease-in-out infinite;
+    }
+
+    /* ============================================
+       MISC
+       ============================================ */
+    .text-gold { color: var(--gold); }
+    .text-gray-400 { color: var(--gray-400); }
+    .text-gray-500 { color: var(--gray-500); }
+    .text-gray-600 { color: var(--gray-600); }
+
+    .mt-sm { margin-top: var(--space-sm); }
+    .mt-md { margin-top: var(--space-md); }
+    .mt-lg { margin-top: var(--space-lg); }
+    .mb-sm { margin-bottom: var(--space-sm); }
+    .mb-md { margin-bottom: var(--space-md); }
+    .mb-lg { margin-bottom: var(--space-lg); }
+
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-sm { gap: var(--space-sm); }
+    .gap-md { gap: var(--space-md); }
+
+    .screen-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: var(--space-sm) 0 var(--space-md);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       PAGE HEADER
+       ========================================== -->
+  <header class="page-header">
+    <h1>TOMO - Techniques Page <span>Enhancements</span></h1>
+    <p class="subtitle">Design Review -- Proposed New Features</p>
+    <p class="date">February 8, 2026</p>
+  </header>
+
+  <!-- ==========================================
+       TAB NAVIGATION
+       ========================================== -->
+  <nav class="tab-nav" id="tabNav">
+    <button class="tab-btn active" data-screen="screen-1">1. Content Gating</button>
+    <button class="tab-btn" data-screen="screen-2">2. Difficulty Filter</button>
+    <button class="tab-btn" data-screen="screen-3">3. Proficiency Update</button>
+    <button class="tab-btn" data-screen="screen-4">4. Related Techniques</button>
+    <button class="tab-btn" data-screen="screen-5">5. Instructor Tap</button>
+    <button class="tab-btn" data-screen="screen-6">6. Bookmarking</button>
+    <button class="tab-btn" data-screen="screen-7">7. Enhanced Search</button>
+    <button class="tab-btn" data-screen="screen-8">8. Watch Tracking</button>
+  </nav>
+
+  <!-- ==========================================
+       SCREEN 1: CONTENT GATING BY BELT
+       ========================================== -->
+  <div class="screen-panel active" id="screen-1">
+    <div class="phone-container">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>TOMO</span>
+          </div>
+
+          <div class="app-bar">
+            <div class="app-bar-title">Browse</div>
+            <div class="app-bar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="view-toggle">
+            <button class="view-toggle-btn">For You</button>
+            <button class="view-toggle-btn active">Browse</button>
+          </div>
+
+          <div class="screen-title">Positions</div>
+
+          <div class="position-grid">
+            <!-- Unlocked cards -->
+            <div class="position-card">
+              <div class="position-card-name">Closed Guard</div>
+              <div class="position-card-count">12 techniques</div>
+            </div>
+            <div class="position-card">
+              <div class="position-card-name">Mount</div>
+              <div class="position-card-count">9 techniques</div>
+            </div>
+            <div class="position-card">
+              <div class="position-card-name">Side Control</div>
+              <div class="position-card-count">11 techniques</div>
+            </div>
+            <div class="position-card">
+              <div class="position-card-name">Standing</div>
+              <div class="position-card-count">8 techniques</div>
+            </div>
+            <!-- Locked cards -->
+            <div class="position-card locked" id="lockedCard" style="cursor:pointer">
+              <div class="lock-overlay">
+                <div class="lock-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="position-card-name">Leg Locks</div>
+              <div class="position-card-count">14 techniques</div>
+            </div>
+            <div class="position-card locked">
+              <div class="lock-overlay">
+                <div class="lock-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="position-card-name">Berimbolo</div>
+              <div class="position-card-count">6 techniques</div>
+            </div>
+          </div>
+
+          <div style="font-family: var(--font-mono); font-weight: 500; font-size: 12px; color: var(--gray-600); text-align: center; padding: var(--space-md);">
+            Tap the locked "Leg Locks" card above
+          </div>
+
+          <!-- Bottom sheet (shown on tap) -->
+          <div class="bottom-sheet-overlay" id="gatingSheet" style="display: none;">
+            <div class="bottom-sheet">
+              <div class="bottom-sheet-handle"></div>
+              <div style="text-align: center; margin-bottom: var(--space-lg);">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gray-500)" stroke-width="1.5" style="margin-bottom: var(--space-md);">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <div class="bottom-sheet-title" style="text-align: center;">Leg Locks</div>
+              <div class="bottom-sheet-text" style="text-align: center;">
+                This category unlocks at <strong style="color: var(--white);">Blue Belt</strong>. Leg lock techniques require a solid foundation in guard play and positional control.
+              </div>
+              <div style="display: flex; align-items: center; justify-content: center; gap: var(--space-sm); margin-bottom: var(--space-lg);">
+                <span class="belt-indicator blue-belt">
+                  <span class="belt-dot blue"></span>
+                  Unlocks at Blue Belt
+                </span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+                <button class="btn btn-gold" onclick="document.getElementById('gatingSheet').style.display='none'">Got It</button>
+                <button class="btn btn-outline" onclick="document.getElementById('gatingSheet').style.display='none'">View Prerequisites</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation-container">
+      <div class="annotation">
+        <div class="annotation-title">Design Decision: Content Gating</div>
+        <div class="annotation-text">
+          Locked categories use a dimmed overlay (50% opacity) with a centered lock icon to clearly signal inaccessibility without hiding the content entirely. Users can still see what is ahead, which creates aspiration and goal-setting. The bottom sheet explains the requirement in a non-punitive tone, framing it as a progression milestone rather than a restriction. Belt color indicators use the system's established belt dot pattern for consistency. The "View Prerequisites" CTA provides a pathway to progression rather than a dead end.
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-title">Data Model Impact</div>
+        <div class="annotation-text">
+          The existing CatalogTechnique type already includes belt-level booleans (white_belt, blue_belt, etc.). Gating uses these flags against the user's current belt from UserProfileContext. No schema changes required. Position-level gating is derived by checking if ANY technique in a position category requires a higher belt.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SCREEN 2: DIFFICULTY FILTERING
+       ========================================== -->
+  <div class="screen-panel" id="screen-2">
+    <div class="phone-container">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>TOMO</span>
+          </div>
+
+          <div class="app-bar">
+            <div class="app-bar-title">Browse</div>
+            <div class="app-bar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="view-toggle">
+            <button class="view-toggle-btn">For You</button>
+            <button class="view-toggle-btn active">Browse</button>
+          </div>
+
+          <!-- Difficulty filter chips -->
+          <div class="filter-row" id="difficultyFilter">
+            <div class="filter-chip active" data-level="all" onclick="filterDifficulty(this, 'all')">All Levels</div>
+            <div class="filter-chip" data-level="beginner" onclick="filterDifficulty(this, 'beginner')">Beginner (1-3)</div>
+            <div class="filter-chip" data-level="intermediate" onclick="filterDifficulty(this, 'intermediate')">Intermediate (4-6)</div>
+            <div class="filter-chip" data-level="advanced" onclick="filterDifficulty(this, 'advanced')">Advanced (7-10)</div>
+          </div>
+
+          <div class="screen-title">Positions</div>
+
+          <div class="position-grid" id="filteredGrid">
+            <div class="position-card" data-difficulty="beginner">
+              <div class="position-card-name">Closed Guard</div>
+              <div class="position-card-count">12 techniques</div>
+              <div class="difficulty-badge beginner">1-4</div>
+            </div>
+            <div class="position-card" data-difficulty="beginner">
+              <div class="position-card-name">Mount</div>
+              <div class="position-card-count">9 techniques</div>
+              <div class="difficulty-badge beginner">1-5</div>
+            </div>
+            <div class="position-card" data-difficulty="beginner">
+              <div class="position-card-name">Side Control</div>
+              <div class="position-card-count">11 techniques</div>
+              <div class="difficulty-badge beginner">2-5</div>
+            </div>
+            <div class="position-card" data-difficulty="beginner">
+              <div class="position-card-name">Standing</div>
+              <div class="position-card-count">8 techniques</div>
+              <div class="difficulty-badge beginner">1-3</div>
+            </div>
+            <div class="position-card" data-difficulty="intermediate">
+              <div class="position-card-name">Half Guard</div>
+              <div class="position-card-count">10 techniques</div>
+              <div class="difficulty-badge intermediate">3-7</div>
+            </div>
+            <div class="position-card" data-difficulty="intermediate">
+              <div class="position-card-name">Open Guard</div>
+              <div class="position-card-count">15 techniques</div>
+              <div class="difficulty-badge intermediate">4-8</div>
+            </div>
+            <div class="position-card" data-difficulty="intermediate">
+              <div class="position-card-name">Turtle</div>
+              <div class="position-card-count">7 techniques</div>
+              <div class="difficulty-badge intermediate">3-6</div>
+            </div>
+            <div class="position-card" data-difficulty="intermediate">
+              <div class="position-card-name">North-South</div>
+              <div class="position-card-count">5 techniques</div>
+              <div class="difficulty-badge intermediate">4-6</div>
+            </div>
+            <div class="position-card" data-difficulty="advanced">
+              <div class="position-card-name">Back Control</div>
+              <div class="position-card-count">8 techniques</div>
+              <div class="difficulty-badge advanced">5-9</div>
+            </div>
+            <div class="position-card" data-difficulty="advanced">
+              <div class="position-card-name">Leg Entanglements</div>
+              <div class="position-card-count">14 techniques</div>
+              <div class="difficulty-badge advanced">7-10</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation-container">
+      <div class="annotation">
+        <div class="annotation-title">Design Decision: Difficulty Filtering</div>
+        <div class="annotation-text">
+          Horizontal scrollable filter chips follow the established pattern in mobile UIs (Instagram, YouTube). The "All Levels" default ensures no content is hidden initially. Difficulty ranges (e.g., "3-7") are shown as badges on each position card, giving users immediate context about the skill spread within a category. Difficulty values map directly to the existing DifficultyLevel type (1-10) in techniqueVideos.ts. Color coding -- green for beginner, amber for intermediate, red for advanced -- uses the semantic color system already defined in the design tokens.
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-title">Interaction: Filter Animation</div>
+        <div class="annotation-text">
+          When a difficulty level is selected, position cards outside the range fade out and the grid re-flows. The active chip gets the gold border treatment consistent with all selected states in the design system. This is a client-side filter with no API call required since technique data is already loaded.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SCREEN 3: PROFICIENCY UPDATE
+       ========================================== -->
+  <div class="screen-panel" id="screen-3">
+    <div class="phone-container">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>TOMO</span>
+          </div>
+
+          <div class="detail-header">
+            <div class="detail-back">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              Closed Guard
+            </div>
+            <div class="detail-title">Triangle Choke</div>
+            <div class="detail-subtitle">Closed Guard -- Submission -- White Belt</div>
+          </div>
+
+          <!-- Current State: Read-only -->
+          <div class="state-badge current">CURRENT STATE</div>
+
+          <div class="proficiency-section">
+            <div class="proficiency-label">Your Proficiency</div>
+            <div class="proficiency-read-only">
+              <div class="proficiency-dot developing"></div>
+              <span class="proficiency-text">Developing</span>
+            </div>
+            <div style="font-family: var(--font-mono); font-weight: 500; font-size: 12px; color: var(--gray-600); margin-top: var(--space-sm);">
+              Read-only -- cannot update from this view
+            </div>
+          </div>
+
+          <!-- Transition arrow -->
+          <div class="transition-indicator">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          </div>
+
+          <!-- New State: Interactive -->
+          <div class="state-badge new-state">PROPOSED STATE</div>
+
+          <div class="proficiency-section" style="border-color: rgba(34, 197, 94, 0.2);">
+            <div class="proficiency-label">Your Proficiency</div>
+            <div class="proficiency-chips" id="proficiencyChips">
+              <div class="proficiency-chip" onclick="selectProficiency(this, 'learning')">
+                <span class="chip-dot learning"></span>
+                Learning
+              </div>
+              <div class="proficiency-chip selected" onclick="selectProficiency(this, 'developing')">
+                <span class="chip-dot developing"></span>
+                Developing
+              </div>
+              <div class="proficiency-chip" onclick="selectProficiency(this, 'proficient')">
+                <span class="chip-dot proficient"></span>
+                Proficient
+              </div>
+              <div class="proficiency-chip" onclick="selectProficiency(this, 'advanced')">
+                <span class="chip-dot advanced"></span>
+                Advanced
+              </div>
+            </div>
+            <div style="font-family: var(--font-mono); font-weight: 500; font-size: 12px; color: var(--positive); margin-top: var(--space-sm);">
+              Tap to update -- saves immediately
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Additional detail content -->
+          <div class="section-label">Key Points</div>
+          <div style="margin-bottom: var(--space-md);">
+            <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-sm); align-items: flex-start;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="font-family: var(--font-body); font-weight: 500; font-size: 13px; color: var(--gray-400);">Cut angle across opponent's body, not straight back</span>
+            </div>
+            <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-sm); align-items: flex-start;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="font-family: var(--font-body); font-weight: 500; font-size: 13px; color: var(--gray-400);">Lock ankle behind knee, squeeze knees together</span>
+            </div>
+            <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-sm); align-items: flex-start;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="font-family: var(--font-body); font-weight: 500; font-size: 13px; color: var(--gray-400);">Pull head down, hips up for maximum pressure</span>
+            </div>
+          </div>
+
+          <div class="section-label">Common Mistakes</div>
+          <div>
+            <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-sm); align-items: flex-start;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--negative)" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <span style="font-family: var(--font-body); font-weight: 500; font-size: 13px; color: var(--gray-400);">Crossing ankles instead of locking behind knee</span>
+            </div>
+            <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-sm); align-items: flex-start;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--negative)" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <span style="font-family: var(--font-body); font-weight: 500; font-size: 13px; color: var(--gray-400);">Not controlling posture before attempting lock</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation-container">
+      <div class="annotation">
+        <div class="annotation-title">Design Decision: Interactive Proficiency</div>
+        <div class="annotation-text">
+          The current read-only dot provides no affordance for updating proficiency. The proposed tappable chips use the existing ProficiencyLevel type (learning, developing, proficient, advanced) with color-coded dots that match the system's semantic palette. Chips are sized at 44px minimum height for comfortable touch targets. The selected state uses the gold border pattern. Changes save immediately (optimistic update) to eliminate the friction of a separate save action. This aligns with the "relaxed user" context -- users browsing techniques are not time-pressured.
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-title">Persistence Strategy</div>
+        <div class="annotation-text">
+          Updates write to the TechniqueProgress record (techniqueId + proficiency). In the prototype, this persists to localStorage. In production, this syncs to Supabase with an optimistic UI pattern. The coachEndorsed boolean on TechniqueProgress remains separate, allowing coaches to validate user self-assessments independently.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SCREEN 4: RELATED TECHNIQUES
+       ========================================== -->
+  <div class="screen-panel" id="screen-4">
+    <div class="phone-container">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>TOMO</span>
+          </div>
+
+          <div class="detail-header">
+            <div class="detail-back">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              Closed Guard
+            </div>
+            <div class="detail-title">Armbar from Guard</div>
+            <div class="detail-subtitle">Closed Guard -- Submission -- White Belt</div>
+          </div>
+
+          <!-- Video section -->
+          <div class="video-card" style="margin-bottom: var(--space-md);">
+            <div class="video-thumbnail">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="video-info">
+              <div class="video-title">Armbar from Closed Guard - Complete Breakdown</div>
+              <div class="video-instructor">John Danaher</div>
+              <div class="video-duration">12:34 -- Instructional</div>
+            </div>
+          </div>
+
+          <div class="proficiency-section">
+            <div class="proficiency-label">Your Proficiency</div>
+            <div class="proficiency-chips">
+              <div class="proficiency-chip">
+                <span class="chip-dot learning"></span>
+                Learning
+              </div>
+              <div class="proficiency-chip">
+                <span class="chip-dot developing"></span>
+                Developing
+              </div>
+              <div class="proficiency-chip selected">
+                <span class="chip-dot proficient"></span>
+                Proficient
+              </div>
+              <div class="proficiency-chip">
+                <span class="chip-dot advanced"></span>
+                Advanced
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Related Techniques Section -->
+          <div class="related-section">
+            <div class="section-label">Related Techniques</div>
+            <div class="horizontal-scroll">
+              <div class="related-card">
+                <div class="related-card-name">Triangle Choke</div>
+                <div class="related-card-position">Closed Guard</div>
+                <div class="related-card-meta">
+                  <div class="related-card-belt" style="background: #FFFFFF; border: 1px solid var(--gray-700);"></div>
+                  <span class="related-card-level">White Belt</span>
+                </div>
+              </div>
+              <div class="related-card">
+                <div class="related-card-name">Omoplata</div>
+                <div class="related-card-position">Closed Guard</div>
+                <div class="related-card-meta">
+                  <div class="related-card-belt" style="background: #2563eb;"></div>
+                  <span class="related-card-level">Blue Belt</span>
+                </div>
+              </div>
+              <div class="related-card">
+                <div class="related-card-name">Kimura from Guard</div>
+                <div class="related-card-position">Closed Guard</div>
+                <div class="related-card-meta">
+                  <div class="related-card-belt" style="background: #FFFFFF; border: 1px solid var(--gray-700);"></div>
+                  <span class="related-card-level">White Belt</span>
+                </div>
+              </div>
+              <div class="related-card">
+                <div class="related-card-name">Hip Bump Sweep</div>
+                <div class="related-card-position">Closed Guard</div>
+                <div class="related-card-meta">
+                  <div class="related-card-belt" style="background: #FFFFFF; border: 1px solid var(--gray-700);"></div>
+                  <span class="related-card-level">White Belt</span>
+                </div>
+              </div>
+              <div class="related-card">
+                <div class="related-card-name">Guillotine Choke</div>
+                <div class="related-card-position">Closed Guard</div>
+                <div class="related-card-meta">
+                  <div class="related-card-belt" style="background: #FFFFFF; border: 1px solid var(--gray-700);"></div>
+                  <span class="related-card-level">White Belt</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Chain section -->
+          <div class="related-section">
+            <div class="section-label">Technique Chains</div>
+            <div style="font-family: var(--font-body); font-weight: 500; font-size: 13px; color: var(--gray-400); margin-bottom: var(--space-md); line-height: 1.6;">
+              Common sequences that flow from or into this technique:
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-sm); flex-wrap: wrap;">
+              <div style="font-family: var(--font-mono); font-weight: 600; font-size: 12px; color: var(--white); background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 8px 12px;">Hip Bump Sweep</div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <div style="font-family: var(--font-mono); font-weight: 600; font-size: 12px; color: var(--gold); background: rgba(245,166,35,0.08); border: 1px solid var(--gold); border-radius: var(--radius-sm); padding: 8px 12px;">Armbar</div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <div style="font-family: var(--font-mono); font-weight: 600; font-size: 12px; color: var(--white); background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 8px 12px;">Triangle</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation-container">
+      <div class="annotation">
+        <div class="annotation-title">Design Decision: Related Techniques</div>
+        <div class="annotation-text">
+          The horizontal scroll pattern is well-established for content discovery (Netflix, Spotify). Cards are sized at 160px width to show 2+ cards on screen with a peek of the next, signaling scrollability. Each card displays technique name, position, and belt level using the dot indicator pattern. The data source is the existing relatedTechniques array on the Technique type. Tapping a card navigates to that technique's detail view, creating a discovery loop.
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-title">Technique Chains</div>
+        <div class="annotation-text">
+          The chain visualization shows common sequences using arrow connectors. This leverages the "chain" video type from the TechniqueVideo schema and the related_techniques field. The current technique is highlighted in gold. This helps users understand BJJ as a system of connected moves, not isolated techniques -- a key pedagogical insight.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SCREEN 5: FEATURED INSTRUCTORS TAP ACTION
+       ========================================== -->
+  <div class="screen-panel" id="screen-5">
+    <div class="phone-container">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>TOMO</span>
+          </div>
+
+          <div class="app-bar">
+            <div class="app-bar-title">Techniques</div>
+            <div class="app-bar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="view-toggle">
+            <button class="view-toggle-btn active">For You</button>
+            <button class="view-toggle-btn">Browse</button>
+          </div>
+
+          <!-- Before state: static -->
+          <div class="state-badge current">BEFORE -- STATIC LIST</div>
+
+          <div class="section-label">Featured Instructors</div>
+
+          <div class="instructor-item" id="danaherItem" style="cursor: pointer;" onclick="showInstructorFilter()">
+            <div class="instructor-avatar">JD</div>
+            <div class="instructor-info">
+              <div class="instructor-name">John Danaher</div>
+              <div class="instructor-count">24 videos</div>
+            </div>
+            <div class="instructor-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+          <div class="instructor-item">
+            <div class="instructor-avatar">GR</div>
+            <div class="instructor-info">
+              <div class="instructor-name">Gordon Ryan</div>
+              <div class="instructor-count">18 videos</div>
+            </div>
+            <div class="instructor-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+          <div class="instructor-item">
+            <div class="instructor-avatar">LG</div>
+            <div class="instructor-info">
+              <div class="instructor-name">Lachlan Giles</div>
+              <div class="instructor-count">15 videos</div>
+            </div>
+            <div class="instructor-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+          <div class="instructor-item">
+            <div class="instructor-avatar">RG</div>
+            <div class="instructor-info">
+              <div class="instructor-name">Roger Gracie</div>
+              <div class="instructor-count">11 videos</div>
+            </div>
+            <div class="instructor-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- After state: filtered view -->
+          <div class="state-badge new-state">AFTER -- TAP "JOHN DANAHER"</div>
+
+          <div id="instructorFiltered">
+            <div class="filter-active-bar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" style="flex-shrink: 0;">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+              </svg>
+              <span class="filter-active-text">John Danaher -- 24 videos</span>
+              <span class="filter-clear" id="clearFilter" onclick="hideInstructorFilter()">Clear</span>
+            </div>
+
+            <div class="video-card">
+              <div class="video-thumbnail">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="video-info">
+                <div class="video-title">Armbar from Closed Guard</div>
+                <div class="video-instructor">John Danaher</div>
+                <div class="video-duration">12:34 -- Instructional</div>
+              </div>
+            </div>
+            <div class="video-card">
+              <div class="video-thumbnail">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="video-info">
+                <div class="video-title">Triangle System - Complete Guide</div>
+                <div class="video-instructor">John Danaher</div>
+                <div class="video-duration">18:22 -- Instructional</div>
+              </div>
+            </div>
+            <div class="video-card">
+              <div class="video-thumbnail">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="video-info">
+                <div class="video-title">Ashi Garami Entry Systems</div>
+                <div class="video-instructor">John Danaher</div>
+                <div class="video-duration">15:47 -- Instructional</div>
+              </div>
+            </div>
+            <div class="video-card">
+              <div class="video-thumbnail">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="video-info">
+                <div class="video-title">Back Attack Fundamentals</div>
+                <div class="video-instructor">John Danaher</div>
+                <div class="video-duration">9:15 -- Instructional</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation-container">
+      <div class="annotation">
+        <div class="annotation-title">Design Decision: Instructor Tap-to-Filter</div>
+        <div class="annotation-text">
+          The current instructor list is informational only. By making each row tappable (with the chevron affordance), we create a filtered view showing all videos by that instructor. This leverages the instructor field on TechniqueVideo records. The gold filter bar at the top clearly communicates the active filter state, and the "Clear" action returns to the unfiltered view. The right-chevron on each instructor row signals tappability. The highlighted state (gold border) on the tapped instructor provides visual feedback during the transition.
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-title">Navigation Pattern</div>
+        <div class="annotation-text">
+          This filter view replaces the current content area rather than navigating to a new screen, keeping the user in context. The filter bar persists at the top as a reminder. Back navigation or "Clear" returns to the full For You view. This pattern is lighter-weight than a full navigation push and aligns with the browse-mode mental model.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SCREEN 6: BOOKMARKING / FAVORITES
+       ========================================== -->
+  <div class="screen-panel" id="screen-6">
+    <div class="phone-container">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>TOMO</span>
+          </div>
+
+          <div class="app-bar">
+            <div class="app-bar-title">Techniques</div>
+            <div class="app-bar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="view-toggle">
+            <button class="view-toggle-btn active" id="forYouBtn" onclick="showBookmarkView('foryou')">For You</button>
+            <button class="view-toggle-btn" id="savedBtn" onclick="showBookmarkView('saved')">Saved</button>
+            <button class="view-toggle-btn">Browse</button>
+          </div>
+
+          <!-- For You view with bookmark icons -->
+          <div id="bookmarkForYou">
+            <div class="section-label">Recommended Videos</div>
+
+            <div class="video-card" style="position: relative;">
+              <div class="bookmark-icon" onclick="this.classList.toggle('saved')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="video-thumbnail">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="video-info">
+                <div class="video-title">Guard Retention Fundamentals</div>
+                <div class="video-instructor">Lachlan Giles</div>
+                <div class="video-duration">11:22 -- Instructional</div>
+              </div>
+            </div>
+
+            <div class="video-card" style="position: relative;">
+              <div class="bookmark-icon saved">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="video-thumbnail">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="video-info">
+                <div class="video-title">Knee Slice Pass Details</div>
+                <div class="video-instructor">Gordon Ryan</div>
+                <div class="video-duration">8:45 -- Instructional</div>
+              </div>
+            </div>
+
+            <div class="video-card" style="position: relative;">
+              <div class="bookmark-icon" onclick="this.classList.toggle('saved')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="video-thumbnail">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="video-info">
+                <div class="video-title">Dealing with Smash Pass</div>
+                <div class="video-instructor">Mikey Musumeci</div>
+                <div class="video-duration">6:18 -- Quick Tip</div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-label">Technique Cards with Bookmark</div>
+
+            <div class="position-grid">
+              <div class="position-card" style="position: relative;">
+                <div class="bookmark-icon saved" style="top: 6px; right: 6px;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <div class="position-card-name">Triangle Choke</div>
+                <div class="position-card-count">Closed Guard</div>
+              </div>
+              <div class="position-card" style="position: relative;">
+                <div class="bookmark-icon" onclick="this.classList.toggle('saved')" style="top: 6px; right: 6px;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <div class="position-card-name">Armbar</div>
+                <div class="position-card-count">Closed Guard</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Saved view -->
+          <div id="bookmarkSaved" style="display: none;">
+            <div class="saved-header">
+              <div class="section-label" style="margin-bottom: 0;">Saved Items</div>
+              <div class="saved-count">3 saved</div>
+            </div>
+
+            <div class="video-card" style="position: relative;">
+              <div class="bookmark-icon saved">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="video-thumbnail">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="video-info">
+                <div class="video-title">Knee Slice Pass Details</div>
+                <div class="video-instructor">Gordon Ryan</div>
+                <div class="video-duration">8:45 -- Instructional</div>
+              </div>
+            </div>
+
+            <div class="video-card" style="position: relative;">
+              <div class="bookmark-icon saved">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="video-thumbnail">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="video-info">
+                <div class="video-title">Half Guard Sweep System</div>
+                <div class="video-instructor">Bernardo Faria</div>
+                <div class="video-duration">14:02 -- Instructional</div>
+              </div>
+            </div>
+
+            <div style="padding: var(--space-md); background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); position: relative;">
+              <div class="bookmark-icon saved" style="top: 10px; right: 10px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--white); margin-bottom: 4px;">Triangle Choke</div>
+              <div style="font-family: var(--font-mono); font-weight: 500; font-size: 12px; color: var(--gray-600);">Closed Guard -- Submission</div>
+              <div style="display: flex; align-items: center; gap: var(--space-sm); margin-top: var(--space-sm);">
+                <span class="belt-dot white"></span>
+                <span style="font-family: var(--font-mono); font-weight: 500; font-size: 12px; color: var(--gray-500);">White Belt</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation-container">
+      <div class="annotation">
+        <div class="annotation-title">Design Decision: Bookmarking</div>
+        <div class="annotation-text">
+          The bookmark icon uses a standard bookmark shape (not a heart) to signal "save for later" rather than "like." The icon is placed in the top-right corner of cards, consistent with established mobile patterns. The saved state fills the icon with gold, providing clear visual feedback. Both video cards and technique cards support bookmarking. The "Saved" tab in the view toggle provides quick access to all saved items without navigating away from the Techniques page. Bookmark actions are tappable at the existing card level without requiring a long-press gesture for discoverability.
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-title">Data Model</div>
+        <div class="annotation-text">
+          Bookmarks are stored as a simple array of IDs (technique_id or video youtube_id) in the user's profile. In the prototype, this persists to localStorage. In production, a bookmarks table with user_id, item_id, item_type (technique or video), and created_at provides full persistence and ordering. The "Saved" tab queries this table and joins with technique/video data.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SCREEN 7: ENHANCED SEARCH
+       ========================================== -->
+  <div class="screen-panel" id="screen-7">
+    <div class="phone-container">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>TOMO</span>
+          </div>
+
+          <div class="app-bar">
+            <div class="app-bar-title">Search</div>
+          </div>
+
+          <!-- Search bar with active query -->
+          <div class="search-bar" style="border-color: var(--gold);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" value="triangle" style="color: var(--white);" readonly>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2" style="cursor: pointer;">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </div>
+
+          <!-- Results: Techniques -->
+          <div class="search-section-header">Techniques</div>
+
+          <div class="search-result">
+            <div class="search-result-thumb">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="search-result-info">
+              <div class="search-result-name"><span class="highlight">Triangle</span> Choke</div>
+              <div class="search-result-meta">Closed Guard -- White Belt -- John Danaher</div>
+            </div>
+          </div>
+
+          <div class="search-result">
+            <div class="search-result-thumb">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="search-result-info">
+              <div class="search-result-name">Mounted <span class="highlight">Triangle</span></div>
+              <div class="search-result-meta">Mount -- Blue Belt -- Gordon Ryan</div>
+            </div>
+          </div>
+
+          <div class="search-result">
+            <div class="search-result-thumb">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="search-result-info">
+              <div class="search-result-name">Arm <span class="highlight">Triangle</span></div>
+              <div class="search-result-meta">Side Control -- Blue Belt -- Lachlan Giles</div>
+            </div>
+          </div>
+
+          <div class="search-result">
+            <div class="search-result-thumb">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="search-result-info">
+              <div class="search-result-name">Inverted <span class="highlight">Triangle</span></div>
+              <div class="search-result-meta">Open Guard -- Purple Belt -- Mikey Musumeci</div>
+            </div>
+          </div>
+
+          <!-- Results: Mindset -->
+          <div class="search-section-header">Mindset</div>
+
+          <div class="search-result">
+            <div class="search-result-thumb" style="background: rgba(245, 166, 35, 0.08);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="search-result-info">
+              <div class="search-result-name">The <span class="highlight">Triangle</span> of Progress</div>
+              <div class="search-result-meta">Mental Game -- Chewjitsu</div>
+            </div>
+          </div>
+
+          <!-- Results: Instructors -->
+          <div class="search-section-header">Instructors</div>
+
+          <div class="search-result">
+            <div class="instructor-avatar" style="width: 48px; height: 48px; font-size: 13px;">JD</div>
+            <div class="search-result-info">
+              <div class="search-result-name">John Danaher</div>
+              <div class="search-result-meta">3 <span class="highlight">triangle</span> videos</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation-container">
+      <div class="annotation">
+        <div class="annotation-title">Design Decision: Enhanced Search</div>
+        <div class="annotation-text">
+          Search results are organized into distinct sections (Techniques, Mindset, Instructors) with clear headers using the mono font section divider pattern. Matched text is highlighted in gold, providing immediate visual feedback on why each result appears. Each technique result includes a small video thumbnail indicator (signaling video availability), the position, belt level, and instructor name -- all visible without tapping into the result. This reduces the number of taps needed to find the right content.
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-title">Search Implementation</div>
+        <div class="annotation-text">
+          Search queries against technique names, instructor names, position categories, and concept tags. The existing TechniqueLibraryFilters type supports a search string. For the prototype, this is client-side fuzzy matching using the loaded technique data. In production, this becomes a Supabase full-text search with pg_trgm for fuzzy matching. Results are ranked by relevance with techniques first (primary use case), then mindset content, then instructor matches.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SCREEN 8: VIDEO WATCH TRACKING
+       ========================================== -->
+  <div class="screen-panel" id="screen-8">
+    <div class="phone-container">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>TOMO</span>
+          </div>
+
+          <div class="detail-header">
+            <div class="detail-back">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              Closed Guard
+            </div>
+            <div class="detail-title">Closed Guard</div>
+            <div class="detail-subtitle">12 techniques -- 38 videos</div>
+          </div>
+
+          <!-- Category header with watch counter -->
+          <div class="category-header-row">
+            <div class="section-label" style="margin-bottom: 0;">Instructional Videos</div>
+            <div class="watch-counter">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--positive)" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><polyline points="20 6 9 17 4 12"/></svg>
+              5 of 12 watched
+            </div>
+          </div>
+
+          <!-- Watched video -->
+          <div class="video-card" style="position: relative;">
+            <div class="video-thumbnail" style="position: relative;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <div class="watch-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title" style="color: var(--gray-500);">Armbar from Closed Guard</div>
+              <div class="video-instructor">John Danaher</div>
+              <div class="video-duration">12:34 -- Watched</div>
+            </div>
+          </div>
+
+          <!-- Partially watched video -->
+          <div class="video-card" style="position: relative;">
+            <div class="video-thumbnail" style="position: relative;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <div style="position: absolute; bottom: 0; left: 0; right: 0;">
+                <div class="progress-bar-container" style="border-radius: 0;">
+                  <div class="progress-bar-fill" style="width: 65%;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">Triangle Choke Setup System</div>
+              <div class="video-instructor">John Danaher</div>
+              <div class="video-duration">18:22 -- 65% watched</div>
+            </div>
+          </div>
+
+          <!-- Unwatched video -->
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="video-info">
+              <div class="video-title">Hip Bump to Kimura Chain</div>
+              <div class="video-instructor">Roger Gracie</div>
+              <div class="video-duration">9:15 -- Instructional</div>
+            </div>
+          </div>
+
+          <!-- Watched video -->
+          <div class="video-card" style="position: relative;">
+            <div class="video-thumbnail" style="position: relative;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <div class="watch-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title" style="color: var(--gray-500);">Scissor Sweep Fundamentals</div>
+              <div class="video-instructor">Lachlan Giles</div>
+              <div class="video-duration">7:08 -- Watched</div>
+            </div>
+          </div>
+
+          <!-- Partially watched -->
+          <div class="video-card" style="position: relative;">
+            <div class="video-thumbnail" style="position: relative;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <div style="position: absolute; bottom: 0; left: 0; right: 0;">
+                <div class="progress-bar-container" style="border-radius: 0;">
+                  <div class="progress-bar-fill" style="width: 30%;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">Flower Sweep to Mount</div>
+              <div class="video-instructor">Gordon Ryan</div>
+              <div class="video-duration">11:45 -- 30% watched</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Quick Tips section with counter -->
+          <div class="category-header-row">
+            <div class="section-label" style="margin-bottom: 0;">Quick Tips</div>
+            <div class="watch-counter">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--positive)" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><polyline points="20 6 9 17 4 12"/></svg>
+              2 of 6 watched
+            </div>
+          </div>
+
+          <div class="video-card" style="position: relative;">
+            <div class="video-thumbnail" style="position: relative;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <div class="watch-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title" style="color: var(--gray-500);">The 1 Grip That Changes Everything</div>
+              <div class="video-instructor">Craig Jones</div>
+              <div class="video-duration">2:45 -- Watched</div>
+            </div>
+          </div>
+
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="video-info">
+              <div class="video-title">Breaking Closed Guard Posture</div>
+              <div class="video-instructor">Stephan Kesting</div>
+              <div class="video-duration">3:12 -- Quick Tip</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation-container">
+      <div class="annotation">
+        <div class="annotation-title">Design Decision: Watch Tracking</div>
+        <div class="annotation-text">
+          Three visual states communicate watch progress: (1) Green checkmark badge on the thumbnail for fully watched videos, (2) Gold progress bar at the bottom of the thumbnail for partially watched videos showing exact progress, (3) No indicator for unwatched videos. Watched video titles dim to gray-500 to visually deprioritize them, helping users quickly scan for unwatched content. The "X of Y watched" counter in category headers provides progress context at the section level, encouraging completion.
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-title">Data Model</div>
+        <div class="annotation-text">
+          Watch tracking requires a new user_video_progress table: user_id, youtube_id, watch_seconds (integer), total_seconds (integer), completed (boolean), last_watched_at (timestamp). The "completed" flag triggers at 90% watch time (not 100%) to account for users who skip intros/outros. Progress is tracked via YouTube iframe API postMessage events. In the prototype, this persists to localStorage. The progress bar width is calculated as (watch_seconds / total_seconds * 100)%.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       JAVASCRIPT
+       ========================================== -->
+  <script>
+    // ==========================================
+    // TAB SWITCHING
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', function() {
+      var tabButtons = document.querySelectorAll('.tab-btn');
+      var panels = document.querySelectorAll('.screen-panel');
+
+      tabButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var targetId = btn.getAttribute('data-screen');
+
+          // Deactivate all tabs
+          tabButtons.forEach(function(b) { b.classList.remove('active'); });
+          panels.forEach(function(p) { p.classList.remove('active'); });
+
+          // Activate selected tab
+          btn.classList.add('active');
+          document.getElementById(targetId).classList.add('active');
+
+          // Scroll to top of screen
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+
+      // Content gating bottom sheet
+      var lockedCard = document.getElementById('lockedCard');
+      if (lockedCard) {
+        lockedCard.addEventListener('click', function() {
+          document.getElementById('gatingSheet').style.display = 'flex';
+        });
+      }
+    });
+
+    // ==========================================
+    // DIFFICULTY FILTERING
+    // ==========================================
+    function filterDifficulty(chip, level) {
+      // Update active chip
+      var chips = document.querySelectorAll('#difficultyFilter .filter-chip');
+      chips.forEach(function(c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+
+      // Filter cards
+      var cards = document.querySelectorAll('#filteredGrid .position-card');
+      cards.forEach(function(card) {
+        if (level === 'all') {
+          card.style.display = '';
+          card.style.opacity = '1';
+        } else {
+          var cardLevel = card.getAttribute('data-difficulty');
+          if (cardLevel === level) {
+            card.style.display = '';
+            card.style.opacity = '1';
+          } else {
+            card.style.display = 'none';
+            card.style.opacity = '0';
+          }
+        }
+      });
+    }
+
+    // ==========================================
+    // PROFICIENCY SELECTOR
+    // ==========================================
+    function selectProficiency(chip, level) {
+      var chips = document.querySelectorAll('#proficiencyChips .proficiency-chip');
+      chips.forEach(function(c) { c.classList.remove('selected'); });
+      chip.classList.add('selected');
+    }
+
+    // ==========================================
+    // INSTRUCTOR FILTER
+    // ==========================================
+    function showInstructorFilter() {
+      var item = document.getElementById('danaherItem');
+      if (item) {
+        item.classList.add('highlighted');
+      }
+    }
+
+    function hideInstructorFilter() {
+      var item = document.getElementById('danaherItem');
+      if (item) {
+        item.classList.remove('highlighted');
+      }
+    }
+
+    // ==========================================
+    // BOOKMARK VIEW SWITCHING
+    // ==========================================
+    function showBookmarkView(view) {
+      var forYouView = document.getElementById('bookmarkForYou');
+      var savedView = document.getElementById('bookmarkSaved');
+      var forYouBtn = document.getElementById('forYouBtn');
+      var savedBtn = document.getElementById('savedBtn');
+
+      if (view === 'saved') {
+        forYouView.style.display = 'none';
+        savedView.style.display = 'block';
+        forYouBtn.classList.remove('active');
+        savedBtn.classList.add('active');
+      } else {
+        forYouView.style.display = 'block';
+        savedView.style.display = 'none';
+        forYouBtn.classList.add('active');
+        savedBtn.classList.remove('active');
+      }
+    }
+  </script>
+
+</body>
+</html>

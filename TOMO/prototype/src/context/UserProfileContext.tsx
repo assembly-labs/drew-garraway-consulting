@@ -25,6 +25,27 @@ export type BeltLevel = 'white' | 'blue' | 'purple' | 'brown' | 'black';
 export type TrainingGoal = 'competition' | 'fitness' | 'self-defense' | 'mental' | 'community' | 'hobby';
 export type LoggingPreference = 'voice' | 'text' | 'undecided';
 export type ExperienceLevel = 'new' | 'beginner' | 'intermediate' | 'experienced';
+export type Gender = 'male' | 'female' | 'non-binary' | 'prefer-not-to-say';
+
+export interface NotificationSettings {
+  trainingReminders: boolean;
+  progressUpdates: boolean;
+  coachFeedback: boolean;
+}
+
+export interface BeltProgressionEvent {
+  id: string;
+  date: string;
+  type: 'belt_promotion' | 'stripe_promotion' | 'belt_correction' | 'stripe_correction';
+  fromBelt: BeltLevel | 'none';
+  fromStripes: number;
+  toBelt: BeltLevel;
+  toStripes: number;
+  createdAt: string;
+  source: 'user_edit' | 'onboarding' | 'import';
+  dateEstimated?: boolean;
+  notes?: string;
+}
 
 // Re-export GymSelection for convenience
 export type { GymSelection } from '../data/gyms';
@@ -55,6 +76,10 @@ export interface UserProfile {
   trainingStartDate: string | null; // ISO date string
   currentBeltDate: string | null; // ISO date string
   birthYear: number | null;
+  birthDate: string | null;  // Full ISO date for birthday celebrations
+  gender: Gender | null;     // For gender-specific insights (locked after set)
+  beltHistory: BeltProgressionEvent[];  // Belt progression events
+  notifications: NotificationSettings;  // Notification preferences
   notificationsEnabled: boolean | null;
 
   // Metadata
@@ -167,6 +192,14 @@ const DEFAULT_PROFILE: UserProfile = {
   trainingStartDate: null,
   currentBeltDate: null,
   birthYear: null,
+  birthDate: null,
+  gender: null,
+  beltHistory: [],
+  notifications: {
+    trainingReminders: true,
+    progressUpdates: true,
+    coachFeedback: true,
+  },
   notificationsEnabled: null,
   onboardingComplete: false,
   sessionCount: 0,
@@ -187,6 +220,8 @@ export interface OnboardingData {
   name: string;
   belt: BeltLevel;
   stripes: number;
+  gender: Gender;
+  birthDate: string; // ISO date string
   gym: GymSelection;
   targetFrequency: number;
   loggingPreference: 'voice' | 'text';
@@ -205,6 +240,7 @@ interface UserProfileContextType {
   // Profile updates
   updateProfile: (updates: Partial<UserProfile>) => void;
   setLoggingPreference: (pref: LoggingPreference) => void;
+  updateNotifications: (updates: Partial<NotificationSettings>) => void;
 
   // Session tracking
   incrementSessionCount: () => void;
@@ -217,6 +253,10 @@ interface UserProfileContextType {
   // Profile completion
   getProfileCompletion: () => number;
   getMissingFields: () => string[];
+
+  // Belt history
+  addBeltEvent: (event: Omit<BeltProgressionEvent, 'id' | 'createdAt'>) => void;
+  getBeltHistory: () => BeltProgressionEvent[];
 
   // Reset (for testing)
   resetProfile: () => void;
@@ -237,6 +277,7 @@ const UserProfileContext = createContext<UserProfileContextType | null>(null);
 
 const STORAGE_KEY = 'bjj-user-profile';
 const DEMO_MODE_KEY = 'bjj-demo-mode';
+const BELT_HISTORY_KEY = 'bjj-belt-history';
 
 export function UserProfileProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<UserProfile>(DEFAULT_PROFILE);
@@ -310,6 +351,8 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
       name: data.name,
       belt: data.belt,
       stripes: data.stripes,
+      gender: data.gender,
+      birthDate: data.birthDate,
       gym: data.gym,
       targetFrequency: data.targetFrequency,
       loggingPreference: data.loggingPreference,
@@ -410,6 +453,8 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
       profile.trainingStartDate,
       profile.currentBeltDate,
       profile.birthYear,
+      profile.gender !== null,
+      profile.birthDate !== null,
     ];
 
     const completed = fields.filter(Boolean).length;
@@ -425,14 +470,116 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
     if (!profile.trainingStartDate) missing.push('Training start date');
     if (!profile.currentBeltDate) missing.push('Current belt date');
     if (profile.birthYear === null) missing.push('Birth year');
+    if (profile.gender === null) missing.push('Gender');
+    if (profile.birthDate === null) missing.push('Birthday');
 
     return missing;
+  };
+
+  // Update notification settings
+  const updateNotifications = (updates: Partial<NotificationSettings>) => {
+    setProfile(prev => ({
+      ...prev,
+      notifications: { ...prev.notifications, ...updates },
+    }));
+  };
+
+  // Add a belt progression event
+  const addBeltEvent = (event: Omit<BeltProgressionEvent, 'id' | 'createdAt'>) => {
+    const newEvent: BeltProgressionEvent = {
+      ...event,
+      id: `belt-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
+      createdAt: new Date().toISOString(),
+    };
+
+    setProfile(prev => {
+      const updatedHistory = [...prev.beltHistory, newEvent].sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      );
+
+      const updated = {
+        ...prev,
+        beltHistory: updatedHistory,
+        belt: newEvent.toBelt,
+        stripes: newEvent.toStripes,
+      };
+
+      // Also persist belt history separately for quick access
+      localStorage.setItem(BELT_HISTORY_KEY, JSON.stringify(updatedHistory));
+
+      return updated;
+    });
+  };
+
+  // Get belt history, initializing from onboarding data if empty
+  const getBeltHistory = (): BeltProgressionEvent[] => {
+    if (profile.beltHistory.length > 0) return profile.beltHistory;
+
+    // Try loading from dedicated storage
+    try {
+      const stored = localStorage.getItem(BELT_HISTORY_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored) as BeltProgressionEvent[];
+        if (parsed.length > 0) return parsed;
+      }
+    } catch {
+      // Ignore parse errors
+    }
+
+    // Initialize from onboarding data if available
+    if (profile.onboardingComplete && profile.beltHistory.length === 0) {
+      const initialEvents: BeltProgressionEvent[] = [];
+
+      // Create "Started Training" event
+      const startDate = profile.trainingStartDate || profile.createdAt;
+      initialEvents.push({
+        id: `belt-init-start`,
+        date: startDate,
+        type: 'belt_promotion',
+        fromBelt: 'none',
+        fromStripes: 0,
+        toBelt: 'white',
+        toStripes: 0,
+        createdAt: new Date().toISOString(),
+        source: 'onboarding',
+        dateEstimated: !profile.trainingStartDate,
+        notes: 'Started Training',
+      });
+
+      // If current belt is not white, create a promotion event
+      if (profile.belt !== 'white' || profile.stripes > 0) {
+        const beltDate = profile.currentBeltDate || profile.createdAt;
+        initialEvents.push({
+          id: `belt-init-current`,
+          date: beltDate,
+          type: profile.belt !== 'white' ? 'belt_promotion' : 'stripe_promotion',
+          fromBelt: 'white',
+          fromStripes: 0,
+          toBelt: profile.belt,
+          toStripes: profile.stripes,
+          createdAt: new Date().toISOString(),
+          source: 'onboarding',
+          dateEstimated: !profile.currentBeltDate,
+        });
+      }
+
+      // Persist and update state
+      if (initialEvents.length > 0) {
+        localStorage.setItem(BELT_HISTORY_KEY, JSON.stringify(initialEvents));
+        setProfile(prev => ({ ...prev, beltHistory: initialEvents }));
+      }
+
+      return initialEvents;
+    }
+
+    return [];
   };
 
   // Reset profile (for testing)
   const resetProfile = () => {
     localStorage.removeItem(STORAGE_KEY);
     localStorage.removeItem(DEMO_MODE_KEY);
+    localStorage.removeItem(BELT_HISTORY_KEY);
     setProfile(DEFAULT_PROFILE);
     setIsDemoMode(false);
     setActiveDemoProfile(null);
@@ -523,12 +670,15 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
         completeOnboarding,
         updateProfile,
         setLoggingPreference,
+        updateNotifications,
         incrementSessionCount,
         getNextNudgeQuestion,
         skipQuestion,
         answerQuestion,
         getProfileCompletion,
         getMissingFields,
+        addBeltEvent,
+        getBeltHistory,
         resetProfile,
         isDemoMode,
         activeDemoProfile,

@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOMO BJJ - Login / Auth Screens</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #111111;
+    --card-bg: #161616;
+    --card-border: #1f1f1f;
+    --gold: #F5A623;
+    --gold-hover: #d4900e;
+    --green: #22c55e;
+    --gray-400: #c4c4c4;
+    --gray-500: #a3a3a3;
+    --gray-700: #4a4a4a;
+    --gray-800: #1f1f1f;
+    --white: #FFFFFF;
+    --font-heading: 'Unbounded', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #0a0a0a;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 500;
+    min-height: 100vh;
+    padding: 24px 16px 48px;
+  }
+
+  h1.page-title {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+
+  .page-subtitle {
+    text-align: center;
+    color: var(--gray-500);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 32px;
+  }
+
+  /* Tab Navigation */
+  .tab-nav {
+    display: flex;
+    gap: 4px;
+    max-width: 600px;
+    margin: 0 auto 32px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 4px;
+    overflow-x: auto;
+  }
+
+  .tab-nav button {
+    flex: 1;
+    padding: 10px 12px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-500);
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .tab-nav button:hover {
+    color: var(--gray-400);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .tab-nav button.active {
+    color: var(--white);
+    background: var(--gray-800);
+  }
+
+  /* Phone Frame */
+  .screen-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .screen-container.active {
+    display: flex;
+  }
+
+  .phone-frame {
+    width: 100%;
+    max-width: 430px;
+    min-height: 760px;
+    background: var(--bg);
+    border: 2px solid var(--card-border);
+    border-radius: 40px;
+    padding: 48px 24px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 28px;
+    background: #000;
+    border-radius: 20px;
+  }
+
+  /* Logo Block */
+  .logo-block {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .logo-block.small {
+    margin-bottom: 24px;
+  }
+
+  .logo-main {
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 4px;
+    line-height: 1.1;
+  }
+
+  .logo-block.small .logo-main {
+    font-size: 32px;
+    letter-spacing: 2px;
+  }
+
+  .logo-kanji {
+    font-size: 20px;
+    color: var(--gold);
+    display: block;
+    margin-top: 2px;
+    font-weight: 500;
+  }
+
+  .logo-block.small .logo-kanji {
+    font-size: 16px;
+  }
+
+  .logo-subtitle {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-500);
+    margin-top: 8px;
+  }
+
+  .logo-block.small .logo-subtitle {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  /* Social Auth Buttons */
+  .social-btn {
+    width: 100%;
+    height: 52px;
+    border-radius: 12px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.15s ease;
+    margin-bottom: 12px;
+  }
+
+  .social-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .btn-apple {
+    background: var(--white);
+    color: #000;
+    border: none;
+  }
+
+  .btn-apple:hover {
+    background: #e8e8e8;
+  }
+
+  .btn-google {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--gray-700);
+  }
+
+  .btn-google:hover {
+    border-color: var(--gray-500);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gray-700);
+  }
+
+  .divider span {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-500);
+    text-transform: lowercase;
+  }
+
+  /* Input Fields */
+  .input-group {
+    margin-bottom: 14px;
+  }
+
+  .input-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-400);
+    margin-bottom: 6px;
+  }
+
+  .input-wrapper {
+    position: relative;
+  }
+
+  .input-field {
+    width: 100%;
+    height: 56px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 0 16px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .input-field::placeholder {
+    color: var(--gray-700);
+    font-weight: 500;
+  }
+
+  .input-field:focus {
+    border-color: var(--gold);
+  }
+
+  .input-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--gray-500);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font-body);
+  }
+
+  .input-toggle:hover {
+    color: var(--gray-400);
+  }
+
+  .input-hint {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-500);
+    margin-top: 6px;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    width: 100%;
+    height: 52px;
+    background: var(--gold);
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    margin-top: 8px;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-hover);
+  }
+
+  /* Links */
+  .link-text {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-500);
+    margin-top: 16px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .link-text span,
+  .link-text a {
+    color: var(--gold);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .link-text span:hover,
+  .link-text a:hover {
+    text-decoration: underline;
+  }
+
+  .link-small {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-500);
+    margin-top: 12px;
+    cursor: pointer;
+  }
+
+  .link-small:hover {
+    color: var(--gray-400);
+  }
+
+  /* Legal */
+  .legal-text {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-top: 24px;
+    line-height: 1.5;
+  }
+
+  .legal-text a {
+    color: var(--gray-500);
+    text-decoration: none;
+  }
+
+  .legal-text a:hover {
+    text-decoration: underline;
+  }
+
+  /* Back Button */
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: var(--gray-400);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 24px;
+    padding: 0;
+  }
+
+  .back-btn:hover {
+    color: var(--white);
+  }
+
+  .back-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Verification screen */
+  .verification-icon {
+    width: 80px;
+    height: 80px;
+    margin: 48px auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(34, 197, 94, 0.1);
+    border-radius: 50%;
+    border: 2px solid rgba(34, 197, 94, 0.2);
+  }
+
+  .verification-icon svg {
+    width: 40px;
+    height: 40px;
+    color: var(--green);
+  }
+
+  .verification-heading {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .verification-subtext {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gray-500);
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .verification-email {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  /* Reset heading */
+  .screen-heading {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .screen-description {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gray-500);
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  /* Annotations */
+  .annotations {
+    width: 100%;
+    max-width: 430px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .annotations h3 {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .annotation-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+
+  .annotation-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .annotation-num {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    background: var(--gray-800);
+    border: 1px solid var(--gray-700);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-400);
+  }
+
+  .annotation-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-400);
+    line-height: 1.5;
+  }
+
+  .annotation-text strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  /* Spacer */
+  .spacer {
+    height: 8px;
+  }
+
+  .spacer-lg {
+    height: 16px;
+  }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">TOMO BJJ -- Login / Auth Screens</h1>
+<p class="page-subtitle">Interactive mockup -- tap tabs to navigate between screens</p>
+
+<!-- Tab Navigation -->
+<nav class="tab-nav">
+  <button class="active" onclick="showScreen('welcome')">Welcome / Login</button>
+  <button onclick="showScreen('signup')">Sign Up</button>
+  <button onclick="showScreen('forgot')">Forgot Password</button>
+  <button onclick="showScreen('verify')">Email Verification</button>
+</nav>
+
+<!-- ============================================ -->
+<!-- SCREEN 1: WELCOME / LOGIN -->
+<!-- ============================================ -->
+<div id="screen-welcome" class="screen-container active">
+  <div class="phone-frame">
+    <!-- Logo -->
+    <div class="logo-block">
+      <div class="logo-main">TOMO</div>
+      <span class="logo-kanji">友</span>
+      <div class="logo-subtitle">Your BJJ Training Journal</div>
+    </div>
+
+    <!-- Apple Sign In -->
+    <button class="social-btn btn-apple">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+      </svg>
+      Sign in with Apple
+    </button>
+
+    <!-- Google Sign In -->
+    <button class="social-btn btn-google">
+      <svg viewBox="0 0 24 24">
+        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+      </svg>
+      Sign in with Google
+    </button>
+
+    <!-- Divider -->
+    <div class="divider"><span>or</span></div>
+
+    <!-- Email -->
+    <div class="input-group">
+      <label class="input-label">Email</label>
+      <div class="input-wrapper">
+        <input type="email" class="input-field" placeholder="you@email.com">
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="input-group">
+      <label class="input-label">Password</label>
+      <div class="input-wrapper">
+        <input type="password" class="input-field" placeholder="Enter your password" id="login-password">
+        <button class="input-toggle" onclick="togglePassword('login-password', this)">SHOW</button>
+      </div>
+    </div>
+
+    <!-- Sign In -->
+    <button class="btn-primary">Sign In</button>
+
+    <!-- Links -->
+    <p class="link-small" onclick="showScreen('forgot')">Forgot Password?</p>
+
+    <p class="link-text">Don't have an account? <span onclick="showScreen('signup')">Sign Up</span></p>
+
+    <!-- Legal -->
+    <div class="legal-text">
+      <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+
+  <!-- Annotations -->
+  <div class="annotations">
+    <h3>Design Notes</h3>
+    <div class="annotation-item">
+      <span class="annotation-num">1</span>
+      <span class="annotation-text"><strong>Apple Sign In is most prominent</strong> -- per Apple HIG, Sign in with Apple must be the primary option when offering third-party social login. White fill makes it visually dominant.</span>
+    </div>
+    <div class="annotation-item">
+      <span class="annotation-num">2</span>
+      <span class="annotation-text"><strong>Social auth first, email second</strong> -- the "or" divider creates a visual hierarchy that nudges users toward the faster social login paths before manual entry.</span>
+    </div>
+    <div class="annotation-item">
+      <span class="annotation-num">3</span>
+      <span class="annotation-text"><strong>56px input height</strong> -- generous touch targets for thumb-zone comfort. All inputs follow the same dark card-bg treatment with gold focus ring.</span>
+    </div>
+    <div class="annotation-item">
+      <span class="annotation-num">4</span>
+      <span class="annotation-text"><strong>Password show/hide toggle</strong> -- reduces friction and login errors. Toggle text switches between SHOW and HIDE.</span>
+    </div>
+    <div class="annotation-item">
+      <span class="annotation-num">5</span>
+      <span class="annotation-text"><strong>Legal links at bottom</strong> -- Terms and Privacy are accessible but unobtrusive. Required for App Store review.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SCREEN 2: SIGN UP -->
+<!-- ============================================ -->
+<div id="screen-signup" class="screen-container">
+  <div class="phone-frame">
+    <!-- Logo -->
+    <div class="logo-block">
+      <div class="logo-main">TOMO</div>
+      <span class="logo-kanji">友</span>
+      <div class="logo-subtitle">Your BJJ Training Journal</div>
+    </div>
+
+    <!-- Apple Sign Up -->
+    <button class="social-btn btn-apple">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+      </svg>
+      Sign up with Apple
+    </button>
+
+    <!-- Google Sign Up -->
+    <button class="social-btn btn-google">
+      <svg viewBox="0 0 24 24">
+        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+      </svg>
+      Sign up with Google
+    </button>
+
+    <!-- Divider -->
+    <div class="divider"><span>or</span></div>
+
+    <!-- Full Name -->
+    <div class="input-group">
+      <label class="input-label">Full Name</label>
+      <div class="input-wrapper">
+        <input type="text" class="input-field" placeholder="Your full name">
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="input-group">
+      <label class="input-label">Email</label>
+      <div class="input-wrapper">
+        <input type="email" class="input-field" placeholder="you@email.com">
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="input-group">
+      <label class="input-label">Password</label>
+      <div class="input-wrapper">
+        <input type="password" class="input-field" placeholder="Create a password" id="signup-password">
+        <button class="input-toggle" onclick="togglePassword('signup-password', this)">SHOW</button>
+      </div>
+      <p class="input-hint">Must be at least 8 characters</p>
+    </div>
+
+    <!-- Create Account -->
+    <button class="btn-primary" onclick="showScreen('verify')">Create Account</button>
+
+    <!-- Links -->
+    <p class="link-text">Already have an account? <span onclick="showScreen('welcome')">Sign In</span></p>
+
+    <!-- Legal -->
+    <div class="legal-text">
+      By creating an account, you agree to our<br>
+      <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+
+  <!-- Annotations -->
+  <div class="annotations">
+    <h3>Design Notes</h3>
+    <div class="annotation-item">
+      <span class="annotation-num">1</span>
+      <span class="annotation-text"><strong>Minimal fields</strong> -- only name, email, and password. Reduces signup friction. Additional profile details (belt rank, academy) are collected during onboarding.</span>
+    </div>
+    <div class="annotation-item">
+      <span class="annotation-num">2</span>
+      <span class="annotation-text"><strong>Password requirements shown inline</strong> -- the "8+ characters" hint appears below the field rather than as a modal or toast, so the user sees the requirement before they start typing.</span>
+    </div>
+    <div class="annotation-item">
+      <span class="annotation-num">3</span>
+      <span class="annotation-text"><strong>Legal consent is implicit</strong> -- per standard mobile patterns, tapping "Create Account" implies agreement. The legal text is visible but not a checkbox blocker.</span>
+    </div>
+    <div class="annotation-item">
+      <span class="annotation-num">4</span>
+      <span class="annotation-text"><strong>Create Account triggers verification</strong> -- tapping the gold button in this mockup navigates to the Email Verification screen to demonstrate the flow.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SCREEN 3: FORGOT PASSWORD -->
+<!-- ============================================ -->
+<div id="screen-forgot" class="screen-container">
+  <div class="phone-frame">
+    <!-- Logo small -->
+    <div class="logo-block small">
+      <div class="logo-main">TOMO</div>
+      <span class="logo-kanji">友</span>
+      <div class="logo-subtitle">Your BJJ Training Journal</div>
+    </div>
+
+    <!-- Back button -->
+    <button class="back-btn" onclick="showScreen('welcome')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5"/>
+        <path d="M12 19l-7-7 7-7"/>
+      </svg>
+      Back
+    </button>
+
+    <!-- Heading -->
+    <h2 class="screen-heading">Reset Password</h2>
+    <p class="screen-description">Enter your email and we'll send you a link to reset your password.</p>
+
+    <!-- Email -->
+    <div class="input-group">
+      <label class="input-label">Email</label>
+      <div class="input-wrapper">
+        <input type="email" class="input-field" placeholder="you@email.com">
+      </div>
+    </div>
+
+    <div class="spacer-lg"></div>
+
+    <!-- Send Reset -->
+    <button class="btn-primary">Send Reset Link</button>
+
+    <!-- Back to sign in -->
+    <p class="link-text" onclick="showScreen('welcome')"><span>Back to Sign In</span></p>
+  </div>
+
+  <!-- Annotations -->
+  <div class="annotations">
+    <h3>Design Notes</h3>
+    <div class="annotation-item">
+      <span class="annotation-num">1</span>
+      <span class="annotation-text"><strong>Simplified layout</strong> -- only one input field. The smaller logo and clear heading make the purpose of this screen immediately obvious.</span>
+    </div>
+    <div class="annotation-item">
+      <span class="annotation-num">2</span>
+      <span class="annotation-text"><strong>Back arrow navigation</strong> -- provides a clear escape hatch. Both the arrow and the "Back to Sign In" link return to the login screen.</span>
+    </div>
+    <div class="annotation-item">
+      <span class="annotation-num">3</span>
+      <span class="annotation-text"><strong>Post-submit behavior</strong> -- in production, after tapping "Send Reset Link," a success message appears inline confirming the email was sent. No redirect so the user can re-send if needed.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SCREEN 4: EMAIL VERIFICATION -->
+<!-- ============================================ -->
+<div id="screen-verify" class="screen-container">
+  <div class="phone-frame">
+    <!-- Logo small -->
+    <div class="logo-block small">
+      <div class="logo-main">TOMO</div>
+      <span class="logo-kanji">友</span>
+      <div class="logo-subtitle">Your BJJ Training Journal</div>
+    </div>
+
+    <!-- Success Icon -->
+    <div class="verification-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6L9 17l-5-5"/>
+      </svg>
+    </div>
+
+    <!-- Heading -->
+    <h2 class="verification-heading">Check Your Email</h2>
+
+    <p class="verification-subtext">
+      We sent a verification link to<br>
+      <span class="verification-email">marcus@email.com</span>
+    </p>
+
+    <div class="spacer-lg"></div>
+
+    <p class="link-text">Didn't receive it? <span>Resend</span></p>
+
+    <div class="spacer-lg"></div>
+
+    <p class="link-text" onclick="showScreen('welcome')"><span>Back to Sign In</span></p>
+  </div>
+
+  <!-- Annotations -->
+  <div class="annotations">
+    <h3>Design Notes</h3>
+    <div class="annotation-item">
+      <span class="annotation-num">1</span>
+      <span class="annotation-text"><strong>Clear success state</strong> -- the green checkmark icon with a subtle green-tinted background circle immediately communicates that the signup step completed successfully.</span>
+    </div>
+    <div class="annotation-item">
+      <span class="annotation-num">2</span>
+      <span class="annotation-text"><strong>Email displayed in bold</strong> -- showing the exact email address helps the user check the right inbox, especially if they have multiple accounts.</span>
+    </div>
+    <div class="annotation-item">
+      <span class="annotation-num">3</span>
+      <span class="annotation-text"><strong>Resend link</strong> -- email delivery can be slow or caught by spam filters. The resend option reduces support requests. In production, add a cooldown timer (e.g., "Resend in 58s").</span>
+    </div>
+    <div class="annotation-item">
+      <span class="annotation-num">4</span>
+      <span class="annotation-text"><strong>Supabase Auth handles verification</strong> -- Supabase sends the email with a magic link. On click, the user is verified and redirected to the onboarding flow in-app.</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showScreen(screenId) {
+    // Hide all screens
+    document.querySelectorAll('.screen-container').forEach(el => {
+      el.classList.remove('active');
+    });
+    // Deactivate all tabs
+    document.querySelectorAll('.tab-nav button').forEach(el => {
+      el.classList.remove('active');
+    });
+    // Show target screen
+    document.getElementById('screen-' + screenId).classList.add('active');
+    // Activate matching tab
+    const tabMap = { welcome: 0, signup: 1, forgot: 2, verify: 3 };
+    document.querySelectorAll('.tab-nav button')[tabMap[screenId]].classList.add('active');
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function togglePassword(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+      input.type = 'text';
+      btn.textContent = 'HIDE';
+    } else {
+      input.type = 'password';
+      btn.textContent = 'SHOW';
+    }
+  }
+</script>
+
+</body>
+</html>

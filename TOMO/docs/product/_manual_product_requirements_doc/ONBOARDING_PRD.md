@@ -1,8 +1,8 @@
 # Onboarding Flow - Product Requirements Document
 
 **Feature:** First-Time User Onboarding
-**Status:** Specification Complete
-**Last Updated:** January 25, 2026
+**Status:** Implementation Complete
+**Last Updated:** February 8, 2026
 **Component:** `Onboarding.tsx`
 
 ---
@@ -49,21 +49,23 @@ Capture essential data to deliver a personalized experience from day 1, while of
 ```
 
 **Total screens:** 4 (down from 6)
-**Mandatory inputs:** 6 (name, belt, stripes, gym, frequency, logging preference)
+**Mandatory inputs:** 8 (name, belt, stripes, gender, birthday, gym, frequency, logging preference)
 **Optional inputs:** 2 (training goals, experience level)
-**Estimated time:** 45-60 seconds (mandatory only), 75-90 seconds (with optionals)
+**Estimated time:** 50-70 seconds (mandatory only), 80-100 seconds (with optionals)
 
 ---
 
 ## Data Captured
 
-### Mandatory Fields (6)
+### Mandatory Fields (8)
 
 | Field | Screen | Type | Why Critical |
 |-------|--------|------|--------------|
 | `name` | About You | text | Personalization in every screen |
 | `belt` | About You | enum | Foundation of personalization system |
 | `stripes` | About You | number | Refines belt psychology |
+| `gender` | About You | enum | Peer comparisons, competition categories (LOCKED after set) |
+| `birthDate` | About You | date | Age-based insights, birthday celebrations (LOCKED after set) |
 | `gymName` | Your Training | search/select | Gym affiliation is core to BJJ identity |
 | `targetFrequency` | Your Training | number | Enables consistency tracking from day 1 |
 | `loggingPreference` | Get Started | enum | Determines first session experience |
@@ -82,7 +84,9 @@ If skipped at onboarding, these are asked via progressive profiling:
 | Field | When Asked | Why Not at Onboarding |
 |-------|------------|----------------------|
 | `beltPromotionDate` | Session 15 | Too specific, can estimate |
-| `birthYear` | Session 18 | Feels invasive upfront |
+| `trainingStartDate` | Session 3 | Context for journey, not critical upfront |
+
+**Note:** Gender and Birthday were moved to onboarding in Feb 2026 to ensure data completeness from day one. These fields are LOCKED after set.
 
 ---
 
@@ -148,6 +152,18 @@ If skipped at onboarding, these are asked via progressive profiling:
 │  │0 │ │1 │ │2 │ │3 │ │4 │      │
 │  └──┘ └──┘ └──┘ └──┘ └──┘      │
 │                                │
+│  ─────────────────────────     │
+│  GENDER                        │
+│  ┌─────────────┐┌─────────────┐│
+│  │    Male     ││   Female    ││
+│  └─────────────┘└─────────────┘│
+│                                │
+│  ─────────────────────────     │
+│  BIRTHDAY                      │
+│  ┌────────────────────────┐    │
+│  │ Select date...         │    │
+│  └────────────────────────┘    │
+│                                │
 │     ┌──────────────────┐       │
 │     │     CONTINUE     │       │
 │     └──────────────────┘       │
@@ -163,13 +179,19 @@ If skipped at onboarding, these are asked via progressive profiling:
 | Name input | Full-width, 52px height, 18px text |
 | Belt buttons | 56×72px each, flex row with 6px gap |
 | Stripe buttons | 44×44px each, flex row with 8px gap |
-| Continue button | Full-width, 56px, disabled until all 3 filled |
+| Gender buttons | Two-button row, 50% width each, 48px height |
+| Birthday input | Native date picker, full-width, 48px height |
+| Continue button | Full-width, 56px, disabled until all 5 fields filled |
 
 **Validation:**
 - Name: 1-30 characters, trimmed
 - Belt: Must select one
 - Stripes: Must select one (0-4)
-- "Continue" disabled until all three are valid
+- Gender: Must select Male or Female
+- Birthday: Must select a valid date
+- "Continue" disabled until all five are valid
+
+**Important:** Gender and Birthday are LOCKED after onboarding. Users cannot change these values later. This is intentional for data integrity in analytics and peer comparisons.
 
 **Interactions:**
 - Stripe selector always visible (not conditional on belt selection - simpler UX)
@@ -530,6 +552,8 @@ interface UserProfile {
   name: string;
   belt: 'white' | 'blue' | 'purple' | 'brown' | 'black';
   stripes: 0 | 1 | 2 | 3 | 4;
+  gender: 'male' | 'female';            // LOCKED after onboarding
+  birthDate: string;                    // ISO date, LOCKED after onboarding
   gym: GymSelection;                    // Required - selected or manually entered
   targetFrequency: number;              // 2, 4, or 5
   loggingPreference: 'voice' | 'text';
@@ -543,7 +567,6 @@ interface UserProfile {
   // Captured via progressive profiling only
   trainingStartDate?: string;           // Can derive from experienceLevel if needed
   beltPromotionDate?: string;           // Session 15
-  birthYear?: number;                   // Session 18
 }
 
 interface GymSelection {
@@ -566,6 +589,8 @@ interface OnboardingState {
   name: string;
   belt: BeltLevel | null;
   stripes: number | null;
+  gender: 'male' | 'female' | null;     // LOCKED after set
+  birthDate: string | null;             // ISO date, LOCKED after set
   gym: GymSelection | null;             // Now mandatory
   targetFrequency: number | null;
   loggingPreference: 'voice' | 'text' | null;
@@ -602,6 +627,8 @@ If already answered at onboarding, these questions are skipped in progressive pr
 | Name | 1-30 chars required | Continue disabled |
 | Belt | Must select one | Continue disabled |
 | Stripes | Must select one | Continue disabled |
+| Gender | Must select Male or Female | Continue disabled |
+| Birthday | Must select valid date | Continue disabled |
 | Gym | Must select from list OR enter manually | Continue disabled |
 | Frequency | Must select one | Continue disabled |
 | Logging pref | Must select one | CTAs hidden |
@@ -636,13 +663,15 @@ If already answered at onboarding, these questions are skipped in progressive pr
 ## Testing Checklist
 
 ### Mandatory Flow
-- [ ] Cannot proceed from About You without name
-- [ ] Cannot proceed from About You without belt
-- [ ] Cannot proceed from About You without stripes
-- [ ] Cannot proceed from Your Training without gym
-- [ ] Cannot proceed from Your Training without frequency
-- [ ] Cannot complete without logging preference
-- [ ] All combinations of belt + stripes work
+- [x] Cannot proceed from About You without name
+- [x] Cannot proceed from About You without belt
+- [x] Cannot proceed from About You without stripes
+- [x] Cannot proceed from About You without gender
+- [x] Cannot proceed from About You without birthday
+- [x] Cannot proceed from Your Training without gym
+- [x] Cannot proceed from Your Training without frequency
+- [x] Cannot complete without logging preference
+- [x] All combinations of belt + stripes work
 
 ### Gym Picker
 - [ ] Search filters gyms in real-time
@@ -670,17 +699,25 @@ If already answered at onboarding, these questions are skipped in progressive pr
 
 ---
 
-## Comparison: v1 vs v2 vs v3
+## Comparison: v1 vs v2 vs v3 vs v4
 
-| Aspect | v1 (6 screens) | v2 (4 screens) | v3 (4 screens + gym) |
-|--------|----------------|----------------|----------------------|
-| Screens | 6 | 4 | 4 |
-| Mandatory inputs | 5 | 5 | **6** |
-| Optional inputs | 0 | 3 | **2** |
-| Est. time (mandatory) | 45-60s | 30-45s | **45-60s** |
-| Est. time (with optionals) | N/A | 60-90s | **75-90s** |
-| Gym captured | No | Optional | **Mandatory** |
-| Data captured | 5 fields | 5-8 fields |
+| Aspect | v1 (6 screens) | v2 (4 screens) | v3 (4 screens + gym) | v4 (current) |
+|--------|----------------|----------------|----------------------|--------------|
+| Screens | 6 | 4 | 4 | **4** |
+| Mandatory inputs | 5 | 5 | 6 | **8** |
+| Optional inputs | 0 | 3 | 2 | **2** |
+| Est. time (mandatory) | 45-60s | 30-45s | 45-60s | **50-70s** |
+| Est. time (with optionals) | N/A | 60-90s | 75-90s | **80-100s** |
+| Gym captured | No | Optional | Mandatory | **Mandatory** |
+| Gender captured | No | No | No | **Mandatory** |
+| Birthday captured | No | No | No | **Mandatory** |
+| Data captured | 5 fields | 5-8 fields | 6-8 fields | **8-10 fields** |
+
+**v4 Changes (Feb 2026):**
+- Added Gender (Male/Female only) as mandatory field on "About You" screen
+- Added Birthday as mandatory field on "About You" screen
+- Both fields are LOCKED after onboarding (cannot be changed)
+- Removed Gender and Birthday from progressive profiling schedule
 
 ---
 

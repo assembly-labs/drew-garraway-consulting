@@ -24,9 +24,9 @@
 |---|---------|--------|-----|----------|-------|
 | 1.1 | **Dashboard** | ✅ | ✅ | Critical | Integrated in App.tsx with real data |
 | 1.2 | **Journal Entry** | ✅ | 🔵 | Critical | Voice logger enhanced Feb 2026: lesson topic, energy level, transcript display |
-| 1.3 | **Belt Progress** | ⬜ | ⬜ | Critical | IBJJF requirements checklist + coach feedback |
-| 1.4 | **Technique Library** | ⬜ | ⬜ | High | Search, filter, proficiency tracking |
-| 1.5 | **Profile** | ⬜ | ⬜ | High | Belt history, stats, settings |
+| 1.3 | **Belt Progress** | 🟡 | ⬜ | Critical | Design review created Feb 2026. IBJJF requirements checklist + coach feedback |
+| 1.4 | **Technique Library** | 🟡 | ⬜ | High | Enhancement mockups created Feb 2026, existing prototype functional. Search, filter, proficiency tracking |
+| 1.5 | **Profile** | 🔵 | 🔵 | High | Gender/birthDate captured at onboarding, belt history planned |
 | 1.6 | **Sparring Tracker** | ⬜ | ⬜ | High | Integrated into Journal Entry (see 1.2) |
 | 1.7 | **Goals Manager** | ⬜ | ⬜ | Medium | Short/long-term goal tracking |
 | 1.8 | **Injury Tracker** | ⬜ | ⬜ | Medium | 91% injury rate - critical for retention |
@@ -59,10 +59,13 @@
 
 | # | Feature | Design | Dev | Priority | Notes |
 |---|---------|--------|-----|----------|-------|
-| 4.1 | **Onboarding Flow** | 🟠 | ⬜ | Critical | 4-screen flow approved 2026-02-08, ready for dev |
-| 4.2 | **Settings** | ⬜ | ⬜ | Medium | Privacy, notifications, subscription |
-| 4.3 | **Legal/Payment** | ⬜ | ⬜ | Medium | ToS, subscription management |
+| 4.1 | **Onboarding Flow** | ✅ | ✅ | Critical | 4-screen flow with gender/birthday implemented 2026-02-08 |
+| 4.2 | **Settings** | ✅ | ✅ | Medium | Notification toggles (UI only), logging preference, data export |
+| 4.3 | **Legal/Payment** | 🟠 | 🟡 | Medium | Privacy Policy & ToS created. iOS payment via StoreKit/RevenueCat designed Feb 2026 |
 | 4.4 | **Notifications** | ⬜ | ⬜ | Low | Reminders, coach feedback alerts |
+| 4.5 | **Authentication** | 🟠 | ⬜ | High | Login/signup with Apple, Google, Email designed Feb 2026 |
+| 4.6 | **Privacy Policy** | ✅ | ⬜ | Medium | Generic text created, needs legal review |
+| 4.7 | **Terms of Service** | ✅ | ⬜ | Medium | Generic text created, needs legal review |
 
 ---
 
@@ -79,17 +82,17 @@
 | C.7 | **Card** | ✅ | ✅ | Base container (CSS) |
 | C.8 | **Button** | ✅ | ✅ | All screens (CSS) |
 | C.9 | **Form Elements** | ✅ | ✅ | Journal Entry, Settings (CSS) |
-| C.10 | **TechniqueCard** | ⬜ | ⬜ | Technique Library |
-| C.11 | **SessionCard** | ⬜ | ⬜ | Journal list view |
+| C.10 | **TechniqueCard** | ✅ | ✅ | Implemented in TechniqueLibrary.tsx |
+| C.11 | **SessionCard** | ✅ | ✅ | Implemented in SessionCard.tsx and JournalEntryCard.tsx |
 | C.12 | **RequirementItem** | ⬜ | ⬜ | Belt Progress |
 | C.13 | **SparringRoundCard** | ⬜ | ⬜ | Journal Entry |
 | C.14 | **GoalCard** | ⬜ | ⬜ | Dashboard, Goals |
 | C.15 | **FeedbackCard** | ⬜ | ⬜ | Belt Progress, Profile |
-| C.16 | **Modal** | ⬜ | ⬜ | Confirmations, Quick Add |
-| C.17 | **Toast/Alert** | ⬜ | ⬜ | Save confirmations |
-| C.18 | **EmptyState** | ⬜ | ⬜ | No data scenarios |
-| C.19 | **LoadingState** | ⬜ | ⬜ | Async operations |
-| C.20 | **SearchInput** | ⬜ | ⬜ | Technique Library |
+| C.16 | **Modal** | ✅ | ✅ | EditSheet.tsx bottom sheet modal |
+| C.17 | **Toast/Alert** | ✅ | ✅ | Toast.tsx component |
+| C.18 | **EmptyState** | ✅ | ✅ | EmptyState.tsx component |
+| C.19 | **LoadingState** | ✅ | ✅ | Skeleton.tsx component (6 variants) |
+| C.20 | **SearchInput** | ✅ | ✅ | In TechniqueLibrary.tsx |
 
 ---
 
@@ -124,16 +127,16 @@
 
 | Category | Total | Complete | In Progress | Not Started |
 |----------|-------|----------|-------------|-------------|
-| Phase 1 Features | 9 | 1 | 1 | 7 |
+| Phase 1 Features | 9 | 1 | 4 | 4 |
 | Phase 2 Features | 4 | 0 | 0 | 4 |
 | Phase 3 Features | 3 | 0 | 0 | 3 |
-| Phase 4 Features | 4 | 0 | 0 | 4 |
-| UI Components | 20 | 9 | 0 | 11 |
+| Phase 4 Features | 7 | 2 | 4 | 1 |
+| UI Components | 20 | 16 | 0 | 4 |
 | Entry Flows | 5 | 0 | 0 | 5 |
 | Visualizations | 8 | 3 | 0 | 5 |
 | Design System | 1 | 1 | 0 | 0 |
 
-**Overall: 54 items | 14 complete (26%) | 1 in progress | 39 not started**
+**Overall: 57 items | 23 complete (40%) | 8 in progress | 26 not started**
 
 ---
 
@@ -189,6 +192,16 @@ Record key UX decisions as we make them:
 | Feb 08, 2026 | Session Logger | Added energy level 1-5 picker | Enables fatigue pattern detection in insights |
 | Feb 08, 2026 | Session Logger | Added collapsible transcript display | Users can verify AI extraction accuracy |
 | Feb 08, 2026 | Session Logger | Fixed data alignment (techniques_drilled, worked_well, struggles) | Database fields now properly captured |
+| Feb 08, 2026 | Onboarding | Gender and Birthday mandatory at onboarding | Ensures 100% data completeness for analytics |
+| Feb 08, 2026 | Onboarding | Gender limited to Male/Female only | Simplified options per product decision |
+| Feb 08, 2026 | Profile | Gender and birthDate now locked fields | Cannot be changed after onboarding |
+| Feb 08, 2026 | Settings | Notification preferences persist | Saved via UserProfileContext (UI only - no actual notifications) |
+| Feb 08, 2026 | Profile | Removed gender/birthDate from progressive profiling | Moved to onboarding for guaranteed capture |
+| Feb 08, 2026 | Belt Progress | Module within Profile (not standalone page), event-sourced promotion history | Keeps profile as hub, avoids navigation sprawl |
+| Feb 08, 2026 | Techniques | 8 enhancement mockups designed (content gating, difficulty filter, proficiency update, related techniques, instructor filter, bookmarks, enhanced search, watch tracking) | Comprehensive design review for technique library polish |
+| Feb 08, 2026 | Legal | Privacy Policy and Terms of Service created | Generic text for App Store submission, needs legal review |
+| Feb 08, 2026 | Auth | Login/signup designed with Apple Sign-In, Google, and email options | SSO-first approach for iOS, email as fallback |
+| Feb 08, 2026 | Payment | iOS App Store via StoreKit + RevenueCat (no custom payment) | Apple-native payment reduces compliance burden |
 | | | | |
 
 ---
