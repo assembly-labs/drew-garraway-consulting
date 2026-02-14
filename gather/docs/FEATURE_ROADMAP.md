@@ -29,7 +29,7 @@
 
 **Goal:** Enable customers to shop, order, and pay online. Enable operations team to organize orders, print packing slips, check in customers, and distribute payments to vendors.
 
-**Timeline:** 12-16 weeks
+**Timeline:** 6 months (per PRD.md)
 **Target:** Berwyn Farmers Market launch
 
 ---
@@ -341,7 +341,7 @@
 
 ---
 
-## Phase 3: Multi-Market & Scale
+## Phase 3: Market Manager Dashboard & Scale
 
 **Goal:** Become indispensable to market operations. Scale to 50-100 markets. Add market management SaaS features.
 

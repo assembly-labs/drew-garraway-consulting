@@ -176,9 +176,44 @@ Berwyn Farmers Market (Bronze Plaza, 511 Old Lancaster Road, Berwyn PA) serves a
 
 ## 3. Feature Requirements
 
-### Phase 1: Core Market Management (MVP — Months 1-6)
+### Phase 1: Consumer Marketplace MVP (Months 1-6)
 
-The MVP focuses on capturing market manager workflow and establishing vendor/product data that powers Phase 2's marketplace.
+The MVP focuses on building a consumer marketplace ("Instacart for farmers markets") for Berwyn Farmers Market. Customers browse, cart, checkout, and pick up at market. The Gather team manages products on behalf of vendors — no vendor self-service portal until Phase 2.
+
+> **Note:** The features below in Sections 3.1-3.7 describe capabilities planned for **Phase 3** (Market Manager Dashboard, Months 13-18). They are retained here as full-platform context but are **not part of the MVP**. See PRD.md for the authoritative MVP scope.
+
+#### MVP Features (Phase 1)
+
+| Feature | Priority | Description |
+|---------|----------|-------------|
+| Customer storefront | P0 | Browse, search, filter products |
+| Shopping cart | P0 | Multi-vendor, persistent |
+| Checkout | P0 | Stripe, guest checkout, pickup slot selection |
+| Order confirmation | P0 | Email with QR code |
+| Staff order dashboard | P0 | View and manage pending orders |
+| Pick lists | P0 | Per-vendor, printable |
+| Customer check-in | P0 | Scan QR, mark picked up |
+| Admin product management | P0 | CRUD for products (Gather team manages on behalf of vendors) |
+| Basic reporting | P1 | Orders, revenue, top products |
+
+#### Out of Scope for MVP
+
+| Feature | Phase | Reason |
+|---------|-------|--------|
+| Vendor self-service portal | 2 | Requires vendor onboarding |
+| SNAP/EBT processing | 3 | Complex integration |
+| Market manager dashboard | 3 | After marketplace proven |
+| Vendor management & fees | 3 | Market management SaaS comes later |
+| Grant reporting | 3 | Depends on market management tools |
+| Multi-market support | 2 | Focus on Berwyn first |
+| Native mobile apps | 4 | Web works fine for MVP |
+| Delivery | Never | Pickup-only model |
+
+---
+
+### Future Phases: Market Management Features (Phases 2-4)
+
+The sections below (3.1-3.7) describe market management features planned for later phases. They provide important context for the full platform vision.
 
 #### 3.1 Vendor Management
 
@@ -359,9 +394,9 @@ The MVP focuses on capturing market manager workflow and establishing vendor/pro
 
 ---
 
-### Phase 2: Consumer Marketplace (Months 7-12)
+### Phase 2: Vendor Self-Service & Multi-Market (Months 7-12)
 
-Phase 2 builds the "Instacart for farmers markets" experience on top of Phase 1's vendor/product data foundation.
+Phase 2 enables vendors to manage their own products and expands to multiple markets. The consumer marketplace features below were originally scoped as Phase 2 but per PRD.md are now **part of the Phase 1 MVP** (see MVP Features table above). The features listed here represent enhancements beyond the MVP.
 
 #### 3.8 Customer Shopping Experience
 
@@ -740,32 +775,37 @@ Lucide React icon library. Key icons by context:
 | Professional | $149/mo | 30-75 vendors | + SNAP/EBT, grant reporting, analytics |
 | Enterprise | $299/mo | 75+ vendors | + multi-market, API access, custom reports |
 
-**Marketplace Transaction Fees (Phase 2):**
-- 2.5% on marketplace transactions
-- 1% on SNAP/EBT processing
-- Optional vendor subscriptions: $29-99/month for premium features (featured placement, analytics)
+**Marketplace Transaction Fees (Phase 1+):**
+- 2.5% on marketplace transactions (active from MVP launch)
+- 1% on SNAP/EBT processing (Phase 3, when SNAP integration added)
+- Optional vendor subscriptions: $29-99/month for premium features (Phase 2+)
 
 ### 7.2 Key Performance Indicators
 
-**Phase 1 (Months 1-6):**
-- Markets onboarded: 20
-- Weekly active markets: 70% of onboarded
-- Manager time savings: 20 hours/week per market
-- Vendor satisfaction: NPS >50
-- ARR: $36K ($150/month avg × 20 markets)
-- Product listings: 50+ products per vendor
-
-**Phase 2 (Months 7-12):**
-- Markets: 100
-- Marketplace GMV: $500K monthly
-- Online basket size: $59 average
-- ARR: $250K
+**Phase 1: Consumer Marketplace MVP (Months 1-6):**
+- Target market: Berwyn Farmers Market (1 market)
+- GMV: $50K in first season
+- Unique customers: 500+
+- Average online basket size: $59
+- Repeat rate: 40%
 - Browse-to-buy conversion: >3%
 - Cart abandonment: <30%
-- Customer monthly repeat rate: 40%
+- Pickup time: <5 minutes average
+
+**Phase 2: Vendor Self-Service (Months 7-12):**
+- Markets: 10
+- Marketplace GMV: $500K/month
+- Vendors self-managing: 70%
+- ARR: $250K
+
+**Phase 3: Market Manager Dashboard (Months 13-18):**
+- Markets: 100
+- Manager time savings: 20+ hours/week per market
+- ARR growth from SaaS subscriptions
 
 **Long-term Targets:**
-- Year 1: 100 markets, $250K ARR
+- Year 1: 10 markets, marketplace proven
+- Year 3: 300 markets, $1M ARR
 - Year 5: 500+ markets, $2-3M ARR
 
 ### 7.3 Unit Economics
@@ -811,35 +851,48 @@ Secondary: Angel/pre-seed ($50-150K) from agricultural angels, impact investors,
 
 ## 9. Development Timeline
 
-### Months 1-3: Foundation
-- Core vendor management system
-- Basic fee collection and tracking
-- Communication hub (broadcast + direct messaging)
-- Vendor profile creation
-- Product catalog with categories
-- 5 pilot markets with Carlo providing hands-on onboarding
+> **Source of truth:** PRD.md. The timeline below is aligned with PRD.md's phasing.
 
-### Months 4-6: Enhancement
-- SNAP/EBT integration
-- Grant reporting templates and auto-compilation
-- Analytics dashboard (market health, vendor performance)
-- Advanced vendor features (scheduling, compliance automation)
-- 20 paying markets
+### Phase 1: Consumer Marketplace MVP (Months 1-6)
 
-### Months 7-9: Marketplace MVP
-- Customer browsing interface (search, filter, category navigation)
-- Multi-vendor shopping cart and checkout
-- Vendor inventory management (real-time sync)
-- Order management system (vendor + manager views)
-- Test marketplace with Berwyn model first
+| Month | Focus | Deliverables |
+|-------|-------|--------------|
+| 1 | Foundation | Design system, wireframes, database schema, project setup |
+| 2 | Storefront | Homepage, product listing, product detail, search |
+| 3 | Commerce | Cart, checkout, Stripe integration, order confirmation |
+| 4 | Operations | Staff dashboard, pick lists, check-in system |
+| 5 | Admin | Product management, settings, basic reporting |
+| 6 | Launch | QA, Berwyn pilot, iterate on feedback |
 
-### Months 10-12: Scale & Polish
-- Mobile app launch (iOS/Android for customers and vendors)
-- Advanced search with recommendations
-- Customer accounts, favorites, reorder, loyalty
-- Full marketplace rollout across onboarded markets
-- 100 markets target
-- Series Seed preparation
+**Target:** $50K GMV in first season, 500+ unique customers, 40% repeat rate
+
+### Phase 2: Vendor Self-Service (Months 7-12)
+- Vendor login portal and product management
+- Order notifications and inventory management
+- Customer accounts, order history, favorites, reorder
+- Multi-market inventory sync
+- Scale to 10 markets
+
+**Target:** 10 markets, $500K monthly GMV, 70% vendors self-managing
+
+### Phase 3: Market Manager Dashboard (Months 13-18)
+- Digital vendor applications and stall assignment
+- Automated fee collection
+- License/insurance tracking
+- SNAP/EBT processing
+- Grant reporting (USDA FMPP/LFPP)
+- Broadcast communications and financial dashboards
+
+**Target:** 100 markets, 20+ hours/week saved per manager
+
+### Phase 4: Platform Ecosystem (Months 19-24)
+- Native mobile apps (iOS/Android)
+- Customer loyalty programs and subscription boxes
+- Personalized recommendations
+- Multi-market management
+- API for integrations and white-label options
+
+**Target:** 500 markets, $3M monthly GMV, Series A fundraise
 
 ---
 
@@ -881,4 +934,4 @@ Secondary: Angel/pre-seed ($50-150K) from agricultural angels, impact investors,
 
 ---
 
-*This document should be kept current as product decisions evolve. Last updated: February 2026.*
+*This document should be kept current as product decisions evolve. PRD.md is the source of truth for MVP scope and phasing. Last updated: February 2026.*

@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gather — Product Requirements Document for Technical Review</title>
+  <style>
+    :root {
+      --sage-900: #1C3A13;
+      --sage-700: #2D5016;
+      --sage-500: #4A7C28;
+      --sage-300: #81C784;
+      --sage-100: #C8E6C9;
+      --sage-50: #E8F5E9;
+      --gold-600: #F57F17;
+      --gold-400: #FFB300;
+      --gold-100: #FFF9C4;
+      --coral-500: #FF6B6B;
+      --sky-500: #4ECDC4;
+      --dash-text: #37352F;
+      --dash-muted: #787774;
+      --dash-border: #E3E2E0;
+      --dash-bg: #FFFFFF;
+      --dash-sidebar: #FBFBFA;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--dash-text);
+      line-height: 1.65;
+      background: #F7F7F5;
+      font-size: 15px;
+    }
+
+    .page-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Source link banner */
+    .source-banner {
+      background: var(--sage-50);
+      border: 1px solid var(--sage-300);
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin-bottom: 32px;
+      font-size: 13px;
+      color: var(--sage-700);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .source-banner a {
+      color: var(--sage-700);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    .source-banner .icon { font-size: 16px; }
+
+    /* Header */
+    .doc-header {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid var(--sage-500);
+    }
+    .doc-header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--sage-900);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .doc-header .subtitle {
+      font-size: 20px;
+      color: var(--sage-500);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .doc-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--dash-muted);
+    }
+    .doc-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* Review purpose callout */
+    .review-callout {
+      background: var(--gold-100);
+      border-left: 4px solid var(--gold-400);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+    }
+    .review-callout h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gold-600);
+      margin-bottom: 8px;
+    }
+    .review-callout p {
+      font-size: 14px;
+      color: var(--dash-text);
+      margin-bottom: 6px;
+    }
+    .review-callout ul {
+      margin-top: 8px;
+      padding-left: 20px;
+      font-size: 14px;
+    }
+    .review-callout li { margin-bottom: 4px; }
+
+    /* Table of Contents */
+    .toc {
+      background: var(--dash-sidebar);
+      border: 1px solid var(--dash-border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+    .toc h2 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--dash-muted);
+      margin-bottom: 14px;
+    }
+    .toc ol {
+      list-style: none;
+      counter-reset: toc;
+      padding: 0;
+    }
+    .toc li {
+      counter-increment: toc;
+      margin-bottom: 6px;
+    }
+    .toc li::before {
+      content: counter(toc) ".";
+      display: inline-block;
+      width: 24px;
+      font-weight: 600;
+      color: var(--sage-500);
+      font-size: 13px;
+    }
+    .toc a {
+      color: var(--dash-text);
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .toc a:hover { color: var(--sage-500); text-decoration: underline; }
+
+    /* Sections */
+    section {
+      margin-bottom: 56px;
+    }
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--sage-900);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--dash-border);
+    }
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--dash-text);
+      margin-top: 28px;
+      margin-bottom: 12px;
+    }
+    h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dash-muted);
+      margin-top: 20px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    p {
+      margin-bottom: 14px;
+    }
+    ul, ol {
+      padding-left: 24px;
+      margin-bottom: 14px;
+    }
+    li { margin-bottom: 6px; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+    th {
+      background: var(--dash-sidebar);
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--dash-border);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--dash-muted);
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--dash-border);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: var(--sage-50); }
+
+    /* Info cards */
+    .info-card {
+      background: var(--dash-bg);
+      border: 1px solid var(--dash-border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .info-card h4 {
+      margin-top: 0;
+      text-transform: none;
+      letter-spacing: normal;
+      font-size: 15px;
+      color: var(--sage-700);
+    }
+    .info-card p { font-size: 14px; margin-bottom: 8px; }
+
+    /* Stat grid */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: var(--dash-bg);
+      border: 1px solid var(--dash-border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      text-align: center;
+    }
+    .stat-card .value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--sage-700);
+      line-height: 1.2;
+    }
+    .stat-card .label {
+      font-size: 12px;
+      color: var(--dash-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 4px;
+    }
+
+    /* Phase badges */
+    .phase-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .phase-mvp { background: var(--sage-100); color: var(--sage-900); }
+    .phase-2 { background: #E3F2FD; color: #1565C0; }
+    .phase-3 { background: #F3E5F5; color: #7B1FA2; }
+    .phase-4 { background: var(--gold-100); color: var(--gold-600); }
+    .priority-p0 { background: var(--sage-100); color: var(--sage-900); }
+    .priority-p1 { background: #E3F2FD; color: #1565C0; }
+
+    /* Code blocks */
+    pre {
+      background: #2D2D2D;
+      color: #F8F8F2;
+      border-radius: 8px;
+      padding: 20px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    code {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      background: var(--dash-sidebar);
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    pre code { background: none; padding: 0; }
+
+    /* Diagram */
+    .diagram {
+      background: var(--dash-bg);
+      border: 1px solid var(--dash-border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+    }
+    .diagram pre {
+      background: none;
+      color: var(--dash-text);
+      padding: 0;
+      margin: 0;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 24px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: var(--sage-300);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--sage-500);
+      border: 2px solid var(--dash-bg);
+    }
+    .timeline-item h4 {
+      margin-top: 0;
+      text-transform: none;
+      letter-spacing: normal;
+      color: var(--sage-700);
+    }
+    .timeline-item p { font-size: 14px; color: var(--dash-muted); }
+
+    /* Links list */
+    .doc-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .doc-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: var(--dash-bg);
+      border: 1px solid var(--dash-border);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--dash-text);
+      font-size: 13px;
+      transition: border-color 0.15s;
+    }
+    .doc-link:hover { border-color: var(--sage-500); }
+    .doc-link .file-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--sage-50);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .doc-link .file-name { font-weight: 600; }
+    .doc-link .file-desc { font-size: 12px; color: var(--dash-muted); }
+
+    /* Persona cards */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .persona-card {
+      background: var(--dash-bg);
+      border: 1px solid var(--dash-border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .persona-card .role {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--sage-500);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .persona-card h4 {
+      margin: 0 0 8px;
+      text-transform: none;
+      letter-spacing: normal;
+      color: var(--dash-text);
+      font-size: 16px;
+    }
+    .persona-card blockquote {
+      border-left: 3px solid var(--sage-300);
+      padding-left: 12px;
+      font-style: italic;
+      color: var(--dash-muted);
+      font-size: 13px;
+      margin: 10px 0;
+    }
+    .persona-card .detail { font-size: 13px; color: var(--dash-muted); }
+
+    /* Callouts */
+    .callout {
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .callout-info { background: #E3F2FD; border-left: 4px solid #1976D2; }
+    .callout-warn { background: #FFF3E0; border-left: 4px solid #F57C00; }
+    .callout-success { background: var(--sage-50); border-left: 4px solid var(--sage-500); }
+    .callout strong { display: block; margin-bottom: 4px; }
+
+    /* Footer */
+    .doc-footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--dash-border);
+      font-size: 12px;
+      color: var(--dash-muted);
+      text-align: center;
+    }
+
+    /* Print styles */
+    @media print {
+      body { background: white; font-size: 12px; }
+      .page-wrapper { max-width: 100%; padding: 0; }
+      .source-banner { display: none; }
+      pre { font-size: 10px; }
+      section { break-inside: avoid; }
+      h2 { break-after: avoid; }
+      table { font-size: 11px; }
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .doc-header h1 { font-size: 28px; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .persona-grid { grid-template-columns: 1fr; }
+      .doc-links { grid-template-columns: 1fr; }
+      .doc-meta { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- Source file link -->
+  <div class="source-banner">
+    <span class="icon">&#128196;</span>
+    <span>
+      <strong>Source document:</strong>
+      <a href="PRD.md">PRD.md</a> &mdash; This HTML is a formatted presentation of the canonical PRD. All detailed feature specs are linked in
+      <a href="#detailed-specs">Section 12</a>.
+    </span>
+  </div>
+
+  <!-- Document header -->
+  <header class="doc-header">
+    <h1>Gather &mdash; Product Requirements Document</h1>
+    <div class="subtitle">Instacart for Farmers Markets</div>
+    <div class="doc-meta">
+      <span><strong>Version:</strong> 2.0</span>
+      <span><strong>Date:</strong> February 14, 2026</span>
+      <span><strong>Authors:</strong> Drew Garraway, Carlo Luciano</span>
+      <span><strong>Status:</strong> Ready for Technical Review</span>
+    </div>
+  </header>
+
+  <!-- Review callout -->
+  <div class="review-callout">
+    <h3>Purpose of This Document</h3>
+    <p>This PRD is prepared for our <strong>technical director</strong> to review, understand, and provide:</p>
+    <ul>
+      <li><strong>MVP estimate</strong> &mdash; effort and cost to build and launch Phase 1 (consumer marketplace for Berwyn Farmers Market)</li>
+      <li><strong>Full build estimate</strong> &mdash; effort and cost across all 4 phases (24-month roadmap to 500+ markets)</li>
+      <li><strong>Technical risks</strong> &mdash; identify areas of complexity, uncertainty, or architectural concern</li>
+      <li><strong>Team composition</strong> &mdash; recommended staffing and skill requirements</li>
+    </ul>
+  </div>
+
+  <!-- Table of Contents -->
+  <nav class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#executive-summary">Executive Summary</a></li>
+      <li><a href="#the-problem">The Problem &amp; Market Opportunity</a></li>
+      <li><a href="#the-solution">The Solution</a></li>
+      <li><a href="#user-personas">User Personas</a></li>
+      <li><a href="#mvp-scope">MVP Scope (Phase 1)</a></li>
+      <li><a href="#feature-domains">Feature Domains &amp; Key Features</a></li>
+      <li><a href="#data-model">Data Model</a></li>
+      <li><a href="#api-spec">API Specification</a></li>
+      <li><a href="#tech-architecture">Technical Architecture</a></li>
+      <li><a href="#design-requirements">Design Requirements</a></li>
+      <li><a href="#roadmap">Full Roadmap (All Phases)</a></li>
+      <li><a href="#detailed-specs">Detailed Specification Documents</a></li>
+      <li><a href="#success-metrics">Success Metrics</a></li>
+      <li><a href="#risks">Risks &amp; Open Questions</a></li>
+      <li><a href="#competitive-landscape">Competitive Landscape</a></li>
+      <li><a href="#business-model">Business Model &amp; Unit Economics</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- 1. EXECUTIVE SUMMARY -->
+  <!-- ============================================================ -->
+  <section id="executive-summary">
+    <h2>1. Executive Summary</h2>
+
+    <h3>What We're Building</h3>
+    <p>A web-based marketplace that lets customers:</p>
+    <ol>
+      <li>Browse all products from a farmers market's vendors</li>
+      <li>Add items from multiple vendors to a single cart</li>
+      <li>Checkout with one payment</li>
+      <li>Pick up their order at the market</li>
+    </ol>
+
+    <h3>MVP Target</h3>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="value">1</div>
+        <div class="label">Market (Berwyn, PA)</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">70+</div>
+        <div class="label">Vendors</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">6 mo</div>
+        <div class="label">Timeline to Launch</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">$50K</div>
+        <div class="label">GMV Target (Season 1)</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">$59</div>
+        <div class="label">Avg Online Basket</div>
+      </div>
+    </div>
+
+    <h3>Why It Matters</h3>
+    <table>
+      <thead>
+        <tr><th>Stakeholder</th><th>Current Pain</th><th>Our Solution</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Customers</strong></td>
+          <td>Can only shop Saturday 8am&ndash;1pm; don't know what's available</td>
+          <td>Shop online anytime; see real inventory</td>
+        </tr>
+        <tr>
+          <td><strong>Vendors</strong></td>
+          <td>Miss 51% of potential customers who can't attend</td>
+          <td>Reach everyone; predictable pre-orders</td>
+        </tr>
+        <tr>
+          <td><strong>Markets</strong></td>
+          <td>Can't compete with grocery delivery apps</td>
+          <td>Modern shopping experience with market pickup</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <strong>Key Architectural Decision: No Delivery</strong>
+      Gather is pickup-only. No last-mile delivery. This is a deliberate decision based on the catastrophic failures of Good Eggs ($200M+ burned), Farmigo ($26M burned), and Webvan ($800M bankruptcy)&mdash;all of which proved last-mile fresh food delivery economics are fundamentally broken.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 2. THE PROBLEM -->
+  <!-- ============================================================ -->
+  <section id="the-problem">
+    <h2>2. The Problem &amp; Market Opportunity</h2>
+
+    <h3>Catherine's Story</h3>
+    <p>Catherine lives 5 minutes from Berwyn Farmers Market. She wants to support Tom's Farm down the road instead of Whole Foods. But she works Saturday mornings, doesn't know if heirloom tomatoes will be in stock, and by the time she arrives at 11am, the good stuff is gone. She can't pre-order anything.</p>
+    <p><strong>Result:</strong> Catherine opens Instacart and orders from Whole Foods. She feels guilty, but convenience wins.</p>
+
+    <h3>The Numbers</h3>
+    <table>
+      <thead>
+        <tr><th>Stat</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>51% of interested customers skip markets due to inconvenience</td><td>USDA Study</td></tr>
+        <tr><td>40M+ Americans want to shop farmers markets but can't</td><td>Market Research</td></tr>
+        <tr><td>$2B+ in potential sales locked away</td><td>Calculated TAM</td></tr>
+        <tr><td>2&ndash;4x larger basket sizes when shopping online</td><td>Berwyn pilot data</td></tr>
+        <tr><td>8,140 operational US farmers markets</td><td>USDA</td></tr>
+        <tr><td>Only 15&ndash;25% use any dedicated software</td><td>Industry surveys</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 3. THE SOLUTION -->
+  <!-- ============================================================ -->
+  <section id="the-solution">
+    <h2>3. The Solution</h2>
+
+    <h3>Core Value Proposition</h3>
+    <p><strong>&ldquo;Shop local from your couch. Pick up fresh at the market.&rdquo;</strong></p>
+
+    <h3>How It Works</h3>
+    <div class="diagram">
+<pre>Thursday Evening (Catherine at home)
+├── Opens gather.market/berwyn
+├── Browses: Produce → Tomatoes → Heirloom
+├── Adds items from 5 different vendors
+├── Checks out once ($75 total)
+└── Selects pickup: Saturday 11am-12pm
+
+Saturday Morning (Behind the scenes)
+├── Vendors receive pick lists
+├── Staff collects items from each vendor
+└── Orders packed and labeled with QR codes
+
+Saturday 11:30am (Catherine at market)
+├── Shows QR code at pickup tent
+├── Grabs her bag
+└── Done in 3 minutes</pre>
+    </div>
+
+    <div class="callout callout-success">
+      <strong>MVP Note: Gather Team Manages Products</strong>
+      In MVP, the Gather team manages all products on behalf of vendors. Vendors do not log in or manage their own listings. Vendor self-service is Phase 2.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 4. USER PERSONAS -->
+  <!-- ============================================================ -->
+  <section id="user-personas">
+    <h2>4. User Personas</h2>
+
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="role">Primary &mdash; Customer</div>
+        <h4>Catherine (Shopper)</h4>
+        <div class="detail">Age 35&ndash;45 &bull; HHI $96K+ &bull; 77% bachelor's+</div>
+        <blockquote>&ldquo;I want to support local but I can't attend Saturday mornings.&rdquo;</blockquote>
+        <p style="font-size:13px; margin-top:10px;"><strong>Jobs:</strong> Know what's available, reserve items, shop on her schedule, support local farms.</p>
+        <p style="font-size:13px;"><strong>Success:</strong> Checkout &lt;60s, order ready on arrival, pickup &lt;5 min.</p>
+      </div>
+
+      <div class="persona-card">
+        <div class="role">Secondary &mdash; Operations</div>
+        <h4>Market Staff</h4>
+        <div class="detail">2&ndash;4 people &bull; Moderate tech comfort &bull; Busy on market day</div>
+        <blockquote>&ldquo;I need to see all orders at a glance and check people in fast.&rdquo;</blockquote>
+        <p style="font-size:13px; margin-top:10px;"><strong>Jobs:</strong> See pending orders, generate pick lists, check in customers, handle issues.</p>
+        <p style="font-size:13px;"><strong>Success:</strong> Pick list accuracy 99%, check-in &lt;30s, zero lost orders.</p>
+      </div>
+
+      <div class="persona-card">
+        <div class="role">Tertiary &mdash; Admin</div>
+        <h4>Admin (Carlo / Gather Team)</h4>
+        <div class="detail">Manages products on behalf of 70+ vendors in MVP</div>
+        <blockquote>&ldquo;I need to add products, toggle availability, and see basic reports.&rdquo;</blockquote>
+        <p style="font-size:13px; margin-top:10px;"><strong>Jobs:</strong> Add/edit products with photos, toggle availability, set pickup times, view sales reports.</p>
+        <p style="font-size:13px;"><strong>Success:</strong> Product added in &lt;2 min, availability updated in 1 click.</p>
+      </div>
+    </div>
+
+    <p style="font-size:13px; color:var(--dash-muted);">Full persona research with demographics, pain points, and UX implications: <a href="research/PERSONAS.md">research/PERSONAS.md</a></p>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 5. MVP SCOPE -->
+  <!-- ============================================================ -->
+  <section id="mvp-scope">
+    <h2>5. MVP Scope (Phase 1)</h2>
+
+    <h3>In Scope</h3>
+    <table>
+      <thead>
+        <tr><th>Feature</th><th>Priority</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Customer storefront</strong></td><td><span class="phase-badge priority-p0">P0</span></td><td>Browse, search, filter products. Category navigation, vendor pages.</td></tr>
+        <tr><td><strong>Shopping cart</strong></td><td><span class="phase-badge priority-p0">P0</span></td><td>Multi-vendor cart, persistent (localStorage), grouped by vendor.</td></tr>
+        <tr><td><strong>Checkout</strong></td><td><span class="phase-badge priority-p0">P0</span></td><td>Guest checkout, Stripe (card + Apple Pay + Google Pay), pickup time slot selection.</td></tr>
+        <tr><td><strong>Order confirmation</strong></td><td><span class="phase-badge priority-p0">P0</span></td><td>Confirmation page + email with QR code, pickup details, calendar add.</td></tr>
+        <tr><td><strong>Staff order dashboard</strong></td><td><span class="phase-badge priority-p0">P0</span></td><td>View/filter/manage all orders. Status tabs: Pending, Packed, Picked Up, Issues.</td></tr>
+        <tr><td><strong>Pick lists</strong></td><td><span class="phase-badge priority-p0">P0</span></td><td>Per-vendor printable pick lists grouped by product. PDF download.</td></tr>
+        <tr><td><strong>Customer check-in</strong></td><td><span class="phase-badge priority-p0">P0</span></td><td>QR scanner + manual lookup fallback. Mark orders as picked up.</td></tr>
+        <tr><td><strong>Admin product management</strong></td><td><span class="phase-badge priority-p0">P0</span></td><td>CRUD for products with photo upload. Vendor management. Category management.</td></tr>
+        <tr><td><strong>Issue resolution</strong></td><td><span class="phase-badge priority-p0">P0</span></td><td>Mark items unavailable, substitutions, partial/full refunds via Stripe.</td></tr>
+        <tr><td><strong>Payments &amp; vendor payouts</strong></td><td><span class="phase-badge priority-p0">P0</span></td><td>Stripe Connect (Express). Multi-vendor split payments. Weekly ACH payouts.</td></tr>
+        <tr><td><strong>Basic reporting</strong></td><td><span class="phase-badge priority-p1">P1</span></td><td>Orders, revenue, top products. Vendor payables CSV export.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Explicitly Out of Scope (Phase 2+)</h3>
+    <table>
+      <thead>
+        <tr><th>Feature</th><th>Phase</th><th>Reason</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Vendor self-service portal</td><td><span class="phase-badge phase-2">Phase 2</span></td><td>Requires vendor onboarding UX; team manages products in MVP</td></tr>
+        <tr><td>Customer accounts</td><td><span class="phase-badge phase-2">Phase 2</span></td><td>Guest checkout sufficient for MVP; reduces friction</td></tr>
+        <tr><td>SNAP/EBT processing</td><td><span class="phase-badge phase-3">Phase 3</span></td><td>Complex regulatory integration</td></tr>
+        <tr><td>Market manager dashboard (SaaS)</td><td><span class="phase-badge phase-3">Phase 3</span></td><td>After marketplace is proven</td></tr>
+        <tr><td>Multi-market support</td><td><span class="phase-badge phase-2">Phase 2</span></td><td>Focus on Berwyn first</td></tr>
+        <tr><td>Native mobile apps</td><td><span class="phase-badge phase-4">Phase 4</span></td><td>Web-first; responsive design sufficient</td></tr>
+        <tr><td>Delivery</td><td><span class="phase-badge phase-4">Never</span></td><td>Pickup-only model by design</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 6. FEATURE DOMAINS -->
+  <!-- ============================================================ -->
+  <section id="feature-domains">
+    <h2>6. Feature Domains &amp; Key Features</h2>
+
+    <p>The MVP is organized into 11 feature domains. Each is summarized below with key features. Full feature-level specs with priority/complexity ratings are in the linked documents.</p>
+
+    <!-- F1: Storefront -->
+    <h3>F1: Customer Storefront</h3>
+    <p><strong>Goal:</strong> Customers can browse, search, and discover products from 70+ vendors in a modern, Instacart-style shopping experience.</p>
+    <table>
+      <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Market homepage</td><td>Hero, categories, featured products, vendor showcase, search bar, order cutoff banner</td></tr>
+        <tr><td>Product listing &amp; grid</td><td>Responsive grid with product cards (photo, name, vendor, price, quick-add). Pagination.</td></tr>
+        <tr><td>Filtering &amp; sorting</td><td>Category, vendor, dietary (organic, vegan, etc.), availability. Sort by popular, price, vendor.</td></tr>
+        <tr><td>Product detail page</td><td>Large photo, description, dietary tags, vendor info, quantity selector, &ldquo;From this vendor&rdquo; section.</td></tr>
+        <tr><td>Vendor pages</td><td>Vendor photo, story, all products. Vendor directory with A&ndash;Z listing.</td></tr>
+        <tr><td>Search</td><td>Product name, description, vendor name search with debounce. Empty state handling.</td></tr>
+        <tr><td>Market closed state</td><td>Display when not accepting orders (off-season, cutoff passed).</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px; color:var(--dash-muted);">Full spec: <a href="docs/CUSTOMER_FEATURES.md">docs/CUSTOMER_FEATURES.md</a> (508 features across all phases, 230 P0 for MVP)</p>
+
+    <!-- F2: Shopping Cart -->
+    <h3>F2: Shopping Cart</h3>
+    <p><strong>Goal:</strong> Multi-vendor cart that feels simple despite complexity. Persistent across sessions.</p>
+    <table>
+      <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Cart page</td><td>Items grouped by vendor with subtotals. Quantity selectors, remove buttons.</td></tr>
+        <tr><td>Cart icon badge</td><td>Real-time item count in header. Updates on add.</td></tr>
+        <tr><td>Cart persistence</td><td>localStorage for guest carts. 7-day expiry.</td></tr>
+        <tr><td>Stock validation</td><td>Real-time check for item availability. Warning if item became unavailable.</td></tr>
+        <tr><td>Service fee display</td><td>Clear fee breakdown: subtotal + service fee = total.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- F3: Checkout -->
+    <h3>F3: Checkout &amp; Payment</h3>
+    <p><strong>Goal:</strong> Single-page checkout. Guest checkout. Stripe payments (card + Apple Pay + Google Pay). Pickup time slot selection.</p>
+    <table>
+      <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Contact information</td><td>Email (required), name (required), phone (optional). No account needed.</td></tr>
+        <tr><td>Pickup time slots</td><td>Select date + time window. Show remaining slot capacity.</td></tr>
+        <tr><td>Stripe Elements</td><td>Embedded card input. Apple Pay / Google Pay buttons.</td></tr>
+        <tr><td>Order cutoff enforcement</td><td>Prevent checkout after cutoff time (e.g., Friday 8pm for Saturday market).</td></tr>
+        <tr><td>Payment processing</td><td>PaymentIntent with multi-vendor split data. Idempotency keys. Webhook handling.</td></tr>
+        <tr><td>Error handling</td><td>Inline errors for declined cards. Retry without re-entering info.</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px; color:var(--dash-muted);">Full payments spec: <a href="docs/PAYMENTS_AND_PAYOUTS.md">docs/PAYMENTS_AND_PAYOUTS.md</a></p>
+
+    <!-- F4: Order Confirmation -->
+    <h3>F4: Order Confirmation</h3>
+    <p><strong>Goal:</strong> Customer receives clear confirmation with QR code for market-day pickup.</p>
+    <table>
+      <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Confirmation page</td><td>Success message, order number (#BFM-2025-0042), large QR code, pickup details.</td></tr>
+        <tr><td>Confirmation email</td><td>Instant email with QR code image, pickup details, order summary, calendar links.</td></tr>
+        <tr><td>Order lookup page</td><td>Token-based URL for guests to view order status and QR code.</td></tr>
+        <tr><td>Add to calendar</td><td>Google Calendar, Apple Calendar, .ics download buttons.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- F5: Staff Operations Dashboard -->
+    <h3>F5: Staff Operations Dashboard</h3>
+    <p><strong>Goal:</strong> 2&ndash;4 staff manage weekly orders from receipt through pickup. Works on tablets at the market.</p>
+    <table>
+      <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Orders list view</td><td>Filterable table: order #, customer, pickup time, items, total, status. Tab navigation by status.</td></tr>
+        <tr><td>Order detail view</td><td>Customer info, items grouped by vendor with pack checkboxes, status timeline, actions.</td></tr>
+        <tr><td>Status management</td><td>Pending &rarr; Packed &rarr; Picked Up &rarr; Complete. Issue flags separate from status.</td></tr>
+        <tr><td>Quick stats header</td><td>Orders today, packed count, picked up count, issues count.</td></tr>
+        <tr><td>Bulk actions</td><td>Multi-select orders for bulk &ldquo;Mark Packed&rdquo; or &ldquo;Generate Pick Lists&rdquo;.</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px; color:var(--dash-muted);">Full spec: <a href="docs/OPERATIONS_DASHBOARD_SPEC.md">docs/OPERATIONS_DASHBOARD_SPEC.md</a></p>
+
+    <!-- F6: Pick Lists -->
+    <h3>F6: Pick List System</h3>
+    <p><strong>Goal:</strong> Generate consolidated, printable pick lists grouped by vendor for market-day order fulfillment.</p>
+    <table>
+      <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Pick list generator</td><td>Select date + vendors. Consolidated view: same products grouped across orders.</td></tr>
+        <tr><td>Print-optimized output</td><td>B&amp;W, clean margins, checkboxes for packing. Vendor name, date, item counts.</td></tr>
+        <tr><td>PDF download</td><td>Downloadable PDF per vendor for email distribution.</td></tr>
+        <tr><td>Bulk print</td><td>One-click to print all vendor pick lists.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- F7: Customer Check-in -->
+    <h3>F7: Customer Check-in</h3>
+    <p><strong>Goal:</strong> Fast, reliable customer pickup processing via QR code scanning.</p>
+    <table>
+      <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>QR scanner</td><td>Camera-based scanner. Shows order summary on successful scan.</td></tr>
+        <tr><td>Manual fallback</td><td>Search by order #, customer name, phone, or email when QR fails.</td></tr>
+        <tr><td>Complete pickup</td><td>One-tap to mark order picked up. Recent check-ins list.</td></tr>
+        <tr><td>Error states</td><td>Already picked up, cancelled, wrong date, not packed warnings.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- F8: Issue Resolution -->
+    <h3>F8: Issue Resolution</h3>
+    <p><strong>Goal:</strong> Handle unavailable items, substitutions, and refunds gracefully.</p>
+    <table>
+      <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Mark item unavailable</td><td>Flag item with resolution: refund, substitute, or contact customer.</td></tr>
+        <tr><td>Substitution flow</td><td>Search/select replacement. Auto-handle price differences (refund if cheaper).</td></tr>
+        <tr><td>Refund processing</td><td>Full or partial refunds via Stripe. Reason codes. Customer email notification.</td></tr>
+        <tr><td>No-show handling</td><td>End-of-day view of unpicked orders. Contact actions, hold, or refund.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- F9: Admin Product Management -->
+    <h3>F9: Admin Product Management</h3>
+    <p><strong>Goal:</strong> Gather team manages 500+ products across 70+ vendors efficiently.</p>
+    <table>
+      <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Product CRUD</td><td>Create/edit/delete products. Fields: name, vendor, category, price, unit type, description, photo, dietary tags.</td></tr>
+        <tr><td>Photo upload</td><td>Drag-and-drop with auto-compression (max 1MB, 1200px). WebP conversion. Thumbnails.</td></tr>
+        <tr><td>Availability management</td><td>Binary toggle (In Stock / Out of Stock). Quick toggle from list view. Bulk toggle per vendor.</td></tr>
+        <tr><td>Vendor management</td><td>CRUD for vendor profiles: name, photo, description, contact, active status.</td></tr>
+        <tr><td>Category management</td><td>CRUD for categories. Drag-and-drop reordering. Predefined dietary tags.</td></tr>
+        <tr><td>Search &amp; filters</td><td>Search by name. Filter by vendor, category, availability. Combined filters.</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px; color:var(--dash-muted);">Full spec: <a href="docs/ADMIN_FEATURES.md">docs/ADMIN_FEATURES.md</a></p>
+
+    <!-- F10: Admin Settings -->
+    <h3>F10: Admin Market Configuration</h3>
+    <table>
+      <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Market profile</td><td>Name, logo, address, description, contact info.</td></tr>
+        <tr><td>Pickup configuration</td><td>Market days, hours, time slots, max orders per slot, order cutoff time.</td></tr>
+        <tr><td>Fee configuration</td><td>Service fee type (%, flat, or none) and amount. Optional minimum order.</td></tr>
+        <tr><td>Staff management</td><td>Invite users. Roles: Admin, Staff, Check-in Only.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- F11: Payments & Payouts -->
+    <h3>F11: Payments &amp; Vendor Payouts</h3>
+    <p><strong>Platform:</strong> Stripe Connect with Express accounts. Stripe handles KYC, vendor dashboards, 1099-K filing.</p>
+    <table>
+      <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Customer payment</td><td>Single charge via PaymentIntent. Multi-vendor split data. PCI via Stripe Elements.</td></tr>
+        <tr><td>Vendor onboarding</td><td>Stripe-hosted Express onboarding. Bank account + identity verification.</td></tr>
+        <tr><td>Payout calculation</td><td>Vendor share = item sales &minus; platform commission. Refund adjustments.</td></tr>
+        <tr><td>Weekly payouts</td><td>ACH transfers every Monday for prior week's completed orders. 2-day hold after pickup.</td></tr>
+        <tr><td>Refund processing</td><td>Full/partial/item-level refunds. Deducted from vendor's next payout.</td></tr>
+        <tr><td>Chargeback handling</td><td>Webhook notifications. Evidence collection (QR pickup proof). Platform absorbs costs in MVP.</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px; color:var(--dash-muted);">Full payments spec: <a href="docs/PAYMENTS_AND_PAYOUTS.md">docs/PAYMENTS_AND_PAYOUTS.md</a></p>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 7. DATA MODEL -->
+  <!-- ============================================================ -->
+  <section id="data-model">
+    <h2>7. Data Model</h2>
+
+    <p>Core entities and their relationships. See PRD.md for complete field definitions and indexes.</p>
+
+    <div class="diagram">
+<pre>Market (1)
+├── has many → Vendor (70+)
+│   └── has many → Product (500+)
+│       └── belongs to → Category
+├── has many → PickupSlot
+├── has many → Order
+│   ├── has many → OrderItem
+│   │   ├── references → Product (snapshot)
+│   │   └── references → Vendor
+│   ├── references → PickupSlot
+│   └── has one → Payment
+│       └── has many → Refund
+├── has many → User (staff/admin)
+└── has many → VendorStripeAccount</pre>
+    </div>
+
+    <h3>Key Entities</h3>
+    <table>
+      <thead><tr><th>Entity</th><th>Key Fields</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Market</strong></td>
+          <td>id, name, slug, address, lat/lng, settings (jsonb)</td>
+          <td>Single market in MVP. Settings stores fees, hours, cutoff times.</td>
+        </tr>
+        <tr>
+          <td><strong>Vendor</strong></td>
+          <td>id, market_id, name, slug, description, photo_url, is_active</td>
+          <td>70+ vendors. Soft-delete via is_active flag.</td>
+        </tr>
+        <tr>
+          <td><strong>Product</strong></td>
+          <td>id, vendor_id, category_id, name, slug, price, unit_type, photo_url, dietary_tags[], is_available</td>
+          <td>500+ SKUs. Binary availability toggle. Unit types: each, lb, oz, pint, bunch, dozen.</td>
+        </tr>
+        <tr>
+          <td><strong>Category</strong></td>
+          <td>id, market_id, name, slug, sort_order, icon</td>
+          <td>Produce, Meat, Dairy, Eggs, Baked Goods, Prepared Foods, Beverages, Plants, Crafts, Other.</td>
+        </tr>
+        <tr>
+          <td><strong>PickupSlot</strong></td>
+          <td>id, market_id, date, start_time, end_time, max_orders, current_orders</td>
+          <td>Configurable slots (e.g., 1-hour windows). Capacity enforcement.</td>
+        </tr>
+        <tr>
+          <td><strong>Order</strong></td>
+          <td>id, market_id, order_number, customer_email/name/phone, pickup_slot_id, status, subtotal, service_fee, total, stripe_payment_id, qr_code</td>
+          <td>Status: pending &rarr; packed &rarr; picked_up &rarr; cancelled. QR code is unique token.</td>
+        </tr>
+        <tr>
+          <td><strong>OrderItem</strong></td>
+          <td>id, order_id, product_id, vendor_id, product_name (snapshot), quantity, unit_price (snapshot), line_total, status</td>
+          <td>Snapshots price/name at order time. Status: pending, packed, unavailable, substituted.</td>
+        </tr>
+        <tr>
+          <td><strong>Payment</strong></td>
+          <td>id, order_id, stripe_payment_intent_id, amount_cents, platform_fee_cents, status</td>
+          <td>One payment per order. Captures immediately.</td>
+        </tr>
+        <tr>
+          <td><strong>Payout</strong></td>
+          <td>id, vendor_id, stripe_payout_id, amount_cents, period_start/end, status</td>
+          <td>Weekly batch payouts. Status: pending, in_transit, paid, failed.</td>
+        </tr>
+        <tr>
+          <td><strong>Refund</strong></td>
+          <td>id, order_id, order_item_id, stripe_refund_id, amount_cents, reason, status</td>
+          <td>Item-level and full-order refunds. Deducted from vendor payout.</td>
+        </tr>
+        <tr>
+          <td><strong>User</strong></td>
+          <td>id, email, password_hash, name, role (admin/staff/check_in), market_id</td>
+          <td>Staff authentication only in MVP. No customer accounts.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Performance Indexes</h3>
+<pre><code>CREATE INDEX idx_products_vendor ON products(vendor_id);
+CREATE INDEX idx_products_category ON products(category_id);
+CREATE INDEX idx_products_available ON products(is_available) WHERE is_available = true;
+CREATE INDEX idx_orders_market_status ON orders(market_id, status);
+CREATE INDEX idx_orders_pickup_slot ON orders(pickup_slot_id);
+CREATE INDEX idx_order_items_order ON order_items(order_id);
+CREATE INDEX idx_order_items_vendor ON order_items(vendor_id);</code></pre>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 8. API SPEC -->
+  <!-- ============================================================ -->
+  <section id="api-spec">
+    <h2>8. API Specification</h2>
+
+    <h3>Public Endpoints (Customer-Facing)</h3>
+<pre><code>GET  /api/markets/:slug                    → Market info, categories, featured
+GET  /api/markets/:slug/products           → Paginated products with filters
+     ?category=produce&vendor=mitchell-farm&dietary=organic&search=tomatoes
+     &sort=popular|price_asc|price_desc&limit=20&offset=0
+GET  /api/markets/:slug/products/:slug     → Product detail
+GET  /api/markets/:slug/vendors            → All active vendors
+GET  /api/markets/:slug/vendors/:slug      → Vendor detail with products
+GET  /api/markets/:slug/pickup-slots?date= → Available slots with capacity
+POST /api/markets/:slug/orders             → Create order + process payment
+     Body: { items, customer, pickup_slot_id, payment_method_id }
+GET  /api/orders/:id?token=abc123          → Order details (token for guests)</code></pre>
+
+    <h3>Staff Endpoints (Authenticated)</h3>
+<pre><code>GET   /api/admin/orders                    → Orders list with filters
+GET   /api/admin/orders/:id                → Order detail
+PATCH /api/admin/orders/:id                → Update order status
+PATCH /api/admin/orders/:id/items/:itemId  → Update item status (packed/unavailable)
+GET   /api/admin/pick-lists?date=          → Pick lists grouped by vendor
+POST  /api/admin/check-in                  → Validate QR, mark as picked up</code></pre>
+
+    <h3>Admin Endpoints (Authenticated)</h3>
+<pre><code>CRUD  /api/admin/products                  → Product management
+POST  /api/admin/products/bulk             → Bulk actions
+CRUD  /api/admin/vendors                   → Vendor management
+CRUD  /api/admin/categories                → Category management
+GET   /api/admin/reports/summary           → Orders, revenue, top products
+PATCH /api/admin/settings/market           → Market configuration
+PATCH /api/admin/settings/pickup           → Pickup slot configuration</code></pre>
+
+    <h3>Payment Endpoints</h3>
+<pre><code>POST  /api/checkout/create-payment-intent  → Stripe PaymentIntent with splits
+POST  /api/webhooks/stripe                 → payment.succeeded, charge.refunded, charge.dispute.*
+POST  /api/admin/refunds                   → Process refund
+GET   /api/admin/payouts                   → List pending/completed payouts</code></pre>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 9. TECHNICAL ARCHITECTURE -->
+  <!-- ============================================================ -->
+  <section id="tech-architecture">
+    <h2>9. Technical Architecture</h2>
+
+    <h3>Stack</h3>
+    <table>
+      <thead><tr><th>Layer</th><th>Technology</th><th>Rationale</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Framework</strong></td><td>Next.js 14 (App Router)</td><td>SSR for SEO, API routes, modern React</td></tr>
+        <tr><td><strong>Language</strong></td><td>TypeScript</td><td>Type safety, better DX</td></tr>
+        <tr><td><strong>Styling</strong></td><td>Tailwind CSS + shadcn/ui</td><td>Fast development, consistent design system</td></tr>
+        <tr><td><strong>Database</strong></td><td>PostgreSQL</td><td>Relational, proven, works with Prisma</td></tr>
+        <tr><td><strong>ORM</strong></td><td>Prisma</td><td>Type-safe queries, migrations, seeding</td></tr>
+        <tr><td><strong>Auth</strong></td><td>NextAuth.js or Clerk</td><td>Staff/admin sessions. No customer auth in MVP.</td></tr>
+        <tr><td><strong>Payments</strong></td><td>Stripe Connect (Express)</td><td>Multi-vendor splits, vendor payouts, Apple/Google Pay</td></tr>
+        <tr><td><strong>Hosting</strong></td><td>Vercel</td><td>Easy Next.js deployment, preview URLs, edge functions</td></tr>
+        <tr><td><strong>Database Hosting</strong></td><td>Supabase or Railway</td><td>Managed Postgres, easy setup, affordable</td></tr>
+        <tr><td><strong>Email</strong></td><td>Resend or SendGrid</td><td>Transactional emails (confirmation, reminders, refunds)</td></tr>
+        <tr><td><strong>File Storage</strong></td><td>Cloudflare R2 or AWS S3</td><td>Product images. CDN for fast delivery.</td></tr>
+        <tr><td><strong>Analytics</strong></td><td>Mixpanel or PostHog</td><td>Funnel tracking, user behavior</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Architecture Diagram</h3>
+    <div class="diagram">
+<pre>┌──────────────────────────────────────────────────────────────┐
+│                          VERCEL                               │
+│  ┌─────────────────┐    ┌─────────────────┐                  │
+│  │  Next.js App    │    │   API Routes    │                  │
+│  │  (React SSR)    │───▶│   (/api/...)    │                  │
+│  └─────────────────┘    └────────┬────────┘                  │
+└──────────────────────────────────┼────────────────────────────┘
+                                   │
+         ┌─────────────────────────┼──────────────────────────┐
+         │                         ▼                          │
+         │  ┌──────────┐   ┌──────────┐   ┌──────────┐       │
+         │  │ Postgres │   │  Stripe  │   │  Resend  │       │
+         │  │(Supabase)│   │ Connect  │   │  Emails  │       │
+         │  └──────────┘   └──────────┘   └──────────┘       │
+         │                                                    │
+         │  ┌──────────┐   ┌──────────┐                       │
+         │  │ R2 / S3  │   │ Mixpanel │                       │
+         │  │ (images) │   │ (events) │                       │
+         │  └──────────┘   └──────────┘                       │
+         │                  EXTERNAL SERVICES                  │
+         └─────────────────────────────────────────────────────┘</pre>
+    </div>
+
+    <h3>Project Structure</h3>
+<pre><code>gather-app/
+├── app/
+│   ├── [marketSlug]/
+│   │   ├── page.tsx                  # Homepage
+│   │   ├── products/page.tsx         # Product listing
+│   │   ├── products/[slug]/page.tsx  # Product detail
+│   │   ├── vendors/[slug]/page.tsx   # Vendor page
+│   │   ├── cart/page.tsx             # Cart
+│   │   ├── checkout/page.tsx         # Checkout
+│   │   └── orders/[id]/confirmation/ # Order confirmation
+│   ├── admin/
+│   │   ├── layout.tsx                # Auth wrapper
+│   │   ├── orders/page.tsx           # Staff dashboard
+│   │   ├── products/page.tsx         # Product management
+│   │   ├── pick-lists/page.tsx       # Pick list generator
+│   │   └── check-in/page.tsx         # QR check-in
+│   ├── api/                          # API routes
+│   └── layout.tsx
+├── components/
+│   ├── ui/                           # shadcn components
+│   ├── products/                     # Product components
+│   ├── cart/                         # Cart components
+│   ├── checkout/                     # Checkout components
+│   └── admin/                        # Admin components
+├── lib/
+│   ├── db.ts                         # Prisma client
+│   ├── stripe.ts                     # Stripe helpers
+│   ├── email.ts                      # Email helpers
+│   └── utils.ts
+├── prisma/
+│   ├── schema.prisma                 # Database schema
+│   └── seed.ts                       # Seed data (70+ vendors, products)
+└── styles/globals.css</code></pre>
+
+    <h3>Key Technical Requirements</h3>
+    <table>
+      <thead><tr><th>Requirement</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Mobile-first</strong></td><td>70%+ traffic expected on mobile. Touch targets 48px min. Thumb-friendly layouts.</td></tr>
+        <tr><td><strong>Performance</strong></td><td>FCP &lt;1.5s, LCP &lt;2.5s, TTI &lt;3.5s, CLS &lt;0.1, Lighthouse &gt;90.</td></tr>
+        <tr><td><strong>Image optimization</strong></td><td>WebP format, responsive sizes, lazy loading. Product photos are central to UX.</td></tr>
+        <tr><td><strong>Accessibility</strong></td><td>WCAG 2.1 AA. Keyboard navigable. Screen reader friendly. 4.5:1 contrast.</td></tr>
+        <tr><td><strong>Real-time updates</strong></td><td>WebSocket or polling for new orders on staff dashboard.</td></tr>
+        <tr><td><strong>PCI compliance</strong></td><td>Stripe Elements handles all card data. Server never sees card numbers.</td></tr>
+        <tr><td><strong>QR scanning</strong></td><td>html5-qrcode or zxing-js library. Camera-based. Works on tablets.</td></tr>
+        <tr><td><strong>Print optimization</strong></td><td>CSS print media queries for pick lists. B&amp;W, clean margins.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 10. DESIGN REQUIREMENTS -->
+  <!-- ============================================================ -->
+  <section id="design-requirements">
+    <h2>10. Design Requirements</h2>
+
+    <h3>Three Distinct Interfaces</h3>
+    <table>
+      <thead><tr><th>Interface</th><th>Design Philosophy</th><th>Font</th><th>Min Touch Target</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Consumer Marketplace</strong></td><td>Instacart-fresh, image-forward, thumb-first</td><td>DM Sans</td><td>44px</td></tr>
+        <tr><td><strong>Staff Dashboard</strong></td><td>Notion-clean, data-dense, keyboard-first</td><td>Inter</td><td>44px</td></tr>
+        <tr><td><strong>Admin Panel</strong></td><td>Shopify-inspired, efficient, form-focused</td><td>Inter</td><td>44px</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Color Palette (Summary)</h3>
+    <table>
+      <thead><tr><th>Color</th><th>Hex</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td style="background:#2D5016;color:#fff;padding:4px 12px;border-radius:4px;">Sage 700</td><td><code>#2D5016</code></td><td>Primary actions, dashboard</td></tr>
+        <tr><td style="background:#4A7C28;color:#fff;padding:4px 12px;border-radius:4px;">Sage 500</td><td><code>#4A7C28</code></td><td>Marketplace accent</td></tr>
+        <tr><td style="background:#FFB300;color:#000;padding:4px 12px;border-radius:4px;">Gold 400</td><td><code>#FFB300</code></td><td>CTAs, highlights</td></tr>
+        <tr><td style="background:#3DDC97;color:#000;padding:4px 12px;border-radius:4px;">Mint 500</td><td><code>#3DDC97</code></td><td>Success, &ldquo;Add to Cart&rdquo;</td></tr>
+        <tr><td style="background:#FF6B6B;color:#fff;padding:4px 12px;border-radius:4px;">Coral 500</td><td><code>#FF6B6B</code></td><td>Errors, issues</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Performance Targets</h3>
+    <table>
+      <thead><tr><th>Metric</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr><td>First Contentful Paint</td><td>&lt;1.5s</td></tr>
+        <tr><td>Largest Contentful Paint</td><td>&lt;2.5s</td></tr>
+        <tr><td>Time to Interactive</td><td>&lt;3.5s</td></tr>
+        <tr><td>Cumulative Layout Shift</td><td>&lt;0.1</td></tr>
+        <tr><td>Lighthouse Score</td><td>&gt;90</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:13px; color:var(--dash-muted);">Full brand guide: <a href="brand/BRAND_GUIDE.md">brand/BRAND_GUIDE.md</a></p>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 11. FULL ROADMAP -->
+  <!-- ============================================================ -->
+  <section id="roadmap">
+    <h2>11. Full Roadmap (All Phases)</h2>
+
+    <h3>Phase 1: MVP &mdash; Consumer Marketplace <span class="phase-badge phase-mvp">Months 1&ndash;6</span></h3>
+    <p><strong>Goal:</strong> Prove customers will buy online at Berwyn Farmers Market.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4>Month 1 &mdash; Foundation</h4>
+        <p>Design system, wireframes, database schema, project setup, Stripe account, seed data.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>Month 2 &mdash; Storefront</h4>
+        <p>Homepage, product listing, product detail, vendor pages, search, filtering.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>Month 3 &mdash; Commerce</h4>
+        <p>Cart, checkout, Stripe integration (card + Apple/Google Pay), order confirmation, email.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>Month 4 &mdash; Operations</h4>
+        <p>Staff dashboard, pick lists, QR check-in, issue resolution, refunds.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>Month 5 &mdash; Admin &amp; Payments</h4>
+        <p>Product management, market settings, vendor payouts, basic reporting.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>Month 6 &mdash; Launch</h4>
+        <p>QA, Berwyn pilot, vendor onboarding (Stripe Connect), iterate on feedback.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <strong>MVP Success Criteria</strong>
+      $50K GMV in first season &bull; 500+ unique customers &bull; $59 avg basket &bull; 40% repeat rate &bull; &lt;5 min avg pickup time
+    </div>
+
+    <h3>Phase 2: Vendor Self-Service &amp; Multi-Market <span class="phase-badge phase-2">Months 7&ndash;12</span></h3>
+    <p><strong>Goal:</strong> Vendors manage their own products. Scale to 10 markets.</p>
+    <table>
+      <thead><tr><th>Feature Domain</th><th>Key Features</th></tr></thead>
+      <tbody>
+        <tr><td>Vendor portal</td><td>Login, product management, order view, availability control, earnings dashboard, payout history.</td></tr>
+        <tr><td>Customer accounts</td><td>Registration, order history, favorites, reorder, dietary preferences.</td></tr>
+        <tr><td>Multi-market</td><td>Infrastructure for multiple markets. Admin market switching. Vendor multi-market presence.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Targets:</strong> 10 markets, $500K monthly GMV, 70% vendors self-managing.</p>
+
+    <h3>Phase 3: Market Management SaaS <span class="phase-badge phase-3">Months 13&ndash;18</span></h3>
+    <p><strong>Goal:</strong> Become indispensable to market operations. 100 markets.</p>
+    <table>
+      <thead><tr><th>Feature Domain</th><th>Key Features</th></tr></thead>
+      <tbody>
+        <tr><td>Vendor management SaaS</td><td>Digital applications, stall assignments, compliance tracking, automated fee collection.</td></tr>
+        <tr><td>SNAP/EBT</td><td>Accept SNAP benefits. Token system. USDA reporting.</td></tr>
+        <tr><td>Grant reporting</td><td>USDA FMPP/LFPP templates. Auto-compiled metrics. Economic impact calculator.</td></tr>
+        <tr><td>Communications</td><td>Broadcast email/SMS. Announcements. Vendor notifications.</td></tr>
+        <tr><td>Analytics</td><td>Vendor performance, customer analytics, product trends, financial dashboards.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Targets:</strong> 100 markets, 20+ hrs/week saved per manager, $250K ARR.</p>
+
+    <h3>Phase 4: Platform Ecosystem <span class="phase-badge phase-4">Months 19&ndash;24</span></h3>
+    <p><strong>Goal:</strong> Network effects. Series A ready. 500+ markets.</p>
+    <table>
+      <thead><tr><th>Feature Domain</th><th>Key Features</th></tr></thead>
+      <tbody>
+        <tr><td>Native apps</td><td>iOS + Android for customers and vendors.</td></tr>
+        <tr><td>Growth features</td><td>Loyalty program, subscription boxes, personalized recommendations, reviews.</td></tr>
+        <tr><td>Platform</td><td>Public API, Zapier/QuickBooks integrations, white-label, self-service market onboarding.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Targets:</strong> 500 markets, $3M monthly GMV, Series A fundraise.</p>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 12. DETAILED SPECS -->
+  <!-- ============================================================ -->
+  <section id="detailed-specs">
+    <h2>12. Detailed Specification Documents</h2>
+
+    <p>Each document below contains exhaustive feature-level specifications with priority ratings (P0/P1/P2), complexity estimates, acceptance criteria, and UX wireframes.</p>
+
+    <div class="doc-links">
+      <a class="doc-link" href="PRD.md">
+        <div class="file-icon">&#128203;</div>
+        <div>
+          <div class="file-name">PRD.md</div>
+          <div class="file-desc">Full PRD &mdash; features, user flows, data model, API spec, architecture</div>
+        </div>
+      </a>
+      <a class="doc-link" href="docs/FEATURE_ROADMAP.md">
+        <div class="file-icon">&#128736;</div>
+        <div>
+          <div class="file-name">FEATURE_ROADMAP.md</div>
+          <div class="file-desc">180 MVP features across 11 domains + Phases 2&ndash;4 features</div>
+        </div>
+      </a>
+      <a class="doc-link" href="docs/CUSTOMER_FEATURES.md">
+        <div class="file-icon">&#128722;</div>
+        <div>
+          <div class="file-name">CUSTOMER_FEATURES.md</div>
+          <div class="file-desc">508 customer-facing features &mdash; storefront, cart, checkout, confirmation</div>
+        </div>
+      </a>
+      <a class="doc-link" href="docs/OPERATIONS_DASHBOARD_SPEC.md">
+        <div class="file-icon">&#128203;</div>
+        <div>
+          <div class="file-name">OPERATIONS_DASHBOARD_SPEC.md</div>
+          <div class="file-desc">Staff dashboard, pick lists, QR check-in, issue resolution</div>
+        </div>
+      </a>
+      <a class="doc-link" href="docs/ADMIN_FEATURES.md">
+        <div class="file-icon">&#9881;</div>
+        <div>
+          <div class="file-name">ADMIN_FEATURES.md</div>
+          <div class="file-desc">Product management, vendor management, categories, settings</div>
+        </div>
+      </a>
+      <a class="doc-link" href="docs/PAYMENTS_AND_PAYOUTS.md">
+        <div class="file-icon">&#128179;</div>
+        <div>
+          <div class="file-name">PAYMENTS_AND_PAYOUTS.md</div>
+          <div class="file-desc">Stripe Connect, multi-vendor payments, payouts, refunds, chargebacks</div>
+        </div>
+      </a>
+      <a class="doc-link" href="docs/REPORTING_AND_ANALYTICS.md">
+        <div class="file-icon">&#128200;</div>
+        <div>
+          <div class="file-name">REPORTING_AND_ANALYTICS.md</div>
+          <div class="file-desc">Reporting for operators, vendors, and internal analytics</div>
+        </div>
+      </a>
+      <a class="doc-link" href="brand/BRAND_GUIDE.md">
+        <div class="file-icon">&#127912;</div>
+        <div>
+          <div class="file-name">BRAND_GUIDE.md</div>
+          <div class="file-desc">Brand voice, color palette, typography, component design system</div>
+        </div>
+      </a>
+      <a class="doc-link" href="research/PERSONAS.md">
+        <div class="file-icon">&#128100;</div>
+        <div>
+          <div class="file-name">PERSONAS.md</div>
+          <div class="file-desc">User personas: Margaret (manager), Victor (vendor), Catherine (customer)</div>
+        </div>
+      </a>
+      <a class="doc-link" href="research/COMPETITIVE_ANALYSIS.md">
+        <div class="file-icon">&#128269;</div>
+        <div>
+          <div class="file-name">COMPETITIVE_ANALYSIS.md</div>
+          <div class="file-desc">6 competitors analyzed: FarmDrop, Market Wagon, WhatsGood, LFM, Local Line</div>
+        </div>
+      </a>
+      <a class="doc-link" href="research/BUSINESS_MODEL.md">
+        <div class="file-icon">&#128176;</div>
+        <div>
+          <div class="file-name">BUSINESS_MODEL.md</div>
+          <div class="file-desc">Revenue model, pricing tiers, KPIs, unit economics, GTM strategy</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>Scope Alignment Note</strong>
+      Some supporting documents (CLAUDE.md, BUSINESS_MODEL.md) describe an alternative Phase 1 focused on market management SaaS rather than the consumer marketplace. <strong>PRD.md is the source of truth.</strong> The MVP is the consumer marketplace described in this document. Market management SaaS features are Phase 3.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 13. SUCCESS METRICS -->
+  <!-- ============================================================ -->
+  <section id="success-metrics">
+    <h2>13. Success Metrics</h2>
+
+    <h3>North Star Metric</h3>
+    <p><strong>Monthly GMV (Gross Merchandise Value)</strong></p>
+
+    <h3>MVP Targets (Month 6 / First Season)</h3>
+    <table>
+      <thead><tr><th>Metric</th><th>Target</th><th>How Measured</th></tr></thead>
+      <tbody>
+        <tr><td>Monthly GMV</td><td>$50,000</td><td>Stripe dashboard</td></tr>
+        <tr><td>Monthly orders</td><td>800&ndash;1,000</td><td>Database</td></tr>
+        <tr><td>Average basket</td><td>$59</td><td>Total GMV / Orders</td></tr>
+        <tr><td>Unique customers</td><td>500+</td><td>Unique emails</td></tr>
+        <tr><td>Repeat rate (30-day)</td><td>40%</td><td>Cohort analysis</td></tr>
+        <tr><td>Cart completion</td><td>70%+</td><td>Analytics funnel</td></tr>
+        <tr><td>Customer satisfaction</td><td>4.8/5</td><td>Post-order survey</td></tr>
+        <tr><td>Pickup time</td><td>&lt;5 min</td><td>Staff tracking</td></tr>
+        <tr><td>Vendor participation</td><td>30+ of 70</td><td>Admin count</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Conversion Funnel Targets</h3>
+    <table>
+      <thead><tr><th>Stage</th><th>Target Rate</th></tr></thead>
+      <tbody>
+        <tr><td>Homepage &rarr; Product view</td><td>&gt;40%</td></tr>
+        <tr><td>Product view &rarr; Add to cart</td><td>&gt;10%</td></tr>
+        <tr><td>Add to cart &rarr; Checkout</td><td>&gt;60%</td></tr>
+        <tr><td>Checkout &rarr; Complete</td><td>&gt;85%</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:13px; color:var(--dash-muted);">Full reporting spec: <a href="docs/REPORTING_AND_ANALYTICS.md">docs/REPORTING_AND_ANALYTICS.md</a></p>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 14. RISKS & OPEN QUESTIONS -->
+  <!-- ============================================================ -->
+  <section id="risks">
+    <h2>14. Risks &amp; Open Questions</h2>
+
+    <h3>Risks &amp; Mitigations</h3>
+    <table>
+      <thead><tr><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Low customer adoption</strong></td><td>Medium</td><td>High</td><td>Pre-launch waitlist (500+); $10 first-order credit; market-day promotion</td></tr>
+        <tr><td><strong>Vendor resistance</strong></td><td>Medium</td><td>Medium</td><td>Start with 10 willing vendors; show sales data; team manages products initially</td></tr>
+        <tr><td><strong>Bad product photos</strong></td><td>High</td><td>Medium</td><td>Photo guidelines for staff; offer to photograph products; AI enhancement (P2)</td></tr>
+        <tr><td><strong>Inventory inaccuracy</strong></td><td>High</td><td>High</td><td>Conservative availability; easy &ldquo;sold out&rdquo; toggle; clear substitution flow</td></tr>
+        <tr><td><strong>Market-day tech issues</strong></td><td>Medium</td><td>High</td><td>Offline fallback mode (P2); paper backup pick lists; thorough pre-launch testing</td></tr>
+        <tr><td><strong>Stripe payment failures</strong></td><td>Low</td><td>High</td><td>Retry logic; clear error messages; manual fallback</td></tr>
+        <tr><td><strong>Staff training gaps</strong></td><td>Medium</td><td>Medium</td><td>Simple UI; video tutorials; on-site support at launch</td></tr>
+        <tr><td><strong>Spotty market WiFi</strong></td><td>High</td><td>Medium</td><td>Test on-site connectivity; hotspot backup; service worker caching (P2)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Open Questions (Need Decisions Before Build)</h3>
+
+    <h4>Product Decisions</h4>
+    <table>
+      <thead><tr><th>#</th><th>Question</th><th>Options</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Service fee model?</td><td>5% of order / Flat $3 / Free at launch</td></tr>
+        <tr><td>2</td><td>Minimum order amount?</td><td>$15 / $20 / No minimum</td></tr>
+        <tr><td>3</td><td>Substitution policy?</td><td>Vendor substitutes / Auto-refund / Customer approval</td></tr>
+        <tr><td>4</td><td>Allow tips for vendors?</td><td>Yes (at checkout) / Yes (post-pickup) / No</td></tr>
+        <tr><td>5</td><td>Order cutoff time?</td><td>Friday 8pm / Saturday 8am / Configurable</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Operations Decisions</h4>
+    <table>
+      <thead><tr><th>#</th><th>Question</th><th>Options</th></tr></thead>
+      <tbody>
+        <tr><td>6</td><td>Pickup logistics?</td><td>Centralized tent / Per-vendor pickup</td></tr>
+        <tr><td>7</td><td>Who packs orders?</td><td>Vendors pre-pack / Staff collects</td></tr>
+        <tr><td>8</td><td>Platform commission rate?</td><td>2.5% / 8% / 8% + $1.50 flat</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Technical Decisions</h4>
+    <table>
+      <thead><tr><th>#</th><th>Question</th><th>Options</th></tr></thead>
+      <tbody>
+        <tr><td>9</td><td>Domain?</td><td>gather.market / getgather.com / custom</td></tr>
+        <tr><td>10</td><td>Auth solution?</td><td>NextAuth.js / Clerk / Custom</td></tr>
+        <tr><td>11</td><td>Database host?</td><td>Supabase / Railway / Neon</td></tr>
+        <tr><td>12</td><td>Who absorbs Stripe processing fees?</td><td>Platform / Vendors / Split</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 15. COMPETITIVE LANDSCAPE -->
+  <!-- ============================================================ -->
+  <section id="competitive-landscape">
+    <h2>15. Competitive Landscape</h2>
+
+    <table>
+      <thead><tr><th>Platform</th><th>Model</th><th>Pricing</th><th>Gap We Fill</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Local Food Marketplace</strong><br><span style="font-size:12px;color:var(--dash-muted);">Est. 2009, bootstrapped</span></td>
+          <td>SaaS platform for markets</td>
+          <td>$149/mo, no tx fees</td>
+          <td>No market management tools. Dated UX. No Instacart-style experience.</td>
+        </tr>
+        <tr>
+          <td><strong>Market Wagon</strong><br><span style="font-size:12px;color:var(--dash-muted);">$14.7M Series A</span></td>
+          <td>Marketplace + delivery</td>
+          <td>~25% commission</td>
+          <td>Delivery-only (no pickup). No market management. 25% commission too high for vendors.</td>
+        </tr>
+        <tr>
+          <td><strong>WhatsGood</strong><br><span style="font-size:12px;color:var(--dash-muted);">~$1M rev (yr 2)</span></td>
+          <td>White-label marketplace</td>
+          <td>Undisclosed</td>
+          <td>No integrated market management. Limited checkout. Slow growth.</td>
+        </tr>
+        <tr>
+          <td><strong>FarmDrop</strong><br><span style="font-size:12px;color:var(--dash-muted);">Grant-funded, 10 markets</span></td>
+          <td>Hub-manager marketplace</td>
+          <td>5% + Stripe fees</td>
+          <td>Limited to ME/NY. Nonprofit-dependent. No management SaaS.</td>
+        </tr>
+        <tr>
+          <td><strong>Barn2Door</strong><br><span style="font-size:12px;color:var(--dash-muted);">$19.5M raised</span></td>
+          <td>Individual farm e-commerce</td>
+          <td>$99&ndash;299/mo per farm</td>
+          <td>No multi-vendor cart. No market management. Farms need own marketing.</td>
+        </tr>
+        <tr>
+          <td><strong>Local Line</strong><br><span style="font-size:12px;color:var(--dash-muted);">Chipotle-backed, 13K farms</span></td>
+          <td>Farm SaaS e-commerce</td>
+          <td>From $29/mo</td>
+          <td>Serves farms, not markets. No multi-vendor marketplace for consumers.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-success">
+      <strong>Gather's Unique Position</strong>
+      No competitor integrates market management, vendor tools, AND consumer marketplace. The market management SaaS (Phase 3) is completely uncontested in this competitive set.
+    </div>
+
+    <p style="font-size:13px; color:var(--dash-muted);">Full competitive analysis: <a href="research/COMPETITIVE_ANALYSIS.md">research/COMPETITIVE_ANALYSIS.md</a></p>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 16. BUSINESS MODEL -->
+  <!-- ============================================================ -->
+  <section id="business-model">
+    <h2>16. Business Model &amp; Unit Economics</h2>
+
+    <h3>Revenue Model</h3>
+    <table>
+      <thead><tr><th>Revenue Stream</th><th>Rate</th><th>Phase</th></tr></thead>
+      <tbody>
+        <tr><td>Marketplace transaction fee</td><td>2.5% on all consumer orders</td><td>MVP</td></tr>
+        <tr><td>Service fee (to customer)</td><td>TBD: flat $3 or 5%</td><td>MVP</td></tr>
+        <tr><td>SaaS subscriptions (market managers)</td><td>$49&ndash;$299/mo tiered</td><td>Phase 3</td></tr>
+        <tr><td>Vendor subscriptions (optional)</td><td>$29&ndash;$99/mo</td><td>Phase 4</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Unit Economics</h3>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="value">16:1</div>
+        <div class="label">LTV:CAC Ratio</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">~5 mo</div>
+        <div class="label">Payback Period</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">80%+</div>
+        <div class="label">Gross Margin</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">30&ndash;40</div>
+        <div class="label">Markets to Breakeven</div>
+      </div>
+    </div>
+
+    <h3>Long-Term Targets</h3>
+    <table>
+      <thead><tr><th>Timeframe</th><th>Markets</th><th>ARR</th></tr></thead>
+      <tbody>
+        <tr><td>Year 1</td><td>100</td><td>$250K</td></tr>
+        <tr><td>Year 3</td><td>300</td><td>$1M</td></tr>
+        <tr><td>Year 5</td><td>500+</td><td>$2&ndash;3M</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:13px; color:var(--dash-muted);">Full business model: <a href="research/BUSINESS_MODEL.md">research/BUSINESS_MODEL.md</a></p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="doc-footer">
+    <p>Gather &mdash; Product Requirements Document v2.0 &bull; February 14, 2026</p>
+    <p>Prepared for technical review. Source: <a href="PRD.md" style="color:var(--sage-500);">PRD.md</a></p>
+    <p style="margin-top:8px;">&ldquo;Good things from good people.&rdquo;</p>
+  </footer>
+
+</div>
+</body>
+</html>

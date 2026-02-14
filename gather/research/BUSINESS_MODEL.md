@@ -20,7 +20,7 @@
 - Value demonstrated within first market day
 - Free tier captures small markets, upgrades when they grow
 
-### 1.2 Marketplace Transaction Fees (Phase 2)
+### 1.2 Marketplace Transaction Fees (Phase 1+)
 
 | Fee Type | Rate | Notes |
 |----------|------|-------|
@@ -40,28 +40,27 @@
 
 ## 2. Key Performance Indicators (KPIs)
 
-### Phase 1: Market Management (Months 1-6)
+### Phase 1: Consumer Marketplace MVP (Months 1-6)
 
 | Metric | Target | Rationale |
 |--------|--------|-----------|
-| Markets onboarded | 20 | Validate product-market fit |
-| Weekly active markets | 70% of onboarded | Retention indicator |
-| Manager time savings | 20 hrs/week per market | Core value proposition |
-| Vendor satisfaction | NPS >50 | Adoption predictor |
-| ARR | $36K | ($150/month avg × 20 markets) |
-| Product listings | 50+ per vendor | Data foundation for marketplace |
-
-### Phase 2: Consumer Marketplace (Months 7-12)
-
-| Metric | Target | Rationale |
-|--------|--------|-----------|
-| Markets | 100 | Scale validation |
-| Marketplace GMV | $500K/month | Revenue driver |
-| Online basket size | $59 average | Industry benchmark |
-| ARR | $250K | Seed-stage milestone |
+| Target market | Berwyn (1 market) | Prove marketplace model |
+| GMV | $50K first season | Revenue validation |
+| Unique customers | 500+ | Adoption validation |
+| Online basket size | $59 average | Industry benchmark (2-4x walk-up) |
+| Repeat rate | 40% | Habit formation |
 | Browse-to-buy conversion | >3% | E-commerce standard |
 | Cart abandonment | <30% | Below industry avg (70%) |
-| Monthly repeat rate | 40% | Habit formation |
+| Pickup time | <5 min average | Operational efficiency |
+
+### Phase 2: Vendor Self-Service (Months 7-12)
+
+| Metric | Target | Rationale |
+|--------|--------|-----------|
+| Markets | 10 | Scale validation |
+| Marketplace GMV | $500K/month | Revenue driver |
+| Vendors self-managing | 70% | Reduced ops burden |
+| ARR | $250K | Seed-stage milestone |
 
 ### Long-term Targets
 
@@ -220,12 +219,14 @@ Priority states based on direct-to-consumer sales volume:
 
 ## 7. Development Timeline
 
+> **Source of truth:** PRD.md
+
 | Phase | Months | Key Deliverables | Market Target |
 |-------|--------|------------------|---------------|
-| **Foundation** | 1-3 | Vendor management, fees, communications | 5 pilots |
-| **Enhancement** | 4-6 | SNAP/EBT, grant reporting, analytics | 20 paying |
-| **Marketplace MVP** | 7-9 | Consumer browsing, cart, checkout | Berwyn test |
-| **Scale & Polish** | 10-12 | Mobile apps, recommendations, loyalty | 100 markets |
+| **Phase 1: Marketplace MVP** | 1-6 | Storefront, cart, checkout, staff ops dashboard, pick lists, check-in, admin product management | Berwyn launch |
+| **Phase 2: Vendor Self-Service** | 7-12 | Vendor portal, product management, order notifications, customer accounts | 10 markets |
+| **Phase 3: Market Manager Dashboard** | 13-18 | Vendor applications, fee collection, SNAP/EBT, grant reporting, communications | 100 markets |
+| **Phase 4: Platform Ecosystem** | 19-24 | Native apps, loyalty, recommendations, API, white-label | 500 markets |
 
 ---
 
@@ -246,4 +247,4 @@ Priority states based on direct-to-consumer sales volume:
 
 ---
 
-*Last updated: February 2025*
+*Last updated: February 2026. Aligned with PRD.md phasing (marketplace-first MVP).*
