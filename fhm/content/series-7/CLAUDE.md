@@ -37,21 +37,41 @@ This is the Series 7 exam preparation framework, built using the same organizati
 
 ## Framework Structure
 
+The project uses a **chapter-based content pipeline** matching the Kaplan textbook structure (Chapters 1-19). Content flows through 4 phases: **INTAKE → EXTRACT → TRANSFORM → PUBLISH**.
+
 ```
 series-7/
 ├── CLAUDE.md                    # This file - main instructions
 ├── README.md                    # User-facing guide
 │
-├── section-01-seeks-business/   # 9% of exam (~11 questions)
-├── section-02-opens-accounts/   # 11% of exam (~14 questions)
-├── section-03-provides-info/    # 73% of exam (~91 questions) ← THE BIG ONE
-├── section-04-processes-transactions/  # 7% of exam (~9 questions)
+├── chapters/                    # Chapter-based content pipeline
+│   ├── ch-01-equities/
+│   │   ├── screenshots/         # Source screenshots (gitignored, NEVER publish)
+│   │   ├── raw-notes.md         # INTAKE: extracted facts from source material
+│   │   └── content/
+│   │       └── chapter-01-equities.md  # TRANSFORM: FHM-voice markdown
+│   ├── ch-02-debt-fundamentals/
+│   ├── ...                      # Ch 3-12, 14-19 (Ch 13 pending)
+│   └── ch-19-suitability/
 │
+├── templates/                   # Reusable content templates
 ├── study-tools/                 # Progress tracking, formulas, schedules
 ├── practice-exams/              # Full practice exams
-├── resources/                   # Glossary, cheat sheets, references
-└── templates/                   # Reusable content templates
+└── resources/                   # Glossary, cheat sheets, references
 ```
+
+### Published HTML Pages (in `/fhm/pages/series-7/`)
+
+18 of 19 chapters published. All connected via prev/next navigation chain.
+Study tools: formula sheet, flashcards, progress tracker, study schedule, common mistakes, exam prep, practice exam, audio library.
+
+### Content Pipeline Status
+
+| Chapter | Status |
+|---------|--------|
+| Ch 1-12 | Published |
+| Ch 13 | Pending source materials |
+| Ch 14-19 | Published |
 
 ---
 

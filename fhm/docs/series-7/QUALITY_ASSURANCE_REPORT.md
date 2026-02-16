@@ -147,28 +147,24 @@ Other subsections can use the SECTION_CLAUDE.md guidance plus templates. If they
 
 ## 📋 Known Limitations
 
-### Content Completion Status
+### Content Completion Status (Updated February 2026)
 
-| Section | Status | Notes |
-|---------|--------|-------|
-| Section 1: Seeks Business | ~15% | Overview + 1 lesson + instruction file |
-| Section 2: Opens Accounts | ~5% | Instruction file only |
-| Section 3: Provides Info | ~5% | Overview + Options subsection started |
-| Section 4: Processes Transactions | ~5% | Instruction file only |
+The project has shifted to a chapter-based content pipeline. Current status:
 
-**This is expected for an initial framework.** The structure is complete; content will be added incrementally.
+| Component | Status | Notes |
+|-----------|--------|-------|
+| Chapter HTML pages | 18 of 19 published | Ch 13 pending source materials |
+| Chapter markdown content | 18 of 19 complete | Full INTAKE→EXTRACT→TRANSFORM→PUBLISH pipeline |
+| Navigation chain | Complete | All 18 chapters linked sequentially + hub |
+| Formula Sheet | Comprehensive | Options (T-chart, spreads, straddles), Bond Yield Seesaw, YTM approximation |
+| Flashcards | 280 cards generated | Target: 530-670 cards |
+| Practice Exams | 1 of 5 created | exam-01 with 30 questions |
 
-### Practice Exams
+### Remaining Work
 
-- Only 1 practice exam created (exam-01)
-- Recommendation: Create exams 02-05 as content is added
-- Each exam should be 30 questions proportioned by weight
-
-### Flashcards
-
-- Template exists but no flashcard files created yet
-- Recommendation: Create flashcards as each topic is completed
-- Prioritize Options and Margin flashcards
+- **Chapter 13** — Awaiting source materials
+- **Practice Exams 2-5** — Create as study progresses
+- **Flashcard expansion** — 280 of ~600 target cards created
 
 ---
 
@@ -217,58 +213,37 @@ Other subsections can use the SECTION_CLAUDE.md guidance plus templates. If they
 
 ---
 
-## 🎯 Next Steps for Drew
+## 🎯 Next Steps
 
-### Immediate (This Week)
+### Immediate
 
-1. **Review the Framework**
-   - Read SERIES_7_FRAMEWORK_COMPLETE.md for overview
-   - Explore folder structure
-   - Review sample lessons for voice/quality
+1. **Chapter 13** — Publish when source materials are provided
+2. **Study using published materials** — 18 chapters + formula sheet + flashcards are live
 
-2. **Validate Voice Alignment**
-   - Confirm content matches your expectations for FHM
-   - Note any adjustments needed
+### Short-Term
 
-### Short-Term (Next 2-4 Weeks)
+3. **Expand flashcard decks** — 280 cards created, target 530-670
+4. **Create Practice Exams 2-5** — Proportioned by exam weight
 
-3. **Begin Content Creation**
-   - Priority 1: Complete Options subsection (25-30% of exam)
-   - Priority 2: Municipal Bonds content
-   - Priority 3: Margin Accounts
+### Medium-Term
 
-4. **Start Studying**
-   - Follow study-schedule.md
-   - Use available content while more is being created
-   - Track progress in progress-tracker.md
-
-### Medium-Term (Month 2+)
-
-5. **Expand Practice Materials**
-   - Create Practice Exams 2-5
-   - Build flashcard decks for each topic
-   - Add more calculation worksheets
-
-6. **Complete Remaining Sections**
-   - Section 1: Prospecting and communications
-   - Section 2: Account types and suitability
-   - Section 4: Order handling and settlement
+5. **Add calculation drill pages** — Interactive practice for options, margin, bonds
 
 ---
 
-## 📈 Content Completion Estimates
+## 📈 Content Completion Estimates (Updated February 2026)
 
 | Component | Complete | Remaining |
 |-----------|----------|-----------|
-| **Section 1** | 15% | 85% (~6 lessons) |
-| **Section 2** | 5% | 95% (~8 lessons) |
-| **Section 3** | 5% | 95% (~50+ lessons across 11 subsections) |
-| **Section 4** | 5% | 95% (~5 lessons) |
-| **Study Tools** | 100% | 0% |
-| **Practice Exams** | 20% | 80% (need 4 more) |
-| **Flashcards** | 0% | 100% (template ready) |
-| **Templates** | 100% | 0% |
-| **Documentation** | 100% | 0% |
+| **Chapter HTML pages** | 95% (18/19) | Ch 13 pending |
+| **Chapter markdown** | 95% (18/19) | Ch 13 pending |
+| **Navigation** | 100% | All pages linked |
+| **Study Tools** | 100% | 8 tools published |
+| **Formula Sheet** | 100% | Comprehensive (options, bonds, critical numbers) |
+| **Practice Exams** | 20% | Need exams 2-5 |
+| **Flashcards** | ~47% | 280 of ~600 target |
+| **Templates** | 100% | All templates ready |
+| **Documentation** | 100% | All docs updated |
 
 ---
 
@@ -299,5 +274,6 @@ The framework is structurally complete, brand-compliant, and ready for content e
 ---
 
 *Quality assurance completed: January 6, 2026*
+*Status updated: February 15, 2026*
 *Verified by: Claude*
-*Status: APPROVED*
+*Status: APPROVED — 18 of 19 chapters published*

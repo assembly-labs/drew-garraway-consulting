@@ -485,4 +485,31 @@ Fourth Layer:
 
 ---
 
-*Ready for Drew's review alongside SERIES_7_FOLDER_STRUCTURE.md and TEMPLATE_SPECIFICATIONS.md*
+---
+
+## Implementation Status (Updated February 2026)
+
+The original section-based planning model above guided content priorities. The actual implementation uses a **chapter-based pipeline** (Chapters 1-19, matching Kaplan textbook structure).
+
+### What's Been Built
+
+| Component | Status |
+|-----------|--------|
+| 18 of 19 chapter HTML pages | Published and live |
+| Comprehensive formula sheet | Options (T-chart, all strategies), Bond Yield Seesaw, YTM, critical numbers |
+| 280 flashcards | Generated across all published chapters |
+| Full navigation chain | All 18 chapters linked sequentially |
+| Hub page | All chapters accessible |
+
+### Content Pipeline
+
+Each chapter follows: **INTAKE** (screenshots/notes) → **EXTRACT** (raw-notes.md) → **TRANSFORM** (chapter markdown in FHM voice) → **PUBLISH** (HTML page with glossary, summary, navigation)
+
+### Remaining
+
+- Chapter 13: awaiting source materials
+- Practice exams 2-5
+- Flashcard expansion (280 of ~600 target)
+
+*Strategy document created: January 6, 2026*
+*Status updated: February 15, 2026*

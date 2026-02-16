@@ -719,25 +719,69 @@ fhm/content/series-7/
 
 ---
 
-## HTML Pages Structure (Future)
+## HTML Pages Structure (Live)
+
+All HTML pages are flat in `/fhm/pages/series-7/` (no subdirectories):
 
 ```
 fhm/pages/series-7/
-├── series-7-study-materials.html          # Main hub
-├── series-7-flashcards.html               # Flashcard practice
-├── series-7-practice-exam.html            # Practice tests
-├── series-7-formula-drill.html            # Calculation practice
-├── series-7-progress.html                 # Progress tracking
-│
-├── section-01/                            # Section 1 pages
-├── section-02/                            # Section 2 pages
-├── section-03/                            # Section 3 pages (most pages here)
-│   ├── equity/
-│   ├── debt/
-│   ├── municipal/
-│   ├── options/                           # Deep structure here
-│   ├── [etc]/
-└── section-04/                            # Section 4 pages
+├── series-7-study-materials.html              # Hub page (links to all chapters)
+├── series-7-chapter-01-equities.html          # Ch 1
+├── series-7-chapter-02-debt-fundamentals.html # Ch 2
+├── series-7-chapter-03-additional-bond-features.html
+├── series-7-chapter-04-corporate-government-debt.html
+├── series-7-chapter-05-municipal-money-market.html
+├── series-7-chapter-06-packaged-products.html
+├── series-7-chapter-07-trading-markets.html
+├── series-7-chapter-08-trade-processing.html
+├── series-7-chapter-09-options-fundamentals.html
+├── series-7-chapter-10-index-options.html
+├── series-7-chapter-11-individual-customer-accounts.html
+├── series-7-chapter-12-other-account-types.html
+│   (Ch 13 pending)
+├── series-7-chapter-14-primary-market.html
+├── series-7-chapter-15-securities-exchange-act.html
+├── series-7-chapter-16-sro-rules.html
+├── series-7-chapter-17-investment-analysis.html
+├── series-7-chapter-18-taxation.html
+├── series-7-chapter-19-suitability.html       # Ch 19
+├── series-7-formula-sheet.html                # Comprehensive formula reference
+├── series-7-flashcards.html                   # Flashcard practice (280 cards)
+├── series-7-practice-exam.html                # 30-question practice test
+├── series-7-progress-tracker.html             # Interactive progress tracking
+├── series-7-study-schedule.html               # 10-week study plan
+├── series-7-common-mistakes.html              # 24 common errors
+├── series-7-exam-prep.html                    # Exam day checklist
+└── series-7-audio-library.html                # Chapter audio summaries
+```
+
+### Content Source Structure (Actual)
+
+```
+fhm/content/series-7/chapters/
+├── ch-01-equities/
+│   ├── screenshots/                    # Source screenshots (gitignored)
+│   ├── raw-notes.md                    # Extracted facts
+│   └── content/
+│       └── chapter-01-equities.md      # FHM-voice markdown
+├── ch-02-debt-fundamentals/
+│   └── ...
+├── ch-03-additional-bond-features-and-risks/
+├── ch-04-corporate-us-government-agency-debt/
+├── ch-05-municipal-debt-money-market-instruments/
+├── ch-06-packaged-products/
+├── ch-07-trading-markets/
+├── ch-08-trade-processing-settlement/
+├── ch-09-fundamentals-of-options/
+├── ch-10-index-options-advanced-strategies/
+├── ch-11-individual-customer-accounts/
+├── ch-12-other-account-types/
+├── ch-14-primary-market/
+├── ch-15-securities-exchange-act-1934-regulations/
+├── ch-16-sro-rules/
+├── ch-17-investment-analysis/
+├── ch-18-taxation/
+└── ch-19-suitability/
 ```
 
 ---
@@ -752,4 +796,6 @@ fhm/pages/series-7/
 
 ---
 
-*Ready for Drew's review before proceeding to Phase 3: Implementation*
+*Original structure planned: January 6, 2026*
+*Actual implementation uses chapter-based pipeline: Updated February 15, 2026*
+*Note: The section-based structure above was aspirational. The actual implementation uses the chapter-based structure documented in the "HTML Pages Structure" and "Content Source Structure" sections above.*

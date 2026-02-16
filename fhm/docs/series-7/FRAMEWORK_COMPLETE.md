@@ -181,42 +181,60 @@ cp ../../templates/flashcard-template.json flashcards-topic.json
 
 ---
 
-## Next Steps
+## Current Status (Updated February 2026)
 
-### Immediate Priority (Week 1-2)
+### Published HTML Chapters (18 of 19)
 
-1. **Complete Options Content** - Most heavily tested topic
-   - Options Fundamentals (4 lessons)
-   - Options Strategies (6 lessons)
-   - Options Calculations (3 lessons)
+The content pipeline has shifted from the original section-based model to a **chapter-based model** matching the Kaplan textbook structure. Content flows through a 4-phase pipeline: **INTAKE → EXTRACT → TRANSFORM → PUBLISH**.
 
-2. **Complete Municipal Bonds** - Second most tested
-   - GO vs Revenue bonds
-   - Tax-equivalent yield calculations
-   - MSRB rules
+| Chapter | Title | HTML | Markdown | Status |
+|---------|-------|------|----------|--------|
+| Ch 1 | Equities | Published | Complete | Live |
+| Ch 2 | Debt Fundamentals | Published | Complete | Live |
+| Ch 3 | Additional Bond Features | Published | Complete | Live |
+| Ch 4 | Corporate & Government Debt | Published | Complete | Live |
+| Ch 5 | Municipal Debt & Money Market | Published | Complete | Live |
+| Ch 6 | Packaged Products | Published | Complete | Live |
+| Ch 7 | Trading Markets | Published | Complete | Live |
+| Ch 8 | Trade Processing | Published | Complete | Live |
+| Ch 9 | Options Fundamentals | Published | Complete | Live |
+| Ch 10 | Index Options & Advanced Strategies | Published | Complete | Live |
+| Ch 11 | Individual Customer Accounts | Published | Complete | Live |
+| Ch 12 | Other Account Types | Published | Complete | Live |
+| Ch 13 | *(Pending)* | — | — | Not started |
+| Ch 14 | Primary Market | Published | Complete | Live |
+| Ch 15 | Securities Exchange Act | Published | Complete | Live |
+| Ch 16 | SRO Rules | Published | Complete | Live |
+| Ch 17 | Investment Analysis | Published | Complete | Live |
+| Ch 18 | Taxation | Published | Complete | Live |
+| Ch 19 | Suitability | Published | Complete | Live |
 
-3. **Complete Margin Accounts** - Calculation-heavy
-   - Regulation T
-   - SMA and buying power
-   - Maintenance requirements
+### Study Tools (All Published)
 
-### Medium Priority (Week 3-4)
+| Tool | Status |
+|------|--------|
+| Formula Sheet | Published (comprehensive: options T-chart, spreads, straddles, bond yield seesaw, YTM approximation) |
+| Flashcards | Published (280 cards) |
+| Study Schedule | Published |
+| Progress Tracker | Published |
+| Common Mistakes | Published |
+| Exam Day Prep | Published |
+| Practice Exam | Published (30 questions) |
+| Audio Library | Published |
 
-4. **Build remaining Section 3 subsections**
-   - Debt securities and yield calculations
-   - Investment companies (NAV calculations)
-   - Retirement plans
-   - Variable products
+### Navigation
 
-5. **Create Practice Exams 2-5**
-   - Each exam: 30 questions proportioned by weight
-   - Include calculation-heavy questions
+All 18 chapter pages are connected in a continuous prev/next chain:
+```
+Ch 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 → 12 → 14 → 15 → 16 → 17 → 18 → 19 → Hub
+```
+All chapters are accessible from the Series 7 Study Materials hub page.
 
-### Lower Priority (Week 5+)
+### Next Steps
 
-6. **Complete Sections 1, 2, and 4** (27% combined)
-7. **Create full flashcard decks**
-8. **Build HTML pages** for web delivery
+1. **Chapter 13** — Content pending from source materials
+2. **Additional practice exams** — Currently 1 of target 5
+3. **Expand flashcard decks** — Currently 280 cards of target 530-670
 
 ---
 
@@ -272,13 +290,13 @@ cp ../../templates/flashcard-template.json flashcards-topic.json
 
 | Metric | Count |
 |--------|-------|
-| Total folders created | 35+ |
+| Published HTML chapter pages | 18 |
+| Completed markdown chapters | 18 |
+| Flashcards generated | 280 |
+| Study tool pages | 8 |
+| Practice exam questions | 30 |
 | CLAUDE.md instruction files | 6 |
 | Template files | 4 |
-| Initial lessons | 3 |
-| Study tool documents | 3 |
-| Practice exam questions | 30 |
-| Detailed explanations | 30 |
 
 ---
 
@@ -333,4 +351,5 @@ The Series 7 Exam Prep Framework is ready for content expansion. The structure, 
 ---
 
 *Framework completed: 2026-01-06*
-*Branch: claude/series-7-exam-framework-V65nX*
+*Content pipeline operational: 2026-02-15*
+*18 of 19 chapters published*
