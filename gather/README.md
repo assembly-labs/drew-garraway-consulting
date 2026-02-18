@@ -1,44 +1,47 @@
-# Gather - Farmers Market Platform
+# Gather — Farmers Market Marketplace
 
-A comprehensive platform connecting buyers with farmers market vendors. Supports 8,140+ markets with multi-vendor shopping, SNAP/EBT payments, and market manager tools.
+"Instacart for farmers markets." Customers browse and order online, pick up at the market. Three-sided platform serving customers, vendors, and market managers.
 
-## Features
+**Target market:** Berwyn Farmers Market (MVP). Pickup-only, always.
 
-- Multi-vendor shopping cart
-- SNAP/EBT payment support
-- Market manager dashboard
-- Vendor management tools
-- Real-time inventory
+## What's In This Repo
 
-## Tech Stack
+A working **UI prototype** built with React 19 + Vite. Includes customer storefront (browse, search, cart, checkout) and operations dashboard (orders, pick lists, QR check-in). Uses mock data — no backend yet.
 
-- Next.js 14
-- Tailwind CSS
-- Shadcn/ui
-- React Hook Form
-- Zustand
-- PostgreSQL + Prisma
-- Stripe Connect
-- Vercel + AWS
+## Tech Stack (Prototype)
+
+- React 19 + TypeScript
+- Vite + React Router 7
+- Tailwind CSS v4
+- Lucide icons
+- Cloudflare Pages
 
 ## Getting Started
 
 ```bash
+cd prototype
 npm install
 npm run dev
 ```
 
-## Documentation
+## Project Structure
 
-| File | What's In It |
-|------|-------------|
-| `CLAUDE.md` | Routing guide — points to the right doc for any question |
-| `PRD.md` | Product requirements, data model, API spec, architecture |
-| `docs/FEATURE_SPEC.md` | All feature specs: customer, ops, admin, payments, reporting, phases 2-4 |
-| `research/BUSINESS_MODEL.md` | Revenue model, unit economics, GTM strategy |
-| `brand/BRAND_GUIDE.md` | Design system, brand voice, component patterns |
-| `research/dara-questionnaire-responses.md` | Real-world operations workflow from Dara |
+```
+gather/
+├── README.md               # This file
+├── prototype/              # React prototype app
+│   └── src/
+│       ├── pages/          # Customer pages (Home, Browse, Cart, Checkout, etc.)
+│       ├── pages/ops/      # Ops pages (Dashboard, Orders, PickLists, CheckIn)
+│       ├── components/     # Shared and ops-specific components
+│       ├── context/        # CartContext, OpsContext
+│       └── data/           # Mock products, vendors, categories, orders
+├── css/, js/, images/      # Static landing page assets
+└── robots.txt
+```
+
+Internal documentation (PRD, feature specs, brand guide, business model, research) is kept local-only and not tracked in git.
 
 ## Status
 
-Work-in-progress (Series Seed fundraising phase).
+Pre-launch. Prototype built, fundraising in progress.

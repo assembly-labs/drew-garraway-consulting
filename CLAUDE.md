@@ -46,7 +46,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | Cool Curriculum | React 19 + TS | CRA | Tailwind | TBD |
 | Prompt Property | Vanilla JS | N/A | CSS3 | TBD |
 | TPL | Vanilla HTML | N/A | Custom CSS | GitHub Pages |
-| Gather | Next.js 14 | Next.js | Tailwind | TBD |
+| Gather | React 19 + TS | Vite | Tailwind v4 | Cloudflare Pages |
 | Read Out Loud | Vanilla JS | N/A | Custom CSS | Cloudflare Pages |
 | Agency | Static HTML | N/A | Custom CSS | N/A |
 | Locally Strong | Static HTML | Tailwind CLI | Tailwind | Cloudflare Pages |
@@ -69,7 +69,7 @@ When you receive a task, first determine which project it belongs to. Look for:
 
 If the project has its own `CLAUDE.md`, read it before making changes:
 - `/TOMO/CLAUDE.md` - Comprehensive guide with design system, voice, deployment
-- `/gather/CLAUDE.md` - Complete context: product, personas, architecture, brand, business model
+- `/gather/CLAUDE.md` - Routing guide: points to PRD, feature specs, brand guide, business model
 - `/tpl/CLAUDE.md` - Style requirements, deployment, HTML conversion rules
 - `/fhm/CLAUDE.md` - Project overview, brand voice, content guides
 
