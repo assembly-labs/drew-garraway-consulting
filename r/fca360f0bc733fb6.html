@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="googlebot" content="noindex, nofollow">
+  <title>Gather &mdash; MVP v1.2 Technical Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sage-900: #1C3A13;
+      --sage-700: #2D5016;
+      --sage-500: #4A7C28;
+      --sage-400: #66A043;
+      --sage-200: #A5D6A7;
+      --sage-100: #C8E6C9;
+      --sage-50: #E8F5E9;
+      --gold-500: #FF9800;
+      --gold-200: #FFCC80;
+      --gold-100: #FFE082;
+      --gold-50: #FFF9C4;
+      --red-50: #FFF5F5;
+      --red-100: #FED7D7;
+      --red-500: #E53E3E;
+      --blue-50: #EBF8FF;
+      --blue-100: #BEE3F8;
+      --blue-500: #3182CE;
+      --text-primary: #1a1a1a;
+      --text-secondary: #4a4a4a;
+      --text-muted: #717171;
+      --border: #e2e8f0;
+      --bg-white: #ffffff;
+      --bg-warm: #FAFAFA;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-warm);
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--sage-200);
+    }
+    .header .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--sage-700);
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+    .header .subtitle {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .header .meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .header .meta strong { color: var(--text-secondary); }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-scope { background: var(--gold-50); color: #B45309; border: 1px solid var(--gold-200); }
+    .badge-p0 { background: var(--red-50); color: var(--red-500); border: 1px solid var(--red-100); }
+    .badge-p1 { background: var(--blue-50); color: var(--blue-500); border: 1px solid var(--blue-100); }
+
+    /* Summary boxes */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 24px 0 32px;
+    }
+    .summary-box {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+    .summary-box .number {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--sage-700);
+    }
+    .summary-box .label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+    .summary-box.highlight {
+      background: var(--sage-50);
+      border-color: var(--sage-200);
+    }
+    .summary-box.highlight .number { color: var(--sage-900); }
+
+    /* Sections */
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--sage-900);
+      margin-top: 40px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--sage-100);
+    }
+    h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--sage-700);
+      margin-top: 28px;
+      margin-bottom: 8px;
+    }
+    p {
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+    }
+    .note {
+      background: var(--gold-50);
+      border: 1px solid var(--gold-200);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: 13px;
+      margin: 16px 0;
+      color: var(--text-secondary);
+    }
+    .note strong { color: var(--text-primary); }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 13px;
+    }
+    th {
+      background: var(--sage-50);
+      color: var(--sage-900);
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 2px solid var(--sage-200);
+      white-space: nowrap;
+    }
+    th.right, td.right { text-align: right; }
+    th.center, td.center { text-align: center; }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr.subtotal td {
+      font-weight: 600;
+      background: var(--sage-50);
+      color: var(--sage-900);
+      border-top: 2px solid var(--sage-200);
+    }
+    tr.grand-total td {
+      font-weight: 700;
+      font-size: 14px;
+      background: var(--sage-100);
+      color: var(--sage-900);
+      border-top: 3px solid var(--sage-400);
+    }
+    tr.section-header td {
+      font-weight: 700;
+      font-size: 13px;
+      background: #f7fafc;
+      color: var(--sage-700);
+      border-top: 2px solid var(--border);
+      padding-top: 14px;
+    }
+    .feature-name { font-weight: 500; color: var(--text-primary); }
+    .priority { font-size: 11px; font-weight: 600; }
+    .p0 { color: var(--red-500); }
+    .p1 { color: var(--blue-500); }
+
+    /* Callout */
+    .callout {
+      background: var(--sage-50);
+      border-left: 4px solid var(--sage-500);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+    .callout p { margin-bottom: 8px; }
+    .callout p:last-child { margin-bottom: 0; }
+
+    ul { margin: 8px 0 16px 20px; }
+    li { margin-bottom: 6px; color: var(--text-secondary); }
+    li strong { color: var(--text-primary); }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 32px 0;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .wrapper { padding: 24px 16px 60px; }
+      table { font-size: 12px; }
+      th, td { padding: 8px 8px; }
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <div class="header">
+    <div class="logo">gather</div>
+    <div class="subtitle">MVP v1.2 &mdash; Technical Review &amp; Re-Estimate Request</div>
+    <div class="meta">
+      <strong>To:</strong> Tony (Technical Director / Lead Developer)<br>
+      <strong>From:</strong> Drew Garraway (Product Manager)<br>
+      <strong>Date:</strong> February 2026<br>
+      <strong>Re:</strong> Scope changes to Gather MVP based on operations research &mdash; need updated estimate
+    </div>
+  </div>
+
+  <!-- Context -->
+  <h2>What happened</h2>
+
+  <p>We completed an operations questionnaire with Dara Rose, the Operations Manager at Culinary Harvest (the team that runs Berwyn Farmers Market). Her responses revealed several critical workflows our original MVP spec didn't account for. I've reconciled her feedback against the v1.0 PRD and produced a v1.2 scope update.</p>
+
+  <p>The original MVP was scoped at <strong>180 features</strong> with an estimated <strong>250&ndash;350 hours</strong> of dev work (~$50K). The v1.2 update adds <strong>18 new features</strong> and modifies <strong>7 existing features</strong>. I need you to review the new scope and provide an updated estimate.</p>
+
+  <div class="summary-grid">
+    <div class="summary-box">
+      <div class="number">180</div>
+      <div class="label">v1.0 Features</div>
+    </div>
+    <div class="summary-box">
+      <div class="number">+18</div>
+      <div class="label">New Features</div>
+    </div>
+    <div class="summary-box">
+      <div class="number">7</div>
+      <div class="label">Modified Features</div>
+    </div>
+    <div class="summary-box highlight">
+      <div class="number">~198</div>
+      <div class="label">v1.2 Total</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>What I need from you:</strong> Review each feature below, sanity-check my hour estimates, and give me a revised total for the MVP. I've included my rough estimates as a starting point &mdash; feel free to adjust based on your assessment. I only need MVP pricing, not the full 24-month roadmap.
+  </div>
+
+  <hr>
+
+  <!-- A la carte estimate -->
+  <h2>New Features &mdash; A La Carte Estimates</h2>
+
+  <p>Each v1.2 feature is listed below with my initial estimates for design (Kenny) and dev/QA (you) hours. Adjust as needed. Features are grouped by domain and marked with priority.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Feature</th>
+        <th class="center">Priority</th>
+        <th class="right">Design (hrs)</th>
+        <th class="right">Dev/QA (hrs)</th>
+        <th class="right">Total (hrs)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Packing & Fulfillment -->
+      <tr class="section-header">
+        <td colspan="6">Packing &amp; Fulfillment</td>
+      </tr>
+      <tr>
+        <td>O64</td>
+        <td class="feature-name">Customer Packing Slips<br><span style="font-size:12px;color:var(--text-muted);">Per-customer slips grouped by time slot, items sorted by pick zone, checkboxes, tear-off bag labels. Batch print.</span></td>
+        <td class="center"><span class="priority p0">P0</span></td>
+        <td class="right">6</td>
+        <td class="right">16</td>
+        <td class="right">22</td>
+      </tr>
+      <tr>
+        <td>O65</td>
+        <td class="feature-name">Pick Zone Assignment<br><span style="font-size:12px;color:var(--text-muted);">Enum field on Product: Cold, Dry, Produce, Fragile, Other. Dropdown in product editor.</span></td>
+        <td class="center"><span class="priority p0">P0</span></td>
+        <td class="right">1</td>
+        <td class="right">2</td>
+        <td class="right">3</td>
+      </tr>
+
+      <!-- Vendor Purchase Orders -->
+      <tr class="section-header">
+        <td colspan="6">Vendor Purchase Orders</td>
+      </tr>
+      <tr>
+        <td>O66</td>
+        <td class="feature-name">Vendor PO Generator<br><span style="font-size:12px;color:var(--text-muted);">After order cutoff, auto-generate per-vendor POs with total quantities. Email or print to vendors.</span></td>
+        <td class="center"><span class="priority p0">P0</span></td>
+        <td class="right">4</td>
+        <td class="right">14</td>
+        <td class="right">18</td>
+      </tr>
+      <tr>
+        <td>O67</td>
+        <td class="feature-name">PO Confirmation Tracking<br><span style="font-size:12px;color:var(--text-muted);">Track vendor PO acknowledgment. Dashboard indicator, re-send option.</span></td>
+        <td class="center"><span class="priority p1">P1</span></td>
+        <td class="right">2</td>
+        <td class="right">4</td>
+        <td class="right">6</td>
+      </tr>
+
+      <!-- Automated Customer Messaging -->
+      <tr class="section-header">
+        <td colspan="6">Automated Customer Messaging</td>
+      </tr>
+      <tr>
+        <td>O68</td>
+        <td class="feature-name">Order Window Open Notification<br><span style="font-size:12px;color:var(--text-muted);">Email + SMS when ordering opens. Admin-configurable product highlight. Twilio + Resend integration.</span></td>
+        <td class="center"><span class="priority p0">P0</span></td>
+        <td class="right">4</td>
+        <td class="right">12</td>
+        <td class="right">16</td>
+      </tr>
+      <tr>
+        <td>O69</td>
+        <td class="feature-name">Order Deadline Reminder<br><span style="font-size:12px;color:var(--text-muted);">Email + SMS X hours before cutoff. Reuses O68 messaging infra.</span></td>
+        <td class="center"><span class="priority p0">P0</span></td>
+        <td class="right">1</td>
+        <td class="right">3</td>
+        <td class="right">4</td>
+      </tr>
+      <tr>
+        <td>O70</td>
+        <td class="feature-name">Pickup Day Reminder<br><span style="font-size:12px;color:var(--text-muted);">Email + SMS morning of pickup with customer's time slot. Reuses O68 infra.</span></td>
+        <td class="center"><span class="priority p0">P0</span></td>
+        <td class="right">1</td>
+        <td class="right">3</td>
+        <td class="right">4</td>
+      </tr>
+      <tr>
+        <td>O71</td>
+        <td class="feature-name">Customer SMS Preferences<br><span style="font-size:12px;color:var(--text-muted);">Opt-in at checkout, opt-out in every SMS. TCPA compliant. Customer entity stores prefs.</span></td>
+        <td class="center"><span class="priority p0">P0</span></td>
+        <td class="right">2</td>
+        <td class="right">4</td>
+        <td class="right">6</td>
+      </tr>
+
+      <!-- Collections -->
+      <tr class="section-header">
+        <td colspan="6">Collections System (Customer Storefront)</td>
+      </tr>
+      <tr>
+        <td>C56</td>
+        <td class="feature-name">Collections Page<br><span style="font-size:12px;color:var(--text-muted);">Dedicated page per collection: banner image, description, curated product grid.</span></td>
+        <td class="center"><span class="priority p0">P0</span></td>
+        <td class="right">6</td>
+        <td class="right">8</td>
+        <td class="right">14</td>
+      </tr>
+      <tr>
+        <td>C57</td>
+        <td class="feature-name">Collections Navigation<br><span style="font-size:12px;color:var(--text-muted);">Homepage carousel of collection cards. Nav dropdown integration.</span></td>
+        <td class="center"><span class="priority p0">P0</span></td>
+        <td class="right">4</td>
+        <td class="right">4</td>
+        <td class="right">8</td>
+      </tr>
+      <tr>
+        <td>C58</td>
+        <td class="feature-name">Curation Badges<br><span style="font-size:12px;color:var(--text-muted);">Product card badges: Limited Run, Award Winner, Carlo's Pick, etc.</span></td>
+        <td class="center"><span class="priority p1">P1</span></td>
+        <td class="right">3</td>
+        <td class="right">3</td>
+        <td class="right">6</td>
+      </tr>
+
+      <!-- Admin: Collections & Products -->
+      <tr class="section-header">
+        <td colspan="6">Admin: Collection &amp; Product Enhancements</td>
+      </tr>
+      <tr>
+        <td>A40</td>
+        <td class="feature-name">Collection Management (CRUD)<br><span style="font-size:12px;color:var(--text-muted);">Create/edit/delete collections. Banner upload, product drag-to-reorder, date ranges, active toggle.</span></td>
+        <td class="center"><span class="priority p0">P0</span></td>
+        <td class="right">6</td>
+        <td class="right">12</td>
+        <td class="right">18</td>
+      </tr>
+      <tr>
+        <td>A41</td>
+        <td class="feature-name">Product Pick Zone Field<br><span style="font-size:12px;color:var(--text-muted);">Dropdown added to product editor. Schema migration for pick_zone enum.</span></td>
+        <td class="center"><span class="priority p0">P0</span></td>
+        <td class="right">0</td>
+        <td class="right">1</td>
+        <td class="right">1</td>
+      </tr>
+      <tr>
+        <td>A42</td>
+        <td class="feature-name">Product Curation Badges<br><span style="font-size:12px;color:var(--text-muted);">Multi-select badge chips on product editor.</span></td>
+        <td class="center"><span class="priority p1">P1</span></td>
+        <td class="right">1</td>
+        <td class="right">2</td>
+        <td class="right">3</td>
+      </tr>
+      <tr>
+        <td>A43</td>
+        <td class="feature-name">Weekly Product Reset Workflow<br><span style="font-size:12px;color:var(--text-muted);">Bulk toggle all off, duplicate last week, per-vendor quick toggle.</span></td>
+        <td class="center"><span class="priority p1">P1</span></td>
+        <td class="right">4</td>
+        <td class="right">10</td>
+        <td class="right">14</td>
+      </tr>
+
+      <!-- Customer Relationship -->
+      <tr class="section-header">
+        <td colspan="6">Customer Relationship Features</td>
+      </tr>
+      <tr>
+        <td>O72</td>
+        <td class="feature-name">New Customer Badge<br><span style="font-size:12px;color:var(--text-muted);">Auto-flag first-time orders on dashboard. Requires Customer entity.</span></td>
+        <td class="center"><span class="priority p1">P1</span></td>
+        <td class="right">1</td>
+        <td class="right">3</td>
+        <td class="right">4</td>
+      </tr>
+      <tr>
+        <td>O73</td>
+        <td class="feature-name">Welcome Email (Auto)<br><span style="font-size:12px;color:var(--text-muted);">Auto-send branded welcome email to first-time customers. Template customizable.</span></td>
+        <td class="center"><span class="priority p1">P1</span></td>
+        <td class="right">2</td>
+        <td class="right">3</td>
+        <td class="right">5</td>
+      </tr>
+      <tr>
+        <td>O74</td>
+        <td class="feature-name">Customer Credit Tracker<br><span style="font-size:12px;color:var(--text-muted);">Store credit / items owed. New DB entity. Auto-apply at checkout. Dashboard view of outstanding credits.</span></td>
+        <td class="center"><span class="priority p1">P1</span></td>
+        <td class="right">4</td>
+        <td class="right">14</td>
+        <td class="right">18</td>
+      </tr>
+      <tr>
+        <td>O75</td>
+        <td class="feature-name">Comp Item Logger<br><span style="font-size:12px;color:var(--text-muted);">Log comps with reason codes. Tracked in reporting.</span></td>
+        <td class="center"><span class="priority p1">P1</span></td>
+        <td class="right">2</td>
+        <td class="right">4</td>
+        <td class="right">6</td>
+      </tr>
+
+      <!-- Subtotal: New Features -->
+      <tr class="subtotal">
+        <td colspan="3">Subtotal: 18 New Features</td>
+        <td class="right">54</td>
+        <td class="right">122</td>
+        <td class="right">176</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- Modified Features -->
+  <h2>Modified Existing Features &mdash; Additional Effort</h2>
+
+  <p>These 7 features already exist in v1.0 but need rework based on real operational workflows. I'm estimating the <strong>delta effort</strong> only (the additional hours on top of what was already planned).</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>What Changed</th>
+        <th class="right">Design (hrs)</th>
+        <th class="right">Dev/QA (hrs)</th>
+        <th class="right">Total (hrs)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="feature-name">C31: Phone Required</td>
+        <td>Phone field now required at checkout. Add SMS opt-in checkbox.</td>
+        <td class="right">1</td>
+        <td class="right">1</td>
+        <td class="right">2</td>
+      </tr>
+      <tr>
+        <td class="feature-name">O15: Order Detail</td>
+        <td>Add customer order count, first-time flag, internal notes, customer tags, "last-minute grab" item flags.</td>
+        <td class="right">4</td>
+        <td class="right">6</td>
+        <td class="right">10</td>
+      </tr>
+      <tr>
+        <td class="feature-name">O20: Staff Notes</td>
+        <td>Single text field &rarr; structured categories (picking, customer service, issues). Timestamped with author.</td>
+        <td class="right">3</td>
+        <td class="right">4</td>
+        <td class="right">7</td>
+      </tr>
+      <tr>
+        <td class="feature-name">O35: By-Order Pick List</td>
+        <td>Add time slot grouping, pick zone sorting within orders, checkboxes, bag label sections.</td>
+        <td class="right">4</td>
+        <td class="right">6</td>
+        <td class="right">10</td>
+      </tr>
+      <tr>
+        <td class="feature-name">O49: Unavailable Item Resolution</td>
+        <td>Add "credit to next order" as 4th resolution option. Connects to O74 credit tracker.</td>
+        <td class="right">1</td>
+        <td class="right">3</td>
+        <td class="right">4</td>
+      </tr>
+      <tr>
+        <td class="feature-name">A24-A27: Vendor Mgmt</td>
+        <td>Add fields: genre, availability notes, stall preference, special requirements, season dates.</td>
+        <td class="right">2</td>
+        <td class="right">3</td>
+        <td class="right">5</td>
+      </tr>
+      <tr>
+        <td class="feature-name">C1/F1.1: Homepage</td>
+        <td>"Featured products" &rarr; Collections carousel. Redesigned homepage hero/browse section.</td>
+        <td class="right">6</td>
+        <td class="right">4</td>
+        <td class="right">10</td>
+      </tr>
+
+      <tr class="subtotal">
+        <td colspan="2">Subtotal: 7 Feature Modifications</td>
+        <td class="right">21</td>
+        <td class="right">27</td>
+        <td class="right">48</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- Infrastructure -->
+  <h2>Infrastructure &amp; Data Model Additions</h2>
+
+  <p>The new features require foundational work that cuts across multiple features:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Description</th>
+        <th class="right">Dev/QA (hrs)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="feature-name">Customer Entity</td>
+        <td>New DB entity tracking order count, spend, notes, tags, SMS/email prefs. Required by O68-O75.</td>
+        <td class="right">6</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Collection + CollectionProduct Entities</td>
+        <td>New DB entities with schema, migrations, API routes. Required by C56-C57, A40.</td>
+        <td class="right">4</td>
+      </tr>
+      <tr>
+        <td class="feature-name">CustomerCredit Entity</td>
+        <td>Credits/items owed with status tracking. Required by O74.</td>
+        <td class="right">3</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Twilio SMS Integration</td>
+        <td>Twilio setup, message templates, opt-in/out handling, TCPA compliance. Required by O68-O71.</td>
+        <td class="right">10</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Scheduled Job Runner</td>
+        <td>Cron or serverless scheduled functions for automated messages (order open, deadline, pickup reminders). Vercel Cron or similar.</td>
+        <td class="right">6</td>
+      </tr>
+      <tr class="subtotal">
+        <td colspan="2">Subtotal: Infrastructure</td>
+        <td class="right">29</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- Grand Total -->
+  <h2>Estimated Total: v1.2 Delta</h2>
+
+  <div class="summary-grid">
+    <div class="summary-box">
+      <div class="number">75</div>
+      <div class="label">Design Hours (Kenny)</div>
+    </div>
+    <div class="summary-box">
+      <div class="number">178</div>
+      <div class="label">Dev/QA Hours (Tony)</div>
+    </div>
+    <div class="summary-box highlight">
+      <div class="number">253</div>
+      <div class="label">Total Delta Hours</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th class="right">Design (hrs)</th>
+        <th class="right">Dev/QA (hrs)</th>
+        <th class="right">Total (hrs)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>18 New Features</td>
+        <td class="right">54</td>
+        <td class="right">122</td>
+        <td class="right">176</td>
+      </tr>
+      <tr>
+        <td>7 Feature Modifications (delta)</td>
+        <td class="right">21</td>
+        <td class="right">27</td>
+        <td class="right">48</td>
+      </tr>
+      <tr>
+        <td>Infrastructure / Data Model</td>
+        <td class="right">0</td>
+        <td class="right">29</td>
+        <td class="right">29</td>
+      </tr>
+      <tr class="grand-total">
+        <td>v1.2 Delta Total</td>
+        <td class="right">75 hrs</td>
+        <td class="right">178 hrs</td>
+        <td class="right">253 hrs</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p><strong>Combined MVP Estimate (v1.0 + v1.2):</strong></p>
+    <p>v1.0 original estimate: <strong>250&ndash;350 hrs</strong> dev (~$31&ndash;44K @ $125/hr)</p>
+    <p>v1.2 delta estimate: <strong>~178 hrs dev + 75 hrs design</strong></p>
+    <p>Combined dev: <strong>~430&ndash;530 hrs</strong> | Combined design: <strong>~75 hrs</strong></p>
+    <p style="margin-top:8px;"><strong>These are my rough estimates. I need Tony to validate the dev/QA numbers and provide his own total.</strong></p>
+  </div>
+
+  <hr>
+
+  <!-- P0 vs P1 -->
+  <h2>P0 vs P1 Breakdown</h2>
+
+  <p>If we need to phase within v1.2, here's the split:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Priority</th>
+        <th>Features</th>
+        <th class="right">Design (hrs)</th>
+        <th class="right">Dev/QA (hrs)</th>
+        <th class="right">Total (hrs)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="priority p0">P0 &mdash; Must-have for launch</span></td>
+        <td>O64-O66, O68-O71, C56-C57, A40-A41 + mods</td>
+        <td class="right">48</td>
+        <td class="right">115</td>
+        <td class="right">163</td>
+      </tr>
+      <tr>
+        <td><span class="priority p1">P1 &mdash; Should-have</span></td>
+        <td>O67, O72-O75, C58, A42-A43 + mods</td>
+        <td class="right">27</td>
+        <td class="right">63</td>
+        <td class="right">90</td>
+      </tr>
+      <tr class="subtotal">
+        <td colspan="2">Total</td>
+        <td class="right">75</td>
+        <td class="right">178</td>
+        <td class="right">253</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- What changed and why -->
+  <h2>Why these features were added</h2>
+
+  <p>Quick context on the six themes and why they're MVP, not Phase 2:</p>
+
+  <ul>
+    <li><strong>Packing slips with pick zone sorting</strong> &mdash; Dara's #1 automation request. Without it, they'll print our lists and manually re-sort them, which is what they already do. This is the core fulfillment workflow.</li>
+    <li><strong>Vendor purchase orders</strong> &mdash; How vendors know what to prepare. Currently done manually after ordering closes. Different from pick lists (pick lists = packing bags, POs = ordering from vendors). Critical path.</li>
+    <li><strong>Automated customer messaging</strong> &mdash; Dara's #2 pain point. She manually texts <em>hundreds</em> of people on Tuesdays. Without automation, Gather adds work instead of removing it.</li>
+    <li><strong>Collections system</strong> &mdash; Revenue driver. Dara says customers spent more because of curation (Carlo's Favorites, Award Winners, Limited Run). This is the business model differentiator vs. generic grocery.</li>
+    <li><strong>Customer credits / items owed</strong> &mdash; When a vendor shorts a delivery, they credit the customer for next week. Currently tracked on a clipboard. P1 but important for recurring customer relationships.</li>
+    <li><strong>Weekly product reset</strong> &mdash; Dara's #1 pain point overall. She rebuilds the entire product listing every week. Bulk tools save hours of manual work.</li>
+  </ul>
+
+  <hr>
+
+  <!-- Technical notes -->
+  <h2>Technical notes for review</h2>
+
+  <ul>
+    <li><strong>Twilio SMS</strong> is the biggest new integration. O68 is the heavy lift (Twilio setup, template system, scheduling); O69-O70 reuse the same infra and are incremental.</li>
+    <li><strong>Customer entity</strong> is new to the data model. v1.0 treated customers as anonymous (email on order). v1.2 needs a Customer record to track order history, notes, tags, SMS prefs, and credits. This is foundational work that enables O68-O75.</li>
+    <li><strong>Collection system</strong> is standard CRUD + join table. The drag-to-reorder in A40 and carousel in C57 are the most design-heavy parts.</li>
+    <li><strong>Packing slip print CSS</strong> (O64) needs real-printer testing. Same as pick lists &mdash; budget time for print formatting.</li>
+    <li><strong>PO generator</strong> (O66) queries are essentially the inverse of pick lists &mdash; aggregate by vendor instead of by customer. The email-to-vendor capability reuses Resend infra.</li>
+    <li><strong>Scheduled jobs</strong> for automated messages need a reliable trigger. Vercel Cron Jobs or a lightweight queue. This is infra that didn't exist in v1.0.</li>
+  </ul>
+
+  <div class="note">
+    <strong>Key architectural question (unchanged from v1.0):</strong> The Berwyn model is wholesale-resale (Gather/CH buys from vendors via POs, resells to customers), not marketplace pass-through. This <em>may</em> simplify the Stripe implementation (single merchant account, no Connect needed for MVP). Worth discussing &mdash; could significantly reduce payments complexity if confirmed.
+  </div>
+
+  <hr>
+
+  <!-- What I need -->
+  <h2>What I need back from you</h2>
+
+  <ol>
+    <li><strong>Validate or adjust the dev/QA hours</strong> for each feature in the tables above.</li>
+    <li><strong>Provide a revised MVP total</strong> (v1.0 + v1.2 combined) as a single number I can use for budgeting.</li>
+    <li><strong>Flag anything that's technically more complex than I've estimated</strong> &mdash; especially the Twilio integration, scheduled jobs, and packing slip print formatting.</li>
+    <li><strong>Let me know if any features should be descoped</strong> from your perspective &mdash; I've marked P0 vs P1 so we can cut P1 if needed to hold budget.</li>
+  </ol>
+
+  <p>I only need MVP pricing. No need to re-estimate Phase 2-4.</p>
+
+  <p style="margin-top: 24px;">Thanks Tony. Let me know if you need any clarification on the feature specs &mdash; happy to jump on a call.</p>
+
+  <p style="margin-top:16px;">Drew</p>
+
+  <div class="footer">
+    This document is confidential and intended only for its named recipients.<br>
+    Gather &mdash; MVP v1.2 Technical Review &mdash; February 2026
+  </div>
+
+</div>
+
+</body>
+</html>

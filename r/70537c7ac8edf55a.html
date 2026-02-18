@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="googlebot" content="noindex, nofollow">
+  <title>Gather &mdash; Questionnaire Response</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sage-900: #1C3A13;
+      --sage-700: #2D5016;
+      --sage-500: #4A7C28;
+      --sage-400: #66A043;
+      --sage-200: #A5D6A7;
+      --sage-100: #C8E6C9;
+      --sage-50: #E8F5E9;
+      --gold-500: #FF9800;
+      --gold-200: #FFCC80;
+      --gold-100: #FFE082;
+      --gold-50: #FFF9C4;
+      --text-primary: #1a1a1a;
+      --text-secondary: #4a4a4a;
+      --text-muted: #717171;
+      --border: #e5e5e5;
+      --bg-white: #ffffff;
+      --bg-warm: #FDFCFA;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text-primary);
+      background: var(--bg-warm);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid var(--sage-200);
+    }
+    .header .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--sage-700);
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+    .header .tagline {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 24px;
+    }
+    .header .meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .header .meta strong {
+      color: var(--text-secondary);
+    }
+
+    /* Salutation */
+    .salutation {
+      font-size: 17px;
+      margin-bottom: 16px;
+    }
+
+    /* Body paragraphs */
+    p {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+    }
+
+    /* Section headers */
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--sage-900);
+      margin-top: 48px;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--sage-100);
+    }
+
+    h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--sage-700);
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    /* Pain points callout */
+    .callout {
+      background: var(--sage-50);
+      border-left: 4px solid var(--sage-500);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .callout.gold {
+      background: var(--gold-50);
+      border-left-color: var(--gold-500);
+    }
+    .callout ol, .callout ul {
+      margin: 8px 0 0 20px;
+    }
+    .callout li {
+      margin-bottom: 6px;
+      color: var(--text-secondary);
+    }
+    .callout li strong {
+      color: var(--text-primary);
+    }
+
+    /* Inline emphasis */
+    strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    em {
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    /* Quotes from Dara */
+    .quote {
+      font-style: italic;
+      color: var(--sage-700);
+      border-left: 3px solid var(--sage-400);
+      padding-left: 16px;
+      margin: 16px 0;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin: 12px 0 16px 24px;
+    }
+    li {
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+    li strong {
+      color: var(--text-primary);
+    }
+
+    /* Feature bullets with green marker */
+    ul.features {
+      list-style: none;
+      margin-left: 0;
+    }
+    ul.features li {
+      padding-left: 24px;
+      position: relative;
+      margin-bottom: 12px;
+    }
+    ul.features li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 10px;
+      height: 10px;
+      background: var(--sage-400);
+      border-radius: 50%;
+    }
+
+    /* Question boxes */
+    .question-box {
+      background: var(--gold-50);
+      border: 1px solid var(--gold-200);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 16px 0 24px;
+      font-size: 15px;
+    }
+    .question-box strong {
+      color: var(--sage-900);
+    }
+
+    /* Adjustments list */
+    ul.adjustments {
+      list-style: none;
+      margin-left: 0;
+    }
+    ul.adjustments li {
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    /* Roadmap table */
+    .roadmap-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+    }
+    .roadmap-table th {
+      background: var(--sage-50);
+      color: var(--sage-900);
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--sage-200);
+    }
+    .roadmap-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      vertical-align: top;
+    }
+    .roadmap-table tr:last-child td {
+      border-bottom: none;
+    }
+    .phase-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--sage-100);
+      color: var(--sage-700);
+      white-space: nowrap;
+    }
+
+    /* Numbered questions */
+    ol.questions {
+      margin-left: 20px;
+    }
+    ol.questions li {
+      margin-bottom: 16px;
+    }
+
+    /* Divider */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 40px 0;
+    }
+
+    /* Next steps */
+    ol.next-steps {
+      margin-left: 20px;
+    }
+    ol.next-steps li {
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* Sign-off */
+    .sign-off {
+      margin-top: 32px;
+      font-size: 17px;
+      color: var(--text-primary);
+    }
+
+    /* PS */
+    .ps {
+      margin-top: 32px;
+      padding: 20px 24px;
+      background: var(--sage-50);
+      border-radius: 8px;
+      font-size: 15px;
+      color: var(--sage-700);
+      font-style: italic;
+    }
+    .ps strong {
+      color: var(--sage-900);
+      font-style: normal;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .wrapper { padding: 24px 16px 60px; }
+      h2 { font-size: 19px; }
+      h3 { font-size: 16px; }
+      .roadmap-table { font-size: 13px; }
+      .roadmap-table th, .roadmap-table td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">gather</div>
+    <div class="tagline">Good things from good people</div>
+    <div class="meta">
+      <strong>To:</strong> Dara Rose, Carlo Luciano<br>
+      <strong>From:</strong> Drew Garraway<br>
+      <strong>Date:</strong> February 2026<br>
+      <strong>Re:</strong> Operations Questionnaire &mdash; What We're Building
+    </div>
+  </div>
+
+  <!-- Salutation & Intro -->
+  <p class="salutation">Dara (and Carlo),</p>
+
+  <p>Thank you for the time you put into the operations questionnaire. Those weren't easy questions &mdash; you basically walked us through three seasons of muscle memory, and it was incredibly valuable.</p>
+
+  <p>We went through every answer line by line and compared it against what we had planned to build. The short version: you confirmed a lot of what we had right, you surfaced several things we were completely missing, and you gave us the operational detail we needed to stop guessing and start building to your actual workflow.</p>
+
+  <p>Here's what came out of it.</p>
+
+  <hr>
+
+  <!-- Pain Points -->
+  <h2>What we heard loud and clear</h2>
+
+  <h3>Your four biggest pain points (in your words)</h3>
+
+  <div class="callout">
+    <ol>
+      <li><strong>Website management</strong> &mdash; rebuilding product listings every single week</li>
+      <li><strong>Text reminders</strong> &mdash; manually texting hundreds of customers on Tuesdays, dozens on Fridays</li>
+      <li><strong>Manually sorting customer orders by time slot</strong></li>
+      <li><strong>Notating customer orders with picking information</strong></li>
+    </ol>
+  </div>
+
+  <p>We're addressing all four directly. Here's how.</p>
+
+  <hr>
+
+  <!-- New MVP Features -->
+  <h2>What we're adding to the MVP</h2>
+
+  <p>We added 18 features to the launch plan based on your responses. They fall into five themes:</p>
+
+  <!-- 1. Packing Slips -->
+  <h3>1. Smart packing slips (your #1 request)</h3>
+
+  <p>You asked for one thing above all else:</p>
+
+  <div class="quote">"Sort customer order slips by time slot and sort products within the order by pick location."</div>
+
+  <p>We're building exactly that. Packing slips will be generated per customer, grouped by pickup time slot, with every item sorted by pick zone &mdash; Cold Storage, Dry Goods, Produce, Fragile/Delicate. Each slip will have checkboxes for your assembly team and a tear-off bag label. Your foreman calls out items by zone, the right person grabs them, and the double-checker works down the list. No more manual sorting.</p>
+
+  <div class="question-box">
+    <strong>We need your help on this one:</strong> What are the actual pick zones in your space? We're starting with Cold Storage, Dry Goods, Produce, and Fragile/Delicate &mdash; but you know the physical layout better than we do. Are there zones we're missing? Would "Freezer" be separate from "Cold"? Is there a dedicated area for meal kits?
+  </div>
+
+  <!-- 2. Automated Messaging -->
+  <h3>2. Automated customer messaging (your #2 pain point)</h3>
+
+  <p>No more manually texting hundreds of people. We're building three automated messages that match your current cadence:</p>
+
+  <ul class="features">
+    <li><strong>"Market is open"</strong> &mdash; Email + SMS when the ordering window opens each week. You'll be able to add a product highlight each week (like the "new milk jawn flavor" you mentioned).</li>
+    <li><strong>"Last chance to order"</strong> &mdash; Email + SMS a few hours before the ordering window closes.</li>
+    <li><strong>"Pickup reminder"</strong> &mdash; Email + SMS on pickup morning with each customer's time slot.</li>
+  </ul>
+
+  <p>All messages will feel like they come from you and Carlo &mdash; not a robot. We know that personal touch is sacred and we're not going to turn it into generic Instacart notifications. Customers who want to text back will still be able to reach a real person.</p>
+
+  <p>Customers will opt in to SMS at checkout. Anyone who doesn't want texts can unsubscribe easily.</p>
+
+  <div class="question-box">
+    <strong>Question for you:</strong> What day and time does the ordering window typically open? And when does it close? We want to nail the timing on the automated reminders. Also &mdash; the Tuesday "reminder to order" text you send, is that the same week as the pickup, or the week before?
+  </div>
+
+  <!-- 3. Collections -->
+  <h3>3. Collections (the curation engine)</h3>
+
+  <p>This was one of the most important things you told us:</p>
+
+  <div class="quote">"Collections were how we organized items on Shopify &mdash; Carlo's favorites, award-winning, Thanksgiving essentials, brunch, father's day picks, new, limited run... I think our customers spent more because of our level of curation. This was a big part."</div>
+
+  <p>We agree &mdash; this is the differentiator. We're building a full collections system into the storefront:</p>
+
+  <ul class="features">
+    <li><strong>Named collections</strong> like "Carlo's Favorites," "Award Winners," "Limited Run," "New This Week," "Thanksgiving Essentials," "Brunch" &mdash; whatever you want.</li>
+    <li><strong>Collections on the homepage</strong> as a prominent carousel, not buried in a menu. When a customer lands on the site, the first thing they see (after the hero) is the curated collections.</li>
+    <li><strong>Curation badges on product cards</strong> &mdash; "Limited Run," "Award Winner," "Carlo's Pick." You told us customers loved knowing when something was special. Now they'll see it on every product card.</li>
+    <li><strong>Seasonal collections</strong> with start/end dates &mdash; set up "Thanksgiving Essentials" once, activate it every November.</li>
+  </ul>
+
+  <p>Carlo, this is your playground. The collections system is designed to showcase the kind of curation you and Dara built on Shopify, but with better tools to manage it week to week.</p>
+
+  <div class="question-box">
+    <strong>Question:</strong> Can you give us 5&ndash;6 example collections you'd want at launch? We want to build the prototype around real content, not placeholders.
+  </div>
+
+  <!-- 4. Vendor POs -->
+  <h3>4. Vendor purchase orders</h3>
+
+  <p>You described this workflow:</p>
+
+  <div class="quote">"Website closes for sales, I print vendor order totals, submit purchase orders to vendors, confirm purchase orders, schedule deliveries."</div>
+
+  <p>We're automating it. After the ordering window closes, the system will automatically generate a purchase order for each vendor &mdash; total quantities of each product across all customer orders. You'll be able to email POs directly to vendors from the dashboard, or print them. You'll also be able to track which vendors have confirmed their POs.</p>
+
+  <p>This is different from the pick lists (which are for packing customer bags on pickup morning). POs are the "what to order from each vendor" document. Pick lists are the "what goes in each customer's bag" document. We're building both.</p>
+
+  <div class="question-box">
+    <strong>Question:</strong> What does a good PO look like to your vendors? Do they want a simple list (item + quantity), or do they expect specific formatting? Do any vendors need a different format than others (e.g., case quantities vs. individual units)?
+  </div>
+
+  <!-- 5. Customer Relationship -->
+  <h3>5. Customer relationship features</h3>
+
+  <p>You described several things that are currently in your head or on a clipboard:</p>
+
+  <ul class="features">
+    <li><strong>New customer flagging</strong> &mdash; You review orders for first-time customers and potential mis-orders. We'll auto-flag first-time orders with a "NEW" badge on the dashboard so you can spot them instantly.</li>
+    <li><strong>Welcome emails</strong> &mdash; You send thank-you emails to new customers after their first order. We'll automate this.</li>
+    <li><strong>Items owed tracking</strong> &mdash; Your "running clipboard of items owed to customers" becomes a digital tracker. When a vendor shorts a delivery and you can't make it right by pickup, you log the credit and it carries forward to their next order. No more Post-its.</li>
+    <li><strong>Comp item logging</strong> &mdash; You track comp items and waste. We'll add a way to log comps with a reason (service recovery, VIP gift, mistake, promo) so you can see the full picture in reporting.</li>
+  </ul>
+
+  <hr>
+
+  <!-- Adjustments -->
+  <h2>What we adjusted in features we already had planned</h2>
+
+  <p>A few things we had in the plan but needed to change based on how you actually work:</p>
+
+  <ul class="adjustments">
+    <li><strong>Phone number is now required at checkout</strong> (was optional). Your entire communication system runs on text. We need that number.</li>
+    <li><strong>Order detail now shows customer context</strong> &mdash; order count, first-time flag, internal staff notes, and which items are "last-minute grabs" (flowers, ice cream, delicate pastries) that the runner should grab fresh instead of pre-bagging.</li>
+    <li><strong>Staff notes are now structured</strong> &mdash; picking notes, customer service notes, and issue notes are separate categories instead of one text box. Different team members need different information.</li>
+    <li><strong>Check-in supports the runner workflow</strong> &mdash; your process isn't "customer walks to a tent and scans a QR code." It's "customer pulls up, runner gets their name, grabs bags + last-minute items, delivers to the car." We're designing for that.</li>
+    <li><strong>When an item is unavailable, "credit to next order" is now an option</strong> alongside refund and substitute. Matches your clipboard system.</li>
+  </ul>
+
+  <hr>
+
+  <!-- Roadmap -->
+  <h2>What's on the roadmap for later (not launch)</h2>
+
+  <p>You and your customers mentioned several things that we agree are important but don't belong in the first version. We want to get the core right first:</p>
+
+  <table class="roadmap-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>When</th>
+        <th>Why not now</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Favorite items</td>
+        <td><span class="phase-badge">Phase 2</span></td>
+        <td>Needs customer accounts, which are optional at launch</td>
+      </tr>
+      <tr>
+        <td>Edit time slot after checkout</td>
+        <td><span class="phase-badge">Phase 2</span></td>
+        <td>Same &mdash; needs customer accounts</td>
+      </tr>
+      <tr>
+        <td>Product reviews</td>
+        <td><span class="phase-badge">Phase 4</span></td>
+        <td>Nice-to-have, not operational</td>
+      </tr>
+      <tr>
+        <td>Loyalty program</td>
+        <td><span class="phase-badge">Phase 4</span></td>
+        <td>Need enough order volume data first</td>
+      </tr>
+      <tr>
+        <td>Mobile app</td>
+        <td><span class="phase-badge">Phase 4</span></td>
+        <td>The web app will be mobile-optimized from day one</td>
+      </tr>
+      <tr>
+        <td>Recipe of the week</td>
+        <td><span class="phase-badge">Phase 3</span></td>
+        <td>Content feature we can add once the core is solid</td>
+      </tr>
+      <tr>
+        <td>Vendor compliance portal</td>
+        <td><span class="phase-badge">Phase 2&ndash;3</span></td>
+        <td>You called this a "huge pain" &mdash; we hear you. We're considering pulling a basic version into Phase 2.</td>
+      </tr>
+      <tr>
+        <td>Vendor self-service</td>
+        <td><span class="phase-badge">Phase 2</span></td>
+        <td>Phase 1 = you manage products. Phase 2 = vendors manage their own.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The customer profile idea you described &mdash; <em>"messed up her last order, give her something nice; birthdays; VIP; top spender; usually brings dogs"</em> &mdash; we love this. We're laying the data foundation for it now (every customer gets a profile with order history, notes, and tags) and will build the full internal CRM view in Phase 2.</p>
+
+  <hr>
+
+  <!-- Follow-up Questions -->
+  <h2>A few more questions</h2>
+
+  <p>Beyond the ones above, a couple things that would help us build better:</p>
+
+  <ol class="questions">
+    <li><strong>Weekly timeline:</strong> Can you map out the typical weekly cycle with specific days? Something like: Sunday = newsletter + open ordering, Tuesday = reminders, Wednesday = ordering closes, Thursday = POs + deliveries, Friday = assembly + pickup. We want to make sure the system's automated triggers match your real schedule.</li>
+    <li><strong>The assembly team roles:</strong> You described a foreman, cold person, dry goods person, bagger, double-checker, labeler. How many people total? Is this consistent week to week or does it flex? This helps us think about how many simultaneous users might be in the ops dashboard on pickup morning.</li>
+    <li><strong>"Pass-through" vs. wholesale vendors:</strong> You mentioned wanting more pass-through vendors to hold less inventory. For the PO system &mdash; do some vendors deliver to you, while others bring product to the market that you then grab from their stall? Or does everything come through deliveries to your storage?</li>
+    <li><strong>Product photos:</strong> You coordinate with vendors for photos. How's the photo quality generally? Do you end up taking your own photos, or do vendors provide good ones? This helps us prioritize photo tools (crop, enhance, background removal) vs. just basic upload.</li>
+  </ol>
+
+  <hr>
+
+  <!-- Next Steps -->
+  <h2>What happens next</h2>
+
+  <p>We're using everything you told us to refine the product spec and start building. The prototype already has the customer storefront, cart, checkout, and operations dashboard roughed out. The next phase of prototype work will focus on:</p>
+
+  <ol class="next-steps">
+    <li>Collections on the storefront</li>
+    <li>Smart packing slips with pick zone sorting</li>
+    <li>Vendor PO generation</li>
+    <li>The automated messaging framework</li>
+  </ol>
+
+  <p>We'll share the updated prototype with you when it's ready for a walkthrough.</p>
+
+  <p>Thank you again &mdash; this kind of detail is exactly what makes the difference between building something generic and building something that actually works for Berwyn.</p>
+
+  <!-- Sign-off -->
+  <p class="sign-off">Drew</p>
+
+  <!-- PS -->
+  <div class="ps">
+    <strong>P.S.</strong> &mdash; Dara, your quote about curation is now basically our north star design principle: "I would hate for the process to feel too similar to ordering on Instacart or the products to feel less special." We're with you on that.
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    This document is confidential and intended only for its named recipients.<br>
+    Gather &mdash; Good things from good people &mdash; February 2026
+  </div>
+
+</div>
+
+</body>
+</html>
