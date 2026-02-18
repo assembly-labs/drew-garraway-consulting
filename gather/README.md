@@ -30,12 +30,14 @@ npm run dev
 
 ## Documentation
 
-- `CLAUDE.md` — Complete project context (start here)
-- `PRD.md` — Product requirements document
-- `docs/FEATURE_ROADMAP.md` — Phased development plan
-- `docs/` — Feature specifications
-- `research/` — Market research and competitive analysis
-- `brand/BRAND_GUIDE.md` — Design system and brand voice
+| File | What's In It |
+|------|-------------|
+| `CLAUDE.md` | Routing guide — points to the right doc for any question |
+| `PRD.md` | Product requirements, data model, API spec, architecture |
+| `docs/FEATURE_SPEC.md` | All feature specs: customer, ops, admin, payments, reporting, phases 2-4 |
+| `research/BUSINESS_MODEL.md` | Revenue model, unit economics, GTM strategy |
+| `brand/BRAND_GUIDE.md` | Design system, brand voice, component patterns |
+| `research/dara-questionnaire-responses.md` | Real-world operations workflow from Dara |
 
 ## Status
 

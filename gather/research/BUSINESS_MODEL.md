@@ -1,6 +1,6 @@
 # Gather Business Model & Go-to-Market Strategy
 
-> **Purpose:** Revenue model, pricing tiers, KPIs, unit economics, and go-to-market strategy for Gather platform.
+> **Purpose:** Revenue model, pricing tiers, unit economics, and go-to-market strategy. For KPIs and development timeline, see `PRD.md`.
 
 ---
 
@@ -38,41 +38,7 @@
 
 ---
 
-## 2. Key Performance Indicators (KPIs)
-
-### Phase 1: Consumer Marketplace MVP (Months 1-6)
-
-| Metric | Target | Rationale |
-|--------|--------|-----------|
-| Target market | Berwyn (1 market) | Prove marketplace model |
-| GMV | $50K first season | Revenue validation |
-| Unique customers | 500+ | Adoption validation |
-| Online basket size | $59 average | Industry benchmark (2-4x walk-up) |
-| Repeat rate | 40% | Habit formation |
-| Browse-to-buy conversion | >3% | E-commerce standard |
-| Cart abandonment | <30% | Below industry avg (70%) |
-| Pickup time | <5 min average | Operational efficiency |
-
-### Phase 2: Vendor Self-Service (Months 7-12)
-
-| Metric | Target | Rationale |
-|--------|--------|-----------|
-| Markets | 10 | Scale validation |
-| Marketplace GMV | $500K/month | Revenue driver |
-| Vendors self-managing | 70% | Reduced ops burden |
-| ARR | $250K | Seed-stage milestone |
-
-### Long-term Targets
-
-| Timeframe | Markets | ARR |
-|-----------|---------|-----|
-| Year 1 | 100 | $250K |
-| Year 3 | 300 | $1M |
-| Year 5 | 500+ | $2-3M |
-
----
-
-## 3. Unit Economics
+## 2. Unit Economics
 
 ### Customer Acquisition Cost (CAC)
 
@@ -93,9 +59,9 @@
 
 **LTV Calculation:**
 ```
-LTV = Monthly Revenue × (1 / Monthly Churn Rate)
-LTV = $150 × (1 / 0.0083)
-LTV = $150 × 120 months
+LTV = Monthly Revenue x (1 / Monthly Churn Rate)
+LTV = $150 x (1 / 0.0083)
+LTV = $150 x 120 months
 LTV = ~$16,200 (adjusted for churn pattern)
 ```
 
@@ -117,9 +83,9 @@ LTV = ~$16,200 (adjusted for churn pattern)
 
 ---
 
-## 4. Go-to-Market Strategy
+## 3. Go-to-Market Strategy
 
-### 4.1 Launch Strategy (Leveraging Carlo's Network)
+### 3.1 Launch Strategy (Leveraging Carlo's Network)
 
 **Phase 1: Pilot Markets**
 1. **Berwyn Farmers Market** — Primary testbed (Carlo's market)
@@ -136,7 +102,7 @@ LTV = ~$16,200 (adjusted for churn pattern)
 - State farmers market associations
 - University extension services (Penn State, Cornell, etc.)
 
-### 4.2 Customer Acquisition Channels
+### 3.2 Customer Acquisition Channels
 
 | Channel | Priority | Notes |
 |---------|----------|-------|
@@ -147,9 +113,7 @@ LTV = ~$16,200 (adjusted for churn pattern)
 | **Conferences** | Medium | FMC annual meeting, state events |
 | **University extension** | Medium | Penn State, Cornell partnerships |
 
-### 4.3 Target Market Density by State
-
-Priority states based on direct-to-consumer sales volume:
+### 3.3 Target Market Density by State
 
 | State | Direct Sales Volume | Priority |
 |-------|---------------------|----------|
@@ -160,7 +124,7 @@ Priority states based on direct-to-consumer sales volume:
 | Texas | $500M+ | Medium |
 | Florida | $450M+ | Medium |
 
-### 4.4 Competitive Positioning
+### 3.4 Competitive Positioning
 
 **Key differentiator:** Gather is the only solution that serves all three stakeholder groups (managers, vendors, customers) with integrated operational tools AND consumer marketplace.
 
@@ -173,9 +137,9 @@ Priority states based on direct-to-consumer sales volume:
 
 ---
 
-## 5. Funding Strategy
+## 4. Funding Strategy
 
-### 5.1 Preferred Path: Grant Funding
+### 4.1 Preferred Path: Grant Funding
 
 **Target grants (nonprofit structure):**
 
@@ -186,7 +150,7 @@ Priority states based on direct-to-consumer sales volume:
 | USDA RFSI (state programs) | $10-100K | Varies | Varies |
 | SBIR Phase I | $50-250K | 6-12 months | None |
 
-### 5.2 Secondary Path: Angel/Pre-Seed
+### 4.2 Secondary Path: Angel/Pre-Seed
 
 **Target investors:**
 - Agricultural angels (farming background)
@@ -197,7 +161,7 @@ Priority states based on direct-to-consumer sales volume:
 **Raise amount:** $50-150K
 **Use of funds:** MVP development, pilot market operations
 
-### 5.3 Current Resources
+### 4.3 Current Resources
 
 - **Budget:** ~$20K available
 - **Team:** 3-person AI-augmented team
@@ -205,7 +169,7 @@ Priority states based on direct-to-consumer sales volume:
 
 ---
 
-## 6. Risk Factors & Mitigations
+## 5. Risk Factors & Mitigations
 
 | Risk | Likelihood | Impact | Mitigation |
 |------|------------|--------|------------|
@@ -217,34 +181,4 @@ Priority states based on direct-to-consumer sales volume:
 
 ---
 
-## 7. Development Timeline
-
-> **Source of truth:** PRD.md
-
-| Phase | Months | Key Deliverables | Market Target |
-|-------|--------|------------------|---------------|
-| **Phase 1: Marketplace MVP** | 1-6 | Storefront, cart, checkout, staff ops dashboard, pick lists, check-in, admin product management | Berwyn launch |
-| **Phase 2: Vendor Self-Service** | 7-12 | Vendor portal, product management, order notifications, customer accounts | 10 markets |
-| **Phase 3: Market Manager Dashboard** | 13-18 | Vendor applications, fee collection, SNAP/EBT, grant reporting, communications | 100 markets |
-| **Phase 4: Platform Ecosystem** | 19-24 | Native apps, loyalty, recommendations, API, white-label | 500 markets |
-
----
-
-## 8. What Failed Companies Teach Us
-
-### Good Eggs ($200M+ burned)
-- **Mistake:** Premature scaling to multiple cities before proving unit economics
-- **CEO quote:** "The single biggest mistake we made was growing too quickly"
-- **Lesson:** Prove Berwyn works before expanding
-
-### Farmigo ($26M burned)
-- **Mistake:** Distribution logistics "much more complicated than anticipated"
-- **Lesson:** Pickup-only model avoids logistics complexity
-
-### Webvan ($800M bankruptcy)
-- **Mistake:** Built massive infrastructure before proving product-market fit
-- **Lesson:** Start small, capital cannot fix broken models
-
----
-
-*Last updated: February 2026. Aligned with PRD.md phasing (marketplace-first MVP).*
+*Last updated: February 2026. For KPIs, development timeline, and phasing see PRD.md.*
