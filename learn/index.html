@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Responsibility Course</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .section {
+    display: none;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Header / Progress */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: #1e293b;
+    z-index: 100;
+  }
+  .progress-bar .fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    transition: width 0.5s ease;
+  }
+
+  .course-header {
+    text-align: center;
+    padding: 60px 0 40px;
+  }
+  .course-header .emoji { font-size: 64px; margin-bottom: 16px; }
+  .course-header h1 {
+    font-size: 28px;
+    color: #f8fafc;
+    margin-bottom: 8px;
+  }
+  .course-header .subtitle {
+    color: #94a3b8;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  /* Nav tabs */
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 48px;
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 4px;
+    overflow-x: auto;
+  }
+  .nav-tab {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 13px;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    border: none;
+    background: none;
+    font-family: inherit;
+  }
+  .nav-tab:hover { color: #94a3b8; background: #283548; }
+  .nav-tab.active {
+    background: #3b82f6;
+    color: #fff;
+    font-weight: 600;
+  }
+  .nav-tab.completed {
+    color: #4ade80;
+  }
+
+  /* Cards */
+  h2 {
+    font-size: 32px;
+    color: #f8fafc;
+    margin-bottom: 8px;
+  }
+  h3 {
+    font-size: 22px;
+    color: #f8fafc;
+    margin: 32px 0 12px;
+  }
+  .lesson-tag {
+    font-size: 13px;
+    color: #3b82f6;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .lesson-subtitle {
+    color: #94a3b8;
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  p { margin-bottom: 16px; color: #cbd5e1; font-size: 16px; }
+
+  .card {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 24px;
+    border: 1px solid #334155;
+  }
+  .card.highlight {
+    border-left: 4px solid #3b82f6;
+  }
+  .card.warning {
+    border-left: 4px solid #f59e0b;
+    background: #1e293b;
+  }
+  .card.success {
+    border-left: 4px solid #4ade80;
+  }
+  .card.danger {
+    border-left: 4px solid #ef4444;
+  }
+  .card.purple {
+    border-left: 4px solid #8b5cf6;
+  }
+
+  .card-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #64748b;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .card h4 {
+    font-size: 18px;
+    color: #f8fafc;
+    margin-bottom: 12px;
+  }
+
+  /* Callout / big quote */
+  .callout {
+    background: linear-gradient(135deg, #1e3a5f, #1e293b);
+    border: 1px solid #3b82f6;
+    border-radius: 16px;
+    padding: 32px;
+    margin: 32px 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #93c5fd;
+  }
+
+  /* Comparison grid */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  @media (max-width: 600px) {
+    .compare-grid { grid-template-columns: 1fr; }
+  }
+
+  .compare-box {
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .compare-box.bad {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+  .compare-box.good {
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+  }
+  .compare-box h4 {
+    margin-bottom: 12px;
+    font-size: 15px;
+  }
+  .compare-box.bad h4 { color: #fca5a5; }
+  .compare-box.good h4 { color: #86efac; }
+  .compare-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .compare-box ul li {
+    padding: 4px 0;
+    font-size: 14px;
+    color: #cbd5e1;
+  }
+
+  /* Numbered rules */
+  .rule-list {
+    counter-reset: rules;
+    list-style: none;
+    padding: 0;
+  }
+  .rule-list li {
+    counter-increment: rules;
+    padding: 16px 16px 16px 56px;
+    position: relative;
+    margin-bottom: 12px;
+    background: #1e293b;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    color: #cbd5e1;
+  }
+  .rule-list li::before {
+    content: counter(rules);
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    width: 28px;
+    height: 28px;
+    background: #3b82f6;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .rule-list li strong { color: #f8fafc; }
+
+  /* Scenario boxes */
+  .scenario {
+    background: #1e293b;
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 24px 0;
+    border: 1px solid #334155;
+  }
+  .scenario-header {
+    background: #334155;
+    padding: 12px 20px;
+    font-size: 13px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .scenario-body { padding: 20px; }
+  .text-bubble {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 18px;
+    margin: 8px 0;
+    font-size: 15px;
+  }
+  .text-bubble.bad-msg {
+    background: #7f1d1d;
+    color: #fecaca;
+  }
+  .text-bubble.good-msg {
+    background: #14532d;
+    color: #bbf7d0;
+  }
+  .text-bubble.neutral-msg {
+    background: #334155;
+    color: #e2e8f0;
+  }
+  .scenario-result {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  .scenario-result.bad { background: rgba(239,68,68,0.1); color: #fca5a5; }
+  .scenario-result.good { background: rgba(74,222,128,0.1); color: #86efac; }
+
+  /* Quick fix list */
+  .fix-list {
+    list-style: none;
+    padding: 0;
+  }
+  .fix-list li {
+    padding: 12px 16px;
+    background: #1e293b;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #334155;
+    font-size: 15px;
+    color: #cbd5e1;
+  }
+  .fix-list li .arrow { color: #4ade80; font-weight: 700; margin: 0 8px; }
+  .fix-list li .old { color: #fca5a5; text-decoration: line-through; }
+  .fix-list li .new { color: #86efac; }
+
+  /* Big idea cards */
+  .idea-card {
+    background: linear-gradient(135deg, #1e293b, #1a2332);
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 32px;
+    margin: 24px 0;
+  }
+  .idea-card .idea-num {
+    font-size: 13px;
+    color: #8b5cf6;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .idea-card h4 {
+    font-size: 20px;
+    color: #f8fafc;
+    margin-bottom: 12px;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+    font-family: inherit;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #fff;
+  }
+  .btn-primary:hover { background: linear-gradient(135deg, #60a5fa, #3b82f6); transform: translateY(-1px); }
+  .btn-secondary {
+    background: #334155;
+    color: #e2e8f0;
+  }
+  .btn-secondary:hover { background: #475569; }
+  .btn-success {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #fff;
+  }
+  .btn-success:hover { background: linear-gradient(135deg, #4ade80, #22c55e); }
+
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 48px;
+    gap: 16px;
+  }
+
+  /* Quiz */
+  .question-block {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+    border: 1px solid #334155;
+    transition: border-color 0.3s;
+  }
+  .question-block.correct { border-color: #4ade80; }
+  .question-block.incorrect { border-color: #ef4444; }
+
+  .question-num {
+    font-size: 12px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .question-text {
+    font-size: 16px;
+    color: #f8fafc;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .options { list-style: none; padding: 0; }
+  .options li {
+    margin-bottom: 8px;
+  }
+  .options label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 15px;
+    color: #cbd5e1;
+  }
+  .options label:hover {
+    border-color: #3b82f6;
+    background: #1a2744;
+  }
+  .options input[type="radio"] {
+    accent-color: #3b82f6;
+    width: 18px;
+    height: 18px;
+  }
+  .options label.selected {
+    border-color: #3b82f6;
+    background: #1e3a5f;
+  }
+  .options label.correct-answer {
+    border-color: #4ade80;
+    background: rgba(74,222,128,0.1);
+  }
+  .options label.wrong-answer {
+    border-color: #ef4444;
+    background: rgba(239,68,68,0.1);
+  }
+
+  /* Results */
+  .results-container {
+    text-align: center;
+    padding: 60px 0;
+  }
+  .score-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+    font-size: 48px;
+    font-weight: 800;
+  }
+  .score-circle.pass {
+    background: rgba(74,222,128,0.1);
+    border: 4px solid #4ade80;
+    color: #4ade80;
+  }
+  .score-circle.fail {
+    background: rgba(239,68,68,0.1);
+    border: 4px solid #ef4444;
+    color: #ef4444;
+  }
+  .score-circle .out-of {
+    font-size: 16px;
+    font-weight: 400;
+    color: #94a3b8;
+  }
+  .result-message {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .result-message.pass { color: #4ade80; }
+  .result-message.fail { color: #ef4444; }
+  .result-detail { color: #94a3b8; font-size: 16px; margin-bottom: 32px; }
+
+  /* Tone example blocks */
+  .tone-example {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 20px 0;
+    border: 1px solid #334155;
+  }
+  .tone-example .typed {
+    font-size: 24px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 16px;
+    padding: 12px 20px;
+    background: #334155;
+    border-radius: 12px;
+    display: inline-block;
+  }
+  .tone-example .meaning {
+    padding: 8px 0;
+    font-size: 14px;
+  }
+  .tone-example .meaning strong { color: #f8fafc; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0f172a; }
+  ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+
+  .section-divider {
+    height: 1px;
+    background: #334155;
+    margin: 40px 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="fill" id="progressFill" style="width: 0%"></div></div>
+
+<!-- ==================== WELCOME ==================== -->
+<div class="section active" id="welcome">
+  <div class="course-header">
+    <div class="emoji">📱</div>
+    <h1>Digital Responsibility Course</h1>
+    <div class="subtitle">Welcome</div>
+  </div>
+
+  <nav class="nav-tabs" id="mainNav">
+    <button class="nav-tab active" onclick="goTo('welcome')">Welcome</button>
+    <button class="nav-tab" onclick="goTo('lesson1')">Lesson 1</button>
+    <button class="nav-tab" onclick="goTo('lesson2')">Lesson 2</button>
+    <button class="nav-tab" onclick="goTo('lesson3')">Lesson 3</button>
+    <button class="nav-tab" onclick="goTo('lesson4')">Lesson 4</button>
+    <button class="nav-tab" onclick="goTo('test')">Test</button>
+  </nav>
+
+  <h2>Welcome</h2>
+  <p style="font-size: 20px; color: #94a3b8; margin-bottom: 32px;">Your iPad Isn't a Right. It's a Responsibility.</p>
+  <p>This course will teach you the skills you need to earn back your iPad &mdash; and use it the right way going forward.</p>
+
+  <div class="section-divider"></div>
+
+  <h3>Why You're Here</h3>
+  <p>You lost your iPad because of choices you made &mdash; using curse words and bad emojis in texts, and not following screen time rules. That's not the end of the world. Everyone makes mistakes. But smart people learn from their mistakes so they don't keep making the same ones again.</p>
+
+  <div class="section-divider"></div>
+
+  <h3>How This Works</h3>
+  <p>You'll go through <strong>4 short lessons</strong> about how to use your devices the right way. At the end, there's a <strong>15-question test</strong>. You need to get at least <strong>12 out of 15 right (that's 80%)</strong> to pass. Read each lesson carefully &mdash; the test questions come straight from what you'll learn here.</p>
+
+  <div class="callout">
+    This isn't a punishment. It's a chance to level up. The stuff you'll learn here is real and it matters &mdash; not just now, but for when you're older and using social media, group chats, and texting every single day.
+  </div>
+
+  <p style="text-align: center; font-size: 18px; font-weight: 600; color: #f8fafc;">Let's get started.</p>
+
+  <div class="nav-buttons" style="justify-content: center;">
+    <button class="btn btn-primary" onclick="goTo('lesson1')">Start Lesson 1 &rarr;</button>
+  </div>
+</div>
+
+<!-- ==================== LESSON 1 ==================== -->
+<div class="section" id="lesson1">
+  <div class="lesson-tag">Lesson 1 of 4</div>
+  <h2>YouTube Isn't Real Life</h2>
+  <p class="lesson-subtitle">Understanding the difference between entertainment and reality.</p>
+
+  <div class="section-divider"></div>
+
+  <h3>The Truth About Your Favorite YouTubers</h3>
+  <p>Here's something important that most kids don't know yet: almost everything you watch on YouTube is <strong>planned, practiced, and edited</strong> to get you to keep watching. That's not just an opinion &mdash; it's how YouTube works as a business. YouTubers make money when you watch their videos. The more you watch, the more money they earn. So everything they do is meant to keep your eyes glued to the screen.</p>
+
+  <div class="section-divider"></div>
+
+  <div class="card highlight">
+    <div class="card-label">Reality Check</div>
+    <p><strong>MrBeast</strong> has a team of over 100 people who help plan, film, and edit his videos. Each video costs hundreds of thousands of dollars to make. The "reactions" you see are often filmed more than once to get the best version. His whole channel is a business &mdash; and <em>you</em> are the customer.</p>
+  </div>
+
+  <div class="card highlight">
+    <div class="card-label">Reality Check</div>
+    <p><strong>The Royalty Family</strong> films their "daily life" &mdash; but think about it: real families don't have camera crews following them around. They pick what to film, set up the situations ahead of time, and cut out anything boring. Their "surprises" are planned before they even start recording. It looks like real life, but it's really a TV show pretending to be real life.</p>
+  </div>
+
+  <div class="card highlight">
+    <div class="card-label">Reality Check</div>
+    <p><strong>Minecraft YouTubers like Clown Pierce</strong> are skilled players, but their videos are heavily edited. That means hours of boring gameplay get cut down to just 15 exciting minutes. The trash talk and big reactions are part of the show &mdash; they act that way because it gets more views, not because that's how people really act in real life.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h3>Why This Matters For You</h3>
+  <p>When you spend hours watching people act like loudmouths and show-offs, your brain starts to think that's how people are supposed to act. <strong>It isn't.</strong> If you acted at school, at BJJ, or at the dinner table the way YouTubers act in their videos, people wouldn't think you were cool &mdash; they'd think you were being rude and annoying.</p>
+
+  <div class="compare-grid">
+    <div class="compare-box bad">
+      <h4>&#10060; What YouTube Teaches</h4>
+      <ul>
+        <li>Being loud = being funny</li>
+        <li>Trash talk is normal</li>
+        <li>Reactions should be extreme</li>
+        <li>Spending all day on screens is fine</li>
+      </ul>
+    </div>
+    <div class="compare-box good">
+      <h4>&#9989; What Real Life Requires</h4>
+      <ul>
+        <li>Knowing when to be quiet matters</li>
+        <li>Respect earns respect</li>
+        <li>Calm people are trusted more</li>
+        <li>Screens are a small part of a full life</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h3>Three Questions to Ask Yourself</h3>
+  <p>Before you watch any video, ask:</p>
+  <ol class="rule-list">
+    <li><strong>"Is this real, or is this a performance?"</strong> &mdash; Almost always, it's a performance.</li>
+    <li><strong>"Would I act this way in front of my coach or teacher?"</strong> &mdash; If not, don't absorb it like it's normal.</li>
+    <li><strong>"How long have I been watching?"</strong> &mdash; If you've lost track of time, that's the algorithm doing its job on you. Take a break.</li>
+  </ol>
+
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" onclick="goTo('welcome')">&larr; Back</button>
+    <button class="btn btn-primary" onclick="goTo('lesson2')">Lesson 2 &rarr;</button>
+  </div>
+</div>
+
+<!-- ==================== LESSON 2 ==================== -->
+<div class="section" id="lesson2">
+  <div class="lesson-tag">Lesson 2 of 4</div>
+  <h2>Words Have Weight &mdash; Even in Texts</h2>
+  <p class="lesson-subtitle">Rules for texting anyone &mdash; parents, friends, coaches, or anyone else.</p>
+
+  <div class="section-divider"></div>
+
+  <h3>Texts Are Not Invisible</h3>
+  <p>When you say something out loud, the words disappear into the air. But when you type something in a text message, <strong>it stays forever</strong>. People can take screenshots (a picture of your message). Messages get forwarded to other people. Parents check phones. Teachers can read messages. Nothing you type is ever truly private.</p>
+
+  <div class="callout">
+    This is the #1 rule: Never type anything you wouldn't say out loud in front of your parents, your teacher, or your coach.
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h3>The Middle Finger Emoji</h3>
+  <p>Using the 🖕 emoji in a text to your parents &mdash; or anyone &mdash; is the same as doing it to their face. It's not funny. It's not edgy. It's disrespectful. Emojis carry the same meaning as the real action. Just because it's on a screen doesn't make it less real.</p>
+
+  <div class="section-divider"></div>
+
+  <h3>The Texting Rules</h3>
+  <p>These apply to texting <strong>anyone</strong> &mdash; parents, friends, teammates, classmates, or people you don't know well:</p>
+
+  <ol class="rule-list">
+    <li><strong>No curse words.</strong> Not even short versions of them (like WTF or letters that stand for bad words). If you wouldn't say it in class, don't type it.</li>
+    <li><strong>No bad emojis.</strong> The middle finger, and any emoji used to be mean or disrespectful, is off limits.</li>
+    <li><strong>Re-read before you send.</strong> Read your message back to yourself. Would you be okay if your teacher read it? If not, delete it and try again.</li>
+    <li><strong>Reply to your parents.</strong> When your parents text you, answer them. Ignoring a parent's text is the same as ignoring them when they talk to you face-to-face.</li>
+    <li><strong>Don't text when you're mad.</strong> If you're upset, put the phone down. Wait until you've calmed down. Angry texts always make things worse.</li>
+    <li><strong>Sarcasm doesn't work in texts.</strong> More on this in Lesson 3, but sarcasm almost always gets misunderstood in texts because the other person can't hear your voice or see your face.</li>
+  </ol>
+
+  <div class="section-divider"></div>
+
+  <h3>How Texts Can Go Wrong</h3>
+  <p>Here's an example of the same situation handled two different ways:</p>
+
+  <div class="scenario">
+    <div class="scenario-header">Scenario: Dad texts "Time to get off the iPad and get ready for bed."</div>
+    <div class="scenario-body">
+      <div class="text-bubble bad-msg">No 🖕</div>
+      <div class="scenario-result bad">
+        <strong>Result:</strong> iPad taken away. Trust broken. Now you have to earn it back with a whole course. Not worth it.
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-header">Same Scenario: Dad texts "Time to get off the iPad and get ready for bed."</div>
+    <div class="scenario-body">
+      <div class="text-bubble good-msg">Ok can I have 5 more minutes to finish this video?</div>
+      <div class="scenario-result good">
+        <strong>Result:</strong> Respectful response. You might even get those 5 minutes. You keep your iPad. Trust stays strong.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <div class="card success">
+    <h4>Key Idea</h4>
+    <p>Being respectful doesn't mean you can't disagree or ask for what you want. It means <strong>how you say it</strong> matters just as much as <strong>what you say</strong>. You can stand up for yourself without being rude. That's a skill that will help you your whole life &mdash; with friends, at school, at work, everywhere.</p>
+  </div>
+
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" onclick="goTo('lesson1')">&larr; Back</button>
+    <button class="btn btn-primary" onclick="goTo('lesson3')">Lesson 3 &rarr;</button>
+  </div>
+</div>
+
+<!-- ==================== LESSON 3 ==================== -->
+<div class="section" id="lesson3">
+  <div class="lesson-tag">Lesson 3 of 4</div>
+  <h2>Tone, Sarcasm &amp; How Messages Get Misread</h2>
+  <p class="lesson-subtitle">Why what you meant and what they understood are often two different things.</p>
+
+  <div class="section-divider"></div>
+
+  <h3>What Is Tone?</h3>
+  <p>Tone is the attitude or feeling behind your words. It's not just <em>what</em> you say &mdash; it's <em>how</em> you say it. Think of it this way: you can say "thanks a lot" in a nice way that means you're grateful, or you can say "thanks a LOT" in a mean way that means the opposite. Same words, totally different meaning. That difference is <strong>tone</strong>.</p>
+  <p>When you're talking to someone in person, they can figure out your tone from your voice, your face, and your body language. But in a text message, all of that disappears. The person reading your text has to <em>guess</em> what you meant &mdash; and they usually guess wrong.</p>
+
+  <div class="compare-grid">
+    <div class="compare-box good">
+      <h4>🗣️ In Person</h4>
+      <ul>
+        <li>Someone can hear if you're joking</li>
+        <li>They see your facial expression</li>
+        <li>They know if you're being playful</li>
+        <li>Tone of voice gives context</li>
+      </ul>
+    </div>
+    <div class="compare-box bad">
+      <h4>💬 In Text</h4>
+      <ul>
+        <li>They can't hear your voice</li>
+        <li>No facial expression to read</li>
+        <li>Jokes look like insults</li>
+        <li>Words are all they have to go on</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h3>The Sarcasm Problem</h3>
+  <p>Sarcasm is when you say the opposite of what you really mean, usually to be funny. Here's an example: if it's pouring rain outside and you say "Wow, great weather today!" &mdash; that's sarcasm. You don't actually think the weather is great. In person, people can tell you're being sarcastic because they hear your voice and see your face.</p>
+  <p>But in a text? Sarcasm almost never works. Look at this message:</p>
+
+  <div class="card warning">
+    <div class="card-label">Text Message</div>
+    <p style="font-size: 20px; font-weight: 600; color: #f8fafc;">"Oh yeah that's a GREAT idea"</p>
+    <p>Is this person being nice and saying they like the idea? Or are they making fun of it? <strong>You can't tell.</strong> In a text, these exact same words could mean either thing. That's why sarcasm in texts causes fights and hurt feelings &mdash; even between grown-ups.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h3>How Tone Gets Lost: Examples</h3>
+
+  <div class="tone-example">
+    <div class="card-label">What You Type</div>
+    <div class="typed">Whatever</div>
+    <div class="meaning"><strong>What you might mean:</strong> "Okay, I don't really care either way."</div>
+    <div class="meaning"><strong>What they probably think you mean:</strong> "I don't care about you or what you're saying." It comes across as rude and cold.</div>
+  </div>
+
+  <div class="tone-example">
+    <div class="card-label">What You Type</div>
+    <div class="typed">K</div>
+    <div class="meaning"><strong>What you might mean:</strong> "Okay, sounds good."</div>
+    <div class="meaning"><strong>What they probably think you mean:</strong> "I'm annoyed and I don't want to talk to you." Just one letter can feel like a slap in the face.</div>
+  </div>
+
+  <div class="tone-example">
+    <div class="card-label">What You Type</div>
+    <div class="typed">Fine.</div>
+    <div class="meaning"><strong>What you might mean:</strong> "Okay, that works."</div>
+    <div class="meaning"><strong>What they probably think you mean:</strong> "I'm mad but I'm not going to tell you why." That little period at the end makes it feel angry and cold.</div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <div class="callout">
+    <strong>The Golden Rule of Texting:</strong><br>
+    When in doubt, be more clear and more kind than you think you need to be. Add a word or two to make your meaning obvious. "Ok sounds good!" is way different from "K." A little extra effort prevents a lot of problems.
+  </div>
+
+  <h3>Quick Fixes</h3>
+  <ul class="fix-list">
+    <li>Instead of <span class="old">"K"</span> <span class="arrow">&rarr;</span> <span class="new">"Ok sounds good!"</span></li>
+    <li>Instead of <span class="old">"Whatever"</span> <span class="arrow">&rarr;</span> <span class="new">"I'm fine with either option"</span></li>
+    <li>Instead of <span class="old">"Fine."</span> <span class="arrow">&rarr;</span> <span class="new">"That works for me"</span></li>
+    <li>Instead of <span class="old">sarcasm</span> <span class="arrow">&rarr;</span> <span class="new">just say what you actually mean</span></li>
+    <li>If you're joking, say so <span class="arrow">&rarr;</span> <span class="new">"jk" or "haha" helps, but being direct is always safer</span></li>
+  </ul>
+
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" onclick="goTo('lesson2')">&larr; Back</button>
+    <button class="btn btn-primary" onclick="goTo('lesson4')">Lesson 4 &rarr;</button>
+  </div>
+</div>
+
+<!-- ==================== LESSON 4 ==================== -->
+<div class="section" id="lesson4">
+  <div class="lesson-tag">Lesson 4 of 4</div>
+  <h2>What's Coming: Social Media &amp; Why It Matters Now</h2>
+  <p class="lesson-subtitle">You're not on social media yet &mdash; but the habits you build today will protect you when you are.</p>
+
+  <div class="section-divider"></div>
+
+  <h3>What Is Social Media?</h3>
+  <p>Social media includes apps like Instagram, TikTok, Snapchat, X (which used to be called Twitter), and others. Most of these apps say you have to be at least <strong>13 years old</strong> to make an account. You're not old enough yet &mdash; and that's actually a good thing. Here's why:</p>
+
+  <div class="card warning">
+    <h4>The Research Is Clear</h4>
+    <p>Studies show that kids and teens who spend a lot of time on social media are more likely to feel worried, sad, and bad about themselves. Social media apps are built by teams of really smart people whose job is to make the apps <strong>addictive</strong> &mdash; that means they use tricks to keep you scrolling and scrolling, kind of like how a slot machine keeps people pulling the lever. The younger you start using it, the harder it is to have a healthy relationship with it later.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h3>Why Your Texting Habits Matter Right Now</h3>
+  <p>Right now, you're mostly texting your parents. But in a few years, you'll be in group chats with tons of friends, maybe on social media, and talking to people you don't know that well. The habits you build right now are the same habits you'll carry into all of that.</p>
+  <p>If you learn now how to be respectful, think before you send, and understand that your words really do affect people &mdash; you'll be <strong>way ahead</strong> of most teenagers who have to learn the hard way.</p>
+
+  <div class="section-divider"></div>
+
+  <h3>Things Teens Wish They Knew</h3>
+  <p>Every year, teenagers get in serious trouble for things they posted or texted. Messages that were "just jokes" get screenshotted and sent to parents, teachers, and principals. When you apply to college someday, the people deciding if you get in can look at your social media. When you apply for a job, your boss might search your name online. What you put out there online follows you around &mdash; sometimes forever.</p>
+
+  <div class="section-divider"></div>
+
+  <h3>The Big Ideas to Remember</h3>
+
+  <div class="idea-card">
+    <div class="idea-num">Idea 1</div>
+    <h4>The Screenshot Rule</h4>
+    <p>Before you send any message, picture the person you respect the most &mdash; your coach, your grandparent, whoever it is &mdash; reading that message. If you'd feel embarrassed, don't send it. Remember: <strong>anything you send can be screenshotted and shared with anyone.</strong></p>
+  </div>
+
+  <div class="idea-card">
+    <div class="idea-num">Idea 2</div>
+    <h4>You Are Not Your Feed</h4>
+    <p>YouTube, TikTok, and Instagram only show you the best moments of other people's lives &mdash; like a highlight reel in sports. Nobody posts their boring Tuesday. Nobody posts their failures or bad days. If you compare your real, normal life to someone else's best-of moments, you'll always feel worse. Remember: <strong>you're comparing your regular life to their greatest hits.</strong></p>
+  </div>
+
+  <div class="idea-card">
+    <div class="idea-num">Idea 3</div>
+    <h4>Real Confidence vs. Fake Confidence</h4>
+    <p><strong>Real confidence</strong> comes from being good at things, being kind to people, and knowing who you are. You build it by working hard at BJJ, being a good teammate in soccer and flag football, and treating people with respect. <strong>Fake confidence</strong> is acting tough online, putting other people down, or copying YouTubers who act like jerks just to get views. Real confidence lasts because you earned it. Fake confidence falls apart the second someone calls you out.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <div class="card purple">
+    <h4>The Bottom Line</h4>
+    <p>Your iPad, your phone, your screens &mdash; they're <strong>tools</strong>. Think of a hammer: it can build a house or break a window. It all depends on the person using it. You're learning to be the kind of person who builds things, not breaks them. That starts with how you talk to people, what you choose to watch, and how you spend your time.</p>
+  </div>
+
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" onclick="goTo('lesson3')">&larr; Back</button>
+    <button class="btn btn-success" onclick="goTo('test')">Take the Test &rarr;</button>
+  </div>
+</div>
+
+<!-- ==================== TEST ==================== -->
+<div class="section" id="test">
+  <div class="lesson-tag">Assessment</div>
+  <h2>Prove You Learned It</h2>
+  <p class="lesson-subtitle">15 questions. You need to get at least 12 right (80%) to pass. Read each question carefully. Once you pick an answer, you can't change it.</p>
+
+  <div id="quizContainer"></div>
+
+  <div style="text-align: center; margin-top: 40px;">
+    <button class="btn btn-success" id="submitBtn" onclick="submitTest()" disabled>Submit Test</button>
+    <p id="answeredCount" style="margin-top: 12px; color: #64748b; font-size: 14px;">0 of 15 answered</p>
+  </div>
+</div>
+
+<!-- ==================== RESULTS ==================== -->
+<div class="section" id="results">
+  <div class="results-container">
+    <div class="lesson-tag">Results</div>
+    <h2 style="margin-bottom: 8px;">Your Score</h2>
+    <div class="score-circle" id="scoreCircle">
+      <span id="scoreNum">0</span>
+      <span class="out-of">out of 15</span>
+    </div>
+    <div class="result-message" id="resultMessage"></div>
+    <p class="result-detail" id="resultDetail"></p>
+    <div id="resultActions"></div>
+  </div>
+
+  <div id="reviewContainer" style="margin-top: 40px;"></div>
+</div>
+
+<script>
+const sections = ['welcome','lesson1','lesson2','lesson3','lesson4','test','results'];
+const progressMap = { welcome: 0, lesson1: 16, lesson2: 33, lesson3: 50, lesson4: 66, test: 83, results: 100 };
+
+function goTo(id) {
+  sections.forEach(s => {
+    document.getElementById(s).classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+  document.getElementById('progressFill').style.width = progressMap[id] + '%';
+  window.scrollTo(0, 0);
+
+  // Update nav tabs
+  const tabs = document.querySelectorAll('.nav-tab');
+  tabs.forEach((tab, i) => {
+    tab.classList.remove('active');
+    if (sections[i] === id) tab.classList.add('active');
+  });
+}
+
+// Quiz data
+const questions = [
+  {
+    q: "Why do YouTubers act in extreme, loud, or dramatic ways in their videos?",
+    opts: ["Because that's how they really act in real life", "Because extreme behavior gets more views and makes them more money", "Because they don't know how to act normally", "Because their parents taught them to act that way"],
+    ans: 1
+  },
+  {
+    q: "How many people are on MrBeast's team to help make his videos?",
+    opts: ["About 10", "About 25", "Over 100", "Just him and a friend"],
+    ans: 2
+  },
+  {
+    q: "What's the main problem with watching a lot of YouTube content where people trash-talk and show off?",
+    opts: ["It uses too much internet data", "Your brain starts to think that's normal behavior", "It makes your iPad run slower", "There's no real problem with it"],
+    ans: 1
+  },
+  {
+    q: "When you type a text message, what's the most important thing to remember about it?",
+    opts: ["You can always delete it later", "Only the person you sent it to will ever see it", "It stays forever and can be screenshotted and shared", "Texts aren't a big deal"],
+    ans: 2
+  },
+  {
+    q: "Using the middle finger emoji (🖕) in a text is:",
+    opts: ["Fine as long as it's a joke", "The same as doing it to someone's face", "Only bad if you send it to a teacher", "Not a big deal since it's just an emoji"],
+    ans: 1
+  },
+  {
+    q: "What should you do if you're angry and want to text someone?",
+    opts: ["Send the text quickly before you calm down so they know how you feel", "Use all caps so they understand you're serious", "Put the phone down and wait until you've calmed down", "Send the text but add 'jk' at the end"],
+    ans: 2
+  },
+  {
+    q: "What is \"tone\" in a text message?",
+    opts: ["The ringtone your phone uses", "The attitude or feeling behind your words", "The font size you choose", "How fast you type"],
+    ans: 1
+  },
+  {
+    q: "Why does sarcasm almost never work in text messages?",
+    opts: ["Because phones can't display sarcasm", "Because the other person can't hear your voice or see your face to know you're joking", "Because sarcasm is always rude", "Because texting apps block sarcastic messages"],
+    ans: 1
+  },
+  {
+    q: "If you text someone just the letter \"K\", they will most likely think you are:",
+    opts: ["Being efficient with your time", "Annoyed and don't want to talk to them", "Being respectful", "In a hurry but happy"],
+    ans: 1
+  },
+  {
+    q: "What's a better way to respond than texting \"Whatever\"?",
+    opts: ["Whateverrrrr", "I'm fine with either option", "W/e", "..."],
+    ans: 1
+  },
+  {
+    q: "What is the minimum age most social media apps require to create an account?",
+    opts: ["10 years old", "11 years old", "13 years old", "16 years old"],
+    ans: 2
+  },
+  {
+    q: "What is the \"Screenshot Rule\"?",
+    opts: ["Always take screenshots of your conversations", "Before sending any message, imagine the person you respect most reading it", "Only send screenshots to your best friend", "Delete all screenshots after 24 hours"],
+    ans: 1
+  },
+  {
+    q: "Social media shows you:",
+    opts: ["A complete and honest picture of someone's life", "Only the best moments — like a highlight reel", "Mostly sad and boring content", "Exactly what real life is like"],
+    ans: 1
+  },
+  {
+    q: "What's the difference between real confidence and fake confidence?",
+    opts: ["Real confidence means being loud; fake confidence means being quiet", "Real confidence comes from being good at things and treating people well; fake confidence is acting tough online", "There is no difference", "Fake confidence is better because more people notice you"],
+    ans: 1
+  },
+  {
+    q: "When your parent texts you, the right thing to do is:",
+    opts: ["Ignore it if you're busy with something fun", "Reply when you feel like it, even if that's hours later", "Answer them — ignoring their text is the same as ignoring them face-to-face", "Only reply if they text you three times"],
+    ans: 2
+  }
+];
+
+// Render quiz
+const quizContainer = document.getElementById('quizContainer');
+const answered = new Array(15).fill(null);
+
+questions.forEach((q, i) => {
+  const block = document.createElement('div');
+  block.className = 'question-block';
+  block.id = 'qblock-' + i;
+
+  let optsHtml = '';
+  q.opts.forEach((opt, j) => {
+    optsHtml += `
+      <li>
+        <label id="label-${i}-${j}">
+          <input type="radio" name="q${i}" value="${j}" onchange="selectAnswer(${i}, ${j})">
+          ${opt}
+        </label>
+      </li>`;
+  });
+
+  block.innerHTML = `
+    <div class="question-num">Question ${i + 1} of 15</div>
+    <div class="question-text">${q.q}</div>
+    <ul class="options">${optsHtml}</ul>
+  `;
+  quizContainer.appendChild(block);
+});
+
+function selectAnswer(qi, oi) {
+  answered[qi] = oi;
+  // Highlight selected
+  questions[qi].opts.forEach((_, j) => {
+    document.getElementById(`label-${qi}-${j}`).classList.remove('selected');
+  });
+  document.getElementById(`label-${qi}-${oi}`).classList.add('selected');
+
+  const count = answered.filter(a => a !== null).length;
+  document.getElementById('answeredCount').textContent = count + ' of 15 answered';
+  document.getElementById('submitBtn').disabled = count < 15;
+}
+
+function submitTest() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    const block = document.getElementById('qblock-' + i);
+    const selected = answered[i];
+
+    // Disable all radios
+    block.querySelectorAll('input').forEach(inp => inp.disabled = true);
+
+    if (selected === q.ans) {
+      score++;
+      block.classList.add('correct');
+      document.getElementById(`label-${i}-${selected}`).classList.add('correct-answer');
+    } else {
+      block.classList.add('incorrect');
+      document.getElementById(`label-${i}-${selected}`).classList.add('wrong-answer');
+      document.getElementById(`label-${i}-${q.ans}`).classList.add('correct-answer');
+    }
+  });
+
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('submitBtn').textContent = 'Test Submitted';
+
+  // Show results
+  showResults(score);
+}
+
+function showResults(score) {
+  const passed = score >= 12;
+  document.getElementById('scoreNum').textContent = score;
+  const circle = document.getElementById('scoreCircle');
+  circle.classList.add(passed ? 'pass' : 'fail');
+
+  const msg = document.getElementById('resultMessage');
+  msg.textContent = passed ? 'You Passed!' : 'Not Quite Yet';
+  msg.classList.add(passed ? 'pass' : 'fail');
+
+  const detail = document.getElementById('resultDetail');
+  if (passed) {
+    detail.textContent = `You got ${score} out of 15 correct. You've proven that you understand digital responsibility. Time to put it into practice.`;
+  } else {
+    detail.textContent = `You got ${score} out of 15 correct. You need at least 12 to pass. Go back and re-read the lessons, then try again.`;
+  }
+
+  const actions = document.getElementById('resultActions');
+  if (passed) {
+    actions.innerHTML = '<p style="font-size: 18px; color: #4ade80; font-weight: 600;">Show this screen to your parents.</p>';
+  } else {
+    actions.innerHTML = '<button class="btn btn-primary" onclick="resetTest()">Review Lessons &amp; Try Again</button>';
+  }
+
+  goTo('results');
+}
+
+function resetTest() {
+  // Reset everything
+  answered.fill(null);
+  questions.forEach((q, i) => {
+    const block = document.getElementById('qblock-' + i);
+    block.classList.remove('correct', 'incorrect');
+    block.querySelectorAll('input').forEach(inp => {
+      inp.disabled = false;
+      inp.checked = false;
+    });
+    q.opts.forEach((_, j) => {
+      const label = document.getElementById(`label-${i}-${j}`);
+      label.classList.remove('selected', 'correct-answer', 'wrong-answer');
+    });
+  });
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('submitBtn').textContent = 'Submit Test';
+  document.getElementById('answeredCount').textContent = '0 of 15 answered';
+
+  // Reset result display
+  document.getElementById('scoreCircle').classList.remove('pass', 'fail');
+  document.getElementById('resultMessage').classList.remove('pass', 'fail');
+
+  goTo('welcome');
+}
+</script>
+
+</body>
+</html>
