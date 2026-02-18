@@ -73,10 +73,10 @@
   }
   .nav-tab {
     flex: 1;
-    padding: 10px 12px;
+    padding: 10px 8px;
     border-radius: 8px;
     text-align: center;
-    font-size: 13px;
+    font-size: 12px;
     color: #64748b;
     cursor: pointer;
     transition: all 0.3s;
@@ -91,9 +91,7 @@
     color: #fff;
     font-weight: 600;
   }
-  .nav-tab.completed {
-    color: #4ade80;
-  }
+  .nav-tab.completed { color: #4ade80; }
 
   /* Cards */
   h2 {
@@ -129,22 +127,11 @@
     margin-bottom: 24px;
     border: 1px solid #334155;
   }
-  .card.highlight {
-    border-left: 4px solid #3b82f6;
-  }
-  .card.warning {
-    border-left: 4px solid #f59e0b;
-    background: #1e293b;
-  }
-  .card.success {
-    border-left: 4px solid #4ade80;
-  }
-  .card.danger {
-    border-left: 4px solid #ef4444;
-  }
-  .card.purple {
-    border-left: 4px solid #8b5cf6;
-  }
+  .card.highlight { border-left: 4px solid #3b82f6; }
+  .card.warning { border-left: 4px solid #f59e0b; }
+  .card.success { border-left: 4px solid #4ade80; }
+  .card.danger { border-left: 4px solid #ef4444; }
+  .card.purple { border-left: 4px solid #8b5cf6; }
 
   .card-label {
     font-size: 12px;
@@ -197,21 +184,11 @@
     background: rgba(74, 222, 128, 0.1);
     border: 1px solid rgba(74, 222, 128, 0.3);
   }
-  .compare-box h4 {
-    margin-bottom: 12px;
-    font-size: 15px;
-  }
+  .compare-box h4 { margin-bottom: 12px; font-size: 15px; }
   .compare-box.bad h4 { color: #fca5a5; }
   .compare-box.good h4 { color: #86efac; }
-  .compare-box ul {
-    list-style: none;
-    padding: 0;
-  }
-  .compare-box ul li {
-    padding: 4px 0;
-    font-size: 14px;
-    color: #cbd5e1;
-  }
+  .compare-box ul { list-style: none; padding: 0; }
+  .compare-box ul li { padding: 4px 0; font-size: 14px; color: #cbd5e1; }
 
   /* Numbered rules */
   .rule-list {
@@ -271,18 +248,9 @@
     margin: 8px 0;
     font-size: 15px;
   }
-  .text-bubble.bad-msg {
-    background: #7f1d1d;
-    color: #fecaca;
-  }
-  .text-bubble.good-msg {
-    background: #14532d;
-    color: #bbf7d0;
-  }
-  .text-bubble.neutral-msg {
-    background: #334155;
-    color: #e2e8f0;
-  }
+  .text-bubble.bad-msg { background: #7f1d1d; color: #fecaca; }
+  .text-bubble.good-msg { background: #14532d; color: #bbf7d0; }
+  .text-bubble.neutral-msg { background: #334155; color: #e2e8f0; }
   .scenario-result {
     margin-top: 12px;
     padding: 12px 16px;
@@ -293,10 +261,7 @@
   .scenario-result.good { background: rgba(74,222,128,0.1); color: #86efac; }
 
   /* Quick fix list */
-  .fix-list {
-    list-style: none;
-    padding: 0;
-  }
+  .fix-list { list-style: none; padding: 0; }
   .fix-list li {
     padding: 12px 16px;
     background: #1e293b;
@@ -350,10 +315,7 @@
     color: #fff;
   }
   .btn-primary:hover { background: linear-gradient(135deg, #60a5fa, #3b82f6); transform: translateY(-1px); }
-  .btn-secondary {
-    background: #334155;
-    color: #e2e8f0;
-  }
+  .btn-secondary { background: #334155; color: #e2e8f0; }
   .btn-secondary:hover { background: #475569; }
   .btn-success {
     background: linear-gradient(135deg, #22c55e, #16a34a);
@@ -394,9 +356,7 @@
     font-weight: 500;
   }
   .options { list-style: none; padding: 0; }
-  .options li {
-    margin-bottom: 8px;
-  }
+  .options li { margin-bottom: 8px; }
   .options label {
     display: flex;
     align-items: center;
@@ -410,33 +370,14 @@
     font-size: 15px;
     color: #cbd5e1;
   }
-  .options label:hover {
-    border-color: #3b82f6;
-    background: #1a2744;
-  }
-  .options input[type="radio"] {
-    accent-color: #3b82f6;
-    width: 18px;
-    height: 18px;
-  }
-  .options label.selected {
-    border-color: #3b82f6;
-    background: #1e3a5f;
-  }
-  .options label.correct-answer {
-    border-color: #4ade80;
-    background: rgba(74,222,128,0.1);
-  }
-  .options label.wrong-answer {
-    border-color: #ef4444;
-    background: rgba(239,68,68,0.1);
-  }
+  .options label:hover { border-color: #3b82f6; background: #1a2744; }
+  .options input[type="radio"] { accent-color: #3b82f6; width: 18px; height: 18px; }
+  .options label.selected { border-color: #3b82f6; background: #1e3a5f; }
+  .options label.correct-answer { border-color: #4ade80; background: rgba(74,222,128,0.1); }
+  .options label.wrong-answer { border-color: #ef4444; background: rgba(239,68,68,0.1); }
 
   /* Results */
-  .results-container {
-    text-align: center;
-    padding: 60px 0;
-  }
+  .results-container { text-align: center; padding: 60px 0; }
   .score-circle {
     width: 180px;
     height: 180px;
@@ -449,26 +390,10 @@
     font-size: 48px;
     font-weight: 800;
   }
-  .score-circle.pass {
-    background: rgba(74,222,128,0.1);
-    border: 4px solid #4ade80;
-    color: #4ade80;
-  }
-  .score-circle.fail {
-    background: rgba(239,68,68,0.1);
-    border: 4px solid #ef4444;
-    color: #ef4444;
-  }
-  .score-circle .out-of {
-    font-size: 16px;
-    font-weight: 400;
-    color: #94a3b8;
-  }
-  .result-message {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
+  .score-circle.pass { background: rgba(74,222,128,0.1); border: 4px solid #4ade80; color: #4ade80; }
+  .score-circle.fail { background: rgba(239,68,68,0.1); border: 4px solid #ef4444; color: #ef4444; }
+  .score-circle .out-of { font-size: 16px; font-weight: 400; color: #94a3b8; }
+  .result-message { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
   .result-message.pass { color: #4ade80; }
   .result-message.fail { color: #ef4444; }
   .result-detail { color: #94a3b8; font-size: 16px; margin-bottom: 32px; }
@@ -491,25 +416,273 @@
     border-radius: 12px;
     display: inline-block;
   }
-  .tone-example .meaning {
-    padding: 8px 0;
-    font-size: 14px;
-  }
+  .tone-example .meaning { padding: 8px 0; font-size: 14px; }
   .tone-example .meaning strong { color: #f8fafc; }
+
+  /* References */
+  .ref-list { list-style: none; padding: 0; counter-reset: refs; }
+  .ref-list li {
+    counter-increment: refs;
+    padding: 16px 16px 16px 48px;
+    position: relative;
+    margin-bottom: 8px;
+    background: #1e293b;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.5;
+  }
+  .ref-list li::before {
+    content: "[" counter(refs) "]";
+    position: absolute;
+    left: 14px;
+    top: 16px;
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .ref-list li strong { color: #cbd5e1; }
+  .ref-list li em { color: #94a3b8; }
+  .ref-cat {
+    font-size: 14px;
+    color: #3b82f6;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 28px 0 12px;
+    font-weight: 600;
+  }
+
+  sup.ref {
+    color: #3b82f6;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 11px;
+  }
+  sup.ref:hover { text-decoration: underline; }
 
   /* Scrollbar */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: #0f172a; }
   ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
 
-  .section-divider {
+  .section-divider { height: 1px; background: #334155; margin: 40px 0; }
+
+  /* Side Nav */
+  .sidenav-toggle {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.3s;
+  }
+  .sidenav-toggle:hover { background: #334155; }
+  .sidenav-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #e2e8f0;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .sidenav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .sidenav-toggle.open span:nth-child(2) { opacity: 0; }
+  .sidenav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .sidenav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 150;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .sidenav-overlay.open { opacity: 1; pointer-events: all; }
+
+  .sidenav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    max-width: 85vw;
+    background: #0f172a;
+    border-right: 1px solid #334155;
+    z-index: 160;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    padding: 24px 0;
+  }
+  .sidenav.open { transform: translateX(0); }
+
+  .sidenav-header {
+    padding: 16px 20px 20px;
+    border-bottom: 1px solid #1e293b;
+    margin-bottom: 8px;
+  }
+  .sidenav-header h3 {
+    font-size: 16px;
+    color: #f8fafc;
+    margin: 0;
+  }
+  .sidenav-header p {
+    font-size: 12px;
+    color: #64748b;
+    margin: 4px 0 0;
+  }
+
+  .sidenav-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+    text-decoration: none;
+  }
+  .sidenav-item:hover { background: #1e293b; }
+  .sidenav-item.active {
+    background: rgba(59,130,246,0.1);
+    border-left-color: #3b82f6;
+  }
+  .sidenav-item .sn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .sidenav-item .sn-icon.welcome-icon { background: #334155; color: #e2e8f0; }
+  .sidenav-item .sn-icon.lesson-icon { background: #1e3a5f; color: #60a5fa; }
+  .sidenav-item .sn-icon.test-icon { background: #14532d; color: #4ade80; }
+  .sidenav-item .sn-icon.ref-icon { background: #3b1764; color: #a78bfa; }
+
+  .sidenav-item .sn-text { flex: 1; min-width: 0; }
+  .sidenav-item .sn-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f8fafc;
+    line-height: 1.3;
+  }
+  .sidenav-item .sn-desc {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.3;
+    margin-top: 2px;
+  }
+  .sidenav-item.active .sn-title { color: #60a5fa; }
+
+  .sidenav-divider {
     height: 1px;
-    background: #334155;
-    margin: 40px 0;
+    background: #1e293b;
+    margin: 8px 20px;
   }
 </style>
 </head>
 <body>
+
+<!-- Side Nav Toggle -->
+<button class="sidenav-toggle" id="sidenavToggle" onclick="toggleSidenav()">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- Side Nav Overlay -->
+<div class="sidenav-overlay" id="sidenavOverlay" onclick="closeSidenav()"></div>
+
+<!-- Side Nav -->
+<nav class="sidenav" id="sidenav">
+  <div class="sidenav-header">
+    <h3>📱 Digital Responsibility</h3>
+    <p>Course Navigation</p>
+  </div>
+
+  <div class="sidenav-item active" data-section="welcome" onclick="navTo('welcome')">
+    <div class="sn-icon welcome-icon">&#9679;</div>
+    <div class="sn-text">
+      <div class="sn-title">Welcome</div>
+      <div class="sn-desc">Introduction &amp; how this works</div>
+    </div>
+  </div>
+
+  <div class="sidenav-divider"></div>
+
+  <div class="sidenav-item" data-section="lesson1" onclick="navTo('lesson1')">
+    <div class="sn-icon lesson-icon">1</div>
+    <div class="sn-text">
+      <div class="sn-title">YouTube Isn't Real Life</div>
+      <div class="sn-desc">Entertainment vs. reality</div>
+    </div>
+  </div>
+
+  <div class="sidenav-item" data-section="lesson2" onclick="navTo('lesson2')">
+    <div class="sn-icon lesson-icon">2</div>
+    <div class="sn-text">
+      <div class="sn-title">Why People Are Mean Online</div>
+      <div class="sn-desc">How others misuse devices &amp; how it affects you</div>
+    </div>
+  </div>
+
+  <div class="sidenav-item" data-section="lesson3" onclick="navTo('lesson3')">
+    <div class="sn-icon lesson-icon">3</div>
+    <div class="sn-text">
+      <div class="sn-title">Words Have Weight</div>
+      <div class="sn-desc">Rules for texting anyone</div>
+    </div>
+  </div>
+
+  <div class="sidenav-item" data-section="lesson4" onclick="navTo('lesson4')">
+    <div class="sn-icon lesson-icon">4</div>
+    <div class="sn-text">
+      <div class="sn-title">Tone, Sarcasm &amp; Misreads</div>
+      <div class="sn-desc">Why texts get misunderstood</div>
+    </div>
+  </div>
+
+  <div class="sidenav-item" data-section="lesson5" onclick="navTo('lesson5')">
+    <div class="sn-icon lesson-icon">5</div>
+    <div class="sn-text">
+      <div class="sn-title">Social Media &amp; Your Future</div>
+      <div class="sn-desc">What's coming &amp; why it matters now</div>
+    </div>
+  </div>
+
+  <div class="sidenav-divider"></div>
+
+  <div class="sidenav-item" data-section="test" onclick="navTo('test')">
+    <div class="sn-icon test-icon">&#10003;</div>
+    <div class="sn-text">
+      <div class="sn-title">Take the Test</div>
+      <div class="sn-desc">17 questions &mdash; need 14 to pass</div>
+    </div>
+  </div>
+
+  <div class="sidenav-item" data-section="references" onclick="navTo('references')">
+    <div class="sn-icon ref-icon">&#9881;</div>
+    <div class="sn-text">
+      <div class="sn-title">Sources &amp; References</div>
+      <div class="sn-desc">Research behind the lessons</div>
+    </div>
+  </div>
+</nav>
 
 <div class="progress-bar"><div class="fill" id="progressFill" style="width: 0%"></div></div>
 
@@ -527,7 +700,9 @@
     <button class="nav-tab" onclick="goTo('lesson2')">Lesson 2</button>
     <button class="nav-tab" onclick="goTo('lesson3')">Lesson 3</button>
     <button class="nav-tab" onclick="goTo('lesson4')">Lesson 4</button>
+    <button class="nav-tab" onclick="goTo('lesson5')">Lesson 5</button>
     <button class="nav-tab" onclick="goTo('test')">Test</button>
+    <button class="nav-tab" onclick="goTo('references')">Sources</button>
   </nav>
 
   <h2>Welcome</h2>
@@ -542,7 +717,7 @@
   <div class="section-divider"></div>
 
   <h3>How This Works</h3>
-  <p>You'll go through <strong>4 short lessons</strong> about how to use your devices the right way. At the end, there's a <strong>15-question test</strong>. You need to get at least <strong>12 out of 15 right (that's 80%)</strong> to pass. Read each lesson carefully &mdash; the test questions come straight from what you'll learn here.</p>
+  <p>You'll go through <strong>5 short lessons</strong> about how to use your devices the right way &mdash; and how to handle it when <em>other people</em> don't. At the end, there's a <strong>17-question test</strong>. You need to get at least <strong>14 out of 17 right (that's about 80%)</strong> to pass. Read each lesson carefully &mdash; the test questions come straight from what you'll learn here.</p>
 
   <div class="callout">
     This isn't a punishment. It's a chance to level up. The stuff you'll learn here is real and it matters &mdash; not just now, but for when you're older and using social media, group chats, and texting every single day.
@@ -555,9 +730,9 @@
   </div>
 </div>
 
-<!-- ==================== LESSON 1 ==================== -->
+<!-- ==================== LESSON 1: YouTube Isn't Real Life ==================== -->
 <div class="section" id="lesson1">
-  <div class="lesson-tag">Lesson 1 of 4</div>
+  <div class="lesson-tag">Lesson 1 of 5</div>
   <h2>YouTube Isn't Real Life</h2>
   <p class="lesson-subtitle">Understanding the difference between entertainment and reality.</p>
 
@@ -565,12 +740,13 @@
 
   <h3>The Truth About Your Favorite YouTubers</h3>
   <p>Here's something important that most kids don't know yet: almost everything you watch on YouTube is <strong>planned, practiced, and edited</strong> to get you to keep watching. That's not just an opinion &mdash; it's how YouTube works as a business. YouTubers make money when you watch their videos. The more you watch, the more money they earn. So everything they do is meant to keep your eyes glued to the screen.</p>
+  <p>Research from multiple universities has found that YouTube's recommendation algorithm &mdash; the system that picks what video plays next &mdash; is designed to maximize watch time, and it tends to push content that triggers strong emotions like anger, fear, or excitement.<sup class="ref" onclick="goTo('references')">[1]</sup> That's why the videos that pop up next are almost always more extreme than the one you just watched.</p>
 
   <div class="section-divider"></div>
 
   <div class="card highlight">
     <div class="card-label">Reality Check</div>
-    <p><strong>MrBeast</strong> has a team of over 100 people who help plan, film, and edit his videos. Each video costs hundreds of thousands of dollars to make. The "reactions" you see are often filmed more than once to get the best version. His whole channel is a business &mdash; and <em>you</em> are the customer.</p>
+    <p><strong>MrBeast</strong> has a team of about 300 employees who help plan, film, and edit his videos. A single video costs between $2.5 million and $5 million to make, and his annual video budget is around $48 million.<sup class="ref" onclick="goTo('references')">[2]</sup> The "reactions" you see are often filmed more than once to get the best version. His whole channel is a business &mdash; and <em>you</em> are the customer.</p>
   </div>
 
   <div class="card highlight">
@@ -625,9 +801,100 @@
   </div>
 </div>
 
-<!-- ==================== LESSON 2 ==================== -->
+<!-- ==================== LESSON 2: Why People Are Mean Online (NEW) ==================== -->
 <div class="section" id="lesson2">
-  <div class="lesson-tag">Lesson 2 of 4</div>
+  <div class="lesson-tag">Lesson 2 of 5</div>
+  <h2>Why People Are Mean Online</h2>
+  <p class="lesson-subtitle">It's not just about how you use your device &mdash; it's about understanding how others might misuse theirs, and how that can affect you.</p>
+
+  <div class="section-divider"></div>
+
+  <h3>The Big Question</h3>
+  <p>Have you ever noticed that people say things in online comments, game chats, or messages that they would <em>never</em> say to someone's face? A kid who's perfectly nice at school might be a total jerk in a group chat. A random stranger in a game lobby might say the most awful things you've ever heard. Why?</p>
+  <p>This isn't just something you've noticed &mdash; it's a real psychological phenomenon that scientists have studied. In 2004, a psychologist named Dr. John Suler gave it a name: <strong>the Online Disinhibition Effect</strong>.<sup class="ref" onclick="goTo('references')">[3]</sup> "Disinhibition" is a big word that basically means <strong>losing the thing that normally stops you from doing something you shouldn't do</strong>. When people go online, the brakes that normally stop them from being rude or mean get weaker &mdash; and here's why.</p>
+
+  <div class="section-divider"></div>
+
+  <h3>The 5 Reasons People Act Differently Online</h3>
+
+  <div class="idea-card">
+    <div class="idea-num">Reason 1</div>
+    <h4>They're Hidden &mdash; Anonymity</h4>
+    <p><strong>Anonymity</strong> means nobody knows who you are. Online, people hide behind usernames, fake profile pictures, and screen names. When nobody knows who you really are, you feel like you can say anything without it coming back to you. It's like wearing an invisible mask.</p>
+    <p>Back in 1969, a famous psychologist named Philip Zimbardo ran an experiment where he had people wear hoods that hid their faces. The people wearing hoods acted way more aggressively than the people whose faces were visible.<sup class="ref" onclick="goTo('references')">[4]</sup> Same people, same room &mdash; the only difference was whether they could be recognized. The internet gives everyone that same invisible hood.</p>
+  </div>
+
+  <div class="idea-card">
+    <div class="idea-num">Reason 2</div>
+    <h4>They Can't See You &mdash; Invisibility</h4>
+    <p><strong>Invisibility</strong> means you can't see the other person's face. This is different from anonymity. Even when people <em>know</em> who they're talking to, not being able to see the other person's reaction makes a huge difference.</p>
+    <p>Research from 2012 found that <strong>lack of eye contact</strong> was actually the #1 reason people say hurtful things online &mdash; even more than anonymity.<sup class="ref" onclick="goTo('references')">[5]</sup> When you can see someone's face crumble after you say something mean, your brain feels bad and tells you to stop. But in a text or a game chat? You don't see the tears. You don't see the hurt. So your brain doesn't hit the brakes.</p>
+  </div>
+
+  <div class="idea-card">
+    <div class="idea-num">Reason 3</div>
+    <h4>There's No One Watching &mdash; No Consequences</h4>
+    <p>In real life, there are adults around. At school, there's a teacher. At BJJ, there's a coach. At home, there are parents. If you say something rude, someone hears it and there are <strong>consequences</strong> &mdash; you get in trouble, you get a look, you lose a privilege.</p>
+    <p>Online? There's no teacher in the game chat. No coach watching the group text. No parent reading over your shoulder (most of the time). When people feel like no one is watching and no one will punish them, they do things they'd never do in front of an adult.</p>
+  </div>
+
+  <div class="idea-card">
+    <div class="idea-num">Reason 4</div>
+    <h4>The Screen Is a Wall &mdash; People Don't Feel "Real"</h4>
+    <p>Here's something weird about the human brain: when you're looking at words on a screen instead of a real person, your brain starts treating the other person like <strong>a character in a game rather than a real human being</strong>. Dr. Suler called this "solipsistic introjection" &mdash; but in simple terms, it means that when you can't see or hear someone, your brain kind of forgets they're a real person with real feelings.<sup class="ref" onclick="goTo('references')">[3]</sup></p>
+    <p>Think about it: you'd never walk up to someone at school and say "you're trash" to their face. But in a game lobby, people type it constantly &mdash; because the screen makes the other person feel less real.</p>
+  </div>
+
+  <div class="idea-card">
+    <div class="idea-num">Reason 5</div>
+    <h4>The Crowd Makes It Worse &mdash; Mob Mentality</h4>
+    <p><strong>Mob mentality</strong> is when people in a group start doing things they would never do alone. One person starts being mean in a comment section, and then others pile on. Each person thinks: "Well, everyone else is doing it, so it's fine." Research shows that groups of people tend to become <em>more extreme</em> in whatever direction they were already leaning.<sup class="ref" onclick="goTo('references')">[6]</sup> So if someone starts being a little negative, the group pushes it into being a <em>lot</em> negative.</p>
+    <p>Online, anonymity makes this even worse. One study found that when people are anonymous AND there's an aggressive group around them, they use significantly more aggressive language than either factor alone.<sup class="ref" onclick="goTo('references')">[7]</sup></p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h3>How This Affects You</h3>
+  <p>You might be thinking: "Okay, so people are mean online. So what?" Here's the "so what":</p>
+
+  <div class="card danger">
+    <h4>The Numbers Are Real</h4>
+    <p>A 2022 survey by the Pew Research Center found that <strong>46% of U.S. teens</strong> ages 13&ndash;17 have experienced cyberbullying &mdash; that's almost half.<sup class="ref" onclick="goTo('references')">[8]</sup> That includes being called offensive names online (32%), having false rumors spread about them (22%), or being physically threatened (10%).</p>
+  </div>
+
+  <div class="card danger">
+    <h4>It Gets Inside Your Head</h4>
+    <p>A major scientific review that combined the results of over 130 studies found that being bullied online is linked to depression, anxiety, lower self-esteem, and feeling worse about your life overall.<sup class="ref" onclick="goTo('references')">[9]</sup> Mean comments from a stranger you'll never meet can stick in your head for days, even when you <em>know</em> they shouldn't matter. That's not weakness &mdash; that's how human brains work.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h3>What To Do About It</h3>
+  <p>Now that you know <em>why</em> people are mean online, you can protect yourself:</p>
+
+  <ol class="rule-list">
+    <li><strong>Don't feed the trolls.</strong> A "troll" is someone who says mean things online just to get a reaction. The more you respond, the more they enjoy it. The best move is to ignore them completely. They want your attention &mdash; don't give it to them.</li>
+    <li><strong>Don't take it personally.</strong> That person in the game chat calling you names? They don't know you. They'd say the same thing to literally anyone. It's not about you &mdash; it's about them feeling powerful behind a screen.</li>
+    <li><strong>Talk to someone you trust.</strong> If someone says something online that really bothers you or scares you, tell a parent, a coach, or a teacher. That's not being a snitch &mdash; that's being smart. Even adults deal with this stuff and ask for help.</li>
+    <li><strong>Block and report.</strong> Every app and game has a way to block people who are being harmful and report them. Use it. You don't owe anyone your attention, especially when they're being terrible.</li>
+    <li><strong>Remember the "why."</strong> Now that you know about the Online Disinhibition Effect, you understand <em>why</em> people act this way. They're hiding behind a screen, they can't see your face, and there's no adult watching. Understanding why takes away a lot of its power over you.</li>
+  </ol>
+
+  <div class="section-divider"></div>
+
+  <div class="callout">
+    Knowing why people are mean online is a superpower. Most kids &mdash; and even most adults &mdash; don't understand this. Now you do. Use it to protect yourself and to make sure <strong>you</strong> never become the person hiding behind a screen to make someone else feel bad.
+  </div>
+
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" onclick="goTo('lesson1')">&larr; Back</button>
+    <button class="btn btn-primary" onclick="goTo('lesson3')">Lesson 3 &rarr;</button>
+  </div>
+</div>
+
+<!-- ==================== LESSON 3: Words Have Weight ==================== -->
+<div class="section" id="lesson3">
+  <div class="lesson-tag">Lesson 3 of 5</div>
   <h2>Words Have Weight &mdash; Even in Texts</h2>
   <p class="lesson-subtitle">Rules for texting anyone &mdash; parents, friends, coaches, or anyone else.</p>
 
@@ -643,7 +910,7 @@
   <div class="section-divider"></div>
 
   <h3>The Middle Finger Emoji</h3>
-  <p>Using the 🖕 emoji in a text to your parents &mdash; or anyone &mdash; is the same as doing it to their face. It's not funny. It's not edgy. It's disrespectful. Emojis carry the same meaning as the real action. Just because it's on a screen doesn't make it less real.</p>
+  <p>Using the 🖕 emoji in a text to your parents &mdash; or anyone &mdash; is the same as doing it to their face. It's not funny. It's not edgy. It's disrespectful. Emojis carry the same meaning as the real action. Research has shown that negative emojis can shift how an entire message is interpreted &mdash; one bad emoji can make an otherwise normal message feel hostile.<sup class="ref" onclick="goTo('references')">[10]</sup> Just because it's on a screen doesn't make it less real.</p>
 
   <div class="section-divider"></div>
 
@@ -656,7 +923,7 @@
     <li><strong>Re-read before you send.</strong> Read your message back to yourself. Would you be okay if your teacher read it? If not, delete it and try again.</li>
     <li><strong>Reply to your parents.</strong> When your parents text you, answer them. Ignoring a parent's text is the same as ignoring them when they talk to you face-to-face.</li>
     <li><strong>Don't text when you're mad.</strong> If you're upset, put the phone down. Wait until you've calmed down. Angry texts always make things worse.</li>
-    <li><strong>Sarcasm doesn't work in texts.</strong> More on this in Lesson 3, but sarcasm almost always gets misunderstood in texts because the other person can't hear your voice or see your face.</li>
+    <li><strong>Sarcasm doesn't work in texts.</strong> More on this in Lesson 4, but sarcasm almost always gets misunderstood in texts because the other person can't hear your voice or see your face.</li>
   </ol>
 
   <div class="section-divider"></div>
@@ -692,117 +959,94 @@
   </div>
 
   <div class="nav-buttons">
-    <button class="btn btn-secondary" onclick="goTo('lesson1')">&larr; Back</button>
-    <button class="btn btn-primary" onclick="goTo('lesson3')">Lesson 3 &rarr;</button>
+    <button class="btn btn-secondary" onclick="goTo('lesson2')">&larr; Back</button>
+    <button class="btn btn-primary" onclick="goTo('lesson4')">Lesson 4 &rarr;</button>
   </div>
 </div>
 
-<!-- ==================== LESSON 3 ==================== -->
-<div class="section" id="lesson3">
-  <div class="lesson-tag">Lesson 3 of 4</div>
+<!-- ==================== LESSON 4: Tone & Sarcasm (SHORTENED) ==================== -->
+<div class="section" id="lesson4">
+  <div class="lesson-tag">Lesson 4 of 5</div>
   <h2>Tone, Sarcasm &amp; How Messages Get Misread</h2>
   <p class="lesson-subtitle">Why what you meant and what they understood are often two different things.</p>
 
   <div class="section-divider"></div>
 
-  <h3>What Is Tone?</h3>
-  <p>Tone is the attitude or feeling behind your words. It's not just <em>what</em> you say &mdash; it's <em>how</em> you say it. Think of it this way: you can say "thanks a lot" in a nice way that means you're grateful, or you can say "thanks a LOT" in a mean way that means the opposite. Same words, totally different meaning. That difference is <strong>tone</strong>.</p>
-  <p>When you're talking to someone in person, they can figure out your tone from your voice, your face, and your body language. But in a text message, all of that disappears. The person reading your text has to <em>guess</em> what you meant &mdash; and they usually guess wrong.</p>
-
-  <div class="compare-grid">
-    <div class="compare-box good">
-      <h4>🗣️ In Person</h4>
-      <ul>
-        <li>Someone can hear if you're joking</li>
-        <li>They see your facial expression</li>
-        <li>They know if you're being playful</li>
-        <li>Tone of voice gives context</li>
-      </ul>
-    </div>
-    <div class="compare-box bad">
-      <h4>💬 In Text</h4>
-      <ul>
-        <li>They can't hear your voice</li>
-        <li>No facial expression to read</li>
-        <li>Jokes look like insults</li>
-        <li>Words are all they have to go on</li>
-      </ul>
-    </div>
-  </div>
+  <h3>The Comedy Problem</h3>
+  <p>Think about <strong>Jim Carrey</strong>. He's one of the funniest people alive. But <em>why</em> is he funny? It's not just the words he says &mdash; it's his face, his body, his voice. He spent hours as a kid practicing facial expressions in the mirror, and he can move his face in ways that are almost cartoonish. In movies like <em>Ace Ventura</em>, <em>The Mask</em>, and <em>Liar Liar</em>, his comedy works because you can <strong>see</strong> every exaggerated expression and <strong>hear</strong> every weird voice.<sup class="ref" onclick="goTo('references')">[11]</sup></p>
+  <p>Or think about <strong>Jack Black</strong>. He charges around a room like an angry bear, then suddenly does a tiny delicate move with his fingers, then leaps off like a ballerina. His comedy in <em>School of Rock</em> and <em>Nacho Libre</em> is all energy, facial expressions, and physical movement.<sup class="ref" onclick="goTo('references')">[12]</sup></p>
+  <p>Now imagine reading a <em>transcript</em> of their jokes &mdash; just the words, printed on paper, with no face and no voice. Would it still be funny? <strong>Not even close.</strong> Most of the humor would completely disappear. That's exactly what happens when you try to be funny, sarcastic, or playful in a text message.</p>
 
   <div class="section-divider"></div>
 
-  <h3>The Sarcasm Problem</h3>
-  <p>Sarcasm is when you say the opposite of what you really mean, usually to be funny. Here's an example: if it's pouring rain outside and you say "Wow, great weather today!" &mdash; that's sarcasm. You don't actually think the weather is great. In person, people can tell you're being sarcastic because they hear your voice and see your face.</p>
-  <p>But in a text? Sarcasm almost never works. Look at this message:</p>
+  <h3>The Science Behind It</h3>
+  <p>A study at Cornell University found that people who send emails are confident the reader will understand their intended tone about 80% of the time &mdash; but the reader actually gets it right only about <strong>50% of the time</strong>. That's a coin flip.<sup class="ref" onclick="goTo('references')">[13]</sup> The reason? When you type a message, you "hear" your own tone in your head as you write it. But the person reading it doesn't hear anything &mdash; they just see flat words on a screen.</p>
+  <p>Another study found that emails are consistently read as <strong>more negative than intended</strong>.<sup class="ref" onclick="goTo('references')">[14]</sup> So even when you think you're being friendly or funny, the person reading your text probably thinks you're being colder or meaner than you really are.</p>
 
   <div class="card warning">
     <div class="card-label">Text Message</div>
     <p style="font-size: 20px; font-weight: 600; color: #f8fafc;">"Oh yeah that's a GREAT idea"</p>
-    <p>Is this person being nice and saying they like the idea? Or are they making fun of it? <strong>You can't tell.</strong> In a text, these exact same words could mean either thing. That's why sarcasm in texts causes fights and hurt feelings &mdash; even between grown-ups.</p>
+    <p>Is this person being nice? Or making fun of you? In person, you'd know instantly from their face and voice. In a text &mdash; <strong>you have no idea.</strong></p>
   </div>
 
   <div class="section-divider"></div>
 
-  <h3>How Tone Gets Lost: Examples</h3>
+  <h3>Quick Tone Traps</h3>
 
-  <div class="tone-example">
-    <div class="card-label">What You Type</div>
-    <div class="typed">Whatever</div>
-    <div class="meaning"><strong>What you might mean:</strong> "Okay, I don't really care either way."</div>
-    <div class="meaning"><strong>What they probably think you mean:</strong> "I don't care about you or what you're saying." It comes across as rude and cold.</div>
-  </div>
-
-  <div class="tone-example">
-    <div class="card-label">What You Type</div>
-    <div class="typed">K</div>
-    <div class="meaning"><strong>What you might mean:</strong> "Okay, sounds good."</div>
-    <div class="meaning"><strong>What they probably think you mean:</strong> "I'm annoyed and I don't want to talk to you." Just one letter can feel like a slap in the face.</div>
-  </div>
-
-  <div class="tone-example">
-    <div class="card-label">What You Type</div>
-    <div class="typed">Fine.</div>
-    <div class="meaning"><strong>What you might mean:</strong> "Okay, that works."</div>
-    <div class="meaning"><strong>What they probably think you mean:</strong> "I'm mad but I'm not going to tell you why." That little period at the end makes it feel angry and cold.</div>
+  <div class="compare-grid">
+    <div class="compare-box bad">
+      <h4>&#10060; These Sound Rude in Text</h4>
+      <ul>
+        <li><strong>"K"</strong> &mdash; sounds annoyed</li>
+        <li><strong>"Whatever"</strong> &mdash; sounds dismissive</li>
+        <li><strong>"Fine."</strong> &mdash; sounds angry (that period!)</li>
+        <li><strong>Sarcasm</strong> &mdash; sounds like an insult</li>
+      </ul>
+    </div>
+    <div class="compare-box good">
+      <h4>&#9989; Say This Instead</h4>
+      <ul>
+        <li><strong>"Ok sounds good!"</strong></li>
+        <li><strong>"I'm fine with either option"</strong></li>
+        <li><strong>"That works for me"</strong></li>
+        <li><strong>Just say what you actually mean</strong></li>
+      </ul>
+    </div>
   </div>
 
   <div class="section-divider"></div>
 
   <div class="callout">
     <strong>The Golden Rule of Texting:</strong><br>
-    When in doubt, be more clear and more kind than you think you need to be. Add a word or two to make your meaning obvious. "Ok sounds good!" is way different from "K." A little extra effort prevents a lot of problems.
+    Be more clear and more kind than you think you need to be. Jim Carrey can make "alrighty then" hilarious because you can see his face. You can't do that in a text. A few extra words prevent a lot of problems.
   </div>
 
-  <h3>Quick Fixes</h3>
-  <ul class="fix-list">
-    <li>Instead of <span class="old">"K"</span> <span class="arrow">&rarr;</span> <span class="new">"Ok sounds good!"</span></li>
-    <li>Instead of <span class="old">"Whatever"</span> <span class="arrow">&rarr;</span> <span class="new">"I'm fine with either option"</span></li>
-    <li>Instead of <span class="old">"Fine."</span> <span class="arrow">&rarr;</span> <span class="new">"That works for me"</span></li>
-    <li>Instead of <span class="old">sarcasm</span> <span class="arrow">&rarr;</span> <span class="new">just say what you actually mean</span></li>
-    <li>If you're joking, say so <span class="arrow">&rarr;</span> <span class="new">"jk" or "haha" helps, but being direct is always safer</span></li>
-  </ul>
-
   <div class="nav-buttons">
-    <button class="btn btn-secondary" onclick="goTo('lesson2')">&larr; Back</button>
-    <button class="btn btn-primary" onclick="goTo('lesson4')">Lesson 4 &rarr;</button>
+    <button class="btn btn-secondary" onclick="goTo('lesson3')">&larr; Back</button>
+    <button class="btn btn-primary" onclick="goTo('lesson5')">Lesson 5 &rarr;</button>
   </div>
 </div>
 
-<!-- ==================== LESSON 4 ==================== -->
-<div class="section" id="lesson4">
-  <div class="lesson-tag">Lesson 4 of 4</div>
+<!-- ==================== LESSON 5: Social Media ==================== -->
+<div class="section" id="lesson5">
+  <div class="lesson-tag">Lesson 5 of 5</div>
   <h2>What's Coming: Social Media &amp; Why It Matters Now</h2>
   <p class="lesson-subtitle">You're not on social media yet &mdash; but the habits you build today will protect you when you are.</p>
 
   <div class="section-divider"></div>
 
   <h3>What Is Social Media?</h3>
-  <p>Social media includes apps like Instagram, TikTok, Snapchat, X (which used to be called Twitter), and others. Most of these apps say you have to be at least <strong>13 years old</strong> to make an account. You're not old enough yet &mdash; and that's actually a good thing. Here's why:</p>
+  <p>Social media includes apps like Instagram, TikTok, Snapchat, X (which used to be called Twitter), and others. Most of these apps say you have to be at least <strong>13 years old</strong> to make an account &mdash; that rule comes from a federal law called <strong>COPPA</strong> (Children's Online Privacy Protection Act) passed in 1998.<sup class="ref" onclick="goTo('references')">[15]</sup> You're not old enough yet &mdash; and that's actually a good thing. Here's why:</p>
 
   <div class="card warning">
     <h4>The Research Is Clear</h4>
-    <p>Studies show that kids and teens who spend a lot of time on social media are more likely to feel worried, sad, and bad about themselves. Social media apps are built by teams of really smart people whose job is to make the apps <strong>addictive</strong> &mdash; that means they use tricks to keep you scrolling and scrolling, kind of like how a slot machine keeps people pulling the lever. The younger you start using it, the harder it is to have a healthy relationship with it later.</p>
+    <p>In 2023, the <strong>U.S. Surgeon General</strong> &mdash; the top doctor in the country &mdash; released an official warning that we "cannot conclude social media is sufficiently safe for children and adolescents."<sup class="ref" onclick="goTo('references')">[16]</sup> The report found that teens who spend more than 3 hours per day on social media face <strong>double the risk</strong> of depression and anxiety. In 2024, the Surgeon General called for tobacco-style warning labels on social media platforms.</p>
+    <p>Research by psychologists Jonathan Haidt and Jean Twenge found that social media use has a consistent negative link to mental health, <strong>especially among girls</strong>.<sup class="ref" onclick="goTo('references')">[17]</sup></p>
+  </div>
+
+  <div class="card warning">
+    <h4>Designed to Be Addictive</h4>
+    <p>Social media apps are built by teams of really smart people whose job is to keep you scrolling. The guy who <em>invented</em> infinite scrolling &mdash; Aza Raskin &mdash; has publicly said he regrets it. He described social media design as "taking behavioral cocaine and just sprinkling it all over your interface."<sup class="ref" onclick="goTo('references')">[18]</sup> These apps use the same psychological tricks as slot machines: unpredictable rewards that keep you pulling the lever, hoping the next scroll will show you something great.<sup class="ref" onclick="goTo('references')">[19]</sup></p>
   </div>
 
   <div class="section-divider"></div>
@@ -814,7 +1058,7 @@
   <div class="section-divider"></div>
 
   <h3>Things Teens Wish They Knew</h3>
-  <p>Every year, teenagers get in serious trouble for things they posted or texted. Messages that were "just jokes" get screenshotted and sent to parents, teachers, and principals. When you apply to college someday, the people deciding if you get in can look at your social media. When you apply for a job, your boss might search your name online. What you put out there online follows you around &mdash; sometimes forever.</p>
+  <p>Every year, teenagers get in serious trouble for things they posted or texted. A Pew Research survey found that <strong>57% of teens</strong> decided not to post something because they were worried it would look bad, and 27% avoided posting because it could hurt their chances at school or a job.<sup class="ref" onclick="goTo('references')">[20]</sup> Messages that were "just jokes" get screenshotted and sent to parents, teachers, and principals. What you put out there online follows you around &mdash; sometimes forever.</p>
 
   <div class="section-divider"></div>
 
@@ -829,7 +1073,7 @@
   <div class="idea-card">
     <div class="idea-num">Idea 2</div>
     <h4>You Are Not Your Feed</h4>
-    <p>YouTube, TikTok, and Instagram only show you the best moments of other people's lives &mdash; like a highlight reel in sports. Nobody posts their boring Tuesday. Nobody posts their failures or bad days. If you compare your real, normal life to someone else's best-of moments, you'll always feel worse. Remember: <strong>you're comparing your regular life to their greatest hits.</strong></p>
+    <p>YouTube, TikTok, and Instagram only show you the best moments of other people's lives &mdash; like a highlight reel in sports. Research shows that people who compare themselves to these highlight reels end up with <strong>lower self-esteem</strong>.<sup class="ref" onclick="goTo('references')">[21]</sup> Facebook's own internal research (leaked in 2021) found that <strong>32% of teen girls</strong> said that when they felt bad about their bodies, Instagram made them feel worse.<sup class="ref" onclick="goTo('references')">[22]</sup> Nobody posts their boring Tuesday. Nobody posts their failures. You're comparing your regular life to their greatest hits.</p>
   </div>
 
   <div class="idea-card">
@@ -846,7 +1090,7 @@
   </div>
 
   <div class="nav-buttons">
-    <button class="btn btn-secondary" onclick="goTo('lesson3')">&larr; Back</button>
+    <button class="btn btn-secondary" onclick="goTo('lesson4')">&larr; Back</button>
     <button class="btn btn-success" onclick="goTo('test')">Take the Test &rarr;</button>
   </div>
 </div>
@@ -855,13 +1099,69 @@
 <div class="section" id="test">
   <div class="lesson-tag">Assessment</div>
   <h2>Prove You Learned It</h2>
-  <p class="lesson-subtitle">15 questions. You need to get at least 12 right (80%) to pass. Read each question carefully. Once you pick an answer, you can't change it.</p>
+  <p class="lesson-subtitle">17 questions. You need to get at least 14 right (about 80%) to pass. Read each question carefully. Once you pick an answer, you can't change it.</p>
 
   <div id="quizContainer"></div>
 
   <div style="text-align: center; margin-top: 40px;">
     <button class="btn btn-success" id="submitBtn" onclick="submitTest()" disabled>Submit Test</button>
-    <p id="answeredCount" style="margin-top: 12px; color: #64748b; font-size: 14px;">0 of 15 answered</p>
+    <p id="answeredCount" style="margin-top: 12px; color: #64748b; font-size: 14px;">0 of 17 answered</p>
+  </div>
+</div>
+
+<!-- ==================== REFERENCES ==================== -->
+<div class="section" id="references">
+  <div class="lesson-tag">Sources</div>
+  <h2>References &amp; Research</h2>
+  <p class="lesson-subtitle">Every claim in this course is backed by real scientific research, official government reports, or verified reporting. Here are the sources.</p>
+
+  <div class="ref-cat">YouTube &amp; Algorithms</div>
+  <ol class="ref-list">
+    <li><strong>Hosseinmardi, H., et al. (2024).</strong> "Auditing YouTube's recommendation system for ideologically congenial, extreme, and problematic recommendations." <em>Proceedings of the National Academy of Sciences (PNAS).</em> Also: Munn, L., et al. (2025). "YouTube Recommendations Reinforce Negative Emotions." <em>arXiv.</em></li>
+    <li><strong>MrBeast production scale.</strong> TIME Magazine profile (Feb 2024) confirmed ~300 employees. Annual video budget of ~$48M confirmed in interview with Colin &amp; Samir (Spotify, 2024). Individual videos cost $2.5M&ndash;$5M+.</li>
+  </ol>
+
+  <div class="ref-cat">Online Disinhibition &amp; Behavior</div>
+  <ol class="ref-list" style="counter-reset: refs 2;">
+    <li><strong>Suler, J. (2004).</strong> "The Online Disinhibition Effect." <em>CyberPsychology &amp; Behavior</em>, 7(3), 321&ndash;326. Identified 6 factors: dissociative anonymity, invisibility, asynchronicity, solipsistic introjection, dissociative imagination, and minimization of authority.</li>
+    <li><strong>Zimbardo, P. G. (1969).</strong> "The human choice: Individuation, reason, and order versus deindividuation, impulse, and chaos." <em>Nebraska Symposium on Motivation</em>, Vol. 17, pp. 237&ndash;307. University of Nebraska Press.</li>
+    <li><strong>Lapidot-Lefler, N., &amp; Barak, A. (2012).</strong> "Effects of anonymity, invisibility, and lack of eye-contact on toxic online disinhibition." <em>Computers in Human Behavior</em>, 28(2), 434&ndash;443. Found lack of eye contact was the chief contributor to toxic online behavior.</li>
+    <li><strong>Sunstein, C. R. (2002).</strong> "The law of group polarization." <em>Journal of Political Philosophy</em>, 10(2), 175&ndash;195. Showed how online groups amplify extreme views.</li>
+    <li><strong>Rosner, L., &amp; Kramer, N. C. (2016).</strong> "Verbal venting in the social web: Effects of anonymity and group norms on aggressive language use in online comments." <em>Social Media + Society</em>, 2(3). Anonymity + aggressive group norms = significantly more aggressive language.</li>
+  </ol>
+
+  <div class="ref-cat">Cyberbullying &amp; Mental Health</div>
+  <ol class="ref-list" style="counter-reset: refs 7;">
+    <li><strong>Pew Research Center (2022).</strong> "Teens and Cyberbullying 2022." Survey of 1,316 U.S. teens ages 13&ndash;17. Found 46% experienced at least one form of cyberbullying.</li>
+    <li><strong>Kowalski, R. M., et al. (2014).</strong> "Bullying in the digital age: A critical review and meta-analysis of cyberbullying research among youth." <em>Psychological Bulletin</em>, 140(4), 1073&ndash;1137. 131 effect sizes; significant links to depression, anxiety, lower self-esteem, and suicidal ideation.</li>
+  </ol>
+
+  <div class="ref-cat">Texting, Tone &amp; Emojis</div>
+  <ol class="ref-list" style="counter-reset: refs 9;">
+    <li><strong>Walther, J. B., &amp; D'Addario, K. P. (2001).</strong> "The impacts of emoticons on message interpretation in computer-mediated communication." <em>Social Science Computer Review</em>, 19(3), 324&ndash;347. Negative emojis shift interpretation of entire messages toward the negative.</li>
+    <li><strong>Jim Carrey.</strong> Known for extraordinary facial muscle control developed from childhood mirror practice. Comedy in <em>Ace Ventura</em> (1994), <em>The Mask</em> (1994), and <em>Liar Liar</em> (1997) relies on physical expression. Inside the Actors Studio appearance (2011) confirmed "man of a thousand faces" approach.</li>
+    <li><strong>Jack Black.</strong> Described as "built like a Belushi-Farley power comic but weirdly nimble" (Slate). Comedy in <em>School of Rock</em> (2003) and <em>Nacho Libre</em> (2006) defined by physical energy, facial expressions, and total commitment to absurdity.</li>
+    <li><strong>Kruger, J., Epley, N., Parker, J., &amp; Ng, Z. (2005).</strong> "Egocentrism over e-mail: Can we communicate as well as we think?" <em>Journal of Personality and Social Psychology</em>, 89(6), 925&ndash;936. Senders expect 80% tone accuracy; actual rate is ~50%.</li>
+    <li><strong>Byron, K. (2008).</strong> "Carrying too heavy a load? The communication and miscommunication of emotion by email." <em>Academy of Management Review</em>, 33(2), 309&ndash;327. Emails are systematically read as more negative than intended.</li>
+  </ol>
+
+  <div class="ref-cat">Social Media, Youth &amp; Addictive Design</div>
+  <ol class="ref-list" style="counter-reset: refs 14;">
+    <li><strong>Children's Online Privacy Protection Act (COPPA), 1998.</strong> U.S. federal law prohibiting online services from collecting personal information from children under 13 without parental consent. Basis for the age-13 minimum on Instagram, TikTok, Snapchat, YouTube, and X.</li>
+    <li><strong>U.S. Surgeon General (2023).</strong> "Social Media and Youth Mental Health: The U.S. Surgeon General's Advisory." Found teens spending 3+ hours/day on social media face double the risk of depression and anxiety. In 2024, called for tobacco-style warning labels.</li>
+    <li><strong>Twenge, J. M., Haidt, J., Lozano, J., &amp; Cummins, K. M. (2022).</strong> "Specification curve analysis shows that social media use is linked to poor mental health, especially among girls." <em>Acta Psychologica</em>, 224, 103512.</li>
+    <li><strong>Aza Raskin, inventor of infinite scroll.</strong> BBC interview (2019): described social media design as "taking behavioral cocaine and just sprinkling it all over your interface." Co-founded Center for Humane Technology with Tristan Harris.</li>
+    <li><strong>Sharpe, B. T., &amp; Spooner, R. A. (2025).</strong> "Dopamine-scrolling: a modern public health challenge." <em>Digital Health</em> (SAGE). Social media scrolling operates through variable reinforcement schedules, same mechanism as slot machines.</li>
+    <li><strong>Madden, M., et al. (2013).</strong> "Teens, Social Media, and Privacy." <em>Pew Research Center.</em> 57% of teens decided not to post something due to reputational concerns; 27% avoided posts that could hurt school/job prospects.</li>
+    <li><strong>Vogel, E. A., et al. (2014).</strong> "Social comparison, social media, and self-esteem." <em>Psychology of Popular Media Culture</em>, 3(4), 206&ndash;222. Greater exposure to upward social comparisons on Facebook linked to lower self-esteem.</li>
+    <li><strong>The Facebook Files &mdash; Wall Street Journal (Sept 2021).</strong> Leaked internal Facebook research: 32% of teen girls said Instagram made them feel worse about their bodies. Among teens with suicidal thoughts, 13% of UK users and 6% of US users traced it to Instagram.</li>
+  </ol>
+
+  <div class="section-divider"></div>
+  <p style="text-align: center; color: #64748b; font-size: 13px;">All sources are real, published research accessible through academic databases, government websites, or major news outlets. Last reviewed February 2026.</p>
+
+  <div class="nav-buttons" style="justify-content: center;">
+    <button class="btn btn-secondary" onclick="goTo('welcome')">&larr; Back to Course</button>
   </div>
 </div>
 
@@ -872,7 +1172,7 @@
     <h2 style="margin-bottom: 8px;">Your Score</h2>
     <div class="score-circle" id="scoreCircle">
       <span id="scoreNum">0</span>
-      <span class="out-of">out of 15</span>
+      <span class="out-of">out of 17</span>
     </div>
     <div class="result-message" id="resultMessage"></div>
     <p class="result-detail" id="resultDetail"></p>
@@ -883,35 +1183,57 @@
 </div>
 
 <script>
-const sections = ['welcome','lesson1','lesson2','lesson3','lesson4','test','results'];
-const progressMap = { welcome: 0, lesson1: 16, lesson2: 33, lesson3: 50, lesson4: 66, test: 83, results: 100 };
+const TOTAL_Q = 17;
+const PASS_SCORE = 14;
+const sections = ['welcome','lesson1','lesson2','lesson3','lesson4','lesson5','test','references','results'];
+const progressMap = { welcome: 0, lesson1: 12, lesson2: 25, lesson3: 37, lesson4: 50, lesson5: 62, test: 75, references: 90, results: 100 };
+
+// Side nav
+function toggleSidenav() {
+  document.getElementById('sidenav').classList.toggle('open');
+  document.getElementById('sidenavOverlay').classList.toggle('open');
+  document.getElementById('sidenavToggle').classList.toggle('open');
+}
+function closeSidenav() {
+  document.getElementById('sidenav').classList.remove('open');
+  document.getElementById('sidenavOverlay').classList.remove('open');
+  document.getElementById('sidenavToggle').classList.remove('open');
+}
+function navTo(id) {
+  closeSidenav();
+  goTo(id);
+}
+function updateSidenav(id) {
+  document.querySelectorAll('.sidenav-item').forEach(item => {
+    item.classList.remove('active');
+    if (item.dataset.section === id) item.classList.add('active');
+  });
+}
 
 function goTo(id) {
-  sections.forEach(s => {
-    document.getElementById(s).classList.remove('active');
-  });
+  sections.forEach(s => document.getElementById(s).classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.getElementById('progressFill').style.width = progressMap[id] + '%';
   window.scrollTo(0, 0);
-
-  // Update nav tabs
   const tabs = document.querySelectorAll('.nav-tab');
   tabs.forEach((tab, i) => {
     tab.classList.remove('active');
     if (sections[i] === id) tab.classList.add('active');
   });
+  updateSidenav(id);
 }
 
-// Quiz data
+// Quiz data — 17 questions
 const questions = [
+  // Lesson 1: YouTube (3 questions)
   {
     q: "Why do YouTubers act in extreme, loud, or dramatic ways in their videos?",
     opts: ["Because that's how they really act in real life", "Because extreme behavior gets more views and makes them more money", "Because they don't know how to act normally", "Because their parents taught them to act that way"],
     ans: 1
   },
   {
-    q: "How many people are on MrBeast's team to help make his videos?",
-    opts: ["About 10", "About 25", "Over 100", "Just him and a friend"],
+    q: "About how many employees does MrBeast have on his production team?",
+    opts: ["About 10", "About 50", "About 300", "Just him and a friend"],
     ans: 2
   },
   {
@@ -919,13 +1241,30 @@ const questions = [
     opts: ["It uses too much internet data", "Your brain starts to think that's normal behavior", "It makes your iPad run slower", "There's no real problem with it"],
     ans: 1
   },
+  // Lesson 2: Why People Are Mean Online (3 questions)
+  {
+    q: "What is the \"Online Disinhibition Effect\"?",
+    opts: ["A video game about online behavior", "The phenomenon where people lose the normal brakes on bad behavior when they go online", "A social media filter", "A type of cyberbullying"],
+    ans: 1
+  },
+  {
+    q: "According to research, what is the #1 reason people say hurtful things online?",
+    opts: ["They are bad people in real life too", "They don't have internet rules at home", "They can't see the other person's face (lack of eye contact)", "They are trying to become famous"],
+    ans: 2
+  },
+  {
+    q: "What should you do if someone is being mean to you in a game chat or online?",
+    opts: ["Fight back and insult them worse so they stop", "Don't feed the troll — ignore them, block them, and tell a trusted adult if it bothers you", "Delete all your accounts and never go online again", "Screenshot it and post it publicly to embarrass them"],
+    ans: 1
+  },
+  // Lesson 3: Words Have Weight (3 questions)
   {
     q: "When you type a text message, what's the most important thing to remember about it?",
     opts: ["You can always delete it later", "Only the person you sent it to will ever see it", "It stays forever and can be screenshotted and shared", "Texts aren't a big deal"],
     ans: 2
   },
   {
-    q: "Using the middle finger emoji (🖕) in a text is:",
+    q: "Using the middle finger emoji in a text is:",
     opts: ["Fine as long as it's a joke", "The same as doing it to someone's face", "Only bad if you send it to a teacher", "Not a big deal since it's just an emoji"],
     ans: 1
   },
@@ -934,30 +1273,32 @@ const questions = [
     opts: ["Send the text quickly before you calm down so they know how you feel", "Use all caps so they understand you're serious", "Put the phone down and wait until you've calmed down", "Send the text but add 'jk' at the end"],
     ans: 2
   },
+  // Lesson 4: Tone & Sarcasm (3 questions)
   {
-    q: "What is \"tone\" in a text message?",
-    opts: ["The ringtone your phone uses", "The attitude or feeling behind your words", "The font size you choose", "How fast you type"],
+    q: "Why is Jim Carrey funny in movies but his jokes wouldn't be funny written as plain text?",
+    opts: ["He uses special effects", "His comedy relies on facial expressions, voice, and physical movement that disappear in text", "His movies have a laugh track", "He's only funny to adults"],
     ans: 1
   },
   {
-    q: "Why does sarcasm almost never work in text messages?",
-    opts: ["Because phones can't display sarcasm", "Because the other person can't hear your voice or see your face to know you're joking", "Because sarcasm is always rude", "Because texting apps block sarcastic messages"],
-    ans: 1
-  },
-  {
-    q: "If you text someone just the letter \"K\", they will most likely think you are:",
-    opts: ["Being efficient with your time", "Annoyed and don't want to talk to them", "Being respectful", "In a hurry but happy"],
-    ans: 1
+    q: "According to research, when someone sends an email or text, how often does the reader correctly understand the intended tone?",
+    opts: ["Almost always (95%)", "Most of the time (80%)", "About half the time (50%)", "Almost never (10%)"],
+    ans: 2
   },
   {
     q: "What's a better way to respond than texting \"Whatever\"?",
     opts: ["Whateverrrrr", "I'm fine with either option", "W/e", "..."],
     ans: 1
   },
+  // Lesson 5: Social Media (5 questions)
   {
     q: "What is the minimum age most social media apps require to create an account?",
     opts: ["10 years old", "11 years old", "13 years old", "16 years old"],
     ans: 2
+  },
+  {
+    q: "What did the U.S. Surgeon General say about social media and kids in 2023?",
+    opts: ["Social media is totally safe for all ages", "We cannot conclude social media is sufficiently safe for children and adolescents", "Kids should use social media at least 2 hours per day", "Social media has no effect on mental health"],
+    ans: 1
   },
   {
     q: "What is the \"Screenshot Rule\"?",
@@ -970,11 +1311,6 @@ const questions = [
     ans: 1
   },
   {
-    q: "What's the difference between real confidence and fake confidence?",
-    opts: ["Real confidence means being loud; fake confidence means being quiet", "Real confidence comes from being good at things and treating people well; fake confidence is acting tough online", "There is no difference", "Fake confidence is better because more people notice you"],
-    ans: 1
-  },
-  {
     q: "When your parent texts you, the right thing to do is:",
     opts: ["Ignore it if you're busy with something fun", "Reply when you feel like it, even if that's hours later", "Answer them — ignoring their text is the same as ignoring them face-to-face", "Only reply if they text you three times"],
     ans: 2
@@ -983,55 +1319,35 @@ const questions = [
 
 // Render quiz
 const quizContainer = document.getElementById('quizContainer');
-const answered = new Array(15).fill(null);
+const answered = new Array(TOTAL_Q).fill(null);
 
 questions.forEach((q, i) => {
   const block = document.createElement('div');
   block.className = 'question-block';
   block.id = 'qblock-' + i;
-
   let optsHtml = '';
   q.opts.forEach((opt, j) => {
-    optsHtml += `
-      <li>
-        <label id="label-${i}-${j}">
-          <input type="radio" name="q${i}" value="${j}" onchange="selectAnswer(${i}, ${j})">
-          ${opt}
-        </label>
-      </li>`;
+    optsHtml += `<li><label id="label-${i}-${j}"><input type="radio" name="q${i}" value="${j}" onchange="selectAnswer(${i}, ${j})">${opt}</label></li>`;
   });
-
-  block.innerHTML = `
-    <div class="question-num">Question ${i + 1} of 15</div>
-    <div class="question-text">${q.q}</div>
-    <ul class="options">${optsHtml}</ul>
-  `;
+  block.innerHTML = `<div class="question-num">Question ${i + 1} of ${TOTAL_Q}</div><div class="question-text">${q.q}</div><ul class="options">${optsHtml}</ul>`;
   quizContainer.appendChild(block);
 });
 
 function selectAnswer(qi, oi) {
   answered[qi] = oi;
-  // Highlight selected
-  questions[qi].opts.forEach((_, j) => {
-    document.getElementById(`label-${qi}-${j}`).classList.remove('selected');
-  });
+  questions[qi].opts.forEach((_, j) => document.getElementById(`label-${qi}-${j}`).classList.remove('selected'));
   document.getElementById(`label-${qi}-${oi}`).classList.add('selected');
-
   const count = answered.filter(a => a !== null).length;
-  document.getElementById('answeredCount').textContent = count + ' of 15 answered';
-  document.getElementById('submitBtn').disabled = count < 15;
+  document.getElementById('answeredCount').textContent = count + ' of ' + TOTAL_Q + ' answered';
+  document.getElementById('submitBtn').disabled = count < TOTAL_Q;
 }
 
 function submitTest() {
   let score = 0;
-
   questions.forEach((q, i) => {
     const block = document.getElementById('qblock-' + i);
     const selected = answered[i];
-
-    // Disable all radios
     block.querySelectorAll('input').forEach(inp => inp.disabled = true);
-
     if (selected === q.ans) {
       score++;
       block.classList.add('correct');
@@ -1042,64 +1358,49 @@ function submitTest() {
       document.getElementById(`label-${i}-${q.ans}`).classList.add('correct-answer');
     }
   });
-
   document.getElementById('submitBtn').disabled = true;
   document.getElementById('submitBtn').textContent = 'Test Submitted';
-
-  // Show results
   showResults(score);
 }
 
 function showResults(score) {
-  const passed = score >= 12;
+  const passed = score >= PASS_SCORE;
   document.getElementById('scoreNum').textContent = score;
   const circle = document.getElementById('scoreCircle');
   circle.classList.add(passed ? 'pass' : 'fail');
-
   const msg = document.getElementById('resultMessage');
   msg.textContent = passed ? 'You Passed!' : 'Not Quite Yet';
   msg.classList.add(passed ? 'pass' : 'fail');
-
   const detail = document.getElementById('resultDetail');
   if (passed) {
-    detail.textContent = `You got ${score} out of 15 correct. You've proven that you understand digital responsibility. Time to put it into practice.`;
+    detail.textContent = `You got ${score} out of ${TOTAL_Q} correct. You've proven that you understand digital responsibility. Time to put it into practice.`;
   } else {
-    detail.textContent = `You got ${score} out of 15 correct. You need at least 12 to pass. Go back and re-read the lessons, then try again.`;
+    detail.textContent = `You got ${score} out of ${TOTAL_Q} correct. You need at least ${PASS_SCORE} to pass. Go back and re-read the lessons, then try again.`;
   }
-
   const actions = document.getElementById('resultActions');
   if (passed) {
     actions.innerHTML = '<p style="font-size: 18px; color: #4ade80; font-weight: 600;">Show this screen to your parents.</p>';
   } else {
     actions.innerHTML = '<button class="btn btn-primary" onclick="resetTest()">Review Lessons &amp; Try Again</button>';
   }
-
   goTo('results');
 }
 
 function resetTest() {
-  // Reset everything
   answered.fill(null);
   questions.forEach((q, i) => {
     const block = document.getElementById('qblock-' + i);
     block.classList.remove('correct', 'incorrect');
-    block.querySelectorAll('input').forEach(inp => {
-      inp.disabled = false;
-      inp.checked = false;
-    });
+    block.querySelectorAll('input').forEach(inp => { inp.disabled = false; inp.checked = false; });
     q.opts.forEach((_, j) => {
-      const label = document.getElementById(`label-${i}-${j}`);
-      label.classList.remove('selected', 'correct-answer', 'wrong-answer');
+      document.getElementById(`label-${i}-${j}`).classList.remove('selected', 'correct-answer', 'wrong-answer');
     });
   });
   document.getElementById('submitBtn').disabled = true;
   document.getElementById('submitBtn').textContent = 'Submit Test';
-  document.getElementById('answeredCount').textContent = '0 of 15 answered';
-
-  // Reset result display
+  document.getElementById('answeredCount').textContent = '0 of ' + TOTAL_Q + ' answered';
   document.getElementById('scoreCircle').classList.remove('pass', 'fail');
   document.getElementById('resultMessage').classList.remove('pass', 'fail');
-
   goTo('welcome');
 }
 </script>
