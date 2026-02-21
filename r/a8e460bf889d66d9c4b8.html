@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gather — Operations Review for Culinary Harvest</title>
+<title>Gather — What We're Building for Culinary Harvest</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <meta name="googlebot" content="noindex, nofollow">
 <meta name="description" content="">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --sage-900: #1C3A13;
@@ -29,8 +29,6 @@
     --gold-200: #FFCC80;
     --gold-100: #FFE082;
     --gold-50:  #FFF9C4;
-    --coral-500: #FF6B6B;
-    --sky-500: #4ECDC4;
     --market-bg: #FFFEF7;
     --text-primary: #37352F;
     --text-muted: #787774;
@@ -38,7 +36,6 @@
     --card-bg: #FFFFFF;
     --font-market: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-dash: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -73,500 +70,151 @@
     text-align: center;
   }
 
-  .hero-logo {
-    font-family: var(--font-market);
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 4px;
-  }
+  .hero-logo { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .hero-tagline { font-size: 14px; opacity: 0.8; font-style: italic; margin-bottom: 24px; }
+  .hero h1 { font-size: 22px; font-weight: 600; line-height: 1.3; max-width: 520px; margin: 0 auto 8px; }
+  .hero-date { font-size: 13px; opacity: 0.65; }
 
-  .hero-tagline {
-    font-size: 14px;
-    opacity: 0.8;
-    font-style: italic;
-    margin-bottom: 24px;
-  }
+  .container { max-width: 720px; margin: 0 auto; padding: 0 20px; }
 
-  .hero h1 {
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 1.3;
-    max-width: 520px;
-    margin: 0 auto 8px;
-  }
-
-  .hero-date {
-    font-size: 13px;
-    opacity: 0.65;
-  }
-
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  /* SECTION STYLES */
-  .section {
-    padding: 40px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
+  .section { padding: 40px 0; border-bottom: 1px solid var(--border); }
   .section:last-child { border-bottom: none; }
 
   .section-label {
     font-family: var(--font-dash);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--sage-500);
-    margin-bottom: 8px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--sage-500); margin-bottom: 8px;
   }
 
-  .section-title {
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 1.25;
-    margin-bottom: 16px;
-    color: var(--sage-900);
-  }
+  .section-title { font-size: 24px; font-weight: 700; line-height: 1.25; margin-bottom: 16px; color: var(--sage-900); }
+  .section-intro { font-size: 16px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.7; }
 
-  .section-intro {
-    font-size: 16px;
-    color: var(--text-muted);
-    margin-bottom: 24px;
-    line-height: 1.7;
-  }
-
-  /* CONTENT */
   p { margin-bottom: 16px; }
-
   strong { font-weight: 600; }
 
-  /* LETTER */
   .letter {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 32px 24px;
-    margin: 32px 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+    padding: 32px 24px; margin: 24px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
-
   .letter p { margin-bottom: 14px; font-size: 15.5px; }
   .letter p:last-child { margin-bottom: 0; }
+  .letter .sig { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); font-weight: 600; color: var(--sage-700); }
 
-  .letter .sig {
-    margin-top: 24px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-    font-weight: 600;
-    color: var(--sage-700);
-  }
-
-  /* PAIN POINTS */
-  .pain-points {
-    display: grid;
-    gap: 12px;
-    margin: 20px 0;
-  }
-
+  .pain-points { display: grid; gap: 12px; margin: 20px 0; }
   .pain-point {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--gold-500);
-    border-radius: 8px;
-    padding: 16px 20px;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-left: 4px solid var(--gold-500); border-radius: 8px; padding: 16px 20px;
   }
+  .pain-point .number { font-family: var(--font-dash); font-size: 12px; color: var(--gold-700); font-weight: 600; }
+  .pain-point .text { font-size: 15px; font-weight: 500; margin-top: 2px; }
 
-  .pain-point .number {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--gold-700);
-    font-weight: 600;
+  .toc {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px 24px; margin: 24px 0;
   }
+  .toc-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 12px; }
+  .toc a { display: block; padding: 6px 0; color: var(--sage-700); text-decoration: none; font-size: 15px; font-weight: 500; border-bottom: 1px solid var(--border); }
+  .toc a:last-child { border-bottom: none; }
+  .toc a:hover { color: var(--sage-500); }
 
-  .pain-point .text {
-    font-size: 15px;
-    font-weight: 500;
-    margin-top: 2px;
-  }
-
-  /* Q&A */
-  .qa-item {
-    margin-bottom: 28px;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .qa-question {
-    background: var(--sage-50);
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .qa-number {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--sage-500);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 4px;
-  }
-
-  .qa-question h3 {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--sage-900);
-    line-height: 1.4;
-  }
-
-  .qa-answer {
-    padding: 20px;
-  }
-
+  .qa-item { margin-bottom: 24px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .qa-question { background: var(--sage-50); padding: 16px 20px; border-bottom: 1px solid var(--border); }
+  .qa-number { font-family: var(--font-dash); font-size: 11px; font-weight: 600; color: var(--sage-500); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .qa-question h3 { font-size: 15px; font-weight: 600; color: var(--sage-900); line-height: 1.4; }
+  .qa-answer { padding: 20px; }
   .qa-answer p { font-size: 15px; margin-bottom: 12px; }
   .qa-answer p:last-child { margin-bottom: 0; }
 
   .qa-dara-quote {
-    background: var(--gold-50);
-    border-left: 3px solid var(--gold-400);
-    border-radius: 0 6px 6px 0;
-    padding: 12px 16px;
-    margin: 12px 0;
-    font-style: italic;
-    font-size: 14px;
-    color: var(--text-muted);
-  }
-
-  .qa-feature-tag {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 500;
-    background: var(--sage-50);
-    color: var(--sage-700);
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin: 2px 2px 2px 0;
+    background: var(--gold-50); border-left: 3px solid var(--gold-400);
+    border-radius: 0 6px 6px 0; padding: 12px 16px; margin: 12px 0;
+    font-style: italic; font-size: 14px; color: var(--text-muted);
   }
 
   .qa-followup {
-    background: #F0F4FF;
-    border-left: 3px solid #5B7FFF;
-    border-radius: 0 6px 6px 0;
-    padding: 12px 16px;
-    margin-top: 12px;
-    font-size: 14px;
+    background: #F0F4FF; border-left: 3px solid #5B7FFF;
+    border-radius: 0 6px 6px 0; padding: 12px 16px; margin-top: 12px; font-size: 14px;
   }
+  .qa-followup strong { color: #4A63CC; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
 
-  .qa-followup strong {
-    color: #4A63CC;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  .callout {
+    background: var(--sage-50); border: 1px solid var(--sage-200);
+    border-radius: 10px; padding: 20px; margin: 24px 0;
   }
+  .callout-quote { font-size: 18px; font-weight: 500; font-style: italic; color: var(--sage-800); line-height: 1.5; margin-bottom: 8px; }
+  .callout-attr { font-size: 13px; color: var(--text-muted); }
 
-  /* ROADMAP */
-  .roadmap-domain {
-    margin-bottom: 32px;
+  /* FEATURE GROUPS */
+  .feature-group { margin-bottom: 28px; }
+  .feature-group-header {
+    font-size: 17px; font-weight: 700; color: var(--sage-800);
+    padding-bottom: 8px; margin-bottom: 14px; border-bottom: 2px solid var(--sage-100);
   }
-
-  .domain-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--sage-100);
+  .feature-item {
+    background: var(--card-bg); border: 1px solid var(--border); border-left: 4px solid var(--sage-400);
+    border-radius: 10px; padding: 16px; margin-bottom: 10px;
   }
-
-  .domain-header h3 {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--sage-800);
-  }
-
-  .domain-count {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    background: var(--sage-50);
-    color: var(--sage-600);
-    padding: 2px 8px;
-    border-radius: 10px;
-  }
-
-  .feature-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
-    margin-bottom: 10px;
-    transition: border-color 0.15s;
-  }
-
-  .feature-card.is-new {
-    border-left: 4px solid var(--sage-400);
-  }
-
-  .feature-card.is-modified {
-    border-left: 4px solid var(--gold-400);
-  }
-
-  .feature-top {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 4px;
-  }
-
-  .feature-id {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--sage-600);
-  }
-
-  .feature-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text-primary);
-  }
-
-  .feature-badge {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-
-  .badge-p0 {
-    background: var(--sage-100);
-    color: var(--sage-800);
-  }
-
-  .badge-p1 {
-    background: var(--gold-100);
-    color: #7A5700;
-  }
-
-  .badge-new {
-    background: #DFF3E3;
-    color: #1A6B2C;
-  }
-
-  .badge-modified {
-    background: #FFF3E0;
-    color: #A65D00;
-  }
-
-  .feature-desc {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin-top: 4px;
-    line-height: 1.55;
-  }
-
-  /* SUMMARY TABLE */
-  .summary-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-family: var(--font-dash);
-    font-size: 14px;
-  }
-
-  .summary-table th {
-    text-align: left;
-    padding: 10px 12px;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-muted);
-    border-bottom: 2px solid var(--border);
-    background: var(--sage-50);
-  }
-
-  .summary-table td {
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .summary-table tr:last-child td {
-    border-bottom: none;
-  }
-
-  .summary-table .total-row {
-    font-weight: 700;
-    background: var(--sage-50);
-  }
-
-  .summary-table .total-row td {
-    border-top: 2px solid var(--sage-300);
-    color: var(--sage-900);
-  }
-
-  .summary-table .num {
-    font-family: var(--font-mono);
-    text-align: right;
-    font-size: 13px;
-  }
+  .feature-item.is-adjusted { border-left-color: var(--gold-400); }
+  .feature-item-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .feature-item-desc { font-size: 14px; color: var(--text-muted); line-height: 1.55; }
+  .badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+  .badge-new { background: #DFF3E3; color: #1A6B2C; }
+  .badge-adjusted { background: #FFF3E0; color: #A65D00; }
 
   /* LATER TABLE */
-  .later-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 16px 0;
-    font-size: 14px;
-  }
+  .later-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  .later-table th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+  .later-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .later-table .phase-tag { font-family: var(--font-dash); font-size: 12px; color: var(--text-muted); }
 
-  .later-table th {
-    text-align: left;
-    padding: 8px 12px;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-muted);
-    border-bottom: 2px solid var(--border);
-  }
-
-  .later-table td {
-    padding: 8px 12px;
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
-  }
-
-  .later-table .phase-tag {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--text-muted);
-  }
-
-  /* CALLOUT */
-  .callout {
-    background: var(--sage-50);
-    border: 1px solid var(--sage-200);
-    border-radius: 10px;
-    padding: 20px;
-    margin: 24px 0;
-  }
-
-  .callout-quote {
-    font-size: 18px;
-    font-weight: 500;
-    font-style: italic;
-    color: var(--sage-800);
-    line-height: 1.5;
-    margin-bottom: 8px;
-  }
-
-  .callout-attr {
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-
-  /* FOOTER */
   .footer {
-    background: var(--sage-900);
-    color: rgba(255,255,255,0.6);
-    text-align: center;
-    padding: 32px 20px;
-    font-size: 13px;
+    background: var(--sage-900); color: rgba(255,255,255,0.6);
+    text-align: center; padding: 32px 20px; font-size: 13px;
   }
+  .footer strong { color: rgba(255,255,255,0.9); }
 
-  .footer strong {
-    color: rgba(255,255,255,0.9);
-  }
-
-  /* TOC */
-  .toc {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px 24px;
-    margin: 24px 0;
-  }
-
-  .toc-title {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-  }
-
-  .toc a {
-    display: block;
-    padding: 6px 0;
-    color: var(--sage-700);
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .toc a:last-child { border-bottom: none; }
-  .toc a:hover { color: var(--sage-500); }
-
-  /* RESPONSIVE */
   @media (max-width: 600px) {
     .hero { padding: 36px 20px 32px; }
     .hero h1 { font-size: 19px; }
     .hero-logo { font-size: 28px; }
     .letter { padding: 24px 18px; }
     .section-title { font-size: 21px; }
-    .summary-table { font-size: 13px; }
-    .summary-table th, .summary-table td { padding: 8px 8px; }
-    .feature-top { gap: 4px; }
   }
 </style>
 </head>
 <body>
 
-<div class="confidential-bar">Business Confidential &mdash; Gather + Culinary Harvest &mdash; February 2026</div>
+<div class="confidential-bar">Confidential &mdash; Gather + Culinary Harvest &mdash; February 2026</div>
 
 <div class="hero">
   <div class="hero-logo">Gather</div>
   <div class="hero-tagline">Good things from good people</div>
-  <h1>Operations Review &amp; MVP Roadmap for Culinary Harvest</h1>
+  <h1>What We're Building for Culinary Harvest</h1>
   <div class="hero-date">Prepared by Drew Garraway &bull; February 2026</div>
 </div>
 
 <div class="container">
 
-  <!-- TOC -->
   <div class="toc">
     <div class="toc-title">In This Document</div>
     <a href="#letter">Message from Drew</a>
     <a href="#questions">Your Questions, Our Answers</a>
-    <a href="#roadmap">MVP Feature Roadmap</a>
-    <a href="#estimates">Scope &amp; Estimates</a>
-    <a href="#later">What's Coming Later</a>
+    <a href="#features">What You'll See in Version 1</a>
+    <a href="#later">What's Coming After Launch</a>
+    <a href="#followup">A Few More Questions for You</a>
   </div>
 
   <!-- ===== SECTION 1: LETTER ===== -->
   <div class="section" id="letter">
-    <div class="section-label">Section 1</div>
+    <div class="section-label">Hello</div>
     <div class="section-title">Your Answers Shaped the Product</div>
 
     <div class="letter">
       <p>Dara (and Carlo),</p>
 
-      <p>Thank you for the time you put into the operations questionnaire. Those weren't easy questions &mdash; you basically walked us through three seasons of muscle memory, and it was incredibly valuable.</p>
+      <p>Thank you for the time you put into the questionnaire. You walked us through three seasons of how Berwyn actually runs, and it was incredibly valuable.</p>
 
-      <p>We went through every answer line by line and compared it against what we had planned to build. The short version: you confirmed a lot of what we had right, you surfaced several things we were completely missing, and you gave us the operational detail we needed to stop guessing and start building to your actual workflow.</p>
+      <p>We compared every answer against what we had planned. You confirmed a lot of what we had right, but you also surfaced several things we were completely missing. The product is significantly better because of it.</p>
 
       <p>Your four biggest pain points came through loud and clear:</p>
     </div>
@@ -574,181 +222,156 @@
     <div class="pain-points">
       <div class="pain-point">
         <div class="number">#1</div>
-        <div class="text">Website management &mdash; rebuilding product listings every single week</div>
+        <div class="text">Rebuilding the product listings on the website every single week</div>
       </div>
       <div class="pain-point">
         <div class="number">#2</div>
-        <div class="text">Text reminders &mdash; manually texting hundreds of customers on Tuesdays, dozens on Fridays</div>
+        <div class="text">Manually texting hundreds of customers on Tuesdays and dozens on Fridays</div>
       </div>
       <div class="pain-point">
         <div class="number">#3</div>
-        <div class="text">Manually sorting customer orders by time slot</div>
+        <div class="text">Sorting customer orders by pickup time slot by hand</div>
       </div>
       <div class="pain-point">
         <div class="number">#4</div>
-        <div class="text">Notating customer orders with picking information</div>
+        <div class="text">Writing picking notes on every customer order slip</div>
       </div>
     </div>
 
     <div class="letter">
-      <p>We're addressing all four directly in the MVP. Below you'll find exactly how &mdash; first as answers to each of your questionnaire questions, then as a full feature roadmap.</p>
+      <p>We're addressing all four in version 1. Below you'll find how &mdash; first as answers to each of your questions, then as a summary of everything we're building.</p>
 
-      <p>We also added 18 features to the launch plan, modified 7 existing features, and reorganized priorities based on what you told us. The product is better for it.</p>
-
-      <p>Thank you again &mdash; this kind of detail is exactly what makes the difference between building something generic and building something that actually works for Berwyn.</p>
+      <p>We added 18 new features and adjusted 7 existing ones based on what you told us.</p>
 
       <div class="sig">Drew Garraway<br>Product Manager, Gather</div>
     </div>
 
     <div class="callout">
       <div class="callout-quote">"I would hate for the process to feel too similar to ordering on Instacart or the products to feel less special."</div>
-      <div class="callout-attr">&mdash; Dara Rose, Operations Manager, Culinary Harvest</div>
+      <div class="callout-attr">&mdash; Dara Rose, Culinary Harvest</div>
     </div>
 
-    <p style="font-size:15px; color: var(--text-muted);">This quote is now our north star design principle. Every screen, every feature, every word of copy will be measured against it.</p>
+    <p style="font-size:15px; color: var(--text-muted);">This is our design north star. Every screen will be measured against it.</p>
   </div>
 
   <!-- ===== SECTION 2: Q&A ===== -->
   <div class="section" id="questions">
-    <div class="section-label">Section 2</div>
+    <div class="section-label">Your Input</div>
     <div class="section-title">Your Questions, Our Answers</div>
-    <div class="section-intro">Each of your 18 questionnaire questions restated, with how we're addressing it in the product.</div>
+    <div class="section-intro">Each of your questionnaire topics, with what we're doing about it.</div>
 
     <!-- Q1 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 1 &mdash; Vendor Management</div>
-        <h3>Walk me through how a new vendor joins Berwyn &mdash; from first inquiry to first market day. What documents do you require?</h3>
+        <div class="qa-number">Vendor Onboarding</div>
+        <h3>How a new vendor joins Berwyn</h3>
       </div>
       <div class="qa-answer">
-        <p>Your 15-step onboarding process &mdash; from initial product tasting to the vendor announcement on social media &mdash; confirmed we need a robust vendor management foundation, not just a simple contact list.</p>
-
-        <p><strong>What we're building:</strong> The admin vendor management system <span class="qa-feature-tag">A24-A27</span> now includes additional fields for genre/category, availability notes, stall preferences, special requirements (power, flat ground, van access), and season commitment dates <span class="qa-feature-tag">M6</span>. This captures the data currently in your head and spreadsheets.</p>
-
-        <p><strong>What's later:</strong> A full vendor onboarding workflow with document uploads, compliance tracking, and automated reminders is planned for Phase 2-3. For MVP, vendor data entry is admin-managed.</p>
-
-        <div class="qa-dara-quote">Documents required: COI showing 1 million liability coverage, Chester County Health Department approval or exemption, and completed application.</div>
+        <p>Your 15-step process confirmed we need a real vendor management system, not just a contact list. For now, we're storing all the details you currently keep in your head &mdash; vendor category, availability, stall preferences, power/access needs, season dates.</p>
+        <p>A full vendor portal where they can submit their own documents and manage their own profile is coming in a later version.</p>
       </div>
     </div>
 
     <!-- Q2 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 2 &mdash; Vendor Rotation</div>
-        <h3>You have 70+ vendors with 25-30 selling weekly. How do you manage that rotation?</h3>
+        <div class="qa-number">Vendor Rotation</div>
+        <h3>Managing 70+ vendors with 25-30 selling weekly</h3>
       </div>
       <div class="qa-answer">
-        <p>The rotation logic you described &mdash; core vendors get every week, similar-item vendors alternate, genre gaps get filled, then remaining spots go to vendors wanting more dates &mdash; is too complex for MVP automation. But we're laying the data foundation.</p>
-
-        <p><strong>What we're building:</strong> Every vendor profile now includes a <strong>genre field</strong> (produce, dairy, pastry, olive oil, etc.) and <strong>season dates</strong> <span class="qa-feature-tag">M6</span>. This lets you sort and filter vendors by type when planning the weekly lineup. The weekly product reset tool <span class="qa-feature-tag">A43</span> lets you quickly activate/deactivate each vendor's products.</p>
-
-        <p><strong>What's later:</strong> Full vendor scheduling with conflict detection and automated rotation is Phase 3 <span class="qa-feature-tag">M3/M4</span>.</p>
+        <p>Your rotation logic &mdash; core vendors every week, similar vendors alternate, fill genre gaps &mdash; is too nuanced to automate right now. But every vendor will have a category tag and season dates, so you can quickly filter and sort when planning each week. The weekly reset tool (more on that below) makes toggling vendors on and off fast.</p>
+        <p>Full automated scheduling with conflict detection is planned for a later version.</p>
       </div>
     </div>
 
     <!-- Q3 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 3 &mdash; Stall Locations</div>
-        <h3>How do you assign stall locations? First-come, seniority, product type, or something else?</h3>
+        <div class="qa-number">Stall Locations</div>
+        <h3>How you assign stall spots</h3>
       </div>
       <div class="qa-answer">
-        <p>Your approach &mdash; drawing foot traffic through the market, accommodating vendor needs (glass jars on flat spots, produce near van access, hot food near power), and keeping vendors in the same spot all season &mdash; is a Phase 3 feature. But we're storing the data now.</p>
-
-        <p><strong>What we're building:</strong> Vendor profiles include <strong>stall location preference</strong> and <strong>special requirements</strong> fields (power, flat ground, van access) <span class="qa-feature-tag">M6</span>. This is the data foundation for the full market layout tool later.</p>
-
-        <p><strong>What's later:</strong> Interactive market map with drag-and-drop stall assignment is Phase 3.</p>
+        <p>We're storing stall preferences and special needs (power, flat ground, van access) on every vendor profile now. A visual drag-and-drop market map is coming in a later version.</p>
       </div>
     </div>
 
     <!-- Q4 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 4 &mdash; Vendor Compliance</div>
-        <h3>How do you track vendor compliance (insurance, licenses, certifications)? What happens when something expires?</h3>
+        <div class="qa-number">Vendor Compliance</div>
+        <h3>Tracking insurance, licenses, certifications</h3>
       </div>
       <div class="qa-answer">
         <div class="qa-dara-quote">"This is a huge pain. This was my job and it's since been delegated to Erika which I'm not sure she keeps up with weekly/monthly."</div>
-
-        <p>We hear you. This is currently planned for Phase 3, but given how painful it is, we're considering pulling a basic version into Phase 2: expiration date tracking with automated alerts when documents are about to lapse.</p>
-
-        <p><strong>What's later:</strong> Full vendor compliance portal where vendors can upload documents themselves, with automated expiration alerts and renewal workflows <span class="qa-feature-tag">M7/M8</span>. Your ideal &mdash; "if vendors could submit their documents through a portal, and we all get notified if there's a lapse" &mdash; is exactly what we'll build.</p>
+        <p>We hear you. This is planned for after launch, but given how painful it is, we're considering pulling a basic version forward &mdash; expiration date tracking with automatic alerts when documents are about to lapse.</p>
+        <p>Your ideal &mdash; vendors submit their own documents, everyone gets notified if something lapses &mdash; is exactly what we'll build.</p>
       </div>
     </div>
 
     <!-- Q5 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 5 &mdash; Fee Structure</div>
-        <h3>What's your fee structure? Daily flat fee? Seasonal fee? Percentage of sales? A mix?</h3>
+        <div class="qa-number">Fee Structure</div>
+        <h3>How vendors pay you</h3>
       </div>
       <div class="qa-answer">
-        <p>Flat fee based on attendance with a prepay discount confirmed what we expected. Vendor fee management isn't in the MVP &mdash; you'll continue collecting fees as you do now. Phase 3 will add digital vendor invoicing and payment tracking.</p>
-
-        <p><strong>What's later:</strong> Vendor fee management, invoicing, and payment tracking <span class="qa-feature-tag">M5/M6</span> in Phase 3. This includes the no-show fee you mentioned wanting to enforce.</p>
+        <p>For version 1, you'll continue collecting vendor fees the way you do now. Digital invoicing and payment tracking is coming in a later version &mdash; including the no-show fee you mentioned wanting to enforce.</p>
       </div>
     </div>
 
     <!-- Q6 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 6 &mdash; Vendor Payments</div>
-        <h3>How and when do vendors pay you? What happens when someone is late?</h3>
+        <div class="qa-number">Vendor Payments</div>
+        <h3>Cash/check collection and late payments</h3>
       </div>
       <div class="qa-answer">
-        <p>Cash/check collection on market day (with occasional Square card payments) and the no-show problem are noted. This is a Phase 3 feature, but your feedback about the failed monthly invoicing experiment is important context &mdash; any digital payment system needs to be day-of, not monthly.</p>
-
-        <p><strong>Key insight for us:</strong> The wholesale-resale model (you buy from vendors via POs, resell to customers) may simplify our payment architecture significantly. We may not need Stripe Connect split payments for MVP &mdash; a single merchant account could work, with vendor payments handled separately based on PO amounts.</p>
+        <p>Noted your experience with monthly invoicing not working &mdash; any future digital payment system will be structured around market-day collection, not monthly billing.</p>
       </div>
     </div>
 
     <!-- Q7 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 7 &mdash; Vendor Communication</div>
-        <h3>How do you communicate with vendors? Email, text, WhatsApp, phone?</h3>
+        <div class="qa-number">Vendor Communication</div>
+        <h3>How you talk to vendors (email, text, phone)</h3>
       </div>
       <div class="qa-answer">
-        <p>Primary communication via email and text, with Erika sending weekly vendor emails. For MVP, the <strong>vendor purchase order system</strong> <span class="qa-feature-tag">O66</span> replaces the manual "here's what we need from you" part of the weekly email. POs are emailed directly to vendors from the dashboard.</p>
-
-        <p><strong>What's later:</strong> Full vendor communication portal (Phase 2) where vendors can view POs, confirm attendance, and update availability through a simple interface.</p>
+        <p>The biggest improvement here: after orders close each week, Gather will automatically create vendor order sheets showing exactly what each vendor needs to bring. You can email those directly from the dashboard &mdash; no more manually tallying quantities.</p>
+        <p>A vendor portal where they can view their orders and confirm availability is coming in a later version.</p>
       </div>
     </div>
 
     <!-- Q8 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 8 &mdash; Weather &amp; Cancellations</div>
-        <h3>How do you handle weather cancellations or last-minute changes?</h3>
+        <div class="qa-number">Weather &amp; Cancellations</div>
+        <h3>How you handle last-minute changes</h3>
       </div>
       <div class="qa-answer">
-        <p>Good news: you rarely cancel (maybe two dates in three seasons) and only need a day's notice. This means we don't need complex cancellation workflows for MVP. The existing email/text approach works fine for the rare weather event.</p>
-
-        <p><strong>What's later:</strong> If needed, a broadcast notification system for weather alerts could be added to the automated messaging infrastructure <span class="qa-feature-tag">O68-O71</span> in Phase 2.</p>
+        <p>Since you rarely cancel (maybe twice in three seasons), we don't need anything special for this in version 1. Your existing email/text approach works fine for the rare weather event.</p>
       </div>
     </div>
 
     <!-- Q9 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 9 &mdash; Customer Texting</div>
-        <h3>Walk me through what messages you send. Order confirmations? Pickup reminders? "What's fresh this week"?</h3>
+        <div class="qa-number">Customer Texting</div>
+        <h3>What messages you send each week</h3>
       </div>
       <div class="qa-answer">
         <div class="qa-dara-quote">"Tuesday morning I would manually text our shoppers to remind them that the market closes at noon and to get their order in. I usually included something like 'new milk jawn flavor' or some other highlight to catch their attention."</div>
 
-        <p>This is your #2 pain point, and we're automating it completely. Three automated messages match your current cadence:</p>
+        <p>We're automating this completely. Three messages that match your current routine:</p>
 
-        <p><strong>"Market is open"</strong> <span class="qa-feature-tag">O68</span> &mdash; Email + SMS when the ordering window opens. You'll be able to add a weekly product highlight (like the "new milk jawn flavor").</p>
+        <p><strong>"Market is open"</strong> &mdash; Text + email when the ordering window opens. You can add a weekly highlight (like the milk jawn).</p>
+        <p><strong>"Last chance to order"</strong> &mdash; Text + email a few hours before ordering closes.</p>
+        <p><strong>"Pickup reminder"</strong> &mdash; Text + email morning-of with the customer's pickup time.</p>
 
-        <p><strong>"Last chance to order"</strong> <span class="qa-feature-tag">O69</span> &mdash; Email + SMS a few hours before the window closes.</p>
-
-        <p><strong>"Pickup reminder"</strong> <span class="qa-feature-tag">O70</span> &mdash; Email + SMS on pickup morning with each customer's time slot.</p>
-
-        <p>All messages will feel like they come from you and Carlo &mdash; not a robot. Customers who want to text back will still be able to reach a real person.</p>
+        <p>Messages will feel like they come from you and Carlo &mdash; not a robot. Customers can still text back and reach a real person.</p>
 
         <div class="qa-followup">
-          <strong>Follow-up question:</strong> What day and time does the ordering window typically open? When does it close? Is the Tuesday reminder the same week as pickup, or the week before?
+          <strong>Question for you:</strong> What day and time does ordering typically open? When does it close? Is the Tuesday reminder the same week as pickup?
         </div>
       </div>
     </div>
@@ -756,84 +379,65 @@
     <!-- Q10 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 10 &mdash; Text Management</div>
-        <h3>How do you manage customer texts right now? What's working and what's painful?</h3>
+        <div class="qa-number">Text Management</div>
+        <h3>What's working and what's painful</h3>
       </div>
       <div class="qa-answer">
         <div class="qa-dara-quote">"The only pain point was the time consumption of physically texting hundreds of people on Tuesday, and dozens of people on Friday when pickup day is already busy enough."</div>
-
-        <p>This is exactly what <span class="qa-feature-tag">O68-O71</span> solve. The automated messaging system handles the bulk sending. Customers opt in to SMS at checkout <span class="qa-feature-tag">O71</span>, with easy opt-out in every message. TCPA compliant.</p>
-
-        <p>The personal phone setup that works &mdash; customers knowing there's a real person on the other end &mdash; stays. Automated messages handle the broadcasts; personal texting stays for one-on-one conversations.</p>
+        <p>The automated messages handle the bulk sending. The personal touch &mdash; customers knowing there's a real person on the other end &mdash; stays. Automated for the broadcasts, personal for the one-on-ones.</p>
       </div>
     </div>
 
     <!-- Q11 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 11 &mdash; Ideal Automation</div>
-        <h3>If you could send automated messages to customers, what would be most valuable?</h3>
+        <div class="qa-number">Ideal Automation</div>
+        <h3>Most valuable automated messages</h3>
       </div>
       <div class="qa-answer">
-        <div class="qa-dara-quote">"'Market is open', 'market closes in 3 hours', and day-of pickup (with timeslot) reminders would be most valuable, as texts and emails. Additionally, order confirmation emails."</div>
-
-        <p>Done. All four are in the MVP:</p>
-        <p>
-          <span class="qa-feature-tag">O68</span> Market is open &nbsp;&bull;&nbsp;
-          <span class="qa-feature-tag">O69</span> Market closes soon &nbsp;&bull;&nbsp;
-          <span class="qa-feature-tag">O70</span> Pickup day reminder &nbsp;&bull;&nbsp;
-          Order confirmation emails were already in v1.0.
-        </p>
+        <div class="qa-dara-quote">"'Market is open', 'market closes in 3 hours', and day-of pickup (with timeslot) reminders would be most valuable. Additionally, order confirmation emails."</div>
+        <p>All four are in version 1. Exactly as you described.</p>
       </div>
     </div>
 
     <!-- Q12 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 12 &mdash; Order-to-Pickup Process</div>
-        <h3>Walk me through the full order-to-pickup process.</h3>
+        <div class="qa-number">Order-to-Pickup Process</div>
+        <h3>Your full 20-step workflow</h3>
       </div>
       <div class="qa-answer">
-        <p>Your 20-step process was the single most valuable answer in the questionnaire. It revealed several workflows we were completely missing. Here's how we're addressing the key steps:</p>
+        <p>This was the single most valuable answer. It revealed several steps we were completely missing. Here's how Gather handles the key moments:</p>
 
-        <p><strong>Steps 1-5 (ordering &amp; monitoring):</strong> Customer storefront, order notifications, and the ops dashboard handle this <span class="qa-feature-tag">C1-C55</span> <span class="qa-feature-tag">O1-O20</span>.</p>
+        <p><strong>After ordering closes</strong> &mdash; Vendor order sheets are generated automatically. No more manual tallying.</p>
 
-        <p><strong>Step 6 (vendor POs after close):</strong> This was missing entirely. Now automated <span class="qa-feature-tag">O66-O67</span>. After the ordering window closes, the system generates per-vendor purchase orders with total quantities, emailable to vendors directly.</p>
+        <p><strong>Printing packing slips</strong> &mdash; One slip per customer, already sorted by their pickup time. Items on each slip are organized by where they're stored (cold, dry, produce, fragile). Checkboxes for your assembly team. A tear-off bag label. Hit print and go.</p>
 
-        <p><strong>Step 7 (print customer slips &amp; master list):</strong> Customer packing slips <span class="qa-feature-tag">O64</span> now sorted by time slot and pick zone. Master inventory list via existing pick list features <span class="qa-feature-tag">O24-O35</span>.</p>
+        <p><strong>Assembly morning</strong> &mdash; First-time customers are flagged so you can double-check their orders. Items like flowers, ice cream, and delicate pastries are marked "grab at pickup" so your runner knows not to pre-bag them.</p>
 
-        <p><strong>Steps 9-11 (review orders, assembly):</strong> New customer badge <span class="qa-feature-tag">O72</span> flags first-timers. "Last-minute grab" flags on items like flowers, ice cream, and delicate pastries tell your runner what NOT to pre-bag <span class="qa-feature-tag">M2</span>. Pick zone sorting means your foreman can call out items by zone: cold, dry, produce, fragile <span class="qa-feature-tag">O65</span>.</p>
+        <p><strong>Pickup</strong> &mdash; Customers check in (scan or name lookup), runner grabs their bags plus any fresh items.</p>
 
-        <p><strong>Steps 12-13 (pickup &amp; runner):</strong> QR check-in and runner workflow <span class="qa-feature-tag">O36-O47</span> designed for your "customer pulls up, runner grabs bags + last-minute items" model.</p>
+        <p><strong>After pickup</strong> &mdash; Credits and comps are logged digitally (no more clipboard). First-time customers get an automatic thank-you email.</p>
 
-        <p><strong>Step 15 (comp &amp; waste tracking):</strong> Comp item logger <span class="qa-feature-tag">O75</span> with reason codes.</p>
-
-        <p><strong>Step 17 (thank-you email):</strong> Automated welcome email to first-time customers <span class="qa-feature-tag">O73</span>.</p>
-
-        <p><strong>Step 18 (collections &amp; weekly reset):</strong> Full collections system <span class="qa-feature-tag">C56-C57</span> <span class="qa-feature-tag">A40</span> and weekly product reset workflow <span class="qa-feature-tag">A43</span> to stop rebuilding the site every week.</p>
+        <p><strong>Prep for next week</strong> &mdash; Collections get updated, products get toggled on/off with one click instead of rebuilding the whole site.</p>
       </div>
     </div>
 
     <!-- Q13 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 13 &mdash; Print Materials</div>
-        <h3>What print materials do you create? Packing lists? Customer order sheets? Who uses them?</h3>
+        <div class="qa-number">Print Materials</div>
+        <h3>What you print each week and who uses it</h3>
       </div>
       <div class="qa-answer">
-        <p>You described six types of print materials. Here's how we're handling each:</p>
+        <p>You described six types. Here's how each one works in Gather:</p>
 
-        <p><strong>Vendor order quantities / PO spreadsheet:</strong> Automated PO generator <span class="qa-feature-tag">O66</span> &mdash; emailable and printable.</p>
-
-        <p><strong>Master inventory list:</strong> Existing pick list features <span class="qa-feature-tag">O24-O35</span> cover this.</p>
-
-        <p><strong>Customer order slips:</strong> Smart packing slips <span class="qa-feature-tag">O64</span> with name, contact, order #, dollar total, items sorted by pick zone, checkboxes, and bag label. Batch-printable by time slot.</p>
-
-        <p><strong>Pickups per time slot:</strong> Dashboard view of orders grouped by time slot <span class="qa-feature-tag">O15</span>.</p>
-
-        <p><strong>Bag name tickets:</strong> Built into the packing slip as a tear-off label <span class="qa-feature-tag">O64</span>. No more pre-writing Post-it notes.</p>
-
-        <p><strong>Items owed clipboard:</strong> Digital credit tracker <span class="qa-feature-tag">O74</span>. When a vendor shorts a delivery, log a credit or specific owed item. It carries forward to the customer's next order automatically.</p>
+        <p><strong>Vendor order sheets</strong> &mdash; Generated automatically after ordering closes. Printable or emailable.</p>
+        <p><strong>Master inventory list</strong> &mdash; Available on the dashboard and printable.</p>
+        <p><strong>Customer packing slips</strong> &mdash; One per customer, sorted by time slot and pick zone, with checkboxes and a bag label. Batch-printable.</p>
+        <p><strong>Pickups per time slot</strong> &mdash; Dashboard view, grouped by time.</p>
+        <p><strong>Bag name labels</strong> &mdash; Built into the packing slip as a tear-off. No more hand-writing Post-its.</p>
+        <p><strong>Items owed clipboard</strong> &mdash; Digital. When a vendor shorts you, log it. It carries forward to the customer's next order automatically.</p>
 
         <div class="qa-dara-quote">"We had a running clipboard of items owed to customers (like if a vendor shorted us on a delivery and we couldn't make it right by pickup time, we would add it to their next order)."</div>
       </div>
@@ -842,19 +446,14 @@
     <!-- Q14 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 14 &mdash; Vendor Order Delivery</div>
-        <h3>How do vendors receive their orders? How do they know what to pack?</h3>
+        <div class="qa-number">Vendor Orders</div>
+        <h3>How vendors know what to bring</h3>
       </div>
       <div class="qa-answer">
-        <p>The PO workflow you described &mdash; orders go out after market closes, some vendors need early estimates, some are pass-through, some are wholesale case ordering &mdash; shaped our PO generator design <span class="qa-feature-tag">O66</span>.</p>
-
-        <p><strong>Key design decisions from your answer:</strong></p>
-        <p>&bull; POs are generated after the ordering window closes (with the option to send preliminary estimates earlier for vendors who need lead time)</p>
-        <p>&bull; The system tracks which vendors have confirmed their PO <span class="qa-feature-tag">O67</span></p>
-        <p>&bull; Your insight about preferring "pass-through" vendors to minimize inventory is noted &mdash; the system will work for both models</p>
+        <p>After the ordering window closes, Gather totals everything up per vendor and creates an order sheet you can email or print. You'll also be able to see which vendors have confirmed they got it.</p>
 
         <div class="qa-followup">
-          <strong>Follow-up question:</strong> What does a good PO look like to your vendors? Simple list (item + quantity), or do they expect specific formatting? Do any vendors need a different format (case quantities vs. individual units)?
+          <strong>Question for you:</strong> What does a good order sheet look like to your vendors? Just a list with item + quantity? Do some vendors need case quantities instead of individual counts?
         </div>
       </div>
     </div>
@@ -862,8 +461,8 @@
     <!-- Q15 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 15 &mdash; Time-Consuming Tasks</div>
-        <h3>What's the most time-consuming admin task in the order fulfillment process?</h3>
+        <div class="qa-number">Most Time-Consuming Tasks</div>
+        <h3>Your ranked list</h3>
       </div>
       <div class="qa-answer">
         <p>Your ranked list became our priority list:</p>
@@ -871,66 +470,58 @@
         <div class="pain-points">
           <div class="pain-point">
             <div class="number">#1 Website management</div>
-            <div class="text">Weekly product reset workflow <span class="qa-feature-tag">A43</span> &mdash; bulk toggle, duplicate last week, per-vendor quick toggle</div>
+            <div class="text">One-click weekly reset: turn everything off, copy last week's setup, toggle vendors on/off individually</div>
           </div>
           <div class="pain-point">
             <div class="number">#2 Text reminders</div>
-            <div class="text">Automated messaging <span class="qa-feature-tag">O68-O71</span> &mdash; three messages matching your current cadence</div>
+            <div class="text">Three automated messages matching your current Tuesday/Friday routine</div>
           </div>
           <div class="pain-point">
-            <div class="number">#3 Sorting orders by time slot</div>
-            <div class="text">Packing slips auto-grouped by time slot <span class="qa-feature-tag">O64</span></div>
+            <div class="number">#3 Sorting by time slot</div>
+            <div class="text">Packing slips print already grouped by pickup time</div>
           </div>
           <div class="pain-point">
-            <div class="number">#4 Picking notation</div>
-            <div class="text">Pick zone sorting within each order <span class="qa-feature-tag">O65</span> + structured staff notes <span class="qa-feature-tag">M3</span></div>
+            <div class="number">#4 Picking notes</div>
+            <div class="text">Items auto-sorted by storage zone on every slip &mdash; cold, dry, produce, fragile</div>
           </div>
         </div>
 
-        <p>Every one of your top four pain points has a dedicated feature in the MVP.</p>
+        <p>Every one of your top four pain points has a dedicated solution.</p>
       </div>
     </div>
 
     <!-- Q16 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 16 &mdash; Customer Wishlist</div>
-        <h3>Your customers value convenience. What do they ask for that you currently can't provide?</h3>
+        <div class="qa-number">Customer Wishlist</div>
+        <h3>What customers ask for that you can't provide yet</h3>
       </div>
       <div class="qa-answer">
-        <p>Your customers asked for six things. Here's where each lands:</p>
+        <p><strong>Mobile app</strong> &mdash; Later. The website will look and feel like an app on their phone from day one.</p>
+        <p><strong>Favorite items</strong> &mdash; Coming after launch, once customer accounts are in place.</p>
+        <p><strong>Change pickup time after ordering</strong> &mdash; Same, coming with customer accounts.</p>
+        <p><strong>Reviews, loyalty program</strong> &mdash; Later versions.</p>
+        <p><strong>Customer notes</strong> ("messed up her order, give her something nice; birthdays; VIP; usually brings dogs") &mdash; We're starting this now. Every customer will have a profile with order history, notes, and tags. First-timers get auto-flagged.</p>
 
-        <p><strong>Mobile app</strong> &mdash; Phase 4. The web app is fully mobile-optimized from day one &mdash; it will feel like an app on their phone.</p>
+        <div class="qa-dara-quote">"This stuff was just in my and Carlo's brain all the time."</div>
 
-        <p><strong>Ability to favorite items</strong> &mdash; Phase 2, after customer accounts are built.</p>
-
-        <p><strong>Edit time slot after checkout</strong> &mdash; Phase 2. Requires customer accounts. Added to the roadmap based on your feedback.</p>
-
-        <p><strong>Product reviews</strong> &mdash; Phase 4. Nice-to-have, not operational.</p>
-
-        <p><strong>Loyalty program</strong> &mdash; Phase 4. We need order volume data first to design it properly.</p>
-
-        <p><strong>Customer profile ("messed up her last order, give her something nice; birthdays; VIP; usually brings dogs")</strong> &mdash; We're laying the foundation now. Every customer gets a profile with order history, internal notes, and tags <span class="qa-feature-tag">Customer entity</span>. First-time orders get auto-flagged <span class="qa-feature-tag">O72</span>. Full internal CRM is Phase 2-3.</p>
-
-        <div class="qa-dara-quote">"Customer profile: messed up her last order give her something nice next week; birthdays; VIP; top spender; 'usually brings dogs'; stuff like that. It's not necessary but helps us to provide high level of customer service. This stuff was just in my and Carlo's brain all the time."</div>
-
-        <p>We want to get that out of your brain and into the system.</p>
+        <p>We want to get it out of your brain and into the system.</p>
       </div>
     </div>
 
     <!-- Q17 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 17 &mdash; #1 Automation Request</div>
-        <h3>If we could automate ONE thing, what would save you the most time?</h3>
+        <div class="qa-number">Your #1 Automation Request</div>
+        <h3>The one thing that would save the most time</h3>
       </div>
       <div class="qa-answer">
         <div class="qa-dara-quote">"Ability to sort customer order slips by time slot and sort products within the order by pick location."</div>
 
-        <p>Done. This is <span class="qa-feature-tag">O64</span> Customer Packing Slips + <span class="qa-feature-tag">O65</span> Pick Zone Assignment. P0 priority. Your exact request, built exactly as you described it.</p>
+        <p>Done. This is exactly what the packing slips do. Your exact request, built exactly as you described it.</p>
 
         <div class="qa-followup">
-          <strong>Follow-up question:</strong> What are the actual pick zones in your space? We're starting with Cold Storage, Dry Goods, Produce, and Fragile/Delicate. Are there zones we're missing? Would "Freezer" be separate from "Cold"? Is there a dedicated area for meal kits?
+          <strong>Question for you:</strong> What are the actual storage zones in your space? We're starting with Cold, Dry Goods, Produce, and Fragile. Are we missing any? Is Freezer separate from Cold? Is there a spot for meal kits?
         </div>
       </div>
     </div>
@@ -938,535 +529,224 @@
     <!-- Q18 -->
     <div class="qa-item">
       <div class="qa-question">
-        <div class="qa-number">Question 18 &mdash; Anything Else</div>
-        <h3>Anything else about how you run Berwyn that we should know before we start building?</h3>
+        <div class="qa-number">The Special Sauce</div>
+        <h3>What makes Culinary Harvest different</h3>
       </div>
       <div class="qa-answer">
-        <div class="qa-dara-quote">"The things we want to emphasize on our platform is the level of curation and having a 'main line' level of quality. Our customer's loved to know if something was super limited run, or award winning. They spent a lot of money on 'supplemental' groceries because we marketed it really well to them."</div>
+        <div class="qa-dara-quote">"Our customer's loved to know if something was super limited run, or award winning. They spent a lot of money on 'supplemental' groceries because we marketed it really well to them."</div>
 
-        <p>This answer shaped the entire collections system <span class="qa-feature-tag">C56-C58</span> <span class="qa-feature-tag">A40-A42</span>. Named curated collections, curation badges (Limited Run, Award Winner, Carlo's Pick, New This Week), seasonal collections, and a homepage designed to feel editorial &mdash; not transactional.</p>
+        <p>This shaped everything about how the shopping experience will look. Instead of a generic grocery grid, customers will browse curated <strong>collections</strong> &mdash; like "Carlo's Favorites," "Award Winners," "Limited Run," or seasonal themes. Products can carry badges like "New This Week" or "Staff Pick."</p>
 
-        <p>The collections system is the business model differentiator. It's what makes Gather feel like <em>your</em> market, not just another online grocery store.</p>
+        <p>The homepage will feel editorial, not transactional. It should feel like walking into <em>your</em> market.</p>
 
         <div class="qa-followup">
-          <strong>Follow-up question:</strong> Can you give us 5-6 example collections you'd want at launch? We want to build the prototype around real content, not placeholders.
+          <strong>Question for you:</strong> Can you give us 5-6 example collections you'd want at launch? We want to build the design around real content, not placeholders.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ===== SECTION 3: MVP ROADMAP ===== -->
-  <div class="section" id="roadmap">
-    <div class="section-label">Section 3</div>
-    <div class="section-title">MVP Feature Roadmap</div>
-    <div class="section-intro">All MVP features organized by domain. Features marked <span class="feature-badge badge-new" style="font-size:11px">New in v1.2</span> were added from your questionnaire feedback. Features marked <span class="feature-badge badge-modified" style="font-size:11px">Modified</span> were adjusted.</div>
+  <!-- ===== SECTION 3: FEATURES ===== -->
+  <div class="section" id="features">
+    <div class="section-label">Version 1</div>
+    <div class="section-title">What You'll See at Launch</div>
+    <div class="section-intro">Everything new or adjusted based on your feedback. Items marked <span class="badge badge-new">New</span> didn't exist before your questionnaire. Items marked <span class="badge badge-adjusted">Adjusted</span> were already planned but improved.</div>
 
-    <!-- PACKING & FULFILLMENT -->
-    <div class="roadmap-domain">
-      <div class="domain-header">
-        <h3>Packing &amp; Fulfillment</h3>
-        <span class="domain-count">2 new</span>
+    <!-- Weekly Setup -->
+    <div class="feature-group">
+      <div class="feature-group-header">Setting Up Each Week</div>
+
+      <div class="feature-item">
+        <div class="feature-item-name">Weekly Product Reset <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">One button to turn everything off. One button to copy last week's lineup. Quick toggles per vendor. No more rebuilding the site from scratch.</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">O64</span>
-          <span class="feature-name">Customer Packing Slips</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Per-customer packing slips grouped by pickup time slot. Items sorted by pick zone (Cold, Dry, Produce, Fragile). Checkboxes for assembly team. Tear-off bag label. Batch-printable.</div>
+      <div class="feature-item">
+        <div class="feature-item-name">Collections Management <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">Create and manage curated collections (Carlo's Favorites, Award Winners, Seasonal, etc.). Add a banner image, pick which products belong, drag to reorder. Toggle collections on and off.</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">O65</span>
-          <span class="feature-name">Pick Zone Assignment</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Admin dropdown on each product: Cold Storage, Dry Goods, Produce, Fragile/Delicate, Other. Drives packing slip sort order.</div>
+      <div class="feature-item">
+        <div class="feature-item-name">Product Badges <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">Tag products as "Limited Run," "Award Winner," "Carlo's Pick," "New This Week." Badges show up on the customer-facing site automatically.</div>
       </div>
 
-      <div class="feature-card is-modified">
-        <div class="feature-top">
-          <span class="feature-id">O35</span>
-          <span class="feature-name">By-Order Pick List (Enhanced)</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-modified">Modified</span>
-        </div>
-        <div class="feature-desc">Now sorted by time slot, items within each order sorted by pick zone, with checkboxes and bag label section.</div>
+      <div class="feature-item">
+        <div class="feature-item-name">Storage Zone Labels <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">Mark each product with its storage zone (Cold, Dry, Produce, Fragile). This drives the sorting on packing slips &mdash; set it once, it works every week.</div>
       </div>
     </div>
 
-    <!-- VENDOR PURCHASE ORDERS -->
-    <div class="roadmap-domain">
-      <div class="domain-header">
-        <h3>Vendor Purchase Orders</h3>
-        <span class="domain-count">2 new</span>
+    <!-- Messaging -->
+    <div class="feature-group">
+      <div class="feature-group-header">Customer Messaging (Automated)</div>
+
+      <div class="feature-item">
+        <div class="feature-item-name">"Market is Open" Message <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">Text + email when ordering opens. You choose a weekly highlight to feature.</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">O66</span>
-          <span class="feature-name">Vendor PO Generator</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">After order cutoff, auto-generate per-vendor purchase orders. Total quantities of each product across all customer orders. Email or print to vendors.</div>
+      <div class="feature-item">
+        <div class="feature-item-name">"Last Chance to Order" Reminder <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">Text + email a few hours before the ordering window closes.</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">O67</span>
-          <span class="feature-name">PO Confirmation Tracking</span>
-          <span class="feature-badge badge-p1">P1</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Track which vendors have acknowledged their PO. Dashboard indicator with re-send option.</div>
+      <div class="feature-item">
+        <div class="feature-item-name">Pickup Day Reminder <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">Text + email on pickup morning with the customer's specific time slot.</div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-item-name">Text Opt-In at Checkout <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">Customers choose to receive texts when they check out. Every message includes an easy opt-out.</div>
       </div>
     </div>
 
-    <!-- AUTOMATED MESSAGING -->
-    <div class="roadmap-domain">
-      <div class="domain-header">
-        <h3>Automated Customer Messaging</h3>
-        <span class="domain-count">4 new</span>
+    <!-- Packing -->
+    <div class="feature-group">
+      <div class="feature-group-header">Packing &amp; Assembly</div>
+
+      <div class="feature-item">
+        <div class="feature-item-name">Smart Packing Slips <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">One slip per customer. Grouped by pickup time. Items sorted by storage zone. Checkboxes for your team. Tear-off bag label. Hit "print all" and go.</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">O68</span>
-          <span class="feature-name">Order Window Open Notification</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Email + SMS when ordering opens. Admin-configurable weekly product highlight. Twilio + Resend integration.</div>
+      <div class="feature-item is-adjusted">
+        <div class="feature-item-name">Improved Pick Lists <span class="badge badge-adjusted">Adjusted</span></div>
+        <div class="feature-item-desc">Now sorted by time slot with items grouped by storage zone. Checkboxes and bag labels included.</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">O69</span>
-          <span class="feature-name">Order Deadline Reminder</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Email + SMS sent configurable hours before order cutoff. "Last chance to order for Saturday pickup!"</div>
+      <div class="feature-item is-adjusted">
+        <div class="feature-item-name">Better Order Details <span class="badge badge-adjusted">Adjusted</span></div>
+        <div class="feature-item-desc">Now shows how many times a customer has ordered, flags first-timers, and marks items that should be grabbed fresh at pickup (flowers, ice cream, pastries).</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">O70</span>
-          <span class="feature-name">Pickup Day Reminder</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Email + SMS morning of pickup with customer's time slot and pickup location.</div>
-      </div>
-
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">O71</span>
-          <span class="feature-name">Customer SMS Preferences</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">SMS opt-in checkbox at checkout. Opt-out link in every message. TCPA compliant. Stored per customer.</div>
+      <div class="feature-item is-adjusted">
+        <div class="feature-item-name">Organized Staff Notes <span class="badge badge-adjusted">Adjusted</span></div>
+        <div class="feature-item-desc">Instead of one messy text box, notes are separated into picking notes, customer service notes, and issue notes. Each one is timestamped.</div>
       </div>
     </div>
 
-    <!-- COLLECTIONS -->
-    <div class="roadmap-domain">
-      <div class="domain-header">
-        <h3>Collections &amp; Curation (Storefront)</h3>
-        <span class="domain-count">3 new, 1 modified</span>
+    <!-- Vendor Orders -->
+    <div class="feature-group">
+      <div class="feature-group-header">Vendor Order Sheets</div>
+
+      <div class="feature-item">
+        <div class="feature-item-name">Automatic Vendor Orders <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">After the customer ordering window closes, Gather totals everything up per vendor. Email or print. No more manual spreadsheet work.</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">C56</span>
-          <span class="feature-name">Collections Page</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Dedicated browsable page per curated collection. Banner image, description, curated product grid in admin-defined order.</div>
-      </div>
-
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">C57</span>
-          <span class="feature-name">Collections Navigation</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Homepage carousel of collection cards. Navigation dropdown integration. First thing customers see after the hero.</div>
-      </div>
-
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">C58</span>
-          <span class="feature-name">Curation Badges</span>
-          <span class="feature-badge badge-p1">P1</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Badges on product cards: "Limited Run," "Award Winner," "Carlo's Pick," "New This Week," "Staff Favorite."</div>
-      </div>
-
-      <div class="feature-card is-modified">
-        <div class="feature-top">
-          <span class="feature-id">C1</span>
-          <span class="feature-name">Homepage (Redesigned)</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-modified">Modified</span>
-        </div>
-        <div class="feature-desc">"Featured products" grid replaced with collections carousel. Editorial feel, not transactional. Browse by collection added as secondary navigation.</div>
+      <div class="feature-item">
+        <div class="feature-item-name">Vendor Confirmation Tracking <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">See which vendors have confirmed they got their order. Re-send with one click if they haven't.</div>
       </div>
     </div>
 
-    <!-- ADMIN -->
-    <div class="roadmap-domain">
-      <div class="domain-header">
-        <h3>Admin: Collections &amp; Product Management</h3>
-        <span class="domain-count">4 new</span>
+    <!-- Shopping Experience -->
+    <div class="feature-group">
+      <div class="feature-group-header">What Customers Will See</div>
+
+      <div class="feature-item">
+        <div class="feature-item-name">Collections-First Homepage <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">Instead of a basic product grid, customers browse curated collections. It feels editorial &mdash; like walking into your market, not a grocery app.</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">A40</span>
-          <span class="feature-name">Collection Management</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">CRUD for collections: name, banner upload, product drag-to-reorder, active/inactive toggle, optional start/end dates for seasonal collections.</div>
+      <div class="feature-item">
+        <div class="feature-item-name">Collection Pages <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">Each collection gets its own page with a banner, description, and handpicked products in the order you choose.</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">A41</span>
-          <span class="feature-name">Product Pick Zone Field</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Dropdown on product editor: Cold Storage, Dry Goods, Produce, Fragile/Delicate, Other.</div>
-      </div>
-
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">A42</span>
-          <span class="feature-name">Product Curation Badges</span>
-          <span class="feature-badge badge-p1">P1</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Multi-select badge assignment on product editor. Displayed on storefront product cards.</div>
-      </div>
-
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">A43</span>
-          <span class="feature-name">Weekly Product Reset Workflow</span>
-          <span class="feature-badge badge-p1">P1</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Bulk "turn all off" button, "duplicate last week" with edit, per-vendor quick toggle. Addresses your #1 pain point of rebuilding the site every week.</div>
+      <div class="feature-item is-adjusted">
+        <div class="feature-item-name">Phone Required at Checkout <span class="badge badge-adjusted">Adjusted</span></div>
+        <div class="feature-item-desc">Phone number is now required (was optional). Your entire communication system runs on text &mdash; we need to be able to reach them.</div>
       </div>
     </div>
 
-    <!-- CUSTOMER RELATIONSHIP -->
-    <div class="roadmap-domain">
-      <div class="domain-header">
-        <h3>Customer Relationship Features</h3>
-        <span class="domain-count">4 new</span>
+    <!-- Customer Tracking -->
+    <div class="feature-group">
+      <div class="feature-group-header">Customer Tracking</div>
+
+      <div class="feature-item">
+        <div class="feature-item-name">First-Timer Flags <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">New customers are automatically flagged on the dashboard so your team can give extra attention and catch potential issues.</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">O72</span>
-          <span class="feature-name">New Customer Badge</span>
-          <span class="feature-badge badge-p1">P1</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Auto-flag first-time orders on the dashboard. Helps spot potential mis-orders and provide extra attention.</div>
+      <div class="feature-item">
+        <div class="feature-item-name">Welcome Email <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">First-time customers automatically get a branded thank-you email after their order.</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">O73</span>
-          <span class="feature-name">Welcome Email (Automated)</span>
-          <span class="feature-badge badge-p1">P1</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Branded welcome/thank-you email sent automatically to first-time customers after their first order. Template customizable.</div>
+      <div class="feature-item">
+        <div class="feature-item-name">Credit &amp; "Items Owed" Tracker <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">When a vendor shorts a delivery, log the credit. It carries forward and applies to the customer's next order automatically. No more clipboard.</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">O74</span>
-          <span class="feature-name">Customer Credit Tracker</span>
-          <span class="feature-badge badge-p1">P1</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Log store credits or specific items owed when a vendor shorts a delivery. Credits carry forward and auto-apply at next checkout. Dashboard view of all outstanding credits.</div>
+      <div class="feature-item">
+        <div class="feature-item-name">Comp Logging <span class="badge badge-new">New</span></div>
+        <div class="feature-item-desc">Log complimentary items with a reason (service recovery, VIP gift, promo). Tracked so you can see the cost over time.</div>
       </div>
 
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-id">O75</span>
-          <span class="feature-name">Comp Item Logger</span>
-          <span class="feature-badge badge-p1">P1</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Log complimentary items with reason codes: service recovery, VIP gift, mistake, promo. Tracked in reporting for cost analysis.</div>
+      <div class="feature-item is-adjusted">
+        <div class="feature-item-name">"Credit Next Order" Option <span class="badge badge-adjusted">Adjusted</span></div>
+        <div class="feature-item-desc">When an item is unavailable, staff can now offer "credit to next order" alongside refund or substitute.</div>
       </div>
     </div>
 
-    <!-- MODIFIED FEATURES -->
-    <div class="roadmap-domain">
-      <div class="domain-header">
-        <h3>Modified Existing Features</h3>
-        <span class="domain-count">7 adjustments</span>
-      </div>
+    <!-- Vendor Profiles -->
+    <div class="feature-group">
+      <div class="feature-group-header">Vendor Profiles</div>
 
-      <div class="feature-card is-modified">
-        <div class="feature-top">
-          <span class="feature-id">C31</span>
-          <span class="feature-name">Phone Number Required</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-modified">Modified</span>
-        </div>
-        <div class="feature-desc">Phone changed from optional to required at checkout. SMS opt-in checkbox added. Your entire communication system runs on text.</div>
-      </div>
-
-      <div class="feature-card is-modified">
-        <div class="feature-top">
-          <span class="feature-id">O15</span>
-          <span class="feature-name">Order Detail View (Enhanced)</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-modified">Modified</span>
-        </div>
-        <div class="feature-desc">Added: customer order count, first-time flag, internal staff notes, customer tags (VIP, etc.), "last-minute grab" flags for items the runner grabs fresh.</div>
-      </div>
-
-      <div class="feature-card is-modified">
-        <div class="feature-top">
-          <span class="feature-id">O20</span>
-          <span class="feature-name">Staff Notes (Structured)</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-modified">Modified</span>
-        </div>
-        <div class="feature-desc">Single text field replaced with structured categories: Picking Notes, Customer Service Notes, Issue Notes. Each timestamped with author.</div>
-      </div>
-
-      <div class="feature-card is-modified">
-        <div class="feature-top">
-          <span class="feature-id">O49</span>
-          <span class="feature-name">Unavailable Item Resolution</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-modified">Modified</span>
-        </div>
-        <div class="feature-desc">Added "credit to next order" as resolution option alongside refund and substitute. Connects to Customer Credit Tracker (O74).</div>
-      </div>
-
-      <div class="feature-card is-modified">
-        <div class="feature-top">
-          <span class="feature-id">A24-A27</span>
-          <span class="feature-name">Vendor Management (Additional Fields)</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-modified">Modified</span>
-        </div>
-        <div class="feature-desc">Added: genre/category, weekly availability notes, stall preference, special requirements (power, flat ground, van access), season start/end dates.</div>
-      </div>
-    </div>
-
-    <!-- INFRASTRUCTURE -->
-    <div class="roadmap-domain">
-      <div class="domain-header">
-        <h3>Infrastructure &amp; Data Model</h3>
-        <span class="domain-count">5 items</span>
-      </div>
-
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-name">Customer Entity</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">New database entity: order count, total spend, internal notes, tags (VIP, etc.), SMS/email preferences. Foundation for all customer relationship features.</div>
-      </div>
-
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-name">Collection + CollectionProduct Entities</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Database schema, migrations, and API routes for the collections system.</div>
-      </div>
-
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-name">CustomerCredit Entity</span>
-          <span class="feature-badge badge-p1">P1</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Credits and items owed with status tracking (pending, applied, expired, voided).</div>
-      </div>
-
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-name">Twilio SMS Integration</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Twilio setup, message templates, opt-in/out handling, TCPA compliance. Powers all automated messaging.</div>
-      </div>
-
-      <div class="feature-card is-new">
-        <div class="feature-top">
-          <span class="feature-name">Scheduled Job Runner</span>
-          <span class="feature-badge badge-p0">P0</span>
-          <span class="feature-badge badge-new">New</span>
-        </div>
-        <div class="feature-desc">Cron or serverless scheduled functions for automated message triggers. Vercel Cron or similar.</div>
+      <div class="feature-item is-adjusted">
+        <div class="feature-item-name">Richer Vendor Details <span class="badge badge-adjusted">Adjusted</span></div>
+        <div class="feature-item-desc">Now includes: category (produce, dairy, pastry, etc.), availability notes, stall preference, special needs (power, flat ground, van access), and season dates.</div>
       </div>
     </div>
   </div>
 
-  <!-- ===== SECTION 4: ESTIMATES ===== -->
-  <div class="section" id="estimates">
-    <div class="section-label">Section 4</div>
-    <div class="section-title">Scope &amp; Estimates</div>
-    <div class="section-intro">Summary of the v1.2 scope increase and estimated effort.</div>
-
-    <table class="summary-table">
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th class="num">Count</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Original MVP features (v1.0)</td><td class="num">180</td></tr>
-        <tr><td>New features added (v1.2)</td><td class="num">+18</td></tr>
-        <tr><td>Existing features modified</td><td class="num">7</td></tr>
-        <tr><td>Features re-prioritized</td><td class="num">4</td></tr>
-        <tr><td>New data model entities</td><td class="num">3</td></tr>
-        <tr class="total-row"><td>Total MVP features (v1.2)</td><td class="num">~198</td></tr>
-      </tbody>
-    </table>
-
-    <table class="summary-table">
-      <thead>
-        <tr>
-          <th>Effort (v1.2 delta only)</th>
-          <th class="num">Design</th>
-          <th class="num">Dev/QA</th>
-          <th class="num">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>18 New Features</td><td class="num">54 hrs</td><td class="num">122 hrs</td><td class="num">176 hrs</td></tr>
-        <tr><td>7 Feature Modifications</td><td class="num">21 hrs</td><td class="num">27 hrs</td><td class="num">48 hrs</td></tr>
-        <tr><td>Infrastructure / Data Model</td><td class="num">&mdash;</td><td class="num">29 hrs</td><td class="num">29 hrs</td></tr>
-        <tr class="total-row"><td>v1.2 Delta Total</td><td class="num">75 hrs</td><td class="num">178 hrs</td><td class="num">253 hrs</td></tr>
-      </tbody>
-    </table>
-
-    <table class="summary-table">
-      <thead>
-        <tr>
-          <th>Priority Split</th>
-          <th class="num">Design</th>
-          <th class="num">Dev/QA</th>
-          <th class="num">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>P0 &mdash; Must-have for launch</td><td class="num">48 hrs</td><td class="num">115 hrs</td><td class="num">163 hrs</td></tr>
-        <tr><td>P1 &mdash; Should-have</td><td class="num">27 hrs</td><td class="num">63 hrs</td><td class="num">90 hrs</td></tr>
-        <tr class="total-row"><td>Total</td><td class="num">75 hrs</td><td class="num">178 hrs</td><td class="num">253 hrs</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- ===== SECTION 5: LATER ===== -->
+  <!-- ===== SECTION 4: LATER ===== -->
   <div class="section" id="later">
-    <div class="section-label">Section 5</div>
+    <div class="section-label">After Launch</div>
     <div class="section-title">What's Coming Later</div>
-    <div class="section-intro">Features you and your customers mentioned that are important but don't belong in the first version. We want to get the core right first.</div>
+    <div class="section-intro">Things you and your customers mentioned that are important but don't belong in version 1. We want to get the core right first.</div>
 
     <table class="later-table">
       <thead>
         <tr>
           <th>Feature</th>
-          <th>Phase</th>
-          <th>Why Not Now</th>
+          <th>When</th>
+          <th>Why Later</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Favorite items</td>
-          <td><span class="phase-tag">Phase 2</span></td>
-          <td>Needs customer accounts</td>
-        </tr>
-        <tr>
-          <td>Edit time slot after checkout</td>
-          <td><span class="phase-tag">Phase 2</span></td>
-          <td>Needs customer accounts</td>
-        </tr>
-        <tr>
-          <td>Vendor compliance portal</td>
-          <td><span class="phase-tag">Phase 2-3</span></td>
-          <td>Considering pulling basic version earlier</td>
-        </tr>
-        <tr>
-          <td>Vendor self-service</td>
-          <td><span class="phase-tag">Phase 2</span></td>
-          <td>Phase 1 = you manage products. Phase 2 = vendors manage their own.</td>
-        </tr>
-        <tr>
-          <td>Recipe of the week</td>
-          <td><span class="phase-tag">Phase 3</span></td>
-          <td>Content feature, core first</td>
-        </tr>
-        <tr>
-          <td>Full customer CRM</td>
-          <td><span class="phase-tag">Phase 2-3</span></td>
-          <td>Data foundation in MVP; full search, segments, and automated tagging later</td>
-        </tr>
-        <tr>
-          <td>Product reviews</td>
-          <td><span class="phase-tag">Phase 4</span></td>
-          <td>Nice-to-have, not operational</td>
-        </tr>
-        <tr>
-          <td>Loyalty program</td>
-          <td><span class="phase-tag">Phase 4</span></td>
-          <td>Need order volume data first</td>
-        </tr>
-        <tr>
-          <td>Mobile app</td>
-          <td><span class="phase-tag">Phase 4</span></td>
-          <td>Web app is fully mobile-optimized from day one</td>
-        </tr>
+        <tr><td>Favorite items</td><td><span class="phase-tag">V2</span></td><td>Needs customer accounts first</td></tr>
+        <tr><td>Change pickup time after ordering</td><td><span class="phase-tag">V2</span></td><td>Needs customer accounts first</td></tr>
+        <tr><td>Vendor compliance tracking</td><td><span class="phase-tag">V2</span></td><td>May pull basic version earlier</td></tr>
+        <tr><td>Vendors manage their own products</td><td><span class="phase-tag">V2</span></td><td>V1 = you manage. V2 = they self-serve.</td></tr>
+        <tr><td>Recipe of the week</td><td><span class="phase-tag">V3</span></td><td>Content feature &mdash; core first</td></tr>
+        <tr><td>Full customer profiles (search, segments, auto-tags)</td><td><span class="phase-tag">V2-3</span></td><td>Foundation in V1, full tools later</td></tr>
+        <tr><td>Product reviews</td><td><span class="phase-tag">V3+</span></td><td>Nice-to-have, not operational</td></tr>
+        <tr><td>Loyalty program</td><td><span class="phase-tag">V3+</span></td><td>Need order data to design it right</td></tr>
+        <tr><td>Mobile app</td><td><span class="phase-tag">V3+</span></td><td>Website works great on phones from day one</td></tr>
       </tbody>
     </table>
   </div>
 
-  <!-- ADDITIONAL QUESTIONS -->
-  <div class="section">
-    <div class="section-label">Follow-Up</div>
+  <!-- ===== SECTION 5: FOLLOW-UP ===== -->
+  <div class="section" id="followup">
+    <div class="section-label">Over to You</div>
     <div class="section-title">A Few More Questions</div>
-    <div class="section-intro">Beyond the questions embedded above, a couple things that would help us build better.</div>
 
     <div class="qa-item">
       <div class="qa-answer">
-        <p><strong>1. Weekly timeline:</strong> Can you map out the typical weekly cycle with specific days? Something like: Sunday = newsletter + open ordering, Tuesday = reminders, Wednesday = ordering closes, Thursday = POs + deliveries, Friday = assembly + pickup. We want the system's automated triggers to match your real schedule.</p>
+        <p><strong>1. Weekly schedule:</strong> Can you map out the typical week with days? Something like: Sunday = open ordering, Tuesday = reminders, Wednesday = ordering closes, Thursday = vendor deliveries, Friday = assembly + pickup. We want the automatic messages to match your real schedule.</p>
 
-        <p><strong>2. Assembly team:</strong> You described a foreman, cold person, dry goods person, bagger, double-checker, and labeler. How many people total? Is this consistent week to week? This helps us design for the right number of simultaneous users on the ops dashboard during pickup morning.</p>
+        <p><strong>2. Assembly crew:</strong> How many people work assembly on pickup morning? You mentioned a foreman, cold person, dry goods person, bagger, double-checker, labeler. Is that team consistent week to week?</p>
 
-        <p><strong>3. Pass-through vs. wholesale vendors:</strong> Do some vendors deliver to your storage, while others bring product to the market that you grab from their stall? Or does everything come through deliveries?</p>
+        <p><strong>3. Vendor deliveries:</strong> Does everything come through deliveries, or do some vendors bring product to the market and you grab it from their stall?</p>
 
-        <p><strong>4. Product photos:</strong> How's vendor photo quality generally? Do you end up taking your own photos, or do vendors provide good ones? This helps us prioritize photo tools (crop, enhance, background removal) vs. basic upload.</p>
+        <p><strong>4. Product photos:</strong> Do vendors generally provide good photos, or do you end up taking your own? Helps us decide how much photo editing to build in.</p>
+
+        <p><strong>5. Example collections:</strong> Give us 5-6 collection names you'd want at launch &mdash; we'll build the design around real ones.</p>
       </div>
     </div>
   </div>
@@ -1475,8 +755,8 @@
 
 <div class="footer">
   <p><strong>Gather</strong> &mdash; Good things from good people</p>
-  <p style="margin-top:8px">Business Confidential &bull; Prepared for Culinary Harvest &bull; February 2026</p>
-  <p style="margin-top:8px; font-size:11px; opacity:0.5">This document is not indexed by search engines and is shared via private link only.</p>
+  <p style="margin-top:8px">Confidential &bull; Prepared for Culinary Harvest &bull; February 2026</p>
+  <p style="margin-top:8px; font-size:11px; opacity:0.5">Shared via private link only.</p>
 </div>
 
 </body>
