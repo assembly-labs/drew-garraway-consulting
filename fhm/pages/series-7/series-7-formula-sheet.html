@@ -1,690 +1,920 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-    <meta name="description" content="Series 7 Formula Sheet - All calculations in one place. Options, margin, bonds, and investment company formulas with worked examples.">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+        <meta
+            name="description"
+            content="Series 7 Formula Sheet - All calculations in one place. Options, margin, bonds, and investment company formulas with worked examples."
+        />
 
-    <title>Formula Sheet | Series 7 Study Materials | Franklin Hugh Money</title>
+        <title>Formula Sheet | Series 7 Study Materials | Franklin Hugh Money</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
 
-    <link rel="stylesheet" href="../../assets/css/main.css?v=f6a3d80a">
-    <link rel="stylesheet" href="../../assets/css/sie-chapter.css?v=af51dc2a">
-    <script src="../../assets/js/night-mode.js"></script>
+        <link rel="stylesheet" href="../../assets/css/main.css?v=b3570edb" />
+        <link rel="stylesheet" href="../../assets/css/sie-chapter.css?v=6497aebd" />
+        <script src="../../assets/js/night-mode.js"></script>
 
-    <style>
-        .formula-section { margin-bottom: 3rem; }
-        .formula-section h3 {
-            color: var(--fh-navy);
-            border-bottom: 2px solid var(--fh-gold);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .formula-card {
-            background: var(--fh-white);
-            border: 1px solid var(--fh-gray-200);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        .formula-card h4 {
-            color: var(--fh-gold);
-            font-family: var(--fh-font-mono);
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-        }
-        .formula-card table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .formula-card th, .formula-card td {
-            padding: 0.5rem;
-            text-align: left;
-            border-bottom: 1px solid var(--fh-gray-200);
-        }
-        .formula-card th {
-            font-weight: 600;
-            color: var(--fh-navy);
-        }
-        .formula-code {
-            background: var(--fh-gray-100);
-            padding: 1rem;
-            border-radius: 4px;
-            font-family: var(--fh-font-mono);
-            font-size: 0.9rem;
-            margin: 0.5rem 0;
-            white-space: pre-wrap;
-        }
-        .worked-example {
-            background: #f0f7f3;
-            border-left: 4px solid var(--fh-sage, #7C9885);
-            padding: 1rem 1.5rem;
-            border-radius: 0 8px 8px 0;
-            margin: 0.75rem 0;
-            font-size: 0.925rem;
-        }
-        .worked-example strong { color: var(--fh-navy); }
-        .memory-aid {
-            background: linear-gradient(135deg, var(--fh-gold), #c9a050);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-        .memory-aid strong { color: white; }
-        .critical-numbers {
-            background: var(--fh-navy);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-        }
-        .critical-numbers th, .critical-numbers td {
-            padding: 0.75rem;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
-        .critical-numbers th { color: var(--fh-gold); }
-        .seesaw {
-            text-align: center;
-            font-family: var(--fh-font-mono);
-            font-size: 0.95rem;
-            padding: 1.5rem;
-            background: var(--fh-gray-100);
-            border-radius: 8px;
-            margin: 1rem 0;
-            line-height: 1.8;
-        }
-        .seesaw .label { color: var(--fh-navy); font-weight: 600; }
-        .tchart {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            border: 2px solid var(--fh-navy);
-            border-radius: 8px;
-            overflow: hidden;
-            margin: 1rem 0;
-            font-family: var(--fh-font-mono);
-            font-size: 0.9rem;
-        }
-        .tchart-header {
-            background: var(--fh-navy);
-            color: white;
-            padding: 0.75rem 1rem;
-            font-weight: 600;
-            text-align: center;
-        }
-        .tchart-body {
-            padding: 1rem;
-            background: var(--fh-gray-100);
-        }
-        .tchart-body.left { border-right: 2px solid var(--fh-navy); }
-        @media print {
-            .header, .footer, .back-to-top { display: none; }
-            body { background: white; }
-            .formula-card { break-inside: avoid; }
-            .formula-section { break-inside: avoid; }
-        }
-    </style>
-</head>
-<body>
-    <header class="header" id="header">
-        <div class="header__inner">
-            <h1 class="header__title">Formula Sheet</h1>
-            <nav class="breadcrumb">
-                <a href="../../index.html">Home</a>
-                <span>/</span>
-                <a href="series-7-study-materials.html">Series 7</a>
-                <span>/</span>
-                <span>Formula Sheet</span>
+        <style>
+            .formula-section {
+                margin-bottom: 3rem;
+            }
+            .formula-section h3 {
+                color: var(--fh-navy);
+                border-bottom: 2px solid var(--fh-gold);
+                padding-bottom: 0.5rem;
+                margin-bottom: 1.5rem;
+            }
+            .formula-card {
+                background: var(--fh-white);
+                border: 1px solid var(--fh-gray-200);
+                border-radius: 8px;
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            .formula-card h4 {
+                color: var(--fh-gold);
+                font-family: var(--fh-font-mono);
+                font-size: 0.875rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                margin-bottom: 1rem;
+            }
+            .formula-card table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            .formula-card th,
+            .formula-card td {
+                padding: 0.5rem;
+                text-align: left;
+                border-bottom: 1px solid var(--fh-gray-200);
+            }
+            .formula-card th {
+                font-weight: 600;
+                color: var(--fh-navy);
+            }
+            .formula-code {
+                background: var(--fh-gray-100);
+                padding: 1rem;
+                border-radius: 4px;
+                font-family: var(--fh-font-mono);
+                font-size: 0.9rem;
+                margin: 0.5rem 0;
+                white-space: pre-wrap;
+            }
+            .worked-example {
+                background: #f0f7f3;
+                border-left: 4px solid var(--fh-sage, #7c9885);
+                padding: 1rem 1.5rem;
+                border-radius: 0 8px 8px 0;
+                margin: 0.75rem 0;
+                font-size: 0.925rem;
+            }
+            .worked-example strong {
+                color: var(--fh-navy);
+            }
+            .memory-aid {
+                background: linear-gradient(135deg, var(--fh-gold), #c9a050);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                margin: 1rem 0;
+            }
+            .memory-aid strong {
+                color: white;
+            }
+            .critical-numbers {
+                background: var(--fh-navy);
+                color: white;
+                padding: 1.5rem;
+                border-radius: 8px;
+            }
+            .critical-numbers th,
+            .critical-numbers td {
+                padding: 0.75rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            .critical-numbers th {
+                color: var(--fh-gold);
+            }
+            .seesaw {
+                text-align: center;
+                font-family: var(--fh-font-mono);
+                font-size: 0.95rem;
+                padding: 1.5rem;
+                background: var(--fh-gray-100);
+                border-radius: 8px;
+                margin: 1rem 0;
+                line-height: 1.8;
+            }
+            .seesaw .label {
+                color: var(--fh-navy);
+                font-weight: 600;
+            }
+            .tchart {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+                border: 2px solid var(--fh-navy);
+                border-radius: 8px;
+                overflow: hidden;
+                margin: 1rem 0;
+                font-family: var(--fh-font-mono);
+                font-size: 0.9rem;
+            }
+            .tchart-header {
+                background: var(--fh-navy);
+                color: white;
+                padding: 0.75rem 1rem;
+                font-weight: 600;
+                text-align: center;
+            }
+            .tchart-body {
+                padding: 1rem;
+                background: var(--fh-gray-100);
+            }
+            .tchart-body.left {
+                border-right: 2px solid var(--fh-navy);
+            }
+            @media print {
+                .header,
+                .footer,
+                .back-to-top {
+                    display: none;
+                }
+                body {
+                    background: white;
+                }
+                .formula-card {
+                    break-inside: avoid;
+                }
+                .formula-section {
+                    break-inside: avoid;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header class="header" id="header">
+            <div class="header__inner">
+                <h1 class="header__title">Formula Sheet</h1>
+                <nav class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="series-7-study-materials.html">Series 7</a>
+                    <span>/</span>
+                    <span>Formula Sheet</span>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container">
+            <div class="intro">
+                <p>
+                    Every calculation you need for the Series 7 exam in one place &mdash; formulas, worked examples, and
+                    memory aids. Print this page and review before the exam.
+                </p>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- OPTIONS FORMULAS -->
+            <!-- ============================================================== -->
+            <div class="formula-section">
+                <h3>Options Formulas</h3>
+
+                <!-- T-Chart Method -->
+                <div class="formula-card">
+                    <h4>The T-Chart Method (Use This on Every Options Question)</h4>
+                    <p style="margin-bottom: 1rem">
+                        Draw a T-chart for every options problem. Left side = money OUT (debits). Right side = money IN
+                        (credits). The side that's bigger determines whether you have a gain or a loss.
+                    </p>
+                    <div class="tchart">
+                        <div class="tchart-header">Money OUT (Debits)</div>
+                        <div class="tchart-header">Money IN (Credits)</div>
+                        <div class="tchart-body left">
+                            Buy (premiums paid)<br />
+                            Exercise to buy stock
+                        </div>
+                        <div class="tchart-body">
+                            Sell (premiums received)<br />
+                            Exercise to sell stock
+                        </div>
+                    </div>
+                    <div class="formula-code">
+                        Max Gain = Maximum the right side can exceed the left Max Loss = Maximum the left side can
+                        exceed the right Breakeven = The point where both sides are equal
+                    </div>
+                </div>
+
+                <!-- Four Basic Positions -->
+                <div class="formula-card">
+                    <h4>Long Call</h4>
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Formula</th>
+                        </tr>
+                        <tr>
+                            <td>Max Gain</td>
+                            <td>Unlimited (stock can rise indefinitely)</td>
+                        </tr>
+                        <tr>
+                            <td>Max Loss</td>
+                            <td>Premium paid</td>
+                        </tr>
+                        <tr>
+                            <td>Breakeven</td>
+                            <td>Strike + Premium</td>
+                        </tr>
+                    </table>
+                    <div class="worked-example">
+                        <strong>Example:</strong> Buy 1 ABC Jul 50 Call @ $4<br />
+                        Max Loss = $4 per share = <strong>$400</strong><br />
+                        Breakeven = $50 + $4 = <strong>$54</strong><br />
+                        Max Gain = <strong>Unlimited</strong> (if ABC rises to $100, profit = $100 - $54 = $46 x 100 =
+                        $4,600)
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Short Call (Naked)</h4>
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Formula</th>
+                        </tr>
+                        <tr>
+                            <td>Max Gain</td>
+                            <td>Premium received</td>
+                        </tr>
+                        <tr>
+                            <td>Max Loss</td>
+                            <td>Unlimited (stock can rise indefinitely)</td>
+                        </tr>
+                        <tr>
+                            <td>Breakeven</td>
+                            <td>Strike + Premium</td>
+                        </tr>
+                    </table>
+                    <div class="worked-example">
+                        <strong>Example:</strong> Sell 1 ABC Jul 50 Call @ $4<br />
+                        Max Gain = $4 per share = <strong>$400</strong><br />
+                        Breakeven = $50 + $4 = <strong>$54</strong> (same as the buyer &mdash; opposite sides of same
+                        contract)<br />
+                        Max Loss = <strong>Unlimited</strong>
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Long Put</h4>
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Formula</th>
+                        </tr>
+                        <tr>
+                            <td>Max Gain</td>
+                            <td>Strike - Premium (stock goes to $0)</td>
+                        </tr>
+                        <tr>
+                            <td>Max Loss</td>
+                            <td>Premium paid</td>
+                        </tr>
+                        <tr>
+                            <td>Breakeven</td>
+                            <td>Strike - Premium</td>
+                        </tr>
+                    </table>
+                    <div class="worked-example">
+                        <strong>Example:</strong> Buy 1 XYZ Oct 60 Put @ $3<br />
+                        Max Loss = $3 per share = <strong>$300</strong><br />
+                        Breakeven = $60 - $3 = <strong>$57</strong><br />
+                        Max Gain = $57 per share = <strong>$5,700</strong> (if XYZ goes to $0, you sell at $60, minus $3
+                        premium)
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Short Put</h4>
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Formula</th>
+                        </tr>
+                        <tr>
+                            <td>Max Gain</td>
+                            <td>Premium received</td>
+                        </tr>
+                        <tr>
+                            <td>Max Loss</td>
+                            <td>Strike - Premium (stock goes to $0)</td>
+                        </tr>
+                        <tr>
+                            <td>Breakeven</td>
+                            <td>Strike - Premium</td>
+                        </tr>
+                    </table>
+                    <div class="worked-example">
+                        <strong>Example:</strong> Sell 1 XYZ Oct 60 Put @ $3<br />
+                        Max Gain = $3 per share = <strong>$300</strong><br />
+                        Breakeven = $60 - $3 = <strong>$57</strong><br />
+                        Max Loss = $57 per share = <strong>$5,700</strong> (if XYZ goes to $0, you must buy at $60,
+                        minus $3 received)
+                    </div>
+                </div>
+
+                <div class="memory-aid">
+                    <strong>Breakeven Memory Aid &mdash; CAL / PSB:</strong><br />
+                    <strong>C</strong>alls: <strong>A</strong>dd premium to strike &nbsp;|&nbsp; <strong>P</strong>uts:
+                    <strong>S</strong>ubtract premium from strike<br /><br />
+                    <strong>Quick Patterns:</strong><br />
+                    Buyers pay premium &rarr; max loss = premium paid<br />
+                    Sellers receive premium &rarr; max gain = premium received<br />
+                    Unlimited loss = short a naked call or short a straddle<br />
+                    Unlimited gain = long a call or long a straddle
+                </div>
+
+                <!-- Covered Call & Protective Put -->
+                <div class="formula-card">
+                    <h4>Covered Call (Long Stock + Short Call)</h4>
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Formula</th>
+                        </tr>
+                        <tr>
+                            <td>Max Gain</td>
+                            <td>(Strike - Stock Cost) + Premium</td>
+                        </tr>
+                        <tr>
+                            <td>Max Loss</td>
+                            <td>Stock Cost - Premium (stock goes to $0)</td>
+                        </tr>
+                        <tr>
+                            <td>Breakeven</td>
+                            <td>Stock Cost - Premium</td>
+                        </tr>
+                    </table>
+                    <div class="worked-example">
+                        <strong>Example:</strong> Buy 100 ABC at $48, sell 1 ABC Jul 50 Call @ $3<br />
+                        Max Gain = ($50 - $48) + $3 = <strong>$5 x 100 = $500</strong><br />
+                        Max Loss = $48 - $3 = <strong>$45 x 100 = $4,500</strong> (if ABC goes to $0)<br />
+                        Breakeven = $48 - $3 = <strong>$45</strong>
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Protective Put (Long Stock + Long Put)</h4>
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Formula</th>
+                        </tr>
+                        <tr>
+                            <td>Max Gain</td>
+                            <td>Unlimited (stock can rise indefinitely)</td>
+                        </tr>
+                        <tr>
+                            <td>Max Loss</td>
+                            <td>(Stock Cost - Strike) + Premium</td>
+                        </tr>
+                        <tr>
+                            <td>Breakeven</td>
+                            <td>Stock Cost + Premium</td>
+                        </tr>
+                    </table>
+                    <div class="worked-example">
+                        <strong>Example:</strong> Buy 100 ABC at $48, buy 1 ABC Jul 45 Put @ $2<br />
+                        Max Loss = ($48 - $45) + $2 = <strong>$5 x 100 = $500</strong><br />
+                        Breakeven = $48 + $2 = <strong>$50</strong><br />
+                        Max Gain = <strong>Unlimited</strong>
+                    </div>
+                </div>
+
+                <!-- Spreads -->
+                <div class="formula-card">
+                    <h4>Spreads &mdash; Master Table</h4>
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>Max Gain</th>
+                            <th>Max Loss</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Debit Spread</strong></td>
+                            <td>Width of strikes - Net debit</td>
+                            <td>Net debit (premium paid)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Credit Spread</strong></td>
+                            <td>Net credit (premium received)</td>
+                            <td>Width of strikes - Net credit</td>
+                        </tr>
+                    </table>
+                    <div class="formula-code">
+                        Spread Breakevens: Call Spread BE = Lower strike + Net premium Put Spread BE = Higher strike -
+                        Net premium Width of strikes = difference between the two strike prices
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Bull Call Spread (Debit) &mdash; Worked Example</h4>
+                    <div class="worked-example">
+                        <strong>Position:</strong> Buy 1 ABC Jan 50 Call @ $5, Sell 1 ABC Jan 60 Call @ $2<br />
+                        Net Debit = $5 - $2 = <strong>$3</strong> (you paid more than you received)<br />
+                        Width = $60 - $50 = <strong>$10</strong><br /><br />
+                        Max Loss = Net Debit = <strong>$3 x 100 = $300</strong> (ABC at or below $50 at expiration)<br />
+                        Max Gain = Width - Net Debit = $10 - $3 = <strong>$7 x 100 = $700</strong> (ABC at or above
+                        $60)<br />
+                        Breakeven = Lower Strike + Net Premium = $50 + $3 = <strong>$53</strong>
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Bear Put Spread (Debit) &mdash; Worked Example</h4>
+                    <div class="worked-example">
+                        <strong>Position:</strong> Buy 1 ABC Jan 60 Put @ $6, Sell 1 ABC Jan 50 Put @ $2<br />
+                        Net Debit = $6 - $2 = <strong>$4</strong><br />
+                        Width = $60 - $50 = <strong>$10</strong><br /><br />
+                        Max Loss = Net Debit = <strong>$4 x 100 = $400</strong> (ABC at or above $60 at expiration)<br />
+                        Max Gain = Width - Net Debit = $10 - $4 = <strong>$6 x 100 = $600</strong> (ABC at or below
+                        $50)<br />
+                        Breakeven = Higher Strike - Net Premium = $60 - $4 = <strong>$56</strong>
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Bear Call Spread (Credit) &mdash; Worked Example</h4>
+                    <div class="worked-example">
+                        <strong>Position:</strong> Sell 1 ABC Jan 50 Call @ $5, Buy 1 ABC Jan 60 Call @ $2<br />
+                        Net Credit = $5 - $2 = <strong>$3</strong> (you received more than you paid)<br />
+                        Width = $60 - $50 = <strong>$10</strong><br /><br />
+                        Max Gain = Net Credit = <strong>$3 x 100 = $300</strong> (ABC at or below $50 at expiration)<br />
+                        Max Loss = Width - Net Credit = $10 - $3 = <strong>$7 x 100 = $700</strong> (ABC at or above
+                        $60)<br />
+                        Breakeven = Lower Strike + Net Premium = $50 + $3 = <strong>$53</strong>
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Bull Put Spread (Credit) &mdash; Worked Example</h4>
+                    <div class="worked-example">
+                        <strong>Position:</strong> Sell 1 ABC Jan 60 Put @ $6, Buy 1 ABC Jan 50 Put @ $2<br />
+                        Net Credit = $6 - $2 = <strong>$4</strong><br />
+                        Width = $60 - $50 = <strong>$10</strong><br /><br />
+                        Max Gain = Net Credit = <strong>$4 x 100 = $400</strong> (ABC at or above $60 at expiration)<br />
+                        Max Loss = Width - Net Credit = $10 - $4 = <strong>$6 x 100 = $600</strong> (ABC at or below
+                        $50)<br />
+                        Breakeven = Higher Strike - Net Premium = $60 - $4 = <strong>$56</strong>
+                    </div>
+                </div>
+
+                <div class="memory-aid">
+                    <strong>Spread Memory Aids:</strong><br />
+                    Debit = you paid &rarr; max loss is what you paid (the net debit)<br />
+                    Credit = you received &rarr; max gain is what you received (the net credit)<br />
+                    All spreads: max gain + max loss = width of strikes<br /><br />
+                    <strong>Which is bull? Which is bear?</strong><br />
+                    Bull = buy the lower strike (calls) or sell the higher strike (puts) &mdash; you profit if stock
+                    rises<br />
+                    Bear = sell the lower strike (calls) or buy the higher strike (puts) &mdash; you profit if stock
+                    falls
+                </div>
+
+                <!-- Straddles & Combinations -->
+                <div class="formula-card">
+                    <h4>Long Straddle (Buy Call + Buy Put, Same Strike &amp; Expiration)</h4>
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Formula</th>
+                        </tr>
+                        <tr>
+                            <td>Max Gain</td>
+                            <td>Unlimited (to upside); Strike - Combined Premiums (to downside)</td>
+                        </tr>
+                        <tr>
+                            <td>Max Loss</td>
+                            <td>Combined premiums paid</td>
+                        </tr>
+                        <tr>
+                            <td>Upside BE</td>
+                            <td>Strike + Combined premiums</td>
+                        </tr>
+                        <tr>
+                            <td>Downside BE</td>
+                            <td>Strike - Combined premiums</td>
+                        </tr>
+                    </table>
+                    <div class="worked-example">
+                        <strong>Example:</strong> Buy 1 ABC Jan 50 Call @ $3, Buy 1 ABC Jan 50 Put @ $4<br />
+                        Combined Premiums = $3 + $4 = <strong>$7</strong><br /><br />
+                        Max Loss = <strong>$7 x 100 = $700</strong> (ABC at exactly $50 at expiration &mdash; both
+                        expire worthless)<br />
+                        Upside BE = $50 + $7 = <strong>$57</strong><br />
+                        Downside BE = $50 - $7 = <strong>$43</strong><br />
+                        Max Gain = <strong>Unlimited</strong> (upside); or
+                        <strong>$43 x 100 = $4,300</strong> (downside, if stock goes to $0)
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Short Straddle (Sell Call + Sell Put, Same Strike &amp; Expiration)</h4>
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Formula</th>
+                        </tr>
+                        <tr>
+                            <td>Max Gain</td>
+                            <td>Combined premiums received</td>
+                        </tr>
+                        <tr>
+                            <td>Max Loss</td>
+                            <td>Unlimited (to upside); Strike - Combined Premiums (to downside)</td>
+                        </tr>
+                        <tr>
+                            <td>Upside BE</td>
+                            <td>Strike + Combined premiums</td>
+                        </tr>
+                        <tr>
+                            <td>Downside BE</td>
+                            <td>Strike - Combined premiums</td>
+                        </tr>
+                    </table>
+                    <div class="worked-example">
+                        <strong>Example:</strong> Sell 1 ABC Jan 50 Call @ $3, Sell 1 ABC Jan 50 Put @ $4<br />
+                        Combined Premiums = $3 + $4 = <strong>$7</strong><br /><br />
+                        Max Gain = <strong>$7 x 100 = $700</strong> (ABC at exactly $50 at expiration &mdash; both
+                        expire worthless)<br />
+                        Upside BE = $50 + $7 = <strong>$57</strong><br />
+                        Downside BE = $50 - $7 = <strong>$43</strong><br />
+                        Max Loss = <strong>Unlimited</strong> (upside); or
+                        <strong>$43 x 100 = $4,300</strong> (downside)
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Combinations (Different Strikes or Expirations)</h4>
+                    <p>
+                        A <strong>combination</strong> is like a straddle but the call and put have
+                        <em>different</em> strike prices and/or expirations. The formulas work the same way:
+                    </p>
+                    <div class="formula-code">
+                        Long Combination: Max Loss = Combined premiums paid Upside BE = Call strike + Combined premiums
+                        Downside BE = Put strike - Combined premiums Short Combination: Max Gain = Combined premiums
+                        received Upside BE = Call strike + Combined premiums Downside BE = Put strike - Combined
+                        premiums
+                    </div>
+                    <div class="worked-example">
+                        <strong>Example:</strong> Buy 1 ABC Jan 55 Call @ $2, Buy 1 ABC Jan 45 Put @ $3<br />
+                        Combined Premiums = $2 + $3 = <strong>$5</strong><br />
+                        Upside BE = $55 + $5 = <strong>$60</strong><br />
+                        Downside BE = $45 - $5 = <strong>$40</strong><br />
+                        Max Loss = <strong>$5 x 100 = $500</strong> (stock between $45 and $55 at expiration)
+                    </div>
+                </div>
+
+                <div class="memory-aid">
+                    <strong>Straddle Memory Aids:</strong><br />
+                    A straddle has TWO breakevens: Strike +/- Combined premiums<br />
+                    Long straddle = you WANT movement (either direction). You paid, so max loss = what you paid.<br />
+                    Short straddle = you WANT the stock to sit still. You received, so max gain = what you received.<br />
+                    The long straddle buyer and short straddle seller are on opposite sides &mdash; same breakevens,
+                    flipped gain/loss.
+                </div>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- MARGIN FORMULAS -->
+            <!-- ============================================================== -->
+            <div class="formula-section">
+                <h3>Margin Formulas</h3>
+
+                <div class="formula-card">
+                    <h4>Initial Margin (Reg T = 50%)</h4>
+                    <div class="formula-code">
+                        Long Margin: Margin Required = Market Value x 50% Loan Amount = Market Value x 50% Short Margin:
+                        Margin Required = Short Market Value x 50% Credit Balance = Short Proceeds + Margin Deposit
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Equity Calculations</h4>
+                    <div class="formula-code">
+                        Long Margin Equity = Market Value - Debit Balance Short Margin Equity = Credit Balance - Short
+                        Market Value
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>SMA (Special Memorandum Account)</h4>
+                    <div class="formula-code">
+                        SMA = Equity - (Market Value x 50%) (Only when equity > 50%) SMA increases when: - Stock price
+                        rises (50% of increase) - Dividends received - Cash deposits - Sale proceeds above loan value
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Buying Power</h4>
+                    <div class="formula-code">
+                        Buying Power = SMA / Reg T Buying Power = SMA / 0.50 Buying Power = SMA x 2
+                    </div>
+                    <div class="worked-example">
+                        <strong>Example:</strong> Customer has $5,000 SMA<br />
+                        Buying Power = $5,000 x 2 = <strong>$10,000</strong> in additional securities they can buy
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Maintenance Margin &amp; Trigger Prices</h4>
+                    <div class="formula-code">
+                        LONG Positions (25% maintenance): Margin Call when: Equity < 25% of Market Value Trigger Price:
+                        Debit Balance / 0.75 SHORT Positions (30% maintenance): Margin Call when: Equity < 30% of Market
+                        Value Trigger Price: Credit Balance / 1.30
+                    </div>
+                    <div class="worked-example">
+                        <strong>Long Example:</strong> Debit balance = $40,000<br />
+                        Trigger = $40,000 / 0.75 = <strong>$53,333</strong> &mdash; margin call if market value falls
+                        below this<br /><br />
+                        <strong>Short Example:</strong> Credit balance = $130,000<br />
+                        Trigger = $130,000 / 1.30 = <strong>$100,000</strong> &mdash; margin call if short market value
+                        rises above this
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Pattern Day Trader</h4>
+                    <div class="formula-code">
+                        Minimum Equity: $25,000 Buying Power: 4 x Maintenance Excess Buying Power (with outstanding
+                        margin call): 2 x Maintenance Excess
+                    </div>
+                </div>
+
+                <div class="memory-aid">
+                    <strong>Margin Memory Aids:</strong><br />
+                    SMA x 2 = Buying Power<br />
+                    Long trigger: Debit / 0.75 &nbsp;|&nbsp; Short trigger: Credit / 1.30<br />
+                    Shorts are riskier = higher maintenance (30% > 25%)<br />
+                    PDT: 4 day trades in 5 days &rarr; $25K minimum &rarr; 4x buying power
+                </div>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- BOND FORMULAS -->
+            <!-- ============================================================== -->
+            <div class="formula-section">
+                <h3>Bond Formulas</h3>
+
+                <!-- Yield Seesaw -->
+                <div class="formula-card">
+                    <h4>The Yield Seesaw (Triangle / Ladybug)</h4>
+                    <p style="margin-bottom: 1rem">
+                        Price and yield move in <strong>opposite directions</strong>. The coupon rate (Nominal Yield) is
+                        the fixed fulcrum &mdash; it never changes. The four yields stack in a predictable order
+                        depending on whether the bond is at a premium or discount.
+                    </p>
+
+                    <table>
+                        <tr>
+                            <th>Yield</th>
+                            <th>What It Measures</th>
+                            <th>Formula</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Nominal Yield (NY)</strong></td>
+                            <td>Coupon rate. Fixed at issuance. Never changes.</td>
+                            <td>Stated on the bond (e.g., 6%)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Current Yield (CY)</strong></td>
+                            <td>Annual income relative to current price</td>
+                            <td>Annual Interest / Market Price</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Yield to Maturity (YTM)</strong></td>
+                            <td>Total return if held to maturity (includes price gain/loss)</td>
+                            <td>Approximation formula below</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Yield to Call (YTC)</strong></td>
+                            <td>Total return if called early (shorter time amplifies effect)</td>
+                            <td>Same as YTM but uses call date &amp; call price</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Yield Ordering Rules</h4>
+                    <div class="seesaw">
+                        <span class="label">DISCOUNT BOND (Price &lt; Par)</span><br />
+                        Lowest &larr;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&rarr;
+                        Highest<br />
+                        <strong>NY &nbsp;&lt;&nbsp; CY &nbsp;&lt;&nbsp; YTM &nbsp;&lt;&nbsp; YTC</strong><br />
+                        <em>Price is low &rarr; all yields are pushed UP above the coupon</em><br />
+                        <em>YTC is highest because you get back par SOONER on less money</em>
+                    </div>
+                    <div class="seesaw">
+                        <span class="label">PREMIUM BOND (Price &gt; Par)</span><br />
+                        Lowest &larr;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&rarr;
+                        Highest<br />
+                        <strong>YTC &nbsp;&lt;&nbsp; YTM &nbsp;&lt;&nbsp; CY &nbsp;&lt;&nbsp; NY</strong><br />
+                        <em>Price is high &rarr; all yields are pushed DOWN below the coupon</em><br />
+                        <em>YTC is lowest because you lose the premium FASTER when called early</em>
+                    </div>
+                    <div class="seesaw">
+                        <span class="label">PAR BOND (Price = Par)</span><br />
+                        <strong>NY &nbsp;=&nbsp; CY &nbsp;=&nbsp; YTM &nbsp;=&nbsp; YTC</strong><br />
+                        <em>All four yields are equal at par</em>
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Current Yield</h4>
+                    <div class="formula-code">Current Yield = Annual Interest / Market Price</div>
+                    <div class="worked-example">
+                        <strong>Discount Example:</strong> 7% coupon bond trading at $800<br />
+                        Annual Interest = $1,000 x 0.07 = $70<br />
+                        CY = $70 / $800 = <strong>8.75%</strong><br />
+                        (CY > NY because bond is at a discount &mdash; confirms the seesaw)
+                    </div>
+                    <div class="worked-example">
+                        <strong>Premium Example:</strong> 5% coupon bond trading at $1,100<br />
+                        Annual Interest = $1,000 x 0.05 = $50<br />
+                        CY = $50 / $1,100 = <strong>4.55%</strong><br />
+                        (CY < NY because bond is at a premium &mdash; confirms the seesaw)
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Yield to Maturity (YTM) &mdash; Approximation Formula</h4>
+                    <div class="formula-code">
+                        Annual Interest + (Par - Price) / Years to Maturity YTM =
+                        ------------------------------------------------------- (Par + Price) / 2
+                    </div>
+                    <div class="worked-example">
+                        <strong>Discount Example:</strong> 6% bond, 10 years to maturity, trading at $900<br />
+                        Numerator = $60 + ($1,000 - $900) / 10 = $60 + $10 = $70<br />
+                        Denominator = ($1,000 + $900) / 2 = $950<br />
+                        YTM = $70 / $950 = <strong>7.37%</strong><br />
+                        (YTM > CY > NY &mdash; 7.37% > 6.67% > 6.00% &mdash; confirms discount ordering)
+                    </div>
+                    <div class="worked-example">
+                        <strong>Premium Example:</strong> 8% bond, 10 years to maturity, trading at $1,100<br />
+                        Numerator = $80 + ($1,000 - $1,100) / 10 = $80 + (-$10) = $70<br />
+                        Denominator = ($1,000 + $1,100) / 2 = $1,050<br />
+                        YTM = $70 / $1,050 = <strong>6.67%</strong><br />
+                        (YTM < CY < NY &mdash; 6.67% < 7.27% < 8.00% &mdash; confirms premium ordering)
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Tax-Equivalent Yield</h4>
+                    <div class="formula-code">TEY = Municipal Yield / (1 - Tax Bracket)</div>
+                    <div class="worked-example">
+                        <strong>Example:</strong> 4% muni bond, investor in 32% tax bracket<br />
+                        TEY = 0.04 / (1 - 0.32) = 0.04 / 0.68 = <strong>5.88%</strong><br />
+                        A taxable bond must yield at least 5.88% to match this muni after taxes.
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4>Accrued Interest</h4>
+                    <div class="formula-code">
+                        Accrued Interest = (Annual Interest / Days in Year) x Days Since Last Payment Corporate &amp;
+                        Municipal: 30/360 (30-day months, 360-day year) Government: Actual/Actual (real calendar days)
+                    </div>
+                    <div class="worked-example">
+                        <strong>Example:</strong> 6% corporate bond ($1,000 par), last payment Jan 1, sold April 15<br />
+                        Days = 3 months x 30 + 15 days = <strong>105 days</strong> (using 30/360)<br />
+                        Accrued Interest = ($60 / 360) x 105 = $0.1667 x 105 = <strong>$17.50</strong><br />
+                        Buyer pays seller this amount on top of the bond price.
+                    </div>
+                </div>
+
+                <div class="memory-aid">
+                    <strong>Bond Yield Memory Aids:</strong><br />
+                    <strong>PDY / DIY:</strong> Premium Decreases Yield; Discount Increases Yield<br /><br />
+                    <strong>Discount ordering:</strong> NY &lt; CY &lt; YTM &lt; YTC (smallest to largest,
+                    alphabetical-ish)<br />
+                    <strong>Premium ordering:</strong> YTC &lt; YTM &lt; CY &lt; NY (reverse of discount)<br /><br />
+                    <strong>CY quick check:</strong> If CY &gt; NY, it's a discount. If CY &lt; NY, it's a premium. If
+                    CY = NY, it's at par.<br /><br />
+                    <strong>Why YTC is the extreme:</strong> Calling a bond early amplifies the effect. Discount &rarr;
+                    you get par back sooner (boost). Premium &rarr; you lose premium sooner (drag).
+                </div>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- INVESTMENT COMPANY FORMULAS -->
+            <!-- ============================================================== -->
+            <div class="formula-section">
+                <h3>Investment Company Formulas</h3>
+
+                <div class="formula-card">
+                    <h4>NAV and Sales Charges</h4>
+                    <div class="formula-code">
+                        NAV = (Total Assets - Liabilities) / Shares Outstanding POP = NAV + Sales Charge POP = NAV / (1
+                        - Sales Charge %) Sales Charge % = (POP - NAV) / POP Maximum Sales Charge = 8.5% of POP
+                    </div>
+                    <div class="worked-example">
+                        <strong>Example:</strong> Fund has $100M in assets, $5M in liabilities, 5M shares<br />
+                        NAV = ($100M - $5M) / 5M = <strong>$19.00</strong><br />
+                        With 5% sales charge: POP = $19.00 / (1 - 0.05) = $19.00 / 0.95 = <strong>$20.00</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- CRITICAL NUMBERS -->
+            <!-- ============================================================== -->
+            <div class="formula-section">
+                <h3>Critical Numbers</h3>
+                <div class="critical-numbers">
+                    <table style="width: 100%">
+                        <tr>
+                            <th>Item</th>
+                            <th>Number</th>
+                        </tr>
+                        <tr>
+                            <td>Options contract size</td>
+                            <td>100 shares</td>
+                        </tr>
+                        <tr>
+                            <td>Reg T initial margin</td>
+                            <td>50%</td>
+                        </tr>
+                        <tr>
+                            <td>Long maintenance margin</td>
+                            <td>25%</td>
+                        </tr>
+                        <tr>
+                            <td>Short maintenance margin</td>
+                            <td>30%</td>
+                        </tr>
+                        <tr>
+                            <td>Pattern day trader minimum equity</td>
+                            <td>$25,000</td>
+                        </tr>
+                        <tr>
+                            <td>PDT buying power multiplier</td>
+                            <td>4x (2x with outstanding call)</td>
+                        </tr>
+                        <tr>
+                            <td>Max mutual fund sales charge</td>
+                            <td>8.5%</td>
+                        </tr>
+                        <tr>
+                            <td>Settlement (stocks/bonds)</td>
+                            <td>T+1</td>
+                        </tr>
+                        <tr>
+                            <td>Reg T payment deadline</td>
+                            <td>S+2 (= T+3)</td>
+                        </tr>
+                        <tr>
+                            <td>Options agreement return</td>
+                            <td>15 days</td>
+                        </tr>
+                        <tr>
+                            <td>Frozen account period</td>
+                            <td>90 days</td>
+                        </tr>
+                        <tr>
+                            <td>Regular IRA contribution limit</td>
+                            <td>$7,000 (2024)</td>
+                        </tr>
+                        <tr>
+                            <td>401(k) contribution limit</td>
+                            <td>$23,000 (2024)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 3rem; font-style: italic; color: var(--fh-gray-600)">
+                Print this page. Review before the exam. Formulas should be automatic.
+            </p>
+
+            <nav class="chapter-nav" style="margin-top: 3rem">
+                <a href="series-7-study-materials.html" class="chapter-nav__link">
+                    <span class="chapter-nav__label">Back to</span>
+                    <span class="chapter-nav__title">&larr; Study Materials</span>
+                </a>
             </nav>
-        </div>
-    </header>
+        </main>
 
-    <main class="container">
-        <div class="intro">
-            <p>Every calculation you need for the Series 7 exam in one place &mdash; formulas, worked examples, and memory aids. Print this page and review before the exam.</p>
-        </div>
-
-        <!-- ============================================================== -->
-        <!-- OPTIONS FORMULAS -->
-        <!-- ============================================================== -->
-        <div class="formula-section">
-            <h3>Options Formulas</h3>
-
-            <!-- T-Chart Method -->
-            <div class="formula-card">
-                <h4>The T-Chart Method (Use This on Every Options Question)</h4>
-                <p style="margin-bottom: 1rem;">Draw a T-chart for every options problem. Left side = money OUT (debits). Right side = money IN (credits). The side that's bigger determines whether you have a gain or a loss.</p>
-                <div class="tchart">
-                    <div class="tchart-header">Money OUT (Debits)</div>
-                    <div class="tchart-header">Money IN (Credits)</div>
-                    <div class="tchart-body left">
-                        Buy (premiums paid)<br>
-                        Exercise to buy stock
-                    </div>
-                    <div class="tchart-body">
-                        Sell (premiums received)<br>
-                        Exercise to sell stock
-                    </div>
-                </div>
-                <div class="formula-code">Max Gain  = Maximum the right side can exceed the left
-Max Loss  = Maximum the left side can exceed the right
-Breakeven = The point where both sides are equal</div>
-            </div>
-
-            <!-- Four Basic Positions -->
-            <div class="formula-card">
-                <h4>Long Call</h4>
-                <table>
-                    <tr><th>Metric</th><th>Formula</th></tr>
-                    <tr><td>Max Gain</td><td>Unlimited (stock can rise indefinitely)</td></tr>
-                    <tr><td>Max Loss</td><td>Premium paid</td></tr>
-                    <tr><td>Breakeven</td><td>Strike + Premium</td></tr>
-                </table>
-                <div class="worked-example">
-                    <strong>Example:</strong> Buy 1 ABC Jul 50 Call @ $4<br>
-                    Max Loss = $4 per share = <strong>$400</strong><br>
-                    Breakeven = $50 + $4 = <strong>$54</strong><br>
-                    Max Gain = <strong>Unlimited</strong> (if ABC rises to $100, profit = $100 - $54 = $46 x 100 = $4,600)
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Short Call (Naked)</h4>
-                <table>
-                    <tr><th>Metric</th><th>Formula</th></tr>
-                    <tr><td>Max Gain</td><td>Premium received</td></tr>
-                    <tr><td>Max Loss</td><td>Unlimited (stock can rise indefinitely)</td></tr>
-                    <tr><td>Breakeven</td><td>Strike + Premium</td></tr>
-                </table>
-                <div class="worked-example">
-                    <strong>Example:</strong> Sell 1 ABC Jul 50 Call @ $4<br>
-                    Max Gain = $4 per share = <strong>$400</strong><br>
-                    Breakeven = $50 + $4 = <strong>$54</strong> (same as the buyer &mdash; opposite sides of same contract)<br>
-                    Max Loss = <strong>Unlimited</strong>
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Long Put</h4>
-                <table>
-                    <tr><th>Metric</th><th>Formula</th></tr>
-                    <tr><td>Max Gain</td><td>Strike - Premium (stock goes to $0)</td></tr>
-                    <tr><td>Max Loss</td><td>Premium paid</td></tr>
-                    <tr><td>Breakeven</td><td>Strike - Premium</td></tr>
-                </table>
-                <div class="worked-example">
-                    <strong>Example:</strong> Buy 1 XYZ Oct 60 Put @ $3<br>
-                    Max Loss = $3 per share = <strong>$300</strong><br>
-                    Breakeven = $60 - $3 = <strong>$57</strong><br>
-                    Max Gain = $57 per share = <strong>$5,700</strong> (if XYZ goes to $0, you sell at $60, minus $3 premium)
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Short Put</h4>
-                <table>
-                    <tr><th>Metric</th><th>Formula</th></tr>
-                    <tr><td>Max Gain</td><td>Premium received</td></tr>
-                    <tr><td>Max Loss</td><td>Strike - Premium (stock goes to $0)</td></tr>
-                    <tr><td>Breakeven</td><td>Strike - Premium</td></tr>
-                </table>
-                <div class="worked-example">
-                    <strong>Example:</strong> Sell 1 XYZ Oct 60 Put @ $3<br>
-                    Max Gain = $3 per share = <strong>$300</strong><br>
-                    Breakeven = $60 - $3 = <strong>$57</strong><br>
-                    Max Loss = $57 per share = <strong>$5,700</strong> (if XYZ goes to $0, you must buy at $60, minus $3 received)
-                </div>
-            </div>
-
-            <div class="memory-aid">
-                <strong>Breakeven Memory Aid &mdash; CAL / PSB:</strong><br>
-                <strong>C</strong>alls: <strong>A</strong>dd premium to strike &nbsp;|&nbsp; <strong>P</strong>uts: <strong>S</strong>ubtract premium from strike<br><br>
-                <strong>Quick Patterns:</strong><br>
-                Buyers pay premium &rarr; max loss = premium paid<br>
-                Sellers receive premium &rarr; max gain = premium received<br>
-                Unlimited loss = short a naked call or short a straddle<br>
-                Unlimited gain = long a call or long a straddle
-            </div>
-
-            <!-- Covered Call & Protective Put -->
-            <div class="formula-card">
-                <h4>Covered Call (Long Stock + Short Call)</h4>
-                <table>
-                    <tr><th>Metric</th><th>Formula</th></tr>
-                    <tr><td>Max Gain</td><td>(Strike - Stock Cost) + Premium</td></tr>
-                    <tr><td>Max Loss</td><td>Stock Cost - Premium (stock goes to $0)</td></tr>
-                    <tr><td>Breakeven</td><td>Stock Cost - Premium</td></tr>
-                </table>
-                <div class="worked-example">
-                    <strong>Example:</strong> Buy 100 ABC at $48, sell 1 ABC Jul 50 Call @ $3<br>
-                    Max Gain = ($50 - $48) + $3 = <strong>$5 x 100 = $500</strong><br>
-                    Max Loss = $48 - $3 = <strong>$45 x 100 = $4,500</strong> (if ABC goes to $0)<br>
-                    Breakeven = $48 - $3 = <strong>$45</strong>
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Protective Put (Long Stock + Long Put)</h4>
-                <table>
-                    <tr><th>Metric</th><th>Formula</th></tr>
-                    <tr><td>Max Gain</td><td>Unlimited (stock can rise indefinitely)</td></tr>
-                    <tr><td>Max Loss</td><td>(Stock Cost - Strike) + Premium</td></tr>
-                    <tr><td>Breakeven</td><td>Stock Cost + Premium</td></tr>
-                </table>
-                <div class="worked-example">
-                    <strong>Example:</strong> Buy 100 ABC at $48, buy 1 ABC Jul 45 Put @ $2<br>
-                    Max Loss = ($48 - $45) + $2 = <strong>$5 x 100 = $500</strong><br>
-                    Breakeven = $48 + $2 = <strong>$50</strong><br>
-                    Max Gain = <strong>Unlimited</strong>
-                </div>
-            </div>
-
-            <!-- Spreads -->
-            <div class="formula-card">
-                <h4>Spreads &mdash; Master Table</h4>
-                <table>
-                    <tr><th>Type</th><th>Max Gain</th><th>Max Loss</th></tr>
-                    <tr><td><strong>Debit Spread</strong></td><td>Width of strikes - Net debit</td><td>Net debit (premium paid)</td></tr>
-                    <tr><td><strong>Credit Spread</strong></td><td>Net credit (premium received)</td><td>Width of strikes - Net credit</td></tr>
-                </table>
-                <div class="formula-code">Spread Breakevens:
-  Call Spread BE = Lower strike + Net premium
-  Put Spread  BE = Higher strike - Net premium
-
-Width of strikes = difference between the two strike prices</div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Bull Call Spread (Debit) &mdash; Worked Example</h4>
-                <div class="worked-example">
-                    <strong>Position:</strong> Buy 1 ABC Jan 50 Call @ $5, Sell 1 ABC Jan 60 Call @ $2<br>
-                    Net Debit = $5 - $2 = <strong>$3</strong> (you paid more than you received)<br>
-                    Width = $60 - $50 = <strong>$10</strong><br><br>
-                    Max Loss = Net Debit = <strong>$3 x 100 = $300</strong> (ABC at or below $50 at expiration)<br>
-                    Max Gain = Width - Net Debit = $10 - $3 = <strong>$7 x 100 = $700</strong> (ABC at or above $60)<br>
-                    Breakeven = Lower Strike + Net Premium = $50 + $3 = <strong>$53</strong>
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Bear Put Spread (Debit) &mdash; Worked Example</h4>
-                <div class="worked-example">
-                    <strong>Position:</strong> Buy 1 ABC Jan 60 Put @ $6, Sell 1 ABC Jan 50 Put @ $2<br>
-                    Net Debit = $6 - $2 = <strong>$4</strong><br>
-                    Width = $60 - $50 = <strong>$10</strong><br><br>
-                    Max Loss = Net Debit = <strong>$4 x 100 = $400</strong> (ABC at or above $60 at expiration)<br>
-                    Max Gain = Width - Net Debit = $10 - $4 = <strong>$6 x 100 = $600</strong> (ABC at or below $50)<br>
-                    Breakeven = Higher Strike - Net Premium = $60 - $4 = <strong>$56</strong>
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Bear Call Spread (Credit) &mdash; Worked Example</h4>
-                <div class="worked-example">
-                    <strong>Position:</strong> Sell 1 ABC Jan 50 Call @ $5, Buy 1 ABC Jan 60 Call @ $2<br>
-                    Net Credit = $5 - $2 = <strong>$3</strong> (you received more than you paid)<br>
-                    Width = $60 - $50 = <strong>$10</strong><br><br>
-                    Max Gain = Net Credit = <strong>$3 x 100 = $300</strong> (ABC at or below $50 at expiration)<br>
-                    Max Loss = Width - Net Credit = $10 - $3 = <strong>$7 x 100 = $700</strong> (ABC at or above $60)<br>
-                    Breakeven = Lower Strike + Net Premium = $50 + $3 = <strong>$53</strong>
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Bull Put Spread (Credit) &mdash; Worked Example</h4>
-                <div class="worked-example">
-                    <strong>Position:</strong> Sell 1 ABC Jan 60 Put @ $6, Buy 1 ABC Jan 50 Put @ $2<br>
-                    Net Credit = $6 - $2 = <strong>$4</strong><br>
-                    Width = $60 - $50 = <strong>$10</strong><br><br>
-                    Max Gain = Net Credit = <strong>$4 x 100 = $400</strong> (ABC at or above $60 at expiration)<br>
-                    Max Loss = Width - Net Credit = $10 - $4 = <strong>$6 x 100 = $600</strong> (ABC at or below $50)<br>
-                    Breakeven = Higher Strike - Net Premium = $60 - $4 = <strong>$56</strong>
-                </div>
-            </div>
-
-            <div class="memory-aid">
-                <strong>Spread Memory Aids:</strong><br>
-                Debit = you paid &rarr; max loss is what you paid (the net debit)<br>
-                Credit = you received &rarr; max gain is what you received (the net credit)<br>
-                All spreads: max gain + max loss = width of strikes<br><br>
-                <strong>Which is bull? Which is bear?</strong><br>
-                Bull = buy the lower strike (calls) or sell the higher strike (puts) &mdash; you profit if stock rises<br>
-                Bear = sell the lower strike (calls) or buy the higher strike (puts) &mdash; you profit if stock falls
-            </div>
-
-            <!-- Straddles & Combinations -->
-            <div class="formula-card">
-                <h4>Long Straddle (Buy Call + Buy Put, Same Strike &amp; Expiration)</h4>
-                <table>
-                    <tr><th>Metric</th><th>Formula</th></tr>
-                    <tr><td>Max Gain</td><td>Unlimited (to upside); Strike - Combined Premiums (to downside)</td></tr>
-                    <tr><td>Max Loss</td><td>Combined premiums paid</td></tr>
-                    <tr><td>Upside BE</td><td>Strike + Combined premiums</td></tr>
-                    <tr><td>Downside BE</td><td>Strike - Combined premiums</td></tr>
-                </table>
-                <div class="worked-example">
-                    <strong>Example:</strong> Buy 1 ABC Jan 50 Call @ $3, Buy 1 ABC Jan 50 Put @ $4<br>
-                    Combined Premiums = $3 + $4 = <strong>$7</strong><br><br>
-                    Max Loss = <strong>$7 x 100 = $700</strong> (ABC at exactly $50 at expiration &mdash; both expire worthless)<br>
-                    Upside BE = $50 + $7 = <strong>$57</strong><br>
-                    Downside BE = $50 - $7 = <strong>$43</strong><br>
-                    Max Gain = <strong>Unlimited</strong> (upside); or <strong>$43 x 100 = $4,300</strong> (downside, if stock goes to $0)
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Short Straddle (Sell Call + Sell Put, Same Strike &amp; Expiration)</h4>
-                <table>
-                    <tr><th>Metric</th><th>Formula</th></tr>
-                    <tr><td>Max Gain</td><td>Combined premiums received</td></tr>
-                    <tr><td>Max Loss</td><td>Unlimited (to upside); Strike - Combined Premiums (to downside)</td></tr>
-                    <tr><td>Upside BE</td><td>Strike + Combined premiums</td></tr>
-                    <tr><td>Downside BE</td><td>Strike - Combined premiums</td></tr>
-                </table>
-                <div class="worked-example">
-                    <strong>Example:</strong> Sell 1 ABC Jan 50 Call @ $3, Sell 1 ABC Jan 50 Put @ $4<br>
-                    Combined Premiums = $3 + $4 = <strong>$7</strong><br><br>
-                    Max Gain = <strong>$7 x 100 = $700</strong> (ABC at exactly $50 at expiration &mdash; both expire worthless)<br>
-                    Upside BE = $50 + $7 = <strong>$57</strong><br>
-                    Downside BE = $50 - $7 = <strong>$43</strong><br>
-                    Max Loss = <strong>Unlimited</strong> (upside); or <strong>$43 x 100 = $4,300</strong> (downside)
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Combinations (Different Strikes or Expirations)</h4>
-                <p>A <strong>combination</strong> is like a straddle but the call and put have <em>different</em> strike prices and/or expirations. The formulas work the same way:</p>
-                <div class="formula-code">Long Combination:
-  Max Loss    = Combined premiums paid
-  Upside BE   = Call strike + Combined premiums
-  Downside BE = Put strike - Combined premiums
-
-Short Combination:
-  Max Gain    = Combined premiums received
-  Upside BE   = Call strike + Combined premiums
-  Downside BE = Put strike - Combined premiums</div>
-                <div class="worked-example">
-                    <strong>Example:</strong> Buy 1 ABC Jan 55 Call @ $2, Buy 1 ABC Jan 45 Put @ $3<br>
-                    Combined Premiums = $2 + $3 = <strong>$5</strong><br>
-                    Upside BE = $55 + $5 = <strong>$60</strong><br>
-                    Downside BE = $45 - $5 = <strong>$40</strong><br>
-                    Max Loss = <strong>$5 x 100 = $500</strong> (stock between $45 and $55 at expiration)
-                </div>
-            </div>
-
-            <div class="memory-aid">
-                <strong>Straddle Memory Aids:</strong><br>
-                A straddle has TWO breakevens: Strike +/- Combined premiums<br>
-                Long straddle = you WANT movement (either direction). You paid, so max loss = what you paid.<br>
-                Short straddle = you WANT the stock to sit still. You received, so max gain = what you received.<br>
-                The long straddle buyer and short straddle seller are on opposite sides &mdash; same breakevens, flipped gain/loss.
-            </div>
-        </div>
-
-        <!-- ============================================================== -->
-        <!-- MARGIN FORMULAS -->
-        <!-- ============================================================== -->
-        <div class="formula-section">
-            <h3>Margin Formulas</h3>
-
-            <div class="formula-card">
-                <h4>Initial Margin (Reg T = 50%)</h4>
-                <div class="formula-code">Long Margin:
-Margin Required = Market Value x 50%
-Loan Amount = Market Value x 50%
-
-Short Margin:
-Margin Required = Short Market Value x 50%
-Credit Balance = Short Proceeds + Margin Deposit</div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Equity Calculations</h4>
-                <div class="formula-code">Long Margin Equity = Market Value - Debit Balance
-
-Short Margin Equity = Credit Balance - Short Market Value</div>
-            </div>
-
-            <div class="formula-card">
-                <h4>SMA (Special Memorandum Account)</h4>
-                <div class="formula-code">SMA = Equity - (Market Value x 50%)
-     (Only when equity > 50%)
-
-SMA increases when:
-- Stock price rises (50% of increase)
-- Dividends received
-- Cash deposits
-- Sale proceeds above loan value</div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Buying Power</h4>
-                <div class="formula-code">Buying Power = SMA / Reg T
-Buying Power = SMA / 0.50
-Buying Power = SMA x 2</div>
-                <div class="worked-example">
-                    <strong>Example:</strong> Customer has $5,000 SMA<br>
-                    Buying Power = $5,000 x 2 = <strong>$10,000</strong> in additional securities they can buy
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Maintenance Margin &amp; Trigger Prices</h4>
-                <div class="formula-code">LONG Positions (25% maintenance):
-Margin Call when: Equity < 25% of Market Value
-Trigger Price: Debit Balance / 0.75
-
-SHORT Positions (30% maintenance):
-Margin Call when: Equity < 30% of Market Value
-Trigger Price: Credit Balance / 1.30</div>
-                <div class="worked-example">
-                    <strong>Long Example:</strong> Debit balance = $40,000<br>
-                    Trigger = $40,000 / 0.75 = <strong>$53,333</strong> &mdash; margin call if market value falls below this<br><br>
-                    <strong>Short Example:</strong> Credit balance = $130,000<br>
-                    Trigger = $130,000 / 1.30 = <strong>$100,000</strong> &mdash; margin call if short market value rises above this
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Pattern Day Trader</h4>
-                <div class="formula-code">Minimum Equity: $25,000
-Buying Power: 4 x Maintenance Excess
-Buying Power (with outstanding margin call): 2 x Maintenance Excess</div>
-            </div>
-
-            <div class="memory-aid">
-                <strong>Margin Memory Aids:</strong><br>
-                SMA x 2 = Buying Power<br>
-                Long trigger: Debit / 0.75 &nbsp;|&nbsp; Short trigger: Credit / 1.30<br>
-                Shorts are riskier = higher maintenance (30% > 25%)<br>
-                PDT: 4 day trades in 5 days &rarr; $25K minimum &rarr; 4x buying power
-            </div>
-        </div>
-
-        <!-- ============================================================== -->
-        <!-- BOND FORMULAS -->
-        <!-- ============================================================== -->
-        <div class="formula-section">
-            <h3>Bond Formulas</h3>
-
-            <!-- Yield Seesaw -->
-            <div class="formula-card">
-                <h4>The Yield Seesaw (Triangle / Ladybug)</h4>
-                <p style="margin-bottom: 1rem;">Price and yield move in <strong>opposite directions</strong>. The coupon rate (Nominal Yield) is the fixed fulcrum &mdash; it never changes. The four yields stack in a predictable order depending on whether the bond is at a premium or discount.</p>
-
-                <table>
-                    <tr><th>Yield</th><th>What It Measures</th><th>Formula</th></tr>
-                    <tr><td><strong>Nominal Yield (NY)</strong></td><td>Coupon rate. Fixed at issuance. Never changes.</td><td>Stated on the bond (e.g., 6%)</td></tr>
-                    <tr><td><strong>Current Yield (CY)</strong></td><td>Annual income relative to current price</td><td>Annual Interest / Market Price</td></tr>
-                    <tr><td><strong>Yield to Maturity (YTM)</strong></td><td>Total return if held to maturity (includes price gain/loss)</td><td>Approximation formula below</td></tr>
-                    <tr><td><strong>Yield to Call (YTC)</strong></td><td>Total return if called early (shorter time amplifies effect)</td><td>Same as YTM but uses call date &amp; call price</td></tr>
-                </table>
-            </div>
-
-            <div class="formula-card">
-                <h4>Yield Ordering Rules</h4>
-                <div class="seesaw">
-                    <span class="label">DISCOUNT BOND (Price &lt; Par)</span><br>
-                    Lowest &larr;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&rarr; Highest<br>
-                    <strong>NY &nbsp;&lt;&nbsp; CY &nbsp;&lt;&nbsp; YTM &nbsp;&lt;&nbsp; YTC</strong><br>
-                    <em>Price is low &rarr; all yields are pushed UP above the coupon</em><br>
-                    <em>YTC is highest because you get back par SOONER on less money</em>
-                </div>
-                <div class="seesaw">
-                    <span class="label">PREMIUM BOND (Price &gt; Par)</span><br>
-                    Lowest &larr;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&rarr; Highest<br>
-                    <strong>YTC &nbsp;&lt;&nbsp; YTM &nbsp;&lt;&nbsp; CY &nbsp;&lt;&nbsp; NY</strong><br>
-                    <em>Price is high &rarr; all yields are pushed DOWN below the coupon</em><br>
-                    <em>YTC is lowest because you lose the premium FASTER when called early</em>
-                </div>
-                <div class="seesaw">
-                    <span class="label">PAR BOND (Price = Par)</span><br>
-                    <strong>NY &nbsp;=&nbsp; CY &nbsp;=&nbsp; YTM &nbsp;=&nbsp; YTC</strong><br>
-                    <em>All four yields are equal at par</em>
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Current Yield</h4>
-                <div class="formula-code">Current Yield = Annual Interest / Market Price</div>
-                <div class="worked-example">
-                    <strong>Discount Example:</strong> 7% coupon bond trading at $800<br>
-                    Annual Interest = $1,000 x 0.07 = $70<br>
-                    CY = $70 / $800 = <strong>8.75%</strong><br>
-                    (CY > NY because bond is at a discount &mdash; confirms the seesaw)
-                </div>
-                <div class="worked-example">
-                    <strong>Premium Example:</strong> 5% coupon bond trading at $1,100<br>
-                    Annual Interest = $1,000 x 0.05 = $50<br>
-                    CY = $50 / $1,100 = <strong>4.55%</strong><br>
-                    (CY < NY because bond is at a premium &mdash; confirms the seesaw)
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Yield to Maturity (YTM) &mdash; Approximation Formula</h4>
-                <div class="formula-code">         Annual Interest + (Par - Price) / Years to Maturity
-YTM  =  -------------------------------------------------------
-                    (Par + Price) / 2</div>
-                <div class="worked-example">
-                    <strong>Discount Example:</strong> 6% bond, 10 years to maturity, trading at $900<br>
-                    Numerator = $60 + ($1,000 - $900) / 10 = $60 + $10 = $70<br>
-                    Denominator = ($1,000 + $900) / 2 = $950<br>
-                    YTM = $70 / $950 = <strong>7.37%</strong><br>
-                    (YTM > CY > NY &mdash; 7.37% > 6.67% > 6.00% &mdash; confirms discount ordering)
-                </div>
-                <div class="worked-example">
-                    <strong>Premium Example:</strong> 8% bond, 10 years to maturity, trading at $1,100<br>
-                    Numerator = $80 + ($1,000 - $1,100) / 10 = $80 + (-$10) = $70<br>
-                    Denominator = ($1,000 + $1,100) / 2 = $1,050<br>
-                    YTM = $70 / $1,050 = <strong>6.67%</strong><br>
-                    (YTM < CY < NY &mdash; 6.67% < 7.27% < 8.00% &mdash; confirms premium ordering)
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Tax-Equivalent Yield</h4>
-                <div class="formula-code">TEY = Municipal Yield / (1 - Tax Bracket)</div>
-                <div class="worked-example">
-                    <strong>Example:</strong> 4% muni bond, investor in 32% tax bracket<br>
-                    TEY = 0.04 / (1 - 0.32) = 0.04 / 0.68 = <strong>5.88%</strong><br>
-                    A taxable bond must yield at least 5.88% to match this muni after taxes.
-                </div>
-            </div>
-
-            <div class="formula-card">
-                <h4>Accrued Interest</h4>
-                <div class="formula-code">Accrued Interest = (Annual Interest / Days in Year) x Days Since Last Payment
-
-Corporate &amp; Municipal: 30/360 (30-day months, 360-day year)
-Government: Actual/Actual (real calendar days)</div>
-                <div class="worked-example">
-                    <strong>Example:</strong> 6% corporate bond ($1,000 par), last payment Jan 1, sold April 15<br>
-                    Days = 3 months x 30 + 15 days = <strong>105 days</strong> (using 30/360)<br>
-                    Accrued Interest = ($60 / 360) x 105 = $0.1667 x 105 = <strong>$17.50</strong><br>
-                    Buyer pays seller this amount on top of the bond price.
-                </div>
-            </div>
-
-            <div class="memory-aid">
-                <strong>Bond Yield Memory Aids:</strong><br>
-                <strong>PDY / DIY:</strong> Premium Decreases Yield; Discount Increases Yield<br><br>
-                <strong>Discount ordering:</strong> NY &lt; CY &lt; YTM &lt; YTC (smallest to largest, alphabetical-ish)<br>
-                <strong>Premium ordering:</strong> YTC &lt; YTM &lt; CY &lt; NY (reverse of discount)<br><br>
-                <strong>CY quick check:</strong> If CY &gt; NY, it's a discount. If CY &lt; NY, it's a premium. If CY = NY, it's at par.<br><br>
-                <strong>Why YTC is the extreme:</strong> Calling a bond early amplifies the effect. Discount &rarr; you get par back sooner (boost). Premium &rarr; you lose premium sooner (drag).
-            </div>
-        </div>
-
-        <!-- ============================================================== -->
-        <!-- INVESTMENT COMPANY FORMULAS -->
-        <!-- ============================================================== -->
-        <div class="formula-section">
-            <h3>Investment Company Formulas</h3>
-
-            <div class="formula-card">
-                <h4>NAV and Sales Charges</h4>
-                <div class="formula-code">NAV = (Total Assets - Liabilities) / Shares Outstanding
-
-POP = NAV + Sales Charge
-POP = NAV / (1 - Sales Charge %)
-
-Sales Charge % = (POP - NAV) / POP
-
-Maximum Sales Charge = 8.5% of POP</div>
-                <div class="worked-example">
-                    <strong>Example:</strong> Fund has $100M in assets, $5M in liabilities, 5M shares<br>
-                    NAV = ($100M - $5M) / 5M = <strong>$19.00</strong><br>
-                    With 5% sales charge: POP = $19.00 / (1 - 0.05) = $19.00 / 0.95 = <strong>$20.00</strong>
-                </div>
-            </div>
-        </div>
-
-        <!-- ============================================================== -->
-        <!-- CRITICAL NUMBERS -->
-        <!-- ============================================================== -->
-        <div class="formula-section">
-            <h3>Critical Numbers</h3>
-            <div class="critical-numbers">
-                <table style="width: 100%;">
-                    <tr><th>Item</th><th>Number</th></tr>
-                    <tr><td>Options contract size</td><td>100 shares</td></tr>
-                    <tr><td>Reg T initial margin</td><td>50%</td></tr>
-                    <tr><td>Long maintenance margin</td><td>25%</td></tr>
-                    <tr><td>Short maintenance margin</td><td>30%</td></tr>
-                    <tr><td>Pattern day trader minimum equity</td><td>$25,000</td></tr>
-                    <tr><td>PDT buying power multiplier</td><td>4x (2x with outstanding call)</td></tr>
-                    <tr><td>Max mutual fund sales charge</td><td>8.5%</td></tr>
-                    <tr><td>Settlement (stocks/bonds)</td><td>T+1</td></tr>
-                    <tr><td>Reg T payment deadline</td><td>S+2 (= T+3)</td></tr>
-                    <tr><td>Options agreement return</td><td>15 days</td></tr>
-                    <tr><td>Frozen account period</td><td>90 days</td></tr>
-                    <tr><td>Regular IRA contribution limit</td><td>$7,000 (2024)</td></tr>
-                    <tr><td>401(k) contribution limit</td><td>$23,000 (2024)</td></tr>
-                </table>
-            </div>
-        </div>
-
-        <p style="text-align: center; margin-top: 3rem; font-style: italic; color: var(--fh-gray-600);">
-            Print this page. Review before the exam. Formulas should be automatic.
-        </p>
-
-        <nav class="chapter-nav" style="margin-top: 3rem;">
-            <a href="series-7-study-materials.html" class="chapter-nav__link">
-                <span class="chapter-nav__label">Back to</span>
-                <span class="chapter-nav__title">&larr; Study Materials</span>
-            </a>
-        </nav>
-    </main>
-
-    <footer class="footer">
-        <p class="footer__text">Franklin Hugh Money | Series 7 Study Materials</p>
-    </footer>
-</body>
+        <footer class="footer">
+            <p class="footer__text">Franklin Hugh Money | Series 7 Study Materials</p>
+        </footer>
+    </body>
 </html>

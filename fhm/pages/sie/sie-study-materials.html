@@ -1,530 +1,637 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-    <meta name="description" content="SIE Exam Study Materials - Franklin Hugh Money's guide to passing the Securities Industry Essentials exam">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+        <meta
+            name="description"
+            content="SIE Exam Study Materials - Franklin Hugh Money's guide to passing the Securities Industry Essentials exam"
+        />
 
-    <title>SIE Study Materials | Franklin Hugh Money</title>
+        <title>SIE Study Materials | Franklin Hugh Money</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
 
-    <!-- Shared Navigation Styles -->
-    <link rel="stylesheet" href="../../assets/css/sie-navigation.css?v=d0037e08">
-    <!-- Night Mode (5pm - 9am) -->
-    <script src="../../assets/js/night-mode.js"></script>
+        <!-- Shared Navigation Styles -->
+        <link rel="stylesheet" href="../../assets/css/sie-navigation.css?v=d0037e08" />
+        <!-- Night Mode (5pm - 9am) -->
+        <script src="../../assets/js/night-mode.js"></script>
 
-    <style>
-        :root {
-            /* Primary Institutional Colors */
-            --fh-navy: #002D62;
-            --fh-cream: #FFFDF7;
-            --fh-gray: #54585A;
+        <style>
+            :root {
+                /* Primary Institutional Colors */
+                --fh-navy: #002d62;
+                --fh-cream: #fffdf7;
+                --fh-gray: #54585a;
 
-            /* Secondary Colors */
-            --fh-sage: #7C9885;
-            --fh-burgundy: #6B2737;
-            --fh-gold: #B08D57;
+                /* Secondary Colors */
+                --fh-sage: #7c9885;
+                --fh-burgundy: #6b2737;
+                --fh-gold: #b08d57;
 
-            /* Neutral Scale */
-            --fh-gray-900: #1A1A1A;
-            --fh-gray-700: #404040;
-            --fh-gray-600: #595959;
-            --fh-gray-500: #737373;
-            --fh-gray-300: #D4D4D4;
-            --fh-gray-200: #E5E5E5;
-            --fh-gray-100: #F5F5F5;
-            --fh-white: #FFFFFF;
+                /* Neutral Scale */
+                --fh-gray-900: #1a1a1a;
+                --fh-gray-700: #404040;
+                --fh-gray-600: #595959;
+                --fh-gray-500: #737373;
+                --fh-gray-300: #d4d4d4;
+                --fh-gray-200: #e5e5e5;
+                --fh-gray-100: #f5f5f5;
+                --fh-white: #ffffff;
+
+                /* Typography */
+                --fh-font-display: 'Crimson Pro', Georgia, serif;
+                --fh-font-body: 'Inter', -apple-system, sans-serif;
+                --fh-font-mono: 'IBM Plex Mono', monospace;
+
+                /* Spacing */
+                --fh-space-xs: 0.25rem;
+                --fh-space-sm: 0.5rem;
+                --fh-space-md: 1rem;
+                --fh-space-lg: 1.5rem;
+                --fh-space-xl: 2rem;
+                --fh-space-2xl: 3rem;
+                --fh-space-3xl: 4rem;
+                --fh-space-4xl: 6rem;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: var(--fh-font-body);
+                font-size: 16px;
+                line-height: 1.75;
+                color: var(--fh-gray-900);
+                background: var(--fh-cream);
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
 
             /* Typography */
-            --fh-font-display: 'Crimson Pro', Georgia, serif;
-            --fh-font-body: 'Inter', -apple-system, sans-serif;
-            --fh-font-mono: 'IBM Plex Mono', monospace;
+            h1,
+            h2,
+            h3 {
+                font-family: var(--fh-font-display);
+                font-weight: 400;
+                line-height: 1.2;
+            }
 
-            /* Spacing */
-            --fh-space-xs: 0.25rem;
-            --fh-space-sm: 0.5rem;
-            --fh-space-md: 1rem;
-            --fh-space-lg: 1.5rem;
-            --fh-space-xl: 2rem;
-            --fh-space-2xl: 3rem;
-            --fh-space-3xl: 4rem;
-            --fh-space-4xl: 6rem;
-        }
+            h1 {
+                font-size: clamp(2rem, 5vw, 3.5rem);
+                letter-spacing: -0.02em;
+                color: var(--fh-navy);
+            }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+            h2 {
+                font-size: clamp(1.5rem, 3vw, 2.25rem);
+                margin-bottom: var(--fh-space-lg);
+                color: var(--fh-navy);
+            }
 
-        body {
-            font-family: var(--fh-font-body);
-            font-size: 16px;
-            line-height: 1.75;
-            color: var(--fh-gray-900);
-            background: var(--fh-cream);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+            a {
+                color: var(--fh-navy);
+                text-decoration-thickness: 1px;
+                text-underline-offset: 2px;
+                transition: all 0.2s ease;
+            }
 
-        /* Typography */
-        h1, h2, h3 {
-            font-family: var(--fh-font-display);
-            font-weight: 400;
-            line-height: 1.2;
-        }
+            a:hover {
+                text-decoration-thickness: 2px;
+            }
 
-        h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            letter-spacing: -0.02em;
-            color: var(--fh-navy);
-        }
+            /* Layout */
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 var(--fh-space-xl);
+            }
 
-        h2 {
-            font-size: clamp(1.5rem, 3vw, 2.25rem);
-            margin-bottom: var(--fh-space-lg);
-            color: var(--fh-navy);
-        }
+            /* Header */
+            .header {
+                padding: var(--fh-space-3xl) 0;
+                background: var(--fh-white);
+                border-bottom: 1px solid var(--fh-gray-200);
+            }
 
-        a {
-            color: var(--fh-navy);
-            text-decoration-thickness: 1px;
-            text-underline-offset: 2px;
-            transition: all 0.2s ease;
-        }
+            .header__title {
+                text-align: center;
+                margin-bottom: var(--fh-space-sm);
+            }
 
-        a:hover {
-            text-decoration-thickness: 2px;
-        }
+            .header__subtitle {
+                text-align: center;
+                font-size: 1.25rem;
+                color: var(--fh-gray);
+                font-weight: 300;
+                letter-spacing: 0.025em;
+            }
 
-        /* Layout */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--fh-space-xl);
-        }
-
-        /* Header */
-        .header {
-            padding: var(--fh-space-3xl) 0;
-            background: var(--fh-white);
-            border-bottom: 1px solid var(--fh-gray-200);
-        }
-
-        .header__title {
-            text-align: center;
-            margin-bottom: var(--fh-space-sm);
-        }
-
-        .header__subtitle {
-            text-align: center;
-            font-size: 1.25rem;
-            color: var(--fh-gray);
-            font-weight: 300;
-            letter-spacing: 0.025em;
-        }
-
-        /* Navigation */
-        .nav {
-            margin-top: var(--fh-space-2xl);
-            display: flex;
-            justify-content: center;
-            gap: var(--fh-space-xl);
-            flex-wrap: wrap;
-        }
-
-        .nav a {
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            text-decoration: none;
-            color: var(--fh-gray-700);
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .nav a:hover,
-        .nav a.active {
-            color: var(--fh-navy);
-        }
-
-        /* Main Content */
-        .section {
-            padding: var(--fh-space-3xl) 0;
-        }
-
-        .intro {
-            max-width: 800px;
-            margin: 0 auto var(--fh-space-3xl) auto;
-            text-align: center;
-        }
-
-        .intro p {
-            font-size: 1.125rem;
-            color: var(--fh-gray-700);
-            line-height: 1.8;
-        }
-
-        /* Progress Badge */
-        .progress-badge {
-            display: inline-block;
-            padding: var(--fh-space-sm) var(--fh-space-lg);
-            background: var(--fh-sage);
-            color: var(--fh-white);
-            border-radius: 24px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-top: var(--fh-space-lg);
-        }
-
-        /* Chapter Grid */
-        .chapters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--fh-space-xl);
-            margin-top: var(--fh-space-3xl);
-        }
-
-        .chapter-card {
-            background: var(--fh-white);
-            border: 1px solid var(--fh-gray-200);
-            border-radius: 4px;
-            padding: var(--fh-space-xl);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            text-decoration: none;
-            display: block;
-        }
-
-        .chapter-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        }
-
-        .chapter-card--available {
-            border-color: var(--fh-sage);
-        }
-
-        .chapter-card--coming {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        .chapter-number {
-            font-family: var(--fh-font-mono);
-            font-size: 0.875rem;
-            color: var(--fh-sage);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .chapter-title {
-            font-family: var(--fh-font-display);
-            font-size: 1.5rem;
-            color: var(--fh-navy);
-            margin: var(--fh-space-sm) 0;
-            text-decoration: none;
-        }
-
-        .chapter-topics {
-            font-size: 0.95rem;
-            color: var(--fh-gray-600);
-            line-height: 1.6;
-        }
-
-        .chapter-status {
-            display: inline-block;
-            margin-top: var(--fh-space-md);
-            padding: var(--fh-space-xs) var(--fh-space-md);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-            border-radius: 12px;
-        }
-
-        .chapter-status--available {
-            background: var(--fh-sage);
-            color: var(--fh-white);
-        }
-
-        .chapter-status--coming {
-            background: var(--fh-gray-200);
-            color: var(--fh-gray-600);
-        }
-
-        /* Footer */
-        .footer {
-            padding: var(--fh-space-2xl) 0;
-            text-align: center;
-            border-top: 1px solid var(--fh-gray-200);
-            background: var(--fh-white);
-            margin-top: var(--fh-space-4xl);
-        }
-
-        .footer__text {
-            color: var(--fh-gray-600);
-            font-size: 0.875rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
+            /* Navigation */
             .nav {
-                gap: var(--fh-space-md);
+                margin-top: var(--fh-space-2xl);
+                display: flex;
+                justify-content: center;
+                gap: var(--fh-space-xl);
+                flex-wrap: wrap;
             }
 
+            .nav a {
+                font-size: 0.95rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                text-decoration: none;
+                color: var(--fh-gray-700);
+                font-weight: 500;
+                transition: color 0.2s ease;
+            }
+
+            .nav a:hover,
+            .nav a.active {
+                color: var(--fh-navy);
+            }
+
+            /* Main Content */
+            .section {
+                padding: var(--fh-space-3xl) 0;
+            }
+
+            .intro {
+                max-width: 800px;
+                margin: 0 auto var(--fh-space-3xl) auto;
+                text-align: center;
+            }
+
+            .intro p {
+                font-size: 1.125rem;
+                color: var(--fh-gray-700);
+                line-height: 1.8;
+            }
+
+            /* Progress Badge */
+            .progress-badge {
+                display: inline-block;
+                padding: var(--fh-space-sm) var(--fh-space-lg);
+                background: var(--fh-sage);
+                color: var(--fh-white);
+                border-radius: 24px;
+                font-size: 0.875rem;
+                font-weight: 600;
+                margin-top: var(--fh-space-lg);
+            }
+
+            /* Chapter Grid */
             .chapters-grid {
-                grid-template-columns: 1fr;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: var(--fh-space-xl);
+                margin-top: var(--fh-space-3xl);
             }
-        }
 
-        /* Night Mode Overrides (5pm - 9am) */
-        body.night-mode {
-            --fh-navy: #4A90C2;
-            --fh-cream: #1a1f2e;
-            --fh-gray: #9CA3AF;
-            --fh-sage: #8FB89A;
-            --fh-burgundy: #C77A8A;
-            --fh-gold: #D4A85A;
-            --fh-gray-900: #F5F5F5;
-            --fh-gray-700: #E5E5E5;
-            --fh-gray-600: #D4D4D4;
-            --fh-gray-500: #9CA3AF;
-            --fh-gray-300: #4B5563;
-            --fh-gray-200: #374151;
-            --fh-gray-100: #252d3d;
-            --fh-white: #1e2536;
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <h1 class="header__title">SIE Study Materials</h1>
-            <p class="header__subtitle">Securities Industry Essentials Exam Preparation</p>
+            .chapter-card {
+                background: var(--fh-white);
+                border: 1px solid var(--fh-gray-200);
+                border-radius: 4px;
+                padding: var(--fh-space-xl);
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease;
+                text-decoration: none;
+                display: block;
+            }
 
-            <nav class="nav">
-                <a href="../../index.html">Home</a>
-                <a href="../training/index.html">Training</a>
-                <a href="#" class="active" style="color: var(--fh-sage);">SIE</a>
-                <a href="../series-7/series-7-study-materials.html" style="color: var(--fh-gold);">Series 7</a>
-                <a href="../fhm-treasury.html">Insights</a>
-            </nav>
-            <nav class="nav" style="margin-top: var(--fh-space-md); font-size: 0.85rem;">
-                <a href="sie-flashcards.html">Flashcards</a>
-                <a href="sie-formula-flashcards.html">Formulas</a>
-                <a href="sie-quiz.html">Quiz</a>
-                <a href="sie-practice-exam.html">Practice Exam</a>
-                <a href="sie-exam-simulation.html">Exam Sim</a>
-                <a href="sie-high-yield-drill.html">High-Yield</a>
-                <a href="sie-cramming.html">Cramming</a>
-                <a href="sie-audio-library.html">Audio</a>
-            </nav>
-        </div>
-    </header>
+            .chapter-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            }
 
-    <!-- Main Content -->
-    <section class="section">
-        <div class="container">
-            <div class="intro">
-                <p>
-                    Welcome to Franklin Hugh's SIE exam prep. I'm studying for this test myself,
-                    and figured I might as well document the journey. These materials are my attempt
-                    to make sense of securities regulations without falling asleep.
-                </p>
-                <p>
-                    Fair warning: I add historical context and the occasional observation about
-                    why things work the way they do. Turns out knowing the "why" helps the "what" stick better.
-                </p>
-                <span class="progress-badge">6 of 16 Chapters Available</span>
+            .chapter-card--available {
+                border-color: var(--fh-sage);
+            }
+
+            .chapter-card--coming {
+                opacity: 0.6;
+                pointer-events: none;
+            }
+
+            .chapter-number {
+                font-family: var(--fh-font-mono);
+                font-size: 0.875rem;
+                color: var(--fh-sage);
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+
+            .chapter-title {
+                font-family: var(--fh-font-display);
+                font-size: 1.5rem;
+                color: var(--fh-navy);
+                margin: var(--fh-space-sm) 0;
+                text-decoration: none;
+            }
+
+            .chapter-topics {
+                font-size: 0.95rem;
+                color: var(--fh-gray-600);
+                line-height: 1.6;
+            }
+
+            .chapter-status {
+                display: inline-block;
+                margin-top: var(--fh-space-md);
+                padding: var(--fh-space-xs) var(--fh-space-md);
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                font-weight: 600;
+                border-radius: 12px;
+            }
+
+            .chapter-status--available {
+                background: var(--fh-sage);
+                color: var(--fh-white);
+            }
+
+            .chapter-status--coming {
+                background: var(--fh-gray-200);
+                color: var(--fh-gray-600);
+            }
+
+            /* Footer */
+            .footer {
+                padding: var(--fh-space-2xl) 0;
+                text-align: center;
+                border-top: 1px solid var(--fh-gray-200);
+                background: var(--fh-white);
+                margin-top: var(--fh-space-4xl);
+            }
+
+            .footer__text {
+                color: var(--fh-gray-600);
+                font-size: 0.875rem;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .nav {
+                    gap: var(--fh-space-md);
+                }
+
+                .chapters-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            /* Night Mode Overrides (5pm - 9am) */
+            body.night-mode {
+                --fh-navy: #4a90c2;
+                --fh-cream: #1a1f2e;
+                --fh-gray: #9ca3af;
+                --fh-sage: #8fb89a;
+                --fh-burgundy: #c77a8a;
+                --fh-gold: #d4a85a;
+                --fh-gray-900: #f5f5f5;
+                --fh-gray-700: #e5e5e5;
+                --fh-gray-600: #d4d4d4;
+                --fh-gray-500: #9ca3af;
+                --fh-gray-300: #4b5563;
+                --fh-gray-200: #374151;
+                --fh-gray-100: #252d3d;
+                --fh-white: #1e2536;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <h1 class="header__title">SIE Study Materials</h1>
+                <p class="header__subtitle">Securities Industry Essentials Exam Preparation</p>
+
+                <nav class="nav">
+                    <a href="../../index.html">Home</a>
+                    <a href="../training/index.html">Training</a>
+                    <a href="#" class="active" style="color: var(--fh-sage)">SIE</a>
+                    <a href="../series-7/series-7-study-materials.html" style="color: var(--fh-gold)">Series 7</a>
+                    <a href="../fhm-treasury.html">Insights</a>
+                </nav>
+                <nav class="nav" style="margin-top: var(--fh-space-md); font-size: 0.85rem">
+                    <a href="sie-flashcards.html">Flashcards</a>
+                    <a href="sie-formula-flashcards.html">Formulas</a>
+                    <a href="sie-quiz.html">Quiz</a>
+                    <a href="sie-practice-exam.html">Practice Exam</a>
+                    <a href="sie-exam-simulation.html">Exam Sim</a>
+                    <a href="sie-high-yield-drill.html">High-Yield</a>
+                    <a href="sie-cramming.html">Cramming</a>
+                    <a href="sie-audio-library.html">Audio</a>
+                </nav>
             </div>
+        </header>
 
-            <!-- Visual Learning Tools -->
-            <div style="background: linear-gradient(135deg, #8B5CF6, #7C3AED); border-radius: 12px; padding: 2rem; margin-bottom: 3rem; color: white;">
-                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
-                    <h3 style="font-family: var(--fh-font-display); font-size: 1.5rem; margin: 0;">Visual Learning Tools</h3>
+        <!-- Main Content -->
+        <section class="section">
+            <div class="container">
+                <div class="intro">
+                    <p>
+                        Welcome to Franklin Hugh's SIE exam prep. I'm studying for this test myself, and figured I might
+                        as well document the journey. These materials are my attempt to make sense of securities
+                        regulations without falling asleep.
+                    </p>
+                    <p>
+                        Fair warning: I add historical context and the occasional observation about why things work the
+                        way they do. Turns out knowing the "why" helps the "what" stick better.
+                    </p>
+                    <span class="progress-badge">6 of 16 Chapters Available</span>
                 </div>
-                <p style="margin-bottom: 1.5rem; opacity: 0.95;">Prefer diagrams and flowcharts? These interactive infographics break down complex concepts visually.</p>
-                <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
-                    <a href="sie-chapter-7-markets-infographic.html#flowchart" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 8px;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3h7zM7 9H4V5h3v4zm10 6h3v4h-3v-4zm0-10h3v4h-3V5z"/></svg>
-                        Market Hierarchy
+
+                <!-- Visual Learning Tools -->
+                <div
+                    style="
+                        background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+                        border-radius: 12px;
+                        padding: 2rem;
+                        margin-bottom: 3rem;
+                        color: white;
+                    "
+                >
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
+                            />
+                        </svg>
+                        <h3 style="font-family: var(--fh-font-display); font-size: 1.5rem; margin: 0">
+                            Visual Learning Tools
+                        </h3>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; opacity: 0.95">
+                        Prefer diagrams and flowcharts? These interactive infographics break down complex concepts
+                        visually.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.75rem">
+                        <a
+                            href="sie-chapter-7-markets-infographic.html#flowchart"
+                            style="
+                                background: rgba(255, 255, 255, 0.2);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 8px;
+                                text-decoration: none;
+                                font-weight: 500;
+                                display: inline-flex;
+                                align-items: center;
+                                gap: 8px;
+                            "
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3h7zM7 9H4V5h3v4zm10 6h3v4h-3v-4zm0-10h3v4h-3V5z"
+                                />
+                            </svg>
+                            Market Hierarchy
+                        </a>
+                        <a
+                            href="sie-chapter-7-markets-infographic.html#otc-flow"
+                            style="
+                                background: white;
+                                color: #7c3aed;
+                                padding: 10px 20px;
+                                border-radius: 8px;
+                                text-decoration: none;
+                                font-weight: 600;
+                                display: inline-flex;
+                                align-items: center;
+                                gap: 8px;
+                            "
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+                                />
+                            </svg>
+                            How OTC Works
+                        </a>
+                        <a
+                            href="sie-chapter-7-markets-infographic.html#matrix"
+                            style="
+                                background: rgba(255, 255, 255, 0.2);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 8px;
+                                text-decoration: none;
+                                font-weight: 500;
+                                display: inline-flex;
+                                align-items: center;
+                                gap: 8px;
+                            "
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 3v18h18V3H3zm8 16H5v-6h6v6zm0-8H5V5h6v6zm8 8h-6v-6h6v6zm0-8h-6V5h6v6z" />
+                            </svg>
+                            Comparison Matrix
+                        </a>
+                        <a
+                            href="sie-chapter-7-markets-infographic.html#cards"
+                            style="
+                                background: rgba(255, 255, 255, 0.2);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 8px;
+                                text-decoration: none;
+                                font-weight: 500;
+                                display: inline-flex;
+                                align-items: center;
+                                gap: 8px;
+                            "
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"
+                                />
+                            </svg>
+                            Detail Cards
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Chapters Grid -->
+                <div class="chapters-grid">
+                    <!-- Chapter 1 -->
+                    <div class="chapter-card chapter-card--coming">
+                        <span class="chapter-number">Chapter 1</span>
+                        <h3 class="chapter-title">Capital Markets</h3>
+                        <p class="chapter-topics">
+                            Primary vs. secondary markets, market participants, and how money flows
+                        </p>
+                        <span class="chapter-status chapter-status--coming">Coming Soon</span>
+                    </div>
+
+                    <!-- Chapter 2 -->
+                    <div class="chapter-card chapter-card--coming">
+                        <span class="chapter-number">Chapter 2</span>
+                        <h3 class="chapter-title">Equity Securities</h3>
+                        <p class="chapter-topics">
+                            Common stock, preferred stock, ADRs, and why companies issue shares
+                        </p>
+                        <span class="chapter-status chapter-status--coming">Coming Soon</span>
+                    </div>
+
+                    <!-- Chapter 3 -->
+                    <div class="chapter-card chapter-card--coming">
+                        <span class="chapter-number">Chapter 3</span>
+                        <h3 class="chapter-title">Debt Securities</h3>
+                        <p class="chapter-topics">Corporate bonds, Treasury securities, and the art of lending money</p>
+                        <span class="chapter-status chapter-status--coming">Coming Soon</span>
+                    </div>
+
+                    <!-- Chapter 4 -->
+                    <div class="chapter-card chapter-card--coming">
+                        <span class="chapter-number">Chapter 4</span>
+                        <h3 class="chapter-title">Investment Companies</h3>
+                        <p class="chapter-topics">Mutual funds, ETFs, and pooled investments</p>
+                        <span class="chapter-status chapter-status--coming">Coming Soon</span>
+                    </div>
+
+                    <!-- Chapter 5 - Municipal Debt -->
+                    <a href="sie-chapter-5.html" class="chapter-card chapter-card--available">
+                        <span class="chapter-number">Chapter 5</span>
+                        <h3 class="chapter-title">Municipal Debt</h3>
+                        <p class="chapter-topics">GO bonds, revenue bonds, and why cities borrow money</p>
+                        <span class="chapter-status chapter-status--available">Study Now</span>
                     </a>
-                    <a href="sie-chapter-7-markets-infographic.html#otc-flow" style="background: white; color: #7C3AED; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                        How OTC Works
+
+                    <!-- Chapter 5 Part 2 - Money Markets -->
+                    <a href="sie-chapter-5-money-markets.html" class="chapter-card chapter-card--available">
+                        <span class="chapter-number">Chapter 5</span>
+                        <h3 class="chapter-title">Money Market Instruments</h3>
+                        <p class="chapter-topics">T-bills, commercial paper, repos, and short-term debt</p>
+                        <span class="chapter-status chapter-status--available">Study Now</span>
                     </a>
-                    <a href="sie-chapter-7-markets-infographic.html#matrix" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 8px;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3v18h18V3H3zm8 16H5v-6h6v6zm0-8H5V5h6v6zm8 8h-6v-6h6v6zm0-8h-6V5h6v6z"/></svg>
-                        Comparison Matrix
+
+                    <!-- Chapter 6 - Packaged Products - Available -->
+                    <a href="sie-chapter-6-investment-company-basics.html" class="chapter-card chapter-card--available">
+                        <span class="chapter-number">Chapter 6</span>
+                        <h3 class="chapter-title">Packaged Products</h3>
+                        <p class="chapter-topics">Mutual funds, ETFs, REITs, hedge funds, and DPPs</p>
+                        <span class="chapter-status chapter-status--available">Study Now</span>
                     </a>
-                    <a href="sie-chapter-7-markets-infographic.html#cards" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 8px;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
-                        Detail Cards
+
+                    <!-- Chapter 7 - Trading Markets - Available -->
+                    <a href="sie-chapter-7-one-pager.html" class="chapter-card chapter-card--available">
+                        <span class="chapter-number">Chapter 7</span>
+                        <h3 class="chapter-title">Trading Markets</h3>
+                        <p class="chapter-topics">Exchanges, OTC markets, brokers, dealers, and dark pools</p>
+                        <span class="chapter-status chapter-status--available">Study Now</span>
                     </a>
+
+                    <!-- Chapter 8 - Trade Processing - Available -->
+                    <a href="sie-chapter-8-trade-processing.html" class="chapter-card chapter-card--available">
+                        <span class="chapter-number">Chapter 8</span>
+                        <h3 class="chapter-title">Trade Processing and Settlement</h3>
+                        <p class="chapter-topics">
+                            Order tickets, clearing, settlement, confirmations, and dividend dates
+                        </p>
+                        <span class="chapter-status chapter-status--available">Study Now</span>
+                    </a>
+
+                    <!-- Chapter 9 -->
+                    <div class="chapter-card chapter-card--coming">
+                        <span class="chapter-number">Chapter 9</span>
+                        <h3 class="chapter-title">Customer Accounts</h3>
+                        <p class="chapter-topics">Account types, registration, and suitability</p>
+                        <span class="chapter-status chapter-status--coming">Coming Soon</span>
+                    </div>
+
+                    <!-- Chapter 10 - Individual Customer Accounts and Suitability - Available -->
+                    <a
+                        href="sie-chapter-10-section-1-customer-accounts.html"
+                        class="chapter-card chapter-card--available"
+                    >
+                        <span class="chapter-number">Chapter 10</span>
+                        <h3 class="chapter-title">Individual Customer Accounts &amp; Suitability</h3>
+                        <p class="chapter-topics">
+                            Account opening, CIP/KYC/AML, Regulation S-P, Reg BI, Form CRS, and senior investor
+                            protections
+                        </p>
+                        <span class="chapter-status chapter-status--available">Study Now</span>
+                    </a>
+
+                    <!-- Chapter 11 - Margin Accounts - Available -->
+                    <a href="sie-chapter-11-margin-accounts.html" class="chapter-card chapter-card--available">
+                        <span class="chapter-number">Chapter 11</span>
+                        <h3 class="chapter-title">Margin Accounts</h3>
+                        <p class="chapter-topics">
+                            Regulation T, leverage, short selling, and minimum maintenance requirements
+                        </p>
+                        <span class="chapter-status chapter-status--available">Study Now</span>
+                    </a>
+
+                    <!-- Chapter 12 -->
+                    <div class="chapter-card chapter-card--coming">
+                        <span class="chapter-number">Chapter 12</span>
+                        <h3 class="chapter-title">Economics &amp; Analysis</h3>
+                        <p class="chapter-topics">Economic indicators and fundamental analysis</p>
+                        <span class="chapter-status chapter-status--coming">Coming Soon</span>
+                    </div>
+
+                    <!-- Chapter 13 -->
+                    <div class="chapter-card chapter-card--coming">
+                        <span class="chapter-number">Chapter 13</span>
+                        <h3 class="chapter-title">Direct Participation Programs</h3>
+                        <p class="chapter-topics">Limited partnerships and tax shelters</p>
+                        <span class="chapter-status chapter-status--coming">Coming Soon</span>
+                    </div>
+
+                    <!-- Chapter 14 -->
+                    <div class="chapter-card chapter-card--coming">
+                        <span class="chapter-number">Chapter 14</span>
+                        <h3 class="chapter-title">Retirement Plans</h3>
+                        <p class="chapter-topics">IRAs, 401(k)s, and qualified plans</p>
+                        <span class="chapter-status chapter-status--coming">Coming Soon</span>
+                    </div>
+
+                    <!-- Chapter 15 -->
+                    <div class="chapter-card chapter-card--coming">
+                        <span class="chapter-number">Chapter 15</span>
+                        <h3 class="chapter-title">Rules &amp; Regulations</h3>
+                        <p class="chapter-topics">Compliance, ethics, and keeping your license</p>
+                        <span class="chapter-status chapter-status--coming">Coming Soon</span>
+                    </div>
+
+                    <!-- Chapter 16 -->
+                    <div class="chapter-card chapter-card--coming">
+                        <span class="chapter-number">Chapter 16</span>
+                        <h3 class="chapter-title">Other Securities Products</h3>
+                        <p class="chapter-topics">Everything else you need to know</p>
+                        <span class="chapter-status chapter-status--coming">Coming Soon</span>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Chapters Grid -->
-            <div class="chapters-grid">
-                <!-- Chapter 1 -->
-                <div class="chapter-card chapter-card--coming">
-                    <span class="chapter-number">Chapter 1</span>
-                    <h3 class="chapter-title">Capital Markets</h3>
-                    <p class="chapter-topics">Primary vs. secondary markets, market participants, and how money flows</p>
-                    <span class="chapter-status chapter-status--coming">Coming Soon</span>
-                </div>
-
-                <!-- Chapter 2 -->
-                <div class="chapter-card chapter-card--coming">
-                    <span class="chapter-number">Chapter 2</span>
-                    <h3 class="chapter-title">Equity Securities</h3>
-                    <p class="chapter-topics">Common stock, preferred stock, ADRs, and why companies issue shares</p>
-                    <span class="chapter-status chapter-status--coming">Coming Soon</span>
-                </div>
-
-                <!-- Chapter 3 -->
-                <div class="chapter-card chapter-card--coming">
-                    <span class="chapter-number">Chapter 3</span>
-                    <h3 class="chapter-title">Debt Securities</h3>
-                    <p class="chapter-topics">Corporate bonds, Treasury securities, and the art of lending money</p>
-                    <span class="chapter-status chapter-status--coming">Coming Soon</span>
-                </div>
-
-                <!-- Chapter 4 -->
-                <div class="chapter-card chapter-card--coming">
-                    <span class="chapter-number">Chapter 4</span>
-                    <h3 class="chapter-title">Investment Companies</h3>
-                    <p class="chapter-topics">Mutual funds, ETFs, and pooled investments</p>
-                    <span class="chapter-status chapter-status--coming">Coming Soon</span>
-                </div>
-
-                <!-- Chapter 5 - Municipal Debt -->
-                <a href="sie-chapter-5.html" class="chapter-card chapter-card--available">
-                    <span class="chapter-number">Chapter 5</span>
-                    <h3 class="chapter-title">Municipal Debt</h3>
-                    <p class="chapter-topics">GO bonds, revenue bonds, and why cities borrow money</p>
-                    <span class="chapter-status chapter-status--available">Study Now</span>
-                </a>
-
-                <!-- Chapter 5 Part 2 - Money Markets -->
-                <a href="sie-chapter-5-money-markets.html" class="chapter-card chapter-card--available">
-                    <span class="chapter-number">Chapter 5</span>
-                    <h3 class="chapter-title">Money Market Instruments</h3>
-                    <p class="chapter-topics">T-bills, commercial paper, repos, and short-term debt</p>
-                    <span class="chapter-status chapter-status--available">Study Now</span>
-                </a>
-
-                <!-- Chapter 6 - Packaged Products - Available -->
-                <a href="sie-chapter-6-investment-company-basics.html" class="chapter-card chapter-card--available">
-                    <span class="chapter-number">Chapter 6</span>
-                    <h3 class="chapter-title">Packaged Products</h3>
-                    <p class="chapter-topics">Mutual funds, ETFs, REITs, hedge funds, and DPPs</p>
-                    <span class="chapter-status chapter-status--available">Study Now</span>
-                </a>
-
-                <!-- Chapter 7 - Trading Markets - Available -->
-                <a href="sie-chapter-7-one-pager.html" class="chapter-card chapter-card--available">
-                    <span class="chapter-number">Chapter 7</span>
-                    <h3 class="chapter-title">Trading Markets</h3>
-                    <p class="chapter-topics">Exchanges, OTC markets, brokers, dealers, and dark pools</p>
-                    <span class="chapter-status chapter-status--available">Study Now</span>
-                </a>
-
-                <!-- Chapter 8 - Trade Processing - Available -->
-                <a href="sie-chapter-8-trade-processing.html" class="chapter-card chapter-card--available">
-                    <span class="chapter-number">Chapter 8</span>
-                    <h3 class="chapter-title">Trade Processing and Settlement</h3>
-                    <p class="chapter-topics">Order tickets, clearing, settlement, confirmations, and dividend dates</p>
-                    <span class="chapter-status chapter-status--available">Study Now</span>
-                </a>
-
-                <!-- Chapter 9 -->
-                <div class="chapter-card chapter-card--coming">
-                    <span class="chapter-number">Chapter 9</span>
-                    <h3 class="chapter-title">Customer Accounts</h3>
-                    <p class="chapter-topics">Account types, registration, and suitability</p>
-                    <span class="chapter-status chapter-status--coming">Coming Soon</span>
-                </div>
-
-                <!-- Chapter 10 - Individual Customer Accounts and Suitability - Available -->
-                <a href="sie-chapter-10-section-1-customer-accounts.html" class="chapter-card chapter-card--available">
-                    <span class="chapter-number">Chapter 10</span>
-                    <h3 class="chapter-title">Individual Customer Accounts &amp; Suitability</h3>
-                    <p class="chapter-topics">Account opening, CIP/KYC/AML, Regulation S-P, Reg BI, Form CRS, and senior investor protections</p>
-                    <span class="chapter-status chapter-status--available">Study Now</span>
-                </a>
-
-                <!-- Chapter 11 - Margin Accounts - Available -->
-                <a href="sie-chapter-11-margin-accounts.html" class="chapter-card chapter-card--available">
-                    <span class="chapter-number">Chapter 11</span>
-                    <h3 class="chapter-title">Margin Accounts</h3>
-                    <p class="chapter-topics">Regulation T, leverage, short selling, and minimum maintenance requirements</p>
-                    <span class="chapter-status chapter-status--available">Study Now</span>
-                </a>
-
-                <!-- Chapter 12 -->
-                <div class="chapter-card chapter-card--coming">
-                    <span class="chapter-number">Chapter 12</span>
-                    <h3 class="chapter-title">Economics &amp; Analysis</h3>
-                    <p class="chapter-topics">Economic indicators and fundamental analysis</p>
-                    <span class="chapter-status chapter-status--coming">Coming Soon</span>
-                </div>
-
-                <!-- Chapter 13 -->
-                <div class="chapter-card chapter-card--coming">
-                    <span class="chapter-number">Chapter 13</span>
-                    <h3 class="chapter-title">Direct Participation Programs</h3>
-                    <p class="chapter-topics">Limited partnerships and tax shelters</p>
-                    <span class="chapter-status chapter-status--coming">Coming Soon</span>
-                </div>
-
-                <!-- Chapter 14 -->
-                <div class="chapter-card chapter-card--coming">
-                    <span class="chapter-number">Chapter 14</span>
-                    <h3 class="chapter-title">Retirement Plans</h3>
-                    <p class="chapter-topics">IRAs, 401(k)s, and qualified plans</p>
-                    <span class="chapter-status chapter-status--coming">Coming Soon</span>
-                </div>
-
-                <!-- Chapter 15 -->
-                <div class="chapter-card chapter-card--coming">
-                    <span class="chapter-number">Chapter 15</span>
-                    <h3 class="chapter-title">Rules &amp; Regulations</h3>
-                    <p class="chapter-topics">Compliance, ethics, and keeping your license</p>
-                    <span class="chapter-status chapter-status--coming">Coming Soon</span>
-                </div>
-
-                <!-- Chapter 16 -->
-                <div class="chapter-card chapter-card--coming">
-                    <span class="chapter-number">Chapter 16</span>
-                    <h3 class="chapter-title">Other Securities Products</h3>
-                    <p class="chapter-topics">Everything else you need to know</p>
-                    <span class="chapter-status chapter-status--coming">Coming Soon</span>
-                </div>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p class="footer__text">© 2024 Franklin Hugh Money. An Investment in Knowledge.</p>
             </div>
-        </div>
-    </section>
+        </footer>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p class="footer__text">© 2024 Franklin Hugh Money. An Investment in Knowledge.</p>
-        </div>
-    </footer>
-
-    <!-- Navigation Scripts -->
-    <script src="../../assets/js/sie-navigation-config.js?v=b80ff1ef"></script>
-    <script src="../../assets/js/sie-navigation-component.js?v=61133cdc"></script>
-    <script>
-        // Initialize navigation for this page
-        const navigation = new SIENavigationComponent('sie-study-materials.html');
-    </script>
-</body>
+        <!-- Navigation Scripts -->
+        <script src="../../assets/js/sie-navigation-config.js?v=5df59ca7"></script>
+        <script src="../../assets/js/sie-navigation-component.js?v=c75e2827"></script>
+        <script>
+            // Initialize navigation for this page
+            const navigation = new SIENavigationComponent('sie-study-materials.html');
+        </script>
+    </body>
 </html>

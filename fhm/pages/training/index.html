@@ -1,330 +1,337 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-    <meta name="description" content="Securities exam preparation materials - SIE and Series 7 study guides from Franklin Hugh Money">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+        <meta
+            name="description"
+            content="Securities exam preparation materials - SIE and Series 7 study guides from Franklin Hugh Money"
+        />
 
-    <title>Training Programs | Franklin Hugh Money</title>
+        <title>Training Programs | Franklin Hugh Money</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
 
-    <!-- Main Styles -->
-    <link rel="stylesheet" href="../../assets/css/main.css?v=f6a3d80a">
-    <!-- Night Mode (5pm - 9am) -->
-    <script src="../../assets/js/night-mode.js"></script>
-    <!-- Cache Control -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+        <!-- Main Styles -->
+        <link rel="stylesheet" href="../../assets/css/main.css?v=b3570edb" />
+        <!-- Night Mode (5pm - 9am) -->
+        <script src="../../assets/js/night-mode.js"></script>
+        <!-- Cache Control -->
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
 
-    <style>
-        /* Training Hub Specific Styles */
-        .programs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: var(--fh-space-2xl);
-            margin-top: var(--fh-space-3xl);
-        }
-
-        .program-card {
-            background: var(--fh-white);
-            border: 2px solid var(--fh-gray-200);
-            border-radius: 8px;
-            padding: var(--fh-space-2xl);
-            text-decoration: none;
-            display: block;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .program-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-            border-color: var(--fh-navy);
-        }
-
-        .program-card--sage {
-            border-color: var(--fh-sage);
-        }
-
-        .program-card--sage:hover {
-            border-color: var(--fh-sage);
-            box-shadow: 0 12px 32px rgba(124, 152, 133, 0.2);
-        }
-
-        .program-card--gold {
-            border-color: var(--fh-gold);
-        }
-
-        .program-card--gold:hover {
-            border-color: var(--fh-gold);
-            box-shadow: 0 12px 32px rgba(176, 141, 87, 0.2);
-        }
-
-        .program-badge {
-            display: inline-block;
-            padding: var(--fh-space-xs) var(--fh-space-md);
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            border-radius: 4px;
-            margin-bottom: var(--fh-space-md);
-        }
-
-        .program-badge--sage {
-            background: var(--fh-sage);
-            color: var(--fh-white);
-        }
-
-        .program-badge--gold {
-            background: var(--fh-gold);
-            color: var(--fh-white);
-        }
-
-        .program-title {
-            font-family: var(--fh-font-display);
-            font-size: 1.75rem;
-            color: var(--fh-navy);
-            margin-bottom: var(--fh-space-sm);
-            text-decoration: none;
-        }
-
-        .program-subtitle {
-            font-size: 0.95rem;
-            color: var(--fh-gray-600);
-            margin-bottom: var(--fh-space-xl);
-        }
-
-        .program-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--fh-space-md);
-            padding: var(--fh-space-lg) 0;
-            border-top: 1px solid var(--fh-gray-200);
-            border-bottom: 1px solid var(--fh-gray-200);
-            margin-bottom: var(--fh-space-lg);
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat__number {
-            font-family: var(--fh-font-mono);
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--fh-navy);
-        }
-
-        .stat__label {
-            font-size: 0.75rem;
-            color: var(--fh-gray-500);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .program-description {
-            font-size: 0.95rem;
-            color: var(--fh-gray-700);
-            line-height: 1.7;
-            margin-bottom: var(--fh-space-lg);
-        }
-
-        .program-status {
-            display: flex;
-            align-items: center;
-            gap: var(--fh-space-sm);
-            font-size: 0.875rem;
-            color: var(--fh-gray-600);
-        }
-
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .status-indicator--active {
-            background: var(--fh-sage);
-        }
-
-        .status-indicator--building {
-            background: var(--fh-gold);
-        }
-
-        .program-cta {
-            display: inline-block;
-            margin-top: var(--fh-space-lg);
-            font-weight: 600;
-            color: var(--fh-navy);
-            text-decoration: none;
-        }
-
-        .program-cta:after {
-            content: " \2192";
-            transition: transform 0.2s ease;
-        }
-
-        .program-card:hover .program-cta:after {
-            margin-left: 4px;
-        }
-
-        /* Prerequisite note */
-        .prereq-note {
-            background: var(--fh-gray-100);
-            border-left: 3px solid var(--fh-sage);
-            padding: var(--fh-space-lg);
-            margin-top: var(--fh-space-3xl);
-            font-size: 0.95rem;
-            color: var(--fh-gray-700);
-        }
-
-        .prereq-note strong {
-            color: var(--fh-navy);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
+        <style>
+            /* Training Hub Specific Styles */
             .programs-grid {
-                grid-template-columns: 1fr;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+                gap: var(--fh-space-2xl);
+                margin-top: var(--fh-space-3xl);
+            }
+
+            .program-card {
+                background: var(--fh-white);
+                border: 2px solid var(--fh-gray-200);
+                border-radius: 8px;
+                padding: var(--fh-space-2xl);
+                text-decoration: none;
+                display: block;
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .program-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+                border-color: var(--fh-navy);
+            }
+
+            .program-card--sage {
+                border-color: var(--fh-sage);
+            }
+
+            .program-card--sage:hover {
+                border-color: var(--fh-sage);
+                box-shadow: 0 12px 32px rgba(124, 152, 133, 0.2);
+            }
+
+            .program-card--gold {
+                border-color: var(--fh-gold);
+            }
+
+            .program-card--gold:hover {
+                border-color: var(--fh-gold);
+                box-shadow: 0 12px 32px rgba(176, 141, 87, 0.2);
+            }
+
+            .program-badge {
+                display: inline-block;
+                padding: var(--fh-space-xs) var(--fh-space-md);
+                font-size: 0.75rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                border-radius: 4px;
+                margin-bottom: var(--fh-space-md);
+            }
+
+            .program-badge--sage {
+                background: var(--fh-sage);
+                color: var(--fh-white);
+            }
+
+            .program-badge--gold {
+                background: var(--fh-gold);
+                color: var(--fh-white);
+            }
+
+            .program-title {
+                font-family: var(--fh-font-display);
+                font-size: 1.75rem;
+                color: var(--fh-navy);
+                margin-bottom: var(--fh-space-sm);
+                text-decoration: none;
+            }
+
+            .program-subtitle {
+                font-size: 0.95rem;
+                color: var(--fh-gray-600);
+                margin-bottom: var(--fh-space-xl);
             }
 
             .program-stats {
+                display: grid;
                 grid-template-columns: repeat(3, 1fr);
+                gap: var(--fh-space-md);
+                padding: var(--fh-space-lg) 0;
+                border-top: 1px solid var(--fh-gray-200);
+                border-bottom: 1px solid var(--fh-gray-200);
+                margin-bottom: var(--fh-space-lg);
+            }
+
+            .stat {
+                text-align: center;
             }
 
             .stat__number {
-                font-size: 1.25rem;
+                font-family: var(--fh-font-mono);
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: var(--fh-navy);
             }
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <h1>Training Programs</h1>
-            <p class="header__subtitle">Securities Exam Preparation</p>
 
-            <nav class="nav">
-                <a href="../../index.html">Home</a>
-                <a href="#" class="active">Training</a>
-                <a href="../fhm-treasury.html">Insights</a>
-            </nav>
-        </div>
-    </header>
+            .stat__label {
+                font-size: 0.75rem;
+                color: var(--fh-gray-500);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
 
-    <!-- Main Content -->
-    <section class="section">
-        <div class="container">
-            <div class="prose" style="max-width: 720px; text-align: center; margin-bottom: var(--fh-space-2xl);">
-                <p class="lead">
-                    Study materials for FINRA securities licensing exams, built from personal experience
-                    and designed to make complex concepts stick.
+            .program-description {
+                font-size: 0.95rem;
+                color: var(--fh-gray-700);
+                line-height: 1.7;
+                margin-bottom: var(--fh-space-lg);
+            }
+
+            .program-status {
+                display: flex;
+                align-items: center;
+                gap: var(--fh-space-sm);
+                font-size: 0.875rem;
+                color: var(--fh-gray-600);
+            }
+
+            .status-indicator {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+            }
+
+            .status-indicator--active {
+                background: var(--fh-sage);
+            }
+
+            .status-indicator--building {
+                background: var(--fh-gold);
+            }
+
+            .program-cta {
+                display: inline-block;
+                margin-top: var(--fh-space-lg);
+                font-weight: 600;
+                color: var(--fh-navy);
+                text-decoration: none;
+            }
+
+            .program-cta:after {
+                content: ' \2192';
+                transition: transform 0.2s ease;
+            }
+
+            .program-card:hover .program-cta:after {
+                margin-left: 4px;
+            }
+
+            /* Prerequisite note */
+            .prereq-note {
+                background: var(--fh-gray-100);
+                border-left: 3px solid var(--fh-sage);
+                padding: var(--fh-space-lg);
+                margin-top: var(--fh-space-3xl);
+                font-size: 0.95rem;
+                color: var(--fh-gray-700);
+            }
+
+            .prereq-note strong {
+                color: var(--fh-navy);
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .programs-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .program-stats {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+
+                .stat__number {
+                    font-size: 1.25rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <h1>Training Programs</h1>
+                <p class="header__subtitle">Securities Exam Preparation</p>
+
+                <nav class="nav">
+                    <a href="../../index.html">Home</a>
+                    <a href="#" class="active">Training</a>
+                    <a href="../fhm-treasury.html">Insights</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <section class="section">
+            <div class="container">
+                <div class="prose" style="max-width: 720px; text-align: center; margin-bottom: var(--fh-space-2xl)">
+                    <p class="lead">
+                        Study materials for FINRA securities licensing exams, built from personal experience and
+                        designed to make complex concepts stick.
+                    </p>
+                </div>
+
+                <!-- Program Cards -->
+                <div class="programs-grid">
+                    <!-- SIE Card -->
+                    <a href="../sie/sie-study-materials.html" class="program-card program-card--sage">
+                        <span class="program-badge program-badge--sage">Foundation</span>
+                        <h2 class="program-title">SIE Exam Prep</h2>
+                        <p class="program-subtitle">Securities Industry Essentials</p>
+
+                        <div class="program-stats">
+                            <div class="stat">
+                                <div class="stat__number">75</div>
+                                <div class="stat__label">Questions</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat__number">105</div>
+                                <div class="stat__label">Minutes</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat__number">70%</div>
+                                <div class="stat__label">To Pass</div>
+                            </div>
+                        </div>
+
+                        <p class="program-description">
+                            The prerequisite exam covering fundamental securities industry knowledge. Markets, products,
+                            regulations, and the ethical obligations that come with the territory.
+                        </p>
+
+                        <div class="program-status">
+                            <span class="status-indicator status-indicator--active"></span>
+                            <span>Content available - 7 chapters with study tools</span>
+                        </div>
+
+                        <span class="program-cta">Start studying</span>
+                    </a>
+
+                    <!-- Series 7 Card -->
+                    <a href="../series-7/series-7-study-materials.html" class="program-card program-card--gold">
+                        <span class="program-badge program-badge--gold">Advanced</span>
+                        <h2 class="program-title">Series 7 Exam Prep</h2>
+                        <p class="program-subtitle">General Securities Representative</p>
+
+                        <div class="program-stats">
+                            <div class="stat">
+                                <div class="stat__number">125</div>
+                                <div class="stat__label">Questions</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat__number">225</div>
+                                <div class="stat__label">Minutes</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat__number">72%</div>
+                                <div class="stat__label">To Pass</div>
+                            </div>
+                        </div>
+
+                        <p class="program-description">
+                            The comprehensive exam that qualifies you to sell virtually any security. Options, municipal
+                            bonds, margin accounts, and calculations that need to be automatic.
+                        </p>
+
+                        <div class="program-status">
+                            <span class="status-indicator status-indicator--building"></span>
+                            <span>Framework ready - content in development</span>
+                        </div>
+
+                        <span class="program-cta">View materials</span>
+                    </a>
+                </div>
+
+                <!-- Prerequisite Note -->
+                <div class="prereq-note">
+                    <strong>Exam pathway:</strong> The SIE is a corequisite for the Series 7. You must pass both to
+                    become a registered representative, but you can take them in any order. Most people start with the
+                    SIE since it covers foundational concepts.
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer footer--spaced">
+            <div class="container">
+                <p class="footer__text">
+                    &copy; 2024 Franklin Hugh Money | A Project by <a href="https://drewgarraway.com">Drew Garraway</a>
+                </p>
+                <p class="footer__disclaimer">
+                    Nothing here constitutes financial advice. These are personal study materials, not a substitute for
+                    proper exam prep courses.
                 </p>
             </div>
+        </footer>
 
-            <!-- Program Cards -->
-            <div class="programs-grid">
-                <!-- SIE Card -->
-                <a href="../sie/sie-study-materials.html" class="program-card program-card--sage">
-                    <span class="program-badge program-badge--sage">Foundation</span>
-                    <h2 class="program-title">SIE Exam Prep</h2>
-                    <p class="program-subtitle">Securities Industry Essentials</p>
-
-                    <div class="program-stats">
-                        <div class="stat">
-                            <div class="stat__number">75</div>
-                            <div class="stat__label">Questions</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat__number">105</div>
-                            <div class="stat__label">Minutes</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat__number">70%</div>
-                            <div class="stat__label">To Pass</div>
-                        </div>
-                    </div>
-
-                    <p class="program-description">
-                        The prerequisite exam covering fundamental securities industry knowledge.
-                        Markets, products, regulations, and the ethical obligations that come with the territory.
-                    </p>
-
-                    <div class="program-status">
-                        <span class="status-indicator status-indicator--active"></span>
-                        <span>Content available - 7 chapters with study tools</span>
-                    </div>
-
-                    <span class="program-cta">Start studying</span>
-                </a>
-
-                <!-- Series 7 Card -->
-                <a href="../series-7/series-7-study-materials.html" class="program-card program-card--gold">
-                    <span class="program-badge program-badge--gold">Advanced</span>
-                    <h2 class="program-title">Series 7 Exam Prep</h2>
-                    <p class="program-subtitle">General Securities Representative</p>
-
-                    <div class="program-stats">
-                        <div class="stat">
-                            <div class="stat__number">125</div>
-                            <div class="stat__label">Questions</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat__number">225</div>
-                            <div class="stat__label">Minutes</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat__number">72%</div>
-                            <div class="stat__label">To Pass</div>
-                        </div>
-                    </div>
-
-                    <p class="program-description">
-                        The comprehensive exam that qualifies you to sell virtually any security.
-                        Options, municipal bonds, margin accounts, and calculations that need to be automatic.
-                    </p>
-
-                    <div class="program-status">
-                        <span class="status-indicator status-indicator--building"></span>
-                        <span>Framework ready - content in development</span>
-                    </div>
-
-                    <span class="program-cta">View materials</span>
-                </a>
-            </div>
-
-            <!-- Prerequisite Note -->
-            <div class="prereq-note">
-                <strong>Exam pathway:</strong> The SIE is a corequisite for the Series 7.
-                You must pass both to become a registered representative, but you can take them in any order.
-                Most people start with the SIE since it covers foundational concepts.
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer footer--spaced">
-        <div class="container">
-            <p class="footer__text">
-                &copy; 2024 Franklin Hugh Money | A Project by <a href="https://drewgarraway.com">Drew Garraway</a>
-            </p>
-            <p class="footer__disclaimer">
-                Nothing here constitutes financial advice. These are personal study materials, not a substitute for proper exam prep courses.
-            </p>
-        </div>
-    </footer>
-
-    <script>
-        console.log('%cFranklin Hugh Money', 'font-family: Georgia; font-size: 16px; color: #002D62;');
-        console.log('Training Programs - SIE & Series 7');
-    </script>
-</body>
+        <script>
+            console.log('%cFranklin Hugh Money', 'font-family: Georgia; font-size: 16px; color: #002D62;');
+            console.log('Training Programs - SIE & Series 7');
+        </script>
+    </body>
 </html>

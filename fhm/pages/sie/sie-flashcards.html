@@ -1,268 +1,281 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-    <meta name="description" content="SIE Exam Flashcards - Interactive flashcard training for the Securities Industry Essentials exam">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+        <meta
+            name="description"
+            content="SIE Exam Flashcards - Interactive flashcard training for the Securities Industry Essentials exam"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <title>SIE Flashcards | Franklin Hugh Money</title>
+        <title>SIE Flashcards | Franklin Hugh Money</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
 
-    <!-- Flashcard Styles -->
-    <link rel="stylesheet" href="../../assets/css/sie-flashcards.css">
+        <!-- Flashcard Styles -->
+        <link rel="stylesheet" href="../../assets/css/sie-flashcards.css" />
 
-    <style>
-        /* CSS Variables (Design Tokens) - included for standalone use */
-        :root {
-            /* Primary Institutional Colors */
-            --fh-navy: #002D62;
-            --fh-cream: #FFFDF7;
-            --fh-gray: #54585A;
+        <style>
+            /* CSS Variables (Design Tokens) - included for standalone use */
+            :root {
+                /* Primary Institutional Colors */
+                --fh-navy: #002d62;
+                --fh-cream: #fffdf7;
+                --fh-gray: #54585a;
 
-            /* Secondary Colors */
-            --fh-sage: #7C9885;
-            --fh-burgundy: #6B2737;
-            --fh-gold: #B08D57;
+                /* Secondary Colors */
+                --fh-sage: #7c9885;
+                --fh-burgundy: #6b2737;
+                --fh-gold: #b08d57;
 
-            /* Neutral Scale */
-            --fh-gray-900: #1A1A1A;
-            --fh-gray-800: #2A2A2A;
-            --fh-gray-700: #404040;
-            --fh-gray-600: #595959;
-            --fh-gray-500: #737373;
-            --fh-gray-400: #8a8a8a;
-            --fh-gray-300: #D4D4D4;
-            --fh-gray-200: #E5E5E5;
-            --fh-gray-100: #F5F5F5;
-            --fh-white: #FFFFFF;
+                /* Neutral Scale */
+                --fh-gray-900: #1a1a1a;
+                --fh-gray-800: #2a2a2a;
+                --fh-gray-700: #404040;
+                --fh-gray-600: #595959;
+                --fh-gray-500: #737373;
+                --fh-gray-400: #8a8a8a;
+                --fh-gray-300: #d4d4d4;
+                --fh-gray-200: #e5e5e5;
+                --fh-gray-100: #f5f5f5;
+                --fh-white: #ffffff;
 
-            /* Typography */
-            --fh-font-display: 'Crimson Pro', Georgia, serif;
-            --fh-font-body: 'Inter', -apple-system, sans-serif;
-            --fh-font-mono: 'IBM Plex Mono', monospace;
+                /* Typography */
+                --fh-font-display: 'Crimson Pro', Georgia, serif;
+                --fh-font-body: 'Inter', -apple-system, sans-serif;
+                --fh-font-mono: 'IBM Plex Mono', monospace;
 
-            /* Spacing Scale (8px base) */
-            --fh-space-xs: 0.25rem;
-            --fh-space-sm: 0.5rem;
-            --fh-space-md: 1rem;
-            --fh-space-lg: 1.5rem;
-            --fh-space-xl: 2rem;
-            --fh-space-2xl: 3rem;
-            --fh-space-3xl: 4rem;
-            --fh-space-4xl: 6rem;
-        }
-
-        /* Prevent pull-to-refresh and overscroll on mobile */
-        html, body {
-            overscroll-behavior: none;
-            touch-action: pan-x pan-y;
-            height: 100%;
-            height: -webkit-fill-available;
-        }
-
-        html {
-            /* Fix iOS Safari 100vh issue */
-            height: -webkit-fill-available;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: var(--fh-font-body);
-            background: var(--fh-cream);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
-            /* Prevent iOS rubber-banding */
-            position: fixed;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        #flashcard-app {
-            height: 100%;
-            overflow: hidden;
-        }
-
-        /* Back link */
-        .back-link {
-            position: fixed;
-            top: calc(var(--fh-space-sm) + env(safe-area-inset-top));
-            left: calc(var(--fh-space-sm) + env(safe-area-inset-left));
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--fh-space-xs);
-            padding: var(--fh-space-xs) var(--fh-space-sm);
-            min-width: 44px;
-            min-height: 44px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--fh-white);
-            text-decoration: none;
-            background: rgba(0, 45, 98, 0.95);
-            border-radius: 22px;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            transition: background-color 0.15s ease;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .back-link:hover {
-            background: var(--fh-navy);
-        }
-
-        .back-link:active {
-            transform: scale(0.95);
-        }
-
-        .back-link__icon {
-            font-size: 1rem;
-        }
-
-        /* Hide text on very small screens */
-        @media (max-width: 360px) {
-            .back-link span:not(.back-link__icon) {
-                display: none;
+                /* Spacing Scale (8px base) */
+                --fh-space-xs: 0.25rem;
+                --fh-space-sm: 0.5rem;
+                --fh-space-md: 1rem;
+                --fh-space-lg: 1.5rem;
+                --fh-space-xl: 2rem;
+                --fh-space-2xl: 3rem;
+                --fh-space-3xl: 4rem;
+                --fh-space-4xl: 6rem;
             }
+
+            /* Prevent pull-to-refresh and overscroll on mobile */
+            html,
+            body {
+                overscroll-behavior: none;
+                touch-action: pan-x pan-y;
+                height: 100%;
+                height: -webkit-fill-available;
+            }
+
+            html {
+                /* Fix iOS Safari 100vh issue */
+                height: -webkit-fill-available;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: var(--fh-font-body);
+                background: var(--fh-cream);
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                min-height: 100vh;
+                min-height: -webkit-fill-available;
+                /* Prevent iOS rubber-banding */
+                position: fixed;
+                width: 100%;
+                overflow: hidden;
+            }
+
+            #flashcard-app {
+                height: 100%;
+                overflow: hidden;
+            }
+
+            /* Back link */
             .back-link {
-                padding: var(--fh-space-xs);
+                position: fixed;
+                top: calc(var(--fh-space-sm) + env(safe-area-inset-top));
+                left: calc(var(--fh-space-sm) + env(safe-area-inset-left));
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: var(--fh-space-xs);
+                padding: var(--fh-space-xs) var(--fh-space-sm);
+                min-width: 44px;
+                min-height: 44px;
+                font-size: 0.75rem;
+                font-weight: 500;
+                color: var(--fh-white);
+                text-decoration: none;
+                background: rgba(0, 45, 98, 0.95);
+                border-radius: 22px;
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                transition: background-color 0.15s ease;
+                -webkit-tap-highlight-color: transparent;
             }
-        }
 
-        /* Loading state */
-        .loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            font-family: var(--fh-font-body);
-            color: var(--fh-gray-500);
-        }
+            .back-link:hover {
+                background: var(--fh-navy);
+            }
 
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--fh-gray-200);
-            border-top-color: var(--fh-navy);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+            .back-link:active {
+                transform: scale(0.95);
+            }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+            .back-link__icon {
+                font-size: 1rem;
+            }
 
-        /* Error state */
-        .error-message {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: var(--fh-space-xl);
-            text-align: center;
-        }
-
-        .error-message h2 {
-            font-family: var(--fh-font-display);
-            color: var(--fh-burgundy);
-            margin-bottom: var(--fh-space-md);
-        }
-
-        .error-message p {
-            color: var(--fh-gray-600);
-            margin-bottom: var(--fh-space-xl);
-        }
-
-        .error-message a {
-            color: var(--fh-navy);
-        }
-        /* Night Mode Overrides (5pm - 9am) */
-        body.night-mode {
-            --fh-navy: #4A90C2;
-            --fh-cream: #1a1f2e;
-            --fh-gray: #9CA3AF;
-            --fh-sage: #8FB89A;
-            --fh-burgundy: #C77A8A;
-            --fh-gold: #D4A85A;
-            --fh-gray-900: #F5F5F5;
-            --fh-gray-800: #E8E8E8;
-            --fh-gray-700: #E5E5E5;
-            --fh-gray-600: #D4D4D4;
-            --fh-gray-500: #9CA3AF;
-            --fh-gray-400: #6B7280;
-            --fh-gray-300: #4B5563;
-            --fh-gray-200: #374151;
-            --fh-gray-100: #252d3d;
-            --fh-white: #1e2536;
-        }
-    </style>
-    <!-- Night Mode (5pm - 9am) -->
-    <script src="../../assets/js/night-mode.js"></script>
-</head>
-<body>
-    <a href="sie-study-materials.html" class="back-link">
-        <span class="back-link__icon">&larr;</span>
-        <span>Back</span>
-    </a>
-
-    <div id="flashcard-app" class="loading">
-        <div class="loading-spinner"></div>
-    </div>
-
-    <div class="error-message" id="error-message">
-        <h2>Unable to Load Flashcards</h2>
-        <p>There was a problem loading the flashcard data. Please try refreshing the page.</p>
-        <a href="sie-study-materials.html">Return to Study Materials</a>
-    </div>
-
-    <!-- Flashcard Modules -->
-    <script src="../../assets/js/flashcards/flashcard-data.js"></script>
-    <script src="../../assets/js/flashcards/flashcard-progress.js"></script>
-    <script src="../../assets/js/flashcards/flashcard-session.js"></script>
-    <script src="../../assets/js/flashcards/flashcard-ui.js"></script>
-
-    <script>
-        // Initialize flashcard app
-        document.addEventListener('DOMContentLoaded', async function() {
-            const appContainer = document.getElementById('flashcard-app');
-            const errorMessage = document.getElementById('error-message');
-
-            try {
-                const success = await FlashcardUI.init('flashcard-app');
-
-                if (!success) {
-                    throw new Error('Failed to initialize flashcard UI');
+            /* Hide text on very small screens */
+            @media (max-width: 360px) {
+                .back-link span:not(.back-link__icon) {
+                    display: none;
                 }
-
-                appContainer.classList.remove('loading');
-            } catch (error) {
-                console.error('Flashcard initialization error:', error);
-                appContainer.style.display = 'none';
-                errorMessage.style.display = 'flex';
+                .back-link {
+                    padding: var(--fh-space-xs);
+                }
             }
-        });
 
-        // Prevent default touch behaviors that interfere with swipe
-        document.addEventListener('touchmove', function(e) {
-            if (e.target.closest('.flashcard-container')) {
-                // Allow the flashcard container to handle touch
+            /* Loading state */
+            .loading {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                font-family: var(--fh-font-body);
+                color: var(--fh-gray-500);
             }
-        }, { passive: true });
 
-        // Service worker registration for offline support (optional)
-        if ('serviceWorker' in navigator) {
-            // Future: register service worker for offline flashcard access
-        }
-    </script>
-</body>
+            .loading-spinner {
+                width: 40px;
+                height: 40px;
+                border: 3px solid var(--fh-gray-200);
+                border-top-color: var(--fh-navy);
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            /* Error state */
+            .error-message {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                padding: var(--fh-space-xl);
+                text-align: center;
+            }
+
+            .error-message h2 {
+                font-family: var(--fh-font-display);
+                color: var(--fh-burgundy);
+                margin-bottom: var(--fh-space-md);
+            }
+
+            .error-message p {
+                color: var(--fh-gray-600);
+                margin-bottom: var(--fh-space-xl);
+            }
+
+            .error-message a {
+                color: var(--fh-navy);
+            }
+            /* Night Mode Overrides (5pm - 9am) */
+            body.night-mode {
+                --fh-navy: #4a90c2;
+                --fh-cream: #1a1f2e;
+                --fh-gray: #9ca3af;
+                --fh-sage: #8fb89a;
+                --fh-burgundy: #c77a8a;
+                --fh-gold: #d4a85a;
+                --fh-gray-900: #f5f5f5;
+                --fh-gray-800: #e8e8e8;
+                --fh-gray-700: #e5e5e5;
+                --fh-gray-600: #d4d4d4;
+                --fh-gray-500: #9ca3af;
+                --fh-gray-400: #6b7280;
+                --fh-gray-300: #4b5563;
+                --fh-gray-200: #374151;
+                --fh-gray-100: #252d3d;
+                --fh-white: #1e2536;
+            }
+        </style>
+        <!-- Night Mode (5pm - 9am) -->
+        <script src="../../assets/js/night-mode.js"></script>
+    </head>
+    <body>
+        <a href="sie-study-materials.html" class="back-link">
+            <span class="back-link__icon">&larr;</span>
+            <span>Back</span>
+        </a>
+
+        <div id="flashcard-app" class="loading">
+            <div class="loading-spinner"></div>
+        </div>
+
+        <div class="error-message" id="error-message">
+            <h2>Unable to Load Flashcards</h2>
+            <p>There was a problem loading the flashcard data. Please try refreshing the page.</p>
+            <a href="sie-study-materials.html">Return to Study Materials</a>
+        </div>
+
+        <!-- Flashcard Modules -->
+        <script src="../../assets/js/flashcards/flashcard-data.js"></script>
+        <script src="../../assets/js/flashcards/flashcard-progress.js"></script>
+        <script src="../../assets/js/flashcards/flashcard-session.js"></script>
+        <script src="../../assets/js/flashcards/flashcard-ui.js"></script>
+
+        <script>
+            // Initialize flashcard app
+            document.addEventListener('DOMContentLoaded', async function () {
+                const appContainer = document.getElementById('flashcard-app');
+                const errorMessage = document.getElementById('error-message');
+
+                try {
+                    const success = await FlashcardUI.init('flashcard-app');
+
+                    if (!success) {
+                        throw new Error('Failed to initialize flashcard UI');
+                    }
+
+                    appContainer.classList.remove('loading');
+                } catch (error) {
+                    console.error('Flashcard initialization error:', error);
+                    appContainer.style.display = 'none';
+                    errorMessage.style.display = 'flex';
+                }
+            });
+
+            // Prevent default touch behaviors that interfere with swipe
+            document.addEventListener(
+                'touchmove',
+                function (e) {
+                    if (e.target.closest('.flashcard-container')) {
+                        // Allow the flashcard container to handle touch
+                    }
+                },
+                { passive: true }
+            );
+
+            // Service worker registration for offline support (optional)
+            if ('serviceWorker' in navigator) {
+                // Future: register service worker for offline flashcard access
+            }
+        </script>
+    </body>
 </html>

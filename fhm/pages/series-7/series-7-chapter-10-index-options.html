@@ -1,538 +1,620 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-    <meta name="description" content="Chapter 10: Index Options and Advanced Strategies - Series 7 Exam Study Guide. Covers index options, VIX, straddles, combinations, and spreads.">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+        <meta
+            name="description"
+            content="Chapter 10: Index Options and Advanced Strategies - Series 7 Exam Study Guide. Covers index options, VIX, straddles, combinations, and spreads."
+        />
 
-    <title>Chapter 10: Index Options and Advanced Strategies | Series 7 Study Materials | Franklin Hugh Money</title>
+        <title>
+            Chapter 10: Index Options and Advanced Strategies | Series 7 Study Materials | Franklin Hugh Money
+        </title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
 
-    <link rel="stylesheet" href="../../assets/css/main.css?v=f6a3d80a">
-    <link rel="stylesheet" href="../../assets/css/sie-chapter.css?v=af51dc2a">
-    <script src="../../assets/js/night-mode.js"></script>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-</head>
-<body>
-    <header class="header" id="header">
-        <div class="header__inner">
-            <h1 class="header__title">Chapter 10: Index Options and Advanced Strategies</h1>
-            <nav class="breadcrumb">
-                <a href="../../index.html">Home</a>
-                <span>/</span>
-                <a href="series-7-study-materials.html">Series 7</a>
-                <span>/</span>
-                <span>Chapter 10</span>
-            </nav>
-        </div>
-        <div class="progress">
-            <div class="progress__bar" id="progress-bar"></div>
-        </div>
-    </header>
-
-    <main class="container">
-        <div class="chapter-meta">
-            <div class="chapter-meta__item">
-                <svg class="chapter-meta__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>~40 min read</span>
+        <link rel="stylesheet" href="../../assets/css/main.css?v=b3570edb" />
+        <link rel="stylesheet" href="../../assets/css/sie-chapter.css?v=6497aebd" />
+        <script src="../../assets/js/night-mode.js"></script>
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    </head>
+    <body>
+        <header class="header" id="header">
+            <div class="header__inner">
+                <h1 class="header__title">Chapter 10: Index Options and Advanced Strategies</h1>
+                <nav class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="series-7-study-materials.html">Series 7</a>
+                    <span>/</span>
+                    <span>Chapter 10</span>
+                </nav>
             </div>
-            <div class="chapter-meta__item">
-                <svg class="chapter-meta__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-                <span>~10-15 exam questions (8-12%)</span>
+            <div class="progress">
+                <div class="progress__bar" id="progress-bar"></div>
             </div>
-        </div>
+        </header>
 
-        <div class="intro">
-            <p>
-                In 1983, the CBOE introduced options on the S&P 100 index—the first cash-settled index option.
-                Instead of delivering 100 different stocks when exercised, the option simply paid out the
-                difference in cash. This innovation opened the door to portfolio hedging strategies.
-            </p>
-            <p>
-                This chapter covers index options and multi-leg strategies that bet on volatility or stability
-                rather than direction. Focus on understanding concepts rather than memorizing calculations.
-            </p>
-        </div>
-
-        <nav class="toc">
-            <h2 class="toc__title">In This Chapter</h2>
-            <ul class="toc__list">
-                <li class="toc__item">
-                    <a href="#section-1" class="toc__link">
-                        <span class="toc__number">01</span>
-                        Index Options
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#section-2" class="toc__link">
-                        <span class="toc__number">02</span>
-                        VIX, Interest Rate Index, and Currency Options
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#section-3" class="toc__link">
-                        <span class="toc__number">03</span>
-                        Straddles and Combinations
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#section-4" class="toc__link">
-                        <span class="toc__number">04</span>
-                        Spreads
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#glossary" class="toc__link">
-                        <span class="toc__number">05</span>
-                        Key Terms Glossary
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Section 1: Index Options -->
-        <section id="section-1">
-            <h2>Section 1: Index Options</h2>
-
-            <h3>Popular Index Options</h3>
-            <ul>
-                <li><strong>SPX:</strong> S&P 500 Index (500 largest companies)</li>
-                <li><strong>OEX:</strong> S&P 100 Index (100 stocks from S&P 500)</li>
-                <li><strong>DJX:</strong> Dow Jones Industrial Average (30 stocks)</li>
-            </ul>
-
-            <h3>Key Characteristics</h3>
-            <div class="critical-concept">
-                <div class="critical-concept__label">Index Options vs. Equity Options</div>
-                <ul>
-                    <li><strong>Cash settlement:</strong> No stock delivery; pay the in-the-money amount</li>
-                    <li><strong>Multiplier:</strong> $100 (same as equity options)</li>
-                    <li><strong>No adjustment:</strong> Splits/dividends don't affect index options</li>
-                    <li><strong>European style:</strong> Most index options (except OEX)</li>
-                </ul>
+        <main class="container">
+            <div class="chapter-meta">
+                <div class="chapter-meta__item">
+                    <svg
+                        class="chapter-meta__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                    </svg>
+                    <span>~40 min read</span>
+                </div>
+                <div class="chapter-meta__item">
+                    <svg
+                        class="chapter-meta__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                        />
+                    </svg>
+                    <span>~10-15 exam questions (8-12%)</span>
+                </div>
             </div>
 
-            <h3>Beta and Hedging</h3>
-            <p>
-                <span class="key-term">Beta</span> measures volatility relative to the market. A beta of 1
-                means the portfolio moves with the market. Beta of 2 means twice as volatile.
-            </p>
-
-            <div class="info-box">
-                <div class="info-box__title">Hedging with Index Options</div>
-                <ul>
-                    <li>Can hedge <strong>systematic risk</strong> (market risk)</li>
-                    <li>Cannot hedge <strong>nonsystematic risk</strong> (company-specific risk)</li>
-                    <li>Higher beta = need more contracts to hedge</li>
-                </ul>
-            </div>
-
-            <h3>ETF Options</h3>
-            <p>
-                ETF options differ from index options: they're American style and settle in ETF shares
-                (not cash). They can also hedge systematic risk.
-            </p>
-
-            <div class="comparison-table">
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>Index Option</th>
-                        <th>ETF Option</th>
-                    </tr>
-                    <tr>
-                        <td>Settlement</td>
-                        <td>Cash</td>
-                        <td>Shares</td>
-                    </tr>
-                    <tr>
-                        <td>Style</td>
-                        <td>Mostly European</td>
-                        <td>American</td>
-                    </tr>
-                    <tr>
-                        <td>When Settled</td>
-                        <td>a.m.</td>
-                        <td>p.m.</td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">Section 1 Key Points</div>
-                <table>
-                    <tr>
-                        <th>Topic</th>
-                        <th>Key Details</th>
-                    </tr>
-                    <tr>
-                        <td>Index options</td>
-                        <td>Cash settlement; European style; hedge systematic risk</td>
-                    </tr>
-                    <tr>
-                        <td>ETF options</td>
-                        <td>Share settlement; American style</td>
-                    </tr>
-                    <tr>
-                        <td>Beta</td>
-                        <td>Volatility measure; affects number of contracts needed</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-
-        <!-- Section 2: VIX, Interest Rate, Currency -->
-        <section id="section-2">
-            <h2>Section 2: VIX, Interest Rate Index, and Currency Options</h2>
-
-            <h3>VIX (Volatility Index) Options</h3>
-            <p>
-                The <span class="key-term">VIX</span> is the "fear gauge"—it measures expected stock price
-                volatility over 30 days. VIX is <strong>negatively correlated</strong> to stock prices.
-            </p>
-
-            <div class="test-tip">
+            <div class="intro">
                 <p>
-                    <strong>Test Tip:</strong> If you think markets will RISE, buy VIX PUTS (fear falls).
-                    If you think markets will FALL, buy VIX CALLS (fear rises).
+                    In 1983, the CBOE introduced options on the S&P 100 index—the first cash-settled index option.
+                    Instead of delivering 100 different stocks when exercised, the option simply paid out the difference
+                    in cash. This innovation opened the door to portfolio hedging strategies.
+                </p>
+                <p>
+                    This chapter covers index options and multi-leg strategies that bet on volatility or stability
+                    rather than direction. Focus on understanding concepts rather than memorizing calculations.
                 </p>
             </div>
 
-            <h3>Interest Rate Index Options (TYX)</h3>
-            <p>
-                The TYX tracks 30-Year Treasury Bond Yield. Key point: premiums move with
-                <strong>interest rates</strong>, not bond prices.
-            </p>
-
-            <div class="info-box">
-                <div class="info-box__title">Interest Rate Hedging</div>
-                <ul>
-                    <li>Long Treasuries + rising rates = buy TYX calls to hedge</li>
-                    <li>Short Treasuries + falling rates = buy TYX puts to hedge</li>
+            <nav class="toc">
+                <h2 class="toc__title">In This Chapter</h2>
+                <ul class="toc__list">
+                    <li class="toc__item">
+                        <a href="#section-1" class="toc__link">
+                            <span class="toc__number">01</span>
+                            Index Options
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#section-2" class="toc__link">
+                            <span class="toc__number">02</span>
+                            VIX, Interest Rate Index, and Currency Options
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#section-3" class="toc__link">
+                            <span class="toc__number">03</span>
+                            Straddles and Combinations
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#section-4" class="toc__link">
+                            <span class="toc__number">04</span>
+                            Spreads
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#glossary" class="toc__link">
+                            <span class="toc__number">05</span>
+                            Key Terms Glossary
+                        </a>
+                    </li>
                 </ul>
-            </div>
+            </nav>
 
-            <h3>Foreign Currency Options</h3>
-            <p>
-                Currency options trade on the Philadelphia Stock Exchange (PHLX). They're European style
-                and settle in cash.
-            </p>
+            <!-- Section 1: Index Options -->
+            <section id="section-1">
+                <h2>Section 1: Index Options</h2>
 
-            <div class="critical-concept">
-                <div class="critical-concept__label">EPIC: Export Puts—Import Calls</div>
-                <p><strong>Exporters</strong> hedge against currency decline with long PUTS</p>
-                <p><strong>Importers</strong> hedge against currency rise with long CALLS</p>
-            </div>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">Section 2 Key Points</div>
-                <table>
-                    <tr>
-                        <th>Option Type</th>
-                        <th>Key Characteristic</th>
-                    </tr>
-                    <tr>
-                        <td>VIX</td>
-                        <td>Negatively correlated to stocks; "fear gauge"</td>
-                    </tr>
-                    <tr>
-                        <td>TYX</td>
-                        <td>Tracks yield movements; European style</td>
-                    </tr>
-                    <tr>
-                        <td>Currency</td>
-                        <td>PHLX; European style; Export puts/Import calls</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-
-        <!-- Section 3: Straddles and Combinations -->
-        <section id="section-3">
-            <h2>Section 3: Straddles and Combinations</h2>
-
-            <p>
-                Straddles and combinations bet on volatility or stability rather than direction.
-            </p>
-
-            <h3>Long Straddle = Long Call + Long Put</h3>
-            <p>
-                Same strike price and expiration. The investor <strong>wants volatility</strong>—profits
-                if market moves significantly in either direction. Pays double premium.
-            </p>
-
-            <h3>Short Straddle = Short Call + Short Put</h3>
-            <p>
-                Same strike price and expiration. The investor <strong>wants stability</strong>—profits
-                if market stays flat. Receives double premium.
-            </p>
-
-            <div class="comparison-table">
-                <table>
-                    <tr>
-                        <th>Strategy</th>
-                        <th>Components</th>
-                        <th>Market View</th>
-                    </tr>
-                    <tr>
-                        <td>Long Straddle</td>
-                        <td>Long Call + Long Put</td>
-                        <td>Expects big move (volatile)</td>
-                    </tr>
-                    <tr>
-                        <td>Short Straddle</td>
-                        <td>Short Call + Short Put</td>
-                        <td>Expects stability (flat)</td>
-                    </tr>
-                </table>
-            </div>
-
-            <h3>Combinations (Strangles)</h3>
-            <p>
-                Same as straddles but with <strong>different strike prices or expirations</strong>.
-                A "strangle" typically uses out-of-the-money options (lower premium, needs bigger move).
-            </p>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">Section 3 Key Points</div>
-                <table>
-                    <tr>
-                        <th>Strategy</th>
-                        <th>Key Characteristic</th>
-                    </tr>
-                    <tr>
-                        <td>Long Straddle</td>
-                        <td>Buy volatility; same strike/expiration</td>
-                    </tr>
-                    <tr>
-                        <td>Short Straddle</td>
-                        <td>Sell volatility; same strike/expiration</td>
-                    </tr>
-                    <tr>
-                        <td>Combination</td>
-                        <td>Different strike or expiration</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-
-        <!-- Section 4: Spreads -->
-        <section id="section-4">
-            <h2>Section 4: Spreads</h2>
-
-            <p>
-                Spreads involve buying one option and selling another of the same type. They offer
-                limited-gain/limited-loss wagers that are moderately bullish or bearish.
-            </p>
-
-            <h3>Types of Spreads</h3>
-            <ul>
-                <li><strong>Call spread:</strong> Buy a call + sell a call</li>
-                <li><strong>Put spread:</strong> Buy a put + sell a put</li>
-            </ul>
-
-            <h3>Debit vs. Credit Spreads</h3>
-            <div class="comparison-table">
-                <table>
-                    <tr>
-                        <th>Spread Type</th>
-                        <th>Position</th>
-                        <th>Market Bias</th>
-                    </tr>
-                    <tr>
-                        <td>Debit Call</td>
-                        <td>Net buyer of calls</td>
-                        <td>Bullish</td>
-                    </tr>
-                    <tr>
-                        <td>Credit Call</td>
-                        <td>Net seller of calls</td>
-                        <td>Bearish</td>
-                    </tr>
-                    <tr>
-                        <td>Debit Put</td>
-                        <td>Net buyer of puts</td>
-                        <td>Bearish</td>
-                    </tr>
-                    <tr>
-                        <td>Credit Put</td>
-                        <td>Net seller of puts</td>
-                        <td>Bullish</td>
-                    </tr>
-                </table>
-            </div>
-
-            <h3>Spread Classifications</h3>
-            <div class="info-box">
-                <div class="info-box__title">By Strike/Expiration Differences</div>
+                <h3>Popular Index Options</h3>
                 <ul>
-                    <li><strong>Vertical (Price):</strong> Different strike prices, same expiration</li>
-                    <li><strong>Horizontal (Calendar/Time):</strong> Same strike, different expirations</li>
-                    <li><strong>Diagonal:</strong> Different strikes AND expirations</li>
+                    <li><strong>SPX:</strong> S&P 500 Index (500 largest companies)</li>
+                    <li><strong>OEX:</strong> S&P 100 Index (100 stocks from S&P 500)</li>
+                    <li><strong>DJX:</strong> Dow Jones Industrial Average (30 stocks)</li>
                 </ul>
+
+                <h3>Key Characteristics</h3>
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Index Options vs. Equity Options</div>
+                    <ul>
+                        <li><strong>Cash settlement:</strong> No stock delivery; pay the in-the-money amount</li>
+                        <li><strong>Multiplier:</strong> $100 (same as equity options)</li>
+                        <li><strong>No adjustment:</strong> Splits/dividends don't affect index options</li>
+                        <li><strong>European style:</strong> Most index options (except OEX)</li>
+                    </ul>
+                </div>
+
+                <h3>Beta and Hedging</h3>
+                <p>
+                    <span class="key-term">Beta</span> measures volatility relative to the market. A beta of 1 means the
+                    portfolio moves with the market. Beta of 2 means twice as volatile.
+                </p>
+
+                <div class="info-box">
+                    <div class="info-box__title">Hedging with Index Options</div>
+                    <ul>
+                        <li>Can hedge <strong>systematic risk</strong> (market risk)</li>
+                        <li>Cannot hedge <strong>nonsystematic risk</strong> (company-specific risk)</li>
+                        <li>Higher beta = need more contracts to hedge</li>
+                    </ul>
+                </div>
+
+                <h3>ETF Options</h3>
+                <p>
+                    ETF options differ from index options: they're American style and settle in ETF shares (not cash).
+                    They can also hedge systematic risk.
+                </p>
+
+                <div class="comparison-table">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Index Option</th>
+                            <th>ETF Option</th>
+                        </tr>
+                        <tr>
+                            <td>Settlement</td>
+                            <td>Cash</td>
+                            <td>Shares</td>
+                        </tr>
+                        <tr>
+                            <td>Style</td>
+                            <td>Mostly European</td>
+                            <td>American</td>
+                        </tr>
+                        <tr>
+                            <td>When Settled</td>
+                            <td>a.m.</td>
+                            <td>p.m.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Section 1 Key Points</div>
+                    <table>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Key Details</th>
+                        </tr>
+                        <tr>
+                            <td>Index options</td>
+                            <td>Cash settlement; European style; hedge systematic risk</td>
+                        </tr>
+                        <tr>
+                            <td>ETF options</td>
+                            <td>Share settlement; American style</td>
+                        </tr>
+                        <tr>
+                            <td>Beta</td>
+                            <td>Volatility measure; affects number of contracts needed</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 2: VIX, Interest Rate, Currency -->
+            <section id="section-2">
+                <h2>Section 2: VIX, Interest Rate Index, and Currency Options</h2>
+
+                <h3>VIX (Volatility Index) Options</h3>
+                <p>
+                    The <span class="key-term">VIX</span> is the "fear gauge"—it measures expected stock price
+                    volatility over 30 days. VIX is <strong>negatively correlated</strong> to stock prices.
+                </p>
+
+                <div class="test-tip">
+                    <p>
+                        <strong>Test Tip:</strong> If you think markets will RISE, buy VIX PUTS (fear falls). If you
+                        think markets will FALL, buy VIX CALLS (fear rises).
+                    </p>
+                </div>
+
+                <h3>Interest Rate Index Options (TYX)</h3>
+                <p>
+                    The TYX tracks 30-Year Treasury Bond Yield. Key point: premiums move with
+                    <strong>interest rates</strong>, not bond prices.
+                </p>
+
+                <div class="info-box">
+                    <div class="info-box__title">Interest Rate Hedging</div>
+                    <ul>
+                        <li>Long Treasuries + rising rates = buy TYX calls to hedge</li>
+                        <li>Short Treasuries + falling rates = buy TYX puts to hedge</li>
+                    </ul>
+                </div>
+
+                <h3>Foreign Currency Options</h3>
+                <p>
+                    Currency options trade on the Philadelphia Stock Exchange (PHLX). They're European style and settle
+                    in cash.
+                </p>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">EPIC: Export Puts—Import Calls</div>
+                    <p><strong>Exporters</strong> hedge against currency decline with long PUTS</p>
+                    <p><strong>Importers</strong> hedge against currency rise with long CALLS</p>
+                </div>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Section 2 Key Points</div>
+                    <table>
+                        <tr>
+                            <th>Option Type</th>
+                            <th>Key Characteristic</th>
+                        </tr>
+                        <tr>
+                            <td>VIX</td>
+                            <td>Negatively correlated to stocks; "fear gauge"</td>
+                        </tr>
+                        <tr>
+                            <td>TYX</td>
+                            <td>Tracks yield movements; European style</td>
+                        </tr>
+                        <tr>
+                            <td>Currency</td>
+                            <td>PHLX; European style; Export puts/Import calls</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 3: Straddles and Combinations -->
+            <section id="section-3">
+                <h2>Section 3: Straddles and Combinations</h2>
+
+                <p>Straddles and combinations bet on volatility or stability rather than direction.</p>
+
+                <h3>Long Straddle = Long Call + Long Put</h3>
+                <p>
+                    Same strike price and expiration. The investor <strong>wants volatility</strong>—profits if market
+                    moves significantly in either direction. Pays double premium.
+                </p>
+
+                <h3>Short Straddle = Short Call + Short Put</h3>
+                <p>
+                    Same strike price and expiration. The investor <strong>wants stability</strong>—profits if market
+                    stays flat. Receives double premium.
+                </p>
+
+                <div class="comparison-table">
+                    <table>
+                        <tr>
+                            <th>Strategy</th>
+                            <th>Components</th>
+                            <th>Market View</th>
+                        </tr>
+                        <tr>
+                            <td>Long Straddle</td>
+                            <td>Long Call + Long Put</td>
+                            <td>Expects big move (volatile)</td>
+                        </tr>
+                        <tr>
+                            <td>Short Straddle</td>
+                            <td>Short Call + Short Put</td>
+                            <td>Expects stability (flat)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Combinations (Strangles)</h3>
+                <p>
+                    Same as straddles but with <strong>different strike prices or expirations</strong>. A "strangle"
+                    typically uses out-of-the-money options (lower premium, needs bigger move).
+                </p>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Section 3 Key Points</div>
+                    <table>
+                        <tr>
+                            <th>Strategy</th>
+                            <th>Key Characteristic</th>
+                        </tr>
+                        <tr>
+                            <td>Long Straddle</td>
+                            <td>Buy volatility; same strike/expiration</td>
+                        </tr>
+                        <tr>
+                            <td>Short Straddle</td>
+                            <td>Sell volatility; same strike/expiration</td>
+                        </tr>
+                        <tr>
+                            <td>Combination</td>
+                            <td>Different strike or expiration</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 4: Spreads -->
+            <section id="section-4">
+                <h2>Section 4: Spreads</h2>
+
+                <p>
+                    Spreads involve buying one option and selling another of the same type. They offer
+                    limited-gain/limited-loss wagers that are moderately bullish or bearish.
+                </p>
+
+                <h3>Types of Spreads</h3>
+                <ul>
+                    <li><strong>Call spread:</strong> Buy a call + sell a call</li>
+                    <li><strong>Put spread:</strong> Buy a put + sell a put</li>
+                </ul>
+
+                <h3>Debit vs. Credit Spreads</h3>
+                <div class="comparison-table">
+                    <table>
+                        <tr>
+                            <th>Spread Type</th>
+                            <th>Position</th>
+                            <th>Market Bias</th>
+                        </tr>
+                        <tr>
+                            <td>Debit Call</td>
+                            <td>Net buyer of calls</td>
+                            <td>Bullish</td>
+                        </tr>
+                        <tr>
+                            <td>Credit Call</td>
+                            <td>Net seller of calls</td>
+                            <td>Bearish</td>
+                        </tr>
+                        <tr>
+                            <td>Debit Put</td>
+                            <td>Net buyer of puts</td>
+                            <td>Bearish</td>
+                        </tr>
+                        <tr>
+                            <td>Credit Put</td>
+                            <td>Net seller of puts</td>
+                            <td>Bullish</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Spread Classifications</h3>
+                <div class="info-box">
+                    <div class="info-box__title">By Strike/Expiration Differences</div>
+                    <ul>
+                        <li><strong>Vertical (Price):</strong> Different strike prices, same expiration</li>
+                        <li><strong>Horizontal (Calendar/Time):</strong> Same strike, different expirations</li>
+                        <li><strong>Diagonal:</strong> Different strikes AND expirations</li>
+                    </ul>
+                </div>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Section 4 Key Points</div>
+                    <table>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Key Details</th>
+                        </tr>
+                        <tr>
+                            <td>Call spread</td>
+                            <td>Buy call + sell call</td>
+                        </tr>
+                        <tr>
+                            <td>Put spread</td>
+                            <td>Buy put + sell put</td>
+                        </tr>
+                        <tr>
+                            <td>Debit = Bull for calls</td>
+                            <td>Credit = Bull for puts</td>
+                        </tr>
+                        <tr>
+                            <td>Vertical</td>
+                            <td>Different strikes; Horizontal = different expirations</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Glossary -->
+            <section id="glossary">
+                <h2>Chapter 10 Key Terms Glossary</h2>
+
+                <div class="comparison-table">
+                    <table>
+                        <tr>
+                            <th>Term</th>
+                            <th>Definition</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Index option</strong></td>
+                            <td>Option on stock basket; cash settlement</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cash settlement</strong></td>
+                            <td>Pay in-the-money amount; no stock delivery</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Beta</strong></td>
+                            <td>Volatility relative to market</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Systematic risk</strong></td>
+                            <td>Market risk; can hedge with index options</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ETF option</strong></td>
+                            <td>Option on ETF; settles in shares</td>
+                        </tr>
+                        <tr>
+                            <td><strong>VIX</strong></td>
+                            <td>Volatility Index; "fear gauge"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TYX</strong></td>
+                            <td>30-Year Treasury yield index</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Long straddle</strong></td>
+                            <td>Long call + put; wants volatility</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Short straddle</strong></td>
+                            <td>Short call + put; wants stability</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Strangle</strong></td>
+                            <td>Combination with different strikes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Call spread</strong></td>
+                            <td>Buy call + sell call</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Put spread</strong></td>
+                            <td>Buy put + sell put</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Debit spread</strong></td>
+                            <td>Net cost; buyer of spread</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Credit spread</strong></td>
+                            <td>Net credit; seller of spread</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vertical spread</strong></td>
+                            <td>Different strikes; same expiration</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Horizontal spread</strong></td>
+                            <td>Same strike; different expirations</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p style="margin-top: var(--fh-space-2xl); font-style: italic; color: var(--fh-gray-600)">
+                    Chapter 10 completes your options knowledge for the Series 7 exam. These advanced strategies build
+                    on the fundamentals from Chapter 9.
+                </p>
+            </section>
+
+            <nav class="chapter-nav">
+                <a
+                    href="series-7-chapter-09-options-fundamentals.html"
+                    class="chapter-nav__link chapter-nav__link--prev"
+                >
+                    <span class="chapter-nav__label">Previous Chapter</span>
+                    <span class="chapter-nav__title">&larr; Chapter 9: Options Fundamentals</span>
+                </a>
+                <a
+                    href="series-7-chapter-11-individual-customer-accounts.html"
+                    class="chapter-nav__link chapter-nav__link--next"
+                >
+                    <span class="chapter-nav__label">Next Chapter</span>
+                    <span class="chapter-nav__title">Chapter 11: Individual Customer Accounts &rarr;</span>
+                </a>
+            </nav>
+        </main>
+
+        <footer class="footer">
+            <p class="footer__text">Franklin Hugh Money | Series 7 Study Materials</p>
+            <div class="footer__links">
+                <a href="series-7-study-materials.html">Series 7 Home</a>
+                <span>|</span>
+                <a href="../../index.html">FHM Home</a>
             </div>
+        </footer>
 
-            <div class="critical-concept">
-                <div class="critical-concept__label">Section 4 Key Points</div>
-                <table>
-                    <tr>
-                        <th>Topic</th>
-                        <th>Key Details</th>
-                    </tr>
-                    <tr>
-                        <td>Call spread</td>
-                        <td>Buy call + sell call</td>
-                    </tr>
-                    <tr>
-                        <td>Put spread</td>
-                        <td>Buy put + sell put</td>
-                    </tr>
-                    <tr>
-                        <td>Debit = Bull for calls</td>
-                        <td>Credit = Bull for puts</td>
-                    </tr>
-                    <tr>
-                        <td>Vertical</td>
-                        <td>Different strikes; Horizontal = different expirations</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
+        <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+        </button>
 
-        <!-- Glossary -->
-        <section id="glossary">
-            <h2>Chapter 10 Key Terms Glossary</h2>
+        <script>
+            const progressBar = document.getElementById('progress-bar');
+            const header = document.getElementById('header');
 
-            <div class="comparison-table">
-                <table>
-                    <tr>
-                        <th>Term</th>
-                        <th>Definition</th>
-                    </tr>
-                    <tr><td><strong>Index option</strong></td><td>Option on stock basket; cash settlement</td></tr>
-                    <tr><td><strong>Cash settlement</strong></td><td>Pay in-the-money amount; no stock delivery</td></tr>
-                    <tr><td><strong>Beta</strong></td><td>Volatility relative to market</td></tr>
-                    <tr><td><strong>Systematic risk</strong></td><td>Market risk; can hedge with index options</td></tr>
-                    <tr><td><strong>ETF option</strong></td><td>Option on ETF; settles in shares</td></tr>
-                    <tr><td><strong>VIX</strong></td><td>Volatility Index; "fear gauge"</td></tr>
-                    <tr><td><strong>TYX</strong></td><td>30-Year Treasury yield index</td></tr>
-                    <tr><td><strong>Long straddle</strong></td><td>Long call + put; wants volatility</td></tr>
-                    <tr><td><strong>Short straddle</strong></td><td>Short call + put; wants stability</td></tr>
-                    <tr><td><strong>Strangle</strong></td><td>Combination with different strikes</td></tr>
-                    <tr><td><strong>Call spread</strong></td><td>Buy call + sell call</td></tr>
-                    <tr><td><strong>Put spread</strong></td><td>Buy put + sell put</td></tr>
-                    <tr><td><strong>Debit spread</strong></td><td>Net cost; buyer of spread</td></tr>
-                    <tr><td><strong>Credit spread</strong></td><td>Net credit; seller of spread</td></tr>
-                    <tr><td><strong>Vertical spread</strong></td><td>Different strikes; same expiration</td></tr>
-                    <tr><td><strong>Horizontal spread</strong></td><td>Same strike; different expirations</td></tr>
-                </table>
-            </div>
-
-            <p style="margin-top: var(--fh-space-2xl); font-style: italic; color: var(--fh-gray-600);">
-                Chapter 10 completes your options knowledge for the Series 7 exam. These advanced strategies
-                build on the fundamentals from Chapter 9.
-            </p>
-        </section>
-
-        <nav class="chapter-nav">
-            <a href="series-7-chapter-09-options-fundamentals.html" class="chapter-nav__link chapter-nav__link--prev">
-                <span class="chapter-nav__label">Previous Chapter</span>
-                <span class="chapter-nav__title">&larr; Chapter 9: Options Fundamentals</span>
-            </a>
-            <a href="series-7-chapter-11-individual-customer-accounts.html" class="chapter-nav__link chapter-nav__link--next">
-                <span class="chapter-nav__label">Next Chapter</span>
-                <span class="chapter-nav__title">Chapter 11: Individual Customer Accounts &rarr;</span>
-            </a>
-        </nav>
-    </main>
-
-    <footer class="footer">
-        <p class="footer__text">Franklin Hugh Money | Series 7 Study Materials</p>
-        <div class="footer__links">
-            <a href="series-7-study-materials.html">Series 7 Home</a>
-            <span>|</span>
-            <a href="../../index.html">FHM Home</a>
-        </div>
-    </footer>
-
-    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
-    </button>
-
-    <script>
-        const progressBar = document.getElementById('progress-bar');
-        const header = document.getElementById('header');
-
-        function updateProgress() {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = (scrollTop / docHeight) * 100;
-            progressBar.style.width = progress + '%';
-            if (scrollTop > 50) {
-                header.classList.add('header--scrolled');
-            } else {
-                header.classList.remove('header--scrolled');
-            }
-        }
-
-        const backToTop = document.getElementById('back-to-top');
-        function toggleBackToTop() {
-            if (window.scrollY > 400) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        }
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        const tocLinks = document.querySelectorAll('.toc__link');
-        const sections = document.querySelectorAll('section[id]');
-
-        function updateTocActive() {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.scrollY >= sectionTop - 150) {
-                    current = section.getAttribute('id');
+            function updateProgress() {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (scrollTop / docHeight) * 100;
+                progressBar.style.width = progress + '%';
+                if (scrollTop > 50) {
+                    header.classList.add('header--scrolled');
+                } else {
+                    header.classList.remove('header--scrolled');
                 }
-            });
-            tocLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        }
+            }
 
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    updateProgress();
-                    toggleBackToTop();
-                    updateTocActive();
-                    ticking = false;
+            const backToTop = document.getElementById('back-to-top');
+            function toggleBackToTop() {
+                if (window.scrollY > 400) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            const tocLinks = document.querySelectorAll('.toc__link');
+            const sections = document.querySelectorAll('section[id]');
+
+            function updateTocActive() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
                 });
-                ticking = true;
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
             }
-        });
 
-        updateProgress();
-        toggleBackToTop();
-        updateTocActive();
-    </script>
-</body>
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        updateProgress();
+                        toggleBackToTop();
+                        updateTocActive();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            updateProgress();
+            toggleBackToTop();
+            updateTocActive();
+        </script>
+    </body>
 </html>

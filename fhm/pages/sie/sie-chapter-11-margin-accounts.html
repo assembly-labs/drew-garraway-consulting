@@ -1,623 +1,806 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-    <meta name="description" content="Chapter 11.1: Margin Accounts - SIE Exam Study Guide by Franklin Hugh Money">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+        <meta
+            name="description"
+            content="Chapter 11.1: Margin Accounts - SIE Exam Study Guide by Franklin Hugh Money"
+        />
 
-    <title>Chapter 11.1: Margin Accounts | SIE Study Materials | Franklin Hugh Money</title>
+        <title>Chapter 11.1: Margin Accounts | SIE Study Materials | Franklin Hugh Money</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
 
-    <!-- Shared Navigation Styles -->
-    <link rel="stylesheet" href="../../assets/css/main.css?v=f6a3d80a">
-    <link rel="stylesheet" href="../../assets/css/sie-chapter.css?v=af51dc2a">
-    <link rel="stylesheet" href="../../assets/css/sie-navigation.css?v=d0037e08">
-    <!-- Night Mode (5pm - 9am) -->
-    <script src="../../assets/js/night-mode.js"></script>
-</head>
-<body>
-    <header class="header">
-        <div class="header__inner">
-            <h1 class="header__title">Chapter 11.1: Margin Accounts</h1>
-            <nav class="breadcrumb">
-                <a href="../../index.html">Home</a>
-                <span>/</span>
-                <a href="sie-study-materials.html">SIE Study Materials</a>
-                <span>/</span>
-                <span>Chapter 11.1</span>
+        <!-- Shared Navigation Styles -->
+        <link rel="stylesheet" href="../../assets/css/main.css?v=b3570edb" />
+        <link rel="stylesheet" href="../../assets/css/sie-chapter.css?v=6497aebd" />
+        <link rel="stylesheet" href="../../assets/css/sie-navigation.css?v=d0037e08" />
+        <!-- Night Mode (5pm - 9am) -->
+        <script src="../../assets/js/night-mode.js"></script>
+    </head>
+    <body>
+        <header class="header">
+            <div class="header__inner">
+                <h1 class="header__title">Chapter 11.1: Margin Accounts</h1>
+                <nav class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="sie-study-materials.html">SIE Study Materials</a>
+                    <span>/</span>
+                    <span>Chapter 11.1</span>
+                </nav>
+            </div>
+            <div class="progress">
+                <div class="progress__bar"></div>
+            </div>
+        </header>
+
+        <main class="container">
+            <div class="intro">
+                <p>
+                    In October 1929, you could buy $10,000 worth of stock with just $1,000 cash. Brokers happily lent
+                    the other 90%. When the market crashed, those loans came due. Investors who couldn't meet their
+                    margin calls were forced to sell—at any price—which pushed stocks lower, triggering more margin
+                    calls, forcing more sales. The cascade turned a market correction into the Great Depression.
+                </p>
+                <p>
+                    That's why the Federal Reserve now sets the rules for borrowing to buy securities. The current
+                    answer to "how much can you borrow?" has been the same since 1974: 50%.
+                </p>
+            </div>
+
+            <!-- Audio Player: Listen Along -->
+            <div class="audio-player">
+                <div class="audio-player__header">
+                    <div class="audio-player__icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"
+                            />
+                        </svg>
+                    </div>
+                    <div class="audio-player__meta">
+                        <div class="audio-player__label">Listen Along</div>
+                        <h3 class="audio-player__title">Reg T Margin Rules and Leverage History</h3>
+                        <div class="audio-player__duration">34 min</div>
+                    </div>
+                </div>
+                <div class="audio-player__controls">
+                    <audio controls preload="metadata">
+                        <source
+                            src="../../assets/audio/chapters/ch11/Reg_T_Margin_Rules_and_Leverage_History.m4a"
+                            type="audio/mp4"
+                        />
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <p class="audio-player__description">
+                    Prefer listening? This podcast-style episode covers the same material as the chapter below.
+                    <a href="sie-audio-library.html">Browse all audio</a>
+                </p>
+            </div>
+
+            <nav class="toc">
+                <h2 class="toc__title">What We'll Cover</h2>
+                <ul class="toc__list">
+                    <li class="toc__item">
+                        <a href="#intro-margin" class="toc__link">
+                            <span class="toc__number">01</span>
+                            Introduction to Margin Accounts
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#reg-t-buying" class="toc__link">
+                            <span class="toc__number">02</span>
+                            Regulation T: Buying on Margin
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#reg-t-short" class="toc__link">
+                            <span class="toc__number">03</span>
+                            Regulation T: Selling Short on Margin
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#reg-t-cash" class="toc__link">
+                            <span class="toc__number">04</span>
+                            Regulation T for Cash Accounts
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#restricted-maintenance" class="toc__link">
+                            <span class="toc__number">05</span>
+                            Restricted Accounts &amp; Minimum Maintenance
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#opening-margin" class="toc__link">
+                            <span class="toc__number">06</span>
+                            Opening a Margin Account
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#summary" class="toc__link">
+                            <span class="toc__number">07</span>
+                            Summary &amp; Key Points
+                        </a>
+                    </li>
+                </ul>
             </nav>
-        </div>
-        <div class="progress">
-            <div class="progress__bar"></div>
-        </div>
-    </header>
 
-    <main class="container">
-        <div class="intro">
-            <p>
-                In October 1929, you could buy $10,000 worth of stock with just $1,000 cash. Brokers happily lent the other 90%. When the market crashed, those loans came due. Investors who couldn't meet their margin calls were forced to sell—at any price—which pushed stocks lower, triggering more margin calls, forcing more sales. The cascade turned a market correction into the Great Depression.
-            </p>
-            <p>
-                That's why the Federal Reserve now sets the rules for borrowing to buy securities. The current answer to "how much can you borrow?" has been the same since 1974: 50%.
-            </p>
-        </div>
+            <!-- SECTION 1: INTRODUCTION -->
+            <section id="intro-margin">
+                <h2>Introduction to Margin Accounts</h2>
 
-        <!-- Audio Player: Listen Along -->
-        <div class="audio-player">
-            <div class="audio-player__header">
-                <div class="audio-player__icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                    </svg>
-                </div>
-                <div class="audio-player__meta">
-                    <div class="audio-player__label">Listen Along</div>
-                    <h3 class="audio-player__title">Reg T Margin Rules and Leverage History</h3>
-                    <div class="audio-player__duration">34 min</div>
-                </div>
-            </div>
-            <div class="audio-player__controls">
-                <audio controls preload="metadata">
-                    <source src="../../assets/audio/chapters/ch11/Reg_T_Margin_Rules_and_Leverage_History.m4a" type="audio/mp4">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-            <p class="audio-player__description">
-                Prefer listening? This podcast-style episode covers the same material as the chapter below.
-                <a href="sie-audio-library.html">Browse all audio</a>
-            </p>
-        </div>
+                <p>
+                    Customers can open different types of accounts at a broker-dealer. In a
+                    <span class="key-term">cash account</span>, a customer must deposit 100% of the purchase price of a
+                    security. A <span class="key-term">margin account</span> allows a customer to borrow either money or
+                    securities from a broker-dealer.
+                </p>
 
-        <nav class="toc">
-            <h2 class="toc__title">What We'll Cover</h2>
-            <ul class="toc__list">
-                <li class="toc__item">
-                    <a href="#intro-margin" class="toc__link">
-                        <span class="toc__number">01</span>
-                        Introduction to Margin Accounts
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#reg-t-buying" class="toc__link">
-                        <span class="toc__number">02</span>
-                        Regulation T: Buying on Margin
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#reg-t-short" class="toc__link">
-                        <span class="toc__number">03</span>
-                        Regulation T: Selling Short on Margin
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#reg-t-cash" class="toc__link">
-                        <span class="toc__number">04</span>
-                        Regulation T for Cash Accounts
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#restricted-maintenance" class="toc__link">
-                        <span class="toc__number">05</span>
-                        Restricted Accounts &amp; Minimum Maintenance
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#opening-margin" class="toc__link">
-                        <span class="toc__number">06</span>
-                        Opening a Margin Account
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#summary" class="toc__link">
-                        <span class="toc__number">07</span>
-                        Summary &amp; Key Points
-                    </a>
-                </li>
-            </ul>
-        </nav>
+                <p>
+                    The rules for both cash and margin accounts are governed by the Federal Reserve under
+                    <span class="key-term">Regulation T (Reg T)</span>. There are also additional Financial Industry
+                    Regulatory Authority (FINRA) requirements for the opening and maintenance of margin accounts.
+                </p>
 
-        <!-- SECTION 1: INTRODUCTION -->
-        <section id="intro-margin">
-            <h2>Introduction to Margin Accounts</h2>
+                <p>
+                    A customer opens a margin account in order to borrow cash or securities from a broker-dealer. By
+                    borrowing, the investor is using <span class="key-term">leverage</span>. Leverage can provide
+                    greater returns but can also result in greater losses. Risks and returns are lower in a cash
+                    account, where the customer does not borrow money.
+                </p>
 
-            <p>
-                Customers can open different types of accounts at a broker-dealer. In a <span class="key-term">cash account</span>, a customer must deposit 100% of the purchase price of a security. A <span class="key-term">margin account</span> allows a customer to borrow either money or securities from a broker-dealer.
-            </p>
-
-            <p>
-                The rules for both cash and margin accounts are governed by the Federal Reserve under <span class="key-term">Regulation T (Reg T)</span>. There are also additional Financial Industry Regulatory Authority (FINRA) requirements for the opening and maintenance of margin accounts.
-            </p>
-
-            <p>
-                A customer opens a margin account in order to borrow cash or securities from a broker-dealer. By borrowing, the investor is using <span class="key-term">leverage</span>. Leverage can provide greater returns but can also result in greater losses. Risks and returns are lower in a cash account, where the customer does not borrow money.
-            </p>
-
-            <div class="comparison-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Account Type</th>
-                            <th>Borrowing</th>
-                            <th>Risk/Return</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Cash Account</strong></td>
-                            <td>No borrowing; pay 100%</td>
-                            <td>Lower risk, lower potential returns</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Margin Account</strong></td>
-                            <td>Can borrow up to 50%</td>
-                            <td>Higher risk, higher potential returns</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- SECTION 2: REG T BUYING -->
-        <section id="reg-t-buying">
-            <h2>Regulation T: Buying on Margin</h2>
-
-            <p>
-                <span class="key-term">Regulation T (Reg T)</span> is a Federal Reserve Board regulation that covers lending from broker-dealers to customers. It sets <span class="key-term">initial margin requirements</span> (the percentage of the security's purchase price that the customer must pay for with cash) for marginable securities.
-            </p>
-
-            <div class="historical-note">
-                <div class="historical-note__label">Historical Context</div>
-                <p>Before the Securities Exchange Act of 1934, margin requirements were set by individual exchanges—and they were shockingly low. In the 1920s, investors routinely bought stocks with 10% down. When the crash came, those undercapitalized positions collapsed like dominoes. Congress gave the Federal Reserve authority over margin requirements specifically to prevent another leverage-fueled catastrophe. The Fed experimented with different rates over the decades—it was 100% briefly in 1946—before settling on 50% in 1974, where it's remained ever since.</p>
-            </div>
-
-            <p>
-                Under Reg T, a broker-dealer may lend a customer up to 50% of the purchase price of a <span class="key-term">marginable security</span>.
-            </p>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">INITIAL MARGINS SET BY REG T</div>
                 <div class="comparison-table">
                     <table>
                         <thead>
                             <tr>
-                                <th>Item</th>
-                                <th>Long Position</th>
-                                <th>Short Position</th>
+                                <th>Account Type</th>
+                                <th>Borrowing</th>
+                                <th>Risk/Return</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Stocks and convertibles</strong></td>
-                                <td>50%</td>
-                                <td>50%</td>
+                                <td><strong>Cash Account</strong></td>
+                                <td>No borrowing; pay 100%</td>
+                                <td>Lower risk, lower potential returns</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Margin Account</strong></td>
+                                <td>Can borrow up to 50%</td>
+                                <td>Higher risk, higher potential returns</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </section>
 
-            <div class="info-box">
-                <div class="info-box__title">Example: Buying on Margin</div>
-                <p>A customer buys 200 shares of ABC (a New York Stock Exchange-listed stock) at $50 per share. Under Reg T, the <span class="key-term">initial margin requirement</span> is 50% of $10,000 = $5,000.</p>
-                <p>To purchase the stock in a margin account, the customer would be required to provide $5,000 and the broker-dealer would lend the customer the additional $5,000.</p>
-            </div>
+            <!-- SECTION 2: REG T BUYING -->
+            <section id="reg-t-buying">
+                <h2>Regulation T: Buying on Margin</h2>
 
-            <h3>Exempt Securities</h3>
+                <p>
+                    <span class="key-term">Regulation T (Reg T)</span> is a Federal Reserve Board regulation that covers
+                    lending from broker-dealers to customers. It sets
+                    <span class="key-term">initial margin requirements</span> (the percentage of the security's purchase
+                    price that the customer must pay for with cash) for marginable securities.
+                </p>
 
-            <p><span class="key-term">Exempt securities</span> are not covered under Reg T. The major exempt securities are:</p>
-            <ul>
-                <li>U.S. government securities</li>
-                <li>Agency issues</li>
-                <li>Municipal issues</li>
-                <li>Commercial paper</li>
-            </ul>
-
-            <p>The Federal Reserve has no power to set initial margins for these securities. However, these securities are marginable subject to <span class="key-term">minimum maintenance requirements</span> set by FINRA.</p>
-
-            <h3>Marginable vs. Non-Marginable Securities</h3>
-
-            <p>Not all securities can be purchased on margin. Nasdaq and all exchange-listed securities are marginable, as are U.S. government and municipal bonds. Over-the-counter (OTC) securities are allowed only if they are listed on the Federal Reserve <span class="key-term">marginable securities list</span>.</p>
-
-            <p>Newly issued securities cannot be purchased on margin until they have been publicly traded at least 30 days. Because mutual fund shares are always considered new shares, they cannot be purchased on margin. But once mutual fund shares have been held for 30 days, they can be used as collateral for a margin loan.</p>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">MARGINABLE AND NON-MARGINABLE SECURITIES</div>
-                <div class="comparison-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Category</th>
-                                <th>Securities</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Marginable</strong></td>
-                                <td>
-                                    <ul>
-                                        <li>Exchange-listed securities (Nasdaq, NYSE)</li>
-                                        <li>U.S. government securities</li>
-                                        <li>Investment-grade bonds and debentures</li>
-                                        <li>OTC securities on the Fed's marginable list</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Non-marginable</strong></td>
-                                <td>
-                                    <ul>
-                                        <li>New issues (publicly traded &lt; 30 days)</li>
-                                        <li>Mutual fund shares and variable annuities</li>
-                                        <li>Securities under $5 per share</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Margin securities</strong> (collateral)</td>
-                                <td>
-                                    <ul>
-                                        <li>Marginable securities</li>
-                                        <li>Mutual fund/UIT shares held 30+ days</li>
-                                        <li>Convertible debt convertible into margin security</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="historical-note">
+                    <div class="historical-note__label">Historical Context</div>
+                    <p>
+                        Before the Securities Exchange Act of 1934, margin requirements were set by individual
+                        exchanges—and they were shockingly low. In the 1920s, investors routinely bought stocks with 10%
+                        down. When the crash came, those undercapitalized positions collapsed like dominoes. Congress
+                        gave the Federal Reserve authority over margin requirements specifically to prevent another
+                        leverage-fueled catastrophe. The Fed experimented with different rates over the decades—it was
+                        100% briefly in 1946—before settling on 50% in 1974, where it's remained ever since.
+                    </p>
                 </div>
-            </div>
 
-            <h3>Minimum Deposit Requirement</h3>
+                <p>
+                    Under Reg T, a broker-dealer may lend a customer up to 50% of the purchase price of a
+                    <span class="key-term">marginable security</span>.
+                </p>
 
-            <p>Margin accounts have a minimum equity requirement of $2,000:</p>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">MINIMUM DEPOSIT RULES</div>
-                <div class="comparison-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Purchase Amount</th>
-                                <th>Deposit Required</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Less than $2,000</td>
-                                <td>100% of the purchase price</td>
-                            </tr>
-                            <tr>
-                                <td>$2,000 - $4,000</td>
-                                <td>$2,000</td>
-                            </tr>
-                            <tr>
-                                <td>Over $4,000</td>
-                                <td>50% (Reg T requirement)</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="critical-concept">
+                    <div class="critical-concept__label">INITIAL MARGINS SET BY REG T</div>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Long Position</th>
+                                    <th>Short Position</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Stocks and convertibles</strong></td>
+                                    <td>50%</td>
+                                    <td>50%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- SECTION 3: REG T SHORT SELLING -->
-        <section id="reg-t-short">
-            <h2>Regulation T: Selling Short on Margin</h2>
-
-            <p>
-                <span class="key-term">Short selling</span> is when an investor borrows securities from a broker-dealer, and then sells them. This can only be done in a margin account.
-            </p>
-
-            <div class="historical-note">
-                <div class="historical-note__label">Historical Context</div>
-                <p>Short selling has been controversial since the Dutch East India Company in the 1600s. During every market panic, someone blames the short sellers. After the 1929 crash, Congress considered banning the practice entirely. Instead, they opted for regulation. The logic for requiring margin on short sales is straightforward: when you short a stock, your potential loss is theoretically unlimited (the stock could rise forever), so the broker needs collateral to protect against that risk.</p>
-            </div>
-
-            <p>
-                A customer will use a short-selling strategy when they are bearish and believe that the price of the borrowed securities will fall. Their strategy is to sell the securities at the current high price, then buy the securities back at a cheaper price in the future. After they buy the shares at the hopefully lower price, they return them to the broker-dealer (<span class="key-term">covering</span> their short position).
-            </p>
-
-            <p>In summary:</p>
-            <ul>
-                <li><span class="key-term">Bullish investors</span> hope to buy low and sell high.</li>
-                <li><span class="key-term">Bearish investors</span> hope to sell high and buy low.</li>
-            </ul>
-
-            <p>The Reg T initial margin requirement is the same for buyers and short-sellers—<strong>50%</strong>.</p>
-
-            <div class="info-box">
-                <div class="info-box__title">Example: Short Selling</div>
-                <p>A customer shorts 1,000 shares of XYZ stock. XYZ is currently trading at $10 per share. Reg T requires that the customer deposit 50% of the value of the trade, or $5,000.</p>
-            </div>
-        </section>
-
-        <!-- SECTION 4: REG T FOR CASH ACCOUNTS -->
-        <section id="reg-t-cash">
-            <h2>Regulation T for Cash Accounts</h2>
-
-            <p>
-                Regulation T (Reg T) also applies to cash accounts. In a cash account, Reg T requires that the broker-dealer collect payment from the customer <span class="key-term">promptly</span>, which means no later than two business days after the settlement date.
-            </p>
-
-            <p>
-                In a stock trade, regular way settlement is one business day. So, Reg T requires payment by the customer within three business days after the trade (T+3), which is two business days after settlement (<span class="key-term">S+2</span>: Settlement + 2 business days).
-            </p>
-
-            <h3>Reg T Extension</h3>
-
-            <p>
-                If payment is not collected by S+2, under exceptional circumstances, the firm may ask FINRA for a <span class="key-term">Reg T extension</span>. If granted, this gives the customer another two business days (or longer if a special request is made) to pay.
-            </p>
-
-            <p>
-                If the customer does not pay on either "S+2" or the extension date, if one is granted, the firm is obligated to <span class="key-term">sell out</span> that position and <span class="key-term">freeze the account</span> for 90 days.
-            </p>
-
-            <p>
-                When an account is <span class="key-term">frozen</span>, the customer can still trade in the account. However, they can no longer borrow and must have 100% of the required cash to pay for the transaction. After 90 days, given that the customer complies, the freeze is removed.
-            </p>
-
-            <h3>Free-Riding</h3>
-
-            <p>
-                <span class="key-term">Free-riding</span> is the prohibited practice of buying securities without intending to pay for them, and then selling them on or before the settlement date to generate the cash needed to pay for the original purchase.
-            </p>
-
-            <div class="info-box">
-                <div class="info-box__title">Example: Free-Riding Violation</div>
-                <p>XYZ will be announcing quarterly earnings in two days. A customer believes the news will be positive and decides to buy 1,000 shares of XYZ at $50 per share. The customer does not have the $50,000 to pay for the stock but plans to sell the stock when the price rises.</p>
-                <p>The customer is trying to take a "free ride" by using the broker-dealer to buy the stock for them. Relying on money from the sale of stock to pay for the purchase of the same stock is a violation. The customer's account will be frozen for 90 days.</p>
-            </div>
-        </section>
-
-        <!-- SECTION 5: RESTRICTED AND MAINTENANCE -->
-        <section id="restricted-maintenance">
-            <h2>Restricted Margin Accounts and Minimum Maintenance</h2>
-
-            <p>
-                A <span class="key-term">restricted margin account</span> is where the equity in the customer's account has fallen below 50%. This happens when the value of the securities declines after purchase.
-            </p>
-
-            <h3>Calculating Equity</h3>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">EQUITY FORMULAS</div>
-                <p><strong>Equity Value</strong> = Market Value of Security − Amount Owed Broker</p>
-                <p><strong>Equity Percentage</strong> = Equity Value ÷ Market Value of the Security</p>
-            </div>
-
-            <div class="info-box">
-                <div class="info-box__title">Example: Calculating Equity</div>
-                <p>A customer buys $80,000 worth of stock in a margin account and deposits the required $40,000 initial margin requirement and borrows $40,000 from the broker-dealer. The next day, the stock's value declines to $60,000. How much equity does the customer now have?</p>
-                <p>The market value is $60,000. The customer owes the broker-dealer $40,000.</p>
-                <p>$60,000 − $40,000 = <strong>$20,000 of equity</strong></p>
-                <p>Equity percentage: $20,000 ÷ $60,000 = <strong>33.33%</strong></p>
-            </div>
-
-            <p>
-                Since the equity percentage has fallen below 50%, the account is now <span class="key-term">restricted</span>. But this restriction has little impact on the customer. They are not required to deposit any more money, the account is not frozen, and they can still buy more stock by depositing only 50% of the purchase price.
-            </p>
-
-            <h3>Minimum Maintenance Requirements</h3>
-
-            <p>
-                However, there are limits to how far the equity percentage can fall. These limits are the <span class="key-term">minimum maintenance requirements</span> set by FINRA.
-            </p>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">FINRA MINIMUM MAINTENANCE MARGIN</div>
-                <div class="comparison-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Position Type</th>
-                                <th>Long Position</th>
-                                <th>Short Position</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Stocks and convertibles</strong></td>
-                                <td>25%</td>
-                                <td>30%</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="info-box">
+                    <div class="info-box__title">Example: Buying on Margin</div>
+                    <p>
+                        A customer buys 200 shares of ABC (a New York Stock Exchange-listed stock) at $50 per share.
+                        Under Reg T, the <span class="key-term">initial margin requirement</span> is 50% of $10,000 =
+                        $5,000.
+                    </p>
+                    <p>
+                        To purchase the stock in a margin account, the customer would be required to provide $5,000 and
+                        the broker-dealer would lend the customer the additional $5,000.
+                    </p>
                 </div>
-            </div>
 
-            <div class="info-box">
-                <div class="info-box__title">Example: Long Position Maintenance</div>
-                <p>A customer has 200 shares of ABC stock at $50 in a long account. The minimum maintenance margin requirement is 25% of $10,000 = $2,500. The customer will be called for additional margin if the equity in the account drops below $2,500.</p>
-            </div>
+                <h3>Exempt Securities</h3>
 
-            <div class="info-box">
-                <div class="info-box__title">Example: Short Position Maintenance</div>
-                <p>A customer has sold 200 shares of ABC stock at $50 in a short account. The minimum maintenance margin requirement is 30% of $10,000 = $3,000. The customer will be called for additional margin if the equity in the account drops below $3,000.</p>
-            </div>
-
-            <p>Broker-dealers can, and usually do, establish more stringent (meaning higher) maintenance margin requirements than the 25% set by FINRA.</p>
-
-            <div class="test-tip">
-                <p><strong>Test-Taking Tip:</strong> For the purpose of the test, you will not be required to do any elaborate margin calculations. You will need to understand the basic requirements:</p>
-                <div class="comparison-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Requirement</th>
-                                <th>Long Stock</th>
-                                <th>Short Stock</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Regulation T initial margin</strong></td>
-                                <td>50%</td>
-                                <td>50%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>FINRA minimum maintenance</strong></td>
-                                <td>25%</td>
-                                <td>30%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <h3>Special Memorandum Account (SMA)</h3>
-
-            <p>
-                When a security that has been bought on margin increases in value, the equity in the account also increases. When the equity in a margin account rises over 50% of the market value, the amount over 50% is referred to as <span class="key-term">excess equity</span>. Excess equity is put into a <span class="key-term">special memorandum account (SMA)</span>.
-            </p>
-
-            <p>
-                Excess equity creates buying power of <strong>2 × SMA</strong> (since the initial margin requirement is 50%). This means the customer could use their $5,000 of excess equity to buy $10,000 of stock (meeting the 50% margin requirement). In addition, the SMA amount could be withdrawn from the account in cash. But note that this withdrawal would be considered a loan and added to the amount that the customer owes the broker-dealer.
-            </p>
-        </section>
-
-        <!-- SECTION 6: OPENING A MARGIN ACCOUNT -->
-        <section id="opening-margin">
-            <h2>Opening a Margin Account</h2>
-
-            <p>
-                To open a "cash" account, only the new account form is required. In a cash account, the customer agrees that they will pay in full for all purchases. To open a margin account, additional documentation is required.
-            </p>
-
-            <h3>The Margin Agreement</h3>
-
-            <p>
-                Prior to opening a margin account, the customer must sign a <span class="key-term">margin agreement</span>. The margin agreement sets the terms and conditions between the customer and broker-dealer.
-            </p>
-
-            <p>The agreement has three parts:</p>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">COMPONENTS OF THE MARGIN AGREEMENT</div>
-                <div class="comparison-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Component</th>
-                                <th>Purpose</th>
-                                <th>Required?</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Hypothecation Agreement</strong></td>
-                                <td>Customer pledges (hypothecates) securities to the brokerage firm as collateral. Firm holds securities in <span class="key-term">street name</span>. Allows broker-dealer to sell securities if account falls below minimum maintenance.</td>
-                                <td>Yes</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Credit Agreement</strong></td>
-                                <td>Sets terms and conditions of the loan. States that interest will be based on the broker loan rate (e.g., call loan rate + 2%).</td>
-                                <td>Yes</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Loan Consent Agreement</strong></td>
-                                <td>Allows broker-dealers to lend out a customer's margined securities to other customers for short-selling purposes.</td>
-                                <td>No (but typically included)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <p>
-                The firm also has the right to repledge (<span class="key-term">rehypothecate</span>) the securities to a bank to raise funds. The Federal Reserve controls lending by banks to broker-dealers under <span class="key-term">Regulation U (Reg U)</span>. Funds are borrowed from the bank by the brokerage firm at the <span class="key-term">broker's call</span> (or <span class="key-term">call loan rate</span>).
-            </p>
-
-            <div class="test-tip">
-                <p><strong>Test-Taking Tip:</strong> Borrowing between banks and brokers is covered under Reg U. Borrowing between brokers and their customers is covered under Reg T.</p>
-            </div>
-
-            <h3>Disclosure Requirements</h3>
-
-            <p>
-                Alongside the margin agreement, noninstitutional customers opening a margin account must be given a <span class="key-term">credit disclosure statement</span> as well as a <span class="key-term">margin risk disclosure statement</span> explaining the risks of margin trading. This disclosure must be redelivered to margin customers annually.
-            </p>
-
-            <div class="info-box">
-                <div class="info-box__title">Customer Signature Required</div>
-                <p>Unlike opening a standard cash account (where a signature is NOT required), the margin agreement must be signed by the customer at or prior to settlement of the first trade in the account.</p>
-            </div>
-        </section>
-
-        <!-- SUMMARY -->
-        <section id="summary">
-            <h2>Summary &amp; Key Points</h2>
-
-            <p>
-                Margin accounts allow customers to leverage their investments by borrowing from broker-dealers. While this can amplify returns, it also amplifies losses—and creates obligations that can force sales at the worst possible times.
-            </p>
-
-            <p>
-                The regulatory framework—Reg T for initial requirements, FINRA rules for maintenance—exists because of hard lessons learned in 1929 and since. Every percentage requirement you memorize for the exam represents a guardrail against the kind of cascading failures that can turn individual losses into systemic crises.
-            </p>
-
-            <div class="key-terms">
-                <h3>Margin Requirements</h3>
+                <p>
+                    <span class="key-term">Exempt securities</span> are not covered under Reg T. The major exempt
+                    securities are:
+                </p>
                 <ul>
-                    <li><strong>Cash account:</strong> Customer pays 100% of purchase price</li>
-                    <li><strong>Margin account:</strong> Customer can borrow up to 50% under Reg T</li>
-                    <li><strong>Initial margin (Reg T):</strong> 50% for both long and short positions</li>
-                    <li><strong>Minimum maintenance (FINRA):</strong> 25% long, 30% short</li>
-                    <li><strong>Minimum deposit:</strong> $2,000 for margin accounts</li>
+                    <li>U.S. government securities</li>
+                    <li>Agency issues</li>
+                    <li>Municipal issues</li>
+                    <li>Commercial paper</li>
                 </ul>
 
-                <h3>Cash Account Rules</h3>
+                <p>
+                    The Federal Reserve has no power to set initial margins for these securities. However, these
+                    securities are marginable subject to
+                    <span class="key-term">minimum maintenance requirements</span> set by FINRA.
+                </p>
+
+                <h3>Marginable vs. Non-Marginable Securities</h3>
+
+                <p>
+                    Not all securities can be purchased on margin. Nasdaq and all exchange-listed securities are
+                    marginable, as are U.S. government and municipal bonds. Over-the-counter (OTC) securities are
+                    allowed only if they are listed on the Federal Reserve
+                    <span class="key-term">marginable securities list</span>.
+                </p>
+
+                <p>
+                    Newly issued securities cannot be purchased on margin until they have been publicly traded at least
+                    30 days. Because mutual fund shares are always considered new shares, they cannot be purchased on
+                    margin. But once mutual fund shares have been held for 30 days, they can be used as collateral for a
+                    margin loan.
+                </p>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">MARGINABLE AND NON-MARGINABLE SECURITIES</div>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Securities</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Marginable</strong></td>
+                                    <td>
+                                        <ul>
+                                            <li>Exchange-listed securities (Nasdaq, NYSE)</li>
+                                            <li>U.S. government securities</li>
+                                            <li>Investment-grade bonds and debentures</li>
+                                            <li>OTC securities on the Fed's marginable list</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Non-marginable</strong></td>
+                                    <td>
+                                        <ul>
+                                            <li>New issues (publicly traded &lt; 30 days)</li>
+                                            <li>Mutual fund shares and variable annuities</li>
+                                            <li>Securities under $5 per share</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Margin securities</strong> (collateral)</td>
+                                    <td>
+                                        <ul>
+                                            <li>Marginable securities</li>
+                                            <li>Mutual fund/UIT shares held 30+ days</li>
+                                            <li>Convertible debt convertible into margin security</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <h3>Minimum Deposit Requirement</h3>
+
+                <p>Margin accounts have a minimum equity requirement of $2,000:</p>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">MINIMUM DEPOSIT RULES</div>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Purchase Amount</th>
+                                    <th>Deposit Required</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Less than $2,000</td>
+                                    <td>100% of the purchase price</td>
+                                </tr>
+                                <tr>
+                                    <td>$2,000 - $4,000</td>
+                                    <td>$2,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Over $4,000</td>
+                                    <td>50% (Reg T requirement)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: REG T SHORT SELLING -->
+            <section id="reg-t-short">
+                <h2>Regulation T: Selling Short on Margin</h2>
+
+                <p>
+                    <span class="key-term">Short selling</span> is when an investor borrows securities from a
+                    broker-dealer, and then sells them. This can only be done in a margin account.
+                </p>
+
+                <div class="historical-note">
+                    <div class="historical-note__label">Historical Context</div>
+                    <p>
+                        Short selling has been controversial since the Dutch East India Company in the 1600s. During
+                        every market panic, someone blames the short sellers. After the 1929 crash, Congress considered
+                        banning the practice entirely. Instead, they opted for regulation. The logic for requiring
+                        margin on short sales is straightforward: when you short a stock, your potential loss is
+                        theoretically unlimited (the stock could rise forever), so the broker needs collateral to
+                        protect against that risk.
+                    </p>
+                </div>
+
+                <p>
+                    A customer will use a short-selling strategy when they are bearish and believe that the price of the
+                    borrowed securities will fall. Their strategy is to sell the securities at the current high price,
+                    then buy the securities back at a cheaper price in the future. After they buy the shares at the
+                    hopefully lower price, they return them to the broker-dealer (<span class="key-term">covering</span>
+                    their short position).
+                </p>
+
+                <p>In summary:</p>
                 <ul>
-                    <li><strong>Reg T payment deadline:</strong> S+2 (settlement + 2 business days)</li>
-                    <li><strong>Frozen account:</strong> 90 days, must pay 100% cash for trades</li>
-                    <li><strong>Free-riding:</strong> Buying without intent to pay, using sale proceeds to cover purchase</li>
+                    <li><span class="key-term">Bullish investors</span> hope to buy low and sell high.</li>
+                    <li><span class="key-term">Bearish investors</span> hope to sell high and buy low.</li>
                 </ul>
 
-                <h3>Margin Account Setup</h3>
-                <ul>
-                    <li><strong>Margin agreement:</strong> Hypothecation (required), credit (required), loan consent (optional)</li>
-                    <li><strong>Customer signature:</strong> Required for margin accounts (unlike cash accounts)</li>
-                    <li><strong>Reg T:</strong> Broker-to-customer lending</li>
-                    <li><strong>Reg U:</strong> Bank-to-broker lending</li>
-                </ul>
+                <p>
+                    The Reg T initial margin requirement is the same for buyers and short-sellers—<strong>50%</strong>.
+                </p>
 
-                <h3>Key Terms</h3>
-                <ul>
-                    <li><strong>Regulation T:</strong> Federal Reserve rule governing broker-dealer lending to customers</li>
-                    <li><strong>Initial Margin:</strong> Percentage customer must deposit to purchase securities (50% for stocks)</li>
-                    <li><strong>Maintenance Margin:</strong> Minimum equity required to maintain a position (25% long, 30% short)</li>
-                    <li><strong>Street Name:</strong> Securities registered in the broker-dealer's name, not the customer's</li>
-                    <li><strong>Hypothecation:</strong> Pledging securities as collateral for a margin loan</li>
-                    <li><strong>Rehypothecation:</strong> Broker repledging customer securities to a bank</li>
-                    <li><strong>Short Selling:</strong> Selling borrowed securities, hoping to buy back at lower price</li>
-                    <li><strong>Covering:</strong> Buying securities to return borrowed shares and close short position</li>
-                    <li><strong>SMA:</strong> Special Memorandum Account holding excess equity</li>
-                    <li><strong>Call Loan Rate:</strong> Rate banks charge broker-dealers for margin funding</li>
-                </ul>
-            </div>
-        </section>
+                <div class="info-box">
+                    <div class="info-box__title">Example: Short Selling</div>
+                    <p>
+                        A customer shorts 1,000 shares of XYZ stock. XYZ is currently trading at $10 per share. Reg T
+                        requires that the customer deposit 50% of the value of the trade, or $5,000.
+                    </p>
+                </div>
+            </section>
 
-        <nav class="nav-links">
-            <a href="sie-chapter-10-section-2-suitability.html" class="nav-links__prev">
-                <span class="nav-links__label">Previous Chapter</span>
-                <span class="nav-links__title">Chapter 10.2: Suitability &amp; Account Maintenance</span>
-            </a>
-            <a href="sie-chapter-11-fiduciary-accounts.html" class="nav-links__next">
-                <span class="nav-links__label">Next Section</span>
-                <span class="nav-links__title">Chapter 11.2: Fiduciary Accounts</span>
-            </a>
-        </nav>
-    </main>
+            <!-- SECTION 4: REG T FOR CASH ACCOUNTS -->
+            <section id="reg-t-cash">
+                <h2>Regulation T for Cash Accounts</h2>
 
-    <footer class="footer">
-        <p>&copy; 2026 Franklin Hugh Money. For educational purposes only.</p>
-    </footer>
+                <p>
+                    Regulation T (Reg T) also applies to cash accounts. In a cash account, Reg T requires that the
+                    broker-dealer collect payment from the customer <span class="key-term">promptly</span>, which means
+                    no later than two business days after the settlement date.
+                </p>
 
-    <script src="../../assets/js/sie-chapter.js?v=6e062608"></script>
-    <script src="../../assets/js/audio-player.js"></script>
-</body>
+                <p>
+                    In a stock trade, regular way settlement is one business day. So, Reg T requires payment by the
+                    customer within three business days after the trade (T+3), which is two business days after
+                    settlement (<span class="key-term">S+2</span>: Settlement + 2 business days).
+                </p>
+
+                <h3>Reg T Extension</h3>
+
+                <p>
+                    If payment is not collected by S+2, under exceptional circumstances, the firm may ask FINRA for a
+                    <span class="key-term">Reg T extension</span>. If granted, this gives the customer another two
+                    business days (or longer if a special request is made) to pay.
+                </p>
+
+                <p>
+                    If the customer does not pay on either "S+2" or the extension date, if one is granted, the firm is
+                    obligated to <span class="key-term">sell out</span> that position and
+                    <span class="key-term">freeze the account</span> for 90 days.
+                </p>
+
+                <p>
+                    When an account is <span class="key-term">frozen</span>, the customer can still trade in the
+                    account. However, they can no longer borrow and must have 100% of the required cash to pay for the
+                    transaction. After 90 days, given that the customer complies, the freeze is removed.
+                </p>
+
+                <h3>Free-Riding</h3>
+
+                <p>
+                    <span class="key-term">Free-riding</span> is the prohibited practice of buying securities without
+                    intending to pay for them, and then selling them on or before the settlement date to generate the
+                    cash needed to pay for the original purchase.
+                </p>
+
+                <div class="info-box">
+                    <div class="info-box__title">Example: Free-Riding Violation</div>
+                    <p>
+                        XYZ will be announcing quarterly earnings in two days. A customer believes the news will be
+                        positive and decides to buy 1,000 shares of XYZ at $50 per share. The customer does not have the
+                        $50,000 to pay for the stock but plans to sell the stock when the price rises.
+                    </p>
+                    <p>
+                        The customer is trying to take a "free ride" by using the broker-dealer to buy the stock for
+                        them. Relying on money from the sale of stock to pay for the purchase of the same stock is a
+                        violation. The customer's account will be frozen for 90 days.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION 5: RESTRICTED AND MAINTENANCE -->
+            <section id="restricted-maintenance">
+                <h2>Restricted Margin Accounts and Minimum Maintenance</h2>
+
+                <p>
+                    A <span class="key-term">restricted margin account</span> is where the equity in the customer's
+                    account has fallen below 50%. This happens when the value of the securities declines after purchase.
+                </p>
+
+                <h3>Calculating Equity</h3>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">EQUITY FORMULAS</div>
+                    <p><strong>Equity Value</strong> = Market Value of Security − Amount Owed Broker</p>
+                    <p><strong>Equity Percentage</strong> = Equity Value ÷ Market Value of the Security</p>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-box__title">Example: Calculating Equity</div>
+                    <p>
+                        A customer buys $80,000 worth of stock in a margin account and deposits the required $40,000
+                        initial margin requirement and borrows $40,000 from the broker-dealer. The next day, the stock's
+                        value declines to $60,000. How much equity does the customer now have?
+                    </p>
+                    <p>The market value is $60,000. The customer owes the broker-dealer $40,000.</p>
+                    <p>$60,000 − $40,000 = <strong>$20,000 of equity</strong></p>
+                    <p>Equity percentage: $20,000 ÷ $60,000 = <strong>33.33%</strong></p>
+                </div>
+
+                <p>
+                    Since the equity percentage has fallen below 50%, the account is now
+                    <span class="key-term">restricted</span>. But this restriction has little impact on the customer.
+                    They are not required to deposit any more money, the account is not frozen, and they can still buy
+                    more stock by depositing only 50% of the purchase price.
+                </p>
+
+                <h3>Minimum Maintenance Requirements</h3>
+
+                <p>
+                    However, there are limits to how far the equity percentage can fall. These limits are the
+                    <span class="key-term">minimum maintenance requirements</span> set by FINRA.
+                </p>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">FINRA MINIMUM MAINTENANCE MARGIN</div>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Position Type</th>
+                                    <th>Long Position</th>
+                                    <th>Short Position</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Stocks and convertibles</strong></td>
+                                    <td>25%</td>
+                                    <td>30%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-box__title">Example: Long Position Maintenance</div>
+                    <p>
+                        A customer has 200 shares of ABC stock at $50 in a long account. The minimum maintenance margin
+                        requirement is 25% of $10,000 = $2,500. The customer will be called for additional margin if the
+                        equity in the account drops below $2,500.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-box__title">Example: Short Position Maintenance</div>
+                    <p>
+                        A customer has sold 200 shares of ABC stock at $50 in a short account. The minimum maintenance
+                        margin requirement is 30% of $10,000 = $3,000. The customer will be called for additional margin
+                        if the equity in the account drops below $3,000.
+                    </p>
+                </div>
+
+                <p>
+                    Broker-dealers can, and usually do, establish more stringent (meaning higher) maintenance margin
+                    requirements than the 25% set by FINRA.
+                </p>
+
+                <div class="test-tip">
+                    <p>
+                        <strong>Test-Taking Tip:</strong> For the purpose of the test, you will not be required to do
+                        any elaborate margin calculations. You will need to understand the basic requirements:
+                    </p>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Requirement</th>
+                                    <th>Long Stock</th>
+                                    <th>Short Stock</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Regulation T initial margin</strong></td>
+                                    <td>50%</td>
+                                    <td>50%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FINRA minimum maintenance</strong></td>
+                                    <td>25%</td>
+                                    <td>30%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <h3>Special Memorandum Account (SMA)</h3>
+
+                <p>
+                    When a security that has been bought on margin increases in value, the equity in the account also
+                    increases. When the equity in a margin account rises over 50% of the market value, the amount over
+                    50% is referred to as <span class="key-term">excess equity</span>. Excess equity is put into a
+                    <span class="key-term">special memorandum account (SMA)</span>.
+                </p>
+
+                <p>
+                    Excess equity creates buying power of <strong>2 × SMA</strong> (since the initial margin requirement
+                    is 50%). This means the customer could use their $5,000 of excess equity to buy $10,000 of stock
+                    (meeting the 50% margin requirement). In addition, the SMA amount could be withdrawn from the
+                    account in cash. But note that this withdrawal would be considered a loan and added to the amount
+                    that the customer owes the broker-dealer.
+                </p>
+            </section>
+
+            <!-- SECTION 6: OPENING A MARGIN ACCOUNT -->
+            <section id="opening-margin">
+                <h2>Opening a Margin Account</h2>
+
+                <p>
+                    To open a "cash" account, only the new account form is required. In a cash account, the customer
+                    agrees that they will pay in full for all purchases. To open a margin account, additional
+                    documentation is required.
+                </p>
+
+                <h3>The Margin Agreement</h3>
+
+                <p>
+                    Prior to opening a margin account, the customer must sign a
+                    <span class="key-term">margin agreement</span>. The margin agreement sets the terms and conditions
+                    between the customer and broker-dealer.
+                </p>
+
+                <p>The agreement has three parts:</p>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">COMPONENTS OF THE MARGIN AGREEMENT</div>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Component</th>
+                                    <th>Purpose</th>
+                                    <th>Required?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Hypothecation Agreement</strong></td>
+                                    <td>
+                                        Customer pledges (hypothecates) securities to the brokerage firm as collateral.
+                                        Firm holds securities in <span class="key-term">street name</span>. Allows
+                                        broker-dealer to sell securities if account falls below minimum maintenance.
+                                    </td>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Credit Agreement</strong></td>
+                                    <td>
+                                        Sets terms and conditions of the loan. States that interest will be based on the
+                                        broker loan rate (e.g., call loan rate + 2%).
+                                    </td>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Loan Consent Agreement</strong></td>
+                                    <td>
+                                        Allows broker-dealers to lend out a customer's margined securities to other
+                                        customers for short-selling purposes.
+                                    </td>
+                                    <td>No (but typically included)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <p>
+                    The firm also has the right to repledge (<span class="key-term">rehypothecate</span>) the securities
+                    to a bank to raise funds. The Federal Reserve controls lending by banks to broker-dealers under
+                    <span class="key-term">Regulation U (Reg U)</span>. Funds are borrowed from the bank by the
+                    brokerage firm at the <span class="key-term">broker's call</span> (or
+                    <span class="key-term">call loan rate</span>).
+                </p>
+
+                <div class="test-tip">
+                    <p>
+                        <strong>Test-Taking Tip:</strong> Borrowing between banks and brokers is covered under Reg U.
+                        Borrowing between brokers and their customers is covered under Reg T.
+                    </p>
+                </div>
+
+                <h3>Disclosure Requirements</h3>
+
+                <p>
+                    Alongside the margin agreement, noninstitutional customers opening a margin account must be given a
+                    <span class="key-term">credit disclosure statement</span> as well as a
+                    <span class="key-term">margin risk disclosure statement</span> explaining the risks of margin
+                    trading. This disclosure must be redelivered to margin customers annually.
+                </p>
+
+                <div class="info-box">
+                    <div class="info-box__title">Customer Signature Required</div>
+                    <p>
+                        Unlike opening a standard cash account (where a signature is NOT required), the margin agreement
+                        must be signed by the customer at or prior to settlement of the first trade in the account.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SUMMARY -->
+            <section id="summary">
+                <h2>Summary &amp; Key Points</h2>
+
+                <p>
+                    Margin accounts allow customers to leverage their investments by borrowing from broker-dealers.
+                    While this can amplify returns, it also amplifies losses—and creates obligations that can force
+                    sales at the worst possible times.
+                </p>
+
+                <p>
+                    The regulatory framework—Reg T for initial requirements, FINRA rules for maintenance—exists because
+                    of hard lessons learned in 1929 and since. Every percentage requirement you memorize for the exam
+                    represents a guardrail against the kind of cascading failures that can turn individual losses into
+                    systemic crises.
+                </p>
+
+                <div class="key-terms">
+                    <h3>Margin Requirements</h3>
+                    <ul>
+                        <li><strong>Cash account:</strong> Customer pays 100% of purchase price</li>
+                        <li><strong>Margin account:</strong> Customer can borrow up to 50% under Reg T</li>
+                        <li><strong>Initial margin (Reg T):</strong> 50% for both long and short positions</li>
+                        <li><strong>Minimum maintenance (FINRA):</strong> 25% long, 30% short</li>
+                        <li><strong>Minimum deposit:</strong> $2,000 for margin accounts</li>
+                    </ul>
+
+                    <h3>Cash Account Rules</h3>
+                    <ul>
+                        <li><strong>Reg T payment deadline:</strong> S+2 (settlement + 2 business days)</li>
+                        <li><strong>Frozen account:</strong> 90 days, must pay 100% cash for trades</li>
+                        <li>
+                            <strong>Free-riding:</strong> Buying without intent to pay, using sale proceeds to cover
+                            purchase
+                        </li>
+                    </ul>
+
+                    <h3>Margin Account Setup</h3>
+                    <ul>
+                        <li>
+                            <strong>Margin agreement:</strong> Hypothecation (required), credit (required), loan consent
+                            (optional)
+                        </li>
+                        <li>
+                            <strong>Customer signature:</strong> Required for margin accounts (unlike cash accounts)
+                        </li>
+                        <li><strong>Reg T:</strong> Broker-to-customer lending</li>
+                        <li><strong>Reg U:</strong> Bank-to-broker lending</li>
+                    </ul>
+
+                    <h3>Key Terms</h3>
+                    <ul>
+                        <li>
+                            <strong>Regulation T:</strong> Federal Reserve rule governing broker-dealer lending to
+                            customers
+                        </li>
+                        <li>
+                            <strong>Initial Margin:</strong> Percentage customer must deposit to purchase securities
+                            (50% for stocks)
+                        </li>
+                        <li>
+                            <strong>Maintenance Margin:</strong> Minimum equity required to maintain a position (25%
+                            long, 30% short)
+                        </li>
+                        <li>
+                            <strong>Street Name:</strong> Securities registered in the broker-dealer's name, not the
+                            customer's
+                        </li>
+                        <li><strong>Hypothecation:</strong> Pledging securities as collateral for a margin loan</li>
+                        <li><strong>Rehypothecation:</strong> Broker repledging customer securities to a bank</li>
+                        <li>
+                            <strong>Short Selling:</strong> Selling borrowed securities, hoping to buy back at lower
+                            price
+                        </li>
+                        <li>
+                            <strong>Covering:</strong> Buying securities to return borrowed shares and close short
+                            position
+                        </li>
+                        <li><strong>SMA:</strong> Special Memorandum Account holding excess equity</li>
+                        <li><strong>Call Loan Rate:</strong> Rate banks charge broker-dealers for margin funding</li>
+                    </ul>
+                </div>
+            </section>
+
+            <nav class="nav-links">
+                <a href="sie-chapter-10-section-2-suitability.html" class="nav-links__prev">
+                    <span class="nav-links__label">Previous Chapter</span>
+                    <span class="nav-links__title">Chapter 10.2: Suitability &amp; Account Maintenance</span>
+                </a>
+                <a href="sie-chapter-11-fiduciary-accounts.html" class="nav-links__next">
+                    <span class="nav-links__label">Next Section</span>
+                    <span class="nav-links__title">Chapter 11.2: Fiduciary Accounts</span>
+                </a>
+            </nav>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Franklin Hugh Money. For educational purposes only.</p>
+        </footer>
+
+        <script src="../../assets/js/sie-chapter.js?v=6e062608"></script>
+        <script src="../../assets/js/audio-player.js"></script>
+    </body>
 </html>

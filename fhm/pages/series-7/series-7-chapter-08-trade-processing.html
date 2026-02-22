@@ -1,585 +1,685 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-    <meta name="description" content="Chapter 8: Trade Processing and Settlement - Series 7 Exam Study Guide. Covers order tickets, prohibited practices, trade reporting, clearing, settlement, and distribution dates.">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+        <meta
+            name="description"
+            content="Chapter 8: Trade Processing and Settlement - Series 7 Exam Study Guide. Covers order tickets, prohibited practices, trade reporting, clearing, settlement, and distribution dates."
+        />
 
-    <title>Chapter 8: Trade Processing and Settlement | Series 7 Study Materials | Franklin Hugh Money</title>
+        <title>Chapter 8: Trade Processing and Settlement | Series 7 Study Materials | Franklin Hugh Money</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
 
-    <link rel="stylesheet" href="../../assets/css/main.css?v=f6a3d80a">
-    <link rel="stylesheet" href="../../assets/css/sie-chapter.css?v=af51dc2a">
-    <script src="../../assets/js/night-mode.js"></script>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-</head>
-<body>
-    <header class="header" id="header">
-        <div class="header__inner">
-            <h1 class="header__title">Chapter 8: Trade Processing and Settlement</h1>
-            <nav class="breadcrumb">
-                <a href="../../index.html">Home</a>
-                <span>/</span>
-                <a href="series-7-study-materials.html">Series 7</a>
-                <span>/</span>
-                <span>Chapter 8</span>
-            </nav>
-        </div>
-        <div class="progress">
-            <div class="progress__bar" id="progress-bar"></div>
-        </div>
-    </header>
-
-    <main class="container">
-        <div class="chapter-meta">
-            <div class="chapter-meta__item">
-                <svg class="chapter-meta__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>~35 min read</span>
+        <link rel="stylesheet" href="../../assets/css/main.css?v=b3570edb" />
+        <link rel="stylesheet" href="../../assets/css/sie-chapter.css?v=6497aebd" />
+        <script src="../../assets/js/night-mode.js"></script>
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    </head>
+    <body>
+        <header class="header" id="header">
+            <div class="header__inner">
+                <h1 class="header__title">Chapter 8: Trade Processing and Settlement</h1>
+                <nav class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="series-7-study-materials.html">Series 7</a>
+                    <span>/</span>
+                    <span>Chapter 8</span>
+                </nav>
             </div>
-            <div class="chapter-meta__item">
-                <svg class="chapter-meta__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-                <span>~8-10 exam questions (6-8%)</span>
+            <div class="progress">
+                <div class="progress__bar" id="progress-bar"></div>
             </div>
-        </div>
+        </header>
 
-        <div class="intro">
-            <p>
-                In 1969, Wall Street nearly collapsed—not from a market crash, but from paperwork. Trading volume
-                had exploded, and back offices couldn't keep up. Firms had to close on Wednesdays just to process
-                the previous week's trades.
-            </p>
-            <p>
-                Today, most trades settle in one business day. But the rules governing how trades are documented,
-                what practices are prohibited, and how transactions are reported remain central to the Series 7 exam.
-            </p>
-        </div>
-
-        <!-- Audio Player: Listen Along -->
-        <div class="audio-player">
-            <div class="audio-player__header">
-                <div class="audio-player__icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor"/>
+        <main class="container">
+            <div class="chapter-meta">
+                <div class="chapter-meta__item">
+                    <svg
+                        class="chapter-meta__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
                     </svg>
+                    <span>~35 min read</span>
                 </div>
-                <div class="audio-player__meta">
-                    <div class="audio-player__label">Listen Along</div>
-                    <h3 class="audio-player__title">Trading Rules and Settlement Mechanics</h3>
-                    <div class="audio-player__duration">15 min</div>
+                <div class="chapter-meta__item">
+                    <svg
+                        class="chapter-meta__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                        />
+                    </svg>
+                    <span>~8-10 exam questions (6-8%)</span>
                 </div>
             </div>
-            <div class="audio-player__controls">
-                <audio controls preload="metadata">
-                    <source src="../../assets/audio/chapters/ch8/Trading_Rules_and_Settlement_Mechanics.m4a" type="audio/mp4">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-            <p class="audio-player__description">
-                Prefer listening? This podcast-style episode covers the same material - perfect for commutes or multitasking.
-                <a href="series-7-audio-library.html">Browse all audio</a>
-            </p>
-        </div>
 
-        <nav class="toc">
-            <h2 class="toc__title">In This Chapter</h2>
-            <ul class="toc__list">
-                <li class="toc__item">
-                    <a href="#section-1" class="toc__link">
-                        <span class="toc__number">01</span>
-                        Order Tickets, Prohibited Practices, and Trade Reporting
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#section-2" class="toc__link">
-                        <span class="toc__number">02</span>
-                        Trade Clearing and Settlement
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#section-3" class="toc__link">
-                        <span class="toc__number">03</span>
-                        Distribution Dates
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#glossary" class="toc__link">
-                        <span class="toc__number">04</span>
-                        Key Terms Glossary
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Section 1 -->
-        <section id="section-1">
-            <h2>Section 1: Order Tickets, Prohibited Practices, and Trade Reporting</h2>
-
-            <h3>Order Tickets</h3>
-            <p>
-                To place a customer order in the secondary market, a registered representative fills out an order
-                ticket electronically. The order ticket must specify: buy or sell, security name (ticker), order size,
-                duration (day or GTC), whether discretionary, execution price, solicited/unsolicited, manager approval,
-                and the representative's name.
-            </p>
-
-            <h4>Regulation SHO</h4>
-            <p>
-                Short sales are subject to SEC <span class="key-term">Regulation SHO</span>, which requires every
-                sell order be marked as long or short. If short, the securities to be borrowed must be located by
-                the broker before the sale.
-            </p>
-
-            <div class="test-tip">
+            <div class="intro">
                 <p>
-                    <strong>Test Tip:</strong> Regulators are especially concerned that discretionary accounts might
-                    be excessively traded (churned). Making a profit does not absolve the violation.
+                    In 1969, Wall Street nearly collapsed—not from a market crash, but from paperwork. Trading volume
+                    had exploded, and back offices couldn't keep up. Firms had to close on Wednesdays just to process
+                    the previous week's trades.
+                </p>
+                <p>
+                    Today, most trades settle in one business day. But the rules governing how trades are documented,
+                    what practices are prohibited, and how transactions are reported remain central to the Series 7
+                    exam.
                 </p>
             </div>
 
-            <h3>Prohibited Trading Practices</h3>
+            <!-- Audio Player: Listen Along -->
+            <div class="audio-player">
+                <div class="audio-player__header">
+                    <div class="audio-player__icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"
+                                fill="currentColor"
+                            />
+                        </svg>
+                    </div>
+                    <div class="audio-player__meta">
+                        <div class="audio-player__label">Listen Along</div>
+                        <h3 class="audio-player__title">Trading Rules and Settlement Mechanics</h3>
+                        <div class="audio-player__duration">15 min</div>
+                    </div>
+                </div>
+                <div class="audio-player__controls">
+                    <audio controls preload="metadata">
+                        <source
+                            src="../../assets/audio/chapters/ch8/Trading_Rules_and_Settlement_Mechanics.m4a"
+                            type="audio/mp4"
+                        />
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <p class="audio-player__description">
+                    Prefer listening? This podcast-style episode covers the same material - perfect for commutes or
+                    multitasking.
+                    <a href="series-7-audio-library.html">Browse all audio</a>
+                </p>
+            </div>
 
-            <h4>Best Execution</h4>
-            <p>
-                When executing an order, a firm must obtain the best outcome for the customer, considering price,
-                volatility, liquidity, size and type of transaction, number of markets checked, and accessibility
-                to markets.
-            </p>
-
-            <h4>Customer Orders Have Priority</h4>
-            <p>
-                The firm cannot give preference to its own orders over customer orders—this is called
-                <span class="key-term">trading ahead</span>.
-            </p>
-
-            <h4>Front Running</h4>
-            <p>
-                When a firm receives a large block order, it cannot <span class="key-term">front-run</span> by
-                placing the firm's orders ahead of the block.
-            </p>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">Market Manipulation Types</div>
-                <ul>
-                    <li><strong>Pump and dump:</strong> Trading pools inflate price, then sell</li>
-                    <li><strong>Wash trades / Painting the tape:</strong> Fictitious trades to create appearance of activity</li>
-                    <li><strong>Marking the close/open:</strong> Trading to affect closing/opening prices</li>
-                    <li><strong>Spoofing:</strong> Placing large orders to mislead, then canceling</li>
+            <nav class="toc">
+                <h2 class="toc__title">In This Chapter</h2>
+                <ul class="toc__list">
+                    <li class="toc__item">
+                        <a href="#section-1" class="toc__link">
+                            <span class="toc__number">01</span>
+                            Order Tickets, Prohibited Practices, and Trade Reporting
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#section-2" class="toc__link">
+                            <span class="toc__number">02</span>
+                            Trade Clearing and Settlement
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#section-3" class="toc__link">
+                            <span class="toc__number">03</span>
+                            Distribution Dates
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#glossary" class="toc__link">
+                            <span class="toc__number">04</span>
+                            Key Terms Glossary
+                        </a>
+                    </li>
                 </ul>
-            </div>
+            </nav>
 
-            <h3>Trade Reporting</h3>
+            <!-- Section 1 -->
+            <section id="section-1">
+                <h2>Section 1: Order Tickets, Prohibited Practices, and Trade Reporting</h2>
 
-            <p>
-                Trades in listed securities must be reported to the consolidated tape. OTC equity trades must
-                be reported within 10 seconds; bond trades within 15 minutes.
-            </p>
-
-            <div class="comparison-table">
-                <table>
-                    <tr>
-                        <th>System</th>
-                        <th>Securities Covered</th>
-                    </tr>
-                    <tr>
-                        <td><strong>TRACE</strong></td>
-                        <td>Corporate bonds and other OTC debt</td>
-                    </tr>
-                    <tr>
-                        <td><strong>RTRS</strong></td>
-                        <td>Municipal securities</td>
-                    </tr>
-                    <tr>
-                        <td><strong>EMMA</strong></td>
-                        <td>Municipal market information access</td>
-                    </tr>
-                    <tr>
-                        <td><strong>ADF</strong></td>
-                        <td>Alternative Display Facility for OTC listed securities</td>
-                    </tr>
-                    <tr>
-                        <td><strong>ORF</strong></td>
-                        <td>OTC Reporting Facility for unlisted securities</td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">Section 1 Key Points</div>
-                <table>
-                    <tr>
-                        <th>Topic</th>
-                        <th>Key Details</th>
-                    </tr>
-                    <tr>
-                        <td>Order tickets</td>
-                        <td>Required information, Reg SHO for short sales</td>
-                    </tr>
-                    <tr>
-                        <td>Prohibited practices</td>
-                        <td>Front running, trading ahead, wash trades, spoofing</td>
-                    </tr>
-                    <tr>
-                        <td>Trade reporting</td>
-                        <td>TRACE (bonds), RTRS/EMMA (munis), 10-15 sec/min deadlines</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-
-        <!-- Section 2 -->
-        <section id="section-2">
-            <h2>Section 2: Trade Clearing and Settlement</h2>
-
-            <p>
-                After a trade is executed, it must be cleared and settled. Clearing involves ensuring both parties
-                agree on terms. Settlement is the exchange of cash for securities.
-            </p>
-
-            <h3>Key Players in Clearing</h3>
-
-            <div class="comparison-table">
-                <table>
-                    <tr>
-                        <th>Entity</th>
-                        <th>Role</th>
-                    </tr>
-                    <tr>
-                        <td><strong>DTC</strong></td>
-                        <td>Depository Trust Company - holds securities in book-entry form</td>
-                    </tr>
-                    <tr>
-                        <td><strong>NSCC</strong></td>
-                        <td>National Securities Clearing Corporation - matches and clears trades</td>
-                    </tr>
-                    <tr>
-                        <td><strong>OCC</strong></td>
-                        <td>Options Clearing Corporation - clears options trades</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Clearing firm</strong></td>
-                        <td>Handles settlement, custody, financing</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Introducing firm</strong></td>
-                        <td>Takes orders, relies on clearing firm for back office</td>
-                    </tr>
-                </table>
-            </div>
-
-            <h3>Settlement Types</h3>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">Settlement Timelines</div>
-                <table>
-                    <tr>
-                        <th>Type</th>
-                        <th>Timeline</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Regular way (T+1)</strong></td>
-                        <td>Next business day - stocks, bonds, ETFs, options</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cash settlement</strong></td>
-                        <td>Same day - trades before 2:30 PM ET</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Seller's option</strong></td>
-                        <td>Seller needs more time to deliver</td>
-                    </tr>
-                    <tr>
-                        <td><strong>When issued</strong></td>
-                        <td>New securities not yet available</td>
-                    </tr>
-                </table>
-            </div>
-
-            <h3>Good Delivery Requirements</h3>
-            <p>
-                Physical securities must be endorsed by the registered owner, with a
-                <span class="key-term">signature guarantee</span> (medallion). Stock certificates must be in
-                round lots of 100 shares or multiples that add to 100.
-            </p>
-
-            <h4>Buy-Ins and Sell-Outs</h4>
-            <p>
-                If a seller fails to deliver by T+4, the buyer may execute a <span class="key-term">buy-in</span>
-                (forced purchase in open market). If a buyer fails to pay, the seller may execute a
-                <span class="key-term">sell-out</span> (forced sale) immediately after settlement date.
-            </p>
-
-            <h3>Customer Confirmations</h3>
-            <p>
-                Confirmations must include: customer/firm information, security name, size and price, trade and
-                settlement dates, CUSIP number, and whether agency or principal transaction.
-            </p>
-
-            <h3>Accrued Interest</h3>
-            <p>
-                On bond trades, the buyer pays accrued interest to the seller for the period from the last
-                payment to the day before settlement. Corporate and muni bonds use 30/360 calculation;
-                Treasuries use actual/365.
-            </p>
-
-            <div class="test-tip">
+                <h3>Order Tickets</h3>
                 <p>
-                    <strong>Test Tip:</strong> Bonds trading <span class="key-term">flat</span> (zero-coupon,
-                    defaulted, income bonds) have no accrued interest added.
+                    To place a customer order in the secondary market, a registered representative fills out an order
+                    ticket electronically. The order ticket must specify: buy or sell, security name (ticker), order
+                    size, duration (day or GTC), whether discretionary, execution price, solicited/unsolicited, manager
+                    approval, and the representative's name.
                 </p>
-            </div>
 
-            <div class="critical-concept">
-                <div class="critical-concept__label">Section 2 Key Points</div>
-                <table>
-                    <tr>
-                        <th>Topic</th>
-                        <th>Key Details</th>
-                    </tr>
-                    <tr>
-                        <td>Clearing entities</td>
-                        <td>DTC, NSCC, OCC, clearing vs. introducing firms</td>
-                    </tr>
-                    <tr>
-                        <td>Settlement</td>
-                        <td>Regular way T+1, cash same-day</td>
-                    </tr>
-                    <tr>
-                        <td>Good delivery</td>
-                        <td>Signature guarantee, round lots, DRS</td>
-                    </tr>
-                    <tr>
-                        <td>Accrued interest</td>
-                        <td>30/360 (corporate/muni), actual/365 (Treasury)</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-
-        <!-- Section 3 -->
-        <section id="section-3">
-            <h2>Section 3: Distribution Dates</h2>
-
-            <h3>Cash Dividend Dates</h3>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">Key Dividend Dates</div>
-                <table>
-                    <tr>
-                        <th>Date</th>
-                        <th>What Happens</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Declaration date</strong></td>
-                        <td>Board announces dividend</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Record date</strong></td>
-                        <td>Must own shares by this date to receive dividend</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Ex-dividend date</strong></td>
-                        <td>First day buyer won't receive dividend (same as record date with T+1)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Payment date</strong></td>
-                        <td>Dividend is paid to shareholders of record</td>
-                    </tr>
-                </table>
-            </div>
-
-            <p>
-                With T+1 settlement, the <span class="key-term">ex-date</span> and
-                <span class="key-term">record date</span> are now the same day. To receive the dividend,
-                you must buy the stock at least one business day before the record date.
-            </p>
-
-            <div class="test-tip">
+                <h4>Regulation SHO</h4>
                 <p>
-                    <strong>Test Tip:</strong> Be careful with dividend questions. A dividend declared in
-                    December 2026 but paid in January 2027 counts as 2027 income for tax purposes.
+                    Short sales are subject to SEC <span class="key-term">Regulation SHO</span>, which requires every
+                    sell order be marked as long or short. If short, the securities to be borrowed must be located by
+                    the broker before the sale.
                 </p>
+
+                <div class="test-tip">
+                    <p>
+                        <strong>Test Tip:</strong> Regulators are especially concerned that discretionary accounts might
+                        be excessively traded (churned). Making a profit does not absolve the violation.
+                    </p>
+                </div>
+
+                <h3>Prohibited Trading Practices</h3>
+
+                <h4>Best Execution</h4>
+                <p>
+                    When executing an order, a firm must obtain the best outcome for the customer, considering price,
+                    volatility, liquidity, size and type of transaction, number of markets checked, and accessibility to
+                    markets.
+                </p>
+
+                <h4>Customer Orders Have Priority</h4>
+                <p>
+                    The firm cannot give preference to its own orders over customer orders—this is called
+                    <span class="key-term">trading ahead</span>.
+                </p>
+
+                <h4>Front Running</h4>
+                <p>
+                    When a firm receives a large block order, it cannot <span class="key-term">front-run</span> by
+                    placing the firm's orders ahead of the block.
+                </p>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Market Manipulation Types</div>
+                    <ul>
+                        <li><strong>Pump and dump:</strong> Trading pools inflate price, then sell</li>
+                        <li>
+                            <strong>Wash trades / Painting the tape:</strong> Fictitious trades to create appearance of
+                            activity
+                        </li>
+                        <li><strong>Marking the close/open:</strong> Trading to affect closing/opening prices</li>
+                        <li><strong>Spoofing:</strong> Placing large orders to mislead, then canceling</li>
+                    </ul>
+                </div>
+
+                <h3>Trade Reporting</h3>
+
+                <p>
+                    Trades in listed securities must be reported to the consolidated tape. OTC equity trades must be
+                    reported within 10 seconds; bond trades within 15 minutes.
+                </p>
+
+                <div class="comparison-table">
+                    <table>
+                        <tr>
+                            <th>System</th>
+                            <th>Securities Covered</th>
+                        </tr>
+                        <tr>
+                            <td><strong>TRACE</strong></td>
+                            <td>Corporate bonds and other OTC debt</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RTRS</strong></td>
+                            <td>Municipal securities</td>
+                        </tr>
+                        <tr>
+                            <td><strong>EMMA</strong></td>
+                            <td>Municipal market information access</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ADF</strong></td>
+                            <td>Alternative Display Facility for OTC listed securities</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ORF</strong></td>
+                            <td>OTC Reporting Facility for unlisted securities</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Section 1 Key Points</div>
+                    <table>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Key Details</th>
+                        </tr>
+                        <tr>
+                            <td>Order tickets</td>
+                            <td>Required information, Reg SHO for short sales</td>
+                        </tr>
+                        <tr>
+                            <td>Prohibited practices</td>
+                            <td>Front running, trading ahead, wash trades, spoofing</td>
+                        </tr>
+                        <tr>
+                            <td>Trade reporting</td>
+                            <td>TRACE (bonds), RTRS/EMMA (munis), 10-15 sec/min deadlines</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section id="section-2">
+                <h2>Section 2: Trade Clearing and Settlement</h2>
+
+                <p>
+                    After a trade is executed, it must be cleared and settled. Clearing involves ensuring both parties
+                    agree on terms. Settlement is the exchange of cash for securities.
+                </p>
+
+                <h3>Key Players in Clearing</h3>
+
+                <div class="comparison-table">
+                    <table>
+                        <tr>
+                            <th>Entity</th>
+                            <th>Role</th>
+                        </tr>
+                        <tr>
+                            <td><strong>DTC</strong></td>
+                            <td>Depository Trust Company - holds securities in book-entry form</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NSCC</strong></td>
+                            <td>National Securities Clearing Corporation - matches and clears trades</td>
+                        </tr>
+                        <tr>
+                            <td><strong>OCC</strong></td>
+                            <td>Options Clearing Corporation - clears options trades</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Clearing firm</strong></td>
+                            <td>Handles settlement, custody, financing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Introducing firm</strong></td>
+                            <td>Takes orders, relies on clearing firm for back office</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Settlement Types</h3>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Settlement Timelines</div>
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>Timeline</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Regular way (T+1)</strong></td>
+                            <td>Next business day - stocks, bonds, ETFs, options</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cash settlement</strong></td>
+                            <td>Same day - trades before 2:30 PM ET</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Seller's option</strong></td>
+                            <td>Seller needs more time to deliver</td>
+                        </tr>
+                        <tr>
+                            <td><strong>When issued</strong></td>
+                            <td>New securities not yet available</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Good Delivery Requirements</h3>
+                <p>
+                    Physical securities must be endorsed by the registered owner, with a
+                    <span class="key-term">signature guarantee</span> (medallion). Stock certificates must be in round
+                    lots of 100 shares or multiples that add to 100.
+                </p>
+
+                <h4>Buy-Ins and Sell-Outs</h4>
+                <p>
+                    If a seller fails to deliver by T+4, the buyer may execute a <span class="key-term">buy-in</span>
+                    (forced purchase in open market). If a buyer fails to pay, the seller may execute a
+                    <span class="key-term">sell-out</span> (forced sale) immediately after settlement date.
+                </p>
+
+                <h3>Customer Confirmations</h3>
+                <p>
+                    Confirmations must include: customer/firm information, security name, size and price, trade and
+                    settlement dates, CUSIP number, and whether agency or principal transaction.
+                </p>
+
+                <h3>Accrued Interest</h3>
+                <p>
+                    On bond trades, the buyer pays accrued interest to the seller for the period from the last payment
+                    to the day before settlement. Corporate and muni bonds use 30/360 calculation; Treasuries use
+                    actual/365.
+                </p>
+
+                <div class="test-tip">
+                    <p>
+                        <strong>Test Tip:</strong> Bonds trading <span class="key-term">flat</span> (zero-coupon,
+                        defaulted, income bonds) have no accrued interest added.
+                    </p>
+                </div>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Section 2 Key Points</div>
+                    <table>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Key Details</th>
+                        </tr>
+                        <tr>
+                            <td>Clearing entities</td>
+                            <td>DTC, NSCC, OCC, clearing vs. introducing firms</td>
+                        </tr>
+                        <tr>
+                            <td>Settlement</td>
+                            <td>Regular way T+1, cash same-day</td>
+                        </tr>
+                        <tr>
+                            <td>Good delivery</td>
+                            <td>Signature guarantee, round lots, DRS</td>
+                        </tr>
+                        <tr>
+                            <td>Accrued interest</td>
+                            <td>30/360 (corporate/muni), actual/365 (Treasury)</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section id="section-3">
+                <h2>Section 3: Distribution Dates</h2>
+
+                <h3>Cash Dividend Dates</h3>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Key Dividend Dates</div>
+                    <table>
+                        <tr>
+                            <th>Date</th>
+                            <th>What Happens</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Declaration date</strong></td>
+                            <td>Board announces dividend</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Record date</strong></td>
+                            <td>Must own shares by this date to receive dividend</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ex-dividend date</strong></td>
+                            <td>First day buyer won't receive dividend (same as record date with T+1)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Payment date</strong></td>
+                            <td>Dividend is paid to shareholders of record</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+                    With T+1 settlement, the <span class="key-term">ex-date</span> and
+                    <span class="key-term">record date</span> are now the same day. To receive the dividend, you must
+                    buy the stock at least one business day before the record date.
+                </p>
+
+                <div class="test-tip">
+                    <p>
+                        <strong>Test Tip:</strong> Be careful with dividend questions. A dividend declared in December
+                        2026 but paid in January 2027 counts as 2027 income for tax purposes.
+                    </p>
+                </div>
+
+                <h4>Due Bills</h4>
+                <p>
+                    <span class="key-term">Due bills</span> are required when a trade takes place before the ex-date but
+                    settles after the record date. The seller must forward the dividend to the buyer.
+                </p>
+
+                <h3>Stock Splits and Stock Dividends</h3>
+                <p>
+                    Forward splits increase shares outstanding and decrease price proportionally. Reverse splits
+                    decrease shares and increase price. Stock dividends work similarly. No taxable event occurs since no
+                    cash is received.
+                </p>
+
+                <p>Unlike cash dividends, the ex-date for stock splits is the payable date + 1 business day.</p>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Section 3 Key Points</div>
+                    <table>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Key Details</th>
+                        </tr>
+                        <tr>
+                            <td>Cash dividends</td>
+                            <td>Declaration, record, ex-date (same as record with T+1), payment</td>
+                        </tr>
+                        <tr>
+                            <td>Due bills</td>
+                            <td>Required when trade settles after record date</td>
+                        </tr>
+                        <tr>
+                            <td>Stock splits/dividends</td>
+                            <td>Ex-date is payable date + 1; no tax until sold</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Glossary -->
+            <section id="glossary">
+                <h2>Chapter 8 Key Terms Glossary</h2>
+
+                <div class="comparison-table">
+                    <table>
+                        <tr>
+                            <th>Term</th>
+                            <th>Definition</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Regulation SHO</strong></td>
+                            <td>SEC rule for short sale marking and share location</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best execution</strong></td>
+                            <td>Duty to get best outcome for customer</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Front running</strong></td>
+                            <td>Trading ahead of large customer orders</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wash trades</strong></td>
+                            <td>Fictitious trades with no ownership change</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Painting the tape</strong></td>
+                            <td>Creating false trading activity</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Spoofing</strong></td>
+                            <td>Misleading orders that are quickly canceled</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TRACE</strong></td>
+                            <td>Reporting system for corporate bonds</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RTRS/EMMA</strong></td>
+                            <td>Reporting and access systems for munis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DTC</strong></td>
+                            <td>Depository Trust Company</td>
+                        </tr>
+                        <tr>
+                            <td><strong>OCC</strong></td>
+                            <td>Options Clearing Corporation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Regular way (T+1)</strong></td>
+                            <td>Standard settlement next business day</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cash settlement</strong></td>
+                            <td>Same-day settlement</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Good delivery</strong></td>
+                            <td>Securities meeting transfer requirements</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Signature guarantee</strong></td>
+                            <td>Medallion authentication for transfers</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Buy-in</strong></td>
+                            <td>Forced purchase when seller fails to deliver</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sell-out</strong></td>
+                            <td>Forced sale when buyer fails to pay</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Accrued interest</strong></td>
+                            <td>Interest buyer pays seller on bond trades</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trading flat</strong></td>
+                            <td>Bonds without accrued interest</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ex-dividend date</strong></td>
+                            <td>First day buyer won't receive dividend</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Due bill</strong></td>
+                            <td>Obligation to forward dividend to buyer</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p style="margin-top: var(--fh-space-2xl); font-style: italic; color: var(--fh-gray-600)">
+                    Chapter 8 covers what happens after a trade is executed. Master trade processing and settlement
+                    before moving to Chapter 9: Fundamentals of Options, which introduces derivative securities.
+                </p>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <nav class="chapter-nav">
+                <a href="series-7-chapter-07-trading-markets.html" class="chapter-nav__link chapter-nav__link--prev">
+                    <span class="chapter-nav__label">Previous Chapter</span>
+                    <span class="chapter-nav__title">&larr; Chapter 7: Trading Markets</span>
+                </a>
+                <a
+                    href="series-7-chapter-09-options-fundamentals.html"
+                    class="chapter-nav__link chapter-nav__link--next"
+                >
+                    <span class="chapter-nav__label">Next Chapter</span>
+                    <span class="chapter-nav__title">Chapter 9: Options Fundamentals &rarr;</span>
+                </a>
+            </nav>
+        </main>
+
+        <footer class="footer">
+            <p class="footer__text">Franklin Hugh Money | Series 7 Study Materials</p>
+            <div class="footer__links">
+                <a href="series-7-study-materials.html">Series 7 Home</a>
+                <span>|</span>
+                <a href="../../index.html">FHM Home</a>
             </div>
+        </footer>
 
-            <h4>Due Bills</h4>
-            <p>
-                <span class="key-term">Due bills</span> are required when a trade takes place before the ex-date
-                but settles after the record date. The seller must forward the dividend to the buyer.
-            </p>
+        <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+        </button>
 
-            <h3>Stock Splits and Stock Dividends</h3>
-            <p>
-                Forward splits increase shares outstanding and decrease price proportionally. Reverse splits
-                decrease shares and increase price. Stock dividends work similarly. No taxable event occurs
-                since no cash is received.
-            </p>
+        <script>
+            const progressBar = document.getElementById('progress-bar');
+            const header = document.getElementById('header');
 
-            <p>
-                Unlike cash dividends, the ex-date for stock splits is the payable date + 1 business day.
-            </p>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">Section 3 Key Points</div>
-                <table>
-                    <tr>
-                        <th>Topic</th>
-                        <th>Key Details</th>
-                    </tr>
-                    <tr>
-                        <td>Cash dividends</td>
-                        <td>Declaration, record, ex-date (same as record with T+1), payment</td>
-                    </tr>
-                    <tr>
-                        <td>Due bills</td>
-                        <td>Required when trade settles after record date</td>
-                    </tr>
-                    <tr>
-                        <td>Stock splits/dividends</td>
-                        <td>Ex-date is payable date + 1; no tax until sold</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-
-        <!-- Glossary -->
-        <section id="glossary">
-            <h2>Chapter 8 Key Terms Glossary</h2>
-
-            <div class="comparison-table">
-                <table>
-                    <tr>
-                        <th>Term</th>
-                        <th>Definition</th>
-                    </tr>
-                    <tr><td><strong>Regulation SHO</strong></td><td>SEC rule for short sale marking and share location</td></tr>
-                    <tr><td><strong>Best execution</strong></td><td>Duty to get best outcome for customer</td></tr>
-                    <tr><td><strong>Front running</strong></td><td>Trading ahead of large customer orders</td></tr>
-                    <tr><td><strong>Wash trades</strong></td><td>Fictitious trades with no ownership change</td></tr>
-                    <tr><td><strong>Painting the tape</strong></td><td>Creating false trading activity</td></tr>
-                    <tr><td><strong>Spoofing</strong></td><td>Misleading orders that are quickly canceled</td></tr>
-                    <tr><td><strong>TRACE</strong></td><td>Reporting system for corporate bonds</td></tr>
-                    <tr><td><strong>RTRS/EMMA</strong></td><td>Reporting and access systems for munis</td></tr>
-                    <tr><td><strong>DTC</strong></td><td>Depository Trust Company</td></tr>
-                    <tr><td><strong>OCC</strong></td><td>Options Clearing Corporation</td></tr>
-                    <tr><td><strong>Regular way (T+1)</strong></td><td>Standard settlement next business day</td></tr>
-                    <tr><td><strong>Cash settlement</strong></td><td>Same-day settlement</td></tr>
-                    <tr><td><strong>Good delivery</strong></td><td>Securities meeting transfer requirements</td></tr>
-                    <tr><td><strong>Signature guarantee</strong></td><td>Medallion authentication for transfers</td></tr>
-                    <tr><td><strong>Buy-in</strong></td><td>Forced purchase when seller fails to deliver</td></tr>
-                    <tr><td><strong>Sell-out</strong></td><td>Forced sale when buyer fails to pay</td></tr>
-                    <tr><td><strong>Accrued interest</strong></td><td>Interest buyer pays seller on bond trades</td></tr>
-                    <tr><td><strong>Trading flat</strong></td><td>Bonds without accrued interest</td></tr>
-                    <tr><td><strong>Ex-dividend date</strong></td><td>First day buyer won't receive dividend</td></tr>
-                    <tr><td><strong>Due bill</strong></td><td>Obligation to forward dividend to buyer</td></tr>
-                </table>
-            </div>
-
-            <p style="margin-top: var(--fh-space-2xl); font-style: italic; color: var(--fh-gray-600);">
-                Chapter 8 covers what happens after a trade is executed. Master trade processing and settlement
-                before moving to Chapter 9: Fundamentals of Options, which introduces derivative securities.
-            </p>
-        </section>
-
-        <!-- Chapter Navigation -->
-        <nav class="chapter-nav">
-            <a href="series-7-chapter-07-trading-markets.html" class="chapter-nav__link chapter-nav__link--prev">
-                <span class="chapter-nav__label">Previous Chapter</span>
-                <span class="chapter-nav__title">&larr; Chapter 7: Trading Markets</span>
-            </a>
-            <a href="series-7-chapter-09-options-fundamentals.html" class="chapter-nav__link chapter-nav__link--next">
-                <span class="chapter-nav__label">Next Chapter</span>
-                <span class="chapter-nav__title">Chapter 9: Options Fundamentals &rarr;</span>
-            </a>
-        </nav>
-    </main>
-
-    <footer class="footer">
-        <p class="footer__text">Franklin Hugh Money | Series 7 Study Materials</p>
-        <div class="footer__links">
-            <a href="series-7-study-materials.html">Series 7 Home</a>
-            <span>|</span>
-            <a href="../../index.html">FHM Home</a>
-        </div>
-    </footer>
-
-    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
-    </button>
-
-    <script>
-        const progressBar = document.getElementById('progress-bar');
-        const header = document.getElementById('header');
-
-        function updateProgress() {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = (scrollTop / docHeight) * 100;
-            progressBar.style.width = progress + '%';
-            if (scrollTop > 50) {
-                header.classList.add('header--scrolled');
-            } else {
-                header.classList.remove('header--scrolled');
-            }
-        }
-
-        const backToTop = document.getElementById('back-to-top');
-        function toggleBackToTop() {
-            if (window.scrollY > 400) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        }
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        const tocLinks = document.querySelectorAll('.toc__link');
-        const sections = document.querySelectorAll('section[id]');
-
-        function updateTocActive() {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.scrollY >= sectionTop - 150) {
-                    current = section.getAttribute('id');
+            function updateProgress() {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (scrollTop / docHeight) * 100;
+                progressBar.style.width = progress + '%';
+                if (scrollTop > 50) {
+                    header.classList.add('header--scrolled');
+                } else {
+                    header.classList.remove('header--scrolled');
                 }
-            });
-            tocLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        }
+            }
 
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    updateProgress();
-                    toggleBackToTop();
-                    updateTocActive();
-                    ticking = false;
+            const backToTop = document.getElementById('back-to-top');
+            function toggleBackToTop() {
+                if (window.scrollY > 400) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            const tocLinks = document.querySelectorAll('.toc__link');
+            const sections = document.querySelectorAll('section[id]');
+
+            function updateTocActive() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
                 });
-                ticking = true;
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
             }
-        });
 
-        updateProgress();
-        toggleBackToTop();
-        updateTocActive();
-    </script>
-    <script src="../../assets/js/audio-player.js"></script>
-</body>
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        updateProgress();
+                        toggleBackToTop();
+                        updateTocActive();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            updateProgress();
+            toggleBackToTop();
+            updateTocActive();
+        </script>
+        <script src="../../assets/js/audio-player.js"></script>
+    </body>
 </html>

@@ -1,731 +1,860 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-    <meta name="description" content="Chapter 3: Additional Bond Features and Risks - Series 7 Exam Study Guide by Franklin Hugh Money. Covers callable bonds, puttable bonds, yield to call, bond ratings, and investment risks.">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+        <meta
+            name="description"
+            content="Chapter 3: Additional Bond Features and Risks - Series 7 Exam Study Guide by Franklin Hugh Money. Covers callable bonds, puttable bonds, yield to call, bond ratings, and investment risks."
+        />
 
-    <title>Chapter 3: Additional Bond Features and Risks | Series 7 Study Materials | Franklin Hugh Money</title>
+        <title>Chapter 3: Additional Bond Features and Risks | Series 7 Study Materials | Franklin Hugh Money</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
 
-    <!-- Shared Styles -->
-    <link rel="stylesheet" href="../../assets/css/main.css?v=f6a3d80a">
-    <link rel="stylesheet" href="../../assets/css/sie-chapter.css?v=af51dc2a">
+        <!-- Shared Styles -->
+        <link rel="stylesheet" href="../../assets/css/main.css?v=b3570edb" />
+        <link rel="stylesheet" href="../../assets/css/sie-chapter.css?v=6497aebd" />
 
-    <!-- Night Mode -->
-    <script src="../../assets/js/night-mode.js"></script>
+        <!-- Night Mode -->
+        <script src="../../assets/js/night-mode.js"></script>
 
-    <!-- Cache Busting -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-</head>
-<body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <div class="header__inner">
-            <h1 class="header__title">Chapter 3: Additional Bond Features and Risks</h1>
-            <nav class="breadcrumb">
-                <a href="../../index.html">Home</a>
-                <span>/</span>
-                <a href="series-7-study-materials.html">Series 7</a>
-                <span>/</span>
-                <span>Chapter 3</span>
+        <!-- Cache Busting -->
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="header" id="header">
+            <div class="header__inner">
+                <h1 class="header__title">Chapter 3: Additional Bond Features and Risks</h1>
+                <nav class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="series-7-study-materials.html">Series 7</a>
+                    <span>/</span>
+                    <span>Chapter 3</span>
+                </nav>
+            </div>
+            <div class="progress">
+                <div class="progress__bar" id="progress-bar"></div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container">
+            <!-- Chapter Meta -->
+            <div class="chapter-meta">
+                <div class="chapter-meta__item">
+                    <svg
+                        class="chapter-meta__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                    </svg>
+                    <span>~18 min read</span>
+                </div>
+                <div class="chapter-meta__item">
+                    <svg
+                        class="chapter-meta__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                        />
+                    </svg>
+                    <span>~8-10 exam questions (6%)</span>
+                </div>
+            </div>
+
+            <!-- Introduction -->
+            <div class="intro">
+                <p>
+                    In 1986, General Motors issued $1.25 billion in bonds with an 8.5% coupon—generous at the time. But
+                    by the early 1990s, interest rates had plummeted. GM was stuck paying top dollar while new issuers
+                    borrowed at half the rate. That costly lesson is why today virtually every corporate bond includes
+                    call provisions.
+                </p>
+                <p>
+                    Beyond basic bond structure, bonds can include special features that significantly affect their
+                    value and behavior. Understanding these features—and the full spectrum of bond risks—is essential
+                    for advising clients.
+                </p>
+            </div>
+
+            <!-- Table of Contents -->
+            <nav class="toc">
+                <h2 class="toc__title">In This Chapter</h2>
+                <ul class="toc__list">
+                    <li class="toc__item">
+                        <a href="#section-1" class="toc__link">
+                            <span class="toc__number">01</span>
+                            Call and Put Features
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#section-2" class="toc__link">
+                            <span class="toc__number">02</span>
+                            Risks Associated with Bonds
+                        </a>
+                    </li>
+                    <li class="toc__item">
+                        <a href="#glossary" class="toc__link">
+                            <span class="toc__number">03</span>
+                            Key Terms Glossary
+                        </a>
+                    </li>
+                </ul>
             </nav>
-        </div>
-        <div class="progress">
-            <div class="progress__bar" id="progress-bar"></div>
-        </div>
-    </header>
 
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Chapter Meta -->
-        <div class="chapter-meta">
-            <div class="chapter-meta__item">
-                <svg class="chapter-meta__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>~18 min read</span>
-            </div>
-            <div class="chapter-meta__item">
-                <svg class="chapter-meta__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-                <span>~8-10 exam questions (6%)</span>
-            </div>
-        </div>
+            <!-- Section 1: Call and Put Features -->
+            <section id="section-1">
+                <h2>Section 1: Call and Put Features</h2>
 
-        <!-- Introduction -->
-        <div class="intro">
-            <p>
-                In 1986, General Motors issued $1.25 billion in bonds with an 8.5% coupon—generous at the time.
-                But by the early 1990s, interest rates had plummeted. GM was stuck paying top dollar while new
-                issuers borrowed at half the rate. That costly lesson is why today virtually every corporate
-                bond includes call provisions.
-            </p>
-            <p>
-                Beyond basic bond structure, bonds can include special features that significantly affect their
-                value and behavior. Understanding these features—and the full spectrum of bond risks—is essential
-                for advising clients.
-            </p>
-        </div>
-
-        <!-- Table of Contents -->
-        <nav class="toc">
-            <h2 class="toc__title">In This Chapter</h2>
-            <ul class="toc__list">
-                <li class="toc__item">
-                    <a href="#section-1" class="toc__link">
-                        <span class="toc__number">01</span>
-                        Call and Put Features
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#section-2" class="toc__link">
-                        <span class="toc__number">02</span>
-                        Risks Associated with Bonds
-                    </a>
-                </li>
-                <li class="toc__item">
-                    <a href="#glossary" class="toc__link">
-                        <span class="toc__number">03</span>
-                        Key Terms Glossary
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Section 1: Call and Put Features -->
-        <section id="section-1">
-            <h2>Section 1: Call and Put Features</h2>
-
-            <h3>Why This Section Matters</h3>
-            <p>
-                Call features benefit issuers; put features benefit investors. Understanding which party
-                benefits—and when they'd exercise these features—is essential for advising clients and
-                passing your exam.
-            </p>
-
-            <h3>Bond Call Features</h3>
-
-            <div class="historical-note">
-                <div class="historical-note__label">Why Issuers Want Call Features</div>
+                <h3>Why This Section Matters</h3>
                 <p>
-                    Think about it from the issuer's perspective: if you borrowed money at 8% and rates dropped
-                    to 5%, wouldn't you want to refinance? That's exactly what callable bonds allow. The issuer
-                    retires old high-rate debt and issues new bonds at lower rates. It's the corporate equivalent
-                    of refinancing your mortgage—except bondholders are on the losing end.
+                    Call features benefit issuers; put features benefit investors. Understanding which party
+                    benefits—and when they'd exercise these features—is essential for advising clients and passing your
+                    exam.
                 </p>
-            </div>
 
-            <p>
-                When a bond is <span class="key-term">callable</span>, the issuer has the right to
-                <span class="key-term">call</span> (redeem) the bond before it matures. This forces bondholders
-                to sell the bond back. Selling a bond back before maturity is known as
-                <span class="key-term">redeeming</span> the bond.
-            </p>
+                <h3>Bond Call Features</h3>
 
-            <p>
-                The callable bond's issuer doesn't owe any interest after redemption. This is a risk for the
-                bondholder, known as <span class="key-term">call risk</span>. Issuers typically compensate
-                bondholders for call risk in three ways:
-            </p>
+                <div class="historical-note">
+                    <div class="historical-note__label">Why Issuers Want Call Features</div>
+                    <p>
+                        Think about it from the issuer's perspective: if you borrowed money at 8% and rates dropped to
+                        5%, wouldn't you want to refinance? That's exactly what callable bonds allow. The issuer retires
+                        old high-rate debt and issues new bonds at lower rates. It's the corporate equivalent of
+                        refinancing your mortgage—except bondholders are on the losing end.
+                    </p>
+                </div>
 
-            <div class="critical-concept">
-                <div class="critical-concept__label">How Issuers Compensate for Call Risk</div>
-                <ul>
-                    <li><strong>Higher coupon rate</strong> — Callable bonds usually offer higher rates than comparable non-callable bonds</li>
-                    <li><strong>Call protection period</strong> — A period during which the bond cannot be called</li>
-                    <li><strong>Call premium</strong> — An additional amount above par paid when the bond is called</li>
-                </ul>
-            </div>
-
-            <h4>Call Protection</h4>
-            <p>
-                <span class="key-term">Call protection</span> is a period during which the bond cannot be called.
-            </p>
-
-            <div class="info-box">
-                <div class="info-box__title">Call Protection Example</div>
-                <p>A 20-year bond issued in 2022 is first callable in 2032.</p>
-                <p>The investor has 10 years of call protection—guaranteed interest payments for a decade.</p>
-                <p>After 2032, the issuer can call the bond at any time.</p>
-            </div>
-
-            <h4>Call Premium</h4>
-            <p>
-                A <span class="key-term">call premium</span> is an additional amount paid above par when a bond
-                is called. Typically, the call premium declines over time:
-            </p>
-
-            <div class="info-box">
-                <div class="info-box__title">Declining Call Premium Schedule</div>
-                <table>
-                    <tr>
-                        <th>Redemption Date</th>
-                        <th>Redemption Price</th>
-                    </tr>
-                    <tr><td>2032</td><td>105 ($1,050)</td></tr>
-                    <tr><td>2033</td><td>104 ($1,040)</td></tr>
-                    <tr><td>2034</td><td>103 ($1,030)</td></tr>
-                    <tr><td>2035</td><td>102 ($1,020)</td></tr>
-                    <tr><td>2036</td><td>101 ($1,010)</td></tr>
-                    <tr><td>2037+</td><td>100 ($1,000)</td></tr>
-                </table>
-            </div>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">The Call Process</div>
-                <ol>
-                    <li>The issuer calls the bond</li>
-                    <li>The issuer pays the final interest payment</li>
-                    <li>The issuer returns principal plus any call premium</li>
-                    <li>The issuer can now sell new bonds at lower rates</li>
-                </ol>
-            </div>
-
-            <p>
-                (A low call premium also makes a call more likely. If the issuer only has to pay 101 to retire
-                a bond paying 8%, that's a bargain compared to years of above-market interest payments.)
-            </p>
-
-            <h3>Yield to Call (YTC)</h3>
-
-            <p>
-                <span class="key-term">Yield to call (YTC)</span> measures how the call feature affects an
-                investor's return if the issuer decides to call.
-            </p>
-
-            <div class="test-tip">
                 <p>
-                    <strong>Test Tip:</strong> When recommending callable bonds, the lesser of YTM or YTC must
-                    be disclosed so clients understand the lowest potential yield. This is called
-                    <span class="key-term">yield to worst (YTW)</span>.
+                    When a bond is <span class="key-term">callable</span>, the issuer has the right to
+                    <span class="key-term">call</span> (redeem) the bond before it matures. This forces bondholders to
+                    sell the bond back. Selling a bond back before maturity is known as
+                    <span class="key-term">redeeming</span> the bond.
                 </p>
-            </div>
 
-            <h4>YTC for Discount Bonds</h4>
-            <p>
-                When a bond trades at a discount, YTC is typically <strong>higher</strong> than YTM because
-                the investor receives the gain between purchase price and par sooner.
-            </p>
-
-            <div class="info-box">
-                <div class="info-box__title">Discount Bond Yield Relationship</div>
-                <p style="text-align: center; padding: 1rem; background: var(--fh-gray-100); border-radius: 8px;">
-                    <strong>Nominal Yield → Current Yield → YTM → YTC</strong><br>
-                    <em>(lowest to highest)</em>
-                </p>
-                <p>YTC is highest because the discount is recovered sooner.</p>
-            </div>
-
-            <h4>YTC for Premium Bonds</h4>
-            <p>
-                When a bond trades at a premium, YTC is typically <strong>lower</strong> than YTM—bad news
-                for investors. They lose the attractive higher-coupon payments sooner and lose the premium paid.
-            </p>
-
-            <div class="info-box">
-                <div class="info-box__title">Premium Bond Yield Relationship</div>
-                <p style="text-align: center; padding: 1rem; background: var(--fh-gray-100); border-radius: 8px;">
-                    <strong>YTC → YTM → Current Yield → Nominal Yield</strong><br>
-                    <em>(lowest to highest)</em>
-                </p>
-                <p>YTC is lowest because the premium is lost sooner.</p>
-            </div>
-
-            <div class="test-tip">
-                <p><strong>Test Tip:</strong> You won't calculate YTC, but you must understand:</p>
-                <ul>
-                    <li>YTC &gt; YTM for <strong>discount</strong> bonds</li>
-                    <li>YTC &lt; YTM for <strong>premium</strong> bonds</li>
-                    <li>YTW for discount bond = YTM</li>
-                    <li>YTW for premium bond = YTC</li>
-                </ul>
-            </div>
-
-            <h3>Bond Put Features</h3>
-
-            <p>
-                A <span class="key-term">put feature</span> gives the investor the right to sell the bond
-                back to the issuer at a specified price (typically par). Also called a
-                <span class="key-term">tender option</span>.
-            </p>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">Put vs. Call: Who Benefits?</div>
-                <table>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Who Has the Right?</th>
-                        <th>Who Benefits?</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Call</strong></td>
-                        <td>Issuer</td>
-                        <td>Issuer (refinance at lower rates)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Put</strong></td>
-                        <td>Investor</td>
-                        <td>Investor (exit at par if rates rise)</td>
-                    </tr>
-                </table>
-            </div>
-
-            <h4>When Do Investors Exercise Put Options?</h4>
-            <p>
-                When interest rates rise, bond prices fall. If the price drops below par, the bondholder
-                can tender the bond and receive full par value, then reinvest at higher rates.
-            </p>
-
-            <div class="info-box">
-                <div class="info-box__title">Important Facts About Calls and Puts</div>
-                <ul>
-                    <li>Once issued, coupon rate and par value don't change</li>
-                    <li>Bond prices fluctuate based on interest rate changes</li>
-                    <li>Interest rates and bond prices have an inverse relationship (but this doesn't hold for junk bonds)</li>
-                    <li>When rates fall, callable bonds are likely to be called</li>
-                    <li>When rates rise, puttable bonds are likely to be redeemed</li>
-                    <li>Risk and coupon rates move in the same direction—greater risk means higher coupon</li>
-                </ul>
-            </div>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">Section 1 Key Points</div>
-                <table>
-                    <tr>
-                        <th>Concept</th>
-                        <th>Key Details</th>
-                    </tr>
-                    <tr>
-                        <td>Bond call features</td>
-                        <td>Allow issuer to retire bond prior to maturity</td>
-                    </tr>
-                    <tr>
-                        <td>Yield to call</td>
-                        <td>Measures actual yield if bond is called</td>
-                    </tr>
-                    <tr>
-                        <td>Bond put features</td>
-                        <td>Allow owner to redeem bond prior to maturity</td>
-                    </tr>
-                    <tr>
-                        <td>When calls happen</td>
-                        <td>Rates fall → callable bonds likely called</td>
-                    </tr>
-                    <tr>
-                        <td>When puts happen</td>
-                        <td>Rates rise → puttable bonds likely redeemed</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-
-        <!-- Section 2: Risks Associated with Bonds -->
-        <section id="section-2">
-            <h2>Section 2: Risks Associated with Bonds</h2>
-
-            <p>
-                In 2008, Lehman Brothers bondholders learned a brutal lesson: even investment-grade debt can
-                become worthless overnight. The firm's bonds, rated A just months before, recovered only pennies
-                on the dollar in bankruptcy.
-            </p>
-
-            <h3>Bond Ratings—A Measure of Default Risk</h3>
-
-            <p>
-                <span class="key-term">Credit risk</span> (also <span class="key-term">default risk</span>)
-                is the risk that the issuer cannot make interest and principal payments. The two main rating
-                agencies are <span class="key-term">Moody's</span> and
-                <span class="key-term">Standard & Poor's (S&P)</span>.
-            </p>
-
-            <div class="info-box">
-                <div class="info-box__title">Treasury Bonds: No Credit Risk</div>
-                <p>Treasury bonds are backed by the U.S. Treasury and carry a AAA rating with no credit risk.</p>
-            </div>
-
-            <h4>Investment Grade vs. Speculative Grade</h4>
-
-            <div class="comparison-table">
-                <table>
-                    <tr>
-                        <th>Grade</th>
-                        <th>S&P</th>
-                        <th>Moody's</th>
-                    </tr>
-                    <tr>
-                        <td rowspan="4"><strong>Investment Grade</strong></td>
-                        <td>AAA</td>
-                        <td>Aaa</td>
-                    </tr>
-                    <tr><td>AA</td><td>Aa</td></tr>
-                    <tr><td>A</td><td>A</td></tr>
-                    <tr><td>BBB</td><td>Baa</td></tr>
-                    <tr>
-                        <td rowspan="4"><strong>Speculative Grade</strong></td>
-                        <td>BB</td>
-                        <td>Ba</td>
-                    </tr>
-                    <tr><td>B</td><td>B</td></tr>
-                    <tr><td>CCC</td><td>Caa</td></tr>
-                    <tr><td>CC, C, D</td><td>Ca, C</td></tr>
-                </table>
-            </div>
-
-            <div class="test-tip">
                 <p>
-                    <strong>Test Tip:</strong> S&P uses + or - modifiers (AA+, AA-). Moody's uses 1, 2, 3
-                    (Aa1, Aa2, Aa3). Investment grade = BBB-/Baa3 or better.
+                    The callable bond's issuer doesn't owe any interest after redemption. This is a risk for the
+                    bondholder, known as <span class="key-term">call risk</span>. Issuers typically compensate
+                    bondholders for call risk in three ways:
                 </p>
-            </div>
 
-            <div class="critical-concept">
-                <div class="critical-concept__label">Investment Grade = BBB/Baa or Better</div>
+                <div class="critical-concept">
+                    <div class="critical-concept__label">How Issuers Compensate for Call Risk</div>
+                    <ul>
+                        <li>
+                            <strong>Higher coupon rate</strong> — Callable bonds usually offer higher rates than
+                            comparable non-callable bonds
+                        </li>
+                        <li>
+                            <strong>Call protection period</strong> — A period during which the bond cannot be called
+                        </li>
+                        <li>
+                            <strong>Call premium</strong> — An additional amount above par paid when the bond is called
+                        </li>
+                    </ul>
+                </div>
+
+                <h4>Call Protection</h4>
+                <p><span class="key-term">Call protection</span> is a period during which the bond cannot be called.</p>
+
+                <div class="info-box">
+                    <div class="info-box__title">Call Protection Example</div>
+                    <p>A 20-year bond issued in 2022 is first callable in 2032.</p>
+                    <p>The investor has 10 years of call protection—guaranteed interest payments for a decade.</p>
+                    <p>After 2032, the issuer can call the bond at any time.</p>
+                </div>
+
+                <h4>Call Premium</h4>
                 <p>
-                    Most institutions restrict investments to investment-grade bonds. Bonds below investment
-                    grade are called <span class="key-term">junk bonds</span> or
-                    <span class="key-term">high-yield bonds</span>.
+                    A <span class="key-term">call premium</span> is an additional amount paid above par when a bond is
+                    called. Typically, the call premium declines over time:
                 </p>
-            </div>
 
-            <h3>Interest Rate Risk and Price Volatility</h3>
+                <div class="info-box">
+                    <div class="info-box__title">Declining Call Premium Schedule</div>
+                    <table>
+                        <tr>
+                            <th>Redemption Date</th>
+                            <th>Redemption Price</th>
+                        </tr>
+                        <tr>
+                            <td>2032</td>
+                            <td>105 ($1,050)</td>
+                        </tr>
+                        <tr>
+                            <td>2033</td>
+                            <td>104 ($1,040)</td>
+                        </tr>
+                        <tr>
+                            <td>2034</td>
+                            <td>103 ($1,030)</td>
+                        </tr>
+                        <tr>
+                            <td>2035</td>
+                            <td>102 ($1,020)</td>
+                        </tr>
+                        <tr>
+                            <td>2036</td>
+                            <td>101 ($1,010)</td>
+                        </tr>
+                        <tr>
+                            <td>2037+</td>
+                            <td>100 ($1,000)</td>
+                        </tr>
+                    </table>
+                </div>
 
-            <p>
-                <span class="key-term">Interest rate risk</span> is the risk that rising rates will cause
-                bond prices to fall. Bonds with long maturities or low coupons are most susceptible.
-            </p>
+                <div class="critical-concept">
+                    <div class="critical-concept__label">The Call Process</div>
+                    <ol>
+                        <li>The issuer calls the bond</li>
+                        <li>The issuer pays the final interest payment</li>
+                        <li>The issuer returns principal plus any call premium</li>
+                        <li>The issuer can now sell new bonds at lower rates</li>
+                    </ol>
+                </div>
 
-            <h4>Variable-Rate Bonds</h4>
-            <p>
-                <span class="key-term">Variable-rate bonds</span> have coupons that adjust to match market
-                rates. Because the yield adjusts, the price stays close to par.
-            </p>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">Variable-Rate Bond Behavior</div>
                 <p>
-                    When market rates rise, the variable-rate bond's coupon adjusts up, keeping the bond
-                    trading near par. <strong>Result:</strong> Variable-rate bonds do not have significant
-                    interest rate risk.
+                    (A low call premium also makes a call more likely. If the issuer only has to pay 101 to retire a
+                    bond paying 8%, that's a bargain compared to years of above-market interest payments.)
                 </p>
-            </div>
 
-            <h4>Price Volatility</h4>
+                <h3>Yield to Call (YTC)</h3>
 
-            <div class="comparison-table">
-                <table>
-                    <tr>
-                        <th>Factor</th>
-                        <th>More Volatile</th>
-                        <th>Less Volatile</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Time to maturity</strong></td>
-                        <td>Longer maturity</td>
-                        <td>Shorter maturity</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Coupon rate</strong></td>
-                        <td>Lower coupon</td>
-                        <td>Higher coupon</td>
-                    </tr>
-                </table>
-            </div>
-
-            <h4>Duration</h4>
-            <p>
-                <span class="key-term">Duration</span> expresses a bond's overall sensitivity to interest
-                rate swings.
-            </p>
-
-            <div class="info-box">
-                <div class="info-box__title">Duration Rules</div>
-                <ul>
-                    <li><strong>High duration</strong> = long maturity + low coupon = very volatile</li>
-                    <li><strong>Low duration</strong> = short maturity + high coupon = very stable</li>
-                </ul>
-            </div>
-
-            <div class="critical-concept">
-                <div class="critical-concept__label">Most to Least Volatile (When Rates Rise)</div>
-                <ol>
-                    <li>Large discount bond (lowest coupon)</li>
-                    <li>Small discount bond</li>
-                    <li>Par bond</li>
-                    <li>Small premium bond</li>
-                    <li>Large premium bond (highest coupon)</li>
-                </ol>
                 <p>
-                    <strong>Most volatile of all:</strong> Long-term zero-coupon bonds—they have no interest
-                    payments, so their entire value depends on principal repayment at maturity.
+                    <span class="key-term">Yield to call (YTC)</span> measures how the call feature affects an
+                    investor's return if the issuer decides to call.
                 </p>
-            </div>
 
-            <div class="test-tip">
+                <div class="test-tip">
+                    <p>
+                        <strong>Test Tip:</strong> When recommending callable bonds, the lesser of YTM or YTC must be
+                        disclosed so clients understand the lowest potential yield. This is called
+                        <span class="key-term">yield to worst (YTW)</span>.
+                    </p>
+                </div>
+
+                <h4>YTC for Discount Bonds</h4>
                 <p>
-                    <strong>Test Tip:</strong> Adjustable-rate bonds are suitable for investors looking for
-                    protection from interest rate risk.
+                    When a bond trades at a discount, YTC is typically <strong>higher</strong> than YTM because the
+                    investor receives the gain between purchase price and par sooner.
                 </p>
-            </div>
 
-            <h3>Other Bond Risks</h3>
+                <div class="info-box">
+                    <div class="info-box__title">Discount Bond Yield Relationship</div>
+                    <p style="text-align: center; padding: 1rem; background: var(--fh-gray-100); border-radius: 8px">
+                        <strong>Nominal Yield → Current Yield → YTM → YTC</strong><br />
+                        <em>(lowest to highest)</em>
+                    </p>
+                    <p>YTC is highest because the discount is recovered sooner.</p>
+                </div>
 
-            <p>
-                <span class="key-term">Systematic risk</span> affects all investments (cannot be diversified
-                away). <span class="key-term">Nonsystematic risk</span> is unique to specific securities
-                (can be diversified away).
-            </p>
-
-            <div class="comparison-table">
-                <table>
-                    <tr>
-                        <th>Risk</th>
-                        <th>Affected Most By</th>
-                        <th>Protection Strategy</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Market risk</strong></td>
-                        <td>Stocks, high-yield bonds</td>
-                        <td>Buy puts, short stock, ETFs</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Purchasing power</strong></td>
-                        <td>Fixed-income securities</td>
-                        <td>Stocks, REITs, TIPS</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Interest rate</strong></td>
-                        <td>High-duration bonds</td>
-                        <td>Stocks, convertible bonds</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Credit/default</strong></td>
-                        <td>High-yield bonds</td>
-                        <td>Safer bonds, U.S. Treasuries</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Business</strong></td>
-                        <td>Stocks and bonds</td>
-                        <td>Diversification</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Liquidity</strong></td>
-                        <td>Private placements, DPPs, munis</td>
-                        <td>Money market, large-caps, Treasuries</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Currency</strong></td>
-                        <td>Foreign investments</td>
-                        <td>Currency futures/options</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Call</strong></td>
-                        <td>Callable bonds</td>
-                        <td>Non-callable bonds</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Reinvestment</strong></td>
-                        <td>Callable bonds, interest-paying bonds</td>
-                        <td>Zero-coupon bonds (STRIPS)</td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="info-box">
-                <div class="info-box__title">Purchasing Power Risk (Inflation Risk)</div>
+                <h4>YTC for Premium Bonds</h4>
                 <p>
-                    The risk that inflation reduces what your returns can buy. The only bonds offering
-                    protection are <span class="key-term">Treasury Inflation-Protected Securities (TIPS)</span>.
+                    When a bond trades at a premium, YTC is typically <strong>lower</strong> than YTM—bad news for
+                    investors. They lose the attractive higher-coupon payments sooner and lose the premium paid.
                 </p>
-            </div>
 
-            <div class="info-box">
-                <div class="info-box__title">Reinvestment Risk</div>
+                <div class="info-box">
+                    <div class="info-box__title">Premium Bond Yield Relationship</div>
+                    <p style="text-align: center; padding: 1rem; background: var(--fh-gray-100); border-radius: 8px">
+                        <strong>YTC → YTM → Current Yield → Nominal Yield</strong><br />
+                        <em>(lowest to highest)</em>
+                    </p>
+                    <p>YTC is lowest because the premium is lost sooner.</p>
+                </div>
+
+                <div class="test-tip">
+                    <p><strong>Test Tip:</strong> You won't calculate YTC, but you must understand:</p>
+                    <ul>
+                        <li>YTC &gt; YTM for <strong>discount</strong> bonds</li>
+                        <li>YTC &lt; YTM for <strong>premium</strong> bonds</li>
+                        <li>YTW for discount bond = YTM</li>
+                        <li>YTW for premium bond = YTC</li>
+                    </ul>
+                </div>
+
+                <h3>Bond Put Features</h3>
+
                 <p>
-                    The risk that you can't reinvest returns at comparable rates. Call risk and prepayment
-                    risk both increase reinvestment risk—calls and prepayments are more likely when rates fall.
+                    A <span class="key-term">put feature</span> gives the investor the right to sell the bond back to
+                    the issuer at a specified price (typically par). Also called a
+                    <span class="key-term">tender option</span>.
                 </p>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Put vs. Call: Who Benefits?</div>
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Who Has the Right?</th>
+                            <th>Who Benefits?</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Call</strong></td>
+                            <td>Issuer</td>
+                            <td>Issuer (refinance at lower rates)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Put</strong></td>
+                            <td>Investor</td>
+                            <td>Investor (exit at par if rates rise)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>When Do Investors Exercise Put Options?</h4>
+                <p>
+                    When interest rates rise, bond prices fall. If the price drops below par, the bondholder can tender
+                    the bond and receive full par value, then reinvest at higher rates.
+                </p>
+
+                <div class="info-box">
+                    <div class="info-box__title">Important Facts About Calls and Puts</div>
+                    <ul>
+                        <li>Once issued, coupon rate and par value don't change</li>
+                        <li>Bond prices fluctuate based on interest rate changes</li>
+                        <li>
+                            Interest rates and bond prices have an inverse relationship (but this doesn't hold for junk
+                            bonds)
+                        </li>
+                        <li>When rates fall, callable bonds are likely to be called</li>
+                        <li>When rates rise, puttable bonds are likely to be redeemed</li>
+                        <li>Risk and coupon rates move in the same direction—greater risk means higher coupon</li>
+                    </ul>
+                </div>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Section 1 Key Points</div>
+                    <table>
+                        <tr>
+                            <th>Concept</th>
+                            <th>Key Details</th>
+                        </tr>
+                        <tr>
+                            <td>Bond call features</td>
+                            <td>Allow issuer to retire bond prior to maturity</td>
+                        </tr>
+                        <tr>
+                            <td>Yield to call</td>
+                            <td>Measures actual yield if bond is called</td>
+                        </tr>
+                        <tr>
+                            <td>Bond put features</td>
+                            <td>Allow owner to redeem bond prior to maturity</td>
+                        </tr>
+                        <tr>
+                            <td>When calls happen</td>
+                            <td>Rates fall → callable bonds likely called</td>
+                        </tr>
+                        <tr>
+                            <td>When puts happen</td>
+                            <td>Rates rise → puttable bonds likely redeemed</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 2: Risks Associated with Bonds -->
+            <section id="section-2">
+                <h2>Section 2: Risks Associated with Bonds</h2>
+
+                <p>
+                    In 2008, Lehman Brothers bondholders learned a brutal lesson: even investment-grade debt can become
+                    worthless overnight. The firm's bonds, rated A just months before, recovered only pennies on the
+                    dollar in bankruptcy.
+                </p>
+
+                <h3>Bond Ratings—A Measure of Default Risk</h3>
+
+                <p>
+                    <span class="key-term">Credit risk</span> (also <span class="key-term">default risk</span>) is the
+                    risk that the issuer cannot make interest and principal payments. The two main rating agencies are
+                    <span class="key-term">Moody's</span> and <span class="key-term">Standard & Poor's (S&P)</span>.
+                </p>
+
+                <div class="info-box">
+                    <div class="info-box__title">Treasury Bonds: No Credit Risk</div>
+                    <p>Treasury bonds are backed by the U.S. Treasury and carry a AAA rating with no credit risk.</p>
+                </div>
+
+                <h4>Investment Grade vs. Speculative Grade</h4>
+
+                <div class="comparison-table">
+                    <table>
+                        <tr>
+                            <th>Grade</th>
+                            <th>S&P</th>
+                            <th>Moody's</th>
+                        </tr>
+                        <tr>
+                            <td rowspan="4"><strong>Investment Grade</strong></td>
+                            <td>AAA</td>
+                            <td>Aaa</td>
+                        </tr>
+                        <tr>
+                            <td>AA</td>
+                            <td>Aa</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <td>BBB</td>
+                            <td>Baa</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="4"><strong>Speculative Grade</strong></td>
+                            <td>BB</td>
+                            <td>Ba</td>
+                        </tr>
+                        <tr>
+                            <td>B</td>
+                            <td>B</td>
+                        </tr>
+                        <tr>
+                            <td>CCC</td>
+                            <td>Caa</td>
+                        </tr>
+                        <tr>
+                            <td>CC, C, D</td>
+                            <td>Ca, C</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="test-tip">
+                    <p>
+                        <strong>Test Tip:</strong> S&P uses + or - modifiers (AA+, AA-). Moody's uses 1, 2, 3 (Aa1, Aa2,
+                        Aa3). Investment grade = BBB-/Baa3 or better.
+                    </p>
+                </div>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Investment Grade = BBB/Baa or Better</div>
+                    <p>
+                        Most institutions restrict investments to investment-grade bonds. Bonds below investment grade
+                        are called <span class="key-term">junk bonds</span> or
+                        <span class="key-term">high-yield bonds</span>.
+                    </p>
+                </div>
+
+                <h3>Interest Rate Risk and Price Volatility</h3>
+
+                <p>
+                    <span class="key-term">Interest rate risk</span> is the risk that rising rates will cause bond
+                    prices to fall. Bonds with long maturities or low coupons are most susceptible.
+                </p>
+
+                <h4>Variable-Rate Bonds</h4>
+                <p>
+                    <span class="key-term">Variable-rate bonds</span> have coupons that adjust to match market rates.
+                    Because the yield adjusts, the price stays close to par.
+                </p>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Variable-Rate Bond Behavior</div>
+                    <p>
+                        When market rates rise, the variable-rate bond's coupon adjusts up, keeping the bond trading
+                        near par. <strong>Result:</strong> Variable-rate bonds do not have significant interest rate
+                        risk.
+                    </p>
+                </div>
+
+                <h4>Price Volatility</h4>
+
+                <div class="comparison-table">
+                    <table>
+                        <tr>
+                            <th>Factor</th>
+                            <th>More Volatile</th>
+                            <th>Less Volatile</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Time to maturity</strong></td>
+                            <td>Longer maturity</td>
+                            <td>Shorter maturity</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Coupon rate</strong></td>
+                            <td>Lower coupon</td>
+                            <td>Higher coupon</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Duration</h4>
+                <p>
+                    <span class="key-term">Duration</span> expresses a bond's overall sensitivity to interest rate
+                    swings.
+                </p>
+
+                <div class="info-box">
+                    <div class="info-box__title">Duration Rules</div>
+                    <ul>
+                        <li><strong>High duration</strong> = long maturity + low coupon = very volatile</li>
+                        <li><strong>Low duration</strong> = short maturity + high coupon = very stable</li>
+                    </ul>
+                </div>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Most to Least Volatile (When Rates Rise)</div>
+                    <ol>
+                        <li>Large discount bond (lowest coupon)</li>
+                        <li>Small discount bond</li>
+                        <li>Par bond</li>
+                        <li>Small premium bond</li>
+                        <li>Large premium bond (highest coupon)</li>
+                    </ol>
+                    <p>
+                        <strong>Most volatile of all:</strong> Long-term zero-coupon bonds—they have no interest
+                        payments, so their entire value depends on principal repayment at maturity.
+                    </p>
+                </div>
+
+                <div class="test-tip">
+                    <p>
+                        <strong>Test Tip:</strong> Adjustable-rate bonds are suitable for investors looking for
+                        protection from interest rate risk.
+                    </p>
+                </div>
+
+                <h3>Other Bond Risks</h3>
+
+                <p>
+                    <span class="key-term">Systematic risk</span> affects all investments (cannot be diversified away).
+                    <span class="key-term">Nonsystematic risk</span> is unique to specific securities (can be
+                    diversified away).
+                </p>
+
+                <div class="comparison-table">
+                    <table>
+                        <tr>
+                            <th>Risk</th>
+                            <th>Affected Most By</th>
+                            <th>Protection Strategy</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Market risk</strong></td>
+                            <td>Stocks, high-yield bonds</td>
+                            <td>Buy puts, short stock, ETFs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Purchasing power</strong></td>
+                            <td>Fixed-income securities</td>
+                            <td>Stocks, REITs, TIPS</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interest rate</strong></td>
+                            <td>High-duration bonds</td>
+                            <td>Stocks, convertible bonds</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Credit/default</strong></td>
+                            <td>High-yield bonds</td>
+                            <td>Safer bonds, U.S. Treasuries</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Business</strong></td>
+                            <td>Stocks and bonds</td>
+                            <td>Diversification</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Liquidity</strong></td>
+                            <td>Private placements, DPPs, munis</td>
+                            <td>Money market, large-caps, Treasuries</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Currency</strong></td>
+                            <td>Foreign investments</td>
+                            <td>Currency futures/options</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Call</strong></td>
+                            <td>Callable bonds</td>
+                            <td>Non-callable bonds</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reinvestment</strong></td>
+                            <td>Callable bonds, interest-paying bonds</td>
+                            <td>Zero-coupon bonds (STRIPS)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-box__title">Purchasing Power Risk (Inflation Risk)</div>
+                    <p>
+                        The risk that inflation reduces what your returns can buy. The only bonds offering protection
+                        are <span class="key-term">Treasury Inflation-Protected Securities (TIPS)</span>.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-box__title">Reinvestment Risk</div>
+                    <p>
+                        The risk that you can't reinvest returns at comparable rates. Call risk and prepayment risk both
+                        increase reinvestment risk—calls and prepayments are more likely when rates fall.
+                    </p>
+                </div>
+
+                <div class="critical-concept">
+                    <div class="critical-concept__label">Section 2 Key Points</div>
+                    <table>
+                        <tr>
+                            <th>Concept</th>
+                            <th>Key Details</th>
+                        </tr>
+                        <tr>
+                            <td>Bond ratings</td>
+                            <td>S&P/Moody's; BBB/Baa or better = investment grade</td>
+                        </tr>
+                        <tr>
+                            <td>Interest rate risk</td>
+                            <td>Based on maturity and coupon rate</td>
+                        </tr>
+                        <tr>
+                            <td>Duration</td>
+                            <td>Long maturity + low coupon = high volatility</td>
+                        </tr>
+                        <tr>
+                            <td>Systematic</td>
+                            <td>Cannot be diversified away</td>
+                        </tr>
+                        <tr>
+                            <td>Nonsystematic</td>
+                            <td>Can be diversified away</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Key Terms Glossary -->
+            <section id="glossary">
+                <h2>Chapter 3 Key Terms Glossary</h2>
+
+                <div class="comparison-table">
+                    <table>
+                        <tr>
+                            <th>Term</th>
+                            <th>Definition</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Callable bond</strong></td>
+                            <td>Bond that issuer can redeem before maturity</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Call protection</strong></td>
+                            <td>Period during which bond cannot be called</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Call premium</strong></td>
+                            <td>Amount above par paid when bond is called</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Call risk</strong></td>
+                            <td>Risk that bond will be called, ending interest early</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Yield to call (YTC)</strong></td>
+                            <td>Yield calculation assuming bond is called</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Yield to worst (YTW)</strong></td>
+                            <td>Lower of YTM or YTC; must be disclosed</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Put feature</strong></td>
+                            <td>Gives investor right to sell bond back at specified price</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Credit/default risk</strong></td>
+                            <td>Risk issuer cannot make payments</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Investment grade</strong></td>
+                            <td>BBB/Baa or better rating</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Speculative/junk</strong></td>
+                            <td>Below BBB/Baa (high-yield)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interest rate risk</strong></td>
+                            <td>Risk that rising rates cause price decline</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Variable-rate bond</strong></td>
+                            <td>Coupon adjusts to market rates</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Duration</strong></td>
+                            <td>Measure of bond's sensitivity to rate changes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Systematic risk</strong></td>
+                            <td>Affects all investments; cannot diversify away</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nonsystematic risk</strong></td>
+                            <td>Unique to specific securities; can diversify</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Purchasing power risk</strong></td>
+                            <td>Inflation reduces real returns</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reinvestment risk</strong></td>
+                            <td>Cannot reinvest at same rates</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Liquidity risk</strong></td>
+                            <td>Cannot sell quickly at fair price</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Currency risk</strong></td>
+                            <td>Exchange rate fluctuations</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p style="margin-top: var(--fh-space-2xl); font-style: italic; color: var(--fh-gray-600)">
+                    Chapter 3 builds on Chapter 2's fundamentals by adding call/put features and the full spectrum of
+                    bond risks. Master these before moving to Chapter 4: Corporate, U.S. Government, and Agency Debt.
+                </p>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <nav class="chapter-nav">
+                <a href="series-7-chapter-02-debt-fundamentals.html" class="chapter-nav__link chapter-nav__link--prev">
+                    <span class="chapter-nav__label">Previous Chapter</span>
+                    <span class="chapter-nav__title">← Chapter 2: Debt Fundamentals</span>
+                </a>
+                <a
+                    href="series-7-chapter-04-corporate-government-debt.html"
+                    class="chapter-nav__link chapter-nav__link--next"
+                >
+                    <span class="chapter-nav__label">Next Chapter</span>
+                    <span class="chapter-nav__title">Chapter 4: Corporate & Government Debt →</span>
+                </a>
+            </nav>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer__text">Franklin Hugh Money | Series 7 Study Materials</p>
+            <div class="footer__links">
+                <a href="series-7-study-materials.html">Series 7 Home</a>
+                <span>|</span>
+                <a href="../../index.html">FHM Home</a>
             </div>
+        </footer>
 
-            <div class="critical-concept">
-                <div class="critical-concept__label">Section 2 Key Points</div>
-                <table>
-                    <tr>
-                        <th>Concept</th>
-                        <th>Key Details</th>
-                    </tr>
-                    <tr>
-                        <td>Bond ratings</td>
-                        <td>S&P/Moody's; BBB/Baa or better = investment grade</td>
-                    </tr>
-                    <tr>
-                        <td>Interest rate risk</td>
-                        <td>Based on maturity and coupon rate</td>
-                    </tr>
-                    <tr>
-                        <td>Duration</td>
-                        <td>Long maturity + low coupon = high volatility</td>
-                    </tr>
-                    <tr>
-                        <td>Systematic</td>
-                        <td>Cannot be diversified away</td>
-                    </tr>
-                    <tr>
-                        <td>Nonsystematic</td>
-                        <td>Can be diversified away</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
+        <!-- Back to Top Button -->
+        <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+        </button>
 
-        <!-- Key Terms Glossary -->
-        <section id="glossary">
-            <h2>Chapter 3 Key Terms Glossary</h2>
+        <!-- JavaScript for Interactivity -->
+        <script>
+            // Reading Progress Bar
+            const progressBar = document.getElementById('progress-bar');
+            const header = document.getElementById('header');
 
-            <div class="comparison-table">
-                <table>
-                    <tr>
-                        <th>Term</th>
-                        <th>Definition</th>
-                    </tr>
-                    <tr><td><strong>Callable bond</strong></td><td>Bond that issuer can redeem before maturity</td></tr>
-                    <tr><td><strong>Call protection</strong></td><td>Period during which bond cannot be called</td></tr>
-                    <tr><td><strong>Call premium</strong></td><td>Amount above par paid when bond is called</td></tr>
-                    <tr><td><strong>Call risk</strong></td><td>Risk that bond will be called, ending interest early</td></tr>
-                    <tr><td><strong>Yield to call (YTC)</strong></td><td>Yield calculation assuming bond is called</td></tr>
-                    <tr><td><strong>Yield to worst (YTW)</strong></td><td>Lower of YTM or YTC; must be disclosed</td></tr>
-                    <tr><td><strong>Put feature</strong></td><td>Gives investor right to sell bond back at specified price</td></tr>
-                    <tr><td><strong>Credit/default risk</strong></td><td>Risk issuer cannot make payments</td></tr>
-                    <tr><td><strong>Investment grade</strong></td><td>BBB/Baa or better rating</td></tr>
-                    <tr><td><strong>Speculative/junk</strong></td><td>Below BBB/Baa (high-yield)</td></tr>
-                    <tr><td><strong>Interest rate risk</strong></td><td>Risk that rising rates cause price decline</td></tr>
-                    <tr><td><strong>Variable-rate bond</strong></td><td>Coupon adjusts to market rates</td></tr>
-                    <tr><td><strong>Duration</strong></td><td>Measure of bond's sensitivity to rate changes</td></tr>
-                    <tr><td><strong>Systematic risk</strong></td><td>Affects all investments; cannot diversify away</td></tr>
-                    <tr><td><strong>Nonsystematic risk</strong></td><td>Unique to specific securities; can diversify</td></tr>
-                    <tr><td><strong>Purchasing power risk</strong></td><td>Inflation reduces real returns</td></tr>
-                    <tr><td><strong>Reinvestment risk</strong></td><td>Cannot reinvest at same rates</td></tr>
-                    <tr><td><strong>Liquidity risk</strong></td><td>Cannot sell quickly at fair price</td></tr>
-                    <tr><td><strong>Currency risk</strong></td><td>Exchange rate fluctuations</td></tr>
-                </table>
-            </div>
+            function updateProgress() {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (scrollTop / docHeight) * 100;
+                progressBar.style.width = progress + '%';
 
-            <p style="margin-top: var(--fh-space-2xl); font-style: italic; color: var(--fh-gray-600);">
-                Chapter 3 builds on Chapter 2's fundamentals by adding call/put features and the full spectrum
-                of bond risks. Master these before moving to Chapter 4: Corporate, U.S. Government, and Agency Debt.
-            </p>
-        </section>
-
-        <!-- Chapter Navigation -->
-        <nav class="chapter-nav">
-            <a href="series-7-chapter-02-debt-fundamentals.html" class="chapter-nav__link chapter-nav__link--prev">
-                <span class="chapter-nav__label">Previous Chapter</span>
-                <span class="chapter-nav__title">← Chapter 2: Debt Fundamentals</span>
-            </a>
-            <a href="series-7-chapter-04-corporate-government-debt.html" class="chapter-nav__link chapter-nav__link--next">
-                <span class="chapter-nav__label">Next Chapter</span>
-                <span class="chapter-nav__title">Chapter 4: Corporate & Government Debt →</span>
-            </a>
-        </nav>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p class="footer__text">Franklin Hugh Money | Series 7 Study Materials</p>
-        <div class="footer__links">
-            <a href="series-7-study-materials.html">Series 7 Home</a>
-            <span>|</span>
-            <a href="../../index.html">FHM Home</a>
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
-    </button>
-
-    <!-- JavaScript for Interactivity -->
-    <script>
-        // Reading Progress Bar
-        const progressBar = document.getElementById('progress-bar');
-        const header = document.getElementById('header');
-
-        function updateProgress() {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = (scrollTop / docHeight) * 100;
-            progressBar.style.width = progress + '%';
-
-            if (scrollTop > 50) {
-                header.classList.add('header--scrolled');
-            } else {
-                header.classList.remove('header--scrolled');
-            }
-        }
-
-        // Back to Top Button
-        const backToTop = document.getElementById('back-to-top');
-
-        function toggleBackToTop() {
-            if (window.scrollY > 400) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        }
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // TOC Active State
-        const tocLinks = document.querySelectorAll('.toc__link');
-        const sections = document.querySelectorAll('section[id]');
-
-        function updateTocActive() {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.scrollY >= sectionTop - 150) {
-                    current = section.getAttribute('id');
+                if (scrollTop > 50) {
+                    header.classList.add('header--scrolled');
+                } else {
+                    header.classList.remove('header--scrolled');
                 }
+            }
+
+            // Back to Top Button
+            const backToTop = document.getElementById('back-to-top');
+
+            function toggleBackToTop() {
+                if (window.scrollY > 400) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            tocLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        }
+            // TOC Active State
+            const tocLinks = document.querySelectorAll('.toc__link');
+            const sections = document.querySelectorAll('section[id]');
 
-        // Throttled scroll handler
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    updateProgress();
-                    toggleBackToTop();
-                    updateTocActive();
-                    ticking = false;
+            function updateTocActive() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
                 });
-                ticking = true;
+
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
             }
-        });
 
-        // Initialize on load
-        updateProgress();
-        toggleBackToTop();
-        updateTocActive();
-    </script>
+            // Throttled scroll handler
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        updateProgress();
+                        toggleBackToTop();
+                        updateTocActive();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
 
-</body>
+            // Initialize on load
+            updateProgress();
+            toggleBackToTop();
+            updateTocActive();
+        </script>
+    </body>
 </html>

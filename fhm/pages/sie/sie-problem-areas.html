@@ -1,991 +1,1022 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-    <meta name="description" content="SIE Problem Areas - Drill questions you got wrong on practice exams">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+        <meta name="description" content="SIE Problem Areas - Drill questions you got wrong on practice exams" />
+
+        <title>Problem Areas | Franklin Hugh Money</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            :root {
+                --fh-navy: #002d62;
+                --fh-cream: #fffdf7;
+                --fh-gray: #54585a;
+                --fh-sage: #7c9885;
+                --fh-burgundy: #6b2737;
+                --fh-gold: #b08d57;
+                --fh-gray-900: #1a1a1a;
+                --fh-gray-700: #404040;
+                --fh-gray-600: #595959;
+                --fh-gray-500: #737373;
+                --fh-gray-400: #8a8a8a;
+                --fh-gray-300: #d4d4d4;
+                --fh-gray-200: #e5e5e5;
+                --fh-gray-100: #f5f5f5;
+                --fh-white: #ffffff;
+                --fh-font-display: 'Crimson Pro', Georgia, serif;
+                --fh-font-body: 'Inter', -apple-system, sans-serif;
+                --fh-font-mono: 'IBM Plex Mono', monospace;
+                --fh-space-xs: 0.25rem;
+                --fh-space-sm: 0.5rem;
+                --fh-space-md: 1rem;
+                --fh-space-lg: 1.5rem;
+                --fh-space-xl: 2rem;
+                --fh-space-2xl: 3rem;
+                --fh-space-3xl: 4rem;
+                --fh-correct: #10b981;
+                --fh-incorrect: #ef4444;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: var(--fh-font-body);
+                font-size: 16px;
+                line-height: 1.75;
+                color: var(--fh-gray-900);
+                background: var(--fh-cream);
+                min-height: 100vh;
+            }
+
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 0 var(--fh-space-xl);
+            }
+
+            /* Header */
+            .quiz-header {
+                background: linear-gradient(135deg, var(--fh-burgundy) 0%, #8a3344 100%);
+                color: var(--fh-white);
+                padding: var(--fh-space-xl) 0;
+            }
+
+            .quiz-header__inner {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: var(--fh-space-md);
+            }
+
+            .quiz-header__title {
+                font-family: var(--fh-font-display);
+                font-size: 1.5rem;
+                font-weight: 500;
+                color: var(--fh-white);
+            }
 
-    <title>Problem Areas | Franklin Hugh Money</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --fh-navy: #002D62;
-            --fh-cream: #FFFDF7;
-            --fh-gray: #54585A;
-            --fh-sage: #7C9885;
-            --fh-burgundy: #6B2737;
-            --fh-gold: #B08D57;
-            --fh-gray-900: #1A1A1A;
-            --fh-gray-700: #404040;
-            --fh-gray-600: #595959;
-            --fh-gray-500: #737373;
-            --fh-gray-400: #8a8a8a;
-            --fh-gray-300: #D4D4D4;
-            --fh-gray-200: #E5E5E5;
-            --fh-gray-100: #F5F5F5;
-            --fh-white: #FFFFFF;
-            --fh-font-display: 'Crimson Pro', Georgia, serif;
-            --fh-font-body: 'Inter', -apple-system, sans-serif;
-            --fh-font-mono: 'IBM Plex Mono', monospace;
-            --fh-space-xs: 0.25rem;
-            --fh-space-sm: 0.5rem;
-            --fh-space-md: 1rem;
-            --fh-space-lg: 1.5rem;
-            --fh-space-xl: 2rem;
-            --fh-space-2xl: 3rem;
-            --fh-space-3xl: 4rem;
-            --fh-correct: #10B981;
-            --fh-incorrect: #EF4444;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: var(--fh-font-body);
-            font-size: 16px;
-            line-height: 1.75;
-            color: var(--fh-gray-900);
-            background: var(--fh-cream);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 var(--fh-space-xl);
-        }
-
-        /* Header */
-        .quiz-header {
-            background: linear-gradient(135deg, var(--fh-burgundy) 0%, #8a3344 100%);
-            color: var(--fh-white);
-            padding: var(--fh-space-xl) 0;
-        }
-
-        .quiz-header__inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--fh-space-md);
-        }
-
-        .quiz-header__title {
-            font-family: var(--fh-font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--fh-white);
-        }
-
-        .quiz-header__nav {
-            display: flex;
-            gap: var(--fh-space-lg);
-        }
-
-        .quiz-header__nav a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .quiz-header__nav a:hover {
-            color: var(--fh-white);
-        }
-
-        /* Score Bar */
-        .score-bar {
-            background: var(--fh-white);
-            border-bottom: 1px solid var(--fh-gray-200);
-            padding: var(--fh-space-md) 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .score-bar__inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--fh-space-sm);
-        }
-
-        .score-bar__progress {
-            font-family: var(--fh-font-mono);
-            font-size: 0.875rem;
-            color: var(--fh-gray-600);
-        }
-
-        .score-bar__score {
-            display: flex;
-            align-items: center;
-            gap: var(--fh-space-md);
-        }
-
-        .score-bar__correct {
-            color: var(--fh-correct);
-            font-weight: 600;
-        }
-
-        .score-bar__incorrect {
-            color: var(--fh-incorrect);
-            font-weight: 600;
-        }
-
-        .score-bar__percent {
-            font-family: var(--fh-font-mono);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--fh-navy);
-        }
-
-        /* Progress Bar */
-        .progress-track {
-            height: 4px;
-            background: var(--fh-gray-200);
-            border-radius: 2px;
-            margin-top: var(--fh-space-sm);
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--fh-burgundy);
-            transition: width 0.3s ease;
-        }
-
-        /* Start Screen */
-        .start-screen {
-            padding: var(--fh-space-3xl) 0;
-            text-align: center;
-        }
-
-        .start-screen h1 {
-            font-family: var(--fh-font-display);
-            font-size: 2.5rem;
-            color: var(--fh-navy);
-            margin-bottom: var(--fh-space-md);
-        }
-
-        .start-screen__subtitle {
-            font-size: 1.125rem;
-            color: var(--fh-gray-600);
-            margin-bottom: var(--fh-space-lg);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .start-screen__count {
-            font-family: var(--fh-font-mono);
-            font-size: 0.875rem;
-            color: var(--fh-burgundy);
-            background: rgba(107, 39, 55, 0.1);
-            padding: var(--fh-space-sm) var(--fh-space-lg);
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: var(--fh-space-xl);
-        }
-
-        .start-btn {
-            background: var(--fh-burgundy);
-            color: var(--fh-white);
-            border: none;
-            padding: var(--fh-space-md) var(--fh-space-2xl);
-            border-radius: 8px;
-            font-size: 1.125rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.2s;
-        }
-
-        .start-btn:hover {
-            background: #8a3344;
-            transform: translateY(-2px);
-        }
-
-        /* Quiz Screen */
-        .quiz-screen {
-            display: none;
-            padding: var(--fh-space-2xl) 0 var(--fh-space-3xl);
-        }
-
-        .question-card {
-            background: var(--fh-white);
-            border-radius: 12px;
-            padding: var(--fh-space-xl);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .question-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--fh-space-lg);
-        }
-
-        .question-topic {
-            font-family: var(--fh-font-mono);
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--fh-burgundy);
-            background: rgba(107, 39, 55, 0.1);
-            padding: var(--fh-space-xs) var(--fh-space-sm);
-            border-radius: 4px;
-        }
-
-        .question-number {
-            font-family: var(--fh-font-mono);
-            font-size: 0.875rem;
-            color: var(--fh-gray-500);
-        }
-
-        .question-text {
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: var(--fh-gray-900);
-            line-height: 1.5;
-            margin-bottom: var(--fh-space-xl);
-        }
-
-        .answers-list {
-            display: flex;
-            flex-direction: column;
-            gap: var(--fh-space-md);
-        }
-
-        .answer-btn {
-            background: var(--fh-gray-100);
-            border: 2px solid transparent;
-            border-radius: 8px;
-            padding: var(--fh-space-md) var(--fh-space-lg);
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 1rem;
-            color: var(--fh-gray-700);
-            display: flex;
-            align-items: flex-start;
-            gap: var(--fh-space-md);
-        }
-
-        .answer-btn:hover:not(:disabled) {
-            background: var(--fh-white);
-            border-color: var(--fh-navy);
-        }
-
-        .answer-btn:disabled {
-            cursor: default;
-        }
-
-        .answer-btn.correct {
-            background: rgba(16, 185, 129, 0.1);
-            border-color: var(--fh-correct);
-        }
-
-        .answer-btn.incorrect {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: var(--fh-incorrect);
-        }
-
-        .answer-btn.was-correct {
-            background: rgba(16, 185, 129, 0.1);
-            border-color: var(--fh-correct);
-        }
-
-        .answer-letter {
-            font-family: var(--fh-font-mono);
-            font-weight: 600;
-            color: var(--fh-navy);
-            flex-shrink: 0;
-        }
-
-        .answer-btn.correct .answer-letter,
-        .answer-btn.was-correct .answer-letter {
-            color: var(--fh-correct);
-        }
-
-        .answer-btn.incorrect .answer-letter {
-            color: var(--fh-incorrect);
-        }
-
-        /* Feedback */
-        .feedback {
-            display: none;
-            margin-top: var(--fh-space-xl);
-            padding: var(--fh-space-lg);
-            border-radius: 8px;
-        }
-
-        .feedback.show {
-            display: block;
-        }
-
-        .feedback.correct {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid var(--fh-correct);
-        }
-
-        .feedback.incorrect {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid var(--fh-incorrect);
-        }
-
-        .feedback__title {
-            font-weight: 700;
-            margin-bottom: var(--fh-space-sm);
-        }
-
-        .feedback.correct .feedback__title {
-            color: var(--fh-correct);
-        }
-
-        .feedback.incorrect .feedback__title {
-            color: var(--fh-incorrect);
-        }
-
-        .feedback__explanation {
-            color: var(--fh-gray-700);
-            line-height: 1.6;
-        }
-
-        /* Navigation */
-        .quiz-nav {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: var(--fh-space-xl);
-        }
-
-        .next-btn {
-            background: var(--fh-navy);
-            color: var(--fh-white);
-            border: none;
-            padding: var(--fh-space-md) var(--fh-space-xl);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .next-btn:hover {
-            background: #003d82;
-        }
-
-        .next-btn:disabled {
-            background: var(--fh-gray-300);
-            cursor: not-allowed;
-        }
-
-        /* Results Screen */
-        .results-screen {
-            display: none;
-            padding: var(--fh-space-3xl) 0;
-            text-align: center;
-        }
-
-        .results-card {
-            background: var(--fh-white);
-            border-radius: 12px;
-            padding: var(--fh-space-2xl);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            margin-bottom: var(--fh-space-2xl);
-        }
-
-        .results-score {
-            font-family: var(--fh-font-display);
-            font-size: 4rem;
-            font-weight: 600;
-            color: var(--fh-navy);
-            margin-bottom: var(--fh-space-sm);
-        }
-
-        .results-score.passing {
-            color: var(--fh-correct);
-        }
-
-        .results-score.failing {
-            color: var(--fh-incorrect);
-        }
-
-        .results-label {
-            font-size: 1.25rem;
-            color: var(--fh-gray-600);
-            margin-bottom: var(--fh-space-lg);
-        }
-
-        .results-breakdown {
-            display: flex;
-            justify-content: center;
-            gap: var(--fh-space-2xl);
-            padding: var(--fh-space-lg) 0;
-            border-top: 1px solid var(--fh-gray-200);
-        }
-
-        .results-stat__value {
-            font-size: 2rem;
-            font-weight: 600;
-        }
-
-        .results-stat__value.correct {
-            color: var(--fh-correct);
-        }
-
-        .results-stat__value.incorrect {
-            color: var(--fh-incorrect);
-        }
-
-        .results-stat__label {
-            font-size: 0.875rem;
-            color: var(--fh-gray-500);
-        }
-
-        .restart-btn {
-            background: var(--fh-burgundy);
-            color: var(--fh-white);
-            border: none;
-            padding: var(--fh-space-md) var(--fh-space-2xl);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-right: var(--fh-space-md);
-        }
-
-        .restart-btn:hover {
-            background: #8a3344;
-        }
-
-        .back-btn {
-            background: var(--fh-white);
-            color: var(--fh-navy);
-            border: 2px solid var(--fh-navy);
-            padding: var(--fh-space-md) var(--fh-space-2xl);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .back-btn:hover {
-            background: var(--fh-navy);
-            color: var(--fh-white);
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
             .quiz-header__nav {
-                display: none;
+                display: flex;
+                gap: var(--fh-space-lg);
+            }
+
+            .quiz-header__nav a {
+                color: rgba(255, 255, 255, 0.8);
+                text-decoration: none;
+                font-size: 0.875rem;
+                font-weight: 500;
+                transition: color 0.2s;
+            }
+
+            .quiz-header__nav a:hover {
+                color: var(--fh-white);
+            }
+
+            /* Score Bar */
+            .score-bar {
+                background: var(--fh-white);
+                border-bottom: 1px solid var(--fh-gray-200);
+                padding: var(--fh-space-md) 0;
+                position: sticky;
+                top: 0;
+                z-index: 100;
             }
 
             .score-bar__inner {
-                flex-direction: column;
-                align-items: flex-start;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: var(--fh-space-sm);
             }
 
-            .results-breakdown {
+            .score-bar__progress {
+                font-family: var(--fh-font-mono);
+                font-size: 0.875rem;
+                color: var(--fh-gray-600);
+            }
+
+            .score-bar__score {
+                display: flex;
+                align-items: center;
+                gap: var(--fh-space-md);
+            }
+
+            .score-bar__correct {
+                color: var(--fh-correct);
+                font-weight: 600;
+            }
+
+            .score-bar__incorrect {
+                color: var(--fh-incorrect);
+                font-weight: 600;
+            }
+
+            .score-bar__percent {
+                font-family: var(--fh-font-mono);
+                font-size: 1rem;
+                font-weight: 600;
+                color: var(--fh-navy);
+            }
+
+            /* Progress Bar */
+            .progress-track {
+                height: 4px;
+                background: var(--fh-gray-200);
+                border-radius: 2px;
+                margin-top: var(--fh-space-sm);
+                overflow: hidden;
+            }
+
+            .progress-fill {
+                height: 100%;
+                background: var(--fh-burgundy);
+                transition: width 0.3s ease;
+            }
+
+            /* Start Screen */
+            .start-screen {
+                padding: var(--fh-space-3xl) 0;
+                text-align: center;
+            }
+
+            .start-screen h1 {
+                font-family: var(--fh-font-display);
+                font-size: 2.5rem;
+                color: var(--fh-navy);
+                margin-bottom: var(--fh-space-md);
+            }
+
+            .start-screen__subtitle {
+                font-size: 1.125rem;
+                color: var(--fh-gray-600);
+                margin-bottom: var(--fh-space-lg);
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .start-screen__count {
+                font-family: var(--fh-font-mono);
+                font-size: 0.875rem;
+                color: var(--fh-burgundy);
+                background: rgba(107, 39, 55, 0.1);
+                padding: var(--fh-space-sm) var(--fh-space-lg);
+                border-radius: 20px;
+                display: inline-block;
+                margin-bottom: var(--fh-space-xl);
+            }
+
+            .start-btn {
+                background: var(--fh-burgundy);
+                color: var(--fh-white);
+                border: none;
+                padding: var(--fh-space-md) var(--fh-space-2xl);
+                border-radius: 8px;
+                font-size: 1.125rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition:
+                    transform 0.2s,
+                    background 0.2s;
+            }
+
+            .start-btn:hover {
+                background: #8a3344;
+                transform: translateY(-2px);
+            }
+
+            /* Quiz Screen */
+            .quiz-screen {
+                display: none;
+                padding: var(--fh-space-2xl) 0 var(--fh-space-3xl);
+            }
+
+            .question-card {
+                background: var(--fh-white);
+                border-radius: 12px;
+                padding: var(--fh-space-xl);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            }
+
+            .question-meta {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: var(--fh-space-lg);
+            }
+
+            .question-topic {
+                font-family: var(--fh-font-mono);
+                font-size: 0.75rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: var(--fh-burgundy);
+                background: rgba(107, 39, 55, 0.1);
+                padding: var(--fh-space-xs) var(--fh-space-sm);
+                border-radius: 4px;
+            }
+
+            .question-number {
+                font-family: var(--fh-font-mono);
+                font-size: 0.875rem;
+                color: var(--fh-gray-500);
+            }
+
+            .question-text {
+                font-size: 1.25rem;
+                font-weight: 500;
+                color: var(--fh-gray-900);
+                line-height: 1.5;
+                margin-bottom: var(--fh-space-xl);
+            }
+
+            .answers-list {
+                display: flex;
                 flex-direction: column;
                 gap: var(--fh-space-md);
             }
-        }
-        /* Night Mode Overrides (5pm - 9am) */
-        body.night-mode {
-            --fh-navy: #4A90C2;
-            --fh-cream: #1a1f2e;
-            --fh-gray: #9CA3AF;
-            --fh-sage: #8FB89A;
-            --fh-burgundy: #C77A8A;
-            --fh-gold: #D4A85A;
-            --fh-gray-900: #F5F5F5;
-            --fh-gray-700: #E5E5E5;
-            --fh-gray-600: #D4D4D4;
-            --fh-gray-500: #9CA3AF;
-            --fh-gray-400: #6B7280;
-            --fh-gray-300: #4B5563;
-            --fh-gray-200: #374151;
-            --fh-gray-100: #252d3d;
-            --fh-white: #1e2536;
-        }
-    </style>
-    <!-- Night Mode (5pm - 9am) -->
-    <script src="../../assets/js/night-mode.js"></script>
-</head>
-<body>
-    <!-- Header -->
-    <header class="quiz-header">
-        <div class="container">
-            <div class="quiz-header__inner">
-                <h1 class="quiz-header__title">Problem Areas Exam</h1>
-                <nav class="quiz-header__nav">
-                    <a href="sie-study-materials.html">Study Materials</a>
-                    <a href="sie-flashcards.html">Flashcards</a>
-                    <a href="sie-quiz.html">Quiz</a>
-                </nav>
-            </div>
-        </div>
-    </header>
 
-    <!-- Score Bar -->
-    <div class="score-bar" id="scoreBar" style="display: none;">
-        <div class="container">
-            <div class="score-bar__inner">
-                <span class="score-bar__progress" id="progressText">Question 1 of 16</span>
-                <div class="score-bar__score">
-                    <span class="score-bar__correct" id="correctCount">0 correct</span>
-                    <span class="score-bar__incorrect" id="incorrectCount">0 incorrect</span>
-                </div>
-            </div>
-            <div class="progress-track">
-                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Start Screen -->
-    <div class="start-screen" id="startScreen">
-        <div class="container">
-            <h1>Problem Areas</h1>
-            <p class="start-screen__subtitle">
-                These are questions you got wrong on practice exams. Drilling these will help you master your weak spots.
-            </p>
-            <div class="start-screen__count" id="questionCount">16 questions to review</div>
-            <br><br>
-            <button type="button" class="start-btn" id="startBtn">Start Drilling</button>
-        </div>
-    </div>
-
-    <!-- Quiz Screen -->
-    <div class="quiz-screen" id="quizScreen">
-        <div class="container">
-            <div class="question-card">
-                <div class="question-meta">
-                    <span class="question-topic" id="questionTopic">TOPIC</span>
-                    <span class="question-number" id="questionNumber">1 / 16</span>
-                </div>
-                <div class="question-text" id="questionText">
-                    Question text goes here
-                </div>
-                <div class="answers-list" id="answersList">
-                    <!-- Answers will be inserted here -->
-                </div>
-                <div class="feedback" id="feedback">
-                    <div class="feedback__title" id="feedbackTitle">Correct!</div>
-                    <div class="feedback__explanation" id="feedbackExplanation">
-                        Explanation goes here
-                    </div>
-                </div>
-            </div>
-            <div class="quiz-nav">
-                <button type="button" class="next-btn" id="nextBtn" disabled>Next Question</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Results Screen -->
-    <div class="results-screen" id="resultsScreen">
-        <div class="container">
-            <div class="results-card">
-                <div class="results-score" id="finalScore">75%</div>
-                <div class="results-label">Final Score</div>
-                <div class="results-breakdown">
-                    <div class="results-stat">
-                        <div class="results-stat__value correct" id="finalCorrect">12</div>
-                        <div class="results-stat__label">Correct</div>
-                    </div>
-                    <div class="results-stat">
-                        <div class="results-stat__value incorrect" id="finalIncorrect">4</div>
-                        <div class="results-stat__label">Incorrect</div>
-                    </div>
-                </div>
-            </div>
-            <button type="button" class="restart-btn" id="restartBtn">Try Again</button>
-            <a href="sie-study-materials.html" class="back-btn">Back to Study Materials</a>
-        </div>
-    </div>
-
-    <script>
-        // Problem Areas Exam - Questions from failed practice exams
-        const problemQuestions = [
-            {
-                id: "exam-001",
-                question: "How are funds deposited into a fixed annuity?",
-                choices: {
-                    A: "Into a separate account",
-                    B: "Into a general account",
-                    C: "Into both a separate account and a general account",
-                    D: "Into a fixed index mutual fund"
-                },
-                correctAnswer: "B",
-                topic: "Annuities",
-                explanation: "Fixed annuity funds go into the insurer's GENERAL ACCOUNT (not a separate account, which is for variable annuities). The general account provides the guaranteed return."
-            },
-            {
-                id: "exam-002",
-                question: "A customer has $6,000 of capital gains and $10,000 of capital losses. How much loss is deductible from this year's tax return?",
-                choices: {
-                    A: "$3,000",
-                    B: "$4,000",
-                    C: "$6,000",
-                    D: "$10,000"
-                },
-                correctAnswer: "A",
-                topic: "Taxation",
-                explanation: "Net capital loss is $4,000 ($10,000 - $6,000). Only $3,000 of net capital losses can be deducted in a tax year. The remaining $1,000 is carried forward to the next tax year. The customer's tax bracket was not needed."
-            },
-            {
-                id: "exam-003",
-                question: "A customer buys 100 shares at $20. Two months later, stock is quoted at $10-$10.50. The rep offers to repurchase at $18. Which statement is TRUE?",
-                choices: {
-                    A: "This is prohibited - FINRA rules do not allow guarantees against loss",
-                    B: "This is prohibited because of interpositioning",
-                    C: "This is permitted with principal approval",
-                    D: "This is permitted to maintain goodwill"
-                },
-                correctAnswer: "A",
-                topic: "Prohibited Practices",
-                explanation: "Repurchasing shares above market to limit customer's loss is PROHIBITED under FINRA rules. Customers cannot be guaranteed against loss. If market goes up, customer wins; if down, customer loses."
-            },
-            {
-                id: "exam-004",
-                question: "Which statement is TRUE about the FINRA 5% Mark-Up Policy?",
-                choices: {
-                    A: "Secondary market transactions require a 5% mark-up",
-                    B: "Mark-ups must be lower than 5%",
-                    C: "Mark-ups must be at least 5%",
-                    D: "Mark-ups can be more or less than 5%"
-                },
-                correctAnswer: "D",
-                topic: "FINRA Rules",
-                explanation: "The 5% is a GUIDE, not a rule. Mark-ups can be MORE or LESS than 5% depending on the transaction. Easy transactions = lower; difficult = higher. Applies to both principal (markup) and agency (commission) transactions."
-            },
-            {
-                id: "exam-005",
-                question: "A registered rep's friend (venture capitalist) asks them to obtain investors for a private placement. Which statement is TRUE?",
-                choices: {
-                    A: "Permitted since it's an exempt transaction",
-                    B: "Not permitted since broker-dealer isn't the sponsor",
-                    C: "Permitted only if the VC is a FINRA member",
-                    D: "Permitted only with prior written approval from employer"
-                },
-                correctAnswer: "D",
-                topic: "Selling Away",
-                explanation: "RRs are prohibited from 'private securities transactions' unless they: (1) provide written notice to member firm, (2) detail compensation in writing, (3) obtain express written approval from member firm."
-            },
-            {
-                id: "exam-006",
-                question: "All of the following must be reviewed by a principal EXCEPT:",
-                choices: {
-                    A: "Letters recommending securities to all clients",
-                    B: "Complaint letters from customers",
-                    C: "Form letters mailed to all customers",
-                    D: "Form letters for internal use within a firm"
-                },
-                correctAnswer: "D",
-                topic: "Communications",
-                explanation: "INTERNAL documents don't need review because the public doesn't see them. Retail communications (>25 clients) need principal approval. Correspondence (<=25 clients) needs post-use review."
-            },
-            {
-                id: "exam-007",
-                question: "All of the following must be disclosed on a U4 Form EXCEPT:",
-                choices: {
-                    A: "Primary residence for the past 5 years",
-                    B: "Employers for the past 10 years",
-                    C: "Foreign bank accounts currently owned",
-                    D: "Bankruptcies or financial judgments"
-                },
-                correctAnswer: "C",
-                topic: "Registration",
-                explanation: "NO requirement to disclose bank accounts on the U4. Must disclose: residence for past 5 years, employers for past 10 years, and any bankruptcies/judgments/liens."
-            },
-            {
-                id: "exam-008",
-                question: "All of the following are covered under the Securities Exchange Act of 1934 EXCEPT:",
-                choices: {
-                    A: "Registration of broker-dealers",
-                    B: "Registration of new issues",
-                    C: "Stabilization of new issues",
-                    D: "Registration of exchanges"
-                },
-                correctAnswer: "B",
-                topic: "Regulation",
-                explanation: "REGISTRATION OF NEW ISSUES is covered by the 1933 Act. The 1934 Act covers: registration of broker-dealers, registration of exchanges, and stabilization of new issues in the secondary market."
-            },
-            {
-                id: "exam-009",
-                question: "Which statement is TRUE about the 'build-up' in a variable annuity during accumulation?",
-                choices: {
-                    A: "Interest/dividends/gains are reinvested to buy more annuity units",
-                    B: "Interest/dividends/gains are reinvested and build tax deferred",
-                    C: "Interest/dividends/gains are taxable",
-                    D: "Interest/dividends/gains can be paid out or reinvested"
-                },
-                correctAnswer: "B",
-                topic: "Variable Annuities",
-                explanation: "During accumulation, all earnings are reinvested to buy more ACCUMULATION UNITS (not annuity units) and build TAX DEFERRED. This tax deferral is the major advantage over direct mutual fund investment."
-            },
-            {
-                id: "exam-010",
-                question: "Payments received by the owner of a TAX-QUALIFIED variable annuity are:",
-                choices: {
-                    A: "100% taxable as investment income",
-                    B: "Only taxable to the extent of earnings above cost basis",
-                    C: "Only taxable to the extent of the holder's cost basis",
-                    D: "Non-taxable"
-                },
-                correctAnswer: "A",
-                topic: "Annuity Taxation",
-                explanation: "100% TAXABLE. Tax-qualified contributions were deductible, so the plan has a zero cost basis. ALL distributions are taxable. (Non-qualified annuities only tax the earnings portion.)"
-            },
-            {
-                id: "exam-011",
-                question: "To recommend a variable annuity, the rep must inform the customer about all of the following EXCEPT:",
-                choices: {
-                    A: "Potential surrender period and surrender charge",
-                    B: "Potential tax penalty",
-                    C: "Mortality and expense fees",
-                    D: "Premium reductions available for enhanced riders"
-                },
-                correctAnswer: "D",
-                topic: "Variable Annuities",
-                explanation: "Enhanced riders INCREASE premium cost, not reduce it. Must disclose: surrender period/charge, tax penalties, mortality & expense fees, and charges FOR enhanced riders (like GMIB)."
-            },
-            {
-                id: "exam-012",
-                question: "An open-end fund has NAV of $10 per share. The minimum price at which a share can be purchased is:",
-                choices: {
-                    A: "$10",
-                    B: "$10 plus a commission",
-                    C: "The market price",
-                    D: "The market price plus a commission"
-                },
-                correctAnswer: "A",
-                topic: "Mutual Funds",
-                explanation: "$10 (the NAV). Open-end funds are purchased at NAV plus any sales load. A no-load fund = just NAV. Closed-end funds trade at market price (can differ from NAV) plus commission."
-            },
-            {
-                id: "exam-013",
-                question: "Mutual funds must send their financial statements to shareholders:",
-                choices: {
-                    A: "Once a year",
-                    B: "Two times per year",
-                    C: "Three times per year",
-                    D: "Four times per year"
-                },
-                correctAnswer: "B",
-                topic: "Mutual Funds",
-                explanation: "SEMI-ANNUALLY (twice per year). Mutual funds must send financial statements to shareholders two times per year."
-            },
-            {
-                id: "exam-014",
-                question: "The municipal bond counsel opines on all of the following EXCEPT:",
-                choices: {
-                    A: "Validity",
-                    B: "Legality",
-                    C: "Feasibility",
-                    D: "Tax exempt status"
-                },
-                correctAnswer: "C",
-                topic: "Municipal Bonds",
-                explanation: "NOT FEASIBILITY (economic viability). Bond counsel opines on: validity, legality, and tax-exempt status. They examine legal/tax issues, not economic opinions."
-            },
-            {
-                id: "exam-015",
-                question: "A bond is rated BBB by Standard and Poor's. The bond is:",
-                choices: {
-                    A: "Highest Quality Investment Grade",
-                    B: "High Quality Investment Grade",
-                    C: "Lowest Quality Investment Grade",
-                    D: "Highest Level Speculative Grade"
-                },
-                correctAnswer: "C",
-                topic: "Bond Ratings",
-                explanation: "LOWEST QUALITY INVESTMENT GRADE. Investment grade ratings: AAA (highest), AA, A, BBB (lowest investment grade). Below BBB = speculative/junk."
-            },
-            {
-                id: "exam-016",
-                question: "A registered representative repurchasing customer shares above market price to limit losses is an example of:",
-                choices: {
-                    A: "Guaranteeing against loss (prohibited)",
-                    B: "Interpositioning (prohibited)",
-                    C: "A permitted goodwill gesture",
-                    D: "Proper customer service"
-                },
-                correctAnswer: "A",
-                topic: "Prohibited Practices",
-                explanation: "GUARANTEEING AGAINST LOSS is prohibited under FINRA rules. Interpositioning is different - it's adding unnecessary middlemen. Customers must bear market risk."
+            .answer-btn {
+                background: var(--fh-gray-100);
+                border: 2px solid transparent;
+                border-radius: 8px;
+                padding: var(--fh-space-md) var(--fh-space-lg);
+                text-align: left;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                font-size: 1rem;
+                color: var(--fh-gray-700);
+                display: flex;
+                align-items: flex-start;
+                gap: var(--fh-space-md);
             }
-        ];
 
-        // Quiz State
-        let currentQuestion = 0;
-        let correctAnswers = 0;
-        let incorrectAnswers = 0;
-        let answered = false;
-        let shuffledQuestions = [];
-
-        // DOM Elements
-        const startScreen = document.getElementById('startScreen');
-        const quizScreen = document.getElementById('quizScreen');
-        const resultsScreen = document.getElementById('resultsScreen');
-        const scoreBar = document.getElementById('scoreBar');
-        const startBtn = document.getElementById('startBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const restartBtn = document.getElementById('restartBtn');
-
-        // Shuffle array
-        function shuffle(array) {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            .answer-btn:hover:not(:disabled) {
+                background: var(--fh-white);
+                border-color: var(--fh-navy);
             }
-            return shuffled;
-        }
 
-        // Initialize quiz
-        function startQuiz() {
-            shuffledQuestions = shuffle(problemQuestions);
-            currentQuestion = 0;
-            correctAnswers = 0;
-            incorrectAnswers = 0;
+            .answer-btn:disabled {
+                cursor: default;
+            }
 
-            startScreen.style.display = 'none';
-            resultsScreen.style.display = 'none';
-            quizScreen.style.display = 'block';
-            scoreBar.style.display = 'block';
+            .answer-btn.correct {
+                background: rgba(16, 185, 129, 0.1);
+                border-color: var(--fh-correct);
+            }
 
-            showQuestion();
-        }
+            .answer-btn.incorrect {
+                background: rgba(239, 68, 68, 0.1);
+                border-color: var(--fh-incorrect);
+            }
 
-        // Show current question
-        function showQuestion() {
-            const q = shuffledQuestions[currentQuestion];
-            answered = false;
-            nextBtn.disabled = true;
+            .answer-btn.was-correct {
+                background: rgba(16, 185, 129, 0.1);
+                border-color: var(--fh-correct);
+            }
 
-            // Update progress
-            document.getElementById('progressText').textContent = `Question ${currentQuestion + 1} of ${shuffledQuestions.length}`;
-            document.getElementById('questionNumber').textContent = `${currentQuestion + 1} / ${shuffledQuestions.length}`;
-            document.getElementById('progressFill').style.width = `${((currentQuestion) / shuffledQuestions.length) * 100}%`;
+            .answer-letter {
+                font-family: var(--fh-font-mono);
+                font-weight: 600;
+                color: var(--fh-navy);
+                flex-shrink: 0;
+            }
 
-            // Update scores
-            document.getElementById('correctCount').textContent = `${correctAnswers} correct`;
-            document.getElementById('incorrectCount').textContent = `${incorrectAnswers} incorrect`;
+            .answer-btn.correct .answer-letter,
+            .answer-btn.was-correct .answer-letter {
+                color: var(--fh-correct);
+            }
 
-            // Show question
-            document.getElementById('questionTopic').textContent = q.topic;
-            document.getElementById('questionText').textContent = q.question;
+            .answer-btn.incorrect .answer-letter {
+                color: var(--fh-incorrect);
+            }
 
-            // Reset feedback
-            const feedback = document.getElementById('feedback');
-            feedback.classList.remove('show', 'correct', 'incorrect');
+            /* Feedback */
+            .feedback {
+                display: none;
+                margin-top: var(--fh-space-xl);
+                padding: var(--fh-space-lg);
+                border-radius: 8px;
+            }
 
-            // Create answer buttons
-            const answersList = document.getElementById('answersList');
-            answersList.innerHTML = '';
+            .feedback.show {
+                display: block;
+            }
 
-            const letters = ['A', 'B', 'C', 'D'];
-            letters.forEach(letter => {
-                if (q.choices[letter]) {
-                    const btn = document.createElement('button');
-                    btn.className = 'answer-btn';
-                    btn.innerHTML = `<span class="answer-letter">${letter}.</span><span>${q.choices[letter]}</span>`;
-                    btn.onclick = () => selectAnswer(letter);
-                    answersList.appendChild(btn);
+            .feedback.correct {
+                background: rgba(16, 185, 129, 0.1);
+                border-left: 4px solid var(--fh-correct);
+            }
+
+            .feedback.incorrect {
+                background: rgba(239, 68, 68, 0.1);
+                border-left: 4px solid var(--fh-incorrect);
+            }
+
+            .feedback__title {
+                font-weight: 700;
+                margin-bottom: var(--fh-space-sm);
+            }
+
+            .feedback.correct .feedback__title {
+                color: var(--fh-correct);
+            }
+
+            .feedback.incorrect .feedback__title {
+                color: var(--fh-incorrect);
+            }
+
+            .feedback__explanation {
+                color: var(--fh-gray-700);
+                line-height: 1.6;
+            }
+
+            /* Navigation */
+            .quiz-nav {
+                display: flex;
+                justify-content: flex-end;
+                margin-top: var(--fh-space-xl);
+            }
+
+            .next-btn {
+                background: var(--fh-navy);
+                color: var(--fh-white);
+                border: none;
+                padding: var(--fh-space-md) var(--fh-space-xl);
+                border-radius: 8px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+
+            .next-btn:hover {
+                background: #003d82;
+            }
+
+            .next-btn:disabled {
+                background: var(--fh-gray-300);
+                cursor: not-allowed;
+            }
+
+            /* Results Screen */
+            .results-screen {
+                display: none;
+                padding: var(--fh-space-3xl) 0;
+                text-align: center;
+            }
+
+            .results-card {
+                background: var(--fh-white);
+                border-radius: 12px;
+                padding: var(--fh-space-2xl);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+                margin-bottom: var(--fh-space-2xl);
+            }
+
+            .results-score {
+                font-family: var(--fh-font-display);
+                font-size: 4rem;
+                font-weight: 600;
+                color: var(--fh-navy);
+                margin-bottom: var(--fh-space-sm);
+            }
+
+            .results-score.passing {
+                color: var(--fh-correct);
+            }
+
+            .results-score.failing {
+                color: var(--fh-incorrect);
+            }
+
+            .results-label {
+                font-size: 1.25rem;
+                color: var(--fh-gray-600);
+                margin-bottom: var(--fh-space-lg);
+            }
+
+            .results-breakdown {
+                display: flex;
+                justify-content: center;
+                gap: var(--fh-space-2xl);
+                padding: var(--fh-space-lg) 0;
+                border-top: 1px solid var(--fh-gray-200);
+            }
+
+            .results-stat__value {
+                font-size: 2rem;
+                font-weight: 600;
+            }
+
+            .results-stat__value.correct {
+                color: var(--fh-correct);
+            }
+
+            .results-stat__value.incorrect {
+                color: var(--fh-incorrect);
+            }
+
+            .results-stat__label {
+                font-size: 0.875rem;
+                color: var(--fh-gray-500);
+            }
+
+            .restart-btn {
+                background: var(--fh-burgundy);
+                color: var(--fh-white);
+                border: none;
+                padding: var(--fh-space-md) var(--fh-space-2xl);
+                border-radius: 8px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background 0.2s;
+                margin-right: var(--fh-space-md);
+            }
+
+            .restart-btn:hover {
+                background: #8a3344;
+            }
+
+            .back-btn {
+                background: var(--fh-white);
+                color: var(--fh-navy);
+                border: 2px solid var(--fh-navy);
+                padding: var(--fh-space-md) var(--fh-space-2xl);
+                border-radius: 8px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-block;
+            }
+
+            .back-btn:hover {
+                background: var(--fh-navy);
+                color: var(--fh-white);
+            }
+
+            /* Responsive */
+            @media (max-width: 600px) {
+                .quiz-header__nav {
+                    display: none;
                 }
-            });
-        }
 
-        // Handle answer selection
-        function selectAnswer(selected) {
-            if (answered) return;
-            answered = true;
+                .score-bar__inner {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
 
-            const q = shuffledQuestions[currentQuestion];
-            const isCorrect = selected === q.correctAnswer;
+                .results-breakdown {
+                    flex-direction: column;
+                    gap: var(--fh-space-md);
+                }
+            }
+            /* Night Mode Overrides (5pm - 9am) */
+            body.night-mode {
+                --fh-navy: #4a90c2;
+                --fh-cream: #1a1f2e;
+                --fh-gray: #9ca3af;
+                --fh-sage: #8fb89a;
+                --fh-burgundy: #c77a8a;
+                --fh-gold: #d4a85a;
+                --fh-gray-900: #f5f5f5;
+                --fh-gray-700: #e5e5e5;
+                --fh-gray-600: #d4d4d4;
+                --fh-gray-500: #9ca3af;
+                --fh-gray-400: #6b7280;
+                --fh-gray-300: #4b5563;
+                --fh-gray-200: #374151;
+                --fh-gray-100: #252d3d;
+                --fh-white: #1e2536;
+            }
+        </style>
+        <!-- Night Mode (5pm - 9am) -->
+        <script src="../../assets/js/night-mode.js"></script>
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="quiz-header">
+            <div class="container">
+                <div class="quiz-header__inner">
+                    <h1 class="quiz-header__title">Problem Areas Exam</h1>
+                    <nav class="quiz-header__nav">
+                        <a href="sie-study-materials.html">Study Materials</a>
+                        <a href="sie-flashcards.html">Flashcards</a>
+                        <a href="sie-quiz.html">Quiz</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
 
-            if (isCorrect) {
-                correctAnswers++;
-            } else {
-                incorrectAnswers++;
+        <!-- Score Bar -->
+        <div class="score-bar" id="scoreBar" style="display: none">
+            <div class="container">
+                <div class="score-bar__inner">
+                    <span class="score-bar__progress" id="progressText">Question 1 of 16</span>
+                    <div class="score-bar__score">
+                        <span class="score-bar__correct" id="correctCount">0 correct</span>
+                        <span class="score-bar__incorrect" id="incorrectCount">0 incorrect</span>
+                    </div>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Screen -->
+        <div class="start-screen" id="startScreen">
+            <div class="container">
+                <h1>Problem Areas</h1>
+                <p class="start-screen__subtitle">
+                    These are questions you got wrong on practice exams. Drilling these will help you master your weak
+                    spots.
+                </p>
+                <div class="start-screen__count" id="questionCount">16 questions to review</div>
+                <br /><br />
+                <button type="button" class="start-btn" id="startBtn">Start Drilling</button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div class="quiz-screen" id="quizScreen">
+            <div class="container">
+                <div class="question-card">
+                    <div class="question-meta">
+                        <span class="question-topic" id="questionTopic">TOPIC</span>
+                        <span class="question-number" id="questionNumber">1 / 16</span>
+                    </div>
+                    <div class="question-text" id="questionText">Question text goes here</div>
+                    <div class="answers-list" id="answersList">
+                        <!-- Answers will be inserted here -->
+                    </div>
+                    <div class="feedback" id="feedback">
+                        <div class="feedback__title" id="feedbackTitle">Correct!</div>
+                        <div class="feedback__explanation" id="feedbackExplanation">Explanation goes here</div>
+                    </div>
+                </div>
+                <div class="quiz-nav">
+                    <button type="button" class="next-btn" id="nextBtn" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div class="results-screen" id="resultsScreen">
+            <div class="container">
+                <div class="results-card">
+                    <div class="results-score" id="finalScore">75%</div>
+                    <div class="results-label">Final Score</div>
+                    <div class="results-breakdown">
+                        <div class="results-stat">
+                            <div class="results-stat__value correct" id="finalCorrect">12</div>
+                            <div class="results-stat__label">Correct</div>
+                        </div>
+                        <div class="results-stat">
+                            <div class="results-stat__value incorrect" id="finalIncorrect">4</div>
+                            <div class="results-stat__label">Incorrect</div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="restart-btn" id="restartBtn">Try Again</button>
+                <a href="sie-study-materials.html" class="back-btn">Back to Study Materials</a>
+            </div>
+        </div>
+
+        <script>
+            // Problem Areas Exam - Questions from failed practice exams
+            const problemQuestions = [
+                {
+                    id: 'exam-001',
+                    question: 'How are funds deposited into a fixed annuity?',
+                    choices: {
+                        A: 'Into a separate account',
+                        B: 'Into a general account',
+                        C: 'Into both a separate account and a general account',
+                        D: 'Into a fixed index mutual fund',
+                    },
+                    correctAnswer: 'B',
+                    topic: 'Annuities',
+                    explanation:
+                        "Fixed annuity funds go into the insurer's GENERAL ACCOUNT (not a separate account, which is for variable annuities). The general account provides the guaranteed return.",
+                },
+                {
+                    id: 'exam-002',
+                    question:
+                        "A customer has $6,000 of capital gains and $10,000 of capital losses. How much loss is deductible from this year's tax return?",
+                    choices: {
+                        A: '$3,000',
+                        B: '$4,000',
+                        C: '$6,000',
+                        D: '$10,000',
+                    },
+                    correctAnswer: 'A',
+                    topic: 'Taxation',
+                    explanation:
+                        "Net capital loss is $4,000 ($10,000 - $6,000). Only $3,000 of net capital losses can be deducted in a tax year. The remaining $1,000 is carried forward to the next tax year. The customer's tax bracket was not needed.",
+                },
+                {
+                    id: 'exam-003',
+                    question:
+                        'A customer buys 100 shares at $20. Two months later, stock is quoted at $10-$10.50. The rep offers to repurchase at $18. Which statement is TRUE?',
+                    choices: {
+                        A: 'This is prohibited - FINRA rules do not allow guarantees against loss',
+                        B: 'This is prohibited because of interpositioning',
+                        C: 'This is permitted with principal approval',
+                        D: 'This is permitted to maintain goodwill',
+                    },
+                    correctAnswer: 'A',
+                    topic: 'Prohibited Practices',
+                    explanation:
+                        "Repurchasing shares above market to limit customer's loss is PROHIBITED under FINRA rules. Customers cannot be guaranteed against loss. If market goes up, customer wins; if down, customer loses.",
+                },
+                {
+                    id: 'exam-004',
+                    question: 'Which statement is TRUE about the FINRA 5% Mark-Up Policy?',
+                    choices: {
+                        A: 'Secondary market transactions require a 5% mark-up',
+                        B: 'Mark-ups must be lower than 5%',
+                        C: 'Mark-ups must be at least 5%',
+                        D: 'Mark-ups can be more or less than 5%',
+                    },
+                    correctAnswer: 'D',
+                    topic: 'FINRA Rules',
+                    explanation:
+                        'The 5% is a GUIDE, not a rule. Mark-ups can be MORE or LESS than 5% depending on the transaction. Easy transactions = lower; difficult = higher. Applies to both principal (markup) and agency (commission) transactions.',
+                },
+                {
+                    id: 'exam-005',
+                    question:
+                        "A registered rep's friend (venture capitalist) asks them to obtain investors for a private placement. Which statement is TRUE?",
+                    choices: {
+                        A: "Permitted since it's an exempt transaction",
+                        B: "Not permitted since broker-dealer isn't the sponsor",
+                        C: 'Permitted only if the VC is a FINRA member',
+                        D: 'Permitted only with prior written approval from employer',
+                    },
+                    correctAnswer: 'D',
+                    topic: 'Selling Away',
+                    explanation:
+                        "RRs are prohibited from 'private securities transactions' unless they: (1) provide written notice to member firm, (2) detail compensation in writing, (3) obtain express written approval from member firm.",
+                },
+                {
+                    id: 'exam-006',
+                    question: 'All of the following must be reviewed by a principal EXCEPT:',
+                    choices: {
+                        A: 'Letters recommending securities to all clients',
+                        B: 'Complaint letters from customers',
+                        C: 'Form letters mailed to all customers',
+                        D: 'Form letters for internal use within a firm',
+                    },
+                    correctAnswer: 'D',
+                    topic: 'Communications',
+                    explanation:
+                        "INTERNAL documents don't need review because the public doesn't see them. Retail communications (>25 clients) need principal approval. Correspondence (<=25 clients) needs post-use review.",
+                },
+                {
+                    id: 'exam-007',
+                    question: 'All of the following must be disclosed on a U4 Form EXCEPT:',
+                    choices: {
+                        A: 'Primary residence for the past 5 years',
+                        B: 'Employers for the past 10 years',
+                        C: 'Foreign bank accounts currently owned',
+                        D: 'Bankruptcies or financial judgments',
+                    },
+                    correctAnswer: 'C',
+                    topic: 'Registration',
+                    explanation:
+                        'NO requirement to disclose bank accounts on the U4. Must disclose: residence for past 5 years, employers for past 10 years, and any bankruptcies/judgments/liens.',
+                },
+                {
+                    id: 'exam-008',
+                    question: 'All of the following are covered under the Securities Exchange Act of 1934 EXCEPT:',
+                    choices: {
+                        A: 'Registration of broker-dealers',
+                        B: 'Registration of new issues',
+                        C: 'Stabilization of new issues',
+                        D: 'Registration of exchanges',
+                    },
+                    correctAnswer: 'B',
+                    topic: 'Regulation',
+                    explanation:
+                        'REGISTRATION OF NEW ISSUES is covered by the 1933 Act. The 1934 Act covers: registration of broker-dealers, registration of exchanges, and stabilization of new issues in the secondary market.',
+                },
+                {
+                    id: 'exam-009',
+                    question: "Which statement is TRUE about the 'build-up' in a variable annuity during accumulation?",
+                    choices: {
+                        A: 'Interest/dividends/gains are reinvested to buy more annuity units',
+                        B: 'Interest/dividends/gains are reinvested and build tax deferred',
+                        C: 'Interest/dividends/gains are taxable',
+                        D: 'Interest/dividends/gains can be paid out or reinvested',
+                    },
+                    correctAnswer: 'B',
+                    topic: 'Variable Annuities',
+                    explanation:
+                        'During accumulation, all earnings are reinvested to buy more ACCUMULATION UNITS (not annuity units) and build TAX DEFERRED. This tax deferral is the major advantage over direct mutual fund investment.',
+                },
+                {
+                    id: 'exam-010',
+                    question: 'Payments received by the owner of a TAX-QUALIFIED variable annuity are:',
+                    choices: {
+                        A: '100% taxable as investment income',
+                        B: 'Only taxable to the extent of earnings above cost basis',
+                        C: "Only taxable to the extent of the holder's cost basis",
+                        D: 'Non-taxable',
+                    },
+                    correctAnswer: 'A',
+                    topic: 'Annuity Taxation',
+                    explanation:
+                        '100% TAXABLE. Tax-qualified contributions were deductible, so the plan has a zero cost basis. ALL distributions are taxable. (Non-qualified annuities only tax the earnings portion.)',
+                },
+                {
+                    id: 'exam-011',
+                    question:
+                        'To recommend a variable annuity, the rep must inform the customer about all of the following EXCEPT:',
+                    choices: {
+                        A: 'Potential surrender period and surrender charge',
+                        B: 'Potential tax penalty',
+                        C: 'Mortality and expense fees',
+                        D: 'Premium reductions available for enhanced riders',
+                    },
+                    correctAnswer: 'D',
+                    topic: 'Variable Annuities',
+                    explanation:
+                        'Enhanced riders INCREASE premium cost, not reduce it. Must disclose: surrender period/charge, tax penalties, mortality & expense fees, and charges FOR enhanced riders (like GMIB).',
+                },
+                {
+                    id: 'exam-012',
+                    question:
+                        'An open-end fund has NAV of $10 per share. The minimum price at which a share can be purchased is:',
+                    choices: {
+                        A: '$10',
+                        B: '$10 plus a commission',
+                        C: 'The market price',
+                        D: 'The market price plus a commission',
+                    },
+                    correctAnswer: 'A',
+                    topic: 'Mutual Funds',
+                    explanation:
+                        '$10 (the NAV). Open-end funds are purchased at NAV plus any sales load. A no-load fund = just NAV. Closed-end funds trade at market price (can differ from NAV) plus commission.',
+                },
+                {
+                    id: 'exam-013',
+                    question: 'Mutual funds must send their financial statements to shareholders:',
+                    choices: {
+                        A: 'Once a year',
+                        B: 'Two times per year',
+                        C: 'Three times per year',
+                        D: 'Four times per year',
+                    },
+                    correctAnswer: 'B',
+                    topic: 'Mutual Funds',
+                    explanation:
+                        'SEMI-ANNUALLY (twice per year). Mutual funds must send financial statements to shareholders two times per year.',
+                },
+                {
+                    id: 'exam-014',
+                    question: 'The municipal bond counsel opines on all of the following EXCEPT:',
+                    choices: {
+                        A: 'Validity',
+                        B: 'Legality',
+                        C: 'Feasibility',
+                        D: 'Tax exempt status',
+                    },
+                    correctAnswer: 'C',
+                    topic: 'Municipal Bonds',
+                    explanation:
+                        'NOT FEASIBILITY (economic viability). Bond counsel opines on: validity, legality, and tax-exempt status. They examine legal/tax issues, not economic opinions.',
+                },
+                {
+                    id: 'exam-015',
+                    question: "A bond is rated BBB by Standard and Poor's. The bond is:",
+                    choices: {
+                        A: 'Highest Quality Investment Grade',
+                        B: 'High Quality Investment Grade',
+                        C: 'Lowest Quality Investment Grade',
+                        D: 'Highest Level Speculative Grade',
+                    },
+                    correctAnswer: 'C',
+                    topic: 'Bond Ratings',
+                    explanation:
+                        'LOWEST QUALITY INVESTMENT GRADE. Investment grade ratings: AAA (highest), AA, A, BBB (lowest investment grade). Below BBB = speculative/junk.',
+                },
+                {
+                    id: 'exam-016',
+                    question:
+                        'A registered representative repurchasing customer shares above market price to limit losses is an example of:',
+                    choices: {
+                        A: 'Guaranteeing against loss (prohibited)',
+                        B: 'Interpositioning (prohibited)',
+                        C: 'A permitted goodwill gesture',
+                        D: 'Proper customer service',
+                    },
+                    correctAnswer: 'A',
+                    topic: 'Prohibited Practices',
+                    explanation:
+                        "GUARANTEEING AGAINST LOSS is prohibited under FINRA rules. Interpositioning is different - it's adding unnecessary middlemen. Customers must bear market risk.",
+                },
+            ];
+
+            // Quiz State
+            let currentQuestion = 0;
+            let correctAnswers = 0;
+            let incorrectAnswers = 0;
+            let answered = false;
+            let shuffledQuestions = [];
+
+            // DOM Elements
+            const startScreen = document.getElementById('startScreen');
+            const quizScreen = document.getElementById('quizScreen');
+            const resultsScreen = document.getElementById('resultsScreen');
+            const scoreBar = document.getElementById('scoreBar');
+            const startBtn = document.getElementById('startBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const restartBtn = document.getElementById('restartBtn');
+
+            // Shuffle array
+            function shuffle(array) {
+                const shuffled = [...array];
+                for (let i = shuffled.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                }
+                return shuffled;
             }
 
-            // Update button states
-            const buttons = document.querySelectorAll('.answer-btn');
-            buttons.forEach((btn, index) => {
-                btn.disabled = true;
-                const letter = ['A', 'B', 'C', 'D'][index];
+            // Initialize quiz
+            function startQuiz() {
+                shuffledQuestions = shuffle(problemQuestions);
+                currentQuestion = 0;
+                correctAnswers = 0;
+                incorrectAnswers = 0;
 
-                if (letter === q.correctAnswer) {
-                    btn.classList.add(isCorrect ? 'correct' : 'was-correct');
-                } else if (letter === selected && !isCorrect) {
-                    btn.classList.add('incorrect');
-                }
-            });
+                startScreen.style.display = 'none';
+                resultsScreen.style.display = 'none';
+                quizScreen.style.display = 'block';
+                scoreBar.style.display = 'block';
 
-            // Show feedback
-            const feedback = document.getElementById('feedback');
-            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
-            document.getElementById('feedbackTitle').textContent = isCorrect ? 'Correct!' : 'Incorrect';
-            document.getElementById('feedbackExplanation').textContent = q.explanation;
-
-            // Update scores
-            document.getElementById('correctCount').textContent = `${correctAnswers} correct`;
-            document.getElementById('incorrectCount').textContent = `${incorrectAnswers} incorrect`;
-
-            // Enable next button
-            nextBtn.disabled = false;
-            nextBtn.textContent = currentQuestion < shuffledQuestions.length - 1 ? 'Next Question' : 'See Results';
-        }
-
-        // Next question
-        function nextQuestion() {
-            currentQuestion++;
-
-            if (currentQuestion >= shuffledQuestions.length) {
-                showResults();
-            } else {
                 showQuestion();
             }
-        }
 
-        // Show results
-        function showResults() {
-            quizScreen.style.display = 'none';
-            scoreBar.style.display = 'none';
-            resultsScreen.style.display = 'block';
+            // Show current question
+            function showQuestion() {
+                const q = shuffledQuestions[currentQuestion];
+                answered = false;
+                nextBtn.disabled = true;
 
-            const percentage = Math.round((correctAnswers / shuffledQuestions.length) * 100);
-            const scoreElement = document.getElementById('finalScore');
-            scoreElement.textContent = `${percentage}%`;
-            scoreElement.className = 'results-score ' + (percentage >= 70 ? 'passing' : 'failing');
+                // Update progress
+                document.getElementById('progressText').textContent =
+                    `Question ${currentQuestion + 1} of ${shuffledQuestions.length}`;
+                document.getElementById('questionNumber').textContent =
+                    `${currentQuestion + 1} / ${shuffledQuestions.length}`;
+                document.getElementById('progressFill').style.width =
+                    `${(currentQuestion / shuffledQuestions.length) * 100}%`;
 
-            document.getElementById('finalCorrect').textContent = correctAnswers;
-            document.getElementById('finalIncorrect').textContent = incorrectAnswers;
-        }
+                // Update scores
+                document.getElementById('correctCount').textContent = `${correctAnswers} correct`;
+                document.getElementById('incorrectCount').textContent = `${incorrectAnswers} incorrect`;
 
-        // Event listeners
-        startBtn.addEventListener('click', startQuiz);
-        nextBtn.addEventListener('click', nextQuestion);
-        restartBtn.addEventListener('click', () => {
-            resultsScreen.style.display = 'none';
-            startQuiz();
-        });
+                // Show question
+                document.getElementById('questionTopic').textContent = q.topic;
+                document.getElementById('questionText').textContent = q.question;
 
-        // Update question count on load
-        document.getElementById('questionCount').textContent = `${problemQuestions.length} questions to review`;
-    </script>
-</body>
+                // Reset feedback
+                const feedback = document.getElementById('feedback');
+                feedback.classList.remove('show', 'correct', 'incorrect');
+
+                // Create answer buttons
+                const answersList = document.getElementById('answersList');
+                answersList.innerHTML = '';
+
+                const letters = ['A', 'B', 'C', 'D'];
+                letters.forEach(letter => {
+                    if (q.choices[letter]) {
+                        const btn = document.createElement('button');
+                        btn.className = 'answer-btn';
+                        btn.innerHTML = `<span class="answer-letter">${letter}.</span><span>${q.choices[letter]}</span>`;
+                        btn.onclick = () => selectAnswer(letter);
+                        answersList.appendChild(btn);
+                    }
+                });
+            }
+
+            // Handle answer selection
+            function selectAnswer(selected) {
+                if (answered) return;
+                answered = true;
+
+                const q = shuffledQuestions[currentQuestion];
+                const isCorrect = selected === q.correctAnswer;
+
+                if (isCorrect) {
+                    correctAnswers++;
+                } else {
+                    incorrectAnswers++;
+                }
+
+                // Update button states
+                const buttons = document.querySelectorAll('.answer-btn');
+                buttons.forEach((btn, index) => {
+                    btn.disabled = true;
+                    const letter = ['A', 'B', 'C', 'D'][index];
+
+                    if (letter === q.correctAnswer) {
+                        btn.classList.add(isCorrect ? 'correct' : 'was-correct');
+                    } else if (letter === selected && !isCorrect) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+
+                // Show feedback
+                const feedback = document.getElementById('feedback');
+                feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+                document.getElementById('feedbackTitle').textContent = isCorrect ? 'Correct!' : 'Incorrect';
+                document.getElementById('feedbackExplanation').textContent = q.explanation;
+
+                // Update scores
+                document.getElementById('correctCount').textContent = `${correctAnswers} correct`;
+                document.getElementById('incorrectCount').textContent = `${incorrectAnswers} incorrect`;
+
+                // Enable next button
+                nextBtn.disabled = false;
+                nextBtn.textContent = currentQuestion < shuffledQuestions.length - 1 ? 'Next Question' : 'See Results';
+            }
+
+            // Next question
+            function nextQuestion() {
+                currentQuestion++;
+
+                if (currentQuestion >= shuffledQuestions.length) {
+                    showResults();
+                } else {
+                    showQuestion();
+                }
+            }
+
+            // Show results
+            function showResults() {
+                quizScreen.style.display = 'none';
+                scoreBar.style.display = 'none';
+                resultsScreen.style.display = 'block';
+
+                const percentage = Math.round((correctAnswers / shuffledQuestions.length) * 100);
+                const scoreElement = document.getElementById('finalScore');
+                scoreElement.textContent = `${percentage}%`;
+                scoreElement.className = 'results-score ' + (percentage >= 70 ? 'passing' : 'failing');
+
+                document.getElementById('finalCorrect').textContent = correctAnswers;
+                document.getElementById('finalIncorrect').textContent = incorrectAnswers;
+            }
+
+            // Event listeners
+            startBtn.addEventListener('click', startQuiz);
+            nextBtn.addEventListener('click', nextQuestion);
+            restartBtn.addEventListener('click', () => {
+                resultsScreen.style.display = 'none';
+                startQuiz();
+            });
+
+            // Update question count on load
+            document.getElementById('questionCount').textContent = `${problemQuestions.length} questions to review`;
+        </script>
+    </body>
 </html>
