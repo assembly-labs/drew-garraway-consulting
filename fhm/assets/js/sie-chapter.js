@@ -1,7 +1,7 @@
 // SIE Chapter Page Utilities
 // Handles scroll progress tracking and other chapter-specific functionality
 
-(function() {
+(function () {
     'use strict';
 
     // Update reading progress bar as user scrolls
@@ -22,7 +22,7 @@
         const tocLinks = document.querySelectorAll('.toc__link');
 
         tocLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
                 if (href && href.startsWith('#')) {
                     e.preventDefault();
@@ -34,7 +34,7 @@
 
                         window.scrollTo({
                             top: offsetPosition,
-                            behavior: 'smooth'
+                            behavior: 'smooth',
                         });
                     }
                 }
@@ -49,9 +49,9 @@
 
         // Throttled scroll handler
         let ticking = false;
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             if (!ticking) {
-                window.requestAnimationFrame(function() {
+                window.requestAnimationFrame(function () {
                     updateProgressBar();
                     ticking = false;
                 });

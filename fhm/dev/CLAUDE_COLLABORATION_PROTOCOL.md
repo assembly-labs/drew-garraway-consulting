@@ -1,13 +1,15 @@
 # CLAUDE CODE COLLABORATION PROTOCOL
+
 ## Franklin Hugh Money Project
 
-*This document MUST be read at the start of EVERY Claude Code session*
+_This document MUST be read at the start of EVERY Claude Code session_
 
 ---
 
 ## 1. SESSION INITIALIZATION CHECKLIST
 
 ### START OF EVERY SESSION:
+
 - [ ] Read this protocol document completely
 - [ ] Check `dev/roadmap/current-sprint.md` for active tasks
 - [ ] Review `dev/docs/known-issues.md` for known bugs
@@ -22,6 +24,7 @@
 ## 2. PROJECT CONTEXT & PHILOSOPHY
 
 ### FRANKLIN HUGH MONEY CORE PRINCIPLES:
+
 - **Mission**: Document Drew's journey from SEI certification to financial independence
 - **Tone**: Thoughtful, approachable financial documentation with subtle wit
 - **Voice**: Clear, modern language with occasional clever observations
@@ -29,6 +32,7 @@
 - **Integration**: Linked from main drewgarraway.com sitemap only
 
 ### TECHNICAL PHILOSOPHY:
+
 - Build to scale from day one
 - Clean, maintainable code over clever hacks
 - Progressive enhancement approach
@@ -41,6 +45,7 @@
 ## 3. CODE STANDARDS & CONVENTIONS
 
 ### HTML STANDARDS:
+
 ```html
 <!-- CORRECT STRUCTURE -->
 <article class="fh-card" data-component="lesson-card">
@@ -55,6 +60,7 @@
 ```
 
 **Requirements:**
+
 - Semantic HTML5 elements always
 - ARIA labels for screen readers
 - Meta tags for structure (even though not indexed)
@@ -62,21 +68,26 @@
 - Data attributes for JS hooks
 
 ### CSS CONVENTIONS:
+
 ```css
 /* Component Structure */
-.fh-card { }                    /* Block */
-.fh-card__header { }            /* Element */
-.fh-card--featured { }          /* Modifier */
+.fh-card {
+} /* Block */
+.fh-card__header {
+} /* Element */
+.fh-card--featured {
+} /* Modifier */
 
 /* Custom Properties */
 :root {
-  --fh-navy: #002D62;           /* Institutional Navy */
-  --fh-cream: #FFFDF7;          /* Paper Cream */
-  --fh-sage: #7C9885;           /* Sage Green (Growth) */
+  --fh-navy: #002d62; /* Institutional Navy */
+  --fh-cream: #fffdf7; /* Paper Cream */
+  --fh-sage: #7c9885; /* Sage Green (Growth) */
 }
 ```
 
 **Requirements:**
+
 - BEM methodology for components
 - Tailwind CSS for utilities
 - Prefix `fh-` for all custom components
@@ -84,6 +95,7 @@
 - CSS Custom Properties for theming
 
 ### JAVASCRIPT PATTERNS:
+
 ```javascript
 // fh-calculator.js
 export class FHCalculator {
@@ -107,6 +119,7 @@ export class FHCalculator {
 ```
 
 **Requirements:**
+
 - Vanilla JavaScript (no framework dependencies)
 - ES6+ modules
 - Error boundaries on all functions
@@ -114,6 +127,7 @@ export class FHCalculator {
 - Event delegation over direct binding
 
 ### FILE NAMING CONVENTIONS:
+
 - HTML pages: `kebab-case.html`
 - Components: `fh-component-name.js`
 - Styles: `fh-component-name.css`
@@ -125,6 +139,7 @@ export class FHCalculator {
 ## 4. DEVELOPMENT WORKFLOW
 
 ### BEFORE WRITING CODE:
+
 1. **State the objective** - What are we building/fixing?
 2. **Check existing components** - Can we reuse/extend?
 3. **Review design system** - Check `design/ui/design-system.md`
@@ -132,6 +147,7 @@ export class FHCalculator {
 5. **Update TodoWrite** - Track all tasks
 
 ### WHILE CODING:
+
 1. **HTML First** - Structure before style
 2. **Mobile First** - Design for small screens
 3. **Progressive Enhancement** - JS enhances, doesn't require
@@ -139,6 +155,7 @@ export class FHCalculator {
 5. **Console Clean** - No errors or warnings
 
 ### AFTER CODING:
+
 1. **Test all viewports** - Mobile, tablet, desktop
 2. **Check accessibility** - Keyboard navigation, screen readers
 3. **Validate HTML** - Ensure semantic correctness
@@ -165,6 +182,7 @@ PHASE 5: Deploy     → Update navigation, validate, publish
 **PHASE 2 IS NON-NEGOTIABLE.** Raw textbook content cannot be published directly.
 
 Every section must include:
+
 1. **Opening hook** - Story or "why it matters," NOT a definition
 2. **Historical context** - The story behind the regulation (why does it exist?)
 3. **Real-world examples** - Concrete numbers and scenarios
@@ -172,12 +190,14 @@ Every section must include:
 5. **The "why"** - Explain reasons behind rules, not just what they are
 
 **Key References:**
+
 - `/docs/ADDING_NEW_CONTENT.md` - Full transformation guide
 - `/design/brand/brand-voice.md` - Voice and tone requirements
 - `/content/sie-exam/templates/section-template.md` - Content template
 - `/content/sie-exam/chapters/chapter-06-packaged-products/` - Example of transformed content
 
 **Quality Gate Checklist:**
+
 - [ ] Passes "Dinner Party Test" (sounds natural in conversation)
 - [ ] Opens with hook, not definition
 - [ ] Has at least one historical context story
@@ -188,17 +208,18 @@ Every section must include:
 ---
 
 ### GENERAL CONTENT STRUCTURE:
+
 All content uses Markdown with frontmatter:
 
 ```markdown
 ---
-title: "Why Traditional Financial Advisors Can Kiss My Assets"
+title: 'Why Traditional Financial Advisors Can Kiss My Assets'
 date: 2024-01-15
-category: "rants"
-tags: ["investing", "advisors", "fees"]
+category: 'rants'
+tags: ['investing', 'advisors', 'fees']
 punk_level: 9
-read_time: "7 min"
-tldr: "Most advisors are salespeople in suits charging you to underperform index funds"
+read_time: '7 min'
+tldr: 'Most advisors are salespeople in suits charging you to underperform index funds'
 featured: false
 ---
 
@@ -206,12 +227,14 @@ Content goes here...
 ```
 
 ### CONTENT CATEGORIES:
+
 - **journal/** - Personal finance journey updates
 - **lessons/** - Educational content with attitude
 - **tools/** - Calculators and interactive features
 - **rants/** - Industry critiques and observations
 
 ### CONTENT GUIDELINES:
+
 - Write in Drew's authentic voice
 - Balance education with irreverence
 - Include real numbers/examples
@@ -224,6 +247,7 @@ Content goes here...
 ## 6. BUG PREVENTION STRATEGIES
 
 ### DEFENSIVE CODING CHECKLIST:
+
 - [ ] Null/undefined checks on all variables
 - [ ] Optional chaining (?.) for object access
 - [ ] Try/catch blocks for risky operations
@@ -231,6 +255,7 @@ Content goes here...
 - [ ] Edge case handling
 
 ### COMMON PITFALLS TO AVOID:
+
 - [ ] Forgetting mobile viewport meta tag
 - [ ] Missing alt text on images
 - [ ] Broken internal links
@@ -239,7 +264,9 @@ Content goes here...
 - [ ] Forgetting to test with JS disabled
 
 ### TESTING REQUIREMENTS:
+
 Before marking any task complete, test:
+
 - [ ] Chrome, Firefox, Safari (desktop)
 - [ ] iOS Safari, Chrome (mobile)
 - [ ] JavaScript disabled scenario
@@ -252,6 +279,7 @@ Before marking any task complete, test:
 ## 7. GIT WORKFLOW
 
 ### COMMIT MESSAGE FORMAT:
+
 ```
 type: description
 
@@ -263,6 +291,7 @@ refactor: simplify calculator validation logic
 ```
 
 ### TYPES:
+
 - `feat:` New feature
 - `fix:` Bug fix
 - `docs:` Documentation only
@@ -272,6 +301,7 @@ refactor: simplify calculator validation logic
 - `chore:` Maintain
 
 ### BRANCH STRATEGY:
+
 ```
 main (production)
 ├── dev (active development)
@@ -290,24 +320,29 @@ main (production)
 # Session Log: YYYY-MM-DD
 
 ## Completed Tasks:
+
 - [x] Built FU Money calculator component
 - [x] Added mobile responsive styles
 - [x] Fixed navigation bug on iOS
 
 ## In Progress:
+
 - [ ] Journey timeline component (70% complete)
 
 ## Next Session Priority:
+
 1. Complete journey timeline
 2. Add content for first three lessons
 3. Test calculator on all browsers
 
 ## Notes:
+
 - Calculator performs well but needs input validation
 - Consider adding animation to timeline
 - Remember to update robots.txt
 
 ## Commits Made:
+
 - abc123: feat: add FU Money calculator
 - def456: fix: iOS navigation issue
 ```
@@ -321,6 +356,7 @@ main (production)
 ## 9. QUALITY ASSURANCE CHECKLIST
 
 ### CODE QUALITY:
+
 - [ ] Zero console errors
 - [ ] HTML validates (W3C)
 - [ ] CSS follows BEM conventions
@@ -329,6 +365,7 @@ main (production)
 - [ ] Accessibility tested
 
 ### CONTENT QUALITY:
+
 - [ ] Tone matches brand voice
 - [ ] No spelling/grammar errors
 - [ ] All links functional
@@ -336,6 +373,7 @@ main (production)
 - [ ] Metadata complete
 
 ### PROJECT INTEGRITY:
+
 - [ ] robots.txt blocking all bots
 - [ ] Sitemap updated for new pages
 - [ ] Navigation reflects new content
@@ -347,6 +385,7 @@ main (production)
 ## 10. EMERGENCY PROTOCOLS
 
 ### IF SOMETHING BREAKS:
+
 1. **DON'T PANIC** - Most things are fixable
 2. **Git status** - What changed?
 3. **Check last working commit** - When did it work?
@@ -356,6 +395,7 @@ main (production)
 7. **Document in** `known-issues.md`
 
 ### NEVER DO:
+
 - Force push to main branch
 - Delete without backup
 - Skip testing "small" changes
@@ -369,6 +409,7 @@ main (production)
 ## 11. QUICK REFERENCE
 
 ### KEY FILES:
+
 - **Design System**: `/design/ui/design-system.md`
 - **Current Sprint**: `/dev/roadmap/current-sprint.md`
 - **Known Issues**: `/dev/docs/known-issues.md`
@@ -377,6 +418,7 @@ main (production)
 - **Session Logs**: `/dev/logs/`
 
 ### USEFUL COMMANDS:
+
 ```bash
 # Check current status
 git status
@@ -401,6 +443,7 @@ grep -r "console.log" --include="*.js"
 **"Building wealth with a middle finger to the establishment"**
 
 Every line of code should embody:
+
 - **Rebellion** against traditional finance
 - **Authenticity** in presentation
 - **Education** through irreverence
@@ -408,5 +451,4 @@ Every line of code should embody:
 
 ---
 
-*Last Updated: 2024-12-05*
-*Version: 1.0*
+_Last Updated: 2024-12-05_ _Version: 1.0_

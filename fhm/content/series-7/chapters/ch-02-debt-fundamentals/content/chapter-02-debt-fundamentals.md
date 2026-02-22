@@ -1,18 +1,25 @@
 # Chapter 2: Debt Fundamentals
 
-*Series 7 Exam Weight: ~10-12 Questions (8%)*
+_Series 7 Exam Weight: ~10-12 Questions (8%)_
 
 ---
 
 ## Section 1: Bond Basics and Pricing
 
-In 1693, England was at war with France and nearly broke. King William III needed money fast. His solution: sell bonds to the public—promises to repay with interest. The Bank of England was created specifically to manage this debt. That basic structure—borrow now, pay interest later, repay principal at maturity—hasn't changed in over 300 years.
+In 1693, England was at war with France and nearly broke. King William III needed money fast. His
+solution: sell bonds to the public—promises to repay with interest. The Bank of England was created
+specifically to manage this debt. That basic structure—borrow now, pay interest later, repay
+principal at maturity—hasn't changed in over 300 years.
 
-Today, the U.S. bond market exceeds $50 trillion. If you're going to advise clients on fixed income, you need to understand how these instruments work at a fundamental level.
+Today, the U.S. bond market exceeds $50 trillion. If you're going to advise clients on fixed income,
+you need to understand how these instruments work at a fundamental level.
 
 ### Why This Section Matters
 
-When investors lend money to corporations, governments, or municipalities, they receive bonds as evidence of that loan. Unlike equity investors who hope for growth, bond investors want predictability: regular interest payments and return of their principal. The trade-off is upside potential for downside protection—bondholders get paid before stockholders if a company fails.
+When investors lend money to corporations, governments, or municipalities, they receive bonds as
+evidence of that loan. Unlike equity investors who hope for growth, bond investors want
+predictability: regular interest payments and return of their principal. The trade-off is upside
+potential for downside protection—bondholders get paid before stockholders if a company fails.
 
 ---
 
@@ -25,7 +32,11 @@ When investors lend money to corporations, governments, or municipalities, they 
   <p>The word "bond" comes from the same root as "bind"—as in a binding agreement. When you buy a bond, the issuer is legally bound to pay you. This legal obligation is what makes bonds fundamentally different from stocks. A company can skip dividends without consequence; skip a bond payment and creditors can force bankruptcy.</p>
 </div>
 
-A <span class="key-term">bond</span> is a fixed-income security that represents a loan from an investor to an issuer that needs capital—typically a corporation, government entity, or municipality. The issuer promises to pay interest periodically and repay the <span class="key-term">principal</span> (the original loan amount) at <span class="key-term">maturity</span>.
+A <span class="key-term">bond</span> is a fixed-income security that represents a loan from an
+investor to an issuer that needs capital—typically a corporation, government entity, or
+municipality. The issuer promises to pay interest periodically and repay the
+<span class="key-term">principal</span> (the original loan amount) at
+<span class="key-term">maturity</span>.
 
 <div class="critical-concept">
   <div class="critical-concept__label">Key Relationship</div>
@@ -45,11 +56,16 @@ A <span class="key-term">bond</span> is a fixed-income security that represents 
   </table>
 </div>
 
-Unlike stockholders who own a piece of the business, bondholders are creditors who are owed money. The bond itself is evidence of the issuer's <span class="key-term">indebtedness</span> to the investor.
+Unlike stockholders who own a piece of the business, bondholders are creditors who are owed money.
+The bond itself is evidence of the issuer's <span class="key-term">indebtedness</span> to the
+investor.
 
 #### Par Value and Coupon Rate
 
-Bonds are issued with a stated face value called <span class="key-term">par value</span>—typically $1,000 for corporate and government bonds. The bond pays interest based on its <span class="key-term">coupon rate</span> (also called the <span class="key-term">stated rate</span> or <span class="key-term">nominal yield</span>)—the annual interest rate applied to the par value.
+Bonds are issued with a stated face value called <span class="key-term">par value</span>—typically
+$1,000 for corporate and government bonds. The bond pays interest based on its
+<span class="key-term">coupon rate</span> (also called the <span class="key-term">stated rate</span>
+or <span class="key-term">nominal yield</span>)—the annual interest rate applied to the par value.
 
 <div class="info-box">
   <div class="info-box__title">Bond Interest Example</div>
@@ -92,13 +108,16 @@ Bonds have evolved from physical paper to electronic records:
   </table>
 </div>
 
-When bonds are held in <span class="key-term">street name</span>, the broker-dealer is listed as owner rather than the customer. The customer remains the <span class="key-term">beneficial owner</span> and retains all benefits—interest payments, transfer rights, and principal repayment.
+When bonds are held in <span class="key-term">street name</span>, the broker-dealer is listed as
+owner rather than the customer. The customer remains the <span class="key-term">beneficial
+owner</span> and retains all benefits—interest payments, transfer rights, and principal repayment.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> U.S. government and agency securities are now issued <em>only</em> in book-entry form. No paper certificates exist for new Treasury issues.</p>
 </div>
 
-(Anyone who's watched a heist movie knows bearer bonds are the villain's favorite—anonymous and negotiable. That's exactly why they were phased out. The IRS prefers knowing who owns what.)
+(Anyone who's watched a heist movie knows bearer bonds are the villain's favorite—anonymous and
+negotiable. That's exactly why they were phased out. The IRS prefers knowing who owns what.)
 
 ---
 
@@ -108,7 +127,8 @@ Different bonds are structured differently based on how they mature and pay inte
 
 #### Term Bonds
 
-A <span class="key-term">term bond</span> issue has every bond maturing on the same date with the same interest rate. Corporate bonds and U.S. government bonds are typically term bond issues.
+A <span class="key-term">term bond</span> issue has every bond maturing on the same date with the
+same interest rate. Corporate bonds and U.S. government bonds are typically term bond issues.
 
 <div class="info-box">
   <div class="info-box__title">Term Bond Example</div>
@@ -118,7 +138,9 @@ A <span class="key-term">term bond</span> issue has every bond maturing on the s
 
 #### Zero-Coupon Bonds
 
-<span class="key-term">Zero-coupon bonds</span> pay no periodic interest. Instead, they're sold at a deep <span class="key-term">discount</span> from par and redeemed at full par value at maturity. The difference between purchase price and redemption value represents the interest earned.
+<span class="key-term">Zero-coupon bonds</span> pay no periodic interest. Instead, they're sold at a
+deep <span class="key-term">discount</span> from par and redeemed at full par value at maturity. The
+difference between purchase price and redemption value represents the interest earned.
 
 <div class="info-box">
   <div class="info-box__title">Zero-Coupon Example</div>
@@ -134,7 +156,9 @@ A <span class="key-term">term bond</span> issue has every bond maturing on the s
 
 #### Serial Bonds
 
-A <span class="key-term">serial bond</span> issue matures in stages over several years rather than all at once. Part of the principal is repaid at set intervals until the entire issue is retired. Because different maturities carry different risk levels, serial bonds have varying interest rates.
+A <span class="key-term">serial bond</span> issue matures in stages over several years rather than
+all at once. Part of the principal is repaid at set intervals until the entire issue is retired.
+Because different maturities carry different risk levels, serial bonds have varying interest rates.
 
 <div class="info-box">
   <div class="info-box__title">Serial Bond Example</div>
@@ -179,11 +203,13 @@ A <span class="key-term">serial bond</span> issue matures in stages over several
   <p>Notice: longer maturities command higher rates (investors demand more compensation for longer-term risk). The largest portion maturing last is called a <strong>balloon maturity</strong>.</p>
 </div>
 
-Most <span class="key-term">municipal bonds</span> and corporate <span class="key-term">equipment trust certificates</span> are issued as serial bonds.
+Most <span class="key-term">municipal bonds</span> and corporate <span class="key-term">equipment
+trust certificates</span> are issued as serial bonds.
 
 #### Series Bonds
 
-<span class="key-term">Series bonds</span> have the same maturity but different issuance dates. They're used for long-term construction projects where funds aren't needed all at once.
+<span class="key-term">Series bonds</span> have the same maturity but different issuance dates.
+They're used for long-term construction projects where funds aren't needed all at once.
 
 <div class="info-box">
   <div class="info-box__title">Series Bond Example</div>
@@ -212,7 +238,8 @@ Understanding how bonds are quoted and priced is essential for the exam and for 
 
 #### Bond Quotes: Percentage of Par
 
-Most bonds are quoted as a percentage of par value. One <span class="key-term">bond point</span> equals 1% of par, which is $10 for a $1,000 par bond.
+Most bonds are quoted as a percentage of par value. One <span class="key-term">bond point</span>
+equals 1% of par, which is $10 for a $1,000 par bond.
 
 <div class="calculation-box">
   <div class="calculation-box__label">Quick Conversion</div>
@@ -263,7 +290,8 @@ Corporate and municipal bonds are quoted in eighths (1/8 = $1.25).
   <p><strong>Step 2:</strong> Move decimal right → <strong>$701.25</strong></p>
 </div>
 
-U.S. government bonds are quoted in thirty-seconds (1/32 = $0.3125). The same two-step method applies.
+U.S. government bonds are quoted in thirty-seconds (1/32 = $0.3125). The same two-step method
+applies.
 
 <div class="info-box">
   <div class="info-box__title">Government Bond Quote Example</div>
@@ -278,7 +306,8 @@ U.S. government bonds are quoted in thirty-seconds (1/32 = $0.3125). The same tw
 
 #### Bid-Ask Spread
 
-<span class="key-term">Dealers</span> buy and sell bonds from their own inventory. Their quotes have two parts:
+<span class="key-term">Dealers</span> buy and sell bonds from their own inventory. Their quotes have
+two parts:
 
 <div class="critical-concept">
   <div class="critical-concept__label">Bid vs. Ask</div>
@@ -318,7 +347,9 @@ U.S. government bonds are quoted in thirty-seconds (1/32 = $0.3125). The same tw
 
 #### Bond Quotes: Yield Basis
 
-Some bonds—particularly municipal serial bonds—are quoted based on yield rather than price. <span class="key-term">Basis points</span> (bps, pronounced "bips") are the standard unit: 1 basis point = 0.01% = 0.0001.
+Some bonds—particularly municipal serial bonds—are quoted based on yield rather than price.
+<span class="key-term">Basis points</span> (bps, pronounced "bips") are the standard unit: 1 basis
+point = 0.01% = 0.0001.
 
 <div class="calculation-box">
   <div class="calculation-box__label">Basis Point Conversion</div>
@@ -438,17 +469,24 @@ Some bonds—particularly municipal serial bonds—are quoted based on yield rat
 
 ## Section 2: Interest Rates, Bond Prices, and Yields
 
-In 1981, 10-year Treasury bonds yielded nearly 16%—an investor could lock in that rate for a decade with U.S. government backing. Investors who bought then watched their bond prices soar as rates fell over the following years. Those who waited and bought in 2020 at 0.5% rates learned the opposite lesson when rates rose sharply in 2022. The relationship between interest rates and bond prices is the most important concept in fixed income.
+In 1981, 10-year Treasury bonds yielded nearly 16%—an investor could lock in that rate for a decade
+with U.S. government backing. Investors who bought then watched their bond prices soar as rates fell
+over the following years. Those who waited and bought in 2020 at 0.5% rates learned the opposite
+lesson when rates rose sharply in 2022. The relationship between interest rates and bond prices is
+the most important concept in fixed income.
 
 ### Why This Section Matters
 
-Interest rate risk is the primary risk for bondholders. When rates move, your bond's value moves in the opposite direction. Understanding this inverse relationship—and the different ways to measure bond yields—is essential for advising clients and passing the exam.
+Interest rate risk is the primary risk for bondholders. When rates move, your bond's value moves in
+the opposite direction. Understanding this inverse relationship—and the different ways to measure
+bond yields—is essential for advising clients and passing the exam.
 
 ---
 
 ### Topic 1: The Inverse Relationship Between Price and Yield
 
-When a bond is issued, its coupon rate reflects current market rates for similar securities. But once issued, the bond's market price will fluctuate as interest rates change.
+When a bond is issued, its coupon rate reflects current market rates for similar securities. But
+once issued, the bond's market price will fluctuate as interest rates change.
 
 <div class="historical-note">
   <div class="historical-note__label">Why This Relationship Exists</div>
@@ -478,23 +516,29 @@ When a bond is issued, its coupon rate reflects current market rates for similar
   <p>Result: Bond X trades at a <strong>premium</strong> (above par).</p>
 </div>
 
-(Bondholders in 2022 learned this lesson the hard way—the fastest rate increases in 40 years sent bond prices tumbling. Meanwhile, the inverse works both ways: bond investors in the 1980s who locked in 15% yields watched their bond values climb steadily as rates fell over the next four decades.)
+(Bondholders in 2022 learned this lesson the hard way—the fastest rate increases in 40 years sent
+bond prices tumbling. Meanwhile, the inverse works both ways: bond investors in the 1980s who locked
+in 15% yields watched their bond values climb steadily as rates fell over the next four decades.)
 
 ---
 
 ### Topic 2: Understanding Bond Yields
 
-<span class="key-term">Yield</span> measures the return an investor earns on a bond. There are several ways to calculate yield, and they tell you different things.
+<span class="key-term">Yield</span> measures the return an investor earns on a bond. There are
+several ways to calculate yield, and they tell you different things.
 
 #### Nominal Yield (Coupon Rate)
 
-<span class="key-term">Nominal yield</span> is simply the coupon rate—the fixed interest rate stated on the bond. Also called the <span class="key-term">stated yield</span>.
+<span class="key-term">Nominal yield</span> is simply the coupon rate—the fixed interest rate stated
+on the bond. Also called the <span class="key-term">stated yield</span>.
 
-A 5% coupon bond always has a 5% nominal yield, regardless of what happens to market prices or interest rates. Nominal yield never changes.
+A 5% coupon bond always has a 5% nominal yield, regardless of what happens to market prices or
+interest rates. Nominal yield never changes.
 
 #### Current Yield
 
-<span class="key-term">Current yield</span> measures the annual return based on what you actually paid for the bond:
+<span class="key-term">Current yield</span> measures the annual return based on what you actually
+paid for the bond:
 
 <div class="calculation-box">
   <div class="calculation-box__label">Formula</div>
@@ -511,7 +555,8 @@ A 5% coupon bond always has a 5% nominal yield, regardless of what happens to ma
 
 #### Current Yield for Discount Bonds
 
-When a bond trades below par, current yield exceeds nominal yield—you're earning the same dollar interest on a smaller investment.
+When a bond trades below par, current yield exceeds nominal yield—you're earning the same dollar
+interest on a smaller investment.
 
 <div class="info-box">
   <div class="info-box__title">Discount Bond Current Yield</div>
@@ -523,7 +568,8 @@ When a bond trades below par, current yield exceeds nominal yield—you're earni
 
 #### Current Yield for Premium Bonds
 
-When a bond trades above par, current yield is less than nominal yield—you're earning the same dollar interest on a larger investment.
+When a bond trades above par, current yield is less than nominal yield—you're earning the same
+dollar interest on a larger investment.
 
 <div class="info-box">
   <div class="info-box__title">Premium Bond Current Yield</div>
@@ -535,7 +581,9 @@ When a bond trades above par, current yield is less than nominal yield—you're 
 
 #### Yield to Maturity (YTM)
 
-<span class="key-term">Yield to maturity</span> is the most comprehensive yield measure. It accounts for:
+<span class="key-term">Yield to maturity</span> is the most comprehensive yield measure. It accounts
+for:
+
 - Annual interest payments
 - The difference between purchase price and par value at maturity
 - Time until maturity
@@ -561,7 +609,8 @@ When a bond trades above par, current yield is less than nominal yield—you're 
 
 #### Yield-Based Quotes and Price Movement
 
-When bonds are quoted on a yield basis (common for municipal serial bonds), the inverse relationship still applies:
+When bonds are quoted on a yield basis (common for municipal serial bonds), the inverse relationship
+still applies:
 
 <div class="info-box">
   <div class="info-box__title">Yield Quote Examples</div>
@@ -635,34 +684,36 @@ When bonds are quoted on a yield basis (common for municipal serial bonds), the 
 
 ## Chapter 2 Key Terms Glossary
 
-| Term | Definition |
-|------|------------|
-| **Bond** | Fixed-income security representing a loan; issuer pays interest and repays principal at maturity |
-| **Par value** | Face value of bond, typically $1,000; basis for interest calculations |
-| **Coupon rate** | Annual interest rate stated on bond; also called stated rate or nominal yield |
-| **Maturity** | Date when principal is repaid and bond is redeemed |
-| **Principal** | Original loan amount; repaid at maturity |
-| **Bearer bonds** | Bonds without owner name; whoever holds them can collect (no longer issued) |
-| **Registered bonds** | Bonds with owner name printed; must be endorsed to transfer |
-| **Book-entry bonds** | Electronic ownership record; no physical certificate (current standard) |
-| **Beneficial owner** | Customer who owns bonds held in street name |
-| **Term bonds** | All bonds in issue have same maturity date |
-| **Serial bonds** | Bonds with staggered maturity dates |
-| **Series bonds** | Bonds with same maturity but different issuance dates |
-| **Zero-coupon bonds** | Sold at discount; no interest payments; redeemed at par |
-| **Bond point** | 1% of par value = $10 |
-| **Basis point (bp)** | 0.01% or 0.0001; 100 bps = 1% |
-| **Bid** | Price dealer pays to buy from investor |
-| **Ask (Offer)** | Price dealer charges to sell to investor |
-| **Spread** | Difference between ask and bid; dealer's profit |
-| **Discount** | Bond price below par |
-| **Premium** | Bond price above par |
-| **Nominal yield** | Coupon rate; fixed rate stated on bond |
-| **Current yield** | Annual interest ÷ current market price |
-| **Yield to maturity (YTM)** | Total return including interest and price change to maturity |
-| **Interest rate risk** | Risk that rate changes will affect bond prices |
-| **Inverse relationship** | Rates and bond prices move in opposite directions |
+| Term                        | Definition                                                                                       |
+| --------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Bond**                    | Fixed-income security representing a loan; issuer pays interest and repays principal at maturity |
+| **Par value**               | Face value of bond, typically $1,000; basis for interest calculations                            |
+| **Coupon rate**             | Annual interest rate stated on bond; also called stated rate or nominal yield                    |
+| **Maturity**                | Date when principal is repaid and bond is redeemed                                               |
+| **Principal**               | Original loan amount; repaid at maturity                                                         |
+| **Bearer bonds**            | Bonds without owner name; whoever holds them can collect (no longer issued)                      |
+| **Registered bonds**        | Bonds with owner name printed; must be endorsed to transfer                                      |
+| **Book-entry bonds**        | Electronic ownership record; no physical certificate (current standard)                          |
+| **Beneficial owner**        | Customer who owns bonds held in street name                                                      |
+| **Term bonds**              | All bonds in issue have same maturity date                                                       |
+| **Serial bonds**            | Bonds with staggered maturity dates                                                              |
+| **Series bonds**            | Bonds with same maturity but different issuance dates                                            |
+| **Zero-coupon bonds**       | Sold at discount; no interest payments; redeemed at par                                          |
+| **Bond point**              | 1% of par value = $10                                                                            |
+| **Basis point (bp)**        | 0.01% or 0.0001; 100 bps = 1%                                                                    |
+| **Bid**                     | Price dealer pays to buy from investor                                                           |
+| **Ask (Offer)**             | Price dealer charges to sell to investor                                                         |
+| **Spread**                  | Difference between ask and bid; dealer's profit                                                  |
+| **Discount**                | Bond price below par                                                                             |
+| **Premium**                 | Bond price above par                                                                             |
+| **Nominal yield**           | Coupon rate; fixed rate stated on bond                                                           |
+| **Current yield**           | Annual interest ÷ current market price                                                           |
+| **Yield to maturity (YTM)** | Total return including interest and price change to maturity                                     |
+| **Interest rate risk**      | Risk that rate changes will affect bond prices                                                   |
+| **Inverse relationship**    | Rates and bond prices move in opposite directions                                                |
 
 ---
 
-*Chapter 2 establishes the fundamentals of debt securities. These concepts—par value, coupon rates, yields, and the inverse relationship—apply to all fixed-income securities covered in later chapters, including corporate bonds, government securities, and municipal bonds.*
+_Chapter 2 establishes the fundamentals of debt securities. These concepts—par value, coupon rates,
+yields, and the inverse relationship—apply to all fixed-income securities covered in later chapters,
+including corporate bonds, government securities, and municipal bonds._

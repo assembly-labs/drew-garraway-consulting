@@ -277,7 +277,7 @@ const Series7FlashcardUI = (function () {
         const btnDontKnow = document.getElementById('btn-dont-know');
 
         if (btnGotIt) {
-            btnGotIt.onclick = function() {
+            btnGotIt.onclick = function () {
                 animateCardOut('up', () => {
                     FlashcardSession.markCurrentProficient();
                     showCurrentCard();
@@ -286,7 +286,7 @@ const Series7FlashcardUI = (function () {
         }
 
         if (btnDontKnow) {
-            btnDontKnow.onclick = function() {
+            btnDontKnow.onclick = function () {
                 animateCardOut('left', () => {
                     FlashcardSession.markCurrentLearning();
                     showCurrentCard();
@@ -447,7 +447,7 @@ const Series7FlashcardUI = (function () {
         init,
         startSession,
         showStart,
-        flipCard
+        flipCard,
     };
 })();
 

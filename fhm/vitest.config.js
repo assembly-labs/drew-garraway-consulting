@@ -16,13 +16,13 @@ export default defineConfig({
             provider: 'v8',
             reporter: ['text', 'html', 'lcov'],
             include: ['assets/js/**/*.js', 'scripts/**/*.js'],
-            exclude: ['**/node_modules/**', '**/tests/**']
+            exclude: ['**/node_modules/**', '**/tests/**'],
         },
 
         // Reporter configuration
         reporters: ['verbose'],
 
         // Watch mode exclusions
-        watchExclude: ['**/node_modules/**', '**/content/**']
-    }
+        watchExclude: ['**/node_modules/**', '**/content/**'],
+    },
 });

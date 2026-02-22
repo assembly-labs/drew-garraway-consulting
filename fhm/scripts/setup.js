@@ -58,7 +58,8 @@ if (fs.existsSync(preCommitSource)) {
 
             // Append our hook content
             const ourHook = fs.readFileSync(preCommitSource, 'utf8');
-            const combined = existing + '\n\n# --- Franklin Hugh Money Cache-Bust Hook ---\n' + ourHook;
+            const combined =
+                existing + '\n\n# --- Franklin Hugh Money Cache-Bust Hook ---\n' + ourHook;
             fs.writeFileSync(preCommitDest, combined);
             fs.chmodSync(preCommitDest, '755');
             console.log('  ✓ pre-commit hook appended');

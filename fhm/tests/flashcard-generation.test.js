@@ -184,7 +184,9 @@ describe('Flashcard Data', () => {
 
     describe('Deduplication', () => {
         it('should not have duplicate front text', () => {
-            const fronts = flashcardData.cards.map(c => c.front.toLowerCase().replace(/[^a-z0-9]/g, ''));
+            const fronts = flashcardData.cards.map(c =>
+                c.front.toLowerCase().replace(/[^a-z0-9]/g, '')
+            );
             const uniqueFronts = new Set(fronts);
 
             // Allow small tolerance for near-duplicates that might differ slightly
@@ -209,7 +211,7 @@ describe('Flashcard Data Statistics', () => {
             1: flashcardData.cards.filter(c => c.section === 1).length,
             2: flashcardData.cards.filter(c => c.section === 2).length,
             3: flashcardData.cards.filter(c => c.section === 3).length,
-            4: flashcardData.cards.filter(c => c.section === 4).length
+            4: flashcardData.cards.filter(c => c.section === 4).length,
         };
 
         // Should have cards in multiple sections

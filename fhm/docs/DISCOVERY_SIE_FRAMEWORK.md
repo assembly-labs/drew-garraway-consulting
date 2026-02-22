@@ -1,7 +1,7 @@
 # SIE Framework Discovery Document
 
-**Date:** January 6, 2026
-**Purpose:** Document the existing SIE exam framework structure, patterns, and approach for replication in Series 7 prep materials.
+**Date:** January 6, 2026 **Purpose:** Document the existing SIE exam framework structure, patterns,
+and approach for replication in Series 7 prep materials.
 
 ---
 
@@ -186,11 +186,13 @@ fhm/
 The SIE framework uses a **5-Phase Content Pipeline**:
 
 ### Phase 1: Extract
+
 - Receive screenshots or source materials
 - Extract all factual content into `raw-notes/chapter-XX-topic.md`
 - Capture key terms, definitions, formulas, regulations
 
 ### Phase 2: Transform (CRITICAL - Cannot Skip)
+
 - Research historical context for major topics
 - Write engaging opening hooks for each section
 - Add real-world examples with concrete numbers
@@ -199,17 +201,20 @@ The SIE framework uses a **5-Phase Content Pipeline**:
 - Apply brand voice throughout
 
 ### Phase 3: Structure & Format
+
 - Create chapter folder: `chapters/chapter-XX-[title]/`
 - Create section files following `templates/section-template.md`
 - Create `chapter-meta.json` with metadata
 - Apply HTML components (key-term, info-box, historical-note, test-tip)
 
 ### Phase 4: Generate HTML
+
 - Generate HTML files in `/pages/sie/`
 - Apply styling and navigation component
 - Verify all components render correctly
 
 ### Phase 5: Deploy
+
 - Update navigation config
 - Update study materials page
 - Run validation
@@ -220,19 +225,22 @@ The SIE framework uses a **5-Phase Content Pipeline**:
 ## 4. File Types & Patterns
 
 ### Markdown Content Files
+
 **Pattern:** `section-{number:02d}-{kebab-case-title}.md`
+
 ```
 section-01-municipal-debt.md
 section-02-money-markets.md
 ```
 
 **Frontmatter:**
+
 ```yaml
 ---
 chapter: 6
 section: 1
-title: "Investment Company Basics"
-description: "Understanding the three types of investment companies"
+title: 'Investment Company Basics'
+description: 'Understanding the three types of investment companies'
 topics:
   - Types of Investment Companies
   - Management Companies
@@ -243,6 +251,7 @@ last_updated: 2024-12-12
 ```
 
 ### Chapter Metadata (chapter-meta.json)
+
 ```json
 {
   "number": 6,
@@ -268,6 +277,7 @@ last_updated: 2024-12-12
 ```
 
 ### Flashcard Data (flashcards.json)
+
 ```json
 {
   "id": "opt-001",
@@ -286,11 +296,13 @@ last_updated: 2024-12-12
 ## 5. HTML Components
 
 ### Key Term
+
 ```html
 <span class="key-term">Municipal Bond</span>
 ```
 
 ### Info Box
+
 ```html
 <div class="info-box">
   <div class="info-box__title">Real-World Example</div>
@@ -299,6 +311,7 @@ last_updated: 2024-12-12
 ```
 
 ### Test Tip
+
 ```html
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Remember this...</p>
@@ -306,6 +319,7 @@ last_updated: 2024-12-12
 ```
 
 ### Historical Note
+
 ```html
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
@@ -314,24 +328,33 @@ last_updated: 2024-12-12
 ```
 
 ### Comparison Table
+
 ```html
 <div class="comparison-table">
   <table>
-    <thead>...</thead>
-    <tbody>...</tbody>
+    <thead>
+      ...
+    </thead>
+    <tbody>
+      ...
+    </tbody>
   </table>
 </div>
 ```
 
 ### Critical Concept (Exam Focus)
+
 ```html
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
-  <table>...</table>
+  <table>
+    ...
+  </table>
 </div>
 ```
 
 ### Exam Focus Box
+
 ```html
 <div class="exam-focus">
   <div class="exam-focus__label">EXAM FOCUS - HIGH PRIORITY</div>
@@ -368,26 +391,31 @@ Each section follows this pattern:
 ## 7. Educational Methodology
 
 ### Story-Based Learning ("Regulations are Monuments to Past Failures")
+
 - Every rule exists because something went wrong
 - Connect facts to memorable stories
 - 22x more memorable than facts alone
 
 ### The "Why First" Approach
+
 Before explaining a rule, explain why it exists.
 
 **Instead of:** "Regulation T requires 50% initial margin"
 
-**Do:** "In 1929, investors bought stocks with just 10% down. When prices fell, margin calls cascaded, accelerating the crash. That's why Regulation T now requires 50%."
+**Do:** "In 1929, investors bought stocks with just 10% down. When prices fell, margin calls
+cascaded, accelerating the crash. That's why Regulation T now requires 50%."
 
 ### Story Density Guidelines
-| Content Type | Story Density |
-|--------------|---------------|
-| Chapter intro | 1 compelling hook |
-| Major section | 0-1 historical notes |
+
+| Content Type        | Story Density           |
+| ------------------- | ----------------------- |
+| Chapter intro       | 1 compelling hook       |
+| Major section       | 0-1 historical notes    |
 | Concept explanation | Brief inline references |
-| Summary | Reinforce key stories |
+| Summary             | Reinforce key stories   |
 
 ### Active Recall Through Components
+
 - Flashcards (JSON database with spaced repetition)
 - Practice quizzes
 - Exam simulations
@@ -398,11 +426,11 @@ Before explaining a rule, explain why it exists.
 
 ## 8. Content Length Guidelines
 
-| Content Type | Target | Min | Max |
-|--------------|--------|-----|-----|
-| Section | 1,500-2,500 words | 1,000 | 3,500 |
-| Subsection | 200-400 words | - | 500 |
-| Paragraph | 3-5 sentences | - | 7 |
+| Content Type | Target            | Min   | Max   |
+| ------------ | ----------------- | ----- | ----- |
+| Section      | 1,500-2,500 words | 1,000 | 3,500 |
+| Subsection   | 200-400 words     | -     | 500   |
+| Paragraph    | 3-5 sentences     | -     | 7     |
 
 ---
 
@@ -445,14 +473,16 @@ Content must pass before publishing:
 ## 11. Key Patterns for Replication
 
 ### Naming Conventions
-| Type | Pattern | Example |
-|------|---------|---------|
-| Chapter folder | `chapter-XX-kebab-name/` | `chapter-06-packaged-products/` |
-| Section file | `section-XX-kebab-name.md` | `section-01-investment-company-basics.md` |
-| HTML page | `sie-chapter-X-kebab-name.html` | `sie-chapter-6-investment-company-basics.html` |
-| Meta file | `chapter-meta.json` | (same for all chapters) |
+
+| Type           | Pattern                         | Example                                        |
+| -------------- | ------------------------------- | ---------------------------------------------- |
+| Chapter folder | `chapter-XX-kebab-name/`        | `chapter-06-packaged-products/`                |
+| Section file   | `section-XX-kebab-name.md`      | `section-01-investment-company-basics.md`      |
+| HTML page      | `sie-chapter-X-kebab-name.html` | `sie-chapter-6-investment-company-basics.html` |
+| Meta file      | `chapter-meta.json`             | (same for all chapters)                        |
 
 ### Study Tools Pattern
+
 ```
 ├── study-materials.html     # Hub page
 ├── flashcards.html          # Flashcard system
@@ -469,15 +499,20 @@ Content must pass before publishing:
 
 ## 12. Questions for Drew
 
-1. **Chapter Numbering:** The SIE uses chapters 5-12. Should Series 7 follow the official FINRA outline numbers (1-4) or use sequential numbering (1-n)?
+1. **Chapter Numbering:** The SIE uses chapters 5-12. Should Series 7 follow the official FINRA
+   outline numbers (1-4) or use sequential numbering (1-n)?
 
-2. **Scope Overlap:** Many SIE topics overlap with Series 7 (e.g., options, munis). Should we reference/link to SIE content or recreate it with Series 7 depth?
+2. **Scope Overlap:** Many SIE topics overlap with Series 7 (e.g., options, munis). Should we
+   reference/link to SIE content or recreate it with Series 7 depth?
 
-3. **Study Time Target:** SIE recommends 1-2 months study. Series 7 typically needs 2-3 months. How should pacing be structured?
+3. **Study Time Target:** SIE recommends 1-2 months study. Series 7 typically needs 2-3 months. How
+   should pacing be structured?
 
-4. **Interactive Features:** The SIE has flashcards, quizzes, and audio. Which features are highest priority for Series 7?
+4. **Interactive Features:** The SIE has flashcards, quizzes, and audio. Which features are highest
+   priority for Series 7?
 
-5. **Calculation Focus:** Series 7 is more calculation-heavy (margin, options). Should we add a dedicated calculation drill tool?
+5. **Calculation Focus:** Series 7 is more calculation-heavy (margin, options). Should we add a
+   dedicated calculation drill tool?
 
 ---
 
@@ -486,17 +521,20 @@ Content must pass before publishing:
 Based on the SIE framework analysis, here are recommended adaptations:
 
 ### Structure Changes
+
 - Add deeper subsection nesting for complex topics (options strategies)
 - Create dedicated formula/calculation section
 - Add margin account calculation worksheets
 - More extensive municipal bond coverage
 
 ### Content Depth
+
 - Longer sections for complex topics (options could be 10+ sections)
 - More practice questions per section
 - Case study scenarios
 
 ### New Components Needed
+
 - Calculation step-by-step boxes
 - Strategy comparison charts
 - Customer scenario decision trees
@@ -504,11 +542,12 @@ Based on the SIE framework analysis, here are recommended adaptations:
 
 ---
 
-*Document prepared for Drew's review before proceeding to Phase 2: Planning*
+_Document prepared for Drew's review before proceeding to Phase 2: Planning_
 
 ---
 
 **Next Steps:**
+
 1. Drew reviews this discovery document
 2. Drew reviews FHM_BRAND_ANALYSIS.md
 3. Confirm/clarify questions above

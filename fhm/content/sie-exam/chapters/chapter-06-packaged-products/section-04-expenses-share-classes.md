@@ -1,8 +1,8 @@
 ---
 chapter: 6
 section: 4
-title: "Fund Expenses and Share Classes"
-description: "Understanding 12b-1 fees, share classes, expense ratios, and their impact on returns"
+title: 'Fund Expenses and Share Classes'
+description: 'Understanding 12b-1 fees, share classes, expense ratios, and their impact on returns'
 topics:
   - 12b-1 Fees
   - Class A, B, C Shares
@@ -17,13 +17,17 @@ last_updated: 2024-12-12
 
 ## Introduction
 
-Expenses matter. A 1% difference in annual fees might seem trivial, but compounded over 30 years, it can mean the difference between retiring comfortably and working an extra decade.
+Expenses matter. A 1% difference in annual fees might seem trivial, but compounded over 30 years, it
+can mean the difference between retiring comfortably and working an extra decade.
 
-The fund industry has created multiple share classes offering different fee structures. Same fund, different costs. Understanding which class suits which investor is both an exam topic and a suitability requirement.
+The fund industry has created multiple share classes offering different fee structures. Same fund,
+different costs. Understanding which class suits which investor is both an exam topic and a
+suitability requirement.
 
 ## Learning Objectives
 
 By the end of this section, you'll be able to:
+
 - Explain 12b-1 fees and their regulatory limits
 - Compare Class A, B, and C share characteristics
 - Calculate and interpret expense ratios
@@ -38,7 +42,8 @@ By the end of this section, you'll be able to:
   <p>You scored borderline on 12b-1 fees. Memorize these key numbers and approval requirements.</p>
 </div>
 
-Named after the SEC rule that permits them, <span class="key-term">12b-1 fees</span> offset marketing, advertising, and distribution expenses.
+Named after the SEC rule that permits them, <span class="key-term">12b-1 fees</span> offset
+marketing, advertising, and distribution expenses.
 
 <div class="critical-concept">
   <div class="critical-concept__label">12b-1 FEE LIMITS - MEMORIZE THESE</div>
@@ -68,13 +73,14 @@ Named after the SEC rule that permits them, <span class="key-term">12b-1 fees</s
 
 ### Key Rules
 
-| Requirement | Limit |
-|-------------|-------|
-| Maximum 12b-1 fee | **1%** of average annual net assets |
-| Maximum for no-load funds | **0.25%** (25 basis points) |
-| Approval required from | Shareholders, board, AND independent board members |
+| Requirement               | Limit                                              |
+| ------------------------- | -------------------------------------------------- |
+| Maximum 12b-1 fee         | **1%** of average annual net assets                |
+| Maximum for no-load funds | **0.25%** (25 basis points)                        |
+| Approval required from    | Shareholders, board, AND independent board members |
 
-A typical 12b-1 fee is 0.50% annually. The selling representative often receives a portion as "continuing commissions" or "trail commissions."
+A typical 12b-1 fee is 0.50% annually. The selling representative often receives a portion as
+"continuing commissions" or "trail commissions."
 
 <div class="info-box">
   <div class="info-box__title">The Hidden Cost of 12b-1 Fees</div>
@@ -85,7 +91,8 @@ A typical 12b-1 fee is 0.50% annually. The selling representative often receives
 
 ## Share Classes: A, B, and C
 
-The fund industry created multiple share classes to offer different fee structures for different investor needs.
+The fund industry created multiple share classes to offer different fee structures for different
+investor needs.
 
 ### CLASS A (Front-End Load)
 
@@ -107,14 +114,14 @@ The logic: Pay once upfront, benefit from lower ongoing expenses for years.
 
 The CDSC typically declines over time:
 
-| Year | CDSC |
-|------|------|
-| Year 1 | 5% |
-| Year 2 | 4% |
-| Year 3 | 3% |
-| Year 4 | 2% |
-| Year 5 | 1% |
-| Year 6+ | 0% |
+| Year    | CDSC |
+| ------- | ---- |
+| Year 1  | 5%   |
+| Year 2  | 4%   |
+| Year 3  | 3%   |
+| Year 4  | 2%   |
+| Year 5  | 1%   |
+| Year 6+ | 0%   |
 
 ### CLASS C (Level Load)
 
@@ -127,13 +134,13 @@ The CDSC typically declines over time:
 
 ### Share Class Comparison
 
-| Feature | Class A | Class B | Class C |
-|---------|---------|---------|---------|
-| **POP** | NAV + front-end load | NAV | NAV |
+| Feature          | Class A                            | Class B                           | Class C               |
+| ---------------- | ---------------------------------- | --------------------------------- | --------------------- |
+| **POP**          | NAV + front-end load               | NAV                               | NAV                   |
 | **Sales Charge** | Up to 8.5%, reduced by breakpoints | Back-end CDSC, declines over time | None or 1% first year |
-| **12b-1 Fees** | Lower | Higher | Higher (ongoing) |
-| **Breakpoints** | Yes | No | No |
-| **Best For** | Long-term, large investments | Medium-term | Short-term |
+| **12b-1 Fees**   | Lower                              | Higher                            | Higher (ongoing)      |
+| **Breakpoints**  | Yes                                | No                                | No                    |
+| **Best For**     | Long-term, large investments       | Medium-term                       | Short-term            |
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> The exam often presents scenarios asking which share class is appropriate. Key factors: investment time horizon and investment amount.</p>
@@ -160,7 +167,8 @@ This last point matters. Your fund manager gets paid whether they beat the marke
 
 ### In-Kind Redemption
 
-Rare, but possible: shareholders receive actual securities instead of cash. This typically happens when large redemptions might harm remaining shareholders.
+Rare, but possible: shareholders receive actual securities instead of cash. This typically happens
+when large redemptions might harm remaining shareholders.
 
 ### Expense Ratio
 
@@ -170,11 +178,11 @@ Expense Ratio = Total Expenses / Total Net Assets
 
 The expense ratio tells you what percentage of fund assets go to expenses annually.
 
-| Fund Type | Typical Expense Ratio |
-|-----------|----------------------|
-| Index funds | 0.03% - 0.20% |
-| Actively managed | 0.50% - 1.50% |
-| Specialty/sector | 1.00% - 2.00%+ |
+| Fund Type        | Typical Expense Ratio |
+| ---------------- | --------------------- |
+| Index funds      | 0.03% - 0.20%         |
+| Actively managed | 0.50% - 1.50%         |
+| Specialty/sector | 1.00% - 2.00%+        |
 
 <div class="info-box">
   <div class="info-box__title">Why Expense Ratios Matter</div>
@@ -189,14 +197,14 @@ The expense ratio tells you what percentage of fund assets go to expenses annual
 
 **Scenario:** A fund has $200 million in assets.
 
-| Metric | Amount | Calculation |
-|--------|--------|-------------|
-| Investment Income | $20 million | — |
-| **Gross Return** | 10% | $20M / $200M |
-| Expenses | $2 million | — |
-| Net Income | $18 million | — |
-| **Net Return** | 9% | $18M / $200M |
-| **Expense Ratio** | 1% | $2M / $200M |
+| Metric            | Amount      | Calculation  |
+| ----------------- | ----------- | ------------ |
+| Investment Income | $20 million | —            |
+| **Gross Return**  | 10%         | $20M / $200M |
+| Expenses          | $2 million  | —            |
+| Net Income        | $18 million | —            |
+| **Net Return**    | 9%          | $18M / $200M |
+| **Expense Ratio** | 1%          | $2M / $200M  |
 
 The difference between gross and net return is the expense ratio.
 
@@ -228,19 +236,25 @@ The difference between gross and net return is the expense ratio.
 
 ## Summary
 
-Fund expenses directly impact investor returns. 12b-1 fees cover distribution costs (max 1%), while management fees compensate the investment adviser. Share classes offer different fee structures: Class A charges upfront but has lower ongoing costs, Class B defers charges with higher ongoing costs, and Class C maintains level ongoing costs.
+Fund expenses directly impact investor returns. 12b-1 fees cover distribution costs (max 1%), while
+management fees compensate the investment adviser. Share classes offer different fee structures:
+Class A charges upfront but has lower ongoing costs, Class B defers charges with higher ongoing
+costs, and Class C maintains level ongoing costs.
 
-The expense ratio—total expenses divided by net assets—is the key metric for comparing fund costs. Lower is generally better, especially over long time horizons.
+The expense ratio—total expenses divided by net assets—is the key metric for comparing fund costs.
+Lower is generally better, especially over long time horizons.
 
 ### Quick Reference
 
 **Key Terms:**
+
 - <span class="key-term">12b-1 Fee</span>: Distribution and marketing fee (max 1%)
 - <span class="key-term">CDSC</span>: Contingent Deferred Sales Charge (Class B)
 - <span class="key-term">Expense Ratio</span>: Total expenses / Total net assets
 - <span class="key-term">Front-End Load</span>: Sales charge paid at purchase (Class A)
 
 **Important Numbers:**
+
 - 12b-1 maximum: 1% (load funds), 0.25% (no-load)
 - Class A maximum sales charge: 8.5%
 - Redemption payment deadline: 7 calendar days

@@ -2,15 +2,16 @@
 
 ## Overview
 
-This document defines the workflow for converting study material screenshots into FHM-branded Series 7 content.
+This document defines the workflow for converting study material screenshots into FHM-branded Series
+7 content.
 
 ---
 
 ## The 4-Phase Workflow
 
 ### Phase 1: INTAKE (Quick Triage)
-**Goal:** Categorize and save screenshots without timeout
-**Time per image:** ~30 seconds
+
+**Goal:** Categorize and save screenshots without timeout **Time per image:** ~30 seconds
 
 1. User sends 1-3 screenshots max at a time
 2. I quickly identify:
@@ -25,8 +26,9 @@ This document defines the workflow for converting study material screenshots int
 ---
 
 ### Phase 2: EXTRACT (Raw Markdown)
-**Goal:** Convert image content to accurate raw notes
-**Voice:** Neutral, factual - NO brand voice yet
+
+**Goal:** Convert image content to accurate raw notes **Voice:** Neutral, factual - NO brand voice
+yet
 
 1. Read the image carefully
 2. Extract ALL facts, figures, formulas, rules
@@ -38,10 +40,11 @@ This document defines the workflow for converting study material screenshots int
 ---
 
 ### Phase 3: TRANSFORM (Apply FHM Voice)
-**Goal:** Convert raw notes to FHM-branded content
-**Reference:** `/fhm/design/brand/brand-voice.md`
+
+**Goal:** Convert raw notes to FHM-branded content **Reference:** `/fhm/design/brand/brand-voice.md`
 
 Apply in order:
+
 1. **Opening Hook** - Story, stat, or "why it matters" (never a definition)
 2. **Historical Context** - Why does this rule/concept exist?
 3. **Real-World Examples** - Specific numbers, scenarios
@@ -54,6 +57,7 @@ Apply in order:
 ---
 
 ### Phase 4: PUBLISH (HTML Generation)
+
 **Goal:** Convert to deployable HTML
 
 1. Generate HTML from markdown
@@ -107,19 +111,19 @@ content/series-7/
 
 Section 3 is 73% of the exam. Here's the breakdown:
 
-| # | Subsection | Exam Weight | Priority |
-|---|------------|-------------|----------|
-| 04 | Options | 25-30% | HIGHEST |
-| 03 | Municipal Bonds | 15-20% | HIGH |
-| 08 | Margin Accounts | 10-15% | HIGH |
-| 02 | Debt Securities | 10-12% | MEDIUM |
-| 01 | Equity Securities | 8-10% | MEDIUM |
-| 07 | Retirement Plans | 5-8% | MEDIUM |
-| 06 | Variable Products | 5-7% | LOWER |
-| 05 | Investment Companies | 5-7% | LOWER |
-| 09 | DPPs | 2-3% | LOWER |
-| 10 | Other Products | 2-3% | LOWER |
-| 11 | Analysis & Economics | 3-5% | LOWER |
+| #   | Subsection           | Exam Weight | Priority |
+| --- | -------------------- | ----------- | -------- |
+| 04  | Options              | 25-30%      | HIGHEST  |
+| 03  | Municipal Bonds      | 15-20%      | HIGH     |
+| 08  | Margin Accounts      | 10-15%      | HIGH     |
+| 02  | Debt Securities      | 10-12%      | MEDIUM   |
+| 01  | Equity Securities    | 8-10%       | MEDIUM   |
+| 07  | Retirement Plans     | 5-8%        | MEDIUM   |
+| 06  | Variable Products    | 5-7%        | LOWER    |
+| 05  | Investment Companies | 5-7%        | LOWER    |
+| 09  | DPPs                 | 2-3%        | LOWER    |
+| 10  | Other Products       | 2-3%        | LOWER    |
+| 11  | Analysis & Economics | 3-5%        | LOWER    |
 
 ---
 
@@ -130,21 +134,25 @@ When I receive a screenshot, I'll identify:
 ### By Keywords/Topics
 
 **Section 1 (9%) - Seeks Business:**
+
 - Prospecting, cold calling, advertising
 - Communications with public, retail communications
 - FINRA Rule 2210, institutional communications
 
 **Section 2 (11%) - Opens Accounts:**
+
 - Account types, new account forms
 - KYC, customer profiles, suitability
 - Reg BI, fiduciary duty
 
 **Section 3 (73%) - Provides Info & Recommendations:**
+
 - Any product information (stocks, bonds, options, funds)
 - Calculations (yield, margin, options P&L)
 - Tax treatment, suitability recommendations
 
 **Section 4 (7%) - Processes Transactions:**
+
 - Order types, execution
 - Settlement, clearing
 - Confirmations, record-keeping
@@ -211,5 +219,4 @@ Before marking content as transformed:
 
 ---
 
-*Process created: January 2025*
-*For Series 7 exam preparation content*
+_Process created: January 2025_ _For Series 7 exam preparation content_

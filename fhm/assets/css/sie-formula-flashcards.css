@@ -6,7 +6,8 @@
 /* ============================================
    Base Reset
    ============================================ */
-html, body {
+html,
+body {
     overscroll-behavior: none;
     touch-action: pan-x pan-y;
     height: -webkit-fill-available;
@@ -214,7 +215,10 @@ body {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background-color 0.15s ease;
     min-height: 48px;
     min-width: 48px;
     -webkit-tap-highlight-color: transparent;
@@ -408,8 +412,9 @@ body {
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-                0 16px 48px rgba(0, 0, 0, 0.2);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 16px 48px rgba(0, 0, 0, 0.2);
     min-height: 280px;
 }
 
@@ -561,7 +566,9 @@ body {
     border: none;
     border-radius: 16px;
     cursor: pointer;
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease;
     -webkit-tap-highlight-color: transparent;
 }
 

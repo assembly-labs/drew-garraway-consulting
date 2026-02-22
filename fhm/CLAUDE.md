@@ -2,7 +2,9 @@
 
 ## What This Is
 
-Franklin Hugh Money (FHM) is a personal finance documentation project and securities exam preparation platform. It chronicles one individual's journey toward financial independence while providing high-quality study materials.
+Franklin Hugh Money (FHM) is a personal finance documentation project and securities exam
+preparation platform. It chronicles one individual's journey toward financial independence while
+providing high-quality study materials.
 
 **Live Site:** https://drewgarraway.com/fhm
 
@@ -35,10 +37,10 @@ fhm/
 
 For content creation work, read the appropriate guide:
 
-| Content Area | Guide Location |
-|--------------|----------------|
-| **Series 7 Exam** | `/fhm/content/series-7/CLAUDE.md` |
-| **Brand Voice** | `/fhm/design/brand/brand-voice.md` |
+| Content Area      | Guide Location                     |
+| ----------------- | ---------------------------------- |
+| **Series 7 Exam** | `/fhm/content/series-7/CLAUDE.md`  |
+| **Brand Voice**   | `/fhm/design/brand/brand-voice.md` |
 
 ---
 
@@ -88,4 +90,5 @@ For detailed guidelines, see `/fhm/design/brand/brand-voice.md`.
 
 ## Screenshot Policy
 
-Course screenshots are copyrighted and must **never** be published online. They are stored locally for reference only and excluded via `.gitignore`.
+Course screenshots are copyrighted and must **never** be published online. They are stored locally
+for reference only and excluded via `.gitignore`.

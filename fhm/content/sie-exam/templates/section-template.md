@@ -1,8 +1,8 @@
 ---
 chapter: [CHAPTER_NUMBER]
 section: [SECTION_NUMBER]
-title: "[SECTION_TITLE]"
-description: "[BRIEF_DESCRIPTION]"
+title: '[SECTION_TITLE]'
+description: '[BRIEF_DESCRIPTION]'
 topics:
   - [TOPIC_1]
   - [TOPIC_2]
@@ -16,13 +16,15 @@ last_updated: [YYYY-MM-DD]
 
 ## Introduction
 
-[Write an engaging introduction that captures the reader's attention. Include a hook that relates to real-world applications or interesting facts. Introduce the main concepts that will be covered.]
+[Write an engaging introduction that captures the reader's attention. Include a hook that relates to
+real-world applications or interesting facts. Introduce the main concepts that will be covered.]
 
 [Second paragraph explaining why this topic matters for the SIE exam and in practice.]
 
 ## Learning Objectives
 
 By the end of this section, you'll be able to:
+
 - [Specific, measurable objective 1]
 - [Specific, measurable objective 2]
 - [Specific, measurable objective 3]
@@ -39,6 +41,7 @@ By the end of this section, you'll be able to:
 [Content with <span class="key-term">key terms</span> marked appropriately]
 
 **Important Points:**
+
 - Point 1
 - Point 2
 - Point 3
@@ -139,15 +142,18 @@ By the end of this section, you'll be able to:
 ### Quick Reference
 
 **Key Terms:**
+
 - <span class="key-term">Term 1</span>: [Definition]
 - <span class="key-term">Term 2</span>: [Definition]
 - <span class="key-term">Term 3</span>: [Definition]
 
 **Formulas** (if applicable):
+
 - [Formula 1]
 - [Formula 2]
 
 **Important Numbers** (if applicable):
+
 - [Threshold or requirement 1]
 - [Threshold or requirement 2]
 
@@ -162,4 +168,5 @@ By the end of this section, you'll be able to:
 
 ---
 
-*Note: This content is part of the comprehensive SIE exam preparation course by Franklin Hugh Money. For the complete course, visit [course home page].*
+_Note: This content is part of the comprehensive SIE exam preparation course by Franklin Hugh Money.
+For the complete course, visit [course home page]._

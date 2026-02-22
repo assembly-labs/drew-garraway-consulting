@@ -1,18 +1,21 @@
 # Interactive Overlay System Documentation
 
 ## Overview
-The interactive overlay system enriches educational content with additional context without cluttering the main reading flow. Users can click on marked references to reveal detailed explanations, historical context, humor explanations, and real-world examples.
+
+The interactive overlay system enriches educational content with additional context without
+cluttering the main reading flow. Users can click on marked references to reveal detailed
+explanations, historical context, humor explanations, and real-world examples.
 
 ## Visual Design
 
 ### Inline Indicators
+
 ```html
-Main text with [dotted underline + icon]
-                     ↓ click
-              📝 Popover Window
+Main text with [dotted underline + icon] ↓ click 📝 Popover Window
 ```
 
 ### Reference Types & Colors
+
 - **🏛 Historical** (`ref--history`) - Burgundy (#6B2737) - Historical events and context
 - **😏 Humor** (`ref--joke`) - Gold (#B08D57) - Explains jokes and witty references
 - **💡 Context** (`ref--context`) - Navy (#002D62) - Deep dives and technical explanations
@@ -24,11 +27,13 @@ Main text with [dotted underline + icon]
 
 ```html
 <!-- Basic reference trigger -->
-<span class="ref ref--history"
-      data-type="history"
-      data-title="The Detroit Bankruptcy"
-      data-content="In July 2013, Detroit filed for Chapter 9 bankruptcy...">
-    Detroit circa 2013
+<span
+  class="ref ref--history"
+  data-type="history"
+  data-title="The Detroit Bankruptcy"
+  data-content="In July 2013, Detroit filed for Chapter 9 bankruptcy..."
+>
+  Detroit circa 2013
 </span>
 
 <!-- Reference types -->
@@ -55,48 +60,61 @@ Main text with [dotted underline + icon]
 ## Content Examples
 
 ### Historical Context
+
 ```html
-<span class="ref ref--history"
-      data-type="history"
-      data-title="Ford to City: Drop Dead"
-      data-content="The Daily News headline from October 30, 1975, became one of the most famous in newspaper history...">
-    President Ford's initial response
+<span
+  class="ref ref--history"
+  data-type="history"
+  data-title="Ford to City: Drop Dead"
+  data-content="The Daily News headline from October 30, 1975, became one of the most famous in newspaper history..."
+>
+  President Ford's initial response
 </span>
 ```
 
 ### Humor Explanation
+
 ```html
-<span class="ref ref--joke"
-      data-type="joke"
-      data-title="Why Wealthy People Love Munis"
-      data-content="The joke here is that municipal bonds are stereotypically associated with wealthy, older investors...">
-    your wealthy uncle keeps talking about "munis"
+<span
+  class="ref ref--joke"
+  data-type="joke"
+  data-title="Why Wealthy People Love Munis"
+  data-content="The joke here is that municipal bonds are stereotypically associated with wealthy, older investors..."
+>
+  your wealthy uncle keeps talking about "munis"
 </span>
 ```
 
 ### Technical Context
+
 ```html
-<span class="ref ref--context"
-      data-type="context"
-      data-title="Why Tax Exemption Exists"
-      data-content="The federal government exempts municipal bond interest from taxes to subsidize state and local infrastructure...">
-    Uncle Sam decided to encourage infrastructure
+<span
+  class="ref ref--context"
+  data-type="context"
+  data-title="Why Tax Exemption Exists"
+  data-content="The federal government exempts municipal bond interest from taxes to subsidize state and local infrastructure..."
+>
+  Uncle Sam decided to encourage infrastructure
 </span>
 ```
 
 ### Real Example
+
 ```html
-<span class="ref ref--example"
-      data-type="example"
-      data-title="Glamorous Municipal Projects"
-      data-content="Real municipal bond proceeds at work: The Central Utah Water Conservancy District issued $75 million...">
-    sewage treatment plants
+<span
+  class="ref ref--example"
+  data-type="example"
+  data-title="Glamorous Municipal Projects"
+  data-content="Real municipal bond proceeds at work: The Central Utah Water Conservancy District issued $75 million..."
+>
+  sewage treatment plants
 </span>
 ```
 
 ## UX Features
 
 ### Interactions
+
 - **Click**: Opens popover (all devices)
 - **Hover**: Shows enhanced border on desktop
 - **ESC Key**: Closes popover
@@ -104,6 +122,7 @@ Main text with [dotted underline + icon]
 - **X Button**: Closes popover
 
 ### Accessibility
+
 - Keyboard navigable
 - ARIA labels on buttons
 - Focus management
@@ -111,6 +130,7 @@ Main text with [dotted underline + icon]
 - Clear visual indicators
 
 ### Mobile Optimization
+
 - Touch-friendly tap targets
 - Responsive popover sizing (95% width on mobile)
 - Smooth animations
@@ -121,16 +141,16 @@ Main text with [dotted underline + icon]
 ```javascript
 // Show popover
 function showPopover(element) {
-    const type = element.dataset.type;
-    const title = element.dataset.title;
-    const content = element.dataset.content;
-    // ... display logic
+  const type = element.dataset.type;
+  const title = element.dataset.title;
+  const content = element.dataset.content;
+  // ... display logic
 }
 
 // Hide popover
 function hidePopover() {
-    backdrop.classList.remove('active');
-    popover.classList.remove('active');
+  backdrop.classList.remove('active');
+  popover.classList.remove('active');
 }
 ```
 
@@ -139,24 +159,28 @@ function hidePopover() {
 ### When to Use Interactive References
 
 #### Historical Context (🏛)
+
 - Historical events that provide background
 - Past crises or notable cases
 - Origin stories of regulations or practices
 - "This happened because..." explanations
 
 #### Humor/Wit (😏)
+
 - Explains why something is funny or ironic
 - Clarifies cultural references
 - Unpacks industry inside jokes
 - "The joke here is..." explanations
 
 #### Deep Context (💡)
+
 - Technical explanations that would break reading flow
 - "Why this matters" content
 - Complex concepts simplified
 - Additional detail for curious readers
 
 #### Real Examples (📊)
+
 - Actual data and statistics
 - Specific cases or companies
 - Real-world applications
@@ -165,6 +189,7 @@ function hidePopover() {
 ### Writing Style
 
 **Do:**
+
 - Keep popover content concise (2-4 sentences ideal)
 - Make it worth the click
 - Add genuine value/insight
@@ -172,6 +197,7 @@ function hidePopover() {
 - Include specific details
 
 **Don't:**
+
 - Simply repeat the main text
 - Make every term clickable
 - Use for basic definitions (use key-term highlighting instead)
@@ -218,14 +244,13 @@ function hidePopover() {
 
 ## Quick Reference Card
 
-| Type | Icon | Color | Use For |
-|------|------|-------|---------|
-| History | 🏛 | Burgundy | Historical events, origins |
-| Joke | 😏 | Gold | Humor explanations |
-| Context | 💡 | Navy | Technical deep dives |
-| Example | 📊 | Sage | Real-world cases |
+| Type    | Icon | Color    | Use For                    |
+| ------- | ---- | -------- | -------------------------- |
+| History | 🏛   | Burgundy | Historical events, origins |
+| Joke    | 😏   | Gold     | Humor explanations         |
+| Context | 💡   | Navy     | Technical deep dives       |
+| Example | 📊   | Sage     | Real-world cases           |
 
 ---
 
-*System designed for Franklin Hugh Money SIE Study Materials*
-*Version 1.0 - December 2024*
+_System designed for Franklin Hugh Money SIE Study Materials_ _Version 1.0 - December 2024_

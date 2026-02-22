@@ -1,4 +1,5 @@
 # Common Mistakes on the Series 7
+
 ## Learn From Others' Errors
 
 ---
@@ -10,6 +11,7 @@
 **The Mistake:** Calculating option profit/loss using the quoted premium without multiplying by 100.
 
 **Example:**
+
 - Buy 1 call at $3, sell at $5
 - WRONG: Profit = $2
 - RIGHT: Profit = $2 × 100 = $200
@@ -20,9 +22,11 @@
 
 ### 2. Confusing Buyer vs. Seller Breakeven
 
-**The Mistake:** Both buyer and seller have the SAME breakeven point—it's the profit/loss that's different.
+**The Mistake:** Both buyer and seller have the SAME breakeven point—it's the profit/loss that's
+different.
 
 **The Truth:**
+
 - Long call BE = Strike + Premium (buyer needs stock above this)
 - Short call BE = Strike + Premium (seller needs stock below this)
 - Same number, different goals!
@@ -34,8 +38,11 @@
 **The Mistake:** Calling a bull spread a bear spread (or vice versa).
 
 **Remember:**
-- **Bull spreads**: Want market to rise. Buy lower strike, sell higher strike (calls) OR sell higher strike, buy lower strike (puts)
-- **Bear spreads**: Want market to fall. Buy higher strike, sell lower strike (calls) OR sell lower strike, buy higher strike (puts)
+
+- **Bull spreads**: Want market to rise. Buy lower strike, sell higher strike (calls) OR sell higher
+  strike, buy lower strike (puts)
+- **Bear spreads**: Want market to fall. Buy higher strike, sell lower strike (calls) OR sell lower
+  strike, buy higher strike (puts)
 
 **Memory Aid:** Bull Call = Buy Lower. The word "Lower" has an "L" like "buLL"
 
@@ -45,7 +52,8 @@
 
 **The Mistake:** Saying max loss is "the stock price minus premium received"
 
-**The Truth:** Max loss on uncovered short calls is UNLIMITED because the stock can rise indefinitely.
+**The Truth:** Max loss on uncovered short calls is UNLIMITED because the stock can rise
+indefinitely.
 
 ---
 
@@ -56,6 +64,7 @@
 **The Mistake:** Using 25% for both long and short positions.
 
 **The Truth:**
+
 - LONG positions: 25% maintenance
 - SHORT positions: 30% maintenance
 
@@ -67,7 +76,9 @@
 
 **The Mistake:** Thinking SMA is just excess equity.
 
-**The Truth:** SMA only increases when equity exceeds Reg T requirement (50% of market value). Calculate:
+**The Truth:** SMA only increases when equity exceeds Reg T requirement (50% of market value).
+Calculate:
+
 - Equity = Market Value - Debit
 - Reg T Requirement = Market Value × 50%
 - SMA = Equity - Reg T Requirement (only if positive)
@@ -79,10 +90,12 @@
 **The Mistake:** Using the wrong formula for long vs. short positions.
 
 **Correct Formulas:**
+
 - LONG trigger: Debit Balance ÷ 0.75
 - SHORT trigger: Credit Balance ÷ 1.30
 
 **Memory Aid:**
+
 - Long: 75% (Debit ÷ 0.75)
 - Short: 130% (Credit ÷ 1.30)
 
@@ -95,6 +108,7 @@
 **The Mistake:** Getting the yield relationship backwards for premium/discount bonds.
 
 **The Truth:**
+
 - PREMIUM (price above par): Nominal > Current > YTM
 - DISCOUNT (price below par): YTM > Current > Nominal
 
@@ -109,6 +123,7 @@
 **Correct Formula:** TEY = Municipal yield ÷ (1 - tax bracket)
 
 **Example:**
+
 - 4% muni, 32% bracket
 - WRONG: 4% × 0.32 = 1.28%
 - RIGHT: 4% ÷ (1 - 0.32) = 4% ÷ 0.68 = 5.88%
@@ -120,6 +135,7 @@
 **The Mistake:** Using the wrong day count convention.
 
 **The Truth:**
+
 - Corporate & Municipal: 30/360 (30-day months, 360-day year)
 - Government (T-bills, etc.): Actual/Actual (real calendar days)
 
@@ -132,6 +148,7 @@
 **The Mistake:** Confusing what backs each type of bond.
 
 **The Truth:**
+
 - **GO Bonds**: Backed by taxing power (property taxes)
 - **Revenue Bonds**: Backed ONLY by project revenue (tolls, fees, etc.)
 
@@ -144,6 +161,7 @@
 **The Mistake:** Assuming all munis are tax-free at all levels.
 
 **The Truth:**
+
 - Federal: Always exempt (except private activity bonds with AMT)
 - State: Only exempt if issued by YOUR state
 - Local: Usually exempt, varies by jurisdiction
@@ -159,6 +177,7 @@
 **Correct Formula:** NAV = (Total Assets - Liabilities) ÷ Shares Outstanding
 
 **Example:**
+
 - Assets: $100M, Liabilities: $5M, Shares: 5M
 - NAV = ($100M - $5M) ÷ 5M = $95M ÷ 5M = $19.00
 
@@ -169,6 +188,7 @@
 **The Mistake:** Thinking both trade the same way.
 
 **The Truth:**
+
 - **Open-end (mutual funds)**: Always trade at NAV (plus any sales charge)
 - **Closed-end**: Trade on exchanges at market price (can be above OR below NAV)
 
@@ -179,8 +199,10 @@
 **The Mistake:** Not understanding when each is appropriate.
 
 **The Truth:**
+
 - **Class A**: Front-end load. Better for long-term investors (lower ongoing fees)
-- **Class C**: Level load. Better for shorter holding periods (no front load, but higher annual expenses)
+- **Class C**: Level load. Better for shorter holding periods (no front load, but higher annual
+  expenses)
 
 ---
 
@@ -191,7 +213,9 @@
 **The Mistake:** Treating wealthy individuals as institutional customers.
 
 **The Truth:**
-- **Institutional**: Banks, insurance companies, registered investment companies, entities with $50M+ assets
+
+- **Institutional**: Banks, insurance companies, registered investment companies, entities with
+  $50M+ assets
 - **Accredited**: Individuals meeting income/net worth thresholds for private placements
 
 **Key Point:** A billionaire is still a RETAIL customer for FINRA purposes.
@@ -203,6 +227,7 @@
 **The Mistake:** Only knowing "customer-specific" suitability.
 
 **The Three Parts:**
+
 1. **Reasonable-basis**: Firm must understand the product
 2. **Customer-specific**: Product must be right for THIS customer
 3. **Quantitative**: Trading frequency must be appropriate
@@ -216,6 +241,7 @@
 **The Mistake:** Thinking limit orders execute exactly at the limit price.
 
 **The Truth:**
+
 - Buy limit: Execute at limit price OR LOWER
 - Sell limit: Execute at limit price OR HIGHER
 
@@ -228,6 +254,7 @@
 **The Mistake:** Thinking stop orders guarantee execution price.
 
 **The Truth:**
+
 - Stop orders become MARKET orders when triggered
 - Execution price may differ from stop price
 - Stop-LIMIT orders provide price protection but may not execute
@@ -241,6 +268,7 @@
 **The Mistake:** Using old settlement rules.
 
 **Current Rules (2024):**
+
 - Stocks and corporate bonds: T+1
 - Government securities: T+1
 - Options: T+1
@@ -253,6 +281,7 @@
 ### 21. Rushing Through Calculations
 
 **The Solution:**
+
 - Write out the formula FIRST
 - Plug in numbers SECOND
 - Double-check your math THIRD
@@ -263,6 +292,7 @@
 ### 22. Not Reading "EXCEPT" Questions Carefully
 
 **The Solution:**
+
 - Circle or underline "EXCEPT," "NOT," "FALSE"
 - Find the three TRUE statements
 - The FALSE one is your answer
@@ -272,6 +302,7 @@
 ### 23. Second-Guessing Correct Answers
 
 **The Truth:** Research shows first instincts are usually right. Only change an answer if you:
+
 - Find a specific error in your reasoning
 - Remember a specific fact you'd forgotten
 - Misread the question
@@ -281,6 +312,7 @@
 ### 24. Running Out of Time
 
 **Pacing Guide:**
+
 - 225 minutes ÷ 135 questions = ~1.67 minutes/question
 - Check at Q45: Should be ~75 min in
 - Check at Q90: Should be ~150 min in
@@ -291,6 +323,7 @@
 ## The Big Picture
 
 **Most Common Areas for Mistakes:**
+
 1. Options calculations (especially spreads)
 2. Margin mathematics
 3. Bond yield relationships
@@ -306,6 +339,7 @@
 Making mistakes while studying is GOOD. Making the same mistake twice is BAD.
 
 When you miss a practice question:
+
 1. Understand WHY you missed it
 2. Write down the correct rule/formula
 3. Create a flashcard for it
@@ -313,4 +347,4 @@ When you miss a practice question:
 
 ---
 
-*Don't memorize mistakes. Memorize corrections.*
+_Don't memorize mistakes. Memorize corrections._

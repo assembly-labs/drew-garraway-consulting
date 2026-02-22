@@ -1,512 +1,570 @@
 {
-  "meta": {
-    "description": "Database of historical events, scandals, companies, and stories tied to SIE exam content",
-    "usage": "Reference when creating or expanding chapter content to add memorable context",
-    "lastUpdated": "2024-12-24",
-    "version": "1.0.0"
-  },
+    "meta": {
+        "description": "Database of historical events, scandals, companies, and stories tied to SIE exam content",
+        "usage": "Reference when creating or expanding chapter content to add memorable context",
+        "lastUpdated": "2024-12-24",
+        "version": "1.0.0"
+    },
 
-  "chapters": {
-    "1": {
-      "title": "Regulatory Framework",
-      "coreNarrative": "Every regulator exists because someone got burned. The entire regulatory structure is a monument to past failures.",
-      "stories": [
-        {
-          "id": "crash-1929",
-          "title": "The Crash That Created the SEC",
-          "year": 1929,
-          "type": "market_event",
-          "summary": "Between 1929-1932, the market lost 89% of its value. $30 billion in market value vanished in two days. The public discovered rampant manipulation, insider trading, and fraudulent securities.",
-          "relevantConcepts": ["SEC creation", "Securities Act of 1933", "Securities Exchange Act of 1934"],
-          "memorableDetail": "Joseph Kennedy, known for his own market manipulation, was appointed first SEC chairman. FDR's logic: 'Set a thief to catch a thief.'",
-          "usageNote": "Perfect for explaining why disclosure requirements exist"
+    "chapters": {
+        "1": {
+            "title": "Regulatory Framework",
+            "coreNarrative": "Every regulator exists because someone got burned. The entire regulatory structure is a monument to past failures.",
+            "stories": [
+                {
+                    "id": "crash-1929",
+                    "title": "The Crash That Created the SEC",
+                    "year": 1929,
+                    "type": "market_event",
+                    "summary": "Between 1929-1932, the market lost 89% of its value. $30 billion in market value vanished in two days. The public discovered rampant manipulation, insider trading, and fraudulent securities.",
+                    "relevantConcepts": [
+                        "SEC creation",
+                        "Securities Act of 1933",
+                        "Securities Exchange Act of 1934"
+                    ],
+                    "memorableDetail": "Joseph Kennedy, known for his own market manipulation, was appointed first SEC chairman. FDR's logic: 'Set a thief to catch a thief.'",
+                    "usageNote": "Perfect for explaining why disclosure requirements exist"
+                },
+                {
+                    "id": "nasd-to-finra",
+                    "title": "NASD + NYSE Regulation = FINRA",
+                    "year": 2007,
+                    "type": "regulatory_evolution",
+                    "summary": "The NASD (National Association of Securities Dealers) merged with NYSE's regulatory arm to create FINRA, consolidating broker-dealer oversight.",
+                    "relevantConcepts": ["FINRA", "SRO", "broker-dealer regulation"],
+                    "memorableDetail": "The merger happened partly because having two separate regulators created gaps that firms could exploit.",
+                    "usageNote": "Explains why FINRA exists as unified SRO"
+                },
+                {
+                    "id": "madoff-2008",
+                    "title": "Bernie Madoff's $65 Billion Fraud",
+                    "year": 2008,
+                    "type": "scandal",
+                    "summary": "The largest Ponzi scheme in history ran for decades despite multiple SEC investigations. Madoff was a former NASDAQ chairman.",
+                    "relevantConcepts": ["due diligence", "custody rules", "regulatory gaps"],
+                    "memorableDetail": "Harry Markopolos warned the SEC repeatedly for 9 years. His report was titled 'The World's Largest Hedge Fund is a Fraud.'",
+                    "usageNote": "Why independent verification and custody rules matter"
+                },
+                {
+                    "id": "glass-steagall",
+                    "title": "Glass-Steagall: Banks vs. Brokers",
+                    "year": 1933,
+                    "type": "legislation",
+                    "summary": "Separated commercial banking from investment banking after banks were caught pushing worthless securities on depositors.",
+                    "relevantConcepts": [
+                        "separation of banking activities",
+                        "conflicts of interest"
+                    ],
+                    "memorableDetail": "National City Bank (now Citibank) was caught having salesmen push bad bonds to depositors while executives secretly sold their own holdings.",
+                    "usageNote": "Historical context for understanding financial industry structure"
+                }
+            ]
         },
-        {
-          "id": "nasd-to-finra",
-          "title": "NASD + NYSE Regulation = FINRA",
-          "year": 2007,
-          "type": "regulatory_evolution",
-          "summary": "The NASD (National Association of Securities Dealers) merged with NYSE's regulatory arm to create FINRA, consolidating broker-dealer oversight.",
-          "relevantConcepts": ["FINRA", "SRO", "broker-dealer regulation"],
-          "memorableDetail": "The merger happened partly because having two separate regulators created gaps that firms could exploit.",
-          "usageNote": "Explains why FINRA exists as unified SRO"
+
+        "2": {
+            "title": "Types of Securities",
+            "coreNarrative": "Securities are just formalized promises. Understanding what's being promised—and what can go wrong—is the key.",
+            "stories": [
+                {
+                    "id": "south-sea-bubble",
+                    "title": "The South Sea Bubble",
+                    "year": 1720,
+                    "type": "market_event",
+                    "summary": "The South Sea Company promised monopoly trading rights with South America. Stock soared 800% then collapsed. Isaac Newton lost £20,000 (millions today).",
+                    "relevantConcepts": ["stock speculation", "market bubbles", "disclosure"],
+                    "memorableDetail": "Newton famously said: 'I can calculate the motion of heavenly bodies, but not the madness of people.'",
+                    "usageNote": "Timeless lesson about speculation vs. investment"
+                },
+                {
+                    "id": "enron-2001",
+                    "title": "Enron: The Smartest Guys in the Room",
+                    "year": 2001,
+                    "type": "scandal",
+                    "summary": "Energy giant collapsed due to massive accounting fraud. $74 billion in shareholder value evaporated. Led to Sarbanes-Oxley Act.",
+                    "relevantConcepts": [
+                        "financial statements",
+                        "auditor independence",
+                        "corporate governance"
+                    ],
+                    "memorableDetail": "Enron was named 'America's Most Innovative Company' by Fortune for 6 consecutive years—while committing fraud.",
+                    "usageNote": "Why financial disclosure and auditor rules exist"
+                },
+                {
+                    "id": "first-bond",
+                    "title": "The First Government Bond",
+                    "year": 1693,
+                    "type": "innovation",
+                    "summary": "England issued the first government bond (a 'tontine') to fund war against France. The concept: government borrows from citizens, pays interest.",
+                    "relevantConcepts": ["government securities", "bonds", "fixed income"],
+                    "memorableDetail": "The Bank of England was literally created to manage this debt. It's still paying some of these perpetual bonds.",
+                    "usageNote": "Origin story for government securities"
+                },
+                {
+                    "id": "junk-bond-kings",
+                    "title": "Michael Milken and the Junk Bond Revolution",
+                    "year": 1980,
+                    "type": "innovation",
+                    "summary": "Milken pioneered high-yield 'junk' bonds at Drexel Burnham Lambert, enabling hostile takeovers and LBOs. Made $550 million in one year.",
+                    "relevantConcepts": ["high-yield bonds", "credit ratings", "bond pricing"],
+                    "memorableDetail": "Milken was later convicted of securities fraud, banned from the industry, and fined $600 million. He's now a billionaire philanthropist.",
+                    "usageNote": "Illustrates bond credit spectrum and regulatory consequences"
+                },
+                {
+                    "id": "tulip-mania",
+                    "title": "Tulip Mania",
+                    "year": 1637,
+                    "type": "market_event",
+                    "summary": "Dutch tulip bulb prices rose to 10x annual salary of skilled craftsman before collapsing. Often cited as first recorded speculative bubble.",
+                    "relevantConcepts": ["speculation", "market psychology", "derivatives"],
+                    "memorableDetail": "At peak, futures contracts on tulips traded more than the bulbs themselves—an early form of derivatives.",
+                    "usageNote": "Ancient example of speculation, useful for derivatives discussion"
+                }
+            ]
         },
-        {
-          "id": "madoff-2008",
-          "title": "Bernie Madoff's $65 Billion Fraud",
-          "year": 2008,
-          "type": "scandal",
-          "summary": "The largest Ponzi scheme in history ran for decades despite multiple SEC investigations. Madoff was a former NASDAQ chairman.",
-          "relevantConcepts": ["due diligence", "custody rules", "regulatory gaps"],
-          "memorableDetail": "Harry Markopolos warned the SEC repeatedly for 9 years. His report was titled 'The World's Largest Hedge Fund is a Fraud.'",
-          "usageNote": "Why independent verification and custody rules matter"
+
+        "3": {
+            "title": "Customer Accounts",
+            "coreNarrative": "Account rules exist to protect customers from firms—and sometimes from themselves.",
+            "stories": [
+                {
+                    "id": "stanford-ponzi",
+                    "title": "Allen Stanford's $7 Billion CD Fraud",
+                    "year": 2009,
+                    "type": "scandal",
+                    "summary": "Stanford Financial sold CDs promising impossibly high returns from an Antigua bank. $7 billion lost. Stanford got 110 years.",
+                    "relevantConcepts": [
+                        "account due diligence",
+                        "too good to be true",
+                        "offshore accounts"
+                    ],
+                    "memorableDetail": "Stanford was knighted by Antigua. He sponsored cricket tournaments. The veneer of legitimacy fooled even sophisticated investors.",
+                    "usageNote": "Why KYC and account verification matter"
+                },
+                {
+                    "id": "margin-crash-1929",
+                    "title": "Buying on Margin in 1929",
+                    "year": 1929,
+                    "type": "market_event",
+                    "summary": "Investors could buy stocks with just 10% down. When prices fell, margin calls cascaded. Forced selling accelerated the crash.",
+                    "relevantConcepts": ["margin accounts", "Regulation T", "margin calls"],
+                    "memorableDetail": "Regulation T now requires 50% initial margin—directly because of 1929's 10% margin disaster.",
+                    "usageNote": "Origin of margin requirements"
+                },
+                {
+                    "id": "churning-merrill",
+                    "title": "The Churning Scandals",
+                    "year": 1990,
+                    "type": "scandal",
+                    "summary": "Major brokerages were caught 'churning'—excessive trading to generate commissions regardless of client benefit.",
+                    "relevantConcepts": ["churning", "suitability", "fiduciary duty"],
+                    "memorableDetail": "One Prudential broker made 300 trades in a widow's account in one year, generating $50,000 in commissions on a $250,000 account.",
+                    "usageNote": "Why trading suitability rules exist"
+                }
+            ]
         },
-        {
-          "id": "glass-steagall",
-          "title": "Glass-Steagall: Banks vs. Brokers",
-          "year": 1933,
-          "type": "legislation",
-          "summary": "Separated commercial banking from investment banking after banks were caught pushing worthless securities on depositors.",
-          "relevantConcepts": ["separation of banking activities", "conflicts of interest"],
-          "memorableDetail": "National City Bank (now Citibank) was caught having salesmen push bad bonds to depositors while executives secretly sold their own holdings.",
-          "usageNote": "Historical context for understanding financial industry structure"
+
+        "4": {
+            "title": "Suitability & Recommendations",
+            "coreNarrative": "Suitability rules exist because brokers kept selling grandma high-risk investments.",
+            "stories": [
+                {
+                    "id": "dotcom-retail",
+                    "title": "Dot-Com Bubble Retail Carnage",
+                    "year": 2000,
+                    "type": "market_event",
+                    "summary": "Retail investors poured savings into profitless tech stocks. Many quit jobs to day trade. The NASDAQ fell 78% from peak.",
+                    "relevantConcepts": ["suitability", "risk tolerance", "speculation"],
+                    "memorableDetail": "Pets.com IPO'd at $11, spent $1.2 million on a Super Bowl ad, and was bankrupt 9 months later. Stock ended at $0.19.",
+                    "usageNote": "Why matching investments to client profiles matters"
+                },
+                {
+                    "id": "auction-rate-2008",
+                    "title": "Auction Rate Securities Freeze",
+                    "year": 2008,
+                    "type": "market_event",
+                    "summary": "Banks sold auction-rate securities as 'cash equivalents.' When auctions failed in 2008, $330 billion became illiquid overnight.",
+                    "relevantConcepts": ["liquidity risk", "suitability", "misrepresentation"],
+                    "memorableDetail": "UBS, Citi, and others paid billions in settlements for selling these as 'safe' to customers who needed liquidity.",
+                    "usageNote": "Suitability means understanding product risks, not just returns"
+                },
+                {
+                    "id": "variable-annuity-abuse",
+                    "title": "Variable Annuity Sales Scandals",
+                    "year": 2000,
+                    "type": "scandal",
+                    "summary": "Brokers pushed complex, high-commission variable annuities to elderly clients who didn't need them or understand them.",
+                    "relevantConcepts": ["suitability", "senior investors", "complex products"],
+                    "memorableDetail": "FINRA found cases of 85-year-olds sold 15-year surrender-period annuities. The math didn't work.",
+                    "usageNote": "Why age and time horizon matter for suitability"
+                }
+            ]
+        },
+
+        "5": {
+            "title": "Municipal & Government Securities",
+            "coreNarrative": "Government debt seems safe—until it isn't. Cities and countries default too.",
+            "stories": [
+                {
+                    "id": "detroit-bankruptcy",
+                    "title": "Detroit's $18 Billion Bankruptcy",
+                    "year": 2013,
+                    "type": "market_event",
+                    "summary": "Largest municipal bankruptcy in US history. General obligation bondholders recovered 74 cents on the dollar.",
+                    "relevantConcepts": ["GO bonds", "municipal default", "credit analysis"],
+                    "memorableDetail": "Detroit had been issuing bonds for decades with declining tax base. The pension obligations alone were $3.5 billion underfunded.",
+                    "usageNote": "Even GO bonds backed by 'full faith and credit' can default"
+                },
+                {
+                    "id": "orange-county-1994",
+                    "title": "Orange County's Derivatives Disaster",
+                    "year": 1994,
+                    "type": "scandal",
+                    "summary": "County treasurer Robert Citron bet $7.5 billion of public funds on interest rate derivatives. Lost $1.7 billion. County declared bankruptcy.",
+                    "relevantConcepts": ["derivatives risk", "leverage", "fiduciary duty"],
+                    "memorableDetail": "Citron had no formal finance training. He used astrology and psychics for investment decisions. He still got re-elected twice.",
+                    "usageNote": "Why municipal oversight matters"
+                },
+                {
+                    "id": "puerto-rico-2017",
+                    "title": "Puerto Rico's $74 Billion Default",
+                    "year": 2017,
+                    "type": "market_event",
+                    "summary": "Puerto Rico defaulted on municipal bonds, the largest ever. Triple tax-exempt status had attracted mainland investors for decades.",
+                    "relevantConcepts": ["municipal bonds", "tax-exempt interest", "credit risk"],
+                    "memorableDetail": "The bonds were sold to mainland retirees seeking tax-free income. Many held concentrated positions and lost substantial savings.",
+                    "usageNote": "Tax benefits don't eliminate credit risk"
+                },
+                {
+                    "id": "hamilton-assumption",
+                    "title": "Hamilton's Revolutionary Debt Deal",
+                    "year": 1790,
+                    "type": "innovation",
+                    "summary": "Alexander Hamilton convinced federal government to assume all state Revolutionary War debts, establishing US credit and creating the first Treasury bonds.",
+                    "relevantConcepts": [
+                        "Treasury securities",
+                        "federal debt",
+                        "full faith and credit"
+                    ],
+                    "memorableDetail": "The deal included moving the capital to Washington DC—a compromise with Southern states who had less debt. The musical skipped some details.",
+                    "usageNote": "Origin of US Treasury securities"
+                }
+            ]
+        },
+
+        "6": {
+            "title": "Investment Companies",
+            "coreNarrative": "Mutual funds democratized investing—but created new ways to exploit investors.",
+            "stories": [
+                {
+                    "id": "bogle-vanguard",
+                    "title": "John Bogle Invents the Index Fund",
+                    "year": 1976,
+                    "type": "innovation",
+                    "summary": "Bogle launched the first retail index fund at Vanguard. Wall Street called it 'Bogle's Folly.' It now manages trillions.",
+                    "relevantConcepts": ["index funds", "expense ratios", "passive investing"],
+                    "memorableDetail": "The first index fund raised only $11 million vs. $150 million target. Competitors mocked it as 'un-American.' Bogle never took Vanguard public, keeping it owned by fund shareholders.",
+                    "usageNote": "Origin of passive investing revolution"
+                },
+                {
+                    "id": "mutual-fund-timing-2003",
+                    "title": "The Mutual Fund Timing Scandal",
+                    "year": 2003,
+                    "type": "scandal",
+                    "summary": "Major fund companies allowed hedge funds to 'market time'—rapidly trade fund shares at stale prices, extracting billions from regular shareholders.",
+                    "relevantConcepts": ["NAV calculation", "late trading", "fiduciary duty"],
+                    "memorableDetail": "Putnam, Janus, Strong, and others were implicated. Strong's founder was banned for life. Industry paid $3.1 billion in settlements.",
+                    "usageNote": "Why NAV rules and trading restrictions exist"
+                },
+                {
+                    "id": "first-etf",
+                    "title": "The Birth of ETFs",
+                    "year": 1993,
+                    "type": "innovation",
+                    "summary": "The SPDR S&P 500 ETF (SPY) launched as first US ETF. Combined mutual fund diversification with stock-like trading.",
+                    "relevantConcepts": ["ETFs", "intraday trading", "creation units"],
+                    "memorableDetail": "SPY is now the most traded security in the world. Average daily volume exceeds $30 billion.",
+                    "usageNote": "ETF origin and structure"
+                },
+                {
+                    "id": "money-market-breaks-buck",
+                    "title": "Reserve Primary Fund Breaks the Buck",
+                    "year": 2008,
+                    "type": "market_event",
+                    "summary": "First money market fund since 1994 to 'break the buck'—NAV fell below $1 due to Lehman Brothers exposure. Triggered industry-wide panic.",
+                    "relevantConcepts": ["money market funds", "NAV stability", "credit risk"],
+                    "memorableDetail": "The fund held $785 million in Lehman paper. When Lehman failed, NAV dropped to $0.97. The government created emergency guarantees to prevent mass redemptions.",
+                    "usageNote": "Money market funds aren't risk-free"
+                }
+            ]
+        },
+
+        "7": {
+            "title": "Trading Markets",
+            "coreNarrative": "Markets have evolved from trading under a buttonwood tree to algorithms executing in microseconds.",
+            "stories": [
+                {
+                    "id": "buttonwood-agreement",
+                    "title": "The Buttonwood Agreement",
+                    "year": 1792,
+                    "type": "innovation",
+                    "summary": "24 brokers signed an agreement under a buttonwood tree on Wall Street, agreeing to trade only with each other and charge fixed commissions. Birth of NYSE.",
+                    "relevantConcepts": ["NYSE history", "exchange structure", "market making"],
+                    "memorableDetail": "The tree stood at 68 Wall Street until 1865. The original agreement was essentially a price-fixing cartel—now illegal.",
+                    "usageNote": "NYSE origin story"
+                },
+                {
+                    "id": "flash-crash-2010",
+                    "title": "The Flash Crash",
+                    "year": 2010,
+                    "type": "market_event",
+                    "summary": "Dow Jones dropped 1,000 points (9%) in minutes, then recovered. Caused by algorithmic trading cascade. Some stocks traded at $0.01, others at $100,000.",
+                    "relevantConcepts": [
+                        "circuit breakers",
+                        "algorithmic trading",
+                        "market structure"
+                    ],
+                    "memorableDetail": "Accenture traded at $0.01. Sotheby's at $99,999.99. P&G dropped 37% in minutes. New circuit breaker rules followed.",
+                    "usageNote": "Why trading halts and circuit breakers exist"
+                },
+                {
+                    "id": "knight-capital-2012",
+                    "title": "Knight Capital's $440 Million Software Glitch",
+                    "year": 2012,
+                    "type": "scandal",
+                    "summary": "A software deployment error caused Knight Capital to execute $7 billion in errant trades in 45 minutes. Lost $440 million. Company sold within a week.",
+                    "relevantConcepts": [
+                        "algorithmic trading",
+                        "operational risk",
+                        "market making"
+                    ],
+                    "memorableDetail": "The bug activated old test code that was supposed to have been deleted. 45 minutes of chaos ended a 17-year-old firm.",
+                    "usageNote": "Operational risk in modern markets"
+                },
+                {
+                    "id": "nasdaq-founding",
+                    "title": "NASDAQ: The Electronic Exchange",
+                    "year": 1971,
+                    "type": "innovation",
+                    "summary": "First electronic stock exchange, allowing dealers to post quotes on computer screens instead of shouting on a floor.",
+                    "relevantConcepts": ["dealer market", "OTC", "electronic trading"],
+                    "memorableDetail": "NASDAQ started as 'National Association of Securities Dealers Automated Quotations.' Apple, Microsoft, Amazon—all listed there, not NYSE.",
+                    "usageNote": "Dealer vs. auction market structure"
+                },
+                {
+                    "id": "odd-eighth-scandal",
+                    "title": "The NASDAQ Odd-Eighth Scandal",
+                    "year": 1994,
+                    "type": "scandal",
+                    "summary": "Researchers discovered NASDAQ dealers colluded to keep spreads artificially wide by avoiding odd-eighth quotes ($0.125). Cost investors billions.",
+                    "relevantConcepts": [
+                        "bid-ask spread",
+                        "market maker obligations",
+                        "price manipulation"
+                    ],
+                    "memorableDetail": "After the scandal, the SEC mandated narrower spreads and eventually decimalization. Spreads shrank from $0.25 to pennies.",
+                    "usageNote": "Why spread regulations and decimalization exist"
+                }
+            ]
+        },
+
+        "8": {
+            "title": "Trade Processing & Settlement",
+            "coreNarrative": "What happens after you click 'buy' is a complex dance of clearing, settling, and record-keeping.",
+            "stories": [
+                {
+                    "id": "gamestop-2021",
+                    "title": "GameStop and the T+1 Push",
+                    "year": 2021,
+                    "type": "market_event",
+                    "summary": "Meme stock volatility caused brokers like Robinhood to halt trading because they couldn't meet settlement obligations. Accelerated the move to T+1.",
+                    "relevantConcepts": ["settlement", "clearing", "margin requirements", "T+1"],
+                    "memorableDetail": "Robinhood had to raise $3.4 billion in emergency capital in 48 hours. Congressional hearings followed. T+1 was implemented in 2024.",
+                    "usageNote": "Why faster settlement matters"
+                },
+                {
+                    "id": "paperwork-crisis-1968",
+                    "title": "The Paperwork Crisis",
+                    "year": 1968,
+                    "type": "market_event",
+                    "summary": "Trading volume overwhelmed manual processing. NYSE closed on Wednesdays to catch up. Led to creation of DTC for electronic settlement.",
+                    "relevantConcepts": ["DTC", "book entry", "clearing"],
+                    "memorableDetail": "Firms literally couldn't process the paper. Stock certificates piled up in closets. Some firms failed just from back-office chaos.",
+                    "usageNote": "Why electronic book-entry exists"
+                },
+                {
+                    "id": "lehman-settlement-chaos",
+                    "title": "Lehman's Settlement Nightmare",
+                    "year": 2008,
+                    "type": "market_event",
+                    "summary": "Lehman's bankruptcy created unprecedented settlement failures. Trades in progress had no counterparty. Took years to unwind.",
+                    "relevantConcepts": [
+                        "counterparty risk",
+                        "clearing corporations",
+                        "settlement"
+                    ],
+                    "memorableDetail": "DTCC processed $500 billion in Lehman-related trades in the week after bankruptcy. The system held, barely.",
+                    "usageNote": "Why central clearing and counterparty guarantees matter"
+                },
+                {
+                    "id": "pump-dump-stratton",
+                    "title": "Stratton Oakmont's Pump and Dump",
+                    "year": 1990,
+                    "type": "scandal",
+                    "summary": "The 'Wolf of Wall Street' firm manipulated penny stocks, pumping prices with aggressive sales, then dumping. Defrauded investors of $200 million.",
+                    "relevantConcepts": ["market manipulation", "penny stocks", "pump and dump"],
+                    "memorableDetail": "Jordan Belfort's boiler room had 1,000 brokers cold-calling from scripts. The firm was expelled by NASD in 1996.",
+                    "usageNote": "Why manipulation rules exist"
+                }
+            ]
         }
-      ]
     },
 
-    "2": {
-      "title": "Types of Securities",
-      "coreNarrative": "Securities are just formalized promises. Understanding what's being promised—and what can go wrong—is the key.",
-      "stories": [
-        {
-          "id": "south-sea-bubble",
-          "title": "The South Sea Bubble",
-          "year": 1720,
-          "type": "market_event",
-          "summary": "The South Sea Company promised monopoly trading rights with South America. Stock soared 800% then collapsed. Isaac Newton lost £20,000 (millions today).",
-          "relevantConcepts": ["stock speculation", "market bubbles", "disclosure"],
-          "memorableDetail": "Newton famously said: 'I can calculate the motion of heavenly bodies, but not the madness of people.'",
-          "usageNote": "Timeless lesson about speculation vs. investment"
+    "themes": {
+        "regulationOrigins": {
+            "description": "Stories showing why specific regulations exist",
+            "stories": [
+                "crash-1929",
+                "margin-crash-1929",
+                "madoff-2008",
+                "enron-2001",
+                "flash-crash-2010"
+            ]
         },
-        {
-          "id": "enron-2001",
-          "title": "Enron: The Smartest Guys in the Room",
-          "year": 2001,
-          "type": "scandal",
-          "summary": "Energy giant collapsed due to massive accounting fraud. $74 billion in shareholder value evaporated. Led to Sarbanes-Oxley Act.",
-          "relevantConcepts": ["financial statements", "auditor independence", "corporate governance"],
-          "memorableDetail": "Enron was named 'America's Most Innovative Company' by Fortune for 6 consecutive years—while committing fraud.",
-          "usageNote": "Why financial disclosure and auditor rules exist"
+        "marketInnovation": {
+            "description": "Evolution of markets and products",
+            "stories": [
+                "buttonwood-agreement",
+                "nasdaq-founding",
+                "bogle-vanguard",
+                "first-etf",
+                "first-bond"
+            ]
         },
-        {
-          "id": "first-bond",
-          "title": "The First Government Bond",
-          "year": 1693,
-          "type": "innovation",
-          "summary": "England issued the first government bond (a 'tontine') to fund war against France. The concept: government borrows from citizens, pays interest.",
-          "relevantConcepts": ["government securities", "bonds", "fixed income"],
-          "memorableDetail": "The Bank of England was literally created to manage this debt. It's still paying some of these perpetual bonds.",
-          "usageNote": "Origin story for government securities"
+        "spectacularFailures": {
+            "description": "High-profile collapses and what we learned",
+            "stories": [
+                "enron-2001",
+                "lehman-settlement-chaos",
+                "knight-capital-2012",
+                "detroit-bankruptcy",
+                "orange-county-1994"
+            ]
         },
-        {
-          "id": "junk-bond-kings",
-          "title": "Michael Milken and the Junk Bond Revolution",
-          "year": 1980,
-          "type": "innovation",
-          "summary": "Milken pioneered high-yield 'junk' bonds at Drexel Burnham Lambert, enabling hostile takeovers and LBOs. Made $550 million in one year.",
-          "relevantConcepts": ["high-yield bonds", "credit ratings", "bond pricing"],
-          "memorableDetail": "Milken was later convicted of securities fraud, banned from the industry, and fined $600 million. He's now a billionaire philanthropist.",
-          "usageNote": "Illustrates bond credit spectrum and regulatory consequences"
-        },
-        {
-          "id": "tulip-mania",
-          "title": "Tulip Mania",
-          "year": 1637,
-          "type": "market_event",
-          "summary": "Dutch tulip bulb prices rose to 10x annual salary of skilled craftsman before collapsing. Often cited as first recorded speculative bubble.",
-          "relevantConcepts": ["speculation", "market psychology", "derivatives"],
-          "memorableDetail": "At peak, futures contracts on tulips traded more than the bulbs themselves—an early form of derivatives.",
-          "usageNote": "Ancient example of speculation, useful for derivatives discussion"
+        "investorProtection": {
+            "description": "Why customer protection rules exist",
+            "stories": [
+                "churning-merrill",
+                "mutual-fund-timing-2003",
+                "variable-annuity-abuse",
+                "auction-rate-2008"
+            ]
         }
-      ]
     },
 
-    "3": {
-      "title": "Customer Accounts",
-      "coreNarrative": "Account rules exist to protect customers from firms—and sometimes from themselves.",
-      "stories": [
+    "companies": {
+        "historical": [
+            {
+                "name": "Drexel Burnham Lambert",
+                "significance": "Junk bond pioneer, collapsed 1990 after Milken conviction",
+                "relevantChapters": [2, 5]
+            },
+            {
+                "name": "Stratton Oakmont",
+                "significance": "Wolf of Wall Street boiler room, expelled 1996",
+                "relevantChapters": [8]
+            },
+            {
+                "name": "Long-Term Capital Management",
+                "significance": "Hedge fund whose 1998 collapse nearly caused systemic crisis",
+                "relevantChapters": [2, 4]
+            },
+            {
+                "name": "Enron",
+                "significance": "Accounting fraud led to Sarbanes-Oxley",
+                "relevantChapters": [1, 2]
+            },
+            {
+                "name": "Bear Stearns",
+                "significance": "First major bank to fail in 2008, sold to JPMorgan for $2/share",
+                "relevantChapters": [6, 8]
+            }
+        ],
+        "contemporary": [
+            {
+                "name": "Vanguard",
+                "significance": "Pioneered index funds, unique ownership structure",
+                "relevantChapters": [6]
+            },
+            {
+                "name": "BlackRock",
+                "significance": "World's largest asset manager, iShares ETFs",
+                "relevantChapters": [6]
+            },
+            {
+                "name": "Robinhood",
+                "significance": "Commission-free trading pioneer, GameStop controversy",
+                "relevantChapters": [7, 8]
+            },
+            {
+                "name": "Citadel Securities",
+                "significance": "Largest market maker, payment for order flow debates",
+                "relevantChapters": [7, 8]
+            }
+        ]
+    },
+
+    "notableFigures": [
         {
-          "id": "stanford-ponzi",
-          "title": "Allen Stanford's $7 Billion CD Fraud",
-          "year": 2009,
-          "type": "scandal",
-          "summary": "Stanford Financial sold CDs promising impossibly high returns from an Antigua bank. $7 billion lost. Stanford got 110 years.",
-          "relevantConcepts": ["account due diligence", "too good to be true", "offshore accounts"],
-          "memorableDetail": "Stanford was knighted by Antigua. He sponsored cricket tournaments. The veneer of legitimacy fooled even sophisticated investors.",
-          "usageNote": "Why KYC and account verification matter"
+            "name": "John Bogle",
+            "significance": "Founded Vanguard, created first retail index fund",
+            "quote": "Don't look for the needle in the haystack. Just buy the haystack.",
+            "relevantChapters": [6]
         },
         {
-          "id": "margin-crash-1929",
-          "title": "Buying on Margin in 1929",
-          "year": 1929,
-          "type": "market_event",
-          "summary": "Investors could buy stocks with just 10% down. When prices fell, margin calls cascaded. Forced selling accelerated the crash.",
-          "relevantConcepts": ["margin accounts", "Regulation T", "margin calls"],
-          "memorableDetail": "Regulation T now requires 50% initial margin—directly because of 1929's 10% margin disaster.",
-          "usageNote": "Origin of margin requirements"
+            "name": "Warren Buffett",
+            "significance": "Value investing icon, Berkshire Hathaway",
+            "quote": "Be fearful when others are greedy, and greedy when others are fearful.",
+            "relevantChapters": [2, 4, 6]
         },
         {
-          "id": "churning-merrill",
-          "title": "The Churning Scandals",
-          "year": 1990,
-          "type": "scandal",
-          "summary": "Major brokerages were caught 'churning'—excessive trading to generate commissions regardless of client benefit.",
-          "relevantConcepts": ["churning", "suitability", "fiduciary duty"],
-          "memorableDetail": "One Prudential broker made 300 trades in a widow's account in one year, generating $50,000 in commissions on a $250,000 account.",
-          "usageNote": "Why trading suitability rules exist"
+            "name": "Michael Milken",
+            "significance": "Junk bond king, convicted of fraud, now philanthropist",
+            "relevantChapters": [2, 5]
+        },
+        {
+            "name": "Bernie Madoff",
+            "significance": "Largest Ponzi scheme in history, former NASDAQ chairman",
+            "relevantChapters": [1, 3, 4]
+        },
+        {
+            "name": "Joseph Kennedy",
+            "significance": "First SEC chairman, known market manipulator",
+            "relevantChapters": [1]
+        },
+        {
+            "name": "Jordan Belfort",
+            "significance": "Wolf of Wall Street, Stratton Oakmont founder",
+            "relevantChapters": [8]
         }
-      ]
-    },
-
-    "4": {
-      "title": "Suitability & Recommendations",
-      "coreNarrative": "Suitability rules exist because brokers kept selling grandma high-risk investments.",
-      "stories": [
-        {
-          "id": "dotcom-retail",
-          "title": "Dot-Com Bubble Retail Carnage",
-          "year": 2000,
-          "type": "market_event",
-          "summary": "Retail investors poured savings into profitless tech stocks. Many quit jobs to day trade. The NASDAQ fell 78% from peak.",
-          "relevantConcepts": ["suitability", "risk tolerance", "speculation"],
-          "memorableDetail": "Pets.com IPO'd at $11, spent $1.2 million on a Super Bowl ad, and was bankrupt 9 months later. Stock ended at $0.19.",
-          "usageNote": "Why matching investments to client profiles matters"
-        },
-        {
-          "id": "auction-rate-2008",
-          "title": "Auction Rate Securities Freeze",
-          "year": 2008,
-          "type": "market_event",
-          "summary": "Banks sold auction-rate securities as 'cash equivalents.' When auctions failed in 2008, $330 billion became illiquid overnight.",
-          "relevantConcepts": ["liquidity risk", "suitability", "misrepresentation"],
-          "memorableDetail": "UBS, Citi, and others paid billions in settlements for selling these as 'safe' to customers who needed liquidity.",
-          "usageNote": "Suitability means understanding product risks, not just returns"
-        },
-        {
-          "id": "variable-annuity-abuse",
-          "title": "Variable Annuity Sales Scandals",
-          "year": 2000,
-          "type": "scandal",
-          "summary": "Brokers pushed complex, high-commission variable annuities to elderly clients who didn't need them or understand them.",
-          "relevantConcepts": ["suitability", "senior investors", "complex products"],
-          "memorableDetail": "FINRA found cases of 85-year-olds sold 15-year surrender-period annuities. The math didn't work.",
-          "usageNote": "Why age and time horizon matter for suitability"
-        }
-      ]
-    },
-
-    "5": {
-      "title": "Municipal & Government Securities",
-      "coreNarrative": "Government debt seems safe—until it isn't. Cities and countries default too.",
-      "stories": [
-        {
-          "id": "detroit-bankruptcy",
-          "title": "Detroit's $18 Billion Bankruptcy",
-          "year": 2013,
-          "type": "market_event",
-          "summary": "Largest municipal bankruptcy in US history. General obligation bondholders recovered 74 cents on the dollar.",
-          "relevantConcepts": ["GO bonds", "municipal default", "credit analysis"],
-          "memorableDetail": "Detroit had been issuing bonds for decades with declining tax base. The pension obligations alone were $3.5 billion underfunded.",
-          "usageNote": "Even GO bonds backed by 'full faith and credit' can default"
-        },
-        {
-          "id": "orange-county-1994",
-          "title": "Orange County's Derivatives Disaster",
-          "year": 1994,
-          "type": "scandal",
-          "summary": "County treasurer Robert Citron bet $7.5 billion of public funds on interest rate derivatives. Lost $1.7 billion. County declared bankruptcy.",
-          "relevantConcepts": ["derivatives risk", "leverage", "fiduciary duty"],
-          "memorableDetail": "Citron had no formal finance training. He used astrology and psychics for investment decisions. He still got re-elected twice.",
-          "usageNote": "Why municipal oversight matters"
-        },
-        {
-          "id": "puerto-rico-2017",
-          "title": "Puerto Rico's $74 Billion Default",
-          "year": 2017,
-          "type": "market_event",
-          "summary": "Puerto Rico defaulted on municipal bonds, the largest ever. Triple tax-exempt status had attracted mainland investors for decades.",
-          "relevantConcepts": ["municipal bonds", "tax-exempt interest", "credit risk"],
-          "memorableDetail": "The bonds were sold to mainland retirees seeking tax-free income. Many held concentrated positions and lost substantial savings.",
-          "usageNote": "Tax benefits don't eliminate credit risk"
-        },
-        {
-          "id": "hamilton-assumption",
-          "title": "Hamilton's Revolutionary Debt Deal",
-          "year": 1790,
-          "type": "innovation",
-          "summary": "Alexander Hamilton convinced federal government to assume all state Revolutionary War debts, establishing US credit and creating the first Treasury bonds.",
-          "relevantConcepts": ["Treasury securities", "federal debt", "full faith and credit"],
-          "memorableDetail": "The deal included moving the capital to Washington DC—a compromise with Southern states who had less debt. The musical skipped some details.",
-          "usageNote": "Origin of US Treasury securities"
-        }
-      ]
-    },
-
-    "6": {
-      "title": "Investment Companies",
-      "coreNarrative": "Mutual funds democratized investing—but created new ways to exploit investors.",
-      "stories": [
-        {
-          "id": "bogle-vanguard",
-          "title": "John Bogle Invents the Index Fund",
-          "year": 1976,
-          "type": "innovation",
-          "summary": "Bogle launched the first retail index fund at Vanguard. Wall Street called it 'Bogle's Folly.' It now manages trillions.",
-          "relevantConcepts": ["index funds", "expense ratios", "passive investing"],
-          "memorableDetail": "The first index fund raised only $11 million vs. $150 million target. Competitors mocked it as 'un-American.' Bogle never took Vanguard public, keeping it owned by fund shareholders.",
-          "usageNote": "Origin of passive investing revolution"
-        },
-        {
-          "id": "mutual-fund-timing-2003",
-          "title": "The Mutual Fund Timing Scandal",
-          "year": 2003,
-          "type": "scandal",
-          "summary": "Major fund companies allowed hedge funds to 'market time'—rapidly trade fund shares at stale prices, extracting billions from regular shareholders.",
-          "relevantConcepts": ["NAV calculation", "late trading", "fiduciary duty"],
-          "memorableDetail": "Putnam, Janus, Strong, and others were implicated. Strong's founder was banned for life. Industry paid $3.1 billion in settlements.",
-          "usageNote": "Why NAV rules and trading restrictions exist"
-        },
-        {
-          "id": "first-etf",
-          "title": "The Birth of ETFs",
-          "year": 1993,
-          "type": "innovation",
-          "summary": "The SPDR S&P 500 ETF (SPY) launched as first US ETF. Combined mutual fund diversification with stock-like trading.",
-          "relevantConcepts": ["ETFs", "intraday trading", "creation units"],
-          "memorableDetail": "SPY is now the most traded security in the world. Average daily volume exceeds $30 billion.",
-          "usageNote": "ETF origin and structure"
-        },
-        {
-          "id": "money-market-breaks-buck",
-          "title": "Reserve Primary Fund Breaks the Buck",
-          "year": 2008,
-          "type": "market_event",
-          "summary": "First money market fund since 1994 to 'break the buck'—NAV fell below $1 due to Lehman Brothers exposure. Triggered industry-wide panic.",
-          "relevantConcepts": ["money market funds", "NAV stability", "credit risk"],
-          "memorableDetail": "The fund held $785 million in Lehman paper. When Lehman failed, NAV dropped to $0.97. The government created emergency guarantees to prevent mass redemptions.",
-          "usageNote": "Money market funds aren't risk-free"
-        }
-      ]
-    },
-
-    "7": {
-      "title": "Trading Markets",
-      "coreNarrative": "Markets have evolved from trading under a buttonwood tree to algorithms executing in microseconds.",
-      "stories": [
-        {
-          "id": "buttonwood-agreement",
-          "title": "The Buttonwood Agreement",
-          "year": 1792,
-          "type": "innovation",
-          "summary": "24 brokers signed an agreement under a buttonwood tree on Wall Street, agreeing to trade only with each other and charge fixed commissions. Birth of NYSE.",
-          "relevantConcepts": ["NYSE history", "exchange structure", "market making"],
-          "memorableDetail": "The tree stood at 68 Wall Street until 1865. The original agreement was essentially a price-fixing cartel—now illegal.",
-          "usageNote": "NYSE origin story"
-        },
-        {
-          "id": "flash-crash-2010",
-          "title": "The Flash Crash",
-          "year": 2010,
-          "type": "market_event",
-          "summary": "Dow Jones dropped 1,000 points (9%) in minutes, then recovered. Caused by algorithmic trading cascade. Some stocks traded at $0.01, others at $100,000.",
-          "relevantConcepts": ["circuit breakers", "algorithmic trading", "market structure"],
-          "memorableDetail": "Accenture traded at $0.01. Sotheby's at $99,999.99. P&G dropped 37% in minutes. New circuit breaker rules followed.",
-          "usageNote": "Why trading halts and circuit breakers exist"
-        },
-        {
-          "id": "knight-capital-2012",
-          "title": "Knight Capital's $440 Million Software Glitch",
-          "year": 2012,
-          "type": "scandal",
-          "summary": "A software deployment error caused Knight Capital to execute $7 billion in errant trades in 45 minutes. Lost $440 million. Company sold within a week.",
-          "relevantConcepts": ["algorithmic trading", "operational risk", "market making"],
-          "memorableDetail": "The bug activated old test code that was supposed to have been deleted. 45 minutes of chaos ended a 17-year-old firm.",
-          "usageNote": "Operational risk in modern markets"
-        },
-        {
-          "id": "nasdaq-founding",
-          "title": "NASDAQ: The Electronic Exchange",
-          "year": 1971,
-          "type": "innovation",
-          "summary": "First electronic stock exchange, allowing dealers to post quotes on computer screens instead of shouting on a floor.",
-          "relevantConcepts": ["dealer market", "OTC", "electronic trading"],
-          "memorableDetail": "NASDAQ started as 'National Association of Securities Dealers Automated Quotations.' Apple, Microsoft, Amazon—all listed there, not NYSE.",
-          "usageNote": "Dealer vs. auction market structure"
-        },
-        {
-          "id": "odd-eighth-scandal",
-          "title": "The NASDAQ Odd-Eighth Scandal",
-          "year": 1994,
-          "type": "scandal",
-          "summary": "Researchers discovered NASDAQ dealers colluded to keep spreads artificially wide by avoiding odd-eighth quotes ($0.125). Cost investors billions.",
-          "relevantConcepts": ["bid-ask spread", "market maker obligations", "price manipulation"],
-          "memorableDetail": "After the scandal, the SEC mandated narrower spreads and eventually decimalization. Spreads shrank from $0.25 to pennies.",
-          "usageNote": "Why spread regulations and decimalization exist"
-        }
-      ]
-    },
-
-    "8": {
-      "title": "Trade Processing & Settlement",
-      "coreNarrative": "What happens after you click 'buy' is a complex dance of clearing, settling, and record-keeping.",
-      "stories": [
-        {
-          "id": "gamestop-2021",
-          "title": "GameStop and the T+1 Push",
-          "year": 2021,
-          "type": "market_event",
-          "summary": "Meme stock volatility caused brokers like Robinhood to halt trading because they couldn't meet settlement obligations. Accelerated the move to T+1.",
-          "relevantConcepts": ["settlement", "clearing", "margin requirements", "T+1"],
-          "memorableDetail": "Robinhood had to raise $3.4 billion in emergency capital in 48 hours. Congressional hearings followed. T+1 was implemented in 2024.",
-          "usageNote": "Why faster settlement matters"
-        },
-        {
-          "id": "paperwork-crisis-1968",
-          "title": "The Paperwork Crisis",
-          "year": 1968,
-          "type": "market_event",
-          "summary": "Trading volume overwhelmed manual processing. NYSE closed on Wednesdays to catch up. Led to creation of DTC for electronic settlement.",
-          "relevantConcepts": ["DTC", "book entry", "clearing"],
-          "memorableDetail": "Firms literally couldn't process the paper. Stock certificates piled up in closets. Some firms failed just from back-office chaos.",
-          "usageNote": "Why electronic book-entry exists"
-        },
-        {
-          "id": "lehman-settlement-chaos",
-          "title": "Lehman's Settlement Nightmare",
-          "year": 2008,
-          "type": "market_event",
-          "summary": "Lehman's bankruptcy created unprecedented settlement failures. Trades in progress had no counterparty. Took years to unwind.",
-          "relevantConcepts": ["counterparty risk", "clearing corporations", "settlement"],
-          "memorableDetail": "DTCC processed $500 billion in Lehman-related trades in the week after bankruptcy. The system held, barely.",
-          "usageNote": "Why central clearing and counterparty guarantees matter"
-        },
-        {
-          "id": "pump-dump-stratton",
-          "title": "Stratton Oakmont's Pump and Dump",
-          "year": 1990,
-          "type": "scandal",
-          "summary": "The 'Wolf of Wall Street' firm manipulated penny stocks, pumping prices with aggressive sales, then dumping. Defrauded investors of $200 million.",
-          "relevantConcepts": ["market manipulation", "penny stocks", "pump and dump"],
-          "memorableDetail": "Jordan Belfort's boiler room had 1,000 brokers cold-calling from scripts. The firm was expelled by NASD in 1996.",
-          "usageNote": "Why manipulation rules exist"
-        }
-      ]
-    }
-  },
-
-  "themes": {
-    "regulationOrigins": {
-      "description": "Stories showing why specific regulations exist",
-      "stories": ["crash-1929", "margin-crash-1929", "madoff-2008", "enron-2001", "flash-crash-2010"]
-    },
-    "marketInnovation": {
-      "description": "Evolution of markets and products",
-      "stories": ["buttonwood-agreement", "nasdaq-founding", "bogle-vanguard", "first-etf", "first-bond"]
-    },
-    "spectacularFailures": {
-      "description": "High-profile collapses and what we learned",
-      "stories": ["enron-2001", "lehman-settlement-chaos", "knight-capital-2012", "detroit-bankruptcy", "orange-county-1994"]
-    },
-    "investorProtection": {
-      "description": "Why customer protection rules exist",
-      "stories": ["churning-merrill", "mutual-fund-timing-2003", "variable-annuity-abuse", "auction-rate-2008"]
-    }
-  },
-
-  "companies": {
-    "historical": [
-      {
-        "name": "Drexel Burnham Lambert",
-        "significance": "Junk bond pioneer, collapsed 1990 after Milken conviction",
-        "relevantChapters": [2, 5]
-      },
-      {
-        "name": "Stratton Oakmont",
-        "significance": "Wolf of Wall Street boiler room, expelled 1996",
-        "relevantChapters": [8]
-      },
-      {
-        "name": "Long-Term Capital Management",
-        "significance": "Hedge fund whose 1998 collapse nearly caused systemic crisis",
-        "relevantChapters": [2, 4]
-      },
-      {
-        "name": "Enron",
-        "significance": "Accounting fraud led to Sarbanes-Oxley",
-        "relevantChapters": [1, 2]
-      },
-      {
-        "name": "Bear Stearns",
-        "significance": "First major bank to fail in 2008, sold to JPMorgan for $2/share",
-        "relevantChapters": [6, 8]
-      }
     ],
-    "contemporary": [
-      {
-        "name": "Vanguard",
-        "significance": "Pioneered index funds, unique ownership structure",
-        "relevantChapters": [6]
-      },
-      {
-        "name": "BlackRock",
-        "significance": "World's largest asset manager, iShares ETFs",
-        "relevantChapters": [6]
-      },
-      {
-        "name": "Robinhood",
-        "significance": "Commission-free trading pioneer, GameStop controversy",
-        "relevantChapters": [7, 8]
-      },
-      {
-        "name": "Citadel Securities",
-        "significance": "Largest market maker, payment for order flow debates",
-        "relevantChapters": [7, 8]
-      }
-    ]
-  },
 
-  "notableFigures": [
-    {
-      "name": "John Bogle",
-      "significance": "Founded Vanguard, created first retail index fund",
-      "quote": "Don't look for the needle in the haystack. Just buy the haystack.",
-      "relevantChapters": [6]
-    },
-    {
-      "name": "Warren Buffett",
-      "significance": "Value investing icon, Berkshire Hathaway",
-      "quote": "Be fearful when others are greedy, and greedy when others are fearful.",
-      "relevantChapters": [2, 4, 6]
-    },
-    {
-      "name": "Michael Milken",
-      "significance": "Junk bond king, convicted of fraud, now philanthropist",
-      "relevantChapters": [2, 5]
-    },
-    {
-      "name": "Bernie Madoff",
-      "significance": "Largest Ponzi scheme in history, former NASDAQ chairman",
-      "relevantChapters": [1, 3, 4]
-    },
-    {
-      "name": "Joseph Kennedy",
-      "significance": "First SEC chairman, known market manipulator",
-      "relevantChapters": [1]
-    },
-    {
-      "name": "Jordan Belfort",
-      "significance": "Wolf of Wall Street, Stratton Oakmont founder",
-      "relevantChapters": [8]
+    "usageGuidelines": {
+        "placement": [
+            "Opening hooks: Start sections with compelling stories",
+            "Historical notes: Dedicated callout boxes for context",
+            "Why it matters: Connect rules to real consequences",
+            "Test tips: Link memorable stories to testable concepts"
+        ],
+        "balance": [
+            "1-2 major stories per chapter",
+            "Brief references sprinkled throughout",
+            "Don't overwhelm—stories support content, not replace it"
+        ],
+        "tone": [
+            "Conversational but accurate",
+            "Include specific numbers and dates for credibility",
+            "Acknowledge complexity—few villains are pure evil",
+            "Connect past to present when possible"
+        ]
     }
-  ],
-
-  "usageGuidelines": {
-    "placement": [
-      "Opening hooks: Start sections with compelling stories",
-      "Historical notes: Dedicated callout boxes for context",
-      "Why it matters: Connect rules to real consequences",
-      "Test tips: Link memorable stories to testable concepts"
-    ],
-    "balance": [
-      "1-2 major stories per chapter",
-      "Brief references sprinkled throughout",
-      "Don't overwhelm—stories support content, not replace it"
-    ],
-    "tone": [
-      "Conversational but accurate",
-      "Include specific numbers and dates for credibility",
-      "Acknowledge complexity—few villains are pure evil",
-      "Connect past to present when possible"
-    ]
-  }
 }

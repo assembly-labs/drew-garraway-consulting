@@ -1,18 +1,26 @@
 # Chapter 1: Equities
 
-*Series 7 Exam Weight: ~5 Questions (4%)*
+_Series 7 Exam Weight: ~5 Questions (4%)_
 
 ---
 
 ## Section 1: Common Stock Basics
 
-On May 17, 1792, twenty-four stockbrokers gathered under a buttonwood tree on Wall Street and signed an agreement to trade securities only among themselves and charge minimum commissions. That moment—the Buttonwood Agreement—created what would become the New York Stock Exchange. Those early traders dealt in exactly two things: government bonds and the few bank stocks that existed at the time.
+On May 17, 1792, twenty-four stockbrokers gathered under a buttonwood tree on Wall Street and signed
+an agreement to trade securities only among themselves and charge minimum commissions. That
+moment—the Buttonwood Agreement—created what would become the New York Stock Exchange. Those early
+traders dealt in exactly two things: government bonds and the few bank stocks that existed at the
+time.
 
-Today, the global equity market holds over $100 trillion in value. Understanding how stocks work isn't just academic—it's the foundation of everything else on your Series 7 exam.
+Today, the global equity market holds over $100 trillion in value. Understanding how stocks work
+isn't just academic—it's the foundation of everything else on your Series 7 exam.
 
 ### Why This Section Matters
 
-Companies need money to operate. They can borrow it (debt financing) or sell ownership stakes (equity financing). When you buy stock, you're buying a piece of a company—literally. This chapter covers the mechanics of how that ownership works: what shares are, how they're tracked, and what happens when they change hands.
+Companies need money to operate. They can borrow it (debt financing) or sell ownership stakes
+(equity financing). When you buy stock, you're buying a piece of a company—literally. This chapter
+covers the mechanics of how that ownership works: what shares are, how they're tracked, and what
+happens when they change hands.
 
 ---
 
@@ -25,13 +33,21 @@ Companies need money to operate. They can borrow it (debt financing) or sell own
   <p>The word "stock" comes from the old English word for a tree trunk—the solid base from which everything else grows. A "share" of stock meant you shared in that growth. The terminology has survived for centuries because the concept is simple: you own a piece of something.</p>
 </div>
 
-A <span class="key-term">common stockholder</span> (or shareholder) owns a piece of a corporation. This ownership represents <span class="key-term">equity</span> in the company. Beyond corporations, investment companies like mutual funds also issue common stock. Common stockholders hope to share in the company's growth through increases in the share price.
+A <span class="key-term">common stockholder</span> (or shareholder) owns a piece of a corporation.
+This ownership represents <span class="key-term">equity</span> in the company. Beyond corporations,
+investment companies like mutual funds also issue common stock. Common stockholders hope to share in
+the company's growth through increases in the share price.
 
 #### Authorized Stock and Par Value
 
-When a corporation is formed, its <span class="key-term">corporate charter</span> specifies the maximum number of common shares the company may issue. This ceiling is called <span class="key-term">authorized stock</span>.
+When a corporation is formed, its <span class="key-term">corporate charter</span> specifies the
+maximum number of common shares the company may issue. This ceiling is called
+<span class="key-term">authorized stock</span>.
 
-Each share is assigned an arbitrary <span class="key-term">par value</span>—perhaps $1 or even $0.01 per share. Here's what trips up many test-takers: par value for common stock has absolutely no bearing on market price. It's purely an accounting artifact. Market value is based on investor expectations about the company's future.
+Each share is assigned an arbitrary <span class="key-term">par value</span>—perhaps $1 or even $0.01
+per share. Here's what trips up many test-takers: par value for common stock has absolutely no
+bearing on market price. It's purely an accounting artifact. Market value is based on investor
+expectations about the company's future.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Don't confuse par value for common stock with par value for bonds or preferred stock. For common stock, par is meaningless for pricing. For bonds and preferred, par matters enormously.</p>
@@ -41,7 +57,9 @@ Each share is assigned an arbitrary <span class="key-term">par value</span>—pe
 
 To raise capital, a corporation will <span class="key-term">issue</span> (sell) stock to the public.
 
-Here's the strategic reality: most companies don't issue all their authorized shares at once. They hold some back. Why? Because issuing more shares later—without amending the corporate charter—is much easier than going back to shareholders for permission to increase authorized shares.
+Here's the strategic reality: most companies don't issue all their authorized shares at once. They
+hold some back. Why? Because issuing more shares later—without amending the corporate charter—is
+much easier than going back to shareholders for permission to increase authorized shares.
 
 <div class="info-box">
   <div class="info-box__title">Real-World Example</div>
@@ -63,9 +81,11 @@ Here's the strategic reality: most companies don't issue all their authorized sh
 
 #### Outstanding Shares
 
-Once issued, shares are said to be <span class="key-term">outstanding</span>. These outstanding shares can be freely traded between investors.
+Once issued, shares are said to be <span class="key-term">outstanding</span>. These outstanding
+shares can be freely traded between investors.
 
-The number of outstanding shares times the current market price gives you the company's <span class="key-term">market capitalization</span> (market cap).
+The number of outstanding shares times the current market price gives you the company's
+<span class="key-term">market capitalization</span> (market cap).
 
 <div class="calculation-box">
   <div class="calculation-box__label">Formula</div>
@@ -79,7 +99,8 @@ The number of outstanding shares times the current market price gives you the co
 
 #### Treasury Stock
 
-After issuing stock, a corporation may choose to <span class="key-term">buy back</span> some shares. Repurchased shares are called <span class="key-term">treasury stock</span> (or treasury shares).
+After issuing stock, a corporation may choose to <span class="key-term">buy back</span> some shares.
+Repurchased shares are called <span class="key-term">treasury stock</span> (or treasury shares).
 
 <div class="historical-note">
   <div class="historical-note__label">Why Companies Buy Back Stock</div>
@@ -114,30 +135,38 @@ After issuing stock, a corporation may choose to <span class="key-term">buy back
   </ul>
 </div>
 
-(Whether those buyback decisions consistently add value for shareholders is a debate that has launched a thousand academic papers and at least one congressional hearing.)
+(Whether those buyback decisions consistently add value for shareholders is a debate that has
+launched a thousand academic papers and at least one congressional hearing.)
 
 #### Transfer Agents and Registrars
 
 Corporations hire specialized firms to maintain ownership records:
 
-| Role | Function |
-|------|----------|
+| Role               | Function                                                                               |
+| ------------------ | -------------------------------------------------------------------------------------- |
 | **Transfer Agent** | Records ownership changes, cancels and issues certificates, maintains shareholder list |
-| **Registrar** | Audits the transfer agent, verifies shareholder information |
-| **Paying Agent** | Handles distributions like dividends (often the same firm) |
+| **Registrar**      | Audits the transfer agent, verifies shareholder information                            |
+| **Paying Agent**   | Handles distributions like dividends (often the same firm)                             |
 
 #### Regular Way Settlement
 
-Equity securities trade on exchanges (<span class="key-term">listed</span>) or <span class="key-term">over-the-counter</span> (unlisted). Listed securities meet stringent requirements set by exchanges like the <span class="key-term">New York Stock Exchange (NYSE)</span> or <span class="key-term">Nasdaq</span>. OTC securities are typically smaller companies that don't meet listing standards.
+Equity securities trade on exchanges (<span class="key-term">listed</span>) or
+<span class="key-term">over-the-counter</span> (unlisted). Listed securities meet stringent
+requirements set by exchanges like the <span class="key-term">New York Stock Exchange (NYSE)</span>
+or <span class="key-term">Nasdaq</span>. OTC securities are typically smaller companies that don't
+meet listing standards.
 
 <div class="historical-note">
   <div class="historical-note__label">Why Settlement Matters</div>
   <p>When you buy a stock, you immediately become the economic owner—if the price drops five minutes later, that's your loss. But you're not the official owner of record until the trade settles. The distinction matters because dividends, votes, and other rights go to the owner of record, not necessarily the economic owner.</p>
 </div>
 
-<span class="key-term">Settlement</span> occurs when securities and money officially change hands. At that point, the buyer becomes the <span class="key-term">owner of record</span>.
+<span class="key-term">Settlement</span> occurs when securities and money officially change hands.
+At that point, the buyer becomes the <span class="key-term">owner of record</span>.
 
-For equities, <span class="key-term">regular way settlement</span> is <span class="key-term">T+1</span>—one business day after the trade date. This is the standard for equities and equity-related securities.
+For equities, <span class="key-term">regular way settlement</span> is
+<span class="key-term">T+1</span>—one business day after the trade date. This is the standard for
+equities and equity-related securities.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> T+1 settlement was implemented in May 2024, replacing the older T+2 standard. If you see older study materials referencing T+2, ignore them—the exam tests current rules.</p>
@@ -189,11 +218,17 @@ For equities, <span class="key-term">regular way settlement</span> is <span clas
 
 ## Section 2: Distributions
 
-In 1626, the Dutch West India Company paid the first dividend in what would become America—a return to shareholders from the profits of the fur trade. Nearly four centuries later, dividends remain one of the fundamental ways corporations share profits with their owners. But there's more than one way to give shareholders value.
+In 1626, the Dutch West India Company paid the first dividend in what would become America—a return
+to shareholders from the profits of the fur trade. Nearly four centuries later, dividends remain one
+of the fundamental ways corporations share profits with their owners. But there's more than one way
+to give shareholders value.
 
 ### Why This Section Matters
 
-Investors buy stock for two reasons: growth (the price goes up) and income (they receive cash along the way). Understanding how corporations distribute value to shareholders—through cash dividends, stock dividends, stock splits, and rights offerings—is essential for advising clients and passing your exam.
+Investors buy stock for two reasons: growth (the price goes up) and income (they receive cash along
+the way). Understanding how corporations distribute value to shareholders—through cash dividends,
+stock dividends, stock splits, and rights offerings—is essential for advising clients and passing
+your exam.
 
 ---
 
@@ -201,7 +236,9 @@ Investors buy stock for two reasons: growth (the price goes up) and income (they
 
 #### Cash Dividends
 
-<span class="key-term">Cash dividends</span> allow a company to share profits with shareholders. The <span class="key-term">board of directors</span> declares dividends, typically paid quarterly to shareholders of record.
+<span class="key-term">Cash dividends</span> allow a company to share profits with shareholders. The
+<span class="key-term">board of directors</span> declares dividends, typically paid quarterly to
+shareholders of record.
 
 <div class="historical-note">
   <div class="historical-note__label">Why Some Companies Don't Pay Dividends</div>
@@ -210,9 +247,13 @@ Investors buy stock for two reasons: growth (the price goes up) and income (they
 
 #### Stock Dividends
 
-<span class="key-term">Stock dividends</span> give additional shares to existing stockholders instead of cash. When a company issues stock dividends, the total number of shares outstanding increases, but the value of each share decreases proportionally.
+<span class="key-term">Stock dividends</span> give additional shares to existing stockholders
+instead of cash. When a company issues stock dividends, the total number of shares outstanding
+increases, but the value of each share decreases proportionally.
 
-Here's the key insight: there's no immediate economic value to shareholders who receive a stock dividend. The company's total value hasn't changed—it's just been sliced into more pieces. But shareholders will benefit if those shares appreciate in the future.
+Here's the key insight: there's no immediate economic value to shareholders who receive a stock
+dividend. The company's total value hasn't changed—it's just been sliced into more pieces. But
+shareholders will benefit if those shares appreciate in the future.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Stock dividends are defined as distributions of less than 25% of outstanding shares. Anything 25% or larger is classified as a stock split, not a dividend.</p>
@@ -220,7 +261,9 @@ Here's the key insight: there's no immediate economic value to shareholders who 
 
 #### Stock Splits
 
-<span class="key-term">Stock splits</span> increase (<span class="key-term">forward split</span>) or decrease (<span class="key-term">reverse split</span>) the number of shares outstanding using a ratio.
+<span class="key-term">Stock splits</span> increase (<span class="key-term">forward split</span>) or
+decrease (<span class="key-term">reverse split</span>) the number of shares outstanding using a
+ratio.
 
 <div class="info-box">
   <div class="info-box__title">Forward Split Example (2:1)</div>
@@ -229,7 +272,10 @@ Here's the key insight: there's no immediate economic value to shareholders who 
   <p>Same pizza, twice as many slices.</p>
 </div>
 
-**Why would a company split its stock?** A lower share price makes shares more accessible to small investors. When a stock trades at $1,000 per share, many retail investors simply can't afford it (or think they can't, even with fractional shares available). A 10:1 split brings the price to $100—psychologically more accessible.
+**Why would a company split its stock?** A lower share price makes shares more accessible to small
+investors. When a stock trades at $1,000 per share, many retail investors simply can't afford it (or
+think they can't, even with fractional shares available). A 10:1 split brings the price to
+$100—psychologically more accessible.
 
 <div class="info-box">
   <div class="info-box__title">Reverse Split Example (1:10)</div>
@@ -265,23 +311,31 @@ Some splits use ratios other than simple multiples.
 
 ### Topic 2: Preemptive Rights
 
-<span class="key-term">Preemptive rights</span> protect shareholders from having their ownership diluted when a company issues new shares. Without this protection, a company could issue millions of new shares, and your 5% stake could become 0.5% overnight.
+<span class="key-term">Preemptive rights</span> protect shareholders from having their ownership
+diluted when a company issues new shares. Without this protection, a company could issue millions of
+new shares, and your 5% stake could become 0.5% overnight.
 
 <div class="historical-note">
   <div class="historical-note__label">Why Preemptive Rights Exist</div>
   <p>Imagine owning 10% of a company. The board, controlled by other shareholders, decides to issue shares only to their friends at a bargain price. Suddenly your 10% becomes 1%. Preemptive rights—sometimes spelled out in anti-dilution provisions—ensure existing shareholders get first crack at new shares to maintain their proportional ownership.</p>
 </div>
 
-Companies fulfill preemptive rights by issuing securities called <span class="key-term">rights</span> (also called <span class="key-term">subscription rights</span>). This is called a <span class="key-term">rights offering</span>.
+Companies fulfill preemptive rights by issuing securities called
+<span class="key-term">rights</span> (also called <span class="key-term">subscription
+rights</span>). This is called a <span class="key-term">rights offering</span>.
 
-Rights are short-term securities (typically 30-60 days until expiration) that give shareholders the option to buy new shares at a discount to market price. The terms specify how many rights are needed per share (e.g., 10 rights buy 1 new share).
+Rights are short-term securities (typically 30-60 days until expiration) that give shareholders the
+option to buy new shares at a discount to market price. The terms specify how many rights are needed
+per share (e.g., 10 rights buy 1 new share).
 
 **A shareholder receiving rights has three choices:**
+
 1. **Exercise** — Buy new shares at the discounted price
 2. **Sell** — Transfer the rights to another investor
 3. **Do nothing** — Let the rights expire worthless
 
-If the shareholder exercises, they maintain proportional ownership. If they don't, their interest is diluted.
+If the shareholder exercises, they maintain proportional ownership. If they don't, their interest is
+diluted.
 
 ---
 
@@ -317,11 +371,16 @@ If the shareholder exercises, they maintain proportional ownership. If they don'
 
 ## Section 3: Rights of Common Shareholders
 
-In 1602, the Dutch East India Company became the first corporation to issue stock to the general public. The concept was revolutionary: ordinary people could own a piece of a massive trading enterprise. But ownership without rights is meaningless. What exactly do shareholders get for their money?
+In 1602, the Dutch East India Company became the first corporation to issue stock to the general
+public. The concept was revolutionary: ordinary people could own a piece of a massive trading
+enterprise. But ownership without rights is meaningless. What exactly do shareholders get for their
+money?
 
 ### Why This Section Matters
 
-Common shareholders take on risk—they could lose their entire investment. In exchange, they receive specific legal rights. Understanding these rights is essential for advising clients and explaining why common stock differs from bonds or preferred stock.
+Common shareholders take on risk—they could lose their entire investment. In exchange, they receive
+specific legal rights. Understanding these rights is essential for advising clients and explaining
+why common stock differs from bonds or preferred stock.
 
 ---
 
@@ -363,7 +422,9 @@ As owners of a corporation, shareholders have certain legal rights:
   </table>
 </div>
 
-One crucial protection: shareholders enjoy <span class="key-term">limited liability</span>. This means their losses are capped at their investment. If a company goes bankrupt owing billions, shareholders lose only what they invested—creditors can't come after shareholders' personal assets.
+One crucial protection: shareholders enjoy <span class="key-term">limited liability</span>. This
+means their losses are capped at their investment. If a company goes bankrupt owing billions,
+shareholders lose only what they invested—creditors can't come after shareholders' personal assets.
 
 ---
 
@@ -371,7 +432,8 @@ One crucial protection: shareholders enjoy <span class="key-term">limited liabil
 
 #### What Shareholders Vote On
 
-Common stockholders vote at the annual meeting, primarily to elect the <span class="key-term">board of directors</span>—the group that oversees management on shareholders' behalf.
+Common stockholders vote at the annual meeting, primarily to elect the <span class="key-term">board
+of directors</span>—the group that oversees management on shareholders' behalf.
 
 <div class="comparison-table">
   <table>
@@ -427,13 +489,18 @@ Each shareholder gets one vote per share per voting item. Corporations use one o
 
 #### Proxy Voting
 
-Most shareholders don't attend annual meetings in person. Companies send <span class="key-term">proxies</span>—ballots that grant <span class="key-term">power of attorney</span> to a stand-in who casts votes on the shareholder's behalf.
+Most shareholders don't attend annual meetings in person. Companies send
+<span class="key-term">proxies</span>—ballots that grant <span class="key-term">power of
+attorney</span> to a stand-in who casts votes on the shareholder's behalf.
 
 #### Nonvoting Stock
 
-Some companies issue a class of common stock with no voting rights. These shares receive dividends and have the same residual claims as regular common stock—they just can't vote. This structure lets companies raise capital while founders or controlling shareholders maintain voting control.
+Some companies issue a class of common stock with no voting rights. These shares receive dividends
+and have the same residual claims as regular common stock—they just can't vote. This structure lets
+companies raise capital while founders or controlling shareholders maintain voting control.
 
-(Silicon Valley loves this arrangement, which explains why many tech founders control their companies long after their economic ownership has been diluted to single digits.)
+(Silicon Valley loves this arrangement, which explains why many tech founders control their
+companies long after their economic ownership has been diluted to single digits.)
 
 ---
 
@@ -473,11 +540,17 @@ Some companies issue a class of common stock with no voting rights. These shares
 
 ## Section 4: Preferred Stock
 
-In 1836, the Baltimore and Ohio Railroad issued the first American preferred stock to finance westward expansion. The railroad needed capital but didn't want to dilute the voting power of existing owners. The solution: create a new class of stock that offered better dividend treatment but no vote. Nearly two centuries later, preferred stock still occupies this hybrid space between common stock and bonds.
+In 1836, the Baltimore and Ohio Railroad issued the first American preferred stock to finance
+westward expansion. The railroad needed capital but didn't want to dilute the voting power of
+existing owners. The solution: create a new class of stock that offered better dividend treatment
+but no vote. Nearly two centuries later, preferred stock still occupies this hybrid space between
+common stock and bonds.
 
 ### Why This Section Matters
 
-Preferred stock behaves like a bond in many ways—fixed payments, interest rate sensitivity, no voting rights—but it's technically equity. Understanding this hybrid nature is crucial because the Series 7 tests preferred stock concepts extensively.
+Preferred stock behaves like a bond in many ways—fixed payments, interest rate sensitivity, no
+voting rights—but it's technically equity. Understanding this hybrid nature is crucial because the
+Series 7 tests preferred stock concepts extensively.
 
 ---
 
@@ -485,13 +558,18 @@ Preferred stock behaves like a bond in many ways—fixed payments, interest rate
 
 #### Senior Equity Security
 
-<span class="key-term">Preferred stock</span> is called "preferred" because it gets preferred treatment over common stock in two key situations:
-1. **Dividends**: Preferred shareholders must receive their full year's dividends before common shareholders get anything
-2. **Liquidation**: If the company dissolves, preferred shareholders are paid before common shareholders
+<span class="key-term">Preferred stock</span> is called "preferred" because it gets preferred
+treatment over common stock in two key situations:
+
+1. **Dividends**: Preferred shareholders must receive their full year's dividends before common
+   shareholders get anything
+2. **Liquidation**: If the company dissolves, preferred shareholders are paid before common
+   shareholders
 
 #### Standard Terms: $100 Par, Fixed Dividend
 
-Preferred stock is typically issued at <span class="key-term">$100 par</span> with a stated <span class="key-term">dividend rate</span>.
+Preferred stock is typically issued at <span class="key-term">$100 par</span> with a stated
+<span class="key-term">dividend rate</span>.
 
 <div class="info-box">
   <div class="info-box__title">Preferred Dividend Calculation</div>
@@ -503,7 +581,8 @@ Preferred stock is typically issued at <span class="key-term">$100 par</span> wi
 
 #### No Voting or Preemptive Rights
 
-Unlike common stock, preferred stockholders cannot vote and have no preemptive rights. This is the trade-off for their preferential dividend and liquidation treatment.
+Unlike common stock, preferred stockholders cannot vote and have no preemptive rights. This is the
+trade-off for their preferential dividend and liquidation treatment.
 
 #### How Preferred Stock Resembles Bonds
 
@@ -563,7 +642,9 @@ Unlike common stock, preferred stockholders cannot vote and have no preemptive r
 
 #### Cumulative Preferred
 
-If the issuer skips dividend payments on <span class="key-term">cumulative preferred</span>, the missed payments accumulate. All accumulated dividends—plus the entire current year's dividends—must be paid before common shareholders can receive any dividend.
+If the issuer skips dividend payments on <span class="key-term">cumulative preferred</span>, the
+missed payments accumulate. All accumulated dividends—plus the entire current year's dividends—must
+be paid before common shareholders can receive any dividend.
 
 <div class="info-box">
   <div class="info-box__title">Cumulative Dividend Example</div>
@@ -579,15 +660,21 @@ If the issuer skips dividend payments on <span class="key-term">cumulative prefe
 
 #### Adjustable-Rate (Variable/Floating) Preferred
 
-<span class="key-term">Adjustable-rate preferred</span> pays dividends tied to a benchmark rate (like Treasury bills). The dividend rises and falls with market rates.
+<span class="key-term">Adjustable-rate preferred</span> pays dividends tied to a benchmark rate
+(like Treasury bills). The dividend rises and falls with market rates.
 
-The trade-off: income fluctuates, but because the dividend adjusts with rates, the share price remains relatively stable. This provides <span class="key-term">preservation of capital</span> for investors who prioritize stability over fixed income.
+The trade-off: income fluctuates, but because the dividend adjusts with rates, the share price
+remains relatively stable. This provides <span class="key-term">preservation of capital</span> for
+investors who prioritize stability over fixed income.
 
 #### Callable Preferred
 
-<span class="key-term">Callable preferred</span> can be redeemed by the issuer after a set date, typically at par. Companies call preferred stock when interest rates fall—they retire the old higher-rate shares and issue new preferred at lower rates.
+<span class="key-term">Callable preferred</span> can be redeemed by the issuer after a set date,
+typically at par. Companies call preferred stock when interest rates fall—they retire the old
+higher-rate shares and issue new preferred at lower rates.
 
-To compensate for this call risk, callable preferred typically pays higher dividends than noncallable issues.
+To compensate for this call risk, callable preferred typically pays higher dividends than
+noncallable issues.
 
 <div class="historical-note">
   <div class="historical-note__label">Sinking Funds</div>
@@ -600,17 +687,23 @@ To compensate for this call risk, callable preferred typically pays higher divid
 
 #### Convertible Preferred
 
-<span class="key-term">Convertible preferred</span> can be exchanged for common stock at a predetermined conversion ratio. If the common stock price rises significantly, the convertible preferred rises with it.
+<span class="key-term">Convertible preferred</span> can be exchanged for common stock at a
+predetermined conversion ratio. If the common stock price rises significantly, the convertible
+preferred rises with it.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> The price of convertible preferred is primarily driven by the price of the underlying common stock, not by interest rates like regular preferred. If a question asks what drives convertible preferred pricing, think about the common stock.</p>
 </div>
 
-Because of the conversion feature's value, convertible preferred typically pays lower dividends than non-convertible issues. Convertibles may also be callable or subject to forced conversion if the common stock stays above a certain price.
+Because of the conversion feature's value, convertible preferred typically pays lower dividends than
+non-convertible issues. Convertibles may also be callable or subject to forced conversion if the
+common stock stays above a certain price.
 
 #### Participating Preferred
 
-<span class="key-term">Participating preferred</span> receives its fixed dividend plus potentially additional dividends when declared by the board. This allows shareholders to participate more fully in company profits during strong earnings years.
+<span class="key-term">Participating preferred</span> receives its fixed dividend plus potentially
+additional dividends when declared by the board. This allows shareholders to participate more fully
+in company profits during strong earnings years.
 
 ---
 
@@ -618,7 +711,9 @@ Because of the conversion feature's value, convertible preferred typically pays 
 
 #### The Inverse Relationship
 
-When preferred stock is issued, the dividend rate is set comparable to current market interest rates for similar securities. Once issued, the market price will fluctuate primarily based on interest rate movements.
+When preferred stock is issued, the dividend rate is set comparable to current market interest rates
+for similar securities. Once issued, the market price will fluctuate primarily based on interest
+rate movements.
 
 <div class="critical-concept">
   <div class="critical-concept__label">The Iron Law of Fixed-Income Securities</div>
@@ -632,7 +727,8 @@ When preferred stock is issued, the dividend rate is set comparable to current m
 
 #### Current Yield Calculation
 
-<span class="key-term">Current yield</span> measures the return an investor earns based on what they actually paid:
+<span class="key-term">Current yield</span> measures the return an investor earns based on what they
+actually paid:
 
 <div class="calculation-box">
   <div class="calculation-box__label">Formula</div>
@@ -689,17 +785,22 @@ When preferred stock is issued, the dividend rate is set comparable to current m
 
 ## Section 5: Special Securities
 
-Beyond common stock, preferred stock, and rights, several other equity-related securities appear on the Series 7 exam. Two deserve special attention: warrants and American Depositary Receipts.
+Beyond common stock, preferred stock, and rights, several other equity-related securities appear on
+the Series 7 exam. Two deserve special attention: warrants and American Depositary Receipts.
 
 ---
 
 ### Topic 1: Warrants
 
-In 1911, AT&T issued the first publicly traded warrants to make a bond offering more attractive. The concept worked: investors got a "sweetener" that might become valuable if AT&T's stock price rose. Today, warrants remain a common way to make new issues more appealing.
+In 1911, AT&T issued the first publicly traded warrants to make a bond offering more attractive. The
+concept worked: investors got a "sweetener" that might become valuable if AT&T's stock price rose.
+Today, warrants remain a common way to make new issues more appealing.
 
 #### What Warrants Are
 
-A <span class="key-term">warrant</span> gives the holder the right to buy stock at a fixed price—typically set well above the current market price when issued. Warrants only become valuable if the stock price rises above the exercise price.
+A <span class="key-term">warrant</span> gives the holder the right to buy stock at a fixed
+price—typically set well above the current market price when issued. Warrants only become valuable
+if the stock price rises above the exercise price.
 
 <div class="info-box">
   <div class="info-box__title">Warrant Example</div>
@@ -707,7 +808,9 @@ A <span class="key-term">warrant</span> gives the holder the right to buy stock 
   <p>At issuance, this warrant has no immediate value—why pay $30 when you can buy shares for $20? But if the stock rises to $50 within 5 years, that warrant lets you buy at $30 for an instant $20 profit.</p>
 </div>
 
-Warrants are sometimes called "sweeteners" because they make the underlying security more attractive to investors. Although received as part of a unit, warrants trade separately as their own securities.
+Warrants are sometimes called "sweeteners" because they make the underlying security more attractive
+to investors. Although received as part of a unit, warrants trade separately as their own
+securities.
 
 #### Warrants vs. Rights
 
@@ -749,7 +852,8 @@ Both warrants and rights can be traded, exercised, or allowed to expire worthles
 
 #### Perpetual Warrants
 
-Most warrants expire in 5-10 years, but <span class="key-term">perpetual warrants</span> never expire. These are rare but occasionally appear on exams.
+Most warrants expire in 5-10 years, but <span class="key-term">perpetual warrants</span> never
+expire. These are rare but occasionally appear on exams.
 
 ---
 
@@ -757,7 +861,9 @@ Most warrants expire in 5-10 years, but <span class="key-term">perpetual warrant
 
 #### The Problem ADRs Solve
 
-Foreign companies that want U.S. investors face a challenge: listing directly on U.S. exchanges is expensive and requires extensive regulatory compliance. <span class="key-term">American Depositary Receipts</span> offer an elegant workaround.
+Foreign companies that want U.S. investors face a challenge: listing directly on U.S. exchanges is
+expensive and requires extensive regulatory compliance. <span class="key-term">American Depositary
+Receipts</span> offer an elegant workaround.
 
 #### How ADRs Work
 
@@ -772,7 +878,9 @@ Foreign companies that want U.S. investors face a challenge: listing directly on
 
 #### ADR Holder Rights
 
-ADR holders receive dividends—converted to U.S. dollars by the custodian bank. However, they don't have voting rights (the bank votes the underlying shares) or preemptive rights (the bank sells any rights and passes the proceeds to ADR holders).
+ADR holders receive dividends—converted to U.S. dollars by the custodian bank. However, they don't
+have voting rights (the bank votes the underlying shares) or preemptive rights (the bank sells any
+rights and passes the proceeds to ADR holders).
 
 #### Exchange Rate Risk
 
@@ -786,7 +894,8 @@ ADR holders receive dividends—converted to U.S. dollars by the custodian bank.
   <p>An ADR investor is exposed to two risks: the performance of the underlying company AND currency fluctuations.</p>
 </div>
 
-(Currency risk is why many U.S. investors wake up to find their international holdings moved 2% overnight while they slept—the company did nothing, but the yen did.)
+(Currency risk is why many U.S. investors wake up to find their international holdings moved 2%
+overnight while they slept—the company did nothing, but the yen did.)
 
 ---
 
@@ -818,37 +927,39 @@ ADR holders receive dividends—converted to U.S. dollars by the custodian bank.
 
 ## Chapter 1 Key Terms Glossary
 
-| Term | Definition |
-|------|------------|
-| **Authorized stock** | Maximum shares a corporation can issue per its charter |
-| **Par value** | Arbitrary value assigned to stock for accounting (irrelevant for common stock pricing) |
-| **Issued stock** | Shares sold to the public |
-| **Outstanding shares** | Issued shares currently held by investors (can vote, receive dividends) |
-| **Treasury stock** | Repurchased shares (cannot vote, no dividends) |
-| **Market capitalization** | Outstanding shares × market price per share |
-| **Transfer agent** | Records ownership changes, issues certificates |
-| **Registrar** | Audits transfer agent, verifies shareholder information |
-| **Regular way settlement** | T+1 for equities |
-| **Cash dividend** | Distribution of profits to shareholders (taxable) |
-| **Stock dividend** | Distribution of additional shares (&lt;25% of outstanding, not immediately taxable) |
-| **Stock split** | Increase/decrease shares via ratio (par adjusts, not taxable) |
-| **Preemptive rights** | Right to maintain proportional ownership |
-| **Rights offering** | Distribution of rights to buy new shares at discount |
-| **Limited liability** | Shareholder losses capped at amount invested |
-| **Statutory voting** | One vote per share per item, evenly distributed |
-| **Cumulative voting** | Votes can be allocated freely (benefits small investors) |
-| **Proxy** | Authorization to vote on shareholder's behalf |
-| **Preferred stock** | Senior equity with fixed dividend, no voting rights |
-| **Cumulative preferred** | Missed dividends must be paid before common dividends |
-| **Adjustable-rate preferred** | Dividend floats with benchmark rate; price stable |
-| **Callable preferred** | Issuer can redeem at set price after set date |
-| **Convertible preferred** | Can exchange for common stock; price tracks common |
-| **Participating preferred** | May receive additional dividends |
-| **Current yield** | Annual income ÷ market price |
-| **Warrant** | Long-term right to buy stock above current market price |
-| **ADR** | American Depositary Receipt; foreign shares traded in U.S., priced in dollars |
-| **Exchange rate risk** | Risk from currency fluctuations affecting ADR value |
+| Term                          | Definition                                                                             |
+| ----------------------------- | -------------------------------------------------------------------------------------- |
+| **Authorized stock**          | Maximum shares a corporation can issue per its charter                                 |
+| **Par value**                 | Arbitrary value assigned to stock for accounting (irrelevant for common stock pricing) |
+| **Issued stock**              | Shares sold to the public                                                              |
+| **Outstanding shares**        | Issued shares currently held by investors (can vote, receive dividends)                |
+| **Treasury stock**            | Repurchased shares (cannot vote, no dividends)                                         |
+| **Market capitalization**     | Outstanding shares × market price per share                                            |
+| **Transfer agent**            | Records ownership changes, issues certificates                                         |
+| **Registrar**                 | Audits transfer agent, verifies shareholder information                                |
+| **Regular way settlement**    | T+1 for equities                                                                       |
+| **Cash dividend**             | Distribution of profits to shareholders (taxable)                                      |
+| **Stock dividend**            | Distribution of additional shares (&lt;25% of outstanding, not immediately taxable)    |
+| **Stock split**               | Increase/decrease shares via ratio (par adjusts, not taxable)                          |
+| **Preemptive rights**         | Right to maintain proportional ownership                                               |
+| **Rights offering**           | Distribution of rights to buy new shares at discount                                   |
+| **Limited liability**         | Shareholder losses capped at amount invested                                           |
+| **Statutory voting**          | One vote per share per item, evenly distributed                                        |
+| **Cumulative voting**         | Votes can be allocated freely (benefits small investors)                               |
+| **Proxy**                     | Authorization to vote on shareholder's behalf                                          |
+| **Preferred stock**           | Senior equity with fixed dividend, no voting rights                                    |
+| **Cumulative preferred**      | Missed dividends must be paid before common dividends                                  |
+| **Adjustable-rate preferred** | Dividend floats with benchmark rate; price stable                                      |
+| **Callable preferred**        | Issuer can redeem at set price after set date                                          |
+| **Convertible preferred**     | Can exchange for common stock; price tracks common                                     |
+| **Participating preferred**   | May receive additional dividends                                                       |
+| **Current yield**             | Annual income ÷ market price                                                           |
+| **Warrant**                   | Long-term right to buy stock above current market price                                |
+| **ADR**                       | American Depositary Receipt; foreign shares traded in U.S., priced in dollars          |
+| **Exchange rate risk**        | Risk from currency fluctuations affecting ADR value                                    |
 
 ---
 
-*Chapter 1 covers foundational equity concepts. Master these before moving to Debt Fundamentals (Chapter 2), which builds on similar concepts like par value, yields, and the inverse relationship between prices and rates.*
+_Chapter 1 covers foundational equity concepts. Master these before moving to Debt Fundamentals
+(Chapter 2), which builds on similar concepts like par value, yields, and the inverse relationship
+between prices and rates._

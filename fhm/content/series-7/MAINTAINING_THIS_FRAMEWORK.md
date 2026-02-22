@@ -1,4 +1,5 @@
 # Maintaining This Framework
+
 ## Series 7 Exam Prep - Maintenance Guide
 
 ---
@@ -64,6 +65,7 @@ cp templates/quiz-template.md quiz-chapter-XX.md
 ### Step 3: Write Explanations
 
 **Every question needs:**
+
 - The correct answer stated clearly
 - Explanation of WHY it's correct
 - Explanation of why EACH wrong answer is wrong
@@ -82,6 +84,7 @@ cp templates/flashcard-template.json chapter-XX-flashcards.json
 ### Step 2: Create Cards
 
 Each flashcard needs:
+
 - `id`: Unique identifier (e.g., "s7-options-001")
 - `front`: Question or term
 - `back`: Answer in FHM voice
@@ -92,6 +95,7 @@ Each flashcard needs:
 ### Step 3: Include Memory Aids
 
 For calculation topics, add memory aids:
+
 - Mnemonics (like "CALl UP, PUT DOWN")
 - Visual patterns
 - Association tricks
@@ -122,11 +126,11 @@ mkdir practice-exams/exam-XX
 
 ## Template Usage
 
-| Template | Use For |
-|----------|---------|
-| `lesson-template.md` | New lessons |
-| `quiz-template.md` | Chapter/section quizzes |
-| `flashcard-template.json` | Digital flashcards |
+| Template                            | Use For                      |
+| ----------------------------------- | ---------------------------- |
+| `lesson-template.md`                | New lessons                  |
+| `quiz-template.md`                  | Chapter/section quizzes      |
+| `flashcard-template.json`           | Digital flashcards           |
 | `calculation-worksheet-template.md` | Drill sheets for math topics |
 
 ---
@@ -143,6 +147,7 @@ mkdir practice-exams/exam-XX
 ### Frontmatter
 
 Always include:
+
 - section, chapter, lesson numbers
 - title and description
 - topics array
@@ -154,6 +159,7 @@ Always include:
 ### HTML Components
 
 Use consistently:
+
 - `<span class="key-term">` for first use of terms
 - `<div class="info-box">` for examples and analogies
 - `<div class="test-tip">` for exam advice
@@ -168,6 +174,7 @@ Use consistently:
 Before publishing any content:
 
 ### Content Quality
+
 - [ ] Opens with hook, not definition
 - [ ] Historical context included
 - [ ] Real-world examples with numbers
@@ -176,6 +183,7 @@ Before publishing any content:
 - [ ] Passes Dinner Party Test
 
 ### Technical Quality
+
 - [ ] Frontmatter complete and accurate
 - [ ] All HTML components properly closed
 - [ ] Links work (internal and cross-references)
@@ -183,6 +191,7 @@ Before publishing any content:
 - [ ] Consistent formatting throughout
 
 ### Exam Relevance
+
 - [ ] Content matches FINRA outline
 - [ ] Test tips are accurate
 - [ ] Key terms highlighted
@@ -194,14 +203,17 @@ Before publishing any content:
 ## Updating Study Tools
 
 ### Progress Tracker
+
 - Add new lessons/chapters as they're created
 - Keep section percentages accurate
 
 ### Formula Sheet
+
 - Add new formulas as topics are covered
 - Include memory aids for complex calculations
 
 ### Study Schedule
+
 - Adjust if new major sections are added
 - Keep timeline realistic (8-10 weeks)
 
@@ -210,6 +222,7 @@ Before publishing any content:
 ## Version Control
 
 When making updates:
+
 1. Make changes in a feature branch
 2. Test content renders correctly
 3. Update `last_updated` in frontmatter
@@ -227,4 +240,4 @@ When making updates:
 
 ---
 
-*Keep this framework consistent. When in doubt, reference the SIE patterns and FHM brand voice.*
+_Keep this framework consistent. When in doubt, reference the SIE patterns and FHM brand voice._

@@ -1,24 +1,37 @@
 # Chapter 6: Packaged Products
 
-*Series 7 Exam Weight: ~15-18 Questions (12%)*
+_Series 7 Exam Weight: ~15-18 Questions (12%)_
 
 ---
 
 ## Section 1: Investment Company Basics
 
-In 1924, Massachusetts Investors Trust became the first open-end mutual fund in America, allowing everyday investors to own a diversified portfolio of stocks. Before this innovation, diversification was a luxury only the wealthy could afford. Today, over $30 trillion sits in U.S. mutual funds alone—more than the GDP of most countries. Understanding how these investment vehicles work is essential for any securities professional.
+In 1924, Massachusetts Investors Trust became the first open-end mutual fund in America, allowing
+everyday investors to own a diversified portfolio of stocks. Before this innovation, diversification
+was a luxury only the wealthy could afford. Today, over $30 trillion sits in U.S. mutual funds
+alone—more than the GDP of most countries. Understanding how these investment vehicles work is
+essential for any securities professional.
 
 ### Why This Section Matters
 
-Investment companies pool money from many investors to create diversified portfolios. The Series 7 exam heavily tests the differences between open-end and closed-end funds, how shares are priced, and the various fee structures. This chapter covers mutual funds, ETFs, REITs, and other packaged products.
+Investment companies pool money from many investors to create diversified portfolios. The Series 7
+exam heavily tests the differences between open-end and closed-end funds, how shares are priced, and
+the various fee structures. This chapter covers mutual funds, ETFs, REITs, and other packaged
+products.
 
 ---
 
 ### Topic 1: Types of Investment Companies
 
-An <span class="key-term">investment company</span> issues securities (such as common stock) and uses the proceeds to purchase other securities that are consistent with the company's investment goals (objectives). Individual investors buy shares of an investment company that best matches their own investment goals. The most common type of investment company is a <span class="key-term">mutual fund</span>.
+An <span class="key-term">investment company</span> issues securities (such as common stock) and
+uses the proceeds to purchase other securities that are consistent with the company's investment
+goals (objectives). Individual investors buy shares of an investment company that best matches their
+own investment goals. The most common type of investment company is a <span class="key-term">mutual
+fund</span>.
 
-Investment companies are required to register with the U.S. Securities and Exchange Commission (SEC) under the <span class="key-term">Investment Company Act of 1940</span>. The act defines 3 types of investment companies:
+Investment companies are required to register with the U.S. Securities and Exchange Commission (SEC)
+under the <span class="key-term">Investment Company Act of 1940</span>. The act defines 3 types of
+investment companies:
 
 <div class="comparison-table">
   <table>
@@ -43,7 +56,10 @@ Investment companies are required to register with the U.S. Securities and Excha
 
 #### Management Companies
 
-A management company pools money from investors to create a <span class="key-term">portfolio</span> of securities (a fund). The fund hires an <span class="key-term">investment adviser</span> (fund manager) to make investment decisions based on the fund's investment objective. There are two types of management companies: open-end and closed-end.
+A management company pools money from investors to create a <span class="key-term">portfolio</span>
+of securities (a fund). The fund hires an <span class="key-term">investment adviser</span> (fund
+manager) to make investment decisions based on the fund's investment objective. There are two types
+of management companies: open-end and closed-end.
 
 <div class="critical-concept">
   <div class="critical-concept__label">Open-End vs. Closed-End Funds</div>
@@ -78,7 +94,10 @@ A management company pools money from investors to create a <span class="key-ter
 
 #### Unit Investment Trusts (UITs)
 
-A <span class="key-term">unit investment trust (UIT)</span> can be thought of as a container that holds a portfolio of securities. UITs are investment companies that operate as "pooled investments," similar to management companies. However, unlike management companies, UITs are typically unmanaged. A UIT typically does not have a management fee.
+A <span class="key-term">unit investment trust (UIT)</span> can be thought of as a container that
+holds a portfolio of securities. UITs are investment companies that operate as "pooled investments,"
+similar to management companies. However, unlike management companies, UITs are typically unmanaged.
+A UIT typically does not have a management fee.
 
 <div class="info-box">
   <div class="info-box__title">UIT Characteristics</div>
@@ -93,7 +112,11 @@ A <span class="key-term">unit investment trust (UIT)</span> can be thought of as
 
 #### Variable Annuity
 
-<span class="key-term">Variable annuities</span> are not considered investment companies, but they do utilize investment companies to offer investment options to their customers. Annuities are generally used as retirement planning products. Individuals purchase units in a <span class="key-term">separate account</span> offered by a life insurance company to fund their future retirement income.
+<span class="key-term">Variable annuities</span> are not considered investment companies, but they
+do utilize investment companies to offer investment options to their customers. Annuities are
+generally used as retirement planning products. Individuals purchase units in a
+<span class="key-term">separate account</span> offered by a life insurance company to fund their
+future retirement income.
 
 ---
 
@@ -101,7 +124,8 @@ A <span class="key-term">unit investment trust (UIT)</span> can be thought of as
 
 ### Topic 1: Fund Structure
 
-Mutual funds are managed by an investment adviser who makes decisions about what securities to buy or sell. The fund charges fees for this service.
+Mutual funds are managed by an investment adviser who makes decisions about what securities to buy
+or sell. The fund charges fees for this service.
 
 <div class="info-box">
   <div class="info-box__title">Key Fund Roles</div>
@@ -174,7 +198,10 @@ Mutual funds are managed by an investment adviser who makes decisions about what
 
 ### Topic 1: Fund Pricing
 
-<span class="key-term">Net Asset Value (NAV)</span> is computed daily. Every day, a mutual fund computes its net asset value (NAV) per common share. To do this, all securities held by the fund are <span class="key-term">marked to market</span> to find the total market value of all the fund's assets.
+<span class="key-term">Net Asset Value (NAV)</span> is computed daily. Every day, a mutual fund
+computes its net asset value (NAV) per common share. To do this, all securities held by the fund are
+<span class="key-term">marked to market</span> to find the total market value of all the fund's
+assets.
 
 <div class="calculation-box">
   <div class="calculation-box__label">NAV Formula</div>
@@ -183,7 +210,9 @@ Mutual funds are managed by an investment adviser who makes decisions about what
 
 #### Forward Pricing
 
-When a customer places an order to buy a mutual fund, they do not know the exact price they will pay because the purchase price is based on that day's closing NAV. Similarly, if a customer wishes to redeem a mutual fund, they receive that day's closing NAV.
+When a customer places an order to buy a mutual fund, they do not know the exact price they will pay
+because the purchase price is based on that day's closing NAV. Similarly, if a customer wishes to
+redeem a mutual fund, they receive that day's closing NAV.
 
 <div class="calculation-box">
   <div class="calculation-box__label">Public Offering Price (POP)</div>
@@ -192,7 +221,9 @@ When a customer places an order to buy a mutual fund, they do not know the exact
   <p>POP = NAV ÷ (100% - Sales Charge%) = $9.50 ÷ .95 = <strong>$10.00</strong></p>
 </div>
 
-The public offering price (POP) is the price an investor pays when buying mutual fund shares. When shares are redeemed, the seller receives the NAV (less any redemption fees). In other words, for mutual funds, the NAV is the bid price, and the POP is the ask price.
+The public offering price (POP) is the price an investor pays when buying mutual fund shares. When
+shares are redeemed, the seller receives the NAV (less any redemption fees). In other words, for
+mutual funds, the NAV is the bid price, and the POP is the ask price.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> NAV does not determine the price for a closed-end fund. Closed-end fund prices are based on supply and demand, just like any other traded security. A closed-end fund may trade at a discount to NAV or even at a premium.</p>
@@ -200,7 +231,8 @@ The public offering price (POP) is the price an investor pays when buying mutual
 
 #### Maximum Sales Charge
 
-Under <span class="key-term">FINRA</span> rules, the maximum sales charge for a mutual fund purchase is <strong>8.5% of POP</strong>.
+Under <span class="key-term">FINRA</span> rules, the maximum sales charge for a mutual fund purchase
+is <strong>8.5% of POP</strong>.
 
 <div class="info-box">
   <div class="info-box__title">Sales Charge Calculation</div>
@@ -236,7 +268,8 @@ Under <span class="key-term">FINRA</span> rules, the maximum sales charge for a 
 
 ### Topic 2: Breakpoints and Sales Discounts
 
-<span class="key-term">Breakpoints</span> are quantity discounts offered to investors who purchase larger amounts. The more you invest, the lower your sales charge percentage.
+<span class="key-term">Breakpoints</span> are quantity discounts offered to investors who purchase
+larger amounts. The more you invest, the lower your sales charge percentage.
 
 <div class="info-box">
   <div class="info-box__title">Breakpoint Example</div>
@@ -283,7 +316,9 @@ Under <span class="key-term">FINRA</span> rules, the maximum sales charge for a 
 
 ### Topic 1: 12b-1 Fees
 
-<span class="key-term">12b-1 fees</span> are annual fees deducted from fund assets to pay for marketing and distribution costs. Maximum 12b-1 fee is 0.75% annually (plus 0.25% service fee = 1.00% total).
+<span class="key-term">12b-1 fees</span> are annual fees deducted from fund assets to pay for
+marketing and distribution costs. Maximum 12b-1 fee is 0.75% annually (plus 0.25% service fee =
+1.00% total).
 
 ### Topic 2: Share Classes
 
@@ -316,7 +351,9 @@ Under <span class="key-term">FINRA</span> rules, the maximum sales charge for a 
   </table>
 </div>
 
-<span class="key-term">Contingent deferred sales charge (CDSC)</span> is assessed when shares are sold. The charge declines the longer the investor stays in the fund:
+<span class="key-term">Contingent deferred sales charge (CDSC)</span> is assessed when shares are
+sold. The charge declines the longer the investor stays in the fund:
+
 - 5% if redeemed within 2 years
 - 4% if redeemed after 2 years
 - 3% if redeemed after 3 years
@@ -326,7 +363,9 @@ Under <span class="key-term">FINRA</span> rules, the maximum sales charge for a 
 
 ### No-Load Funds
 
-<span class="key-term">No-load funds</span> are sold directly by a mutual fund sponsor and have no sales charges. Customers buy and redeem no-load funds at net asset value. The maximum 12b-1 fee for a no-load fund is .25% (25 basis points).
+<span class="key-term">No-load funds</span> are sold directly by a mutual fund sponsor and have no
+sales charges. Customers buy and redeem no-load funds at net asset value. The maximum 12b-1 fee for
+a no-load fund is .25% (25 basis points).
 
 ---
 
@@ -334,7 +373,9 @@ Under <span class="key-term">FINRA</span> rules, the maximum sales charge for a 
 
 ### Subchapter M
 
-Mutual funds that qualify under <span class="key-term">Subchapter M</span> of the IRS code can avoid double taxation. The fund must distribute at least 90% of its net investment income to shareholders. When it does, the fund itself is not taxed on that distributed income.
+Mutual funds that qualify under <span class="key-term">Subchapter M</span> of the IRS code can avoid
+double taxation. The fund must distribute at least 90% of its net investment income to shareholders.
+When it does, the fund itself is not taxed on that distributed income.
 
 ### Prohibited Sales Practices
 
@@ -353,7 +394,8 @@ Mutual funds that qualify under <span class="key-term">Subchapter M</span> of th
 
 ### Exchange-Traded Funds (ETFs)
 
-<span class="key-term">ETFs</span> represent shares of ownership in a portfolio of common stock that typically tracks the performance of a specific index.
+<span class="key-term">ETFs</span> represent shares of ownership in a portfolio of common stock that
+typically tracks the performance of a specific index.
 
 <div class="comparison-table">
   <table>
@@ -402,9 +444,13 @@ Mutual funds that qualify under <span class="key-term">Subchapter M</span> of th
 
 #### Leveraged and Inverse ETFs
 
-<span class="key-term">Leveraged ETFs</span> use derivative products to generate daily returns two to three times above the returns of the index they are tracking. For example, a triple-leveraged ETF (3× ETF) projects returns three times the returns of the tracked index.
+<span class="key-term">Leveraged ETFs</span> use derivative products to generate daily returns two
+to three times above the returns of the index they are tracking. For example, a triple-leveraged ETF
+(3× ETF) projects returns three times the returns of the tracked index.
 
-<span class="key-term">Inverse ETFs</span> are designed to move in the opposite direction from the underlying index. For example, an S&P 500 inverse ETF is designed to move down 5% when the S&P 500 index moves up 5%.
+<span class="key-term">Inverse ETFs</span> are designed to move in the opposite direction from the
+underlying index. For example, an S&P 500 inverse ETF is designed to move down 5% when the S&P 500
+index moves up 5%.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Leveraged and inverse ETFs are suitable for sophisticated short-term speculators. FINRA has advised that these are not generally suitable for non-institutional investors who plan to hold for more than one trading session.</p>
@@ -412,7 +458,10 @@ Mutual funds that qualify under <span class="key-term">Subchapter M</span> of th
 
 ### Real Estate Investment Trusts (REITs)
 
-A <span class="key-term">real estate investment trust (REIT)</span> is modeled after a mutual fund but focuses on real estate investments. A REIT either invests directly in real estate (an equity REIT), or in mortgages (a mortgage REIT). Unlike investors in a corporation, shareholders are given shares of beneficial interest in the trust.
+A <span class="key-term">real estate investment trust (REIT)</span> is modeled after a mutual fund
+but focuses on real estate investments. A REIT either invests directly in real estate (an equity
+REIT), or in mortgages (a mortgage REIT). Unlike investors in a corporation, shareholders are given
+shares of beneficial interest in the trust.
 
 <div class="info-box">
   <div class="info-box__title">REIT Requirements</div>
@@ -449,11 +498,15 @@ A <span class="key-term">real estate investment trust (REIT)</span> is modeled a
 
 ### Hedge Funds
 
-<span class="key-term">Hedge funds</span> are private investment partnerships that use aggressive strategies (short selling, leverage, derivatives) to seek high returns. They are not registered with the SEC and are available only to accredited investors.
+<span class="key-term">Hedge funds</span> are private investment partnerships that use aggressive
+strategies (short selling, leverage, derivatives) to seek high returns. They are not registered with
+the SEC and are available only to accredited investors.
 
 ### Direct Participation Programs (DPPs)
 
-<span class="key-term">Direct participation programs (DPPs)</span> are limited partnerships that pass through income, gains, losses, and tax benefits directly to investors. Common types include oil and gas programs, real estate programs, and equipment leasing.
+<span class="key-term">Direct participation programs (DPPs)</span> are limited partnerships that
+pass through income, gains, losses, and tax benefits directly to investors. Common types include oil
+and gas programs, real estate programs, and equipment leasing.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> DPPs are illiquid investments with no secondary market. They are suitable only for investors who can afford to have their money tied up for extended periods.</p>
@@ -463,31 +516,33 @@ A <span class="key-term">real estate investment trust (REIT)</span> is modeled a
 
 ## Chapter 6 Key Terms Glossary
 
-| Term | Definition |
-|------|------------|
-| **Investment Company Act of 1940** | Federal law regulating investment companies |
-| **Mutual fund** | Open-end investment company; shares redeemable at NAV |
-| **Closed-end fund** | Fixed shares; trades on exchange at market price |
-| **UIT** | Unit investment trust; fixed portfolio; redeemable shares |
-| **NAV** | Net asset value; (assets - liabilities) ÷ shares |
-| **POP** | Public offering price; NAV + sales charge |
-| **Forward pricing** | Purchases/redemptions at next calculated NAV |
-| **Breakpoint** | Quantity discount on sales charges |
-| **Letter of intent** | Commitment to invest over 13 months for breakpoint |
-| **12b-1 fee** | Annual fee for marketing/distribution (max 0.75%) |
-| **Class A shares** | Front-end load; lower ongoing fees |
-| **Class B shares** | Back-end load (CDSC); converts to A shares |
-| **Class C shares** | Level load; no front or back-end |
-| **CDSC** | Contingent deferred sales charge (back-end) |
-| **No-load fund** | No sales charges; sold at NAV |
-| **Subchapter M** | Tax provision; distribute 90% to avoid double taxation |
-| **ETF** | Exchange-traded fund; trades like a stock |
-| **Leveraged ETF** | Uses derivatives for amplified returns |
-| **Inverse ETF** | Moves opposite to underlying index |
-| **REIT** | Real estate investment trust |
-| **Hedge fund** | Private partnership; accredited investors only |
-| **DPP** | Direct participation program; pass-through tax treatment |
+| Term                               | Definition                                                |
+| ---------------------------------- | --------------------------------------------------------- |
+| **Investment Company Act of 1940** | Federal law regulating investment companies               |
+| **Mutual fund**                    | Open-end investment company; shares redeemable at NAV     |
+| **Closed-end fund**                | Fixed shares; trades on exchange at market price          |
+| **UIT**                            | Unit investment trust; fixed portfolio; redeemable shares |
+| **NAV**                            | Net asset value; (assets - liabilities) ÷ shares          |
+| **POP**                            | Public offering price; NAV + sales charge                 |
+| **Forward pricing**                | Purchases/redemptions at next calculated NAV              |
+| **Breakpoint**                     | Quantity discount on sales charges                        |
+| **Letter of intent**               | Commitment to invest over 13 months for breakpoint        |
+| **12b-1 fee**                      | Annual fee for marketing/distribution (max 0.75%)         |
+| **Class A shares**                 | Front-end load; lower ongoing fees                        |
+| **Class B shares**                 | Back-end load (CDSC); converts to A shares                |
+| **Class C shares**                 | Level load; no front or back-end                          |
+| **CDSC**                           | Contingent deferred sales charge (back-end)               |
+| **No-load fund**                   | No sales charges; sold at NAV                             |
+| **Subchapter M**                   | Tax provision; distribute 90% to avoid double taxation    |
+| **ETF**                            | Exchange-traded fund; trades like a stock                 |
+| **Leveraged ETF**                  | Uses derivatives for amplified returns                    |
+| **Inverse ETF**                    | Moves opposite to underlying index                        |
+| **REIT**                           | Real estate investment trust                              |
+| **Hedge fund**                     | Private partnership; accredited investors only            |
+| **DPP**                            | Direct participation program; pass-through tax treatment  |
 
 ---
 
-*Chapter 6 is one of the most heavily tested areas on the Series 7 exam. Understanding the differences between mutual funds, ETFs, and other packaged products—including their fee structures and suitability—is essential.*
+_Chapter 6 is one of the most heavily tested areas on the Series 7 exam. Understanding the
+differences between mutual funds, ETFs, and other packaged products—including their fee structures
+and suitability—is essential._

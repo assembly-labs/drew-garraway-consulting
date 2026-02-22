@@ -4,11 +4,15 @@
 
 ## What is This?
 
-Franklin Hugh Money is a personal finance documentation project chronicling one individual's journey toward financial independence. Named after Benjamin Franklin and Hugh (a family name that completes the acronym rather conveniently), it documents the patient accumulation of wealth through index fund investing.
+Franklin Hugh Money is a personal finance documentation project chronicling one individual's journey
+toward financial independence. Named after Benjamin Franklin and Hugh (a family name that completes
+the acronym rather conveniently), it documents the patient accumulation of wealth through index fund
+investing.
 
 ## Project Status
 
 **Phase 2: Training Programs** (Current)
+
 - Site structure and navigation ✅
 - Training hub with SIE and Series 7 ✅
 - SIE exam materials (~80% complete) ✅
@@ -33,14 +37,17 @@ Home → Philosophy, Introduction
 ### Local Development
 
 1. **Simple Python Server** (Recommended):
+
 ```bash
 npm run dev
 # or
 python3 -m http.server 8000
 ```
+
 Then visit: http://localhost:8000
 
 2. **Node.js Server** (Alternative):
+
 ```bash
 npm install
 npm run serve
@@ -128,23 +135,27 @@ This project is designed for AI pair programming. Before each session:
 ## Roadmap
 
 ### Phase 1: Foundation ✅
+
 - Project structure
 - Design system
 - Manifesto page
 - Documentation
 
 ### Phase 2: Content Engine (Next)
+
 - Static site generator setup
 - Markdown content system
 - First 10 pieces of content
 - Journey tracker
 
 ### Phase 3: Interactive Tools
+
 - F.U. Money calculator
 - Investment trackers
 - Fee impact visualizers
 
 ### Phase 4: Community
+
 - Comments system
 - Newsletter
 - Premium content
@@ -152,15 +163,17 @@ This project is designed for AI pair programming. Before each session:
 ## Contributing
 
 This is a personal project, but if you're interested in the journey:
+
 - Visit: https://drewgarraway.com/fhm
 - Follow the main site: https://drewgarraway.com
 
 ## Legal
 
-This is not financial advice. Simply one person's documented journey toward financial independence through index fund investing.
+This is not financial advice. Simply one person's documented journey toward financial independence
+through index fund investing.
 
 ---
 
-*"An investment in knowledge pays the best interest."* – Benjamin Franklin
+_"An investment in knowledge pays the best interest."_ – Benjamin Franklin
 
-*Franklin Hugh Money - Building wealth through patient investing.*
+_Franklin Hugh Money - Building wealth through patient investing._

@@ -1,10 +1,10 @@
 ---
 section: [SECTION_NUMBER]
-subsection: "[SUBSECTION_NAME]"
+subsection: '[SUBSECTION_NAME]'
 chapter: [CHAPTER_NUMBER]
 lesson: [LESSON_NUMBER]
-title: "[LESSON_TITLE]"
-description: "[ONE_SENTENCE_DESCRIPTION]"
+title: '[LESSON_TITLE]'
+description: '[ONE_SENTENCE_DESCRIPTION]'
 topics:
   - [TOPIC_1]
   - [TOPIC_2]
@@ -21,10 +21,11 @@ last_updated: [YYYY-MM-DD]
 
 [OPENING HOOK - 2-3 paragraphs]
 
-Start with a story, historical moment, or "why this matters" statement.
-Never start with a definition.
+Start with a story, historical moment, or "why this matters" statement. Never start with a
+definition.
 
 Example hooks:
+
 - "In April 1973, the Chicago Board Options Exchange opened for business..."
 - "Before Regulation T, investors could buy stocks with just 10% down..."
 - "The 2008 financial crisis exposed a simple truth about municipal bonds..."
@@ -34,6 +35,7 @@ Connect the hook to why this topic matters for the exam and in practice.
 ## Learning Objectives
 
 By the end of this lesson, you'll be able to:
+
 - [Specific, measurable objective using action verbs]
 - [Example: "Calculate maximum gain for a covered call position"]
 - [Example: "Distinguish between GO and revenue bonds"]
@@ -50,6 +52,7 @@ By the end of this lesson, you'll be able to:
 [Content with <span class="key-term">key terms</span> highlighted]
 
 Use concrete examples with real numbers:
+
 - "An investor buys 100 shares of XYZ at $50..."
 - "A municipal bond with a 4% coupon trading at 95..."
 
@@ -113,11 +116,11 @@ Use concrete examples with real numbers:
 
 **Solution:**
 
-| Step | Action | Calculation | Result |
-|------|--------|-------------|--------|
-| 1 | [What you're doing] | [Calculation] | [Result] |
-| 2 | [Next step] | [Calculation] | [Result] |
-| 3 | [Final step] | [Calculation] | **[Answer]** |
+| Step | Action              | Calculation   | Result       |
+| ---- | ------------------- | ------------- | ------------ |
+| 1    | [What you're doing] | [Calculation] | [Result]     |
+| 2    | [Next step]         | [Calculation] | [Result]     |
+| 3    | [Final step]        | [Calculation] | **[Answer]** |
 
 ---
 
@@ -157,13 +160,16 @@ Use concrete examples with real numbers:
 ### Quick Reference
 
 **Key Terms:**
+
 - <span class="key-term">[Term 1]</span>: [Brief definition]
 - <span class="key-term">[Term 2]</span>: [Brief definition]
 
 **Formulas** (if applicable):
+
 - [Formula]: [What it calculates]
 
 **Critical Numbers** (if applicable):
+
 - [Threshold or requirement]
 
 ---
@@ -176,6 +182,7 @@ Use concrete examples with real numbers:
 
 ---
 
-*[ONE SUBTLE HUMOR MOMENT somewhere in the content above]*
+_[ONE SUBTLE HUMOR MOMENT somewhere in the content above]_
 
-*Example: "Whether those decisions add value after fees is a debate that has launched a thousand academic papers and at least one very successful index fund company in Valley Forge, Pennsylvania."*
+_Example: "Whether those decisions add value after fees is a debate that has launched a thousand
+academic papers and at least one very successful index fund company in Valley Forge, Pennsylvania."_

@@ -1,8 +1,10 @@
 ---
 chapter: 12
 section: 3
-title: "Municipal Fund Securities"
-description: "Understanding 529 college savings plans, ABLE accounts, local government investment pools, and education savings vehicles"
+title: 'Municipal Fund Securities'
+description:
+  'Understanding 529 college savings plans, ABLE accounts, local government investment pools, and
+  education savings vehicles'
 topics:
   - Introduction to Municipal Fund Securities
   - 529 College Savings Plans
@@ -19,13 +21,26 @@ last_updated: 2026-01-04
 
 ## Introduction
 
-In 1996, Congress created Section 529 of the Internal Revenue Code, and the college savings industry was born. Named after the tax code section that authorized them, 529 plans have grown from a novel idea to holding over $400 billion in assets. Every state now offers at least one plan, and the competition for your college savings dollars has driven down fees and improved investment options dramatically.
+In 1996, Congress created Section 529 of the Internal Revenue Code, and the college savings industry
+was born. Named after the tax code section that authorized them, 529 plans have grown from a novel
+idea to holding over $400 billion in assets. Every state now offers at least one plan, and the
+competition for your college savings dollars has driven down fees and improved investment options
+dramatically.
 
-But 529s aren't the only municipal fund securities you'll encounter on the exam. ABLE accounts help families save for disability-related expenses, while local government investment pools let municipalities park their cash. What ties them together? They're all issued by state or local governments, exempt from the Investment Company Act of 1940, and regulated by the MSRB instead of the SEC.
+But 529s aren't the only municipal fund securities you'll encounter on the exam. ABLE accounts help
+families save for disability-related expenses, while local government investment pools let
+municipalities park their cash. What ties them together? They're all issued by state or local
+governments, exempt from the Investment Company Act of 1940, and regulated by the MSRB instead of
+the SEC.
 
-A <span class="key-term">municipal fund security</span> is an investment product that is issued by a state or municipality. Because a municipal fund security is issued by a state or local government, it is exempt from the rules of the Investment Company Act of 1940. Instead, their sale is regulated by the Municipal Securities Rulemaking Board (MSRB).
+A <span class="key-term">municipal fund security</span> is an investment product that is issued by a
+state or municipality. Because a municipal fund security is issued by a state or local government,
+it is exempt from the rules of the Investment Company Act of 1940. Instead, their sale is regulated
+by the Municipal Securities Rulemaking Board (MSRB).
 
-Income from municipal fund securities may be exempt from federal taxes and often state and local taxes as well. The MSRB defines three kinds of municipal fund securities:
+Income from municipal fund securities may be exempt from federal taxes and often state and local
+taxes as well. The MSRB defines three kinds of municipal fund securities:
+
 - Higher education savings plans, commonly referred to as <span class="key-term">529 plans</span>
 - <span class="key-term">Local government investment pools (LGIPs)</span>
 - <span class="key-term">ABLE accounts</span>
@@ -33,6 +48,7 @@ Income from municipal fund securities may be exempt from federal taxes and often
 ## Learning Objectives
 
 By the end of this section, you'll be able to:
+
 - Explain 529 college savings plan structure and tax benefits
 - Distinguish between advisor-sold and direct-sold 529 plans
 - Apply the superfunding rule for gift tax purposes
@@ -47,9 +63,16 @@ By the end of this section, you'll be able to:
 
 ### 529 College Savings Plans
 
-<span class="key-term">529 college savings plans</span> are designed to encourage saving for future college costs. As with a 401(k), money can be deposited into separate accounts that invest in a portfolio that is similar to a mutual fund. Investors cannot select individual stocks and bonds but are limited to the portfolios offered by a state's 529 plan. Investment choices within the same plan can be changed twice a year.
+<span class="key-term">529 college savings plans</span> are designed to encourage saving for future
+college costs. As with a 401(k), money can be deposited into separate accounts that invest in a
+portfolio that is similar to a mutual fund. Investors cannot select individual stocks and bonds but
+are limited to the portfolios offered by a state's 529 plan. Investment choices within the same plan
+can be changed twice a year.
 
-The earnings grow on a tax-deferred basis. If used for <span class="key-term">qualified educational expenses</span>, withdrawals are exempt from federal and state income taxes. In addition, some states may offer tax deductions for contributions to these plans if the owner is a state resident. The federal government does not offer any tax deductions for contributions to 529 accounts.
+The earnings grow on a tax-deferred basis. If used for <span class="key-term">qualified educational
+expenses</span>, withdrawals are exempt from federal and state income taxes. In addition, some
+states may offer tax deductions for contributions to these plans if the owner is a state resident.
+The federal government does not offer any tax deductions for contributions to 529 accounts.
 
 <div class="critical-concept">
 <div class="critical-concept__label">QUALIFIED EDUCATIONAL EXPENSES</div>
@@ -60,14 +83,19 @@ The earnings grow on a tax-deferred basis. If used for <span class="key-term">qu
 - School supplies and equipment, such as computers
 - Reasonable room and board expenses (for students attending at least half-time)
 - Expenses associated with special needs services
-- Up to $10,000 in annual expenses for tuition at an elementary or secondary public, private, or religious school
-- Up to $10,000 worth of student loan payments (in total, not per year) for the beneficiary or beneficiary's siblings
+- Up to $10,000 in annual expenses for tuition at an elementary or secondary public, private, or
+  religious school
+- Up to $10,000 worth of student loan payments (in total, not per year) for the beneficiary or
+  beneficiary's siblings
 - Expenses associated with apprenticeship programs
 </div>
 
 ### Characteristics of 529 Accounts
 
-Any adult can establish a 529 account and name anyone (including themselves) as beneficiary. The beneficiary can be any age, and the contributor and beneficiary do not need to be related. However, 529 accounts are typically set up by parents or grandparents with their children or grandchildren as beneficiaries. Once a 529 account is established, anyone can contribute to it.
+Any adult can establish a 529 account and name anyone (including themselves) as beneficiary. The
+beneficiary can be any age, and the contributor and beneficiary do not need to be related. However,
+529 accounts are typically set up by parents or grandparents with their children or grandchildren as
+beneficiaries. Once a 529 account is established, anyone can contribute to it.
 
 <div class="critical-concept">
 <div class="critical-concept__label">529 ACCOUNT FEATURES</div>
@@ -81,7 +109,9 @@ Any adult can establish a 529 account and name anyone (including themselves) as 
 
 ### Superfunding Rule
 
-Contributions to a 529 plan are subject to federal gift tax limits. However, large gifts can be spread over five years for tax purposes. Making five years' worth of contributions at once is called <span class="key-term">superfunding</span> the 529 account.
+Contributions to a 529 plan are subject to federal gift tax limits. However, large gifts can be
+spread over five years for tax purposes. Making five years' worth of contributions at once is called
+<span class="key-term">superfunding</span> the 529 account.
 
 <div class="info-box">
 <div class="info-box__title">Example: Superfunding</div>
@@ -92,19 +122,25 @@ Contributions to a 529 plan are subject to federal gift tax limits. However, lar
 ### Nonqualified Withdrawals
 
 If money is removed at any time for noneducational purposes:
+
 - Any **earnings** will be taxed at the owner's ordinary income tax level
 - Earnings will be subject to an additional **10% tax penalty**
-- Withdrawals of **contributions** (principal) will not be taxed and are not subject to the 10% penalty
-- All nonqualified withdrawals are assumed to be withdrawn on a proportional basis between earnings and principal
+- Withdrawals of **contributions** (principal) will not be taxed and are not subject to the 10%
+  penalty
+- All nonqualified withdrawals are assumed to be withdrawn on a proportional basis between earnings
+  and principal
 
 The penalty does not apply where a withdrawal is made because of the beneficiary's:
+
 1. Death
 2. Disability
 3. Receipt of scholarship payment
 
 ### Plan-to-Plan Rollovers
 
-Funds in a 529 account can be transferred from one state's 529 plan to another state's 529. This can be done without tax consequences if the funds are deposited in the new account within 60 days of withdrawal from the old plan. Plan-to-plan rollovers may be done only once in a 12-month period.
+Funds in a 529 account can be transferred from one state's 529 plan to another state's 529. This can
+be done without tax consequences if the funds are deposited in the new account within 60 days of
+withdrawal from the old plan. Plan-to-plan rollovers may be done only once in a 12-month period.
 
 ### Advisor-Sold vs. Direct-Sold Plans
 
@@ -147,9 +183,14 @@ Contributors may open a 529 college savings account in two different ways:
 
 ### 529 Prepaid Tuition Plans
 
-<span class="key-term">529 prepaid tuition plans</span> are a different kind of 529 plan. They are **not considered municipal fund securities**, and therefore are **not subject to MSRB rules**.
+<span class="key-term">529 prepaid tuition plans</span> are a different kind of 529 plan. They are
+**not considered municipal fund securities**, and therefore are **not subject to MSRB rules**.
 
-Prepaid tuition plans generally allow participants to purchase units or credits at participating colleges and universities to lock in current prices for future tuition and, in some cases, room and board. Performance of these investments depends on tuition inflation. When tuition prices rise quickly, prepaid tuition plans may be a good deal for participants because they have locked-in prepaid tuition.
+Prepaid tuition plans generally allow participants to purchase units or credits at participating
+colleges and universities to lock in current prices for future tuition and, in some cases, room and
+board. Performance of these investments depends on tuition inflation. When tuition prices rise
+quickly, prepaid tuition plans may be a good deal for participants because they have locked-in
+prepaid tuition.
 
 <div class="critical-concept">
 <div class="critical-concept__label">PREPAID TUITION PLAN FEATURES</div>
@@ -164,7 +205,10 @@ Prepaid tuition plans generally allow participants to purchase units or credits 
 
 ### Coverdell Education Savings Accounts
 
-<span class="key-term">Coverdell education savings accounts</span> (also called Coverdell ESAs or CESAs) can be used to pay for qualified education expenses at elementary and secondary schools (K-12), as well as any college or other post-secondary schools. These expenses include virtually any type of educational cost, including tuition, fees, books, supplies, and equipment.
+<span class="key-term">Coverdell education savings accounts</span> (also called Coverdell ESAs or
+CESAs) can be used to pay for qualified education expenses at elementary and secondary schools
+(K-12), as well as any college or other post-secondary schools. These expenses include virtually any
+type of educational cost, including tuition, fees, books, supplies, and equipment.
 
 <div class="historical-note">
 <div class="historical-note__label">Historical Context</div>
@@ -175,15 +219,18 @@ Prepaid tuition plans generally allow participants to purchase units or credits 
 <div class="critical-concept__label">COVERDELL ESA RULES</div>
 
 **Age Limits:**
+
 - Beneficiary must be under age **18** when the CESA is created
 - Additional contributions not permitted after beneficiary reaches age 18
 - Funds must be used by age **30** (waived for special needs students)
 
 **Contribution Limits:**
+
 - Maximum annual contribution: **$2,000**
 - If multiple accounts exist for the same beneficiary, total cannot exceed $2,000 annually
 
 **Taxation:**
+
 - Contributions are **not tax-deductible**
 - Earnings grow **tax-deferred**
 - Qualified withdrawals are **not taxed**
@@ -191,9 +238,11 @@ Prepaid tuition plans generally allow participants to purchase units or credits 
 - Contributions count as **gifts** for gift tax purposes
 
 **Income Limits:**
+
 - **High earners cannot contribute**—phase-out rules similar to Roth IRAs apply
 
 **Unused Funds:**
+
 - May be rolled over to a CESA for a "family member" of the original beneficiary
 </div>
 
@@ -201,7 +250,10 @@ Prepaid tuition plans generally allow participants to purchase units or credits 
 
 ## Local Government Investment Pools (LGIPs)
 
-<span class="key-term">LGIPs</span> are trusts established by state and local governments that offer municipal entities a place to invest their money. Government entities may use their surplus cash to purchase interests in the LGIP, which invests the assets in a portfolio of securities according to the trust's investment objectives and state laws.
+<span class="key-term">LGIPs</span> are trusts established by state and local governments that offer
+municipal entities a place to invest their money. Government entities may use their surplus cash to
+purchase interests in the LGIP, which invests the assets in a portfolio of securities according to
+the trust's investment objectives and state laws.
 
 <div class="critical-concept">
 <div class="critical-concept__label">LGIP KEY FEATURES</div>
@@ -213,7 +265,7 @@ Prepaid tuition plans generally allow participants to purchase units or credits 
   - Diversification
   - Professional portfolio management
   - Liquidity
-</div>
+  </div>
 
 <div class="info-box">
 <div class="info-box__title">Example: LGIP</div>
@@ -224,35 +276,45 @@ Prepaid tuition plans generally allow participants to purchase units or credits 
 
 ## ABLE Accounts
 
-<span class="key-term">ABLE accounts</span> are designed to allow disabled people and their families to save for the future on a tax-deferred basis. An ABLE account can hold up to $100,000 without interfering with the disabled person's ability to qualify for federal Supplemental Security Income (SSI) benefits.
+<span class="key-term">ABLE accounts</span> are designed to allow disabled people and their families
+to save for the future on a tax-deferred basis. An ABLE account can hold up to $100,000 without
+interfering with the disabled person's ability to qualify for federal Supplemental Security Income
+(SSI) benefits.
 
 <div class="critical-concept">
 <div class="critical-concept__label">ABLE ACCOUNT RULES</div>
 
 **Eligibility:**
+
 - Disability must have begun **before age 46**
 - A disabled person can only have **one ABLE account**
 - Anyone may contribute to the account
 
 **SSI Benefits:**
+
 - ABLE account can hold up to **$100,000** without affecting SSI eligibility
 - Only amounts **in excess of $100,000** count as an asset for SSI purposes
 
 **Tax Treatment:**
+
 - Contributions made with **after-tax dollars**
 - Earnings and withdrawals **not taxed** if used for qualified disability expenses
 
 **Qualified Disability Expenses:**
+
 - Medical treatment
 - Education
 - Special needs transportation
 - Other disability-related costs
 
 **Ownership:**
+
 - Unlike 529 accounts, the **beneficiary is also the owner** of the ABLE account
 </div>
 
-ABLE accounts work in a similar way to 529 accounts. States offer their own plans, and contribution limits are the same as a state's 529 college savings plan. Many states allow nonresidents to open an ABLE account in their state.
+ABLE accounts work in a similar way to 529 accounts. States offer their own plans, and contribution
+limits are the same as a state's 529 college savings plan. Many states allow nonresidents to open an
+ABLE account in their state.
 
 <div class="critical-concept">
 <div class="critical-concept__label">529 vs. ABLE ACCOUNT COMPARISON</div>
@@ -298,7 +360,11 @@ ABLE accounts work in a similar way to 529 accounts. States offer their own plan
 
 ## Summary & Key Points
 
-Municipal fund securities offer tax-advantaged ways to save for education and disability expenses, with the added benefit of state sponsorship and MSRB oversight rather than SEC registration. The key distinctions to remember are which products qualify as securities (529 savings plans, ABLE accounts, LGIPs) versus which don't (prepaid tuition plans), and the specific rules governing each type of account.
+Municipal fund securities offer tax-advantaged ways to save for education and disability expenses,
+with the added benefit of state sponsorship and MSRB oversight rather than SEC registration. The key
+distinctions to remember are which products qualify as securities (529 savings plans, ABLE accounts,
+LGIPs) versus which don't (prepaid tuition plans), and the specific rules governing each type of
+account.
 
 <div class="key-terms">
 <h3>529 Plans</h3>

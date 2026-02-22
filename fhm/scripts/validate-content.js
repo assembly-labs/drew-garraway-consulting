@@ -35,7 +35,8 @@ let warnings = [];
  * Get all SIE chapter HTML files in pages/sie/
  */
 function getChapterFiles() {
-    const files = fs.readdirSync(SIE_DIR)
+    const files = fs
+        .readdirSync(SIE_DIR)
         .filter(f => f.match(/^sie-chapter-\d+.*\.html$/))
         .sort();
     return files;
@@ -56,7 +57,7 @@ function parseNavigationConfig() {
     while ((match = chapterRegex.exec(content)) !== null) {
         chapters.push({
             number: parseInt(match[1]),
-            title: match[2]
+            title: match[2],
         });
     }
 
@@ -68,7 +69,7 @@ function parseNavigationConfig() {
         sections.push({
             id: match[1],
             file: match[2],
-            locked: match[3] === 'true'
+            locked: match[3] === 'true',
         });
     }
 
@@ -112,9 +113,9 @@ function getChapterMeta() {
         return chapters;
     }
 
-    const dirs = fs.readdirSync(CONTENT_DIR).filter(d =>
-        fs.statSync(path.join(CONTENT_DIR, d)).isDirectory()
-    );
+    const dirs = fs
+        .readdirSync(CONTENT_DIR)
+        .filter(d => fs.statSync(path.join(CONTENT_DIR, d)).isDirectory());
 
     for (const dir of dirs) {
         const metaPath = path.join(CONTENT_DIR, dir, 'chapter-meta.json');
@@ -123,7 +124,7 @@ function getChapterMeta() {
                 const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
                 chapters.push({
                     dir,
-                    ...meta
+                    ...meta,
                 });
             } catch (e) {
                 warnings.push(`Could not parse ${metaPath}: ${e.message}`);
@@ -195,7 +196,7 @@ function validate() {
     if (studyMaterials.badgeCount !== actualAvailableChapters) {
         errors.push(
             `Progress badge says "${studyMaterials.badgeCount} of ${studyMaterials.totalChapters}" ` +
-            `but ${actualAvailableChapters} chapters have unlocked content in navigation config`
+                `but ${actualAvailableChapters} chapters have unlocked content in navigation config`
         );
     } else {
         console.log(`  ✓ Progress badge correct: ${studyMaterials.badgeCount} chapters available`);
@@ -215,11 +216,13 @@ function validate() {
     for (const [chapterNum, file] of Object.entries(firstSectionPerChapter)) {
         if (!linkedFiles.has(file)) {
             // Check if ANY file from this chapter is linked
-            const chapterLinked = studyMaterials.links.some(l => l.includes(`chapter-${chapterNum}`));
+            const chapterLinked = studyMaterials.links.some(l =>
+                l.includes(`chapter-${chapterNum}`)
+            );
             if (!chapterLinked) {
                 errors.push(
                     `Chapter ${chapterNum} has unlocked content but no link in study materials page. ` +
-                    `Add a card linking to: ${file}`
+                        `Add a card linking to: ${file}`
                 );
             }
         }
@@ -232,7 +235,9 @@ function validate() {
     );
     const cacheControlCount = (studyMaterialsContent.match(/Cache-Control/g) || []).length;
     if (cacheControlCount > 1) {
-        warnings.push(`study-materials.html has ${cacheControlCount} Cache-Control meta tags (should be 0-1)`);
+        warnings.push(
+            `study-materials.html has ${cacheControlCount} Cache-Control meta tags (should be 0-1)`
+        );
     }
 
     // Results

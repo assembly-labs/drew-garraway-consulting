@@ -4,7 +4,7 @@
  * Features: tap to flip, swipe gestures, review pile, localStorage persistence
  */
 
-const FormulaFlashcards = (function() {
+const FormulaFlashcards = (function () {
     'use strict';
 
     // ============================================
@@ -15,12 +15,9 @@ const FormulaFlashcards = (function() {
             id: 'sales-charge',
             name: 'Sales Charge Percentage',
             equation: '(POP - NAV) / POP',
-            variables: [
-                'POP = Public Offering Price',
-                'NAV = Net Asset Value'
-            ],
+            variables: ['POP = Public Offering Price', 'NAV = Net Asset Value'],
             warning: null,
-            priority: 'MOST COMMON'
+            priority: 'MOST COMMON',
         },
         {
             id: 'current-yield',
@@ -28,7 +25,7 @@ const FormulaFlashcards = (function() {
             equation: 'Annual Interest / Current Market Price',
             variables: [],
             warning: null,
-            priority: 'VERY COMMON'
+            priority: 'VERY COMMON',
         },
         {
             id: 'dividend-yield',
@@ -36,7 +33,7 @@ const FormulaFlashcards = (function() {
             equation: 'Annual Dividend / Stock Price',
             variables: [],
             warning: 'If quarterly dividend given, multiply by 4 first',
-            priority: 'VERY COMMON'
+            priority: 'VERY COMMON',
         },
         {
             id: 'nav',
@@ -44,7 +41,7 @@ const FormulaFlashcards = (function() {
             equation: '(Total Assets - Liabilities) / Outstanding Shares',
             variables: [],
             warning: null,
-            priority: 'OCCASIONAL'
+            priority: 'OCCASIONAL',
         },
         {
             id: 'call-breakeven',
@@ -52,7 +49,7 @@ const FormulaFlashcards = (function() {
             equation: 'Strike Price + Premium',
             variables: [],
             warning: null,
-            priority: 'OCCASIONAL'
+            priority: 'OCCASIONAL',
         },
         {
             id: 'put-breakeven',
@@ -60,8 +57,8 @@ const FormulaFlashcards = (function() {
             equation: 'Strike Price - Premium',
             variables: [],
             warning: null,
-            priority: 'OCCASIONAL'
-        }
+            priority: 'OCCASIONAL',
+        },
     ];
 
     // ============================================
@@ -102,7 +99,7 @@ const FormulaFlashcards = (function() {
                 reviewPile: reviewPile.map(f => f.id),
                 currentDeck: currentDeck.map(f => f.id),
                 currentIndex,
-                timestamp: Date.now()
+                timestamp: Date.now(),
             };
             localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
         } catch (e) {
@@ -131,8 +128,12 @@ const FormulaFlashcards = (function() {
         const saved = loadProgress();
         if (saved && saved.currentDeck && saved.currentDeck.length > 0) {
             // Restore session
-            currentDeck = saved.currentDeck.map(id => FORMULAS.find(f => f.id === id)).filter(Boolean);
-            reviewPile = (saved.reviewPile || []).map(id => FORMULAS.find(f => f.id === id)).filter(Boolean);
+            currentDeck = saved.currentDeck
+                .map(id => FORMULAS.find(f => f.id === id))
+                .filter(Boolean);
+            reviewPile = (saved.reviewPile || [])
+                .map(id => FORMULAS.find(f => f.id === id))
+                .filter(Boolean);
             currentIndex = Math.min(saved.currentIndex || 0, currentDeck.length - 1);
             knowCount = saved.knowCount || 0;
             reviewCount = saved.reviewCount || 0;
@@ -180,11 +181,15 @@ const FormulaFlashcards = (function() {
                     <button class="btn btn--primary btn--start" onclick="FormulaFlashcards.startSession()">
                         ${hasProgress ? 'Continue' : 'Start'}
                     </button>
-                    ${hasProgress ? `
+                    ${
+                        hasProgress
+                            ? `
                         <button class="btn btn--secondary btn--start" style="margin-top: var(--fh-space-md);" onclick="FormulaFlashcards.resetAndStart()">
                             Start Fresh
                         </button>
-                    ` : ''}
+                    `
+                            : ''
+                    }
                 </div>
             </div>
         `;
@@ -198,8 +203,12 @@ const FormulaFlashcards = (function() {
 
         if (saved && saved.currentDeck && saved.currentDeck.length > 0) {
             // Resume existing session
-            currentDeck = saved.currentDeck.map(id => FORMULAS.find(f => f.id === id)).filter(Boolean);
-            reviewPile = (saved.reviewPile || []).map(id => FORMULAS.find(f => f.id === id)).filter(Boolean);
+            currentDeck = saved.currentDeck
+                .map(id => FORMULAS.find(f => f.id === id))
+                .filter(Boolean);
+            reviewPile = (saved.reviewPile || [])
+                .map(id => FORMULAS.find(f => f.id === id))
+                .filter(Boolean);
             currentIndex = Math.min(saved.currentIndex || 0, currentDeck.length - 1);
             knowCount = saved.knowCount || 0;
             reviewCount = saved.reviewCount || 0;
@@ -263,12 +272,16 @@ const FormulaFlashcards = (function() {
                 <h1 class="formula-title">Flash Formulas</h1>
                 <span class="formula-progress">${currentIndex + 1} of ${totalInRound}</span>
             </header>
-            ${reviewPile.length > 0 ? `
+            ${
+                reviewPile.length > 0
+                    ? `
                 <div class="review-banner review-banner--visible">
                     <span>Review pile:</span>
                     <span class="review-banner__count">${reviewPile.length}</span>
                 </div>
-            ` : ''}
+            `
+                    : ''
+            }
             <div class="formula-session">
                 <div class="session-progress">
                     <div class="progress-bar">
@@ -321,14 +334,22 @@ const FormulaFlashcards = (function() {
                         <span class="priority-badge priority-badge--${priorityClass}">${formula.priority}</span>
                         <div class="formula-content">
                             <div class="formula-equation">${formula.equation}</div>
-                            ${formula.variables.length > 0 ? `
+                            ${
+                                formula.variables.length > 0
+                                    ? `
                                 <div class="formula-variables">
                                     ${formula.variables.map(v => `<p>${v}</p>`).join('')}
                                 </div>
-                            ` : ''}
-                            ${formula.warning ? `
+                            `
+                                    : ''
+                            }
+                            ${
+                                formula.warning
+                                    ? `
                                 <div class="formula-warning">⚠️ ${formula.warning}</div>
-                            ` : ''}
+                            `
+                                    : ''
+                            }
                         </div>
                     </div>
                 </div>
@@ -347,7 +368,7 @@ const FormulaFlashcards = (function() {
 
         // Tap to flip
         card.addEventListener('click', handleTap);
-        card.addEventListener('keydown', (e) => {
+        card.addEventListener('keydown', e => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 handleTap();
@@ -505,10 +526,10 @@ const FormulaFlashcards = (function() {
         let icon = '🎉';
 
         if (masteryPercent === 100) {
-            message = 'Perfect! You\'ve mastered all the formulas.';
+            message = "Perfect! You've mastered all the formulas.";
             icon = '🏆';
         } else if (masteryPercent >= 80) {
-            message = 'Great job! You\'re almost there.';
+            message = "Great job! You're almost there.";
             icon = '🎉';
         } else if (masteryPercent >= 50) {
             message = 'Good progress! Keep practicing.';
@@ -565,6 +586,6 @@ const FormulaFlashcards = (function() {
         startReviewRound,
         markKnow,
         markReview,
-        finishSession
+        finishSession,
     };
 })();

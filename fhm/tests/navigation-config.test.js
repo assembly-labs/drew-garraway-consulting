@@ -96,14 +96,17 @@ describe('SIECourseStructure', () => {
         });
 
         it('should match the length of getAllSections()', () => {
-            expect(SIECourseStructure.getTotalSections())
-                .toBe(SIECourseStructure.getAllSections().length);
+            expect(SIECourseStructure.getTotalSections()).toBe(
+                SIECourseStructure.getAllSections().length
+            );
         });
     });
 
     describe('getCurrentSection()', () => {
         it('should find a section by filename', () => {
-            const section = SIECourseStructure.getCurrentSection('pages/sie/sie-chapter-5-municipal.html');
+            const section = SIECourseStructure.getCurrentSection(
+                'pages/sie/sie-chapter-5-municipal.html'
+            );
             expect(section).toBeDefined();
             expect(section.id).toBe('5.1');
         });

@@ -1,16 +1,27 @@
 # Chapter 18: Taxation
 
-*Series 7 Exam Weight: ~5-7% of exam*
+_Series 7 Exam Weight: ~5-7% of exam_
 
 ---
 
-On February 3, 1913, the Sixteenth Amendment to the Constitution was ratified, giving Congress the power to tax income "from whatever source derived." The first Form 1040, filed that year, was four pages long. Today, the Internal Revenue Code runs over 2,600 pages, and the regulations interpreting it fill roughly 9,000 more.
+On February 3, 1913, the Sixteenth Amendment to the Constitution was ratified, giving Congress the
+power to tax income "from whatever source derived." The first Form 1040, filed that year, was four
+pages long. Today, the Internal Revenue Code runs over 2,600 pages, and the regulations interpreting
+it fill roughly 9,000 more.
 
-For the Series 7, you don't need to be a tax attorney. But you absolutely need to understand how different securities are taxed—because tax treatment is often the deciding factor in whether a particular investment is suitable for a client. A municipal bond yielding 4% might actually put more money in a high-bracket investor's pocket than a corporate bond yielding 6%. Understanding why is the point of this chapter.
+For the Series 7, you don't need to be a tax attorney. But you absolutely need to understand how
+different securities are taxed—because tax treatment is often the deciding factor in whether a
+particular investment is suitable for a client. A municipal bond yielding 4% might actually put more
+money in a high-bracket investor's pocket than a corporate bond yielding 6%. Understanding why is
+the point of this chapter.
 
 ### Why This Chapter Matters
 
-Taxation touches every investment decision. The type of security purchased, the income it generates, the length of time it's held, and the account in which it's held all determine how much the IRS takes. This chapter covers seven distinct areas: equity taxation, options, bonds, mutual funds, annuities and retirement plans, REITs and DPPs, and miscellaneous tax issues like wash sales and the AMT.
+Taxation touches every investment decision. The type of security purchased, the income it generates,
+the length of time it's held, and the account in which it's held all determine how much the IRS
+takes. This chapter covers seven distinct areas: equity taxation, options, bonds, mutual funds,
+annuities and retirement plans, REITs and DPPs, and miscellaneous tax issues like wash sales and the
+AMT.
 
 ---
 
@@ -23,7 +34,8 @@ Taxation touches every investment decision. The type of security purchased, the 
 
 ### Types of Income
 
-The tax code classifies income into three categories, and the exam expects you to know which is which:
+The tax code classifies income into three categories, and the exam expects you to know which is
+which:
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -32,13 +44,16 @@ The tax code classifies income into three categories, and the exam expects you t
   <strong>Passive income</strong> — rental income, limited partnership income. Can only offset passive losses.</p>
 </div>
 
-These categories matter because the IRS restricts how losses in one category can offset income in another. You can't use a loss from a limited partnership to reduce your W-2 wages.
+These categories matter because the IRS restricts how losses in one category can offset income in
+another. You can't use a loss from a limited partnership to reduce your W-2 wages.
 
 ---
 
 ### Capital Gains and Losses
 
-When an investor sells a security for more than they paid, the profit is a <span class="key-term">capital gain</span>. The tax rate depends entirely on how long the security was held:
+When an investor sells a security for more than they paid, the profit is a
+<span class="key-term">capital gain</span>. The tax rate depends entirely on how long the security
+was held:
 
 <div class="info-box">
   <div class="info-box__title">Capital Gains Tax Rates</div>
@@ -49,7 +64,9 @@ When an investor sells a security for more than they paid, the profit is a <span
   </table>
 </div>
 
-Short-term losses offset short-term gains first. Long-term losses offset long-term gains first. If there's a net capital loss remaining, up to <strong>$3,000 per year</strong> can be deducted against ordinary income. Any excess carries forward indefinitely.
+Short-term losses offset short-term gains first. Long-term losses offset long-term gains first. If
+there's a net capital loss remaining, up to <strong>$3,000 per year</strong> can be deducted against
+ordinary income. Any excess carries forward indefinitely.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> The holding period is "more than 12 months" for long-term treatment—not "12 months or more." One extra day matters.</p>
@@ -63,10 +80,13 @@ Short-term losses offset short-term gains first. Long-term losses offset long-te
 
 ### Determining Cost Basis
 
-<span class="key-term">Cost basis</span> is the purchase price plus commissions—the total amount invested. When calculating gains or losses, you subtract cost basis from sale proceeds.
+<span class="key-term">Cost basis</span> is the purchase price plus commissions—the total amount
+invested. When calculating gains or losses, you subtract cost basis from sale proceeds.
 
 Three methods for identifying which shares were sold:
-- **Specific identification** — investor tells the broker exactly which shares to sell (must be done at time of sale)
+
+- **Specific identification** — investor tells the broker exactly which shares to sell (must be done
+  at time of sale)
 - **FIFO (First In, First Out)** — the IRS default. First shares purchased are deemed first sold.
 - **Average cost** — available only for mutual fund shares
 
@@ -83,29 +103,45 @@ In a stock split, the total cost basis stays the same—only the per-share basis
 
 ### Taxation of Dividends
 
-<span class="key-term">Qualified dividends</span> from corporate stock are taxed at the preferential capital gains rate (currently 15%, or 20% for the highest bracket). <span class="key-term">Nonqualified dividends</span> are taxed at ordinary income rates.
+<span class="key-term">Qualified dividends</span> from corporate stock are taxed at the preferential
+capital gains rate (currently 15%, or 20% for the highest bracket).
+<span class="key-term">Nonqualified dividends</span> are taxed at ordinary income rates.
 
-Important: interest from corporate bonds does NOT receive the qualified dividend rate—it's always ordinary income.
+Important: interest from corporate bonds does NOT receive the qualified dividend rate—it's always
+ordinary income.
 
 #### Stock Dividends and Splits
 
-<span class="key-term">Stock dividends</span> and stock splits are <strong>not taxable</strong> when received. They simply change the per-share cost basis. A 10% stock dividend on 100 shares at $10/share ($1,000 total basis) gives you 110 shares with a per-share basis of $9.09.
+<span class="key-term">Stock dividends</span> and stock splits are <strong>not taxable</strong> when
+received. They simply change the per-share cost basis. A 10% stock dividend on 100 shares at
+$10/share ($1,000 total basis) gives you 110 shares with a per-share basis of $9.09.
 
 #### Corporations and the Dividends-Received Deduction
 
-Corporations that receive dividends from other corporations get a <span class="key-term">dividends-received deduction</span> of 50% or more—a significant tax advantage that makes preferred stock attractive for corporate investors.
+Corporations that receive dividends from other corporations get a
+<span class="key-term">dividends-received deduction</span> of 50% or more—a significant tax
+advantage that makes preferred stock attractive for corporate investors.
 
 #### Tax Reporting Forms
 
-Portfolio income is reported to the IRS by the payer. Dividends are reported on <span class="key-term">Form 1099-DIV</span>, which details cash dividends, qualified dividend amounts, capital gains distributions, and REIT distributions. Interest income is reported on <span class="key-term">Form 1099-INT</span>, broken into taxable and nontaxable (municipal) interest.
+Portfolio income is reported to the IRS by the payer. Dividends are reported on
+<span class="key-term">Form 1099-DIV</span>, which details cash dividends, qualified dividend
+amounts, capital gains distributions, and REIT distributions. Interest income is reported on
+<span class="key-term">Form 1099-INT</span>, broken into taxable and nontaxable (municipal)
+interest.
 
 #### Mergers and Conversions
 
-When companies merge, shareholders receiving stock in the new company generally face <strong>no taxable event</strong>. Their cost basis carries over from the original shares. Similarly, converting convertible preferred stock or bonds to common stock is not taxable.
+When companies merge, shareholders receiving stock in the new company generally face <strong>no
+taxable event</strong>. Their cost basis carries over from the original shares. Similarly,
+converting convertible preferred stock or bonds to common stock is not taxable.
 
 #### No Capital Events in Retirement Accounts
 
-Transactions inside tax-deferred retirement plans (IRAs, 401(k)s, etc.) are <strong>not capital events</strong>. Buying and selling within the account does not generate taxable gains or losses. After-tax (Roth) contributions are also not considered capital events. Only distributions from the account create a tax obligation.
+Transactions inside tax-deferred retirement plans (IRAs, 401(k)s, etc.) are <strong>not capital
+events</strong>. Buying and selling within the account does not generate taxable gains or losses.
+After-tax (Roth) contributions are also not considered capital events. Only distributions from the
+account create a tax obligation.
 
 ---
 
@@ -135,11 +171,15 @@ Three possible outcomes for an option position, each with different tax conseque
 
 ### Puts and Holding Periods
 
-Buying a put on stock you already hold short-term <strong>wipes out the holding period</strong>—it resets to zero. If the put is exercised, the gain is short-term regardless of how long you held the stock beforehand.
+Buying a put on stock you already hold short-term <strong>wipes out the holding period</strong>—it
+resets to zero. If the put is exercised, the gain is short-term regardless of how long you held the
+stock beforehand.
 
 ### Married Put
 
-If you buy stock and a put <strong>on the same day</strong>, it's a <span class="key-term">married put</span>. The IRS treats the put premium as part of the stock's cost basis (like a commission). The holding period is based on the stock, not the option.
+If you buy stock and a put <strong>on the same day</strong>, it's a <span class="key-term">married
+put</span>. The IRS treats the put premium as part of the stock's cost basis (like a commission).
+The holding period is based on the stock, not the option.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Most options expire within a year, so gains and losses from expired options are typically short-term.</p>
@@ -156,7 +196,10 @@ If you buy stock and a put <strong>on the same day</strong>, it's a <span class=
 
 ### Bond Interest Taxation
 
-Interest from corporate bonds is taxed as ordinary income at all levels. However, bond interest paid by a corporation is <strong>deductible against corporate taxes</strong>—unlike dividends paid on stock. This is a powerful advantage for companies choosing to raise capital through debt rather than equity.
+Interest from corporate bonds is taxed as ordinary income at all levels. However, bond interest paid
+by a corporation is <strong>deductible against corporate taxes</strong>—unlike dividends paid on
+stock. This is a powerful advantage for companies choosing to raise capital through debt rather than
+equity.
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -168,7 +211,8 @@ Interest from corporate bonds is taxed as ordinary income at all levels. However
   </table>
 </div>
 
-Bonds issued by U.S. territories (Puerto Rico, Guam, U.S. Virgin Islands) are <span class="key-term">triple-tax-exempt</span>—free from federal, state, and local taxes.
+Bonds issued by U.S. territories (Puerto Rico, Guam, U.S. Virgin Islands) are
+<span class="key-term">triple-tax-exempt</span>—free from federal, state, and local taxes.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Interest from agency securities (GNMAs, CMOs issued by GSEs) is fully taxable at all levels—even though they're backed by the government. Don't confuse agency bonds with Treasuries.</p>
@@ -176,7 +220,8 @@ Bonds issued by U.S. territories (Puerto Rico, Guam, U.S. Virgin Islands) are <s
 
 ### Comparing Yields: Net Yield and Taxable Equivalent Yield
 
-Because municipal and corporate bonds are taxed differently, you need to convert to compare them on an apples-to-apples basis.
+Because municipal and corporate bonds are taxed differently, you need to convert to compare them on
+an apples-to-apples basis.
 
 <div class="calculation-box">
   <div class="calculation-box__label">Net Yield (After-Tax Yield on a Taxable Bond)</div>
@@ -198,19 +243,27 @@ Because municipal and corporate bonds are taxed differently, you need to convert
 
 ### Premium and Discount Bonds
 
-**Premium bonds** (bought above par): The holder can <span class="key-term">amortize</span> the premium—reducing cost basis annually until it equals par at maturity. This eliminates any capital loss at maturity.
+**Premium bonds** (bought above par): The holder can <span class="key-term">amortize</span> the
+premium—reducing cost basis annually until it equals par at maturity. This eliminates any capital
+loss at maturity.
 
 <div class="info-box">
   <div class="info-box__title">Premium Amortization Example</div>
   <p>Jane purchases a $1,000 par, 10-year bond on the secondary market for $1,100. The bond is redeemable in 7 years. Premium = $100. Annual amortization = $100 / 7 = approximately $14.29/year. Each year, Jane's adjusted cost basis decreases by $14.29 until it reaches $1,000 at maturity—eliminating any capital loss.</p>
 </div>
 
-**Discount bonds** (bought below par): The discount is <span class="key-term">accreted</span>—added to cost basis over time. The IRS treats accreted discount as ordinary income (not capital gain).
+**Discount bonds** (bought below par): The discount is <span class="key-term">accreted</span>—added
+to cost basis over time. The IRS treats accreted discount as ordinary income (not capital gain).
 
 ### Municipal Bond Specifics
-- Premium on municipal bonds <strong>must</strong> be amortized (no capital loss if held to maturity)
-- Original issue discount (OID) on municipal bonds: accretion is treated as tax-exempt interest (not ordinary income)
-- <span class="key-term">Bank qualified bonds</span>: issuers offering no more than $10 million in tax-exempt bonds per year. Banks can deduct 80% of carrying costs, resulting in slightly lower yields for investors.
+
+- Premium on municipal bonds <strong>must</strong> be amortized (no capital loss if held to
+  maturity)
+- Original issue discount (OID) on municipal bonds: accretion is treated as tax-exempt interest (not
+  ordinary income)
+- <span class="key-term">Bank qualified bonds</span>: issuers offering no more than $10 million in
+  tax-exempt bonds per year. Banks can deduct 80% of carrying costs, resulting in slightly lower
+  yields for investors.
 
 ---
 
@@ -218,7 +271,9 @@ Because municipal and corporate bonds are taxed differently, you need to convert
 
 ### The 90% Distribution Rule (Subchapter M)
 
-If a <span class="key-term">regulated investment company</span> (RIC) distributes at least 90% of its net investment income to shareholders, the fund itself pays no tax on distributed income. The tax obligation passes through to shareholders.
+If a <span class="key-term">regulated investment company</span> (RIC) distributes at least 90% of
+its net investment income to shareholders, the fund itself pays no tax on distributed income. The
+tax obligation passes through to shareholders.
 
 ### Three Taxable Events for Fund Investors
 
@@ -232,7 +287,9 @@ If a <span class="key-term">regulated investment company</span> (RIC) distribute
 
 ### What Funds Don't Distribute
 
-Funds <strong>never distribute net capital losses</strong>. Losses are retained in the fund and reflected in the NAV. Unrealized gains are also not taxable until the fund actually sells the securities.
+Funds <strong>never distribute net capital losses</strong>. Losses are retained in the fund and
+reflected in the NAV. Unrealized gains are also not taxable until the fund actually sells the
+securities.
 
 ### Taxation of Bond Fund Dividends
 
@@ -250,19 +307,27 @@ Funds <strong>never distribute net capital losses</strong>. Losses are retained 
 
 ### Cost Basis and Reinvestment
 
-Even when dividends and capital gains are automatically reinvested, they are <strong>still taxable</strong> in the year received. Reinvested distributions increase the cost basis of the holding (because the investor is purchasing additional shares at NAV).
+Even when dividends and capital gains are automatically reinvested, they are <strong>still
+taxable</strong> in the year received. Reinvested distributions increase the cost basis of the
+holding (because the investor is purchasing additional shares at NAV).
 
 Cost basis methods for mutual funds: FIFO (default), average cost, or specific identification.
 
 ### Municipal Bond Fund Caveat
 
-Dividends from a municipal bond fund may represent <strong>tax-free income</strong>, but if the fund buys and sells bonds at a profit, those capital gains are <strong>taxable to shareholders</strong>. Tax-free applies only to the interest income, not to the fund's trading profits.
+Dividends from a municipal bond fund may represent <strong>tax-free income</strong>, but if the fund
+buys and sells bonds at a profit, those capital gains are <strong>taxable to shareholders</strong>.
+Tax-free applies only to the interest income, not to the fund's trading profits.
 
-Additionally, a fund's NAV may decline while investors still owe capital gains taxes—if the fund sold appreciated securities inside the portfolio, those gains are distributed even though the overall fund price dropped.
+Additionally, a fund's NAV may decline while investors still owe capital gains taxes—if the fund
+sold appreciated securities inside the portfolio, those gains are distributed even though the
+overall fund price dropped.
 
 ### Switching Funds
 
-Exchanging shares between funds within a fund family is a <strong>taxable event</strong>—it generates a capital gain or loss. Don't confuse this with switching between funds inside a 401(k), which is tax-sheltered.
+Exchanging shares between funds within a fund family is a <strong>taxable event</strong>—it
+generates a capital gain or loss. Don't confuse this with switching between funds inside a 401(k),
+which is tax-sheltered.
 
 ---
 
@@ -271,35 +336,48 @@ Exchanging shares between funds within a fund family is a <strong>taxable event<
 ### Annuities
 
 #### Accumulation Phase (Nonqualified)
+
 - Contributions are made with <strong>after-tax dollars</strong>
 - Earnings grow <strong>tax-deferred</strong>
-- Withdrawals during accumulation: IRS treats as <strong>LIFO</strong> (earnings come out first = taxable)
+- Withdrawals during accumulation: IRS treats as <strong>LIFO</strong> (earnings come out first =
+  taxable)
 - Early withdrawal before age 59½: 10% penalty plus ordinary income tax on earnings
 
 #### Annuitization Phase
-- Each payment has two components: return of cost basis (not taxable) and earnings (taxable as ordinary income)
+
+- Each payment has two components: return of cost basis (not taxable) and earnings (taxable as
+  ordinary income)
 - The <span class="key-term">exclusion ratio</span> determines the non-taxable portion
 
 #### Death Benefit During Accumulation
 
-If the annuity owner dies during the accumulation phase, the beneficiary pays <strong>ordinary income tax</strong> on the gain—the amount above the original cost basis.
+If the annuity owner dies during the accumulation phase, the beneficiary pays <strong>ordinary
+income tax</strong> on the gain—the amount above the original cost basis.
 
 #### Losses During Accumulation
 
-If the annuity's value drops below the cost basis and the contract is fully surrendered, the loss <strong>may be deductible</strong>.
+If the annuity's value drops below the cost basis and the contract is fully surrendered, the loss
+<strong>may be deductible</strong>.
 
 #### Non-Qualified Annuity RMDs
 
-Non-qualified annuities have <strong>no required minimum distributions</strong> during the owner's lifetime. (Beneficiary distribution rules apply upon death.)
+Non-qualified annuities have <strong>no required minimum distributions</strong> during the owner's
+lifetime. (Beneficiary distribution rules apply upon death.)
 
 #### Tax-Qualified Variable Annuities
 
-Qualified variable annuities are funded with <strong>pre-tax dollars</strong>. Because contributions were never taxed, <strong>all distributions</strong> are taxed as ordinary income—both the contributions and the earnings.
+Qualified variable annuities are funded with <strong>pre-tax dollars</strong>. Because contributions
+were never taxed, <strong>all distributions</strong> are taxed as ordinary income—both the
+contributions and the earnings.
 
 #### 1035 Exchange
-A <span class="key-term">1035 exchange</span> allows a tax-free swap of one annuity for another (or life insurance to annuity). But you <strong>cannot</strong> exchange an annuity for life insurance—that direction is taxable.
+
+A <span class="key-term">1035 exchange</span> allows a tax-free swap of one annuity for another (or
+life insurance to annuity). But you <strong>cannot</strong> exchange an annuity for life
+insurance—that direction is taxable.
 
 ### Life Insurance
+
 - Cash value growth: <strong>tax-deferred</strong>
 - Death benefit to beneficiary: generally <strong>tax-free</strong>
 - Policy loans: not taxable events (unless the policy lapses)
@@ -323,6 +401,7 @@ A <span class="key-term">1035 exchange</span> allows a tax-free swap of one annu
 </div>
 
 #### IRA Rollovers
+
 - Must complete within 60 days
 - One rollover per 12-month period
 - Direct trustee-to-trustee transfers: unlimited, no tax consequence
@@ -333,11 +412,15 @@ A <span class="key-term">1035 exchange</span> allows a tax-free swap of one annu
 
 ### REITs
 
-Like mutual funds, REITs that distribute at least 90% of net investment income to shareholders avoid taxation at the entity level (<span class="key-term">Subchapter M</span>). REIT distributions are generally taxed as <strong>ordinary income</strong> (not at the qualified dividend rate).
+Like mutual funds, REITs that distribute at least 90% of net investment income to shareholders avoid
+taxation at the entity level (<span class="key-term">Subchapter M</span>). REIT distributions are
+generally taxed as <strong>ordinary income</strong> (not at the qualified dividend rate).
 
 ### Direct Participation Programs (DPPs)
 
-DPPs are structured as limited partnerships—<span class="key-term">pass-through entities</span>. The partnership itself pays no taxes. All income, gains, losses, deductions, and credits flow through to partners via <strong>Schedule K-1</strong>.
+DPPs are structured as limited partnerships—<span class="key-term">pass-through entities</span>. The
+partnership itself pays no taxes. All income, gains, losses, deductions, and credits flow through to
+partners via <strong>Schedule K-1</strong>.
 
 #### Passive Income and Loss Rules
 
@@ -349,46 +432,65 @@ DPPs are structured as limited partnerships—<span class="key-term">pass-throug
 
 #### Tax Basis in a Partnership
 
-An investor's <span class="key-term">tax basis</span> determines the maximum amount of losses they can deduct. Losses exceeding basis are suspended and carried forward.
+An investor's <span class="key-term">tax basis</span> determines the maximum amount of losses they
+can deduct. Losses exceeding basis are suspended and carried forward.
 
-Basis is **established** by: initial investment, cash contributions, share of recourse debt, share of partnership income
+Basis is **established** by: initial investment, cash contributions, share of recourse debt, share
+of partnership income
 
 Basis is **reduced** by: distributions, allocated losses, decrease in partnership liabilities
 
 #### Tax Credits vs. Tax Deductions
+
 - A <strong>tax deduction</strong> reduces taxable income (value depends on tax bracket)
 - A <strong>tax credit</strong> reduces tax liability dollar-for-dollar (always more valuable)
 
 #### Depreciation in DPPs
 
-Most real estate or equipment leasing partnerships generate deductions primarily through <span class="key-term">depreciation</span>. For residential real estate, the IRS allows straight-line depreciation over **27.5 years**. For example, a building acquired at $2,500,000 generates approximately $90,909 per year in depreciation deductions.
+Most real estate or equipment leasing partnerships generate deductions primarily through
+<span class="key-term">depreciation</span>. For residential real estate, the IRS allows
+straight-line depreciation over **27.5 years**. For example, a building acquired at $2,500,000
+generates approximately $90,909 per year in depreciation deductions.
 
 #### At-Risk Rules and Nonrecourse Debt
 
-The IRS <span class="key-term">at-risk rules</span> limit loss deductions to the amount the investor has "at risk"—generally the initial investment plus their share of <strong>recourse debt</strong> (debt for which the investor is personally liable).
+The IRS <span class="key-term">at-risk rules</span> limit loss deductions to the amount the investor
+has "at risk"—generally the initial investment plus their share of <strong>recourse debt</strong>
+(debt for which the investor is personally liable).
 
-**Exception:** <strong>Real estate partnerships</strong> can include nonrecourse debt in their tax basis. This exception does not apply to other types of DPPs (oil/gas, equipment leasing, etc.).
+**Exception:** <strong>Real estate partnerships</strong> can include nonrecourse debt in their tax
+basis. This exception does not apply to other types of DPPs (oil/gas, equipment leasing, etc.).
 
 #### Disposing of a Partnership Interest
-When a partner sells or disposes of their partnership interest, any <strong>suspended passive losses</strong> become fully deductible at that point.
+
+When a partner sells or disposes of their partnership interest, any <strong>suspended passive
+losses</strong> become fully deductible at that point.
 
 ---
 
 ## Section 7: Other Tax Issues
 
 ### Charitable Donations of Securities
+
 - Long-term securities: donor can deduct the <strong>fair market value</strong> at time of donation
 - Short-term securities: donor can only deduct <strong>cost basis</strong> (not FMV)
 
 ### Estate Tax and Inherited Securities (Stepped-Up Basis)
 
-When a person dies, their estate may be subject to <strong>estate taxes</strong>—but the person who inherits assets from the estate is <strong>not</strong> subject to estate taxes. That obligation falls on the estate itself.
+When a person dies, their estate may be subject to <strong>estate taxes</strong>—but the person who
+inherits assets from the estate is <strong>not</strong> subject to estate taxes. That obligation
+falls on the estate itself.
 
-When securities are inherited, the beneficiary receives a <span class="key-term">stepped-up cost basis</span>—the FMV on the date of the decedent's death becomes the new cost basis. All subsequent sales are treated as <strong>long-term</strong>, regardless of how long the decedent or beneficiary actually held the shares.
+When securities are inherited, the beneficiary receives a <span class="key-term">stepped-up cost
+basis</span>—the FMV on the date of the decedent's death becomes the new cost basis. All subsequent
+sales are treated as <strong>long-term</strong>, regardless of how long the decedent or beneficiary
+actually held the shares.
 
 ### Gifted Securities
+
 - Annual gift tax exclusion: $18,000 per person (2024), $19,000 (2025-2026)
-- A married couple can double the exclusion: **$36,000 per recipient** (2024), **$38,000** (2025-2026)
+- A married couple can double the exclusion: **$36,000 per recipient** (2024), **$38,000**
+  (2025-2026)
 - Gift tax is paid by the <strong>donor</strong>, not the recipient
 - Recipient's cost basis: the donor's original cost basis (if gift is not taxed)
 - Recipient uses the donor's holding period
@@ -405,10 +507,14 @@ When securities are inherited, the beneficiary receives a <span class="key-term"
   <p>You sell 300 shares of XYZ at a $1,200 loss. Two weeks later, you buy back 300 shares of XYZ at $21/share. This is a wash sale—the $1,200 loss is disallowed. Instead, $1,200 is added to the cost basis of your new shares.</p>
 </div>
 
-A wash sale is not illegal—you just can't claim the tax loss. The rule also applies to substantially identical securities in IRA accounts.
+A wash sale is not illegal—you just can't claim the tax loss. The rule also applies to substantially
+identical securities in IRA accounts.
 
 #### Municipal Bond Tax Swap
-You <strong>can</strong> sell a municipal bond at a loss and buy a <em>different</em> municipal bond (different issuer, maturity, or coupon) without triggering a wash sale. The bonds must not be "substantially identical."
+
+You <strong>can</strong> sell a municipal bond at a loss and buy a <em>different</em> municipal bond
+(different issuer, maturity, or coupon) without triggering a wash sale. The bonds must not be
+"substantially identical."
 
 ### Annual Gift Tax and Lifetime Gift Tax Exclusion
 
@@ -423,20 +529,29 @@ You <strong>can</strong> sell a municipal bond at a loss and buy a <em>different
 
 ### Alternative Minimum Tax (AMT)
 
-The <span class="key-term">AMT</span> is a parallel tax system designed to ensure high-income taxpayers pay at least a minimum amount of tax. Taxpayers must calculate their alternative minimum taxable income (AMTI) and pay the higher of the AMT or regular tax.
+The <span class="key-term">AMT</span> is a parallel tax system designed to ensure high-income
+taxpayers pay at least a minimum amount of tax. Taxpayers must calculate their alternative minimum
+taxable income (AMTI) and pay the higher of the AMT or regular tax.
 
 Key AMT adjustments:
+
 - Interest from <strong>private activity municipal bonds</strong> is added back to income
-- State and local tax deductions are disallowed entirely (vs. deductible up to $10,000 under regular tax)
-- **Home mortgage interest** is only deductible if the loan was used to purchase or improve a primary or secondary residence (not if funds are used for other purposes)
-- Incentive stock option exercise gains are included (the difference between grant price and FMV at exercise)
+- State and local tax deductions are disallowed entirely (vs. deductible up to $10,000 under regular
+  tax)
+- **Home mortgage interest** is only deductible if the loan was used to purchase or improve a
+  primary or secondary residence (not if funds are used for other purposes)
+- Incentive stock option exercise gains are included (the difference between grant price and FMV at
+  exercise)
 - Accelerated depreciation may need adjustment (straight-line is not affected)
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> To reduce AMT exposure, look for investments that lower AGI: contributions to employer-sponsored retirement plans (401(k), 403(b), 457(b)), IRA contributions, and HSA contributions all reduce AGI and therefore reduce AMTI.</p>
 </div>
 
-(The AMT was designed to catch about 150 wealthy taxpayers who were paying zero federal income tax in 1969. By 2017, it was hitting over 5 million households. Congress has adjusted the exemption amounts several times since, but the basic principle remains: there is a floor below which your tax bill cannot fall, no matter how creative your accountant.)
+(The AMT was designed to catch about 150 wealthy taxpayers who were paying zero federal income tax
+in 1969. By 2017, it was hitting over 5 million households. Congress has adjusted the exemption
+amounts several times since, but the basic principle remains: there is a floor below which your tax
+bill cannot fall, no matter how creative your accountant.)
 
 ---
 

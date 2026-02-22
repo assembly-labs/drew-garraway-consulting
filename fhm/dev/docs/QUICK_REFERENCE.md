@@ -2,12 +2,10 @@
 
 ## What Changed (TL;DR)
 
-✅ **CSS extracted** from inline → `assets/css/main.css`
-✅ **Tests added**: 42 passing Vitest tests
-✅ **Files reorganized**: Chapters moved to `pages/sie/`
-✅ **Scripts modernized**: CommonJS → ESM modules
-✅ **Audio added**: Trading_Rules_and_Settlement_Mechanics.m4a
-✅ **Content strategy**: Story database + UX docs created
+✅ **CSS extracted** from inline → `assets/css/main.css` ✅ **Tests added**: 42 passing Vitest tests
+✅ **Files reorganized**: Chapters moved to `pages/sie/` ✅ **Scripts modernized**: CommonJS → ESM
+modules ✅ **Audio added**: Trading_Rules_and_Settlement_Mechanics.m4a ✅ **Content strategy**:
+Story database + UX docs created
 
 **Commits**: `ab70b06` (restructure), `ffbff65` (content strategy)
 
@@ -17,14 +15,14 @@
 
 ### Before → After
 
-| Before | After |
-|--------|-------|
+| Before                                | After                                           |
+| ------------------------------------- | ----------------------------------------------- |
 | `sie-chapter-8-trade-processing.html` | `pages/sie/sie-chapter-8-trade-processing.html` |
-| `sie-study-materials.html` | `pages/sie/sie-study-materials.html` |
-| Inline CSS in `index.html` | `assets/css/main.css` |
-| No tests | `tests/*.test.js` (42 tests) |
-| CommonJS scripts | ESM scripts with `import` |
-| No story database | `content/story-database.json` |
+| `sie-study-materials.html`            | `pages/sie/sie-study-materials.html`            |
+| Inline CSS in `index.html`            | `assets/css/main.css`                           |
+| No tests                              | `tests/*.test.js` (42 tests)                    |
+| CommonJS scripts                      | ESM scripts with `import`                       |
+| No story database                     | `content/story-database.json`                   |
 
 ### New Files You Should Know About
 
@@ -44,11 +42,13 @@ vitest.config.js                 # Test configuration
 ## Common Tasks
 
 ### Run tests
+
 ```bash
 npm test
 ```
 
 ### Revert everything
+
 ```bash
 git revert ffbff65  # Remove content strategy
 git revert ab70b06  # Remove restructure
@@ -56,6 +56,7 @@ git push origin main
 ```
 
 ### Revert just content strategy
+
 ```bash
 git revert ffbff65
 git push origin main
@@ -63,11 +64,13 @@ git push origin main
 ```
 
 ### Find a moved file
+
 - **All SIE chapters**: `pages/sie/sie-chapter-*.html`
 - **Treasury page**: `pages/franklin-hugh-money-treasury.html`
 - **Audio files**: `assets/audio/chapters/ch8/*.m4a`
 
 ### Update a chapter
+
 1. Edit in `pages/sie/sie-chapter-X-*.html`
 2. Reference stories from `content/story-database.json`
 3. Run `npm test` to verify
@@ -78,12 +81,14 @@ git push origin main
 ## Import Syntax Changed
 
 ### Before (CommonJS)
+
 ```javascript
 const fs = require('fs');
 const path = require('path');
 ```
 
 ### After (ESM)
+
 ```javascript
 import fs from 'fs';
 import path from 'path';
@@ -96,15 +101,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 ## Path Changes in HTML
 
 ### Before
+
 ```html
-<link rel="stylesheet" href="assets/css/sie-chapter.css">
+<link rel="stylesheet" href="assets/css/sie-chapter.css" />
 <a href="sie-study-materials.html">Study Materials</a>
 ```
 
 ### After
+
 ```html
 <!-- From pages/sie/sie-chapter-X.html -->
-<link rel="stylesheet" href="../../assets/css/sie-chapter.css">
+<link rel="stylesheet" href="../../assets/css/sie-chapter.css" />
 <a href="sie-study-materials.html">Study Materials</a>
 ```
 
@@ -113,6 +120,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 ## Story Database Usage
 
 ### Finding stories by chapter
+
 ```javascript
 // content/story-database.json
 {
@@ -131,6 +139,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 ```
 
 ### Quick lookup
+
 See `content/STORY_QUICK_REFERENCE.md` for one-liners by chapter.
 
 ---

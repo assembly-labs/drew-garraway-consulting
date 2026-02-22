@@ -3,7 +3,7 @@
  * Activates between 5pm (17:00) and 9am (09:00)
  */
 
-(function() {
+(function () {
     'use strict';
 
     function isNightTime() {
@@ -29,7 +29,7 @@
     }
 
     // Check every minute for time changes
-    setInterval(function() {
+    setInterval(function () {
         if (document.body) {
             applyNightMode();
         }

@@ -1,63 +1,63 @@
 {
-  "number": 11,
-  "title": "Other Account Types",
-  "description": "Comprehensive coverage of margin accounts, fiduciary accounts, joint accounts, business accounts, and options accounts",
-  "sections": [
-    {
-      "id": "11.1",
-      "title": "Margin Accounts",
-      "file": "section-01-margin-accounts.md",
-      "locked": false,
-      "topics": [
-        "Introduction to Margin Accounts",
-        "Regulation T: Buying on Margin",
-        "Regulation T: Selling Short",
-        "Regulation T for Cash Accounts",
-        "Restricted Accounts and Maintenance",
-        "Opening a Margin Account"
-      ],
-      "estimated_minutes": 35
-    },
-    {
-      "id": "11.2",
-      "title": "Fiduciary Accounts",
-      "file": "section-02-fiduciary-accounts.md",
-      "locked": false,
-      "topics": [
-        "Requirements for Fiduciary Accounts",
-        "Power of Attorney",
-        "Custodial Accounts (UGMA/UTMA)",
-        "Guardian Accounts",
-        "Trust Accounts"
-      ],
-      "estimated_minutes": 30
-    },
-    {
-      "id": "11.3",
-      "title": "Joint, Business, and Options Accounts",
-      "file": "section-03-joint-business-options.md",
-      "locked": false,
-      "topics": [
-        "Joint Accounts (JTWROS, Tenancy in Common)",
-        "Transfer on Death (TOD)",
-        "Business Accounts",
-        "Options Account Requirements"
-      ],
-      "estimated_minutes": 25
-    }
-  ],
-  "prerequisites": ["chapter-10"],
-  "estimated_hours": 1.5,
-  "learning_objectives": [
-    "Understand margin account mechanics and Regulation T requirements",
-    "Calculate initial margin and minimum maintenance requirements",
-    "Distinguish between UGMA and UTMA custodial accounts",
-    "Compare revocable and irrevocable trust structures",
-    "Differentiate between JTWROS and tenancy in common",
-    "Identify options account approval requirements"
-  ],
-  "exam_weight": "8-10%",
-  "last_updated": "2026-01-04",
-  "author": "Franklin Hugh Money",
-  "status": "published"
+    "number": 11,
+    "title": "Other Account Types",
+    "description": "Comprehensive coverage of margin accounts, fiduciary accounts, joint accounts, business accounts, and options accounts",
+    "sections": [
+        {
+            "id": "11.1",
+            "title": "Margin Accounts",
+            "file": "section-01-margin-accounts.md",
+            "locked": false,
+            "topics": [
+                "Introduction to Margin Accounts",
+                "Regulation T: Buying on Margin",
+                "Regulation T: Selling Short",
+                "Regulation T for Cash Accounts",
+                "Restricted Accounts and Maintenance",
+                "Opening a Margin Account"
+            ],
+            "estimated_minutes": 35
+        },
+        {
+            "id": "11.2",
+            "title": "Fiduciary Accounts",
+            "file": "section-02-fiduciary-accounts.md",
+            "locked": false,
+            "topics": [
+                "Requirements for Fiduciary Accounts",
+                "Power of Attorney",
+                "Custodial Accounts (UGMA/UTMA)",
+                "Guardian Accounts",
+                "Trust Accounts"
+            ],
+            "estimated_minutes": 30
+        },
+        {
+            "id": "11.3",
+            "title": "Joint, Business, and Options Accounts",
+            "file": "section-03-joint-business-options.md",
+            "locked": false,
+            "topics": [
+                "Joint Accounts (JTWROS, Tenancy in Common)",
+                "Transfer on Death (TOD)",
+                "Business Accounts",
+                "Options Account Requirements"
+            ],
+            "estimated_minutes": 25
+        }
+    ],
+    "prerequisites": ["chapter-10"],
+    "estimated_hours": 1.5,
+    "learning_objectives": [
+        "Understand margin account mechanics and Regulation T requirements",
+        "Calculate initial margin and minimum maintenance requirements",
+        "Distinguish between UGMA and UTMA custodial accounts",
+        "Compare revocable and irrevocable trust structures",
+        "Differentiate between JTWROS and tenancy in common",
+        "Identify options account approval requirements"
+    ],
+    "exam_weight": "8-10%",
+    "last_updated": "2026-01-04",
+    "author": "Franklin Hugh Money",
+    "status": "published"
 }

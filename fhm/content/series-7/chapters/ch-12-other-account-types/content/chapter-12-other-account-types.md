@@ -1,29 +1,54 @@
 # Chapter 12: Other Account Types
 
-*Series 7 Exam Weight: ~11% of exam (~14 questions)*
+_Series 7 Exam Weight: ~11% of exam (~14 questions)_
 
 ---
 
-In October 1929, a Wall Street shoeshine boy reportedly offered stock tips to Joseph P. Kennedy, who took it as a sign that the market had gone too far. Whether the story is apocryphal hardly matters -- what happened next was real enough. When the market collapsed that autumn, the damage was amplified by leverage: investors had been buying stocks on as little as 10% margin, borrowing the other 90% from their brokers. A $10,000 portfolio built on $1,000 of actual cash became worthless in a matter of days, and the margin calls cascaded like dominoes through the financial system. Congress responded with the Securities Exchange Act of 1934, which gave the Federal Reserve Board the authority to regulate credit in the securities markets. The Fed exercised that authority through <span class="key-term">Regulation T</span>, setting the initial margin requirement at 50% -- a level where it has remained, with occasional adjustments, for decades. The logic was simple: if you want to speculate with borrowed money, you need to have real skin in the game.
+In October 1929, a Wall Street shoeshine boy reportedly offered stock tips to Joseph P. Kennedy, who
+took it as a sign that the market had gone too far. Whether the story is apocryphal hardly matters
+-- what happened next was real enough. When the market collapsed that autumn, the damage was
+amplified by leverage: investors had been buying stocks on as little as 10% margin, borrowing the
+other 90% from their brokers. A $10,000 portfolio built on $1,000 of actual cash became worthless in
+a matter of days, and the margin calls cascaded like dominoes through the financial system. Congress
+responded with the Securities Exchange Act of 1934, which gave the Federal Reserve Board the
+authority to regulate credit in the securities markets. The Fed exercised that authority through
+<span class="key-term">Regulation T</span>, setting the initial margin requirement at 50% -- a level
+where it has remained, with occasional adjustments, for decades. The logic was simple: if you want
+to speculate with borrowed money, you need to have real skin in the game.
 
-This chapter covers the account types that go beyond the standard individual cash account: margin accounts and their intricate web of borrowing rules, fiduciary accounts where someone else manages money on a beneficiary's behalf, and the various joint, business, and options accounts that round out a broker-dealer's offerings. Together, these account types represent the infrastructure of how money actually moves through the securities industry -- and they account for roughly 14 questions on the Series 7.
+This chapter covers the account types that go beyond the standard individual cash account: margin
+accounts and their intricate web of borrowing rules, fiduciary accounts where someone else manages
+money on a beneficiary's behalf, and the various joint, business, and options accounts that round
+out a broker-dealer's offerings. Together, these account types represent the infrastructure of how
+money actually moves through the securities industry -- and they account for roughly 14 questions on
+the Series 7.
 
 ### Why This Chapter Matters
 
-The individual cash account from Chapter 11 is the foundation, but it's not how most of the industry actually operates. Margin accounts generate interest revenue for broker-dealers, fiduciary accounts protect vulnerable investors, and options accounts require their own approval process. Understanding these structures isn't just exam material -- it's the difference between knowing what a brokerage firm does and understanding how it makes money doing it.
+The individual cash account from Chapter 11 is the foundation, but it's not how most of the industry
+actually operates. Margin accounts generate interest revenue for broker-dealers, fiduciary accounts
+protect vulnerable investors, and options accounts require their own approval process. Understanding
+these structures isn't just exam material -- it's the difference between knowing what a brokerage
+firm does and understanding how it makes money doing it.
 
 ---
 
 ## Section 1: Margin Accounts
 
-A <span class="key-term">margin account</span> allows a customer to borrow either money or securities from a broker-dealer. By borrowing, the investor uses <span class="key-term">leverage</span> -- which can amplify returns but also amplify losses. In a cash account, risks and returns are lower because the customer pays 100% of the purchase price. Leverage changes the math entirely.
+A <span class="key-term">margin account</span> allows a customer to borrow either money or
+securities from a broker-dealer. By borrowing, the investor uses
+<span class="key-term">leverage</span> -- which can amplify returns but also amplify losses. In a
+cash account, risks and returns are lower because the customer pays 100% of the purchase price.
+Leverage changes the math entirely.
 
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
   <p>Before Regulation T, there was no federal floor on how much an investor needed to put down. Brokers set their own margin requirements, and competitive pressure drove them lower and lower. By the late 1920s, some brokers were lending 90% of the purchase price. When stock prices fell, the resulting margin calls forced mass liquidations, which drove prices even lower, which triggered more margin calls. The Fed's 50% requirement was designed to break this cycle by ensuring investors always had meaningful equity in their positions.</p>
 </div>
 
-Due to the risky nature of margin, not all account types are permitted to use leverage. <span class="key-term">Custodial, fiduciary, and retirement accounts</span> are generally ineligible for margin.
+Due to the risky nature of margin, not all account types are permitted to use leverage.
+<span class="key-term">Custodial, fiduciary, and retirement accounts</span> are generally ineligible
+for margin.
 
 ---
 
@@ -31,10 +56,13 @@ Due to the risky nature of margin, not all account types are permitted to use le
 
 #### Initial Margin Requirements
 
-<span class="key-term">Regulation T (Reg T)</span> is a Federal Reserve Board regulation that covers lending from broker-dealers to customers. It sets <span class="key-term">initial margin requirements</span> for marginable securities.
+<span class="key-term">Regulation T (Reg T)</span> is a Federal Reserve Board regulation that covers
+lending from broker-dealers to customers. It sets <span class="key-term">initial margin
+requirements</span> for marginable securities.
 
 - In a **cash account**, the initial margin requirement is **100%** (you pay for everything)
-- In a **margin account**, the broker-dealer may lend a customer up to **50%** of the purchase price of a marginable security
+- In a **margin account**, the broker-dealer may lend a customer up to **50%** of the purchase price
+  of a marginable security
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -51,16 +79,20 @@ Due to the risky nature of margin, not all account types are permitted to use le
 
 #### Exempt Securities
 
-Not all securities fall under Reg T's jurisdiction. <span class="key-term">Exempt securities</span> are not covered by Reg T's initial margin rules. The major exempt securities are:
+Not all securities fall under Reg T's jurisdiction. <span class="key-term">Exempt securities</span>
+are not covered by Reg T's initial margin rules. The major exempt securities are:
 
 - U.S. government securities
 - Agency issues
 - Municipal issues
 - Commercial paper
 
-The Fed has no power to set initial margins for these securities. However, they are still marginable, subject to <span class="key-term">minimum maintenance requirements</span> set by FINRA.
+The Fed has no power to set initial margins for these securities. However, they are still
+marginable, subject to <span class="key-term">minimum maintenance requirements</span> set by FINRA.
 
-While corporate bonds are nonexempt, the Fed does not set specific margins for them either, because their prices tend to be fairly stable. Only FINRA minimum maintenance margins apply to corporate bonds.
+While corporate bonds are nonexempt, the Fed does not set specific margins for them either, because
+their prices tend to be fairly stable. Only FINRA minimum maintenance margins apply to corporate
+bonds.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> "Exempt" from Reg T does not mean "not marginable." It means the Fed doesn't set the initial margin -- FINRA's maintenance requirements still apply. The exam tests this distinction.</p>
@@ -68,9 +100,11 @@ While corporate bonds are nonexempt, the Fed does not set specific margins for t
 
 #### Deposit Requirements
 
-Reg T deposits must be made within **2 business days of settlement**. Since a corporate security settles in 1 business day (T+1), the Reg T deposit must be made by **T+3**.
+Reg T deposits must be made within **2 business days of settlement**. Since a corporate security
+settles in 1 business day (T+1), the Reg T deposit must be made by **T+3**.
 
-The deposit can be made in securities instead of cash. A customer may deposit fully paid marginable securities worth **twice the amount** of the call.
+The deposit can be made in securities instead of cash. A customer may deposit fully paid marginable
+securities worth **twice the amount** of the call.
 
 #### Marginable vs. Non-Marginable Securities
 
@@ -94,14 +128,20 @@ The deposit can be made in securities instead of cash. A customer may deposit fu
 
 #### Short Selling Basics
 
-<span class="key-term">Short selling</span> is when an investor borrows securities from a broker-dealer and then sells them. This can **only** be done in a margin account.
+<span class="key-term">Short selling</span> is when an investor borrows securities from a
+broker-dealer and then sells them. This can **only** be done in a margin account.
 
-The strategy works like this: a bearish investor sells borrowed securities at the current (high) price, hoping to repurchase them later at a lower price. After buying back the shares, they return them to the broker-dealer -- this is called <span class="key-term">covering</span> the short position. The difference between the sale price and the repurchase price is the customer's profit or loss.
+The strategy works like this: a bearish investor sells borrowed securities at the current (high)
+price, hoping to repurchase them later at a lower price. After buying back the shares, they return
+them to the broker-dealer -- this is called <span class="key-term">covering</span> the short
+position. The difference between the sale price and the repurchase price is the customer's profit or
+loss.
 
 - **Bullish investors** hope to buy low and sell high
 - **Bearish investors** hope to sell high and buy low
 
-Fiduciary and retirement accounts are typically **not permitted** to sell short due to the strategy's unlimited loss potential.
+Fiduciary and retirement accounts are typically **not permitted** to sell short due to the
+strategy's unlimited loss potential.
 
 #### Initial Margin for Short Sales
 
@@ -114,7 +154,8 @@ The Reg T initial margin requirement for short sales is the same as for long pur
 
 #### Minimum Deposit Requirements
 
-Margin accounts have a minimum equity requirement of <span class="key-term">$2,000</span>. But the rules differ depending on whether you're long or short:
+Margin accounts have a minimum equity requirement of <span class="key-term">$2,000</span>. But the
+rules differ depending on whether you're long or short:
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -131,7 +172,8 @@ Margin accounts have a minimum equity requirement of <span class="key-term">$2,0
 
 #### Payment Requirements
 
-In a cash account, Reg T requires the broker-dealer to collect payment from the customer **promptly** -- no later than 2 business days after the settlement date.
+In a cash account, Reg T requires the broker-dealer to collect payment from the customer
+**promptly** -- no later than 2 business days after the settlement date.
 
 <div class="calculation-box">
   <div class="calculation-box__label">Payment Timeline</div>
@@ -143,17 +185,25 @@ In a cash account, Reg T requires the broker-dealer to collect payment from the 
 
 #### Reg T Extensions
 
-If payment is not collected by S+2, under exceptional circumstances, the firm may request a <span class="key-term">Reg T extension</span> from FINRA. If granted, the customer gets another 2 business days (or longer if a special request is made) to pay.
+If payment is not collected by S+2, under exceptional circumstances, the firm may request a
+<span class="key-term">Reg T extension</span> from FINRA. If granted, the customer gets another 2
+business days (or longer if a special request is made) to pay.
 
-If the customer does not pay by either S+2 or the extension date (if one is granted), the firm is **obligated** to sell out that position and <span class="key-term">freeze the account</span> for **90 days**.
+If the customer does not pay by either S+2 or the extension date (if one is granted), the firm is
+**obligated** to sell out that position and <span class="key-term">freeze the account</span> for
+**90 days**.
 
 #### Frozen Accounts
 
-When an account is <span class="key-term">frozen</span>, the customer can still trade -- but they can no longer borrow. They must have 100% of the required cash to pay for any transaction before placing it. After 90 days of compliance, the freeze is removed.
+When an account is <span class="key-term">frozen</span>, the customer can still trade -- but they
+can no longer borrow. They must have 100% of the required cash to pay for any transaction before
+placing it. After 90 days of compliance, the freeze is removed.
 
 #### Free-Riding
 
-<span class="key-term">Free-riding</span> is the prohibited practice of buying securities without intending to pay for them, then selling them on or before the settlement date to generate the cash needed to pay for the original purchase.
+<span class="key-term">Free-riding</span> is the prohibited practice of buying securities without
+intending to pay for them, then selling them on or before the settlement date to generate the cash
+needed to pay for the original purchase.
 
 <div class="info-box">
   <div class="info-box__title">Real-World Example</div>
@@ -171,7 +221,8 @@ When an account is <span class="key-term">frozen</span>, the customer can still 
 
 #### Restricted Margin Accounts
 
-A <span class="key-term">restricted margin account</span> is one where the equity has fallen below 50% of the market value but remains above the minimum maintenance requirement.
+A <span class="key-term">restricted margin account</span> is one where the equity has fallen below
+50% of the market value but remains above the minimum maintenance requirement.
 
 <div class="calculation-box">
   <div class="calculation-box__label">Long Margin Account Equity Formulas</div>
@@ -208,7 +259,9 @@ In a short margin account, equity is calculated differently:
 
 #### Minimum Maintenance Requirements
 
-While a restricted account doesn't trigger any immediate action, there are limits to how far equity can fall. These limits are the <span class="key-term">minimum maintenance requirements</span> established by FINRA.
+While a restricted account doesn't trigger any immediate action, there are limits to how far equity
+can fall. These limits are the <span class="key-term">minimum maintenance requirements</span>
+established by FINRA.
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -240,7 +293,8 @@ While a restricted account doesn't trigger any immediate action, there are limit
 
 #### Short Account Margin Call
 
-In a short margin account, a margin call is issued when equity drops below **30%**. A useful shortcut for finding the trigger point:
+In a short margin account, a margin call is issued when equity drops below **30%**. A useful
+shortcut for finding the trigger point:
 
 <div class="calculation-box">
   <div class="calculation-box__label">Short Account Margin Call Trigger</div>
@@ -249,7 +303,8 @@ In a short margin account, a margin call is issued when equity drops below **30%
   </div>
 </div>
 
-For example, a customer with a short margin account that has a credit balance of $130,000 will receive a margin call if the SMV rises above $130,000 / 1.3 = **$100,000**.
+For example, a customer with a short margin account that has a credit balance of $130,000 will
+receive a margin call if the SMV rises above $130,000 / 1.3 = **$100,000**.
 
 #### Long Account Margin Call Trigger
 
@@ -262,11 +317,16 @@ The same convention works for long accounts:
   </div>
 </div>
 
-An account with a $50,000 debit balance will receive a margin call if its LMV falls below $50,000 / 0.75 = **$66,666.67**.
+An account with a $50,000 debit balance will receive a margin call if its LMV falls below $50,000 /
+0.75 = **$66,666.67**.
 
 #### Meeting a Margin Call
 
-When a margin call occurs, it must be met **promptly** -- typically within 3 business days, though depending on circumstances it could be anywhere from the same day to 5 business days. If the customer fails to provide the required equity, the broker-dealer will **sell the customer out**: liquidating enough stock to bring the account back to the required 25% minimum. The customer has **no control** over which securities are sold.
+When a margin call occurs, it must be met **promptly** -- typically within 3 business days, though
+depending on circumstances it could be anywhere from the same day to 5 business days. If the
+customer fails to provide the required equity, the broker-dealer will **sell the customer out**:
+liquidating enough stock to bring the account back to the required 25% minimum. The customer has
+**no control** over which securities are sold.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Broker-dealers can (and usually do) establish more stringent maintenance margin requirements than the 25% set by FINRA. On the exam, use FINRA's minimums unless told otherwise.</p>
@@ -285,7 +345,8 @@ When a margin call occurs, it must be met **promptly** -- typically within 3 bus
 
 #### Special Memorandum Account (SMA)
 
-When a security purchased on margin increases in value, the equity in the account increases as well. Equity above 50% of the market value is considered <span class="key-term">excess equity</span>.
+When a security purchased on margin increases in value, the equity in the account increases as well.
+Equity above 50% of the market value is considered <span class="key-term">excess equity</span>.
 
 <div class="info-box">
   <div class="info-box__title">Real-World Example</div>
@@ -298,7 +359,8 @@ When a security purchased on margin increases in value, the equity in the accoun
 
 #### SMA and Buying Power
 
-Excess equity creates <span class="key-term">buying power</span> of **2 x SMA** (since the initial margin requirement is 50%).
+Excess equity creates <span class="key-term">buying power</span> of **2 x SMA** (since the initial
+margin requirement is 50%).
 
 <div class="calculation-box">
   <div class="calculation-box__label">SMA Buying Power</div>
@@ -308,7 +370,9 @@ Excess equity creates <span class="key-term">buying power</span> of **2 x SMA** 
   </div>
 </div>
 
-The <span class="key-term">Special Memorandum Account (SMA)</span> amount can also be withdrawn from the account in cash. However, this withdrawal would be considered a **loan** and added to the amount the customer owes the broker-dealer.
+The <span class="key-term">Special Memorandum Account (SMA)</span> amount can also be withdrawn from
+the account in cash. However, this withdrawal would be considered a **loan** and added to the amount
+the customer owes the broker-dealer.
 
 ---
 
@@ -316,19 +380,29 @@ The <span class="key-term">Special Memorandum Account (SMA)</span> amount can al
 
 #### Pattern Day Traders
 
-Customers who engage in day-trading strategies take on a higher level of risk. Because day traders execute rapid "in and out" transactions on the same day, they typically end the day with no position -- and therefore would have no margin requirement under standard Reg T rules. Due to this elevated risk, these accounts require special client disclosures.
+Customers who engage in day-trading strategies take on a higher level of risk. Because day traders
+execute rapid "in and out" transactions on the same day, they typically end the day with no position
+-- and therefore would have no margin requirement under standard Reg T rules. Due to this elevated
+risk, these accounts require special client disclosures.
 
 #### Pattern Day Trader Definition
 
-FINRA defines a <span class="key-term">pattern day trader (PDT)</span> as anyone who executes **four or more day trades within five business days**. A day trade is a purchase and sale of the same security (or vice versa) on the same day. A purchase on one day followed by a sale the next day is **not** defined as a day trade.
+FINRA defines a <span class="key-term">pattern day trader (PDT)</span> as anyone who executes **four
+or more day trades within five business days**. A day trade is a purchase and sale of the same
+security (or vice versa) on the same day. A purchase on one day followed by a sale the next day is
+**not** defined as a day trade.
 
 #### $25,000 Minimum Equity
 
-Instead of the standard $2,000 minimum equity, the minimum equity for a day-trading account is <span class="key-term">$25,000</span> -- a 12.5x premium over regular margin accounts.
+Instead of the standard $2,000 minimum equity, the minimum equity for a day-trading account is
+<span class="key-term">$25,000</span> -- a 12.5x premium over regular margin accounts.
 
 #### Minimum Margin: 25% of Highest Intraday Market Value
 
-Day traders must maintain a minimum margin of 25%, the same as regular accounts. The critical difference is **how it's computed**: because a day-trading account has no end-of-day market value, the 25% minimum is applied to the account's <span class="key-term">highest intraday market value</span>, but in no case less than $25,000.
+Day traders must maintain a minimum margin of 25%, the same as regular accounts. The critical
+difference is **how it's computed**: because a day-trading account has no end-of-day market value,
+the 25% minimum is applied to the account's <span class="key-term">highest intraday market
+value</span>, but in no case less than $25,000.
 
 #### Buying Power in Day-Trading Accounts
 
@@ -340,9 +414,12 @@ Day traders must maintain a minimum margin of 25%, the same as regular accounts.
   </div>
 </div>
 
-Pattern day-trading accounts are subject to FINRA's minimum margin rules (not Reg T) since they typically don't carry securities positions into the next day. If the account is "flat" at the end of the day, buying power is simply four times the cash balance.
+Pattern day-trading accounts are subject to FINRA's minimum margin rules (not Reg T) since they
+typically don't carry securities positions into the next day. If the account is "flat" at the end of
+the day, buying power is simply four times the cash balance.
 
-However, if the account has an **unsatisfied margin call outstanding**, buying power is reduced to **twice** the maintenance margin excess.
+However, if the account has an **unsatisfied margin call outstanding**, buying power is reduced to
+**twice** the maintenance margin excess.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Pattern day trader = 4+ day trades in 5 business days. Minimum equity = $25,000. Buying power = 4x (or 2x with outstanding margin call). These three facts cover most exam questions on day trading.</p>
@@ -350,9 +427,13 @@ However, if the account has an **unsatisfied margin call outstanding**, buying p
 
 #### Portfolio Margin
 
-Everything discussed so far uses the standard <span class="key-term">strategy-based margin</span> method, where a prescribed percentage is applied regardless of actual risk. This approach is conservative and doesn't account for hedging strategies or offsetting positions.
+Everything discussed so far uses the standard <span class="key-term">strategy-based margin</span>
+method, where a prescribed percentage is applied regardless of actual risk. This approach is
+conservative and doesn't account for hedging strategies or offsetting positions.
 
-<span class="key-term">Portfolio margin</span> takes a different approach: it assesses the risk of the **entire account**, considering variables such as hedging strategies, protective options, and offsetting long and short positions.
+<span class="key-term">Portfolio margin</span> takes a different approach: it assesses the risk of
+the **entire account**, considering variables such as hedging strategies, protective options, and
+offsetting long and short positions.
 
 <div class="info-box">
   <div class="info-box__title">Real-World Example</div>
@@ -364,11 +445,17 @@ Everything discussed so far uses the standard <span class="key-term">strategy-ba
 
 **Key facts about portfolio margin:**
 
-- The most dramatic effect is reducing margin for **stock positions hedged by options** -- since the margin becomes the maximum potential loss
-- Portfolio margin provides **no benefit** for long options positions or spread positions, where the margin already equals the maximum potential loss
-- Portfolio margin can only be used for **equities, options, or derivatives positions** used as hedges -- it **cannot** be used for bond positions
-- The basis for the margin requirement is "stress testing" securities positions using probability-based loss percentages based on historical volatility
-- For most equities, the maximum portfolio margin is **15%** (vs. 50% under Reg T). If the position is "concentrated" (too large a percentage of the portfolio in a single security), the margin doubles to **30%**
+- The most dramatic effect is reducing margin for **stock positions hedged by options** -- since the
+  margin becomes the maximum potential loss
+- Portfolio margin provides **no benefit** for long options positions or spread positions, where the
+  margin already equals the maximum potential loss
+- Portfolio margin can only be used for **equities, options, or derivatives positions** used as
+  hedges -- it **cannot** be used for bond positions
+- The basis for the margin requirement is "stress testing" securities positions using
+  probability-based loss percentages based on historical volatility
+- For most equities, the maximum portfolio margin is **15%** (vs. 50% under Reg T). If the position
+  is "concentrated" (too large a percentage of the portfolio in a single security), the margin
+  doubles to **30%**
 
 #### Only Sophisticated Investors Qualify
 
@@ -384,10 +471,15 @@ Everything discussed so far uses the standard <span class="key-term">strategy-ba
 
 **Additional portfolio margin requirements:**
 
-- The brokerage firm must get **prior approval from FINRA** and demonstrate it has sophisticated computer systems capable of computing and monitoring margin requirements on a **real-time, intraday basis**
-- If a portfolio margin account has a margin deficiency at end of day, payment must be received within **3 business days**
-- The account must be approved for **uncovered options writing** by a Registered Options Principal (ROP) -- either Series 4 or Series 9 licensed
-- The customer must receive a **Portfolio Margin Risk Disclosure Statement** at or before the first transaction and must sign an acknowledgment that they have read and understand it
+- The brokerage firm must get **prior approval from FINRA** and demonstrate it has sophisticated
+  computer systems capable of computing and monitoring margin requirements on a **real-time,
+  intraday basis**
+- If a portfolio margin account has a margin deficiency at end of day, payment must be received
+  within **3 business days**
+- The account must be approved for **uncovered options writing** by a Registered Options Principal
+  (ROP) -- either Series 4 or Series 9 licensed
+- The customer must receive a **Portfolio Margin Risk Disclosure Statement** at or before the first
+  transaction and must sign an acknowledgment that they have read and understand it
 
 ---
 
@@ -395,13 +487,19 @@ Everything discussed so far uses the standard <span class="key-term">strategy-ba
 
 #### Margin on Long Options
 
-<span class="key-term">Long options require 100% deposit of the premium</span>. No loans are permitted against long options -- which makes sense since the contract expires at a set date within the coming months. Minimum maintenance requirements do not apply since the positions are fully paid.
+<span class="key-term">Long options require 100% deposit of the premium</span>. No loans are
+permitted against long options -- which makes sense since the contract expires at a set date within
+the coming months. Minimum maintenance requirements do not apply since the positions are fully paid.
 
-This treatment is the same whether a long call, long put, interest rate option, or foreign currency option is purchased.
+This treatment is the same whether a long call, long put, interest rate option, or foreign currency
+option is purchased.
 
 #### LEAPS
 
-<span class="key-term">LEAPS (Long-term Equity Anticipation Securities)</span> have initial expirations from 28-36 months in the future. Reg T requires that **75%** of the premium be deposited. This is also the minimum requirement. When LEAPS are within **9 months** of expiration (the same as a regular option), **100%** of the premium must be deposited.
+<span class="key-term">LEAPS (Long-term Equity Anticipation Securities)</span> have initial
+expirations from 28-36 months in the future. Reg T requires that **75%** of the premium be
+deposited. This is also the minimum requirement. When LEAPS are within **9 months** of expiration
+(the same as a regular option), **100%** of the premium must be deposited.
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -417,13 +515,19 @@ This treatment is the same whether a long call, long put, interest rate option, 
 
 ##### Short Call Covered by Stock Ownership
 
-If a stock call is "covered" by owning the underlying stock, there is **no margin on the call itself** -- only on the long stock position (100% in a cash account, 50% in a margin account). If the customer is exercised, they simply deliver the stock they own.
+If a stock call is "covered" by owning the underlying stock, there is **no margin on the call
+itself** -- only on the long stock position (100% in a cash account, 50% in a margin account). If
+the customer is exercised, they simply deliver the stock they own.
 
 ##### Short Put Covered by Short Stock Position
 
-A short put is considered covered if the customer has a **short stock position** in the same stock. The customer cannot lose on the short put: if the market falls, the short stock position generates an offsetting profit. (However, the customer still faces unlimited loss potential on the short stock itself.)
+A short put is considered covered if the customer has a **short stock position** in the same stock.
+The customer cannot lose on the short put: if the market falls, the short stock position generates
+an offsetting profit. (However, the customer still faces unlimited loss potential on the short stock
+itself.)
 
-Once the short stock position is properly margined, there is **no additional margin requirement** on the short put.
+Once the short stock position is properly margined, there is **no additional margin requirement** on
+the short put.
 
 <div class="info-box">
   <div class="info-box__title">Covered Put Examples</div>
@@ -435,7 +539,8 @@ Once the short stock position is properly margined, there is **no additional mar
 
 ##### Straddles
 
-If a customer buys a straddle (buying an identical call and put on the same stock), they must deposit **100% of the combined premiums** because they are buying both contracts.
+If a customer buys a straddle (buying an identical call and put on the same stock), they must
+deposit **100% of the combined premiums** because they are buying both contracts.
 
 <div class="info-box">
   <div class="info-box__title">Real-World Example</div>
@@ -453,7 +558,9 @@ If a customer buys a straddle (buying an identical call and put on the same stoc
 
 ##### Spreads
 
-Spreads are gain-limiting and risk-limiting positions where the customer buys and sells a contract on the same security with different strike prices or expirations. The key margin principle: **a customer cannot be required to put up more than they can lose**.
+Spreads are gain-limiting and risk-limiting positions where the customer buys and sells a contract
+on the same security with different strike prices or expirations. The key margin principle: **a
+customer cannot be required to put up more than they can lose**.
 
 <div class="info-box">
   <div class="info-box__title">Spread Margin Examples</div>
@@ -474,9 +581,14 @@ Spreads are gain-limiting and risk-limiting positions where the customer buys an
 
 #### Leveraged ETFs
 
-<span class="key-term">Leveraged exchange-traded funds (ETFs)</span> are designed to generate multiples (e.g., 200%, 300%) of the performance of the underlying index or sector. Some are "short" or "inverse" leveraged ETFs, seeking to deliver performance opposite to the index. They use options, futures, and swaps to multiply returns -- which also means price swings can be dramatic.
+<span class="key-term">Leveraged exchange-traded funds (ETFs)</span> are designed to generate
+multiples (e.g., 200%, 300%) of the performance of the underlying index or sector. Some are "short"
+or "inverse" leveraged ETFs, seeking to deliver performance opposite to the index. They use options,
+futures, and swaps to multiply returns -- which also means price swings can be dramatic.
 
-FINRA's concern is that increased volatility means traditional strategy-based margin won't sufficiently account for the expected risk. As a result, the FINRA Board of Governors can require leveraged ETFs to maintain more than normal margin.
+FINRA's concern is that increased volatility means traditional strategy-based margin won't
+sufficiently account for the expected risk. As a result, the FINRA Board of Governors can require
+leveraged ETFs to maintain more than normal margin.
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -495,11 +607,15 @@ FINRA's concern is that increased volatility means traditional strategy-based ma
 
 #### Cash vs. Margin Account Opening
 
-To open a cash account, only the new account form is required -- the customer agrees to pay in full for all purchases. To open a margin account, additional documentation is required. A principal must approve all accounts.
+To open a cash account, only the new account form is required -- the customer agrees to pay in full
+for all purchases. To open a margin account, additional documentation is required. A principal must
+approve all accounts.
 
 #### The Margin Agreement
 
-Before opening a margin account, the customer must sign a <span class="key-term">margin agreement</span>, which sets the terms and conditions between the customer and the broker-dealer. The agreement has three parts:
+Before opening a margin account, the customer must sign a <span class="key-term">margin
+agreement</span>, which sets the terms and conditions between the customer and the broker-dealer.
+The agreement has three parts:
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -513,7 +629,11 @@ Before opening a margin account, the customer must sign a <span class="key-term"
 
 #### Rehypothecation
 
-The firm also has the right to <span class="key-term">repledge (rehypothecate)</span> the securities to a bank to raise funds. The Federal Reserve controls lending by banks to broker-dealers under <span class="key-term">Regulation U (Reg U)</span>. Funds are borrowed from the bank at the <span class="key-term">broker's call rate</span> (also called the call loan rate) -- the rate at which banks lend money to broker-dealers to fund margin loans.
+The firm also has the right to <span class="key-term">repledge (rehypothecate)</span> the securities
+to a bank to raise funds. The Federal Reserve controls lending by banks to broker-dealers under
+<span class="key-term">Regulation U (Reg U)</span>. Funds are borrowed from the bank at the
+<span class="key-term">broker's call rate</span> (also called the call loan rate) -- the rate at
+which banks lend money to broker-dealers to fund margin loans.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Reg U = borrowing between banks and brokers. Reg T = borrowing between brokers and customers. The exam tests this distinction frequently. Think: "U" for "Upstream" (banks to brokers) and "T" for "To customers" (brokers to customers).</p>
@@ -532,17 +652,24 @@ Before opening a day-trading account, the firm must provide a disclosure stateme
 
 #### Credit and Risk Disclosure Statements
 
-Noninstitutional customers opening a margin account must also receive a <span class="key-term">credit disclosure statement</span> and a <span class="key-term">margin risk disclosure statement</span> explaining the risks of margin trading. This disclosure must be **redelivered annually**.
+Noninstitutional customers opening a margin account must also receive a
+<span class="key-term">credit disclosure statement</span> and a <span class="key-term">margin risk
+disclosure statement</span> explaining the risks of margin trading. This disclosure must be
+**redelivered annually**.
 
 #### Customer Signature
 
-The customer must sign the margin agreement **at or before the settlement of the first trade** in the account.
+The customer must sign the margin agreement **at or before the settlement of the first trade** in
+the account.
 
 ---
 
 ## Section 2: Fiduciary Accounts
 
-A <span class="key-term">fiduciary account</span> is one where a third party acts for, and in the best interest of, the account owner. The fiduciary standard is the highest duty of care in the financial world -- it means putting someone else's interests ahead of your own, every single time. Types of fiduciary accounts include custodial accounts, guardian accounts, and trust accounts.
+A <span class="key-term">fiduciary account</span> is one where a third party acts for, and in the
+best interest of, the account owner. The fiduciary standard is the highest duty of care in the
+financial world -- it means putting someone else's interests ahead of your own, every single time.
+Types of fiduciary accounts include custodial accounts, guardian accounts, and trust accounts.
 
 ---
 
@@ -550,26 +677,38 @@ A <span class="key-term">fiduciary account</span> is one where a third party act
 
 #### Documentation
 
-Fiduciary accounts generally cannot be opened unless the proper documentation appointing the fiduciary is received by the firm. Since the fiduciary is a third party, only they are permitted to trade in the account. The fiduciary cannot give trading authorization to another person (unless the account documentation specifically permits this, such as allowing an outside registered investment adviser to manage the account).
+Fiduciary accounts generally cannot be opened unless the proper documentation appointing the
+fiduciary is received by the firm. Since the fiduciary is a third party, only they are permitted to
+trade in the account. The fiduciary cannot give trading authorization to another person (unless the
+account documentation specifically permits this, such as allowing an outside registered investment
+adviser to manage the account).
 
 #### Cash Accounts Only
 
-Fiduciary accounts are generally **prohibited from margin transactions** -- only cash accounts are permitted. To open a margin account for a fiduciary, the documents appointing the fiduciary must **specifically authorize** margin transactions.
+Fiduciary accounts are generally **prohibited from margin transactions** -- only cash accounts are
+permitted. To open a margin account for a fiduciary, the documents appointing the fiduciary must
+**specifically authorize** margin transactions.
 
 #### The Prudent Person Rule and Legal List
 
-Each state often limits fiduciaries in the types of investments they can make. State law requires fiduciaries to follow either:
+Each state often limits fiduciaries in the types of investments they can make. State law requires
+fiduciaries to follow either:
 
-- The <span class="key-term">prudent person rule</span>: only investments that a prudent individual would make are permitted
-- A <span class="key-term">legal list</span>: a specific list of permissible investments provided by the state
+- The <span class="key-term">prudent person rule</span>: only investments that a prudent individual
+  would make are permitted
+- A <span class="key-term">legal list</span>: a specific list of permissible investments provided by
+  the state
 
 Under these standards:
+
 - **Aggressive options strategies** (e.g., naked call writing) are **prohibited**
-- **Conservative options strategies** (e.g., covered call writing, buying protective puts) are **permissible**
+- **Conservative options strategies** (e.g., covered call writing, buying protective puts) are
+  **permissible**
 
 #### Power of Attorney
 
-A <span class="key-term">power of attorney (POA)</span> is not a type of account but a mechanism for granting authorization to a third party.
+A <span class="key-term">power of attorney (POA)</span> is not a type of account but a mechanism for
+granting authorization to a third party.
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -593,31 +732,44 @@ A <span class="key-term">power of attorney (POA)</span> is not a type of account
 
 #### Custodial Accounts
 
-<span class="key-term">Custodial accounts</span> are accounts where a third party manages the account on behalf of a beneficiary, most often a minor. The third party must manage the account in the best interest of the beneficiary.
+<span class="key-term">Custodial accounts</span> are accounts where a third party manages the
+account on behalf of a beneficiary, most often a minor. The third party must manage the account in
+the best interest of the beneficiary.
 
 #### UGMA and UTMA
 
-Two custodial account types appear on the exam: the <span class="key-term">Uniform Gifts to Minors Act (UGMA)</span> and the <span class="key-term">Uniform Transfers to Minors Act (UTMA)</span>.
+Two custodial account types appear on the exam: the <span class="key-term">Uniform Gifts to Minors
+Act (UGMA)</span> and the <span class="key-term">Uniform Transfers to Minors Act (UTMA)</span>.
 
 Key rules:
+
 - An adult must open and manage the account on behalf of a minor
-- **One custodian, one minor** -- the minor and custodian do not need to be related, but the custodian must be an adult
-- The **minor is the official owner** of the account and its assets; the custodian manages the account
+- **One custodian, one minor** -- the minor and custodian do not need to be related, but the
+  custodian must be an adult
+- The **minor is the official owner** of the account and its assets; the custodian manages the
+  account
 - These are **NOT joint accounts** -- all assets are the property of the minor
 - Custodians have third-party trading authorization; minors cannot trade in the account
-- Dividends, interest, and capital gains are considered <span class="key-term">unearned income</span>
+- Dividends, interest, and capital gains are considered <span class="key-term">unearned
+  income</span>
 
 #### Tax Treatment (Kiddie Tax)
 
-The account must be opened under the **minor's Social Security number**. A portion of earnings is taxable at the minor's rate; above a certain threshold, the **parent's/guardian's tax rate** applies. Regardless of the rate, the taxes are the **child's responsibility**. These rules are called the <span class="key-term">kiddie tax</span>.
+The account must be opened under the **minor's Social Security number**. A portion of earnings is
+taxable at the minor's rate; above a certain threshold, the **parent's/guardian's tax rate**
+applies. Regardless of the rate, the taxes are the **child's responsibility**. These rules are
+called the <span class="key-term">kiddie tax</span>.
 
 #### Irrevocable Gifts
 
-Gifts can be made to the account by other adults, but all gifts are <span class="key-term">irrevocable</span> -- they cannot be withdrawn or reversed once given. Gifts can be either cash or fully paid securities.
+Gifts can be made to the account by other adults, but all gifts are
+<span class="key-term">irrevocable</span> -- they cannot be withdrawn or reversed once given. Gifts
+can be either cash or fully paid securities.
 
 #### Death of Minor
 
-In the event of the minor's death, the account assets transfer to the **minor's estate** -- not directly to the parents.
+In the event of the minor's death, the account assets transfer to the **minor's estate** -- not
+directly to the parents.
 
 #### Fiduciary Duties of the Custodian
 
@@ -637,24 +789,34 @@ In the event of the minor's death, the account assets transfer to the **minor's 
 
 #### UGMA Accounts
 
-Under UGMA, full rights to account assets transfer to the minor upon reaching the **age of majority** in their state of residence. The minor is always the legal owner, and the account uses the minor's Social Security or tax ID number.
+Under UGMA, full rights to account assets transfer to the minor upon reaching the **age of
+majority** in their state of residence. The minor is always the legal owner, and the account uses
+the minor's Social Security or tax ID number.
 
-UGMA investments are limited to **financial assets** -- stocks, bonds, mutual funds, etc. Investments **cannot** include real estate, collectibles, or uncovered derivative products.
+UGMA investments are limited to **financial assets** -- stocks, bonds, mutual funds, etc.
+Investments **cannot** include real estate, collectibles, or uncovered derivative products.
 
 #### UTMA Accounts
 
 UTMA accounts are similar to UGMA but with two important differences:
 
 1. **Broader asset range** -- UTMA accounts can include real estate and other non-financial assets
-2. **Delayed transfer** -- The custodian can delay the transfer of assets beyond the age of majority, but **no later than age 25** (actual age limits vary by state)
+2. **Delayed transfer** -- The custodian can delay the transfer of assets beyond the age of
+   majority, but **no later than age 25** (actual age limits vary by state)
 
 #### ABLE Accounts
 
-Do not confuse UGMA/UTMA accounts with <span class="key-term">Achieving a Better Life Experience (ABLE) accounts</span>, which are designed to allow people with disabilities and their families to save for the future. An ABLE account can be established for either a child or an adult, provided they have a disability that began **before the age of 46**.
+Do not confuse UGMA/UTMA accounts with <span class="key-term">Achieving a Better Life Experience
+(ABLE) accounts</span>, which are designed to allow people with disabilities and their families to
+save for the future. An ABLE account can be established for either a child or an adult, provided
+they have a disability that began **before the age of 46**.
 
 #### Guardian Accounts
 
-A <span class="key-term">legal guardian</span> is a person appointed by a court to protect the assets of a minor or an incompetent adult. To open a <span class="key-term">guardian account</span>, the firm must obtain a copy of the **court order** appointing the guardian. The account cannot be opened only in the name of a minor or incompetent adult.
+A <span class="key-term">legal guardian</span> is a person appointed by a court to protect the
+assets of a minor or an incompetent adult. To open a <span class="key-term">guardian account</span>,
+the firm must obtain a copy of the **court order** appointing the guardian. The account cannot be
+opened only in the name of a minor or incompetent adult.
 
 ---
 
@@ -662,7 +824,9 @@ A <span class="key-term">legal guardian</span> is a person appointed by a court 
 
 #### Overview
 
-<span class="key-term">Trust accounts</span> are most commonly used to ensure the smooth passing of assets to heirs upon death. They may also minimize estate and inheritance taxes, or provide for a minor child or a loved one with a disability.
+<span class="key-term">Trust accounts</span> are most commonly used to ensure the smooth passing of
+assets to heirs upon death. They may also minimize estate and inheritance taxes, or provide for a
+minor child or a loved one with a disability.
 
 #### Key Parties
 
@@ -676,11 +840,15 @@ A <span class="key-term">legal guardian</span> is a person appointed by a court 
   </ul>
 </div>
 
-Like estate accounts, trust accounts are custodial accounts because the trustee manages the account on behalf of the beneficiaries. The trustee has trading authority, but a third party can also have trading authority **if listed in the trust agreement**.
+Like estate accounts, trust accounts are custodial accounts because the trustee manages the account
+on behalf of the beneficiaries. The trustee has trading authority, but a third party can also have
+trading authority **if listed in the trust agreement**.
 
 #### Trust Agreement
 
-When opening a trust account, the firm must obtain a copy of the <span class="key-term">trust agreement</span>. The agreement specifies what transactions the trustee is authorized to perform. These accounts **cannot be margin accounts** unless specifically authorized by the trust agreement.
+When opening a trust account, the firm must obtain a copy of the <span class="key-term">trust
+agreement</span>. The agreement specifies what transactions the trustee is authorized to perform.
+These accounts **cannot be margin accounts** unless specifically authorized by the trust agreement.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> The trustee -- not the grantor or the beneficiaries -- is the person from whom the representative must take instructions. The trustee must follow the instructions in the trust agreement or will. This trips people up when the grantor wants to make changes.</p>
@@ -688,9 +856,13 @@ When opening a trust account, the firm must obtain a copy of the <span class="ke
 
 #### Revocable vs. Irrevocable Trusts
 
-A <span class="key-term">revocable living trust</span> can be revoked (eliminated) at any time before death by the person who owns the assets (the trustor). If revoked, ownership reverts back to the original owner. The grantor may appoint themselves as trustee.
+A <span class="key-term">revocable living trust</span> can be revoked (eliminated) at any time
+before death by the person who owns the assets (the trustor). If revoked, ownership reverts back to
+the original owner. The grantor may appoint themselves as trustee.
 
-An <span class="key-term">irrevocable trust</span>, once set up, **cannot be undone or revoked**. Irrevocable trusts are typically given their own tax identification numbers and treated as separate taxpayers. Any income earned within the trust is subject to annual taxation.
+An <span class="key-term">irrevocable trust</span>, once set up, **cannot be undone or revoked**.
+Irrevocable trusts are typically given their own tax identification numbers and treated as separate
+taxpayers. Any income earned within the trust is subject to annual taxation.
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -702,12 +874,15 @@ An <span class="key-term">irrevocable trust</span>, once set up, **cannot be und
   <p>For both types, the trustee is a fiduciary who must put the beneficiary's interests first and manage assets prudently.</p>
 </div>
 
-(If you're wondering why anyone would choose a revocable trust given the tax disadvantage, the answer is flexibility. Some people value the ability to change their mind more than the estate tax savings -- a very human impulse that no regulation can account for.)
+(If you're wondering why anyone would choose a revocable trust given the tax disadvantage, the
+answer is flexibility. Some people value the ability to change their mind more than the estate tax
+savings -- a very human impulse that no regulation can account for.)
 
 #### Living vs. Testamentary Trusts
 
 - <span class="key-term">Living trusts</span>: Created while a person is living
-- <span class="key-term">Testamentary trusts</span>: Initiated upon a person's death, according to the terms of a will. The instructions are carried out by a trustee
+- <span class="key-term">Testamentary trusts</span>: Initiated upon a person's death, according to
+  the terms of a will. The instructions are carried out by a trustee
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Testamentary trusts do NOT avoid probate -- a court must substantiate the claims within the will. Living trusts, particularly revocable living trusts, do avoid probate. The exam tests this distinction.</p>
@@ -715,15 +890,22 @@ An <span class="key-term">irrevocable trust</span>, once set up, **cannot be und
 
 #### Charitable Trusts
 
-A <span class="key-term">charitable trust</span> is for customers who want to leave part of or all their estate to a charity.
+A <span class="key-term">charitable trust</span> is for customers who want to leave part of or all
+their estate to a charity.
 
-A <span class="key-term">charitable remainder trust (CRT)</span> works as follows: assets are given to the charity before the donor's death, but the donor receives a **fixed amount of income** from the assets periodically until death. After death, the remainder of the assets belong to the charity. A CRT is **irrevocable**.
+A <span class="key-term">charitable remainder trust (CRT)</span> works as follows: assets are given
+to the charity before the donor's death, but the donor receives a **fixed amount of income** from
+the assets periodically until death. After death, the remainder of the assets belong to the charity.
+A CRT is **irrevocable**.
 
 ---
 
 ## Section 3: Joint, Business, and Options Accounts
 
-Several additional account types appear on the Series 7. Joint accounts involve more than one owner. Business accounts serve partnerships, corporations, or investment advisers managing accounts on behalf of clients. Options accounts follow specific rules established by the Chicago Board Options Exchange (Cboe) and the Options Clearing Corporation (OCC).
+Several additional account types appear on the Series 7. Joint accounts involve more than one owner.
+Business accounts serve partnerships, corporations, or investment advisers managing accounts on
+behalf of clients. Options accounts follow specific rules established by the Chicago Board Options
+Exchange (Cboe) and the Options Clearing Corporation (OCC).
 
 ---
 
@@ -736,8 +918,10 @@ When more than one party is named on an account:
 - New account information must be obtained **for each party**
 - **All parties** are allowed access and may make trades independently
 - Checks issued must be payable **to all parties** on the account
-- Social Security numbers are collected from each owner, but joint accounts report taxable events under a **primary tax identification number** belonging to one owner
-- Each owner is responsible for their respective tax bill (in many cases, each party claims half of gains or losses)
+- Social Security numbers are collected from each owner, but joint accounts report taxable events
+  under a **primary tax identification number** belonging to one owner
+- Each owner is responsible for their respective tax bill (in many cases, each party claims half of
+  gains or losses)
 
 #### Two Types of Joint Account Ownership
 
@@ -759,7 +943,9 @@ When more than one party is named on an account:
 
 #### Transfer-on-Death (TOD)
 
-<span class="key-term">Transfer-on-death (TOD)</span> is not an account type but a designation that allows the owner to pass an account to a beneficiary upon death. The owner keeps complete control of the account during their lifetime. Similar to JTWROS, a TOD designation **avoids probate**.
+<span class="key-term">Transfer-on-death (TOD)</span> is not an account type but a designation that
+allows the owner to pass an account to a beneficiary upon death. The owner keeps complete control of
+the account during their lifetime. Similar to JTWROS, a TOD designation **avoids probate**.
 
 ---
 
@@ -767,38 +953,65 @@ When more than one party is named on an account:
 
 #### Corporate Accounts
 
-To open a corporate account, the firm must receive a copy of the <span class="key-term">corporate resolution</span>, which must permit accounts to be opened and designate individuals with trading authorization. A corporate tax identification number is required. Firms may also request a copy of the corporate charter.
+To open a corporate account, the firm must receive a copy of the <span class="key-term">corporate
+resolution</span>, which must permit accounts to be opened and designate individuals with trading
+authorization. A corporate tax identification number is required. Firms may also request a copy of
+the corporate charter.
 
 #### Limited Liability Company (LLC) Accounts
 
-An <span class="key-term">LLC</span> combines the benefits of a sole proprietorship or partnership with those of a corporation. Starting an LLC requires filing <span class="key-term">articles of organization</span> with the secretary of state, including a statement of purpose and expected duration (an LLC may exist perpetually or have a specific termination date).
+An <span class="key-term">LLC</span> combines the benefits of a sole proprietorship or partnership
+with those of a corporation. Starting an LLC requires filing <span class="key-term">articles of
+organization</span> with the secretary of state, including a statement of purpose and expected
+duration (an LLC may exist perpetually or have a specific termination date).
 
-To open an account, an LLC must provide a copy of their articles or certificate of organization. If the LLC has only one member, that member's Social Security number can be used in place of an employer identification number.
+To open an account, an LLC must provide a copy of their articles or certificate of organization. If
+the LLC has only one member, that member's Social Security number can be used in place of an
+employer identification number.
 
 #### Partnership Accounts
 
-To open a partnership account, the firm must obtain a copy of the <span class="key-term">partnership agreement</span>. Like a corporate resolution, it must allow for opening the account and name the partners authorized to trade.
+To open a partnership account, the firm must obtain a copy of the <span class="key-term">partnership
+agreement</span>. Like a corporate resolution, it must allow for opening the account and name the
+partners authorized to trade.
 
 #### Investment Adviser Accounts
 
-An <span class="key-term">investment adviser</span> provides investment advice for a fee and is considered a fiduciary. An investment adviser account is typically held in the **customer's name**, but the adviser has discretionary authority.
+An <span class="key-term">investment adviser</span> provides investment advice for a fee and is
+considered a fiduciary. An investment adviser account is typically held in the **customer's name**,
+but the adviser has discretionary authority.
 
-When an adviser has many customers, they might open an <span class="key-term">omnibus account</span> -- an account held in the adviser's name containing all its customers' securities. To open an omnibus account, the investment adviser must fill out individual new account forms for each customer, along with a third-party trading authorization (since the customer is granting POA to the adviser).
+When an adviser has many customers, they might open an <span class="key-term">omnibus account</span>
+-- an account held in the adviser's name containing all its customers' securities. To open an
+omnibus account, the investment adviser must fill out individual new account forms for each
+customer, along with a third-party trading authorization (since the customer is granting POA to the
+adviser).
 
 #### Wrap Accounts
 
-A <span class="key-term">wrap account</span> provides investment advice and a certain number of brokerage transactions in a single package. The investment adviser trades accounts for clients, charging an **annual management fee**. Confirmations and statements go to both the customer and the adviser.
+A <span class="key-term">wrap account</span> provides investment advice and a certain number of
+brokerage transactions in a single package. The investment adviser trades accounts for clients,
+charging an **annual management fee**. Confirmations and statements go to both the customer and the
+adviser.
 
-Wrap accounts are defined as an **advisory product** because they charge either a flat fee or a percentage of assets. To offer advisory products, a representative must be **dually registered** as a FINRA broker-dealer representative and a <span class="key-term">registered investment adviser (RIA)</span> representative.
+Wrap accounts are defined as an **advisory product** because they charge either a flat fee or a
+percentage of assets. To offer advisory products, a representative must be **dually registered** as
+a FINRA broker-dealer representative and a <span class="key-term">registered investment adviser
+(RIA)</span> representative.
 
 #### Institutional Accounts
 
-An <span class="key-term">institutional account</span> is held by a bank, investment company, registered investment adviser, or any other business or individual with total assets of at least <span class="key-term">$50 million</span>.
+An <span class="key-term">institutional account</span> is held by a bank, investment company,
+registered investment adviser, or any other business or individual with total assets of at least
+<span class="key-term">$50 million</span>.
 
-Institutional accounts are considered sophisticated investors who do not need retail-level protections. The suitability obligation is fulfilled if:
+Institutional accounts are considered sophisticated investors who do not need retail-level
+protections. The suitability obligation is fulfilled if:
 
-- The broker-dealer reasonably believes the institutional customer can **evaluate risk independently**
-- The customer affirms it is **exercising independent judgment** when evaluating the broker-dealer's recommendations
+- The broker-dealer reasonably believes the institutional customer can **evaluate risk
+  independently**
+- The customer affirms it is **exercising independent judgment** when evaluating the broker-dealer's
+  recommendations
 
 ---
 
@@ -806,7 +1019,8 @@ Institutional accounts are considered sophisticated investors who do not need re
 
 #### Cboe Requirements
 
-The Chicago Board Options Exchange (Cboe) has its own requirements for opening options accounts, similar to FINRA's but with specific additions.
+The Chicago Board Options Exchange (Cboe) has its own requirements for opening options accounts,
+similar to FINRA's but with specific additions.
 
 #### Required Information
 
@@ -821,11 +1035,16 @@ To open an options account, the customer must be asked specifically about:
 - Liquid net worth
 - Estimated annual income
 
-If the customer **refuses to disclose** any of this information, the representative must note "not disclosed" for each such item. The Cboe states it is then up to the approving manager to decide whether the account should be opened.
+If the customer **refuses to disclose** any of this information, the representative must note "not
+disclosed" for each such item. The Cboe states it is then up to the approving manager to decide
+whether the account should be opened.
 
 #### Options Agreement
 
-Cboe requires the customer be sent a copy of the <span class="key-term">options agreement</span>. By signing, the customer agrees to abide by trading restrictions imposed by the member firm and to comply with OCC rules (e.g., position limits, exercise limits). If the customer's financial situation changes materially, the options agreement must be amended.
+Cboe requires the customer be sent a copy of the <span class="key-term">options agreement</span>. By
+signing, the customer agrees to abide by trading restrictions imposed by the member firm and to
+comply with OCC rules (e.g., position limits, exercise limits). If the customer's financial
+situation changes materially, the options agreement must be amended.
 
 #### Account Approval
 
@@ -841,7 +1060,8 @@ Cboe requires the customer be sent a copy of the <span class="key-term">options 
 
 #### Options Disclosure Document (ODD)
 
-The customer must also receive an <span class="key-term">Options Disclosure Document (ODD)</span> created by the OCC. This must be delivered **by the date of the principal's approval**.
+The customer must also receive an <span class="key-term">Options Disclosure Document (ODD)</span>
+created by the OCC. This must be delivered **by the date of the principal's approval**.
 
 #### The 15-Day Rule
 
@@ -858,7 +1078,9 @@ The customer must also receive an <span class="key-term">Options Disclosure Docu
 
 #### Options Accounts for Associated Persons
 
-If a representative of another firm wishes to open an options account at another member firm, they must first receive **written approval from their employer**. If approved, all statements and confirmations will be **automatically sent** to the employing broker-dealer.
+If a representative of another firm wishes to open an options account at another member firm, they
+must first receive **written approval from their employer**. If approved, all statements and
+confirmations will be **automatically sent** to the employing broker-dealer.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> The options account approval chain is: RR signs the form, BOM may give initial approval, but the ROP gives final approval. The ODD must be delivered by the date of the principal's approval, and the signed options agreement must be returned within 15 days. These timing requirements are heavily tested.</p>

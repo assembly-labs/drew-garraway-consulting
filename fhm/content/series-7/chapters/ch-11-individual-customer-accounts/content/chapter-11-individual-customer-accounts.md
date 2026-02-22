@@ -1,22 +1,38 @@
 # Chapter 11: Individual Customer Accounts
 
-*Series 7 Exam Weight: ~11% of exam (~14 questions)*
+_Series 7 Exam Weight: ~11% of exam (~14 questions)_
 
 ---
 
-On October 26, 2001, President George W. Bush signed the USA PATRIOT Act into law, just 45 days after the September 11 attacks. Buried inside its 342 pages were provisions that would permanently transform how brokerage firms open accounts. Before that day, opening a brokerage account was roughly as complicated as getting a library card. After it, every new account became a small-scale federal investigation--verifying identity, checking terrorist watchlists, and documenting the source of funds. The financial industry, which had previously treated account opening as a sales formality, suddenly found itself on the front lines of national security.
+On October 26, 2001, President George W. Bush signed the USA PATRIOT Act into law, just 45 days
+after the September 11 attacks. Buried inside its 342 pages were provisions that would permanently
+transform how brokerage firms open accounts. Before that day, opening a brokerage account was
+roughly as complicated as getting a library card. After it, every new account became a small-scale
+federal investigation--verifying identity, checking terrorist watchlists, and documenting the source
+of funds. The financial industry, which had previously treated account opening as a sales formality,
+suddenly found itself on the front lines of national security.
 
-This chapter covers everything that happens before and after a customer places their first trade: the paperwork, the identity checks, the privacy rules, the suitability analysis, and the ongoing maintenance that keeps an account running properly. It's not the most glamorous material on the Series 7, but it shows up in roughly 14 questions--and getting these wrong means you don't understand the regulatory framework that every other chapter builds upon.
+This chapter covers everything that happens before and after a customer places their first trade:
+the paperwork, the identity checks, the privacy rules, the suitability analysis, and the ongoing
+maintenance that keeps an account running properly. It's not the most glamorous material on the
+Series 7, but it shows up in roughly 14 questions--and getting these wrong means you don't
+understand the regulatory framework that every other chapter builds upon.
 
 ### Why This Chapter Matters
 
-Every recommendation you'll ever make, every trade you'll ever execute, and every dispute you'll ever face traces back to how the account was opened. The new account form isn't just paperwork--it's the legal foundation that determines what's suitable, what's authorized, and who's responsible when things go wrong.
+Every recommendation you'll ever make, every trade you'll ever execute, and every dispute you'll
+ever face traces back to how the account was opened. The new account form isn't just paperwork--it's
+the legal foundation that determines what's suitable, what's authorized, and who's responsible when
+things go wrong.
 
 ---
 
 ## Section 1: Customer Accounts for Individuals
 
-Before opening a new account, a registered representative (RR) is required to gather and record a significant amount of information. This information serves three purposes: establishing the customer's identity, determining suitability for future recommendations, and fulfilling anti-money laundering requirements.
+Before opening a new account, a registered representative (RR) is required to gather and record a
+significant amount of information. This information serves three purposes: establishing the
+customer's identity, determining suitability for future recommendations, and fulfilling anti-money
+laundering requirements.
 
 ---
 
@@ -45,7 +61,9 @@ FINRA requires specific information for every new customer account. Here's what 
 
 #### Reasonable Efforts for Non-Mutual Fund Accounts
 
-If the account is for an individual who isn't simply purchasing unsolicited mutual funds, the broker must make <span class="key-term">reasonable efforts</span> to obtain the following information before the settlement of the first transaction:
+If the account is for an individual who isn't simply purchasing unsolicited mutual funds, the broker
+must make <span class="key-term">reasonable efforts</span> to obtain the following information
+before the settlement of the first transaction:
 
 - Social Security number or tax identification number (this must be provided to verify identity)
 - Occupation of customer and address of employer
@@ -82,7 +100,8 @@ Timing matters. A copy of the new account form must be sent to the customer:
 - **At least every 3 years** thereafter, to verify and update the customer's information
 - **Within 30 days** of any updates
 
-Customer records must be maintained for at least <span class="key-term">6 years</span> after the information was last updated and for at least 6 years after the account is closed.
+Customer records must be maintained for at least <span class="key-term">6 years</span> after the
+information was last updated and for at least 6 years after the account is closed.
 
 #### The Predispute Arbitration Agreement
 
@@ -91,13 +110,18 @@ Customer records must be maintained for at least <span class="key-term">6 years<
   <p>Arbitration became the standard dispute resolution mechanism in the securities industry because lawsuits were expensive, unpredictable, and slow. The industry discovered that mandatory arbitration was a more cost-effective and expedited way to resolve disputes--and it also kept embarrassing details out of public court records. Today, virtually every firm requires a predispute arbitration agreement before opening an account, even though no FINRA or SEC rule mandates it.</p>
 </div>
 
-Here's the key distinction: it is **not mandatory** that a customer sign an arbitration agreement. No FINRA or SEC rule requires it. However, virtually every firm requires one as a condition of opening the account. In practice, if you want to open the account, you're signing the agreement.
+Here's the key distinction: it is **not mandatory** that a customer sign an arbitration agreement.
+No FINRA or SEC rule requires it. However, virtually every firm requires one as a condition of
+opening the account. In practice, if you want to open the account, you're signing the agreement.
 
-Most new account forms contain a <span class="key-term">predispute arbitration agreement</span>, in which the customer agrees to resolve disputes with the firm or its associated persons through arbitration rather than litigation.
+Most new account forms contain a <span class="key-term">predispute arbitration agreement</span>, in
+which the customer agrees to resolve disputes with the firm or its associated persons through
+arbitration rather than litigation.
 
 #### Predispute Arbitration Agreement Disclosures
 
-If a firm includes a predispute arbitration agreement, FINRA requires it to be highlighted and include language explaining that:
+If a firm includes a predispute arbitration agreement, FINRA requires it to be highlighted and
+include language explaining that:
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -116,7 +140,8 @@ If a firm includes a predispute arbitration agreement, FINRA requires it to be h
 
 #### The USA PATRIOT Act
 
-The <span class="key-term">USA PATRIOT Act</span> requires member firms to independently verify a customer's identity using four pieces of information:
+The <span class="key-term">USA PATRIOT Act</span> requires member firms to independently verify a
+customer's identity using four pieces of information:
 
 1. **Name**
 2. **Address**
@@ -139,33 +164,46 @@ Verification must be completed within a reasonable amount of time after the acco
 
 #### Customer Identification Program (CIP)
 
-Beyond verifying identity, firms must also check whether the customer appears on a known or suspected terrorist list. Specifically, they must screen against the <span class="key-term">Specially Designated Nationals and Blocked Persons (SDN) list</span>, maintained by the <span class="key-term">Office of Foreign Asset Control (OFAC)</span>.
+Beyond verifying identity, firms must also check whether the customer appears on a known or
+suspected terrorist list. Specifically, they must screen against the
+<span class="key-term">Specially Designated Nationals and Blocked Persons (SDN) list</span>,
+maintained by the <span class="key-term">Office of Foreign Asset Control (OFAC)</span>.
 
-These rules exist to detect and deter money laundering and the funding of terrorist organizations. Records relating to identification verification must be kept for at least **5 years**.
+These rules exist to detect and deter money laundering and the funding of terrorist organizations.
+Records relating to identification verification must be kept for at least **5 years**.
 
 #### Know Your Customer (KYC)
 
-The <span class="key-term">Know Your Customer (KYC)</span> rule requires broker-dealers to use "reasonable diligence" in collecting and maintaining essential information on their customers. The rule requires firms to check:
+The <span class="key-term">Know Your Customer (KYC)</span> rule requires broker-dealers to use
+"reasonable diligence" in collecting and maintaining essential information on their customers. The
+rule requires firms to check:
 
 - Customers' identities
 - Investment histories
 - Investment objectives
 - Sources of funds
 
-This information serves two purposes: ensuring customers aren't engaging in money laundering, and making suitable recommendations.
+This information serves two purposes: ensuring customers aren't engaging in money laundering, and
+making suitable recommendations.
 
-**What if the customer doesn't provide everything?** The account may still be opened if the firm collects certain essential facts necessary to:
+**What if the customer doesn't provide everything?** The account may still be opened if the firm
+collects certain essential facts necessary to:
 
 - Effectively service a customer's account
 - Carry out special handling instructions for the account
 - Understand who has trading authority on the account
 - Comply with securities laws, regulations, and rules
 
-When information is missing, a supervisor must be informed. Inquiries should be made and documented as to why the missing information wasn't provided. The supervisor must ensure that no missing information constitutes an essential fact.
+When information is missing, a supervisor must be informed. Inquiries should be made and documented
+as to why the missing information wasn't provided. The supervisor must ensure that no missing
+information constitutes an essential fact.
 
 #### KYC Updates
 
-The KYC rule requires firms to make regular contact with customers to check if investment objectives or essential facts have changed. While the SEC requires broker-dealers to update suitability information at least every **3 years**, the KYC obligation may require more frequent updates depending on the circumstances.
+The KYC rule requires firms to make regular contact with customers to check if investment objectives
+or essential facts have changed. While the SEC requires broker-dealers to update suitability
+information at least every **3 years**, the KYC obligation may require more frequent updates
+depending on the circumstances.
 
 #### Anti-Money Laundering (AML) Requirements
 
@@ -186,31 +224,42 @@ Understanding how criminals launder money helps you understand why the rules exi
   <p><strong>3. Integration</strong> — The final stage, where funds are returned to the criminal from what appear to be legitimate sources. The money is now "clean."</p>
 </div>
 
-Think of it as: get the cash in (placement), move it around until nobody can follow the trail (layering), then pull it back out looking legitimate (integration).
+Think of it as: get the cash in (placement), move it around until nobody can follow the trail
+(layering), then pull it back out looking legitimate (integration).
 
 #### Currency Transaction Reports (CTRs)
 
-The BSA requires financial institutions to report currency transactions--deposits or withdrawals of cash--that exceed <span class="key-term">$10,000</span>. When this threshold is crossed, the institution must file a <span class="key-term">Currency Transaction Report (CTR)</span> with <span class="key-term">FinCEN</span> (the Financial Crimes Enforcement Network) within **15 days**.
+The BSA requires financial institutions to report currency transactions--deposits or withdrawals of
+cash--that exceed <span class="key-term">$10,000</span>. When this threshold is crossed, the
+institution must file a <span class="key-term">Currency Transaction Report (CTR)</span> with
+<span class="key-term">FinCEN</span> (the Financial Crimes Enforcement Network) within **15 days**.
 
 #### Structuring
 
-<span class="key-term">Structuring</span> is the practice of making a series of smaller deposits or withdrawals to avoid triggering the $10,000 CTR threshold. It's illegal, and firms are trained to spot it.
+<span class="key-term">Structuring</span> is the practice of making a series of smaller deposits or
+withdrawals to avoid triggering the $10,000 CTR threshold. It's illegal, and firms are trained to
+spot it.
 
 <div class="info-box">
   <div class="info-box__title">Real-World Example</div>
   <p>An individual deposits $4,000 in cash at 8:00 a.m., another $4,000 at 1:00 p.m., and another $4,000 at 3:00 p.m. Even though no single deposit exceeds $10,000, the combined total for the day does--triggering a CTR filing. And if an individual makes repeated deposits under $10,000 over several days, weeks, or even months, and the representative believes this is being done intentionally to avoid reporting, that's still structuring.</p>
 </div>
 
-If the $10,000 limit is exceeded AND the firm suspects illegal activity, both an SAR and a CTR must be filed.
+If the $10,000 limit is exceeded AND the firm suspects illegal activity, both an SAR and a CTR must
+be filed.
 
 #### Suspicious Activity Reports (SARs)
 
-The BSA requires broker-dealers to file <span class="key-term">Suspicious Activity Reports (SARs)</span> with FinCEN--part of the U.S. Department of the Treasury--which serves as the central collection point for these reports.
+The BSA requires broker-dealers to file <span class="key-term">Suspicious Activity Reports
+(SARs)</span> with FinCEN--part of the U.S. Department of the Treasury--which serves as the central
+collection point for these reports.
 
 Key SAR facts:
 
-- If potential money laundering or BSA violations are detected or suspected, **for any dollar amount**, a report must be filed within **30 days**
-- Beginning 1/1/2026, firms must notify FinCEN regarding the <span class="key-term">Beneficial Ownership Information (BOI)</span> of each account held by the firm in street name
+- If potential money laundering or BSA violations are detected or suspected, **for any dollar
+  amount**, a report must be filed within **30 days**
+- Beginning 1/1/2026, firms must notify FinCEN regarding the <span class="key-term">Beneficial
+  Ownership Information (BOI)</span> of each account held by the firm in street name
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> The Bank Secrecy Act <strong>forbids</strong> anyone who files a Suspicious Activity Report from notifying any person involved in the suspected activity that an SAR has been filed. This is sometimes called the "tipping off" prohibition. If the exam asks whether a firm should inform a customer that an SAR was filed, the answer is always NO.</p>
@@ -218,7 +267,9 @@ Key SAR facts:
 
 #### Monetary Instrument Log (MIL)
 
-Broker-dealers must record cash purchases of negotiable instruments--personal checks, money orders, travelers' checks--between <span class="key-term">$3,000 and $10,000</span> in an internal log called a <span class="key-term">Monetary Instrument Log (MIL)</span>.
+Broker-dealers must record cash purchases of negotiable instruments--personal checks, money orders,
+travelers' checks--between <span class="key-term">$3,000 and $10,000</span> in an internal log
+called a <span class="key-term">Monetary Instrument Log (MIL)</span>.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> MIL documents must be kept for 5 years. The exam likes to test the various retention periods: MIL = 5 years, CIP records = 5 years, customer records = 6 years.</p>
@@ -226,7 +277,8 @@ Broker-dealers must record cash purchases of negotiable instruments--personal ch
 
 #### The Firm's AML Program
 
-Every firm must establish an <span class="key-term">anti-money laundering (AML) program</span> with the following components:
+Every firm must establish an <span class="key-term">anti-money laundering (AML) program</span> with
+the following components:
 
 <div class="info-box">
   <div class="info-box__title">AML Program Requirements</div>
@@ -241,9 +293,14 @@ Every firm must establish an <span class="key-term">anti-money laundering (AML) 
 
 #### Numbered Accounts
 
-Customers are permitted to open a <span class="key-term">numbered account</span>, using a number or symbol instead of their name so they can remain anonymous when placing trades. But anonymity from other traders doesn't mean anonymity from the firm--the customer's identity must still appear on the new account form, and the owner must sign the form. This document is kept on file at the broker-dealer.
+Customers are permitted to open a <span class="key-term">numbered account</span>, using a number or
+symbol instead of their name so they can remain anonymous when placing trades. But anonymity from
+other traders doesn't mean anonymity from the firm--the customer's identity must still appear on the
+new account form, and the owner must sign the form. This document is kept on file at the
+broker-dealer.
 
-Customers may also open multiple individual accounts at a single broker-dealer, but they must sign a statement affirming that the accounts are not held for any other individual.
+Customers may also open multiple individual accounts at a single broker-dealer, but they must sign a
+statement affirming that the accounts are not held for any other individual.
 
 ---
 
@@ -251,7 +308,9 @@ Customers may also open multiple individual accounts at a single broker-dealer, 
 
 #### The Privacy Framework
 
-<span class="key-term">Regulation S-P (Reg S-P)</span> limits the ability of broker-dealers, investment companies, and investment advisers to disclose <span class="key-term">personally identifiable information (PII)</span> about their customers to nonaffiliated third parties.
+<span class="key-term">Regulation S-P (Reg S-P)</span> limits the ability of broker-dealers,
+investment companies, and investment advisers to disclose <span class="key-term">personally
+identifiable information (PII)</span> about their customers to nonaffiliated third parties.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> The exam may refer to personally identifiable information as "PII." Know this acronym.</p>
@@ -262,11 +321,13 @@ Customers may also open multiple individual accounts at a single broker-dealer, 
 Firms must provide customers with a notice describing their privacy policies and procedures:
 
 - **When the account is opened**, and **annually thereafter**
-- The notice must describe the type of information collected, how it will be used, and the categories of entities with whom it will be shared
+- The notice must describe the type of information collected, how it will be used, and the
+  categories of entities with whom it will be shared
 
 #### Consumers vs. Customers
 
-Reg S-P draws an important distinction between <span class="key-term">consumers</span> and <span class="key-term">customers</span>:
+Reg S-P draws an important distinction between <span class="key-term">consumers</span> and
+<span class="key-term">customers</span>:
 
 <div class="info-box">
   <div class="info-box__title">Consumer vs. Customer Under Reg S-P</div>
@@ -279,16 +340,19 @@ Reg S-P draws an important distinction between <span class="key-term">consumers<
   </table>
 </div>
 
-Both consumers and customers must be given adequate notice and the opportunity to <span class="key-term">opt out</span> of sharing personal information with third parties.
+Both consumers and customers must be given adequate notice and the opportunity to
+<span class="key-term">opt out</span> of sharing personal information with third parties.
 
 #### Written Safeguarding Plan
 
-Reg S-P requires firms to maintain a written plan for safeguarding customer information. The plan must be designed to:
+Reg S-P requires firms to maintain a written plan for safeguarding customer information. The plan
+must be designed to:
 
 - Ensure the security and confidentiality of customer records and information
 - Protect against anticipated threats or hazards to customer records
 - Protect against unauthorized access to or use of customer records
-- Properly dispose of personal information and protect against unauthorized access to disposed information
+- Properly dispose of personal information and protect against unauthorized access to disposed
+  information
 
 Firms must also conduct periodic reviews to detect potential problems in their databases.
 
@@ -298,7 +362,9 @@ Firms must also conduct periodic reviews to detect potential problems in their d
 
 #### Account Ownership
 
-An individual account has only one owner. A representative may not give account information to anyone else--including the account owner's spouse. The owner is the only person who can trade in the account unless trading authorization has been explicitly granted.
+An individual account has only one owner. A representative may not give account information to
+anyone else--including the account owner's spouse. The owner is the only person who can trade in the
+account unless trading authorization has been explicitly granted.
 
 #### Three Types of Trading Authorization
 
@@ -322,11 +388,16 @@ An individual account has only one owner. A representative may not give account 
   <p>If the customer provides all three, the representative does not need discretionary authority--even if the customer leaves the timing and price to the rep's judgment.</p>
 </div>
 
-In most cases, discretionary authority is NOT required to exercise <span class="key-term">discretion over time and price</span>. This means the broker-dealer may wait for the best time or price at which to execute a customer order, as long as it is executed on the same day the customer places it.
+In most cases, discretionary authority is NOT required to exercise <span class="key-term">discretion
+over time and price</span>. This means the broker-dealer may wait for the best time or price at
+which to execute a customer order, as long as it is executed on the same day the customer places it.
 
 #### Discretionary Accounts
 
-Discretionary authority must be given **in writing** before the account can be opened. A discretionary account typically requires the customer to grant their representative a <span class="key-term">power of attorney (POA)</span>. In most cases, the POA grants limited trading authorization (to trade), not full authorization (to make withdrawals).
+Discretionary authority must be given **in writing** before the account can be opened. A
+discretionary account typically requires the customer to grant their representative a
+<span class="key-term">power of attorney (POA)</span>. In most cases, the POA grants limited trading
+authorization (to trade), not full authorization (to make withdrawals).
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Even with a power of attorney, a registered representative CANNOT sign documents for a customer. The POA authorizes trading, not document execution. The exam tests this regularly.</p>
@@ -334,7 +405,9 @@ Discretionary authority must be given **in writing** before the account can be o
 
 #### Churning in Discretionary Accounts
 
-<span class="key-term">Churning</span> is the entering of excessive, often unsuitable transactions to generate commissions for the representative. It's a major concern in discretionary accounts because the representative has the power to trade without asking permission each time.
+<span class="key-term">Churning</span> is the entering of excessive, often unsuitable transactions
+to generate commissions for the representative. It's a major concern in discretionary accounts
+because the representative has the power to trade without asking permission each time.
 
 To guard against churning:
 
@@ -348,7 +421,9 @@ To guard against churning:
 
 #### Accounts for Employees of Other Member Firms
 
-FINRA and the MSRB have similar rules for opening an account for an associated person of another member firm. The logic is straightforward: your employer needs to know what you're doing with your personal investments, because conflicts of interest don't announce themselves.
+FINRA and the MSRB have similar rules for opening an account for an associated person of another
+member firm. The logic is straightforward: your employer needs to know what you're doing with your
+personal investments, because conflicts of interest don't announce themselves.
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -367,7 +442,8 @@ FINRA and the MSRB have similar rules for opening an account for an associated p
 This rule applies broadly:
 
 - All employees of broker-dealers who open accounts at other member firms
-- Employees who open accounts at non-member financial institutions such as banks, trust companies, and investment advisers
+- Employees who open accounts at non-member financial institutions such as banks, trust companies,
+  and investment advisers
 
 #### Related and Other Persons
 
@@ -380,25 +456,33 @@ The rule extends beyond just the employee. It also applies to accounts held by:
 
 All such accounts must be disclosed to the representative's employing broker-dealer.
 
-**Exception:** The rule does not apply to accounts limited to investment company securities or municipal fund securities (such as 529 plans).
+**Exception:** The rule does not apply to accounts limited to investment company securities or
+municipal fund securities (such as 529 plans).
 
 #### Restrictions on FINRA Employees
 
-FINRA has specific rules for its own employees who want brokerage accounts. The self-regulatory organization polices the industry, so its employees face additional restrictions:
+FINRA has specific rules for its own employees who want brokerage accounts. The self-regulatory
+organization polices the industry, so its employees face additional restrictions:
 
-- Cannot have a debt or equity interest in broker-dealers, or companies with broker-dealer subsidiaries that contribute 10% or more of the parent's revenue
+- Cannot have a debt or equity interest in broker-dealers, or companies with broker-dealer
+  subsidiaries that contribute 10% or more of the parent's revenue
 - Cannot take options positions on these firms
 - Cannot purchase stock in an IPO
 - Must disclose to FINRA all brokerage accounts they own or control
 - Must authorize their broker-dealer to send duplicate statements to FINRA
 
-(You can appreciate the irony: the regulators regulate themselves more strictly than they regulate anyone else. At least on paper.)
+(You can appreciate the irony: the regulators regulate themselves more strictly than they regulate
+anyone else. At least on paper.)
 
 ---
 
 ## Section 2: Suitability and Account Maintenance
 
-One of the primary reasons for collecting all that new account information is to ensure that future recommendations will be suitable for a particular customer. All regulators--FINRA, the MSRB, and the SEC--have established suitability standards. And as with all regulations, the SEC has the final say. <span class="key-term">Regulation Best Interest (Reg BI)</span> is the ultimate standard for client suitability.
+One of the primary reasons for collecting all that new account information is to ensure that future
+recommendations will be suitable for a particular customer. All regulators--FINRA, the MSRB, and the
+SEC--have established suitability standards. And as with all regulations, the SEC has the final say.
+<span class="key-term">Regulation Best Interest (Reg BI)</span> is the ultimate standard for client
+suitability.
 
 ---
 
@@ -406,7 +490,8 @@ One of the primary reasons for collecting all that new account information is to
 
 #### Suitability Information Collection
 
-FINRA requires firms to evaluate whether each recommendation is suitable for the customer. This means collecting information on:
+FINRA requires firms to evaluate whether each recommendation is suitable for the customer. This
+means collecting information on:
 
 - Customer's age
 - Time horizon (length of investment time)
@@ -416,7 +501,9 @@ FINRA requires firms to evaluate whether each recommendation is suitable for the
 - Current and future financial needs
 - Investment experience
 
-A suitability questionnaire should be provided at account opening and kept in the customer's file. Firms must make reasonable efforts to collect and maintain this information. The questionnaire should be revisited and updated frequently--at least every **36 months**.
+A suitability questionnaire should be provided at account opening and kept in the customer's file.
+Firms must make reasonable efforts to collect and maintain this information. The questionnaire
+should be revisited and updated frequently--at least every **36 months**.
 
 #### Three Components of Suitability
 
@@ -428,26 +515,33 @@ A suitability questionnaire should be provided at account opening and kept in th
   <p><strong>3. Quantitative suitability obligation</strong> — A broker-dealer must believe that a series of recommended transactions is not excessive. Even if each trade is individually suitable, the pattern as a whole must make sense.</p>
 </div>
 
-A suitability analysis must be conducted before a representative can make any recommendations. However, a representative **may accept unsolicited orders** from a customer who has not provided suitability information.
+A suitability analysis must be conducted before a representative can make any recommendations.
+However, a representative **may accept unsolicited orders** from a customer who has not provided
+suitability information.
 
 #### Institutional Customers Exception
 
-Broker-dealers are not subject to the same strict suitability rules for <span class="key-term">institutional customers</span>. An institutional customer is:
+Broker-dealers are not subject to the same strict suitability rules for
+<span class="key-term">institutional customers</span>. An institutional customer is:
 
 - A bank, savings and loan association, or insurance company
 - A registered investment company
 - A registered investment adviser
 - An individual with total assets of **at least $50 million**
 
-If the firm believes an institutional customer can evaluate risk independently, and the customer has stated that it is acting independently, the broker-dealer has met its suitability requirements.
+If the firm believes an institutional customer can evaluate risk independently, and the customer has
+stated that it is acting independently, the broker-dealer has met its suitability requirements.
 
 #### Municipal Securities Suitability (MSRB)
 
 The MSRB suitability rule mirrors FINRA's and the SEC's, with a few additions:
 
-- Firms must determine tax status by asking the customer for their **tax bracket** and **state of residence**
-- If a customer refuses to disclose their financial status, **no recommendations can be made** (but unsolicited trades can still be accepted)
-- If the representative believes an unsolicited trade is unsuitable, the customer must be informed. If the customer insists, the unsolicited order can then be entered
+- Firms must determine tax status by asking the customer for their **tax bracket** and **state of
+  residence**
+- If a customer refuses to disclose their financial status, **no recommendations can be made** (but
+  unsolicited trades can still be accepted)
+- If the representative believes an unsolicited trade is unsuitable, the customer must be informed.
+  If the customer insists, the unsolicited order can then be entered
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Although not expressly prohibited, municipal securities are generally NOT suitable for tax-deferred accounts such as IRAs. Why? Because munis already provide tax-exempt income. Putting tax-exempt income inside a tax-deferred wrapper adds no benefit--and you lose the tax exemption on withdrawal. The exam tests this frequently.</p>
@@ -476,15 +570,24 @@ The MSRB suitability rule mirrors FINRA's and the SEC's, with a few additions:
   <p>Before Reg BI was adopted in June 2019, broker-dealers were held only to a suitability standard--meaning a recommendation just had to be "suitable" for the customer, even if a better or cheaper alternative existed. Investment advisers, meanwhile, were held to a fiduciary standard requiring them to act in their clients' best interest at all times. Reg BI was the SEC's attempt to close that gap for broker-dealers without going all the way to a full fiduciary duty. Whether it succeeded is still debated, but for exam purposes, Reg BI is the highest standard that applies to broker-dealer recommendations.</p>
 </div>
 
-The SEC's <span class="key-term">Regulation Best Interest (Reg BI)</span> provides standards that exceed traditional suitability requirements. Reg BI requires broker-dealers and their associated persons to act in their <span class="key-term">retail customers' best interest</span>. The firm cannot place its own financial interests ahead of its customers'. Firms must also identify, eliminate, or disclose and mitigate any conflicts of interest between the firm and its retail customers.
+The SEC's <span class="key-term">Regulation Best Interest (Reg BI)</span> provides standards that
+exceed traditional suitability requirements. Reg BI requires broker-dealers and their associated
+persons to act in their <span class="key-term">retail customers' best interest</span>. The firm
+cannot place its own financial interests ahead of its customers'. Firms must also identify,
+eliminate, or disclose and mitigate any conflicts of interest between the firm and its retail
+customers.
 
 #### Retail Customer Definition
 
-A customer is considered a <span class="key-term">retail customer</span> under Reg BI if all of the following are true:
+A customer is considered a <span class="key-term">retail customer</span> under Reg BI if all of the
+following are true:
 
-- The customer is a **natural person** (not a corporation) or a natural person's legal representative (such as a trustee or executor)
-- The customer receives a recommendation from a broker-dealer about securities or an investment strategy involving securities
-- The customer uses the recommendation primarily for **personal investing** (or that of their family or household)
+- The customer is a **natural person** (not a corporation) or a natural person's legal
+  representative (such as a trustee or executor)
+- The customer receives a recommendation from a broker-dealer about securities or an investment
+  strategy involving securities
+- The customer uses the recommendation primarily for **personal investing** (or that of their family
+  or household)
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Accredited investors are NOT excluded from Reg BI protections. Even wealthy, sophisticated investors are covered when receiving recommendations from broker-dealers. Likewise, Reg BI applies to recommendations about private placements, OTC trades, and any other securities transaction or strategy.</p>
@@ -492,13 +595,15 @@ A customer is considered a <span class="key-term">retail customer</span> under R
 
 #### What Counts as a "Recommendation" Under Reg BI?
 
-Reg BI applies broadly to recommendations made across all account types--margin accounts, retirement accounts, and education savings accounts.
+Reg BI applies broadly to recommendations made across all account types--margin accounts, retirement
+accounts, and education savings accounts.
 
 Recommendations covered include:
 
 - What type of account to open (e.g., traditional IRA vs. Roth IRA)
 - Rollovers or transfers from one account to another
-- Any <span class="key-term">call to action</span>--statements that suggest a specific course of action
+- Any <span class="key-term">call to action</span>--statements that suggest a specific course of
+  action
 
 What is NOT a recommendation:
 
@@ -524,29 +629,41 @@ What is NOT a recommendation:
 
 #### 1. The Disclosure Obligation
 
-Before or at the time of making a recommendation, firms must provide **full and fair written disclosure** of the following material facts:
+Before or at the time of making a recommendation, firms must provide **full and fair written
+disclosure** of the following material facts:
 
 - That the firm is acting in a **broker-dealer capacity**
 - Material **fees and costs**
 - **Type and scope of services** provided
 - Any material **limitations** on the securities or strategies that may be recommended
-- All material facts relating to **conflicts of interest** associated with a recommendation (e.g., proprietary products, third-party payments, compensation arrangements)
+- All material facts relating to **conflicts of interest** associated with a recommendation (e.g.,
+  proprietary products, third-party payments, compensation arrangements)
 
 #### 2. The Care Obligation
 
-The SEC defines three components of the care obligation that closely mirror FINRA's suitability framework:
+The SEC defines three components of the care obligation that closely mirror FINRA's suitability
+framework:
 
-- **Reasonable-basis**: The firm must understand the potential risks, rewards, and costs associated with a recommendation
-- **Customer-specific**: The firm must consider risks, rewards, and costs in the context of the customer's investment profile. Recommendations must be in the customer's best interest and cannot prioritize the firm's interests. Reasonable alternatives should be considered
-- **Quantitative**: The firm cannot recommend a series of transactions that are excessive--even if each transaction is individually sound. A representative may not recommend multiple transactions simply to earn higher fees
+- **Reasonable-basis**: The firm must understand the potential risks, rewards, and costs associated
+  with a recommendation
+- **Customer-specific**: The firm must consider risks, rewards, and costs in the context of the
+  customer's investment profile. Recommendations must be in the customer's best interest and cannot
+  prioritize the firm's interests. Reasonable alternatives should be considered
+- **Quantitative**: The firm cannot recommend a series of transactions that are excessive--even if
+  each transaction is individually sound. A representative may not recommend multiple transactions
+  simply to earn higher fees
 
 #### 3. The Conflict-of-Interest Obligation
 
 Broker-dealers must establish, maintain, and enforce procedures to address conflicts of interest:
 
-- **Identify and mitigate** conflicts that might create incentives to put the firm's interests ahead of the customer's
-- **Identify and disclose** material limitations on offerings (e.g., only offering proprietary funds) and prevent those limitations from disadvantaging customers
-- **Identify and eliminate** sales contests, sales quotas, bonuses, and noncash compensation based on the sale of **specific securities** (e.g., a sales contest for mutual funds from a particular company)
+- **Identify and mitigate** conflicts that might create incentives to put the firm's interests ahead
+  of the customer's
+- **Identify and disclose** material limitations on offerings (e.g., only offering proprietary
+  funds) and prevent those limitations from disadvantaging customers
+- **Identify and eliminate** sales contests, sales quotas, bonuses, and noncash compensation based
+  on the sale of **specific securities** (e.g., a sales contest for mutual funds from a particular
+  company)
 
 <div class="info-box">
   <div class="info-box__title">The Contest Distinction</div>
@@ -556,13 +673,18 @@ Broker-dealers must establish, maintain, and enforce procedures to address confl
 
 #### 4. The Compliance Obligation
 
-Reg BI requires broker-dealers to establish, maintain, and enforce **written policies and procedures** designed to achieve compliance with Reg BI.
+Reg BI requires broker-dealers to establish, maintain, and enforce **written policies and
+procedures** designed to achieve compliance with Reg BI.
 
-Keep in mind the key distinction: these standards apply to broker-dealers. <span class="key-term">Registered investment advisers</span> are already held to a <span class="key-term">fiduciary standard</span> that requires them to always act in their customers' best interest.
+Keep in mind the key distinction: these standards apply to broker-dealers.
+<span class="key-term">Registered investment advisers</span> are already held to a
+<span class="key-term">fiduciary standard</span> that requires them to always act in their
+customers' best interest.
 
 #### Form CRS (Customer Relationship Summary)
 
-Broker-dealers and investment advisers must deliver a summary of their relationship with a customer via <span class="key-term">Form CRS</span>, the Customer Relationship Summary.
+Broker-dealers and investment advisers must deliver a summary of their relationship with a customer
+via <span class="key-term">Form CRS</span>, the Customer Relationship Summary.
 
 **Form CRS must contain information about:**
 
@@ -584,7 +706,8 @@ Broker-dealers and investment advisers must deliver a summary of their relations
 
 - Must be filed with FINRA through the **FINRA Gateway**
 - Changes to Form CRS must be sent to existing customers within **60 days**
-- A current Form CRS must be provided to any customer **upon request** and **posted prominently** on the broker-dealer's website
+- A current Form CRS must be provided to any customer **upon request** and **posted prominently** on
+  the broker-dealer's website
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> The disclosure obligation under Reg BI typically requires MORE information than what appears on Form CRS. Form CRS is a summary; the disclosure obligation is comprehensive. Don't confuse them on the exam.</p>
@@ -626,52 +749,70 @@ If a confirmation contains errors, the firm must send a corrected confirmation.
 If a trade was incorrectly executed:
 
 - The original trade is canceled and rebilled at the correct amount
-- The customer receives **two new confirmations**: one canceling the erroneous trade, one documenting the correction
+- The customer receives **two new confirmations**: one canceling the erroneous trade, one
+  documenting the correction
 - The customer pays the actual execution price
 - All trade cancellations or adjustments must be **approved by a principal**
 
 #### Errors in Client Instructions
 
-If the client gave incorrect instructions, the client is obligated to accept the trade. For example, if a customer wanted to buy 1,000 shares of ABA at market but told the firm to buy 1,000 shares of AAB at market, the customer must pay for the AAB shares. You said it, you own it.
+If the client gave incorrect instructions, the client is obligated to accept the trade. For example,
+if a customer wanted to buy 1,000 shares of ABA at market but told the firm to buy 1,000 shares of
+AAB at market, the customer must pay for the AAB shares. You said it, you own it.
 
 #### Delivery Instructions
 
-Most securities today are issued in <span class="key-term">book-entry form</span>--an electronic record on the books of the broker-dealer or issuer. But some physical certificates still exist. When physical securities are involved, customers have four options for how to hold them:
+Most securities today are issued in <span class="key-term">book-entry form</span>--an electronic
+record on the books of the broker-dealer or issuer. But some physical certificates still exist. When
+physical securities are involved, customers have four options for how to hold them:
 
 **Transfer and Ship** -- Securities are delivered to the customer's address of record.
 
-**Transfer and Hold** -- Securities are registered in the customer's name but held for safekeeping by the brokerage firm. The firm may charge a fee for this service.
+**Transfer and Hold** -- Securities are registered in the customer's name but held for safekeeping
+by the brokerage firm. The firm may charge a fee for this service.
 
-**Hold in Street Name** -- Securities are held in book-entry form and registered in the name of the brokerage firm. The broker-dealer is the <span class="key-term">owner of record</span>; the investor is the <span class="key-term">beneficial owner</span>, retaining all rights of ownership (dividends, voting rights) without being listed directly on the issuer's books.
+**Hold in Street Name** -- Securities are held in book-entry form and registered in the name of the
+brokerage firm. The broker-dealer is the <span class="key-term">owner of record</span>; the investor
+is the <span class="key-term">beneficial owner</span>, retaining all rights of ownership (dividends,
+voting rights) without being listed directly on the issuer's books.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Securities are generally held in street name unless the investor specifically requests otherwise. And ALL securities in a margin account MUST be held in street name--no exceptions.</p>
 </div>
 
-**Direct Registration** -- Securities are registered in the purchaser's own name without a physical certificate. The customer receives statements, dividends, annual reports, proxies, and other mailings directly from the issuer, bypassing the broker entirely.
+**Direct Registration** -- Securities are registered in the purchaser's own name without a physical
+certificate. The customer receives statements, dividends, annual reports, proxies, and other
+mailings directly from the issuer, bypassing the broker entirely.
 
 #### Cash and Mailing Instructions
 
 Customers must instruct their broker-dealer on how to handle income and sales proceeds:
 
 - Interest payments and dividends may be delivered in cash or reinvested
-- Sale proceeds may be delivered directly to the customer, placed in a money market account, or credited to the investor's cash balance until reinvested
+- Sale proceeds may be delivered directly to the customer, placed in a money market account, or
+  credited to the investor's cash balance until reinvested
 
 #### Quarterly Statements
 
-- Customers must receive **quarterly statements** showing all positions at their current market value
+- Customers must receive **quarterly statements** showing all positions at their current market
+  value
 - No statement is required for a quarter with no balance or securities
-- If the customer owns <span class="key-term">penny stocks</span>, statements must be sent **monthly**
+- If the customer owns <span class="key-term">penny stocks</span>, statements must be sent
+  **monthly**
 - Statements can be mailed or sent electronically at the customer's request
-- Firms may charge for paper statements and confirmations, which is why many clients opt for electronic delivery
-- A legend on account statements must direct customers to promptly report inaccuracies or discrepancies
+- Firms may charge for paper statements and confirmations, which is why many clients opt for
+  electronic delivery
+- A legend on account statements must direct customers to promptly report inaccuracies or
+  discrepancies
 - The phone number provided for reporting cannot be the representative's personal number
 
 #### Holding Customer Mail
 
-Customer mail must be sent to the address on the new account form or to a post office box designated by the customer. It **cannot** be directed to the registered representative's office.
+Customer mail must be sent to the address on the new account form or to a post office box designated
+by the customer. It **cannot** be directed to the registered representative's office.
 
-Customers may request in writing that mail be sent to an investment adviser or any individual with power of attorney.
+Customers may request in writing that mail be sent to an investment adviser or any individual with
+power of attorney.
 
 <div class="info-box">
   <div class="info-box__title">Mail Hold Rules</div>
@@ -682,22 +823,32 @@ Customers may request in writing that mail be sent to an investment adviser or a
 
 #### Accounts Are the Property of the Firm
 
-If a registered representative leaves a broker-dealer for any reason, all accounts are considered the **property of the firm**. The broker-dealer will allocate the departing representative's accounts among existing representatives.
+If a registered representative leaves a broker-dealer for any reason, all accounts are considered
+the **property of the firm**. The broker-dealer will allocate the departing representative's
+accounts among existing representatives.
 
-If a representative inherits an account from a retiring or departing representative, the account documents must be updated **before making any transactions** in the account.
+If a representative inherits an account from a retiring or departing representative, the account
+documents must be updated **before making any transactions** in the account.
 
 #### Proxy Materials
 
-When securities are held in <span class="key-term">street name</span>, the firm--not the investor--is listed as the owner on the issuer's books. But the investor remains the <span class="key-term">beneficial owner</span>, retaining all rights of ownership including dividends and voting rights.
+When securities are held in <span class="key-term">street name</span>, the firm--not the
+investor--is listed as the owner on the issuer's books. But the investor remains the
+<span class="key-term">beneficial owner</span>, retaining all rights of ownership including
+dividends and voting rights.
 
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
   <p>The term "street name" comes from Wall Street itself. Because so many broker-dealers were historically located on or near Wall Street, securities registered in the firm's name became known as being held "in the name of the street." The convention persists even though broker-dealers are now scattered across the country.</p>
 </div>
 
-A firm holding securities in street name must forward all issuer communications--annual reports, proxy statements, and other materials--to the beneficial owner or their investment adviser.
+A firm holding securities in street name must forward all issuer communications--annual reports,
+proxy statements, and other materials--to the beneficial owner or their investment adviser.
 
-The SEC requires companies to send a <span class="key-term">proxy statement</span> before every stockholders' meeting. Whenever an issuer delivers proxy materials to a firm and promises to reimburse out-of-pocket expenses, the member firm must promptly forward those materials to the beneficial owner.
+The SEC requires companies to send a <span class="key-term">proxy statement</span> before every
+stockholders' meeting. Whenever an issuer delivers proxy materials to a firm and promises to
+reimburse out-of-pocket expenses, the member firm must promptly forward those materials to the
+beneficial owner.
 
 **Proxy statements provide information on upcoming votes, including:**
 
@@ -713,11 +864,14 @@ The SEC requires companies to send a <span class="key-term">proxy statement</spa
 
 #### Senior Citizen Suitability
 
-FINRA has stated that a customer's age and life stage are both important factors in determining suitability. As investors age, their investment time horizons, goals, risk tolerance, and tax status often change--and liquidity takes on added importance.
+FINRA has stated that a customer's age and life stage are both important factors in determining
+suitability. As investors age, their investment time horizons, goals, risk tolerance, and tax status
+often change--and liquidity takes on added importance.
 
 #### Typically Unsuitable Recommendations for Seniors
 
-FINRA does not prohibit any particular recommendation to a senior citizen if it's genuinely suitable. However, certain types of recommendations raise red flags:
+FINRA does not prohibit any particular recommendation to a senior citizen if it's genuinely
+suitable. However, certain types of recommendations raise red flags:
 
 <div class="info-box">
   <div class="info-box__title">Red Flags for Senior Accounts</div>
@@ -732,21 +886,26 @@ FINRA does not prohibit any particular recommendation to a senior citizen if it'
 
 #### Senior Certifications
 
-FINRA is concerned about representatives using bogus certifications to appear more credible when working with senior citizens.
+FINRA is concerned about representatives using bogus certifications to appear more credible when
+working with senior citizens.
 
 **Prohibited designations** (these are not true professional designations):
+
 - Certified Senior Adviser
 - Certified Financial Gerontologist
 - Senior Specialist
 - Retirement Specialist
 
 **Permitted designations** (independently conferred, requiring rigorous training):
+
 - Certified Financial Planner (CFP)
 - Certified Public Accountant (CPA)
 
 #### Trusted Contact Person
 
-FINRA requires members to make reasonable efforts to obtain the name and contact information of a <span class="key-term">trusted contact person</span> when opening an account. The member must disclose in writing that the firm may contact the trusted contact person to:
+FINRA requires members to make reasonable efforts to obtain the name and contact information of a
+<span class="key-term">trusted contact person</span> when opening an account. The member must
+disclose in writing that the firm may contact the trusted contact person to:
 
 - Disclose information about the client's account to address possible **financial exploitation**
 - Confirm the specifics of the client's current **contact information or health status**
@@ -754,7 +913,9 @@ FINRA requires members to make reasonable efforts to obtain the name and contact
 
 #### Diminished Mental Capacity
 
-Firms must train employees to identify <span class="key-term">diminished mental capacity</span>. FINRA requires an internal process that allows representatives to seek guidance from others on what steps to take.
+Firms must train employees to identify <span class="key-term">diminished mental capacity</span>.
+FINRA requires an internal process that allows representatives to seek guidance from others on what
+steps to take.
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -770,10 +931,13 @@ Firms must train employees to identify <span class="key-term">diminished mental 
 
 #### Financial Exploitation of Specified Adults
 
-FINRA allows firms to place <span class="key-term">temporary holds on disbursements</span> from client accounts when fraud is suspected. The investors FINRA considers particularly susceptible to financial exploitation are:
+FINRA allows firms to place <span class="key-term">temporary holds on disbursements</span> from
+client accounts when fraud is suspected. The investors FINRA considers particularly susceptible to
+financial exploitation are:
 
 - Individuals **aged 65 or older**
-- Individuals **aged 18 or older** with a mental or physical impairment that makes them unable to protect their interests
+- Individuals **aged 18 or older** with a mental or physical impairment that makes them unable to
+  protect their interests
 
 FINRA refers to these individuals as <span class="key-term">specified adults</span>.
 
@@ -794,7 +958,8 @@ FINRA refers to these individuals as <span class="key-term">specified adults</sp
 If a hold is placed, the member must:
 
 - **Document** the reason for the hold
-- **Notify the trusted contact person**, UNLESS the trusted contact is suspected of being involved in the exploitation (in which case, do NOT notify them)
+- **Notify the trusted contact person**, UNLESS the trusted contact is suspected of being involved
+  in the exploitation (in which case, do NOT notify them)
 
 ---
 
@@ -802,11 +967,14 @@ If a hold is placed, the member must:
 
 #### Internal Transfers
 
-If a customer wants their account transferred to another broker at the **same firm**, the branch manager must approve the transfer. No new account form is required.
+If a customer wants their account transferred to another broker at the **same firm**, the branch
+manager must approve the transfer. No new account form is required.
 
 #### External Account Transfers (ACATS)
 
-When a customer wants to transfer to a **different firm**, the process begins with a <span class="key-term">Transfer Initiation Form (TIF)</span>, provided by the firm that will receive the assets--the <span class="key-term">receiving firm</span>.
+When a customer wants to transfer to a **different firm**, the process begins with a
+<span class="key-term">Transfer Initiation Form (TIF)</span>, provided by the firm that will receive
+the assets--the <span class="key-term">receiving firm</span>.
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -826,7 +994,8 @@ When a customer wants to transfer to a **different firm**, the process begins wi
 
 #### Reasons a Carrying Firm May Reject a Transfer
 
-The carrying firm isn't required to accept every transfer request. Common reasons for taking exception include:
+The carrying firm isn't required to accept every transfer request. Common reasons for taking
+exception include:
 
 - The account contains no transferable assets
 - Transfer instructions are incorrect
@@ -836,11 +1005,13 @@ The carrying firm isn't required to accept every transfer request. Common reason
 - Authorization for the transfer is missing or incomplete
 - The customer has already taken possession of the assets (or they're in transit)
 
-However, FINRA prohibits broker-dealers from interfering with a customer's account transfer simply because they don't want to lose the client.
+However, FINRA prohibits broker-dealers from interfering with a customer's account transfer simply
+because they don't want to lose the client.
 
 #### Educational Brochure When Soliciting Account Transfers
 
-<span class="key-term">FINRA Rule 2273</span> addresses situations where a representative moves to a new firm and solicits former customers to follow them.
+<span class="key-term">FINRA Rule 2273</span> addresses situations where a representative moves to a
+new firm and solicits former customers to follow them.
 
 If such a solicitation is made, an **educational brochure** must be provided:
 
@@ -857,7 +1028,10 @@ If such a solicitation is made, an **educational brochure** must be provided:
   </ul>
 </div>
 
-The brochure must be delivered within a **3-month window** following the representative's association with the new firm. The rule also applies if a former customer seeks to transfer assets without being individually contacted--in that case, the customer must receive the brochure with the approved account transfer documentation.
+The brochure must be delivered within a **3-month window** following the representative's
+association with the new firm. The rule also applies if a former customer seeks to transfer assets
+without being individually contacted--in that case, the customer must receive the brochure with the
+approved account transfer documentation.
 
 #### Death of a Customer
 
@@ -872,7 +1046,8 @@ The brochure must be delivered within a **3-month window** following the represe
   <p>All powers of attorney and third-party authorizations, including discretionary authority, are <strong>immediately terminated</strong> upon the customer's death.</p>
 </div>
 
-The executor of the customer's estate will typically transfer assets to an estate account. No changes can be made until proper legal documents are provided:
+The executor of the customer's estate will typically transfer assets to an estate account. No
+changes can be made until proper legal documents are provided:
 
 - **Letters testamentary** (court-issued documents verifying the executor's identity)
 - **Inheritance tax waivers** (required in some states)
@@ -881,7 +1056,9 @@ The executor of the customer's estate will typically transfer assets to an estat
 
 #### Estate Accounts
 
-<span class="key-term">Estate accounts</span> are a type of trust whose purpose is to safeguard a deceased person's assets pending probate. A designated executor creates this temporary account to hold assets while settling the estate.
+<span class="key-term">Estate accounts</span> are a type of trust whose purpose is to safeguard a
+deceased person's assets pending probate. A designated executor creates this temporary account to
+hold assets while settling the estate.
 
 To open an estate account, the executor needs:
 
@@ -890,17 +1067,24 @@ To open an estate account, the executor needs:
 - A list of **bank accounts** held by the deceased
 - Proof of the executor's **legal status**
 
-The firm may also be asked to value the securities in the account--the market value of all securities should be determined as of the **date of death**.
+The firm may also be asked to value the securities in the account--the market value of all
+securities should be determined as of the **date of death**.
 
 **How different account types handle death:**
 
-- In a <span class="key-term">joint tenants in common (JTIC or TIC)</span> account, the executor legally transfers the deceased's proportional share of assets into the estate account
-- In a <span class="key-term">joint tenants with right of survivorship (JTWROS)</span> account, the assets transfer to the surviving owner(s) **without going through probate**
-- Upon the death of a child, assets in a <span class="key-term">Uniform Gifts to Minors Act (UGMA)</span> account are NOT transferred to the parents--they become part of the child's estate
+- In a <span class="key-term">joint tenants in common (JTIC or TIC)</span> account, the executor
+  legally transfers the deceased's proportional share of assets into the estate account
+- In a <span class="key-term">joint tenants with right of survivorship (JTWROS)</span> account, the
+  assets transfer to the surviving owner(s) **without going through probate**
+- Upon the death of a child, assets in a <span class="key-term">Uniform Gifts to Minors Act
+  (UGMA)</span> account are NOT transferred to the parents--they become part of the child's estate
 
 #### Transfer on Death (TOD) Accounts
 
-Most states allow account holders to name a beneficiary to inherit securities without going through probate court. Customers register the securities with the broker using a <span class="key-term">transfer on death (TOD)</span> designation form, naming one or more individuals to receive the securities upon their death.
+Most states allow account holders to name a beneficiary to inherit securities without going through
+probate court. Customers register the securities with the broker using a
+<span class="key-term">transfer on death (TOD)</span> designation form, naming one or more
+individuals to receive the securities upon their death.
 
 TOD beneficiaries typically need only:
 

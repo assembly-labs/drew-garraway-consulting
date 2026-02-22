@@ -45,7 +45,7 @@ const CHAPTER_TO_SECTION = {
     13: { section: 4, weight: 0.09, name: 'Overview of the Regulatory Framework' },
     14: { section: 4, weight: 0.09, name: 'Overview of the Regulatory Framework' },
     15: { section: 4, weight: 0.09, name: 'Overview of the Regulatory Framework' },
-    16: { section: 4, weight: 0.09, name: 'Overview of the Regulatory Framework' }
+    16: { section: 4, weight: 0.09, name: 'Overview of the Regulatory Framework' },
 };
 
 let cardIdCounter = 0;
@@ -124,7 +124,8 @@ function extractBoldDefinitions(content, chapter, sectionNum) {
     const cards = [];
 
     // Pattern 1: "A/An **term** is/are/refers to..."
-    const definitionPattern = /(?:A|An|The)\s+\*\*([^*]+)\*\*\s+(?:is|are|refers to|means)\s+([^.]+(?:\.[^.]+)?)/gi;
+    const definitionPattern =
+        /(?:A|An|The)\s+\*\*([^*]+)\*\*\s+(?:is|are|refers to|means)\s+([^.]+(?:\.[^.]+)?)/gi;
     let match;
 
     while ((match = definitionPattern.exec(content)) !== null) {
@@ -140,7 +141,7 @@ function extractBoldDefinitions(content, chapter, sectionNum) {
                 section: CHAPTER_TO_SECTION[chapter]?.section || 2,
                 weight: CHAPTER_TO_SECTION[chapter]?.weight || 0.44,
                 source: 'auto',
-                tags: ['definition']
+                tags: ['definition'],
             });
         }
     }
@@ -164,7 +165,7 @@ function extractBoldDefinitions(content, chapter, sectionNum) {
                     section: CHAPTER_TO_SECTION[chapter]?.section || 2,
                     weight: CHAPTER_TO_SECTION[chapter]?.weight || 0.44,
                     source: 'auto',
-                    tags: ['definition']
+                    tags: ['definition'],
                 });
             }
         }
@@ -190,13 +191,19 @@ function extractTableCards(content, chapter, sectionNum) {
         if (lines.length < 3) continue;
 
         // Parse headers
-        const headers = lines[0].split('|').map(h => cleanText(h)).filter(h => h);
+        const headers = lines[0]
+            .split('|')
+            .map(h => cleanText(h))
+            .filter(h => h);
 
         if (headers.length < 2) continue;
 
         // Skip separator line (index 1) and parse data rows
         for (let i = 2; i < lines.length; i++) {
-            const cells = lines[i].split('|').map(c => cleanText(c)).filter(c => c);
+            const cells = lines[i]
+                .split('|')
+                .map(c => cleanText(c))
+                .filter(c => c);
 
             if (cells.length >= 2) {
                 // Create cards from table rows
@@ -215,7 +222,7 @@ function extractTableCards(content, chapter, sectionNum) {
                             section: CHAPTER_TO_SECTION[chapter]?.section || 2,
                             weight: CHAPTER_TO_SECTION[chapter]?.weight || 0.44,
                             source: 'auto',
-                            tags: ['comparison']
+                            tags: ['comparison'],
                         });
                     }
                 }
@@ -248,13 +255,14 @@ function extractTestTips(content, chapter, sectionNum) {
                 section: CHAPTER_TO_SECTION[chapter]?.section || 2,
                 weight: CHAPTER_TO_SECTION[chapter]?.weight || 0.44,
                 source: 'auto',
-                tags: ['exam-tip']
+                tags: ['exam-tip'],
             });
         }
     }
 
     // HTML exam-focus divs
-    const examFocusPattern = /<div class="exam-focus">[^<]*<[^>]*>[^<]*<\/[^>]*>\s*<p>([^<]+)<\/p>/gi;
+    const examFocusPattern =
+        /<div class="exam-focus">[^<]*<[^>]*>[^<]*<\/[^>]*>\s*<p>([^<]+)<\/p>/gi;
 
     while ((match = examFocusPattern.exec(content)) !== null) {
         const focus = cleanText(match[1]);
@@ -268,7 +276,7 @@ function extractTestTips(content, chapter, sectionNum) {
                 section: CHAPTER_TO_SECTION[chapter]?.section || 2,
                 weight: CHAPTER_TO_SECTION[chapter]?.weight || 0.44,
                 source: 'auto',
-                tags: ['exam-focus']
+                tags: ['exam-focus'],
             });
         }
     }
@@ -303,7 +311,7 @@ function extractKeyTerms(content, chapter, sectionNum) {
                     section: CHAPTER_TO_SECTION[chapter]?.section || 2,
                     weight: CHAPTER_TO_SECTION[chapter]?.weight || 0.44,
                     source: 'auto',
-                    tags: ['key-term']
+                    tags: ['key-term'],
                 });
             }
         }
@@ -322,7 +330,9 @@ function extractKeyTerms(content, chapter, sectionNum) {
             // Try to find a definition nearby
             const termIdx = content.indexOf(match[0]);
             const surroundingText = content.substring(termIdx, termIdx + 300);
-            const defMatch = surroundingText.match(new RegExp(`${term}[^.]*(?:is|are|means|refers to)\\s+([^.]+)`, 'i'));
+            const defMatch = surroundingText.match(
+                new RegExp(`${term}[^.]*(?:is|are|means|refers to)\\s+([^.]+)`, 'i')
+            );
 
             if (defMatch) {
                 const definition = cleanText(defMatch[1]);
@@ -335,7 +345,7 @@ function extractKeyTerms(content, chapter, sectionNum) {
                         section: CHAPTER_TO_SECTION[chapter]?.section || 2,
                         weight: CHAPTER_TO_SECTION[chapter]?.weight || 0.44,
                         source: 'auto',
-                        tags: ['key-term']
+                        tags: ['key-term'],
                     });
                 }
             }
@@ -352,13 +362,15 @@ function extractListItems(content, chapter, sectionNum) {
     const cards = [];
 
     // Find headers followed by bullet lists about characteristics/features
-    const listPattern = /###?\s*(?:Characteristics|Features|Key Points|Important Points)[^\n]*\n\n?((?:- [^\n]+\n?)+)/gi;
+    const listPattern =
+        /###?\s*(?:Characteristics|Features|Key Points|Important Points)[^\n]*\n\n?((?:- [^\n]+\n?)+)/gi;
     let match;
 
     while ((match = listPattern.exec(content)) !== null) {
         const headerMatch = match[0].match(/###?\s*([^\n]+)/);
         const header = headerMatch ? cleanText(headerMatch[1]) : 'Key Points';
-        const items = match[1].split('\n')
+        const items = match[1]
+            .split('\n')
             .map(line => line.replace(/^-\s*/, '').trim())
             .filter(line => line.length > 0);
 
@@ -371,7 +383,7 @@ function extractListItems(content, chapter, sectionNum) {
                 section: CHAPTER_TO_SECTION[chapter]?.section || 2,
                 weight: CHAPTER_TO_SECTION[chapter]?.weight || 0.44,
                 source: 'auto',
-                tags: ['list']
+                tags: ['list'],
             });
         }
     }
@@ -404,8 +416,11 @@ function extractAcronyms(content, chapter, sectionNum) {
             // Common patterns for acronym definitions
             const patterns = [
                 new RegExp(`([A-Z][a-z]+(?:\\s+[A-Za-z]+){1,5})\\s*\\(${acronym}\\)`, 'i'),
-                new RegExp(`\\*\\*${acronym}\\*\\*[^a-zA-Z]*([A-Z][a-z]+(?:\\s+[A-Za-z]+){1,5})`, 'i'),
-                new RegExp(`${acronym}\\s*[-–:]\\s*([A-Z][a-z]+(?:\\s+[A-Za-z]+){1,5})`, 'i')
+                new RegExp(
+                    `\\*\\*${acronym}\\*\\*[^a-zA-Z]*([A-Z][a-z]+(?:\\s+[A-Za-z]+){1,5})`,
+                    'i'
+                ),
+                new RegExp(`${acronym}\\s*[-–:]\\s*([A-Z][a-z]+(?:\\s+[A-Za-z]+){1,5})`, 'i'),
             ];
 
             for (const pattern of patterns) {
@@ -421,7 +436,7 @@ function extractAcronyms(content, chapter, sectionNum) {
                             section: CHAPTER_TO_SECTION[chapter]?.section || 2,
                             weight: CHAPTER_TO_SECTION[chapter]?.weight || 0.44,
                             source: 'auto',
-                            tags: ['acronym']
+                            tags: ['acronym'],
                         });
                         break;
                     }
@@ -449,7 +464,7 @@ function processMarkdownFile(filePath, chapter, sectionNum) {
         ...extractTestTips(mainContent, chapter, sectionNum),
         ...extractKeyTerms(mainContent, chapter, sectionNum),
         ...extractListItems(mainContent, chapter, sectionNum),
-        ...extractAcronyms(mainContent, chapter, sectionNum)
+        ...extractAcronyms(mainContent, chapter, sectionNum),
     ];
 
     return cards;
@@ -507,11 +522,12 @@ function main() {
     const stats = {
         byChapter: {},
         bySection: { 1: 0, 2: 0, 3: 0, 4: 0 },
-        byTag: {}
+        byTag: {},
     };
 
     // Find all chapter directories
-    const chapterDirs = fs.readdirSync(CONTENT_DIR)
+    const chapterDirs = fs
+        .readdirSync(CONTENT_DIR)
         .filter(d => d.startsWith('chapter-'))
         .sort();
 
@@ -528,7 +544,8 @@ function main() {
         stats.byChapter[chapterNum] = 0;
 
         // Find all section markdown files
-        const sectionFiles = fs.readdirSync(chapterPath)
+        const sectionFiles = fs
+            .readdirSync(chapterPath)
             .filter(f => f.endsWith('.md') && f.startsWith('section-'))
             .sort();
 
@@ -563,7 +580,7 @@ function main() {
     const output = {
         generated: new Date().toISOString(),
         totalCards: filteredCards.length,
-        cards: filteredCards
+        cards: filteredCards,
     };
 
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));

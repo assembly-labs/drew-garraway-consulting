@@ -34,7 +34,7 @@ const TRACKED_ASSETS = [
     'assets/css/sie-chapter.css',
     'assets/css/sie-navigation.css',
     'assets/js/sie-navigation-config.js',
-    'assets/js/sie-navigation-component.js'
+    'assets/js/sie-navigation-component.js',
 ];
 
 // Patterns to match in HTML files
@@ -101,8 +101,8 @@ function updateHtmlFile(htmlPath, hashes, dryRun = false) {
     // Update CSS references
     content = content.replace(CSS_PATTERN, (match, filename, existingVersion) => {
         // Try to match by full path first, then by basename for backwards compatibility
-        const matchedAsset = TRACKED_ASSETS.find(asset =>
-            filename === asset || filename.endsWith(asset) || asset.endsWith(filename)
+        const matchedAsset = TRACKED_ASSETS.find(
+            asset => filename === asset || filename.endsWith(asset) || asset.endsWith(filename)
         );
         if (matchedAsset && hashes[matchedAsset]) {
             const newRef = `href="${filename}?v=${hashes[matchedAsset]}"`;
@@ -122,8 +122,8 @@ function updateHtmlFile(htmlPath, hashes, dryRun = false) {
         }
 
         // Try to match by full path first, then by basename for backwards compatibility
-        const matchedAsset = TRACKED_ASSETS.find(asset =>
-            filename === asset || filename.endsWith(asset) || asset.endsWith(filename)
+        const matchedAsset = TRACKED_ASSETS.find(
+            asset => filename === asset || filename.endsWith(asset) || asset.endsWith(filename)
         );
         if (matchedAsset && hashes[matchedAsset]) {
             const newRef = `src="${filename}?v=${hashes[matchedAsset]}"`;

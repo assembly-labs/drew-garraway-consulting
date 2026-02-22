@@ -1,8 +1,8 @@
 ---
 chapter: 6
 section: 3
-title: "Buying and Selling Fund Shares"
-description: "Understanding NAV, POP, pricing mechanics, breakpoints, and sales discounts"
+title: 'Buying and Selling Fund Shares'
+description: 'Understanding NAV, POP, pricing mechanics, breakpoints, and sales discounts'
 topics:
   - NAV and POP Pricing
   - Breakpoints
@@ -17,13 +17,17 @@ last_updated: 2024-12-12
 
 ## Introduction
 
-The mechanics of buying and selling mutual fund shares differ fundamentally from trading stocks. There's no bid-ask spread, no negotiating prices, and no exchange floor. Instead, there's a daily calculation, a formula, and a pricing system designed to treat all investors fairly.
+The mechanics of buying and selling mutual fund shares differ fundamentally from trading stocks.
+There's no bid-ask spread, no negotiating prices, and no exchange floor. Instead, there's a daily
+calculation, a formula, and a pricing system designed to treat all investors fairly.
 
-Understanding how fund pricing works—including the various discounts available—is essential for both the SIE exam and for properly serving clients.
+Understanding how fund pricing works—including the various discounts available—is essential for both
+the SIE exam and for properly serving clients.
 
 ## Learning Objectives
 
 By the end of this section, you'll be able to:
+
 - Calculate NAV and understand the POP formula
 - Explain the difference between open-end and closed-end fund pricing
 - Apply breakpoint schedules to client purchases
@@ -40,11 +44,13 @@ By the end of this section, you'll be able to:
 
 ### Closed-End Funds
 
-One-time stock issuance. After the IPO, shares trade continuously throughout the day on an exchange, just like regular stocks.
+One-time stock issuance. After the IPO, shares trade continuously throughout the day on an exchange,
+just like regular stocks.
 
 ### Open-End Funds
 
-Continuous issuance of new shares and <span class="key-term">redemption</span> of old ones. Every purchase creates shares; every sale destroys them.
+Continuous issuance of new shares and <span class="key-term">redemption</span> of old ones. Every
+purchase creates shares; every sale destroys them.
 
 ### The Prospectus Question
 
@@ -75,10 +81,10 @@ Continuous issuance of new shares and <span class="key-term">redemption</span> o
 
 This is a common exam topic:
 
-| Fund Type | Prospectus Delivery |
-|-----------|---------------------|
-| **Closed-End Fund** | No longer required once securities trade in secondary market |
-| **Open-End Fund** | Required upon every purchase—it's a continuous primary offering |
+| Fund Type           | Prospectus Delivery                                             |
+| ------------------- | --------------------------------------------------------------- |
+| **Closed-End Fund** | No longer required once securities trade in secondary market    |
+| **Open-End Fund**   | Required upon every purchase—it's a continuous primary offering |
 
 <div class="info-box">
   <div class="info-box__title">Why the Difference?</div>
@@ -148,8 +154,8 @@ POP = NAV + Sales Charge (SC)
 
 **Example:**
 
-| NAV | POP |
-|-----|-----|
+| NAV   | POP    |
+| ----- | ------ |
 | $9.15 | $10.00 |
 
 ```
@@ -202,12 +208,12 @@ Sales Charge = (POP - NAV) / POP
   </table>
 </div>
 
-| Feature | Open-End Fund | Closed-End Fund |
-|---------|---------------|-----------------|
-| **Buy at** | POP (NAV + sales charge) | Market price + commission |
-| **Sell at** | NAV | Market price - commission |
-| **Pricing** | Forward pricing (typically 4:00 PM) | Continuous throughout the day |
-| **Premium/Discount** | Always trades at NAV | Can trade at premium or discount |
+| Feature              | Open-End Fund                       | Closed-End Fund                  |
+| -------------------- | ----------------------------------- | -------------------------------- |
+| **Buy at**           | POP (NAV + sales charge)            | Market price + commission        |
+| **Sell at**          | NAV                                 | Market price - commission        |
+| **Pricing**          | Forward pricing (typically 4:00 PM) | Continuous throughout the day    |
+| **Premium/Discount** | Always trades at NAV                | Can trade at premium or discount |
 
 ### Forward Pricing
 
@@ -216,7 +222,9 @@ Sales Charge = (POP - NAV) / POP
   <p><strong>Forward pricing</strong> means your order is filled at the NEXT calculated NAV. Order at 2:00 PM? You get the 4:00 PM price. This applies ONLY to open-end (mutual) funds.</p>
 </div>
 
-<span class="key-term">Forward pricing</span> means your order is filled at the next calculated NAV. If you place an order at 2:00 PM, you get the 4:00 PM price. This prevents arbitrage that could harm other shareholders.
+<span class="key-term">Forward pricing</span> means your order is filled at the next calculated NAV.
+If you place an order at 2:00 PM, you get the 4:00 PM price. This prevents arbitrage that could harm
+other shareholders.
 
 ---
 
@@ -224,19 +232,21 @@ Sales Charge = (POP - NAV) / POP
 
 ### Why Breakpoints Exist
 
-To charge the maximum 8½% sales charge, FINRA requires funds to offer volume discounts called <span class="key-term">breakpoints</span>.
+To charge the maximum 8½% sales charge, FINRA requires funds to offer volume discounts called
+<span class="key-term">breakpoints</span>.
 
 ### Sample Breakpoint Schedule
 
-| Purchase Amount | Sales Charge |
-|-----------------|--------------|
-| $0 – $10,000 | 8½% |
-| >$10,000 – $20,000 | 7½% |
-| >$20,001 – $45,000 | 6½% |
-| >$45,001 – $65,000 | 5½% |
-| >$65,001+ | 5% |
+| Purchase Amount    | Sales Charge |
+| ------------------ | ------------ |
+| $0 – $10,000       | 8½%          |
+| >$10,000 – $20,000 | 7½%          |
+| >$20,001 – $45,000 | 6½%          |
+| >$45,001 – $65,000 | 5½%          |
+| >$65,001+          | 5%           |
 
-The exact breakpoints vary by fund—this is just an example. The principle is universal: buy more, pay less.
+The exact breakpoints vary by fund—this is just an example. The principle is universal: buy more,
+pay less.
 
 <div class="info-box">
   <div class="info-box__title">Important Exception</div>
@@ -257,7 +267,8 @@ A <span class="key-term">Letter of Intent</span> lets you:
 
 ### If You Don't Complete the LOI
 
-**No penalty**—your sales charge is simply recalculated at the actual level invested. You'll owe the difference between what you paid and what you should have paid.
+**No penalty**—your sales charge is simply recalculated at the actual level invested. You'll owe the
+difference between what you paid and what you should have paid.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Asset appreciation and reinvested dividends do NOT count toward your LOI amount. Only new money counts.</p>
@@ -267,7 +278,8 @@ A <span class="key-term">Letter of Intent</span> lets you:
 
 ## Rights of Accumulation
 
-For subsequent purchases, <span class="key-term">Rights of Accumulation</span> provide breakpoint pricing based on:
+For subsequent purchases, <span class="key-term">Rights of Accumulation</span> provide breakpoint
+pricing based on:
 
 - **Current market value** of existing holdings (including appreciation and reinvested dividends)
 - Combined purchases across a **fund family**
@@ -275,12 +287,12 @@ For subsequent purchases, <span class="key-term">Rights of Accumulation</span> p
 
 ### LOI vs. Rights of Accumulation
 
-| Feature | Letter of Intent | Rights of Accumulation |
-|---------|------------------|----------------------|
-| **Looks at** | Future intended purchases | Current accumulated value |
-| **Time period** | 13 months | Ongoing |
-| **Appreciation counts?** | No | Yes |
-| **Dividends count?** | No | Yes |
+| Feature                  | Letter of Intent          | Rights of Accumulation    |
+| ------------------------ | ------------------------- | ------------------------- |
+| **Looks at**             | Future intended purchases | Current accumulated value |
+| **Time period**          | 13 months                 | Ongoing                   |
+| **Appreciation counts?** | No                        | Yes                       |
+| **Dividends count?**     | No                        | Yes                       |
 
 ---
 
@@ -288,11 +300,13 @@ For subsequent purchases, <span class="key-term">Rights of Accumulation</span> p
 
 ### Dividend Reinvestment at NAV
 
-Any fund sold by a FINRA member must offer dividend reinvestment at NAV—no sales charge. The dividend is still taxable, but you don't pay to reinvest it.
+Any fund sold by a FINRA member must offer dividend reinvestment at NAV—no sales charge. The
+dividend is still taxable, but you don't pay to reinvest it.
 
 ### Switching Within a Fund Family
 
-Most fund families allow exchanges between funds without additional sales charges. Moving from ABC Growth to ABC Bond? Usually free.
+Most fund families allow exchanges between funds without additional sales charges. Moving from ABC
+Growth to ABC Bond? Usually free.
 
 <div class="info-box">
   <div class="info-box__title">Tax Warning</div>
@@ -326,18 +340,24 @@ Most fund families allow exchanges between funds without additional sales charge
 
 ## Summary
 
-Mutual fund pricing centers on NAV (calculated daily) and POP (NAV plus sales charge). Open-end funds use forward pricing and always trade at NAV, while closed-end funds trade continuously and can trade at premiums or discounts.
+Mutual fund pricing centers on NAV (calculated daily) and POP (NAV plus sales charge). Open-end
+funds use forward pricing and always trade at NAV, while closed-end funds trade continuously and can
+trade at premiums or discounts.
 
-Breakpoints, Letters of Intent, and Rights of Accumulation provide ways to reduce sales charges for larger or ongoing investments. Understanding these mechanisms is essential for both the exam and client service.
+Breakpoints, Letters of Intent, and Rights of Accumulation provide ways to reduce sales charges for
+larger or ongoing investments. Understanding these mechanisms is essential for both the exam and
+client service.
 
 ### Quick Reference
 
 **Key Formulas:**
+
 - NAV = (Total Assets - Total Liabilities) / Shares Outstanding
 - POP = NAV + Sales Charge
 - Sales Charge % = (POP - NAV) / POP
 
 **Important Numbers:**
+
 - Maximum sales charge: 8.5% of POP
 - LOI backdate: 90 days
 - LOI completion: 13 months

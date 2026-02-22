@@ -1,18 +1,29 @@
 # Chapter 17: Investment Analysis
 
-*Series 7 Exam Weight: ~3-5% of exam*
+_Series 7 Exam Weight: ~3-5% of exam_
 
 ---
 
-In 1934, a pair of Columbia Business School professors published a 725-page book called *Security Analysis*. Benjamin Graham and David Dodd argued that stocks had an intrinsic value that could be calculated by examining a company's financial statements—and that the market's mood swings created opportunities for disciplined investors who did their homework.
+In 1934, a pair of Columbia Business School professors published a 725-page book called _Security
+Analysis_. Benjamin Graham and David Dodd argued that stocks had an intrinsic value that could be
+calculated by examining a company's financial statements—and that the market's mood swings created
+opportunities for disciplined investors who did their homework.
 
-Around the same time, a different school of thought was taking shape. Charles Dow—founder of the Dow Jones Industrial Average and *The Wall Street Journal*—had already pioneered the idea that stock price patterns themselves contained useful information. His followers believed you didn't need to read a balance sheet if you could read a chart.
+Around the same time, a different school of thought was taking shape. Charles Dow—founder of the Dow
+Jones Industrial Average and _The Wall Street Journal_—had already pioneered the idea that stock
+price patterns themselves contained useful information. His followers believed you didn't need to
+read a balance sheet if you could read a chart.
 
-These two camps—fundamental analysis and technical analysis—have been arguing ever since. The Series 7 expects you to understand both, plus a third approach: portfolio analysis, which focuses not on picking individual securities but on building the right combination of them.
+These two camps—fundamental analysis and technical analysis—have been arguing ever since. The Series
+7 expects you to understand both, plus a third approach: portfolio analysis, which focuses not on
+picking individual securities but on building the right combination of them.
 
 ### Why This Chapter Matters
 
-This chapter ties together everything you've studied about individual securities. The question is no longer "what is this product?"—it's "should a client buy it, and how does it fit into their portfolio?" That shift from product knowledge to investment reasoning is exactly where the Series 7 lives.
+This chapter ties together everything you've studied about individual securities. The question is no
+longer "what is this product?"—it's "should a client buy it, and how does it fit into their
+portfolio?" That shift from product knowledge to investment reasoning is exactly where the Series 7
+lives.
 
 ---
 
@@ -23,31 +34,43 @@ This chapter ties together everything you've studied about individual securities
   <p>Charles Dow never actually called his ideas "technical analysis." He wrote a series of editorials in <em>The Wall Street Journal</em> between 1900 and 1902 observing that stock prices moved in identifiable trends. After his death, followers compiled his observations into what became known as "Dow Theory"—the grandfather of every chart pattern, moving average, and trend line used today.</p>
 </div>
 
-<span class="key-term">Technical analysis</span> focuses on price trends to gauge where the market or an individual security may be heading. Technical analysts—sometimes called "chartists"—believe that all relevant information is already reflected in the price, so studying price movements is the most efficient way to make investment decisions.
+<span class="key-term">Technical analysis</span> focuses on price trends to gauge where the market
+or an individual security may be heading. Technical analysts—sometimes called "chartists"—believe
+that all relevant information is already reflected in the price, so studying price movements is the
+most efficient way to make investment decisions.
 
-The core assumption: history tends to repeat itself. If a stock has bounced off a certain price three times before, it might do so again.
+The core assumption: history tends to repeat itself. If a stock has bounced off a certain price
+three times before, it might do so again.
 
 ---
 
 ### The Trend Line
 
-A <span class="key-term">trend line</span> is the most basic tool in technical analysis. It connects a series of prices over time to reveal the direction of movement.
+A <span class="key-term">trend line</span> is the most basic tool in technical analysis. It connects
+a series of prices over time to reveal the direction of movement.
 
-- An <span class="key-term">uptrend</span> shows prices making higher highs and higher lows—the line slopes up from left to right
-- A <span class="key-term">downtrend</span> shows prices making lower highs and lower lows—the line slopes down
+- An <span class="key-term">uptrend</span> shows prices making higher highs and higher lows—the line
+  slopes up from left to right
+- A <span class="key-term">downtrend</span> shows prices making lower highs and lower lows—the line
+  slopes down
 
-The simplest question a technical analyst asks: "Is the trend your friend?" If a security is in an established uptrend, technicians expect it to continue until something breaks the pattern.
+The simplest question a technical analyst asks: "Is the trend your friend?" If a security is in an
+established uptrend, technicians expect it to continue until something breaks the pattern.
 
 ---
 
 ### Seasons (Cyclical Patterns)
 
-Patterns of up-and-down price movements that follow a repeating cycle are known as <span class="key-term">seasons</span> or <span class="key-term">seasonal trends</span>. These are recurring patterns that technical analysts use to time their trades.
+Patterns of up-and-down price movements that follow a repeating cycle are known as
+<span class="key-term">seasons</span> or <span class="key-term">seasonal trends</span>. These are
+recurring patterns that technical analysts use to time their trades.
 
 Two classic seasonal chart shapes:
 
-- **Saucer** — a U-shaped pattern where prices gradually decline, bottom out, and then gradually rise. This is considered a bullish reversal pattern.
-- **Inverted Saucer** — an upside-down U where prices rise, top out, and then decline. This is a bearish reversal pattern.
+- **Saucer** — a U-shaped pattern where prices gradually decline, bottom out, and then gradually
+  rise. This is considered a bullish reversal pattern.
+- **Inverted Saucer** — an upside-down U where prices rise, top out, and then decline. This is a
+  bearish reversal pattern.
 
 ---
 
@@ -60,11 +83,16 @@ Two classic seasonal chart shapes:
   A <strong>breakout</strong> occurs when price pushes through either level.</p>
 </div>
 
-A <span class="key-term">resistance level</span> is a price point where a security repeatedly fails to move higher. Think of it as a ceiling that the price keeps bumping against. Sellers tend to emerge at this level, pushing the price back down.
+A <span class="key-term">resistance level</span> is a price point where a security repeatedly fails
+to move higher. Think of it as a ceiling that the price keeps bumping against. Sellers tend to
+emerge at this level, pushing the price back down.
 
-A <span class="key-term">support level</span> is the opposite—a price floor where buyers consistently step in, preventing the price from falling further.
+A <span class="key-term">support level</span> is the opposite—a price floor where buyers
+consistently step in, preventing the price from falling further.
 
-When the price finally pushes through resistance, that's a <span class="key-term">breakout</span>—generally considered bullish because the old ceiling has been overcome. If the price breaks below support, the signal is bearish.
+When the price finally pushes through resistance, that's a
+<span class="key-term">breakout</span>—generally considered bullish because the old ceiling has been
+overcome. If the price breaks below support, the signal is bearish.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Once resistance is broken, it often becomes the new support level (and vice versa). This concept of "role reversal" shows up on exam questions.</p>
@@ -74,34 +102,45 @@ When the price finally pushes through resistance, that's a <span class="key-term
 
 ### Consolidating Market
 
-A market that moves within a narrow range—bouncing between support and resistance without making significant new highs or lows—is said to be <span class="key-term">consolidating</span>. This is also called <span class="key-term">sideways movement</span>.
+A market that moves within a narrow range—bouncing between support and resistance without making
+significant new highs or lows—is said to be <span class="key-term">consolidating</span>. This is
+also called <span class="key-term">sideways movement</span>.
 
-Consolidation often precedes a significant move in one direction. Technicians watch consolidating markets closely because the eventual breakout (up or down) can be powerful.
+Consolidation often precedes a significant move in one direction. Technicians watch consolidating
+markets closely because the eventual breakout (up or down) can be powerful.
 
 ---
 
 ### Head and Shoulders
 
-The <span class="key-term">head and shoulders</span> pattern is one of the most recognized reversal patterns in technical analysis. It signals a potential shift from bullish to bearish.
+The <span class="key-term">head and shoulders</span> pattern is one of the most recognized reversal
+patterns in technical analysis. It signals a potential shift from bullish to bearish.
 
 The pattern forms in three peaks:
+
 1. **Left Shoulder** — price rises, then pulls back
 2. **Head** — price rises higher than the first peak, then pulls back again
 3. **Right Shoulder** — price rises to roughly the same level as the left shoulder, then declines
 
-When the price drops below the "neckline" (the support level connecting the two pullback lows), the pattern is confirmed. Technicians expect further decline.
+When the price drops below the "neckline" (the support level connecting the two pullback lows), the
+pattern is confirmed. Technicians expect further decline.
 
 ---
 
 ### Reverse Head and Shoulders
 
-The mirror image. If the market has been trending downward and forms a <span class="key-term">reverse head and shoulders</span> (three troughs with the middle one deepest), it signals a potential bullish reversal. The pattern is confirmed when price breaks above the neckline.
+The mirror image. If the market has been trending downward and forms a
+<span class="key-term">reverse head and shoulders</span> (three troughs with the middle one
+deepest), it signals a potential bullish reversal. The pattern is confirmed when price breaks above
+the neckline.
 
 ---
 
 ### Moving Average
 
-A <span class="key-term">moving average</span> smooths out short-term price fluctuations to reveal longer-term trends. It's calculated by averaging a security's closing prices over a set number of days.
+A <span class="key-term">moving average</span> smooths out short-term price fluctuations to reveal
+longer-term trends. It's calculated by averaging a security's closing prices over a set number of
+days.
 
 <div class="info-box">
   <div class="info-box__title">Real-World Example</div>
@@ -112,20 +151,29 @@ A <span class="key-term">moving average</span> smooths out short-term price fluc
 
 ### Market Strength Indicators
 
-Technical analysts don't just study individual stocks—they study the health of the market itself. Several indicators help gauge market strength:
+Technical analysts don't just study individual stocks—they study the health of the market itself.
+Several indicators help gauge market strength:
 
 #### Short Interest Ratio
 
-The <span class="key-term">short interest ratio</span> measures how many shares have been sold short relative to average daily trading volume.
+The <span class="key-term">short interest ratio</span> measures how many shares have been sold short
+relative to average daily trading volume.
 
-Here's the contrarian logic: a high short interest ratio is actually considered <strong>bullish</strong>. Why? Because every short seller eventually has to buy shares to close their position. All those short positions represent future buying pressure—a "short squeeze" waiting to happen.
+Here's the contrarian logic: a high short interest ratio is actually considered
+<strong>bullish</strong>. Why? Because every short seller eventually has to buy shares to close
+their position. All those short positions represent future buying pressure—a "short squeeze" waiting
+to happen.
 
 #### Odd Lot Theory
 
-This is a classic <span class="key-term">contrarian indicator</span>. The theory holds that small investors—those buying fewer than 100 shares (an "odd lot")—tend to be wrong at market turning points.
+This is a classic <span class="key-term">contrarian indicator</span>. The theory holds that small
+investors—those buying fewer than 100 shares (an "odd lot")—tend to be wrong at market turning
+points.
 
-- If odd lot purchases increase → contrarian view: <strong>bearish</strong> (small investors are buying near the top)
-- If odd lot sales increase → contrarian view: <strong>bullish</strong> (small investors are selling near the bottom)
+- If odd lot purchases increase → contrarian view: <strong>bearish</strong> (small investors are
+  buying near the top)
+- If odd lot sales increase → contrarian view: <strong>bullish</strong> (small investors are selling
+  near the bottom)
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> The odd lot theory and short interest ratio are both contrarian indicators. The exam loves to test whether you understand that these indicators say the <em>opposite</em> of what you might initially expect.</p>
@@ -133,7 +181,9 @@ This is a classic <span class="key-term">contrarian indicator</span>. The theory
 
 #### Advance/Decline Index
 
-The <span class="key-term">advance/decline index</span> measures market breadth—how many stocks are participating in a market move. Each day, the number of advancing stocks minus declining stocks is calculated and added to a running cumulative total.
+The <span class="key-term">advance/decline index</span> measures market breadth—how many stocks are
+participating in a market move. Each day, the number of advancing stocks minus declining stocks is
+calculated and added to a running cumulative total.
 
 <div class="info-box">
   <div class="info-box__title">Real-World Example</div>
@@ -148,7 +198,10 @@ The <span class="key-term">advance/decline index</span> measures market breadth�
 
 #### Put/Call Ratio
 
-The <span class="key-term">put/call ratio</span> compares the volume of put options purchased to call options purchased. A high ratio (more puts than calls) means bearish sentiment prevails among traders. Contrarian technicians interpret this as a <strong>bullish</strong> signal—when everyone is pessimistic, the market is more likely to go up.
+The <span class="key-term">put/call ratio</span> compares the volume of put options purchased to
+call options purchased. A high ratio (more puts than calls) means bearish sentiment prevails among
+traders. Contrarian technicians interpret this as a <strong>bullish</strong> signal—when everyone is
+pessimistic, the market is more likely to go up.
 
 ---
 
@@ -159,13 +212,18 @@ The <span class="key-term">put/call ratio</span> compares the volume of put opti
   <p>When Benjamin Graham published <em>The Intelligent Investor</em> in 1949, he introduced a concept he called "Mr. Market"—an imaginary business partner who shows up every day offering to buy your shares or sell you his at a different price. Sometimes Mr. Market is euphoric and overpays. Sometimes he's depressed and offers bargains. Graham's insight was that you should take advantage of Mr. Market's mood swings, not be guided by them. His most famous student? Warren Buffett, who has called the book "by far the best book on investing ever written."</p>
 </div>
 
-<span class="key-term">Fundamental analysis</span> examines a company's financial statements to determine its intrinsic value. Where technical analysts study price charts, fundamental analysts study income statements and balance sheets. The goal: figure out whether a stock's current market price is justified by the company's actual financial health.
+<span class="key-term">Fundamental analysis</span> examines a company's financial statements to
+determine its intrinsic value. Where technical analysts study price charts, fundamental analysts
+study income statements and balance sheets. The goal: figure out whether a stock's current market
+price is justified by the company's actual financial health.
 
 ---
 
 ### The Income Statement
 
-The <span class="key-term">income statement</span> shows a company's financial performance over a period of time—typically a quarter or a year. Think of it as a movie, not a photograph: it captures what happened between two dates.
+The <span class="key-term">income statement</span> shows a company's financial performance over a
+period of time—typically a quarter or a year. Think of it as a movie, not a photograph: it captures
+what happened between two dates.
 
 The flow works from top to bottom:
 
@@ -186,24 +244,33 @@ The flow works from top to bottom:
 
 #### Key Income Statement Terms
 
-<span class="key-term">EBIT</span> (Earnings Before Interest and Taxes) — also called operating income. This shows how well the company's core business performs before financing costs and taxes enter the picture. It's the purest measure of operational profitability.
+<span class="key-term">EBIT</span> (Earnings Before Interest and Taxes) — also called operating
+income. This shows how well the company's core business performs before financing costs and taxes
+enter the picture. It's the purest measure of operational profitability.
 
-<span class="key-term">EBITDA</span> — adds depreciation and amortization back to EBIT. Useful for comparing companies with different capital structures and depreciation methods, because it strips out non-cash charges.
+<span class="key-term">EBITDA</span> — adds depreciation and amortization back to EBIT. Useful for
+comparing companies with different capital structures and depreciation methods, because it strips
+out non-cash charges.
 
-<span class="key-term">EBT</span> (Earnings Before Taxes) — EBIT minus interest expense. This shows profitability after all expenses except taxes.
+<span class="key-term">EBT</span> (Earnings Before Taxes) — EBIT minus interest expense. This shows
+profitability after all expenses except taxes.
 
-<span class="key-term">Net Income</span> — the "bottom line." This is what's left after all expenses, interest, and taxes. Net income is what's available to shareholders.
+<span class="key-term">Net Income</span> — the "bottom line." This is what's left after all
+expenses, interest, and taxes. Net income is what's available to shareholders.
 
 #### Earnings Per Share
 
-<span class="key-term">Earnings Per Share (EPS)</span> is arguably the single most watched number in all of corporate finance.
+<span class="key-term">Earnings Per Share (EPS)</span> is arguably the single most watched number in
+all of corporate finance.
 
 <div class="calculation-box">
   <div class="calculation-box__label">Formula</div>
   <div class="calculation-box__formula">Basic EPS = Net Income ÷ Shares Outstanding</div>
 </div>
 
-If a company has convertible bonds, stock options, or warrants that could create additional shares, it must also report <span class="key-term">fully diluted EPS</span>—which assumes all convertible securities have been converted to common stock.
+If a company has convertible bonds, stock options, or warrants that could create additional shares,
+it must also report <span class="key-term">fully diluted EPS</span>—which assumes all convertible
+securities have been converted to common stock.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Fully diluted EPS will always be <em>equal to or lower than</em> basic EPS, never higher. More shares in the denominator = smaller number. The exam tests this concept frequently.</p>
@@ -213,7 +280,9 @@ If a company has convertible bonds, stock options, or warrants that could create
 
 ### The Balance Sheet
 
-The <span class="key-term">balance sheet</span> shows a company's financial position at a specific point in time—a snapshot, not a movie. It answers one fundamental question: what does this company own, what does it owe, and what's left for shareholders?
+The <span class="key-term">balance sheet</span> shows a company's financial position at a specific
+point in time—a snapshot, not a movie. It answers one fundamental question: what does this company
+own, what does it owe, and what's left for shareholders?
 
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -222,15 +291,20 @@ The <span class="key-term">balance sheet</span> shows a company's financial posi
 </div>
 
 **Assets** (what the company owns):
-- <span class="key-term">Current Assets</span> — cash, accounts receivable, inventory, prepaid expenses (convertible to cash within 12 months)
+
+- <span class="key-term">Current Assets</span> — cash, accounts receivable, inventory, prepaid
+  expenses (convertible to cash within 12 months)
 - <span class="key-term">Fixed Assets</span> — property, plant, and equipment (PP&E)
 - <span class="key-term">Intangible Assets</span> — goodwill, patents, trademarks
 
 **Liabilities** (what the company owes):
-- <span class="key-term">Current Liabilities</span> — accounts payable, notes payable, accrued liabilities, wages payable (due within 12 months)
+
+- <span class="key-term">Current Liabilities</span> — accounts payable, notes payable, accrued
+  liabilities, wages payable (due within 12 months)
 - <span class="key-term">Long-term Liabilities</span> — bonds, mortgages, long-term debt
 
 **Shareholders' Equity** (what's left for owners):
+
 - Common stock (par value) + Capital in excess of par + Retained earnings
 
 <div class="info-box">
@@ -242,28 +316,34 @@ The <span class="key-term">balance sheet</span> shows a company's financial posi
 
 ### Measures of Liquidity
 
-Liquidity ratios measure a company's ability to pay its short-term obligations. The exam focuses on three:
+Liquidity ratios measure a company's ability to pay its short-term obligations. The exam focuses on
+three:
 
 <div class="calculation-box">
   <div class="calculation-box__label">Working Capital</div>
   <div class="calculation-box__formula">Working Capital = Current Assets − Current Liabilities</div>
 </div>
 
-Positive working capital means the company has enough short-term assets to cover short-term debts. Negative working capital is a red flag.
+Positive working capital means the company has enough short-term assets to cover short-term debts.
+Negative working capital is a red flag.
 
 <div class="calculation-box">
   <div class="calculation-box__label">Current Ratio</div>
   <div class="calculation-box__formula">Current Ratio = Current Assets ÷ Current Liabilities</div>
 </div>
 
-A current ratio above 1.0 means the company can cover its short-term debts. Higher is generally better.
+A current ratio above 1.0 means the company can cover its short-term debts. Higher is generally
+better.
 
 <div class="calculation-box">
   <div class="calculation-box__label">Quick Ratio (Acid Test)</div>
   <div class="calculation-box__formula">Quick Ratio = (Current Assets − Inventory) ÷ Current Liabilities</div>
 </div>
 
-The <span class="key-term">quick ratio</span> (also called the <span class="key-term">acid test</span>) is a more conservative measure. It strips out inventory because inventory can't always be converted to cash quickly. If a company passes the acid test, it can meet short-term obligations even without selling any inventory.
+The <span class="key-term">quick ratio</span> (also called the <span class="key-term">acid
+test</span>) is a more conservative measure. It strips out inventory because inventory can't always
+be converted to cash quickly. If a company passes the acid test, it can meet short-term obligations
+even without selling any inventory.
 
 ---
 
@@ -276,7 +356,8 @@ Leverage ratios reveal how much debt a company carries relative to its equity an
   <div class="calculation-box__formula">Debt-to-Equity = Total Debt ÷ Total Equity</div>
 </div>
 
-Higher debt-to-equity = more leverage = more risk. A company financed primarily by debt is more vulnerable in downturns because interest payments are mandatory regardless of profitability.
+Higher debt-to-equity = more leverage = more risk. A company financed primarily by debt is more
+vulnerable in downturns because interest payments are mandatory regardless of profitability.
 
 <div class="calculation-box">
   <div class="calculation-box__label">Debt Ratio</div>
@@ -290,13 +371,16 @@ A ratio above 0.5 means more than half of the company's assets are financed by d
   <div class="calculation-box__formula">Interest Coverage = EBIT ÷ Annual Interest Expense</div>
 </div>
 
-This measures whether a company can comfortably pay the interest on its debt. A ratio of 5× means the company earns five times its interest expense. Higher is better—and lenders pay very close attention to this number.
+This measures whether a company can comfortably pay the interest on its debt. A ratio of 5× means
+the company earns five times its interest expense. Higher is better—and lenders pay very close
+attention to this number.
 
 ---
 
 ### Inventory Valuation
 
-How a company values its inventory affects its reported profits and tax liability. The exam tests four methods:
+How a company values its inventory affects its reported profits and tax liability. The exam tests
+four methods:
 
 <div class="info-box">
   <div class="info-box__title">Inventory Methods in a Rising Price Environment</div>
@@ -313,21 +397,25 @@ How a company values its inventory affects its reported profits and tax liabilit
   <p><strong>Test Tip:</strong> Remember "FIFO = Fatter Income" in a rising price environment. Because the oldest (cheapest) inventory is sold first, COGS is lower and profits appear higher. LIFO has the opposite effect.</p>
 </div>
 
-**Inventory Turnover** = COGS ÷ Average Inventory. Higher turnover means the company is selling inventory more quickly—generally a sign of efficiency.
+**Inventory Turnover** = COGS ÷ Average Inventory. Higher turnover means the company is selling
+inventory more quickly—generally a sign of efficiency.
 
-**Accounts Receivable Turnover** = Net Sales ÷ Average Accounts Receivable. Higher is better—the company is collecting on credit sales more efficiently.
+**Accounts Receivable Turnover** = Net Sales ÷ Average Accounts Receivable. Higher is better—the
+company is collecting on credit sales more efficiently.
 
 ---
 
 ### Cash Flow Statement
 
-The <span class="key-term">cash flow statement</span> tracks actual cash moving in and out of the company. It has three sections:
+The <span class="key-term">cash flow statement</span> tracks actual cash moving in and out of the
+company. It has three sections:
 
 1. **Operating Activities** — cash from day-to-day business operations
 2. **Investing Activities** — cash from buying/selling assets and investments
 3. **Financing Activities** — cash from issuing stock, paying dividends, borrowing
 
-A company can report positive net income but still have negative cash flow (and vice versa). The cash flow statement reveals the truth behind the accounting.
+A company can report positive net income but still have negative cash flow (and vice versa). The
+cash flow statement reveals the truth behind the accounting.
 
 ---
 
@@ -338,18 +426,23 @@ A company can report positive net income but still have negative cash flow (and 
   <div class="calculation-box__formula">P/E = Market Price per Share ÷ Earnings Per Share</div>
 </div>
 
-The <span class="key-term">P/E ratio</span> is the most widely used valuation metric in the market. A high P/E may indicate the stock is overvalued—or that investors expect strong future growth. A low P/E may indicate undervaluation—or that the company's prospects are dim.
+The <span class="key-term">P/E ratio</span> is the most widely used valuation metric in the market.
+A high P/E may indicate the stock is overvalued—or that investors expect strong future growth. A low
+P/E may indicate undervaluation—or that the company's prospects are dim.
 
 <div class="calculation-box">
   <div class="calculation-box__label">Price-to-Book (P/B) Ratio</div>
   <div class="calculation-box__formula">P/B = Market Price per Share ÷ Book Value per Share</div>
 </div>
 
-A P/B ratio above 1.0 means the market values the company above its accounting (book) value. Most healthy, growing companies trade above book value.
+A P/B ratio above 1.0 means the market values the company above its accounting (book) value. Most
+healthy, growing companies trade above book value.
 
 #### Financial Footnotes
 
-Don't skip the footnotes. Financial statement footnotes can reveal accounting methods used, contingent liabilities, related-party transactions, and off-balance-sheet items. On the exam—and in real life—the footnotes can completely change your interpretation of the numbers.
+Don't skip the footnotes. Financial statement footnotes can reveal accounting methods used,
+contingent liabilities, related-party transactions, and off-balance-sheet items. On the exam—and in
+real life—the footnotes can completely change your interpretation of the numbers.
 
 ---
 
@@ -360,7 +453,9 @@ Don't skip the footnotes. Financial statement footnotes can reveal accounting me
   <p>In 1952, a 25-year-old graduate student named Harry Markowitz published a 14-page paper called "Portfolio Selection" in <em>The Journal of Finance</em>. His insight was deceptively simple: investors should evaluate securities not in isolation but in the context of their entire portfolio. Diversification wasn't just common sense—it could be mathematically optimized. That paper earned him a Nobel Prize in Economics in 1990 and launched the entire field of modern portfolio theory.</p>
 </div>
 
-Portfolio analysis shifts the focus from individual securities to how those securities work together. The central question: how do you build a portfolio that maximizes return for a given level of risk?
+Portfolio analysis shifts the focus from individual securities to how those securities work
+together. The central question: how do you build a portfolio that maximizes return for a given level
+of risk?
 
 ---
 
@@ -372,15 +467,20 @@ Portfolio analysis shifts the focus from individual securities to how those secu
   <strong>Systematic risk</strong> (market risk, non-diversifiable) — cannot be diversified away. It affects the entire market.</p>
 </div>
 
-If your portfolio holds only one stock, a single piece of bad news can devastate its value. That's <span class="key-term">nonsystematic risk</span>—risk that's specific to a company or industry. Add more positions across different sectors and this risk shrinks.
+If your portfolio holds only one stock, a single piece of bad news can devastate its value. That's
+<span class="key-term">nonsystematic risk</span>—risk that's specific to a company or industry. Add
+more positions across different sectors and this risk shrinks.
 
-But no amount of diversification eliminates <span class="key-term">systematic risk</span>. When interest rates rise, nearly all bond prices fall. When the economy enters a recession, most stocks decline. That's market-wide risk, and it's always present.
+But no amount of diversification eliminates <span class="key-term">systematic risk</span>. When
+interest rates rise, nearly all bond prices fall. When the economy enters a recession, most stocks
+decline. That's market-wide risk, and it's always present.
 
 ---
 
 ### Beta
 
-<span class="key-term">Beta</span> measures the correlation between a security's price movement and the overall market (typically the S&P 500, which has a beta of 1.0).
+<span class="key-term">Beta</span> measures the correlation between a security's price movement and
+the overall market (typically the S&P 500, which has a beta of 1.0).
 
 <div class="info-box">
   <div class="info-box__title">Beta Quick Reference</div>
@@ -392,7 +492,8 @@ But no amount of diversification eliminates <span class="key-term">systematic ri
   </table>
 </div>
 
-A stock with a beta of 1.2 is expected to be 20% more volatile than the market. If the market rises 10%, that stock should rise about 12%. If the market drops 10%, expect a 12% decline.
+A stock with a beta of 1.2 is expected to be 20% more volatile than the market. If the market rises
+10%, that stock should rise about 12%. If the market drops 10%, expect a 12% decline.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> High beta = high risk = high expected return. Conservative clients should hold lower-beta portfolios. Aggressive growth investors tolerate higher betas.</p>
@@ -402,44 +503,56 @@ A stock with a beta of 1.2 is expected to be 20% more volatile than the market. 
 
 ### CAPM and the Risk Premium
 
-The <span class="key-term">Capital Asset Pricing Model (CAPM)</span> provides a framework for calculating the expected return on a security.
+The <span class="key-term">Capital Asset Pricing Model (CAPM)</span> provides a framework for
+calculating the expected return on a security.
 
 <div class="calculation-box">
   <div class="calculation-box__label">CAPM Formula</div>
   <div class="calculation-box__formula">Expected Return = Risk-Free Rate + Beta × (Market Return − Risk-Free Rate)</div>
 </div>
 
-The <span class="key-term">risk-free rate</span> is typically the Treasury bill rate. The difference between the market return and the risk-free rate is the <span class="key-term">risk premium</span>—the additional return investors demand for taking on market risk.
+The <span class="key-term">risk-free rate</span> is typically the Treasury bill rate. The difference
+between the market return and the risk-free rate is the <span class="key-term">risk
+premium</span>—the additional return investors demand for taking on market risk.
 
-Investors expect higher returns from high-risk stocks (high beta) and accept lower returns from safer investments (low beta). CAPM quantifies this relationship.
+Investors expect higher returns from high-risk stocks (high beta) and accept lower returns from
+safer investments (low beta). CAPM quantifies this relationship.
 
 ---
 
 ### Alpha
 
-<span class="key-term">Alpha</span> measures the difference between a security's actual return and its expected return (as predicted by CAPM).
+<span class="key-term">Alpha</span> measures the difference between a security's actual return and
+its expected return (as predicted by CAPM).
 
 <div class="calculation-box">
   <div class="calculation-box__label">Formula</div>
   <div class="calculation-box__formula">Alpha = Actual Return − Expected Return</div>
 </div>
 
-- **Positive alpha**: the investment outperformed expectations. A fund manager who consistently generates positive alpha is "beating the market."
+- **Positive alpha**: the investment outperformed expectations. A fund manager who consistently
+  generates positive alpha is "beating the market."
 - **Negative alpha**: the investment underperformed expectations.
 
-This is the heart of the active vs. passive management debate. Active managers believe skilled analysis can generate positive alpha. Passive investors argue that after fees and taxes, most active managers fail to deliver it consistently—which is why index funds exist.
+This is the heart of the active vs. passive management debate. Active managers believe skilled
+analysis can generate positive alpha. Passive investors argue that after fees and taxes, most active
+managers fail to deliver it consistently—which is why index funds exist.
 
-(Whether those fees are worth paying is a debate that has filled more financial journals than anyone will ever read, and launched at least one very successful index fund company in a suburb outside Philadelphia.)
+(Whether those fees are worth paying is a debate that has filled more financial journals than anyone
+will ever read, and launched at least one very successful index fund company in a suburb outside
+Philadelphia.)
 
 ---
 
 ### Asset Allocation Strategies
 
-Once you've analyzed individual securities, the next step is deciding how to allocate across asset classes. The exam covers two main approaches:
+Once you've analyzed individual securities, the next step is deciding how to allocate across asset
+classes. The exam covers two main approaches:
 
 #### Strategic Asset Allocation
 
-<span class="key-term">Strategic asset allocation</span> sets target percentages for each asset class based on the investor's objectives, risk tolerance, and time horizon.
+<span class="key-term">Strategic asset allocation</span> sets target percentages for each asset
+class based on the investor's objectives, risk tolerance, and time horizon.
 
 <div class="info-box">
   <div class="info-box__title">Sample Strategic Allocation</div>
@@ -454,15 +567,22 @@ Once you've analyzed individual securities, the next step is deciding how to all
 
 #### Tactical Asset Allocation
 
-Within the strategic framework, a manager can make <span class="key-term">tactical adjustments</span>—shifting weights toward asset classes that appear undervalued or away from those that appear overvalued. The minimum/maximum constraints prevent extreme positions.
+Within the strategic framework, a manager can make <span class="key-term">tactical
+adjustments</span>—shifting weights toward asset classes that appear undervalued or away from those
+that appear overvalued. The minimum/maximum constraints prevent extreme positions.
 
 ---
 
 ### Active vs. Passive Management
 
-<span class="key-term">Active management</span> relies on fundamental analysis to identify undervalued securities within each asset class. The goal is to generate returns above the benchmark (positive alpha). The trade-off: higher fees, higher transaction costs, and potential tax consequences from frequent trading.
+<span class="key-term">Active management</span> relies on fundamental analysis to identify
+undervalued securities within each asset class. The goal is to generate returns above the benchmark
+(positive alpha). The trade-off: higher fees, higher transaction costs, and potential tax
+consequences from frequent trading.
 
-<span class="key-term">Passive management</span> accepts that markets are generally efficient and uses index funds to match market returns at minimal cost. No attempt is made to beat the market—just to capture its returns with the lowest possible expenses.
+<span class="key-term">Passive management</span> accepts that markets are generally efficient and
+uses index funds to match market returns at minimal cost. No attempt is made to beat the market—just
+to capture its returns with the lowest possible expenses.
 
 Two common passive rebalancing methods:
 
@@ -479,13 +599,23 @@ Two common passive rebalancing methods:
 The exam also covers several distinct approaches to equity selection:
 
 #### Indexing
-Using index funds that mirror a broad market benchmark (S&P 500, S&P 400 Mid Cap, etc.) to achieve diversification efficiently. The premise: markets are efficient, so trying to beat them wastes time and money.
+
+Using index funds that mirror a broad market benchmark (S&P 500, S&P 400 Mid Cap, etc.) to achieve
+diversification efficiently. The premise: markets are efficient, so trying to beat them wastes time
+and money.
 
 #### Growth Investing
-Selecting stocks based primarily on earnings growth or stock price momentum. Growth investors seek companies whose earnings are growing faster than the market average, often accepting higher valuations in exchange for higher expected growth.
+
+Selecting stocks based primarily on earnings growth or stock price momentum. Growth investors seek
+companies whose earnings are growing faster than the market average, often accepting higher
+valuations in exchange for higher expected growth.
 
 #### Value Investing
-Selecting stocks that appear <span class="key-term">fundamentally undervalued</span> relative to their peers. Value investors examine P/E ratios, price-to-book ratios, and other fundamentals to find solid companies that are temporarily out of favor. The expectation: over time, the market will recognize the company's true worth and the stock price will rise to reflect it.
+
+Selecting stocks that appear <span class="key-term">fundamentally undervalued</span> relative to
+their peers. Value investors examine P/E ratios, price-to-book ratios, and other fundamentals to
+find solid companies that are temporarily out of favor. The expectation: over time, the market will
+recognize the company's true worth and the stock price will rise to reflect it.
 
 ---
 

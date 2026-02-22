@@ -6,14 +6,17 @@ Beyond storytelling, these evidence-based techniques can make SIE content more e
 
 ## 1. Spaced Repetition
 
-**The Science**: Memory decays predictably. Reviewing at optimal intervals (just before forgetting) dramatically improves long-term retention.
+**The Science**: Memory decays predictably. Reviewing at optimal intervals (just before forgetting)
+dramatically improves long-term retention.
 
 **Implementation Ideas**:
+
 - Build flashcard decks (Anki-compatible) from chapter key terms
 - Email/notification sequences that resurface concepts
 - "Daily review" feature that pulls random concepts
 
 **Data Structure**:
+
 ```json
 {
   "concept": "Regulation T",
@@ -28,23 +31,22 @@ Beyond storytelling, these evidence-based techniques can make SIE content more e
 
 ## 2. Active Recall Quizzes
 
-**The Science**: Testing yourself is more effective than re-reading. The struggle to retrieve information strengthens memory.
+**The Science**: Testing yourself is more effective than re-reading. The struggle to retrieve
+information strengthens memory.
 
 **Current State**: Some chapters have embedded quizzes.
 
 **Enhancement Ideas**:
+
 - End-of-section mini-quizzes (3-5 questions)
 - "Check yourself" expandable answers
 - Exam-style question bank with explanations
 - Wrong answer analysis ("Why this is wrong")
 
-**Question Types That Work**:
-| Type | Example |
-|------|---------|
-| Application | "A customer buys stock on Monday. When does it settle?" |
-| Comparison | "What distinguishes discretionary from not-held orders?" |
-| Scenario | "An 80-year-old wants growth. What suitability concerns exist?" |
-| Why | "Why does Reg T require 50% margin instead of 10%?" |
+**Question Types That Work**: | Type | Example | |------|---------| | Application | "A customer buys
+stock on Monday. When does it settle?" | | Comparison | "What distinguishes discretionary from
+not-held orders?" | | Scenario | "An 80-year-old wants growth. What suitability concerns exist?" | |
+Why | "Why does Reg T require 50% margin instead of 10%?" |
 
 ---
 
@@ -53,11 +55,13 @@ Beyond storytelling, these evidence-based techniques can make SIE content more e
 **The Science**: Working memory holds ~4 items. Content must be chunked appropriately.
 
 **Current Strengths**:
+
 - Clear section headers
 - Bulleted lists
 - Visual callouts (test tips, historical notes)
 
 **Enhancement Ideas**:
+
 - "Key takeaway" summary boxes every 3-4 paragraphs
 - Visual diagrams for complex flows (trade settlement)
 - Comparison tables (broker vs. dealer, T+1 vs. cash)
@@ -70,12 +74,14 @@ Beyond storytelling, these evidence-based techniques can make SIE content more e
 **The Science**: Combining visual and verbal information creates multiple memory pathways.
 
 **Implementation Ideas**:
+
 - Timeline graphics for regulatory history
 - Flowcharts for trade processing
 - Infographics summarizing each chapter
 - Icon system for concept types (rule, definition, calculation)
 
 **High-Value Visual Candidates**:
+
 - Trade settlement T+1 timeline
 - Regulatory structure hierarchy (SEC → FINRA → SROs)
 - Bond pricing inverse relationship
@@ -88,22 +94,27 @@ Beyond storytelling, these evidence-based techniques can make SIE content more e
 **The Science**: Asking "why?" and "how?" during learning improves comprehension and retention.
 
 **Implementation Ideas**:
+
 - "Why does this make sense?" prompts
 - "How would this apply if..." scenarios
 - Connect concepts across chapters
 - "What would happen if this rule didn't exist?"
 
 **Example Prompts**:
-- "Why would a firm act as both broker AND dealer on the same trade? (They wouldn't—it's prohibited because...)"
+
+- "Why would a firm act as both broker AND dealer on the same trade? (They wouldn't—it's prohibited
+  because...)"
 - "What happens if margin requirements were only 10%? (See: 1929)"
 
 ---
 
 ## 6. Interleaving
 
-**The Science**: Mixing different types of problems/topics improves transfer and discrimination ability.
+**The Science**: Mixing different types of problems/topics improves transfer and discrimination
+ability.
 
 **Implementation Ideas**:
+
 - Mixed practice quizzes across chapters
 - "Which chapter?" categorization exercises
 - Cumulative reviews that span multiple topics
@@ -116,6 +127,7 @@ Beyond storytelling, these evidence-based techniques can make SIE content more e
 **The Science**: Information you generate yourself is remembered better than information you read.
 
 **Implementation Ideas**:
+
 - Fill-in-the-blank exercises
 - "Complete the definition" activities
 - Create-your-own-mnemonic prompts
@@ -128,6 +140,7 @@ Beyond storytelling, these evidence-based techniques can make SIE content more e
 **The Science**: Some friction in learning (appropriate challenge) improves retention.
 
 **Implementation Ideas**:
+
 - Slightly harder practice questions than actual exam
 - Require clicking to reveal answers
 - Time pressure on practice quizzes
@@ -137,14 +150,14 @@ Beyond storytelling, these evidence-based techniques can make SIE content more e
 
 ## Implementation Priority Matrix
 
-| Enhancement | Impact | Effort | Priority |
-|-------------|--------|--------|----------|
-| Story integration | High | Low | Now |
-| End-of-section quizzes | High | Medium | Next |
-| Flashcard export | Medium | Low | Next |
-| Visual diagrams | High | Medium | Soon |
-| Spaced repetition system | High | High | Later |
-| Mixed practice generator | Medium | High | Later |
+| Enhancement              | Impact | Effort | Priority |
+| ------------------------ | ------ | ------ | -------- |
+| Story integration        | High   | Low    | Now      |
+| End-of-section quizzes   | High   | Medium | Next     |
+| Flashcard export         | Medium | Low    | Next     |
+| Visual diagrams          | High   | Medium | Soon     |
+| Spaced repetition system | High   | High   | Later    |
+| Mixed practice generator | Medium | High   | Later    |
 
 ---
 
@@ -153,11 +166,13 @@ Beyond storytelling, these evidence-based techniques can make SIE content more e
 The podcast format has unique advantages:
 
 **Current Strengths**:
+
 - Commute-friendly
 - Conversational tone
 - Story-based content translates well
 
 **Enhancement Ideas**:
+
 - "Pause and think" prompts
 - Quick verbal quizzes with pause for answer
 - Memorable mnemonics repeated throughout
@@ -169,6 +184,7 @@ The podcast format has unique advantages:
 ## Personalization Opportunities
 
 **Future State Ideas**:
+
 - Adaptive difficulty based on quiz performance
 - Weak area identification and focused review
 - Learning pace preferences
@@ -180,6 +196,7 @@ The podcast format has unique advantages:
 ## Measurement & Iteration
 
 **What to Track**:
+
 - Time on page by section
 - Quiz completion and scores
 - Audio listen-through rates
@@ -187,6 +204,7 @@ The podcast format has unique advantages:
 - User-reported confidence levels
 
 **Success Signals**:
+
 - Quiz scores improve over time
 - Users complete full chapters
 - Return visits for review
@@ -205,4 +223,4 @@ The podcast format has unique advantages:
 
 ---
 
-*Learning science isn't about gimmicks—it's about working with how memory actually functions.*
+_Learning science isn't about gimmicks—it's about working with how memory actually functions._

@@ -18,7 +18,7 @@ const FlashcardSession = (function () {
     let sessionStats = {
         seen: 0,
         markedProficient: 0,
-        markedLearning: 0
+        markedLearning: 0,
     };
     let sessionActive = false;
 
@@ -89,7 +89,7 @@ const FlashcardSession = (function () {
         // Score all cards
         const scored = allCards.map(card => ({
             card,
-            score: calculatePriority(card)
+            score: calculatePriority(card),
         }));
 
         // Sort by score (highest first)
@@ -122,7 +122,7 @@ const FlashcardSession = (function () {
         sessionStats = {
             seen: 0,
             markedProficient: 0,
-            markedLearning: 0
+            markedLearning: 0,
         };
         sessionActive = true;
 
@@ -204,9 +204,10 @@ const FlashcardSession = (function () {
             total: originalQueueLength,
             remaining: remaining,
             cardsRequeued: cardsRequeued,
-            percentage: originalQueueLength > 0
-                ? Math.round((uniqueCardsCompleted / originalQueueLength) * 100)
-                : 0
+            percentage:
+                originalQueueLength > 0
+                    ? Math.round((uniqueCardsCompleted / originalQueueLength) * 100)
+                    : 0,
         };
     }
 
@@ -255,7 +256,7 @@ const FlashcardSession = (function () {
         getStats,
         end,
         isActive,
-        getQueueLength
+        getQueueLength,
     };
 })();
 

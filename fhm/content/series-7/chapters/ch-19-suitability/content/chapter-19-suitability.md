@@ -1,16 +1,26 @@
 # Chapter 19: Suitability
 
-*Series 7 Exam Weight: Suitability concepts appear throughout the exam (~11-14% overall)*
+_Series 7 Exam Weight: Suitability concepts appear throughout the exam (~11-14% overall)_
 
 ---
 
-In 1999, a 72-year-old widow walked into a brokerage office with $800,000 in life insurance proceeds—every dollar she had in the world. Her broker put her into speculative technology stocks. Within two years, she'd lost nearly everything. The case became one of the most cited FINRA arbitration examples in suitability law. The broker's defense? "She said she wanted growth." The arbitration panel was unconvinced.
+In 1999, a 72-year-old widow walked into a brokerage office with $800,000 in life insurance
+proceeds—every dollar she had in the world. Her broker put her into speculative technology stocks.
+Within two years, she'd lost nearly everything. The case became one of the most cited FINRA
+arbitration examples in suitability law. The broker's defense? "She said she wanted growth." The
+arbitration panel was unconvinced.
 
-The Series 7 exam doesn't just test whether you know what a municipal bond is. It tests whether you know *who* should own one. Suitability—matching the right investment to the right client—is arguably the most important concept on the entire exam, because it's the concept that protects real people from real harm.
+The Series 7 exam doesn't just test whether you know what a municipal bond is. It tests whether you
+know _who_ should own one. Suitability—matching the right investment to the right client—is arguably
+the most important concept on the entire exam, because it's the concept that protects real people
+from real harm.
 
 ### Why This Chapter Matters
 
-FINRA's suitability framework is the backbone of every recommendation you'll ever make as a registered representative. The exam tests it two ways: first, your understanding of the rules themselves, and second, your ability to apply them in scenario-based questions. This chapter covers both.
+FINRA's suitability framework is the backbone of every recommendation you'll ever make as a
+registered representative. The exam tests it two ways: first, your understanding of the rules
+themselves, and second, your ability to apply them in scenario-based questions. This chapter covers
+both.
 
 ---
 
@@ -35,7 +45,9 @@ FINRA's suitability framework is the backbone of every recommendation you'll eve
 
 ### The Customer Investment Profile
 
-A customer's financial situation is one of the most important factors in making a suitable recommendation. Before recommending anything, you need to understand who you're talking to. FINRA requires consideration of these factors:
+A customer's financial situation is one of the most important factors in making a suitable
+recommendation. Before recommending anything, you need to understand who you're talking to. FINRA
+requires consideration of these factors:
 
 <div class="info-box">
   <div class="info-box__title">Customer Profile Elements</div>
@@ -63,13 +75,22 @@ A customer's financial situation is one of the most important factors in making 
 
 ### Experience and Complexity
 
-A customer who has financial experience and/or is a market professional is generally more suited to speculative, complex, and high-risk investments. Conversely, a customer with limited to moderate investment knowledge should be directed toward more conservative, less complex, and lower-risk options.
+A customer who has financial experience and/or is a market professional is generally more suited to
+speculative, complex, and high-risk investments. Conversely, a customer with limited to moderate
+investment knowledge should be directed toward more conservative, less complex, and lower-risk
+options.
 
 ### Risk Tolerance
 
-<span class="key-term">Risk</span> is the possibility that something bad could happen financially—specifically, the loss of money in an investment. <span class="key-term">Risk tolerance</span> is the degree of variability in investment returns that an investor is willing and able to withstand. It's shaped by both emotional comfort and financial circumstances.
+<span class="key-term">Risk</span> is the possibility that something bad could happen
+financially—specifically, the loss of money in an investment. <span class="key-term">Risk
+tolerance</span> is the degree of variability in investment returns that an investor is willing and
+able to withstand. It's shaped by both emotional comfort and financial circumstances.
 
-Customers have varying degrees of tolerance for risk, generally proportional to their overall investment knowledge and financial circumstances. A customer with limited investment experience has, by default, a lower risk tolerance than someone with years of trading knowledge. Understanding risk tolerance—combined with the customer's objectives—is the key to making suitable recommendations.
+Customers have varying degrees of tolerance for risk, generally proportional to their overall
+investment knowledge and financial circumstances. A customer with limited investment experience has,
+by default, a lower risk tolerance than someone with years of trading knowledge. Understanding risk
+tolerance—combined with the customer's objectives—is the key to making suitable recommendations.
 
 <div class="info-box">
   <div class="info-box__title">Risk Tolerance and Investment Profiles</div>
@@ -96,17 +117,22 @@ Customers have varying degrees of tolerance for risk, generally proportional to 
   </table>
 </div>
 
-These objectives are not mutually exclusive—many investors seek a combination of growth and income, for example. But the exam tends to test clear-cut scenarios where one objective dominates.
+These objectives are not mutually exclusive—many investors seek a combination of growth and income,
+for example. But the exam tends to test clear-cut scenarios where one objective dominates.
 
 ---
 
 ### Time Horizon
 
-<span class="key-term">Time horizon</span> is how long the investor expects to hold an investment before needing the money. It directly affects which products are appropriate:
+<span class="key-term">Time horizon</span> is how long the investor expects to hold an investment
+before needing the money. It directly affects which products are appropriate:
 
-- **Short-term (0-3 years)** — Money market instruments, CDs, short-term bonds. Capital preservation is paramount.
-- **Medium-term (3-10 years)** — Balanced funds, intermediate bonds, blue-chip stocks. Some growth potential with moderate risk.
-- **Long-term (10+ years)** — Growth stocks, equity funds, real estate. Time to recover from market downturns.
+- **Short-term (0-3 years)** — Money market instruments, CDs, short-term bonds. Capital preservation
+  is paramount.
+- **Medium-term (3-10 years)** — Balanced funds, intermediate bonds, blue-chip stocks. Some growth
+  potential with moderate risk.
+- **Long-term (10+ years)** — Growth stocks, equity funds, real estate. Time to recover from market
+  downturns.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> When the exam gives you a time horizon, match it to the investment. A client saving for a house down payment in 2 years shouldn't be in growth stocks. A 30-year-old saving for retirement shouldn't be in money market funds.</p>
@@ -116,28 +142,38 @@ These objectives are not mutually exclusive—many investors seek a combination 
 
 ### Liquidity Needs
 
-<span class="key-term">Liquidity</span> refers to how quickly an investment can be converted to cash without significant loss of value.
+<span class="key-term">Liquidity</span> refers to how quickly an investment can be converted to cash
+without significant loss of value.
 
 - **High liquidity needs** — Money market funds, Treasury bills, savings accounts
-- **Low liquidity needs** — Real estate, limited partnerships, annuities (which may carry surrender charges)
+- **Low liquidity needs** — Real estate, limited partnerships, annuities (which may carry surrender
+  charges)
 
-Clients who may need access to their money on short notice should not be placed in illiquid investments, regardless of the potential return.
+Clients who may need access to their money on short notice should not be placed in illiquid
+investments, regardless of the potential return.
 
 ---
 
 ### Prohibited Practices
 
-Even when individual recommendations appear suitable, certain patterns of behavior are always prohibited:
+Even when individual recommendations appear suitable, certain patterns of behavior are always
+prohibited:
 
-- <span class="key-term">Excessive trading (churning)</span> — Making trades primarily to generate commissions, not to benefit the client. This is what quantitative suitability is designed to catch.
-- <span class="key-term">Unauthorized trading</span> — Executing transactions without the customer's prior authorization.
-- <span class="key-term">Unsuitable recommendations</span> — Recommending products that do not match the customer's investment profile, regardless of the product's merits.
+- <span class="key-term">Excessive trading (churning)</span> — Making trades primarily to generate
+  commissions, not to benefit the client. This is what quantitative suitability is designed to
+  catch.
+- <span class="key-term">Unauthorized trading</span> — Executing transactions without the customer's
+  prior authorization.
+- <span class="key-term">Unsuitable recommendations</span> — Recommending products that do not match
+  the customer's investment profile, regardless of the product's merits.
 
 ---
 
 ## Section 2: Suitability Scenarios
 
-The Series 7 exam will present scenario-based questions that describe a customer's profile and ask which investment would be most or least suitable. These questions can appear to be subjective, but there is always a "best" answer given the information provided.
+The Series 7 exam will present scenario-based questions that describe a customer's profile and ask
+which investment would be most or least suitable. These questions can appear to be subjective, but
+there is always a "best" answer given the information provided.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Since the question stems can be lengthy, an effective strategy is to look at the four answer choices first, then read the question stem for the appropriate information. If you are stuck between two close answer choices? As always, your first choice is often the best choice, as long as you think like a regulator. Regulators tend to help consumers stick to their investment goals and often lean toward safety vs. the chance of achieving outsized returns.</p>
@@ -158,7 +194,9 @@ These principles emerged from the course's seven practice scenarios:
   <p><strong>7. Diversification and concentration risk:</strong> An investor with 80% of their 401(k) in company stock has dangerous concentration risk. The first priority when rolling over is to diversify. Also: Class C shares (with higher ongoing expenses) are generally unsuitable for long-term retirement investing—Class A shares (with upfront sales charges but lower ongoing fees) are typically more appropriate for long holding periods.</p>
 </div>
 
-(The suitability scenarios on the exam tend to reward the answer that thinks like a regulator—conservative, diversified, tax-aware, and always matching the investment to the client's actual situation rather than their most optimistic hopes.)
+(The suitability scenarios on the exam tend to reward the answer that thinks like a
+regulator—conservative, diversified, tax-aware, and always matching the investment to the client's
+actual situation rather than their most optimistic hopes.)
 
 ---
 

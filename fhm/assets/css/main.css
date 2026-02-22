@@ -8,25 +8,25 @@
    ============================================ */
 :root {
     /* Primary Institutional Colors */
-    --fh-navy: #002D62;
-    --fh-cream: #FFFDF7;
-    --fh-gray: #54585A;
+    --fh-navy: #002d62;
+    --fh-cream: #fffdf7;
+    --fh-gray: #54585a;
 
     /* Secondary Colors */
-    --fh-sage: #7C9885;
-    --fh-burgundy: #6B2737;
-    --fh-gold: #B08D57;
+    --fh-sage: #7c9885;
+    --fh-burgundy: #6b2737;
+    --fh-gold: #b08d57;
 
     /* Neutral Scale */
-    --fh-gray-900: #1A1A1A;
+    --fh-gray-900: #1a1a1a;
     --fh-gray-700: #404040;
     --fh-gray-600: #595959;
     --fh-gray-500: #737373;
     --fh-gray-400: #8a8a8a;
-    --fh-gray-300: #D4D4D4;
-    --fh-gray-200: #E5E5E5;
-    --fh-gray-100: #F5F5F5;
-    --fh-white: #FFFFFF;
+    --fh-gray-300: #d4d4d4;
+    --fh-gray-200: #e5e5e5;
+    --fh-gray-100: #f5f5f5;
+    --fh-white: #ffffff;
 
     /* Typography */
     --fh-font-display: 'Crimson Pro', Georgia, serif;
@@ -48,20 +48,20 @@
    Night Mode (5pm - 9am)
    ============================================ */
 body.night-mode {
-    --fh-navy: #4A90C2;
+    --fh-navy: #4a90c2;
     --fh-cream: #1a1f2e;
-    --fh-gray: #9CA3AF;
+    --fh-gray: #9ca3af;
 
-    --fh-sage: #8FB89A;
-    --fh-burgundy: #C77A8A;
-    --fh-gold: #D4A85A;
+    --fh-sage: #8fb89a;
+    --fh-burgundy: #c77a8a;
+    --fh-gold: #d4a85a;
 
-    --fh-gray-900: #F5F5F5;
-    --fh-gray-700: #E5E5E5;
-    --fh-gray-600: #D4D4D4;
-    --fh-gray-500: #9CA3AF;
-    --fh-gray-400: #6B7280;
-    --fh-gray-300: #4B5563;
+    --fh-gray-900: #f5f5f5;
+    --fh-gray-700: #e5e5e5;
+    --fh-gray-600: #d4d4d4;
+    --fh-gray-500: #9ca3af;
+    --fh-gray-400: #6b7280;
+    --fh-gray-300: #4b5563;
     --fh-gray-200: #374151;
     --fh-gray-100: #252d3d;
     --fh-white: #1e2536;
@@ -89,7 +89,9 @@ body {
 /* ============================================
    Typography
    ============================================ */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: var(--fh-font-display);
     font-weight: 400;
     line-height: 1.2;
@@ -616,7 +618,7 @@ strong {
 }
 
 .holder-name.indented:before {
-    content: "\2514\2500";
+    content: '\2514\2500';
     position: absolute;
     left: 0.5rem;
     color: var(--fh-gray-400);
@@ -630,11 +632,11 @@ strong {
 }
 
 .status-verified {
-    color: #2E7D32;
+    color: #2e7d32;
 }
 
 .status-estimated {
-    color: #F57C00;
+    color: #f57c00;
 }
 
 .source-note {
@@ -651,11 +653,11 @@ strong {
 }
 
 .change.positive {
-    color: #2E7D32;
+    color: #2e7d32;
 }
 
 .change.negative {
-    color: #C62828;
+    color: #c62828;
 }
 
 .change.neutral {
@@ -690,7 +692,7 @@ strong {
 }
 
 .insight-box li:before {
-    content: "\2192";
+    content: '\2192';
     position: absolute;
     left: 0;
     color: var(--fh-gold);
@@ -700,17 +702,17 @@ strong {
    SIE Footnotes Section (Treasury Page)
    ============================================ */
 .sie-footnotes {
-    background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
-    border: 1px solid #FFB74D;
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border: 1px solid #ffb74d;
     border-radius: 8px;
     padding: var(--fh-space-2xl);
     margin: var(--fh-space-2xl) 0;
 }
 
 .sie-footnotes h3 {
-    color: #E65100;
+    color: #e65100;
     margin-bottom: var(--fh-space-lg);
-    border-bottom: 2px solid #FFB74D;
+    border-bottom: 2px solid #ffb74d;
     padding-bottom: var(--fh-space-sm);
 }
 
@@ -718,13 +720,13 @@ strong {
     margin-bottom: var(--fh-space-lg);
     padding: var(--fh-space-md);
     background: var(--fh-white);
-    border-left: 4px solid #FF9800;
+    border-left: 4px solid #ff9800;
     border-radius: 4px;
 }
 
 .sie-note-title {
     font-weight: 600;
-    color: #E65100;
+    color: #e65100;
     margin-bottom: var(--fh-space-sm);
     display: flex;
     align-items: center;
@@ -737,12 +739,12 @@ strong {
 }
 
 .sie-note-content strong {
-    color: #E65100;
+    color: #e65100;
     font-weight: 600;
 }
 
 .footnote-ref {
-    color: #E65100;
+    color: #e65100;
     font-weight: 600;
     cursor: help;
     font-size: 0.85rem;
@@ -758,14 +760,22 @@ strong {
 }
 
 .loading:after {
-    content: "...";
+    content: '...';
     animation: dots 1.5s steps(5, end) infinite;
 }
 
 @keyframes dots {
-    0%, 20% { content: "."; }
-    40% { content: ".."; }
-    60%, 100% { content: "..."; }
+    0%,
+    20% {
+        content: '.';
+    }
+    40% {
+        content: '..';
+    }
+    60%,
+    100% {
+        content: '...';
+    }
 }
 
 /* ============================================

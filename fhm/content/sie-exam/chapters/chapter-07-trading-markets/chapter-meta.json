@@ -1,49 +1,49 @@
 {
-  "number": 7,
-  "title": "Trading Markets",
-  "description": "Understanding how securities trade across exchanges, OTC markets, and institutional venues, plus the critical differences between brokers and dealers",
-  "sections": [
-    {
-      "id": "7.0",
-      "title": "Chapter 7 One-Pager",
-      "file": "section-00-chapter-one-pager.md",
-      "locked": false,
-      "topics": [
-        "Quick Reference Guide",
-        "Four Markets Overview",
-        "Broker vs Dealer",
-        "Key Exam Concepts"
-      ],
-      "estimated_minutes": 10
-    },
-    {
-      "id": "7.1",
-      "title": "Types of Trading Markets",
-      "file": "section-01-types-of-trading-markets.md",
-      "locked": false,
-      "topics": [
-        "Primary vs. Secondary Markets",
-        "First Market - Exchange Trading",
-        "Second Market - OTC Trading",
-        "Third Market - OTC Trading of Listed Securities",
-        "Fourth Market - Institutional Trading",
-        "Brokers vs. Dealers",
-        "Markups, Markdowns, and Commissions"
-      ],
-      "estimated_minutes": 30
-    }
-  ],
-  "prerequisites": ["chapter-06"],
-  "estimated_hours": 0.5,
-  "learning_objectives": [
-    "Distinguish between primary and secondary markets",
-    "Identify the four submarkets of the secondary market",
-    "Compare auction markets (NYSE) with negotiated markets (Nasdaq)",
-    "Explain the role of DMMs, market makers, and ECNs",
-    "Differentiate between brokers (agents) and dealers (principals)",
-    "Apply FINRA's 5% markup policy and know its exceptions",
-    "Understand dark pools and after-hours trading risks"
-  ],
-  "exam_weight": "5-7%",
-  "status": "ready_for_html"
+    "number": 7,
+    "title": "Trading Markets",
+    "description": "Understanding how securities trade across exchanges, OTC markets, and institutional venues, plus the critical differences between brokers and dealers",
+    "sections": [
+        {
+            "id": "7.0",
+            "title": "Chapter 7 One-Pager",
+            "file": "section-00-chapter-one-pager.md",
+            "locked": false,
+            "topics": [
+                "Quick Reference Guide",
+                "Four Markets Overview",
+                "Broker vs Dealer",
+                "Key Exam Concepts"
+            ],
+            "estimated_minutes": 10
+        },
+        {
+            "id": "7.1",
+            "title": "Types of Trading Markets",
+            "file": "section-01-types-of-trading-markets.md",
+            "locked": false,
+            "topics": [
+                "Primary vs. Secondary Markets",
+                "First Market - Exchange Trading",
+                "Second Market - OTC Trading",
+                "Third Market - OTC Trading of Listed Securities",
+                "Fourth Market - Institutional Trading",
+                "Brokers vs. Dealers",
+                "Markups, Markdowns, and Commissions"
+            ],
+            "estimated_minutes": 30
+        }
+    ],
+    "prerequisites": ["chapter-06"],
+    "estimated_hours": 0.5,
+    "learning_objectives": [
+        "Distinguish between primary and secondary markets",
+        "Identify the four submarkets of the secondary market",
+        "Compare auction markets (NYSE) with negotiated markets (Nasdaq)",
+        "Explain the role of DMMs, market makers, and ECNs",
+        "Differentiate between brokers (agents) and dealers (principals)",
+        "Apply FINRA's 5% markup policy and know its exceptions",
+        "Understand dark pools and after-hours trading risks"
+    ],
+    "exam_weight": "5-7%",
+    "status": "ready_for_html"
 }

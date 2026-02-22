@@ -1,4 +1,5 @@
 # Deployment Guide
+
 ## Franklin Hugh Money Project
 
 ---
@@ -11,11 +12,11 @@ No more copying files to the repository root. The deploy script handles everythi
 
 ### Live URLs
 
-| Page | URL |
-|------|-----|
-| Main Site | https://drewgarraway.com/fhm/ |
-| SIE Study Materials | https://drewgarraway.com/fhm/sie-study-materials.html |
-| Treasury Analysis | https://drewgarraway.com/fhm/franklin-hugh-money-treasury.html |
+| Page                | URL                                                            |
+| ------------------- | -------------------------------------------------------------- |
+| Main Site           | https://drewgarraway.com/fhm/                                  |
+| SIE Study Materials | https://drewgarraway.com/fhm/sie-study-materials.html          |
+| Treasury Analysis   | https://drewgarraway.com/fhm/franklin-hugh-money-treasury.html |
 
 ---
 
@@ -28,6 +29,7 @@ From the `fhm` directory:
 ```
 
 The script will:
+
 1. Validate content sync
 2. Run cache-busting on CSS/JS files
 3. Stage and commit changes
@@ -114,12 +116,15 @@ drew-garraway-consulting/           # Repository root
 
 ## Cache-Bust Workflow
 
-The `cache-bust.js` script generates content-based hashes for CSS and JS files, appending them as version query parameters (e.g., `?v=a34c2881`). This forces browsers to fetch new versions when files change.
+The `cache-bust.js` script generates content-based hashes for CSS and JS files, appending them as
+version query parameters (e.g., `?v=a34c2881`). This forces browsers to fetch new versions when
+files change.
 
 Files processed:
+
 - `assets/css/*.css`
 - `assets/js/*.js`
 
 ---
 
-*Last Updated: 2024-12-24*
+_Last Updated: 2024-12-24_

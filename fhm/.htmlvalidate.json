@@ -1,10 +1,10 @@
 {
-  "extends": ["html-validate:recommended"],
-  "rules": {
-    "no-inline-style": "off",
-    "long-title": "warn",
-    "unique-landmark": "warn",
-    "wcag/h63": "warn",
-    "no-deprecated-attr": "warn"
-  }
+    "extends": ["html-validate:recommended"],
+    "rules": {
+        "no-inline-style": "off",
+        "long-title": "warn",
+        "unique-landmark": "warn",
+        "wcag/h63": "warn",
+        "no-deprecated-attr": "warn"
+    }
 }

@@ -8,9 +8,11 @@
 
 **A person who has had a business relationship with the firm in the past 18 months**
 
-The Do-Not-Call rules have an exemption for existing business relationships within the past 18 months. This allows firms to maintain contact with current and recent clients.
+The Do-Not-Call rules have an exemption for existing business relationships within the past 18
+months. This allows firms to maintain contact with current and recent clients.
 
 **Why the others are wrong:**
+
 - A) Being off the registry isn't enough—state lists may apply
 - C) State lists are additional restrictions, not exemptions
 - D) Time of day doesn't create an exemption
@@ -21,9 +23,11 @@ The Do-Not-Call rules have an exemption for existing business relationships with
 
 **Sales literature sent to 30 retail investors**
 
-Communications sent to more than 25 retail investors within 30 days are considered "retail communications" and require principal pre-approval before first use.
+Communications sent to more than 25 retail investors within 30 days are considered "retail
+communications" and require principal pre-approval before first use.
 
 **Why the others are wrong:**
+
 - A) Letters to existing customers (correspondence) need post-use review, not pre-approval
 - C) Institutional communications have relaxed requirements
 - D) Internal materials don't require FINRA approval
@@ -34,9 +38,11 @@ Communications sent to more than 25 retail investors within 30 days are consider
 
 **A registered investment adviser**
 
-Registered investment advisers are automatically institutional regardless of asset size. Banks, insurance companies, and registered investment companies also qualify automatically.
+Registered investment advisers are automatically institutional regardless of asset size. Banks,
+insurance companies, and registered investment companies also qualify automatically.
 
 **Why the others are wrong:**
+
 - A) & B) These entities need $50 million+ to qualify
 - D) Individuals are always retail, regardless of wealth
 
@@ -48,9 +54,11 @@ Registered investment advisers are automatically institutional regardless of ass
 
 **The surviving owner automatically inherits the entire account**
 
-JTWROS (Joint Tenants With Right of Survivorship) means the surviving owner inherits automatically, bypassing probate.
+JTWROS (Joint Tenants With Right of Survivorship) means the surviving owner inherits automatically,
+bypassing probate.
 
 **Why the others are wrong:**
+
 - A) & D) The account isn't frozen or closed—it continues
 - B) That describes Tenants in Common (TIC)
 
@@ -60,9 +68,11 @@ JTWROS (Joint Tenants With Right of Survivorship) means the surviving owner inhe
 
 **Product-specific suitability**
 
-The three suitability obligations are: reasonable-basis, customer-specific, and quantitative. "Product-specific" is not one of them.
+The three suitability obligations are: reasonable-basis, customer-specific, and quantitative.
+"Product-specific" is not one of them.
 
-**Key concept:** Reasonable-basis means the firm understands the product. Customer-specific means it's right for THIS customer. Quantitative means the trading frequency is appropriate.
+**Key concept:** Reasonable-basis means the firm understands the product. Customer-specific means
+it's right for THIS customer. Quantitative means the trading frequency is appropriate.
 
 ---
 
@@ -70,9 +80,11 @@ The three suitability obligations are: reasonable-basis, customer-specific, and 
 
 **Obtain a signed options agreement within 15 days of account approval**
 
-The options agreement must be signed within 15 days of account approval. Trading can begin before the agreement is returned.
+The options agreement must be signed within 15 days of account approval. Trading can begin before
+the agreement is returned.
 
 **Why the others are wrong:**
+
 - B) No specific asset requirement is mandated
 - C) Customers don't need licenses
 - D) Trading can begin immediately upon approval
@@ -108,6 +120,7 @@ The stock must rise above $54 for the investor to profit after accounting for th
 **Limited gain potential, limited loss potential**
 
 Covered call = own stock + write call:
+
 - Limited gain: Stock can only be called away at strike
 - Limited loss: Stock could fall, but premium received provides cushion
 
@@ -131,6 +144,7 @@ Covered call = own stock + write call:
 Naked short calls have unlimited loss potential because the stock can rise indefinitely.
 
 **Why the others are wrong:**
+
 - A) Long call: max loss is premium
 - B) Long put: max loss is premium
 - C) Short put: max loss is strike minus premium
@@ -141,7 +155,8 @@ Naked short calls have unlimited loss potential because the stock can rise indef
 
 **The full faith, credit, and taxing power of the issuer**
 
-GO bonds are backed by the issuer's ability to tax. Revenue bonds (not GO) are backed by specific projects.
+GO bonds are backed by the issuer's ability to tax. Revenue bonds (not GO) are backed by specific
+projects.
 
 ---
 
@@ -165,8 +180,7 @@ G-37 is the "pay-to-play" rule. Contributions create a 2-year ban from business 
 
 **Reg T = 50%**
 
-Purchase: 200 × $80 = $16,000
-Initial margin: $16,000 × 50% = **$8,000**
+Purchase: 200 × $80 = $16,000 Initial margin: $16,000 × 50% = **$8,000**
 
 ---
 
@@ -174,9 +188,8 @@ Initial margin: $16,000 × 50% = **$8,000**
 
 **SMA = Equity - (Market Value × 50%)**
 
-Equity: $60,000 - $25,000 = $35,000
-Minimum required: $60,000 × 50% = $30,000
-SMA: $35,000 - $30,000 = **$5,000**
+Equity: $60,000 - $25,000 = $35,000 Minimum required: $60,000 × 50% = $30,000 SMA: $35,000 - $30,000
+= **$5,000**
 
 ---
 
@@ -192,9 +205,8 @@ Trigger = $30,000 ÷ 0.75 = **$40.00**
 
 **Current yield = Annual interest ÷ Market price**
 
-Annual interest: 6% × $1,000 = $60
-Market price: 105 × $10 = $1,050
-Current yield: $60 ÷ $1,050 = **5.71%**
+Annual interest: 6% × $1,000 = $60 Market price: 105 × $10 = $1,050 Current yield: $60 ÷ $1,050 =
+**5.71%**
 
 ---
 
@@ -228,7 +240,8 @@ NAV = ($100M - $5M) ÷ 5M = $95M ÷ 5M = **$19.00**
 
 **They trade on exchanges and may trade at a premium or discount**
 
-Closed-end funds have fixed shares that trade on exchanges at market prices, which can differ from NAV.
+Closed-end funds have fixed shares that trade on exchanges at market prices, which can differ from
+NAV.
 
 ---
 
@@ -244,7 +257,8 @@ Roth contributions are after-tax, but qualified distributions are completely tax
 
 **Tax-deferred until withdrawal**
 
-Variable annuity earnings grow tax-deferred during accumulation. Taxed as ordinary income upon withdrawal.
+Variable annuity earnings grow tax-deferred during accumulation. Taxed as ordinary income upon
+withdrawal.
 
 ---
 
@@ -252,8 +266,7 @@ Variable annuity earnings grow tax-deferred during accumulation. Taxed as ordina
 
 **300 shares at $60**
 
-3:2 split: 200 × (3/2) = 300 shares
-Price: $90 × (2/3) = $60
+3:2 split: 200 × (3/2) = 300 shares Price: $90 × (2/3) = $60
 
 Total value unchanged: 200 × $90 = 300 × $60 = $18,000
 
@@ -271,7 +284,8 @@ Convertible preferred can be exchanged for common stock at a predetermined ratio
 
 **Unlimited liability for partnership debts**
 
-General partners have unlimited liability. Limited partners have liability limited to their investment.
+General partners have unlimited liability. Limited partners have liability limited to their
+investment.
 
 ---
 
@@ -279,7 +293,8 @@ General partners have unlimited liability. Limited partners have liability limit
 
 **Investors expect high future growth**
 
-High P/E suggests investors are paying more for each dollar of current earnings, typically because they expect earnings growth.
+High P/E suggests investors are paying more for each dollar of current earnings, typically because
+they expect earnings growth.
 
 ---
 
@@ -303,4 +318,4 @@ Regular way settlement for stocks and bonds is T+1 as of 2024.
 
 ---
 
-*Review any questions you missed before taking the next practice exam.*
+_Review any questions you missed before taking the next practice exam._

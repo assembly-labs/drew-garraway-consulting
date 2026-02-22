@@ -1,53 +1,53 @@
 {
-  "name": "fhm",
-  "version": "1.0.0",
-  "description": "Building F.U. Money with a punk rock attitude - A financial journey documentation",
-  "private": true,
-  "author": "Drew Garraway",
-  "license": "UNLICENSED",
-  "type": "module",
-  "scripts": {
-    "setup": "node scripts/setup.js",
-    "postinstall": "node scripts/setup.js",
-    "dev": "python3 -m http.server 8000",
-    "serve": "npx serve .",
-    "format": "prettier --write '**/*.{html,css,js,md,json}'",
-    "lint:html": "html-validate '*.html' 'pages/**/*.html'",
-    "lint:css": "stylelint 'assets/**/*.css'",
-    "lint:js": "eslint 'assets/**/*.js' 'scripts/**/*.js'",
-    "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
-    "test": "vitest",
-    "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage",
-    "validate": "node scripts/validate-content.js",
-    "generate-cards": "node scripts/generate-flashcards.js",
-    "build": "npm run generate-cards && npm run validate && npm run cache-bust",
-    "cache-bust": "node scripts/cache-bust.js",
-    "cache-bust:check": "node scripts/cache-bust.js --check",
-    "cache-bust:clean": "node scripts/cache-bust.js --clean",
-    "predeploy": "npm run cache-bust"
-  },
-  "keywords": [
-    "finance",
-    "personal-finance",
-    "wealth-building",
-    "financial-independence",
-    "F.U. money",
-    "punk",
-    "rebellion"
-  ],
-  "devDependencies": {
-    "prettier": "^3.1.0",
-    "eslint": "^8.54.0",
-    "stylelint": "^15.11.0",
-    "html-validate": "^8.7.0",
-    "serve": "^14.2.1",
-    "vitest": "^2.1.0",
-    "@vitest/coverage-v8": "^2.1.0",
-    "jsdom": "^25.0.0"
-  },
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
-  }
+    "name": "fhm",
+    "version": "1.0.0",
+    "description": "Building F.U. Money with a punk rock attitude - A financial journey documentation",
+    "private": true,
+    "author": "Drew Garraway",
+    "license": "UNLICENSED",
+    "type": "module",
+    "scripts": {
+        "setup": "node scripts/setup.js",
+        "postinstall": "node scripts/setup.js",
+        "dev": "python3 -m http.server 8000",
+        "serve": "npx serve .",
+        "format": "prettier --write '**/*.{html,css,js,md,json}'",
+        "lint:html": "html-validate '*.html' 'pages/**/*.html'",
+        "lint:css": "stylelint 'assets/**/*.css'",
+        "lint:js": "eslint 'assets/**/*.js' 'scripts/**/*.js'",
+        "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
+        "test": "vitest",
+        "test:run": "vitest run",
+        "test:coverage": "vitest run --coverage",
+        "validate": "node scripts/validate-content.js",
+        "generate-cards": "node scripts/generate-flashcards.js",
+        "build": "npm run generate-cards && npm run validate && npm run cache-bust",
+        "cache-bust": "node scripts/cache-bust.js",
+        "cache-bust:check": "node scripts/cache-bust.js --check",
+        "cache-bust:clean": "node scripts/cache-bust.js --clean",
+        "predeploy": "npm run cache-bust"
+    },
+    "keywords": [
+        "finance",
+        "personal-finance",
+        "wealth-building",
+        "financial-independence",
+        "F.U. money",
+        "punk",
+        "rebellion"
+    ],
+    "devDependencies": {
+        "prettier": "^3.1.0",
+        "eslint": "^8.54.0",
+        "stylelint": "^15.11.0",
+        "html-validate": "^8.7.0",
+        "serve": "^14.2.1",
+        "vitest": "^2.1.0",
+        "@vitest/coverage-v8": "^2.1.0",
+        "jsdom": "^25.0.0"
+    },
+    "engines": {
+        "node": ">=18.0.0",
+        "npm": ">=9.0.0"
+    }
 }

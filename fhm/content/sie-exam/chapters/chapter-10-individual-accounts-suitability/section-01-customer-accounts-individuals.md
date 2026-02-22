@@ -1,8 +1,9 @@
 ---
 chapter: 10
 section: 1
-title: "Customer Accounts for Individuals"
-description: "New account requirements, customer identification, privacy rules, and trading authorizations"
+title: 'Customer Accounts for Individuals'
+description:
+  'New account requirements, customer identification, privacy rules, and trading authorizations'
 topics:
   - New Account Form Requirements
   - Customer Identification and Verification
@@ -19,17 +20,28 @@ last_updated: 2026-01-02
 
 ## Introduction
 
-In 2009, a man named Allen Stanford was arrested at his girlfriend's home in Virginia. He'd been running a $7 billion Ponzi scheme through certificates of deposit issued by an offshore bank in Antigua—a bank he happened to own. Stanford had been knighted by Antigua, sponsored international cricket tournaments, and cultivated an image of tropical respectability. Sophisticated investors handed him billions.
+In 2009, a man named Allen Stanford was arrested at his girlfriend's home in Virginia. He'd been
+running a $7 billion Ponzi scheme through certificates of deposit issued by an offshore bank in
+Antigua—a bank he happened to own. Stanford had been knighted by Antigua, sponsored international
+cricket tournaments, and cultivated an image of tropical respectability. Sophisticated investors
+handed him billions.
 
-How did no one catch this earlier? Among other failures, the answer involves inadequate customer identification, insufficient due diligence, and a system that didn't ask enough questions about where the money was really going.
+How did no one catch this earlier? Among other failures, the answer involves inadequate customer
+identification, insufficient due diligence, and a system that didn't ask enough questions about
+where the money was really going.
 
-Every rule in this chapter exists because someone, somewhere, got burned. The paperwork you'll encounter when opening customer accounts isn't bureaucratic busywork—it's the financial industry's scar tissue from decades of fraud, money laundering, and exploitation.
+Every rule in this chapter exists because someone, somewhere, got burned. The paperwork you'll
+encounter when opening customer accounts isn't bureaucratic busywork—it's the financial industry's
+scar tissue from decades of fraud, money laundering, and exploitation.
 
-Before opening a new account, a representative is required to gather and record a substantial amount of information. This information serves three critical purposes: establishing customer identity, determining suitability for investments, and complying with anti-money laundering requirements.
+Before opening a new account, a representative is required to gather and record a substantial amount
+of information. This information serves three critical purposes: establishing customer identity,
+determining suitability for investments, and complying with anti-money laundering requirements.
 
 ## Learning Objectives
 
 By the end of this section, you'll be able to:
+
 - Identify required vs. optional information on new account forms
 - Explain the Customer Identification Program (CIP) requirements under the USA PATRIOT Act
 - Describe anti-money laundering procedures including SARs, CTRs, and MILs
@@ -41,7 +53,8 @@ By the end of this section, you'll be able to:
 
 ## The New Account Form
 
-Opening a brokerage account requires collecting specific information. The exam tests your knowledge of what's required versus what's merely helpful.
+Opening a brokerage account requires collecting specific information. The exam tests your knowledge
+of what's required versus what's merely helpful.
 
 ### Required Information
 
@@ -63,7 +76,8 @@ Opening a brokerage account requires collecting specific information. The exam t
 Beyond basic identification, firms must gather information to make suitable recommendations:
 
 - <span class="key-term">Financial situation</span> — income, net worth, liquid net worth
-- <span class="key-term">Investment objectives</span> — growth, income, capital preservation, speculation
+- <span class="key-term">Investment objectives</span> — growth, income, capital preservation,
+  speculation
 - <span class="key-term">Investment experience</span> — knowledge level with different products
 - <span class="key-term">Risk tolerance</span> — how much volatility can they stomach?
 - <span class="key-term">Time horizon</span> — when will they need the money?
@@ -84,14 +98,18 @@ Beyond basic identification, firms must gather information to make suitable reco
 
 A principal must approve each new account. The timing depends on the type of trade:
 
-- <span class="key-term">Solicited orders</span> (recommended by the rep): Principal approval required **before** the first transaction
-- <span class="key-term">Unsolicited orders</span> (initiated by the customer): Principal approval must occur **promptly after** the transaction
+- <span class="key-term">Solicited orders</span> (recommended by the rep): Principal approval
+  required **before** the first transaction
+- <span class="key-term">Unsolicited orders</span> (initiated by the customer): Principal approval
+  must occur **promptly after** the transaction
 
 ---
 
 ## Customer Identification Program (CIP)
 
-The <span class="key-term">USA PATRIOT Act</span> was passed in response to the September 11, 2001 terrorist attacks. Among its many provisions, it requires financial institutions to implement a <span class="key-term">Customer Identification Program (CIP)</span>.
+The <span class="key-term">USA PATRIOT Act</span> was passed in response to the September 11, 2001
+terrorist attacks. Among its many provisions, it requires financial institutions to implement a
+<span class="key-term">Customer Identification Program (CIP)</span>.
 
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
@@ -101,8 +119,10 @@ The <span class="key-term">USA PATRIOT Act</span> was passed in response to the 
 ### CIP Requirements
 
 Firms must:
+
 1. **Obtain identifying information** — name, date of birth, address, identification number
-2. **Verify identity** — using documentary methods (government-issued ID) or non-documentary methods (checking databases, references)
+2. **Verify identity** — using documentary methods (government-issued ID) or non-documentary methods
+   (checking databases, references)
 3. **Compare against government lists** — check if the customer appears on any terrorist watch lists
 4. **Maintain records** — keep identification records for **5 years after the account is closed**
 
@@ -115,9 +135,12 @@ Firms must:
 
 ## Know Your Customer (KYC)
 
-<span class="key-term">Know Your Customer (KYC)</span> goes beyond basic identification. It requires firms to use reasonable diligence to understand the customer's investment profile and to keep that information current.
+<span class="key-term">Know Your Customer (KYC)</span> goes beyond basic identification. It requires
+firms to use reasonable diligence to understand the customer's investment profile and to keep that
+information current.
 
 KYC means understanding:
+
 - The customer's financial situation
 - Their investment experience and objectives
 - Whether recommendations are suitable
@@ -132,7 +155,9 @@ KYC means understanding:
 
 ## Anti-Money Laundering (AML)
 
-The <span class="key-term">Bank Secrecy Act</span> established the framework for detecting and preventing money laundering in the United States. Financial institutions must implement AML programs that include:
+The <span class="key-term">Bank Secrecy Act</span> established the framework for detecting and
+preventing money laundering in the United States. Financial institutions must implement AML programs
+that include:
 
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
@@ -146,7 +171,8 @@ The <span class="key-term">Bank Secrecy Act</span> established the framework for
 
 ### Suspicious Activity Reports (SARs)
 
-A <span class="key-term">Suspicious Activity Report (SAR)</span> must be filed when a firm detects potentially suspicious activity.
+A <span class="key-term">Suspicious Activity Report (SAR)</span> must be filed when a firm detects
+potentially suspicious activity.
 
 <div class="critical-concept">
   <div class="critical-concept__label">SAR FILING REQUIREMENTS</div>
@@ -184,11 +210,15 @@ A <span class="key-term">Suspicious Activity Report (SAR)</span> must be filed w
 
 ### Currency Transaction Reports (CTRs)
 
-Banks (not broker-dealers directly, but the banks they work with) must file <span class="key-term">Currency Transaction Reports (CTRs)</span> for cash transactions exceeding **$10,000**.
+Banks (not broker-dealers directly, but the banks they work with) must file
+<span class="key-term">Currency Transaction Reports (CTRs)</span> for cash transactions exceeding
+**$10,000**.
 
 ### Monetary Instrument Logs (MILs)
 
-A <span class="key-term">Monetary Instrument Log (MIL)</span> must be maintained when a customer uses **cash between $3,000 and $10,000** to purchase negotiable instruments such as:
+A <span class="key-term">Monetary Instrument Log (MIL)</span> must be maintained when a customer
+uses **cash between $3,000 and $10,000** to purchase negotiable instruments such as:
+
 - Cashier's checks
 - Money orders
 - Traveler's checks
@@ -226,7 +256,8 @@ A <span class="key-term">Monetary Instrument Log (MIL)</span> must be maintained
 
 ## Regulation S-P: Privacy Rules
 
-<span class="key-term">Regulation S-P</span> governs how financial institutions handle customer privacy. The "S-P" stands for "Safeguarding Personal" information.
+<span class="key-term">Regulation S-P</span> governs how financial institutions handle customer
+privacy. The "S-P" stands for "Safeguarding Personal" information.
 
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
@@ -242,11 +273,14 @@ Firms must provide customers with:
    - How it will be used
    - With whom it may be shared
 
-2. <span class="key-term">Annual Privacy Notice</span> — provided every year the account remains open
+2. <span class="key-term">Annual Privacy Notice</span> — provided every year the account remains
+   open
 
 ### Opt-Out Rights
 
-Customers have the right to <span class="key-term">opt out</span> of having their information shared with **non-affiliated third parties**. However, they cannot opt out of information sharing with:
+Customers have the right to <span class="key-term">opt out</span> of having their information shared
+with **non-affiliated third parties**. However, they cannot opt out of information sharing with:
+
 - Affiliated companies (within the same corporate family)
 - Third parties processing transactions
 - Regulatory agencies
@@ -262,7 +296,8 @@ Customers have the right to <span class="key-term">opt out</span> of having thei
 
 ### Power of Attorney
 
-A customer can grant another person authority over their account through a <span class="key-term">power of attorney</span>:
+A customer can grant another person authority over their account through a
+<span class="key-term">power of attorney</span>:
 
 <div class="comparison-table">
   <table>
@@ -290,7 +325,9 @@ A customer can grant another person authority over their account through a <span
 
 ### Discretionary Accounts
 
-A <span class="key-term">discretionary account</span> gives the representative authority to make trading decisions without consulting the customer for each transaction. This is a significant grant of trust—and one that has been abused.
+A <span class="key-term">discretionary account</span> gives the representative authority to make
+trading decisions without consulting the customer for each transaction. This is a significant grant
+of trust—and one that has been abused.
 
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
@@ -318,15 +355,19 @@ Discretion over **time and price only** = NOT discretionary (good for same day o
 
 ## Accounts for Employees of Other Firms
 
-When opening an account for someone employed by another FINRA member firm, special rules apply to prevent conflicts of interest and ensure proper oversight.
+When opening an account for someone employed by another FINRA member firm, special rules apply to
+prevent conflicts of interest and ensure proper oversight.
 
 ### Requirements
 
-1. **Written notification** — The employing firm must be notified in writing before or promptly after opening the account
+1. **Written notification** — The employing firm must be notified in writing before or promptly
+   after opening the account
 
-2. **Duplicate statements** — Upon request from the employer, duplicate account statements and confirmations must be sent to the employing firm
+2. **Duplicate statements** — Upon request from the employer, duplicate account statements and
+   confirmations must be sent to the employing firm
 
-3. **Employer may refuse** — The employing firm can instruct you not to open the account for their employee
+3. **Employer may refuse** — The employing firm can instruct you not to open the account for their
+   employee
 
 <div class="info-box">
   <div class="info-box__title">Why These Rules Exist</div>
@@ -337,7 +378,9 @@ When opening an account for someone employed by another FINRA member firm, speci
 
 ## Summary
 
-Opening a customer account involves much more than collecting a signature (which, remember, isn't even required). The information gathered serves critical purposes: identifying the customer, assessing suitability, and complying with anti-money laundering requirements.
+Opening a customer account involves much more than collecting a signature (which, remember, isn't
+even required). The information gathered serves critical purposes: identifying the customer,
+assessing suitability, and complying with anti-money laundering requirements.
 
 ### Key Points to Remember
 

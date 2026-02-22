@@ -1,46 +1,46 @@
 {
-  "chapter": 8,
-  "title": "Trade Processing and Settlement",
-  "description": "Understanding how trades move from execution to settlement, including order tickets, clearing, settlement timing, and dividend distributions",
-  "sections": [
-    {
-      "section": 1,
-      "title": "Order Tickets and Prohibited Trading Practices",
-      "file": "section-01-order-tickets-and-prohibited-practices.md",
-      "topics": [
-        "Order Ticket Requirements",
-        "Regulation SHO",
-        "Best Execution",
-        "Prohibited Trading Practices",
-        "Market Manipulation"
-      ]
-    },
-    {
-      "section": 2,
-      "title": "Trade Clearing and Settlement",
-      "file": "section-02-trade-clearing-and-settlement.md",
-      "topics": [
-        "Trade Clearing",
-        "The DTC and NSCC",
-        "Trade Settlement (T+1)",
-        "Good Delivery Requirements",
-        "Customer Confirmations",
-        "Accrued Interest"
-      ]
-    },
-    {
-      "section": 3,
-      "title": "Distribution Dates",
-      "file": "section-03-distribution-dates.md",
-      "topics": [
-        "Cash Dividend Dates",
-        "Ex-Date and Record Date",
-        "Stock Splits and Stock Dividends"
-      ]
-    }
-  ],
-  "estimated_time": 75,
-  "difficulty": "intermediate",
-  "prerequisites": ["chapter-07-trading-markets"],
-  "last_updated": "2024-12-16"
+    "chapter": 8,
+    "title": "Trade Processing and Settlement",
+    "description": "Understanding how trades move from execution to settlement, including order tickets, clearing, settlement timing, and dividend distributions",
+    "sections": [
+        {
+            "section": 1,
+            "title": "Order Tickets and Prohibited Trading Practices",
+            "file": "section-01-order-tickets-and-prohibited-practices.md",
+            "topics": [
+                "Order Ticket Requirements",
+                "Regulation SHO",
+                "Best Execution",
+                "Prohibited Trading Practices",
+                "Market Manipulation"
+            ]
+        },
+        {
+            "section": 2,
+            "title": "Trade Clearing and Settlement",
+            "file": "section-02-trade-clearing-and-settlement.md",
+            "topics": [
+                "Trade Clearing",
+                "The DTC and NSCC",
+                "Trade Settlement (T+1)",
+                "Good Delivery Requirements",
+                "Customer Confirmations",
+                "Accrued Interest"
+            ]
+        },
+        {
+            "section": 3,
+            "title": "Distribution Dates",
+            "file": "section-03-distribution-dates.md",
+            "topics": [
+                "Cash Dividend Dates",
+                "Ex-Date and Record Date",
+                "Stock Splits and Stock Dividends"
+            ]
+        }
+    ],
+    "estimated_time": 75,
+    "difficulty": "intermediate",
+    "prerequisites": ["chapter-07-trading-markets"],
+    "last_updated": "2024-12-16"
 }

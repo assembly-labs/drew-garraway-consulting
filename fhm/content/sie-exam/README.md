@@ -24,8 +24,8 @@ Raw textbook content is not publishable. Every section must be transformed with:
 4. **Observational humor** - One subtle, well-placed moment per section
 5. **The "why"** - Explain why rules exist, not just what they are
 
-See `/docs/ADDING_NEW_CONTENT.md` for the complete transformation guide.
-See `/design/brand/brand-voice.md` for voice and tone requirements.
+See `/docs/ADDING_NEW_CONTENT.md` for the complete transformation guide. See
+`/design/brand/brand-voice.md` for voice and tone requirements.
 
 ---
 
@@ -70,11 +70,13 @@ See `/design/brand/brand-voice.md` for voice and tone requirements.
 ## Content Style Guide
 
 ### Raw Notes
+
 - Can be informal, personal study notes
 - Include all important concepts from source materials
 - Mark key terms and test tips
 
 ### Study Guides (Web-Ready)
+
 - Written in Franklin Hugh brand voice
 - Include historical context where relevant
 - One subtle humor element per chapter
@@ -82,6 +84,7 @@ See `/design/brand/brand-voice.md` for voice and tone requirements.
 - Test tips highlighted appropriately
 
 ### Practice Materials
+
 - Multiple choice questions matching SIE format
 - Flashcards for key terms
 - Practice scenarios for application
@@ -91,40 +94,32 @@ See `/design/brand/brand-voice.md` for voice and tone requirements.
 ### Step-by-Step Process
 
 **Phase 1: Extract Raw Content**
+
 1. Receive screenshots or source materials
 2. Extract all factual content into `raw-notes/chapter-XX-topic.md`
 3. Capture key terms, definitions, formulas, regulations
 
-**Phase 2: Transform Content (CRITICAL)**
-4. Research historical context for major topics
-5. Write engaging opening hooks for each section
-6. Add real-world examples with concrete numbers
-7. Include one subtle humor moment per section
-8. Explain the "why" behind every regulation
-9. Apply brand voice throughout (see `/design/brand/brand-voice.md`)
+**Phase 2: Transform Content (CRITICAL)** 4. Research historical context for major topics 5. Write
+engaging opening hooks for each section 6. Add real-world examples with concrete numbers 7. Include
+one subtle humor moment per section 8. Explain the "why" behind every regulation 9. Apply brand
+voice throughout (see `/design/brand/brand-voice.md`)
 
-**Phase 3: Structure & Format**
-10. Create chapter folder: `chapters/chapter-XX-[title]/`
-11. Create section files following `templates/section-template.md`
-12. Create `chapter-meta.json` with metadata
-13. Apply HTML components (key-term, info-box, historical-note, test-tip)
+**Phase 3: Structure & Format** 10. Create chapter folder: `chapters/chapter-XX-[title]/` 11. Create
+section files following `templates/section-template.md` 12. Create `chapter-meta.json` with
+metadata 13. Apply HTML components (key-term, info-box, historical-note, test-tip)
 
-**Phase 4: Generate HTML**
-14. Generate HTML files in `/public/`
-15. Apply styling and navigation component
-16. Verify all components render correctly
+**Phase 4: Generate HTML** 14. Generate HTML files in `/public/` 15. Apply styling and navigation
+component 16. Verify all components render correctly
 
-**Phase 5: Deploy**
-17. Update `sie-navigation-config.js` with new sections
-18. Update `sie-study-materials.html` with chapter card and progress badge
-19. Run `npm run validate` to check for sync errors
-20. Run `npm run cache-bust` for version strings
-21. Copy files to repo root (live site serves from root, not `/public/`)
-22. Git commit and push
+**Phase 5: Deploy** 17. Update `sie-navigation-config.js` with new sections 18. Update
+`sie-study-materials.html` with chapter card and progress badge 19. Run `npm run validate` to check
+for sync errors 20. Run `npm run cache-bust` for version strings 21. Copy files to repo root (live
+site serves from root, not `/public/`) 22. Git commit and push
 
 ### Quality Gates
 
 Before publishing, content must:
+
 - [ ] Pass the "Dinner Party Test" (sounds natural in conversation)
 - [ ] Have opening hook, not definition
 - [ ] Include historical context
@@ -135,4 +130,4 @@ Before publishing, content must:
 
 ---
 
-*Last updated: December 2024*
+_Last updated: December 2024_

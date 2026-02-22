@@ -1,8 +1,8 @@
 ---
 chapter: 6
 section: 1
-title: "Investment Company Basics"
-description: "Understanding the three types of investment companies and how they operate"
+title: 'Investment Company Basics'
+description: 'Understanding the three types of investment companies and how they operate'
 topics:
   - Types of Investment Companies
   - Management Companies
@@ -17,19 +17,26 @@ last_updated: 2024-12-12
 
 ## Introduction
 
-Before 1924, if you wanted a diversified portfolio of stocks, you needed to be wealthy. Really wealthy. The kind of wealthy where you could afford to buy meaningful positions in dozens of companies while still having enough left over for a reasonable life.
+Before 1924, if you wanted a diversified portfolio of stocks, you needed to be wealthy. Really
+wealthy. The kind of wealthy where you could afford to buy meaningful positions in dozens of
+companies while still having enough left over for a reasonable life.
 
 Then something remarkable happened in Boston.
 
-The Massachusetts Investors Trust launched on March 21, 1924, becoming what most consider America's first modern mutual fund. The concept was elegantly simple: pool money from many investors, hire a professional to manage it, and suddenly the average person could own a slice of corporate America.
+The Massachusetts Investors Trust launched on March 21, 1924, becoming what most consider America's
+first modern mutual fund. The concept was elegantly simple: pool money from many investors, hire a
+professional to manage it, and suddenly the average person could own a slice of corporate America.
 
-A century later, packaged products—mutual funds, ETFs, REITs, and their cousins—hold over $30 trillion in assets. They've become the primary vehicle through which most Americans invest for retirement.
+A century later, packaged products—mutual funds, ETFs, REITs, and their cousins—hold over $30
+trillion in assets. They've become the primary vehicle through which most Americans invest for
+retirement.
 
 Understanding these products isn't optional if you're in the securities industry. It's foundational.
 
 ## Learning Objectives
 
 By the end of this section, you'll be able to:
+
 - Identify the three types of investment companies under the Investment Company Act of 1940
 - Distinguish between open-end and closed-end management companies
 - Explain how Unit Investment Trusts differ from management companies
@@ -44,7 +51,8 @@ By the end of this section, you'll be able to:
   <p><strong>This topic was marked WEAK on your practice exam.</strong> Pay close attention to the three types of investment companies and their distinguishing characteristics.</p>
 </div>
 
-An investment company does exactly what the name suggests: it's a company that invests. More specifically, it:
+An investment company does exactly what the name suggests: it's a company that invests. More
+specifically, it:
 
 - Issues securities to raise capital from investors
 - Uses those proceeds to build a portfolio of securities
@@ -54,7 +62,9 @@ Think of it as crowdfunding for Wall Street, except it predates that term by abo
 
 ### The Investment Company Act of 1940
 
-After the stock market crash of 1929 and the subsequent Great Depression, Congress decided that maybe—just maybe—some regulation of pooled investment vehicles would be prudent. The Investment Company Act of 1940 established the framework we still use today.
+After the stock market crash of 1929 and the subsequent Great Depression, Congress decided that
+maybe—just maybe—some regulation of pooled investment vehicles would be prudent. The Investment
+Company Act of 1940 established the framework we still use today.
 
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
@@ -111,7 +121,9 @@ The Act recognizes three types of investment companies:
                                   Fund
 ```
 
-**Face-Amount Certificate Companies** are largely historical relics—they promised to pay a fixed sum at maturity if you made periodic payments. Think of them as a hybrid between a savings bond and an annuity. You'll rarely encounter them in practice, but they may appear on your exam.
+**Face-Amount Certificate Companies** are largely historical relics—they promised to pay a fixed sum
+at maturity if you made periodic payments. Think of them as a hybrid between a savings bond and an
+annuity. You'll rarely encounter them in practice, but they may appear on your exam.
 
 The other two types are where the action is.
 
@@ -119,20 +131,28 @@ The other two types are where the action is.
 
 ## Management Companies
 
-Management companies are <span class="key-term">actively managed</span> portfolios of securities. A fund manager—called an <span class="key-term">investment adviser</span>—makes decisions about what to buy and sell based on the fund's <span class="key-term">investment objective</span>.
+Management companies are <span class="key-term">actively managed</span> portfolios of securities. A
+fund manager—called an <span class="key-term">investment adviser</span>—makes decisions about what
+to buy and sell based on the fund's <span class="key-term">investment objective</span>.
 
-This is the key distinction: someone is actively making decisions. Whether those decisions add value after fees is a debate that has launched a thousand academic papers and at least one very successful index fund company in Valley Forge, Pennsylvania.
+This is the key distinction: someone is actively making decisions. Whether those decisions add value
+after fees is a debate that has launched a thousand academic papers and at least one very successful
+index fund company in Valley Forge, Pennsylvania.
 
 ### Open-End Management Companies – MUTUAL FUNDS
 
-When most people say "mutual fund," they mean an open-end management company. Here's what defines them:
+When most people say "mutual fund," they mean an open-end management company. Here's what defines
+them:
 
 - **Can only issue common stock** — no bonds or preferred shares
-- **The number of shares is "open-ended"** — the fund creates new shares when investors buy and retires shares when they sell
+- **The number of shares is "open-ended"** — the fund creates new shares when investors buy and
+  retires shares when they sell
 - **Shares are non-negotiable** — you can't sell your shares to another investor on an exchange
 - **Shares are redeemed** at the Net Asset Value (NAV) — the fund itself buys back your shares
 
-The "open-ended" nature is crucial. When you invest $10,000 in a mutual fund, the fund creates new shares for you. When you withdraw, those shares disappear. The fund is constantly expanding and contracting.
+The "open-ended" nature is crucial. When you invest $10,000 in a mutual fund, the fund creates new
+shares for you. When you withdraw, those shares disappear. The fund is constantly expanding and
+contracting.
 
 ### Closed-End Management Companies – PUBLICLY TRADED FUNDS
 
@@ -188,7 +208,8 @@ Closed-end funds work differently:
   <p>Because closed-end fund shares trade on the open market, they can trade at a <strong>premium</strong> or <strong>discount</strong> to their NAV. If a fund holds $100 million in securities but investors are pessimistic about its prospects, it might trade at $95 million (a 5% discount). If investors are enthusiastic, it might trade at $105 million (a 5% premium).</p>
 </div>
 
-This creates arbitrage opportunities that don't exist with open-end funds—and exam questions that definitely do.
+This creates arbitrage opportunities that don't exist with open-end funds—and exam questions that
+definitely do.
 
 ---
 
@@ -204,9 +225,11 @@ This creates arbitrage opportunities that don't exist with open-end funds—and 
   </ol>
 </div>
 
-Unit Investment Trusts (UITs) take a different approach: they assemble a fixed portfolio and hold it. No active management. No trading. Just... holding.
+Unit Investment Trusts (UITs) take a different approach: they assemble a fixed portfolio and hold
+it. No active management. No trading. Just... holding.
 
-- Issue <span class="key-term">shares of beneficial interest</span> representing an undivided interest in the trust
+- Issue <span class="key-term">shares of beneficial interest</span> representing an undivided
+  interest in the trust
 - Have a <span class="key-term">termination date</span> — the trust eventually winds down
 - Have <span class="key-term">no board of directors</span> — there's a trustee instead
 
@@ -219,7 +242,8 @@ The classic UIT:
 - Once selected, the portfolio doesn't change
 - Matures at a fixed date
 
-If you want to know exactly what you own and don't want anyone tinkering with it, a fixed UIT delivers that certainty.
+If you want to know exactly what you own and don't want anyone tinkering with it, a fixed UIT
+delivers that certainty.
 
 ### Non-Fixed UIT
 
@@ -229,7 +253,8 @@ Non-fixed UITs invest in mutual funds, typically within insurance company produc
 - Use investment companies to provide investment options
 - Popular for retirement planning
 
-The "non-fixed" refers to the fact that the underlying mutual funds are actively managed, even though the UIT structure itself is passive.
+The "non-fixed" refers to the fact that the underlying mutual funds are actively managed, even
+though the UIT structure itself is passive.
 
 ---
 
@@ -241,7 +266,8 @@ The "non-fixed" refers to the fact that the underlying mutual funds are actively
 
 ### Key Points to Remember
 
-1. **Three types of investment companies**: Face-amount certificate companies (rare), management companies, and UITs
+1. **Three types of investment companies**: Face-amount certificate companies (rare), management
+   companies, and UITs
 2. **Open-end funds**: Create and redeem shares continuously at NAV
 3. **Closed-end funds**: Fixed number of shares trading on exchanges
 4. **UITs**: Fixed portfolio, no active management, have termination dates
@@ -256,17 +282,24 @@ The "non-fixed" refers to the fact that the underlying mutual funds are actively
 
 ## Summary
 
-Investment companies pool investor money to create diversified portfolios. The Investment Company Act of 1940 established three categories: face-amount certificate companies (historical), management companies (open-end mutual funds and closed-end funds), and unit investment trusts.
+Investment companies pool investor money to create diversified portfolios. The Investment Company
+Act of 1940 established three categories: face-amount certificate companies (historical), management
+companies (open-end mutual funds and closed-end funds), and unit investment trusts.
 
-The key distinctions center on how shares are issued, whether they can be redeemed, and whether the portfolio is actively managed.
+The key distinctions center on how shares are issued, whether they can be redeemed, and whether the
+portfolio is actively managed.
 
 ### Quick Reference
 
 **Key Terms:**
-- <span class="key-term">Investment Company</span>: Entity that pools investor capital to invest in securities
-- <span class="key-term">NAV (Net Asset Value)</span>: Per-share value of fund assets minus liabilities
+
+- <span class="key-term">Investment Company</span>: Entity that pools investor capital to invest in
+  securities
+- <span class="key-term">NAV (Net Asset Value)</span>: Per-share value of fund assets minus
+  liabilities
 - <span class="key-term">Redemption</span>: Fund buying back shares from investors at NAV
-- <span class="key-term">Open-End Fund</span>: Mutual fund that continuously issues and redeems shares
+- <span class="key-term">Open-End Fund</span>: Mutual fund that continuously issues and redeems
+  shares
 - <span class="key-term">Closed-End Fund</span>: Fund with fixed shares trading on exchanges
 
 ---

@@ -1,7 +1,7 @@
 ---
-topic: "[CALCULATION_TOPIC]"
+topic: '[CALCULATION_TOPIC]'
 section: [SECTION_NUMBER]
-subsection: "[SUBSECTION_NAME]"
+subsection: '[SUBSECTION_NAME]'
 difficulty: [beginner|intermediate|advanced]
 problem_count: [NUMBER]
 last_updated: [YYYY-MM-DD]
@@ -34,11 +34,11 @@ last_updated: [YYYY-MM-DD]
 
 **Step-by-Step:**
 
-| Step | What We're Doing | Calculation | Result |
-|------|------------------|-------------|--------|
-| 1 | [Action] | [Math] | [Number] |
-| 2 | [Action] | [Math] | [Number] |
-| 3 | [Final step] | [Math] | **[Answer]** |
+| Step | What We're Doing | Calculation | Result       |
+| ---- | ---------------- | ----------- | ------------ |
+| 1    | [Action]         | [Math]      | [Number]     |
+| 2    | [Action]         | [Math]      | [Number]     |
+| 3    | [Final step]     | [Math]      | **[Answer]** |
 
 **Key Insight:** [What to remember]
 
@@ -53,10 +53,10 @@ last_updated: [YYYY-MM-DD]
 <details>
 <summary>Show Solution</summary>
 
-| Step | Calculation | Result |
-|------|-------------|--------|
-| 1 | [Work] | [Result] |
-| 2 | [Work] | **[Answer]** |
+| Step | Calculation | Result       |
+| ---- | ----------- | ------------ |
+| 1    | [Work]      | [Result]     |
+| 2    | [Work]      | **[Answer]** |
 
 </details>
 
@@ -98,10 +98,7 @@ last_updated: [YYYY-MM-DD]
 
 [Problem in multiple choice format]
 
-A) [Choice]
-B) [Choice]
-C) [Choice]
-D) [Choice]
+A) [Choice] B) [Choice] C) [Choice] D) [Choice]
 
 <details>
 <summary>Show Answer</summary>
@@ -128,11 +125,11 @@ D) [Choice]
 
 ## Quick Reference Card
 
-| Calculation | Formula | Quick Example |
-|-------------|---------|---------------|
-| [Name] | [Formula] | [Example with answer] |
-| [Name] | [Formula] | [Example with answer] |
+| Calculation | Formula   | Quick Example         |
+| ----------- | --------- | --------------------- |
+| [Name]      | [Formula] | [Example with answer] |
+| [Name]      | [Formula] | [Example with answer] |
 
 ---
 
-*Practice until automatic. The exam doesn't give time to derive formulas.*
+_Practice until automatic. The exam doesn't give time to derive formulas._

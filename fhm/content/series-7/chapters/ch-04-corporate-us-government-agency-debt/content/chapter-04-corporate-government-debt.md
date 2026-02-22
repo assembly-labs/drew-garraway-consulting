@@ -1,41 +1,57 @@
 # Chapter 4: Corporate, U.S. Government, and Agency Debt
 
-*Series 7 Exam Weight: ~12-15 Questions (10%)*
+_Series 7 Exam Weight: ~12-15 Questions (10%)_
 
 ---
 
 ## Section 1: Corporate Debt
 
-On September 15, 2008, Lehman Brothers filed the largest bankruptcy in American history—$639 billion in assets, gone. Bondholders scrambled to understand their place in line. Secured creditors recovered most of their money. Unsecured bondholders? Not so much. The hierarchy of corporate debt isn't just academic theory—it determines who gets paid when companies fail.
+On September 15, 2008, Lehman Brothers filed the largest bankruptcy in American history—$639 billion
+in assets, gone. Bondholders scrambled to understand their place in line. Secured creditors
+recovered most of their money. Unsecured bondholders? Not so much. The hierarchy of corporate debt
+isn't just academic theory—it determines who gets paid when companies fail.
 
 ### Why This Section Matters
 
-When corporations need capital, they issue debt securities with different structures, security levels, and risk profiles. Understanding the differences between secured bonds, debentures, and subordinated debt—and who gets paid first in bankruptcy—is essential for the Series 7 exam.
+When corporations need capital, they issue debt securities with different structures, security
+levels, and risk profiles. Understanding the differences between secured bonds, debentures, and
+subordinated debt—and who gets paid first in bankruptcy—is essential for the Series 7 exam.
 
 ---
 
 ### Topic 1: Characteristics of Corporate Debt
 
-Corporations issue bonds to raise capital. In the past, there were two types: bearer bonds (with coupons attached) and fully registered bonds.
+Corporations issue bonds to raise capital. In the past, there were two types: bearer bonds (with
+coupons attached) and fully registered bonds.
 
 <div class="historical-note">
   <div class="historical-note__label">From Paper to Electronic</div>
   <p>Bearer bonds were historically issued in physical form with coupons attached. No records were kept of the owner—whoever held the bond could collect interest. The attached coupons were clipped and sent to receive payment. Today, we continue to use the term "coupon" to refer to the stated interest rate (nominal yield) for debt instruments. Bearer bonds are no longer issued.</p>
 </div>
 
-Today, <span class="key-term">fully registered bonds</span> are registered as to principal and interest. The <span class="key-term">registrar</span> keeps track of owners of record. The <span class="key-term">paying agent</span> sends semiannual interest payments directly to the registered owner. At maturity, the paying agent sends the final $1,000 principal repayment.
+Today, <span class="key-term">fully registered bonds</span> are registered as to principal and
+interest. The <span class="key-term">registrar</span> keeps track of owners of record. The
+<span class="key-term">paying agent</span> sends semiannual interest payments directly to the
+registered owner. At maturity, the paying agent sends the final $1,000 principal repayment.
 
-Fully registered bonds are issued as <span class="key-term">book entries</span>—they have no physical certificates. Advanced name, address, and purchase amount are registered with the <span class="key-term">transfer agent</span>. All new issues of bonds in the United States are book entries.
+Fully registered bonds are issued as <span class="key-term">book entries</span>—they have no
+physical certificates. Advanced name, address, and purchase amount are registered with the
+<span class="key-term">transfer agent</span>. All new issues of bonds in the United States are book
+entries.
 
 #### The Indenture
 
-Bonds are issued under a bond contract called an <span class="key-term">indenture</span>. The indenture defines the interest rate, maturity, collateral, and all other features of the bonds. The indenture may also require the corporation to maintain specific <span class="key-term">protective provisions</span> or <span class="key-term">covenants</span>. Protections can include:
+Bonds are issued under a bond contract called an <span class="key-term">indenture</span>. The
+indenture defines the interest rate, maturity, collateral, and all other features of the bonds. The
+indenture may also require the corporation to maintain specific <span class="key-term">protective
+provisions</span> or <span class="key-term">covenants</span>. Protections can include:
 
 - Insurance coverage
 - Audit by an independent accountant
 - Ratios of assets to liabilities
 
-An independent <span class="key-term">trustee</span> is appointed to monitor compliance with the indenture provisions. The trustee ensures that the corporation adheres to the indenture.
+An independent <span class="key-term">trustee</span> is appointed to monitor compliance with the
+indenture provisions. The trustee ensures that the corporation adheres to the indenture.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> All corporate issues of $50,000,000 or more must have a trust indenture as specified by the <span class="key-term">Trust Indenture Act of 1939</span>. Municipal and government issues are exempt and therefore not subject to this requirement.</p>
@@ -43,15 +59,22 @@ An independent <span class="key-term">trustee</span> is appointed to monitor com
 
 #### Settlement and Trading
 
-<span class="key-term">Regular way settlement</span> for corporate bond trades is 1 business day after the trade date (T+1). If the buyer and seller agree, other settlement arrangements can be made. Corporate bonds trade in increments of 1/8 of a point.
+<span class="key-term">Regular way settlement</span> for corporate bond trades is 1 business day
+after the trade date (T+1). If the buyer and seller agree, other settlement arrangements can be
+made. Corporate bonds trade in increments of 1/8 of a point.
 
-<span class="key-term">Cash settlements</span> occur the same day as the trade date if the trade is done before 2:30 p.m. ET.
+<span class="key-term">Cash settlements</span> occur the same day as the trade date if the trade is
+done before 2:30 p.m. ET.
 
 ---
 
 ### Topic 2: Secured Bonds
 
-Corporate bonds can be <span class="key-term">secured</span> or <span class="key-term">unsecured</span>. Secured bonds have collateral (property or other valuable items) pledged to back the bond issue. The bondholders have claim to the collateral if the issuer defaults. This helps secured bondholders avoid losing their investment (capital risk). Unsecured bonds have no collateral backing.
+Corporate bonds can be <span class="key-term">secured</span> or
+<span class="key-term">unsecured</span>. Secured bonds have collateral (property or other valuable
+items) pledged to back the bond issue. The bondholders have claim to the collateral if the issuer
+defaults. This helps secured bondholders avoid losing their investment (capital risk). Unsecured
+bonds have no collateral backing.
 
 <div class="critical-concept">
   <div class="critical-concept__label">Secured Bond Advantage</div>
@@ -60,7 +83,10 @@ Corporate bonds can be <span class="key-term">secured</span> or <span class="key
 
 #### Mortgage Bonds
 
-<span class="key-term">Mortgage bonds</span> are issued with real estate or real property (equipment) pledged as collateral. The bondholder has a <span class="key-term">lien</span> (legal claim) on the pledged real estate. This gives the bondholder the legal right to the proceeds of the sale if the bondholders' claims are not satisfied.
+<span class="key-term">Mortgage bonds</span> are issued with real estate or real property
+(equipment) pledged as collateral. The bondholder has a <span class="key-term">lien</span> (legal
+claim) on the pledged real estate. This gives the bondholder the legal right to the proceeds of the
+sale if the bondholders' claims are not satisfied.
 
 <div class="info-box">
   <div class="info-box__title">Open-End vs. Closed-End Mortgage Bonds</div>
@@ -72,7 +98,11 @@ Corporate bonds can be <span class="key-term">secured</span> or <span class="key
 
 #### Equipment Trust Certificates
 
-<span class="key-term">Equipment trust certificates</span> are backed by equipment owned by the issuing corporation that is pledged as collateral. This is the typical form of financing for common carriers such as airlines, trucking companies, and railroads. For example, if United Airlines wants to buy new planes, it will finance the purchase by issuing equipment trust certificates. The planes are collateral.
+<span class="key-term">Equipment trust certificates</span> are backed by equipment owned by the
+issuing corporation that is pledged as collateral. This is the typical form of financing for common
+carriers such as airlines, trucking companies, and railroads. For example, if United Airlines wants
+to buy new planes, it will finance the purchase by issuing equipment trust certificates. The planes
+are collateral.
 
 <div class="critical-concept">
   <div class="critical-concept__label">Equipment Trust Certificate Features</div>
@@ -87,17 +117,23 @@ Corporate bonds can be <span class="key-term">secured</span> or <span class="key
 
 #### Collateral Trust Certificates
 
-<span class="key-term">Collateral trust certificates</span> are issued with a portfolio of marketable securities as collateral. Typically, a parent company uses the securities of a subsidiary as collateral.
+<span class="key-term">Collateral trust certificates</span> are issued with a portfolio of
+marketable securities as collateral. Typically, a parent company uses the securities of a subsidiary
+as collateral.
 
 ---
 
 ### Topic 3: Unsecured Debt Instruments
 
-Unsecured corporate debt is only backed by the issuer's promise to pay. There is no collateral backing the issue. Unsecured debt is issued in short-term, intermediate-term, and long-term maturities. These include commercial paper, debentures, and income bonds.
+Unsecured corporate debt is only backed by the issuer's promise to pay. There is no collateral
+backing the issue. Unsecured debt is issued in short-term, intermediate-term, and long-term
+maturities. These include commercial paper, debentures, and income bonds.
 
 #### Commercial Paper
 
-<span class="key-term">Commercial paper</span> is used for short-term corporate financing needs. Maturities typically range from 14 to 365 days, with 30 days being the most common. The maturity will rarely exceed 270 days because the issue would then have to be registered with the SEC.
+<span class="key-term">Commercial paper</span> is used for short-term corporate financing needs.
+Maturities typically range from 14 to 365 days, with 30 days being the most common. The maturity
+will rarely exceed 270 days because the issue would then have to be registered with the SEC.
 
 <div class="info-box">
   <div class="info-box__title">Commercial Paper Characteristics</div>
@@ -113,17 +149,30 @@ Unsecured corporate debt is only backed by the issuer's promise to pay. There is
 
 #### Debentures
 
-<span class="key-term">Debentures</span> are intermediate and long-term unsecured corporate debt. Credit risk is higher for debentures than for secured bonds, as debentures are only backed by the issuer's promise to pay. Debentures are often issued by stronger companies with solid financials.
+<span class="key-term">Debentures</span> are intermediate and long-term unsecured corporate debt.
+Credit risk is higher for debentures than for secured bonds, as debentures are only backed by the
+issuer's promise to pay. Debentures are often issued by stronger companies with solid financials.
 
-<span class="key-term">Subordinated debentures</span> have a junior (lower) status in corporate liquidations (bankruptcies). These issues rank lower than other, more senior debt such as secured debt or standard debentures. In a company liquidation, subordinated debentures are paid after all other creditors, but ahead of any equity holders. Subordinated debentures may include a conversion feature that allows the bondholder to convert the bond into a fixed number of common shares.
+<span class="key-term">Subordinated debentures</span> have a junior (lower) status in corporate
+liquidations (bankruptcies). These issues rank lower than other, more senior debt such as secured
+debt or standard debentures. In a company liquidation, subordinated debentures are paid after all
+other creditors, but ahead of any equity holders. Subordinated debentures may include a conversion
+feature that allows the bondholder to convert the bond into a fixed number of common shares.
 
 #### Guaranteed Bonds
 
-<span class="key-term">Guaranteed bonds</span> are another form of debenture. These bonds are typically issued by a subsidiary company with a corporate parent guaranteeing payment of interest and principal as due. These bonds take on the credit rating of the guarantor.
+<span class="key-term">Guaranteed bonds</span> are another form of debenture. These bonds are
+typically issued by a subsidiary company with a corporate parent guaranteeing payment of interest
+and principal as due. These bonds take on the credit rating of the guarantor.
 
 #### Income Bonds
 
-<span class="key-term">Income bonds</span> are issued as part of a corporate reorganization. An issuer will default on any outstanding debt when a corporation goes bankrupt. The company may then try to reorganize and emerge from bankruptcy. Part of the reorganization is convincing the existing bondholders to surrender any claims under the old bonds and accept a new type of bond. This new bond is an income bond that only obligates the issuer to pay if it has sufficient earnings in the future. These are also referred to as <span class="key-term">adjustment bonds</span>.
+<span class="key-term">Income bonds</span> are issued as part of a corporate reorganization. An
+issuer will default on any outstanding debt when a corporation goes bankrupt. The company may then
+try to reorganize and emerge from bankruptcy. Part of the reorganization is convincing the existing
+bondholders to surrender any claims under the old bonds and accept a new type of bond. This new bond
+is an income bond that only obligates the issuer to pay if it has sufficient earnings in the future.
+These are also referred to as <span class="key-term">adjustment bonds</span>.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Income bonds are not suitable for investors seeking income because payments are not guaranteed. In addition, if an income bond has missed a payment, it is not considered to be in default.</p>
@@ -131,7 +180,10 @@ Unsecured corporate debt is only backed by the issuer's promise to pay. There is
 
 #### Accrued Interest
 
-Most bonds trade with <span class="key-term">accrued interest</span>, which means the price includes any interest that has accrued on the bond from the last interest payment date until the day before the settlement date. Accrued interest is paid by the buyer to the seller of a bond. The amount of accrued interest is included on both the buyer's and seller's trade confirmation.
+Most bonds trade with <span class="key-term">accrued interest</span>, which means the price includes
+any interest that has accrued on the bond from the last interest payment date until the day before
+the settlement date. Accrued interest is paid by the buyer to the seller of a bond. The amount of
+accrued interest is included on both the buyer's and seller's trade confirmation.
 
 <div class="calculation-box">
   <div class="calculation-box__label">Accrued Interest Conventions</div>
@@ -167,7 +219,10 @@ Most bonds trade with <span class="key-term">accrued interest</span>, which mean
 
 ### Topic 4: Convertible Bonds
 
-<span class="key-term">Convertible bonds</span> are corporate debentures that can be converted, at the option of the bondholder, into common stock of the issuer. A <span class="key-term">conversion price</span> is set per share at the time of issuance. The bond can then be converted into a fixed number of common shares based on its par value.
+<span class="key-term">Convertible bonds</span> are corporate debentures that can be converted, at
+the option of the bondholder, into common stock of the issuer. A <span class="key-term">conversion
+price</span> is set per share at the time of issuance. The bond can then be converted into a fixed
+number of common shares based on its par value.
 
 <div class="info-box">
   <div class="info-box__title">Convertible Bond Example</div>
@@ -312,17 +367,25 @@ When a corporation liquidates in bankruptcy, creditors are paid in a specific or
 
 ## Section 2: U.S. Government Debt and Agency Obligations
 
-In 2011, Standard & Poor's downgraded U.S. government debt from AAA to AA+ for the first time in history. The market reaction? Investors bought more Treasuries, not fewer. When the world panics, it still runs to U.S. government debt—the ultimate safe haven. Understanding these securities and the agencies that support them is essential.
+In 2011, Standard & Poor's downgraded U.S. government debt from AAA to AA+ for the first time in
+history. The market reaction? Investors bought more Treasuries, not fewer. When the world panics, it
+still runs to U.S. government debt—the ultimate safe haven. Understanding these securities and the
+agencies that support them is essential.
 
 ### Why This Section Matters
 
-U.S. government securities form the backbone of the global fixed-income market. Treasury bills, notes, and bonds—plus the complex world of mortgage-backed securities issued by government agencies—appear frequently on the Series 7 exam.
+U.S. government securities form the backbone of the global fixed-income market. Treasury bills,
+notes, and bonds—plus the complex world of mortgage-backed securities issued by government
+agencies—appear frequently on the Series 7 exam.
 
 ---
 
 ### Topic 1: Characteristics of U.S. Government Debt
 
-The U.S. government issues debt to finance the running of the government. The market for U.S. government debt is the largest and most active trading market in the world. Negotiable government debt issues take the form of long-term bonds, intermediate-term notes, and short-term bills known as Treasury bills.
+The U.S. government issues debt to finance the running of the government. The market for U.S.
+government debt is the largest and most active trading market in the world. Negotiable government
+debt issues take the form of long-term bonds, intermediate-term notes, and short-term bills known as
+Treasury bills.
 
 <div class="historical-note">
   <div class="historical-note__label">Why Treasuries Are Special</div>
@@ -375,15 +438,23 @@ The U.S. government issues debt to finance the running of the government. The ma
 
 #### Treasury Bills (T-Bills)
 
-<span class="key-term">Treasury bills</span> are short-term securities issued with 1-, 3-, 6-, and 12-month maturities on 4 weeks, 8 weeks, 13 weeks, 26 weeks, and 52 weeks. T-bills are issued at a discount from par ($100 minimum) and mature at par. The discount earned is the interest income. They are quoted on a <span class="key-term">yield basis</span>.
+<span class="key-term">Treasury bills</span> are short-term securities issued with 1-, 3-, 6-, and
+12-month maturities on 4 weeks, 8 weeks, 13 weeks, 26 weeks, and 52 weeks. T-bills are issued at a
+discount from par ($100 minimum) and mature at par. The discount earned is the interest income. They
+are quoted on a <span class="key-term">yield basis</span>.
 
-Four week notes, bonds, and TIPS are sold by competitive bidding at a weekly auction conducted by the Federal Reserve.
+Four week notes, bonds, and TIPS are sold by competitive bidding at a weekly auction conducted by
+the Federal Reserve.
 
 #### STRIPS
 
-<span class="key-term">STRIPS</span> were introduced for investors who wish to avoid reinvestment risk. STRIPS are Treasury bonds that have been stripped of their interest payments, making them zero-coupon Treasury obligations.
+<span class="key-term">STRIPS</span> were introduced for investors who wish to avoid reinvestment
+risk. STRIPS are Treasury bonds that have been stripped of their interest payments, making them
+zero-coupon Treasury obligations.
 
-A STRIPS has two components: the semiannual interest payments represented by the coupons on the bond and the final principal repayment at maturity. A STRIPS bond strips off the coupons from the bond, leaving just the final principal repayment of $1,000. This creates a zero-coupon Treasury bond.
+A STRIPS has two components: the semiannual interest payments represented by the coupons on the bond
+and the final principal repayment at maturity. A STRIPS bond strips off the coupons from the bond,
+leaving just the final principal repayment of $1,000. This creates a zero-coupon Treasury bond.
 
 <div class="info-box">
   <div class="info-box__title">STRIPS Example</div>
@@ -397,7 +468,9 @@ A STRIPS has two components: the semiannual interest payments represented by the
 
 #### TIPS (Treasury Inflation-Protected Securities)
 
-<span class="key-term">TIPS</span> are designed for investors who want to avoid purchasing power risk. TIPS have a fixed interest rate over the life of the bond. The principal amount is adjusted every 6 months by an amount equal to the change in the Consumer Price Index (CPI).
+<span class="key-term">TIPS</span> are designed for investors who want to avoid purchasing power
+risk. TIPS have a fixed interest rate over the life of the bond. The principal amount is adjusted
+every 6 months by an amount equal to the change in the Consumer Price Index (CPI).
 
 <div class="info-box">
   <div class="info-box__title">TIPS Characteristics</div>
@@ -414,7 +487,10 @@ A STRIPS has two components: the semiannual interest payments represented by the
 
 ### Topic 2: U.S. Government Agency and Sponsored Agency Obligations
 
-There are many agencies and quasi-agencies of the U.S. government in addition to the U.S. Treasury. Securities issued by such agencies are considered low-risk, although <span class="key-term">government-sponsored enterprises (GSEs)</span> such as Fannie Mae and Freddie Mac are not directly backed by the full faith and credit of the U.S. Treasury.
+There are many agencies and quasi-agencies of the U.S. government in addition to the U.S. Treasury.
+Securities issued by such agencies are considered low-risk, although
+<span class="key-term">government-sponsored enterprises (GSEs)</span> such as Fannie Mae and Freddie
+Mac are not directly backed by the full faith and credit of the U.S. Treasury.
 
 <div class="critical-concept">
   <div class="critical-concept__label">Agency Securities</div>
@@ -427,17 +503,21 @@ There are many agencies and quasi-agencies of the U.S. government in addition to
 
 #### Federal Farm Credit System
 
-Farmers can secure low-rate financing through the <span class="key-term">Federal Farm Credit System</span>. The Federal Farm Credit Banks Funding Corporation is a GSE that issues discount notes, intermediate-term bonds, and long-term bonds.
+Farmers can secure low-rate financing through the <span class="key-term">Federal Farm Credit
+System</span>. The Federal Farm Credit Banks Funding Corporation is a GSE that issues discount
+notes, intermediate-term bonds, and long-term bonds.
 
 #### Mortgage-Backed Securities (MBSs)
 
-<span class="key-term">Mortgage-backed securities (MBSs)</span> are issued by the following agencies:
+<span class="key-term">Mortgage-backed securities (MBSs)</span> are issued by the following
+agencies:
 
 - Federal Home Loan Banks (FHLBs)
 - Federal National Mortgage Association (FNMA, Fannie Mae)
 - Federal Home Loan Mortgage Corporation (FHLMC, Freddie Mac)
 
-These agencies make a secondary market in home mortgages. They purchase the mortgages from the banks that originated the loans, enabling the banks to sell more mortgages.
+These agencies make a secondary market in home mortgages. They purchase the mortgages from the banks
+that originated the loans, enabling the banks to sell more mortgages.
 
 <div class="info-box">
   <div class="info-box__title">How MBSs Work</div>
@@ -456,17 +536,27 @@ These agencies make a secondary market in home mortgages. They purchase the mort
 
 #### Ginnie Mae (GNMA)
 
-The <span class="key-term">Government National Mortgage Association (GNMA, Ginnie Mae)</span> does not issue these securities, but does guarantee them on behalf of the federal government. Ginnie Mae is an actual government agency and not a GSE. For this reason, Ginnie Mae's agency securities have a higher credit rating and lower yield than those of other GSEs.
+The <span class="key-term">Government National Mortgage Association (GNMA, Ginnie Mae)</span> does
+not issue these securities, but does guarantee them on behalf of the federal government. Ginnie Mae
+is an actual government agency and not a GSE. For this reason, Ginnie Mae's agency securities have a
+higher credit rating and lower yield than those of other GSEs.
 
 #### Student Loan Marketing Association (SLMA, Sallie Mae)
 
-The <span class="key-term">Student Loan Marketing Association (SLMA, Sallie Mae)</span> purchases insured student loans from qualified lending institutions. Loans are purchased from colleges, universities, state agencies, and banks. Sallie Mae sells normal debentures paying interest semiannually, backed by these loans. The key point to remember here is that Sallie Mae does not deal in mortgage debt.
+The <span class="key-term">Student Loan Marketing Association (SLMA, Sallie Mae)</span> purchases
+insured student loans from qualified lending institutions. Loans are purchased from colleges,
+universities, state agencies, and banks. Sallie Mae sells normal debentures paying interest
+semiannually, backed by these loans. The key point to remember here is that Sallie Mae does not deal
+in mortgage debt.
 
 ---
 
 ### Topic 3: Collateralized Mortgage Obligations (CMOs) and CDOs
 
-<span class="key-term">Collateralized mortgage obligations (CMOs)</span> are a type of structured product that invests in mortgage-backed securities. They are not exempt. Unlike MBSs which pass through mortgage payments equally to all investors, CMOs are structured in <span class="key-term">tranches</span> to divide risk among investors.
+<span class="key-term">Collateralized mortgage obligations (CMOs)</span> are a type of structured
+product that invests in mortgage-backed securities. They are not exempt. Unlike MBSs which pass
+through mortgage payments equally to all investors, CMOs are structured in
+<span class="key-term">tranches</span> to divide risk among investors.
 
 <div class="info-box">
   <div class="info-box__title">CMO Tranches</div>
@@ -495,7 +585,13 @@ The <span class="key-term">Student Loan Marketing Association (SLMA, Sallie Mae)
 
 #### Collateralized Debt Obligations (CDOs)
 
-A <span class="key-term">collateralized debt obligation (CDO)</span> is another type of structured product—similar to a CMO—but it may be backed by a pool of debt assets, including corporate bonds, bank loans, asset-backed securities, and mortgage-backed securities. Different investors may have different tolerances for risk. To satisfy the need of acquiring investors, it is called a <span class="key-term">collateralized bond obligation (CBO)</span>. These securities are issued overseas and are not registered with the U.S. Securities and Exchange Commission (SEC), but they are denominated in and pay interest in U.S. dollars.
+A <span class="key-term">collateralized debt obligation (CDO)</span> is another type of structured
+product—similar to a CMO—but it may be backed by a pool of debt assets, including corporate bonds,
+bank loans, asset-backed securities, and mortgage-backed securities. Different investors may have
+different tolerances for risk. To satisfy the need of acquiring investors, it is called a
+<span class="key-term">collateralized bond obligation (CBO)</span>. These securities are issued
+overseas and are not registered with the U.S. Securities and Exchange Commission (SEC), but they are
+denominated in and pay interest in U.S. dollars.
 
 ---
 
@@ -503,7 +599,12 @@ A <span class="key-term">collateralized debt obligation (CDO)</span> is another 
 
 #### Customer Suitability and Public Communications
 
-Broker-dealers must have a reasonable basis to believe that their recommendations to customers are suitable based on the customer's investment profile. The member must describe the CMO's characteristics and risks, how the CMO fits the customer's objectives, and the CMO's payment structure. The structure between a mortgage and Mortgage-backed securities is explained, auction schedule, and a glossary of terms. These suitability and customer communication requirements do not apply to institutional investors.
+Broker-dealers must have a reasonable basis to believe that their recommendations to customers are
+suitable based on the customer's investment profile. The member must describe the CMO's
+characteristics and risks, how the CMO fits the customer's objectives, and the CMO's payment
+structure. The structure between a mortgage and Mortgage-backed securities is explained, auction
+schedule, and a glossary of terms. These suitability and customer communication requirements do not
+apply to institutional investors.
 
 <div class="comparison-table">
   <table>
@@ -595,33 +696,36 @@ Broker-dealers must have a reasonable basis to believe that their recommendation
 
 ## Chapter 4 Key Terms Glossary
 
-| Term | Definition |
-|------|------------|
-| **Indenture** | Bond contract defining all terms and covenants |
-| **Trustee** | Independent party monitoring indenture compliance |
-| **Secured bond** | Bond backed by collateral |
-| **Mortgage bond** | Secured by real estate |
-| **Equipment trust certificate** | Secured by equipment; issued in serial form |
-| **Collateral trust certificate** | Secured by portfolio of securities |
-| **Debenture** | Unsecured bond backed only by issuer's promise |
-| **Subordinated debenture** | Junior status in bankruptcy; paid after other debt |
-| **Commercial paper** | Short-term unsecured debt; sold at discount |
-| **Income bond** | Pays only if issuer has sufficient earnings |
-| **Convertible bond** | Can convert to common stock at conversion price |
-| **Conversion ratio** | Par value ÷ conversion price |
-| **Parity** | When bond and equivalent stock have equal value |
-| **Forced conversion** | Bondholders convert rather than accept call |
-| **Treasury bill** | Short-term; sold at discount; 1 year or less |
-| **Treasury note** | 2-10 year maturity; pays semiannual interest |
-| **Treasury bond** | 10-30 year maturity; pays semiannual interest |
-| **STRIPS** | Zero-coupon Treasury; eliminates reinvestment risk |
-| **TIPS** | Principal adjusts with inflation (CPI) |
-| **GSE** | Government-sponsored enterprise (not government agency) |
-| **MBS** | Mortgage-backed security; pass-through payments |
-| **CMO** | Collateralized mortgage obligation; structured in tranches |
-| **Prepayment risk** | Risk mortgages paid off early, ending payments |
-| **Tranche** | Section of CMO with specific risk/payment characteristics |
+| Term                             | Definition                                                 |
+| -------------------------------- | ---------------------------------------------------------- |
+| **Indenture**                    | Bond contract defining all terms and covenants             |
+| **Trustee**                      | Independent party monitoring indenture compliance          |
+| **Secured bond**                 | Bond backed by collateral                                  |
+| **Mortgage bond**                | Secured by real estate                                     |
+| **Equipment trust certificate**  | Secured by equipment; issued in serial form                |
+| **Collateral trust certificate** | Secured by portfolio of securities                         |
+| **Debenture**                    | Unsecured bond backed only by issuer's promise             |
+| **Subordinated debenture**       | Junior status in bankruptcy; paid after other debt         |
+| **Commercial paper**             | Short-term unsecured debt; sold at discount                |
+| **Income bond**                  | Pays only if issuer has sufficient earnings                |
+| **Convertible bond**             | Can convert to common stock at conversion price            |
+| **Conversion ratio**             | Par value ÷ conversion price                               |
+| **Parity**                       | When bond and equivalent stock have equal value            |
+| **Forced conversion**            | Bondholders convert rather than accept call                |
+| **Treasury bill**                | Short-term; sold at discount; 1 year or less               |
+| **Treasury note**                | 2-10 year maturity; pays semiannual interest               |
+| **Treasury bond**                | 10-30 year maturity; pays semiannual interest              |
+| **STRIPS**                       | Zero-coupon Treasury; eliminates reinvestment risk         |
+| **TIPS**                         | Principal adjusts with inflation (CPI)                     |
+| **GSE**                          | Government-sponsored enterprise (not government agency)    |
+| **MBS**                          | Mortgage-backed security; pass-through payments            |
+| **CMO**                          | Collateralized mortgage obligation; structured in tranches |
+| **Prepayment risk**              | Risk mortgages paid off early, ending payments             |
+| **Tranche**                      | Section of CMO with specific risk/payment characteristics  |
 
 ---
 
-*Chapter 4 covers the major categories of corporate and government debt. Understanding the differences between secured and unsecured debt, the hierarchy in bankruptcy, and the various Treasury and agency securities is essential before moving to Chapter 5: Municipal Debt and Money Market Instruments.*
+_Chapter 4 covers the major categories of corporate and government debt. Understanding the
+differences between secured and unsecured debt, the hierarchy in bankruptcy, and the various
+Treasury and agency securities is essential before moving to Chapter 5: Municipal Debt and Money
+Market Instruments._

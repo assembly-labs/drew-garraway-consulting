@@ -80,12 +80,14 @@ class SIENavigationComponent {
     }
 
     generateChapterMenu() {
-        return SIECourseStructure.chapters.map(chapter => {
-            const chapterSections = chapter.sections.map(section => {
-                const isCurrent = section.id === this.currentSection?.id;
-                const isLocked = section.locked;
+        return SIECourseStructure.chapters
+            .map(chapter => {
+                const chapterSections = chapter.sections
+                    .map(section => {
+                        const isCurrent = section.id === this.currentSection?.id;
+                        const isLocked = section.locked;
 
-                return `
+                        return `
                     <a href="${!isLocked ? section.file : '#'}"
                        class="sie-section-option ${isCurrent ? 'sie-section-option--current' : ''} ${isLocked ? 'sie-section-option--locked' : ''}">
                         <span class="sie-section-option__number">${section.id}</span>
@@ -93,9 +95,10 @@ class SIENavigationComponent {
                         ${isLocked ? '<span class="sie-section-option__lock">🔒</span>' : ''}
                     </a>
                 `;
-            }).join('');
+                    })
+                    .join('');
 
-            return `
+                return `
                 <div class="sie-chapter-group">
                     <div class="sie-chapter-group__header">
                         Chapter ${chapter.number}: ${chapter.title}
@@ -105,7 +108,8 @@ class SIENavigationComponent {
                     </div>
                 </div>
             `;
-        }).join('');
+            })
+            .join('');
     }
 
     generateSectionDots() {
@@ -113,28 +117,32 @@ class SIENavigationComponent {
         if (!this.currentChapter) return '';
 
         const sectionsInChapter = this.currentChapter.sections;
-        const currentSectionIndex = sectionsInChapter.findIndex(s => s.id === this.currentSection?.id);
+        const currentSectionIndex = sectionsInChapter.findIndex(
+            s => s.id === this.currentSection?.id
+        );
 
         // Only show dots if there are multiple sections in the chapter
         if (sectionsInChapter.length <= 1) return '';
 
-        const dots = sectionsInChapter.map((section, index) => {
-            const isActive = index === currentSectionIndex;
-            const isLocked = section.locked;
+        const dots = sectionsInChapter
+            .map((section, index) => {
+                const isActive = index === currentSectionIndex;
+                const isLocked = section.locked;
 
-            if (section.id === this.currentSection?.id) {
-                // For current page, use internal section navigation
-                return this.generateInternalSectionDots();
-            } else {
-                // For other sections in chapter, link to those pages
-                return `
+                if (section.id === this.currentSection?.id) {
+                    // For current page, use internal section navigation
+                    return this.generateInternalSectionDots();
+                } else {
+                    // For other sections in chapter, link to those pages
+                    return `
                     <a href="${!isLocked ? section.file : '#'}"
                        class="sie-section-link-dot ${isActive ? 'active' : ''} ${isLocked ? 'locked' : ''}"
                        title="${section.title}">
                     </a>
                 `;
-            }
-        }).join('');
+                }
+            })
+            .join('');
 
         return `<div class="sie-section-nav">${dots}</div>`;
     }
@@ -144,18 +152,21 @@ class SIENavigationComponent {
         const sections = document.querySelectorAll('section[id]');
         if (sections.length <= 1) return '';
 
-        return Array.from(sections).map((section, index) => {
-            const sectionId = section.id;
-            const sectionTitle = section.querySelector('h2')?.textContent || `Section ${index + 1}`;
+        return Array.from(sections)
+            .map((section, index) => {
+                const sectionId = section.id;
+                const sectionTitle =
+                    section.querySelector('h2')?.textContent || `Section ${index + 1}`;
 
-            return `
+                return `
                 <div class="sie-section-dot ${index === 0 ? 'active' : ''}"
                      data-section="${sectionId}"
                      onclick="scrollToSection('${sectionId}')"
                      title="${sectionTitle}">
                 </div>
             `;
-        }).join('');
+            })
+            .join('');
     }
 
     updateProgressBar() {
@@ -175,13 +186,13 @@ class SIENavigationComponent {
         const menu = document.getElementById('chapterMenu');
 
         if (toggle && menu) {
-            toggle.addEventListener('click', (e) => {
+            toggle.addEventListener('click', e => {
                 e.stopPropagation();
                 menu.classList.toggle('open');
             });
 
             // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
+            document.addEventListener('click', e => {
                 if (!menu.contains(e.target) && !toggle.contains(e.target)) {
                     menu.classList.remove('open');
                 }
@@ -194,10 +205,10 @@ class SIENavigationComponent {
         if (sections.length <= 1) return;
 
         const observerOptions = {
-            rootMargin: '-20% 0px -70% 0px'
+            rootMargin: '-20% 0px -70% 0px',
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     this.updateActiveSectionDot(entry.target.id);

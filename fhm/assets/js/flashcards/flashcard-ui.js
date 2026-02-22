@@ -265,7 +265,7 @@ const FlashcardUI = (function () {
         const btnDontKnow = document.getElementById('btn-dont-know');
 
         if (btnGotIt) {
-            btnGotIt.onclick = function() {
+            btnGotIt.onclick = function () {
                 animateCardOut('up', () => {
                     FlashcardSession.markCurrentProficient();
                     showCurrentCard();
@@ -274,7 +274,7 @@ const FlashcardUI = (function () {
         }
 
         if (btnDontKnow) {
-            btnDontKnow.onclick = function() {
+            btnDontKnow.onclick = function () {
                 animateCardOut('left', () => {
                     FlashcardSession.markCurrentLearning();
                     showCurrentCard();
@@ -473,7 +473,7 @@ const FlashcardUI = (function () {
         init,
         startSession,
         showStart,
-        flipCard
+        flipCard,
     };
 })();
 

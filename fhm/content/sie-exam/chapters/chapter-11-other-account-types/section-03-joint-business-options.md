@@ -1,8 +1,10 @@
 ---
 chapter: 11
 section: 3
-title: "Joint, Business, and Options Accounts"
-description: "Understanding joint ownership structures, business account requirements, and options account approval procedures"
+title: 'Joint, Business, and Options Accounts'
+description:
+  'Understanding joint ownership structures, business account requirements, and options account
+  approval procedures'
 topics:
   - Joint Accounts (JTWROS and Tenancy in Common)
   - Transfer on Death (TOD)
@@ -17,17 +19,26 @@ last_updated: 2026-01-04
 
 ## Introduction
 
-On March 15, 1985, a husband and wife in New Jersey learned an expensive lesson about account registration. The husband died, and his wife assumed she'd inherit their joint brokerage account automatically. She was wrong. Their account was registered as "tenancy in common"—which meant his half went to his estate, not to her. The probate process took eighteen months and cost $47,000 in legal fees.
+On March 15, 1985, a husband and wife in New Jersey learned an expensive lesson about account
+registration. The husband died, and his wife assumed she'd inherit their joint brokerage account
+automatically. She was wrong. Their account was registered as "tenancy in common"—which meant his
+half went to his estate, not to her. The probate process took eighteen months and cost $47,000 in
+legal fees.
 
 Two words on an account form. Eighteen months of headaches.
 
-Account registration matters. Whether it's a married couple's joint account, a corporation's investment holdings, or an individual's options trading account, the type of account determines the paperwork required, the authority structure, and what happens when circumstances change.
+Account registration matters. Whether it's a married couple's joint account, a corporation's
+investment holdings, or an individual's options trading account, the type of account determines the
+paperwork required, the authority structure, and what happens when circumstances change.
 
-This section covers the account types that fall outside the basic individual framework. They're less common than individual accounts, but they appear frequently on the exam—and in practice, they often involve the most complex client situations you'll encounter.
+This section covers the account types that fall outside the basic individual framework. They're less
+common than individual accounts, but they appear frequently on the exam—and in practice, they often
+involve the most complex client situations you'll encounter.
 
 ## Learning Objectives
 
 By the end of this section, you'll be able to:
+
 - Distinguish between JTWROS and tenancy in common
 - Explain how Transfer on Death (TOD) registration works
 - Identify required documentation for corporate and partnership accounts
@@ -41,7 +52,9 @@ By the end of this section, you'll be able to:
 
 When more than one person owns an account, things get more complicated.
 
-All parties need to provide new account information. All parties can access the account and trade independently. And here's one that catches people: **any check issued must be made payable to all parties** on the account.
+All parties need to provide new account information. All parties can access the account and trade
+independently. And here's one that catches people: **any check issued must be made payable to all
+parties** on the account.
 
 But the real question—the one that matters most—is what happens when one owner dies.
 
@@ -77,7 +90,9 @@ But the real question—the one that matters most—is what happens when one own
   </table>
 </div>
 
-The name tells you what matters: <span class="key-term">rights of survivorship</span>. If one party dies, the surviving owner automatically becomes sole owner. No lawyers. No court proceedings. No delays.
+The name tells you what matters: <span class="key-term">rights of survivorship</span>. If one party
+dies, the surviving owner automatically becomes sole owner. No lawyers. No court proceedings. No
+delays.
 
 <div class="info-box">
   <div class="info-box__title">Why Probate Matters</div>
@@ -118,7 +133,9 @@ Different structure, different outcome.
   </table>
 </div>
 
-This structure makes sense for business partners. If you're running a business with someone, you might not want your investment account to automatically go to them when you die—you want it to go to your heirs.
+This structure makes sense for business partners. If you're running a business with someone, you
+might not want your investment account to automatically go to them when you die—you want it to go to
+your heirs.
 
 <div class="exam-focus">
   <div class="exam-focus__label">EXAM FOCUS - COMPARE THESE</div>
@@ -159,9 +176,11 @@ This structure makes sense for business partners. If you're running a business w
 
 ## Transfer on Death (TOD)
 
-<span class="key-term">Transfer on death (TOD)</span> isn't an account type—it's a registration option.
+<span class="key-term">Transfer on death (TOD)</span> isn't an account type—it's a registration
+option.
 
 With a TOD designation:
+
 - The account owner maintains **full control** during their lifetime
 - At death, the account transfers directly to the named <span class="key-term">beneficiary</span>
 - Like JTWROS, it **avoids probate**
@@ -205,7 +224,8 @@ Corporations are legal entities separate from their owners. To open a corporate 
   </table>
 </div>
 
-The <span class="key-term">corporate resolution</span> is the key document. It proves the corporation authorized the account and identifies who has trading authority.
+The <span class="key-term">corporate resolution</span> is the key document. It proves the
+corporation authorized the account and identifies who has trading authority.
 
 ### Partnership Accounts
 
@@ -214,13 +234,16 @@ Partnerships require the <span class="key-term">partnership agreement</span>, wh
 - Authorize opening the account
 - Name the partners who can trade
 
-Like a corporate resolution, the partnership agreement is the source of authority. No agreement? No account.
+Like a corporate resolution, the partnership agreement is the source of authority. No agreement? No
+account.
 
 ### Investment Adviser Accounts
 
-An <span class="key-term">investment adviser</span> manages money for clients in exchange for a fee. They're <span class="key-term">fiduciaries</span>—legally required to put clients' interests first.
+An <span class="key-term">investment adviser</span> manages money for clients in exchange for a fee.
+They're <span class="key-term">fiduciaries</span>—legally required to put clients' interests first.
 
 Investment adviser accounts typically work like this:
+
 - Account held in the **client's name**
 - Adviser has <span class="key-term">discretionary authority</span> to trade
 - Adviser makes most decisions without calling the client first
@@ -232,7 +255,9 @@ Investment adviser accounts typically work like this:
 
 ### Prime Brokerage Accounts
 
-Hedge funds and institutions often trade through multiple broker-dealers called <span class="key-term">executing brokers</span>. A <span class="key-term">prime broker</span> centralizes:
+Hedge funds and institutions often trade through multiple broker-dealers called
+<span class="key-term">executing brokers</span>. A <span class="key-term">prime broker</span>
+centralizes:
 
 - Settlement of trades from all executing brokers
 - Custody of assets
@@ -243,7 +268,8 @@ Prime brokerage is an institutional service. Individual investors don't use it.
 
 ### Wrap Accounts
 
-A <span class="key-term">wrap account</span> bundles everything—management, trading, custody, administration—into a single fee.
+A <span class="key-term">wrap account</span> bundles everything—management, trading, custody,
+administration—into a single fee.
 
 <div class="critical-concept">
   <div class="critical-concept__label">WRAP ACCOUNT FEATURES</div>
@@ -271,7 +297,8 @@ A <span class="key-term">wrap account</span> bundles everything—management, tr
   </table>
 </div>
 
-The appeal for clients: simplicity and aligned incentives. The adviser doesn't make more money by trading more.
+The appeal for clients: simplicity and aligned incentives. The adviser doesn't make more money by
+trading more.
 
 ---
 
@@ -284,7 +311,9 @@ Options are different. More complex. More risky. And therefore, more regulated.
   <p>The Chicago Board Options Exchange (Cboe) opened in 1973, creating the first standardized, exchange-traded options market. Before that, options were bespoke contracts traded between institutions. The Cboe brought options to retail investors—and with that access came the need for suitability standards and approval processes that didn't exist for regular stock trading.</p>
 </div>
 
-The <span class="key-term">Chicago Board Options Exchange (Cboe)</span> and the <span class="key-term">Options Clearing Corporation (OCC)</span> impose specific requirements beyond standard FINRA rules.
+The <span class="key-term">Chicago Board Options Exchange (Cboe)</span> and the
+<span class="key-term">Options Clearing Corporation (OCC)</span> impose specific requirements beyond
+standard FINRA rules.
 
 ### Opening Requirements
 
@@ -310,7 +339,8 @@ To open an options account, the customer must provide information about:
 
 ### The Options Agreement
 
-Cboe requires the customer receive a copy of the <span class="key-term">options agreement</span> before trading. By signing, the customer agrees to:
+Cboe requires the customer receive a copy of the <span class="key-term">options agreement</span>
+before trading. By signing, the customer agrees to:
 
 - Abide by any trading restrictions the firm imposes
 - Follow OCC rules (position limits, exercise limits)
@@ -355,7 +385,9 @@ Cboe requires the customer receive a copy of the <span class="key-term">options 
 
 ### The Options Disclosure Document (ODD)
 
-Before or at the time of approval, the customer must receive the <span class="key-term">options disclosure document (ODD)</span>, created by the OCC. This document explains the risks of options trading.
+Before or at the time of approval, the customer must receive the <span class="key-term">options
+disclosure document (ODD)</span>, created by the OCC. This document explains the risks of options
+trading.
 
 **Timing**: The ODD must be delivered by the date of the principal's approval—not later.
 
@@ -373,11 +405,14 @@ Before or at the time of approval, the customer must receive the <span class="ke
 
 ### Options Accounts for Associated Persons
 
-What if a registered representative at one firm wants to open an options account at a different firm?
+What if a registered representative at one firm wants to open an options account at a different
+firm?
 
 They need **written approval from their employer** first.
 
-If approved, all statements and confirmations will be **automatically sent to the employing broker-dealer**. This prevents representatives from hiding trading activity from their compliance departments.
+If approved, all statements and confirmations will be **automatically sent to the employing
+broker-dealer**. This prevents representatives from hiding trading activity from their compliance
+departments.
 
 ---
 
@@ -406,25 +441,36 @@ If approved, all statements and confirmations will be **automatically sent to th
 
 ## Summary
 
-Account registration determines authority, documentation requirements, and outcomes when circumstances change. Joint accounts pass differently depending on whether they're JTWROS (survivor takes all) or tenancy in common (estate inherits). Business accounts require specific authorization documents. Options accounts need additional approval steps and disclosures.
+Account registration determines authority, documentation requirements, and outcomes when
+circumstances change. Joint accounts pass differently depending on whether they're JTWROS (survivor
+takes all) or tenancy in common (estate inherits). Business accounts require specific authorization
+documents. Options accounts need additional approval steps and disclosures.
 
-The details matter. Two words on an account form—"rights of survivorship" or "tenancy in common"—can mean the difference between a seamless transfer and eighteen months of probate.
+The details matter. Two words on an account form—"rights of survivorship" or "tenancy in common"—can
+mean the difference between a seamless transfer and eighteen months of probate.
 
 ### Quick Reference
 
 **Key Terms:**
-- <span class="key-term">JTWROS</span>: Joint Tenancy with Rights of Survivorship — survivor takes all
-- <span class="key-term">Tenancy in Common</span>: Each party owns percentage; estate inherits at death
+
+- <span class="key-term">JTWROS</span>: Joint Tenancy with Rights of Survivorship — survivor takes
+  all
+- <span class="key-term">Tenancy in Common</span>: Each party owns percentage; estate inherits at
+  death
 - <span class="key-term">TOD</span>: Transfer on Death — passes to beneficiary, avoids probate
-- <span class="key-term">Corporate Resolution</span>: Document authorizing corporate account and traders
-- <span class="key-term">Registered Options Principal</span>: Must give final approval for options accounts
+- <span class="key-term">Corporate Resolution</span>: Document authorizing corporate account and
+  traders
+- <span class="key-term">Registered Options Principal</span>: Must give final approval for options
+  accounts
 
 **Key Documents:**
+
 - Corporate account: Corporate resolution, tax ID, possibly charter
 - Partnership account: Partnership agreement
 - Options account: Options agreement, ODD
 
 **Key Numbers:**
+
 - 15 days: Deadline for returning signed options agreement
 
 ---

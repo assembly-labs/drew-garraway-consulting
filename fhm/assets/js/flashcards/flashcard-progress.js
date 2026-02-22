@@ -9,7 +9,7 @@ const FlashcardProgress = (function () {
 
     const DEFAULT_SETTINGS = {
         cardsPerSession: 20,
-        prioritizeWeakCards: true
+        prioritizeWeakCards: true,
     };
 
     /**
@@ -29,7 +29,7 @@ const FlashcardProgress = (function () {
         return {
             cardProficiency: {},
             settings: { ...DEFAULT_SETTINGS },
-            lastSession: null
+            lastSession: null,
         };
     }
 
@@ -52,12 +52,14 @@ const FlashcardProgress = (function () {
      */
     function getCardProficiency(cardId) {
         const data = getData();
-        return data.cardProficiency[cardId] || {
-            proficiencyScore: 0,
-            lastSeen: null,
-            timesMarkedProficient: 0,
-            timesMarkedLearning: 0
-        };
+        return (
+            data.cardProficiency[cardId] || {
+                proficiencyScore: 0,
+                lastSeen: null,
+                timesMarkedProficient: 0,
+                timesMarkedLearning: 0,
+            }
+        );
     }
 
     /**
@@ -72,7 +74,7 @@ const FlashcardProgress = (function () {
                 proficiencyScore: 0,
                 lastSeen: null,
                 timesMarkedProficient: 0,
-                timesMarkedLearning: 0
+                timesMarkedLearning: 0,
             };
         }
 
@@ -96,7 +98,7 @@ const FlashcardProgress = (function () {
                 proficiencyScore: 0,
                 lastSeen: null,
                 timesMarkedProficient: 0,
-                timesMarkedLearning: 0
+                timesMarkedLearning: 0,
             };
         }
 
@@ -186,9 +188,8 @@ const FlashcardProgress = (function () {
             unseen: allCards.length - seen,
             mastered,
             learning,
-            masteryPercentage: allCards.length > 0
-                ? Math.round((mastered / allCards.length) * 100)
-                : 0
+            masteryPercentage:
+                allCards.length > 0 ? Math.round((mastered / allCards.length) * 100) : 0,
         };
     }
 
@@ -200,7 +201,7 @@ const FlashcardProgress = (function () {
         const data = getData();
         data.lastSession = {
             date: new Date().toISOString(),
-            ...sessionStats
+            ...sessionStats,
         };
         saveData(data);
     }
@@ -232,7 +233,7 @@ const FlashcardProgress = (function () {
         getOverallStats,
         saveSession,
         getLastSession,
-        reset
+        reset,
     };
 })();
 

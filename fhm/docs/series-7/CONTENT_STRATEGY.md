@@ -1,51 +1,56 @@
 # Series 7 Content Strategy
 
-**Date:** January 6, 2026
-**Purpose:** Define how Series 7 content will be created, organized, and prioritized using FHM brand voice and SIE structural patterns.
+**Date:** January 6, 2026 **Purpose:** Define how Series 7 content will be created, organized, and
+prioritized using FHM brand voice and SIE structural patterns.
 
 ---
 
 ## Core Philosophy
 
 ### From SIE Content Strategy
+
 > "Regulations are monuments to past failures."
 
-Every Series 7 rule exists because something went wrong. When students understand *why*, they remember. This approach is even more critical for Series 7, where the material is denser and more calculation-heavy.
+Every Series 7 rule exists because something went wrong. When students understand _why_, they
+remember. This approach is even more critical for Series 7, where the material is denser and more
+calculation-heavy.
 
 ### The 90/10 Rule Applied
+
 - **90%** clear, practical exam content
 - **10%** memorable stories and observations
 
-Series 7 candidates are future registered representatives. The content should respect their intelligence while making complex topics approachable.
+Series 7 candidates are future registered representatives. The content should respect their
+intelligence while making complex topics approachable.
 
 ---
 
 ## Content Distribution by Exam Weight
 
-| Section | Exam Weight | Content Share | Priority |
-|---------|-------------|---------------|----------|
-| Section 1: Seeks Business | 9% | 8-10% | Medium |
-| Section 2: Opens Accounts | 11% | 12-15% | Medium |
-| Section 3: Provides Info | 73% | 70-75% | **HIGHEST** |
-| Section 4: Processes Transactions | 7% | 5-8% | Lower |
+| Section                           | Exam Weight | Content Share | Priority    |
+| --------------------------------- | ----------- | ------------- | ----------- |
+| Section 1: Seeks Business         | 9%          | 8-10%         | Medium      |
+| Section 2: Opens Accounts         | 11%         | 12-15%        | Medium      |
+| Section 3: Provides Info          | 73%         | 70-75%        | **HIGHEST** |
+| Section 4: Processes Transactions | 7%          | 5-8%          | Lower       |
 
 ### Section 3 Internal Priorities
 
 Within Section 3 (73% of exam), prioritize by typical exam weight:
 
-| Topic | Est. Weight | Content Depth | Priority |
-|-------|-------------|---------------|----------|
-| Options | 25-30% | **MAXIMUM** | Critical |
-| Municipal Bonds | 15-20% | Heavy | Critical |
-| Margin Accounts | 10-15% | Heavy (calculations) | High |
-| Debt Securities | 10-12% | Medium-Heavy | High |
-| Equity Securities | 8-10% | Medium | Medium |
-| Retirement Plans | 5-8% | Medium | Medium |
-| Variable Products | 5-7% | Medium | Medium |
-| Investment Companies | 5-7% | Medium | Medium |
-| DPPs | 3-5% | Light | Lower |
-| Other Products | 3-5% | Light | Lower |
-| Analysis/Economics | 3-5% | Light | Lower |
+| Topic                | Est. Weight | Content Depth        | Priority |
+| -------------------- | ----------- | -------------------- | -------- |
+| Options              | 25-30%      | **MAXIMUM**          | Critical |
+| Municipal Bonds      | 15-20%      | Heavy                | Critical |
+| Margin Accounts      | 10-15%      | Heavy (calculations) | High     |
+| Debt Securities      | 10-12%      | Medium-Heavy         | High     |
+| Equity Securities    | 8-10%       | Medium               | Medium   |
+| Retirement Plans     | 5-8%        | Medium               | Medium   |
+| Variable Products    | 5-7%        | Medium               | Medium   |
+| Investment Companies | 5-7%        | Medium               | Medium   |
+| DPPs                 | 3-5%        | Light                | Lower    |
+| Other Products       | 3-5%        | Light                | Lower    |
+| Analysis/Economics   | 3-5%        | Light                | Lower    |
 
 ---
 
@@ -85,20 +90,20 @@ Based on SIE patterns, each lesson follows this structure:
 
 ### Length Guidelines by Topic Complexity
 
-| Topic Type | Target Length | Min | Max |
-|------------|---------------|-----|-----|
-| Foundational concept | 1,500-2,000 | 1,200 | 2,500 |
-| Complex topic | 2,000-2,500 | 1,800 | 3,000 |
-| Calculation-heavy | 2,500-3,000 | 2,000 | 3,500 |
-| Overview/intro | 1,000-1,500 | 800 | 1,800 |
+| Topic Type           | Target Length | Min   | Max   |
+| -------------------- | ------------- | ----- | ----- |
+| Foundational concept | 1,500-2,000   | 1,200 | 2,500 |
+| Complex topic        | 2,000-2,500   | 1,800 | 3,000 |
+| Calculation-heavy    | 2,500-3,000   | 2,000 | 3,500 |
+| Overview/intro       | 1,000-1,500   | 800   | 1,800 |
 
 ### Lessons per Chapter
 
-| Chapter Size | Lessons | When to Use |
-|--------------|---------|-------------|
-| Small | 1-2 | Simple topics (ADRs, hedge funds) |
-| Medium | 3-4 | Standard topics (most chapters) |
-| Large | 5-6 | Complex topics (options strategies) |
+| Chapter Size | Lessons | When to Use                         |
+| ------------ | ------- | ----------------------------------- |
+| Small        | 1-2     | Simple topics (ADRs, hedge funds)   |
+| Medium       | 3-4     | Standard topics (most chapters)     |
+| Large        | 5-6     | Complex topics (options strategies) |
 
 ---
 
@@ -108,12 +113,12 @@ Based on SIE patterns, each lesson follows this structure:
 
 Match exam proportions:
 
-| Section | Exam Questions | Practice Questions (per full exam) |
-|---------|----------------|-------------------------------------|
-| Section 1 | ~11 | 10-12 |
-| Section 2 | ~14 | 14-16 |
-| Section 3 | ~91 | 90-95 |
-| Section 4 | ~9 | 8-10 |
+| Section   | Exam Questions | Practice Questions (per full exam) |
+| --------- | -------------- | ---------------------------------- |
+| Section 1 | ~11            | 10-12                              |
+| Section 2 | ~14            | 14-16                              |
+| Section 3 | ~91            | 90-95                              |
+| Section 4 | ~9             | 8-10                               |
 
 ### Question Types
 
@@ -134,6 +139,7 @@ Match exam proportions:
 ### Question Format
 
 Each question includes:
+
 - Clear stem (avoid ambiguity)
 - Four answer choices (A-D)
 - One clearly correct answer
@@ -153,37 +159,39 @@ Each question includes:
 
 ### Card Distribution
 
-| Section | Flashcards | Focus |
-|---------|------------|-------|
-| Section 1 | 40-50 | Terms, rules |
-| Section 2 | 60-80 | Account types, suitability |
-| Section 3 | 400-500 | Products, strategies, formulas |
-| Section 4 | 30-40 | Settlement, order types |
-| **Total** | **530-670** | |
+| Section   | Flashcards  | Focus                          |
+| --------- | ----------- | ------------------------------ |
+| Section 1 | 40-50       | Terms, rules                   |
+| Section 2 | 60-80       | Account types, suitability     |
+| Section 3 | 400-500     | Products, strategies, formulas |
+| Section 4 | 30-40       | Settlement, order types        |
+| **Total** | **530-670** |                                |
 
 ### Section 3 Flashcard Breakdown
 
-| Topic | Cards | Notes |
-|-------|-------|-------|
-| Options | 120-150 | Strategies, calculations, terms |
-| Municipal Bonds | 80-100 | Types, rules, calculations |
-| Margin | 60-80 | Formulas, requirements |
-| Debt Securities | 50-60 | Yields, features |
-| Equity | 30-40 | Rights, characteristics |
-| Investment Companies | 30-40 | Structures, fees |
-| Variable Products | 25-35 | Features, taxation |
-| Retirement | 30-40 | Contribution limits, rules |
-| DPPs | 15-20 | Structure, tax treatment |
-| Other Products | 15-20 | ETFs, REITs, basics |
+| Topic                | Cards   | Notes                           |
+| -------------------- | ------- | ------------------------------- |
+| Options              | 120-150 | Strategies, calculations, terms |
+| Municipal Bonds      | 80-100  | Types, rules, calculations      |
+| Margin               | 60-80   | Formulas, requirements          |
+| Debt Securities      | 50-60   | Yields, features                |
+| Equity               | 30-40   | Rights, characteristics         |
+| Investment Companies | 30-40   | Structures, fees                |
+| Variable Products    | 25-35   | Features, taxation              |
+| Retirement           | 30-40   | Contribution limits, rules      |
+| DPPs                 | 15-20   | Structure, tax treatment        |
+| Other Products       | 15-20   | ETFs, REITs, basics             |
 
 ### Card Format
 
 **Front (Question):**
+
 - Clear, specific question
 - Test one concept
 - Avoid "trick" questions
 
 **Back (Answer):**
+
 - Direct answer first
 - Brief explanation if needed
 - Memory aid when helpful
@@ -191,18 +199,21 @@ Each question includes:
 ### Card Types
 
 1. **Term Cards** (40%)
+
    ```
    Front: "What is a straddle?"
    Back: "Buying (or selling) both a call and put with the same strike and expiration. Long straddle = expects volatility. Short straddle = expects stability."
    ```
 
 2. **Formula Cards** (20%)
+
    ```
    Front: "How do you calculate long margin buying power?"
    Back: "SMA ÷ Reg T requirement (50%) = Buying Power. $5,000 SMA = $10,000 buying power."
    ```
 
 3. **Comparison Cards** (20%)
+
    ```
    Front: "Bull call spread vs. bear call spread: Which is debit? Which is credit?"
    Back: "Bull call spread = DEBIT (buy lower strike). Bear call spread = CREDIT (sell lower strike). Remember: Bulls charge forward (buy first)."
@@ -221,6 +232,7 @@ Each question includes:
 ### Progress Tracker
 
 Track completion across:
+
 - Lessons read
 - Quizzes completed (with scores)
 - Flashcards reviewed
@@ -229,31 +241,37 @@ Track completion across:
 ### 8-10 Week Study Schedule
 
 **Week 1-2: Foundation**
+
 - Section 1 (Seeks Business)
 - Section 2 (Opens Accounts)
 - Basic equity and debt concepts
 
 **Week 3-4: Products Deep Dive**
+
 - Investment companies
 - Variable products
 - Retirement plans
 
 **Week 5-6: Complex Topics I**
+
 - Options fundamentals
 - Options pricing and basic strategies
 - Start margin accounts
 
 **Week 7-8: Complex Topics II**
+
 - Options spreads and advanced strategies
 - Complete margin calculations
 - Municipal bonds (comprehensive)
 
 **Week 9: Processing & Review**
+
 - Section 4 (Processes Transactions)
 - Comprehensive review of weak areas
 - Practice exams 1 & 2
 
 **Week 10: Final Prep**
+
 - Practice exam 3
 - Review missed questions
 - Formula sheet mastery
@@ -288,6 +306,7 @@ Group formulas by topic:
 ### Common Mistakes Document
 
 Collect and categorize:
+
 - Exam traps (common wrong answers)
 - Calculation errors (sign mistakes, order of operations)
 - Conceptual confusion (similar concepts mixed up)
@@ -300,6 +319,7 @@ Collect and categorize:
 ### Phase 1: Extract (Raw Content)
 
 Collect source material:
+
 - FINRA content outlines
 - Study guide notes
 - Practice question patterns
@@ -320,6 +340,7 @@ Apply FHM brand voice:
 ### Phase 3: Structure
 
 Apply lesson template:
+
 - Add frontmatter metadata
 - Format with HTML components
 - Create cross-references
@@ -328,6 +349,7 @@ Apply lesson template:
 ### Phase 4: Review
 
 Quality checklist:
+
 - [ ] Opens with hook, not definition
 - [ ] Has historical/contextual story
 - [ ] Includes real-world examples
@@ -396,37 +418,37 @@ Each calculation lesson includes:
 
 Build foundation with most-tested content:
 
-| Priority | Content | Why First |
-|----------|---------|-----------|
-| 1 | Options Fundamentals | Most heavily tested, builds on itself |
-| 2 | Municipal Bond Basics | Heavy exam weight, unique rules |
-| 3 | Margin Account Basics | Foundation for advanced calculations |
-| 4 | Account Types (Section 2) | Early exam section, straightforward |
+| Priority | Content                   | Why First                             |
+| -------- | ------------------------- | ------------------------------------- |
+| 1        | Options Fundamentals      | Most heavily tested, builds on itself |
+| 2        | Municipal Bond Basics     | Heavy exam weight, unique rules       |
+| 3        | Margin Account Basics     | Foundation for advanced calculations  |
+| 4        | Account Types (Section 2) | Early exam section, straightforward   |
 
 ### Phase 2: Build Out (Weeks 5-8)
 
 Expand with secondary topics:
 
-| Priority | Content | Notes |
-|----------|---------|-------|
-| 5 | Options Strategies | Build on fundamentals |
-| 6 | Options Calculations | Apply strategy knowledge |
-| 7 | Full Margin Coverage | Complete the margin section |
-| 8 | Municipal Trading/MSRB | Complete muni coverage |
-| 9 | Debt Securities | Important foundation |
-| 10 | Investment Companies | Moderate exam weight |
+| Priority | Content                | Notes                       |
+| -------- | ---------------------- | --------------------------- |
+| 5        | Options Strategies     | Build on fundamentals       |
+| 6        | Options Calculations   | Apply strategy knowledge    |
+| 7        | Full Margin Coverage   | Complete the margin section |
+| 8        | Municipal Trading/MSRB | Complete muni coverage      |
+| 9        | Debt Securities        | Important foundation        |
+| 10       | Investment Companies   | Moderate exam weight        |
 
 ### Phase 3: Complete (Weeks 9-12)
 
 Fill remaining gaps:
 
-| Priority | Content | Notes |
-|----------|---------|-------|
-| 11 | Variable Products | Moderate weight |
-| 12 | Retirement Plans | Moderate weight |
-| 13 | Section 1 (Seeks Business) | Lower exam weight |
-| 14 | Section 4 (Processing) | Lowest exam weight |
-| 15 | DPPs, Other Products | Lightest coverage needed |
+| Priority | Content                    | Notes                    |
+| -------- | -------------------------- | ------------------------ |
+| 11       | Variable Products          | Moderate weight          |
+| 12       | Retirement Plans           | Moderate weight          |
+| 13       | Section 1 (Seeks Business) | Lower exam weight        |
+| 14       | Section 4 (Processing)     | Lowest exam weight       |
+| 15       | DPPs, Other Products       | Lightest coverage needed |
 
 ---
 
@@ -489,21 +511,23 @@ Fourth Layer:
 
 ## Implementation Status (Updated February 2026)
 
-The original section-based planning model above guided content priorities. The actual implementation uses a **chapter-based pipeline** (Chapters 1-19, matching Kaplan textbook structure).
+The original section-based planning model above guided content priorities. The actual implementation
+uses a **chapter-based pipeline** (Chapters 1-19, matching Kaplan textbook structure).
 
 ### What's Been Built
 
-| Component | Status |
-|-----------|--------|
-| 18 of 19 chapter HTML pages | Published and live |
+| Component                   | Status                                                                      |
+| --------------------------- | --------------------------------------------------------------------------- |
+| 18 of 19 chapter HTML pages | Published and live                                                          |
 | Comprehensive formula sheet | Options (T-chart, all strategies), Bond Yield Seesaw, YTM, critical numbers |
-| 280 flashcards | Generated across all published chapters |
-| Full navigation chain | All 18 chapters linked sequentially |
-| Hub page | All chapters accessible |
+| 280 flashcards              | Generated across all published chapters                                     |
+| Full navigation chain       | All 18 chapters linked sequentially                                         |
+| Hub page                    | All chapters accessible                                                     |
 
 ### Content Pipeline
 
-Each chapter follows: **INTAKE** (screenshots/notes) → **EXTRACT** (raw-notes.md) → **TRANSFORM** (chapter markdown in FHM voice) → **PUBLISH** (HTML page with glossary, summary, navigation)
+Each chapter follows: **INTAKE** (screenshots/notes) → **EXTRACT** (raw-notes.md) → **TRANSFORM**
+(chapter markdown in FHM voice) → **PUBLISH** (HTML page with glossary, summary, navigation)
 
 ### Remaining
 
@@ -511,5 +535,4 @@ Each chapter follows: **INTAKE** (screenshots/notes) → **EXTRACT** (raw-notes.
 - Practice exams 2-5
 - Flashcard expansion (280 of ~600 target)
 
-*Strategy document created: January 6, 2026*
-*Status updated: February 15, 2026*
+_Strategy document created: January 6, 2026_ _Status updated: February 15, 2026_

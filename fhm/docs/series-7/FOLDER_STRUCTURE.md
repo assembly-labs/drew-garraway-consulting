@@ -1,7 +1,7 @@
 # Series 7 Framework - Folder Structure
 
-**Date:** January 6, 2026
-**Purpose:** Define the complete directory structure for Series 7 exam prep materials, mirroring SIE patterns while adapting for Series 7 content depth.
+**Date:** January 6, 2026 **Purpose:** Define the complete directory structure for Series 7 exam
+prep materials, mirroring SIE patterns while adapting for Series 7 content depth.
 
 ---
 
@@ -683,14 +683,15 @@ fhm/content/series-7/
 
 ## File Counts by Section
 
-| Section | % of Exam | Chapters | Lessons | Quizzes | Est. Content |
-|---------|-----------|----------|---------|---------|--------------|
-| Section 1 | 9% | 3 | 9 | 4 | Light |
-| Section 2 | 11% | 4 | 18 | 5 | Medium |
-| Section 3 | 73% | 38+ | 95+ | 15+ | Heavy |
-| Section 4 | 7% | 4 | 10 | 5 | Light |
+| Section   | % of Exam | Chapters | Lessons | Quizzes | Est. Content |
+| --------- | --------- | -------- | ------- | ------- | ------------ |
+| Section 1 | 9%        | 3        | 9       | 4       | Light        |
+| Section 2 | 11%       | 4        | 18      | 5       | Medium       |
+| Section 3 | 73%       | 38+      | 95+     | 15+     | Heavy        |
+| Section 4 | 7%        | 4        | 10      | 5       | Light        |
 
 **Section 3 Subsections:**
+
 - Equity Securities: 4 chapters, ~10 lessons
 - Debt Securities: 4 chapters, ~12 lessons
 - Municipal Bonds: 6 chapters, ~15 lessons (heavy)
@@ -707,15 +708,15 @@ fhm/content/series-7/
 
 ## Naming Conventions
 
-| Type | Pattern | Example |
-|------|---------|---------|
-| Section folder | `section-XX-kebab-name/` | `section-03-provides-info/` |
-| Subsection folder | `XX-kebab-name/` | `04-options/` |
-| Chapter folder | `chapter-XX-kebab-name/` | `chapter-01-options-fundamentals/` |
-| Lesson file | `lesson-XX-kebab-name.md` | `lesson-01-options-basics.md` |
-| Quiz file | `quiz-[scope].md` | `quiz-chapter-01.md` |
-| Flashcard file | `[topic]-flashcards.json` | `options-terms-flashcards.json` |
-| Meta file | `[scope]-meta.json` | `chapter-meta.json` |
+| Type              | Pattern                   | Example                            |
+| ----------------- | ------------------------- | ---------------------------------- |
+| Section folder    | `section-XX-kebab-name/`  | `section-03-provides-info/`        |
+| Subsection folder | `XX-kebab-name/`          | `04-options/`                      |
+| Chapter folder    | `chapter-XX-kebab-name/`  | `chapter-01-options-fundamentals/` |
+| Lesson file       | `lesson-XX-kebab-name.md` | `lesson-01-options-basics.md`      |
+| Quiz file         | `quiz-[scope].md`         | `quiz-chapter-01.md`               |
+| Flashcard file    | `[topic]-flashcards.json` | `options-terms-flashcards.json`    |
+| Meta file         | `[scope]-meta.json`       | `chapter-meta.json`                |
 
 ---
 
@@ -796,6 +797,7 @@ fhm/content/series-7/chapters/
 
 ---
 
-*Original structure planned: January 6, 2026*
-*Actual implementation uses chapter-based pipeline: Updated February 15, 2026*
-*Note: The section-based structure above was aspirational. The actual implementation uses the chapter-based structure documented in the "HTML Pages Structure" and "Content Source Structure" sections above.*
+_Original structure planned: January 6, 2026_ _Actual implementation uses chapter-based pipeline:
+Updated February 15, 2026_ _Note: The section-based structure above was aspirational. The actual
+implementation uses the chapter-based structure documented in the "HTML Pages Structure" and
+"Content Source Structure" sections above._

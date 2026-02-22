@@ -6,18 +6,19 @@ Track all processed screenshots and their status through the pipeline.
 
 ## Status Legend
 
-| Status | Meaning |
-|--------|---------|
-| INTAKE | Categorized, not yet extracted |
-| RAW | Extracted to raw markdown |
-| TRANSFORMED | FHM voice applied |
-| PUBLISHED | Live on site |
+| Status      | Meaning                        |
+| ----------- | ------------------------------ |
+| INTAKE      | Categorized, not yet extracted |
+| RAW         | Extracted to raw markdown      |
+| TRANSFORMED | FHM voice applied              |
+| PUBLISHED   | Live on site                   |
 
 ---
 
 ## Intake Sessions
 
 ### Session Template
+
 ```
 ### [Date] - [Topic Area]
 
@@ -30,7 +31,7 @@ Track all processed screenshots and their status through the pipeline.
 
 ## Log Entries
 
-*(Add new sessions below)*
+_(Add new sessions below)_
 
 ---
 
@@ -43,35 +44,38 @@ Ready to process screenshots. Send 1-3 images at a time with context about what 
 ## Summary by Section
 
 ### Section 1: Seeks Business (9%)
-- Topics covered: *none yet*
+
+- Topics covered: _none yet_
 - Raw notes: 0
 - Transformed: 0
 - Published: 0
 
 ### Section 2: Opens Accounts (11%)
-- Topics covered: *none yet*
+
+- Topics covered: _none yet_
 - Raw notes: 0
 - Transformed: 0
 - Published: 0
 
 ### Section 3: Provides Info (73%)
 
-| Subsection | Topics | Raw | Transformed | Published |
-|------------|--------|-----|-------------|-----------|
-| 01 Equity Securities | 0 | 0 | 0 | 0 |
-| 02 Debt Securities | 0 | 0 | 0 | 0 |
-| 03 Municipal Bonds | 0 | 0 | 0 | 0 |
-| 04 Options | 0 | 0 | 0 | 0 |
-| 05 Investment Companies | 0 | 0 | 0 | 0 |
-| 06 Variable Products | 0 | 0 | 0 | 0 |
-| 07 Retirement Plans | 0 | 0 | 0 | 0 |
-| 08 Margin Accounts | 0 | 0 | 0 | 0 |
-| 09 DPPs | 0 | 0 | 0 | 0 |
-| 10 Other Products | 0 | 0 | 0 | 0 |
-| 11 Analysis & Economics | 0 | 0 | 0 | 0 |
+| Subsection              | Topics | Raw | Transformed | Published |
+| ----------------------- | ------ | --- | ----------- | --------- |
+| 01 Equity Securities    | 0      | 0   | 0           | 0         |
+| 02 Debt Securities      | 0      | 0   | 0           | 0         |
+| 03 Municipal Bonds      | 0      | 0   | 0           | 0         |
+| 04 Options              | 0      | 0   | 0           | 0         |
+| 05 Investment Companies | 0      | 0   | 0           | 0         |
+| 06 Variable Products    | 0      | 0   | 0           | 0         |
+| 07 Retirement Plans     | 0      | 0   | 0           | 0         |
+| 08 Margin Accounts      | 0      | 0   | 0           | 0         |
+| 09 DPPs                 | 0      | 0   | 0           | 0         |
+| 10 Other Products       | 0      | 0   | 0           | 0         |
+| 11 Analysis & Economics | 0      | 0   | 0           | 0         |
 
 ### Section 4: Processes Transactions (7%)
-- Topics covered: *none yet*
+
+- Topics covered: _none yet_
 - Raw notes: 0
 - Transformed: 0
 - Published: 0
@@ -89,4 +93,4 @@ High-priority topics to process first (by exam weight):
 
 ---
 
-*Log started: January 2025*
+_Log started: January 2025_

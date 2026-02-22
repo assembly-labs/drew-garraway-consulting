@@ -1,14 +1,17 @@
 # Series 7 Flashcards Feature - UX Design
 
-*A mobile-first flashcard experience for Series 7 exam preparation*
+_A mobile-first flashcard experience for Series 7 exam preparation_
 
 ---
 
 ## Executive Summary
 
-This document outlines the UX design for Series 7 flashcards, building on the successful SIE flashcard system while addressing the unique challenges of the Series 7 exam: larger content volume, complex calculations, and weighted topic areas.
+This document outlines the UX design for Series 7 flashcards, building on the successful SIE
+flashcard system while addressing the unique challenges of the Series 7 exam: larger content volume,
+complex calculations, and weighted topic areas.
 
 **Key design principles:**
+
 1. Mobile-first, thumb-friendly interactions
 2. Spaced repetition for long-term retention
 3. Topic-based filtering for focused study
@@ -20,6 +23,7 @@ This document outlines the UX design for Series 7 flashcards, building on the su
 ## Current State Analysis
 
 ### What Works in SIE Flashcards
+
 - Swipe gestures (up = got it, left/right = don't know)
 - Tap to flip
 - Dark theme for reduced eye strain
@@ -30,19 +34,20 @@ This document outlines the UX design for Series 7 flashcards, building on the su
 
 ### Series 7 Unique Challenges
 
-| Challenge | Impact | Solution Needed |
-|-----------|--------|-----------------|
-| Volume: 400+ cards vs 116 | Overwhelming | Topic filtering, spaced repetition |
-| 73% weighted to Section 3 | Uneven distribution | Priority-weighted sessions |
-| Heavy calculations | Hard to memorize | Formula mode with worked examples |
-| Complex strategies | Need context | Card types with explanations |
-| Long prep period | Forgetting curve | Spaced repetition algorithm |
+| Challenge                 | Impact              | Solution Needed                    |
+| ------------------------- | ------------------- | ---------------------------------- |
+| Volume: 400+ cards vs 116 | Overwhelming        | Topic filtering, spaced repetition |
+| 73% weighted to Section 3 | Uneven distribution | Priority-weighted sessions         |
+| Heavy calculations        | Hard to memorize    | Formula mode with worked examples  |
+| Complex strategies        | Need context        | Card types with explanations       |
+| Long prep period          | Forgetting curve    | Spaced repetition algorithm        |
 
 ---
 
 ## Feature Requirements
 
 ### Must Have (MVP)
+
 - [ ] Browse/filter by section and topic
 - [ ] Swipe-based card interaction (existing pattern)
 - [ ] Progress persistence (localStorage)
@@ -53,12 +58,14 @@ This document outlines the UX design for Series 7 flashcards, building on the su
 - [ ] "Due for Review" session mode
 
 ### Should Have (V1.1)
+
 - [ ] Difficulty rating per card (manual adjustment)
 - [ ] Quick review of missed cards (separate mode)
 - [ ] Keyboard shortcuts
 - [ ] Weak area summary on session complete
 
 ### Nice to Have (Future)
+
 - [ ] Offline support (service worker)
 - [ ] Audio pronunciation for terms
 - [ ] Export/import progress
@@ -286,25 +293,26 @@ This document outlines the UX design for Series 7 flashcards, building on the su
 
 ### Gesture System (Same as SIE)
 
-| Gesture | Action | Feedback |
-|---------|--------|----------|
-| **Tap** | Flip card | 3D flip animation |
-| **Swipe Up** | Mark "Got It" | Green glow, card slides up |
-| **Swipe Left** | Mark "Don't Know" | Red glow, card slides left |
-| **Swipe Right** | Mark "Don't Know" | Red glow, card slides right |
-| **Long Press** | Show hint (if available) | Subtle modal |
+| Gesture         | Action                   | Feedback                    |
+| --------------- | ------------------------ | --------------------------- |
+| **Tap**         | Flip card                | 3D flip animation           |
+| **Swipe Up**    | Mark "Got It"            | Green glow, card slides up  |
+| **Swipe Left**  | Mark "Don't Know"        | Red glow, card slides left  |
+| **Swipe Right** | Mark "Don't Know"        | Red glow, card slides right |
+| **Long Press**  | Show hint (if available) | Subtle modal                |
 
 ### Keyboard Shortcuts (Desktop)
 
-| Key | Action |
-|-----|--------|
-| `Space` / `Enter` | Flip card |
-| `↑` | Got It |
-| `←` / `→` | Don't Know |
-| `?` | Show hint |
-| `Esc` | End session |
+| Key               | Action      |
+| ----------------- | ----------- |
+| `Space` / `Enter` | Flip card   |
+| `↑`               | Got It      |
+| `←` / `→`         | Don't Know  |
+| `?`               | Show hint   |
+| `Esc`             | End session |
 
 ### Touch Targets
+
 - Minimum 44x44px (WCAG 2.1 AA)
 - Action buttons: 60px height minimum
 - Adequate spacing between interactive elements
@@ -314,6 +322,7 @@ This document outlines the UX design for Series 7 flashcards, building on the su
 ## Card Types & Formatting
 
 ### Type 1: Term Definition
+
 ```
 ┌────────────────────────────────────────┐
 │ FRONT                                  │
@@ -336,6 +345,7 @@ This document outlines the UX design for Series 7 flashcards, building on the su
 ```
 
 ### Type 2: Formula/Calculation
+
 ```
 ┌────────────────────────────────────────┐
 │ FORMULA                          [f(x)]│
@@ -361,6 +371,7 @@ This document outlines the UX design for Series 7 flashcards, building on the su
 ```
 
 ### Type 3: Comparison
+
 ```
 ┌────────────────────────────────────────┐
 │ COMPARE                           [vs] │
@@ -389,6 +400,7 @@ This document outlines the UX design for Series 7 flashcards, building on the su
 ```
 
 ### Type 4: Rule/Regulation
+
 ```
 ┌────────────────────────────────────────┐
 │ RULE                              [§]  │
@@ -414,6 +426,7 @@ This document outlines the UX design for Series 7 flashcards, building on the su
 ```
 
 ### Type 5: Scenario
+
 ```
 ┌────────────────────────────────────────┐
 │ SCENARIO                         [?]   │
@@ -452,17 +465,16 @@ The spaced repetition system is built into MVP - no point building flashcards wi
 
 Cards move between boxes based on correct/incorrect responses:
 
-| Box | Level | Review Interval | Criteria |
-|-----|-------|-----------------|----------|
-| 0 | New | Immediate | Never seen OR missed twice |
-| 1 | Learning | 1 day | Got it once |
-| 2 | Familiar | 3 days | Got it twice in a row |
-| 3 | Proficient | 7 days | Got it 3x in a row |
-| 4 | Mastered | 14 days | Got it 4x in a row |
-| 5 | Expert | 30 days | Got it 5+ times |
+| Box | Level      | Review Interval | Criteria                   |
+| --- | ---------- | --------------- | -------------------------- |
+| 0   | New        | Immediate       | Never seen OR missed twice |
+| 1   | Learning   | 1 day           | Got it once                |
+| 2   | Familiar   | 3 days          | Got it twice in a row      |
+| 3   | Proficient | 7 days          | Got it 3x in a row         |
+| 4   | Mastered   | 14 days         | Got it 4x in a row         |
+| 5   | Expert     | 30 days         | Got it 5+ times            |
 
-**On correct**: Move up one box (max 5)
-**On incorrect**: Drop back 2 boxes (min 0)
+**On correct**: Move up one box (max 5) **On incorrect**: Drop back 2 boxes (min 0)
 
 ### Algorithm Implementation
 
@@ -479,18 +491,19 @@ card.nextReview = null; // Re-queue in current session
 
 // Next Review Intervals
 const intervals = {
-  0: 0,        // Immediate (learning)
-  1: 1,        // 1 day
-  2: 3,        // 3 days
-  3: 7,        // 1 week
-  4: 14,       // 2 weeks
-  5: 30        // 1 month (mastered)
+  0: 0, // Immediate (learning)
+  1: 1, // 1 day
+  2: 3, // 3 days
+  3: 7, // 1 week
+  4: 14, // 2 weeks
+  5: 30, // 1 month (mastered)
 };
 ```
 
 ### Progress Persistence
 
 Store in localStorage:
+
 ```javascript
 {
   "fhm_series7_flashcards": {
@@ -515,27 +528,27 @@ Store in localStorage:
 
 ### Color Usage (FHM Brand)
 
-| Element | Color | Usage |
-|---------|-------|-------|
-| Background | `#1a1f2e` | App background (dark) |
-| Card Front | `#2a3142` | Question side |
-| Card Back | `#1e3a5f` | Answer side |
-| Got It | `#7C9885` (Sage) | Success actions |
-| Don't Know | `#6B2737` (Burgundy) | Retry actions |
-| Progress | `#7C9885` → `#8fb099` | Gradient fill |
-| Accent | `#B08D57` (Gold) | Streaks, achievements |
-| Text Primary | `#e8eaed` | Main text |
-| Text Secondary | `rgba(255,255,255,0.6)` | Labels, hints |
+| Element        | Color                   | Usage                 |
+| -------------- | ----------------------- | --------------------- |
+| Background     | `#1a1f2e`               | App background (dark) |
+| Card Front     | `#2a3142`               | Question side         |
+| Card Back      | `#1e3a5f`               | Answer side           |
+| Got It         | `#7C9885` (Sage)        | Success actions       |
+| Don't Know     | `#6B2737` (Burgundy)    | Retry actions         |
+| Progress       | `#7C9885` → `#8fb099`   | Gradient fill         |
+| Accent         | `#B08D57` (Gold)        | Streaks, achievements |
+| Text Primary   | `#e8eaed`               | Main text             |
+| Text Secondary | `rgba(255,255,255,0.6)` | Labels, hints         |
 
 ### Typography
 
-| Element | Font | Size | Weight |
-|---------|------|------|--------|
-| Card Question | Inter | 1.125-1.625rem (clamp) | 500 |
-| Card Answer | Inter | 1rem-1.5rem (clamp) | 400 |
-| Formula | IBM Plex Mono | 1rem | 400 |
-| Labels | Inter | 0.75rem | 500 |
-| Headers | Crimson Pro | 1.75rem | 600 |
+| Element       | Font          | Size                   | Weight |
+| ------------- | ------------- | ---------------------- | ------ |
+| Card Question | Inter         | 1.125-1.625rem (clamp) | 500    |
+| Card Answer   | Inter         | 1rem-1.5rem (clamp)    | 400    |
+| Formula       | IBM Plex Mono | 1rem                   | 400    |
+| Labels        | Inter         | 0.75rem                | 500    |
+| Headers       | Crimson Pro   | 1.75rem                | 600    |
 
 ### Card Type Badges
 
@@ -551,10 +564,18 @@ Store in localStorage:
   opacity: 0.7;
 }
 
-.card-type--formula { color: #B08D57; } /* Gold */
-.card-type--rule { color: #7C9885; }    /* Sage */
-.card-type--compare { color: #4A90C2; } /* Light blue */
-.card-type--scenario { color: #9B7BB8; } /* Purple */
+.card-type--formula {
+  color: #b08d57;
+} /* Gold */
+.card-type--rule {
+  color: #7c9885;
+} /* Sage */
+.card-type--compare {
+  color: #4a90c2;
+} /* Light blue */
+.card-type--scenario {
+  color: #9b7bb8;
+} /* Purple */
 ```
 
 ---
@@ -562,6 +583,7 @@ Store in localStorage:
 ## Mobile Considerations
 
 ### iOS Safari Specific
+
 - Use `100dvh` for dynamic viewport height
 - `env(safe-area-inset-*)` for notch/home indicator
 - `-webkit-overflow-scrolling: touch` for smooth scroll
@@ -569,12 +591,14 @@ Store in localStorage:
 - `position: fixed` on body to prevent rubber-banding
 
 ### Performance
+
 - Lazy load card data by section
 - Preload next 3 cards in session
 - Debounce progress saves (every 5 cards or 30 seconds)
 - Use CSS transforms (GPU accelerated) for animations
 
 ### Offline Support (Future)
+
 ```javascript
 // Service worker strategy
 // - Cache flashcard JSON on first load
@@ -587,6 +611,7 @@ Store in localStorage:
 ## Accessibility
 
 ### WCAG 2.1 AA Compliance
+
 - [ ] Color contrast 4.5:1 minimum
 - [ ] Focus indicators visible (3px gold outline)
 - [ ] Screen reader announcements for card flip
@@ -594,11 +619,9 @@ Store in localStorage:
 - [ ] Touch targets 44x44px minimum
 
 ### Screen Reader Support
+
 ```html
-<div class="flashcard"
-     role="button"
-     aria-label="Flashcard. Tap to flip."
-     aria-pressed="false">
+<div class="flashcard" role="button" aria-label="Flashcard. Tap to flip." aria-pressed="false">
   <div class="flashcard__front" aria-hidden="false">
     <p>Question text...</p>
   </div>
@@ -672,6 +695,7 @@ Total: ~400-450 cards
 ## Implementation Approach
 
 ### Phase 1: MVP (Reuse SIE Infrastructure)
+
 1. Create `series-7-flashcards.html` (copy from SIE)
 2. Add topic filter dropdown to start screen
 3. Create Series 7 card data JSON
@@ -679,6 +703,7 @@ Total: ~400-450 cards
 5. Test on mobile devices
 
 ### Phase 2: Enhanced Features
+
 1. Add card type badges and formatting
 2. Implement spaced repetition algorithm
 3. Add "Due for Review" session mode
@@ -686,6 +711,7 @@ Total: ~400-450 cards
 5. Add streak tracking
 
 ### Phase 3: Polish
+
 1. Formula card special rendering
 2. Memory aid hints (long press)
 3. Progress export/import
@@ -696,13 +722,13 @@ Total: ~400-450 cards
 
 ## Success Metrics
 
-| Metric | Target | How to Measure |
-|--------|--------|----------------|
-| Cards created | 400+ | Card count |
-| Daily active usage | 5+ min | Session time tracking |
-| Mastery rate | 80%+ cards mastered | Progress data |
-| Retention | 70%+ on review | Review session performance |
-| Mobile usage | 80%+ | User agent tracking |
+| Metric             | Target              | How to Measure             |
+| ------------------ | ------------------- | -------------------------- |
+| Cards created      | 400+                | Card count                 |
+| Daily active usage | 5+ min              | Session time tracking      |
+| Mastery rate       | 80%+ cards mastered | Progress data              |
+| Retention          | 70%+ on review      | Review session performance |
+| Mobile usage       | 80%+                | User agent tracking        |
 
 ---
 
@@ -726,5 +752,4 @@ Total: ~400-450 cards
 
 ---
 
-*Document created: January 2026*
-*FHM Series 7 Flashcards - An Investment in Knowledge*
+_Document created: January 2026_ _FHM Series 7 Flashcards - An Investment in Knowledge_

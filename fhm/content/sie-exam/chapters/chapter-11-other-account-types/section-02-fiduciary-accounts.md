@@ -1,8 +1,10 @@
 ---
 chapter: 11
 section: 2
-title: "Fiduciary Accounts"
-description: "Understanding custodial accounts, trust accounts, and the legal responsibilities of managing someone else's money"
+title: 'Fiduciary Accounts'
+description:
+  "Understanding custodial accounts, trust accounts, and the legal responsibilities of managing
+  someone else's money"
 topics:
   - Requirements for Fiduciary Accounts
   - Custodial Accounts (UGMA/UTMA)
@@ -17,13 +19,22 @@ last_updated: 2026-01-04
 
 ## Introduction
 
-In 1830, a Harvard treasurer named Samuel Gridley Howe faced a novel legal question: when you manage someone else's money, exactly what obligations do you have? The resulting Massachusetts court case, Harvard College v. Amory, established what we now call the "prudent person rule"—a standard that still governs fiduciary accounts today.
+In 1830, a Harvard treasurer named Samuel Gridley Howe faced a novel legal question: when you manage
+someone else's money, exactly what obligations do you have? The resulting Massachusetts court case,
+Harvard College v. Amory, established what we now call the "prudent person rule"—a standard that
+still governs fiduciary accounts today.
 
-The principle is deceptively simple: manage other people's money with the same care a prudent person would use with their own. But defining "prudent" has kept lawyers employed for nearly two centuries.
+The principle is deceptively simple: manage other people's money with the same care a prudent person
+would use with their own. But defining "prudent" has kept lawyers employed for nearly two centuries.
 
-A <span class="key-term">fiduciary</span> is someone who manages assets for another person's benefit—and must put that person's interests before their own. It's a legal obligation, not just a nice idea. Courts have been enforcing fiduciary duties since medieval England, and the securities industry takes them seriously. Breach your fiduciary duty, and you'll face both civil liability and regulatory consequences.
+A <span class="key-term">fiduciary</span> is someone who manages assets for another person's
+benefit—and must put that person's interests before their own. It's a legal obligation, not just a
+nice idea. Courts have been enforcing fiduciary duties since medieval England, and the securities
+industry takes them seriously. Breach your fiduciary duty, and you'll face both civil liability and
+regulatory consequences.
 
 Types of fiduciary accounts include:
+
 - Custodial accounts (UGMA/UTMA)
 - Guardian accounts
 - Trust accounts
@@ -31,6 +42,7 @@ Types of fiduciary accounts include:
 ## Learning Objectives
 
 By the end of this section, you'll be able to:
+
 - Explain the fiduciary duty and prudent person rule
 - Distinguish between durable and nondurable powers of attorney
 - Compare UGMA and UTMA custodial accounts
@@ -45,7 +57,8 @@ By the end of this section, you'll be able to:
 
 ### Documentation Comes First
 
-Fiduciary accounts can't be opened without proper documentation appointing the fiduciary. No court order? No guardian account. No trust agreement? No trust account.
+Fiduciary accounts can't be opened without proper documentation appointing the fiduciary. No court
+order? No guardian account. No trust agreement? No trust account.
 
 <div class="critical-concept">
   <div class="critical-concept__label">KEY RULE: TRADING AUTHORITY</div>
@@ -61,7 +74,8 @@ Fiduciary accounts can't be opened without proper documentation appointing the f
 
 ### The Prudent Person Rule
 
-Fiduciaries don't have free rein over investments. State law typically requires them to follow one of two standards:
+Fiduciaries don't have free rein over investments. State law typically requires them to follow one
+of two standards:
 
 <div class="critical-concept">
   <div class="critical-concept__label">TWO INVESTMENT STANDARDS</div>
@@ -92,9 +106,11 @@ Fiduciaries don't have free rein over investments. State law typically requires 
 
 ## Power of Attorney
 
-A <span class="key-term">power of attorney (POA)</span> isn't an account type—it's a grant of authority. It allows someone to act on behalf of an account owner.
+A <span class="key-term">power of attorney (POA)</span> isn't an account type—it's a grant of
+authority. It allows someone to act on behalf of an account owner.
 
-A <span class="key-term">full POA</span> allows the agent to trade *and* make withdrawals. A <span class="key-term">limited POA</span> might restrict actions to trading only.
+A <span class="key-term">full POA</span> allows the agent to trade _and_ make withdrawals. A
+<span class="key-term">limited POA</span> might restrict actions to trading only.
 
 ### Durable vs. Nondurable
 
@@ -132,7 +148,8 @@ A <span class="key-term">full POA</span> allows the agent to trade *and* make wi
 
 ## Custodial Accounts
 
-Custodial accounts allow an adult to manage investments on behalf of a minor. The adult has trading authority; the minor is the legal owner.
+Custodial accounts allow an adult to manage investments on behalf of a minor. The adult has trading
+authority; the minor is the legal owner.
 
 Two types dominate: <span class="key-term">UGMA</span> and <span class="key-term">UTMA</span>.
 
@@ -152,9 +169,11 @@ Key features of UGMA accounts:
 - Gifts are <span class="key-term">irrevocable</span>—once given, they cannot be taken back
 - Gifts can be cash or fully paid securities
 
-When the minor reaches the <span class="key-term">age of majority</span> (varies by state—typically 18 or 21), full control of the assets transfers to them. No exceptions.
+When the minor reaches the <span class="key-term">age of majority</span> (varies by state—typically
+18 or 21), full control of the assets transfers to them. No exceptions.
 
-**Investment limitations**: UGMA accounts can only hold financial assets—stocks, bonds, mutual funds. No real estate. No collectibles. No uncovered options.
+**Investment limitations**: UGMA accounts can only hold financial assets—stocks, bonds, mutual
+funds. No real estate. No collectibles. No uncovered options.
 
 ### UTMA: Uniform Transfers to Minors Act
 
@@ -253,11 +272,13 @@ The custodian's obligations are specific and enforceable:
   </ul>
 </div>
 
-The IRS designed these rules—often called the <span class="key-term">"kiddie tax"</span>—to prevent wealthy parents from shifting investment income to children in lower tax brackets.
+The IRS designed these rules—often called the <span class="key-term">"kiddie tax"</span>—to prevent
+wealthy parents from shifting investment income to children in lower tax brackets.
 
 ### Death of a Minor
 
-If the minor dies before reaching adulthood, the assets pass to the **minor's estate**—not directly to the parents. This can create estate complications.
+If the minor dies before reaching adulthood, the assets pass to the **minor's estate**—not directly
+to the parents. This can create estate complications.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> Don't confuse UGMA/UTMA accounts with ABLE accounts. <span class="key-term">ABLE (Achieving a Better Life Experience) accounts</span> are for people with disabilities and can be established for either a child or an adult up to age 26. Different purpose entirely.</p>
@@ -267,11 +288,15 @@ If the minor dies before reaching adulthood, the assets pass to the **minor's es
 
 ## Guardian Accounts
 
-A <span class="key-term">guardian account</span> is for situations where a court has intervened—either to protect a minor's assets or to manage finances for an adult who lacks mental capacity.
+A <span class="key-term">guardian account</span> is for situations where a court has
+intervened—either to protect a minor's assets or to manage finances for an adult who lacks mental
+capacity.
 
 The key difference from custodial accounts: **court appointment is required**.
 
-To open a guardian account, the firm needs a copy of the court order appointing the guardian. The account cannot be opened only in the name of the minor or incompetent adult—the guardian must be part of the registration.
+To open a guardian account, the firm needs a copy of the court order appointing the guardian. The
+account cannot be opened only in the name of the minor or incompetent adult—the guardian must be
+part of the registration.
 
 ---
 
@@ -286,7 +311,8 @@ Trusts are the most flexible—and complex—fiduciary structure.
 
 The basic architecture:
 
-- <span class="key-term">Grantor</span> (also called trustor, donor, or settlor): Creates the trust and transfers assets
+- <span class="key-term">Grantor</span> (also called trustor, donor, or settlor): Creates the trust
+  and transfers assets
 - <span class="key-term">Trustee</span>: Manages the assets according to the trust's terms
 - <span class="key-term">Beneficiary</span>: Eventually receives the assets
 
@@ -340,7 +366,8 @@ The firm needs a copy of the <span class="key-term">trust agreement</span>, whic
   </table>
 </div>
 
-The most common form is the <span class="key-term">revocable living trust</span>—a trust that can be revoked at any time before death. Advantage: flexibility. Disadvantage: no estate tax savings.
+The most common form is the <span class="key-term">revocable living trust</span>—a trust that can be
+revoked at any time before death. Advantage: flexibility. Disadvantage: no estate tax savings.
 
 ### Living vs. Testamentary Trusts
 
@@ -382,7 +409,8 @@ A <span class="key-term">charitable remainder trust (CRT)</span> works like this
 2. Donor receives fixed income from the trust during their lifetime
 3. After death, remaining assets go to the charity
 
-CRTs are **irrevocable**—once established, they can't be undone. The donor gives up ownership but gains a steady income stream and a charitable tax deduction.
+CRTs are **irrevocable**—once established, they can't be undone. The donor gives up ownership but
+gains a steady income stream and a charitable tax deduction.
 
 ---
 
@@ -411,20 +439,28 @@ CRTs are **irrevocable**—once established, they can't be undone. The donor giv
 
 ## Summary
 
-Fiduciary accounts exist because not everyone can—or should—manage their own investments. Whether it's a minor who can't legally trade, an incompetent adult who needs protection, or a grantor who wants professional management, fiduciary structures provide the legal framework.
+Fiduciary accounts exist because not everyone can—or should—manage their own investments. Whether
+it's a minor who can't legally trade, an incompetent adult who needs protection, or a grantor who
+wants professional management, fiduciary structures provide the legal framework.
 
-The common thread: someone is responsible for managing assets in another person's best interest. That responsibility is legally enforceable—and the securities industry has specific rules about how these accounts must be opened and operated.
+The common thread: someone is responsible for managing assets in another person's best interest.
+That responsibility is legally enforceable—and the securities industry has specific rules about how
+these accounts must be opened and operated.
 
 ### Quick Reference
 
 **Key Terms:**
+
 - <span class="key-term">Fiduciary</span>: Person who manages assets for another's benefit
-- <span class="key-term">UGMA</span>: Uniform Gifts to Minors Act — custodial account for financial assets
-- <span class="key-term">UTMA</span>: Uniform Transfers to Minors Act — allows real estate, delayed transfer
+- <span class="key-term">UGMA</span>: Uniform Gifts to Minors Act — custodial account for financial
+  assets
+- <span class="key-term">UTMA</span>: Uniform Transfers to Minors Act — allows real estate, delayed
+  transfer
 - <span class="key-term">Revocable Trust</span>: Can be changed; assets remain in grantor's estate
 - <span class="key-term">Irrevocable Trust</span>: Cannot be changed; removes assets from estate
 
 **Important Rules:**
+
 - Custodial accounts: One custodian, one minor
 - POA terminates at grantor's death (all types)
 - Fiduciary accounts: Cash only unless documents authorize margin

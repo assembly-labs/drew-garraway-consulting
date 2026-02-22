@@ -1,4 +1,5 @@
 # Franklin Hugh Money Design System
+
 ## "An Investment in Knowledge"
 
 ---
@@ -6,33 +7,35 @@
 ## 🎨 Color Palette
 
 ### Primary Colors
+
 ```css
 :root {
   /* Primary Institutional Colors */
-  --fh-navy: #002D62;         /* Institutional Navy */
-  --fh-cream: #FFFDF7;        /* Paper Cream */
-  --fh-gray: #54585A;         /* Warm Gray */
+  --fh-navy: #002d62; /* Institutional Navy */
+  --fh-cream: #fffdf7; /* Paper Cream */
+  --fh-gray: #54585a; /* Warm Gray */
 
   /* Secondary Colors */
-  --fh-sage: #7C9885;         /* Sage Green (Growth) */
-  --fh-burgundy: #6B2737;     /* Burgundy (Losses) */
-  --fh-gold: #B08D57;         /* Gold (Achievements) */
+  --fh-sage: #7c9885; /* Sage Green (Growth) */
+  --fh-burgundy: #6b2737; /* Burgundy (Losses) */
+  --fh-gold: #b08d57; /* Gold (Achievements) */
 
   /* Neutral Scale */
-  --fh-gray-900: #1A1A1A;
-  --fh-gray-800: #2A2A2A;
+  --fh-gray-900: #1a1a1a;
+  --fh-gray-800: #2a2a2a;
   --fh-gray-700: #404040;
   --fh-gray-600: #595959;
   --fh-gray-500: #737373;
-  --fh-gray-400: #A3A3A3;
-  --fh-gray-300: #D4D4D4;
-  --fh-gray-200: #E5E5E5;
-  --fh-gray-100: #F5F5F5;
-  --fh-white: #FFFFFF;
+  --fh-gray-400: #a3a3a3;
+  --fh-gray-300: #d4d4d4;
+  --fh-gray-200: #e5e5e5;
+  --fh-gray-100: #f5f5f5;
+  --fh-white: #ffffff;
 }
 ```
 
 ### Color Usage
+
 - **Background**: Cream/White
 - **Text**: Navy/Gray-900
 - **Links**: Navy (hover: underlined)
@@ -46,6 +49,7 @@
 ## 📝 Typography
 
 ### Font Stack
+
 ```css
 :root {
   /* Headlines - Classical Serif */
@@ -60,6 +64,7 @@
 ```
 
 ### Type Scale
+
 ```css
 /* Mobile First */
 .fh-h1 {
@@ -95,10 +100,18 @@
 
 /* Desktop (min-width: 768px) */
 @media (min-width: 768px) {
-  .fh-h1 { font-size: 3rem; }
-  .fh-h2 { font-size: 2rem; }
-  .fh-h3 { font-size: 1.5rem; }
-  .fh-body { font-size: 1.125rem; }
+  .fh-h1 {
+    font-size: 3rem;
+  }
+  .fh-h2 {
+    font-size: 2rem;
+  }
+  .fh-h3 {
+    font-size: 1.5rem;
+  }
+  .fh-body {
+    font-size: 1.125rem;
+  }
 }
 ```
 
@@ -107,16 +120,17 @@
 ## 📐 Spacing System
 
 ### Base Unit: 8px (Harmonious Proportions)
+
 ```css
 :root {
-  --fh-space-xs: 0.25rem;   /* 4px */
-  --fh-space-sm: 0.5rem;    /* 8px */
-  --fh-space-md: 1rem;      /* 16px */
-  --fh-space-lg: 1.5rem;    /* 24px */
-  --fh-space-xl: 2rem;      /* 32px */
-  --fh-space-2xl: 3rem;     /* 48px */
-  --fh-space-3xl: 4rem;     /* 64px */
-  --fh-space-4xl: 6rem;     /* 96px */
+  --fh-space-xs: 0.25rem; /* 4px */
+  --fh-space-sm: 0.5rem; /* 8px */
+  --fh-space-md: 1rem; /* 16px */
+  --fh-space-lg: 1.5rem; /* 24px */
+  --fh-space-xl: 2rem; /* 32px */
+  --fh-space-2xl: 3rem; /* 48px */
+  --fh-space-3xl: 4rem; /* 64px */
+  --fh-space-4xl: 6rem; /* 96px */
 }
 ```
 
@@ -125,6 +139,7 @@
 ## 🎭 Effects & Animations
 
 ### Subtle Transitions
+
 ```css
 :root {
   --fh-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -145,10 +160,16 @@ a:hover {
 ```
 
 ### Loading Animation
+
 ```css
 @keyframes fh-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .fh-loading {
@@ -161,6 +182,7 @@ a:hover {
 ## 🧩 Components
 
 ### Buttons
+
 ```css
 .fh-btn {
   /* Base */
@@ -199,6 +221,7 @@ a:hover {
 ```
 
 ### Cards
+
 ```css
 .fh-card {
   background: var(--fh-white);
@@ -225,6 +248,7 @@ a:hover {
 ```
 
 ### Tables (Financial Data)
+
 ```css
 .fh-table {
   width: 100%;
@@ -256,6 +280,7 @@ a:hover {
 ```
 
 ### Forms
+
 ```css
 .fh-input {
   width: 100%;
@@ -290,16 +315,18 @@ a:hover {
 ```css
 /* Mobile First Approach */
 :root {
-  --fh-screen-sm: 640px;   /* Small devices */
-  --fh-screen-md: 768px;   /* Tablets */
-  --fh-screen-lg: 1024px;  /* Desktop */
-  --fh-screen-xl: 1280px;  /* Large desktop */
+  --fh-screen-sm: 640px; /* Small devices */
+  --fh-screen-md: 768px; /* Tablets */
+  --fh-screen-lg: 1024px; /* Desktop */
+  --fh-screen-xl: 1280px; /* Large desktop */
   --fh-screen-2xl: 1536px; /* XL desktop */
 }
 
 /* Standard Media Queries */
-@media (min-width: 768px) { }  /* Tablet and up */
-@media (min-width: 1024px) { } /* Desktop and up */
+@media (min-width: 768px) {
+} /* Tablet and up */
+@media (min-width: 1024px) {
+} /* Desktop and up */
 ```
 
 ---
@@ -307,6 +334,7 @@ a:hover {
 ## 📊 Data Visualization
 
 ### Charts & Graphs
+
 ```css
 .fh-chart {
   width: 100%;
@@ -333,6 +361,7 @@ a:hover {
 ```
 
 ### Portfolio Display
+
 ```css
 .fh-portfolio {
   font-family: var(--fh-font-mono);
@@ -364,15 +393,28 @@ a:hover {
 ## 🚨 Utility Classes
 
 ### Text Utilities
+
 ```css
-.fh-text-center { text-align: center; }
-.fh-text-muted { color: var(--fh-gray-600); }
-.fh-font-serif { font-family: var(--fh-font-display); }
-.fh-font-mono { font-family: var(--fh-font-mono); }
-.fh-uppercase { text-transform: uppercase; letter-spacing: 0.1em; }
+.fh-text-center {
+  text-align: center;
+}
+.fh-text-muted {
+  color: var(--fh-gray-600);
+}
+.fh-font-serif {
+  font-family: var(--fh-font-display);
+}
+.fh-font-mono {
+  font-family: var(--fh-font-mono);
+}
+.fh-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
 ```
 
 ### Layout Utilities
+
 ```css
 .fh-container {
   max-width: 1024px;
@@ -405,6 +447,7 @@ a:hover {
 ## 🎯 Component Examples
 
 ### Page Header
+
 ```html
 <header class="fh-header">
   <div class="fh-container">
@@ -420,6 +463,7 @@ a:hover {
 ```
 
 ### Portfolio Card
+
 ```html
 <article class="fh-card">
   <header class="fh-card__header">
@@ -436,6 +480,7 @@ a:hover {
 ```
 
 ### Data Table
+
 ```html
 <table class="fh-table">
   <thead>
@@ -462,5 +507,4 @@ a:hover {
 
 ---
 
-*Last Updated: 2024-12-05*
-*Design System v2.0 - Institutional Edition*
+_Last Updated: 2024-12-05_ _Design System v2.0 - Institutional Edition_

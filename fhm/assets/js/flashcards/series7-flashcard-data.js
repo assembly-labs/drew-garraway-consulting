@@ -147,7 +147,7 @@ const Series7FlashcardData = (function () {
             bySection,
             bySubsection,
             byDifficulty,
-            byTag
+            byTag,
         };
     }
 
@@ -156,9 +156,10 @@ const Series7FlashcardData = (function () {
      * @returns {Array} Cards tagged as high-yield or with weight >= 1.4
      */
     function getHighYield() {
-        return cards.filter(card =>
-            (card.tags && card.tags.includes('high-yield')) ||
-            (card.weight && card.weight >= 1.4)
+        return cards.filter(
+            card =>
+                (card.tags && card.tags.includes('high-yield')) ||
+                (card.weight && card.weight >= 1.4)
         );
     }
 
@@ -173,7 +174,7 @@ const Series7FlashcardData = (function () {
         getById,
         getCount,
         getStats,
-        getHighYield
+        getHighYield,
     };
 })();
 

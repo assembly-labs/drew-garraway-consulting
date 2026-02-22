@@ -1,8 +1,10 @@
 ---
 chapter: 10
 section: 2
-title: "Suitability and Account Maintenance"
-description: "Suitability obligations, Regulation Best Interest, account maintenance requirements, and senior investor protections"
+title: 'Suitability and Account Maintenance'
+description:
+  'Suitability obligations, Regulation Best Interest, account maintenance requirements, and senior
+  investor protections'
 topics:
   - FINRA and MSRB Suitability Requirements
   - Regulation Best Interest (Reg BI)
@@ -18,15 +20,27 @@ last_updated: 2026-01-02
 
 ## Introduction
 
-In the early 2000s, FINRA investigators discovered a disturbing pattern: brokers were selling variable annuities with 15-year surrender periods to customers in their mid-80s. The math didn't work—these customers would likely need access to their money for healthcare costs long before the surrender period ended, or wouldn't be alive to benefit from the product's features. But the commissions were excellent.
+In the early 2000s, FINRA investigators discovered a disturbing pattern: brokers were selling
+variable annuities with 15-year surrender periods to customers in their mid-80s. The math didn't
+work—these customers would likely need access to their money for healthcare costs long before the
+surrender period ended, or wouldn't be alive to benefit from the product's features. But the
+commissions were excellent.
 
-One reason for collecting all that new account information is to ensure that future recommendations will be suitable for a particular customer. All regulators—including the <span class="key-term">Financial Industry Regulatory Authority (FINRA)</span>, the <span class="key-term">Municipal Securities Rulemaking Board (MSRB)</span>, and the <span class="key-term">Securities and Exchange Commission (SEC)</span>—have established suitability standards. And as with all regulations, the SEC has the final say. <span class="key-term">Regulation Best Interest (Reg BI)</span> is the ultimate standard for client suitability.
+One reason for collecting all that new account information is to ensure that future recommendations
+will be suitable for a particular customer. All regulators—including the
+<span class="key-term">Financial Industry Regulatory Authority (FINRA)</span>, the
+<span class="key-term">Municipal Securities Rulemaking Board (MSRB)</span>, and the
+<span class="key-term">Securities and Exchange Commission (SEC)</span>—have established suitability
+standards. And as with all regulations, the SEC has the final say. <span class="key-term">Regulation
+Best Interest (Reg BI)</span> is the ultimate standard for client suitability.
 
-This section covers what it means to make suitable recommendations—and what happens when firms fail to do so.
+This section covers what it means to make suitable recommendations—and what happens when firms fail
+to do so.
 
 ## Learning Objectives
 
 By the end of this section, you'll be able to:
+
 - Explain the three components of FINRA suitability requirements
 - Understand Regulation Best Interest and its four obligations
 - Describe Form CRS and its purpose
@@ -114,7 +128,9 @@ Suitability isn't a vague concept—it has three specific, testable components.
 
 ### When Suitability Applies
 
-Suitability obligations apply when a representative makes a <span class="key-term">recommendation</span>. They do NOT apply to:
+Suitability obligations apply when a representative makes a
+<span class="key-term">recommendation</span>. They do NOT apply to:
+
 - Unsolicited orders (customer initiates without recommendation)
 - Self-directed accounts where the customer makes all decisions
 - Institutional investors who affirmatively indicate they're exercising independent judgment
@@ -127,7 +143,9 @@ Suitability obligations apply when a representative makes a <span class="key-ter
 
 ## Regulation Best Interest (Reg BI)
 
-<span class="key-term">Regulation Best Interest</span> is an SEC rule that establishes a higher standard of conduct for broker-dealers when making recommendations to retail customers. It went into effect in June 2020.
+<span class="key-term">Regulation Best Interest</span> is an SEC rule that establishes a higher
+standard of conduct for broker-dealers when making recommendations to retail customers. It went into
+effect in June 2020.
 
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
@@ -169,6 +187,7 @@ Suitability obligations apply when a representative makes a <span class="key-ter
 ### The Care Obligation in Detail
 
 The Care Obligation requires representatives to:
+
 - Understand the potential risks, rewards, and costs of a recommendation
 - Have a reasonable basis to believe the recommendation is in the customer's best interest
 - Consider reasonably available alternatives
@@ -183,7 +202,8 @@ The Care Obligation requires representatives to:
 
 ## Form CRS: Customer Relationship Summary
 
-<span class="key-term">Form CRS</span> (Customer Relationship Summary) is a disclosure document that broker-dealers and investment advisers must provide to retail investors.
+<span class="key-term">Form CRS</span> (Customer Relationship Summary) is a disclosure document that
+broker-dealers and investment advisers must provide to retail investors.
 
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
@@ -193,6 +213,7 @@ The Care Obligation requires representatives to:
 ### Purpose
 
 Form CRS helps investors understand:
+
 - The types of services offered
 - Fees and costs
 - Conflicts of interest
@@ -201,7 +222,8 @@ Form CRS helps investors understand:
 
 ### Delivery Requirements
 
-- Must be provided at or before the **earliest of**: a recommendation, placing an order, or opening an account
+- Must be provided at or before the **earliest of**: a recommendation, placing an order, or opening
+  an account
 - Maximum **4 pages** for broker-dealers (or 4 pages for the BD portion if a dual registrant)
 - Must use **plain English** and a prescribed format
 
@@ -213,7 +235,8 @@ Form CRS helps investors understand:
 
 ## Continuing Maintenance of Accounts
 
-Once an account is open, firms have ongoing obligations to keep customers informed about their accounts and transactions.
+Once an account is open, firms have ongoing obligations to keep customers informed about their
+accounts and transactions.
 
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
@@ -225,10 +248,12 @@ Once an account is open, firms have ongoing obligations to keep customers inform
 A <span class="key-term">trade confirmation</span> must be sent to customers for each transaction.
 
 **Timing:**
+
 - Sent **at or before the completion of the transaction** (settlement)
 - In practice, confirmations are typically sent **promptly after execution**
 
 **Required Information:**
+
 - Security traded (name, quantity)
 - Price and total amount
 - Trade date and settlement date
@@ -265,13 +290,17 @@ A <span class="key-term">trade confirmation</span> must be sent to customers for
 </div>
 
 Statements must show:
+
 - All positions in the account
 - Current market value
-- A legend telling customers to promptly report any inaccuracies or discrepancies to the firm (the phone number given **cannot** be that of the representative)
+- A legend telling customers to promptly report any inaccuracies or discrepancies to the firm (the
+  phone number given **cannot** be that of the representative)
 
 ### Customer Mail
 
-<span class="key-term">Firms cannot generally hold customer mail.</span> Statements and confirmations must be sent to:
+<span class="key-term">Firms cannot generally hold customer mail.</span> Statements and
+confirmations must be sent to:
+
 - The address on the new account form, OR
 - A P.O. Box designated by the customer
 
@@ -282,18 +311,25 @@ Customer mail **cannot** be directed to the registered representative's office.
   <p>The mail hold restrictions exist because fraudsters discovered a simple trick: if you control the mail, you control what the customer knows. Dishonest brokers would have statements sent to their own offices, intercept them, and hide unauthorized trading, churning, or outright theft—sometimes for years. By the time the customer discovered the problem, the money was long gone. FINRA's strict limits on holding mail ensure that statements reach customers directly, making fraud much harder to conceal. The three-month exception exists for legitimate reasons (like customers traveling abroad), but "convenience" explicitly doesn't qualify.</p>
 </div>
 
-**Exception:** If the customer requests in writing, mail can be held for up to **3 months**. If the customer wants mail held longer, their written instruction must include an acceptable reason (e.g., safety or security concerns). FINRA states that **convenience is NOT an acceptable reason** for holding mail longer than 3 months.
+**Exception:** If the customer requests in writing, mail can be held for up to **3 months**. If the
+customer wants mail held longer, their written instruction must include an acceptable reason (e.g.,
+safety or security concerns). FINRA states that **convenience is NOT an acceptable reason** for
+holding mail longer than 3 months.
 
 ### Business Continuity Plans
 
-FINRA requires firms to create and maintain a <span class="key-term">Business Continuity Plan (BCP)</span> that identifies the procedures to be followed if there is an emergency or significant business disruption.
+FINRA requires firms to create and maintain a <span class="key-term">Business Continuity Plan
+(BCP)</span> that identifies the procedures to be followed if there is an emergency or significant
+business disruption.
 
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
   <p>The BCP requirement emerged directly from September 11, 2001. When the towers fell, they took out critical financial infrastructure—backup generators, communication systems, and trading floors. The securities industry showed impressive resilience in recovering, but regulators saw vulnerabilities. What if the next disruption was worse? In 2004, FINRA (then NASD) adopted rules requiring every member firm to have a written business continuity plan. The goal: ensure that customer accounts remain accessible even when buildings don't.</p>
 </div>
 
-At account opening, the firm must disclose, in writing, how its BCP addresses the possibility of significant business disruption and how it plans to respond. The BCP disclosure must also be:
+At account opening, the firm must disclose, in writing, how its BCP addresses the possibility of
+significant business disruption and how it plans to respond. The BCP disclosure must also be:
+
 - Posted on the firm's website
 - Mailed to customers on request
 
@@ -304,21 +340,36 @@ At account opening, the firm must disclose, in writing, how its BCP addresses th
   <p>If a registered representative leaves a broker-dealer for any reason, all accounts are considered to be the property of the firm. The broker-dealer will allocate the departing representative's accounts among the existing representatives at that firm.</p>
 </div>
 
-If a representative inherits an account (e.g., from a retiring representative or one who has left the firm), the account documents must be **updated prior to making any transactions** in the account.
+If a representative inherits an account (e.g., from a retiring representative or one who has left
+the firm), the account documents must be **updated prior to making any transactions** in the
+account.
 
 ### Transfer of Accounts Within the Firm
 
-If a customer wishes to have their account transferred to another broker at the **same firm**, the branch manager must approve. There is no requirement to complete another new account form. However, <span class="key-term">discretionary power cannot be transferred</span>—the client would need to provide written discretionary authority to their new representative.
+If a customer wishes to have their account transferred to another broker at the **same firm**, the
+branch manager must approve. There is no requirement to complete another new account form. However,
+<span class="key-term">discretionary power cannot be transferred</span>—the client would need to
+provide written discretionary authority to their new representative.
 
 ### Proxy Materials
 
-To facilitate trading, the ownership of a security is usually registered in the name of the broker-dealer. The purchaser is still the <span class="key-term">beneficial owner</span> of the security, meaning they maintain all the rights of ownership, including dividends and voting rights. This kind of registration is called holding securities in <span class="key-term">street name</span> (because many broker-dealers were located on Wall Street).
+To facilitate trading, the ownership of a security is usually registered in the name of the
+broker-dealer. The purchaser is still the <span class="key-term">beneficial owner</span> of the
+security, meaning they maintain all the rights of ownership, including dividends and voting rights.
+This kind of registration is called holding securities in <span class="key-term">street name</span>
+(because many broker-dealers were located on Wall Street).
 
-A firm that holds securities in street name must **forward all information** it receives from the issuer (such as annual reports) to the beneficial owner or the beneficial owner's investment adviser.
+A firm that holds securities in street name must **forward all information** it receives from the
+issuer (such as annual reports) to the beneficial owner or the beneficial owner's investment
+adviser.
 
-The SEC requires companies to send shareholders a <span class="key-term">proxy statement</span> prior to every stockholders' meeting. Whenever an issuer delivers proxy materials to a firm and promises to reimburse the firm for out-of-pocket expenses, the member firm must promptly send those materials to the beneficial owner.
+The SEC requires companies to send shareholders a <span class="key-term">proxy statement</span>
+prior to every stockholders' meeting. Whenever an issuer delivers proxy materials to a firm and
+promises to reimburse the firm for out-of-pocket expenses, the member firm must promptly send those
+materials to the beneficial owner.
 
 A proxy statement provides information relevant to upcoming votes, such as:
+
 - The election of individuals to the board of directors
 - The election or ratification of the company's accountant
 - Authorization of new securities issues
@@ -329,11 +380,15 @@ A proxy statement provides information relevant to upcoming votes, such as:
 
 ## Senior Citizen Rules
 
-The <span class="key-term">Financial Industry Regulatory Authority (FINRA)</span> has stated that a customer's age and life stage are both important factors when determining suitability. As investors age, their investment time horizons, goals, risk tolerance, and tax status often change, and liquidity takes on added importance.
+The <span class="key-term">Financial Industry Regulatory Authority (FINRA)</span> has stated that a
+customer's age and life stage are both important factors when determining suitability. As investors
+age, their investment time horizons, goals, risk tolerance, and tax status often change, and
+liquidity takes on added importance.
 
 ### Typically Unsuitable Recommendations for Seniors
 
-FINRA has stated that it does not prohibit any particular recommendation to a senior citizen if it is suitable. However, certain types of recommendations are <span class="key-term">red flags</span>:
+FINRA has stated that it does not prohibit any particular recommendation to a senior citizen if it
+is suitable. However, certain types of recommendations are <span class="key-term">red flags</span>:
 
 <div class="critical-concept">
   <div class="critical-concept__label">RED FLAGS FOR SENIOR INVESTORS</div>
@@ -348,9 +403,11 @@ FINRA has stated that it does not prohibit any particular recommendation to a se
 
 ### Senior Certifications
 
-FINRA is concerned about registered representatives using bogus certifications when making presentations to senior citizens.
+FINRA is concerned about registered representatives using bogus certifications when making
+presentations to senior citizens.
 
 Claiming to be a:
+
 - Certified Senior Adviser
 - Certified Financial Gerontologist
 - Senior Specialist
@@ -358,43 +415,61 @@ Claiming to be a:
 
 ...is **prohibited** since these are not true professional designations.
 
-If a representative has an **independently conferred designation** that requires rigorous training, such as a <span class="key-term">CFP (Certified Financial Planner)</span> or <span class="key-term">CPA (Certified Public Accountant)</span>, these designations can be used.
+If a representative has an **independently conferred designation** that requires rigorous training,
+such as a <span class="key-term">CFP (Certified Financial Planner)</span> or
+<span class="key-term">CPA (Certified Public Accountant)</span>, these designations can be used.
 
 ### Trusted Contact Person
 
-FINRA requires members to make reasonable efforts to obtain the name and contact information of a <span class="key-term">trusted contact person</span> when opening an account for a client.
+FINRA requires members to make reasonable efforts to obtain the name and contact information of a
+<span class="key-term">trusted contact person</span> when opening an account for a client.
 
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
   <p>The trusted contact requirement (FINRA Rule 4512, effective February 2018) addresses a frustrating gap that brokers faced for years. A representative would notice signs that an elderly client was being exploited—perhaps by a caregiver or family member—but had no one to call. Privacy rules prevented sharing account information with anyone except the customer. Meanwhile, the exploitation continued. The trusted contact person gives firms a lifeline: someone they can call to verify the customer's wellbeing without violating privacy rules. It's not a power of attorney. It's more like an emergency contact for your money.</p>
 </div>
 
-The member must disclose in writing to the client that the firm or associated person will be authorized to contact the trusted contact person to:
+The member must disclose in writing to the client that the firm or associated person will be
+authorized to contact the trusted contact person to:
+
 - Disclose information about the client's account to address possible financial exploitation
 - Confirm the specifics of the client's current contact information or health status
 - Obtain the identity of any legal guardian, executor, trustee, or holder of a power of attorney
 
 ### Diminished Mental Capacity
 
-Firms must train their employees to identify diminished mental capacity. FINRA requires that firms have an internal process to permit representatives to get advice from others as to what steps to take.
+Firms must train their employees to identify diminished mental capacity. FINRA requires that firms
+have an internal process to permit representatives to get advice from others as to what steps to
+take.
 
-**Document suspicions:** The representative should document the suspected diminished capacity and escalate immediately. The firm should have a clearly designated individual to whom the matter is directed.
+**Document suspicions:** The representative should document the suspected diminished capacity and
+escalate immediately. The firm should have a clearly designated individual to whom the matter is
+directed.
 
-Once the problem is identified and escalated, the next step for the firm is to **stop trading in the account** until the concern no longer exists. Then the firm should:
-- Communicate with the customer's designated emergency contact person (next of kin) or a person given power of attorney over the account to discuss the situation
-- Maintain frequent contact with the investor to assess the situation and notify legal or compliance about these conversations
-- Consult appropriate state statutes to determine the next steps, which may include alerting appropriate authorities, including government protective services
+Once the problem is identified and escalated, the next step for the firm is to **stop trading in the
+account** until the concern no longer exists. Then the firm should:
+
+- Communicate with the customer's designated emergency contact person (next of kin) or a person
+  given power of attorney over the account to discuss the situation
+- Maintain frequent contact with the investor to assess the situation and notify legal or compliance
+  about these conversations
+- Consult appropriate state statutes to determine the next steps, which may include alerting
+  appropriate authorities, including government protective services
 
 ### Financial Exploitation of Senior Citizens
 
-FINRA allows firms to place temporary holds on disbursements from client accounts when fraud is suspected. The investors who FINRA believes are particularly susceptible to financial exploitation are:
+FINRA allows firms to place temporary holds on disbursements from client accounts when fraud is
+suspected. The investors who FINRA believes are particularly susceptible to financial exploitation
+are:
 
 - Individuals aged **65 or older**; or
-- Individuals aged **18 or older** where the member believes that the individual has a mental or physical impairment that makes the individual unable to protect their own interests
+- Individuals aged **18 or older** where the member believes that the individual has a mental or
+  physical impairment that makes the individual unable to protect their own interests
 
 FINRA calls these vulnerable individuals <span class="key-term">specified adults</span>.
 
-If a rep suspects financial exploitation, the rep should immediately report this to the appropriate person within the firm. The rep may also want to discuss their concerns directly with the customer.
+If a rep suspects financial exploitation, the rep should immediately report this to the appropriate
+person within the firm. The rep may also want to discuss their concerns directly with the customer.
 
 ### The 15-Business Day Hold
 
@@ -429,19 +504,28 @@ If a rep suspects financial exploitation, the rep should immediately report this
   </table>
 </div>
 
-Note that this hold only applies to **suspicious disbursements**, not to ones that are not suspicious.
+Note that this hold only applies to **suspicious disbursements**, not to ones that are not
+suspicious.
 
-If a hold is put on the account, the member must document why it has done so and must notify the <span class="key-term">trusted contact person</span> named on the account, assuming the trusted contact person is not the exploiter.
+If a hold is put on the account, the member must document why it has done so and must notify the
+<span class="key-term">trusted contact person</span> named on the account, assuming the trusted
+contact person is not the exploiter.
 
 ---
 
 ## Summary
 
-Suitability requirements ensure that recommendations match customer needs and circumstances. The three components—reasonable-basis, customer-specific, and quantitative suitability—work together to protect investors from inappropriate recommendations.
+Suitability requirements ensure that recommendations match customer needs and circumstances. The
+three components—reasonable-basis, customer-specific, and quantitative suitability—work together to
+protect investors from inappropriate recommendations.
 
-Regulation Best Interest raises the bar further with its four obligations: Disclosure, Care, Conflict of Interest, and Compliance. Form CRS ensures customers understand the nature of their relationship with the firm.
+Regulation Best Interest raises the bar further with its four obligations: Disclosure, Care,
+Conflict of Interest, and Compliance. Form CRS ensures customers understand the nature of their
+relationship with the firm.
 
-Account maintenance requirements—confirmations, statements, and proper handling of mail and proxy materials—keep customers informed. And the senior citizen rules recognize that age brings unique vulnerabilities that deserve special protection.
+Account maintenance requirements—confirmations, statements, and proper handling of mail and proxy
+materials—keep customers informed. And the senior citizen rules recognize that age brings unique
+vulnerabilities that deserve special protection.
 
 ### Key Points to Remember
 
@@ -457,21 +541,34 @@ Account maintenance requirements—confirmations, statements, and proper handlin
 
 ### Quick Reference - Key Terms
 
-- <span class="key-term">Reasonable-Basis Suitability</span>: Investment suitable for at least some investors
-- <span class="key-term">Customer-Specific Suitability</span>: Investment suitable for this particular customer
-- <span class="key-term">Quantitative Suitability</span>: Series of transactions suitable in aggregate
-- <span class="key-term">Regulation Best Interest</span>: SEC standard requiring acting in customer's best interest
+- <span class="key-term">Reasonable-Basis Suitability</span>: Investment suitable for at least some
+  investors
+- <span class="key-term">Customer-Specific Suitability</span>: Investment suitable for this
+  particular customer
+- <span class="key-term">Quantitative Suitability</span>: Series of transactions suitable in
+  aggregate
+- <span class="key-term">Regulation Best Interest</span>: SEC standard requiring acting in
+  customer's best interest
 - <span class="key-term">Form CRS</span>: Customer Relationship Summary disclosure document
-- <span class="key-term">Street Name</span>: Securities registered in broker-dealer's name, customer is beneficial owner
-- <span class="key-term">Trusted Contact Person</span>: Individual firm can contact regarding possible exploitation
-- <span class="key-term">Specified Adults</span>: Individuals 65+ or 18+ with impairment affecting ability to protect interests
+- <span class="key-term">Street Name</span>: Securities registered in broker-dealer's name, customer
+  is beneficial owner
+- <span class="key-term">Trusted Contact Person</span>: Individual firm can contact regarding
+  possible exploitation
+- <span class="key-term">Specified Adults</span>: Individuals 65+ or 18+ with impairment affecting
+  ability to protect interests
 
 ---
 
 ## Chapter Summary
 
-Chapter 10 covered the full lifecycle of individual customer accounts: from the initial information gathering and identity verification, through the suitability analysis for recommendations, to the ongoing maintenance and special protections for vulnerable investors.
+Chapter 10 covered the full lifecycle of individual customer accounts: from the initial information
+gathering and identity verification, through the suitability analysis for recommendations, to the
+ongoing maintenance and special protections for vulnerable investors.
 
-The regulations in this chapter aren't arbitrary bureaucracy—they're responses to real failures. Every requirement for customer identification traces back to the USA PATRIOT Act's response to 9/11. Every suitability rule exists because brokers once sold inappropriate products to unsuitable customers. Every senior protection measure addresses documented cases of exploitation.
+The regulations in this chapter aren't arbitrary bureaucracy—they're responses to real failures.
+Every requirement for customer identification traces back to the USA PATRIOT Act's response to 9/11.
+Every suitability rule exists because brokers once sold inappropriate products to unsuitable
+customers. Every senior protection measure addresses documented cases of exploitation.
 
-Understanding the "why" behind these rules makes them easier to remember—and easier to apply when you're actually working with customers in the securities industry.
+Understanding the "why" behind these rules makes them easier to remember—and easier to apply when
+you're actually working with customers in the securities industry.

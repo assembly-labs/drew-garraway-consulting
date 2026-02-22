@@ -1,16 +1,22 @@
 # Chapter 3: Additional Bond Features and Risks
 
-*Series 7 Exam Weight: ~8-10 Questions (6%)*
+_Series 7 Exam Weight: ~8-10 Questions (6%)_
 
 ---
 
 ## Section 1: Call and Put Features
 
-In 1986, General Motors issued $1.25 billion in bonds with an 8.5% coupon—generous at the time. But by the early 1990s, interest rates had plummeted. GM was stuck paying top dollar while new issuers borrowed at half the rate. That costly lesson is why today virtually every corporate bond includes call provisions. Issuers learned: never lock yourself into high rates without an escape hatch.
+In 1986, General Motors issued $1.25 billion in bonds with an 8.5% coupon—generous at the time. But
+by the early 1990s, interest rates had plummeted. GM was stuck paying top dollar while new issuers
+borrowed at half the rate. That costly lesson is why today virtually every corporate bond includes
+call provisions. Issuers learned: never lock yourself into high rates without an escape hatch.
 
 ### Why This Section Matters
 
-Beyond the basic bond structure covered in Chapter 2, bonds can include special features that significantly affect their value and behavior. Call features benefit issuers; put features benefit investors. Understanding which party benefits—and when they'd exercise these features—is essential for advising clients and passing your exam.
+Beyond the basic bond structure covered in Chapter 2, bonds can include special features that
+significantly affect their value and behavior. Call features benefit issuers; put features benefit
+investors. Understanding which party benefits—and when they'd exercise these features—is essential
+for advising clients and passing your exam.
 
 ---
 
@@ -18,14 +24,19 @@ Beyond the basic bond structure covered in Chapter 2, bonds can include special 
 
 #### What Is a Callable Bond?
 
-When a bond is <span class="key-term">callable</span>, the issuer has the right to <span class="key-term">call</span> (redeem) the bond before it matures. This forces bondholders to sell the bond back to the issuer. Selling a bond back before maturity is known as <span class="key-term">redeeming</span> the bond.
+When a bond is <span class="key-term">callable</span>, the issuer has the right to
+<span class="key-term">call</span> (redeem) the bond before it matures. This forces bondholders to
+sell the bond back to the issuer. Selling a bond back before maturity is known as
+<span class="key-term">redeeming</span> the bond.
 
 <div class="historical-note">
   <div class="historical-note__label">Why Issuers Want Call Features</div>
   <p>Think about it from the issuer's perspective: if you borrowed money at 8% and rates dropped to 5%, wouldn't you want to refinance? That's exactly what callable bonds allow. The issuer retires the old high-rate debt and issues new bonds at lower rates. It's the corporate equivalent of refinancing your mortgage—except bondholders are on the losing end of that transaction.</p>
 </div>
 
-The callable bond's issuer doesn't owe any interest after the bond is redeemed. This is a risk for the bondholder, known as <span class="key-term">call risk</span>. The issuer typically compensates bondholders for call risk in three ways:
+The callable bond's issuer doesn't owe any interest after the bond is redeemed. This is a risk for
+the bondholder, known as <span class="key-term">call risk</span>. The issuer typically compensates
+bondholders for call risk in three ways:
 
 <div class="critical-concept">
   <div class="critical-concept__label">How Issuers Compensate for Call Risk</div>
@@ -38,7 +49,8 @@ The callable bond's issuer doesn't owe any interest after the bond is redeemed. 
 
 #### Call Protection
 
-<span class="key-term">Call protection</span> is a period during which the bond cannot be called. Most callable bonds offer call protection for the first several years.
+<span class="key-term">Call protection</span> is a period during which the bond cannot be called.
+Most callable bonds offer call protection for the first several years.
 
 <div class="info-box">
   <div class="info-box__title">Call Protection Example</div>
@@ -49,7 +61,8 @@ The callable bond's issuer doesn't owe any interest after the bond is redeemed. 
 
 #### Call Premium
 
-A <span class="key-term">call premium</span> is an additional amount paid above par value when a bond is called. Typically, the call premium declines over time as the bond approaches maturity.
+A <span class="key-term">call premium</span> is an additional amount paid above par value when a
+bond is called. Typically, the call premium declines over time as the bond approaches maturity.
 
 <div class="info-box">
   <div class="info-box__title">Declining Call Premium Schedule</div>
@@ -88,7 +101,8 @@ A <span class="key-term">call premium</span> is an additional amount paid above 
 
 #### When Do Issuers Call Bonds?
 
-The issuer has the right to call but is not obligated to do so. An issuer will be more likely to call bonds when interest rates fall, because it can issue new bonds at lower rates.
+The issuer has the right to call but is not obligated to do so. An issuer will be more likely to
+call bonds when interest rates fall, because it can issue new bonds at lower rates.
 
 <div class="critical-concept">
   <div class="critical-concept__label">The Call Process</div>
@@ -100,13 +114,16 @@ The issuer has the right to call but is not obligated to do so. An issuer will b
   </ol>
 </div>
 
-(A low call premium also makes a call more likely. If the issuer only has to pay 101 to retire a bond paying 8%, that's a bargain compared to years of above-market interest payments.)
+(A low call premium also makes a call more likely. If the issuer only has to pay 101 to retire a
+bond paying 8%, that's a bargain compared to years of above-market interest payments.)
 
 ---
 
 ### Topic 2: Yield to Call (YTC)
 
-<span class="key-term">Yield to call (YTC)</span> measures how the call feature affects an investor's return. It's important for investors considering buying a callable bond to understand what happens to their return if the issuer decides to call.
+<span class="key-term">Yield to call (YTC)</span> measures how the call feature affects an
+investor's return. It's important for investors considering buying a callable bond to understand
+what happens to their return if the issuer decides to call.
 
 <div class="test-tip">
   <p><strong>Test Tip:</strong> When a recommendation is made, the lesser of yield to maturity (YTM) or YTC must be disclosed to the client so they understand the lowest potential yield. This is often referred to as <span class="key-term">yield to worst (YTW)</span>.</p>
@@ -114,7 +131,9 @@ The issuer has the right to call but is not obligated to do so. An issuer will b
 
 #### YTC for a Discount Bond
 
-When a bond trades at a discount, YTC is typically <strong>higher</strong> than YTM. Why? Because the investor receives the gain between the discounted price and par value sooner—at the call date rather than at maturity.
+When a bond trades at a discount, YTC is typically <strong>higher</strong> than YTM. Why? Because
+the investor receives the gain between the discounted price and par value sooner—at the call date
+rather than at maturity.
 
 <div class="info-box">
   <div class="info-box__title">Discount Bond Yield Relationship</div>
@@ -128,7 +147,10 @@ When a bond trades at a discount, YTC is typically <strong>higher</strong> than 
 
 #### YTC for a Premium Bond
 
-When a bond trades at a premium, YTC is typically <strong>lower</strong> than YTM—and this is bad news for investors. Calls on premium bonds hurt investors because they're forced to redeem the bond prior to maturity, losing the attractive higher-coupon payments sooner. The investor also loses the premium paid.
+When a bond trades at a premium, YTC is typically <strong>lower</strong> than YTM—and this is bad
+news for investors. Calls on premium bonds hurt investors because they're forced to redeem the bond
+prior to maturity, losing the attractive higher-coupon payments sooner. The investor also loses the
+premium paid.
 
 <div class="info-box">
   <div class="info-box__title">Premium Bond Yield Relationship</div>
@@ -154,7 +176,9 @@ When a bond trades at a premium, YTC is typically <strong>lower</strong> than YT
 
 ### Topic 3: Bond Put Features
 
-A <span class="key-term">put feature</span> gives the investor the right to sell the bond back to the issuer at a specified price (typically par), at a specified date. A put option is also called a <span class="key-term">tender option</span>.
+A <span class="key-term">put feature</span> gives the investor the right to sell the bond back to
+the issuer at a specified price (typically par), at a specified date. A put option is also called a
+<span class="key-term">tender option</span>.
 
 <div class="critical-concept">
   <div class="critical-concept__label">Put vs. Call: Who Benefits?</div>
@@ -179,7 +203,10 @@ A <span class="key-term">put feature</span> gives the investor the right to sell
 
 #### When Do Investors Exercise Put Options?
 
-The bondholder is likely to exercise the put option if interest rates rise. As rates rise, bond prices fall. If the bond's price drops below par, the bondholder can tender the bond to the issuer and receive the full par value. The bondholder can then reinvest the principal into a bond with a higher coupon rate.
+The bondholder is likely to exercise the put option if interest rates rise. As rates rise, bond
+prices fall. If the bond's price drops below par, the bondholder can tender the bond to the issuer
+and receive the full par value. The bondholder can then reinvest the principal into a bond with a
+higher coupon rate.
 
 <div class="info-box">
   <div class="info-box__title">Put Feature Example</div>
@@ -240,17 +267,25 @@ The bondholder is likely to exercise the put option if interest rates rise. As r
 
 ## Section 2: Risks Associated with Bonds
 
-In 2008, Lehman Brothers bondholders learned a brutal lesson: even investment-grade debt can become worthless overnight. The firm's bonds, rated A just months before, recovered only pennies on the dollar in bankruptcy. Understanding the full spectrum of bond risks—not just interest rate movements—is essential for protecting clients.
+In 2008, Lehman Brothers bondholders learned a brutal lesson: even investment-grade debt can become
+worthless overnight. The firm's bonds, rated A just months before, recovered only pennies on the
+dollar in bankruptcy. Understanding the full spectrum of bond risks—not just interest rate
+movements—is essential for protecting clients.
 
 ### Why This Section Matters
 
-Every investment involves risk, but bond risks are specific and testable. The Series 7 exam loves asking about the different types of risk and which investments are most affected by each. This section breaks down every major bond risk you need to know.
+Every investment involves risk, but bond risks are specific and testable. The Series 7 exam loves
+asking about the different types of risk and which investments are most affected by each. This
+section breaks down every major bond risk you need to know.
 
 ---
 
 ### Topic 1: Bond Ratings—A Measure of Default Risk
 
-<span class="key-term">Credit risk</span>, also called <span class="key-term">default risk</span>, is the risk that the issuer cannot make interest and principal payments. The two main bond rating agencies for long-term corporate and municipal bonds are <span class="key-term">Moody's</span> and <span class="key-term">Standard & Poor's (S&P)</span>.
+<span class="key-term">Credit risk</span>, also called <span class="key-term">default risk</span>,
+is the risk that the issuer cannot make interest and principal payments. The two main bond rating
+agencies for long-term corporate and municipal bonds are <span class="key-term">Moody's</span> and
+<span class="key-term">Standard & Poor's (S&P)</span>.
 
 <div class="info-box">
   <div class="info-box__title">Treasury Bonds: No Credit Risk</div>
@@ -314,7 +349,8 @@ Every investment involves risk, but bond risks are specific and testable. The Se
 
 #### Short-Term Debt Ratings
 
-Moody's also rates short-term corporate and municipal issues for credit risk. The ratings for short-term issues differ:
+Moody's also rates short-term corporate and municipal issues for credit risk. The ratings for
+short-term issues differ:
 
 <div class="comparison-table">
   <table>
@@ -345,7 +381,9 @@ Moody's also rates short-term corporate and municipal issues for credit risk. Th
 
 ### Topic 2: Interest Rate Risk and Price Volatility
 
-<span class="key-term">Interest rate risk</span> is the risk that rising interest rates will cause bond prices to fall. Bonds with long-term maturities or low coupon rates, and those sold at a deep discount, are most susceptible.
+<span class="key-term">Interest rate risk</span> is the risk that rising interest rates will cause
+bond prices to fall. Bonds with long-term maturities or low coupon rates, and those sold at a deep
+discount, are most susceptible.
 
 <div class="historical-note">
   <div class="historical-note__label">Market Risk vs. Interest Rate Risk</div>
@@ -354,7 +392,10 @@ Moody's also rates short-term corporate and municipal issues for credit risk. Th
 
 #### Variable-Rate Bonds
 
-<span class="key-term">Variable-rate bonds</span> (also called <span class="key-term">adjustable-rate</span> or <span class="key-term">floating-rate</span> bonds) have an interest rate that adjusts periodically to match market rates. This causes the coupon rate to move in the same direction as interest rates.
+<span class="key-term">Variable-rate bonds</span> (also called
+<span class="key-term">adjustable-rate</span> or <span class="key-term">floating-rate</span> bonds)
+have an interest rate that adjusts periodically to match market rates. This causes the coupon rate
+to move in the same direction as interest rates.
 
 <div class="critical-concept">
   <div class="critical-concept__label">Variable-Rate Bond Behavior</div>
@@ -364,11 +405,14 @@ Moody's also rates short-term corporate and municipal issues for credit risk. Th
 
 #### Step-Coupon Bonds
 
-A <span class="key-term">step-coupon bond</span> is issued with a coupon rate that will increase over time based on a predetermined schedule. These increases may or may not reflect current market rates—they're subject to call risk.
+A <span class="key-term">step-coupon bond</span> is issued with a coupon rate that will increase
+over time based on a predetermined schedule. These increases may or may not reflect current market
+rates—they're subject to call risk.
 
 #### Price Volatility
 
-A bond's <span class="key-term">price volatility</span> is how much the bond's price is likely to move in response to interest rate changes. The major factors affecting volatility are:
+A bond's <span class="key-term">price volatility</span> is how much the bond's price is likely to
+move in response to interest rate changes. The major factors affecting volatility are:
 
 <div class="comparison-table">
   <table>
@@ -392,7 +436,8 @@ A bond's <span class="key-term">price volatility</span> is how much the bond's p
 
 #### Duration
 
-The term used to express a bond's overall sensitivity to interest rate swings is <span class="key-term">duration</span>.
+The term used to express a bond's overall sensitivity to interest rate swings is
+<span class="key-term">duration</span>.
 
 <div class="info-box">
   <div class="info-box__title">Duration Rules</div>
@@ -427,9 +472,12 @@ The term used to express a bond's overall sensitivity to interest rate swings is
 
 ### Topic 3: Other Bond Risks
 
-<span class="key-term">Investment risk</span> is divided into two broad categories: <span class="key-term">systematic risk</span> (affects all investments) and <span class="key-term">nonsystematic risk</span> (unique to specific securities or issuers).
+<span class="key-term">Investment risk</span> is divided into two broad categories:
+<span class="key-term">systematic risk</span> (affects all investments) and
+<span class="key-term">nonsystematic risk</span> (unique to specific securities or issuers).
 
-Systematic risks cannot be diversified away—they affect the entire market. Nonsystematic risks can be reduced through diversification.
+Systematic risks cannot be diversified away—they affect the entire market. Nonsystematic risks can
+be reduced through diversification.
 
 #### Types of Risk
 
@@ -559,33 +607,36 @@ Systematic risks cannot be diversified away—they affect the entire market. Non
 
 ## Chapter 3 Key Terms Glossary
 
-| Term | Definition |
-|------|------------|
-| **Callable bond** | Bond that issuer can redeem before maturity |
-| **Call protection** | Period during which bond cannot be called |
-| **Call premium** | Amount above par paid when bond is called |
-| **Redeeming** | Selling a bond back to the issuer before maturity |
-| **Call risk** | Risk that bond will be called, ending interest payments early |
-| **Yield to call (YTC)** | Yield calculation assuming bond is called |
-| **Yield to worst (YTW)** | Lower of YTM or YTC; must be disclosed to clients |
-| **Put feature** | Gives investor right to sell bond back at specified price |
-| **Tender option** | Another name for put feature |
-| **Credit risk** | Risk issuer cannot make payments (also: default risk) |
-| **Investment grade** | BBB/Baa or better rating |
-| **Speculative grade** | Below BBB/Baa (also: junk bonds, high-yield) |
-| **Interest rate risk** | Risk that rising rates will cause bond prices to fall |
-| **Market risk** | Risk that overall market conditions affect investments |
-| **Variable-rate bond** | Bond with coupon that adjusts to market rates |
-| **Duration** | Measure of bond's sensitivity to interest rate changes |
-| **Price volatility** | How much bond price moves with rate changes |
-| **Systematic risk** | Risk affecting all investments (cannot diversify away) |
-| **Nonsystematic risk** | Risk unique to specific securities (can diversify away) |
-| **Purchasing power risk** | Risk of inflation reducing real returns |
-| **Reinvestment risk** | Risk of not being able to reinvest at same rates |
-| **Liquidity risk** | Risk of not being able to sell quickly at fair price |
-| **Currency risk** | Risk from exchange rate fluctuations |
-| **Political/legislative risk** | Risk from government actions or instability |
+| Term                           | Definition                                                    |
+| ------------------------------ | ------------------------------------------------------------- |
+| **Callable bond**              | Bond that issuer can redeem before maturity                   |
+| **Call protection**            | Period during which bond cannot be called                     |
+| **Call premium**               | Amount above par paid when bond is called                     |
+| **Redeeming**                  | Selling a bond back to the issuer before maturity             |
+| **Call risk**                  | Risk that bond will be called, ending interest payments early |
+| **Yield to call (YTC)**        | Yield calculation assuming bond is called                     |
+| **Yield to worst (YTW)**       | Lower of YTM or YTC; must be disclosed to clients             |
+| **Put feature**                | Gives investor right to sell bond back at specified price     |
+| **Tender option**              | Another name for put feature                                  |
+| **Credit risk**                | Risk issuer cannot make payments (also: default risk)         |
+| **Investment grade**           | BBB/Baa or better rating                                      |
+| **Speculative grade**          | Below BBB/Baa (also: junk bonds, high-yield)                  |
+| **Interest rate risk**         | Risk that rising rates will cause bond prices to fall         |
+| **Market risk**                | Risk that overall market conditions affect investments        |
+| **Variable-rate bond**         | Bond with coupon that adjusts to market rates                 |
+| **Duration**                   | Measure of bond's sensitivity to interest rate changes        |
+| **Price volatility**           | How much bond price moves with rate changes                   |
+| **Systematic risk**            | Risk affecting all investments (cannot diversify away)        |
+| **Nonsystematic risk**         | Risk unique to specific securities (can diversify away)       |
+| **Purchasing power risk**      | Risk of inflation reducing real returns                       |
+| **Reinvestment risk**          | Risk of not being able to reinvest at same rates              |
+| **Liquidity risk**             | Risk of not being able to sell quickly at fair price          |
+| **Currency risk**              | Risk from exchange rate fluctuations                          |
+| **Political/legislative risk** | Risk from government actions or instability                   |
 
 ---
 
-*Chapter 3 builds on Chapter 2's bond fundamentals by adding complexity: features that benefit issuers (calls) or investors (puts), and the full spectrum of risks that affect fixed-income investments. Master these concepts before moving to Chapter 4, which covers specific types of corporate and government debt.*
+_Chapter 3 builds on Chapter 2's bond fundamentals by adding complexity: features that benefit
+issuers (calls) or investors (puts), and the full spectrum of risks that affect fixed-income
+investments. Master these concepts before moving to Chapter 4, which covers specific types of
+corporate and government debt._

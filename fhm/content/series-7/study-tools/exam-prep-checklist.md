@@ -1,4 +1,5 @@
 # Series 7 Exam Day Preparation
+
 ## Your Final Checklist
 
 ---
@@ -6,12 +7,14 @@
 ## One Week Before
 
 ### Content Review
+
 - [ ] Review all formula sheet calculations
 - [ ] Retake any practice exam where you scored below 75%
 - [ ] Focus study time on your weakest sections
 - [ ] Review common mistakes document
 
 ### Administrative
+
 - [ ] Confirm exam appointment (Prometric)
 - [ ] Know your testing center location
 - [ ] Plan your route (drive there if possible)
@@ -22,6 +25,7 @@
 ## Three Days Before
 
 ### Light Review
+
 - [ ] Options max gain/loss/breakeven (all positions)
 - [ ] Margin calculations (SMA, buying power, maintenance)
 - [ ] Bond yield relationships
@@ -29,6 +33,7 @@
 - [ ] NAV and sales charge calculations
 
 ### Mental Preparation
+
 - [ ] Get to bed at a reasonable hour
 - [ ] Avoid cramming new material
 - [ ] Light exercise to manage stress
@@ -39,17 +44,20 @@
 ## Night Before
 
 ### What to Review
+
 - [ ] Formula sheet (quick review, not deep study)
 - [ ] Your personal notes on tricky topics
 - [ ] One practice exam at 70-80% speed (confidence builder)
 
 ### What NOT to Do
+
 - [ ] Don't try to learn new material
 - [ ] Don't stay up late studying
 - [ ] Don't drink alcohol or take sleep aids
 - [ ] Don't stress about topics you haven't mastered
 
 ### Prepare Your Bag
+
 - [ ] Valid government-issued photo ID
 - [ ] Confirmation email/appointment number
 - [ ] Light snack for break
@@ -61,16 +69,19 @@
 ## Exam Morning
 
 ### Before Leaving
+
 - [ ] Eat a balanced breakfast (protein + complex carbs)
 - [ ] Limit caffeine to your normal amount
 - [ ] Use the bathroom
 - [ ] Leave early (aim to arrive 30 minutes early)
 
 ### What to Bring
+
 - [ ] Two forms of ID (primary must be government-issued with photo)
 - [ ] Nothing else (everything goes in a locker)
 
 ### What NOT to Bring
+
 - [ ] Phone (will be locked away)
 - [ ] Notes or study materials (not allowed in testing area)
 - [ ] Calculator (one is provided on screen)
@@ -81,6 +92,7 @@
 ## At the Testing Center
 
 ### Check-In Process
+
 1. Present ID at front desk
 2. Store all belongings in locker
 3. Palm scan or photo (security verification)
@@ -88,12 +100,14 @@
 5. Escorted to your workstation
 
 ### Before Starting
+
 - [ ] Adjust chair height
 - [ ] Make sure you can read the screen clearly
 - [ ] Take a deep breath
 - [ ] Write key formulas on scratch paper immediately
 
 ### Key Formulas to Write First
+
 ```
 Options:
 - Long call BE = Strike + Premium
@@ -121,6 +135,7 @@ NAV:
 ## During the Exam
 
 ### Time Management
+
 - **Total time**: 225 minutes (3 hours 45 minutes)
 - **Questions**: 135 (125 scored + 10 pilot)
 - **Target pace**: ~1.5-2 minutes per question
@@ -132,28 +147,33 @@ NAV:
 ### Strategy Tips
 
 **For Calculation Questions:**
+
 - Write out the formula first
 - Show your work on scratch paper
 - Double-check your math
 - Make sure units match (×100 for options)
 
 **For Conceptual Questions:**
+
 - Read all four answers before choosing
 - Eliminate obviously wrong answers first
 - Watch for absolutes ("always," "never")
 - Trust your first instinct unless you find an error
 
 **For "Except" Questions:**
+
 - Underline "EXCEPT" or "NOT"
 - Find the three TRUE statements
 - The FALSE one is your answer
 
 **For "Best" Questions:**
+
 - Multiple answers may be partially correct
 - Look for the MOST correct or complete answer
 - Consider the specific situation given
 
 ### Break Strategy
+
 - You can take an optional break
 - Time continues during breaks
 - Use it only if you really need to reset
@@ -176,16 +196,19 @@ NAV:
 ## After the Exam
 
 ### Immediate Results
+
 - You'll see your score immediately on screen
 - Passing = 72% or higher
 - If you don't pass, you'll see which sections need work
 
 ### If You Pass
+
 - Congratulations!
 - Results sent to your firm within 24 hours
 - Registration typically processed within 2-3 business days
 
 ### If You Don't Pass
+
 - 30-day waiting period before retaking
 - Focus on sections where you scored lowest
 - Consider additional practice exams
@@ -196,15 +219,19 @@ NAV:
 ## Mental Reminders
 
 **Before the exam:**
+
 > "I've prepared for this. I know this material. Trust the process."
 
 **During tough questions:**
+
 > "Mark it and move on. I can come back to it."
 
 **If anxiety hits:**
+
 > "Take a breath. This is just one question. Focus on what I know."
 
 **Remember:**
+
 - You don't need to get every question right
 - 72% is passing—that's 90 out of 125
 - You can miss 35 questions and still pass
@@ -214,10 +241,11 @@ NAV:
 
 ## Final Words
 
-You've done the work. You've learned the material. The exam is just a demonstration of what you already know.
+You've done the work. You've learned the material. The exam is just a demonstration of what you
+already know.
 
 Go get that Series 7.
 
 ---
 
-*Print this checklist. Use it in the week before your exam.*
+_Print this checklist. Use it in the week before your exam._

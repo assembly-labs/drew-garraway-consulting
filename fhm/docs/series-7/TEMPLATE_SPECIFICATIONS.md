@@ -1,7 +1,7 @@
 # Series 7 Template Specifications
 
-**Date:** January 6, 2026
-**Purpose:** Define reusable templates that combine SIE structural patterns with FHM brand voice for consistent Series 7 content.
+**Date:** January 6, 2026 **Purpose:** Define reusable templates that combine SIE structural
+patterns with FHM brand voice for consistent Series 7 content.
 
 ---
 
@@ -24,11 +24,11 @@
 ```markdown
 ---
 section: [SECTION_NUMBER]
-subsection: "[SUBSECTION_NAME]"  # Only for Section 3
+subsection: '[SUBSECTION_NAME]' # Only for Section 3
 chapter: [CHAPTER_NUMBER]
 lesson: [LESSON_NUMBER]
-title: "[LESSON_TITLE]"
-description: "[ONE_SENTENCE_DESCRIPTION]"
+title: '[LESSON_TITLE]'
+description: '[ONE_SENTENCE_DESCRIPTION]'
 topics:
   - [TOPIC_1]
   - [TOPIC_2]
@@ -43,22 +43,21 @@ last_updated: [YYYY-MM-DD]
 
 ## Introduction
 
-[OPENING HOOK - Start with a story, historical moment, or "why this matters."
-Never start with a definition. This should be 2-3 paragraphs that capture
-attention and set context for why this topic is important.]
+[OPENING HOOK - Start with a story, historical moment, or "why this matters." Never start with a
+definition. This should be 2-3 paragraphs that capture attention and set context for why this topic
+is important.]
 
-[Example for Options:]
-In April 1973, the Chicago Board Options Exchange opened for business with
-just 16 call options on 16 different stocks. The first day's volume was
-911 contracts. Today, the options market trades billions of contracts
-annually—and understanding options will account for roughly 25% of your
-Series 7 exam.
+[Example for Options:] In April 1973, the Chicago Board Options Exchange opened for business with
+just 16 call options on 16 different stocks. The first day's volume was 911 contracts. Today, the
+options market trades billions of contracts annually—and understanding options will account for
+roughly 25% of your Series 7 exam.
 
 [Second paragraph connecting to exam and practical relevance.]
 
 ## Learning Objectives
 
 By the end of this lesson, you'll be able to:
+
 - [Specific, measurable objective using action verbs]
 - [Example: "Calculate maximum gain for a covered call position"]
 - [Example: "Identify the appropriate investor for a protective put"]
@@ -72,12 +71,12 @@ By the end of this lesson, you'll be able to:
 
 ### [Subtopic 1.1]
 
-[Content with <span class="key-term">key terms</span> marked appropriately.
-Write in FHM voice: clear, conversational, knowledgeable without arrogance.]
+[Content with <span class="key-term">key terms</span> marked appropriately. Write in FHM voice:
+clear, conversational, knowledgeable without arrogance.]
 
-[Include real numbers and examples:]
-When an investor buys 1 XYZ Jan 50 call at $3, they're paying $300 (100 shares × $3)
-for the right to buy XYZ stock at $50 per share anytime before January expiration.
+[Include real numbers and examples:] When an investor buys 1 XYZ Jan 50 call at $3, they're paying
+$300 (100 shares × $3) for the right to buy XYZ stock at $50 per share anytime before January
+expiration.
 
 <div class="info-box">
   <div class="info-box__title">Real-World Example</div>
@@ -201,6 +200,7 @@ for the right to buy XYZ stock at $50 per share anytime before January expiratio
 ### Practice Question Preview
 
 Expect questions that:
+
 - [Type of question you'll likely see]
 - [Another question type]
 - [Calculation question if applicable]
@@ -209,21 +209,24 @@ Expect questions that:
 
 ## Summary
 
-[Concise 3-4 sentence summary that reinforces the main points. This should
-feel like the "takeaway" a student would remember.]
+[Concise 3-4 sentence summary that reinforces the main points. This should feel like the "takeaway"
+a student would remember.]
 
 ### Quick Reference
 
 **Key Terms:**
+
 - <span class="key-term">[Term 1]</span>: [Brief definition]
 - <span class="key-term">[Term 2]</span>: [Brief definition]
 - <span class="key-term">[Term 3]</span>: [Brief definition]
 
 **Formulas** (if applicable):
+
 - [Formula 1]: [What it calculates]
 - [Formula 2]: [What it calculates]
 
 **Critical Numbers** (if applicable):
+
 - [Threshold or requirement with number]
 - [Another important number to remember]
 
@@ -238,21 +241,18 @@ feel like the "takeaway" a student would remember.]
 
 ---
 
-*[SUBTLE HUMOR PLACEMENT - Insert one moment of wit somewhere natural
-in the content above. End of a section, parenthetical aside, or transition
-moment. Examples:]*
+_[SUBTLE HUMOR PLACEMENT - Insert one moment of wit somewhere natural in the content above. End of a
+section, parenthetical aside, or transition moment. Examples:]_
 
-*"Whether those decisions add value after fees is a debate that has launched
-a thousand academic papers and at least one very successful index fund
-company in Valley Forge, Pennsylvania."*
+_"Whether those decisions add value after fees is a debate that has launched a thousand academic
+papers and at least one very successful index fund company in Valley Forge, Pennsylvania."_
 
-*"The MSRB created these rules because some creative municipal bond dealers
-discovered that political contributions could be remarkably effective marketing
-expenses."*
+_"The MSRB created these rules because some creative municipal bond dealers discovered that
+political contributions could be remarkably effective marketing expenses."_
 
 ---
 
-*This lesson is part of the Series 7 Exam Preparation course by Franklin Hugh Money.*
+_This lesson is part of the Series 7 Exam Preparation course by Franklin Hugh Money._
 ```
 
 ---
@@ -263,12 +263,12 @@ expenses."*
 
 ```markdown
 ---
-quiz_type: "[lesson|chapter|section|comprehensive]"
+quiz_type: '[lesson|chapter|section|comprehensive]'
 section: [SECTION_NUMBER]
-chapter: [CHAPTER_NUMBER]  # If chapter quiz
-topic: "[TOPIC_NAME]"
+chapter: [CHAPTER_NUMBER] # If chapter quiz
+topic: '[TOPIC_NAME]'
 question_count: [NUMBER]
-time_limit_minutes: [MINUTES]  # Optional
+time_limit_minutes: [MINUTES] # Optional
 passing_score: [PERCENTAGE]
 last_updated: [YYYY-MM-DD]
 ---
@@ -279,8 +279,8 @@ last_updated: [YYYY-MM-DD]
 
 [Brief instructions appropriate to quiz type. Example:]
 
-This quiz covers [topic/chapter/section]. You should be able to answer
-these questions after completing [lesson/chapter/section name].
+This quiz covers [topic/chapter/section]. You should be able to answer these questions after
+completing [lesson/chapter/section name].
 
 - Questions: [X]
 - Recommended time: [X] minutes
@@ -294,33 +294,29 @@ these questions after completing [lesson/chapter/section name].
 
 [Clear, specific question stem. Avoid ambiguity. Test one concept.]
 
-Example: An investor buys 1 ABC Jan 50 call at $4. The stock rises to $60
-at expiration. What is the investor's profit?
+Example: An investor buys 1 ABC Jan 50 call at $4. The stock rises to $60 at expiration. What is the
+investor's profit?
 
-A) $400
-B) $600
-C) $1,000
-D) $1,400
+A) $400 B) $600 C) $1,000 D) $1,400
 
 <details>
 <summary>Answer & Explanation</summary>
 
 **Correct Answer: B) $600**
 
-**Explanation:**
-[Step-by-step explanation in FHM voice]
+**Explanation:** [Step-by-step explanation in FHM voice]
 
 1. The investor paid $400 for the call ($4 × 100 shares)
 2. At expiration, the call has intrinsic value of $1,000 ($60 - $50 = $10 × 100)
 3. Profit = Intrinsic value - Premium paid = $1,000 - $400 = **$600**
 
 **Why the other answers are wrong:**
+
 - A) $400: This is just the premium paid, not the profit
 - C) $1,000: This is the intrinsic value before subtracting cost
 - D) $1,400: This incorrectly adds premium instead of subtracting
 
-**Key Concept:** When calculating profit, always subtract what you paid
-from what you received.
+**Key Concept:** When calculating profit, always subtract what you paid from what you received.
 
 </details>
 
@@ -330,20 +326,17 @@ from what you received.
 
 [Question stem...]
 
-A) [Choice A]
-B) [Choice B]
-C) [Choice C]
-D) [Choice D]
+A) [Choice A] B) [Choice B] C) [Choice C] D) [Choice D]
 
 <details>
 <summary>Answer & Explanation</summary>
 
 **Correct Answer: [X]) [Answer text]**
 
-**Explanation:**
-[Explanation in FHM voice...]
+**Explanation:** [Explanation in FHM voice...]
 
 **Why the other answers are wrong:**
+
 - [Analysis of each wrong answer]
 
 **Key Concept:** [Testable takeaway]
@@ -358,12 +351,12 @@ D) [Choice D]
 
 ## Score Guide
 
-| Score | Assessment | Recommendation |
-|-------|------------|----------------|
-| 90-100% | Excellent | Move to next topic |
-| 80-89% | Good | Quick review of missed concepts |
-| 70-79% | Passing | Review weak areas before continuing |
-| Below 70% | Needs work | Re-read lesson before retaking |
+| Score     | Assessment | Recommendation                      |
+| --------- | ---------- | ----------------------------------- |
+| 90-100%   | Excellent  | Move to next topic                  |
+| 80-89%    | Good       | Quick review of missed concepts     |
+| 70-79%    | Passing    | Review weak areas before continuing |
+| Below 70% | Needs work | Re-read lesson before retaking      |
 
 ---
 
@@ -410,6 +403,7 @@ D) [Choice D]
 ### Card Type Examples
 
 **Term Card:**
+
 ```json
 {
   "id": "opt-001",
@@ -424,6 +418,7 @@ D) [Choice D]
 ```
 
 **Formula Card:**
+
 ```json
 {
   "id": "marg-005",
@@ -438,6 +433,7 @@ D) [Choice D]
 ```
 
 **Comparison Card:**
+
 ```json
 {
   "id": "opt-020",
@@ -452,6 +448,7 @@ D) [Choice D]
 ```
 
 **Rule Card:**
+
 ```json
 {
   "id": "muni-015",
@@ -473,9 +470,9 @@ D) [Choice D]
 
 ```markdown
 ---
-topic: "[CALCULATION_TOPIC]"
+topic: '[CALCULATION_TOPIC]'
 section: [SECTION_NUMBER]
-subsection: "[SUBSECTION_NAME]"
+subsection: '[SUBSECTION_NAME]'
 difficulty: [beginner|intermediate|advanced]
 problem_count: [NUMBER]
 last_updated: [YYYY-MM-DD]
@@ -504,11 +501,11 @@ last_updated: [YYYY-MM-DD]
 
 **Step-by-Step Solution:**
 
-| Step | Action | Calculation | Result |
-|------|--------|-------------|--------|
-| 1 | [What you're doing] | [Calculation] | [Result] |
-| 2 | [Next step] | [Calculation] | [Result] |
-| 3 | [Final step] | [Calculation] | **[Final Answer]** |
+| Step | Action              | Calculation   | Result             |
+| ---- | ------------------- | ------------- | ------------------ |
+| 1    | [What you're doing] | [Calculation] | [Result]           |
+| 2    | [Next step]         | [Calculation] | [Result]           |
+| 3    | [Final step]        | [Calculation] | **[Final Answer]** |
 
 **Key Insight:** [What to remember from this example]
 
@@ -518,18 +515,17 @@ last_updated: [YYYY-MM-DD]
 
 ### Level 1: Basic (Problems 1-5)
 
-**Problem 1:**
-[Problem statement]
+**Problem 1:** [Problem statement]
 
 <details>
 <summary>Show Answer</summary>
 
 **Answer:** [Answer with work shown]
 
-| Step | Calculation |
-|------|-------------|
-| 1 | [Work] |
-| 2 | [Work] |
+| Step       | Calculation  |
+| ---------- | ------------ |
+| 1          | [Work]       |
+| 2          | [Work]       |
 | **Result** | **[Answer]** |
 
 </details>
@@ -548,13 +544,9 @@ last_updated: [YYYY-MM-DD]
 
 [Multiple choice format matching actual exam]
 
-**Problem 11:**
-[Problem statement]
+**Problem 11:** [Problem statement]
 
-A) [Choice]
-B) [Choice]
-C) [Choice]
-D) [Choice]
+A) [Choice] B) [Choice] C) [Choice] D) [Choice]
 
 <details>
 <summary>Show Answer</summary>
@@ -581,15 +573,14 @@ D) [Choice]
 
 [Condensed formulas and key numbers for this topic, suitable for memorization]
 
-| Calculation | Formula | Example |
-|-------------|---------|---------|
-| [Name] | [Formula] | [Quick example] |
+| Calculation | Formula   | Example         |
+| ----------- | --------- | --------------- |
+| [Name]      | [Formula] | [Quick example] |
 
 ---
 
-*Practice these calculations until they're automatic. The exam doesn't
-give you much time to think—you need to recognize the pattern and
-execute the formula quickly.*
+_Practice these calculations until they're automatic. The exam doesn't give you much time to
+think—you need to recognize the pattern and execute the formula quickly._
 ```
 
 ---
@@ -603,8 +594,7 @@ execute the formula quickly.*
 
 ## Section Overview
 
-**Exam Weight:** [X]% (~[X] questions out of 125)
-**Primary Focus:** [What this section tests]
+**Exam Weight:** [X]% (~[X] questions out of 125) **Primary Focus:** [What this section tests]
 **Difficulty Level:** [beginner|intermediate|advanced]
 
 ---
@@ -616,8 +606,7 @@ execute the formula quickly.*
 ### Chapters in This Section
 
 1. **Chapter [X]: [Name]** - [Brief description]
-2. **Chapter [X]: [Name]** - [Brief description]
-[Continue for all chapters]
+2. **Chapter [X]: [Name]** - [Brief description] [Continue for all chapters]
 
 ---
 
@@ -644,24 +633,13 @@ All content must follow **FHM Brand Voice** (see `/design/brand/brand-voice.md`)
 ---
 
 ## File Organization
-
 ```
-section-[XX]-[name]/
-├── SECTION_CLAUDE.md          # This file
-├── section-meta.json          # Section metadata
-├── section-00-overview.md     # Section introduction
-│
-├── chapters/
-│   └── chapter-[XX]-[name]/
-│       ├── chapter-meta.json
-│       └── lesson-[XX]-[name].md
-│
-├── practice/
-│   ├── quiz-chapter-[XX].md
-│   └── section-comprehensive.md
-│
-└── flashcards/
-    └── section-[XX]-flashcards.json
+
+section-[XX]-[name]/ ├── SECTION_CLAUDE.md # This file ├── section-meta.json # Section metadata ├──
+section-00-overview.md # Section introduction │ ├── chapters/ │ └── chapter-[XX]-[name]/ │ ├──
+chapter-meta.json │ └── lesson-[XX]-[name].md │ ├── practice/ │ ├── quiz-chapter-[XX].md │ └──
+section-comprehensive.md │ └── flashcards/ └── section-[XX]-flashcards.json
+
 ```
 
 ---
@@ -743,11 +721,7 @@ For questions about content in this section, reference the main
       "number": 1,
       "title": "Options Basics",
       "file": "lesson-01-options-basics.md",
-      "topics": [
-        "What is an option",
-        "Calls vs. puts",
-        "Buyers vs. sellers"
-      ],
+      "topics": ["What is an option", "Calls vs. puts", "Buyers vs. sellers"],
       "estimated_minutes": 25,
       "difficulty": "beginner",
       "calculation_heavy": false,
@@ -758,11 +732,7 @@ For questions about content in this section, reference the main
       "number": 2,
       "title": "Rights and Obligations",
       "file": "lesson-02-rights-obligations.md",
-      "topics": [
-        "Buyer rights",
-        "Seller obligations",
-        "Exercise vs. expiration"
-      ],
+      "topics": ["Buyer rights", "Seller obligations", "Exercise vs. expiration"],
       "estimated_minutes": 20,
       "difficulty": "beginner",
       "calculation_heavy": false,
@@ -793,9 +763,9 @@ For questions about content in this section, reference the main
 ```markdown
 ---
 section: [SECTION_NUMBER]
-type: "overview"
-title: "[SECTION_TITLE]"
-description: "[SECTION_DESCRIPTION]"
+type: 'overview'
+title: '[SECTION_TITLE]'
+description: '[SECTION_DESCRIPTION]'
 last_updated: [YYYY-MM-DD]
 ---
 
@@ -803,16 +773,13 @@ last_updated: [YYYY-MM-DD]
 
 ## Welcome
 
-[Opening hook for the section - why this material matters, what it prepares
-you to do, and its significance in the exam and in practice as a registered
-representative.]
+[Opening hook for the section - why this material matters, what it prepares you to do, and its
+significance in the exam and in practice as a registered representative.]
 
-[Example for Section 3:]
-This is where it gets real. Section 3 accounts for 73% of your Series 7
-exam—91 questions that will test whether you can actually advise clients
-on securities. Everything from options strategies to municipal bond analysis
-to margin calculations lives here. Master this section, and you've mastered
-the exam.
+[Example for Section 3:] This is where it gets real. Section 3 accounts for 73% of your Series 7
+exam—91 questions that will test whether you can actually advise clients on securities. Everything
+from options strategies to municipal bond analysis to margin calculations lives here. Master this
+section, and you've mastered the exam.
 
 ---
 
@@ -821,9 +788,11 @@ the exam.
 This section covers:
 
 ### [Subsection/Chapter 1 Name]
+
 [Brief description of what this covers and why it matters]
 
 ### [Subsection/Chapter 2 Name]
+
 [Brief description]
 
 [Continue for all major subsections/chapters]
@@ -832,11 +801,11 @@ This section covers:
 
 ## Exam Weight
 
-| Topic | Approximate Weight | Priority |
-|-------|-------------------|----------|
-| [Topic 1] | [X]% | [High/Medium/Low] |
-| [Topic 2] | [X]% | [High/Medium/Low] |
-| **Section Total** | **[X]%** | |
+| Topic             | Approximate Weight | Priority          |
+| ----------------- | ------------------ | ----------------- |
+| [Topic 1]         | [X]%               | [High/Medium/Low] |
+| [Topic 2]         | [X]%               | [High/Medium/Low] |
+| **Section Total** | **[X]%**           |                   |
 
 ---
 
@@ -845,11 +814,13 @@ This section covers:
 [Recommendations for how to approach this section]
 
 **Recommended order:**
+
 1. [Topic] - Start here because...
 2. [Topic] - Then move to...
 3. [Topic] - Finally...
 
 **Time allocation:**
+
 - [Topic]: [X] hours (high priority)
 - [Topic]: [X] hours (medium priority)
 - [Topic]: [X] hours (lower priority)
@@ -861,17 +832,18 @@ This section covers:
 [If applicable, list the calculation types covered in this section]
 
 This section includes significant calculation requirements:
+
 - [Calculation type 1]
 - [Calculation type 2]
 
-See the **Formula Sheet** (`/study-tools/formula-sheet.md`) for all
-formulas in one place.
+See the **Formula Sheet** (`/study-tools/formula-sheet.md`) for all formulas in one place.
 
 ---
 
 ## Prerequisites
 
 Before starting this section, you should be comfortable with:
+
 - [Prerequisite concept 1]
 - [Prerequisite concept 2]
 
@@ -883,7 +855,7 @@ Start with **[First Chapter/Lesson Name]** →
 
 ---
 
-*Estimated time to complete section: [X] hours*
+_Estimated time to complete section: [X] hours_
 ```
 
 ---
@@ -893,11 +865,13 @@ Start with **[First Chapter/Lesson Name]** →
 For use within lesson content:
 
 ### Key Term
+
 ```html
 <span class="key-term">Term</span>
 ```
 
 ### Info Box
+
 ```html
 <div class="info-box">
   <div class="info-box__title">[Title: Example, Note, etc.]</div>
@@ -906,6 +880,7 @@ For use within lesson content:
 ```
 
 ### Test Tip
+
 ```html
 <div class="test-tip">
   <p><strong>Test Tip:</strong> [Tip content]</p>
@@ -913,6 +888,7 @@ For use within lesson content:
 ```
 
 ### Historical Note
+
 ```html
 <div class="historical-note">
   <div class="historical-note__label">Historical Context</div>
@@ -921,6 +897,7 @@ For use within lesson content:
 ```
 
 ### Exam Focus (High Priority)
+
 ```html
 <div class="exam-focus">
   <div class="exam-focus__label">EXAM FOCUS</div>
@@ -929,6 +906,7 @@ For use within lesson content:
 ```
 
 ### Critical Concept
+
 ```html
 <div class="critical-concept">
   <div class="critical-concept__label">MEMORIZE THIS</div>
@@ -937,6 +915,7 @@ For use within lesson content:
 ```
 
 ### Calculation Box
+
 ```html
 <div class="calculation-box">
   <div class="calculation-box__label">Formula</div>
@@ -946,14 +925,23 @@ For use within lesson content:
 ```
 
 ### Comparison Table
+
 ```html
 <div class="comparison-table">
   <table>
     <thead>
-      <tr><th>Feature</th><th>A</th><th>B</th></tr>
+      <tr>
+        <th>Feature</th>
+        <th>A</th>
+        <th>B</th>
+      </tr>
     </thead>
     <tbody>
-      <tr><td>[Feature]</td><td>[A value]</td><td>[B value]</td></tr>
+      <tr>
+        <td>[Feature]</td>
+        <td>[A value]</td>
+        <td>[B value]</td>
+      </tr>
     </tbody>
   </table>
 </div>
@@ -961,5 +949,5 @@ For use within lesson content:
 
 ---
 
-*These templates ensure consistency across all Series 7 content while
-maintaining the FHM brand voice and following SIE structural patterns.*
+_These templates ensure consistency across all Series 7 content while maintaining the FHM brand
+voice and following SIE structural patterns._

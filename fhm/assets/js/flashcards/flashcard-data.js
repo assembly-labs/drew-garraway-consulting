@@ -95,7 +95,7 @@ const FlashcardData = (function () {
         return {
             total: cards.length,
             bySection,
-            byChapter
+            byChapter,
         };
     }
 
@@ -106,7 +106,7 @@ const FlashcardData = (function () {
         getBySection,
         getById,
         getCount,
-        getStats
+        getStats,
     };
 })();
 
