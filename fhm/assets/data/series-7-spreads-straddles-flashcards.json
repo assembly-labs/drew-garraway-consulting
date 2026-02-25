@@ -16,7 +16,7 @@
         {
             "id": "s7-ss-001",
             "front": "You buy 1 TSLA Mar 250 call for 8 and sell 1 TSLA Mar 270 call for 3.",
-            "back": "Bull Call Spread\n\nBuy the lower call, sell the higher call.",
+            "back": "Bull Call Spread (Net Debit)\n\nBuy the lower call, sell the higher call.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -28,7 +28,7 @@
         {
             "id": "s7-ss-002",
             "front": "You buy 1 NVDA Apr 130 call for 5 and sell 1 NVDA Apr 145 call for 2.",
-            "back": "Bull Call Spread\n\nBuy the lower call, sell the higher call.",
+            "back": "Bull Call Spread (Net Debit)\n\nBuy the lower call, sell the higher call.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -40,7 +40,7 @@
         {
             "id": "s7-ss-003",
             "front": "You buy 1 AAPL Feb 215 call for 6 and sell 1 AAPL Feb 230 call for 2.50.",
-            "back": "Bull Call Spread\n\nBuy the lower call, sell the higher call.",
+            "back": "Bull Call Spread (Net Debit)\n\nBuy the lower call, sell the higher call.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -52,7 +52,7 @@
         {
             "id": "s7-ss-004",
             "front": "You buy 1 META Mar 575 call for 12 and sell 1 META Mar 600 call for 5.",
-            "back": "Bull Call Spread\n\nBuy the lower call, sell the higher call.",
+            "back": "Bull Call Spread (Net Debit)\n\nBuy the lower call, sell the higher call.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -64,7 +64,7 @@
         {
             "id": "s7-ss-005",
             "front": "You buy 1 AMD Mar 115 put for 5 and sell 1 AMD Mar 100 put for 1.50.",
-            "back": "Bear Put Spread\n\nBuy the higher put, sell the lower put.",
+            "back": "Bear Put Spread (Net Debit)\n\nBuy the higher put, sell the lower put.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -76,7 +76,7 @@
         {
             "id": "s7-ss-006",
             "front": "You buy 1 SPY Apr 585 put for 8 and sell 1 SPY Apr 565 put for 3.",
-            "back": "Bear Put Spread\n\nBuy the higher put, sell the lower put.",
+            "back": "Bear Put Spread (Net Debit)\n\nBuy the higher put, sell the lower put.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -88,7 +88,7 @@
         {
             "id": "s7-ss-007",
             "front": "You buy 1 TSLA Feb 255 put for 10 and sell 1 TSLA Feb 235 put for 4.",
-            "back": "Bear Put Spread\n\nBuy the higher put, sell the lower put.",
+            "back": "Bear Put Spread (Net Debit)\n\nBuy the higher put, sell the lower put.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -100,7 +100,7 @@
         {
             "id": "s7-ss-008",
             "front": "You buy 1 NVDA Mar 135 put for 6 and sell 1 NVDA Mar 120 put for 2.",
-            "back": "Bear Put Spread\n\nBuy the higher put, sell the lower put.",
+            "back": "Bear Put Spread (Net Debit)\n\nBuy the higher put, sell the lower put.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -112,7 +112,7 @@
         {
             "id": "s7-ss-009",
             "front": "You sell 1 AAPL Mar 220 put for 7 and buy 1 AAPL Mar 205 put for 2.50.",
-            "back": "Bull Put Spread\n\nSell the higher put, buy the lower put.",
+            "back": "Bull Put Spread (Net Credit)\n\nSell the higher put, buy the lower put.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -124,7 +124,7 @@
         {
             "id": "s7-ss-010",
             "front": "You sell 1 META Feb 580 put for 14 and buy 1 META Feb 560 put for 6.",
-            "back": "Bull Put Spread\n\nSell the higher put, buy the lower put.",
+            "back": "Bull Put Spread (Net Credit)\n\nSell the higher put, buy the lower put.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -136,7 +136,7 @@
         {
             "id": "s7-ss-011",
             "front": "You sell 1 AMD Apr 112 put for 4 and buy 1 AMD Apr 100 put for 1.50.",
-            "back": "Bull Put Spread\n\nSell the higher put, buy the lower put.",
+            "back": "Bull Put Spread (Net Credit)\n\nSell the higher put, buy the lower put.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -148,7 +148,7 @@
         {
             "id": "s7-ss-012",
             "front": "You sell 1 SPY Mar 580 put for 9 and buy 1 SPY Mar 565 put for 4.",
-            "back": "Bull Put Spread\n\nSell the higher put, buy the lower put.",
+            "back": "Bull Put Spread (Net Credit)\n\nSell the higher put, buy the lower put.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -160,7 +160,7 @@
         {
             "id": "s7-ss-013",
             "front": "You sell 1 TSLA Mar 260 call for 9 and buy 1 TSLA Mar 280 call for 3.50.",
-            "back": "Bear Call Spread\n\nSell the lower call, buy the higher call.",
+            "back": "Bear Call Spread (Net Credit)\n\nSell the lower call, buy the higher call.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -172,7 +172,7 @@
         {
             "id": "s7-ss-014",
             "front": "You sell 1 NVDA Apr 135 call for 5 and buy 1 NVDA Apr 150 call for 1.50.",
-            "back": "Bear Call Spread\n\nSell the lower call, buy the higher call.",
+            "back": "Bear Call Spread (Net Credit)\n\nSell the lower call, buy the higher call.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -184,7 +184,7 @@
         {
             "id": "s7-ss-015",
             "front": "You sell 1 AAPL Feb 225 call for 6 and buy 1 AAPL Feb 240 call for 2.",
-            "back": "Bear Call Spread\n\nSell the lower call, buy the higher call.",
+            "back": "Bear Call Spread (Net Credit)\n\nSell the lower call, buy the higher call.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -196,7 +196,7 @@
         {
             "id": "s7-ss-016",
             "front": "You sell 1 META Mar 590 call for 11 and buy 1 META Mar 615 call for 4.",
-            "back": "Bear Call Spread\n\nSell the lower call, buy the higher call.",
+            "back": "Bear Call Spread (Net Credit)\n\nSell the lower call, buy the higher call.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -208,7 +208,7 @@
         {
             "id": "s7-ss-017",
             "front": "You buy 1 TSLA Mar 250 call for 14 and buy 1 TSLA Mar 250 put for 11.",
-            "back": "Long Straddle\n\nBuy a call AND a put at the same strike.",
+            "back": "Long Straddle (Net Debit)\n\nBuy a call AND a put at the same strike.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -220,7 +220,7 @@
         {
             "id": "s7-ss-018",
             "front": "You buy 1 NVDA Apr 130 call for 8 and buy 1 NVDA Apr 130 put for 6.",
-            "back": "Long Straddle\n\nBuy a call AND a put at the same strike.",
+            "back": "Long Straddle (Net Debit)\n\nBuy a call AND a put at the same strike.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -232,7 +232,7 @@
         {
             "id": "s7-ss-019",
             "front": "You buy 1 AMD Feb 110 call for 5 and buy 1 AMD Feb 110 put for 4.",
-            "back": "Long Straddle\n\nBuy a call AND a put at the same strike.",
+            "back": "Long Straddle (Net Debit)\n\nBuy a call AND a put at the same strike.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -244,7 +244,7 @@
         {
             "id": "s7-ss-020",
             "front": "You buy 1 SPY Mar 580 call for 10 and buy 1 SPY Mar 580 put for 9.",
-            "back": "Long Straddle\n\nBuy a call AND a put at the same strike.",
+            "back": "Long Straddle (Net Debit)\n\nBuy a call AND a put at the same strike.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -256,7 +256,7 @@
         {
             "id": "s7-ss-021",
             "front": "You sell 1 META Mar 580 call for 15 and sell 1 META Mar 580 put for 13.",
-            "back": "Short Straddle\n\nSell a call AND a put at the same strike.",
+            "back": "Short Straddle (Net Credit)\n\nSell a call AND a put at the same strike.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -268,7 +268,7 @@
         {
             "id": "s7-ss-022",
             "front": "You sell 1 AAPL Apr 220 call for 8 and sell 1 AAPL Apr 220 put for 7.",
-            "back": "Short Straddle\n\nSell a call AND a put at the same strike.",
+            "back": "Short Straddle (Net Credit)\n\nSell a call AND a put at the same strike.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -280,7 +280,7 @@
         {
             "id": "s7-ss-023",
             "front": "You sell 1 TSLA Feb 255 call for 16 and sell 1 TSLA Feb 255 put for 12.",
-            "back": "Short Straddle\n\nSell a call AND a put at the same strike.",
+            "back": "Short Straddle (Net Credit)\n\nSell a call AND a put at the same strike.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -292,7 +292,7 @@
         {
             "id": "s7-ss-024",
             "front": "You sell 1 NVDA Mar 130 call for 7 and sell 1 NVDA Mar 130 put for 6.",
-            "back": "Short Straddle\n\nSell a call AND a put at the same strike.",
+            "back": "Short Straddle (Net Credit)\n\nSell a call AND a put at the same strike.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -304,7 +304,7 @@
         {
             "id": "s7-ss-025",
             "front": "You buy 1 AMD Mar 115 call for 3 and buy 1 AMD Mar 105 put for 2.50.",
-            "back": "Long Strangle\n\nBuy a call AND a put at different strikes.",
+            "back": "Long Strangle (Net Debit)\n\nBuy a call AND a put at different strikes.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -316,7 +316,7 @@
         {
             "id": "s7-ss-026",
             "front": "You buy 1 SPY Apr 590 call for 6 and buy 1 SPY Apr 570 put for 5.",
-            "back": "Long Strangle\n\nBuy a call AND a put at different strikes.",
+            "back": "Long Strangle (Net Debit)\n\nBuy a call AND a put at different strikes.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -328,7 +328,7 @@
         {
             "id": "s7-ss-027",
             "front": "You buy 1 AAPL Feb 230 call for 4 and buy 1 AAPL Feb 210 put for 3.50.",
-            "back": "Long Strangle\n\nBuy a call AND a put at different strikes.",
+            "back": "Long Strangle (Net Debit)\n\nBuy a call AND a put at different strikes.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -340,7 +340,7 @@
         {
             "id": "s7-ss-028",
             "front": "You buy 1 META Mar 600 call for 8 and buy 1 META Mar 560 put for 7.",
-            "back": "Long Strangle\n\nBuy a call AND a put at different strikes.",
+            "back": "Long Strangle (Net Debit)\n\nBuy a call AND a put at different strikes.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -352,7 +352,7 @@
         {
             "id": "s7-ss-029",
             "front": "You sell 1 TSLA Mar 270 call for 6 and sell 1 TSLA Mar 230 put for 5.",
-            "back": "Short Strangle\n\nSell a call AND a put at different strikes.",
+            "back": "Short Strangle (Net Credit)\n\nSell a call AND a put at different strikes.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -364,7 +364,7 @@
         {
             "id": "s7-ss-030",
             "front": "You sell 1 NVDA Apr 145 call for 3.50 and sell 1 NVDA Apr 118 put for 2.50.",
-            "back": "Short Strangle\n\nSell a call AND a put at different strikes.",
+            "back": "Short Strangle (Net Credit)\n\nSell a call AND a put at different strikes.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -376,7 +376,7 @@
         {
             "id": "s7-ss-031",
             "front": "You sell 1 AMD Mar 120 call for 3 and sell 1 AMD Mar 100 put for 2.",
-            "back": "Short Strangle\n\nSell a call AND a put at different strikes.",
+            "back": "Short Strangle (Net Credit)\n\nSell a call AND a put at different strikes.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
@@ -388,7 +388,7 @@
         {
             "id": "s7-ss-032",
             "front": "You sell 1 SPY Apr 595 call for 5 and sell 1 SPY Apr 565 put for 4.50.",
-            "back": "Short Strangle\n\nSell a call AND a put at different strikes.",
+            "back": "Short Strangle (Net Credit)\n\nSell a call AND a put at different strikes.",
             "type": "strategy",
             "section": 3,
             "subsection": "spreads-straddles",
