@@ -10,7 +10,14 @@
     },
     "globals": {
         "SIECourseStructure": "readonly",
-        "module": "readonly"
+        "module": "readonly",
+        "createFlashcardUI": "readonly",
+        "createFlashcardData": "readonly",
+        "FlashcardData": "readonly",
+        "FlashcardProgress": "readonly",
+        "FlashcardSession": "readonly",
+        "Series7FlashcardData": "readonly",
+        "SpreadsStraddlesData": "readonly"
     },
     "rules": {
         "no-unused-vars": "error",

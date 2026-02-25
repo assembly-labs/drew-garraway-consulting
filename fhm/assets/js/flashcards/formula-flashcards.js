@@ -4,6 +4,7 @@
  * Features: tap to flip, swipe gestures, review pile, localStorage persistence
  */
 
+// eslint-disable-next-line no-unused-vars -- consumed by HTML pages
 const FormulaFlashcards = (function () {
     'use strict';
 

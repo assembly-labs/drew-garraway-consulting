@@ -16,9 +16,6 @@
         "lint:css": "stylelint 'assets/**/*.css'",
         "lint:js": "eslint 'assets/**/*.js' 'scripts/**/*.js'",
         "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
-        "test": "vitest",
-        "test:run": "vitest run",
-        "test:coverage": "vitest run --coverage",
         "validate": "node scripts/validate-content.js",
         "generate-cards": "node scripts/generate-flashcards.js",
         "build": "npm run generate-cards && npm run validate && npm run cache-bust",
@@ -41,10 +38,7 @@
         "eslint": "^8.54.0",
         "stylelint": "^15.11.0",
         "html-validate": "^8.7.0",
-        "serve": "^14.2.1",
-        "vitest": "^2.1.0",
-        "@vitest/coverage-v8": "^2.1.0",
-        "jsdom": "^25.0.0"
+        "serve": "^14.2.1"
     },
     "engines": {
         "node": ">=18.0.0",

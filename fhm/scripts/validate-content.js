@@ -51,7 +51,7 @@ function parseNavigationConfig() {
 
     // Extract chapters array using regex (simple parser)
     const chapters = [];
-    const chapterRegex = /number:\s*(\d+),\s*\n\s*title:\s*"([^"]+)"/g;
+    const chapterRegex = /number:\s*(\d+),\s*\n\s*title:\s*['"]([^'"]+)['"]/g;
     let match;
 
     while ((match = chapterRegex.exec(content)) !== null) {
@@ -62,7 +62,7 @@ function parseNavigationConfig() {
     }
 
     // Extract sections for each chapter
-    const sectionRegex = /id:\s*"(\d+\.\d+)"[^}]*file:\s*"([^"]+)"[^}]*locked:\s*(true|false)/g;
+    const sectionRegex = /id:\s*['"](\d+\.\d+)['"][^}]*file:\s*['"]([^'"]+)['"][^}]*locked:\s*(true|false)/g;
     const sections = [];
 
     while ((match = sectionRegex.exec(content)) !== null) {

@@ -1,6 +1,7 @@
 // SIE Navigation Component
 // Reusable navigation component for all SIE study material pages
 
+// eslint-disable-next-line no-unused-vars -- instantiated by HTML pages
 class SIENavigationComponent {
     constructor(currentPageFile) {
         this.currentPageFile = currentPageFile;
@@ -229,7 +230,7 @@ class SIENavigationComponent {
     }
 }
 
-// Global function for scrolling to sections
+// eslint-disable-next-line no-unused-vars -- called from HTML onclick
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (section) {

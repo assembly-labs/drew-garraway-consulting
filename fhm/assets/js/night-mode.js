@@ -7,7 +7,7 @@
     'use strict';
 
     function isNightTime() {
-        var hour = new Date().getHours();
+        const hour = new Date().getHours();
         // Night mode: 5pm (17) to 9am (9)
         return hour >= 17 || hour < 9;
     }
