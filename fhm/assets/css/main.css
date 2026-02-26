@@ -33,6 +33,17 @@
     --fh-font-body: 'Inter', -apple-system, sans-serif;
     --fh-font-mono: 'IBM Plex Mono', monospace;
 
+    /* Semantic Colors */
+    --fh-navy-dark: #003d82;
+    --fh-status-positive: #2e7d32;
+    --fh-status-negative: #c62828;
+    --fh-status-warning: #f57c00;
+    --fh-note-orange: #e65100;
+    --fh-note-border: #ff9800;
+    --fh-note-bg-start: #fff3e0;
+    --fh-note-bg-end: #ffe0b2;
+    --fh-note-border-accent: #ffb74d;
+
     /* Spacing Scale (8px base) */
     --fh-space-xs: 0.25rem;
     --fh-space-sm: 0.5rem;
@@ -84,6 +95,36 @@ body {
     background: var(--fh-cream);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Skip to Content (Accessibility)
+   ============================================ */
+.skip-to-content {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 1000;
+    padding: var(--fh-space-sm) var(--fh-space-md);
+    background: var(--fh-navy);
+    color: var(--fh-white);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+}
+
+.skip-to-content:focus {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: auto;
+    outline: 2px solid var(--fh-gold);
+    outline-offset: 2px;
 }
 
 /* ============================================
@@ -401,7 +442,7 @@ strong {
 }
 
 .control-btn:hover {
-    background: #003d82;
+    background: var(--fh-navy-dark);
     transform: translateY(-1px);
 }
 
@@ -580,11 +621,11 @@ strong {
 }
 
 .parent-row:hover {
-    background: #e3e9f0;
+    background: var(--fh-gray-200);
 }
 
 .parent-row.expanded {
-    background: #d9e2ed;
+    background: var(--fh-gray-300);
 }
 
 .child-row {
@@ -632,11 +673,11 @@ strong {
 }
 
 .status-verified {
-    color: #2e7d32;
+    color: var(--fh-status-positive);
 }
 
 .status-estimated {
-    color: #f57c00;
+    color: var(--fh-status-warning);
 }
 
 .source-note {
@@ -653,11 +694,11 @@ strong {
 }
 
 .change.positive {
-    color: #2e7d32;
+    color: var(--fh-status-positive);
 }
 
 .change.negative {
-    color: #c62828;
+    color: var(--fh-status-negative);
 }
 
 .change.neutral {
@@ -668,7 +709,7 @@ strong {
    Insight Box (Treasury Page)
    ============================================ */
 .insight-box {
-    background: linear-gradient(135deg, var(--fh-navy) 0%, #003d82 100%);
+    background: linear-gradient(135deg, var(--fh-navy) 0%, var(--fh-navy-dark) 100%);
     color: var(--fh-white);
     padding: var(--fh-space-2xl);
     border-radius: 8px;
@@ -702,17 +743,17 @@ strong {
    SIE Footnotes Section (Treasury Page)
    ============================================ */
 .sie-footnotes {
-    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-    border: 1px solid #ffb74d;
+    background: linear-gradient(135deg, var(--fh-note-bg-start) 0%, var(--fh-note-bg-end) 100%);
+    border: 1px solid var(--fh-note-border-accent);
     border-radius: 8px;
     padding: var(--fh-space-2xl);
     margin: var(--fh-space-2xl) 0;
 }
 
 .sie-footnotes h3 {
-    color: #e65100;
+    color: var(--fh-note-orange);
     margin-bottom: var(--fh-space-lg);
-    border-bottom: 2px solid #ffb74d;
+    border-bottom: 2px solid var(--fh-note-border-accent);
     padding-bottom: var(--fh-space-sm);
 }
 
@@ -720,13 +761,13 @@ strong {
     margin-bottom: var(--fh-space-lg);
     padding: var(--fh-space-md);
     background: var(--fh-white);
-    border-left: 4px solid #ff9800;
+    border-left: 4px solid var(--fh-note-border);
     border-radius: 4px;
 }
 
 .sie-note-title {
     font-weight: 600;
-    color: #e65100;
+    color: var(--fh-note-orange);
     margin-bottom: var(--fh-space-sm);
     display: flex;
     align-items: center;
@@ -739,12 +780,12 @@ strong {
 }
 
 .sie-note-content strong {
-    color: #e65100;
+    color: var(--fh-note-orange);
     font-weight: 600;
 }
 
 .footnote-ref {
-    color: #e65100;
+    color: var(--fh-note-orange);
     font-weight: 600;
     cursor: help;
     font-size: 0.85rem;

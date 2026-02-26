@@ -5,14 +5,13 @@
  * with card rendering, flip animation, touch/swipe gestures, and session flow.
  *
  * @param {Object} config
- * @param {string} config.globalName - Global variable name (for onclick handlers)
  * @param {string} config.title - Display title shown in header
  * @param {Object} config.dataModule - Data module with load() and getAll()
  * @param {boolean} config.hasMemoryAid - Whether to show memory aid on card back
  * @returns {Object} Flashcard UI module with init, startSession, showStart, flipCard
  */
 function createFlashcardUI(config) {
-    const { globalName, title, dataModule, hasMemoryAid = false } = config;
+    const { title, dataModule, hasMemoryAid = false } = config;
 
     const SWIPE_THRESHOLD_X = 50;
     const SWIPE_THRESHOLD_Y = 80;
@@ -35,7 +34,12 @@ function createFlashcardUI(config) {
             return false;
         }
 
-        await dataModule.load();
+        const cards = await dataModule.load();
+        if (!cards || cards.length === 0) {
+            console.error('No flashcard data loaded');
+            return false;
+        }
+
         render();
         startSession();
         return true;
@@ -126,7 +130,7 @@ function createFlashcardUI(config) {
                             </div>
                         </div>
                         <div class="summary-actions">
-                            <button class="btn btn--primary" onclick="${globalName}.startSession()">
+                            <button class="btn btn--primary" id="btn-study-again" type="button">
                                 Study Again
                             </button>
                         </div>
@@ -138,6 +142,13 @@ function createFlashcardUI(config) {
         cardElement = document.getElementById('flashcard');
         progressElement = document.getElementById('session-progress');
         summaryElement = document.getElementById('flashcard-summary');
+
+        const studyAgainBtn = document.getElementById('btn-study-again');
+        if (studyAgainBtn) {
+            studyAgainBtn.addEventListener('click', function () {
+                startSession();
+            });
+        }
     }
 
     function startSession() {
@@ -237,6 +248,7 @@ function createFlashcardUI(config) {
         cardContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
         cardContainer.addEventListener('click', handleClick);
 
+        document.removeEventListener('keydown', handleKeydown);
         document.addEventListener('keydown', handleKeydown);
 
         const btnGotIt = document.getElementById('btn-got-it');

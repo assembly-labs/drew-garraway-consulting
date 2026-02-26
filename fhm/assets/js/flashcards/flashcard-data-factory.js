@@ -27,7 +27,7 @@ function createFlashcardData(config) {
             meta = data.meta || {};
             loaded = true;
 
-            console.log(`Loaded ${cards.length} ${label} flashcards`);
+            // cards loaded successfully
             return cards;
         } catch (error) {
             console.error(`Error loading ${label} flashcards:`, error);

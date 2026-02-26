@@ -28,10 +28,16 @@
         applyNightMode();
     }
 
-    // Check every minute for time changes
-    setInterval(function () {
-        if (document.body) {
-            applyNightMode();
-        }
-    }, 60000);
+    // Re-check at the next hour boundary (9am or 5pm)
+    function scheduleNextCheck() {
+        const now = new Date();
+        const hour = now.getHours();
+        const nextHour = hour < 9 ? 9 : hour < 17 ? 17 : 33; // 33 = 9am next day
+        const msUntilNext = new Date(now.getFullYear(), now.getMonth(), now.getDate(), nextHour, 0, 1) - now;
+        setTimeout(function () {
+            if (document.body) applyNightMode();
+            scheduleNextCheck();
+        }, msUntilNext);
+    }
+    scheduleNextCheck();
 })();

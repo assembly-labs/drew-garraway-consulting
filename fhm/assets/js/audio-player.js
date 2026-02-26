@@ -170,7 +170,7 @@
         }
 
         // Set up IntersectionObserver for tracking player visibility
-        if ('IntersectionObserver' in window) {
+        if ('IntersectionObserver' in window && !miniObserver) {
             miniObserver = new IntersectionObserver(
                 function (entries) {
                     entries.forEach(function (entry) {
@@ -489,9 +489,17 @@
             }
         }
 
+        function cleanupDragListeners() {
+            document.removeEventListener('mousemove', onDragMove);
+            document.removeEventListener('mouseup', onDragEnd);
+            document.removeEventListener('touchmove', onDragMove);
+            document.removeEventListener('touchend', onDragEnd);
+        }
+
         function onDragStart(e) {
             player.seeking = true;
             seekFromEvent(e);
+            cleanupDragListeners(); // prevent stale listeners from previous drag
             document.addEventListener('mousemove', onDragMove);
             document.addEventListener('mouseup', onDragEnd);
             document.addEventListener('touchmove', onDragMove, { passive: false });
@@ -506,10 +514,7 @@
 
         function onDragEnd() {
             player.seeking = false;
-            document.removeEventListener('mousemove', onDragMove);
-            document.removeEventListener('mouseup', onDragEnd);
-            document.removeEventListener('touchmove', onDragMove);
-            document.removeEventListener('touchend', onDragEnd);
+            cleanupDragListeners();
             savePosition(audio);
         }
 

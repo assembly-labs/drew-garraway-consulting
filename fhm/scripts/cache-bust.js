@@ -99,7 +99,8 @@ function updateHtmlFile(htmlPath, hashes, dryRun = false) {
     let changes = [];
 
     // Update CSS references
-    content = content.replace(CSS_PATTERN, (match, filename, existingVersion) => {
+    // eslint-disable-next-line no-unused-vars
+    content = content.replace(CSS_PATTERN, (match, filename, _existingVersion) => {
         // Try to match by full path first, then by basename for backwards compatibility
         const matchedAsset = TRACKED_ASSETS.find(
             asset => filename === asset || filename.endsWith(asset) || asset.endsWith(filename)
@@ -115,7 +116,8 @@ function updateHtmlFile(htmlPath, hashes, dryRun = false) {
     });
 
     // Update JS references (exclude CDN/external)
-    content = content.replace(JS_PATTERN, (match, filename, existingVersion) => {
+    // eslint-disable-next-line no-unused-vars
+    content = content.replace(JS_PATTERN, (match, filename, _existingVersion) => {
         // Skip external URLs
         if (filename.startsWith('http') || filename.startsWith('//')) {
             return match;

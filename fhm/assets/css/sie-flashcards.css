@@ -159,7 +159,7 @@
 }
 
 .option-select:focus {
-    outline: none;
+    outline: 2px solid transparent; /* visible in forced-colors/high-contrast mode */
     border-color: var(--fh-sage);
     box-shadow: 0 0 0 3px rgba(124, 152, 133, 0.2);
 }

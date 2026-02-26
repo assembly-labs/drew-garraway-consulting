@@ -28,7 +28,7 @@ const FlashcardData = (function () {
             cards = data.cards || [];
             loaded = true;
 
-            console.log(`Loaded ${cards.length} flashcards`);
+            // cards loaded successfully
             return cards;
         } catch (error) {
             console.error('Error loading flashcards:', error);

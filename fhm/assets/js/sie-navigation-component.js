@@ -47,10 +47,16 @@ class SIENavigationComponent {
         return `
             <div class="sie-nav-bar__content">
                 <!-- Previous button -->
-                <a href="${prevSection && !prevSection.locked ? prevSection.file : '#'}"
-                   class="sie-nav-button sie-nav-button--prev ${!prevSection || prevSection.locked ? 'sie-nav-button--disabled' : ''}">
-                    <span>← ${prevSection ? `${prevSection.id}` : 'Previous'}</span>
-                </a>
+                ${prevSection && !prevSection.locked
+                    ? `<a href="${prevSection.file}"
+                       class="sie-nav-button sie-nav-button--prev">
+                        <span>← ${prevSection.id}</span>
+                    </a>`
+                    : `<span class="sie-nav-button sie-nav-button--prev sie-nav-button--disabled"
+                        aria-disabled="true">
+                        <span>← ${prevSection ? prevSection.id : 'Previous'}</span>
+                    </span>`
+                }
 
                 <!-- Chapter/Section selector -->
                 <div class="sie-chapter-selector">
@@ -72,10 +78,16 @@ class SIENavigationComponent {
                 ${this.generateSectionDots()}
 
                 <!-- Next button -->
-                <a href="${nextSection && !nextSection.locked ? nextSection.file : '#'}"
-                   class="sie-nav-button sie-nav-button--next ${!nextSection || nextSection.locked ? 'sie-nav-button--disabled' : ''}">
-                    <span>${nextSection ? `${nextSection.id}` : 'Next'} →</span>
-                </a>
+                ${nextSection && !nextSection.locked
+                    ? `<a href="${nextSection.file}"
+                       class="sie-nav-button sie-nav-button--next">
+                        <span>${nextSection.id} →</span>
+                    </a>`
+                    : `<span class="sie-nav-button sie-nav-button--next sie-nav-button--disabled"
+                        aria-disabled="true">
+                        <span>${nextSection ? nextSection.id : 'Next'} →</span>
+                    </span>`
+                }
             </div>
         `;
     }
@@ -88,12 +100,20 @@ class SIENavigationComponent {
                         const isCurrent = section.id === this.currentSection?.id;
                         const isLocked = section.locked;
 
-                        return `
-                    <a href="${!isLocked ? section.file : '#'}"
-                       class="sie-section-option ${isCurrent ? 'sie-section-option--current' : ''} ${isLocked ? 'sie-section-option--locked' : ''}">
+                        if (isLocked) {
+                            return `
+                    <span class="sie-section-option sie-section-option--locked" aria-disabled="true">
                         <span class="sie-section-option__number">${section.id}</span>
                         <span class="sie-section-option__title">${section.title}</span>
-                        ${isLocked ? '<span class="sie-section-option__lock">🔒</span>' : ''}
+                        <span class="sie-section-option__lock">🔒</span>
+                    </span>
+                `;
+                        }
+                        return `
+                    <a href="${section.file}"
+                       class="sie-section-option ${isCurrent ? 'sie-section-option--current' : ''}">
+                        <span class="sie-section-option__number">${section.id}</span>
+                        <span class="sie-section-option__title">${section.title}</span>
                     </a>
                 `;
                     })
@@ -133,11 +153,17 @@ class SIENavigationComponent {
                 if (section.id === this.currentSection?.id) {
                     // For current page, use internal section navigation
                     return this.generateInternalSectionDots();
-                } else {
-                    // For other sections in chapter, link to those pages
+                } else if (isLocked) {
                     return `
-                    <a href="${!isLocked ? section.file : '#'}"
-                       class="sie-section-link-dot ${isActive ? 'active' : ''} ${isLocked ? 'locked' : ''}"
+                    <span class="sie-section-link-dot ${isActive ? 'active' : ''} locked"
+                       aria-disabled="true"
+                       title="${section.title} (locked)">
+                    </span>
+                `;
+                } else {
+                    return `
+                    <a href="${section.file}"
+                       class="sie-section-link-dot ${isActive ? 'active' : ''}"
                        title="${section.title}">
                     </a>
                 `;
@@ -162,7 +188,8 @@ class SIENavigationComponent {
                 return `
                 <div class="sie-section-dot ${index === 0 ? 'active' : ''}"
                      data-section="${sectionId}"
-                     onclick="scrollToSection('${sectionId}')"
+                     role="button"
+                     tabindex="0"
                      title="${sectionTitle}">
                 </div>
             `;
@@ -199,6 +226,34 @@ class SIENavigationComponent {
                 }
             });
         }
+
+        // Section dot navigation via event delegation
+        const navBar = document.querySelector('.sie-nav-bar');
+        if (navBar) {
+            navBar.addEventListener('click', e => {
+                const dot = e.target.closest('.sie-section-dot[data-section]');
+                if (dot) {
+                    const sectionId = dot.getAttribute('data-section');
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+            navBar.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    const dot = e.target.closest('.sie-section-dot[data-section]');
+                    if (dot) {
+                        e.preventDefault();
+                        const sectionId = dot.getAttribute('data-section');
+                        const section = document.getElementById(sectionId);
+                        if (section) {
+                            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                }
+            });
+        }
     }
 
     setupScrollTracking() {
@@ -230,10 +285,3 @@ class SIENavigationComponent {
     }
 }
 
-// eslint-disable-next-line no-unused-vars -- called from HTML onclick
-function scrollToSection(sectionId) {
-    const section = document.getElementById(sectionId);
-    if (section) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-}
