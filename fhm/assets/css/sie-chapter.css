@@ -1193,6 +1193,75 @@ code {
 }
 
 /* ============================================
+   Audio Library Sections & Exam Review Variant
+   ============================================ */
+.audio-library__section {
+    margin-bottom: var(--fh-space-3xl);
+}
+
+.audio-library__section-header {
+    margin-bottom: var(--fh-space-lg);
+}
+
+.audio-library__section-title {
+    font-family: var(--fh-font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fh-gray-500);
+    border-bottom: 1px solid var(--fh-gray-200);
+    padding-bottom: var(--fh-space-sm);
+    margin: 0 0 var(--fh-space-xs);
+}
+
+.audio-library__section-desc {
+    font-size: 0.875rem;
+    color: var(--fh-gray-500);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Exam Review badge — burgundy accent */
+.audio-card__chapter--review {
+    background: var(--fh-burgundy, #6b2737);
+}
+
+/* Topic chips */
+.audio-card__topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: var(--fh-space-md);
+}
+
+.audio-card__topics span {
+    font-family: var(--fh-font-mono);
+    font-size: 0.675rem;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 3px;
+    border: 1px solid var(--fh-gray-200);
+    color: var(--fh-gray-600);
+    white-space: nowrap;
+}
+
+/* Night mode: exam review & topics */
+body.night-mode .audio-card__chapter--review {
+    background: #a0475a;
+    color: #fff;
+}
+
+body.night-mode .audio-card__topics span {
+    border-color: var(--fh-gray-300);
+    color: var(--fh-gray-400);
+}
+
+body.night-mode .audio-library__section-title {
+    border-color: var(--fh-gray-300);
+}
+
+/* ============================================
    Back to Top Button
    ============================================ */
 .back-to-top {
