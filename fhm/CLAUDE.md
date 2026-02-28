@@ -88,6 +88,44 @@ For detailed guidelines, see `/fhm/design/brand/brand-voice.md`.
 
 ---
 
+## Audio Files
+
+Audio files live in `assets/audio/` and are organized by type:
+
+```
+assets/audio/
+├── chapters/          # Chapter deep-dive podcasts (by chapter number)
+│   ├── ch1/
+│   ├── ch6/
+│   └── ...
+└── exam-reviews/      # Wrong-answer review podcasts (by score milestone)
+    └── Why_Common_Sense_Fails_the_Series_7.m4a
+```
+
+### Web Optimization (Required)
+
+All `.m4a` files **must** be optimized for web streaming before deployment. This moves the moov atom
+(metadata) to the front of the file so browsers can determine duration and enable seeking without
+downloading the entire file first.
+
+**Symptom of un-optimized files:** Audio appears to cut off after ~4 minutes, incorrect duration
+shown, or seeking fails on longer files.
+
+**Fix — run on every new audio file before committing:**
+
+```bash
+ffmpeg -i input.m4a -c copy -movflags +faststart output.m4a
+```
+
+This re-muxes only (no re-encoding, no quality loss, same file size). Verify with:
+
+```bash
+afinfo output.m4a | grep optimized
+# Should say "optimized" (NOT "not optimized")
+```
+
+---
+
 ## Screenshot Policy
 
 Course screenshots are copyrighted and must **never** be published online. They are stored locally
