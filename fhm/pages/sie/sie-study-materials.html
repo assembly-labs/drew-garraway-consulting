@@ -279,6 +279,101 @@
                 font-size: 0.875rem;
             }
 
+            /* Search Component */
+            .search-wrapper {
+                position: relative;
+                max-width: 560px;
+                margin: 0 auto;
+            }
+            .search-input {
+                width: 100%;
+                padding: var(--fh-space-md) var(--fh-space-lg);
+                padding-left: 2.75rem;
+                font-family: var(--fh-font-body);
+                font-size: 1rem;
+                color: var(--fh-gray-900);
+                background: var(--fh-white);
+                border: 2px solid var(--fh-gray-200);
+                border-radius: 8px;
+                outline: none;
+                transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            }
+            .search-input::placeholder { color: var(--fh-gray-400, #8a8a8a); }
+            .search-input:focus {
+                border-color: var(--fh-navy);
+                box-shadow: 0 0 0 3px rgba(0, 45, 98, 0.1);
+            }
+            .search-icon {
+                position: absolute;
+                left: var(--fh-space-md);
+                top: 50%;
+                transform: translateY(-50%);
+                width: 20px;
+                height: 20px;
+                color: var(--fh-gray-400, #8a8a8a);
+                pointer-events: none;
+            }
+            .search-input:focus ~ .search-icon { color: var(--fh-navy); }
+            .search-shortcut {
+                position: absolute;
+                right: var(--fh-space-md);
+                top: 50%;
+                transform: translateY(-50%);
+                font-family: var(--fh-font-mono);
+                font-size: 0.75rem;
+                color: var(--fh-gray-400, #8a8a8a);
+                background: var(--fh-gray-100);
+                padding: 2px 6px;
+                border-radius: 4px;
+                border: 1px solid var(--fh-gray-200);
+                pointer-events: none;
+            }
+            .search-input:focus ~ .search-shortcut { opacity: 0; }
+            .search-results {
+                position: absolute;
+                top: calc(100% + 4px);
+                left: 0; right: 0;
+                background: var(--fh-white);
+                border: 1px solid var(--fh-gray-200);
+                border-radius: 8px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+                max-height: 420px;
+                overflow-y: auto;
+                z-index: 100;
+                opacity: 0; visibility: hidden;
+                transform: translateY(-4px);
+                transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+            }
+            .search-results--visible { opacity: 1; visibility: visible; transform: translateY(0); }
+            .search-result {
+                display: block;
+                padding: var(--fh-space-md) var(--fh-space-lg);
+                text-decoration: none;
+                border-bottom: 1px solid var(--fh-gray-100);
+            }
+            .search-result:last-child { border-bottom: none; }
+            .search-result:hover, .search-result--active { background: var(--fh-gray-100); }
+            .search-result__header { display: flex; align-items: center; gap: var(--fh-space-sm); flex-wrap: wrap; }
+            .search-result__title { font-family: var(--fh-font-display); font-size: 1rem; font-weight: 500; color: var(--fh-navy); }
+            .search-result__badges { display: flex; gap: 4px; }
+            .search-result__badge {
+                display: inline-block; padding: 1px 6px; font-size: 0.7rem; font-weight: 600;
+                text-transform: uppercase; letter-spacing: 0.05em; border-radius: 3px; line-height: 1.5;
+            }
+            .search-result__badge--series-7 { background: var(--fh-gold); color: var(--fh-white); }
+            .search-result__badge--sie { background: var(--fh-sage); color: var(--fh-white); }
+            .search-result__badge--type { background: var(--fh-gray-200); color: var(--fh-gray-700); }
+            .search-result__snippet { font-size: 0.875rem; color: var(--fh-gray-600); line-height: 1.5; margin-top: 2px; margin-bottom: 0; }
+            .search-result mark { background: rgba(176, 141, 87, 0.25); color: inherit; padding: 0 1px; border-radius: 2px; }
+            .search-empty { padding: var(--fh-space-xl) var(--fh-space-lg); text-align: center; }
+            .search-empty p { font-size: 0.95rem; color: var(--fh-gray-600); margin-bottom: var(--fh-space-xs); }
+            .search-empty__hint { font-size: 0.85rem; color: var(--fh-gray-500); }
+            .search-overlay {
+                position: fixed; inset: 0; background: rgba(0,0,0,0.15); z-index: 50;
+                opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s;
+            }
+            .search-overlay--visible { opacity: 1; visibility: visible; }
+
             /* Responsive */
             @media (max-width: 768px) {
                 .nav {
@@ -352,6 +447,24 @@
                     </p>
                     <span class="progress-badge">7 of 16 Chapters Available</span>
                 </div>
+
+                <!-- Search -->
+                <div class="search-wrapper" style="margin-bottom: var(--fh-space-2xl)">
+                    <input
+                        type="search"
+                        id="training-search"
+                        class="search-input"
+                        placeholder="Search chapters and study tools..."
+                        autocomplete="off"
+                        aria-label="Search SIE content"
+                    >
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <span class="search-shortcut">/</span>
+                    <div id="search-results" class="search-results" role="listbox"></div>
+                </div>
+                <div id="search-overlay" class="search-overlay"></div>
 
                 <!-- Visual Learning Tools -->
                 <div
@@ -631,6 +744,17 @@
         <script>
             // Initialize navigation for this page
             const navigation = new SIENavigationComponent('sie-study-materials.html');
+        </script>
+
+        <!-- Search -->
+        <script src="../../assets/js/search.js"></script>
+        <script>
+            FHMSearch.init({
+                inputId: 'training-search',
+                resultsId: 'search-results',
+                overlayId: 'search-overlay',
+                indexUrl: '../../assets/data/search-index.json'
+            });
         </script>
     </body>
 </html>
