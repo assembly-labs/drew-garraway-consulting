@@ -1,46 +1,42 @@
 /**
- * FHM Training Search
+ * FHM Global Search — Command Palette
  *
- * Client-side full-text search across all training content.
- * Loads a pre-built JSON index and matches against titles,
- * descriptions, key terms, headings, and body text.
+ * Self-initializing: injects a search button into the page header
+ * and creates a modal overlay. Works on every page automatically.
+ * Loads the search index from a path relative to this script's location.
  */
 
 (function () {
   'use strict';
 
-  let searchIndex = null;
-  let searchInput = null;
-  let resultsContainer = null;
-  let overlay = null;
-  let activeIndex = -1;
-  let debounceTimer = null;
+  var searchIndex = null;
+  var modal = null;
+  var overlay = null;
+  var input = null;
+  var resultsContainer = null;
+  var activeIndex = -1;
+  var debounceTimer = null;
 
-  /**
-   * Normalize text for matching: lowercase, collapse whitespace
-   */
+  // ── Utilities ──
+
   function normalize(text) {
     return (text || '').toLowerCase().replace(/\s+/g, ' ').trim();
   }
 
-  /**
-   * Tokenize a query into individual words
-   */
   function tokenize(query) {
-    return normalize(query)
-      .split(/\s+/)
-      .filter(function (w) {
-        return w.length > 1;
-      });
+    return normalize(query).split(/\s+/).filter(function (w) { return w.length > 1; });
   }
 
-  /**
-   * Score a document against query tokens.
-   * Higher score = better match. Returns 0 for no match.
-   */
+  function escapeHtml(text) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(text));
+    return div.innerHTML;
+  }
+
+  // ── Scoring ──
+
   function scoreDocument(doc, tokens) {
     if (tokens.length === 0) return 0;
-
     var score = 0;
     var matched = 0;
     var titleNorm = normalize(doc.title);
@@ -53,131 +49,73 @@
       var token = tokens[i];
       var tokenMatched = false;
 
-      // Title match (highest weight)
-      if (titleNorm.indexOf(token) !== -1) {
-        score += 10;
-        tokenMatched = true;
-      }
+      if (titleNorm.indexOf(token) !== -1) { score += 10; tokenMatched = true; }
 
-      // Key term match (very high weight)
       for (var t = 0; t < termsNorm.length; t++) {
-        if (termsNorm[t].indexOf(token) !== -1) {
-          score += 8;
-          tokenMatched = true;
-          break;
-        }
+        if (termsNorm[t].indexOf(token) !== -1) { score += 8; tokenMatched = true; break; }
       }
 
-      // Description match
-      if (descNorm.indexOf(token) !== -1) {
-        score += 5;
-        tokenMatched = true;
-      }
+      if (descNorm.indexOf(token) !== -1) { score += 5; tokenMatched = true; }
 
-      // Heading match
       for (var h = 0; h < headingsNorm.length; h++) {
-        if (headingsNorm[h].indexOf(token) !== -1) {
-          score += 4;
-          tokenMatched = true;
-          break;
-        }
+        if (headingsNorm[h].indexOf(token) !== -1) { score += 4; tokenMatched = true; break; }
       }
 
-      // Body text match (lowest weight)
-      if (bodyNorm.indexOf(token) !== -1) {
-        score += 2;
-        tokenMatched = true;
-      }
+      if (bodyNorm.indexOf(token) !== -1) { score += 2; tokenMatched = true; }
 
       if (tokenMatched) matched++;
     }
 
-    // Require all tokens to match at least somewhere
     if (matched < tokens.length) return 0;
-
-    // Bonus for chapters (more useful than tool pages)
     if (doc.type === 'chapter') score += 1;
-
     return score;
   }
 
-  /**
-   * Search the index and return ranked results
-   */
   function search(query) {
     if (!searchIndex || !searchIndex.documents) return [];
-
     var tokens = tokenize(query);
     if (tokens.length === 0) return [];
 
     var results = [];
     var docs = searchIndex.documents;
-
     for (var i = 0; i < docs.length; i++) {
       var s = scoreDocument(docs[i], tokens);
-      if (s > 0) {
-        results.push({ doc: docs[i], score: s });
-      }
+      if (s > 0) results.push({ doc: docs[i], score: s });
     }
-
-    results.sort(function (a, b) {
-      return b.score - a.score;
-    });
-
+    results.sort(function (a, b) { return b.score - a.score; });
     return results.slice(0, 8);
   }
 
-  /**
-   * Build a readable label for the exam badge
-   */
+  // ── Display Helpers ──
+
   function examLabel(exam) {
     if (exam === 'series-7') return 'Series 7';
     if (exam === 'sie') return 'SIE';
     return '';
   }
 
-  /**
-   * Build the result type label
-   */
   function typeLabel(doc) {
-    if (doc.type === 'chapter' && doc.chapter != null) {
-      return 'Ch. ' + doc.chapter;
-    }
+    if (doc.type === 'chapter' && doc.chapter != null) return 'Ch. ' + doc.chapter;
     if (doc.type === 'tool') return 'Study Tool';
     return '';
   }
 
-  /**
-   * Highlight matching tokens in text
-   */
   function highlightText(text, tokens) {
     if (!text || tokens.length === 0) return text;
-    var escaped = tokens.map(function (t) {
-      return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    });
+    var escaped = tokens.map(function (t) { return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); });
     var pattern = new RegExp('(' + escaped.join('|') + ')', 'gi');
     return text.replace(pattern, '<mark>$1</mark>');
   }
 
-  /**
-   * Find the best snippet from body text containing query tokens
-   */
   function findSnippet(doc, tokens) {
-    // Prefer description if it matches
     var descNorm = normalize(doc.description);
-    var descMatches = tokens.some(function (t) {
-      return descNorm.indexOf(t) !== -1;
-    });
+    var descMatches = tokens.some(function (t) { return descNorm.indexOf(t) !== -1; });
     if (descMatches && doc.description) {
-      return doc.description.length > 120
-        ? doc.description.slice(0, 120) + '\u2026'
-        : doc.description;
+      return doc.description.length > 120 ? doc.description.slice(0, 120) + '\u2026' : doc.description;
     }
 
-    // Otherwise pull from body
     var body = doc.body || '';
     var bodyLower = body.toLowerCase();
-
     for (var i = 0; i < tokens.length; i++) {
       var pos = bodyLower.indexOf(tokens[i]);
       if (pos !== -1) {
@@ -190,65 +128,64 @@
       }
     }
 
-    // Fallback: description or first 120 chars of body
     if (doc.description) {
-      return doc.description.length > 120
-        ? doc.description.slice(0, 120) + '\u2026'
-        : doc.description;
+      return doc.description.length > 120 ? doc.description.slice(0, 120) + '\u2026' : doc.description;
     }
     return body.slice(0, 120) + (body.length > 120 ? '\u2026' : '');
   }
 
+  // ── URL Resolution ──
+
   /**
-   * Resolve URL relative to current page location
+   * Resolve a search-index URL (relative to fhm/ root) to the current page.
    */
   function resolveUrl(relativeUrl) {
-    // The search-index stores paths relative to fhm/ root like "pages/series-7/file.html"
-    // We need to resolve relative to the current page.
-    // If we're at pages/training/index.html, we need ../../ prefix
-    // Use a base URL approach
+    // relativeUrl is like "pages/series-7/file.html"
+    // We need to resolve relative to current page depth from fhm/
     var currentPath = window.location.pathname;
-
-    // Count depth from fhm root by finding how deep we are
-    // Look for known path segments
     var fhmIdx = currentPath.indexOf('/fhm/');
     if (fhmIdx !== -1) {
-      var afterFhm = currentPath.slice(fhmIdx + 5); // after /fhm/
-      var depth = afterFhm.split('/').length - 1; // number of directory levels
+      var afterFhm = currentPath.slice(fhmIdx + 5);
+      var depth = afterFhm.split('/').length - 1;
       var prefix = '';
-      for (var i = 0; i < depth; i++) {
-        prefix += '../';
-      }
+      for (var i = 0; i < depth; i++) prefix += '../';
       return prefix + relativeUrl;
     }
-
-    // Fallback: assume we're 2 levels deep (pages/training/)
-    return '../../' + relativeUrl;
+    return relativeUrl;
   }
 
   /**
-   * Render search results into the dropdown
+   * Resolve the search index URL relative to this script's own location.
    */
-  function renderResults(results, query) {
-    if (!resultsContainer) return;
+  function getIndexUrl() {
+    // Script is at assets/js/search.js, index is at assets/data/search-index.json
+    // Find our own script tag to determine path
+    var scripts = document.querySelectorAll('script[src*="search.js"]');
+    if (scripts.length > 0) {
+      var src = scripts[scripts.length - 1].getAttribute('src');
+      return src.replace(/js\/search\.js.*$/, 'data/search-index.json');
+    }
+    // Fallback: try relative to fhm root
+    return resolveUrl('assets/data/search-index.json');
+  }
 
+  // ── Modal Rendering ──
+
+  function renderResults(results, query) {
     var tokens = tokenize(query);
     activeIndex = -1;
 
     if (results.length === 0 && query.length > 0) {
       resultsContainer.innerHTML =
-        '<div class="search-empty">' +
-        '<p>No results for "<strong>' +
-        escapeHtml(query) +
-        '</strong>"</p>' +
-        '<p class="search-empty__hint">Try broader terms like "options", "bonds", or "margin"</p>' +
+        '<div class="search-modal__empty">' +
+        '<p>No results for "<strong>' + escapeHtml(query) + '</strong>"</p>' +
+        '<p class="search-modal__empty-hint">Try broader terms like "options", "bonds", or "margin"</p>' +
         '</div>';
-      showResults();
       return;
     }
 
     if (results.length === 0) {
-      hideResults();
+      resultsContainer.innerHTML = '';
       return;
     }
 
@@ -261,15 +198,9 @@
       var type = typeLabel(doc);
 
       html +=
-        '<a href="' +
-        escapeHtml(url) +
-        '" class="search-result" data-index="' +
-        i +
-        '">' +
+        '<a href="' + escapeHtml(url) + '" class="search-result" data-index="' + i + '">' +
         '<div class="search-result__header">' +
-        '<span class="search-result__title">' +
-        highlightText(escapeHtml(doc.title), tokens) +
-        '</span>' +
+        '<span class="search-result__title">' + highlightText(escapeHtml(doc.title), tokens) + '</span>' +
         (exam || type
           ? '<span class="search-result__badges">' +
             (exam ? '<span class="search-result__badge search-result__badge--' + doc.exam + '">' + exam + '</span>' : '') +
@@ -277,70 +208,15 @@
             '</span>'
           : '') +
         '</div>' +
-        '<p class="search-result__snippet">' +
-        highlightText(escapeHtml(snippet), tokens) +
-        '</p>' +
+        '<p class="search-result__snippet">' + highlightText(escapeHtml(snippet), tokens) + '</p>' +
         '</a>';
     }
 
     resultsContainer.innerHTML = html;
-    showResults();
   }
 
-  /**
-   * Escape HTML special characters
-   */
-  function escapeHtml(text) {
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(text));
-    return div.innerHTML;
-  }
-
-  /**
-   * Show the results dropdown + overlay
-   */
-  function showResults() {
-    if (resultsContainer) resultsContainer.classList.add('search-results--visible');
-    if (overlay) overlay.classList.add('search-overlay--visible');
-  }
-
-  /**
-   * Hide the results dropdown + overlay
-   */
-  function hideResults() {
-    if (resultsContainer) resultsContainer.classList.remove('search-results--visible');
-    if (overlay) overlay.classList.remove('search-overlay--visible');
-    activeIndex = -1;
-  }
-
-  /**
-   * Handle keyboard navigation in results
-   */
-  function handleKeydown(e) {
-    var items = resultsContainer ? resultsContainer.querySelectorAll('.search-result') : [];
-    if (items.length === 0) return;
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      activeIndex = Math.min(activeIndex + 1, items.length - 1);
-      updateActiveItem(items);
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      activeIndex = Math.max(activeIndex - 1, -1);
-      updateActiveItem(items);
-    } else if (e.key === 'Enter' && activeIndex >= 0) {
-      e.preventDefault();
-      items[activeIndex].click();
-    } else if (e.key === 'Escape') {
-      hideResults();
-      searchInput.blur();
-    }
-  }
-
-  /**
-   * Update visual active state for keyboard navigation
-   */
-  function updateActiveItem(items) {
+  function updateActiveItem() {
+    var items = resultsContainer.querySelectorAll('.search-result');
     for (var i = 0; i < items.length; i++) {
       items[i].classList.toggle('search-result--active', i === activeIndex);
     }
@@ -349,102 +225,204 @@
     }
   }
 
-  /**
-   * Debounced input handler
-   */
-  function handleInput() {
-    clearTimeout(debounceTimer);
-    var query = searchInput.value.trim();
+  // ── Modal Control ──
 
-    if (query.length < 2) {
-      hideResults();
+  function openModal() {
+    overlay.classList.add('search-modal-overlay--visible');
+    modal.classList.add('search-modal--visible');
+    input.value = '';
+    resultsContainer.innerHTML = '';
+    activeIndex = -1;
+    setTimeout(function () { input.focus(); }, 50);
+  }
+
+  function closeModal() {
+    overlay.classList.remove('search-modal-overlay--visible');
+    modal.classList.remove('search-modal--visible');
+    activeIndex = -1;
+  }
+
+  function isOpen() {
+    return modal.classList.contains('search-modal--visible');
+  }
+
+  // ── DOM Injection ──
+
+  var SVG_SEARCH = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>';
+
+  function injectTriggerButton() {
+    // Try nav-style header first (hub pages)
+    var nav = document.querySelector('header .nav');
+    if (nav) {
+      var btn = document.createElement('button');
+      btn.className = 'search-trigger';
+      btn.setAttribute('aria-label', 'Search training content');
+      btn.innerHTML =
+        '<span class="search-trigger__icon">' + SVG_SEARCH + '</span>' +
+        '<span class="search-trigger__shortcut">/</span>';
+      btn.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
+      nav.appendChild(btn);
       return;
     }
 
-    debounceTimer = setTimeout(function () {
-      var results = search(query);
-      renderResults(results, query);
-    }, 150);
+    // Chapter-style header (breadcrumb pages)
+    var headerInner = document.querySelector('.header__inner');
+    if (headerInner) {
+      var btn = document.createElement('button');
+      btn.className = 'search-trigger';
+      btn.setAttribute('aria-label', 'Search training content');
+      btn.innerHTML =
+        '<span class="search-trigger__icon">' + SVG_SEARCH + '</span>' +
+        '<span class="search-trigger__shortcut">/</span>';
+      btn.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
+      // Place it beside the breadcrumb
+      headerInner.style.display = 'flex';
+      headerInner.style.justifyContent = 'space-between';
+      headerInner.style.alignItems = 'flex-start';
+      headerInner.appendChild(btn);
+      return;
+    }
+
+    // Last resort: append to first header
+    var header = document.querySelector('header');
+    if (header) {
+      var btn = document.createElement('button');
+      btn.className = 'search-trigger';
+      btn.setAttribute('aria-label', 'Search training content');
+      btn.innerHTML =
+        '<span class="search-trigger__icon">' + SVG_SEARCH + '</span>' +
+        '<span class="search-trigger__shortcut">/</span>';
+      btn.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
+      var container = header.querySelector('.container') || header;
+      container.appendChild(btn);
+    }
   }
 
-  /**
-   * Load the search index JSON
-   */
-  function loadIndex(indexUrl) {
+  function injectModal() {
+    // Overlay
+    overlay = document.createElement('div');
+    overlay.className = 'search-modal-overlay';
+    overlay.addEventListener('click', closeModal);
+
+    // Modal
+    modal = document.createElement('div');
+    modal.className = 'search-modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-label', 'Search training content');
+
+    modal.innerHTML =
+      '<div class="search-modal__input-wrap">' +
+        '<span class="search-modal__icon">' + SVG_SEARCH + '</span>' +
+        '<input type="search" class="search-modal__input" placeholder="Search chapters, terms, and study tools..." autocomplete="off" aria-label="Search">' +
+        '<button class="search-modal__close" aria-label="Close search">esc</button>' +
+      '</div>' +
+      '<div class="search-modal__results" role="listbox"></div>' +
+      '<div class="search-modal__footer">' +
+        '<span><kbd>↑</kbd> <kbd>↓</kbd> navigate</span>' +
+        '<span><kbd>↵</kbd> open</span>' +
+        '<span><kbd>esc</kbd> close</span>' +
+      '</div>';
+
+    document.body.appendChild(overlay);
+    document.body.appendChild(modal);
+
+    input = modal.querySelector('.search-modal__input');
+    resultsContainer = modal.querySelector('.search-modal__results');
+
+    var closeBtn = modal.querySelector('.search-modal__close');
+    closeBtn.addEventListener('click', closeModal);
+
+    // Input handler
+    input.addEventListener('input', function () {
+      clearTimeout(debounceTimer);
+      var query = input.value.trim();
+      if (query.length < 2) {
+        resultsContainer.innerHTML = '';
+        return;
+      }
+      debounceTimer = setTimeout(function () {
+        renderResults(search(query), query);
+      }, 150);
+    });
+
+    // Keyboard navigation within modal
+    input.addEventListener('keydown', function (e) {
+      var items = resultsContainer.querySelectorAll('.search-result');
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIndex = Math.min(activeIndex + 1, items.length - 1);
+        updateActiveItem();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIndex = Math.max(activeIndex - 1, -1);
+        updateActiveItem();
+      } else if (e.key === 'Enter' && activeIndex >= 0 && items[activeIndex]) {
+        e.preventDefault();
+        items[activeIndex].click();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        closeModal();
+      }
+    });
+  }
+
+  function bindGlobalShortcuts() {
+    document.addEventListener('keydown', function (e) {
+      // Don't trigger when typing in inputs/textareas (unless it's our search input)
+      var tag = document.activeElement.tagName;
+      var isTyping = tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement.isContentEditable;
+
+      // Cmd/Ctrl+K always opens
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        if (isOpen()) { closeModal(); } else { openModal(); }
+        return;
+      }
+
+      // / opens when not typing
+      if (e.key === '/' && !e.ctrlKey && !e.metaKey && !isTyping) {
+        e.preventDefault();
+        openModal();
+        return;
+      }
+
+      // Escape closes
+      if (e.key === 'Escape' && isOpen()) {
+        e.preventDefault();
+        closeModal();
+      }
+    });
+  }
+
+  // ── Index Loading ──
+
+  function loadIndex() {
+    var url = getIndexUrl();
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', indexUrl, true);
+    xhr.open('GET', url, true);
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
-        try {
-          searchIndex = JSON.parse(xhr.responseText);
-        } catch (e) {
-          console.error('Failed to parse search index:', e);
-        }
+        try { searchIndex = JSON.parse(xhr.responseText); }
+        catch (e) { console.error('FHMSearch: failed to parse index', e); }
       }
     };
     xhr.send();
   }
 
-  /**
-   * Initialize the search component.
-   * Call this after the DOM is ready, passing the base URL for the index.
-   *
-   * @param {Object} opts
-   * @param {string} opts.inputId - ID of the search <input>
-   * @param {string} opts.resultsId - ID of the results container
-   * @param {string} opts.overlayId - ID of the overlay element
-   * @param {string} opts.indexUrl - URL to search-index.json
-   */
-  function init(opts) {
-    searchInput = document.getElementById(opts.inputId);
-    resultsContainer = document.getElementById(opts.resultsId);
-    overlay = document.getElementById(opts.overlayId);
+  // ── Init ──
 
-    if (!searchInput || !resultsContainer) {
-      console.warn('Search: missing input or results container');
-      return;
-    }
-
-    loadIndex(opts.indexUrl);
-
-    searchInput.addEventListener('input', handleInput);
-    searchInput.addEventListener('keydown', handleKeydown);
-    searchInput.addEventListener('focus', function () {
-      if (searchInput.value.trim().length >= 2) {
-        handleInput();
-      }
-    });
-
-    if (overlay) {
-      overlay.addEventListener('click', function () {
-        hideResults();
-      });
-    }
-
-    // Close on click outside
-    document.addEventListener('click', function (e) {
-      var wrapper = searchInput.closest('.search-wrapper');
-      if (wrapper && !wrapper.contains(e.target)) {
-        hideResults();
-      }
-    });
-
-    // Keyboard shortcut: / to focus search
-    document.addEventListener('keydown', function (e) {
-      if (
-        e.key === '/' &&
-        !e.ctrlKey &&
-        !e.metaKey &&
-        document.activeElement !== searchInput &&
-        document.activeElement.tagName !== 'INPUT' &&
-        document.activeElement.tagName !== 'TEXTAREA'
-      ) {
-        e.preventDefault();
-        searchInput.focus();
-      }
-    });
+  function init() {
+    injectModal();
+    injectTriggerButton();
+    bindGlobalShortcuts();
+    loadIndex();
   }
 
-  // Expose the init function globally
-  window.FHMSearch = { init: init };
+  // Auto-initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
