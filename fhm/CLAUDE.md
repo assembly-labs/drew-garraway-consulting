@@ -126,6 +126,25 @@ afinfo output.m4a | grep optimized
 
 ---
 
+## Global Search
+
+FHM has a global command palette search accessible from every page via a nav button, `/` key, or `Cmd+K`.
+
+**When adding new content pages:**
+1. Add `<link rel="stylesheet" href="../../assets/css/search.css">` before `</head>`
+2. Add `<script src="../../assets/js/search.js"></script>` before `</body>`
+3. Regenerate the search index: `node scripts/generate-search-index.js`
+
+The search index (`assets/data/search-index.json`) is built from all HTML files in `pages/series-7/` and `pages/sie/` plus `pages/training/index.html`. To add new content directories to the index, update `collectFiles()` in `scripts/generate-search-index.js`.
+
+**Key files:**
+- `assets/js/search.js` — self-initializing, injects button + modal into DOM
+- `assets/css/search.css` — modal/command palette styles
+- `assets/data/search-index.json` — pre-built search index (61 documents)
+- `scripts/generate-search-index.js` — index generation script
+
+---
+
 ## Screenshot Policy
 
 Course screenshots are copyrighted and must **never** be published online. They are stored locally
