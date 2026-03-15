@@ -16,9 +16,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Prepare deploy directory
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          [ -f products.html ] && cp products.html _site/ || true
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy index.html --project-name=drewgarraway --commit-dirty=true
+          command: pages deploy _site --project-name=drewgarraway --commit-dirty=true
