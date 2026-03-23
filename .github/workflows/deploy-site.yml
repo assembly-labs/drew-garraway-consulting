@@ -1,0 +1,76 @@
+name: Deploy Site to Cloudflare Pages
+
+# Triggers when any deployable content changes on main
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'fhm/**'
+      - 'kaijutsu/**'
+      - 'read-out-loud/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      # --- Build FHM (only project that needs a build step) ---
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: fhm/package-lock.json
+
+      - name: Build FHM
+        working-directory: fhm
+        run: |
+          npm ci
+          npm run build
+
+      # --- Assemble _site/ directory ---
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+
+          # Root files
+          cp index.html _site/
+          [ -f robots.txt ] && cp robots.txt _site/ || true
+          [ -f sitemap.xml ] && cp sitemap.xml _site/ || true
+
+          # FHM — only web-servable files (no source, no dev tooling)
+          mkdir -p _site/fhm
+          cp fhm/index.html _site/fhm/
+          [ -f fhm/robots.txt ] && cp fhm/robots.txt _site/fhm/ || true
+          cp -r fhm/assets _site/fhm/
+          cp -r fhm/pages _site/fhm/
+
+          # Kaijutsu — static HTML + images
+          mkdir -p _site/kaijutsu
+          cp kaijutsu/index.html _site/kaijutsu/
+          cp kaijutsu/*.png _site/kaijutsu/ 2>/dev/null || true
+
+          # Read Out Loud — static PWA
+          mkdir -p _site/read-out-loud
+          cp read-out-loud/index.html _site/read-out-loud/
+          cp -r read-out-loud/css _site/read-out-loud/
+          cp -r read-out-loud/js _site/read-out-loud/
+          cp -r read-out-loud/icons _site/read-out-loud/
+          cp read-out-loud/manifest.json _site/read-out-loud/
+          cp read-out-loud/sw.js _site/read-out-loud/
+          [ -f read-out-loud/_headers ] && cp read-out-loud/_headers _site/read-out-loud/ || true
+          [ -f read-out-loud/_redirects ] && cp read-out-loud/_redirects _site/read-out-loud/ || true
+
+      # --- Deploy to Cloudflare Pages ---
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy _site --project-name=drewgarraway --commit-dirty=true
