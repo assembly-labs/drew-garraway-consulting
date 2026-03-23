@@ -1,6 +1,6 @@
 # BJJ Voice Logging System
 
-## Feature Specification v1.0
+## Feature Specification v1.1 (Updated March 2026)
 
 ---
 
@@ -66,20 +66,22 @@ Users have ~90 seconds of willingness post-training. Every question we ask spend
 
 | Field | Source | Why It Matters |
 |-------|--------|----------------|
-| Techniques worked | Voice extraction | Maps to curriculum, identifies gaps |
-| Positions covered | Voice extraction | Builds positional heat map |
-| Sparring outcomes | Voice extraction | Performance trending |
-| What worked | Voice extraction | Confidence/success patterns |
-| What didn't work | Voice extraction | Focus area identification |
+| Techniques drilled | Voice extraction | Maps to curriculum, identifies gaps |
+| Submissions given | Voice extraction | Offensive game tracking (type + count) |
+| Submissions received | Voice extraction | Defensive gap identification (type + count) |
+| Injuries | Voice extraction | Body tracking, training load management |
+| Warm-up | Voice extraction | Habit tracking, injury correlation |
+| Instructor | Voice extraction | Track who teaches what, correlate with progress |
+
+> **v1.1 Note:** `worked_well`, `struggles`, `energy_level`, and `mood` were originally in Tier 2-3 but have been deferred from the MVP. These are captured in `rawNotes` instead of as separate structured fields. Focus is on basics that white/blue belts care about.
 
 ### Tier 3: Context (Enrichment Only)
 
 | Field | Source | Why It Matters |
 |-------|--------|----------------|
 | Training partners | Voice extraction | Skill-relative performance |
-| Physical state | Voice extraction | Injury tracking, fatigue patterns |
-| Energy/mood | Voice extraction | Correlates mental state to performance |
-| Class type | Voice extraction | Competition class vs fundamentals vs open mat |
+| Session kind | Voice extraction or tap | Competition class vs fundamentals vs open mat |
+| Lesson topic | Voice extraction | What class focused on |
 
 ---
 
@@ -427,21 +429,20 @@ You are extracting structured data from a BJJ practitioner's voice note about th
 
 Extract the following fields. If a field cannot be determined, leave it null. Be aggressive about inferring—it's better to extract something than nothing.
 
-Fields:
-- duration_minutes (integer or null)
-- training_type (enum: "gi", "nogi", "both", null)
-- sparring (boolean or null)
-- sparring_rounds (integer or null)
-- techniques (array of strings)
-- positions (array of strings)
-- submissions_given (array of {technique, partner?})
-- submissions_received (array of {technique, partner?})
-- worked_well (array of strings)
-- struggled_with (array of strings)
-- training_partners (array of strings)
-- injuries (array of {body_part, severity?, notes?})
-- energy_level (enum: "high", "medium", "low", null)
-- notes (string, anything else notable)
+Fields (v1.1):
+- trainingMode (enum: "gi", "nogi", "other", null)
+- durationMinutes (integer or null)
+- warmedUp (boolean or null)
+- techniquesDrilled (array of strings)
+- didSpar (boolean or null)
+- sparringRounds (integer or null)
+- submissionsGiven (array of {type: string, count: number})
+- submissionsReceived (array of {type: string, count: number})
+- injuries (array of strings)
+- instructor (string or null)
+- sessionKind (enum: "class", "open_mat", "drilling", "competition", "other", null)
+- lessonTopic (string or null)
+- rawNotes (string — concise 1-3 sentence journal entry in first person)
 
 Transcript:
 {transcript}
@@ -456,3 +457,4 @@ Output valid JSON only.
 | Version | Date | Changes |
 |---------|------|---------|
 | 1.0 | Dec 2024 | Initial specification |
+| 1.1 | Mar 2026 | Updated data tiers and extraction schema for v1.1 data model. Removed worked_well, struggles, energy_level, mood. Added warmedUp, instructor, submissions (typed with count). Updated sample extraction prompt. |

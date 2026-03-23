@@ -1,0 +1,926 @@
+/**
+ * Onboarding Screen 3: Your Training
+ *
+ * Redesigned gym picker: location soft-ask → nearby gyms / inline autocomplete.
+ * No modal. Everything inline.
+ *
+ * Also: frequency picker, optional goals + experience.
+ */
+
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  Animated,
+  ActivityIndicator,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { OnboardingStackParamList } from '../../navigation/OnboardingNavigator';
+import { colors, spacing, radius } from '../../config/design-tokens';
+import { Icons } from '../../components/Icons';
+import { haptics } from '../../utils/haptics';
+import { useLocation } from '../../hooks/useLocation';
+import { findNearbyGyms, searchGyms, type GymWithDistance } from '../../services/gymService';
+import { OnboardingProgressBar } from '../../components/OnboardingProgressBar';
+import type { LocationPermission } from '../../types/mvp-types';
+
+type Props = NativeStackScreenProps<OnboardingStackParamList, 'YourTraining'>;
+
+const FREQUENCY_OPTIONS = [
+  { label: '1-2x / week', value: 2 },
+  { label: '3-4x / week', value: 4 },
+  { label: '5+ / week', value: 5 },
+];
+
+const GOAL_OPTIONS = ['Competition', 'Fitness', 'Hobby', 'Mental Health'];
+
+const EXPERIENCE_OPTIONS = [
+  { label: 'New (< 6 months)', value: 'new' },
+  { label: 'Beginner (6mo - 2yr)', value: 'beginner' },
+  { label: 'Intermediate (2 - 5yr)', value: 'intermediate' },
+  { label: 'Experienced (5+ yr)', value: 'experienced' },
+];
+
+type GymPickerState = 'soft-ask' | 'loading-nearby' | 'nearby' | 'text-only';
+
+interface SelectedGym {
+  id: string | null;
+  name: string;
+  isCustom: boolean;
+  city?: string;
+  state?: string;
+  affiliation?: string;
+  lat?: number;
+  lng?: number;
+}
+
+export function YourTrainingScreen({ navigation, route }: Props) {
+  const { name, belt, stripes } = route.params;
+
+  // Location
+  const location = useLocation();
+
+  // Gym picker state
+  const [gymPickerState, setGymPickerState] = useState<GymPickerState>('soft-ask');
+  const [nearbyGyms, setNearbyGyms] = useState<GymWithDistance[]>([]);
+  const [selectedGym, setSelectedGym] = useState<SelectedGym | null>(null);
+  const [gymSearchText, setGymSearchText] = useState('');
+  const [autocompleteResults, setAutocompleteResults] = useState<GymWithDistance[]>([]);
+  const [showAutocomplete, setShowAutocomplete] = useState(false);
+
+  // Other fields
+  const [targetFrequency, setTargetFrequency] = useState<number>(4);
+  const [trainingGoals, setTrainingGoals] = useState<string[]>([]);
+  const [experienceLevel, setExperienceLevel] = useState<string>('');
+
+  // Animations
+  const softAskOpacity = useRef(new Animated.Value(1)).current;
+  const softAskHeight = useRef(new Animated.Value(1)).current;
+  const nearbyOpacity = useRef(new Animated.Value(0)).current;
+
+  // Debounce timer for autocomplete
+  const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const canContinue = selectedGym !== null;
+
+  // Check if location was already granted (e.g. re-entering screen)
+  useEffect(() => {
+    (async () => {
+      const alreadyGranted = await location.checkExistingPermission();
+      if (alreadyGranted) {
+        // Skip soft ask, go straight to loading nearby
+        handleEnableLocation(true);
+      }
+    })();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleEnableLocation = useCallback(async (alreadyGranted = false) => {
+    if (!alreadyGranted) {
+      haptics.medium();
+    }
+
+    // Animate soft ask card out
+    Animated.parallel([
+      Animated.timing(softAskOpacity, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: false,
+      }),
+      Animated.timing(softAskHeight, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+    ]).start();
+
+    setGymPickerState('loading-nearby');
+
+    if (alreadyGranted) {
+      // Already have permission, just get coords
+      await location.requestLocation();
+    } else {
+      await location.requestLocation();
+    }
+  }, [location, softAskOpacity, softAskHeight]);
+
+  // When location state changes, fetch nearby gyms
+  useEffect(() => {
+    if (location.state === 'granted' && location.coords) {
+      fetchNearbyGyms();
+    } else if (location.state === 'denied') {
+      setGymPickerState('text-only');
+      animateNearbyIn();
+    }
+  }, [location.state, location.coords]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const fetchNearbyGyms = async () => {
+    if (!location.coords) return;
+
+    try {
+      const gyms = await findNearbyGyms(location.coords, 25, 5);
+      setNearbyGyms(gyms);
+      setGymPickerState(gyms.length > 0 ? 'nearby' : 'text-only');
+    } catch {
+      setGymPickerState('text-only');
+    }
+    animateNearbyIn();
+  };
+
+  const animateNearbyIn = () => {
+    Animated.timing(nearbyOpacity, {
+      toValue: 1,
+      duration: 250,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const handleSkipLocation = () => {
+    haptics.light();
+    location.skip();
+
+    // Animate soft ask out
+    Animated.parallel([
+      Animated.timing(softAskOpacity, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: false,
+      }),
+      Animated.timing(softAskHeight, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+    ]).start();
+
+    setGymPickerState('text-only');
+    setTimeout(() => animateNearbyIn(), 200);
+  };
+
+  const handleSelectNearbyGym = (gym: GymWithDistance) => {
+    haptics.light();
+    setSelectedGym({
+      id: gym.id,
+      name: gym.name,
+      isCustom: false,
+      city: gym.city,
+      state: gym.stateOrCountry ?? undefined,
+      affiliation: gym.affiliation ?? undefined,
+      lat: undefined, // Will come from Supabase gym record when available
+      lng: undefined,
+    });
+    setGymSearchText('');
+    setShowAutocomplete(false);
+  };
+
+  const handleSelectAutocompleteGym = (gym: GymWithDistance) => {
+    haptics.light();
+    setSelectedGym({
+      id: gym.id,
+      name: gym.name,
+      isCustom: false,
+      city: gym.city,
+      state: gym.stateOrCountry ?? undefined,
+      affiliation: gym.affiliation ?? undefined,
+    });
+    setGymSearchText(gym.name);
+    setShowAutocomplete(false);
+  };
+
+  const handleGymSearchChange = (text: string) => {
+    setGymSearchText(text);
+
+    // If user is typing, clear any nearby gym selection
+    if (selectedGym && !selectedGym.isCustom) {
+      setSelectedGym(null);
+    }
+
+    // Debounced autocomplete search
+    if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
+
+    if (text.length < 2) {
+      setAutocompleteResults([]);
+      setShowAutocomplete(false);
+      return;
+    }
+
+    searchTimerRef.current = setTimeout(async () => {
+      const results = await searchGyms(text, location.coords, 4);
+      setAutocompleteResults(results);
+      setShowAutocomplete(results.length > 0);
+    }, 200);
+  };
+
+  const handleGymSearchBlur = () => {
+    // Delay hiding autocomplete to allow tap on results
+    setTimeout(() => {
+      setShowAutocomplete(false);
+
+      // If user typed a name but didn't select from autocomplete, treat as custom gym
+      if (gymSearchText.trim() && !selectedGym) {
+        setSelectedGym({
+          id: null,
+          name: gymSearchText.trim(),
+          isCustom: true,
+        });
+      }
+    }, 200);
+  };
+
+  const handleGymSearchFocus = () => {
+    // If there's a selected gym shown in the input, clear it for editing
+    if (selectedGym) {
+      setSelectedGym(null);
+      setGymSearchText('');
+    }
+  };
+
+  const toggleGoal = (goal: string) => {
+    haptics.light();
+    setTrainingGoals((prev) =>
+      prev.includes(goal) ? prev.filter((g) => g !== goal) : [...prev, goal]
+    );
+  };
+
+  const getLocationPermission = (): LocationPermission => {
+    if (location.state === 'granted') return 'granted';
+    if (location.state === 'denied') return 'denied';
+    return 'skipped';
+  };
+
+  const handleContinue = () => {
+    if (!selectedGym) return;
+    haptics.medium();
+    navigation.navigate('GetStarted', {
+      name,
+      belt,
+      stripes,
+      gymId: selectedGym.id,
+      gymName: selectedGym.name,
+      gymIsCustom: selectedGym.isCustom,
+      gymCity: selectedGym.city,
+      gymState: selectedGym.state,
+      gymAffiliation: selectedGym.affiliation,
+      gymLat: selectedGym.lat,
+      gymLng: selectedGym.lng,
+      locationPermission: getLocationPermission(),
+      targetFrequency,
+      trainingGoals: trainingGoals.length > 0 ? trainingGoals : undefined,
+      experienceLevel: experienceLevel || undefined,
+    });
+  };
+
+  // ============================================
+  // RENDER HELPERS
+  // ============================================
+
+  const renderSoftAsk = () => {
+    if (gymPickerState !== 'soft-ask') return null;
+
+    // Interpolate height for collapse animation
+    const maxHeight = softAskHeight.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 300],
+    });
+
+    return (
+      <Animated.View style={{ opacity: softAskOpacity, maxHeight, overflow: 'hidden' }}>
+        <View style={styles.locationCard}>
+          <View style={styles.locationCardHeader}>
+            <Icons.MapPin size={22} color={colors.gold} />
+            <Text style={styles.locationCardTitle}>Find gyms near you</Text>
+          </View>
+          <Text style={styles.locationCardDesc}>
+            We'll show nearby BJJ gyms so you can pick yours in one tap.
+          </Text>
+          <Pressable
+            style={({ pressed }) => [styles.enableButton, pressed && { opacity: 0.9 }]}
+            onPress={() => handleEnableLocation(false)}
+          >
+            <Text style={styles.enableButtonText}>Enable Location</Text>
+          </Pressable>
+        </View>
+        <Pressable
+          style={({ pressed }) => [styles.skipLink, pressed && { opacity: 0.7 }]}
+          onPress={handleSkipLocation}
+          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+        >
+          <Text style={styles.skipLinkText}>I'll type it myself</Text>
+        </Pressable>
+      </Animated.View>
+    );
+  };
+
+  const renderLoadingNearby = () => {
+    if (gymPickerState !== 'loading-nearby') return null;
+
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator color={colors.gold} size="small" />
+        <Text style={styles.loadingText}>Finding nearby gyms...</Text>
+      </View>
+    );
+  };
+
+  const renderNearbyGyms = () => {
+    if (gymPickerState !== 'nearby') return null;
+
+    return (
+      <Animated.View style={{ opacity: nearbyOpacity }}>
+        <Text style={styles.nearbyLabel}>NEAR YOU</Text>
+        <View style={styles.nearbyList}>
+          {nearbyGyms.map((gym, index) => {
+            const isSelected = selectedGym?.id === gym.id && !selectedGym?.isCustom;
+            return (
+              <Pressable
+                key={gym.id || index}
+                style={[
+                  styles.gymCard,
+                  isSelected && styles.gymCardSelected,
+                  index < nearbyGyms.length - 1 && styles.gymCardBorder,
+                ]}
+                onPress={() => handleSelectNearbyGym(gym)}
+              >
+                <View style={styles.gymCardInfo}>
+                  <Text style={styles.gymName}>{gym.name}</Text>
+                  <Text style={styles.gymMeta}>
+                    {[gym.city, gym.stateOrCountry].filter(Boolean).join(', ')}
+                    {gym.distance_mi != null ? ` · ${gym.distance_mi} mi` : ''}
+                  </Text>
+                </View>
+                {isSelected && (
+                  <Icons.Check size={18} color={colors.gold} strokeWidth={3} />
+                )}
+              </Pressable>
+            );
+          })}
+        </View>
+
+        <Text style={styles.fallbackHint}>Not here? Type your gym name</Text>
+        {renderTextInput()}
+      </Animated.View>
+    );
+  };
+
+  const renderTextOnlyMode = () => {
+    if (gymPickerState !== 'text-only') return null;
+
+    return (
+      <Animated.View style={{ opacity: nearbyOpacity }}>
+        {renderTextInput()}
+      </Animated.View>
+    );
+  };
+
+  const renderTextInput = () => {
+    // If a gym is selected (from autocomplete), show confirmation state
+    if (selectedGym && gymPickerState !== 'nearby') {
+      return (
+        <Pressable
+          style={styles.selectedGymDisplay}
+          onPress={handleGymSearchFocus}
+        >
+          <View>
+            <Text style={styles.selectedGymName}>{selectedGym.name}</Text>
+            {selectedGym.city && (
+              <Text style={styles.selectedGymMeta}>
+                {[selectedGym.city, selectedGym.state].filter(Boolean).join(', ')}
+              </Text>
+            )}
+          </View>
+          <Icons.Check size={18} color={colors.gold} strokeWidth={3} />
+        </Pressable>
+      );
+    }
+
+    return (
+      <View>
+        <TextInput
+          style={[
+            styles.textInput,
+            showAutocomplete && styles.textInputWithDropdown,
+          ]}
+          value={gymSearchText}
+          onChangeText={handleGymSearchChange}
+          onBlur={handleGymSearchBlur}
+          onFocus={handleGymSearchFocus}
+          placeholder="Search or add your gym"
+          placeholderTextColor={colors.gray600}
+          autoCorrect={false}
+          returnKeyType="done"
+          onSubmitEditing={() => {
+            if (gymSearchText.trim() && !selectedGym) {
+              setSelectedGym({
+                id: null,
+                name: gymSearchText.trim(),
+                isCustom: true,
+              });
+              setShowAutocomplete(false);
+            }
+          }}
+        />
+        {showAutocomplete && (
+          <View style={styles.autocompleteDropdown}>
+            {autocompleteResults.map((gym, index) => (
+              <Pressable
+                key={gym.id || index}
+                style={({ pressed }) => [
+                  styles.autocompleteItem,
+                  index < autocompleteResults.length - 1 && styles.autocompleteItemBorder,
+                  pressed && { backgroundColor: '#252525' },
+                ]}
+                onPress={() => handleSelectAutocompleteGym(gym)}
+              >
+                <Text style={styles.autocompleteName}>{gym.name}</Text>
+                <Text style={styles.autocompleteMeta}>
+                  {[gym.city, gym.stateOrCountry, gym.affiliation]
+                    .filter(Boolean)
+                    .join(' · ')}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
+        )}
+      </View>
+    );
+  };
+
+  // ============================================
+  // MAIN RENDER
+  // ============================================
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <OnboardingProgressBar screenName="YourTraining" />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={styles.flex}
+      >
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+        >
+          {/* Header */}
+          <View style={styles.header}>
+            <Text style={styles.title}>Your Training</Text>
+          </View>
+
+          {/* Gym Picker */}
+          <View style={styles.field}>
+            <Text style={styles.fieldLabel}>YOUR GYM</Text>
+            {renderSoftAsk()}
+            {renderLoadingNearby()}
+            {renderNearbyGyms()}
+            {renderTextOnlyMode()}
+          </View>
+
+          {/* Frequency */}
+          <View style={styles.field}>
+            <Text style={styles.fieldLabel}>HOW OFTEN DO YOU TRAIN?</Text>
+            <View style={styles.chipRow}>
+              {FREQUENCY_OPTIONS.map((opt) => (
+                <Pressable
+                  key={opt.value}
+                  style={({ pressed }) => [
+                    styles.chip,
+                    targetFrequency === opt.value && styles.chipSelected,
+                    pressed && { opacity: 0.7 },
+                  ]}
+                  onPress={() => { haptics.light(); setTargetFrequency(opt.value); }}
+                >
+                  <Text
+                    style={[
+                      styles.chipText,
+                      targetFrequency === opt.value && styles.chipTextSelected,
+                    ]}
+                  >
+                    {opt.label}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          </View>
+
+          {/* Optional divider */}
+          <View style={styles.divider}>
+            <View style={styles.dividerLine} />
+            <Text style={styles.dividerText}>TELL US MORE (OPTIONAL)</Text>
+            <View style={styles.dividerLine} />
+          </View>
+
+          {/* Goals */}
+          <View style={styles.field}>
+            <Text style={styles.fieldLabel}>TRAINING GOALS</Text>
+            <View style={styles.chipRow}>
+              {GOAL_OPTIONS.map((goal) => (
+                <Pressable
+                  key={goal}
+                  style={({ pressed }) => [
+                    styles.chip,
+                    trainingGoals.includes(goal) && styles.chipSelected,
+                    pressed && { opacity: 0.7 },
+                  ]}
+                  onPress={() => toggleGoal(goal)}
+                >
+                  <Text
+                    style={[
+                      styles.chipText,
+                      trainingGoals.includes(goal) && styles.chipTextSelected,
+                    ]}
+                  >
+                    {goal}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          </View>
+
+          {/* Experience */}
+          <View style={styles.field}>
+            <Text style={styles.fieldLabel}>EXPERIENCE LEVEL</Text>
+            <View style={styles.chipRow}>
+              {EXPERIENCE_OPTIONS.map((opt) => (
+                <Pressable
+                  key={opt.value}
+                  style={({ pressed }) => [
+                    styles.chip,
+                    experienceLevel === opt.value && styles.chipSelected,
+                    pressed && { opacity: 0.7 },
+                  ]}
+                  onPress={() => {
+                    haptics.light();
+                    setExperienceLevel(experienceLevel === opt.value ? '' : opt.value);
+                  }}
+                >
+                  <Text
+                    style={[
+                      styles.chipText,
+                      experienceLevel === opt.value && styles.chipTextSelected,
+                    ]}
+                  >
+                    {opt.label}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          </View>
+        </ScrollView>
+
+        {/* Footer */}
+        <View style={styles.footer}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.button,
+              !canContinue && styles.buttonDisabled,
+              pressed && canContinue && { opacity: 0.85 },
+            ]}
+            onPress={handleContinue}
+            disabled={!canContinue}
+          >
+            <Text style={[styles.buttonText, !canContinue && styles.buttonTextDisabled]}>
+              Continue
+            </Text>
+          </Pressable>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
+}
+
+// ============================================
+// STYLES
+// ============================================
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.black,
+  },
+  flex: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing['2xl'],
+    paddingBottom: spacing.xl,
+  },
+  header: {
+    marginBottom: spacing.xl,
+  },
+  title: {
+    fontFamily: 'Unbounded-ExtraBold',
+    fontSize: 28,
+    fontWeight: '800',
+    color: colors.white,
+  },
+  field: {
+    marginBottom: spacing.lg,
+  },
+  fieldLabel: {
+    fontFamily: 'JetBrains Mono-SemiBold',
+    fontSize: 12,
+    fontWeight: '600',
+    color: colors.gray500,
+    letterSpacing: 2,
+    marginBottom: spacing.sm,
+  },
+
+  // ---- Location Soft Ask ----
+  locationCard: {
+    backgroundColor: colors.gray800,
+    borderWidth: 1,
+    borderColor: colors.gray700,
+    borderRadius: radius.xl,
+    padding: spacing.lg,
+  },
+  locationCardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    marginBottom: spacing.sm,
+  },
+  locationCardTitle: {
+    fontFamily: 'Inter-SemiBold',
+    fontSize: 17,
+    fontWeight: '600',
+    color: colors.white,
+  },
+  locationCardDesc: {
+    fontFamily: 'Inter',
+    fontSize: 14,
+    fontWeight: '500',
+    color: colors.gray400,
+    lineHeight: 20,
+    marginBottom: 20,
+  },
+  enableButton: {
+    backgroundColor: colors.gold,
+    height: 48,
+    borderRadius: radius.xl,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  enableButtonText: {
+    fontFamily: 'Inter-Bold',
+    fontSize: 15,
+    fontWeight: '700',
+    color: colors.black,
+  },
+  skipLink: {
+    alignItems: 'center',
+    paddingVertical: spacing.md,
+  },
+  skipLinkText: {
+    fontFamily: 'Inter',
+    fontSize: 14,
+    fontWeight: '500',
+    color: colors.gray500,
+  },
+
+  // ---- Loading ----
+  loadingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.sm,
+    paddingVertical: spacing.xl,
+  },
+  loadingText: {
+    fontFamily: 'Inter',
+    fontSize: 14,
+    fontWeight: '500',
+    color: colors.gray500,
+  },
+
+  // ---- Nearby Gyms ----
+  nearbyLabel: {
+    fontFamily: 'JetBrains Mono-SemiBold',
+    fontSize: 11,
+    fontWeight: '600',
+    color: colors.gray500,
+    letterSpacing: 2,
+    marginBottom: spacing.sm,
+  },
+  nearbyList: {
+    backgroundColor: colors.gray800,
+    borderRadius: radius.lg,
+    overflow: 'hidden',
+    marginBottom: spacing.md,
+  },
+  gymCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 14,
+    paddingHorizontal: spacing.md,
+  },
+  gymCardSelected: {
+    backgroundColor: colors.goldDim,
+    borderLeftWidth: 3,
+    borderLeftColor: colors.gold,
+  },
+  gymCardBorder: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#2a2a2a',
+  },
+  gymCardInfo: {
+    flex: 1,
+  },
+  gymName: {
+    fontFamily: 'Inter-SemiBold',
+    fontSize: 16,
+    fontWeight: '600',
+    color: colors.white,
+    marginBottom: 2,
+  },
+  gymMeta: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gray500,
+  },
+  fallbackHint: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gray500,
+    marginBottom: spacing.sm,
+  },
+
+  // ---- Text Input ----
+  textInput: {
+    fontFamily: 'Inter',
+    backgroundColor: colors.gray800,
+    borderRadius: radius.lg,
+    paddingHorizontal: spacing.md,
+    paddingVertical: 16,
+    fontSize: 17,
+    fontWeight: '500',
+    color: colors.white,
+    borderWidth: 1,
+    borderColor: colors.gray700,
+  },
+  textInputWithDropdown: {
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    borderBottomWidth: 0,
+    borderColor: colors.gold,
+  },
+
+  // ---- Selected Gym Display ----
+  selectedGymDisplay: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: colors.gray800,
+    borderRadius: radius.lg,
+    paddingHorizontal: spacing.md,
+    paddingVertical: 14,
+    borderWidth: 1,
+    borderColor: colors.gold,
+  },
+  selectedGymName: {
+    fontFamily: 'Inter-SemiBold',
+    fontSize: 17,
+    fontWeight: '600',
+    color: colors.white,
+  },
+  selectedGymMeta: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gray500,
+    marginTop: 1,
+  },
+
+  // ---- Autocomplete Dropdown ----
+  autocompleteDropdown: {
+    backgroundColor: colors.gray800,
+    borderWidth: 1,
+    borderTopWidth: 0,
+    borderColor: colors.gold,
+    borderBottomLeftRadius: radius.lg,
+    borderBottomRightRadius: radius.lg,
+    overflow: 'hidden',
+  },
+  autocompleteItem: {
+    paddingVertical: 12,
+    paddingHorizontal: spacing.md,
+  },
+  autocompleteItemBorder: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#2a2a2a',
+  },
+  autocompleteName: {
+    fontFamily: 'Inter-SemiBold',
+    fontSize: 15,
+    fontWeight: '600',
+    color: colors.white,
+    marginBottom: 1,
+  },
+  autocompleteMeta: {
+    fontFamily: 'Inter',
+    fontSize: 12,
+    fontWeight: '500',
+    color: colors.gray500,
+  },
+
+  // ---- Chips ----
+  chipRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing.sm,
+  },
+  chip: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: 12,
+    borderRadius: radius.full,
+    backgroundColor: colors.gray800,
+    borderWidth: 1,
+    borderColor: colors.gray700,
+  },
+  chipSelected: {
+    backgroundColor: colors.goldDim,
+    borderColor: colors.gold,
+  },
+  chipText: {
+    fontFamily: 'Inter-SemiBold',
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.gray400,
+  },
+  chipTextSelected: {
+    color: colors.gold,
+  },
+
+  // ---- Divider ----
+  divider: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: spacing.lg,
+    gap: spacing.sm,
+  },
+  dividerLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.gray700,
+  },
+  dividerText: {
+    fontFamily: 'JetBrains Mono-SemiBold',
+    fontSize: 12,
+    fontWeight: '600',
+    color: colors.gray600,
+    letterSpacing: 1.5,
+  },
+
+  // ---- Footer ----
+  footer: {
+    paddingHorizontal: spacing.lg,
+    paddingBottom: spacing.lg,
+    paddingTop: spacing.sm,
+  },
+  button: {
+    backgroundColor: colors.gold,
+    paddingVertical: 18,
+    borderRadius: radius.xl,
+    alignItems: 'center',
+  },
+  buttonDisabled: {
+    backgroundColor: colors.gray800,
+  },
+  buttonText: {
+    fontFamily: 'Inter-Bold',
+    fontSize: 17,
+    fontWeight: '700',
+    color: colors.black,
+  },
+  buttonTextDisabled: {
+    color: colors.gray600,
+  },
+});

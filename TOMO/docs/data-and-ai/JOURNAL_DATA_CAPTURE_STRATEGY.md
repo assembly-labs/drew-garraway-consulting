@@ -2,7 +2,7 @@
 
 > **Purpose:** Define how to maximize data collection from exhausted post-training users while respecting their cognitive state. This strategy informs voice logger design, AI extraction, and progressive data enrichment.
 
-**Last Updated:** December 2024
+**Last Updated:** March 2026 (v1.1 — field changes applied)
 
 ---
 
@@ -56,11 +56,13 @@ Voice-first captures 3-4x more information than forms because it matches the exh
 |------------|-------------------|-------------------|
 | Techniques practiced | "Worked on knee slice today" | NER for technique names |
 | Sparring outcomes | "Got tapped twice by triangles" | Outcome parsing |
-| Partners | "Rolled with Jake and Sarah" | Name extraction |
-| Struggles | "Couldn't escape side control" | Sentiment + position matching |
-| Wins | "Finally hit that armbar" | Success language detection |
-| Energy/mood | "Felt gassed today" | Sentiment analysis |
+| Submissions given | "Hit an armbar and a guillotine" | Success submission parsing |
+| Submissions received | "Got caught in a triangle" | Caught/tapped-to parsing |
+| Warm-up | "We warmed up for 15 min" | Boolean inference |
+| Instructor | "Professor Mike taught class" | Name + role extraction |
 | Injuries | "Tweaked my shoulder" | Body part + injury verb detection |
+
+> **v1.1 Note (March 2026):** `worked_well`, `struggles`, `energy_level`, and `mood` have been deferred from the MVP data model. These are still extractable from voice but won't be stored as separate fields until v1.1+. The `rawNotes` field captures this context instead.
 
 ### Gap-Fill Rules
 
@@ -262,20 +264,22 @@ stat modules       responses           interventions
 
 ## Implementation Priorities
 
-### Phase 1: Core Voice Capture (Current)
+### Phase 1: Core Voice Capture ✅ DONE (March 2026)
 - [x] Voice recording with rotating prompts
 - [x] Belt-specific prompt selection
 - [x] Gap-fill for gi/nogi
 - [x] Review phase with extracted data
-- [ ] Real transcription (AssemblyAI integration)
-- [ ] Real NLP extraction pipeline
+- [x] Real transcription (AssemblyAI with 180 BJJ terms word_boost)
+- [x] Real AI extraction pipeline (Claude Haiku 4.5 via Supabase Edge Function)
 
-### Phase 2: Smart Extraction
-- [ ] Custom vocabulary for BJJ terms
+### Phase 2: Smart Extraction (Partially Done)
+- [x] Custom vocabulary for BJJ terms (180 terms in word_boost)
 - [ ] Technique name matching to library
-- [ ] Submission outcome parsing
+- [x] Submission outcome parsing (given vs received with type/count)
 - [ ] Partner name extraction
-- [ ] Sentiment analysis for struggles/wins
+- [x] Injury extraction
+- [x] Instructor extraction
+- [x] Warm-up detection
 
 ### Phase 3: Enrichment Layer
 - [ ] Pre-session prompt system

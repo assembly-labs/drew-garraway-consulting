@@ -1,0 +1,15 @@
+# Supabase project configuration
+# Project ref: whzycopfjvwmsgzfqvig
+
+# Project ref stored in supabase/.temp/project-ref (set via supabase link)
+
+# Edge Functions
+# Both functions handle their own JWT verification in-code via supabase.auth.getUser(),
+# so gateway-level verification is disabled to prevent double-401 errors.
+# See BUG-029 (Session 10) and BUG-031 (Session 17) for context.
+
+[functions.transcribe-audio]
+verify_jwt = false
+
+[functions.extract-session]
+verify_jwt = false

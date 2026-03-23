@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "tomo",
+    "slug": "tomo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#111111"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "buildNumber": "2"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#111111",
+        "foregroundImage": "./assets/adaptive-icon.png"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "supabaseUrl": "https://whzycopfjvwmsgzfqvig.supabase.co",
+      "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indoenljb3BmanZ3bXNnemZxdmlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwMDc4OTIsImV4cCI6MjA4ODU4Mzg5Mn0.DK77hald-AaCUcY1AIz7t_MgSbn_LDNO0HcESt_vD8Y",
+      "sentryDsn": "https://3ac2b9a99c8fd8b6cae3614b4d92d141@o4511011218849792.ingest.us.sentry.io/4511011232415744",
+      "eas": {
+        "projectId": "96937ab8-c6ad-476d-8fa6-fd1feb2c5823"
+      }
+    }
+  }
+}

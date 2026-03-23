@@ -1,5 +1,10 @@
 # iOS TestFlight Deployment Checklist
 
+> **SUPERSEDED (March 7, 2026):** This checklist was created before the MVP 1.0 planning sessions.
+> The current implementation plan and checklist live in `docs/mvp-1.0/SHIP_PLAN.md`.
+> Key differences: MVP is 8 weeks (not 12), built by Drew + Claude Code (not a contractor),
+> and costs ~$99 to start (not $34K-$66K). This file is kept for reference only.
+
 ## Quick Reference
 
 **Current State:** Web prototype (React) - PRODUCTION READY

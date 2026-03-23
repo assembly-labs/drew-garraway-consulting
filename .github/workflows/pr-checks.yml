@@ -16,12 +16,8 @@ jobs:
     outputs:
       tomo: ${{ steps.changes.outputs.tomo }}
       scout: ${{ steps.changes.outputs.scout }}
-      career-chat: ${{ steps.changes.outputs.career-chat }}
       f_this_app: ${{ steps.changes.outputs.f_this_app }}
-      mikey-real: ${{ steps.changes.outputs.mikey-real }}
-      cool-curriculum: ${{ steps.changes.outputs.cool-curriculum }}
       gather: ${{ steps.changes.outputs.gather }}
-      luka: ${{ steps.changes.outputs.luka }}
       fhm: ${{ steps.changes.outputs.fhm }}
     steps:
       - uses: actions/checkout@v4
@@ -33,18 +29,10 @@ jobs:
               - 'TOMO/prototype/**'
             scout:
               - 'scout/**'
-            career-chat:
-              - 'career-chat/**'
             f_this_app:
               - 'f_this_app/**'
-            mikey-real:
-              - 'Mikey-real/**'
-            cool-curriculum:
-              - 'cool-curriculum/**'
             gather:
               - 'gather/prototype/**'
-            luka:
-              - 'luka/**'
             fhm:
               - 'fhm/**'
 
@@ -86,26 +74,6 @@ jobs:
       - run: npm run build
       - run: npm run lint --if-present
 
-  # Career Chat - React 19 + Vite + TypeScript
-  check-career-chat:
-    needs: detect-changes
-    if: needs.detect-changes.outputs.career-chat == 'true'
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: career-chat
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: career-chat/package-lock.json
-      - run: npm ci
-      - run: npm run build
-      - run: npm run test:run --if-present
-      - run: npm run lint --if-present
-
   # F This App - Next.js 16 + React 19
   check-f-this-app:
     needs: detect-changes
@@ -125,43 +93,6 @@ jobs:
       - run: npm run build
       - run: npm run lint --if-present
 
-  # Mikey-real - React 19 + Vite + PWA
-  check-mikey-real:
-    needs: detect-changes
-    if: needs.detect-changes.outputs.mikey-real == 'true'
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Mikey-real
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: Mikey-real/package-lock.json
-      - run: npm ci
-      - run: npm run build
-      - run: npm run lint --if-present
-
-  # Cool Curriculum - React 19 + CRA
-  check-cool-curriculum:
-    needs: detect-changes
-    if: needs.detect-changes.outputs.cool-curriculum == 'true'
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: cool-curriculum/ai-lesson-planner
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: cool-curriculum/ai-lesson-planner/package-lock.json
-      - run: npm ci
-      - run: npm run build
-
   # Gather - React 19 + Vite
   check-gather:
     needs: detect-changes
@@ -180,24 +111,6 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run lint --if-present
-
-  # Luka - Static HTML + Tailwind CLI
-  check-luka:
-    needs: detect-changes
-    if: needs.detect-changes.outputs.luka == 'true'
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: luka
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: luka/package-lock.json
-      - run: npm ci
-      - run: npm run build
 
   # FHM - Vanilla JS + Node scripts
   check-fhm:

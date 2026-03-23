@@ -1,5 +1,9 @@
 # BJJ Progress Tracker - iOS TestFlight Deployment Plan
 
+> **SUPERSEDED (March 7, 2026):** This document was written before the MVP 1.0 planning sessions.
+> The current implementation plan lives in `docs/mvp-1.0/SHIP_PLAN.md` (8 weeks, DIY with Claude Code).
+> This file is kept for historical reference only — do not use for active development.
+
 ## Executive Summary
 
 This document outlines the complete path from our current React web prototype to a functioning iOS app on TestFlight. The current prototype is a polished web application with no native mobile capabilities or backend infrastructure. This plan addresses all gaps and provides a roadmap for deployment.

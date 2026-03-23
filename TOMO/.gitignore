@@ -3,10 +3,11 @@
 # ============================================
 TOMO-TONY/
 
-# Environment variables
+# Environment variables & credentials
 .env
 .env.local
 .env.*.local
+credentials.local
 
 # OS files
 .DS_Store

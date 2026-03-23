@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=414, initial-scale=1">
+<title>TOMO — Gym Picker Redesign Mockup</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #000;
+    font-family: 'Inter', -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 60px;
+  }
+
+  .state-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: #F5A623;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .state-description {
+    font-size: 13px;
+    color: #8a8a8a;
+    text-align: center;
+    max-width: 360px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  /* iPhone frame */
+  .phone {
+    width: 390px;
+    min-height: 700px;
+    background: #111111;
+    border-radius: 44px;
+    padding: 60px 24px 40px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #2a2a2a;
+  }
+
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 28px;
+    background: #000;
+    border-radius: 20px;
+  }
+
+  /* Typography */
+  .step-indicator {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: #F5A623;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .screen-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 32px;
+    letter-spacing: -0.5px;
+  }
+
+  .field-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: #a3a3a3;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  /* Location Soft Ask Card */
+  .location-card {
+    background: #1f1f1f;
+    border: 1px solid #4a4a4a;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .location-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .location-pin {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .location-pin svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: #F5A623;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .location-card-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .location-card-desc {
+    font-size: 14px;
+    font-weight: 500;
+    color: #c4c4c4;
+    line-height: 20px;
+    margin-bottom: 20px;
+  }
+
+  .btn-enable {
+    width: 100%;
+    height: 48px;
+    background: #F5A623;
+    border: none;
+    border-radius: 12px;
+    color: #111;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 0;
+  }
+
+  .btn-enable:hover { opacity: 0.9; }
+
+  .skip-link {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #a3a3a3;
+    cursor: pointer;
+  }
+
+  .skip-link:hover { color: #c4c4c4; }
+
+  /* Nearby Gyms */
+  .nearby-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: #a3a3a3;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    margin-top: 4px;
+  }
+
+  .nearby-list {
+    background: #1f1f1f;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .gym-card {
+    padding: 14px 16px;
+    border-bottom: 1px solid #2a2a2a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .gym-card:last-child { border-bottom: none; }
+
+  .gym-card:hover { background: #252525; }
+
+  .gym-card.selected {
+    background: rgba(245, 166, 35, 0.15);
+    border-left: 3px solid #F5A623;
+  }
+
+  .gym-card-info { flex: 1; }
+
+  .gym-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+
+  .gym-meta {
+    font-size: 13px;
+    font-weight: 500;
+    color: #a3a3a3;
+  }
+
+  .gym-check {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gym-check svg {
+    width: 18px;
+    height: 18px;
+    stroke: #F5A623;
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .fallback-hint {
+    font-size: 13px;
+    font-weight: 500;
+    color: #8a8a8a;
+    margin-bottom: 8px;
+  }
+
+  /* Text Input */
+  .text-input {
+    width: 100%;
+    height: 52px;
+    background: #1f1f1f;
+    border: 1px solid #4a4a4a;
+    border-radius: 8px;
+    padding: 0 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: #fff;
+    outline: none;
+    margin-bottom: 0;
+  }
+
+  .text-input::placeholder { color: #8a8a8a; }
+
+  .text-input:focus {
+    border-color: #F5A623;
+  }
+
+  .text-input-wrapper {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .text-input-selected {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 52px;
+    background: #1f1f1f;
+    border: 1px solid #F5A623;
+    border-radius: 8px;
+    padding: 0 16px;
+  }
+
+  .text-input-selected .gym-name {
+    font-size: 17px;
+  }
+
+  /* Autocomplete Dropdown */
+  .autocomplete-dropdown {
+    background: #1f1f1f;
+    border: 1px solid #4a4a4a;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    margin-top: -1px;
+  }
+
+  .autocomplete-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid #2a2a2a;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .autocomplete-item:last-child { border-bottom: none; }
+  .autocomplete-item:hover { background: #252525; }
+
+  .autocomplete-item .gym-name {
+    font-size: 15px;
+    margin-bottom: 1px;
+  }
+
+  .autocomplete-item .gym-meta {
+    font-size: 12px;
+  }
+
+  /* Frequency chips (context) */
+  .field-section {
+    margin-bottom: 24px;
+  }
+
+  .chip-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    padding: 10px 16px;
+    border-radius: 9999px;
+    background: #1f1f1f;
+    border: 1px solid #4a4a4a;
+    font-size: 14px;
+    font-weight: 600;
+    color: #c4c4c4;
+    cursor: pointer;
+  }
+
+  .chip.selected {
+    background: rgba(245, 166, 35, 0.15);
+    border-color: #F5A623;
+    color: #F5A623;
+  }
+
+  /* Footer button */
+  .footer {
+    margin-top: auto;
+    padding-top: 16px;
+  }
+
+  .btn-continue {
+    width: 100%;
+    height: 56px;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .btn-continue.enabled {
+    background: #F5A623;
+    color: #111;
+  }
+
+  .btn-continue.disabled {
+    background: #1f1f1f;
+    color: #8a8a8a;
+    cursor: not-allowed;
+  }
+
+  /* Divider */
+  .divider-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 24px 0;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: #4a4a4a;
+  }
+
+  .divider-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: #8a8a8a;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+  }
+
+  /* Arrow connector between states */
+  .arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: #4a4a4a;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .arrow svg {
+    width: 24px;
+    height: 24px;
+    stroke: #4a4a4a;
+    stroke-width: 2;
+    fill: none;
+  }
+
+  /* Section separator */
+  .section-divider {
+    width: 100%;
+    max-width: 500px;
+    border-top: 1px solid #2a2a2a;
+    margin: 20px 0;
+  }
+
+  /* Two-column for granted/denied */
+  .split-row {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .split-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .split-row {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================ -->
+<!-- STATE 1: Location Soft Ask -->
+<!-- ============================================ -->
+
+<div class="state-label">State 1 — Initial</div>
+<div class="state-description">
+  User reaches the "Your Training" screen. Before any gym input, they see the location primer card.
+</div>
+
+<div class="phone">
+  <div class="step-indicator">STEP 2 OF 3</div>
+  <div class="screen-title">Your Training</div>
+
+  <div class="field-label">YOUR GYM</div>
+
+  <div class="location-card">
+    <div class="location-card-header">
+      <div class="location-pin">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      </div>
+      <span class="location-card-title">Find gyms near you</span>
+    </div>
+    <div class="location-card-desc">
+      We'll show nearby BJJ gyms so you can pick yours in one tap.
+    </div>
+    <button class="btn-enable">Enable Location</button>
+  </div>
+  <div class="skip-link">I'll type it myself</div>
+
+  <div style="height: 24px"></div>
+
+  <div class="field-section">
+    <div class="field-label">HOW OFTEN DO YOU TRAIN?</div>
+    <div class="chip-row">
+      <div class="chip">1-2x / week</div>
+      <div class="chip selected">3-4x / week</div>
+      <div class="chip">5+ / week</div>
+    </div>
+  </div>
+
+  <div class="divider-row">
+    <div class="divider-line"></div>
+    <div class="divider-text">TELL US MORE (OPTIONAL)</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="footer">
+    <button class="btn-continue disabled">Continue</button>
+  </div>
+</div>
+
+
+<!-- ============================================ -->
+<!-- STATE 2a: Location Granted — Nearby Gyms -->
+<!-- ============================================ -->
+
+<div class="section-divider"></div>
+
+<div class="arrow">
+  <span>User taps "Enable Location" → grants permission</span>
+  <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+</div>
+
+<div class="state-label">State 2a — Location Granted</div>
+<div class="state-description">
+  Soft-ask card collapses. Nearby gyms appear from the Supabase database, sorted by distance. User taps one to select.
+</div>
+
+<div class="phone">
+  <div class="step-indicator">STEP 2 OF 3</div>
+  <div class="screen-title">Your Training</div>
+
+  <div class="field-label">YOUR GYM</div>
+
+  <div class="nearby-label">NEAR YOU</div>
+  <div class="nearby-list">
+    <div class="gym-card selected">
+      <div class="gym-card-info">
+        <div class="gym-name">10th Planet Philadelphia</div>
+        <div class="gym-meta">Philadelphia, PA · 0.3 mi</div>
+      </div>
+      <div class="gym-check">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+    </div>
+    <div class="gym-card">
+      <div class="gym-card-info">
+        <div class="gym-name">Renzo Gracie Philly</div>
+        <div class="gym-meta">Philadelphia, PA · 1.1 mi</div>
+      </div>
+    </div>
+    <div class="gym-card">
+      <div class="gym-card-info">
+        <div class="gym-name">Balance Studios BJJ</div>
+        <div class="gym-meta">Philadelphia, PA · 2.4 mi</div>
+      </div>
+    </div>
+    <div class="gym-card">
+      <div class="gym-card-info">
+        <div class="gym-name">Gracie Barra Philadelphia</div>
+        <div class="gym-meta">Philadelphia, PA · 3.8 mi</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fallback-hint">Not here? Type your gym name</div>
+  <div class="text-input-wrapper">
+    <input type="text" class="text-input" placeholder="Search or add your gym">
+  </div>
+
+  <div class="field-section">
+    <div class="field-label">HOW OFTEN DO YOU TRAIN?</div>
+    <div class="chip-row">
+      <div class="chip">1-2x / week</div>
+      <div class="chip selected">3-4x / week</div>
+      <div class="chip">5+ / week</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button class="btn-continue enabled">Continue</button>
+  </div>
+</div>
+
+
+<!-- ============================================ -->
+<!-- STATE 2b: Location Skipped — Text Input -->
+<!-- ============================================ -->
+
+<div class="section-divider"></div>
+
+<div class="arrow">
+  <span>User taps "I'll type it myself" or denies location</span>
+  <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+</div>
+
+<div class="state-label">State 2b — Skipped / Denied</div>
+<div class="state-description">
+  No location available. Simple text input with autocomplete dropdown from the gym database as they type.
+</div>
+
+<div class="phone">
+  <div class="step-indicator">STEP 2 OF 3</div>
+  <div class="screen-title">Your Training</div>
+
+  <div class="field-label">YOUR GYM</div>
+
+  <div class="text-input-wrapper">
+    <input type="text" class="text-input" value="grac" style="border-radius: 8px 8px 0 0; border-color: #F5A623; border-bottom: none;">
+    <div class="autocomplete-dropdown">
+      <div class="autocomplete-item">
+        <div class="gym-name">Gracie Barra Philadelphia</div>
+        <div class="gym-meta">Philadelphia, PA · Gracie Barra</div>
+      </div>
+      <div class="autocomplete-item">
+        <div class="gym-name">Gracie Barra Denver</div>
+        <div class="gym-meta">Denver, CO · Gracie Barra</div>
+      </div>
+      <div class="autocomplete-item">
+        <div class="gym-name">Gracie University</div>
+        <div class="gym-meta">Torrance, CA · Gracie</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 8px"></div>
+
+  <div class="field-section">
+    <div class="field-label">HOW OFTEN DO YOU TRAIN?</div>
+    <div class="chip-row">
+      <div class="chip">1-2x / week</div>
+      <div class="chip selected">3-4x / week</div>
+      <div class="chip">5+ / week</div>
+    </div>
+  </div>
+
+  <div class="divider-row">
+    <div class="divider-line"></div>
+    <div class="divider-text">TELL US MORE (OPTIONAL)</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="footer">
+    <button class="btn-continue disabled">Continue</button>
+  </div>
+</div>
+
+
+<!-- ============================================ -->
+<!-- STATE 2b (selected): Gym chosen via autocomplete -->
+<!-- ============================================ -->
+
+<div class="section-divider"></div>
+
+<div class="arrow">
+  <span>User taps an autocomplete result</span>
+  <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+</div>
+
+<div class="state-label">State 2b — Gym Selected</div>
+<div class="state-description">
+  Autocomplete collapses. Input shows the selected gym with a checkmark. Continue enables.
+</div>
+
+<div class="phone">
+  <div class="step-indicator">STEP 2 OF 3</div>
+  <div class="screen-title">Your Training</div>
+
+  <div class="field-label">YOUR GYM</div>
+
+  <div class="text-input-wrapper">
+    <div class="text-input-selected">
+      <div>
+        <div class="gym-name">Gracie Barra Philadelphia</div>
+        <div class="gym-meta" style="margin-top: 1px;">Philadelphia, PA</div>
+      </div>
+      <div class="gym-check">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="field-section">
+    <div class="field-label">HOW OFTEN DO YOU TRAIN?</div>
+    <div class="chip-row">
+      <div class="chip">1-2x / week</div>
+      <div class="chip selected">3-4x / week</div>
+      <div class="chip">5+ / week</div>
+    </div>
+  </div>
+
+  <div class="divider-row">
+    <div class="divider-line"></div>
+    <div class="divider-text">TELL US MORE (OPTIONAL)</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="field-section">
+    <div class="field-label">TRAINING GOALS</div>
+    <div class="chip-row">
+      <div class="chip selected">Competition</div>
+      <div class="chip">Fitness</div>
+      <div class="chip selected">Hobby</div>
+      <div class="chip">Mental Health</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button class="btn-continue enabled">Continue</button>
+  </div>
+</div>
+
+</body>
+</html>

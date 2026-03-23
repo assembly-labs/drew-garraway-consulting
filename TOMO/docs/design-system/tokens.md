@@ -168,6 +168,35 @@ All grays are lightened for better contrast on dark backgrounds.
 | `--tracking-widest` | 0.15em | Section titles |
 | `--tracking-ultra` | 0.2em | Eyebrow labels |
 
+### React Native Font Family Names
+
+When using fonts in React Native StyleSheet, you MUST use the exact registered variant name.
+Do NOT use generic family names with fontWeight — they won't resolve correctly.
+
+| Intent | fontFamily value | fontWeight |
+|--------|-----------------|------------|
+| Unbounded Medium | `'Unbounded'` | `'500'` |
+| Unbounded Bold | `'Unbounded-Bold'` | `'700'` |
+| Unbounded ExtraBold | `'Unbounded-ExtraBold'` | `'800'` |
+| Unbounded Black | `'Unbounded-Black'` | `'900'` |
+| Inter Medium | `'Inter'` | `'500'` |
+| Inter SemiBold | `'Inter-SemiBold'` | `'600'` |
+| Inter Bold | `'Inter-Bold'` | `'700'` |
+| JetBrains Mono Medium | `'JetBrains Mono'` | `'500'` |
+| JetBrains Mono SemiBold | `'JetBrains Mono-SemiBold'` | `'600'` |
+| JetBrains Mono Bold | `'JetBrains Mono-Bold'` | `'700'` |
+
+### Pressed State Guidance
+
+On dark themes, press states should LIGHTEN the element (`'#252525'` or `rgba(255,255,255,0.05)`), never darken. Darkening makes elements recede on press, which contradicts expected touch physics.
+
+### Chip Standardization
+
+Two chip variants exist in `design-tokens.ts`:
+- **Pill** (`chipStyles.pill`): For filters, multi-select labels, text options. Uses `borderRadius: full`.
+- **Square** (`chipStyles.square`): For number selectors, fixed-width options. Uses `borderRadius: lg`, fixed 48x48.
+Both use `chipStyles.selected` for active state and `chipStyles.text` / `chipStyles.textSelected` for typography.
+
 ---
 
 ## Spacing System

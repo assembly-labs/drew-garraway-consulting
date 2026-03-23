@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Brain Millionaire – Kids Edition</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== START SCREEN ===== -->
+  <div id="start-screen" class="screen active">
+    <div class="game-logo">Brain Millionaire</div>
+    <div class="game-subtitle">Kids Edition</div>
+    <div class="game-description">
+      22 questions across Math, English, Science &amp; History.<br>
+      Tap fast between questions to earn bonus points!
+    </div>
+    <button id="btn-play" class="btn-play">Play</button>
+  </div>
+
+  <!-- ===== GAME SCREEN ===== -->
+  <div id="game-screen" class="screen">
+    <!-- Top bar -->
+    <div class="top-bar">
+      <div class="score-box" id="score-display">Score: <span>0</span></div>
+      <div id="category-badge" class="category-badge">Math</div>
+      <div class="question-num" id="question-num">Q <span>1</span>/22</div>
+    </div>
+
+    <!-- Timer ring -->
+    <div class="timer-container">
+      <svg class="timer-ring" viewBox="0 0 100 100">
+        <circle class="timer-ring-bg" cx="50" cy="50" r="45"/>
+        <circle class="timer-ring-fg" id="timer-ring-fg" cx="50" cy="50" r="45"/>
+      </svg>
+      <div class="timer-text" id="timer-text">22</div>
+    </div>
+
+    <!-- Question -->
+    <div class="question-box">
+      <div class="question-text" id="question-text">Loading…</div>
+    </div>
+
+    <!-- Answers -->
+    <div class="answers-grid">
+      <button class="answer-btn"><span class="answer-label">A</span></button>
+      <button class="answer-btn"><span class="answer-label">B</span></button>
+      <button class="answer-btn"><span class="answer-label">C</span></button>
+      <button class="answer-btn"><span class="answer-label">D</span></button>
+    </div>
+
+    <!-- Difficulty -->
+    <div class="difficulty-bar">
+      <span class="difficulty-label">Difficulty</span>
+      <div class="difficulty-dots">
+        <div class="difficulty-dot"></div>
+        <div class="difficulty-dot"></div>
+        <div class="difficulty-dot"></div>
+      </div>
+    </div>
+
+    <!-- Learning popup -->
+    <div class="learning-popup" id="learning-popup"></div>
+  </div>
+
+  <!-- ===== TAPPING SCREEN ===== -->
+  <div id="tapping-screen" class="screen">
+    <div class="tapping-header">
+      <div class="tapping-title">Tap the Targets!</div>
+      <div class="tapping-subtitle">Tap as many as you can for bonus points</div>
+      <div class="tapping-score">Bonus: <span id="tapping-score">0</span></div>
+    </div>
+    <div class="tapping-timer-bar-container">
+      <div class="tapping-timer-bar" id="tapping-timer-bar"></div>
+    </div>
+    <div class="tapping-area" id="tapping-area"></div>
+  </div>
+
+  <!-- ===== GAME OVER SCREEN ===== -->
+  <div id="gameover-screen" class="screen">
+    <div class="gameover-title" id="gameover-title">Great Job!</div>
+    <div class="gameover-subtitle" id="gameover-subtitle">You really know your stuff!</div>
+    <div class="final-score" id="final-score">0</div>
+
+    <div class="score-breakdown">
+      <div class="score-item">
+        <div class="score-item-label">Correct</div>
+        <div class="score-item-value correct-count" id="correct-count">0</div>
+      </div>
+      <div class="score-item">
+        <div class="score-item-label">Wrong</div>
+        <div class="score-item-value wrong-count" id="wrong-count">0</div>
+      </div>
+      <div class="score-item">
+        <div class="score-item-label">Tap Bonus</div>
+        <div class="score-item-value tap-count" id="tap-count">0</div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card-label">Quiz Points</div>
+        <div class="stat-card-value" id="quiz-points">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Tap Points</div>
+        <div class="stat-card-value" id="tap-points">0</div>
+      </div>
+    </div>
+
+    <button id="btn-play-again" class="btn-play-again">Play Again</button>
+  </div>
+
+  <!-- ===== TRANSITION OVERLAY ===== -->
+  <div class="transition-overlay" id="transition-overlay">
+    <div class="transition-text" id="transition-text"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="sounds.js"></script>
+  <script src="tapping.js"></script>
+  <script src="questions.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

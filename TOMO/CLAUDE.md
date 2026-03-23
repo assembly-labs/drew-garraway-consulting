@@ -1,5 +1,84 @@
 # TOMO (友) - BJJ Training Journal - Project Context for Claude
 
+---
+
+## Session Tracking (MANDATORY)
+
+> **Every Claude Code session that modifies code MUST update the tracking files before finishing.**
+
+**Location:** `docs/mvp-1.0/tracking/`
+
+| File | Purpose |
+|------|---------|
+| `CHANGELOG.md` | What changed, why, and how it was verified |
+| `ISSUES.md` | Active bugs, blockers, and feature requests |
+
+### At the END of every session:
+
+1. **Update `CHANGELOG.md`** — Add a dated entry with all changes made this session. Include type (Build/Fix/Polish/Refactor/Feature), what changed, why, and how it was tested.
+2. **Update `ISSUES.md`** — Add any new bugs or issues discovered. Mark resolved items as Done. Move completed items to the Completed section.
+3. **Run `npx tsc --noEmit`** before closing to verify no TypeScript errors.
+4. **Recommend testing path** — Tell Drew whether to test locally or deploy to TestFlight (see Testing & Deployment below).
+
+### At the START of every session:
+
+1. **Read `ISSUES.md`** — Check for blockers and open bugs before starting new work.
+2. **Read the latest entry in `CHANGELOG.md`** — Understand what was done last.
+
+---
+
+## Testing & Deployment (MANDATORY)
+
+> **Drew is a vibe coder. Always tell him which testing path to use and why.**
+
+### Two Testing Paths
+
+| Path | Command | Speed | When to Use |
+|------|---------|-------|-------------|
+| **Local Dev** | `SENTRY_DISABLE_AUTO_UPLOAD=true npx expo run:ios --device` | Instant (hot reload) | During development — every code change |
+| **TestFlight** | `bash build.sh` | 20-30 min | Milestones only — when testers need a new version |
+
+### When to Recommend LOCAL Testing
+
+Recommend local testing when:
+- Any code change was just made (UI, logic, bug fix, feature)
+- Drew wants to see/verify changes immediately
+- Work is still in progress or experimental
+- Only Drew needs to see the result
+
+Say: **"Run this locally to test — no need for TestFlight yet."**
+
+### When to Recommend TESTFLIGHT Deployment
+
+Recommend TestFlight **only** when ALL of these are true:
+1. **TypeScript clean** — `npx tsc --noEmit` passes with zero errors
+2. **Feature complete** — The change set is a coherent milestone (not half-finished)
+3. **Locally tested** — Drew has verified the changes work on his phone
+4. **Testers need it** — Other people need to try the new version
+
+Say: **"This looks ready for TestFlight. Want me to run `bash build.sh` to ship it to your testers?"**
+
+### Never Auto-Deploy
+
+- **NEVER** run `build.sh` without Drew's explicit approval
+- **NEVER** suggest TestFlight for a single bug fix or small tweak — local test first
+- **ALWAYS** confirm the testing path at the end of a session
+
+### TestFlight Deploy Process
+
+Full guide: `docs/mvp-1.0/DEPLOYMENT_GUIDE.md`
+
+```
+bash build.sh    # Builds IPA + submits to TestFlight (~20-30 min)
+```
+
+- Build number auto-increments
+- Internal testers get it within minutes
+- External testers may wait 24-48h (first build to a new group only)
+- All credentials are pre-configured — no manual steps needed
+
+---
+
 ## Project Overview
 
 BJJ Journal is a voice-first training journal app for Brazilian Jiu-Jitsu practitioners. The app helps users log training sessions, track belt progression, and build a personal technique library.
@@ -395,23 +474,15 @@ When the design system is updated:
 
 ## Key Patterns
 
-### Progressive Profiling
-Instead of long onboarding, we collect profile data over ~20 sessions:
+### Onboarding (MVP 1.0)
+MVP uses **full upfront onboarding** (~60 seconds), not progressive profiling:
+- Screen 1: Welcome
+- Screen 2: Name, belt, stripes
+- Screen 3: Gym picker, target frequency, optional goals + experience
+- Screen 4: Logging preference (voice/text), mic permission
 
-**Critical (required at onboarding):**
-- Name
-- Belt level
-
-**Deferred (asked via nudges at session milestones):**
-- Session 3: Training start date
-- Session 5: Stripes count
-- Session 7: Gym name
-- Session 10: Training goals
-- Session 12: Target frequency
-- Session 15: Current belt date
-- Session 18: Birth year
-
-Users can skip questions up to 3 times before we stop asking.
+Progressive profiling (collecting data over ~20 sessions) is a **v1.1+ consideration**.
+See `docs/mvp-1.0/FEATURE_SPEC.md` for exact onboarding spec.
 
 ### Session Logging Flow
 1. User taps "Log Session"
@@ -484,8 +555,9 @@ When logging a session (immediately post-training):
 - Focus states for buttons
 - Screen reader support
 
-### Next Phase: iOS TestFlight
-See `/docs/IOS_DEPLOYMENT_CHECKLIST.md` for full plan.
+### Next Phase: iOS TestFlight (MVP 1.0)
+See `docs/mvp-1.0/` for the current implementation plan (supersedes old deployment docs).
+Pre-built files ready in `mobile-prep/` — see `mobile-prep/README.md`.
 
 ## Development Guidelines
 
@@ -532,88 +604,47 @@ See `/docs/research/USER_PERSONAS_AND_RESEARCH.md` for:
 
 ---
 
-## iOS TestFlight Deployment
+## iOS MVP 1.0 — TestFlight (Active Plan)
 
-### Deployment Documents
-- **Full Plan:** `/docs/IOS_TESTFLIGHT_DEPLOYMENT_PLAN.md`
-- **Checklist:** `/docs/IOS_DEPLOYMENT_CHECKLIST.md`
+> **Source of truth:** `docs/mvp-1.0/` (README, FEATURE_SPEC, SHIP_PLAN, SESSION_NOTES)
+> **Pre-built files:** `mobile-prep/` (README has full inventory and setup guide)
+> **Old deployment docs:** `docs/deployment/` — SUPERSEDED, kept for reference only
 
-### Technology Decisions
+### Technology Decisions (Decided March 7, 2026)
 | Layer | Technology | Status |
 |-------|------------|--------|
-| Mobile App | React Native + Expo | Not started |
-| Database | Supabase (PostgreSQL) | Not started |
-| Authentication | Supabase Auth (Email + Apple) | Not started |
-| Voice Transcription | AssemblyAI | Not started |
-| Crash Reporting | Sentry | Not started |
-| Analytics | PostHog | Not started |
+| Mobile App | React Native + Expo (managed workflow) | Pre-built config ready |
+| Database | Supabase (PostgreSQL) | Migration SQL ready |
+| Auth | Supabase Auth (Email + Apple Sign-In) | Auth hook ready |
+| Voice Transcription | AssemblyAI (180 BJJ terms word_boost) | Edge Function ready |
+| AI Extraction | Claude Haiku 4.5 (via Edge Function) | Edge Function ready |
+| Audio Storage | Supabase Storage (private bucket, signed URLs) | RLS policies ready |
+| Crash Reporting | Sentry | Config in app.config.ts |
 | iOS Builds | Expo EAS | Not started |
 | Web Hosting | Cloudflare Pages | **Active** (bjjj.pages.dev) |
 
-### Why AssemblyAI for Voice Transcription
-- **24% better accuracy** on proper nouns (critical for BJJ terminology like "kimura", "de la Riva")
-- **30% lower hallucination rate** than Whisper (important when users are exhausted/mumbling)
-- **Custom vocabulary** support for BJJ-specific terms
-- **$50 free credits** (~135 hours of transcription for testing)
-- **Pricing:** $0.0062/min (Best tier) or $0.002/min (Nano tier)
-- **99.95% uptime SLA** for production reliability
+### Key MVP Decisions
+- **Bundle ID:** `com.drewgarraway.tomo`
+- **iOS target:** 16.0
+- **Data model:** `trainingMode` + `sessionKind` (not old `trainingType`)
+- **Onboarding:** Full upfront (~60 seconds), not progressive profiling
+- **Belt personalization:** Copy/tone/defaults only — no field locking in MVP
+- **Audio:** Private bucket, signed URLs, never publicly accessible
+- **PostHog:** Excluded from MVP, add post-TestFlight
+- **API keys:** All server-side via Edge Functions, none in app binary
 
-### iOS Deployment Checklist
-
-#### Phase 0: Prerequisites
-- [ ] Purchase Apple Developer Account ($99/year)
-- [ ] Create App Store Connect listing
-- [ ] Create Supabase account
-- [ ] Create AssemblyAI account ($50 free credits)
-
-#### Phase 1: Foundation (Weeks 1-3)
-- [ ] Set up Supabase project with database schema
-- [ ] Configure Supabase authentication
-- [ ] Initialize Expo project with TypeScript
-- [ ] Connect Expo app to Supabase
-- [ ] Basic auth flow working (sign up, log in, log out)
-
-#### Phase 2: Core Features (Weeks 4-7)
-- [ ] Integrate expo-av for voice recording
-- [ ] Connect to AssemblyAI for transcription
-- [ ] Configure custom vocabulary for BJJ terms
-- [ ] Migrate Dashboard to native
-- [ ] Migrate SessionLogger with real voice
-- [ ] Migrate SessionHistory with database
-- [ ] Migrate ProfileScreen with persistence
-- [ ] Connect progressive profiling to backend
-
-#### Phase 3: Polish (Weeks 8-10)
-- [ ] Configure iOS app icons (1024x1024)
-- [ ] Create splash screen
-- [ ] Implement Apple Sign-In
-- [ ] Add offline caching with AsyncStorage
-- [ ] Implement sync queue for offline sessions
-- [ ] Set up Sentry crash reporting
-- [ ] Add PostHog analytics
-- [ ] Test on multiple iPhone sizes
-
-#### Phase 4: TestFlight (Weeks 11-12)
-- [ ] Write App Store description
-- [ ] Create screenshots (6.5" and 5.5")
-- [ ] Run EAS build for iOS
-- [ ] Submit to TestFlight
-- [ ] Distribute to internal testers (5-10)
-- [ ] Set up feedback collection
-- [ ] Monitor crashes and iterate
+### Cost Estimates (Updated March 7, 2026)
+| Phase | Monthly Cost |
+|-------|--------------|
+| Development | ~$99 one-time (Apple Developer Account) |
+| TestFlight (10 users) | ~$1.12/month |
+| Growth (1,000 users) | ~$200-250/month |
 
 ### Key Metrics for TestFlight Success
-- App installs on iOS 15+
-- Onboarding < 2 minutes
+- App installs on iOS 16+
+- Download to first session < 3 minutes
 - Voice transcription > 85% accuracy for BJJ terms
 - Crash rate < 1%
 - Cold start < 3 seconds
 - 5+ testers complete 3+ sessions each
-
-### Cost Estimates
-| Phase | Monthly Cost |
-|-------|--------------|
-| Development | ~$18/month |
-| TestFlight (10 users) | ~$28/month |
-| Launch (100 users) | ~$58/month |
-| Growth (1000 users) | ~$133/month |
+- AI extraction edit rate < 30%
