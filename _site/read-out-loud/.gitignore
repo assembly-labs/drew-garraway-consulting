@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Development
+.wrangler/
+*.pem
+*.key
+*.crt
+
+# Editor
+.vscode/
+.idea/
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+
+# Node (if ever added)
+node_modules/

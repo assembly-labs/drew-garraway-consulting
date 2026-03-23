@@ -1,0 +1,859 @@
+/* SIE Flashcard Styles
+ * Mobile-first design for swipe-based flashcard training
+ * Uses existing design tokens from main.css
+ */
+
+/* ============================================
+   Flashcard App Container - Dark theme default
+   ============================================ */
+.flashcard-app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    min-height: -webkit-fill-available; /* iOS Safari fallback */
+    background: #1a1f2e; /* Dark blue-gray, easy on eyes */
+    overflow: hidden;
+    /* Safe area insets for notched devices */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ============================================
+   Header - Compact for mobile
+   ============================================ */
+.flashcard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--fh-space-xs) var(--fh-space-md);
+    padding-top: calc(var(--fh-space-xs) + env(safe-area-inset-top));
+    background: var(--fh-navy);
+    color: var(--fh-white);
+    /* Leave room for back button on left */
+    padding-left: 72px;
+    min-height: 44px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 360px) {
+    .flashcard-header {
+        padding-left: 64px;
+        padding-right: var(--fh-space-sm);
+    }
+}
+
+.flashcard-title {
+    font-family: var(--fh-font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--fh-white);
+    margin: 0;
+}
+
+.flashcard-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--fh-space-xs);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    opacity: 0.95;
+}
+
+.stat-divider {
+    opacity: 0.5;
+}
+
+/* ============================================
+   Start Screen
+   ============================================ */
+.flashcard-start-screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--fh-space-xl);
+    text-align: center;
+}
+
+.start-content {
+    max-width: 320px;
+    width: 100%;
+}
+
+/* Progress Ring */
+.progress-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto var(--fh-space-xl);
+}
+
+.progress-ring svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.progress-ring__bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+}
+
+.progress-ring__fill {
+    fill: none;
+    stroke: var(--fh-sage);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.progress-ring__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--fh-font-display);
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #e8eaed;
+}
+
+.start-title {
+    font-family: var(--fh-font-display);
+    font-size: 1.75rem;
+    color: #e8eaed;
+    margin-bottom: var(--fh-space-sm);
+}
+
+.start-description {
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: var(--fh-space-xl);
+}
+
+/* Session Options */
+.session-options {
+    margin-top: var(--fh-space-xl);
+}
+
+.option-label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fh-space-sm);
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.option-select {
+    padding: var(--fh-space-sm) var(--fh-space-md);
+    font-family: var(--fh-font-body);
+    font-size: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    background: #2a3142;
+    color: #e8eaed;
+    cursor: pointer;
+}
+
+.option-select:focus {
+    outline: 2px solid transparent; /* visible in forced-colors/high-contrast mode */
+    border-color: var(--fh-sage);
+    box-shadow: 0 0 0 3px rgba(124, 152, 133, 0.2);
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--fh-space-md) var(--fh-space-xl);
+    font-family: var(--fh-font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background-color 0.15s ease;
+    min-height: 48px; /* Touch target */
+    min-width: 48px;
+}
+
+.btn--primary {
+    background: var(--fh-navy);
+    color: var(--fh-white);
+}
+
+.btn--primary:hover {
+    background: #003a7d;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 45, 98, 0.3);
+}
+
+.btn--primary:active {
+    transform: translateY(0);
+}
+
+.btn--secondary {
+    background: transparent;
+    color: var(--fh-navy);
+    border: 2px solid var(--fh-navy);
+}
+
+.btn--secondary:hover {
+    background: rgba(0, 45, 98, 0.05);
+}
+
+.btn--start {
+    width: 100%;
+    padding: var(--fh-space-lg) var(--fh-space-xl);
+    font-size: 1.125rem;
+}
+
+/* ============================================
+   Session View - Optimized for iPhone 12 Pro
+   ============================================ */
+.flashcard-session {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: var(--fh-space-sm) var(--fh-space-md);
+    padding-bottom: 0;
+    overflow: hidden;
+    min-height: 0; /* Allow flex shrinking */
+    gap: var(--fh-space-xs);
+}
+
+/* Progress Bar - More prominent */
+.session-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--fh-space-md);
+    flex-shrink: 0;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--fh-sage), #8fb099);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+    font-family: var(--fh-font-mono);
+    min-width: 5ch;
+    text-align: right;
+}
+
+/* Session Counter - Compact inline display */
+.session-counter {
+    display: flex;
+    justify-content: center;
+    gap: var(--fh-space-xl);
+    flex-shrink: 0;
+}
+
+.counter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--fh-space-sm);
+}
+
+.counter__value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: var(--fh-font-mono);
+    min-width: 2ch;
+    text-align: center;
+}
+
+.counter__label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.counter--got-it .counter__value {
+    color: var(--fh-sage);
+}
+
+.counter--dont-know .counter__value {
+    color: var(--fh-burgundy);
+}
+
+/* Stacked counters on larger screens */
+@media (min-width: 500px) {
+    .counter {
+        flex-direction: column;
+        gap: var(--fh-space-xs);
+    }
+
+    .counter__value {
+        font-size: 1.75rem;
+    }
+
+    .counter__label {
+        font-size: 0.8125rem;
+    }
+}
+
+/* ============================================
+   Flashcard - Optimized for iPhone 12 Pro (390x844)
+   ============================================ */
+.flashcard-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+    touch-action: none; /* Enable custom touch handling */
+    user-select: none;
+    min-height: 0; /* Allow flex shrinking */
+    padding: var(--fh-space-sm);
+}
+
+.flashcard {
+    width: 100%;
+    max-width: 380px;
+    /* Height adapts to content */
+    height: auto;
+    min-height: 200px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    transition: transform 0.35s ease;
+}
+
+/* iPhone 12 Pro and similar (390px width, 844px height) */
+@media (min-width: 380px) and (min-height: 800px) {
+    .flashcard {
+        max-width: 360px;
+        min-height: 220px;
+    }
+}
+
+/* Larger phones and tablets */
+@media (min-height: 900px) {
+    .flashcard {
+        max-width: 420px;
+        min-height: 240px;
+    }
+}
+
+.flashcard--flipped {
+    transform: rotateY(180deg);
+}
+
+.flashcard__inner {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    transform-style: preserve-3d;
+    transform-origin: center center;
+}
+
+.flashcard__front,
+.flashcard__back {
+    display: flex;
+    /* Center content vertically and horizontally */
+    align-items: center;
+    justify-content: center;
+    padding: var(--fh-space-xl);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-origin: center center;
+    border-radius: 20px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 16px 48px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    /* Ensure minimum height for short content */
+    min-height: 200px;
+}
+
+/* Front is in normal flow, determines card size */
+.flashcard__front {
+    position: relative;
+    width: 100%;
+    background: #2a3142; /* Soft dark blue-gray */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Back is absolutely positioned on top of front */
+.flashcard__back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1e3a5f; /* Deep navy, slightly lighter than before */
+    color: var(--fh-white);
+    transform: rotateY(180deg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Even more padding on larger screens */
+@media (min-width: 500px) {
+    .flashcard__front,
+    .flashcard__back {
+        padding: var(--fh-space-2xl);
+        border-radius: 24px;
+    }
+}
+
+.flashcard__text {
+    font-family: var(--fh-font-body);
+    font-size: clamp(1.125rem, 5vw, 1.625rem);
+    line-height: 1.5;
+    text-align: center;
+    margin: 0;
+    /* Ensure text stays within card bounds */
+    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+.flashcard__front .flashcard__text {
+    color: #e8eaed; /* Soft white, not harsh */
+    font-weight: 500;
+}
+
+.flashcard__back .flashcard__text {
+    color: #f0f4f8; /* Slightly warm white */
+    font-weight: 400;
+    /* Support line breaks in content */
+    white-space: pre-line;
+}
+
+/* Formula styling - monospace for calculations */
+.flashcard__formula {
+    display: block;
+    font-family: var(--fh-font-mono);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--fh-gold);
+    margin-bottom: var(--fh-space-md);
+    letter-spacing: 0.02em;
+}
+
+/* Back content wrapper - stacks answer and tip vertically */
+.flashcard__back-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Memory Aid - tip shown below the answer */
+.flashcard__memory-aid {
+    display: block;
+    width: 100%;
+    margin-top: var(--fh-space-lg);
+    padding-top: var(--fh-space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--fh-sage);
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* Hide empty memory aids */
+.flashcard__memory-aid:empty {
+    display: none;
+}
+
+/* Swipe visual feedback - Brand colors */
+.flashcard--swiping-horizontal {
+    box-shadow: 0 0 30px rgba(107, 39, 55, 0.4);
+}
+
+.flashcard--swiping-up {
+    box-shadow: 0 0 30px rgba(124, 152, 133, 0.5);
+}
+
+/* ============================================
+   Action Buttons - Large tap targets for mobile
+   ============================================ */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--fh-space-md);
+    padding: var(--fh-space-md);
+    padding-bottom: calc(var(--fh-space-lg) + env(safe-area-inset-bottom));
+    flex-shrink: 0;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--fh-space-sm);
+    padding: var(--fh-space-md) var(--fh-space-xl);
+    flex: 1;
+    max-width: 180px;
+    min-height: 60px;
+    font-family: var(--fh-font-body);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.action-btn__icon {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.action-btn--dont-know {
+    background: var(--fh-burgundy);
+    color: var(--fh-white);
+    box-shadow: 0 4px 12px rgba(107, 39, 55, 0.3);
+}
+
+.action-btn--dont-know:hover {
+    background: #7a3040;
+    box-shadow: 0 6px 16px rgba(107, 39, 55, 0.4);
+}
+
+.action-btn--dont-know:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(107, 39, 55, 0.3);
+}
+
+.action-btn--got-it {
+    background: var(--fh-sage);
+    color: var(--fh-white);
+    box-shadow: 0 4px 12px rgba(124, 152, 133, 0.3);
+}
+
+.action-btn--got-it:hover {
+    background: #8ba990;
+    box-shadow: 0 6px 16px rgba(124, 152, 133, 0.4);
+}
+
+.action-btn--got-it:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(124, 152, 133, 0.3);
+}
+
+/* Full-width buttons on very small screens */
+@media (max-width: 360px) {
+    .action-buttons {
+        flex-direction: column;
+        gap: var(--fh-space-sm);
+    }
+
+    .action-btn {
+        max-width: 100%;
+    }
+}
+
+/* Hide action buttons on desktop (swipe/keyboard works well) */
+@media (min-width: 768px) and (hover: hover) {
+    .action-buttons {
+        display: none;
+    }
+}
+
+/* ============================================
+   Swipe Hints (hidden - users discover gestures naturally)
+   ============================================ */
+.swipe-hints,
+.tap-hint {
+    display: none;
+}
+
+/* ============================================
+   Session Summary
+   ============================================ */
+.flashcard-summary {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--fh-space-lg);
+    padding-bottom: calc(var(--fh-space-lg) + env(safe-area-inset-bottom));
+}
+
+.summary-content {
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.summary-title {
+    font-family: var(--fh-font-display);
+    font-size: 1.75rem;
+    color: #e8eaed; /* Soft white for dark theme */
+    margin-bottom: var(--fh-space-lg);
+}
+
+@media (min-width: 400px) {
+    .summary-title {
+        font-size: 2rem;
+        margin-bottom: var(--fh-space-xl);
+    }
+}
+
+.summary-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--fh-space-lg);
+    margin-bottom: var(--fh-space-xl);
+}
+
+@media (min-width: 400px) {
+    .summary-stats {
+        gap: var(--fh-space-xl);
+        margin-bottom: var(--fh-space-2xl);
+    }
+}
+
+.summary-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--fh-space-xs);
+}
+
+.summary-stat__value {
+    font-family: var(--fh-font-display);
+    font-size: 2rem;
+    font-weight: 600;
+    color: #e8eaed; /* Soft white for dark theme */
+}
+
+@media (min-width: 400px) {
+    .summary-stat__value {
+        font-size: 2.5rem;
+    }
+}
+
+.summary-stat--proficient .summary-stat__value {
+    color: var(--fh-sage);
+}
+
+.summary-stat--learning .summary-stat__value {
+    color: var(--fh-gold);
+}
+
+.summary-stat__label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (min-width: 400px) {
+    .summary-stat__label {
+        font-size: 0.875rem;
+    }
+}
+
+.summary-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fh-space-md);
+}
+
+.summary-actions .btn {
+    min-height: 52px;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+@media (min-width: 768px) {
+    .flashcard {
+        width: 70%;
+        max-width: 500px;
+    }
+
+    .swipe-hints {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .summary-actions {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .flashcard-app {
+        max-width: 800px;
+        margin: 0 auto;
+        min-height: calc(100vh - 4rem);
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+}
+
+/* ============================================
+   Landscape Mode - Horizontal layout for phones
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+    .flashcard-header {
+        padding-top: var(--fh-space-xs);
+        padding-bottom: var(--fh-space-xs);
+        min-height: 36px;
+    }
+
+    .flashcard-title {
+        font-size: 0.875rem;
+    }
+
+    .flashcard-stats {
+        font-size: 0.75rem;
+    }
+
+    .flashcard-session {
+        flex-direction: row;
+        padding: var(--fh-space-xs) var(--fh-space-md);
+        gap: var(--fh-space-md);
+    }
+
+    .session-progress {
+        display: none; /* Hide progress bar in landscape */
+    }
+
+    .session-counter {
+        flex-direction: column;
+        justify-content: center;
+        gap: var(--fh-space-sm);
+        min-width: 80px;
+    }
+
+    .counter {
+        flex-direction: row;
+        gap: var(--fh-space-xs);
+    }
+
+    .counter__value {
+        font-size: 1.25rem;
+    }
+
+    .counter__label {
+        font-size: 0.625rem;
+    }
+
+    .flashcard-container {
+        flex: 1;
+        padding: var(--fh-space-xs);
+    }
+
+    .flashcard {
+        max-width: none;
+        max-height: 100%;
+        min-height: 180px;
+    }
+
+    .flashcard__front,
+    .flashcard__back {
+        padding: var(--fh-space-md);
+        border-radius: 12px;
+    }
+
+    .flashcard__text {
+        font-size: clamp(0.9375rem, 3vw, 1.25rem);
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        justify-content: center;
+        padding: var(--fh-space-xs);
+        padding-right: calc(var(--fh-space-sm) + env(safe-area-inset-right));
+        padding-bottom: var(--fh-space-xs);
+        gap: var(--fh-space-sm);
+    }
+
+    .action-btn {
+        flex-direction: column;
+        min-width: 70px;
+        max-width: 70px;
+        min-height: 70px;
+        padding: var(--fh-space-sm);
+        font-size: 0.625rem;
+        gap: 2px;
+    }
+
+    .action-btn__icon {
+        font-size: 1.25rem;
+    }
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .flashcard,
+    .progress-bar__fill,
+    .progress-ring__fill,
+    .btn {
+        transition: none;
+    }
+
+    .flashcard--flipped {
+        transform: none;
+    }
+
+    .flashcard--flipped .flashcard__front {
+        visibility: hidden;
+    }
+
+    .flashcard--flipped .flashcard__back {
+        transform: none;
+        visibility: visible;
+    }
+}
+
+/* Focus styles for keyboard navigation */
+.btn:focus-visible {
+    outline: 3px solid var(--fh-gold);
+    outline-offset: 2px;
+}
+
+.flashcard:focus-visible {
+    outline: 3px solid var(--fh-gold);
+    outline-offset: 4px;
+}

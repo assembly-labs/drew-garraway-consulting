@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Drew Garraway | Product Consultant Philadelphia | AI Operations & Product Strategy</title>
+    <meta name="description" content="Philadelphia product consultant delivering measurable results in 90 days. AI operations, project recovery, growth systems. Former Apple, Google, Samsung, Tesla.">
+    <meta name="keywords" content="product consultant, AI operations, product strategy, Philadelphia consultant, project rescue, growth systems, Drew Garraway">
+    <meta name="author" content="Drew Garraway">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://assemblylabs.co">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Drew Garraway - Product Strategy & AI Operations">
+    <meta property="og:description" content="Delivering tangible products and results in 90 days. Experienced consultant with work delivered at Apple, Google, Samsung, and Tesla.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://assemblylabs.co">
+    <meta property="og:site_name" content="Drew Garraway Consulting">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Drew Garraway - Product Strategy & AI Operations">
+    <meta name="twitter:description" content="Philadelphia product consultant. AI operations, project recovery, growth systems. Delivering results in 90 days.">
+    <meta name="twitter:creator" content="@drewmavrogeorge">
+
+    <!-- Structured Data Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Drew Garraway Consulting",
+      "alternateName": "Assembly Labs",
+      "description": "Product consulting services specializing in AI operations, project recovery, and growth systems",
+      "url": "https://assemblylabs.co",
+      "email": "drew@assemblylabs.co",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Wayne",
+        "addressRegion": "PA",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "40.0439",
+        "longitude": "-75.3875"
+      },
+      "priceRange": "$$",
+      "founder": {
+        "@type": "Person",
+        "name": "Drew Garraway",
+        "jobTitle": "Product Consultant",
+        "alumniOf": [
+          {"@type": "Organization", "name": "Apple"},
+          {"@type": "Organization", "name": "Google"},
+          {"@type": "Organization", "name": "Samsung"},
+          {"@type": "Organization", "name": "Tesla"}
+        ],
+        "knowsAbout": ["Product Strategy", "AI Operations", "Project Management", "Growth Systems", "Digital Transformation"]
+      },
+      "serviceType": ["Product Consulting", "AI Operations", "Project Recovery", "Growth Strategy"],
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      }
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231E1B4B'/%3E%3Ctext x='50%25' y='50%25' font-size='16' font-weight='bold' text-anchor='middle' dy='.35em' fill='%23ffffff'%3EDM%3C/text%3E%3C/svg%3E">
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Primary Gradient Colors */
+            --indigo-deep: #1E1B4B;
+            --purple-rich: #4C1D95;
+            --magenta-vibrant: #C026D3;
+            --coral-pink: #FB7185;
+
+            /* Background Gradients */
+            --gradient-main: linear-gradient(135deg, #1E1B4B 0%, #4C1D95 35%, #C026D3 70%, #FB7185 100%);
+            --gradient-subtle: linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%);
+            --gradient-accent: linear-gradient(90deg, #C026D3 0%, #FB7185 100%);
+
+            /* Text Gradients */
+            --gradient-text: linear-gradient(90deg, #1E1B4B, #4C1D95, #C026D3, #FB7185);
+            --gradient-text-bright: linear-gradient(90deg, #4C1D95, #C026D3, #FB7185);
+            --gradient-text-reverse: linear-gradient(90deg, #FB7185, #C026D3, #4C1D95, #1E1B4B);
+
+            /* Legacy/Supporting Colors */
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray: #6b7280;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            background: #000000;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(192, 38, 211, 0.02) 2px,
+                    rgba(192, 38, 211, 0.02) 4px
+                );
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+            animation: slideUp 0.8s ease-out;
+            /* Fallback for browsers without gradient support */
+            color: #C026D3;
+            /* Gradient text */
+            background: linear-gradient(90deg, #4C1D95, #C026D3, #FB7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-paragraph {
+            font-size: clamp(1.1rem, 2vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 900px;
+            margin-bottom: 3rem;
+            animation: slideUp 0.8s ease-out 0.2s both;
+            line-height: 1.8;
+        }
+
+        .hero-paragraph a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(192, 38, 211, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .hero-paragraph a:hover {
+            border-bottom-color: #FB7185;
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .hero-paragraph a.highlight-link {
+            /* Fallback */
+            color: #C026D3;
+            /* Gradient text for colorful links */
+            background: linear-gradient(90deg, #C026D3, #FB7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border-bottom-color: rgba(251, 113, 133, 0.4);
+        }
+
+        .hero-paragraph a.highlight-link:hover {
+            background: linear-gradient(90deg, #FB7185, #C026D3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border-bottom-color: #FB7185;
+        }
+
+        .highlight {
+            /* Fallback */
+            color: #C026D3;
+            /* Gradient text for highlights */
+            background: linear-gradient(90deg, #C026D3, #FB7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            color: rgba(192, 38, 211, 0.6);
+            font-size: 1.5rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, #0f0f0f 0%, #1E1B4B 50%, #0f0f0f 100%);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #C026D3, transparent);
+        }
+
+        .section-header {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 4rem;
+            text-align: center;
+            letter-spacing: -0.02em;
+            /* Fallback */
+            color: #FB7185;
+            /* Gradient text */
+            background: linear-gradient(90deg, #FB7185, #C026D3, #4C1D95);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(192, 38, 211, 0.2);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(192, 38, 211, 0.1), rgba(251, 113, 133, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(251, 113, 133, 0.4);
+            background: rgba(78, 29, 149, 0.05);
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .service-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+
+        .service-stat {
+            /* Fallback */
+            color: #FB7185;
+            /* Gradient text for stats */
+            background: linear-gradient(90deg, #C026D3, #FB7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #1E1B4B 0%, #4C1D95 35%, #C026D3 70%, #FB7185 100%);
+        }
+
+        .cta-text {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .cta-subtext {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1E1B4B;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(251, 113, 133, 0.3);
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: linear-gradient(135deg, rgba(192, 38, 211, 0.2), rgba(251, 113, 133, 0.2));
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(251, 113, 133, 0.5);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            color: var(--white);
+            box-shadow: none;
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--white);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 100vh;
+                padding: 1.5rem;
+            }
+
+            .services {
+                padding: 3rem 1.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection Style */
+        ::selection {
+            background: #C026D3;
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero" id="hero" role="banner">
+        <div class="container">
+            <h1>Product Strategy and AI Operations That Deliver Results</h1>
+
+            <p class="hero-paragraph" role="contentinfo">
+                With over 15 years of experience in product management and operations, I have worked with teams at <a href="https://techcrunch.com/2014/01/24/apple-reflects-on-the-mac-at-30-with-new-video-and-website-retrospective/" target="_blank" rel="noopener noreferrer" class="highlight-link">Apple</a>, <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer" class="highlight-link">Google</a>, <a href="https://www.samsung.com/" target="_blank" rel="noopener noreferrer" class="highlight-link">Samsung</a>, <a href="https://www.dreamworks.com/" target="_blank" rel="noopener noreferrer" class="highlight-link">DreamWorks</a>, and <a href="https://www.lexus.com/" target="_blank" rel="noopener noreferrer" class="highlight-link">Lexus</a>. Based in the Philadelphia area, I specialize in helping organizations leverage AI and modern methodologies to build sustainable products and high-performing teams. My focus is on practical implementation that produces measurable outcomes.
+            </p>
+        </div>
+
+        <div class="scroll-indicator" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})" aria-label="Scroll to services">
+            |
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <main>
+        <section class="services" id="services" role="main" aria-label="Services">
+            <div class="container">
+                <h2 class="section-header">Services</h2>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3 class="service-title">AI Operations Implementation</h3>
+                    <p class="service-description">
+                        Transform your AI strategy from planning to production. I work with teams to implement practical AI workflows that deliver measurable efficiency gains of <span class="service-stat">40-200%</span> in content production and operational processes.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <h3 class="service-title">Project Recovery and Acceleration</h3>
+                    <p class="service-description">
+                        For projects that have fallen behind schedule or lost direction, I provide systematic analysis and restructuring to get them back on track. Experienced in recovering projects that were significantly behind and delivering them successfully.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <h3 class="service-title">Scalable Growth Systems</h3>
+                    <p class="service-description">
+                        Build operational infrastructure that supports growth without creating organizational friction. I design and implement systems that maintain quality and team cohesion as your organization expands.
+                    </p>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section" aria-label="Contact">
+            <div class="container">
+                <p class="cta-text">Get In Touch</p>
+                <div class="cta-buttons">
+                    <a href="mailto:drew@assemblylabs.co" class="cta-button" aria-label="Email Drew Garraway">
+                        <span>drew@assemblylabs.co</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Add subtle parallax effect to hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Add intersection observer for service cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideUp 0.6s ease-out both';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

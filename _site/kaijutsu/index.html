@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaijutsu — Beta Pilot Program</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 
+  Font substitutions (brand fonts not available on Google Fonts):
+  Hello-Imperfect Regular  →  Caveat       (handwritten display, same imperfect-friendly energy)
+  Nove Regular             →  Nunito       (rounded geometric, same clean geometry)
+  Sofia Pro Soft Medium    →  Quicksand    (soft rounded humanist, near-identical feel)
+-->
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ─────────────────────────────────────────────
+   BRAND TOKENS
+───────────────────────────────────────────── */
+:root {
+  /* Brand palette */
+  --pink:      #EF5A90;
+  --pink-lt:   #fde8f1;
+  --orange:    #F6946A;
+  --orange-lt: #fef0e9;
+  --yellow:    #EFE68E;
+  --yellow-lt: #fdfbe8;
+  --green:     #98CD8E;
+  --green-lt:  #edf7eb;
+  --blue:      #79AEDD;
+  --blue-lt:   #e8f2fb;
+  --black:     #000000;
+  --white:     #ffffff;
+
+  /* UI helpers */
+  --body-bg:  #fafafa;
+  --card-bg:  #ffffff;
+  --muted:    #6b7280;
+  --border:   rgba(0,0,0,0.08);
+
+  /* Typography */
+  --font-display: 'Caveat', cursive;
+  --font-heading: 'Nunito', sans-serif;
+  --font-body:    'Quicksand', sans-serif;
+
+  /* Shadows */
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg:   0 20px 60px rgba(0,0,0,0.12);
+}
+
+/* ─────────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--body-bg);
+  color: var(--black);
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ─────────────────────────────────────────────
+   ANIMATIONS
+───────────────────────────────────────────── */
+@keyframes fadeUp  { from{opacity:0;transform:translateY(32px);} to{opacity:1;transform:translateY(0);} }
+@keyframes float   { 0%,100%{transform:translateY(0) rotate(-5deg);}  50%{transform:translateY(-12px) rotate(-5deg);} }
+@keyframes float2  { 0%,100%{transform:translateY(0) rotate(6deg);}   50%{transform:translateY(-16px) rotate(6deg);} }
+@keyframes float3  { 0%,100%{transform:translateY(0) rotate(-2deg);}  50%{transform:translateY(-8px)  rotate(-2deg);} }
+@keyframes float4  { 0%,100%{transform:translateY(0) rotate(3deg);}   50%{transform:translateY(-10px) rotate(3deg);} }
+@keyframes marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+@keyframes wobble  { 0%,100%{transform:rotate(-1.5deg);} 50%{transform:rotate(1.5deg);} }
+@keyframes pulse-pink {
+  0%,100%{box-shadow:0 6px 30px rgba(239,90,144,0.35);}
+  50%{box-shadow:0 6px 40px rgba(239,90,144,0.6), 0 0 0 8px rgba(239,90,144,0.1);}
+}
+
+.fade-up { animation: fadeUp 0.75s ease forwards; opacity: 0; }
+.d1 { animation-delay: 0.12s; }
+.d2 { animation-delay: 0.26s; }
+.d3 { animation-delay: 0.40s; }
+.d4 { animation-delay: 0.56s; }
+.d5 { animation-delay: 0.72s; }
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY HELPERS
+───────────────────────────────────────────── */
+h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.2; }
+.txt-pink   { color: var(--pink);   }
+.txt-orange { color: var(--orange); }
+.txt-green  { color: var(--green);  }
+.txt-blue   { color: var(--blue);   }
+.txt-muted  { color: var(--muted);  }
+
+/* ─────────────────────────────────────────────
+   NAV
+───────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2.5rem;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+}
+.logo {
+  display: flex; align-items: center;
+}
+.logo img {
+  height: 42px;
+  width: auto;
+  display: block;
+}
+.nav-tagline {
+  font-family: var(--font-body);
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+}
+.nav-badge {
+  font-family: var(--font-heading);
+  font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--pink), var(--orange));
+  padding: 0.35rem 1rem; border-radius: 99px;
+}
+
+/* ─────────────────────────────────────────────
+   MARQUEE
+───────────────────────────────────────────── */
+.marquee-band {
+  background: linear-gradient(90deg, var(--pink), var(--orange) 30%, var(--yellow) 50%, var(--green) 70%, var(--blue));
+  padding: 0.6rem 0; overflow: hidden; margin-top: 64px;
+}
+.marquee-track {
+  display: flex; white-space: nowrap; width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.marquee-item {
+  font-family: var(--font-heading);
+  font-size: 0.7rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--white); padding: 0 2.2rem;
+}
+.marquee-dot { color: rgba(255,255,255,0.5); font-size: 0.5rem; }
+
+/* ─────────────────────────────────────────────
+   HERO
+───────────────────────────────────────────── */
+.hero {
+  min-height: 95vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 5rem 1.5rem 4rem;
+  position: relative; overflow: hidden;
+  background: var(--white);
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 12% 18%, rgba(239,90,144,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 88% 15%, rgba(121,174,221,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 50% at 82% 85%, rgba(152,205,142,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 35% at 18% 82%, rgba(246,148,106,0.10) 0%, transparent 55%);
+}
+
+/* Floating cards */
+.card-float {
+  position: absolute; border-radius: 16px; background: var(--white);
+  box-shadow: var(--shadow-lg); pointer-events: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; padding: 14px 10px;
+}
+.cf1 { width:110px; height:150px; left:3%;  top:18%; border:3px solid var(--pink);   background:linear-gradient(160deg,var(--pink-lt),#fff);   animation:float  5.5s ease-in-out infinite; }
+.cf2 { width:95px;  height:132px; right:4%; top:22%; border:3px solid var(--blue);   background:linear-gradient(160deg,var(--blue-lt),#fff);   animation:float2 6.5s ease-in-out infinite; }
+.cf3 { width:85px;  height:118px; right:10%;bottom:20%;border:3px solid var(--green); background:linear-gradient(160deg,var(--green-lt),#fff);  animation:float3 7.5s ease-in-out infinite 0.8s; }
+.cf4 { width:80px;  height:110px; left:8%;  bottom:24%;border:3px solid var(--orange);background:linear-gradient(160deg,var(--orange-lt),#fff); animation:float4 8s   ease-in-out infinite 0.3s; }
+.cf5 { width:70px;  height:96px;  left:20%; top:12%; border:3px solid var(--yellow); background:linear-gradient(160deg,var(--yellow-lt),#fff); animation:float2 9s   ease-in-out infinite 1.2s; opacity:0.7; }
+
+.card-emoji  { font-size:2rem; }
+.card-label  { font-family:var(--font-heading); font-size:0.45rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--black); }
+.card-type   { font-family:var(--font-body); font-size:0.38rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; }
+.card-divider{ width:65%; height:2px; border-radius:1px; }
+.cd-pink   { background:var(--pink); }
+.cd-blue   { background:var(--blue); }
+.cd-green  { background:var(--green); }
+.cd-orange { background:var(--orange); }
+.cd-yellow { background:var(--yellow); }
+
+/* Eyebrow pill */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading); font-size:0.72rem; font-weight:800;
+  letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--pink); background:var(--pink-lt);
+  border:1.5px solid rgba(239,90,144,0.3);
+  padding:0.4rem 1.2rem; border-radius:99px; margin-bottom:1.5rem;
+}
+
+h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem,6vw,4.2rem); font-weight:900; line-height:1.1;
+  margin-bottom:0.8rem; max-width:820px; color:var(--black);
+}
+.h1-handwritten {
+  font-family: var(--font-display);
+  font-size: clamp(3rem,7.5vw,5.5rem); font-weight:700; display:inline-block;
+  background: linear-gradient(90deg, var(--pink), var(--orange));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  line-height:1.05; animation:wobble 4s ease-in-out infinite;
+}
+.hero-kicker {
+  font-family:var(--font-heading); font-size:0.8rem; font-weight:700;
+  letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:1.4rem;
+  display:flex; align-items:center; justify-content:center; gap:0.7rem; flex-wrap:wrap;
+}
+.hero-kicker em { color:var(--orange); font-style:normal; }
+.hero-sub {
+  font-size:1.05rem; color:#444; max-width:560px;
+  margin:0 auto 2.5rem; line-height:1.85; font-weight:500;
+}
+.hero-sub strong { color:var(--black); font-weight:700; }
+
+/* Buttons */
+.btn-primary {
+  display:inline-flex; align-items:center; gap:0.6rem;
+  background:linear-gradient(135deg,var(--pink),var(--orange));
+  color:var(--white); font-family:var(--font-heading);
+  font-size:0.9rem; font-weight:800; letter-spacing:0.06em; text-transform:uppercase;
+  padding:1rem 2.4rem; border-radius:99px; border:none; cursor:pointer; text-decoration:none;
+  animation:pulse-pink 2.5s ease-in-out infinite;
+  transition:transform 0.2s;
+}
+.btn-primary:hover { transform:translateY(-3px); }
+.btn-ghost {
+  display:inline-flex; align-items:center; gap:0.5rem;
+  background:transparent; color:var(--black); font-family:var(--font-heading);
+  font-size:0.82rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+  padding:0.9rem 2rem; border-radius:99px; border:2px solid rgba(0,0,0,0.15);
+  cursor:pointer; text-decoration:none; transition:border-color 0.25s, color 0.25s;
+}
+.btn-ghost:hover { border-color:var(--pink); color:var(--pink); }
+
+.hero-ctas { display:flex; gap:1rem; align-items:center; justify-content:center; flex-wrap:wrap; }
+.hero-trust {
+  margin-top:2rem; font-family:var(--font-body); font-size:0.78rem;
+  font-weight:600; color:var(--muted);
+  display:flex; align-items:center; gap:0.7rem;
+}
+.hero-trust::before,.hero-trust::after { content:''; flex:1; height:1px; background:rgba(0,0,0,0.1); max-width:50px; }
+
+/* ─────────────────────────────────────────────
+   DIFFERENTIATOR BAND
+───────────────────────────────────────────── */
+.diff-band {
+  background:var(--yellow); padding:3rem 1.5rem; text-align:center;
+  border-top:3px solid rgba(0,0,0,0.06); border-bottom:3px solid rgba(0,0,0,0.06);
+}
+.diff-statement {
+  font-family:var(--font-heading); font-size:clamp(1.15rem,2.8vw,1.75rem);
+  font-weight:900; line-height:1.45; max-width:760px; margin:0 auto; color:var(--black);
+}
+.diff-accent { font-family:var(--font-display); font-size:clamp(1.5rem,3.5vw,2.2rem); font-weight:700; color:var(--pink); }
+.diff-sub { font-size:0.9rem; color:rgba(0,0,0,0.6); margin-top:0.8rem; font-weight:600; }
+
+/* ─────────────────────────────────────────────
+   OFFER STRIP
+───────────────────────────────────────────── */
+.offer-strip { background:var(--white); border-bottom:2px solid var(--border); }
+.offer-grid { display:grid; grid-template-columns:repeat(3,1fr); max-width:1000px; margin:0 auto; }
+.offer-item { padding:2.8rem 2rem; text-align:center; border-right:2px solid var(--border); }
+.offer-item:last-child { border-right:none; }
+.offer-num { font-family:var(--font-display); font-size:3.2rem; line-height:1; display:block; margin-bottom:0.4rem; }
+.offer-item:nth-child(1) .offer-num { color:var(--pink); }
+.offer-item:nth-child(2) .offer-num { color:var(--orange); }
+.offer-item:nth-child(3) .offer-num { color:var(--green); }
+.offer-label { font-family:var(--font-heading); font-size:1rem; font-weight:800; margin-bottom:0.5rem; }
+.offer-desc  { font-size:0.85rem; color:var(--muted); line-height:1.65; }
+
+/* ─────────────────────────────────────────────
+   SHARED SECTION STYLES
+───────────────────────────────────────────── */
+.section-inner { max-width:1080px; margin:0 auto; padding:6rem 1.5rem; }
+.section-label {
+  display:inline-block; font-family:var(--font-heading); font-size:0.68rem; font-weight:800;
+  letter-spacing:0.2em; text-transform:uppercase; color:var(--pink); margin-bottom:0.8rem;
+}
+.section-title { font-family:var(--font-heading); font-size:clamp(1.8rem,4vw,2.6rem); font-weight:900; margin-bottom:1rem; }
+.section-sub   { color:var(--muted); max-width:540px; font-size:1rem; line-height:1.8; }
+.section-display { font-family:var(--font-display); font-size:clamp(2.2rem,5vw,3.2rem); font-weight:700; }
+
+/* Color dot divider */
+.color-dots { display:flex; align-items:center; justify-content:center; gap:0.5rem; margin:0 auto 2.2rem; }
+.dot { width:10px; height:10px; border-radius:50%; }
+.dot-pink   { background:var(--pink); }
+.dot-orange { background:var(--orange); }
+.dot-yellow { background:var(--yellow); }
+.dot-green  { background:var(--green); }
+.dot-blue   { background:var(--blue); }
+
+/* ─────────────────────────────────────────────
+   WHO SECTION
+───────────────────────────────────────────── */
+.who-section { background:var(--body-bg); }
+.who-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(295px,1fr)); gap:1.5rem; margin-top:3rem; }
+.who-card {
+  background:var(--card-bg); border-radius:20px; padding:2rem;
+  border:2px solid var(--border); position:relative; overflow:hidden;
+  transition:transform 0.25s, box-shadow 0.25s; box-shadow:var(--shadow-card);
+}
+.who-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+.who-card::before { content:''; position:absolute; top:0; left:0; right:0; height:5px; border-radius:20px 20px 0 0; }
+.who-card.educator::before { background:var(--green); }
+.who-card.therapist::before { background:var(--blue); }
+.who-card.parent::before    { background:var(--pink); }
+
+.who-icon {
+  width:52px; height:52px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.6rem; margin-bottom:1.1rem;
+}
+.who-card.educator  .who-icon { background:var(--green-lt); }
+.who-card.therapist .who-icon { background:var(--blue-lt); }
+.who-card.parent    .who-icon { background:var(--pink-lt); }
+
+.who-role { font-family:var(--font-heading); font-size:1rem; font-weight:800; margin-bottom:0.7rem; }
+.who-card.educator  .who-role { color:#2e7d22; }
+.who-card.therapist .who-role { color:#1a5da8; }
+.who-card.parent    .who-role { color:var(--pink); }
+
+.who-pain { color:var(--muted); font-size:0.88rem; line-height:1.75; margin-bottom:1rem; }
+.who-gain { font-size:0.88rem; line-height:1.75; color:var(--black); }
+.who-voice-note {
+  margin-top:1.2rem; padding:0.9rem 1rem; border-radius:12px;
+  font-size:0.8rem; line-height:1.55; font-style:italic; font-weight:600;
+}
+.who-card.educator  .who-voice-note { background:var(--green-lt);  color:#2e7d22; }
+.who-card.therapist .who-voice-note { background:var(--blue-lt);   color:#1a5da8; }
+.who-card.parent    .who-voice-note { background:var(--pink-lt);   color:var(--pink); }
+
+/* Tags */
+.tag {
+  display:inline-block; font-size:0.65rem; font-family:var(--font-heading);
+  font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+  padding:0.25rem 0.75rem; border-radius:99px; margin:0.3rem 0.2rem 0 0;
+}
+.tag-green  { background:var(--green-lt);  color:#2e7d22; }
+.tag-blue   { background:var(--blue-lt);   color:#1a5da8; }
+.tag-pink   { background:var(--pink-lt);   color:var(--pink); }
+.tag-orange { background:var(--orange-lt); color:#c45a1e; }
+.tag-yellow { background:var(--yellow-lt); color:#7a6e05; }
+
+/* ─────────────────────────────────────────────
+   HOW IT WORKS
+───────────────────────────────────────────── */
+.how-section { background:var(--white); }
+.steps { display:flex; flex-direction:column; gap:0; margin-top:2.5rem; }
+.step {
+  display:flex; gap:1.5rem; align-items:flex-start;
+  padding:1.6rem 0; border-bottom:1.5px dashed rgba(0,0,0,0.1);
+}
+.step:last-child { border-bottom:none; }
+.step-num-wrap {
+  width:48px; height:48px; border-radius:14px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-size:1.6rem; font-weight:700; color:var(--white);
+}
+.step:nth-child(1) .step-num-wrap { background:var(--pink); }
+.step:nth-child(2) .step-num-wrap { background:var(--orange); }
+.step:nth-child(3) .step-num-wrap { background:var(--green); }
+.step:nth-child(4) .step-num-wrap { background:var(--blue); }
+.step-body h3 { font-family:var(--font-heading); font-size:1rem; font-weight:800; margin-bottom:0.35rem; }
+.step-body p  { color:var(--muted); font-size:0.88rem; line-height:1.7; }
+.step-badge {
+  display:inline-block; font-size:0.62rem; font-family:var(--font-heading); font-weight:700;
+  letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--orange); background:var(--orange-lt);
+  padding:0.15rem 0.6rem; border-radius:99px; margin-left:0.5rem; vertical-align:middle;
+}
+
+/* Kit grid */
+.kit-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(196px,1fr)); gap:1rem; margin-top:2.5rem; }
+.kit-item {
+  background:var(--body-bg); border-radius:16px; border:2px solid var(--border);
+  padding:1.4rem 1.2rem; display:flex; align-items:flex-start; gap:0.9rem;
+  transition:border-color 0.2s, transform 0.2s;
+}
+.kit-item:hover { border-color:var(--pink); transform:translateY(-3px); }
+.kit-icon { font-size:1.6rem; flex-shrink:0; width:40px; height:40px; display:flex; align-items:center; justify-content:center; }
+.kit-text h4 { font-family:var(--font-heading); font-size:0.85rem; font-weight:800; margin-bottom:0.25rem; }
+.kit-text p  { color:var(--muted); font-size:0.78rem; line-height:1.5; }
+
+/* ─────────────────────────────────────────────
+   PROOF BAND
+───────────────────────────────────────────── */
+.proof-band {
+  background:linear-gradient(135deg,#1a1a2e 0%,#2d1b4e 100%);
+  position:relative; overflow:hidden;
+}
+.proof-band::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 50% 60% at 10% 50%, rgba(239,90,144,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 90% 50%, rgba(121,174,221,0.12) 0%, transparent 55%);
+}
+.proof-inner {
+  max-width:960px; margin:0 auto; padding:5rem 1.5rem;
+  display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;
+  position:relative; z-index:1;
+}
+.proof-stat-block { display:flex; flex-direction:column; gap:2.2rem; }
+.stat { display:flex; flex-direction:column; }
+.stat-num { font-family:var(--font-display); font-size:3rem; line-height:1; margin-bottom:0.3rem; }
+.stat:nth-child(1) .stat-num { color:var(--pink); }
+.stat:nth-child(2) .stat-num { color:var(--yellow); }
+.stat:nth-child(3) .stat-num { color:var(--green); }
+.stat-desc { color:rgba(255,255,255,0.6); font-size:0.85rem; line-height:1.55; }
+
+.proof-quote {
+  background:rgba(255,255,255,0.06); border:2px solid rgba(255,255,255,0.1);
+  border-radius:20px; padding:2.2rem; position:relative;
+}
+.quote-mark {
+  font-family:var(--font-display); font-size:5rem; line-height:1;
+  color:rgba(239,90,144,0.25); position:absolute; top:-0.8rem; left:1.2rem; pointer-events:none;
+}
+.proof-quote p { color:var(--white); font-size:1rem; line-height:1.85; font-style:italic; margin-bottom:1.2rem; }
+.proof-attribution { font-family:var(--font-heading); font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--pink); }
+
+/* ─────────────────────────────────────────────
+   OWNERSHIP STRIP
+───────────────────────────────────────────── */
+.own-strip {
+  background:var(--yellow); padding:3rem 1.5rem; text-align:center;
+  border-top:3px solid rgba(0,0,0,0.06); border-bottom:3px solid rgba(0,0,0,0.06);
+}
+.own-title { font-family:var(--font-heading); font-size:0.68rem; font-weight:800; letter-spacing:0.2em; text-transform:uppercase; color:rgba(0,0,0,0.5); margin-bottom:1.4rem; }
+.own-list { display:flex; flex-wrap:wrap; gap:0.75rem; justify-content:center; max-width:900px; margin:0 auto; }
+.own-item {
+  font-family:var(--font-body); font-size:0.85rem; font-weight:600;
+  color:var(--black); padding:0.6rem 1.3rem;
+  background:rgba(255,255,255,0.7); border:1.5px solid rgba(0,0,0,0.1);
+  border-radius:99px; transition:background 0.2s, border-color 0.2s; cursor:default;
+}
+.own-item:hover { background:var(--white); border-color:var(--pink); color:var(--pink); }
+
+/* ─────────────────────────────────────────────
+   SIGNUP
+───────────────────────────────────────────── */
+.signup-section {
+  background:linear-gradient(160deg,var(--pink-lt) 0%,var(--blue-lt) 100%);
+  position:relative; overflow:hidden;
+}
+.signup-section::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(ellipse 60% 60% at 50% 40%, rgba(239,90,144,0.08) 0%, transparent 65%);
+}
+.signup-inner { max-width:600px; margin:0 auto; padding:6rem 1.5rem; text-align:center; position:relative; z-index:1; }
+
+.form-wrap {
+  background:var(--white); border-radius:24px; padding:2.8rem; margin-top:2.5rem;
+  box-shadow:0 30px 80px rgba(239,90,144,0.12), 0 8px 30px rgba(0,0,0,0.08);
+  border:2px solid rgba(239,90,144,0.12);
+}
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.field { display:flex; flex-direction:column; gap:0.45rem; margin-bottom:1rem; }
+.field label { font-family:var(--font-heading); font-size:0.68rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+.field input,.field select {
+  background:var(--body-bg); border:2px solid rgba(0,0,0,0.1);
+  border-radius:12px; padding:0.85rem 1rem; color:var(--black);
+  font-family:var(--font-body); font-size:0.92rem; font-weight:500; outline:none;
+  transition:border-color 0.25s, box-shadow 0.25s;
+}
+.field select {
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 1rem center;
+  padding-right:2.5rem;
+}
+.field input:focus,.field select:focus { border-color:var(--pink); box-shadow:0 0 0 3px rgba(239,90,144,0.12); }
+.field input::placeholder { color:rgba(0,0,0,0.3); }
+.field select option { background:var(--white); }
+.form-note { color:var(--muted); font-size:0.76rem; margin-top:0.9rem; line-height:1.6; }
+.submit-btn {
+  width:100%; padding:1.15rem; margin-top:0.3rem;
+  background:linear-gradient(135deg,var(--pink),var(--orange));
+  border:none; border-radius:99px; cursor:pointer;
+  font-family:var(--font-heading); font-size:0.9rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--white); box-shadow:0 6px 30px rgba(239,90,144,0.35);
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.submit-btn:hover { transform:translateY(-2px); box-shadow:0 10px 40px rgba(239,90,144,0.45); }
+.submit-btn:active { transform:translateY(0); }
+
+.success-msg { display:none; text-align:center; padding:1rem; }
+.success-msg.show { display:block; }
+.success-icon { font-size:3.5rem; margin-bottom:1rem; }
+.success-msg h3 { font-family:var(--font-display); font-size:1.8rem; font-weight:700; color:var(--pink); margin-bottom:0.6rem; }
+.success-msg p { color:var(--muted); font-size:0.9rem; line-height:1.75; }
+
+/* ─────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────── */
+footer { background:var(--black); text-align:center; padding:2.8rem 1.5rem; color:rgba(255,255,255,0.45); font-size:0.78rem; }
+.footer-logo {
+  display: block; margin: 0 auto 0.6rem;
+}
+.footer-logo img {
+  height: 52px; width: auto;
+  /* Inverse PNG on dark footer — looks great as-is, no blend needed */
+}
+.footer-tagline { font-family:var(--font-heading); font-size:0.7rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:1rem; }
+footer a { color:var(--pink); text-decoration:none; }
+footer a:hover { text-decoration:underline; }
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width:720px) {
+  .offer-grid { grid-template-columns:1fr; }
+  .offer-item { border-right:none; border-bottom:2px solid var(--border); }
+  .offer-item:last-child { border-bottom:none; }
+  .form-row { grid-template-columns:1fr; }
+  .proof-inner { grid-template-columns:1fr; gap:2.5rem; }
+  nav { padding:1rem 1.2rem; }
+  .nav-tagline { display:none; }
+  .cf3,.cf4,.cf5 { display:none; }
+  .cf1 { left:-16px; width:90px; height:125px; }
+  .cf2 { right:-12px; width:80px; height:112px; }
+  .how-grid { grid-template-columns:1fr !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="logo"><img src="HorizontalHorizontal-RGB.png" alt="Kaijutsu" /></div>
+  <div class="nav-tagline">Battle with Cards. Grow with Heart.</div>
+  <div class="nav-badge">Beta Pilot</div>
+</nav>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-band">
+  <div class="marquee-track">
+    <span class="marquee-item">Level Up Your EQ</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Boss Battle with Big Feelings</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">The Only SEL Tool Kids Beg to Play</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Power Cards for Tough Days</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Cards in Hand. Feelings in Check.</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">We Made Therapy Techniques Collectible</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Level Up Your EQ</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Boss Battle with Big Feelings</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">The Only SEL Tool Kids Beg to Play</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Power Cards for Tough Days</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Cards in Hand. Feelings in Check.</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">We Made Therapy Techniques Collectible</span><span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="card-float cf1">
+    <div class="card-emoji">🔥</div>
+    <div class="card-divider cd-pink"></div>
+    <div class="card-label">Hiro</div>
+    <div class="card-type">Power Card</div>
+  </div>
+  <div class="card-float cf2">
+    <div class="card-emoji">💙</div>
+    <div class="card-divider cd-blue"></div>
+    <div class="card-label">Lumi</div>
+    <div class="card-type">Emotion Card</div>
+  </div>
+  <div class="card-float cf3">
+    <div class="card-emoji">🌪️</div>
+    <div class="card-divider cd-green"></div>
+    <div class="card-label">Rocky</div>
+    <div class="card-type">Action Card</div>
+  </div>
+  <div class="card-float cf4">
+    <div class="card-emoji">⭐</div>
+    <div class="card-divider cd-orange"></div>
+    <div class="card-label">Stella</div>
+    <div class="card-type">Power Card</div>
+  </div>
+  <div class="card-float cf5">
+    <div class="card-emoji">🎋</div>
+    <div class="card-divider cd-yellow"></div>
+    <div class="card-label">Tatami</div>
+  </div>
+
+  <div style="position:relative;z-index:2;">
+    <div class="eyebrow fade-up">✦ Exclusive Pilot Invitation ✦</div>
+
+    <h1 class="fade-up d1">
+      What if big feelings had a<br>
+      <span class="h1-handwritten">boss battle</span><br>
+      — and kids actually wanted to fight them?
+    </h1>
+
+    <p class="hero-kicker fade-up d2">
+      <em>We made therapy techniques collectible</em>
+      &nbsp;✦&nbsp;
+      <em>Kids think they're gaming. They're actually growing.</em>
+    </p>
+
+    <p class="hero-sub fade-up d3">
+      We're hand-selecting educators, therapists, and parents to test Kaijutsu — the trading card game where <strong>mindfulness became a power card</strong> and emotional intelligence levels up one epic combo at a time.
+    </p>
+
+    <div class="hero-ctas fade-up d4">
+      <a href="#signup" class="btn-primary">⚡ Claim Your Free Beta Kit</a>
+      <a href="#how" class="btn-ghost">See How It Works ↓</a>
+    </div>
+    <p class="hero-trust fade-up d5">No cost · Shipped to you · 15 minutes of feedback</p>
+  </div>
+</section>
+
+<!-- ── DIFFERENTIATOR BAND ── -->
+<div class="diff-band">
+  <p class="diff-statement">
+    <span class="diff-accent">Too fun to be therapy.</span> Too effective to be just a game.<br>
+    The SEL tool that doesn't feel like one.
+  </p>
+  <p class="diff-sub">Co-created by parents, classroom teachers, and child development experts — tested by actual kids.</p>
+</div>
+
+<!-- ── OFFER STRIP ── -->
+<div class="offer-strip">
+  <div class="offer-grid">
+    <div class="offer-item">
+      <span class="offer-num">01</span>
+      <div class="offer-label">Receive the Game</div>
+      <div class="offer-desc">A complete Kaijutsu beta deck — Power, Emotion, and Action Cards — shipped directly to you. Power cards for tough days, shipped free.</div>
+    </div>
+    <div class="offer-item">
+      <span class="offer-num">02</span>
+      <div class="offer-label">Play It With Kids</div>
+      <div class="offer-desc">Run one session in your classroom, therapy practice, or at home. Watch what happens when emotional learning feels like an adventure.</div>
+    </div>
+    <div class="offer-item">
+      <span class="offer-num">03</span>
+      <div class="offer-label">Share 15 Min of Feedback</div>
+      <div class="offer-desc">A short survey. Then keep your discount toward the full game when we launch on Kickstarter. You earned it.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── WHO IS THIS FOR ── -->
+<section class="who-section">
+  <div class="section-inner">
+    <div class="color-dots">
+      <div class="dot dot-pink"></div><div class="dot dot-orange"></div>
+      <div class="dot dot-yellow"></div><div class="dot dot-green"></div><div class="dot dot-blue"></div>
+    </div>
+    <span class="section-label">Who We're Looking For</span>
+    <h2 class="section-title">Built <span class="txt-pink">with</span> people like you</h2>
+    <p class="section-sub">Kaijutsu was co-developed by parents, teachers, and child development experts. We want feedback from the people in the room with kids every day — and the parents surviving the evenings.</p>
+
+    <div class="who-grid">
+      <div class="who-card educator fade-up">
+        <div class="who-icon">📚</div>
+        <div class="who-role">Educators · K–8 Teachers</div>
+        <p class="who-pain">Real talk from the teacher's lounge: that post-lunch chaos? The Friday-afternoon energy? You need a tool that actually works — without adding a single thing to your prep list.</p>
+        <p class="who-gain">15 minutes of Kaijutsu resets the whole classroom vibe. Your students will literally ask to practice their mindfulness techniques. The only SEL tool that doesn't feel like one more thing on your plate.</p>
+        <div class="who-voice-note">💬 "Friday-afternoon energy level? Play a quick Kaijutsu face-off."</div>
+        <br>
+        <span class="tag tag-green">CASEL Aligned</span>
+        <span class="tag tag-green">Zero Prep</span>
+        <span class="tag tag-yellow">15-Min Sessions</span>
+      </div>
+
+      <div class="who-card therapist fade-up d1">
+        <div class="who-icon">🧠</div>
+        <div class="who-role">Child Therapists · Counselors</div>
+        <p class="who-pain">Finding evidence-based activities that kids genuinely choose during free play — and request by name — is rare. Most tools feel like homework the moment the session ends.</p>
+        <p class="who-gain">Each Power Card is a real mindfulness or regulation technique, CASEL-aligned and disguised as a collectible. Kids think they're gaming. Clinical outcomes meet genuine engagement.</p>
+        <div class="who-voice-note">🔬 Evidence-based emotional regulation through gamified play. The SEL tool kids actually choose.</div>
+        <br>
+        <span class="tag tag-blue">Evidence-Based</span>
+        <span class="tag tag-blue">CASEL Aligned</span>
+        <span class="tag tag-orange">Kid-Requested</span>
+      </div>
+
+      <div class="who-card parent fade-up d2">
+        <div class="who-icon">🏠</div>
+        <div class="who-role">Parents · Caregivers</div>
+        <p class="who-pain">You want something that can actually compete with a screen — and teaches something real while it's at it. (Also: you've been burned by "educational games" before. We get it.)</p>
+        <p class="who-gain">Yes, it's educational. No, they won't notice. They'll be too busy trading Lumi cards and leveling up their EQ. The 15-minute solution to big feelings that doesn't involve a single charger.</p>
+        <div class="who-voice-note">😄 "And yes — you'll probably steal their deck for your own stress relief."</div>
+        <br>
+        <span class="tag tag-pink">Screen-Free</span>
+        <span class="tag tag-pink">Ages 8–14</span>
+        <span class="tag tag-orange">Family Bonding</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how-section" id="how">
+  <div class="section-inner">
+    <div class="color-dots">
+      <div class="dot dot-pink"></div><div class="dot dot-orange"></div>
+      <div class="dot dot-yellow"></div><div class="dot dot-green"></div><div class="dot dot-blue"></div>
+    </div>
+
+    <div class="how-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
+      <div>
+        <span class="section-label">How the Pilot Works</span>
+        <h2 class="section-title">Low-commitment. <span class="txt-pink">High impact.</span></h2>
+        <p class="section-sub" style="margin-bottom:0;">Here's the thing about feelings — they don't wait for a perfect curriculum. We're not asking for your time. We're offering a power card in exchange for your honest expertise.</p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num-wrap">1</div>
+            <div class="step-body">
+              <h3>Sign up below <span class="step-badge">2 min</span></h3>
+              <p>Tell us a little about your setting. We confirm your spot and send your beta kit out within a week. No payment. No tricks.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num-wrap">2</div>
+            <div class="step-body">
+              <h3>Receive &amp; play</h3>
+              <p>Run one session with the kids in your world. The rules take 3 minutes to learn. Hiro, Lumi, Rocky, and the whole crew do the heavy lifting from there.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num-wrap">3</div>
+            <div class="step-body">
+              <h3>Level up the game <span class="step-badge">15 min</span></h3>
+              <p>A short survey sent to your email. What worked, what didn't, what the kids said. Your expertise shapes the final game.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num-wrap">4</div>
+            <div class="step-body">
+              <h3>Claim your discount <span class="step-badge">You earned it</span></h3>
+              <p>Beta pilots get early access and a guaranteed educator/professional discount when Kaijutsu launches on Kickstarter. Cards in hand, savings locked in.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <span class="section-label">What's in the Beta Kit</span>
+        <h2 class="section-title" style="font-size:1.7rem;">Everything you need <span class="txt-pink">to play</span></h2>
+        <div class="kit-grid">
+          <div class="kit-item">
+            <div class="kit-icon">⚡</div>
+            <div class="kit-text">
+              <h4>Power Cards</h4>
+              <p>Real mindfulness techniques with Hiro, Tatami, Lumi, Stella &amp; Rocky — disguised as collectibles</p>
+            </div>
+          </div>
+          <div class="kit-item">
+            <div class="kit-icon">💭</div>
+            <div class="kit-text">
+              <h4>Emotion Cards</h4>
+              <p>Five boss-level emotions — happy, angry, sad, surprised, confused. Name them to beat them.</p>
+            </div>
+          </div>
+          <div class="kit-item">
+            <div class="kit-icon">🎯</div>
+            <div class="kit-text">
+              <h4>Action Cards</h4>
+              <p>Group combo challenges that get everyone moving, laughing, and connecting — screen-free</p>
+            </div>
+          </div>
+          <div class="kit-item">
+            <div class="kit-icon">📖</div>
+            <div class="kit-text">
+              <h4>Facilitator Play Guide</h4>
+              <p>Step-by-step notes and discussion prompts by grade. Zero prep. Serious fun.</p>
+            </div>
+          </div>
+          <div class="kit-item">
+            <div class="kit-icon">🎓</div>
+            <div class="kit-text">
+              <h4>SEL Framework Map</h4>
+              <p>CASEL alignment guide and learning outcome overview — ready for your documentation</p>
+            </div>
+          </div>
+          <div class="kit-item">
+            <div class="kit-icon">🏷️</div>
+            <div class="kit-text">
+              <h4>Kickstarter Code</h4>
+              <p>Early-backer discount locked in for every beta pilot. Your power card for savings.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROOF BAND ── -->
+<section class="proof-band">
+  <div class="proof-inner">
+    <div class="proof-stat-block">
+      <div class="stat">
+        <span class="stat-num">5,000+</span>
+        <span class="stat-desc">SEL champions across 73 countries committed to tools like Kaijutsu in 2024</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">$21B</span>
+        <span class="stat-desc">Projected size of the children's educational games market by 2031</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">15 min</span>
+        <span class="stat-desc">All it takes to reset an entire classroom's emotional energy. One game session. Real results.</span>
+      </div>
+    </div>
+    <div class="proof-quote">
+      <div class="quote-mark">"</div>
+      <p>The kids didn't want to stop. One student asked if she could bring the Power Cards home to teach her little brother the breathing technique. That doesn't happen with worksheets. That doesn't happen with most games either.</p>
+      <div class="proof-attribution">Beta Tester · 3rd Grade Teacher, Chicago</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── OWNERSHIP STRIP ── -->
+<div class="own-strip">
+  <div class="own-title">What People Say About Kaijutsu</div>
+  <div class="own-list">
+    <span class="own-item">"The ridiculous idea that became the classroom essential"</span>
+    <span class="own-item">"Too fun to be therapy, too effective to be just a game"</span>
+    <span class="own-item">"Where emotional intelligence meets actual fun"</span>
+    <span class="own-item">"The only SEL tool kids beg to play"</span>
+    <span class="own-item">"We turned mindfulness into trading cards — and it actually works"</span>
+  </div>
+</div>
+
+<!-- ── SIGNUP ── -->
+<section class="signup-section" id="signup">
+  <div class="signup-inner">
+    <span class="section-label">Apply for the Beta Pilot</span>
+    <h2 class="section-title">
+      Claim your <span class="txt-pink">free kit.</span><br>
+      <span class="section-display">Level up the future of SEL.</span>
+    </h2>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:0.8rem;line-height:1.7;">
+      Spots are limited. We're hand-selecting educators, therapists, and parents who will actually play the game with kids — and tell us the truth about what happens.
+    </p>
+
+    <div class="form-wrap">
+      <div id="form-content">
+        <div class="form-row" style="margin-bottom:0;">
+          <div class="field">
+            <label>First Name</label>
+            <input type="text" id="fname" placeholder="Your first name" />
+          </div>
+          <div class="field">
+            <label>Last Name</label>
+            <input type="text" id="lname" placeholder="Your last name" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="your@email.com" />
+        </div>
+        <div class="field">
+          <label>I am a...</label>
+          <select id="role">
+            <option value="" disabled selected>Select your role</option>
+            <option value="teacher">K–8 Classroom Teacher</option>
+            <option value="counselor">School Counselor / Social Worker</option>
+            <option value="therapist">Child Therapist / Psychologist</option>
+            <option value="parent">Parent / Caregiver</option>
+            <option value="admin">School Administrator</option>
+            <option value="other">Other Education Professional</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>How will you level up with Kaijutsu?</label>
+          <select id="use">
+            <option value="" disabled selected>Select primary use</option>
+            <option value="classroom">Classroom SEL sessions</option>
+            <option value="therapy">Therapy or counseling sessions</option>
+            <option value="home">Home / family play</option>
+            <option value="group">After-school program or group</option>
+          </select>
+        </div>
+        <button class="submit-btn" onclick="handleSubmit()">⚡ Apply for My Free Beta Kit</button>
+        <p class="form-note">No payment required. Shipping covered. Limited spots available.<br>Cards in hand, feelings in check — let's build something that actually works.</p>
+      </div>
+
+      <div class="success-msg" id="success">
+        <div class="success-icon">🎴</div>
+        <h3>You're in the deck!</h3>
+        <p>Epic combo — you just joined the Kaijutsu beta pilot.<br><br>
+        We'll review your application and be in touch within 48 hours. Get ready to level up your EQ game.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo"><img src="HorizontalHorizontal-RGB-Inverse.png" alt="Kaijutsu" /></div>
+  <div class="footer-tagline">Battle with Cards. Grow with Heart.</div>
+  <p>Built by parents, teachers, and child development experts. &copy; 2025 White Rabbit Adventures LLC.</p>
+  <p style="margin-top:0.4rem;">Questions? <a href="mailto:hello@kaijutsu.com">hello@kaijutsu.com</a></p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animation = 'fadeUp 0.7s ease forwards';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.who-card, .kit-item, .step, .stat, .own-item').forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+  });
+
+  function handleSubmit() {
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const role  = document.getElementById('role').value;
+    const use   = document.getElementById('use').value;
+
+    if (!fname || !email || !role || !use) {
+      const btn = document.querySelector('.submit-btn');
+      btn.style.transform = 'translateX(-6px)';
+      setTimeout(() => btn.style.transform = 'translateX(6px)', 100);
+      setTimeout(() => btn.style.transform = 'translateX(0)', 200);
+      return;
+    }
+    document.getElementById('form-content').style.display = 'none';
+    document.getElementById('success').classList.add('show');
+  }
+</script>
+</body>
+</html>
