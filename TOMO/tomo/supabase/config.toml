@@ -4,12 +4,26 @@
 # Project ref stored in supabase/.temp/project-ref (set via supabase link)
 
 # Edge Functions
-# Both functions handle their own JWT verification in-code via supabase.auth.getUser(),
+# ALL functions handle their own JWT verification in-code via supabase.auth.getUser(),
 # so gateway-level verification is disabled to prevent double-401 errors.
 # See BUG-029 (Session 10) and BUG-031 (Session 17) for context.
+# IMPORTANT: If you add a new function, add it here with verify_jwt = false
+# AND ensure the function code calls supabase.auth.getUser() before processing.
 
 [functions.transcribe-audio]
 verify_jwt = false
 
 [functions.extract-session]
+verify_jwt = false
+
+[functions.generate-weekly]
+verify_jwt = false
+
+[functions.generate-monthly]
+verify_jwt = false
+
+[functions.generate-quarterly]
+verify_jwt = false
+
+[functions.chat-with-insight]
 verify_jwt = false

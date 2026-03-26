@@ -36,7 +36,7 @@ export function OfflineBanner() {
 
   return (
     <View style={styles.banner}>
-      <Icons.AlertCircle size={16} color={colors.warning} />
+      <Icons.WifiOff size={16} color={colors.warning} />
       <Text style={styles.bannerText}>No internet connection</Text>
     </View>
   );

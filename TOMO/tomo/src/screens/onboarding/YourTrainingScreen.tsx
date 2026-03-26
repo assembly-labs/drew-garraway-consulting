@@ -11,7 +11,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   View,
   Text,
-  TextInput,
   Pressable,
   StyleSheet,
   ScrollView,
@@ -25,9 +24,10 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { OnboardingStackParamList } from '../../navigation/OnboardingNavigator';
 import { colors, spacing, radius } from '../../config/design-tokens';
 import { Icons } from '../../components/Icons';
+import { GymSearchInput, type SelectedGym } from '../../components/GymSearchInput';
 import { haptics } from '../../utils/haptics';
 import { useLocation } from '../../hooks/useLocation';
-import { findNearbyGyms, searchGyms, type GymWithDistance } from '../../services/gymService';
+import { findNearbyGyms, type GymWithDistance } from '../../services/gymService';
 import { OnboardingProgressBar } from '../../components/OnboardingProgressBar';
 import type { LocationPermission } from '../../types/mvp-types';
 
@@ -50,17 +50,6 @@ const EXPERIENCE_OPTIONS = [
 
 type GymPickerState = 'soft-ask' | 'loading-nearby' | 'nearby' | 'text-only';
 
-interface SelectedGym {
-  id: string | null;
-  name: string;
-  isCustom: boolean;
-  city?: string;
-  state?: string;
-  affiliation?: string;
-  lat?: number;
-  lng?: number;
-}
-
 export function YourTrainingScreen({ navigation, route }: Props) {
   const { name, belt, stripes } = route.params;
 
@@ -71,9 +60,6 @@ export function YourTrainingScreen({ navigation, route }: Props) {
   const [gymPickerState, setGymPickerState] = useState<GymPickerState>('soft-ask');
   const [nearbyGyms, setNearbyGyms] = useState<GymWithDistance[]>([]);
   const [selectedGym, setSelectedGym] = useState<SelectedGym | null>(null);
-  const [gymSearchText, setGymSearchText] = useState('');
-  const [autocompleteResults, setAutocompleteResults] = useState<GymWithDistance[]>([]);
-  const [showAutocomplete, setShowAutocomplete] = useState(false);
 
   // Other fields
   const [targetFrequency, setTargetFrequency] = useState<number>(4);
@@ -84,9 +70,6 @@ export function YourTrainingScreen({ navigation, route }: Props) {
   const softAskOpacity = useRef(new Animated.Value(1)).current;
   const softAskHeight = useRef(new Animated.Value(1)).current;
   const nearbyOpacity = useRef(new Animated.Value(0)).current;
-
-  // Debounce timer for autocomplete
-  const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const canContinue = selectedGym !== null;
 
@@ -192,73 +175,15 @@ export function YourTrainingScreen({ navigation, route }: Props) {
       city: gym.city,
       state: gym.stateOrCountry ?? undefined,
       affiliation: gym.affiliation ?? undefined,
-      lat: undefined, // Will come from Supabase gym record when available
-      lng: undefined,
+      lat: gym.lat,
+      lng: gym.lng,
     });
-    setGymSearchText('');
-    setShowAutocomplete(false);
   };
 
-  const handleSelectAutocompleteGym = (gym: GymWithDistance) => {
-    haptics.light();
-    setSelectedGym({
-      id: gym.id,
-      name: gym.name,
-      isCustom: false,
-      city: gym.city,
-      state: gym.stateOrCountry ?? undefined,
-      affiliation: gym.affiliation ?? undefined,
-    });
-    setGymSearchText(gym.name);
-    setShowAutocomplete(false);
-  };
-
-  const handleGymSearchChange = (text: string) => {
-    setGymSearchText(text);
-
-    // If user is typing, clear any nearby gym selection
-    if (selectedGym && !selectedGym.isCustom) {
-      setSelectedGym(null);
-    }
-
-    // Debounced autocomplete search
-    if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
-
-    if (text.length < 2) {
-      setAutocompleteResults([]);
-      setShowAutocomplete(false);
-      return;
-    }
-
-    searchTimerRef.current = setTimeout(async () => {
-      const results = await searchGyms(text, location.coords, 4);
-      setAutocompleteResults(results);
-      setShowAutocomplete(results.length > 0);
-    }, 200);
-  };
-
-  const handleGymSearchBlur = () => {
-    // Delay hiding autocomplete to allow tap on results
-    setTimeout(() => {
-      setShowAutocomplete(false);
-
-      // If user typed a name but didn't select from autocomplete, treat as custom gym
-      if (gymSearchText.trim() && !selectedGym) {
-        setSelectedGym({
-          id: null,
-          name: gymSearchText.trim(),
-          isCustom: true,
-        });
-      }
-    }, 200);
-  };
-
-  const handleGymSearchFocus = () => {
-    // If there's a selected gym shown in the input, clear it for editing
-    if (selectedGym) {
-      setSelectedGym(null);
-      setGymSearchText('');
-    }
+  const handleGymSearchSelected = (gym: SelectedGym | null) => {
+    // Only update if this came from the text search (not nearby cards)
+    // Nearby card selection is handled by handleSelectNearbyGym
+    setSelectedGym(gym);
   };
 
   const toggleGoal = (goal: string) => {
@@ -383,7 +308,7 @@ export function YourTrainingScreen({ navigation, route }: Props) {
         </View>
 
         <Text style={styles.fallbackHint}>Not here? Type your gym name</Text>
-        {renderTextInput()}
+        {renderSearchFallback()}
       </Animated.View>
     );
   };
@@ -393,81 +318,29 @@ export function YourTrainingScreen({ navigation, route }: Props) {
 
     return (
       <Animated.View style={{ opacity: nearbyOpacity }}>
-        {renderTextInput()}
+        <GymSearchInput
+          initialGym={selectedGym}
+          onGymSelected={handleGymSearchSelected}
+          coords={location.coords}
+        />
       </Animated.View>
     );
   };
 
-  const renderTextInput = () => {
-    // If a gym is selected (from autocomplete), show confirmation state
-    if (selectedGym && gymPickerState !== 'nearby') {
-      return (
-        <Pressable
-          style={styles.selectedGymDisplay}
-          onPress={handleGymSearchFocus}
-        >
-          <View>
-            <Text style={styles.selectedGymName}>{selectedGym.name}</Text>
-            {selectedGym.city && (
-              <Text style={styles.selectedGymMeta}>
-                {[selectedGym.city, selectedGym.state].filter(Boolean).join(', ')}
-              </Text>
-            )}
-          </View>
-          <Icons.Check size={18} color={colors.gold} strokeWidth={3} />
-        </Pressable>
-      );
-    }
+  const renderSearchFallback = () => {
+    // Hide the search input only when a NEARBY gym is selected (shown via
+    // checkmark on the card above). If the user selected via autocomplete
+    // search, the GymSearchInput must stay mounted to show its gold
+    // confirmation display.
+    const isNearbySelection = selectedGym && nearbyGyms.some(g => g.id === selectedGym.id);
+    if (isNearbySelection) return null;
 
     return (
-      <View>
-        <TextInput
-          style={[
-            styles.textInput,
-            showAutocomplete && styles.textInputWithDropdown,
-          ]}
-          value={gymSearchText}
-          onChangeText={handleGymSearchChange}
-          onBlur={handleGymSearchBlur}
-          onFocus={handleGymSearchFocus}
-          placeholder="Search or add your gym"
-          placeholderTextColor={colors.gray600}
-          autoCorrect={false}
-          returnKeyType="done"
-          onSubmitEditing={() => {
-            if (gymSearchText.trim() && !selectedGym) {
-              setSelectedGym({
-                id: null,
-                name: gymSearchText.trim(),
-                isCustom: true,
-              });
-              setShowAutocomplete(false);
-            }
-          }}
-        />
-        {showAutocomplete && (
-          <View style={styles.autocompleteDropdown}>
-            {autocompleteResults.map((gym, index) => (
-              <Pressable
-                key={gym.id || index}
-                style={({ pressed }) => [
-                  styles.autocompleteItem,
-                  index < autocompleteResults.length - 1 && styles.autocompleteItemBorder,
-                  pressed && { backgroundColor: '#252525' },
-                ]}
-                onPress={() => handleSelectAutocompleteGym(gym)}
-              >
-                <Text style={styles.autocompleteName}>{gym.name}</Text>
-                <Text style={styles.autocompleteMeta}>
-                  {[gym.city, gym.stateOrCountry, gym.affiliation]
-                    .filter(Boolean)
-                    .join(' · ')}
-                </Text>
-              </Pressable>
-            ))}
-          </View>
-        )}
-      </View>
+      <GymSearchInput
+        initialGym={selectedGym}
+        onGymSelected={handleGymSearchSelected}
+        coords={location.coords}
+      />
     );
   };
 
@@ -771,84 +644,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: colors.gray500,
     marginBottom: spacing.sm,
-  },
-
-  // ---- Text Input ----
-  textInput: {
-    fontFamily: 'Inter',
-    backgroundColor: colors.gray800,
-    borderRadius: radius.lg,
-    paddingHorizontal: spacing.md,
-    paddingVertical: 16,
-    fontSize: 17,
-    fontWeight: '500',
-    color: colors.white,
-    borderWidth: 1,
-    borderColor: colors.gray700,
-  },
-  textInputWithDropdown: {
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-    borderBottomWidth: 0,
-    borderColor: colors.gold,
-  },
-
-  // ---- Selected Gym Display ----
-  selectedGymDisplay: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: colors.gray800,
-    borderRadius: radius.lg,
-    paddingHorizontal: spacing.md,
-    paddingVertical: 14,
-    borderWidth: 1,
-    borderColor: colors.gold,
-  },
-  selectedGymName: {
-    fontFamily: 'Inter-SemiBold',
-    fontSize: 17,
-    fontWeight: '600',
-    color: colors.white,
-  },
-  selectedGymMeta: {
-    fontFamily: 'Inter',
-    fontSize: 13,
-    fontWeight: '500',
-    color: colors.gray500,
-    marginTop: 1,
-  },
-
-  // ---- Autocomplete Dropdown ----
-  autocompleteDropdown: {
-    backgroundColor: colors.gray800,
-    borderWidth: 1,
-    borderTopWidth: 0,
-    borderColor: colors.gold,
-    borderBottomLeftRadius: radius.lg,
-    borderBottomRightRadius: radius.lg,
-    overflow: 'hidden',
-  },
-  autocompleteItem: {
-    paddingVertical: 12,
-    paddingHorizontal: spacing.md,
-  },
-  autocompleteItemBorder: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#2a2a2a',
-  },
-  autocompleteName: {
-    fontFamily: 'Inter-SemiBold',
-    fontSize: 15,
-    fontWeight: '600',
-    color: colors.white,
-    marginBottom: 1,
-  },
-  autocompleteMeta: {
-    fontFamily: 'Inter',
-    fontSize: 12,
-    fontWeight: '500',
-    color: colors.gray500,
   },
 
   // ---- Chips ----

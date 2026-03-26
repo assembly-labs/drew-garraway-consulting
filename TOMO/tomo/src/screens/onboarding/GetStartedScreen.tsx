@@ -17,12 +17,15 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AudioModule } from 'expo-audio';
 import { OnboardingStackParamList } from '../../navigation/OnboardingNavigator';
 import { colors, spacing, radius } from '../../config/design-tokens';
 import { Icons } from '../../components/Icons';
+import { MicPermissionPrimer } from '../../components/MicPermissionPrimer';
 import { useAuth } from '../../hooks/useAuth';
 import { useToast } from '../../components/Toast';
 import { profileService } from '../../services/supabase';
+import { userGymService } from '../../services/userGymService';
 import { haptics } from '../../utils/haptics';
 import { OnboardingProgressBar } from '../../components/OnboardingProgressBar';
 
@@ -234,9 +237,21 @@ export function GetStartedScreen({ route }: Props) {
   const [preference, setPreference] = useState<'voice' | 'text'>('voice');
   const [saving, setSaving] = useState(false);
   const [showPayoff, setShowPayoff] = useState(false);
+  const [showMicPrimer, setShowMicPrimer] = useState(false);
 
   // Fade out the main content when transitioning to payoff
   const mainOpacity = useRef(new Animated.Value(1)).current;
+
+  // After profile is saved, transition to the chat payoff
+  const transitionToPayoff = () => {
+    Animated.timing(mainOpacity, {
+      toValue: 0,
+      duration: 250,
+      useNativeDriver: true,
+    }).start(() => {
+      setShowPayoff(true);
+    });
+  };
 
   const handleStart = async () => {
     if (!user) return;
@@ -264,18 +279,51 @@ export function GetStartedScreen({ route }: Props) {
         experience_level: params.experienceLevel as any,
       });
 
-      // Fade out main content, show chat payoff
-      Animated.timing(mainOpacity, {
-        toValue: 0,
-        duration: 250,
-        useNativeDriver: true,
-      }).start(() => {
-        setShowPayoff(true);
-      });
+      // Create initial user_gyms row (best-effort, non-blocking for onboarding)
+      if (params.gymName) {
+        userGymService.add({
+          gym_id: params.gymId,
+          gym_name: params.gymName,
+          gym_city: params.gymCity ?? null,
+          gym_state: params.gymState ?? null,
+          gym_affiliation: params.gymAffiliation ?? null,
+          gym_lat: params.gymLat ?? null,
+          gym_lng: params.gymLng ?? null,
+          is_primary: true,
+          relationship: 'home',
+        }).catch(() => {}); // Non-critical — profile has the gym data as fallback
+      }
+
+      // If voice preference, check if we need mic permission
+      if (preference === 'voice') {
+        const status = await AudioModule.getRecordingPermissionsAsync();
+        if (!status.granted) {
+          // Show our branded primer before the system dialog
+          setShowMicPrimer(true);
+          return;
+        }
+      }
+
+      // Text preference or mic already granted — go straight to payoff
+      transitionToPayoff();
     } catch (error) {
       setSaving(false);
       showToast('Could not save your profile. Please try again.', 'error');
     }
+  };
+
+  const handleMicEnable = async () => {
+    setShowMicPrimer(false);
+    // Triggers the iOS system permission dialog
+    await AudioModule.requestRecordingPermissionsAsync();
+    // Regardless of grant/deny, proceed to the payoff
+    transitionToPayoff();
+  };
+
+  const handleMicSkip = () => {
+    setShowMicPrimer(false);
+    // Permission will be requested on first recording attempt (existing fallback)
+    transitionToPayoff();
   };
 
   const handlePayoffComplete = async () => {
@@ -398,6 +446,13 @@ export function GetStartedScreen({ route }: Props) {
           )}
         </Pressable>
       </Animated.View>
+
+      {/* Mic permission primer — shows before iOS system dialog */}
+      <MicPermissionPrimer
+        visible={showMicPrimer}
+        onEnable={handleMicEnable}
+        onSkip={handleMicSkip}
+      />
     </SafeAreaView>
   );
 }

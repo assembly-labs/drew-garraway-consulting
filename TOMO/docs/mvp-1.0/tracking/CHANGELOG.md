@@ -31,6 +31,177 @@ Each entry follows this format:
 
 ---
 
+## 2026-03-26 — Icon Library + 3 Strategic Icon Fixes (Session 22)
+
+**Type:** Polish / Feature
+
+### Changes
+
+**Icon Swaps (Icons.tsx)**
+- `Edit`: Replaced square-with-pencil with Lucide `pen-line` (pencil only). The old square disappeared at 10-14px, leaving a blob across 8+ inline edit indicators.
+- `Sparring`: Replaced two-heads icon with Lucide `swords`. Old icon read as "group/team" — new one immediately communicates combat on journal cards.
+
+**New Icons (Icons.tsx)**
+- `Info`: Lucide `info` (circle-i). Info toasts now visually distinct from error/warning toasts.
+- `WifiOff`: Lucide `wifi-off`. Offline banner now shows a connectivity icon instead of a generic alert.
+
+**Consumer Updates**
+- `Toast.tsx`: Info toast switched from `Icons.AlertCircle` to `Icons.Info`
+- `NetworkError.tsx`: Offline banner switched from `Icons.AlertCircle` to `Icons.WifiOff`
+
+**DESIGN Folder (NEW)**
+- Created `TOMO/DESIGN/` as central hub for all design assets
+- `DESIGN/icons/`: 469 pre-downloaded Lucide SVGs across 12 categories, ready for future use
+- `DESIGN/icons/ICON_LIBRARY.md`: Full reference doc — every icon mapped to its screen, conversion guide, design rules, changelog
+- `DESIGN/icons/pull-icons.sh`: Re-runnable script to refresh icon candidates from Lucide GitHub
+- `DESIGN/brand/`: Copies of brand voice guide, instructor influence matrix
+- `DESIGN/style-guide/`: Copies of design tokens, styles.css, typography, logo explorations
+- `DESIGN/README.md`: Overview of all design assets
+
+### Why
+- AlertCircle was doing quadruple duty (error, warning, info, network) — users couldn't distinguish states at a glance
+- Edit icon was unreadable at the small sizes used across the app
+- Sparring icon had wrong semantic meaning
+- DESIGN folder centralizes scattered design assets and provides a scalable icon pipeline
+
+### Testing
+- `npx tsc --noEmit` — clean, zero errors
+- Test locally: check journal cards for new swords sparring icon, tap into session detail to see pen-line edit indicators, trigger an info toast, toggle airplane mode for wifi-off banner
+
+---
+
+## 2026-03-25 — Gym Search Shared Component + Profile Fix (Session 21b)
+
+**Type:** Feature / Fix
+
+### Changes
+
+**Shared `GymSearchInput` Component (NEW)**
+- Extracted the gym text search + autocomplete into a reusable component: `src/components/GymSearchInput.tsx`
+- Debounced autocomplete (200ms) against 120+ gym database via `searchGyms()` service
+- Selected gym shows gold-bordered confirmation with name/city, tappable to clear and re-search
+- Unmatched text commits as custom gym on blur or return key
+- Used in both onboarding and profile editing
+
+**Onboarding Refactor (`YourTrainingScreen.tsx`)**
+- Replaced ~100 lines of inline text input, autocomplete dropdown, and selected gym display with `<GymSearchInput>`
+- Location soft-ask, nearby gym cards, and state machine remain inline (onboarding-only UX)
+- Removed unused `TextInput` import and 10 style definitions that moved to the shared component
+- Behavior is identical — no UX changes for onboarding
+
+**Profile Gym Edit Fix (`ProfileScreen.tsx`)**
+- Replaced bare `TextInput` in `EditGymSheet` with `<GymSearchInput>` — users now get the same autocomplete experience as onboarding
+- Save now writes all 6 gym fields (`gym_id`, `gym_name`, `gym_is_custom`, `gym_city`, `gym_state`, `gym_affiliation`) instead of just `gym_name`
+- Previously, changing gym in profile left stale metadata (old city, state, affiliation) — now all fields update together
+
+**Self-Review Bug Fix**
+- Fixed: In onboarding nearby mode, selecting a gym from autocomplete search caused `GymSearchInput` to unmount — `renderSearchFallback` incorrectly hid the component for ANY non-custom selection, not just nearby card selections. Now checks `nearbyGyms.some(g => g.id === selectedGym.id)` specifically.
+- Fixed: Added cleanup effect for `searchTimerRef` on unmount in `GymSearchInput` to prevent state updates on unmounted component.
+
+### Why
+- Profile gym edit was a bare text input that only saved `gym_name` — other 5 gym fields stayed frozen from onboarding
+- Switching gyms corrupted profile metadata (name said one thing, city/state/affiliation said another)
+- The autocomplete UX from onboarding was too good to not reuse
+
+### Testing
+- `npx tsc --noEmit` — clean, zero errors
+- Test locally: edit gym in Profile > verify autocomplete dropdown appears when typing 2+ chars
+- Verify selecting from dropdown shows gold confirmation with city/state
+- Verify typing a gym not in the database saves as custom gym
+- Verify onboarding gym picker still works identically (location + nearby + text fallback)
+- Verify onboarding nearby mode: select from autocomplete search below cards — gold confirmation should stay visible
+
+---
+
+## 2026-03-25 — Mic Permission Priming (Session 21)
+
+**Type:** Feature
+
+### Changes
+
+**Mic Permission Primer Modal (UX-003)**
+- New component: `src/components/MicPermissionPrimer.tsx` — branded modal overlay explaining why TOMO needs microphone access
+- Spring-animated modal with gold mic icon, Unbounded headline, Inter body copy
+- Two CTAs: "Enable Microphone" (triggers iOS system dialog) and "Maybe Later" (defers to first recording)
+- Integrated into `GetStartedScreen.tsx` — shows after profile save when voice preference is selected and mic permission is not yet granted
+- No-op for text preference users or users who already granted mic permission
+- Existing fallback in `useVoiceRecorder` handles the "Maybe Later" path on first recording attempt
+- Files: `src/components/MicPermissionPrimer.tsx` (new), `src/screens/onboarding/GetStartedScreen.tsx` (modified)
+
+### Why
+- iOS system mic permission dialog was firing cold on first recording — no context, no explanation
+- Apple's data shows pre-permission priming doubles grant rates (~40% → ~80%+)
+- Denied mic permission breaks TOMO's core value prop (voice-first logging) and recovery requires digging into iOS Settings
+- Critical for TestFlight testers who will all hit this on first use
+
+### Testing
+- `npx tsc --noEmit` — clean, zero errors
+- Test locally on device — requires going through onboarding with a fresh account
+- Verify: voice preference shows primer → "Enable Microphone" triggers system dialog → payoff plays
+- Verify: text preference skips primer entirely
+- Verify: "Maybe Later" skips → first recording attempt still requests permission
+
+---
+
+## 2026-03-25 — Security Hardening + Auth Fix (Session 20)
+
+**Type:** Fix / Build
+
+### Changes
+
+**Auth: Onboarding Flash Fix**
+- Added AsyncStorage cache for `onboarding_complete` flag in `useAuth.ts`
+- On app launch, reads cached flag instantly (no network) — prevents onboarding screens from flashing on slow loads
+- Cache written when profile loads with `onboarding_complete: true`, cleared on sign out
+- Files: `src/hooks/useAuth.ts`
+
+**Database: Security Audit + RLS Hardening**
+- Full security audit of all Supabase tables, edge functions, and client access patterns
+- Applied missing migration `20260322100000_insights_tables.sql` — created `insights`, `insight_conversations`, `user_context` tables (were 404 on live DB)
+- Created and applied `20260325000000_security_hardening.sql`:
+  - Added DELETE policy to `sessions` (service_role only — prevents client-side hard delete)
+  - Added DELETE policy to `profiles` (service_role only)
+- Verified all 6 user data tables have RLS enabled and blocking unauthorized access
+- Files: `supabase/migrations/20260325000000_security_hardening.sql` (new)
+
+**Edge Functions: Config Hardening**
+- Added `verify_jwt = false` entries for all 6 edge functions in `supabase/config.toml`
+- Previously only `transcribe-audio` and `extract-session` were declared; `generate-weekly`, `generate-monthly`, `generate-quarterly`, `chat-with-insight` were missing
+- Added documentation comment explaining why verify_jwt = false and what to do when adding new functions
+- Files: `supabase/config.toml`
+
+**Outstanding: spatial_ref_sys (Supabase support ticket filed)**
+- PostGIS system table `spatial_ref_sys` in public schema triggers Supabase advisory "rls_disabled_in_public"
+- Owned by `supabase_admin` (superuser) — cannot be modified by any user-accessible role
+- Exhaustively tried: ALTER TABLE, REVOKE, SET ROLE, pg_class UPDATE, SECURITY DEFINER function, Management API — all blocked
+- Contains only EPSG coordinate reference data (zero user data)
+- Support ticket filed requesting Supabase run the fix as supabase_admin
+
+### Why
+- Supabase emailed critical security advisory: "Security vulnerabilities detected in your Supabase projects"
+- Onboarding animation replayed on slow app loads due to profile fetch latency
+- 3 insight tables existed in migration files but were never applied to live DB
+
+### Testing
+- `npx tsc --noEmit` — clean, zero errors
+- Verified all tables via PostgREST anon queries: profiles, sessions, insights, insight_conversations, user_context all return empty (RLS blocking); gyms returns data (intentional public read)
+- INSERT/DELETE as anon user tested and blocked on all tables
+- Auth cache fix is JS-only — test locally
+
+### Security Verification Summary
+
+| Table | RLS | Anon Access |
+|---|---|---|
+| profiles | ON | Blocked (empty) |
+| sessions | ON | Blocked (empty) |
+| insights | ON | Blocked (empty) |
+| insight_conversations | ON | Blocked (empty) |
+| user_context | ON | Blocked (empty) |
+| gyms | ON | Public read (intentional) |
+| spatial_ref_sys | OFF | Exposed (support ticket filed) |
+
+---
+
 ## 2026-03-22 — Onboarding UX Enhancements (Session 19)
 
 **Type:** Feature / Polish

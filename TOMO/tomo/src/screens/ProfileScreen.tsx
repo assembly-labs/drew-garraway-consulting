@@ -26,9 +26,13 @@ import { useAuth } from '../hooks/useAuth';
 import { useToast } from '../components/Toast';
 import { colors, spacing, radius, getBeltColor } from '../config/design-tokens';
 import { Icons } from '../components/Icons';
+import { GymSearchInput, type SelectedGym } from '../components/GymSearchInput';
+import { GymCard } from '../components/GymCard';
+import { GymHistoryList } from '../components/GymHistoryList';
 import { ProfileSkeleton } from '../components/Skeleton';
 import { profileService, sessionService } from '../services/supabase';
-import type { BeltLevel } from '../types/mvp-types';
+import { userGymService } from '../services/userGymService';
+import type { BeltLevel, UserGym } from '../types/mvp-types';
 import { haptics } from '../utils/haptics';
 
 const BELT_LABELS: Record<string, string> = {
@@ -49,18 +53,36 @@ export function ProfileScreen() {
   const { showToast } = useToast();
   const [editSheet, setEditSheet] = useState<string | null>(null);
   const [sessionCount, setSessionCount] = useState(0);
+  const [gymHistory, setGymHistory] = useState<UserGym[]>([]);
+  const [primaryGym, setPrimaryGym] = useState<UserGym | null>(null);
+  const [gymSessionCounts, setGymSessionCounts] = useState<Record<string, number>>({});
+  const [editingGymNotes, setEditingGymNotes] = useState<UserGym | null>(null);
 
   const loadSessionCount = useCallback(async () => {
     const count = await sessionService.getCount();
     setSessionCount(count);
   }, []);
 
-  // Load count on mount and when screen comes into focus
+  const loadGymHistory = useCallback(async () => {
+    const [gyms, counts] = await Promise.all([
+      userGymService.list(),
+      userGymService.getSessionCountsByGym(),
+    ]);
+    setGymHistory(gyms);
+    setPrimaryGym(gyms.find(g => g.is_primary) ?? null);
+    setGymSessionCounts(counts);
+  }, []);
+
+  // Load count + gym history on mount and when screen comes into focus
   useEffect(() => {
     loadSessionCount();
-    const unsubscribe = navigation.addListener('focus', loadSessionCount);
+    loadGymHistory();
+    const unsubscribe = navigation.addListener('focus', () => {
+      loadSessionCount();
+      loadGymHistory();
+    });
     return unsubscribe;
-  }, [navigation, loadSessionCount]);
+  }, [navigation, loadSessionCount, loadGymHistory]);
 
   const handleSignOut = () => {
     Alert.alert('Sign Out', 'Are you sure you want to sign out?', [
@@ -119,8 +141,6 @@ export function ProfileScreen() {
         <View style={styles.card}>
           <EditableRow label="Belt" value={`${BELT_LABELS[profile.belt]}${stripesText}`} onPress={() => setEditSheet('belt')} />
           <View style={styles.rowDivider} />
-          <EditableRow label="Gym" value={profile.gym_name} onPress={() => setEditSheet('gym')} />
-          <View style={styles.rowDivider} />
           <EditableRow
             label="Training Target"
             value={`${profile.target_frequency}x / week`}
@@ -138,6 +158,24 @@ export function ProfileScreen() {
             value={String(sessionCount)}
           />
         </View>
+
+        {/* Gym Card — current home gym + actions */}
+        <GymCard
+          primaryGym={primaryGym}
+          fallbackGymName={profile.gym_name}
+          sessionCount={primaryGym ? (gymSessionCounts[primaryGym.id] ?? 0) : 0}
+          onChangeGym={() => setEditSheet('gym')}
+        />
+
+        {/* Gym History — collapsible timeline */}
+        <GymHistoryList
+          gyms={gymHistory}
+          sessionCounts={gymSessionCounts}
+          onEditNotes={(gym) => {
+            setEditingGymNotes(gym);
+            setEditSheet('gym_notes');
+          }}
+        />
 
         {/* Privacy Policy + Version */}
         <Pressable
@@ -172,11 +210,42 @@ export function ProfileScreen() {
         onSave={(belt, stripes) => handleSave({ belt, stripes })}
         onClose={() => setEditSheet(null)}
       />
-      <EditGymSheet
+      <ChangeGymSheet
         visible={editSheet === 'gym'}
-        value={profile.gym_name}
-        onSave={(gymName) => handleSave({ gym_name: gymName })}
+        currentGymName={primaryGym?.gym_name ?? profile.gym_name}
+        onSave={async (gym) => {
+          try {
+            await userGymService.changePrimary(gym);
+            await refreshProfile();
+            await loadGymHistory();
+            setEditSheet(null);
+            haptics.success();
+            showToast('Home gym updated', 'success');
+          } catch {
+            haptics.error();
+            showToast('Could not change gym', 'error');
+          }
+        }}
         onClose={() => setEditSheet(null)}
+      />
+      <GymNotesSheet
+        visible={editSheet === 'gym_notes'}
+        gym={editingGymNotes}
+        onSave={async (notes) => {
+          if (!editingGymNotes) return;
+          try {
+            await userGymService.update(editingGymNotes.id, { notes });
+            await loadGymHistory();
+            setEditSheet(null);
+            setEditingGymNotes(null);
+            haptics.success();
+            showToast('Notes saved', 'success');
+          } catch {
+            haptics.error();
+            showToast('Could not save notes', 'error');
+          }
+        }}
+        onClose={() => { setEditSheet(null); setEditingGymNotes(null); }}
       />
       <EditFrequencySheet
         visible={editSheet === 'frequency'}
@@ -313,21 +382,67 @@ function EditBeltSheet({ visible, belt, stripes, onSave, onClose }: {
   );
 }
 
-function EditGymSheet({ visible, value, onSave, onClose }: {
-  visible: boolean; value: string; onSave: (v: string) => void; onClose: () => void;
+function ChangeGymSheet({ visible, currentGymName, onSave, onClose }: {
+  visible: boolean; currentGymName: string; onSave: (gym: SelectedGym) => void; onClose: () => void;
 }) {
-  const [text, setText] = useState(value);
-  useEffect(() => { if (visible) setText(value); }, [visible, value]);
-  const canSave = text.trim().length > 0;
+  const [gym, setGym] = useState<SelectedGym | null>(null);
+
+  // Reset when sheet opens
+  useEffect(() => { if (visible) setGym(null); }, [visible]);
+
+  const canSave = gym !== null && gym.name.trim().length > 0;
+
+  const handleSave = () => {
+    if (!canSave || !gym) return;
+    Alert.alert(
+      'Change Home Gym?',
+      `Switching from ${currentGymName} to ${gym.name}. Your history at ${currentGymName} will be saved.`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Switch', onPress: () => onSave(gym) },
+      ]
+    );
+  };
+
   return (
-    <SheetWrapper visible={visible} title="Edit Gym" onClose={onClose} onSave={() => canSave && onSave(text.trim())}>
+    <SheetWrapper visible={visible} title="Change Home Gym" onClose={onClose} onSave={handleSave}>
+      <GymSearchInput
+        key={visible ? 'open' : 'closed'}
+        onGymSelected={setGym}
+        placeholder="Search for your new gym"
+        autoFocus
+      />
+    </SheetWrapper>
+  );
+}
+
+function GymNotesSheet({ visible, gym, onSave, onClose }: {
+  visible: boolean; gym: UserGym | null; onSave: (notes: string) => void; onClose: () => void;
+}) {
+  const [text, setText] = useState('');
+
+  useEffect(() => { if (visible && gym) setText(gym.notes ?? ''); }, [visible, gym]);
+
+  return (
+    <SheetWrapper visible={visible} title={gym?.gym_name ?? 'Gym Notes'} onClose={onClose} onSave={() => onSave(text.trim())}>
+      <Text style={{
+        fontFamily: 'JetBrains Mono-SemiBold',
+        fontSize: 12,
+        fontWeight: '600',
+        color: colors.gray500,
+        letterSpacing: 2,
+        marginBottom: spacing.sm,
+      }}>
+        NOTES
+      </Text>
       <TextInput
-        style={styles.sheetInput}
+        style={[styles.sheetInput, { minHeight: 80, textAlignVertical: 'top' }]}
         value={text}
         onChangeText={setText}
-        placeholder="Your gym name"
+        placeholder="e.g., Got my blue belt here"
         placeholderTextColor={colors.gray600}
         autoFocus
+        multiline
       />
     </SheetWrapper>
   );

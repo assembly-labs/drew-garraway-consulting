@@ -133,6 +133,9 @@ export interface Session {
   updated_at: string; // ISO timestamp
   deleted_at: string | null; // soft delete — null means active
 
+  // Gym reference (which gym this session was logged at)
+  user_gym_id: string | null;
+
   // Pipeline metadata (internal, not shown in UI)
   input_method: InputMethod;
   transcription_status: TranscriptionStatus | null;
@@ -168,10 +171,14 @@ export interface SessionInsert {
   notes?: string | null;
   transcript?: string | null;
   audio_path?: string | null;
+  user_gym_id?: string | null;
   input_method: InputMethod;
   transcription_status?: TranscriptionStatus;
   extraction_status?: ExtractionStatus;
   extraction_model?: string | null;
+  transcription_error?: string | null;
+  extraction_error?: string | null;
+  schema_version?: number;
   edited_after_ai?: boolean;
 }
 
@@ -216,6 +223,46 @@ export interface Gym {
   stateOrCountry: string;
   isHeadquarters?: boolean;
   aliases?: string[];
+}
+
+// ===========================================
+// USER GYM (gym history / relationships)
+// ===========================================
+
+export type GymRelationship = 'home' | 'drop_in' | 'seminar' | 'open_mat';
+
+export interface UserGym {
+  id: string;           // UUID
+  user_id: string;      // UUID, references profiles.id
+  gym_id: string | null; // UUID, references gyms.id (null for custom)
+  gym_name: string;
+  gym_city: string | null;
+  gym_state: string | null;
+  gym_affiliation: string | null;
+  gym_lat: number | null;
+  gym_lng: number | null;
+  is_primary: boolean;
+  relationship: GymRelationship;
+  started_at: string;   // YYYY-MM-DD
+  ended_at: string | null; // YYYY-MM-DD, null = still active
+  notes: string | null;
+  created_at: string;   // ISO timestamp
+  updated_at: string;   // ISO timestamp
+}
+
+export interface UserGymInsert {
+  gym_id?: string | null;
+  gym_name: string;
+  gym_city?: string | null;
+  gym_state?: string | null;
+  gym_affiliation?: string | null;
+  gym_lat?: number | null;
+  gym_lng?: number | null;
+  is_primary?: boolean;
+  relationship?: GymRelationship;
+  started_at?: string;
+  ended_at?: string | null;
+  notes?: string | null;
 }
 
 // ===========================================

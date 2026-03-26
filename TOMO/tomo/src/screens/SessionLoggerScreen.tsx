@@ -39,6 +39,10 @@ import type { ExtractionResult, ExtractionResponse, TrainingMode, SessionKind, S
 import { haptics } from '../utils/haptics';
 import { logger } from '../utils/logger';
 import { TECHNIQUE_SUGGESTIONS, SUBMISSION_SUGGESTIONS } from '../data/bjj-dictionary';
+import { userGymService } from '../services/userGymService';
+import { GymChip, GymLabel } from '../components/GymChip';
+import { GymPickerSheet } from '../components/GymPickerSheet';
+import type { SelectedGym } from '../components/GymSearchInput';
 
 // ============================================
 // TYPES
@@ -156,6 +160,22 @@ export function SessionLoggerScreen() {
   const processingRef = useRef(false); // Bug 2: prevent double pipeline
   const savingRef = useRef(false); // Bug 4: prevent double save
   const rawExtractionRef = useRef<ExtractionResult | null>(null); // Bug 18: track edits
+  const primaryGymIdRef = useRef<string | null>(null); // Gym stamp for sessions
+  const [primaryGymName, setPrimaryGymName] = useState<string | null>(null);
+  const [gymOverride, setGymOverride] = useState<SelectedGym | null>(null);
+  const [showGymPicker, setShowGymPicker] = useState(false);
+
+  // Derived gym state for display
+  const effectiveGymName = gymOverride?.name ?? primaryGymName ?? profile?.gym_name ?? null;
+  const isGymOverridden = gymOverride !== null;
+
+  // Fetch primary gym on mount (non-blocking)
+  useEffect(() => {
+    userGymService.getPrimary().then((gym) => {
+      primaryGymIdRef.current = gym?.id ?? null;
+      setPrimaryGymName(gym?.gym_name ?? null);
+    }).catch(() => {}); // Non-critical — session saves fine without it
+  }, []);
 
   // Clean up dismiss timer on unmount
   useEffect(() => {
@@ -384,7 +404,18 @@ export function SessionLoggerScreen() {
         extraction_model: extractionModel, // Bug 17
         schema_version: schemaVersion, // Bug 17
         edited_after_ai: wasEdited, // Bug 18
+        user_gym_id: primaryGymIdRef.current, // Gym history stamp — may be overridden below
       };
+
+      // If gym was overridden (drop-in), create user_gyms entry and use its ID
+      if (gymOverride) {
+        try {
+          const dropIn = await userGymService.addDropIn(gymOverride);
+          if (dropIn) sessionInsert.user_gym_id = dropIn.id;
+        } catch {
+          // Non-critical — session still saves with primary gym or null
+        }
+      }
       // Use the same session ID that was used for audio upload
       if (voiceSessionId) {
         sessionInsert.id = voiceSessionId;
@@ -460,6 +491,8 @@ export function SessionLoggerScreen() {
     setExtractionError(null);
     setExtractionModel(null);
     setSchemaVersion(undefined);
+    setGymOverride(null);
+    setShowGymPicker(false);
     rawExtractionRef.current = null;
     voiceRecorder.reset();
     (navigation as any).navigate('JournalTab');
@@ -470,7 +503,25 @@ export function SessionLoggerScreen() {
   // ============================================
 
   if (phase === 'entry') {
-    return <EntryPhase entry={entry} setEntry={setEntry} onRecord={handleStartRecording} onTextOnly={handleTextOnly} />;
+    return (
+      <>
+        <EntryPhase
+          entry={entry}
+          setEntry={setEntry}
+          onRecord={handleStartRecording}
+          onTextOnly={handleTextOnly}
+          gymName={effectiveGymName}
+          isGymOverridden={isGymOverridden}
+          onGymPress={() => setShowGymPicker(true)}
+          onGymReset={() => setGymOverride(null)}
+        />
+        <GymPickerSheet
+          visible={showGymPicker}
+          onSelect={(gym) => { setGymOverride(gym); setShowGymPicker(false); }}
+          onClose={() => setShowGymPicker(false)}
+        />
+      </>
+    );
   }
 
   if (phase === 'recording') {
@@ -479,6 +530,7 @@ export function SessionLoggerScreen() {
         duration={voiceRecorder.durationFormatted}
         pulseAnim={pulseAnim}
         onStop={handleStopRecording}
+        gymName={effectiveGymName}
       />
     );
   }
@@ -493,14 +545,25 @@ export function SessionLoggerScreen() {
 
   if (phase === 'review') {
     return (
-      <ReviewPhase
-        review={review}
-        setReview={setReview}
-        transcript={transcript}
-        saving={saving}
-        onSave={handleSave}
-        onCancel={resetAndGoBack}
-      />
+      <>
+        <ReviewPhase
+          review={review}
+          setReview={setReview}
+          transcript={transcript}
+          saving={saving}
+          onSave={handleSave}
+          onCancel={resetAndGoBack}
+          gymName={effectiveGymName}
+          isGymOverridden={isGymOverridden}
+          onGymPress={() => setShowGymPicker(true)}
+          onGymReset={() => setGymOverride(null)}
+        />
+        <GymPickerSheet
+          visible={showGymPicker}
+          onSelect={(gym) => { setGymOverride(gym); setShowGymPicker(false); }}
+          onClose={() => setShowGymPicker(false)}
+        />
+      </>
     );
   }
 
@@ -520,11 +583,19 @@ function EntryPhase({
   setEntry,
   onRecord,
   onTextOnly,
+  gymName,
+  isGymOverridden,
+  onGymPress,
+  onGymReset,
 }: {
   entry: EntryFields;
   setEntry: React.Dispatch<React.SetStateAction<EntryFields>>;
   onRecord: () => void;
   onTextOnly: () => void;
+  gymName: string | null;
+  isGymOverridden: boolean;
+  onGymPress: () => void;
+  onGymReset: () => void;
 }) {
   const [promptIndex] = useState(Math.floor(Math.random() * RECORDING_PROMPTS.length));
 
@@ -532,6 +603,12 @@ function EntryPhase({
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.entryContent}>
         <Text style={styles.phaseTitle}>Log Your Training</Text>
+        <GymChip
+          gymName={gymName}
+          isOverridden={isGymOverridden}
+          onPress={onGymPress}
+          onReset={onGymReset}
+        />
 
         {/* Training Mode */}
         <Text style={styles.fieldLabel}>TRAINING MODE</Text>
@@ -626,14 +703,17 @@ function RecordingPhase({
   duration,
   pulseAnim,
   onStop,
+  gymName,
 }: {
   duration: string;
   pulseAnim: Animated.Value;
   onStop: () => void;
+  gymName: string | null;
 }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.recordingContent}>
+        <GymLabel gymName={gymName} />
         <Animated.View style={[styles.recordingCircle, { transform: [{ scale: pulseAnim }] }]}>
           <Icons.Mic size={48} color={colors.white} />
         </Animated.View>
@@ -690,6 +770,10 @@ function ReviewPhase({
   saving,
   onSave,
   onCancel,
+  gymName,
+  isGymOverridden,
+  onGymPress,
+  onGymReset,
 }: {
   review: ReviewFields;
   setReview: React.Dispatch<React.SetStateAction<ReviewFields>>;
@@ -697,6 +781,10 @@ function ReviewPhase({
   saving: boolean;
   onSave: () => void;
   onCancel: () => void;
+  gymName: string | null;
+  isGymOverridden: boolean;
+  onGymPress: () => void;
+  onGymReset: () => void;
 }) {
 
   const [techniqueInput, setTechniqueInput] = useState('');
@@ -834,6 +922,14 @@ function ReviewPhase({
         style={{ flex: 1 }}
       >
       <ScrollView contentContainerStyle={styles.reviewContent} keyboardShouldPersistTaps="handled">
+
+        {/* Gym chip */}
+        <GymChip
+          gymName={gymName}
+          isOverridden={isGymOverridden}
+          onPress={onGymPress}
+          onReset={onGymReset}
+        />
 
         {/* 1. Training Mode + Duration badges */}
         <View style={styles.detailsRow}>
