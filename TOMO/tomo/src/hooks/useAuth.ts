@@ -21,10 +21,13 @@
  */
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase, profileService } from '../services/supabase';
 import { offlineQueue } from '../services/offline-queue';
 import type { Profile } from '../types/mvp-types';
 import type { User } from '@supabase/supabase-js';
+
+const ONBOARDING_COMPLETE_KEY = 'tomo_onboarding_complete';
 
 // ===========================================
 // TYPES
@@ -65,26 +68,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  // Cached flag: true if onboarding was previously completed (survives slow loads)
+  const [cachedOnboardingComplete, setCachedOnboardingComplete] = useState(false);
 
-  // Compute auth state from user + profile
+  // Compute auth state from user + profile (or cached flag)
+  const onboardingDone = profile?.onboarding_complete || cachedOnboardingComplete;
   const authState: AuthState = isLoading
     ? 'loading'
     : !user
       ? 'unauthenticated'
-      : !profile?.onboarding_complete
+      : !onboardingDone
         ? 'needs_onboarding'
         : 'authenticated';
 
-  // Load profile for a given user
+  // Load profile for a given user, cache onboarding status locally
   const loadProfile = useCallback(async (userId: string) => {
     const fetchedProfile = await profileService.get();
     setProfile(fetchedProfile);
+    if (fetchedProfile?.onboarding_complete) {
+      await AsyncStorage.setItem(ONBOARDING_COMPLETE_KEY, 'true');
+      setCachedOnboardingComplete(true);
+    }
   }, []);
 
   // Initial auth check on app launch
   useEffect(() => {
     async function initAuth() {
       try {
+        // Read cached onboarding flag first (instant, no network)
+        const cached = await AsyncStorage.getItem(ONBOARDING_COMPLETE_KEY);
+        if (cached === 'true') {
+          setCachedOnboardingComplete(true);
+        }
+
         const { data: { session } } = await supabase.auth.getSession();
         if (session?.user) {
           setUser(session.user);
@@ -139,6 +155,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signOut = useCallback(async () => {
     await supabase.auth.signOut();
     await offlineQueue.clear();
+    await AsyncStorage.removeItem(ONBOARDING_COMPLETE_KEY);
+    setCachedOnboardingComplete(false);
     setUser(null);
     setProfile(null);
   }, []);

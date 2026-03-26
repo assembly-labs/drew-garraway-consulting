@@ -332,6 +332,50 @@ Migration applied via `supabase db push --linked --include-all`. Verified: `warm
 
 ---
 
+## Security — Session 20 (2026-03-25)
+
+### SEC-001 Onboarding Flash on Slow Load
+**Priority:** P1
+**Area:** Auth (useAuth.ts)
+**Added:** 2026-03-25
+**Status:** ✅ Done (2026-03-25, Session 20)
+
+On slow network loads, onboarding screens (WelcomeScreen typewriter animation) briefly flashed for returning users. Root cause: profile fetch from Supabase took time, leaving `profile` null → authState evaluated to `needs_onboarding`. Fix: cached `onboarding_complete` flag in AsyncStorage, read instantly on launch before network call. Cache cleared on sign out.
+
+### SEC-002 Missing Insight Tables on Live DB
+**Priority:** P0
+**Area:** Database (Supabase)
+**Added:** 2026-03-25
+**Status:** ✅ Done (2026-03-25, Session 20)
+
+`insights`, `insight_conversations`, and `user_context` tables did not exist on the live Supabase instance — migration `20260322100000_insights_tables.sql` was never applied. All 3 returned 404 via PostgREST. Applied via `supabase db push`. All 3 now have RLS enabled and verified.
+
+### SEC-003 Missing DELETE Policies on profiles/sessions
+**Priority:** P2
+**Area:** Database (Supabase RLS)
+**Added:** 2026-03-25
+**Status:** ✅ Done (2026-03-25, Session 20)
+
+No DELETE policy existed on `profiles` or `sessions` tables. While RLS blocked unauthorized reads/writes, hard DELETE was theoretically possible. Added service_role-only DELETE policies via migration `20260325000000_security_hardening.sql`.
+
+### SEC-004 Edge Function config.toml Missing 4 Functions
+**Priority:** P2
+**Area:** Edge Functions (Supabase)
+**Added:** 2026-03-25
+**Status:** ✅ Done (2026-03-25, Session 20)
+
+`supabase/config.toml` only declared `verify_jwt = false` for `transcribe-audio` and `extract-session`. Missing entries for `generate-weekly`, `generate-monthly`, `generate-quarterly`, `chat-with-insight`. Any redeploy of those functions would reset JWT verification to `true` (repeat of BUG-029/BUG-031). All 6 now declared.
+
+### SEC-005 spatial_ref_sys RLS (PostGIS System Table)
+**Priority:** P2
+**Area:** Database (Supabase — PostGIS)
+**Added:** 2026-03-25
+**Status:** Blocked — Supabase support ticket filed
+
+Supabase advisory flags `spatial_ref_sys` (PostGIS system table) as "rls_disabled_in_public". Table is owned by `supabase_admin` — no user-accessible role can ALTER it, REVOKE grants on it, or SET ROLE to the owner. Contains zero user data (EPSG coordinate reference definitions only). Exhaustively tried: ALTER TABLE, REVOKE, SET ROLE, pg_class UPDATE, SECURITY DEFINER function, ALTER EXTENSION SET SCHEMA — all blocked by permissions. Support ticket filed requesting Supabase run the fix as `supabase_admin`.
+
+---
+
 ## Onboarding UX — Remaining Enhancements
 
 ### UX-001 Belt Picker Ceremony
@@ -354,9 +398,17 @@ Elements load instantly on each screen. Should fade/slide in with 50-100ms stagg
 **Priority:** P2
 **Area:** Onboarding (GetStartedScreen) or first session
 **Added:** 2026-03-22
-**Status:** Open
+**Status:** ✅ Done (2026-03-25, Session 21)
 
-If user chose voice logging, the iOS mic permission dialog fires cold on first session. A branded primer screen explaining why the mic is needed before the system dialog would improve grant rates. Apple's own data shows priming doubles permission acceptance.
+Branded primer modal in GetStartedScreen shows after profile save when voice preference is selected. "Enable Microphone" triggers iOS system dialog; "Maybe Later" defers to first recording attempt. Skipped entirely for text preference or already-granted users.
+
+### UX-005 Profile Gym Edit Missing Autocomplete + Stale Metadata
+**Priority:** P2
+**Area:** ProfileScreen (EditGymSheet)
+**Added:** 2026-03-25
+**Status:** ✅ Done (2026-03-25, Session 21b)
+
+Profile gym edit was a bare TextInput saving only `gym_name`. Switching gyms left stale `gym_city`, `gym_state`, `gym_affiliation`, `gym_id`, `gym_is_custom` from onboarding. Fix: extracted `GymSearchInput` shared component with debounced autocomplete, used in both onboarding and profile. Profile now saves all 6 gym fields on edit.
 
 ### UX-004 Gym Scraper Database
 **Priority:** P2

@@ -173,6 +173,32 @@ function AlertCircle({ size = 24, color = '#ffffff', strokeWidth = 1.5 }: IconPr
   );
 }
 
+function Info({ size = 24, color = '#ffffff', strokeWidth = 1.5 }: IconProps) {
+  // Lucide "info" — circle with "i", for informational (non-error) messages
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <Circle cx="12" cy="12" r="10" />
+      <Path d="M12 16v-4" />
+      <Path d="M12 8h.01" />
+    </Svg>
+  );
+}
+
+function WifiOff({ size = 24, color = '#ffffff', strokeWidth = 1.5 }: IconProps) {
+  // Lucide "wifi-off" — for network/connectivity errors
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <Path d="M12 20h.01" />
+      <Path d="M8.5 16.429a5 5 0 0 1 7 0" />
+      <Path d="M5 12.859a10 10 0 0 1 5.17-2.69" />
+      <Path d="M19 12.859a10 10 0 0 0-2.007-1.523" />
+      <Path d="M2 8.82a15 15 0 0 1 4.177-2.643" />
+      <Path d="M22 8.82a15 15 0 0 0-11.288-3.764" />
+      <Path d="m2 2 20 20" />
+    </Svg>
+  );
+}
+
 // ============================================
 // ACTIONS
 // ============================================
@@ -195,10 +221,11 @@ function Minus({ size = 24, color = '#ffffff', strokeWidth = 1.5 }: IconProps) {
 }
 
 function Edit({ size = 24, color = '#ffffff', strokeWidth = 1.5 }: IconProps) {
+  // Lucide "pen-line" — pencil only, no square. Reads clean at 10-14px.
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
-      <Path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-      <Path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+      <Path d="M13 21h8" />
+      <Path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
     </Svg>
   );
 }
@@ -235,12 +262,17 @@ function Logout({ size = 24, color = '#ffffff', strokeWidth = 1.5 }: IconProps) 
 // ============================================
 
 function Sparring({ size = 24, color = '#ffffff', strokeWidth = 1.5 }: IconProps) {
+  // Lucide "swords" — crossed swords, reads as combat/sparring not "group"
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
-      <Circle cx="9" cy="7" r="3" />
-      <Circle cx="15" cy="7" r="3" />
-      <Path d="M5 21v-2a4 4 0 0 1 4-4h0" />
-      <Path d="M19 21v-2a4 4 0 0 0-4-4h0" />
+      <Polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5" />
+      <Line x1="13" y1="19" x2="19" y2="13" />
+      <Line x1="16" y1="16" x2="20" y2="20" />
+      <Line x1="19" y1="21" x2="21" y2="19" />
+      <Polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5" />
+      <Line x1="5" y1="14" x2="9" y2="18" />
+      <Line x1="7" y1="17" x2="4" y2="20" />
+      <Line x1="3" y1="19" x2="5" y2="21" />
     </Svg>
   );
 }
@@ -289,6 +321,8 @@ export const Icons = {
   Check,
   CheckCircle,
   AlertCircle,
+  Info,
+  WifiOff,
   // Actions
   Plus,
   Minus,

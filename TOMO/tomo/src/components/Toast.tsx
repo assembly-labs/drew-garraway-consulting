@@ -148,7 +148,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
                 <Icons.AlertCircle size={20} color={colors.warning} />
               )}
               {toast.type === 'info' && (
-                <Icons.AlertCircle size={20} color={colors.info} />
+                <Icons.Info size={20} color={colors.info} />
               )}
             </View>
             <Text style={[styles.message, messageTypeStyles[toast.type]]} numberOfLines={2}>

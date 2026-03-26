@@ -13,6 +13,8 @@ import type { Gym } from '../types/mvp-types';
 import type { Coordinates } from '../hooks/useLocation';
 
 export interface GymWithDistance extends Gym {
+  lat?: number;
+  lng?: number;
   distance_mi?: number;
 }
 
@@ -41,6 +43,8 @@ export async function findNearbyGyms(
         affiliation: g.affiliation,
         city: g.city,
         stateOrCountry: g.state,
+        lat: g.lat ?? undefined,
+        lng: g.lng ?? undefined,
         distance_mi: g.distance_miles != null
           ? Math.round(g.distance_miles * 10) / 10
           : undefined,
@@ -83,6 +87,8 @@ export async function searchGyms(
         affiliation: g.affiliation,
         city: g.city,
         stateOrCountry: g.state,
+        lat: g.lat ?? undefined,
+        lng: g.lng ?? undefined,
         distance_mi: g.distance_miles != null
           ? Math.round(g.distance_miles * 10) / 10
           : undefined,
