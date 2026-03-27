@@ -22,10 +22,12 @@
       font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--cream);
       color: var(--navy);
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 18px;
       -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
     }
-    .container { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
 
     .hero {
       background: var(--navy);
@@ -35,12 +37,12 @@
     }
     .hero h1 {
       font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(26px, 5vw, 36px);
+      font-size: clamp(30px, 6vw, 42px);
       font-weight: 400;
       line-height: 1.2;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
-    .hero p { font-size: 18px; opacity: 0.8; max-width: 500px; margin: 0 auto; }
+    .hero p { font-size: 19px; opacity: 0.8; max-width: 520px; margin: 0 auto; line-height: 1.6; }
 
     .letter {
       background: var(--light-cream);
@@ -52,22 +54,22 @@
       z-index: 1;
       max-width: 640px;
     }
-    .letter p { font-size: 16px; margin-bottom: 12px; color: #2c4a6e; }
-    .letter .sig { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 16px; }
+    .letter p { font-size: 18px; margin-bottom: 14px; color: #2c4a6e; line-height: 1.7; }
+    .letter .sig { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 17px; }
     .letter .sig strong { display: block; }
 
     section { padding: 48px 24px; }
     section + section { padding-top: 0; }
     .label {
-      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      font-size: 13px; font-weight: 700; letter-spacing: 2px;
       text-transform: uppercase; color: var(--sage); margin-bottom: 10px;
     }
     h2 {
       font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(22px, 4vw, 30px);
-      font-weight: 400; line-height: 1.25; margin-bottom: 16px;
+      font-size: clamp(26px, 5vw, 34px);
+      font-weight: 400; line-height: 1.25; margin-bottom: 18px;
     }
-    section > .container > p { font-size: 17px; color: #2c4a6e; margin-bottom: 14px; }
+    section > .container > p { font-size: 18px; color: #2c4a6e; margin-bottom: 16px; line-height: 1.7; }
 
     .demo-cta {
       background: var(--navy); border-radius: 12px; padding: 32px;
@@ -75,13 +77,13 @@
     }
     .demo-cta h3 {
       font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 20px; font-weight: 400; margin-bottom: 8px;
+      font-size: 24px; font-weight: 400; margin-bottom: 10px;
     }
-    .demo-cta p { font-size: 15px; opacity: 0.75; margin-bottom: 16px; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .demo-cta p { font-size: 17px; opacity: 0.8; margin-bottom: 18px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.6; }
     .btn {
       display: inline-block; background: var(--sage); color: #fff;
-      text-decoration: none; font-weight: 600; font-size: 15px;
-      padding: 12px 28px; border-radius: 8px; transition: background 0.2s, transform 0.15s;
+      text-decoration: none; font-weight: 600; font-size: 17px;
+      padding: 14px 32px; border-radius: 8px; transition: background 0.2s, transform 0.15s;
     }
     .btn:hover { background: #6b8c67; transform: translateY(-1px); }
 
@@ -89,13 +91,13 @@
       background: var(--light-cream); border: 1px solid var(--border);
       border-radius: 10px; padding: 24px; margin-top: 16px;
     }
-    .card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
-    .card p, .card li { font-size: 15px; color: #2c4a6e; line-height: 1.6; }
+    .card h3 { font-size: 19px; font-weight: 600; margin-bottom: 10px; }
+    .card p, .card li { font-size: 17px; color: #2c4a6e; line-height: 1.65; }
     .card ul { list-style: none; padding: 0; }
-    .card li { padding: 3px 0 3px 18px; position: relative; }
+    .card li { padding: 5px 0 5px 20px; position: relative; }
     .card li::before {
-      content: ''; position: absolute; left: 0; top: 11px;
-      width: 7px; height: 7px; border-radius: 50%; background: var(--sage); opacity: 0.6;
+      content: ''; position: absolute; left: 0; top: 14px;
+      width: 8px; height: 8px; border-radius: 50%; background: var(--sage); opacity: 0.6;
     }
 
     .steps {
@@ -104,41 +106,41 @@
     }
     .steps h3 {
       font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 18px; font-weight: 400; margin-bottom: 16px;
+      font-size: 22px; font-weight: 400; margin-bottom: 18px;
     }
-    .step { display: flex; gap: 12px; margin-bottom: 12px; }
+    .step { display: flex; gap: 14px; margin-bottom: 14px; }
     .step:last-child { margin-bottom: 0; }
     .step-n {
-      width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--sage);
+      width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--sage);
       display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 600; color: var(--sage); flex-shrink: 0; margin-top: 1px;
+      font-size: 14px; font-weight: 600; color: var(--sage); flex-shrink: 0; margin-top: 2px;
     }
-    .step p { font-size: 15px; opacity: 0.85; }
+    .step p { font-size: 17px; opacity: 0.85; line-height: 1.6; }
     .step strong { color: #fff; opacity: 1; }
 
     .callout {
       background: rgba(122, 155, 118, 0.1); border-left: 3px solid var(--sage);
       border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 20px 0;
     }
-    .callout p { font-size: 15px; color: var(--navy); }
+    .callout p { font-size: 17px; color: var(--navy); line-height: 1.65; }
 
-    .benefit { padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .benefit { padding: 16px 0; border-bottom: 1px solid var(--border); }
     .benefit:last-child { border-bottom: none; }
-    .benefit h3 { font-size: 16px; font-weight: 600; margin-bottom: 3px; }
-    .benefit p { font-size: 15px; color: #2c4a6e; }
+    .benefit h3 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+    .benefit p { font-size: 17px; color: #2c4a6e; line-height: 1.65; }
 
-    .grant-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 15px; }
+    .grant-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 17px; }
     .grant-table th {
-      text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--slate); padding: 8px 10px; border-bottom: 2px solid var(--border);
+      text-align: left; font-size: 12px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--slate); padding: 10px 12px; border-bottom: 2px solid var(--border);
     }
-    .grant-table td { padding: 12px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .grant-table td { padding: 14px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
     .grant-table tr:last-child td { border-bottom: none; }
-    .gn { font-weight: 600; color: var(--navy); display: block; }
-    .gd { font-size: 13px; color: var(--slate); margin-top: 2px; }
+    .gn { font-weight: 600; color: var(--navy); display: block; font-size: 17px; }
+    .gd { font-size: 15px; color: var(--slate); margin-top: 3px; }
     .tag {
-      display: inline-block; font-size: 11px; font-weight: 600;
-      padding: 2px 8px; border-radius: 10px; white-space: nowrap;
+      display: inline-block; font-size: 13px; font-weight: 600;
+      padding: 3px 10px; border-radius: 10px; white-space: nowrap;
     }
     .tag-lib { background: rgba(30, 58, 95, 0.1); color: var(--navy); }
     .tag-scout { background: rgba(122, 155, 118, 0.15); color: #4e7248; }
@@ -146,20 +148,34 @@
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
 
     footer {
-      text-align: center; padding: 40px 24px; font-size: 13px; color: var(--slate);
+      text-align: center; padding: 40px 24px; font-size: 15px; color: var(--slate);
     }
     footer a { color: var(--navy); }
     footer .logo {
       font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 20px; color: var(--navy); margin-bottom: 6px;
+      font-size: 24px; color: var(--navy); margin-bottom: 6px;
     }
 
     @media (max-width: 600px) {
-      .letter { padding: 24px 20px; margin-left: 16px; margin-right: 16px; }
+      body { font-size: 17px; }
+      .letter { padding: 24px 20px; margin-left: 12px; margin-right: 12px; }
+      .letter p { font-size: 17px; }
       .hero { padding: 44px 20px 40px; }
+      .hero p { font-size: 17px; }
       section { padding: 36px 16px; }
+      section > .container > p { font-size: 17px; }
       .grid-2 { grid-template-columns: 1fr; }
       .steps, .demo-cta { padding: 24px 20px; }
+      .step p { font-size: 16px; }
+      .card p, .card li { font-size: 16px; }
+      .benefit p { font-size: 16px; }
+      .callout p { font-size: 16px; }
+      .demo-cta p { font-size: 16px; }
+      .btn { font-size: 17px; padding: 14px 28px; width: 100%; text-align: center; }
+      .grant-table { font-size: 15px; }
+      .grant-table th, .grant-table td { padding: 10px 8px; }
+      .gn { font-size: 16px; }
+      .gd { font-size: 14px; }
     }
   </style>
 </head>
