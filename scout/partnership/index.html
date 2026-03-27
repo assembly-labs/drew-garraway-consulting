@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scout + Tredyffrin Township Libraries — Partnership &amp; Funding</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1e3a5f;
+      --cream: #f5f1e8;
+      --sage: #7a9b76;
+      --coral: #e67356;
+      --slate: #5c7a9e;
+      --light-cream: #faf8f3;
+      --border: #e2ddd2;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+    .hero {
+      background: var(--navy);
+      color: var(--cream);
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(26px, 5vw, 36px);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .hero p { font-size: 18px; opacity: 0.8; max-width: 500px; margin: 0 auto; }
+
+    .letter {
+      background: var(--light-cream);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      margin: -28px auto 0;
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+    }
+    .letter p { font-size: 16px; margin-bottom: 12px; color: #2c4a6e; }
+    .letter .sig { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 16px; }
+    .letter .sig strong { display: block; }
+
+    section { padding: 48px 24px; }
+    section + section { padding-top: 0; }
+    .label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 10px;
+    }
+    h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 400; line-height: 1.25; margin-bottom: 16px;
+    }
+    section > .container > p { font-size: 17px; color: #2c4a6e; margin-bottom: 14px; }
+
+    .demo-cta {
+      background: var(--navy); border-radius: 12px; padding: 32px;
+      text-align: center; margin: 28px 0 0; color: var(--cream);
+    }
+    .demo-cta h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 20px; font-weight: 400; margin-bottom: 8px;
+    }
+    .demo-cta p { font-size: 15px; opacity: 0.75; margin-bottom: 16px; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .btn {
+      display: inline-block; background: var(--sage); color: #fff;
+      text-decoration: none; font-weight: 600; font-size: 15px;
+      padding: 12px 28px; border-radius: 8px; transition: background 0.2s, transform 0.15s;
+    }
+    .btn:hover { background: #6b8c67; transform: translateY(-1px); }
+
+    .card {
+      background: var(--light-cream); border: 1px solid var(--border);
+      border-radius: 10px; padding: 24px; margin-top: 16px;
+    }
+    .card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+    .card p, .card li { font-size: 15px; color: #2c4a6e; line-height: 1.6; }
+    .card ul { list-style: none; padding: 0; }
+    .card li { padding: 3px 0 3px 18px; position: relative; }
+    .card li::before {
+      content: ''; position: absolute; left: 0; top: 11px;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--sage); opacity: 0.6;
+    }
+
+    .steps {
+      background: var(--navy); color: var(--cream);
+      border-radius: 12px; padding: 28px; margin-top: 20px;
+    }
+    .steps h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 18px; font-weight: 400; margin-bottom: 16px;
+    }
+    .step { display: flex; gap: 12px; margin-bottom: 12px; }
+    .step:last-child { margin-bottom: 0; }
+    .step-n {
+      width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--sage);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; color: var(--sage); flex-shrink: 0; margin-top: 1px;
+    }
+    .step p { font-size: 15px; opacity: 0.85; }
+    .step strong { color: #fff; opacity: 1; }
+
+    .callout {
+      background: rgba(122, 155, 118, 0.1); border-left: 3px solid var(--sage);
+      border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 20px 0;
+    }
+    .callout p { font-size: 15px; color: var(--navy); }
+
+    .benefit { padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .benefit:last-child { border-bottom: none; }
+    .benefit h3 { font-size: 16px; font-weight: 600; margin-bottom: 3px; }
+    .benefit p { font-size: 15px; color: #2c4a6e; }
+
+    .grant-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 15px; }
+    .grant-table th {
+      text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--slate); padding: 8px 10px; border-bottom: 2px solid var(--border);
+    }
+    .grant-table td { padding: 12px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .grant-table tr:last-child td { border-bottom: none; }
+    .gn { font-weight: 600; color: var(--navy); display: block; }
+    .gd { font-size: 13px; color: var(--slate); margin-top: 2px; }
+    .tag {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      padding: 2px 8px; border-radius: 10px; white-space: nowrap;
+    }
+    .tag-lib { background: rgba(30, 58, 95, 0.1); color: var(--navy); }
+    .tag-scout { background: rgba(122, 155, 118, 0.15); color: #4e7248; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+
+    footer {
+      text-align: center; padding: 40px 24px; font-size: 13px; color: var(--slate);
+    }
+    footer a { color: var(--navy); }
+    footer .logo {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 20px; color: var(--navy); margin-bottom: 6px;
+    }
+
+    @media (max-width: 600px) {
+      .letter { padding: 24px 20px; margin-left: 16px; margin-right: 16px; }
+      .hero { padding: 44px 20px 40px; }
+      section { padding: 36px 16px; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .steps, .demo-cta { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="container">
+      <h1>Funding Scout at Tredyffrin&nbsp;&amp;&nbsp;Paoli</h1>
+      <p>How the library can leverage grants to bring AI-powered discovery to patrons — and fund technology and staff in the process.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="letter">
+      <p><strong>Mallory &amp; Jonathan,</strong></p>
+      <p>I want to show you how we can fund Scout's deployment through library grants — with Tredyffrin as the lead applicant and Scout as the technology partner. This model means grant dollars flow to the library for research, staff, and technology. Scout's costs are small: $5K&ndash;$10K covers the pilot.</p>
+      <p>Below is the strategy, what's in it for the library, and a link to try the demo.</p>
+      <div class="sig">
+        <strong>Drew Garraway</strong>
+        Co-founder, Search with Scout
+      </div>
+    </div>
+  </div>
+
+  <!-- Demo -->
+  <section>
+    <div class="container">
+      <div class="demo-cta">
+        <h3>Try Scout Right Now</h3>
+        <p>Scout is built for librarians and patrons. It searches across your Sierra catalog, Libby, Comics Now!, Kanopy, Museum &amp; Equipment of Things, news publications, library events, and more — all in one conversation.</p>
+        <a href="https://searchwithscout.com" class="btn" target="_blank">Open the Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Scout Searches -->
+  <section>
+    <div class="container">
+      <div class="label">What Scout Does</div>
+      <h2>One Search. Every Resource.</h2>
+      <p>Scout works for both patrons and librarians. Patrons get a single conversational search instead of navigating each resource separately. Librarians get a faster way to answer reference questions and surface resources they know exist but patrons can't find.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Collections</h3>
+          <ul>
+            <li>Sierra catalog (books, media, CDs)</li>
+            <li>Libby (ebooks &amp; audiobooks)</li>
+            <li>Comics Now!</li>
+            <li>Kanopy (streaming film)</li>
+            <li>Museum &amp; Equipment of Things</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Resources &amp; More</h3>
+          <ul>
+            <li>News pubs (NYTimes, Phila Inquirer, etc.)</li>
+            <li>Library events &amp; programs</li>
+            <li>12-language voice input</li>
+            <li>WCAG 2.2 AA accessible</li>
+            <li>Zero patron data logged</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section>
+    <div class="container">
+      <div class="label">The Model</div>
+      <h2>Library Applies, Scout Supports</h2>
+      <p>Tredyffrin applies as lead on library grants. Scout is the technology partner. This is standard in library funding — and it means most of the money goes to the library.</p>
+
+      <div class="steps">
+        <h3>How it works</h3>
+        <div class="step">
+          <div class="step-n">1</div>
+          <p><strong>Library applies as lead</strong> on IMLS, LSTA, and foundation grants — funders want to fund libraries.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <p><strong>Scout is the tech partner.</strong> Our costs are a line item in the library's grant budget.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <p><strong>60&ndash;70% of funds go to the library</strong> for research, staff stipends, and technology.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">4</div>
+          <p><strong>Library owns the results.</strong> The data, the story, and the conference presentations are yours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section>
+    <div class="container">
+      <div class="label">For Tredyffrin &amp; Paoli</div>
+      <h2>What the Library Gets</h2>
+
+      <div>
+        <div class="benefit">
+          <h3>Funded research and staff stipends</h3>
+          <p>Grants pay librarians to test Scout and evaluate results. Your staff get compensated for expertise — money goes directly back to library workers.</p>
+        </div>
+        <div class="benefit">
+          <h3>Technology and infrastructure funding</h3>
+          <p>Grant budgets cover devices, software, and tools the library keeps beyond Scout — strengthening both branches.</p>
+        </div>
+        <div class="benefit">
+          <h3>One search for every resource you offer</h3>
+          <p>Patrons stop bouncing between Sierra, Libby, Kanopy, Comics Now!, and the events calendar. Scout unifies them. Twelve languages, voice input, fully accessible.</p>
+        </div>
+        <div class="benefit">
+          <h3>A tool librarians actually want to use</h3>
+          <p>Librarians use Scout at the reference desk to answer questions faster and pull up resources across systems in seconds. Routine patron questions — "Do you have audiobooks in Spanish?", "How do I access the Inquirer?" — get handled directly, freeing staff for high-value work.</p>
+        </div>
+        <div class="benefit">
+          <h3>Higher digital resource usage</h3>
+          <p>Patrons underuse Libby, Kanopy, Comics Now!, and news pubs because they can't find them. Scout surfaces these automatically — better ROI on content you already pay for.</p>
+        </div>
+        <div class="benefit">
+          <h3>Privacy-first AI</h3>
+          <p>Zero query logging. Zero patron data stored. Aligned with ALA's Library Bill of Rights.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Budget -->
+  <section>
+    <div class="container">
+      <div class="label">The Budget</div>
+      <h2>What This Actually Costs</h2>
+      <p>Scout needs <strong>$5,000&ndash;$10,000</strong> to pilot at Tredyffrin and Paoli. That's it.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Library (~60&ndash;70%)</h3>
+          <ul>
+            <li>Librarian research &amp; testing stipends</li>
+            <li>Evaluation and patron surveys</li>
+            <li>Technology, devices, and tools</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Scout (~30&ndash;40%)</h3>
+          <ul>
+            <li>Development &amp; integration</li>
+            <li>LLM tokens (AI processing costs)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p><strong>What are LLM tokens?</strong> Scout is powered by a large language model (LLM) — the AI that understands patron questions and finds answers. Every query Scout processes costs a small fee called "tokens," similar to how a utility charges per kilowatt-hour. For a library's volume of searches, this runs a few hundred dollars per month.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grant Pipeline -->
+  <section>
+    <div class="container">
+      <div class="label">The Pipeline</div>
+      <h2>Grants We Can Pursue Together</h2>
+
+      <table class="grant-table">
+        <thead>
+          <tr><th>Grant</th><th>Amount</th><th>Who Applies</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="gn">IMLS National Leadership Grant</span><span class="gd">#1 priority. AI called out by IMLS. Deadline Nov 2026.</span></td>
+            <td>$25K&ndash;$1M</td>
+            <td><span class="tag tag-lib">Library</span></td>
+          </tr>
+          <tr>
+            <td><span class="gn">PA LSTA Statewide Grant</span><span class="gd">Fastest path to funded pilot. Watching for cycle reopening.</span></td>
+            <td>$5K&ndash;$150K</td>
+            <td><span class="tag tag-lib">Library</span></td>
+          </tr>
+          <tr>
+            <td><span class="gn">Lyrasis Catalyst Fund</span><span class="gd">Library tech innovation. Past winners include AI projects.</span></td>
+            <td>$5K&ndash;$50K</td>
+            <td><span class="tag tag-lib">Library</span></td>
+          </tr>
+          <tr>
+            <td><span class="gn">NSF SBIR Phase I</span><span class="gd">Scout applies directly. Pre-revenue startup focus.</span></td>
+            <td>$275K</td>
+            <td><span class="tag tag-scout">Scout</span></td>
+          </tr>
+          <tr>
+            <td><span class="gn">Echoing Green Fellowship</span><span class="gd">Social enterprise. For-profit eligible. Apps Sep&ndash;Nov 2026.</span></td>
+            <td>$90K</td>
+            <td><span class="tag tag-scout">Scout</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Next Steps -->
+  <section>
+    <div class="container">
+      <div class="label">Next Steps</div>
+      <h2>What We Need</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>From the Library</h3>
+          <ul>
+            <li>Letters of support from Mallory &amp; Jonathan (we'll draft them)</li>
+            <li>Usage stats: circulation, Libby, Kanopy, reference volume</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Together</h3>
+          <ul>
+            <li>30 minutes to walk through the strategy</li>
+            <li>Decide which grants to pursue first</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section>
+    <div class="container">
+      <div class="demo-cta">
+        <h3>See What Patrons Would Experience</h3>
+        <p>Ask Scout for a book, a film on Kanopy, a news article, or library events — all in one search.</p>
+        <a href="https://searchwithscout.com" class="btn" target="_blank">Try the Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="logo">Scout</div>
+      <p>AI-Powered Library Discovery</p>
+      <p style="margin-top: 8px;">Built by librarians, for librarians.</p>
+      <p style="margin-top: 6px;"><a href="https://searchwithscout.com">searchwithscout.com</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
