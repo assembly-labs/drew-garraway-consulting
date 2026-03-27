@@ -15,7 +15,7 @@ import { ProfileScreen } from '../screens/ProfileScreen';
 import { SessionDetailScreen } from '../screens/SessionDetailScreen';
 import { PrivacyPolicyScreen } from '../screens/PrivacyPolicyScreen';
 import { Icons } from '../components/Icons';
-import { colors, spacing } from '../config/design-tokens';
+import { colors, spacing, shadows } from '../config/design-tokens';
 
 // Journal stack (list + detail)
 export type JournalStackParamList = {
@@ -85,7 +85,7 @@ export function MainTabNavigator() {
         name="LogTab"
         component={SessionLoggerScreen}
         options={{
-          tabBarLabel: '',
+          tabBarShowLabel: false,
           tabBarAccessibilityLabel: 'Log Session',
           tabBarIcon: () => (
             <View style={styles.logButton}>
@@ -132,5 +132,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
+    ...shadows.elevated,
   },
 });

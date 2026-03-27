@@ -25,13 +25,13 @@ function PulseBar({
   borderRadius?: number;
   style?: object;
 }) {
-  const opacity = useRef(new Animated.Value(0.3)).current;
+  const opacity = useRef(new Animated.Value(0.2)).current;
 
   useEffect(() => {
     const pulse = Animated.loop(
       Animated.sequence([
-        Animated.timing(opacity, { toValue: 0.6, duration: 800, useNativeDriver: true }),
-        Animated.timing(opacity, { toValue: 0.3, duration: 800, useNativeDriver: true }),
+        Animated.timing(opacity, { toValue: 0.55, duration: 600, useNativeDriver: true }),
+        Animated.timing(opacity, { toValue: 0.2, duration: 600, useNativeDriver: true }),
       ]),
     );
     pulse.start();
@@ -45,7 +45,7 @@ function PulseBar({
           width: width as any,
           height,
           borderRadius: br,
-          backgroundColor: colors.gray700,
+          backgroundColor: colors.gray600,
           opacity,
         },
         style,

@@ -23,6 +23,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors, spacing, radius, typography, pressedStyles } from '../config/design-tokens';
+import { Icons } from '../components/Icons';
 import { insightService } from '../services/insights-service';
 import { sessionService } from '../services/supabase';
 import type {
@@ -218,9 +219,12 @@ function QuarterlyCard({
           )}
         </View>
       )}
-      <Text style={styles.readMoreLink}>
-        {expanded ? 'Collapse' : 'Read Full Review  \u2192'}
-      </Text>
+      <View style={styles.readMoreRow}>
+        <Text style={styles.readMoreLink}>
+          {expanded ? 'Collapse' : 'Read Full Review'}
+        </Text>
+        {!expanded && <Icons.ChevronRight size={16} color={colors.gold} />}
+      </View>
     </Pressable>
   );
 }
@@ -302,9 +306,12 @@ function MonthlyCard({
           ) : null}
         </View>
       )}
-      <Text style={styles.readMoreLinkWhite}>
-        {expanded ? 'Collapse' : 'Read Full Review  \u2192'}
-      </Text>
+      <View style={styles.readMoreRow}>
+        <Text style={styles.readMoreLinkWhite}>
+          {expanded ? 'Collapse' : 'Read Full Review'}
+        </Text>
+        {!expanded && <Icons.ChevronRight size={16} color={colors.gray300} />}
+      </View>
     </Pressable>
   );
 }
@@ -390,7 +397,7 @@ function EmptyNoSessions() {
   return (
     <View style={styles.emptyState}>
       <View style={styles.emptyIcon}>
-        <Text style={styles.emptyIconText}>--</Text>
+        <Icons.Mic size={28} color={colors.gray600} />
       </View>
       <Text style={styles.emptyTitle}>No Insights Yet</Text>
       <Text style={styles.emptyDescription}>
@@ -405,7 +412,7 @@ function EmptyFewSessions({ sessionCount }: { sessionCount: number }) {
   return (
     <View style={styles.emptyState}>
       <View style={styles.emptyIcon}>
-        <Text style={styles.emptyIconText}>...</Text>
+        <Icons.Journal size={28} color={colors.gray600} />
       </View>
       <Text style={styles.emptyTitle}>Building Your Profile</Text>
       <Text style={styles.emptyDescription}>
@@ -725,12 +732,17 @@ const styles = StyleSheet.create({
     color: colors.gray400,
     lineHeight: 22,
   },
+  readMoreRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    marginTop: 10,
+  },
   readMoreLink: {
     fontFamily: 'Inter-SemiBold',
     fontSize: 15,
     fontWeight: '600',
     color: colors.gold,
-    marginTop: 10,
   },
 
   // -------------------------------------------
@@ -775,7 +787,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '600',
     color: colors.gray300,
-    marginTop: 10,
   },
 
   // -------------------------------------------
@@ -1002,7 +1013,6 @@ const styles = StyleSheet.create({
     color: colors.gray600,
     textAlign: 'center',
     lineHeight: 22,
-    fontStyle: 'italic',
   },
 
   // -------------------------------------------

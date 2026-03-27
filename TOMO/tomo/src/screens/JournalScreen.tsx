@@ -38,14 +38,17 @@ export function JournalScreen() {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [error, setError] = useState(false);
   const [filter, setFilter] = useState<Filter>('all');
 
   const loadSessions = useCallback(async () => {
     try {
+      setError(false);
       const data = await sessionService.list();
       setSessions(data ?? []);
     } catch (err) {
       console.error('Failed to load sessions:', err);
+      setError(true);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -101,6 +104,9 @@ export function JournalScreen() {
             key={f}
             style={({ pressed }) => [styles.filterPill, filter === f && styles.filterPillActive, pressed && { opacity: 0.7 }]}
             onPress={() => { haptics.light(); setFilter(f); }}
+            accessibilityRole="button"
+            accessibilityLabel={`Filter: ${f === 'all' ? 'All' : f === 'gi' ? 'Gi' : 'No-Gi'}`}
+            accessibilityState={{ selected: filter === f }}
           >
             <Text style={[styles.filterText, filter === f && styles.filterTextActive]}>
               {f === 'all' ? 'All' : f === 'gi' ? 'Gi' : 'No-Gi'}
@@ -116,6 +122,24 @@ export function JournalScreen() {
       {/* Loading skeleton */}
       {loading ? (
         <JournalSkeleton />
+      ) : error ? (
+        <View style={styles.emptyState}>
+          <View style={styles.emptyIcon}>
+            <Icons.WifiOff size={32} color={colors.gray600} />
+          </View>
+          <Text style={styles.emptyTitle}>Could Not Load Sessions</Text>
+          <Text style={styles.emptyDescription}>
+            Something went wrong. Pull down to try again, or check your connection.
+          </Text>
+          <Pressable
+            style={({ pressed }) => [styles.retryButton, pressed && { opacity: 0.85 }]}
+            onPress={() => { setLoading(true); loadSessions(); }}
+            accessibilityRole="button"
+            accessibilityLabel="Retry loading sessions"
+          >
+            <Text style={styles.retryButtonText}>Retry</Text>
+          </Pressable>
+        </View>
       ) : filtered.length === 0 && sessions.length > 0 ? (
         <View style={styles.emptyState}>
           <View style={styles.emptyIcon}>
@@ -205,7 +229,7 @@ function SessionCard({
         : colors.gray500;
 
   return (
-    <Pressable style={({ pressed }) => [styles.card, pressed && styles.cardPressed]} onPress={onPress}>
+    <Pressable style={({ pressed }) => [styles.card, pressed && styles.cardPressed]} onPress={onPress} accessibilityRole="button" accessibilityLabel={`${modeLabel} ${kindLabel} session, ${session.duration_minutes} minutes`}>
       <View style={styles.cardTop}>
         {/* Mode badge */}
         <View style={[styles.modeBadge, { backgroundColor: modeColor + '22', borderColor: modeColor + '44' }]}>
@@ -275,11 +299,12 @@ const styles = StyleSheet.create({
   },
   filterPill: {
     paddingHorizontal: spacing.md,
-    paddingVertical: 8,
+    paddingVertical: 12,
     borderRadius: radius.full,
     backgroundColor: colors.gray800,
     borderWidth: 1,
     borderColor: colors.gray700,
+    minHeight: 44,
   },
   filterPillActive: {
     backgroundColor: colors.goldDim,
@@ -325,7 +350,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.gray700,
     padding: spacing.md,
-    marginBottom: spacing.sm,
+    marginBottom: spacing.md,
     position: 'relative',
   },
   cardPressed: {
@@ -373,7 +398,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '500',
     color: colors.gray500,
-    fontStyle: 'italic',
     marginTop: spacing.xs,
   },
   sparringRow: {
@@ -426,5 +450,18 @@ const styles = StyleSheet.create({
     color: colors.gray500,
     textAlign: 'center',
     lineHeight: 22,
+  },
+  retryButton: {
+    marginTop: spacing.lg,
+    paddingHorizontal: spacing.xl,
+    paddingVertical: 14,
+    backgroundColor: colors.gold,
+    borderRadius: radius.xl,
+  },
+  retryButtonText: {
+    fontFamily: 'Inter-Bold',
+    fontSize: 15,
+    fontWeight: '700',
+    color: colors.black,
   },
 });

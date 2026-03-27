@@ -31,6 +31,67 @@ Each entry follows this format:
 
 ---
 
+## 2026-03-26 — UI Polish Pass: 30 Items (Session 23)
+
+**Type:** Polish
+
+### Changes
+
+**Touch Targets & Accessibility (6 items)**
+- Filter pills: paddingVertical 8→12, minHeight 44, a11y labels + selected state (JournalScreen)
+- Sheet Cancel/Save hitSlop expanded to {12,12,20,20} (ProfileScreen, SessionDetailScreen)
+- Frequency chips: paddingVertical sm→md, minHeight 44 (YourTrainingScreen)
+- Gym card minHeight 56 (YourTrainingScreen)
+- SessionCard + filter pills: accessibilityRole, accessibilityLabel, accessibilityState
+- Session detail back button + training details: accessibilityRole + label
+
+**Auth & Onboarding (8 items)**
+- Kanji 友 fontFamily set to Inter (AuthScreen)
+- Input focus state: gold border on focused fields (AuthScreen)
+- "BJJ TRAINING JOURNAL" descriptor below kanji (AuthScreen)
+- Forgot password: underline + gray400 color (AuthScreen)
+- Chat avatar 28→40px, text 14→18px Unbounded-Bold (GetStartedScreen)
+- Belt circles 44→52px (AboutYouScreen)
+- Stripe hint "0 if you don't have any yet" (AboutYouScreen)
+- 3-dot typing indicator between chat bubbles (GetStartedScreen)
+- Log tab: tabBarLabel→tabBarShowLabel:false (MainTabNavigator)
+
+**Journal & Session Detail (7 items)**
+- Journal error state with WifiOff icon + retry button (JournalScreen)
+- Session detail header split into 2 rows (SessionDetailScreen)
+- Removed italic from techniques preview (JournalScreen)
+- Narrative card bg: gray800→goldUltraDim (SessionDetailScreen)
+- Removed italic from narrative text (SessionDetailScreen)
+- Edit icons dimmed: gray600→gray700 (SessionDetailScreen)
+- Journal card spacing: sm→md (JournalScreen)
+- Log FAB shadow: ...shadows.elevated (MainTabNavigator)
+
+**Profile & Insights (8 items)**
+- Session count styled gold mono (ProfileScreen)
+- Sheet header border: gray800→gray700 (ProfileScreen, SessionDetailScreen)
+- Sign out border: negativeDim→negativeDimBorder (ProfileScreen)
+- Unicode arrow→SVG ChevronRight (InsightsScreen)
+- Empty state icons: Mic + Journal replacing text (InsightsScreen)
+- Removed italic from coach footer (InsightsScreen)
+- Skeleton pulse: faster (600ms), brighter range 0.2→0.55, gray600 bg (Skeleton)
+
+**Processing Loader (1 item)**
+- Replaced ActivityIndicator with 3 animated gold bars (SessionLoggerScreen)
+
+**New Token**
+- `negativeDimBorder: 'rgba(239, 68, 68, 0.3)'` (design-tokens.ts)
+
+### Why
+Full UI polish pass to bring all screens to design-system compliance before next TestFlight build. Addresses touch target violations, accessibility gaps, visual polish, and brand consistency.
+
+### Testing
+- `npx tsc --noEmit` — zero errors
+- Zero fontWeight 400 violations
+- All remaining italics are intentional (placeholder text, transcripts, hints)
+- **Test locally on device before TestFlight**
+
+---
+
 ## 2026-03-26 — Icon Library + 3 Strategic Icon Fixes (Session 22)
 
 **Type:** Polish / Feature

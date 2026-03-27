@@ -146,16 +146,19 @@ export function SessionDetailScreen({ route, navigation }: Props) {
     <SafeAreaView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Pressable style={({ pressed }) => [styles.backButton, pressed && { opacity: 0.7 }]} onPress={() => navigation.goBack()}>
-          <Icons.Back size={22} color={colors.gray400} />
-        </Pressable>
-        <Pressable style={({ pressed }) => [styles.headerCenter, pressed && { opacity: 0.7 }]} onPress={() => setEditSheet('date')}>
-          <View style={styles.editDateRow}>
-            <Text style={styles.headerDate}>{formattedDate}{formattedTime ? ` · ${formattedTime}` : ''}</Text>
-            <Icons.Edit size={12} color={colors.gray600} />
-          </View>
-        </Pressable>
-        <Pressable style={({ pressed }) => [pressed && { opacity: 0.7 }]} onPress={() => setEditSheet('trainingDetails')}>
+        <View style={styles.headerRow1}>
+          <Pressable style={({ pressed }) => [styles.backButton, pressed && { opacity: 0.7 }]} onPress={() => navigation.goBack()} accessibilityRole="button" accessibilityLabel="Go back">
+            <Icons.Back size={22} color={colors.gray400} />
+          </Pressable>
+          <Pressable style={({ pressed }) => [styles.headerCenter, pressed && { opacity: 0.7 }]} onPress={() => setEditSheet('date')}>
+            <View style={styles.editDateRow}>
+              <Text style={styles.headerDate}>{formattedDate}{formattedTime ? ` · ${formattedTime}` : ''}</Text>
+              <Icons.Edit size={12} color={colors.gray600} />
+            </View>
+          </Pressable>
+          <View style={{ width: 44 }} />
+        </View>
+        <Pressable style={({ pressed }) => [styles.headerRow2, pressed && { opacity: 0.7 }]} onPress={() => setEditSheet('trainingDetails')} accessibilityRole="button" accessibilityLabel="Edit training details">
           <View style={styles.headerMeta}>
             <View style={[styles.modeBadge, { backgroundColor: modeColor + '22', borderColor: modeColor + '44' }]}>
               <Text style={[styles.modeBadgeText, { color: modeColor }]}>{modeLabel}</Text>
@@ -168,7 +171,6 @@ export function SessionDetailScreen({ route, navigation }: Props) {
             <Icons.Edit size={12} color={colors.gray600} />
           </View>
         </Pressable>
-        <View style={{ width: 44 }} />
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -417,7 +419,7 @@ function DetailSection({
     <Pressable style={({ pressed }) => [styles.section, empty && styles.sectionEmpty, pressed && { opacity: 0.85 }]} onPress={onEdit}>
       <View style={styles.sectionHeader}>
         <Text style={[styles.sectionLabel, labelColor ? { color: labelColor } : undefined]}>{label}</Text>
-        <Icons.Edit size={14} color={colors.gray600} />
+        <Icons.Edit size={14} color={colors.gray700} />
       </View>
       {children}
     </Pressable>
@@ -445,11 +447,11 @@ function SheetWrapper({
     <Modal visible={visible} animationType="slide" presentationStyle="pageSheet">
       <SafeAreaView style={styles.sheetContainer}>
         <View style={styles.sheetHeader}>
-          <Pressable style={({ pressed }) => pressed && { opacity: 0.7 }} onPress={onClose} hitSlop={8}>
+          <Pressable style={({ pressed }) => pressed && { opacity: 0.7 }} onPress={onClose} hitSlop={{ top: 12, bottom: 12, left: 20, right: 20 }}>
             <Text style={styles.sheetCancel}>Cancel</Text>
           </Pressable>
           <Text style={styles.sheetTitle}>{title}</Text>
-          <Pressable style={({ pressed }) => pressed && { opacity: 0.7 }} onPress={onSave} hitSlop={8}>
+          <Pressable style={({ pressed }) => pressed && { opacity: 0.7 }} onPress={onSave} hitSlop={{ top: 12, bottom: 12, left: 20, right: 20 }}>
             <Text style={styles.sheetSave}>Save</Text>
           </Pressable>
         </View>
@@ -791,12 +793,18 @@ const styles = StyleSheet.create({
 
   // Header
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.md,
     borderBottomWidth: 1,
     borderBottomColor: colors.gray800,
+  },
+  headerRow1: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  headerRow2: {
+    marginTop: spacing.xs,
+    alignItems: 'center',
   },
   backButton: {
     width: 44,
@@ -853,7 +861,7 @@ const styles = StyleSheet.create({
   narrativeCard: {
     borderLeftWidth: 3,
     borderLeftColor: colors.gold,
-    backgroundColor: colors.gray800,
+    backgroundColor: colors.goldUltraDim,
     borderRadius: radius.lg,
     padding: spacing.md,
     marginBottom: spacing.md,
@@ -876,7 +884,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '500',
     color: colors.gray300,
-    fontStyle: 'italic',
     lineHeight: 22,
   },
 
@@ -1005,7 +1012,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.md,
     borderBottomWidth: 1,
-    borderBottomColor: colors.gray800,
+    borderBottomColor: colors.gray700,
   },
   sheetCancel: {
     fontFamily: 'Inter-SemiBold',

@@ -33,6 +33,7 @@ export const colors = {
   positiveDim: 'rgba(34, 197, 94, 0.15)',
   negative: '#ef4444',
   negativeDim: 'rgba(239, 68, 68, 0.15)',
+  negativeDimBorder: 'rgba(239, 68, 68, 0.3)',
   warning: '#f59e0b',
   warningDim: 'rgba(245, 158, 11, 0.15)',
   warningDimBorder: 'rgba(245, 158, 11, 0.3)',

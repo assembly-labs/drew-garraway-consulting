@@ -143,6 +143,47 @@ function ChatBubble({
 // CHAT PAYOFF OVERLAY
 // ============================================
 
+function TypingIndicator() {
+  const dot1 = useRef(new Animated.Value(0.3)).current;
+  const dot2 = useRef(new Animated.Value(0.3)).current;
+  const dot3 = useRef(new Animated.Value(0.3)).current;
+  const translateY = useRef(new Animated.Value(12)).current;
+  const containerOpacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    // Fade in
+    Animated.parallel([
+      Animated.timing(containerOpacity, { toValue: 1, duration: 200, useNativeDriver: true }),
+      Animated.timing(translateY, { toValue: 0, duration: 200, useNativeDriver: true }),
+    ]).start();
+
+    // Staggered dot pulse
+    const createPulse = (dot: Animated.Value, delay: number) =>
+      Animated.loop(
+        Animated.sequence([
+          Animated.delay(delay),
+          Animated.timing(dot, { toValue: 1, duration: 300, useNativeDriver: true }),
+          Animated.timing(dot, { toValue: 0.3, duration: 300, useNativeDriver: true }),
+        ])
+      );
+
+    const a1 = createPulse(dot1, 0);
+    const a2 = createPulse(dot2, 150);
+    const a3 = createPulse(dot3, 300);
+    a1.start(); a2.start(); a3.start();
+
+    return () => { a1.stop(); a2.stop(); a3.stop(); };
+  }, [dot1, dot2, dot3, containerOpacity, translateY]);
+
+  return (
+    <Animated.View style={[styles.typingContainer, { opacity: containerOpacity, transform: [{ translateY }] }]}>
+      {[dot1, dot2, dot3].map((dot, i) => (
+        <Animated.View key={i} style={[styles.typingDot, { opacity: dot }]} />
+      ))}
+    </Animated.View>
+  );
+}
+
 function ChatPayoff({
   name,
   belt,
@@ -206,6 +247,8 @@ function ChatPayoff({
               delay={i === 0 ? 400 : 200}
               onComplete={() => handleBubbleComplete(i)}
             />
+          ) : i === activeBubble + 1 ? (
+            <TypingIndicator key={`typing-${i}`} />
           ) : null
         ))}
       </View>
@@ -568,9 +611,9 @@ const styles = StyleSheet.create({
     marginBottom: spacing.lg,
   },
   chatAvatar: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     backgroundColor: colors.gray800,
     borderWidth: 1,
     borderColor: colors.gold,
@@ -578,7 +621,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   chatAvatarText: {
-    fontSize: 14,
+    fontFamily: 'Unbounded-Bold',
+    fontSize: 18,
     color: colors.gold,
   },
   chatName: {
@@ -615,5 +659,21 @@ const styles = StyleSheet.create({
   },
   payoffFooter: {
     paddingTop: spacing.xl,
+  },
+  typingContainer: {
+    alignSelf: 'flex-start',
+    flexDirection: 'row',
+    gap: 6,
+    backgroundColor: colors.gray800,
+    borderRadius: 14,
+    borderTopLeftRadius: 4,
+    paddingHorizontal: spacing.md,
+    paddingVertical: 12,
+  },
+  typingDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: colors.gray500,
   },
 });

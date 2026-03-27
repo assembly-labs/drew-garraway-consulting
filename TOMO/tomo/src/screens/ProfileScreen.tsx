@@ -153,10 +153,10 @@ export function ProfileScreen() {
             onPress={() => setEditSheet('logging')}
           />
           <View style={styles.rowDivider} />
-          <ProfileRow
-            label="Sessions Logged"
-            value={String(sessionCount)}
-          />
+          <View style={styles.row}>
+            <Text style={styles.rowLabel}>Sessions Logged</Text>
+            <Text style={styles.sessionCountValue}>{sessionCount}</Text>
+          </View>
         </View>
 
         {/* Gym Card — current home gym + actions */}
@@ -309,11 +309,11 @@ function SheetWrapper({
     <Modal visible={visible} animationType="slide" presentationStyle="pageSheet">
       <SafeAreaView style={styles.sheetContainer}>
         <View style={styles.sheetHeader}>
-          <Pressable style={({ pressed }) => pressed && { opacity: 0.7 }} onPress={onClose} hitSlop={8}>
+          <Pressable style={({ pressed }) => pressed && { opacity: 0.7 }} onPress={onClose} hitSlop={{ top: 12, bottom: 12, left: 20, right: 20 }}>
             <Text style={styles.sheetCancel}>Cancel</Text>
           </Pressable>
           <Text style={styles.sheetTitle}>{title}</Text>
-          <Pressable style={({ pressed }) => pressed && { opacity: 0.7 }} onPress={onSave} hitSlop={8}>
+          <Pressable style={({ pressed }) => pressed && { opacity: 0.7 }} onPress={onSave} hitSlop={{ top: 12, bottom: 12, left: 20, right: 20 }}>
             <Text style={styles.sheetSave}>Save</Text>
           </Pressable>
         </View>
@@ -572,6 +572,12 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: colors.white,
   },
+  sessionCountValue: {
+    fontFamily: 'JetBrains Mono-Bold',
+    fontSize: 15,
+    fontWeight: '700',
+    color: colors.gold,
+  },
   editableValue: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -617,7 +623,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     borderRadius: radius.lg,
     borderWidth: 1,
-    borderColor: colors.negativeDim,
+    borderColor: colors.negativeDimBorder,
   },
   signOutText: {
     fontFamily: 'Inter-SemiBold',
@@ -638,7 +644,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.md,
     borderBottomWidth: 1,
-    borderBottomColor: colors.gray800,
+    borderBottomColor: colors.gray700,
   },
   sheetCancel: {
     fontFamily: 'Inter-SemiBold',

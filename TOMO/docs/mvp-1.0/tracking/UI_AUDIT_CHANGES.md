@@ -133,3 +133,95 @@ git revert <commit-hash>
 ```bash
 cd tomo && npx tsc --noEmit
 ```
+
+---
+
+## Session 23 — UI Polish Pass (30 Items)
+
+### design-tokens.ts
+| Token | Value | Reason |
+|-------|-------|--------|
+| `negativeDimBorder` | `rgba(239, 68, 68, 0.3)` | Sign out button border visibility |
+
+### JournalScreen.tsx
+| Change | Was | Now |
+|--------|-----|-----|
+| filterPill paddingVertical | 8 | 12 |
+| filterPill minHeight | (none) | 44 |
+| filter pills a11y | (none) | accessibilityRole, accessibilityLabel, accessibilityState |
+| SessionCard a11y | (none) | accessibilityRole, accessibilityLabel |
+| cardTechniques fontStyle | italic | (removed) |
+| card marginBottom | spacing.sm | spacing.md |
+| error state | (none) | WifiOff icon + retry button |
+
+### SessionDetailScreen.tsx
+| Change | Was | Now |
+|--------|-----|-----|
+| header layout | single row | 2 rows (headerRow1 + headerRow2) |
+| narrativeCard bg | colors.gray800 | colors.goldUltraDim |
+| narrativeText fontStyle | italic | (removed) |
+| DetailSection edit icon | colors.gray600 | colors.gray700 |
+| sheetHeader borderBottom | colors.gray800 | colors.gray700 |
+| sheet hitSlop | 8 | { top: 12, bottom: 12, left: 20, right: 20 } |
+
+### ProfileScreen.tsx
+| Change | Was | Now |
+|--------|-----|-----|
+| Sessions Logged value | Inter-SemiBold white | JetBrains Mono-Bold gold |
+| sheetHeader borderBottom | colors.gray800 | colors.gray700 |
+| signOutButton borderColor | colors.negativeDim | colors.negativeDimBorder |
+| sheet hitSlop | 8 | { top: 12, bottom: 12, left: 20, right: 20 } |
+
+### AuthScreen.tsx
+| Change | Was | Now |
+|--------|-----|-----|
+| logoSubtext fontFamily | (none) | Inter |
+| textInput focus | (none) | gold borderColor on focus |
+| logo descriptor | (none) | "BJJ TRAINING JOURNAL" label |
+| forgotPasswordText color | gray500 | gray400 + underline |
+
+### GetStartedScreen.tsx
+| Change | Was | Now |
+|--------|-----|-----|
+| chatAvatar size | 28x28 | 40x40 |
+| chatAvatarText | fontSize 14, no fontFamily | fontSize 18, Unbounded-Bold |
+| typing indicator | (none) | 3-dot pulsing animation |
+
+### AboutYouScreen.tsx
+| Change | Was | Now |
+|--------|-----|-----|
+| beltCircle size | 44x44 | 52x52 |
+| stripe hint | (none) | "0 if you don't have any yet" |
+
+### YourTrainingScreen.tsx
+| Change | Was | Now |
+|--------|-----|-----|
+| chip paddingVertical | spacing.sm | spacing.md |
+| chip minHeight | (none) | 44 |
+| gymCard minHeight | (none) | 56 |
+
+### MainTabNavigator.tsx
+| Change | Was | Now |
+|--------|-----|-----|
+| LogTab label | tabBarLabel: '' | tabBarShowLabel: false |
+| logButton shadow | (none) | ...shadows.elevated |
+
+### InsightsScreen.tsx
+| Change | Was | Now |
+|--------|-----|-----|
+| readMoreLink arrow | Unicode \u2192 | SVG ChevronRight |
+| EmptyNoSessions icon | Text "--" | Icons.Mic |
+| EmptyFewSessions icon | Text "..." | Icons.Journal |
+| coachFooterText fontStyle | italic | (removed) |
+
+### Skeleton.tsx
+| Change | Was | Now |
+|--------|-----|-----|
+| PulseBar opacity range | 0.3→0.6 | 0.2→0.55 |
+| PulseBar duration | 800ms | 600ms |
+| PulseBar bg | colors.gray700 | colors.gray600 |
+
+### SessionLoggerScreen.tsx
+| Change | Was | Now |
+|--------|-----|-----|
+| ProcessingPhase loader | ActivityIndicator | 3 animated gold bars |

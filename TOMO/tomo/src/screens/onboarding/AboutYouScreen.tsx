@@ -119,6 +119,7 @@ export function AboutYouScreen({ navigation }: Props) {
           {belt !== '' && (
             <View style={styles.field}>
               <Text style={styles.fieldLabel}>STRIPES</Text>
+              <Text style={styles.stripeHint}>0 if you don't have any yet</Text>
               <View style={styles.stripesRow}>
                 {[0, 1, 2, 3, 4].map((s) => (
                   <Pressable
@@ -211,6 +212,13 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     marginBottom: spacing.sm,
   },
+  stripeHint: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gray600,
+    marginBottom: spacing.sm,
+  },
   textInput: {
     fontFamily: 'Inter',
     backgroundColor: colors.gray800,
@@ -236,9 +244,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.goldDim,
   },
   beltCircle: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 52,
+    height: 52,
+    borderRadius: 26,
     marginBottom: spacing.xs,
   },
   beltCircleWhite: {

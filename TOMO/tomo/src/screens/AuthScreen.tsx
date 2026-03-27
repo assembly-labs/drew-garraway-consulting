@@ -29,6 +29,8 @@ export function AuthScreen() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [resetLoading, setResetLoading] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
 
   const handleSubmit = async () => {
     if (!email.trim() || !password.trim()) {
@@ -92,6 +94,7 @@ export function AuthScreen() {
           <View style={styles.logoContainer}>
             <Text style={styles.logoText}>TOMO</Text>
             <Text style={styles.logoSubtext}>友</Text>
+            <Text style={styles.logoDescriptor}>BJJ TRAINING JOURNAL</Text>
           </View>
 
           {/* Form */}
@@ -99,7 +102,7 @@ export function AuthScreen() {
             <View style={styles.field}>
               <Text style={styles.fieldLabel}>EMAIL</Text>
               <TextInput
-                style={styles.textInput}
+                style={[styles.textInput, emailFocused && styles.textInputFocused]}
                 value={email}
                 onChangeText={setEmail}
                 placeholder="you@email.com"
@@ -108,13 +111,15 @@ export function AuthScreen() {
                 autoCapitalize="none"
                 autoCorrect={false}
                 returnKeyType="next"
+                onFocus={() => setEmailFocused(true)}
+                onBlur={() => setEmailFocused(false)}
               />
             </View>
 
             <View style={styles.field}>
               <Text style={styles.fieldLabel}>PASSWORD</Text>
               <TextInput
-                style={styles.textInput}
+                style={[styles.textInput, passwordFocused && styles.textInputFocused]}
                 value={password}
                 onChangeText={setPassword}
                 placeholder={mode === 'signup' ? 'Create a password' : 'Your password'}
@@ -122,6 +127,8 @@ export function AuthScreen() {
                 secureTextEntry
                 returnKeyType="go"
                 onSubmitEditing={handleSubmit}
+                onFocus={() => setPasswordFocused(true)}
+                onBlur={() => setPasswordFocused(false)}
               />
             </View>
 
@@ -198,9 +205,18 @@ const styles = StyleSheet.create({
     letterSpacing: 8,
   },
   logoSubtext: {
+    fontFamily: 'Inter',
     fontSize: 32,
     color: colors.gold,
     marginTop: spacing.sm,
+  },
+  logoDescriptor: {
+    fontFamily: 'JetBrains Mono-SemiBold',
+    fontSize: 12,
+    fontWeight: '600',
+    color: colors.gray500,
+    letterSpacing: 2,
+    marginTop: spacing.md,
   },
   form: {
     gap: spacing.md,
@@ -227,6 +243,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.gray700,
   },
+  textInputFocused: {
+    borderColor: colors.gold,
+  },
   button: {
     backgroundColor: colors.gold,
     paddingVertical: 18,
@@ -251,7 +270,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter',
     fontSize: 14,
     fontWeight: '500',
-    color: colors.gray500,
+    color: colors.gray400,
+    textDecorationLine: 'underline',
   },
   toggleMode: {
     alignItems: 'center',

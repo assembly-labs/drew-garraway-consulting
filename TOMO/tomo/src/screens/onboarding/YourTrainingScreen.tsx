@@ -612,6 +612,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: spacing.md,
     paddingHorizontal: spacing.md,
+    minHeight: 56,
   },
   gymCardSelected: {
     backgroundColor: colors.goldDim,
@@ -654,11 +655,13 @@ const styles = StyleSheet.create({
   },
   chip: {
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
+    paddingVertical: spacing.md,
     borderRadius: radius.full,
     backgroundColor: colors.gray800,
     borderWidth: 1,
     borderColor: colors.gray700,
+    minHeight: 44,
+    justifyContent: 'center',
   },
   chipSelected: {
     backgroundColor: colors.goldDim,
