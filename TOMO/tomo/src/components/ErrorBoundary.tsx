@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     borderColor: colors.gray700,
   },
   errorText: {
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.negative,
     fontFamily: 'JetBrains Mono',

@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerTitle: {
+    fontFamily: 'Inter-Bold',
     fontSize: 17,
     fontWeight: '700',
     color: colors.white,
@@ -147,7 +148,8 @@ const styles = StyleSheet.create({
     paddingBottom: spacing['3xl'],
   },
   updated: {
-    fontSize: 13,
+    fontFamily: 'Inter',
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray600,
     marginBottom: spacing.lg,
@@ -156,12 +158,14 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xl,
   },
   sectionTitle: {
+    fontFamily: 'Inter-Bold',
     fontSize: 17,
     fontWeight: '700',
     color: colors.white,
     marginBottom: spacing.sm,
   },
   body: {
+    fontFamily: 'Inter',
     fontSize: 15,
     fontWeight: '500',
     color: colors.gray400,
@@ -176,6 +180,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.md,
   },
   email: {
+    fontFamily: 'Inter-SemiBold',
     fontSize: 15,
     fontWeight: '600',
     color: colors.gold,

@@ -528,7 +528,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     color: colors.gray500,
-    lineHeight: 20,
+    lineHeight: 22,
   },
   checkmark: {
     marginLeft: spacing.sm,
@@ -596,8 +596,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray800,
     borderRadius: 14,
     borderTopLeftRadius: 4,
-    paddingHorizontal: 14,
-    paddingVertical: 10,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
     maxWidth: '88%',
   },
   chatBubbleText: {
@@ -605,12 +605,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     color: colors.white,
-    lineHeight: 20,
+    lineHeight: 22,
   },
   chatCursor: {
     fontFamily: 'Inter',
     fontSize: 14,
-    fontWeight: '300',
+    fontWeight: '500',
     color: colors.gold,
   },
   payoffFooter: {

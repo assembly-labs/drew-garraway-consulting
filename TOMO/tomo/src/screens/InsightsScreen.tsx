@@ -22,7 +22,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
-import { colors, spacing, radius, typography } from '../config/design-tokens';
+import { colors, spacing, radius, typography, pressedStyles } from '../config/design-tokens';
 import { insightService } from '../services/insights-service';
 import { sessionService } from '../services/supabase';
 import type {
@@ -38,12 +38,12 @@ import type {
 // ===========================================
 
 const TYPE_BADGE_COLORS: Record<InsightType, { bg: string; text: string }> = {
-  technique: { bg: 'rgba(59, 130, 246, 0.15)', text: '#3B82F6' },
-  consistency: { bg: 'rgba(245, 166, 35, 0.15)', text: '#F5A623' },
+  technique: { bg: colors.infoDim, text: colors.info },
+  consistency: { bg: colors.goldDim, text: '#F5A623' },
   sparring: { bg: 'rgba(34, 197, 94, 0.15)', text: '#22c55e' },
   risk: { bg: 'rgba(239, 68, 68, 0.15)', text: '#ef4444' },
-  milestone: { bg: 'rgba(245, 166, 35, 0.15)', text: '#F5A623' },
-  game_development: { bg: 'rgba(139, 92, 246, 0.15)', text: '#8B5CF6' },
+  milestone: { bg: colors.goldDim, text: '#F5A623' },
+  game_development: { bg: colors.purpleDim, text: colors.purple },
 };
 
 // ===========================================
@@ -700,7 +700,7 @@ const styles = StyleSheet.create({
     minHeight: 44,
   },
   cardPressed: {
-    backgroundColor: '#252525',
+    backgroundColor: pressedStyles.card.backgroundColor,
   },
   quarterlyLabel: {
     fontFamily: 'JetBrains Mono-SemiBold',
@@ -727,7 +727,7 @@ const styles = StyleSheet.create({
   },
   readMoreLink: {
     fontFamily: 'Inter-SemiBold',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '600',
     color: colors.gold,
     marginTop: 10,
@@ -772,7 +772,7 @@ const styles = StyleSheet.create({
   },
   readMoreLinkWhite: {
     fontFamily: 'Inter-SemiBold',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '600',
     color: colors.gray300,
     marginTop: 10,
@@ -871,10 +871,10 @@ const styles = StyleSheet.create({
   },
   weeklyInsightBody: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray400,
-    lineHeight: 20,
+    lineHeight: 22,
   },
 
   // -------------------------------------------
@@ -897,10 +897,10 @@ const styles = StyleSheet.create({
   },
   focusNextBody: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray300,
-    lineHeight: 20,
+    lineHeight: 22,
   },
 
   // -------------------------------------------
@@ -949,11 +949,11 @@ const styles = StyleSheet.create({
   },
   emptyWeeklyText: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray500,
     textAlign: 'center',
-    lineHeight: 20,
+    lineHeight: 22,
   },
 
   // -------------------------------------------
@@ -997,11 +997,11 @@ const styles = StyleSheet.create({
   },
   coachFooterText: {
     fontFamily: 'Inter',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray600,
     textAlign: 'center',
-    lineHeight: 19,
+    lineHeight: 22,
     fontStyle: 'italic',
   },
 
@@ -1013,7 +1013,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: radius.full,
-    backgroundColor: 'rgba(245, 166, 35, 0.15)',
+    backgroundColor: colors.goldDim,
     marginBottom: 8,
   },
   newBadgeText: {

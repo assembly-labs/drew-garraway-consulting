@@ -27,7 +27,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import { colors, spacing, radius, touchTargets } from '../config/design-tokens';
+import { colors, spacing, radius, touchTargets, fontSizes } from '../config/design-tokens';
 import { Icons } from '../components/Icons';
 import { useAuth } from '../hooks/useAuth';
 import { useToast } from '../components/Toast';
@@ -1550,7 +1550,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 4,
     paddingHorizontal: 12,
-    paddingVertical: 6,
+    paddingVertical: 8,
     borderRadius: radius.full,
     backgroundColor: colors.gray800,
     borderWidth: 1,
@@ -1558,7 +1558,7 @@ const styles = StyleSheet.create({
   },
   detailBadgeText: {
     fontFamily: 'JetBrains Mono-SemiBold',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '600',
     color: colors.gray300,
     textTransform: 'capitalize',
@@ -1570,7 +1570,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderLeftColor: colors.gold,
     paddingLeft: spacing.sm,
-    backgroundColor: 'rgba(245, 166, 35, 0.04)',
+    backgroundColor: colors.goldUltraDim,
     borderRadius: radius.sm,
   },
   reviewInput: {
@@ -1639,7 +1639,7 @@ const styles = StyleSheet.create({
   },
   suggestionBadge: {
     fontFamily: 'JetBrains Mono',
-    fontSize: 10,
+    fontSize: fontSizes.xs,
     fontWeight: '600',
     color: colors.gold,
     textTransform: 'uppercase',
@@ -1654,8 +1654,8 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(239, 68, 68, 0.3)',
   },
   tagWarning: {
-    backgroundColor: 'rgba(245, 158, 11, 0.1)',
-    borderColor: 'rgba(245, 158, 11, 0.3)',
+    backgroundColor: colors.warningDim,
+    borderColor: colors.warningDimBorder,
   },
   tagText: {
     fontFamily: 'Inter',
@@ -1727,7 +1727,7 @@ const styles = StyleSheet.create({
   },
   transcriptCardText: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray400,
     lineHeight: 22,
