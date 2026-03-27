@@ -256,7 +256,7 @@ export function SessionDetailScreen({ route, navigation }: Props) {
           {(session.injuries ?? []).length > 0 ? (
             <View style={styles.tagList}>
               {(session.injuries ?? []).map((injury, i) => (
-                <View key={i} style={[styles.tag, { backgroundColor: 'rgba(245, 158, 11, 0.1)', borderColor: 'rgba(245, 158, 11, 0.3)' }]}>
+                <View key={i} style={[styles.tag, { backgroundColor: colors.warningDim, borderColor: colors.warningDimBorder }]}>
                   <Text style={[styles.tagText, { color: '#f59e0b' }]}>{injury}</Text>
                 </View>
               ))}
@@ -818,7 +818,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '700',
     color: colors.white,
-    marginBottom: 4,
+    marginBottom: spacing.xs,
   },
   headerMeta: {
     flexDirection: 'row',
@@ -827,7 +827,7 @@ const styles = StyleSheet.create({
   },
   modeBadge: {
     paddingHorizontal: 10,
-    paddingVertical: 3,
+    paddingVertical: spacing.xs,
     borderRadius: radius.full,
     borderWidth: 1,
   },
@@ -838,7 +838,7 @@ const styles = StyleSheet.create({
   },
   headerDetail: {
     fontFamily: 'Inter',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray500,
   },
@@ -862,7 +862,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 4,
+    marginBottom: spacing.xs,
   },
   narrativeLabel: {
     fontFamily: 'JetBrains Mono-SemiBold',
@@ -926,7 +926,7 @@ const styles = StyleSheet.create({
   },
   tag: {
     paddingHorizontal: 12,
-    paddingVertical: 6,
+    paddingVertical: 8,
     borderRadius: radius.full,
     backgroundColor: colors.gray900,
     borderWidth: 1,
@@ -942,11 +942,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
-    marginTop: 6,
+    marginTop: spacing.sm,
   },
   subLabel: {
     fontFamily: 'Inter-SemiBold',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '600',
   },
 
@@ -1034,7 +1034,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray800,
     borderRadius: radius.lg,
     paddingHorizontal: spacing.md,
-    paddingVertical: 14,
+    paddingVertical: spacing.md,
     fontSize: 16,
     fontWeight: '500',
     color: colors.white,
@@ -1052,8 +1052,8 @@ const styles = StyleSheet.create({
   editTag: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
-    paddingHorizontal: 12,
+    gap: spacing.sm,
+    paddingHorizontal: spacing.sm,
     paddingVertical: 8,
     borderRadius: radius.full,
     backgroundColor: colors.gray800,

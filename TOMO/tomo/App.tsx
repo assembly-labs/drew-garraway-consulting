@@ -21,6 +21,7 @@ import {
   JetBrainsMono_600SemiBold,
   JetBrainsMono_700Bold,
 } from '@expo-google-fonts/jetbrains-mono';
+import { colors } from './src/config/design-tokens';
 import { AuthProvider } from './src/hooks/useAuth';
 import { ToastProvider } from './src/components/Toast';
 import { ErrorBoundary } from './src/components/ErrorBoundary';
@@ -53,8 +54,8 @@ function App() {
 
   if (!fontsLoaded) {
     return (
-      <View style={{ flex: 1, backgroundColor: '#111111', alignItems: 'center', justifyContent: 'center' }}>
-        <ActivityIndicator size="large" color="#F5A623" />
+      <View style={{ flex: 1, backgroundColor: colors.black, alignItems: 'center', justifyContent: 'center' }}>
+        <ActivityIndicator size="large" color={colors.gold} />
       </View>
     );
   }

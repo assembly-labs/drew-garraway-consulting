@@ -197,19 +197,19 @@ const styles = StyleSheet.create({
 
 const typeStyles = StyleSheet.create({
   success: {
-    backgroundColor: '#1a2e1a',
+    backgroundColor: colors.toastSuccess,
     borderColor: colors.positive,
   },
   error: {
-    backgroundColor: '#2e1a1a',
+    backgroundColor: colors.toastError,
     borderColor: colors.negative,
   },
   warning: {
-    backgroundColor: '#2e2a1a',
+    backgroundColor: colors.toastWarning,
     borderColor: colors.warning,
   },
   info: {
-    backgroundColor: '#1a1a2e',
+    backgroundColor: colors.toastInfo,
     borderColor: colors.info,
   },
 });

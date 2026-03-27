@@ -17,7 +17,7 @@ import {
   Pressable,
   StyleSheet,
 } from 'react-native';
-import { colors, spacing, radius } from '../config/design-tokens';
+import { colors, spacing, radius, pressedStyles } from '../config/design-tokens';
 import { Icons } from './Icons';
 import { searchGyms, type GymWithDistance } from '../services/gymService';
 import type { Coordinates } from '../hooks/useLocation';
@@ -209,7 +209,7 @@ export function GymSearchInput({
               style={({ pressed }) => [
                 styles.dropdownItem,
                 index < results.length - 1 && styles.dropdownItemBorder,
-                pressed && { backgroundColor: '#252525' },
+                pressed && { backgroundColor: pressedStyles.card.backgroundColor },
               ]}
               onPress={() => handleSelectGym(gym)}
             >
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
   },
   selectedMeta: {
     fontFamily: 'Inter',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray500,
     marginTop: 1,
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
   },
   dropdownItemBorder: {
     borderBottomWidth: 1,
-    borderBottomColor: '#2a2a2a',
+    borderBottomColor: colors.divider,
   },
   dropdownName: {
     fontFamily: 'Inter-SemiBold',
@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
   },
   dropdownMeta: {
     fontFamily: 'Inter',
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray500,
   },

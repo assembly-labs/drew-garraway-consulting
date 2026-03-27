@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'Inter',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray500,
     flexShrink: 1,

@@ -22,7 +22,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { JournalStackParamList } from '../navigation/MainTabNavigator';
-import { colors, spacing, radius } from '../config/design-tokens';
+import { colors, spacing, radius, pressedStyles } from '../config/design-tokens';
 import { Icons } from '../components/Icons';
 import { JournalSkeleton } from '../components/Skeleton';
 import { haptics } from '../utils/haptics';
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
   },
   filterPill: {
-    paddingHorizontal: 14,
+    paddingHorizontal: spacing.md,
     paddingVertical: 8,
     borderRadius: radius.full,
     backgroundColor: colors.gray800,
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
   },
   filterText: {
     fontFamily: 'Inter-SemiBold',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '600',
     color: colors.gray500,
   },
@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
   },
   sessionCount: {
     fontFamily: 'JetBrains Mono-SemiBold',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '600',
     color: colors.gray500,
   },
@@ -329,13 +329,13 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   cardPressed: {
-    backgroundColor: '#252525',
+    backgroundColor: pressedStyles.card.backgroundColor,
   },
   cardTop: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 6,
+    marginBottom: spacing.sm,
   },
   modeBadge: {
     paddingHorizontal: 10,
@@ -350,7 +350,7 @@ const styles = StyleSheet.create({
   },
   cardDuration: {
     fontFamily: 'JetBrains Mono-SemiBold',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '600',
     color: colors.gray400,
   },
@@ -359,32 +359,32 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     color: colors.white,
-    marginBottom: 2,
+    marginBottom: spacing.xs,
   },
   cardTopic: {
     fontFamily: 'Inter',
     fontSize: 14,
     fontWeight: '500',
     color: colors.gray400,
-    marginBottom: 4,
+    marginBottom: spacing.xs,
   },
   cardTechniques: {
     fontFamily: 'Inter',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray500,
     fontStyle: 'italic',
-    marginTop: 4,
+    marginTop: spacing.xs,
   },
   sparringRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
-    marginTop: 6,
+    gap: spacing.xs,
+    marginTop: spacing.sm,
   },
   sparringText: {
     fontFamily: 'Inter',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray500,
   },

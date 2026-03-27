@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
-import { colors, spacing, radius } from '../config/design-tokens';
+import { colors, spacing, radius, fontSizes } from '../config/design-tokens';
 import { Icons } from './Icons';
 import type { UserGym } from '../types/mvp-types';
 
@@ -134,11 +134,11 @@ const styles = StyleSheet.create({
     borderRadius: radius.lg,
     backgroundColor: colors.goldDim,
     borderWidth: 1,
-    borderColor: 'rgba(245, 166, 35, 0.2)',
+    borderColor: colors.goldDimBorder,
   },
   affiliationText: {
     fontFamily: 'JetBrains Mono-SemiBold',
-    fontSize: 11,
+    fontSize: fontSizes.xs,
     fontWeight: '600',
     color: colors.gold,
     letterSpacing: 1,
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
   durationText: {
     fontFamily: 'Inter',
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray600,
     marginTop: 1,

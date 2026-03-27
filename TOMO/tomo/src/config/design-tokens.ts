@@ -25,6 +25,8 @@ export const colors = {
   white: '#ffffff',
   gold: '#F5A623',
   goldDim: 'rgba(245, 166, 35, 0.15)',
+  goldUltraDim: 'rgba(245, 166, 35, 0.04)',
+  goldDimBorder: 'rgba(245, 166, 35, 0.2)',
 
   // Semantic
   positive: '#22c55e',
@@ -32,7 +34,21 @@ export const colors = {
   negative: '#ef4444',
   negativeDim: 'rgba(239, 68, 68, 0.15)',
   warning: '#f59e0b',
+  warningDim: 'rgba(245, 158, 11, 0.15)',
+  warningDimBorder: 'rgba(245, 158, 11, 0.3)',
   info: '#3b82f6',
+  infoDim: 'rgba(59, 130, 246, 0.15)',
+  purple: '#8B5CF6',
+  purpleDim: 'rgba(139, 92, 246, 0.15)',
+
+  // Toast backgrounds
+  toastSuccess: '#1a2e1a',
+  toastError: '#2e1a1a',
+  toastWarning: '#2e2a1a',
+  toastInfo: '#1a1a2e',
+
+  // Dividers
+  divider: '#2a2a2a',
 
   // Grayscale (all brightened for dark background readability)
   gray300: '#d4d4d4', // Tertiary text

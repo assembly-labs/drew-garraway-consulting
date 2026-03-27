@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   cursor: {
     fontFamily: 'Inter',
     fontSize: 17,
-    fontWeight: '300',
+    fontWeight: '500',
     color: colors.gold,
   },
   footer: {

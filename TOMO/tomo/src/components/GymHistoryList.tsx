@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
-import { colors, spacing, radius } from '../config/design-tokens';
+import { colors, spacing, radius, fontSizes } from '../config/design-tokens';
 import { Icons } from './Icons';
 import type { UserGym } from '../types/mvp-types';
 
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   },
   entryLocation: {
     fontFamily: 'Inter',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray500,
     marginBottom: 1,
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
   },
   entryNotes: {
     fontFamily: 'Inter',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray400,
     fontStyle: 'italic',
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
   },
   visitsSectionTitle: {
     fontFamily: 'JetBrains Mono-SemiBold',
-    fontSize: 11,
+    fontSize: fontSizes.xs,
     fontWeight: '600',
     color: colors.gray600,
     letterSpacing: 1,
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 6,
+    paddingVertical: 8,
   },
   visitName: {
     fontFamily: 'Inter',
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
   },
   showAllText: {
     fontFamily: 'Inter-SemiBold',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '600',
     color: colors.gold,
     paddingVertical: spacing.sm,

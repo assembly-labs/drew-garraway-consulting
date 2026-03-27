@@ -22,7 +22,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { OnboardingStackParamList } from '../../navigation/OnboardingNavigator';
-import { colors, spacing, radius } from '../../config/design-tokens';
+import { colors, spacing, radius, fontSizes } from '../../config/design-tokens';
 import { Icons } from '../../components/Icons';
 import { GymSearchInput, type SelectedGym } from '../../components/GymSearchInput';
 import { haptics } from '../../utils/haptics';
@@ -535,7 +535,7 @@ const styles = StyleSheet.create({
   locationCardHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: spacing.sm,
     marginBottom: spacing.sm,
   },
   locationCardTitle: {
@@ -550,7 +550,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: colors.gray400,
     lineHeight: 20,
-    marginBottom: 20,
+    marginBottom: spacing.lg,
   },
   enableButton: {
     backgroundColor: colors.gold,
@@ -594,7 +594,7 @@ const styles = StyleSheet.create({
   // ---- Nearby Gyms ----
   nearbyLabel: {
     fontFamily: 'JetBrains Mono-SemiBold',
-    fontSize: 11,
+    fontSize: fontSizes.xs,
     fontWeight: '600',
     color: colors.gray500,
     letterSpacing: 2,
@@ -610,7 +610,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 14,
+    paddingVertical: spacing.md,
     paddingHorizontal: spacing.md,
   },
   gymCardSelected: {
@@ -620,7 +620,7 @@ const styles = StyleSheet.create({
   },
   gymCardBorder: {
     borderBottomWidth: 1,
-    borderBottomColor: '#2a2a2a',
+    borderBottomColor: colors.divider,
   },
   gymCardInfo: {
     flex: 1,
@@ -630,17 +630,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: colors.white,
-    marginBottom: 2,
+    marginBottom: spacing.xs,
   },
   gymMeta: {
     fontFamily: 'Inter',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray500,
   },
   fallbackHint: {
     fontFamily: 'Inter',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray500,
     marginBottom: spacing.sm,
@@ -654,7 +654,7 @@ const styles = StyleSheet.create({
   },
   chip: {
     paddingHorizontal: spacing.md,
-    paddingVertical: 12,
+    paddingVertical: spacing.sm,
     borderRadius: radius.full,
     backgroundColor: colors.gray800,
     borderWidth: 1,
