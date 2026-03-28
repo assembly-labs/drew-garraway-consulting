@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scout + CCLS Sierra Integration</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --navy: #1e3a5f;
+      --navy-light: #2a4d7a;
+      --sage: #4a7a45;
+      --sage-light: #8fb08a;
+      --cream: #faf8f4;
+      --cream-dark: #e8e2d5;
+      --slate: #466a8e;
+      --coral: #e67356;
+      --text: #1a2a3a;
+      --text-light: #3d5060;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.7;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      color: var(--white);
+      padding: 3rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: var(--cream);
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+
+    .hero-logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-logo svg {
+      width: 56px;
+      height: 56px;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span { color: var(--sage-light); }
+
+    .hero .subtitle {
+      font-size: 1.1rem;
+      font-weight: 400;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── Container ── */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ── Section ── */
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--sage);
+      background: rgba(74, 122, 69, 0.1);
+      padding: 0.3rem 0.85rem;
+      border-radius: 100px;
+      margin-bottom: 0.75rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    p { margin-bottom: 1rem; color: var(--text-light); font-size: 1rem; line-height: 1.7; }
+
+    /* ── What Is Scout ── */
+    .what-is-scout {
+      margin-top: 2.5rem;
+    }
+
+    .what-is-scout p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    /* ── Value Cards ── */
+    .value-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .value-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .value-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(30,58,95,0.06), 0 4px 12px rgba(30,58,95,0.04);
+      border: 1px solid rgba(30,58,95,0.06);
+    }
+
+    .value-card .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .value-card.patrons .icon { background: rgba(92, 122, 158, 0.12); }
+    .value-card.librarians .icon { background: rgba(122, 155, 118, 0.12); }
+    .value-card.libraries .icon { background: rgba(30, 58, 95, 0.1); }
+
+    .value-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .value-card p {
+      font-size: 0.95rem;
+      margin: 0;
+      line-height: 1.65;
+      color: var(--text-light);
+    }
+
+    /* ── Conversation Demo ── */
+    .conversation {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(30,58,95,0.06), 0 4px 12px rgba(30,58,95,0.04);
+      border: 1px solid rgba(30,58,95,0.06);
+      margin-bottom: 1rem;
+    }
+
+    .message {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .message:last-child { margin-bottom: 0; }
+
+    .message .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .message.patron .avatar {
+      background: var(--cream);
+      color: var(--slate);
+    }
+
+    .message.scout .avatar {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .message .bubble {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text);
+      padding-top: 0.25rem;
+    }
+
+    .message .bubble .label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+
+    .message.patron .bubble .label { color: var(--slate); }
+    .message.scout .bubble .label { color: var(--navy); }
+
+    /* ── What We Need ── */
+    .need-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(30,58,95,0.06), 0 4px 12px rgba(30,58,95,0.04);
+      border: 1px solid rgba(30,58,95,0.06);
+      margin-bottom: 0.75rem;
+    }
+
+    .need-card .need-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .need-card .need-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .need-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .need-card p {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin: 0;
+      padding-left: 2.65rem;
+      color: var(--text-light);
+    }
+
+    .need-card code {
+      background: var(--cream);
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
+      font-size: 0.88rem;
+      color: var(--navy);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    /* ── Phase Badges ── */
+    .phase-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+
+    .phase-badge.mvp {
+      background: rgba(74, 122, 69, 0.12);
+      color: var(--sage);
+    }
+
+    .phase-badge.future {
+      background: rgba(70, 106, 142, 0.12);
+      color: var(--slate);
+    }
+
+    /* ── Technical Details ── */
+    .tech-section {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(30,58,95,0.06), 0 4px 12px rgba(30,58,95,0.04);
+      border: 1px solid rgba(30,58,95,0.06);
+      margin-bottom: 1rem;
+    }
+
+    .tech-section h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    .api-flow {
+      background: var(--cream);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      line-height: 2;
+    }
+
+    .api-flow .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .api-flow .step-arrow {
+      color: var(--sage);
+      font-weight: 600;
+      flex-shrink: 0;
+      width: 1.25rem;
+      text-align: center;
+    }
+
+    .api-flow .step-text {
+      color: var(--text-light);
+    }
+
+    .api-flow .step-text code {
+      background: var(--white);
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
+      font-size: 0.88rem;
+      color: var(--navy);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    /* ── Endpoint Table (desktop) ── */
+    .endpoint-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .endpoint-table th {
+      text-align: left;
+      font-weight: 600;
+      color: var(--navy);
+      padding: 0.6rem 0.75rem;
+      border-bottom: 2px solid var(--cream-dark);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .endpoint-table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--cream);
+      color: var(--text-light);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    .endpoint-table tr:last-child td { border-bottom: none; }
+
+    .endpoint-table td:first-child {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.88rem;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+
+    .method {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      margin-right: 0.35rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    .method.get {
+      background: rgba(74, 122, 69, 0.12);
+      color: var(--sage);
+    }
+
+    .method.post {
+      background: rgba(70, 106, 142, 0.12);
+      color: var(--slate);
+    }
+
+    /* ── Endpoint Cards (mobile) ── */
+    .endpoint-cards { display: none; }
+
+    .endpoint-card {
+      background: var(--cream);
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .endpoint-card .endpoint-name {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--navy);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      word-break: break-all;
+    }
+
+    .endpoint-card .endpoint-desc {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--text-light);
+      margin-bottom: 0.4rem;
+    }
+
+    /* ── Roles Table ── */
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .role-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 0.85rem;
+      background: var(--cream);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .role-item .check {
+      color: var(--sage);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .role-item.optional {
+      opacity: 0.65;
+    }
+
+    .role-item .opt-label {
+      font-size: 0.8rem;
+      color: var(--slate);
+      font-weight: 500;
+    }
+
+    /* ── Architecture Diagram ── */
+    .arch-diagram {
+      background: var(--navy);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      color: var(--white);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.9;
+      overflow-x: auto;
+      white-space: pre;
+      margin-top: 1rem;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .arch-diagram .dim { opacity: 0.55; }
+    .arch-diagram .sage { color: #a3d49a; }
+    .arch-diagram .slate { color: #a0c8e8; }
+    .arch-diagram .cream { color: #fff; }
+
+    /* ── Commitment ── */
+    .commitment {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      border-radius: 12px;
+      padding: 2rem;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .commitment h2 { color: var(--white); margin-bottom: 0.75rem; }
+
+    .commitment p {
+      color: rgba(255,255,255,0.8);
+      max-width: 550px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .commitment .promises {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .commitment p {
+      font-size: 1rem;
+    }
+
+    .commitment .promise {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.1);
+      padding: 0.4rem 0.85rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .commitment .promise .check { color: var(--sage-light); }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    footer a {
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive: Tablet ── */
+    @media (max-width: 768px) {
+      .container { padding: 0 1.25rem; }
+      .endpoint-table td:first-child { white-space: normal; }
+    }
+
+    /* ── Responsive: Phone ── */
+    @media (max-width: 639px) {
+      body { font-size: 16px; }
+      .hero { padding: 2.5rem 1.5rem 3.5rem; }
+      .hero h1 { font-size: 1.6rem; }
+      .hero .subtitle { font-size: 1rem; }
+      .container { padding: 0 1rem; }
+      h2 { font-size: 1.3rem; }
+
+      .what-is-scout p { font-size: 1rem; }
+
+      .value-card { padding: 1.25rem; }
+      .value-card p { font-size: 0.95rem; }
+
+      .conversation { padding: 1.15rem; }
+
+      .need-card { padding: 1.25rem; }
+      .need-card p { padding-left: 2.5rem; font-size: 0.95rem; }
+
+      .tech-section { padding: 1.25rem; }
+      .tech-section p { font-size: 0.95rem; }
+
+      /* Hide table, show cards on mobile */
+      .endpoint-table-wrap { display: none; }
+      .endpoint-cards { display: block; }
+
+      .arch-diagram {
+        font-size: 0.72rem;
+        padding: 1rem;
+        line-height: 1.75;
+        border-radius: 6px;
+      }
+
+      .api-flow { padding: 1rem; font-size: 0.92rem; }
+      .api-flow .step { margin-bottom: 0.4rem; }
+
+      .roles-grid { grid-template-columns: 1fr; }
+
+      .commitment { padding: 1.5rem 1.25rem; }
+      .commitment .promises { gap: 0.5rem; }
+      .commitment .promise { font-size: 0.85rem; padding: 0.35rem 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ Hero ═══ -->
+  <header class="hero">
+    <div class="hero-logo">
+      <svg viewBox="0 0 1500 1500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M651.266 391.139C670.141 391.139 685.443 406.441 685.443 425.317C685.443 444.192 670.141 459.494 651.266 459.494H542.422L410.801 624.806C421.148 623.473 431.696 622.785 442.405 622.785C543.673 622.785 630.585 684.243 667.883 771.895C669.977 770.164 672.134 768.497 674.366 766.911C696.728 751.02 722.444 745.314 752.911 746.218C783.055 747.112 807.872 755.227 829.042 771.502C829.861 772.131 830.667 772.775 831.468 773.423C868.402 684.957 955.738 622.785 1057.59 622.785C1069.04 622.785 1080.3 623.57 1091.32 625.088L959.476 459.494H850.633C831.757 459.494 816.456 444.192 816.456 425.317C816.456 406.441 831.757 391.139 850.633 391.139H975.949C986.36 391.139 996.203 395.886 1002.69 404.03L1240.03 702.131C1241.83 704.394 1243.29 706.817 1244.43 709.337C1280.67 752.041 1302.53 807.328 1302.53 867.722C1302.53 1003 1192.87 1112.66 1057.59 1112.66C922.32 1112.66 812.658 1003 812.658 867.722C812.658 864.066 812.741 860.428 812.899 856.811C803.249 841.39 795.42 831.874 787.381 825.694C779.276 819.462 768.917 815.078 750.886 814.542C730.601 813.941 720.852 817.73 713.961 822.627C706.209 828.136 698.337 837.633 687.067 856.137C687.246 859.976 687.342 863.838 687.342 867.722C687.342 1003 577.68 1112.66 442.405 1112.66C307.13 1112.66 197.468 1003 197.468 867.722C197.468 804.046 221.769 746.047 261.599 702.487C261.69 702.37 261.776 702.248 261.869 702.131L499.211 404.03C505.696 395.886 515.539 391.139 525.949 391.139H651.266ZM442.405 691.139C344.881 691.139 265.823 770.198 265.823 867.722C265.823 965.245 344.881 1044.3 442.405 1044.3C539.929 1044.3 618.987 965.245 618.987 867.722C618.987 770.198 539.929 691.139 442.405 691.139ZM1057.59 691.139C960.071 691.139 881.013 770.198 881.013 867.722C881.013 965.245 960.071 1044.3 1057.59 1044.3C1155.12 1044.3 1234.18 965.245 1234.18 867.722C1234.18 770.198 1155.12 691.139 1057.59 691.139Z" fill="white"/>
+      </svg>
+    </div>
+    <h1>Scout <span>+</span> Sierra ILS</h1>
+    <p class="subtitle">Bringing AI-powered catalog discovery to Chester County Library System patrons</p>
+  </header>
+
+  <div class="container">
+
+    <!-- ═══ What Is Scout ═══ -->
+    <section class="what-is-scout">
+      <span class="section-label">About Scout</span>
+      <h2>An AI assistant built by librarians, for libraries</h2>
+      <p>Scout is an AI-powered library discovery tool that helps patrons find what they need through natural conversation. Instead of navigating filters and keyword searches, patrons simply ask Scout what they're looking for — and get helpful, librarian-quality answers grounded in your actual catalog data.</p>
+      <p>Scout was built by <strong>Drew Garraway</strong>, a Reference Librarian at Tredyffrin Public Library, and <strong>Kenny Allen</strong>, a former librarian. We built Scout because we saw first-hand how patrons struggle with traditional catalog interfaces — and how much time staff spends helping people find things that should be easy to discover.</p>
+      <p>To work, Scout needs to connect to the library's catalog system. That's where the <strong>Sierra REST API</strong> comes in — it's the bridge that lets Scout search the real CCLS catalog and show patrons real-time availability.</p>
+    </section>
+
+    <!-- ═══ Value ═══ -->
+    <section>
+      <span class="section-label">Why it matters</span>
+      <h2>Value for everyone in the library</h2>
+      <div class="value-grid">
+        <div class="value-card patrons">
+          <div class="icon">&#128100;</div>
+          <h3>For Patrons</h3>
+          <p>Ask in plain language — "I need a good audiobook for a road trip" or "Do you have anything about starting a small business?" — and get personalized, conversational recommendations with real-time availability. No more decoding boolean search or navigating the OPAC.</p>
+        </div>
+        <div class="value-card librarians">
+          <div class="icon">&#128218;</div>
+          <h3>For Librarians</h3>
+          <p>Fewer repetitive "do you have this?" questions at the desk means more time for the meaningful work — reader's advisory, programming, and community engagement. Scout handles the catalog lookups so staff can focus on what humans do best.</p>
+        </div>
+        <div class="value-card libraries">
+          <div class="icon">&#127963;</div>
+          <h3>For Libraries</h3>
+          <p>A modern, accessible discovery experience that meets patrons where they are — on their phones, at home, any time of day. Increases catalog usage, surfaces underutilized collections, and demonstrates innovation to stakeholders and funders.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ How It Works ═══ -->
+    <section>
+      <span class="section-label">In action</span>
+      <h2>What a conversation looks like</h2>
+      <div class="conversation">
+        <div class="message patron">
+          <div class="avatar">P</div>
+          <div class="bubble">
+            <div class="label">Patron</div>
+            My daughter just finished the Percy Jackson series and loved it. What should she read next?
+          </div>
+        </div>
+        <div class="message scout">
+          <div class="avatar">S</div>
+          <div class="bubble">
+            <div class="label">Scout</div>
+            Great taste! If she loved Percy Jackson, she'll probably enjoy these — and they're all available right now at Tredyffrin:<br><br>
+            <strong>The Kane Chronicles</strong> by Rick Riordan — same author, Egyptian mythology this time. 2 copies available.<br><br>
+            <strong>Aru Shah and the End of Time</strong> by Roshani Chokshi — Hindu mythology, same fast-paced adventure feel. 1 copy available.<br><br>
+            <strong>The Storm Runner</strong> by J.C. Cervantes — Maya mythology, recently returned. On the shelf now.<br><br>
+            Want me to check if any of these are available as audiobooks too?
+          </div>
+        </div>
+      </div>
+      <p style="font-size: 0.92rem; text-align: center; color: var(--text-light);">Scout searches the Sierra catalog in real time, checks item availability, and responds in natural language.</p>
+    </section>
+
+    <!-- ═══ What We Need ═══ -->
+    <section>
+      <span class="section-label">Partnership</span>
+      <h2>What we need from CCLS &amp; Clarivate</h2>
+      <p>To connect Scout to the CCLS catalog, we need access to the Sierra REST API. Here's exactly what's involved:</p>
+
+      <div class="need-card">
+        <div class="need-header">
+          <div class="need-number">1</div>
+          <h3>A Sierra API Key <span class="phase-badge mvp">Phase 1 MVP</span></h3>
+        </div>
+        <p>Created in Sierra Administration &rarr; API Keys. We need a client key and secret with <strong>read-only</strong> access. We will never write to or modify any data in Sierra.</p>
+      </div>
+
+      <div class="need-card">
+        <div class="need-header">
+          <div class="need-number">2</div>
+          <h3>Three API Roles</h3>
+        </div>
+        <p>
+          <code>Bibs Read</code> — search and retrieve catalog records<br>
+          <code>Items Read</code> — check real-time availability and status<br>
+          <code>Branches Read</code> — list branch locations and names
+        </p>
+      </div>
+
+      <div class="need-card">
+        <div class="need-header">
+          <div class="need-number">3</div>
+          <h3>The API Base URL</h3>
+        </div>
+        <p>We believe the Sierra API is accessible at <code>catalog.ccls.org</code> but need confirmation of the exact endpoint path for API requests.</p>
+      </div>
+
+      <div class="need-card" style="border-left: 3px solid var(--slate); opacity: 0.8;">
+        <div class="need-header">
+          <div class="need-number" style="background: var(--slate);">+</div>
+          <h3>Optional: Sandbox Access <span class="phase-badge future">Nice to have</span></h3>
+        </div>
+        <p>If available, a sandbox or test environment would let us develop without touching production. Innovative offers sandbox access via <code>vendorsupport@iii.com</code>.</p>
+      </div>
+    </section>
+
+    <!-- ═══ Technical Details ═══ -->
+    <section>
+      <span class="section-label">Technical Detail</span>
+      <h2>How Scout connects to Sierra</h2>
+
+      <div class="tech-section">
+        <h3>Architecture Overview</h3>
+        <p style="font-size: 0.95rem;">Scout acts as a read-only client to the Sierra REST API (v6). It authenticates via OAuth 2.0 Client Credentials, then makes standard GET requests to search and retrieve catalog data. The AI layer interprets patron questions, translates them into API calls, and presents results in natural language.</p>
+
+        <div class="arch-diagram"><span class="cream">Patron</span> <span class="dim">asks:</span> "Do you have books about beekeeping?"
+  <span class="dim">│</span>
+  <span class="dim">▼</span>
+<span class="cream">Scout AI</span> <span class="dim">extracts intent + keywords</span>
+  <span class="dim">│</span>
+  <span class="dim">▼</span>
+<span class="sage">Sierra API</span>  <span class="slate">GET /v6/bibs/search?text=beekeeping</span>
+  <span class="dim">│</span>          <span class="dim">→ returns matching bib records</span>
+  <span class="dim">▼</span>
+<span class="sage">Sierra API</span>  <span class="slate">GET /v6/items?bibIds=[...]</span>
+  <span class="dim">│</span>          <span class="dim">→ returns availability per branch</span>
+  <span class="dim">▼</span>
+<span class="cream">Scout AI</span> <span class="dim">formats natural language response</span>
+  <span class="dim">│</span>
+  <span class="dim">▼</span>
+<span class="cream">Patron</span> <span class="dim">sees:</span> "I found 3 books about beekeeping.
+         The Beekeeper's Handbook is available
+         at Tredyffrin right now..."</div>
+      </div>
+
+      <div class="tech-section">
+        <h3>Sierra API Endpoints We'll Use</h3>
+
+        <p style="font-size: 0.95rem; margin-bottom: 1rem;">All requests are <strong>read-only</strong> (GET). Scout never creates, modifies, or deletes any records.</p>
+
+        <!-- Desktop: table layout -->
+        <div class="endpoint-table-wrap">
+        <table class="endpoint-table">
+          <thead>
+            <tr>
+              <th>Endpoint</th>
+              <th>Purpose</th>
+              <th>Phase</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="method get">GET</span>/v6/bibs/search</td>
+              <td>Keyword search across the catalog — title, author, subject, or all fields. Uses Sierra's Advanced Word Search index with relevance ranking.</td>
+              <td><span class="phase-badge mvp">MVP</span></td>
+            </tr>
+            <tr>
+              <td><span class="method get">GET</span>/v6/bibs/{id}</td>
+              <td>Retrieve full bibliographic record — title, author, ISBN, material type, subjects, publication year, MARC data.</td>
+              <td><span class="phase-badge mvp">MVP</span></td>
+            </tr>
+            <tr>
+              <td><span class="method get">GET</span>/v6/items</td>
+              <td>Get item-level detail — availability status (available, checked out, in transit), due dates, branch location, call number.</td>
+              <td><span class="phase-badge mvp">MVP</span></td>
+            </tr>
+            <tr>
+              <td><span class="method get">GET</span>/v6/branches</td>
+              <td>List all CCLS branch locations with names and codes. Used to translate location codes into human-readable branch names.</td>
+              <td><span class="phase-badge mvp">MVP</span></td>
+            </tr>
+            <tr>
+              <td><span class="method post">POST</span>/v6/bibs/query</td>
+              <td>Structured filtering with boolean logic (AND/OR) — for targeted searches by specific MARC fields, material type, or audience level.</td>
+              <td><span class="phase-badge mvp">MVP</span></td>
+            </tr>
+            <tr>
+              <td><span class="method get">GET</span>/v6/bibs/metadata</td>
+              <td>Retrieve material type codes and labels (book, DVD, audiobook, etc.) for accurate format display.</td>
+              <td><span class="phase-badge mvp">MVP</span></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+
+        <!-- Mobile: card layout -->
+        <div class="endpoint-cards">
+          <div class="endpoint-card">
+            <div class="endpoint-name"><span class="method get">GET</span> /v6/bibs/search</div>
+            <div class="endpoint-desc">Keyword search across the catalog — title, author, subject, or all fields. Uses Sierra's relevance ranking.</div>
+            <span class="phase-badge mvp">MVP</span>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name"><span class="method get">GET</span> /v6/bibs/{id}</div>
+            <div class="endpoint-desc">Retrieve full bibliographic record — title, author, ISBN, material type, subjects, publication year.</div>
+            <span class="phase-badge mvp">MVP</span>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name"><span class="method get">GET</span> /v6/items</div>
+            <div class="endpoint-desc">Item-level availability — status, due dates, branch location, call number.</div>
+            <span class="phase-badge mvp">MVP</span>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name"><span class="method get">GET</span> /v6/branches</div>
+            <div class="endpoint-desc">List all CCLS branch locations with names and codes.</div>
+            <span class="phase-badge mvp">MVP</span>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name"><span class="method post">POST</span> /v6/bibs/query</div>
+            <div class="endpoint-desc">Structured filtering with boolean logic for targeted searches by MARC fields, material type, or audience.</div>
+            <span class="phase-badge mvp">MVP</span>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name"><span class="method get">GET</span> /v6/bibs/metadata</div>
+            <div class="endpoint-desc">Material type codes and labels (book, DVD, audiobook, etc.) for format display.</div>
+            <span class="phase-badge mvp">MVP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-section">
+        <h3>Authentication Flow</h3>
+        <p style="font-size: 0.95rem;">Scout authenticates using OAuth 2.0 Client Credentials — the standard server-to-server flow that Sierra supports. No patron credentials are involved in Phase 1.</p>
+        <div class="api-flow">
+          <div class="step">
+            <span class="step-arrow">1.</span>
+            <span class="step-text">Scout sends <code>POST /v6/token</code> with the client key and secret (Base64-encoded)</span>
+          </div>
+          <div class="step">
+            <span class="step-arrow">2.</span>
+            <span class="step-text">Sierra returns a bearer token valid for <strong>60 minutes</strong></span>
+          </div>
+          <div class="step">
+            <span class="step-arrow">3.</span>
+            <span class="step-text">Scout includes <code>Authorization: Bearer &lt;token&gt;</code> on all subsequent requests</span>
+          </div>
+          <div class="step">
+            <span class="step-arrow">4.</span>
+            <span class="step-text">Token is refreshed automatically before expiry — no manual intervention needed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-section">
+        <h3>API Roles Required</h3>
+        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">When creating the API key in Sierra Administration, these are the roles we need enabled:</p>
+        <div class="roles-grid">
+          <div class="role-item">
+            <span class="check">&#10003;</span>
+            <span>Bibs Read</span>
+          </div>
+          <div class="role-item">
+            <span class="check">&#10003;</span>
+            <span>Items Read</span>
+          </div>
+          <div class="role-item">
+            <span class="check">&#10003;</span>
+            <span>Branches Read</span>
+          </div>
+          <div class="role-item optional">
+            <span class="check">&#10003;</span>
+            <span>Holdings Read <span class="opt-label">(optional)</span></span>
+          </div>
+        </div>
+        <p style="font-size: 0.92rem; color: var(--text-light); margin-top: 0.75rem; margin-bottom: 0;">That's it — all read-only. No write access, no patron data access, no circulation operations. Phase 2 patron features (holds, checkouts) would require additional roles and patron-level OAuth, but that's a separate conversation down the road.</p>
+      </div>
+    </section>
+
+    <!-- ═══ Commitment ═══ -->
+    <section>
+      <div class="commitment">
+        <h2>Our commitments</h2>
+        <p>Scout is designed to complement the library experience, not replace it. We take data responsibility seriously.</p>
+        <div class="promises">
+          <div class="promise"><span class="check">&#10003;</span> Read-only access</div>
+          <div class="promise"><span class="check">&#10003;</span> No patron data collected</div>
+          <div class="promise"><span class="check">&#10003;</span> No catalog data stored</div>
+          <div class="promise"><span class="check">&#10003;</span> HTTPS encrypted</div>
+          <div class="promise"><span class="check">&#10003;</span> Built by librarians</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <p><strong>Scout</strong> &mdash; Built by librarians, for libraries</p>
+    <p style="margin-top: 0.35rem;">Questions? Reach Drew at <a href="mailto:drew@assemblylabs.co">drew@assemblylabs.co</a></p>
+    <p style="margin-top: 0.25rem;"><a href="https://searchwithscout.com">searchwithscout.com</a></p>
+  </footer>
+
+</body>
+</html>
