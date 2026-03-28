@@ -31,6 +31,50 @@ Each entry follows this format:
 
 ---
 
+## 2026-03-28 — Multi-Session Fix, Log Button, Gym Autocomplete (Session 25)
+
+**Type:** Fix / Polish
+
+### Changes
+
+**Bug Fix: Multi-Session Logging (P0)**
+- Users could not log a second session in the same day — tapping Log (+) after saving showed the old session's data instead of a fresh form
+- Root cause: React Navigation caches tab screens; SessionLoggerScreen never unmounted between uses, so all state persisted
+- Fix: Added `useFocusEffect` that resets all form state when returning to Log screen after a completed save (success phase)
+- Active phases (recording, processing, review) are left untouched — accidental tab switches don't wipe in-progress work
+- Also resets `autoStarted` ref so voice auto-start works on every new session, not just the first
+- Clears the 5-second auto-dismiss timer to prevent stale navigation
+
+**Log Button — 25% Larger + Ghost Label Fix (MainTabNavigator)**
+- Gold circle button: 56→70px, icon 28→35px, borderRadius 28→35
+- marginBottom 20→32px for better clearance above tab bar
+- Added `tabBarItemStyle: { height: 0, overflow: 'visible' }` to kill ghost "LogTab" text bleeding through behind the button
+
+**Gym Autocomplete — Multi-Word Search (gymService.ts)**
+- Old search matched entire query as one string against each field — "Alliance Paoli" returned 0 results
+- New search splits query into words and requires ALL words to match across any combination of fields (name, city, affiliation, aliases)
+- "Alliance Paoli" now correctly matches Alliance affiliation + Paoli city
+- Added Alliance Paoli (PA) and Alliance Philadelphia (PA) to local gym database
+
+**Build Hygiene**
+- Added `*.ipa` to `.gitignore` — build artifacts no longer at risk of accidental commit
+
+### Why
+- Multi-session bug blocked core workflow — BJJ practitioners often train twice a day (morning class + evening open mat)
+- Log button was too small for exhausted users and showed a faint "LogTab" label artifact
+- Gym autocomplete failed on multi-word queries, preventing users from finding their gym
+- 6 IPA files were untracked in the repo directory
+
+### Testing
+- TypeScript clean (`npx tsc --noEmit` — zero errors)
+- Code review passed — no blockers found across all changed files
+- Two TestFlight builds submitted (build from earlier session + this session's build)
+- Test: Log session → save → tap Journal → tap Log (+) → fresh empty form (not old data)
+- Test: Type "Alliance Paoli" in gym search → dropdown shows Alliance Paoli, PA
+- Test: Log button visually larger with no ghost text underneath
+
+---
+
 ## 2026-03-26 — UI Polish Pass: 30 Items (Session 23)
 
 **Type:** Polish

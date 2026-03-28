@@ -187,6 +187,22 @@ export function SessionDetailScreen({ route, navigation }: Props) {
           </Pressable>
         ) : null}
 
+        {/* Notes — elevated, editable, personal space */}
+        <Pressable
+          style={({ pressed }) => [styles.notesCard, !session.notes && styles.notesCardEmpty, pressed && { opacity: 0.85 }]}
+          onPress={() => setEditSheet('notes')}
+        >
+          <View style={styles.notesHeader}>
+            <Text style={styles.notesLabel}>MY NOTES</Text>
+            <Icons.Edit size={16} color={colors.gray500} />
+          </View>
+          {session.notes ? (
+            <Text style={styles.notesText}>{session.notes}</Text>
+          ) : (
+            <Text style={styles.notesEmptyText}>Tap to add notes...</Text>
+          )}
+        </Pressable>
+
         {/* Lesson Topic */}
         <DetailSection
           label="LESSON TOPIC"
@@ -288,22 +304,14 @@ export function SessionDetailScreen({ route, navigation }: Props) {
           </Text>
         </DetailSection>
 
-        {/* Notes */}
-        <DetailSection
-          label="NOTES"
-          onEdit={() => setEditSheet('notes')}
-          empty={!session.notes}
-        >
-          <Text style={styles.sectionText}>{session.notes || 'No notes'}</Text>
-        </DetailSection>
-
-        {/* Transcript (collapsible) */}
+        {/* Transcript (collapsible — demoted to subtle toggle) */}
         {session.transcript ? (
           <Pressable style={({ pressed }) => pressed && { opacity: 0.85 }} onPress={() => setShowTranscript((p) => !p)}>
             <View style={styles.transcriptSection}>
-              <View style={styles.transcriptHeader}>
-                <Text style={styles.sectionLabel}>VOICE TRANSCRIPT</Text>
-                {showTranscript ? <Icons.ChevronUp size={14} color={colors.gray500} /> : <Icons.ChevronDown size={14} color={colors.gray500} />}
+              <View style={styles.transcriptToggle}>
+                <Icons.Mic size={14} color={colors.gray600} />
+                <Text style={styles.transcriptToggleText}>View voice transcript</Text>
+                {showTranscript ? <Icons.ChevronUp size={12} color={colors.gray600} /> : <Icons.ChevronDown size={12} color={colors.gray600} />}
               </View>
               {showTranscript && (
                 <Text style={styles.transcriptText}>{session.transcript}</Text>
@@ -887,6 +895,46 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
 
+  // Notes (elevated)
+  notesCard: {
+    borderLeftWidth: 3,
+    borderLeftColor: colors.gray500,
+    backgroundColor: colors.gray800,
+    borderRadius: radius.lg,
+    padding: spacing.md,
+    marginBottom: spacing.md,
+  },
+  notesCardEmpty: {
+    borderStyle: 'dashed' as const,
+    borderLeftColor: colors.gray600,
+  },
+  notesHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: spacing.xs,
+  },
+  notesLabel: {
+    fontFamily: 'JetBrains Mono-SemiBold',
+    fontSize: 12,
+    fontWeight: '600',
+    color: colors.gray400,
+    letterSpacing: 1.5,
+  },
+  notesText: {
+    fontFamily: 'Inter',
+    fontSize: 16,
+    fontWeight: '500',
+    color: colors.gray300,
+    lineHeight: 24,
+  },
+  notesEmptyText: {
+    fontFamily: 'Inter',
+    fontSize: 15,
+    fontWeight: '500',
+    color: colors.gray500,
+  },
+
   // Sections
   section: {
     backgroundColor: colors.gray800,
@@ -957,16 +1005,23 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 
-  // Transcript
+  // Transcript (demoted toggle)
   transcriptSection: {
-    marginTop: spacing.sm,
+    marginTop: spacing.md,
     marginBottom: spacing.md,
   },
-  transcriptHeader: {
+  transcriptToggle: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    gap: spacing.sm,
     paddingVertical: spacing.sm,
+  },
+  transcriptToggleText: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gray600,
+    flex: 1,
   },
   transcriptText: {
     fontFamily: 'Inter',

@@ -500,6 +500,102 @@ Show the "your coach knows your game better" footer on first 3 visits only (trac
 
 ---
 
+## Bugs — Session 25 (2026-03-28)
+
+### BUG-032 Cannot Log Second Session in Same Day
+**Priority:** P0
+**Area:** SessionLoggerScreen + MainTabNavigator
+**Added:** 2026-03-28
+**Status:** ✅ Done (2026-03-28, Session 25)
+
+**Symptoms:** After logging and saving a session, tapping Log (+) again showed the old session's data (success screen or stale review fields) instead of a fresh form. Users could not log a second session in the same day.
+
+**Root cause:** 4 compounding issues:
+1. React Navigation caches tab screens — `SessionLoggerScreen` never unmounted between visits, so all `useState` values persisted
+2. No `useFocusEffect` reset hook existed to clean up state on re-focus
+3. The 5-second auto-dismiss timer in `resetAndGoBack` could fire mid-new-session and navigate the user away
+4. `autoStarted` ref was never reset, so voice auto-start only worked on first visit
+
+**Fix:** Added `useFocusEffect` that checks `phaseRef.current === 'success'` on focus. If the previous session is done, performs a full state reset (same fields as `resetAndGoBack` but without the navigation call), clears the dismiss timer, and resets `autoStarted`. Active phases (recording, processing, review) are left untouched to protect in-progress work from accidental tab switches.
+
+### BUG-033 Ghost "LogTab" Label Visible Behind Log Button
+**Priority:** P2
+**Area:** MainTabNavigator
+**Added:** 2026-03-28
+**Status:** ✅ Done (2026-03-28, Session 25)
+
+Faint "LogTab" text visible behind the gold circle button. Fix: `tabBarItemStyle: { height: 0, overflow: 'visible' }` collapses the tab item's label area to zero.
+
+### BUG-034 Gym Autocomplete Fails on Multi-Word Queries
+**Priority:** P2
+**Area:** gymService.ts (localTextSearch)
+**Added:** 2026-03-28
+**Status:** ✅ Done (2026-03-28, Session 25)
+
+Typing "Alliance Paoli" returned 0 results because `String.includes()` checked the full query against each individual field. Fix: split query into words, require all words to match across any combination of fields (name, city, affiliation, aliases).
+
+---
+
+## Session 25 Code Review — Open Items (2026-03-28)
+
+### CR-001 Insights Screen Not in Tab Bar
+**Priority:** P1
+**Area:** MainTabNavigator
+**Added:** 2026-03-28
+**Status:** Open
+
+InsightsScreen is fully built (weekly/monthly/quarterly cards, empty states, skeleton loading, NEW badges, chat service) but is unreachable — not wired into the tab navigator. Biggest user-facing gap in the app.
+
+### CR-002 No Notes Field in Review Phase
+**Priority:** P2
+**Area:** SessionLoggerScreen (review phase)
+**Added:** 2026-03-28
+**Status:** Open
+
+`review.notes` state exists and gets saved to DB, but no TextInput is rendered in the Review phase UI. Users can't add free-text notes like "Coach showed a detail on the underhook."
+
+### CR-003 Missing 75-Minute Duration Option
+**Priority:** P2
+**Area:** SessionLoggerScreen (entry + review phases)
+**Added:** 2026-03-28
+**Status:** Open
+
+Most BJJ classes are 75 minutes. Entry phase offers 60/90/120; Review phase offers 30/45/60/90/120/130. No custom input or 75-min chip.
+
+### CR-004 No Cancel Button on Recording Phase
+**Priority:** P2
+**Area:** SessionLoggerScreen (recording phase)
+**Added:** 2026-03-28
+**Status:** Open
+
+Accidental record start = stuck until processing finishes. Need a Cancel/Back button alongside Stop Recording.
+
+### CR-005 Gym Name Not Shown on Session Detail
+**Priority:** P2
+**Area:** SessionDetailScreen
+**Added:** 2026-03-28
+**Status:** Open
+
+Session stores `user_gym_id` but detail screen doesn't display which gym the session was logged at. Multi-gym users can't tell where they trained.
+
+### CR-006 Insight Generation Not Triggered
+**Priority:** P2
+**Area:** Insights service layer
+**Added:** 2026-03-28
+**Status:** Open
+
+`insightGenerationService` has `generateWeekly`, `generateMonthly`, `generateQuarterly` methods but nothing calls them — no cron, no background task, no client-side trigger. Insights will never appear unless generation is wired up.
+
+### CR-007 Success Phase Has No Manual Done Button
+**Priority:** P3
+**Area:** SessionLoggerScreen (success phase)
+**Added:** 2026-03-28
+**Status:** Open
+
+Auto-dismisses after 5 seconds with no manual "Done" button. If user is reading the success message, the auto-dismiss can feel jarring.
+
+---
+
 ## P3 — Nice to Have
 
 ### P3-001 App Icon + Splash Screen
