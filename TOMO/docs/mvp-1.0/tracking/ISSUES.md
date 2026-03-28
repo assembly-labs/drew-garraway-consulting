@@ -728,3 +728,9 @@ Audio upload used one UUID, session record got a different server-generated UUID
 
 ### PIPELINE-005 Pipeline Status Always "completed" — ✅ 2026-03-09 (Session 4)
 `transcription_status` and `extraction_status` were always set to `completed` even when pipeline failed. Now correctly set to `failed` on error.
+
+### FEAT-004 Training Frequency Tracker (Weekly Pulse) — ✅ 2026-03-28 (Session 26)
+Compact dot strip on JournalScreen above filter pills. Gold dots for completed sessions, empty for remaining. Shows "X of Y" with target, or "X sessions this week" without. Handles exceeded targets with bonus dots.
+
+### FEAT-005 Gym Name on Session Detail — ✅ 2026-03-28 (Session 26)
+MapPin icon + gym name below the mode/kind/duration row on SessionDetailScreen. Looks up `user_gym_id` via userGymService, falls back to profile gym_name. Truncates with ellipsis. Hidden when no gym data.
