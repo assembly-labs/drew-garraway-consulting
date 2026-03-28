@@ -11,11 +11,11 @@
     :root {
       --navy: #1e3a5f;
       --navy-light: #2a4d7a;
-      --sage: #4a7a45;
+      --sage: #2f5c2a;
       --sage-light: #8fb08a;
       --cream: #faf8f4;
       --cream-dark: #e8e2d5;
-      --slate: #466a8e;
+      --slate: #35516d;
       --coral: #e67356;
       --text: #1a2a3a;
       --text-light: #3d5060;
@@ -477,12 +477,16 @@
     }
 
     .role-item.optional {
-      opacity: 0.65;
+      color: var(--text-light);
+    }
+
+    .role-item.optional .check {
+      color: var(--sage);
     }
 
     .role-item .opt-label {
       font-size: 0.8rem;
-      color: var(--slate);
+      color: var(--text-light);
       font-weight: 500;
     }
 
@@ -501,7 +505,7 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    .arch-diagram .dim { opacity: 0.55; }
+    .arch-diagram .dim { opacity: 0.70; }
     .arch-diagram .sage { color: #a3d49a; }
     .arch-diagram .slate { color: #a0c8e8; }
     .arch-diagram .cream { color: #fff; }
@@ -545,7 +549,7 @@
       font-weight: 500;
     }
 
-    .commitment .promise .check { color: var(--sage-light); }
+    .commitment .promise .check { color: #fff; }
 
     /* ── Footer ── */
     footer {
