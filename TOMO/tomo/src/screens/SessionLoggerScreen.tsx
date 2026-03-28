@@ -23,6 +23,7 @@ import {
   Animated,
   KeyboardAvoidingView,
   Platform,
+  Alert,
   type ViewStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -541,6 +542,17 @@ export function SessionLoggerScreen() {
     (navigation as any).navigate('JournalTab');
   };
 
+  const handleCancelRecording = useCallback(async () => {
+    // Stop and discard audio
+    await voiceRecorder.stopRecording();
+    voiceRecorder.reset();
+    // Reset to entry phase
+    setPhase('entry');
+    setSkippedEntry(false);
+    // Re-enable voice auto-start so it works if they re-enter recording
+    autoStarted.current = false;
+  }, [voiceRecorder]);
+
   // ============================================
   // RENDER PHASES
   // ============================================
@@ -573,6 +585,7 @@ export function SessionLoggerScreen() {
         duration={voiceRecorder.durationFormatted}
         pulseAnim={pulseAnim}
         onStop={handleStopRecording}
+        onCancel={handleCancelRecording}
         gymName={effectiveGymName}
       />
     );
@@ -688,7 +701,7 @@ function EntryPhase({
         {/* Duration */}
         <Text style={styles.fieldLabel}>DURATION</Text>
         <View style={styles.chipRow}>
-          {[60, 90, 120].map((min) => (
+          {[60, 75, 90, 120].map((min) => (
             <Pressable
               key={min}
               style={({ pressed }) => [styles.entryChip, entry.durationMinutes === min && styles.entryChipSelected, pressed && { opacity: 0.7 }]}
@@ -746,15 +759,55 @@ function RecordingPhase({
   duration,
   pulseAnim,
   onStop,
+  onCancel,
   gymName,
 }: {
   duration: string;
   pulseAnim: Animated.Value;
   onStop: () => void;
+  onCancel: () => void;
   gymName: string | null;
 }) {
+  const cancelRef = useRef(false);
+
+  const handleCancel = useCallback(() => {
+    // Double-tap guard
+    if (cancelRef.current) return;
+    cancelRef.current = true;
+
+    // Parse elapsed seconds from "M:SS" format
+    const parts = duration.split(':');
+    const totalSeconds = (parseInt(parts[0], 10) || 0) * 60 + (parseInt(parts[1], 10) || 0);
+
+    if (totalSeconds < 3) {
+      // Under 3 seconds — cancel instantly
+      onCancel();
+    } else {
+      // 3+ seconds — confirm discard
+      Alert.alert(
+        'Discard this recording?',
+        undefined,
+        [
+          { text: 'Keep Recording', style: 'cancel', onPress: () => { cancelRef.current = false; } },
+          { text: 'Discard', style: 'destructive', onPress: onCancel },
+        ],
+      );
+      // Reset guard if alert is dismissed without action
+      cancelRef.current = false;
+    }
+  }, [duration, onCancel]);
+
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.recordingCancelRow}>
+        <Pressable
+          style={({ pressed }) => pressed && { opacity: 0.5 }}
+          onPress={handleCancel}
+          hitSlop={12}
+        >
+          <Text style={styles.recordingCancelText}>Cancel</Text>
+        </Pressable>
+      </View>
       <View style={styles.recordingContent}>
         <GymLabel gymName={gymName} />
         <Animated.View style={[styles.recordingCircle, { transform: [{ scale: pulseAnim }] }]}>
@@ -1042,14 +1095,14 @@ function ReviewPhase({
           <View style={styles.reviewField}>
             <Text style={styles.fieldLabel}>DURATION</Text>
             <View style={styles.chipRow}>
-              {[30, 45, 60, 90, 120, 130].map((min) => (
+              {[30, 45, 60, 75, 90, 120].map((min) => (
                 <Pressable
                   key={min}
                   style={({ pressed }) => [styles.smallChip, review.durationMinutes === min && styles.smallChipSelected, pressed && { opacity: 0.7 }]}
                   onPress={() => { setReview((p) => ({ ...p, durationMinutes: min })); setEditingDetail(null); }}
                 >
                   <Text style={[styles.smallChipText, review.durationMinutes === min && styles.smallChipTextSelected]}>
-                    {min === 130 ? '130+' : min}
+                    {min}
                   </Text>
                 </Pressable>
               ))}
@@ -1527,6 +1580,18 @@ const styles = StyleSheet.create({
   },
 
   // Recording phase
+  recordingCancelRow: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingHorizontal: spacing.md,
+    paddingTop: spacing.sm,
+  },
+  recordingCancelText: {
+    fontFamily: 'Inter',
+    fontSize: 15,
+    fontWeight: '500',
+    color: colors.gray400,
+  },
   recordingContent: {
     flex: 1,
     alignItems: 'center',

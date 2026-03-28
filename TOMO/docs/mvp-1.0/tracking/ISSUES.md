@@ -558,17 +558,17 @@ InsightsScreen is fully built (weekly/monthly/quarterly cards, empty states, ske
 **Priority:** P2
 **Area:** SessionLoggerScreen (entry + review phases)
 **Added:** 2026-03-28
-**Status:** Open
+**Status:** ✅ Done (2026-03-28, Session 26b)
 
-Most BJJ classes are 75 minutes. Entry phase offers 60/90/120; Review phase offers 30/45/60/90/120/130. No custom input or 75-min chip.
+Added 75-min chip to entry (60/75/90/120), review (30/45/60/75/90/120), and edit sheet. Edit sheet also gets a Custom chip (15–300 min, number-pad input). Dropped 130.
 
 ### CR-004 No Cancel Button on Recording Phase
 **Priority:** P2
 **Area:** SessionLoggerScreen (recording phase)
 **Added:** 2026-03-28
-**Status:** Open
+**Status:** ✅ Done (2026-03-28, Session 26b)
 
-Accidental record start = stuck until processing finishes. Need a Cancel/Back button alongside Stop Recording.
+Cancel text link top-left of recording screen. <3s = instant cancel, 3+s = confirm dialog. Resets to entry, discards audio, re-enables voice auto-start.
 
 ### CR-005 Gym Name Not Shown on Session Detail
 **Priority:** P2
@@ -734,3 +734,9 @@ Compact dot strip on JournalScreen above filter pills. Gold dots for completed s
 
 ### FEAT-005 Gym Name on Session Detail — ✅ 2026-03-28 (Session 26)
 MapPin icon + gym name below the mode/kind/duration row on SessionDetailScreen. Looks up `user_gym_id` via userGymService, falls back to profile gym_name. Truncates with ellipsis. Hidden when no gym data.
+
+### CR-003 Duration Options Update — ✅ 2026-03-28 (Session 26b)
+Entry: 60/75/90/120. Review: 30/45/60/75/90/120. Edit sheet: same presets + Custom chip (15–300 min, number-pad). Dropped 130.
+
+### CR-004 Cancel Button on Recording — ✅ 2026-03-28 (Session 26b)
+Cancel text (Inter 15px, gray400) top-left of recording phase. <3s instant cancel, 3+s confirm dialog. Discards audio, resets to entry, re-enables voice auto-start. Double-tap protected.

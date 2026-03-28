@@ -6,6 +6,17 @@
 set -e
 cd /Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/tomo
 
+# Check disk space before build (needs ~5-10 GB working room)
+echo "=== TOMO: Pre-build disk check ==="
+AVAIL=$(df -g / | tail -1 | awk '{print $4}')
+if [ "$AVAIL" -lt 10 ]; then
+  echo "WARNING: Only ${AVAIL} GB free. Builds need 5-10 GB working space."
+  echo "Run 'devclean' first to free up space, then re-run this script."
+  exit 1
+fi
+echo "${AVAIL} GB free — OK"
+echo ""
+
 echo "=== TOMO: Building production IPA ==="
 SENTRY_DISABLE_AUTO_UPLOAD=true EAS_BUILD_NO_EXPO_GO_WARNING=true \
   eas build --platform ios --profile production --local --non-interactive \
