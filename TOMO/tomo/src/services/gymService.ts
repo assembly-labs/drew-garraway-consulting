@@ -104,16 +104,27 @@ export async function searchGyms(
 
 /**
  * Local-only text search against gyms.ts
+ * Splits query into words and requires ALL words to match across any field.
+ * e.g. "Alliance Paoli" matches a gym with "Alliance" in name + "Paoli" in city.
  */
 function localTextSearch(query: string, limit: number): GymWithDistance[] {
   if (!query.trim()) return GYM_DATABASE.slice(0, limit);
 
-  const q = query.toLowerCase();
-  return GYM_DATABASE.filter(
-    (g) =>
-      g.name.toLowerCase().includes(q) ||
-      (g.city && g.city.toLowerCase().includes(q)) ||
-      (g.affiliation && g.affiliation.toLowerCase().includes(q)) ||
-      (g.stateOrCountry && g.stateOrCountry.toLowerCase().includes(q))
-  ).slice(0, limit);
+  const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+  if (words.length === 0) return GYM_DATABASE.slice(0, limit);
+
+  return GYM_DATABASE.filter((g) => {
+    const searchable = [
+      g.name,
+      g.city,
+      g.affiliation,
+      g.stateOrCountry,
+      ...(g.aliases ?? []),
+    ]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase();
+
+    return words.every((w) => searchable.includes(w));
+  }).slice(0, limit);
 }

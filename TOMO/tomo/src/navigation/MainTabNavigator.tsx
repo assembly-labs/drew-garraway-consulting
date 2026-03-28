@@ -88,9 +88,10 @@ export function MainTabNavigator() {
           tabBarLabel: () => null,
           tabBarShowLabel: false,
           tabBarAccessibilityLabel: 'Log Session',
+          tabBarItemStyle: { height: 0, overflow: 'visible' },
           tabBarIcon: () => (
             <View style={styles.logButton}>
-              <Icons.Plus size={28} color={colors.black} strokeWidth={2.5} />
+              <Icons.Plus size={35} color={colors.black} strokeWidth={2.5} />
             </View>
           ),
         }}
@@ -126,13 +127,13 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   logButton: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+    width: 70,
+    height: 70,
+    borderRadius: 35,
     backgroundColor: colors.gold,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 20,
+    marginBottom: 32,
     ...shadows.elevated,
   },
 });

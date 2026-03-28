@@ -16,6 +16,8 @@ export const GYM_DATABASE: Gym[] = [
   { id: 'alliance-atx', name: 'Alliance Austin', affiliation: 'Alliance', city: 'Austin', stateOrCountry: 'TX' },
   { id: 'alliance-mia', name: 'Alliance Miami', affiliation: 'Alliance', city: 'Miami', stateOrCountry: 'FL' },
   { id: 'alliance-chi', name: 'Alliance Chicago', affiliation: 'Alliance', city: 'Chicago', stateOrCountry: 'IL' },
+  { id: 'alliance-paoli', name: 'Alliance Paoli', affiliation: 'Alliance', city: 'Paoli', stateOrCountry: 'PA' },
+  { id: 'alliance-philly', name: 'Alliance Philadelphia', affiliation: 'Alliance', city: 'Philadelphia', stateOrCountry: 'PA' },
 
   // Gracie Barra
   { id: 'gb-hq', name: 'Gracie Barra HQ', affiliation: 'Gracie Barra', city: 'Irvine', stateOrCountry: 'CA', isHeadquarters: true },
