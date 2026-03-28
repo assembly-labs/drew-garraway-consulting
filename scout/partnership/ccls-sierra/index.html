@@ -623,7 +623,7 @@
       </svg>
     </div>
     <h1>Scout <span>+</span> Sierra ILS</h1>
-    <p class="subtitle">Bringing AI-powered catalog discovery to Chester County Library System patrons</p>
+    <p class="subtitle">Natural language catalog discovery for Chester County Library System patrons</p>
   </header>
 
   <div class="container">
@@ -631,8 +631,8 @@
     <!-- ═══ What Is Scout ═══ -->
     <section class="what-is-scout">
       <span class="section-label">About Scout</span>
-      <h2>An AI assistant built by librarians, for libraries</h2>
-      <p>Scout is an AI-powered library discovery tool that helps patrons find what they need through natural conversation. Instead of navigating filters and keyword searches, patrons simply ask Scout what they're looking for — and get helpful, librarian-quality answers grounded in your actual catalog data.</p>
+      <h2>A library assistant built by librarians, for libraries</h2>
+      <p>Scout is a natural language discovery tool that helps patrons find what they need through plain conversation. Instead of navigating filters and keyword searches, patrons simply ask Scout what they're looking for — and get helpful, librarian-quality answers grounded in your actual catalog data.</p>
       <p>Scout was built by <strong>Drew Garraway</strong>, a Reference Librarian at Tredyffrin Public Library, and <strong>Kenny Allen</strong>, a former librarian. We built Scout because we saw first-hand how patrons struggle with traditional catalog interfaces — and how much time staff spends helping people find things that should be easy to discover.</p>
       <p>To work, Scout needs to connect to the library's catalog system. That's where the <strong>Sierra REST API</strong> comes in — it's the bridge that lets Scout search the real CCLS catalog and show patrons real-time availability.</p>
     </section>
@@ -656,6 +656,30 @@
           <div class="icon">&#127963;</div>
           <h3>For Libraries</h3>
           <p>A modern, accessible discovery experience that meets patrons where they are — on their phones, at home, any time of day. Increases catalog usage, surfaces underutilized collections, and demonstrates innovation to stakeholders and funders.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Accessibility ═══ -->
+    <section>
+      <span class="section-label">Accessibility &amp; Inclusion</span>
+      <h2>A catalog that works for everyone</h2>
+      <p>Traditional library catalogs assume patrons can read English fluently, see small text, and understand library jargon like "OPAC," "bib record," and boolean operators. That's a barrier for a lot of the people libraries serve most. Scout removes those barriers.</p>
+      <div class="value-grid">
+        <div class="value-card patrons">
+          <div class="icon">&#127760;</div>
+          <h3>ESL &amp; Multilingual Patrons</h3>
+          <p>Patrons can ask questions in their own words — imperfect English, mixed languages, conversational phrasing. Scout understands intent, not just exact keywords. A patron who types "book for learn English at home" gets useful results, not zero hits.</p>
+        </div>
+        <div class="value-card librarians">
+          <div class="icon">&#128065;</div>
+          <h3>Low Vision &amp; Blind Patrons</h3>
+          <p>Scout's conversational interface works naturally with screen readers — no complex navigation menus, dropdown filters, or tiny clickable elements to fight with. Patrons get clear, spoken answers instead of dense results pages.</p>
+        </div>
+        <div class="value-card libraries">
+          <div class="icon">&#129309;</div>
+          <h3>Digital Literacy Gaps</h3>
+          <p>Many patrons — older adults, new library users, people without tech experience — find catalog search intimidating. Talking to Scout feels like asking a librarian at the desk, not operating a database. That's the point.</p>
         </div>
       </div>
     </section>
@@ -737,12 +761,12 @@
 
       <div class="tech-section">
         <h3>Architecture Overview</h3>
-        <p style="font-size: 0.95rem;">Scout acts as a read-only client to the Sierra REST API (v6). It authenticates via OAuth 2.0 Client Credentials, then makes standard GET requests to search and retrieve catalog data. The AI layer interprets patron questions, translates them into API calls, and presents results in natural language.</p>
+        <p style="font-size: 0.95rem;">Scout acts as a read-only client to the Sierra REST API (v6). It authenticates via OAuth 2.0 Client Credentials, then makes standard GET requests to search and retrieve catalog data. The natural language layer interprets patron questions, translates them into API calls, and presents results conversationally.</p>
 
         <div class="arch-diagram"><span class="cream">Patron</span> <span class="dim">asks:</span> "Do you have books about beekeeping?"
   <span class="dim">│</span>
   <span class="dim">▼</span>
-<span class="cream">Scout AI</span> <span class="dim">extracts intent + keywords</span>
+<span class="cream">Scout</span> <span class="dim">extracts intent + keywords</span>
   <span class="dim">│</span>
   <span class="dim">▼</span>
 <span class="sage">Sierra API</span>  <span class="slate">GET /v6/bibs/search?text=beekeeping</span>
@@ -751,7 +775,7 @@
 <span class="sage">Sierra API</span>  <span class="slate">GET /v6/items?bibIds=[...]</span>
   <span class="dim">│</span>          <span class="dim">→ returns availability per branch</span>
   <span class="dim">▼</span>
-<span class="cream">Scout AI</span> <span class="dim">formats natural language response</span>
+<span class="cream">Scout</span> <span class="dim">formats natural language response</span>
   <span class="dim">│</span>
   <span class="dim">▼</span>
 <span class="cream">Patron</span> <span class="dim">sees:</span> "I found 3 books about beekeeping.
