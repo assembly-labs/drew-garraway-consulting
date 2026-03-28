@@ -710,8 +710,8 @@
     <section class="what-is-scout">
       <span class="section-label">About Scout</span>
       <h2>A library assistant built by librarians, for libraries</h2>
-      <p>Scout is a natural language discovery tool that replaces fragmented catalog search with plain conversation. Most patrons have no idea what's available across the thousands of books, audiobooks, DVDs, equipment, events, and digital resources in a library's collection — and traditional search only works if you already know what you're looking for. Scout changes that. Patrons and librarians simply describe what they need, and Scout surfaces relevant materials from across the entire catalog with real-time availability.</p>
-      <p>Built by <strong>Drew Garraway</strong> (Reference Librarian, Tredyffrin Public Library) and <strong>Kenny Allen</strong> (former librarian). To connect to the CCLS catalog, Scout needs access to the <strong>Sierra REST API</strong> — read-only, no patron data, no writes.</p>
+      <p>Scout is a natural language discovery tool that replaces fragmented catalog search with plain conversation. Most patrons have no idea what's available across the thousands of books, audiobooks, DVDs, equipment, events, and digital resources in a library's collection. Traditional search only works if you already know what you're looking for. Scout changes that. Patrons and librarians simply describe what they need, and Scout surfaces relevant materials from across the entire catalog with real-time availability.</p>
+      <p>Built by <strong>Drew Garraway</strong> (Reference Librarian, Tredyffrin Public Library) and <strong>Kenny Allen</strong> (former librarian). To connect to the CCLS catalog, Scout needs read-only access to the <strong>Sierra REST API</strong>. No patron data. No writes.</p>
     </section>
 
     <!-- ═══ Conversation Demo ═══ -->
@@ -730,11 +730,11 @@
           <div class="bubble">
             <div class="label">Scout</div>
             Great taste! If she loved Percy Jackson, here's what I found across the catalog at Tredyffrin:<br><br>
-            <strong>The Kane Chronicles</strong> by Rick Riordan — same author, Egyptian mythology this time. 2 copies on the shelf.<br><br>
-            <strong>Aru Shah and the End of Time</strong> by Roshani Chokshi — Hindu mythology, same fast-paced adventure feel. 1 copy available.<br><br>
-            <strong>The Storm Runner</strong> by J.C. Cervantes — Maya mythology, recently returned.<br><br>
-            She might also enjoy the DVD <strong>Clash of the Titans</strong> — it's a fun Greek mythology adventure and there's a copy available right now.<br><br>
-            One more thing — the library is hosting <strong>Teen Book Night</strong> next Thursday at 6:30 PM. It's a mythology theme this month, so she'd be right at home. Want me to check if any of these are available as audiobooks too?
+            <strong>The Kane Chronicles</strong> by Rick Riordan. Same author, but Egyptian mythology this time. 2 copies on the shelf.<br><br>
+            <strong>Aru Shah and the End of Time</strong> by Roshani Chokshi. Hindu mythology with that same fast-paced adventure feel. 1 copy available.<br><br>
+            <strong>The Storm Runner</strong> by J.C. Cervantes. Maya mythology, recently returned.<br><br>
+            She might also enjoy the DVD <strong>Clash of the Titans</strong>, a fun Greek mythology adventure with a copy available right now.<br><br>
+            One more thing: the library is hosting <strong>Teen Book Night</strong> next Thursday at 6:30 PM. It's a mythology theme this month, so she'd be right at home. Want me to check if any of these are available as audiobooks too?
           </div>
         </div>
       </div>
@@ -749,24 +749,24 @@
         <div class="value-card patrons">
           <div class="icon">&#128100;</div>
           <h3>For Patrons</h3>
-          <p>Ask in plain language — "I need a good audiobook for a road trip" — and get conversational recommendations with real-time availability. Works for ESL speakers, screen reader users, and patrons who find the OPAC intimidating. Scout understands intent, not just keywords.</p>
+          <p>Ask in plain language: "I need a good audiobook for a road trip." Scout returns conversational recommendations with real-time availability. Works for ESL speakers, screen reader users, and patrons who find the OPAC intimidating. It understands intent, not just keywords.</p>
         </div>
         <div class="value-card librarians">
           <div class="icon">&#128218;</div>
           <h3>For Librarians</h3>
-          <p>Scout gives staff a faster, more intuitive way to search the catalog — making reader's advisory richer and more rewarding. When finding the right material takes seconds instead of multiple searches, librarians can have deeper, more valuable conversations with patrons and build the relationships that keep people coming back.</p>
+          <p>Scout gives staff a faster, more intuitive way to search the catalog, making reader's advisory richer and more rewarding. When finding the right material takes seconds instead of multiple searches, librarians can have deeper, more valuable conversations with patrons and build the relationships that keep people coming back.</p>
         </div>
         <div class="value-card libraries">
           <div class="icon">&#127963;</div>
           <h3>For Libraries</h3>
-          <p>Scout surfaces materials that traditional search buries — putting older, underutilized, and more diverse parts of the collection into patrons' hands. More checkouts, more doors opening, higher event attendance, stronger numbers across every metric that drives funding.</p>
+          <p>Scout surfaces materials that traditional search buries, putting older, underutilized, and more diverse parts of the collection into patrons' hands. More checkouts, more doors opening, higher event attendance, stronger numbers across every metric that drives funding.</p>
         </div>
       </div>
 
       <div class="stat-row">
         <div class="stat">
           <div class="number">80%</div>
-          <div class="label">of a typical collection sits underused — Scout surfaces the long tail</div>
+          <div class="label">of a typical collection sits underused. Scout surfaces the long tail.</div>
         </div>
         <div class="stat">
           <div class="number">50%</div>
@@ -774,7 +774,7 @@
         </div>
         <div class="stat">
           <div class="number">$5.50</div>
-          <div class="label">returned per $1 invested in PA libraries — Scout helps make the case</div>
+          <div class="label">returned per $1 invested in PA libraries. Scout helps make the case.</div>
         </div>
       </div>
       <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 0;">Sources: IMLS Public Library Survey, Pew Research Center, OCLC Research, Colorado Library Research Service, PA state ROI study.</p>
@@ -790,7 +790,7 @@
           <div class="need-number">1</div>
           <h3>A Sierra API Key</h3>
         </div>
-        <p>Created in Sierra Administration &rarr; API Keys. Read-only — we never write to or modify any data in Sierra.</p>
+        <p>Created in Sierra Administration &rarr; API Keys. Read-only access only. We never write to or modify any data in Sierra.</p>
       </div>
 
       <div class="need-card">
@@ -810,12 +810,12 @@
           <div class="need-number">3</div>
           <h3>The API Base URL</h3>
         </div>
-        <p>We believe it's at <code>catalog.ccls.org</code> — just need confirmation of the exact endpoint path.</p>
+        <p>We believe it's at <code>catalog.ccls.org</code>. We just need confirmation of the exact endpoint path.</p>
       </div>
 
       <div class="commitment" style="margin-top: 1.25rem;">
         <h2>Our commitments</h2>
-        <p>Scout complements the library experience — it doesn't replace it.</p>
+        <p>Scout complements the library experience. It doesn't replace it.</p>
         <div class="promises">
           <div class="promise"><span class="check">&#10003;</span> Read-only access</div>
           <div class="promise"><span class="check">&#10003;</span> No patron data</div>
@@ -870,15 +870,15 @@
           <tbody>
             <tr>
               <td><span class="method get">GET</span>/v6/bibs/search</td>
-              <td>Keyword search — title, author, subject, or all fields. Uses Sierra's Advanced Word Search index with relevance ranking.</td>
+              <td>Keyword search across title, author, subject, or all fields. Uses Sierra's Advanced Word Search index with relevance ranking.</td>
             </tr>
             <tr>
               <td><span class="method get">GET</span>/v6/bibs/{id}</td>
-              <td>Full bib record — title, author, ISBN, material type, subjects, publication year, MARC data.</td>
+              <td>Full bib record including title, author, ISBN, material type, subjects, publication year, and MARC data.</td>
             </tr>
             <tr>
               <td><span class="method get">GET</span>/v6/items</td>
-              <td>Item-level availability — status (available, checked out, in transit), due dates, branch, call number.</td>
+              <td>Item-level availability including status (available, checked out, in transit), due dates, branch, and call number.</td>
             </tr>
             <tr>
               <td><span class="method get">GET</span>/v6/branches</td>
@@ -899,15 +899,15 @@
         <div class="endpoint-cards">
           <div class="endpoint-card">
             <div class="endpoint-name"><span class="method get">GET</span> /v6/bibs/search</div>
-            <div class="endpoint-desc">Keyword search — title, author, subject, or all fields. Sierra's relevance ranking.</div>
+            <div class="endpoint-desc">Keyword search across title, author, subject, or all fields. Sierra's relevance ranking.</div>
           </div>
           <div class="endpoint-card">
             <div class="endpoint-name"><span class="method get">GET</span> /v6/bibs/{id}</div>
-            <div class="endpoint-desc">Full bib record — title, author, ISBN, material type, subjects, publication year.</div>
+            <div class="endpoint-desc">Full bib record including title, author, ISBN, material type, subjects, publication year.</div>
           </div>
           <div class="endpoint-card">
             <div class="endpoint-name"><span class="method get">GET</span> /v6/items</div>
-            <div class="endpoint-desc">Item-level availability — status, due dates, branch location, call number.</div>
+            <div class="endpoint-desc">Item-level availability including status, due dates, branch location, and call number.</div>
           </div>
           <div class="endpoint-card">
             <div class="endpoint-name"><span class="method get">GET</span> /v6/branches</div>
@@ -926,7 +926,7 @@
 
       <div class="tech-section">
         <h3>Authentication</h3>
-        <p style="font-size: 0.95rem;">OAuth 2.0 Client Credentials — standard server-to-server flow. No patron credentials involved.</p>
+        <p style="font-size: 0.95rem;">OAuth 2.0 Client Credentials, the standard server-to-server flow. No patron credentials involved.</p>
         <div class="api-flow">
           <div class="step">
             <span class="step-arrow">1.</span>
@@ -942,7 +942,7 @@
           </div>
           <div class="step">
             <span class="step-arrow">4.</span>
-            <span class="step-text">Token refreshed automatically before expiry — no manual intervention</span>
+            <span class="step-text">Token refreshed automatically before expiry. No manual intervention needed.</span>
           </div>
         </div>
       </div>
@@ -956,7 +956,7 @@
           <div class="role-item"><span class="check">&#10003;</span> <span>Branches Read</span></div>
           <div class="role-item optional"><span class="check">&#10003;</span> <span>Holdings Read <span class="opt-label">(optional)</span></span></div>
         </div>
-        <p style="font-size: 0.92rem; color: var(--text-light); margin-top: 0.75rem; margin-bottom: 0;">All read-only. No write access, no patron data, no circulation operations. Phase 2 patron features (holds, checkouts) would require additional roles and patron-level OAuth — a separate conversation down the road.</p>
+        <p style="font-size: 0.92rem; color: var(--text-light); margin-top: 0.75rem; margin-bottom: 0;">All read-only. No write access, no patron data, no circulation operations. Phase 2 patron features (holds, checkouts) would require additional roles and patron-level OAuth, but that's a separate conversation down the road.</p>
       </div>
     </section>
 
