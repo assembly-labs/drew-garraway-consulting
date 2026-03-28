@@ -59,6 +59,7 @@ export interface Profile {
   session_count: number;
   training_goals: string[] | null; // e.g. ['competition', 'fitness']
   experience_level: ExperienceLevel | null;
+  avatar_url: string | null;
   created_at: string; // ISO timestamp
   updated_at: string; // ISO timestamp
 }
@@ -103,6 +104,7 @@ export interface ProfileUpdate {
   training_goals?: string[] | null;
   experience_level?: ExperienceLevel | null;
   session_count?: number; // managed by app after session create; not shown in UI
+  avatar_url?: string | null;
 }
 
 // ===========================================

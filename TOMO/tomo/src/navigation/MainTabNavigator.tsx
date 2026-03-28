@@ -85,6 +85,7 @@ export function MainTabNavigator() {
         name="LogTab"
         component={SessionLoggerScreen}
         options={{
+          tabBarLabel: () => null,
           tabBarShowLabel: false,
           tabBarAccessibilityLabel: 'Log Session',
           tabBarIcon: () => (

@@ -17,7 +17,11 @@ import {
   Alert,
   Modal,
   TextInput,
+  Image,
+  ActionSheetIOS,
+  Platform,
 } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -30,7 +34,7 @@ import { GymSearchInput, type SelectedGym } from '../components/GymSearchInput';
 import { GymCard } from '../components/GymCard';
 import { GymHistoryList } from '../components/GymHistoryList';
 import { ProfileSkeleton } from '../components/Skeleton';
-import { profileService, sessionService } from '../services/supabase';
+import { profileService, sessionService, avatarService } from '../services/supabase';
 import { userGymService } from '../services/userGymService';
 import type { BeltLevel, UserGym } from '../types/mvp-types';
 import { haptics } from '../utils/haptics';
@@ -57,6 +61,13 @@ export function ProfileScreen() {
   const [primaryGym, setPrimaryGym] = useState<UserGym | null>(null);
   const [gymSessionCounts, setGymSessionCounts] = useState<Record<string, number>>({});
   const [editingGymNotes, setEditingGymNotes] = useState<UserGym | null>(null);
+  const [avatarSignedUrl, setAvatarSignedUrl] = useState<string | null>(null);
+
+  const loadAvatarUrl = useCallback(async () => {
+    if (!profile?.avatar_url) { setAvatarSignedUrl(null); return; }
+    const url = await avatarService.getSignedUrl(profile.avatar_url);
+    setAvatarSignedUrl(url);
+  }, [profile?.avatar_url]);
 
   const loadSessionCount = useCallback(async () => {
     const count = await sessionService.getCount();
@@ -73,16 +84,18 @@ export function ProfileScreen() {
     setGymSessionCounts(counts);
   }, []);
 
-  // Load count + gym history on mount and when screen comes into focus
+  // Load count + gym history + avatar on mount and when screen comes into focus
   useEffect(() => {
     loadSessionCount();
     loadGymHistory();
+    loadAvatarUrl();
     const unsubscribe = navigation.addListener('focus', () => {
       loadSessionCount();
       loadGymHistory();
+      loadAvatarUrl();
     });
     return unsubscribe;
-  }, [navigation, loadSessionCount, loadGymHistory]);
+  }, [navigation, loadSessionCount, loadGymHistory, loadAvatarUrl]);
 
   const handleSignOut = () => {
     Alert.alert('Sign Out', 'Are you sure you want to sign out?', [
@@ -119,15 +132,27 @@ export function ProfileScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {/* Avatar + Name */}
-        <Pressable style={({ pressed }) => [styles.profileHeader, pressed && { opacity: 0.85 }]} onPress={() => setEditSheet('name')}>
+        <View style={styles.profileHeader}>
           <View style={[styles.avatar, { borderColor: beltColor }]}>
-            <Text style={styles.avatarInitial}>
-              {profile.name.charAt(0).toUpperCase()}
-            </Text>
+            {avatarSignedUrl ? (
+              <Image source={{ uri: avatarSignedUrl }} style={styles.avatarImage} />
+            ) : (
+              <Text style={styles.avatarInitial}>
+                {profile.name.charAt(0).toUpperCase()}
+              </Text>
+            )}
           </View>
           <View style={styles.nameRow}>
             <Text style={styles.name}>{profile.name}</Text>
-            <Icons.Edit size={16} color={colors.gray600} />
+            <Pressable
+              style={({ pressed }) => [styles.editProfileButton, pressed && { opacity: 0.7 }]}
+              onPress={() => setEditSheet('profile')}
+              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+              accessibilityRole="button"
+              accessibilityLabel="Edit name and photo"
+            >
+              <Icons.Edit size={16} color={colors.gray500} />
+            </Pressable>
           </View>
           <View style={styles.beltBadge}>
             <View style={[styles.beltBar, { backgroundColor: beltColor }]} />
@@ -135,7 +160,7 @@ export function ProfileScreen() {
               {BELT_LABELS[profile.belt] ?? profile.belt}{stripesText}
             </Text>
           </View>
-        </Pressable>
+        </View>
 
         {/* Info card — each row is tappable */}
         <View style={styles.card}>
@@ -197,10 +222,39 @@ export function ProfileScreen() {
       </ScrollView>
 
       {/* Edit Sheets */}
-      <EditNameSheet
-        visible={editSheet === 'name'}
-        value={profile.name}
-        onSave={(name) => handleSave({ name })}
+      <EditProfileSheet
+        visible={editSheet === 'profile'}
+        name={profile.name}
+        avatarUrl={avatarSignedUrl}
+        beltColor={beltColor}
+        onSave={async (name, avatarUri) => {
+          try {
+            const updates: Record<string, any> = {};
+            if (name !== profile.name) updates.name = name;
+            if (avatarUri === null) {
+              // Remove avatar
+              if (profile.avatar_url) {
+                await avatarService.delete(profile.avatar_url);
+              }
+              updates.avatar_url = null;
+            } else if (avatarUri) {
+              // Upload new avatar
+              const storagePath = await avatarService.upload(avatarUri);
+              if (storagePath) updates.avatar_url = storagePath;
+            }
+            if (Object.keys(updates).length > 0) {
+              await profileService.update(updates);
+              await refreshProfile();
+              await loadAvatarUrl();
+            }
+            setEditSheet(null);
+            haptics.success();
+            showToast('Profile updated', 'success');
+          } catch {
+            haptics.error();
+            showToast('Could not save changes', 'error');
+          }
+        }}
         onClose={() => setEditSheet(null)}
       />
       <EditBeltSheet
@@ -327,26 +381,158 @@ function SheetWrapper({
 // EDIT SHEETS
 // ============================================
 
-function EditNameSheet({ visible, value, onSave, onClose }: {
-  visible: boolean; value: string; onSave: (v: string) => void; onClose: () => void;
+function EditProfileSheet({ visible, name, avatarUrl, beltColor, onSave, onClose }: {
+  visible: boolean;
+  name: string;
+  avatarUrl: string | null;
+  beltColor: string;
+  onSave: (name: string, avatarUri: string | null | undefined) => void;
+  onClose: () => void;
 }) {
-  const [text, setText] = useState(value);
-  useEffect(() => { if (visible) setText(value); }, [visible, value]);
+  const [text, setText] = useState(name);
+  const [localAvatarUri, setLocalAvatarUri] = useState<string | null | undefined>(undefined);
+  // undefined = no change, null = removed, string = new local file
+
+  useEffect(() => {
+    if (visible) { setText(name); setLocalAvatarUri(undefined); }
+  }, [visible, name]);
+
   const canSave = text.trim().length > 0;
+
+  const displayUri = localAvatarUri === undefined ? avatarUrl : localAvatarUri;
+
+  const pickImage = async (useCamera: boolean) => {
+    const permResult = useCamera
+      ? await ImagePicker.requestCameraPermissionsAsync()
+      : await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (!permResult.granted) {
+      Alert.alert('Permission needed', useCamera ? 'Camera access is required to take a photo.' : 'Photo library access is required.');
+      return;
+    }
+
+    const result = useCamera
+      ? await ImagePicker.launchCameraAsync({
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 0.7,
+        })
+      : await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ['images'],
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 0.7,
+        });
+
+    if (!result.canceled && result.assets[0]) {
+      setLocalAvatarUri(result.assets[0].uri);
+    }
+  };
+
+  const showPhotoOptions = () => {
+    const hasPhoto = displayUri !== null;
+    if (Platform.OS === 'ios') {
+      const options = hasPhoto
+        ? ['Take Photo', 'Choose from Library', 'Remove Photo', 'Cancel']
+        : ['Take Photo', 'Choose from Library', 'Cancel'];
+      ActionSheetIOS.showActionSheetWithOptions(
+        { options, cancelButtonIndex: options.length - 1, destructiveButtonIndex: hasPhoto ? 2 : undefined },
+        (idx) => {
+          if (idx === 0) pickImage(true);
+          else if (idx === 1) pickImage(false);
+          else if (hasPhoto && idx === 2) setLocalAvatarUri(null);
+        }
+      );
+    } else {
+      // Android fallback
+      Alert.alert('Change Photo', undefined, [
+        { text: 'Take Photo', onPress: () => pickImage(true) },
+        { text: 'Choose from Library', onPress: () => pickImage(false) },
+        ...(hasPhoto ? [{ text: 'Remove Photo', style: 'destructive' as const, onPress: () => setLocalAvatarUri(null) }] : []),
+        { text: 'Cancel', style: 'cancel' as const },
+      ]);
+    }
+  };
+
   return (
-    <SheetWrapper visible={visible} title="Edit Name" onClose={onClose} onSave={() => canSave && onSave(text.trim())}>
+    <SheetWrapper visible={visible} title="Edit Profile" onClose={onClose} onSave={() => canSave && onSave(text.trim(), localAvatarUri)}>
+      {/* Avatar with camera overlay */}
+      <View style={editProfileStyles.avatarSection}>
+        <Pressable
+          onPress={showPhotoOptions}
+          style={({ pressed }) => [pressed && { opacity: 0.8 }]}
+          accessibilityRole="button"
+          accessibilityLabel="Change profile photo"
+        >
+          <View style={[editProfileStyles.avatar, { borderColor: beltColor }]}>
+            {displayUri ? (
+              <Image source={{ uri: displayUri }} style={editProfileStyles.avatarImage} />
+            ) : (
+              <Text style={styles.avatarInitial}>{text.charAt(0).toUpperCase() || '?'}</Text>
+            )}
+          </View>
+          <View style={editProfileStyles.cameraOverlay}>
+            <Icons.Camera size={14} color={colors.white} />
+          </View>
+        </Pressable>
+        <Text style={editProfileStyles.changePhotoText}>Tap to change photo</Text>
+      </View>
+
+      {/* Name input */}
+      <Text style={styles.sheetFieldLabel}>NAME</Text>
       <TextInput
         style={styles.sheetInput}
         value={text}
         onChangeText={setText}
         placeholder="Your name"
         placeholderTextColor={colors.gray600}
-        autoFocus
         autoCapitalize="words"
       />
     </SheetWrapper>
   );
 }
+
+const editProfileStyles = StyleSheet.create({
+  avatarSection: {
+    alignItems: 'center',
+    marginBottom: spacing.xl,
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: colors.gray800,
+    borderWidth: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  avatarImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 50,
+  },
+  cameraOverlay: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: colors.gold,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: colors.black,
+  },
+  changePhotoText: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gray500,
+    marginTop: spacing.sm,
+  },
+});
 
 function EditBeltSheet({ visible, belt, stripes, onSave, onClose }: {
   visible: boolean; belt: string; stripes: number;
@@ -511,12 +697,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: spacing.md,
+    overflow: 'hidden',
+  },
+  avatarImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 50,
   },
   avatarInitial: {
     fontFamily: 'Unbounded-Bold',
     fontSize: 36,
     fontWeight: '700',
     color: colors.white,
+  },
+  editProfileButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: colors.gray800,
+    borderWidth: 1,
+    borderColor: colors.gray700,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   nameRow: {
     flexDirection: 'row',

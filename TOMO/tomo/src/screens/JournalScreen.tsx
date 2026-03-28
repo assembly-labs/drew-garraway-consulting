@@ -115,7 +115,7 @@ export function JournalScreen() {
         ))}
         <View style={styles.filterSpacer} />
         <Text style={styles.sessionCount}>
-          {sessions.length} session{sessions.length !== 1 ? 's' : ''}
+          {filtered.length} session{filtered.length !== 1 ? 's' : ''}
         </Text>
       </View>
 

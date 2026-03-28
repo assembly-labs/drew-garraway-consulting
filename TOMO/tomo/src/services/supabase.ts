@@ -389,6 +389,94 @@ export const audioService = {
 };
 
 // ===========================================
+// AVATAR STORAGE SERVICE
+// ===========================================
+
+export const avatarService = {
+  /** Upload avatar image from a local file URI, returns the storage path */
+  async upload(fileUri: string): Promise<string | null> {
+    await ensureFreshToken();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return null;
+
+    const storagePath = `${user.id}/avatar.jpg`;
+
+    let base64Data: string;
+    try {
+      const fileInfo = await FileSystem.getInfoAsync(fileUri);
+      if (!fileInfo.exists) return null;
+      base64Data = await FileSystem.readAsStringAsync(fileUri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+    } catch {
+      console.error('[Avatar] Failed to read file');
+      return null;
+    }
+
+    let binaryString: string;
+    if (typeof atob === 'function') {
+      binaryString = atob(base64Data);
+    } else {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+      let result = '';
+      let i = 0;
+      const padded = base64Data + '='.repeat((4 - (base64Data.length % 4)) % 4);
+      const str = padded.replace(/=+$/, '');
+      while (i < str.length) {
+        const a = chars.indexOf(str.charAt(i++));
+        const b = chars.indexOf(str.charAt(i++));
+        const c = chars.indexOf(str.charAt(i++));
+        const d = chars.indexOf(str.charAt(i++));
+        const n = (a << 18) | (b << 12) | (c << 6) | d;
+        result += String.fromCharCode((n >> 16) & 0xff);
+        if (c !== -1) result += String.fromCharCode((n >> 8) & 0xff);
+        if (d !== -1) result += String.fromCharCode(n & 0xff);
+      }
+      binaryString = result;
+    }
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+
+    const { error } = await supabase.storage
+      .from('profile-avatars')
+      .upload(storagePath, bytes, {
+        contentType: 'image/jpeg',
+        upsert: true,
+      });
+
+    if (error) {
+      console.error('[Avatar] Upload failed:', error.message);
+      return null;
+    }
+    return storagePath;
+  },
+
+  /** Get a signed URL for an avatar (valid 1 hour) */
+  async getSignedUrl(storagePath: string): Promise<string | null> {
+    const { data, error } = await supabase.storage
+      .from('profile-avatars')
+      .createSignedUrl(storagePath, 3600);
+
+    if (error || !data?.signedUrl) return null;
+    return data.signedUrl;
+  },
+
+  /** Delete avatar from storage */
+  async delete(storagePath: string): Promise<boolean> {
+    const { error } = await supabase.storage
+      .from('profile-avatars')
+      .remove([storagePath]);
+    if (error) {
+      console.error('[Avatar] Delete failed:', error.message);
+      return false;
+    }
+    return true;
+  },
+};
+
+// ===========================================
 // EDGE FUNCTION CALLERS
 // ===========================================
 
