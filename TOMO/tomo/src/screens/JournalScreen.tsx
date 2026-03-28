@@ -9,7 +9,7 @@
  * - Pull to refresh
  */
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   View,
   Text,
@@ -26,12 +26,27 @@ import { colors, spacing, radius, pressedStyles } from '../config/design-tokens'
 import { Icons } from '../components/Icons';
 import { JournalSkeleton } from '../components/Skeleton';
 import { haptics } from '../utils/haptics';
-import { sessionService } from '../services/supabase';
+import { sessionService, profileService } from '../services/supabase';
 import { groupSessionsByDate } from '../utils/journal-helpers';
 import type { Session } from '../types/mvp-types';
 
 type Nav = NativeStackNavigationProp<JournalStackParamList, 'JournalList'>;
 type Filter = 'all' | 'gi' | 'nogi';
+
+/** Get Monday 00:00 and Sunday 23:59:59 for the current week */
+function getCurrentWeekBounds(): { start: string; end: string } {
+  const now = new Date();
+  const day = now.getDay(); // 0=Sun, 1=Mon, ...
+  const diffToMonday = day === 0 ? -6 : 1 - day;
+  const monday = new Date(now);
+  monday.setDate(now.getDate() + diffToMonday);
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+  return {
+    start: monday.toISOString().split('T')[0],
+    end: sunday.toISOString().split('T')[0],
+  };
+}
 
 export function JournalScreen() {
   const navigation = useNavigation<Nav>();
@@ -40,6 +55,7 @@ export function JournalScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(false);
   const [filter, setFilter] = useState<Filter>('all');
+  const [targetFrequency, setTargetFrequency] = useState<number | null>(null);
 
   const loadSessions = useCallback(async () => {
     try {
@@ -57,7 +73,16 @@ export function JournalScreen() {
 
   useEffect(() => {
     loadSessions();
+    profileService.get().then((p) => {
+      if (p) setTargetFrequency(p.target_frequency);
+    });
   }, [loadSessions]);
+
+  // Count sessions this week (Mon–Sun)
+  const sessionsThisWeek = useMemo(() => {
+    const { start, end } = getCurrentWeekBounds();
+    return sessions.filter((s) => s.date >= start && s.date <= end).length;
+  }, [sessions]);
 
   // Re-fetch when screen comes into focus (after logging a new session)
   useEffect(() => {
@@ -96,6 +121,11 @@ export function JournalScreen() {
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Journal</Text>
       </View>
+
+      {/* Weekly pulse strip */}
+      {!loading && (
+        <WeeklyPulse count={sessionsThisWeek} target={targetFrequency} />
+      )}
 
       {/* Filter pills */}
       <View style={styles.filterRow}>
@@ -195,6 +225,39 @@ export function JournalScreen() {
 }
 
 // ============================================
+// WEEKLY PULSE
+// ============================================
+
+function WeeklyPulse({ count, target }: { count: number; target: number | null }) {
+  const hasTarget = target !== null && target > 0;
+  // When exceeded, show bonus dots
+  const dotCount = hasTarget ? Math.max(target, count) : 0;
+
+  return (
+    <View style={styles.pulseRow}>
+      {hasTarget && (
+        <View style={styles.pulseDots}>
+          {Array.from({ length: dotCount }, (_, i) => (
+            <View
+              key={i}
+              style={[
+                styles.pulseDot,
+                i < count ? styles.pulseDotFilled : styles.pulseDotEmpty,
+              ]}
+            />
+          ))}
+        </View>
+      )}
+      <Text style={styles.pulseLabel}>
+        {hasTarget
+          ? `${count} of ${target}`
+          : `${count} session${count !== 1 ? 's' : ''} this week`}
+      </Text>
+    </View>
+  );
+}
+
+// ============================================
 // SESSION CARD
 // ============================================
 
@@ -290,6 +353,39 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: colors.white,
   },
+  // Weekly pulse
+  pulseRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: spacing.lg,
+    paddingBottom: spacing.sm,
+    gap: spacing.sm,
+  },
+  pulseDots: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+  },
+  pulseDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+  },
+  pulseDotFilled: {
+    backgroundColor: colors.gold,
+  },
+  pulseDotEmpty: {
+    backgroundColor: colors.gray800,
+    borderWidth: 1,
+    borderColor: colors.gray600,
+  },
+  pulseLabel: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gray500,
+  },
+
   filterRow: {
     flexDirection: 'row',
     alignItems: 'center',

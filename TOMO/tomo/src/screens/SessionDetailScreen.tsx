@@ -30,7 +30,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { Icons } from '../components/Icons';
 import { SessionDetailSkeleton } from '../components/Skeleton';
 import { useToast } from '../components/Toast';
-import { sessionService, audioService } from '../services/supabase';
+import { sessionService, audioService, profileService } from '../services/supabase';
+import { userGymService } from '../services/userGymService';
 import { generateNarrativeSummary } from '../utils/journal-helpers';
 import type { Session, SessionUpdate, TrainingMode, SessionKind, Submission } from '../types/mvp-types';
 import { haptics } from '../utils/haptics';
@@ -48,6 +49,7 @@ export function SessionDetailScreen({ route, navigation }: Props) {
   const [editSheet, setEditSheet] = useState<string | null>(null);
   const [showTranscript, setShowTranscript] = useState(false);
   const [showNarrative, setShowNarrative] = useState(true);
+  const [gymName, setGymName] = useState<string | null>(null);
   const { showToast } = useToast();
 
   const loadSession = useCallback(async () => {
@@ -60,6 +62,24 @@ export function SessionDetailScreen({ route, navigation }: Props) {
       setLoading(false);
     }
   }, [sessionId]);
+
+  // Look up gym name: user_gym_id → userGymService, fallback → profile gym_name
+  useEffect(() => {
+    if (!session) return;
+    let cancelled = false;
+    (async () => {
+      if (session.user_gym_id) {
+        const gyms = await userGymService.list();
+        const match = gyms.find((g) => g.id === session.user_gym_id);
+        if (!cancelled && match) { setGymName(match.gym_name); return; }
+      }
+      // Fallback: profile gym
+      const profile = await profileService.get();
+      if (!cancelled && profile?.gym_name) { setGymName(profile.gym_name); return; }
+      if (!cancelled) setGymName(null);
+    })();
+    return () => { cancelled = true; };
+  }, [session?.id, session?.user_gym_id]);
 
   useEffect(() => {
     loadSession();
@@ -171,6 +191,14 @@ export function SessionDetailScreen({ route, navigation }: Props) {
             <Icons.Edit size={12} color={colors.gray600} />
           </View>
         </Pressable>
+        {gymName ? (
+          <View style={styles.gymRow}>
+            <Icons.MapPin size={14} color={colors.gray500} />
+            <Text style={styles.gymName} numberOfLines={1} ellipsizeMode="tail">
+              {gymName}
+            </Text>
+          </View>
+        ) : null}
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -545,11 +573,21 @@ function EditTrainingDetailsSheet({ visible, mode, kind, duration, didSpar, onSa
   onSave: (mode: string, kind: string, duration: number, didSpar: boolean) => void;
   onClose: () => void;
 }) {
+  const DURATIONS = [30, 45, 60, 75, 90, 120];
   const [m, setM] = useState(mode);
   const [k, setK] = useState(kind);
   const [d, setD] = useState(duration);
   const [s, setS] = useState(didSpar);
-  useEffect(() => { if (visible) { setM(mode); setK(kind); setD(duration); setS(didSpar); } }, [visible, mode, kind, duration, didSpar]);
+  const [showCustom, setShowCustom] = useState(false);
+  const [customText, setCustomText] = useState('');
+  useEffect(() => {
+    if (visible) {
+      setM(mode); setK(kind); setD(duration); setS(didSpar);
+      const isPreset = DURATIONS.includes(duration);
+      setShowCustom(!isPreset);
+      setCustomText(!isPreset ? String(duration) : '');
+    }
+  }, [visible, mode, kind, duration, didSpar]);
 
   const MODES = [
     { label: 'Gi', value: 'gi' },
@@ -562,7 +600,43 @@ function EditTrainingDetailsSheet({ visible, mode, kind, duration, didSpar, onSa
     { label: 'Comp Training', value: 'competition_training' },
     { label: 'Other', value: 'other' },
   ];
-  const DURATIONS = [30, 45, 60, 90, 120, 130];
+
+  const handlePresetTap = (min: number) => {
+    setD(min);
+    setShowCustom(false);
+    setCustomText('');
+  };
+
+  const handleCustomTap = () => {
+    setShowCustom(true);
+    setCustomText(String(d));
+  };
+
+  const handleCustomChange = (text: string) => {
+    const digits = text.replace(/[^0-9]/g, '');
+    setCustomText(digits);
+    const num = parseInt(digits, 10);
+    if (num >= 15 && num <= 300) {
+      setD(num);
+    }
+  };
+
+  const handleCustomBlur = () => {
+    const num = parseInt(customText, 10);
+    if (!num || num === 0) {
+      setShowCustom(false);
+      setCustomText('');
+    } else if (num < 15) {
+      setD(15);
+      setCustomText('15');
+    } else if (num > 300) {
+      setD(300);
+      setCustomText('300');
+    }
+  };
+
+  const isCustomActive = showCustom && !DURATIONS.includes(d);
+  const customLabel = isCustomActive && customText && parseInt(customText, 10) >= 15 ? customText : 'Custom';
 
   return (
     <SheetWrapper visible={visible} title="Training Details" onClose={onClose} onSave={() => onSave(m, k, d, s)}>
@@ -597,13 +671,32 @@ function EditTrainingDetailsSheet({ visible, mode, kind, duration, didSpar, onSa
         {DURATIONS.map((min) => (
           <Pressable
             key={min}
-            style={({ pressed }) => [styles.roundChip, d === min && styles.roundChipSelected, pressed && { opacity: 0.7 }]}
-            onPress={() => setD(min)}
+            style={({ pressed }) => [styles.roundChip, d === min && !showCustom && styles.roundChipSelected, pressed && { opacity: 0.7 }]}
+            onPress={() => handlePresetTap(min)}
           >
-            <Text style={[styles.roundChipText, d === min && styles.roundChipTextSelected]}>{min}</Text>
+            <Text style={[styles.roundChipText, d === min && !showCustom && styles.roundChipTextSelected]}>{min}</Text>
           </Pressable>
         ))}
+        <Pressable
+          style={({ pressed }) => [styles.roundChip, showCustom && styles.roundChipSelected, pressed && { opacity: 0.7 }]}
+          onPress={handleCustomTap}
+        >
+          <Text style={[styles.roundChipText, showCustom && styles.roundChipTextSelected]}>{customLabel}</Text>
+        </Pressable>
       </View>
+      {showCustom && (
+        <TextInput
+          style={styles.customDurationInput}
+          value={customText}
+          onChangeText={handleCustomChange}
+          onBlur={handleCustomBlur}
+          keyboardType="number-pad"
+          placeholder="15–300 min"
+          placeholderTextColor={colors.gray600}
+          maxLength={3}
+          autoFocus
+        />
+      )}
 
       <Text style={[styles.sheetFieldLabel, { marginTop: spacing.lg }]}>SPARRING</Text>
       <View style={styles.chipRow}>
@@ -858,6 +951,20 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: colors.gray500,
   },
+  gymRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.xs,
+    marginTop: spacing.sm,
+  },
+  gymName: {
+    fontFamily: 'Inter',
+    fontSize: 14,
+    fontWeight: '500',
+    color: colors.gray500,
+    flexShrink: 1,
+  },
 
   scrollContent: {
     paddingHorizontal: spacing.lg,
@@ -1102,6 +1209,20 @@ const styles = StyleSheet.create({
     color: colors.white,
     borderWidth: 1,
     borderColor: colors.gray700,
+  },
+  customDurationInput: {
+    fontFamily: 'Inter',
+    backgroundColor: colors.gray800,
+    borderRadius: radius.lg,
+    paddingHorizontal: spacing.md,
+    paddingVertical: 12,
+    fontSize: 16,
+    fontWeight: '500',
+    color: colors.white,
+    borderWidth: 1,
+    borderColor: colors.gold,
+    marginTop: spacing.sm,
+    width: 120,
   },
   sheetFieldLabel: {
     fontFamily: 'JetBrains Mono-SemiBold',

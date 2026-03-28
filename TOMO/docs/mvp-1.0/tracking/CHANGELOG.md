@@ -31,6 +31,70 @@ Each entry follows this format:
 
 ---
 
+## 2026-03-28 — Duration Options + Recording Cancel (Session 26b)
+
+**Type:** Feature
+
+### Changes
+
+**Feature: Duration Chip Updates**
+- Entry phase (SessionLoggerScreen): Duration chips changed from 60/90/120 to 60/75/90/120
+- Review phase (SessionLoggerScreen): Duration chips changed from 30/45/60/90/120/130 to 30/45/60/75/90/120, dropped 130+ label
+- Edit sheet (SessionDetailScreen EditTrainingDetailsSheet): Same preset update (30/45/60/75/90/120) plus "Custom" chip
+- Custom chip: tapping shows number-pad TextInput, constrained to 15–300 minutes, displays entered value on chip, resets when a preset is tapped, empty/0 falls back to previous value
+
+**Feature: Cancel Button on Recording Phase**
+- Added "Cancel" text link to top-left of recording screen (Inter 15px, gray400)
+- Smart confirmation: recordings under 3 seconds cancel instantly; 3+ seconds shows Alert with "Discard" (destructive) / "Keep Recording"
+- Cancel resets to Entry phase, discards audio, resets recording state
+- Double-tap protection via ref guard
+- Resets autoStarted ref so voice auto-start works on re-entry
+
+### Why
+- 75-minute sessions are common in BJJ (class + some sparring) — missing from presets
+- 130 was rarely used — replaced with 75 plus Custom for edge cases
+- Users had no way to cancel a recording without stopping and going through the full pipeline
+
+### Testing
+- `npx tsc --noEmit` passes with zero errors
+- Test locally: entry phase shows 4 duration chips, review shows 6 chips
+- Test locally: session detail edit sheet shows 6 presets + Custom chip with number input
+- Test locally: recording phase shows Cancel in top-left, confirm dialog on 3+ second recordings
+
+---
+
+## 2026-03-28 — Weekly Pulse + Gym Name on Detail (Session 26)
+
+**Type:** Feature
+
+### Changes
+
+**Feature 4: Training Frequency Tracker (JournalScreen)**
+- Added compact "weekly pulse" strip above the filter pills showing progress dots
+- Gold filled dots for sessions completed this week (Mon–Sun), gray empty dots for remaining
+- Shows "X of Y" text when user has a target_frequency set
+- Falls back to "X sessions this week" when no target is set
+- Handles exceeded targets (bonus gold dots), zero sessions, and new users gracefully
+- Uses `profileService.get()` for target, counts sessions from already-loaded list
+- Styled with design tokens: 10px dots, gold fill, Inter 13px gray500 label
+
+**Feature 5: Gym Name on Session Detail (SessionDetailScreen)**
+- Added gym name line below the mode/kind/duration row in the header
+- MapPin icon (14px, gray500) + gym name in Inter 14px gray500
+- Looks up gym from `userGymService.list()` by `user_gym_id`, falls back to profile `gym_name`
+- Truncates long names with ellipsis (numberOfLines={1})
+- Hidden when no gym data available — no empty state
+
+### Why
+- Frequency tracker gives users at-a-glance weekly accountability without leaving the journal
+- Gym name adds location context to session details, useful for users who train at multiple gyms
+
+### Testing
+- TypeScript clean (`npx tsc --noEmit` — 0 errors)
+- Test locally on device
+
+---
+
 ## 2026-03-28 — Multi-Session Fix, Log Button, Gym Autocomplete (Session 25)
 
 **Type:** Fix / Polish
