@@ -169,15 +169,16 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     console.log('Successfully processed Claude API request and cached response');
 
     return Response.json(result, { headers: corsHeaders });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Claude API Error:', error);
 
+    const errorMsg = error instanceof Error ? error.message : '';
     let errorMessage = 'An unexpected error occurred';
-    if (error.message?.includes('rate limit')) {
+    if (errorMsg.includes('rate limit')) {
       errorMessage = 'Rate limit exceeded. Please try again in a moment.';
-    } else if (error.message?.includes('API key')) {
+    } else if (errorMsg.includes('API key')) {
       errorMessage = 'API authentication error';
-    } else if (error.message?.includes('timeout')) {
+    } else if (errorMsg.includes('timeout')) {
       errorMessage = 'Request timed out. Please try again.';
     }
 

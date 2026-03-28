@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef } from 'react';
+import { useCallback, useState, useRef, RefObject } from 'react';
 import { SearchInput } from './components/common/SearchInput';
 import { ConversationHistory } from './components/features/ConversationHistory';
 import { ErrorMessage } from './components/common/ErrorMessage';
@@ -105,7 +105,7 @@ function AppContent(): JSX.Element {
       if (newCount >= 6) {
         setIsSessionLimitReached(true);
       }
-    } catch (error) {
+    } catch (_error) {
       // Error is already handled by the onError callback
       // Just add a fallback message
       addMessage(
@@ -329,7 +329,7 @@ function AppContent(): JSX.Element {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div ref={hamburgerButtonRef as any}>
+              <div ref={hamburgerButtonRef as unknown as RefObject<HTMLDivElement>}>
                 <HamburgerButton
                   isOpen={sidebarOpen}
                   onClick={toggleSidebar}

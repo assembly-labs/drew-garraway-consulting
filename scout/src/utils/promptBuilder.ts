@@ -53,7 +53,7 @@ Would you like more recommendations from our collection?"
 REMEMBER: You are working with a CLOSED catalog system. Use ONLY the books listed in the catalog above. NO exceptions.`;
 };
 
-export const formatConversationForAPI = (messages: Message[]): any[] => {
+export const formatConversationForAPI = (messages: Message[]): Array<{ role: string; content: string }> => {
   // Convert our Message format to Claude's expected format
   return messages.map(msg => ({
     role: msg.role === 'user' ? 'user' : 'assistant',

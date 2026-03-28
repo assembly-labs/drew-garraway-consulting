@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Message, ConversationState } from '../types';
+import { Message, ConversationState, CatalogItem } from '../types';
 
 export const useConversation = () => {
   const [state, setState] = useState<ConversationState>({
@@ -9,7 +9,7 @@ export const useConversation = () => {
   });
 
   // Add a new message to the conversation
-  const addMessage = useCallback((content: string, role: 'user' | 'assistant', books?: any[]) => {
+  const addMessage = useCallback((content: string, role: 'user' | 'assistant', books?: CatalogItem[]) => {
     const newMessage: Message = {
       id: `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       role,

@@ -18,7 +18,7 @@ export const useCatalog = () => {
         }
         const data = await response.json();
         return data;
-      } catch (error) {
+      } catch (_error) {
         // Fallback to a minimal catalog for demo purposes
         return getFallbackCatalog();
       }
