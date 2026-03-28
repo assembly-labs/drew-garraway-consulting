@@ -26,7 +26,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { colors, spacing, radius, touchTargets, fontSizes } from '../config/design-tokens';
 import { Icons } from '../components/Icons';
 import { useAuth } from '../hooks/useAuth';
@@ -183,6 +183,49 @@ export function SessionLoggerScreen() {
       if (dismissTimerRef.current) clearTimeout(dismissTimerRef.current);
     };
   }, []);
+
+  // Reset form when screen regains focus — but only if the previous session
+  // is done (success phase). Active phases (recording/processing/review) are
+  // left alone so an accidental tab switch doesn't wipe in-progress work.
+  const phaseRef = useRef(phase);
+  phaseRef.current = phase;
+  useFocusEffect(
+    useCallback(() => {
+      if (phaseRef.current === 'success') {
+        // Kill the auto-dismiss timer so it doesn't navigate us away later
+        if (dismissTimerRef.current) {
+          clearTimeout(dismissTimerRef.current);
+          dismissTimerRef.current = null;
+        }
+        // Full state reset — same as resetAndGoBack but without the navigate
+        setPhase(prefersVoice ? 'recording' : 'entry');
+        setSkippedEntry(prefersVoice);
+        setEntry({ trainingMode: 'gi', sessionKind: 'class', durationMinutes: 90, didSpar: null });
+        setReview({
+          trainingMode: 'gi', sessionKind: 'class', durationMinutes: 90,
+          didSpar: false, sparringRounds: 0, techniquesDrilled: [],
+          lessonTopic: '', notes: '', instructor: '', warmedUp: null,
+          submissionsGiven: [], submissionsReceived: [], injuries: [],
+        });
+        setTranscript('');
+        setAudioPath(null);
+        setVoiceSessionId(null);
+        setPipelineSucceeded(false);
+        setSaving(false);
+        savingRef.current = false;
+        setTranscriptionError(null);
+        setExtractionError(null);
+        setExtractionModel(null);
+        setSchemaVersion(undefined);
+        setGymOverride(null);
+        setShowGymPicker(false);
+        rawExtractionRef.current = null;
+        voiceRecorder.reset();
+        // Re-enable voice auto-start for next session
+        autoStarted.current = false;
+      }
+    }, [prefersVoice, voiceRecorder])
+  );
 
   useEffect(() => {
     if (phase === 'recording') {
