@@ -203,14 +203,3 @@ function listToNaturalLanguage(items: string[]): string {
   return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
 }
 
-function energyLabel(level: number): string {
-  switch (level) {
-    case 1: return 'exhausted';
-    case 2: return 'low';
-    case 3: return 'moderate';
-    case 4: return 'good';
-    case 5: return 'great';
-    default: return '';
-  }
-}
-

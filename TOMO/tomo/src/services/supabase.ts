@@ -51,6 +51,40 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 });
 
 // ===========================================
+// SHARED HELPERS
+// ===========================================
+
+/** Decode a base64 string to Uint8Array. Uses atob when available, manual decode for older Hermes. */
+function decodeBase64ToBytes(base64Data: string): Uint8Array {
+  let binaryString: string;
+  if (typeof atob === 'function') {
+    binaryString = atob(base64Data);
+  } else {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    let result = '';
+    let i = 0;
+    const padded = base64Data + '='.repeat((4 - (base64Data.length % 4)) % 4);
+    const str = padded.replace(/=+$/, '');
+    while (i < str.length) {
+      const a = chars.indexOf(str.charAt(i++));
+      const b = chars.indexOf(str.charAt(i++));
+      const c = chars.indexOf(str.charAt(i++));
+      const d = chars.indexOf(str.charAt(i++));
+      const n = (a << 18) | (b << 12) | (c << 6) | d;
+      result += String.fromCharCode((n >> 16) & 0xff);
+      if (c !== -1) result += String.fromCharCode((n >> 8) & 0xff);
+      if (d !== -1) result += String.fromCharCode(n & 0xff);
+    }
+    binaryString = result;
+  }
+  const bytes = new Uint8Array(binaryString.length);
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  return bytes;
+}
+
+// ===========================================
 // PROFILE SERVICE
 // ===========================================
 
@@ -326,36 +360,7 @@ export const audioService = {
       return null;
     }
 
-    // Decode base64 to ArrayBuffer for Supabase upload
-    // Use atob if available (modern Hermes), otherwise manual decode
-    let binaryString: string;
-    if (typeof atob === 'function') {
-      binaryString = atob(base64Data);
-    } else {
-      // Manual base64 decode for older Hermes versions
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-      let result = '';
-      let i = 0;
-      // Normalize padding before stripping (Bug 15)
-      const padded = base64Data + '='.repeat((4 - (base64Data.length % 4)) % 4);
-      const str = padded.replace(/=+$/, '');
-      while (i < str.length) {
-        const a = chars.indexOf(str.charAt(i++));
-        const b = chars.indexOf(str.charAt(i++));
-        const c = chars.indexOf(str.charAt(i++));
-        const d = chars.indexOf(str.charAt(i++));
-        const n = (a << 18) | (b << 12) | (c << 6) | d;
-        result += String.fromCharCode((n >> 16) & 0xff);
-        if (c !== -1) result += String.fromCharCode((n >> 8) & 0xff);
-        if (d !== -1) result += String.fromCharCode(n & 0xff);
-      }
-      binaryString = result;
-      logger.log('[Audio] Used manual base64 decode (atob not available)');
-    }
-    const bytes = new Uint8Array(binaryString.length);
-    for (let i = 0; i < binaryString.length; i++) {
-      bytes[i] = binaryString.charCodeAt(i);
-    }
+    const bytes = decodeBase64ToBytes(base64Data);
     logger.log('[Audio] Decoded to', bytes.length, 'bytes');
 
     const { error } = await supabase.storage
@@ -413,31 +418,7 @@ export const avatarService = {
       return null;
     }
 
-    let binaryString: string;
-    if (typeof atob === 'function') {
-      binaryString = atob(base64Data);
-    } else {
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-      let result = '';
-      let i = 0;
-      const padded = base64Data + '='.repeat((4 - (base64Data.length % 4)) % 4);
-      const str = padded.replace(/=+$/, '');
-      while (i < str.length) {
-        const a = chars.indexOf(str.charAt(i++));
-        const b = chars.indexOf(str.charAt(i++));
-        const c = chars.indexOf(str.charAt(i++));
-        const d = chars.indexOf(str.charAt(i++));
-        const n = (a << 18) | (b << 12) | (c << 6) | d;
-        result += String.fromCharCode((n >> 16) & 0xff);
-        if (c !== -1) result += String.fromCharCode((n >> 8) & 0xff);
-        if (d !== -1) result += String.fromCharCode(n & 0xff);
-      }
-      binaryString = result;
-    }
-    const bytes = new Uint8Array(binaryString.length);
-    for (let i = 0; i < binaryString.length; i++) {
-      bytes[i] = binaryString.charCodeAt(i);
-    }
+    const bytes = decodeBase64ToBytes(base64Data);
 
     const { error } = await supabase.storage
       .from('profile-avatars')

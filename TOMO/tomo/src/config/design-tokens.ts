@@ -108,25 +108,6 @@ export const radius = {
 //
 // Weight 400 is PROHIBITED — minimum is 500 (Medium).
 
-export const fontFamilies = {
-  display: {
-    medium: 'Unbounded',
-    bold: 'Unbounded-Bold',
-    extraBold: 'Unbounded-ExtraBold',
-    black: 'Unbounded-Black',
-  },
-  body: {
-    medium: 'Inter',
-    semiBold: 'Inter-SemiBold',
-    bold: 'Inter-Bold',
-  },
-  mono: {
-    medium: 'JetBrains Mono',
-    semiBold: 'JetBrains Mono-SemiBold',
-    bold: 'JetBrains Mono-Bold',
-  },
-} as const;
-
 export const fontSizes = {
   xs: 12,    // Minimum allowed — eyebrow labels only
   sm: 13,    // Secondary text, timestamps
@@ -147,55 +128,13 @@ export const lineHeights = {
 } as const;
 
 // Pre-built typography styles for common use cases.
-// Spread these into your StyleSheet: { ...typography.headline }
+// Spread these into your StyleSheet: { ...typography.body }
 export const typography: Record<string, TextStyle> = {
-  heroNumber: {
-    fontFamily: 'Unbounded-Black',
-    fontSize: fontSizes['5xl'],
-    fontWeight: '900',
-    lineHeight: fontSizes['5xl'] * lineHeights.none,
-  },
-  headline: {
-    fontFamily: 'Unbounded-ExtraBold',
-    fontSize: fontSizes['2xl'],
-    fontWeight: '800',
-    lineHeight: fontSizes['2xl'] * lineHeights.tight,
-  },
-  subheadline: {
-    fontFamily: 'Unbounded-Bold',
-    fontSize: fontSizes.xl,
-    fontWeight: '700',
-    lineHeight: fontSizes.xl * lineHeights.tight,
-  },
   body: {
     fontFamily: 'Inter',
     fontSize: fontSizes.base,
     fontWeight: '500',
     lineHeight: fontSizes.base * lineHeights.normal,
-  },
-  bodySmall: {
-    fontFamily: 'Inter',
-    fontSize: fontSizes.sm,
-    fontWeight: '500',
-    lineHeight: fontSizes.sm * lineHeights.normal,
-  },
-  bodyBold: {
-    fontFamily: 'Inter-Bold',
-    fontSize: fontSizes.base,
-    fontWeight: '700',
-    lineHeight: fontSizes.base * lineHeights.normal,
-  },
-  label: {
-    fontFamily: 'JetBrains Mono-SemiBold',
-    fontSize: fontSizes.xs,
-    fontWeight: '600',
-    letterSpacing: 2,
-    textTransform: 'uppercase',
-  },
-  dataValue: {
-    fontFamily: 'JetBrains Mono-Bold',
-    fontSize: fontSizes.sm,
-    fontWeight: '700',
   },
 } as const;
 
@@ -241,40 +180,6 @@ export const shadows = {
 // ===========================================
 // SHARED COMPONENT STYLES
 // ===========================================
-
-export const chipStyles = {
-  pill: {
-    borderRadius: radius.full,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    backgroundColor: colors.gray800,
-    borderWidth: 1,
-    borderColor: colors.gray700,
-  },
-  square: {
-    borderRadius: radius.lg,
-    width: 48,
-    height: 48,
-    alignItems: 'center' as const,
-    justifyContent: 'center' as const,
-    backgroundColor: colors.gray800,
-    borderWidth: 1,
-    borderColor: colors.gray700,
-  },
-  selected: {
-    backgroundColor: colors.goldDim,
-    borderColor: colors.gold,
-  },
-  text: {
-    fontFamily: 'Inter-SemiBold',
-    fontSize: 15,
-    fontWeight: '600' as const,
-    color: colors.gray400,
-  },
-  textSelected: {
-    color: colors.gold,
-  },
-} as const;
 
 export const pressedStyles = {
   card: { backgroundColor: '#252525' },

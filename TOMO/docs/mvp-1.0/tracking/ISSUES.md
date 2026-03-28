@@ -640,6 +640,26 @@ Add accessibilityLabel to all interactive elements for VoiceOver support. Sessio
 
 ---
 
+## Cleanup — Session 25d (2026-03-28)
+
+### CLEAN-001 Dead Code Removal
+**Priority:** P3
+**Area:** Multiple files
+**Added:** 2026-03-28
+**Status:** ✅ Done (2026-03-28, Session 25d)
+
+Removed ~137 lines of dead code: `energyLabel()` (journal-helpers.ts), `Icons.Search` (Icons.tsx), `chipStyles` (design-tokens.ts), `fontFamilies` (design-tokens.ts), 7 unused `typography` entries (design-tokens.ts), dead `typography` import (InsightsScreen.tsx).
+
+### CLEAN-002 Duplicate Base64 Decode Consolidated
+**Priority:** P3
+**Area:** supabase.ts
+**Added:** 2026-03-28
+**Status:** ✅ Done (2026-03-28, Session 25d)
+
+Identical base64-to-Uint8Array decode logic was copy-pasted in `audioService.upload()` and `avatarService.upload()`. Extracted shared `decodeBase64ToBytes()` helper. Both services now call it. ~25 net lines removed.
+
+---
+
 ## Completed
 
 ### BUG-005 Review Fields Empty (Extraction Parse Failure) — ✅ 2026-03-10 (Session 7)

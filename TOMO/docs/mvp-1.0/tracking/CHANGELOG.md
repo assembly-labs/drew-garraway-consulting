@@ -31,6 +31,35 @@ Each entry follows this format:
 
 ---
 
+## 2026-03-28 — Codebase Cleanup: Dead Code Removal (Session 25d)
+
+**Type:** Refactor
+
+### Changes
+
+**Dead Code Removed (~137 lines)**
+- `energyLabel()` — unused private function in journal-helpers.ts (never called)
+- `Icons.Search` — icon component defined but never used in any screen
+- `chipStyles` — exported from design-tokens.ts but never imported by any component
+- `fontFamilies` — exported from design-tokens.ts but never imported (all components hardcode font strings)
+- 7 unused `typography` entries (heroNumber, headline, subheadline, bodySmall, bodyBold, label, dataValue) — only `typography.body` was used (by Toast.tsx)
+- Dead `typography` import removed from InsightsScreen.tsx
+
+**Consolidated Duplicate Logic**
+- Base64 decode logic was copy-pasted identically in `audioService.upload()` and `avatarService.upload()` in supabase.ts
+- Extracted shared `decodeBase64ToBytes()` helper, both services now call it
+
+### Why
+- Dead code adds cognitive load and bundle size for zero benefit
+- Duplicate base64 logic was a maintenance risk — fixing a bug in one copy could miss the other
+
+### Testing
+- `npx tsc --noEmit` passes with zero errors
+- Zero behavior change — all removed code had zero consumers
+- Audio upload and avatar upload both use the shared helper (same logic, verified identical)
+
+---
+
 ## 2026-03-28 — Duration Options + Recording Cancel (Session 26b)
 
 **Type:** Feature

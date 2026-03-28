@@ -22,7 +22,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
-import { colors, spacing, radius, typography, pressedStyles } from '../config/design-tokens';
+import { colors, spacing, radius, pressedStyles } from '../config/design-tokens';
 import { Icons } from '../components/Icons';
 import { insightService } from '../services/insights-service';
 import { sessionService } from '../services/supabase';
