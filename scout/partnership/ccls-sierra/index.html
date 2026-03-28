@@ -567,6 +567,69 @@
 
     footer a:hover { text-decoration: underline; }
 
+    /* ── Divider ── */
+    .divider {
+      text-align: center;
+      margin: 3rem 0 2.5rem;
+      position: relative;
+    }
+
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--cream-dark);
+    }
+
+    .divider span {
+      position: relative;
+      background: var(--cream);
+      padding: 0 1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-light);
+    }
+
+    /* ── Stat Callout ── */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 1rem 0.5rem;
+      background: var(--white);
+      border-radius: 10px;
+      border: 1px solid rgba(30,58,95,0.06);
+    }
+
+    .stat .number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .stat .label {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 0.25rem;
+      line-height: 1.3;
+    }
+
+    /* ── Two-col value ── */
+    @media (min-width: 640px) {
+      .value-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* ── Responsive: Tablet ── */
     @media (max-width: 768px) {
       .container { padding: 0 1.25rem; }
@@ -611,6 +674,12 @@
 
       .roles-grid { grid-template-columns: 1fr; }
 
+      .stat-row { grid-template-columns: 1fr; gap: 0.5rem; }
+      .stat { padding: 0.75rem; }
+      .stat .number { font-size: 1.3rem; }
+
+      .divider { margin: 2rem 0 2rem; }
+
       .commitment { padding: 1.5rem 1.25rem; }
       .commitment .promises { gap: 0.5rem; }
       .commitment .promise { font-size: 0.85rem; padding: 0.35rem 0.7rem; }
@@ -632,91 +701,20 @@
 
   <div class="container">
 
+    <!-- ════════════════════════════════════════════
+         PART 1 — OVERVIEW (scannable in 60 seconds)
+         ════════════════════════════════════════════ -->
+
     <!-- ═══ What Is Scout ═══ -->
     <section class="what-is-scout">
       <span class="section-label">About Scout</span>
       <h2>A library assistant built by librarians, for libraries</h2>
-      <p>Scout is a natural language discovery tool that helps patrons find what they need through plain conversation. Instead of navigating filters and keyword searches, patrons simply ask Scout what they're looking for — and get helpful, librarian-quality answers grounded in your actual catalog data.</p>
-      <p>Scout was built by <strong>Drew Garraway</strong>, a Reference Librarian at Tredyffrin Public Library, and <strong>Kenny Allen</strong>, a former librarian. We built Scout because we saw first-hand how patrons struggle with traditional catalog interfaces — and how much time staff spends helping people find things that should be easy to discover.</p>
-      <p>To work, Scout needs to connect to the library's catalog system. That's where the <strong>Sierra REST API</strong> comes in — it's the bridge that lets Scout search the real CCLS catalog and show patrons real-time availability.</p>
+      <p>Scout is a natural language discovery tool that lets patrons and librarians search the catalog through plain conversation. Instead of keyword searches and boolean filters, you simply ask for what you need — and Scout returns real answers grounded in your actual catalog, with real-time availability.</p>
+      <p>Built by <strong>Drew Garraway</strong> (Reference Librarian, Tredyffrin Public Library) and <strong>Kenny Allen</strong> (former librarian). To connect to the CCLS catalog, Scout needs access to the <strong>Sierra REST API</strong> — read-only, no patron data, no writes.</p>
     </section>
 
-    <!-- ═══ Value ═══ -->
+    <!-- ═══ Conversation Demo ═══ -->
     <section>
-      <span class="section-label">Why it matters</span>
-      <h2>Value for everyone in the library</h2>
-      <div class="value-grid">
-        <div class="value-card patrons">
-          <div class="icon">&#128100;</div>
-          <h3>For Patrons</h3>
-          <p>Ask in plain language — "I need a good audiobook for a road trip" or "Do you have anything about starting a small business?" — and get personalized, conversational recommendations with real-time availability. No more decoding boolean search or navigating the OPAC.</p>
-        </div>
-        <div class="value-card librarians">
-          <div class="icon">&#128218;</div>
-          <h3>For Librarians</h3>
-          <p>Scout gives librarians a faster, more intuitive way to search the catalog — making reader's advisory richer and more rewarding. When finding the right material takes seconds instead of multiple searches, librarians can spend that time building deeper relationships with patrons and having the kinds of conversations that keep people coming back.</p>
-        </div>
-        <div class="value-card libraries">
-          <div class="icon">&#127963;</div>
-          <h3>For Libraries</h3>
-          <p>Scout surfaces materials that traditional search buries — putting older, underutilized, and more diverse parts of the collection into patrons' hands. The result is increased circulation, higher event attendance, more doors opening, and stronger numbers across every metric that drives library funding.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ Impact ═══ -->
-    <section>
-      <span class="section-label">Impact</span>
-      <h2>Moving the metrics that matter</h2>
-      <p>Libraries are measured by circulation, door count, program attendance, and registered borrowers. These are the numbers that go to municipal councils, state library agencies, and IMLS — and they determine funding. Scout directly improves each of them.</p>
-      <div class="value-grid">
-        <div class="value-card patrons">
-          <div class="icon">&#128214;</div>
-          <h3>Unlocking the Collection</h3>
-          <p>In a typical library, <strong>80% of the collection accounts for only 20% of circulation.</strong> That's thousands of quality materials sitting on shelves because the OPAC can't surface them. Scout recommends based on what a patron actually wants — not just exact keyword matches — putting older catalog investments back into circulation. Libraries that implemented discovery layers have reported <strong>15–25% increases in backlist circulation.</strong></p>
-        </div>
-        <div class="value-card librarians">
-          <div class="icon">&#128200;</div>
-          <h3>Driving Visits &amp; Attendance</h3>
-          <p>Digital discovery drives physical visits. Research shows patrons who use library websites have <strong>50% higher borrowing rates</strong> and are more likely to walk through the door. At Columbus Metropolitan Library, <strong>over 60% of all circulation is holds-driven</strong> — patrons find materials online, then come in to pick them up. When Scout surfaces events alongside books, program attendance grows too.</p>
-        </div>
-        <div class="value-card libraries">
-          <div class="icon">&#127974;</div>
-          <h3>Strengthening Funding</h3>
-          <p>Colorado's Library Research Service found that libraries in the top quartile of per-capita circulation receive <strong>40–60% more funding</strong> than those in the bottom quartile. State ROI studies consistently show every dollar invested in libraries returns <strong>$4–$6 in community value</strong> (PA: $5.50, FL: $6.54, OH: $4.00). Scout helps move the numbers that make those cases.</p>
-        </div>
-      </div>
-      <p style="font-size: 0.88rem; color: var(--text-light); margin-top: 0.5rem;">Sources: IMLS Public Library Survey, Pew Research Center (2013, 2015), OCLC Research, Colorado Library Research Service, PLA Project Outcome, state ROI studies (PA, FL, OH).</p>
-    </section>
-
-    <!-- ═══ Accessibility ═══ -->
-    <section>
-      <span class="section-label">Accessibility &amp; Inclusion</span>
-      <h2>A catalog that works for everyone</h2>
-      <p>Traditional library catalogs assume patrons can read English fluently, see small text, and understand library jargon like "OPAC," "bib record," and boolean operators. That's a barrier for a lot of the people libraries serve most. Scout removes those barriers.</p>
-      <div class="value-grid">
-        <div class="value-card patrons">
-          <div class="icon">&#127760;</div>
-          <h3>ESL &amp; Multilingual Patrons</h3>
-          <p>Patrons can ask questions in their own words — imperfect English, mixed languages, conversational phrasing. Scout understands intent, not just exact keywords. A patron who types "book for learn English at home" gets useful results, not zero hits.</p>
-        </div>
-        <div class="value-card librarians">
-          <div class="icon">&#128065;</div>
-          <h3>Low Vision &amp; Blind Patrons</h3>
-          <p>Scout's conversational interface works naturally with screen readers — no complex navigation menus, dropdown filters, or tiny clickable elements to fight with. Patrons get clear, spoken answers instead of dense results pages.</p>
-        </div>
-        <div class="value-card libraries">
-          <div class="icon">&#129309;</div>
-          <h3>Digital Literacy Gaps</h3>
-          <p>Many patrons — older adults, new library users, people without tech experience — find catalog search intimidating. Talking to Scout feels like asking a librarian at the desk, not operating a database. That's the point.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ How It Works ═══ -->
-    <section>
-      <span class="section-label">In action</span>
-      <h2>What a conversation looks like</h2>
       <div class="conversation">
         <div class="message patron">
           <div class="avatar">P</div>
@@ -737,32 +735,70 @@
           </div>
         </div>
       </div>
-      <p style="font-size: 0.92rem; text-align: center; color: var(--text-light);">Scout searches the Sierra catalog in real time, checks item availability, and responds in natural language.</p>
+    </section>
+
+    <!-- ═══ Value + Impact (merged) ═══ -->
+    <section>
+      <span class="section-label">Why it matters</span>
+      <h2>Better discovery for patrons, librarians, and libraries</h2>
+
+      <div class="value-grid" style="margin-bottom: 1.25rem;">
+        <div class="value-card patrons">
+          <div class="icon">&#128100;</div>
+          <h3>For Patrons</h3>
+          <p>Ask in plain language — "I need a good audiobook for a road trip" — and get conversational recommendations with real-time availability. Works for ESL speakers, screen reader users, and patrons who find the OPAC intimidating. Scout understands intent, not just keywords.</p>
+        </div>
+        <div class="value-card librarians">
+          <div class="icon">&#128218;</div>
+          <h3>For Librarians</h3>
+          <p>Scout gives staff a faster, more intuitive way to search the catalog — making reader's advisory richer and more rewarding. When finding the right material takes seconds instead of multiple searches, librarians can have deeper, more valuable conversations with patrons and build the relationships that keep people coming back.</p>
+        </div>
+        <div class="value-card libraries">
+          <div class="icon">&#127963;</div>
+          <h3>For Libraries</h3>
+          <p>Scout surfaces materials that traditional search buries — putting older, underutilized, and more diverse parts of the collection into patrons' hands. More checkouts, more doors opening, higher event attendance, stronger numbers across every metric that drives funding.</p>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="number">80%</div>
+          <div class="label">of a typical collection sits underused — Scout surfaces the long tail</div>
+        </div>
+        <div class="stat">
+          <div class="number">50%</div>
+          <div class="label">higher borrowing rates among patrons who use library digital tools</div>
+        </div>
+        <div class="stat">
+          <div class="number">$5.50</div>
+          <div class="label">returned per $1 invested in PA libraries — Scout helps make the case</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 0;">Sources: IMLS Public Library Survey, Pew Research Center, OCLC Research, Colorado Library Research Service, PA state ROI study.</p>
     </section>
 
     <!-- ═══ What We Need ═══ -->
     <section>
-      <span class="section-label">Partnership</span>
-      <h2>What we need from CCLS &amp; Clarivate</h2>
-      <p>To connect Scout to the CCLS catalog, we need access to the Sierra REST API. Here's exactly what's involved:</p>
+      <span class="section-label">The ask</span>
+      <h2>What we need to get started</h2>
 
       <div class="need-card">
         <div class="need-header">
           <div class="need-number">1</div>
-          <h3>A Sierra API Key <span class="phase-badge mvp">Phase 1 MVP</span></h3>
+          <h3>A Sierra API Key</h3>
         </div>
-        <p>Created in Sierra Administration &rarr; API Keys. We need a client key and secret with <strong>read-only</strong> access. We will never write to or modify any data in Sierra.</p>
+        <p>Created in Sierra Administration &rarr; API Keys. Read-only — we never write to or modify any data in Sierra.</p>
       </div>
 
       <div class="need-card">
         <div class="need-header">
           <div class="need-number">2</div>
-          <h3>Three API Roles</h3>
+          <h3>Three Read-Only Roles</h3>
         </div>
         <p>
-          <code>Bibs Read</code> — search and retrieve catalog records<br>
-          <code>Items Read</code> — check real-time availability and status<br>
-          <code>Branches Read</code> — list branch locations and names
+          <code>Bibs Read</code> &mdash; search and retrieve catalog records<br>
+          <code>Items Read</code> &mdash; check real-time availability and status<br>
+          <code>Branches Read</code> &mdash; list branch locations and names
         </p>
       </div>
 
@@ -771,27 +807,34 @@
           <div class="need-number">3</div>
           <h3>The API Base URL</h3>
         </div>
-        <p>We believe the Sierra API is accessible at <code>catalog.ccls.org</code> but need confirmation of the exact endpoint path for API requests.</p>
+        <p>We believe it's at <code>catalog.ccls.org</code> — just need confirmation of the exact endpoint path.</p>
       </div>
 
-      <div class="need-card" style="border-left: 3px solid var(--slate); opacity: 0.8;">
-        <div class="need-header">
-          <div class="need-number" style="background: var(--slate);">+</div>
-          <h3>Optional: Sandbox Access <span class="phase-badge future">Nice to have</span></h3>
+      <div class="commitment" style="margin-top: 1.25rem;">
+        <h2>Our commitments</h2>
+        <p>Scout complements the library experience — it doesn't replace it.</p>
+        <div class="promises">
+          <div class="promise"><span class="check">&#10003;</span> Read-only access</div>
+          <div class="promise"><span class="check">&#10003;</span> No patron data</div>
+          <div class="promise"><span class="check">&#10003;</span> No catalog stored</div>
+          <div class="promise"><span class="check">&#10003;</span> HTTPS encrypted</div>
+          <div class="promise"><span class="check">&#10003;</span> Built by librarians</div>
         </div>
-        <p>If available, a sandbox or test environment would let us develop without touching production. Innovative offers sandbox access via <code>vendorsupport@iii.com</code>.</p>
       </div>
     </section>
 
-    <!-- ═══ Technical Details ═══ -->
+    <!-- ════════════════════════════════════════════
+         PART 2 — TECHNICAL REFERENCE
+         ════════════════════════════════════════════ -->
+
+    <div class="divider"><span>Technical Reference</span></div>
+
     <section>
-      <span class="section-label">Technical Detail</span>
       <h2>How Scout connects to Sierra</h2>
+      <p>Everything below is reference detail for evaluating the integration. Scout acts as a read-only client to the Sierra REST API (v6), authenticating via OAuth 2.0 Client Credentials and making standard GET requests to search and retrieve catalog data.</p>
 
       <div class="tech-section">
-        <h3>Architecture Overview</h3>
-        <p style="font-size: 0.95rem;">Scout acts as a read-only client to the Sierra REST API (v6). It authenticates via OAuth 2.0 Client Credentials, then makes standard GET requests to search and retrieve catalog data. The natural language layer interprets patron questions, translates them into API calls, and presents results conversationally.</p>
-
+        <h3>Request Flow</h3>
         <div class="arch-diagram"><span class="cream">Patron</span> <span class="dim">asks:</span> "Do you have books about beekeeping?"
   <span class="dim">│</span>
   <span class="dim">▼</span>
@@ -813,97 +856,78 @@
       </div>
 
       <div class="tech-section">
-        <h3>Sierra API Endpoints We'll Use</h3>
+        <h3>Endpoints</h3>
+        <p style="font-size: 0.95rem; margin-bottom: 1rem;">All requests are <strong>read-only</strong>. Scout never creates, modifies, or deletes any records.</p>
 
-        <p style="font-size: 0.95rem; margin-bottom: 1rem;">All requests are <strong>read-only</strong> (GET). Scout never creates, modifies, or deletes any records.</p>
-
-        <!-- Desktop: table layout -->
         <div class="endpoint-table-wrap">
         <table class="endpoint-table">
           <thead>
-            <tr>
-              <th>Endpoint</th>
-              <th>Purpose</th>
-              <th>Phase</th>
-            </tr>
+            <tr><th>Endpoint</th><th>Purpose</th></tr>
           </thead>
           <tbody>
             <tr>
               <td><span class="method get">GET</span>/v6/bibs/search</td>
-              <td>Keyword search across the catalog — title, author, subject, or all fields. Uses Sierra's Advanced Word Search index with relevance ranking.</td>
-              <td><span class="phase-badge mvp">MVP</span></td>
+              <td>Keyword search — title, author, subject, or all fields. Uses Sierra's Advanced Word Search index with relevance ranking.</td>
             </tr>
             <tr>
               <td><span class="method get">GET</span>/v6/bibs/{id}</td>
-              <td>Retrieve full bibliographic record — title, author, ISBN, material type, subjects, publication year, MARC data.</td>
-              <td><span class="phase-badge mvp">MVP</span></td>
+              <td>Full bib record — title, author, ISBN, material type, subjects, publication year, MARC data.</td>
             </tr>
             <tr>
               <td><span class="method get">GET</span>/v6/items</td>
-              <td>Get item-level detail — availability status (available, checked out, in transit), due dates, branch location, call number.</td>
-              <td><span class="phase-badge mvp">MVP</span></td>
+              <td>Item-level availability — status (available, checked out, in transit), due dates, branch, call number.</td>
             </tr>
             <tr>
               <td><span class="method get">GET</span>/v6/branches</td>
-              <td>List all CCLS branch locations with names and codes. Used to translate location codes into human-readable branch names.</td>
-              <td><span class="phase-badge mvp">MVP</span></td>
+              <td>List all CCLS branch locations with names and codes.</td>
             </tr>
             <tr>
               <td><span class="method post">POST</span>/v6/bibs/query</td>
-              <td>Structured filtering with boolean logic (AND/OR) — for targeted searches by specific MARC fields, material type, or audience level.</td>
-              <td><span class="phase-badge mvp">MVP</span></td>
+              <td>Structured filtering with boolean logic (AND/OR) for targeted searches by MARC fields, material type, or audience.</td>
             </tr>
             <tr>
               <td><span class="method get">GET</span>/v6/bibs/metadata</td>
-              <td>Retrieve material type codes and labels (book, DVD, audiobook, etc.) for accurate format display.</td>
-              <td><span class="phase-badge mvp">MVP</span></td>
+              <td>Material type codes and labels (book, DVD, audiobook, etc.) for format display.</td>
             </tr>
           </tbody>
         </table>
         </div>
 
-        <!-- Mobile: card layout -->
         <div class="endpoint-cards">
           <div class="endpoint-card">
             <div class="endpoint-name"><span class="method get">GET</span> /v6/bibs/search</div>
-            <div class="endpoint-desc">Keyword search across the catalog — title, author, subject, or all fields. Uses Sierra's relevance ranking.</div>
-            <span class="phase-badge mvp">MVP</span>
+            <div class="endpoint-desc">Keyword search — title, author, subject, or all fields. Sierra's relevance ranking.</div>
           </div>
           <div class="endpoint-card">
             <div class="endpoint-name"><span class="method get">GET</span> /v6/bibs/{id}</div>
-            <div class="endpoint-desc">Retrieve full bibliographic record — title, author, ISBN, material type, subjects, publication year.</div>
-            <span class="phase-badge mvp">MVP</span>
+            <div class="endpoint-desc">Full bib record — title, author, ISBN, material type, subjects, publication year.</div>
           </div>
           <div class="endpoint-card">
             <div class="endpoint-name"><span class="method get">GET</span> /v6/items</div>
             <div class="endpoint-desc">Item-level availability — status, due dates, branch location, call number.</div>
-            <span class="phase-badge mvp">MVP</span>
           </div>
           <div class="endpoint-card">
             <div class="endpoint-name"><span class="method get">GET</span> /v6/branches</div>
-            <div class="endpoint-desc">List all CCLS branch locations with names and codes.</div>
-            <span class="phase-badge mvp">MVP</span>
+            <div class="endpoint-desc">All CCLS branch locations with names and codes.</div>
           </div>
           <div class="endpoint-card">
             <div class="endpoint-name"><span class="method post">POST</span> /v6/bibs/query</div>
-            <div class="endpoint-desc">Structured filtering with boolean logic for targeted searches by MARC fields, material type, or audience.</div>
-            <span class="phase-badge mvp">MVP</span>
+            <div class="endpoint-desc">Structured boolean filtering by MARC fields, material type, or audience.</div>
           </div>
           <div class="endpoint-card">
             <div class="endpoint-name"><span class="method get">GET</span> /v6/bibs/metadata</div>
-            <div class="endpoint-desc">Material type codes and labels (book, DVD, audiobook, etc.) for format display.</div>
-            <span class="phase-badge mvp">MVP</span>
+            <div class="endpoint-desc">Material type codes and labels for format display.</div>
           </div>
         </div>
       </div>
 
       <div class="tech-section">
-        <h3>Authentication Flow</h3>
-        <p style="font-size: 0.95rem;">Scout authenticates using OAuth 2.0 Client Credentials — the standard server-to-server flow that Sierra supports. No patron credentials are involved in Phase 1.</p>
+        <h3>Authentication</h3>
+        <p style="font-size: 0.95rem;">OAuth 2.0 Client Credentials — standard server-to-server flow. No patron credentials involved.</p>
         <div class="api-flow">
           <div class="step">
             <span class="step-arrow">1.</span>
-            <span class="step-text">Scout sends <code>POST /v6/token</code> with the client key and secret (Base64-encoded)</span>
+            <span class="step-text">Scout sends <code>POST /v6/token</code> with client key and secret (Base64-encoded)</span>
           </div>
           <div class="step">
             <span class="step-arrow">2.</span>
@@ -911,52 +935,25 @@
           </div>
           <div class="step">
             <span class="step-arrow">3.</span>
-            <span class="step-text">Scout includes <code>Authorization: Bearer &lt;token&gt;</code> on all subsequent requests</span>
+            <span class="step-text">Scout includes <code>Authorization: Bearer &lt;token&gt;</code> on all requests</span>
           </div>
           <div class="step">
             <span class="step-arrow">4.</span>
-            <span class="step-text">Token is refreshed automatically before expiry — no manual intervention needed</span>
+            <span class="step-text">Token refreshed automatically before expiry — no manual intervention</span>
           </div>
         </div>
       </div>
 
       <div class="tech-section">
-        <h3>API Roles Required</h3>
-        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">When creating the API key in Sierra Administration, these are the roles we need enabled:</p>
+        <h3>Required API Roles</h3>
+        <p style="font-size: 0.95rem; margin-bottom: 0.5rem;">Set these when creating the API key in Sierra Administration:</p>
         <div class="roles-grid">
-          <div class="role-item">
-            <span class="check">&#10003;</span>
-            <span>Bibs Read</span>
-          </div>
-          <div class="role-item">
-            <span class="check">&#10003;</span>
-            <span>Items Read</span>
-          </div>
-          <div class="role-item">
-            <span class="check">&#10003;</span>
-            <span>Branches Read</span>
-          </div>
-          <div class="role-item optional">
-            <span class="check">&#10003;</span>
-            <span>Holdings Read <span class="opt-label">(optional)</span></span>
-          </div>
+          <div class="role-item"><span class="check">&#10003;</span> <span>Bibs Read</span></div>
+          <div class="role-item"><span class="check">&#10003;</span> <span>Items Read</span></div>
+          <div class="role-item"><span class="check">&#10003;</span> <span>Branches Read</span></div>
+          <div class="role-item optional"><span class="check">&#10003;</span> <span>Holdings Read <span class="opt-label">(optional)</span></span></div>
         </div>
-        <p style="font-size: 0.92rem; color: var(--text-light); margin-top: 0.75rem; margin-bottom: 0;">That's it — all read-only. No write access, no patron data access, no circulation operations. Phase 2 patron features (holds, checkouts) would require additional roles and patron-level OAuth, but that's a separate conversation down the road.</p>
-      </div>
-    </section>
-
-    <!-- ═══ Commitment ═══ -->
-    <section>
-      <div class="commitment">
-        <h2>Our commitments</h2>
-        <p>Scout is designed to complement the library experience, not replace it. We take data responsibility seriously.</p>
-        <div class="promises">
-          <div class="promise"><span class="check">&#10003;</span> Read-only access</div>
-          <div class="promise"><span class="check">&#10003;</span> No patron data collected</div>
-          <div class="promise"><span class="check">&#10003;</span> No catalog data stored</div>
-          <div class="promise"><span class="check">&#10003;</span> HTTPS encrypted</div>
-          <div class="promise"><span class="check">&#10003;</span> Built by librarians</div>
-        </div>
+        <p style="font-size: 0.92rem; color: var(--text-light); margin-top: 0.75rem; margin-bottom: 0;">All read-only. No write access, no patron data, no circulation operations. Phase 2 patron features (holds, checkouts) would require additional roles and patron-level OAuth — a separate conversation down the road.</p>
       </div>
     </section>
 
