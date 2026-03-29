@@ -27,3 +27,10 @@ verify_jwt = false
 
 [functions.chat-with-insight]
 verify_jwt = false
+
+# Beta launch: public signup + NDA flows (no auth required)
+[functions.beta-signup-notify]
+verify_jwt = false
+
+[functions.nda-agreement-notify]
+verify_jwt = false

@@ -47,7 +47,7 @@ interface AuthContextValue {
   /** Sign in with email + password */
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   /** Create account with email + password */
-  signUp: (email: string, password: string) => Promise<{ error: string | null }>;
+  signUp: (email: string, password: string) => Promise<{ error: string | null; session: any | null }>;
   /** Sign out and clear local state */
   signOut: () => Promise<void>;
   /** Refresh profile from database (call after onboarding completes) */
@@ -145,11 +145,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signUp = useCallback(async (email: string, password: string) => {
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { data, error } = await supabase.auth.signUp({ email, password });
     if (error) {
-      return { error: error.message };
+      return { error: error.message, session: null };
     }
-    return { error: null };
+    // If session exists, user was auto-signed in (email confirmation disabled).
+    // The onAuthStateChange listener will handle navigation to onboarding.
+    return { error: null, session: data.session };
   }, []);
 
   const signOut = useCallback(async () => {

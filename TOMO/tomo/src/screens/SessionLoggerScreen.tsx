@@ -543,9 +543,11 @@ export function SessionLoggerScreen() {
   };
 
   const handleCancelRecording = useCallback(async () => {
-    // Stop and discard audio
-    await voiceRecorder.stopRecording();
-    voiceRecorder.reset();
+    // Use cancelRecording() — NOT stopRecording() + reset().
+    // cancelRecording() skips file copy/persistence, resets audio mode,
+    // and calls recorder.stop() directly (bypasses stoppingRef guard,
+    // so it works even if auto-stop is racing).
+    await voiceRecorder.cancelRecording();
     // Reset to entry phase
     setPhase('entry');
     setSkippedEntry(false);
@@ -565,6 +567,7 @@ export function SessionLoggerScreen() {
           setEntry={setEntry}
           onRecord={handleStartRecording}
           onTextOnly={handleTextOnly}
+          onCancel={() => (navigation as any).navigate('JournalTab')}
           gymName={effectiveGymName}
           isGymOverridden={isGymOverridden}
           onGymPress={() => setShowGymPicker(true)}
@@ -639,6 +642,7 @@ function EntryPhase({
   setEntry,
   onRecord,
   onTextOnly,
+  onCancel,
   gymName,
   isGymOverridden,
   onGymPress,
@@ -648,6 +652,7 @@ function EntryPhase({
   setEntry: React.Dispatch<React.SetStateAction<EntryFields>>;
   onRecord: () => void;
   onTextOnly: () => void;
+  onCancel: () => void;
   gymName: string | null;
   isGymOverridden: boolean;
   onGymPress: () => void;
@@ -657,6 +662,15 @@ function EntryPhase({
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.recordingCancelRow}>
+        <Pressable
+          style={({ pressed }) => pressed && { opacity: 0.5 }}
+          onPress={onCancel}
+          hitSlop={12}
+        >
+          <Text style={styles.recordingCancelText}>Cancel</Text>
+        </Pressable>
+      </View>
       <ScrollView contentContainerStyle={styles.entryContent}>
         <Text style={styles.phaseTitle}>Log Your Training</Text>
         <GymChip
@@ -791,9 +805,13 @@ function RecordingPhase({
           { text: 'Keep Recording', style: 'cancel', onPress: () => { cancelRef.current = false; } },
           { text: 'Discard', style: 'destructive', onPress: onCancel },
         ],
+        // onDismiss fires when alert is dismissed without choosing an option (e.g. tap outside on Android).
+        // Reset the guard so Cancel button works again.
+        { onDismiss: () => { cancelRef.current = false; } },
       );
-      // Reset guard if alert is dismissed without action
-      cancelRef.current = false;
+      // Do NOT reset guard here — let the Alert callbacks handle it.
+      // Resetting synchronously created a race where a second tap could slip through
+      // before the Alert rendered.
     }
   }, [duration, onCancel]);
 
@@ -821,7 +839,7 @@ function RecordingPhase({
           style={({ pressed }) => [styles.stopButton, pressed && { opacity: 0.85 }]}
           onPress={onStop}
         >
-          <Icons.Stop size={24} color={colors.white} />
+          <Icons.Stop size={24} color={colors.black} />
           <Text style={styles.stopButtonText}>Stop Recording</Text>
         </Pressable>
       </View>
@@ -1470,7 +1488,7 @@ function SuccessPhase({ sessionCount }: { sessionCount: number }) {
         <View style={styles.successIcon}>
           <Icons.CheckCircle size={56} color={colors.gold} />
         </View>
-        <Text style={styles.successTitle}>Session Logged!</Text>
+        <Text style={styles.successTitle}>Session logged.</Text>
         <Text style={styles.successSubtitle}>
           You've logged {sessionCount + 1} session{sessionCount !== 0 ? 's' : ''} total.
         </Text>
@@ -1568,6 +1586,8 @@ const styles = StyleSheet.create({
   },
   textOnlyButton: {
     alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 44,
     paddingVertical: spacing.md,
     marginTop: spacing.sm,
   },
@@ -1626,7 +1646,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: spacing.sm,
-    backgroundColor: colors.negative,
+    backgroundColor: colors.gold,
     paddingHorizontal: spacing.xl,
     paddingVertical: 18,
     borderRadius: radius.xl,
@@ -1636,7 +1656,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-Bold',
     fontSize: 17,
     fontWeight: '700',
-    color: colors.white,
+    color: colors.black,
   },
 
   // Processing phase
@@ -1793,7 +1813,7 @@ const styles = StyleSheet.create({
   },
   suggestionText: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray300,
   },
@@ -1819,7 +1839,7 @@ const styles = StyleSheet.create({
   },
   tagText: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray300,
   },
@@ -1852,7 +1872,7 @@ const styles = StyleSheet.create({
   },
   transcriptText: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray400,
     fontStyle: 'italic',

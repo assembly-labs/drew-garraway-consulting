@@ -59,7 +59,11 @@ export function OnboardingNavigator() {
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
       <Stack.Screen name="AboutYou" component={AboutYouScreen} />
       <Stack.Screen name="YourTraining" component={YourTrainingScreen} />
-      <Stack.Screen name="GetStarted" component={GetStartedScreen} />
+      <Stack.Screen
+        name="GetStarted"
+        component={GetStartedScreen}
+        options={{ gestureEnabled: false }}
+      />
     </Stack.Navigator>
   );
 }

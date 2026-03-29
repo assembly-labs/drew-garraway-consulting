@@ -8,6 +8,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, spacing } from '../config/design-tokens';
 import { Icons } from './Icons';
 import { offlineQueue } from '../services/offline-queue';
@@ -16,6 +17,7 @@ import { offlineQueue } from '../services/offline-queue';
  * Banner that appears at the top when offline. Dismisses automatically on reconnect.
  */
 export function OfflineBanner() {
+  const insets = useSafeAreaInsets();
   const [isOffline, setIsOffline] = useState(false);
 
   useEffect(() => {
@@ -35,7 +37,7 @@ export function OfflineBanner() {
   if (!isOffline) return null;
 
   return (
-    <View style={styles.banner}>
+    <View style={[styles.banner, { paddingTop: insets.top + 6 }]}>
       <Icons.WifiOff size={16} color={colors.warning} />
       <Text style={styles.bannerText}>No internet connection</Text>
     </View>
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: spacing.sm,
     backgroundColor: colors.warningDim,
-    paddingTop: 54,
+    paddingTop: 0, // overridden inline with useSafeAreaInsets
     paddingBottom: 10,
     paddingHorizontal: spacing.md,
   },

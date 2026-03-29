@@ -2,7 +2,21 @@
 
 **Goal:** Ship the core data loop (Capture > Store > Review > Edit) to TestFlight.
 **Started:** March 7, 2026
-**Status:** Implementation-ready — feature spec and ship plan complete
+**Status:** Live on TestFlight, design audit backlog active
+
+---
+
+## Current Priority: Design Audit Backlog (March 28, 2026)
+
+> **DA-/DS- issues take precedence over all other open issues until resolved or bypassed by Drew.**
+
+A full UX audit was conducted on March 28, 2026. Findings are tracked in `tracking/ISSUES.md` under the "Design Audit" section (DA- and DS- prefixed items). The complete audit report with detailed recommendations lives at `docs/design-reviews/ux-audit-2026-03-28.md`.
+
+**Priority order when picking work:**
+1. DA- items (P0/P1 first, then P2)
+2. DS- items (design system gaps)
+3. Existing CR-/UX-/INS- items (paused until DA/DS resolved or Drew says otherwise)
+4. P3 polish
 
 ---
 
@@ -10,10 +24,10 @@
 
 | Document | Purpose | Status |
 |----------|---------|--------|
-| `README.md` | This file — index + status tracker | Active |
+| `README.md` | This file -- index + status tracker | Active |
 | `SESSION_NOTES.md` | Running log of planning decisions from each session | Active |
-| `FEATURE_SPEC.md` | Exact MVP 1.0 scope — what's in, what's deferred | Complete |
-| `SHIP_PLAN.md` | Implementation plan — phases, tasks, dependencies | Complete |
+| `FEATURE_SPEC.md` | Exact MVP 1.0 scope -- what's in, what's deferred | Complete |
+| `SHIP_PLAN.md` | Implementation plan -- phases, tasks, dependencies | Complete |
 
 ---
 

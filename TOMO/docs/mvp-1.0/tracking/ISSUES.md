@@ -22,6 +22,190 @@ When resolved: move the entry to CHANGELOG.md under the appropriate date, mark a
 
 ---
 
+## ACTIVE PRIORITY: Design Audit (2026-03-28)
+
+> **These items take precedence over all other open issues.** Full audit report: `docs/design-reviews/ux-audit-2026-03-28.md`
+>
+> Work on existing open issues (CR-, UX-, INS-, P3-) is paused until DA-/DS- items are resolved or Drew explicitly requests otherwise.
+
+### DA-001 Insights Screen Not in Tab Bar
+**Priority:** P0
+**Area:** MainTabNavigator
+**Added:** 2026-03-28
+**Status:** Open (also tracked as CR-001)
+
+InsightsScreen is fully built (1065 lines) but not wired into the tab navigator. TOMO's core differentiator is invisible to every user. Add as 4th tab.
+
+### DA-002 No Cancel/Back from Entry Phase
+**Priority:** P1
+**Area:** SessionLoggerScreen (Entry phase)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Added "Cancel" text button top-left, reusing RecordingPhase cancel styles. Navigates to JournalTab.
+
+### DA-003 Review Phase Too Dense for Exhausted Users
+**Priority:** P1
+**Area:** SessionLoggerScreen (Review phase)
+**Added:** 2026-03-28
+**Status:** Open
+
+10+ fields visible simultaneously in Review violates the 90-second principle. Restructure into summary card (mode, duration, techniques, notes) + collapsible "Review Details" for secondary fields. Default collapsed.
+
+### DA-004 No Back Navigation in Onboarding
+**Priority:** P1
+**Area:** Onboarding (screens 2-4)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Back buttons added to AboutYouScreen, YourTrainingScreen, GetStartedScreen. 44x44 touch target, Icons.Back 22px gray400.
+
+### DA-005 14px Font Size Used ~12 Times But Not in Type Scale
+**Priority:** P1
+**Area:** Multiple screens (JournalScreen, InsightsScreen, GetStartedScreen, YourTrainingScreen)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+All 21 instances of fontSize: 14 remapped across 9 files. Metadata/secondary text to 13px, readable body/descriptions to 15px. Zero instances remain.
+
+### DA-006 WelcomeScreen Kanji Has No fontFamily
+**Priority:** P2
+**Area:** WelcomeScreen, AuthScreen
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Added `fontFamily: 'Inter'` to WelcomeScreen `logoSubtext`. AuthScreen already had it.
+
+### DA-007 GymChip Reset Button 28px in Exhausted-User Context
+**Priority:** P2
+**Area:** GymChip component
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Increased to 36x36 with hitSlop 10 (56px total). Close icon bumped from 14 to 16.
+
+### DA-008 "Type Instead" Link Has No Min Touch Target
+**Priority:** P2
+**Area:** SessionLoggerScreen (Entry phase)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Added `minHeight: 44` and `justifyContent: 'center'` to `textOnlyButton` style.
+
+### DA-009 Offline Banner Hardcoded paddingTop
+**Priority:** P2
+**Area:** NetworkError.tsx
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Replaced hardcoded 54 with `useSafeAreaInsets().top + 6`. Works on all device types.
+
+### DA-010 Success Message Hollow Positivity
+**Priority:** P2
+**Area:** SessionLoggerScreen (Success phase)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Changed to "Session logged." (period, lowercase, no exclamation).
+
+### DA-011 Auth Password No Visibility Toggle
+**Priority:** P2
+**Area:** AuthScreen
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Added Eye/EyeOff icons and password visibility toggle. Works in both signin and signup modes.
+
+### DA-012 Journal Empty State No Direct CTA
+**Priority:** P2
+**Area:** JournalScreen
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Added gold "Log Your First Session" button that navigates to LogTab via parent navigator.
+
+### DA-013 Session Detail Back Button No Explicit Hit Area
+**Priority:** P2
+**Area:** SessionDetailScreen
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Already had `width: 44, height: 44` with `alignItems/justifyContent: 'center'`. No change needed.
+
+### DA-014 Inconsistent Header Casing
+**Priority:** P3
+**Area:** InsightsScreen, JournalScreen
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Changed to "Insights" (title-case) and removed letterSpacing: 1 to match Journal header style.
+
+### DA-015 Stop Recording Button Lacks Visual Weight
+**Priority:** P3
+**Area:** SessionLoggerScreen (Recording phase)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Changed from red background/white text to gold background/black text+icon. Now reads as the primary action.
+
+### DA-016 Processing Skip Link Too Subtle
+**Priority:** P3
+**Area:** SessionLoggerScreen (Processing phase)
+**Added:** 2026-03-28
+**Status:** Open
+
+"Skip to manual entry" in gray during a potentially 150s wait. Delay 10-15s then fade in with gold text.
+
+### DA-017 Weekly Pulse Dots No Accessibility Labels
+**Priority:** P3
+**Area:** JournalScreen (WeeklyPulse)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Added `accessibilityLabel` ("X of Y sessions this week") to pulseRow, `accessibilityElementsHidden` on individual dots.
+
+### DS-001 Type Scale: No 14px Token
+**Priority:** P2
+**Area:** Design system (design-tokens.ts)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 28)
+
+Resolved by DA-005: all 21 instances migrated to 13/15. No 14px token needed.
+
+### DS-002 No Reusable DismissibleTag Component
+**Priority:** P3
+**Area:** Design system (components)
+**Added:** 2026-03-28
+**Status:** Open
+
+Technique/injury tags with close buttons are built inline in Review + SessionDetail. Extract shared component.
+
+### DS-003 No Named Cancel Link Style
+**Priority:** P3
+**Area:** Design system (design-tokens.ts)
+**Added:** 2026-03-28
+**Status:** Open
+
+gray400 / Inter / 15px cancel link pattern appears on 4+ screens inline. Add `typography.cancelLink`.
+
+### DS-004 No Animation Timing Tokens
+**Priority:** P3
+**Area:** Design system (design-tokens.ts)
+**Added:** 2026-03-28
+**Status:** Open
+
+Screens use magic numbers (200ms, 250ms, 300ms, etc.) for animations. Add timing tokens.
+
+### DS-005 pressedStyles Tokens Unused
+**Priority:** P3
+**Area:** Design system (design-tokens.ts)
+**Added:** 2026-03-28
+**Status:** Open
+
+Token exists but most pressables use inline `opacity: 0.7`. Dark theme should lighten on press, not reduce opacity.
+
+---
+
 ## Blockers
 
 ### BLOCK-001 Xcode Installation
@@ -533,6 +717,74 @@ Faint "LogTab" text visible behind the gold circle button. Fix: `tabBarItemStyle
 **Status:** ✅ Done (2026-03-28, Session 25)
 
 Typing "Alliance Paoli" returned 0 results because `String.includes()` checked the full query against each individual field. Fix: split query into words, require all words to match across any combination of fields (name, city, affiliation, aliases).
+
+---
+
+## Bugs — Session 27c (2026-03-28)
+
+### BUG-041 Signup Toast Shows "Check Your Email" Incorrectly
+**Priority:** P1
+**Area:** AuthScreen + useAuth (signup flow)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 27c)
+
+`signUp()` in useAuth.ts discarded the session from `supabase.auth.signUp()`. AuthScreen always showed the "Check your email for a confirmation link" toast even though email confirmation is disabled. New users saw a confusing message before being navigated to onboarding. Fix: `signUp()` returns `{ error, session }`, AuthScreen only shows toast when no session is returned (email confirmation ON fallback).
+
+---
+
+## Bugs — Session 27b (2026-03-28)
+
+### BUG-037 Cancel Button Guard Race in RecordingPhase
+**Priority:** P1
+**Area:** SessionLoggerScreen (RecordingPhase)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 27b)
+
+`cancelRef.current = false` reset synchronously after `Alert.alert()`, before the Alert rendered. A rapid second tap could bypass the guard. Fix: use Alert's `onDismiss` callback instead of synchronous reset.
+
+### BUG-038 Session Detail Concurrent Edit Saves
+**Priority:** P1
+**Area:** SessionDetailScreen (handleUpdate)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 27b)
+
+No in-flight guard on `handleUpdate()`. Rapidly saving from two edit sheets fired parallel API calls, risking data overwrite. Fix: added `isSaving` state flag.
+
+### BUG-039 Session Detail Double Delete
+**Priority:** P2
+**Area:** SessionDetailScreen (handleDelete)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 27b)
+
+No in-flight guard on `handleDelete()`. Could fire two soft-delete requests. Fix: added `isDeleting` state flag.
+
+### BUG-040 Journal Pull-to-Refresh Error State + Concurrency
+**Priority:** P2
+**Area:** JournalScreen (onRefresh)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 27b)
+
+`onRefresh()` didn't clear `error` state, so error UI persisted during refresh. No guard against concurrent pulls. Fix: clear error on refresh, return early if already refreshing.
+
+---
+
+## Bugs — Session 27 (2026-03-28)
+
+### BUG-035 WeeklyPulse Shows Stale Training Target
+**Priority:** P1
+**Area:** JournalScreen (WeeklyPulse)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 27)
+
+`targetFrequency` was fetched once on mount via `profileService.get()`. Navigation focus listener only refreshed sessions, not profile data. Changing target_frequency in ProfileScreen had no effect on JournalScreen until app restart. Fix: focus listener now re-fetches profile data on every tab visit.
+
+### BUG-036 handleCancelRecording File Leak + Race Condition
+**Priority:** P1
+**Area:** SessionLoggerScreen (recording cancel)
+**Added:** 2026-03-28
+**Status:** Done (2026-03-28, Session 27)
+
+`handleCancelRecording` called `stopRecording()` + `reset()` instead of `cancelRecording()`. Three problems: (1) every cancelled recording leaked a `.m4a` file to documentDirectory, (2) unnecessary file copy work, (3) `stoppingRef` guard could block cancel if auto-stop was racing. Fix: switched to `cancelRecording()` which bypasses stoppingRef, skips file copy, resets atomically.
 
 ---
 

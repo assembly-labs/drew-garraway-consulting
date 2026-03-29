@@ -25,6 +25,20 @@
 1. **Read `ISSUES.md`** — Check for blockers and open bugs before starting new work.
 2. **Read the latest entry in `CHANGELOG.md`** — Understand what was done last.
 
+### Work Priority (Active as of March 28, 2026)
+
+> **Design Audit items (DA-/DS- prefixes) take precedence over all other open issues.**
+
+A full UX audit was conducted on 2026-03-28. Findings are in `ISSUES.md` under "ACTIVE PRIORITY: Design Audit". Full report at `docs/design-reviews/ux-audit-2026-03-28.md`.
+
+**When picking work, follow this order:**
+1. DA- items (P0/P1 first, then P2)
+2. DS- items (design system gaps)
+3. Existing CR-/UX-/INS- items (paused until DA/DS resolved or Drew says otherwise)
+4. P3 polish
+
+This priority override stays in effect until Drew removes it or all DA-/DS- items are resolved.
+
 ---
 
 ## Testing & Deployment (MANDATORY)

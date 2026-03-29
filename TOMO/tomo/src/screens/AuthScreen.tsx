@@ -19,6 +19,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../hooks/useAuth';
 import { useToast } from '../components/Toast';
 import { colors, spacing, radius } from '../config/design-tokens';
+import { Icons } from '../components/Icons';
 import { supabase } from '../services/supabase';
 
 export function AuthScreen() {
@@ -29,6 +30,7 @@ export function AuthScreen() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [resetLoading, setResetLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
 
@@ -45,13 +47,17 @@ export function AuthScreen() {
           showToast(error, 'error');
         }
       } else {
-        const { error } = await signUp(email.trim(), password);
+        const { error, session } = await signUp(email.trim(), password);
         if (error) {
           showToast(error, 'error');
-        } else {
+        } else if (!session) {
+          // No session returned = email confirmation is required by Supabase.
+          // This is a fallback — the intended config has email confirmation OFF.
           showToast('Check your email for a confirmation link, then sign in.', 'success');
           setMode('signin');
         }
+        // If session exists, onAuthStateChange fires SIGNED_IN automatically
+        // and navigation moves user to onboarding. No toast needed.
       }
     } catch (error: any) {
       showToast(error?.message ?? 'Something went wrong. Please try again.', 'error');
@@ -118,18 +124,32 @@ export function AuthScreen() {
 
             <View style={styles.field}>
               <Text style={styles.fieldLabel}>PASSWORD</Text>
-              <TextInput
-                style={[styles.textInput, passwordFocused && styles.textInputFocused]}
-                value={password}
-                onChangeText={setPassword}
-                placeholder={mode === 'signup' ? 'Create a password' : 'Your password'}
-                placeholderTextColor={colors.gray600}
-                secureTextEntry
-                returnKeyType="go"
-                onSubmitEditing={handleSubmit}
-                onFocus={() => setPasswordFocused(true)}
-                onBlur={() => setPasswordFocused(false)}
-              />
+              <View style={[styles.passwordContainer, passwordFocused && styles.textInputFocused]}>
+                <TextInput
+                  style={styles.passwordInput}
+                  value={password}
+                  onChangeText={setPassword}
+                  placeholder={mode === 'signup' ? 'Create a password' : 'Your password'}
+                  placeholderTextColor={colors.gray600}
+                  secureTextEntry={!showPassword}
+                  returnKeyType="go"
+                  onSubmitEditing={handleSubmit}
+                  onFocus={() => setPasswordFocused(true)}
+                  onBlur={() => setPasswordFocused(false)}
+                />
+                <Pressable
+                  style={styles.eyeToggle}
+                  onPress={() => setShowPassword(!showPassword)}
+                  accessibilityRole="button"
+                  accessibilityLabel={showPassword ? 'Hide password' : 'Show password'}
+                  hitSlop={4}
+                >
+                  {showPassword
+                    ? <Icons.EyeOff size={20} color={colors.gray500} />
+                    : <Icons.Eye size={20} color={colors.gray500} />
+                  }
+                </Pressable>
+              </View>
             </View>
 
             {/* Forgot Password — only on sign in */}
@@ -246,6 +266,29 @@ const styles = StyleSheet.create({
   textInputFocused: {
     borderColor: colors.gold,
   },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.gray800,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderColor: colors.gray700,
+  },
+  passwordInput: {
+    flex: 1,
+    fontFamily: 'Inter',
+    paddingHorizontal: spacing.md,
+    paddingVertical: 16,
+    fontSize: 17,
+    fontWeight: '500',
+    color: colors.white,
+  },
+  eyeToggle: {
+    width: 44,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   button: {
     backgroundColor: colors.gold,
     paddingVertical: 18,
@@ -268,7 +311,7 @@ const styles = StyleSheet.create({
   },
   forgotPasswordText: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray400,
     textDecorationLine: 'underline',

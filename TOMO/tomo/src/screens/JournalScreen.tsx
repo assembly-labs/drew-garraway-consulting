@@ -84,16 +84,22 @@ export function JournalScreen() {
     return sessions.filter((s) => s.date >= start && s.date <= end).length;
   }, [sessions]);
 
-  // Re-fetch when screen comes into focus (after logging a new session)
+  // Re-fetch sessions + profile data when screen comes into focus
+  // (after logging a new session or updating profile settings)
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       loadSessions();
+      profileService.get().then((p) => {
+        if (p) setTargetFrequency(p.target_frequency);
+      });
     });
     return unsubscribe;
   }, [navigation, loadSessions]);
 
   const onRefresh = () => {
+    if (refreshing) return;
     setRefreshing(true);
+    setError(false);
     loadSessions();
   };
 
@@ -190,6 +196,17 @@ export function JournalScreen() {
             After your next training session, tap the + button to log it. Your journal
             will build over time.
           </Text>
+          <Pressable
+            style={({ pressed }) => [styles.emptyCtaButton, pressed && { opacity: 0.85 }]}
+            onPress={() => {
+              haptics.medium();
+              navigation.getParent()?.navigate('LogTab');
+            }}
+            accessibilityRole="button"
+            accessibilityLabel="Log your first session"
+          >
+            <Text style={styles.emptyCtaText}>Log Your First Session</Text>
+          </Pressable>
         </View>
       ) : (
         <FlatList
@@ -233,10 +250,14 @@ function WeeklyPulse({ count, target }: { count: number; target: number | null }
   // When exceeded, show bonus dots
   const dotCount = hasTarget ? Math.max(target, count) : 0;
 
+  const a11yLabel = hasTarget
+    ? `${count} of ${target} sessions this week`
+    : `${count} session${count !== 1 ? 's' : ''} this week`;
+
   return (
-    <View style={styles.pulseRow}>
+    <View style={styles.pulseRow} accessibilityLabel={a11yLabel} accessibilityRole="text">
       {hasTarget && (
-        <View style={styles.pulseDots}>
+        <View style={styles.pulseDots} accessibilityElementsHidden>
           {Array.from({ length: dotCount }, (_, i) => (
             <View
               key={i}
@@ -484,7 +505,7 @@ const styles = StyleSheet.create({
   },
   cardTopic: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray400,
     marginBottom: spacing.xs,
@@ -546,6 +567,19 @@ const styles = StyleSheet.create({
     color: colors.gray500,
     textAlign: 'center',
     lineHeight: 22,
+  },
+  emptyCtaButton: {
+    marginTop: spacing.lg,
+    paddingHorizontal: spacing.xl,
+    paddingVertical: 18,
+    backgroundColor: colors.gold,
+    borderRadius: radius.xl,
+  },
+  emptyCtaText: {
+    fontFamily: 'Inter-Bold',
+    fontSize: 17,
+    fontWeight: '700',
+    color: colors.black,
   },
   retryButton: {
     marginTop: spacing.lg,

@@ -359,6 +359,16 @@ export function YourTrainingScreen({ navigation, route }: Props) {
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
         >
+          {/* Back button */}
+          <Pressable
+            style={({ pressed }) => [styles.backButton, pressed && { opacity: 0.7 }]}
+            onPress={() => navigation.goBack()}
+            accessibilityRole="button"
+            accessibilityLabel="Go back"
+          >
+            <Icons.Back size={22} color={colors.gray400} />
+          </Pressable>
+
           {/* Header */}
           <View style={styles.header}>
             <Text style={styles.title}>Your Training</Text>
@@ -498,9 +508,16 @@ const styles = StyleSheet.create({
   flex: {
     flex: 1,
   },
+  backButton: {
+    width: 44,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: -spacing.sm,
+  },
   scrollContent: {
     paddingHorizontal: spacing.lg,
-    paddingTop: spacing['2xl'],
+    paddingTop: spacing.md,
     paddingBottom: spacing.xl,
   },
   header: {
@@ -546,10 +563,10 @@ const styles = StyleSheet.create({
   },
   locationCardDesc: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray400,
-    lineHeight: 20,
+    lineHeight: 22,
     marginBottom: spacing.lg,
   },
   enableButton: {
@@ -571,7 +588,7 @@ const styles = StyleSheet.create({
   },
   skipLinkText: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray500,
   },
@@ -586,7 +603,7 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray500,
   },
@@ -669,7 +686,7 @@ const styles = StyleSheet.create({
   },
   chipText: {
     fontFamily: 'Inter-SemiBold',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
     color: colors.gray400,
   },

@@ -218,6 +218,7 @@ const styles = StyleSheet.create({
     letterSpacing: 8,
   },
   logoSubtext: {
+    fontFamily: 'Inter',
     fontSize: 32,
     color: colors.gold,
     marginTop: spacing.sm,

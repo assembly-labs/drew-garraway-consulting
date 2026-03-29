@@ -23,6 +23,7 @@ import { OnboardingStackParamList } from '../../navigation/OnboardingNavigator';
 import { colors, spacing, radius, getBeltColor } from '../../config/design-tokens';
 import { haptics } from '../../utils/haptics';
 import { OnboardingProgressBar } from '../../components/OnboardingProgressBar';
+import { Icons } from '../../components/Icons';
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, 'AboutYou'>;
 
@@ -53,6 +54,16 @@ export function AboutYouScreen({ navigation }: Props) {
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
         >
+          {/* Back button */}
+          <Pressable
+            style={({ pressed }) => [styles.backButton, pressed && { opacity: 0.7 }]}
+            onPress={() => navigation.goBack()}
+            accessibilityRole="button"
+            accessibilityLabel="Go back"
+          >
+            <Icons.Back size={22} color={colors.gray400} />
+          </Pressable>
+
           {/* Header */}
           <View style={styles.header}>
             <Text style={styles.title}>About You</Text>
@@ -180,9 +191,16 @@ const styles = StyleSheet.create({
   flex: {
     flex: 1,
   },
+  backButton: {
+    width: 44,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: -spacing.sm,
+  },
   scrollContent: {
     paddingHorizontal: spacing.lg,
-    paddingTop: spacing['2xl'],
+    paddingTop: spacing.md,
   },
   header: {
     marginBottom: spacing.xl,

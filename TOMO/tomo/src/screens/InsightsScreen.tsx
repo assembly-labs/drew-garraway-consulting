@@ -573,7 +573,7 @@ export function InsightsScreen() {
     <SafeAreaView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>INSIGHTS</Text>
+        <Text style={styles.headerTitle}>Insights</Text>
         {totalSessions > 0 && !loading && (
           <Text style={styles.headerSubtitle}>
             Based on {totalSessions} session{totalSessions !== 1 ? 's' : ''}
@@ -678,11 +678,10 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '800',
     color: colors.white,
-    letterSpacing: 1,
   },
   headerSubtitle: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray500,
     marginTop: 4,
@@ -845,7 +844,7 @@ const styles = StyleSheet.create({
   },
   weeklyDateRange: {
     fontFamily: 'Inter-SemiBold',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
     color: colors.white,
   },

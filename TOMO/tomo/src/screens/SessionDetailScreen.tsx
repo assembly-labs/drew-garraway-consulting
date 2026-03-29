@@ -85,8 +85,10 @@ export function SessionDetailScreen({ route, navigation }: Props) {
     loadSession();
   }, [loadSession]);
 
+  const [isSaving, setIsSaving] = useState(false);
   const handleUpdate = async (fields: SessionUpdate) => {
-    if (!session) return;
+    if (!session || isSaving) return;
+    setIsSaving(true);
     try {
       await sessionService.update(session.id, fields);
       await loadSession();
@@ -96,10 +98,14 @@ export function SessionDetailScreen({ route, navigation }: Props) {
     } catch (err) {
       haptics.error();
       showToast('Could not save changes', 'error');
+    } finally {
+      setIsSaving(false);
     }
   };
 
+  const [isDeleting, setIsDeleting] = useState(false);
   const handleDelete = () => {
+    if (isDeleting) return;
     haptics.warning();
     Alert.alert(
       'Delete this session?',
@@ -110,6 +116,7 @@ export function SessionDetailScreen({ route, navigation }: Props) {
           text: 'Delete',
           style: 'destructive',
           onPress: async () => {
+            setIsDeleting(true);
             try {
               await sessionService.softDelete(session!.id);
               // Clean up audio file if it exists
@@ -119,6 +126,7 @@ export function SessionDetailScreen({ route, navigation }: Props) {
               showToast('Session deleted', 'info');
               navigation.goBack();
             } catch (err) {
+              setIsDeleting(false);
               showToast('Could not delete session', 'error');
             }
           },
@@ -960,7 +968,7 @@ const styles = StyleSheet.create({
   },
   gymName: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray500,
     flexShrink: 1,
@@ -1076,7 +1084,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray600,
     fontStyle: 'italic',
@@ -1096,7 +1104,7 @@ const styles = StyleSheet.create({
   },
   tagText: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray300,
   },
@@ -1132,7 +1140,7 @@ const styles = StyleSheet.create({
   },
   transcriptText: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray400,
     fontStyle: 'italic',
@@ -1246,7 +1254,7 @@ const styles = StyleSheet.create({
   },
   editTagText: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray300,
   },

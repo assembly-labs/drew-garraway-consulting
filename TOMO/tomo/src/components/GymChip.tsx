@@ -42,9 +42,9 @@ export function GymChip({ gymName, isOverridden, onPress, onReset }: GymChipProp
         <Pressable
           style={({ pressed }) => [styles.resetButton, pressed && { opacity: 0.7 }]}
           onPress={() => { haptics.light(); onReset(); }}
-          hitSlop={8}
+          hitSlop={10}
         >
-          <Icons.Close size={14} color={colors.gray500} />
+          <Icons.Close size={16} color={colors.gray500} />
         </Pressable>
       )}
     </View>
@@ -99,9 +99,9 @@ const styles = StyleSheet.create({
     color: colors.gold,
   },
   resetButton: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     backgroundColor: colors.gray800,
     borderWidth: 1,
     borderColor: colors.gray700,

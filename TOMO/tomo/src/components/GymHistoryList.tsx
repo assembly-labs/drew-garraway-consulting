@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   },
   visitName: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray400,
     flex: 1,

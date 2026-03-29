@@ -31,6 +31,209 @@ Each entry follows this format:
 
 ---
 
+## 2026-03-28 -- Design Audit Sweep: 15 Items Resolved (Session 28)
+
+**Type:** Polish
+
+### Changes
+
+**DA-004: Back navigation in onboarding (P1)**
+- Added back button (Icons.Back, 22px, gray400) to AboutYouScreen, YourTrainingScreen, and GetStartedScreen
+- 44x44 touch target, positioned top-left of scroll content, above the title
+- Uses `navigation.goBack()` on all three screens
+- Reduced top padding from 48px to 16px to accommodate the back button without pushing content down
+- Files: `src/screens/onboarding/AboutYouScreen.tsx`, `YourTrainingScreen.tsx`, `GetStartedScreen.tsx`
+
+**DA-007: GymChip reset button size (P2)**
+- Increased reset "X" button from 28x28 to 36x36, borderRadius 14 to 18
+- hitSlop increased from 8 to 10 (56px total effective target)
+- Close icon bumped from 14px to 16px to stay proportional
+- File: `src/components/GymChip.tsx`
+
+**DA-008: "Type instead" touch target (P2)**
+- Added `minHeight: 44` and `justifyContent: 'center'` to the `textOnlyButton` style
+- File: `src/screens/SessionLoggerScreen.tsx`
+
+**DA-010: Success message brand voice (P2)**
+- Changed "Session Logged!" to "Session logged." (period, no exclamation)
+- File: `src/screens/SessionLoggerScreen.tsx`
+
+**DA-011: Password visibility toggle (P2)**
+- Added Eye and EyeOff icons to Icons.tsx (Lucide, MIT)
+- AuthScreen password field now has a 44x44 eye toggle button
+- Password container restructured: TextInput + Pressable toggle in a flex row
+- Works in both signin and signup modes
+- File: `src/components/Icons.tsx`, `src/screens/AuthScreen.tsx`
+
+**DA-012: Journal empty state CTA (P2)**
+- Added gold "Log Your First Session" button to the zero-sessions empty state
+- Navigates to LogTab via `navigation.getParent()?.navigate('LogTab')`
+- Styled consistently with other gold CTAs (Inter-Bold 17px, paddingVertical 18)
+- File: `src/screens/JournalScreen.tsx`
+
+**DA-006: Kanji fontFamily (P2)**
+- Added `fontFamily: 'Inter'` to WelcomeScreen `logoSubtext`. AuthScreen already had it.
+- File: `src/screens/onboarding/WelcomeScreen.tsx`
+
+**DA-014: Header casing consistency (P3)**
+- Changed "INSIGHTS" to "Insights" (title-case) and removed letterSpacing: 1
+- Now matches Journal header style exactly
+- File: `src/screens/InsightsScreen.tsx`
+
+**DA-015: Stop Recording button visual weight (P3)**
+- Changed from red background/white text to gold background/black text+icon
+- Stop button now reads as the dominant primary action during recording
+- File: `src/screens/SessionLoggerScreen.tsx`
+
+**DA-017: Weekly pulse accessibility (P3)**
+- Added `accessibilityLabel` ("X of Y sessions this week") to pulse row container
+- Added `accessibilityElementsHidden` on individual dots so screen readers read the summary
+- File: `src/screens/JournalScreen.tsx`
+
+**DA-013: Already resolved**
+- Verified `backButton` style in SessionDetailScreen already has `width: 44, height: 44` with centering. No change needed.
+
+**DA-009: Offline banner safe area (P2)**
+- Replaced hardcoded `paddingTop: 54` with `useSafeAreaInsets().top + 6`
+- Works correctly on Dynamic Island, standard notch, and older devices
+- File: `src/components/NetworkError.tsx`
+
+**DA-002: Cancel from Entry phase (P1)**
+- Added "Cancel" text button top-left of Entry phase, reusing RecordingPhase cancel styles
+- Navigates to JournalTab so user returns to their session list
+- Added `onCancel` prop to EntryPhase component
+- File: `src/screens/SessionLoggerScreen.tsx`
+
+**DA-005 + DS-001: 14px font audit (P1 + P2)**
+- Audited all 21 instances of `fontSize: 14` across 9 files
+- Metadata/secondary text remapped to 13px: GymPickerSheet subtitle, GymCard location/count, GymHistoryList visitName, InsightsScreen headerSubtitle, ProfileScreen beltText, AuthScreen forgotPasswordText, YourTrainingScreen skipLink/loadingText, SessionDetailScreen gymName/emptyText/tagText/transcriptText/editTagText, SessionLoggerScreen suggestionText/tagText/transcriptText, JournalScreen cardTopic
+- Readable body text remapped to 15px: YourTrainingScreen locationCardDesc/chipText, InsightsScreen weeklyDateRange, GetStartedScreen optionDescription/chatBubbleText/chatCursor
+- Zero instances of fontSize: 14 remain. DS-001 resolved (no 14px token needed).
+
+### Why
+- 15 design audit items resolved, completing all P0, P1, and P2 items from the March 28 UX audit. Covers navigation safety, accessibility, brand voice, platform correctness, and type scale consistency.
+
+### Testing
+- `npx tsc --noEmit` passes with zero errors
+- Zero instances of `fontSize: 14` confirmed via grep
+- Test locally across these flows:
+  - Onboarding: back buttons on screens 2-4
+  - Auth: tap eye icon to show/hide password
+  - Journal (zero sessions): gold CTA button navigates to logger
+  - Session logger: Cancel button on Entry phase, "Type instead" target, gold stop button, "Session logged." on success
+  - GymChip: reset X button (larger target)
+  - Insights: header says "Insights" (title-case)
+  - All text should feel proportional (secondary text slightly smaller, body text same as before or slightly larger)
+  - Go offline (airplane mode) to verify banner sits correctly below status bar
+
+---
+
+## 2026-03-28 -- Beta Launch Infrastructure (Session 27c)
+
+**Type:** Build
+
+### Changes
+
+**Feature: Beta signup backend**
+- New Supabase tables: `beta_signups` (interest tracking with status workflow) and `nda_agreements` (immutable legal log)
+- RLS enabled on both: anon can INSERT (public form), service_role has full access
+- Unique constraint on email for beta_signups, index on email for NDA lookups
+- Auto-updating `updated_at` trigger on beta_signups
+- Migration: `supabase/migrations/20260328100000_beta_signup_tables.sql`
+
+**Feature: Beta notification edge functions**
+- `beta-signup-notify` — fires when someone signs up via the one-pager form
+- `nda-agreement-notify` — fires when someone agrees to the NDA
+- Both deployed with `--no-verify-jwt` (public-facing, no auth required)
+- Added to `supabase/config.toml` so JWT settings persist across deploys
+
+**Fix: Signup toast showing incorrect "check your email" message**
+- `signUp()` in useAuth.ts discarded the session object from `supabase.auth.signUp()`
+- AuthScreen had no way to know a session was created, so it always showed the email confirmation toast
+- Fix: `signUp()` now returns `{ error, session }`. AuthScreen checks: if session exists (email confirmation OFF), lets `onAuthStateChange` handle navigation silently. If no session (confirmation ON), shows the toast as fallback.
+- Files: `src/hooks/useAuth.ts`, `src/screens/AuthScreen.tsx`
+
+**Ops: Supabase user reset for fresh testing**
+- Deleted both test accounts (`drew@assemblylabs.co`, `garrawaydrew@gmail.com`) and all associated data (sessions, profiles, user_gyms, insights)
+- 0 users remaining in auth — clean slate for beta onboarding testing
+
+### Why
+- Beta launch at Alliance Paoli requires public signup form, NDA tracking, and notification plumbing
+- The signup toast bug was confusing new users on first impression — the most critical moment in onboarding
+- User reset needed so both accounts experience the full fresh flow with the auth fix
+
+### Testing
+- `npx tsc --noEmit` passes with zero errors
+- Beta tables verified via `supabase db push`
+- Edge functions deployed and confirmed live
+- Test: Create Account on fresh install — should go straight to onboarding with no toast
+
+---
+
+## 2026-03-28 — Button Action Safety Sweep (Session 27b)
+
+**Type:** Fix
+
+### Changes
+
+**Fix: Cancel button guard reset race in RecordingPhase**
+- `cancelRef.current = false` was resetting synchronously after `Alert.alert()`, before the Alert rendered
+- A second tap could slip through the guard during the async gap
+- Fix: removed synchronous reset, use Alert's `onDismiss` callback instead so guard only resets when Alert is actually dismissed
+
+**Fix: Session Detail concurrent edit guard**
+- `handleUpdate()` had no in-flight check — rapidly opening two edit sheets and saving both caused parallel API calls
+- Second save could overwrite first, or stale `loadSession()` could roll back the first change
+- Fix: added `isSaving` state flag, `handleUpdate()` returns early if already saving
+
+**Fix: Session Detail double-delete guard**
+- `handleDelete()` had no in-flight check — dismissing the Alert and tapping delete again could fire two soft-delete requests
+- Fix: added `isDeleting` state flag, blocks re-entry until delete completes or fails
+
+**Fix: Journal pull-to-refresh error/concurrent guard**
+- `onRefresh()` didn't clear `error` state before calling `loadSessions()`, so error UI persisted during refresh
+- No guard against concurrent pulls — multiple rapid pulls fired parallel API requests
+- Fix: clear `error` on refresh, return early if already refreshing
+
+### Why
+- Full workflow audit found 4 unguarded button actions that could cause data inconsistency or confusing UI under rapid taps or concurrent operations
+- All are defensive guards — no behavior change for normal usage
+
+### Testing
+- `npx tsc --noEmit` passes with zero errors
+- Test: tap Cancel on recording with 3+ seconds — Alert should dismiss cleanly, Cancel should work again after "Keep Recording"
+- Test: open two edit sheets rapidly on Session Detail — second save should be blocked
+- Test: pull-to-refresh on Journal while error state is showing — error should clear immediately
+
+---
+
+## 2026-03-28 — State Management Bug Fixes (Session 27)
+
+**Type:** Fix
+
+### Changes
+
+**Fix: Stale targetFrequency on JournalScreen**
+- JournalScreen fetched `targetFrequency` from `profileService.get()` once on mount only
+- Navigation focus listener refreshed sessions but never re-fetched profile data
+- WeeklyPulse dots showed stale training target after user changed it in Profile until app restart
+- Fix: focus listener now also re-fetches `targetFrequency` from profile on every tab visit
+
+**Fix: handleCancelRecording file leak + race condition**
+- Cancel was calling `voiceRecorder.stopRecording()` + `voiceRecorder.reset()` instead of `voiceRecorder.cancelRecording()`
+- Three problems: (1) every cancelled recording leaked a `.m4a` file to documentDirectory permanently, (2) unnecessary file copy work on discard, (3) if auto-stop (90s) raced with cancel confirmation dialog, `stoppingRef` blocked the cancel and recorder could stay active
+- Fix: switched to `cancelRecording()` which stops recorder directly (bypasses stoppingRef), skips file copy, resets audio mode atomically
+
+### Why
+- Profile-to-journal state decoupling: journal had its own stale copy of profile data instead of refreshing reactively
+- Recording cancel used the wrong hook method, causing disk leaks and a subtle race with auto-stop
+
+### Testing
+- `npx tsc --noEmit` passes with zero errors
+- Test plan: (1) Change training target in Profile, switch to Journal, verify WeeklyPulse updates immediately (2) Start recording, tap Cancel, verify clean reset and ability to immediately start new recording
+
+---
+
 ## 2026-03-28 — Codebase Cleanup: Dead Code Removal (Session 25d)
 
 **Type:** Refactor

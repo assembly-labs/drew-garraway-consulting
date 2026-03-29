@@ -273,7 +273,7 @@ function ChatPayoff({
 // MAIN SCREEN
 // ============================================
 
-export function GetStartedScreen({ route }: Props) {
+export function GetStartedScreen({ navigation, route }: Props) {
   const params = route.params;
   const { user, refreshProfile } = useAuth();
   const { showToast } = useToast();
@@ -394,6 +394,16 @@ export function GetStartedScreen({ route }: Props) {
     <SafeAreaView style={styles.container}>
       <OnboardingProgressBar screenName="GetStarted" />
       <Animated.View style={[styles.content, { opacity: mainOpacity }]}>
+        {/* Back button */}
+        <Pressable
+          style={({ pressed }) => [styles.backButton, pressed && { opacity: 0.7 }]}
+          onPress={() => navigation.goBack()}
+          accessibilityRole="button"
+          accessibilityLabel="Go back"
+        >
+          <Icons.Back size={22} color={colors.gray400} />
+        </Pressable>
+
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>How Do You Want to Log?</Text>
@@ -509,10 +519,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.black,
   },
+  backButton: {
+    width: 44,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: -spacing.sm,
+  },
   content: {
     flex: 1,
     paddingHorizontal: spacing.lg,
-    paddingTop: spacing['2xl'],
+    paddingTop: spacing.md,
   },
   header: {
     marginBottom: spacing.xl,
@@ -568,7 +585,7 @@ const styles = StyleSheet.create({
   },
   optionDescription: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gray500,
     lineHeight: 22,
@@ -646,14 +663,14 @@ const styles = StyleSheet.create({
   },
   chatBubbleText: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.white,
     lineHeight: 22,
   },
   chatCursor: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '500',
     color: colors.gold,
   },

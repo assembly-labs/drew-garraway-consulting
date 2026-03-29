@@ -744,7 +744,7 @@ const styles = StyleSheet.create({
   },
   beltText: {
     fontFamily: 'Inter-SemiBold',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '600',
     color: colors.gray400,
   },

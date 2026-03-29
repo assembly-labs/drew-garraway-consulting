@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   location: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray500,
     marginBottom: spacing.md,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   },
   countText: {
     fontFamily: 'Inter-SemiBold',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '600',
     color: colors.gray400,
   },

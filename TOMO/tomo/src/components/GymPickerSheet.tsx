@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     color: colors.gray500,
     marginBottom: spacing.md,
