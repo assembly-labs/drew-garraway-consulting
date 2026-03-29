@@ -1548,6 +1548,11 @@ body.night-mode .audio-library__section-title {
 
     .audio-card__header {
         flex-direction: column;
+        gap: 2px;
+    }
+
+    .audio-card__chapter {
+        align-self: flex-start;
     }
 
     .audio-card__description {
