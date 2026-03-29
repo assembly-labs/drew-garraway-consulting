@@ -76,9 +76,9 @@ dev/logs/*.md
 *.bak
 
 # Package manager files
-package-lock.json
 yarn.lock
 pnpm-lock.yaml
+# NOTE: package-lock.json is NOT ignored -- it must be tracked for CI (npm ci requires it)
 
 # Generated flashcard data (rebuilt by npm run generate-cards)
 assets/data/flashcards.json
