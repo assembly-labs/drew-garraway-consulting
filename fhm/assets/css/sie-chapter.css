@@ -48,7 +48,7 @@ h4 {
     scroll-margin-top: 100px;
 }
 
-h2 {
+h2:not(.audio-card__title):not(.audio-library__section-title) {
     font-size: 1.875rem;
     font-weight: 500;
     margin-top: var(--fh-space-4xl);
@@ -61,14 +61,14 @@ h2 {
     position: relative;
 }
 
-h2:first-of-type {
+h2:first-of-type:not(.audio-card__title):not(.audio-library__section-title) {
     border-top: none;
     padding-top: 0;
     margin-top: var(--fh-space-2xl);
 }
 
-/* Decorative element for section headers */
-h2::before {
+/* Decorative element for section headers (not audio cards) */
+h2:not(.audio-card__title):not(.audio-library__section-title)::before {
     content: '';
     position: absolute;
     left: 0;
@@ -79,7 +79,7 @@ h2::before {
     border-radius: 2px;
 }
 
-h2:first-of-type::before {
+h2:first-of-type:not(.audio-card__title)::before {
     top: 0;
 }
 
@@ -1346,7 +1346,7 @@ body.night-mode .audio-library__section-title {
         padding: 0;
     }
 
-    h2 {
+    h2:not(.audio-card__title):not(.audio-library__section-title) {
         page-break-after: avoid;
         border-top: 1px solid #ccc;
     }
@@ -1379,7 +1379,7 @@ body.night-mode .audio-library__section-title {
         padding: 0 var(--fh-space-lg);
     }
 
-    h2 {
+    h2:not(.audio-card__title):not(.audio-library__section-title) {
         font-size: 1.625rem;
     }
 
@@ -1415,13 +1415,13 @@ body.night-mode .audio-library__section-title {
         padding: 0 var(--fh-space-md);
     }
 
-    h2 {
+    h2:not(.audio-card__title):not(.audio-library__section-title) {
         font-size: 1.5rem;
         margin-top: var(--fh-space-2xl);
         padding-top: var(--fh-space-lg);
     }
 
-    h2::before {
+    h2:not(.audio-card__title):not(.audio-library__section-title)::before {
         width: 30px;
         height: 2px;
     }
