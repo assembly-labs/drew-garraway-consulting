@@ -1,16 +1,17 @@
 /**
- * Insights Screen — Tiered AI training insights (weekly/monthly/quarterly)
+ * Insights Screen — Weekly training debrief in message style.
  *
- * Displays the user's generated insights grouped by tier:
- * - Quarterly card (gold border, premium feel)
- * - Monthly card (white border)
- * - Weekly cards grouped by month
+ * Three modes:
+ *   A. Pre-insight: account < 7 days old OR 0 sessions — typewriter holding message.
+ *   B. Has insight data: latest weekly rendered as sequential paragraphs with
+ *      typewriter on first view. Older weeks collapsed below.
+ *   C. Loading / error states.
  *
- * Empty states for 0 sessions, <5 sessions, and no weekly insights.
- * Coach deferral footer at bottom.
+ * Quarterly and monthly cards are preserved for backward compatibility but
+ * the primary weekly experience is the new message-style render.
  */
 
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -19,37 +20,64 @@ import {
   ScrollView,
   RefreshControl,
   ActivityIndicator,
+  Animated,
+  type TextStyle,
+  type StyleProp,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
-import { colors, spacing, radius, pressedStyles } from '../config/design-tokens';
+import { colors, spacing, radius } from '../config/design-tokens';
 import { Icons } from '../components/Icons';
 import { insightService } from '../services/insights-service';
 import { sessionService } from '../services/supabase';
+import { useAuth } from '../hooks/useAuth';
+import { useInsightTypewriter } from '../hooks/useInsightTypewriter';
+import { parseBold } from '../utils/text-helpers';
 import type {
   Insight,
   InsightType,
   WeeklyInsightOutput,
   MonthlyInsightOutput,
   QuarterlyInsightOutput,
+  WeeklyInsightParagraph,
+  WeeklyInsightOutputV2,
 } from '../types/insights-types';
 
 // ===========================================
-// TYPE BADGE COLORS
+// COMPATIBILITY LAYER
+// Normalizes old and new weekly insight_data shapes into V2 format.
 // ===========================================
 
-const TYPE_BADGE_COLORS: Record<InsightType, { bg: string; text: string }> = {
-  technique: { bg: colors.infoDim, text: colors.info },
-  consistency: { bg: colors.goldDim, text: '#F5A623' },
-  sparring: { bg: 'rgba(34, 197, 94, 0.15)', text: '#22c55e' },
-  risk: { bg: 'rgba(239, 68, 68, 0.15)', text: '#ef4444' },
-  milestone: { bg: colors.goldDim, text: '#F5A623' },
-  game_development: { bg: colors.purpleDim, text: colors.purple },
-};
+function normalizeInsightData(data: any): WeeklyInsightOutputV2 {
+  // New format already has paragraphs
+  if (data && data.paragraphs) return data as WeeklyInsightOutputV2;
+
+  // Old format — convert insights array to paragraphs
+  if (data && data.insights) {
+    return {
+      paragraphs: (data.insights as Array<{ type: InsightType; title: string; body: string }>).map((i) => ({
+        text: i.body,
+        isWatch: i.type === 'risk',
+        defer: i.type === 'risk' ? 'Worth talking to your coach about this.' : undefined,
+      })),
+      focusNext: data.focusNext ?? '',
+    };
+  }
+
+  return { paragraphs: [], focusNext: '' };
+}
 
 // ===========================================
 // HELPERS
 // ===========================================
+
+function formatWeekRange(periodStart: string, periodEnd: string): string {
+  const start = new Date(periodStart + 'T00:00:00');
+  const end = new Date(periodEnd + 'T00:00:00');
+  const startStr = start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const endStr = end.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  return `${startStr} - ${endStr}`;
+}
 
 function formatPeriodLabel(insight: Insight): string {
   const start = new Date(insight.period_start + 'T00:00:00');
@@ -65,7 +93,6 @@ function formatPeriodLabel(insight: Insight): string {
     return start.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   }
 
-  // Weekly — show date range
   const startStr = start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   const endStr = end.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   return `${startStr} - ${endStr}`;
@@ -80,9 +107,131 @@ function getMonthSortKey(dateStr: string): number {
   return new Date(dateStr + 'T00:00:00').getTime();
 }
 
-function truncateText(text: string, maxLength: number): string {
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength).trimEnd() + '...';
+// ===========================================
+// BOLD TEXT RENDERER
+// Renders a string with **bold** markers using inline Text spans.
+// ===========================================
+
+function BoldText({
+  text,
+  style,
+  boldStyle,
+}: {
+  text: string;
+  style: object;
+  boldStyle: object;
+}) {
+  const segments = parseBold(text);
+  return (
+    <Text style={style}>
+      {segments.map((seg, i) =>
+        seg.bold ? (
+          <Text key={i} style={boldStyle}>
+            {seg.text}
+          </Text>
+        ) : (
+          <Text key={i}>{seg.text}</Text>
+        )
+      )}
+    </Text>
+  );
+}
+
+// ===========================================
+// EMBER TEXT — Gold trailing glow typewriter effect
+// Ported from prototype's TrainingFeedback.tsx GlowText.
+// 12-character gold trail fades to settled gray-200.
+// ===========================================
+
+const TRAIL_LENGTH = 12;
+
+function EmberText({
+  text,
+  isAnimating,
+  style,
+  isComplete,
+}: {
+  text: string;
+  isAnimating: boolean;
+  style: StyleProp<TextStyle>;
+  isComplete: boolean;
+}) {
+  if (!text) return null;
+
+  // Strip bold markers for character-level rendering during animation
+  const cleanText = text.replace(/\*\*/g, '');
+
+  // Once animation is done or not animating, render with BoldText for proper bold styling
+  if (!isAnimating || isComplete) {
+    return <BoldText text={text} style={[style, { color: colors.gray300 }]} boldStyle={{ fontWeight: '700', color: colors.white }} />;
+  }
+
+  const charCount = cleanText.length;
+  const trailStart = Math.max(0, charCount - TRAIL_LENGTH);
+
+  // Settled portion (already revealed, no glow)
+  const settledText = cleanText.slice(0, trailStart);
+  // Trail portion (last 12 chars, gold glow)
+  const trailChars = cleanText.slice(trailStart);
+
+  return (
+    <Text style={style}>
+      {settledText.length > 0 && (
+        <Text style={{ color: colors.gray300 }}>{settledText}</Text>
+      )}
+      {trailChars.split('').map((char, i) => {
+        const distanceFromEnd = trailChars.length - 1 - i;
+        const intensity = 1 - distanceFromEnd / TRAIL_LENGTH;
+        const alpha = 0.4 + intensity * 0.6;
+        const shadowBlur = 4 + intensity * 8;
+        const shadowAlpha = intensity * 0.4;
+
+        return (
+          <Text
+            key={`${trailStart + i}`}
+            style={{
+              color: `rgba(245, 166, 35, ${alpha})`,
+              textShadowColor: `rgba(245, 166, 35, ${shadowAlpha})`,
+              textShadowOffset: { width: 0, height: 0 },
+              textShadowRadius: shadowBlur,
+            }}
+          >
+            {char}
+          </Text>
+        );
+      })}
+      <EmberCursor />
+    </Text>
+  );
+}
+
+/** Pulsing gold cursor bar at the typing position */
+function EmberCursor() {
+  const opacity = useRef(new Animated.Value(0.8)).current;
+
+  useEffect(() => {
+    const pulse = Animated.loop(
+      Animated.sequence([
+        Animated.timing(opacity, { toValue: 0.3, duration: 750, useNativeDriver: true }),
+        Animated.timing(opacity, { toValue: 0.8, duration: 750, useNativeDriver: true }),
+      ])
+    );
+    pulse.start();
+    return () => pulse.stop();
+  }, [opacity]);
+
+  return (
+    <Animated.Text
+      style={{
+        color: 'rgba(245, 166, 35, 0.8)',
+        opacity,
+        fontSize: 15,
+        fontWeight: '300',
+      }}
+    >
+      |
+    </Animated.Text>
+  );
 }
 
 // ===========================================
@@ -92,45 +241,246 @@ function truncateText(text: string, maxLength: number): string {
 function InsightsSkeleton() {
   return (
     <View style={styles.skeletonContainer}>
-      {/* Quarterly skeleton */}
-      <View style={[styles.skeletonCard, { borderLeftColor: colors.gold, borderLeftWidth: 3 }]}>
-        <View style={[styles.skeletonBar, { width: 140, height: 12, marginBottom: 12 }]} />
-        <View style={[styles.skeletonBar, { width: '80%', height: 16, marginBottom: 8 }]} />
-        <View style={[styles.skeletonBar, { width: '60%', height: 14 }]} />
-      </View>
-      {/* Monthly skeleton */}
-      <View style={[styles.skeletonCard, { borderLeftColor: colors.white, borderLeftWidth: 2 }]}>
-        <View style={[styles.skeletonBar, { width: 120, height: 12, marginBottom: 12 }]} />
-        <View style={[styles.skeletonBar, { width: '70%', height: 16, marginBottom: 8 }]} />
-        <View style={[styles.skeletonBar, { width: '50%', height: 14 }]} />
-      </View>
-      {/* Weekly skeletons */}
-      <View style={[styles.skeletonBar, { width: 100, height: 12, marginTop: spacing.lg, marginBottom: spacing.sm }]} />
-      {[1, 2].map((i) => (
-        <View key={i} style={[styles.skeletonCard, { marginBottom: spacing.sm }]}>
-          <View style={[styles.skeletonBar, { width: '60%', height: 14, marginBottom: 8 }]} />
-          <View style={[styles.skeletonBar, { width: '90%', height: 12, marginBottom: 6 }]} />
-          <View style={[styles.skeletonBar, { width: '40%', height: 12 }]} />
-        </View>
-      ))}
+      <View style={[styles.skeletonBar, { width: 100, height: 11, marginBottom: spacing.lg }]} />
+      <View style={[styles.skeletonBar, { width: '90%', height: 15, marginBottom: 12 }]} />
+      <View style={[styles.skeletonBar, { width: '75%', height: 15, marginBottom: 12 }]} />
+      <View style={[styles.skeletonBar, { width: '85%', height: 15, marginBottom: 20 }]} />
+      <View style={[styles.skeletonBar, { width: '60%', height: 15, marginBottom: 12 }]} />
+      <View style={[styles.skeletonBar, { width: '70%', height: 15 }]} />
     </View>
   );
 }
 
 // ===========================================
-// PROGRESS INDICATOR
+// PRE-INSIGHT TYPEWRITER MESSAGE (Mode A)
+// Shown when account < 7 days old OR 0 sessions.
 // ===========================================
 
-function SessionProgressBar({ current, target }: { current: number; target: number }) {
-  const pct = Math.min(current / target, 1);
+function PreInsightMessage({
+  message,
+  hasBeenSeen,
+  onSeen,
+}: {
+  message: string;
+  hasBeenSeen: boolean;
+  onSeen: () => void;
+}) {
+  const input = useMemo(
+    () => ({ paragraphs: [{ text: message, isWatch: false }], focusNext: '' }),
+    [message]
+  );
+
+  const { revealedTexts, isComplete, skip } = useInsightTypewriter(
+    input,
+    !hasBeenSeen
+  );
+
+  const hasNotifiedSeen = useRef(false);
+  React.useEffect(() => {
+    if (isComplete && !hasBeenSeen && !hasNotifiedSeen.current) {
+      hasNotifiedSeen.current = true;
+      onSeen();
+    }
+  }, [isComplete, hasBeenSeen, onSeen]);
+
+  const displayText = hasBeenSeen ? message : (revealedTexts[0] ?? '');
+  const isAnimating = !hasBeenSeen && !isComplete;
+
   return (
-    <View style={styles.progressContainer}>
-      <View style={styles.progressTrack}>
-        <View style={[styles.progressFill, { width: `${pct * 100}%` }]} />
-      </View>
-      <Text style={styles.progressLabel}>
-        {current} / {target} sessions
-      </Text>
+    <Pressable style={styles.preInsightContainer} onPress={skip}>
+      <EmberText
+        text={displayText}
+        isAnimating={isAnimating}
+        isComplete={isComplete || hasBeenSeen}
+        style={styles.preInsightText}
+      />
+    </Pressable>
+  );
+}
+
+// ===========================================
+// WEEKLY MESSAGE VIEW (Mode B — latest week)
+// Renders paragraphs sequentially with typewriter on first view.
+// ===========================================
+
+function WeeklyMessageView({
+  insight,
+  isNew,
+  onViewed,
+}: {
+  insight: Insight;
+  isNew: boolean;
+  onViewed: () => void;
+}) {
+  const normalized = useMemo(
+    () => normalizeInsightData(insight.insight_data),
+    [insight.insight_data]
+  );
+
+  const { revealedTexts, activeIndex, isComplete, skip } = useInsightTypewriter(
+    normalized,
+    isNew
+  );
+
+  // Mark as viewed once typewriter completes
+  const hasMarkedViewed = useRef(false);
+  React.useEffect(() => {
+    if (isComplete && isNew && !hasMarkedViewed.current) {
+      hasMarkedViewed.current = true;
+      onViewed();
+    }
+  }, [isComplete, isNew, onViewed]);
+
+  const weekLabel = formatWeekRange(insight.period_start, insight.period_end);
+
+  return (
+    <Pressable style={styles.weeklyMessageContainer} onPress={skip} accessible={false}>
+      {/* Week header */}
+      <Text style={styles.weekRangeLabel}>{weekLabel}</Text>
+
+      {/* Paragraphs */}
+      {normalized.paragraphs.map((para, i) => {
+        const displayText = isNew ? (revealedTexts[i] ?? '') : para.text;
+        // Only show paragraphs that have started (activeIndex reached them)
+        const hasStarted = !isNew || activeIndex >= i;
+        if (!hasStarted) return null;
+
+        // Is this the paragraph currently being typed?
+        const isTypingThis = isNew && activeIndex === i && !isComplete;
+        // Is this paragraph done (moved on to next or complete)?
+        const paraComplete = !isNew || isComplete || activeIndex > i;
+
+        if (para.isWatch) {
+          return (
+            <View key={i} style={styles.watchParagraph}>
+              <EmberText
+                text={displayText}
+                isAnimating={isTypingThis}
+                isComplete={paraComplete}
+                style={styles.watchParagraphText}
+              />
+              {para.defer && (isComplete || activeIndex > i) ? (
+                <Text style={styles.watchDefer}>{para.defer}</Text>
+              ) : null}
+            </View>
+          );
+        }
+
+        return (
+          <EmberText
+            key={i}
+            text={displayText}
+            isAnimating={isTypingThis}
+            isComplete={paraComplete}
+            style={[styles.paragraphText, i < normalized.paragraphs.length - 1 && styles.paragraphSpacing]}
+          />
+        );
+      })}
+
+      {/* Focus section — shown after all paragraphs complete */}
+      {normalized.focusNext ? (() => {
+        const focusIdx = normalized.paragraphs.length;
+        const focusText = isNew ? (revealedTexts[focusIdx] ?? '') : normalized.focusNext;
+        const isTypingFocus = isNew && activeIndex === focusIdx && !isComplete;
+        const focusDone = !isNew || isComplete || activeIndex > focusIdx;
+        return (
+          <View
+            style={[
+              styles.focusSection,
+              (!isNew || (isComplete || activeIndex >= focusIdx)) ? {} : styles.focusSectionHidden,
+            ]}
+          >
+            <Text style={styles.focusLabel}>THIS WEEK, TRY THIS</Text>
+            <EmberText
+              text={focusText}
+              isAnimating={isTypingFocus}
+              isComplete={focusDone}
+              style={styles.focusBody}
+            />
+          </View>
+        );
+      })() : null}
+
+      {/* Signoff */}
+      {(isComplete || !isNew) ? (
+        <Text style={styles.signoff}>
+          Your coach knows your game better than any app.
+        </Text>
+      ) : null}
+    </Pressable>
+  );
+}
+
+// ===========================================
+// COLLAPSED WEEKLY ROW (older weeks)
+// ===========================================
+
+function CollapsedWeekRow({
+  insight,
+  expanded,
+  onToggle,
+}: {
+  insight: Insight;
+  expanded: boolean;
+  onToggle: () => void;
+}) {
+  const normalized = useMemo(
+    () => normalizeInsightData(insight.insight_data),
+    [insight.insight_data]
+  );
+
+  const weekLabel = formatPeriodLabel(insight);
+
+  return (
+    <View style={styles.collapsedWeekCard}>
+      <Pressable
+        style={styles.collapsedWeekRow}
+        onPress={onToggle}
+        accessibilityRole="button"
+        accessibilityLabel={`${weekLabel} — ${expanded ? 'collapse' : 'expand'}`}
+      >
+        <Text style={styles.collapsedWeekLabel}>{weekLabel}</Text>
+        {expanded ? (
+          <Icons.ChevronDown size={16} color={colors.gray500} />
+        ) : (
+          <Icons.ChevronRight size={16} color={colors.gray500} />
+        )}
+      </Pressable>
+
+      {expanded && (
+        <View style={styles.collapsedWeekContent}>
+          {normalized.paragraphs.map((para, i) => {
+            if (para.isWatch) {
+              return (
+                <View key={i} style={styles.watchParagraph}>
+                  <BoldText
+                    text={para.text}
+                    style={styles.watchParagraphText}
+                    boldStyle={styles.paragraphBold}
+                  />
+                  {para.defer ? (
+                    <Text style={styles.watchDefer}>{para.defer}</Text>
+                  ) : null}
+                </View>
+              );
+            }
+            return (
+              <BoldText
+                key={i}
+                text={para.text}
+                style={[styles.paragraphText, i < normalized.paragraphs.length - 1 && styles.paragraphSpacing]}
+                boldStyle={styles.paragraphBold}
+              />
+            );
+          })}
+          {normalized.focusNext ? (
+            <View style={styles.focusSection}>
+              <Text style={styles.focusLabel}>THIS WEEK, TRY THIS</Text>
+              <Text style={styles.focusBody}>{normalized.focusNext}</Text>
+            </View>
+          ) : null}
+        </View>
+      )}
     </View>
   );
 }
@@ -149,16 +499,13 @@ function QuarterlyCard({
   insight: Insight;
   expanded: boolean;
   onToggle: () => void;
-  /** True if this insight has never been viewed — typewriter should play */
   isNew: boolean;
-  /** Called once when the insight is first rendered as new */
   onViewed: () => void;
 }) {
   const data = insight.insight_data as QuarterlyInsightOutput;
   const periodLabel = formatPeriodLabel(insight);
 
-  // Mark as viewed on first render when new
-  const hasTriggeredView = React.useRef(false);
+  const hasTriggeredView = useRef(false);
   React.useEffect(() => {
     if (isNew && !hasTriggeredView.current) {
       hasTriggeredView.current = true;
@@ -179,7 +526,7 @@ function QuarterlyCard({
       <Text style={styles.quarterlyLabel}>QUARTERLY REVIEW</Text>
       <Text style={styles.quarterlyPeriod}>{periodLabel}</Text>
       <Text style={styles.quarterlyPreview} numberOfLines={expanded ? undefined : 3}>
-        {expanded ? data.quarterSentence : truncateText(data.quarterSentence, 100)}
+        {data.quarterSentence}
       </Text>
       {expanded && (
         <View style={styles.expandedContent}>
@@ -249,7 +596,7 @@ function MonthlyCard({
   const data = insight.insight_data as MonthlyInsightOutput;
   const periodLabel = formatPeriodLabel(insight);
 
-  const hasTriggeredView = React.useRef(false);
+  const hasTriggeredView = useRef(false);
   React.useEffect(() => {
     if (isNew && !hasTriggeredView.current) {
       hasTriggeredView.current = true;
@@ -270,7 +617,7 @@ function MonthlyCard({
       <Text style={styles.monthlyLabel}>MONTHLY CHECK-IN</Text>
       <Text style={styles.monthlyPeriod}>{periodLabel}</Text>
       <Text style={styles.monthlyPreview} numberOfLines={expanded ? undefined : 3}>
-        {expanded ? data.overview : truncateText(data.overview, 100)}
+        {data.overview}
       </Text>
       {expanded && (
         <View style={styles.expandedContent}>
@@ -317,79 +664,6 @@ function MonthlyCard({
 }
 
 // ===========================================
-// WEEKLY INSIGHT ITEM
-// ===========================================
-
-function WeeklyInsightItem({
-  item,
-}: {
-  item: { type: InsightType; title: string; body: string };
-}) {
-  const badge = TYPE_BADGE_COLORS[item.type] ?? TYPE_BADGE_COLORS.technique;
-
-  return (
-    <View style={styles.weeklyInsightItem}>
-      <View style={styles.weeklyInsightHeader}>
-        <View style={[styles.typeBadge, { backgroundColor: badge.bg }]}>
-          <Text style={[styles.typeBadgeText, { color: badge.text }]}>
-            {item.type.replace('_', ' ')}
-          </Text>
-        </View>
-      </View>
-      <Text style={styles.weeklyInsightTitle}>{item.title}</Text>
-      <Text style={styles.weeklyInsightBody}>{item.body}</Text>
-    </View>
-  );
-}
-
-// ===========================================
-// WEEKLY CARD
-// ===========================================
-
-function WeeklyCard({
-  insight,
-  isNew,
-  onViewed,
-}: {
-  insight: Insight;
-  isNew: boolean;
-  onViewed: () => void;
-}) {
-  const data = insight.insight_data as WeeklyInsightOutput;
-  const periodLabel = formatPeriodLabel(insight);
-
-  const hasTriggeredView = React.useRef(false);
-  React.useEffect(() => {
-    if (isNew && !hasTriggeredView.current) {
-      hasTriggeredView.current = true;
-      onViewed();
-    }
-  }, [isNew, onViewed]);
-
-  return (
-    <View style={styles.weeklyCard}>
-      <View style={styles.weeklyCardHeader}>
-        <Text style={styles.weeklyDateRange}>{periodLabel}</Text>
-        {isNew && (
-          <View style={styles.newBadge}>
-            <Text style={styles.newBadgeText}>NEW</Text>
-          </View>
-        )}
-      </View>
-      {data.insights.map((item, i) => (
-        <WeeklyInsightItem key={i} item={item} />
-      ))}
-      {data.focusNext ? (
-        <View style={styles.focusNextRow}>
-          <Text style={styles.focusNextLabel}>FOCUS NEXT</Text>
-          <Text style={styles.focusNextBody}>{data.focusNext}</Text>
-        </View>
-      ) : null}
-    </View>
-  );
-}
-
-// ===========================================
 // EMPTY STATES
 // ===========================================
 
@@ -402,24 +676,8 @@ function EmptyNoSessions() {
       <Text style={styles.emptyTitle}>No Insights Yet</Text>
       <Text style={styles.emptyDescription}>
         Log your first session to start building insights. Your training data
-        feeds the AI that learns your game.
+        feeds the system that learns your game.
       </Text>
-    </View>
-  );
-}
-
-function EmptyFewSessions({ sessionCount }: { sessionCount: number }) {
-  return (
-    <View style={styles.emptyState}>
-      <View style={styles.emptyIcon}>
-        <Icons.Journal size={28} color={colors.gray600} />
-      </View>
-      <Text style={styles.emptyTitle}>Building Your Profile</Text>
-      <Text style={styles.emptyDescription}>
-        Keep logging — insights unlock after 5 sessions. The more data TOMO has,
-        the sharper your feedback gets.
-      </Text>
-      <SessionProgressBar current={sessionCount} target={5} />
     </View>
   );
 }
@@ -439,6 +697,8 @@ function EmptyNoWeekly() {
 // ===========================================
 
 export function InsightsScreen() {
+  const { profile } = useAuth();
+
   const [insights, setInsights] = useState<Insight[]>([]);
   const [sessionCount, setSessionCount] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
@@ -447,16 +707,15 @@ export function InsightsScreen() {
   const [expandedQuarterly, setExpandedQuarterly] = useState(false);
   const [expandedMonthly, setExpandedMonthly] = useState(false);
 
-  // Track which insights are being viewed for the first time this session.
-  // When an unviewed insight is rendered, the typewriter plays, then we
-  // mark it viewed in the DB so it never animates again.
+  // Track collapsed state for older weekly rows
+  const [expandedOlderWeeks, setExpandedOlderWeeks] = useState<Set<string>>(new Set());
+
+  // Track which insights are being viewed for the first time this session
   const [viewedThisSession, setViewedThisSession] = useState<Set<string>>(new Set());
 
-  /**
-   * Determine if an insight should play the typewriter animation.
-   * True only when: has_been_viewed is false AND we haven't already
-   * started the animation this session (prevents re-trigger on re-render).
-   */
+  // Track whether the pre-insight holding message has been seen (so it doesn't re-animate)
+  const [preInsightSeen, setPreInsightSeen] = useState(false);
+
   const shouldAnimate = useCallback(
     (insight: Insight): boolean => {
       return !insight.has_been_viewed && !viewedThisSession.has(insight.id);
@@ -464,36 +723,25 @@ export function InsightsScreen() {
     [viewedThisSession]
   );
 
-  /**
-   * Called when an insight's typewriter animation starts (or when an
-   * unviewed insight is first rendered). Marks it viewed in the DB
-   * and in local state so it won't animate again — even if the user
-   * backgrounds the app and comes back.
-   */
-  const handleInsightViewed = useCallback(
-    (insightId: string) => {
-      // Update local state immediately (prevents re-animation on re-render)
-      setViewedThisSession((prev) => {
-        if (prev.has(insightId)) return prev;
-        const next = new Set(prev);
-        next.add(insightId);
-        return next;
-      });
+  const handleInsightViewed = useCallback((insightId: string) => {
+    setViewedThisSession((prev) => {
+      if (prev.has(insightId)) return prev;
+      const next = new Set(prev);
+      next.add(insightId);
+      return next;
+    });
 
-      // Update DB in background (non-blocking, fire-and-forget)
-      insightService.markAsViewed(insightId);
+    // Fire-and-forget — non-blocking
+    insightService.markAsViewed(insightId);
 
-      // Update the insights array so has_been_viewed reflects truth
-      setInsights((prev) =>
-        prev.map((i) =>
-          i.id === insightId
-            ? { ...i, has_been_viewed: true, first_viewed_at: new Date().toISOString() }
-            : i
-        )
-      );
-    },
-    []
-  );
+    setInsights((prev) =>
+      prev.map((i) =>
+        i.id === insightId
+          ? { ...i, has_been_viewed: true, first_viewed_at: new Date().toISOString() }
+          : i
+      )
+    );
+  }, []);
 
   const loadData = useCallback(async () => {
     try {
@@ -513,7 +761,7 @@ export function InsightsScreen() {
     }
   }, []);
 
-  // Load on mount and on focus
+  // Load on mount and on tab focus
   useFocusEffect(
     useCallback(() => {
       loadData();
@@ -524,6 +772,18 @@ export function InsightsScreen() {
     setRefreshing(true);
     loadData();
   };
+
+  const toggleOlderWeek = useCallback((id: string) => {
+    setExpandedOlderWeeks((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  }, []);
 
   // Separate insights by tier
   const latestQuarterly = useMemo(
@@ -539,31 +799,35 @@ export function InsightsScreen() {
     [insights]
   );
 
-  // Group weekly insights by month
-  const weeklyByMonth = useMemo(() => {
-    const groups: { monthLabel: string; sortKey: number; insights: Insight[] }[] = [];
-    const monthMap = new Map<string, Insight[]>();
+  // Sort weekly newest-first; first is the latest, rest are older
+  const sortedWeekly = useMemo(
+    () =>
+      [...weeklyInsights].sort(
+        (a, b) =>
+          new Date(b.period_start).getTime() - new Date(a.period_start).getTime()
+      ),
+    [weeklyInsights]
+  );
 
-    for (const wi of weeklyInsights) {
-      const key = getMonthKey(wi.period_start);
-      if (!monthMap.has(key)) monthMap.set(key, []);
-      monthMap.get(key)!.push(wi);
-    }
-
-    for (const [label, ins] of monthMap.entries()) {
-      groups.push({
-        monthLabel: label,
-        sortKey: getMonthSortKey(ins[0].period_start),
-        insights: ins,
-      });
-    }
-
-    // Sort groups newest first
-    groups.sort((a, b) => b.sortKey - a.sortKey);
-    return groups;
-  }, [weeklyInsights]);
+  const latestWeekly = sortedWeekly[0] ?? null;
+  const olderWeekly = sortedWeekly.slice(1);
 
   const totalSessions = sessionCount ?? 0;
+
+  // Account age in days
+  const accountAgeDays = profile?.created_at
+    ? Math.floor((Date.now() - new Date(profile.created_at).getTime()) / 86400000)
+    : 0;
+
+  // Determine if we're in Mode A (pre-insight)
+  const isPreInsight = totalSessions === 0 || accountAgeDays < 7;
+
+  const preInsightMessage: string = useMemo(() => {
+    if (totalSessions === 0) {
+      return 'TOMO needs at least one week of training data before your first debrief. Log your sessions this week and your first insights will be here next week.';
+    }
+    return "You've been putting in the work. TOMO needs a full week of training data to spot patterns and put together your first debrief. Keep logging.";
+  }, [totalSessions]);
 
   // ===========================================
   // RENDER
@@ -581,7 +845,6 @@ export function InsightsScreen() {
         )}
       </View>
 
-      {/* Loading */}
       {loading ? (
         <InsightsSkeleton />
       ) : error ? (
@@ -589,11 +852,27 @@ export function InsightsScreen() {
           <Text style={styles.emptyTitle}>Something went wrong</Text>
           <Text style={styles.emptyDescription}>{error}</Text>
         </View>
-      ) : totalSessions === 0 ? (
-        <EmptyNoSessions />
-      ) : totalSessions < 5 && insights.length === 0 ? (
-        <EmptyFewSessions sessionCount={totalSessions} />
+      ) : isPreInsight ? (
+        // Mode A: Pre-insight holding message
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              tintColor={colors.gold}
+            />
+          }
+          showsVerticalScrollIndicator={false}
+        >
+          <PreInsightMessage
+            message={preInsightMessage}
+            hasBeenSeen={preInsightSeen}
+            onSeen={() => setPreInsightSeen(true)}
+          />
+        </ScrollView>
       ) : (
+        // Mode B: Has data — full weekly message view
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           refreshControl={
@@ -627,32 +906,31 @@ export function InsightsScreen() {
             />
           )}
 
-          {/* Weekly Cards grouped by month */}
-          {weeklyByMonth.length > 0 ? (
-            weeklyByMonth.map((group) => (
-              <View key={group.monthLabel}>
-                <Text style={styles.monthDivider}>{group.monthLabel}</Text>
-                {group.insights.map((wi) => (
-                  <WeeklyCard
-                    key={wi.id}
-                    insight={wi}
-                    isNew={shouldAnimate(wi)}
-                    onViewed={() => handleInsightViewed(wi.id)}
-                  />
-                ))}
-              </View>
-            ))
+          {/* Latest weekly — full message style */}
+          {latestWeekly ? (
+            <WeeklyMessageView
+              insight={latestWeekly}
+              isNew={shouldAnimate(latestWeekly)}
+              onViewed={() => handleInsightViewed(latestWeekly.id)}
+            />
           ) : (
             <EmptyNoWeekly />
           )}
 
-          {/* Coach Deferral Footer */}
-          <View style={styles.coachFooter}>
-            <Text style={styles.coachFooterText}>
-              Your coach knows your game better than any app. These insights
-              supplement — never replace — their guidance.
-            </Text>
-          </View>
+          {/* Older weekly rows — collapsed */}
+          {olderWeekly.length > 0 && (
+            <View style={styles.olderSection}>
+              <Text style={styles.olderSectionLabel}>EARLIER</Text>
+              {olderWeekly.map((wi) => (
+                <CollapsedWeekRow
+                  key={wi.id}
+                  insight={wi}
+                  expanded={expandedOlderWeeks.has(wi.id)}
+                  onToggle={() => toggleOlderWeek(wi.id)}
+                />
+              ))}
+            </View>
+          )}
         </ScrollView>
       )}
     </SafeAreaView>
@@ -688,7 +966,164 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingHorizontal: spacing.lg,
-    paddingBottom: spacing['3xl'],
+    paddingBottom: 60,
+  },
+
+  // -------------------------------------------
+  // SKELETON
+  // -------------------------------------------
+  skeletonContainer: {
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.md,
+  },
+  skeletonBar: {
+    backgroundColor: colors.gray700,
+    borderRadius: radius.md,
+    opacity: 0.5,
+  },
+
+  // -------------------------------------------
+  // PRE-INSIGHT (Mode A)
+  // -------------------------------------------
+  preInsightContainer: {
+    paddingTop: spacing.lg,
+  },
+  preInsightText: {
+    fontFamily: 'Inter',
+    fontSize: 15,
+    fontWeight: '500',
+    color: colors.gray300,
+    lineHeight: 24,
+  },
+
+  // -------------------------------------------
+  // WEEKLY MESSAGE VIEW (Mode B — latest)
+  // -------------------------------------------
+  weeklyMessageContainer: {
+    paddingTop: spacing.md,
+  },
+  weekRangeLabel: {
+    fontFamily: 'JetBrains Mono-SemiBold',
+    fontSize: 11,
+    fontWeight: '600',
+    color: colors.gray600,
+    letterSpacing: 0.5,
+    marginBottom: spacing.md,
+  },
+  paragraphText: {
+    fontFamily: 'Inter',
+    fontSize: 15,
+    fontWeight: '500',
+    color: colors.gray300,
+    lineHeight: 24,
+  },
+  paragraphSpacing: {
+    marginBottom: 16,
+  },
+  paragraphBold: {
+    fontFamily: 'Inter',
+    fontSize: 15,
+    fontWeight: '600',
+    color: colors.white,
+  },
+  watchParagraph: {
+    borderLeftWidth: 2,
+    borderLeftColor: colors.negative,
+    paddingLeft: 12,
+    marginBottom: 16,
+  },
+  watchParagraphText: {
+    fontFamily: 'Inter',
+    fontSize: 15,
+    fontWeight: '500',
+    color: colors.gray300,
+    lineHeight: 24,
+  },
+  watchDefer: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gray500,
+    marginTop: 6,
+    lineHeight: 20,
+  },
+  focusSection: {
+    marginTop: 20,
+    paddingTop: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#222222',
+  },
+  focusSectionHidden: {
+    opacity: 0,
+  },
+  focusLabel: {
+    fontFamily: 'JetBrains Mono-SemiBold',
+    fontSize: 11,
+    fontWeight: '600',
+    color: colors.gold,
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+    marginBottom: 8,
+  },
+  focusBody: {
+    fontFamily: 'Inter',
+    fontSize: 15,
+    fontWeight: '500',
+    color: colors.gray300,
+    lineHeight: 24,
+  },
+  signoff: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gray600,
+    marginTop: 24,
+    lineHeight: 20,
+  },
+
+  // -------------------------------------------
+  // COLLAPSED OLDER WEEKS
+  // -------------------------------------------
+  olderSection: {
+    marginTop: spacing.xl,
+  },
+  olderSectionLabel: {
+    fontFamily: 'JetBrains Mono-SemiBold',
+    fontSize: 11,
+    fontWeight: '600',
+    color: colors.gray500,
+    letterSpacing: 2,
+    textTransform: 'uppercase',
+    marginBottom: spacing.sm,
+  },
+  collapsedWeekCard: {
+    backgroundColor: colors.gray800,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.gray700,
+    marginBottom: spacing.sm,
+    overflow: 'hidden',
+  },
+  collapsedWeekRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    minHeight: 44,
+  },
+  collapsedWeekLabel: {
+    fontFamily: 'Inter',
+    fontSize: 14,
+    fontWeight: '500',
+    color: colors.gray400,
+  },
+  collapsedWeekContent: {
+    paddingHorizontal: 14,
+    paddingBottom: 14,
+    borderTopWidth: 1,
+    borderTopColor: colors.gray700,
+    paddingTop: 12,
   },
 
   // -------------------------------------------
@@ -706,7 +1141,7 @@ const styles = StyleSheet.create({
     minHeight: 44,
   },
   cardPressed: {
-    backgroundColor: pressedStyles.card.backgroundColor,
+    backgroundColor: '#242424',
   },
   quarterlyLabel: {
     fontFamily: 'JetBrains Mono-SemiBold',
@@ -718,7 +1153,7 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   quarterlyPeriod: {
-    fontFamily: 'Inter-Bold',
+    fontFamily: 'Inter',
     fontSize: 17,
     fontWeight: '700',
     color: colors.white,
@@ -738,7 +1173,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   readMoreLink: {
-    fontFamily: 'Inter-SemiBold',
+    fontFamily: 'Inter',
     fontSize: 15,
     fontWeight: '600',
     color: colors.gold,
@@ -768,7 +1203,7 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   monthlyPeriod: {
-    fontFamily: 'Inter-Bold',
+    fontFamily: 'Inter',
     fontSize: 17,
     fontWeight: '700',
     color: colors.white,
@@ -782,7 +1217,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   readMoreLinkWhite: {
-    fontFamily: 'Inter-SemiBold',
+    fontFamily: 'Inter',
     fontSize: 15,
     fontWeight: '600',
     color: colors.gray300,
@@ -818,99 +1253,23 @@ const styles = StyleSheet.create({
   },
 
   // -------------------------------------------
-  // MONTH DIVIDER
+  // NEW BADGE
   // -------------------------------------------
-  monthDivider: {
-    fontFamily: 'JetBrains Mono-SemiBold',
-    fontSize: 12,
-    fontWeight: '600',
-    color: colors.gray500,
-    letterSpacing: 2,
-    textTransform: 'uppercase',
-    marginTop: spacing.lg,
-    marginBottom: spacing.sm,
-  },
-
-  // -------------------------------------------
-  // WEEKLY CARD
-  // -------------------------------------------
-  weeklyCard: {
-    backgroundColor: colors.gray800,
-    borderRadius: radius.lg,
-    borderWidth: 1,
-    borderColor: colors.gray700,
-    padding: spacing.md,
-    marginBottom: spacing.sm,
-  },
-  weeklyDateRange: {
-    fontFamily: 'Inter-SemiBold',
-    fontSize: 15,
-    fontWeight: '600',
-    color: colors.white,
-  },
-
-  // -------------------------------------------
-  // WEEKLY INSIGHT ITEM
-  // -------------------------------------------
-  weeklyInsightItem: {
-    marginBottom: 10,
-  },
-  weeklyInsightHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 4,
-  },
-  typeBadge: {
+  newBadge: {
+    alignSelf: 'flex-start',
     paddingHorizontal: 8,
-    paddingVertical: 3,
+    paddingVertical: 2,
     borderRadius: radius.full,
+    backgroundColor: colors.goldDim,
+    marginBottom: 8,
   },
-  typeBadgeText: {
+  newBadgeText: {
     fontFamily: 'JetBrains Mono-SemiBold',
     fontSize: 12,
-    fontWeight: '600',
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-  },
-  weeklyInsightTitle: {
-    fontFamily: 'Inter-Bold',
-    fontSize: 15,
     fontWeight: '700',
-    color: colors.white,
-    marginBottom: 2,
-  },
-  weeklyInsightBody: {
-    fontFamily: 'Inter',
-    fontSize: 15,
-    fontWeight: '500',
-    color: colors.gray400,
-    lineHeight: 22,
-  },
-
-  // -------------------------------------------
-  // FOCUS NEXT
-  // -------------------------------------------
-  focusNextRow: {
-    marginTop: 8,
-    paddingTop: 8,
-    borderTopWidth: 1,
-    borderTopColor: colors.gray700,
-  },
-  focusNextLabel: {
-    fontFamily: 'JetBrains Mono-SemiBold',
-    fontSize: 12,
-    fontWeight: '600',
     color: colors.gold,
     letterSpacing: 1.5,
     textTransform: 'uppercase',
-    marginBottom: 4,
-  },
-  focusNextBody: {
-    fontFamily: 'Inter',
-    fontSize: 15,
-    fontWeight: '500',
-    color: colors.gray300,
-    lineHeight: 22,
   },
 
   // -------------------------------------------
@@ -931,14 +1290,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: spacing.lg,
   },
-  emptyIconText: {
-    fontFamily: 'JetBrains Mono-Bold',
-    fontSize: 20,
-    fontWeight: '700',
-    color: colors.gray600,
-  },
   emptyTitle: {
-    fontFamily: 'Inter-Bold',
+    fontFamily: 'Inter',
     fontSize: 20,
     fontWeight: '700',
     color: colors.white,
@@ -954,7 +1307,6 @@ const styles = StyleSheet.create({
   },
   emptyWeekly: {
     paddingVertical: spacing.lg,
-    paddingHorizontal: spacing.md,
     alignItems: 'center',
   },
   emptyWeeklyText: {
@@ -964,100 +1316,5 @@ const styles = StyleSheet.create({
     color: colors.gray500,
     textAlign: 'center',
     lineHeight: 22,
-  },
-
-  // -------------------------------------------
-  // PROGRESS BAR
-  // -------------------------------------------
-  progressContainer: {
-    width: '100%',
-    maxWidth: 240,
-    marginTop: spacing.lg,
-    alignItems: 'center',
-  },
-  progressTrack: {
-    width: '100%',
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: colors.gray700,
-    overflow: 'hidden',
-    marginBottom: 8,
-  },
-  progressFill: {
-    height: '100%',
-    borderRadius: 3,
-    backgroundColor: colors.gold,
-  },
-  progressLabel: {
-    fontFamily: 'JetBrains Mono-SemiBold',
-    fontSize: 12,
-    fontWeight: '600',
-    color: colors.gray500,
-    letterSpacing: 0.5,
-  },
-
-  // -------------------------------------------
-  // COACH DEFERRAL FOOTER
-  // -------------------------------------------
-  coachFooter: {
-    marginTop: spacing.xl,
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.sm,
-    alignItems: 'center',
-  },
-  coachFooterText: {
-    fontFamily: 'Inter',
-    fontSize: 15,
-    fontWeight: '500',
-    color: colors.gray600,
-    textAlign: 'center',
-    lineHeight: 22,
-  },
-
-  // -------------------------------------------
-  // NEW BADGE (shown on unviewed insights)
-  // -------------------------------------------
-  newBadge: {
-    alignSelf: 'flex-start',
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: radius.full,
-    backgroundColor: colors.goldDim,
-    marginBottom: 8,
-  },
-  newBadgeText: {
-    fontFamily: 'JetBrains Mono-Bold',
-    fontSize: 12,
-    fontWeight: '700',
-    color: colors.gold,
-    letterSpacing: 1.5,
-    textTransform: 'uppercase',
-  },
-  weeklyCardHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-
-  // -------------------------------------------
-  // SKELETON
-  // -------------------------------------------
-  skeletonContainer: {
-    paddingHorizontal: spacing.lg,
-    paddingTop: spacing.md,
-  },
-  skeletonCard: {
-    backgroundColor: colors.gray800,
-    borderRadius: radius.lg,
-    borderWidth: 1,
-    borderColor: colors.gray700,
-    padding: spacing.md,
-    marginBottom: spacing.md,
-  },
-  skeletonBar: {
-    backgroundColor: colors.gray700,
-    borderRadius: radius.md,
-    opacity: 0.5,
   },
 });

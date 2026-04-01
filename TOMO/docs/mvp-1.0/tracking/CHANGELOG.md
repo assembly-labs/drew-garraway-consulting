@@ -31,6 +31,297 @@ Each entry follows this format:
 
 ---
 
+## 2026-03-31 -- Session 34: P0 Save Flow Fix + Ember Typewriter
+
+**Type:** Fix + Feature
+
+### Changes
+
+**SessionLoggerScreen.tsx** (`src/screens/SessionLoggerScreen.tsx`)
+- **P0 Fix: Save reopens recording** (AUTH-002 regression) -- `useFocusEffect` was setting phase to `'recording'` for voice-preference users after save. Now always resets to `'entry'` regardless of preference. Users tap Record when ready for the next session.
+- **P0 Fix: Can't log multiple sessions per day** -- `resetAndGoBack()` navigated to `'JournalTab'` which could show a stale SessionDetail from the journal stack. Now navigates to `'JournalTab', { screen: 'JournalList' }` to always show the session list.
+- **Safety: processingRef reset** -- Added `processingRef.current = false` to both reset paths (useFocusEffect + resetAndGoBack). Prevents stuck processing guard if user interrupts pipeline.
+- **Consistency: autoStarted reset** -- Moved `autoStarted.current = false` to `resetAndGoBack()` only. Removed from `useFocusEffect` to prevent auto-start during focus transitions.
+- Entry phase Cancel button also uses `{ screen: 'JournalList' }` navigation.
+
+**InsightsScreen.tsx** (`src/screens/InsightsScreen.tsx`)
+- **Ember typewriter animation** -- Ported gold/white burn effect from prototype's TrainingFeedback.tsx GlowText. 12-character trailing gold glow fades to settled gray. Pulsing gold cursor bar during typing. Applied to all typewriter surfaces: PreInsightMessage, WeeklyMessageView paragraphs, watch items, and focus section.
+- EmberText component: per-character gold gradient with textShadow for glow, falls back to BoldText when animation complete.
+- EmberCursor component: Animated opacity pulse (0.3-0.8, 750ms cycle).
+
+### Why
+- Save flow bugs were blocking TestFlight testers from basic session logging. Two competing reset mechanisms (useFocusEffect + resetAndGoBack) could race depending on timing, causing voice users to land on recording screen after save and journal navigation to show stale session details.
+- Ember typewriter matches the prototype's dynamic feel. Plain text reveal was functional but visually flat.
+
+### Testing
+- TypeScript clean (`npx tsc --noEmit`)
+- Shipped to TestFlight for tester verification tonight
+
+---
+
+## 2026-03-30 -- Insights Tab: Message-Style Render + Tab Wiring
+
+**Type:** Feature + Refactor
+
+### Changes
+
+**Icons.tsx** (`src/components/Icons.tsx`)
+- Added `TrendUp` SVG icon (Lucide trend-up polyline, MIT licensed)
+- Added to Icons export object
+
+**MainTabNavigator.tsx** (`src/navigation/MainTabNavigator.tsx`)
+- Added `InsightsTab: undefined` to `MainTabParamList`
+- Imported `InsightsScreen` (named export)
+- Added `InsightsTab` screen between LogTab and ProfileTab using `Icons.TrendUp`
+
+**useInsightTypewriter.ts** (new hook at `src/hooks/useInsightTypewriter.ts`)
+- Sequential paragraph typing at 25ms/character with 200ms pause between paragraphs
+- `skip()` escape hatch reveals everything instantly
+- `shouldAnimate: false` path skips animation for already-seen content
+
+**text-helpers.ts** (new util at `src/utils/text-helpers.ts`)
+- `parseBold(input)` parses `**bold**` markers into `TextSegment[]` for inline Text rendering
+
+**insights-types.ts** (`src/types/insights-types.ts`)
+- Added `WeeklyInsightParagraph` interface (text, isWatch, defer?)
+- Added `WeeklyInsightOutputV2` interface (paragraphs + focusNext)
+- Preserved original `WeeklyInsightOutput` for backward compatibility
+
+**insights-service.ts** (`src/services/insights-service.ts`)
+- Removed duplicate `extractEdgeFnError()` function
+- Now imports and uses `parseEdgeFnError` exported from supabase.ts (same logic, one source)
+
+**supabase.ts** (`src/services/supabase.ts`)
+- Changed `parseEdgeFnError` from private function to named export
+
+**InsightsScreen.tsx** (`src/screens/InsightsScreen.tsx`)
+- Full rewrite of render layer (data fetching logic unchanged)
+- Added `normalizeInsightData()` compatibility layer: handles both old `{insights, focusNext}` and new `{paragraphs, focusNext}` shapes
+- Mode A: pre-insight holding message with typewriter (account < 7 days OR 0 sessions)
+- Mode B: latest weekly rendered as sequential message paragraphs with typewriter on first view
+- Watch paragraphs: 2px red left border, defer text shown after paragraph completes
+- Bold text via `parseBold()` rendered as inline Text spans
+- Older weeks collapsed below latest (date + chevron, expand inline, no animation)
+- Quarterly and Monthly cards preserved (unchanged logic)
+- `useAuth()` used to read `profile.created_at` for account age check
+- `preInsightSeen` state prevents re-animating the holding message on every tab focus
+
+### Why
+CR-001 from the post-launch code review: Insights was fully built but invisible (not wired to the tab bar). The render layer was also redesigned from card-based to message-style for a more human, coaching feel.
+
+### Testing
+TypeScript check: `npx tsc --noEmit` passes with zero errors.
+Test locally: `SENTRY_DISABLE_AUTO_UPLOAD=true npx expo run:ios --device` then tap the new Insights tab.
+
+---
+
+## 2026-03-30 -- FEAT-008: User Profile Expansion (Session 32)
+
+**Type:** Feature + Build
+
+### Changes
+
+**Supabase Migration** (`supabase/migrations/20260330000000_profile_expansion.sql`)
+- Added `birth_date DATE NOT NULL` to profiles table (with 18+ enforcement trigger)
+- Added `gender TEXT` (nullable, CHECK male/female)
+- Added `body_weight_kg NUMERIC` (nullable)
+- Added `weight_unit_preference TEXT DEFAULT 'lb'`
+- Trigger `enforce_minimum_age` blocks INSERT/UPDATE if birth_date < 18 years ago
+
+**TypeScript Types** (`src/types/mvp-types.ts`)
+- Added `Gender`, `TrainingGoal` type exports
+- Added `birth_date`, `gender`, `body_weight_kg`, `weight_unit_preference` to Profile, ProfileInsert, ProfileUpdate
+- `birth_date` omitted from ProfileUpdate (locked after onboarding)
+
+**Navigation** (`src/navigation/OnboardingNavigator.tsx`)
+- YourTraining params now include `birthDate` and `gender` (passed from AboutYou)
+- GetStarted params now include `birthDate`, `gender`, `bodyWeightKg`, `weightUnitPreference`
+
+**About You Screen** (`src/screens/onboarding/AboutYouScreen.tsx`)
+- Added birthday field: iOS scroll wheel date picker, max date = today - 18 years
+- Inline age display ("X years old") and age error ("Must be 18 or older")
+- Transparency microcopy: "Your age helps us adjust insights and projections to your training."
+- Added mandatory gender field: Male/Female chips (must select one)
+- Transparency microcopy: "Helps personalize competition class and training insights."
+- Continue requires name + belt + stripes + valid 18+ birthday + gender
+
+**Your Training Screen** (`src/screens/onboarding/YourTrainingScreen.tsx`)
+- Expanded training goals: Competition, Fitness, Self-Defense, Mental Health, Community, Hobby (was 5, now 6)
+- Added body weight field: numeric input + lb/kg toggle, stored in kg
+- Instant IBJJF weight class feedback when weight entered (adapts to gender if set)
+- Full IBJJF weight class tables for both men and women built into component
+
+**Get Started Screen** (`src/screens/onboarding/GetStartedScreen.tsx`)
+- Profile creation now passes birth_date, gender, body_weight_kg, weight_unit_preference to Supabase
+
+**Profile Screen** (`src/screens/ProfileScreen.tsx`)
+- New "Personal Info" card with Birthday, Gender, Body Weight (all editable)
+- EditBirthdaySheet: scroll wheel picker with age bracket change detection. Shows live preview of old vs new age/bracket. Warns with confirmation dialog when change crosses IBJJF Masters brackets (30, 36, 41, 46, 51, 56)
+- EditGenderSheet: Male/Female chips with impact warning. Switching gender triggers confirmation dialog explaining effects on competition class, peer comparisons, and insights history
+- EditWeightSheet: number input + lb/kg toggle with conversion
+
+**Icons** (`src/components/Icons.tsx`)
+- Added Lock icon (padlock SVG)
+
+**User Context Service** (`src/services/user-context.ts`)
+- UCD profile now includes `age` (computed from birth_date), `gender`, `bodyWeightKg`
+- Added `calculateAge()` helper
+
+**Insights Types** (`src/types/insights-types.ts`)
+- UserContextDocument profile section now includes `age`, `gender`, `bodyWeightKg`
+
+**PRD Updates:**
+- ONBOARDING_PRD.md updated to v5: birthday mandatory (18+), gender mandatory, weight optional, expanded goals, editable-with-warnings philosophy
+- PROFILE_SETTINGS_PRD.md: new body weight section, gender/birthday editable with warnings, injuries noted as future (FEAT-006)
+- PERSONALIZATION.md: UCD includes age/gender/weight, updated serialization example, removed from "future variables"
+- Features backlog: added FEAT-008 as P0, moved to Shipped
+
+**Styling Fixes (from code review before ship):**
+- Weight input padding/font unified across onboarding and profile edit (was inconsistent)
+- Unit toggle gap changed from hardcoded `4` to `spacing.xs`
+- Profile edit sheet chips changed from `radius.lg` to `radius.full` (pill) to match onboarding
+- All new chips/inputs have `minHeight: 48` for consistent touch targets
+- Birthday picker in profile edit now has `marginTop: spacing.sm` matching onboarding
+
+**Design Decisions (evolved during session):**
+1. Gender started as optional, changed to mandatory. Competition class, peer comparisons, and insight personalization all depend on it.
+2. Birthday and gender started as locked (no edit after set), changed to editable with smart warnings. Users should be able to fix mistakes, but we warn them when a change crosses a meaningful threshold (IBJJF Masters age brackets at 30/36/41/46/51/56, or gender switch affecting weight class and comparisons).
+3. Training goals expanded from 5 to 6: added Self-Defense (#3 reason people start BJJ) and Community (major retention driver), removed "Other" catch-all.
+
+### Why
+- Age is foundational to insight personalization (recovery, training projections, injury context)
+- Gender enables competition class mapping and peer comparisons
+- Body weight gives instant IBJJF weight class value and rolling context
+- Self-defense was the #3 reason people start BJJ but was missing from goals
+- Community is a major retention driver that was unrecognized
+
+### Testing
+- `npx tsc --noEmit` passes with zero errors
+- Shipped directly to TestFlight (no local testing)
+- Test plan: `docs/mvp-1.0/tracking/FEAT-008-TEST-PLAN.md` (9 test sections)
+- Supabase migration applied, test accounts cleared
+
+---
+
+## 2026-03-29 -- Auth Race Condition + Post-Save Navigation Fix (Session 31)
+
+**Type:** Fix
+
+### Changes
+
+**Bug 1: Onboarding flash on sign-back-in** (`src/hooks/useAuth.ts`)
+- When a user signed out and signed back in, the WelcomeScreen (typewriter animation) briefly flashed before the main app loaded
+- Root cause: `signOut()` clears the local `tomo_onboarding_complete` cache. On sign-back-in, the `SIGNED_IN` auth event set the user immediately but `loadProfile()` was still in-flight. During that window, `authState` computed as `'needs_onboarding'` because both profile and cache were empty
+- Fix: Added `setIsLoading(true)` before and `setIsLoading(false)` after `loadProfile()` in the `onAuthStateChange` handler. This keeps `authState` as `'loading'` (spinner) instead of `'needs_onboarding'` (onboarding screens) while the profile fetches
+
+**Bug 2: Save Session reopens blank recording** (`src/screens/SessionLoggerScreen.tsx`)
+- After pressing "Save Session", user saw a recording screen with no active timer instead of navigating to the journal
+- Root cause: `resetAndGoBack()` called `setPhase('entry')` (batched/async) then `navigate('JournalTab')`. During the navigation transition, `useFocusEffect` checked `phaseRef.current` which was still `'success'` (hadn't re-rendered yet). The focus effect reset phase to `'recording'` (voice preference) and set `autoStarted.current = false`, but the auto-start effect's deps hadn't changed so the recorder never actually started -- resulting in a dead recording screen
+- Fix: Added `phaseRef.current = 'entry'` as an immediate synchronous ref update before the batched `setPhase('entry')`. Now `useFocusEffect` sees `'entry'` during navigation and skips the reset
+
+### Why
+- Bug 1 caused visual jank on every sign-out/sign-in cycle
+- Bug 2 broke the first-session experience -- users couldn't reach their journal after saving
+
+### Testing
+- `npx tsc --noEmit` passes with zero errors
+- **Test locally** -- no TestFlight needed
+
+---
+
+## 2026-03-29 -- v1.1 TestFlight Ship + Experience Intake Design (Session 30)
+
+**Type:** Build / Feature Design
+
+### Changes
+
+**Test Plan**
+- Created v1.1 pre-TestFlight test plan: 64 manual test cases across 3 suites
+- File: `docs/project/TEST_PLAN.md` (replaced old web prototype version)
+- Suite A: Onboarding to first journal entry (21 tests)
+- Suite B: Profile editing (13 tests)
+- Suite C: Session logging (30 tests)
+- Pre-flight checklist (8 items) + ship decision matrix
+
+**Code Audit**
+- Ran full code audit against all 64 test cases using 3 parallel agents
+- Results: 62 PASS, 2 UNCLEAR (A-20, A-21 need device walkthrough -- code is correct)
+- 0 FAIL, 0 P0 blockers found
+
+**TestFlight Deploy**
+- Built IPA locally via `bash build.sh`
+- Submitted to App Store Connect via EAS Submit
+- Internal testers receive automatically
+
+**Experience Intake Feature (Design)**
+- Identified cold-start problem for experienced practitioners (3+ months)
+- Wrote comprehensive design session prompt for new conversation
+- File: `docs/product/EXPERIENCE_ONBOARDING_PROMPT.md`
+- Added FEAT-006 to ISSUES.md
+- Covers: training arc capture, technique profile seeding, cold-start payoff, conversational UX
+
+### Why
+- Pre-ship QA gate before wider beta distribution
+- Experience intake is critical for retaining experienced users who need TOMO to acknowledge their history
+
+### Testing
+- `npx tsc --noEmit` passes with zero errors
+- Code-level audit of all 3 suites (Auth, Profile, SessionLogger)
+- IPA built locally and submitted to App Store Connect via EAS Submit
+- **Deployed to TestFlight** -- internal testers receive automatically
+
+---
+
+## 2026-03-29 -- v1.1 UX Polish (Session 29)
+
+**Type:** Polish
+
+### Changes
+
+**UX-P-001: Remove "NEAR YOU" label from onboarding gym picker**
+- Deleted `nearbyLabel` text and style from YourTrainingScreen
+- Removed unused `fontSizes` import
+- File: `src/screens/onboarding/YourTrainingScreen.tsx`
+
+**UX-P-002: Remove "Not here? Type your gym name" hint**
+- Deleted `fallbackHint` text and style -- search input is self-explanatory
+- File: `src/screens/onboarding/YourTrainingScreen.tsx`
+
+**UX-P-003: Add "Other" to Training Goals**
+- Added 'Other' to GOAL_OPTIONS array
+- File: `src/screens/onboarding/YourTrainingScreen.tsx`
+
+**UX-P-004: Time-based experience labels**
+- Changed field label from "EXPERIENCE LEVEL" to "TOTAL YEARS OF TRAINING"
+- Simplified chip labels to time ranges only (< 6 months, 6mo - 2yr, 2 - 5yr, 5+ yr)
+- DB values unchanged for compatibility
+- File: `src/screens/onboarding/YourTrainingScreen.tsx`
+
+**UX-P-005: Teach users what to say (onboarding payoff)**
+- Expanded buildPayoffMessages from 3 to 5 chat bubbles
+- Added coaching messages about what details to share and an example
+- File: `src/screens/onboarding/GetStartedScreen.tsx`
+
+**DA-029: Recording screen TOMO identity**
+- Replaced red filled circle + mic icon with gold ring + kanji character (友)
+- Changed pulse animation from scale (1.15/1) to opacity (1/0.5)
+- File: `src/screens/SessionLoggerScreen.tsx`
+
+**DA-031: "Done" button on success screen**
+- Added `onDone` prop to SuccessPhase component
+- Added outline "Done" button below motivational hint (gray700 border, gray300 text, 44px min height)
+- Parent clears auto-dismiss timer before calling resetAndGoBack to prevent double-fire
+- File: `src/screens/SessionLoggerScreen.tsx`
+
+### Why
+- Pre-beta UX polish pass: reduce onboarding friction, coach new users on voice input, give recording/success screens more TOMO identity
+
+### Testing
+- `npx tsc --noEmit` passes with zero errors
+- **Test locally** on device to verify all changes before TestFlight
+
+---
+
 ## 2026-03-28 -- Design Audit Sweep: 15 Items Resolved (Session 28)
 
 **Type:** Polish

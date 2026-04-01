@@ -161,6 +161,7 @@ export function SessionLoggerScreen() {
   const processingRef = useRef(false); // Bug 2: prevent double pipeline
   const savingRef = useRef(false); // Bug 4: prevent double save
   const rawExtractionRef = useRef<ExtractionResult | null>(null); // Bug 18: track edits
+  const needsResetRef = useRef(false); // Set true after save, triggers full reset on next focus
   const primaryGymIdRef = useRef<string | null>(null); // Gym stamp for sessions
   const [primaryGymName, setPrimaryGymName] = useState<string | null>(null);
   const [gymOverride, setGymOverride] = useState<SelectedGym | null>(null);
@@ -185,22 +186,35 @@ export function SessionLoggerScreen() {
     };
   }, []);
 
-  // Reset form when screen regains focus — but only if the previous session
-  // is done (success phase). Active phases (recording/processing/review) are
-  // left alone so an accidental tab switch doesn't wipe in-progress work.
+  // Reset form when screen regains focus after a completed session.
+  // Uses needsResetRef (set in handleSave) instead of checking phase state,
+  // because setPhase('entry') in resetAndGoBack may not flush before
+  // the component loses focus during navigation. The ref is synchronous
+  // and immune to React's batching, so it's always reliable.
+  // Active phases (recording/processing/review) are never affected —
+  // needsResetRef is only set after a successful save.
+  //
+  // IMPORTANT: Always resets to 'entry' phase regardless of voice preference.
+  // Previously this set phase to 'recording' for voice users, which caused
+  // the recording screen to reappear after save (AUTH-002 regression).
+  // Users can tap Record from the entry form when ready for their next session.
+  // autoStarted is NOT reset here — it's only reset in resetAndGoBack so the
+  // auto-start effect doesn't fire during focus transitions.
   const phaseRef = useRef(phase);
   phaseRef.current = phase;
   useFocusEffect(
     useCallback(() => {
-      if (phaseRef.current === 'success') {
+      if (needsResetRef.current) {
+        needsResetRef.current = false;
         // Kill the auto-dismiss timer so it doesn't navigate us away later
         if (dismissTimerRef.current) {
           clearTimeout(dismissTimerRef.current);
           dismissTimerRef.current = null;
         }
-        // Full state reset — same as resetAndGoBack but without the navigate
-        setPhase(prefersVoice ? 'recording' : 'entry');
-        setSkippedEntry(prefersVoice);
+        // Full state reset — always to 'entry' phase (never 'recording')
+        phaseRef.current = 'entry';
+        setPhase('entry');
+        setSkippedEntry(false);
         setEntry({ trainingMode: 'gi', sessionKind: 'class', durationMinutes: 90, didSpar: null });
         setReview({
           trainingMode: 'gi', sessionKind: 'class', durationMinutes: 90,
@@ -221,19 +235,18 @@ export function SessionLoggerScreen() {
         setGymOverride(null);
         setShowGymPicker(false);
         rawExtractionRef.current = null;
+        processingRef.current = false;
         voiceRecorder.reset();
-        // Re-enable voice auto-start for next session
-        autoStarted.current = false;
       }
-    }, [prefersVoice, voiceRecorder])
+    }, [voiceRecorder])
   );
 
   useEffect(() => {
     if (phase === 'recording') {
       const pulse = Animated.loop(
         Animated.sequence([
-          Animated.timing(pulseAnim, { toValue: 1.15, duration: 800, useNativeDriver: true }),
           Animated.timing(pulseAnim, { toValue: 1, duration: 800, useNativeDriver: true }),
+          Animated.timing(pulseAnim, { toValue: 0.5, duration: 800, useNativeDriver: true }),
         ])
       );
       pulse.start();
@@ -497,6 +510,7 @@ export function SessionLoggerScreen() {
         // Non-critical — count will be stale until next refresh
       }
       await refreshProfile();
+      needsResetRef.current = true;
       haptics.success();
       setPhase('success');
 
@@ -516,6 +530,9 @@ export function SessionLoggerScreen() {
       entry, voiceRecorder, refreshProfile, showToast]);
 
   const resetAndGoBack = () => {
+    // Clear the reset flag — we're handling the reset right here
+    needsResetRef.current = false;
+    phaseRef.current = 'entry';
     setPhase('entry');
     setSkippedEntry(false);
     setEntry({ trainingMode: 'gi', sessionKind: 'class', durationMinutes: 90, didSpar: null });
@@ -538,8 +555,14 @@ export function SessionLoggerScreen() {
     setGymOverride(null);
     setShowGymPicker(false);
     rawExtractionRef.current = null;
+    processingRef.current = false;
     voiceRecorder.reset();
-    (navigation as any).navigate('JournalTab');
+    // Re-enable voice auto-start for next LogTab visit
+    autoStarted.current = false;
+    // Navigate to JournalList explicitly — without { screen: 'JournalList' },
+    // the JournalStack might still show a SessionDetail from a previous view,
+    // which makes it look like you can't log a new session.
+    (navigation as any).navigate('JournalTab', { screen: 'JournalList' });
   };
 
   const handleCancelRecording = useCallback(async () => {
@@ -567,7 +590,7 @@ export function SessionLoggerScreen() {
           setEntry={setEntry}
           onRecord={handleStartRecording}
           onTextOnly={handleTextOnly}
-          onCancel={() => (navigation as any).navigate('JournalTab')}
+          onCancel={() => (navigation as any).navigate('JournalTab', { screen: 'JournalList' })}
           gymName={effectiveGymName}
           isGymOverridden={isGymOverridden}
           onGymPress={() => setShowGymPicker(true)}
@@ -627,7 +650,18 @@ export function SessionLoggerScreen() {
   }
 
   if (phase === 'success') {
-    return <SuccessPhase sessionCount={profile?.session_count ?? 0} />;
+    return (
+      <SuccessPhase
+        sessionCount={profile?.session_count ?? 0}
+        onDone={() => {
+          if (dismissTimerRef.current) {
+            clearTimeout(dismissTimerRef.current);
+            dismissTimerRef.current = null;
+          }
+          resetAndGoBack();
+        }}
+      />
+    );
   }
 
   return null;
@@ -828,8 +862,8 @@ function RecordingPhase({
       </View>
       <View style={styles.recordingContent}>
         <GymLabel gymName={gymName} />
-        <Animated.View style={[styles.recordingCircle, { transform: [{ scale: pulseAnim }] }]}>
-          <Icons.Mic size={48} color={colors.white} />
+        <Animated.View style={[styles.recordingCircle, { opacity: pulseAnim }]}>
+          <Text style={styles.recordingKanji}>友</Text>
         </Animated.View>
 
         <Text style={styles.recordingTimer}>{duration}</Text>
@@ -1481,7 +1515,7 @@ function DetailBadge({ label, onPress }: { label: string; onPress?: () => void }
 // SUCCESS PHASE
 // ============================================
 
-function SuccessPhase({ sessionCount }: { sessionCount: number }) {
+function SuccessPhase({ sessionCount, onDone }: { sessionCount: number; onDone: () => void }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.successContent}>
@@ -1493,6 +1527,12 @@ function SuccessPhase({ sessionCount }: { sessionCount: number }) {
           You've logged {sessionCount + 1} session{sessionCount !== 0 ? 's' : ''} total.
         </Text>
         <Text style={styles.successHint}>Keep showing up. That's the whole game.</Text>
+        <Pressable
+          style={({ pressed }) => [styles.doneButton, pressed && { opacity: 0.7 }]}
+          onPress={onDone}
+        >
+          <Text style={styles.doneButtonText}>Done</Text>
+        </Pressable>
       </View>
     </SafeAreaView>
   );
@@ -1622,10 +1662,17 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 60,
-    backgroundColor: colors.negative,
+    backgroundColor: 'transparent',
+    borderWidth: 3,
+    borderColor: colors.gold,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: spacing.xl,
+  },
+  recordingKanji: {
+    fontSize: 32,
+    color: colors.gold,
+    fontWeight: '700',
   },
   recordingTimer: {
     fontFamily: 'Unbounded-ExtraBold',
@@ -1958,5 +2005,23 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: colors.gray500,
     fontStyle: 'italic',
+  },
+  doneButton: {
+    marginTop: spacing.xl,
+    paddingVertical: 12,
+    paddingHorizontal: spacing.xl,
+    borderRadius: radius.xl,
+    borderWidth: 1,
+    borderColor: colors.gray700,
+    backgroundColor: 'transparent',
+    minHeight: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  doneButtonText: {
+    fontFamily: 'Inter-SemiBold',
+    fontSize: 15,
+    fontWeight: '600',
+    color: colors.gray300,
   },
 });

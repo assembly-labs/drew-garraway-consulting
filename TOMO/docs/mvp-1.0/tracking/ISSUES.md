@@ -22,6 +22,67 @@ When resolved: move the entry to CHANGELOG.md under the appropriate date, mark a
 
 ---
 
+## Completed: Session 33 (2026-03-30) -- Insights Tab Wiring + Message-Style Render
+
+### CR-001 Insights Tab Missing from Navigation
+**Priority:** P1
+**Area:** MainTabNavigator, InsightsScreen, Icons
+**Added:** 2026-03-28 (post-launch audit)
+**Status:** Done (2026-03-30, Session 33)
+
+Insights screen was fully built but not wired to the tab bar. Added TrendUp icon, InsightsTab to MainTabParamList, and Tab.Screen between LogTab and ProfileTab. Also rewrote render layer to message-style (sequential paragraph typewriter, watch items with red border, collapsed older weeks). Compatibility layer handles both old and new insight_data shapes.
+
+---
+
+## Completed: Session 32 (2026-03-30) -- FEAT-008
+
+### FEAT-008 User Profile Expansion
+**Priority:** P0
+**Area:** Onboarding, Profile, Types, Migration, UCD
+**Added:** 2026-03-30
+**Status:** Shipped to TestFlight
+
+Birthday (mandatory, 18+), gender (mandatory), body weight (optional), expanded training goals (self-defense, community). Both birthday and gender editable from Profile with smart warnings (age bracket changes, gender switch impact). Supabase migration applied. Test accounts cleared. Shipped directly to TestFlight.
+
+**Remaining polish (not blockers):**
+- Accessibility labels on new interactive elements (gender chips, goal chips, weight input, date button)
+- Weight class display on Profile could show IBJJF class name alongside weight
+- Tokenize the 28px page title fontSize and 18px CTA button paddingVertical
+
+---
+
+## Fixed: Session 34 (2026-03-31)
+
+### AUTH-002b Save Session Reopens Recording (Regression)
+**Priority:** P0
+**Area:** SessionLoggerScreen.tsx (useFocusEffect + resetAndGoBack)
+**Added:** 2026-03-31
+**Status:** Done (2026-03-31, Session 34)
+
+Session 31 fix was incomplete. `useFocusEffect` still set phase to `'recording'` for voice users during focus transitions. `resetAndGoBack()` navigated to `'JournalTab'` without specifying `{ screen: 'JournalList' }`, so stale SessionDetail screens persisted in the journal stack. Root cause: two competing reset paths (useFocusEffect + resetAndGoBack) with inconsistent behavior. Fixed by: (1) always resetting to 'entry' phase in useFocusEffect, (2) navigating to JournalList explicitly, (3) resetting autoStarted only in resetAndGoBack (not focus effect), (4) adding processingRef reset to both paths.
+
+---
+
+## Fixed: Session 31 (2026-03-29)
+
+### AUTH-001 Onboarding Flash on Sign-Back-In
+**Priority:** P1
+**Area:** useAuth.ts (onAuthStateChange handler)
+**Added:** 2026-03-29
+**Status:** Done (2026-03-29, Session 31)
+
+Signing out then back in caused the WelcomeScreen typewriter animation to flash briefly. Race condition: `SIGNED_IN` event set user before profile loaded, causing `authState` to compute as `needs_onboarding`. Fixed by keeping `isLoading = true` during profile fetch in the auth state change handler.
+
+### AUTH-002 Save Session Reopens Blank Recording
+**Priority:** P1
+**Area:** SessionLoggerScreen.tsx (resetAndGoBack + useFocusEffect)
+**Added:** 2026-03-29
+**Status:** Done (2026-03-29, Session 31)
+
+After saving first session, user saw dead recording screen instead of journal. Race condition: `resetAndGoBack()` called batched `setPhase('entry')` then navigated, but `useFocusEffect` read stale `phaseRef.current === 'success'` and reset to recording phase. Fixed by immediately syncing `phaseRef.current = 'entry'` before the batched state update.
+
+---
+
 ## ACTIVE PRIORITY: Design Audit (2026-03-28)
 
 > **These items take precedence over all other open issues.** Full audit report: `docs/design-reviews/ux-audit-2026-03-28.md`
@@ -203,6 +264,22 @@ Screens use magic numbers (200ms, 250ms, 300ms, etc.) for animations. Add timing
 **Status:** Open
 
 Token exists but most pressables use inline `opacity: 0.7`. Dark theme should lighten on press, not reduce opacity.
+
+---
+
+## Feature Requests
+
+### FEAT-006 Experience Intake for Experienced Practitioners
+**Priority:** P1
+**Area:** Onboarding / New feature
+**Added:** 2026-03-29
+**Status:** Open (design prompt written, needs design session)
+
+Users with 3+ months experience (white belt with stripes through black belt) hit a cold-start problem: TOMO has zero data about their training history, technique profile, competition record, or injury context. The app treats a 6-year purple belt the same as a day-one white belt.
+
+Need a conversational "Experience Intake" flow (3-5 min, skippable) that captures training arc, seeds technique profile, and acknowledges their history so TOMO can deliver value from session one.
+
+**Design prompt:** `docs/product/EXPERIENCE_ONBOARDING_PROMPT.md`
 
 ---
 
