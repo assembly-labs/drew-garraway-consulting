@@ -136,6 +136,18 @@ export interface WeeklyInsightOutput {
   focusNext: string;
 }
 
+// New message-style output (Phase 1 approved design)
+export interface WeeklyInsightParagraph {
+  text: string;       // Can contain **bold** markers
+  isWatch: boolean;   // True = injury/risk item, rendered with red left border
+  defer?: string;     // Coach deferral note (only when isWatch)
+}
+
+export interface WeeklyInsightOutputV2 {
+  paragraphs: WeeklyInsightParagraph[];
+  focusNext: string;
+}
+
 // ===========================================
 // MONTHLY SONNET — INPUT/OUTPUT
 // ===========================================
@@ -341,6 +353,9 @@ export interface UserContextDocument {
     name: string;
     belt: BeltLevel;
     stripes: number;
+    age: number;
+    gender: 'male' | 'female' | null;
+    bodyWeightKg: number | null;
     gym: string;
     monthsTraining: number;
     trainingGoals: string[] | null;

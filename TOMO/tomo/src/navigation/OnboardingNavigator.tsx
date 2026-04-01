@@ -26,11 +26,19 @@ import { GetStartedScreen } from '../screens/onboarding/GetStartedScreen';
 export type OnboardingStackParamList = {
   Welcome: undefined;
   AboutYou: undefined;
-  YourTraining: { name: string; belt: string; stripes: number };
+  YourTraining: {
+    name: string;
+    belt: string;
+    stripes: number;
+    birthDate: string; // ISO date (YYYY-MM-DD)
+    gender: 'male' | 'female';
+  };
   GetStarted: {
     name: string;
     belt: string;
     stripes: number;
+    birthDate: string;
+    gender: 'male' | 'female';
     gymId: string | null;
     gymName: string;
     gymIsCustom: boolean;
@@ -43,6 +51,8 @@ export type OnboardingStackParamList = {
     targetFrequency: number;
     trainingGoals?: string[];
     experienceLevel?: string;
+    bodyWeightKg?: number;
+    weightUnitPreference?: 'lb' | 'kg';
   };
 };
 

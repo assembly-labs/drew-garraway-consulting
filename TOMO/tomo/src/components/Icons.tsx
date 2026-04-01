@@ -326,6 +326,24 @@ function EyeOff({ size = 24, color = '#ffffff', strokeWidth = 1.5 }: IconProps) 
   );
 }
 
+function Lock({ size = 24, color = '#ffffff', strokeWidth = 1.5 }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <Rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+      <Path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </Svg>
+  );
+}
+
+function TrendUp({ size = 24, color = '#ffffff', strokeWidth = 1.5 }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <Polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+      <Polyline points="17 6 23 6 23 12" />
+    </Svg>
+  );
+}
+
 export const Icons = {
   // Navigation
   Journal,
@@ -363,4 +381,7 @@ export const Icons = {
   // Misc
   Shield,
   Camera,
+  Lock,
+  // Insights
+  TrendUp,
 } as const;

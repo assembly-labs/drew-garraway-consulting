@@ -110,11 +110,6 @@ export function SessionDetailSkeleton() {
           <PulseBar width={50} height={14} />
         </View>
       </View>
-      {/* Narrative */}
-      <View style={styles.narrativeSkeleton}>
-        <PulseBar width="95%" height={14} />
-        <PulseBar width="75%" height={14} style={{ marginTop: 6 }} />
-      </View>
       <SectionSkeleton />
       <SectionSkeleton lines={3} />
       <SectionSkeleton lines={1} />
@@ -183,14 +178,6 @@ const styles = StyleSheet.create({
   },
   detailHeader: {
     alignItems: 'center',
-    marginBottom: spacing.md,
-  },
-  narrativeSkeleton: {
-    borderLeftWidth: 3,
-    borderLeftColor: colors.gray700,
-    backgroundColor: colors.gray800,
-    borderRadius: radius.lg,
-    padding: spacing.md,
     marginBottom: spacing.md,
   },
   profileContainer: {

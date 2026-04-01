@@ -44,6 +44,8 @@ function buildPayoffMessages(name: string, belt: string, stripes: number, gymNam
   return [
     `Hey ${name}. ${beltLabel} belt${stripeText}, training at ${gymName}. Got it.`,
     "After each session, just talk. I'll track your progress and spot the patterns.",
+    "Tell me how long you trained, what techniques you drilled, and how your rounds went. The more detail, the better your journal.",
+    "Like: 'Trained gi today for about an hour. Worked on half guard sweeps. Hit two in live rolls but got caught in a triangle.'",
     "Let's get to work.",
   ];
 }
@@ -306,6 +308,10 @@ export function GetStartedScreen({ navigation, route }: Props) {
         name: params.name,
         belt: params.belt as any,
         stripes: params.stripes,
+        birth_date: params.birthDate,
+        gender: params.gender,
+        body_weight_kg: params.bodyWeightKg ?? null,
+        weight_unit_preference: params.weightUnitPreference ?? 'lb',
         gym_id: params.gymId,
         gym_name: params.gymName,
         gym_is_custom: params.gymIsCustom,

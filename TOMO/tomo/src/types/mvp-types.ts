@@ -39,11 +39,19 @@ export type LocationPermission = 'granted' | 'denied' | 'skipped';
 // PROFILE
 // ===========================================
 
+export type Gender = 'male' | 'female';
+
+export type TrainingGoal = 'competition' | 'fitness' | 'self_defense' | 'mental' | 'community' | 'hobby';
+
 export interface Profile {
   id: string; // UUID, matches auth.users.id
   name: string;
   belt: BeltLevel;
   stripes: number; // 0-4
+  birth_date: string; // ISO date (YYYY-MM-DD), mandatory, must be 18+. Editable with bracket-change warning.
+  gender: Gender | null; // mandatory at onboarding, editable with impact warning. Null for legacy rows only.
+  body_weight_kg: number | null; // stored in kg, freely editable
+  weight_unit_preference: 'lb' | 'kg'; // user's preferred display unit
   gym_id: string | null;
   gym_name: string;
   gym_is_custom: boolean;
@@ -57,7 +65,7 @@ export interface Profile {
   logging_preference: LoggingPreference;
   onboarding_complete: boolean;
   session_count: number;
-  training_goals: string[] | null; // e.g. ['competition', 'fitness']
+  training_goals: string[] | null; // e.g. ['competition', 'fitness', 'self_defense']
   experience_level: ExperienceLevel | null;
   avatar_url: string | null;
   created_at: string; // ISO timestamp
@@ -69,6 +77,10 @@ export interface ProfileInsert {
   name: string;
   belt: BeltLevel;
   stripes: number;
+  birth_date: string; // ISO date (YYYY-MM-DD), mandatory, must be 18+
+  gender: Gender;
+  body_weight_kg?: number | null;
+  weight_unit_preference?: 'lb' | 'kg';
   gym_id?: string | null;
   gym_name: string;
   gym_is_custom?: boolean;
@@ -90,6 +102,10 @@ export interface ProfileUpdate {
   name?: string;
   belt?: BeltLevel;
   stripes?: number;
+  birth_date?: string; // editable, but app warns when change crosses age brackets
+  gender?: Gender | null; // editable, but app warns when changing (affects competition class, insights)
+  body_weight_kg?: number | null; // freely editable
+  weight_unit_preference?: 'lb' | 'kg';
   gym_id?: string | null;
   gym_name?: string;
   gym_is_custom?: boolean;

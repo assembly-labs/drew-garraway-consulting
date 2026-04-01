@@ -7,7 +7,7 @@
  * See docs/insights/SCHEMA.md for database schema.
  */
 
-import { supabase } from './supabase';
+import { supabase, parseEdgeFnError } from './supabase';
 import type {
   Insight,
   InsightTier,
@@ -209,7 +209,7 @@ export const insightGenerationService = {
     });
 
     if (error) {
-      const detail = await extractEdgeFnError(error);
+      const { detail } = await parseEdgeFnError(error);
       console.error('[Insights] Weekly generation failed:', detail);
       return { success: false, data: null, insightId: null, error: detail };
     }
@@ -234,7 +234,7 @@ export const insightGenerationService = {
     });
 
     if (error) {
-      const detail = await extractEdgeFnError(error);
+      const { detail } = await parseEdgeFnError(error);
       console.error('[Insights] Monthly generation failed:', detail);
       return { success: false, data: null, insightId: null, error: detail };
     }
@@ -259,7 +259,7 @@ export const insightGenerationService = {
     });
 
     if (error) {
-      const detail = await extractEdgeFnError(error);
+      const { detail } = await parseEdgeFnError(error);
       console.error('[Insights] Quarterly generation failed:', detail);
       return { success: false, data: null, insightId: null, error: detail };
     }
@@ -285,7 +285,7 @@ export const insightChatService = {
     });
 
     if (error) {
-      const detail = await extractEdgeFnError(error);
+      const { detail } = await parseEdgeFnError(error);
       console.error('[Insights] Chat failed:', detail);
       throw new Error(`Chat failed: ${detail}`);
     }
@@ -390,25 +390,3 @@ export const userContextService = {
   },
 };
 
-// ===========================================
-// HELPERS
-// ===========================================
-
-/**
- * Extract error detail from a Supabase edge function error.
- * Non-2xx responses put the response body in error.context.
- */
-async function extractEdgeFnError(error: Error): Promise<string> {
-  const ctx = (error as any).context;
-  let detail = error.message;
-
-  if (ctx && typeof ctx === 'object') {
-    try {
-      const body = await ctx.json?.();
-      detail = body?.error || body?.message || JSON.stringify(body) || detail;
-    } catch {
-      // Could not parse error context — fall back to error.message
-    }
-  }
-  return detail;
-}

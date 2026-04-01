@@ -18,6 +18,22 @@ import type {
 import { quickSentimentCheck } from '../config/belt-system/journal-patterns';
 
 // ===========================================
+// HELPERS
+// ===========================================
+
+/** Calculate age in years from an ISO date string (YYYY-MM-DD) */
+function calculateAge(birthDateStr: string): number {
+  const birthDate = new Date(birthDateStr);
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+}
+
+// ===========================================
 // UCD BUILDER
 // ===========================================
 
@@ -41,6 +57,9 @@ export function buildUserContext(
       name: profile.name,
       belt: profile.belt,
       stripes: profile.stripes,
+      age: calculateAge(profile.birth_date),
+      gender: profile.gender,
+      bodyWeightKg: profile.body_weight_kg,
       gym: profile.gym_name,
       monthsTraining,
       trainingGoals: profile.training_goals,

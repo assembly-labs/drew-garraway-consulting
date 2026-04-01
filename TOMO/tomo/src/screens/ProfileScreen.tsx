@@ -7,7 +7,7 @@
  * - Sign out button
  */
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   View,
   Text,
@@ -22,6 +22,7 @@ import {
   Platform,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -46,6 +47,22 @@ const BELT_LABELS: Record<string, string> = {
   brown: 'Brown Belt',
   black: 'Black Belt',
 };
+
+function calculateProfileAge(birthDateStr: string): number {
+  const birthDate = new Date(birthDateStr);
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+}
+
+function formatWeight(kg: number, unit: 'lb' | 'kg'): string {
+  if (unit === 'kg') return `${kg} kg`;
+  return `${Math.round(kg * 2.20462)} lb`;
+}
 
 const BELTS: BeltLevel[] = ['white', 'blue', 'purple', 'brown', 'black'];
 
@@ -184,6 +201,38 @@ export function ProfileScreen() {
           </View>
         </View>
 
+        {/* Personal Info card */}
+        <View style={styles.card}>
+          {/* Birthday — editable with bracket-change warning */}
+          <EditableRow
+            label="Birthday"
+            value={profile.birth_date
+              ? `${calculateProfileAge(profile.birth_date)} years old`
+              : 'Not set'}
+            onPress={() => setEditSheet('birthday')}
+          />
+          <View style={styles.rowDivider} />
+
+          {/* Gender — editable with impact warning */}
+          <EditableRow
+            label="Gender"
+            value={profile.gender
+              ? (profile.gender === 'male' ? 'Male' : 'Female')
+              : '+ Add'}
+            onPress={() => setEditSheet('gender')}
+          />
+          <View style={styles.rowDivider} />
+
+          {/* Body Weight — freely editable */}
+          <EditableRow
+            label="Body Weight"
+            value={profile.body_weight_kg
+              ? formatWeight(profile.body_weight_kg, profile.weight_unit_preference)
+              : '+ Add'}
+            onPress={() => setEditSheet('weight')}
+          />
+        </View>
+
         {/* Gym Card — current home gym + actions */}
         <GymCard
           primaryGym={primaryGym}
@@ -311,6 +360,26 @@ export function ProfileScreen() {
         visible={editSheet === 'logging'}
         value={profile.logging_preference}
         onSave={(pref) => handleSave({ logging_preference: pref })}
+        onClose={() => setEditSheet(null)}
+      />
+      <EditBirthdaySheet
+        visible={editSheet === 'birthday'}
+        currentBirthDate={profile.birth_date}
+        onSave={(date) => handleSave({ birth_date: date })}
+        onClose={() => setEditSheet(null)}
+      />
+      <EditGenderSheet
+        visible={editSheet === 'gender'}
+        currentGender={profile.gender}
+        onSave={(g) => handleSave({ gender: g })}
+        onClose={() => setEditSheet(null)}
+      />
+      <EditWeightSheet
+        visible={editSheet === 'weight'}
+        weightKg={profile.body_weight_kg}
+        unit={profile.weight_unit_preference ?? 'lb'}
+        gender={profile.gender}
+        onSave={(kg, unit) => handleSave({ body_weight_kg: kg, weight_unit_preference: unit })}
         onClose={() => setEditSheet(null)}
       />
     </SafeAreaView>
@@ -670,6 +739,295 @@ function EditLoggingSheet({ visible, value, onSave, onClose }: {
   );
 }
 
+/** IBJJF Masters age brackets */
+function getAgeBracket(age: number): string {
+  if (age < 30) return 'Adult';
+  if (age < 36) return 'Masters 1 (30+)';
+  if (age < 41) return 'Masters 2 (36+)';
+  if (age < 46) return 'Masters 3 (41+)';
+  if (age < 51) return 'Masters 4 (46+)';
+  if (age < 56) return 'Masters 5 (51+)';
+  return 'Masters 6 (56+)';
+}
+
+function EditBirthdaySheet({ visible, currentBirthDate, onSave, onClose }: {
+  visible: boolean;
+  currentBirthDate: string;
+  onSave: (date: string) => void;
+  onClose: () => void;
+}) {
+  const maxDate = useMemo(() => {
+    const d = new Date();
+    d.setFullYear(d.getFullYear() - 18);
+    return d;
+  }, []);
+  const minDate = useMemo(() => {
+    const d = new Date();
+    d.setFullYear(d.getFullYear() - 100);
+    return d;
+  }, []);
+
+  const [date, setDate] = useState<Date>(new Date(currentBirthDate));
+
+  useEffect(() => {
+    if (visible) setDate(new Date(currentBirthDate));
+  }, [visible, currentBirthDate]);
+
+  const currentAge = calculateProfileAge(currentBirthDate);
+  const newAge = calculateProfileAge(date.toISOString().slice(0, 10));
+  const currentBracket = getAgeBracket(currentAge);
+  const newBracket = getAgeBracket(newAge);
+  const bracketChanged = currentBracket !== newBracket;
+  const dateChanged = date.toISOString().slice(0, 10) !== currentBirthDate;
+
+  const handleSave = () => {
+    const newDateStr = date.toISOString().slice(0, 10);
+    if (!dateChanged) { onClose(); return; }
+
+    if (bracketChanged) {
+      Alert.alert(
+        'Age Bracket Change',
+        `Changing your birthday moves you from ${currentBracket} to ${newBracket}. This will affect your training insights, competition brackets, and peer comparisons across your entire history.`,
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Change Birthday', style: 'destructive', onPress: () => onSave(newDateStr) },
+        ]
+      );
+    } else {
+      onSave(newDateStr);
+    }
+  };
+
+  return (
+    <SheetWrapper visible={visible} title="Birthday" onClose={onClose} onSave={handleSave}>
+      <Text style={profileEditStyles.hint}>
+        Your age shapes your training insights, recovery recommendations, and competition brackets.
+      </Text>
+      <DateTimePicker
+        value={date}
+        mode="date"
+        display="spinner"
+        maximumDate={maxDate}
+        minimumDate={minDate}
+        onChange={(_event, selectedDate) => {
+          if (selectedDate) setDate(selectedDate);
+        }}
+        textColor={colors.white}
+        themeVariant="dark"
+        style={{ height: 180, marginTop: spacing.sm }}
+      />
+      {dateChanged && (
+        <View style={profileEditStyles.changePreview}>
+          <Text style={profileEditStyles.changeLabel}>
+            {currentAge} years old ({currentBracket})
+          </Text>
+          <Text style={profileEditStyles.changeArrow}>{'   >>>   '}</Text>
+          <Text style={[
+            profileEditStyles.changeLabel,
+            bracketChanged && { color: colors.gold },
+          ]}>
+            {newAge} years old ({newBracket})
+          </Text>
+        </View>
+      )}
+      {bracketChanged && (
+        <Text style={profileEditStyles.warning}>
+          This changes your competition age bracket. Your insights and comparisons will update to reflect the new bracket.
+        </Text>
+      )}
+    </SheetWrapper>
+  );
+}
+
+function EditGenderSheet({ visible, currentGender, onSave, onClose }: {
+  visible: boolean;
+  currentGender: 'male' | 'female' | null;
+  onSave: (g: 'male' | 'female') => void;
+  onClose: () => void;
+}) {
+  const [g, setG] = useState<'male' | 'female' | null>(currentGender);
+  useEffect(() => { if (visible) setG(currentGender); }, [visible, currentGender]);
+
+  const isChange = currentGender !== null && g !== null && g !== currentGender;
+
+  const handleSave = () => {
+    if (!g) return;
+    if (isChange) {
+      Alert.alert(
+        'Change Gender?',
+        'Changing your gender will update your competition weight class, peer comparisons, and training insights across your entire history. This significantly affects how your data is interpreted.',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Change Gender', style: 'destructive', onPress: () => onSave(g) },
+        ]
+      );
+    } else {
+      onSave(g);
+    }
+  };
+
+  return (
+    <SheetWrapper visible={visible} title="Gender" onClose={onClose} onSave={handleSave}>
+      <Text style={profileEditStyles.hint}>
+        Your gender affects competition weight classes, peer comparisons, and how we personalize your insights.
+      </Text>
+      <View style={styles.chipRow}>
+        {[{ label: 'Male', value: 'male' as const }, { label: 'Female', value: 'female' as const }].map((opt) => (
+          <Pressable key={opt.value} style={[styles.freqChip, g === opt.value && styles.chipSelected]} onPress={() => setG(opt.value)}>
+            <Text style={[styles.chipText, g === opt.value && styles.chipTextSelected]}>{opt.label}</Text>
+          </Pressable>
+        ))}
+      </View>
+      {isChange && (
+        <Text style={profileEditStyles.warning}>
+          Switching from {currentGender === 'male' ? 'Male' : 'Female'} to {g === 'male' ? 'Male' : 'Female'} will change your competition weight class and recalculate all peer comparisons.
+        </Text>
+      )}
+    </SheetWrapper>
+  );
+}
+
+const profileEditStyles = StyleSheet.create({
+  hint: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gray500,
+    marginBottom: spacing.lg,
+    lineHeight: 18,
+  },
+  warning: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gold,
+    marginTop: spacing.md,
+    lineHeight: 18,
+  },
+  changePreview: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: spacing.sm,
+    flexWrap: 'wrap',
+  },
+  changeLabel: {
+    fontFamily: 'JetBrains Mono-SemiBold',
+    fontSize: 12,
+    fontWeight: '600',
+    color: colors.gray400,
+  },
+  changeArrow: {
+    fontFamily: 'JetBrains Mono',
+    fontSize: 12,
+    fontWeight: '500',
+    color: colors.gray600,
+  },
+});
+
+function EditWeightSheet({ visible, weightKg, unit, gender, onSave, onClose }: {
+  visible: boolean;
+  weightKg: number | null;
+  unit: 'lb' | 'kg';
+  gender: 'male' | 'female' | null;
+  onSave: (kg: number | null, unit: 'lb' | 'kg') => void;
+  onClose: () => void;
+}) {
+  const [text, setText] = useState('');
+  const [u, setU] = useState<'lb' | 'kg'>(unit);
+
+  useEffect(() => {
+    if (visible) {
+      setU(unit);
+      if (weightKg) {
+        setText(unit === 'kg' ? String(weightKg) : String(Math.round(weightKg * 2.20462)));
+      } else {
+        setText('');
+      }
+    }
+  }, [visible, weightKg, unit]);
+
+  const handleSave = () => {
+    const num = parseFloat(text);
+    if (isNaN(num) || num <= 0) {
+      onSave(null, u);
+    } else {
+      const kg = u === 'lb' ? Math.round(num * 0.453592 * 10) / 10 : num;
+      onSave(kg, u);
+    }
+  };
+
+  return (
+    <SheetWrapper visible={visible} title="Body Weight" onClose={onClose} onSave={handleSave}>
+      <Text style={profileEditStyles.hint}>
+        Only visible to you. Helps suggest your competition weight class.
+      </Text>
+      <View style={weightSheetStyles.row}>
+        <TextInput
+          style={weightSheetStyles.input}
+          value={text}
+          onChangeText={(t) => {
+            const cleaned = t.replace(/[^0-9.]/g, '');
+            if (cleaned.split('.').length <= 2) setText(cleaned);
+          }}
+          placeholder={u === 'lb' ? '165' : '75'}
+          placeholderTextColor={colors.gray600}
+          keyboardType="decimal-pad"
+          autoFocus
+        />
+        <View style={weightSheetStyles.unitRow}>
+          {(['lb', 'kg'] as const).map((opt) => (
+            <Pressable
+              key={opt}
+              style={[styles.freqChip, u === opt && styles.chipSelected]}
+              onPress={() => {
+                if (u !== opt) {
+                  const num = parseFloat(text);
+                  if (!isNaN(num) && num > 0) {
+                    setText(opt === 'kg'
+                      ? String(Math.round(num * 0.453592 * 10) / 10)
+                      : String(Math.round(num * 2.20462)));
+                  }
+                  setU(opt);
+                }
+              }}
+            >
+              <Text style={[styles.chipText, u === opt && styles.chipTextSelected]}>{opt}</Text>
+            </Pressable>
+          ))}
+        </View>
+      </View>
+    </SheetWrapper>
+  );
+}
+
+const weightSheetStyles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+    alignItems: 'center',
+  },
+  input: {
+    fontFamily: 'Inter',
+    backgroundColor: colors.gray800,
+    borderRadius: radius.lg,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.md,
+    fontSize: 17,
+    fontWeight: '500',
+    color: colors.white,
+    borderWidth: 1,
+    borderColor: colors.gray700,
+    width: 100,
+    textAlign: 'center',
+    minHeight: 48,
+  },
+  unitRow: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+  },
+});
+
 // ============================================
 // STYLES
 // ============================================
@@ -784,6 +1142,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.xs,
+  },
+  lockedLabelRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
   },
   rowDivider: {
     height: 1,
@@ -956,9 +1319,11 @@ const styles = StyleSheet.create({
   freqChip: {
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.md,
-    borderRadius: radius.lg,
+    borderRadius: radius.full,
     backgroundColor: colors.gray800,
     borderWidth: 1,
     borderColor: colors.gray700,
+    minHeight: 48,
+    justifyContent: 'center',
   },
 });

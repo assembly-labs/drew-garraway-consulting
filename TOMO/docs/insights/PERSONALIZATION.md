@@ -20,13 +20,16 @@ The UCD is a living JSON document that gets injected into every AI prompt. It gr
 
 | Variable | Type | Source | When Available |
 |----------|------|--------|---------------|
-| name | string | Onboarding | Session 0 |
-| belt | BeltLevel | Onboarding | Session 0 |
-| stripes | number | Onboarding | Session 0 |
-| gym | string | Onboarding | Session 0 |
-| trainingGoals | string[] | Onboarding (optional) | Session 0 |
-| experienceLevel | string | Onboarding (optional) | Session 0 |
-| targetFrequency | number | Onboarding | Session 0 |
+| name | string | Onboarding (mandatory) | Session 0 |
+| belt | BeltLevel | Onboarding (mandatory) | Session 0 |
+| stripes | number | Onboarding (mandatory) | Session 0 |
+| age | number (computed) | Onboarding (mandatory, from birthDate) | Session 0 |
+| gym | string | Onboarding (mandatory) | Session 0 |
+| targetFrequency | number | Onboarding (mandatory) | Session 0 |
+| gender | 'male' / 'female' / null | Onboarding (optional) or Session 5 | Session 0 or 5 |
+| trainingGoals | string[] | Onboarding (optional) | Session 0 or 10 |
+| experienceLevel | string | Onboarding (optional) | Session 0 or 3 |
+| bodyWeightKg | number / null | Onboarding (optional) | Session 0 or 5 |
 
 ### Computed Variables (pattern engine)
 
@@ -57,11 +60,9 @@ The UCD is a living JSON document that gets injected into every AI prompt. It gr
 
 | Variable | Source | Notes |
 |----------|--------|-------|
-| age | Progressive profiling | Injury framing, intensity advice |
-| gender | Progressive profiling | Physiological considerations |
-| weight | Progressive profiling | Competition class context |
 | competitionHistory | Journal detection or manual | Changes sparring framing |
 | lineage | Gym affiliation | Terminology adaptation (Gracie vs 10P vs Danaher) |
+| injuryProfile | Aggregated from session injuries (FEAT-006) | Persistent injury tracking for safety-aware recommendations |
 
 ## UCD JSON Structure
 
@@ -76,11 +77,14 @@ interface UserContextDocument {
     name: string;
     belt: BeltLevel;
     stripes: number;
+    age: number;                    // Computed from birthDate
+    gender: 'male' | 'female' | null;
     gym: string;
     monthsTraining: number;
-    trainingGoals: string[] | null;
+    trainingGoals: string[] | null;  // includes 'self_defense', 'community'
     experienceLevel: string | null;
     targetFrequency: number;
+    bodyWeightKg: number | null;
   };
 
   // Computed
@@ -132,7 +136,9 @@ The UCD is serialized to natural language for injection (~200-400 tokens):
 
 ```
 Name: Drew
+Age: 32, Male
 Belt: Blue (2 stripes), 8 months training
+Weight: 75 kg (Leve class)
 Gym: Gracie Barra Center City
 Goal: Competition, fitness
 Style: Half guard player -- sweep -> knee slice pass -> armbar
@@ -144,6 +150,12 @@ Recent breakthrough: knee slice pass (March)
 Plateau: February week 3 (resolved)
 Preference: asks for specific drills over conceptual explanations
 ```
+
+**Age/gender/weight in serialization:**
+- Age is always included (mandatory field): "Age: 32" or "Age: 45"
+- Gender is included if set: "Age: 32, Male" or just "Age: 32" if null
+- Weight is included if set: "Weight: 75 kg (Leve class)" with IBJJF class name
+- These enable age-adjusted insights ("At 45, prioritizing recovery between sessions is smart"), gendered competition context, and weight-class-aware advice
 
 ## Privacy
 

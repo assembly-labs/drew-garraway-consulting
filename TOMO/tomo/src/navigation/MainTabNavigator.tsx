@@ -14,6 +14,7 @@ import { SessionLoggerScreen } from '../screens/SessionLoggerScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
 import { SessionDetailScreen } from '../screens/SessionDetailScreen';
 import { PrivacyPolicyScreen } from '../screens/PrivacyPolicyScreen';
+import { InsightsScreen } from '../screens/InsightsScreen';
 import { Icons } from '../components/Icons';
 import { colors, spacing, shadows } from '../config/design-tokens';
 
@@ -55,6 +56,7 @@ function ProfileStackNavigator() {
 export type MainTabParamList = {
   JournalTab: undefined;
   LogTab: undefined;
+  InsightsTab: undefined;
   ProfileTab: undefined;
 };
 
@@ -93,6 +95,16 @@ export function MainTabNavigator() {
             <View style={styles.logButton}>
               <Icons.Plus size={35} color={colors.black} strokeWidth={2.5} />
             </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="InsightsTab"
+        component={InsightsScreen}
+        options={{
+          tabBarLabel: 'Insights',
+          tabBarIcon: ({ color, size }) => (
+            <Icons.TrendUp size={size} color={color} />
           ),
         }}
       />

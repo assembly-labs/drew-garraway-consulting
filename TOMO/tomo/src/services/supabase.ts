@@ -509,8 +509,9 @@ async function ensureFreshToken(): Promise<void> {
 /**
  * Parse edge function error details from supabase-js v2 error object.
  * Non-2xx responses put the response body in error.context.
+ * Exported so insights-service and other callers don't duplicate this logic.
  */
-async function parseEdgeFnError(error: Error): Promise<{ detail: string; status?: number }> {
+export async function parseEdgeFnError(error: Error): Promise<{ detail: string; status?: number }> {
   const ctx = (error as any).context;
   let detail = error.message;
   let status: number | undefined;

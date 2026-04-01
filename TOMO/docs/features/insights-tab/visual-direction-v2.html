@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights -- Visual Direction v2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#0a0a0a; color:#e5e5e5; padding:40px 20px 80px; }
+
+  :root {
+    --black: #111111; --white: #ffffff; --gold: #F5A623;
+    --goldDim: rgba(245,166,35,0.15); --goldUltraDim: rgba(245,166,35,0.04);
+    --positive: #22c55e; --positiveDim: rgba(34,197,94,0.15);
+    --negative: #ef4444; --negativeDim: rgba(239,68,68,0.06);
+    --info: #3b82f6; --infoDim: rgba(59,130,246,0.15);
+    --gray300: #d4d4d4; --gray400: #c4c4c4; --gray500: #a3a3a3;
+    --gray600: #8a8a8a; --gray700: #4a4a4a; --gray800: #1f1f1f;
+  }
+
+  .page-title { text-align:center; font-size:22px; font-weight:700; color:var(--gold); margin-bottom:4px; }
+  .page-sub { text-align:center; font-size:12px; color:#525252; margin-bottom:40px; }
+
+  .section { max-width:1200px; margin:0 auto 56px; }
+  .section-title { font-size:16px; font-weight:700; color:#fff; margin-bottom:4px; }
+  .section-desc { font-size:12px; color:#525252; margin-bottom:20px; max-width:600px; }
+
+  .row { display:flex; gap:24px; overflow-x:auto; padding-bottom:16px; }
+  .col { flex-shrink:0; }
+  .col-label { font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:#404040; margin-bottom:8px; text-align:center; }
+
+  .phone { width:300px; height:600px; background:var(--black); border-radius:32px; border:2px solid #333; overflow:hidden; display:flex; flex-direction:column; }
+  .sb { height:52px; padding:14px 24px 0; display:flex; justify-content:space-between; align-items:center; flex-shrink:0; }
+  .sb-time { font-size:15px; font-weight:700; color:#fff; }
+  .sb-dots { display:flex; gap:3px; }
+  .sb-dot { width:4px; height:4px; background:#fff; border-radius:50%; }
+  .sh { padding:4px 24px 8px; flex-shrink:0; }
+  .sh-title { font-size:28px; font-weight:800; color:#fff; letter-spacing:-0.5px; }
+  .sh-sub { font-size:13px; font-weight:500; color:var(--gray500); margin-top:2px; }
+  .sc { flex:1; overflow-y:auto; padding:4px 20px 20px; }
+  .sc::-webkit-scrollbar { width:0; }
+  .tb { height:72px; background:#1a1a1a; border-top:1px solid #222; display:flex; align-items:flex-start; justify-content:space-around; padding:8px 12px 24px; flex-shrink:0; }
+  .t { display:flex; flex-direction:column; align-items:center; gap:3px; opacity:0.4; }
+  .t.active { opacity:1; }
+  .t-label { font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--gray500); }
+  .t.active .t-label { color:var(--gold); }
+  .log-btn { width:56px; height:56px; background:var(--gold); border-radius:28px; margin-top:-24px; }
+
+  .divider { border:none; border-top:1px solid #1a1a1a; margin:48px auto; max-width:1200px; }
+
+  /* ===== MESSAGE STYLE ===== */
+
+  /* Week header - subtle, just enough context */
+  .week-header {
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; font-weight:600;
+    letter-spacing:1px; color:var(--gray600);
+    margin:12px 0 16px;
+  }
+
+  /* Message body - the core content. Just text. */
+  .msg {
+    font-size:15px; font-weight:500;
+    color:var(--gray300); line-height:24px;
+    margin-bottom:16px;
+  }
+  .msg strong { color:var(--white); font-weight:600; }
+
+  /* Injury/watch - red accent, same text style */
+  .msg-watch {
+    font-size:15px; font-weight:500;
+    color:var(--gray300); line-height:24px;
+    margin-bottom:16px;
+    padding-left:12px;
+    border-left:2px solid var(--negative);
+  }
+  .msg-watch .defer {
+    color:var(--gray500); font-size:13px;
+    margin-top:6px; display:block;
+  }
+
+  /* Focus - slight visual break */
+  .msg-focus {
+    font-size:15px; font-weight:500;
+    color:var(--gray300); line-height:24px;
+    margin-top:20px; padding-top:16px;
+    border-top:1px solid #222;
+  }
+  .msg-focus .label {
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; font-weight:600;
+    letter-spacing:1px; color:var(--gold);
+    margin-bottom:6px; display:block;
+  }
+
+  /* Signoff - minimal */
+  .msg-signoff {
+    font-size:13px; font-weight:500;
+    color:var(--gray600); margin-top:24px;
+    line-height:20px;
+  }
+
+  /* Collapsed older week */
+  .older {
+    background:var(--gray800); border-radius:8px;
+    padding:12px 14px; margin-bottom:8px;
+    display:flex; justify-content:space-between;
+    align-items:center;
+  }
+  .older-left { display:flex; align-items:center; gap:8px; }
+  .older-date { font-size:14px; font-weight:500; color:var(--gray400); }
+  .older-chev { color:var(--gray600); font-size:14px; }
+
+  .note-box { background:rgba(255,255,255,0.02); border:1px solid #1a1a1a; border-radius:6px; padding:12px 16px; margin-top:20px; max-width:1200px; margin-left:auto; margin-right:auto; }
+  .note-label { font-size:10px; font-weight:600; color:#404040; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+  .note-box p { font-size:11px; color:#333; line-height:1.6; margin-bottom:4px; }
+  .note-box p:last-child { margin-bottom:0; }
+
+  .footer { text-align:center; color:#262626; font-size:11px; margin-top:64px; }
+</style>
+</head>
+<body>
+
+<div class="page-title">Visual Direction v2</div>
+<p class="page-sub">Reads like a message. Red for injuries. Everything else is just text.</p>
+
+<div class="section">
+  <div class="section-title">White Belt Scenarios</div>
+
+  <div class="row">
+
+    <!-- White: Week 1, first insight -->
+    <div class="col">
+      <div class="col-label">Week 1 -- First Insight</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">3 sessions this week</div></div>
+        <div class="sc">
+          <div class="week-header">Mar 24 - 30</div>
+
+          <div class="msg">Three classes this week, right at your target. At this stage, showing up IS the progress. The rest follows.</div>
+
+          <div class="msg">You drilled hip escapes in two of three sessions. That repetition is the point -- your body is memorizing a movement that shows up everywhere in jiu jitsu. It won't feel natural yet. It will.</div>
+
+          <div class="msg-focus">
+            <span class="label">This week, try this</span>
+            During sparring, count how many times you get back to guard after being passed. That number is your real progress metric right now.
+          </div>
+
+          <div class="msg-signoff">Your coach knows your game better than any app.</div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- White: Week 4, milestone -->
+    <div class="col">
+      <div class="col-label">Week 4 -- 10 Sessions</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">10 sessions total</div></div>
+        <div class="sc">
+          <div class="week-header">Apr 14 - 20</div>
+
+          <div class="msg"><strong>10 sessions in the books.</strong> You've been to more classes than most people who sign up. This is when it starts to feel less foreign.</div>
+
+          <div class="msg">Third week of guard work. The hip escapes are becoming automatic -- you recovered guard twice on Saturday after getting passed. That doesn't happen by accident.</div>
+
+          <div class="msg-focus">
+            <span class="label">This week, try this</span>
+            When you feel an armbar grip tighten, try pulling your elbow toward your hip before they extend. You'll get it wrong at first. That's fine.
+          </div>
+
+          <div class="msg-signoff">Your coach knows your game better than any app.</div>
+
+          <div style="margin-top:20px;">
+            <div class="week-header" style="margin-bottom:8px;">Earlier</div>
+            <div class="older"><div class="older-left"><span class="older-date">Apr 7 - 13</span></div><span class="older-chev">&#8250;</span></div>
+            <div class="older"><div class="older-left"><span class="older-date">Mar 31 - Apr 6</span></div><span class="older-chev">&#8250;</span></div>
+            <div class="older"><div class="older-left"><span class="older-date">Mar 24 - 30</span></div><span class="older-chev">&#8250;</span></div>
+          </div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- White: Rough week -->
+    <div class="col">
+      <div class="col-label">Week 8 -- Ego Hit</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">2 sessions this week</div></div>
+        <div class="sc">
+          <div class="week-header">Jun 2 - 8</div>
+
+          <div class="msg">Getting tapped by someone smaller is one of the most common experiences in jiu jitsu. It has nothing to do with strength -- they just have more pattern recognition right now. That gap closes with mat time.</div>
+
+          <div class="msg">2 sessions on a week that didn't feel great. A lot of people skip the week after a hard one. You didn't.</div>
+
+          <div class="msg-focus">
+            <span class="label">This week, try this</span>
+            Try to get back to three. And when you spar, pick one thing to focus on -- like keeping your elbows tight -- instead of trying to win the round.
+          </div>
+
+          <div class="msg-signoff">Your coach knows your game better than any app.</div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- White: Injury -->
+    <div class="col">
+      <div class="col-label">Week 10 -- Injury</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">3 sessions this week</div></div>
+        <div class="sc">
+          <div class="week-header">Jun 16 - 22</div>
+
+          <div class="msg-watch">
+            You mentioned rib soreness again this week. That's two weeks in a row. Training through it can turn a two-week thing into a two-month thing.
+            <span class="defer">Worth talking to your coach about modifying while it heals.</span>
+          </div>
+
+          <div class="msg">Still got 3 sessions in despite the discomfort. Dialing back sparring intensity was smart -- staying on the mats at 60% beats being off them completely.</div>
+
+          <div class="msg-focus">
+            <span class="label">This week, try this</span>
+            If the ribs are still bothering you, ask your coach if you can drill without live sparring for a week. The mat time still counts.
+          </div>
+
+          <div class="msg-signoff">Your coach knows your game better than any app.</div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section">
+  <div class="section-title">Blue Belt Scenarios</div>
+
+  <div class="row">
+
+    <!-- Blue: Game forming -->
+    <div class="col">
+      <div class="col-label">Month 4 -- Techniques Connecting</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">4 sessions, 12 rounds</div></div>
+        <div class="sc">
+          <div class="week-header">Apr 7 - 13</div>
+
+          <div class="msg"><strong>SLX into heel hook entries, with k-guard as the backup when the finish isn't there.</strong> These techniques are starting to talk to each other. Three heel hooks in sparring says the reps are translating.</div>
+
+          <div class="msg">2 gi, 2 nogi. The nogi sessions are where your leg work gets reps. Gi is forcing you to solve different problems. Both matter.</div>
+
+          <div class="msg-watch">
+            Guillotined twice this week. Your head position on guard pulls might be the common thread.
+            <span class="defer">Worth paying attention to where your head is right before you get caught.</span>
+          </div>
+
+          <div class="msg-focus">
+            <span class="label">This week, try this</span>
+            Spend 5 minutes each open mat drilling guillotine defense from the positions where you keep getting caught. You already know which ones.
+          </div>
+
+          <div class="msg-signoff">Your coach knows your game better than any app.</div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blue: Plateau -->
+    <div class="col">
+      <div class="col-label">Month 8 -- Plateau</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">3 sessions, 8 rounds</div></div>
+        <div class="sc">
+          <div class="week-header">Nov 3 - 9</div>
+
+          <div class="msg">Half guard, closed guard, arm drags -- same core as last month. That's not stagnation at blue belt. That's your game getting more refined. New techniques are exciting but depth in your existing game is what works under pressure.</div>
+
+          <div class="msg">Similar submission count, similar rounds. The learning curve flattens at blue and progress becomes invisible. "Not improving" and "improving in ways you can't measure week to week" look identical from the inside.</div>
+
+          <div class="msg-focus">
+            <span class="label">This week, try this</span>
+            Next open mat, start every round from your worst position. If you survive longer than you did two months ago, that's progress the numbers won't show you.
+          </div>
+
+          <div class="msg-signoff">Your coach knows your game better than any app.</div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blue: Ego check + injury -->
+    <div class="col">
+      <div class="col-label">Month 14 -- Knee + Overtraining</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">5 sessions, 16 rounds</div></div>
+        <div class="sc">
+          <div class="week-header">Feb 17 - 23</div>
+
+          <div class="msg-watch">
+            Left knee mentioned in two sessions this week, and it came up last week too. That's three weeks. Training through joint pain at this volume is how short-term issues become long-term problems.
+            <span class="defer">Talk to your coach about whether your heel hook defense mechanics need adjusting, or if you need to dial back the leg entanglement work temporarily.</span>
+          </div>
+
+          <div class="msg">That submission on a purple belt isn't a fluke at 280 sessions. Your game is reaching a level where belt color matters less than position and timing.</div>
+
+          <div class="msg">5 sessions, 16 rounds. That's high volume. If the knee weren't an issue, this would be a strong week. But the knee IS an issue -- and 5 sessions might be why.</div>
+
+          <div class="msg-focus">
+            <span class="label">This week, try this</span>
+            Drop to 3-4 sessions and cut the nogi leg entanglement rounds until the knee settles. Your game will still be there when you come back to it.
+          </div>
+
+          <div class="msg-signoff">Your coach knows your game better than any app.</div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blue: Ego check -->
+    <div class="col">
+      <div class="col-label">Month 6 -- Caught by White Belt</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">3 sessions, 8 rounds</div></div>
+        <div class="sc">
+          <div class="week-header">Sep 8 - 14</div>
+
+          <div class="msg">Getting caught by a white belt stings at blue. But it happens to everyone -- including purple belts who won't admit it. The triangle they caught you with tells you something about your posture in their guard. That's useful information.</div>
+
+          <div class="msg">No passing work logged in two weeks. If that's intentional -- maybe you're shoring up the bottom game -- fine. But if you stopped because you're avoiding top positions, that's worth noticing.</div>
+
+          <div class="msg-focus">
+            <span class="label">This week, try this</span>
+            Start one roll from standing or top position. Get back to passing. The worst thing that happens is you end up in their guard again -- and you already know how to play there.
+          </div>
+
+          <div class="msg-signoff">Your coach knows your game better than any app.</div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section">
+  <div class="section-title">Over Time -- Reading Weeks in Sequence</div>
+  <div class="section-desc">Each week opens differently. No name repetition. The opener varies based on what happened.</div>
+
+  <div style="max-width:340px; background:var(--black); border-radius:16px; border:1px solid #333; padding:24px 20px;">
+
+    <div class="week-header">Apr 14 - 20</div>
+    <div class="msg" style="font-size:14px; margin-bottom:24px; opacity:0.5;">10 sessions in the books. You've been to more classes than most people who sign up...</div>
+
+    <div class="week-header">Apr 7 - 13</div>
+    <div class="msg" style="font-size:14px; margin-bottom:24px; opacity:0.5;">Solid week. Three sessions, all guard work. The closed guard sweeps are getting smoother...</div>
+
+    <div class="week-header">Mar 31 - Apr 6</div>
+    <div class="msg" style="font-size:14px; margin-bottom:24px; opacity:0.5;">Scissor sweep showed up for the first time this week. You're expanding beyond guard recovery into offense...</div>
+
+    <div class="week-header">Mar 24 - 30</div>
+    <div class="msg" style="font-size:14px; margin-bottom:0; opacity:0.5;">Three classes this week, right at your target. At this stage, showing up IS the progress...</div>
+
+  </div>
+
+  <div class="note-box" style="margin-top:16px; max-width:340px;">
+    <div class="note-label">Opener Variety</div>
+    <p>Each week leads with whatever is most noteworthy -- a milestone, a technique observation, a consistency note, or a direct response to their own words. Never the same structure twice in a row. Never starts with their name unless it's the first insight they've ever received.</p>
+  </div>
+</div>
+
+<div class="note-box" style="max-width:1200px; margin-top:40px;">
+  <div class="note-label">Output Schema (Simplified)</div>
+  <p style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#525252; margin-top:8px;">
+    { paragraphs: [<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{ text: "...", isWatch: false },<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{ text: "...", isWatch: false },<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{ text: "...", isWatch: true, defer: "Talk to your coach about..." }<br>
+    &nbsp;&nbsp;],<br>
+    &nbsp;&nbsp;focusNext: "..." }
+  </p>
+  <p style="margin-top:8px;">Simple array of paragraphs. Each is just text. The only visual differentiation is `isWatch: true` which gets the red left border. Everything else renders as plain message text. Bold is applied inline via markdown-style markers in the text. The focus recommendation is always last, separated by a line.</p>
+</div>
+
+<div class="footer">TOMO -- Visual Direction v2 -- March 30, 2026</div>
+
+</body>
+</html>

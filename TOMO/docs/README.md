@@ -10,6 +10,9 @@
 
 | I need to... | Go to... |
 |--------------|----------|
+| See what we're building next | `features/` (prioritized backlog + feature subfolders) |
+| Check bugs and polish items | `mvp-1.0/tracking/ISSUES.md` |
+| See what shipped recently | `mvp-1.0/tracking/CHANGELOG.md` |
 | Understand the product philosophy | `FIRST_PRINCIPLES.md` |
 | Learn how to use these docs | `DOCS_GUIDE.md` |
 | Understand user personas | `personas/` |
@@ -32,6 +35,9 @@ docs/
 ├── DOCS_GUIDE.md                    # Guide for using this knowledge base
 ├── README.md                    # This file - master index
 │
+├── features/                    # ACTIVE: Feature backlog + major feature subfolders
+│   └── experience-intake/       # FEAT-001: Experience Intake (P1, exploring)
+├── mvp-1.0/tracking/            # ACTIVE: ISSUES.md (bugs) + CHANGELOG.md (shipped)
 ├── brand/                       # Voice, tone, philosophy
 ├── data-and-ai/                 # Data capture, AI strategy & visualization
 ├── deployment/                  # iOS TestFlight plans
@@ -151,6 +157,15 @@ Request for Proposal documents, development contracts, and business-facing docum
 | Stats Page Design Guide | `design-system/stats-page-design-guide.html` | Active |
 | Stats Module Strategy | `product/STATS_MODULE_STRATEGY.md` | Active |
 | Infographic Strategy | `data-and-ai/INFOGRAPHIC_STRATEGY.md` | Active |
+
+### Features & Planning
+
+| Document | Location | Status |
+|----------|----------|--------|
+| **Features Backlog** | `features/README.md` | **Active** |
+| **Experience Intake** | `features/experience-intake/` | **Active** (Exploring) |
+| Bugs & Polish | `mvp-1.0/tracking/ISSUES.md` | **Active** |
+| Session Changelog | `mvp-1.0/tracking/CHANGELOG.md` | **Active** |
 
 ### Product
 

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights -- Visual Element Exploration</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#0a0a0a; color:#e5e5e5; padding:40px 20px 80px; }
+
+  :root {
+    --black: #111111; --white: #ffffff; --gold: #F5A623;
+    --goldDim: rgba(245,166,35,0.15); --goldUltraDim: rgba(245,166,35,0.04);
+    --positive: #22c55e; --positiveDim: rgba(34,197,94,0.15);
+    --negative: #ef4444; --negativeDim: rgba(239,68,68,0.15);
+    --info: #3b82f6; --infoDim: rgba(59,130,246,0.15);
+    --gray300: #d4d4d4; --gray400: #c4c4c4; --gray500: #a3a3a3;
+    --gray600: #8a8a8a; --gray700: #4a4a4a; --gray800: #1f1f1f;
+  }
+
+  .page-title { text-align:center; font-size:22px; font-weight:700; color:var(--gold); margin-bottom:4px; }
+  .page-sub { text-align:center; font-size:12px; color:#525252; margin-bottom:40px; }
+
+  .section { max-width:1200px; margin:0 auto 56px; }
+  .section-title { font-size:16px; font-weight:700; color:#fff; margin-bottom:4px; }
+  .section-desc { font-size:12px; color:#525252; margin-bottom:20px; max-width:600px; }
+
+  .row { display:flex; gap:24px; overflow-x:auto; padding-bottom:16px; }
+  .col { flex-shrink:0; }
+  .col-label { font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:#404040; margin-bottom:8px; text-align:center; }
+
+  .phone { width:300px; height:580px; background:var(--black); border-radius:32px; border:2px solid #333; overflow:hidden; display:flex; flex-direction:column; }
+  .sb { height:52px; padding:14px 24px 0; display:flex; justify-content:space-between; align-items:center; flex-shrink:0; }
+  .sb-time { font-size:15px; font-weight:700; color:#fff; }
+  .sb-dots { display:flex; gap:3px; }
+  .sb-dot { width:4px; height:4px; background:#fff; border-radius:50%; }
+  .sh { padding:4px 24px 8px; flex-shrink:0; }
+  .sh-title { font-size:28px; font-weight:800; color:#fff; letter-spacing:-0.5px; }
+  .sh-sub { font-size:13px; font-weight:500; color:var(--gray500); margin-top:2px; }
+  .sc { flex:1; overflow-y:auto; padding:0 16px 20px; }
+  .sc::-webkit-scrollbar { width:0; }
+
+  /* Tab bar */
+  .tb { height:72px; background:#1a1a1a; border-top:1px solid #222; display:flex; align-items:flex-start; justify-content:space-around; padding:8px 12px 24px; flex-shrink:0; }
+  .t { display:flex; flex-direction:column; align-items:center; gap:3px; opacity:0.4; }
+  .t.active { opacity:1; }
+  .t-label { font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--gray500); }
+  .t.active .t-label { color:var(--gold); }
+  .log-btn { width:56px; height:56px; background:var(--gold); border-radius:28px; margin-top:-24px; display:flex; align-items:center; justify-content:center; }
+
+  .divider { border:none; border-top:1px solid #1a1a1a; margin:48px auto; max-width:1200px; }
+
+  /* ===== VISUAL ELEMENT STYLES ===== */
+
+  /* Greeting / address line */
+  .greeting { padding:16px 8px 4px; }
+  .greeting-text { font-size:15px; font-weight:500; color:var(--gray400); line-height:22px; }
+  .greeting-name { color:var(--gold); font-weight:600; }
+  .greeting-week { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--gray600); margin-top:4px; letter-spacing:0.5px; }
+
+  /* Observation card -- the main insight type */
+  .obs { background:var(--gray800); border-radius:8px; padding:16px; margin-bottom:10px; border-left:3px solid var(--gray700); }
+  .obs-label { font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--gray600); margin-bottom:8px; }
+  .obs-body { font-size:15px; font-weight:500; color:var(--gray300); line-height:24px; }
+
+  /* Highlight card -- for the key observation, the "lead" */
+  .highlight { background:var(--gray800); border-radius:8px; padding:20px; margin-bottom:10px; border-left:3px solid var(--gold); }
+  .highlight-body { font-size:17px; font-weight:600; color:var(--white); line-height:26px; }
+  .highlight-context { font-size:13px; font-weight:500; color:var(--gray500); margin-top:8px; line-height:20px; }
+
+  /* Watch/alert card -- for risk items */
+  .watch { background:rgba(239,68,68,0.04); border-radius:8px; padding:16px; margin-bottom:10px; border-left:3px solid var(--negative); }
+  .watch-label { font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--negative); margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+  .watch-dot { width:6px; height:6px; border-radius:50%; background:var(--negative); }
+  .watch-body { font-size:15px; font-weight:500; color:var(--gray300); line-height:24px; }
+  .watch-action { font-size:13px; font-weight:500; color:var(--gray500); margin-top:8px; font-style:italic; }
+
+  /* Milestone -- minimal, inline, doesn't need a full card */
+  .milestone { display:flex; align-items:center; gap:10px; padding:12px 8px; margin-bottom:10px; }
+  .milestone-num { font-family:'JetBrains Mono',monospace; font-size:28px; font-weight:700; color:var(--gold); line-height:1; min-width:48px; text-align:right; }
+  .milestone-text { font-size:15px; font-weight:500; color:var(--gray400); line-height:22px; }
+
+  /* Focus card -- distinct from observations */
+  .focus { background:var(--goldUltraDim); border:1px solid rgba(245,166,35,0.12); border-radius:8px; padding:16px; margin-top:16px; margin-bottom:10px; }
+  .focus-label { font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+  .focus-body { font-size:15px; font-weight:500; color:var(--gray300); line-height:24px; }
+
+  /* Signoff */
+  .signoff { padding:20px 8px 8px; text-align:center; }
+  .signoff-line { width:32px; height:2px; background:var(--gray700); margin:0 auto 12px; border-radius:1px; }
+  .signoff-text { font-size:13px; font-weight:500; color:var(--gray600); line-height:20px; }
+
+  /* Sparring callout -- for submission/sparring data */
+  .spar { background:var(--gray800); border-radius:8px; padding:16px; margin-bottom:10px; display:flex; gap:14px; align-items:flex-start; border-left:3px solid var(--positive); }
+  .spar-stat { flex-shrink:0; text-align:center; min-width:44px; }
+  .spar-num { font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:700; color:var(--positive); line-height:1; }
+  .spar-unit { font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:600; color:var(--gray600); text-transform:uppercase; letter-spacing:1px; margin-top:2px; }
+  .spar-body { font-size:15px; font-weight:500; color:var(--gray300); line-height:24px; }
+
+  /* Technique tag cluster */
+  .tags { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+  .tag { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; color:var(--info); background:var(--infoDim); padding:4px 10px; border-radius:4px; }
+
+  /* Note style */
+  .note-box { background:rgba(255,255,255,0.02); border:1px solid #1a1a1a; border-radius:6px; padding:12px 16px; margin-top:20px; max-width:1200px; margin-left:auto; margin-right:auto; }
+  .note-label { font-size:10px; font-weight:600; color:#404040; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+  .note-box p { font-size:11px; color:#333; line-height:1.6; margin-bottom:4px; }
+  .note-box p:last-child { margin-bottom:0; }
+
+  .footer { text-align:center; color:#262626; font-size:11px; margin-top:64px; }
+</style>
+</head>
+<body>
+
+<div class="page-title">Visual Element Exploration</div>
+<p class="page-sub">Moving from "data dashboard" to "personal debrief" -- same content, different feel</p>
+
+<!-- ===== COMPARISON: FLAT vs PERSONAL ===== -->
+<div class="section">
+  <div class="section-title">Side by Side: Dashboard vs. Debrief</div>
+  <div class="section-desc">Left is what we had. Right is how it could feel -- like someone who knows your training sat down and wrote you a note.</div>
+
+  <div class="row">
+
+    <!-- BEFORE: Flat dashboard -->
+    <div class="col">
+      <div class="col-label">Before -- Flat Cards</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">Based on 10 sessions</div></div>
+        <div class="sc">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gray500); margin:16px 0 8px; display:flex; align-items:center; gap:8px;">This Week<span style="flex:1; height:1px; background:var(--gray700);"></span></div>
+
+          <div style="background:var(--gray800); border-radius:8px; border:1px solid var(--gray700); padding:16px; margin-bottom:8px;">
+            <div style="display:flex; gap:6px; margin-bottom:4px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:600; text-transform:uppercase; padding:3px 8px; border-radius:999px; background:var(--goldDim); color:var(--gold);">Milestone</span></div>
+            <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:2px;">10 Sessions</div>
+            <div style="font-size:15px; font-weight:500; color:var(--gray400); line-height:22px;">Double digits. You've been to more classes than most people who sign up.</div>
+          </div>
+          <div style="background:var(--gray800); border-radius:8px; border:1px solid var(--gray700); padding:16px; margin-bottom:8px;">
+            <div style="display:flex; gap:6px; margin-bottom:4px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:600; text-transform:uppercase; padding:3px 8px; border-radius:999px; background:var(--infoDim); color:var(--info);">Technique</span></div>
+            <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:2px;">Guard Work Is Adding Up</div>
+            <div style="font-size:15px; font-weight:500; color:var(--gray400); line-height:22px;">Third week drilling hip escapes and closed guard.</div>
+          </div>
+          <div style="background:var(--gray800); border-radius:8px; border:1px solid var(--gray700); padding:16px; margin-bottom:8px;">
+            <div style="display:flex; gap:6px; margin-bottom:4px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:600; text-transform:uppercase; padding:3px 8px; border-radius:999px; background:var(--goldDim); color:var(--gold);">Consistency</span></div>
+            <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:2px;">Hit Your Number</div>
+            <div style="font-size:15px; font-weight:500; color:var(--gray400); line-height:22px;">3 for 3 again this week.</div>
+          </div>
+          <div style="margin-top:8px; padding-top:8px; border-top:1px solid var(--gray700);">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:4px;">Focus Next Week</div>
+            <div style="font-size:15px; font-weight:500; color:var(--gray300); line-height:22px;">When you feel an armbar grip tighten, try pulling your elbow toward your hip.</div>
+          </div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AFTER: Personal debrief -->
+    <div class="col">
+      <div class="col-label">After -- Personal Debrief</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">Week of Apr 14 - 20</div></div>
+        <div class="sc">
+          <div class="greeting">
+            <div class="greeting-text"><span class="greeting-name">Drew</span>, here's your week.</div>
+          </div>
+
+          <div class="milestone">
+            <div class="milestone-num">10</div>
+            <div class="milestone-text">sessions in the books. You've been to more classes than most people who sign up. This is when it starts to feel less foreign.</div>
+          </div>
+
+          <div class="highlight">
+            <div class="highlight-body">Third week of guard work. The hip escapes are becoming automatic -- you recovered guard twice on Saturday after getting passed.</div>
+            <div class="highlight-context">That doesn't happen by accident. The reps are compounding.</div>
+          </div>
+
+          <div class="obs">
+            <div class="obs-label">This week</div>
+            <div class="obs-body">3 sessions at your target, all gi classes. Closed guard and hip escapes again -- that repetition is building a foundation everything else stands on.</div>
+            <div class="tags">
+              <span class="tag">hip escapes</span>
+              <span class="tag">closed guard</span>
+              <span class="tag">guard recovery</span>
+            </div>
+          </div>
+
+          <div class="focus">
+            <div class="focus-label">This week, try this</div>
+            <div class="focus-body">When you feel an armbar grip tighten during sparring, pull your elbow toward your hip before they extend. You'll get it wrong at first. That's fine.</div>
+          </div>
+
+          <div class="signoff">
+            <div class="signoff-line"></div>
+            <div class="signoff-text">Your coach knows your game better than any app.</div>
+          </div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note-box">
+    <div class="note-label">What Changed</div>
+    <p>The content is nearly identical. What's different is the framing: a personal greeting, a milestone that uses the number as a visual anchor instead of a badge, a highlighted lead observation with supporting context below it, technique tags that feel like your training log, a focus recommendation that reads like advice from a friend, and a signoff instead of a footer disclaimer.</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== ELEMENT CATALOG ===== -->
+<div class="section">
+  <div class="section-title">Visual Element Catalog</div>
+  <div class="section-desc">Six distinct card types that create rhythm and hierarchy. Not every insight is equal -- the visual treatment should reflect that.</div>
+
+  <div class="row">
+
+    <!-- White belt full debrief -->
+    <div class="col">
+      <div class="col-label">White Belt -- Good Week</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">Week of Mar 24 - 30</div></div>
+        <div class="sc">
+          <div class="greeting">
+            <div class="greeting-text"><span class="greeting-name">Jake</span>, three sessions this week.</div>
+          </div>
+
+          <div class="highlight">
+            <div class="highlight-body">You drilled hip escapes in two of three sessions. Your body is memorizing a movement that shows up everywhere in jiu jitsu.</div>
+            <div class="highlight-context">It won't feel natural yet. It will.</div>
+          </div>
+
+          <div class="obs">
+            <div class="obs-label">Consistency</div>
+            <div class="obs-body">Right at your target. At this stage, showing up IS the progress. The technique work follows the habit -- not the other way around.</div>
+          </div>
+
+          <div class="focus">
+            <div class="focus-label">This week, try this</div>
+            <div class="focus-body">During sparring, count how many times you get back to guard after being passed. That number is your real progress metric right now.</div>
+          </div>
+
+          <div class="signoff">
+            <div class="signoff-line"></div>
+            <div class="signoff-text">Your coach knows your game better than any app.</div>
+          </div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- White belt with injury -->
+    <div class="col">
+      <div class="col-label">White Belt -- Injury Flag</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">Week of Jun 16 - 22</div></div>
+        <div class="sc">
+          <div class="greeting">
+            <div class="greeting-text"><span class="greeting-name">Jake</span>, still showing up.</div>
+          </div>
+
+          <div class="watch">
+            <div class="watch-label"><span class="watch-dot"></span> Heads Up</div>
+            <div class="watch-body">You mentioned rib soreness again this week. That's two weeks in a row. Training through it can turn a two-week thing into a two-month thing.</div>
+            <div class="watch-action">Worth talking to your coach about modifying while it heals.</div>
+          </div>
+
+          <div class="obs">
+            <div class="obs-label">Training Through It</div>
+            <div class="obs-body">3 sessions despite the discomfort. You dialed back sparring intensity -- smart. Staying on the mats at 60% beats being off them completely.</div>
+          </div>
+
+          <div class="focus">
+            <div class="focus-label">This week, try this</div>
+            <div class="focus-body">If the ribs are still bothering you, ask your coach if you can drill without live sparring for a week. The mat time still counts.</div>
+          </div>
+
+          <div class="signoff">
+            <div class="signoff-line"></div>
+            <div class="signoff-text">Your coach knows your game better than any app.</div>
+          </div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blue belt with sparring stats -->
+    <div class="col">
+      <div class="col-label">Blue Belt -- Sparring Data</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">Week of Apr 7 - 13</div></div>
+        <div class="sc">
+          <div class="greeting">
+            <div class="greeting-text"><span class="greeting-name">Marcus</span>, busy week.</div>
+          </div>
+
+          <div class="highlight">
+            <div class="highlight-body">SLX into heel hook entries, with k-guard as the backup. These techniques are starting to talk to each other.</div>
+            <div class="highlight-context">Three heel hooks in sparring says the reps are translating.</div>
+          </div>
+
+          <div class="spar">
+            <div class="spar-stat">
+              <div class="spar-num">12</div>
+              <div class="spar-unit">rounds</div>
+            </div>
+            <div class="spar-body">2 gi, 2 nogi. The nogi sessions are where your leg work gets reps. Gi is forcing you to solve different problems.</div>
+          </div>
+
+          <div class="watch">
+            <div class="watch-label"><span class="watch-dot"></span> Heads Up</div>
+            <div class="watch-body">Guillotined twice this week. Your head position on guard pulls might be the leak.</div>
+            <div class="watch-action">Worth paying attention to where your head is right before you get caught.</div>
+          </div>
+
+          <div class="obs">
+            <div class="obs-label">Techniques this week</div>
+            <div class="tags">
+              <span class="tag">single leg x</span>
+              <span class="tag">heel hook entry</span>
+              <span class="tag">k-guard</span>
+              <span class="tag">kiss of the dragon</span>
+            </div>
+          </div>
+
+          <div class="focus">
+            <div class="focus-label">This week, try this</div>
+            <div class="focus-body">Spend 5 minutes each open mat drilling guillotine defense from the positions where you keep getting caught. You already know which ones.</div>
+          </div>
+
+          <div class="signoff">
+            <div class="signoff-line"></div>
+            <div class="signoff-text">Your coach knows your game better than any app.</div>
+          </div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blue belt plateau / ego -->
+    <div class="col">
+      <div class="col-label">Blue Belt -- Plateau</div>
+      <div class="phone">
+        <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+        <div class="sh"><div class="sh-title">Insights</div><div class="sh-sub">Week of Nov 3 - 9</div></div>
+        <div class="sc">
+          <div class="greeting">
+            <div class="greeting-text"><span class="greeting-name">Marcus</span>, honest week.</div>
+          </div>
+
+          <div class="highlight">
+            <div class="highlight-body">Getting caught by a lower belt stings at blue. It happens to everyone -- including purple belts who won't admit it.</div>
+            <div class="highlight-context">The triangle tells you something about your posture in their guard. That's data, not a failure.</div>
+          </div>
+
+          <div class="obs">
+            <div class="obs-label">The Bigger Picture</div>
+            <div class="obs-body">Half guard, closed guard, arm drags -- same core as last month. That's not stagnation. That's your game getting more refined. Depth in existing techniques is what works under pressure.</div>
+          </div>
+
+          <div class="spar">
+            <div class="spar-stat">
+              <div class="spar-num">8</div>
+              <div class="spar-unit">rounds</div>
+            </div>
+            <div class="spar-body">Guard passing hasn't shown up in two weeks. If that's intentional, fine. If not, worth noticing.</div>
+          </div>
+
+          <div class="focus">
+            <div class="focus-label">This week, try this</div>
+            <div class="focus-body">Start one roll from standing or top position. Get back to passing. The worst thing that happens is you end up in their guard again.</div>
+          </div>
+
+          <div class="signoff">
+            <div class="signoff-line"></div>
+            <div class="signoff-text">Your coach knows your game better than any app.</div>
+          </div>
+        </div>
+        <div class="tb">
+          <div class="t"><span class="t-label">Journal</span></div>
+          <div class="t"><div class="log-btn"></div></div>
+          <div class="t active"><span class="t-label">Insights</span></div>
+          <div class="t"><span class="t-label">Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== ELEMENT BREAKDOWN ===== -->
+<div class="section">
+  <div class="section-title">The Six Elements</div>
+  <div class="section-desc">Each has a distinct job in the debrief.</div>
+
+  <div style="max-width:680px; display:flex; flex-direction:column; gap:24px;">
+
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+      <div style="width:120px; flex-shrink:0;">
+        <div class="greeting" style="padding:8px;">
+          <div class="greeting-text" style="font-size:13px;"><span class="greeting-name">Name</span>, ...</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:14px; font-weight:600; color:#fff; margin-bottom:4px;">1. Greeting</div>
+        <div style="font-size:13px; color:var(--gray500); line-height:1.6;">Opens with their name + a one-line read on the week. Sets the tone. "Drew, busy week." / "Jake, still showing up." / "Marcus, honest week." This is the sports psych talking directly to them.</div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+      <div style="width:120px; flex-shrink:0;">
+        <div class="highlight" style="padding:10px; margin:0;">
+          <div style="font-size:12px; font-weight:600; color:#fff;">Lead insight</div>
+          <div style="font-size:10px; color:var(--gray500); margin-top:2px;">Context below</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:14px; font-weight:600; color:#fff; margin-bottom:4px;">2. Highlight Card</div>
+        <div style="font-size:13px; color:var(--gray500); line-height:1.6;">The lead observation. Gold left border. Larger text. The one thing TOMO most wants them to know this week. Below it, a quieter context line that connects the observation to their journey.</div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+      <div style="width:120px; flex-shrink:0;">
+        <div class="obs" style="padding:10px; margin:0;">
+          <div class="obs-label" style="font-size:8px; margin-bottom:4px;">Observation</div>
+          <div style="font-size:10px; color:var(--gray400);">Supporting detail...</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:14px; font-weight:600; color:#fff; margin-bottom:4px;">3. Observation Card</div>
+        <div style="font-size:13px; color:var(--gray500); line-height:1.6;">Secondary observations. Gray left border. Quieter than the highlight. For consistency notes, technique summaries, training patterns. Can include technique tags.</div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+      <div style="width:120px; flex-shrink:0;">
+        <div class="watch" style="padding:10px; margin:0;">
+          <div class="watch-label" style="font-size:8px; margin-bottom:4px;"><span class="watch-dot" style="width:4px; height:4px;"></span> Heads Up</div>
+          <div style="font-size:10px; color:var(--gray400);">Injury or concern...</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:14px; font-weight:600; color:#fff; margin-bottom:4px;">4. Watch Card</div>
+        <div style="font-size:13px; color:var(--gray500); line-height:1.6;">For injuries, overtraining signals, or vulnerability patterns. Red left border + subtle red background tint. Red dot next to "Heads Up" label. Italic action line at the bottom always defers to coach/doctor.</div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+      <div style="width:120px; flex-shrink:0;">
+        <div class="spar" style="padding:10px; margin:0; gap:8px;">
+          <div class="spar-stat" style="min-width:32px;">
+            <div class="spar-num" style="font-size:16px;">12</div>
+            <div class="spar-unit" style="font-size:7px;">rnds</div>
+          </div>
+          <div style="font-size:10px; color:var(--gray400);">Sparring data</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:14px; font-weight:600; color:#fff; margin-bottom:4px;">5. Sparring Card</div>
+        <div style="font-size:13px; color:var(--gray500); line-height:1.6;">For sparring-specific observations. Green left border. Large number stat on the left (rounds, submissions). Body text on the right. Only for blue belts and up -- white belts don't get sparring stats quantified.</div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+      <div style="width:120px; flex-shrink:0;">
+        <div class="milestone" style="padding:4px 0; margin:0; gap:6px;">
+          <div class="milestone-num" style="font-size:20px; min-width:32px;">50</div>
+          <div style="font-size:10px; color:var(--gray400);">Milestone text</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:14px; font-weight:600; color:#fff; margin-bottom:4px;">6. Milestone</div>
+        <div style="font-size:13px; color:var(--gray500); line-height:1.6;">No card background. Just a large gold number + text. Minimal. The number itself is the visual anchor. For session counts (10, 25, 50, 100, 200), streaks, or anniversaries. Feels earned, not gamified.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="note-box" style="max-width:1200px;">
+  <div class="note-label">How This Changes the Prompt Output</div>
+  <p>The current edge function outputs `{ insights: [{type, title, body}], focusNext }`. To support these visual elements, the output schema would expand to:</p>
+  <p style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#525252; margin-top:8px;">
+    { greeting: "Drew, busy week.",<br>
+    &nbsp;&nbsp;highlight: { body: "...", context: "..." },<br>
+    &nbsp;&nbsp;observations: [{ label: "...", body: "...", techniques?: [...] }],<br>
+    &nbsp;&nbsp;watch?: { body: "...", action: "..." },<br>
+    &nbsp;&nbsp;sparring?: { stat: 12, unit: "rounds", body: "..." },<br>
+    &nbsp;&nbsp;milestone?: { number: 50, body: "..." },<br>
+    &nbsp;&nbsp;focusNext: "..." }
+  </p>
+  <p style="margin-top:8px;">Each field is optional. The screen renders whichever elements the prompt returns. A quiet week might only have a greeting + one observation + focusNext. A big week gets all six.</p>
+</div>
+
+<div class="footer">TOMO -- Visual Element Exploration -- March 30, 2026</div>
+
+</body>
+</html>

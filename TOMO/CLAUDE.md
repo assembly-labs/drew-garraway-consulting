@@ -6,12 +6,14 @@
 
 > **Every Claude Code session that modifies code MUST update the tracking files before finishing.**
 
-**Location:** `docs/mvp-1.0/tracking/`
+**Location:** `docs/mvp-1.0/tracking/` (bugs + changelog) and `docs/features/` (planned features)
 
 | File | Purpose |
 |------|---------|
 | `CHANGELOG.md` | What changed, why, and how it was verified |
 | `ISSUES.md` | Active bugs, blockers, and feature requests |
+| `docs/features/README.md` | **Features backlog** - prioritized list of planned features |
+| `docs/features/<name>/` | Major feature subfolders (strategy, spec, tasks) |
 
 ### At the END of every session:
 
@@ -34,10 +36,11 @@ A full UX audit was conducted on 2026-03-28. Findings are in `ISSUES.md` under "
 **When picking work, follow this order:**
 1. DA- items (P0/P1 first, then P2)
 2. DS- items (design system gaps)
-3. Existing CR-/UX-/INS- items (paused until DA/DS resolved or Drew says otherwise)
-4. P3 polish
+3. Features backlog (`docs/features/README.md`) - FEAT- items by priority
+4. Existing CR-/UX-/INS- items (paused until DA/DS resolved or Drew says otherwise)
+5. P3 polish
 
-This priority override stays in effect until Drew removes it or all DA-/DS- items are resolved.
+DA/DS priority override stays in effect until Drew removes it or all DA-/DS- items are resolved. The features backlog is the source of truth for planned work beyond bug fixes.
 
 ---
 

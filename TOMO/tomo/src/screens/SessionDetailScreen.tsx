@@ -32,7 +32,7 @@ import { SessionDetailSkeleton } from '../components/Skeleton';
 import { useToast } from '../components/Toast';
 import { sessionService, audioService, profileService } from '../services/supabase';
 import { userGymService } from '../services/userGymService';
-import { generateNarrativeSummary } from '../utils/journal-helpers';
+
 import type { Session, SessionUpdate, TrainingMode, SessionKind, Submission } from '../types/mvp-types';
 import { haptics } from '../utils/haptics';
 
@@ -48,7 +48,7 @@ export function SessionDetailScreen({ route, navigation }: Props) {
   const [loading, setLoading] = useState(true);
   const [editSheet, setEditSheet] = useState<string | null>(null);
   const [showTranscript, setShowTranscript] = useState(false);
-  const [showNarrative, setShowNarrative] = useState(true);
+
   const [gymName, setGymName] = useState<string | null>(null);
   const { showToast } = useToast();
 
@@ -159,8 +159,6 @@ export function SessionDetailScreen({ route, navigation }: Props) {
   const modeLabel = session.training_mode === 'nogi' ? 'No-Gi' : session.training_mode === 'gi' ? 'Gi' : session.training_mode === 'other' ? 'Other' : '';
   const kindLabel = session.session_kind === 'open_mat' ? 'Open Mat' : session.session_kind ? session.session_kind.charAt(0).toUpperCase() + session.session_kind.slice(1) : '';
   const modeColor = session.training_mode === 'gi' ? colors.trainingGi : session.training_mode === 'nogi' ? colors.trainingNogi : colors.gray500;
-  const narrative = generateNarrativeSummary(session);
-
   const formattedDate = new Date(session.date + 'T00:00:00').toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',
@@ -210,19 +208,6 @@ export function SessionDetailScreen({ route, navigation }: Props) {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* AI Narrative Summary */}
-        {narrative ? (
-          <Pressable style={({ pressed }) => pressed && { opacity: 0.85 }} onPress={() => setShowNarrative((p) => !p)}>
-            <View style={styles.narrativeCard}>
-              <View style={styles.narrativeHeader}>
-                <Text style={styles.narrativeLabel}>SESSION SUMMARY</Text>
-                {showNarrative ? <Icons.ChevronUp size={14} color={colors.gray500} /> : <Icons.ChevronDown size={14} color={colors.gray500} />}
-              </View>
-              {showNarrative && <Text style={styles.narrativeText}>{narrative}</Text>}
-            </View>
-          </Pressable>
-        ) : null}
-
         {/* Notes — elevated, editable, personal space */}
         <Pressable
           style={({ pressed }) => [styles.notesCard, !session.notes && styles.notesCardEmpty, pressed && { opacity: 0.85 }]}
@@ -978,36 +963,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.md,
     paddingBottom: spacing['3xl'],
-  },
-
-  // Narrative
-  narrativeCard: {
-    borderLeftWidth: 3,
-    borderLeftColor: colors.gold,
-    backgroundColor: colors.goldUltraDim,
-    borderRadius: radius.lg,
-    padding: spacing.md,
-    marginBottom: spacing.md,
-  },
-  narrativeHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: spacing.xs,
-  },
-  narrativeLabel: {
-    fontFamily: 'JetBrains Mono-SemiBold',
-    fontSize: 12,
-    fontWeight: '600',
-    color: colors.gray500,
-    letterSpacing: 1.5,
-  },
-  narrativeText: {
-    fontFamily: 'Inter',
-    fontSize: 15,
-    fontWeight: '500',
-    color: colors.gray300,
-    lineHeight: 22,
   },
 
   // Notes (elevated)

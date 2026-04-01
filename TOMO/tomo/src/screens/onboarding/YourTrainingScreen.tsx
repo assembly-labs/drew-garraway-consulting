@@ -11,6 +11,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   View,
   Text,
+  TextInput,
   Pressable,
   StyleSheet,
   ScrollView,
@@ -22,7 +23,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { OnboardingStackParamList } from '../../navigation/OnboardingNavigator';
-import { colors, spacing, radius, fontSizes } from '../../config/design-tokens';
+import { colors, spacing, radius } from '../../config/design-tokens';
 import { Icons } from '../../components/Icons';
 import { GymSearchInput, type SelectedGym } from '../../components/GymSearchInput';
 import { haptics } from '../../utils/haptics';
@@ -39,19 +40,56 @@ const FREQUENCY_OPTIONS = [
   { label: '5+ / week', value: 5 },
 ];
 
-const GOAL_OPTIONS = ['Competition', 'Fitness', 'Hobby', 'Mental Health'];
+const GOAL_OPTIONS = ['Competition', 'Fitness', 'Self-Defense', 'Mental Health', 'Community', 'Hobby'];
 
 const EXPERIENCE_OPTIONS = [
-  { label: 'New (< 6 months)', value: 'new' },
-  { label: 'Beginner (6mo - 2yr)', value: 'beginner' },
-  { label: 'Intermediate (2 - 5yr)', value: 'intermediate' },
-  { label: 'Experienced (5+ yr)', value: 'experienced' },
+  { label: '< 6 months', value: 'new' },
+  { label: '6mo - 2yr', value: 'beginner' },
+  { label: '2 - 5yr', value: 'intermediate' },
+  { label: '5+ yr', value: 'experienced' },
 ];
 
 type GymPickerState = 'soft-ask' | 'loading-nearby' | 'nearby' | 'text-only';
 
+/** IBJJF weight class lookup — returns class name for a given weight in kg and gender */
+function getWeightClass(weightKg: number, gender: 'male' | 'female' | undefined): string {
+  const maleClasses = [
+    { max: 57.5, name: 'Rooster (Galo)' },
+    { max: 64.0, name: 'Light Feather (Pluma)' },
+    { max: 70.0, name: 'Feather (Pena)' },
+    { max: 76.0, name: 'Light (Leve)' },
+    { max: 82.3, name: 'Middle (Medio)' },
+    { max: 88.3, name: 'Medium Heavy (Meio Pesado)' },
+    { max: 94.3, name: 'Heavy (Pesado)' },
+    { max: 100.5, name: 'Super Heavy (Super Pesado)' },
+    { max: Infinity, name: 'Ultra Heavy (Pesadissimo)' },
+  ];
+  const femaleClasses = [
+    { max: 48.5, name: 'Rooster (Galo)' },
+    { max: 53.5, name: 'Light Feather (Pluma)' },
+    { max: 58.5, name: 'Feather (Pena)' },
+    { max: 64.0, name: 'Light (Leve)' },
+    { max: 69.0, name: 'Middle (Medio)' },
+    { max: 74.0, name: 'Medium Heavy (Meio Pesado)' },
+    { max: 79.3, name: 'Heavy (Pesado)' },
+    { max: Infinity, name: 'Super Heavy (Super Pesado)' },
+  ];
+
+  if (!gender) {
+    const m = maleClasses.find(c => weightKg <= c.max);
+    const f = femaleClasses.find(c => weightKg <= c.max);
+    return `${m?.name ?? 'Ultra Heavy'} (men) / ${f?.name ?? 'Super Heavy'} (women)`;
+  }
+
+  const classes = gender === 'male' ? maleClasses : femaleClasses;
+  return classes.find(c => weightKg <= c.max)?.name ?? (gender === 'male' ? 'Ultra Heavy' : 'Super Heavy');
+}
+
+const LB_TO_KG = 0.453592;
+const KG_TO_LB = 2.20462;
+
 export function YourTrainingScreen({ navigation, route }: Props) {
-  const { name, belt, stripes } = route.params;
+  const { name, belt, stripes, birthDate, gender } = route.params;
 
   // Location
   const location = useLocation();
@@ -65,6 +103,8 @@ export function YourTrainingScreen({ navigation, route }: Props) {
   const [targetFrequency, setTargetFrequency] = useState<number>(4);
   const [trainingGoals, setTrainingGoals] = useState<string[]>([]);
   const [experienceLevel, setExperienceLevel] = useState<string>('');
+  const [weightText, setWeightText] = useState<string>('');
+  const [weightUnit, setWeightUnit] = useState<'lb' | 'kg'>('lb');
 
   // Animations
   const softAskOpacity = useRef(new Animated.Value(1)).current;
@@ -199,6 +239,20 @@ export function YourTrainingScreen({ navigation, route }: Props) {
     return 'skipped';
   };
 
+  // Convert weight text to kg for storage
+  const getWeightKg = (): number | undefined => {
+    const num = parseFloat(weightText);
+    if (isNaN(num) || num <= 0) return undefined;
+    return weightUnit === 'lb' ? Math.round(num * LB_TO_KG * 10) / 10 : num;
+  };
+
+  // Weight class hint text
+  const weightClassHint = (() => {
+    const kg = getWeightKg();
+    if (!kg) return null;
+    return getWeightClass(kg, gender);
+  })();
+
   const handleContinue = () => {
     if (!selectedGym) return;
     haptics.medium();
@@ -206,6 +260,8 @@ export function YourTrainingScreen({ navigation, route }: Props) {
       name,
       belt,
       stripes,
+      birthDate,
+      gender,
       gymId: selectedGym.id,
       gymName: selectedGym.name,
       gymIsCustom: selectedGym.isCustom,
@@ -218,6 +274,8 @@ export function YourTrainingScreen({ navigation, route }: Props) {
       targetFrequency,
       trainingGoals: trainingGoals.length > 0 ? trainingGoals : undefined,
       experienceLevel: experienceLevel || undefined,
+      bodyWeightKg: getWeightKg(),
+      weightUnitPreference: weightUnit,
     });
   };
 
@@ -278,7 +336,6 @@ export function YourTrainingScreen({ navigation, route }: Props) {
 
     return (
       <Animated.View style={{ opacity: nearbyOpacity }}>
-        <Text style={styles.nearbyLabel}>NEAR YOU</Text>
         <View style={styles.nearbyList}>
           {nearbyGyms.map((gym, index) => {
             const isSelected = selectedGym?.id === gym.id && !selectedGym?.isCustom;
@@ -307,7 +364,6 @@ export function YourTrainingScreen({ navigation, route }: Props) {
           })}
         </View>
 
-        <Text style={styles.fallbackHint}>Not here? Type your gym name</Text>
         {renderSearchFallback()}
       </Animated.View>
     );
@@ -446,7 +502,7 @@ export function YourTrainingScreen({ navigation, route }: Props) {
 
           {/* Experience */}
           <View style={styles.field}>
-            <Text style={styles.fieldLabel}>EXPERIENCE LEVEL</Text>
+            <Text style={styles.fieldLabel}>TOTAL YEARS OF TRAINING</Text>
             <View style={styles.chipRow}>
               {EXPERIENCE_OPTIONS.map((opt) => (
                 <Pressable
@@ -472,6 +528,74 @@ export function YourTrainingScreen({ navigation, route }: Props) {
                 </Pressable>
               ))}
             </View>
+          </View>
+
+          {/* Body Weight */}
+          <View style={styles.field}>
+            <Text style={styles.fieldLabel}>BODY WEIGHT (OPTIONAL)</Text>
+            <Text style={styles.weightHint}>
+              Helps suggest your competition weight class. Only visible to you.
+            </Text>
+            <View style={styles.weightRow}>
+              <TextInput
+                style={styles.weightInput}
+                value={weightText}
+                onChangeText={(val: string) => {
+                  // Allow only numbers and one decimal
+                  const cleaned = val.replace(/[^0-9.]/g, '');
+                  if (cleaned.split('.').length <= 2) {
+                    setWeightText(cleaned);
+                  }
+                }}
+                placeholder={weightUnit === 'lb' ? '165' : '75'}
+                placeholderTextColor={colors.gray600}
+                keyboardType="decimal-pad"
+                returnKeyType="done"
+              />
+              <View style={styles.unitToggle}>
+                <Pressable
+                  style={[
+                    styles.unitChip,
+                    weightUnit === 'lb' && styles.unitChipSelected,
+                  ]}
+                  onPress={() => {
+                    haptics.light();
+                    if (weightUnit !== 'lb') {
+                      // Convert kg to lb display
+                      const num = parseFloat(weightText);
+                      if (!isNaN(num) && num > 0) {
+                        setWeightText(String(Math.round(num * KG_TO_LB)));
+                      }
+                      setWeightUnit('lb');
+                    }
+                  }}
+                >
+                  <Text style={[styles.unitText, weightUnit === 'lb' && styles.unitTextSelected]}>lb</Text>
+                </Pressable>
+                <Pressable
+                  style={[
+                    styles.unitChip,
+                    weightUnit === 'kg' && styles.unitChipSelected,
+                  ]}
+                  onPress={() => {
+                    haptics.light();
+                    if (weightUnit !== 'kg') {
+                      // Convert lb to kg display
+                      const num = parseFloat(weightText);
+                      if (!isNaN(num) && num > 0) {
+                        setWeightText(String(Math.round(num * LB_TO_KG * 10) / 10));
+                      }
+                      setWeightUnit('kg');
+                    }
+                  }}
+                >
+                  <Text style={[styles.unitText, weightUnit === 'kg' && styles.unitTextSelected]}>kg</Text>
+                </Pressable>
+              </View>
+            </View>
+            {weightClassHint && (
+              <Text style={styles.weightClassHint}>{weightClassHint}</Text>
+            )}
           </View>
         </ScrollView>
 
@@ -609,14 +733,6 @@ const styles = StyleSheet.create({
   },
 
   // ---- Nearby Gyms ----
-  nearbyLabel: {
-    fontFamily: 'JetBrains Mono-SemiBold',
-    fontSize: fontSizes.xs,
-    fontWeight: '600',
-    color: colors.gray500,
-    letterSpacing: 2,
-    marginBottom: spacing.sm,
-  },
   nearbyList: {
     backgroundColor: colors.gray800,
     borderRadius: radius.lg,
@@ -655,13 +771,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '500',
     color: colors.gray500,
-  },
-  fallbackHint: {
-    fontFamily: 'Inter',
-    fontSize: 15,
-    fontWeight: '500',
-    color: colors.gray500,
-    marginBottom: spacing.sm,
   },
 
   // ---- Chips ----
@@ -712,6 +821,70 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: colors.gray600,
     letterSpacing: 1.5,
+  },
+
+  // ---- Weight ----
+  weightHint: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gray600,
+    marginBottom: spacing.sm,
+    lineHeight: 18,
+  },
+  weightRow: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+    alignItems: 'center',
+  },
+  weightInput: {
+    fontFamily: 'Inter',
+    backgroundColor: colors.gray800,
+    borderRadius: radius.lg,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.md,
+    fontSize: 17,
+    fontWeight: '500',
+    color: colors.white,
+    borderWidth: 1,
+    borderColor: colors.gray700,
+    width: 100,
+    textAlign: 'center',
+    minHeight: 48,
+  },
+  unitToggle: {
+    flexDirection: 'row',
+    gap: spacing.xs,
+  },
+  unitChip: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.md,
+    borderRadius: radius.full,
+    backgroundColor: colors.gray800,
+    borderWidth: 1,
+    borderColor: colors.gray700,
+    minHeight: 48,
+    justifyContent: 'center',
+  },
+  unitChipSelected: {
+    backgroundColor: colors.goldDim,
+    borderColor: colors.gold,
+  },
+  unitText: {
+    fontFamily: 'Inter-SemiBold',
+    fontSize: 15,
+    fontWeight: '600',
+    color: colors.gray400,
+  },
+  unitTextSelected: {
+    color: colors.gold,
+  },
+  weightClassHint: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gold,
+    marginTop: spacing.sm,
   },
 
   // ---- Footer ----

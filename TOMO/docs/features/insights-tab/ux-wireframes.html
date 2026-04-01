@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FEAT-002: Insights UX Wireframes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0a;
+    color: #e5e5e5;
+    padding: 40px 20px;
+  }
+
+  .page-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #F5A623;
+    margin-bottom: 4px;
+  }
+
+  .page-sub {
+    text-align: center;
+    font-size: 13px;
+    color: #525252;
+    margin-bottom: 48px;
+  }
+
+  /* Approach sections */
+  .approach {
+    max-width: 1200px;
+    margin: 0 auto 72px;
+  }
+
+  .approach-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .approach-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  .label-a { background: rgba(245,166,35,0.2); color: #F5A623; }
+  .label-b { background: rgba(34,197,94,0.2); color: #22c55e; }
+  .label-c { background: rgba(96,165,250,0.2); color: #60a5fa; }
+
+  .approach-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .approach-desc {
+    font-size: 14px;
+    color: #737373;
+    margin-bottom: 24px;
+    max-width: 600px;
+  }
+
+  /* Phone frames */
+  .phones {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding-bottom: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+  }
+
+  .phone-col {
+    flex-shrink: 0;
+  }
+
+  .phone-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #525252;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .phone {
+    width: 280px;
+    height: 560px;
+    background: #111111;
+    border-radius: 28px;
+    border: 2px solid #333;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Status bar */
+  .status-bar {
+    height: 44px;
+    padding: 14px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .status-bar .time { font-size: 14px; font-weight: 700; }
+  .status-icons { display: flex; gap: 4px; align-items: center; }
+  .status-dot { width: 4px; height: 4px; background: #fff; border-radius: 50%; }
+
+  /* Screen header */
+  .screen-header {
+    padding: 8px 20px 12px;
+    flex-shrink: 0;
+  }
+
+  .screen-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .screen-subtitle {
+    font-size: 12px;
+    color: #525252;
+    margin-top: 2px;
+  }
+
+  /* Content area */
+  .screen-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 16px 16px;
+  }
+
+  /* Tab bar */
+  .tab-bar {
+    height: 72px;
+    background: #1a1a1a;
+    border-top: 1px solid #262626;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 8px;
+    flex-shrink: 0;
+  }
+
+  .tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    opacity: 0.4;
+  }
+
+  .tab.active { opacity: 1; }
+
+  .tab-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tab-icon svg { width: 20px; height: 20px; }
+
+  .tab-text {
+    font-size: 10px;
+    font-weight: 500;
+    color: #a3a3a3;
+  }
+
+  .tab.active .tab-text { color: #F5A623; }
+
+  .log-btn {
+    width: 52px;
+    height: 52px;
+    background: #F5A623;
+    border-radius: 50%;
+    margin-top: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .log-btn svg { width: 24px; height: 24px; }
+
+  /* Wireframe elements */
+  .w-card {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+
+  .w-card-gold { border-left: 3px solid #F5A623; }
+  .w-card-white { border-left: 3px solid #fff; }
+  .w-card-blue { border-left: 3px solid #60a5fa; }
+  .w-card-green { border-left: 3px solid #22c55e; }
+  .w-card-subtle { border-left: 3px solid #333; }
+
+  .w-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+  }
+
+  .badge-technique { background: rgba(96,165,250,0.15); color: #60a5fa; }
+  .badge-consistency { background: rgba(245,166,35,0.15); color: #F5A623; }
+  .badge-sparring { background: rgba(34,197,94,0.15); color: #22c55e; }
+  .badge-risk { background: rgba(239,68,68,0.15); color: #ef4444; }
+  .badge-milestone { background: rgba(245,166,35,0.15); color: #F5A623; }
+  .badge-quarterly { background: rgba(245,166,35,0.1); color: #F5A623; }
+  .badge-monthly { background: rgba(255,255,255,0.08); color: #d4d4d4; }
+  .badge-weekly { background: rgba(163,163,163,0.1); color: #a3a3a3; }
+
+  .w-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .w-body {
+    font-size: 11px;
+    color: #a3a3a3;
+    line-height: 1.6;
+  }
+
+  .w-body .gold { color: #F5A623; }
+
+  .w-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #525252;
+    margin: 16px 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .w-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #262626;
+  }
+
+  .w-empty {
+    text-align: center;
+    padding: 60px 24px;
+  }
+
+  .w-empty-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 16px;
+    border: 2px dashed #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 20px;
+  }
+
+  .w-empty-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #737373;
+    margin-bottom: 6px;
+  }
+
+  .w-empty-body {
+    font-size: 12px;
+    color: #525252;
+    line-height: 1.6;
+  }
+
+  /* Typewriter specific */
+  .w-typewriter {
+    position: relative;
+  }
+
+  .w-typewriter .w-body {
+    color: #d4d4d4;
+  }
+
+  .w-typewriter .w-body .revealed {
+    color: #737373;
+  }
+
+  .w-typewriter .w-body .glow {
+    color: #F5A623;
+    text-shadow: 0 0 8px rgba(245,166,35,0.4);
+  }
+
+  .w-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 13px;
+    background: #F5A623;
+    margin-left: 1px;
+    vertical-align: text-bottom;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .w-skip {
+    font-size: 11px;
+    color: #525252;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  /* Chat input */
+  .w-chat-input {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+  }
+
+  .w-chat-input span {
+    font-size: 11px;
+    color: #525252;
+  }
+
+  .w-chat-input .send {
+    color: #F5A623;
+    font-size: 14px;
+  }
+
+  /* Chat messages */
+  .w-chat-msg {
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 11px;
+    line-height: 1.5;
+    max-width: 85%;
+  }
+
+  .w-chat-user {
+    background: #262626;
+    color: #e5e5e5;
+    margin-left: auto;
+  }
+
+  .w-chat-bot {
+    color: #a3a3a3;
+  }
+
+  .w-chat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #525252;
+    margin-bottom: 4px;
+  }
+
+  .w-counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #525252;
+    text-align: right;
+    margin-top: 4px;
+  }
+
+  /* Focus card */
+  .w-focus {
+    background: rgba(245,166,35,0.06);
+    border-left: 3px solid #F5A623;
+    border-radius: 4px;
+    padding: 10px 12px;
+    margin-top: 10px;
+  }
+
+  .w-focus-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #F5A623;
+    margin-bottom: 4px;
+  }
+
+  .w-focus-body {
+    font-size: 11px;
+    color: #d4d4d4;
+  }
+
+  /* Collapsed card row */
+  .w-collapsed {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .w-collapsed-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .w-collapsed-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: #a3a3a3;
+  }
+
+  .w-collapsed-meta {
+    font-size: 10px;
+    color: #525252;
+  }
+
+  .w-chevron {
+    color: #525252;
+    font-size: 14px;
+  }
+
+  /* Journal session card (for Approach C) */
+  .w-session {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+  }
+
+  .w-session-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
+  .w-session-date {
+    font-size: 11px;
+    font-weight: 600;
+    color: #a3a3a3;
+  }
+
+  .w-session-mode {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    color: #525252;
+    text-transform: uppercase;
+  }
+
+  .w-session-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: #d4d4d4;
+    margin-bottom: 2px;
+  }
+
+  .w-session-meta {
+    font-size: 10px;
+    color: #525252;
+  }
+
+  /* Coach deferral */
+  .w-coach {
+    background: #141414;
+    border-left: 2px solid #60a5fa;
+    border-radius: 4px;
+    padding: 10px 12px;
+    margin-top: 16px;
+  }
+
+  .w-coach-text {
+    font-size: 10px;
+    color: #525252;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* New badge */
+  .w-new {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #F5A623;
+    background: rgba(245,166,35,0.12);
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* Dividers */
+  .approach-divider {
+    border: none;
+    border-top: 1px solid #1a1a1a;
+    margin: 48px auto;
+    max-width: 1200px;
+  }
+
+  /* Annotations */
+  .annotation {
+    background: rgba(245,166,35,0.06);
+    border: 1px solid rgba(245,166,35,0.15);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 20px;
+    max-width: 900px;
+  }
+
+  .annotation-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #F5A623;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .annotation p {
+    font-size: 12px;
+    color: #a3a3a3;
+    line-height: 1.6;
+    margin-bottom: 4px;
+  }
+
+  .annotation p:last-child { margin-bottom: 0; }
+
+  /* 3-tab vs 4-tab comparison */
+  .tab-bar-3 .tab { flex: 1; }
+
+  /* Progress indicator for cold start */
+  .w-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #262626;
+    border-radius: 2px;
+    margin: 8px 0;
+  }
+
+  .w-progress-fill {
+    height: 100%;
+    background: #F5A623;
+    border-radius: 2px;
+  }
+
+  .w-progress-text {
+    font-size: 10px;
+    color: #525252;
+    text-align: center;
+  }
+
+  .footer {
+    text-align: center;
+    color: #333;
+    font-size: 12px;
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid #1a1a1a;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-title">Insights Tab -- UX Wireframes</div>
+<p class="page-sub">FEAT-002 &middot; Three approaches compared across key user states</p>
+
+<!-- ==================== APPROACH A ==================== -->
+<div class="approach">
+  <div class="approach-header">
+    <span class="approach-label label-a">A</span>
+    <span class="approach-name">"The Debrief"</span>
+  </div>
+  <p class="approach-desc">Typewriter animation, narrative-first, own tab. TOMO composes insights in real time.</p>
+
+  <div class="phones">
+
+    <!-- A: Empty State -->
+    <div class="phone-col">
+      <div class="phone-label">Day 1 &middot; Empty</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="status-icons"><span class="status-dot"></span><span class="status-dot"></span><span class="status-dot"></span></div>
+        </div>
+        <div class="screen-header">
+          <div class="screen-title">Insights</div>
+        </div>
+        <div class="screen-content">
+          <div class="w-empty">
+            <div class="w-empty-icon">&#10024;</div>
+            <div class="w-empty-title">Your debriefs will appear here</div>
+            <div class="w-empty-body">Log your first session. After a week of training, TOMO will have something to say about your game.</div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="tab-text">Journal</div></div>
+          <div class="tab"><div class="log-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></div>
+          <div class="tab active"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div><div class="tab-text">Insights</div></div>
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tab-text">Profile</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- A: First Weekly (Typewriter) -->
+    <div class="phone-col">
+      <div class="phone-label">Day 7 &middot; First Insight</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="status-icons"><span class="status-dot"></span><span class="status-dot"></span><span class="status-dot"></span></div>
+        </div>
+        <div class="screen-header">
+          <div class="screen-title">Insights <span style="font-size:11px; color:#525252; font-weight:400; float:right; margin-top:8px;">skip</span></div>
+          <div class="screen-subtitle">Based on 4 sessions</div>
+        </div>
+        <div class="screen-content">
+          <div class="w-section-label">This Week</div>
+          <div class="w-card w-card-gold w-typewriter">
+            <span class="w-badge badge-technique">Technique</span>
+            <div class="w-title">Guard Recovery Showing Up</div>
+            <div class="w-body">
+              <span class="revealed">Three sessions this week, all gi. You drilled closed guard </span><span class="glow">recovery twice -- that repetition</span><span class="w-cursor"></span>
+            </div>
+          </div>
+
+          <div style="opacity: 0.3; margin-top: 20px;">
+            <div class="w-card w-card-subtle" style="padding: 10px 14px;">
+              <div style="font-size:10px; color:#333;">Chat input appears after text completes...</div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="tab-text">Journal</div></div>
+          <div class="tab"><div class="log-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></div>
+          <div class="tab active"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div><div class="tab-text">Insights</div></div>
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tab-text">Profile</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- A: Completed + Chat -->
+    <div class="phone-col">
+      <div class="phone-label">Day 7 &middot; After Typewriter</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="status-icons"><span class="status-dot"></span><span class="status-dot"></span><span class="status-dot"></span></div>
+        </div>
+        <div class="screen-header">
+          <div class="screen-title">Insights</div>
+          <div class="screen-subtitle">Based on 4 sessions</div>
+        </div>
+        <div class="screen-content">
+          <div class="w-section-label">This Week</div>
+          <div class="w-card w-card-gold">
+            <span class="w-badge badge-technique">Technique</span>
+            <div class="w-title">Guard Recovery Showing Up</div>
+            <div class="w-body">Three sessions this week, all gi. You drilled closed guard recovery twice -- that repetition is how foundations get built. Your instructor covered it in class and you stayed to drill after.</div>
+          </div>
+          <div class="w-card w-card-gold">
+            <span class="w-badge badge-consistency">Consistency</span>
+            <div class="w-title">Solid Start</div>
+            <div class="w-body">3 out of your target 4 sessions. Tuesday-Thursday-Saturday pattern forming.</div>
+          </div>
+          <div class="w-focus">
+            <div class="w-focus-label">Focus Next Week</div>
+            <div class="w-focus-body">Get that 4th session in. One more rep of guard recovery will cement it.</div>
+          </div>
+          <div class="w-chat-input">
+            <span>Ask about this insight...</span>
+            <span class="send">&#8593;</span>
+          </div>
+          <div class="w-coach">
+            <div class="w-coach-text">Your coach knows your game better than any app. These observations supplement -- never replace -- their guidance.</div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="tab-text">Journal</div></div>
+          <div class="tab"><div class="log-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></div>
+          <div class="tab active"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div><div class="tab-text">Insights</div></div>
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tab-text">Profile</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- A: Established (Monthly + Weekly history) -->
+    <div class="phone-col">
+      <div class="phone-label">Day 30 &middot; Monthly + History</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="status-icons"><span class="status-dot"></span><span class="status-dot"></span><span class="status-dot"></span></div>
+        </div>
+        <div class="screen-header">
+          <div class="screen-title">Insights</div>
+          <div class="screen-subtitle">Based on 14 sessions</div>
+        </div>
+        <div class="screen-content">
+          <div class="w-collapsed" style="border-left: 3px solid #F5A623;">
+            <div class="w-collapsed-left">
+              <span class="w-badge badge-quarterly" style="margin:0;">Quarterly</span>
+              <span class="w-collapsed-title">Q1 2026</span>
+              <span class="w-new">NEW</span>
+            </div>
+            <span class="w-chevron">&#8250;</span>
+          </div>
+
+          <div class="w-collapsed" style="border-left: 3px solid #fff;">
+            <div class="w-collapsed-left">
+              <span class="w-badge badge-monthly" style="margin:0;">Monthly</span>
+              <span class="w-collapsed-title">March 2026</span>
+            </div>
+            <span class="w-chevron">&#8250;</span>
+          </div>
+
+          <div class="w-section-label">This Week</div>
+          <div class="w-card w-card-gold">
+            <span class="w-badge badge-technique">Technique</span>
+            <div class="w-title">Half Guard System Building</div>
+            <div class="w-body">You drilled half guard underhook in 3 of 4 sessions. Your monthly review flagged this as your developing system -- the reps are proving it.</div>
+          </div>
+          <div class="w-card w-card-gold">
+            <span class="w-badge badge-sparring">Sparring</span>
+            <div class="w-title">Submission Rate Climbing</div>
+            <div class="w-body">2 submissions given this week, 0 received. Best ratio since you started.</div>
+          </div>
+
+          <div class="w-section-label">Earlier</div>
+          <div class="w-collapsed">
+            <div class="w-collapsed-left">
+              <span class="w-collapsed-title">Mar 17-23</span>
+              <span class="w-collapsed-meta">&middot; 3 insights</span>
+            </div>
+            <span class="w-chevron">&#8250;</span>
+          </div>
+          <div class="w-collapsed">
+            <div class="w-collapsed-left">
+              <span class="w-collapsed-title">Mar 10-16</span>
+              <span class="w-collapsed-meta">&middot; 2 insights</span>
+            </div>
+            <span class="w-chevron">&#8250;</span>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="tab-text">Journal</div></div>
+          <div class="tab"><div class="log-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></div>
+          <div class="tab active"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div><div class="tab-text">Insights</div></div>
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tab-text">Profile</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- A: Chat conversation -->
+    <div class="phone-col">
+      <div class="phone-label">Chat Follow-Up</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="status-icons"><span class="status-dot"></span><span class="status-dot"></span><span class="status-dot"></span></div>
+        </div>
+        <div class="screen-header">
+          <div class="screen-title" style="font-size:16px;">Half Guard System Building</div>
+          <div class="screen-subtitle">Weekly insight &middot; Mar 24-30</div>
+        </div>
+        <div class="screen-content">
+          <div class="w-card w-card-gold" style="margin-bottom:16px;">
+            <div class="w-body">You drilled half guard underhook in 3 of 4 sessions. Your monthly review flagged this as your developing system -- the reps are proving it.</div>
+          </div>
+
+          <div class="w-chat-label">You</div>
+          <div class="w-chat-msg w-chat-user">What should I focus on when drilling the underhook?</div>
+
+          <div class="w-chat-label">TOMO</div>
+          <div class="w-chat-msg w-chat-bot">
+            <span class="revealed">The underhook itself is the easy part -- it's what you do </span><span class="glow">with the inside position that</span><span class="w-cursor"></span>
+          </div>
+
+          <div class="w-counter">1/5</div>
+
+          <div class="w-chat-input" style="margin-top:8px;">
+            <span>Ask a follow-up...</span>
+            <span class="send">&#8593;</span>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="tab-text">Journal</div></div>
+          <div class="tab"><div class="log-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></div>
+          <div class="tab active"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div><div class="tab-text">Insights</div></div>
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tab-text">Profile</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="annotation">
+    <div class="annotation-title">Design Notes</div>
+    <p>The typewriter reveals text at 20ms/char with a 12-character gold glow trail. A pulsing gold cursor marks the leading edge. "Skip" in the header jumps to full reveal. Chat input fades in only after text completes. Quarterly/monthly cards are collapsed by default -- tap to expand (typewriter on first view only). Subsequent visits show static text, no re-animation.</p>
+  </div>
+</div>
+
+<hr class="approach-divider">
+
+<!-- ==================== APPROACH B ==================== -->
+<div class="approach">
+  <div class="approach-header">
+    <span class="approach-label label-b">B</span>
+    <span class="approach-name">"Weekly Check-In"</span>
+  </div>
+  <p class="approach-desc">Static weekly cards, own tab. No animation, no chat. Content must carry the experience alone.</p>
+
+  <div class="phones">
+
+    <!-- B: Empty State -->
+    <div class="phone-col">
+      <div class="phone-label">Day 1 &middot; Empty</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="status-icons"><span class="status-dot"></span><span class="status-dot"></span><span class="status-dot"></span></div>
+        </div>
+        <div class="screen-header">
+          <div class="screen-title">Insights</div>
+        </div>
+        <div class="screen-content">
+          <div class="w-empty">
+            <div class="w-empty-icon">&#10024;</div>
+            <div class="w-empty-title">Your debriefs will appear here</div>
+            <div class="w-empty-body">Log your first session. After a week of training, TOMO will have something to say about your game.</div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="tab-text">Journal</div></div>
+          <div class="tab"><div class="log-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></div>
+          <div class="tab active"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div><div class="tab-text">Insights</div></div>
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tab-text">Profile</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B: First Weekly -->
+    <div class="phone-col">
+      <div class="phone-label">Day 7 &middot; First Insight</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="status-icons"><span class="status-dot"></span><span class="status-dot"></span><span class="status-dot"></span></div>
+        </div>
+        <div class="screen-header">
+          <div class="screen-title">Insights</div>
+          <div class="screen-subtitle">Based on 4 sessions</div>
+        </div>
+        <div class="screen-content">
+          <div class="w-section-label">Mar 24 - 30</div>
+          <div class="w-card w-card-gold">
+            <span class="w-badge badge-technique">Technique</span>
+            <div class="w-title">Guard Recovery Showing Up</div>
+            <div class="w-body">Three sessions this week, all gi. You drilled closed guard recovery twice -- that repetition is how foundations get built.</div>
+          </div>
+          <div class="w-card w-card-gold">
+            <span class="w-badge badge-consistency">Consistency</span>
+            <div class="w-title">Solid Start</div>
+            <div class="w-body">3 out of your target 4 sessions. Tuesday-Thursday-Saturday pattern forming.</div>
+          </div>
+          <div class="w-focus">
+            <div class="w-focus-label">Focus Next Week</div>
+            <div class="w-focus-body">Get that 4th session in. One more rep of guard recovery will cement it.</div>
+          </div>
+          <div class="w-coach">
+            <div class="w-coach-text">Your coach knows your game better than any app. These observations supplement -- never replace -- their guidance.</div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="tab-text">Journal</div></div>
+          <div class="tab"><div class="log-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></div>
+          <div class="tab active"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div><div class="tab-text">Insights</div></div>
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tab-text">Profile</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B: Week 2 -->
+    <div class="phone-col">
+      <div class="phone-label">Day 14 &middot; Two Weeks</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="status-icons"><span class="status-dot"></span><span class="status-dot"></span><span class="status-dot"></span></div>
+        </div>
+        <div class="screen-header">
+          <div class="screen-title">Insights</div>
+          <div class="screen-subtitle">Based on 7 sessions</div>
+        </div>
+        <div class="screen-content">
+          <div class="w-section-label">Mar 31 - Apr 6</div>
+          <div class="w-card w-card-gold">
+            <span class="w-badge badge-technique">Technique</span><span class="w-new">NEW</span>
+            <div class="w-title">Adding Sweeps to the Mix</div>
+            <div class="w-body">Scissor sweep showed up this week for the first time. You're expanding beyond guard recovery into offense.</div>
+          </div>
+          <div class="w-card w-card-gold">
+            <span class="w-badge badge-milestone">Milestone</span><span class="w-new">NEW</span>
+            <div class="w-title">Target Hit</div>
+            <div class="w-body">4 sessions this week. That's your target frequency. Second week in and you're already consistent.</div>
+          </div>
+          <div class="w-focus">
+            <div class="w-focus-label">Focus Next Week</div>
+            <div class="w-focus-body">Try the scissor sweep in sparring. Drilling it is step one -- testing it live is step two.</div>
+          </div>
+
+          <div class="w-section-label">Mar 24 - 30</div>
+          <div class="w-collapsed">
+            <div class="w-collapsed-left">
+              <span class="w-collapsed-title">Guard Recovery Showing Up</span>
+              <span class="w-collapsed-meta">&middot; 2 insights</span>
+            </div>
+            <span class="w-chevron">&#8250;</span>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="tab-text">Journal</div></div>
+          <div class="tab"><div class="log-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></div>
+          <div class="tab active"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div><div class="tab-text">Insights</div></div>
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tab-text">Profile</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B: Week 4 -->
+    <div class="phone-col">
+      <div class="phone-label">Day 28 &middot; Four Weeks</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="status-icons"><span class="status-dot"></span><span class="status-dot"></span><span class="status-dot"></span></div>
+        </div>
+        <div class="screen-header">
+          <div class="screen-title">Insights</div>
+          <div class="screen-subtitle">Based on 14 sessions</div>
+        </div>
+        <div class="screen-content">
+          <div class="w-section-label">Apr 14 - 20</div>
+          <div class="w-card w-card-gold">
+            <span class="w-badge badge-sparring">Sparring</span><span class="w-new">NEW</span>
+            <div class="w-title">First Submission in Live Rolling</div>
+            <div class="w-body">You hit an arm bar from guard this week. First submission you've reported in sparring. That's not luck -- you've been drilling guard for 4 weeks.</div>
+          </div>
+          <div class="w-card w-card-gold">
+            <span class="w-badge badge-risk">Watch</span><span class="w-new">NEW</span>
+            <div class="w-title">Right Shoulder Mentioned Twice</div>
+            <div class="w-body">You noted shoulder soreness in Tuesday's and Saturday's sessions. Worth mentioning to your coach so they can adjust your drilling load.</div>
+          </div>
+          <div class="w-focus">
+            <div class="w-focus-label">Focus Next Week</div>
+            <div class="w-focus-body">Keep the guard work going but listen to that shoulder. One bad rep isn't worth a month off the mat.</div>
+          </div>
+
+          <div class="w-section-label">Earlier</div>
+          <div class="w-collapsed">
+            <div class="w-collapsed-left"><span class="w-collapsed-title">Apr 7-13</span><span class="w-collapsed-meta">&middot; 2 insights</span></div>
+            <span class="w-chevron">&#8250;</span>
+          </div>
+          <div class="w-collapsed">
+            <div class="w-collapsed-left"><span class="w-collapsed-title">Mar 31 - Apr 6</span><span class="w-collapsed-meta">&middot; 2 insights</span></div>
+            <span class="w-chevron">&#8250;</span>
+          </div>
+          <div class="w-collapsed">
+            <div class="w-collapsed-left"><span class="w-collapsed-title">Mar 24-30</span><span class="w-collapsed-meta">&middot; 2 insights</span></div>
+            <span class="w-chevron">&#8250;</span>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="tab-text">Journal</div></div>
+          <div class="tab"><div class="log-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></div>
+          <div class="tab active"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div><div class="tab-text">Insights</div></div>
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tab-text">Profile</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="annotation">
+    <div class="annotation-title">Design Notes</div>
+    <p>No animation -- content appears immediately on tab open. NEW badges mark unread insights. Older weeks collapse to a single row. Focus Next card has the gold left-border treatment for emphasis. Coach deferral footer on first view only. This is the existing InsightsScreen with minor cleanup -- ships as-is.</p>
+  </div>
+</div>
+
+<hr class="approach-divider">
+
+<!-- ==================== APPROACH C ==================== -->
+<div class="approach">
+  <div class="approach-header">
+    <span class="approach-label label-c">C</span>
+    <span class="approach-name">"The Feed"</span>
+  </div>
+  <p class="approach-desc">No new tab. Insights appear as cards in the Journal timeline alongside sessions.</p>
+
+  <div class="phones">
+
+    <!-- C: Journal with no insights yet -->
+    <div class="phone-col">
+      <div class="phone-label">Day 5 &middot; Journal Only</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="status-icons"><span class="status-dot"></span><span class="status-dot"></span><span class="status-dot"></span></div>
+        </div>
+        <div class="screen-header">
+          <div class="screen-title">Journal</div>
+        </div>
+        <div class="screen-content">
+          <div class="w-session">
+            <div class="w-session-top">
+              <span class="w-session-date">Sat, Mar 29</span>
+              <span class="w-session-mode">Gi &middot; Class</span>
+            </div>
+            <div class="w-session-title">Closed guard sweeps, sparring</div>
+            <div class="w-session-meta">60 min &middot; 3 rounds &middot; Alliance Paoli</div>
+          </div>
+          <div class="w-session">
+            <div class="w-session-top">
+              <span class="w-session-date">Thu, Mar 27</span>
+              <span class="w-session-mode">Gi &middot; Class</span>
+            </div>
+            <div class="w-session-title">Guard recovery drill, technique</div>
+            <div class="w-session-meta">60 min &middot; 2 rounds &middot; Alliance Paoli</div>
+          </div>
+          <div class="w-session">
+            <div class="w-session-top">
+              <span class="w-session-date">Tue, Mar 25</span>
+              <span class="w-session-mode">Gi &middot; Class</span>
+            </div>
+            <div class="w-session-title">Guard passing, closed guard</div>
+            <div class="w-session-meta">60 min &middot; 2 rounds &middot; Alliance Paoli</div>
+          </div>
+        </div>
+        <div class="tab-bar tab-bar-3">
+          <div class="tab active"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="tab-text">Journal</div></div>
+          <div class="tab"><div class="log-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></div>
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tab-text">Profile</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C: Journal with first debrief card -->
+    <div class="phone-col">
+      <div class="phone-label">Day 7 &middot; Debrief Appears</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="status-icons"><span class="status-dot"></span><span class="status-dot"></span><span class="status-dot"></span></div>
+        </div>
+        <div class="screen-header">
+          <div class="screen-title">Journal</div>
+        </div>
+        <div class="screen-content">
+          <!-- Debrief card mixed into feed -->
+          <div class="w-card w-card-gold" style="margin-bottom:10px;">
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:#F5A623;">Weekly Debrief</span>
+              <span style="font-size:10px; color:#525252; margin-left:auto;">Mar 24-30</span>
+            </div>
+            <div class="w-title">Guard Recovery Showing Up</div>
+            <div class="w-body" style="margin-bottom:6px;">Three sessions this week, all gi. You drilled closed guard recovery twice -- that repetition is how foundations get built.</div>
+            <div style="font-size:10px; color:#F5A623;">Tap to read full debrief &#8250;</div>
+          </div>
+
+          <div class="w-session">
+            <div class="w-session-top">
+              <span class="w-session-date">Sat, Mar 29</span>
+              <span class="w-session-mode">Gi &middot; Class</span>
+            </div>
+            <div class="w-session-title">Closed guard sweeps, sparring</div>
+            <div class="w-session-meta">60 min &middot; 3 rounds &middot; Alliance Paoli</div>
+          </div>
+          <div class="w-session">
+            <div class="w-session-top">
+              <span class="w-session-date">Thu, Mar 27</span>
+              <span class="w-session-mode">Gi &middot; Class</span>
+            </div>
+            <div class="w-session-title">Guard recovery drill, technique</div>
+            <div class="w-session-meta">60 min &middot; 2 rounds &middot; Alliance Paoli</div>
+          </div>
+          <div class="w-session">
+            <div class="w-session-top">
+              <span class="w-session-date">Tue, Mar 25</span>
+              <span class="w-session-mode">Gi &middot; Class</span>
+            </div>
+            <div class="w-session-title">Guard passing, closed guard</div>
+            <div class="w-session-meta">60 min &middot; 2 rounds &middot; Alliance Paoli</div>
+          </div>
+        </div>
+        <div class="tab-bar tab-bar-3">
+          <div class="tab active"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="tab-text">Journal</div></div>
+          <div class="tab"><div class="log-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></div>
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tab-text">Profile</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C: Journal busy feed - insights buried -->
+    <div class="phone-col">
+      <div class="phone-label">Day 14 &middot; Busy Week</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="status-icons"><span class="status-dot"></span><span class="status-dot"></span><span class="status-dot"></span></div>
+        </div>
+        <div class="screen-header">
+          <div class="screen-title">Journal</div>
+        </div>
+        <div class="screen-content">
+          <div class="w-session">
+            <div class="w-session-top">
+              <span class="w-session-date">Sun, Apr 6</span>
+              <span class="w-session-mode">Nogi &middot; Open Mat</span>
+            </div>
+            <div class="w-session-title">Open mat, mostly rolling</div>
+            <div class="w-session-meta">90 min &middot; 5 rounds</div>
+          </div>
+          <div class="w-session">
+            <div class="w-session-top">
+              <span class="w-session-date">Sat, Apr 5</span>
+              <span class="w-session-mode">Gi &middot; Class</span>
+            </div>
+            <div class="w-session-title">Scissor sweep, guard passing</div>
+            <div class="w-session-meta">60 min &middot; 3 rounds</div>
+          </div>
+          <div class="w-session">
+            <div class="w-session-top">
+              <span class="w-session-date">Thu, Apr 3</span>
+              <span class="w-session-mode">Gi &middot; Class</span>
+            </div>
+            <div class="w-session-title">Half guard, underhook drills</div>
+            <div class="w-session-meta">60 min &middot; 2 rounds</div>
+          </div>
+          <div class="w-session">
+            <div class="w-session-top">
+              <span class="w-session-date">Tue, Apr 1</span>
+              <span class="w-session-mode">Gi &middot; Class</span>
+            </div>
+            <div class="w-session-title">Side control escapes</div>
+            <div class="w-session-meta">60 min &middot; 2 rounds</div>
+          </div>
+
+          <!-- Debrief buried below 4 sessions -->
+          <div class="w-card w-card-gold" style="margin:2px 0 10px; opacity: 0.85;">
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:600; letter-spacing:1px; color:#F5A623;">Weekly Debrief</span>
+              <span style="font-size:9px; color:#525252;">Mar 31 - Apr 6</span>
+            </div>
+            <div class="w-body" style="font-size:10px;">Adding Sweeps to the Mix -- Scissor sweep showed up for the first time...</div>
+          </div>
+
+          <div class="w-session" style="opacity:0.6;">
+            <div class="w-session-top">
+              <span class="w-session-date">Sat, Mar 29</span>
+              <span class="w-session-mode">Gi</span>
+            </div>
+            <div class="w-session-title">Closed guard sweeps...</div>
+            <div class="w-session-meta">60 min</div>
+          </div>
+        </div>
+        <div class="tab-bar tab-bar-3">
+          <div class="tab active"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="tab-text">Journal</div></div>
+          <div class="tab"><div class="log-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></div>
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tab-text">Profile</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C: Monthly in feed -->
+    <div class="phone-col">
+      <div class="phone-label">Day 30 &middot; Monthly Appears</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="status-icons"><span class="status-dot"></span><span class="status-dot"></span><span class="status-dot"></span></div>
+        </div>
+        <div class="screen-header">
+          <div class="screen-title">Journal</div>
+        </div>
+        <div class="screen-content">
+          <!-- Monthly card -->
+          <div class="w-card w-card-white" style="margin-bottom:10px; padding: 16px;">
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:#fff;">Monthly Check-In</span>
+              <span class="w-new">NEW</span>
+            </div>
+            <div class="w-title" style="font-size:14px;">March 2026</div>
+            <div class="w-body" style="margin-bottom:6px;">Your first full month. 14 sessions, guard-focused game developing, first submission in live rolling...</div>
+            <div style="font-size:10px; color:#a3a3a3;">Tap to read full review &#8250;</div>
+          </div>
+
+          <div class="w-session">
+            <div class="w-session-top"><span class="w-session-date">Mon, Mar 31</span><span class="w-session-mode">Gi</span></div>
+            <div class="w-session-title">First day of April block</div>
+            <div class="w-session-meta">60 min</div>
+          </div>
+
+          <div class="w-card w-card-gold" style="margin:2px 0 10px; padding:12px;">
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:600; letter-spacing:1px; color:#F5A623;">Weekly Debrief</span>
+              <span style="font-size:9px; color:#525252;">Mar 24-30</span>
+            </div>
+            <div class="w-body" style="font-size:10px;">Guard Recovery Showing Up...</div>
+          </div>
+
+          <div class="w-session" style="opacity:0.7;">
+            <div class="w-session-top"><span class="w-session-date">Sat, Mar 29</span><span class="w-session-mode">Gi</span></div>
+            <div class="w-session-title">Closed guard sweeps...</div>
+            <div class="w-session-meta">60 min</div>
+          </div>
+          <div class="w-session" style="opacity:0.5;">
+            <div class="w-session-top"><span class="w-session-date">Thu, Mar 27</span><span class="w-session-mode">Gi</span></div>
+            <div class="w-session-title">Guard recovery...</div>
+            <div class="w-session-meta">60 min</div>
+          </div>
+        </div>
+        <div class="tab-bar tab-bar-3">
+          <div class="tab active"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="tab-text">Journal</div></div>
+          <div class="tab"><div class="log-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></div>
+          <div class="tab"><div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a3a3a3" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tab-text">Profile</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="annotation">
+    <div class="annotation-title">Design Notes</div>
+    <p>No tab bar change -- still 3 tabs. Insight cards use gold/white left borders to stand apart from session cards. The core risk is visible in the "Day 14" wireframe: after a busy week, the debrief sits below 4 session entries. Users who open the Journal, see their latest session, and close the app will never scroll down to it. The monthly card has more visual weight (larger padding, white border) but still competes with session entries for attention.</p>
+  </div>
+</div>
+
+<div class="footer">
+  TOMO &middot; FEAT-002 Insights Tab UX Wireframes &middot; March 30, 2026
+</div>
+
+</body>
+</html>
