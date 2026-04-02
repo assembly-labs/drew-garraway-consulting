@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TOMO - Profile Enhancements (Onboarding)</title>
+  <style>
+    /* Import fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap');
+
+    /* TOMO Design Tokens */
+    :root {
+      --color-black: #111111;
+      --color-white: #FFFFFF;
+      --color-gold: #F5A623;
+      --color-gold-dim: rgba(245, 166, 35, 0.15);
+      --color-positive: #22c55e;
+      --color-positive-dim: rgba(34, 197, 94, 0.15);
+      --color-negative: #ef4444;
+      --color-gray-300: #d4d4d4;
+      --color-gray-400: #c4c4c4;
+      --color-gray-500: #a3a3a3;
+      --color-gray-600: #8a8a8a;
+      --color-gray-700: #4a4a4a;
+      --color-gray-800: #1f1f1f;
+      --color-gray-900: #161616;
+
+      --font-display: 'Unbounded', sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+
+      --radius-sm: 2px;
+      --radius-md: 4px;
+      --radius-lg: 8px;
+      --radius-full: 9999px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 500;
+      background: var(--color-black);
+      color: var(--color-white);
+      min-height: 100vh;
+      max-width: 375px;
+      margin: 0 auto;
+      padding: var(--space-md);
+    }
+
+    /* Section headers */
+    .section-header {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: var(--space-md);
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--color-gray-700);
+    }
+
+    .section-header:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .section-description {
+      font-size: 13px;
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-lg);
+      line-height: 1.5;
+    }
+
+    /* Onboarding screen */
+    .onboarding-screen {
+      background: var(--color-black);
+      border: 1px solid var(--color-gray-700);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .step-counter {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-gray-500);
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-lg);
+    }
+
+    .step-counter span {
+      color: var(--color-gold);
+    }
+
+    .screen-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* Form labels */
+    .form-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-gray-400);
+      margin-bottom: var(--space-md);
+    }
+
+    /* Form group */
+    .form-group {
+      margin-bottom: var(--space-xl);
+    }
+
+    /* Text input */
+    .text-input {
+      width: 100%;
+      padding: var(--space-md) var(--space-lg);
+      font-size: 17px;
+      font-weight: 500;
+      font-family: var(--font-body);
+      background: var(--color-gray-900);
+      border: 2px solid var(--color-gray-700);
+      border-radius: var(--radius-md);
+      color: var(--color-white);
+      outline: none;
+    }
+
+    .text-input:focus {
+      border-color: var(--color-gold);
+    }
+
+    /* Date input */
+    .date-input {
+      width: 100%;
+      padding: var(--space-md) var(--space-lg);
+      font-size: 17px;
+      font-weight: 500;
+      font-family: var(--font-body);
+      background: var(--color-gray-900);
+      border: 2px solid var(--color-gray-700);
+      border-radius: var(--radius-md);
+      color: var(--color-white);
+      outline: none;
+    }
+
+    .date-input:focus {
+      border-color: var(--color-gold);
+    }
+
+    /* Belt selector */
+    .belt-grid {
+      display: flex;
+      gap: var(--space-sm);
+      justify-content: center;
+    }
+
+    .belt-button {
+      width: 56px;
+      height: 72px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      background: transparent;
+      border: 2px solid var(--color-gray-700);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+    }
+
+    .belt-button.selected {
+      background: var(--color-gray-800);
+      border: 3px solid var(--color-gold);
+    }
+
+    .belt-swatch {
+      width: 36px;
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    .belt-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-gray-400);
+    }
+
+    .belt-button.selected .belt-label {
+      color: var(--color-gold);
+    }
+
+    /* Stripe selector */
+    .stripe-grid {
+      display: flex;
+      gap: var(--space-sm);
+      justify-content: center;
+    }
+
+    .stripe-button {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 2px solid var(--color-gray-700);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--color-gray-400);
+    }
+
+    .stripe-button.selected {
+      background: var(--color-gray-800);
+      border: 3px solid var(--color-gold);
+      color: var(--color-gold);
+    }
+
+    /* Gender selector */
+    .gender-grid {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+    }
+
+    .gender-button {
+      flex: 1;
+      max-width: 140px;
+      padding: var(--space-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 2px solid var(--color-gray-700);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--color-gray-400);
+    }
+
+    .gender-button.selected {
+      background: var(--color-gray-800);
+      border: 3px solid var(--color-gold);
+      color: var(--color-gold);
+    }
+
+    /* Submit button */
+    .btn-continue {
+      width: 100%;
+      padding: var(--space-lg);
+      background: var(--color-gold);
+      border: none;
+      border-radius: var(--radius-md);
+      color: var(--color-black);
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+    }
+
+    .btn-continue:disabled {
+      background: var(--color-gray-700);
+      color: var(--color-gray-500);
+      cursor: not-allowed;
+    }
+
+    /* Profile section preview */
+    .profile-section {
+      background: var(--color-gray-800);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .profile-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid var(--color-gray-700);
+    }
+
+    .profile-row:last-child {
+      border-bottom: none;
+    }
+
+    .profile-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .profile-value {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--color-white);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .profile-value.locked {
+      color: var(--color-gray-400);
+    }
+
+    .profile-value .edit-icon {
+      color: var(--color-gray-600);
+      cursor: pointer;
+    }
+
+    .profile-value .lock-icon {
+      color: var(--color-gray-600);
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--color-gray-700);
+      margin: var(--space-xl) 0;
+    }
+
+    /* Settings section */
+    .settings-section {
+      background: var(--color-gray-800);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .settings-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid var(--color-gray-700);
+    }
+
+    .settings-row:last-child {
+      border-bottom: none;
+    }
+
+    .settings-label {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--color-white);
+    }
+
+    .settings-description {
+      font-size: 13px;
+      color: var(--color-gray-500);
+      margin-top: var(--space-xs);
+    }
+
+    /* Toggle switch */
+    .toggle {
+      width: 48px;
+      height: 28px;
+      background: var(--color-gray-700);
+      border-radius: 14px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .toggle.on {
+      background: var(--color-positive);
+    }
+
+    .toggle::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: var(--color-white);
+      border-radius: 12px;
+      top: 2px;
+      left: 2px;
+      transition: left 0.2s;
+    }
+
+    .toggle.on::after {
+      left: 22px;
+    }
+
+    /* Persistence indicator */
+    .persistence-note {
+      background: var(--color-positive-dim);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin-bottom: var(--space-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .persistence-note svg {
+      flex-shrink: 0;
+      color: var(--color-positive);
+    }
+
+    .persistence-note-text {
+      font-size: 13px;
+      color: var(--color-gray-300);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================================== -->
+  <!-- ONBOARDING: About You Screen -->
+  <!-- ===================================== -->
+
+  <div class="section-header">Onboarding: About You</div>
+  <div class="section-description">
+    Gender and Birthday are now collected during onboarding (mandatory). Only Male/Female options available.
+  </div>
+
+  <div class="onboarding-screen">
+    <div class="step-counter"><span>1</span> of 3</div>
+    <div class="screen-title">About You</div>
+
+    <!-- Name -->
+    <div class="form-group">
+      <label class="form-label">What should we call you?</label>
+      <input type="text" class="text-input" value="Sofia" placeholder="First name">
+    </div>
+
+    <!-- Belt -->
+    <div class="form-group">
+      <label class="form-label">What's your current belt?</label>
+      <div class="belt-grid">
+        <button class="belt-button">
+          <div class="belt-swatch" style="background: #FFFFFF; border: 1px solid #666;"></div>
+          <span class="belt-label">White</span>
+        </button>
+        <button class="belt-button">
+          <div class="belt-swatch" style="background: #0033A0;"></div>
+          <span class="belt-label">Blue</span>
+        </button>
+        <button class="belt-button selected">
+          <div class="belt-swatch" style="background: #4B0082;"></div>
+          <span class="belt-label">Purple</span>
+        </button>
+        <button class="belt-button">
+          <div class="belt-swatch" style="background: #8B4513;"></div>
+          <span class="belt-label">Brown</span>
+        </button>
+        <button class="belt-button">
+          <div class="belt-swatch" style="background: #000000;"></div>
+          <span class="belt-label">Black</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Stripes -->
+    <div class="form-group">
+      <label class="form-label">How many stripes?</label>
+      <div class="stripe-grid">
+        <button class="stripe-button">0</button>
+        <button class="stripe-button selected">1</button>
+        <button class="stripe-button">2</button>
+        <button class="stripe-button">3</button>
+        <button class="stripe-button">4</button>
+      </div>
+    </div>
+
+    <!-- Gender (NEW) -->
+    <div class="form-group">
+      <label class="form-label">Gender</label>
+      <div class="gender-grid">
+        <button class="gender-button">Male</button>
+        <button class="gender-button selected">Female</button>
+      </div>
+    </div>
+
+    <!-- Birthday (NEW) -->
+    <div class="form-group">
+      <label class="form-label">Birthday</label>
+      <input type="date" class="date-input" value="1997-08-12">
+    </div>
+
+    <button class="btn-continue">Continue</button>
+  </div>
+
+
+  <div class="divider"></div>
+
+
+  <!-- ===================================== -->
+  <!-- PROFILE VIEW: Locked Fields -->
+  <!-- ===================================== -->
+
+  <div class="section-header">Profile View</div>
+  <div class="section-description">
+    Gender and Birthday are locked after onboarding (lock icon indicates non-editable).
+  </div>
+
+  <div class="profile-section">
+    <div class="profile-row">
+      <div class="profile-label">Name</div>
+      <div class="profile-value">
+        Sofia Rodriguez
+        <svg class="edit-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="profile-row">
+      <div class="profile-label">Belt</div>
+      <div class="profile-value">
+        Purple (1 stripe)
+        <svg class="edit-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="profile-row">
+      <div class="profile-label">Gender</div>
+      <div class="profile-value locked">
+        Female
+        <svg class="lock-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="profile-row">
+      <div class="profile-label">Birthday</div>
+      <div class="profile-value locked">
+        August 12, 1997
+        <svg class="lock-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="profile-row">
+      <div class="profile-label">Gym</div>
+      <div class="profile-value">
+        Alliance BJJ Austin
+        <svg class="edit-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="divider"></div>
+
+
+  <!-- ===================================== -->
+  <!-- NOTIFICATION SETTINGS (Persisted) -->
+  <!-- ===================================== -->
+
+  <div class="section-header">Notification Settings</div>
+  <div class="section-description">
+    Settings now persist to profile (not lost on refresh).
+  </div>
+
+  <div class="persistence-note">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
+    </svg>
+    <div class="persistence-note-text">
+      Settings save to your profile and sync across sessions.
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Training Reminders</div>
+        <div class="settings-description">Get reminded to log after training</div>
+      </div>
+      <div class="toggle on"></div>
+    </div>
+
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Progress Updates</div>
+        <div class="settings-description">Weekly training summaries</div>
+      </div>
+      <div class="toggle on"></div>
+    </div>
+
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Coach Feedback</div>
+        <div class="settings-description">Notifications when coaches send notes</div>
+      </div>
+      <div class="toggle"></div>
+    </div>
+  </div>
+
+
+  <!-- INTERACTION NOTES (for reviewer) -->
+  <!--
+  ================================================================
+  PROFILE ENHANCEMENTS PROTOTYPE (UPDATED)
+  ================================================================
+
+  ## Changes from Previous Version:
+
+  1. GENDER AND BIRTHDAY NOW IN ONBOARDING
+     - Previously: Progressive profiling at sessions 12 and 20
+     - Now: Mandatory during onboarding (About You screen)
+     - Only Male/Female options (removed non-binary and prefer-not-to-say)
+
+  2. ONBOARDING FLOW
+     - Screen 1: About You
+       * Name (text input)
+       * Belt (5-button selector)
+       * Stripes (0-4 selector)
+       * Gender (Male/Female buttons) - NEW
+       * Birthday (date picker) - NEW
+
+  3. LOCKED FIELDS
+     - Gender and Birthday cannot be changed after onboarding
+     - Lock icon in profile view indicates non-editable
+     - Belt/Stripes remain editable (edit icon shown)
+
+  4. NOTIFICATION SETTINGS
+     - Now persist to profile context
+     - Sync indicator confirms saving
+
+  ## Questions for Reviewer:
+
+  1. Is the onboarding flow getting too long with 6 fields?
+     Consider: Split into 2 screens (Name/Belt/Stripes + Gender/Birthday)
+
+  2. Date picker format: Is standard HTML date picker sufficient?
+     Alternative: Custom month/day/year dropdowns
+
+  3. Should we show age calculated from birthday in profile?
+     e.g., "August 12, 1997 (28 years old)"
+
+  ## Technical Implementation:
+
+  - Gender type: 'male' | 'female' (removed other options)
+  - OnboardingData interface updated with gender and birthDate
+  - Removed from progressive profiling (PROFILE_QUESTIONS)
+  - Removed from skipCounts
+  - Mock profiles updated with actual values
+
+  ================================================================
+  -->
+
+</body>
+</html>

@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BJJ Journal - Remember What You Learned</title>
+    <meta name="description" content="Voice-first training journal for Brazilian Jiu-Jitsu. Capture techniques before you forget them. Track progress. Get better.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           BJJ JOURNAL - GO-TO-MARKET LANDING PAGE
+           Brand: Dark, bold, athletic
+           ======================================== */
+
+        :root {
+            --color-black: #0a0a0a;
+            --color-white: #ffffff;
+            --color-gold: #F5A623;
+            --color-gold-dim: rgba(245, 166, 35, 0.15);
+            --color-gold-bright: #FCD34D;
+            --color-gray-50: #fafafa;
+            --color-gray-100: #f5f5f5;
+            --color-gray-200: #e5e5e5;
+            --color-gray-300: #d4d4d4;
+            --color-gray-400: #a3a3a3;
+            --color-gray-500: #737373;
+            --color-gray-600: #525252;
+            --color-gray-700: #404040;
+            --color-gray-800: #262626;
+            --color-gray-900: #171717;
+            --color-success: #10b981;
+            --color-error: #ef4444;
+            --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+            --font-body: 'Space Grotesk', -apple-system, sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-white);
+            background-color: var(--color-black);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-gray-800);
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: -0.02em;
+            color: var(--color-white);
+            text-decoration: none;
+        }
+
+        .nav-logo svg {
+            color: var(--color-gold);
+        }
+
+        .nav-cta {
+            background: var(--color-gold);
+            color: var(--color-black);
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .nav-cta:active {
+            transform: scale(0.97);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--color-black) 0%, var(--color-gray-900) 100%);
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-gray-700), transparent);
+        }
+
+        .hero-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-gold);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(36px, 8vw, 64px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            color: var(--color-white);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            color: var(--color-gold);
+        }
+
+        .hero-sub {
+            font-size: 20px;
+            color: var(--color-gray-400);
+            max-width: 600px;
+            margin: 0 auto 48px;
+            line-height: 1.6;
+        }
+
+        .cta-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            background: var(--color-gold);
+            color: var(--color-black);
+            padding: 18px 48px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .cta-primary:active {
+            transform: scale(0.97);
+        }
+
+        .cta-note {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--color-gray-500);
+        }
+
+        /* Section Base */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-gray-800), transparent);
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-gold);
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .section h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(28px, 5vw, 40px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .section-intro {
+            font-size: 18px;
+            color: var(--color-gray-400);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        /* Problem Section */
+        .problem {
+            background: var(--color-gray-900);
+        }
+
+        .problem-quote {
+            font-size: 24px;
+            font-style: italic;
+            color: var(--color-gray-300);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+            position: relative;
+        }
+
+        .problem-quote::before {
+            content: '"';
+            font-size: 80px;
+            color: var(--color-gold);
+            opacity: 0.3;
+            position: absolute;
+            top: -30px;
+            left: -20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--color-gray-800);
+        }
+
+        .stat-card {
+            background: var(--color-black);
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--color-gold);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-gray-400);
+            line-height: 1.5;
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            background: var(--color-black);
+        }
+
+        .philosophy-statement {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 500;
+            line-height: 1.4;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 60px;
+            color: var(--color-white);
+        }
+
+        .philosophy-statement span {
+            color: var(--color-gold);
+        }
+
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .principle-card {
+            padding: 32px;
+            border: 1px solid var(--color-gray-800);
+            background: var(--color-gray-900);
+        }
+
+        .principle-number {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--color-gold);
+            margin-bottom: 16px;
+        }
+
+        .principle-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .principle-card p {
+            font-size: 15px;
+            color: var(--color-gray-400);
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--color-gray-900);
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            background: var(--color-gray-800);
+        }
+
+        .feature-item {
+            background: var(--color-black);
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 32px;
+            padding: 40px;
+            align-items: start;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-gold-dim);
+            color: var(--color-gold);
+        }
+
+        .feature-content h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .feature-content p {
+            font-size: 16px;
+            color: var(--color-gray-400);
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        /* Science Section */
+        .science {
+            background: linear-gradient(180deg, var(--color-black) 0%, var(--color-gray-900) 100%);
+        }
+
+        .research-card {
+            background: var(--color-gold-dim);
+            border-left: 3px solid var(--color-gold);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .research-card blockquote {
+            font-size: 18px;
+            font-style: italic;
+            color: var(--color-white);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .research-card cite {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--color-gold);
+            font-style: normal;
+        }
+
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+            background: var(--color-gray-800);
+        }
+
+        .insight-cell {
+            background: var(--color-black);
+            padding: 32px;
+        }
+
+        .insight-stat {
+            font-family: var(--font-heading);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--color-gold);
+            margin-bottom: 8px;
+        }
+
+        .insight-label {
+            font-size: 14px;
+            color: var(--color-gray-400);
+            line-height: 1.5;
+        }
+
+        /* Who Section */
+        .who {
+            background: var(--color-black);
+        }
+
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .persona-card {
+            background: var(--color-gray-900);
+            padding: 32px 24px;
+            text-align: center;
+            border: 1px solid var(--color-gray-800);
+        }
+
+        .persona-belt {
+            width: 48px;
+            height: 12px;
+            margin: 0 auto 20px;
+        }
+
+        .belt-white { background: var(--color-white); border: 1px solid var(--color-gray-600); }
+        .belt-blue { background: #0033A0; }
+        .belt-purple { background: #4B0082; }
+        .belt-brown { background: #8B4513; }
+
+        .persona-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .persona-card p {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--color-gray-400);
+            line-height: 1.5;
+        }
+
+        /* Final CTA Section */
+        .final-cta {
+            background: var(--color-gold);
+            text-align: center;
+            padding: 100px 24px;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(28px, 5vw, 44px);
+            color: var(--color-black);
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .final-cta p {
+            font-size: 18px;
+            color: rgba(0, 0, 0, 0.7);
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-dark {
+            display: inline-block;
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 18px 48px;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .cta-dark:active {
+            transform: scale(0.97);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-black);
+            padding: 40px 24px;
+            text-align: center;
+            border-top: 1px solid var(--color-gray-800);
+        }
+
+        .footer p {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--color-gray-500);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .principle-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-item {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .insight-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .persona-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-number {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .persona-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#" class="nav-logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                    <circle cx="12" cy="10" r="2"/>
+                </svg>
+                BJJ Journal
+            </a>
+            <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <p class="hero-label">Voice-First Training Journal</p>
+            <h1>Remember what you <span>learned</span></h1>
+            <p class="hero-sub">
+                You just trained hard. Your brain is fried. But that technique detail?
+                It's already fading. BJJ Journal captures your training in 60 seconds—by voice.
+            </p>
+            <div class="cta-group">
+                <a href="#waitlist" class="cta-primary">Join the Waitlist</a>
+                <span class="cta-note">Early access coming soon</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section problem">
+        <div class="container">
+            <p class="section-label">The Problem</p>
+            <h2>The best time to log is the worst time to think</h2>
+
+            <p class="problem-quote">
+                You know the feeling: Coach showed something brilliant. You drilled it.
+                You even hit it during sparring. But by the time you get home? Gone.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">90</div>
+                    <div class="stat-label">Seconds after training—your window to capture what you learned</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">40%</div>
+                    <div class="stat-label">Cognitive function impaired post-training (research-backed)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">80%</div>
+                    <div class="stat-label">Of white belts quit before blue. Progress visibility matters.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="section philosophy">
+        <div class="container">
+            <p class="section-label">Our Philosophy</p>
+            <h2>Built for the exhausted user</h2>
+
+            <p class="philosophy-statement">
+                After training, you're depleted. Sweaty. Your fingers can barely grip a water bottle,
+                let alone type on a phone. <span>We designed for that exact moment.</span>
+            </p>
+
+            <div class="principle-grid">
+                <div class="principle-card">
+                    <p class="principle-number">01</p>
+                    <h3>Talk, don't type</h3>
+                    <p>Voice-first logging. Just talk through what you learned while walking to your car. We structure it for you.</p>
+                </div>
+                <div class="principle-card">
+                    <p class="principle-number">02</p>
+                    <h3>One question at a time</h3>
+                    <p>Tired brains can't parallel process. We guide you through capture with single, simple prompts.</p>
+                </div>
+                <div class="principle-card">
+                    <p class="principle-number">03</p>
+                    <h3>Skip is always available</h3>
+                    <p>We never force input. Capture what you can, skip what you can't. Something is always better than nothing.</p>
+                </div>
+                <div class="principle-card">
+                    <p class="principle-number">04</p>
+                    <h3>Progress over perfection</h3>
+                    <p>"You've trained 12 times this month" matters more than perfect technique logs. We celebrate consistency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features">
+        <div class="container">
+            <p class="section-label">Features</p>
+            <h2>What you get</h2>
+            <p class="section-intro">Everything you need to track your training—nothing you don't.</p>
+
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            <line x1="12" x2="12" y1="19" y2="22"/>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Voice Logging</h3>
+                        <p>Tap once, talk, tap to save. "Worked on half guard sweeps. Hit the knee shield to back take twice during rolling. Need to work on grip fighting." Done.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18"/>
+                            <path d="m19 9-5 5-4-4-3 3"/>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Progress Tracking</h3>
+                        <p>Belt requirements, session counts, time-in-grade—see exactly where you are on the path. No guessing if you're improving.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Technique Library</h3>
+                        <p>Your personal encyclopedia. Every technique you've logged, organized and searchable. Review before class—remember what you drilled last month.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Session History</h3>
+                        <p>Scroll through your training timeline. Gi days, no-gi days, competition prep, open mats—all logged, all searchable, all yours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Science Section -->
+    <section class="section science">
+        <div class="container">
+            <p class="section-label">The Science</p>
+            <h2>Why voice-first matters</h2>
+            <p class="section-intro">This isn't a preference—it's physiology.</p>
+
+            <div class="research-card">
+                <blockquote>
+                    "Mental fatigue has a negative effect on various sports skills of high-level athletes,
+                    including their technical and decision-making skills."
+                </blockquote>
+                <cite>— PMC Mental Fatigue Study, 2024</cite>
+            </div>
+
+            <div class="research-card">
+                <blockquote>
+                    "While the brain accounts for about 2% of body weight, it consumes over 20% of the body's
+                    energy at rest. That number increases when attention is sustained, emotions are being
+                    regulated, or decisions are being made rapidly."
+                </blockquote>
+                <cite>— Aypex Move Research</cite>
+            </div>
+
+            <div class="insight-grid">
+                <div class="insight-cell">
+                    <div class="insight-stat">20-40%</div>
+                    <div class="insight-label">Executive function impairment post-training. Typing is work. Talking isn't.</div>
+                </div>
+                <div class="insight-cell">
+                    <div class="insight-stat">12-15</div>
+                    <div class="insight-label">Average years to black belt. You need a system that lasts the journey.</div>
+                </div>
+                <div class="insight-cell">
+                    <div class="insight-stat">60-70%</div>
+                    <div class="insight-label">Quit at blue belt. Visible progress is the antidote to dropout.</div>
+                </div>
+                <div class="insight-cell">
+                    <div class="insight-stat">6M+</div>
+                    <div class="insight-label">Global BJJ practitioners. Most have no training journal.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who Section -->
+    <section class="section who">
+        <div class="container">
+            <p class="section-label">Who It's For</p>
+            <h2>Every practitioner. Every belt.</h2>
+            <p class="section-intro">Whether you train twice a week or twice a day.</p>
+
+            <div class="persona-grid">
+                <div class="persona-card">
+                    <div class="persona-belt belt-white"></div>
+                    <h3>The Beginner</h3>
+                    <p>Overwhelmed by new techniques. Track what you learn, review before class.</p>
+                </div>
+                <div class="persona-card">
+                    <div class="persona-belt belt-blue"></div>
+                    <h3>The Hobbyist</h3>
+                    <p>Balancing life and training. See that consistency is progress.</p>
+                </div>
+                <div class="persona-card">
+                    <div class="persona-belt belt-purple"></div>
+                    <h3>The Competitor</h3>
+                    <p>Need pattern analysis. Know where you're getting caught.</p>
+                </div>
+                <div class="persona-card">
+                    <div class="persona-belt belt-brown"></div>
+                    <h3>The Lifer</h3>
+                    <p>Been at it for years. Build a searchable archive of your journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta" id="waitlist">
+        <div class="container">
+            <h2>Stop forgetting what you learned</h2>
+            <p>Early access coming soon. Join the waitlist for first access.</p>
+            <a href="#" class="cta-dark">Join the Waitlist</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>BJJ Journal — Built by practitioners, for practitioners.</p>
+        </div>
+    </footer>
+</body>
+</html>
