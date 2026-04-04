@@ -31,6 +31,104 @@ Each entry follows this format:
 
 ---
 
+## 2026-04-04 -- Session 39: Architecture Decomposition + Codebase Review
+
+**Type:** Refactor
+
+### Changes
+
+**Codebase Architecture Review**
+- Full post-restructure audit: zero broken imports, zero type errors, zero stale path references
+- Identified two P1 large-file issues (SessionLoggerScreen 1,973 lines, InsightsScreen ~1,400 lines)
+
+**SessionLoggerScreen Decomposition (1,973 -> 588 lines)**
+- Extracted `EntryPhase.tsx`, `RecordingPhase.tsx`, `ProcessingPhase.tsx`, `ReviewPhase.tsx` into `screens/session-logger/`
+- Each phase owns its styles and props interface
+- Parent retains all state, handlers, and phase routing
+- Shared types/constants in `session-logger/types.ts`
+
+**InsightsScreen Decomposition (~1,400 -> 296 lines)**
+- Extracted 10 sub-components into `screens/insights/`: BoldText, EmberText, InsightsSkeleton, PreInsightSection, WeeklyMessageView, CollapsedWeekRow, QuarterlyCard, MonthlyCard, EmptyStates
+- Shared helpers in `insights/helpers.ts`, unified stylesheet in `insights/styles.ts`
+- Parent retains data loading, memo computations, render orchestration
+
+**Insight Trigger Decoupled**
+- Extracted `maybeTriggerWeeklyInsight` from SessionLoggerScreen into `services/insight-trigger.ts`
+- Both SessionLoggerScreen and InsightsScreen can now trigger insight generation independently
+
+### Why
+
+Post-restructure foundation check before building Insights Tab (FEAT-002). Large monolithic screens would have made feature work slower and riskier. Decomposition makes each phase independently testable and editable.
+
+### Testing
+
+- `npx tsc --noEmit` passes with zero errors
+- Pure refactor, zero behavior changes
+- Needs on-device verification: all 5 logging phases + Insights tab rendering
+
+---
+
+## 2026-04-04 -- Session 38: Insights Prompt Enhancement + Edge Function Deploy
+
+**Type:** Feature / Polish
+
+### Changes
+
+- Enhanced `generate-weekly` edge function system prompt with sports psychology research findings
+- Added submission defense trending as a priority observation ("you're getting caught less in X")
+- Added negative space rule: never point out what's missing from a session
+- Added repetition validation: if same techniques drilled 3+ weeks, validate the depth
+- Added experimentation-under-pressure framing: trying new things + getting caught more = growth
+- Belt-specific observation limits: white belt max 2, upper belts max 1-2
+- Blue belt game identity recognition: "this is becoming your game"
+- Upper belt rules added (purple/brown/black): systems-level framing, brown belt injury awareness
+- First-insight messaging improved: acknowledges the reflection habit, not just the training
+- Deployed updated edge function to Supabase (--no-verify-jwt)
+- Verified DB migration already applied, all insights tables exist
+- Full sports psychology research doc written: `docs/features/insights-tab/SPORTS_PSYCHOLOGY_RESEARCH.md`
+
+### Why
+
+Sports psychology research revealed specific opportunities to make insights more resonant: defense trending (data nobody tracks), experimentation validation (rewarding risk-taking), repetition validation (not suggesting variety when depth is the goal), and belt-specific observation density.
+
+### Testing
+
+- TypeScript clean (`npx tsc --noEmit` passes)
+- Edge function deployed and ACTIVE on Supabase
+- TestFlight build submitted
+
+---
+
+## 2026-04-02 -- Session 37: Shake-to-Report Bug Reporter
+
+**Type:** Feature
+
+### Changes
+
+- Added shake-to-report bug/feedback system for beta testers
+- New component: `src/components/ShakeBugReporter.tsx`
+- Shake the phone from any screen to open a feedback modal
+- Two feedback types: Bug and Idea
+- Auto-captures a screenshot of the current screen at the moment of shake
+- Screenshot thumbnail preview in modal (removable by tester)
+- Submits to Sentry as a tagged event with screenshot attachment, user context (name, email, belt), and feedback type
+- Also creates Sentry User Feedback entry for the Sentry dashboard
+- Wired into App.tsx inside ToastProvider (available globally on every screen)
+- Toast confirmation on successful submit
+- New dependencies: `react-native-shake`, `react-native-view-shot`
+
+### Why
+
+Beta testers need a frictionless way to report bugs and share ideas without leaving the app. Shake gesture is discoverable and doesn't clutter the UI.
+
+### Testing
+
+- TypeScript clean (`npx tsc --noEmit` passes)
+- Requires native rebuild (new native packages). Not tested on device yet.
+- Sentry sends are disabled in dev mode (`enabled: !__DEV__`). Modal opens and flows work, but feedback won't appear in Sentry until a TestFlight build.
+
+---
+
 ## 2026-04-02 -- Session 35: Project Restructure + Screen Reference + Design Fix
 
 **Type:** Infrastructure / Refactor / Fix / Build
