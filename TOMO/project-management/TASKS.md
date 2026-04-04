@@ -1,6 +1,6 @@
 # Tasks
 
-**Last updated:** 2026-04-02
+**Last updated:** 2026-04-04 (Session 38)
 
 Statuses: `backlog` | `ready` | `in-progress` | `blocked` | `done` | `cut`
 
@@ -14,10 +14,12 @@ Tracks: `app` | `studio`
 
 | ID | Task | Status | Priority | Dependencies | Acceptance Criteria |
 |----|------|--------|----------|-------------|-------------------|
-| T-001 | Build Insights Tab (FEAT-002) | ready | P0 | FEAT-008 (done) | Weekly insight generation, message-style render, typewriter effect. See insights-tab/ subfolder for full spec. |
+| T-001 | Build Insights Tab (FEAT-002) | done | P0 | FEAT-008 (done) | Weekly insight generation, message-style render, typewriter effect. Shipped Session 38. |
+| T-006 | Insights Intelligence (FEAT-009) | backlog | P2 | T-001 (done) | Mood rating, pre-session intentions, plateau detection, competition routing. See insights-tab/INSIGHTS_INTELLIGENCE.md |
 | T-002 | Review Phase Redesign (FEAT-003) | backlog | P1 | none | Summary card + collapsible details. 90-second principle respected. |
 | T-003 | Experience Intake (FEAT-001) | backlog | P1 | none | Conversational intake for experienced practitioners. Solves cold-start. |
 | T-004 | Processing Skip Upgrade (FEAT-004) | backlog | P2 | none | Gold "skip to manual" link after 10-15s delay. |
+| T-005 | Shake-to-Report Bug Reporter | done | P1 | none | Shake to open feedback modal (Bug/Idea), auto-screenshot, submit to Sentry. Needs native rebuild + on-device test. |
 
 ### Design Audit (references mvp-1.0/docs/tracking/ISSUES.md, DA-/DS- prefixes)
 
@@ -45,7 +47,7 @@ Tracks: `app` | `studio`
 
 | ID | Task | Status | Priority | Dependencies | Acceptance Criteria |
 |----|------|--------|----------|-------------|-------------------|
-| T-030 | Write weekly insight prompt templates | backlog | P0 | T-001 | Prompt templates that generate personalized weekly insights per belt/goals/frequency |
+| T-030 | Write weekly insight prompt templates | done | P0 | T-001 | Psychology-informed prompt with belt routing, defense trending, experimentation validation. Shipped Session 38. |
 | T-031 | Write "watch" item coaching copy | backlog | P1 | T-001 | Copy for flagged items (overtraining, plateau, inconsistency, etc.) |
 
 ### Onboarding + Coaching Copy
