@@ -172,6 +172,24 @@ export const insightService = {
     }
   },
 
+  /** Check if any unread insights exist (count-only, no rows fetched) */
+  async hasUnread(): Promise<boolean> {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return false;
+
+    const { count, error } = await supabase
+      .from('insights')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', user.id)
+      .eq('has_been_viewed', false);
+
+    if (error) {
+      console.error('Failed to check unread insights:', error.message);
+      return false;
+    }
+    return (count ?? 0) > 0;
+  },
+
   /** Check if an insight exists for a given tier and period */
   async existsForPeriod(tier: InsightTier, periodStart: string): Promise<boolean> {
     const { data: { user } } = await supabase.auth.getUser();

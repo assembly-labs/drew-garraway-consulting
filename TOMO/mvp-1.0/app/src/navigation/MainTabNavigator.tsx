@@ -16,6 +16,7 @@ import { SessionDetailScreen } from '../screens/SessionDetailScreen';
 import { PrivacyPolicyScreen } from '../screens/PrivacyPolicyScreen';
 import { InsightsScreen } from '../screens/InsightsScreen';
 import { Icons } from '../components/Icons';
+import { useInsightsBadge } from '../hooks/useInsightsBadge';
 import { colors, spacing, shadows } from '../config/design-tokens';
 
 // Journal stack (list + detail)
@@ -63,6 +64,8 @@ export type MainTabParamList = {
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
 export function MainTabNavigator() {
+  const { hasUnreadInsight } = useInsightsBadge();
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -106,6 +109,13 @@ export function MainTabNavigator() {
           tabBarIcon: ({ color, size }) => (
             <Icons.TrendUp size={size} color={color} />
           ),
+          tabBarBadge: hasUnreadInsight ? '' : undefined,
+          tabBarBadgeStyle: {
+            backgroundColor: colors.gold,
+            minWidth: 8,
+            maxHeight: 8,
+            borderRadius: 4,
+          },
         }}
       />
       <Tab.Screen

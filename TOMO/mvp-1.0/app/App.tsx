@@ -23,10 +23,12 @@ import {
 } from '@expo-google-fonts/jetbrains-mono';
 import { colors } from './src/config/design-tokens';
 import { AuthProvider } from './src/hooks/useAuth';
+import { InsightsBadgeProvider } from './src/hooks/useInsightsBadge';
 import { ToastProvider } from './src/components/Toast';
 import { ErrorBoundary } from './src/components/ErrorBoundary';
 import { RootNavigator } from './src/navigation/RootNavigator';
 import { OfflineBanner } from './src/components/NetworkError';
+import { ShakeBugReporter } from './src/components/ShakeBugReporter';
 
 Sentry.init({
   dsn: Constants.expoConfig?.extra?.sentryDsn ?? '',
@@ -64,11 +66,14 @@ function App() {
     <SafeAreaProvider>
       <ErrorBoundary>
         <AuthProvider>
+          <InsightsBadgeProvider>
           <ToastProvider>
             <StatusBar style="light" />
             <OfflineBanner />
+            <ShakeBugReporter />
             <RootNavigator />
           </ToastProvider>
+          </InsightsBadgeProvider>
         </AuthProvider>
       </ErrorBoundary>
     </SafeAreaProvider>
